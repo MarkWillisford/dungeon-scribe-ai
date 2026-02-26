@@ -5,10 +5,10 @@ export interface AppUser {
   email: string;
   displayName: string;
   photoURL: string | null;
-  createdAt: Date;
-  lastLogin: Date;
-  campaigns: string[]; // Campaign IDs
-  role: 'player' | 'dm';
+  createdAt?: Date;
+  lastLogin?: Date;
+  campaigns?: string[]; // Campaign IDs
+  role?: 'player' | 'dm';
 }
 
 export interface UserPreferences {
