@@ -3,8 +3,8 @@ jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
 );
 
-// Mock Firebase
-jest.mock('./src/config/firebase', () => ({
+// Mock Firebase — will be created in Step 6
+jest.mock('@config/firebase', () => ({
   auth: {},
   db: {},
   storage: {},
