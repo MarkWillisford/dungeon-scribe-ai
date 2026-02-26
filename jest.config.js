@@ -17,7 +17,7 @@ module.exports = {
   transformIgnorePatterns: [
     'node_modules/(?!(expo|@expo|expo-.*|@react-native|react-native|nativewind|react-redux)/)',
   ],
-  setupFilesAfterSetup: ['<rootDir>/jest.setup.ts'],
+  setupFiles: ['<rootDir>/jest.setup.ts'],
   coverageThreshold: {
     global: {
       branches: 70,
