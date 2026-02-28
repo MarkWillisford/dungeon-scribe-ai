@@ -1,0 +1,39 @@
+name: Build Staging
+
+# Runs after the CI workflow succeeds on main branch pushes.
+# Requires the following repository secret:
+#   EAS_TOKEN — Expo Application Services authentication token.
+#              Generate one at https://expo.dev/accounts/[account]/settings/access-tokens
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  build-staging:
+    name: EAS Build (Staging)
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Build staging (all platforms)
+        run: eas build --platform all --profile staging --non-interactive
+        env:
+          EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
