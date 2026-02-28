@@ -1,0 +1,44 @@
+name: Build & Submit Production
+
+# Runs when a version tag (v*) is pushed, e.g. v1.0.0, v1.1.0-rc.1
+# Requires the following repository secrets:
+#   EAS_TOKEN          — Expo Application Services authentication token.
+#   APPLE_ID           — Apple ID email for App Store Connect submission.
+#   APPLE_APP_SPECIFIC_PASSWORD — App-specific password for App Store Connect.
+#   GOOGLE_SERVICE_ACCOUNT_KEY  — Base64-encoded Google Play service account JSON key.
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-submit:
+    name: EAS Build & Submit (Production)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Build production (all platforms)
+        run: eas build --platform all --profile production --non-interactive
+        env:
+          EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
+
+      - name: Submit to stores (all platforms)
+        run: eas submit --platform all --profile production --non-interactive
+        env:
+          EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
