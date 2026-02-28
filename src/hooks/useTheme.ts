@@ -2,12 +2,10 @@ import { lightColors, darkColors, fantasyColors } from '@/theme/colors';
 import { contextAccents } from '@/theme/contextColors';
 import { fontFamilies } from '@/theme/fonts';
 import { shadows } from '@/theme/shadows';
+import { useAppSelector } from '@/store/hooks';
 import type { ThemeMode, ContextTheme, ThemeColors } from '@/types/theme';
 
-// Standalone hook — will connect to Redux store once it exists (Step 5)
-// For now, returns a static theme based on provided mode
-
-interface UseThemeResult {
+export interface UseThemeResult {
   mode: ThemeMode;
   colors: ThemeColors;
   fantasy: typeof fantasyColors;
@@ -17,6 +15,25 @@ interface UseThemeResult {
   isDark: boolean;
 }
 
+export function useTheme(): UseThemeResult {
+  const mode = useAppSelector((state) => state.theme.mode);
+  const contextTheme = useAppSelector((state) => state.theme.context);
+
+  const colors = mode === 'dark' ? darkColors : lightColors;
+  const contextAccent = contextAccents[contextTheme];
+
+  return {
+    mode,
+    colors,
+    fantasy: fantasyColors,
+    context: contextAccent,
+    fonts: fontFamilies,
+    shadows,
+    isDark: mode === 'dark',
+  };
+}
+
+// Standalone version for use outside Redux provider (e.g., tests, storybook)
 export function useThemeColors(
   mode: ThemeMode = 'dark',
   context: ContextTheme = 'default',
