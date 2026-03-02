@@ -20,7 +20,7 @@ Examples: `MW/fix_ability_score_calc`, `MW/add_combat_tracker_screen`
 - **Lint:** `npm run lint` / `npm run lint:fix`
 - **Format:** `npm run format`
 - **Type check:** `npm run typecheck`
-- **Firebase emulators:** `npm run emulators`
+- **Deploy rules:** `npm run firebase:deploy-rules`
 
 ## Project Structure
 

@@ -19,7 +19,7 @@ This project merges the best of two earlier apps: **Dungeon Scribe AI** (compreh
 - Node.js 20+
 - npm
 - Expo CLI (`npx expo`)
-- Firebase CLI (for local emulators): `npm install -g firebase-tools`
+- Firebase CLI (for deploying rules): included as devDependency
 
 ## Getting Started
 
@@ -41,20 +41,19 @@ npx expo start
 
 ## Available Scripts
 
-| Command                  | Description                    |
-| ------------------------ | ------------------------------ |
-| `npm start`              | Start Expo dev server          |
-| `npm run ios`            | Start on iOS simulator         |
-| `npm run android`        | Start on Android emulator      |
-| `npm run web`            | Start in web browser           |
-| `npm test`               | Run Jest test suite            |
-| `npm run test:coverage`  | Run tests with coverage report |
-| `npm run lint`           | Lint with ESLint               |
-| `npm run lint:fix`       | Lint and auto-fix              |
-| `npm run format`         | Format with Prettier           |
-| `npm run typecheck`      | TypeScript type checking       |
-| `npm run emulators`      | Start Firebase emulators       |
-| `npm run emulators:seed` | Start emulators with seed data |
+| Command                         | Description                                 |
+| ------------------------------- | ------------------------------------------- |
+| `npm start`                     | Start Expo dev server                       |
+| `npm run ios`                   | Start on iOS simulator                      |
+| `npm run android`               | Start on Android emulator                   |
+| `npm run web`                   | Start in web browser                        |
+| `npm test`                      | Run Jest test suite                         |
+| `npm run test:coverage`         | Run tests with coverage report              |
+| `npm run lint`                  | Lint with ESLint                            |
+| `npm run lint:fix`              | Lint and auto-fix                           |
+| `npm run format`                | Format with Prettier                        |
+| `npm run typecheck`             | TypeScript type checking                    |
+| `npm run firebase:deploy-rules` | Deploy Firestore + Storage rules to staging |
 
 ## Project Structure
 
