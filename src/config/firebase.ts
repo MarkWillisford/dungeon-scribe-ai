@@ -1,7 +1,7 @@
 import { initializeApp, getApps } from 'firebase/app';
-import { initializeAuth, getAuth, connectAuthEmulator } from 'firebase/auth';
-import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
-import { getStorage, connectStorageEmulator } from 'firebase/storage';
+import { initializeAuth, getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
@@ -32,12 +32,5 @@ if (Platform.OS === 'web') {
 
 const db = getFirestore(app);
 const storage = getStorage(app);
-
-// Connect to Firebase emulators in development
-if (__DEV__) {
-  connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
-  connectFirestoreEmulator(db, 'localhost', 8080);
-  connectStorageEmulator(storage, 'localhost', 9199);
-}
 
 export { app, auth, db, storage };

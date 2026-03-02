@@ -13,9 +13,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
     "typecheck": "tsc --noEmit",
-    "emulators": "firebase emulators:start --project demo-dungeon-scribe",
-    "emulators:seed": "firebase emulators:start --project demo-dungeon-scribe --import=./firebase-seed",
-    "emulators:export": "firebase emulators:export ./firebase-seed",
+    "firebase:deploy-rules": "firebase deploy --only firestore:rules,firestore:indexes,storage --project staging",
     "prepare": "husky"
   },
   "dependencies": {
