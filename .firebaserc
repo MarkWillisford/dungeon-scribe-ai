@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "dungeon-scribe-ai-staging",
+    "production": "dungeon-scribe-ai-prod"
+  }
+}

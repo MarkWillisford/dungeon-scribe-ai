@@ -13,8 +13,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
     "typecheck": "tsc --noEmit",
-    "emulators": "firebase emulators:start",
-    "emulators:seed": "firebase emulators:start --import=./firebase-seed",
+    "emulators": "firebase emulators:start --project demo-dungeon-scribe",
+    "emulators:seed": "firebase emulators:start --project demo-dungeon-scribe --import=./firebase-seed",
     "emulators:export": "firebase emulators:export ./firebase-seed",
     "prepare": "husky"
   },
@@ -55,6 +55,7 @@
     "eslint": "^9.39.3",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
+    "firebase-tools": "^15.8.0",
     "husky": "^9.1.7",
     "jest": "^30.2.0",
     "lint-staged": "^16.2.7",
