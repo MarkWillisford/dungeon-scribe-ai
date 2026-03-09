@@ -32,7 +32,9 @@ export interface SpellcastingClass {
 
 export interface Spell {
   name: string;
-  level: number;
+  // Map of class name to spell level — e.g. { wizard: 3, sorcerer: 3, magus: 3 }
+  // Queryable in Firestore: where('classLevels.wizard', '==', 3)
+  classLevels: Record<string, number>;
   school: string;
   subschool?: string;
   descriptor?: string[];
@@ -47,6 +49,7 @@ export interface Spell {
   };
   castingTime: string;
   range: string;
+  area?: string;
   target: string;
   duration: string;
   savingThrow: string;

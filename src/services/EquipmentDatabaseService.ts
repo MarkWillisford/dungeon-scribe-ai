@@ -7,7 +7,14 @@ import {
   Gear,
   AmmoType,
 } from '@/types/equipment';
+import type {
+  WeaponDefinition,
+  ArmorDefinition,
+  ShieldDefinition,
+  GearDefinition,
+} from '@/types/equipment';
 import { Size } from '@/types/base';
+import { ALL_WEAPONS, ALL_ARMOR, ALL_SHIELDS, ALL_GEAR } from '@/data/equipment';
 
 export class EquipmentDatabaseService {
   private static _weaponTemplates: EquipmentTemplate[] = [];
@@ -19,10 +26,10 @@ export class EquipmentDatabaseService {
   static initialize(): void {
     if (this._initialized) return;
 
-    this._initializeWeapons();
-    this._initializeArmor();
-    this._initializeShields();
-    this._initializeGear();
+    this._weaponTemplates = ALL_WEAPONS.map(this._weaponDefToTemplate);
+    this._armorTemplates = ALL_ARMOR.map(this._armorDefToTemplate);
+    this._shieldTemplates = ALL_SHIELDS.map(this._shieldDefToTemplate);
+    this._gearTemplates = ALL_GEAR.map(this._gearDefToTemplate);
 
     this._initialized = true;
   }
@@ -236,7 +243,7 @@ export class EquipmentDatabaseService {
     };
   }
 
-  // Private initialization methods
+  // Private helpers
 
   private static _createBaseItem(template: EquipmentTemplate, quantity = 1) {
     return {
@@ -252,424 +259,104 @@ export class EquipmentDatabaseService {
     };
   }
 
-  private static _initializeWeapons(): void {
-    this._weaponTemplates = [
-      // Simple Melee Weapons
-      {
-        id: 'club',
-        name: 'Club',
-        type: EquipmentType.WEAPON,
-        category: 'Weapons',
-        subcategory: 'Simple Melee',
-        source: 'Core Rulebook',
-        basePrice: 0,
-        baseWeight: 3,
-        description: 'A simple wooden club.',
-        properties: {
-          type: 'simple',
-          weaponGroup: ['clubs'],
-          handedness: 'one-handed',
-          damage: '1d6',
-          damageS: '1d4',
-          critical: '20/x2',
-          damageType: ['bludgeoning'],
-          special: [],
-          isRanged: false,
-          isThrown: false,
-        },
-      },
-      {
-        id: 'dagger',
-        name: 'Dagger',
-        type: EquipmentType.WEAPON,
-        category: 'Weapons',
-        subcategory: 'Simple Melee',
-        source: 'Core Rulebook',
-        basePrice: 2,
-        baseWeight: 1,
-        description: 'A sharp, pointed blade.',
-        properties: {
-          type: 'simple',
-          weaponGroup: ['light blades'],
-          handedness: 'light',
-          damage: '1d4',
-          damageS: '1d3',
-          critical: '19-20/x2',
-          damageType: ['piercing', 'slashing'],
-          special: [],
-          isRanged: false,
-          isThrown: true,
-          rangeIncrement: 10,
-        },
-      },
-      {
-        id: 'spear',
-        name: 'Spear',
-        type: EquipmentType.WEAPON,
-        category: 'Weapons',
-        subcategory: 'Simple Melee',
-        source: 'Core Rulebook',
-        basePrice: 2,
-        baseWeight: 6,
-        description: 'A long wooden shaft with a sharp metal point.',
-        properties: {
-          type: 'simple',
-          weaponGroup: ['spears'],
-          handedness: 'two-handed',
-          damage: '1d8',
-          damageS: '1d6',
-          critical: '20/x3',
-          damageType: ['piercing'],
-          special: ['brace', 'reach'],
-          isRanged: false,
-          isThrown: true,
-          rangeIncrement: 20,
-        },
-      },
-      // Martial Melee Weapons
-      {
-        id: 'longsword',
-        name: 'Longsword',
-        type: EquipmentType.WEAPON,
-        category: 'Weapons',
-        subcategory: 'Martial Melee',
-        source: 'Core Rulebook',
-        basePrice: 15,
-        baseWeight: 4,
-        description: 'A versatile one-handed sword.',
-        properties: {
-          type: 'martial',
-          weaponGroup: ['heavy blades'],
-          handedness: 'one-handed',
-          damage: '1d8',
-          damageS: '1d6',
-          critical: '19-20/x2',
-          damageType: ['slashing'],
-          special: [],
-          isRanged: false,
-          isThrown: false,
-        },
-      },
-      {
-        id: 'greatsword',
-        name: 'Greatsword',
-        type: EquipmentType.WEAPON,
-        category: 'Weapons',
-        subcategory: 'Martial Melee',
-        source: 'Core Rulebook',
-        basePrice: 50,
-        baseWeight: 8,
-        description: 'A massive two-handed sword.',
-        properties: {
-          type: 'martial',
-          weaponGroup: ['heavy blades'],
-          handedness: 'two-handed',
-          damage: '2d6',
-          damageS: '1d12',
-          critical: '19-20/x2',
-          damageType: ['slashing'],
-          special: [],
-          isRanged: false,
-          isThrown: false,
-        },
-      },
-      // Ranged Weapons
-      {
-        id: 'shortbow',
-        name: 'Shortbow',
-        type: EquipmentType.WEAPON,
-        category: 'Weapons',
-        subcategory: 'Martial Ranged',
-        source: 'Core Rulebook',
-        basePrice: 30,
-        baseWeight: 2,
-        description: 'A small, curved bow.',
-        properties: {
-          type: 'martial',
-          weaponGroup: ['bows'],
-          handedness: 'two-handed',
-          damage: '1d6',
-          damageS: '1d4',
-          critical: '20/x3',
-          damageType: ['piercing'],
-          special: [],
-          isRanged: true,
-          isThrown: false,
-          rangeIncrement: 60,
+  private static _capitalize(s: string): string {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
+  private static _weaponDefToTemplate(def: WeaponDefinition): EquipmentTemplate {
+    const isRanged = def.weaponType === 'ranged' && !def.isThrown;
+    const subcategory = `${EquipmentDatabaseService._capitalize(def.proficiency)} ${def.weaponType === 'ranged' || def.isThrown ? 'Ranged' : EquipmentDatabaseService._capitalize(def.handedness) + ' Melee'}`;
+
+    return {
+      id: def.id,
+      name: def.name,
+      type: EquipmentType.WEAPON,
+      category: 'Weapons',
+      subcategory,
+      source: def.source,
+      basePrice: def.cost,
+      baseWeight: def.weight,
+      description: def.description,
+      properties: {
+        type: def.proficiency,
+        weaponGroup: def.weaponGroup,
+        handedness: def.handedness,
+        damage: def.damageM,
+        damageS: def.damageS,
+        critical: def.critical,
+        damageType: def.damageType,
+        special: def.special,
+        isRanged,
+        isThrown: def.isThrown,
+        range: def.range,
+        rangeIncrement: def.range > 0 ? def.range : undefined,
+        ...(def.ammunition && {
+          ammunition: def.ammunition,
           usesAmmunition: true,
-          ammunition: AmmoType.ARROW,
-          ammunitionType: 'arrows',
-        },
+          ammunitionType: def.ammunition,
+        }),
       },
-      {
-        id: 'longbow',
-        name: 'Longbow',
-        type: EquipmentType.WEAPON,
-        category: 'Weapons',
-        subcategory: 'Martial Ranged',
-        source: 'Core Rulebook',
-        basePrice: 100,
-        baseWeight: 3,
-        description: 'A large, powerful bow.',
-        properties: {
-          type: 'martial',
-          weaponGroup: ['bows'],
-          handedness: 'two-handed',
-          damage: '1d8',
-          damageS: '1d6',
-          critical: '20/x3',
-          damageType: ['piercing'],
-          special: [],
-          isRanged: true,
-          isThrown: false,
-          rangeIncrement: 100,
-          usesAmmunition: true,
-          ammunition: AmmoType.ARROW,
-          ammunitionType: 'arrows',
-        },
-      },
-    ];
+    };
   }
 
-  private static _initializeArmor(): void {
-    this._armorTemplates = [
-      // Light Armor
-      {
-        id: 'padded',
-        name: 'Padded',
-        type: EquipmentType.ARMOR,
-        category: 'Armor',
-        subcategory: 'Light Armor',
-        source: 'Core Rulebook',
-        basePrice: 5,
-        baseWeight: 10,
-        description: 'Quilted cloth armor.',
-        properties: {
-          type: 'light',
-          acBonus: 1,
-          maxDexBonus: 8,
-          checkPenalty: 0,
-          spellFailure: 5,
-          speed30: 30,
-          speed20: 20,
-        },
+  private static _armorDefToTemplate(def: ArmorDefinition): EquipmentTemplate {
+    return {
+      id: def.id,
+      name: def.name,
+      type: EquipmentType.ARMOR,
+      category: 'Armor',
+      subcategory: `${EquipmentDatabaseService._capitalize(def.armorType)} Armor`,
+      source: def.source,
+      basePrice: def.cost,
+      baseWeight: def.weight,
+      description: def.description,
+      properties: {
+        type: def.armorType,
+        acBonus: def.acBonus,
+        maxDexBonus: def.maxDexBonus,
+        checkPenalty: def.checkPenalty,
+        spellFailure: def.spellFailure,
+        speed30: def.speed30,
+        speed20: def.speed20,
       },
-      {
-        id: 'leather',
-        name: 'Leather',
-        type: EquipmentType.ARMOR,
-        category: 'Armor',
-        subcategory: 'Light Armor',
-        source: 'Core Rulebook',
-        basePrice: 10,
-        baseWeight: 15,
-        description: 'Soft leather armor.',
-        properties: {
-          type: 'light',
-          acBonus: 2,
-          maxDexBonus: 6,
-          checkPenalty: 0,
-          spellFailure: 10,
-          speed30: 30,
-          speed20: 20,
-        },
-      },
-      {
-        id: 'studded_leather',
-        name: 'Studded Leather',
-        type: EquipmentType.ARMOR,
-        category: 'Armor',
-        subcategory: 'Light Armor',
-        source: 'Core Rulebook',
-        basePrice: 25,
-        baseWeight: 20,
-        description: 'Leather armor with metal studs.',
-        properties: {
-          type: 'light',
-          acBonus: 3,
-          maxDexBonus: 5,
-          checkPenalty: -1,
-          spellFailure: 15,
-          speed30: 30,
-          speed20: 20,
-        },
-      },
-      // Medium Armor
-      {
-        id: 'chain_shirt',
-        name: 'Chain Shirt',
-        type: EquipmentType.ARMOR,
-        category: 'Armor',
-        subcategory: 'Medium Armor',
-        source: 'Core Rulebook',
-        basePrice: 100,
-        baseWeight: 25,
-        description: 'A shirt of chain mail.',
-        properties: {
-          type: 'medium',
-          acBonus: 4,
-          maxDexBonus: 4,
-          checkPenalty: -2,
-          spellFailure: 20,
-          speed30: 30,
-          speed20: 20,
-        },
-      },
-      {
-        id: 'scale_mail',
-        name: 'Scale Mail',
-        type: EquipmentType.ARMOR,
-        category: 'Armor',
-        subcategory: 'Medium Armor',
-        source: 'Core Rulebook',
-        basePrice: 50,
-        baseWeight: 30,
-        description: 'Armor made of overlapping metal scales.',
-        properties: {
-          type: 'medium',
-          acBonus: 5,
-          maxDexBonus: 3,
-          checkPenalty: -4,
-          spellFailure: 25,
-          speed30: 20,
-          speed20: 15,
-        },
-      },
-      // Heavy Armor
-      {
-        id: 'splint_mail',
-        name: 'Splint Mail',
-        type: EquipmentType.ARMOR,
-        category: 'Armor',
-        subcategory: 'Heavy Armor',
-        source: 'Core Rulebook',
-        basePrice: 200,
-        baseWeight: 45,
-        description: 'Metal strips sewn to a leather backing.',
-        properties: {
-          type: 'heavy',
-          acBonus: 7,
-          maxDexBonus: 0,
-          checkPenalty: -7,
-          spellFailure: 40,
-          speed30: 20,
-          speed20: 15,
-        },
-      },
-      {
-        id: 'full_plate',
-        name: 'Full Plate',
-        type: EquipmentType.ARMOR,
-        category: 'Armor',
-        subcategory: 'Heavy Armor',
-        source: 'Core Rulebook',
-        basePrice: 1500,
-        baseWeight: 50,
-        description: 'Complete suit of fitted metal plates.',
-        properties: {
-          type: 'heavy',
-          acBonus: 9,
-          maxDexBonus: 1,
-          checkPenalty: -6,
-          spellFailure: 35,
-          speed30: 20,
-          speed20: 15,
-        },
-      },
-    ];
+    };
   }
 
-  private static _initializeShields(): void {
-    this._shieldTemplates = [
-      {
-        id: 'buckler',
-        name: 'Buckler',
-        type: EquipmentType.SHIELD,
-        category: 'Shields',
-        subcategory: 'Light Shield',
-        source: 'Core Rulebook',
-        basePrice: 5,
-        baseWeight: 5,
-        description: 'A small, round shield.',
-        properties: { type: 'light', acBonus: 1, checkPenalty: -1, spellFailure: 5 },
+  private static _shieldDefToTemplate(def: ShieldDefinition): EquipmentTemplate {
+    return {
+      id: def.id,
+      name: def.name,
+      type: EquipmentType.SHIELD,
+      category: 'Shields',
+      subcategory: `${EquipmentDatabaseService._capitalize(def.shieldType)} Shield`,
+      source: def.source,
+      basePrice: def.cost,
+      baseWeight: def.weight,
+      description: def.description,
+      properties: {
+        type: def.shieldType,
+        acBonus: def.acBonus,
+        checkPenalty: def.checkPenalty,
+        spellFailure: def.spellFailure,
       },
-      {
-        id: 'light_shield',
-        name: 'Light Shield',
-        type: EquipmentType.SHIELD,
-        category: 'Shields',
-        subcategory: 'Light Shield',
-        source: 'Core Rulebook',
-        basePrice: 3,
-        baseWeight: 6,
-        description: 'A small shield made of wood or metal.',
-        properties: { type: 'light', acBonus: 1, checkPenalty: -1, spellFailure: 5 },
-      },
-      {
-        id: 'heavy_shield',
-        name: 'Heavy Shield',
-        type: EquipmentType.SHIELD,
-        category: 'Shields',
-        subcategory: 'Heavy Shield',
-        source: 'Core Rulebook',
-        basePrice: 7,
-        baseWeight: 15,
-        description: 'A large shield that covers most of the torso.',
-        properties: { type: 'heavy', acBonus: 2, checkPenalty: -2, spellFailure: 15 },
-      },
-    ];
+    };
   }
 
-  private static _initializeGear(): void {
-    this._gearTemplates = [
-      {
-        id: 'backpack',
-        name: 'Backpack',
-        type: EquipmentType.GEAR,
-        category: 'Gear',
-        subcategory: 'Adventuring Gear',
-        source: 'Core Rulebook',
-        basePrice: 2,
-        baseWeight: 2,
-        description: 'A leather pack worn on the back.',
-        properties: { type: 'adventuring', isConsumable: false },
+  private static _gearDefToTemplate(def: GearDefinition): EquipmentTemplate {
+    return {
+      id: def.id,
+      name: def.name,
+      type: EquipmentType.GEAR,
+      category: 'Gear',
+      subcategory: `${EquipmentDatabaseService._capitalize(def.gearType)} Gear`,
+      source: def.source,
+      basePrice: def.cost,
+      baseWeight: def.weight,
+      description: def.description,
+      properties: {
+        type: def.gearType,
+        isConsumable: def.isConsumable,
       },
-      {
-        id: 'rope_silk',
-        name: 'Rope, Silk (50 ft.)',
-        type: EquipmentType.GEAR,
-        category: 'Gear',
-        subcategory: 'Adventuring Gear',
-        source: 'Core Rulebook',
-        basePrice: 10,
-        baseWeight: 5,
-        description: 'Strong silk rope.',
-        properties: { type: 'adventuring', isConsumable: false },
-      },
-      {
-        id: 'torch',
-        name: 'Torch',
-        type: EquipmentType.GEAR,
-        category: 'Gear',
-        subcategory: 'Adventuring Gear',
-        source: 'Core Rulebook',
-        basePrice: 0.01,
-        baseWeight: 1,
-        description: 'A wooden torch that burns for 1 hour.',
-        properties: { type: 'adventuring', isConsumable: true, usesRemaining: 1 },
-      },
-      {
-        id: 'rations_trail',
-        name: 'Trail Rations (per day)',
-        type: EquipmentType.GEAR,
-        category: 'Gear',
-        subcategory: 'Adventuring Gear',
-        source: 'Core Rulebook',
-        basePrice: 0.5,
-        baseWeight: 1,
-        description: 'Dried and preserved food for travel.',
-        properties: { type: 'adventuring', isConsumable: true, usesRemaining: 1 },
-      },
-    ];
+    };
   }
 }

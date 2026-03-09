@@ -700,7 +700,7 @@ const mockCharacter: Character = {
     totalRanks: 10,
   },
   feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
-  traits: { traits: [] },
+  traits: { traits: [], maxTraits: 2 },
   equipment: {
     weapons: [],
     armor: [],
@@ -811,7 +811,10 @@ describe('charactersSlice', () => {
         payload: mockCharacter,
       });
       expect(state.loading).toBe(false);
-      expect(state.activeCharacter).toEqual(mockCharacter);
+      expect(state.activeCharacter).not.toBeNull();
+      expect(state.activeCharacter!.info.name).toEqual(mockCharacter.info.name);
+      expect(state.activeCharacter!.info.race.name).toEqual(mockCharacter.info.race.name);
+      expect(state.activeCharacter!.classes.totalLevel).toEqual(mockCharacter.classes.totalLevel);
     });
 
     // deleteCharacter

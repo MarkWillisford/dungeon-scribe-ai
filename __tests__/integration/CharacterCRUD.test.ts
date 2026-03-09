@@ -9,7 +9,7 @@ import { Race } from '@/types/race';
 import { Character } from '@/types';
 
 // ---------------------------------------------------------------------------
-// Helpers to convert static RaceData -> the Race interface expected by services
+// Helper to convert ExpandedRaceData -> the Race interface expected by services
 // ---------------------------------------------------------------------------
 function raceDataToRace(name: string): Race {
   const data = getRaceByName(name);
@@ -19,7 +19,7 @@ function raceDataToRace(name: string): Race {
     name: data.name,
     sizeMod: data.size,
     baseSpeed: data.speed,
-    alternativeMovements: {},
+    alternativeMovements: data.alternativeMovements ?? {},
     abilityModifiers: {
       str: data.abilityModifiers.strength,
       dex: data.abilityModifiers.dexterity,
@@ -28,9 +28,13 @@ function raceDataToRace(name: string): Race {
       wis: data.abilityModifiers.wisdom,
       cha: data.abilityModifiers.charisma,
     },
-    traits: data.traits.map((t) => ({ name: t, description: t, effects: [] })),
+    traits: data.racialTraits.map((t) => ({
+      name: t.name,
+      description: t.description,
+      effects: [],
+    })),
     languages: data.languages,
-    bonusLanguages: [],
+    bonusLanguages: data.bonusLanguages,
   };
 }
 

@@ -3,11 +3,17 @@ import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { OrnatePanel } from '@/components/ui/OrnatePanel';
 import { FantasyDivider } from '@/components/ui/FantasyDivider';
-import { CORE_RACES, FLEXIBLE_ABILITY_RACES, type RaceData } from '@/data/races';
+import {
+  CORE_RACES,
+  FEATURED_RACES,
+  UNCOMMON_RACES,
+  FLEXIBLE_ABILITY_RACES,
+  type ExpandedRaceData,
+} from '@/data/races';
 
 interface RaceSelectorProps {
-  selectedRace: RaceData | null;
-  onSelectRace: (race: RaceData) => void;
+  selectedRace: ExpandedRaceData | null;
+  onSelectRace: (race: ExpandedRaceData) => void;
   flexibleAbilityChoice?: string;
   onFlexibleAbilityChoice?: (ability: string) => void;
   testID?: string;
@@ -30,6 +36,12 @@ const ABILITY_LABELS: Record<string, string> = {
   charisma: 'CHA',
 };
 
+const RACE_SECTIONS = [
+  { title: 'Core Races', data: CORE_RACES },
+  { title: 'Featured Races', data: FEATURED_RACES },
+  { title: 'Uncommon Races', data: UNCOMMON_RACES },
+];
+
 export function RaceSelector({
   selectedRace,
   onSelectRace,
@@ -42,101 +54,121 @@ export function RaceSelector({
 
   const isFlexibleRace = selectedRace && FLEXIBLE_ABILITY_RACES.includes(selectedRace.name);
 
-  const handleRacePress = (race: RaceData) => {
+  const handleRacePress = (race: ExpandedRaceData) => {
     setExpandedRace(race.name === expandedRace ? null : race.name);
     onSelectRace(race);
   };
 
-  const formatModifiers = (mods: RaceData['abilityModifiers']) => {
-    const entries = Object.entries(mods).filter(([, v]) => v !== undefined);
-    if (entries.length === 0) return '+2 to one ability of choice';
+  const formatModifiers = (race: ExpandedRaceData) => {
+    if (race.flexibleAbilityBonus) return '+2 to one ability of choice';
+    const entries = Object.entries(race.abilityModifiers).filter(([, v]) => v !== undefined);
+    if (entries.length === 0) return 'No modifiers';
     return entries
       .map(([key, val]) => `${ABILITY_LABELS[key]} ${val! > 0 ? '+' : ''}${val}`)
       .join(', ');
   };
 
+  const renderRaceItem = (race: ExpandedRaceData) => {
+    const isSelected = selectedRace?.name === race.name;
+    const isExpanded = expandedRace === race.name;
+
+    return (
+      <Pressable
+        key={race.name}
+        onPress={() => handleRacePress(race)}
+        accessibilityRole="radio"
+        accessibilityLabel={race.name}
+        accessibilityState={{ selected: isSelected }}
+      >
+        <View
+          style={[
+            styles.raceItem,
+            {
+              backgroundColor: isSelected
+                ? colors.bg.tertiary
+                : isDark
+                  ? colors.bg.secondary
+                  : colors.bg.primary,
+              borderColor: isSelected ? fantasy.gold : colors.border.DEFAULT,
+            },
+          ]}
+        >
+          <View style={styles.raceHeader}>
+            <Text style={[styles.raceName, { color: colors.text.primary }]}>{race.name}</Text>
+            <Text style={[styles.raceModifiers, { color: colors.text.secondary }]}>
+              {formatModifiers(race)}
+            </Text>
+          </View>
+
+          {isExpanded && (
+            <View style={styles.raceDetails}>
+              <FantasyDivider />
+
+              <Text style={[styles.detailLabel, { color: colors.text.tertiary }]}>
+                Speed: {race.speed} ft. | Size: {race.size}
+              </Text>
+
+              {race.senses.length > 0 && (
+                <Text style={[styles.detailLabel, { color: colors.text.tertiary }]}>
+                  Senses: {race.senses.join(', ')}
+                </Text>
+              )}
+
+              <Text
+                style={[styles.sectionTitle, { color: isDark ? fantasy.gold : fantasy.darkWood }]}
+              >
+                Racial Traits
+              </Text>
+              {race.racialTraits.map((trait, idx) => (
+                <View key={idx} style={styles.traitItem}>
+                  <Text style={[styles.traitName, { color: colors.text.primary }]}>
+                    {trait.name}
+                  </Text>
+                  <Text style={[styles.traitText, { color: colors.text.secondary }]}>
+                    {trait.description}
+                  </Text>
+                </View>
+              ))}
+
+              <Text
+                style={[styles.sectionTitle, { color: isDark ? fantasy.gold : fantasy.darkWood }]}
+              >
+                Languages
+              </Text>
+              <Text style={[styles.detailLabel, { color: colors.text.secondary }]}>
+                {race.languages.join(', ')}
+              </Text>
+              {race.bonusLanguages.length > 0 && (
+                <Text style={[styles.detailLabel, { color: colors.text.tertiary }]}>
+                  Bonus: {race.bonusLanguages.join(', ')}
+                </Text>
+              )}
+            </View>
+          )}
+        </View>
+      </Pressable>
+    );
+  };
+
   return (
     <View testID={testID}>
       <ScrollView>
-        {CORE_RACES.map((race) => {
-          const isSelected = selectedRace?.name === race.name;
-          const isExpanded = expandedRace === race.name;
-
-          return (
-            <Pressable
-              key={race.name}
-              onPress={() => handleRacePress(race)}
-              accessibilityRole="radio"
-              accessibilityLabel={race.name}
-              accessibilityState={{ selected: isSelected }}
+        {RACE_SECTIONS.map((section) => (
+          <View key={section.title}>
+            <Text
+              style={[
+                styles.sectionHeader,
+                {
+                  color: isDark ? fantasy.gold : fantasy.darkWood,
+                  backgroundColor: isDark ? colors.bg.primary : colors.bg.secondary,
+                },
+              ]}
             >
-              <View
-                style={[
-                  styles.raceItem,
-                  {
-                    backgroundColor: isSelected
-                      ? isDark
-                        ? colors.bg.tertiary
-                        : colors.bg.tertiary
-                      : isDark
-                        ? colors.bg.secondary
-                        : colors.bg.primary,
-                    borderColor: isSelected ? fantasy.gold : colors.border.DEFAULT,
-                  },
-                ]}
-              >
-                <View style={styles.raceHeader}>
-                  <Text style={[styles.raceName, { color: colors.text.primary }]}>{race.name}</Text>
-                  <Text style={[styles.raceModifiers, { color: colors.text.secondary }]}>
-                    {formatModifiers(race.abilityModifiers)}
-                  </Text>
-                </View>
-
-                {isExpanded && (
-                  <View style={styles.raceDetails}>
-                    <FantasyDivider />
-
-                    <Text style={[styles.detailLabel, { color: colors.text.tertiary }]}>
-                      Speed: {race.speed} ft. | Size: {race.size}
-                    </Text>
-
-                    {race.vision && (
-                      <Text style={[styles.detailLabel, { color: colors.text.tertiary }]}>
-                        Vision: {race.vision}
-                      </Text>
-                    )}
-
-                    <Text
-                      style={[
-                        styles.sectionTitle,
-                        { color: isDark ? fantasy.gold : fantasy.darkWood },
-                      ]}
-                    >
-                      Racial Traits
-                    </Text>
-                    {race.traits.map((trait, idx) => (
-                      <Text key={idx} style={[styles.traitText, { color: colors.text.secondary }]}>
-                        {trait}
-                      </Text>
-                    ))}
-
-                    <Text
-                      style={[
-                        styles.sectionTitle,
-                        { color: isDark ? fantasy.gold : fantasy.darkWood },
-                      ]}
-                    >
-                      Languages
-                    </Text>
-                    <Text style={[styles.detailLabel, { color: colors.text.secondary }]}>
-                      {race.languages.join(', ')}
-                    </Text>
-                  </View>
-                )}
-              </View>
-            </Pressable>
-          );
-        })}
+              {section.title}
+            </Text>
+            {section.data.map((race) => renderRaceItem(race))}
+          </View>
+        ))}
       </ScrollView>
 
       {isFlexibleRace && onFlexibleAbilityChoice && (
@@ -212,6 +244,15 @@ const styles = StyleSheet.create({
   raceDetails: {
     marginTop: 4,
   },
+  sectionHeader: {
+    fontFamily: 'Cinzel',
+    fontSize: 16,
+    fontWeight: '700',
+    paddingVertical: 8,
+    paddingHorizontal: 4,
+    marginTop: 12,
+    marginBottom: 4,
+  },
   sectionTitle: {
     fontFamily: 'Cinzel',
     fontSize: 12,
@@ -224,11 +265,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 2,
   },
+  traitItem: {
+    marginBottom: 6,
+    paddingLeft: 8,
+  },
+  traitName: {
+    fontFamily: 'Cinzel',
+    fontSize: 11,
+    fontWeight: '700',
+  },
   traitText: {
     fontFamily: 'LibreBaskerville',
     fontSize: 11,
-    marginBottom: 4,
-    paddingLeft: 8,
   },
   flexibleLabel: {
     fontFamily: 'LibreBaskerville',

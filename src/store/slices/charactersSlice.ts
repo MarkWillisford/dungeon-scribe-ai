@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 import type { Character, CharacterSummary, CreateCharacterParams } from '@/types';
+import type { CharacterFeat } from '@/types/feats';
+import { FirebaseCharacterService } from '@/services/FirebaseCharacterService';
+import { CharacterService } from '@/services/CharacterService';
+import { ModifierPipelineService } from '@/services/ModifierPipelineService';
 
 interface CharactersState {
   characters: CharacterSummary[];
@@ -15,13 +19,11 @@ const initialState: CharactersState = {
   error: null,
 };
 
-// Async thunks — implementations will call FirebaseCharacterService (Step 6)
 export const fetchCharacters = createAsyncThunk<CharacterSummary[], string>(
   'characters/fetchCharacters',
-  async (_userId, { rejectWithValue }) => {
+  async (userId, { rejectWithValue }) => {
     try {
-      // TODO: call FirebaseCharacterService.getUserCharacters()
-      throw new Error('Not implemented');
+      return await FirebaseCharacterService.getUserCharacters(userId);
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : 'Failed to fetch characters');
     }
@@ -30,10 +32,9 @@ export const fetchCharacters = createAsyncThunk<CharacterSummary[], string>(
 
 export const fetchCharacter = createAsyncThunk<Character, string>(
   'characters/fetchCharacter',
-  async (_characterId, { rejectWithValue }) => {
+  async (characterId, { rejectWithValue }) => {
     try {
-      // TODO: call FirebaseCharacterService.getCharacter()
-      throw new Error('Not implemented');
+      return await FirebaseCharacterService.getCharacter(characterId);
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : 'Failed to fetch character');
     }
@@ -43,10 +44,10 @@ export const fetchCharacter = createAsyncThunk<Character, string>(
 export const createCharacter = createAsyncThunk<
   Character,
   { userId: string; data: CreateCharacterParams }
->('characters/createCharacter', async (_params, { rejectWithValue }) => {
+>('characters/createCharacter', async (params, { rejectWithValue }) => {
   try {
-    // TODO: call FirebaseCharacterService.create()
-    throw new Error('Not implemented');
+    const character = CharacterService.createDefaultCharacter(params.data);
+    return await FirebaseCharacterService.create(params.userId, character);
   } catch (error) {
     return rejectWithValue(error instanceof Error ? error.message : 'Failed to create character');
   }
@@ -55,10 +56,9 @@ export const createCharacter = createAsyncThunk<
 export const updateCharacter = createAsyncThunk<
   Character,
   { characterId: string; data: Partial<Character> }
->('characters/updateCharacter', async (_params, { rejectWithValue }) => {
+>('characters/updateCharacter', async (params, { rejectWithValue }) => {
   try {
-    // TODO: call FirebaseCharacterService.update()
-    throw new Error('Not implemented');
+    return await FirebaseCharacterService.update(params.characterId, params.data);
   } catch (error) {
     return rejectWithValue(error instanceof Error ? error.message : 'Failed to update character');
   }
@@ -66,10 +66,9 @@ export const updateCharacter = createAsyncThunk<
 
 export const deleteCharacter = createAsyncThunk<void, string>(
   'characters/deleteCharacter',
-  async (_characterId, { rejectWithValue }) => {
+  async (characterId, { rejectWithValue }) => {
     try {
-      // TODO: call FirebaseCharacterService.delete()
-      throw new Error('Not implemented');
+      await FirebaseCharacterService.delete(characterId);
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : 'Failed to delete character');
     }
@@ -89,6 +88,30 @@ const charactersSlice = createSlice({
     },
     clearError(state) {
       state.error = null;
+    },
+    addFeat(state, action: PayloadAction<CharacterFeat>) {
+      if (!state.activeCharacter) return;
+      state.activeCharacter.feats.feats.push(action.payload);
+      state.activeCharacter = ModifierPipelineService.recalculate(state.activeCharacter);
+    },
+    removeFeat(state, action: PayloadAction<string>) {
+      if (!state.activeCharacter) return;
+      state.activeCharacter.feats.feats = state.activeCharacter.feats.feats.filter(
+        (f) => f.featId !== action.payload,
+      );
+      state.activeCharacter = ModifierPipelineService.recalculate(state.activeCharacter);
+    },
+    toggleFeat(state, action: PayloadAction<string>) {
+      if (!state.activeCharacter) return;
+      const feat = state.activeCharacter.feats.feats.find((f) => f.featId === action.payload);
+      if (feat) {
+        feat.active = !feat.active;
+        state.activeCharacter = ModifierPipelineService.recalculate(state.activeCharacter);
+      }
+    },
+    recalculateStats(state) {
+      if (!state.activeCharacter) return;
+      state.activeCharacter = ModifierPipelineService.recalculate(state.activeCharacter);
     },
   },
   extraReducers: (builder) => {
@@ -113,7 +136,7 @@ const charactersSlice = createSlice({
     });
     builder.addCase(fetchCharacter.fulfilled, (state, action) => {
       state.loading = false;
-      state.activeCharacter = action.payload;
+      state.activeCharacter = ModifierPipelineService.recalculate(action.payload);
     });
     builder.addCase(fetchCharacter.rejected, (state, action) => {
       state.loading = false;
@@ -127,7 +150,7 @@ const charactersSlice = createSlice({
     });
     builder.addCase(createCharacter.fulfilled, (state, action) => {
       state.loading = false;
-      const character = action.payload;
+      const character = ModifierPipelineService.recalculate(action.payload);
       state.activeCharacter = character;
       state.characters.push({
         id: character.info.id,
@@ -177,5 +200,13 @@ const charactersSlice = createSlice({
   },
 });
 
-export const { setActiveCharacter, clearCharacters, clearError } = charactersSlice.actions;
+export const {
+  setActiveCharacter,
+  clearCharacters,
+  clearError,
+  addFeat,
+  removeFeat,
+  toggleFeat,
+  recalculateStats,
+} = charactersSlice.actions;
 export default charactersSlice.reducer;

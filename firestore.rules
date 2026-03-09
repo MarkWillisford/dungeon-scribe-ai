@@ -20,7 +20,7 @@ service cloud.firestore {
 
     function isCampaignMember(campaignId) {
       return isAuthenticated() &&
-        request.auth.uid in getCampaign(campaignId).members.map(m => m.userId);
+        request.auth.uid in getCampaign(campaignId).memberIds;
     }
 
     // Users collection

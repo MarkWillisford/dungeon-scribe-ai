@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 import type { AppUser } from '@/types/auth';
+import { FirebaseAuthService } from '@/services/FirebaseAuthService';
 
 interface AuthState {
   user: AppUser | null;
@@ -18,10 +19,9 @@ const initialState: AuthState = {
 // Async thunks — implementations will call FirebaseAuthService (Step 6)
 export const login = createAsyncThunk<AppUser, { email: string; password: string }>(
   'auth/login',
-  async (_params, { rejectWithValue }) => {
+  async (params, { rejectWithValue }) => {
     try {
-      // TODO: call FirebaseAuthService.login()
-      throw new Error('Not implemented');
+      return await FirebaseAuthService.login(params.email, params.password);
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : 'Login failed');
     }
@@ -31,21 +31,19 @@ export const login = createAsyncThunk<AppUser, { email: string; password: string
 export const signup = createAsyncThunk<
   AppUser,
   { email: string; password: string; displayName: string }
->('auth/signup', async (_params, { rejectWithValue }) => {
+>('auth/signup', async (params, { rejectWithValue }) => {
   try {
-    // TODO: call FirebaseAuthService.signup()
-    throw new Error('Not implemented');
+    return await FirebaseAuthService.signUp(params.email, params.password);
   } catch (error) {
     return rejectWithValue(error instanceof Error ? error.message : 'Signup failed');
   }
 });
 
-export const googleLogin = createAsyncThunk<AppUser, void>(
+export const googleLogin = createAsyncThunk<AppUser, string>(
   'auth/googleLogin',
-  async (_, { rejectWithValue }) => {
+  async (idToken, { rejectWithValue }) => {
     try {
-      // TODO: call FirebaseAuthService.googleLogin()
-      throw new Error('Not implemented');
+      return await FirebaseAuthService.googleLogin(idToken);
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : 'Google login failed');
     }
@@ -56,8 +54,7 @@ export const logout = createAsyncThunk<void, void>(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      // TODO: call FirebaseAuthService.logout()
-      throw new Error('Not implemented');
+      await FirebaseAuthService.logout();
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : 'Logout failed');
     }
@@ -66,10 +63,9 @@ export const logout = createAsyncThunk<void, void>(
 
 export const resetPassword = createAsyncThunk<void, string>(
   'auth/resetPassword',
-  async (_email, { rejectWithValue }) => {
+  async (email, { rejectWithValue }) => {
     try {
-      // TODO: call FirebaseAuthService.resetPassword()
-      throw new Error('Not implemented');
+      await FirebaseAuthService.resetPassword(email);
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : 'Password reset failed');
     }

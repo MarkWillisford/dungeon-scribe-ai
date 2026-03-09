@@ -72,6 +72,7 @@ export enum AmmoType {
   BULLET = 'bullet',
   DART = 'dart',
   SHURIKEN = 'shuriken',
+  FIREARM = 'firearm',
 }
 
 export interface EquipmentTemplate {
@@ -258,4 +259,120 @@ export interface Gear extends BaseItem {
   type: string; // adventuring, alchemical, tool, etc.
   isConsumable: boolean;
   usesRemaining?: number;
+}
+
+// --- Strongly-typed definition types for static data registry ---
+
+export type WeaponProficiency = 'simple' | 'martial' | 'exotic';
+export type WeaponHandedness = 'light' | 'one-handed' | 'two-handed';
+export type ArmorWeight = 'light' | 'medium' | 'heavy';
+export type ShieldWeight = 'buckler' | 'light' | 'heavy' | 'tower';
+export type DamageType = 'bludgeoning' | 'piercing' | 'slashing';
+export type GearCategory =
+  | 'adventuring'
+  | 'alchemical'
+  | 'tool'
+  | 'clothing'
+  | 'kit'
+  | 'container'
+  | 'illumination'
+  | 'writing'
+  | 'food'
+  | 'entertainment'
+  | 'animal'
+  | 'ammunition'
+  | 'remedy'
+  | 'class_tool';
+
+export interface WeaponDefinition {
+  id: string;
+  name: string;
+  proficiency: WeaponProficiency;
+  weaponType: 'melee' | 'ranged';
+  handedness: WeaponHandedness;
+  weaponGroup: string[];
+  cost: number;
+  weight: number;
+  damageS: string;
+  damageM: string;
+  critical: string;
+  damageType: DamageType[];
+  special: string[];
+  range: number;
+  isThrown: boolean;
+  isDoubleWeapon?: boolean;
+  ammunition?: AmmoType;
+  description: string;
+  source: string;
+}
+
+export interface ArmorDefinition {
+  id: string;
+  name: string;
+  armorType: ArmorWeight;
+  cost: number;
+  weight: number;
+  acBonus: number;
+  maxDexBonus: number;
+  checkPenalty: number;
+  spellFailure: number;
+  speed30: number;
+  speed20: number;
+  description: string;
+  source: string;
+}
+
+export interface ShieldDefinition {
+  id: string;
+  name: string;
+  shieldType: ShieldWeight;
+  cost: number;
+  weight: number;
+  acBonus: number;
+  checkPenalty: number;
+  spellFailure: number;
+  description: string;
+  source: string;
+}
+
+export interface GearDefinition {
+  id: string;
+  name: string;
+  gearType: GearCategory;
+  cost: number;
+  weight: number;
+  description: string;
+  isConsumable: boolean;
+  quantity?: number;
+  source: string;
+}
+
+export interface MaterialDefinition {
+  id: string;
+  name: string;
+  description: string;
+  weaponCostModifier?: string;
+  armorCostModifier?: string;
+  shieldCostModifier?: string;
+  hardness?: number;
+  hpPerInch?: number;
+  properties: string[];
+  applicableTo: ('weapon' | 'armor' | 'shield')[];
+  source: string;
+}
+
+export interface ServiceDefinition {
+  id: string;
+  name: string;
+  serviceType:
+    | 'spellcasting'
+    | 'hireling'
+    | 'lodging'
+    | 'transport'
+    | 'food_drink'
+    | 'entertainment';
+  cost: number;
+  costUnit?: string;
+  description: string;
+  source: string;
 }

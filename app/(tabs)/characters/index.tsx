@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, View, Text, FlatList, StyleSheet } from 'react-native';
+import { Alert, SafeAreaView, View, Text, FlatList, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { useTheme } from '@/hooks/useTheme';
-import { fetchCharacters } from '@/store/slices/charactersSlice';
+import { fetchCharacters, deleteCharacter } from '@/store/slices/charactersSlice';
 import { OrnateButton } from '@/components/ui/OrnateButton';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { CharacterCard } from '@/components/character/CharacterCard';
@@ -27,6 +27,22 @@ export default function CharactersListScreen() {
     router.push(`/(tabs)/characters/${id}`);
   };
 
+  const handleDeleteCharacter = (id: string) => {
+    const character = characters.find((c) => c.id === id);
+    Alert.alert(
+      'Delete Character',
+      `Are you sure you want to delete ${character?.name ?? 'this character'}? This cannot be undone.`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => dispatch(deleteCharacter(id)),
+        },
+      ],
+    );
+  };
+
   const handleCreateCharacter = () => {
     router.push('/(tabs)/characters/create');
   };
@@ -35,6 +51,7 @@ export default function CharactersListScreen() {
     <CharacterCard
       character={item}
       onPress={handleCharacterPress}
+      onDelete={handleDeleteCharacter}
       testID={`character-card-${item.id}`}
     />
   );

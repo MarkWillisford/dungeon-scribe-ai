@@ -87,31 +87,45 @@ export interface Bonus {
   active?: boolean; // Defaults to true
 }
 
+// Structured condition for effects
+export interface EffectCondition {
+  type:
+    | 'always'
+    | 'weapon_type'
+    | 'weapon_group'
+    | 'range'
+    | 'target_type'
+    | 'armor_type'
+    | 'custom';
+  params: Record<string, string | number | boolean>;
+  description: string;
+}
+
+// Duration for temporary effects
+export interface EffectDuration {
+  type: 'rounds' | 'minutes' | 'hours' | 'permanent' | 'encounter' | string;
+  value: number;
+  remaining: number;
+  startTime?: number;
+}
+
+// Activation mode for effects
+export interface EffectActivation {
+  type: 'passive' | 'toggle' | 'use' | 'immediate' | 'swift' | 'standard' | string;
+  usesPerDay?: number;
+  usesRemaining?: number;
+  active: boolean;
+}
+
 // Effects system for modifiers
 export interface Effect {
-  type: string; // Effect type (bonus, penalty, special)
-  bonusType?: string;
-  target: string; // What it affects (attribute.strength, ac.armor, etc.)
-  value: number | string; // Value/formula
+  type: string; // Effect type (bonus, penalty, special, override)
+  bonusType?: BonusType | string; // Bonus type for stacking; defaults to UNTYPED if omitted
+  target: string; // What it affects (ability.str, ac.armor, save.reflex, etc.)
+  value: number | string; // Value or formula string
   source: string;
 
-  condition?: {
-    type: string;
-    description: string;
-    check: string;
-  };
-
-  duration?: {
-    type: string;
-    value: number;
-    remaining: number;
-    startTime?: number;
-  };
-
-  activation?: {
-    type: string; // How it's activated (standard, swift, etc.)
-    usesPerDay?: number;
-    usesRemaining?: number;
-    active: boolean;
-  };
+  condition?: EffectCondition;
+  duration?: EffectDuration;
+  activation?: EffectActivation;
 }

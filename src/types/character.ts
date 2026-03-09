@@ -99,6 +99,7 @@ export interface CreateCharacterParams {
   };
   alignment: Alignment;
   deity?: string;
+  skillRanks?: Record<string, number>;
 }
 
 // Ability score generation configuration

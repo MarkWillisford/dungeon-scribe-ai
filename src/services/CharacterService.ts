@@ -73,7 +73,7 @@ export class CharacterService {
       combatStats: this.createDefaultCombatStats(),
       skills: this.createDefaultSkills(),
       feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
-      traits: { traits: [] },
+      traits: { traits: [], maxTraits: 2 },
       equipment: this.createDefaultEquipment(),
       spellcasting: {
         spellcastingClasses: [],
@@ -94,7 +94,73 @@ export class CharacterService {
     };
 
     // Apply racial modifiers
-    return this.applyRacialModifiers(character);
+    const withRace = this.applyRacialModifiers(character);
+
+    // Apply skill ranks from creation
+    if (params.skillRanks) {
+      for (const [skillKey, ranks] of Object.entries(params.skillRanks)) {
+        if (ranks > 0 && skillKey in withRace.skills) {
+          const skill = (withRace.skills as any)[skillKey];
+          if (skill && typeof skill === 'object' && 'ranks' in skill) {
+            skill.ranks = ranks;
+            withRace.skills.totalRanks += ranks;
+          }
+        }
+      }
+    }
+
+    // Mark class skills
+    const classSkillKeyMap: Record<string, string> = {
+      Acrobatics: 'acrobatics',
+      Appraise: 'appraise',
+      Bluff: 'bluff',
+      Climb: 'climb',
+      Diplomacy: 'diplomacy',
+      'Disable Device': 'disableDevice',
+      Disguise: 'disguise',
+      'Escape Artist': 'escapeArtist',
+      Fly: 'fly',
+      'Handle Animal': 'handleAnimal',
+      Heal: 'heal',
+      Intimidate: 'intimidate',
+      'Knowledge (arcana)': 'knowledgeArcana',
+      'Knowledge (dungeoneering)': 'knowledgeDungeoneering',
+      'Knowledge (engineering)': 'knowledgeEngineering',
+      'Knowledge (geography)': 'knowledgeGeography',
+      'Knowledge (history)': 'knowledgeHistory',
+      'Knowledge (local)': 'knowledgeLocal',
+      'Knowledge (nature)': 'knowledgeNature',
+      'Knowledge (nobility)': 'knowledgeNobility',
+      'Knowledge (planes)': 'knowledgePlanes',
+      'Knowledge (religion)': 'knowledgeReligion',
+      Linguistics: 'linguistics',
+      Perception: 'perception',
+      Ride: 'ride',
+      'Sense Motive': 'senseMotive',
+      'Sleight of Hand': 'sleightOfHand',
+      Spellcraft: 'spellcraft',
+      Stealth: 'stealth',
+      Survival: 'survival',
+      Swim: 'swim',
+      'Use Magic Device': 'useMagicDevice',
+    };
+    const classSkills = withRace.classes.classes[0]?.classSkills ?? [];
+    for (const csName of classSkills) {
+      if (csName === 'Knowledge (all)') {
+        Object.keys(withRace.skills)
+          .filter((k) => k.startsWith('knowledge'))
+          .forEach((k) => {
+            (withRace.skills as any)[k].isClassSkill = true;
+          });
+      } else {
+        const key = classSkillKeyMap[csName];
+        if (key && key in withRace.skills) {
+          (withRace.skills as any)[key].isClassSkill = true;
+        }
+      }
+    }
+
+    return withRace;
   }
 
   /**

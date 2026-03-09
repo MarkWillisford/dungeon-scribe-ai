@@ -657,7 +657,8 @@ npx husky init
    - Component tests: 7 suites (OrnatePanel, OrnateButton, OrnateStatInput, FantasyTextInput, CharacterCard, RaceSelector, AuthForm)
    - Integration tests: 3 suites (CharacterCRUD — 50 tests, EquipmentManagement — 29 tests, CharacterCreationFlow — 59 tests)
 3. E2E tests: **deferred** — requires running app on device/emulator with Firebase connected
-4. Manual verification: pending Firebase project creation (run `bash scripts/firebase-setup.sh`)
+4. Firebase staging project created and configured (Auth + Firestore enabled, rules deployed)
+5. App runs on device via Expo Go (tunnel mode)
 
 ### Deviations from Original Plan
 
@@ -665,6 +666,11 @@ npx husky init
 - **Custom test renderer:** Could not install `react-test-renderer` (npm peer dep conflict). Built a lightweight custom renderer at `__tests__/helpers/testUtils.tsx` with minimal React hooks support.
 - **Jest projects config:** Tests split into two Jest projects (`services` + `components`) with separate configs. Component tests use `tsconfig.jest.json` to override `jsx: "react-jsx"`.
 - **firebase-tools as devDependency:** Installed locally for rule deployment (`npm run firebase:deploy-rules`) rather than globally.
+- **Downgraded to Expo SDK 54:** Expo Go on the App Store only supports SDK 54. Downgraded from SDK 55 (React Native 0.83) to SDK 54 (React Native 0.81.5). Added `react-native-worklets@0.5.1` as required by Reanimated 4.1. Use `--tunnel` mode for WSL2 development.
+- **Removed `@testing-library/jest-native`:** Deprecated package causing peer dep conflicts with React 19. Its matchers are now built into `@testing-library/react-native`.
+- **Auth thunks wired to Firebase:** Redux auth thunks (login, signup, logout, resetPassword) were stubs — now call real `FirebaseAuthService` methods. Added `onAuthStateChanged` listener in root layout to sync Firebase auth state with Redux.
+- **Firestore rules fix:** `isCampaignMember()` used `.map()` which isn't supported in Firestore rules — changed to flat `memberIds` array lookup.
+- **npm install requires `--legacy-peer-deps`:** Due to `@testing-library/react-native` peer dep on `react-test-renderer` conflicting with React 19.1.
 
 ## Critical Source Files
 

@@ -1,6 +1,8 @@
 {
   "projects": {
-    "staging": "dungeon-scribe-ai-staging",
+    "staging": "dungeon-scribe-ai-stagin-b4fb5",
     "production": "dungeon-scribe-ai-prod"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }

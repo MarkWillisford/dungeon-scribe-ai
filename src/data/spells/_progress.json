@@ -1,0 +1,98 @@
+{
+  "_comment": "Spell collection progress tracker. Updated by agents after each batch.",
+  "config": {
+    "batchSize": 50
+  },
+  "schools": {
+    "abjuration": {
+      "status": "complete",
+      "batchesComplete": 2,
+      "totalSpellsCollected": 137,
+      "lastSpellInExistingFile": "Mind Blank, Communal",
+      "nextSpellName": "DONE",
+      "nextSpellUrl": null,
+      "merged": false,
+      "lastUpdated": "2026-03-07"
+    },
+    "conjuration": {
+      "status": "complete",
+      "batchesComplete": 2,
+      "totalSpellsCollected": 143,
+      "lastSpellInExistingFile": "Summon Giant Ally III",
+      "nextSpellName": "DONE",
+      "nextSpellUrl": null,
+      "merged": false,
+      "lastUpdated": "2026-03-07"
+    },
+    "divination": {
+      "status": "complete",
+      "batchesComplete": 3,
+      "totalSpellsCollected": 195,
+      "lastSpellInExistingFile": "Foresight",
+      "nextSpellName": "DONE",
+      "nextSpellUrl": null,
+      "merged": false,
+      "lastUpdated": "2026-03-07"
+    },
+    "enchantment": {
+      "status": "complete",
+      "batchesComplete": 3,
+      "totalSpellsCollected": 192,
+      "lastSpellInExistingFile": "Euphoric Tranquility",
+      "nextSpellName": "DONE",
+      "nextSpellUrl": null,
+      "merged": false,
+      "lastUpdated": "2026-03-07"
+    },
+    "evocation": {
+      "status": "complete",
+      "batchesComplete": 2,
+      "totalSpellsCollected": 54,
+      "lastSpellInExistingFile": null,
+      "nextSpellName": "DONE",
+      "nextSpellUrl": null,
+      "merged": false,
+      "lastUpdated": "2026-03-07"
+    },
+    "illusion": {
+      "status": "complete",
+      "batchesComplete": 2,
+      "totalSpellsCollected": 133,
+      "lastSpellInExistingFile": "Invisibility, Mass",
+      "nextSpellName": "DONE",
+      "nextSpellUrl": null,
+      "merged": false,
+      "lastUpdated": "2026-03-07"
+    },
+    "necromancy": {
+      "status": "complete",
+      "batchesComplete": 1,
+      "totalSpellsCollected": 74,
+      "lastSpellInExistingFile": "Wail of the Banshee",
+      "nextSpellName": "DONE",
+      "nextSpellUrl": null,
+      "merged": false,
+      "lastUpdated": "2026-03-07"
+    },
+    "transmutation": {
+      "status": "complete",
+      "batchesComplete": 10,
+      "totalSpellsCollected": 458,
+      "lastSpellInExistingFile": null,
+      "nextSpellName": "DONE",
+      "nextSpellUrl": null,
+      "merged": false,
+      "lastUpdated": "2026-03-07"
+    },
+    "universal": {
+      "status": "complete",
+      "batchesComplete": 0,
+      "totalSpellsCollected": 5,
+      "lastSpellInExistingFile": "Wish",
+      "nextSpellName": "DONE",
+      "nextSpellUrl": null,
+      "merged": false,
+      "lastUpdated": "2026-03-07"
+    }
+  }
+}

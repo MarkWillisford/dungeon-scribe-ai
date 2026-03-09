@@ -7,7 +7,7 @@ This project merges the best of two earlier apps: **Dungeon Scribe AI** (compreh
 ## Tech Stack
 
 - **TypeScript** -- strict mode, path aliases (`@/*`)
-- **React Native** (Expo SDK 55)
+- **React Native** (Expo SDK 54)
 - **Expo Router** -- file-based navigation with auth gating
 - **Redux Toolkit** -- global state with typed hooks
 - **Firebase** -- Auth, Firestore, Storage (staging + production environments)
@@ -28,15 +28,47 @@ This project merges the best of two earlier apps: **Dungeon Scribe AI** (compreh
 git clone git@github.com:MarkWillisford/dungeon-scribe-ai.git
 cd "Dungeon Scribe AI 1.1"
 
-# Install dependencies
-npm install
+# Install dependencies (--legacy-peer-deps required due to testing library peer dep)
+npm install --legacy-peer-deps
 
 # Set up environment variables
 cp .env.example .env
-# Fill in your Firebase config values in .env
+# Fill in your Firebase config values in .env (see Firebase Setup below)
 
 # Start the dev server
 npx expo start
+```
+
+## Running on a Device
+
+Install **Expo Go** from the App Store (iOS) or Google Play (Android). The app requires Expo SDK 54, so make sure your Expo Go version supports SDK 54.
+
+```bash
+# Standard start (local network — phone and computer must be on same Wi-Fi)
+npx expo start
+
+# Tunnel mode (recommended for WSL2 or when local network doesn't work)
+npx expo start --tunnel
+
+# Clear Metro cache if you see stale code after changes
+npx expo start --tunnel --clear
+```
+
+Scan the QR code with your phone camera (iOS) or the Expo Go app (Android) to open the app.
+
+## Firebase Setup
+
+1. Go to [Firebase Console](https://console.firebase.google.com) and create a project
+2. Enable **Authentication** (Email/Password sign-in method)
+3. Enable **Cloud Firestore** (start in test mode)
+4. Register a **Web app** in Project Settings and copy the config values
+5. Paste the config values into your `.env` file
+6. Set the Firebase project alias and deploy rules:
+
+```bash
+npx firebase use --add <your-project-id> --alias staging
+npx firebase deploy --only firestore:rules --project staging
+npx firebase deploy --only firestore:indexes --project staging
 ```
 
 ## Available Scripts

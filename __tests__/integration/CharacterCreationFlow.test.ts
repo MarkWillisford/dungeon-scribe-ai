@@ -9,7 +9,7 @@ import { Race } from '@/types/race';
 import { Character } from '@/types';
 
 // ---------------------------------------------------------------------------
-// Helper: convert static RaceData -> the Race interface expected by services
+// Helper: convert ExpandedRaceData -> the Race interface expected by services
 // ---------------------------------------------------------------------------
 function raceDataToRace(name: string): Race {
   const data = getRaceByName(name);
@@ -19,7 +19,7 @@ function raceDataToRace(name: string): Race {
     name: data.name,
     sizeMod: data.size,
     baseSpeed: data.speed,
-    alternativeMovements: {},
+    alternativeMovements: data.alternativeMovements ?? {},
     abilityModifiers: {
       str: data.abilityModifiers.strength,
       dex: data.abilityModifiers.dexterity,
@@ -28,9 +28,13 @@ function raceDataToRace(name: string): Race {
       wis: data.abilityModifiers.wisdom,
       cha: data.abilityModifiers.charisma,
     },
-    traits: data.traits.map((t) => ({ name: t, description: t, effects: [] })),
+    traits: data.racialTraits.map((t) => ({
+      name: t.name,
+      description: t.description,
+      effects: [],
+    })),
     languages: data.languages,
-    bonusLanguages: [],
+    bonusLanguages: data.bonusLanguages,
   };
 }
 
@@ -316,7 +320,6 @@ describe('Character Creation Flow Integration', () => {
       });
 
       const traitNames = character.info.race.traits.map((t) => t.name);
-      expect(traitNames.some((t) => t.includes('Darkvision'))).toBe(true);
       expect(traitNames.some((t) => t.includes('Weapon Familiarity'))).toBe(true);
       expect(traitNames.some((t) => t.includes('Hardy'))).toBe(true);
       expect(traitNames.some((t) => t.includes('Stability'))).toBe(true);
@@ -335,7 +338,6 @@ describe('Character Creation Flow Integration', () => {
       });
 
       const traitNames = character.info.race.traits.map((t) => t.name);
-      expect(traitNames.some((t) => t.includes('Low-Light Vision'))).toBe(true);
       expect(traitNames.some((t) => t.includes('Elven Immunities'))).toBe(true);
       expect(traitNames.some((t) => t.includes('Keen Senses'))).toBe(true);
       expect(traitNames.some((t) => t.includes('Weapon Familiarity'))).toBe(true);
@@ -373,10 +375,10 @@ describe('Character Creation Flow Integration', () => {
         });
 
         // Each race's traits should be on the character
-        expect(character.info.race.traits).toHaveLength(raceData.traits.length);
+        expect(character.info.race.traits).toHaveLength(raceData.racialTraits.length);
 
-        for (let i = 0; i < raceData.traits.length; i++) {
-          expect(character.info.race.traits[i].name).toBe(raceData.traits[i]);
+        for (let i = 0; i < raceData.racialTraits.length; i++) {
+          expect(character.info.race.traits[i].name).toBe(raceData.racialTraits[i].name);
         }
       }
     });

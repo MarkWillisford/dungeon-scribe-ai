@@ -6,10 +6,11 @@ import type { CharacterSummary } from '@/types/character';
 interface CharacterCardProps {
   character: CharacterSummary;
   onPress: (id: string) => void;
+  onDelete?: (id: string) => void;
   testID?: string;
 }
 
-export function CharacterCard({ character, onPress, testID }: CharacterCardProps) {
+export function CharacterCard({ character, onPress, onDelete, testID }: CharacterCardProps) {
   const { colors, fantasy, shadows, isDark } = useTheme();
 
   const formattedDate = character.lastUpdated.toLocaleDateString();
@@ -18,9 +19,10 @@ export function CharacterCard({ character, onPress, testID }: CharacterCardProps
     <Pressable
       testID={testID}
       onPress={() => onPress(character.id)}
+      onLongPress={onDelete ? () => onDelete(character.id) : undefined}
       accessibilityRole="button"
       accessibilityLabel={`${character.name}, Level ${character.level} ${character.race} ${character.classes}`}
-      accessibilityHint="Opens character details"
+      accessibilityHint="Opens character details. Long press to delete."
     >
       <View
         style={[
