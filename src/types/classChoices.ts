@@ -50,13 +50,15 @@ export interface ClassChoiceOptionGroup {
   options: ClassChoiceOption[];
 }
 
+// Inline options only — 2–4 fixed choices with no prereqs or sub-structure.
+// e.g. Wizard arcane bond (familiar vs bonded object), Ranger combat style label.
+// For large choice pools (domains, bloodlines, rage powers, etc.) use optionSource: 'collection'
+// and see src/types/classOptions.ts for the document shapes.
 export interface ClassChoiceOption {
   id: string;
   name: string;
   description: string;
-  prerequisites?: FeatPrerequisite[]; // some talents/rage powers require other abilities
-  sourceId: string;
-  sourceRev: number;
+  prerequisites?: FeatPrerequisite[];
 }
 
 // ---- Class Choice Definition ----
