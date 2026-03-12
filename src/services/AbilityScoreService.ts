@@ -288,6 +288,7 @@ export class AbilityScoreService {
         competence: [],
         untyped: [],
       },
+      levelIncrements: 0,
       total: base,
       modifier: Math.floor((base - 10) / 2),
       tempTotal: base,

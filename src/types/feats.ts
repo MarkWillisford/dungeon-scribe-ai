@@ -42,6 +42,7 @@ export type FeatPrerequisite =
   | { type: 'proficiency'; proficiency: string }
   | { type: 'race'; raceName: string }
   | { type: 'caster_level'; minimum: number }
+  | { type: 'mythic_tier'; minimum: number }
   | { type: 'special'; description: string };
 
 // ---- Feat Effect (extends Effect with required bonusType) ----
@@ -91,6 +92,13 @@ export interface CharacterFeat {
   grantedAtLevel: number;
   active: boolean;
   choices: Record<string, string>;
+
+  // Point-in-time validation snapshots (what the character looked like when this feat was taken)
+  babWhenTaken?: number;
+  classLevelsWhenTaken?: Record<string, number>;
+
+  // Mythic feat flag
+  isMythic?: boolean;
 }
 
 // ---- Container on Character ----

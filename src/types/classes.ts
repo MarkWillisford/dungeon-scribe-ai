@@ -1,4 +1,5 @@
 import { BABProgression, SaveProgression, Effect } from './base';
+import { FeatPrerequisite } from './feats';
 
 export interface CharacterClasses {
   classes: ClassEntry[];
@@ -23,6 +24,32 @@ export interface ClassEntry {
   refProgression: SaveProgression;
   willProgression: SaveProgression;
   classFeatures: ClassFeature[];
+
+  // Level-by-level selections (domains, talents, favored enemies, rage powers, etc.)
+  classChoices?: ClassChoice[];
+
+  // For prestige/advancement classes: advances an existing casting pool rather than granting its own
+  spellcastingAdvancement?: {
+    type: 'divine' | 'arcane' | 'both' | 'highest' | 'chosen';
+    chosenType?: 'divine' | 'arcane'; // Required when type === 'chosen'
+  };
+
+  // Prestige class entry requirements (point-in-time validated)
+  prerequisites?: FeatPrerequisite[];
+
+  // Custom / ported class metadata
+  sourceSystem?: 'pf1e' | '3.5e' | 'homebrew' | 'campaign';
+  isCustom?: boolean;
+  sourceNotes?: string; // e.g. "Ported from Complete Divine p.52, modified for Milani"
+}
+
+// ---- Class Choices ----
+
+export interface ClassChoice {
+  featureName: string; // 'Domain', 'Favored Enemy', 'Rogue Talent', 'Rage Power', etc.
+  takenAtLevel: number; // Character class level when this choice was made
+  selection: string | string[];
+  metadata?: Record<string, unknown>;
 }
 
 export interface ClassFeature {

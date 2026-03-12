@@ -608,18 +608,74 @@ npx husky init
 
 ---
 
-## Phases 2-4 Roadmap (Future)
+## Phases 2-4 Roadmap
 
-### Phase 2: Combat System
+### Phase 2: Combat System — COMPLETE (2026-03-10)
 
-- Playsheet UI (attacks, defense, saves, iterative attacks, two-weapon fighting, haste)
-- Buff system with HL's stacking engine (dodge/untyped stack, typed take highest), library, packages
-- Combat abilities (Power Attack, Rage, etc.) with toggles, variable inputs, mutual exclusion
-- HP tracker (current/max/temp, non-lethal, negative levels at -5 HP / -1 rolls each)
-- Dice roller (multi-dice groups, modifier auto-apply, roll history, statistics)
-- Combat stats calculator with full bonus breakdown
+**570 tests passing** across 35 suites. See `plans/phase2-combat-system.md` for full details.
 
-### Phase 3: Campaigns & Social
+- [x] Playsheet UI (attacks, defense, saves, iterative attacks, two-weapon fighting, haste)
+- [x] Buff system with stacking engine (dodge/untyped stack, typed take highest), library, presets
+- [x] Combat abilities (Power Attack, Rage, TWF, Haste, Deadly Aim, Combat Expertise, Flurry)
+- [x] HP tracker (current/max/temp, non-lethal, HP state: Healthy/Wounded/Disabled/Dying/Dead)
+- [x] Dice roller (d4–d100, count/modifier, manual entry, roll log, FAB overlay)
+- [x] `DiceFAB` mounted in root layout, hidden on combat tab
+- [x] 18 buff presets seeded (`src/data/buffs/presets.ts`)
+- [ ] E2E tests (deferred — requires running app on device)
+
+### Phase 3: Character System — IN PROGRESS (2026-03-11)
+
+Full design in `plans/character-system-redesign.md` and `plans/direct-entry-ui-design.md`.
+
+#### 3a. Type System — COMPLETE (2026-03-11)
+
+All type changes implemented and tests passing. Key additions:
+
+- `src/types/templates.ts` — `LevelUpDecision`, `AppliedTemplate`, `GrantedBonus`, `CharacterCRTracking`, `TemplateFeature` variants
+- `src/types/mythic.ts` — `MythicProgression`, `MythicAbilityEntry`, `MythicTierGrant`
+- `src/types/resources.ts` — `ResourcePool` (`rechargeOn: 'rest' | 'per_encounter' | 'special'`)
+- `src/types/spells.ts` — `SpellcastingPool` replaces `SpellcastingClass`; `CLBonus`, `SpellcastingContributor` added
+- `src/types/classes.ts` — `ClassChoice`, `spellcastingAdvancement`, `prerequisites`, `sourceSystem`, `isCustom`
+- `src/types/feats.ts` — `CharacterFeat.babWhenTaken`, `classLevelsWhenTaken`, `isMythic`; `FeatPrerequisite.mythic_tier`
+- `src/types/abilities.ts` — `AbilityScore.levelIncrements`
+- `src/types/campaign.ts` — `CampaignSettings` extended with `epicEnabled`, `epicSpellProgression`, `mythicEnabled`, `laBuybackMode`, `maxTraits`, `globalGrants`
+- `src/types/index.ts` — `Character` extended with `levelHistory`, `appliedTemplates`, `grantedBonuses`, `crTracking`, `mythic`, `resources`
+- `src/services/PrerequisiteService.ts` — `mythic_tier` prereq check; caster level check updated for pool model
+
+#### 3b. Direct Entry UI — DESIGNED (2026-03-11)
+
+See `plans/direct-entry-ui-design.md` for full spec. **23 new components** needed in `src/components/character/direct-entry/`.
+
+10 tabs: Identity, Abilities, Classes & Templates, Combat, Skills, Traits, Feats, Spells, Equipment, Notes.
+
+**Critical dependency:** Class choice definitions must be seeded in Firestore before Classes tab can function.
+
+#### 3c. Class Choices Data — DESIGNED (2026-03-11)
+
+See `plans/character-system-redesign.md` §"Class Choices Data Design" for full schema.
+
+Firestore collection: `classChoiceDefinitions/{id}`. Key types: `ClassChoiceDefinition`, `ClassChoiceSelectionMode`, `ClassChoiceOptionGroup`, `ClassChoiceOption`.
+
+Also needed: `domains/{id}` collection for cleric domain choices.
+
+**Seeding priority:**
+
+1. Cleric domains + Domain collection (Rissi's character)
+2. Core classes: Fighter, Rogue, Wizard, Sorcerer, Ranger, Barbarian, Oracle, Witch
+3. All remaining PF1e classes
+
+#### 3d. Implementation Queue
+
+- [ ] Write `ClassChoiceDefinition` TypeScript type + add to `src/types/`
+- [ ] Seed script: `classChoiceDefinitions` for Cleric, Fighter, Rogue, Wizard, Sorcerer, Ranger, Barbarian
+- [ ] Seed script: `domains` collection (PF1e core domains)
+- [ ] Seed 3.5e prestige classes (Hathran, Dweomerkeeper, Radiant Servant, Prestige Paladin) as campaign content
+- [ ] Build 23 direct-entry UI components (`src/components/character/direct-entry/`)
+- [ ] Wire direct-entry screen into navigation (`app/(tabs)/characters/[id]/entry.tsx`)
+- [ ] Enter Rissi — validate model end-to-end
+- [ ] Kah-Mei session — capture character, stress-test template model
+
+### Phase 4: Campaigns & Social
 
 - Campaign CRUD with invite codes
 - DM/player roles with permission rules
@@ -627,9 +683,8 @@ npx husky init
 - Real-time Firestore sync (onSnapshot)
 - Bestiary with creature templates
 
-### Phase 4: Advanced
+### Phase 5: Advanced
 
-- Spell management UI (spells per day, prepared spells, DCs)
 - Condition tracking UI with automated effects
 - Skill rank allocation per level
 - Character import/export (JSON)
@@ -658,6 +713,14 @@ npx husky init
    - Integration tests: 3 suites (CharacterCRUD — 50 tests, EquipmentManagement — 29 tests, CharacterCreationFlow — 59 tests)
 3. E2E tests: **deferred** — requires running app on device/emulator with Firebase connected
 4. Manual verification: pending Firebase project creation (run `bash scripts/firebase-setup.sh`)
+
+### Phase 2 Status: COMPLETE (2026-03-10)
+
+1. `npm test` — **570 tests passing** across **35 suites** (added 219 tests)
+   - New service tests: CombatService, DiceService, ModifierPipelineService
+   - New store tests: combatSlice
+   - New component tests: HPTracker, AttackPanel, DefensePanel, BuffsPanel, CombatAbilityToggles, RollLog, DiceRoller, RollResultDisplay
+2. E2E tests: **deferred** — requires running app on device
 
 ### Deviations from Original Plan
 

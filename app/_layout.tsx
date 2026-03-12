@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Stack } from 'expo-router';
+import { Stack, usePathname } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { Provider } from 'react-redux';
@@ -9,9 +9,17 @@ import { FirebaseAuthService } from '@/services/FirebaseAuthService';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { fontAssets } from '@/theme/fonts';
 import { initializeFeatRegistry } from '@/data/feats';
+import { DiceFAB } from '@/components/dice/DiceFAB';
 
 SplashScreen.preventAutoHideAsync();
 initializeFeatRegistry?.();
+
+function DiceFABWrapper() {
+  const pathname = usePathname();
+  // Hide FAB on the combat tab — it has an embedded dice roller
+  const hideFAB = pathname.startsWith('/combat') || pathname.startsWith('/(tabs)/combat');
+  return <DiceFAB hidden={hideFAB} />;
+}
 
 function RootNavigation() {
   const [fontsLoaded, fontError] = useFonts(fontAssets);
@@ -44,7 +52,12 @@ function RootNavigation() {
     return null;
   }
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <>
+      <Stack screenOptions={{ headerShown: false }} />
+      <DiceFABWrapper />
+    </>
+  );
 }
 
 export default function RootLayout() {

@@ -31,6 +31,9 @@ export interface AbilityScore {
     untyped: Bonus[]; // These stack
   };
 
+  // Level-up ability score increases (every 4 class HD)
+  levelIncrements: number; // Count of +1 increases allocated here
+
   // Computed properties
   total: number;
   modifier: number;

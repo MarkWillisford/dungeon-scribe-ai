@@ -10,6 +10,9 @@ import { Equipment } from './equipment';
 import { Spellcasting } from './spells';
 import { SpecialAbilities } from './specialAbilities';
 import { Buff, SavedBuff, BuffPackage } from './buff';
+import { MythicProgression } from './mythic';
+import { ResourcePool } from './resources';
+import { AppliedTemplate, GrantedBonus, LevelUpDecision, CharacterCRTracking } from './templates';
 
 export interface Character {
   info: CharacterInfo;
@@ -25,6 +28,20 @@ export interface Character {
   conditions: Conditions;
   experience: Experience;
   currency: Currency;
+
+  // Level history — source of truth for ECL, class levels, CR/LA tracking
+  levelHistory: LevelUpDecision[];
+
+  // Templates
+  appliedTemplates: AppliedTemplate[]; // Paid templates (carry ECL machinery)
+  grantedBonuses: GrantedBonus[]; // Free campaign grants (no ECL impact)
+  crTracking?: CharacterCRTracking; // Aggregate CR tracking (present if any CR templates)
+
+  // Mythic progression (absent if campaign doesn't use mythic)
+  mythic?: MythicProgression;
+
+  // Resource pools (ki, arcane pool, mythic power, rage rounds, etc.)
+  resources: ResourcePool[];
 
   // Combat runtime — from HL
   buffs: Buff[];
@@ -59,3 +76,8 @@ export * from './buff';
 export * from './theme';
 export * from './validation';
 export * from './effectTargets';
+export * from './dice';
+export * from './templates';
+export * from './mythic';
+export * from './resources';
+export * from './classChoices';

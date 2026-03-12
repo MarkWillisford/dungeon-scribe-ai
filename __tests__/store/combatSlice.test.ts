@@ -1,0 +1,422 @@
+import combatReducer, {
+  addBuff,
+  removeBuff,
+  toggleBuff,
+  clearAllBuffs,
+  toggleCombatAbility,
+  setCombatExpertisePenalty,
+  initHP,
+  adjustHP,
+  addTempHP,
+  adjustNonlethal,
+  applyRageEndHPLoss,
+  nextRound,
+  appendRoll,
+  clearRollLog,
+  setBuffLibrary,
+  addToBuffLibrary,
+  removeFromBuffLibrary,
+  resetCombat,
+} from '@store/slices/combatSlice';
+import { BonusType } from '@/types/base';
+import { Buff, RollRecord, SavedBuff } from '@/types/buff';
+
+// ----------------------------------------------------------------
+// Helpers
+// ----------------------------------------------------------------
+
+function makeBuff(overrides: Partial<Buff> = {}): Buff {
+  return {
+    id: 'test_buff',
+    name: 'Test Buff',
+    source: 'Test',
+    bonusType: BonusType.MORALE,
+    duration: 10,
+    durationType: 'rounds',
+    isActive: true,
+    effects: [],
+    ...overrides,
+  };
+}
+
+function makeRoll(overrides: Partial<RollRecord> = {}): RollRecord {
+  return {
+    id: 'roll_1',
+    timestamp: Date.now(),
+    type: 'attack',
+    label: 'Attack',
+    diceNotation: '1d20+5',
+    rawRoll: 14,
+    modifier: 5,
+    total: 19,
+    breakdown: ['d20: 14', 'BAB: +5'],
+    isManual: false,
+    ...overrides,
+  };
+}
+
+const getInitialState = () => combatReducer(undefined, { type: '@@INIT' });
+
+// ----------------------------------------------------------------
+// Initial state
+// ----------------------------------------------------------------
+
+describe('combatSlice initial state', () => {
+  it('starts with empty active buffs', () => {
+    expect(getInitialState().activeBuffs).toHaveLength(0);
+  });
+
+  it('starts with all combat abilities off', () => {
+    const state = getInitialState();
+    expect(state.combatAbilities.powerAttack).toBe(false);
+    expect(state.combatAbilities.rage).toBe(false);
+    expect(state.combatAbilities.haste).toBe(false);
+  });
+
+  it('starts with null HP (no active session)', () => {
+    expect(getInitialState().currentHP).toBeNull();
+  });
+
+  it('round starts at 0', () => {
+    expect(getInitialState().round).toBe(0);
+  });
+});
+
+// ----------------------------------------------------------------
+// Buff management
+// ----------------------------------------------------------------
+
+describe('addBuff', () => {
+  it('adds a buff to activeBuffs', () => {
+    const state = combatReducer(undefined, addBuff(makeBuff()));
+    expect(state.activeBuffs).toHaveLength(1);
+    expect(state.activeBuffs[0].name).toBe('Test Buff');
+  });
+
+  it('does not add duplicate IDs', () => {
+    let state = combatReducer(undefined, addBuff(makeBuff({ id: 'buff_1' })));
+    state = combatReducer(state, addBuff(makeBuff({ id: 'buff_1', name: 'Duplicate' })));
+    expect(state.activeBuffs).toHaveLength(1);
+    expect(state.activeBuffs[0].name).toBe('Test Buff');
+  });
+});
+
+describe('removeBuff', () => {
+  it('removes a buff by ID', () => {
+    let state = combatReducer(undefined, addBuff(makeBuff({ id: 'buff_a' })));
+    state = combatReducer(state, addBuff(makeBuff({ id: 'buff_b', name: 'B' })));
+    state = combatReducer(state, removeBuff('buff_a'));
+    expect(state.activeBuffs).toHaveLength(1);
+    expect(state.activeBuffs[0].id).toBe('buff_b');
+  });
+
+  it('is a no-op for unknown ID', () => {
+    const state = combatReducer(undefined, removeBuff('nonexistent'));
+    expect(state.activeBuffs).toHaveLength(0);
+  });
+});
+
+describe('toggleBuff', () => {
+  it('flips isActive from true to false', () => {
+    let state = combatReducer(undefined, addBuff(makeBuff({ id: 'b', isActive: true })));
+    state = combatReducer(state, toggleBuff('b'));
+    expect(state.activeBuffs[0].isActive).toBe(false);
+  });
+
+  it('flips isActive from false to true', () => {
+    let state = combatReducer(undefined, addBuff(makeBuff({ id: 'b', isActive: false })));
+    state = combatReducer(state, toggleBuff('b'));
+    expect(state.activeBuffs[0].isActive).toBe(true);
+  });
+});
+
+describe('clearAllBuffs', () => {
+  it('empties activeBuffs', () => {
+    let state = combatReducer(undefined, addBuff(makeBuff({ id: 'a' })));
+    state = combatReducer(state, addBuff(makeBuff({ id: 'b' })));
+    state = combatReducer(state, clearAllBuffs());
+    expect(state.activeBuffs).toHaveLength(0);
+  });
+});
+
+// ----------------------------------------------------------------
+// Combat abilities
+// ----------------------------------------------------------------
+
+describe('toggleCombatAbility', () => {
+  it('toggles powerAttack', () => {
+    let state = combatReducer(undefined, toggleCombatAbility('powerAttack'));
+    expect(state.combatAbilities.powerAttack).toBe(true);
+    state = combatReducer(state, toggleCombatAbility('powerAttack'));
+    expect(state.combatAbilities.powerAttack).toBe(false);
+  });
+
+  it('toggles rage independently of other abilities', () => {
+    let state = combatReducer(undefined, toggleCombatAbility('rage'));
+    expect(state.combatAbilities.rage).toBe(true);
+    expect(state.combatAbilities.powerAttack).toBe(false);
+  });
+
+  it('toggles haste', () => {
+    const state = combatReducer(undefined, toggleCombatAbility('haste'));
+    expect(state.combatAbilities.haste).toBe(true);
+  });
+});
+
+describe('setCombatExpertisePenalty', () => {
+  it('sets penalty within 1–5', () => {
+    const state = combatReducer(undefined, setCombatExpertisePenalty(3));
+    expect(state.combatAbilities.combatExpertisePenalty).toBe(3);
+  });
+
+  it('clamps to minimum 1', () => {
+    const state = combatReducer(undefined, setCombatExpertisePenalty(0));
+    expect(state.combatAbilities.combatExpertisePenalty).toBe(1);
+  });
+
+  it('clamps to maximum 5', () => {
+    const state = combatReducer(undefined, setCombatExpertisePenalty(10));
+    expect(state.combatAbilities.combatExpertisePenalty).toBe(5);
+  });
+});
+
+// ----------------------------------------------------------------
+// HP tracking
+// ----------------------------------------------------------------
+
+describe('initHP', () => {
+  it('sets currentHP and resets temp and nonlethal', () => {
+    let state = combatReducer(undefined, addTempHP(5));
+    state = combatReducer(state, initHP(20));
+    expect(state.currentHP).toBe(20);
+    expect(state.tempHP).toBe(0);
+    expect(state.nonlethalDamage).toBe(0);
+  });
+});
+
+describe('adjustHP', () => {
+  it('applies damage (negative delta)', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, adjustHP({ delta: -5, maxHP: 20 }));
+    expect(state.currentHP).toBe(15);
+  });
+
+  it('temp HP absorbs damage first', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, addTempHP(5));
+    state = combatReducer(state, adjustHP({ delta: -3, maxHP: 20 }));
+    expect(state.tempHP).toBe(2);
+    expect(state.currentHP).toBe(20); // current HP unaffected
+  });
+
+  it('damage overflows temp HP into current HP', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, addTempHP(3));
+    state = combatReducer(state, adjustHP({ delta: -5, maxHP: 20 }));
+    expect(state.tempHP).toBe(0);
+    expect(state.currentHP).toBe(18); // 20 - 2 overflow
+  });
+
+  it('healing caps at max HP', () => {
+    let state = combatReducer(undefined, initHP(15));
+    state = combatReducer(state, adjustHP({ delta: 10, maxHP: 20 }));
+    expect(state.currentHP).toBe(20);
+  });
+
+  it('can go below 0 (dying)', () => {
+    let state = combatReducer(undefined, initHP(3));
+    state = combatReducer(state, adjustHP({ delta: -10, maxHP: 20 }));
+    expect(state.currentHP).toBe(-7);
+  });
+
+  it('is a no-op when currentHP is null', () => {
+    const state = combatReducer(undefined, adjustHP({ delta: -5, maxHP: 20 }));
+    expect(state.currentHP).toBeNull();
+  });
+});
+
+describe('addTempHP', () => {
+  it('sets temp HP', () => {
+    const state = combatReducer(undefined, addTempHP(8));
+    expect(state.tempHP).toBe(8);
+  });
+
+  it('takes the higher value (temp HP does not stack)', () => {
+    let state = combatReducer(undefined, addTempHP(5));
+    state = combatReducer(state, addTempHP(3));
+    expect(state.tempHP).toBe(5); // keeps the higher
+
+    state = combatReducer(state, addTempHP(10));
+    expect(state.tempHP).toBe(10); // new higher value wins
+  });
+});
+
+describe('adjustNonlethal', () => {
+  it('tracks nonlethal damage', () => {
+    let state = combatReducer(undefined, adjustNonlethal(5));
+    expect(state.nonlethalDamage).toBe(5);
+    state = combatReducer(state, adjustNonlethal(3));
+    expect(state.nonlethalDamage).toBe(8);
+  });
+
+  it('does not go below 0', () => {
+    const state = combatReducer(undefined, adjustNonlethal(-5));
+    expect(state.nonlethalDamage).toBe(0);
+  });
+});
+
+describe('applyRageEndHPLoss', () => {
+  it('updates current and temp HP', () => {
+    let state = combatReducer(undefined, initHP(18));
+    state = combatReducer(state, addTempHP(3));
+    state = combatReducer(state, applyRageEndHPLoss({ newCurrentHP: 18, newTempHP: 1 }));
+    expect(state.currentHP).toBe(18);
+    expect(state.tempHP).toBe(1);
+  });
+});
+
+// ----------------------------------------------------------------
+// Round management
+// ----------------------------------------------------------------
+
+describe('nextRound', () => {
+  it('increments the round counter', () => {
+    const state = combatReducer(undefined, nextRound());
+    expect(state.round).toBe(1);
+  });
+
+  it('ticks down round-duration buff durations', () => {
+    let state = combatReducer(
+      undefined,
+      addBuff(makeBuff({ id: 'b', duration: 3, durationType: 'rounds' })),
+    );
+    state = combatReducer(state, nextRound());
+    expect(state.activeBuffs[0].duration).toBe(2);
+  });
+
+  it('removes buff when duration reaches 0', () => {
+    let state = combatReducer(
+      undefined,
+      addBuff(makeBuff({ id: 'b', duration: 1, durationType: 'rounds' })),
+    );
+    state = combatReducer(state, nextRound());
+    expect(state.activeBuffs).toHaveLength(0);
+  });
+
+  it('does not remove permanent buffs', () => {
+    let state = combatReducer(
+      undefined,
+      addBuff(makeBuff({ id: 'perm', duration: null, durationType: 'permanent' })),
+    );
+    state = combatReducer(state, nextRound());
+    expect(state.activeBuffs).toHaveLength(1);
+  });
+
+  it('does not decrement non-round buffs', () => {
+    let state = combatReducer(
+      undefined,
+      addBuff(makeBuff({ id: 'min', duration: 5, durationType: 'minutes' })),
+    );
+    state = combatReducer(state, nextRound());
+    expect(state.activeBuffs[0].duration).toBe(5); // unchanged
+  });
+});
+
+// ----------------------------------------------------------------
+// Roll log
+// ----------------------------------------------------------------
+
+describe('appendRoll', () => {
+  it('adds a roll record to the log', () => {
+    const state = combatReducer(undefined, appendRoll(makeRoll()));
+    expect(state.rollLog).toHaveLength(1);
+    expect(state.rollLog[0].total).toBe(19);
+  });
+});
+
+describe('clearRollLog', () => {
+  it('empties the roll log', () => {
+    let state = combatReducer(undefined, appendRoll(makeRoll()));
+    state = combatReducer(state, appendRoll(makeRoll({ id: 'roll_2' })));
+    state = combatReducer(state, clearRollLog());
+    expect(state.rollLog).toHaveLength(0);
+  });
+});
+
+// ----------------------------------------------------------------
+// Buff library
+// ----------------------------------------------------------------
+
+describe('setBuffLibrary / addToBuffLibrary / removeFromBuffLibrary', () => {
+  const savedBuff: SavedBuff = {
+    id: 'bless',
+    name: 'Bless',
+    description: '+1 morale attack and saves vs fear',
+    source: 'Cleric',
+    category: 'Spell',
+    bonusType: BonusType.MORALE,
+    duration: 10,
+    durationType: 'rounds',
+    effects: [],
+  };
+
+  it('sets the entire library', () => {
+    const state = combatReducer(undefined, setBuffLibrary([savedBuff]));
+    expect(state.buffLibrary).toHaveLength(1);
+  });
+
+  it('adds a single buff to the library', () => {
+    const state = combatReducer(undefined, addToBuffLibrary(savedBuff));
+    expect(state.buffLibrary).toHaveLength(1);
+  });
+
+  it('does not add duplicate to library', () => {
+    let state = combatReducer(undefined, addToBuffLibrary(savedBuff));
+    state = combatReducer(state, addToBuffLibrary(savedBuff));
+    expect(state.buffLibrary).toHaveLength(1);
+  });
+
+  it('removes a buff from the library', () => {
+    let state = combatReducer(undefined, addToBuffLibrary(savedBuff));
+    state = combatReducer(state, removeFromBuffLibrary('bless'));
+    expect(state.buffLibrary).toHaveLength(0);
+  });
+});
+
+// ----------------------------------------------------------------
+// resetCombat
+// ----------------------------------------------------------------
+
+describe('resetCombat', () => {
+  it('clears buffs, abilities, HP, and round but keeps library and log', () => {
+    let state = combatReducer(undefined, addBuff(makeBuff()));
+    state = combatReducer(state, toggleCombatAbility('powerAttack'));
+    state = combatReducer(state, initHP(20));
+    state = combatReducer(state, nextRound());
+    state = combatReducer(state, appendRoll(makeRoll()));
+    state = combatReducer(
+      state,
+      addToBuffLibrary({
+        id: 'saved',
+        name: 'Saved',
+        description: '',
+        source: 'Spell',
+        category: 'Spell',
+        bonusType: BonusType.MORALE,
+        duration: 10,
+        durationType: 'rounds',
+        effects: [],
+      }),
+    );
+
+    state = combatReducer(state, resetCombat());
+
+    expect(state.activeBuffs).toHaveLength(0);
+    expect(state.combatAbilities.powerAttack).toBe(false);
+    expect(state.currentHP).toBeNull();
+    expect(state.round).toBe(0);
+    // Roll log and library persist
+    expect(state.rollLog).toHaveLength(1);
+    expect(state.buffLibrary).toHaveLength(1);
+  });
+});

@@ -76,7 +76,7 @@ export class CharacterService {
       traits: { traits: [], maxTraits: 2 },
       equipment: this.createDefaultEquipment(),
       spellcasting: {
-        spellcastingClasses: [],
+        pools: [],
         preparedSpells: [],
         knownSpells: [],
         spellbooks: [],
@@ -85,6 +85,11 @@ export class CharacterService {
       conditions: { activeConditions: [] },
       experience: { current: 0, nextLevel: 2000 },
       currency: { platinum: 0, gold: 0, silver: 0, copper: 0, totalGP: 0 },
+
+      levelHistory: [],
+      appliedTemplates: [],
+      grantedBonuses: [],
+      resources: [],
 
       buffs: [],
       savedBuffs: [],

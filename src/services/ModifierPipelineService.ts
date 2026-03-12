@@ -3,7 +3,6 @@ import { BonusType, type Effect } from '@/types/base';
 import type { AbilityScores } from '@/types/abilities';
 import type { Skills } from '@/types/skills';
 import { Size, SaveProgression } from '@/types/base';
-import type { BuffEffects } from '@/types/buff';
 import { FormulaService, type FormulaContext } from './FormulaService';
 import { FeatRegistryService } from './FeatRegistryService';
 
@@ -284,43 +283,17 @@ export class ModifierPipelineService {
   }
 
   /**
-   * Convert Buff/BuffEffects into Effect[] for the pipeline.
+   * Collect active buff effects directly into the pipeline.
+   * Buffs now carry Effect[] natively — no conversion mapping needed.
    */
   private static collectBuffEffects(character: Character): Effect[] {
     const effects: Effect[] = [];
-    const mapping: [keyof BuffEffects, string][] = [
-      ['strength', 'ability.str'],
-      ['dexterity', 'ability.dex'],
-      ['constitution', 'ability.con'],
-      ['intelligence', 'ability.int'],
-      ['wisdom', 'ability.wis'],
-      ['charisma', 'ability.cha'],
-      ['attackBonus', 'attack.all'],
-      ['ac', 'ac'],
-      ['naturalArmor', 'ac.natural'],
-      ['fortitude', 'save.fortitude'],
-      ['reflex', 'save.reflex'],
-      ['will', 'save.will'],
-      ['damage', 'damage.all'],
-      ['cmb', 'cmb'],
-      ['cmd', 'cmd'],
-    ];
-
     for (const buff of character.buffs) {
-      for (const [field, target] of mapping) {
-        const val = buff.effects[field];
-        if (val !== undefined && val !== 0) {
-          effects.push({
-            type: val > 0 ? 'bonus' : 'penalty',
-            bonusType: buff.bonusType,
-            target,
-            value: val,
-            source: buff.name,
-          });
-        }
+      if (!buff.isActive) continue;
+      for (const effect of buff.effects) {
+        effects.push({ ...effect, source: effect.source || buff.name });
       }
     }
-
     return effects;
   }
 

@@ -1,5 +1,29 @@
 import { Bonus } from './base';
 
+// ---- Combat calculation return types (used by CombatService) ----
+
+export interface ACTotals {
+  total: number;
+  touch: number;
+  flatFooted: number;
+  breakdown: string[]; // ["Base: 10", "Armor: +8", "DEX: +2", "Bless: +1 morale"]
+}
+
+export interface SkillTotal {
+  total: number;
+  breakdown: string[];
+}
+
+export interface BuffedTotals {
+  ac: ACTotals;
+  fort: number;
+  ref: number;
+  will: number;
+  meleeAttack: number[]; // iterative attack array e.g. [14, 9, 4]
+  rangedAttack: number[];
+  skills: Partial<Record<string, number>>; // skill key → buffed total
+}
+
 export interface CombatStats {
   hitPoints: {
     base: number; // Base HP from hit dice
@@ -76,6 +100,10 @@ export interface CombatStats {
     burrow: number;
     current: number;
   };
+
+  // Cached totals with all active buffs + combat abilities applied (computed by CombatService)
+  // Populated during a combat session; undefined when not in combat
+  buffedTotals?: BuffedTotals;
 
   attackBonuses: {
     baseAttack: number[];

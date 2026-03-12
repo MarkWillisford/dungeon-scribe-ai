@@ -97,9 +97,10 @@ export class PrerequisiteService {
         return character.info.race.name.toLowerCase() === prereq.raceName.toLowerCase();
 
       case 'caster_level':
-        return character.spellcasting.spellcastingClasses.some(
-          (sc) => sc.casterLevel >= prereq.minimum,
-        );
+        return character.spellcasting.pools.some((pool) => pool.baseCasterLevel >= prereq.minimum);
+
+      case 'mythic_tier':
+        return (character.mythic?.tier ?? 0) >= prereq.minimum;
 
       case 'special':
         // Can't auto-check; assume met (DM can override)
@@ -146,6 +147,8 @@ export class PrerequisiteService {
         return `Race: ${prereq.raceName}`;
       case 'caster_level':
         return `Caster level ${prereq.minimum}`;
+      case 'mythic_tier':
+        return `Mythic Tier ${prereq.minimum}`;
       case 'special':
         return prereq.description;
     }

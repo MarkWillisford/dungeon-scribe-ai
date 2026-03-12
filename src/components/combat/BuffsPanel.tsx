@@ -1,0 +1,497 @@
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Pressable, TextInput, ScrollView, Modal } from 'react-native';
+import { useTheme } from '@/hooks/useTheme';
+import { Buff, SavedBuff } from '@/types/buff';
+
+const makeTimestamp = () => Date.now();
+
+interface BuffsPanelProps {
+  activeBuffs: Buff[];
+  buffLibrary: SavedBuff[];
+  round: number;
+  onAddBuff: (buff: Buff) => void;
+  onRemoveBuff: (id: string) => void;
+  onToggleBuff: (id: string) => void;
+  onSaveToLibrary: (buff: SavedBuff) => void;
+  testID?: string;
+}
+
+const CATEGORY_COLORS: Record<string, string> = {
+  Spell: '#7C4DFF',
+  Item: '#B87333',
+  Ability: '#228B22',
+  Custom: '#1A237E',
+};
+
+export function BuffsPanel({
+  activeBuffs,
+  buffLibrary,
+  round,
+  onAddBuff,
+  onRemoveBuff,
+  onToggleBuff,
+  onSaveToLibrary,
+  testID,
+}: BuffsPanelProps) {
+  const { colors, fantasy } = useTheme();
+  const [showLibrary, setShowLibrary] = useState(false);
+  const [showCustomModal, setShowCustomModal] = useState(false);
+  const [customName, setCustomName] = useState('');
+  const [customDuration, setCustomDuration] = useState('');
+  const [expandedBuff, setExpandedBuff] = useState<string | null>(null);
+
+  const handleAddFromLibrary = (saved: SavedBuff) => {
+    const buff: Buff = {
+      id: `${saved.id}_${makeTimestamp()}`,
+      name: saved.name,
+      description: saved.description,
+      source: saved.source,
+      bonusType: saved.bonusType,
+      duration: saved.duration,
+      durationType: saved.durationType,
+      effects: saved.effects,
+      isActive: true,
+    };
+    onAddBuff(buff);
+    setShowLibrary(false);
+  };
+
+  const handleAddCustom = () => {
+    const name = customName.trim();
+    if (!name) return;
+    const dur = parseInt(customDuration, 10);
+    const buff: Buff = {
+      id: `custom_${Date.now()}`,
+      name,
+      source: 'Custom',
+      bonusType: 'untyped' as any,
+      duration: isNaN(dur) || dur <= 0 ? null : dur,
+      durationType: isNaN(dur) || dur <= 0 ? 'permanent' : 'rounds',
+      effects: [],
+      isActive: true,
+    };
+    onAddBuff(buff);
+    setCustomName('');
+    setCustomDuration('');
+    setShowCustomModal(false);
+  };
+
+  const formatDuration = (buff: Buff): string => {
+    if (buff.duration === null || buff.durationType === 'permanent') return 'Permanent';
+    return `${buff.duration} ${buff.durationType}`;
+  };
+
+  return (
+    <View testID={testID} style={styles.container}>
+      {/* Active buffs */}
+      {activeBuffs.length === 0 ? (
+        <View style={[styles.emptyState, { borderColor: colors.border.DEFAULT }]}>
+          <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>No active buffs</Text>
+        </View>
+      ) : (
+        activeBuffs.map((buff) => (
+          <View
+            key={buff.id}
+            style={[
+              styles.buffCard,
+              {
+                backgroundColor: colors.bg.secondary,
+                borderColor: buff.isActive ? fantasy.bronze : colors.border.DEFAULT,
+                opacity: buff.isActive ? 1 : 0.5,
+              },
+            ]}
+          >
+            <Pressable
+              style={styles.buffHeader}
+              onPress={() => setExpandedBuff(expandedBuff === buff.id ? null : buff.id)}
+              accessibilityLabel={`${buff.name} buff details`}
+            >
+              <View style={styles.buffTitleRow}>
+                <View
+                  style={[
+                    styles.buffDot,
+                    { backgroundColor: buff.isActive ? '#4CAF50' : '#9E9E9E' },
+                  ]}
+                />
+                <Text style={[styles.buffName, { color: colors.text.primary }]}>{buff.name}</Text>
+              </View>
+              <Text style={[styles.buffDuration, { color: fantasy.gold }]}>
+                {formatDuration(buff)}
+              </Text>
+            </Pressable>
+
+            {expandedBuff === buff.id && (
+              <View style={[styles.buffDetails, { borderTopColor: colors.border.DEFAULT }]}>
+                {buff.description ? (
+                  <Text style={[styles.buffDesc, { color: colors.text.secondary }]}>
+                    {buff.description}
+                  </Text>
+                ) : null}
+                {buff.effects.length > 0 && (
+                  <View style={styles.effectsList}>
+                    {buff.effects.map((e, i) => (
+                      <Text key={i} style={[styles.effectLine, { color: colors.text.tertiary }]}>
+                        {e.target}:{' '}
+                        {typeof e.value === 'number' && e.value >= 0 ? `+${e.value}` : e.value} (
+                        {e.type})
+                      </Text>
+                    ))}
+                  </View>
+                )}
+                <View style={styles.buffActions}>
+                  <Pressable
+                    style={[
+                      styles.actionBtn,
+                      { borderColor: buff.isActive ? '#FF9800' : '#4CAF50' },
+                    ]}
+                    onPress={() => onToggleBuff(buff.id)}
+                    accessibilityLabel={
+                      buff.isActive ? `Deactivate ${buff.name}` : `Activate ${buff.name}`
+                    }
+                  >
+                    <Text
+                      style={[
+                        styles.actionBtnText,
+                        { color: buff.isActive ? '#FF9800' : '#4CAF50' },
+                      ]}
+                    >
+                      {buff.isActive ? 'Pause' : 'Resume'}
+                    </Text>
+                  </Pressable>
+                  <Pressable
+                    style={[styles.actionBtn, { borderColor: '#F44336' }]}
+                    onPress={() => onRemoveBuff(buff.id)}
+                    accessibilityLabel={`Remove ${buff.name}`}
+                  >
+                    <Text style={[styles.actionBtnText, { color: '#F44336' }]}>Remove</Text>
+                  </Pressable>
+                </View>
+              </View>
+            )}
+          </View>
+        ))
+      )}
+
+      {/* Add buttons */}
+      <View style={styles.addRow}>
+        <Pressable
+          style={[styles.addBtn, { backgroundColor: colors.primary.DEFAULT }]}
+          onPress={() => setShowLibrary(true)}
+          accessibilityLabel="Add buff from library"
+        >
+          <Text style={styles.addBtnText}>+ From Library</Text>
+        </Pressable>
+        <Pressable
+          style={[
+            styles.addBtn,
+            { backgroundColor: colors.bg.tertiary, borderColor: fantasy.bronze, borderWidth: 1 },
+          ]}
+          onPress={() => setShowCustomModal(true)}
+          accessibilityLabel="Add custom buff"
+        >
+          <Text style={[styles.addBtnText, { color: fantasy.bronze }]}>+ Custom</Text>
+        </Pressable>
+      </View>
+
+      {/* Library Modal */}
+      <Modal visible={showLibrary} transparent animationType="slide">
+        <View style={styles.modalOverlay}>
+          <View
+            style={[
+              styles.modalSheet,
+              { backgroundColor: colors.bg.primary, borderColor: fantasy.gold },
+            ]}
+          >
+            <View style={styles.modalHeader}>
+              <Text style={[styles.modalTitle, { color: fantasy.gold }]}>Buff Library</Text>
+              <Pressable onPress={() => setShowLibrary(false)} accessibilityLabel="Close library">
+                <Text style={[styles.closeBtn, { color: colors.text.tertiary }]}>✕</Text>
+              </Pressable>
+            </View>
+            <ScrollView style={styles.libraryList} showsVerticalScrollIndicator={false}>
+              {buffLibrary.length === 0 ? (
+                <Text
+                  style={[
+                    styles.emptyText,
+                    { color: colors.text.tertiary, textAlign: 'center', paddingVertical: 20 },
+                  ]}
+                >
+                  No saved buffs yet
+                </Text>
+              ) : (
+                buffLibrary.map((saved) => (
+                  <Pressable
+                    key={saved.id}
+                    style={[
+                      styles.libraryItem,
+                      { borderColor: colors.border.DEFAULT, backgroundColor: colors.bg.secondary },
+                    ]}
+                    onPress={() => handleAddFromLibrary(saved)}
+                    accessibilityLabel={`Add ${saved.name}`}
+                  >
+                    <View style={styles.libraryItemHeader}>
+                      <Text style={[styles.libraryName, { color: colors.text.primary }]}>
+                        {saved.name}
+                      </Text>
+                      <View
+                        style={[
+                          styles.categoryBadge,
+                          { backgroundColor: CATEGORY_COLORS[saved.category] ?? '#666' },
+                        ]}
+                      >
+                        <Text style={styles.categoryText}>{saved.category}</Text>
+                      </View>
+                    </View>
+                    <Text
+                      style={[styles.libraryDesc, { color: colors.text.secondary }]}
+                      numberOfLines={2}
+                    >
+                      {saved.description}
+                    </Text>
+                    <Text style={[styles.libraryDuration, { color: fantasy.gold }]}>
+                      {saved.duration} {saved.durationType}
+                    </Text>
+                  </Pressable>
+                ))
+              )}
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Custom Buff Modal */}
+      <Modal visible={showCustomModal} transparent animationType="fade">
+        <Pressable style={styles.modalOverlay} onPress={() => setShowCustomModal(false)}>
+          <View
+            style={[
+              styles.customCard,
+              { backgroundColor: colors.bg.primary, borderColor: fantasy.gold },
+            ]}
+          >
+            <Text style={[styles.modalTitle, { color: fantasy.gold }]}>Custom Buff</Text>
+            <TextInput
+              style={[
+                styles.input,
+                {
+                  borderColor: colors.border.DEFAULT,
+                  backgroundColor: colors.bg.secondary,
+                  color: colors.text.primary,
+                },
+              ]}
+              value={customName}
+              onChangeText={setCustomName}
+              placeholder="Buff name"
+              placeholderTextColor={colors.text.tertiary}
+              autoFocus
+            />
+            <TextInput
+              style={[
+                styles.input,
+                {
+                  borderColor: colors.border.DEFAULT,
+                  backgroundColor: colors.bg.secondary,
+                  color: colors.text.primary,
+                },
+              ]}
+              value={customDuration}
+              onChangeText={setCustomDuration}
+              placeholder="Duration (rounds, blank = permanent)"
+              placeholderTextColor={colors.text.tertiary}
+              keyboardType="numeric"
+            />
+            <Pressable
+              style={[styles.addBtn, { backgroundColor: colors.primary.DEFAULT }]}
+              onPress={handleAddCustom}
+              accessibilityLabel="Add custom buff"
+            >
+              <Text style={styles.addBtnText}>Add Buff</Text>
+            </Pressable>
+          </View>
+        </Pressable>
+      </Modal>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { gap: 8 },
+  emptyState: {
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: 'dashed',
+    padding: 20,
+    alignItems: 'center',
+  },
+  emptyText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+  },
+  buffCard: {
+    borderWidth: 1,
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  buffHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+  },
+  buffTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    flex: 1,
+  },
+  buffDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  buffName: {
+    fontFamily: 'Cinzel',
+    fontSize: 13,
+    fontWeight: '600',
+    flex: 1,
+  },
+  buffDuration: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    marginLeft: 8,
+  },
+  buffDetails: {
+    borderTopWidth: 1,
+    padding: 10,
+    gap: 6,
+  },
+  buffDesc: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+  },
+  effectsList: { gap: 2 },
+  effectLine: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+  },
+  buffActions: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 4,
+  },
+  actionBtn: {
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    minHeight: 36,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  actionBtnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 11,
+    fontWeight: '600',
+  },
+  addRow: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  addBtn: {
+    flex: 1,
+    borderRadius: 8,
+    paddingVertical: 10,
+    alignItems: 'center',
+    minHeight: 44,
+    justifyContent: 'center',
+  },
+  addBtnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 13,
+    color: '#FFFFFF',
+    fontWeight: '600',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    justifyContent: 'flex-end',
+  },
+  modalSheet: {
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    borderTopWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    maxHeight: '70%',
+    padding: 16,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  modalTitle: {
+    fontFamily: 'Cinzel',
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  closeBtn: {
+    fontFamily: 'Cinzel',
+    fontSize: 18,
+    padding: 4,
+  },
+  libraryList: { flex: 1 },
+  libraryItem: {
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 8,
+    gap: 4,
+  },
+  libraryItemHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  libraryName: {
+    fontFamily: 'Cinzel',
+    fontSize: 13,
+    fontWeight: '600',
+    flex: 1,
+  },
+  categoryBadge: {
+    borderRadius: 4,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  categoryText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 10,
+    color: '#FFFFFF',
+    fontWeight: '600',
+  },
+  libraryDesc: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+  },
+  libraryDuration: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+  },
+  customCard: {
+    margin: 20,
+    borderRadius: 12,
+    borderWidth: 1,
+    padding: 20,
+    gap: 12,
+  },
+  input: {
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+    minHeight: 44,
+  },
+});
