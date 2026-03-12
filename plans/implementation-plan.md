@@ -666,7 +666,7 @@ Also needed: `domains/{id}` collection for cleric domain choices.
 
 #### 3d. Implementation Queue
 
-- [ ] Write `ClassChoiceDefinition` TypeScript type + add to `src/types/`
+- [x] Write `ClassChoiceDefinition` TypeScript type + add to `src/types/` — `classChoices.ts` (trimmed) + `classOptions.ts` (9 collection interfaces) + `deities.ts` — `291b6c3`
 - [ ] Seed script: `classChoiceDefinitions` for Cleric, Fighter, Rogue, Wizard, Sorcerer, Ranger, Barbarian
 - [ ] Seed script: `domains` collection (PF1e core domains)
 - [ ] Seed 3.5e prestige classes (Hathran, Dweomerkeeper, Radiant Servant, Prestige Paladin) as campaign content
