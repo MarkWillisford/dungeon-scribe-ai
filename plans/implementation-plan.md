@@ -650,30 +650,81 @@ See `plans/direct-entry-ui-design.md` for full spec. **23 new components** neede
 
 **Critical dependency:** Class choice definitions must be seeded in Firestore before Classes tab can function.
 
-#### 3c. Class Choices Data — DESIGNED (2026-03-11)
+#### 3c. Class Choices Data — DESIGNED (2026-03-12)
 
-See `plans/character-system-redesign.md` §"Class Choices Data Design" for full schema.
+Full design in `plans/data-scraping/class-choices-database.md` (canonical reference).
+High-level architecture in `plans/character-system-redesign.md` §"Class Choices Data Design".
 
 Firestore collection: `classChoiceDefinitions/{id}`. Key types: `ClassChoiceDefinition`, `ClassChoiceSelectionMode`, `ClassChoiceOptionGroup`, `ClassChoiceOption`.
 
-Also needed: `domains/{id}` collection for cleric domain choices.
+**Interface naming convention:** all collection document interfaces use `*Entry` suffix (not `*Document`). `ClassOptionDocument` → `ClassOptionBase`. Full rename table in class-choices-database.md.
 
-**Seeding priority:**
+**Collections needed:** `classChoiceDefinitions`, `domains`, `deities`, `animalcompanions`, `ragepowers`, `roguetalents`. Plus existing `feats` and `spells`.
 
-1. Cleric domains + Domain collection (Rissi's character)
-2. Core classes: Fighter, Rogue, Wizard, Sorcerer, Ranger, Barbarian, Oracle, Witch
-3. All remaining PF1e classes
+**Priority classes (12):** Fighter, Cleric, Druid, Barbarian, Hathran (3.5e), Dweomerkeeper (3.5e), Radiant Servant of Milani (3.5e), Rogue, Sentinel (PF PrC), Ranger, Paladin, Wizard.
+
+**Scraping plans status:**
+
+| Plan                                                | Status                                               |
+| --------------------------------------------------- | ---------------------------------------------------- |
+| `plans/data-scraping/domains-database.md`           | Ready to run                                         |
+| `plans/data-scraping/deities-database.md`           | Needs writing — see `plans/scraping-agent-prompt.md` |
+| `plans/data-scraping/animal-companions-database.md` | Needs writing — see `plans/scraping-agent-prompt.md` |
+| `plans/data-scraping/ragepowers-database.md`        | Needs writing — see `plans/scraping-agent-prompt.md` |
+| `plans/data-scraping/roguetalents-database.md`      | Needs writing — see `plans/scraping-agent-prompt.md` |
+
+`plans/scraping-agent-prompt.md` is a complete prompt for another AI model to write all 4 missing plans.
 
 #### 3d. Implementation Queue
 
 - [x] Write `ClassChoiceDefinition` TypeScript type + add to `src/types/` — `classChoices.ts` (trimmed) + `classOptions.ts` (9 collection interfaces) + `deities.ts` — `291b6c3`
-- [ ] Seed script: `classChoiceDefinitions` for Cleric, Fighter, Rogue, Wizard, Sorcerer, Ranger, Barbarian
-- [ ] Seed script: `domains` collection (PF1e core domains)
+- [x] Write class choices design plan — `plans/data-scraping/class-choices-database.md` — `MW/plans-reorg`
+- [x] Write scraping agent prompt — `plans/scraping-agent-prompt.md` — `MW/plans-reorg`
+- [ ] Phase A type changes (see class-choices-database.md §"Type Changes Required"):
+  - [ ] Rename all `*Document` → `*Entry` in `src/types/classOptions.ts`; `ClassOptionDocument` → `ClassOptionBase`
+  - [ ] Add `druidAllowed: boolean` to `DomainEntry`
+  - [ ] Add `DeityBoonTier`, `DeityBoons` + `boons?` to `DeityEntry` in `src/types/deities.ts`
+  - [ ] Add `subtypePrompt?` to `ClassChoiceOption` in `src/types/classChoices.ts`
+  - [ ] Add `levelFilterTable?` to `ClassChoiceDefinition` in `src/types/classChoices.ts`
+  - [ ] Create `src/types/animalCompanions.ts` with `AnimalCompanionEntry`
+  - [ ] `npm run typecheck` — zero errors
+- [ ] Write 4 scraping plans using `plans/scraping-agent-prompt.md`
+- [ ] Write `src/data/classChoiceDefinitions/` static files (Fighter, Cleric, Druid, Barbarian, Ranger, Paladin, Wizard, Rogue, prestige3_5e, Sentinel)
+- [ ] Seed script: `scripts/db/seedClassChoiceDefinitions.ts`
+- [ ] Run domain scraping agents (plan ready: `plans/data-scraping/domains-database.md`)
+- [ ] Seed script: `scripts/db/seedDomains.ts`
+- [ ] Run remaining scraping agents (deities, animal companions, rage powers, rogue talents) once plans written
 - [ ] Seed 3.5e prestige classes (Hathran, Dweomerkeeper, Radiant Servant, Prestige Paladin) as campaign content
 - [ ] Build 23 direct-entry UI components (`src/components/character/direct-entry/`)
 - [ ] Wire direct-entry screen into navigation (`app/(tabs)/characters/[id]/entry.tsx`)
 - [ ] Enter Rissi — validate model end-to-end
 - [ ] Kah-Mei session — capture character, stress-test template model
+
+#### 3e. Animal Companion Builder — PLANNED
+
+**Trigger:** Druid or Ranger selects `animal_companion` as their Nature Bond / Hunter's Bond choice.
+
+The animal companion is not a `ClassChoiceDefinition` — it is a separate builder UI flow. The companion has its own HD, BAB, saves, skills, feats, ability scores, tricks, and HP. Its stats update automatically as druid/ranger level increases.
+
+**Data dependency:** `animalcompanions` Firestore collection must be seeded before this UI can function. Scraping plan: `plans/data-scraping/animal-companions-database.md` (needs writing).
+
+**Not a blocker for Rissi** — she has no animal companion. Can be built after the core direct-entry UI (3d) is functional.
+
+Key facts:
+
+- Companion has its own character-like stat block, tracked separately from the PC
+- Progression tiers activate at druid levels 4 and 7 (size, ability score changes, natural armor, new attacks)
+- Multiple companions possible (Leadership feat, secondary sources)
+- DM additions (e.g. Fleshraker from 3.5e) use `visibility: 'campaign'` — same homebrew pattern as all content
+
+**Implementation items:**
+
+- [ ] Write `plans/data-scraping/animal-companions-database.md`
+- [ ] Run animal companion scraping agents
+- [ ] Seed script: `scripts/db/seedAnimalCompanions.ts`
+- [ ] Design companion builder UI (separate spec doc)
+- [ ] Build companion builder components
+- [ ] Wire companion builder into direct-entry Classes & Templates tab
 
 ### Phase 4: Campaigns & Social
 
