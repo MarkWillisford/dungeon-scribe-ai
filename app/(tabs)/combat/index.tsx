@@ -64,7 +64,7 @@ export default function CombatTrackerScreen() {
     if (buffLibrary.length === 0) {
       dispatch(setBuffLibrary(BUFF_PRESETS));
     }
-  }, []);
+  }, [buffLibrary.length, dispatch]);
 
   // Init HP from character when entering combat for the first time
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function CombatTrackerScreen() {
       const maxHP = hp.base + hp.constitution + hp.favoredClass + hp.other;
       dispatch(initHP(maxHP));
     }
-  }, [character]);
+  }, [character, currentHP, dispatch]);
 
   // Compute buffed totals whenever character, buffs, or abilities change
   const totals: BuffedTotals | null = useMemo(() => {
@@ -197,7 +197,7 @@ export default function CombatTrackerScreen() {
           showsVerticalScrollIndicator={false}
         >
           {/* HP Tracker */}
-          <SectionHeader title="Hit Points" colors={colors} fantasy={fantasy} />
+          <SectionHeader title="Hit Points" />
           <HPTracker
             currentHP={currentHP ?? maxHP}
             maxHP={maxHP}
@@ -211,16 +211,14 @@ export default function CombatTrackerScreen() {
           />
 
           {/* Initiative */}
-          <SectionHeader title="Initiative" colors={colors} fantasy={fantasy} />
+          <SectionHeader title="Initiative" />
           <InitiativeRow
             initiative={character.combatStats.initiative.total}
             onRollRecorded={handleRollRecorded}
-            colors={colors}
-            fantasy={fantasy}
           />
 
           {/* Attacks */}
-          <SectionHeader title="Attacks" colors={colors} fantasy={fantasy} />
+          <SectionHeader title="Attacks" />
           <AttackPanel
             meleeAttacks={
               totals?.meleeAttack ?? character.combatStats.attackBonuses.allAttacks.melee
@@ -233,7 +231,7 @@ export default function CombatTrackerScreen() {
           />
 
           {/* Defense */}
-          <SectionHeader title="Defense" colors={colors} fantasy={fantasy} />
+          <SectionHeader title="Defense" />
           <DefensePanel
             ac={
               totals?.ac ?? {
@@ -311,7 +309,8 @@ export default function CombatTrackerScreen() {
 
 // ── Small helpers ────────────────────────────────────────────────────────────
 
-function SectionHeader({ title, colors, fantasy }: { title: string; colors: any; fantasy: any }) {
+function SectionHeader({ title }: { title: string }) {
+  const { fantasy } = useTheme();
   return (
     <View style={sectionHeaderStyles.row}>
       <View style={[sectionHeaderStyles.line, { backgroundColor: fantasy.bronze }]} />
@@ -324,14 +323,11 @@ function SectionHeader({ title, colors, fantasy }: { title: string; colors: any;
 function InitiativeRow({
   initiative,
   onRollRecorded,
-  colors,
-  fantasy,
 }: {
   initiative: number;
   onRollRecorded: (r: RollRecord) => void;
-  colors: any;
-  fantasy: any;
 }) {
+  const { colors, fantasy } = useTheme();
   const { DiceService } = require('@services/DiceService');
   const handleRoll = () => {
     const raw = DiceService.rollD20();

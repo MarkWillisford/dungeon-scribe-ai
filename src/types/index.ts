@@ -81,3 +81,6 @@ export * from './templates';
 export * from './mythic';
 export * from './resources';
 export * from './classChoices';
+export * from './classOptions';
+export * from './deities';
+export * from './animalCompanions';

@@ -5,7 +5,7 @@ import React from 'react';
 // Renders components to a tree and provides query/interaction methods
 // Includes a minimal hooks implementation so useState/useRef work in function components.
 
-interface RenderedNode {
+export interface RenderedNode {
   type: string | Function;
   props: Record<string, any>;
   children: (RenderedNode | string)[];

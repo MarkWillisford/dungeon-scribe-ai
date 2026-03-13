@@ -1,4 +1,4 @@
-import { ArchetypeData, ClassFeatureData } from '../types';
+import { ArchetypeData } from '../types';
 
 export const SHAMAN_ARCHETYPES: ArchetypeData[] = [
   // ──────────────────────────────────────────────

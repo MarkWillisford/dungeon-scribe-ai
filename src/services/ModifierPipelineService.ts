@@ -1,7 +1,6 @@
 import type { Character } from '@/types';
 import { BonusType, type Effect } from '@/types/base';
 import type { AbilityScores } from '@/types/abilities';
-import type { Skills } from '@/types/skills';
 import { Size, SaveProgression } from '@/types/base';
 import { FormulaService, type FormulaContext } from './FormulaService';
 import { FeatRegistryService } from './FeatRegistryService';
@@ -554,11 +553,11 @@ export class ModifierPipelineService {
 
   private static applySkills(c: Character, stacked: Map<string, StackedResult>): void {
     const skillKeys = Object.keys(c.skills).filter(
-      (k) => k !== 'totalRanks' && !Array.isArray((c.skills as any)[k]),
+      (k) => k !== 'totalRanks' && !Array.isArray(c.skills[k]),
     );
 
     for (const key of skillKeys) {
-      const skill = (c.skills as any)[key];
+      const skill = c.skills[key];
       if (!skill || typeof skill !== 'object' || !('ability' in skill)) continue;
 
       const abilityMod = c.abilityScores[skill.ability as keyof AbilityScores]?.tempModifier ?? 0;

@@ -1,4 +1,4 @@
-import { ArchetypeData, ClassFeatureData } from '../types';
+import { ArchetypeData } from '../types';
 
 // Standard Bloodrager class features (for reference in replacedFeatures/modifiedFeatures):
 // Bloodrage, Bloodline (and bloodline powers), Fast Movement, Uncanny Dodge,

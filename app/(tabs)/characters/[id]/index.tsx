@@ -11,6 +11,8 @@ import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { FantasyDivider } from '@/components/ui/FantasyDivider';
 import { FeatRegistryService } from '@/services/FeatRegistryService';
 import type { Character } from '@/types';
+import type { AppDispatch } from '@/store/store';
+import type { Skill, NamedSkill } from '@/types/skills';
 
 const TABS = [
   { key: 'overview', label: 'Overview' },
@@ -104,7 +106,7 @@ export default function CharacterDetailScreen() {
 // ============================================================
 
 function OverviewTab({ character }: { character: Character }) {
-  const { colors, fantasy } = useTheme();
+  const { fantasy } = useTheme();
   const hp = character.combatStats.hitPoints;
   const ac = character.combatStats.armorClass;
   const saves = character.combatStats.savingThrows;
@@ -131,9 +133,9 @@ function OverviewTab({ character }: { character: Character }) {
 
       {/* Saves */}
       <OrnatePanel title="Saving Throws" testID="overview-saves">
-        <StatRow label="Fortitude" value={formatBonus(saves.fortitude.total)} colors={colors} />
-        <StatRow label="Reflex" value={formatBonus(saves.reflex.total)} colors={colors} />
-        <StatRow label="Will" value={formatBonus(saves.will.total)} colors={colors} />
+        <StatRow label="Fortitude" value={formatBonus(saves.fortitude.total)} />
+        <StatRow label="Reflex" value={formatBonus(saves.reflex.total)} />
+        <StatRow label="Will" value={formatBonus(saves.will.total)} />
       </OrnatePanel>
 
       {/* Attack */}
@@ -143,28 +145,20 @@ function OverviewTab({ character }: { character: Character }) {
           value={character.combatStats.attackBonuses.baseAttack
             .map((b) => formatBonus(b))
             .join('/')}
-          colors={colors}
         />
         <StatRow
           label="Melee"
           value={formatBonus(character.combatStats.attackBonuses.meleeTotal)}
-          colors={colors}
         />
         <StatRow
           label="Ranged"
           value={formatBonus(character.combatStats.attackBonuses.rangedTotal)}
-          colors={colors}
         />
         <StatRow
           label="CMB"
           value={formatBonus(character.combatStats.combatManeuver.bonus.total)}
-          colors={colors}
         />
-        <StatRow
-          label="CMD"
-          value={`${character.combatStats.combatManeuver.defense.total}`}
-          colors={colors}
-        />
+        <StatRow label="CMD" value={`${character.combatStats.combatManeuver.defense.total}`} />
       </OrnatePanel>
 
       {/* Ability Scores */}
@@ -174,7 +168,6 @@ function OverviewTab({ character }: { character: Character }) {
             key={ab}
             label={ab.toUpperCase()}
             value={`${character.abilityScores[ab].total} (${formatBonus(character.abilityScores[ab].modifier)})`}
-            colors={colors}
           />
         ))}
       </OrnatePanel>
@@ -206,17 +199,13 @@ function AbilitiesTab({ character }: { character: Character }) {
                 </Text>
               </View>
               <FantasyDivider />
-              <StatRow label="Base" value={`${score.base}`} colors={colors} />
-              <StatRow label="Racial" value={formatBonus(score.racial)} colors={colors} />
+              <StatRow label="Base" value={`${score.base}`} />
+              <StatRow label="Racial" value={formatBonus(score.racial)} />
               {score.inherent !== 0 && (
-                <StatRow label="Inherent" value={formatBonus(score.inherent)} colors={colors} />
+                <StatRow label="Inherent" value={formatBonus(score.inherent)} />
               )}
-              {score.damage > 0 && (
-                <StatRow label="Damage" value={`-${score.damage}`} colors={colors} />
-              )}
-              {score.drain > 0 && (
-                <StatRow label="Drain" value={`-${score.drain}`} colors={colors} />
-              )}
+              {score.damage > 0 && <StatRow label="Damage" value={`-${score.damage}`} />}
+              {score.drain > 0 && <StatRow label="Drain" value={`-${score.drain}`} />}
             </View>
           </OrnatePanel>
         );
@@ -247,10 +236,10 @@ function CombatTab({ character }: { character: Character }) {
           <QuickStat label="Nonlethal" value={`${hp.nonlethal}`} color={fantasy.bronze} />
         </View>
         <FantasyDivider />
-        <StatRow label="Base (Hit Dice)" value={`${hp.base}`} colors={colors} />
-        <StatRow label="Constitution" value={formatBonus(hp.constitution)} colors={colors} />
-        <StatRow label="Favored Class" value={`${hp.favoredClass}`} colors={colors} />
-        <StatRow label="Other" value={`${hp.other}`} colors={colors} />
+        <StatRow label="Base (Hit Dice)" value={`${hp.base}`} />
+        <StatRow label="Constitution" value={formatBonus(hp.constitution)} />
+        <StatRow label="Favored Class" value={`${hp.favoredClass}`} />
+        <StatRow label="Other" value={`${hp.other}`} />
       </OrnatePanel>
 
       {/* AC */}
@@ -261,15 +250,15 @@ function CombatTab({ character }: { character: Character }) {
           <QuickStat label="Flat-Footed" value={`${ac.flatFooted}`} color={fantasy.bronze} />
         </View>
         <FantasyDivider />
-        <StatRow label="Base" value="10" colors={colors} />
-        <StatRow label="Armor" value={formatBonus(ac.armor)} colors={colors} />
-        <StatRow label="Shield" value={formatBonus(ac.shield)} colors={colors} />
-        <StatRow label="Dexterity" value={formatBonus(ac.dexterity)} colors={colors} />
-        <StatRow label="Natural" value={formatBonus(ac.natural)} colors={colors} />
-        <StatRow label="Deflection" value={formatBonus(ac.deflection)} colors={colors} />
-        <StatRow label="Dodge" value={formatBonus(ac.dodge)} colors={colors} />
-        <StatRow label="Size" value={formatBonus(ac.size)} colors={colors} />
-        {ac.misc !== 0 && <StatRow label="Misc" value={formatBonus(ac.misc)} colors={colors} />}
+        <StatRow label="Base" value="10" />
+        <StatRow label="Armor" value={formatBonus(ac.armor)} />
+        <StatRow label="Shield" value={formatBonus(ac.shield)} />
+        <StatRow label="Dexterity" value={formatBonus(ac.dexterity)} />
+        <StatRow label="Natural" value={formatBonus(ac.natural)} />
+        <StatRow label="Deflection" value={formatBonus(ac.deflection)} />
+        <StatRow label="Dodge" value={formatBonus(ac.dodge)} />
+        <StatRow label="Size" value={formatBonus(ac.size)} />
+        {ac.misc !== 0 && <StatRow label="Misc" value={formatBonus(ac.misc)} />}
       </OrnatePanel>
 
       {/* Saves */}
@@ -282,7 +271,7 @@ function CombatTab({ character }: { character: Character }) {
           ] as const
         ).map(([name, save]) => (
           <View key={name} style={styles.saveBlock}>
-            <StatRow label={name} value={formatBonus(save.total)} colors={colors} bold />
+            <StatRow label={name} value={formatBonus(save.total)} bold />
             <View style={styles.saveBreakdown}>
               <Text style={[styles.breakdownText, { color: colors.text.tertiary }]}>
                 Base {formatBonus(save.base)} | Ability {formatBonus(save.ability)} | Magic{' '}
@@ -295,65 +284,39 @@ function CombatTab({ character }: { character: Character }) {
 
       {/* Attack */}
       <OrnatePanel title="Attack Bonuses" testID="combat-attack">
-        <StatRow
-          label="BAB"
-          value={atk.baseAttack.map((b) => formatBonus(b)).join('/')}
-          colors={colors}
-        />
+        <StatRow label="BAB" value={atk.baseAttack.map((b) => formatBonus(b)).join('/')} />
         <FantasyDivider />
         <StatRow
           label="Melee"
           value={atk.allAttacks.melee.map((b) => formatBonus(b)).join('/')}
-          colors={colors}
           bold
         />
         <StatRow
           label="Ranged"
           value={atk.allAttacks.ranged.map((b) => formatBonus(b)).join('/')}
-          colors={colors}
           bold
         />
       </OrnatePanel>
 
       {/* CMB/CMD */}
       <OrnatePanel title="Combat Maneuvers" testID="combat-maneuvers">
-        <StatRow label="CMB" value={formatBonus(cmb.bonus.total)} colors={colors} bold />
-        <StatRow label="CMD" value={`${cmb.defense.total}`} colors={colors} bold />
-        <StatRow label="CMD Flat-Footed" value={`${cmb.defense.flatFooted}`} colors={colors} />
+        <StatRow label="CMB" value={formatBonus(cmb.bonus.total)} bold />
+        <StatRow label="CMD" value={`${cmb.defense.total}`} bold />
+        <StatRow label="CMD Flat-Footed" value={`${cmb.defense.flatFooted}`} />
       </OrnatePanel>
 
       {/* Initiative & Movement */}
       <OrnatePanel title="Initiative & Movement" testID="combat-init-speed">
-        <StatRow
-          label="Initiative"
-          value={formatBonus(character.combatStats.initiative.total)}
-          colors={colors}
-        />
-        <StatRow
-          label="Speed"
-          value={`${character.combatStats.movement.current} ft.`}
-          colors={colors}
-        />
+        <StatRow label="Initiative" value={formatBonus(character.combatStats.initiative.total)} />
+        <StatRow label="Speed" value={`${character.combatStats.movement.current} ft.`} />
         {character.combatStats.movement.fly > 0 && (
-          <StatRow
-            label="Fly"
-            value={`${character.combatStats.movement.fly} ft.`}
-            colors={colors}
-          />
+          <StatRow label="Fly" value={`${character.combatStats.movement.fly} ft.`} />
         )}
         {character.combatStats.movement.swim > 0 && (
-          <StatRow
-            label="Swim"
-            value={`${character.combatStats.movement.swim} ft.`}
-            colors={colors}
-          />
+          <StatRow label="Swim" value={`${character.combatStats.movement.swim} ft.`} />
         )}
         {character.combatStats.movement.climb > 0 && (
-          <StatRow
-            label="Climb"
-            value={`${character.combatStats.movement.climb} ft.`}
-            colors={colors}
-          />
+          <StatRow label="Climb" value={`${character.combatStats.movement.climb} ft.`} />
         )}
       </OrnatePanel>
     </>
@@ -369,14 +332,20 @@ function SkillsTab({ character }: { character: Character }) {
   const skills = character.skills;
 
   const skillEntries = Object.entries(skills)
-    .filter(
-      ([key, val]) =>
-        key !== 'totalRanks' && typeof val === 'object' && val !== null && 'ability' in val,
-    )
+    .filter((entry): entry is [string, Skill | NamedSkill] => {
+      const [key, val] = entry;
+      return (
+        key !== 'totalRanks' &&
+        typeof val === 'object' &&
+        val !== null &&
+        !Array.isArray(val) &&
+        'ability' in val
+      );
+    })
     .sort(([, a], [, b]) => {
-      const skillA = a as any;
-      const skillB = b as any;
-      return (skillA.name || '').localeCompare(skillB.name || '');
+      const nameA = 'name' in a ? a.name : '';
+      const nameB = 'name' in b ? b.name : '';
+      return nameA.localeCompare(nameB);
     });
 
   return (
@@ -404,18 +373,20 @@ function SkillsTab({ character }: { character: Character }) {
       </View>
       <FantasyDivider />
       {skillEntries.map(([key, skill]) => {
-        const s = skill as any;
         return (
           <View
             key={key}
-            style={[styles.skillRow, s.isClassSkill && { backgroundColor: colors.bg.secondary }]}
+            style={[
+              styles.skillRow,
+              skill.isClassSkill && { backgroundColor: colors.bg.secondary },
+            ]}
           >
             <Text
               style={[styles.skillName, { color: colors.text.primary, flex: 2 }]}
               numberOfLines={1}
             >
-              {s.name || key}
-              {s.isClassSkill ? ' *' : ''}
+              {('name' in skill ? skill.name : undefined) || key}
+              {skill.isClassSkill ? ' *' : ''}
             </Text>
             <Text
               style={[
@@ -423,7 +394,7 @@ function SkillsTab({ character }: { character: Character }) {
                 { color: colors.text.primary, width: 40, textAlign: 'center' },
               ]}
             >
-              {formatBonus(s.total ?? 0)}
+              {formatBonus(skill.total ?? 0)}
             </Text>
             <Text
               style={[
@@ -431,7 +402,7 @@ function SkillsTab({ character }: { character: Character }) {
                 { color: colors.text.secondary, width: 40, textAlign: 'center' },
               ]}
             >
-              {s.ranks ?? 0}
+              {skill.ranks ?? 0}
             </Text>
           </View>
         );
@@ -444,7 +415,7 @@ function SkillsTab({ character }: { character: Character }) {
 // Feats Tab
 // ============================================================
 
-function FeatsTab({ character, dispatch }: { character: Character; dispatch: any }) {
+function FeatsTab({ character, dispatch }: { character: Character; dispatch: AppDispatch }) {
   const { colors, fantasy } = useTheme();
   const feats = character.feats.feats;
 
@@ -525,17 +496,8 @@ function QuickStat({ label, value, color }: { label: string; value: string; colo
   );
 }
 
-function StatRow({
-  label,
-  value,
-  colors,
-  bold,
-}: {
-  label: string;
-  value: string;
-  colors: any;
-  bold?: boolean;
-}) {
+function StatRow({ label, value, bold }: { label: string; value: string; bold?: boolean }) {
+  const { colors } = useTheme();
   return (
     <View style={styles.statRow}>
       <Text style={[styles.statLabel, { color: colors.text.secondary }]}>{label}</Text>

@@ -126,8 +126,9 @@ function runTypeCheck(): boolean {
   try {
     execSync('npx tsc --noEmit', { cwd: PROJECT_ROOT, stdio: 'pipe' });
     return true;
-  } catch (e: any) {
-    console.error('TypeScript errors:\n' + e.stdout?.toString());
+  } catch (e) {
+    const err = e as { stdout?: Buffer };
+    console.error('TypeScript errors:\n' + err.stdout?.toString());
     return false;
   }
 }
@@ -152,8 +153,8 @@ function mergeSchool(school: string): boolean {
   let merged: string;
   try {
     merged = buildFinalFile(school);
-  } catch (e: any) {
-    console.error(`  ERROR: ${e.message}`);
+  } catch (e) {
+    console.error(`  ERROR: ${e instanceof Error ? e.message : String(e)}`);
     return false;
   }
 

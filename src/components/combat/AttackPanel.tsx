@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, TextInput, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Pressable, TextInput } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { DiceService } from '@services/DiceService';
 import { RollRecord } from '@/types/buff';
@@ -29,7 +29,6 @@ export function AttackPanel({
   >([]);
   const [manualInputs, setManualInputs] = useState<Record<number, string>>({});
   const [isFullAttackRunning, setIsFullAttackRunning] = useState(false);
-  const [expandedBreakdown, setExpandedBreakdown] = useState<number | null>(null);
 
   const attacks = mode === 'melee' ? meleeAttacks : rangedAttacks;
 

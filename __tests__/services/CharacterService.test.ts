@@ -2,7 +2,6 @@ import { CharacterService } from '@services/CharacterService';
 import { CreateCharacterParams, AbilityScoreMethod } from '@/types/character';
 import { Size, Alignment, BonusType } from '@/types/base';
 import { Race } from '@/types/race';
-import { Character } from '@/types';
 
 describe('CharacterService', () => {
   const mockRace: Race = {

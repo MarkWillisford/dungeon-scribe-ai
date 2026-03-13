@@ -54,7 +54,11 @@ function main() {
   let totalCollected = 0;
   const rows: string[][] = [];
 
-  for (const [school, data] of Object.entries(schools) as [string, any][]) {
+  const schoolEntries = Object.entries(schools) as [
+    string,
+    { merged?: boolean; status: string; nextSpellName?: string },
+  ][];
+  for (const [school, data] of schoolEntries) {
     const batches = getBatchFiles(school);
     const schoolFile = path.join(SPELLS_DIR, SCHOOL_TO_FILE[school]);
 
@@ -111,7 +115,11 @@ function main() {
   }
 
   console.log('\nReady to merge:');
-  for (const [school, data] of Object.entries(schools) as [string, any][]) {
+  const mergeEntries = Object.entries(schools) as [
+    string,
+    { merged?: boolean; status: string; nextSpellName?: string },
+  ][];
+  for (const [school, data] of mergeEntries) {
     const batches = getBatchFiles(school);
     if (batches.length > 0 && !data.merged) {
       console.log(`  ${school} — ${batches.length} batch file(s) waiting`);

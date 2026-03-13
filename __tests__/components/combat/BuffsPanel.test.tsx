@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, fireEvent } from '../../helpers/testUtils';
+import { render } from '../../helpers/testUtils';
 import { BuffsPanel } from '@/components/combat/BuffsPanel';
-import { Buff, SavedBuff } from '@/types/buff';
+import { Buff } from '@/types/buff';
 import { BonusType } from '@/types/base';
 
 function makeBuff(overrides: Partial<Buff> = {}): Buff {
@@ -14,21 +14,6 @@ function makeBuff(overrides: Partial<Buff> = {}): Buff {
     durationType: 'rounds',
     effects: [],
     isActive: true,
-    ...overrides,
-  };
-}
-
-function makeSavedBuff(overrides: Partial<SavedBuff> = {}): SavedBuff {
-  return {
-    id: 'bless',
-    name: 'Bless',
-    description: '+1 morale on attacks',
-    source: 'Cleric 1',
-    category: 'Spell',
-    bonusType: BonusType.MORALE,
-    duration: 10,
-    durationType: 'rounds',
-    effects: [],
     ...overrides,
   };
 }

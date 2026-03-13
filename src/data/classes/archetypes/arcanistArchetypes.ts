@@ -1,4 +1,4 @@
-import { ArchetypeData, ClassFeatureData } from '../types';
+import { ArchetypeData } from '../types';
 
 // Standard Arcanist class features (for reference in replacedFeatures/modifiedFeatures):
 // Arcane Reservoir, Arcanist Exploits, Consume Spells, Greater Exploits

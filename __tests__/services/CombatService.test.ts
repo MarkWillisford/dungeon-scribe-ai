@@ -4,7 +4,7 @@ import { ModifierPipelineService } from '@services/ModifierPipelineService';
 import { CreateCharacterParams, AbilityScoreMethod } from '@/types/character';
 import { Size, Alignment, BonusType } from '@/types/base';
 import { Race } from '@/types/race';
-import { Buff, CombatAbilityState } from '@/types/buff';
+import { Buff } from '@/types/buff';
 import { Character } from '@/types';
 
 // ----------------------------------------------------------------
