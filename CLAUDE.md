@@ -54,3 +54,4 @@ e2e/           — Maestro E2E tests
 - All tests must pass before merging
 - Run `npm run typecheck` before committing
 - Pre-commit hooks enforce lint + format via Husky + lint-staged
+- Never include `Co-Authored-By: Claude` in commit messages
