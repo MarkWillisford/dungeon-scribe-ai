@@ -199,10 +199,6 @@ This means spell tables are built up incrementally — Core classes (Tier 1) wil
 - Existing `src/data/classes.ts` remains untouched
 - Count check: total classes matches expected per category
 
----
-
-# Plan: Spell Data Collection — NEXT UP
-
 ## Status
 
 Infrastructure COMPLETE (2026-03-07). Ready to launch agents.
