@@ -773,6 +773,21 @@ Key facts:
    - New component tests: HPTracker, AttackPanel, DefensePanel, BuffsPanel, CombatAbilityToggles, RollLog, DiceRoller, RollResultDisplay
 2. E2E tests: **deferred** — requires running app on device
 
+### CI Coverage Fix — COMPLETE (2026-03-14) — `MW/coverage-fix`
+
+All four Jest coverage thresholds now met globally (statements 80%, branches 70%, functions 80%, lines 80%).
+
+`npm test` — **657 tests passing** across **35 suites** (added 87 tests)
+
+| File | Coverage problem fixed |
+|---|---|
+| `store/slices/authSlice.ts` | Async thunks never executed — mocked `FirebaseAuthService`, dispatched real thunks, covered all `try/catch` branches |
+| `store/slices/charactersSlice.ts` | 31% functions — mocked deps, added thunk execution + `addFeat`/`removeFeat`/`toggleFeat`/`recalculateStats` tests |
+| `services/PrerequisiteService.ts` | Missing prereq types — added `level+class`, `skill`, `class_feature`, `proficiency`, `caster_level`, `mythic_tier` tests |
+| `services/CombatService.ts` | `calculateSkill`, `isDying`, `isDead` untested |
+| `services/EquipmentDatabaseService.ts` | `getEquipmentByCategory`, `searchEquipment` (all filter branches) untested |
+| `services/ModifierPipelineService.ts` | Medium/Low BAB progressions, condition effects untested |
+
 ### Deviations from Original Plan
 
 - **No local emulators:** Decided to develop against a real staging Firebase project instead of local emulators (which require Java). Emulator config removed; `firebase.ts` connects directly to the project in `.env`.
