@@ -6,6 +6,7 @@ import { AbilityScoreMethod } from '@/types/character';
 import type { Character } from '@/types';
 import type { FeatDefinition } from '@/types/feats';
 import type { Race } from '@/types/race';
+import type { SpellcastingPool } from '@/types/spells';
 
 const mockRace: Race = {
   name: 'Human',
@@ -179,6 +180,133 @@ describe('PrerequisiteService', () => {
       const result = PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
       expect(result.unmet).toHaveLength(1);
+    });
+
+    test('ability_score with invalid ability key returns false', () => {
+      const char = createTestCharacter();
+      const feat = makeFeat([{ type: 'ability_score', ability: 'LCK' as 'STR', minimum: 10 }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+    });
+
+    test('level prerequisite with class met', () => {
+      const char = createTestCharacter({ className: 'Fighter' });
+      const feat = makeFeat([{ type: 'level', minimum: 1, class: 'Fighter' }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(true);
+    });
+
+    test('level prerequisite with class not met when wrong class', () => {
+      const char = createTestCharacter({ className: 'Fighter' });
+      const feat = makeFeat([{ type: 'level', minimum: 1, class: 'Wizard' }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+      expect(result.reasons[0]).toContain('Wizard');
+    });
+
+    test('skill prerequisite met', () => {
+      const char = createTestCharacter();
+      char.skills.acrobatics.ranks = 5;
+      const feat = makeFeat([{ type: 'skill', skillId: 'acrobatics', ranks: 5 }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(true);
+    });
+
+    test('skill prerequisite not met', () => {
+      const char = createTestCharacter();
+      char.skills.acrobatics.ranks = 2;
+      const feat = makeFeat([{ type: 'skill', skillId: 'acrobatics', ranks: 5 }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+      expect(result.reasons[0]).toContain('acrobatics');
+    });
+
+    test('skill prerequisite not met when skillId does not exist', () => {
+      const char = createTestCharacter();
+      const feat = makeFeat([{ type: 'skill', skillId: 'nonexistent_skill', ranks: 1 }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+    });
+
+    test('class_feature prerequisite met', () => {
+      const char = createTestCharacter({ className: 'Fighter' });
+      char.classes.classes[0].classFeatures.push({
+        name: 'Bravery',
+        description: 'Will save bonus',
+        level: 2,
+        effects: [],
+      });
+      const feat = makeFeat([{ type: 'class_feature', featureName: 'Bravery' }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(true);
+    });
+
+    test('class_feature prerequisite not met', () => {
+      const char = createTestCharacter({ className: 'Fighter' });
+      const feat = makeFeat([{ type: 'class_feature', featureName: 'Sneak Attack' }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+      expect(result.reasons[0]).toContain('Sneak Attack');
+    });
+
+    test('proficiency prerequisite met (Fighter has Martial weapons)', () => {
+      const char = createTestCharacter({ className: 'Fighter' });
+      const feat = makeFeat([{ type: 'proficiency', proficiency: 'Martial weapons' }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(true);
+    });
+
+    test('proficiency prerequisite not met', () => {
+      const char = createTestCharacter({ className: 'Fighter' });
+      const feat = makeFeat([{ type: 'proficiency', proficiency: 'Exotic weapons' }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+      expect(result.reasons[0]).toContain('Exotic weapons');
+    });
+
+    test('caster_level prerequisite met', () => {
+      const char = createTestCharacter();
+      const pool: SpellcastingPool = {
+        baseClass: 'wizard',
+        castingType: 'arcane',
+        spellAbility: 'INT',
+        contributors: [],
+        effectiveSpellcastingLevel: 5,
+        baseCasterLevel: 5,
+        clBonuses: [],
+        spellsPerDay: { base: [], bonus: [], misc: [], total: [], used: [] },
+        spellDC: { base: 10, miscBonus: 0, byLevel: [] },
+        spellFailure: 0,
+        concentration: { abilityMod: 3, casterLevel: 5, misc: 0, total: 8 },
+      };
+      char.spellcasting.pools.push(pool);
+      const feat = makeFeat([{ type: 'caster_level', minimum: 5 }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(true);
+    });
+
+    test('caster_level prerequisite not met', () => {
+      const char = createTestCharacter();
+      const feat = makeFeat([{ type: 'caster_level', minimum: 5 }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+      expect(result.reasons[0]).toContain('Caster level');
+    });
+
+    test('mythic_tier prerequisite met', () => {
+      const char = createTestCharacter();
+      char.mythic = { tier: 3, path: 'archmage', pathAbilities: [], universalAbilities: [], tierHistory: [] };
+      const feat = makeFeat([{ type: 'mythic_tier', minimum: 3 }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(true);
+    });
+
+    test('mythic_tier prerequisite not met (no mythic)', () => {
+      const char = createTestCharacter();
+      const feat = makeFeat([{ type: 'mythic_tier', minimum: 1 }]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+      expect(result.reasons[0]).toContain('Mythic Tier');
     });
   });
 

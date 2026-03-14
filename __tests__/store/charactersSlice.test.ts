@@ -1,10 +1,62 @@
+import { configureStore } from '@reduxjs/toolkit';
 import charactersReducer, {
   setActiveCharacter,
   clearCharacters,
   clearError,
+  addFeat,
+  removeFeat,
+  toggleFeat,
+  recalculateStats,
+  fetchCharacters,
+  fetchCharacter,
+  createCharacter,
+  updateCharacter,
+  deleteCharacter,
 } from '@store/slices/charactersSlice';
 import type { Character, CharacterSummary } from '@/types';
 import { Size, Alignment, EncumbranceVariant } from '@/types';
+import type { CharacterFeat } from '@/types/feats';
+import { FirebaseCharacterService } from '@/services/FirebaseCharacterService';
+import { CharacterService } from '@/services/CharacterService';
+
+jest.mock('@/services/FirebaseCharacterService', () => ({
+  FirebaseCharacterService: {
+    getUserCharacters: jest.fn(),
+    getCharacter: jest.fn(),
+    create: jest.fn(),
+    update: jest.fn(),
+    delete: jest.fn(),
+  },
+}));
+
+jest.mock('@/services/CharacterService', () => ({
+  CharacterService: {
+    createDefaultCharacter: jest.fn(),
+  },
+}));
+
+jest.mock('@/services/ModifierPipelineService', () => ({
+  ModifierPipelineService: {
+    recalculate: jest.fn((char) => char),
+  },
+}));
+
+function makeCharactersStore() {
+  return configureStore({
+    reducer: { characters: charactersReducer },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({ serializableCheck: false }),
+  });
+}
+
+const mockFeat: CharacterFeat = {
+  featId: 'power-attack',
+  name: 'Power Attack',
+  source: 'level_1',
+  grantedAtLevel: 1,
+  active: true,
+  choices: {},
+};
 
 const mockCharacterSummary: CharacterSummary = {
   id: 'char-1',
@@ -860,6 +912,298 @@ describe('charactersSlice', () => {
       });
       expect(state.characters).toHaveLength(1);
       expect(state.activeCharacter).toEqual(mockCharacter);
+    });
+
+    // fetchCharacter
+    it('should set loading on fetchCharacter pending', () => {
+      const state = charactersReducer(initialState, {
+        type: 'characters/fetchCharacter/pending',
+      });
+      expect(state.loading).toBe(true);
+      expect(state.error).toBeNull();
+    });
+
+    it('should set error on fetchCharacter rejected', () => {
+      const loadingState = { ...initialState, loading: true };
+      const state = charactersReducer(loadingState, {
+        type: 'characters/fetchCharacter/rejected',
+        payload: 'Character not found',
+      });
+      expect(state.loading).toBe(false);
+      expect(state.error).toBe('Character not found');
+    });
+
+    // createCharacter
+    it('should set loading on createCharacter pending', () => {
+      const state = charactersReducer(initialState, {
+        type: 'characters/createCharacter/pending',
+      });
+      expect(state.loading).toBe(true);
+      expect(state.error).toBeNull();
+    });
+
+    it('should set activeCharacter and push summary on createCharacter fulfilled', () => {
+      const loadingState = { ...initialState, loading: true };
+      const state = charactersReducer(loadingState, {
+        type: 'characters/createCharacter/fulfilled',
+        payload: mockCharacter,
+      });
+      expect(state.loading).toBe(false);
+      expect(state.activeCharacter).not.toBeNull();
+      expect(state.characters).toHaveLength(1);
+      expect(state.characters[0].id).toBe('char-1');
+      expect(state.characters[0].name).toBe('Thorin');
+    });
+
+    it('should set error on createCharacter rejected', () => {
+      const loadingState = { ...initialState, loading: true };
+      const state = charactersReducer(loadingState, {
+        type: 'characters/createCharacter/rejected',
+        payload: 'Create failed',
+      });
+      expect(state.loading).toBe(false);
+      expect(state.error).toBe('Create failed');
+    });
+
+    // updateCharacter
+    it('should set loading on updateCharacter pending', () => {
+      const state = charactersReducer(initialState, {
+        type: 'characters/updateCharacter/pending',
+      });
+      expect(state.loading).toBe(true);
+    });
+
+    it('should set activeCharacter on updateCharacter fulfilled', () => {
+      const loadingState = { ...initialState, loading: true };
+      const state = charactersReducer(loadingState, {
+        type: 'characters/updateCharacter/fulfilled',
+        payload: mockCharacter,
+      });
+      expect(state.loading).toBe(false);
+      expect(state.activeCharacter).toEqual(mockCharacter);
+    });
+
+    it('should set error on updateCharacter rejected', () => {
+      const loadingState = { ...initialState, loading: true };
+      const state = charactersReducer(loadingState, {
+        type: 'characters/updateCharacter/rejected',
+        payload: 'Update failed',
+      });
+      expect(state.loading).toBe(false);
+      expect(state.error).toBe('Update failed');
+    });
+
+    // deleteCharacter
+    it('should set loading on deleteCharacter pending', () => {
+      const state = charactersReducer(initialState, {
+        type: 'characters/deleteCharacter/pending',
+      });
+      expect(state.loading).toBe(true);
+    });
+
+    it('should set error on deleteCharacter rejected', () => {
+      const loadingState = { ...initialState, loading: true };
+      const state = charactersReducer(loadingState, {
+        type: 'characters/deleteCharacter/rejected',
+        payload: 'Delete failed',
+      });
+      expect(state.loading).toBe(false);
+      expect(state.error).toBe('Delete failed');
+    });
+  });
+
+  describe('addFeat', () => {
+    it('is a no-op when there is no active character', () => {
+      const state = charactersReducer(initialState, addFeat(mockFeat));
+      expect(state.activeCharacter).toBeNull();
+    });
+
+    it('adds feat to active character and recalculates', () => {
+      const stateWithChar = { ...initialState, activeCharacter: mockCharacter };
+      const state = charactersReducer(stateWithChar, addFeat(mockFeat));
+      expect(state.activeCharacter).not.toBeNull();
+      expect(
+        state.activeCharacter!.feats.feats.some((f) => f.featId === 'power-attack'),
+      ).toBe(true);
+    });
+  });
+
+  describe('removeFeat', () => {
+    it('is a no-op when there is no active character', () => {
+      const state = charactersReducer(initialState, removeFeat('power-attack'));
+      expect(state.activeCharacter).toBeNull();
+    });
+
+    it('removes feat from active character', () => {
+      const charWithFeat: Character = {
+        ...mockCharacter,
+        feats: { feats: [mockFeat], totalFeats: 1, bonusFeats: 0 },
+      };
+      const stateWithChar = { ...initialState, activeCharacter: charWithFeat };
+      const state = charactersReducer(stateWithChar, removeFeat('power-attack'));
+      expect(state.activeCharacter!.feats.feats).toHaveLength(0);
+    });
+  });
+
+  describe('toggleFeat', () => {
+    it('is a no-op when there is no active character', () => {
+      const state = charactersReducer(initialState, toggleFeat('power-attack'));
+      expect(state.activeCharacter).toBeNull();
+    });
+
+    it('toggles feat active state when feat exists', () => {
+      const charWithFeat: Character = {
+        ...mockCharacter,
+        feats: { feats: [{ ...mockFeat, active: true }], totalFeats: 1, bonusFeats: 0 },
+      };
+      const stateWithChar = { ...initialState, activeCharacter: charWithFeat };
+      const state = charactersReducer(stateWithChar, toggleFeat('power-attack'));
+      expect(state.activeCharacter!.feats.feats[0].active).toBe(false);
+    });
+
+    it('is a no-op when feat is not found', () => {
+      const stateWithChar = { ...initialState, activeCharacter: mockCharacter };
+      const state = charactersReducer(stateWithChar, toggleFeat('nonexistent-feat'));
+      expect(state.activeCharacter!.feats.feats).toHaveLength(0);
+    });
+  });
+
+  describe('recalculateStats', () => {
+    it('is a no-op when there is no active character', () => {
+      const state = charactersReducer(initialState, recalculateStats());
+      expect(state.activeCharacter).toBeNull();
+    });
+
+    it('recalculates stats when active character exists', () => {
+      const stateWithChar = { ...initialState, activeCharacter: mockCharacter };
+      const state = charactersReducer(stateWithChar, recalculateStats());
+      expect(state.activeCharacter).not.toBeNull();
+    });
+  });
+
+  describe('async thunk execution', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('fetchCharacters succeeds - sets characters', async () => {
+      const store = makeCharactersStore();
+      (FirebaseCharacterService.getUserCharacters as jest.Mock).mockResolvedValue([
+        mockCharacterSummary,
+      ]);
+      await store.dispatch(fetchCharacters('user-123'));
+      expect(store.getState().characters.characters).toEqual([mockCharacterSummary]);
+      expect(store.getState().characters.loading).toBe(false);
+    });
+
+    it('fetchCharacters fails - sets error', async () => {
+      const store = makeCharactersStore();
+      (FirebaseCharacterService.getUserCharacters as jest.Mock).mockRejectedValue(
+        new Error('Fetch failed'),
+      );
+      await store.dispatch(fetchCharacters('user-123'));
+      expect(store.getState().characters.error).toBe('Fetch failed');
+    });
+
+    it('fetchCharacters fails with non-Error - uses fallback', async () => {
+      const store = makeCharactersStore();
+      (FirebaseCharacterService.getUserCharacters as jest.Mock).mockRejectedValue('bad');
+      await store.dispatch(fetchCharacters('user-123'));
+      expect(store.getState().characters.error).toBe('Failed to fetch characters');
+    });
+
+    it('fetchCharacter succeeds - sets activeCharacter', async () => {
+      const store = makeCharactersStore();
+      (FirebaseCharacterService.getCharacter as jest.Mock).mockResolvedValue(mockCharacter);
+      await store.dispatch(fetchCharacter('char-1'));
+      expect(store.getState().characters.activeCharacter).not.toBeNull();
+    });
+
+    it('fetchCharacter fails - sets error', async () => {
+      const store = makeCharactersStore();
+      (FirebaseCharacterService.getCharacter as jest.Mock).mockRejectedValue(
+        new Error('Not found'),
+      );
+      await store.dispatch(fetchCharacter('char-1'));
+      expect(store.getState().characters.error).toBe('Not found');
+    });
+
+    it('fetchCharacter fails with non-Error - uses fallback', async () => {
+      const store = makeCharactersStore();
+      (FirebaseCharacterService.getCharacter as jest.Mock).mockRejectedValue('not found');
+      await store.dispatch(fetchCharacter('char-1'));
+      expect(store.getState().characters.error).toBe('Failed to fetch character');
+    });
+
+    it('createCharacter succeeds - sets activeCharacter and pushes summary', async () => {
+      const store = makeCharactersStore();
+      (CharacterService.createDefaultCharacter as jest.Mock).mockReturnValue(mockCharacter);
+      (FirebaseCharacterService.create as jest.Mock).mockResolvedValue(mockCharacter);
+      await store.dispatch(createCharacter({ userId: 'user-123', data: {} as never }));
+      expect(store.getState().characters.activeCharacter).not.toBeNull();
+      expect(store.getState().characters.characters).toHaveLength(1);
+    });
+
+    it('createCharacter fails - sets error', async () => {
+      const store = makeCharactersStore();
+      (CharacterService.createDefaultCharacter as jest.Mock).mockReturnValue(mockCharacter);
+      (FirebaseCharacterService.create as jest.Mock).mockRejectedValue(new Error('Save failed'));
+      await store.dispatch(createCharacter({ userId: 'user-123', data: {} as never }));
+      expect(store.getState().characters.error).toBe('Save failed');
+    });
+
+    it('createCharacter fails with non-Error - uses fallback', async () => {
+      const store = makeCharactersStore();
+      (CharacterService.createDefaultCharacter as jest.Mock).mockReturnValue(mockCharacter);
+      (FirebaseCharacterService.create as jest.Mock).mockRejectedValue('error');
+      await store.dispatch(createCharacter({ userId: 'user-123', data: {} as never }));
+      expect(store.getState().characters.error).toBe('Failed to create character');
+    });
+
+    it('updateCharacter succeeds - sets activeCharacter', async () => {
+      const store = makeCharactersStore();
+      (FirebaseCharacterService.update as jest.Mock).mockResolvedValue(mockCharacter);
+      await store.dispatch(updateCharacter({ characterId: 'char-1', data: {} }));
+      expect(store.getState().characters.activeCharacter).toEqual(mockCharacter);
+    });
+
+    it('updateCharacter fails - sets error', async () => {
+      const store = makeCharactersStore();
+      (FirebaseCharacterService.update as jest.Mock).mockRejectedValue(
+        new Error('Update failed'),
+      );
+      await store.dispatch(updateCharacter({ characterId: 'char-1', data: {} }));
+      expect(store.getState().characters.error).toBe('Update failed');
+    });
+
+    it('updateCharacter fails with non-Error - uses fallback', async () => {
+      const store = makeCharactersStore();
+      (FirebaseCharacterService.update as jest.Mock).mockRejectedValue('error');
+      await store.dispatch(updateCharacter({ characterId: 'char-1', data: {} }));
+      expect(store.getState().characters.error).toBe('Failed to update character');
+    });
+
+    it('deleteCharacter succeeds - removes character', async () => {
+      const store = makeCharactersStore();
+      (FirebaseCharacterService.delete as jest.Mock).mockResolvedValue(undefined);
+      await store.dispatch(deleteCharacter('char-1'));
+      expect(store.getState().characters.loading).toBe(false);
+    });
+
+    it('deleteCharacter fails - sets error', async () => {
+      const store = makeCharactersStore();
+      (FirebaseCharacterService.delete as jest.Mock).mockRejectedValue(
+        new Error('Delete failed'),
+      );
+      await store.dispatch(deleteCharacter('char-1'));
+      expect(store.getState().characters.error).toBe('Delete failed');
+    });
+
+    it('deleteCharacter fails with non-Error - uses fallback', async () => {
+      const store = makeCharactersStore();
+      (FirebaseCharacterService.delete as jest.Mock).mockRejectedValue('error');
+      await store.dispatch(deleteCharacter('char-1'));
+      expect(store.getState().characters.error).toBe('Failed to delete character');
     });
   });
 });
