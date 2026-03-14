@@ -688,7 +688,7 @@ Firestore collection: `classChoiceDefinitions/{id}`. Key types: `ClassChoiceDefi
   - [ ] Add `levelFilterTable?` to `ClassChoiceDefinition` in `src/types/classChoices.ts`
   - [ ] Create `src/types/animalCompanions.ts` with `AnimalCompanionEntry`
   - [ ] `npm run typecheck` — zero errors
-- [ ] Write 4 scraping plans using `plans/scraping-agent-prompt.md`
+- [x] Write 4 scraping plans using `plans/scraping-agent-prompt.md` — `805551b`
 - [ ] Write `src/data/classChoiceDefinitions/` static files (Fighter, Cleric, Druid, Barbarian, Ranger, Paladin, Wizard, Rogue, prestige3_5e, Sentinel)
 - [ ] Seed script: `scripts/db/seedClassChoiceDefinitions.ts`
 - [ ] Run domain scraping agents (plan ready: `plans/data-scraping/domains-database.md`)
