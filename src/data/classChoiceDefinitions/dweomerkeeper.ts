@@ -1,11 +1,10 @@
 import { ClassChoiceDefinition } from '@/types/classChoices';
 
-// 3.5e prestige class choice definitions — campaign content (visibility: 'campaign').
-// These classes must be authored as custom campaign content before these definitions
-// are useful. Source: Complete Divine (Dweomerkeeper, Radiant Servant of Pelor).
-// Modified from Pelor to Milani for our campaign.
+// 3.5e prestige class — campaign content. Source: Complete Divine.
+// Requires both arcane and divine spellcasting.
+// Class document must be authored as campaign content before this definition is useful.
 
-export const prestige3_5eDefinitions: ClassChoiceDefinition[] = [
+export const dweomerkeeperDefinitions: ClassChoiceDefinition[] = [
   {
     id: 'dweomerkeeper-mantle-of-spells',
     className: 'dweomerkeeper',
@@ -27,24 +26,6 @@ export const prestige3_5eDefinitions: ClassChoiceDefinition[] = [
       7: { maxSpellLevel: 8 },
       9: { maxSpellLevel: 9 },
     },
-    source: '3.5e',
-    isOfficial: false,
-    visibility: 'campaign',
-    rev: 1,
-  },
-  {
-    id: 'radiant-servant-extra-domain',
-    className: 'radiant-servant',
-    featureName: 'Extra Domain',
-    description:
-      "At 4th level, a Radiant Servant of Milani gains an extra domain from her deity's domain list. Filtered to the character's chosen deity (Milani).",
-    selectionMode: {
-      type: 'at_class_levels',
-      levels: [4],
-    },
-    optionSource: 'collection',
-    collectionName: 'domains',
-    collectionFilter: { deityIds: '{chosen_deity}' },
     source: '3.5e',
     isOfficial: false,
     visibility: 'campaign',

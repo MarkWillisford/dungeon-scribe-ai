@@ -7,7 +7,8 @@ import { rangerDefinitions } from './ranger';
 import { paladinDefinitions } from './paladin';
 import { wizardDefinitions } from './wizard';
 import { rogueDefinitions } from './rogue';
-import { prestige3_5eDefinitions } from './prestige3_5e';
+import { dweomerkeeperDefinitions } from './dweomerkeeper';
+import { radiantServantDefinitions } from './radiantServant';
 import { sentinelDefinitions } from './sentinel';
 
 export {
@@ -19,7 +20,8 @@ export {
   paladinDefinitions,
   wizardDefinitions,
   rogueDefinitions,
-  prestige3_5eDefinitions,
+  dweomerkeeperDefinitions,
+  radiantServantDefinitions,
   sentinelDefinitions,
 };
 
@@ -32,7 +34,8 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...paladinDefinitions,
   ...wizardDefinitions,
   ...rogueDefinitions,
-  ...prestige3_5eDefinitions,
+  ...dweomerkeeperDefinitions,
+  ...radiantServantDefinitions,
   ...sentinelDefinitions,
 ];
 
