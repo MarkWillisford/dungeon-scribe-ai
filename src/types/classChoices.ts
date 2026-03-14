@@ -57,11 +57,6 @@ export interface ClassChoiceOption {
   prerequisites?: FeatPrerequisite[]; // some talents/rage powers require other abilities
   sourceId: string;
   sourceRev: number;
-  // For options requiring a secondary subtype pick (e.g. Ranger Favored Enemy: Humanoid → subtype)
-  subtypePrompt?: {
-    label: string; // e.g. 'Choose a humanoid subtype'
-    options: string[]; // e.g. ['human', 'elf', 'dwarf', 'goblinoid', ...]
-  };
 }
 
 // ---- Class Choice Definition ----
@@ -85,11 +80,6 @@ export interface ClassChoiceDefinition {
   collectionName?: string;
   // Runtime substitution tokens (e.g. '{chosen_deity}') resolved from character state
   collectionFilter?: Record<string, unknown>;
-
-  // Optional: overrides collectionFilter at specific class levels.
-  // Key = class level at which this filter becomes active.
-  // e.g. Dweomerkeeper: { 1: { maxSpellLevel: 3 }, 3: { maxSpellLevel: 5 }, ... }
-  levelFilterTable?: Record<number, Record<string, unknown>>;
 
   // ContentMetadata
   source: string; // 'pf1e-core' | 'pf1e-apg' | '3.5e' | 'homebrew' | etc.
