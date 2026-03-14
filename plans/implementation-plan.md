@@ -689,7 +689,7 @@ Firestore collection: `classChoiceDefinitions/{id}`. Key types: `ClassChoiceDefi
   - [x] Create `src/types/animalCompanions.ts` with `AnimalCompanionEntry`
   - [x] `npm run typecheck` — zero errors
 - [x] Write 4 scraping plans using `plans/scraping-agent-prompt.md` — `805551b`
-- [ ] Write `src/data/classChoiceDefinitions/` static files (Fighter, Cleric, Druid, Barbarian, Ranger, Paladin, Wizard, Rogue, prestige3_5e, Sentinel)
+- [x] Write `src/data/classChoiceDefinitions/` static files (Fighter, Cleric, Druid, Barbarian, Ranger, Paladin, Wizard, Rogue, prestige3_5e, Sentinel) — `12097e0`
 - [ ] Seed script: `scripts/db/seedClassChoiceDefinitions.ts`
 - [ ] Run domain scraping agents (plan ready: `plans/data-scraping/domains-database.md`)
 - [ ] Seed script: `scripts/db/seedDomains.ts`
