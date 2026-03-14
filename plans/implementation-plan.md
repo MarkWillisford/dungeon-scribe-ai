@@ -680,14 +680,14 @@ Firestore collection: `classChoiceDefinitions/{id}`. Key types: `ClassChoiceDefi
 - [x] Write `ClassChoiceDefinition` TypeScript type + add to `src/types/` — `classChoices.ts` (trimmed) + `classOptions.ts` (9 collection interfaces) + `deities.ts` — `291b6c3`
 - [x] Write class choices design plan — `plans/data-scraping/class-choices-database.md` — `MW/plans-reorg`
 - [x] Write scraping agent prompt — `plans/scraping-agent-prompt.md` — `MW/plans-reorg`
-- [ ] Phase A type changes (see class-choices-database.md §"Type Changes Required"):
-  - [ ] Rename all `*Document` → `*Entry` in `src/types/classOptions.ts`; `ClassOptionDocument` → `ClassOptionBase`
-  - [ ] Add `druidAllowed: boolean` to `DomainEntry`
-  - [ ] Add `DeityBoonTier`, `DeityBoons` + `boons?` to `DeityEntry` in `src/types/deities.ts`
-  - [ ] Add `subtypePrompt?` to `ClassChoiceOption` in `src/types/classChoices.ts`
-  - [ ] Add `levelFilterTable?` to `ClassChoiceDefinition` in `src/types/classChoices.ts`
-  - [ ] Create `src/types/animalCompanions.ts` with `AnimalCompanionEntry`
-  - [ ] `npm run typecheck` — zero errors
+- [x] Phase A type changes (see class-choices-database.md §"Type Changes Required") — `07072a4`
+  - [x] Rename all `*Document` → `*Entry` in `src/types/classOptions.ts`; `ClassOptionDocument` → `ClassOptionBase`
+  - [x] Add `druidAllowed: boolean` to `DomainEntry`
+  - [x] Add `DeityBoonTier`, `DeityBoons` + `boons?` to `DeityEntry` in `src/types/deities.ts`
+  - [x] Add `subtypePrompt?` to `ClassChoiceOption` in `src/types/classChoices.ts`
+  - [x] Add `levelFilterTable?` to `ClassChoiceDefinition` in `src/types/classChoices.ts`
+  - [x] Create `src/types/animalCompanions.ts` with `AnimalCompanionEntry`
+  - [x] `npm run typecheck` — zero errors
 - [x] Write 4 scraping plans using `plans/scraping-agent-prompt.md` — `805551b`
 - [ ] Write `src/data/classChoiceDefinitions/` static files (Fighter, Cleric, Druid, Barbarian, Ranger, Paladin, Wizard, Rogue, prestige3_5e, Sentinel)
 - [ ] Seed script: `scripts/db/seedClassChoiceDefinitions.ts`
