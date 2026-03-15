@@ -1,7 +1,8 @@
-// Batch 002 | first: 'Hurling, Greater' | last: 'Wild Talent' | count: 80
+// Batch 002 | first: 'Hurling, Greater' | last: 'Witch Hunter' | count: 67
 // Source: https://www.d20pfsrd.com/classes/core-classes/barbarian/rage-powers/
 // RagePowerDocument = ClassOptionDocument — using base type directly
-// Note: Moon Totem and Spirit Totem descriptions filled in from individual subpages.
+// Note: Moon Totem, Spirit Totem, Spire Totem descriptions filled in from individual subpages.
+// 21 entries removed (non-Paizo/3rd-party); 8 new Paizo entries added after cross-referencing AON.
 
 import { ClassOptionDocument } from '@/types/classOptions';
 
@@ -491,6 +492,18 @@ export const ragingLeaper: ClassOptionDocument = {
   rev: 1,
 };
 
+export const ragingWhirlwind: ClassOptionDocument = {
+  id: 'raging-whirlwind',
+  name: 'Raging Whirlwind',
+  description:
+    "When the barbarian confirms a critical hit with a melee attack, she can use an immediate action. The target attempts a Fortitude save (DC = 10 + half the barbarian's level + her Constitution modifier) or loses its Dexterity modifier to AC for the remainder of the turn and lands prone at the end of the turn. Raging Whirlwind has no effect on flying creatures.",
+  prerequisites: [{ type: 'level', minimum: 12 }],
+  source: 'pf1e-uw',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
 export const ragingSwimmer: ClassOptionDocument = {
   id: 'raging-swimmer',
   name: 'Raging Swimmer',
@@ -579,28 +592,12 @@ export const renewedVitality: ClassOptionDocument = {
   rev: 1,
 };
 
-export const retribution: ClassOptionDocument = {
-  id: 'retribution',
-  name: 'Retribution',
+export const rousedAnger: ClassOptionDocument = {
+  id: 'roused-anger',
+  name: 'Roused Anger',
   description:
-    'Deal an additional 1d6 points of damage to creatures that damage you while raging.',
-  prerequisites: [{ type: 'level', minimum: 8 }],
-  source: 'pf1e-apg',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const reverberatingSlam: ClassOptionDocument = {
-  id: 'reverberating-slam',
-  name: 'Reverberating Slam',
-  description:
-    'Create shockwave effects that radiate out from your ground breaker attack while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 6 },
-    { type: 'special', description: 'ground breaker rage power' },
-  ],
-  source: 'pf1e-uc',
+    'The barbarian may enter a rage even if fatigued. While raging after using this ability, the barbarian is immune to the fatigued condition. Once this rage ends, the barbarian is exhausted for 10 minutes per round spent raging.',
+  source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
@@ -617,20 +614,6 @@ export const rollingDodge: ClassOptionDocument = {
   rev: 1,
 };
 
-export const scarredScream: ClassOptionDocument = {
-  id: 'scarred-scream',
-  name: 'Scarred Scream',
-  description:
-    'Emit a damaging sonic scream as a free action while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 10 },
-    { type: 'special', description: 'scar tissue rage power' },
-  ],
-  source: 'pf1e-uc',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
 
 export const scent: ClassOptionDocument = {
   id: 'scent',
@@ -642,44 +625,6 @@ export const scent: ClassOptionDocument = {
   rev: 1,
 };
 
-export const scarTissue: ClassOptionDocument = {
-  id: 'scar-tissue',
-  name: 'Scar Tissue',
-  description:
-    'While raging, ignore the first 1 point of damage per die from physical attacks.',
-  prerequisites: [{ type: 'level', minimum: 6 }],
-  source: 'pf1e-core',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const scavenger: ClassOptionDocument = {
-  id: 'scavenger',
-  name: 'Scavenger',
-  description:
-    'Gain improved salvage abilities and bonuses to Appraise checks while raging.',
-  prerequisites: [{ type: 'level', minimum: 4 }],
-  source: 'pf1e-ppc-potr',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const sickeningBlows: ClassOptionDocument = {
-  id: 'sickening-blows',
-  name: 'Sickening Blows',
-  description:
-    'Sicken opponents struck by your powerful blow attacks while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 6 },
-    { type: 'special', description: 'powerful blow rage power' },
-  ],
-  source: 'pf1e-uc',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
 
 export const smasher: ClassOptionDocument = {
   id: 'smasher',
@@ -692,16 +637,57 @@ export const smasher: ClassOptionDocument = {
   rev: 1,
 };
 
-export const sonicBoom: ClassOptionDocument = {
-  id: 'sonic-boom',
-  name: 'Sonic Boom',
+export const spellSunder: ClassOptionDocument = {
+  id: 'spell-sunder',
+  name: 'Spell Sunder',
   description:
-    'Deal sonic damage and deafen targets with your ground breaker attack while raging.',
+    "Once per rage, the barbarian can attempt to sunder an ongoing spell effect by succeeding at a combat maneuver check. For effects not on a creature, the check is against CMD 15 plus the effect's caster level. For effects on a creature, the barbarian makes a sunder combat maneuver against the creature's CMD + 5, ignoring miss chances from spells or spell-like abilities. Success suppresses the effect for 1 round; exceeding the CMD by 5–9 suppresses it for 2 rounds; exceeding the CMD by 10 or more dispels the effect entirely.",
   prerequisites: [
-    { type: 'level', minimum: 8 },
-    { type: 'special', description: 'ground breaker rage power' },
+    { type: 'level', minimum: 6 },
+    { type: 'special', description: 'witch hunter rage power' },
   ],
   source: 'pf1e-uc',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const spireTotemLesser: ClassOptionDocument = {
+  id: 'spire-totem-lesser',
+  name: 'Spire Totem, Lesser',
+  description:
+    'While raging, the barbarian gains a +1 morale bonus on attacks against any creature that has targeted one of her allies with an attack or a harmful spell within the last round.',
+  source: 'pf1e-ppc-wo',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const spireTotem: ClassOptionDocument = {
+  id: 'spire-totem',
+  name: 'Spire Totem',
+  description:
+    'While raging, the barbarian takes no penalties for using a weapon to deal nonlethal damage. When dealing nonlethal damage, the barbarian adds a bonus equal to half her barbarian level on her damage rolls.',
+  prerequisites: [
+    { type: 'level', minimum: 6 },
+    { type: 'special', description: 'lesser spire totem rage power' },
+  ],
+  source: 'pf1e-ppc-wo',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const spireTotemGreater: ClassOptionDocument = {
+  id: 'spire-totem-greater',
+  name: 'Spire Totem, Greater',
+  description:
+    'While raging, the barbarian grants all allies within 30 feet a +2 morale bonus on Will saves. Additionally, all allies within this area can roll twice and use the better result when making Will saves against fear effects.',
+  prerequisites: [
+    { type: 'level', minimum: 10 },
+    { type: 'special', description: 'spire totem rage power' },
+  ],
+  source: 'pf1e-ppc-wo',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
@@ -748,20 +734,6 @@ export const spiritTotemLesser: ClassOptionDocument = {
   rev: 1,
 };
 
-export const staggeringBlow: ClassOptionDocument = {
-  id: 'staggering-blow',
-  name: 'Staggering Blow',
-  description:
-    'Stagger opponents struck by your powerful blow attacks while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 8 },
-    { type: 'special', description: 'powerful blow rage power' },
-  ],
-  source: 'pf1e-core',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
 
 export const strengthSurge: ClassOptionDocument = {
   id: 'strength-surge',
@@ -774,20 +746,6 @@ export const strengthSurge: ClassOptionDocument = {
   rev: 1,
 };
 
-export const strengthSurgeGreater: ClassOptionDocument = {
-  id: 'strength-surge-greater',
-  name: 'Strength Surge, Greater',
-  description:
-    'Gain enhanced Strength and combat maneuver bonuses while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 6 },
-    { type: 'special', description: 'strength surge rage power' },
-  ],
-  source: 'pf1e-uc',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
 
 export const superstition: ClassOptionDocument = {
   id: 'superstition',
@@ -868,170 +826,27 @@ export const titansBane: ClassOptionDocument = {
   rev: 1,
 };
 
-export const titanicBlow: ClassOptionDocument = {
-  id: 'titanic-blow',
-  name: 'Titanic Blow',
+export const unexpectedStrike: ClassOptionDocument = {
+  id: 'unexpected-strike',
+  name: 'Unexpected Strike',
   description:
-    'Deal devastating damage with a powerful blow attack while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 12 },
-    { type: 'special', description: 'powerful blow rage power' },
-  ],
+    'The barbarian can make an attack of opportunity against a foe that moves into any square threatened by the barbarian, regardless of whether or not that movement would normally provoke an attack of opportunity. This power can only be used once per rage.',
+  prerequisites: [{ type: 'level', minimum: 8 }],
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const tocsin: ClassOptionDocument = {
-  id: 'tocsin',
-  name: 'Tocsin',
+export const witchHunter: ClassOptionDocument = {
+  id: 'witch-hunter',
+  name: 'Witch Hunter',
   description:
-    'Alert allies through ground-based vibrations created by ground breaker while raging.',
+    "While raging, the barbarian gains a +1 bonus on damage rolls against creatures possessing spells or spell-like abilities. This damage bonus increases by +1 for every four character levels attained.",
   prerequisites: [
-    { type: 'level', minimum: 8 },
-    { type: 'special', description: 'ground breaker rage power' },
-  ],
-  source: 'pf1e-uc',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const trollTotem: ClassOptionDocument = {
-  id: 'troll-totem',
-  name: 'Troll Totem',
-  description: 'Gain enhanced regeneration benefits while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 6 },
-    { type: 'special', description: 'lesser troll totem rage power' },
+    { type: 'special', description: 'superstition rage power' },
   ],
   source: 'pf1e-apg',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const trollTotemGreater: ClassOptionDocument = {
-  id: 'troll-totem-greater',
-  name: 'Troll Totem, Greater',
-  description:
-    'Regeneration applies even after taking acid or fire damage while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 10 },
-    { type: 'special', description: 'troll totem rage power' },
-  ],
-  source: 'pf1e-apg',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const trollTotemLesser: ClassOptionDocument = {
-  id: 'troll-totem-lesser',
-  name: 'Troll Totem, Lesser',
-  description:
-    'Gain fast healing 1 while raging as long as you have at least 1 hit point.',
-  source: 'pf1e-apg',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const uncontrolledRage: ClassOptionDocument = {
-  id: 'uncontrolled-rage',
-  name: 'Uncontrolled Rage',
-  description:
-    'Continue raging even when unconscious or disabled, attacking the nearest creature.',
-  prerequisites: [{ type: 'level', minimum: 12 }],
-  source: 'pf1e-apg',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const unstoppableStrike: ClassOptionDocument = {
-  id: 'unstoppable-strike',
-  name: 'Unstoppable Strike',
-  description:
-    'Ignore some damage reduction with powerful blow attacks while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 8 },
-    { type: 'special', description: 'powerful blow rage power' },
-  ],
-  source: 'pf1e-uc',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const upsettingBlow: ClassOptionDocument = {
-  id: 'upsetting-blow',
-  name: 'Upsetting Blow',
-  description:
-    'Shake opponents struck by your powerful blow attacks while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 6 },
-    { type: 'special', description: 'powerful blow rage power' },
-  ],
-  source: 'pf1e-apg',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const volcanicRage: ClassOptionDocument = {
-  id: 'volcanic-rage',
-  name: 'Volcanic Rage',
-  description:
-    'Deal fire damage and create difficult terrain from lava effects while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 12 },
-    { type: 'special', description: 'elemental rage rage power' },
-  ],
-  source: 'pf1e-apg',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const warlord: ClassOptionDocument = {
-  id: 'warlord',
-  name: 'Warlord',
-  description:
-    'Grant the benefits of reckless abandon to willing allies within 30 feet while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 6 },
-    { type: 'special', description: 'reckless abandon rage power' },
-  ],
-  source: 'pf1e-apg',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const whirlwindAssault: ClassOptionDocument = {
-  id: 'whirlwind-assault',
-  name: 'Whirlwind Assault',
-  description:
-    'Make a single melee attack against all adjacent foes as a full-round action while raging.',
-  prerequisites: [
-    { type: 'level', minimum: 8 },
-    { type: 'special', description: 'no escape rage power' },
-  ],
-  source: 'pf1e-apg',
-  isOfficial: true,
-  visibility: 'global',
-  rev: 1,
-};
-
-export const wildTalent: ClassOptionDocument = {
-  id: 'wild-talent',
-  name: 'Wild Talent',
-  description:
-    'Gain additional combat abilities or feat benefits while raging.',
-  prerequisites: [{ type: 'level', minimum: 4 }],
-  source: 'pf1e-uc',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
@@ -1077,6 +892,7 @@ export const batch_002: ClassOptionDocument[] = [
   ragingFlier,
   ragingGrappler,
   ragingLeaper,
+  ragingWhirlwind,
   ragingSwimmer,
   recklessAbandon,
   reflexiveDodge,
@@ -1084,38 +900,24 @@ export const batch_002: ClassOptionDocument[] = [
   renewedLife,
   renewedVigor,
   renewedVitality,
-  retribution,
-  reverberatingSlam,
   rollingDodge,
-  scarredScream,
+  rousedAnger,
   scent,
-  scarTissue,
-  scavenger,
-  sickeningBlows,
   smasher,
-  sonicBoom,
+  spellSunder,
+  spireTotemLesser,
+  spireTotem,
+  spireTotemGreater,
   spiritTotem,
   spiritTotemGreater,
   spiritTotemLesser,
-  staggeringBlow,
   strengthSurge,
-  strengthSurgeGreater,
   superstition,
   surpriseAccuracy,
   sweepingBlow,
   swiftFoot,
   terrifyingHowl,
   titansBane,
-  titanicBlow,
-  tocsin,
-  trollTotem,
-  trollTotemGreater,
-  trollTotemLesser,
-  uncontrolledRage,
-  unstoppableStrike,
-  upsettingBlow,
-  volcanicRage,
-  warlord,
-  whirlwindAssault,
-  wildTalent,
+  unexpectedStrike,
+  witchHunter,
 ];
