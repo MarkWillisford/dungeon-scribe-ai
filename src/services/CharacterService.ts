@@ -1,9 +1,6 @@
 import { Character } from '@/types';
-import {
-  CreateCharacterParams,
-  CharacterValidationResult,
-  AbilityScoreMethod,
-} from '@/types/character';
+import { CreateCharacterParams, CharacterValidationResult } from '@/types/character';
+import { Skill } from '@/types/skills';
 import { EncumbranceVariant } from '@/types/equipment';
 import { AbilityScores } from '@/types/abilities';
 import { Race } from '@/types/race';
@@ -105,7 +102,7 @@ export class CharacterService {
     if (params.skillRanks) {
       for (const [skillKey, ranks] of Object.entries(params.skillRanks)) {
         if (ranks > 0 && skillKey in withRace.skills) {
-          const skill = (withRace.skills as any)[skillKey];
+          const skill = withRace.skills[skillKey];
           if (skill && typeof skill === 'object' && 'ranks' in skill) {
             skill.ranks = ranks;
             withRace.skills.totalRanks += ranks;
@@ -155,12 +152,18 @@ export class CharacterService {
         Object.keys(withRace.skills)
           .filter((k) => k.startsWith('knowledge'))
           .forEach((k) => {
-            (withRace.skills as any)[k].isClassSkill = true;
+            const s = withRace.skills[k];
+            if (s && typeof s === 'object' && !Array.isArray(s)) {
+              (s as Skill).isClassSkill = true;
+            }
           });
       } else {
         const key = classSkillKeyMap[csName];
         if (key && key in withRace.skills) {
-          (withRace.skills as any)[key].isClassSkill = true;
+          const s = withRace.skills[key];
+          if (s && typeof s === 'object' && !Array.isArray(s)) {
+            (s as Skill).isClassSkill = true;
+          }
         }
       }
     }

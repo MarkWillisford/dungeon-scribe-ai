@@ -2,6 +2,7 @@ import type { Character } from '@/types';
 import type { FeatDefinition, FeatPrerequisite } from '@/types/feats';
 import type { Skills, Skill } from '@/types/skills';
 import type { AbilityScores } from '@/types/abilities';
+import { getClassByName } from '@/data/classes';
 
 export interface PrerequisiteResult {
   met: boolean;
@@ -82,16 +83,18 @@ export class PrerequisiteService {
         );
 
       case 'proficiency':
-        // Proficiencies come from class data — check weapon/armor proficiency lists
-        return character.classes.classes.some(
-          (cls) =>
-            (cls as any).weaponProficiencies?.some((p: string) =>
+        // Proficiencies live on static class data, not on the character's ClassEntry
+        return character.classes.classes.some((cls) => {
+          const classData = getClassByName(cls.name);
+          return (
+            classData?.weaponProficiencies?.some((p) =>
               p.toLowerCase().includes(prereq.proficiency.toLowerCase()),
             ) ||
-            (cls as any).armorProficiencies?.some((p: string) =>
+            classData?.armorProficiencies?.some((p) =>
               p.toLowerCase().includes(prereq.proficiency.toLowerCase()),
-            ),
-        );
+            )
+          );
+        });
 
       case 'race':
         return character.info.race.name.toLowerCase() === prereq.raceName.toLowerCase();

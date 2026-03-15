@@ -13,7 +13,7 @@ import {
 import { db } from '@config/firebase';
 import type { Character } from '@/types';
 import type { CharacterSummary } from '@/types/character';
-import type { EquipmentSlot, Equipment } from '@/types/equipment';
+import type { EquipmentSlot } from '@/types/equipment';
 
 export class FirebaseCharacterService {
   private static readonly COLLECTION = 'characters';
@@ -155,17 +155,23 @@ export class FirebaseCharacterService {
       );
     }
 
-    // Convert timestamp fields back to Date
+    // Convert timestamp fields back to Date — handles string (from JSON), Firestore Timestamp, and Date
     if (data.lastUpdated && typeof data.lastUpdated === 'string') {
       character.lastUpdated = new Date(data.lastUpdated);
-    } else if ((data.lastUpdated as any)?.toDate) {
-      character.lastUpdated = (data.lastUpdated as any).toDate();
+    } else if (
+      data.lastUpdated &&
+      typeof (data.lastUpdated as { toDate?: unknown }).toDate === 'function'
+    ) {
+      character.lastUpdated = (data.lastUpdated as { toDate(): Date }).toDate();
     }
 
     if (data.createdAt && typeof data.createdAt === 'string') {
       character.createdAt = new Date(data.createdAt);
-    } else if ((data.createdAt as any)?.toDate) {
-      character.createdAt = (data.createdAt as any).toDate();
+    } else if (
+      data.createdAt &&
+      typeof (data.createdAt as { toDate?: unknown }).toDate === 'function'
+    ) {
+      character.createdAt = (data.createdAt as { toDate(): Date }).toDate();
     }
 
     return character;

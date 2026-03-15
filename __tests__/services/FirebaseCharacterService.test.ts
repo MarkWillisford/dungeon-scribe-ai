@@ -5,18 +5,30 @@ import { Size, Alignment } from '@/types/base';
 import { AbilityScoreMethod } from '@/types/character';
 
 // Mock firebase/firestore
-jest.mock('firebase/firestore', () => ({
-  collection: jest.fn(),
-  doc: jest.fn(),
-  getDocs: jest.fn(),
-  getDoc: jest.fn(),
-  addDoc: jest.fn(),
-  updateDoc: jest.fn(),
-  deleteDoc: jest.fn(),
-  query: jest.fn(),
-  where: jest.fn(),
-  serverTimestamp: jest.fn(() => 'mock-timestamp'),
-}));
+jest.mock('firebase/firestore', () => {
+  class Timestamp {
+    constructor(
+      private _seconds: number,
+      private _nanoseconds: number,
+    ) {}
+    toDate() {
+      return new Date(this._seconds * 1000);
+    }
+  }
+  return {
+    collection: jest.fn(),
+    doc: jest.fn(),
+    getDocs: jest.fn(),
+    getDoc: jest.fn(),
+    addDoc: jest.fn(),
+    updateDoc: jest.fn(),
+    deleteDoc: jest.fn(),
+    query: jest.fn(),
+    where: jest.fn(),
+    serverTimestamp: jest.fn(() => 'mock-timestamp'),
+    Timestamp,
+  };
+});
 
 jest.mock('@config/firebase', () => ({
   db: {},

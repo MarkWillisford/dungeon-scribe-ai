@@ -1,8 +1,8 @@
 import { CharacterService } from '@/services/CharacterService';
 import { AbilityScoreService } from '@/services/AbilityScoreService';
 import { ValidationService } from '@/services/ValidationService';
-import { CORE_RACES, FLEXIBLE_ABILITY_RACES, getRaceByName } from '@/data/races';
-import { CORE_CLASSES, getClassByName } from '@/data/classes';
+import { FLEXIBLE_ABILITY_RACES, getRaceByName } from '@/data/races';
+import { getClassByName } from '@/data/classes';
 import { CreateCharacterParams, AbilityScoreMethod } from '@/types/character';
 import { Alignment, Size, BABProgression, SaveProgression } from '@/types/base';
 import { Race } from '@/types/race';

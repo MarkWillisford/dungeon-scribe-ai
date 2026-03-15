@@ -1,4 +1,3 @@
-import { BonusType } from '@/types/base';
 import type { FeatDefinition } from '@/types/feats';
 
 export const UCOMBAT_FEATS: FeatDefinition[] = [

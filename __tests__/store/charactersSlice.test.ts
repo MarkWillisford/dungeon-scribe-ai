@@ -4,7 +4,7 @@ import charactersReducer, {
   clearError,
 } from '@store/slices/charactersSlice';
 import type { Character, CharacterSummary } from '@/types';
-import { Size, Alignment, BonusType, EncumbranceVariant } from '@/types';
+import { Size, Alignment, EncumbranceVariant } from '@/types';
 
 const mockCharacterSummary: CharacterSummary = {
   id: 'char-1',

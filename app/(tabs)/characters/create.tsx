@@ -13,14 +13,13 @@ import { AbilityScoreEditor } from '@/components/character/AbilityScoreEditor';
 import { Alignment } from '@/types/base';
 import { AbilityScoreMethod } from '@/types/character';
 import { AbilityScoreService } from '@/services/AbilityScoreService';
-import { FLEXIBLE_ABILITY_RACES, type ExpandedRaceData } from '@/data/races';
+import { type ExpandedRaceData } from '@/data/races';
 import { getClassByName } from '@/data/classes';
 import type { Race } from '@/types/race';
 
 type AbilityKey = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha';
 
 const STEPS = ['Name', 'Race', 'Class', 'Abilities', 'Skills', 'Review'] as const;
-type Step = (typeof STEPS)[number];
 
 const ALIGNMENTS = Object.values(Alignment);
 
@@ -167,7 +166,7 @@ function raceDataToRace(data: ExpandedRaceData, flexibleAbility?: string): Race 
 export default function CreateCharacterScreen() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { colors, fantasy, isDark } = useTheme();
+  const { colors, fantasy } = useTheme();
   const userId = useAppSelector((state) => state.auth.user?.uid);
   const { loading } = useAppSelector((state) => state.characters);
 

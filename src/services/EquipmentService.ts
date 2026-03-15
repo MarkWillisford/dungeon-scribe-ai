@@ -1,6 +1,5 @@
 import { Character } from '@/types';
 import {
-  Equipment,
   Weapon,
   Armor,
   Shield,
@@ -10,11 +9,10 @@ import {
   EquipmentTemplate,
   EquipmentType,
   EncumbranceLevel,
-  EncumbranceSettings,
   EncumbranceVariant,
   CarryingCapacity,
 } from '@/types/equipment';
-import { Bonus, BonusType, Effect, Size } from '@/types/base';
+import { Bonus, BonusType, Effect } from '@/types/base';
 import { ValidationResult } from '@/types/validation';
 import { EquipmentDatabaseService } from '@services/EquipmentDatabaseService';
 
@@ -38,8 +36,8 @@ export class EquipmentService {
         updatedCharacter.equipment.shields.push(shield);
         break;
       case EquipmentType.MAGIC_ITEM:
-        const magicItem = EquipmentDatabaseService.createGearFromTemplate(template);
-        updatedCharacter.equipment.magicItems.push(magicItem as any);
+        const magicItem = EquipmentDatabaseService.createMagicItemFromTemplate(template);
+        updatedCharacter.equipment.magicItems.push(magicItem);
         break;
       case EquipmentType.GEAR:
         const gear = EquipmentDatabaseService.createGearFromTemplate(template);
@@ -311,12 +309,20 @@ export class EquipmentService {
     ];
 
     const item = allItems.find((i) => i.id === itemId);
-    if (item && 'equipped' in item) {
-      (item as any).equipped = equipped;
+    if (!item) return;
+    if (this.isArmor(item)) {
+      item.equipped = equipped;
+    } else if (this.isShield(item)) {
+      item.equipped = equipped;
+    } else if (this.isMagicItem(item)) {
+      item.equipped = equipped;
     }
   }
 
-  private static validateSlotCompatibility(item: any, slot: EquipmentSlot): ValidationResult {
+  private static validateSlotCompatibility(
+    item: Weapon | Armor | Shield | MagicItem | Gear,
+    slot: EquipmentSlot,
+  ): ValidationResult {
     if (this.isWeapon(item)) {
       const validWeaponSlots = [
         EquipmentSlot.MAIN_HAND,
@@ -337,7 +343,7 @@ export class EquipmentService {
 
   private static checkSlotConflicts(
     character: Character,
-    item: any,
+    item: Weapon | Armor | Shield | MagicItem | Gear,
     slot: EquipmentSlot,
   ): ValidationResult {
     const currentlyEquipped = character.equipment.equippedSlots.get(slot);
@@ -354,20 +360,24 @@ export class EquipmentService {
   }
 
   // Type Guards
-  private static isWeapon(item: any): item is Weapon {
-    return 'weaponGroup' in item;
+  private static isWeapon(item: unknown): item is Weapon {
+    return typeof item === 'object' && item !== null && 'weaponGroup' in item;
   }
 
-  private static isArmor(item: any): item is Armor {
-    return 'acBonus' in item && 'armorAbilities' in item;
+  private static isArmor(item: unknown): item is Armor {
+    return (
+      typeof item === 'object' && item !== null && 'acBonus' in item && 'armorAbilities' in item
+    );
   }
 
-  private static isShield(item: any): item is Shield {
-    return 'acBonus' in item && 'shieldAbilities' in item;
+  private static isShield(item: unknown): item is Shield {
+    return (
+      typeof item === 'object' && item !== null && 'acBonus' in item && 'shieldAbilities' in item
+    );
   }
 
-  private static isMagicItem(item: any): item is MagicItem {
-    return 'casterLevel' in item;
+  private static isMagicItem(item: unknown): item is MagicItem {
+    return typeof item === 'object' && item !== null && 'casterLevel' in item;
   }
 
   private static calculateWeaponAttackBonuses(weapon: Weapon): Bonus[] {

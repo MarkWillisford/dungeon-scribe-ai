@@ -1,4 +1,4 @@
-import { ArchetypeData, ClassFeatureData } from '../types';
+import { ArchetypeData } from '../types';
 
 export const RANGER_ARCHETYPES: ArchetypeData[] = [
   // ──────────────────────────────────────────────

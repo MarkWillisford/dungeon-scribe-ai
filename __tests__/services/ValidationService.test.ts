@@ -218,7 +218,10 @@ describe('ValidationService', () => {
     });
 
     test('should reject missing race', () => {
-      const result = ValidationService.validateRaceClassCombination(null as any, 'Fighter');
+      const result = ValidationService.validateRaceClassCombination(
+        null as unknown as Race,
+        'Fighter',
+      );
       expect(result.isValid).toBe(false);
       expect(result.errors).toContain('Race is required');
     });

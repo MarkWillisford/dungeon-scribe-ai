@@ -1,4 +1,4 @@
-import { ArchetypeData, ClassFeatureData } from '../types';
+import { ArchetypeData } from '../types';
 
 export const INQUISITOR_ARCHETYPES: ArchetypeData[] = [
   // ──────────────────────────────────────────────

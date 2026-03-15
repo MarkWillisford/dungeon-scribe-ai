@@ -2,7 +2,7 @@
 // Source: https://www.d20pfsrd.com/races/other-races/featured-races/
 
 import { Size } from '@/types/base';
-import { RaceCategory, RacePowerTier, ExpandedRaceData } from './types';
+import { ExpandedRaceData } from './types';
 
 export const FEATURED_RACES: ExpandedRaceData[] = [
   {

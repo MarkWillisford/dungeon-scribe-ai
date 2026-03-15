@@ -5,6 +5,11 @@ import {
   Armor,
   Shield,
   Gear,
+  MagicItem,
+  MagicAura,
+  AuraStrength,
+  MagicSchool,
+  EquipmentSlot,
   AmmoType,
 } from '@/types/equipment';
 import type {
@@ -14,6 +19,7 @@ import type {
   GearDefinition,
 } from '@/types/equipment';
 import { Size } from '@/types/base';
+import type { Effect } from '@/types/base';
 import { ALL_WEAPONS, ALL_ARMOR, ALL_SHIELDS, ALL_GEAR } from '@/data/equipment';
 
 export class EquipmentDatabaseService {
@@ -240,6 +246,34 @@ export class EquipmentDatabaseService {
       type: (props.type as string) || 'adventuring',
       isConsumable: (props.isConsumable as boolean) || false,
       usesRemaining: props.usesRemaining as number | undefined,
+    };
+  }
+
+  static createMagicItemFromTemplate(
+    template: EquipmentTemplate,
+    options?: { quantity?: number },
+  ): MagicItem {
+    const baseItem = this._createBaseItem(template, options?.quantity);
+    const props = template.properties;
+
+    return {
+      ...baseItem,
+      type: (props.type as string) || 'wondrous',
+      slot: (props.slot as string) || 'none',
+      equipmentSlot: props.equipmentSlot as EquipmentSlot | undefined,
+      aura: (props.aura as string) || '',
+      magicAura: (props.magicAura as MagicAura) || {
+        strength: AuraStrength.FAINT,
+        school: MagicSchool.TRANSMUTATION,
+      },
+      casterLevel: (props.casterLevel as number) || 1,
+      activationType: (props.activationType as string) || 'passive',
+      requirements: (props.requirements as string[]) || [],
+      effects: (props.effects as Effect[]) || [],
+      continuousEffects: (props.continuousEffects as Effect[]) || [],
+      activatedEffects: (props.activatedEffects as Effect[]) || [],
+      equipped: false,
+      active: false,
     };
   }
 

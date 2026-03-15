@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '../../helpers/testUtils';
+import { render, type RenderedNode } from '../../helpers/testUtils';
 import { HPTracker } from '@/components/combat/HPTracker';
 
 function makeProps(overrides = {}) {
@@ -64,9 +64,7 @@ describe('HPTracker', () => {
     const onAdjustHP = jest.fn();
     const { tree } = render(<HPTracker {...makeProps({ onAdjustHP })} />);
     // Find the Pressable by accessibilityLabel to avoid substring ambiguity
-    const { findAllNodes } = require('../../helpers/testUtils');
-    // Use tree to find Pressable with accessibilityLabel "Take 1 damage"
-    function findByLabel(node: any, label: string): any {
+    function findByLabel(node: RenderedNode, label: string): RenderedNode | null {
       if (node.props?.accessibilityLabel === label) return node;
       for (const child of node.children ?? []) {
         if (typeof child !== 'string') {
@@ -85,7 +83,7 @@ describe('HPTracker', () => {
   it('quick heal button calls onAdjustHP with heal amount', () => {
     const onAdjustHP = jest.fn();
     const { tree } = render(<HPTracker {...makeProps({ onAdjustHP })} />);
-    function findByLabel(node: any, label: string): any {
+    function findByLabel(node: RenderedNode, label: string): RenderedNode | null {
       if (node.props?.accessibilityLabel === label) return node;
       for (const child of node.children ?? []) {
         if (typeof child !== 'string') {

@@ -5,7 +5,6 @@ import { Size, Alignment } from '@/types/base';
 import { AbilityScoreMethod } from '@/types/character';
 import type { Character } from '@/types';
 import type { FeatDefinition } from '@/types/feats';
-import { BonusType } from '@/types/base';
 import type { Race } from '@/types/race';
 
 const mockRace: Race = {

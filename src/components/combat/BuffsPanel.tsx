@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, TextInput, ScrollView, Modal } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { Buff, SavedBuff } from '@/types/buff';
+import { BonusType } from '@/types/base';
 
 const makeTimestamp = () => Date.now();
 
@@ -26,11 +27,11 @@ const CATEGORY_COLORS: Record<string, string> = {
 export function BuffsPanel({
   activeBuffs,
   buffLibrary,
-  round,
+  round: _round,
   onAddBuff,
   onRemoveBuff,
   onToggleBuff,
-  onSaveToLibrary,
+  onSaveToLibrary: _onSaveToLibrary,
   testID,
 }: BuffsPanelProps) {
   const { colors, fantasy } = useTheme();
@@ -64,7 +65,7 @@ export function BuffsPanel({
       id: `custom_${Date.now()}`,
       name,
       source: 'Custom',
-      bonusType: 'untyped' as any,
+      bonusType: BonusType.UNTYPED,
       duration: isNaN(dur) || dur <= 0 ? null : dur,
       durationType: isNaN(dur) || dur <= 0 ? 'permanent' : 'rounds',
       effects: [],

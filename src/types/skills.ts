@@ -1,4 +1,5 @@
 export interface Skills {
+  [key: string]: Skill | NamedSkill[] | number;
   acrobatics: Skill;
   appraise: Skill;
   bluff: Skill;

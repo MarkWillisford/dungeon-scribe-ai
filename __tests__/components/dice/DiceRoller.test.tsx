@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, fireEvent } from '../../helpers/testUtils';
+import { render, type RenderedNode } from '../../helpers/testUtils';
 import { DiceRoller } from '@/components/dice/DiceRoller';
 
-function findByLabel(node: any, label: string): any {
+function findByLabel(node: RenderedNode, label: string): RenderedNode | null {
   if (node.props?.accessibilityLabel === label) return node;
   for (const child of node.children ?? []) {
     if (typeof child !== 'string') {
