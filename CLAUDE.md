@@ -55,3 +55,4 @@ e2e/           — Maestro E2E tests
 - Run `npm run typecheck` before committing
 - Pre-commit hooks enforce lint + format via Husky + lint-staged
 - Never include `Co-Authored-By: Claude` in commit messages
+- Never include `🤖 Generated with [Claude Code](https://claude.com/claude-code)` in PR descriptions or any other output
