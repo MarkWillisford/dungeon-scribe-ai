@@ -291,7 +291,12 @@ Include these verbatim in every plan, then append collection-specific rules belo
    (see URL strategy above). Only emit a `PAGE_FETCH_FAILED` stub if both attempts fail.
    Log the entry name and both attempted URLs in the checkpoint comment.
 9. Run `npm run typecheck` before reporting done. Fix all type errors.
-10. [Collection-specific rules follow]
+10. **Response text must be brief.** Write all data to the file via the Write tool.
+    Your final text response must contain only a short summary: entry count, first name,
+    last name, and stub count. Do NOT reproduce file contents, spell descriptions, or
+    entry data in your response text. Doing so causes a fatal 32,000-token output error
+    that destroys all collected data.
+11. [Collection-specific rules follow]
 
 ---
 

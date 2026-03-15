@@ -1,7 +1,8 @@
 import type { Spell } from '@/types/spells';
 
 export const UNIVERSAL_SPELLS: Spell[] = [
-  {
+  // ─── Pre-existing content ────────────────────────────────────────────────────
+{
     name: 'Arcane Mark',
     classLevels: {
       arcanist: 0,
@@ -169,5 +170,27 @@ export const UNIVERSAL_SPELLS: Spell[] = [
       "• Undo a single recent event. The wish forces a reroll of any roll made within the last round (including your last turn). Reality reshapes itself to accommodate the new result. For example, a wish could undo an opponent's successful save, a foe's successful critical hit, or a friend's failed save. The reroll, however, may be as bad as or worse than the original roll. An unwilling target (such as an opponent who is the target of a harmful spell) can attempt a Will save to resist the wish and keep the original result.\n\n" +
       'A duplicated spell allows saving throws and spell resistance as normal (but the save DC is for a 9th-level spell). When a wish duplicates a spell with a material component that costs more than 10,000 gp, you must provide that component.',
     source: 'Core Rulebook',
+  },
+
+  // ─── batch_001 ─────────────────────────────────────────────────────────────
+// No additional universal spells exist beyond those already in universalSpells.ts.
+  // d20pfsrd explicitly states the complete universal spell list is:
+  // arcane mark, limited wish, permanency, prestidigitation, and wish —
+  // all five of which are already present in src/data/spells/universalSpells.ts.,
+
+  // ─── batch_gap_C_1 ─────────────────────────────────────────────────────────────
+{
+    name: 'Collaborative Thaumaturgy',
+    classLevels: { bard: 3, cleric: 3, druid: 3, magus: 3, summoner: 3, 'sorcerer/wizard': 3, witch: 3 },
+    school: 'Universal',
+    components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'bronze tuning fork', divine: false },
+    castingTime: '1 immediate action',
+    range: 'Close (25 ft. + 5 ft./2 levels)',
+    target: 'One creature',
+    duration: 'Instantaneous',
+    savingThrow: 'None',
+    spellResistance: 'None',
+    description: 'This spell allows a caster to apply one metamagic effect (Enlarge, Extend, Silent, or Still Spell) to an ally\'s spell without increasing its level or casting time. Multiple castings enable stronger effects: two applications allow Empower Spell, while three allow Maximize or Widen Spell.',
+    source: 'Pathfinder Society Primer',
   },
 ];
