@@ -1,9 +1,7 @@
 // Batch 002 | first: 'Hurling, Greater' | last: 'Wild Talent' | count: 80
 // Source: https://www.d20pfsrd.com/classes/core-classes/barbarian/rage-powers/
 // RagePowerDocument = ClassOptionDocument — using base type directly
-// Note: Moon Totem (all variants) and Spirit Totem (all variants) are marked
-// PAGE_FETCH_FAILED — the source page content was truncated during extraction.
-// URL attempted: https://www.d20pfsrd.com/classes/core-classes/barbarian/rage-powers/
+// Note: Moon Totem and Spirit Totem descriptions filled in from individual subpages.
 
 import { ClassOptionDocument } from '@/types/classOptions';
 
@@ -287,14 +285,11 @@ export const momentOfClarity: ClassOptionDocument = {
   rev: 1,
 };
 
-// PAGE_FETCH_FAILED entries — descriptions unavailable due to page truncation on extraction.
-// Source: https://www.d20pfsrd.com/classes/core-classes/barbarian/rage-powers/
-
 export const moonTotemGreater: ClassOptionDocument = {
   id: 'moon-totem-greater',
   name: 'Moon Totem, Greater',
   description:
-    'PAGE_FETCH_FAILED: Description unavailable — page content was truncated during extraction. See https://www.d20pfsrd.com/classes/core-classes/barbarian/rage-powers/',
+    'While raging, the barbarian ignores the miss chance for concealment and treats total concealment as concealment.',
   prerequisites: [
     { type: 'level', minimum: 10 },
     { type: 'special', description: 'moon totem rage power' },
@@ -309,7 +304,7 @@ export const moonTotemLesser: ClassOptionDocument = {
   id: 'moon-totem-lesser',
   name: 'Moon Totem, Lesser',
   description:
-    'PAGE_FETCH_FAILED: Description unavailable — page content was truncated during extraction. See https://www.d20pfsrd.com/classes/core-classes/barbarian/rage-powers/',
+    'While raging, the barbarian gains darkvision with a range of 30 feet. If the barbarian already has darkvision, the range of her darkvision increases by 30 feet while she is raging.',
   source: 'pf1e-ppc-wo',
   isOfficial: true,
   visibility: 'global',
@@ -320,7 +315,7 @@ export const moonTotem: ClassOptionDocument = {
   id: 'moon-totem',
   name: 'Moon Totem',
   description:
-    'PAGE_FETCH_FAILED: Description unavailable — page content was truncated during extraction. See https://www.d20pfsrd.com/classes/core-classes/barbarian/rage-powers/',
+    'While raging, the barbarian gains a bonus equal to half her character level on Perception checks to locate unseen creatures. Additionally, unseen attackers receive no attack bonus against the barbarian while she is raging.',
   prerequisites: [
     { type: 'level', minimum: 6 },
     { type: 'special', description: 'lesser moon totem rage power' },
@@ -712,13 +707,11 @@ export const sonicBoom: ClassOptionDocument = {
   rev: 1,
 };
 
-// PAGE_FETCH_FAILED entries — descriptions unavailable due to page truncation on extraction.
-
 export const spiritTotem: ClassOptionDocument = {
   id: 'spirit-totem',
   name: 'Spirit Totem',
   description:
-    'PAGE_FETCH_FAILED: Description unavailable — page content was truncated during extraction. See https://www.d20pfsrd.com/classes/core-classes/barbarian/rage-powers/',
+    'While raging, the barbarian is surrounded by a protective barrier of spirits. Enemies suffer a 20% miss chance on ranged attacks and melee attacks made by creatures that are not adjacent to the barbarian (typically those using reach).',
   prerequisites: [
     { type: 'level', minimum: 6 },
     { type: 'special', description: 'lesser spirit totem rage power' },
@@ -733,7 +726,7 @@ export const spiritTotemGreater: ClassOptionDocument = {
   id: 'spirit-totem-greater',
   name: 'Spirit Totem, Greater',
   description:
-    'PAGE_FETCH_FAILED: Description unavailable — page content was truncated during extraction. See https://www.d20pfsrd.com/classes/core-classes/barbarian/rage-powers/',
+    'While raging, the spirit wisps surrounding the barbarian grow more powerful. At the start of the barbarian\'s turn, each living enemy adjacent to the barbarian takes 1d8 points of negative energy damage. In addition, the spirits\' slam attacks now reach out to 15 feet, dealing 1d6 points of negative energy damage.',
   prerequisites: [
     { type: 'level', minimum: 10 },
     { type: 'special', description: 'spirit totem rage power' },
@@ -748,7 +741,7 @@ export const spiritTotemLesser: ClassOptionDocument = {
   id: 'spirit-totem-lesser',
   name: 'Spirit Totem, Lesser',
   description:
-    'PAGE_FETCH_FAILED: Description unavailable — page content was truncated during extraction. See https://www.d20pfsrd.com/classes/core-classes/barbarian/rage-powers/',
+    'While raging, the barbarian is surrounded by spirit wisps that harass her enemies. These spirits make one slam attack per round against each living enemy adjacent to the barbarian, using the barbarian\'s full base attack bonus plus her Charisma modifier. Each attack deals 1d4 points of negative energy damage plus the barbarian\'s Charisma modifier.',
   source: 'pf1e-ppc-wo',
   isOfficial: true,
   visibility: 'global',
