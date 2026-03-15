@@ -481,14 +481,27 @@ export const saint: TemplateDefinition = {
 
 ---
 
+## CURRENT STATUS (as of 2026-03-14)
+
+### Collection — COMPLETE
+
+492 templates collected across 20 batch files. `index.ts` barrel export and `scripts/db/seedTemplates.ts` seed script written. Zero type errors.
+
+**Remaining steps:**
+
+- [ ] Seed to staging: `npx tsx scripts/db/seedTemplates.ts`
+- [ ] Verify in Firestore console, then seed to prod
+
+---
+
 ## Execution Checklist
 
-- [ ] Write `src/data/templates/types.ts`
-- [ ] Hand-author 4 sample docs, verify `npm run typecheck` passes
-- [ ] Fetch index page, extract full URL list, divide into 25-entry batches
-- [ ] Round 1: launch 4–5 agents in parallel (batches 001–005)
-- [ ] Round 2: launch next 4–5 agents (batches 006–010)
-- [ ] ... repeat until all batches done (~22 batches total, ~5 rounds)
-- [ ] Combine all `raw/templates_batch_NNN.ts` into `src/data/templates/index.ts`
-- [ ] Write `scripts/db/seedTemplates.ts`
-- [ ] Final `npm run typecheck` — zero errors
+- [x] Write `src/data/templates/types.ts`
+- [x] Hand-author 4 sample docs, verify `npm run typecheck` passes
+- [x] Fetch index page, extract full URL list, divide into 25-entry batches
+- [x] Round 1: launch 4–5 agents in parallel (batches 001–005)
+- [x] Round 2: launch next 4–5 agents (batches 006–010)
+- [x] ... repeat until all batches done (20 batches, 492 templates)
+- [x] Combine all `raw/templates_batch_NNN.ts` into `src/data/templates/index.ts`
+- [x] Write `scripts/db/seedTemplates.ts`
+- [x] Final `npm run typecheck` — zero errors

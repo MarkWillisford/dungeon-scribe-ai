@@ -677,6 +677,8 @@ Firestore collection: `classChoiceDefinitions/{id}`. Key types: `ClassChoiceDefi
 
 #### 3d. Implementation Queue
 
+- [x] Collect all ~2,500 PF1e spells into `src/data/spells/` (9 school files, batch + gap fill strategy) + `scripts/db/seedSpells.ts` — COMPLETE (2026-03-14)
+- [x] Collect ~492 PF1e templates into `src/data/templates/` (20 raw batch files) + `src/data/templates/index.ts` + `scripts/db/seedTemplates.ts` — COMPLETE (2026-03-14)
 - [x] Write `ClassChoiceDefinition` TypeScript type + add to `src/types/` — `classChoices.ts` (trimmed) + `classOptions.ts` (9 collection interfaces) + `deities.ts` — `291b6c3`
 - [x] Write class choices design plan — `plans/data-scraping/class-choices-database.md` — `MW/plans-reorg`
 - [x] Write scraping agent prompt — `plans/scraping-agent-prompt.md` — `MW/plans-reorg`
