@@ -17,7 +17,7 @@
 
 import * as admin from 'firebase-admin';
 import { ALL_RAGE_POWERS } from '../../src/data/ragePowers/index';
-import type { ClassOptionDocument } from '../../src/types/classOptions';
+import type { ClassOptionBase } from '../../src/types/classOptions';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -50,7 +50,7 @@ function chunkArray<T>(arr: T[], size: number): T[][] {
   return chunks;
 }
 
-async function seedRagePowers(powers: ClassOptionDocument[]): Promise<void> {
+async function seedRagePowers(powers: ClassOptionBase[]): Promise<void> {
   console.log(`\nSeeding ${powers.length} rage powers to project: ${PROJECT_ID}`);
 
   const bySource: Record<string, number> = {};

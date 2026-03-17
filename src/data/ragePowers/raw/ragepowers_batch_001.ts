@@ -1,10 +1,10 @@
 // Batch 001 | first: 'Ancestor Totem, Greater' | last: 'Hive Totem Toxicity' | count: 83
 // Source: https://www.d20pfsrd.com/classes/core-classes/barbarian/rage-powers/
-// RagePowerDocument = ClassOptionDocument — using base type directly
+// RagePowerDocument = ClassOptionBase — using base type directly
 
-import { ClassOptionDocument } from '@/types/classOptions';
+import { ClassOptionBase } from '@/types/classOptions';
 
-export const ancestorTotemGreater: ClassOptionDocument = {
+export const ancestorTotemGreater: ClassOptionBase = {
   id: 'ancestor-totem-greater',
   name: 'Ancestor Totem, Greater',
   description:
@@ -19,7 +19,7 @@ export const ancestorTotemGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const ancestorTotemLesser: ClassOptionDocument = {
+export const ancestorTotemLesser: ClassOptionBase = {
   id: 'ancestor-totem-lesser',
   name: 'Ancestor Totem, Lesser',
   description:
@@ -30,7 +30,7 @@ export const ancestorTotemLesser: ClassOptionDocument = {
   rev: 1,
 };
 
-export const ancestorTotem: ClassOptionDocument = {
+export const ancestorTotem: ClassOptionBase = {
   id: 'ancestor-totem',
   name: 'Ancestor Totem',
   description:
@@ -45,7 +45,7 @@ export const ancestorTotem: ClassOptionDocument = {
   rev: 1,
 };
 
-export const animalFury: ClassOptionDocument = {
+export const animalFury: ClassOptionBase = {
   id: 'animal-fury',
   name: 'Animal Fury',
   description: 'Gain a bite attack while raging.',
@@ -55,7 +55,7 @@ export const animalFury: ClassOptionDocument = {
   rev: 1,
 };
 
-export const armorRipper: ClassOptionDocument = {
+export const armorRipper: ClassOptionBase = {
   id: 'armor-ripper',
   name: 'Armor Ripper',
   description:
@@ -66,7 +66,7 @@ export const armorRipper: ClassOptionDocument = {
   rev: 1,
 };
 
-export const atavismTotemGreater: ClassOptionDocument = {
+export const atavismTotemGreater: ClassOptionBase = {
   id: 'atavism-totem-greater',
   name: 'Atavism Totem, Greater',
   description: 'You gain the trample ability.',
@@ -80,7 +80,7 @@ export const atavismTotemGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const atavismTotemLesser: ClassOptionDocument = {
+export const atavismTotemLesser: ClassOptionBase = {
   id: 'atavism-totem-lesser',
   name: 'Atavism Totem, Lesser',
   description:
@@ -91,7 +91,7 @@ export const atavismTotemLesser: ClassOptionDocument = {
   rev: 1,
 };
 
-export const atavismTotem: ClassOptionDocument = {
+export const atavismTotem: ClassOptionBase = {
   id: 'atavism-totem',
   name: 'Atavism Totem',
   description: 'You gain the ferocity ability.',
@@ -105,7 +105,7 @@ export const atavismTotem: ClassOptionDocument = {
   rev: 1,
 };
 
-export const auspiciousMark: ClassOptionDocument = {
+export const auspiciousMark: ClassOptionBase = {
   id: 'auspicious-mark',
   name: 'Auspicious Mark',
   description: 'Gain a bonus on a roll once per rage.',
@@ -115,7 +115,7 @@ export const auspiciousMark: ClassOptionDocument = {
   rev: 1,
 };
 
-export const battleRoar: ClassOptionDocument = {
+export const battleRoar: ClassOptionBase = {
   id: 'battle-roar',
   name: 'Battle Roar',
   description:
@@ -130,7 +130,7 @@ export const battleRoar: ClassOptionDocument = {
   rev: 1,
 };
 
-export const beastTotemGreater: ClassOptionDocument = {
+export const beastTotemGreater: ClassOptionBase = {
   id: 'beast-totem-greater',
   name: 'Beast Totem, Greater',
   description: 'Gain a pounce attack while raging.',
@@ -144,7 +144,7 @@ export const beastTotemGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const beastTotemLesser: ClassOptionDocument = {
+export const beastTotemLesser: ClassOptionBase = {
   id: 'beast-totem-lesser',
   name: 'Beast Totem, Lesser',
   description: 'Gain two claw attacks while raging.',
@@ -154,7 +154,7 @@ export const beastTotemLesser: ClassOptionDocument = {
   rev: 1,
 };
 
-export const beastTotem: ClassOptionDocument = {
+export const beastTotem: ClassOptionBase = {
   id: 'beast-totem',
   name: 'Beast Totem',
   description: 'Gain a natural armor bonus while raging.',
@@ -168,7 +168,7 @@ export const beastTotem: ClassOptionDocument = {
   rev: 1,
 };
 
-export const bestialClimber: ClassOptionDocument = {
+export const bestialClimber: ClassOptionBase = {
   id: 'bestial-climber',
   name: 'Bestial Climber',
   description: 'Climb at your normal land speed while raging.',
@@ -182,7 +182,7 @@ export const bestialClimber: ClassOptionDocument = {
   rev: 1,
 };
 
-export const bestialLeaper: ClassOptionDocument = {
+export const bestialLeaper: ClassOptionBase = {
   id: 'bestial-leaper',
   name: 'Bestial Leaper',
   description: 'Take a standard action while moving during a rage.',
@@ -196,7 +196,7 @@ export const bestialLeaper: ClassOptionDocument = {
   rev: 1,
 };
 
-export const bestialSwimmer: ClassOptionDocument = {
+export const bestialSwimmer: ClassOptionBase = {
   id: 'bestial-swimmer',
   name: 'Bestial Swimmer',
   description: 'Swim at your normal land speed while raging.',
@@ -210,7 +210,7 @@ export const bestialSwimmer: ClassOptionDocument = {
   rev: 1,
 };
 
-export const bleedingBlow: ClassOptionDocument = {
+export const bleedingBlow: ClassOptionBase = {
   id: 'bleeding-blow',
   name: 'Bleeding Blow',
   description: 'Deal bleed damage with your powerful blows.',
@@ -224,7 +224,7 @@ export const bleedingBlow: ClassOptionDocument = {
   rev: 1,
 };
 
-export const bloodyBite: ClassOptionDocument = {
+export const bloodyBite: ClassOptionBase = {
   id: 'bloody-bite',
   name: 'Bloody Bite',
   description:
@@ -242,7 +242,7 @@ export const bloodyBite: ClassOptionDocument = {
   rev: 1,
 };
 
-export const bloodyFist: ClassOptionDocument = {
+export const bloodyFist: ClassOptionBase = {
   id: 'bloody-fist',
   name: 'Bloody Fist',
   description:
@@ -254,7 +254,7 @@ export const bloodyFist: ClassOptionDocument = {
   rev: 1,
 };
 
-export const boarsCharge: ClassOptionDocument = {
+export const boarsCharge: ClassOptionBase = {
   id: 'boars-charge',
   name: "Boar's Charge",
   description:
@@ -266,7 +266,7 @@ export const boarsCharge: ClassOptionDocument = {
   rev: 1,
 };
 
-export const boastingTaunt: ClassOptionDocument = {
+export const boastingTaunt: ClassOptionBase = {
   id: 'boasting-taunt',
   name: 'Boasting Taunt',
   description: 'Force an enemy to attack the barbarian.',
@@ -277,7 +277,7 @@ export const boastingTaunt: ClassOptionDocument = {
   rev: 1,
 };
 
-export const bodyBludgeon: ClassOptionDocument = {
+export const bodyBludgeon: ClassOptionBase = {
   id: 'body-bludgeon',
   name: 'Body Bludgeon',
   description: 'Beat a foe with another creature.',
@@ -288,7 +288,7 @@ export const bodyBludgeon: ClassOptionDocument = {
   rev: 1,
 };
 
-export const brawler: ClassOptionDocument = {
+export const brawler: ClassOptionBase = {
   id: 'brawler',
   name: 'Brawler',
   description: 'Gain Improved Unarmed Strike while raging.',
@@ -298,7 +298,7 @@ export const brawler: ClassOptionDocument = {
   rev: 1,
 };
 
-export const brawlerGreater: ClassOptionDocument = {
+export const brawlerGreater: ClassOptionBase = {
   id: 'brawler-greater',
   name: 'Brawler, Greater',
   description: 'Gain Two-Weapon Fighting while raging.',
@@ -309,7 +309,7 @@ export const brawlerGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const breathtaker: ClassOptionDocument = {
+export const breathtaker: ClassOptionBase = {
   id: 'breathtaker',
   name: 'Breathtaker',
   description:
@@ -320,7 +320,7 @@ export const breathtaker: ClassOptionDocument = {
   rev: 1,
 };
 
-export const celestialTotemGreater: ClassOptionDocument = {
+export const celestialTotemGreater: ClassOptionBase = {
   id: 'celestial-totem-greater',
   name: 'Celestial Totem, Greater',
   description:
@@ -335,7 +335,7 @@ export const celestialTotemGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const celestialTotemLesser: ClassOptionDocument = {
+export const celestialTotemLesser: ClassOptionBase = {
   id: 'celestial-totem-lesser',
   name: 'Celestial Totem, Lesser',
   description:
@@ -346,7 +346,7 @@ export const celestialTotemLesser: ClassOptionDocument = {
   rev: 1,
 };
 
-export const celestialTotem: ClassOptionDocument = {
+export const celestialTotem: ClassOptionBase = {
   id: 'celestial-totem',
   name: 'Celestial Totem',
   description:
@@ -361,7 +361,7 @@ export const celestialTotem: ClassOptionDocument = {
   rev: 1,
 };
 
-export const chaosTotemGreater: ClassOptionDocument = {
+export const chaosTotemGreater: ClassOptionBase = {
   id: 'chaos-totem-greater',
   name: 'Chaos Totem, Greater',
   description: 'Gain DR/lawful and weapons count as chaotic while raging.',
@@ -375,7 +375,7 @@ export const chaosTotemGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const chaosTotemLesser: ClassOptionDocument = {
+export const chaosTotemLesser: ClassOptionBase = {
   id: 'chaos-totem-lesser',
   name: 'Chaos Totem, Lesser',
   description:
@@ -386,7 +386,7 @@ export const chaosTotemLesser: ClassOptionDocument = {
   rev: 1,
 };
 
-export const chaosTotem: ClassOptionDocument = {
+export const chaosTotem: ClassOptionBase = {
   id: 'chaos-totem',
   name: 'Chaos Totem',
   description:
@@ -401,7 +401,7 @@ export const chaosTotem: ClassOptionDocument = {
   rev: 1,
 };
 
-export const clearMind: ClassOptionDocument = {
+export const clearMind: ClassOptionBase = {
   id: 'clear-mind',
   name: 'Clear Mind',
   description: 'Reroll a failed Will save once per rage.',
@@ -412,7 +412,7 @@ export const clearMind: ClassOptionDocument = {
   rev: 1,
 };
 
-export const comeAndGetMe: ClassOptionDocument = {
+export const comeAndGetMe: ClassOptionBase = {
   id: 'come-and-get-me',
   name: 'Come and Get Me',
   description:
@@ -424,7 +424,7 @@ export const comeAndGetMe: ClassOptionDocument = {
   rev: 1,
 };
 
-export const cripplingBlow: ClassOptionDocument = {
+export const cripplingBlow: ClassOptionBase = {
   id: 'crippling-blow',
   name: 'Crippling Blow',
   description:
@@ -439,7 +439,7 @@ export const cripplingBlow: ClassOptionDocument = {
   rev: 1,
 };
 
-export const cultTotemGreater: ClassOptionDocument = {
+export const cultTotemGreater: ClassOptionBase = {
   id: 'cult-totem-greater',
   name: 'Cult Totem, Greater',
   description:
@@ -455,7 +455,7 @@ export const cultTotemGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const cultTotemLesser: ClassOptionDocument = {
+export const cultTotemLesser: ClassOptionBase = {
   id: 'cult-totem-lesser',
   name: 'Cult Totem, Lesser',
   description:
@@ -466,7 +466,7 @@ export const cultTotemLesser: ClassOptionDocument = {
   rev: 1,
 };
 
-export const cultTotem: ClassOptionDocument = {
+export const cultTotem: ClassOptionBase = {
   id: 'cult-totem',
   name: 'Cult Totem',
   description:
@@ -481,7 +481,7 @@ export const cultTotem: ClassOptionDocument = {
   rev: 1,
 };
 
-export const daemonTotemGreater: ClassOptionDocument = {
+export const daemonTotemGreater: ClassOptionBase = {
   id: 'daemon-totem-greater',
   name: 'Daemon Totem, Greater',
   description:
@@ -497,7 +497,7 @@ export const daemonTotemGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const daemonTotemLesser: ClassOptionDocument = {
+export const daemonTotemLesser: ClassOptionBase = {
   id: 'daemon-totem-lesser',
   name: 'Daemon Totem, Lesser',
   description:
@@ -508,7 +508,7 @@ export const daemonTotemLesser: ClassOptionDocument = {
   rev: 1,
 };
 
-export const daemonTotem: ClassOptionDocument = {
+export const daemonTotem: ClassOptionBase = {
   id: 'daemon-totem',
   name: 'Daemon Totem',
   description:
@@ -523,7 +523,7 @@ export const daemonTotem: ClassOptionDocument = {
   rev: 1,
 };
 
-export const deadlyAccuracy: ClassOptionDocument = {
+export const deadlyAccuracy: ClassOptionBase = {
   id: 'deadly-accuracy',
   name: 'Deadly Accuracy',
   description:
@@ -538,7 +538,7 @@ export const deadlyAccuracy: ClassOptionDocument = {
   rev: 1,
 };
 
-export const deathlessFrenzy: ClassOptionDocument = {
+export const deathlessFrenzy: ClassOptionBase = {
   id: 'deathless-frenzy',
   name: 'Deathless Frenzy',
   description:
@@ -550,7 +550,7 @@ export const deathlessFrenzy: ClassOptionDocument = {
   rev: 1,
 };
 
-export const disembowellingTusks: ClassOptionDocument = {
+export const disembowellingTusks: ClassOptionBase = {
   id: 'disemboweling-tusks',
   name: 'Disemboweling Tusks',
   description:
@@ -562,7 +562,7 @@ export const disembowellingTusks: ClassOptionDocument = {
   rev: 1,
 };
 
-export const disruptive: ClassOptionDocument = {
+export const disruptive: ClassOptionBase = {
   id: 'disruptive',
   name: 'Disruptive',
   description: 'Gain the Disruptive feat as a bonus feat while raging.',
@@ -576,7 +576,7 @@ export const disruptive: ClassOptionDocument = {
   rev: 1,
 };
 
-export const dragonTotem: ClassOptionDocument = {
+export const dragonTotem: ClassOptionBase = {
   id: 'dragon-totem',
   name: 'Dragon Totem',
   description: 'Gain bonuses while raging based on a chosen dragon type.',
@@ -591,7 +591,7 @@ export const dragonTotem: ClassOptionDocument = {
   rev: 1,
 };
 
-export const dragonTotemResilience: ClassOptionDocument = {
+export const dragonTotemResilience: ClassOptionBase = {
   id: 'dragon-totem-resilience',
   name: 'Dragon Totem Resilience',
   description: 'Gain energy resistance while raging.',
@@ -605,7 +605,7 @@ export const dragonTotemResilience: ClassOptionDocument = {
   rev: 1,
 };
 
-export const dragonTotemWings: ClassOptionDocument = {
+export const dragonTotemWings: ClassOptionBase = {
   id: 'dragon-totem-wings',
   name: 'Dragon Totem Wings',
   description: 'Gain wings and a fly speed while raging.',
@@ -620,7 +620,7 @@ export const dragonTotemWings: ClassOptionDocument = {
   rev: 1,
 };
 
-export const eaterOfMagic: ClassOptionDocument = {
+export const eaterOfMagic: ClassOptionBase = {
   id: 'eater-of-magic',
   name: 'Eater of Magic',
   description:
@@ -635,7 +635,7 @@ export const eaterOfMagic: ClassOptionDocument = {
   rev: 1,
 };
 
-export const elementalRageGreater: ClassOptionDocument = {
+export const elementalRageGreater: ClassOptionBase = {
   id: 'elemental-rage-greater',
   name: 'Elemental Rage, Greater',
   description:
@@ -650,7 +650,7 @@ export const elementalRageGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const elementalRageLesser: ClassOptionDocument = {
+export const elementalRageLesser: ClassOptionBase = {
   id: 'elemental-rage-lesser',
   name: 'Elemental Rage, Lesser',
   description:
@@ -662,7 +662,7 @@ export const elementalRageLesser: ClassOptionDocument = {
   rev: 1,
 };
 
-export const elementalRage: ClassOptionDocument = {
+export const elementalRage: ClassOptionBase = {
   id: 'elemental-rage',
   name: 'Elemental Rage',
   description:
@@ -677,7 +677,7 @@ export const elementalRage: ClassOptionDocument = {
   rev: 1,
 };
 
-export const energyAbsorption: ClassOptionDocument = {
+export const energyAbsorption: ClassOptionBase = {
   id: 'energy-absorption',
   name: 'Energy Absorption',
   description:
@@ -692,7 +692,7 @@ export const energyAbsorption: ClassOptionDocument = {
   rev: 1,
 };
 
-export const energyEruption: ClassOptionDocument = {
+export const energyEruption: ClassOptionBase = {
   id: 'energy-eruption',
   name: 'Energy Eruption',
   description:
@@ -707,7 +707,7 @@ export const energyEruption: ClassOptionDocument = {
   rev: 1,
 };
 
-export const energyResistanceGreater: ClassOptionDocument = {
+export const energyResistanceGreater: ClassOptionBase = {
   id: 'energy-resistance-greater',
   name: 'Energy Resistance, Greater',
   description:
@@ -722,7 +722,7 @@ export const energyResistanceGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const energyResistance: ClassOptionDocument = {
+export const energyResistance: ClassOptionBase = {
   id: 'energy-resistance',
   name: 'Energy Resistance',
   description:
@@ -733,7 +733,7 @@ export const energyResistance: ClassOptionDocument = {
   rev: 1,
 };
 
-export const fearlessRage: ClassOptionDocument = {
+export const fearlessRage: ClassOptionBase = {
   id: 'fearless-rage',
   name: 'Fearless Rage',
   description:
@@ -745,7 +745,7 @@ export const fearlessRage: ClassOptionDocument = {
   rev: 1,
 };
 
-export const feastingBite: ClassOptionDocument = {
+export const feastingBite: ClassOptionBase = {
   id: 'feasting-bite',
   name: 'Feasting Bite',
   description:
@@ -764,7 +764,7 @@ export const feastingBite: ClassOptionDocument = {
   rev: 1,
 };
 
-export const feastOfBlood: ClassOptionDocument = {
+export const feastOfBlood: ClassOptionBase = {
   id: 'feast-of-blood',
   name: 'Feast of Blood',
   description:
@@ -779,7 +779,7 @@ export const feastOfBlood: ClassOptionDocument = {
   rev: 1,
 };
 
-export const ferociousBeast: ClassOptionDocument = {
+export const ferociousBeast: ClassOptionBase = {
   id: 'ferocious-beast',
   name: 'Ferocious Beast',
   description:
@@ -790,7 +790,7 @@ export const ferociousBeast: ClassOptionDocument = {
   rev: 1,
 };
 
-export const ferociousBeastGreater: ClassOptionDocument = {
+export const ferociousBeastGreater: ClassOptionBase = {
   id: 'ferocious-beast-greater',
   name: 'Ferocious Beast, Greater',
   description:
@@ -805,7 +805,7 @@ export const ferociousBeastGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const ferociousMount: ClassOptionDocument = {
+export const ferociousMount: ClassOptionBase = {
   id: 'ferocious-mount',
   name: 'Ferocious Mount',
   description: 'Allow your mount to rage as well.',
@@ -815,7 +815,7 @@ export const ferociousMount: ClassOptionDocument = {
   rev: 1,
 };
 
-export const ferociousMountGreater: ClassOptionDocument = {
+export const ferociousMountGreater: ClassOptionBase = {
   id: 'ferocious-mount-greater',
   name: 'Ferocious Mount, Greater',
   description: 'Allow your mount to benefit from rage powers while raging.',
@@ -829,7 +829,7 @@ export const ferociousMountGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const ferociousTramplee: ClassOptionDocument = {
+export const ferociousTramplee: ClassOptionBase = {
   id: 'ferocious-trample',
   name: 'Ferocious Trample',
   description: 'While raging your mount gains the trample ability.',
@@ -843,7 +843,7 @@ export const ferociousTramplee: ClassOptionDocument = {
   rev: 1,
 };
 
-export const ferociousTrampleGreater: ClassOptionDocument = {
+export const ferociousTrampleGreater: ClassOptionBase = {
   id: 'ferocious-trample-greater',
   name: 'Ferocious Trample, Greater',
   description:
@@ -858,7 +858,7 @@ export const ferociousTrampleGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const fiendTotem: ClassOptionDocument = {
+export const fiendTotem: ClassOptionBase = {
   id: 'fiend-totem',
   name: 'Fiend Totem',
   description:
@@ -873,7 +873,7 @@ export const fiendTotem: ClassOptionDocument = {
   rev: 1,
 };
 
-export const fiendTotemGreater: ClassOptionDocument = {
+export const fiendTotemGreater: ClassOptionBase = {
   id: 'fiend-totem-greater',
   name: 'Fiend Totem, Greater',
   description:
@@ -888,7 +888,7 @@ export const fiendTotemGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const fiendTotemLesser: ClassOptionDocument = {
+export const fiendTotemLesser: ClassOptionBase = {
   id: 'fiend-totem-lesser',
   name: 'Fiend Totem, Lesser',
   description: 'Gain a gore attack while raging.',
@@ -898,7 +898,7 @@ export const fiendTotemLesser: ClassOptionDocument = {
   rev: 1,
 };
 
-export const fierceFortitude: ClassOptionDocument = {
+export const fierceFortitude: ClassOptionBase = {
   id: 'fierce-fortitude',
   name: 'Fierce Fortitude',
   description:
@@ -910,7 +910,7 @@ export const fierceFortitude: ClassOptionDocument = {
   rev: 1,
 };
 
-export const fightResponse: ClassOptionDocument = {
+export const fightResponse: ClassOptionBase = {
   id: 'fight-response',
   name: 'Fight Response',
   description:
@@ -921,7 +921,7 @@ export const fightResponse: ClassOptionDocument = {
   rev: 1,
 };
 
-export const fleshWound: ClassOptionDocument = {
+export const fleshWound: ClassOptionBase = {
   id: 'flesh-wound',
   name: 'Flesh Wound',
   description: 'Convert lethal damage to nonlethal damage while raging.',
@@ -932,7 +932,7 @@ export const fleshWound: ClassOptionDocument = {
   rev: 1,
 };
 
-export const fueledByVengeance: ClassOptionDocument = {
+export const fueledByVengeance: ClassOptionBase = {
   id: 'fueled-by-vengeance',
   name: 'Fueled by Vengeance',
   description:
@@ -944,7 +944,7 @@ export const fueledByVengeance: ClassOptionDocument = {
   rev: 1,
 };
 
-export const gearbreaker: ClassOptionDocument = {
+export const gearbreaker: ClassOptionBase = {
   id: 'gearbreaker',
   name: 'Gearbreaker',
   description:
@@ -956,7 +956,7 @@ export const gearbreaker: ClassOptionDocument = {
   rev: 1,
 };
 
-export const ghostRager: ClassOptionDocument = {
+export const ghostRager: ClassOptionBase = {
   id: 'ghost-rager',
   name: 'Ghost Rager',
   description: 'Deal normal damage to incorporeal creatures while raging.',
@@ -970,7 +970,7 @@ export const ghostRager: ClassOptionDocument = {
   rev: 1,
 };
 
-export const goodForWhatAilsYou: ClassOptionDocument = {
+export const goodForWhatAilsYou: ClassOptionBase = {
   id: 'good-for-what-ails-you',
   name: 'Good for What Ails You',
   description:
@@ -981,7 +981,7 @@ export const goodForWhatAilsYou: ClassOptionDocument = {
   rev: 1,
 };
 
-export const greaterAnimalFury: ClassOptionDocument = {
+export const greaterAnimalFury: ClassOptionBase = {
   id: 'greater-animal-fury',
   name: 'Greater Animal Fury',
   description:
@@ -995,7 +995,7 @@ export const greaterAnimalFury: ClassOptionDocument = {
   rev: 1,
 };
 
-export const groundBreaker: ClassOptionDocument = {
+export const groundBreaker: ClassOptionBase = {
   id: 'ground-breaker',
   name: 'Ground Breaker',
   description:
@@ -1007,7 +1007,7 @@ export const groundBreaker: ClassOptionDocument = {
   rev: 1,
 };
 
-export const groundBreakerGreater: ClassOptionDocument = {
+export const groundBreakerGreater: ClassOptionBase = {
   id: 'ground-breaker-greater',
   name: 'Ground Breaker, Greater',
   description:
@@ -1022,7 +1022,7 @@ export const groundBreakerGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const guardedLife: ClassOptionDocument = {
+export const guardedLife: ClassOptionBase = {
   id: 'guarded-life',
   name: 'Guarded Life',
   description:
@@ -1033,7 +1033,7 @@ export const guardedLife: ClassOptionDocument = {
   rev: 1,
 };
 
-export const guardedLifeGreater: ClassOptionDocument = {
+export const guardedLifeGreater: ClassOptionBase = {
   id: 'guarded-life-greater',
   name: 'Guarded Life, Greater',
   description:
@@ -1048,7 +1048,7 @@ export const guardedLifeGreater: ClassOptionDocument = {
   rev: 1,
 };
 
-export const guardedStance: ClassOptionDocument = {
+export const guardedStance: ClassOptionBase = {
   id: 'guarded-stance',
   name: 'Guarded Stance',
   description:
@@ -1059,7 +1059,7 @@ export const guardedStance: ClassOptionDocument = {
   rev: 1,
 };
 
-export const hiveTotem: ClassOptionDocument = {
+export const hiveTotem: ClassOptionBase = {
   id: 'hive-totem',
   name: 'Hive Totem',
   description: 'Take half damage from swarms while raging.',
@@ -1073,7 +1073,7 @@ export const hiveTotem: ClassOptionDocument = {
   rev: 1,
 };
 
-export const hiveTotemResilience: ClassOptionDocument = {
+export const hiveTotemResilience: ClassOptionBase = {
   id: 'hive-totem-resilience',
   name: 'Hive Totem Resilience',
   description: 'Take no damage from swarms while raging.',
@@ -1087,7 +1087,7 @@ export const hiveTotemResilience: ClassOptionDocument = {
   rev: 1,
 };
 
-export const hiveTotemToxicity: ClassOptionDocument = {
+export const hiveTotemToxicity: ClassOptionBase = {
   id: 'hive-totem-toxicity',
   name: 'Hive Totem Toxicity',
   description:
@@ -1103,7 +1103,7 @@ export const hiveTotemToxicity: ClassOptionDocument = {
   rev: 1,
 };
 
-export const batch_001: ClassOptionDocument[] = [
+export const batch_001: ClassOptionBase[] = [
   ancestorTotemGreater,
   ancestorTotemLesser,
   ancestorTotem,
