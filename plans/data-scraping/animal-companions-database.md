@@ -108,38 +108,81 @@ scripts/db/
 
 ## Source & URL Pattern
 
-**Index page:** https://www.d20pfsrd.com/classes/core-classes/druid/animal-companions/
+**Primary source: Archives of Nethys — one page per companion (reliable)**
 
-All companion entries may be listed inline on the index page (with anchor links) or may
-link to individual subpages. Check the index page structure before dividing batches:
+```
+https://aonprd.com/DruidCompanions.aspx?ItemName={Name}&Category={Category}
+```
 
-- If entries are **inline**: all agents fetch the same source page URL. Each agent is
-  assigned a named range of entries (alphabetical or by type section) and extracts only
-  those entries from the full page.
-- If entries **link to subpages**: treat each subpage URL as an individual entry URL, same
-  as the domains pattern. The orchestrating Claude determines this at run time.
+Category options: `Animal`, `Monstrous`, `Plant`, `Vermin`
 
-**Stop condition:** The d20pfsrd page clearly separates official Paizo content from
-3rd-party content. When agents encounter the 3rd-party section heading, they stop and
-note the boundary in the checkpoint comment.
+This mirrors the per-entry approach used for spells (each spell has its own d20pfsrd page).
+AONPRD individual pages return clean, accurate data without truncation.
 
-**Fallback URL construction:** For inline pages, no URL fallback is needed — all entries are
-on the same page. If a subpage link fails, try constructing the URL from the companion name
-using kebab-case slug: `https://www.d20pfsrd.com/classes/core-classes/druid/animal-companions/{slug}/`.
+**Why not d20pfsrd?** d20pfsrd places ALL animal companions inline on a single enormous page
+(`/classes/core-classes/druid/animal-companions/`). The WebFetch tool truncates this page
+and synthesizes missing data, leading to errors. There are no individual subpages on d20pfsrd.
+
+**Index / discovery:** `https://aonprd.com/DruidCompanions.aspx?ItemName=All&Category=Animal`
+This returns the full companion list sorted alphabetically, including all types mixed together.
+
+**d20pfsrd fallback:** If an AONPRD page fails, search for the entry by name within the
+d20pfsrd index page as a last resort. Only use for stubs if both sources fail.
+
+**Stop condition:** AONPRD only lists official Paizo content — no 3pp section to worry about.
 
 ---
 
 ## Agent Batch Plan
 
-~200 entries ÷ 25 per batch = **~8 batches → 2 rounds of 4 agents**.
+**Status as of 2026-03-16:** All 8 batches committed and pushed to `MW/animalcompanions-scraping`.
+~220 entries total. Remaining work: fix 17 PAGE_FETCH_FAILED stubs (see stub fix list below).
 
-| Round | Batches | Approximate Content                                                              |
-| ----- | ------- | -------------------------------------------------------------------------------- |
-| 1     | 001–004 | Standard Animals A–L (~100 entries)                                              |
-| 2     | 005–008 | Standard Animals M–Z + Aberrations + Accursed + Magical Beasts + Plants + Vermin |
+**Agent prompt template:** `scripts/animal-companions/AGENT_PROMPT_TEMPLATE.md`
 
-_If total count is lower (closer to 120–150), adjust to fewer batches. Exact batch boundaries
-set by the orchestrating Claude after fetching the index page and counting entries._
+### Batch status
+
+| Batch | Entries                                          | Count | Status                        |
+| ----- | ------------------------------------------------ | ----- | ----------------------------- |
+| 001   | Allosaurus – Bustard                             | 25    | ✅ Done (1 stub: Bustard)      |
+| 002   | Camel – Elasmotherium                            | 25    | ✅ Done (3 stubs: see below)   |
+| 003   | Elephant/Mastodon – Hippocampus                  | 24    | ✅ Done (0 stubs)              |
+| 004   | Hippogriff – Megaloceros                         | 25    | ✅ Done (0 stubs)              |
+| 005   | Megatherium – Quetzalcoatlus                     | 25    | ✅ Done (1 stub: Puma)         |
+| 006   | Ram – Tortoise                                   | 21    | ✅ Done (4 stubs: see below)   |
+| 007   | Trilobite Giant – Zebra (T–Z tail + Dire Rat/Dragonfly) | 22 | ✅ Done (12 stubs: see below) |
+| 008   | Anglerfish – Dire Polar Bear (missed A–E)        | 25    | ✅ Done (0 stubs)              |
+
+### Outstanding PAGE_FETCH_FAILED stubs (17 total)
+
+These entries have placeholder data and need to be fixed by fetching their AONPRD page:
+
+**Batch 001:**
+- Bustard
+
+**Batch 002:**
+- Cattle, Deer (Ringhorn), Devil Monkey
+
+**Batch 005:**
+- Puma (AONPRD page is JS-rendered; try d20pfsrd or another source)
+
+**Batch 006:**
+- Seal, Sheep, Squirrel, Stag Beetle
+
+**Batch 007 (all JS-rendered on AONPRD):**
+- Trilobite (Giant), Trout, Tuatara (Giant), Turkey, Turtle, Uintaceratops,
+  Unicorn, Ursine Charger, Viper (Giant), Whale Shark, Wombat (Giant),
+  Woodpecker (Giant), Wyvern Skeletal
+
+**Stub fix approach:** Fetch each entry's AONPRD page. If JS-rendered (no data), try
+d20pfsrd inline page search, then Nethys wikis, then mark as permanently unresolvable.
+Edit the specific batch file and replace the PAGE_FETCH_FAILED block with real data.
+
+### Data quality note (batches 001–002)
+
+Batches 001–002 were sourced from d20pfsrd's inline page. Some stats may be inaccurate
+due to WebFetch truncation/synthesis. When data quality issues are found, fix them by
+fetching the AONPRD individual page for that entry and correcting the values.
 
 ---
 
@@ -347,12 +390,21 @@ like DM-added 3.5e creatures):
 
 ## Execution Checklist
 
-- [ ] Fetch https://www.d20pfsrd.com/classes/core-classes/druid/animal-companions/ to determine
-      whether entries are inline or subpages; count total official entries
-- [ ] Divide into batches of 25; assign batch numbers; identify 3pp section boundary
-- [ ] Round 1: launch 4 background agents (batches 001–004)
-- [ ] Round 2: launch 4 background agents (batches 005–008)
-- [ ] Combine all `raw/animalcompanions_batch_NNN.ts` into `src/data/animalCompanions/index.ts`
-- [ ] `npm run typecheck` — zero errors
-- [ ] Write `scripts/db/seedAnimalCompanions.ts`
+- [x] Create `src/types/animalCompanions.ts`
+- [x] Batch 001: Allosaurus–Bustard (25 entries, d20pfsrd-sourced)
+- [x] Batch 002: Camel–Elasmotherium (25 entries, d20pfsrd-sourced)
+- [x] Create `src/data/animalCompanions/index.ts` (batches 001–002)
+- [x] Write `scripts/db/seedAnimalCompanions.ts` (ready, not run)
+- [x] Create `scripts/animal-companions/AGENT_PROMPT_TEMPLATE.md` (AONPRD-based)
+- [x] Batch 003: Elephant/Mastodon–Hippocampus (AONPRD, 24 entries)
+- [x] Batch 004: Hippogriff–Megaloceros (AONPRD, 25 entries)
+- [x] Batch 005: Megatherium–Quetzalcoatlus (AONPRD, 25 entries)
+- [x] Batch 006: Ram–Tortoise (AONPRD, 21 entries after dedup)
+- [x] Batch 007: T–Z tail + Dire Rat/Dragonfly (22 entries, 12 stubs)
+- [x] Batch 008: Missed A–E entries from AONPRD (25 entries, 0 stubs)
+- [x] Update `src/data/animalCompanions/index.ts` with all 8 batches (~220 entries)
+- [x] `npm run typecheck` — zero errors in data files
+- [x] Commit and push `MW/animalcompanions-scraping`
+- [ ] **Fix 17 PAGE_FETCH_FAILED stubs** (see stub list above)
 - [ ] Final `npm run typecheck` — zero errors
+- [ ] Seed staging Firestore: `npx tsx scripts/db/seedAnimalCompanions.ts --dry-run` then without flag
