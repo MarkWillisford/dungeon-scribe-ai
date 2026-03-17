@@ -5,6 +5,9 @@ import { OrnateTab } from '@/components/ui/OrnateTab';
 import { CharacterEntryHeader } from './CharacterEntryHeader';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setActiveTab, type EntryTabKey, type TabStatus } from '@/store/slices/characterEntrySlice';
+import { IdentitySection } from './IdentitySection';
+import { AbilityScoreEntryPanel } from './AbilityScoreEntryPanel';
+import { LevelIncrementSlots } from './LevelIncrementSlots';
 
 // ---- Tab definitions ----
 
@@ -131,7 +134,16 @@ export function CharacterEntryScreen() {
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
       >
-        <PlaceholderSection tab={activeTab} />
+        {activeTab === 'identity' && <IdentitySection />}
+        {activeTab === 'abilities' && (
+          <>
+            <AbilityScoreEntryPanel />
+            <LevelIncrementSlots />
+          </>
+        )}
+        {activeTab !== 'identity' && activeTab !== 'abilities' && (
+          <PlaceholderSection tab={activeTab} />
+        )}
       </ScrollView>
 
       {/* Floating validation FAB */}
