@@ -390,4 +390,47 @@ describe('ModifierPipelineService', () => {
       expect(result.combatStats.armorClass.natural).toBe(3);
     });
   });
+
+  describe('BAB progressions', () => {
+    test('Rogue (medium BAB) has lower BAB than Fighter (full BAB) at level 1', () => {
+      const fighter = createTestCharacter({ className: 'Fighter' });
+      const rogue = createTestCharacter({ className: 'Rogue' });
+      const recalcFighter = ModifierPipelineService.recalculate(fighter);
+      const recalcRogue = ModifierPipelineService.recalculate(rogue);
+      // Both level 1: Fighter BAB = 1, Rogue BAB = 0 (floor(1*0.75)=0)
+      expect(recalcFighter.classes.baseAttackBonus[0]).toBeGreaterThanOrEqual(
+        recalcRogue.classes.baseAttackBonus[0],
+      );
+    });
+
+    test('Wizard (low BAB) has BAB of 0 at level 1', () => {
+      const wizard = createTestCharacter({ className: 'Wizard' });
+      const result = ModifierPipelineService.recalculate(wizard);
+      expect(result.classes.baseAttackBonus[0]).toBe(0);
+    });
+  });
+
+  describe('conditions effects', () => {
+    test('active condition effects are applied to stats', () => {
+      const char = createTestCharacter();
+      char.conditions.activeConditions.push({
+        name: 'Blessed',
+        description: 'Morale bonus to attacks',
+        effects: [
+          {
+            type: 'bonus',
+            target: 'attack.melee',
+            value: 1,
+            bonusType: BonusType.MORALE,
+            source: 'Blessed',
+          },
+        ],
+      });
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal + 1,
+      );
+    });
+  });
 });

@@ -1,5 +1,29 @@
-import authReducer, { setUser, clearError } from '@store/slices/authSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer, {
+  login,
+  signup,
+  googleLogin,
+  logout,
+  resetPassword,
+  setUser,
+  clearError,
+} from '@store/slices/authSlice';
 import type { AppUser } from '@/types/auth';
+import { FirebaseAuthService } from '@/services/FirebaseAuthService';
+
+jest.mock('@/services/FirebaseAuthService', () => ({
+  FirebaseAuthService: {
+    login: jest.fn(),
+    signUp: jest.fn(),
+    googleLogin: jest.fn(),
+    logout: jest.fn(),
+    resetPassword: jest.fn(),
+  },
+}));
+
+function makeAuthStore() {
+  return configureStore({ reducer: { auth: authReducer } });
+}
 
 const mockUser: AppUser = {
   uid: 'test-uid-123',
@@ -167,6 +191,142 @@ describe('authSlice', () => {
       });
       expect(state.loading).toBe(false);
       expect(state.error).toBe('User not found');
+    });
+
+    it('should set error on signup rejected', () => {
+      const loadingState = { ...initialState, loading: true };
+      const state = authReducer(loadingState, {
+        type: 'auth/signup/rejected',
+        payload: 'Email already in use',
+      });
+      expect(state.loading).toBe(false);
+      expect(state.error).toBe('Email already in use');
+    });
+
+    it('should set error on googleLogin rejected', () => {
+      const loadingState = { ...initialState, loading: true };
+      const state = authReducer(loadingState, {
+        type: 'auth/googleLogin/rejected',
+        payload: 'Google sign-in failed',
+      });
+      expect(state.loading).toBe(false);
+      expect(state.error).toBe('Google sign-in failed');
+    });
+  });
+
+  describe('async thunk execution', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('login succeeds - sets user in store', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.login as jest.Mock).mockResolvedValue(mockUser);
+      await store.dispatch(login({ email: 'test@example.com', password: 'pass' }));
+      const state = store.getState().auth;
+      expect(state.user).toEqual(mockUser);
+      expect(state.isAuthenticated).toBe(true);
+      expect(state.loading).toBe(false);
+    });
+
+    it('login fails with Error - sets error.message', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.login as jest.Mock).mockRejectedValue(new Error('Bad credentials'));
+      await store.dispatch(login({ email: 'x@x.com', password: 'bad' }));
+      expect(store.getState().auth.error).toBe('Bad credentials');
+    });
+
+    it('login fails with non-Error - uses fallback message', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.login as jest.Mock).mockRejectedValue('string error');
+      await store.dispatch(login({ email: 'x@x.com', password: 'bad' }));
+      expect(store.getState().auth.error).toBe('Login failed');
+    });
+
+    it('signup succeeds - sets user in store', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.signUp as jest.Mock).mockResolvedValue(mockUser);
+      await store.dispatch(signup({ email: 'new@example.com', password: 'pass', displayName: 'New' }));
+      expect(store.getState().auth.user).toEqual(mockUser);
+    });
+
+    it('signup fails with Error - sets error.message', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.signUp as jest.Mock).mockRejectedValue(new Error('Email in use'));
+      await store.dispatch(signup({ email: 'x@x.com', password: 'p', displayName: 'X' }));
+      expect(store.getState().auth.error).toBe('Email in use');
+    });
+
+    it('signup fails with non-Error - uses fallback message', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.signUp as jest.Mock).mockRejectedValue('unknown');
+      await store.dispatch(signup({ email: 'x@x.com', password: 'p', displayName: 'X' }));
+      expect(store.getState().auth.error).toBe('Signup failed');
+    });
+
+    it('googleLogin succeeds - sets user in store', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.googleLogin as jest.Mock).mockResolvedValue(mockUser);
+      await store.dispatch(googleLogin('google-id-token'));
+      expect(store.getState().auth.user).toEqual(mockUser);
+    });
+
+    it('googleLogin fails with Error - sets error.message', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.googleLogin as jest.Mock).mockRejectedValue(new Error('Google failed'));
+      await store.dispatch(googleLogin('bad-token'));
+      expect(store.getState().auth.error).toBe('Google failed');
+    });
+
+    it('googleLogin fails with non-Error - uses fallback message', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.googleLogin as jest.Mock).mockRejectedValue('token invalid');
+      await store.dispatch(googleLogin('bad-token'));
+      expect(store.getState().auth.error).toBe('Google login failed');
+    });
+
+    it('logout succeeds - clears user', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.logout as jest.Mock).mockResolvedValue(undefined);
+      store.dispatch(setUser(mockUser));
+      await store.dispatch(logout());
+      expect(store.getState().auth.user).toBeNull();
+    });
+
+    it('logout fails with Error - sets error.message', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.logout as jest.Mock).mockRejectedValue(new Error('Network error'));
+      await store.dispatch(logout());
+      expect(store.getState().auth.error).toBe('Network error');
+    });
+
+    it('logout fails with non-Error - uses fallback message', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.logout as jest.Mock).mockRejectedValue('network down');
+      await store.dispatch(logout());
+      expect(store.getState().auth.error).toBe('Logout failed');
+    });
+
+    it('resetPassword succeeds - clears loading', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.resetPassword as jest.Mock).mockResolvedValue(undefined);
+      await store.dispatch(resetPassword('test@example.com'));
+      expect(store.getState().auth.loading).toBe(false);
+      expect(store.getState().auth.error).toBeNull();
+    });
+
+    it('resetPassword fails with Error - sets error.message', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.resetPassword as jest.Mock).mockRejectedValue(new Error('User not found'));
+      await store.dispatch(resetPassword('unknown@example.com'));
+      expect(store.getState().auth.error).toBe('User not found');
+    });
+
+    it('resetPassword fails with non-Error - uses fallback message', async () => {
+      const store = makeAuthStore();
+      (FirebaseAuthService.resetPassword as jest.Mock).mockRejectedValue('bad request');
+      await store.dispatch(resetPassword('test@example.com'));
+      expect(store.getState().auth.error).toBe('Password reset failed');
     });
   });
 });

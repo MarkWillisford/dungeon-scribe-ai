@@ -321,3 +321,88 @@ describe('EquipmentService', () => {
     });
   });
 });
+
+describe('EquipmentDatabaseService', () => {
+  beforeAll(() => {
+    EquipmentDatabaseService.initialize();
+  });
+
+  describe('getEquipmentByCategory', () => {
+    it('returns weapons for category "weapons"', () => {
+      const weapons = EquipmentDatabaseService.getEquipmentByCategory('weapons');
+      expect(weapons.length).toBeGreaterThan(0);
+      expect(weapons.every((w) => w.category === 'Weapons')).toBe(true);
+    });
+
+    it('returns armor for category "armor"', () => {
+      const armor = EquipmentDatabaseService.getEquipmentByCategory('armor');
+      expect(armor.length).toBeGreaterThan(0);
+      expect(armor.every((a) => a.category === 'Armor')).toBe(true);
+    });
+
+    it('returns shields for category "shields"', () => {
+      const shields = EquipmentDatabaseService.getEquipmentByCategory('shields');
+      expect(shields.length).toBeGreaterThan(0);
+    });
+
+    it('returns gear for category "gear"', () => {
+      const gear = EquipmentDatabaseService.getEquipmentByCategory('gear');
+      expect(gear.length).toBeGreaterThan(0);
+    });
+
+    it('returns empty array for unknown category', () => {
+      const result = EquipmentDatabaseService.getEquipmentByCategory('potions');
+      expect(result).toHaveLength(0);
+    });
+  });
+
+  describe('searchEquipment', () => {
+    it('returns all items when query is empty', () => {
+      const all = EquipmentDatabaseService.getAllEquipment();
+      const results = EquipmentDatabaseService.searchEquipment('');
+      expect(results.length).toBe(all.length);
+    });
+
+    it('filters by name query', () => {
+      const results = EquipmentDatabaseService.searchEquipment('longsword');
+      expect(results.length).toBeGreaterThan(0);
+      expect(results.some((r) => r.name.toLowerCase().includes('longsword'))).toBe(true);
+    });
+
+    it('filters by category', () => {
+      const results = EquipmentDatabaseService.searchEquipment('', { category: 'Armor' });
+      expect(results.every((r) => r.category === 'Armor')).toBe(true);
+    });
+
+    it('filters by subcategory', () => {
+      const results = EquipmentDatabaseService.searchEquipment('', {
+        subcategory: 'Light Armor',
+      });
+      expect(results.every((r) => r.subcategory === 'Light Armor')).toBe(true);
+    });
+
+    it('filters by source', () => {
+      const all = EquipmentDatabaseService.getAllEquipment();
+      const firstSource = all[0].source;
+      const results = EquipmentDatabaseService.searchEquipment('', { source: firstSource });
+      expect(results.every((r) => r.source.toLowerCase() === firstSource.toLowerCase())).toBe(true);
+    });
+
+    it('filters by maxPrice', () => {
+      const results = EquipmentDatabaseService.searchEquipment('', { maxPrice: 5 });
+      expect(results.every((r) => r.basePrice <= 5)).toBe(true);
+    });
+
+    it('filters by maxWeight', () => {
+      const results = EquipmentDatabaseService.searchEquipment('', { maxWeight: 5 });
+      expect(results.every((r) => r.baseWeight <= 5)).toBe(true);
+    });
+
+    it('returns results sorted by name', () => {
+      const results = EquipmentDatabaseService.searchEquipment('');
+      const names = results.map((r) => r.name);
+      const sorted = [...names].sort((a, b) => a.localeCompare(b));
+      expect(names).toEqual(sorted);
+    });
+  });
+});

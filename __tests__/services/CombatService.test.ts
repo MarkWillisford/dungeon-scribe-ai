@@ -483,3 +483,49 @@ describe('CombatService.calculateRageEndHPAdjustment', () => {
     expect(result.newCurrentHP).toBe(-1);
   });
 });
+
+// ----------------------------------------------------------------
+// calculateSkill
+// ----------------------------------------------------------------
+
+describe('CombatService.calculateSkill', () => {
+  it('returns a numeric total for a valid skill key', () => {
+    const fighter = makeFighter();
+    const result = CombatService.calculateSkill(fighter, [], 'acrobatics');
+    expect(typeof result.total).toBe('number');
+    expect(Array.isArray(result.breakdown)).toBe(true);
+  });
+
+  it('returns 0 for an unknown skill key', () => {
+    const fighter = makeFighter();
+    const result = CombatService.calculateSkill(fighter, [], 'nonexistent_skill');
+    expect(result.total).toBe(0);
+  });
+});
+
+// ----------------------------------------------------------------
+// isDying / isDead
+// ----------------------------------------------------------------
+
+describe('CombatService.isDying', () => {
+  it('returns true when HP is negative', () => {
+    expect(CombatService.isDying(-1)).toBe(true);
+  });
+
+  it('returns false when HP is zero or positive', () => {
+    expect(CombatService.isDying(0)).toBe(false);
+    expect(CombatService.isDying(5)).toBe(false);
+  });
+});
+
+describe('CombatService.isDead', () => {
+  it('returns true when HP is at or below negative CON score', () => {
+    expect(CombatService.isDead(-14, 14)).toBe(true);
+    expect(CombatService.isDead(-20, 14)).toBe(true);
+  });
+
+  it('returns false when HP is above negative CON score', () => {
+    expect(CombatService.isDead(-13, 14)).toBe(false);
+    expect(CombatService.isDead(0, 14)).toBe(false);
+  });
+});
