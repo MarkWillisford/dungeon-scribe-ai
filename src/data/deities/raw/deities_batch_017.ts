@@ -1,0 +1,374 @@
+// Batch 017 | first: 'Andirifkhu' | last: 'Haagenti' | count: 10
+import { DeityEntry } from '@/types/deities';
+
+export const andirifkhu: DeityEntry = {
+  id: 'andirifkhu',
+  name: 'Andirifkhu',
+  title: 'The Razor Princess',
+  alignment: 'CE',
+  portfolio: `Knives, illusions, traps`,
+  domains: ['chaos', 'evil', 'luck', 'trickery'],
+  subdomains: ['curse', 'deception', 'chaos-demon', 'evil-demon', 'thievery'],
+  favoredWeapon: 'Kukri',
+  allowedClericAlignments: ['CN', 'NE', 'CE'],
+  symbol: `Skull pierced by six blades`,
+  sacredAnimal: `Spider`,
+  sacredColors: ['green', 'red'],
+  boons: {
+    obedienceRequirement: `Torture a living creature that is smaller than your size category on a mechanical device that utilizes blades or spikes, or torture a bound creature of any size with a knife. The creature must remain alive for the duration, and must die within 1 minute of the obedience’s end. Gain a +4 profane bonus on saves against illusions and a +4 profane bonus to AC against traps that inflict slashing damage.`,
+    evangelist: [
+    { tier: 1, description: `1: Alter Perception (Sp) silent image 3/day, mirror image 2/day, or invisibility sphere 1/day` },
+    { tier: 2, description: `2: Subtle Razor (Ex) You gain sneak attack +2d6; this stacks with any sneak attack damage you can already deal from class levels and other sources. In addition, whenever you deal sneak attack damage, you can have all damage dealt by the attack become nonlethal damage. If you deal nonlethal damage this way to a creature that is unaware of your presence, the creature is unaware it has been attacked or has taken damage (instead experiencing a sense of unexplained weariness or weakness).` },
+    { tier: 3, description: `3: Unreal Legion (Su) Once per day, you can create three illusory copies of yourself. These copies are semireal; each uses your saving throws, has an Armor Class equal to your touch AC, and has hit points equal to one-quarter your maximum hit points. The copies move as you mentally direct them (a free action) and can be instructed to attack, although they always miss (the copies can provide flanking, however). When you cast a spell or use an ability, you can have the copies appear to cast that spell or use that ability simultaneously; if the effect has an obvious point of origin, you can have it appear to originate from all copies simultaneously. As an immediate action, you can switch places with one of the copies. If a copy is ever more than 60 feet from you, leaves your line of sight, or is reduced to 0 hit points, it immediately ceases to exist; otherwise, the copies last 24 hours or until you use this ability again, whichever comes first.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Sadist’s Trick (Sp) magic weapon 3/day, phantom trap 2/day, or snare 1/day` },
+    { tier: 2, description: `2: Deeper Cuts (Ex) When you damage a creature with a slashing weapon or an effect that deals slashing damage, you can also deal 5 points of bleed damage.` },
+    { tier: 3, description: `3: Andirifkhu’s Kiss (Sp) Once per day, you can cast empowered blade barrier as a spell-like ability. You are immune to the effects of this blade barrier.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Princess’s Blade (Sp) unerring weapon 3/day, spiritual weapon 2/day, or twilight knife 1/day` },
+    { tier: 2, description: `2: One of Ten Thousand Deaths (Sp) You can summon the murderous creations of Andirifkhu’s realm to the mortal world. Three times per day as a full-round action, you can conjure a trap into being in a square or squares within 30 feet. The trap must have a CR equal to or less than half your Hit Dice, and the environment must be able to support it (for example, a falling block trap must have a ceiling to fall from). The appropriate triggers for the trap, such as pressure plates or divination spells, are added to the environment in the fashion of your choosing. A trap conjured this way vanishes after 24 hours, when it is disabled, or after it is triggered and its effects have been resolved.` },
+    { tier: 3, description: `3: Killing Machine (Su) Once per day as a full-round action, you can transform yourself into a trap. The trap must have a CR equal to or less than your total Hit Dice (maximum CR 20), and the environment must be able to support your new form. When your trap form is triggered, or when a creature attempts to disable your trap form, you can instantaneously return to your normal form (appearing in the square or squares targeted by your trap form). This occurs after the trap has finished triggering and its effects are resolved (if appropriate), and it causes a surprise round in which only you and those who were aware of your true nature may act. This transformation otherwise lasts for 24 hours or until you dismiss it as a full-round action. This is a polymorph effect.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const angazhan: DeityEntry = {
+  id: 'angazhan',
+  name: 'Angazhan',
+  title: 'The Ravenous King',
+  alignment: 'CE',
+  portfolio: `Apes, jungles, tyrants`,
+  domains: ['animal', 'chaos', 'evil', 'plant'],
+  subdomains: ['decay', 'chaos-demon', 'evil-demon', 'fur', 'growth'],
+  favoredWeapon: 'Spear',
+  allowedClericAlignments: ['CN', 'NE', 'CE'],
+  symbol: `Demonic ape face`,
+  sacredAnimal: `Ape`,
+  sacredColors: ['black', 'red'],
+  boons: {
+    obedienceRequirement: `Ingest hallucinogenic jungle plants and then beat a complex rhythm on a large drum made of human skin and bones while chanting prayers to Angazhan. Gain a +4 profane bonus on saves against disease and poison caused by exposure to the jungle or creatures native to jungles.`,
+    evangelist: [
+    { tier: 1, description: `1: The Jungle Consumes (Sp) pass without trace 3/day, tree shape 2/day, or spike growth 1/day` },
+    { tier: 2, description: `2: Canopy Crawler (Ex) Your feet become prehensile, making you adept at brachiating, and you can move unseen through the trees with ease. You gain a climb speed equal to your base speed + 10 feet, and you can attempt a Climb check in place of an Acrobatics check to leap or swing between branches or trees. As long as your feet are available (magical footwear reshapes to permit use, but mundane shoes do not), you can perform climbing-related activities without needing to use your hands, and you don’t lose your Dexterity bonus to AC or your ability to use a shield while climbing. In addition, you can attempt a Climb check in place of a Stealth check while in the trees and can do so at full speed without taking penalties. You can also attempt a Climb check in place of a Stealth check while sniping from the trees, reducing the penalty for sniping by 10. You can execute somatic spell components and carry objects with your feet, though you can’t wield weapons or shields with them.` },
+    { tier: 3, description: `3: One With The Jungle (Su) You tap into the collective consciousness of the jungle’s life, from mighty trees to tiny gnats, granting you perfect awareness of all that transpires in your vicinity. While in the jungle, you gain blindsight to a range of 60 feet, you gain a +2 insight bonus to AC and on saving throws, and you are never flat-footed or surprised. You ignore cover and concealment caused by natural features of the jungle, as the very plants and stones twist out of the path of your attacks and spells.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Jungle’s Wrath (Sp) entangle 3/day, bull’s strength 2/day, or summon monster III (1 fiendish ape, 1d3 fiendish advanced baboons, or 1d4+1 fiendish baboons) 1/day` },
+    { tier: 2, description: `2: Summon Child of Angazhan (Sp) Once per day as a swift action, you can summon an advanced fiendish girallon, 1d3 advanced fiendish dire apes, or 1d4+1 advanced fiendish apes as if you had cast summon monster VI.` },
+    { tier: 3, description: `3: Jungle’s Might (Su) You gain a +2 profane bonus to your Strength score and a +2 bonus on Fortitude saving throws.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Tyrant’s Roar (Sp) command 3/day, sound burst 2/day, or suggestion 1/day` },
+    { tier: 2, description: `2: Reign of Terror (Ex) You are a master of overwhelming your foes and minions through fear and intimidation. You gain a bonus equal to your Strength modifier on Intimidate checks (this does not stack with the bonus provided by Intimidating Prowess or similar effects). Once per minute, you can use Intimidate to demoralize a creature within 30 feet as a swift action, or all creatures within 10 feet as a move action. When using Intimidate to demoralize a creature in this way, if your result exceeds the DC by 5 or more, the creature is frightened for 1 round and then shaken for the normal duration; if your result exceeds the DC by 10 or more, the creature cowers for 1 round, then is frightened for 1 round, and then is shaken for the normal duration. When you use Intimidate to demoralize an ally, instead of being shaken, that creature gains a +2 morale bonus on attack rolls for the appropriate duration.` },
+    { tier: 3, description: `3: Unchallenged Tyrant (Su) You are attuned to the jungle mind, the primeval tangle of instinct that simmers below every sentient creature’s consciousness; you can use it to forge your elite minions into a force of unequaled savagery, united by (and utterly subordinate to) your will. When you perform your obedience, designate a number of present and willing creatures equal to your Charisma modifier; these are your thralls. This designation lasts for 24 hours or until you next perform your obedience. Three times per day, you can infuse all thralls within 50 feet of you as a swift action, granting them a +4 bonus to their Strength and Constitution scores and a +2 bonus on initiative checks, and granting any teamwork feats you have as bonus feats. If a thrall dies within 50 feet of you at any time, you gain the effects of death ward (CL = half the thrall’s Hit Dice, to a maximum of CL 20th).` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const areshkagal: DeityEntry = {
+  id: 'areshkagal',
+  name: 'Areshkagal',
+  title: 'The Faceless Sphinx',
+  alignment: 'CE',
+  portfolio: `Greed, portals, riddles`,
+  domains: ['air', 'chaos', 'evil', 'trickery'],
+  subdomains: ['deception', 'chaos-demon', 'evil-demon', 'thievery', 'wind'],
+  favoredWeapon: 'Sickle',
+  allowedClericAlignments: ['CN', 'NE', 'CE'],
+  symbol: `Faceless female pharaoh`,
+  sacredAnimal: `Viper`,
+  sacredColors: ['blue', 'gold'],
+  boons: {
+    obedienceRequirement: `Inscribe several of the 23 riddles of the flesh (an interlocked series of conundrums, the answer to which no mortal has achieved) on your own flesh with a tiny bone knife carved from a child’s rib. Gain a +4 profane bonus on Will saving throws against sonic and languagedependant effects.`,
+    evangelist: [
+    { tier: 1, description: `1: Twisted Riddles (Sp) fumbletongue 3/day, fox’s cunning 2/day, or illusory script 1/day` },
+    { tier: 2, description: `2: Maddening Enigma (Sp) Through your faith in the Faceless Sphinx, you are granted knowledge of three unsolvable riddles. Three times per day as a standard action, you can speak one of these riddles, though the riddles must be spoken in order. When spoken to a creature within 30 feet, the first unsolvable riddle you use in a day paralyzes the target as it searches for the answer; the creature must succeed at a Will save (DC = half your Hit Dice + your Charisma modifier) or be affected by hold monster. The second unsolvable riddle is filled with subliminal messages; up to one creature for every 3 Hit Dice you have within 30 feet must succeed at a Will save (at the same DC as above) or be affected by a suggestion spell (with a suggestion of your choosing). The third unsolvable riddle uses such circuitous and warped logic that it shatters listeners’ sanity; each creature within 60 feet must succeed at a Will save (using the same DC) or become confused. Worshipers of Areshkagal are immune to these effects.` },
+    { tier: 3, description: `3: Faceless Mystery (Su) Areshkagal’s form is the most sacred of shapes, and as one of her favored minions, you can adopt a similar form as your own. You gain the change shape universal monster ability, allowing you to assume the form of a sphinx as per beast shape IV. In sphinx form, your face is eerily devoid of features (although they appear when you need them to eat, speak, make bite attacks, cast spells, and so on), and you gain blindsight to a range of 60 feet. You can activate this ability only once per day, but the new form lasts indefinitely. However, if you lose access to this boon by failing to perform your obedience, you cannot change forms or return to your true form until you perform the obedience again or the effect ends.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Sphinx’s Secret (Sp) hold portal 3/day, touch of idiocy 2/day, or shrink item 1/day` },
+    { tier: 2, description: `2: Portal Jump (Sp) You understand that doorways and openings don’t always have to lead to the same place. Once per day as a swift action, you can step through one doorway, arch, or window and emerge from another such portal at any point within 500 feet. This is a teleportation effect similar to dimension door, but you do not become disoriented when you use this ability.` },
+    { tier: 3, description: `3: Create Portal (Sp) Doorways have the potential to exist anywhere and everywhere—one simply needs to know where and how to look for them to find them. Once per day, you can use gate as a spell-like ability, but only as a mode of planar travel, not as a method of calling creatures.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Gilded Arms (Sp) magic weapon 3/day, spiritual weapon 2/day, or magic vestment 1/day` },
+    { tier: 2, description: `2: Auric Knight (Su) Your greed demands that you equip yourself with the purest form of wealth: gold. When you are wielding weapons or shields made purely of gold or wearing armor made purely of gold, that equipment is considered to have all the properties of adamantine instead of the properties of gold; weapons affected this way also count as both cold iron and silver for the purpose of bypassing damage reduction. While you wield a shield made purely of gold, any DR/— you gain from armor made purely of gold increases by 2. In addition, you gain a +2 bonus on attack and damage rolls with sickles made purely of gold.` },
+    { tier: 3, description: `3: Avatars of Avarice (Sp) You can conjure the paragons of greed from the Blood Clefts to serve you... for a price. Once per day as a standard action, you can throw gold (as coins, bars, or another form) to the ground, whereupon it vanishes to Areshkagal’s realm. For every 500 gp’s worth of gold thrown down this way, a fiendish young red dragon appears to serve you, up to a maximum of three dragons per day. These dragons follow your commands perfectly for 1 minute per level before vanishing back to the Abyss.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const baphomet: DeityEntry = {
+  id: 'baphomet',
+  name: 'Baphomet',
+  title: 'Lord of the Minotaurs',
+  alignment: 'CE',
+  portfolio: `Beasts, labyrinths, minotaurs`,
+  domains: ['animal', 'chaos', 'evil', 'strength'],
+  subdomains: ['chaos-demon', 'evil-demon', 'ferocity', 'fur', 'resolve'],
+  favoredWeapon: 'Glaive',
+  allowedClericAlignments: ['CN', 'NE', 'CE'],
+  symbol: `Brass minotaur head`,
+  sacredAnimal: `Aurochs`,
+  sacredColors: ['gold', 'red'],
+  boons: {
+    obedienceRequirement: `Remain motionless for 55 minutes, and then spend the last 5 minutes speaking 50 observations regarding your surroundings into a hollowed-out bull’s horn. Gain immunity to maze and a +4 profane bonus on saving throws against confusion and insanity effects.`,
+    evangelist: [
+    { tier: 1, description: `1: Walk among the Herd (Sp) pass without trace 3/day, undetectable alignment 2/day, or clairaudience/clairvoyance 1/day` },
+    { tier: 2, description: `2: Unquestioned Influence (Sp) As a reward for your devotion to him, Baphomet grants you the power to make pawns of the weak willed and spread your influence among the ignorant masses. Three times per day, you can cast mass suggestion as a spell-like ability.` },
+    { tier: 3, description: `3: Invoke Tempter (Sp) You can conjure an agent of the Abyss to spread demonic intrigues and tempt the foolish. Once per day as a standard action, you can conjure a glabrezu to your location. The glabrezu remains for 1 minute per Hit Die you have before returning to the Abyss. This is a calling effect, and the glabrezu is not under your control, although it generally aids you and follows your directives. This glabrezu is loath to employ its wish ability for your use, preferring instead to offer it to others as a bargaining chip on your behalf or to tempt foolish mortals. This ability always calls the same glabrezu; if the glabrezu conjured this way is slain, you cannot use this boon for 1 month (at which point you can call a new glabrezu).` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Conspirator’s Whisper (Sp) summon monster I 3/day, misdirection 2/day, or beast shape I 1/day` },
+    { tier: 2, description: `2: Minotaur Form (Su) Once per day, you can change shape (as per the universal monster ability) into a minotaur for 1 hour. When you do so, you gain a +4 size bonus to Strength and take a –2 penalty to Charisma. If you are already a minotaur, this ability instead allows you to assume a Small, Medium, or Large humanoid form at will (this change of form does not alter your ability scores). This is a polymorph effect.` },
+    { tier: 3, description: `3: Maze of Madness (Sp) You can cast maze with the benefits of the Extend Spell feat as a spell-like ability once per day.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Might of the Labyrinth (Sp) enlarge person 3/day, bull’s strength 2/day, or nondetection 1/day` },
+    { tier: 2, description: `2: Devouring Beast (Ex) To aid in your profane crusade against the cult’s many enemies, Baphomet sends one of the flesh-eating bulls of the Ivory Labyrinth to slaughter and feed at your side. You gain an aurochs animal companion as a druid of a level equal to your Hit Dice – 4, in addition to any animal companions you already have. This animal companion possesses the fiendish template and the extraplanar subtype, along with a bite attack that inflicts 1d6 points of damage. Any day on which you fail to perform your obedience, this beast vanishes back to the Ivory Labyrinth; if returned to the Abyss, whether by this or by other means, it returns to you when you next perform your obedience (along with any gear it was equipped with).` },
+    { tier: 3, description: `3: Invocation of the Gorgon (Su) You gain the change shape universal monster ability, allowing you to assume the form of an ivory-colored gorgon as per beast shape IV. Although you can activate this ability only once per day, the new form lasts indefinitely. If you lose access to this boon by failing to perform your obedience, you cannot change forms or return to your true form until you perform the obedience again or the effect is otherwise ended.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const cythVsug: DeityEntry = {
+  id: 'cyth-vsug',
+  name: `Cyth-V'sug`,
+  title: 'Prince of the Blasted Heath',
+  alignment: 'CE',
+  portfolio: `Disease, fungus, parasites`,
+  domains: ['chaos', 'earth', 'evil', 'plant'],
+  subdomains: ['caves', 'decay', 'chaos-demon', 'evil-demon', 'growth'],
+  favoredWeapon: 'Scimitar',
+  allowedClericAlignments: ['CN', 'NE', 'CE'],
+  symbol: `Moldy spiraling tentacle`,
+  sacredAnimal: `Centipede`,
+  sacredColors: ['green', 'yellow'],
+  boons: {
+    obedienceRequirement: `Eat moldering flesh rife with parasitic worms and drink putrid alcohol distilled from strange fungi during a 1-hour feast. You gain a +4 profane bonus on saving throws against diseases and effects that cause the nauseated condition.`,
+    evangelist: [
+    { tier: 1, description: `1: Contamination (Sp) ray of sickening 3/day, pox pustules 2/day, or fungal infestation 1/day` },
+    { tier: 2, description: `2: Cloud of Toxicity (Su) As a standard action, you can exhale a 20-foot cone of a disgusting miasma that exacerbates disease. Each diseased creature in the cone must attempt a Fortitude saving throw (DC = 10 + half your Hit Dice + your Charisma modifier); if it fails, it immediately takes damage as though it had failed its Fortitude saves against all of its diseases, and any remaining onset times for these diseases end. You can use this ability a number of times per day equal to your Charisma modifier.` },
+    { tier: 3, description: `3: Ravaging Harm (Su) Three times per day with a successful touch attack, you can weaken a living creature’s immune system unless the target succeeds at a Fortitude saving throw (DC = 10 + half your Hit Dice + your Charisma modifier). For the next 24 hours, when a creature that failed its save takes ability damage, 1 point of that damage becomes permanent ability drain instead. This is a curse effect, and it can be removed with a remove curse spell (treat your total Hit Dice as the caster level).` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Sickness Within (Sp) ray of enfeeblement 3/day, warp wood 2/day, or contagion 1/day` },
+    { tier: 2, description: `2: Parasitic Link (Su) Once per day with a successful touch attack, you can infest a living creature with tiny, gnawing, parasitic worms unless the target succeeds at a Fortitude save (DC = 10 + half your Hit Dice + your Constitution modifier). These parasites retain an unholy link to you, draining the target creature’s energy and transferring it to you. This infestation persists for 10 rounds, during which you act as if under the effects of a haste spell and the infested victim is staggered. As a swift action, you can quicken the parasitic infestation—this reduces the remaining duration by 1 round, but the target takes 1d3 points of Charisma damage as the parasites feed at an accelerated rate. You can maintain a parasitic link with only one creature at a time. These parasites count as a disease effect.` },
+    { tier: 3, description: `3: Fungal Ruin (Sp) Once per day, you can target a creature with a destruction spell. A creature slain by this effect crumbles into a mound of russet mold that immediately releases a cloud of spores in a 20-foot-radius burst.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Deadly Nature (Sp) thorn javelin 3/day, sickening entanglement 2/day, or command plants 1/day` },
+    { tier: 2, description: `2: Vicious Thorns (Su) As a standard action, you can cause the ground in a 5-foot-radius burst centered on you to sprout twisting, thorny vines. Creatures moving through the area must travel at half speed or take bleed damage equal to half your character level; if you activate this ability in an area with numerous plants (grass, trees, weeds, etc.), the area also becomes difficult terrain. These effects last for 1 minute, after which the vines crumble to dust. Creatures able to move through natural undergrowth unhindered ignore the effects of this ability. You can use this ability a number of times per day equal to 3 + your Charisma modifier.` },
+    { tier: 3, description: `3: Shambling Form (Su) Once per day as a move action, you can assume the form of a Huge shambling mound. You gain a +8 size bonus to Strength, a –2 penalty to Dexterity, a +4 size bonus to Constitution, and a +6 natural armor bonus. You gain a constrict special attack and two slam attacks that each deal 2d8 points of damage plus your Strength modifier and have the grab special attack. You gain darkvision (60 feet) and resistance 20 to electricity and fire. In addition, if you are struck with an attack that deals an amount of electricity damage that is less than your resistance, you gain temporary hit points equal to your level. You lose these temporary hit points after 1 hour. You return to your true form after 10 minutes or when you take a free action to dismiss this ability, whichever comes first.` },
+    ],
+  },
+  source: 'pf1e-ap',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const dagon: DeityEntry = {
+  id: 'dagon',
+  name: 'Dagon',
+  title: 'The Shadow in the Sea',
+  alignment: 'CE',
+  portfolio: `Deformity, sea monsters, the sea`,
+  domains: ['chaos', 'destruction', 'evil', 'water'],
+  subdomains: ['catastrophe', 'chaos-demon', 'evil-demon', 'oceans', 'rage'],
+  favoredWeapon: 'Trident',
+  allowedClericAlignments: ['CN', 'NE', 'CE'],
+  symbol: `Eye surrounded by runes`,
+  sacredAnimal: `Fish`,
+  sacredColors: ['blue', 'gold'],
+  boons: {
+    obedienceRequirement: `Offer a bowl of fresh blood to Dagon by speaking prayers over the blood and then emptying the blood into the sea. The bowl must be made of gold and inscribed with runes sacred to Dagon—such a bowl must be worth no less than 100 gp, but can be reused for multiple obediences. Gain a +4 profane bonus against the extraordinary or supernatural attacks of creatures with the aquatic or water subtype.`,
+    evangelist: [
+    { tier: 1, description: `1: Enslave The Sea (Sp) hydraulic push 3/day, slipstream 2/day, or water breathing 1/day` },
+    { tier: 2, description: `2: Aspect of Ishiar (Su) You can cause the flesh and bone of your body to liquefy into a roiling mass of brackish sea water as a move action. While under this effect, your body takes on a slick, watery appearance and can stretch and shift with ease. You become mostly transparent, as if you were composed of liquid, granting you a +4 bonus on Stealth checks. While underwater, this bonus increases to +8, and you can attempt Stealth checks while observed and without needing cover or concealment. You gain DR 10/slashing and your reach increases by 10 feet. In addition, you can pass through small holes or narrow openings, even mere cracks, with anything you were carrying when you activated this ability (except other creatures). Finally, you gain the water subtype and a swim speed of 60 feet, and you can breathe both water and air for the duration of this effect. You can use this ability for 10 minutes per Hit Die per day; this duration need not be consecutive but must be spent in 10-minute increments.` },
+    { tier: 3, description: `3: Drowning Doom (Sp) You can use mass suffocation once per day, but instead of drawing the air from creatures’ lungs, this effect fills creatures’ lungs with anoxic water (and as such, the ability to breathe water offers no protection). While disturbing, this water is largely a cosmetic effect and doesn’t otherwise adjust how the spell effect functions.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: First Oath (Sp) speak with animals (aquatic animals only) 3/day, disfiguring touch 2/day, or summon monster III (aquatic creatures only) 1/day` },
+    { tier: 2, description: `2: Second Oath (Ex) You become immune to damage from water pressure and gain the ability to breathe water, a +2 profane bonus to Constitution, and a swim speed equal to your base speed (if you already have a swim speed, it increases by 30 feet instead).` },
+    { tier: 3, description: `3: Third Oath (Sp) You can cast dominate monster as a spell-like ability once per day but can target only aquatic creatures or creatures currently breathing water.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Teratogen (Sp) long arm 3/day, bear’s endurance 2/day, or resinous skin 1/day` },
+    { tier: 2, description: `2: Mutagenic Strike (Su) A number of times per day equal to your Hit Dice, when you strike a creature with a melee weapon, as a swift action you can cause it to become deformed. When you do so, the creature struck must succeed at a Fortitude save (DC = 10 + half your Hit Dice + your Charisma modifier) or take 2 points of Charisma drain. A creature reduced to 0 Charisma in this way is permanently transformed into a hideously deformed aquatic version of itself; it gains the mutant template, the aquatic subtype, and the amphibious quality, and its alignment becomes chaotic evil. When this transformation occurs, all Charisma damage the creature has suffered is instantly cured. Such mutants are initially friendly toward you. This transformation is a curse effect.` },
+    { tier: 3, description: `3: Horror of the Deep (Su) As a move action, you can switch between your natural form and a hideous hybrid of your natural form and a deep-sea monstrosity. In your hybrid form, you are immune to damage from water pressure, gain the ability to breathe water, and gain a swim speed equal to twice your base speed. Your head becomes that of a viperfish, granting you a bite attack that deals damage as for a creature two size categories larger than you (2d6 for a Medium creature). In addition, a single long tentacle sprouts from your body, granting you a tentacle secondary natural attack that deals damage as for a creature of your size category (1d4 for a Medium creature). This tentacle has the grab and constrict abilities; the constrict damage is equal to your tentacle damage plus 1-1/2 times your Strength modifier. While grappling a creature with your tentacle, you are not considered grappled and do not take any of the penalties associated with that condition. You can maintain this form for 1 minute per Hit Die per day; this duration need not be consecutive but must be spent in 1-minute increments.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const deskari: DeityEntry = {
+  id: 'deskari',
+  name: 'Deskari',
+  title: 'Lord of the Locust Host',
+  alignment: 'CE',
+  portfolio: `Chasms, infestations, locusts`,
+  domains: ['chaos', 'destruction', 'evil', 'war'],
+  subdomains: ['blood', 'catastrophe', 'chaos-demon', 'evil-demon', 'insect', 'tactics'],
+  favoredWeapon: 'Scythe',
+  allowedClericAlignments: ['CN', 'NE', 'CE'],
+  symbol: `Bloody locust wings`,
+  sacredAnimal: `Locust`,
+  sacredColors: ['green', 'red'],
+  boons: {
+    obedienceRequirement: `Meditate while allowing insects or worms of any type to crawl upon your body—if no such vermin is available, you must instead lie facedown in a trench dug into soil and mouth prayers to Deskari into the dirt while scratching yourself with sharp bits of bone or wood. Gain a +4 profane bonus on all saving throws against disease and against effects caused by vermin.`,
+    evangelist: [
+    { tier: 1, description: `1: Locusts’ Gifts (Sp) jump 3/day, acid arrow 2/day, or fly 1/day` },
+    { tier: 2, description: `2: Avatar of the Locust Host (Sp) You can cast verminous transformation as a spell-like ability once per day; the swarming parts of your body are comprised of locusts, and your swarm attack deals double damage to plant creatures.` },
+    { tier: 3, description: `3: Infestation of Flesh (Su) Once per day as a standard action, you can take the form of a hellwasp swarm for up to 8 hours. You gain swarm traits (including immunity to weapon damage) and a swarm attack. You also gain the distraction, inhabit, and poison special attacks. While in this form, you cannot perform any actions that the swarm could not perform; this includes casting spells with somatic components and wielding weapons or items. While not using the swarm’s inhabit ability, you can return to your normal form as a full-round action. This is a polymorph effect.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Swarming Susurrus (Sp) inflict light wounds 3/day, summon swarm 2/day, or summon monster III (vermin only) 1/day` },
+    { tier: 2, description: `2: Swarm-Walker (Su) You can walk through any swarm without taking damage or suffering any ill effects—swarms recognize you as one of their own. As long as you stand within a swarm, you gain a +4 profane bonus on initiative checks and saving throws.` },
+    { tier: 3, description: `3: Swarm Master (Sp) You can cast quickened insect plague once per day.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Split the Earth (Sp) stumble gap 3/day, create pit 2/day, or spiked pit 1/day` },
+    { tier: 2, description: `2: Planar Wound (Su) You can cut through the fabric of reality, delivering foes to your master’s embrace. Three times per day as a standard action, you can strike the ground with a scythe to open a fissure under your feet or the feet of an adjacent Medium or smaller creature (if you target yourself, the rift opens just enough to let you—and only you—through, regardless of your size). This fissure is a planar rift that sends the creature to the Rasping Rifts in the Abyss, as per plane shift, except the fissure can transport only one creature and closes instantly after doing so (or after being avoided). An unwilling target can attempt a Reflex save (DC = 10 + half your Hit Dice + your Charisma modifier) to evade the fissure and negate this effect. Flying and levitating creatures are immune to this effect, and a creature capable of flight that is standing on the ground can avoid this effect if it succeeds at a DC 20 Fly check (it can still attempt a Reflex save to avoid the spell if it fails this Fly check).` },
+    { tier: 3, description: `3: Welcome the Rasping Rifts (Sp) You can cast rift of ruin once per day as a spell-like ability. When the rift closes, each creature still present within the rift must attempt a Will save (against the spell’s save DC). Creatures that succeed at this save are expelled violently (as normal for the spell), while those that fail are expelled violently into the Rasping Rifts in the Abyss. If you close the rift early to summon creatures, you summon one additional creature of the same type.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const flauros: DeityEntry = {
+  id: 'flauros',
+  name: 'Flauros',
+  title: 'The Burning Maw',
+  alignment: 'CE',
+  portfolio: `Fire, salamanders, volcanoes`,
+  domains: ['chaos', 'evil', 'fire', 'war'],
+  subdomains: ['ash', 'blood', 'chaos-demon', 'evil-demon', 'smoke'],
+  favoredWeapon: 'Spear',
+  allowedClericAlignments: ['CN', 'NE', 'CE'],
+  symbol: `Fanged mouth with lava`,
+  sacredAnimal: `Salamander`,
+  sacredColors: ['black', 'red'],
+  boons: {
+    obedienceRequirement: `Burn a valuable nonmagical object (something worth at least 100 gp) or any living creature as an offering and eat the ashes. Gain a +4 profane bonus on all saving throws against fire effects.`,
+    evangelist: [
+    { tier: 1, description: `1: Salamander Magic (Sp) magic weapon 3/day, pyrotechnics 2/day, or protection from energy (fire only) 1/day` },
+    { tier: 2, description: `2: Servants of the Burning Maw (Sp) Flauros is served by a wide range of burning demons and fiery fiends, and as one of his favored, you have the power to call upon the aid of the servants of the Burning Maw. Once per day as a standard action, you can summon two advanced salamanders or two advanced brimorak demons as though using summon monster VII.` },
+    { tier: 3, description: `3: Salamander’s Heart (Su) Although they dwell in the Plane of Fire, salamanders have long ranked among Flauros’s favorite minions he sends to impose his will upon realms beyond the Abyss. As one of his chosen few, you can take on aspects of this favored race. Your skin turns a deep crimson, and your body emanates intense heat. You gain the fire subtype and DR 10/magic. Your touch and any metallic weapons you wield deal 1d6 points of fire damage, but your equipment is not damaged by this effect. At will, as a standard action you can transform your legs into a salamander-like tail or back again. This tail reduces your base speed by 10 feet, to a minimum of 20 feet, but grants you a tail slap natural attack (dealing 2d6 points of damage for a Medium creature) with reach 5 feet greater than your natural reach. You also gain the grab and constrict special attacks; your constrict damage is equal to your tail slap damage plus 1-1/2 times your Strength modifier.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Fire’s Harlot (Sp) burning hands 3/day, flaming sphere 2/day, or fireball 1/day` },
+    { tier: 2, description: `2: Flame’s Consort (Ex) You see perfection in the burning blood and molten flesh of your demonic patron and have been rewarded with a fraction of this power. You permanently gain fire resistance 30. If you are immune to fire or gain permanent immunity to fire at a point after you gain this boon, you instead gain cold resistance 30, as your flesh and blood burn so hot that they protect you against such extremes.` },
+    { tier: 3, description: `3: Awaken Flames (Su) Even fire itself must answer to mighty Flauros, and at his whim, flames take on lives of their own. You have developed a method of doing the same. Once per day as a standard action, you can call forth an elder fire elemental from any flame source. Alternatively, you can activate this ability as a swift action while you cast a spell with the fire descriptor, causing an elder fire elemental to manifest in a space adjacent to you. The elemental appears immediately, and you can direct its actions as a free action via telepathy. The elemental is considered called, not summoned, and remains your minion for 1 hour. Unlike a normal elemental, this elder fire elemental is chaotic evil in alignment and has the Chaotic and Evil subtypes.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Volcanic Fury (Sp) magic stone 3/day, scorching ray 2/day, or ash storm 1/day` },
+    { tier: 2, description: `2: Pyroclastic Execution (Sp) It is said that every volcano on every world is an extension of the Burning Maw, and you have been granted the power to open new maws in the worlds you travel. By stabbing the earth below you with your spear, you cause a deadly eruption that engulfs a foe. This allows you to cast maximized pyrotechnic eruption once per day. You must be wielding a spear to use this ability.` },
+    { tier: 3, description: `3: Vengeful Annihilation (Sp and Su) The wrath of Flauros fills you, causing your might to intensify with every wound—and erupting from you in a killing wave when you finally fall. Whenever you have taken at least 1 point of damage per Hit Die, your attacks deal an additional 1d6 points of fire damage, and the save DCs of fire spells and effects you create increase by 1. Once per day, you can cast fire shield (warm shield) on yourself as a swift action. When you die, your body explodes in a wave of ash and magma, dealing 10d6 points of fire damage to all creatures within a 30-foot burst; a target that succeeds at a Reflex save (DC = 10 + half your Hit Dice + your Constitution modifier) takes half damage. Your body is destroyed by this eruption, but your gear is not. If you die in this way, you can be restored to life only via miracle, true resurrection, or wish.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const gogunta: DeityEntry = {
+  id: 'gogunta',
+  name: 'Gogunta',
+  title: 'Song of the Swamp',
+  alignment: 'CE',
+  portfolio: `Amphibians, boggards, swamps`,
+  domains: ['chaos', 'death', 'evil', 'water'],
+  subdomains: ['chaos-demon', 'evil-demon', 'murder', 'rivers', 'undead'],
+  favoredWeapon: 'Whip',
+  allowedClericAlignments: ['CN', 'NE', 'CE'],
+  symbol: `Twig fetish of a boggard`,
+  sacredAnimal: `Frog`,
+  sacredColors: ['blue', 'green'],
+  boons: {
+    obedienceRequirement: `Drown a living creature in swamp water (or at the very least, in muddy water), then impale the dead body on a sharp branch so wild creatures can feast on it. After impaling the creature, you must spend the rest of your obedience meditating on the sound of fluid dripping from its sodden body. Gain a +4 profane bonus on saves against disease and poison caused by exposure to the jungle or creatures native to swamps.`,
+    evangelist: [
+    { tier: 1, description: `1: Swamp Secrets (Sp) obscuring mist 3/day, tree shape 2/day, or lily pad stride 1/day` },
+    { tier: 2, description: `2: Murky Gaze (Sp and Su) Gogunta has many eyes, and nothing escapes her glare. Your eyes take on a pale green-blue hue as you are granted a fraction of the power of her murky gaze. You gain a +2 bonus on Perception checks and can see through fog and mist as though they weren’t there. While in swamp terrain, you ignore concealment and cover (including total cover) from vegetation and water. In addition, once per day when in swamp terrain, you can cast true seeing as a spell-like ability.` },
+    { tier: 3, description: `3: Fen Witchcraft (Sp or Su) As one of Gogunta’s most powerful worshipers, you have been granted access to some of the most sinister powers of her faith. You are constantly under the effects of freedom of movement. In addition, once per day as a standard action, you can activate a drowning aura. Creatures within 30 feet of you must succeed at a Will save each round (DC = 10 + half your Hit Dice + your Constitution modifier) or be unable to speak or breathe. A creature can still hold its breath, but the aura saps held breath as well—a creature in the aura can hold its breath only for a number of rounds equal to its Constitution modifier before running out of air. Worshipers of Gogunta and creatures that don’t breathe air are unaffected by this aura. Once activated, your drowning aura persists for 1 round per Hit Die.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Swamper’s Boon (Sp) jump 3/day, summon swarm 2/day, or water walk 1/day` },
+    { tier: 2, description: `2: Warty Skin (Ex) Just as the flesh of her favored minions, your skin grows thick and warty (or more warty than normal, in the case of a worshiper such as a boggard), increasing your base natural armor bonus by 3.` },
+    { tier: 3, description: `3: Summon Froghemoth (Sp) Once per day, you can summon a fiendish froghemoth as if using summon monster IX.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Plague of Frogs (Sp) summon monster I (1 fiendish poisonous frog) 3/day, summon monster II (1 fiendish giant frog or 1d3 fiendish poisonous frogs) 2/day, or rain of frogs 1/day` },
+    { tier: 2, description: `2: Boggard’s Blessing (Ex) Your form becomes batrachian in aspect, like the frogfolk of the marshes. You gain the boggard’s hold breath, sticky tongue, and terrifying croak abilities. In addition, you count as a boggard for the purpose of effects, including prerequisites (although you lose access to related options if you haven’t performed your obedience). If you are a boggard, you instead gain a permanent +2 profane bonus to Strength, Dexterity, Constitution, and the DC of your terrifying croak ability, and you can use your terrifying croak ability at will.` },
+    { tier: 3, description: `3: Kiss of Gogunta (Sp) Calling out to the Song of the Swamp, you transform those who oppose you into frogs and toads. Any number of creatures of your choice within 30 feet must succeed at a Fortitude save or be transformed into Diminutive frogs or toads, as per baleful polymorph but heightened to a 9th-level spell. As with baleful polymorph, any creature that fails its Fortitude save must then succeed at a Will save to retain its mental faculties. Any creature that intentionally touches a creature transformed this way must succeed at the same saving throws or be transformed as well; a creature that kisses a transformed creature automatically fails its Fortitude save against this effect but automatically succeeds at its Will save. This ability can be used once per day.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const haagenti: DeityEntry = {
+  id: 'haagenti',
+  name: 'Haagenti',
+  title: 'The Whispers Within',
+  alignment: 'CE',
+  portfolio: `Alchemy, invention, transformation`,
+  domains: ['artifice', 'chaos', 'evil', 'strength'],
+  subdomains: ['artifice-alchemy', 'construct', 'chaos-demon', 'evil-demon', 'resolve', 'strength-self-realization', 'toil'],
+  favoredWeapon: 'Battleaxe',
+  allowedClericAlignments: ['CN', 'NE', 'CE'],
+  symbol: `Philosopher's stone`,
+  sacredAnimal: `Bull`,
+  sacredColors: ['gold', 'lead gray'],
+  boons: {
+    obedienceRequirement: `Practice the Divine Experiment by following the procedure to transmute lead into gold; this process normally requires a philosopher’s stone, but for this obedience, the thaumaturge can substitute any material for lead—it’s not the actual transmutation that functions as the obedience, but the act of going through the motions. Gain a +4 profane bonus against transmutation effects.`,
+    evangelist: [
+    { tier: 1, description: `1: Novice Philosopher (Sp) cure light wounds 3/day, lesser restoration 2/day, or cure serious wounds 1/day` },
+    { tier: 2, description: `2: Altered State (Su) It is said that Haagenti introduced the concept of mutagens to the first alchemists at the dawn of time. Regardless of the veracity of this legend, your worship and faith in the Whispers Within grants you the ability to create a mutagen, as per an alchemist of a level equal to your Hit Dice – 4 (maximum 20th level). If you could already create mutagens, any mutagen you create from this point onward no longer applies its penalties to ability scores; in addition, any ability score increased by your mutagen increases by an additional 2 points.` },
+    { tier: 3, description: `3: Immortal Chymist (Su) You have mastered the legendary techniques of Haagenti’s Divine Experiment. Your body no longer physically ages (although you continue to accrue mental bonuses), and you don’t die from old age. If you were middle-aged or older, your body returns to its prime— you retain your mental bonuses but lose any penalties to Strength, Dexterity, and Constitution gained from advanced age. Each day, when you perform your obedience, you create a small amount of mystic quicksilver; if mixed with a potion of cure serious wounds, it creates a dose of oil of life. Just like that created by a philosopher’s stone, if this oil is sprinkled over a dead body (a standard action), it revives the dead creature as per true resurrection. Alternatively, the quicksilver can be used to convert up to 1 pound of lead into gold (worth a maximum of 50 gp). This quicksilver loses its potency after 24 hours or when you next perform your obedience.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Truth in the Flesh (Sp) enlarge person 3/day, alter self 2/day, or beast shape I 1/day` },
+    { tier: 2, description: `2: Transformation (Sp) You can cast extended transformation as a spell-like ability once per day.` },
+    { tier: 3, description: `3: Master of Shapes (Su) You gain the shapechanger subtype. Your body can react instantaneously to mitigate attacks, granting you immunity to critical hits and sneak attacks (which are treated as normal attacks). Whenever you are affected by a polymorph effect, you regain 4d8 hit points.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Alchemical Armaments (Sp) lead blades 3/day, alchemical allocation 2/day, or versatile weapon 1/day` },
+    { tier: 2, description: `2: Inventive Warfare (Ex) You can treat any weapon as if you were proficient with it. Any feats or effects you have that apply specifically to battleaxes (such as Weapon Focus or the sentinel’s symbolic weapon class feature) or to the axe weapon group (such as the fighter’s weapon training class feature) apply to any weapon you wield. In addition, as a swift action, you can grant weapons you wield one of the following special weapon features for 1 round: brace, disarm, nonlethal, reach, or trip.` },
+    { tier: 3, description: `3: Adaptive Flesh and Twisting Steel (Sp) You can transform into whatever form is most efficient for the battle ahead, and your tools remain ready for use. Whenever you use any polymorph effect, all of your equipment is altered in whatever manner necessary to function with your new form (including functioning as ghost touch or similar magical effects). You can use shapechange once per day. In addition, add monstrous physique IV, undead anatomy IV, and vermin shape II to the list of spells that shapechange spells you cast can function as.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const batch_017: DeityEntry[] = [andirifkhu, angazhan, areshkagal, baphomet, cythVsug, dagon, deskari, flauros, gogunta, haagenti];

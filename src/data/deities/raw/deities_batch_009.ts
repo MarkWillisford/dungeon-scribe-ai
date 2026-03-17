@@ -1,0 +1,173 @@
+// Batch 009 | first: 'Zurapadyn' | last: 'Acavna' | count: 10
+import { DeityEntry } from '@/types/deities';
+
+export const zurapadyn: DeityEntry = {
+  id: 'zurapadyn',
+  name: 'Zurapadyn',
+  title: 'Beast Who Waits in Smoke',
+  alignment: 'LE',
+  portfolio: `Fire, injustice, vendetts`,
+  domains: ['destruction', 'evil', 'fire', 'law'],
+  subdomains: ['arson', 'ash', 'catastrophe', 'rage'],
+  favoredWeapon: 'Kukri',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  source: 'pf1e-book-of-the-damned',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const aesocar: DeityEntry = {
+  id: 'aesocar',
+  name: 'Aesocar',
+  title: 'The Healing Touch',
+  alignment: 'LG',
+  portfolio: `Creation of life, health, and medicine`,
+  domains: ['artifice', 'good', 'healing', 'law', 'protection'],
+  subdomains: ['good-archon', 'law-archon', 'construct', 'loyalty', 'purity', 'restoration', 'resurrection'],
+  favoredWeapon: 'Mancatcher',
+  allowedClericAlignments: ['LG', 'LN', 'NG'],
+  symbol: `Enclosed six-pointed star`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const myr: DeityEntry = {
+  id: 'myr',
+  name: 'Myr',
+  title: 'The Guide of Perfection',
+  alignment: 'LG',
+  portfolio: `Charity, lineage, and physical perfection`,
+  domains: ['glory', 'good', 'law', 'nobility', 'strength'],
+  subdomains: ['ancestors', 'good-archon', 'law-archon', 'heroism', 'honor', 'leadership', 'resolve'],
+  favoredWeapon: 'Longsword',
+  allowedClericAlignments: ['LG', 'LN', 'NG'],
+  symbol: `Branching tree and its roots`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const jaidi: DeityEntry = {
+  id: 'jaidi',
+  name: 'Jaidi',
+  title: 'The Blessing and Bounty',
+  alignment: 'NG',
+  portfolio: `Agriculture, hard work, and self-sufficiency`,
+  domains: ['animal', 'glory', 'good', 'plant', 'sun'],
+  subdomains: ['agathion', 'day', 'fur', 'growth', 'honor', 'light'],
+  favoredWeapon: 'Scythe',
+  allowedClericAlignments: ['LG', 'NG', 'CG', 'N'],
+  symbol: `Shepherd's crook bearing a sun`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const shelynPreEarthfall: DeityEntry = {
+  id: 'shelyn-pre-earthfall',
+  name: 'Shelyn (pre-Earthfall)',
+  title: 'Song of the Prism',
+  alignment: 'NG',
+  portfolio: `Art, beauty, love, and music`,
+  domains: ['air', 'charm', 'good', 'luck', 'protection'],
+  subdomains: ['agathion', 'cloud', 'defense', 'fate', 'love', 'purity'],
+  favoredWeapon: 'Dagger',
+  allowedClericAlignments: ['LG', 'NG', 'CG', 'N'],
+  symbol: `Songbird with a multicolored tail`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const elion: DeityEntry = {
+  id: 'elion',
+  name: 'Elion',
+  title: 'The Farseeker',
+  alignment: 'CG',
+  portfolio: `Colonization, discovery, and exploration`,
+  domains: ['chaos', 'community', 'good', 'travel', 'weather'],
+  subdomains: ['chaos-azata', 'good-azata', 'cooperation', 'community-education', 'exploration', 'friendship', 'home'],
+  favoredWeapon: 'Longbow',
+  allowedClericAlignments: ['NG', 'CG', 'CN'],
+  symbol: `Compass`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const amaznen: DeityEntry = {
+  id: 'amaznen',
+  name: 'Amaznen',
+  title: 'The Father of Invention',
+  alignment: 'LN',
+  portfolio: `Invention, magic, and secret knowledge`,
+  domains: ['artifice', 'knowledge', 'law', 'magic', 'protection'],
+  subdomains: ['arcane', 'construct', 'defense', 'divine', 'inevitable', 'thought'],
+  favoredWeapon: 'light hammer',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'N'],
+  symbol: `Gears that resemble an eye`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const lissalaPreEarthfall: DeityEntry = {
+  id: 'lissala-pre-earthfall',
+  name: 'Lissala (pre-Earthfall)',
+  title: 'The Order of Virtue',
+  alignment: 'LN',
+  portfolio: `Duty, fate, reward for service, and runes`,
+  domains: ['knowledge', 'law', 'nobility', 'rune'],
+  subdomains: ['language', 'leadership', 'memory', 'thought', 'wards'],
+  favoredWeapon: 'Whip',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'N'],
+  symbol: `Seven-pointed star`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const onos: DeityEntry = {
+  id: 'onos',
+  name: 'Onos',
+  title: 'God of Many Doors',
+  alignment: 'N',
+  portfolio: `Elements, embassies, and extraplanar travel`,
+  domains: ['air', 'earth', 'fire', 'travel', 'water'],
+  subdomains: ['ash', 'exploration', 'metal', 'oceans', 'portal', 'wind'],
+  favoredWeapon: 'Chakram',
+  allowedClericAlignments: ['LN', 'N', 'CN', 'NG', 'NE'],
+  symbol: `Swirling portal made of all four elements`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const acavna: DeityEntry = {
+  id: 'acavna',
+  name: 'Acavna',
+  title: 'The Shield',
+  alignment: 'CN',
+  portfolio: `Companionship, defensive battle, and the moon`,
+  domains: ['chaos', 'darkness', 'protection', 'repose', 'war'],
+  subdomains: ['ancestors', 'defense', 'moon', 'night', 'tactics', 'wards'],
+  favoredWeapon: 'Spear',
+  allowedClericAlignments: ['CG', 'CN', 'CE', 'N'],
+  symbol: `Crossed spears over a full moon`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const batch_009: DeityEntry[] = [zurapadyn, aesocar, myr, jaidi, shelynPreEarthfall, elion, amaznen, lissalaPreEarthfall, onos, acavna];

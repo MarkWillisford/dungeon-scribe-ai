@@ -1,0 +1,332 @@
+// Batch 007 | first: 'Baalzebul' | last: 'Bohga' | count: 10
+import { DeityEntry } from '@/types/deities';
+
+export const baalzebul: DeityEntry = {
+  id: 'baalzebul',
+  name: 'Baalzebul',
+  title: 'Lord of Flies',
+  alignment: 'LE',
+  portfolio: `Arrogance, flies, lies`,
+  domains: ['air', 'death', 'evil', 'law'],
+  subdomains: ['evil-devil', 'law-devil', 'murder', 'undead', 'wind'],
+  favoredWeapon: 'Spear',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  symbol: `Iron crown and diamond`,
+  sacredAnimal: `Fly`,
+  sacredColors: ['black', 'white'],
+  boons: {
+    obedienceRequirement: `Cover your hands and arms in a paste made from rotten fruit, spoiled meat, or any other malodorous organic material you create as an offering to Baalzebul, and sit perfectly still with your palms held upward. Wait for flies to gather on your limbs, and let them gorge themselves on the offering while you recount the mighty battles that the Lord of Flies has won in Asmodeus’s name. Gain a +4 profane bonus on saves against mind-affecting effects.`,
+    evangelist: [
+    { tier: 1, description: `1: Cocytus’s Deception (Sp) lesser confusion 3/day, misdirection 2/day, or glibness 1/day` },
+    { tier: 2, description: `2: White Angel of Hell (Sp, Su) Baalzebul knows, perhaps a little self-deceptively, that he is the mightiest creature the Prince of Hell has ever created, and from this profane knowledge Baalzebul draws great power. Likewise, in your dark heart you know that you are one of Baalzebul’s favored servants, and this knowledge invests you with authority. Whenever a creature senses your aura, such as with detect evil or similar spells, you radiate an aura as if you had 20 Hit Dice. A number of times per day equal to 3 + your Wisdom modifier, you gain a +20 bonus on Intimidate checks when you flaunt your association with Hell as part of the check. Additionally, you can cast greater command twice per day as a spell-like ability.` },
+    { tier: 3, description: `3: Lies of the Son (Sp) Like the Lord of Flies, you can weave a tapestry of lies so convincing that it can wipe the very identity from individuals’ minds, and you can cleverly use this ability to your advantage. Once per day, you can cast communal mind blank as a spell-like ability.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Flies of the Seventh (Sp) decompose corpse 3/day, haunting mists 2/day, distracting cacophony 1/day` },
+    { tier: 2, description: `2: Master of the Multitudes (Sp) The Lord of Flies happily lends you his hellish servants to further your unholy cause and, of course, his own glory. Once per day, you can summon a swarm of blood-sucking flies to consume your enemies. This functions as per >summon monster VII, except you can summon only a single swarm of blood-draining flies. Treat this swarm as a tick swarm with the fiendish template and a fly speed of 50 feet (perfect maneuverability).` },
+    { tier: 3, description: `3: Consume Divine Flesh (Su) You relish the thought of the dying Azhia hanging in Baalzebul’s home, hellish flies feasting on the forgotten god’s flesh for eternity. Your obsession with this macabre act has imbued you with mind-warping abilities to make Baalzebul proud. Three times per day as a standard action, you can target a single living creature within 60 feet. If this creature fails a Will saving throw (DC = 10 + half your Hit Dice + your Wisdom modifier), it believes that flies and maggots are infesting its flesh, and it can take no actions for a full round as it claws at its flesh in terror. The imagined pain deals an amount of damage equal to 1d6 per Hit Die you have (maximum 20d6). The target can negate this effect with a successful Will saving throw. This is a mind-affecting effect. This ability has no effect on creatures that don’t have flesh.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Dark Prince’s Son (Sp) murderous command 3/day, blur 2/day, burst of speed 1/day` },
+    { tier: 2, description: `2: Heir of Hell (Su) Even if your companions refuse to acknowledge it, you know that your infernal devotion to and sacrifices for Baalzebul have earned you a place at the side of the greatest fiends of Cocytus, just as the Lord of Flies knows he deserves a place at the side of his dark father. Once per day as a standard action, you can declare your infernal birthright to inspire shock and awe in your enemies. Creatures within 30 feet that hear and oppose you must each attempt a Will saving throw (DC = 10 + half your Hit Dice + your Wisdom modifier) or be stunned for 1 round and then shaken for a number of rounds equal to your Hit Dice while contemplating your unholy power. Creatures that succeed at their saving throws are instead shaken for 1d4 rounds. This is a mind-affecting fear effect.` },
+    { tier: 3, description: `3: Baalzebul’s Vengeance (Sp) You can briefly call upon the unfathomable, unholy power of the Lord of Flies to bring down a mighty storm upon those who would oppose you, just as Baalzebul will one day crush all those who stand against him, Hell’s servant or not. Once per day as a spell-like ability, you can cast storm of vengeance.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const barbatos: DeityEntry = {
+  id: 'barbatos',
+  name: 'Barbatos',
+  title: 'The Bearded Lord',
+  alignment: 'LE',
+  portfolio: `Animals, corruption, gateways`,
+  domains: ['evil', 'law', 'magic', 'travel'],
+  subdomains: ['arcane', 'evil-devil', 'law-devil', 'divine', 'portal', 'trade'],
+  favoredWeapon: 'Quarterstaff',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  symbol: `Three-eyed beard`,
+  sacredAnimal: `Raven`,
+  sacredColors: ['gray', 'red'],
+  boons: {
+    obedienceRequirement: `Build a small, tree-shaped shrine to Barbatos out of broken branches, moss-covered stones, viscous mud, or any other sort of naturally occurring material. While pacing around the shrine, spatter it with fresh blood—either your own or that of a companion or an enemy—and speak 21 words of allegiance to the Bearded Lord. Gain a +4 profane bonus on Knowledge (arcana, planes, and religion) checks concerning evil-aligned planes, evil faiths, or evil magic.`,
+    evangelist: [
+    { tier: 1, description: `1: Taint of the Promised Land (Sp) ill omen 3/day, blindness/deafness 2/day, or howling agony 1/day` },
+    { tier: 2, description: `2: Defile the Sacred (Su) You can project the terrible mysteries of Barbatos’s true form into an opponent’s body, infusing it with a mere iota of the Bearded Lord’s horrors. Once per day as a standard action, you can target a living good-aligned or neutral creature with a touch attack that briefly transforms its body into a mass of quivering worms and undulating flesh. This deals an amount of damage equal to 10 points per Hit Die you have (maximum 150 points of damage) and nauseates the target for 1 round. A target that succeeds at a Fortitude saving throw (DC = 10 + half your Hit Dice + your Charisma modifier) takes only half damage and negates the nauseated effect. If the creature you target is evil-aligned, this ability has no effect and is wasted for the day.` },
+    { tier: 3, description: `3: Faces of the Wise (Su) You are keenly aware of the million possible visages that might lurk under Barbatos’s hood and can project those images into an enemy’s mind. Once per day as a standard action, you can target any creature within 100 feet. If the target fails a Will saving throw (DC = 10 + half your Hit Dice + your Charisma modifier), it is stunned for 1 round and then paralyzed for a number of rounds equal to your Hit Dice. Each round on its turn while it is paralyzed, the target can attempt a new saving throw to end the paralyzing effect; this is a full-round action that does not provoke attacks of opportunity. A creature that recovers from this effect early after being affected by it for at least 2 rounds is staggered for 2d4 rounds. A creature that succeeds at its initial saving throw against this effect is merely staggered for 1 round. This is a mind-affecting fear effect.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Beasts of the First (Sp) magic fang 3/day, fox’s cunning 2/day, or stench of prey 1/day` },
+    { tier: 2, description: `2: Gnashing of Brutish Teeth (Su) You are intimately familiar with the guttural sounds of hellbeasts and can imitate their cacophonies to the detriment of your foes. Once per day as a standard action, you can unleash this clamor, forcing all enemies within 30 feet of you to attempt a Will saving throw (DC = 10 + half your Hit Dice + your Charisma modifier). Those who fail are frightened for a number of rounds equal to your Hit Dice and take an amount of sonic damage equal to 1d6 per Hit Die you have (maximum 20d6). Creatures that succeed at their saving throws take half damage and are instead shaken for this effect’s duration. This is a mind-affecting fear effect.` },
+    { tier: 3, description: `3: Bearded Lord’s Aspect (Sp) Once per day, you can assume an imitation of one of the many forms Barbatos prefers when traveling in the mortal realms. This functions as frightful aspect, using your Hit Dice as your caster level, except you also gain darkvision with a range of 90 feet, scent, and a bite attack. Treat the bite attack as a primary attack made with your full base attack bonus; it deals an amount of damage equal to 3d6 plus 1-1/2 times your Strength modifier.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: No Passage (Sp) bungle 3/day, piercing shriek 2/day, or glyph of warding 1/day` },
+    { tier: 2, description: `2: From Whence You Came (Sp) The Bearded Lord has untold knowledge of not only fiends and their places in Hell and beyond but also all outsiders, and you can periodically harness this confounding reality to your advantage. Three times per day, you can cast dismissal as a spell-like ability. When you do, you are immediately affected by protection from good if the dismissed outsider was good-aligned, or protection from evil if the outsider was evil-aligned, for a number of minutes equal to your Hit Dice.` },
+    { tier: 3, description: `3: Avernus’s Iron Gates (Sp) You have an unholy tie to Barbatos’s demesne. Once per day, you can open a gate to Avernus, as per the spell gate, and use it either for planar travel or to call a pit fiend to your service. If you use it to call a pit fiend, this functions like the gate spell’s calling creatures effect, but you are not required to pay the 10,000 gp material cost. If the pit fiend has more Hit Dice than you, you can’t control it (as normal), but pit fiends tend to gladly obey the requests of powerful minions of Barbatos.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const belial: DeityEntry = {
+  id: 'belial',
+  name: 'Belial',
+  title: 'The Pale Kiss',
+  alignment: 'LE',
+  portfolio: `Adultery, deception, desire`,
+  domains: ['charm', 'destruction', 'evil', 'law'],
+  subdomains: ['catastrophe', 'evil-devil', 'law-devil', 'lust', 'rage'],
+  favoredWeapon: 'Ranseur',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  symbol: `Two-toned devil mask`,
+  sacredAnimal: `Goat`,
+  sacredColors: ['red', 'white'],
+  boons: {
+    obedienceRequirement: `Fill a chalice, cup, or other small receptacle with pure, clean water, then despoil it with 13 drops of bodily fluid of any nature. Hold the spoiled concoction in your hands, envision the most sexually enticing image imaginable, and pray aloud to Belial until your throat is parched. Then, drink from the receptacle until it is empty. Gain a +4 profane bonus on saving throws to resist charm effects and spells with the charm descriptor.`,
+    evangelist: [
+    { tier: 1, description: `1: Sins of the Flesh (Sp) erase 3/day, acute senses 2/day, or nondetection 1/day` },
+    { tier: 2, description: `2: Idolisque’s Apogee (Su) The Pale Kiss delights in painful acts of carnal desire, and you share this sense of glee when others so suffer. Once per day as a standard action, you can target a single creature within 60 feet with a number of Hit Dice less than or equal to twice your own. If that creature fails a Will saving throw (DC = 10 + half your Hit Dice + your Charisma modifier), it feels the emotional anguish of a beloved’s betrayal. The creature drops all held items and, beginning on the round it is targeted by this ability, deals 1d8 points of damage to itself each round (no saving throw) as a full-round action as it tries to grapple with its emotions. The creature can take no other actions while it is affected by this ability. A creature that is restrained with a successful grapple or otherwise rendered immobile cannot damage itself for that round. This ability lasts for a number of rounds equal to your Hit Dice. Each round a creature is affected, it can attempt a new saving throw to end this effect. This is an emotion mind-affecting effect.` },
+    { tier: 3, description: `3: Thorny Caress (Su) The pinnacle of the Thorned Caress’s worship has taught you how to couple being desirous to others with the ability to inflict great pain upon those you entice. For a number of minutes per day equal to your Hit Dice, anyone who touches your skin (such as with a successful natural weapon attack, touch attack, or unarmed strike) takes 4d6 points of bleed damage. You cannot deal this bleed damage to others by touching them yourself. Activating this ability is a standard action, and dismissing it is a free action. This effect’s duration need not be used all at once, but it must be used in 1-minute increments.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Desires of Mortals (Sp) charm person 3/day, unnatural lust 2/day, or seek thoughts 1/day` },
+    { tier: 2, description: `2: The Palest Kiss (Su) Like Belial, you can offer great pleasures at an even greater price. Twice per day when you lure a creature into an act of passion, such as a kiss, as a standard action you can bestow a negative level on the creature and cause it to be exhausted for a number of rounds equal to half your Hit Dice. You can affect an unwilling creature, but that creature must be grappled for you to use this ability. A creature can negate the negative level and exhaustion effect with a successful Will saving throw (DC = 10 + half your Hit Dice + your Charisma modifier).` },
+    { tier: 3, description: `3: Skeletal Palace (Sp) Deep understanding of the Pale Kiss has taught you how to lure chattel to your side with sweet promises of pleasure, lulling them into a sense of complacency before they realize they can never escape your iron grasp. Once per day, you can cast mass hold monster as a spell-like ability, assaulting potential victims’ minds with promises of pleasures.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Great Deceiver (Sp) disguise self 3/day, alter self 2/day, or glibness 1/day` },
+    { tier: 2, description: `2: Infernal Shapeshifter (Su) Studying and worshiping the inscrutable ways of Belial, the Duke of Many Forms, has taught you how to imitate the appearances of many creatures. Three times per day as a standard action, for a number of minutes equal to your Hit Dice, you can take on the appearance of any outsider with a number of Hit Dice equal to or fewer than your own. If the outsider has a fly speed, you gain its fly speed while this ability is in effect, and you similarly gain any of the outsider’s resistances and immunities. You do not gain any of this outsider’s other statistics or abilities, and you only superficially appear to be the outsider, but you gain a bonus equal to twice your Hit Dice on Bluff checks to convince others that you are the outsider. Any creature that interacts with you can attempt a Will saving throw to disbelieve your illusion (DC = 10 + half your Hit Dice + your Charisma modifier). This effect’s duration need not be used all at once, but must be used in 1-minute increments.` },
+    { tier: 3, description: `3: Phlegethon’s Forges (Su) You embody the might of the forges of Belial’s realm. For a number of rounds equal to your Hit Dice each day, you gain DR 15/good and silver, immunity to fire and poison, and SR equal to 11 plus your Hit Dice. You also gain fast healing 5, and all your weapons count as evil and lawful for the purpose of overcoming damage reduction. Activating this ability is a swift action, and dismissing it is a free action. This effect’s duration need not be used all at once, but it must be used in 1-round increments.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const dispater: DeityEntry = {
+  id: 'dispater',
+  name: 'Dispater',
+  title: 'Iron Lord',
+  alignment: 'LE',
+  portfolio: `Cities, prisons, rulership`,
+  domains: ['evil', 'law', 'nobility', 'trickery'],
+  subdomains: ['deception', 'evil-devil', 'law-devil', 'nobility-hubris', 'leadership', 'law-legislation', 'sovereignty', 'tyranny'],
+  favoredWeapon: 'Heavy mace',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  symbol: `Iron nail, crown, and ring`,
+  sacredAnimal: `Hound`,
+  sacredColors: ['iron gray', 'red'],
+  boons: {
+    obedienceRequirement: `Use an iron staff or bar to draw a mazelike pattern in a soft surface such as dirt or sand. In the center of the pattern, draw a bloodshot eye inside a pentagram, and trace these lines repetitively while chanting prayers to the Iron Lord. Gain a +2 profane bonus on Bluff checks as well as a +2 profane bonus on Diplomacy and Knowledge (nobility) checks when among nobles or in a courtly setting.`,
+    evangelist: [
+    { tier: 1, description: `1: Wicked and Urbane (Sp) charm person 3/day, castigate 2/day, or suggestion 1/day` },
+    { tier: 2, description: `2: Master of the Maze (Sp) You can use the immense, profane powers of the Oppidan Maze to your advantage. Once per day, you can cast maze as a spell-like ability, except the DC of the Intelligence check to escape the labyrinth is 15 and you must succeed at a touch attack to target a creature. The maze you conjure is a replica of the infamous labyrinths of the Infernal City itself: walls of iron and black marble, with the tormented faces of the damned screaming and contorting soundlessly throughout their facades.` },
+    { tier: 3, description: `3: Towers of Marble and Flesh (Su) You can harness some of the Infernal City’s horrific landscape and use it to warp your enemies’ flesh. Once per day as a standard action, you can target a creature made of flesh. If the target fails a Fortitude saving throw (DC = 10 + half your Hit Dice + your Charisma modifier), it is turned into an infernal statue made of black marble and hardened soul flesh as per flesh to stone. Additionally, each round on the target’s turn for 3 rounds (starting on the round after it is turned to stone), the target takes 10d6 points of damage as ravenous souls from Dis consume its petrified body (this damage bypasses the statue’s hardness). The target can attempt a Fortitude saving throw each round to halve the damage. If this damage kills the target, its petrified body shatters, and only miracle, true resurrection, or wish can bring the target back to life.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Fist of the Iron Lord (Sp) forbid action 3/day, enthrall 2/day, or force punch 1/day` },
+    { tier: 2, description: `2: Eclipsing Eye’s Glare (Su) You carry an air of the Iron Lord’s dark perfection about you and can see easily through the pettiness of your friends and foes alike. For a number of minutes per day equal to your Hit Dice, you can see things as they actually are, as per true seeing. You must use a standard action to activate this ability and can dismiss it as a free action. The duration need not be used all at once, but must be used in 1-minute increments. Additionally, once per day while this ability is active, when you use it to see a creature that is invisible or under a blur or displacement effect, you can invoke the Iron Lord’s unholy power to strike fear into its heart as a swift action, giving it the shaken condition for a number of rounds equal to your Hit Dice and removing the blur, displacement, or invisibility effect. There is no saving throw for this secondary effect, and it is a fear effect.` },
+    { tier: 3, description: `3: Courtly King (Sp) Like the Iron Lord, you see the value in using your infernal charm to get your way rather than relying on brute force, and your darkly honeyed words are intoxicatingly compelling. Twice per day, you can cast mass charm monster as a spell-like ability, except no two of the creatures can be more than 60 feet apart.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: No Sympathy, No Mercy (Sp) doom 3/day, bull’s strength 2/day, or rage 1/day` },
+    { tier: 2, description: `2: Judgment of Fiends (Su) Three times per day, as a swift action that does not provoke attacks of opportunity, you can pronounce fiendish judgment upon a target. For a number of rounds equal to half your Hit Dice, add a bonus equal to half your Hit Dice on your attack rolls against the target, and your attacks ignore the target’s DR and energy resistance, if it has any. Additionally, while this ability is in effect, you gain a bonus equal to your Hit Dice on damage rolls against the target. You can have only one fiendish judgment active at a time. If a target of your fiendish judgment dies before this ability’s duration ends, it still counts as one use.` },
+    { tier: 3, description: `3: Gaoler of the First (Sp) Twice per day, you can cast forcecage as a spell-like ability. The DC of the Reflex saving throw to negate this effect is equal to 10 + half your Hit Dice + your Charisma modifier. Regardless of whether you use this effect to create a barred cage or a windowless cell, creatures caught in it hear the low rumble of a deep, taunting, profane chuckle for the entirety of the time they are confined.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const geryon: DeityEntry = {
+  id: 'geryon',
+  name: 'Geryon',
+  title: 'The Serpent',
+  alignment: 'LE',
+  portfolio: `Forbidden knowledge, heresy, snakes`,
+  domains: ['evil', 'law', 'strength', 'water'],
+  subdomains: ['evil-devil', 'law-devil', 'ferocity', 'oceans', 'resolve'],
+  favoredWeapon: 'Heavy flail',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  symbol: `Serpent's head`,
+  sacredAnimal: `Snake`,
+  sacredColors: ['purple', 'red'],
+  boons: {
+    obedienceRequirement: `Spend an hour meditating on something you’ve learned and whispering hypotheses and possibilities based upon that fact. Additionally, once per week, you must perform an act you’ve never done before and that society holds as taboo—usually involving eating or drinking something unsavory. You can attempt a saving throw to disbelieve any illusion you come within 10 feet of, and you gain a +4 bonus on Will saving throws to disbelieve illusions.`,
+    evangelist: [
+    { tier: 1, description: `1: Taboo Breaker (Sp) remove fear 3/day, touch of idiocy 2/day, or water breathing 1/day` },
+    { tier: 2, description: `2: Heresy Speaker (Su) Once per day, you can speak an incredible heresy. This functions as per dictum, but affects even creatures of lawful alignment. You can choose what creatures to exclude from this ability’s effects.` },
+    { tier: 3, description: `3: Poison Tongue (Su) Your words become poison. As a standard action, while you’re speaking, you can choose to poison any number of creatures that can hear your voice. The creatures must each succeed at a Fortitude saving throw (DC = 10 + your Charisma modifier + your Hit Dice) or be affected with muddling heresy (see the sidebar) with a frequency of 1/round for 2 rounds. You can attempt to poison any number of creatures per day equal to your Hit Dice. There is no evidence that your words are magical or envenomed, causing the venom to have no obvious source.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Serpent Blood (Sp) reduce person 3/day, acid arrow 2/day, or beast shape III (reptiles only) 1/day` },
+    { tier: 2, description: `2: Venom Maw (Su) As an immediate action, you can cause your mouth to widen and grow a pair of long, venomous fangs. You gain a bite attack for 1 round. This is a primary natural attack that deals 1d8 points of piercing damage if you’re Medium or 1d6 points of damage if you’re Small. Any creature damaged by your attack must succeed at a Fortitude saving throw (DC = 10 + your Wisdom modifier + half your Hit Dice) or be affected by muddling heresy (see the sidebar). Additionally, once per hour, you can spit a stream of venom up to 30 feet. Any creature struck by this ranged attack must save against your poison as if it had been bitten.` },
+    { tier: 3, description: `3: Divine Insult (Su) A number of times per day equal to your Wisdom bonus, you can speak a specialized blasphemy against a single target. As a standard action, you shout shocking truths at the target. The target is affected as per heretic’s tongue (see page 72). If you successfully deny a divine spellcaster access to its class abilities, that target must succeed at a second saving throw at the end of the spell’s effect, whether shortened or not (DC = 10 + your Wisdom modifier + half your Hit Dice). If the target fails, its abilities do not return until it receives the benefits of an atonement spell.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Stygian Sentinel (Sp) summon nature’s ally I 3/day, bear’s endurance 2/day, or water breathing 1/day` },
+    { tier: 2, description: `2: Chain Coil (Su) When you successfully disarm an opponent using a heavy flail, your disarmed opponent immediately provokes an attack of opportunity from you. In addition, you gain a +2 bonus on any attacks of opportunity you make against opponents you have disarmed with a heavy flail within the last round. Additionally, the critical threat range of any heavy flail you wield increases by 1 (this increase stacks with that from the Improved Critical feat).` },
+    { tier: 3, description: `3: Coffin Feast (Su) Once per day, you can touch the corpse of a humanoid creature, affecting it as though it were the food and drink created by the spell heroes’ feast. The appearance of the corpse doesn’t change, but it miraculously provides enough sustenance to feed a number of creatures equal to your Hit Dice. Creatures that eat from this communal table, a process that takes 1 hour, gain a +2 profane bonus on attack rolls and Will saving throws instead of the usual +1 morale bonus. It also provides those who eat from the corpse with the benefits of the spell regenerate.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const mammon: DeityEntry = {
+  id: 'mammon',
+  name: 'Mammon',
+  title: 'The Argent Prince',
+  alignment: 'LE',
+  portfolio: `Avarice, watchfulness, wealth`,
+  domains: ['artifice', 'earth', 'evil', 'law'],
+  subdomains: ['construct', 'evil-devil', 'law-devil', 'metal', 'toil'],
+  favoredWeapon: 'Shortspear',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  symbol: `Devil-faced coin`,
+  sacredAnimal: `Rat`,
+  sacredColors: ['gold', 'silver'],
+  boons: {
+    obedienceRequirement: `Shake a purse containing at least six coins of any minting rhythmically while recounting exactly how you earned, stole, or otherwise acquired them, and declare that you have gained all of your wealth for the glory of Mammon, the Argent Prince. Then, use the coins in the purse to form a pentagram on top of a small mirror or any other reflective surface while singing profane hymns to the Argent Prince. Gain a +2 profane bonus on Appraise checks and Sleight of Hand checks to take something unnoticed.`,
+    evangelist: [
+    { tier: 1, description: `1: Dawn Vaults’ Glory (Sp) color spray 3/day, symbol of mirroring 2/day, or magic vestment 1/day` },
+    { tier: 2, description: `2: Argent Prince’s Sanctum (Sp) You have seen visions of Mammon’s Bier, the darkly magnificent vault where Mammon’s oncestunning angelic form lies entombed in a coffin of diamond, and you can make a sanctum for yourself in its image. Once per day, you can use mage’s magnificent mansion as a spell-like ability. When you do, the inside of the extradimensional dwelling is filled with images of riches beyond imagining, including replicas of the gem-filled chests in Mammon’s Bier in Erebus (though this wealth is illusory and cannot be removed from your sanctum or sold).` },
+    { tier: 3, description: `3: Darkly Shining Majesty (Su) Three times per day as a standard action, you can release a burst of overwhelming evil in the form of the searing reflections of a mighty treasure vault. This is an 80-foot-radius burst centered at any point within 400 feet of you. Each creature in the area is permanently blinded and takes 10d6 points of damage unless it succeeds at a Reflex saving throw (DC = 10 + half your Hit Dice + your Charisma modifier) to negate the blindness and take half damage. Since this burst is not traditional light, it does not further affect creatures vulnerable to sunlight, but it does dispel darkness spells lower than 9th level within its area.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Erebus’s Grasp (Sp) grease 3/day, pilfering hand 2/day, or obscure object 1/day` },
+    { tier: 2, description: `2: Pay in Blood (Sp) Once a vaunted champion of Asmodeus’s infernal armies, Mammon covets the blood and suffering of those who would stand against him, and you are more than happy to bring the Open Palm his due. Three times per day, you can cast empowered inflict critical wounds as a spell-like ability with a Will save DC equal to 10 + half your Hit Dice + your Charisma modifier.` },
+    { tier: 3, description: `3: 13,001 Chests (Sp) Like the Argent Prince, you understand the role that treasure can play when trying to persuade others to join your side. Three times per day, you can show your enemies visions of the 13,001 open gem-filled chests in Mammon’s Bier that were meant to coerce the proteans to Hell’s side eons ago. This functions like mass suggestion, except no two of the creatures can be more than 60 feet apart. The DC of the Will saving throw to negate this effect is equal to 10 + half your Hit Dice + your Charisma modifier.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Guardian of Infernal Vaults (Sp) alarm 3/day, spiritual weapon 2/day, or keen edge 1/day` },
+    { tier: 2, description: `2: Enemy of the Light (Su) For a number of minutes per day equal to your Hit Dice, you are immune to good-aligned damage, and damage you deal is considered evil-aligned for the purpose of overcoming damage reduction. Against good foes, your weapons gain a +3 profane bonus on damage rolls. Further, while this ability is in effect, weapons and effects cannot deal additional damage (such as a holy weapon would deal) to you due to your evil alignment, though you still suffer from any nondamaging effects based on your evil alignment as normal. Activating this ability is a standard action, and dismissing it is a free action. This effect’s duration need not be used all at once but must be used in 1-minute increments.` },
+    { tier: 3, description: `3: Flesh of Mammon’s Flesh (Su) As one of Mammon’s favored unholy servants, you can briefly imbue your weapon as if it were a part of the Argent Prince’s body, granting it great power. For a number of rounds equal to your Hit Dice, a single weapon that you are holding gains the unholy and brilliant energy special abilities. (This effect stacks with the weapon’s existing enhancement bonuses and special abilities, including enemy of the light, and is not subject to the normal limitations and requirements for magic weapons.) Activating this ability is a move action, and dismissing it is a free action. This effect’s duration need not be used all at once but must be used in 1-round increments. While this ability is in effect, your weapon sheds light as normal, but it is an eerie, black, colorless light—a mockery of the light that servants of good might use.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const mephistopheles: DeityEntry = {
+  id: 'mephistopheles',
+  name: 'Mephistopheles',
+  title: 'The Crimson Son',
+  alignment: 'LE',
+  portfolio: `Contracts, devils, secrets`,
+  domains: ['evil', 'knowledge', 'law', 'rune'],
+  subdomains: ['evil-devil', 'law-devil', 'language', 'memory', 'thought'],
+  favoredWeapon: 'Trident',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  symbol: `Trident and ring`,
+  sacredAnimal: `Mockingbird`,
+  sacredColors: ['red', 'yellow'],
+  boons: {
+    obedienceRequirement: `Every day you must lie to someone for your own personal gain (this cannot be the same person more than once a week). Additionally, once per week, you must write down a new secret that you have learned about someone else and burn it as a sacrifice to Mephistopheles. Gain a +4 profane bonus to Diplomacy checks attempted against targets whose attitudes are unfriendly or worse.`,
+    evangelist: [
+    { tier: 1, description: `1: Fool Maker (Sp) charm person 3/day, undetectable alignment 2/day, or suggestion 1/day` },
+    { tier: 2, description: `2: Breaking the Bones of Hell pg. 751: Fool Maker (Sp) charm person 3/day, undetectable alignment 2/day, or suggestion 1/day2: Persecutor (Ex) You can use your Bluff skill to demoralize opponents and influence an opponent’s attitude as though it were the Intimidate skill. The effects function the same. Additionally, you may use the Knowledge (religion) skill on any check related to knowing about or interpreting the law—including infernal contracts.` },
+    { tier: 3, description: `3: Charming Liar (Su) Whenever you use the Bluff skill, you can use the Diplomacy skill to influence an NPC’s attitude at the same time. Both skill checks are made independently, so even if one fails, the other might succeed—suggesting an obvious but charming falsehood or an aggravating but convincing lie. Additionally, any spell of the charm subschool that you cast has its DC increased by 2.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Faith Taker (Sp) unseen servant 3/day, detect thoughts 2/day, or glibness 1/day` },
+    { tier: 2, description: `2: Breaking the Bones of Hell pg. 751: Faith Taker (Sp) unseen servant 3/day, detect thoughts 2/day, or glibness 1/day2: False Priest (Su) You gain a +4 bonus on Disguise checks to pass as a worshiper of another deity and can cast spells using holy symbols other than your own. Additionally, for a number of hours per day equal to your Charisma modifier (minimum 1), you can disguise your alignment. By spending a standard action, you hide your true alignment and instead detect as being of the same alignment as the deity whose holy symbol you are wearing.` },
+    { tier: 3, description: `3: Revoke Healing (Su) A number of times per day equal to your Charisma modifier (minimum 1), you can deal damage to a creature in your line of sight that you have magically healed within the past 24 hours. The damage equals the amount restored by the highest-level spell with the healing descriptor that you can cast. This may result in you causing more damage than you healed. The damage occurs in a single round. In the case of healing spells that heal over multiple rounds, only healing provided in the first round is counted when determining damage.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Trust Breaker (Sp) doom 3/day, eagle’s splendor 2/day, or keen edge 1/day` },
+    { tier: 2, description: `2: Breaking the Bones of Hell pg. 751: Trust Breaker (Sp) doom 3/day, eagle’s splendor 2/day, or keen edge 1/day2: Spectacular Rival (Su) A number of times per day equal to your Charisma modifier (minimum 1), you can add your Charisma modifier (minimum 1) to your combat maneuver bonus.` },
+    { tier: 3, description: `3: Fatal Choice (Su) Once per day, upon defeating an opponent, you can heal it and attempt to force it to obey you. As soon as you reduce a living creature to –1 or fewer hit points, you can force it to attempt a Will saving throw with a DC equal to 10 + your Hit Dice + your Charisma modifier. If it succeeds, it begins dying as normal. If the target fails, it is restored to 1 hit point and is affected as per the spell charm monster. The target can willingly fail this saving throw. This effect lasts for a number of minutes equal to your Charisma modifier (minimum 1). At the end of this period, the target can behave as normal.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const moloch: DeityEntry = {
+  id: 'moloch',
+  name: 'Moloch',
+  title: 'The Ashen Bull',
+  alignment: 'LE',
+  portfolio: `Fire, obedience, war`,
+  domains: ['evil', 'fire', 'law', 'war'],
+  subdomains: ['ash', 'evil-devil', 'law-devil', 'smoke', 'tactics'],
+  favoredWeapon: 'Whip',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  symbol: `Bull's head with flame`,
+  sacredAnimal: `Bull`,
+  sacredColors: ['orange', 'yellow'],
+  boons: {
+    obedienceRequirement: `Heat an iron bar, tool, or weapon in an open flame while speaking prayers to Moloch. At the end of this time, snuff the fire with your hand or let the fire burn your flesh before extinguishing it (taking 1 point of fire damage). You gain a +4 profane bonus on saving throws against fire effects.`,
+    evangelist: [
+    { tier: 1, description: `1: Enkindler (Sp) produce flame 3/day, pyrotechnics 2/day, or rage 1/day` },
+    { tier: 2, description: `2: Voice in Flames (Su) For a number of minutes per day equal to your Hit Dice, you can gaze through a fire at least the size of a torch in order to perceive the surroundings of another flame of equal or greater size within line of sight, as if using clairaudience/clairvoyance. While doing so, you can cause your voice to emanate from that flame, either as your normal voice or as a crackling, inhuman one. Once per day while using this ability, you can cast mass suggestion as a spell-like ability, but the spell originates from the distant flame rather than from you.` },
+    { tier: 3, description: `3: Face in Flames (Su) A number of times per day equal to your Charisma modifier, you can reshape a campfiresized flame to produce the effects of major image. Whatever shape you create appears to be made of flame and occupies roughly a 5-foot cube, even if it is part of a larger fire. You can end the effect as a free action, causing the flames to erupt in a 5-foot-radius burst that deals 1d6 points of fire damage if you so choose. This damage increases by 1d6 for every additional round you maintained the major image, but can deal no more than 1d6 points of fire damage per Hit Die you have. Causing a flame to erupt in this way extinguishes the flame. You can use this ability in tandem with Voice in Flames.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Fire Starter (Sp) produce flame 3/day, heat metal 2/day, or flame arrow 1/day` },
+    { tier: 2, description: `2: Mark of Flame (Su) By dealing fire damage to a creature using a spell or spell-like ability, you can temporarily brand that creature with a coin-sized, smoldering image of Moloch’s unholy symbol for 1 minute. While marked, the creature takes a –2 penalty on saving throws against all fire effects. A creature can remove this brand with erase or remove curse.` },
+    { tier: 3, description: `3: Accept the Flame (Su) Three times per day, you can gain immunity to fire for a number of rounds per day equal to your Wisdom modifier. Track any fire damage you take during this time. For 1 minute after you end the effect, your body becomes uncomfortably warm, and once as a standard action you can use a melee touch attack to deal an amount of fire damage equal to the damage your immunity prevented (maximum 10 points of fire damage for every Hit Die you have) and cause the attack’s target to catch fire (Core Rulebook 444). A successful Fortitude save halves the damage (DC = 10 + 1/2 your Hit Dice + your Wisdom modifier). If you do not touch another creature before the end of this minute, you take all of the damage your immunity prevented—neither fire resistance nor fire immunity can reduce this damage.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Pyrebrand (Sp) produce flame 3/day, flame blade 2/day, or phantom steed 1/day` },
+    { tier: 2, description: `2: Ceremonial Pyre (Su) Once per day as a swift action, you can cause all creatures within 15 feet of you to catch fire (DC = 10 + 1/2 your Hit Dice + your Charisma modifier, Reflex negates); they burn for 1 minute or until the flames are extinguished. Each round that they’re on fire, affected creatures take an additional 1d6 points of fire damage per 6 Hit Dice you have (maximum 4d6). If you begin your turn within 15 feet of a creature taking damage from this ability, you gain fast healing 10 for 1 round.` },
+    { tier: 3, description: `3: Sacrificial Pyre (Su) When you confirm a critical hit against a foe, it must succeed at a Reflex saving throw (DC = 10 + your base attack bonus) or catch fire. While the target is on fire, caustic smoke obscures its vision, and it treats all other creatures as though they had concealment. Creatures killed while on fire from this ability are immediately reduced to ashes, leaving behind no remains.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const andak: DeityEntry = {
+  id: 'andak',
+  name: 'Andak',
+  title: 'The Dismembered',
+  alignment: 'LE',
+  portfolio: `Axes, dismemberment, torture`,
+  domains: ['death', 'destruction', 'evil', 'law'],
+  subdomains: ['fear', 'murder', 'rage', 'torture'],
+  favoredWeapon: 'Battleaxe',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  source: 'pf1e-book-of-the-damned',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const bohga: DeityEntry = {
+  id: 'bohga',
+  name: 'Bohga',
+  title: 'The Treasurer',
+  alignment: 'LE',
+  portfolio: `Avarice, meditation, vigilance`,
+  domains: ['evil', 'law', 'protection', 'strength'],
+  subdomains: ['defense', 'ferocity', 'resolve', 'tyranny'],
+  favoredWeapon: 'Halberd',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  source: 'pf1e-book-of-the-damned',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const batch_007: DeityEntry[] = [baalzebul, barbatos, belial, dispater, geryon, mammon, mephistopheles, moloch, andak, bohga];
