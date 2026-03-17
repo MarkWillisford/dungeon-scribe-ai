@@ -1,0 +1,298 @@
+// Batch 004 | first: 'Alseta' | last: 'Ashukharma' | count: 10
+import { DeityEntry } from '@/types/deities';
+
+export const alseta: DeityEntry = {
+  id: 'alseta',
+  name: 'Alseta',
+  title: 'The Welcomer',
+  alignment: 'LN',
+  portfolio: `Doors, transitions, years`,
+  domains: ['community', 'law', 'magic', 'protection'],
+  subdomains: ['arcane', 'defense', 'home', 'inevitable', 'portal'],
+  favoredWeapon: 'Dagger',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'N'],
+  symbol: `Two faces in profile`,
+  sacredAnimal: `Tortoise`,
+  sacredColors: ['brown', 'gray'],
+  boons: {
+    obedienceRequirement: `Find a physical boundary between two places, such as a doorway, a bridge, or even just a line drawn in the sand. Kneel with your back to this boundary and contemplate all the ways your life has changed during the previous day—this could be as simple as a new person you met in passing. Stand, turn, and step across the boundary while chanting a prayer to Alseta. On the other side, kneel and meditate on the transitions and changes that await you in the coming day. At the end of this meditation, out of respect for the transition to the new day, vow to perform a mundane task in a distinctly different manner during the coming day than you have done previously. You then gain a +4 sacred or profane bonus on Disable Device checks to unlock doors and a +4 sacred or profane bonus on Perception checks to detect secret doors. The type of bonus depends on your alignment—if you’re neither good nor evil, you must choose either sacred or profane the first time you perform your obedience, and this choice can’t be changed.`,
+    evangelist: [
+    { tier: 1, description: `1: Keeper of Keys (Sp) hold portal 3/day, knock 2/day, or glyph of warding 1/day` },
+    { tier: 2, description: `2: Safe Passage (Ex) Alseta smiles upon your attempts to clear away obstacles that would hinder travelers’ passage. You do not risk triggering a trap while attempting Disable Device checks unless you fail your check by 10 or more, rather than by 5 or more as normal. If the trap is part of a door or archway, or is otherwise triggered by passing through a door or archway, you gain a +4 sacred or profane bonus (of the same type as that provided by your obedience) on your Disable Device check.` },
+    { tier: 3, description: `3: Summon Door (Sp) You have an uncanny knack for acting as a holy gatekeeper against those who would stand against you. Three times per day, you can use passwall as a spell-like ability. When using this ability, you also conjure a strong wooden door (hardness 10, hp 40, break DC 30) at one end of the passageway produced by the spell. The door has a lock requiring either a plain iron key (which magically appears in your possession) or a successful DC 30 Disable Device check to open. You can also conjure the door so it comes into being already unlocked and open.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Warden (Sp) alarm 3/day, arcane lock 2/day, or greater stunning barrierACG 1/day` },
+    { tier: 2, description: `2: Turning of the Seasons (Sp) You have a deep understanding of your goddess’s connection to teleportation. Once per day, you can use teleport as a spell-like ability. When you use this ability, increase your familiarity of your intended destination by one step (a place you’ve viewed once becomes a place you’ve seen casually, a place you’ve seen casually becomes a place you’ve studied carefully, etc.). Using this ability cannot result in a mishap; if you roll a mishap on the spell’s table when determining how well the teleportation works, treat it as a result of a “similar area.”` },
+    { tier: 3, description: `3: Eviction (Sp) The Welcomer trusts your judgment enough to grant you powerful magic to keep your enemies at bay. Once per day as a standard action, you can bar all creatures from passing through a specific door or entrance within 30 feet of your position. This functions as the spell antilife shell, except that it functions on all creatures regardless of their type. This effect lasts a number of rounds equal to your Hit Dice. If a creature trying to penetrate the barrier has spell resistance, you must overcome that resistance in order to keep it out. You can use your Hit Dice in place of your caster level on this spell resistance check.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Watchful (Sp) line in the sandACG 3/day, mirror image 2/day, or countless eyesUM 1/day` },
+    { tier: 2, description: `2: Past and Future (Ex) You catch glimpses of the future that allow you to avoid your enemies’ strikes. You gain improved uncanny dodge as a rogue of a level equal to your Hit Dice. If you already possess the improved uncanny dodge ability, or if you would gain it later, you instead gain a +2 sacred or profane bonus (of the same type as that provided by your obedience) on attack and damage rolls against creatures that are currently flanking you.` },
+    { tier: 3, description: `3: Portal to Safety (Sp) Once per day as a standard action, you can transform an open door or archway into a temporary one-way portal, connecting it to another open door or archway of your choice that you have seen or of which you have a reliable description. This portal functions as a greater teleport spell targeting any creature that passes through the first doorway until the end of your next turn. All creatures that pass through the doorway, up to the limit imposed by the spell and your Hit Dice, arrive at the same location, and the destination must include an open door or archway from which the targets exit.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const erecura: DeityEntry = {
+  id: 'erecura',
+  name: 'Erecura',
+  title: 'Queen of Dis',
+  alignment: 'LN',
+  portfolio: `Deduction, mind reading, subtlety`,
+  domains: ['knowledge', 'law', 'nobility', 'trickery'],
+  subdomains: ['deception', 'knowledge-espionage', 'trickery-espionage', 'leadership', 'memory', 'thought'],
+  favoredWeapon: 'Light mace',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'N'],
+  symbol: `Halo of runes`,
+  sacredAnimal: `Deer`,
+  sacredColors: ['green', 'tan'],
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const matravash: DeityEntry = {
+  id: 'matravash',
+  name: 'Matravash',
+  title: 'The Wide Water',
+  alignment: 'LN',
+  portfolio: `The Matra River`,
+  domains: ['community', 'law', 'travel', 'water'],
+  subdomains: ['cooperation', 'loyalty', 'trade'],
+  favoredWeapon: 'Whip',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'N'],
+  symbol: `Lotus blossom floating on a winding river`,
+  sacredAnimal: `Fish`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const brigh: DeityEntry = {
+  id: 'brigh',
+  name: 'Brigh',
+  title: 'The Whisper in the Bronze',
+  alignment: 'N',
+  portfolio: `Clockwork, invention, time`,
+  domains: ['artifice', 'earth', 'fire', 'knowledge'],
+  subdomains: ['artifice-alchemy', 'construct', 'industry', 'metal', 'smoke', 'thought'],
+  favoredWeapon: 'Light hammer',
+  allowedClericAlignments: ['LN', 'N', 'CN', 'NG', 'NE'],
+  symbol: `Mask with forehead rune`,
+  sacredAnimal: `Termite`,
+  sacredColors: ['bronze', 'silver'],
+  boons: {
+    obedienceRequirement: `While reciting formulas from Logic of Design, you must craft a new creation, continue work on an elaborate device or object, or disassemble an existing creation to see how it works. Favored projects among the church include useful gear, magic items, innovative toys, and contraptions invented primarily to see if they would work rather than to solve a specific problem. Share the knowledge you discover while working on this project. If no people are around to hear or read your observations, or you are incapable of communicating with anyone, instead write down notes about your work to publish or otherwise share with others later. If you can share these notes with someone but choose not to, your obedience is unfulfilled; the requirement to share a set of these notes needs only be met once for that set of notes. You gain a +4 sacred or profane bonus on Disable Device checks. The type of bonus depends on your alignment—if you’re neither good nor evil, you must choose either sacred or profane the first time you perform your obedience, and this choice can’t be changed.`,
+    evangelist: [
+    { tier: 1, description: `1: Voice of Bronze (Sp) jury rigUC 3/day, fox's cunning 2/day, sands of timeUM 1/day` },
+    { tier: 2, description: `2: Living Construct (Su) The Whisper in the Bronze is the patron of constructs, and through the teachings of her faith, you have learned how to sense the animating spirits within such mechanical entities. You can affect constructs with magic as if they were living creatures. Once per day, you can target a construct with a spell or spell-like ability, and the spell resolves as if the construct’s creature type were humanoid. This can bypass intelligent constructs’ immunity to mind-affecting effects, but mindless constructs remain unaffected.` },
+    { tier: 3, description: `3: Time Bounce (Sp) Time is simply a construct, and as such, it can be understood and manipulated. You gain the ability to perceive the flow of time and alter it around yourself, giving you the ability to bounce through time-space from one place to another. Once per day, you can use dimensional bounceACG as a spell-like ability.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Creator (Sp) crafter’s fortuneAPG 3/day, make whole 2/day, minor creation 1/day` },
+    { tier: 2, description: `2: Protected by the Machine (Su) Your body gains a bit of the resistance of a construct, perhaps appearing as bronze plates shielding vital organs or bronze gears on your limbs to help push them past their limits, much as Brigh’s own clockwork armor is said to change form to suit her needs. You gain a +2 sacred or profane bonus (of the same type as that provided by your obedience) on saving throws against effects that cause ability damage, ability drain, energy drain, exhaustion, fatigue, or nonlethal damage.` },
+    { tier: 3, description: `3: Inspired Crafting (Su) The quest for discovery and innovation never stops. By applying Brigh’s deep insights into efficient time management and technical innovation, you can craft items in spare moments squeezed in while adventuring or otherwise serving your god’s ideals. When crafting magic items while adventuring, you can devote 4 hours each day to creation and take advantage of the full amount of time spent crafting instead of netting only 2 hours’ worth of work. In addition, you can use fabricate once per day as a spell-like ability. Although you can’t create magic items with the fabricate spell, you can use it to create items that you later enhance magically.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Bronze Warrior (Sp) crafter’s curseAPG 3/day, heat metal 2/day, haste 1/day` },
+    { tier: 2, description: `2: Constructed Form (Su) Brigh is fond of adjusting, adding, and removing devices from her internal mechanical workings to constantly improve her design, and she blesses you with a trace of this ability. As a swift action, you can alter your body to incorporate construct-like features that protect you from physical damage. The transformation is subtle, such as adding metal reinforcements along your bones or small, auxiliary clockwork counterparts to your vital organs. The transformation grants you DR 3/— and lasts for a number of rounds per day equal to your Hit Dice. These rounds need not be consecutive. Dismissing the effect is a free action.` },
+    { tier: 3, description: `3: Call to Battle (Su) Brigh’s mechanical servants answer your call to defend inventions, innocent constructs, and the victims of misguided inventions. Once per day as a full-round action, you can summon a clockwork golem (Pathfinder RPG Bestiary 2 137). It has the extraplanar subtype but is otherwise a typical golem of its kind. The golem follows your commands perfectly for 1 round per Hit Die you possess before vanishing.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const feronia: DeityEntry = {
+  id: 'feronia',
+  name: 'Feronia',
+  title: 'The Fertile Flame',
+  alignment: 'N',
+  portfolio: `Fertility, sacred fires, wildlife`,
+  domains: ['destruction', 'fire', 'liberation', 'protection'],
+  subdomains: ['ash', 'catastrophe', 'freedom', 'smoke'],
+  favoredWeapon: 'Bastard sword',
+  allowedClericAlignments: ['LN', 'N', 'CN', 'NG', 'NE'],
+  symbol: `Bonfire under stars`,
+  sacredAnimal: `Rabbit`,
+  sacredColors: ['blue', 'yellow'],
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const grandmotherSpider: DeityEntry = {
+  id: 'grandmother-spider',
+  name: 'Grandmother Spider',
+  title: 'The Weaver',
+  alignment: 'N',
+  portfolio: `Twilight, weaving, illusion, and family`,
+  domains: ['charm', 'community', 'darkness', 'luck', 'trickery'],
+  subdomains: [],
+  favoredWeapon: 'Net',
+  allowedClericAlignments: ['LN', 'N', 'CN', 'NG', 'NE'],
+  symbol: `Diamond made of eight interwoven threads`,
+  boons: {
+    obedienceRequirement: `Spend an hour weaving something clever and useful that you will use to better your community, incorporating the stories or symbolism of Grandmother Spider. Kindhearted souls often interpret this to mean weaving blankets, clothing, or tapestries for those in need, while duplicitous worshippers take it to mean weaving a tall tale or confidence game that exploits someone who’s taking advantage of the community or teaches someone a valuable lesson. Gain a +2 sacred or profane bonus on Bluff and Perform (oratory) checks and on saving throws against illusions. The type of bonus depends on your alignment—if you’re neither good nor evil, you must choose either sacred or profane the first time you perform your obedience, and this choice can’t be changed.`,
+    evangelist: [
+    { tier: 1, description: `1: Charming Sort (Sp) sleep 3/day, eagle’s splendor 2/day, or glibness 1/day` },
+    { tier: 2, description: `2: Storyteller (Ex) Much like Grandmother Spider, you can weave thrilling tales to buy yourself time or distract those around you, even when among those who know better than to listen to you. You gain the fascinate bardic performance and a number of rounds of bardic performance each day equal to your Charisma modifier + your Hit Dice, with a caster level equal to your Hit Dice. If you already have the bardic performance class feature, all your class levels count as bard levels for the purpose of determining your total rounds of bardic performance each day and the save DC of your fascinate performance.` },
+    { tier: 3, description: `3: One with the Night (Su) Grandmother Spider welcomes cool darkness as a relief from the heat of the sun. You too have learned to embrace the starlit beauty of the evening, knowing that the darkness will give you shelter whether you are predator or prey. You gain darkvision with a range of 30 feet, or extend your existing darkvision by 30 feet. You need only half the normal amount of sleep or rest each day to avoid becoming fatigued.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: The Weaver (Sp) silent image 3/day, minor image 2/day, or borrow fortune 1/day` },
+    { tier: 2, description: `2: Inspired Illusionist (Su) Though you lack Grandmother Spider’s ability to weave new fates, you can emulate some measure of her skill at seamlessly transforming figments into reality. Your illusions are especially convincing and persistent. Spells you cast from the figment or glamer subschools last twice as long, as if extended with the Extend Spell feat. You cannot further extend these spells by applying Extend Spell metamagic a second time. You add the following spells to your spell list of spells known: silent image (1st), minor image (2nd), major image (3rd), hallucinatory terrain (4th), persistent image (5th), programmed image (6th), project image (7th), screen (8th).` },
+    { tier: 3, description: `3: Willful Weaver (Sp) What matters the reality if all the world believes the lie? The effects of your illusions are so strong they can override the physical world. Three times per day, you can cast a false version of a conjuration or evocation spell as if casting shadow evocation or greater shadow conjuration.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Trapper (Sp) animate rope 3/day, web 2/day, or spiked pit 1/day` },
+    { tier: 2, description: `2: Net Master (Ex) A trapper and a trickster rather than a true warrior, Grandmother Spider bests her foes through schemes, wits, and quick reflexes. You have learned to use the spider’s patient guile in combat, trapping your foes within the spider’s web. You gain Net Adept as a bonus feat, ignoring its prerequisites. If you already have Net Adept, you instead gain a +1 sacred or profane bonus on attack rolls with a net. When fighting with a net as a one-handed weapon and wielding nothing in your off hand, you also gain a +1 shield bonus to AC.` },
+    { tier: 3, description: `3: Binding Strike (Su) You allow no chances for your foes to escape once you have the advantage. Those enemies you fell are bound and ripe for your stewpot, should you feel less than charitable in victory. When you confirm a critical hit against an opponent, you can forgo any additional damage to immediately bind your foe in sticky webs, paralyzing it and pinning it in place. This functions as a hold monster spell with a caster level equal to your Hit Dice. You can use this ability a number of times per day equal to your Charisma modifier (minimum 1).` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const naderi: DeityEntry = {
+  id: 'naderi',
+  name: 'Naderi',
+  title: 'The Lost Maiden',
+  alignment: 'N',
+  portfolio: `Drowning, romantic tragedy, suicide`,
+  domains: ['charm', 'nobility', 'repose', 'water'],
+  subdomains: ['love', 'lust', 'martyr', 'souls'],
+  favoredWeapon: 'Dagger',
+  allowedClericAlignments: ['LN', 'N', 'CN', 'NG', 'NE'],
+  symbol: `Ornate golden dagger`,
+  sacredAnimal: `Swan`,
+  sacredColors: ['blue', 'red'],
+  boons: {
+    obedienceRequirement: `Collect two unblemished white rose blossoms, open to their fullest but without any wilted petals. Stand beside a river and cut the blossoms from the stems, then set them on the water to float downstream. Meditate upon the beautiful perfection of love and the imperfection of a life that would deny it to star-crossed lovers. You gain a +2 profane or sacred bonus on Charismabased skill checks. The type of bonus depends on your alignment—if you’re neither good nor evil, you must choose either sacred or profane the first time you perform your obedience, and this choice can be changed.`,
+    evangelist: [
+    { tier: 1, description: `1: Watery Souls (Sp) wave shieldACG 3/day, life pactACG 2/day, or water breathing 1/day` },
+    { tier: 2, description: `2: Depths of the Maelstrom (Su) You do not fear death by water, for you are unafraid of your goddess’s embrace, and you can capitalize on others’ terror of the depths. Three times per day as an immediate action, when you step into any natural body of water, you can cause water within a 30-foot radius of where you stand to churn. You are unaffected by this churning. Any other creature wading or swimming in this water must attempt Swim checks as if the water were one category rougher; wading creatures must attempt DC 10 Swim checks, creatures swimming in calm water must make DC 15 Swim checks, creatures swimming in rough water must attempt DC 20 Swim checks, and creatures swimming in stormy water must attempt DC 25 Swim checks. If the water has a natural current, that current becomes fast moving. If the current was already fast moving, the DC of the Swim or Strength check to avoid going under increases to 15 + half your Hit Dice. This effect lasts for a number of rounds equal to your Hit Dice or until you leave the water, whichever is first.` },
+    { tier: 3, description: `3: Healing Waters (Su) You have learned that the waters can take life, but also that they can give it. Three times per day, you can hold a creature underwater for a number of rounds equal to half your Hit Dice. Each round, as long as the creature is submerged and holding its breath, it is healed of 1d8 + 5 points of damage. If the creature doesn’t hold its breath, it doesn’t receive healing that round. If you submerge a creature and heal it for fewer rounds than half your Hit Dice, it still counts as one use of this ability.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: No Rest for the Living (Sp) heightened awarenessACG 3/day, compassionate allyUM 2/day, or lover’s vengeanceISWG 1/day` },
+    { tier: 2, description: `2: Nothing Left to Lose (Su) The losses you have suffered have made you morose and perhaps even aloof, but also fearless in battle. Once per day as a standard action, you may call out the name of a loved one you have lost. All opponents within hearing distance must succeed at a Will saving throw (DC = 10 + 1/2 your Hit Dice + your Wisdom modifier) or become shaken for a number of rounds equal to your Hit Dice. If you cause at least one creature to become shaken in this way, you gain a +2 profane or sacred bonus (of the same type as that provided by your obedience) on saving throws against spells with the mind-affecting descriptor for a number of rounds equal to your Hit Dice.` },
+    { tier: 3, description: `3: Final Strike (Sp) You can call down your goddess’s cleansing wrath upon your wretched enemies. Three times per day as a standard action, you can cause a great column of white light to pour from the heavens that acts as a fireball, except the damage is force damage. A successful Reflex saving throw (DC = 13 + your Wisdom modifier) halves this damage.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Frozen Despair (Sp) icicle daggerUM 3/day, castigateAPG 2/day, or howling agonyUM 1/day` },
+    { tier: 2, description: `2: All Who Live Suffer Loss (Su) You channel the despair and grief you have suffered into a cloud of sadness that saps the will of those who oppose you. All foes within a 30-foot, cone-shaped burst are staggered for a number of rounds equal to your Hit Dice, and take a –1 penalty on attack rolls, saving throws, ability checks, skill checks, and weapon damage rolls. A successful Will saving throw (DC = 10 + 1/2 your Hit Dice + your Charisma modifier) negates this effect.` },
+    { tier: 3, description: `3: Mantle of Tragic Grace (Sp) You drape yourself in tragic glamor, and your longing for rest puts you beyond the reach of mortal harm for a lingering moment. As a standard action, you can activate this mantle, which acts as a globe of invulnerability. You may use this ability for a number of rounds each day equal to your Hit Dice. These rounds do not need to be consecutive, and you can dismiss this effect as a standard action that does not provoke attacks of opportunity.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const niviRhombodazzle: DeityEntry = {
+  id: 'nivi-rhombodazzle',
+  name: 'Nivi Rhombodazzle',
+  title: 'The Gray Polychrome',
+  alignment: 'N',
+  portfolio: `Gems, stealth, gambling`,
+  domains: ['community', 'earth', 'luck', 'trickery'],
+  subdomains: ['caves', 'deception', 'fate', 'thievery'],
+  favoredWeapon: 'Light hammer',
+  allowedClericAlignments: ['LN', 'N', 'CN', 'NG', 'NE'],
+  symbol: `Seven-pipped gem die`,
+  sacredAnimal: `Mole`,
+  sacredColors: ['gray', 'red'],
+  boons: {
+    obedienceRequirement: `Engage in a game of chance in which money, gems, or items worth at least 10 gp are at stake. This must be a wager that both parties enter into willingly. Offer a prayer out loud to Nivi Rhombodazzle before the wager begins (for example, if the wager involves dice, offer up the prayer before the dice are rolled). If you are alone and there is no one else to wager against, make a bet against yourself on Nivi’s behalf, setting aside the stakes as an offering in the event that Nivi’s side of the wager wins. Spend time privately reveling in the exciting thrill of making a risky wager and preparing yourself for the inevitable moment when the dice turn against you. Gain a +4 sacred or profane bonus on Bluff and Sleight of Hand checks. The type of bonus depends on your alignment—if you’re neither good nor evil, you must choose either sacred or profane the first time you perform your obedience. Once made, this choice can’t be changed.`,
+    evangelist: [
+    { tier: 1, description: `1: Gambler’s Essentials (Sp) true strike 3/day, augury 2/day, or haste 1/day` },
+    { tier: 2, description: `2: Gambler’s Egress (Sp) Nivi Rhombodazzle fled from angry creditors long ago, and her worshippers are encouraged to learn from her wisdom. Three times per day as a swift action, you can cast litany of escape as a spell-like ability, targeting yourself or an ally.` },
+    { tier: 3, description: `3: Gambler’s Prayer (Su) Three times per day as a standard action, you can offer up a quick prayer to Nivi Rhombodazzle that also serves as a wager with the demigoddess. Using this ability is similar to activating a rod of wonder; choose a single target within 60 feet and then roll on the rod of wonder’s Wondrous Effect table to learn the result of this ability. If you roll a result of 88–90, the gemstones that erupt are blessed by Nivi, dealing an additional amount of bludgeoning and piercing damage equal to your Charisma bonus on each successful strike.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Faithful’s Fortune (Sp) bless 3/day, misdirection 2/day, or heroism 1/day` },
+    { tier: 2, description: `2: Gemstone Guardian (Sp) Once per day as a standard action, you can summon a Huge earth elemental. You gain telepathy with the earth elemental to a range of 100 feet. The earth elemental follows your commands perfectly for 1 minute for every Hit Die you have before vanishing back to the Plane of Earth. The earth elemental won’t follow any commands that cause it to bring direct harm to a gnome or svirfneblin, though it can be commanded to grapple or restrain such a creature.` },
+    { tier: 3, description: `3: Seven-Pipped Gem (Su) As an immediate action, you can gain a luck bonus on a single d20 roll equal to half your total Hit Dice (minimum 1). You can use this ability after you have rolled, but must declare the use of this ability before you know the result of the check. If this roll is made as part of a Sleight of Hand check or game of chance, the luck bonus is instead equal to your total Hit Dice. You can use this ability a number of times per day equal to your Charisma bonus (minimum 1). Once you have used all of your daily uses of this ability, you can attempt to use this ability one additional time, but there is a 50% chance that instead of gaining a luck bonus on the roll, you instead take a penalty equal to the bonus you would have received.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Communal Combatant (Sp) divine favor 3/day, shield other 2/day, or prayer 1/day` },
+    { tier: 2, description: `2: Stone Strikes (Ex) Once per round when you deal damage to an opponent with a weapon from the hammers weapon group or any weapon with “gnome” in its name, you can attempt a sunder combat maneuver check as a free action against any weapon or armor the target of the attack is wielding or wearing. This does not provoke an attack of opportunity. You gain a +2 competence bonus on your combat maneuver check for each size category larger than you the target is.` },
+    { tier: 3, description: `3: Strength of the Earth (Ex) You gain the ability to enter a defensive stance, as per the stalwart defender class feature, treating your sentinel levels as stalwart defender levels when determining the total number of rounds you can use this ability each day. While in a defensive stance, you gain a +2 dodge bonus to AC, a +4 morale bonus to Strength and Constitution, and a +2 morale bonus on Will saves. While you are fatigued from using this ability, you can also use your stone strikes ability whenever a creature damages you with a melee attack, though you can still use stone strikes only once per round.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const sivanah: DeityEntry = {
+  id: 'sivanah',
+  name: 'Sivanah',
+  title: 'The Seventh Veil',
+  alignment: 'N',
+  portfolio: `Illusions, mystery, reflections`,
+  domains: ['knowledge', 'madness', 'magic', 'rune', 'trickery'],
+  subdomains: ['aeon', 'deception', 'innuendo', 'insanity', 'memory', 'protean', 'rites', 'thought', 'truth', 'wards'],
+  favoredWeapon: 'Bladed scarf',
+  allowedClericAlignments: ['LN', 'N', 'CN', 'NG', 'NE'],
+  symbol: `Veils tied in a circle`,
+  sacredAnimal: `Coyote`,
+  sacredColors: ['gray'],
+  boons: {
+    obedienceRequirement: `Carry an ordinary scarf or veil and walk through a settlement, making sure you are seen and exchange pleasantries with at least one person. After you reach the settlement’s edge, place the scarf or veil over your face so you aren’t easily recognizable, and again speak with anyone you encountered before. If your true identity is recognized, you must deny it, providing a false name if necessary. Even if anyone you met sees through your ruse, you gain a +2 sacred or profane bonus on Disguise checks. The type of bonus depends on your alignment—if you’re neither good nor evil, you must choose either sacred or profane the first time you perform your obedience, and this choice can’t be changed.`,
+    evangelist: [
+    { tier: 1, description: `1: Masks and Veils (Sp) blurred movementACG 3/day, invisibility 2/day, or major image 1/day` },
+    { tier: 2, description: `2: Illusion Expert (Su) Your enemies have a harder time fooling you with illusions. You gain a +4 sacred or profane bonus (of the same type as that provided by your obedience) on Will saves to disbelieve illusions. If you successfully disbelieve an illusion and communicate this fact to others, such viewers gain a +6 bonus (of the same type as above) on their saving throws to disbelieve the illusion.` },
+    { tier: 3, description: `3: Protection of the Veiled Goddess (Sp) You are skilled at misdirecting your opponents while preparing to do them harm. Once per day as a standard action, you can cast mislead. The spell’s greater invisibility effect lasts a number of rounds equal to your Hit Dice.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Nothing is What It Seems (Sp) color spray 3/day, misdirection 2/day, or hide campsiteAPG 1/day` },
+    { tier: 2, description: `2: Shared Mask (Sp) As a standard action, you can alter your own appearance and that of up to four willing creatures within a 30-foot radius as per disguise self. All the creatures disguised appear to be of a single race or creature type; creatures in the group that could not be disguised as that creature type (such as an animal companion in a group of humanoids) cannot be affected by this ability. This effect lasts 10 minutes per Hit Die you possess.` },
+    { tier: 3, description: `3: The Protecting Veil (Su) You can shield an area, and those within it, from both mundane and magical observation. As a full-round action, you can meditate to veil an area with an illusion extending in a 30-foot radius around you. During this round, you can’t take any other actions, including free or swift actions. The illusion appears as a general concept you envision and can’t be changed once in place. The illusion affects only visual observation and scrying; it doesn’t create or disguise smells, sounds, or tactile properties. You may maintain the illusion for up to 1 hour, but if you leave the square you were occupying when you initiated it, the illusion is dispelled. The DC to disbelieve the illusion is equal to 10 + your Hit Dice + your Charisma modifier.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Hard to Pin Down (Sp) disguise weaponACG 3/day, blur 2/day, or displacement 1/day` },
+    { tier: 2, description: `2: Killer Illusion (Sp) You can channel illusions through your weapon to terrify and even slay your enemies. Once per day, as a free action when you hit with a melee attack, you can cause images of a creature the target most fears to erupt from your weapon right before its eyes. Resolve this effect before rolling damage for the attack; this functions as phantasmal killer, and the target can attempt a Will saving throw (DC = 14 + your Charisma modifier) to recognize the image as unreal. On a failed save, the phantasm touches the target, which must then succeed at a Fortitude saving throw (against the same DC) or die from fear. Even if the target succeeds at its Fortitude saving throw, it takes 3d6 points of damage as well as the damage from the successful melee attack. Unlike phantasmal killer, this effect cannot be turned upon you if the subject possesses telepathy or is wearing a helm of telepathy.` },
+    { tier: 3, description: `3: Illusive Revenge (Sp) You have learned how to use illusions to torment your enemies even long after battle is over. Once per day, you can cast phantasmal revenge (Pathfinder RPG Advanced Player’s Guide 235) as a spell-like ability upon a recently slain creature, which rises as a ghastly image to seek out its killer. This illusive ghost is always veiled, even if it never was so in life. After the target attempts its Will saving throw (DC = 17 + your Charisma modifier), regardless of whether the attempt was successful, the ghost tears off its veil to reveal an image of the killer’s own face.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const ashukharma: DeityEntry = {
+  id: 'ashukharma',
+  name: 'Ashukharma',
+  title: 'The Divine Divide',
+  alignment: 'CN',
+  portfolio: `Canyons, cliffs, gorges, and ravines`,
+  domains: ['chaos', 'earth', 'protection', 'strength'],
+  subdomains: ['caves', 'defense', 'entropy', 'resolve'],
+  favoredWeapon: 'Greatsword',
+  allowedClericAlignments: ['CG', 'CN', 'CE', 'N'],
+  symbol: `A deep, jagged gorge in dry earth`,
+  sacredAnimal: `Goat`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const batch_004: DeityEntry[] = [alseta, erecura, matravash, brigh, feronia, grandmotherSpider, naderi, niviRhombodazzle, sivanah, ashukharma];

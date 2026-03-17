@@ -1,0 +1,294 @@
+// Batch 005 | first: 'Besmara' | last: 'Ahriman' | count: 10
+import { DeityEntry } from '@/types/deities';
+
+export const besmara: DeityEntry = {
+  id: 'besmara',
+  name: 'Besmara',
+  title: 'The Pirate Queen',
+  alignment: 'CN',
+  portfolio: `Piracy, sea monsters, strife`,
+  domains: ['chaos', 'trickery', 'war', 'water', 'weather'],
+  subdomains: ['deception', 'duels', 'innuendo', 'oceans', 'protean', 'storms', 'tactics', 'thievery'],
+  favoredWeapon: 'Rapier',
+  allowedClericAlignments: ['CG', 'CN', 'CE', 'N'],
+  symbol: `Skull and crossbones`,
+  sacredAnimal: `Parrot`,
+  sacredColors: ['black', 'white'],
+  boons: {
+    obedienceRequirement: `Steal a gold coin or alcoholic drink by force or trickery. Then, while recounting your latest or most impressive act of piracy and blessing Besmara’s name for all to hear, offer your stolen item to her by throwing it into water at least 4 feet deep. Alternatively, you can recount your most impressive or recent act of piracy to someone unaware of it, although you are free to hide the fact that the act was yours. You then gain a +2 sacred or profane bonus to AC against attacks of opportunity. The type of bonus depends on your alignment—if you’re neither good nor evil, you must choose either sacred or profane the first time you perform your obedience, and this choice can’t be changed.`,
+    evangelist: [
+    { tier: 1, description: `1: Tricky Adversary (Sp) illusion of calmUC 3/day, daze monster 2/day, or twilight knifeAPG 1/day` },
+    { tier: 2, description: `2: Coerce Service (Su) You understand and can exhibit the blatantly charismatic pull of your goddess, convincing others to aid you even if they normally might not. Once per day, when you attempt a Diplomacy check to bribe a target (treat as if you are attempting to improve an NPC’s attitude toward you by one step) or an Intimidate check to coerce a target, you can use this ability to gain Besmara’s blessing to ensure further cooperation. You gain a +4 sacred or profane bonus (of the same type as that provided by your obedience) on the Diplomacy or Intimidate check, and if you succeed, the target is immediately subject to a geas/quest effect. For as long as the effect lasts, you can concentrate as a standard action and learn whether the target is actively undertaking your orders or actively defying them.` },
+    { tier: 3, description: `3: Bribed Sea Monster (Sp) The sea monsters at Besmara’s behest follow your call at the goddess’s command. Once per day as a standard action, you can summon one of the monsters Besmara has bribed or intimidated into aiding her followers. You must choose the monster from among the following list: adult sea dragon (Pathfinder RPG Bestiary 3 96), sea serpent (Pathfinder RPG Bestiary 244), or vouivre (Pathfinder RPG Bestiary 4 270). The monster appears as if summoned via summon monster, and you must summon it into an appropriately watery environment. It follows your commands perfectly for 1 round per Hit Die you possess before vanishing. The monster doesn’t follow commands that contravene Besmara’s interests, such as blocking waterways or giving a navy better control of a sea region; issuing such untenable instructions, if they’re egregious, could cause the monster to attack you.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Captain’s Bluster (Sp) command 3/day, aggressive thundercloudACG 2/day, or wind wall 1/day` },
+    { tier: 2, description: `2: Treacherous Mirage (Sp) Besmara’s blessing allows you to hide the truth once per day. This ability takes the form of either false vision or mirage arcana. You can change the illusion by spending a move action in concentration. The illusion lasts until you create a new one or dismiss this effect as a swift action.` },
+    { tier: 3, description: `3: Rally Crew (Su) The Pirate Queen lends you her divine panache, which fills all of your allies with courage and pride in their service to you. Once per day as a standard action, you can inspire all allies within 60 feet to greater speed and might. They each gain a 10-foot bonus to their speed and the benefits of heroism. On any attack rolls, saving throws, or skill checks benefiting from this morale bonus, your allies take no penalties due to the effects of water or weather. The bonus lasts for 1 hour per Hit Die you possess. As an immediate action, you can cause any number of creatures who disobey your orders to lose this bonus.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Fearsome Boast (Sp) monkey fishACG 3/day, slipstreamAPG 2/day, or water breathing 1/day` },
+    { tier: 2, description: `2: Doom of Sailors (Sp) You can immobilize ships or scatter a fleet with a wave of your hand. Once per day, you can cast either control water or control winds.` },
+    { tier: 3, description: `3: Pirate Queen’s Curse (Su) You know that the Pirate Queen’s enemies are destined to suffer, and you can deliver her wrath personally. Three times per day, you can channel a curse through your weapon. You must declare your use of this ability before you make the attack roll. On a hit, the target is cursed unless it succeeds at a Will saving throw to negate the effect (DC = 10 + 1/2 your Hit Dice + your Charisma modifier). The curse causes the target to be sickened for a number of days equal to your Hit Dice; furthermore, during this period, any creatures flanking the target or against which it is denied its Dexterity bonus to AC deal an additional 1d6 points of damage with every successful hit. This extra damage applies to the attack that delivers the curse. In addition, all creatures with a swim speed have a starting attitude of hostile toward the target. This is a 7th-level curse effect. The curse cannot be dispelled, but it can be removed through break enchantment, limited wish, miracle, remove curse, or wish.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const groetus: DeityEntry = {
+  id: 'groetus',
+  name: 'Groetus',
+  title: 'God of the End Times',
+  alignment: 'CN',
+  portfolio: `Empty places, oblivion, ruins`,
+  domains: ['chaos', 'darkness', 'destruction', 'madness', 'void'],
+  subdomains: ['catastrophe', 'entropy', 'insanity', 'loss', 'night', 'stars', 'truth'],
+  favoredWeapon: 'Heavy flail',
+  allowedClericAlignments: ['CG', 'CN', 'CE', 'N'],
+  symbol: `Skull-faced moon`,
+  boons: {
+    obedienceRequirement: `Preach of the coming end times to a listener who has not yet accepted this truth. If the person leaves or otherwise refuses to listen to you for the full hour, you must find another person to preach to so that you are proselytizing the entire time. Alternatively, if no one at all is available to listen, spend an hour contemplating ways and times the world might end—do so in an empty place where nothing lives and no person except Groetan worshipers have been for at least a month. While you contemplate, deface any surface available to you with unholy images and symbols, such as a skull-like moon. You then gain a +1 sacred or profane bonus on Will saving throws. The type of bonus depends on your alignment— if you’re neither good nor evil, you must choose either sacred or profane the first time you perform your obedience, and this choice can’t be changed.`,
+    evangelist: [
+    { tier: 1, description: `1: Doomsayer (Sp) doom 3/day, augury 2/day, or bestow curse 1/day` },
+    { tier: 2, description: `2: Consume Essence (Su) As Groetus will one day consume all existence, so do you seek to consume other mortals. Once per day, you can consume the essence of a dead creature. You must touch the target corpse, which can attempt a Fortitude saving throw (DC = 10 + 1/2 your Hit Dice + your Charisma modifier). If it fails this saving throw, the target is destroyed as per disintegrate, and you gain 1d8 temporary hit points. These temporary hit points last for a number of hours equal to your Hit Dice.` },
+    { tier: 3, description: `3: Whispers of Insanity (Su) Once per day as a standard action, you can whisper an insight gleaned from Groetus to shatter the mind of another creature within 30 feet. The target must attempt a Will saving throw (DC = 10 + 1/2 your Hit Dice + your Charisma modifier). If it fails, the target is driven mad by thoughts and concepts far beyond what the brain can handle, as if the workings of Thassilonian magic were revealed to a common ant; it is affected as if by the insanity spell. In addition to the normal ways to remove this spell, this ability’s maddening thoughts can be removed using modify memory. A successful Knowledge (religion) check (DC = 10 + 1/2 your Hit Dice + your Charisma modifier) reveals this additional way to negate the effect.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Maddening Voice (Sp) lesser confusion 3/day, mad hallucinationUM 2/day, or confusion 1/day` },
+    { tier: 2, description: `2: Silent Witness (Su) Emulating Groetus, you can observe your surroundings and the people within them without being heeded or harmed. Once per day as a full-round action, you can protect yourself with the effects of invisibility, nondetection, and sanctuary for 10 minutes per Hit Die you possess. Anyone who succeeds at a Will saving throw (DC = 10 + 1/2 your Hit Dice + your Wisdom modifier) or a caster level check (DC = 11 + your Hit Dice) against these effects sees a glimpse of something unfathomable and becomes confused for 1 round unless it succeeds at a second Will save with the same DC.` },
+    { tier: 3, description: `3: Infinite Patience (Su) You will serve Groetus until the end of the world, no matter how long you must wait. You cannot die of old age, even by magical means, although aging otherwise affects you normally. In addition, once per day as a standard action, you can choose any one action you could ready and define a condition under which you will take that action. Within the next 24 hours, whenever you observe that condition, you can take the chosen action as an immediate action.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Endbringer (Sp) true strike 3/day, death knell 2/day, or keen edge 1/day` },
+    { tier: 2, description: `2: Visions of the End (Su) Once per day as a full-round action, you can gain a sudden vision of a target’s doom. You gain the benefits of augury, know the enemyUM, and locate weaknessUC simultaneously, all regarding the same creature or object (even if the spell normally doesn’t function with objects) and its death or undoing. You can use the locate weakness effect on only the target creature.` },
+    { tier: 3, description: `3: Frightful Presence (Su) You have looked into oblivion, and its horrors are reflected in your eyes. You can terrify foes as a free action whenever you take an offensive action, such as attacking. Foes within 30 feet of you and with fewer Hit Dice than you must succeed at a Will saving throw or become shaken for a number of rounds equal to your Hit Dice (DC = 10 + 1/2 your Hit Dice + your Charisma modifier). If the victim has 4 or fewer Hit Dice, it becomes panicked instead. Foes with more Hit Dice than you are immune to this ability.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const hanspur: DeityEntry = {
+  id: 'hanspur',
+  name: 'Hanspur',
+  title: 'The Water Rat',
+  alignment: 'CN',
+  portfolio: `River travel, rivers, smugglers`,
+  domains: ['chaos', 'death', 'travel', 'water'],
+  subdomains: ['exploration', 'murder', 'rivers', 'trade'],
+  favoredWeapon: 'Trident',
+  allowedClericAlignments: ['CG', 'CN', 'CE', 'N'],
+  symbol: `Rat walking on water`,
+  sacredAnimal: `Rat`,
+  sacredColors: ['blue', 'gold'],
+  boons: {
+    obedienceRequirement: `With the assistance of another priest of Hanspur or by yourself, simulate the act of drowning. You can do this by fully submerging yourself in a body of water, exhaling all of your breath, and painfully inhaling water instead of air. Alternatively, you can lie on your back with your head at a lower elevation than your legs while water is slowly poured on your face and up your nose. If you choose the latter method, you must cover your face with a cloth while the water is poured. When you conclude this simulated drowning, contemplate your life and how your goals coincide with the teachings of Hanspur and the Six River Freedoms. You gain a +4 sacred or profane bonus on Survival checks attempted while on or near rivers. The type of bonus depends on your alignment—if you’re neither good nor evil, you must choose either a sacred bonus or a profane bonus the first time you perform your obedience, and this choice can’t be changed.`,
+    evangelist: [
+    { tier: 1, description: `1: River Sage (Sp) hydraulic pushAPG 3/day, river whipACG 2/day, or hydraulic torrentAPG 1/day` },
+    { tier: 2, description: `2: River Scion (Su) Just as drowning was not the end of Hanspur’s story, inhaling water holds no terror for you. As a free action you can breathe underwater, as if affected by water breathing, for a number of hours per day equal to the number of Hit Dice you possess. These hours need not be used consecutively, but must be used in 1-hour increments.` },
+    { tier: 3, description: `3: River’s Embodiment (Sp) The river is a part of you, and you are a part of it. Once per day as a standard action, you can transform yourself into a Huge water elemental, as per elemental body IV. You can stay in this form for 1 minute per Hit Die you possess, and can dismiss this effect as a free action.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: River Guide (Sp) obscuring mist 3/day, haunting mistsUM 2/day, or aqueous orbAPG 1/day` },
+    { tier: 2, description: `2: River Traveler (Su) A priest of Hanspur should never fear the water, and should move as freely as the fish (and rats) that make their homes within it. As a free action, you can grant yourself and any allies within 30 feet of you a swim speed of 60 feet. This effect lasts for 1 round per Hit Die you possess or until you dismiss it as a free action, whichever comes first. Your allies must remain within 30 feet of you or lose this benefit. In addition, you gain a +2 profane or sacred bonus (of the same type as that provided by your obedience) on saves against spells with the water descriptor.` },
+    { tier: 3, description: `3: River’s Depths (Su) The river is your companion, and it fights on your behalf, teaching your enemies about the holy act of drowning. Once per day as a standard action, you can cause one creature within 30 feet to begin drowning, filling its lungs with water. The target of this ability can attempt a Fortitude save (DC = 10 + 1/2 your Hit Dice + your Wisdom modifier) to negate the effect. If the target succeeds, it is staggered for 1 round while it gasps for breath. On a failed save, the target immediately begins to suffocate. On the target’s next turn, it falls unconscious and is reduced to 0 hit points. One round later, the target drops to –1 hit points and is dying. One round after that, the target dies. Each round, the target can attempt a Fortitude save to end the effect. This ability affects only living creatures that must breathe and cannot breathe underwater. This is a curse effect.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: River Warden (Sp) wave shieldACG 3/day, masterwork transformationUM 2/day, or quench 1/day` },
+    { tier: 2, description: `2: River Champion (Su) The river is your weapon. Three times per day as a standard action, you can sculpt water into the form of a melee weapon with which you are proficient (typically a trident, but it could also take the form of a dagger or another light weapon). You must have enough water to form the weapon, an amount equal to the weapon’s normal weight. Once formed, the weapon behaves as a weapon of its type with an enhancement bonus of +1. This bonus increases by 1 for every 5 additional Hit Dice you have beyond 5 (up to a maximum of +4 at 20 Hit Dice). This weapon deals double the normal amount of damage to creatures with the fire subtype. The weapon dissolves into ordinary water after a number of rounds equal to your Hit Dice or as soon as it leaves your hand, whichever happens first.` },
+    { tier: 3, description: `3: River’s Renewal (Su) As Hanspur was reborn in the water, so too are you healed by it. When completely submerged in water, you gain fast healing 2. You can recover a total number of hit points equal to twice your Hit Dice in this manner each day. At 20th level, if you fall below 0 hit points and your body is fully submerged in a river, you automatically stabilize.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const nocticulaRedeemed: DeityEntry = {
+  id: 'nocticula-redeemed',
+  name: 'Nocticula (Redeemed)',
+  title: 'The Redeemer Queen',
+  alignment: 'CN',
+  portfolio: `Artists, exiles, midnight`,
+  domains: ['artifice', 'chaos', 'darkness', 'travel', 'void'],
+  subdomains: ['exploration', 'isolation', 'moon', 'night', 'revelry'],
+  favoredWeapon: 'dagger',
+  allowedClericAlignments: ['CG', 'CN', 'CE', 'N'],
+  symbol: `moon with a pair of smirking lips and a seven-pointed crown`,
+  sacredAnimal: `bat`,
+  sacredColors: ['blue', 'white'],
+  boons: {
+    obedienceRequirement: `Spend an hour in a secluded location while crafting a work of art. If your hour of work begins at, ends at, or includes the stroke of midnight, then the subject of your art is up to you. Otherwise, your art must include the concept of midnight in some way. When you aren’t adjacent to an ally, gain a +1 morale bonus to your AC and on all saving throws.`,
+    evangelist: [
+    { tier: 1, description: `1: Avoid Society (Sp) vanish 3/day, invisibility 2/day, or nondetection 1/day` },
+    { tier: 2, description: `2: Seed of Redemption (Sp) Once per day, you can make a special touch attack against an outsider. On a hit, the outsider becomes staggered for 1 round as it suddenly becomes aware of the fact that it need not follow the ethos and morals of its kind— that it can choose options other than the traditions of its ilk. The outsider must also succeed at a Will saving throw (DC = 10 + 1/2 your Hit Dice + your Charisma modifier) or become favorably disposed toward you, as if affected by charm monster; in this case the stagger effect persists for 1d4+1 rounds, even if the charm effect is dispelled or negated. Given time, you may be able to convert the outsider from its ways and help it find a new path beyond its alignment, although the GM should adjudicate the time and potential success of such an endeavor. This effect is the equivalent of a 7th-level mind-affecting spell.` },
+    { tier: 3, description: `3: False Demise (Su) Once per day, when you are reduced to negative hit points by damage, you are instead reduced to 1 hit point and affected by a mislead spell (caster level equals your character level). The illusory double created by the spell appears to be your dead body.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Artist’s Flourish (Sp) crafter’s fortune 3/ day, wood shape 2/day, or major image 1/day` },
+    { tier: 2, description: `2: Swift Creation (Sp) Once per day as a standard action, you can conjure an object into existence in your vicinity. Objects created in this fashion are always artistic in appearance— otherwise this spell-like ability functions as major creation.` },
+    { tier: 3, description: `3: Summon Sculpture (Sp) Once per day, you can summon a construct to do your bidding. This functions as summon monster IX, but you can only choose to summon one iron golem, 1d3 stone golems, or 1d4+1 glass golems.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Midnight’s Grace (Sp) true strike 3/day, cat’s grace 2/day, or keen edge 1/day` },
+    { tier: 2, description: `2: Sinuous Daggerplay (Ex) You grow a sinuous tail (if you already have a tail, you grow a second one). This tail is prehensile and capable of manipulating and holding small objects, but cannot perform fine manual work as if it were a hand, with the exception of wielding a dagger. When you make a full attack, you can make an additional attack with this tail-wielded dagger. When you do so, you resolve this attack as a primary attack, add your Dexterity modifier to any damage dealt (in addition to any modifiers you might have from Strength), and have a reach that is 5 feet greater than your base reach. Wielding a dagger with your tail in this way does not count as two-weapon fighting for the purposes of determining penalties to attacks made with weapons wielded in your hands. In any round during which you don’t make a full attack but you wield a dagger with this tail, it makes a single attack against an adjacent enemy of your choice—if it hits, it deals no damage but distracts the foe enough so that you gain a +2 circumstance bonus to your Armor Class against that target. You cannot attack with this tail-wielded dagger in any other way, including as a thrown weapon.` },
+    { tier: 3, description: `3: Midnight Rejuvenation (Su) Every night at midnight, you gain the benefits of a heal spell and a greater restoration spell (both resolve at a caster level equal to your character level).` },
+    ],
+  },
+  source: 'pf1e-ap',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const speakersOfTheDepths: DeityEntry = {
+  id: 'speakers-of-the-depths',
+  name: 'Speakers of the Depths',
+  alignment: 'CN',
+  portfolio: `Chaos, creation, and destruction`,
+  domains: ['artifice', 'chaos', 'destruction', 'madness', 'water'],
+  subdomains: ['catastrophe', 'construct', 'insanity', 'oceans', 'protean', 'toil'],
+  favoredWeapon: 'Sickle',
+  allowedClericAlignments: ['CG', 'CN', 'CE', 'N'],
+  symbol: `An eyeless serpent twisted into an infinity symbol to feed upon its own tail`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const achaekek: DeityEntry = {
+  id: 'achaekek',
+  name: 'Achaekek',
+  title: 'He Who Walks in Blood',
+  alignment: 'LE',
+  portfolio: `Assassinations, divine punishment, the red mantis`,
+  domains: ['death', 'evil', 'law', 'trickery', 'war'],
+  subdomains: ['blood', 'deception', 'evil-devil', 'law-devil', 'insect', 'murder', 'tactics', 'thievery'],
+  favoredWeapon: 'Sawtooth sabre',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  symbol: `Crossed mantis claws`,
+  sacredAnimal: `Crimson mantis`,
+  sacredColors: ['red'],
+  boons: {
+    obedienceRequirement: `Meditate in a private place before a trophy or broken religious symbol taken from a target you have been contracted to kill. This trophy must be anointed with a single drop of your blood, drawn from your flesh by a sawtooth sabre, and the trophy must be destroyed at the end of your meditation. If you have yet to complete a contract, have no appropriate trophies at hand, or seek to serve the Mantis God in other ways than as the god’s assassin, you must instead offer your own vital fluid to He Who Walks in Blood by cutting yourself along the right arm with a sawtooth sabre. Such self-mutilation deals 1d6 points of damage to you, which cannot be healed during the hour of meditation without disrupting the obedience; after the meditation ends, the wounds can be healed by any means available. You gain a +2 profane bonus to confirm critical hits while wielding a sawtooth sabre. As long as you have a sawtooth sabre in each hand, you can use those blades to complete the somatic component of any spell you cast, and you treat sawtooth sabres as your divine focus for the casting of divine spells.`,
+    evangelist: [
+    { tier: 1, description: `1: Blessing of the Mantis (Sp) disguise self 3/day, invisibility 2/day, or gaseous form 1/day` },
+    { tier: 2, description: `2: Walk Unseen (Su) He Who Walks in Blood cloaks your steps, ensuring that you can move clandestinely during your hunts. You are constantly under the effects of a pass without trace spell, unless you wish to be followed. You also gain a +2 profane bonus on Stealth checks.` },
+    { tier: 3, description: `3: Second Face (Su) Your deadly equipment is sacred to you. As long as you carry a mask of the mantis (Pathfinder Campaign Setting: The Inner Sea World Guide 298) on your person (even if you do so by carrying it in an extradimensional space), you can instantly don it as a free action or as part of an attack of opportunity. While you wear a mask of the mantis, you can attempt to demoralize a creature within 30 feet using Intimidate as a swift action. You no longer need to expend charges from a mask of the mantis to gain the effect of deathwatch, although you must expend charges as normal to use the mask’s other effects.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Crimson Decree (Sp) doom 3/day, death knell 2/day, or blood biographyAPG 1/day` },
+    { tier: 2, description: `2: Blood Scent (Sp) To your heightened olfactory senses, the acrid scent of blood is as pleasing and distinctive as the sweetest perfume. Three times per day, you can cast blood scent (Pathfinder RPG Advanced Race Guide 143) on yourself as a spell-like ability. This ability does not grant the spell’s bonus on attack and damage rolls, even if you are an orc or have a rage ability.` },
+    { tier: 3, description: `3: Focused Assassin (Su) Your combat skills are just as deadly when you have an assassination target as when you don’t. When you perform your obedience for the day, if you are not contracted to kill a target, you can name a single target. You need not know the exact name of your target, but you must know a suitably detailed and correct description, such as “the thieves’ guild’s second in command.” Against that target, you gain a +2 profane bonus on attack rolls and weapon damage rolls, and you deal an additional 2d6 points of damage. The save DCs of any spells you cast on the target increase by 2. If you are contracted to kill a target, these bonuses apply against that target; if you are contracted to kill multiple targets, you must choose one target against whom these bonuses apply when you perform your obedience.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Blood Must Flow (Sp) lead bladesAPG 3/day, spiritual weapon 2/day, or keen edge 1/day` },
+    { tier: 2, description: `2: Bleeding Wounds (Ex) All wounds you inflict with a sawtooth sabre are bleeding wounds, and deal 1d4 points of bleed damage to the target. If you deal bleed damage via another source (such as the bleeding attack rogue talent or by using a wounding sawtooth sabre), this ability does not deal additional bleed damage. You can also use bleed as a quickened spell-like ability three times per day.` },
+    { tier: 3, description: `3: Mantis Style Mastery (Ex) You take no penalties on attack rolls from two-weapon fighting when wielding two sawtooth sabres simultaneously, and you gain a +2 profane bonus on all damage rolls with sawtooth sabres. If you deal sneak attack damage with a sawtooth sabre, you deal 2 additional points of damage for each die rolled as part of your sneak attack damage. If you have levels in the Red Mantis assassin prestige class (The Inner Sea World Guide 282), the DC for the save against your prayer attack increases by 2.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const dhalavei: DeityEntry = {
+  id: 'dhalavei',
+  name: 'Dhalavei',
+  title: 'The Unsuspected Rot',
+  alignment: 'LE',
+  portfolio: `Secrets, discord, eclipses`,
+  domains: ['destruction', 'evil', 'knowledge', 'law', 'trickery'],
+  subdomains: [],
+  favoredWeapon: 'Temple sword',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  symbol: `Six feminine arms forming a hexagon shape`,
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const lissala: DeityEntry = {
+  id: 'lissala',
+  name: 'Lissala',
+  title: 'The Sihedron Scion',
+  alignment: 'LE',
+  portfolio: `Obedience, reward of service, runes`,
+  domains: ['evil', 'knowledge', 'law', 'nobility', 'rune'],
+  subdomains: ['evil-devil', 'law-devil', 'nobility-hubris', 'language', 'leadership', 'law-legislation', 'rune-legislation', 'memory', 'sovereignty', 'thought', 'wards'],
+  favoredWeapon: 'Whip',
+  allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
+  symbol: `Sihedron`,
+  sacredAnimal: `Snake`,
+  sacredColors: ['gold', 'green'],
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const ahPook: DeityEntry = {
+  id: 'ah-pook',
+  name: 'Ah Pook',
+  title: 'The Destroyer',
+  alignment: 'NE',
+  portfolio: `Death, destruction, and the moon`,
+  domains: ['darkness', 'death', 'destruction', 'evil', 'void'],
+  subdomains: ['catastrophe', 'fear', 'isolation', 'loss', 'moon', 'sahkil'],
+  favoredWeapon: 'Terbutje',
+  allowedClericAlignments: ['N', 'NE', 'LE', 'CE'],
+  symbol: `a skull with a crescent eclipse`,
+  sacredAnimal: `maggot`,
+  source: 'pf1e-ap',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const ahriman: DeityEntry = {
+  id: 'ahriman',
+  name: 'Ahriman',
+  title: 'Lord of All Divs',
+  alignment: 'NE',
+  portfolio: `Destruction, div, nihilism`,
+  domains: ['darkness', 'death', 'destruction', 'evil'],
+  subdomains: ['catastrophe', 'fear', 'loss', 'rage'],
+  favoredWeapon: 'Whip',
+  allowedClericAlignments: ['N', 'NE', 'LE', 'CE'],
+  symbol: `Black and silver eclipse`,
+  sacredAnimal: `Snake`,
+  sacredColors: ['black', 'silver'],
+  boons: {
+    obedienceRequirement: `While praying to Ahriman, destroy something of monetary or sentimental value to another person, preferably in front of someone who feels a strong emotional connection toward it. Alternatively, voluntarily take 1 point of Constitution damage while chanting praises to Ahriman and flagellating yourself with a barbed lash. After performing this obedience, your true alignment is masked from detection. Each time you perform this obedience, you select an alignment that you wish to detect as. Once chosen, this alignment can’t be changed until you perform this obedience again or 24 hours pass. The masked alignment can trick items and magic that require a particular alignment. For example, a neutral evil follower can make her alignment appear to be lawful good, which would allow her to safely pass beyond a glyph of warding keyed to lawful good.`,
+    evangelist: [
+    { tier: 1, description: `1: Ahriman’s Word (Sp) command 3/day, detect thoughts 2/day, or suggestion 1/day` },
+    { tier: 2, description: `2: Unassailable Conviction (Su) You know existence is pointless and find little that can affect your outlook or sway your ultimate outcome in the bleak span of existence. Once per day when you fail a Will save, you can immediately roll again and use the second result as your actual saving throw result. If you succeed at this second save, you gain a +2 morale bonus on attack rolls and saving throws for 1 hour.` },
+    { tier: 3, description: `3: Force the Lie (Su) Once per day, you can twist the intention of beneficial effects. As a standard action, you can create a wave of crackling black energy that fills a 30-foot-radius spread at any point within 90 feet of you. Creatures in this area other than yourself that are benefiting from a luck, morale, or sacred bonus instead treat that bonus as a penalty. You and other worshipers of Ahriman can see through this area of black energy with ease, but all other creatures treat the area as if it were under the effects of obscuring mist. The black energy persists for 1 round per Hit Die you have, and cannot be dissipated by wind effects. An affected creature can negate this adjustment to bonuses with a successful Will save (DC = 10 + half your Hit Dice + your Charisma modifier), but this does not negate the obscuring effect.` },
+    ],
+    exalted: [
+    { tier: 1, description: `1: Hamper the Righteous (Sp) protection from good 3/day, touch of idiocy 2/day, or bestow curse 1/day` },
+    { tier: 2, description: `2: Pierce Obfuscation (Su) You can see the bleak truth despite means to hide your vision. You can see perfectly in darkness of any kind, including that created by deeper darkness. Once per day, you can cast true seeing as a spell-like ability.` },
+    { tier: 3, description: `3: Call for Ruin (Sp) You can conjure some of Ahriman’s armies for your own purposes. Once per day as a standard action, you can summon 1d4+1 ghawwas, 1d3 shiras, or one sepid as if with summon monster IX, and you gain telepathy with them to a range of 100 feet. The divs summoned in this way follow your commands perfectly for 1 round per Hit Die you have before vanishing back to their home in Abaddon. The summoned divs don’t follow commands that would cause them to perform overly good acts or save mortal lives other than your own, and they immediately vanish if your orders contradict these restrictions.` },
+    ],
+    sentinel: [
+    { tier: 1, description: `1: Break the Weak (Sp) inflict light wounds 3/day, death knell 2/day, or dispel magic 1/day` },
+    { tier: 2, description: `2: Serpentine Lash (Su) Any whip you wield becomes an extension of your embodiment of evil, lashing out against all those who fail to prostrate themselves before you and oblivion. You gain Weapon Specialization (whip) and Whip Mastery as bonus feats, even if you do not meet the prerequisites. In addition, your whip takes on the illusory appearance of a serpent, and you gain a +2 profane bonus to combat maneuver checks to trip opponents. If you wield a whip with at least a +1 enhancement bonus, you can grant it the dancing weapon special ability for 6 rounds per day as a swift action. These rounds need not be consecutive.` },
+    { tier: 3, description: `3: Crush Opposition (Su) Three times per day, you can target one corporeal enemy within 60 feet and call out a castigating challenge that causes the creature to painfully collapse in on itself in a crackle of black energy. The target takes 10 points of damage per Hit Dice you have. Creatures targeted by this ability can attempt a Fortitude save (DC = 10 + half your Hit Dice + your Charisma modifier) to reduce the damage by half. A creature slain by this effect is completely destroyed, and all items it was carrying or wearing at the time fall to the ground and become cursed for a number of hours equal to your Hit Dice. The curse on these items causes nonevil creatures who carry one of the items to take a –1 penalty on saving throws against fear and insanity effects; the penalties for carrying multiple items stack.` },
+    ],
+  },
+  source: 'pf1e-inner-sea-gods',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const batch_005: DeityEntry[] = [besmara, groetus, hanspur, nocticulaRedeemed, speakersOfTheDepths, achaekek, dhalavei, lissala, ahPook, ahriman];

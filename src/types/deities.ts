@@ -22,7 +22,7 @@ export interface DeityBoons {
 export interface DeityEntry {
   id: string; // kebab-case: 'milani', 'iomedae', 'cayden-cailean'
   name: string;
-  title: string; // epithet: 'The Everbloom', 'The Inheritor'
+  title?: string; // epithet: 'The Everbloom', 'The Inheritor'; absent for collective entities
   alignment: string; // 'LG' | 'NG' | 'CG' | 'LN' | 'N' | 'CN' | 'LE' | 'NE' | 'CE'
   portfolio: string; // 'hope, uprisings, devotion to a cause'
 
@@ -33,7 +33,7 @@ export interface DeityEntry {
   allowedClericAlignments: string[]; // alignments within one step of deity
 
   // Flavor
-  symbol: string; // holy symbol description: 'rose on bloody street'
+  symbol?: string; // holy symbol description: 'rose on bloody street'; absent if undocumented
   sacredAnimal?: string;
   sacredColors?: string[];
   description?: string;

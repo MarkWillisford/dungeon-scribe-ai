@@ -124,24 +124,35 @@ so re-seeding them is a safe no-op.
 
 ## Agent Batch Plan
 
-~400 entries ÷ 25 per batch = **~16 batches → 4 rounds of 4 agents**.
+~400 entries ÷ 10 per batch = **~40 batches → 10 rounds of 4 agents**.
+
+**Why 10 per batch:** Deity entries with full Deific Obedience boons average ~700 words of boon
+text alone (~100–150 lines of TypeScript per entry). At 10 per batch the output file stays in
+the 1,000–1,500 line range — the same safe zone as other successful scraping runs. 25 per batch
+would push 3,000+ lines and risks agent output limits.
 
 The orchestrating Claude instance fetches the index page, extracts the full ordered list of
-deity names and URLs across all groups, divides them into 16 sequential batches of 25, and
+deity names and URLs across all groups, divides them into 40 sequential batches of 10, and
 assigns one batch per agent. Exact batch boundaries depend on the live index order.
 
-| Round | Batches | Approximate Groups Covered                                                             |
-| ----- | ------- | -------------------------------------------------------------------------------------- |
-| 1     | 001–004 | Core Deities (~20) + start of Other Deities                                            |
-| 2     | 005–008 | Other Deities (continued) + Archdevils + Asura Ranas + start of Azlanti                |
-| 3     | 009–012 | Azlanti (cont) + Daemon Harbingers + Dead Deities + Demon Lords + start Dwarven        |
-| 4     | 013–016 | Dwarven (cont) + Eldest + Elemental Lords + Elven + Empyreal Lords + Giants + Tian Xia |
+| Round | Batches | Approximate Groups Covered                                                              |
+| ----- | ------- | --------------------------------------------------------------------------------------- |
+| 1     | 001–004 | Core Deities (first ~40)                                                                |
+| 2     | 005–008 | Core Deities (remaining) + start of Other Deities                                       |
+| 3     | 009–012 | Other Deities (continued)                                                               |
+| 4     | 013–016 | Other Deities (cont) + Archdevils + Asura Ranas                                         |
+| 5     | 017–020 | Azlanti + start of Daemon Harbingers                                                    |
+| 6     | 021–024 | Daemon Harbingers (cont) + Dead Deities + start of Demon Lords                          |
+| 7     | 025–028 | Demon Lords (continued)                                                                 |
+| 8     | 029–032 | Demon Lords (cont) + Dwarven + Eldest + Elemental Lords                                 |
+| 9     | 033–036 | Elven + Empyreal Lords (first half)                                                     |
+| 10    | 037–040 | Empyreal Lords (cont) + Giants + Tian Xia                                               |
 
 ---
 
 ## Agent Rules
 
-1. You are given a pre-assigned list of 25 entry URLs. Work through them in order.
+1. You are given a pre-assigned list of 10 entry URLs. Work through them in order.
 2. Write your output to `src/data/deities/raw/deities_batch_NNN.ts`.
 3. Begin the file with: `// Batch NNN | first: 'Name' | last: 'Name' | count: N`
 4. Import types: `import { DeityEntry } from '@/types/deities';`
@@ -388,11 +399,17 @@ Follows the upsert pattern (no clear before seed — preserves campaign/homebrew
 
 - [ ] Orchestrating Claude fetches https://www.aonprd.com/DeitiesByGroup.aspx
 - [ ] Extract full ordered URL list across all 15 groups
-- [ ] Divide into 16 batches of 25; note any entries already hand-authored (Milani, Iomedae)
+- [ ] Divide into 40 batches of 10; note any entries already hand-authored (Milani, Iomedae)
 - [ ] Round 1: launch 4 background agents (batches 001–004)
 - [ ] Round 2: launch 4 background agents (batches 005–008)
 - [ ] Round 3: launch 4 background agents (batches 009–012)
 - [ ] Round 4: launch 4 background agents (batches 013–016)
+- [ ] Round 5: launch 4 background agents (batches 017–020)
+- [ ] Round 6: launch 4 background agents (batches 021–024)
+- [ ] Round 7: launch 4 background agents (batches 025–028)
+- [ ] Round 8: launch 4 background agents (batches 029–032)
+- [ ] Round 9: launch 4 background agents (batches 033–036)
+- [ ] Round 10: launch 4 background agents (batches 037–040)
 - [ ] Combine all `raw/deities_batch_NNN.ts` into `src/data/deities/index.ts`
 - [ ] `npm run typecheck` — zero errors
 - [ ] Write `scripts/db/seedDeities.ts`
