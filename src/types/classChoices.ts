@@ -59,6 +59,11 @@ export interface ClassChoiceOption {
   name: string;
   description: string;
   prerequisites?: FeatPrerequisite[];
+  // For choices that require a subtype (e.g. Humanoid → 'human', 'elf'; Outsider → 'devil', 'demon')
+  subtypePrompt?: {
+    label: string; // 'Choose a subtype'
+    options: string[]; // allowed subtype values
+  };
 }
 
 // ---- Class Choice Definition ----
@@ -82,6 +87,11 @@ export interface ClassChoiceDefinition {
   collectionName?: string;
   // Runtime substitution tokens (e.g. '{chosen_deity}') resolved from character state
   collectionFilter?: Record<string, unknown>;
+
+  // Per-level max spell level filter (Dweomerkeeper Mantle of Spells, etc.)
+  // Maps class level → filter parameters applied to the collection query.
+  // e.g. { 1: { maxSpellLevel: 1 }, 3: { maxSpellLevel: 2 }, 5: { maxSpellLevel: 3 } }
+  levelFilterTable?: Record<number, Record<string, unknown>>;
 
   // ContentMetadata
   source: string; // 'pf1e-core' | 'pf1e-apg' | '3.5e' | 'homebrew' | etc.

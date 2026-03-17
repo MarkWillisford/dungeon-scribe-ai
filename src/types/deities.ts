@@ -4,7 +4,22 @@
 // and determine favored weapon for Warpriest and related features.
 // Descriptions are flavor text — mechanical effects wired by modifier pipeline.
 
-export interface DeityDocument {
+// ---- Prestige class boons (Sentinel 3/6/9, Evangelist 3/6/9, Exalted 3/6/9) ----
+// Boons are text descriptions only — mechanical effects wired by modifier pipeline.
+
+export interface DeityBoonTier {
+  tier: 1 | 2 | 3;
+  description: string;
+}
+
+export interface DeityBoons {
+  obedienceRequirement: string;
+  evangelist: DeityBoonTier[]; // exactly 3 entries
+  exalted: DeityBoonTier[]; // exactly 3 entries
+  sentinel: DeityBoonTier[]; // exactly 3 entries
+}
+
+export interface DeityEntry {
   id: string; // kebab-case: 'milani', 'iomedae', 'cayden-cailean'
   name: string;
   title: string; // epithet: 'The Everbloom', 'The Inheritor'
@@ -22,6 +37,9 @@ export interface DeityDocument {
   sacredAnimal?: string;
   sacredColors?: string[];
   description?: string;
+
+  // Prestige class boons (Evangelist / Exalted / Sentinel)
+  boons?: DeityBoons;
 
   // ContentMetadata
   source: string; // 'pf1e-core' | 'pf1e-apg' | '3.5e' | 'homebrew' | etc.

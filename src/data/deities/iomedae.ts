@@ -1,6 +1,6 @@
-import { DeityDocument } from '@/types/deities';
+import { DeityEntry } from '@/types/deities';
 
-export const iomedae: DeityDocument = {
+export const iomedae: DeityEntry = {
   id: 'iomedae',
   name: 'Iomedae',
   title: 'The Inheritor',

@@ -14,9 +14,9 @@ Collect all Paizo domains and subdomains from d20pfsrd.com into the Firestore `d
 
 Types are already defined — no new type files needed.
 
-- `DomainDocument` — `src/types/classOptions.ts`
+- `DomainEntry` — `src/types/classOptions.ts`
 - `DomainPower` — `src/types/classOptions.ts`
-- `ClassOptionDocument` — base type, `src/types/classOptions.ts`
+- `ClassOptionBase` — base type, `src/types/classOptions.ts`
 
 ```typescript
 // For reference:
@@ -26,10 +26,11 @@ interface DomainPower {
   levelGained: number; // typically 1 or 6
 }
 
-interface DomainDocument extends ClassOptionDocument {
+interface DomainEntry extends ClassOptionBase {
   domainSpells: string[]; // 9 entries — index 0 = level 1 spell name
   powers: DomainPower[];
   grantedClassSkills?: string[];
+  druidAllowed?: boolean; // true if Druids can choose this domain via Nature Bond; omit if unknown
 }
 ```
 
@@ -90,7 +91,7 @@ Every scraping agent must follow these rules:
 1. You are given a pre-assigned list of URLs. Scrape only those URLs, in order.
 2. Write output to `src/data/domains/raw/domains_batch_NNN.ts`.
 3. Begin the file with: `// Batch NNN | first: 'Name' | last: 'Name' | count: N`
-4. Import types: `import { DomainDocument } from '@/types/classOptions';`
+4. Import types: `import { DomainEntry } from '@/types/classOptions';`
 5. `id` format:
    - Domain: kebab-case name, e.g. `'air'`, `'good'`, `'death'`
    - Subdomain: `'{parent}-{subdomain}'`, e.g. `'death-undead'`, `'good-agathion'`
@@ -100,7 +101,7 @@ Every scraping agent must follow these rules:
 9. For subdomains, `description` must note the parent domain: e.g. `'Subdomain of Death. ...'`
 10. Every entry gets `source: 'pf1e-core'`, `isOfficial: true`, `visibility: 'global'`, `rev: 1`. Omit `createdBy` and `campaignId`.
 11. Do not summarize or abbreviate power descriptions — copy them faithfully.
-12. Emit one named export per domain: `export const goodDomain: DomainDocument = { ... }`.
+12. Emit one named export per domain: `export const goodDomain: DomainEntry = { ... }`.
 13. Also emit a batch array at the bottom: `export const batch_NNN = [airDomain, animalDomain, ...]`.
 14. If a page cannot be fetched (404, timeout), emit a stub with `description: 'PAGE_FETCH_FAILED'` and `powers: []`, `domainSpells: []`. Log the failed URL in the checkpoint comment.
 15. Run `npm run typecheck` before reporting done. Fix all errors.
@@ -114,7 +115,7 @@ Hand-authored to validate the model before agents launch.
 ### 1. Good Domain
 
 ```typescript
-export const goodDomain: DomainDocument = {
+export const goodDomain: DomainEntry = {
   id: 'good',
   name: 'Good Domain',
   description: 'You have pledged your life and soul to goodness and purity.',
@@ -153,7 +154,7 @@ export const goodDomain: DomainDocument = {
 ### 2. Good — Agathion Subdomain
 
 ```typescript
-export const goodAgathionDomain: DomainDocument = {
+export const goodAgathionDomain: DomainEntry = {
   id: 'good-agathion',
   name: 'Agathion Subdomain',
   description:
@@ -193,7 +194,7 @@ export const goodAgathionDomain: DomainDocument = {
 ### 3. Healing Domain
 
 ```typescript
-export const healingDomain: DomainDocument = {
+export const healingDomain: DomainEntry = {
   id: 'healing',
   name: 'Healing Domain',
   description:
@@ -233,7 +234,7 @@ export const healingDomain: DomainDocument = {
 ### 4. Liberation Domain
 
 ```typescript
-export const liberationDomain: DomainDocument = {
+export const liberationDomain: DomainEntry = {
   id: 'liberation',
   name: 'Liberation Domain',
   description:
@@ -316,7 +317,7 @@ Deities gate domain availability for clerics and must be seeded alongside domain
 
 ### Type — DONE
 
-`src/types/deities.ts` — `DeityDocument` interface. Fields: `id`, `name`, `title`, `alignment`, `portfolio`, `domains[]`, `subdomains[]`, `favoredWeapon`, `allowedClericAlignments[]`, `symbol`, `sacredAnimal?`, `sacredColors?`, `description?`, plus ContentMetadata.
+`src/types/deities.ts` — `DeityEntry` interface. Fields: `id`, `name`, `title`, `alignment`, `portfolio`, `domains[]`, `subdomains[]`, `favoredWeapon`, `allowedClericAlignments[]`, `symbol`, `sacredAnimal?`, `sacredColors?`, `description?`, plus ContentMetadata.
 
 ### Hand-Authored Entries — DONE
 

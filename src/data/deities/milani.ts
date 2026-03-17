@@ -1,6 +1,6 @@
-import { DeityDocument } from '@/types/deities';
+import { DeityEntry } from '@/types/deities';
 
-export const milani: DeityDocument = {
+export const milani: DeityEntry = {
   id: 'milani',
   name: 'Milani',
   title: 'The Everbloom',
