@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Pressable, Text, StyleSheet, ScrollView } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
+import { SectionCompletionDot } from './SectionCompletionDot';
+import { type TabStatus } from '@/store/slices/characterEntrySlice';
 
 interface Tab {
   key: string;
@@ -11,10 +13,11 @@ interface OrnateTabProps {
   tabs: Tab[];
   activeTab: string;
   onTabChange: (key: string) => void;
+  tabStatus?: Record<string, TabStatus>; // optional per-tab dot indicators
   testID?: string;
 }
 
-export function OrnateTab({ tabs, activeTab, onTabChange, testID }: OrnateTabProps) {
+export function OrnateTab({ tabs, activeTab, onTabChange, tabStatus, testID }: OrnateTabProps) {
   const { colors, fantasy, isDark } = useTheme();
 
   return (
@@ -37,20 +40,23 @@ export function OrnateTab({ tabs, activeTab, onTabChange, testID }: OrnateTabPro
               accessibilityLabel={tab.label}
               accessibilityState={{ selected: isActive }}
             >
-              <Text
-                style={[
-                  styles.tabText,
-                  {
-                    color: isActive
-                      ? isDark
-                        ? fantasy.gold
-                        : fantasy.darkWood
-                      : colors.text.tertiary,
-                  },
-                ]}
-              >
-                {tab.label}
-              </Text>
+              <View style={styles.labelRow}>
+                <Text
+                  style={[
+                    styles.tabText,
+                    {
+                      color: isActive
+                        ? isDark
+                          ? fantasy.gold
+                          : fantasy.darkWood
+                        : colors.text.tertiary,
+                    },
+                  ]}
+                >
+                  {tab.label}
+                </Text>
+                {tabStatus?.[tab.key] && <SectionCompletionDot status={tabStatus[tab.key]} />}
+              </View>
             </Pressable>
           );
         })}
@@ -69,6 +75,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     minHeight: 44,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  labelRow: {
+    flexDirection: 'row',
     alignItems: 'center',
   },
   tabText: {
