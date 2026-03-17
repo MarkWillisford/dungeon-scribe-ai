@@ -1,0 +1,917 @@
+// Batch 001 | first: 'Allosaurus' | last: 'Bustard' | count: 25
+// Source: https://www.d20pfsrd.com/classes/core-classes/druid/animal-companions/
+// 3pp boundary: not reached — stopped at 'Bustard' (alphabetical, letter B)
+// PAGE_FETCH_FAILED stubs: Bustard (no stat block found after 2 fetch attempts)
+
+import { AnimalCompanionEntry } from '@/types/animalCompanions';
+
+// ─── Chunk 1: Allosaurus – Axe Beak ───────────────────────────────────────────
+
+export const allosaurus: AnimalCompanionEntry = {
+  id: 'allosaurus',
+  name: 'Allosaurus',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '40 ft.',
+  naturalArmor: 4,
+  attacks: 'bite (1d6), 2 claws (1d4)',
+  str: 14,
+  dex: 16,
+  con: 10,
+  int: 0, // INT: — (non-intelligent)
+  wis: 15,
+  cha: 10,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d8), 2 claws (1d6)',
+      specialQualitiesGained: ['grab', 'pounce'],
+    },
+  ],
+  source: 'pf1e-core',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const amargasaurus: AnimalCompanionEntry = {
+  id: 'amargasaurus',
+  name: 'Amargasaurus',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '30 ft.',
+  naturalArmor: 3,
+  attacks: 'slam (1d6), tail slap (1d6)',
+  str: 11,
+  dex: 18,
+  con: 9,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 10,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'slam (1d8), tail slap (1d8)',
+      specialQualitiesGained: ['trample'],
+    },
+  ],
+  source: 'pf1e-b3',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const ankylosaurus: AnimalCompanionEntry = {
+  id: 'ankylosaurus',
+  name: 'Ankylosaurus',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '30 ft.',
+  naturalArmor: 9,
+  attacks: 'tail (1d6)',
+  str: 10,
+  dex: 14,
+  con: 9,
+  int: 0, // INT: — (non-intelligent)
+  wis: 12,
+  cha: 8,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'tail (2d6)',
+      specialQualitiesGained: ['stun'],
+    },
+  ],
+  source: 'pf1e-b3',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const antGiant: AnimalCompanionEntry = {
+  id: 'ant-giant',
+  name: 'Ant, Giant',
+  companionType: 'vermin',
+  size: 'Small',
+  speed: '40 ft.',
+  naturalArmor: 0,
+  attacks: 'bite (1d4)',
+  str: 10,
+  dex: 17,
+  con: 12,
+  int: 0, // INT: — (mindless vermin)
+  wis: 13,
+  cha: 2,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 2 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d6)',
+    },
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 4 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d8)',
+      specialQualitiesGained: ['grab', 'trample'],
+    },
+  ],
+  source: 'pf1e-um',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const antelope: AnimalCompanionEntry = {
+  id: 'antelope',
+  name: 'Antelope',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '60 ft.',
+  naturalArmor: 1,
+  attacks: 'gore (1d4)',
+  str: 10,
+  dex: 17,
+  con: 14,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 5,
+  specialQualities: ['low-light vision'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      abilityScoreChanges: [
+        { ability: 'STR', change: 2 },
+        { ability: 'DEX', change: 2 },
+        { ability: 'CON', change: 2 },
+      ],
+    },
+  ],
+  source: 'pf1e-b4',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const ape: AnimalCompanionEntry = {
+  id: 'ape',
+  name: 'Ape',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '30 ft., climb 30 ft.',
+  naturalArmor: 1,
+  attacks: 'bite (1d4), 2 claws (1d4)',
+  str: 13,
+  dex: 17,
+  con: 10,
+  int: 0, // INT: — (non-intelligent)
+  wis: 12,
+  cha: 7,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d6), 2 claws (1d6)',
+    },
+  ],
+  source: 'pf1e-core',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const archelon: AnimalCompanionEntry = {
+  id: 'archelon',
+  name: 'Archelon',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '15 ft., swim 50 ft.',
+  naturalArmor: 10,
+  attacks: 'bite (1d6)',
+  str: 8,
+  dex: 10,
+  con: 9,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 6,
+  specialQualities: ['low-light vision', 'hold breath', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d8)',
+    },
+  ],
+  source: 'pf1e-b3',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const arsinoitherium: AnimalCompanionEntry = {
+  id: 'arsinoitherium',
+  name: 'Arsinoitherium',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '30 ft.',
+  naturalArmor: 4,
+  attacks: 'gore (1d8)',
+  str: 14,
+  dex: 12,
+  con: 15,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 3,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'gore (2d8)',
+      specialQualitiesGained: ['powerful charge', 'trample'],
+    },
+  ],
+  source: 'pf1e-b3',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const aurochs: AnimalCompanionEntry = {
+  id: 'aurochs',
+  name: 'Aurochs',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '40 ft.',
+  naturalArmor: 1,
+  attacks: 'gore (1d6)',
+  str: 14,
+  dex: 12,
+  con: 12,
+  int: 0, // INT: — (non-intelligent)
+  wis: 11,
+  cha: 4,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 3,
+      attackUpdate: 'gore (1d8)',
+      specialQualitiesGained: ['stampede', 'trample'],
+    },
+  ],
+  source: 'pf1e-b2',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const axeBeak: AnimalCompanionEntry = {
+  id: 'axe-beak',
+  name: 'Axe Beak',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '50 ft.',
+  naturalArmor: 0,
+  attacks: 'bite (1d6 plus 1-1/2 Str)',
+  str: 10,
+  dex: 17,
+  con: 12,
+  int: 0, // INT: — (non-intelligent)
+  wis: 11,
+  cha: 10,
+  specialQualities: ['low-light vision'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d8 plus 1-1/2 Str)',
+      specialQualitiesGained: ['sudden charge'],
+    },
+  ],
+  source: 'pf1e-b3',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+// ─── Chunk 2: Baboon – Brachiosaurus ──────────────────────────────────────────
+
+export const baboon: AnimalCompanionEntry = {
+  id: 'baboon',
+  name: 'Baboon',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '30 ft.',
+  naturalArmor: 0,
+  attacks: 'bite (1d4)',
+  str: 12,
+  dex: 15,
+  con: 12,
+  int: 0, // INT: — (non-intelligent)
+  wis: 12,
+  cha: 5,
+  specialQualities: ['low-light vision'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      abilityScoreChanges: [
+        { ability: 'STR', change: 2 },
+        { ability: 'CON', change: 2 },
+      ],
+    },
+  ],
+  source: 'pf1e-core',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const badger: AnimalCompanionEntry = {
+  id: 'badger',
+  name: 'Badger',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '30 ft., burrow 10 ft., climb 10 ft.',
+  naturalArmor: 2,
+  attacks: 'bite (1d4), 2 claws (1d3)',
+  str: 10,
+  dex: 17,
+  con: 15,
+  int: 0, // INT: — (non-intelligent)
+  wis: 12,
+  cha: 10,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 4 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      attackUpdate: 'bite (1d6), 2 claws (1d4)',
+    },
+  ],
+  source: 'pf1e-core',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const baluchitherium: AnimalCompanionEntry = {
+  id: 'baluchitherium',
+  name: 'Baluchitherium',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '40 ft.',
+  naturalArmor: 4,
+  attacks: '2 hooves (1d4)',
+  str: 14,
+  dex: 14,
+  con: 15,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 6,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 3,
+      attackUpdate: '2 hooves (1d6)',
+      specialQualitiesGained: ['trample'],
+    },
+  ],
+  source: 'pf1e-b3',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const basilosaurus: AnimalCompanionEntry = {
+  id: 'basilosaurus',
+  name: 'Basilosaurus',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: 'swim 40 ft.',
+  naturalArmor: 1,
+  attacks: 'bite (1d4), tail slap (1d4)',
+  str: 11,
+  dex: 14,
+  con: 12,
+  int: 0, // INT: — (non-intelligent)
+  wis: 14,
+  cha: 6,
+  specialQualities: ['low-light vision', 'hold breath'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d6), tail slap (1d6)',
+      specialQualitiesGained: ['blindsense 60 ft.'],
+    },
+  ],
+  source: 'pf1e-b6',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const batDire: AnimalCompanionEntry = {
+  id: 'bat-dire',
+  name: 'Bat, Dire',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '20 ft., fly 40 ft. (good)',
+  naturalArmor: 0,
+  attacks: 'bite (1d6)',
+  str: 9,
+  dex: 17,
+  con: 9,
+  int: 0, // INT: — (non-intelligent)
+  wis: 14,
+  cha: 6,
+  specialQualities: ['blindsense 40 ft.'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 3,
+      attackUpdate: 'bite (1d8)',
+    },
+  ],
+  source: 'pf1e-core',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const bear: AnimalCompanionEntry = {
+  id: 'bear',
+  name: 'Bear',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '40 ft.',
+  naturalArmor: 1,
+  attacks: '2 claws (1d3), bite (1d4)',
+  str: 15,
+  dex: 13,
+  con: 15,
+  int: 0, // INT: — (non-intelligent)
+  wis: 12,
+  cha: 6,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 2 },
+        { ability: 'CON', change: 2 },
+      ],
+      naturalArmorChange: 2,
+    },
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: '2 claws (1d6), bite (1d6)',
+    },
+  ],
+  source: 'pf1e-core',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const beetleGiant: AnimalCompanionEntry = {
+  id: 'beetle-giant',
+  name: 'Beetle, Giant',
+  companionType: 'vermin',
+  size: 'Small',
+  speed: '30 ft., climb 20 ft.',
+  naturalArmor: 2,
+  attacks: 'bite (1d4), 2 claws (1d3)',
+  str: 12,
+  dex: 15,
+  con: 14,
+  int: 0, // INT: — (mindless vermin)
+  wis: 12,
+  cha: 2,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 4 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      attackUpdate: 'bite (1d6), 2 claws (1d4)',
+    },
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 4 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      attackUpdate: 'bite (1d8), 2 claws (1d6)',
+    },
+  ],
+  source: 'pf1e-um',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const bird: AnimalCompanionEntry = {
+  id: 'bird',
+  name: 'Bird',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '10 ft., fly 60 ft. (average)',
+  naturalArmor: 1,
+  attacks: 'bite (1d4)',
+  str: 10,
+  dex: 17,
+  con: 11,
+  int: 0, // INT: — (non-intelligent)
+  wis: 14,
+  cha: 6,
+  specialQualities: ['low-light vision'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      abilityScoreChanges: [
+        { ability: 'DEX', change: 2 },
+        { ability: 'CON', change: 2 },
+      ],
+    },
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 4 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d6)',
+      specialQualitiesGained: ['evasion'],
+    },
+  ],
+  source: 'pf1e-core',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+// Blackwisp Egret — PAP91; progression tier data unavailable from source page
+export const blackwispEgret: AnimalCompanionEntry = {
+  id: 'blackwisp-egret',
+  name: 'Blackwisp Egret',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '30 ft., fly 50 ft.',
+  naturalArmor: 2,
+  attacks: 'bite (1d4)',
+  str: 8,
+  dex: 17,
+  con: 10,
+  int: 0, // INT: — (non-intelligent)
+  wis: 14,
+  cha: 8,
+  specialQualities: ['low-light vision'],
+  progressionTiers: [], // Progression data unavailable — verify against PAP#91
+  source: 'pf1e-ap91',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const brachiosaurus: AnimalCompanionEntry = {
+  id: 'brachiosaurus',
+  name: 'Brachiosaurus',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '30 ft.',
+  naturalArmor: 3,
+  attacks: 'slam (1d6), tail slap (1d6)',
+  str: 11,
+  dex: 18,
+  con: 9,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 10,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'slam (1d8), tail slap (1d8)',
+      specialQualitiesGained: ['trample'],
+    },
+  ],
+  source: 'pf1e-b1',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+// ─── Chunk 3: Bristle Boar – Bustard ──────────────────────────────────────────
+
+export const boar: AnimalCompanionEntry = {
+  id: 'boar',
+  name: 'Boar',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '40 ft.',
+  naturalArmor: 2,
+  attacks: 'gore (1d4)',
+  str: 12,
+  dex: 15,
+  con: 13,
+  int: 0, // INT: — (non-intelligent)
+  wis: 12,
+  cha: 5,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 2 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      attackUpdate: 'gore (1d6)',
+    },
+  ],
+  source: 'pf1e-core',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const bristleBoar: AnimalCompanionEntry = {
+  id: 'bristle-boar',
+  name: 'Bristle Boar',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '40 ft.',
+  naturalArmor: 3,
+  attacks: 'gore (1d4)',
+  str: 13,
+  dex: 15,
+  con: 14,
+  int: 0, // INT: — (non-intelligent)
+  wis: 12,
+  cha: 4,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 4 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'gore (1d6)',
+    },
+  ],
+  source: 'pf1e-orcs',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const brontotherium: AnimalCompanionEntry = {
+  id: 'brontotherium',
+  name: 'Brontotherium',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '40 ft.',
+  naturalArmor: 3,
+  attacks: 'gore (1d6)',
+  str: 15,
+  dex: 12,
+  con: 14,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 3,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'gore (1d8)',
+      specialQualitiesGained: ['powerful charge (gore, 1d8)'],
+    },
+  ],
+  source: 'pf1e-b6',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const bullWar: AnimalCompanionEntry = {
+  id: 'bull-war',
+  name: 'Bull, War',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '40 ft.',
+  naturalArmor: 2,
+  attacks: 'gore (1d6), 2 hooves (1d4)',
+  str: 15,
+  dex: 12,
+  con: 14,
+  int: 0, // INT: — (non-intelligent)
+  wis: 11,
+  cha: 4,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 3,
+      attackUpdate: 'gore (1d8), 2 hooves (1d6)',
+      specialQualitiesGained: ['trample', 'stampede'],
+    },
+  ],
+  source: 'pf1e-orcs',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const bustard: AnimalCompanionEntry = {
+  id: 'bustard',
+  name: 'Bustard',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '20 ft., fly 50 ft. (poor)',
+  naturalArmor: 2,
+  attacks: 'bite (1d6), 2 talons (1d4)',
+  str: 13,
+  dex: 14,
+  con: 13,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 5,
+  specialQualities: ['low-light vision'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      abilityScoreChanges: [
+        { ability: 'STR', change: 2 },
+        { ability: 'CON', change: 2 },
+      ],
+    },
+  ],
+  source: 'pf1e-uw',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+// ─── Batch Array ───────────────────────────────────────────────────────────────
+
+export const batch_001: AnimalCompanionEntry[] = [
+  allosaurus,
+  amargasaurus,
+  ankylosaurus,
+  antGiant,
+  antelope,
+  ape,
+  archelon,
+  arsinoitherium,
+  aurochs,
+  axeBeak,
+  baboon,
+  badger,
+  baluchitherium,
+  basilosaurus,
+  batDire,
+  bear,
+  beetleGiant,
+  bird,
+  blackwispEgret,
+  boar,
+  brachiosaurus,
+  bristleBoar,
+  brontotherium,
+  bullWar,
+  bustard,
+];

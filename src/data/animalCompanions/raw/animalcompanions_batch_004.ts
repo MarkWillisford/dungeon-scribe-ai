@@ -1,0 +1,883 @@
+// Batch 004 | first: 'Hippogriff' | last: 'Megaloceros' | count: 25
+// Batch metadata: {"batchNum":"004","startEntry":"Hippogriff","lastEntry":"Megaloceros","nextEntry":"Megafauna (Megatherium)","entriesInBatch":25}
+import { AnimalCompanionEntry } from '@/types/animalCompanions';
+
+export const hippogriff: AnimalCompanionEntry = {
+  id: 'hippogriff',
+  name: 'Hippogriff',
+  companionType: 'magical beast',
+  size: 'Large',
+  speed: '40 ft., fly 60 ft. (average)',
+  naturalArmor: 2,
+  attacks: 'bite (1d6)',
+  str: 15,
+  dex: 15,
+  con: 14,
+  int: 2, // INT: — (non-intelligent)
+  wis: 12,
+  cha: 9,
+  specialQualities: ['darkvision 60 ft.', 'low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      abilityScoreChanges: [
+        { ability: 'STR', change: 2 },
+        { ability: 'CON', change: 2 },
+      ],
+      attackUpdate: 'bite (1d6), 2 claws (1d4)',
+      specialQualitiesGained: ['fly 100 ft. (average)'],
+    },
+    {
+      atDruidLevel: 7,
+      abilityScoreChanges: [],
+      specialQualitiesGained: ['can carry a rider while flying (fly speed reduced by half)'],
+    },
+  ],
+  source: 'pf1e-unknown', // Inner Sea Combat pg. 14
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const hippopotamus: AnimalCompanionEntry = {
+  id: 'hippopotamus',
+  name: 'Hippopotamus',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '40 ft.',
+  naturalArmor: 6,
+  attacks: 'bite (1d8)',
+  str: 11,
+  dex: 12,
+  con: 12,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 5,
+  specialQualities: ['low-light vision', 'scent', 'sweat'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (2d8)',
+      specialQualitiesGained: ['trample'],
+    },
+  ],
+  source: 'pf1e-b2',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const hobbeHound: AnimalCompanionEntry = {
+  id: 'hobbe-hound',
+  name: 'Hobbe Hound',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '40 ft.',
+  naturalArmor: 1,
+  attacks: 'bite (1d4 plus allergic reaction)',
+  str: 12,
+  dex: 15,
+  con: 15,
+  int: 0, // INT: — (non-intelligent)
+  wis: 10,
+  cha: 7,
+  specialQualities: ['allergic reaction', 'low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      abilityScoreChanges: [
+        { ability: 'STR', change: 6 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      naturalArmorChange: 3,
+      attackUpdate: 'bite (1d6 plus allergic reaction)',
+      specialQualitiesGained: ['fire resistance 3'],
+    },
+  ],
+  source: 'pf1e-unknown', // Pathfinder #119: Prisoners of the Blight pg. 89
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const horse: AnimalCompanionEntry = {
+  id: 'horse',
+  name: 'Horse',
+  companionType: 'animal',
+  size: 'Large',
+  speed: '50 ft.',
+  naturalArmor: 4,
+  attacks: 'bite (1d4), 2 hooves (1d6)',
+  str: 16,
+  dex: 13,
+  con: 15,
+  int: 0, // INT: — (non-intelligent)
+  wis: 12,
+  cha: 6,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      abilityScoreChanges: [
+        { ability: 'STR', change: 2 },
+        { ability: 'CON', change: 2 },
+      ],
+      specialQualitiesGained: ['combat trained'],
+    },
+  ],
+  source: 'pf1e-core',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const huntingCactus: AnimalCompanionEntry = {
+  id: 'hunting-cactus',
+  name: 'Hunting Cactus',
+  companionType: 'plant',
+  size: 'Medium',
+  speed: '30 ft.',
+  naturalArmor: 3,
+  attacks: '2 slams (1d6)',
+  str: 14,
+  dex: 13,
+  con: 17,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 6,
+  specialQualities: ['needles'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: '2 slams (1d8)',
+      specialQualitiesGained: ['low-light vision'],
+    },
+  ],
+  source: 'pf1e-unknown', // Ultimate Wilderness pg. 183
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const hyena: AnimalCompanionEntry = {
+  id: 'hyena',
+  name: 'Hyena',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '50 ft.',
+  naturalArmor: 2,
+  attacks: 'bite (1d4 plus trip)',
+  str: 10,
+  dex: 17,
+  con: 13,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 6,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 4 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      attackUpdate: 'bite (1d6 plus trip)',
+    },
+  ],
+  source: 'pf1e-b1',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const impalerShrike: AnimalCompanionEntry = {
+  id: 'impaler-shrike',
+  name: 'Impaler Shrike',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '10 ft., fly 60 ft. (average)',
+  naturalArmor: 0,
+  attacks: 'bite (1d4)',
+  str: 12,
+  dex: 13,
+  con: 13,
+  int: 0, // INT: — (non-intelligent)
+  wis: 14,
+  cha: 7,
+  specialQualities: ['low-light vision'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 2 },
+        { ability: 'CON', change: 2 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d6)',
+      specialQualitiesGained: ['impale'],
+    },
+  ],
+  source: 'pf1e-unknown', // Pathfinder #97: In Hell's Bright Shadow pg. 83
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const kangaroo: AnimalCompanionEntry = {
+  id: 'kangaroo',
+  name: 'Kangaroo',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '40 ft.',
+  naturalArmor: 0,
+  attacks: 'kick (1d4)',
+  str: 12,
+  dex: 14,
+  con: 13,
+  int: 0, // INT: — (non-intelligent)
+  wis: 11,
+  cha: 7,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      abilityScoreChanges: [
+        { ability: 'STR', change: 4 },
+        { ability: 'DEX', change: 2 },
+        { ability: 'CON', change: 2 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'kick (1d6)',
+      specialQualitiesGained: ['speed 50 ft.'],
+    },
+  ],
+  source: 'pf1e-b3',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const kaprosuchus: AnimalCompanionEntry = {
+  id: 'kaprosuchus',
+  name: 'Kaprosuchus',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '30 ft.',
+  naturalArmor: 3,
+  attacks: 'bite (1d6), tail slap (1d6)',
+  str: 15,
+  dex: 14,
+  con: 15,
+  int: 0, // INT: — (non-intelligent)
+  wis: 14,
+  cha: 2,
+  specialQualities: ['low-light vision'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 6 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d8), tail slap (1d8)',
+      specialQualitiesGained: ['ramming snout'],
+    },
+  ],
+  source: 'pf1e-b5',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const kentrosaurus: AnimalCompanionEntry = {
+  id: 'kentrosaurus',
+  name: 'Kentrosaurus',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '40 ft.',
+  naturalArmor: 2,
+  attacks: 'tail (1d8)',
+  str: 10,
+  dex: 16,
+  con: 10,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 10,
+  specialQualities: ['impaling strike', 'low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 3,
+      attackUpdate: 'tail (2d6)',
+      specialQualitiesGained: ['defensive spikes'],
+    },
+  ],
+  source: 'pf1e-b6',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const leechGiant: AnimalCompanionEntry = {
+  id: 'leech-giant',
+  name: 'Leech, Giant',
+  companionType: 'vermin',
+  size: 'Small',
+  speed: '5 ft., swim 20 ft.',
+  naturalArmor: 0,
+  attacks: 'bite (1d4 plus attach)',
+  str: 9,
+  dex: 14,
+  con: 12,
+  int: 0, // INT: — (mindless vermin)
+  wis: 10,
+  cha: 1,
+  specialQualities: ['amphibious', 'attach', 'blindsense 30 ft.', 'blood drain (1 Str)', 'scent', 'susceptible to salt'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 2 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      attackUpdate: 'bite (1d6 plus attach)',
+      specialQualitiesGained: ['blindsight 30 ft.', 'blood drain (1 Str and 1 Con)'],
+    },
+  ],
+  source: 'pf1e-um',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const lizardGiantGecko: AnimalCompanionEntry = {
+  id: 'lizard-giant-gecko',
+  name: 'Lizard, Giant Gecko',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '30 ft., climb 30 ft.',
+  naturalArmor: 1,
+  attacks: 'bite (1d4)',
+  str: 13,
+  dex: 15,
+  con: 12,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 6,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 2 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d6)',
+    },
+  ],
+  source: 'pf1e-b3',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const lizardMonitor: AnimalCompanionEntry = {
+  id: 'lizard-monitor',
+  name: 'Lizard, Monitor',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '30 ft., swim 30 ft.',
+  naturalArmor: 2,
+  attacks: 'bite (1d4)',
+  str: 13,
+  dex: 15,
+  con: 12,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 6,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 2 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d6)',
+    },
+  ],
+  source: 'pf1e-b1',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const llama: AnimalCompanionEntry = {
+  id: 'llama',
+  name: 'Llama',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '40 ft.',
+  naturalArmor: 1,
+  attacks: 'bite (1d4)',
+  str: 11,
+  dex: 16,
+  con: 12,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 9,
+  specialQualities: ['low-light vision'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 4 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      attackUpdate: 'bite (1d6)',
+    },
+  ],
+  source: 'pf1e-unknown', // Ultimate Wilderness pg. 180 / Animal Archive pg. 28
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const locustGiant: AnimalCompanionEntry = {
+  id: 'locust-giant',
+  name: 'Locust, Giant',
+  companionType: 'vermin',
+  size: 'Small',
+  speed: '20 ft., climb 20 ft., fly 20 ft. (poor)',
+  naturalArmor: 3,
+  attacks: 'bite (1d6)',
+  str: 12,
+  dex: 17,
+  con: 11,
+  int: 0, // INT: — (mindless vermin)
+  wis: 10,
+  cha: 7,
+  specialQualities: ['darkvision 60 ft.', 'leap', 'spit goo'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 4 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d8)',
+      specialQualitiesGained: ['fly 60 ft. (average)', 'voracious'],
+    },
+  ],
+  source: 'pf1e-unknown', // Ultimate Wilderness pg. 185
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const mantaRay: AnimalCompanionEntry = {
+  id: 'manta-ray',
+  name: 'Manta Ray',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: 'swim 60 ft.',
+  naturalArmor: 1,
+  attacks: 'tail slap (1d4)',
+  str: 8,
+  dex: 15,
+  con: 11,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 2,
+  specialQualities: ['low-light vision'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'tail slap (1d6)',
+      specialQualitiesGained: ['blindsense 30 ft.'],
+    },
+  ],
+  source: 'pf1e-b2',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const mantisShrimpGiant: AnimalCompanionEntry = {
+  id: 'mantis-shrimp-giant',
+  name: 'Mantis Shrimp, Giant',
+  companionType: 'vermin',
+  size: 'Small',
+  speed: '40 ft., swim 30 ft.',
+  naturalArmor: 3,
+  attacks: '2 pincers (1d6)',
+  str: 12,
+  dex: 17,
+  con: 14,
+  int: 0, // INT: — (mindless vermin)
+  wis: 13,
+  cha: 6,
+  specialQualities: ['aquatic blindsense 10 ft.', 'darkvision 60 ft.', 'sonic resistance 5'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Small to Medium',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 6 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: '2 pincers (1d8)',
+      specialQualitiesGained: ['blindsight 10 ft.', 'sonic resistance 10', 'speedy pincers'],
+    },
+  ],
+  source: 'pf1e-unknown', // Ultimate Wilderness pg. 185
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const mantisGiant: AnimalCompanionEntry = {
+  id: 'mantis-giant',
+  name: 'Mantis, Giant',
+  companionType: 'vermin',
+  size: 'Medium',
+  speed: '30 ft., climb 30 ft., fly 40 ft. (average)',
+  naturalArmor: 3,
+  attacks: '2 claws (1d4 plus grab)',
+  str: 10,
+  dex: 15,
+  con: 10,
+  int: 0, // INT: — (mindless vermin)
+  wis: 12,
+  cha: 7,
+  specialQualities: ['darkvision 60 ft.', 'lunge'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: '2 claws (1d6)',
+      specialQualitiesGained: ['mandibles (1d6)', 'sudden strike'],
+    },
+  ],
+  source: 'pf1e-um',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const marax: AnimalCompanionEntry = {
+  id: 'marax',
+  name: 'Marax',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '30 ft.',
+  naturalArmor: 3,
+  attacks: 'bite (1d6), tail barbs (1d4 plus poison)',
+  str: 16,
+  dex: 15,
+  con: 12,
+  int: 0, // INT: — (non-intelligent)
+  wis: 12,
+  cha: 6,
+  specialQualities: ['low-light vision', 'poison (tail barbs; frequency 1/round for 4 rounds; effect 1d2 Dex damage; cure 1 save)', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 6 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 2 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d8), 2 claws (1d4)',
+      specialQualitiesGained: ['pounce'],
+    },
+  ],
+  source: 'pf1e-unknown', // Pathfinder #90: The Divinity Drive pg. 87
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const marsupialDevil: AnimalCompanionEntry = {
+  id: 'marsupial-devil',
+  name: 'Marsupial Devil',
+  companionType: 'animal',
+  size: 'Small',
+  speed: '20 ft.',
+  naturalArmor: 1,
+  attacks: 'bite (1d6)',
+  str: 15,
+  dex: 13,
+  con: 12,
+  int: 0, // INT: — (non-intelligent)
+  wis: 10,
+  cha: 7,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 4,
+      abilityScoreChanges: [
+        { ability: 'STR', change: 4 },
+        { ability: 'CON', change: 2 },
+      ],
+    },
+  ],
+  source: 'pf1e-unknown', // Ultimate Wilderness pg. 180
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const marsupialLion: AnimalCompanionEntry = {
+  id: 'marsupial-lion',
+  name: 'Marsupial Lion',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '30 ft., climb 20 ft.',
+  naturalArmor: 1,
+  attacks: 'bite (1d6), 2 claws (1d4)',
+  str: 12,
+  dex: 16,
+  con: 13,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 7,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (1d8), 2 claws (1d6 plus grab)',
+      specialQualitiesGained: ['climb 30 ft.'],
+    },
+  ],
+  source: 'pf1e-unknown', // Ultimate Wilderness pg. 180
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const embolotherium: AnimalCompanionEntry = {
+  id: 'embolotherium',
+  name: 'Embolotherium',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '40 ft.',
+  naturalArmor: 4,
+  attacks: 'gore (1d8)',
+  str: 14,
+  dex: 12,
+  con: 15,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 3,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'gore (2d8)',
+    },
+  ],
+  source: 'pf1e-unknown', // Pathfinder Adventure Path #91
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const glyptodon: AnimalCompanionEntry = {
+  id: 'glyptodon',
+  name: 'Glyptodon',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '30 ft.',
+  naturalArmor: 9,
+  attacks: 'tail (1d6)',
+  str: 10,
+  dex: 14,
+  con: 9,
+  int: 0, // INT: — (non-intelligent)
+  wis: 12,
+  cha: 8,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'tail (2d6)',
+    },
+  ],
+  source: 'pf1e-b2',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const megalania: AnimalCompanionEntry = {
+  id: 'megalania',
+  name: 'Megalania',
+  companionType: 'animal',
+  size: 'Medium',
+  speed: '30 ft., climb 20 ft.',
+  naturalArmor: 4,
+  attacks: 'bite (1d8)',
+  str: 14,
+  dex: 13,
+  con: 12,
+  int: 0, // INT: — (non-intelligent)
+  wis: 13,
+  cha: 6,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      sizeChange: 'Medium to Large',
+      abilityScoreChanges: [
+        { ability: 'STR', change: 8 },
+        { ability: 'DEX', change: -2 },
+        { ability: 'CON', change: 4 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'bite (2d6)',
+    },
+  ],
+  source: 'pf1e-b3',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const megaloceros: AnimalCompanionEntry = {
+  id: 'megaloceros',
+  name: 'Megaloceros',
+  companionType: 'animal',
+  size: 'Large',
+  speed: '50 ft.',
+  naturalArmor: 4,
+  attacks: 'gore (1d8), 2 hooves (1d6)',
+  str: 18,
+  dex: 14,
+  con: 14,
+  int: 0, // INT: — (non-intelligent)
+  wis: 12,
+  cha: 5,
+  specialQualities: ['low-light vision', 'scent'],
+  progressionTiers: [
+    {
+      atDruidLevel: 7,
+      abilityScoreChanges: [
+        { ability: 'STR', change: 4 },
+        { ability: 'CON', change: 2 },
+      ],
+      naturalArmorChange: 2,
+      attackUpdate: 'gore (2d8), 2 hooves (1d8)',
+    },
+  ],
+  source: 'pf1e-b2',
+  isOfficial: true,
+  visibility: 'global',
+  rev: 1,
+};
+
+export const batch_004: AnimalCompanionEntry[] = [
+  hippogriff,
+  hippopotamus,
+  hobbeHound,
+  horse,
+  huntingCactus,
+  hyena,
+  impalerShrike,
+  kangaroo,
+  kaprosuchus,
+  kentrosaurus,
+  leechGiant,
+  lizardGiantGecko,
+  lizardMonitor,
+  llama,
+  locustGiant,
+  mantaRay,
+  mantisShrimpGiant,
+  mantisGiant,
+  marax,
+  marsupialDevil,
+  marsupialLion,
+  embolotherium,
+  glyptodon,
+  megalania,
+  megaloceros,
+];
