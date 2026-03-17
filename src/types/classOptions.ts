@@ -8,7 +8,7 @@ import { FeatPrerequisite } from './feats';
 
 // ---- Base type shared by all option collection documents ----
 
-export interface ClassOptionDocument {
+export interface ClassOptionBase {
   id: string;
   name: string;
   description: string;
@@ -32,10 +32,11 @@ export interface DomainPower {
   levelGained: number; // typically 1 or 6
 }
 
-export interface DomainDocument extends ClassOptionDocument {
+export interface DomainEntry extends ClassOptionBase {
   domainSpells: string[]; // 9 entries — index 0 = level 1 spell name
   powers: DomainPower[];
   grantedClassSkills?: string[];
+  druidAllowed?: boolean; // true if Druids can choose this domain via Nature Bond; absent = unknown/false
 }
 
 // ---- Bloodline (Sorcerer, Bloodrager — shared pool) ----
@@ -47,7 +48,7 @@ export interface BloodlinePower {
   levelGained: number; // class levels: 1, 3, 9, 15, 20
 }
 
-export interface BloodlineDocument extends ClassOptionDocument {
+export interface BloodlineEntry extends ClassOptionBase {
   bloodlineArcana: string; // text description of passive benefit
   powers: BloodlinePower[];
   bonusSpells: string[]; // 9 entries — index 0 = level 1 bonus spell name
@@ -59,7 +60,7 @@ export interface BloodlineDocument extends ClassOptionDocument {
 // Collection: 'mysteries'
 // Revelations query a separate 'revelations' collection filtered by mysteryId.
 
-export interface MysteryDocument extends ClassOptionDocument {
+export interface MysteryEntry extends ClassOptionBase {
   bonusSpells: string[]; // 9 entries — index 0 = level 1 bonus spell name
   classSkills: string[];
   finalRevelation: string; // text description of 20th-level ability
@@ -68,7 +69,7 @@ export interface MysteryDocument extends ClassOptionDocument {
 // ---- Rogue Talent (Rogue, Ninja — shared pool) ----
 // Collection: 'roguetalents'
 
-export interface RogueTalentDocument extends ClassOptionDocument {
+export interface RogueTalentEntry extends ClassOptionBase {
   talentTier: 'standard' | 'advanced'; // advanced requires class level 10+
 }
 
@@ -76,19 +77,19 @@ export interface RogueTalentDocument extends ClassOptionDocument {
 // Collection: 'ragepowers'
 // Prerequisite rage powers use the prerequisites[] field on the base type.
 
-export type RagePowerDocument = ClassOptionDocument;
+export type RagePowerEntry = ClassOptionBase;
 
 // ---- Hex (Witch) ----
 // Collection: 'hexes'
 
-export interface HexDocument extends ClassOptionDocument {
+export interface HexEntry extends ClassOptionBase {
   hexTier: 'standard' | 'major' | 'grand';
 }
 
 // ---- Arcanist Exploit (Arcanist) ----
 // Collection: 'arcanistexploits'
 
-export interface ArcanistExploitDocument extends ClassOptionDocument {
+export interface ArcanistExploitEntry extends ClassOptionBase {
   exploitTier: 'standard' | 'greater';
 }
 
@@ -96,12 +97,12 @@ export interface ArcanistExploitDocument extends ClassOptionDocument {
 // Collection: 'investigatortalents'
 // Base fields are sufficient — no collection-specific additions needed.
 
-export type InvestigatorTalentDocument = ClassOptionDocument;
+export type InvestigatorTalentEntry = ClassOptionBase;
 
 // ---- Shaman Spirit ----
 // Collection: 'shamanspirits'
 
-export interface ShamanSpiritDocument extends ClassOptionDocument {
+export interface ShamanSpiritEntry extends ClassOptionBase {
   spiritSpells: string[]; // 9 entries — index 0 = level 1 spirit spell name
   spiritAbility: string; // text description of the spirit ability
   hexList?: string[]; // hex ids available to this spirit's shaman
@@ -112,7 +113,7 @@ export interface ShamanSpiritDocument extends ClassOptionDocument {
 // Collection: 'wildtalents'
 // Kineticist choice architecture warrants its own design pass — this is a placeholder.
 
-export interface WildTalentDocument extends ClassOptionDocument {
+export interface WildTalentEntry extends ClassOptionBase {
   element: string; // 'aether' | 'air' | 'earth' | 'fire' | 'water' | 'void' | 'wood' | string
   talentType: 'infusion' | 'utility';
   requiredElement?: string; // some talents are locked to a specific element

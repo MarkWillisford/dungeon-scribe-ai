@@ -433,15 +433,15 @@ src/data/
 
 ## Execution Checklist
 
-### Phase A — Type changes (do first, unblocks everything)
+### Phase A — Type changes (do first, unblocks everything) — COMPLETE `07072a4`
 
-- [ ] Rename all `*Document` → `*Entry` in `src/types/classOptions.ts`
-- [ ] Add `druidAllowed: boolean` to `DomainEntry`
-- [ ] Add `DeityBoonTier`, `DeityBoons` interfaces + `boons?` to `DeityEntry` in `src/types/deities.ts`
-- [ ] Add `subtypePrompt?` to `ClassChoiceOption` in `src/types/classChoices.ts`
-- [ ] Add `levelFilterTable?` to `ClassChoiceDefinition` in `src/types/classChoices.ts`
-- [ ] Create `src/types/animalCompanions.ts` with `AnimalCompanionEntry`
-- [ ] `npm run typecheck` — zero errors
+- [x] Rename all `*Document` → `*Entry` in `src/types/classOptions.ts`
+- [x] Add `druidAllowed: boolean` to `DomainEntry`
+- [x] Add `DeityBoonTier`, `DeityBoons` interfaces + `boons?` to `DeityEntry` in `src/types/deities.ts`
+- [x] Add `subtypePrompt?` to `ClassChoiceOption` in `src/types/classChoices.ts`
+- [x] Add `levelFilterTable?` to `ClassChoiceDefinition` in `src/types/classChoices.ts`
+- [x] Create `src/types/animalCompanions.ts` with `AnimalCompanionEntry`
+- [x] `npm run typecheck` — zero errors
 
 ### Phase B — Inline static data (can do immediately, no scraping needed)
 
