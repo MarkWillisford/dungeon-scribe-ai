@@ -1184,10 +1184,23 @@ describe('charactersSlice', () => {
     });
 
     it('deleteCharacter succeeds - removes character', async () => {
-      const store = makeCharactersStore();
+      const store = configureStore({
+        reducer: { characters: charactersReducer },
+        middleware: (getDefaultMiddleware) =>
+          getDefaultMiddleware({ serializableCheck: false }),
+        preloadedState: {
+          characters: {
+            characters: [mockCharacterSummary],
+            activeCharacter: mockCharacter,
+            loading: false,
+            error: null,
+          },
+        },
+      });
       (FirebaseCharacterService.delete as jest.Mock).mockResolvedValue(undefined);
       await store.dispatch(deleteCharacter('char-1'));
-      expect(store.getState().characters.loading).toBe(false);
+      expect(store.getState().characters.characters).toHaveLength(0);
+      expect(store.getState().characters.activeCharacter).toBeNull();
     });
 
     it('deleteCharacter fails - sets error', async () => {

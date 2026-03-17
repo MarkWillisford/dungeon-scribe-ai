@@ -426,8 +426,11 @@ describe('ModifierPipelineService', () => {
           },
         ],
       });
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
       const result = ModifierPipelineService.recalculate(char);
-      expect(result).toBeDefined();
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal + 1,
+      );
     });
   });
 });
