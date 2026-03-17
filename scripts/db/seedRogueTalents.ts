@@ -18,7 +18,7 @@
 
 import * as admin from 'firebase-admin';
 import { ALL_ROGUE_TALENTS } from '../../src/data/rogueTalents/index';
-import type { RogueTalentDocument } from '../../src/types/classOptions';
+import type { RogueTalentEntry } from '../../src/types/classOptions';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -51,7 +51,7 @@ function chunkArray<T>(arr: T[], size: number): T[][] {
   return chunks;
 }
 
-async function seedRogueTalents(talents: RogueTalentDocument[]): Promise<void> {
+async function seedRogueTalents(talents: RogueTalentEntry[]): Promise<void> {
   console.log(`\nSeeding ${talents.length} rogue talents to project: ${PROJECT_ID}`);
 
   const byTier: Record<string, number> = {};

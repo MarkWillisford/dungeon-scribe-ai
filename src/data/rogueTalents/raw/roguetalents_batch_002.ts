@@ -1,10 +1,10 @@
 // Batch 002 | first: 'Obfuscate Story' | last: 'Weapon Snatcher' | count: 113
 // Standard talents O–Z (66) + All advanced talents (47)
-import { RogueTalentDocument } from '@/types/classOptions';
+import { RogueTalentEntry } from '@/types/classOptions';
 
 // ── Standard Talents O–Z: Entries 1–20 ──────────────────────────────────────
 
-export const obfuscateStory: RogueTalentDocument = {
+export const obfuscateStory: RogueTalentEntry = {
   id: 'obfuscate-story',
   name: 'Obfuscate Story',
   talentTier: 'standard',
@@ -16,7 +16,7 @@ export const obfuscateStory: RogueTalentDocument = {
   rev: 1,
 };
 
-export const obscuringBlow: RogueTalentDocument = {
+export const obscuringBlow: RogueTalentEntry = {
   id: 'obscuring-blow',
   name: 'Obscuring Blow',
   talentTier: 'standard',
@@ -28,7 +28,7 @@ export const obscuringBlow: RogueTalentDocument = {
   rev: 1,
 };
 
-export const occultDungeoneer: RogueTalentDocument = {
+export const occultDungeoneer: RogueTalentEntry = {
   id: 'occult-dungeoneer',
   name: 'Occult Dungeoneer',
   talentTier: 'standard',
@@ -40,7 +40,7 @@ export const occultDungeoneer: RogueTalentDocument = {
   rev: 1,
 };
 
-export const occultMysticism: RogueTalentDocument = {
+export const occultMysticism: RogueTalentEntry = {
   id: 'occult-mysticism',
   name: 'Occult Mysticism',
   talentTier: 'standard',
@@ -52,7 +52,7 @@ export const occultMysticism: RogueTalentDocument = {
   rev: 1,
 };
 
-export const offensiveDefense: RogueTalentDocument = {
+export const offensiveDefense: RogueTalentEntry = {
   id: 'offensive-defense',
   name: 'Offensive Defense',
   talentTier: 'standard',
@@ -64,7 +64,7 @@ export const offensiveDefense: RogueTalentDocument = {
   rev: 1,
 };
 
-export const oneOfThoseFaces: RogueTalentDocument = {
+export const oneOfThoseFaces: RogueTalentEntry = {
   id: 'one-of-those-faces',
   name: 'One of Those Faces',
   talentTier: 'standard',
@@ -76,7 +76,7 @@ export const oneOfThoseFaces: RogueTalentDocument = {
   rev: 1,
 };
 
-export const papercraftTools: RogueTalentDocument = {
+export const papercraftTools: RogueTalentEntry = {
   id: 'papercraft-tools',
   name: 'Papercraft Tools',
   talentTier: 'standard',
@@ -88,7 +88,7 @@ export const papercraftTools: RogueTalentDocument = {
   rev: 1,
 };
 
-export const peerlessManeuver: RogueTalentDocument = {
+export const peerlessManeuver: RogueTalentEntry = {
   id: 'peerless-maneuver',
   name: 'Peerless Maneuver',
   talentTier: 'standard',
@@ -100,7 +100,7 @@ export const peerlessManeuver: RogueTalentDocument = {
   rev: 1,
 };
 
-export const philologist: RogueTalentDocument = {
+export const philologist: RogueTalentEntry = {
   id: 'philologist',
   name: 'Philologist',
   talentTier: 'standard',
@@ -112,7 +112,7 @@ export const philologist: RogueTalentDocument = {
   rev: 1,
 };
 
-export const pierceTheDarkness: RogueTalentDocument = {
+export const pierceTheDarkness: RogueTalentEntry = {
   id: 'pierce-the-darkness',
   name: 'Pierce the Darkness',
   talentTier: 'standard',
@@ -124,7 +124,7 @@ export const pierceTheDarkness: RogueTalentDocument = {
   rev: 1,
 };
 
-export const poisonUse: RogueTalentDocument = {
+export const poisonUse: RogueTalentEntry = {
   id: 'poison-use',
   name: 'Poison Use',
   talentTier: 'standard',
@@ -136,7 +136,7 @@ export const poisonUse: RogueTalentDocument = {
   rev: 1,
 };
 
-export const positioningAttack: RogueTalentDocument = {
+export const positioningAttack: RogueTalentEntry = {
   id: 'positioning-attack',
   name: 'Positioning Attack',
   talentTier: 'standard',
@@ -148,7 +148,7 @@ export const positioningAttack: RogueTalentDocument = {
   rev: 1,
 };
 
-export const powerfulSneak: RogueTalentDocument = {
+export const powerfulSneak: RogueTalentEntry = {
   id: 'powerful-sneak',
   name: 'Powerful Sneak',
   talentTier: 'standard',
@@ -160,7 +160,7 @@ export const powerfulSneak: RogueTalentDocument = {
   rev: 1,
 };
 
-export const quickDisable: RogueTalentDocument = {
+export const quickDisable: RogueTalentEntry = {
   id: 'quick-disable',
   name: 'Quick Disable',
   talentTier: 'standard',
@@ -172,7 +172,7 @@ export const quickDisable: RogueTalentDocument = {
   rev: 1,
 };
 
-export const quickDisguise: RogueTalentDocument = {
+export const quickDisguise: RogueTalentEntry = {
   id: 'quick-disguise',
   name: 'Quick Disguise',
   talentTier: 'standard',
@@ -184,7 +184,7 @@ export const quickDisguise: RogueTalentDocument = {
   rev: 1,
 };
 
-export const quickScrounge: RogueTalentDocument = {
+export const quickScrounge: RogueTalentEntry = {
   id: 'quick-scrounge',
   name: 'Quick Scrounge',
   talentTier: 'standard',
@@ -196,7 +196,7 @@ export const quickScrounge: RogueTalentDocument = {
   rev: 1,
 };
 
-export const quickTrapsmith: RogueTalentDocument = {
+export const quickTrapsmith: RogueTalentEntry = {
   id: 'quick-trapsmith',
   name: 'Quick Trapsmith',
   talentTier: 'standard',
@@ -208,7 +208,7 @@ export const quickTrapsmith: RogueTalentDocument = {
   rev: 1,
 };
 
-export const rapidBoost: RogueTalentDocument = {
+export const rapidBoost: RogueTalentEntry = {
   id: 'rapid-boost',
   name: 'Rapid Boost',
   talentTier: 'standard',
@@ -220,7 +220,7 @@ export const rapidBoost: RogueTalentDocument = {
   rev: 1,
 };
 
-export const rapidPerception: RogueTalentDocument = {
+export const rapidPerception: RogueTalentEntry = {
   id: 'rapid-perception',
   name: 'Rapid Perception',
   talentTier: 'standard',
@@ -232,7 +232,7 @@ export const rapidPerception: RogueTalentDocument = {
   rev: 1,
 };
 
-export const resiliency: RogueTalentDocument = {
+export const resiliency: RogueTalentEntry = {
   id: 'resiliency',
   name: 'Resiliency',
   talentTier: 'standard',
@@ -246,7 +246,7 @@ export const resiliency: RogueTalentDocument = {
 
 // ── Standard Talents O–Z: Entries 21–40 ─────────────────────────────────────
 
-export const ridingStunt: RogueTalentDocument = {
+export const ridingStunt: RogueTalentEntry = {
   id: 'riding-stunt',
   name: 'Riding Stunt',
   talentTier: 'standard',
@@ -259,7 +259,7 @@ export const ridingStunt: RogueTalentDocument = {
   rev: 1,
 };
 
-export const rogueCrawl: RogueTalentDocument = {
+export const rogueCrawl: RogueTalentEntry = {
   id: 'rogue-crawl',
   name: 'Rogue Crawl',
   talentTier: 'standard',
@@ -271,7 +271,7 @@ export const rogueCrawl: RogueTalentDocument = {
   rev: 1,
 };
 
-export const ropeMaster: RogueTalentDocument = {
+export const ropeMaster: RogueTalentEntry = {
   id: 'rope-master',
   name: 'Rope Master',
   talentTier: 'standard',
@@ -283,7 +283,7 @@ export const ropeMaster: RogueTalentDocument = {
   rev: 1,
 };
 
-export const sacredSneakAttack: RogueTalentDocument = {
+export const sacredSneakAttack: RogueTalentEntry = {
   id: 'sacred-sneak-attack',
   name: 'Sacred Sneak Attack',
   talentTier: 'standard',
@@ -296,7 +296,7 @@ export const sacredSneakAttack: RogueTalentDocument = {
   rev: 1,
 };
 
-export const sacrificeSelf: RogueTalentDocument = {
+export const sacrificeSelf: RogueTalentEntry = {
   id: 'sacrifice-self',
   name: 'Sacrifice Self',
   talentTier: 'standard',
@@ -315,7 +315,7 @@ export const sacrificeSelf: RogueTalentDocument = {
   rev: 1,
 };
 
-export const scavenger: RogueTalentDocument = {
+export const scavenger: RogueTalentEntry = {
   id: 'scavenger',
   name: 'Scavenger',
   talentTier: 'standard',
@@ -327,7 +327,7 @@ export const scavenger: RogueTalentDocument = {
   rev: 1,
 };
 
-export const scryingFamiliarity: RogueTalentDocument = {
+export const scryingFamiliarity: RogueTalentEntry = {
   id: 'scrying-familiarity',
   name: 'Scrying Familiarity',
   talentTier: 'standard',
@@ -339,7 +339,7 @@ export const scryingFamiliarity: RogueTalentDocument = {
   rev: 1,
 };
 
-export const scrySlip: RogueTalentDocument = {
+export const scrySlip: RogueTalentEntry = {
   id: 'scry-slip',
   name: 'Scry Slip',
   talentTier: 'standard',
@@ -351,7 +351,7 @@ export const scrySlip: RogueTalentDocument = {
   rev: 1,
 };
 
-export const setUp: RogueTalentDocument = {
+export const setUp: RogueTalentEntry = {
   id: 'set-up',
   name: 'Set-Up',
   talentTier: 'standard',
@@ -363,7 +363,7 @@ export const setUp: RogueTalentDocument = {
   rev: 1,
 };
 
-export const shadowsChill: RogueTalentDocument = {
+export const shadowsChill: RogueTalentEntry = {
   id: 'shadows-chill',
   name: "Shadow's Chill",
   talentTier: 'standard',
@@ -376,7 +376,7 @@ export const shadowsChill: RogueTalentDocument = {
   rev: 1,
 };
 
-export const shoveAside: RogueTalentDocument = {
+export const shoveAside: RogueTalentEntry = {
   id: 'shove-aside',
   name: 'Shove Aside',
   talentTier: 'standard',
@@ -389,7 +389,7 @@ export const shoveAside: RogueTalentDocument = {
   rev: 1,
 };
 
-export const signaturePoison: RogueTalentDocument = {
+export const signaturePoison: RogueTalentEntry = {
   id: 'signature-poison',
   name: 'Signature Poison',
   talentTier: 'standard',
@@ -401,7 +401,7 @@ export const signaturePoison: RogueTalentDocument = {
   rev: 1,
 };
 
-export const silencingStrike: RogueTalentDocument = {
+export const silencingStrike: RogueTalentEntry = {
   id: 'silencing-strike',
   name: 'Silencing Strike',
   talentTier: 'standard',
@@ -413,7 +413,7 @@ export const silencingStrike: RogueTalentDocument = {
   rev: 1,
 };
 
-export const sleightOfHandStunt: RogueTalentDocument = {
+export const sleightOfHandStunt: RogueTalentEntry = {
   id: 'sleight-of-hand-stunt',
   name: 'Sleight of Hand Stunt',
   talentTier: 'standard',
@@ -426,7 +426,7 @@ export const sleightOfHandStunt: RogueTalentDocument = {
   rev: 1,
 };
 
-export const slowReactions: RogueTalentDocument = {
+export const slowReactions: RogueTalentEntry = {
   id: 'slow-reactions',
   name: 'Slow Reactions',
   talentTier: 'standard',
@@ -438,7 +438,7 @@ export const slowReactions: RogueTalentDocument = {
   rev: 1,
 };
 
-export const snapShot: RogueTalentDocument = {
+export const snapShot: RogueTalentEntry = {
   id: 'snap-shot',
   name: 'Snap Shot',
   talentTier: 'standard',
@@ -450,7 +450,7 @@ export const snapShot: RogueTalentDocument = {
   rev: 1,
 };
 
-export const sneakTraining: RogueTalentDocument = {
+export const sneakTraining: RogueTalentEntry = {
   id: 'sneak-training',
   name: 'Sneak Training',
   talentTier: 'standard',
@@ -462,7 +462,7 @@ export const sneakTraining: RogueTalentDocument = {
   rev: 1,
 };
 
-export const sneakyManeuver: RogueTalentDocument = {
+export const sneakyManeuver: RogueTalentEntry = {
   id: 'sneaky-maneuver',
   name: 'Sneaky Maneuver',
   talentTier: 'standard',
@@ -475,7 +475,7 @@ export const sneakyManeuver: RogueTalentDocument = {
   rev: 1,
 };
 
-export const snipersEye: RogueTalentDocument = {
+export const snipersEye: RogueTalentEntry = {
   id: 'snipers-eye',
   name: "Sniper's Eye",
   talentTier: 'standard',
@@ -487,7 +487,7 @@ export const snipersEye: RogueTalentDocument = {
   rev: 1,
 };
 
-export const spellStoring: RogueTalentDocument = {
+export const spellStoring: RogueTalentEntry = {
   id: 'spell-storing',
   name: 'Spell Storing',
   talentTier: 'standard',
@@ -502,7 +502,7 @@ export const spellStoring: RogueTalentDocument = {
 
 // ── Standard Talents O–Z: Entries 41–60 ─────────────────────────────────────
 
-export const standUp: RogueTalentDocument = {
+export const standUp: RogueTalentEntry = {
   id: 'stand-up',
   name: 'Stand Up',
   talentTier: 'standard',
@@ -514,7 +514,7 @@ export const standUp: RogueTalentDocument = {
   rev: 1,
 };
 
-export const stealTheStory: RogueTalentDocument = {
+export const stealTheStory: RogueTalentEntry = {
   id: 'steal-the-story',
   name: 'Steal the Story',
   talentTier: 'standard',
@@ -527,7 +527,7 @@ export const stealTheStory: RogueTalentDocument = {
   rev: 1,
 };
 
-export const stealthStunt: RogueTalentDocument = {
+export const stealthStunt: RogueTalentEntry = {
   id: 'stealth-stunt',
   name: 'Stealth Stunt',
   talentTier: 'standard',
@@ -540,7 +540,7 @@ export const stealthStunt: RogueTalentDocument = {
   rev: 1,
 };
 
-export const stemTheFlow: RogueTalentDocument = {
+export const stemTheFlow: RogueTalentEntry = {
   id: 'stem-the-flow',
   name: 'Stem the Flow',
   talentTier: 'standard',
@@ -552,7 +552,7 @@ export const stemTheFlow: RogueTalentDocument = {
   rev: 1,
 };
 
-export const strongImpression: RogueTalentDocument = {
+export const strongImpression: RogueTalentEntry = {
   id: 'strong-impression',
   name: 'Strong Impression',
   talentTier: 'standard',
@@ -563,7 +563,7 @@ export const strongImpression: RogueTalentDocument = {
   rev: 1,
 };
 
-export const strongStroke: RogueTalentDocument = {
+export const strongStroke: RogueTalentEntry = {
   id: 'strong-stroke',
   name: 'Strong Stroke',
   talentTier: 'standard',
@@ -575,7 +575,7 @@ export const strongStroke: RogueTalentDocument = {
   rev: 1,
 };
 
-export const superiorSniper: RogueTalentDocument = {
+export const superiorSniper: RogueTalentEntry = {
   id: 'superior-sniper',
   name: 'Superior Sniper',
   talentTier: 'standard',
@@ -587,7 +587,7 @@ export const superiorSniper: RogueTalentDocument = {
   rev: 1,
 };
 
-export const suppressPoison: RogueTalentDocument = {
+export const suppressPoison: RogueTalentEntry = {
   id: 'suppress-poison',
   name: 'Suppress Poison',
   talentTier: 'standard',
@@ -599,7 +599,7 @@ export const suppressPoison: RogueTalentDocument = {
   rev: 1,
 };
 
-export const surpriseAttack: RogueTalentDocument = {
+export const surpriseAttack: RogueTalentEntry = {
   id: 'surprise-attack',
   name: 'Surprise Attack',
   talentTier: 'standard',
@@ -611,7 +611,7 @@ export const surpriseAttack: RogueTalentDocument = {
   rev: 1,
 };
 
-export const survivalist: RogueTalentDocument = {
+export const survivalist: RogueTalentEntry = {
   id: 'survivalist',
   name: 'Survivalist',
   talentTier: 'standard',
@@ -622,7 +622,7 @@ export const survivalist: RogueTalentDocument = {
   rev: 1,
 };
 
-export const swiftPoison: RogueTalentDocument = {
+export const swiftPoison: RogueTalentEntry = {
   id: 'swift-poison',
   name: 'Swift Poison',
   talentTier: 'standard',
@@ -634,7 +634,7 @@ export const swiftPoison: RogueTalentDocument = {
   rev: 1,
 };
 
-export const swiftTracker: RogueTalentDocument = {
+export const swiftTracker: RogueTalentEntry = {
   id: 'swift-tracker',
   name: 'Swift Tracker',
   talentTier: 'standard',
@@ -646,7 +646,7 @@ export const swiftTracker: RogueTalentDocument = {
   rev: 1,
 };
 
-export const swimmingStunt: RogueTalentDocument = {
+export const swimmingStunt: RogueTalentEntry = {
   id: 'swimming-stunt',
   name: 'Swimming Stunt',
   talentTier: 'standard',
@@ -659,7 +659,7 @@ export const swimmingStunt: RogueTalentDocument = {
   rev: 1,
 };
 
-export const terrainMastery: RogueTalentDocument = {
+export const terrainMastery: RogueTalentEntry = {
   id: 'terrain-mastery',
   name: 'Terrain Mastery',
   talentTier: 'standard',
@@ -671,7 +671,7 @@ export const terrainMastery: RogueTalentDocument = {
   rev: 1,
 };
 
-export const theWholeTime: RogueTalentDocument = {
+export const theWholeTime: RogueTalentEntry = {
   id: 'the-whole-time',
   name: 'The Whole Time',
   talentTier: 'standard',
@@ -683,7 +683,7 @@ export const theWholeTime: RogueTalentDocument = {
   rev: 1,
 };
 
-export const thrillOfTheChase: RogueTalentDocument = {
+export const thrillOfTheChase: RogueTalentEntry = {
   id: 'thrill-of-the-chase',
   name: 'Thrill of the Chase',
   talentTier: 'standard',
@@ -695,7 +695,7 @@ export const thrillOfTheChase: RogueTalentDocument = {
   rev: 1,
 };
 
-export const toxicRegurgitation: RogueTalentDocument = {
+export const toxicRegurgitation: RogueTalentEntry = {
   id: 'toxic-regurgitation',
   name: 'Toxic Regurgitation',
   talentTier: 'standard',
@@ -707,7 +707,7 @@ export const toxicRegurgitation: RogueTalentDocument = {
   rev: 1,
 };
 
-export const trapSpotter: RogueTalentDocument = {
+export const trapSpotter: RogueTalentEntry = {
   id: 'trap-spotter',
   name: 'Trap Spotter',
   talentTier: 'standard',
@@ -719,7 +719,7 @@ export const trapSpotter: RogueTalentDocument = {
   rev: 1,
 };
 
-export const umbralGear: RogueTalentDocument = {
+export const umbralGear: RogueTalentEntry = {
   id: 'umbral-gear',
   name: 'Umbral Gear',
   talentTier: 'standard',
@@ -731,7 +731,7 @@ export const umbralGear: RogueTalentDocument = {
   rev: 1,
 };
 
-export const unbalancingTrick: RogueTalentDocument = {
+export const unbalancingTrick: RogueTalentEntry = {
   id: 'unbalancing-trick',
   name: 'Unbalancing Trick',
   talentTier: 'standard',
@@ -745,7 +745,7 @@ export const unbalancingTrick: RogueTalentDocument = {
 
 // ── Standard Talents O–Z: Entries 61–66 ─────────────────────────────────────
 
-export const underhanded: RogueTalentDocument = {
+export const underhanded: RogueTalentEntry = {
   id: 'underhanded',
   name: 'Underhanded',
   talentTier: 'standard',
@@ -757,7 +757,7 @@ export const underhanded: RogueTalentDocument = {
   rev: 1,
 };
 
-export const underhandedTrick: RogueTalentDocument = {
+export const underhandedTrick: RogueTalentEntry = {
   id: 'underhanded-trick',
   name: 'Underhanded Trick',
   talentTier: 'standard',
@@ -769,7 +769,7 @@ export const underhandedTrick: RogueTalentDocument = {
   rev: 1,
 };
 
-export const wallScramble: RogueTalentDocument = {
+export const wallScramble: RogueTalentEntry = {
   id: 'wall-scramble',
   name: 'Wall Scramble',
   talentTier: 'standard',
@@ -781,7 +781,7 @@ export const wallScramble: RogueTalentDocument = {
   rev: 1,
 };
 
-export const weaponTraining: RogueTalentDocument = {
+export const weaponTraining: RogueTalentEntry = {
   id: 'weapon-training',
   name: 'Weapon Training',
   talentTier: 'standard',
@@ -792,7 +792,7 @@ export const weaponTraining: RogueTalentDocument = {
   rev: 1,
 };
 
-export const wildMagic: RogueTalentDocument = {
+export const wildMagic: RogueTalentEntry = {
   id: 'wild-magic',
   name: 'Wild Magic',
   talentTier: 'standard',
@@ -805,7 +805,7 @@ export const wildMagic: RogueTalentDocument = {
   rev: 1,
 };
 
-export const withoutATrace: RogueTalentDocument = {
+export const withoutATrace: RogueTalentEntry = {
   id: 'without-a-trace',
   name: 'Without a Trace',
   talentTier: 'standard',
@@ -822,7 +822,7 @@ export const withoutATrace: RogueTalentDocument = {
 
 // ── Advanced Talents: Entries 67–80 ─────────────────────────────────────────
 
-export const againstTheWall: RogueTalentDocument = {
+export const againstTheWall: RogueTalentEntry = {
   id: 'against-the-wall',
   name: 'Against the Wall',
   talentTier: 'advanced',
@@ -834,7 +834,7 @@ export const againstTheWall: RogueTalentDocument = {
   rev: 1,
 };
 
-export const alignedDisguise: RogueTalentDocument = {
+export const alignedDisguise: RogueTalentEntry = {
   id: 'aligned-disguise',
   name: 'Aligned Disguise',
   talentTier: 'advanced',
@@ -849,7 +849,7 @@ export const alignedDisguise: RogueTalentDocument = {
   rev: 1,
 };
 
-export const anotherDay: RogueTalentDocument = {
+export const anotherDay: RogueTalentEntry = {
   id: 'another-day',
   name: 'Another Day',
   talentTier: 'advanced',
@@ -861,7 +861,7 @@ export const anotherDay: RogueTalentDocument = {
   rev: 1,
 };
 
-export const blindingStrike: RogueTalentDocument = {
+export const blindingStrike: RogueTalentEntry = {
   id: 'blinding-strike',
   name: 'Blinding Strike',
   talentTier: 'advanced',
@@ -877,7 +877,7 @@ export const blindingStrike: RogueTalentDocument = {
   rev: 1,
 };
 
-export const confoundingBlades: RogueTalentDocument = {
+export const confoundingBlades: RogueTalentEntry = {
   id: 'confounding-blades',
   name: 'Confounding Blades',
   talentTier: 'advanced',
@@ -890,7 +890,7 @@ export const confoundingBlades: RogueTalentDocument = {
   rev: 1,
 };
 
-export const cripplingStrike: RogueTalentDocument = {
+export const cripplingStrike: RogueTalentEntry = {
   id: 'crippling-strike',
   name: 'Crippling Strike',
   talentTier: 'advanced',
@@ -902,7 +902,7 @@ export const cripplingStrike: RogueTalentDocument = {
   rev: 1,
 };
 
-export const danceOfDisorientingShadows: RogueTalentDocument = {
+export const danceOfDisorientingShadows: RogueTalentEntry = {
   id: 'dance-of-disorienting-shadows',
   name: 'Dance of Disorienting Shadows',
   talentTier: 'advanced',
@@ -914,7 +914,7 @@ export const danceOfDisorientingShadows: RogueTalentDocument = {
   rev: 1,
 };
 
-export const deadlyCocktail: RogueTalentDocument = {
+export const deadlyCocktail: RogueTalentEntry = {
   id: 'deadly-cocktail',
   name: 'Deadly Cocktail',
   talentTier: 'advanced',
@@ -926,7 +926,7 @@ export const deadlyCocktail: RogueTalentDocument = {
   rev: 1,
 };
 
-export const deadlySneak: RogueTalentDocument = {
+export const deadlySneak: RogueTalentEntry = {
   id: 'deadly-sneak',
   name: 'Deadly Sneak',
   talentTier: 'advanced',
@@ -939,7 +939,7 @@ export const deadlySneak: RogueTalentDocument = {
   rev: 1,
 };
 
-export const defensiveRoll: RogueTalentDocument = {
+export const defensiveRoll: RogueTalentEntry = {
   id: 'defensive-roll',
   name: 'Defensive Roll',
   talentTier: 'advanced',
@@ -951,7 +951,7 @@ export const defensiveRoll: RogueTalentDocument = {
   rev: 1,
 };
 
-export const dispellingAttack: RogueTalentDocument = {
+export const dispellingAttack: RogueTalentEntry = {
   id: 'dispelling-attack',
   name: 'Dispelling Attack',
   talentTier: 'advanced',
@@ -964,7 +964,7 @@ export const dispellingAttack: RogueTalentDocument = {
   rev: 1,
 };
 
-export const entanglementOfBlades: RogueTalentDocument = {
+export const entanglementOfBlades: RogueTalentEntry = {
   id: 'entanglement-of-blades',
   name: 'Entanglement of Blades',
   talentTier: 'advanced',
@@ -976,7 +976,7 @@ export const entanglementOfBlades: RogueTalentDocument = {
   rev: 1,
 };
 
-export const familiar: RogueTalentDocument = {
+export const familiar: RogueTalentEntry = {
   id: 'familiar',
   name: 'Familiar',
   talentTier: 'advanced',
@@ -992,7 +992,7 @@ export const familiar: RogueTalentDocument = {
   rev: 1,
 };
 
-export const fastTumble: RogueTalentDocument = {
+export const fastTumble: RogueTalentEntry = {
   id: 'fast-tumble',
   name: 'Fast Tumble',
   talentTier: 'advanced',
@@ -1006,7 +1006,7 @@ export const fastTumble: RogueTalentDocument = {
 
 // ── Advanced Talents: Entries 81–100 ────────────────────────────────────────
 
-export const feat: RogueTalentDocument = {
+export const feat: RogueTalentEntry = {
   id: 'feat',
   name: 'Feat',
   talentTier: 'advanced',
@@ -1021,7 +1021,7 @@ export const feat: RogueTalentDocument = {
   rev: 1,
 };
 
-export const foundersBlessing: RogueTalentDocument = {
+export const foundersBlessing: RogueTalentEntry = {
   id: 'founders-blessing',
   name: "Founders' Blessing",
   talentTier: 'advanced',
@@ -1033,7 +1033,7 @@ export const foundersBlessing: RogueTalentDocument = {
   rev: 1,
 };
 
-export const frugalTrapsmith: RogueTalentDocument = {
+export const frugalTrapsmith: RogueTalentEntry = {
   id: 'frugal-trapsmith',
   name: 'Frugal Trapsmith',
   talentTier: 'advanced',
@@ -1045,7 +1045,7 @@ export const frugalTrapsmith: RogueTalentDocument = {
   rev: 1,
 };
 
-export const getawayMaster: RogueTalentDocument = {
+export const getawayMaster: RogueTalentEntry = {
   id: 'getaway-master',
   name: 'Getaway Master',
   talentTier: 'advanced',
@@ -1057,7 +1057,7 @@ export const getawayMaster: RogueTalentDocument = {
   rev: 1,
 };
 
-export const glibFacade: RogueTalentDocument = {
+export const glibFacade: RogueTalentEntry = {
   id: 'glib-facade',
   name: 'Glib Facade',
   talentTier: 'advanced',
@@ -1070,7 +1070,7 @@ export const glibFacade: RogueTalentDocument = {
   rev: 1,
 };
 
-export const hardMinded: RogueTalentDocument = {
+export const hardMinded: RogueTalentEntry = {
   id: 'hard-minded',
   name: 'Hard Minded',
   talentTier: 'advanced',
@@ -1082,7 +1082,7 @@ export const hardMinded: RogueTalentDocument = {
   rev: 1,
 };
 
-export const harrowStrike: RogueTalentDocument = {
+export const harrowStrike: RogueTalentEntry = {
   id: 'harrow-strike',
   name: 'Harrow Strike',
   talentTier: 'advanced',
@@ -1095,7 +1095,7 @@ export const harrowStrike: RogueTalentDocument = {
   rev: 1,
 };
 
-export const hiddenMind: RogueTalentDocument = {
+export const hiddenMind: RogueTalentEntry = {
   id: 'hidden-mind',
   name: 'Hidden Mind',
   talentTier: 'advanced',
@@ -1108,7 +1108,7 @@ export const hiddenMind: RogueTalentDocument = {
   rev: 1,
 };
 
-export const hideInPlainSight: RogueTalentDocument = {
+export const hideInPlainSight: RogueTalentEntry = {
   id: 'hide-in-plain-sight',
   name: 'Hide in Plain Sight',
   talentTier: 'advanced',
@@ -1120,7 +1120,7 @@ export const hideInPlainSight: RogueTalentDocument = {
   rev: 1,
 };
 
-export const huntersSurprise: RogueTalentDocument = {
+export const huntersSurprise: RogueTalentEntry = {
   id: 'hunters-surprise',
   name: "Hunter's Surprise",
   talentTier: 'advanced',
@@ -1132,7 +1132,7 @@ export const huntersSurprise: RogueTalentDocument = {
   rev: 1,
 };
 
-export const improvedEvasion: RogueTalentDocument = {
+export const improvedEvasion: RogueTalentEntry = {
   id: 'improved-evasion',
   name: 'Improved Evasion',
   talentTier: 'advanced',
@@ -1144,7 +1144,7 @@ export const improvedEvasion: RogueTalentDocument = {
   rev: 1,
 };
 
-export const improvedShadowsChill: RogueTalentDocument = {
+export const improvedShadowsChill: RogueTalentEntry = {
   id: 'improved-shadows-chill',
   name: "Improved Shadow's Chill",
   talentTier: 'advanced',
@@ -1160,7 +1160,7 @@ export const improvedShadowsChill: RogueTalentDocument = {
   rev: 1,
 };
 
-export const knockOutBlow: RogueTalentDocument = {
+export const knockOutBlow: RogueTalentEntry = {
   id: 'knock-out-blow',
   name: 'Knock-Out Blow',
   talentTier: 'advanced',
@@ -1172,7 +1172,7 @@ export const knockOutBlow: RogueTalentDocument = {
   rev: 1,
 };
 
-export const masterOfDisguise: RogueTalentDocument = {
+export const masterOfDisguise: RogueTalentEntry = {
   id: 'master-of-disguise',
   name: 'Master of Disguise',
   talentTier: 'advanced',
@@ -1184,7 +1184,7 @@ export const masterOfDisguise: RogueTalentDocument = {
   rev: 1,
 };
 
-export const masterTricks: RogueTalentDocument = {
+export const masterTricks: RogueTalentEntry = {
   id: 'master-tricks',
   name: 'Master Tricks',
   talentTier: 'advanced',
@@ -1196,7 +1196,7 @@ export const masterTricks: RogueTalentDocument = {
   rev: 1,
 };
 
-export const opportunist: RogueTalentDocument = {
+export const opportunist: RogueTalentEntry = {
   id: 'opportunist',
   name: 'Opportunist',
   talentTier: 'advanced',
@@ -1208,7 +1208,7 @@ export const opportunist: RogueTalentDocument = {
   rev: 1,
 };
 
-export const petrifyingStrike: RogueTalentDocument = {
+export const petrifyingStrike: RogueTalentEntry = {
   id: 'petrifying-strike',
   name: 'Petrifying Strike',
   talentTier: 'advanced',
@@ -1220,7 +1220,7 @@ export const petrifyingStrike: RogueTalentDocument = {
   rev: 1,
 };
 
-export const redirectAttack: RogueTalentDocument = {
+export const redirectAttack: RogueTalentEntry = {
   id: 'redirect-attack',
   name: 'Redirect Attack',
   talentTier: 'advanced',
@@ -1232,7 +1232,7 @@ export const redirectAttack: RogueTalentDocument = {
   rev: 1,
 };
 
-export const reflexiveShadowShield: RogueTalentDocument = {
+export const reflexiveShadowShield: RogueTalentEntry = {
   id: 'reflexive-shadow-shield',
   name: 'Reflexive Shadow Shield',
   talentTier: 'advanced',
@@ -1245,7 +1245,7 @@ export const reflexiveShadowShield: RogueTalentDocument = {
   rev: 1,
 };
 
-export const resonatingRumbles: RogueTalentDocument = {
+export const resonatingRumbles: RogueTalentEntry = {
   id: 'resonating-rumbles',
   name: 'Resonating Rumbles',
   talentTier: 'advanced',
@@ -1259,7 +1259,7 @@ export const resonatingRumbles: RogueTalentDocument = {
 
 // ── Advanced Talents: Entries 101–113 ───────────────────────────────────────
 
-export const rumormonger: RogueTalentDocument = {
+export const rumormonger: RogueTalentEntry = {
   id: 'rumormonger',
   name: 'Rumormonger',
   talentTier: 'advanced',
@@ -1271,7 +1271,7 @@ export const rumormonger: RogueTalentDocument = {
   rev: 1,
 };
 
-export const seeInDarkness: RogueTalentDocument = {
+export const seeInDarkness: RogueTalentEntry = {
   id: 'see-in-darkness',
   name: 'See in Darkness',
   talentTier: 'advanced',
@@ -1284,7 +1284,7 @@ export const seeInDarkness: RogueTalentDocument = {
   rev: 1,
 };
 
-export const shadowDuplicate: RogueTalentDocument = {
+export const shadowDuplicate: RogueTalentEntry = {
   id: 'shadow-duplicate',
   name: 'Shadow Duplicate',
   talentTier: 'advanced',
@@ -1296,7 +1296,7 @@ export const shadowDuplicate: RogueTalentDocument = {
   rev: 1,
 };
 
-export const shrinewalk: RogueTalentDocument = {
+export const shrinewalk: RogueTalentEntry = {
   id: 'shrinewalk',
   name: 'Shrinewalk',
   talentTier: 'advanced',
@@ -1308,7 +1308,7 @@ export const shrinewalk: RogueTalentDocument = {
   rev: 1,
 };
 
-export const skillMastery: RogueTalentDocument = {
+export const skillMastery: RogueTalentEntry = {
   id: 'skill-mastery',
   name: 'Skill Mastery',
   talentTier: 'advanced',
@@ -1320,7 +1320,7 @@ export const skillMastery: RogueTalentDocument = {
   rev: 1,
 };
 
-export const slipperyMind: RogueTalentDocument = {
+export const slipperyMind: RogueTalentEntry = {
   id: 'slippery-mind',
   name: 'Slippery Mind',
   talentTier: 'advanced',
@@ -1332,7 +1332,7 @@ export const slipperyMind: RogueTalentDocument = {
   rev: 1,
 };
 
-export const stalker: RogueTalentDocument = {
+export const stalker: RogueTalentEntry = {
   id: 'stalker',
   name: 'Stalker',
   talentTier: 'advanced',
@@ -1345,7 +1345,7 @@ export const stalker: RogueTalentDocument = {
   rev: 1,
 };
 
-export const stealthySniper: RogueTalentDocument = {
+export const stealthySniper: RogueTalentEntry = {
   id: 'stealthy-sniper',
   name: 'Stealthy Sniper',
   talentTier: 'advanced',
@@ -1357,7 +1357,7 @@ export const stealthySniper: RogueTalentDocument = {
   rev: 1,
 };
 
-export const stonySkin: RogueTalentDocument = {
+export const stonySkin: RogueTalentEntry = {
   id: 'stony-skin',
   name: 'Stony Skin',
   talentTier: 'advanced',
@@ -1369,7 +1369,7 @@ export const stonySkin: RogueTalentDocument = {
   rev: 1,
 };
 
-export const thoughtfulReexamining: RogueTalentDocument = {
+export const thoughtfulReexamining: RogueTalentEntry = {
   id: 'thoughtful-reexamining',
   name: 'Thoughtful Reexamining',
   talentTier: 'advanced',
@@ -1381,7 +1381,7 @@ export const thoughtfulReexamining: RogueTalentDocument = {
   rev: 1,
 };
 
-export const unlockKi: RogueTalentDocument = {
+export const unlockKi: RogueTalentEntry = {
   id: 'unlock-ki',
   name: 'Unlock Ki',
   talentTier: 'advanced',
@@ -1394,7 +1394,7 @@ export const unlockKi: RogueTalentDocument = {
   rev: 1,
 };
 
-export const unwittingAlly: RogueTalentDocument = {
+export const unwittingAlly: RogueTalentEntry = {
   id: 'unwitting-ally',
   name: 'Unwitting Ally',
   talentTier: 'advanced',
@@ -1406,7 +1406,7 @@ export const unwittingAlly: RogueTalentDocument = {
   rev: 1,
 };
 
-export const weaponSnatcher: RogueTalentDocument = {
+export const weaponSnatcher: RogueTalentEntry = {
   id: 'weapon-snatcher',
   name: 'Weapon Snatcher',
   talentTier: 'advanced',
@@ -1420,7 +1420,7 @@ export const weaponSnatcher: RogueTalentDocument = {
 
 // ── Batch array (entries 1–113) ──────────────────────────────────────────────
 
-export const batch_002: RogueTalentDocument[] = [
+export const batch_002: RogueTalentEntry[] = [
   // Standard O–Z
   obfuscateStory,
   obscuringBlow,
