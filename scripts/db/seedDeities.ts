@@ -11,13 +11,13 @@
  * Usage:
  *   npx tsx scripts/db/seedDeities.ts [--dry-run]
  *
- * The script is idempotent: it clears the deities collection before re-seeding,
- * so re-running always produces a clean result.
+ * The script is idempotent: re-running upserts official entries by id without
+ * touching campaign or homebrew content.
  */
 
 import * as admin from 'firebase-admin';
 import { ALL_DEITIES } from '../../src/data/deities/index';
-import type { DeityDocument } from '../../src/types/deities';
+import type { DeityEntry } from '../../src/types/deities';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -50,31 +50,13 @@ function chunkArray<T>(arr: T[], size: number): T[][] {
   return chunks;
 }
 
-async function clearCollection(collectionName: string): Promise<void> {
-  console.log(`Clearing collection: ${collectionName}...`);
-  const snapshot = await db.collection(collectionName).get();
-  if (snapshot.empty) {
-    console.log('  Collection already empty.');
-    return;
-  }
-  const chunks = chunkArray(snapshot.docs, BATCH_SIZE);
-  for (const chunk of chunks) {
-    const batch = db.batch();
-    chunk.forEach((doc) => batch.delete(doc.ref));
-    await batch.commit();
-    console.log(`  Deleted ${chunk.length} documents`);
-  }
-}
-
-async function seedDeities(deities: DeityDocument[]): Promise<void> {
+async function seedDeities(deities: DeityEntry[]): Promise<void> {
   console.log(`\nSeeding ${deities.length} deities to project: ${PROJECT_ID}`);
 
   if (DRY_RUN) {
     console.log('\n[DRY RUN] — no writes performed.');
     return;
   }
-
-  await clearCollection('deities');
 
   const chunks = chunkArray(deities, BATCH_SIZE);
   let totalWritten = 0;

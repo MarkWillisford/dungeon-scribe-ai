@@ -1,9 +1,9 @@
 // Batch 001 | first: 'Air Domain' | last: 'Chaos/Demon Subdomain' | count: 24
-import { DomainDocument } from '@/types/classOptions';
+import { DomainEntry } from '@/types/classOptions';
 
 // ---- Domains (10) ----
 
-export const airDomain: DomainDocument = {
+export const airDomain: DomainEntry = {
   id: 'air',
   name: 'Air Domain',
   description:
@@ -33,13 +33,14 @@ export const airDomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const animalDomain: DomainDocument = {
+export const animalDomain: DomainEntry = {
   id: 'animal',
   name: 'Animal Domain',
   description:
@@ -70,13 +71,14 @@ export const animalDomain: DomainDocument = {
     },
   ],
   grantedClassSkills: ['Knowledge (nature)'],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const artificeDomain: DomainDocument = {
+export const artificeDomain: DomainEntry = {
   id: 'artifice',
   name: 'Artifice Domain',
   description:
@@ -112,7 +114,7 @@ export const artificeDomain: DomainDocument = {
   rev: 1,
 };
 
-export const chaosDomain: DomainDocument = {
+export const chaosDomain: DomainEntry = {
   id: 'chaos',
   name: 'Chaos Domain',
   description:
@@ -148,7 +150,7 @@ export const chaosDomain: DomainDocument = {
   rev: 1,
 };
 
-export const charmDomain: DomainDocument = {
+export const charmDomain: DomainEntry = {
   id: 'charm',
   name: 'Charm Domain',
   description:
@@ -184,7 +186,7 @@ export const charmDomain: DomainDocument = {
   rev: 1,
 };
 
-export const communityDomain: DomainDocument = {
+export const communityDomain: DomainEntry = {
   id: 'community',
   name: 'Community Domain',
   description:
@@ -220,7 +222,7 @@ export const communityDomain: DomainDocument = {
   rev: 1,
 };
 
-export const darknessDomain: DomainDocument = {
+export const darknessDomain: DomainEntry = {
   id: 'darkness',
   name: 'Darkness Domain',
   description: 'You manipulate shadows and darkness.',
@@ -255,7 +257,7 @@ export const darknessDomain: DomainDocument = {
   rev: 1,
 };
 
-export const deathDomain: DomainDocument = {
+export const deathDomain: DomainEntry = {
   id: 'death',
   name: 'Death Domain',
   description:
@@ -291,7 +293,7 @@ export const deathDomain: DomainDocument = {
   rev: 1,
 };
 
-export const destructionDomain: DomainDocument = {
+export const destructionDomain: DomainEntry = {
   id: 'destruction',
   name: 'Destruction Domain',
   description:
@@ -327,7 +329,7 @@ export const destructionDomain: DomainDocument = {
   rev: 1,
 };
 
-export const earthDomain: DomainDocument = {
+export const earthDomain: DomainEntry = {
   id: 'earth',
   name: 'Earth Domain',
   description:
@@ -357,6 +359,7 @@ export const earthDomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
@@ -365,7 +368,7 @@ export const earthDomain: DomainDocument = {
 
 // ---- Subdomains (14) ----
 
-export const airCloudSubdomain: DomainDocument = {
+export const airCloudSubdomain: DomainEntry = {
   id: 'air-cloud',
   name: 'Cloud Subdomain',
   description:
@@ -395,13 +398,14 @@ export const airCloudSubdomain: DomainDocument = {
       levelGained: 8,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const airLightningSubdomain: DomainDocument = {
+export const airLightningSubdomain: DomainEntry = {
   id: 'air-lightning',
   name: 'Lightning Subdomain',
   description:
@@ -431,13 +435,14 @@ export const airLightningSubdomain: DomainDocument = {
       levelGained: 8,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const airWindSubdomain: DomainDocument = {
+export const airWindSubdomain: DomainEntry = {
   id: 'air-wind',
   name: 'Wind Subdomain',
   description:
@@ -467,13 +472,14 @@ export const airWindSubdomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const animalFeatherSubdomain: DomainDocument = {
+export const animalFeatherSubdomain: DomainEntry = {
   id: 'animal-feather',
   name: 'Feather Subdomain',
   description:
@@ -504,13 +510,14 @@ export const animalFeatherSubdomain: DomainDocument = {
     },
   ],
   grantedClassSkills: ['Fly'],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const animalFurSubdomain: DomainDocument = {
+export const animalFurSubdomain: DomainEntry = {
   id: 'animal-fur',
   name: 'Fur Subdomain',
   description:
@@ -540,13 +547,14 @@ export const animalFurSubdomain: DomainDocument = {
       levelGained: 4,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const animalInsectSubdomain: DomainDocument = {
+export const animalInsectSubdomain: DomainEntry = {
   id: 'animal-insect',
   name: 'Insect Subdomain',
   description:
@@ -576,13 +584,14 @@ export const animalInsectSubdomain: DomainDocument = {
       levelGained: 4,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const artificeAlchemySubdomain: DomainDocument = {
+export const artificeAlchemySubdomain: DomainEntry = {
   id: 'artifice-alchemy',
   name: 'Alchemy Subdomain',
   description:
@@ -618,7 +627,7 @@ export const artificeAlchemySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const artificeConstructSubdomain: DomainDocument = {
+export const artificeConstructSubdomain: DomainEntry = {
   id: 'artifice-construct',
   name: 'Construct Subdomain',
   description:
@@ -654,7 +663,7 @@ export const artificeConstructSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const artificeIndustrySubdomain: DomainDocument = {
+export const artificeIndustrySubdomain: DomainEntry = {
   id: 'artifice-industry',
   name: 'Industry Subdomain',
   description:
@@ -690,7 +699,7 @@ export const artificeIndustrySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const artificeToilSubdomain: DomainDocument = {
+export const artificeToilSubdomain: DomainEntry = {
   id: 'artifice-toil',
   name: 'Toil Subdomain',
   description:
@@ -726,7 +735,7 @@ export const artificeToilSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const artificeTrapSubdomain: DomainDocument = {
+export const artificeTrapSubdomain: DomainEntry = {
   id: 'artifice-trap',
   name: 'Trap Subdomain',
   description:
@@ -762,7 +771,7 @@ export const artificeTrapSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const chaosAzataSubdomain: DomainDocument = {
+export const chaosAzataSubdomain: DomainEntry = {
   id: 'chaos-azata',
   name: 'Azata Subdomain',
   description:
@@ -798,7 +807,7 @@ export const chaosAzataSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const chaosDemodandSubdomain: DomainDocument = {
+export const chaosDemodandSubdomain: DomainEntry = {
   id: 'chaos-demodand',
   name: 'Demodand Subdomain',
   description:
@@ -834,7 +843,7 @@ export const chaosDemodandSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const chaosDemonSubdomain: DomainDocument = {
+export const chaosDemonSubdomain: DomainEntry = {
   id: 'chaos-demon',
   name: 'Demon Subdomain',
   description:
@@ -872,7 +881,7 @@ export const chaosDemonSubdomain: DomainDocument = {
 
 // ---- Batch array ----
 
-export const batch_001: DomainDocument[] = [
+export const batch_001: DomainEntry[] = [
   airDomain,
   animalDomain,
   artificeDomain,

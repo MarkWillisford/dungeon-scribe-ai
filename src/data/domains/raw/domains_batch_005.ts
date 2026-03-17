@@ -1,9 +1,9 @@
 // Batch 005 | first: 'Liberation/Freedom Subdomain' | last: 'Nobility/Martyr Subdomain' | count: 26
-import { DomainDocument } from '@/types/classOptions';
+import { DomainEntry } from '@/types/classOptions';
 
 // ---- Liberation Subdomains (3) ----
 
-export const liberationFreedomSubdomain: DomainDocument = {
+export const liberationFreedomSubdomain: DomainEntry = {
   id: 'liberation-freedom',
   name: 'Freedom Subdomain',
   description:
@@ -39,7 +39,7 @@ export const liberationFreedomSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const liberationRevolutionSubdomain: DomainDocument = {
+export const liberationRevolutionSubdomain: DomainEntry = {
   id: 'liberation-revolution',
   name: 'Revolution Subdomain',
   description:
@@ -75,7 +75,7 @@ export const liberationRevolutionSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const liberationSelfRealizationSubdomain: DomainDocument = {
+export const liberationSelfRealizationSubdomain: DomainEntry = {
   id: 'liberation-self-realization',
   name: 'Self-Realization Subdomain',
   description:
@@ -107,7 +107,7 @@ export const liberationSelfRealizationSubdomain: DomainDocument = {
 
 // ---- Luck Subdomains (3) ----
 
-export const luckCurseSubdomain: DomainDocument = {
+export const luckCurseSubdomain: DomainEntry = {
   id: 'luck-curse',
   name: 'Curse Subdomain',
   description:
@@ -143,7 +143,7 @@ export const luckCurseSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const luckFateSubdomain: DomainDocument = {
+export const luckFateSubdomain: DomainEntry = {
   id: 'luck-fate',
   name: 'Fate Subdomain',
   description:
@@ -179,7 +179,7 @@ export const luckFateSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const luckImaginationSubdomain: DomainDocument = {
+export const luckImaginationSubdomain: DomainEntry = {
   id: 'luck-imagination',
   name: 'Imagination Subdomain',
   description:
@@ -217,7 +217,7 @@ export const luckImaginationSubdomain: DomainDocument = {
 
 // ---- Madness Subdomains (3) ----
 
-export const madnessInsanitySubdomain: DomainDocument = {
+export const madnessInsanitySubdomain: DomainEntry = {
   id: 'madness-insanity',
   name: 'Insanity Subdomain',
   description:
@@ -253,7 +253,7 @@ export const madnessInsanitySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const madnessNightmareSubdomain: DomainDocument = {
+export const madnessNightmareSubdomain: DomainEntry = {
   id: 'madness-nightmare',
   name: 'Nightmare Subdomain',
   description:
@@ -289,7 +289,7 @@ export const madnessNightmareSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const madnessTruthSubdomain: DomainDocument = {
+export const madnessTruthSubdomain: DomainEntry = {
   id: 'madness-truth',
   name: 'Truth Subdomain',
   description:
@@ -327,7 +327,7 @@ export const madnessTruthSubdomain: DomainDocument = {
 
 // ---- Magic Subdomains (4) ----
 
-export const magicAlchemySubdomain: DomainDocument = {
+export const magicAlchemySubdomain: DomainEntry = {
   id: 'magic-alchemy',
   name: 'Alchemy Subdomain',
   description:
@@ -363,7 +363,7 @@ export const magicAlchemySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const magicArcaneSubdomain: DomainDocument = {
+export const magicArcaneSubdomain: DomainEntry = {
   id: 'magic-arcane',
   name: 'Arcane Subdomain',
   description:
@@ -399,7 +399,7 @@ export const magicArcaneSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const magicDivineSubdomain: DomainDocument = {
+export const magicDivineSubdomain: DomainEntry = {
   id: 'magic-divine',
   name: 'Divine Subdomain',
   description:
@@ -435,7 +435,7 @@ export const magicDivineSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const magicRitesSubdomain: DomainDocument = {
+export const magicRitesSubdomain: DomainEntry = {
   id: 'magic-rites',
   name: 'Rites Subdomain',
   description:
@@ -473,7 +473,7 @@ export const magicRitesSubdomain: DomainDocument = {
 
 // ---- Core Domains (9) ----
 
-export const nobilityDomain: DomainDocument = {
+export const nobilityDomain: DomainEntry = {
   id: 'nobility',
   name: 'Nobility Domain',
   description:
@@ -509,7 +509,7 @@ export const nobilityDomain: DomainDocument = {
   rev: 1,
 };
 
-export const plantDomain: DomainDocument = {
+export const plantDomain: DomainEntry = {
   id: 'plant',
   name: 'Plant Domain',
   description:
@@ -539,13 +539,14 @@ export const plantDomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const protectionDomain: DomainDocument = {
+export const protectionDomain: DomainEntry = {
   id: 'protection',
   name: 'Protection Domain',
   description:
@@ -581,7 +582,7 @@ export const protectionDomain: DomainDocument = {
   rev: 1,
 };
 
-export const reposeDomain: DomainDocument = {
+export const reposeDomain: DomainEntry = {
   id: 'repose',
   name: 'Repose Domain',
   description:
@@ -617,7 +618,7 @@ export const reposeDomain: DomainDocument = {
   rev: 1,
 };
 
-export const runeDomain: DomainDocument = {
+export const runeDomain: DomainEntry = {
   id: 'rune',
   name: 'Rune Domain',
   description:
@@ -653,7 +654,7 @@ export const runeDomain: DomainDocument = {
   rev: 1,
 };
 
-export const scalykindDomain: DomainDocument = {
+export const scalykindDomain: DomainEntry = {
   id: 'scalykind',
   name: 'Scalykind Domain',
   description:
@@ -689,7 +690,7 @@ export const scalykindDomain: DomainDocument = {
   rev: 1,
 };
 
-export const strengthDomain: DomainDocument = {
+export const strengthDomain: DomainEntry = {
   id: 'strength',
   name: 'Strength Domain',
   description:
@@ -725,7 +726,7 @@ export const strengthDomain: DomainDocument = {
   rev: 1,
 };
 
-export const sunDomain: DomainDocument = {
+export const sunDomain: DomainEntry = {
   id: 'sun',
   name: 'Sun Domain',
   description:
@@ -761,7 +762,7 @@ export const sunDomain: DomainDocument = {
   rev: 1,
 };
 
-export const travelDomain: DomainDocument = {
+export const travelDomain: DomainEntry = {
   id: 'travel',
   name: 'Travel Domain',
   description:
@@ -800,7 +801,7 @@ export const travelDomain: DomainDocument = {
 
 // ---- Nobility Subdomains (4) ----
 
-export const nobilityAristocracySubdomain: DomainDocument = {
+export const nobilityAristocracySubdomain: DomainEntry = {
   id: 'nobility-aristocracy',
   name: 'Aristocracy Subdomain',
   description:
@@ -836,7 +837,7 @@ export const nobilityAristocracySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const nobilityHubrisSubdomain: DomainDocument = {
+export const nobilityHubrisSubdomain: DomainEntry = {
   id: 'nobility-hubris',
   name: 'Hubris Subdomain',
   description:
@@ -873,7 +874,7 @@ export const nobilityHubrisSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const nobilityLeadershipSubdomain: DomainDocument = {
+export const nobilityLeadershipSubdomain: DomainEntry = {
   id: 'nobility-leadership',
   name: 'Leadership Subdomain',
   description:
@@ -909,7 +910,7 @@ export const nobilityLeadershipSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const nobilityMartyrSubdomain: DomainDocument = {
+export const nobilityMartyrSubdomain: DomainEntry = {
   id: 'nobility-martyr',
   name: 'Martyr Subdomain',
   description:
@@ -947,7 +948,7 @@ export const nobilityMartyrSubdomain: DomainDocument = {
 
 // ---- Batch Array ----
 
-export const batch_005: DomainDocument[] = [
+export const batch_005: DomainEntry[] = [
   liberationFreedomSubdomain,
   liberationRevolutionSubdomain,
   liberationSelfRealizationSubdomain,

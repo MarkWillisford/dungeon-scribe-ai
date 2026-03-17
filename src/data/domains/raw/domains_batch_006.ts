@@ -1,9 +1,9 @@
 // Batch 006 | first: 'Plant/Leshy Subdomain' | last: 'Sun/Thirst Subdomain' | count: 26
-import { DomainDocument } from '@/types/classOptions';
+import { DomainEntry } from '@/types/classOptions';
 
 // ---- Plant Subdomains (4) ----
 
-export const plantLeshySubdomain: DomainDocument = {
+export const plantLeshySubdomain: DomainEntry = {
   id: 'plant-leshy',
   name: 'Leshy Subdomain',
   description:
@@ -27,13 +27,14 @@ export const plantLeshySubdomain: DomainDocument = {
       levelGained: 1,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const plantDecaySubdomain: DomainDocument = {
+export const plantDecaySubdomain: DomainEntry = {
   id: 'plant-decay',
   name: 'Decay Subdomain',
   description:
@@ -63,13 +64,14 @@ export const plantDecaySubdomain: DomainDocument = {
       levelGained: 8,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const plantGrowthSubdomain: DomainDocument = {
+export const plantGrowthSubdomain: DomainEntry = {
   id: 'plant-growth',
   name: 'Growth Subdomain',
   description:
@@ -99,13 +101,14 @@ export const plantGrowthSubdomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const plantThornsSubdomain: DomainDocument = {
+export const plantThornsSubdomain: DomainEntry = {
   id: 'plant-thorns',
   name: 'Thorns Subdomain',
   description:
@@ -135,6 +138,7 @@ export const plantThornsSubdomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
@@ -143,7 +147,7 @@ export const plantThornsSubdomain: DomainDocument = {
 
 // ---- Protection Subdomains (4) ----
 
-export const protectionDefenseSubdomain: DomainDocument = {
+export const protectionDefenseSubdomain: DomainEntry = {
   id: 'protection-defense',
   name: 'Defense Subdomain',
   description:
@@ -179,7 +183,7 @@ export const protectionDefenseSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const protectionFortificationsSubdomain: DomainDocument = {
+export const protectionFortificationsSubdomain: DomainEntry = {
   id: 'protection-fortifications',
   name: 'Fortifications Subdomain',
   description:
@@ -215,7 +219,7 @@ export const protectionFortificationsSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const protectionPuritySubdomain: DomainDocument = {
+export const protectionPuritySubdomain: DomainEntry = {
   id: 'protection-purity',
   name: 'Purity Subdomain',
   description:
@@ -251,7 +255,7 @@ export const protectionPuritySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const protectionSolitudeSubdomain: DomainDocument = {
+export const protectionSolitudeSubdomain: DomainEntry = {
   id: 'protection-solitude',
   name: 'Solitude Subdomain',
   description:
@@ -289,7 +293,7 @@ export const protectionSolitudeSubdomain: DomainDocument = {
 
 // ---- Repose Subdomains (3) ----
 
-export const reposeAncestorsSubdomain: DomainDocument = {
+export const reposeAncestorsSubdomain: DomainEntry = {
   id: 'repose-ancestors',
   name: 'Ancestors Subdomain',
   description:
@@ -325,7 +329,7 @@ export const reposeAncestorsSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const reposePsychopompSubdomain: DomainDocument = {
+export const reposePsychopompSubdomain: DomainEntry = {
   id: 'repose-psychopomp',
   name: 'Psychopomp Subdomain',
   description:
@@ -361,7 +365,7 @@ export const reposePsychopompSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const reposeSoulsSubdomain: DomainDocument = {
+export const reposeSoulsSubdomain: DomainEntry = {
   id: 'repose-souls',
   name: 'Souls Subdomain',
   description:
@@ -399,7 +403,7 @@ export const reposeSoulsSubdomain: DomainDocument = {
 
 // ---- Rune Subdomains (3) ----
 
-export const runeLanguageSubdomain: DomainDocument = {
+export const runeLanguageSubdomain: DomainEntry = {
   id: 'rune-language',
   name: 'Language Subdomain',
   description:
@@ -435,7 +439,7 @@ export const runeLanguageSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const runeLegislationSubdomain: DomainDocument = {
+export const runeLegislationSubdomain: DomainEntry = {
   id: 'rune-legislation',
   name: 'Legislation Subdomain',
   description:
@@ -471,7 +475,7 @@ export const runeLegislationSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const runeWardsSubdomain: DomainDocument = {
+export const runeWardsSubdomain: DomainEntry = {
   id: 'rune-wards',
   name: 'Wards Subdomain',
   description:
@@ -509,7 +513,7 @@ export const runeWardsSubdomain: DomainDocument = {
 
 // ---- Scalykind Subdomains (3) ----
 
-export const scalykindDragonSubdomain: DomainDocument = {
+export const scalykindDragonSubdomain: DomainEntry = {
   id: 'scalykind-dragon',
   name: 'Dragon Subdomain',
   description:
@@ -545,7 +549,7 @@ export const scalykindDragonSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const scalykindSaurianSubdomain: DomainDocument = {
+export const scalykindSaurianSubdomain: DomainEntry = {
   id: 'scalykind-saurian',
   name: 'Saurian Subdomain',
   description:
@@ -581,7 +585,7 @@ export const scalykindSaurianSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const scalykindVenomSubdomain: DomainDocument = {
+export const scalykindVenomSubdomain: DomainEntry = {
   id: 'scalykind-venom',
   name: 'Venom Subdomain',
   description:
@@ -619,7 +623,7 @@ export const scalykindVenomSubdomain: DomainDocument = {
 
 // ---- Strength Subdomains (5) ----
 
-export const strengthCompetitionSubdomain: DomainDocument = {
+export const strengthCompetitionSubdomain: DomainEntry = {
   id: 'strength-competition',
   name: 'Competition Subdomain',
   description:
@@ -655,7 +659,7 @@ export const strengthCompetitionSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const strengthFerocitySubdomain: DomainDocument = {
+export const strengthFerocitySubdomain: DomainEntry = {
   id: 'strength-ferocity',
   name: 'Ferocity Subdomain',
   description:
@@ -691,7 +695,7 @@ export const strengthFerocitySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const strengthFistSubdomain: DomainDocument = {
+export const strengthFistSubdomain: DomainEntry = {
   id: 'strength-fist',
   name: 'Fist Subdomain',
   description:
@@ -727,7 +731,7 @@ export const strengthFistSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const strengthResolveSubdomain: DomainDocument = {
+export const strengthResolveSubdomain: DomainEntry = {
   id: 'strength-resolve',
   name: 'Resolve Subdomain',
   description:
@@ -763,7 +767,7 @@ export const strengthResolveSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const strengthSelfRealizationSubdomain: DomainDocument = {
+export const strengthSelfRealizationSubdomain: DomainEntry = {
   id: 'strength-self-realization',
   name: 'Self-Realization Subdomain',
   description:
@@ -801,7 +805,7 @@ export const strengthSelfRealizationSubdomain: DomainDocument = {
 
 // ---- Sun Subdomains (4) ----
 
-export const sunDaySubdomain: DomainDocument = {
+export const sunDaySubdomain: DomainEntry = {
   id: 'sun-day',
   name: 'Day Subdomain',
   description:
@@ -837,7 +841,7 @@ export const sunDaySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const sunLightSubdomain: DomainDocument = {
+export const sunLightSubdomain: DomainEntry = {
   id: 'sun-light',
   name: 'Light Subdomain',
   description:
@@ -873,7 +877,7 @@ export const sunLightSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const sunRevelationSubdomain: DomainDocument = {
+export const sunRevelationSubdomain: DomainEntry = {
   id: 'sun-revelation',
   name: 'Revelation Subdomain',
   description:
@@ -910,7 +914,7 @@ export const sunRevelationSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const sunThirstSubdomain: DomainDocument = {
+export const sunThirstSubdomain: DomainEntry = {
   id: 'sun-thirst',
   name: 'Thirst Subdomain',
   description:
@@ -948,7 +952,7 @@ export const sunThirstSubdomain: DomainDocument = {
 
 // ---- Batch Array ----
 
-export const batch_006: DomainDocument[] = [
+export const batch_006: DomainEntry[] = [
   plantLeshySubdomain,
   plantDecaySubdomain,
   plantGrowthSubdomain,

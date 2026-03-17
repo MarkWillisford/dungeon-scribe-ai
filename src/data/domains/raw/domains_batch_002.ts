@@ -1,9 +1,9 @@
 // Batch 002 | first: 'Chaos/Entropy Subdomain' | last: 'Earth/Caves Subdomain' | count: 24
-import { DomainDocument } from '@/types/classOptions';
+import { DomainEntry } from '@/types/classOptions';
 
 // ---- Chaos Subdomains (5) ----
 
-export const chaosEntropySubdomain: DomainDocument = {
+export const chaosEntropySubdomain: DomainEntry = {
   id: 'chaos-entropy',
   name: 'Entropy Subdomain',
   description: 'Subdomain of Chaos. You seek to bring about the end of all things.',
@@ -38,7 +38,7 @@ export const chaosEntropySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const chaosProteanSubdomain: DomainDocument = {
+export const chaosProteanSubdomain: DomainEntry = {
   id: 'chaos-protean',
   name: 'Protean Subdomain',
   description:
@@ -74,7 +74,7 @@ export const chaosProteanSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const chaosRevelrySubdomain: DomainDocument = {
+export const chaosRevelrySubdomain: DomainEntry = {
   id: 'chaos-revelry',
   name: 'Revelry Subdomain',
   description: 'Subdomain of Chaos. You know how to best celebrate the good times in life.',
@@ -109,7 +109,7 @@ export const chaosRevelrySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const chaosRiotSubdomain: DomainDocument = {
+export const chaosRiotSubdomain: DomainEntry = {
   id: 'chaos-riot',
   name: 'Riot Subdomain',
   description:
@@ -146,7 +146,7 @@ export const chaosRiotSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const chaosWhimsySubdomain: DomainDocument = {
+export const chaosWhimsySubdomain: DomainEntry = {
   id: 'chaos-whimsy',
   name: 'Whimsy Subdomain',
   description:
@@ -184,7 +184,7 @@ export const chaosWhimsySubdomain: DomainDocument = {
 
 // ---- Charm Subdomains (3) ----
 
-export const charmCaptivationSubdomain: DomainDocument = {
+export const charmCaptivationSubdomain: DomainEntry = {
   id: 'charm-captivation',
   name: 'Captivation Subdomain',
   description:
@@ -220,7 +220,7 @@ export const charmCaptivationSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const charmLoveSubdomain: DomainDocument = {
+export const charmLoveSubdomain: DomainEntry = {
   id: 'charm-love',
   name: 'Love Subdomain',
   description:
@@ -256,7 +256,7 @@ export const charmLoveSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const charmLustSubdomain: DomainDocument = {
+export const charmLustSubdomain: DomainEntry = {
   id: 'charm-lust',
   name: 'Lust Subdomain',
   description:
@@ -294,7 +294,7 @@ export const charmLustSubdomain: DomainDocument = {
 
 // ---- Community Subdomains (4) ----
 
-export const communityCooperationSubdomain: DomainDocument = {
+export const communityCooperationSubdomain: DomainEntry = {
   id: 'community-cooperation',
   name: 'Cooperation Subdomain',
   description:
@@ -330,7 +330,7 @@ export const communityCooperationSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const communityEducationSubdomain: DomainDocument = {
+export const communityEducationSubdomain: DomainEntry = {
   id: 'community-education',
   name: 'Education Subdomain',
   description:
@@ -367,7 +367,7 @@ export const communityEducationSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const communityFamilySubdomain: DomainDocument = {
+export const communityFamilySubdomain: DomainEntry = {
   id: 'community-family',
   name: 'Family Subdomain',
   description:
@@ -403,7 +403,7 @@ export const communityFamilySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const communityHomeSubdomain: DomainDocument = {
+export const communityHomeSubdomain: DomainEntry = {
   id: 'community-home',
   name: 'Home Subdomain',
   description:
@@ -441,7 +441,7 @@ export const communityHomeSubdomain: DomainDocument = {
 
 // ---- Darkness Subdomains (3) ----
 
-export const darknessLossSubdomain: DomainDocument = {
+export const darknessLossSubdomain: DomainEntry = {
   id: 'darkness-loss',
   name: 'Loss Subdomain',
   description:
@@ -477,7 +477,7 @@ export const darknessLossSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const darknessMoonSubdomain: DomainDocument = {
+export const darknessMoonSubdomain: DomainEntry = {
   id: 'darkness-moon',
   name: 'Moon Subdomain',
   description:
@@ -513,7 +513,7 @@ export const darknessMoonSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const darknessNightSubdomain: DomainDocument = {
+export const darknessNightSubdomain: DomainEntry = {
   id: 'darkness-night',
   name: 'Night Subdomain',
   description:
@@ -551,7 +551,7 @@ export const darknessNightSubdomain: DomainDocument = {
 
 // ---- Death Subdomains (4) ----
 
-export const deathMurderSubdomain: DomainDocument = {
+export const deathMurderSubdomain: DomainEntry = {
   id: 'death-murder',
   name: 'Murder Subdomain',
   description:
@@ -587,7 +587,7 @@ export const deathMurderSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const deathPlagueSubdomain: DomainDocument = {
+export const deathPlagueSubdomain: DomainEntry = {
   id: 'death-plague',
   name: 'Plague Subdomain',
   description:
@@ -624,7 +624,7 @@ export const deathPlagueSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const deathPsychopompSubdomain: DomainDocument = {
+export const deathPsychopompSubdomain: DomainEntry = {
   id: 'death-psychopomp',
   name: 'Psychopomp Subdomain',
   description:
@@ -660,7 +660,7 @@ export const deathPsychopompSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const deathUndeadSubdomain: DomainDocument = {
+export const deathUndeadSubdomain: DomainEntry = {
   id: 'death-undead',
   name: 'Undead Subdomain',
   description:
@@ -698,7 +698,7 @@ export const deathUndeadSubdomain: DomainDocument = {
 
 // ---- Destruction Subdomains (4) ----
 
-export const destructionCatastropheSubdomain: DomainDocument = {
+export const destructionCatastropheSubdomain: DomainEntry = {
   id: 'destruction-catastrophe',
   name: 'Catastrophe Subdomain',
   description:
@@ -734,7 +734,7 @@ export const destructionCatastropheSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const destructionHatredSubdomain: DomainDocument = {
+export const destructionHatredSubdomain: DomainEntry = {
   id: 'destruction-hatred',
   name: 'Hatred Subdomain',
   description:
@@ -770,7 +770,7 @@ export const destructionHatredSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const destructionRageSubdomain: DomainDocument = {
+export const destructionRageSubdomain: DomainEntry = {
   id: 'destruction-rage',
   name: 'Rage Subdomain',
   description:
@@ -806,7 +806,7 @@ export const destructionRageSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const destructionTortureSubdomain: DomainDocument = {
+export const destructionTortureSubdomain: DomainEntry = {
   id: 'destruction-torture',
   name: 'Torture Subdomain',
   description:
@@ -844,7 +844,7 @@ export const destructionTortureSubdomain: DomainDocument = {
 
 // ---- Earth Subdomains (1) ----
 
-export const earthCavesSubdomain: DomainDocument = {
+export const earthCavesSubdomain: DomainEntry = {
   id: 'earth-caves',
   name: 'Caves Subdomain',
   description:
@@ -874,6 +874,7 @@ export const earthCavesSubdomain: DomainDocument = {
       levelGained: 8,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
@@ -882,7 +883,7 @@ export const earthCavesSubdomain: DomainDocument = {
 
 // ---- Batch array ----
 
-export const batch_002: DomainDocument[] = [
+export const batch_002: DomainEntry[] = [
   chaosEntropySubdomain,
   chaosProteanSubdomain,
   chaosRevelrySubdomain,

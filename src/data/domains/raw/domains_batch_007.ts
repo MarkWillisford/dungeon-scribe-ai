@@ -1,9 +1,9 @@
 // Batch 007 | first: 'Travel/Exploration Subdomain' | last: 'Weather/Storms Subdomain' | count: 29
-import { DomainDocument } from '@/types/classOptions';
+import { DomainEntry } from '@/types/classOptions';
 
 // ---- Travel Subdomains (3) ----
 
-export const travelExplorationSubdomain: DomainDocument = {
+export const travelExplorationSubdomain: DomainEntry = {
   id: 'travel-exploration',
   name: 'Exploration Subdomain',
   description:
@@ -39,7 +39,7 @@ export const travelExplorationSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const travelPortalSubdomain: DomainDocument = {
+export const travelPortalSubdomain: DomainEntry = {
   id: 'travel-portal',
   name: 'Portal Subdomain',
   description:
@@ -75,7 +75,7 @@ export const travelPortalSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const travelTradeSubdomain: DomainDocument = {
+export const travelTradeSubdomain: DomainEntry = {
   id: 'travel-trade',
   name: 'Trade Subdomain',
   description:
@@ -113,7 +113,7 @@ export const travelTradeSubdomain: DomainDocument = {
 
 // ---- Core Domains (6) ----
 
-export const trickeryDomain: DomainDocument = {
+export const trickeryDomain: DomainEntry = {
   id: 'trickery',
   name: 'Trickery Domain',
   description:
@@ -150,7 +150,7 @@ export const trickeryDomain: DomainDocument = {
   rev: 1,
 };
 
-export const verminDomain: DomainDocument = {
+export const verminDomain: DomainEntry = {
   id: 'vermin',
   name: 'Vermin Domain',
   description: 'You share a deep connection with mindless invertebrates.',
@@ -191,7 +191,7 @@ export const verminDomain: DomainDocument = {
   rev: 1,
 };
 
-export const voidDomain: DomainDocument = {
+export const voidDomain: DomainEntry = {
   id: 'void',
   name: 'Void Domain',
   description:
@@ -227,7 +227,7 @@ export const voidDomain: DomainDocument = {
   rev: 1,
 };
 
-export const warDomain: DomainDocument = {
+export const warDomain: DomainEntry = {
   id: 'war',
   name: 'War Domain',
   description:
@@ -263,7 +263,7 @@ export const warDomain: DomainDocument = {
   rev: 1,
 };
 
-export const waterDomain: DomainDocument = {
+export const waterDomain: DomainEntry = {
   id: 'water',
   name: 'Water Domain',
   description:
@@ -293,13 +293,14 @@ export const waterDomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const weatherDomain: DomainDocument = {
+export const weatherDomain: DomainEntry = {
   id: 'weather',
   name: 'Weather Domain',
   description:
@@ -329,6 +330,7 @@ export const weatherDomain: DomainDocument = {
       levelGained: 8,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
@@ -337,7 +339,7 @@ export const weatherDomain: DomainDocument = {
 
 // ---- Trickery Subdomains (6) ----
 
-export const trickeryAmbushSubdomain: DomainDocument = {
+export const trickeryAmbushSubdomain: DomainEntry = {
   id: 'trickery-ambush',
   name: 'Ambush Subdomain',
   description:
@@ -374,7 +376,7 @@ export const trickeryAmbushSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const trickeryDeceptionSubdomain: DomainDocument = {
+export const trickeryDeceptionSubdomain: DomainEntry = {
   id: 'trickery-deception',
   name: 'Deception Subdomain',
   description:
@@ -411,7 +413,7 @@ export const trickeryDeceptionSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const trickeryEspionageSubdomain: DomainDocument = {
+export const trickeryEspionageSubdomain: DomainEntry = {
   id: 'trickery-espionage',
   name: 'Espionage Subdomain',
   description:
@@ -448,7 +450,7 @@ export const trickeryEspionageSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const trickeryGreedSubdomain: DomainDocument = {
+export const trickeryGreedSubdomain: DomainEntry = {
   id: 'trickery-greed',
   name: 'Greed Subdomain',
   description:
@@ -485,7 +487,7 @@ export const trickeryGreedSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const trickeryInnuendoSubdomain: DomainDocument = {
+export const trickeryInnuendoSubdomain: DomainEntry = {
   id: 'trickery-innuendo',
   name: 'Innuendo Subdomain',
   description:
@@ -522,7 +524,7 @@ export const trickeryInnuendoSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const trickeryThieverySubdomain: DomainDocument = {
+export const trickeryThieverySubdomain: DomainEntry = {
   id: 'trickery-thievery',
   name: 'Thievery Subdomain',
   description:
@@ -561,7 +563,7 @@ export const trickeryThieverySubdomain: DomainDocument = {
 
 // ---- Void Subdomains (3) ----
 
-export const voidDarkTapestrySubdomain: DomainDocument = {
+export const voidDarkTapestrySubdomain: DomainEntry = {
   id: 'void-dark-tapestry',
   name: 'Dark Tapestry Subdomain',
   description:
@@ -597,7 +599,7 @@ export const voidDarkTapestrySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const voidIsolationSubdomain: DomainDocument = {
+export const voidIsolationSubdomain: DomainEntry = {
   id: 'void-isolation',
   name: 'Isolation Subdomain',
   description:
@@ -633,7 +635,7 @@ export const voidIsolationSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const voidStarsSubdomain: DomainDocument = {
+export const voidStarsSubdomain: DomainEntry = {
   id: 'void-stars',
   name: 'Stars Subdomain',
   description:
@@ -671,7 +673,7 @@ export const voidStarsSubdomain: DomainDocument = {
 
 // ---- War Subdomains (3) ----
 
-export const warBloodSubdomain: DomainDocument = {
+export const warBloodSubdomain: DomainEntry = {
   id: 'war-blood',
   name: 'Blood Subdomain',
   description:
@@ -707,7 +709,7 @@ export const warBloodSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const warDuelsSubdomain: DomainDocument = {
+export const warDuelsSubdomain: DomainEntry = {
   id: 'war-duels',
   name: 'Duels Subdomain',
   description:
@@ -743,7 +745,7 @@ export const warDuelsSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const warTacticsSubdomain: DomainDocument = {
+export const warTacticsSubdomain: DomainEntry = {
   id: 'war-tactics',
   name: 'Tactics Subdomain',
   description:
@@ -781,7 +783,7 @@ export const warTacticsSubdomain: DomainDocument = {
 
 // ---- Water Subdomains (5) ----
 
-export const waterFlotsamSubdomain: DomainDocument = {
+export const waterFlotsamSubdomain: DomainEntry = {
   id: 'water-flotsam',
   name: 'Flotsam Subdomain',
   description:
@@ -811,13 +813,14 @@ export const waterFlotsamSubdomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const waterFlowingSubdomain: DomainDocument = {
+export const waterFlowingSubdomain: DomainEntry = {
   id: 'water-flowing',
   name: 'Flowing Subdomain',
   description:
@@ -847,13 +850,14 @@ export const waterFlowingSubdomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const waterIceSubdomain: DomainDocument = {
+export const waterIceSubdomain: DomainEntry = {
   id: 'water-ice',
   name: 'Ice Subdomain',
   description:
@@ -883,13 +887,14 @@ export const waterIceSubdomain: DomainDocument = {
       levelGained: 8,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const waterOceansSubdomain: DomainDocument = {
+export const waterOceansSubdomain: DomainEntry = {
   id: 'water-oceans',
   name: 'Oceans Subdomain',
   description:
@@ -919,13 +924,14 @@ export const waterOceansSubdomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const waterRiversSubdomain: DomainDocument = {
+export const waterRiversSubdomain: DomainEntry = {
   id: 'water-rivers',
   name: 'Rivers Subdomain',
   description:
@@ -955,6 +961,7 @@ export const waterRiversSubdomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
@@ -963,7 +970,7 @@ export const waterRiversSubdomain: DomainDocument = {
 
 // ---- Weather Subdomains (3) ----
 
-export const weatherMonsoonSubdomain: DomainDocument = {
+export const weatherMonsoonSubdomain: DomainEntry = {
   id: 'weather-monsoon',
   name: 'Monsoon Subdomain',
   description:
@@ -993,13 +1000,14 @@ export const weatherMonsoonSubdomain: DomainDocument = {
       levelGained: 8,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const weatherSeasonsSubdomain: DomainDocument = {
+export const weatherSeasonsSubdomain: DomainEntry = {
   id: 'weather-seasons',
   name: 'Seasons Subdomain',
   description:
@@ -1029,13 +1037,14 @@ export const weatherSeasonsSubdomain: DomainDocument = {
       levelGained: 8,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const weatherStormsSubdomain: DomainDocument = {
+export const weatherStormsSubdomain: DomainEntry = {
   id: 'weather-storms',
   name: 'Storms Subdomain',
   description:
@@ -1065,6 +1074,7 @@ export const weatherStormsSubdomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
@@ -1073,7 +1083,7 @@ export const weatherStormsSubdomain: DomainDocument = {
 
 // ---- Batch Array ----
 
-export const batch_007: DomainDocument[] = [
+export const batch_007: DomainEntry[] = [
   travelExplorationSubdomain,
   travelPortalSubdomain,
   travelTradeSubdomain,

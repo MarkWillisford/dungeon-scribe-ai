@@ -1,10 +1,10 @@
 // Batch 003 | first: 'Earth/Metal Subdomain' | last: 'Magic Domain' | count: 26
 // PAGE_FETCH_FAILED: none
-import { DomainDocument } from '@/types/classOptions';
+import { DomainEntry } from '@/types/classOptions';
 
 // ---- Earth Subdomains (3) ----
 
-export const earthMetalSubdomain: DomainDocument = {
+export const earthMetalSubdomain: DomainEntry = {
   id: 'earth-metal',
   name: 'Metal Subdomain',
   description: 'Subdomain of Earth. You are attuned to the power of metal and forge your body into a weapon of divine will.',
@@ -33,13 +33,14 @@ export const earthMetalSubdomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const earthPetrificationSubdomain: DomainDocument = {
+export const earthPetrificationSubdomain: DomainEntry = {
   id: 'earth-petrification',
   name: 'Petrification Subdomain',
   description: 'Subdomain of Earth. You channel the power of stone to harden your flesh against the world, trading mobility for enduring protection.',
@@ -68,13 +69,14 @@ export const earthPetrificationSubdomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const earthRadiationSubdomain: DomainDocument = {
+export const earthRadiationSubdomain: DomainEntry = {
   id: 'earth-radiation',
   name: 'Radiation Subdomain',
   description: 'Subdomain of Earth. You channel the invisible, corrupting power that flows from deep within the earth, sickening those who draw near.',
@@ -111,7 +113,7 @@ export const earthRadiationSubdomain: DomainDocument = {
 
 // ---- Evil Subdomains (9) ----
 
-export const evilCannibalismSubdomain: DomainDocument = {
+export const evilCannibalismSubdomain: DomainEntry = {
   id: 'evil-cannibalism',
   name: 'Cannibalism Subdomain',
   description: 'Subdomain of Evil. You draw power from the darkest act of consumption, devouring the flesh of your enemies to gain mastery over them.',
@@ -146,7 +148,7 @@ export const evilCannibalismSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const evilCorruptionSubdomain: DomainDocument = {
+export const evilCorruptionSubdomain: DomainEntry = {
   id: 'evil-corruption',
   name: 'Corruption Subdomain',
   description: 'Subdomain of Evil. You awaken the darkest impulses within others, stoking guilt and sinful desire until corruption consumes them.',
@@ -181,7 +183,7 @@ export const evilCorruptionSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const evilDaemonSubdomain: DomainDocument = {
+export const evilDaemonSubdomain: DomainEntry = {
   id: 'evil-daemon',
   name: 'Daemon Subdomain',
   description: 'Subdomain of Evil. Daemons are a race of neutral evil outsiders who embody the concept of death and the corruption of souls.',
@@ -216,7 +218,7 @@ export const evilDaemonSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const evilDemodandSubdomain: DomainDocument = {
+export const evilDemodandSubdomain: DomainEntry = {
   id: 'evil-demodand',
   name: 'Demodand Subdomain',
   description: 'Subdomain of Evil. Demodands are hateful outsiders who loathe divine power and delight in cutting off mortals from their gods.',
@@ -251,7 +253,7 @@ export const evilDemodandSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const evilDemonSubdomain: DomainDocument = {
+export const evilDemonSubdomain: DomainEntry = {
   id: 'evil-demon',
   name: 'Demon Subdomain',
   description: 'Subdomain of Evil. Demons are a race of chaotic evil outsiders who embody sin and destruction, and you channel their savage fury.',
@@ -286,7 +288,7 @@ export const evilDemonSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const evilDevilSubdomain: DomainDocument = {
+export const evilDevilSubdomain: DomainEntry = {
   id: 'evil-devil',
   name: 'Devil Subdomain',
   description: 'Subdomain of Evil. Devils are a race of lawful evil outsiders who corrupt souls through temptation and binding contracts.',
@@ -321,7 +323,7 @@ export const evilDevilSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const evilFearSubdomain: DomainDocument = {
+export const evilFearSubdomain: DomainEntry = {
   id: 'evil-fear',
   name: 'Fear Subdomain',
   description: 'Subdomain of Evil. You relish the feeling of power that rises in you when your enemies quake before you in fear.',
@@ -356,7 +358,7 @@ export const evilFearSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const evilKytonSubdomain: DomainDocument = {
+export const evilKytonSubdomain: DomainEntry = {
   id: 'evil-kyton',
   name: 'Kyton Subdomain',
   description: 'Subdomain of Evil. Kytons are a race of lawful evil outsiders who embrace pain as a path to power and transcendence.',
@@ -391,7 +393,7 @@ export const evilKytonSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const evilPlagueSubdomain: DomainDocument = {
+export const evilPlagueSubdomain: DomainEntry = {
   id: 'evil-plague',
   name: 'Plague Subdomain',
   description: 'Subdomain of Evil. You carry disease as a divine instrument of suffering, exacerbating the afflictions of those you touch.',
@@ -428,7 +430,7 @@ export const evilPlagueSubdomain: DomainDocument = {
 
 // ---- Fire Subdomains (3) ----
 
-export const fireArsonSubdomain: DomainDocument = {
+export const fireArsonSubdomain: DomainEntry = {
   id: 'fire-arson',
   name: 'Arson Subdomain',
   description: 'Subdomain of Fire. You express your devotion by setting the world ablaze.',
@@ -463,7 +465,7 @@ export const fireArsonSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const fireAshSubdomain: DomainDocument = {
+export const fireAshSubdomain: DomainEntry = {
   id: 'fire-ash',
   name: 'Ash Subdomain',
   description: 'Subdomain of Fire. You channel the smothering remnants of fire, wielding ash and cinder to blind foes and reveal the hidden.',
@@ -492,13 +494,14 @@ export const fireAshSubdomain: DomainDocument = {
       levelGained: 8,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const fireSmokeSubdomain: DomainDocument = {
+export const fireSmokeSubdomain: DomainEntry = {
   id: 'fire-smoke',
   name: 'Smoke Subdomain',
   description: 'Subdomain of Fire. You wield the choking, blinding power of smoke to obscure the battlefield and confound your enemies.',
@@ -527,6 +530,7 @@ export const fireSmokeSubdomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
@@ -535,7 +539,7 @@ export const fireSmokeSubdomain: DomainDocument = {
 
 // ---- Core Domains (11) ----
 
-export const evilDomain: DomainDocument = {
+export const evilDomain: DomainEntry = {
   id: 'evil',
   name: 'Evil Domain',
   description: 'You are sinister and cruel, and have wholly pledged your soul to the cause of evil.',
@@ -570,7 +574,7 @@ export const evilDomain: DomainDocument = {
   rev: 1,
 };
 
-export const fireDomain: DomainDocument = {
+export const fireDomain: DomainEntry = {
   id: 'fire',
   name: 'Fire Domain',
   description: 'You can call forth fire, command creatures of the inferno, and your flesh does not burn.',
@@ -599,13 +603,14 @@ export const fireDomain: DomainDocument = {
       levelGained: 6,
     },
   ],
+  druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
   visibility: 'global',
   rev: 1,
 };
 
-export const gloryDomain: DomainDocument = {
+export const gloryDomain: DomainEntry = {
   id: 'glory',
   name: 'Glory Domain',
   description:
@@ -641,7 +646,7 @@ export const gloryDomain: DomainDocument = {
   rev: 1,
 };
 
-export const goodDomain: DomainDocument = {
+export const goodDomain: DomainEntry = {
   id: 'good',
   name: 'Good Domain',
   description: 'You have pledged your life and soul to goodness and purity.',
@@ -676,7 +681,7 @@ export const goodDomain: DomainDocument = {
   rev: 1,
 };
 
-export const healingDomain: DomainDocument = {
+export const healingDomain: DomainEntry = {
   id: 'healing',
   name: 'Healing Domain',
   description: 'Your touch staves off pain and death, and your healing magic is particularly vital and potent.',
@@ -711,7 +716,7 @@ export const healingDomain: DomainDocument = {
   rev: 1,
 };
 
-export const knowledgeDomain: DomainDocument = {
+export const knowledgeDomain: DomainEntry = {
   id: 'knowledge',
   name: 'Knowledge Domain',
   description: 'You are a scholar and a sage of legends. In addition, you treat all Knowledge skills as class skills.',
@@ -758,7 +763,7 @@ export const knowledgeDomain: DomainDocument = {
   rev: 1,
 };
 
-export const lawDomain: DomainDocument = {
+export const lawDomain: DomainEntry = {
   id: 'law',
   name: 'Law Domain',
   description: 'You follow a strict and ordered code of laws, and in so doing, achieve enlightenment.',
@@ -793,7 +798,7 @@ export const lawDomain: DomainDocument = {
   rev: 1,
 };
 
-export const liberationDomain: DomainDocument = {
+export const liberationDomain: DomainEntry = {
   id: 'liberation',
   name: 'Liberation Domain',
   description: 'You are a spirit of freedom and a staunch foe against all who would enslave and oppress.',
@@ -828,7 +833,7 @@ export const liberationDomain: DomainDocument = {
   rev: 1,
 };
 
-export const luckDomain: DomainDocument = {
+export const luckDomain: DomainEntry = {
   id: 'luck',
   name: 'Luck Domain',
   description: 'You are infused with luck, and your mere presence can spread good fortune.',
@@ -863,7 +868,7 @@ export const luckDomain: DomainDocument = {
   rev: 1,
 };
 
-export const madnessDomain: DomainDocument = {
+export const madnessDomain: DomainEntry = {
   id: 'madness',
   name: 'Madness Domain',
   description:
@@ -899,7 +904,7 @@ export const madnessDomain: DomainDocument = {
   rev: 1,
 };
 
-export const magicDomain: DomainDocument = {
+export const magicDomain: DomainEntry = {
   id: 'magic',
   name: 'Magic Domain',
   description: 'You are a true student of all things mystical, and see divinity in the purity of magic.',
@@ -936,7 +941,7 @@ export const magicDomain: DomainDocument = {
 
 // ---- Batch Array ----
 
-export const batch_003: DomainDocument[] = [
+export const batch_003: DomainEntry[] = [
   earthMetalSubdomain,
   earthPetrificationSubdomain,
   earthRadiationSubdomain,

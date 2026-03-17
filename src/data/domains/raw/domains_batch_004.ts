@@ -1,9 +1,9 @@
 // Batch 004 | first: 'Glory/Heroism Subdomain' | last: 'Law/Tyranny Subdomain' | count: 26
-import { DomainDocument } from '@/types/classOptions';
+import { DomainEntry } from '@/types/classOptions';
 
 // ---- Glory Subdomains (4) ----
 
-export const gloryHeroismSubdomain: DomainDocument = {
+export const gloryHeroismSubdomain: DomainEntry = {
   id: 'glory-heroism',
   name: 'Heroism Subdomain',
   description:
@@ -39,7 +39,7 @@ export const gloryHeroismSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const gloryHonorSubdomain: DomainDocument = {
+export const gloryHonorSubdomain: DomainEntry = {
   id: 'glory-honor',
   name: 'Honor Subdomain',
   description:
@@ -75,7 +75,7 @@ export const gloryHonorSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const gloryHubrisSubdomain: DomainDocument = {
+export const gloryHubrisSubdomain: DomainEntry = {
   id: 'glory-hubris',
   name: 'Hubris Subdomain',
   description:
@@ -112,7 +112,7 @@ export const gloryHubrisSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const gloryLegendSubdomain: DomainDocument = {
+export const gloryLegendSubdomain: DomainEntry = {
   id: 'glory-legend',
   name: 'Legend Subdomain',
   description:
@@ -150,7 +150,7 @@ export const gloryLegendSubdomain: DomainDocument = {
 
 // ---- Good Subdomains (5) ----
 
-export const goodAgathionSubdomain: DomainDocument = {
+export const goodAgathionSubdomain: DomainEntry = {
   id: 'good-agathion',
   name: 'Agathion Subdomain',
   description:
@@ -186,7 +186,7 @@ export const goodAgathionSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const goodArchonSubdomain: DomainDocument = {
+export const goodArchonSubdomain: DomainEntry = {
   id: 'good-archon',
   name: 'Archon Subdomain',
   description:
@@ -222,7 +222,7 @@ export const goodArchonSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const goodAzataSubdomain: DomainDocument = {
+export const goodAzataSubdomain: DomainEntry = {
   id: 'good-azata',
   name: 'Azata Subdomain',
   description:
@@ -258,7 +258,7 @@ export const goodAzataSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const goodFriendshipSubdomain: DomainDocument = {
+export const goodFriendshipSubdomain: DomainEntry = {
   id: 'good-friendship',
   name: 'Friendship Subdomain',
   description:
@@ -294,7 +294,7 @@ export const goodFriendshipSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const goodRedemptionSubdomain: DomainDocument = {
+export const goodRedemptionSubdomain: DomainEntry = {
   id: 'good-redemption',
   name: 'Redemption Subdomain',
   description:
@@ -332,7 +332,7 @@ export const goodRedemptionSubdomain: DomainDocument = {
 
 // ---- Healing Subdomains (3) ----
 
-export const healingMedicineSubdomain: DomainDocument = {
+export const healingMedicineSubdomain: DomainEntry = {
   id: 'healing-medicine',
   name: 'Medicine Subdomain',
   description:
@@ -368,7 +368,7 @@ export const healingMedicineSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const healingRestorationSubdomain: DomainDocument = {
+export const healingRestorationSubdomain: DomainEntry = {
   id: 'healing-restoration',
   name: 'Restoration Subdomain',
   description:
@@ -404,7 +404,7 @@ export const healingRestorationSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const healingResurrectionSubdomain: DomainDocument = {
+export const healingResurrectionSubdomain: DomainEntry = {
   id: 'healing-resurrection',
   name: 'Resurrection Subdomain',
   description:
@@ -442,7 +442,7 @@ export const healingResurrectionSubdomain: DomainDocument = {
 
 // ---- Knowledge Subdomains (5) ----
 
-export const knowledgeAeonSubdomain: DomainDocument = {
+export const knowledgeAeonSubdomain: DomainEntry = {
   id: 'knowledge-aeon',
   name: 'Aeon Subdomain',
   description:
@@ -490,7 +490,7 @@ export const knowledgeAeonSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const knowledgeEducationSubdomain: DomainDocument = {
+export const knowledgeEducationSubdomain: DomainEntry = {
   id: 'knowledge-education',
   name: 'Education Subdomain',
   description:
@@ -527,7 +527,7 @@ export const knowledgeEducationSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const knowledgeEspionageSubdomain: DomainDocument = {
+export const knowledgeEspionageSubdomain: DomainEntry = {
   id: 'knowledge-espionage',
   name: 'Espionage Subdomain',
   description:
@@ -564,7 +564,7 @@ export const knowledgeEspionageSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const knowledgeMemorySubdomain: DomainDocument = {
+export const knowledgeMemorySubdomain: DomainEntry = {
   id: 'knowledge-memory',
   name: 'Memory Subdomain',
   description:
@@ -612,7 +612,7 @@ export const knowledgeMemorySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const knowledgeThoughtSubdomain: DomainDocument = {
+export const knowledgeThoughtSubdomain: DomainEntry = {
   id: 'knowledge-thought',
   name: 'Thought Subdomain',
   description:
@@ -662,7 +662,7 @@ export const knowledgeThoughtSubdomain: DomainDocument = {
 
 // ---- Law Subdomains (9) ----
 
-export const lawArchonSubdomain: DomainDocument = {
+export const lawArchonSubdomain: DomainEntry = {
   id: 'law-archon',
   name: 'Archon Subdomain',
   description:
@@ -698,7 +698,7 @@ export const lawArchonSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const lawDevilSubdomain: DomainDocument = {
+export const lawDevilSubdomain: DomainEntry = {
   id: 'law-devil',
   name: 'Devil Subdomain',
   description:
@@ -734,7 +734,7 @@ export const lawDevilSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const lawInevitableSubdomain: DomainDocument = {
+export const lawInevitableSubdomain: DomainEntry = {
   id: 'law-inevitable',
   name: 'Inevitable Subdomain',
   description:
@@ -770,7 +770,7 @@ export const lawInevitableSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const lawJudgmentSubdomain: DomainDocument = {
+export const lawJudgmentSubdomain: DomainEntry = {
   id: 'law-judgment',
   name: 'Judgment Subdomain',
   description:
@@ -806,7 +806,7 @@ export const lawJudgmentSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const lawKytonSubdomain: DomainDocument = {
+export const lawKytonSubdomain: DomainEntry = {
   id: 'law-kyton',
   name: 'Kyton Subdomain',
   description:
@@ -842,7 +842,7 @@ export const lawKytonSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const lawLegislationSubdomain: DomainDocument = {
+export const lawLegislationSubdomain: DomainEntry = {
   id: 'law-legislation',
   name: 'Legislation Subdomain',
   description:
@@ -879,7 +879,7 @@ export const lawLegislationSubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const lawLoyaltySubdomain: DomainDocument = {
+export const lawLoyaltySubdomain: DomainEntry = {
   id: 'law-loyalty',
   name: 'Loyalty Subdomain',
   description:
@@ -915,7 +915,7 @@ export const lawLoyaltySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const lawSlaverySubdomain: DomainDocument = {
+export const lawSlaverySubdomain: DomainEntry = {
   id: 'law-slavery',
   name: 'Slavery Subdomain',
   description:
@@ -951,7 +951,7 @@ export const lawSlaverySubdomain: DomainDocument = {
   rev: 1,
 };
 
-export const lawTyrannySubdomain: DomainDocument = {
+export const lawTyrannySubdomain: DomainEntry = {
   id: 'law-tyranny',
   name: 'Tyranny Subdomain',
   description:
@@ -989,7 +989,7 @@ export const lawTyrannySubdomain: DomainDocument = {
 
 // ---- Batch Array ----
 
-export const batch_004: DomainDocument[] = [
+export const batch_004: DomainEntry[] = [
   gloryHeroismSubdomain,
   gloryHonorSubdomain,
   gloryHubrisSubdomain,
