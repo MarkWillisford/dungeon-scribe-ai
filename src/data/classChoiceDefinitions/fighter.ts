@@ -93,7 +93,7 @@ export const fighterDefinitions: ClassChoiceDefinition[] = [
       levels: [7, 11, 15],
     },
     optionSource: 'collection',
-    collectionName: 'advancedarmorrtraining',
+    collectionName: 'advancedarmortraining',
     source: 'pf1e-core',
     isOfficial: true,
     visibility: 'global',
