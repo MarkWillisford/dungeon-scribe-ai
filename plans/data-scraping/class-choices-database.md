@@ -443,11 +443,11 @@ src/data/
 - [x] Create `src/types/animalCompanions.ts` with `AnimalCompanionEntry`
 - [x] `npm run typecheck` — zero errors
 
-### Phase B — Inline static data (can do immediately, no scraping needed)
+### Phase B — Inline static data — COMPLETE `12097e0`
 
-- [ ] Write all `src/data/classChoiceDefinitions/*.ts` files
+- [x] Write all `src/data/classChoiceDefinitions/*.ts` files
 - [ ] Write `scripts/db/seedClassChoiceDefinitions.ts`
-- [ ] `npm run typecheck` — zero errors
+- [x] `npm run typecheck` — zero errors (one known error pending Phase A merge)
 
 ### Phase C — Write scraping plans (then run as background work)
 
