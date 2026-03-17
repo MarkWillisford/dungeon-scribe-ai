@@ -36,7 +36,7 @@ export interface DomainEntry extends ClassOptionBase {
   domainSpells: string[]; // 9 entries — index 0 = level 1 spell name
   powers: DomainPower[];
   grantedClassSkills?: string[];
-  druidAllowed: boolean; // true if Druids can choose this domain via Nature Bond
+  druidAllowed?: boolean; // true if Druids can choose this domain via Nature Bond; absent = unknown/false
 }
 
 // ---- Bloodline (Sorcerer, Bloodrager — shared pool) ----

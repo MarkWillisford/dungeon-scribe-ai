@@ -8,15 +8,15 @@
 // Boons are text descriptions only — mechanical effects wired by modifier pipeline.
 
 export interface DeityBoonTier {
-  level3: string; // boon description at prestige class level 3
-  level6: string; // boon description at prestige class level 6
-  level9: string; // boon description at prestige class level 9
+  tier: 1 | 2 | 3;
+  description: string;
 }
 
 export interface DeityBoons {
-  evangelist?: DeityBoonTier;
-  exalted?: DeityBoonTier;
-  sentinel?: DeityBoonTier;
+  obedienceRequirement: string;
+  evangelist: DeityBoonTier[]; // exactly 3 entries
+  exalted: DeityBoonTier[]; // exactly 3 entries
+  sentinel: DeityBoonTier[]; // exactly 3 entries
 }
 
 export interface DeityEntry {
