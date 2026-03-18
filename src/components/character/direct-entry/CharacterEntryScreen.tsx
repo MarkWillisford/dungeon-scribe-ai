@@ -12,6 +12,8 @@ import { ClassesSection } from './ClassesSection';
 import { CombatStatsSection } from './CombatStatsSection';
 import { SkillsSection } from './SkillsSection';
 import { EquipmentSection } from './EquipmentSection';
+import { TraitsSection } from './TraitsSection';
+import { FeatSlotList } from './FeatSlotList';
 
 // ---- Tab definitions ----
 
@@ -149,12 +151,16 @@ export function CharacterEntryScreen() {
         {activeTab === 'combat' && <CombatStatsSection />}
         {activeTab === 'skills' && <SkillsSection />}
         {activeTab === 'equipment' && <EquipmentSection />}
+        {activeTab === 'traits' && <TraitsSection />}
+        {activeTab === 'feats' && <FeatSlotList />}
         {activeTab !== 'identity' &&
           activeTab !== 'abilities' &&
           activeTab !== 'classes' &&
           activeTab !== 'combat' &&
           activeTab !== 'skills' &&
-          activeTab !== 'equipment' && <PlaceholderSection tab={activeTab} />}
+          activeTab !== 'equipment' &&
+          activeTab !== 'traits' &&
+          activeTab !== 'feats' && <PlaceholderSection tab={activeTab} />}
       </ScrollView>
 
       {/* Floating validation FAB */}
