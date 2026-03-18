@@ -9,6 +9,9 @@ import { IdentitySection } from './IdentitySection';
 import { AbilityScoreEntryPanel } from './AbilityScoreEntryPanel';
 import { LevelIncrementSlots } from './LevelIncrementSlots';
 import { ClassesSection } from './ClassesSection';
+import { CombatStatsSection } from './CombatStatsSection';
+import { SkillsSection } from './SkillsSection';
+import { EquipmentSection } from './EquipmentSection';
 
 // ---- Tab definitions ----
 
@@ -143,9 +146,15 @@ export function CharacterEntryScreen() {
           </>
         )}
         {activeTab === 'classes' && <ClassesSection />}
-        {activeTab !== 'identity' && activeTab !== 'abilities' && activeTab !== 'classes' && (
-          <PlaceholderSection tab={activeTab} />
-        )}
+        {activeTab === 'combat' && <CombatStatsSection />}
+        {activeTab === 'skills' && <SkillsSection />}
+        {activeTab === 'equipment' && <EquipmentSection />}
+        {activeTab !== 'identity' &&
+          activeTab !== 'abilities' &&
+          activeTab !== 'classes' &&
+          activeTab !== 'combat' &&
+          activeTab !== 'skills' &&
+          activeTab !== 'equipment' && <PlaceholderSection tab={activeTab} />}
       </ScrollView>
 
       {/* Floating validation FAB */}

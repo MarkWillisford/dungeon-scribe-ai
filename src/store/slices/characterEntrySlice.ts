@@ -563,6 +563,14 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
+    updateMagicItem(state, action: PayloadAction<DraftMagicItem>) {
+      const idx = state.draft.magicItems.findIndex((m) => m.id === action.payload.id);
+      if (idx >= 0) {
+        state.draft.magicItems[idx] = action.payload;
+        state.isDirty = true;
+      }
+    },
+
     // ---- Notes ----
 
     setCharacterNotes(state, action: PayloadAction<string>) {
@@ -634,6 +642,7 @@ export const {
   updateArmor,
   addMagicItem,
   removeMagicItem,
+  updateMagicItem,
   setCharacterNotes,
   setCampaignNotes,
 } = characterEntrySlice.actions;
