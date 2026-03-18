@@ -8,6 +8,7 @@ import { setActiveTab, type EntryTabKey, type TabStatus } from '@/store/slices/c
 import { IdentitySection } from './IdentitySection';
 import { AbilityScoreEntryPanel } from './AbilityScoreEntryPanel';
 import { LevelIncrementSlots } from './LevelIncrementSlots';
+import { ClassesSection } from './ClassesSection';
 
 // ---- Tab definitions ----
 
@@ -141,7 +142,8 @@ export function CharacterEntryScreen() {
             <LevelIncrementSlots />
           </>
         )}
-        {activeTab !== 'identity' && activeTab !== 'abilities' && (
+        {activeTab === 'classes' && <ClassesSection />}
+        {activeTab !== 'identity' && activeTab !== 'abilities' && activeTab !== 'classes' && (
           <PlaceholderSection tab={activeTab} />
         )}
       </ScrollView>

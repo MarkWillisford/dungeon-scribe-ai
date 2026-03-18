@@ -47,6 +47,10 @@ export default function CharactersListScreen() {
     router.push('/(tabs)/characters/create');
   };
 
+  const handleDirectEntry = () => {
+    router.push('/(tabs)/characters/entry?mode=import');
+  };
+
   const renderCharacter = ({ item }: { item: CharacterSummary }) => (
     <CharacterCard
       character={item}
@@ -74,6 +78,12 @@ export default function CharactersListScreen() {
           onPress={handleCreateCharacter}
           variant="primary"
           testID="create-character-button"
+        />
+        <OrnateButton
+          title="Direct Entry"
+          onPress={handleDirectEntry}
+          variant="secondary"
+          testID="direct-entry-button"
         />
       </View>
 

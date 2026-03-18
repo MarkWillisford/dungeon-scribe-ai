@@ -84,7 +84,7 @@ export const RISSI_FIXTURE: CharacterDraft = {
     {
       id: 'class-radiant-servant',
       className: 'Radiant Servant',
-      level: 2,
+      level: 1,
       sourceSystem: 'pf1e',
       spellcastingAdvancement: { type: 'divine' },
       classChoices: [],
