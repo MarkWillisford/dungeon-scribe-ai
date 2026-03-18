@@ -58,8 +58,8 @@ export const RISSI_FIXTURE: CharacterDraft = {
       level: 5,
       sourceSystem: 'pf1e',
       classChoices: [
-        { featureName: 'Domain', takenAtLevel: 1, selection: 'Healing' },
-        { featureName: 'Domain', takenAtLevel: 1, selection: 'Liberation' },
+        { featureName: 'Domain', takenAtLevel: 1, selection: 'healing' },
+        { featureName: 'Domain', takenAtLevel: 1, selection: 'liberation' },
       ],
       prereqOverride: false,
     },

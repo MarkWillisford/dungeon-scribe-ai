@@ -64,6 +64,7 @@ function buildInlineItems(definition: ClassChoiceDefinition): SearchItem[] {
 export function ClassChoiceRow({
   classId,
   definition,
+  choiceIndex,
   currentChoice,
   takenAtLevel,
   featureLabel,
@@ -72,13 +73,6 @@ export function ClassChoiceRow({
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
 
-  const currentSelection =
-    typeof currentChoice?.selection === 'string'
-      ? currentChoice.selection
-      : Array.isArray(currentChoice?.selection)
-        ? (currentChoice.selection as string[]).join(', ')
-        : null;
-
   const pickerItems: SearchItem[] = useMemo(() => {
     if (definition.optionSource === 'collection' && definition.collectionName) {
       return buildCollectionItems(definition.collectionName);
@@ -86,14 +80,27 @@ export function ClassChoiceRow({
     return buildInlineItems(definition);
   }, [definition]);
 
+  // Resolve stored ID(s) back to human-readable labels for display.
+  const currentSelection = useMemo(() => {
+    if (!currentChoice?.selection) return null;
+    if (Array.isArray(currentChoice.selection)) {
+      return (currentChoice.selection as string[])
+        .map((id) => pickerItems.find((i) => i.key === id)?.label ?? id)
+        .join(', ');
+    }
+    const id = currentChoice.selection as string;
+    return pickerItems.find((i) => i.key === id)?.label ?? id;
+  }, [currentChoice, pickerItems]);
+
   const handleSelect = (item: SearchItem) => {
     dispatch(
       upsertClassChoice({
         classId,
+        choiceIndex,
         choice: {
           featureName: definition.featureName,
           takenAtLevel,
-          selection: item.label,
+          selection: item.key,
         },
       }),
     );

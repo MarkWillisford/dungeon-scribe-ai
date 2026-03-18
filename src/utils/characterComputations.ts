@@ -84,35 +84,52 @@ export function formatBABString(totalBAB: number): string {
 
 // ---- Saves ----
 
-function saveContrib(
+// Progression-only contribution (no +2 base bonus).
+// The +2 is granted once per character per save type, not per class.
+function saveProgContrib(
   data: ExpandedClassData | null,
   saveType: 'fortitude' | 'reflex' | 'will',
   level: number,
 ): number {
   if (!data) return Math.floor(level / 3); // default Poor for unknown classes
   const prog = data.saves[saveType];
-  return prog === SaveProgression.Good ? 2 + Math.floor(level / 2) : Math.floor(level / 3);
+  return prog === SaveProgression.Good ? Math.floor(level / 2) : Math.floor(level / 3);
+}
+
+function hasGoodSave(
+  classes: DraftClassEntry[],
+  saveType: 'fortitude' | 'reflex' | 'will',
+): boolean {
+  return classes.some((c) => {
+    const data = lookupClassData(c.className);
+    return data !== null && data.saves[saveType] === SaveProgression.Good;
+  });
+}
+
+function computeBaseSave(
+  classes: DraftClassEntry[],
+  saveType: 'fortitude' | 'reflex' | 'will',
+): number {
+  const base = hasGoodSave(classes, saveType) ? 2 : 0;
+  return (
+    base +
+    classes.reduce(
+      (sum, c) => sum + saveProgContrib(lookupClassData(c.className), saveType, c.level),
+      0,
+    )
+  );
 }
 
 export function computeBaseFort(classes: DraftClassEntry[]): number {
-  return classes.reduce(
-    (sum, c) => sum + saveContrib(lookupClassData(c.className), 'fortitude', c.level),
-    0,
-  );
+  return computeBaseSave(classes, 'fortitude');
 }
 
 export function computeBaseRef(classes: DraftClassEntry[]): number {
-  return classes.reduce(
-    (sum, c) => sum + saveContrib(lookupClassData(c.className), 'reflex', c.level),
-    0,
-  );
+  return computeBaseSave(classes, 'reflex');
 }
 
 export function computeBaseWill(classes: DraftClassEntry[]): number {
-  return classes.reduce(
-    (sum, c) => sum + saveContrib(lookupClassData(c.className), 'will', c.level),
-    0,
-  );
+  return computeBaseSave(classes, 'will');
 }
 
 // ---- ECL ----

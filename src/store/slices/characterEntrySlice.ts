@@ -355,18 +355,24 @@ const characterEntrySlice = createSlice({
       }
     },
 
-    upsertClassChoice(state, action: PayloadAction<{ classId: string; choice: ClassChoice }>) {
+    upsertClassChoice(
+      state,
+      action: PayloadAction<{ classId: string; choiceIndex: number; choice: ClassChoice }>,
+    ) {
       const cls = state.draft.classes.find((c) => c.id === action.payload.classId);
       if (cls) {
-        const idx = cls.classChoices.findIndex(
-          (ch) =>
-            ch.featureName === action.payload.choice.featureName &&
-            ch.takenAtLevel === action.payload.choice.takenAtLevel,
-        );
-        if (idx >= 0) {
-          cls.classChoices[idx] = action.payload.choice;
+        const { choiceIndex, choice } = action.payload;
+        // Find the choiceIndex-th existing entry for this feature name.
+        // This correctly handles features with multiple slots at the same level
+        // (e.g. two Domain choices for Cleric, both at takenAtLevel 1).
+        const sameFeatureIndices = cls.classChoices
+          .map((ch, i) => ({ ch, i }))
+          .filter(({ ch }) => ch.featureName === choice.featureName)
+          .map(({ i }) => i);
+        if (sameFeatureIndices[choiceIndex] !== undefined) {
+          cls.classChoices[sameFeatureIndices[choiceIndex]] = choice;
         } else {
-          cls.classChoices.push(action.payload.choice);
+          cls.classChoices.push(choice);
         }
         state.isDirty = true;
       }
