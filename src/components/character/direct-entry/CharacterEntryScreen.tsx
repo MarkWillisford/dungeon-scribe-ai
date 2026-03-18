@@ -14,6 +14,8 @@ import { SkillsSection } from './SkillsSection';
 import { EquipmentSection } from './EquipmentSection';
 import { TraitsSection } from './TraitsSection';
 import { FeatSlotList } from './FeatSlotList';
+import { SpellcastingSection } from './SpellcastingSection';
+import { NotesSection } from './NotesSection';
 
 // ---- Tab definitions ----
 
@@ -153,6 +155,8 @@ export function CharacterEntryScreen() {
         {activeTab === 'equipment' && <EquipmentSection />}
         {activeTab === 'traits' && <TraitsSection />}
         {activeTab === 'feats' && <FeatSlotList />}
+        {activeTab === 'spells' && <SpellcastingSection />}
+        {activeTab === 'notes' && <NotesSection />}
         {activeTab !== 'identity' &&
           activeTab !== 'abilities' &&
           activeTab !== 'classes' &&
@@ -160,7 +164,9 @@ export function CharacterEntryScreen() {
           activeTab !== 'skills' &&
           activeTab !== 'equipment' &&
           activeTab !== 'traits' &&
-          activeTab !== 'feats' && <PlaceholderSection tab={activeTab} />}
+          activeTab !== 'feats' &&
+          activeTab !== 'spells' &&
+          activeTab !== 'notes' && <PlaceholderSection tab={activeTab} />}
       </ScrollView>
 
       {/* Floating validation FAB */}
