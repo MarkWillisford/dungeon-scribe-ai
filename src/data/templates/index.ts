@@ -1,5 +1,8 @@
 // Barrel export for template data — 492 templates across 20 batch files.
 // Static seed data only — authoritative copy lives in Firestore at runtime.
+// Batch 018 re-scraped the H–I range already covered by batches 009–010; the Map
+// deduplication below keeps the last occurrence per id (batch 018 wins) to match
+// the seed script's last-write-wins upsert behavior.
 
 export type { TemplateDefinition, TemplateSourceInfo, TemplatePrerequisite, AbilityScoreChange, TemplateDR, TemplateResistance, TemplateSLA, CRTierDefinition } from './types';
 
@@ -25,7 +28,7 @@ import { TEMPLATES_BATCH_018 } from './raw/templates_batch_018';
 import { TEMPLATES_BATCH_019 } from './raw/templates_batch_019';
 import { TEMPLATES_BATCH_020 } from './raw/templates_batch_020';
 
-export const ALL_TEMPLATES: TemplateDefinition[] = [
+const _raw: TemplateDefinition[] = [
   ...TEMPLATES_BATCH_001,
   ...TEMPLATES_BATCH_002,
   ...TEMPLATES_BATCH_003,
@@ -47,6 +50,11 @@ export const ALL_TEMPLATES: TemplateDefinition[] = [
   ...TEMPLATES_BATCH_019,
   ...TEMPLATES_BATCH_020,
 ];
+
+// Deduplicate by id — last occurrence wins, preserving first-insertion order.
+export const ALL_TEMPLATES: TemplateDefinition[] = Array.from(
+  new Map(_raw.map((t) => [t.id, t])).values(),
+);
 
 export function getTemplateById(id: string): TemplateDefinition | undefined {
   return ALL_TEMPLATES.find((t) => t.id === id);

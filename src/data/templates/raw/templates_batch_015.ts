@@ -1401,8 +1401,9 @@ export const TEMPLATES_BATCH_015: TemplateDefinition[] = [
     rev: 1,
   },
 
-  // 375. Selenic Creature (CR +?)
-  // PAGE_FETCH_FAILED: CR adjustment is variable/unspecified in the source; crAdjustment set to 0 per rules.
+  // 375. Selenic Creature (CR variable — changes by lunar phase)
+  // NOTE: CR adjustment is intentionally phase-dependent; crAdjustment: 0 is a placeholder
+  // since no single CR applies. Third-party source (Green Ronin Publishing).
   {
     id: 'selenic-creature',
     name: 'Selenic Creature',
