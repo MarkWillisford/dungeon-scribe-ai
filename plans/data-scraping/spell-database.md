@@ -149,90 +149,52 @@ export const DIVINATION_BATCH_001: Spell[] = [
 
 ---
 
-## CURRENT STATUS (as of 2026-03-08)
+## CURRENT STATUS (as of 2026-03-14)
 
-### Phase 1 — Initial Collection: COMPLETE (all schools)
+### Phase 1 — Initial Collection: COMPLETE
 
-All 9 schools collected and in batch files. `_progress.json` shows all schools `"status": "complete"`, `"merged": false`.
+All 9 schools collected, sorted, and merged into final school files.
 
-| School        | Batch files | Collected |
-| ------------- | ----------- | --------- |
-| abjuration    | 2           | 137       |
-| conjuration   | 2           | 143       |
-| divination    | 3           | 195       |
-| enchantment   | 3           | 192       |
-| evocation     | 2           | 54        |
-| illusion      | 2           | 133       |
-| necromancy    | 1           | 74        |
-| transmutation | 10          | 458       |
-| universal     | 1           | 5         |
+### Phase 2 — Gap Fill: COMPLETE (2026-03-14)
 
-**Total: ~1,391 spells collected in batch files, not yet merged into school files.**
+1,585 new spells collected across all alphabet letters (A–X) and merged into the 9 school files. All schools show `"merged": true` in `_progress.json`.
 
-### Phase 2 — Gap Fill: IN PROGRESS
+**Gap files (all complete):**
 
-Gap fill agents scrape spells missing from the initial collection (spells on d20pfsrd not yet in any batch or school file). Gap files live in `src/data/spells/batches/gap/`. After all gaps are collected, `sortGapBatches.ts` routes them into per-school batch files, then `mergeSpells.ts` merges everything.
+| Files                         | Letter Range    | New Spells |
+| ----------------------------- | --------------- | ---------- |
+| `gap_IJK.ts`                  | I, J, K         | 82         |
+| `gap_S1.ts`                   | Sa–Se           | 47         |
+| `gap_S3.ts`                   | Sr–Sz           | 84         |
+| `gap_VWYZ.ts`                 | V, W, Y, Z      | 58         |
+| `gap_A_1.ts`, `gap_A_2.ts`    | A               | ~         |
+| `gap_B_1.ts`, `gap_B_2.ts`    | B               | ~         |
+| `gap_C_1.ts`, `gap_C_2.ts`    | C               | ~         |
+| `gap_D_1.ts`, `gap_D_2.ts`    | D               | ~         |
+| `gap_E_1.ts`, `gap_E_2.ts`    | E               | ~         |
+| `gap_F_1.ts`, `gap_F_2.ts`    | F               | ~         |
+| `gap_G_1.ts`, `gap_G_2.ts`    | G               | ~         |
+| `gap_H_1.ts`, `gap_H_2.ts`    | H               | ~         |
+| `gap_L_1.ts`, `gap_L_2.ts`    | L               | ~         |
+| `gap_M_1.ts`, `gap_M_2.ts`    | M               | ~         |
+| `gap_N_1.ts`, `gap_N_2.ts`    | N               | ~         |
+| `gap_O_1.ts`, `gap_O_2.ts`    | O               | ~         |
+| `gap_P_1.ts`, `gap_P_2.ts`    | P               | ~         |
+| `gap_R_1.ts`, `gap_R_2.ts`    | R               | ~         |
+| `gap_S2_1.ts`, `gap_S2_2.ts`  | Sf–Sq           | ~         |
+| `gap_T_1.ts`, `gap_T_2.ts`    | T               | ~         |
+| `gap_U_1.ts`, `gap_U_2.ts`    | U               | ~         |
+| `gap_X.ts`                    | X               | 0 (none exist in PF1e) |
+| **Total**                     |                 | **1,585**  |
 
-**Gap files confirmed on disk:**
+**Completed steps:**
 
-| File          | Spell Count | Letter Range | Status      |
-| ------------- | ----------- | ------------ | ----------- |
-| `gap_IJK.ts`  | 82          | I, J, K      | ✅ Complete |
-| `gap_S1.ts`   | 47          | Sa–Se        | ✅ Complete |
-| `gap_S3.ts`   | 84          | Sr–Sz        | ✅ Complete |
-| `gap_VWYZ.ts` | 58          | V, W, Y, Z   | ✅ Complete |
+1. ✅ All gap letter ranges collected (two files per letter to stay under 32k output token limit)
+2. ✅ `sortGapBatches.ts` run — routed all 1,585 new spells to per-school `batch_gap_*.ts` files
+3. ✅ `mergeSpells.ts` run — all batches merged into final 9 school files
+4. ✅ Type-check: zero errors in `src/data/spells/`
 
-**Gap files still needed (agents hit rate limit before completing):**
+**Remaining steps:**
 
-| File         | Letter Range | Status         |
-| ------------ | ------------ | -------------- |
-| `gap_A.ts`   | A            | ❌ Not created |
-| `gap_B.ts`   | B            | ❌ Not created |
-| `gap_C.ts`   | C            | ❌ Not created |
-| `gap_D.ts`   | D            | ❌ Not created |
-| `gap_EF.ts`  | E, F         | ❌ Not created |
-| `gap_GH.ts`  | G, H         | ❌ Not created |
-| `gap_LM.ts`  | L, M         | ❌ Not created |
-| `gap_NOP.ts` | N, O, P      | ❌ Not created |
-| `gap_QR.ts`  | Q, R         | ❌ Not created |
-| `gap_S2.ts`  | Sf–Sq        | ❌ Not created |
-| `gap_TU.ts`  | T, U         | ❌ Not created |
-
-### Remaining Steps (in order)
-
-1. **Complete 11 missing gap letter ranges** — launch agents per letter group, targeting `src/data/spells/batches/gap/gap_{letters}.ts`. Use `known_spells.txt` in the gap dir to avoid duplicates. Check d20pfsrd alphabetical school lists for each letter, collect spells not in `known_spells.txt`.
-
-2. **Run `sortGapBatches.ts`** to route gap spells into per-school batch files:
-
-   ```
-   npx tsx scripts/spells/sortGapBatches.ts
-   ```
-
-3. **Merge all batches** into final school files:
-
-   ```
-   npx tsx scripts/spells/mergeSpells.ts
-   ```
-
-4. **Review merged files**, then delete batch files:
-
-   ```
-   npx tsx scripts/spells/mergeSpells.ts --confirm-delete
-   ```
-
-5. **Type-check:** `npm run typecheck`
-
-6. **Seed to staging:** `npx tsx scripts/db/seedSpells.ts`
-
-7. **Verify in Firestore console**, then seed to prod.
-
-### Gap Agent Prompt Notes
-
-When launching gap-fill agents, pass:
-
-- **Known spells list:** `src/data/spells/batches/gap/known_spells.txt` (deduplication reference)
-- **Letter range:** which letters to scan (e.g., "A", "EF", "GH")
-- **Output file:** `src/data/spells/batches/gap/gap_{LETTERS}.ts`
-- **Export name:** `GAP_SPELLS_{LETTERS}`
-- **Format:** Same `Spell[]` format as regular batch files (see AGENT_PROMPT_TEMPLATE.md)
-- **Rule:** Skip any spell whose name (case-insensitive) appears in `known_spells.txt`
+5. [ ] Seed to staging: `npx tsx scripts/db/seedSpells.ts`
+6. [ ] Verify in Firestore console, then seed to prod

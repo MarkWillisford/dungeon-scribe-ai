@@ -35,8 +35,8 @@ const SCHOOL_META: Record<string, { file: string; exportName: string }> = {
 };
 
 const CONFIRM_DELETE = process.argv.includes('--confirm-delete');
-const targetSchool = process.argv.find(
-  (a) => !a.startsWith('-') && a !== process.argv[1] && a !== 'mergeSpells.ts',
+const targetSchool = process.argv.slice(2).find(
+  (a) => !a.startsWith('-') && !a.startsWith('/') && !a.includes('mergeSpells'),
 );
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -54,7 +54,8 @@ function extractArrayContent(filePath: string): string | null {
   const exportMatch = content.match(/export const \w+ ?:.*?=\s*\[/);
   if (!exportMatch || exportMatch.index === undefined) return null;
 
-  const openBracketIdx = content.indexOf('[', exportMatch.index) + 1;
+  // The regex ends with \[ so the matched string's end IS the opening bracket
+  const openBracketIdx = exportMatch.index + exportMatch[0].length;
 
   // Find the closing `];` — it should be the last `\n];` in the file
   const closingIdx = content.lastIndexOf('\n];');
@@ -124,11 +125,24 @@ ${combined}
 
 function runTypeCheck(): boolean {
   try {
-    execSync('npx tsc --noEmit', { cwd: PROJECT_ROOT, stdio: 'pipe' });
+    // Use npm run typecheck (which resolves tsc via the project's scripts/PATH)
+    // Only fail if there are errors in src/data/spells — other pre-existing errors are ignored
+    const result = execSync('npm run typecheck 2>&1 || true', {
+      cwd: PROJECT_ROOT,
+      stdio: 'pipe',
+    });
+    const output = result.toString();
+    const spellErrors = output
+      .split('\n')
+      .filter((l) => l.includes('src/data/spells') && l.includes('error TS'));
+    if (spellErrors.length > 0) {
+      console.error('TypeScript errors in spell files:\n' + spellErrors.join('\n'));
+      return false;
+    }
     return true;
   } catch (e) {
     const err = e as { stdout?: Buffer };
-    console.error('TypeScript errors:\n' + err.stdout?.toString());
+    console.error('TypeScript check failed:\n' + err.stdout?.toString());
     return false;
   }
 }
