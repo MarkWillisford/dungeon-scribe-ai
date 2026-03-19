@@ -2,6 +2,19 @@
 
 ## 2026-03-11
 
+## Status (as of 2026-03-19)
+
+| Area                                                                        | Status                                                                                                                    |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| 18 section/support components (PR #12)                                      | **COMPLETE** — all 10 tabs rendered, merged 2026-03-18                                                                    |
+| `ValidationReportSheet`                                                     | **NOT BUILT** — explicit TODO in `CharacterEntryScreen.tsx:182`. Planned for a follow-up "validation PR"                  |
+| `SpellcastingPoolCard`, `ContributorRow`, `SpellsPerDayGrid`, `FeatSlotRow` | Implemented inline inside parent components — no separate files needed                                                    |
+| Validation logic wiring                                                     | **NOT STARTED** — `characterEntrySlice.validationWarnings` exists in Redux but validate button is not wired to real logic |
+
+**Immediate next step:** Build `ValidationReportSheet` + wire validation logic into `CharacterEntryScreen`.
+
+---
+
 ### Purpose
 
 A freeform editor for importing existing paper characters. No required entry order.
@@ -352,8 +365,8 @@ Auto-computed values shown in amber. Tapping an amber value offers "Override" �
 - System uses class order as listed in Classes section to reconstruct character state at each feat slot level
 - If prereq fails but would pass with a different class order:
   `"⚠ Augment Summoning: Spell Focus (conjuration) not in prior slots.
-  Suggested order: Cleric 5 first → Hathran 3 would resolve this.
-  [Apply suggestion]  [Keep as-is]"`
+Suggested order: Cleric 5 first → Hathran 3 would resolve this.
+[Apply suggestion]  [Keep as-is]"`
 
 ---
 

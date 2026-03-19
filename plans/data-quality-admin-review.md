@@ -2,6 +2,12 @@
 
 ## 2026-03-17
 
+## Status (as of 2026-03-19): NOT STARTED
+
+No code has been written for this plan. `verificationStatus` does not exist in any type file, seed script, or service. The admin screen does not exist. Everything below is the design spec ready to implement.
+
+---
+
 ### Problem
 
 Scraped game data collections contain entries in three states of completeness:

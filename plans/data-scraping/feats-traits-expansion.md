@@ -8,7 +8,7 @@ The engine (types, services, pipeline, index files) is already built. This is a 
 
 ---
 
-## CURRENT STATUS (as of 2026-03-09)
+## CURRENT STATUS (as of 2026-03-19)
 
 ### Progress: 1,785 feats across 43 files
 
@@ -18,8 +18,8 @@ Last clean verified state:
 
 - `npx tsx scripts/verify-feats.ts` → 1,785 feats, 0 duplicate IDs, 0 validation errors
 - `npx tsx scripts/verify-traits.ts` → 458 traits, 0 duplicate IDs, 0 validation errors
-- `npm run typecheck` → clean (pre-existing errors in abjurationSpells.ts only — unrelated)
-- `npm test` → 409/409 tests pass (24 suites)
+- `npm run typecheck` → clean (pre-existing errors in umagic-extra.ts only — unrelated, pre-existing)
+- `npm test` → 657/657 tests pass (35 suites)
 
 ---
 
@@ -53,7 +53,7 @@ Launch these 3 agents in parallel:
 
 ---
 
-## Completed Feat Files (37 files, 1,679 total)
+## Completed Feat Files (43 files, 1,785 total)
 
 | File                      | Export                  | Count | Source                                                                         |
 | ------------------------- | ----------------------- | ----- | ------------------------------------------------------------------------------ |
@@ -94,6 +94,12 @@ Launch these 3 agents in parallel:
 | `heroesFeats.ts`          | HEROES_FEATS            | 42    | Heroes of the Wild + Streets                                                   |
 | `faithsFeats.ts`          | FAITHS_FEATS            | 43    | Faiths & Philosophies + Faiths of Purity/Balance/Corruption                    |
 | `psoFeats.ts`             | PSO_FEATS               | 36    | Pathfinder Society Primer/Field Guide + Cohorts and Companions + Faction Guide |
+| `antiheroFeats.ts`        | ANTIHERO_FEATS          | —     | Added post-plan                                                                |
+| `armoryFeats.ts`          | ARMORY_FEATS            | —     | Added post-plan                                                                |
+| `dragonEmpiresFeats.ts`   | DRAGON_EMPIRES_FEATS    | —     | Added post-plan                                                                |
+| `hauntedHeroesFeats.ts`   | HAUNTED_HEROES_FEATS    | —     | Added post-plan                                                                |
+| `healerFeats.ts`          | HEALER_FEATS            | —     | Added post-plan                                                                |
+| `monsterHunterFeats.ts`   | MONSTER_HUNTER_FEATS    | —     | Added post-plan                                                                |
 
 ## Completed Trait Files (12 files, 458 total)
 

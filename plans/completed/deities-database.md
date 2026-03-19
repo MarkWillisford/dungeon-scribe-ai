@@ -135,18 +135,18 @@ The orchestrating Claude instance fetches the index page, extracts the full orde
 deity names and URLs across all groups, divides them into 40 sequential batches of 10, and
 assigns one batch per agent. Exact batch boundaries depend on the live index order.
 
-| Round | Batches | Approximate Groups Covered                                                              |
-| ----- | ------- | --------------------------------------------------------------------------------------- |
-| 1     | 001–004 | Core Deities (first ~40)                                                                |
-| 2     | 005–008 | Core Deities (remaining) + start of Other Deities                                       |
-| 3     | 009–012 | Other Deities (continued)                                                               |
-| 4     | 013–016 | Other Deities (cont) + Archdevils + Asura Ranas                                         |
-| 5     | 017–020 | Azlanti + start of Daemon Harbingers                                                    |
-| 6     | 021–024 | Daemon Harbingers (cont) + Dead Deities + start of Demon Lords                          |
-| 7     | 025–028 | Demon Lords (continued)                                                                 |
-| 8     | 029–032 | Demon Lords (cont) + Dwarven + Eldest + Elemental Lords                                 |
-| 9     | 033–036 | Elven + Empyreal Lords (first half)                                                     |
-| 10    | 037–040 | Empyreal Lords (cont) + Giants + Tian Xia                                               |
+| Round | Batches | Approximate Groups Covered                                     |
+| ----- | ------- | -------------------------------------------------------------- |
+| 1     | 001–004 | Core Deities (first ~40)                                       |
+| 2     | 005–008 | Core Deities (remaining) + start of Other Deities              |
+| 3     | 009–012 | Other Deities (continued)                                      |
+| 4     | 013–016 | Other Deities (cont) + Archdevils + Asura Ranas                |
+| 5     | 017–020 | Azlanti + start of Daemon Harbingers                           |
+| 6     | 021–024 | Daemon Harbingers (cont) + Dead Deities + start of Demon Lords |
+| 7     | 025–028 | Demon Lords (continued)                                        |
+| 8     | 029–032 | Demon Lords (cont) + Dwarven + Eldest + Elemental Lords        |
+| 9     | 033–036 | Elven + Empyreal Lords (first half)                            |
+| 10    | 037–040 | Empyreal Lords (cont) + Giants + Tian Xia                      |
 
 ---
 

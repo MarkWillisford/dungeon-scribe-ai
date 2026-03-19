@@ -15,6 +15,20 @@ direct-entry UI (Classes & Templates tab) can function. This plan defines:
 
 ---
 
+## Status (as of 2026-03-19)
+
+| Area                                               | Status                                                                                                                                           |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Type changes (PR #4)                               | **COMPLETE** — `*Document`→`*Entry` rename, `druidAllowed`, `DeityBoons`, `AnimalCompanionEntry`, `subtypePrompt`, `levelFilterTable` all merged |
+| Dependent collections scraped                      | **COMPLETE** — domains (PR #8), rage powers (PR #7), rogue talents (PR #9), animal companions (PR #11), deities (PR #10) all merged              |
+| classChoiceDefinitions seeded — 10 classes (PR #5) | **COMPLETE** — fighter, cleric, druid, barbarian, ranger, paladin, wizard, rogue, dweomerkeeper, radiantServant, sentinel                        |
+| classChoiceDefinitions — remaining classes         | **NOT STARTED** — bard, sorcerer, oracle, witch, magus, inquisitor, shaman, skald, hunter, arcanist, investigator, kineticist, etc.              |
+| Seed classChoiceDefinitions to Firestore           | **NOT STARTED** — `scripts/db/seedClassChoiceDefinitions.ts` written and ready                                                                   |
+
+**Immediate next step:** Run `seedClassChoiceDefinitions.ts` against staging, then add class choice definitions for remaining classes as the UI needs them.
+
+---
+
 ## Naming Convention
 
 All collection document interfaces use the suffix **`Entry`**, not `Document`.
@@ -163,20 +177,15 @@ interface AnimalCompanionEntry {
 
 ## Collections Inventory
 
-### Needs scraping — plan exists
+### Scraped collections — all complete
 
-| Collection | Plan file                                 | Status       |
-| ---------- | ----------------------------------------- | ------------ |
-| `domains`  | `plans/data-scraping/domains-database.md` | Ready to run |
-
-### Needs scraping — plan needed
-
-| Collection         | Plan file to create                                 | Approx. count | Source   |
-| ------------------ | --------------------------------------------------- | ------------- | -------- |
-| `deities`          | `plans/data-scraping/deities-database.md`           | ~400          | AoN      |
-| `animalcompanions` | `plans/data-scraping/animal-companions-database.md` | ~200          | d20pfsrd |
-| `ragepowers`       | `plans/data-scraping/ragepowers-database.md`        | ~100+         | d20pfsrd |
-| `roguetalents`     | `plans/data-scraping/roguetalents-database.md`      | ~100+         | d20pfsrd |
+| Collection         | PR  | Final count | Status                                 |
+| ------------------ | --- | ----------- | -------------------------------------- |
+| `domains`          | #8  | 181 entries | **MERGED** — seed to Firestore pending |
+| `ragepowers`       | #7  | 150 entries | **MERGED** — seed to Firestore pending |
+| `roguetalents`     | #9  | 196 entries | **MERGED** — seed to Firestore pending |
+| `animalcompanions` | #11 | 220 entries | **MERGED** — seed to Firestore pending |
+| `deities`          | #10 | 271 entries | **MERGED** — seed to Firestore pending |
 
 ### Small enough to hand-author — no plan needed
 

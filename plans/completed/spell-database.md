@@ -161,31 +161,31 @@ All 9 schools collected, sorted, and merged into final school files.
 
 **Gap files (all complete):**
 
-| Files                         | Letter Range    | New Spells |
-| ----------------------------- | --------------- | ---------- |
-| `gap_IJK.ts`                  | I, J, K         | 82         |
-| `gap_S1.ts`                   | Sa–Se           | 47         |
-| `gap_S3.ts`                   | Sr–Sz           | 84         |
-| `gap_VWYZ.ts`                 | V, W, Y, Z      | 58         |
-| `gap_A_1.ts`, `gap_A_2.ts`    | A               | ~         |
-| `gap_B_1.ts`, `gap_B_2.ts`    | B               | ~         |
-| `gap_C_1.ts`, `gap_C_2.ts`    | C               | ~         |
-| `gap_D_1.ts`, `gap_D_2.ts`    | D               | ~         |
-| `gap_E_1.ts`, `gap_E_2.ts`    | E               | ~         |
-| `gap_F_1.ts`, `gap_F_2.ts`    | F               | ~         |
-| `gap_G_1.ts`, `gap_G_2.ts`    | G               | ~         |
-| `gap_H_1.ts`, `gap_H_2.ts`    | H               | ~         |
-| `gap_L_1.ts`, `gap_L_2.ts`    | L               | ~         |
-| `gap_M_1.ts`, `gap_M_2.ts`    | M               | ~         |
-| `gap_N_1.ts`, `gap_N_2.ts`    | N               | ~         |
-| `gap_O_1.ts`, `gap_O_2.ts`    | O               | ~         |
-| `gap_P_1.ts`, `gap_P_2.ts`    | P               | ~         |
-| `gap_R_1.ts`, `gap_R_2.ts`    | R               | ~         |
-| `gap_S2_1.ts`, `gap_S2_2.ts`  | Sf–Sq           | ~         |
-| `gap_T_1.ts`, `gap_T_2.ts`    | T               | ~         |
-| `gap_U_1.ts`, `gap_U_2.ts`    | U               | ~         |
-| `gap_X.ts`                    | X               | 0 (none exist in PF1e) |
-| **Total**                     |                 | **1,585**  |
+| Files                        | Letter Range | New Spells             |
+| ---------------------------- | ------------ | ---------------------- |
+| `gap_IJK.ts`                 | I, J, K      | 82                     |
+| `gap_S1.ts`                  | Sa–Se        | 47                     |
+| `gap_S3.ts`                  | Sr–Sz        | 84                     |
+| `gap_VWYZ.ts`                | V, W, Y, Z   | 58                     |
+| `gap_A_1.ts`, `gap_A_2.ts`   | A            | ~                      |
+| `gap_B_1.ts`, `gap_B_2.ts`   | B            | ~                      |
+| `gap_C_1.ts`, `gap_C_2.ts`   | C            | ~                      |
+| `gap_D_1.ts`, `gap_D_2.ts`   | D            | ~                      |
+| `gap_E_1.ts`, `gap_E_2.ts`   | E            | ~                      |
+| `gap_F_1.ts`, `gap_F_2.ts`   | F            | ~                      |
+| `gap_G_1.ts`, `gap_G_2.ts`   | G            | ~                      |
+| `gap_H_1.ts`, `gap_H_2.ts`   | H            | ~                      |
+| `gap_L_1.ts`, `gap_L_2.ts`   | L            | ~                      |
+| `gap_M_1.ts`, `gap_M_2.ts`   | M            | ~                      |
+| `gap_N_1.ts`, `gap_N_2.ts`   | N            | ~                      |
+| `gap_O_1.ts`, `gap_O_2.ts`   | O            | ~                      |
+| `gap_P_1.ts`, `gap_P_2.ts`   | P            | ~                      |
+| `gap_R_1.ts`, `gap_R_2.ts`   | R            | ~                      |
+| `gap_S2_1.ts`, `gap_S2_2.ts` | Sf–Sq        | ~                      |
+| `gap_T_1.ts`, `gap_T_2.ts`   | T            | ~                      |
+| `gap_U_1.ts`, `gap_U_2.ts`   | U            | ~                      |
+| `gap_X.ts`                   | X            | 0 (none exist in PF1e) |
+| **Total**                    |              | **1,585**              |
 
 **Completed steps:**
 

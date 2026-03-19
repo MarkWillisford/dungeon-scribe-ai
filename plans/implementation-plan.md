@@ -1,5 +1,36 @@
 # Dungeon Scribe AI 1.1 — Implementation Plan
 
+## Status (as of 2026-03-19)
+
+All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown significantly beyond the original plan through additional phases.
+
+| Step | Description                  | Status                                                                                                                                                                                      |
+| ---- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0    | GitHub repo setup            | **COMPLETE**                                                                                                                                                                                |
+| 1    | Project initialization       | **COMPLETE**                                                                                                                                                                                |
+| 2    | Type system                  | **COMPLETE** + extended (PR #1, #4)                                                                                                                                                         |
+| 3    | Theme system                 | **COMPLETE**                                                                                                                                                                                |
+| 4    | Redux store                  | **COMPLETE** + `characterEntrySlice` added (PR #12)                                                                                                                                         |
+| 5    | Firebase config + services   | **COMPLETE**                                                                                                                                                                                |
+| 6    | Navigation (Expo Router)     | **COMPLETE** + `entry.tsx` added (PR #12)                                                                                                                                                   |
+| 7    | Shared UI components         | **COMPLETE** + 18 direct-entry components (PR #12)                                                                                                                                          |
+| 8    | Game data                    | **COMPLETE** + massively extended (races, classes, archetypes, feats, traits, spells, templates, domains, rage powers, rogue talents, animal companions, deities, class choice definitions) |
+| 9    | Testing                      | **COMPLETE** — 657 tests, 35 suites, all thresholds passing (PR #6)                                                                                                                         |
+| 10   | CI/CD (GitHub Actions + EAS) | **COMPLETE** — `ci.yml`, `build-staging.yml`, `build-production.yml`                                                                                                                        |
+
+### Currently in flight
+
+| Work                                             | Plan                                      | Status                          |
+| ------------------------------------------------ | ----------------------------------------- | ------------------------------- |
+| `ValidationReportSheet` + validation wiring      | `direct-entry-ui-design.md`               | NOT STARTED                     |
+| Feats expansion (~215 more to target)            | `data-scraping/feats-traits-expansion.md` | IN PROGRESS (1,785/2,000+)      |
+| Traits expansion (~450 more to target)           | `data-scraping/feats-traits-expansion.md` | IN PROGRESS (458/900+)          |
+| Seed all collections to Firestore staging → prod | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready) |
+| Data quality + admin review system               | `data-quality-admin-review.md`            | NOT STARTED                     |
+| Enter Rissi — validate model end-to-end          | —                                         | NOT STARTED                     |
+
+---
+
 ## Context
 
 Two Pathfinder 1e apps exist: **Dungeon Scribe AI** (TypeScript/React Native — strong type system, services, character creation) and **Hero's Ledger** (JS/React web — working combat tracker, campaigns, rich fantasy theme, Firebase backend). This plan merges the best of both into a new modern TS/React Native project with HL's visual identity.
@@ -781,14 +812,14 @@ All four Jest coverage thresholds now met globally (statements 80%, branches 70%
 
 `npm test` — **657 tests passing** across **35 suites** (added 87 tests)
 
-| File | Coverage problem fixed |
-|---|---|
-| `store/slices/authSlice.ts` | Async thunks never executed — mocked `FirebaseAuthService`, dispatched real thunks, covered all `try/catch` branches |
-| `store/slices/charactersSlice.ts` | 31% functions — mocked deps, added thunk execution + `addFeat`/`removeFeat`/`toggleFeat`/`recalculateStats` tests |
-| `services/PrerequisiteService.ts` | Missing prereq types — added `level+class`, `skill`, `class_feature`, `proficiency`, `caster_level`, `mythic_tier` tests |
-| `services/CombatService.ts` | `calculateSkill`, `isDying`, `isDead` untested |
-| `services/EquipmentDatabaseService.ts` | `getEquipmentByCategory`, `searchEquipment` (all filter branches) untested |
-| `services/ModifierPipelineService.ts` | Medium/Low BAB progressions, condition effects untested |
+| File                                   | Coverage problem fixed                                                                                                   |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `store/slices/authSlice.ts`            | Async thunks never executed — mocked `FirebaseAuthService`, dispatched real thunks, covered all `try/catch` branches     |
+| `store/slices/charactersSlice.ts`      | 31% functions — mocked deps, added thunk execution + `addFeat`/`removeFeat`/`toggleFeat`/`recalculateStats` tests        |
+| `services/PrerequisiteService.ts`      | Missing prereq types — added `level+class`, `skill`, `class_feature`, `proficiency`, `caster_level`, `mythic_tier` tests |
+| `services/CombatService.ts`            | `calculateSkill`, `isDying`, `isDead` untested                                                                           |
+| `services/EquipmentDatabaseService.ts` | `getEquipmentByCategory`, `searchEquipment` (all filter branches) untested                                               |
+| `services/ModifierPipelineService.ts`  | Medium/Low BAB progressions, condition effects untested                                                                  |
 
 ### Deviations from Original Plan
 
