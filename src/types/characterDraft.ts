@@ -1,0 +1,206 @@
+// ---- Character Draft ----
+// Editor state for the direct-entry character sheet.
+// Captures user inputs only — computed values (BAB, saves, modifiers, totals)
+// are derived from these via selectors, never stored here.
+// All fields are serializable (no Date objects, no class instances).
+
+import { Alignment } from './base';
+import { ClassChoice } from './classes';
+
+// ---- Ability scores ----
+
+export type AbilityKey = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha';
+
+export interface DraftAbilityScore {
+  base: number;
+  racial: number; // auto-populated from race selection, shown read-only
+  inherent: number; // tomes / wishes (manual)
+  enhancement: number; // auto-populated from equipped gear, shown read-only
+  other: number; // morale / sacred / misc (manual)
+  levelIncrements: number; // count of +1 increases allocated here
+}
+
+export type DraftAbilityScores = Record<AbilityKey, DraftAbilityScore>;
+
+// Which ability receives the +1 at each class-HD milestone (every 4 HD)
+export interface LevelIncrementSlot {
+  atHD: number; // 4, 8, 12, 16, 20, 24, ...
+  ability: AbilityKey | null;
+}
+
+// ---- Classes ----
+
+export interface DraftClassEntry {
+  id: string; // local uuid — used as React key and action target
+  className: string;
+  level: number;
+  archetypeId?: string;
+  archetypeName?: string;
+  sourceSystem: 'pf1e' | '3.5e' | 'homebrew' | 'campaign';
+  spellcastingAdvancement?: {
+    type: 'divine' | 'arcane' | 'both' | 'highest' | 'chosen';
+    chosenType?: 'divine' | 'arcane'; // required when type === 'chosen'
+  };
+  classChoices: ClassChoice[];
+  prereqOverride: boolean; // DM override — suppress prereq warnings for this class
+}
+
+// ---- Templates ----
+
+export interface DraftTemplateEntry {
+  id: string;
+  templateId?: string; // undefined for free grants
+  templateName: string;
+  appliedAs?: 'CR' | 'LA';
+  crValue?: number;
+  laValue?: number;
+  acquired?: 'inherited' | 'acquired' | 'either';
+  isFreeGrant: boolean;
+  freeGrantNote?: string; // description for free grants
+  grantedBy?: string; // e.g. "DM (campaign grant)"
+}
+
+// ---- Feats ----
+
+export type FeatSlotSource = 'racial' | 'level' | 'bonus' | 'mythic';
+
+export interface DraftFeatSlot {
+  id: string;
+  source: FeatSlotSource;
+  availableAt: string; // display label: "Lvl 1", "Fighter 4", "Tier 2"
+  availableAtLevel: number; // numeric for ordering and validation
+  featId?: string;
+  featName?: string;
+  prereqOverride: boolean; // suppress prereq warning for this slot
+}
+
+// ---- Skills ----
+
+export interface DraftSkillEntry {
+  ranks: number;
+  misc: number;
+  // isClassSkill is derived at runtime from the classes list — not stored here
+}
+
+// ---- Traits ----
+
+export interface DraftTrait {
+  id: string;
+  traitId?: string; // DB id; undefined for custom/homebrew traits
+  traitName: string;
+  category: string; // Combat / Faith / Magic / Social / Race / Regional / Religion
+  description: string;
+}
+
+// ---- Combat stats ----
+
+export interface DraftCombatStats {
+  maxHPOverride?: number; // undefined = use computed value
+  currentHP: number;
+  nonlethalDamage: number;
+  tempHP: number;
+  // Misc adjustments on top of auto-computed values
+  acMiscBonus: number;
+  saveFortMisc: number;
+  saveRefMisc: number;
+  saveWillMisc: number;
+  meleeAttackMisc: number;
+  rangedAttackMisc: number;
+  cmbMisc: number;
+  // Movement speeds (feet)
+  speedLand: number;
+  speedFly?: number;
+  speedSwim?: number;
+  speedClimb?: number;
+}
+
+// ---- Spellcasting ----
+
+export type SpellPoolType = 'divine' | 'arcane';
+
+export interface DraftSpellcastingPool {
+  id: string;
+  poolType: SpellPoolType;
+  castingAbility: AbilityKey;
+  spellsPerDayMisc: number[]; // index = spell level 0–9; misc adjustments
+}
+
+// ---- Equipment ----
+
+export interface DraftWeapon {
+  id: string;
+  name: string;
+  attackBonus: number;
+  damage: string; // e.g. "1d8+8"
+  damageType: string; // B / P / S
+  critRange: string; // e.g. "19-20"
+  critMultiplier: number;
+}
+
+export interface DraftArmor {
+  id: string;
+  name: string;
+  acBonus: number;
+  maxDex?: number;
+  acp: number;
+}
+
+export interface DraftMagicItem {
+  id: string;
+  name: string;
+  description: string;
+  autoApplyNote?: string; // e.g. "+1 CL all spells → applied to Divine pool"
+}
+
+// ---- Root draft ----
+
+export interface CharacterDraft {
+  // Identity
+  name: string;
+  player: string;
+  raceId: string;
+  raceName: string;
+  alignment: Alignment;
+  deity: string;
+  gender: string;
+  age: string;
+  height: string;
+  weight: string;
+  hair: string;
+  eyes: string;
+  skin: string;
+  background: string;
+  portrait?: string;
+
+  // Abilities
+  abilities: DraftAbilityScores;
+  levelIncrementSlots: LevelIncrementSlot[];
+
+  // Classes & Templates
+  classes: DraftClassEntry[];
+  templates: DraftTemplateEntry[];
+
+  // Combat
+  combat: DraftCombatStats;
+
+  // Skills — key matches skillKey from Skills type (e.g. 'perception', 'spellcraft')
+  skills: Record<string, DraftSkillEntry>;
+
+  // Traits
+  traits: DraftTrait[];
+
+  // Feats
+  featSlots: DraftFeatSlot[];
+
+  // Spellcasting
+  spellcastingPools: DraftSpellcastingPool[];
+
+  // Equipment
+  weapons: DraftWeapon[];
+  armor: DraftArmor[];
+  magicItems: DraftMagicItem[];
+
+  // Notes
+  characterNotes: string;
+  campaignNotes: string;
+}
