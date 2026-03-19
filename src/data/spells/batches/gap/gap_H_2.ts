@@ -6,7 +6,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: 'Homeward Bound',
     classLevels: { cleric: 3, 'sorcerer/wizard': 4 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 minute',
     range: 'touch',
@@ -20,7 +20,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: 'Horn of Pursuit',
     classLevels: { bard: 1, inquisitor: 1, paladin: 1, ranger: 1 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['sonic'],
     components: { verbal: false, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -36,8 +36,8 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: 'Hostile Juxtaposition',
     classLevels: { 'sorcerer/wizard': 5, summoner: 4, 'unchained summoner': 5, witch: 5 },
-    school: 'conjuration',
-    subschool: 'teleportation',
+    school: 'Conjuration',
+    subschool: 'Teleportation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a coin' },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -51,7 +51,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: 'Howling Agony',
     classLevels: { bloodrager: 3, inquisitor: 2, mesmerist: 2, psychic: 2, 'sorcerer/wizard': 3, spiritualist: 3, witch: 3 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['pain'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a needle and a dried eyeball' },
     castingTime: '1 standard action',
@@ -66,7 +66,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: 'Hunger for Flesh',
     classLevels: { antipaladin: 3, cleric: 4, psychic: 4, shaman: 4, 'sorcerer/wizard': 4, spiritualist: 4, witch: 4 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['evil', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'ghoul fang', divine: true },
     castingTime: '1 standard action',
@@ -81,7 +81,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: 'Hungry Darkness',
     classLevels: { 'sorcerer/wizard': 7 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['darkness', 'force'],
     components: { verbal: true, somatic: true, material: true, materialComponents: "bat's tooth" },
     castingTime: '1 standard action',
@@ -97,7 +97,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: 'Hungry Earth',
     classLevels: { druid: 5, 'sorcerer/wizard': 5, witch: 5 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'medium (100 ft. + 10 ft./level)',
@@ -112,7 +112,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: "Hunter's Blessing",
     classLevels: { cleric: 5, druid: 5, inquisitor: 5, shaman: 5 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -126,7 +126,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: "Hunter's Eye",
     classLevels: { inquisitor: 3, ranger: 2 },
-    school: 'divination',
+    school: 'Divination',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
     range: 'medium (100 ft. + 10 ft./level)',
@@ -140,7 +140,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: "Hunter's Friend",
     classLevels: { druid: 3, ranger: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
     range: 'touch',
@@ -154,7 +154,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: "Hunter's Howl",
     classLevels: { ranger: 1 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['emotion', 'fear', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -170,7 +170,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: "Hunter's Lore",
     classLevels: { inquisitor: 2, ranger: 2 },
-    school: 'divination',
+    school: 'Divination',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a scrap of paper torn from a book about monsters' },
     castingTime: '1 standard action',
     range: 'personal',
@@ -184,7 +184,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: "Huntmaster's Spear",
     classLevels: { antipaladin: 1, bloodrager: 2, druid: 2, hunter: 1, inquisitor: 2, magus: 2, occultist: 2, paladin: 1, ranger: 1, shaman: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: true, divine: true },
     castingTime: '10 minutes',
     range: 'touch',
@@ -198,7 +198,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: 'Hurricane Blast',
     classLevels: { druid: 3, 'sorcerer/wizard': 4 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['air'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -214,7 +214,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: 'Hydrophobia',
     classLevels: { bard: 2, cleric: 3, druid: 3, 'sorcerer/wizard': 3, witch: 3 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['emotion', 'fear', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -230,7 +230,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
   {
     name: 'Hymn of Peace',
     classLevels: { bard: 6, cleric: 7 },
-    school: 'abjuration',
+    school: 'Abjuration',
     descriptor: ['good'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',

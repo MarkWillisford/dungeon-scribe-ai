@@ -5,8 +5,8 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Restore Eidolon',
     classLevels: { summoner: 3, 'unchained summoner': 3 },
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'diamond dust worth 100 gp or 1,000 gp' },
     castingTime: '1 minute',
     range: 'touch',
@@ -20,8 +20,8 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Resurgent Transformation',
     classLevels: { alchemist: 5 },
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a pinch of meteoric iron worth 100 gp' },
     castingTime: '1 standard action',
     range: 'personal',
@@ -35,8 +35,8 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Resurrection',
     classLevels: { 'cleric/oracle': 7, shaman: 8, witch: 8 },
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'diamond worth 10,000 gp', divine: true },
     castingTime: '1 minute',
     range: 'touch',
@@ -50,7 +50,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Retribution',
     classLevels: { inquisitor: 3 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['evil', 'pain'],
     components: { verbal: true, somatic: false, material: false },
     castingTime: '1 standard action',
@@ -65,7 +65,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Retributive Reparations',
     classLevels: { antipaladin: 3, inquisitor: 3, occultist: 3, spiritualist: 3, witch: 4 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['curse'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -80,8 +80,8 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Retrieve Item',
     classLevels: { bard: 2, 'sorcerer/wizard': 2 },
-    school: 'conjuration',
-    subschool: 'calling',
+    school: 'Conjuration',
+    subschool: 'Calling',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 full round',
     range: 'long (400 ft. + 40 ft./level)',
@@ -95,8 +95,8 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Returning Weapon',
     classLevels: { bard: 2, bloodrager: 1, cleric: 2, inquisitor: 1, magus: 1, occultist: 1, psychic: 2, ranger: 1, 'sorcerer/wizard': 2, witch: 2 },
-    school: 'conjuration',
-    subschool: 'teleportation',
+    school: 'Conjuration',
+    subschool: 'Teleportation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -110,7 +110,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Revealing Light',
     classLevels: { bard: 1, 'cleric/oracle': 2, inquisitor: 2, medium: 1, psychic: 2, 'sorcerer/wizard': 2 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['light'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'piece of a mirror', divine: true },
     castingTime: '1 standard action',
@@ -125,7 +125,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Revenant Armor',
     classLevels: { antipaladin: 3, cleric: 4, magus: 4, medium: 4, occultist: 4, paladin: 3, shaman: 3, 'sorcerer/wizard': 4, spiritualist: 3, witch: 3 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'one suit of armor' },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -139,8 +139,8 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Reversion',
     classLevels: { cleric: 3, psychic: 2, 'sorcerer/wizard': 3 },
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '10 minutes',
     range: 'personal',
@@ -154,8 +154,8 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Reviving Finale',
     classLevels: { bard: 3 },
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 swift action',
     range: '20 feet',
@@ -170,7 +170,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Ricochet Shot',
     classLevels: { ranger: 2, 'sorcerer/wizard': 2 },
-    school: 'evocation',
+    school: 'Evocation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a wishbone' },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -184,7 +184,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Ride the Lightning',
     classLevels: { 'sorcerer/wizard': 9 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['electricity'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 swift action',
@@ -199,7 +199,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Ride the Waves',
     classLevels: { bloodrager: 4, 'cleric/oracle': 4, druid: 4, shaman: 4, 'sorcerer/wizard': 4, witch: 4 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['water'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -214,7 +214,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Riding Possession',
     classLevels: { medium: 2, mesmerist: 4, occultist: 3, psychic: 4, 'sorcerer/wizard': 4, spiritualist: 3, summoner: 4, witch: 4 },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'medium (100 ft. + 10 ft./level)',
@@ -228,8 +228,8 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Rift of Ruin',
     classLevels: { cleric: 8, 'sorcerer/wizard': 8, witch: 8 },
-    school: 'conjuration',
-    subschool: 'calling',
+    school: 'Conjuration',
+    subschool: 'Calling',
     descriptor: ['chaotic', 'evil'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -245,7 +245,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Righteous Blood',
     classLevels: { inquisitor: 2, paladin: 2 },
-    school: 'abjuration',
+    school: 'Abjuration',
     descriptor: ['good'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
@@ -260,7 +260,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Righteous Condemnation',
     classLevels: { cleric: 3, inquisitor: 3, paladin: 2 },
-    school: 'abjuration',
+    school: 'Abjuration',
     descriptor: ['good', 'law'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
@@ -275,7 +275,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Rigor Mortis',
     classLevels: { cleric: 4, magus: 4, occultist: 4, psychic: 4, shaman: 4, 'sorcerer/wizard': 4, spiritualist: 3, witch: 4 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['pain'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a knucklebone', divine: true },
     castingTime: '1 standard action',
@@ -290,7 +290,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Rising Water',
     classLevels: { bloodrager: 3, druid: 4, magus: 4, occultist: 4, psychic: 4, ranger: 3, shaman: 4, 'sorcerer/wizard': 4, summoner: 4 },
-    school: 'conjuration',
+    school: 'Conjuration',
     descriptor: ['water'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a lily pad' },
     castingTime: '1 standard action',
@@ -306,8 +306,8 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: "Rival's Weald",
     classLevels: { druid: 9, shaman: 9, witch: 9 },
-    school: 'transmutation',
-    subschool: 'polymorph',
+    school: 'Transmutation',
+    subschool: 'Polymorph',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a hardened piece of tree sap' },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -321,8 +321,8 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'River Whip',
     classLevels: { magus: 2, 'sorcerer/wizard': 2, witch: 2 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     descriptor: ['water'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -338,8 +338,8 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Roaming Pit',
     classLevels: { cleric: 6, druid: 6, psychic: 6, 'sorcerer/wizard': 5, summoner: 5 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'powered diamond dust worth 10 gp' },
     castingTime: '1 standard action',
     range: 'medium (100 ft. + 10 ft./level)',
@@ -354,8 +354,8 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Rock Whip',
     classLevels: { arcanist: 2, 'cleric/oracle': 2, druid: 2, hunter: 1, magus: 2, ranger: 1, shaman: 2, 'sorcerer/wizard': 2, warpriest: 2, witch: 2 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: '0 ft.',
@@ -370,7 +370,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Rope Tornado',
     classLevels: { druid: 4, magus: 4, occultist: 4, shaman: 4, 'sorcerer/wizard': 4, witch: 4 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['air'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a length of twine' },
     castingTime: '1 standard action',
@@ -386,7 +386,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Ropeweave',
     classLevels: { occultist: 2, ranger: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'a rope' },
     castingTime: '1 minute',
     range: 'touch',
@@ -400,7 +400,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Rotgut',
     classLevels: { antipaladin: 2, bard: 2, 'cleric/oracle': 2, inquisitor: 2, occultist: 2, skald: 2, warpriest: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a pinch of hops' },
     castingTime: '1 round',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -414,7 +414,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Rumbling Fury',
     classLevels: { adept: 2, 'cleric/oracle': 2, 'sorcerer/wizard': 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: '30 feet',
@@ -429,7 +429,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Rune of Durability',
     classLevels: { 'sorcerer/wizard': 3 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'iron filings' },
     castingTime: '1 minute',
     range: 'touch',
@@ -443,7 +443,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Rune of Ruin',
     classLevels: { alchemist: 4, bard: 4, inquisitor: 4, 'sorcerer/wizard': 5, witch: 5 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['curse'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'self-portrait on thin paper' },
     castingTime: '1 standard action',
@@ -458,7 +458,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Rune of Rule',
     classLevels: { bard: 2, occultist: 2, 'sorcerer/wizard': 2, witch: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'vial of paint worth 25 gp' },
     castingTime: '1 minute',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -472,7 +472,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
   {
     name: 'Runic Overload',
     classLevels: { bloodrager: 3, magus: 4, 'sorcerer/wizard': 5, witch: 6 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['sonic'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a small rune carved from stone' },
     castingTime: '1 standard action',

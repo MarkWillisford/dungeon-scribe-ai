@@ -16,7 +16,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
       wizard: 4,
       witch: 4,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['shadow'],
     components: {
       verbal: true,
@@ -43,7 +43,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
       wizard: 8,
       witch: 8,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['shadow'],
     components: {
       verbal: true,
@@ -77,8 +77,8 @@ export const GAP_SPELLS_U_1: Spell[] = [
       spiritualist: 6,
       witch: 7,
     },
-    school: 'necromancy',
-    subschool: 'shadow',
+    school: 'Necromancy',
+    subschool: 'Shadow',
     descriptor: ['darkness'],
     components: {
       verbal: true,
@@ -106,7 +106,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
       wizard: 4,
       witch: 4,
     },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['light'],
     components: {
       verbal: true,
@@ -132,7 +132,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
       sorcerer: 5,
       wizard: 5,
     },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: {
       verbal: true,
       somatic: true,
@@ -161,7 +161,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
       sorcerer: 8,
       wizard: 8,
     },
-    school: 'conjuration',
+    school: 'Conjuration',
     components: {
       verbal: true,
       somatic: true,
@@ -188,8 +188,8 @@ export const GAP_SPELLS_U_1: Spell[] = [
       sorcerer: 3,
       wizard: 3,
     },
-    school: 'transmutation',
-    subschool: 'polymorph',
+    school: 'Transmutation',
+    subschool: 'Polymorph',
     components: {
       verbal: true,
       somatic: true,
@@ -216,8 +216,8 @@ export const GAP_SPELLS_U_1: Spell[] = [
       sorcerer: 5,
       wizard: 5,
     },
-    school: 'transmutation',
-    subschool: 'polymorph',
+    school: 'Transmutation',
+    subschool: 'Polymorph',
     components: {
       verbal: true,
       somatic: true,
@@ -244,8 +244,8 @@ export const GAP_SPELLS_U_1: Spell[] = [
       sorcerer: 6,
       wizard: 6,
     },
-    school: 'transmutation',
-    subschool: 'polymorph',
+    school: 'Transmutation',
+    subschool: 'Polymorph',
     components: {
       verbal: true,
       somatic: true,
@@ -270,8 +270,8 @@ export const GAP_SPELLS_U_1: Spell[] = [
       sorcerer: 8,
       wizard: 8,
     },
-    school: 'transmutation',
-    subschool: 'polymorph',
+    school: 'Transmutation',
+    subschool: 'Polymorph',
     components: {
       verbal: true,
       somatic: true,
@@ -297,7 +297,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
       cleric: 2,
       inquisitor: 2,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['emotion', 'evil', 'fear', 'mind-affecting'],
     components: {
       verbal: true,
@@ -326,7 +326,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
       wizard: 4,
       witch: 4,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: {
       verbal: true,
       somatic: true,
@@ -352,7 +352,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
       ranger: 1,
       shaman: 1,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: {
       verbal: false,
       somatic: true,
@@ -377,7 +377,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
       wizard: 1,
       witch: 1,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['curse', 'evil'],
     components: {
       verbal: true,

@@ -5,7 +5,7 @@ import type { Spell } from '@/types/spells';
 export const GAP_SPELLS_S2_2: Spell[] = [
   {
     name: 'Snapdragon Fireworks',
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['fire', 'light'],
     classLevels: { bard: 2, sorcerer: 1, wizard: 1 },
     castingTime: '1 standard action',
@@ -21,7 +21,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Snare',
-    school: 'transmutation',
+    school: 'Transmutation',
     classLevels: { druid: 3, ranger: 2 },
     castingTime: '3 rounds',
     components: { verbal: true, somatic: true, material: false, divine: true },
@@ -35,8 +35,8 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Snowball',
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     descriptor: ['cold', 'water'],
     classLevels: { druid: 1, magus: 1, sorcerer: 1, wizard: 1, summoner: 1, witch: 1, bloodrager: 1 },
     castingTime: '1 standard action',
@@ -52,8 +52,8 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Solid Note',
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     classLevels: { bard: 1 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: false, material: false },
@@ -68,8 +68,8 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Song of Discord',
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['mind-affecting', 'sonic'],
     classLevels: { bard: 5 },
     castingTime: '1 standard action',
@@ -85,8 +85,8 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Song of Healing',
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     classLevels: { bard: 4 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
@@ -100,7 +100,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Songbird',
-    school: 'conjuration',
+    school: 'Conjuration',
     descriptor: ['good'],
     classLevels: { bard: 1, cleric: 1, mesmerist: 1, paladin: 1, psychic: 1, sorcerer: 1, wizard: 1 },
     castingTime: '1 swift action',
@@ -115,7 +115,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Sonic Scream',
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['sonic'],
     classLevels: { bard: 2, bloodrager: 2, magus: 2, psychic: 2, sorcerer: 2, wizard: 2 },
     castingTime: '1 standard action',
@@ -131,7 +131,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Sonic Thrust',
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['sonic'],
     classLevels: { bard: 4, sorcerer: 5, wizard: 5 },
     castingTime: '1 standard action',
@@ -146,7 +146,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Soothe Construct',
-    school: 'abjuration',
+    school: 'Abjuration',
     classLevels: { cleric: 4, sorcerer: 5, wizard: 5 },
     castingTime: '1 round',
     components: { verbal: true, somatic: true, material: false },
@@ -160,8 +160,8 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Soothing Mud',
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     descriptor: ['earth', 'water'],
     classLevels: { druid: 3, ranger: 3, shaman: 3 },
     castingTime: '1 standard action',
@@ -177,8 +177,8 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Soothing Word',
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     classLevels: { cleric: 2, druid: 2, inquisitor: 2, paladin: 2, ranger: 3, witch: 2 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
@@ -192,7 +192,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Sotto Voce',
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['fear', 'mind-affecting', 'sonic'],
     classLevels: { bard: 1, cleric: 0, sorcerer: 0, wizard: 0 },
     castingTime: '1 standard action',
@@ -207,7 +207,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spawn Ward',
-    school: 'necromancy',
+    school: 'Necromancy',
     classLevels: { cleric: 5, inquisitor: 5 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
@@ -221,7 +221,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Speak with Haunt',
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['language-dependent'],
     classLevels: { cleric: 4, shaman: 3, witch: 4 },
     castingTime: '10 minutes',
@@ -236,7 +236,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Speak with Soul',
-    school: 'necromancy',
+    school: 'Necromancy',
     classLevels: { antipaladin: 4, cleric: 6, medium: 4, paladin: 4, shaman: 6, spiritualist: 6 },
     castingTime: '1 minute',
     components: { verbal: true, somatic: true, material: true },
@@ -250,7 +250,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spear of Purity',
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['good'],
     classLevels: { cleric: 2, oracle: 2 },
     castingTime: '1 standard action',
@@ -266,7 +266,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spectral Saluqi',
-    school: 'necromancy',
+    school: 'Necromancy',
     classLevels: { sorcerer: 6, wizard: 6, witch: 6 },
     castingTime: '1 round',
     components: { verbal: true, somatic: true, material: false, focus: true },
@@ -281,8 +281,8 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spectral Scout',
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     classLevels: { bard: 3, druid: 3, ranger: 3, shaman: 3, sorcerer: 3, wizard: 3 },
     castingTime: '1 minute',
     components: { verbal: true, somatic: true, material: false },
@@ -297,7 +297,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: "Speechreader's Sight",
-    school: 'divination',
+    school: 'Divination',
     classLevels: { alchemist: 1, bard: 1, cleric: 1, inquisitor: 1, medium: 1, mesmerist: 1, occultist: 1, psychic: 1, sorcerer: 1, wizard: 1, spiritualist: 1, witch: 1 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
@@ -311,7 +311,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spell Scourge',
-    school: 'abjuration',
+    school: 'Abjuration',
     classLevels: { cleric: 7, sorcerer: 7, wizard: 7, witch: 7 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
@@ -325,7 +325,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spellbane',
-    school: 'abjuration',
+    school: 'Abjuration',
     classLevels: { sorcerer: 9, wizard: 9 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false, focus: true },
@@ -340,7 +340,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spellblight Jinx',
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['curse'],
     classLevels: { antipaladin: 4, bard: 4, cleric: 6, inquisitor: 5, occultist: 5, psychic: 6, shaman: 5, sorcerer: 6, wizard: 6, witch: 5 },
     castingTime: '1 standard action',
@@ -355,7 +355,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spellcasting Contract, Lesser',
-    school: 'evocation',
+    school: 'Evocation',
     classLevels: { cleric: 5, oracle: 5 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false, focus: true },
@@ -369,7 +369,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spellcrash, Lesser',
-    school: 'abjuration',
+    school: 'Abjuration',
     classLevels: { cleric: 4, sorcerer: 4, wizard: 4, witch: 4 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
@@ -383,7 +383,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spellcurse',
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['curse'],
     classLevels: { antipaladin: 2, cleric: 3, inquisitor: 2, occultist: 4, psychic: 3, shaman: 4, witch: 3 },
     castingTime: '1 standard action',
@@ -398,7 +398,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spellscar',
-    school: 'abjuration',
+    school: 'Abjuration',
     classLevels: { cleric: 8, sorcerer: 8, wizard: 8, oracle: 8 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: true },
@@ -413,7 +413,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spellsteal',
-    school: 'abjuration',
+    school: 'Abjuration',
     classLevels: { cleric: 5, sorcerer: 5, wizard: 5, witch: 5 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
@@ -427,8 +427,8 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spindrift Spritz',
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     descriptor: ['water'],
     classLevels: { cleric: 2, druid: 2, inquisitor: 2, paladin: 1, ranger: 1, shaman: 2, spiritualist: 2 },
     castingTime: '1 immediate action',
@@ -443,8 +443,8 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spiral Ascent',
-    school: 'conjuration',
-    subschool: 'teleportation',
+    school: 'Conjuration',
+    subschool: 'Teleportation',
     classLevels: { cleric: 3, inquisitor: 3 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
@@ -458,8 +458,8 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spiral Descent',
-    school: 'conjuration',
-    subschool: 'teleportation',
+    school: 'Conjuration',
+    subschool: 'Teleportation',
     classLevels: { cleric: 2, inquisitor: 2 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
@@ -473,7 +473,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spirit Call',
-    school: 'enchantment',
+    school: 'Enchantment',
     classLevels: { druid: 1, shaman: 1 },
     castingTime: '1 full round',
     components: { verbal: true, somatic: true, material: false, divine: true },
@@ -488,7 +488,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spirit Share',
-    school: 'transmutation',
+    school: 'Transmutation',
     classLevels: { alchemist: 1, bard: 1, cleric: 1, druid: 1, occultist: 1, shaman: 1, sorcerer: 1, wizard: 1, witch: 1 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false, focus: true },
@@ -502,7 +502,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spirit-Bound Blade',
-    school: 'evocation',
+    school: 'Evocation',
     classLevels: { medium: 4, occultist: 4, shaman: 4, spiritualist: 3, sorcerer: 4, wizard: 4 },
     castingTime: '1 standard action',
     components: { verbal: false, somatic: true, material: false },
@@ -516,7 +516,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spiritual Ally',
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['force'],
     classLevels: { cleric: 4, medium: 4, spiritualist: 4, warpriest: 4, oracle: 4 },
     castingTime: '1 standard action',
@@ -532,7 +532,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spiritual Squire',
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['force'],
     classLevels: { antipaladin: 2, cleric: 2, inquisitor: 2, paladin: 2, shaman: 2, spiritualist: 2 },
     castingTime: '1 standard action',
@@ -548,7 +548,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spiritual Weapon',
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['force'],
     classLevels: { cleric: 2, inquisitor: 2, shaman: 2 },
     castingTime: '1 standard action',
@@ -564,7 +564,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spite',
-    school: 'abjuration',
+    school: 'Abjuration',
     classLevels: { witch: 4 },
     castingTime: '1 round',
     components: { verbal: true, somatic: true, material: true },
@@ -578,7 +578,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Splinter Spell Resistance',
-    school: 'transmutation',
+    school: 'Transmutation',
     classLevels: { bloodrager: 2, magus: 2, occultist: 2, psychic: 2, shaman: 2, sorcerer: 2, wizard: 2, witch: 2 },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
@@ -592,7 +592,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spontaneous Immolation',
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['fire'],
     classLevels: { psychic: 2, sorcerer: 2, wizard: 2 },
     castingTime: '1 standard action',
@@ -607,7 +607,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spore Burst',
-    school: 'conjuration',
+    school: 'Conjuration',
     descriptor: ['poison'],
     classLevels: { druid: 2, ranger: 3, shaman: 2, witch: 2 },
     castingTime: '1 standard action',
@@ -622,7 +622,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
   },
   {
     name: 'Spotlight',
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['darkness', 'light'],
     classLevels: { bard: 3, cleric: 3, druid: 3, inquisitor: 3, magus: 3, occultist: 3, paladin: 3, shaman: 3, sorcerer: 3, wizard: 3, witch: 3 },
     castingTime: '1 standard action',

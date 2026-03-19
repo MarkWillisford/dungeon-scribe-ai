@@ -6,7 +6,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Glyph of Warding, Greater',
     classLevels: { 'cleric/oracle': 6, inquisitor: 6, 'rune domain': 6 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'incense sprinkled with powdered diamond worth at least 400 gp' },
     castingTime: '10 minutes',
     range: 'touch',
@@ -20,7 +20,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Golden Guise',
     classLevels: { bard: 2, 'sorcerer/wizard': 3, witch: 3 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: true, materialComponents: '10 gold pieces' },
     castingTime: '1 standard action',
     range: 'Close (25 ft. + 5 ft./2 levels)',
@@ -34,7 +34,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Goodberry',
     classLevels: { druid: 1, shaman: 1, 'seasons subdomain': 1 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, divine: true, material: false },
     castingTime: '1 standard action',
     range: 'touch',
@@ -48,7 +48,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Grace',
     classLevels: { 'cleric/oracle': 2, paladin: 1 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: false, material: false },
     castingTime: '1 swift action',
     range: 'personal',
@@ -62,7 +62,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Grappling Scarf',
     classLevels: { bard: 1, inquisitor: 1, occultist: 1, skald: 1, 'sorcerer/wizard': 1 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, focus: true, focusComponents: 'a scarf', material: false },
     castingTime: '1 standard action',
     range: 'personal',
@@ -76,7 +76,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Grasp',
     classLevels: { arcanist: 0, bard: 0, 'cleric/oracle': 0, druid: 0, hunter: 0, magus: 0, psychic: 0, skald: 0, 'sorcerer/wizard': 0, warpriest: 0, witch: 0 },
-    school: 'divination',
+    school: 'Divination',
     components: { verbal: true, somatic: false, material: false },
     castingTime: '1 immediate action',
     range: 'personal',
@@ -90,8 +90,8 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Grasping Depths',
     classLevels: { 'cleric/oracle': 5, inquisitor: 6, shaman: 6, spiritualist: 5, witch: 6 },
-    school: 'necromancy',
-    subschool: 'haunted',
+    school: 'Necromancy',
+    subschool: 'Haunted',
     descriptor: ['emotion', 'fear', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a vial of sea water', divine: true },
     castingTime: '1 standard action',
@@ -107,7 +107,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Grasping Hand',
     classLevels: { 'sorcerer/wizard': 7, 'strength domain': 7 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['force'],
     components: { verbal: true, somatic: true, focus: true, focusComponents: 'a soft glove', material: false },
     castingTime: '1 standard action',
@@ -123,8 +123,8 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Grasping Tentacles',
     classLevels: { bloodrager: 3, magus: 3, 'sorcerer/wizard': 3, summoner: 3, witch: 3 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'octopus or squid tentacle' },
     castingTime: '1 standard action',
     range: 'Medium (100 ft. + 10 ft./level)',
@@ -139,7 +139,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Grasping Vine',
     classLevels: { alchemist: 2, druid: 2, occultist: 2, ranger: 2, shaman: 2, 'sorcerer/wizard': 2, witch: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'personal',
@@ -153,7 +153,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Grave Words',
     classLevels: { medium: 0, occultist: 0, psychic: 0, spiritualist: 0 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['language-dependent'],
     components: { verbal: false, somatic: true, material: false },
     castingTime: '1 minute',
@@ -168,8 +168,8 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Gravel Vortex',
     classLevels: { arcanist: 4, druid: 4, hunter: 4, 'sorcerer/wizard': 4 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     descriptor: ['earth'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a handful of pebbles' },
     castingTime: '1 standard action',
@@ -185,7 +185,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Gravity Sphere',
     classLevels: { druid: 6, 'sorcerer/wizard': 5 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a marble' },
     castingTime: '1 standard action',
     range: 'Medium (100 ft. + 10 ft./level)',
@@ -200,7 +200,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Gravity Well',
     classLevels: { druid: 6, 'sorcerer/wizard': 5 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a small lead weight' },
     castingTime: '1 standard action',
     range: 'Medium (100 ft. + 10 ft./level)',
@@ -214,8 +214,8 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Grease',
     classLevels: { bard: 1, magus: 1, 'sorcerer/wizard': 1, 'summoner/unchained summoner': 1, 'elemental school (earth)': 1 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'butter' },
     castingTime: '1 standard action',
     range: 'Close (25 ft. + 5 ft./2 levels)',
@@ -229,8 +229,8 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Grease, Greater',
     classLevels: { bard: 5, magus: 5, 'sorcerer/wizard': 5, summoner: 5 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'butter' },
     castingTime: '1 standard action',
     range: 'Medium (100 ft. + 10 ft./level)',
@@ -244,8 +244,8 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Grim Stalker',
     classLevels: { 'cleric/oracle': 7, magus: 6, shaman: 7, 'sorcerer/wizard': 7, summoner: 6, witch: 7 },
-    school: 'necromancy',
-    subschool: 'haunted',
+    school: 'Necromancy',
+    subschool: 'Haunted',
     descriptor: ['death', 'emotion', 'fear', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a hound\'s fang', divine: true },
     castingTime: '1 minute',
@@ -260,8 +260,8 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Grove of Respite',
     classLevels: { druid: 4, ranger: 4, shaman: 5, 'oracle (nature mystery)': 4 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a leaf or blade of grass and a drop of water', divine: true },
     castingTime: '10 minutes',
     range: 'Close (25 ft. + 5 ft./2 levels)',
@@ -276,7 +276,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Guardian Armor',
     classLevels: { antipaladin: 1, bloodrager: 1, 'cleric/oracle': 1, inquisitor: 1, magus: 1, occultist: 1, paladin: 1, 'sorcerer/wizard': 1 },
-    school: 'conjuration',
+    school: 'Conjuration',
     descriptor: ['teleportation'],
     components: { verbal: true, somatic: true, focus: true, focusComponents: 'armor worn by caster', material: false },
     castingTime: '1 immediate action',
@@ -291,7 +291,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Guardian Monument, Lesser',
     classLevels: { bard: 3, inquisitor: 3, magus: 3, occultist: 3, paladin: 3, psychic: 3, shaman: 4, 'sorcerer/wizard': 3, witch: 3 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, focus: true, focusComponents: 'an unattended, non-magical object', material: false },
     castingTime: '1 full round',
     range: 'touch',
@@ -306,7 +306,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Guardian Monument',
     classLevels: { bard: 5, inquisitor: 5, occultist: 5, psychic: 5, 'sorcerer/wizard': 5, witch: 5 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, focus: true, focusComponents: 'an unattended, non-magical object', material: false },
     castingTime: '1 full round',
     range: 'touch',
@@ -321,7 +321,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Guardian of Faith',
     classLevels: { 'cleric/oracle': 4, paladin: 4 },
-    school: 'abjuration',
+    school: 'Abjuration',
     descriptor: ['see text'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'parchment with a holy text written on it' },
     castingTime: '1 standard action',
@@ -336,8 +336,8 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Guardian Wasps',
     classLevels: { druid: 3, psychic: 3, ranger: 3, 'sorcerer/wizard': 3 },
-    school: 'conjuration',
-    subschool: 'summoning',
+    school: 'Conjuration',
+    subschool: 'Summoning',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a glob of spiced honey' },
     castingTime: '10 minutes',
     range: 'Close (25 ft. + 5 ft./2 levels)',
@@ -352,7 +352,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Guarding Knowledge',
     classLevels: { alchemist: 3, arcanist: 3, bard: 3, 'cleric/oracle': 3, inquisitor: 2, investigator: 3, occultist: 3, psychic: 3, skald: 3, 'sorcerer/wizard': 3, warpriest: 3 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: true, divine: true },
     castingTime: '1 standard action',
     range: 'personal',
@@ -366,7 +366,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Guards and Wards',
     classLevels: { 'sorcerer/wizard': 6, witch: 6, 'greed subdomain': 6, 'home subdomain': 7, 'wards subdomain': 6 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'burning incense, a small measure of brimstone and oil, a knotted string, and a small amount of blood', focus: true, focusComponents: 'a small silver rod' },
     castingTime: '30 minutes',
     range: 'anywhere within the area to be warded',
@@ -381,7 +381,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
   {
     name: 'Gusting Sphere',
     classLevels: { bloodrager: 2, druid: 2, magus: 2, 'sorcerer/wizard': 2 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['air'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',

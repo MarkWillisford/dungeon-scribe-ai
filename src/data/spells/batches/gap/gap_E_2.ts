@@ -6,7 +6,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Entropic Shield',
     classLevels: { cleric: 1, oracle: 1, psychic: 1 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'Personal',
@@ -20,8 +20,8 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Envious Urge',
     classLevels: { bard: 4, sorcerer: 6, wizard: 6 },
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['emotion', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -36,7 +36,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Epidemic',
     classLevels: { cleric: 6, oracle: 6, druid: 6, sorcerer: 7, wizard: 7, witch: 6 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['disease', 'evil'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -51,7 +51,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Erase Impressions',
     classLevels: { medium: 3, mesmerist: 4, occultist: 3, psychic: 5, spiritualist: 4 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 round',
     range: 'Touch',
@@ -65,7 +65,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Escape Alarm',
     classLevels: { bard: 2, inquisitor: 2, occultist: 2, psychic: 2, ranger: 2, sorcerer: 2, wizard: 2, spiritualist: 2, summoner: 2, unchainedSummoner: 2 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'a short segment of chain' },
     castingTime: '1 standard action',
     range: 'Medium (100 ft. + 10 ft./level)',
@@ -80,7 +80,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Escaping Ward',
     classLevels: { bard: 2, inquisitor: 2, magus: 2, ranger: 2, sorcerer: 2, wizard: 2 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'Personal',
@@ -94,8 +94,8 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Ethereal Envelope',
     classLevels: { psychic: 5, spiritualist: 4 },
-    school: 'conjuration',
-    subschool: 'teleportation',
+    school: 'Conjuration',
+    subschool: 'Teleportation',
     components: { verbal: false, somatic: true, material: true, materialComponents: 'an empty crystal box' },
     castingTime: '1 standard action',
     range: 'Personal',
@@ -109,8 +109,8 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Ethereal Envelopment',
     classLevels: { psychic: 7, spiritualist: 5 },
-    school: 'conjuration',
-    subschool: 'teleportation',
+    school: 'Conjuration',
+    subschool: 'Teleportation',
     components: { verbal: false, somatic: true, material: true, materialComponents: 'an empty crystal box' },
     castingTime: '1 standard action',
     range: 'Close (25 ft. + 5 ft./2 levels)',
@@ -124,7 +124,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Etheric Shards',
     classLevels: { occultist: 4, psychic: 5, spiritualist: 4 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['force'],
     components: { verbal: false, somatic: true, material: true, materialComponents: 'broken glass' },
     castingTime: '1 standard action',
@@ -140,8 +140,8 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Euphoric Cloud',
     classLevels: { druid: 2, magus: 2, psychic: 2, sorcerer: 2, wizard: 2, witch: 2 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     descriptor: ['poison'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'rare mushrooms worth 5 gp' },
     castingTime: '1 standard action',
@@ -157,8 +157,8 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: "Evaluator's Lens",
     classLevels: { inquisitor: 2, occultist: 3, sorcerer: 3, wizard: 3, summoner: 2, witch: 3 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'Personal',
@@ -172,8 +172,8 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Expeditious Construction',
     classLevels: { druid: 1, sorcerer: 1, wizard: 1 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     descriptor: ['earth'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a handful of earth or stone' },
     castingTime: '1 standard action',
@@ -189,7 +189,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Expel Blood',
     classLevels: { sorcerer: 7, wizard: 7, summoner: 6, witch: 7 },
-    school: 'conjuration',
+    school: 'Conjuration',
     descriptor: ['evil', 'water'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a drop of blood from each of three different creatures' },
     castingTime: '1 round',
@@ -204,7 +204,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Expend',
     classLevels: { sorcerer: 7, wizard: 7 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a miniature broken hourglass' },
     castingTime: '1 standard action',
     range: 'Medium (100 ft. + 10 ft./level)',
@@ -219,7 +219,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Explode Head',
     classLevels: { magus: 6, psychic: 5, sorcerer: 6, wizard: 6 },
-    school: 'evocation',
+    school: 'Evocation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'Close (25 ft. + 5 ft./2 levels)',
@@ -234,7 +234,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Explosion of Rot',
     classLevels: { druid: 4 },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a rotting flower' },
     castingTime: '1 standard action',
     range: 'Close (25 ft. + 5 ft./2 levels)',
@@ -249,7 +249,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Explosive Runes',
     classLevels: { sorcerer: 3, wizard: 3 },
-    school: 'abjuration',
+    school: 'Abjuration',
     descriptor: ['force'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -264,8 +264,8 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Exquisite Accompaniment',
     classLevels: { bard: 3 },
-    school: 'illusion',
-    subschool: 'shadow',
+    school: 'Illusion',
+    subschool: 'Shadow',
     descriptor: ['shadow'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -281,7 +281,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
   {
     name: 'Extreme Buoyancy',
     classLevels: { alchemist: 2, bard: 2, druid: 2, investigator: 2, medium: 2, occultist: 2, psychic: 2, ranger: 2, shaman: 2 },
-    school: 'evocation',
+    school: 'Evocation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a bag of air', divine: true },
     castingTime: '1 standard action',
     range: 'Touch',

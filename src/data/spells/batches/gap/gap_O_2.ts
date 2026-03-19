@@ -8,7 +8,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     classLevels: {
       sorcerer_wizard: 5,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: {
       verbal: true,
       somatic: true,
@@ -32,7 +32,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     classLevels: {
       oracle: 2,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['curse'],
     components: {
       verbal: true,
@@ -56,7 +56,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     classLevels: {
       oracle: 4,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: {
       verbal: true,
       somatic: true,
@@ -80,7 +80,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
       cleric_oracle: 8,
       sorcerer_wizard: 8,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: {
       verbal: true,
       somatic: true,
@@ -105,7 +105,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     classLevels: {
       alchemist: 3,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: {
       verbal: true,
       somatic: true,
@@ -130,7 +130,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
       cleric_oracle: 4,
       inquisitor: 4,
     },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['lawful'],
     components: {
       verbal: true,
@@ -157,7 +157,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
       mesmerist: 3,
       psychic: 4,
     },
-    school: 'enchantment',
+    school: 'Enchantment',
     descriptor: ['mind-affecting'],
     components: {
       verbal: true,
@@ -189,7 +189,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
       sorcerer_wizard: 3,
       warpriest: 2,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: {
       verbal: true,
       somatic: true,
@@ -215,8 +215,8 @@ export const GAP_SPELLS_O_2: Spell[] = [
       mesmerist: 3,
       psychic: 4,
     },
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['mind-affecting'],
     components: {
       verbal: true,
@@ -245,7 +245,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
       shaman: 6,
       witch: 6,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['poison'],
     components: {
       verbal: true,
@@ -280,7 +280,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
       summoner: 2,
       summoner_unchained: 2,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: {
       verbal: true,
       somatic: true,
@@ -310,7 +310,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
       summoner: 4,
       summoner_unchained: 6,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: {
       verbal: true,
       somatic: true,

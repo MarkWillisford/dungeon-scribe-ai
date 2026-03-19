@@ -6,7 +6,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Mischievous Shadow',
     classLevels: { bard: 4, magus: 4, medium: 3, shaman: 4, sorcerer: 4, wizard: 4, spiritualist: 4, summoner: 4, witch: 4 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['emotion', 'fear', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'black candle' },
     castingTime: '1 standard action',
@@ -22,7 +22,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Miserable Pity',
     classLevels: { bard: 2, mesmerist: 2, psychic: 2, sorcerer: 2, wizard: 2, witch: 2 },
-    school: 'abjuration',
+    school: 'Abjuration',
     descriptor: ['emotion', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -37,7 +37,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Mnemonic Siphon',
     classLevels: { arcanist: 4, magus: 3, occultist: 3, sorcerer: 4, wizard: 4, witch: 4 },
-    school: 'divination',
+    school: 'Divination',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '10 minutes',
     range: 'touch',
@@ -51,7 +51,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Molten Orb',
     classLevels: { bloodrager: 2, magus: 2, sorcerer: 2, wizard: 2, witch: 2 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['earth', 'fire'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -66,8 +66,8 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Moment of Greatness',
     classLevels: { bard: 1, cleric: 1, psychic: 1, sorcerer: 1, wizard: 1 },
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['mind-affecting'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'rabbit fur' },
     castingTime: '1 standard action',
@@ -83,7 +83,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Morning Sun',
     classLevels: { cleric: 7, oracle: 7, druid: 7, inquisitor: 6, shaman: 7 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['light'],
     components: { verbal: true, somatic: true, material: true, materialComponents: '500 gp worth of gold dust' },
     castingTime: '1 standard action',
@@ -99,7 +99,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Motes of Dusk And Dawn',
     classLevels: { bard: 3, magus: 3, medium: 3, mesmerist: 3, occultist: 3, psychic: 3, shaman: 3, sorcerer: 3, wizard: 3, witch: 3 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['darkness', 'light'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -115,8 +115,8 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Mud Buddy',
     classLevels: { druid: 2, sorcerer: 2, wizard: 2, witch: 2 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: { verbal: true, somatic: true, material: true, materialComponents: '1 pint of water' },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -130,8 +130,8 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Mudball',
     classLevels: { bloodrager: 1, druid: 1, magus: 1, sorcerer: 1, wizard: 1, witch: 1 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     descriptor: ['earth'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -147,8 +147,8 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Muffle Sound',
     classLevels: { bard: 2, cleric: 2, oracle: 2, inquisitor: 2, mesmerist: 2, psychic: 2 },
-    school: 'illusion',
-    subschool: 'glamer',
+    school: 'Illusion',
+    subschool: 'Glamer',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 round',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -162,8 +162,8 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Murderous Crow',
     classLevels: { antipaladin: 1, cleric: 1, paladin: 1, sorcerer: 1, wizard: 1, summoner: 1, witch: 1 },
-    school: 'conjuration',
-    subschool: 'summoning',
+    school: 'Conjuration',
+    subschool: 'Summoning',
     descriptor: ['see text'],
     components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: "a crow's feather" },
     castingTime: '1 round',
@@ -179,8 +179,8 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Music of the Spheres',
     classLevels: { bard: 5, cleric: 6 },
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     descriptor: ['sonic'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a stick of incense treated with special balms' },
     castingTime: '1 standard action',
@@ -196,7 +196,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Mydriatic Spontaneity',
     classLevels: { bard: 3, mesmerist: 3, psychic: 3, sorcerer: 4, wizard: 4, witch: 4 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['darkness', 'light'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -211,7 +211,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Mydriatic Spontaneity, Mass',
     classLevels: { bard: 5, mesmerist: 5, psychic: 6, sorcerer: 7, wizard: 7, witch: 7 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['darkness', 'light'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -226,8 +226,8 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Mind Swap, Major',
     classLevels: { psychic: 9 },
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['mind-affecting'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'diamonds worth 10,000 gp' },
     castingTime: '1 minute',
@@ -242,8 +242,8 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Miasmal Dread (Half-Orc)',
     classLevels: { antipaladin: 2, bard: 2, bloodrager: 2, inquisitor: 3, mesmerist: 3 },
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['fear', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -259,7 +259,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
   {
     name: 'Malediction (PZO9213)',
     classLevels: { cleric: 4, oracle: 4 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['evil'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',

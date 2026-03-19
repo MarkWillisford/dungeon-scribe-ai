@@ -5,7 +5,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Lightning Lash Bomb Admixture',
     classLevels: { alchemist: 3 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['electricity'],
     components: { verbal: true, somatic: true, material: false, divine: false },
     castingTime: '1 standard action',
@@ -21,7 +21,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Lily Pad Stride',
     classLevels: { druid: 3 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: {
       verbal: true,
       somatic: true,
@@ -43,7 +43,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Limp Lash',
     classLevels: { 'sorcerer/wizard': 2, witch: 2 },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: {
       verbal: true,
       somatic: true,
@@ -64,7 +64,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Line In The Sand',
     classLevels: { bloodrager: 1, magus: 1, 'sorcerer/wizard': 1 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false, divine: false },
     castingTime: '1 standard action',
     range: '5 feet',
@@ -89,7 +89,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
       'sorcerer/wizard': 1,
       witch: 1,
     },
-    school: 'divination',
+    school: 'Divination',
     components: { verbal: true, somatic: true, material: false, divine: false },
     castingTime: '1 round',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -105,7 +105,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Lipstitch',
     classLevels: { 'sorcerer/wizard': 2, witch: 2 },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: {
       verbal: false,
       somatic: true,
@@ -126,7 +126,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Admonition',
     classLevels: { antipaladin: 3, inquisitor: 4, paladin: 3 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['language-dependent'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 swift action',
@@ -142,7 +142,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Defense',
     classLevels: { antipaladin: 2, inquisitor: 2, paladin: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 swift action',
     range: 'personal',
@@ -157,8 +157,8 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Dependability',
     classLevels: { inquisitor: 4, paladin: 3 },
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['lawful'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 immediate action',
@@ -174,7 +174,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Duty',
     classLevels: { inquisitor: 2, paladin: 1 },
-    school: 'abjuration',
+    school: 'Abjuration',
     descriptor: ['lawful'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 immediate action',
@@ -190,8 +190,8 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Entanglement',
     classLevels: { antipaladin: 2, inquisitor: 3, paladin: 2 },
-    school: 'conjuration',
-    subschool: 'calling',
+    school: 'Conjuration',
+    subschool: 'Calling',
     descriptor: ['language-dependent'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 swift action',
@@ -207,8 +207,8 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Escape',
     classLevels: { antipaladin: 3, inquisitor: 4, paladin: 3 },
-    school: 'conjuration',
-    subschool: 'teleportation',
+    school: 'Conjuration',
+    subschool: 'Teleportation',
     descriptor: ['language-dependent'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 swift action',
@@ -224,7 +224,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Order',
     classLevels: { inquisitor: 3, paladin: 2 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['lawful', 'language-dependent'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 swift action',
@@ -240,7 +240,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Righteousness',
     classLevels: { inquisitor: 3, paladin: 2 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['good', 'language-dependent'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 swift action',
@@ -256,7 +256,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of the Red Crusader',
     classLevels: { antipaladin: 1, inquisitor: 2, paladin: 1 },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 swift action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -271,7 +271,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Thunder',
     classLevels: { antipaladin: 4, inquisitor: 5, paladin: 4 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['language-dependent', 'sonic'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 swift action',
@@ -287,7 +287,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Truth',
     classLevels: { inquisitor: 6, paladin: 4 },
-    school: 'divination',
+    school: 'Divination',
     descriptor: ['language-dependent'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 swift action',
@@ -303,7 +303,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Vengeance',
     classLevels: { antipaladin: 4, inquisitor: 5, paladin: 4 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['language-dependent'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 swift action',
@@ -319,7 +319,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Warding',
     classLevels: { antipaladin: 2, inquisitor: 3, paladin: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 swift action',
     range: 'personal',
@@ -334,7 +334,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Litany of Weakness',
     classLevels: { antipaladin: 1, inquisitor: 1 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['language-dependent'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 swift action',
@@ -350,7 +350,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Liveoak',
     classLevels: { druid: 6, shaman: 7 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false, divine: false },
     castingTime: '10 minutes',
     range: 'touch',
@@ -373,7 +373,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
       summoner: 1,
       witch: 1,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false, divine: false },
     castingTime: '1 standard action',
     range: 'personal',
@@ -397,7 +397,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
       ranger: 1,
       'sorcerer/wizard': 1,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: {
       verbal: true,
       somatic: true,
@@ -418,7 +418,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Longstrider',
     classLevels: { druid: 1, ranger: 1 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: {
       verbal: true,
       somatic: true,
@@ -439,7 +439,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Longstrider, Greater',
     classLevels: { druid: 3, ranger: 3 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: {
       verbal: true,
       somatic: true,
@@ -460,8 +460,8 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Lose the Trail',
     classLevels: { antipaladin: 2, ranger: 1, 'sorcerer/wizard': 1 },
-    school: 'illusion',
-    subschool: 'glamer',
+    school: 'Illusion',
+    subschool: 'Glamer',
     components: { verbal: true, somatic: true, material: false, divine: false },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -484,7 +484,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
       'sorcerer/wizard': 7,
       witch: 6,
     },
-    school: 'enchantment',
+    school: 'Enchantment',
     descriptor: ['curse', 'mind-affecting'],
     components: {
       verbal: true,
@@ -507,8 +507,8 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Lost Locale',
     classLevels: { psychic: 9, 'sorcerer/wizard': 9 },
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['mind-affecting'],
     components: { verbal: true, somatic: true, material: false, divine: false },
     castingTime: '24 hours',
@@ -525,8 +525,8 @@ export const GAP_SPELLS_L_2: Spell[] = [
   {
     name: 'Lost Passage',
     classLevels: { bard: 4, mesmerist: 3, psychic: 4, 'sorcerer/wizard': 4 },
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['mind-affecting'],
     components: { verbal: true, somatic: true, material: false, divine: false },
     castingTime: '1 standard action',
@@ -549,8 +549,8 @@ export const GAP_SPELLS_L_2: Spell[] = [
       'sorcerer/wizard': 3,
       witch: 3,
     },
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['mind-affecting'],
     components: {
       verbal: true,

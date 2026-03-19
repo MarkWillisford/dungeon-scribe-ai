@@ -6,7 +6,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: "Hag's Seasoning",
     classLevels: { antipaladin: 2, bloodrager: 2, druid: 3, shaman: 3, witch: 3 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['curse'],
     components: { verbal: false, somatic: true, material: true, materialComponents: 'a handful of spices' },
     castingTime: '1 standard action',
@@ -21,7 +21,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Halfling Vengeance',
     classLevels: { antipaladin: 1, cleric: 2, inquisitor: 2 },
-    school: 'divination',
+    school: 'Divination',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'touch',
@@ -35,7 +35,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hallow',
     classLevels: { cleric: 5, druid: 5, inquisitor: 5 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['good'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'herbs, oils, and incense worth at least 1,000 gp, plus 1,000 gp per spell level to be included in the hallowed area', divine: true },
     castingTime: '24 hours',
@@ -51,8 +51,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hallucinatory Decor',
     classLevels: { bard: 3, mesmerist: 3, psychic: 3, 'sorcerer/wizard': 3, witch: 3 },
-    school: 'illusion',
-    subschool: 'glamer',
+    school: 'Illusion',
+    subschool: 'Glamer',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 minute',
     range: 'medium (100 ft. + 10 ft./level)',
@@ -67,7 +67,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hallucinogenic Smoke',
     classLevels: { cleric: 4, witch: 4 },
-    school: 'conjuration',
+    school: 'Conjuration',
     descriptor: ['poison'],
     components: { verbal: false, somatic: true, material: true, materialComponents: 'tobacco leaves, ingested' },
     castingTime: '1 standard action',
@@ -82,7 +82,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Harm',
     classLevels: { cleric: 6, inquisitor: 6, shaman: 7, witch: 7 },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'touch',
@@ -96,7 +96,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Harvest Season',
     classLevels: { druid: 2, shaman: 2 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: true },
     castingTime: '1 minute',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -110,7 +110,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hasten Judgment',
     classLevels: { antipaladin: 4, cleric: 5, druid: 5, inquisitor: 4, 'sorcerer/wizard': 6, spiritualist: 4, witch: 5 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['curse'],
     components: { verbal: true, somatic: true, material: true, materialComponents: '2 silver pieces' },
     castingTime: '1 standard action',
@@ -125,8 +125,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Haunted Fey Aspect',
     classLevels: { bard: 0, psychic: 0, 'sorcerer/wizard': 0 },
-    school: 'illusion',
-    subschool: 'glamer',
+    school: 'Illusion',
+    subschool: 'Glamer',
     components: { verbal: false, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'personal',
@@ -140,7 +140,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Haunting Choir',
     classLevels: { bard: 3 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['mind-affecting', 'pain'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -156,8 +156,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Haunting Mists',
     classLevels: { bard: 2, mesmerist: 2, psychic: 2, 'sorcerer/wizard': 2, witch: 2 },
-    school: 'illusion',
-    subschool: 'figment',
+    school: 'Illusion',
+    subschool: 'Figment',
     descriptor: ['fear', 'shadow'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -173,8 +173,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Heal',
     classLevels: { alchemist: 6, cleric: 6, druid: 7, inquisitor: 6, shaman: 7, witch: 7 },
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'touch',
@@ -188,8 +188,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Heal Mount',
     classLevels: { paladin: 3 },
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'touch',
@@ -203,8 +203,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Healing Flames',
     classLevels: { cleric: 4, inquisitor: 4, paladin: 4, warpriest: 4 },
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     descriptor: ['fire', 'good'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
@@ -220,7 +220,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Healing Leak',
     classLevels: { antipaladin: 2, cleric: 3, paladin: 2, 'sorcerer/wizard': 3, witch: 3 },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a piece of muslin', divine: true },
     castingTime: '1 standard action',
     range: 'touch',
@@ -234,7 +234,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Healing Thief',
     classLevels: { mesmerist: 1, occultist: 3, psychic: 3, 'sorcerer/wizard': 3, witch: 3 },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a bit of sponge, damp with tears' },
     castingTime: '1 standard action',
     range: 'touch',
@@ -248,8 +248,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Healing Token',
     classLevels: { cleric: 2, druid: 2, hunter: 2, inquisitor: 2, paladin: 2, ranger: 2, shaman: 2, warpriest: 2 },
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
     range: 'touch',
@@ -263,7 +263,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Healing Warmth',
     classLevels: { alchemist: 4, cleric: 4, druid: 4, inquisitor: 4, psychic: 4 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'personal',
@@ -277,7 +277,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Heatstroke',
     classLevels: { druid: 3, 'sorcerer/wizard': 3 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a drop of sweat' },
     castingTime: '1 standard action',
@@ -293,7 +293,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hedging Weapons',
     classLevels: { antipaladin: 1, cleric: 1, inquisitor: 1, paladin: 1 },
-    school: 'abjuration',
+    school: 'Abjuration',
     descriptor: ['force'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
@@ -308,7 +308,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hellmouth Lash',
     classLevels: { bloodrager: 4, 'sorcerer/wizard': 4, witch: 4 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['acid, electricity, or fire (chosen at casting)'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -323,7 +323,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Helping Hand',
     classLevels: { cleric: 3, medium: 2, psychic: 3, spiritualist: 3 },
-    school: 'evocation',
+    school: 'Evocation',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
     range: '5 miles',
@@ -338,8 +338,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: "Hero's Defiance",
     classLevels: { paladin: 1 },
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     components: { verbal: true, somatic: false, material: false },
     castingTime: '1 immediate action',
     range: 'personal',
@@ -353,8 +353,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: "Heroes' Feast",
     classLevels: { bard: 6, cleric: 6, inquisitor: 6 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '10 minutes',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -369,7 +369,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Heroic Fortune',
     classLevels: { alchemist: 2, bard: 2, cleric: 2, paladin: 3 },
-    school: 'evocation',
+    school: 'Evocation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'diamond dust worth 100 gp', divine: true },
     castingTime: '1 standard action',
     range: 'touch',
@@ -383,7 +383,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hex Glyph',
     classLevels: { shaman: 3, witch: 3 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '10 minutes',
     range: 'touch',
@@ -397,7 +397,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hex Vulnerability',
     classLevels: { shaman: 1, witch: 1 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['curse'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a drop of your blood' },
     castingTime: '1 standard action',
@@ -412,7 +412,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hex Ward',
     classLevels: { inquisitor: 1, shaman: 1, witch: 1 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'touch',
@@ -426,8 +426,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hidden Blades',
     classLevels: { alchemist: 2, antipaladin: 2, bard: 2, inquisitor: 2, magus: 2, 'sorcerer/wizard': 2, summoner: 2 },
-    school: 'illusion',
-    subschool: 'glamer',
+    school: 'Illusion',
+    subschool: 'Glamer',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a shard of glass' },
     castingTime: '1 standard action',
     range: 'touch',
@@ -441,8 +441,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hidden Diplomacy',
     classLevels: { bard: 1, cleric: 1, inquisitor: 1, magus: 1, mesmerist: 1, psychic: 1 },
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['mind-affecting'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a bent coin' },
     castingTime: '1 standard action',
@@ -457,7 +457,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hidden Knowledge',
     classLevels: { bard: 2, medium: 2, mesmerist: 2, occultist: 2, psychic: 2, 'sorcerer/wizard': 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a drop of ink' },
     castingTime: '1 round',
     range: 'personal',
@@ -471,8 +471,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hidden Presence',
     classLevels: { bard: 2, inquisitor: 2, mesmerist: 2, psychic: 2, 'sorcerer/wizard': 2, witch: 2 },
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['mind-affecting'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'eye drops made with extract of poppy' },
     castingTime: '1 standard action',
@@ -487,7 +487,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hidden Speech',
     classLevels: { bard: 2, inquisitor: 3, medium: 2, mesmerist: 2, psychic: 2, witch: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['language-dependent'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a cipher written on parchment', divine: true },
     castingTime: '1 standard action',
@@ -502,7 +502,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hidden Spring',
     classLevels: { cleric: 1, druid: 1, ranger: 1, shaman: 1, witch: 1 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['water'],
     components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'Y-shaped wooden rod' },
     castingTime: '1 hour',
@@ -518,8 +518,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hide Bruises',
     classLevels: { antipaladin: 1, arcanist: 1, bard: 1, inquisitor: 1, mesmerist: 1, occultist: 1, psychic: 1, skald: 1, 'sorcerer/wizard': 1, witch: 1 },
-    school: 'illusion',
-    subschool: 'glamer',
+    school: 'Illusion',
+    subschool: 'Glamer',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a drop of blood' },
     castingTime: '1 standard action',
     range: 'touch',
@@ -533,8 +533,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hide Campsite',
     classLevels: { druid: 3, ranger: 2 },
-    school: 'illusion',
-    subschool: 'glamer',
+    school: 'Illusion',
+    subschool: 'Glamer',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a sprig of mistletoe, and a vial of quicksilver' },
     castingTime: '10 minutes',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -549,7 +549,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hide from Animals',
     classLevels: { druid: 1, ranger: 1, shaman: 1 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: false, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
     range: 'touch',
@@ -563,7 +563,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hide from Undead',
     classLevels: { cleric: 1, inquisitor: 1 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
     range: 'touch',
@@ -577,7 +577,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hide Weapon',
     classLevels: { antipaladin: 1, bloodrager: 1, inquisitor: 1, magus: 1, ranger: 1, 'sorcerer/wizard': 1 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'personal',
@@ -591,7 +591,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hobbling Bomb Admixture',
     classLevels: { alchemist: 4 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'personal',
@@ -605,7 +605,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Hold Portal',
     classLevels: { psychic: 1, 'sorcerer/wizard': 1 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: false, material: false },
     castingTime: '1 standard action',
     range: 'medium (100 ft. + 10 ft./level)',
@@ -619,7 +619,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Holy Aura',
     classLevels: { cleric: 8 },
-    school: 'abjuration',
+    school: 'Abjuration',
     descriptor: ['good'],
     components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'a tiny reliquary worth 500 gp' },
     castingTime: '1 standard action',
@@ -634,7 +634,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Holy Ice',
     classLevels: { cleric: 5 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['cold', 'good', 'water'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a flask of holy water or 5 pounds of powdered silver worth 25 gp' },
     castingTime: '1 standard action',
@@ -650,7 +650,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Holy Ice Weapon',
     classLevels: { cleric: 2, inquisitor: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['cold', 'good', 'water'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a flask of holy water, or 5 pounds of powdered silver worth 25 gp' },
     castingTime: '1 standard action',
@@ -666,8 +666,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Holy Javelin',
     classLevels: { cleric: 3, inquisitor: 3, paladin: 2 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     descriptor: ['good'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
@@ -683,7 +683,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Holy Shield',
     classLevels: { paladin: 2 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'personal',
@@ -697,7 +697,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Holy Sword',
     classLevels: { paladin: 4 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['good'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -712,7 +712,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Holy Whisper',
     classLevels: { paladin: 3 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['good'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -728,8 +728,8 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Horrific Doubles',
     classLevels: { bard: 4, bloodrager: 4, medium: 3, mesmerist: 4, psychic: 4, 'sorcerer/wizard': 4 },
-    school: 'illusion',
-    subschool: 'figment',
+    school: 'Illusion',
+    subschool: 'Figment',
     descriptor: ['mind-affecting', 'fear'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -744,7 +744,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
   {
     name: 'Horrifying Visage',
     classLevels: { bard: 3, cleric: 3, inquisitor: 3, magus: 3, psychic: 3, shaman: 3, 'sorcerer/wizard': 3, spiritualist: 3, witch: 3 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['emotion', 'fear', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a live spider' },
     castingTime: '1 standard action',

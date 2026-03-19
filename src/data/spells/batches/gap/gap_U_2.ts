@@ -13,7 +13,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
       sorcerer: 3,
       wizard: 3,
     },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['force'],
     components: {
       verbal: true,
@@ -41,7 +41,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
       inquisitor: 5,
       oracle: 5,
     },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['evil'],
     components: {
       verbal: true,
@@ -73,7 +73,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
       wizard: 1,
       witch: 1,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['evil'],
     components: {
       verbal: true,
@@ -103,7 +103,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
       wizard: 3,
       witch: 3,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['evil'],
     components: {
       verbal: true,
@@ -129,7 +129,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
       cleric: 5,
       oracle: 5,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['cold', 'evil', 'water'],
     components: {
       verbal: true,
@@ -156,7 +156,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
       cleric: 2,
       inquisitor: 2,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['cold', 'evil', 'water'],
     components: {
       verbal: true,
@@ -182,7 +182,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     classLevels: {
       antipaladin: 4,
     },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['evil'],
     components: {
       verbal: true,
@@ -213,8 +213,8 @@ export const GAP_SPELLS_U_2: Spell[] = [
       shaman: 3,
       warpriest: 3,
     },
-    school: 'conjuration',
-    subschool: 'healing',
+    school: 'Conjuration',
+    subschool: 'Healing',
     descriptor: ['water'],
     components: {
       verbal: true,
@@ -243,7 +243,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
       wizard: 3,
       witch: 3,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: {
       verbal: true,
       somatic: true,
@@ -268,7 +268,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
       wizard: 1,
       witch: 1,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: {
       verbal: true,
       somatic: true,
@@ -300,8 +300,8 @@ export const GAP_SPELLS_U_2: Spell[] = [
       wizard: 2,
       witch: 2,
     },
-    school: 'necromancy',
-    subschool: 'haunted',
+    school: 'Necromancy',
+    subschool: 'Haunted',
     descriptor: ['emotion', 'fear', 'mind-affecting'],
     components: {
       verbal: true,
@@ -330,7 +330,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
       wizard: 2,
       witch: 2,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['cold'],
     components: {
       verbal: true,
@@ -358,7 +358,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
       sorcerer: 1,
       wizard: 1,
     },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['light'],
     components: {
       verbal: true,
@@ -386,7 +386,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
       wizard: 6,
       witch: 6,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: {
       verbal: true,
       somatic: true,

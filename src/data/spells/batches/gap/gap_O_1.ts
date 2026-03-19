@@ -12,8 +12,8 @@ export const GAP_SPELLS_O_1: Spell[] = [
       paladin: 1,
       sorcerer_wizard: 0,
     },
-    school: 'illusion',
-    subschool: 'glamer',
+    school: 'Illusion',
+    subschool: 'Glamer',
     components: {
       verbal: true,
       somatic: false,
@@ -37,7 +37,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
       cleric_oracle: 3,
       paladin: 2,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['curse'],
     components: {
       verbal: true,
@@ -67,7 +67,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
       spiritualist: 3,
       witch: 4,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: {
       verbal: true,
       somatic: true,
@@ -96,7 +96,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
       spiritualist: 5,
       witch: 5,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: {
       verbal: true,
       somatic: true,
@@ -123,7 +123,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
       spiritualist: 6,
       witch: 7,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: {
       verbal: true,
       somatic: true,
@@ -150,8 +150,8 @@ export const GAP_SPELLS_O_1: Spell[] = [
       psychic: 2,
       sorcerer_wizard: 2,
     },
-    school: 'illusion',
-    subschool: 'phantasm',
+    school: 'Illusion',
+    subschool: 'Phantasm',
     components: {
       verbal: true,
       somatic: true,
@@ -181,8 +181,8 @@ export const GAP_SPELLS_O_1: Spell[] = [
       summoner_unchained: 1,
       witch: 1,
     },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: {
       verbal: true,
       somatic: true,
@@ -209,7 +209,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
       summoner: 3,
       summoner_unchained: 4,
     },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['earth', 'fire'],
     components: {
       verbal: true,
@@ -236,7 +236,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
       druid: 5,
       witch: 5,
     },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['curse'],
     components: {
       verbal: true,
@@ -265,8 +265,8 @@ export const GAP_SPELLS_O_1: Spell[] = [
       psychic: 2,
       sorcerer_wizard: 3,
     },
-    school: 'illusion',
-    subschool: 'phantasm',
+    school: 'Illusion',
+    subschool: 'Phantasm',
     descriptor: ['mind-affecting'],
     components: {
       verbal: true,
@@ -294,8 +294,8 @@ export const GAP_SPELLS_O_1: Spell[] = [
       psychic: 4,
       sorcerer_wizard: 5,
     },
-    school: 'illusion',
-    subschool: 'phantasm',
+    school: 'Illusion',
+    subschool: 'Phantasm',
     descriptor: ['mind-affecting'],
     components: {
       verbal: true,
@@ -322,8 +322,8 @@ export const GAP_SPELLS_O_1: Spell[] = [
       sorcerer_wizard: 1,
       witch: 1,
     },
-    school: 'illusion',
-    subschool: 'glamer',
+    school: 'Illusion',
+    subschool: 'Glamer',
     components: {
       verbal: true,
       somatic: true,

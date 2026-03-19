@@ -6,8 +6,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fable Tapestry',
     classLevels: { bard: 5 },
-    school: 'illusion',
-    subschool: 'shadow',
+    school: 'Illusion',
+    subschool: 'Shadow',
     descriptor: ['shadow'],
     components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'your family scarf' },
     castingTime: '1 round',
@@ -23,7 +23,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fabricate Disguise',
     classLevels: { alchemist: 1, antipaladin: 1, bard: 1, inquisitor: 1, psychic: 1, 'sorcerer/wizard': 1, witch: 1 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: false, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'personal',
@@ -37,8 +37,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Face of the Devourer',
     classLevels: { adept: 1, antipaladin: 1, 'cleric/oracle': 1, druid: 1, 'sorcerer/wizard': 1 },
-    school: 'transmutation',
-    subschool: 'polymorph',
+    school: 'Transmutation',
+    subschool: 'Polymorph',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'touch',
@@ -52,7 +52,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Faerie Fire',
     classLevels: { druid: 1, cleric: 1 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['light'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
@@ -68,7 +68,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fair Is Foul',
     classLevels: { antipaladin: 2, cleric: 3, shaman: 3, 'sorcerer/wizard': 4, spiritualist: 3, witch: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['curse'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'newt eye' },
     castingTime: '1 standard action',
@@ -83,8 +83,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fairy Ring Retreat',
     classLevels: { druid: 7, shaman: 7, witch: 7 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -99,7 +99,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fallback Strategy',
     classLevels: { 'cleric/oracle': 1, inquisitor: 1, paladin: 1, magus: 1 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
     range: 'personal',
@@ -113,8 +113,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'False Face',
     classLevels: { alchemist: 1, bard: 1, inquisitor: 1, mesmerist: 1, 'sorcerer/wizard': 1, witch: 1 },
-    school: 'transmutation',
-    subschool: 'polymorph',
+    school: 'Transmutation',
+    subschool: 'Polymorph',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a folded-paper mask' },
     castingTime: '1 standard action',
     range: 'personal',
@@ -128,8 +128,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'False Future',
     classLevels: { bard: 3, cleric: 4, medium: 3, mesmerist: 3, psychic: 4, shaman: 4, 'sorcerer/wizard': 5, spiritualist: 4, witch: 4 },
-    school: 'illusion',
-    subschool: 'glamer',
+    school: 'Illusion',
+    subschool: 'Glamer',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'crushed jade worth 100 gp' },
     castingTime: '1 standard action',
     range: 'touch',
@@ -143,8 +143,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'False Resurrection',
     classLevels: { cleric: 7, shaman: 8, witch: 8 },
-    school: 'conjuration',
-    subschool: 'calling',
+    school: 'Conjuration',
+    subschool: 'Calling',
     descriptor: ['chaotic', 'evil'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'diamond worth 10,000 gp', divine: true },
     castingTime: '1 minute',
@@ -159,8 +159,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Familiar Double',
     classLevels: { witch: 7 },
-    school: 'illusion',
-    subschool: 'shadow',
+    school: 'Illusion',
+    subschool: 'Shadow',
     descriptor: ['shadow'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a small replica of the caster worth 5 gp' },
     castingTime: '1 standard action',
@@ -176,8 +176,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Familiar Figment',
     classLevels: { 'sorcerer/wizard': 2, witch: 2 },
-    school: 'illusion',
-    subschool: 'figment',
+    school: 'Illusion',
+    subschool: 'Figment',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'touch',
@@ -191,7 +191,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Familiar Melding',
     classLevels: { shaman: 4, 'sorcerer/wizard': 4, witch: 4 },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'medium (100 ft. + 10 ft./level)',
@@ -205,7 +205,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fastidiousness',
     classLevels: { bard: 1, cleric: 1, mesmerist: 1, occultist: 1, paladin: 1, psychic: 1, 'sorcerer/wizard': 1 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'personal',
@@ -219,7 +219,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fear the Sun',
     classLevels: { antipaladin: 1, bloodrager: 1, cleric: 2, druid: 2, inquisitor: 2, occultist: 2, psychic: 2, shaman: 2, 'sorcerer/wizard': 2, witch: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a drow eyelash' },
     castingTime: '1 standard action',
     range: 'medium (100 ft. + 10 ft./level)',
@@ -233,8 +233,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fearsome Duplicate',
     classLevels: { bard: 3, inquisitor: 3, mesmerist: 3, psychic: 3, 'sorcerer/wizard': 3, witch: 3 },
-    school: 'illusion',
-    subschool: 'figment',
+    school: 'Illusion',
+    subschool: 'Figment',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'medium (100 ft. + 10 ft./level)',
@@ -249,7 +249,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Feast of Ashes',
     classLevels: { druid: 2, psychic: 2, witch: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['curse'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a pinch of ash' },
     castingTime: '1 standard action',
@@ -264,7 +264,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Feast On Fear',
     classLevels: { bard: 4, shaman: 5, 'sorcerer/wizard': 5, witch: 5 },
-    school: 'necromancy',
+    school: 'Necromancy',
     descriptor: ['emotion', 'fear', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -279,7 +279,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fester',
     classLevels: { inquisitor: 3, witch: 2 },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'rotted meat' },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -293,7 +293,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fester, Mass',
     classLevels: { inquisitor: 6, witch: 6 },
-    school: 'necromancy',
+    school: 'Necromancy',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'rotted meat' },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -307,8 +307,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fey Gate',
     classLevels: { bard: 6, cleric: 8, druid: 8, 'sorcerer/wizard': 8, summoner: 6, witch: 8 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -323,8 +323,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fiendish Wrath',
     classLevels: { alchemist: 3, bard: 3, bloodrager: 3, mesmerist: 3, psychic: 4, 'sorcerer/wizard': 4, summoner: 3, witch: 4 },
-    school: 'enchantment',
-    subschool: 'compulsion',
+    school: 'Enchantment',
+    subschool: 'Compulsion',
     descriptor: ['emotion', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -339,7 +339,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fiery Runes',
     classLevels: { alchemist: 2, bloodrager: 2, druid: 2, magus: 2, 'sorcerer/wizard': 2 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -354,8 +354,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fiery Shuriken',
     classLevels: { 'sorcerer/wizard': 2 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a pinch of sulfur and a single shuriken worth 2 sp' },
     castingTime: '1 standard action',
@@ -371,7 +371,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Final Sacrifice',
     classLevels: { antipaladin: 3, bloodrager: 2, cleric: 3, shaman: 3, 'sorcerer/wizard': 3, summoner: 2, witch: 4 },
-    school: 'evocation',
+    school: 'Evocation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -385,7 +385,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Find Fault',
     classLevels: { bard: 3, bloodrager: 3, inquisitor: 3, magus: 3, medium: 3, oracle: 3, psychic: 3, shaman: 3, 'sorcerer/wizard': 3, witch: 3 },
-    school: 'divination',
+    school: 'Divination',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
     range: 'medium (100 ft. + 10 ft./level)',
@@ -399,7 +399,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Find Quarry',
     classLevels: { inquisitor: 4, ranger: 4 },
-    school: 'divination',
+    school: 'Divination',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
     range: 'personal',
@@ -413,7 +413,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fire Breath',
     classLevels: { alchemist: 2, bloodrager: 2, magus: 2, 'sorcerer/wizard': 2 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'chili pepper' },
     castingTime: '1 standard action',
@@ -429,7 +429,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fire of Entanglement',
     classLevels: { paladin: 2 },
-    school: 'evocation',
+    school: 'Evocation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 swift action',
     range: 'special (must be used with smite evil ability)',
@@ -443,7 +443,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fire of Judgment',
     classLevels: { paladin: 3 },
-    school: 'evocation',
+    school: 'Evocation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 swift action',
     range: 'special (see description)',
@@ -457,7 +457,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fire of Vengeance',
     classLevels: { paladin: 4 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 swift action',
@@ -472,8 +472,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fire Seeds',
     classLevels: { druid: 6, shaman: 6 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'acorns or holly berries' },
     castingTime: '1 standard action',
@@ -488,7 +488,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fire Snake',
     classLevels: { druid: 5, magus: 5, 'sorcerer/wizard': 5 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'snake scale' },
     castingTime: '1 standard action',
@@ -504,7 +504,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fire Sneeze',
     classLevels: { alchemist: 2, druid: 2, 'sorcerer/wizard': 2 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['air', 'fire'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'hot pepper soaked in oil' },
     castingTime: '1 standard action',
@@ -519,7 +519,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fire Storm',
     classLevels: { cleric: 8, oracle: 8, druid: 7, shaman: 8 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -535,7 +535,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fire Trail',
     classLevels: { alchemist: 3, bloodrager: 3, magus: 3, 'sorcerer/wizard': 3 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -551,7 +551,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Fire Trap',
     classLevels: { druid: 2, 'sorcerer/wizard': 4 },
-    school: 'abjuration',
+    school: 'Abjuration',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'gold dust worth 25 gp' },
     castingTime: '10 minutes',
@@ -566,7 +566,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: "Fire's Friend",
     classLevels: { alchemist: 2, bloodrager: 2, magus: 2 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a flame of any size' },
     castingTime: '1 standard action',
@@ -581,7 +581,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Firebelly',
     classLevels: { alchemist: 1, cleric: 1, oracle: 1, druid: 1, paladin: 1 },
-    school: 'abjuration',
+    school: 'Abjuration',
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
     range: 'personal',
@@ -595,7 +595,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Firebrand',
     classLevels: { 'sorcerer/wizard': 7 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -610,7 +610,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Firefall',
     classLevels: { bloodrager: 4, magus: 4, 'sorcerer/wizard': 4 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'one fire source' },
     castingTime: '1 standard action',
@@ -625,7 +625,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Firestream',
     classLevels: { bloodrager: 3, magus: 3, 'sorcerer/wizard': 3 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -641,7 +641,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: "Firewalker's Meditation",
     classLevels: { cleric: 4, druid: 4, paladin: 3, shaman: 4, wizard: 4 },
-    school: 'abjuration',
+    school: 'Abjuration',
     descriptor: ['meditative'],
     components: { verbal: true, somatic: false, material: true, materialComponents: 'soothing incense worth 400 gp' },
     castingTime: '1 hour',
@@ -656,7 +656,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Flame Blade',
     classLevels: { druid: 2, shaman: 2 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: true, material: false, divine: true },
     castingTime: '1 standard action',
@@ -672,8 +672,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Flame Steed',
     classLevels: { bloodrager: 3, cleric: 4, druid: 4, paladin: 3, shaman: 4, witch: 4 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '10 minutes',
     range: '0 feet',
@@ -688,7 +688,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Flames of the Faithful',
     classLevels: { inquisitor: 2 },
-    school: 'transmutation',
+    school: 'Transmutation',
     descriptor: ['fire'],
     components: { verbal: true, somatic: false, material: false },
     castingTime: '1 standard action',
@@ -703,7 +703,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Flare',
     classLevels: { bard: 0, druid: 0, magus: 0, psychic: 0, 'sorcerer/wizard': 0 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['light'],
     components: { verbal: true, somatic: false, material: false },
     castingTime: '1 standard action',
@@ -719,7 +719,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Flare Burst',
     classLevels: { bard: 1, bloodrager: 1, druid: 1, magus: 1, psychic: 1, 'sorcerer/wizard': 1 },
-    school: 'evocation',
+    school: 'Evocation',
     descriptor: ['light'],
     components: { verbal: true, somatic: false, material: false },
     castingTime: '1 standard action',
@@ -735,7 +735,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Flash Fire',
     classLevels: { 'sorcerer/wizard': 3, witch: 3 },
-    school: 'transmutation',
+    school: 'Transmutation',
     components: { verbal: true, somatic: true, material: true, materialComponents: 'a pinch of powdered fool\'s gold' },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -749,8 +749,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Flash Flood',
     classLevels: { druid: 6, shaman: 6, 'sorcerer/wizard': 6 },
-    school: 'conjuration',
-    subschool: 'creation',
+    school: 'Conjuration',
+    subschool: 'Creation',
     descriptor: ['water'],
     components: { verbal: true, somatic: true, material: true, materialComponents: 'water-smoothed pebble' },
     castingTime: '1 standard action',
@@ -766,8 +766,8 @@ export const GAP_SPELLS_F_1: Spell[] = [
   {
     name: 'Flash Forward',
     classLevels: { alchemist: 4, antipaladin: 4, bard: 4, bloodrager: 4, inquisitor: 4, magus: 4, medium: 4, occultist: 4, paladin: 4, psychic: 5, 'sorcerer/wizard': 5 },
-    school: 'conjuration',
-    subschool: 'teleportation',
+    school: 'Conjuration',
+    subschool: 'Teleportation',
     components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'gear or clockwork bit' },
     castingTime: '1 standard action',
     range: 'personal',
