@@ -25,25 +25,125 @@ Last clean verified state:
 
 ## IMMEDIATE NEXT STEPS
 
+**Current:** 1,969 feats. Estimated ~500–600 more across ~50 remaining books.
+
 Use **scout + scraper** pattern for books with 25+ feats:
 
-1. Run scout agent to build numbered manifest at `scripts/manifests/<book>-manifest.md`
-2. Split manifest into named ranges (1–25, 26–50, 51+) and launch scraper agents in parallel
+1. Run scout agent → writes numbered manifest at `scripts/manifests/<book>-manifest.md`
+2. Split manifest into named ranges (1–25, 26–50, 51+) → launch scraper agents in parallel
 3. Each scraper writes its own part file; delete manifests after all parts complete
 
-Launch scouts in parallel:
+**Next batch to launch:**
 
-**1. Villain Codex** → `src/data/feats/villainCodexFeats.ts` (export `VILLAIN_CODEX_FEATS`)
-**2. Taldor, Fallen Empire** → `src/data/feats/taldorFeats.ts` (export `TALDOR_FEATS`)
-**3. Distant Shores** → `src/data/feats/distantShoresFeats.ts` (export `DISTANT_SHORES_FEATS`)
+- Villain Codex (~26 feats, scout + 2 agents)
+- Planar Adventures (~48 remaining feats, scout + 2 agents)
+- Wilderness Origins (~28 feats, scout + 2 agents)
 
-### Source Books NOT YET COVERED (priority order)
+---
 
-1. Villain Codex ← **NEXT** (~20 feats, single agent)
-2. Taldor, Fallen Empire ← **NEXT** (~20 feats, single agent)
-3. Distant Shores ← **NEXT** (~15 feats, single agent)
-4. Planar Adventures (~57 feats, 3 agents)
-5. Occult Mysteries, Magical Marketplace, and other smaller books
+## REMAINING BOOKS — Full Research List
+
+_Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
+
+### Tier 1 — Large (25+ feats) — scout + multi-agent
+
+| Book                   | Total | Have | Remaining | File pattern                                 |
+| ---------------------- | ----- | ---- | --------- | -------------------------------------------- |
+| Monster Codex          | ~79   | 29   | ~50       | `monsterCodexFeats2.ts` / `3.ts`             |
+| Planar Adventures      | ~57   | 9    | ~48       | `planarAdventuresFeats.ts` / `2.ts`          |
+| Villain Codex          | ~26   | 0    | ~26       | `villainCodexFeats.ts` / `2.ts`              |
+| Wilderness Origins     | ~28   | 0    | ~28       | `wildernessOriginsFeats.ts` / `2.ts`         |
+| Heroes from the Fringe | ~27   | 0    | ~27       | `heroesFromFringeFeats.ts` / `2.ts`          |
+| Ultimate Campaign      | ~28   | 0    | ~28       | `ultimateCampaignFeats.ts` / `2.ts`          |
+| Inner Sea World Guide  | ~38   | 1    | ~37       | `iswgFeats2.ts` (careful dedup vs PRPG 2008) |
+
+### Tier 2 — Medium (10–24 feats) — single agent each
+
+**Player Companion:**
+
+| Book                          | Feats | Have | File                           |
+| ----------------------------- | ----- | ---- | ------------------------------ |
+| Blood of the Beast            | ~22   | 0    | `bloodOfBeastFeats.ts`         |
+| Quests and Campaigns          | ~22   | 0    | `questsCampaignsFeats.ts`      |
+| Heroes of Golarion            | ~21   | 0    | `heroesOfGolarionFeats.ts`     |
+| Inner Sea Combat              | ~24   | 7    | `innerSeaCombatFeats.ts`       |
+| Pathfinder Unchained          | ~22   | 1    | `pathfinderUnchainedFeats.ts`  |
+| Heroes of the High Court      | ~19   | 0    | `heroesHighCourtFeats.ts`      |
+| People of the Wastes          | ~17   | 0    | `peopleWastesFeats.ts`         |
+| Elemental Master's Handbook   | ~17   | 0    | `elementalMastersFeats.ts`     |
+| Legacy of the First World     | ~17   | 0    | `legacyFirstWorldFeats.ts`     |
+| Legacy of Dragons             | ~17   | 0    | `legacyDragonsFeats.ts`        |
+| Chronicle of Legends          | ~17   | 0    | `chronicleLegendsFeats.ts`     |
+| Monster Summoner's Handbook   | ~16   | 0    | `monsterSummonerFeats.ts`      |
+| Agents of Evil                | ~16   | 0    | `agentsEvilFeats.ts`           |
+| Blood of the Ancients         | ~16   | 0    | `bloodAncientFeats.ts`         |
+| Psychic Anthology             | ~15   | 0    | `psychicAnthologyFeats.ts`     |
+| Potions and Poisons           | ~15   | 0    | `potionsPoisonsFeats.ts`       |
+| Kobolds of Golarion           | ~15   | 2    | `koboldGolarionFeats.ts`       |
+| Giant Hunter's Handbook       | ~15   | 1    | `giantHunterFeats.ts`          |
+| Advanced Class Origins        | ~14   | 0    | `advancedClassOriginsFeats.ts` |
+| Dragonslayer's Handbook       | ~14   | 0    | `dragonslayerFeats.ts`         |
+| Demons Revisited              | ~14   | 0    | `demonsRevisitedFeats.ts`      |
+| Halflings of Golarion         | ~13   | 0    | `halflingGolarionFeats.ts`     |
+| Animal Archive                | ~13   | 0    | `animalArchiveFeats.ts`        |
+| Spymaster's Handbook          | ~13   | 0    | `spymasterFeats.ts`            |
+| Book of the Damned (2017)     | ~12   | 1    | `bookDamnedFeats.ts`           |
+| Occult Origins                | ~12   | 1    | `occultOriginsFeats.ts`        |
+| Cheliax, Empire of Devils     | ~12   | 0    | `cheliaxFeats.ts`              |
+| Path of the Hellknight        | ~12   | 0    | `hellknightFeats.ts`           |
+| Inner Sea Monster Codex       | ~13   | 0    | `innerSeaMonsterCodexFeats.ts` |
+| Distant Realms                | ~12   | 0    | `distantRealmsFeats.ts`        |
+| Aquatic Adventures            | ~16   | 0    | `aquaticAdventuresFeats.ts`    |
+| Arcane Anthology              | ~10   | 0    | `arcaneAnthologyFeats.ts`      |
+| Goblins of Golarion           | ~10   | 0    | `goblinGolarionFeats.ts`       |
+| Gnomes of Golarion            | ~13   | 0    | `gnomeGolarionFeats.ts`        |
+| Technology Guide              | ~10   | 0    | `technologyGuideFeats.ts`      |
+| Orcs of Golarion              | ~11   | 4    | `orcGolarionFeats.ts`          |
+| Osirion, Land of the Pharaohs | ~10   | 0    | `osirionFeats.ts`              |
+
+### Tier 3 — Small (1–9 feats) — low priority, batch multiple per file
+
+| Book                       | Feats    | Notes                                   |
+| -------------------------- | -------- | --------------------------------------- |
+| Blood of the Coven         | ~9       |                                         |
+| Dungeoneer's Handbook      | ~9       |                                         |
+| Black Markets              | ~9       |                                         |
+| Bastards of Golarion       | ~8       |                                         |
+| Heroes of the Darklands    | ~8       | Have 2                                  |
+| Rival Guide                | ~8       | Have 2                                  |
+| People of the River        | ~7       |                                         |
+| Demon Hunter's Handbook    | ~7       |                                         |
+| Undead Slayer's Handbook   | ~7       |                                         |
+| Champions of Balance       | ~7       | Have 4                                  |
+| People of the Stars        | ~7       |                                         |
+| Taldor, Echoes of Glory    | ~8       |                                         |
+| People of the Sands        | ~6       |                                         |
+| Distant Shores             | ~6       |                                         |
+| Andoran, Spirit of Liberty | ~4       |                                         |
+| Inner Sea Magic            | ~7       | Have 1                                  |
+| Inner Sea Intrigue         | ~6       |                                         |
+| Occult Mysteries           | ~4       | Have 1                                  |
+| Magical Marketplace        | ~5       |                                         |
+| The Harrow Handbook        | ~5       |                                         |
+| Dwarves of Golarion        | ~5       |                                         |
+| People of the North        | ~3       |                                         |
+| Seekers of Secrets         | ~3       |                                         |
+| Various AP Player's Guides | 3–8 each | Rise of Runelords, Crimson Throne, etc. |
+
+### Adventure Path volumes (feats worth grabbing)
+
+| Book                                       | Feats    |
+| ------------------------------------------ | -------- |
+| Pathfinder #91: Battle of Bloodmarch Hills | ~14      |
+| Pathfinder #132: The Six-Legend Soul       | ~11      |
+| Pathfinder #139: The Dead Road             | ~10      |
+| Pathfinder #131: The Reaper's Right Hand   | ~8       |
+| Legacy of Fire Player's Guide              | ~8       |
+| Rise of the Runelords Player's Guide       | ~6       |
+| Curse of the Crimson Throne Player's Guide | ~5       |
+| Various others                             | 1–4 each |
+
+---
 
 ### LESSON LEARNED — obscure books + URL guessing = token waste
 
