@@ -18,20 +18,6 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 | 9    | Testing                      | **COMPLETE** — 657 tests, 35 suites, all thresholds passing (PR #6)                                                                                                                         |
 | 10   | CI/CD (GitHub Actions + EAS) | **COMPLETE** — `ci.yml`, `build-staging.yml`, `build-production.yml`                                                                                                                        |
 
-### Housekeeping — orphaned Windows directories to delete manually
-
-These worktree directories are no longer registered with git and all their code is safely merged into main. Delete from Windows Explorer or cmd:
-
-- `ds-animalcompanions-scraping`
-- `ds-coverage-fix`
-- `ds-deities-scraping`
-- `ds-domains-scraping`
-- `ds-ragepowers-scraping`
-- `ds-roguetalents-scraping`
-- `ds-scraping-check`
-- `ds-seed-classchoicedefs`
-- `ds-template-scraping`
-
 ### Currently in flight
 
 | Work                                             | Plan                                      | Status                          |
