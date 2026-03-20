@@ -103,24 +103,24 @@ Launch these 3 agents in parallel:
 
 ## Completed Trait Files (12 files, 458 total)
 
-| File                      | Export                   | Count | Source                                                                |
-| ------------------------- | ------------------------ | ----- | --------------------------------------------------------------------- |
-| `core.ts`                 | APG_TRAITS               | ~54   | APG core                                                              |
-| `apgTraits-extra.ts`      | APG_EXTRA_TRAITS         | 16    | APG remainder                                                         |
-| `ucTraits.ts`             | UC_TRAITS                | ~19   | UC                                                                    |
-| `ucTraits-extra.ts`       | UC_EXTRA_TRAITS          | ~61   | UC remainder                                                          |
-| `argRaceTraits.ts`        | ARG_TRAITS               | 45    | ARG core + featured races                                             |
-| `argRaceTraits2.ts`       | ARG_EXTRA_RACE_TRAITS_2  | 43    | ARG uncommon races                                                    |
-| `religionTraits.ts`       | FAITH_TRAITS             | 45    | Faiths books (19 deities)                                             |
-| `religionTraits-extra.ts` | RELIGION_EXTRA_TRAITS    | ~20   | Religion expansion                                                    |
-| `innerSea.ts`             | INNER_SEA_TRAITS         | 48    | Inner Sea regional/campaign                                           |
-| `miscTraits.ts`           | MISC_TRAITS              | 48    | AP campaign, equipment, blood of series                               |
-| `religionTraits2.ts`      | RELIGION_TRAITS_2        | 55    | Gorum, Achaekek, Brigh, Groetus, Milani, Sivanah + extra deity traits |
-| `bloodOfTheMoonTraits.ts` | BLOOD_OF_THE_MOON_TRAITS | ~12   | Blood of the Moon race traits                                         |
+| File                  | Export                  | Count | Source                                                                |
+| --------------------- | ----------------------- | ----- | --------------------------------------------------------------------- |
+| `core.ts`             | APG_TRAITS              | ~54   | APG core                                                              |
+| `apgTraits-extra.ts`  | APG_EXTRA_TRAITS        | 16    | APG remainder                                                         |
+| `ultimateCampaign.ts` | UC_TRAITS               | ~19   | UC                                                                    |
+| `ucTraits-extra.ts`   | UC_EXTRA_TRAITS         | ~61   | UC remainder                                                          |
+| `advancedRace.ts`     | ARG_TRAITS              | 45    | ARG core + featured races                                             |
+| `argRaceTraits.ts`    | ARG_EXTRA_RACE_TRAITS   | 45    | ARG core + featured races (extra)                                     |
+| `argRaceTraits2.ts`   | ARG_EXTRA_RACE_TRAITS_2 | 43    | ARG uncommon races                                                    |
+| `religionTraits.ts`   | RELIGION_EXTRA_TRAITS   | ~20   | Religion expansion                                                    |
+| `faiths.ts`           | FAITH_TRAITS            | 45    | Faiths books (19 deities)                                             |
+| `innerSea.ts`         | INNER_SEA_TRAITS        | 48    | Inner Sea regional/campaign                                           |
+| `miscTraits.ts`       | MISC_TRAITS             | 48    | AP campaign, equipment, Blood of the Moon race traits                 |
+| `religionTraits2.ts`  | RELIGION_TRAITS_2       | 55    | Gorum, Achaekek, Brigh, Groetus, Milani, Sivanah + extra deity traits |
 
 **Index files wired:**
 
-- `src/data/feats/index.ts` — all 37 feat files imported and spread into ALL_FEATS
+- `src/data/feats/index.ts` — all 43 feat files imported and spread into ALL_FEATS
 - `src/data/traits/index.ts` — all 12 trait files imported and spread into ALL_TRAITS
 
 ---
