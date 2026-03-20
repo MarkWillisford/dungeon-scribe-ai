@@ -47,6 +47,12 @@ import { MONSTER_HUNTER_FEATS } from './monsterHunterFeats';
 import { PLANE_HOPPER_FEATS } from './planeHopperFeats';
 import { PATHS_RIGHTEOUS_FEATS } from './pathsRighteousFeats';
 import { DIVINE_ANTHOLOGY_FEATS } from './divineAnthologyFeats';
+import { MARTIAL_ARTS_FEATS } from './martialArtsFeats';
+import { MARTIAL_ARTS_FEATS_2 } from './martialArtsFeats2';
+import { MARTIAL_ARTS_FEATS_3 } from './martialArtsFeats3';
+import { ADVENTURERS_GUIDE_FEATS } from './adventurersGuideFeats';
+import { ADVENTURERS_GUIDE_FEATS_2 } from './adventurersGuideFeats2';
+import { ADVENTURERS_GUIDE_FEATS_3 } from './adventurersGuideFeats3';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -94,6 +100,12 @@ export { MONSTER_HUNTER_FEATS } from './monsterHunterFeats';
 export { PLANE_HOPPER_FEATS } from './planeHopperFeats';
 export { PATHS_RIGHTEOUS_FEATS } from './pathsRighteousFeats';
 export { DIVINE_ANTHOLOGY_FEATS } from './divineAnthologyFeats';
+export { MARTIAL_ARTS_FEATS } from './martialArtsFeats';
+export { MARTIAL_ARTS_FEATS_2 } from './martialArtsFeats2';
+export { MARTIAL_ARTS_FEATS_3 } from './martialArtsFeats3';
+export { ADVENTURERS_GUIDE_FEATS } from './adventurersGuideFeats';
+export { ADVENTURERS_GUIDE_FEATS_2 } from './adventurersGuideFeats2';
+export { ADVENTURERS_GUIDE_FEATS_3 } from './adventurersGuideFeats3';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -142,6 +154,12 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...PLANE_HOPPER_FEATS,
   ...PATHS_RIGHTEOUS_FEATS,
   ...DIVINE_ANTHOLOGY_FEATS,
+  ...MARTIAL_ARTS_FEATS,
+  ...MARTIAL_ARTS_FEATS_2,
+  ...MARTIAL_ARTS_FEATS_3,
+  ...ADVENTURERS_GUIDE_FEATS,
+  ...ADVENTURERS_GUIDE_FEATS_2,
+  ...ADVENTURERS_GUIDE_FEATS_3,
 ];
 
 export function initializeFeatRegistry(): void {
