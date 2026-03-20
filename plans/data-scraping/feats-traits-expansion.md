@@ -8,37 +8,34 @@ The engine (types, services, pipeline, index files) is already built. This is a 
 
 ---
 
-## CURRENT STATUS (as of 2026-03-19)
+## CURRENT STATUS (as of 2026-03-20)
 
-### Progress: 1,785 feats across 43 files
+### Progress: 1,845 feats across 46 files
 
-**Verified totals: 1,785 feats (43 files), 458 traits (12 files)**
+**Verified totals: 1,845 feats (46 files), 458 traits (12 files)**
 
 Last clean verified state:
 
-- `npx tsx scripts/verify-feats.ts` → 1,785 feats, 0 duplicate IDs, 0 validation errors
+- `npx tsx scripts/verify-feats.ts` → 1,845 feats, 0 new duplicate IDs, 0 validation errors
 - `npx tsx scripts/verify-traits.ts` → 458 traits, 0 duplicate IDs, 0 validation errors
 - `npm run typecheck` → clean (pre-existing errors in umagic-extra.ts only — unrelated, pre-existing)
-- `npm test` → 657/657 tests pass (35 suites)
+- `npm test` → 690/690 tests pass (36 suites)
 
 ---
 
 ## IMMEDIATE NEXT STEPS
 
-Launch these 3 agents in parallel:
+Launch these agents in parallel:
 
-**1. Plane-Hopper's Handbook** → `src/data/feats/planeHopperFeats.ts` (export `PLANE_HOPPER_FEATS`)
-**2. Paths of the Righteous** → `src/data/feats/pathsRighteousFeats.ts` (export `PATHS_RIGHTEOUS_FEATS`)
-**3. Divine Anthology** → `src/data/feats/divineAnthologyFeats.ts` (export `DIVINE_ANTHOLOGY_FEATS`)
+**1. Villain Codex** → `src/data/feats/villainCodexFeats.ts` (export `VILLAIN_CODEX_FEATS`)
+**2. Taldor, Fallen Empire** → `src/data/feats/taldorFeats.ts` (export `TALDOR_FEATS`)
+**3. Distant Shores** → `src/data/feats/distantShoresFeats.ts` (export `DISTANT_SHORES_FEATS`)
 
 ### Source Books NOT YET COVERED (priority order)
 
-1. Plane-Hopper's Handbook ← **NEXT**
-2. Paths of the Righteous ← **NEXT**
-3. Divine Anthology ← **NEXT**
-4. Villain Codex
-5. Taldor, Fallen Empire
-6. Distant Shores
+1. Villain Codex ← **NEXT**
+2. Taldor, Fallen Empire ← **NEXT**
+3. Distant Shores ← **NEXT**
 
 ### LESSON LEARNED — obscure books + URL guessing = token waste
 
@@ -100,6 +97,9 @@ Launch these 3 agents in parallel:
 | `hauntedHeroesFeats.ts`   | HAUNTED_HEROES_FEATS    | —     | Added post-plan                                                                |
 | `healerFeats.ts`          | HEALER_FEATS            | —     | Added post-plan                                                                |
 | `monsterHunterFeats.ts`   | MONSTER_HUNTER_FEATS    | —     | Added post-plan                                                                |
+| `planeHopperFeats.ts`     | PLANE_HOPPER_FEATS      | 38    | Plane-Hopper's Handbook                                                        |
+| `pathsRighteousFeats.ts`  | PATHS_RIGHTEOUS_FEATS   | 13    | Paths of the Righteous                                                         |
+| `divineAnthologyFeats.ts` | DIVINE_ANTHOLOGY_FEATS  | 9     | Divine Anthology                                                               |
 
 ## Completed Trait Files (12 files, 458 total)
 
