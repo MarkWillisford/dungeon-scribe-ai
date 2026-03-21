@@ -53,6 +53,10 @@ import { MARTIAL_ARTS_FEATS_3 } from './martialArtsFeats3';
 import { ADVENTURERS_GUIDE_FEATS } from './adventurersGuideFeats';
 import { ADVENTURERS_GUIDE_FEATS_2 } from './adventurersGuideFeats2';
 import { ADVENTURERS_GUIDE_FEATS_3 } from './adventurersGuideFeats3';
+import { VILLAIN_CODEX_FEATS } from './villainCodexFeats';
+import { PLANAR_ADVENTURES_FEATS } from './planarAdventuresFeats';
+import { PLANAR_ADVENTURES_FEATS_2 } from './planarAdventuresFeats2';
+import { WILDERNESS_ORIGINS_FEATS } from './wildernessOriginsFeats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -106,6 +110,10 @@ export { MARTIAL_ARTS_FEATS_3 } from './martialArtsFeats3';
 export { ADVENTURERS_GUIDE_FEATS } from './adventurersGuideFeats';
 export { ADVENTURERS_GUIDE_FEATS_2 } from './adventurersGuideFeats2';
 export { ADVENTURERS_GUIDE_FEATS_3 } from './adventurersGuideFeats3';
+export { VILLAIN_CODEX_FEATS } from './villainCodexFeats';
+export { PLANAR_ADVENTURES_FEATS } from './planarAdventuresFeats';
+export { PLANAR_ADVENTURES_FEATS_2 } from './planarAdventuresFeats2';
+export { WILDERNESS_ORIGINS_FEATS } from './wildernessOriginsFeats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -160,6 +168,10 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...ADVENTURERS_GUIDE_FEATS,
   ...ADVENTURERS_GUIDE_FEATS_2,
   ...ADVENTURERS_GUIDE_FEATS_3,
+  ...VILLAIN_CODEX_FEATS,
+  ...PLANAR_ADVENTURES_FEATS,
+  ...PLANAR_ADVENTURES_FEATS_2,
+  ...WILDERNESS_ORIGINS_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {

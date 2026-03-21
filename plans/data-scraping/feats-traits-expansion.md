@@ -25,7 +25,7 @@ Last clean verified state:
 
 ## IMMEDIATE NEXT STEPS
 
-**Current:** 1,969 feats. Estimated ~500–600 more across ~50 remaining books.
+**Current:** 2,064 feats. Estimated ~400–500 more across ~45 remaining books.
 
 Use **scout + scraper** pattern for books with 25+ feats:
 
@@ -35,9 +35,9 @@ Use **scout + scraper** pattern for books with 25+ feats:
 
 **Next batch to launch:**
 
-- Villain Codex (~26 feats, scout + 2 agents)
-- Planar Adventures (~48 remaining feats, scout + 2 agents)
-- Wilderness Origins (~28 feats, scout + 2 agents)
+- Heroes from the Fringe (~27 feats, scout + 2 agents)
+- Ultimate Campaign (~28 feats, scout + 2 agents)
+- Monster Codex part 2 (~50 remaining feats, scout + 2 agents)
 
 ---
 
@@ -47,15 +47,15 @@ _Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
 
 ### Tier 1 — Large (25+ feats) — scout + multi-agent
 
-| Book                   | Total | Have | Remaining | File pattern                                 |
-| ---------------------- | ----- | ---- | --------- | -------------------------------------------- |
-| Monster Codex          | ~79   | 29   | ~50       | `monsterCodexFeats2.ts` / `3.ts`             |
-| Planar Adventures      | ~57   | 9    | ~48       | `planarAdventuresFeats.ts` / `2.ts`          |
-| Villain Codex          | ~26   | 0    | ~26       | `villainCodexFeats.ts` / `2.ts`              |
-| Wilderness Origins     | ~28   | 0    | ~28       | `wildernessOriginsFeats.ts` / `2.ts`         |
-| Heroes from the Fringe | ~27   | 0    | ~27       | `heroesFromFringeFeats.ts` / `2.ts`          |
-| Ultimate Campaign      | ~28   | 0    | ~28       | `ultimateCampaignFeats.ts` / `2.ts`          |
-| Inner Sea World Guide  | ~38   | 1    | ~37       | `iswgFeats2.ts` (careful dedup vs PRPG 2008) |
+| Book                   | Total | Have | Remaining | File pattern                                  |
+| ---------------------- | ----- | ---- | --------- | --------------------------------------------- |
+| Monster Codex          | ~79   | 29   | ~50       | `monsterCodexFeats2.ts` / `3.ts`              |
+| Planar Adventures      | ~57   | 48   | 0         | ✅ DONE — `planarAdventuresFeats.ts` / `2.ts` |
+| Villain Codex          | ~26   | 26   | 0         | ✅ DONE — `villainCodexFeats.ts`              |
+| Wilderness Origins     | ~28   | 28   | 0         | ✅ DONE — `wildernessOriginsFeats.ts`         |
+| Heroes from the Fringe | ~27   | 0    | ~27       | `heroesFromFringeFeats.ts` / `2.ts`           |
+| Ultimate Campaign      | ~28   | 0    | ~28       | `ultimateCampaignFeats.ts` / `2.ts`           |
+| Inner Sea World Guide  | ~38   | 1    | ~37       | `iswgFeats2.ts` (careful dedup vs PRPG 2008)  |
 
 ### Tier 2 — Medium (10–24 feats) — single agent each
 
@@ -158,7 +158,7 @@ _Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
 
 ---
 
-## Completed Feat Files (52 files, 1,969 total)
+## Completed Feat Files (56 files, 2,064 total)
 
 | File                        | Export                    | Count | Source                                                                         |
 | --------------------------- | ------------------------- | ----- | ------------------------------------------------------------------------------ |
@@ -214,6 +214,10 @@ _Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
 | `adventurersGuideFeats.ts`  | ADVENTURERS_GUIDE_FEATS   | 25    | Adventurer's Guide part 1                                                      |
 | `adventurersGuideFeats2.ts` | ADVENTURERS_GUIDE_FEATS_2 | 25    | Adventurer's Guide part 2                                                      |
 | `adventurersGuideFeats3.ts` | ADVENTURERS_GUIDE_FEATS_3 | 14    | Adventurer's Guide part 3                                                      |
+| `villainCodexFeats.ts`      | VILLAIN_CODEX_FEATS       | 26    | Villain Codex                                                                  |
+| `planarAdventuresFeats.ts`  | PLANAR_ADVENTURES_FEATS   | 18    | Planar Adventures part 1 (7 reprints removed)                                  |
+| `planarAdventuresFeats2.ts` | PLANAR_ADVENTURES_FEATS_2 | 23    | Planar Adventures part 2                                                       |
+| `wildernessOriginsFeats.ts` | WILDERNESS_ORIGINS_FEATS  | 28    | Wilderness Origins                                                             |
 
 ## Completed Trait Files (12 files, 458 total)
 
