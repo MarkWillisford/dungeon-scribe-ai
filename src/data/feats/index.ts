@@ -57,6 +57,12 @@ import { VILLAIN_CODEX_FEATS } from './villainCodexFeats';
 import { PLANAR_ADVENTURES_FEATS } from './planarAdventuresFeats';
 import { PLANAR_ADVENTURES_FEATS_2 } from './planarAdventuresFeats2';
 import { WILDERNESS_ORIGINS_FEATS } from './wildernessOriginsFeats';
+import { MONSTER_CODEX_FEATS } from './monsterCodexFeats';
+import { MONSTER_CODEX_FEATS_2 } from './monsterCodexFeats2';
+import { HEROES_FROM_FRINGE_FEATS } from './heroesFromFringeFeats';
+import { ULTIMATE_CAMPAIGN_FEATS } from './ultimateCampaignFeats';
+import { ISWG_FEATS } from './iswgFeats';
+import { ISWG_FEATS_2 } from './iswgFeats2';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -114,6 +120,12 @@ export { VILLAIN_CODEX_FEATS } from './villainCodexFeats';
 export { PLANAR_ADVENTURES_FEATS } from './planarAdventuresFeats';
 export { PLANAR_ADVENTURES_FEATS_2 } from './planarAdventuresFeats2';
 export { WILDERNESS_ORIGINS_FEATS } from './wildernessOriginsFeats';
+export { MONSTER_CODEX_FEATS } from './monsterCodexFeats';
+export { MONSTER_CODEX_FEATS_2 } from './monsterCodexFeats2';
+export { HEROES_FROM_FRINGE_FEATS } from './heroesFromFringeFeats';
+export { ULTIMATE_CAMPAIGN_FEATS } from './ultimateCampaignFeats';
+export { ISWG_FEATS } from './iswgFeats';
+export { ISWG_FEATS_2 } from './iswgFeats2';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -172,6 +184,12 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...PLANAR_ADVENTURES_FEATS,
   ...PLANAR_ADVENTURES_FEATS_2,
   ...WILDERNESS_ORIGINS_FEATS,
+  ...MONSTER_CODEX_FEATS,
+  ...MONSTER_CODEX_FEATS_2,
+  ...HEROES_FROM_FRINGE_FEATS,
+  ...ULTIMATE_CAMPAIGN_FEATS,
+  ...ISWG_FEATS,
+  ...ISWG_FEATS_2,
 ];
 
 export function initializeFeatRegistry(): void {

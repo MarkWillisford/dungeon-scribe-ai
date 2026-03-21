@@ -8,15 +8,15 @@ The engine (types, services, pipeline, index files) is already built. This is a 
 
 ---
 
-## CURRENT STATUS (as of 2026-03-20)
+## CURRENT STATUS (as of 2026-03-21)
 
-### Progress: 1,969 feats across 52 files
+### Progress: 2,202 feats across 62 files
 
-**Verified totals: 1,969 feats (52 files), 458 traits (12 files)**
+**Verified totals: 2,202 feats (62 files), 458 traits (12 files)**
 
 Last clean verified state:
 
-- `npx tsx scripts/verify-feats.ts` → 1,969 feats, 0 new duplicate IDs, 0 validation errors
+- `npx tsx scripts/verify-feats.ts` → 2,202 feats, 0 duplicate IDs, 0 validation errors
 - `npx tsx scripts/verify-traits.ts` → 458 traits, 0 duplicate IDs, 0 validation errors
 - `npm run typecheck` → clean (pre-existing errors in umagic-extra.ts only — unrelated, pre-existing)
 - `npm test` → 690/690 tests pass (36 suites)
@@ -25,7 +25,7 @@ Last clean verified state:
 
 ## IMMEDIATE NEXT STEPS
 
-**Current:** 2,064 feats. Estimated ~400–500 more across ~45 remaining books.
+**Current:** 2,202 feats. All Tier 1 books complete. Moving to Tier 2 medium books (~35 books, single agent each).
 
 Use **scout + scraper** pattern for books with 25+ feats:
 
@@ -33,11 +33,14 @@ Use **scout + scraper** pattern for books with 25+ feats:
 2. Split manifest into named ranges (1–25, 26–50, 51+) → launch scraper agents in parallel
 3. Each scraper writes its own part file; delete manifests after all parts complete
 
-**Next batch to launch:**
+**Next batch to launch (Tier 2 — medium books):**
 
-- Heroes from the Fringe (~27 feats, scout + 2 agents)
-- Ultimate Campaign (~28 feats, scout + 2 agents)
-- Monster Codex part 2 (~50 remaining feats, scout + 2 agents)
+- Blood of the Beast (~22 feats, single agent) → `bloodOfBeastFeats.ts`
+- Quests and Campaigns (~22 feats, single agent) → `questsCampaignsFeats.ts`
+- Heroes of Golarion (~21 feats, single agent) → `heroesOfGolarionFeats.ts`
+- Pathfinder Unchained (~21 remaining, single agent) → `pathfinderUnchainedFeats.ts`
+- Heroes of the High Court (~19 feats, single agent) → `heroesHighCourtFeats.ts`
+- Aquatic Adventures (~16 remaining, single agent) → `aquaticAdventuresFeats.ts`
 
 ---
 
@@ -47,15 +50,15 @@ _Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
 
 ### Tier 1 — Large (25+ feats) — scout + multi-agent
 
-| Book                   | Total | Have | Remaining | File pattern                                  |
-| ---------------------- | ----- | ---- | --------- | --------------------------------------------- |
-| Monster Codex          | ~79   | 29   | ~50       | `monsterCodexFeats2.ts` / `3.ts`              |
-| Planar Adventures      | ~57   | 48   | 0         | ✅ DONE — `planarAdventuresFeats.ts` / `2.ts` |
-| Villain Codex          | ~26   | 26   | 0         | ✅ DONE — `villainCodexFeats.ts`              |
-| Wilderness Origins     | ~28   | 28   | 0         | ✅ DONE — `wildernessOriginsFeats.ts`         |
-| Heroes from the Fringe | ~27   | 0    | ~27       | `heroesFromFringeFeats.ts` / `2.ts`           |
-| Ultimate Campaign      | ~28   | 0    | ~28       | `ultimateCampaignFeats.ts` / `2.ts`           |
-| Inner Sea World Guide  | ~38   | 1    | ~37       | `iswgFeats2.ts` (careful dedup vs PRPG 2008)  |
+| Book                   | Total | Have | Remaining | File pattern                                                                |
+| ---------------------- | ----- | ---- | --------- | --------------------------------------------------------------------------- |
+| Monster Codex          | ~79   | ~80  | 0         | ✅ DONE — `monsterCodexFeats.ts` / `2.ts` (+ pre-existing in miscBooks2.ts) |
+| Planar Adventures      | ~57   | 48   | 0         | ✅ DONE — `planarAdventuresFeats.ts` / `2.ts`                               |
+| Villain Codex          | ~26   | 26   | 0         | ✅ DONE — `villainCodexFeats.ts`                                            |
+| Wilderness Origins     | ~28   | 28   | 0         | ✅ DONE — `wildernessOriginsFeats.ts`                                       |
+| Heroes from the Fringe | ~27   | 27   | 0         | ✅ DONE — `heroesFromFringeFeats.ts`                                        |
+| Ultimate Campaign      | ~28   | 28   | 0         | ✅ DONE — `ultimateCampaignFeats.ts`                                        |
+| Inner Sea World Guide  | ~38   | 33   | 0         | ✅ DONE — `iswgFeats.ts` / `2.ts` (4 reprints skipped)                      |
 
 ### Tier 2 — Medium (10–24 feats) — single agent each
 
@@ -218,6 +221,12 @@ _Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
 | `planarAdventuresFeats.ts`  | PLANAR_ADVENTURES_FEATS   | 18    | Planar Adventures part 1 (7 reprints removed)                                  |
 | `planarAdventuresFeats2.ts` | PLANAR_ADVENTURES_FEATS_2 | 23    | Planar Adventures part 2                                                       |
 | `wildernessOriginsFeats.ts` | WILDERNESS_ORIGINS_FEATS  | 28    | Wilderness Origins                                                             |
+| `monsterCodexFeats.ts`      | MONSTER_CODEX_FEATS       | 25    | Monster Codex part 1                                                           |
+| `monsterCodexFeats2.ts`     | MONSTER_CODEX_FEATS_2     | 26    | Monster Codex part 2                                                           |
+| `heroesFromFringeFeats.ts`  | HEROES_FROM_FRINGE_FEATS  | 27    | Heroes from the Fringe                                                         |
+| `ultimateCampaignFeats.ts`  | ULTIMATE_CAMPAIGN_FEATS   | 28    | Ultimate Campaign (story feats)                                                |
+| `iswgFeats.ts`              | ISWG_FEATS                | 22    | Inner Sea World Guide part 1 (3 reprints out)                                  |
+| `iswgFeats2.ts`             | ISWG_FEATS_2              | 10    | Inner Sea World Guide part 2 (1 reprint out)                                   |
 
 ## Completed Trait Files (12 files, 458 total)
 
@@ -238,7 +247,7 @@ _Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
 
 **Index files wired:**
 
-- `src/data/feats/index.ts` — all 43 feat files imported and spread into ALL_FEATS
+- `src/data/feats/index.ts` — all 62 feat files imported and spread into ALL_FEATS
 - `src/data/traits/index.ts` — all 12 trait files imported and spread into ALL_TRAITS
 
 ---
