@@ -154,7 +154,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     effects: [],
   },
   {
-    id: 'coordinated_reposition',
+    id: 'coordinated_reposition_mc',
     name: 'Coordinated Reposition',
     types: ['teamwork'],
     source: 'Monster Codex',
@@ -336,22 +336,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     ],
     effects: [],
   },
-  {
-    id: 'hurtful',
-    name: 'Hurtful',
-    types: ['combat'],
-    source: 'Monster Codex',
-    activationMode: 'conditional',
-    description:
-      'When you successfully demoralize an opponent within your melee reach with an Intimidate check, you can make a single melee attack against that creature as a swift action. If your attack fails to damage the target, its shaken condition from being demoralized immediately ends.',
-    shortDescription:
-      'After demoralizing a foe within reach, make one melee attack against it as a swift action.',
-    prerequisites: [
-      { type: 'ability_score', ability: 'STR', minimum: 13 },
-      { type: 'feat', featId: 'power_attack' },
-    ],
-    effects: [],
-  },
+  // hurtful — already in miscBooks1.ts (source: Melee Tactics Toolbox, same mechanics)
   {
     id: 'icy_stare',
     name: 'Icy Stare',

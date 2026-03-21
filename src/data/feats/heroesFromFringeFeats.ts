@@ -1,68 +1,8 @@
 import type { FeatDefinition } from '@/types/feats';
 
 export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
-  {
-    id: 'blood_frenzy_style',
-    name: 'Blood Frenzy Style',
-    description:
-      'You can harness pain as a source of power, entering a frenzied state in response to taking damage. You gain a +2 bonus to Strength and Constitution while using this style, but take a -2 penalty to AC. You can enter Blood Frenzy Style only as an immediate action when you take damage. You cannot enter this style as a swift action, as with other style feats.',
-    shortDescription: 'Enter a frenzied state when damaged, gaining +2 Str/Con but -2 AC.',
-    source: 'Heroes from the Fringe',
-    types: ['combat', 'style'],
-    prerequisites: [
-      { type: 'ability_score', ability: 'STR', minimum: 13 },
-      { type: 'feat', featId: 'improved_unarmed_strike' },
-      { type: 'bab', minimum: 1 },
-      { type: 'special', description: 'Aquatic subtype' },
-    ],
-    effects: [],
-    activationMode: 'conditional',
-    tags: ['style', 'aquatic', 'unarmed', 'frenzy'],
-  },
-  {
-    id: 'blood_frenzy_strike',
-    name: 'Blood Frenzy Strike',
-    description:
-      'While using Blood Frenzy Style, your unarmed strikes or natural attacks that damage opponents also inflict 1d6 bleed damage (this bleed damage does not stack). Once per 1d4 rounds, you may make an unarmed attack with a -5 penalty; on a successful hit, this deals an additional 2d6 bludgeoning damage.',
-    shortDescription:
-      'Blood Frenzy Style attacks deal 1d6 bleed; powerful bonus attack once per 1d4 rounds.',
-    source: 'Heroes from the Fringe',
-    types: ['combat'],
-    prerequisites: [
-      { type: 'ability_score', ability: 'STR', minimum: 15 },
-      { type: 'feat', featId: 'blood_frenzy_style' },
-      { type: 'feat', featId: 'improved_unarmed_strike' },
-      { type: 'feat', featId: 'power_attack' },
-      { type: 'bab', minimum: 4 },
-      { type: 'special', description: 'Aquatic subtype' },
-    ],
-    effects: [],
-    activationMode: 'conditional',
-    tags: ['style', 'aquatic', 'unarmed', 'bleed', 'frenzy'],
-  },
-  {
-    id: 'blood_frenzy_assault',
-    name: 'Blood Frenzy Assault',
-    description:
-      'While using Blood Frenzy Style, when you make a full attack against a bleeding enemy within reach you gain additional unarmed or natural weapon attacks. Each additional attack incurs a -2 penalty to AC. Additionally, bleed damage from Blood Frenzy Strike increases to 2d6 points.',
-    shortDescription:
-      'Gain extra attacks on full attacks vs. bleeding enemies; bleed damage improves to 2d6.',
-    source: 'Heroes from the Fringe',
-    types: ['combat'],
-    prerequisites: [
-      { type: 'ability_score', ability: 'STR', minimum: 17 },
-      { type: 'feat', featId: 'blood_frenzy_strike' },
-      { type: 'feat', featId: 'blood_frenzy_style' },
-      { type: 'feat', featId: 'bloody_assault' },
-      { type: 'feat', featId: 'improved_unarmed_strike' },
-      { type: 'feat', featId: 'power_attack' },
-      { type: 'bab', minimum: 6 },
-      { type: 'special', description: 'Aquatic subtype' },
-    ],
-    effects: [],
-    activationMode: 'conditional',
-    tags: ['style', 'aquatic', 'unarmed', 'bleed', 'frenzy'],
-  },
+  // blood_frenzy_style / blood_frenzy_strike / blood_frenzy_assault — already in styleFeats.ts (source: Blood of the Sea, same mechanics)
+
   {
     id: 'citystep',
     name: 'Citystep',
@@ -131,19 +71,8 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     activationMode: 'conditional',
     tags: ['half-orc', 'divine', 'light', 'fire', 'Sarenrae'],
   },
-  {
-    id: 'equipment_trick',
-    name: 'Equipment Trick',
-    description:
-      "Choose a type of equipment. You can use any equipment trick related to the chosen item as long as you meet the trick's prerequisites. If the item also functions as an improvised weapon, you may treat it as either a normal or improvised weapon based on what benefits you most. You can gain Equipment Trick multiple times. Each time you take the feat, it applies to a new type of equipment.",
-    shortDescription: 'Gain access to special tricks for a chosen equipment type.',
-    source: 'Heroes from the Fringe',
-    types: ['combat'],
-    prerequisites: [{ type: 'bab', minimum: 1 }],
-    effects: [],
-    activationMode: 'passive',
-    tags: ['equipment', 'trick', 'versatile'],
-  },
+  // equipment_trick — already in armoryFeats.ts (same mechanics)
+
   {
     id: 'frozen_skin',
     name: 'Frozen Skin',

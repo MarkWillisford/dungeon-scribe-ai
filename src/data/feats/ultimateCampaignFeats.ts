@@ -74,7 +74,7 @@ export const ULTIMATE_CAMPAIGN_FEATS: FeatDefinition[] = [
     activationMode: 'conditional',
   },
   {
-    id: 'damned',
+    id: 'damned_uc',
     name: 'Damned',
     types: ['story'],
     source: 'Ultimate Campaign',
@@ -129,7 +129,7 @@ export const ULTIMATE_CAMPAIGN_FEATS: FeatDefinition[] = [
     activationMode: 'conditional',
   },
   {
-    id: 'fearless_zeal',
+    id: 'fearless_zeal_uc',
     name: 'Fearless Zeal',
     types: ['story'],
     source: 'Ultimate Campaign',

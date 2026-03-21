@@ -105,34 +105,7 @@ export const ISWG_FEATS_2: FeatDefinition[] = [
     tags: ['fear', 'saving_throw', 'will', 'morale'],
   },
 
-  {
-    id: 'storm_lashed',
-    name: 'Storm-Lashed',
-    types: ['general'],
-    source: 'Inner Sea World Guide',
-    description:
-      'A life spent enduring gales and storms has hardened your body to the elements. In rainy conditions, visibility is reduced by only one-quarter (not one-half) and you take only a -2 penalty (not -4) on Perception checks. You are treated as one size category larger for the purpose of determining the effects of wind on you. Penalties from high winds on Perception checks are halved. You gain a +2 bonus on saving throws against electricity effects or effects that deal electricity damage.',
-    shortDescription:
-      'Reduced rain visibility penalties; treat as larger vs wind; +2 saves vs electricity',
-    prerequisites: [],
-    effects: [
-      {
-        type: 'bonus',
-        bonusType: BonusType.UNTYPED,
-        target: 'saving_throws',
-        value: 2,
-        source: 'Storm-Lashed',
-        condition: {
-          type: 'custom',
-          description:
-            'Against electricity descriptor effects or effects that deal electricity damage',
-          params: {},
-        },
-      },
-    ],
-    activationMode: 'passive',
-    tags: ['environment', 'electricity', 'weather', 'saving_throw'],
-  },
+  // storm_lashed — already in adventurersGuideFeats3.ts (same mechanics)
 
   {
     id: 'survivor',

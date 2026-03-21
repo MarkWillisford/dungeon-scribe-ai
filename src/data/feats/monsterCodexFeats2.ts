@@ -32,7 +32,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
       'Cannot be permanently killed except by fire, holy water, or positive energy after reaching 0 HP.',
     prerequisites: [
       { type: 'feat', featId: 'sleeper' },
-      { type: 'feat', featId: 'warren_digger' },
+      { type: 'feat', featId: 'warren_digger_mc' },
       { type: 'special', description: 'Must have been a ghoul for at least 500 years' },
     ],
     effects: [],
@@ -101,7 +101,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     activationMode: 'conditional',
   },
   {
-    id: 'savage_critical',
+    id: 'savage_critical_mc',
     name: 'Savage Critical',
     types: ['critical'],
     source: 'Monster Codex',
@@ -131,7 +131,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     activationMode: 'passive',
   },
   {
-    id: 'shadow_shroud',
+    id: 'shadow_shroud_mc',
     name: 'Shadow Shroud',
     types: ['general'],
     source: 'Monster Codex',
@@ -174,7 +174,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Heal 1 HP per 10 minutes while completely surrounded by dirt or stone and taking no actions.',
     prerequisites: [
-      { type: 'feat', featId: 'warren_digger' },
+      { type: 'feat', featId: 'warren_digger_mc' },
       { type: 'special', description: 'Ghoul' },
     ],
     effects: [],
@@ -453,7 +453,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     activationMode: 'passive',
   },
   {
-    id: 'warren_digger',
+    id: 'warren_digger_mc',
     name: 'Warren Digger',
     types: ['general'],
     source: 'Monster Codex',

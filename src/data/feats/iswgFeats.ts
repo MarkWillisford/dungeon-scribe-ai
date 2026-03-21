@@ -5,50 +5,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
   // ==================== INNER SEA WORLD GUIDE ====================
   // Skipped (already in database): Hamatulatsu, Noble Scion, Rapid Reload, Scholar
 
-  {
-    id: 'aldori_dueling_mastery',
-    name: 'Aldori Dueling Mastery',
-    description:
-      'You gain a +2 bonus on initiative checks as long as you start combat with an Aldori dueling sword in your hand. When wielding only a single Aldori dueling sword one-handed without a shield or off-hand weapon, you receive a +2 shield bonus to your AC. This bonus is reduced to +1 when using the sword two-handed. You may treat the Aldori dueling sword as a piercing weapon for the purposes of feats and class abilities that require a piercing weapon.',
-    shortDescription: '+2 initiative with Aldori sword drawn; +2 shield AC when wielding it alone.',
-    source: 'Inner Sea World Guide',
-    types: ['combat'],
-    prerequisites: [
-      { type: 'proficiency', proficiency: 'Aldori dueling sword (exotic)' },
-      { type: 'feat', featId: 'quick_draw' },
-      { type: 'feat', featId: 'weapon_finesse' },
-      { type: 'feat', featId: 'weapon_focus_aldori_dueling_sword' },
-    ],
-    effects: [
-      {
-        type: 'bonus',
-        target: 'initiative',
-        value: 2,
-        bonusType: BonusType.UNTYPED,
-        source: 'Aldori Dueling Mastery',
-        condition: {
-          type: 'custom',
-          description: 'when you start combat with an Aldori dueling sword in hand',
-          params: {},
-        },
-      },
-      {
-        type: 'bonus',
-        target: 'ac',
-        value: 2,
-        bonusType: BonusType.SHIELD,
-        source: 'Aldori Dueling Mastery',
-        condition: {
-          type: 'custom',
-          description:
-            'when wielding only a single Aldori dueling sword one-handed with no shield or off-hand weapon',
-          params: {},
-        },
-      },
-    ],
-    activationMode: 'passive',
-    tags: ['aldori', 'dueling', 'initiative', 'shield bonus', 'finesse'],
-  },
+  // aldori_dueling_mastery — already in adventurersGuideFeats.ts (same mechanics)
 
   {
     id: 'altitude_affinity',
@@ -78,37 +35,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     tags: ['altitude', 'survival', 'environment', 'endurance'],
   },
 
-  {
-    id: 'andoren_falconry',
-    name: 'Andoren Falconry',
-    description:
-      'You gain a +2 bonus on Handle Animal checks for training or controlling birds of prey (eagles, falcons, hawks, and owls). If you have a bird of prey as an animal companion, select one of the following enhancements for it: a +1 dodge bonus to AC, a +1 morale bonus on all attack rolls, or a +2 morale bonus on all Will saves.',
-    shortDescription:
-      '+2 Handle Animal with birds of prey; enhance a bird of prey animal companion.',
-    source: 'Inner Sea World Guide',
-    types: ['general'],
-    prerequisites: [
-      { type: 'ability_score', ability: 'CHA', minimum: 13 },
-      { type: 'feat', featId: 'animal_affinity' },
-      { type: 'class_feature', featureName: 'animal companion' },
-    ],
-    effects: [
-      {
-        type: 'bonus',
-        target: 'skill.handle_animal',
-        value: 2,
-        bonusType: BonusType.UNTYPED,
-        source: 'Andoren Falconry',
-        condition: {
-          type: 'custom',
-          description: 'when training or controlling birds of prey',
-          params: {},
-        },
-      },
-    ],
-    activationMode: 'passive',
-    tags: ['falconry', 'animal companion', 'birds', 'handle animal', 'andoren'],
-  },
+  // andoren_falconry — already in psoFeats.ts (same mechanics)
 
   {
     id: 'arcane_vendetta',
@@ -138,107 +65,10 @@ export const ISWG_FEATS: FeatDefinition[] = [
     tags: ['arcane', 'damage', 'spellcraft', 'vendetta'],
   },
 
-  {
-    id: 'careful_speaker',
-    name: 'Careful Speaker',
-    description:
-      'You receive a +2 bonus on all Bluff checks made to fool someone or pass secret messages (but not to feint in combat), and a +2 bonus on all Will saves against attempts to scry upon you or read your mind.',
-    shortDescription: '+2 Bluff (fool/secret messages) and +2 Will vs. scrying and mind-reading.',
-    source: 'Inner Sea World Guide',
-    types: ['general'],
-    prerequisites: [{ type: 'ability_score', ability: 'WIS', minimum: 13 }],
-    effects: [
-      {
-        type: 'bonus',
-        target: 'skill.bluff',
-        value: 2,
-        bonusType: BonusType.UNTYPED,
-        source: 'Careful Speaker',
-        condition: {
-          type: 'custom',
-          description: 'when used to fool someone or pass secret messages (not to feint)',
-          params: {},
-        },
-      },
-      {
-        type: 'bonus',
-        target: 'saving_throw.will',
-        value: 2,
-        bonusType: BonusType.UNTYPED,
-        source: 'Careful Speaker',
-        condition: {
-          type: 'custom',
-          description: 'against attempts to scry upon you or read your mind',
-          params: {},
-        },
-      },
-    ],
-    activationMode: 'passive',
-    tags: ['bluff', 'will save', 'scrying', 'mind-reading', 'cheliax', 'galt'],
-  },
+  // careful_speaker — already in heroesFeats.ts (same mechanics)
 
-  {
-    id: 'cypher_magic',
-    name: 'Cypher Magic',
-    description:
-      "Spells you cast from scrolls function at a caster level one higher than the scroll's caster level. You also gain a +2 bonus on caster level checks made when activating a scroll whose caster level exceeds your own.",
-    shortDescription:
-      'Scrolls cast at +1 caster level; +2 caster level checks when using high-level scrolls.',
-    source: 'Inner Sea World Guide',
-    types: ['general'],
-    prerequisites: [
-      { type: 'ability_score', ability: 'INT', minimum: 15 },
-      { type: 'feat', featId: 'scribe_scroll' },
-    ],
-    effects: [
-      {
-        type: 'bonus',
-        target: 'caster_level.scroll',
-        value: 1,
-        bonusType: BonusType.UNTYPED,
-        source: 'Cypher Magic',
-        condition: {
-          type: 'custom',
-          description: 'when casting spells from scrolls',
-          params: {},
-        },
-      },
-      {
-        type: 'bonus',
-        target: 'caster_level_check',
-        value: 2,
-        bonusType: BonusType.UNTYPED,
-        source: 'Cypher Magic',
-        condition: {
-          type: 'custom',
-          description: 'when activating a scroll whose caster level exceeds your own',
-          params: {},
-        },
-      },
-    ],
-    activationMode: 'passive',
-    tags: ['scroll', 'caster level', 'cyphermages', 'riddleport', 'arcane'],
-  },
-
-  {
-    id: 'cypher_script',
-    name: 'Cypher Script',
-    description:
-      'Any spell you scribe in your spellbook costs half as much as normal and takes up only half the room it normally would (round all fractions up). Additionally, it takes you only 10 minutes per spell level to scribe a spell into your spellbook (5 minutes for cantrips).',
-    shortDescription:
-      'Scribing spells into your spellbook costs half the GP/space and takes half the time.',
-    source: 'Inner Sea World Guide',
-    types: ['general'],
-    prerequisites: [
-      { type: 'skill', skillId: 'knowledge_arcana', ranks: 1 },
-      { type: 'skill', skillId: 'linguistics', ranks: 1 },
-      { type: 'skill', skillId: 'spellcraft', ranks: 1 },
-      { type: 'class_feature', featureName: 'spellbook' },
-    ],
-    effects: [],
-    activationMode: 'passive',
-    tags: ['spellbook', 'wizard', 'scribing', 'cyphermages', 'riddleport'],
-  },
+  // cypher_magic — already in adventurersGuideFeats.ts (same mechanics)
+  // cypher_script — already in adventurersGuideFeats.ts (same mechanics)
 
   {
     id: 'demon_hunter',
@@ -703,34 +533,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     tags: ['hermea', 'class skill', 'background', '1st level only'],
   },
 
-  {
-    id: 'necromantic_affinity',
-    name: 'Necromantic Affinity',
-    description:
-      'You gain a +2 bonus on saving throws against spells and effects using negative energy, causing negative levels, or inflicting ability damage, ability drain, or ability penalties. In addition, damage caused by inflict spells heals you as if you were an undead creature, but you also take damage from cure spells as if you were undead.',
-    shortDescription:
-      '+2 saves vs. negative energy/levels/ability damage; inflict heals you but cure damages you.',
-    source: 'Inner Sea World Guide',
-    types: ['general'],
-    prerequisites: [{ type: 'ability_score', ability: 'CON', minimum: 15 }],
-    effects: [
-      {
-        type: 'bonus',
-        target: 'saving_throw',
-        value: 2,
-        bonusType: BonusType.UNTYPED,
-        source: 'Necromantic Affinity',
-        condition: {
-          type: 'custom',
-          description:
-            'against spells and effects using negative energy, causing negative levels, or inflicting ability damage/drain/penalties',
-          params: {},
-        },
-      },
-    ],
-    activationMode: 'passive',
-    tags: ['negative energy', 'necromancy', 'undead', 'inflict', 'cure', 'ability damage'],
-  },
+  // necromantic_affinity — already in bloodSeriesFeats.ts (same mechanics)
 ];
 
 // CHECKPOINT: last_written=necromantic_affinity, written=22/22, status=complete
