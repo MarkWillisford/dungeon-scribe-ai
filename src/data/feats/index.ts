@@ -63,6 +63,12 @@ import { HEROES_FROM_FRINGE_FEATS } from './heroesFromFringeFeats';
 import { ULTIMATE_CAMPAIGN_FEATS } from './ultimateCampaignFeats';
 import { ISWG_FEATS } from './iswgFeats';
 import { ISWG_FEATS_2 } from './iswgFeats2';
+import { BLOOD_OF_BEAST_FEATS } from './bloodOfBeastFeats';
+import { QUESTS_CAMPAIGNS_FEATS } from './questsCampaignsFeats';
+import { HEROES_OF_GOLARION_FEATS } from './heroesOfGolarionFeats';
+import { AQUATIC_ADVENTURES_FEATS } from './aquaticAdventuresFeats';
+import { HEROES_HIGH_COURT_FEATS } from './heroesHighCourtFeats';
+import { PATHFINDER_UNCHAINED_FEATS } from './pathfinderUnchainedFeats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -126,6 +132,12 @@ export { HEROES_FROM_FRINGE_FEATS } from './heroesFromFringeFeats';
 export { ULTIMATE_CAMPAIGN_FEATS } from './ultimateCampaignFeats';
 export { ISWG_FEATS } from './iswgFeats';
 export { ISWG_FEATS_2 } from './iswgFeats2';
+export { BLOOD_OF_BEAST_FEATS } from './bloodOfBeastFeats';
+export { QUESTS_CAMPAIGNS_FEATS } from './questsCampaignsFeats';
+export { HEROES_OF_GOLARION_FEATS } from './heroesOfGolarionFeats';
+export { AQUATIC_ADVENTURES_FEATS } from './aquaticAdventuresFeats';
+export { HEROES_HIGH_COURT_FEATS } from './heroesHighCourtFeats';
+export { PATHFINDER_UNCHAINED_FEATS } from './pathfinderUnchainedFeats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -190,6 +202,12 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...ULTIMATE_CAMPAIGN_FEATS,
   ...ISWG_FEATS,
   ...ISWG_FEATS_2,
+  ...BLOOD_OF_BEAST_FEATS,
+  ...QUESTS_CAMPAIGNS_FEATS,
+  ...HEROES_OF_GOLARION_FEATS,
+  ...AQUATIC_ADVENTURES_FEATS,
+  ...HEROES_HIGH_COURT_FEATS,
+  ...PATHFINDER_UNCHAINED_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {

@@ -10,13 +10,13 @@ The engine (types, services, pipeline, index files) is already built. This is a 
 
 ## CURRENT STATUS (as of 2026-03-21)
 
-### Progress: 2,202 feats across 62 files
+### Progress: 2,190 feats across 62 files
 
-**Verified totals: 2,202 feats (62 files), 458 traits (12 files)**
+**Verified totals: 2,190 feats (62 files), 458 traits (12 files)**
 
 Last clean verified state:
 
-- `npx tsx scripts/verify-feats.ts` → 2,202 feats, 0 duplicate IDs, 0 validation errors
+- `npx tsx scripts/verify-feats.ts` → 2,190 feats, 0 new duplicate IDs, 0 validation errors
 - `npx tsx scripts/verify-traits.ts` → 458 traits, 0 duplicate IDs, 0 validation errors
 - `npm run typecheck` → clean (pre-existing errors in umagic-extra.ts only — unrelated, pre-existing)
 - `npm test` → 690/690 tests pass (36 suites)
@@ -25,22 +25,18 @@ Last clean verified state:
 
 ## IMMEDIATE NEXT STEPS
 
-**Current:** 2,202 feats. All Tier 1 books complete. Moving to Tier 2 medium books (~35 books, single agent each).
+**Current:** 2,190 feats. All Tier 1 books complete (duplicate conflicts resolved). Tier 2 agents IN PROGRESS.
 
-Use **scout + scraper** pattern for books with 25+ feats:
+6 scraper agents launched 2026-03-21 (in background):
 
-1. Run scout agent → writes numbered manifest at `scripts/manifests/<book>-manifest.md`
-2. Split manifest into named ranges (1–25, 26–50, 51+) → launch scraper agents in parallel
-3. Each scraper writes its own part file; delete manifests after all parts complete
+- Blood of the Beast (21 feats) → `bloodOfBeastFeats.ts`
+- Quests and Campaigns (18 feats, 4 UC reprints skipped) → `questsCampaignsFeats.ts`
+- Heroes of Golarion (21 feats) → `heroesOfGolarionFeats.ts`
+- Pathfinder Unchained (20 feats, Signature Skill skipped) → `pathfinderUnchainedFeats.ts`
+- Heroes of the High Court (19 feats) → `heroesHighCourtFeats.ts`
+- Aquatic Adventures (13 feats, Dolphin chain skipped) → `aquaticAdventuresFeats.ts`
 
-**Next batch to launch (Tier 2 — medium books):**
-
-- Blood of the Beast (~22 feats, single agent) → `bloodOfBeastFeats.ts`
-- Quests and Campaigns (~22 feats, single agent) → `questsCampaignsFeats.ts`
-- Heroes of Golarion (~21 feats, single agent) → `heroesOfGolarionFeats.ts`
-- Pathfinder Unchained (~21 remaining, single agent) → `pathfinderUnchainedFeats.ts`
-- Heroes of the High Court (~19 feats, single agent) → `heroesHighCourtFeats.ts`
-- Aquatic Adventures (~16 remaining, single agent) → `aquaticAdventuresFeats.ts`
+After agents complete: run verify-feats + typecheck + tests → wire all 6 into index.ts → commit + push + PR.
 
 ---
 
@@ -64,45 +60,45 @@ _Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
 
 **Player Companion:**
 
-| Book                          | Feats | Have | File                           |
-| ----------------------------- | ----- | ---- | ------------------------------ |
-| Blood of the Beast            | ~22   | 0    | `bloodOfBeastFeats.ts`         |
-| Quests and Campaigns          | ~22   | 0    | `questsCampaignsFeats.ts`      |
-| Heroes of Golarion            | ~21   | 0    | `heroesOfGolarionFeats.ts`     |
-| Inner Sea Combat              | ~24   | 7    | `innerSeaCombatFeats.ts`       |
-| Pathfinder Unchained          | ~22   | 1    | `pathfinderUnchainedFeats.ts`  |
-| Heroes of the High Court      | ~19   | 0    | `heroesHighCourtFeats.ts`      |
-| People of the Wastes          | ~17   | 0    | `peopleWastesFeats.ts`         |
-| Elemental Master's Handbook   | ~17   | 0    | `elementalMastersFeats.ts`     |
-| Legacy of the First World     | ~17   | 0    | `legacyFirstWorldFeats.ts`     |
-| Legacy of Dragons             | ~17   | 0    | `legacyDragonsFeats.ts`        |
-| Chronicle of Legends          | ~17   | 0    | `chronicleLegendsFeats.ts`     |
-| Monster Summoner's Handbook   | ~16   | 0    | `monsterSummonerFeats.ts`      |
-| Agents of Evil                | ~16   | 0    | `agentsEvilFeats.ts`           |
-| Blood of the Ancients         | ~16   | 0    | `bloodAncientFeats.ts`         |
-| Psychic Anthology             | ~15   | 0    | `psychicAnthologyFeats.ts`     |
-| Potions and Poisons           | ~15   | 0    | `potionsPoisonsFeats.ts`       |
-| Kobolds of Golarion           | ~15   | 2    | `koboldGolarionFeats.ts`       |
-| Giant Hunter's Handbook       | ~15   | 1    | `giantHunterFeats.ts`          |
-| Advanced Class Origins        | ~14   | 0    | `advancedClassOriginsFeats.ts` |
-| Dragonslayer's Handbook       | ~14   | 0    | `dragonslayerFeats.ts`         |
-| Demons Revisited              | ~14   | 0    | `demonsRevisitedFeats.ts`      |
-| Halflings of Golarion         | ~13   | 0    | `halflingGolarionFeats.ts`     |
-| Animal Archive                | ~13   | 0    | `animalArchiveFeats.ts`        |
-| Spymaster's Handbook          | ~13   | 0    | `spymasterFeats.ts`            |
-| Book of the Damned (2017)     | ~12   | 1    | `bookDamnedFeats.ts`           |
-| Occult Origins                | ~12   | 1    | `occultOriginsFeats.ts`        |
-| Cheliax, Empire of Devils     | ~12   | 0    | `cheliaxFeats.ts`              |
-| Path of the Hellknight        | ~12   | 0    | `hellknightFeats.ts`           |
-| Inner Sea Monster Codex       | ~13   | 0    | `innerSeaMonsterCodexFeats.ts` |
-| Distant Realms                | ~12   | 0    | `distantRealmsFeats.ts`        |
-| Aquatic Adventures            | ~16   | 0    | `aquaticAdventuresFeats.ts`    |
-| Arcane Anthology              | ~10   | 0    | `arcaneAnthologyFeats.ts`      |
-| Goblins of Golarion           | ~10   | 0    | `goblinGolarionFeats.ts`       |
-| Gnomes of Golarion            | ~13   | 0    | `gnomeGolarionFeats.ts`        |
-| Technology Guide              | ~10   | 0    | `technologyGuideFeats.ts`      |
-| Orcs of Golarion              | ~11   | 4    | `orcGolarionFeats.ts`          |
-| Osirion, Land of the Pharaohs | ~10   | 0    | `osirionFeats.ts`              |
+| Book                          | Feats | Have | File                                         |
+| ----------------------------- | ----- | ---- | -------------------------------------------- |
+| Blood of the Beast            | ~22   | 0→21 | `bloodOfBeastFeats.ts` ⏳ IN PROGRESS        |
+| Quests and Campaigns          | ~22   | 0→18 | `questsCampaignsFeats.ts` ⏳ IN PROGRESS     |
+| Heroes of Golarion            | ~21   | 0→21 | `heroesOfGolarionFeats.ts` ⏳ IN PROGRESS    |
+| Inner Sea Combat              | ~24   | 7    | `innerSeaCombatFeats.ts`                     |
+| Pathfinder Unchained          | ~22   | 1→20 | `pathfinderUnchainedFeats.ts` ⏳ IN PROGRESS |
+| Heroes of the High Court      | ~19   | 0→19 | `heroesHighCourtFeats.ts` ⏳ IN PROGRESS     |
+| People of the Wastes          | ~17   | 0    | `peopleWastesFeats.ts`                       |
+| Elemental Master's Handbook   | ~17   | 0    | `elementalMastersFeats.ts`                   |
+| Legacy of the First World     | ~17   | 0    | `legacyFirstWorldFeats.ts`                   |
+| Legacy of Dragons             | ~17   | 0    | `legacyDragonsFeats.ts`                      |
+| Chronicle of Legends          | ~17   | 0    | `chronicleLegendsFeats.ts`                   |
+| Monster Summoner's Handbook   | ~16   | 0    | `monsterSummonerFeats.ts`                    |
+| Agents of Evil                | ~16   | 0    | `agentsEvilFeats.ts`                         |
+| Blood of the Ancients         | ~16   | 0    | `bloodAncientFeats.ts`                       |
+| Psychic Anthology             | ~15   | 0    | `psychicAnthologyFeats.ts`                   |
+| Potions and Poisons           | ~15   | 0    | `potionsPoisonsFeats.ts`                     |
+| Kobolds of Golarion           | ~15   | 2    | `koboldGolarionFeats.ts`                     |
+| Giant Hunter's Handbook       | ~15   | 1    | `giantHunterFeats.ts`                        |
+| Advanced Class Origins        | ~14   | 0    | `advancedClassOriginsFeats.ts`               |
+| Dragonslayer's Handbook       | ~14   | 0    | `dragonslayerFeats.ts`                       |
+| Demons Revisited              | ~14   | 0    | `demonsRevisitedFeats.ts`                    |
+| Halflings of Golarion         | ~13   | 0    | `halflingGolarionFeats.ts`                   |
+| Animal Archive                | ~13   | 0    | `animalArchiveFeats.ts`                      |
+| Spymaster's Handbook          | ~13   | 0    | `spymasterFeats.ts`                          |
+| Book of the Damned (2017)     | ~12   | 1    | `bookDamnedFeats.ts`                         |
+| Occult Origins                | ~12   | 1    | `occultOriginsFeats.ts`                      |
+| Cheliax, Empire of Devils     | ~12   | 0    | `cheliaxFeats.ts`                            |
+| Path of the Hellknight        | ~12   | 0    | `hellknightFeats.ts`                         |
+| Inner Sea Monster Codex       | ~13   | 0    | `innerSeaMonsterCodexFeats.ts`               |
+| Distant Realms                | ~12   | 0    | `distantRealmsFeats.ts`                      |
+| Aquatic Adventures            | ~16   | 0→13 | `aquaticAdventuresFeats.ts` ⏳ IN PROGRESS   |
+| Arcane Anthology              | ~10   | 0    | `arcaneAnthologyFeats.ts`                    |
+| Goblins of Golarion           | ~10   | 0    | `goblinGolarionFeats.ts`                     |
+| Gnomes of Golarion            | ~13   | 0    | `gnomeGolarionFeats.ts`                      |
+| Technology Guide              | ~10   | 0    | `technologyGuideFeats.ts`                    |
+| Orcs of Golarion              | ~11   | 4    | `orcGolarionFeats.ts`                        |
+| Osirion, Land of the Pharaohs | ~10   | 0    | `osirionFeats.ts`                            |
 
 ### Tier 3 — Small (1–9 feats) — low priority, batch multiple per file
 
