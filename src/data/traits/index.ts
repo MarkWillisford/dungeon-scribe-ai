@@ -12,6 +12,8 @@ import { ARG_EXTRA_RACE_TRAITS_2 } from './argRaceTraits2';
 import { INNER_SEA_TRAITS } from './innerSea';
 import { MISC_TRAITS } from './miscTraits';
 import { RELIGION_TRAITS_2 } from './religionTraits2';
+import { PEOPLE_NORTH_RIVER_TRAITS } from './peopleNorthRiverTraits';
+import { BLOOD_MOON_SHADOWS_BEAST_TRAITS } from './bloodMoonShadowsBeastTraits';
 
 export { APG_TRAITS } from './core';
 export { UC_TRAITS } from './ultimateCampaign';
@@ -25,6 +27,8 @@ export { ARG_EXTRA_RACE_TRAITS_2 } from './argRaceTraits2';
 export { INNER_SEA_TRAITS } from './innerSea';
 export { MISC_TRAITS } from './miscTraits';
 export { RELIGION_TRAITS_2 } from './religionTraits2';
+export { PEOPLE_NORTH_RIVER_TRAITS } from './peopleNorthRiverTraits';
+export { BLOOD_MOON_SHADOWS_BEAST_TRAITS } from './bloodMoonShadowsBeastTraits';
 
 export const ALL_TRAITS: TraitDefinition[] = [
   ...APG_TRAITS,
@@ -39,6 +43,8 @@ export const ALL_TRAITS: TraitDefinition[] = [
   ...RELIGION_TRAITS_2,
   ...INNER_SEA_TRAITS,
   ...MISC_TRAITS,
+  ...PEOPLE_NORTH_RIVER_TRAITS,
+  ...BLOOD_MOON_SHADOWS_BEAST_TRAITS,
 ];
 
 export function getTraitById(id: string): TraitDefinition | undefined {
