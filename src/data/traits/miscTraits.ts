@@ -148,6 +148,72 @@ export const MISC_TRAITS: TraitDefinition[] = [
     ],
     tags: ['will', 'save'],
   },
+  {
+    id: 'framed',
+    name: 'Framed',
+    description:
+      'Someone you care about was falsely accused of murder by a fisherman who had been intimidated and manipulated by the crime lord Gaedren Lamm. Though the accused was eventually exonerated when the fisherman\'s coercion was exposed, the reputational damage was severe. You are determined to find Gaedren and gather evidence to fully clear the accused\'s name. Choose one of the following: Dropout — you were the accused; forced to leave your school or church after the false accusation, you gain a +1 trait bonus on Spellcraft checks, and Spellcraft is a class skill for you. Family Honor — the framed person was a family member; using your persuasive abilities, you extracted the truth, and you gain a +1 trait bonus on Bluff checks, and Bluff is a class skill for you.',
+    shortDescription: '+1 Spellcraft (class skill) or +1 Bluff (class skill)',
+    source: "Curse of the Crimson Throne Player's Guide",
+    category: 'campaign',
+    subcategory: 'Curse of the Crimson Throne',
+    prerequisites: [],
+    effects: [],
+    choices: [
+      {
+        type: 'skill',
+        label: 'Choose background',
+        options: ['Dropout (Spellcraft)', 'Family Honor (Bluff)'],
+        affectsEffects: true,
+        effectTargetTemplate: 'class_skill.{choice}',
+      },
+    ],
+    tags: ['spellcraft', 'bluff', 'class skill', 'korvosa'],
+  },
+  {
+    id: 'love_lost',
+    name: 'Love Lost',
+    description:
+      'A loved one was murdered and their ring stolen, and you suspect the crime lord Gaedren Lamm is responsible. You have recently located the ring for sale but cannot yet afford it. Choose one of the following: All Alone — your murdered loved one was a romantic partner; you gain a +1 trait bonus on Intimidate checks, and Intimidate is a class skill for you. Orphaned — your murdered loved one was your only surviving parent; you gain a +1 trait bonus on Survival checks, and Survival is a class skill for you.',
+    shortDescription: '+1 Intimidate (class skill) or +1 Survival (class skill)',
+    source: "Curse of the Crimson Throne Player's Guide",
+    category: 'campaign',
+    subcategory: 'Curse of the Crimson Throne',
+    prerequisites: [],
+    effects: [],
+    choices: [
+      {
+        type: 'skill',
+        label: 'Choose background',
+        options: ['All Alone (Intimidate)', 'Orphaned (Survival)'],
+        affectsEffects: true,
+        effectTargetTemplate: 'class_skill.{choice}',
+      },
+    ],
+    tags: ['intimidate', 'survival', 'class skill', 'korvosa'],
+  },
+  {
+    id: 'missing_child',
+    name: 'Missing Child',
+    description:
+      'A child you know has been abducted by the crime lord Gaedren Lamm, who uses children as pickpockets and thieves. Despite your efforts, the Korvosan Guard has proven unhelpful, leaving the rescue to you. Choose one of the following: Missing Sibling — you gain a +1 trait bonus on Sense Motive checks, and Sense Motive is a class skill for you. Missing Son or Daughter — you gain a +1 trait bonus on Will saves.',
+    shortDescription: '+1 Sense Motive (class skill) or +1 Will saves',
+    source: "Curse of the Crimson Throne Player's Guide",
+    category: 'campaign',
+    subcategory: 'Curse of the Crimson Throne',
+    prerequisites: [],
+    effects: [],
+    choices: [
+      {
+        type: 'skill',
+        label: 'Choose background',
+        options: ['Missing Sibling (Sense Motive)', 'Missing Son or Daughter (Will save)'],
+        affectsEffects: true,
+        effectTargetTemplate: 'class_skill.{choice}',
+      },
+    ],
+    tags: ['sense motive', 'will', 'save', 'korvosa'],
+  },
 
   // ==================== CAMPAIGN TRAITS — Kingmaker ====================
   {
@@ -209,6 +275,129 @@ export const MISC_TRAITS: TraitDefinition[] = [
     ],
     tags: ['perception', 'class skill'],
   },
+  {
+    id: 'bastard_km',
+    name: 'Bastard',
+    description:
+      'One of your parents was a member of a great Brevic noble family, yet you lack substantive proof of your heritage. You have lived knowing you deserve the comforts and esteem of nobility while facing their contempt. You take a -1 penalty on all Charisma-based skill checks when dealing with members of nobility, but your stubbornness and individuality grant you a +1 trait bonus on Will saves. This penalty is removed if you ever establish yourself as a true noble.',
+    shortDescription: '+1 Will saves; -1 Charisma skills vs nobles',
+    source: "Kingmaker Player's Guide",
+    category: 'campaign',
+    subcategory: 'Kingmaker',
+    prerequisites: [],
+    effects: [
+      {
+        type: 'bonus',
+        bonusType: BonusType.TRAIT,
+        target: 'save.will',
+        value: 1,
+        source: 'Bastard',
+      },
+      {
+        type: 'penalty',
+        bonusType: BonusType.TRAIT,
+        target: 'skill.charisma_based',
+        value: -1,
+        source: 'Bastard',
+        condition: {
+          type: 'custom',
+          params: {},
+          description: 'When dealing with members of nobility',
+        },
+      },
+    ],
+    tags: ['will', 'save', 'brevoy', 'nobility'],
+  },
+  {
+    id: 'brigand',
+    name: 'Brigand',
+    description:
+      'You come from the River Kingdoms or the more lawless reaches of Brevoy, and have lived by ambushing travelers, bullying merchants, evading the law, and hiding in wild places. Facing trouble with the law or with rival criminals, you have joined an expedition into the Stolen Lands to disappear into places pursuers will not dare follow. You begin play with an extra 100 gp in ill-gotten gains, and gain a +1 trait bonus on Bluff, Diplomacy, Intimidate, and Sense Motive checks when dealing with brigands, thieves, bandits, and their ilk.',
+    shortDescription: '+100 gp starting wealth; +1 Bluff/Diplomacy/Intimidate/Sense Motive vs criminals',
+    source: "Kingmaker Player's Guide",
+    category: 'campaign',
+    subcategory: 'Kingmaker',
+    prerequisites: [],
+    effects: [
+      {
+        type: 'special',
+        bonusType: BonusType.TRAIT,
+        target: 'special',
+        value: 0,
+        source: 'Brigand',
+      },
+    ],
+    tags: ['bluff', 'diplomacy', 'intimidate', 'sense motive', 'bandits'],
+  },
+  {
+    id: 'noble_born',
+    name: 'Noble Born',
+    description:
+      'You have a distant connection to one of Brevoy\'s noble families. Though your immediate family lacks significant wealth or influence, you have decided to prove your worth independent of your family name by testing yourself in the Stolen Lands. Choose one of the following family heritages: Garess (+2 Appraise for natural stones/metals; ignore movement penalty for first 5 feet of rocky difficult terrain), Lebeda (bonus language: Dwarven, Elven, Gnome, Giant, Halfling, Skald, or Sylvan), Lodovka (+1 Swim; Swim is a class skill), Medvyed (+2 Diplomacy with fey; +1 Will vs fey spells/abilities), Orlovsky (+1 CMD; +1 to one of Acrobatics, Diplomacy, or Stealth), or Surtova (+2 damage against flat-footed opponents with light or one-handed weapons).',
+    shortDescription: 'Choose one of six Brevic noble family bonuses',
+    source: "Kingmaker Player's Guide",
+    category: 'campaign',
+    subcategory: 'Kingmaker',
+    prerequisites: [],
+    effects: [],
+    choices: [
+      {
+        type: 'skill',
+        label: 'Choose noble family',
+        options: ['Garess', 'Lebeda', 'Lodovka', 'Medvyed', 'Orlovsky', 'Surtova'],
+        affectsEffects: true,
+        effectTargetTemplate: 'special.{choice}',
+      },
+    ],
+    tags: ['brevoy', 'nobility', 'family'],
+  },
+  {
+    id: 'rostlander',
+    name: 'Rostlander',
+    description:
+      'You were raised in the south of Brevoy, a land of dense forests and rolling plains, of crystalline rivers and endless sapphire skies. You come from hearty stock and were raised with simple sensibilities of hard work winning well-deserved gains, the importance of charity and compassion, and the value of personal and familial honor. Yours is the country of the Aldori swordlords and the heroes who refused to bend before the armies of a violent conqueror. You care little for matters of politics and nobles or of deception and schemes. Your hardy nature grants you a +1 trait bonus on all Fortitude saves.',
+    shortDescription: '+1 Fortitude saves',
+    source: "Kingmaker Player's Guide",
+    category: 'campaign',
+    subcategory: 'Kingmaker',
+    prerequisites: [],
+    effects: [
+      {
+        type: 'bonus',
+        bonusType: BonusType.TRAIT,
+        target: 'save.fortitude',
+        value: 1,
+        source: 'Rostlander',
+      },
+    ],
+    tags: ['fortitude', 'save', 'brevoy'],
+  },
+  {
+    id: 'tough_minded',
+    name: 'Tough Minded',
+    description:
+      'You have trained yourself to resist the mental attacks and trickery of those who would see you fail. You gain a +1 trait bonus on all Will saves made to resist mind-affecting effects.',
+    shortDescription: '+1 Will saves vs mind-affecting effects',
+    source: "Kingmaker Player's Guide",
+    category: 'campaign',
+    subcategory: 'Kingmaker',
+    prerequisites: [],
+    effects: [
+      {
+        type: 'bonus',
+        bonusType: BonusType.TRAIT,
+        target: 'save.will',
+        value: 1,
+        source: 'Tough Minded',
+        condition: {
+          type: 'custom',
+          params: {},
+          description: 'Against mind-affecting effects',
+        },
+      },
+    ],
+    tags: ['will', 'save', 'mind-affecting'],
+  },
 
   // ==================== CAMPAIGN TRAITS — Carrion Crown ====================
   {
@@ -264,6 +453,134 @@ export const MISC_TRAITS: TraitDefinition[] = [
       },
     ],
     tags: ['knowledge', 'class skill'],
+  },
+  {
+    id: 'chance_savior',
+    name: 'Chance Savior',
+    description:
+      'Fate smiled on you and Professor Lorrimor when you were in a position to save his life. Tossed together by chance, the professor took an interest in you and, when he died, left you something in his will. He may have saved your life in return, or helped you in some other way. Regardless, he named you as a potential heir. You gain a +2 trait bonus on Initiative checks.',
+    shortDescription: '+2 Initiative',
+    source: "Carrion Crown Player's Guide",
+    category: 'campaign',
+    subcategory: 'Carrion Crown',
+    prerequisites: [],
+    effects: [
+      {
+        type: 'bonus',
+        bonusType: BonusType.TRAIT,
+        target: 'initiative',
+        value: 2,
+        source: 'Chance Savior',
+      },
+    ],
+    tags: ['initiative'],
+  },
+  {
+    id: 'inspired_by_greatness',
+    name: 'Inspired by Greatness',
+    description:
+      'Professor Lorrimor\'s career and discoveries motivated you to excel. As you honed your craft, you and the professor corresponded, and he was delighted to hear that he had directly or indirectly motivated you to strive for your full potential. His death has left you determined to honor his memory. Choose one spell you can cast. You always cast that spell at +1 caster level.',
+    shortDescription: '+1 caster level for one chosen spell',
+    source: "Carrion Crown Player's Guide",
+    category: 'campaign',
+    subcategory: 'Carrion Crown',
+    prerequisites: [],
+    effects: [
+      {
+        type: 'special',
+        bonusType: BonusType.TRAIT,
+        target: 'special',
+        value: 0,
+        source: 'Inspired by Greatness',
+      },
+    ],
+    choices: [
+      {
+        type: 'custom',
+        label: 'Choose spell for +1 caster level',
+        options: [],
+        affectsEffects: true,
+        effectTargetTemplate: 'caster_level.{choice}',
+      },
+    ],
+    tags: ['caster level', 'spell', 'lorrimor'],
+  },
+  {
+    id: 'on_the_payroll',
+    name: 'On the Payroll',
+    description:
+      'Professor Lorrimor was never shy about hiring professionals to help him attain his goals. Over the course of his long career, he employed thousands of skilled individuals and remembered those who served him well. You were among those he called upon repeatedly, and he has left you a bequest in recognition of your skilled service. You gain an additional 150 gp in starting wealth.',
+    shortDescription: '+150 gp starting wealth',
+    source: "Carrion Crown Player's Guide",
+    category: 'campaign',
+    subcategory: 'Carrion Crown',
+    prerequisites: [],
+    effects: [
+      {
+        type: 'special',
+        bonusType: BonusType.TRAIT,
+        target: 'special',
+        value: 0,
+        source: 'On the Payroll',
+      },
+    ],
+    tags: ['wealth', 'starting gold', 'lorrimor'],
+  },
+  {
+    id: 'subject_of_study',
+    name: 'Subject of Study',
+    description:
+      'Professor Lorrimor approached you to study you after you survived an encounter with a creature that most people would have found lethal. Through his study of you, he noted incredible details about the encounter and helped you to better understand the creature that nearly killed you. Choose a non-humanoid creature type (and subtype if outsider). You gain a +1 bonus on damage rolls against creatures of the chosen type.',
+    shortDescription: '+1 damage vs chosen creature type',
+    source: "Carrion Crown Player's Guide",
+    category: 'campaign',
+    subcategory: 'Carrion Crown',
+    prerequisites: [],
+    effects: [
+      {
+        type: 'bonus',
+        bonusType: BonusType.TRAIT,
+        target: 'damage',
+        value: 1,
+        source: 'Subject of Study',
+        condition: {
+          type: 'custom',
+          params: {},
+          description: 'Against creatures of the chosen type',
+        },
+      },
+    ],
+    choices: [
+      {
+        type: 'skill',
+        label: 'Choose creature type',
+        options: [
+          'Aberration',
+          'Animal',
+          'Construct',
+          'Dragon',
+          'Fey',
+          'Magical Beast',
+          'Monstrous Humanoid',
+          'Ooze',
+          'Plant',
+          'Undead',
+          'Vermin',
+          'Outsider (air)',
+          'Outsider (chaotic)',
+          'Outsider (earth)',
+          'Outsider (evil)',
+          'Outsider (fire)',
+          'Outsider (good)',
+          'Outsider (lawful)',
+          'Outsider (native)',
+          'Outsider (water)',
+        ],
+        affectsEffects: true,
+        effectTargetTemplate: 'damage.{choice}',
+      },
+    ],
+    tags: ['damage', 'creature type'],
   },
 
   // ==================== CAMPAIGN TRAITS — Skull & Shackles ====================

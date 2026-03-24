@@ -19,6 +19,16 @@ import { BLOOD_ANGELS_TRAITS, BLOOD_FIENDS_TRAITS } from './bloodAngelsFiendsTra
 import { DRAGON_EMPIRES_PRIMER_TRAITS } from './dragonEmpiresTraits';
 import { DRAGON_EMPIRES_PRIMER_TRAITS_2 } from './dragonEmpiresTraits2';
 import { HUMANS_GOLARION_TRAITS } from './humansGolarionTraits';
+import { HELLS_REBELS_TRAITS } from './hellsRebelsTraits';
+import { COUNCIL_OF_THIEVES_TRAITS } from './councilThievesTraits';
+import { JADE_REGENT_TRAITS } from './jadeRegentTraits';
+import { REIGN_OF_WINTER_TRAITS } from './reignWinterTraits';
+import { MUMMYS_MASK_TRAITS } from './mummysMaskTraits';
+import { IRON_GODS_TRAITS } from './ironGodsTraits';
+import { SHATTERED_STAR_TRAITS } from './shatteredStarTraits';
+import { SERPENTS_SKULL_TRAITS } from './serpentSkullTraits';
+import { HELLS_VENGEANCE_TRAITS } from './hellsVengeanceTraits';
+import { GIANTSLAYER_TRAITS } from './giantslayerTraits';
 
 export { APG_TRAITS } from './core';
 export { UC_TRAITS } from './ultimateCampaign';
@@ -39,6 +49,16 @@ export { BLOOD_ANGELS_TRAITS, BLOOD_FIENDS_TRAITS } from './bloodAngelsFiendsTra
 export { DRAGON_EMPIRES_PRIMER_TRAITS } from './dragonEmpiresTraits';
 export { DRAGON_EMPIRES_PRIMER_TRAITS_2 } from './dragonEmpiresTraits2';
 export { HUMANS_GOLARION_TRAITS } from './humansGolarionTraits';
+export { HELLS_REBELS_TRAITS } from './hellsRebelsTraits';
+export { COUNCIL_OF_THIEVES_TRAITS } from './councilThievesTraits';
+export { JADE_REGENT_TRAITS } from './jadeRegentTraits';
+export { REIGN_OF_WINTER_TRAITS } from './reignWinterTraits';
+export { MUMMYS_MASK_TRAITS } from './mummysMaskTraits';
+export { IRON_GODS_TRAITS } from './ironGodsTraits';
+export { SHATTERED_STAR_TRAITS } from './shatteredStarTraits';
+export { SERPENTS_SKULL_TRAITS } from './serpentSkullTraits';
+export { HELLS_VENGEANCE_TRAITS } from './hellsVengeanceTraits';
+export { GIANTSLAYER_TRAITS } from './giantslayerTraits';
 
 export const ALL_TRAITS: TraitDefinition[] = [
   ...APG_TRAITS,
@@ -61,6 +81,16 @@ export const ALL_TRAITS: TraitDefinition[] = [
   ...DRAGON_EMPIRES_PRIMER_TRAITS,
   ...DRAGON_EMPIRES_PRIMER_TRAITS_2,
   ...HUMANS_GOLARION_TRAITS,
+  ...HELLS_REBELS_TRAITS,
+  ...COUNCIL_OF_THIEVES_TRAITS,
+  ...JADE_REGENT_TRAITS,
+  ...REIGN_OF_WINTER_TRAITS,
+  ...MUMMYS_MASK_TRAITS,
+  ...IRON_GODS_TRAITS,
+  ...SHATTERED_STAR_TRAITS,
+  ...SERPENTS_SKULL_TRAITS,
+  ...HELLS_VENGEANCE_TRAITS,
+  ...GIANTSLAYER_TRAITS,
 ];
 
 export function getTraitById(id: string): TraitDefinition | undefined {
