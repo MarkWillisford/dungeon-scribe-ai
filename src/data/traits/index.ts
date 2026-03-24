@@ -29,6 +29,12 @@ import { SHATTERED_STAR_TRAITS } from './shatteredStarTraits';
 import { SERPENTS_SKULL_TRAITS } from './serpentSkullTraits';
 import { HELLS_VENGEANCE_TRAITS } from './hellsVengeanceTraits';
 import { GIANTSLAYER_TRAITS } from './giantslayerTraits';
+import { ISG_RELIGION_TRAITS } from './isgReligionTraits';
+import { ISG_RELIGION_TRAITS_2 } from './isgReligionTraits2';
+import { FAITHS_GOLARION_TRAITS } from './faithsGolarionTraits';
+import { PATHS_RIGHTEOUS_TRAITS } from './pathsRighteousTraits';
+import { ADV_ARMORY_SOCIETY_TRAITS } from './advArmorySocietyTraits';
+import { UC_DRAWBACK_TRAITS } from './ucDrawbackTraits';
 
 export { APG_TRAITS } from './core';
 export { UC_TRAITS } from './ultimateCampaign';
@@ -59,6 +65,12 @@ export { SHATTERED_STAR_TRAITS } from './shatteredStarTraits';
 export { SERPENTS_SKULL_TRAITS } from './serpentSkullTraits';
 export { HELLS_VENGEANCE_TRAITS } from './hellsVengeanceTraits';
 export { GIANTSLAYER_TRAITS } from './giantslayerTraits';
+export { ISG_RELIGION_TRAITS } from './isgReligionTraits';
+export { ISG_RELIGION_TRAITS_2 } from './isgReligionTraits2';
+export { FAITHS_GOLARION_TRAITS } from './faithsGolarionTraits';
+export { PATHS_RIGHTEOUS_TRAITS } from './pathsRighteousTraits';
+export { ADV_ARMORY_SOCIETY_TRAITS } from './advArmorySocietyTraits';
+export { UC_DRAWBACK_TRAITS } from './ucDrawbackTraits';
 
 export const ALL_TRAITS: TraitDefinition[] = [
   ...APG_TRAITS,
@@ -91,6 +103,12 @@ export const ALL_TRAITS: TraitDefinition[] = [
   ...SERPENTS_SKULL_TRAITS,
   ...HELLS_VENGEANCE_TRAITS,
   ...GIANTSLAYER_TRAITS,
+  ...ISG_RELIGION_TRAITS,
+  ...ISG_RELIGION_TRAITS_2,
+  ...FAITHS_GOLARION_TRAITS,
+  ...PATHS_RIGHTEOUS_TRAITS,
+  ...ADV_ARMORY_SOCIETY_TRAITS,
+  ...UC_DRAWBACK_TRAITS,
 ];
 
 export function getTraitById(id: string): TraitDefinition | undefined {
