@@ -75,6 +75,13 @@ import { LEGACY_FIRST_WORLD_FEATS } from './legacyFirstWorldFeats';
 import { LEGACY_DRAGONS_FEATS } from './legacyDragonsFeats';
 import { CHRONICLE_LEGENDS_FEATS } from './chronicleLegendsFeats';
 import { MONSTER_SUMMONER_FEATS } from './monsterSummonerFeats';
+import { INNER_SEA_COMBAT_FEATS } from './innerSeaCombatFeats';
+import { AGENTS_EVIL_FEATS } from './agentsEvilFeats';
+import { BLOOD_ANCIENTS_FEATS } from './bloodAncientFeats';
+import { PSYCHIC_ANTHOLOGY_FEATS } from './psychicAnthologyFeats';
+import { POTIONS_POISONS_FEATS } from './potionsPoisonsFeats';
+import { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
+import { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -150,6 +157,13 @@ export { LEGACY_FIRST_WORLD_FEATS } from './legacyFirstWorldFeats';
 export { LEGACY_DRAGONS_FEATS } from './legacyDragonsFeats';
 export { CHRONICLE_LEGENDS_FEATS } from './chronicleLegendsFeats';
 export { MONSTER_SUMMONER_FEATS } from './monsterSummonerFeats';
+export { INNER_SEA_COMBAT_FEATS } from './innerSeaCombatFeats';
+export { AGENTS_EVIL_FEATS } from './agentsEvilFeats';
+export { BLOOD_ANCIENTS_FEATS } from './bloodAncientFeats';
+export { PSYCHIC_ANTHOLOGY_FEATS } from './psychicAnthologyFeats';
+export { POTIONS_POISONS_FEATS } from './potionsPoisonsFeats';
+export { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
+export { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -226,6 +240,13 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...LEGACY_DRAGONS_FEATS,
   ...CHRONICLE_LEGENDS_FEATS,
   ...MONSTER_SUMMONER_FEATS,
+  ...INNER_SEA_COMBAT_FEATS,
+  ...AGENTS_EVIL_FEATS,
+  ...BLOOD_ANCIENTS_FEATS,
+  ...PSYCHIC_ANTHOLOGY_FEATS,
+  ...POTIONS_POISONS_FEATS,
+  ...KOBOLD_GOLARION_FEATS,
+  ...GIANT_HUNTERS_HANDBOOK_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {
