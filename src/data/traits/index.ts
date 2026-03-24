@@ -14,6 +14,11 @@ import { MISC_TRAITS } from './miscTraits';
 import { RELIGION_TRAITS_2 } from './religionTraits2';
 import { PEOPLE_NORTH_RIVER_TRAITS } from './peopleNorthRiverTraits';
 import { BLOOD_MOON_SHADOWS_BEAST_TRAITS } from './bloodMoonShadowsBeastTraits';
+import { INNER_SEA_PRIMER_TRAITS } from './innerSeaPrimerTraits';
+import { BLOOD_ANGELS_TRAITS, BLOOD_FIENDS_TRAITS } from './bloodAngelsFiendsTraits';
+import { DRAGON_EMPIRES_PRIMER_TRAITS } from './dragonEmpiresTraits';
+import { DRAGON_EMPIRES_PRIMER_TRAITS_2 } from './dragonEmpiresTraits2';
+import { HUMANS_GOLARION_TRAITS } from './humansGolarionTraits';
 
 export { APG_TRAITS } from './core';
 export { UC_TRAITS } from './ultimateCampaign';
@@ -29,6 +34,11 @@ export { MISC_TRAITS } from './miscTraits';
 export { RELIGION_TRAITS_2 } from './religionTraits2';
 export { PEOPLE_NORTH_RIVER_TRAITS } from './peopleNorthRiverTraits';
 export { BLOOD_MOON_SHADOWS_BEAST_TRAITS } from './bloodMoonShadowsBeastTraits';
+export { INNER_SEA_PRIMER_TRAITS } from './innerSeaPrimerTraits';
+export { BLOOD_ANGELS_TRAITS, BLOOD_FIENDS_TRAITS } from './bloodAngelsFiendsTraits';
+export { DRAGON_EMPIRES_PRIMER_TRAITS } from './dragonEmpiresTraits';
+export { DRAGON_EMPIRES_PRIMER_TRAITS_2 } from './dragonEmpiresTraits2';
+export { HUMANS_GOLARION_TRAITS } from './humansGolarionTraits';
 
 export const ALL_TRAITS: TraitDefinition[] = [
   ...APG_TRAITS,
@@ -45,6 +55,12 @@ export const ALL_TRAITS: TraitDefinition[] = [
   ...MISC_TRAITS,
   ...PEOPLE_NORTH_RIVER_TRAITS,
   ...BLOOD_MOON_SHADOWS_BEAST_TRAITS,
+  ...INNER_SEA_PRIMER_TRAITS,
+  ...BLOOD_ANGELS_TRAITS,
+  ...BLOOD_FIENDS_TRAITS,
+  ...DRAGON_EMPIRES_PRIMER_TRAITS,
+  ...DRAGON_EMPIRES_PRIMER_TRAITS_2,
+  ...HUMANS_GOLARION_TRAITS,
 ];
 
 export function getTraitById(id: string): TraitDefinition | undefined {
