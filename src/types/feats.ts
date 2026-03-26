@@ -26,6 +26,10 @@ export type FeatType =
   | 'meditation'
   | 'targeting';
 
+// ---- Feat Choice Key (shared between FeatChoice.type and choiceRequirement.key) ----
+
+export type FeatChoiceKey = 'weapon' | 'skill' | 'school' | 'ability' | 'custom';
+
 // ---- Prerequisites (structured, machine-checkable) ----
 
 export type FeatPrerequisite =
@@ -36,7 +40,7 @@ export type FeatPrerequisite =
     }
   | { type: 'bab'; minimum: number }
   | { type: 'level'; minimum: number; class?: string }
-  | { type: 'feat'; featId: string; choiceRequirement?: { key: string; value: string } }
+  | { type: 'feat'; featId: string; choiceRequirement?: { key: FeatChoiceKey; value: string } }
   | { type: 'skill'; skillId: string; ranks: number }
   | { type: 'class_feature'; featureName: string }
   | { type: 'proficiency'; proficiency: string }
@@ -56,7 +60,7 @@ export interface FeatEffect extends Omit<Effect, 'bonusType'> {
 // ---- Feat Choices (for feats requiring selection) ----
 
 export interface FeatChoice {
-  type: 'weapon' | 'skill' | 'school' | 'ability' | 'custom';
+  type: FeatChoiceKey;
   label: string;
   options?: string[];
   affectsEffects: boolean;

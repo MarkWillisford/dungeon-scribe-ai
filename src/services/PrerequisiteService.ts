@@ -3,6 +3,7 @@ import type { FeatDefinition, FeatPrerequisite } from '@/types/feats';
 import type { Skills, Skill } from '@/types/skills';
 import type { AbilityScores } from '@/types/abilities';
 import { getClassByName } from '@/data/classes';
+import { getFeatById } from '@/data/feats';
 
 export interface PrerequisiteResult {
   met: boolean;
@@ -33,9 +34,11 @@ export class PrerequisiteService {
    */
   static getAvailableFeats(character: Character, allFeats: FeatDefinition[]): FeatDefinition[] {
     const currentFeatIds = new Set(character.feats.feats.map((f) => f.featId));
-    return allFeats.filter(
-      (feat) => !currentFeatIds.has(feat.id) && this.checkPrerequisites(character, feat).met,
-    );
+    return allFeats.filter((feat) => {
+      // Choice-based feats (e.g. Weapon Focus) can be taken multiple times with different choices
+      const alreadyTaken = currentFeatIds.has(feat.id) && !feat.choices?.length;
+      return !alreadyTaken && this.checkPrerequisites(character, feat).met;
+    });
   }
 
   /**
@@ -74,7 +77,7 @@ export class PrerequisiteService {
           (f) =>
             f.featId === prereq.featId &&
             (!prereq.choiceRequirement ||
-              f.choices[prereq.choiceRequirement.key] === prereq.choiceRequirement.value),
+              f.choices?.[prereq.choiceRequirement.key] === prereq.choiceRequirement.value),
         );
 
       case 'skill': {
@@ -143,10 +146,12 @@ export class PrerequisiteService {
         return prereq.class
           ? `${prereq.class} level ${prereq.minimum}`
           : `Character level ${prereq.minimum}`;
-      case 'feat':
+      case 'feat': {
+        const featName = getFeatById(prereq.featId)?.name ?? prereq.featId;
         return prereq.choiceRequirement
-          ? `Feat: ${prereq.featId} (${prereq.choiceRequirement.key}: ${prereq.choiceRequirement.value})`
-          : `Feat: ${prereq.featId}`;
+          ? `Feat: ${featName} (${prereq.choiceRequirement.key}: ${prereq.choiceRequirement.value})`
+          : `Feat: ${featName}`;
+      }
       case 'skill':
         return `${prereq.skillId} ${prereq.ranks} ranks`;
       case 'class_feature':
