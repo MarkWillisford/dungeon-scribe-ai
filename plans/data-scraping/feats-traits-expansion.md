@@ -8,33 +8,30 @@ The engine (types, services, pipeline, index files) is already built. This is a 
 
 ---
 
-## CURRENT STATUS (as of 2026-03-21)
+## CURRENT STATUS (as of 2026-03-24)
 
-### Progress: 2,302 feats across 68 files
+### Progress: 2,587 feats across 89 files | 971 traits across 30 files
 
-**Verified totals: 2,302 feats (68 files), 458 traits (12 files)**
+**Traits expansion COMPLETE (971 > 900+ target). Feats expansion in progress.**
 
-Last clean verified state:
+- Feats: `MW/feats-expansion` — PR #18 open. Tier 2 Batch 3 complete (2,587 feats).
+- Traits: `MW/traits-expansion` — PR #19 open. All Priority 1–4 batches complete (971 traits).
 
-- `npx tsx scripts/verify-feats.ts` → 2,302 feats, 0 new duplicate IDs, 0 validation errors
-- `npx tsx scripts/verify-traits.ts` → 458 traits, 0 duplicate IDs, 0 validation errors
-- `npm run typecheck` → clean
-- `npm test` → 690/690 tests pass (36 suites)
+Session 2026-03-24 additions:
+
+- **Traits (+323 today, +466 total on branch):**
+  - AP Player's Guides (10 books): +110 traits
+  - ISG remaining deities: +46 traits
+  - Divine Anthology + Disciple's Doctrine: +44 traits
+  - Adventurer's Armory + scattered sources: +60 traits
+  - UC Drawbacks + multi-source: +63 traits
 
 ---
 
 ## IMMEDIATE NEXT STEPS
 
-**Current:** 2,302 feats. Tier 2 Batch 1 complete. Launch Tier 2 Batch 2 next.
-
-Next 6 books to scrape (all under 25 feats, single agent each):
-
-- People of the Wastes (~17 feats) → `peopleWastesFeats.ts`
-- Elemental Master's Handbook (~17 feats) → `elementalMastersFeats.ts`
-- Legacy of the First World (~17 feats) → `legacyFirstWorldFeats.ts`
-- Legacy of Dragons (~17 feats) → `legacyDragonsFeats.ts`
-- Chronicle of Legends (~17 feats) → `chronicleLegendsFeats.ts`
-- Monster Summoner's Handbook (~16 feats) → `monsterSummonerFeats.ts`
+**Traits:** DONE at 971. PRs open (#18 feats, #19 traits) — merge when ready.
+**Feats next books to scrape (Tier 2 Batch 4):**
 
 ---
 
@@ -66,12 +63,12 @@ _Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
 | Inner Sea Combat              | ~24   | 7    | `innerSeaCombatFeats.ts`                                                           |
 | Pathfinder Unchained          | ~22   | 20   | ✅ DONE — `pathfinderUnchainedFeats.ts` (Signature Skill + Combat Stamina skipped) |
 | Heroes of the High Court      | ~19   | 19   | ✅ DONE — `heroesHighCourtFeats.ts`                                                |
-| People of the Wastes          | ~17   | 0    | `peopleWastesFeats.ts`                                                             |
-| Elemental Master's Handbook   | ~17   | 0    | `elementalMastersFeats.ts`                                                         |
-| Legacy of the First World     | ~17   | 0    | `legacyFirstWorldFeats.ts`                                                         |
-| Legacy of Dragons             | ~17   | 0    | `legacyDragonsFeats.ts`                                                            |
-| Chronicle of Legends          | ~17   | 0    | `chronicleLegendsFeats.ts`                                                         |
-| Monster Summoner's Handbook   | ~16   | 0    | `monsterSummonerFeats.ts`                                                          |
+| People of the Wastes          | ~17   | 17   | ✅ DONE — `peopleWastesFeats.ts`                                                   |
+| Elemental Master's Handbook   | ~17   | 17   | ✅ DONE — `elementalMastersFeats.ts`                                               |
+| Legacy of the First World     | ~17   | 17   | ✅ DONE — `legacyFirstWorldFeats.ts`                                               |
+| Legacy of Dragons             | ~17   | 17   | ✅ DONE — `legacyDragonsFeats.ts`                                                  |
+| Chronicle of Legends          | ~17   | 17   | ✅ DONE — `chronicleLegendsFeats.ts`                                               |
+| Monster Summoner's Handbook   | ~16   | 16   | ✅ DONE — `monsterSummonerFeats.ts`                                                |
 | Agents of Evil                | ~16   | 0    | `agentsEvilFeats.ts`                                                               |
 | Blood of the Ancients         | ~16   | 0    | `bloodAncientFeats.ts`                                                             |
 | Psychic Anthology             | ~15   | 0    | `psychicAnthologyFeats.ts`                                                         |
@@ -147,11 +144,74 @@ _Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
 - Monster Hunter's Handbook: 4 feats, 173,944 tokens (622 tool calls, mostly 404s)
 - Add to all future prompts: "If after 10 web fetches you cannot find a feat index page, write only what you've confirmed and stop. Do not guess URLs indefinitely."
 
-### Traits expansion still needed
+### Traits expansion — Researched 2026-03-23
 
-- Adventure Path campaign traits (Rise of the Runelords, Curse of the Crimson Throne, etc.)
-- More regional traits per Inner Sea region
-- More race traits for uncommon races
+Scout confirmed d20pfsrd totals: Combat ~168, Social ~215, Magic ~120, Faith ~95, Race ~500+, Regional ~400+, Religion ~250+. We have ~458 of these. Need ~442 more to hit 900+.
+
+**Priority 1 — High Yield Regional/Race Player Companions (~200 traits)**
+
+| Book                              | ~Count | File                        |
+| --------------------------------- | ------ | --------------------------- |
+| Inner Sea Primer                  | ~20    | `innerSeaPrimerTraits.ts`   |
+| Dragon Empires Primer             | ~15    | `dragonEmpiresTraits.ts`    |
+| People of the North               | ~15    | `peopleNorthTraits.ts`      |
+| People of the River               | ~15    | `peopleRiverTraits.ts`      |
+| People of the Sands               | ~12    | `peopleSandsTraits.ts`      |
+| Humans of Golarion                | ~12    | `humansGolarionTraits.ts`   |
+| Blood of Angels + Blood of Fiends | ~16    | `bloodAngelsFindsTraits.ts` |
+| Blood of the Moon                 | ~10    | `bloodMoonTraits2.ts`       |
+| Blood of Shadows                  | ~8     | `bloodShadowsTraits.ts`     |
+| Blood of the Beast                | ~10    | `bloodBeastTraits.ts`       |
+
+**Priority 2 — AP Player's Guides (~80 traits)**
+
+| Book                              | ~Count  | Already Have | File                      |
+| --------------------------------- | ------- | ------------ | ------------------------- |
+| Shattered Star Player's Guide     | ~13     | 0            | `shatteredStarTraits.ts`  |
+| Serpent's Skull Player's Guide    | ~10     | 0            | `serpentSkullTraits.ts`   |
+| Hell's Rebels Player's Guide      | ~10     | 0            | `hellsRebelsTraits.ts`    |
+| Council of Thieves Player's Guide | ~7      | 0            | `councilThievesTraits.ts` |
+| Jade Regent Player's Guide        | ~8      | 0            | `jadeRegentTraits.ts`     |
+| Reign of Winter Player's Guide    | ~8      | 0            | `reignWinterTraits.ts`    |
+| Mummy's Mask Player's Guide       | ~8      | 0            | `mummysMaskTraits.ts`     |
+| Iron Gods Player's Guide          | ~8      | 0            | `ironGodsTraits.ts`       |
+| Hell's Vengeance Player's Guide   | ~8      | 0            | `hellsVengeanceTraits.ts` |
+| Giantslayer Player's Guide        | ~8      | 0            | `giantslayerTraits.ts`    |
+| Curse of the Crimson Throne PG    | ~3 more | ~2           | add to `miscTraits.ts`    |
+| Kingmaker PG                      | ~4 more | ~3           | add to `miscTraits.ts`    |
+| Carrion Crown PG                  | ~4 more | ~2           | add to `miscTraits.ts`    |
+
+**Priority 3 — Religion Traits Expansion (~80 traits)**
+
+| Book                                    | ~Count | Notes                                              |
+| --------------------------------------- | ------ | -------------------------------------------------- |
+| Inner Sea Gods (remaining deities)      | ~30–40 | We have ~40 deities; ISG has 20 major + ~60 minor  |
+| Faiths of Golarion (Campaign Setting)   | ~20    | Different from Faiths of Purity/Balance/Corruption |
+| Disciple's Doctrine / Divine Anthology  | ~15    | Various deities                                    |
+| Paths of the Righteous / Agents of Evil | ~12    | Good/evil deity traits                             |
+
+**Priority 4 — Equipment + Drawbacks (~45 traits)**
+
+| Book                        | ~Count | Notes                                                    |
+| --------------------------- | ------ | -------------------------------------------------------- |
+| Adventurer's Armory         | 14     | All 14 equipment traits (none covered yet)               |
+| Ultimate Campaign Drawbacks | ~25–30 | UC pg. 65 — mechanically distinct negative traits        |
+| Scattered basic traits      | ~10    | Quests and Campaigns, Heroes of the Wild, Society Primer |
+
+**Priority 5 — Race Traits from Race Books (~60 traits)**
+
+| Book                                                            | ~Count    | Notes                   |
+| --------------------------------------------------------------- | --------- | ----------------------- |
+| Goblins/Kobolds/Dwarves/Elves/Gnomes/Halflings/Orcs of Golarion | ~6–8 each | Batch multiple per file |
+| Bastards of Golarion                                            | ~8        | Half-race variants      |
+| Inner Sea Races (Campaign Setting)                              | ~20       | Many races              |
+
+**Scraping notes:**
+
+- AoN trait pages are JS-rendered — individual trait display pages work; category list pages don't
+- Many Player Companion books have only 3–5 traits — batch by region (e.g. "People of the \_\_\_" books together)
+- `source` on AoN individual trait pages is reliable and exact
+- Drawbacks use `TraitCategory` of their own — need to check if type system supports it
 
 ---
 
