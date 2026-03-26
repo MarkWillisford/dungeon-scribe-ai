@@ -70,7 +70,12 @@ export class PrerequisiteService {
         return character.classes.totalLevel >= prereq.minimum;
 
       case 'feat':
-        return character.feats.feats.some((f) => f.featId === prereq.featId);
+        return character.feats.feats.some(
+          (f) =>
+            f.featId === prereq.featId &&
+            (!prereq.choiceRequirement ||
+              f.choices[prereq.choiceRequirement.key] === prereq.choiceRequirement.value),
+        );
 
       case 'skill': {
         const skill = this.getSkill(character.skills, prereq.skillId);
@@ -139,7 +144,9 @@ export class PrerequisiteService {
           ? `${prereq.class} level ${prereq.minimum}`
           : `Character level ${prereq.minimum}`;
       case 'feat':
-        return `Feat: ${prereq.featId}`;
+        return prereq.choiceRequirement
+          ? `Feat: ${prereq.featId} (${prereq.choiceRequirement.key}: ${prereq.choiceRequirement.value})`
+          : `Feat: ${prereq.featId}`;
       case 'skill':
         return `${prereq.skillId} ${prereq.ranks} ranks`;
       case 'class_feature':

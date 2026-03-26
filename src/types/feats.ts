@@ -36,7 +36,7 @@ export type FeatPrerequisite =
     }
   | { type: 'bab'; minimum: number }
   | { type: 'level'; minimum: number; class?: string }
-  | { type: 'feat'; featId: string }
+  | { type: 'feat'; featId: string; choiceRequirement?: { key: string; value: string } }
   | { type: 'skill'; skillId: string; ranks: number }
   | { type: 'class_feature'; featureName: string }
   | { type: 'proficiency'; proficiency: string }

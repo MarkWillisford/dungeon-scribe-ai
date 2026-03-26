@@ -140,6 +140,76 @@ describe('PrerequisiteService', () => {
       expect(result.met).toBe(false);
     });
 
+    test('feat prerequisite with choiceRequirement met when choice matches', () => {
+      const char = createTestCharacter();
+      char.feats.feats.push({
+        featId: 'weapon_focus',
+        name: 'Weapon Focus',
+        source: 'level_1',
+        grantedAtLevel: 1,
+        active: true,
+        choices: { weapon: 'glaive' },
+      });
+      const feat = makeFeat([
+        { type: 'feat', featId: 'weapon_focus', choiceRequirement: { key: 'weapon', value: 'glaive' } },
+      ]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(true);
+    });
+
+    test('feat prerequisite with choiceRequirement not met when choice is wrong weapon', () => {
+      const char = createTestCharacter();
+      char.feats.feats.push({
+        featId: 'weapon_focus',
+        name: 'Weapon Focus',
+        source: 'level_1',
+        grantedAtLevel: 1,
+        active: true,
+        choices: { weapon: 'longsword' },
+      });
+      const feat = makeFeat([
+        { type: 'feat', featId: 'weapon_focus', choiceRequirement: { key: 'weapon', value: 'glaive' } },
+      ]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+      expect(result.reasons[0]).toContain('weapon_focus');
+      expect(result.reasons[0]).toContain('glaive');
+    });
+
+    test('feat prerequisite with choiceRequirement not met when character lacks the feat entirely', () => {
+      const char = createTestCharacter();
+      const feat = makeFeat([
+        { type: 'feat', featId: 'weapon_focus', choiceRequirement: { key: 'weapon', value: 'glaive' } },
+      ]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+    });
+
+    test('feat prerequisite with choiceRequirement met when character has the feat twice with different choices', () => {
+      const char = createTestCharacter();
+      char.feats.feats.push({
+        featId: 'weapon_focus',
+        name: 'Weapon Focus',
+        source: 'level_1',
+        grantedAtLevel: 1,
+        active: true,
+        choices: { weapon: 'longsword' },
+      });
+      char.feats.feats.push({
+        featId: 'weapon_focus',
+        name: 'Weapon Focus',
+        source: 'fighter_bonus_2',
+        grantedAtLevel: 2,
+        active: true,
+        choices: { weapon: 'glaive' },
+      });
+      const feat = makeFeat([
+        { type: 'feat', featId: 'weapon_focus', choiceRequirement: { key: 'weapon', value: 'glaive' } },
+      ]);
+      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(true);
+    });
+
     test('race prerequisite met', () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'race', raceName: 'Human' }]);
