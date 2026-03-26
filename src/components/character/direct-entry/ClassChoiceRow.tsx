@@ -9,6 +9,10 @@ import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { ALL_DOMAINS } from '@/data/domains/index';
 import { ALL_RAGE_POWERS } from '@/data/ragePowers/index';
 import { ALL_ROGUE_TALENTS } from '@/data/rogueTalents/index';
+import { ALL_MYSTERIES } from '@/data/mysteries/index';
+import { ALL_INQUISITIONS } from '@/data/inquisitions/index';
+import { ALL_REVELATIONS } from '@/data/revelations/index';
+import { ALL_CAVALIER_ORDERS } from '@/data/cavalierOrders/index';
 
 interface ClassChoiceRowProps {
   classId: string;
@@ -20,9 +24,40 @@ interface ClassChoiceRowProps {
   // Level this choice is taken at (for at_class_levels / every_n_levels)
   takenAtLevel: number;
   featureLabel: string; // e.g. "Domain 1", "Domain 2", "Rage Power (lvl 2)"
+  // All choices stored for this class entry — used to resolve {chosen_X} filter tokens
+  siblingChoices?: ClassChoice[];
 }
 
-function buildCollectionItems(collectionName: string): SearchItem[] {
+// Resolve {chosen_X} tokens in a collectionFilter using sibling class choices.
+// e.g. { mysteryId: '{chosen_mystery}' } → { mysteryId: 'battle' }
+// Tokens that don't match a sibling featureName (e.g. {chosen_deity}) are left unresolved.
+function resolveFilterTokens(
+  filter: Record<string, unknown>,
+  siblingChoices: ClassChoice[],
+): Record<string, unknown> {
+  const resolved: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(filter)) {
+    if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}')) {
+      const tokenName = value.slice(1, -1); // e.g. 'chosen_mystery'
+      if (tokenName.startsWith('chosen_')) {
+        const featureKeyword = tokenName.slice('chosen_'.length); // e.g. 'mystery'
+        const match = siblingChoices.find(
+          (c) => c.featureName.toLowerCase() === featureKeyword,
+        );
+        resolved[key] = typeof match?.selection === 'string' ? match.selection : undefined;
+      }
+      // {chosen_deity} and other non-class-choice tokens remain unresolved (future work)
+    } else {
+      resolved[key] = value;
+    }
+  }
+  return resolved;
+}
+
+function buildCollectionItems(
+  collectionName: string,
+  resolvedFilter: Record<string, unknown> = {},
+): SearchItem[] {
   switch (collectionName) {
     case 'domains':
       return ALL_DOMAINS.map((d) => ({
@@ -43,6 +78,35 @@ function buildCollectionItems(collectionName: string): SearchItem[] {
         label: t.name,
         subLabel: t.description?.slice(0, 80),
         category: t.talentTier === 'advanced' ? 'Advanced Talents' : 'Talents',
+      }));
+    case 'mysteries':
+      return ALL_MYSTERIES.map((m) => ({
+        key: m.id,
+        label: m.name,
+        subLabel: m.classSkills.slice(0, 3).join(', '),
+      }));
+    case 'inquisitions':
+      return ALL_INQUISITIONS.map((i) => ({
+        key: i.id,
+        label: i.name,
+        subLabel: i.description?.slice(0, 80),
+      }));
+    case 'revelations': {
+      const mysteryId = resolvedFilter.mysteryId as string | undefined;
+      const pool = mysteryId
+        ? ALL_REVELATIONS.filter((r) => r.mysteryId === mysteryId)
+        : ALL_REVELATIONS;
+      return pool.map((r) => ({
+        key: r.id,
+        label: r.name,
+        subLabel: r.description?.slice(0, 80),
+      }));
+    }
+    case 'cavalierorders':
+      return ALL_CAVALIER_ORDERS.map((o) => ({
+        key: o.id,
+        label: o.name,
+        subLabel: o.classSkills.join(', '),
       }));
     default:
       return [];
@@ -68,6 +132,7 @@ export function ClassChoiceRow({
   currentChoice,
   takenAtLevel,
   featureLabel,
+  siblingChoices,
 }: ClassChoiceRowProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
@@ -75,10 +140,14 @@ export function ClassChoiceRow({
 
   const pickerItems: SearchItem[] = useMemo(() => {
     if (definition.optionSource === 'collection' && definition.collectionName) {
-      return buildCollectionItems(definition.collectionName);
+      const resolvedFilter = resolveFilterTokens(
+        definition.collectionFilter ?? {},
+        siblingChoices ?? [],
+      );
+      return buildCollectionItems(definition.collectionName, resolvedFilter);
     }
     return buildInlineItems(definition);
-  }, [definition]);
+  }, [definition, siblingChoices]);
 
   // Resolve stored ID(s) back to human-readable labels for display.
   const currentSelection = useMemo(() => {

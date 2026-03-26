@@ -279,6 +279,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
                     currentChoice={currentChoice}
                     takenAtLevel={slot.takenAtLevel}
                     featureLabel={slot.featureLabel}
+                    siblingChoices={entry.classChoices}
                   />
                 );
               })}

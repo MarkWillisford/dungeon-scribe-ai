@@ -20,14 +20,16 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 
 ### Currently in flight
 
-| Work                                             | Plan                                      | Status                                       |
-| ------------------------------------------------ | ----------------------------------------- | -------------------------------------------- |
-| `ValidationReportSheet` + validation wiring      | `direct-entry-ui-design.md`               | NOT STARTED                                  |
-| Feats expansion                                  | `data-scraping/feats-traits-expansion.md` | IN PROGRESS — PR #18 open (2,587 feats)      |
-| Traits expansion                                 | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PR #19 open (971/900+ traits) |
-| Seed all collections to Firestore staging → prod | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)              |
-| Data quality + admin review system               | `data-quality-admin-review.md`            | NOT STARTED                                  |
-| Enter Rissi — validate model end-to-end          | —                                         | NOT STARTED                                  |
+| Work                                                | Plan                                      | Status                                       |
+| --------------------------------------------------- | ----------------------------------------- | -------------------------------------------- |
+| `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED                                  |
+| Class choices — Cavalier, Inquisitor, Oracle, Bard  | `data-scraping/class-choices-database.md` | IN PROGRESS — PR #20 open                    |
+| `{chosen_deity}` token resolution in ClassChoiceRow | `data-scraping/class-choices-database.md` | NOT STARTED — domains show unfiltered        |
+| Feats expansion                                     | `data-scraping/feats-traits-expansion.md` | IN PROGRESS — PR #18 open (2,587 feats)      |
+| Traits expansion                                    | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PR #19 open (971/900+ traits) |
+| Seed all collections to Firestore staging → prod    | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)              |
+| Data quality + admin review system                  | `data-quality-admin-review.md`            | NOT STARTED                                  |
+| Enter Rissi — validate model end-to-end             | —                                         | NOT STARTED                                  |
 
 ---
 
