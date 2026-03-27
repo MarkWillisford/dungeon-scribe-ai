@@ -28,11 +28,12 @@ export const WMH_FEATS: FeatDefinition[] = [
     source: "Weapon Master's Handbook",
     types: ['combat', 'style'],
     prerequisites: [
-      { type: 'special', description: 'Weapon Focus with the chosen melee weapon' },
+      { type: 'feat', featId: 'weapon_focus', matchChoiceKey: 'weapon' },
       { type: 'special', description: 'base attack bonus +1 or monk level 1st' },
     ],
     effects: [],
     activationMode: 'toggle',
+    choices: [{ type: 'weapon', label: 'Weapon', affectsEffects: false }],
     tags: ['monk', 'unarmed', 'style'],
   },
   {
@@ -46,11 +47,12 @@ export const WMH_FEATS: FeatDefinition[] = [
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'ascetic_style_wmh' },
-      { type: 'special', description: 'Weapon Focus with the chosen melee weapon' },
+      { type: 'feat', featId: 'weapon_focus', matchChoiceKey: 'weapon' },
       { type: 'special', description: 'base attack bonus +5 or monk level 5th' },
     ],
     effects: [],
     activationMode: 'toggle',
+    choices: [{ type: 'weapon', label: 'Weapon', affectsEffects: false }],
     tags: ['monk', 'unarmed', 'style'],
   },
   {
@@ -65,7 +67,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     prerequisites: [
       { type: 'feat', featId: 'ascetic_form_wmh' },
       { type: 'feat', featId: 'ascetic_style_wmh' },
-      { type: 'special', description: 'Weapon Focus with the chosen weapon' },
+      { type: 'feat', featId: 'weapon_focus', matchChoiceKey: 'weapon' },
       { type: 'special', description: 'base attack bonus +7 or monk level 7th' },
     ],
     effects: [],
