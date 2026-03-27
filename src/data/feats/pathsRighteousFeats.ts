@@ -237,6 +237,52 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
   },
 
   {
+    id: 'starry_grace',
+    name: 'Starry Grace',
+    description:
+      'Your quick and free starknife motions allow you to make deadly dexterous attacks. You can use Weapon Finesse to substitute your Dexterity modifier for your Strength modifier on damage rolls with a starknife sized for you, as long as you are not wielding any other weapon or shield (other than a buckler). Additionally, if you have the panache class feature and have at least 1 panache point, you gain a +5-foot bonus to your speed when moving as part of a charge or Spring Attack with a starknife, or when taking a move action following an attack with a starknife.',
+    shortDescription:
+      'Apply DEX to starknife damage; +5 ft speed on move after starknife attack or on charge/Spring Attack with panache',
+    source: 'Ultimate Intrigue',
+    types: ['combat'],
+    prerequisites: [
+      { type: 'ability_score', ability: 'DEX', minimum: 13 },
+      { type: 'feat', featId: 'weapon_finesse' },
+      { type: 'feat', featId: 'weapon_focus' },
+      { type: 'special', description: 'Must have selected starknife as your Weapon Focus weapon' },
+    ],
+    effects: [
+      {
+        type: 'stat_replacement',
+        bonusType: BonusType.UNTYPED,
+        target: 'damage_rolls.starknife',
+        value: 'DEX',
+        source: 'Starry Grace',
+        condition: {
+          type: 'weapon_type',
+          params: { weapon: 'starknife', singleWeapon: true },
+          description: 'When wielding only a starknife (no other weapon or shield except buckler)',
+        },
+      },
+      {
+        type: 'bonus',
+        bonusType: BonusType.UNTYPED,
+        target: 'speed.base',
+        value: 5,
+        source: 'Starry Grace',
+        condition: {
+          type: 'custom',
+          params: { requires: 'panache', trigger: 'move_after_starknife_attack_or_charge' },
+          description:
+            'When moving after attacking with a starknife or on a charge/Spring Attack with a starknife while having at least 1 panache point',
+        },
+      },
+    ],
+    activationMode: 'passive',
+    tags: ['divine', 'desna', 'starknife', 'dexterity', 'finesse', 'panache', 'swashbuckler'],
+  },
+
+  {
     id: 'guided_star',
     name: 'Guided Star',
     description:
