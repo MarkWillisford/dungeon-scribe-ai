@@ -1,5 +1,5 @@
 import type { Character } from '@/types';
-import type { FeatDefinition, FeatPrerequisite } from '@/types/feats';
+import type { CharacterFeat, FeatDefinition, FeatPrerequisite } from '@/types/feats';
 import type { Skills, Skill } from '@/types/skills';
 import type { AbilityScores } from '@/types/abilities';
 import { getClassByName } from '@/data/classes';
@@ -14,15 +14,25 @@ export interface PrerequisiteResult {
 export class PrerequisiteService {
   /**
    * Check all prerequisites for a feat against a character.
+   *
+   * Pass `characterFeatInstance` when validating an already-taken feat (e.g. direct-entry).
+   * This enables `matchChoiceKey` validation — prereq feats must share the same choice value
+   * (e.g. Greater Weapon Focus requires Weapon Focus with the same weapon).
+   * When omitted (e.g. browsing available feats), `matchChoiceKey` prereqs fall back to
+   * checking that the prereq feat exists at all.
    */
-  static checkPrerequisites(character: Character, feat: FeatDefinition): PrerequisiteResult {
+  static checkPrerequisites(
+    character: Character,
+    feat: FeatDefinition,
+    characterFeatInstance?: CharacterFeat,
+  ): PrerequisiteResult {
     const unmet: FeatPrerequisite[] = [];
     const reasons: string[] = [];
 
     for (const prereq of feat.prerequisites) {
-      if (!this.checkSingle(character, prereq)) {
+      if (!this.checkSingle(character, prereq, characterFeatInstance)) {
         unmet.push(prereq);
-        reasons.push(this.describe(prereq));
+        reasons.push(this.describe(prereq, characterFeatInstance));
       }
     }
 
@@ -44,7 +54,11 @@ export class PrerequisiteService {
   /**
    * Check a single prerequisite.
    */
-  private static checkSingle(character: Character, prereq: FeatPrerequisite): boolean {
+  private static checkSingle(
+    character: Character,
+    prereq: FeatPrerequisite,
+    characterFeatInstance?: CharacterFeat,
+  ): boolean {
     switch (prereq.type) {
       case 'ability_score': {
         const keyMap: Record<string, keyof AbilityScores> = {
@@ -72,13 +86,19 @@ export class PrerequisiteService {
         }
         return character.classes.totalLevel >= prereq.minimum;
 
-      case 'feat':
+      case 'feat': {
+        const requiredChoiceValue =
+          prereq.matchChoiceKey && characterFeatInstance
+            ? characterFeatInstance.choices?.[prereq.matchChoiceKey]
+            : undefined;
         return character.feats.feats.some(
           (f) =>
             f.featId === prereq.featId &&
             (!prereq.choiceRequirement ||
-              f.choices?.[prereq.choiceRequirement.key] === prereq.choiceRequirement.value),
+              f.choices?.[prereq.choiceRequirement.key] === prereq.choiceRequirement.value) &&
+            (!requiredChoiceValue || f.choices?.[prereq.matchChoiceKey!] === requiredChoiceValue),
         );
+      }
 
       case 'skill': {
         const skill = this.getSkill(character.skills, prereq.skillId);
@@ -136,7 +156,7 @@ export class PrerequisiteService {
   /**
    * Describe a prerequisite in human-readable text.
    */
-  private static describe(prereq: FeatPrerequisite): string {
+  private static describe(prereq: FeatPrerequisite, characterFeatInstance?: CharacterFeat): string {
     switch (prereq.type) {
       case 'ability_score':
         return `${prereq.ability} ${prereq.minimum}+`;
@@ -148,9 +168,16 @@ export class PrerequisiteService {
           : `Character level ${prereq.minimum}`;
       case 'feat': {
         const featName = getFeatById(prereq.featId)?.name ?? prereq.featId;
-        return prereq.choiceRequirement
-          ? `Feat: ${featName} (${prereq.choiceRequirement.key}: ${prereq.choiceRequirement.value})`
-          : `Feat: ${featName}`;
+        if (prereq.choiceRequirement) {
+          return `Feat: ${featName} (${prereq.choiceRequirement.key}: ${prereq.choiceRequirement.value})`;
+        }
+        if (prereq.matchChoiceKey) {
+          const resolvedValue = characterFeatInstance?.choices?.[prereq.matchChoiceKey];
+          return resolvedValue
+            ? `Feat: ${featName} (${prereq.matchChoiceKey}: ${resolvedValue})`
+            : `Feat: ${featName} (same ${prereq.matchChoiceKey})`;
+        }
+        return `Feat: ${featName}`;
       }
       case 'skill':
         return `${prereq.skillId} ${prereq.ranks} ranks`;

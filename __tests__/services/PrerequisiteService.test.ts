@@ -226,6 +226,84 @@ describe('PrerequisiteService', () => {
       expect(result.met).toBe(true);
     });
 
+    describe('matchChoiceKey', () => {
+      const weaponSpecDef = makeFeat([
+        { type: 'feat', featId: 'weapon_focus', matchChoiceKey: 'weapon' },
+      ]);
+      weaponSpecDef.choices = [{ type: 'weapon', label: 'Weapon', affectsEffects: true }];
+
+      const weaponFocusLongsword = {
+        featId: 'weapon_focus',
+        name: 'Weapon Focus',
+        source: 'level_1',
+        grantedAtLevel: 1,
+        active: true,
+        choices: { weapon: 'longsword' },
+      };
+
+      test('met when prereq feat has the same choice as the instance', () => {
+        const char = createTestCharacter();
+        char.feats.feats.push(weaponFocusLongsword);
+        const instance = {
+          ...weaponFocusLongsword,
+          featId: 'weapon_specialization',
+          choices: { weapon: 'longsword' },
+        };
+        const result = PrerequisiteService.checkPrerequisites(char, weaponSpecDef, instance);
+        expect(result.met).toBe(true);
+      });
+
+      test('not met when prereq feat has a different choice', () => {
+        const char = createTestCharacter();
+        char.feats.feats.push(weaponFocusLongsword);
+        const instance = {
+          ...weaponFocusLongsword,
+          featId: 'weapon_specialization',
+          choices: { weapon: 'glaive' },
+        };
+        const result = PrerequisiteService.checkPrerequisites(char, weaponSpecDef, instance);
+        expect(result.met).toBe(false);
+        expect(result.reasons[0]).toContain('Weapon Focus');
+        expect(result.reasons[0]).toContain('glaive');
+      });
+
+      test('not met when character lacks the prereq feat entirely', () => {
+        const char = createTestCharacter();
+        const instance = {
+          ...weaponFocusLongsword,
+          featId: 'weapon_specialization',
+          choices: { weapon: 'longsword' },
+        };
+        const result = PrerequisiteService.checkPrerequisites(char, weaponSpecDef, instance);
+        expect(result.met).toBe(false);
+      });
+
+      test('falls back to "has feat at all" when no instance provided (browsing mode)', () => {
+        const char = createTestCharacter();
+        char.feats.feats.push(weaponFocusLongsword);
+        // No characterFeatInstance — getAvailableFeats pattern
+        const result = PrerequisiteService.checkPrerequisites(char, weaponSpecDef);
+        expect(result.met).toBe(true);
+      });
+
+      test('reason includes resolved choice when instance provided', () => {
+        const char = createTestCharacter();
+        const instance = {
+          ...weaponFocusLongsword,
+          featId: 'weapon_specialization',
+          choices: { weapon: 'longsword' },
+        };
+        const result = PrerequisiteService.checkPrerequisites(char, weaponSpecDef, instance);
+        expect(result.reasons[0]).toContain('longsword');
+      });
+
+      test('reason includes generic "same weapon" when no instance provided', () => {
+        const char = createTestCharacter();
+        const result = PrerequisiteService.checkPrerequisites(char, weaponSpecDef);
+        expect(result.reasons[0]).toContain('same weapon');
+      });
+    });
+
     test('race prerequisite met', () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'race', raceName: 'Human' }]);

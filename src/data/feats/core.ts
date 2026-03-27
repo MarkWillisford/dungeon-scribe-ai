@@ -145,8 +145,11 @@ export const CORE_FEATS: FeatDefinition[] = [
     source: 'Core Rulebook',
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'spell_focus' },
-      { type: 'special', description: 'Spell Focus (conjuration)' },
+      {
+        type: 'feat',
+        featId: 'spell_focus',
+        choiceRequirement: { key: 'school', value: 'conjuration' },
+      },
     ],
     effects: [],
     activationMode: 'passive',
@@ -726,7 +729,7 @@ export const CORE_FEATS: FeatDefinition[] = [
     shortDescription: 'Additional +1 DC for spells from chosen school (stacks with Spell Focus)',
     source: 'Core Rulebook',
     types: ['general'],
-    prerequisites: [{ type: 'feat', featId: 'spell_focus' }],
+    prerequisites: [{ type: 'feat', featId: 'spell_focus', matchChoiceKey: 'school' }],
     effects: [],
     activationMode: 'passive',
     choices: [
@@ -2758,7 +2761,7 @@ export const CORE_FEATS: FeatDefinition[] = [
     source: 'Core Rulebook',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'weapon_focus' },
+      { type: 'feat', featId: 'weapon_focus', matchChoiceKey: 'weapon' },
       { type: 'level', minimum: 8, class: 'Fighter' },
       { type: 'bab', minimum: 8 },
     ],
@@ -2792,7 +2795,7 @@ export const CORE_FEATS: FeatDefinition[] = [
     types: ['combat'],
     prerequisites: [
       { type: 'proficiency', proficiency: 'selected weapon' },
-      { type: 'feat', featId: 'weapon_focus' },
+      { type: 'feat', featId: 'weapon_focus', matchChoiceKey: 'weapon' },
       { type: 'level', minimum: 4, class: 'Fighter' },
     ],
     effects: [
@@ -2825,9 +2828,9 @@ export const CORE_FEATS: FeatDefinition[] = [
     types: ['combat'],
     prerequisites: [
       { type: 'proficiency', proficiency: 'selected weapon' },
-      { type: 'feat', featId: 'greater_weapon_focus' },
-      { type: 'feat', featId: 'weapon_focus' },
-      { type: 'feat', featId: 'weapon_specialization' },
+      { type: 'feat', featId: 'greater_weapon_focus', matchChoiceKey: 'weapon' },
+      { type: 'feat', featId: 'weapon_focus', matchChoiceKey: 'weapon' },
+      { type: 'feat', featId: 'weapon_specialization', matchChoiceKey: 'weapon' },
       { type: 'level', minimum: 12, class: 'Fighter' },
     ],
     effects: [

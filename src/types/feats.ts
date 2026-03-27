@@ -40,7 +40,14 @@ export type FeatPrerequisite =
     }
   | { type: 'bab'; minimum: number }
   | { type: 'level'; minimum: number; class?: string }
-  | { type: 'feat'; featId: string; choiceRequirement?: { key: FeatChoiceKey; value: string } }
+  | {
+      type: 'feat';
+      featId: string;
+      // Static: prereq feat must have been taken with this specific choice (e.g. Bladed Brush → WF glaive)
+      choiceRequirement?: { key: FeatChoiceKey; value: string };
+      // Dynamic: prereq feat must match the same choice as the feat being validated (e.g. GWF → WF same weapon)
+      matchChoiceKey?: FeatChoiceKey;
+    }
   | { type: 'skill'; skillId: string; ranks: number }
   | { type: 'class_feature'; featureName: string }
   | { type: 'proficiency'; proficiency: string }
