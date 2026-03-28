@@ -44,6 +44,9 @@ import { DRAGON_EMPIRES_FEATS } from './dragonEmpiresFeats';
 import { ANTIHERO_FEATS } from './antiheroFeats';
 import { HAUNTED_HEROES_FEATS } from './hauntedHeroesFeats';
 import { MONSTER_HUNTER_FEATS } from './monsterHunterFeats';
+import { PLANE_HOPPER_FEATS } from './planeHopperFeats';
+import { PATHS_RIGHTEOUS_FEATS } from './pathsRighteousFeats';
+import { DIVINE_ANTHOLOGY_FEATS } from './divineAnthologyFeats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -88,6 +91,9 @@ export { DRAGON_EMPIRES_FEATS } from './dragonEmpiresFeats';
 export { ANTIHERO_FEATS } from './antiheroFeats';
 export { HAUNTED_HEROES_FEATS } from './hauntedHeroesFeats';
 export { MONSTER_HUNTER_FEATS } from './monsterHunterFeats';
+export { PLANE_HOPPER_FEATS } from './planeHopperFeats';
+export { PATHS_RIGHTEOUS_FEATS } from './pathsRighteousFeats';
+export { DIVINE_ANTHOLOGY_FEATS } from './divineAnthologyFeats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -133,6 +139,9 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...ANTIHERO_FEATS,
   ...HAUNTED_HEROES_FEATS,
   ...MONSTER_HUNTER_FEATS,
+  ...PLANE_HOPPER_FEATS,
+  ...PATHS_RIGHTEOUS_FEATS,
+  ...DIVINE_ANTHOLOGY_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {
