@@ -118,3 +118,26 @@ export interface WildTalentEntry extends ClassOptionBase {
   talentType: 'infusion' | 'utility';
   requiredElement?: string; // some talents are locked to a specific element
 }
+
+// ---- Cavalier Order ----
+// Collection: 'cavalierorders'
+
+export interface CavalierOrderEntry extends ClassOptionBase {
+  classSkills: string[]; // skills granted by the order
+  edicts: string; // roleplay obligations the cavalier must uphold
+}
+
+// ---- Inquisition (Inquisitor) ----
+// Collection: 'inquisitions'
+// Inquisitions are alternatives to domains for the Inquisitor class (APG+).
+// Base fields are sufficient — mechanics are described in description.
+
+export type InquisitionEntry = ClassOptionBase;
+
+// ---- Revelation (Oracle) ----
+// Collection: 'revelations'
+// Filtered at runtime by mysteryId matching the oracle's chosen mystery.
+
+export interface RevelationEntry extends ClassOptionBase {
+  mysteryId: string; // e.g. 'battle', 'bones', 'flame' — matches MysteryEntry.id
+}

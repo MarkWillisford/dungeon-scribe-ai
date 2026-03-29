@@ -10,6 +10,10 @@ import { rogueDefinitions } from './rogue';
 import { dweomerkeeperDefinitions } from './dweomerkeeper';
 import { radiantServantDefinitions } from './radiantServant';
 import { sentinelDefinitions } from './sentinel';
+import { cavalierDefinitions } from './cavalier';
+import { inquisitorDefinitions } from './inquisitor';
+import { oracleDefinitions } from './oracle';
+import { bardDefinitions } from './bard';
 
 export {
   fighterDefinitions,
@@ -23,6 +27,10 @@ export {
   dweomerkeeperDefinitions,
   radiantServantDefinitions,
   sentinelDefinitions,
+  cavalierDefinitions,
+  inquisitorDefinitions,
+  oracleDefinitions,
+  bardDefinitions,
 };
 
 export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
@@ -37,6 +45,10 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...dweomerkeeperDefinitions,
   ...radiantServantDefinitions,
   ...sentinelDefinitions,
+  ...cavalierDefinitions,
+  ...inquisitorDefinitions,
+  ...oracleDefinitions,
+  ...bardDefinitions,
 ];
 
 export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined =>
