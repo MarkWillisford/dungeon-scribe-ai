@@ -167,7 +167,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Chronicle of Legends',
     types: ['combat'],
     prerequisites: [
-      { type: 'class_level', classId: 'dragon_disciple', minimum: 3 },
+      { type: 'level', class: 'dragon_disciple', minimum: 3 },
     ],
     effects: [],
     activationMode: 'conditional',

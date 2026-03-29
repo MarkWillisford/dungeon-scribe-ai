@@ -165,8 +165,8 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     types: ['general'],
     prerequisites: [
       {
-        type: 'class_level',
-        classId: 'kineticist',
+        type: 'level',
+        class: 'kineticist',
         minimum: 1,
       },
     ],

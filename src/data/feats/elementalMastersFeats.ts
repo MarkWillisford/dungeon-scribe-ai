@@ -277,7 +277,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'word_of_healing' },
-      { type: 'class_level', classId: 'paladin', minimum: 5 },
+      { type: 'level', class: 'paladin', minimum: 5 },
       { type: 'special', description: 'Worshiper of a deity that grants the Fire or Sun domain' },
     ],
     effects: [],
