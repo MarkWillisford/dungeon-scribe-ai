@@ -8,6 +8,23 @@ No code has been written yet. Design is fully resolved including wayfinder reson
 
 ---
 
+## Implementation Phases
+
+This plan is implemented in two separate PRs:
+
+### PR 1 — Types + Cleanup + Seed Scaffold (`MW/magic-items-types`)
+1. Type system (`src/types/magicItems.ts`)
+2. Cleanup of existing stubs in `equipment.ts` (remove `MagicItem`, `EquipmentSlot` enum, dead enhancement fields)
+3. Update `character.ts` (`magicItems: MagicItem[]` → `CharacterMagicItem[]`)
+4. Seed script scaffold (`scripts/db/seedMagicItems.ts`) — structure only, no data yet
+
+### PR 2 — Data Scraping (separate campaign, like feats/traits)
+- Static data files (`src/data/magicItems/`) — ~750–900 hand-authored entries
+- Wands/potions/scrolls generated from spell list at seed time
+- Scope: CRB wondrous items, Ultimate Equipment, APG, specific named weapons/armor, ioun stones
+
+---
+
 ## Overview
 
 Pathfinder 1e has a rich magic item system spanning 11 item categories, each with distinct mechanics. This plan covers:

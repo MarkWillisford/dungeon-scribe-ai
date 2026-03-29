@@ -1,6 +1,6 @@
 # Dungeon Scribe AI 1.1 — Implementation Plan
 
-## Status (as of 2026-03-25)
+## Status (as of 2026-03-28)
 
 All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown significantly beyond the original plan through additional phases.
 
@@ -20,6 +20,7 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 
 ### Currently in flight
 
+<<<<<<< HEAD
 | Work                                                | Plan                                      | Status                                       |
 | --------------------------------------------------- | ----------------------------------------- | -------------------------------------------- |
 | `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED                                  |
@@ -60,6 +61,19 @@ Symptoms: `fatal: not a git repository: /mnt/c/.../.git/worktrees/...` or the gi
 Workaround if already broken: temporarily patch the `.git` file to use the `/mnt/c/` WSL path, do the operation, restore the Windows path. Or use `GIT_DIR=` env variable directly.
 
 **Rule: Always create new worktrees from WSL at a `/home/markw/worktrees/<name>` path.**
+=======
+| Work                                             | Plan                            | Status                                                        |
+| ------------------------------------------------ | ------------------------------- | ------------------------------------------------------------- |
+| `ValidationReportSheet` + validation wiring      | `direct-entry-ui-design.md`     | NOT STARTED                                                   |
+| Magic items — types + equipment cleanup (PR 1)   | `magic-items.md`                | IN PROGRESS — `MW/magic-items-types` branch                   |
+| Magic items — data scraping (PR 2)               | `magic-items.md`                | NOT STARTED — blocked on PR 1 merge                           |
+| Feats expansion                                  | `data-scraping/feats-traits-expansion.md` | IN PROGRESS — PR #18 open (2,587 feats)             |
+| Traits expansion                                 | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PR #19 open (971 traits)             |
+| Class choices (Cavalier/Inquisitor/Oracle/Bard)  | `data-scraping/class-choices-database.md` | **COMPLETE** — PR #20 open                          |
+| Seed all collections to Firestore staging → prod | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)                     |
+| Data quality + admin review system               | `data-quality-admin-review.md`  | NOT STARTED                                                   |
+| Enter Rissi — validate model end-to-end          | —                               | NOT STARTED                                                   |
+>>>>>>> 65c0aee (docs: split magic items into PR 1 (types) and PR 2 (data); update implementation plan)
 
 ---
 
