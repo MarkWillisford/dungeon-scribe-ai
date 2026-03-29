@@ -47,6 +47,41 @@ import { MONSTER_HUNTER_FEATS } from './monsterHunterFeats';
 import { PLANE_HOPPER_FEATS } from './planeHopperFeats';
 import { PATHS_RIGHTEOUS_FEATS } from './pathsRighteousFeats';
 import { DIVINE_ANTHOLOGY_FEATS } from './divineAnthologyFeats';
+import { MARTIAL_ARTS_FEATS } from './martialArtsFeats';
+import { MARTIAL_ARTS_FEATS_2 } from './martialArtsFeats2';
+import { MARTIAL_ARTS_FEATS_3 } from './martialArtsFeats3';
+import { ADVENTURERS_GUIDE_FEATS } from './adventurersGuideFeats';
+import { ADVENTURERS_GUIDE_FEATS_2 } from './adventurersGuideFeats2';
+import { ADVENTURERS_GUIDE_FEATS_3 } from './adventurersGuideFeats3';
+import { VILLAIN_CODEX_FEATS } from './villainCodexFeats';
+import { PLANAR_ADVENTURES_FEATS } from './planarAdventuresFeats';
+import { PLANAR_ADVENTURES_FEATS_2 } from './planarAdventuresFeats2';
+import { WILDERNESS_ORIGINS_FEATS } from './wildernessOriginsFeats';
+import { MONSTER_CODEX_FEATS } from './monsterCodexFeats';
+import { MONSTER_CODEX_FEATS_2 } from './monsterCodexFeats2';
+import { HEROES_FROM_FRINGE_FEATS } from './heroesFromFringeFeats';
+import { ULTIMATE_CAMPAIGN_FEATS } from './ultimateCampaignFeats';
+import { ISWG_FEATS } from './iswgFeats';
+import { ISWG_FEATS_2 } from './iswgFeats2';
+import { BLOOD_OF_BEAST_FEATS } from './bloodOfBeastFeats';
+import { QUESTS_CAMPAIGNS_FEATS } from './questsCampaignsFeats';
+import { HEROES_OF_GOLARION_FEATS } from './heroesOfGolarionFeats';
+import { AQUATIC_ADVENTURES_FEATS } from './aquaticAdventuresFeats';
+import { HEROES_HIGH_COURT_FEATS } from './heroesHighCourtFeats';
+import { PATHFINDER_UNCHAINED_FEATS } from './pathfinderUnchainedFeats';
+import { PEOPLE_WASTES_FEATS } from './peopleWastesFeats';
+import { ELEMENTAL_MASTERS_FEATS } from './elementalMastersFeats';
+import { LEGACY_FIRST_WORLD_FEATS } from './legacyFirstWorldFeats';
+import { LEGACY_DRAGONS_FEATS } from './legacyDragonsFeats';
+import { CHRONICLE_LEGENDS_FEATS } from './chronicleLegendsFeats';
+import { MONSTER_SUMMONER_FEATS } from './monsterSummonerFeats';
+import { INNER_SEA_COMBAT_FEATS } from './innerSeaCombatFeats';
+import { AGENTS_EVIL_FEATS } from './agentsEvilFeats';
+import { BLOOD_ANCIENTS_FEATS } from './bloodAncientFeats';
+import { PSYCHIC_ANTHOLOGY_FEATS } from './psychicAnthologyFeats';
+import { POTIONS_POISONS_FEATS } from './potionsPoisonsFeats';
+import { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
+import { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -94,6 +129,41 @@ export { MONSTER_HUNTER_FEATS } from './monsterHunterFeats';
 export { PLANE_HOPPER_FEATS } from './planeHopperFeats';
 export { PATHS_RIGHTEOUS_FEATS } from './pathsRighteousFeats';
 export { DIVINE_ANTHOLOGY_FEATS } from './divineAnthologyFeats';
+export { MARTIAL_ARTS_FEATS } from './martialArtsFeats';
+export { MARTIAL_ARTS_FEATS_2 } from './martialArtsFeats2';
+export { MARTIAL_ARTS_FEATS_3 } from './martialArtsFeats3';
+export { ADVENTURERS_GUIDE_FEATS } from './adventurersGuideFeats';
+export { ADVENTURERS_GUIDE_FEATS_2 } from './adventurersGuideFeats2';
+export { ADVENTURERS_GUIDE_FEATS_3 } from './adventurersGuideFeats3';
+export { VILLAIN_CODEX_FEATS } from './villainCodexFeats';
+export { PLANAR_ADVENTURES_FEATS } from './planarAdventuresFeats';
+export { PLANAR_ADVENTURES_FEATS_2 } from './planarAdventuresFeats2';
+export { WILDERNESS_ORIGINS_FEATS } from './wildernessOriginsFeats';
+export { MONSTER_CODEX_FEATS } from './monsterCodexFeats';
+export { MONSTER_CODEX_FEATS_2 } from './monsterCodexFeats2';
+export { HEROES_FROM_FRINGE_FEATS } from './heroesFromFringeFeats';
+export { ULTIMATE_CAMPAIGN_FEATS } from './ultimateCampaignFeats';
+export { ISWG_FEATS } from './iswgFeats';
+export { ISWG_FEATS_2 } from './iswgFeats2';
+export { BLOOD_OF_BEAST_FEATS } from './bloodOfBeastFeats';
+export { QUESTS_CAMPAIGNS_FEATS } from './questsCampaignsFeats';
+export { HEROES_OF_GOLARION_FEATS } from './heroesOfGolarionFeats';
+export { AQUATIC_ADVENTURES_FEATS } from './aquaticAdventuresFeats';
+export { HEROES_HIGH_COURT_FEATS } from './heroesHighCourtFeats';
+export { PATHFINDER_UNCHAINED_FEATS } from './pathfinderUnchainedFeats';
+export { PEOPLE_WASTES_FEATS } from './peopleWastesFeats';
+export { ELEMENTAL_MASTERS_FEATS } from './elementalMastersFeats';
+export { LEGACY_FIRST_WORLD_FEATS } from './legacyFirstWorldFeats';
+export { LEGACY_DRAGONS_FEATS } from './legacyDragonsFeats';
+export { CHRONICLE_LEGENDS_FEATS } from './chronicleLegendsFeats';
+export { MONSTER_SUMMONER_FEATS } from './monsterSummonerFeats';
+export { INNER_SEA_COMBAT_FEATS } from './innerSeaCombatFeats';
+export { AGENTS_EVIL_FEATS } from './agentsEvilFeats';
+export { BLOOD_ANCIENTS_FEATS } from './bloodAncientFeats';
+export { PSYCHIC_ANTHOLOGY_FEATS } from './psychicAnthologyFeats';
+export { POTIONS_POISONS_FEATS } from './potionsPoisonsFeats';
+export { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
+export { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -142,6 +212,41 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...PLANE_HOPPER_FEATS,
   ...PATHS_RIGHTEOUS_FEATS,
   ...DIVINE_ANTHOLOGY_FEATS,
+  ...MARTIAL_ARTS_FEATS,
+  ...MARTIAL_ARTS_FEATS_2,
+  ...MARTIAL_ARTS_FEATS_3,
+  ...ADVENTURERS_GUIDE_FEATS,
+  ...ADVENTURERS_GUIDE_FEATS_2,
+  ...ADVENTURERS_GUIDE_FEATS_3,
+  ...VILLAIN_CODEX_FEATS,
+  ...PLANAR_ADVENTURES_FEATS,
+  ...PLANAR_ADVENTURES_FEATS_2,
+  ...WILDERNESS_ORIGINS_FEATS,
+  ...MONSTER_CODEX_FEATS,
+  ...MONSTER_CODEX_FEATS_2,
+  ...HEROES_FROM_FRINGE_FEATS,
+  ...ULTIMATE_CAMPAIGN_FEATS,
+  ...ISWG_FEATS,
+  ...ISWG_FEATS_2,
+  ...BLOOD_OF_BEAST_FEATS,
+  ...QUESTS_CAMPAIGNS_FEATS,
+  ...HEROES_OF_GOLARION_FEATS,
+  ...AQUATIC_ADVENTURES_FEATS,
+  ...HEROES_HIGH_COURT_FEATS,
+  ...PATHFINDER_UNCHAINED_FEATS,
+  ...PEOPLE_WASTES_FEATS,
+  ...ELEMENTAL_MASTERS_FEATS,
+  ...LEGACY_FIRST_WORLD_FEATS,
+  ...LEGACY_DRAGONS_FEATS,
+  ...CHRONICLE_LEGENDS_FEATS,
+  ...MONSTER_SUMMONER_FEATS,
+  ...INNER_SEA_COMBAT_FEATS,
+  ...AGENTS_EVIL_FEATS,
+  ...BLOOD_ANCIENTS_FEATS,
+  ...PSYCHIC_ANTHOLOGY_FEATS,
+  ...POTIONS_POISONS_FEATS,
+  ...KOBOLD_GOLARION_FEATS,
+  ...GIANT_HUNTERS_HANDBOOK_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {

@@ -20,14 +20,44 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 
 ### Currently in flight
 
-| Work                                             | Plan                                      | Status                          |
-| ------------------------------------------------ | ----------------------------------------- | ------------------------------- |
-| `ValidationReportSheet` + validation wiring      | `direct-entry-ui-design.md`               | NOT STARTED                     |
-| Feats expansion (~215 more to target)            | `data-scraping/feats-traits-expansion.md` | IN PROGRESS (1,785/2,000+)      |
-| Traits expansion (~450 more to target)           | `data-scraping/feats-traits-expansion.md` | IN PROGRESS (458/900+)          |
-| Seed all collections to Firestore staging → prod | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready) |
-| Data quality + admin review system               | `data-quality-admin-review.md`            | NOT STARTED                     |
-| Enter Rissi — validate model end-to-end          | —                                         | NOT STARTED                     |
+| Work                                             | Plan                                      | Status                                       |
+| ------------------------------------------------ | ----------------------------------------- | -------------------------------------------- |
+| `ValidationReportSheet` + validation wiring      | `direct-entry-ui-design.md`               | NOT STARTED                                  |
+| Feats expansion                                  | `data-scraping/feats-traits-expansion.md` | IN PROGRESS — PR #18 open (2,587 feats)      |
+| Traits expansion                                 | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PR #19 open (971/900+ traits) |
+| Seed all collections to Firestore staging → prod | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)              |
+| Data quality + admin review system               | `data-quality-admin-review.md`            | NOT STARTED                                  |
+| Enter Rissi — validate model end-to-end          | —                                         | NOT STARTED                                  |
+
+---
+
+## Git Worktree Setup — Lessons Learned
+
+### The Right Way: WSL-path worktrees (traits model)
+
+Create worktrees inside the WSL Linux filesystem, not on the Windows filesystem:
+
+```bash
+# From WSL, in the main repo root:
+git worktree add /home/markw/worktrees/<name> MW/<branch-name>
+```
+
+This produces:
+
+- Worktree files at `/home/markw/worktrees/<name>/` (Linux FS)
+- `.git` file contains `gitdir: /mnt/c/.../.git/worktrees/<name>` — a Linux-style path
+- All git and npm commands work from WSL without user involvement
+- Push via SSH (already configured in WSL): `git push origin <branch>`
+
+### The Wrong Way: Windows-path worktrees (feats model)
+
+If a worktree is created from Windows cmd on the Windows filesystem (e.g. `C:\...\Dungeon Scribe AI 1.1 - Feats`), the `.git` file contains `gitdir: C:/Users/...` — a Windows absolute path that WSL cannot follow. This breaks all WSL git operations, requiring the user to manually run git commands from Windows cmd.
+
+Symptoms: `fatal: not a git repository: /mnt/c/.../.git/worktrees/...` or the gitdir path resolving to a Windows path WSL can't use.
+
+Workaround if already broken: temporarily patch the `.git` file to use the `/mnt/c/` WSL path, do the operation, restore the Windows path. Or use `GIT_DIR=` env variable directly.
+
+**Rule: Always create new worktrees from WSL at a `/home/markw/worktrees/<name>` path.**
 
 ---
 
