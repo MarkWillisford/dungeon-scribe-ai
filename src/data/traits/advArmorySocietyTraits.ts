@@ -1060,26 +1060,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     ],
     tags: ['cold', 'fortitude', 'saving throw', 'weather', 'winter'],
   },
-  {
-    id: 'student_of_philosophy',
-    name: 'Student of Philosophy',
-    description:
-      'You were trained in a now-defunct philosophical tradition and learned to use logic and reason to convince others. You can use your Intelligence modifier in place of your Charisma modifier on Diplomacy checks made to persuade others and on Bluff checks to convince others that a lie is true. This trait does not apply to Diplomacy checks to gather information or Bluff checks to feint in combat.',
-    shortDescription: 'Use Intelligence instead of Charisma for Diplomacy (persuade) and Bluff (lie convincingly)',
-    source: 'Quests and Campaigns',
-    category: 'social',
-    prerequisites: [],
-    effects: [
-      {
-        type: 'special',
-        bonusType: BonusType.TRAIT,
-        target: 'special',
-        value: 0,
-        source: 'Student of Philosophy',
-      },
-    ],
-    tags: ['intelligence', 'charisma', 'diplomacy', 'bluff', 'philosophy'],
-  },
+  // student_of_philosophy — skipped, already in core.ts (Ultimate Campaign). Same mechanics, core.ts is canonical source.
 
   // ==================== SOCIAL TRAITS — Heroes of the Wild ====================
   {
