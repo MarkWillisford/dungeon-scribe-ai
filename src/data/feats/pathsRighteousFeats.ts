@@ -14,7 +14,8 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     source: 'Paths of the Righteous',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'weapon_focus_glaive' },
+      { type: 'feat', featId: 'weapon_focus' },
+      { type: 'special', description: 'Must have selected glaive as your Weapon Focus weapon' },
       { type: 'special', description: 'Must be a worshiper of Shelyn' },
     ],
     effects: [
@@ -61,7 +62,8 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     source: 'Paths of the Righteous',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'weapon_focus_longbow' },
+      { type: 'feat', featId: 'weapon_focus' },
+      { type: 'special', description: 'Must have selected longbow as your Weapon Focus weapon' },
       { type: 'special', description: 'Must be a worshiper of Erastil' },
     ],
     effects: [
