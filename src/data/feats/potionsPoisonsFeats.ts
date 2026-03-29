@@ -11,7 +11,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['item_creation'],
     prerequisites: [
-      { type: 'feat', featId: 'Brew Potion' },
+      { type: 'feat', featId: 'brew_potion' },
       { type: 'caster_level', minimum: 5 },
     ],
     effects: [],
@@ -27,7 +27,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['blood_hex'],
     prerequisites: [
-      { type: 'skill', skillId: 'Knowledge (arcana)', ranks: 7 },
+      { type: 'skill', skillId: 'knowledge_arcana', ranks: 7 },
       { type: 'special', description: 'Vishkanya race' },
     ],
     effects: [
@@ -51,7 +51,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['general'],
     prerequisites: [
-      { type: 'skill', skillId: 'Knowledge (religion)', ranks: 9 },
+      { type: 'skill', skillId: 'knowledge_religion', ranks: 9 },
       { type: 'special', description: 'Vishkanya race' },
     ],
     effects: [
@@ -75,7 +75,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['item_creation'],
     prerequisites: [
-      { type: 'feat', featId: 'Brew Potion' },
+      { type: 'feat', featId: 'brew_potion' },
       { type: 'special', description: 'Ability to cast cure serious wounds' },
     ],
     effects: [],
@@ -91,8 +91,8 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'Spit Venom' },
-      { type: 'feat', featId: 'Virulent Venom' },
+      { type: 'feat', featId: 'spit_venom' },
+      { type: 'feat', featId: 'virulent_venom' },
       { type: 'bab', minimum: 7 },
       { type: 'special', description: 'Nagaji race' },
     ],
@@ -117,7 +117,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['item_creation'],
     prerequisites: [
-      { type: 'feat', featId: 'Brew Potion' },
+      { type: 'feat', featId: 'brew_potion' },
       { type: 'caster_level', minimum: 10 },
     ],
     effects: [],
@@ -194,8 +194,8 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'Spit Venom' },
-      { type: 'feat', featId: 'Viscous Venom' },
+      { type: 'feat', featId: 'spit_venom' },
+      { type: 'feat', featId: 'viscous_venom' },
       { type: 'special', description: 'Nagaji race' },
     ],
     effects: [
@@ -219,8 +219,8 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['blood_hex'],
     prerequisites: [
-      { type: 'feat', featId: 'Dispelling Blood' },
-      { type: 'skill', skillId: 'Knowledge (arcana)', ranks: 9 },
+      { type: 'feat', featId: 'dispelling_blood' },
+      { type: 'skill', skillId: 'knowledge_arcana', ranks: 9 },
       { type: 'special', description: 'Vishkanya race' },
     ],
     effects: [
@@ -244,7 +244,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['item_creation'],
     prerequisites: [
-      { type: 'feat', featId: 'Brew Potion' },
+      { type: 'feat', featId: 'brew_potion' },
     ],
     effects: [],
     activationMode: 'passive',
@@ -259,7 +259,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'Spit Venom' },
+      { type: 'feat', featId: 'spit_venom' },
       { type: 'special', description: 'Nagaji race' },
     ],
     effects: [
@@ -283,7 +283,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'Spit Venom' },
+      { type: 'feat', featId: 'spit_venom' },
       { type: 'special', description: 'Nagaji race' },
     ],
     effects: [
@@ -307,8 +307,8 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'Ghostbane Ichor' },
-      { type: 'skill', skillId: 'Knowledge (religion)', ranks: 13 },
+      { type: 'feat', featId: 'ghostbane_ichor' },
+      { type: 'skill', skillId: 'knowledge_religion', ranks: 13 },
       { type: 'special', description: 'Vishkanya race' },
     ],
     effects: [

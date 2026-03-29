@@ -11,7 +11,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Blood of the Ancients',
     types: ['general'],
     prerequisites: [
-      { type: 'skill', skillId: 'Heal', ranks: 5 },
+      { type: 'skill', skillId: 'heal', ranks: 5 },
     ],
     effects: [],
     activationMode: 'conditional',
@@ -26,7 +26,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Blood of the Ancients',
     types: ['combat'],
     prerequisites: [
-      { type: 'skill', skillId: 'Fly', ranks: 10 },
+      { type: 'skill', skillId: 'fly', ranks: 10 },
     ],
     effects: [
       {
@@ -49,7 +49,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Blood of the Ancients',
     types: ['general'],
     prerequisites: [
-      { type: 'skill', skillId: 'Knowledge (history)', ranks: 3 },
+      { type: 'skill', skillId: 'knowledge_history', ranks: 3 },
       { type: 'special', description: 'Connection to a lost culture (relic/object, extensive research, or cultural/direct descent)' },
     ],
     effects: [],
@@ -80,7 +80,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Blood of the Ancients',
     types: ['general'],
     prerequisites: [
-      { type: 'skill', skillId: 'Heal', ranks: 5 },
+      { type: 'skill', skillId: 'heal', ranks: 5 },
     ],
     effects: [],
     activationMode: 'conditional',
@@ -110,7 +110,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Blood of the Ancients',
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'Incredible Healer' },
+      { type: 'feat', featId: 'incredible_healer_bota' },
     ],
     effects: [],
     activationMode: 'conditional',
@@ -125,8 +125,8 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Blood of the Ancients',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'Turbulent Takeoff' },
-      { type: 'skill', skillId: 'Fly', ranks: 10 },
+      { type: 'feat', featId: 'turbulent_takeoff' },
+      { type: 'skill', skillId: 'fly', ranks: 10 },
     ],
     effects: [
       {
@@ -149,9 +149,9 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Blood of the Ancients',
     types: ['general'],
     prerequisites: [
-      { type: 'skill', skillId: 'Knowledge (arcana)', ranks: 1 },
-      { type: 'skill', skillId: 'Knowledge (nature)', ranks: 1 },
-      { type: 'skill', skillId: 'Knowledge (planes)', ranks: 1 },
+      { type: 'skill', skillId: 'knowledge_arcana', ranks: 1 },
+      { type: 'skill', skillId: 'knowledge_nature', ranks: 1 },
+      { type: 'skill', skillId: 'knowledge_planes', ranks: 1 },
     ],
     effects: [
       {
@@ -174,10 +174,10 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Blood of the Ancients',
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'Saoc Brethren Initiate' },
-      { type: 'skill', skillId: 'Knowledge (arcana)', ranks: 5 },
-      { type: 'skill', skillId: 'Knowledge (nature)', ranks: 5 },
-      { type: 'skill', skillId: 'Knowledge (planes)', ranks: 5 },
+      { type: 'feat', featId: 'saoc_brethren_initiate' },
+      { type: 'skill', skillId: 'knowledge_arcana', ranks: 5 },
+      { type: 'skill', skillId: 'knowledge_nature', ranks: 5 },
+      { type: 'skill', skillId: 'knowledge_planes', ranks: 5 },
     ],
     effects: [],
     activationMode: 'passive',
@@ -192,7 +192,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Blood of the Ancients',
     types: ['combat', 'style'],
     prerequisites: [
-      { type: 'feat', featId: 'Step Up' },
+      { type: 'feat', featId: 'step_up' },
       { type: 'bab', minimum: 1 },
     ],
     effects: [
@@ -217,8 +217,8 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
-      { type: 'feat', featId: 'Skyseeker Style' },
-      { type: 'feat', featId: 'Step Up' },
+      { type: 'feat', featId: 'skyseeker_style' },
+      { type: 'feat', featId: 'step_up' },
       { type: 'bab', minimum: 4 },
     ],
     effects: [
@@ -243,9 +243,9 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
-      { type: 'feat', featId: 'Skyseeker Style' },
-      { type: 'feat', featId: 'Skyseeker Thrash' },
-      { type: 'feat', featId: 'Step Up' },
+      { type: 'feat', featId: 'skyseeker_style' },
+      { type: 'feat', featId: 'skyseeker_thrash' },
+      { type: 'feat', featId: 'step_up' },
       { type: 'bab', minimum: 9 },
     ],
     effects: [
@@ -292,7 +292,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Blood of the Ancients',
     types: ['combat'],
     prerequisites: [
-      { type: 'skill', skillId: 'Fly', ranks: 5 },
+      { type: 'skill', skillId: 'fly', ranks: 5 },
     ],
     effects: [],
     activationMode: 'conditional',

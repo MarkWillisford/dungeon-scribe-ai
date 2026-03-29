@@ -35,7 +35,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'Learn Ranger Trap' },
+      { type: 'feat', featId: 'learn_ranger_trap' },
       { type: 'skill', skillId: 'survival', ranks: 8 },
     ],
     effects: [],
@@ -75,9 +75,9 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'Combat Expertise' },
-      { type: 'feat', featId: 'Kobold Groundling' },
-      { type: 'feat', featId: 'Kobold Style' },
+      { type: 'feat', featId: 'combat_expertise' },
+      { type: 'feat', featId: 'kobold_groundling' },
+      { type: 'feat', featId: 'kobold_style' },
       { type: 'special', description: 'Small size or smaller' },
     ],
     effects: [
@@ -101,8 +101,8 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'Combat Expertise' },
-      { type: 'feat', featId: 'Kobold Style' },
+      { type: 'feat', featId: 'combat_expertise' },
+      { type: 'feat', featId: 'kobold_style' },
       { type: 'special', description: 'Small size or smaller' },
     ],
     effects: [
@@ -126,7 +126,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
     types: ['combat', 'style'],
     prerequisites: [
-      { type: 'feat', featId: 'Combat Expertise' },
+      { type: 'feat', featId: 'combat_expertise' },
       { type: 'special', description: 'Small size or smaller' },
     ],
     effects: [

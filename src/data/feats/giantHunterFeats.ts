@@ -12,9 +12,9 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
-      { type: 'feat', featId: 'Point-Blank Shot' },
-      { type: 'feat', featId: 'Precise Shot' },
-      { type: 'feat', featId: 'Throw Anything' },
+      { type: 'feat', featId: 'point_blank_shot' },
+      { type: 'feat', featId: 'precise_shot' },
+      { type: 'feat', featId: 'throw_anything' },
     ],
     effects: [],
     activationMode: 'conditional',
@@ -29,7 +29,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'Antagonize' },
+      { type: 'feat', featId: 'antagonize' },
     ],
     effects: [
       {
@@ -53,8 +53,8 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
-      { type: 'feat', featId: 'Combat Expertise' },
-      { type: 'feat', featId: 'Improved Disarm' },
+      { type: 'feat', featId: 'combat_expertise' },
+      { type: 'feat', featId: 'improved_disarm' },
     ],
     effects: [],
     activationMode: 'conditional',
@@ -123,7 +123,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'Power Attack' },
+      { type: 'feat', featId: 'power_attack' },
     ],
     effects: [
       {
@@ -170,7 +170,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
-      { type: 'feat', featId: 'Improved Unarmed Strike' },
+      { type: 'feat', featId: 'improved_unarmed_strike' },
     ],
     effects: [
       {
@@ -270,7 +270,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
     types: ['teamwork'],
     prerequisites: [
-      { type: 'feat', featId: 'Escape Route' },
+      { type: 'feat', featId: 'escape_route' },
     ],
     effects: [],
     activationMode: 'conditional',
@@ -286,7 +286,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     types: ['metamagic'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 15 },
-      { type: 'feat', featId: 'Still Spell' },
+      { type: 'feat', featId: 'still_spell' },
     ],
     effects: [
       {

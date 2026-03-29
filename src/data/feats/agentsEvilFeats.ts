@@ -223,7 +223,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Agents of Evil',
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'Associate (Pathfinder Society)' },
+      { type: 'feat', featId: 'associate' },
     ],
     effects: [
       {
@@ -246,7 +246,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Agents of Evil',
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'Associate (Red Mantis)' },
+      { type: 'feat', featId: 'associate' },
     ],
     effects: [
       {
@@ -269,8 +269,8 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Agents of Evil',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'Power Attack' },
-      { type: 'feat', featId: 'Toughness' },
+      { type: 'feat', featId: 'power_attack' },
+      { type: 'feat', featId: 'toughness' },
     ],
     effects: [
       {
@@ -293,7 +293,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Agents of Evil',
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'Disruptive' },
+      { type: 'feat', featId: 'disruptive' },
       { type: 'level', minimum: 8 },
     ],
     effects: [
@@ -338,7 +338,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Agents of Evil',
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'Associate (Whispering Way)' },
+      { type: 'feat', featId: 'associate' },
     ],
     effects: [
       {
