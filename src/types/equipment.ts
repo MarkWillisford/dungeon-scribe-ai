@@ -1,4 +1,5 @@
 import { BaseItem, Size, Bonus, Effect } from './base';
+import { CharacterMagicItem } from './magicItems';
 
 export enum EquipmentSlot {
   HEAD = 'head',
@@ -107,7 +108,7 @@ export interface Equipment {
   weapons: Weapon[];
   armor: Armor[];
   shields: Shield[];
-  magicItems: MagicItem[];
+  magicItems: CharacterMagicItem[];
   gear: Gear[];
 
   // Equipment slot management — serialized as Record for Firestore
@@ -226,34 +227,7 @@ export interface Shield extends BaseItem {
   totalCheckPenalty: number;
 }
 
-export interface MagicItem extends BaseItem {
-  type: string; // wondrous, ring, staff, etc.
-  slot: string;
-  equipmentSlot?: EquipmentSlot;
-  aura: string;
-  magicAura: MagicAura;
-  casterLevel: number;
-  activationType: string;
-  requirements: string[];
-
-  charges?: {
-    maximum: number;
-    current: number;
-    rechargeMethod?: string;
-  };
-
-  usesPerDay?: {
-    maximum: number;
-    current: number;
-  };
-
-  effects: Effect[];
-  continuousEffects: Effect[];
-  activatedEffects: Effect[];
-
-  equipped: boolean;
-  active: boolean;
-}
+// MagicItem instance type moved to src/types/magicItems.ts (CharacterMagicItem)
 
 export interface Gear extends BaseItem {
   type: string; // adventuring, alchemical, tool, etc.

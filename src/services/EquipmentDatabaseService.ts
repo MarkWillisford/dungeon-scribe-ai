@@ -5,13 +5,9 @@ import {
   Armor,
   Shield,
   Gear,
-  MagicItem,
-  MagicAura,
-  AuraStrength,
-  MagicSchool,
-  EquipmentSlot,
   AmmoType,
 } from '@/types/equipment';
+import { CharacterMagicItem } from '@/types/magicItems';
 import type {
   WeaponDefinition,
   ArmorDefinition,
@@ -251,29 +247,15 @@ export class EquipmentDatabaseService {
 
   static createMagicItemFromTemplate(
     template: EquipmentTemplate,
-    options?: { quantity?: number },
-  ): MagicItem {
-    const baseItem = this._createBaseItem(template, options?.quantity);
-    const props = template.properties;
-
+    _options?: { quantity?: number },
+  ): CharacterMagicItem {
     return {
-      ...baseItem,
-      type: (props.type as string) || 'wondrous',
-      slot: (props.slot as string) || 'none',
-      equipmentSlot: props.equipmentSlot as EquipmentSlot | undefined,
-      aura: (props.aura as string) || '',
-      magicAura: (props.magicAura as MagicAura) || {
-        strength: AuraStrength.FAINT,
-        school: MagicSchool.TRANSMUTATION,
-      },
-      casterLevel: (props.casterLevel as number) || 1,
-      activationType: (props.activationType as string) || 'passive',
-      requirements: (props.requirements as string[]) || [],
-      effects: (props.effects as Effect[]) || [],
-      continuousEffects: (props.continuousEffects as Effect[]) || [],
-      activatedEffects: (props.activatedEffects as Effect[]) || [],
+      instanceId: `${template.id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      definitionId: template.id,
+      name: template.name,
       equipped: false,
-      active: false,
+      identified: true,
+      notes: '',
     };
   }
 
