@@ -2,9 +2,9 @@
 
 ## 2026-03-25
 
-## Status: NOT STARTED
+## Status: DESIGN COMPLETE — ready to implement
 
-No code has been written for this plan. Everything below is the design spec ready to implement.
+No code has been written yet. Design is fully resolved including wayfinder resonance powers (2026-03-28). Everything below is the spec ready to implement.
 
 ---
 
@@ -406,6 +406,21 @@ export interface MagicShieldDefinition extends MagicItemDefinition {
   allowsHandUse?: boolean; // true for bucklers
 }
 
+// Resonance power granted when an ioun stone is slotted in a wayfinder.
+// Most powers are plain text; structured fields cover the common numeric bonus cases.
+// All three grades (standard/cracked/flawed) of a stone share the same resonance power.
+// Source: Seekers of Secrets (primary), PFS Field Guide, PFS Primer, Inner Sea Combat, others.
+export interface IounStoneResonancePower {
+  description: string; // always present — full rules text
+  // Optional structured fields for simple bonus resonance powers:
+  bonusType?: 'competence' | 'insight' | 'resistance' | 'sacred' | 'circumstance';
+  bonusValue?: number;
+  bonusTarget?: string; // e.g. 'fortitude_saves', 'combat_maneuver_checks'
+  // Flags for special cases:
+  requiresHoldingWayfinder?: boolean; // e.g. Pale Lavender / Lavender and Green Ellipsoid
+  consumesStone?: boolean; // e.g. Clear Spindle — destroys on use
+}
+
 export interface IounStoneDefinition extends MagicItemDefinition {
   category: 'ioun_stone';
   color: string; // "dusty rose prism"
@@ -413,10 +428,10 @@ export interface IounStoneDefinition extends MagicItemDefinition {
   iounVariant?: 'standard' | 'cracked' | 'flawed';
   // Cracked/flawed variants are separate definition entries (different IDs, prices, effects)
   // slot is always 'none' — actual floating/embedded/wayfinder state lives on CharacterMagicItem
-  //
-  // NOTE: Wayfinder resonance powers — when a stone is slotted in a wayfinder, it may grant
-  // an additional resonance power. This data is deferred (no resonance power field yet).
-  // Track as a known gap when implementing IounStoneDefinition data.
+  resonancePower?: IounStoneResonancePower; // undefined = no resonance (e.g. Dark Green Rhomboid)
+  // NOTE: Wayfinder of Hidden Strength uses shape-based resonance that overrides the stone's
+  // resonancePower for 24 hours. That is modeled on the WayfinderOfHiddenStrength wondrous item
+  // entry, not on the stone. No additional field needed here.
 }
 ```
 
@@ -543,7 +558,9 @@ This plan covers data model + static data + Firestore seeding only.
 
 ## Open Questions
 
-- **Two ring slots:** The existing `EquipmentSlot` has `RING_LEFT` and `RING_RIGHT`. Keep both in `ItemSlot` to allow tracking which finger a ring is on, even though the mechanic is simply "max two rings worn."
-- **Wayfinder resonance powers:** Known gap in `IounStoneDefinition`. No field defined yet — requires research into which stones have resonance powers and what they do.
-- **Intelligent artifact weapons:** e.g., a sentient Holy Avenger that is also a major artifact. All three overlays (`intelligentItem`, `artifactProperties`, and the weapon's `conditionalEffects`) can coexist on a single `MagicWeaponDefinition` object — TypeScript structural typing allows this without any special syntax.
-- **Antimagic field:** All `grantedFeats` from magic items are suppressed in antimagic fields. This is enforced at runtime in the modifier pipeline, not in the type definition.
+All open questions resolved. Design is complete.
+
+- **Two ring slots:** Keep both `ring_left` / `ring_right` in `ItemSlot`.
+- **Wayfinder resonance powers:** ✅ Resolved (2026-03-28). Resonance lives on `IounStoneDefinition.resonancePower?: IounStoneResonancePower`. ~50 stones have resonance; ~5 don't (undefined = no resonance). All three grades of a stone share the same resonance power. The Wayfinder of Hidden Strength uses shape-based resonance that overrides the stone's power for 24h — modeled on its own wondrous item entry, not on the stone. Sources: Seekers of Secrets (primary), PFS Field Guide, PFS Primer, Inner Sea Combat.
+- **Intelligent artifact weapons:** All three overlays (`intelligentItem`, `artifactProperties`, `conditionalEffects`) can coexist on one object — TypeScript structural typing handles it.
+- **Antimagic field:** `grantedFeats` suppression enforced at runtime in modifier pipeline, not in types.
