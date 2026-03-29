@@ -26,6 +26,8 @@ interface ClassChoiceRowProps {
   featureLabel: string; // e.g. "Domain 1", "Domain 2", "Rage Power (lvl 2)"
   // All choices stored for this class entry — used to resolve {chosen_X} filter tokens
   siblingChoices?: ClassChoice[];
+  // Disabled when a mutually exclusive sibling choice is already filled (e.g. Inquisitor Domain vs Inquisition)
+  disabled?: boolean;
 }
 
 // Resolve {chosen_X} tokens in a collectionFilter using sibling class choices.
@@ -133,6 +135,7 @@ export function ClassChoiceRow({
   takenAtLevel,
   featureLabel,
   siblingChoices,
+  disabled = false,
 }: ClassChoiceRowProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
@@ -182,11 +185,11 @@ export function ClassChoiceRow({
     <>
       <Pressable
         onPress={() => setPickerOpen(true)}
-        disabled={!hasItems}
-        style={[styles.row, { borderBottomColor: colors.border.DEFAULT }]}
+        disabled={!hasItems || disabled}
+        style={[styles.row, { borderBottomColor: colors.border.DEFAULT, opacity: disabled ? 0.4 : 1 }]}
         accessibilityRole="button"
-        accessibilityLabel={`${featureLabel}: ${currentSelection ?? 'not set'}`}
-        accessibilityHint="Tap to change selection"
+        accessibilityLabel={`${featureLabel}: ${disabled ? 'not available — mutually exclusive choice already made' : (currentSelection ?? 'not set')}`}
+        accessibilityHint={disabled ? undefined : 'Tap to change selection'}
       >
         <Text style={[styles.label, { color: colors.text.secondary }]}>{featureLabel}</Text>
         <View style={styles.selectionRow}>
@@ -194,20 +197,20 @@ export function ClassChoiceRow({
             style={[
               styles.selection,
               {
-                color: currentSelection ? colors.text.primary : colors.text.tertiary,
-                fontStyle: currentSelection ? 'normal' : 'italic',
+                color: disabled ? colors.text.tertiary : (currentSelection ? colors.text.primary : colors.text.tertiary),
+                fontStyle: disabled || !currentSelection ? 'italic' : 'normal',
               },
             ]}
             numberOfLines={1}
           >
-            {currentSelection ?? '— choose —'}
+            {disabled ? '— n/a (other choice made) —' : (currentSelection ?? '— choose —')}
           </Text>
-          {hasItems && (
+          {hasItems && !disabled && (
             <Text style={[styles.searchIcon, { color: isDark ? fantasy.gold : fantasy.bronze }]}>
               🔍
             </Text>
           )}
-          {!hasItems && <Text style={[styles.searchIcon, { color: colors.text.tertiary }]}>—</Text>}
+          {(!hasItems || disabled) && <Text style={[styles.searchIcon, { color: colors.text.tertiary }]}>—</Text>}
         </View>
       </Pressable>
 
