@@ -1047,13 +1047,21 @@ export const APG_TRAITS: TraitDefinition[] = [
     id: 'student_of_philosophy',
     name: 'Student of Philosophy',
     description:
-      'You can use your Intelligence modifier in place of your Charisma modifier on Diplomacy checks to persuade others and on Bluff checks to convince others that a lie is true. (This trait does not affect Diplomacy checks to gather information or Bluff checks to feint in combat.)',
-    shortDescription: 'Use Int instead of Cha for Diplomacy (persuade) and Bluff (lie)',
+      'You were trained in a now-defunct philosophical tradition and learned to use logic and reason to convince others. You can use your Intelligence modifier in place of your Charisma modifier on Diplomacy checks made to persuade others and on Bluff checks to convince others that a lie is true. This trait does not apply to Diplomacy checks to gather information or Bluff checks to feint in combat.',
+    shortDescription: 'Use Intelligence instead of Charisma for Diplomacy (persuade) and Bluff (lie convincingly)',
     source: 'Ultimate Campaign',
     category: 'social',
     prerequisites: [],
-    effects: [],
-    tags: ['intelligence', 'diplomacy', 'bluff'],
+    effects: [
+      {
+        type: 'special',
+        bonusType: BonusType.TRAIT,
+        target: 'special',
+        value: 0,
+        source: 'Student of Philosophy',
+      },
+    ],
+    tags: ['intelligence', 'charisma', 'diplomacy', 'bluff', 'philosophy'],
   },
   {
     id: 'wisdom_in_the_flesh',
