@@ -1,0 +1,677 @@
+import { type RevelationEntry } from '@/types/classOptions';
+
+export const revelationsBatch001: RevelationEntry[] = [
+  // ==================== BATTLE REVELATIONS ====================
+  {
+    id: 'battle-battlecry',
+    name: 'Battlecry',
+    description:
+      "As a standard action, you can unleash an inspiring battlecry. All allies within 100 feet who hear your cry gain a +1 morale bonus on attack rolls, skill checks, and saving throws for a number of rounds equal to your Charisma modifier. At 10th level, the bonus increases to +2. You can use this ability once per day, plus one additional time at 5th level and every five levels thereafter.",
+    mysteryId: 'battle',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'battle-battlefield-clarity',
+    name: 'Battlefield Clarity',
+    description:
+      "Once per day as an immediate action, whenever you fail a saving throw that causes you to become blinded, deafened, frightened, panicked, paralyzed, shaken, or stunned, you may attempt that saving throw again with a +4 insight bonus on the roll. You must take the second result. You gain one additional daily use at 7th level and again at 15th level.",
+    mysteryId: 'battle',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'battle-combat-healer',
+    name: 'Combat Healer',
+    description:
+      "You must be at least 7th level to select this revelation. Whenever you cast a cure spell, you can cast it as a swift action by expending two spell slots of the appropriate level. You can use this ability once per day at 7th level, plus one additional time per day for every four oracle levels beyond 7th.",
+    mysteryId: 'battle',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'battle-iron-skin',
+    name: 'Iron Skin',
+    description:
+      "You must be at least 11th level to select this revelation. Once per day, your skin hardens to grant you DR 10/adamantine, functioning as stoneskin. At 15th level, you can use this ability twice per day.",
+    mysteryId: 'battle',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'battle-maneuver-mastery',
+    name: 'Maneuver Mastery',
+    description:
+      "Select one combat maneuver. Your oracle level is treated as your base attack bonus when calculating your CMB for that maneuver. At 7th level, you gain the Improved combat maneuver feat for that maneuver as a bonus feat. At 11th level, you gain the Greater combat maneuver feat as a bonus feat.",
+    mysteryId: 'battle',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'battle-resiliency',
+    name: 'Resiliency',
+    description:
+      "You are not disabled when reduced to exactly 0 hit points. At 7th level, you gain Diehard as a bonus feat. At 11th level, you do not lose hit points when you take standard actions while disabled.",
+    mysteryId: 'battle',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'battle-skill-at-arms',
+    name: 'Skill at Arms',
+    description:
+      "You gain proficiency in all martial weapons and heavy armor.",
+    mysteryId: 'battle',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'battle-surprising-charge',
+    name: 'Surprising Charge',
+    description:
+      "Once per day, you can move up to your speed as an immediate action. You can use this ability one additional time per day at 7th level and at 15th level.",
+    mysteryId: 'battle',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'battle-war-sight',
+    name: 'War Sight',
+    description:
+      "Whenever you roll initiative, you can roll twice and take either result. At 7th level, you can always act in the surprise round, though you are still flat-footed until you take an action. At 11th level, you can roll initiative three times and take any result.",
+    mysteryId: 'battle',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'battle-weapon-mastery',
+    name: 'Weapon Mastery',
+    description:
+      "Select one weapon type (such as sword or axe). You gain Weapon Focus with that weapon as a bonus feat. At 8th level, you gain Improved Critical with that weapon as a bonus feat. At 12th level, you gain Greater Weapon Focus with that weapon as a bonus feat.",
+    mysteryId: 'battle',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+
+  // ==================== BONES REVELATIONS ====================
+  {
+    id: 'bones-armor-of-bones',
+    name: 'Armor of Bones',
+    description:
+      "You can conjure armor made of bones that grants you a +4 armor bonus. This bonus increases by +2 at 7th level and every four oracle levels thereafter. At 13th level, this armor also grants DR 5/bludgeoning. You can use this armor for 1 hour per day per oracle level, which does not need to be consecutive.",
+    mysteryId: 'bones',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'bones-bleeding-wounds',
+    name: 'Bleeding Wounds',
+    description:
+      "Whenever a creature takes damage from your negative energy effects, it begins to bleed, taking 1 point of damage per round. At 5th level and every five levels thereafter, this damage increases by 1. The bleeding can be stopped by a DC 15 Heal check or any effect that heals damage.",
+    mysteryId: 'bones',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'bones-deaths-touch',
+    name: "Death's Touch",
+    description:
+      "You can make a melee touch attack as a standard action that deals 1d6 points of negative energy damage plus 1 point per two oracle levels. Against undead, this touch heals damage and grants a +2 channel resistance bonus for 1 minute. You can use this ability 3 + Charisma modifier times per day.",
+    mysteryId: 'bones',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'bones-near-death',
+    name: 'Near Death',
+    description:
+      "You gain a +2 insight bonus on saving throws against diseases, mind-affecting effects, and poisons. At 7th level, this bonus also applies to saving throws against death effects, sleep effects, and stunning. At 11th level, the bonus increases to +4.",
+    mysteryId: 'bones',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'bones-raise-the-dead',
+    name: 'Raise the Dead',
+    description:
+      "As a standard action, you can summon a skeleton or zombie with Hit Dice equal to your oracle level. This undead servant lasts for a number of rounds equal to your Charisma modifier. At 7th level, you can summon a bloody skeleton or fast zombie. At 15th level, you can summon advanced versions of those undead. You can use this ability once per day, plus one additional time at 10th level.",
+    mysteryId: 'bones',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'bones-resist-life',
+    name: 'Resist Life',
+    description:
+      "You are treated as an undead creature when targeted by positive or negative energy effects, such as a cleric's channel energy. At 7th level, you gain channel resistance +2. At 11th level, this increases to channel resistance +4. At 15th level, it increases to channel resistance +6.",
+    mysteryId: 'bones',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'bones-soul-siphon',
+    name: 'Soul Siphon',
+    description:
+      "You must be at least 7th level to select this revelation. As a standard action, make a ranged touch attack against a living creature within 30 feet to inflict one negative level lasting a number of minutes equal to your Charisma modifier. You heal hit points equal to your oracle level each time you use this ability. You can use this ability once per day at 7th level, plus one additional time at 11th level and every four levels thereafter.",
+    mysteryId: 'bones',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'bones-spirit-walk',
+    name: 'Spirit Walk',
+    description:
+      "You must be at least 11th level to select this revelation. As a standard action, you become incorporeal and invisible, allowing you to move through solid objects. You can only move while in this form and cannot take other actions. This form lasts for a number of rounds equal to your oracle level. You can end this effect as a standard action. You can use this ability once per day at 11th level, twice per day at 15th level.",
+    mysteryId: 'bones',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'bones-undead-servitude',
+    name: 'Undead Servitude',
+    description:
+      "You gain Command Undead as a bonus feat. You can channel negative energy a number of times per day equal to 3 + your Charisma modifier, but this energy can only be used to command undead via the Command Undead feat.",
+    mysteryId: 'bones',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'bones-voice-of-the-grave',
+    name: 'Voice of the Grave',
+    description:
+      "You can speak with dead, as per the spell, for a number of rounds per day equal to your oracle level. These rounds do not need to be consecutive. At 5th level and every five levels thereafter, the target takes a cumulative -2 penalty on any Will save made to resist this effect.",
+    mysteryId: 'bones',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+
+  // ==================== FLAME REVELATIONS ====================
+  {
+    id: 'flame-burning-magic',
+    name: 'Burning Magic',
+    description:
+      "Whenever a creature fails a saving throw and takes fire damage from one of your spells, it catches on fire. This fire deals 1 point of fire damage per spell level at the beginning of the burning creature's turn each round until the fire is extinguished.",
+    mysteryId: 'flame',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'flame-cinder-dance',
+    name: 'Cinder Dance',
+    description:
+      "Your base speed increases by 10 feet. At 5th level, you gain Nimble Moves as a bonus feat. At 10th level, you gain Acrobatic Steps as a bonus feat. This revelation is unavailable to oracles with the lame oracle curse.",
+    mysteryId: 'flame',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'flame-fire-breath',
+    name: 'Fire Breath',
+    description:
+      "As a standard action, you can exhale a 15-foot cone of flame from your mouth. This flame deals 1d4 points of fire damage per oracle level. A Reflex save (DC 10 + half oracle level + Charisma modifier) halves this damage. You can use this ability once per day, plus one additional time at 5th level and every five levels thereafter.",
+    mysteryId: 'flame',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'flame-firestorm',
+    name: 'Firestorm',
+    description:
+      "You must be at least 11th level to select this revelation. As a standard action, you can cause fire to erupt around you. You can create one 10-foot cube of fire per oracle level, arranged contiguously. Creatures within the fire take 1d6 fire damage per oracle level (Reflex save for half). The fire lasts for a number of rounds equal to your Charisma modifier. You can use this ability once per day.",
+    mysteryId: 'flame',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'flame-form-of-flame',
+    name: 'Form of Flame',
+    description:
+      "You must be at least 7th level to select this revelation. You can assume the form of a fire elemental once per day for 1 hour per oracle level. At 7th level this functions as elemental body I (Small), at 9th level as elemental body II (Medium), at 11th level as elemental body III (Large), and at 13th level as elemental body IV (Huge).",
+    mysteryId: 'flame',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'flame-gaze-of-flames',
+    name: 'Gaze of Flames',
+    description:
+      "You can see through fire, fog, and smoke without penalty. At 7th level, you can gaze through any flame within 10 feet per oracle level as if using clairvoyance. You can use this ability for a number of rounds per day equal to your oracle level, though these rounds do not need to be consecutive.",
+    mysteryId: 'flame',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'flame-heat-aura',
+    name: 'Heat Aura',
+    description:
+      "As a swift action, you can cause waves of heat to radiate from your body. This heat deals 1d4 points of fire damage per two oracle levels (minimum 1d4) to all creatures within 10 feet and grants you 20% concealment until the start of your next turn. You can use this ability once per day, plus one additional time at 5th level and every five levels thereafter.",
+    mysteryId: 'flame',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'flame-molten-skin',
+    name: 'Molten Skin',
+    description:
+      "You gain fire resistance 5. At 5th level, this increases to fire resistance 10. At 11th level, it increases to fire resistance 20. At 17th level, you become immune to fire.",
+    mysteryId: 'flame',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'flame-touch-of-flame',
+    name: 'Touch of Flame',
+    description:
+      "As a standard action, you can make a melee touch attack that deals 1d6 points of fire damage plus 1 point per two oracle levels. You can use this ability 3 + Charisma modifier times per day. At 11th level, any weapon you wield is treated as a flaming weapon.",
+    mysteryId: 'flame',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'flame-wings-of-fire',
+    name: 'Wings of Fire',
+    description:
+      "You must be at least 7th level to select this revelation. As a swift action, you can manifest a pair of fiery wings that grant you a fly speed of 60 feet with average maneuverability. You can use this ability for 1 minute per day per oracle level, and these minutes do not need to be consecutive.",
+    mysteryId: 'flame',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+
+  // ==================== HEAVENS REVELATIONS ====================
+  {
+    id: 'heavens-awesome-display',
+    name: 'Awesome Display',
+    description:
+      "Each creature affected by your illusion (pattern) spells is treated as if its total number of Hit Dice were equal to its actual Hit Dice minus your Charisma modifier (if positive). This makes it easier to affect higher-HD creatures with pattern spells such as color spray and rainbow pattern.",
+    mysteryId: 'heavens',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'heavens-coat-of-many-stars',
+    name: 'Coat of Many Stars',
+    description:
+      "You conjure a coat of shimmering stars around yourself that grants a +4 armor bonus. This bonus increases by +2 at 7th level and every four oracle levels thereafter. At 13th level, the coat also provides DR 5/slashing. You can use this ability for 1 hour per day per oracle level, which does not need to be consecutive.",
+    mysteryId: 'heavens',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'heavens-dweller-in-darkness',
+    name: 'Dweller in Darkness',
+    description:
+      "You must be at least 11th level to select this revelation. Once per day, you can cast phantasmal killer as a spell-like ability. At 17th level, this functions as weird instead, potentially affecting all enemies within range.",
+    mysteryId: 'heavens',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'heavens-guiding-star',
+    name: 'Guiding Star',
+    description:
+      "Whenever you can see the open sky at night, you can determine your precise location. When the night sky is visible, you add your Charisma modifier to all Wisdom-based skill checks. Additionally, once per night while outdoors you can cast one spell as if it were modified by the Empower Spell, Extend Spell, Silent Spell, or Still Spell feat without increasing the casting time or spell level.",
+    mysteryId: 'heavens',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'heavens-interstellar-void',
+    name: 'Interstellar Void',
+    description:
+      "As a standard action, you call upon the void between the stars and target one creature within 30 feet, dealing 1d6 points of cold damage per oracle level (Fortitude save for half). At 10th level, a creature that fails its save is also fatigued. At 15th level, a creature that fails its save is instead exhausted and stunned for 1 round. You can use this ability once per day, plus one additional time at 10th level.",
+    mysteryId: 'heavens',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'heavens-lure-of-the-heavens',
+    name: 'Lure of the Heavens',
+    description:
+      "At 1st level, you no longer leave tracks on the ground. At 5th level, you hover 6 inches above the ground, ignoring difficult terrain. At 10th level, you gain the ability to fly (as the spell) for a number of minutes per day equal to your oracle level, which do not need to be consecutive.",
+    mysteryId: 'heavens',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'heavens-mantle-of-moonlight',
+    name: 'Mantle of Moonlight',
+    description:
+      "You are immune to lycanthropy. As a standard action, you can make a melee touch attack against a lycanthrope to force it into its humanoid form for a number of rounds equal to your oracle level. At 5th level, you can force other living creatures into a rage state with a melee touch attack. You can use the touch attack ability once per day at 5th level, plus one additional time per five levels beyond 5th.",
+    mysteryId: 'heavens',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'heavens-moonlight-bridge',
+    name: 'Moonlight Bridge',
+    description:
+      "You summon a bridge of moonlight. The bridge is 10 feet wide and extends 10 feet per oracle level in a straight line from your current location. It persists until you cross it completely or for 24 hours, whichever comes first. Treat the bridge as a wall of force if attacked. You can use this ability once per day per point of Charisma bonus.",
+    mysteryId: 'heavens',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'heavens-spray-of-shooting-stars',
+    name: 'Spray of Shooting Stars',
+    description:
+      "As a standard action, you can send a spray of shooting stars at targets within 60 feet. You can target up to one creature or object per four oracle levels; each target takes 1d4 points of fire damage per oracle level (Reflex save for half). Multiple simultaneous explosions deal damage only once. You can use this ability once per day, plus one additional time at 5th level and every five levels thereafter.",
+    mysteryId: 'heavens',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'heavens-star-chart',
+    name: 'Star Chart',
+    description:
+      "You must be at least 7th level to select this revelation. Once per day, you can spend 10 minutes in meditation to gain the benefits of the commune spell. You do not need any material components for this effect.",
+    mysteryId: 'heavens',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+
+  // ==================== LIFE REVELATIONS ====================
+  {
+    id: 'life-channel',
+    name: 'Channel',
+    description:
+      "You can channel positive energy like a cleric, using your oracle level as your effective cleric level when determining the amount of damage healed or dealt. You can use this ability a number of times per day equal to 1 + your Charisma modifier.",
+    mysteryId: 'life',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'life-combat-healer',
+    name: 'Combat Healer',
+    description:
+      "You must be at least 7th level to select this revelation. Whenever you cast a cure spell, you can cast it as a swift action by expending two spell slots of the appropriate level. You can use this ability once per day at 7th level, plus one additional time per day for every four oracle levels beyond 7th.",
+    mysteryId: 'life',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'life-delay-affliction',
+    name: 'Delay Affliction',
+    description:
+      "Once per day as an immediate action, when you fail a saving throw against a disease or poison, you can ignore that effect for 1 hour per oracle level. After this time elapses, the effect resumes. You gain one additional daily use at 7th level and again at 15th level.",
+    mysteryId: 'life',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'life-energy-body',
+    name: 'Energy Body',
+    description:
+      "As a standard action, you can transform your body into living energy. Any undead creature that strikes you takes 1d6 points of positive energy damage plus 1 point per oracle level. Any ally who passes through your space heals 1d6 points of damage plus 1 point per oracle level (once per round). You can use this ability for a number of rounds per day equal to your oracle level, which need not be consecutive.",
+    mysteryId: 'life',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'life-enhanced-cures',
+    name: 'Enhanced Cures',
+    description:
+      "Whenever you cast a cure spell, the maximum number of hit points healed is based on your oracle level rather than your caster level for the purposes of the bonus hit points healed. For example, cure light wounds heals 1d8 + your oracle level instead of 1d8 + your caster level cap.",
+    mysteryId: 'life',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'life-healing-hands',
+    name: 'Healing Hands',
+    description:
+      "You gain a +4 bonus on Heal checks. You can provide first aid to two people per standard action rather than one, and you can treat two people for poison per standard action. You can also treat double the normal number of people simultaneously for wounds, poison, disease, and long-term care.",
+    mysteryId: 'life',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'life-life-link',
+    name: 'Life Link',
+    description:
+      "As a standard action, you can create bonds between yourself and other creatures. Each round, a bonded creature that is more than 5 hit points below its maximum heals 5 hit points; you take 5 points of damage. You can maintain one bond per oracle level simultaneously. A bond ends if the creature dies, moves out of medium range, or you end it as a free action.",
+    mysteryId: 'life',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'life-lifesense',
+    name: 'Lifesense',
+    description:
+      "You must be at least 11th level to select this revelation. You can notice and locate living creatures within 30 feet, just as if you had the blindsight ability. This allows you to detect invisible and hidden living creatures within that range.",
+    mysteryId: 'life',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'life-safe-curing',
+    name: 'Safe Curing',
+    description:
+      "Whenever you cast a spell that cures hit point damage, doing so does not provoke attacks of opportunity.",
+    mysteryId: 'life',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'life-spirit-boost',
+    name: 'Spirit Boost',
+    description:
+      "Whenever you heal a creature beyond its maximum hit points, the excess healing persists as temporary hit points for 1 round per oracle level. The temporary hit points from this ability cannot exceed your oracle level.",
+    mysteryId: 'life',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+
+  // ==================== LORE REVELATIONS ====================
+  {
+    id: 'lore-arcane-archivist',
+    name: 'Arcane Archivist',
+    description:
+      "You must be at least 11th level to select this revelation. Once per day, you can cast any sorcerer/wizard spell from a spellbook in your possession using a spell slot one level higher than the spell's actual level. The spell is erased from the spellbook after you cast it in this way.",
+    mysteryId: 'lore',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'lore-automatic-writing',
+    name: 'Automatic Writing',
+    description:
+      "Once per day, you can spend 1 hour in meditation to produce magical writing. At 1st level, this functions as augury with 90% effectiveness. At 5th level, it functions as divination with 90% effectiveness. At 8th level, it functions as commune with no material component required.",
+    mysteryId: 'lore',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'lore-brain-drain',
+    name: 'Brain Drain',
+    description:
+      "As a standard action, you can pull information from one intelligent enemy within 100 feet. The target must make a Will save (DC 10 + half oracle level + Charisma modifier) or take 1d4 points of damage per oracle level. After a successful use, you may spend a full-round action to make any Knowledge skill check using the victim's bonus. You can use this ability once per day at 1st level, twice per day at 5th level, and one additional time per day every five levels thereafter.",
+    mysteryId: 'lore',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'lore-focused-trance',
+    name: 'Focused Trance',
+    description:
+      "You can enter a deep meditative trance as a full-round action. While in this trance, which lasts 1d6 rounds, you can only take move actions. You gain your oracle level as a bonus on saves against sonic effects and gaze attacks while in the trance. Upon exiting, you can immediately make one Intelligence-based skill check with a +20 circumstance bonus. You can use this ability a number of times per day equal to your Charisma modifier.",
+    mysteryId: 'lore',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'lore-lore-keeper',
+    name: 'Lore Keeper',
+    description:
+      "Instead of using your Intelligence modifier on Knowledge checks, you use your Charisma modifier. You can make all Knowledge checks untrained.",
+    mysteryId: 'lore',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'lore-mental-acuity',
+    name: 'Mental Acuity',
+    description:
+      "You must be at least 7th level to select this revelation. You gain a +1 inherent bonus to Intelligence upon selecting this revelation. You gain an additional +1 inherent bonus to Intelligence every three oracle levels after 7th.",
+    mysteryId: 'lore',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'lore-sidestep-secret',
+    name: 'Sidestep Secret',
+    description:
+      "Your innate understanding of the universe allows you to sidestep danger using your insight. You add your Charisma modifier (instead of your Dexterity modifier) to your Armor Class and all Reflex saving throws. Any effect that negates a Dexterity bonus to AC also negates the Charisma bonus provided by this revelation. Heavy armor and shields with an armor check penalty still impose normal penalties.",
+    mysteryId: 'lore',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'lore-spontaneous-symbology',
+    name: 'Spontaneous Symbology',
+    description:
+      "You must be at least 11th level to select this revelation. Once per day, you can cast any symbol spell (symbol of death, symbol of fear, etc.) as a spell-like ability by using a spell slot of the appropriate level, even if you do not have it on your spell list or in your spells known.",
+    mysteryId: 'lore',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'lore-think-on-it',
+    name: 'Think On It',
+    description:
+      "Once per day, when you fail a Knowledge check, you can reattempt it with a +10 competence bonus. You must attempt this reroll before the end of the encounter or scene in which the check was made.",
+    mysteryId: 'lore',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'lore-whirlwind-lesson',
+    name: 'Whirlwind Lesson',
+    description:
+      "You can absorb the content of a magical tome or scroll in a single 8-hour session, permanently gaining the benefits yourself instead of the typical 48-hour study period. At 7th level, you can also share the benefits with one other character. At 15th level, you can share the benefits with up to your oracle level in characters. The benefits are permanent for you but temporary (lasting a number of days equal to your Charisma modifier) for others.",
+    mysteryId: 'lore',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+];
+
+// CHECKPOINT: last_written=lore-whirlwind-lesson, written=60/60, status=complete
