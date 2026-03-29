@@ -48,6 +48,13 @@ e2e/           — Maestro E2E tests
 - **Styling:** NativeWind (Tailwind for RN) with HL's fantasy theme
 - **Backend:** Firebase (Auth + Firestore + Storage), two environments (staging + prod)
 
+## Working Directory (WSL)
+
+`$PROJ_DIR` is set at session start to the project root:
+`/mnt/c/Users/Markw/Documents/Development Projects/Dungeon Scribe AI 1.1`
+
+Use absolute paths in all Bash commands. Never rely on relative paths or assume cwd.
+
 ## Rules
 
 - Never commit directly to main; use feature branches

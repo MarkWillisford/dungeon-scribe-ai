@@ -481,6 +481,18 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
           description: 'Target must have been dealt hit point damage by you this round',
         },
       },
+      {
+        type: 'penalty',
+        bonusType: BonusType.UNTYPED,
+        target: 'combat_maneuver_defense',
+        value: -2,
+        source: 'Marcher-Lord of the Cerulean Abyss',
+        condition: {
+          type: 'custom',
+          params: { trigger: 'dealt_damage_this_round' },
+          description: 'Target must have been dealt hit point damage by you this round',
+        },
+      },
     ],
     activationMode: 'conditional',
     tags: ['fey', 'court title', 'combat maneuver', 'Ragadahn', 'planar'],

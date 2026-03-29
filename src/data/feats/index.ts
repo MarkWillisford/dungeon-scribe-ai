@@ -69,6 +69,19 @@ import { HEROES_OF_GOLARION_FEATS } from './heroesOfGolarionFeats';
 import { AQUATIC_ADVENTURES_FEATS } from './aquaticAdventuresFeats';
 import { HEROES_HIGH_COURT_FEATS } from './heroesHighCourtFeats';
 import { PATHFINDER_UNCHAINED_FEATS } from './pathfinderUnchainedFeats';
+import { PEOPLE_WASTES_FEATS } from './peopleWastesFeats';
+import { ELEMENTAL_MASTERS_FEATS } from './elementalMastersFeats';
+import { LEGACY_FIRST_WORLD_FEATS } from './legacyFirstWorldFeats';
+import { LEGACY_DRAGONS_FEATS } from './legacyDragonsFeats';
+import { CHRONICLE_LEGENDS_FEATS } from './chronicleLegendsFeats';
+import { MONSTER_SUMMONER_FEATS } from './monsterSummonerFeats';
+import { INNER_SEA_COMBAT_FEATS } from './innerSeaCombatFeats';
+import { AGENTS_EVIL_FEATS } from './agentsEvilFeats';
+import { BLOOD_ANCIENTS_FEATS } from './bloodAncientFeats';
+import { PSYCHIC_ANTHOLOGY_FEATS } from './psychicAnthologyFeats';
+import { POTIONS_POISONS_FEATS } from './potionsPoisonsFeats';
+import { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
+import { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -138,6 +151,19 @@ export { HEROES_OF_GOLARION_FEATS } from './heroesOfGolarionFeats';
 export { AQUATIC_ADVENTURES_FEATS } from './aquaticAdventuresFeats';
 export { HEROES_HIGH_COURT_FEATS } from './heroesHighCourtFeats';
 export { PATHFINDER_UNCHAINED_FEATS } from './pathfinderUnchainedFeats';
+export { PEOPLE_WASTES_FEATS } from './peopleWastesFeats';
+export { ELEMENTAL_MASTERS_FEATS } from './elementalMastersFeats';
+export { LEGACY_FIRST_WORLD_FEATS } from './legacyFirstWorldFeats';
+export { LEGACY_DRAGONS_FEATS } from './legacyDragonsFeats';
+export { CHRONICLE_LEGENDS_FEATS } from './chronicleLegendsFeats';
+export { MONSTER_SUMMONER_FEATS } from './monsterSummonerFeats';
+export { INNER_SEA_COMBAT_FEATS } from './innerSeaCombatFeats';
+export { AGENTS_EVIL_FEATS } from './agentsEvilFeats';
+export { BLOOD_ANCIENTS_FEATS } from './bloodAncientFeats';
+export { PSYCHIC_ANTHOLOGY_FEATS } from './psychicAnthologyFeats';
+export { POTIONS_POISONS_FEATS } from './potionsPoisonsFeats';
+export { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
+export { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -208,6 +234,19 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...AQUATIC_ADVENTURES_FEATS,
   ...HEROES_HIGH_COURT_FEATS,
   ...PATHFINDER_UNCHAINED_FEATS,
+  ...PEOPLE_WASTES_FEATS,
+  ...ELEMENTAL_MASTERS_FEATS,
+  ...LEGACY_FIRST_WORLD_FEATS,
+  ...LEGACY_DRAGONS_FEATS,
+  ...CHRONICLE_LEGENDS_FEATS,
+  ...MONSTER_SUMMONER_FEATS,
+  ...INNER_SEA_COMBAT_FEATS,
+  ...AGENTS_EVIL_FEATS,
+  ...BLOOD_ANCIENTS_FEATS,
+  ...PSYCHIC_ANTHOLOGY_FEATS,
+  ...POTIONS_POISONS_FEATS,
+  ...KOBOLD_GOLARION_FEATS,
+  ...GIANT_HUNTERS_HANDBOOK_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {
