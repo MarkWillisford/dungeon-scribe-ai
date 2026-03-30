@@ -93,6 +93,9 @@ import { CHELIAX_FEATS } from './cheliaxFeats';
 import { HELLKNIGHT_FEATS } from './hellknightFeats';
 import { DISTANT_REALMS_FEATS } from './distantRealmsFeats';
 import { ARCANE_ANTHOLOGY_FEATS } from './arcaneAnthologyFeats';
+import { GOBLIN_GOLARION_FEATS } from './goblinGolarionFeats';
+import { GNOME_GOLARION_FEATS } from './gnomeGolarionFeats';
+import { TECHNOLOGY_GUIDE_FEATS } from './technologyGuideFeats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -186,6 +189,9 @@ export { CHELIAX_FEATS } from './cheliaxFeats';
 export { HELLKNIGHT_FEATS } from './hellknightFeats';
 export { DISTANT_REALMS_FEATS } from './distantRealmsFeats';
 export { ARCANE_ANTHOLOGY_FEATS } from './arcaneAnthologyFeats';
+export { GOBLIN_GOLARION_FEATS } from './goblinGolarionFeats';
+export { GNOME_GOLARION_FEATS } from './gnomeGolarionFeats';
+export { TECHNOLOGY_GUIDE_FEATS } from './technologyGuideFeats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -280,6 +286,9 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...HELLKNIGHT_FEATS,
   ...DISTANT_REALMS_FEATS,
   ...ARCANE_ANTHOLOGY_FEATS,
+  ...GOBLIN_GOLARION_FEATS,
+  ...GNOME_GOLARION_FEATS,
+  ...TECHNOLOGY_GUIDE_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {
