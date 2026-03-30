@@ -90,6 +90,9 @@ import { SPYMASTER_FEATS } from './spymasterFeats';
 import { BOOK_DAMNED_FEATS } from './bookDamnedFeats';
 import { OCCULT_ORIGINS_FEATS } from './occultOriginsFeats';
 import { CHELIAX_FEATS } from './cheliaxFeats';
+import { HELLKNIGHT_FEATS } from './hellknightFeats';
+import { DISTANT_REALMS_FEATS } from './distantRealmsFeats';
+import { ARCANE_ANTHOLOGY_FEATS } from './arcaneAnthologyFeats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -180,6 +183,9 @@ export { SPYMASTER_FEATS } from './spymasterFeats';
 export { BOOK_DAMNED_FEATS } from './bookDamnedFeats';
 export { OCCULT_ORIGINS_FEATS } from './occultOriginsFeats';
 export { CHELIAX_FEATS } from './cheliaxFeats';
+export { HELLKNIGHT_FEATS } from './hellknightFeats';
+export { DISTANT_REALMS_FEATS } from './distantRealmsFeats';
+export { ARCANE_ANTHOLOGY_FEATS } from './arcaneAnthologyFeats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -271,6 +277,9 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...BOOK_DAMNED_FEATS,
   ...OCCULT_ORIGINS_FEATS,
   ...CHELIAX_FEATS,
+  ...HELLKNIGHT_FEATS,
+  ...DISTANT_REALMS_FEATS,
+  ...ARCANE_ANTHOLOGY_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {
