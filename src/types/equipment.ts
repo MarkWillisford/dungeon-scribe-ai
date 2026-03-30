@@ -1,5 +1,5 @@
 import { BaseItem, Size, Bonus, Effect } from './base';
-import { CharacterMagicItem } from './magicItems';
+import type { CharacterMagicItem } from './magicItems';
 
 export enum EquipmentSlot {
   HEAD = 'head',
