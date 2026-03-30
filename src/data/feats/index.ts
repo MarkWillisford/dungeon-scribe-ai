@@ -87,6 +87,9 @@ import { DRAGONSLAYER_FEATS } from './dragonslayerFeats';
 import { HALFLING_GOLARION_FEATS } from './halflingGolarionFeats';
 import { ANIMAL_ARCHIVE_FEATS } from './animalArchiveFeats';
 import { SPYMASTER_FEATS } from './spymasterFeats';
+import { BOOK_DAMNED_FEATS } from './bookDamnedFeats';
+import { OCCULT_ORIGINS_FEATS } from './occultOriginsFeats';
+import { CHELIAX_FEATS } from './cheliaxFeats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -174,6 +177,9 @@ export { DRAGONSLAYER_FEATS } from './dragonslayerFeats';
 export { HALFLING_GOLARION_FEATS } from './halflingGolarionFeats';
 export { ANIMAL_ARCHIVE_FEATS } from './animalArchiveFeats';
 export { SPYMASTER_FEATS } from './spymasterFeats';
+export { BOOK_DAMNED_FEATS } from './bookDamnedFeats';
+export { OCCULT_ORIGINS_FEATS } from './occultOriginsFeats';
+export { CHELIAX_FEATS } from './cheliaxFeats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -262,6 +268,9 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...HALFLING_GOLARION_FEATS,
   ...ANIMAL_ARCHIVE_FEATS,
   ...SPYMASTER_FEATS,
+  ...BOOK_DAMNED_FEATS,
+  ...OCCULT_ORIGINS_FEATS,
+  ...CHELIAX_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {
