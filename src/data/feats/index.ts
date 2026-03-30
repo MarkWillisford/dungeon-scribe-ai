@@ -84,6 +84,9 @@ import { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
 import { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
 import { ADVANCED_CLASS_ORIGINS_FEATS } from './advancedClassOriginsFeats';
 import { DRAGONSLAYER_FEATS } from './dragonslayerFeats';
+import { HALFLING_GOLARION_FEATS } from './halflingGolarionFeats';
+import { ANIMAL_ARCHIVE_FEATS } from './animalArchiveFeats';
+import { SPYMASTER_FEATS } from './spymasterFeats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -168,6 +171,9 @@ export { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
 export { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
 export { ADVANCED_CLASS_ORIGINS_FEATS } from './advancedClassOriginsFeats';
 export { DRAGONSLAYER_FEATS } from './dragonslayerFeats';
+export { HALFLING_GOLARION_FEATS } from './halflingGolarionFeats';
+export { ANIMAL_ARCHIVE_FEATS } from './animalArchiveFeats';
+export { SPYMASTER_FEATS } from './spymasterFeats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -253,6 +259,9 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...GIANT_HUNTERS_HANDBOOK_FEATS,
   ...ADVANCED_CLASS_ORIGINS_FEATS,
   ...DRAGONSLAYER_FEATS,
+  ...HALFLING_GOLARION_FEATS,
+  ...ANIMAL_ARCHIVE_FEATS,
+  ...SPYMASTER_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {
