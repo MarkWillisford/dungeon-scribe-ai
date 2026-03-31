@@ -82,6 +82,7 @@ import { PSYCHIC_ANTHOLOGY_FEATS } from './psychicAnthologyFeats';
 import { POTIONS_POISONS_FEATS } from './potionsPoisonsFeats';
 import { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
 import { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
+import { TIER3_BATCH1_FEATS } from './tier3Batch1Feats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -164,6 +165,7 @@ export { PSYCHIC_ANTHOLOGY_FEATS } from './psychicAnthologyFeats';
 export { POTIONS_POISONS_FEATS } from './potionsPoisonsFeats';
 export { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
 export { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
+export { TIER3_BATCH1_FEATS } from './tier3Batch1Feats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -247,6 +249,7 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...POTIONS_POISONS_FEATS,
   ...KOBOLD_GOLARION_FEATS,
   ...GIANT_HUNTERS_HANDBOOK_FEATS,
+  ...TIER3_BATCH1_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {
