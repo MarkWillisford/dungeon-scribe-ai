@@ -87,6 +87,7 @@ import { TIER3_BATCH2_FEATS } from './tier3Batch2Feats';
 import { TIER3_BATCH3_FEATS } from './tier3Batch3Feats';
 import { TIER3_BATCH4_FEATS } from './tier3Batch4Feats';
 import { TIER3_BATCH5_FEATS } from './tier3Batch5Feats';
+import { TIER3_BATCH6_FEATS } from './tier3Batch6Feats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -174,6 +175,7 @@ export { TIER3_BATCH2_FEATS } from './tier3Batch2Feats';
 export { TIER3_BATCH3_FEATS } from './tier3Batch3Feats';
 export { TIER3_BATCH4_FEATS } from './tier3Batch4Feats';
 export { TIER3_BATCH5_FEATS } from './tier3Batch5Feats';
+export { TIER3_BATCH6_FEATS } from './tier3Batch6Feats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -262,6 +264,7 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...TIER3_BATCH3_FEATS,
   ...TIER3_BATCH4_FEATS,
   ...TIER3_BATCH5_FEATS,
+  ...TIER3_BATCH6_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {
