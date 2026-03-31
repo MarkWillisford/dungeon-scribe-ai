@@ -3,7 +3,7 @@ import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { ClassChoiceRow } from './ClassChoiceRow';
-import { useAppDispatch } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   removeClass,
   updateClassLevel,
@@ -133,6 +133,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [choicesExpanded, setChoicesExpanded] = useState(false);
+  const characterDeity = useAppSelector((state) => state.characterEntry.draft.deity);
 
   const definitions = getDefinitionsForClass(entry.className);
   const allSlots = definitions.flatMap((def) => deriveChoiceSlots(def, entry.level));
@@ -295,6 +296,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
                     featureLabel={slot.featureLabel}
                     siblingChoices={entry.classChoices}
                     disabled={isMutuallyExcludedFilled(slot.definition.featureName, entry.classChoices)}
+                    characterDeity={characterDeity}
                   />
                 );
               })}
