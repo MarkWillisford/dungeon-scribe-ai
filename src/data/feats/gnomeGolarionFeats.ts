@@ -37,7 +37,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
     tags: ['gnome', 'bluff', 'appraise', 'trade', 'social'],
   },
   {
-    id: 'bewildering_koan',
+    id: 'bewildering_koan_gg',
     name: 'Bewildering Koan',
     description:
       'As a swift action, spend 1 ki point and make a Bluff check by posing an impossible question to a creature. If the creature fails, you either cause it to lose its next action or gain a +2 damage bonus against it for 1 round.',
@@ -88,7 +88,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
     tags: ['gnome', 'ranger', 'favored enemy', 'bluff', 'taunt'],
   },
   {
-    id: 'effortless_trickery',
+    id: 'effortless_trickery_gg',
     name: 'Effortless Trickery',
     description:
       'You can maintain concentration on one spell of the illusion school as a swift action. This does not affect spells from other schools or illusion spells whose durations do not rely on concentration.',
@@ -184,7 +184,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
     tags: ['gnome', 'rage', 'barbarian', 'bluff', 'feint'],
   },
   {
-    id: 'threatening_illusion',
+    id: 'threatening_illusion_gg',
     name: 'Threatening Illusion',
     description:
       'When casting an illusion (figment) spell, designate one 5-foot square within the illusion as threatening, causing a target to perceive it as an actual threat and creating flanking opportunities. Targets may Will save to disbelieve. You can adjust the threatening square as a swift action while maintaining the illusion. Uses a spell slot one level higher than the spell\'s actual level.',

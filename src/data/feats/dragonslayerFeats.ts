@@ -115,7 +115,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     tags: ['dragon', 'saving throw', 'resistance'],
   },
   {
-    id: 'dragonslayer_feat',
+    id: 'dragonslayer',
     name: 'Dragonslayer',
     description:
       "When you confirm a critical hit against an opponent possessing a breath weapon ability, you may forgo the additional critical damage. Instead, the target is prevented from using its breath weapon for a number of rounds equal to twice the weapon's critical multiplier, beyond any standard recharge time the ability specifies.",
@@ -271,7 +271,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     tags: ['dodge', 'reach', 'attack of opportunity', 'dragon'],
   },
   {
-    id: 'snoutgrip',
+    id: 'snoutgrip_dh',
     name: 'Snoutgrip',
     description:
       "When a larger opponent misses you with a bite attack, you can attempt a grapple check (at -5 penalty) as an immediate action to seize your opponent's mouth. Upon success, you establish a grapple while preventing the target from using its bite attack, breath weapon, or spells requiring verbal components until it escapes the grapple. You may make this grapple attempt even if the target is out of your reach.",
@@ -301,7 +301,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     tags: ['grapple', 'bite', 'breath weapon', 'dragon', 'monk'],
   },
   {
-    id: 'tandem_evasion',
+    id: 'tandem_evasion_dh',
     name: 'Tandem Evasion',
     description:
       "When standing adjacent to an ally who also possesses this feat, you gain evasion against a dragon's breath weapon and tail sweep special attacks. If you already possess evasion, you instead gain improved evasion against those attacks.",

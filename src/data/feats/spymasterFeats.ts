@@ -3,7 +3,7 @@ import { BonusType } from '@/types/base';
 
 export const SPYMASTER_FEATS: FeatDefinition[] = [
   {
-    id: 'ascendant_story',
+    id: 'ascendant',
     name: 'Ascendant',
     description:
       'You and your apparent allies gain a +2 bonus on skill checks to gain influence or request a favor. This bonus ends against individuals or organizations where you\'ve failed relevant checks. Sense Motive checks against you and allies increase by DC 2.',

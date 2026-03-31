@@ -177,7 +177,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     tags: ['rapier', 'dexterity', 'swashbuckler', 'finesse', 'panache'],
   },
   {
-    id: 'fighting_frenzy',
+    id: 'fighting_frenzy_aco',
     name: 'Fighting Frenzy',
     description:
       'When you are in a rage and an ally who also has this feat is in a rage within 60 feet of you, you don\'t take the normal -2 penalty to AC for being in a rage. If you would take a larger penalty to AC for being in a rage, reduce that penalty by 2.',
@@ -305,7 +305,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     tags: ['teamwork', 'animal companion', 'hunter', 'druid', 'ranger'],
   },
   {
-    id: 'totem_beast',
+    id: 'totem_beast_aco',
     name: 'Totem Beast',
     description:
       'Select one animal aspect from the hunter class\'s animal focus class feature. Your animal companion gains the benefits of the selected animal aspect, treating its Hit Dice as its effective hunter level. Your animal companion also gains natural coloration suggestive of this aspect. This benefit does not stack if the companion is already under the benefit of the same animal aspect from the actual class feature.',

@@ -93,7 +93,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     tags: ['occult', 'phrenology', 'implant', 'concentration', 'heal'],
   },
   {
-    id: 'haruspicy',
+    id: 'haruspicy_oo',
     name: 'Haruspicy',
     description:
       'Upon performing a successful coup de grace, you gain a +2 circumstance bonus on skill checks attempted as part of a single occult ritual or occult skill unlock performed within the next minute. Alternatively, you may gain a +1 caster level bonus on a single divination or necromancy spell. The ritual or spell must begin within 1 minute of the coup de grace.',
@@ -211,7 +211,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     tags: ['occult', 'aura', 'perception', 'ki'],
   },
   {
-    id: 'spirit_symbiosis',
+    id: 'spirit_symbiosis_oo',
     name: 'Spirit Symbiosis',
     description:
       'When casting speak with dead, you may forgo the spell\'s normal effects to temporarily merge the summoned spirit into your phantom. This allows you to exchange your phantom\'s current emotional focus and associated abilities for a new one of your choice. The new emotional focus lasts for 10 minutes per class level before reverting.',

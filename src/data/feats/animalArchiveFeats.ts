@@ -49,7 +49,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
     tags: ['animal companion', 'familiar', 'magic item', 'slot'],
   },
   {
-    id: 'familiar_focus',
+    id: 'familiar_focus_aa',
     name: 'Familiar Focus',
     description:
       "Whenever your master targets you with a harmless spell or spell-like ability, your master's effective caster level for the effect is increased by 1.",
@@ -70,7 +70,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
     tags: ['familiar', 'caster level', 'spellcasting'],
   },
   {
-    id: 'familiar_spell',
+    id: 'familiar_spell_aa',
     name: 'Familiar Spell',
     description:
       "You can transfer prepared spells to your familiar for later casting. Variables that rely on caster level function according to your caster level, not your familiar's Hit Dice. Your familiar needs the ability to speak to cast spells with verbal components and must carry material/focus components. A familiar spell occupies a spell slot 3 levels higher than the actual spell level. Your familiar can store spell levels equal to your caster level total, with no individual spell's adjusted level exceeding half your caster level.",
