@@ -24,19 +24,120 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 | --------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------- |
 | `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED                                             |
 | Magic items — types + equipment cleanup (PR 1)      | `magic-items.md`                          | **COMPLETE** — merged PR #23 (2026-04-01)               |
-| Magic items — data scraping (PR 2)                  | `magic-items.md`                          | NOT STARTED                                             |
+| **PR A — Effect type system redesign**              | `src/types/base.ts`                       | NOT STARTED — blocks PR B; see note below               |
+| **PR B — Magic items data scraping**                | `magic-items.md`                          | NOT STARTED — blocked by PR A                           |
 | Feats expansion                                     | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — merged PR #18 (2026-03-29)               |
 | Traits expansion                                    | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — merged PR #19 (2026-03-29)               |
 | Class choices (Cavalier/Inquisitor/Oracle/Bard)     | `data-scraping/class-choices-database.md` | **COMPLETE** — merged PR #20 (2026-03-29)               |
 | `{chosen_deity}` token resolution in ClassChoiceRow | `data-scraping/class-choices-database.md` | IN PROGRESS — PR #28 open (`DH/deity-token-resolution`) |
 | Seed all collections to Firestore staging → prod    | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)                         |
 | Data quality + admin review system                  | `data-quality-admin-review.md`            | NOT STARTED                                             |
-| `Effect.type` enum review                           | `src/types/base.ts`                       | NOT STARTED — see note below                            |
 | Enter Rissi — validate model end-to-end             | —                                         | NOT STARTED                                             |
 
-#### Note: `Effect.type` enum needs redesign
+#### PR A — Effect type system redesign (scope)
 
-`Effect.type` in `src/types/base.ts` currently has values: `'bonus' | 'special' | 'damage' | 'resistance' | 'penalty' | 'custom'`. These are too vague to be useful — a scraper writing feat data doesn't know which to use, so they invent their own (e.g. `skill_bonus`, `save_dc_bonus`, `caster_level_bonus`, `spell_like_ability`). The enum mixes semantic categories (what kind of thing it is) with mechanical categories (how it applies). Before PR 2 data scraping begins, this should be redesigned to be unambiguous and cover the full range of Pathfinder mechanical effects. Consider consulting the PF1e rules to enumerate the actual modifier categories the engine needs to handle.
+`Effect.type` is currently `type: string` — completely unconstrained. Agents invent values (`skill_bonus`, `save_dc_bonus`, `stat_replacement`, etc.) because there is nothing to stop them. `target` has the same problem. This PR locks both down using TypeScript before any more data is scraped.
+
+**Deliverables:**
+
+1. **`EffectType` string literal union** in `src/types/base.ts`:
+
+   ```typescript
+   export type EffectType =
+     | 'bonus' // numeric add — bonusType controls stacking
+     | 'penalty' // numeric subtract — always stacks
+     | 'damage' // damage dealt (weapon abilities, bonus on-hit damage)
+     | 'resistance' // DR / SR / energy resistance (own stacking rules)
+     | 'ability_substitution' // use one ability score in place of another (e.g. DEX for STR on Climb)
+     | 'grant_sense' // darkvision, blindsight, tremorsense, scent, etc.
+     | 'grant_movement' // grants a movement mode (fly, swim, burrow, climb)
+     | 'immunity' // immune to a condition, damage type, or school
+     | 'override' // replaces a stat value entirely
+     | 'special'; // qualitative — pipeline ignores; UI renders as readable ability text
+   ```
+
+   **`special` contract:** The pipeline does NOT apply `special` effects. They display in the UI as readable ability text only. Items in the Feature Backlog section use `special` until their pipeline phase is built.
+
+2. **`EffectTarget` template literal type** built from component types in `src/types/base.ts`:
+
+   Component types: `AbilityScore`, `SaveType`, `SkillName`, `ACComponent`, `AttackMode`, `SpeedType`, `DamageType`, `SenseType`, `MovementType`, `ImmunityTarget`.
+
+   `SkillName` includes all 11 Knowledge subtypes: `knowledge_arcana`, `knowledge_dungeoneering`, `knowledge_engineering`, `knowledge_geography`, `knowledge_history`, `knowledge_local`, `knowledge_nature`, `knowledge_nobility`, `knowledge_planes`, `knowledge_religion`, `knowledge_martial` (Path of War).
+
+   Craft/Profession/Perform use flat targets (`skill.craft`, `skill.profession`, `skill.perform`) — subtypes go in `EffectCondition.params`.
+
+   Convention per `EffectType`:
+
+   | EffectType             | `target`                                                     | `value`                                 | `bonusType` |
+   | ---------------------- | ------------------------------------------------------------ | --------------------------------------- | ----------- |
+   | `bonus`                | stat path (`skill.perception`, `ac.armor`, `save.fortitude`) | number                                  | required    |
+   | `penalty`              | stat path                                                    | positive number (applied as negative)   | optional    |
+   | `damage`               | damage type (`fire`, `cold`) or `weapon.damage`              | dice string (`'1d6'`) or number         | n/a         |
+   | `resistance`           | `dr`, `sr`, `energy_resistance.fire`, etc.                   | number                                  | n/a         |
+   | `ability_substitution` | stat being substituted (`skill.climb`, `attack.melee`)       | ability score string (`'DEX'`, `'WIS'`) | n/a         |
+   | `grant_sense`          | sense name (`darkvision`, `blindsight`)                      | range in feet                           | n/a         |
+   | `grant_movement`       | movement type (`fly`, `swim`, `burrow`, `climb`)             | speed in feet                           | n/a         |
+   | `immunity`             | what (`fear`, `poison`, `fire`)                              | omit or 0                               | n/a         |
+   | `override`             | stat path                                                    | replacement value                       | n/a         |
+   | `special`              | descriptive key (free text)                                  | description or omit                     | n/a         |
+
+3. **`FeatDefinition` update** — add `spellLikeAbilities?: FeatSpellLikeAbility[]` (mirrors `ItemSpellLikeAbility` on magic items). Migrate 3 feat entries currently using `Effect.type: 'spell_like_ability'` to this field instead.
+
+4. **Codemod script** (`scripts/migrate-effect-types.ts`) — migrates all non-standard `type` values in `src/data/feats/` (89 files) and `src/data/traits/` (30 files) to the new `EffectType` union. Mapping:
+
+   | Old value                      | New `type`             | Notes                                                                    |
+   | ------------------------------ | ---------------------- | ------------------------------------------------------------------------ |
+   | `special_rule`                 | `special`              |                                                                          |
+   | `class_skill`                  | n/a                    | These are `TraitChoice.type`, not `Effect.type` — not migrated           |
+   | `skill_bonus`                  | `bonus`                | fix `target` to `skill.X`                                                |
+   | `stat_replacement`             | `ability_substitution` | fix `value` to ability score string where `value: 0` was a scraper error |
+   | `ac_bonus`                     | `bonus`                | fix `target` to `ac.X`                                                   |
+   | `spell_like_ability`           | removed                | move to `spellLikeAbilities` field (3 feats)                             |
+   | `combat_bonus`                 | `bonus`                | fix `target` to `attack.all`                                             |
+   | `stat_bonus_to_damage`         | `bonus`                | fix `target` to `damage.melee` or `damage.ranged` (verify per feat)      |
+   | `combat_maneuver_bonus`        | `bonus`                | fix `target` to `cmb`                                                    |
+   | `energy_resistance`            | `resistance`           | fix `target` to `energy_resistance.X`                                    |
+   | `insight_bonus`                | `bonus`                | fix `bonusType` to `INSIGHT`, verify `target`                            |
+   | `healing_bonus`                | `special`              | pipeline phase not yet built                                             |
+   | `sneak_attack_bonus`           | `bonus`                | fix `target` to `sneak_attack`                                           |
+   | `save_dc_bonus`                | `special`              | conditional; pipeline phase not yet built                                |
+   | `caster_level_bonus`           | `bonus`                | fix `target` to `spell.caster_level`                                     |
+   | `caster_level_check`           | `bonus`                | fix `target` to `spell.caster_level_check`                               |
+   | `bonus_damage`                 | `damage`               | fix `target` to `weapon.damage` (condition handles qualifier)            |
+   | `cmd_bonus`                    | `bonus`                | fix `target` to `cmd`                                                    |
+   | `speed`                        | `grant_movement`       | target already correct                                                   |
+   | `resource_increase`            | `special`              | pipeline phase not yet built                                             |
+   | `damage_reduction_penetration` | `special`              | pipeline phase not yet built                                             |
+
+5. **`CharacterMagicItem` updates** in `src/types/magicItems.ts`:
+   - `definitionId` becomes optional (undefined for generated items)
+   - `generatedFrom?: { recipe: 'wand' | 'potion' | 'scroll'; spellId: string; spellLevel: number; casterLevel: number; casterClass: string; } | { recipe: 'magic_weapon' | 'magic_armor' | 'magic_shield'; baseItemId: string; enhancementBonus: number; abilityIds: string[]; }`
+   - `additionalSpecialAbilities?: ItemSpecialAbility[]` (DM customization of named items)
+
+**Note on `condition` EffectType:** intentionally omitted. Conditions (sickened, etc.) are a lifecycle system that applies/removes bundles of `penalty` effects. They are not an EffectType. Use `source: 'sickened'` on penalty effects to trace back to the originating condition.
+
+---
+
+## Feature Backlog (rules engine phases not yet built)
+
+These effects exist in the data (`EffectType: 'special'` for now) but have no pipeline phase to apply them. Each requires a dedicated `applyX` phase added to `ModifierPipelineService`.
+
+| Feature                     | What it needs                                                                                         | Example feat/item                                    |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| Class resource pools        | Pipeline phase reading `resource.{pool_name}` targets — adds to per-day/per-encounter resource limits | Extra Crystalline Dust (`resource.crystalline_dust`) |
+| DR penetration              | Pipeline phase for mesmerist stare reducing target's DR                                               | Penetrating Stare (`damage_reduction.penetration`)   |
+| Healing modifiers           | Pipeline phase for `healing.hp_per_die` and similar — modifies incoming/outgoing healing calculations | Reward of the Faithful                               |
+| DR / SR / Energy Resistance | Pipeline phases for `dr`, `sr`, `energy_resistance.{type}` — own stacking rules                       | General (many items and feats)                       |
+| Spell save DC bonuses       | Pipeline phase reading `spell.save_dc` targets                                                        | Merciless Magic (conditional)                        |
+| Speed grants                | `applyMovement` currently only handles `speed.base`; needs `speed.fly`, `speed.swim`, etc.            | Wind Rider (`grant_movement`)                        |
+
+---
+
+## Known Issues / Fix Later
+
+| Issue                                | Description                                                                                                                                                                                                                                                                                                                             | Impact                                                                                                                                                                                                                                    |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Condition evaluation not implemented | `ModifierPipelineService.resolveEffects` never checks `effect.condition`. All conditional effects are applied unconditionally — a character always gets Moonlight Stalker's concealment bonus whether or not they have concealment. Affects `EffectCondition.type: 'custom'` (~1,100 feat/trait effects) and all other condition types. | Conditional feat/trait bonuses are over-applied. Incorrect but not crashing. Fix requires building a condition evaluation system in the rules engine that reads game state (combat state, character state) and gates effects accordingly. |
 
 ---
 
