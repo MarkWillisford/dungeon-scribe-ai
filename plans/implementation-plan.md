@@ -20,60 +20,23 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 
 ### Currently in flight
 
-<<<<<<< HEAD
-| Work                                                | Plan                                      | Status                                       |
-| --------------------------------------------------- | ----------------------------------------- | -------------------------------------------- |
-| `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED                                  |
-| Class choices — Cavalier, Inquisitor, Oracle, Bard  | `data-scraping/class-choices-database.md` | **COMPLETE** — PR #20 open                   |
-| `{chosen_deity}` token resolution in ClassChoiceRow | `data-scraping/class-choices-database.md` | NOT STARTED — domains show unfiltered        |
-| Feats expansion                                     | `data-scraping/feats-traits-expansion.md` | IN PROGRESS — PR #18 open (2,587 feats)      |
-| Traits expansion                                    | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PR #19 open (971/900+ traits) |
-| Seed all collections to Firestore staging → prod    | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)              |
-| Data quality + admin review system                  | `data-quality-admin-review.md`            | NOT STARTED                                  |
-| Enter Rissi — validate model end-to-end             | —                                         | NOT STARTED                                  |
+| Work                                                | Plan                                      | Status                                      |
+| --------------------------------------------------- | ----------------------------------------- | ------------------------------------------- |
+| `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED                                 |
+| Magic items — types + equipment cleanup (PR 1)      | `magic-items.md`                          | IN PROGRESS — `MW/magic-items-types` branch |
+| Magic items — data scraping (PR 2)                  | `magic-items.md`                          | NOT STARTED — blocked on PR 1 merge         |
+| Feats expansion                                     | `data-scraping/feats-traits-expansion.md` | IN PROGRESS — PR #18 open (2,587 feats)     |
+| Traits expansion                                    | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PR #19 open (971 traits)     |
+| Class choices (Cavalier/Inquisitor/Oracle/Bard)     | `data-scraping/class-choices-database.md` | **COMPLETE** — PR #20 open                  |
+| `{chosen_deity}` token resolution in ClassChoiceRow | `data-scraping/class-choices-database.md` | NOT STARTED — domains show unfiltered       |
+| Seed all collections to Firestore staging → prod    | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)             |
+| Data quality + admin review system                  | `data-quality-admin-review.md`            | NOT STARTED                                 |
+| `Effect.type` enum review                           | `src/types/base.ts`                       | NOT STARTED — see note below                |
+| Enter Rissi — validate model end-to-end             | —                                         | NOT STARTED                                 |
 
----
+#### Note: `Effect.type` enum needs redesign
 
-## Git Worktree Setup — Lessons Learned
-
-### The Right Way: WSL-path worktrees (traits model)
-
-Create worktrees inside the WSL Linux filesystem, not on the Windows filesystem:
-
-```bash
-# From WSL, in the main repo root:
-git worktree add /home/markw/worktrees/<name> MW/<branch-name>
-```
-
-This produces:
-
-- Worktree files at `/home/markw/worktrees/<name>/` (Linux FS)
-- `.git` file contains `gitdir: /mnt/c/.../.git/worktrees/<name>` — a Linux-style path
-- All git and npm commands work from WSL without user involvement
-- Push via SSH (already configured in WSL): `git push origin <branch>`
-
-### The Wrong Way: Windows-path worktrees (feats model)
-
-If a worktree is created from Windows cmd on the Windows filesystem (e.g. `C:\...\Dungeon Scribe AI 1.1 - Feats`), the `.git` file contains `gitdir: C:/Users/...` — a Windows absolute path that WSL cannot follow. This breaks all WSL git operations, requiring the user to manually run git commands from Windows cmd.
-
-Symptoms: `fatal: not a git repository: /mnt/c/.../.git/worktrees/...` or the gitdir path resolving to a Windows path WSL can't use.
-
-Workaround if already broken: temporarily patch the `.git` file to use the `/mnt/c/` WSL path, do the operation, restore the Windows path. Or use `GIT_DIR=` env variable directly.
-
-**Rule: Always create new worktrees from WSL at a `/home/markw/worktrees/<name>` path.**
-=======
-| Work                                             | Plan                            | Status                                                        |
-| ------------------------------------------------ | ------------------------------- | ------------------------------------------------------------- |
-| `ValidationReportSheet` + validation wiring      | `direct-entry-ui-design.md`     | NOT STARTED                                                   |
-| Magic items — types + equipment cleanup (PR 1)   | `magic-items.md`                | IN PROGRESS — `MW/magic-items-types` branch                   |
-| Magic items — data scraping (PR 2)               | `magic-items.md`                | NOT STARTED — blocked on PR 1 merge                           |
-| Feats expansion                                  | `data-scraping/feats-traits-expansion.md` | IN PROGRESS — PR #18 open (2,587 feats)             |
-| Traits expansion                                 | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PR #19 open (971 traits)             |
-| Class choices (Cavalier/Inquisitor/Oracle/Bard)  | `data-scraping/class-choices-database.md` | **COMPLETE** — PR #20 open                          |
-| Seed all collections to Firestore staging → prod | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)                     |
-| Data quality + admin review system               | `data-quality-admin-review.md`  | NOT STARTED                                                   |
-| Enter Rissi — validate model end-to-end          | —                               | NOT STARTED                                                   |
->>>>>>> 65c0aee (docs: split magic items into PR 1 (types) and PR 2 (data); update implementation plan)
+`Effect.type` in `src/types/base.ts` currently has values: `'bonus' | 'special' | 'damage' | 'resistance' | 'penalty' | 'custom'`. These are too vague to be useful — a scraper writing feat data doesn't know which to use, so they invent their own (e.g. `skill_bonus`, `save_dc_bonus`, `caster_level_bonus`, `spell_like_ability`). The enum mixes semantic categories (what kind of thing it is) with mechanical categories (how it applies). Before PR 2 data scraping begins, this should be redesigned to be unambiguous and cover the full range of Pathfinder mechanical effects. Consider consulting the PF1e rules to enumerate the actual modifier categories the engine needs to handle.
 
 ---
 

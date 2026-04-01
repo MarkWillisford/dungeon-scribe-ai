@@ -2,9 +2,9 @@
 
 ## 2026-03-25
 
-## Status: DESIGN COMPLETE — ready to implement
+## Status: PR 1 OPEN — type system implemented
 
-No code has been written yet. Design is fully resolved including wayfinder resonance powers (2026-03-28). Everything below is the spec ready to implement.
+PR 1 (`MW/magic-items-types`, PR #23) is open with `src/types/magicItems.ts` fully implemented. Design is fully resolved including wayfinder resonance powers (2026-03-28). See notes under "Pre-existing Code to Clean Up" for what was deferred to PR 2.
 
 ---
 
@@ -13,12 +13,14 @@ No code has been written yet. Design is fully resolved including wayfinder reson
 This plan is implemented in two separate PRs:
 
 ### PR 1 — Types + Cleanup + Seed Scaffold (`MW/magic-items-types`)
+
 1. Type system (`src/types/magicItems.ts`)
 2. Cleanup of existing stubs in `equipment.ts` (remove `MagicItem`, `EquipmentSlot` enum, dead enhancement fields)
 3. Update `character.ts` (`magicItems: MagicItem[]` → `CharacterMagicItem[]`)
 4. Seed script scaffold (`scripts/db/seedMagicItems.ts`) — structure only, no data yet
 
 ### PR 2 — Data Scraping (separate campaign, like feats/traits)
+
 - Static data files (`src/data/magicItems/`) — ~750–900 hand-authored entries
 - Wands/potions/scrolls generated from spell list at seed time
 - Scope: CRB wondrous items, Ultimate Equipment, APG, specific named weapons/armor, ioun stones
@@ -44,7 +46,7 @@ Before writing new types, three things in `equipment.ts` need cleanup:
 
 The existing enum is incomplete for magic items (missing `eyes`, `headband`, `shoulders`) and uses `RING_LEFT`/`RING_RIGHT` (two ring slots) while PF1e wondrous items only need one `ring` slot (rings are tracked as individual items, not by finger). The `TWO_HANDED` slot is a _grip mode_, not a worn slot.
 
-**Resolution:** Replace `EquipmentSlot` with a new unified `ItemSlot` type defined in `magicItems.ts` and imported by `equipment.ts`. The two ring slots stay (since a character can wear two rings simultaneously), but PF1e body slots are added:
+**Resolution:** `ItemSlot` was added as a new unified type in `magicItems.ts`. `EquipmentSlot` was **preserved** (not removed) because existing tests depend on `EquipmentSlot.TWO_HANDED`. The two ring slots stay (since a character can wear two rings simultaneously), but PF1e body slots are added:
 
 ```
 armor | belt | body | chest | eyes | feet | hands | head | headband
@@ -52,7 +54,7 @@ neck | ring_left | ring_right | shield | shoulders | wrists
 main_hand | off_hand | none
 ```
 
-`TWO_HANDED` is removed as a slot — wielding two-handed is a property of the weapon (`handedness: 'two-handed'`), not an equipment slot.
+`TWO_HANDED` remains in `EquipmentSlot` for backwards compatibility. Removal of `EquipmentSlot` in favour of `ItemSlot` is deferred to PR 2 once tests are updated.
 
 ### 2. `MagicItem` interface (equipment.ts:229–256) — replaced
 
@@ -60,7 +62,7 @@ The existing stub `MagicItem extends BaseItem` is superseded by `MagicItemDefini
 
 ### 3. `enhancement` and `weaponAbilities`/`armorAbilities` on `Weapon`/`Armor` — removed
 
-Per the data model decision: mundane weapons and armor do NOT have enhancement numbers. Magic weapons and armor live in a separate collection (`MagicWeaponDefinition`, `MagicArmorDefinition`) that reference the base item via `baseWeaponId`/`baseArmorId`. The `enhancement`, `weaponAbilities`, `armorAbilities`, `specialAbilities` fields on `Weapon` and `Armor` are removed in the same PR that introduces `magicItems.ts`.
+Per the data model decision: mundane weapons and armor do NOT have enhancement numbers. Magic weapons and armor live in a separate collection (`MagicWeaponDefinition`, `MagicArmorDefinition`) that reference the base item via `baseWeaponId`/`baseArmorId`. The `enhancement`, `weaponAbilities`, `armorAbilities`, `specialAbilities` fields on `Weapon` and `Armor` are **deferred to PR 2** — they were retained in PR 1 to avoid breaking existing tests that set these fields directly.
 
 ---
 
