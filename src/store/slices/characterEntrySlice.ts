@@ -227,7 +227,17 @@ const characterEntrySlice = createSlice({
     },
 
     setDeity(state, action: PayloadAction<string>) {
+      const previousDeity = state.draft.deity;
       state.draft.deity = action.payload;
+      // Clear stale domain selections when deity changes — domains valid for
+      // the previous deity may not be valid for the new one.
+      if (previousDeity !== action.payload) {
+        for (const cls of state.draft.classes) {
+          cls.classChoices = cls.classChoices.filter(
+            (c) => c.featureName !== 'Domain',
+          );
+        }
+      }
       state.isDirty = true;
     },
 

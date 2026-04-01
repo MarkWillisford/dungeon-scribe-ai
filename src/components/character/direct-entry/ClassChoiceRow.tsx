@@ -13,7 +13,7 @@ import { ALL_MYSTERIES } from '@/data/mysteries/index';
 import { ALL_INQUISITIONS } from '@/data/inquisitions/index';
 import { ALL_REVELATIONS } from '@/data/revelations/index';
 import { ALL_CAVALIER_ORDERS } from '@/data/cavalierOrders/index';
-import { getDeityById } from '@/data/deities/index';
+import { getDeityByName } from '@/data/deities/index';
 
 interface ClassChoiceRowProps {
   classId: string;
@@ -29,7 +29,7 @@ interface ClassChoiceRowProps {
   siblingChoices?: ClassChoice[];
   // Disabled when a mutually exclusive sibling choice is already filled (e.g. Inquisitor Domain vs Inquisition)
   disabled?: boolean;
-  // The deity ID selected in the Identity section — used to resolve {chosen_deity} filter tokens
+  // The deity name from the Identity section — used to resolve {chosen_deity} filter tokens
   characterDeity?: string;
 }
 
@@ -68,9 +68,11 @@ function buildCollectionItems(
 ): SearchItem[] {
   switch (collectionName) {
     case 'domains': {
-      const deityId = resolvedFilter.deityIds as string | undefined;
-      const deity = deityId ? getDeityById(deityId) : undefined;
-      const deityDomainIds = deity ? new Set(deity.domains) : null;
+      const deityName = resolvedFilter.deityIds as string | undefined;
+      const deity = deityName ? getDeityByName(deityName) : undefined;
+      const deityDomainIds = deity
+        ? new Set([...deity.domains, ...deity.subdomains])
+        : null;
       const pool = deityDomainIds
         ? ALL_DOMAINS.filter((d) => deityDomainIds.has(d.id))
         : ALL_DOMAINS;
