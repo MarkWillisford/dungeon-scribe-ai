@@ -109,8 +109,8 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Bluff 5 ranks and Perform (act) 5 ranks, or dual identity class feature' }],
     effects: [
-      { type: 'skill_bonus', target: 'bluff', value: 5, bonusType: BonusType.CIRCUMSTANCE, source: 'Convincing Persona' },
-      { type: 'skill_bonus', target: 'disguise', value: 5, bonusType: BonusType.CIRCUMSTANCE, source: 'Convincing Persona' },
+      { type: 'bonus', target: 'bluff', value: 5, bonusType: BonusType.CIRCUMSTANCE, source: 'Convincing Persona' },
+      { type: 'bonus', target: 'disguise', value: 5, bonusType: BonusType.CIRCUMSTANCE, source: 'Convincing Persona' },
     ],
     activationMode: 'conditional',
     tags: ['vigilante', 'dual identity', 'disguise', 'bluff', 'intrigue'],

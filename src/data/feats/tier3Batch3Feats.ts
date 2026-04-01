@@ -6,7 +6,7 @@ import { BonusType } from '@/types/base';
 export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
   // ─── Demon Hunter's Handbook ──────────────────────────────────────────────────
   {
-    id: 'coordinated_distraction',
+    id: 'coordinated_distraction_dhh',
     name: 'Coordinated Distraction',
     description:
       'When you and at least one ally with this feat threaten the same enemy, the enemy treats the DC to cast spells defensively as 2 higher for each threatening character with this feat. Does not apply if you or allies cannot take AoOs against the target.',
@@ -31,7 +31,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
       { type: 'skill', skillId: 'knowledge_planes', ranks: 6 },
     ],
     effects: [
-      { type: 'damage_bonus', target: 'demon_lord_followers', value: 2, bonusType: BonusType.UNTYPED, source: 'Demonic Nemesis' },
+      { type: 'damage', target: 'demon_lord_followers', value: 2, bonusType: BonusType.UNTYPED, source: 'Demonic Nemesis' },
     ],
     activationMode: 'passive',
     tags: ['demon', 'demon lord', 'favored enemy', 'critical hit'],
@@ -65,13 +65,13 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
       { type: 'special', description: 'Ability to cast plane shift or gate' },
     ],
     effects: [
-      { type: 'save_bonus', target: 'planar_descriptor', value: 2, bonusType: BonusType.UNTYPED, source: 'Outer Planes Traveler' },
+      { type: 'bonus', target: 'planar_descriptor', value: 2, bonusType: BonusType.UNTYPED, source: 'Outer Planes Traveler' },
     ],
     activationMode: 'passive',
     tags: ['planar', 'caster level', 'saving throw', 'descriptor'],
   },
   {
-    id: 'punch_through',
+    id: 'punch_through_dhh',
     name: 'Punch Through',
     description:
       'As a full-round action, make a single attack. If it hits and deals damage, all allies with this feat ignore up to 5 points of DR against the same target for 1 round. Does not apply to DR without a type (DR X/—).',
@@ -84,7 +84,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
     tags: ['teamwork', 'damage reduction', 'demon', 'support'],
   },
   {
-    id: 'spell_chain',
+    id: 'spell_chain_dhh',
     name: 'Spell Chain',
     description:
       'When you succeed at a caster level check to overcome SR, the next ally with this feat who attempts to overcome the same target\'s SR within 1 round can roll twice and take the better result.',
@@ -107,7 +107,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
     prerequisites: [
       { type: 'special', description: 'Witnessed a family member or close friend killed by demons or demonic cultists, or possess Hated Foe or An Eye for an Eye background' },
     ],
-    effects: [{ type: 'save_bonus', target: 'demon', value: 2, bonusType: BonusType.UNTYPED, source: 'Vengeful Banisher' }],
+    effects: [{ type: 'bonus', target: 'demon', value: 2, bonusType: BonusType.UNTYPED, source: 'Vengeful Banisher' }],
     activationMode: 'conditional',
     tags: ['story', 'demon', 'dismissal', 'saving throw'],
   },
@@ -123,7 +123,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'alignment_channel' },
-      { type: 'feat', featId: 'bless_equipment' },
+      { type: 'feat', featId: 'bless_equipment_ush' },
       { type: 'caster_level', minimum: 3 },
       { type: 'class_feature', featureName: 'channel energy' },
     ],
@@ -132,7 +132,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
     tags: ['channel energy', 'alignment', 'equipment', 'undead'],
   },
   {
-    id: 'bless_equipment',
+    id: 'bless_equipment_ush',
     name: 'Bless Equipment',
     description:
       'As a standard action, expend channel energy uses to touch a weapon, armor, or shield and temporarily grant it a special ability (bane, ghost touch, disruption, lifesurge, nullifying, deathless, stanching, undead-controlling). Lasts rounds equal to channel energy dice. Masterwork items require an extra use but gain +1 enhancement.',
@@ -156,7 +156,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
     source: "Pathfinder Player Companion: Undead Slayer's Handbook",
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'bless_equipment' },
+      { type: 'feat', featId: 'bless_equipment_ush' },
       { type: 'feat', featId: 'improved_bless_equipment' },
       { type: 'caster_level', minimum: 12 },
       { type: 'class_feature', featureName: 'channel energy' },
@@ -190,7 +190,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
     source: "Pathfinder Player Companion: Undead Slayer's Handbook",
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'bless_equipment' },
+      { type: 'feat', featId: 'bless_equipment_ush' },
       { type: 'caster_level', minimum: 9 },
       { type: 'class_feature', featureName: 'channel energy' },
     ],
@@ -241,7 +241,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Champions of Balance',
     types: ['story'],
     prerequisites: [{ type: 'special', description: 'LN, N, or CN alignment; must have shifted from good or evil at least once' }],
-    effects: [{ type: 'save_bonus', target: 'will', value: 2, bonusType: BonusType.UNTYPED, source: 'Crisis of Conscience' }],
+    effects: [{ type: 'bonus', target: 'will', value: 2, bonusType: BonusType.UNTYPED, source: 'Crisis of Conscience' }],
     activationMode: 'passive',
     tags: ['story', 'alignment', 'neutral', 'social'],
   },
@@ -254,7 +254,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Champions of Balance',
     types: ['grit'],
     prerequisites: [{ type: 'special', description: 'Amateur Gunslinger feat or grit class feature' }],
-    effects: [{ type: 'skill_bonus', target: 'perform', value: 1, bonusType: BonusType.UNTYPED, source: 'Fabulist' }],
+    effects: [{ type: 'bonus', target: 'perform', value: 1, bonusType: BonusType.UNTYPED, source: 'Fabulist' }],
     activationMode: 'passive',
     tags: ['grit', 'gunslinger', 'bluff', 'perform', 'storytelling'],
   },
@@ -276,7 +276,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
     tags: ['grit', 'gunslinger', 'feint', 'firearm', 'holster'],
   },
   {
-    id: 'named_bullet_feat',
+    id: 'named_bullet_cb',
     name: 'Named Bullet',
     description:
       'You can craft ammunition inscribed with a specific target\'s name, granting it the bane weapon special ability against that creature only. Using it against other targets incurs -2. Crafting costs 1 grit point and temporarily reduces max grit until fired or destroyed.',
@@ -304,7 +304,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
       { type: 'skill', skillId: 'knowledge_planes', ranks: 5 },
       { type: 'class_feature', featureName: 'favored terrain' },
     ],
-    effects: [{ type: 'attack_bonus', target: 'outsiders', value: 2, bonusType: BonusType.UNTYPED, source: 'Planar Hunter' }],
+    effects: [{ type: 'bonus', target: 'outsiders', value: 2, bonusType: BonusType.UNTYPED, source: 'Planar Hunter' }],
     activationMode: 'conditional',
     tags: ['ranger', 'favored terrain', 'outsider', 'planar', 'DR'],
   },
@@ -361,7 +361,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: People of the Stars',
     types: ['general'],
     prerequisites: [],
-    effects: [{ type: 'skill_bonus', target: 'knowledge_geography', value: 2, bonusType: BonusType.UNTYPED, source: 'Celestial Guidance' }],
+    effects: [{ type: 'bonus', target: 'knowledge_geography', value: 2, bonusType: BonusType.UNTYPED, source: 'Celestial Guidance' }],
     activationMode: 'passive',
     tags: ['navigation', 'stars', 'knowledge', 'reroll'],
   },
@@ -422,7 +422,7 @@ export const TIER3_BATCH3_FEATS: FeatDefinition[] = [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
       { type: 'special', description: 'Nanite surge racial ability' },
     ],
-    effects: [{ type: 'hp_bonus', target: 'self', value: 0, bonusType: BonusType.UNTYPED, source: 'Rapid Repair' }],
+    effects: [{ type: 'bonus', target: 'hp.healing', value: 1, bonusType: BonusType.UNTYPED, source: 'Rapid Repair' }],
     activationMode: 'conditional',
     tags: ['android', 'nanite', 'healing', 'self-repair'],
   },

@@ -22,8 +22,8 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       { type: 'special', description: 'Member of an underclass' },
     ],
     effects: [
-      { type: 'skill_bonus', target: 'bluff', value: 1, bonusType: BonusType.UNTYPED, source: 'Experienced Vagabond' },
-      { type: 'skill_bonus', target: 'knowledge_local', value: 1, bonusType: BonusType.UNTYPED, source: 'Experienced Vagabond' },
+      { type: 'bonus', target: 'bluff', value: 1, bonusType: BonusType.UNTYPED, source: 'Experienced Vagabond' },
+      { type: 'bonus', target: 'knowledge_local', value: 1, bonusType: BonusType.UNTYPED, source: 'Experienced Vagabond' },
     ],
     activationMode: 'conditional',
     tags: ['taldor', 'underclass', 'social', 'criminal'],
@@ -40,7 +40,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       { type: 'skill', skillId: 'profession_sailor', ranks: 2 },
       { type: 'special', description: 'Current or former galley slave' },
     ],
-    effects: [{ type: 'damage_bonus', target: 'first_attack_ship', value: 2, bonusType: BonusType.UNTYPED, source: 'Galley Slave' }],
+    effects: [{ type: 'damage', target: 'first_attack_ship', value: 2, bonusType: BonusType.UNTYPED, source: 'Galley Slave' }],
     activationMode: 'conditional',
     tags: ['taldor', 'ship', 'sailor', 'naval'],
   },
@@ -57,7 +57,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       { type: 'special', description: 'Profession (any) 6 ranks' },
     ],
     effects: [
-      { type: 'skill_bonus', target: 'appraise', value: 2, bonusType: BonusType.UNTYPED, source: 'Master of the Ledger' },
+      { type: 'bonus', target: 'appraise', value: 2, bonusType: BonusType.UNTYPED, source: 'Master of the Ledger' },
     ],
     activationMode: 'passive',
     tags: ['taldor', 'merchant', 'investment', 'appraise', 'profession'],
@@ -71,7 +71,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Companion: Taldor, Echoes of Glory',
     types: ['general'],
     prerequisites: [],
-    effects: [{ type: 'skill_bonus', target: 'stealth', value: 2, bonusType: BonusType.UNTYPED, source: 'Sneaky Vagabond' }],
+    effects: [{ type: 'bonus', target: 'stealth', value: 2, bonusType: BonusType.UNTYPED, source: 'Sneaky Vagabond' }],
     activationMode: 'conditional',
     tags: ['taldor', 'stealth', 'hiding', 'urban'],
   },
@@ -84,7 +84,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Companion: Taldor, Echoes of Glory',
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Taldan serf in service to a lord' }],
-    effects: [{ type: 'damage_bonus', target: 'farm_weapons', value: 1, bonusType: BonusType.UNTYPED, source: 'Taldan Conscript' }],
+    effects: [{ type: 'damage', target: 'farm_weapons', value: 1, bonusType: BonusType.UNTYPED, source: 'Taldan Conscript' }],
     activationMode: 'passive',
     tags: ['taldor', 'conscript', 'farm weapons', 'initiative'],
   },
@@ -102,8 +102,8 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       { type: 'special', description: 'Proficient in a martial weapon' },
     ],
     effects: [
-      { type: 'initiative_bonus', target: 'initiative', value: 2, bonusType: BonusType.UNTYPED, source: 'Taldan Knight' },
-      { type: 'ac_bonus', target: 'ac', value: 1, bonusType: BonusType.DODGE, source: 'Taldan Knight' },
+      { type: 'bonus', target: 'initiative', value: 2, bonusType: BonusType.UNTYPED, source: 'Taldan Knight' },
+      { type: 'bonus', target: 'ac', value: 1, bonusType: BonusType.DODGE, source: 'Taldan Knight' },
     ],
     activationMode: 'conditional',
     tags: ['taldor', 'knight', 'cohort', 'leadership', 'squire'],
@@ -120,7 +120,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       { type: 'bab', minimum: 1 },
       { type: 'special', description: 'Proficient in a martial weapon' },
     ],
-    effects: [{ type: 'initiative_bonus', target: 'initiative', value: 2, bonusType: BonusType.UNTYPED, source: 'Taldan Squire' }],
+    effects: [{ type: 'bonus', target: 'initiative', value: 2, bonusType: BonusType.UNTYPED, source: 'Taldan Squire' }],
     activationMode: 'conditional',
     tags: ['taldor', 'squire', 'mounted', 'initiative', 'dodge'],
   },
@@ -144,7 +144,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
 
   // ─── People of the Sands (5 new — Out of the Sun already in teamworkFeats) ───
   {
-    id: 'horn_of_the_criosphinx',
+    id: 'horn_of_the_criosphinx_ps',
     name: 'Horn of the Criosphinx',
     description:
       'When making a successful charge attack with a two-handed weapon wielded in both hands, add double your Strength bonus to damage instead of 1.5x. Monks can use this with both hands empty for unarmed strikes.',
@@ -187,7 +187,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
     tags: ['teamwork', 'splash weapon', 'alchemy', 'thuvia'],
   },
   {
-    id: 'undermine_teamwork',
+    id: 'undermine_ps',
     name: 'Undermine',
     description:
       'When you use a combat maneuver to move a creature into or through a square adjacent to an ally with this feat, the foe treats all adjacent squares as difficult terrain next turn. Acrobatics DC increases by 2 for each ally with this feat adjacent to the foe.',
@@ -213,7 +213,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       { type: 'feat', featId: 'improved_reposition' },
       { type: 'special', description: 'Base attack bonus +1 or monk level 1st' },
     ],
-    effects: [{ type: 'ac_bonus', target: 'ac', value: 2, bonusType: BonusType.UNTYPED, source: 'Wings of the Androsphinx' }],
+    effects: [{ type: 'bonus', target: 'ac', value: 2, bonusType: BonusType.UNTYPED, source: 'Wings of the Androsphinx' }],
     activationMode: 'conditional',
     tags: ['charge', 'reposition', 'sphinx', 'defense', 'monk'],
   },
@@ -228,7 +228,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Companion: Andoran, Spirit of Liberty',
     types: ['achievement'],
     prerequisites: [{ type: 'special', description: 'Over five occasions, free 50+ sentient beings from unjust captivity' }],
-    effects: [{ type: 'damage_bonus', target: 'slavers', value: 0, bonusType: BonusType.UNTYPED, source: 'Chainbreaker' }],
+    effects: [{ type: 'damage', target: 'slavers', value: 1, bonusType: BonusType.UNTYPED, source: 'Chainbreaker' }],
     activationMode: 'conditional',
     tags: ['andoran', 'achievement', 'slavery', 'freedom', 'damage'],
   },
