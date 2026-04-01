@@ -1,5 +1,5 @@
 import { Effect, Alignment } from './base';
-import { MagicAura } from './equipment';
+import type { MagicAura } from './equipment';
 
 // ---------------------------------------------------------------------------
 // Slot type — worn location for magic items
