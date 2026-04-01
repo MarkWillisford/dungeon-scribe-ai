@@ -20,19 +20,19 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 
 ### Currently in flight
 
-| Work                                                | Plan                                      | Status                                      |
-| --------------------------------------------------- | ----------------------------------------- | ------------------------------------------- |
-| `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED                                 |
-| Magic items — types + equipment cleanup (PR 1)      | `magic-items.md`                          | IN PROGRESS — `MW/magic-items-types` branch |
-| Magic items — data scraping (PR 2)                  | `magic-items.md`                          | NOT STARTED — blocked on PR 1 merge         |
-| Feats expansion                                     | `data-scraping/feats-traits-expansion.md` | IN PROGRESS — PR #18 open (2,587 feats)     |
-| Traits expansion                                    | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PR #19 open (971 traits)     |
-| Class choices (Cavalier/Inquisitor/Oracle/Bard)     | `data-scraping/class-choices-database.md` | **COMPLETE** — PR #20 open                  |
-| `{chosen_deity}` token resolution in ClassChoiceRow | `data-scraping/class-choices-database.md` | NOT STARTED — domains show unfiltered       |
-| Seed all collections to Firestore staging → prod    | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)             |
-| Data quality + admin review system                  | `data-quality-admin-review.md`            | NOT STARTED                                 |
-| `Effect.type` enum review                           | `src/types/base.ts`                       | NOT STARTED — see note below                |
-| Enter Rissi — validate model end-to-end             | —                                         | NOT STARTED                                 |
+| Work                                                | Plan                                      | Status                                                  |
+| --------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------- |
+| `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED                                             |
+| Magic items — types + equipment cleanup (PR 1)      | `magic-items.md`                          | **COMPLETE** — merged PR #23 (2026-04-01)               |
+| Magic items — data scraping (PR 2)                  | `magic-items.md`                          | NOT STARTED                                             |
+| Feats expansion                                     | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — merged PR #18 (2026-03-29)               |
+| Traits expansion                                    | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — merged PR #19 (2026-03-29)               |
+| Class choices (Cavalier/Inquisitor/Oracle/Bard)     | `data-scraping/class-choices-database.md` | **COMPLETE** — merged PR #20 (2026-03-29)               |
+| `{chosen_deity}` token resolution in ClassChoiceRow | `data-scraping/class-choices-database.md` | IN PROGRESS — PR #28 open (`DH/deity-token-resolution`) |
+| Seed all collections to Firestore staging → prod    | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)                         |
+| Data quality + admin review system                  | `data-quality-admin-review.md`            | NOT STARTED                                             |
+| `Effect.type` enum review                           | `src/types/base.ts`                       | NOT STARTED — see note below                            |
+| Enter Rissi — validate model end-to-end             | —                                         | NOT STARTED                                             |
 
 #### Note: `Effect.type` enum needs redesign
 

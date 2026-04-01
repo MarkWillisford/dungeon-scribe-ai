@@ -2,9 +2,9 @@
 
 ## 2026-03-25
 
-## Status: PR 1 OPEN — type system implemented
+## Status: PR 1 MERGED — PR 2 ready to start
 
-PR 1 (`MW/magic-items-types`, PR #23) is open with `src/types/magicItems.ts` fully implemented. Design is fully resolved including wayfinder resonance powers (2026-03-28). See notes under "Pre-existing Code to Clean Up" for what was deferred to PR 2.
+PR 1 (`MW/magic-items-types`, PR #23) merged 2026-04-01. `src/types/magicItems.ts` is in main. PR 2 (data scraping) is unblocked. See notes under "Pre-existing Code to Clean Up" for what was deferred to PR 2.
 
 ---
 
