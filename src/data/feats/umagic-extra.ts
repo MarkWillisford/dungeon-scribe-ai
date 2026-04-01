@@ -25,8 +25,11 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
     source: 'Ultimate Magic',
     types: ['metamagic'],
     prerequisites: [
-      { type: 'feat', featId: 'spell_focus' },
-      { type: 'special', description: 'Spell Focus (illusion)' },
+      {
+        type: 'feat',
+        featId: 'spell_focus',
+        choiceRequirement: { key: 'school', value: 'illusion' },
+      },
     ],
     effects: [],
     activationMode: 'passive',
@@ -215,8 +218,11 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'augment_summoning' },
-      { type: 'feat', featId: 'spell_focus' },
-      { type: 'special', description: 'Spell Focus (conjuration)' },
+      {
+        type: 'feat',
+        featId: 'spell_focus',
+        choiceRequirement: { key: 'school', value: 'conjuration' },
+      },
     ],
     effects: [],
     activationMode: 'passive',
@@ -717,8 +723,11 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
     source: 'Ultimate Magic',
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'spell_focus' },
-      { type: 'special', description: 'Spell Focus (necromancy)' },
+      {
+        type: 'feat',
+        featId: 'spell_focus',
+        choiceRequirement: { key: 'school', value: 'necromancy' },
+      },
     ],
     effects: [],
     activationMode: 'passive',

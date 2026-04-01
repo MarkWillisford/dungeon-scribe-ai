@@ -13,6 +13,20 @@ import {
 import { type DraftClassEntry } from '@/types/characterDraft';
 import { getDefinitionsForClass } from '@/data/classChoiceDefinitions/index';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
+import { type ClassChoice } from '@/types/classes';
+
+// Pairs of featureNames that are mutually exclusive — filling one disables the other.
+const MUTUALLY_EXCLUSIVE_PAIRS: [string, string][] = [['Domain', 'Inquisition']];
+
+function isMutuallyExcludedFilled(featureName: string, classChoices: ClassChoice[]): boolean {
+  for (const [a, b] of MUTUALLY_EXCLUSIVE_PAIRS) {
+    const otherName = featureName === a ? b : featureName === b ? a : null;
+    if (otherName) {
+      return classChoices.some((c) => c.featureName === otherName && c.selection);
+    }
+  }
+  return false;
+}
 
 // ---- Source badge ----
 
@@ -279,6 +293,8 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
                     currentChoice={currentChoice}
                     takenAtLevel={slot.takenAtLevel}
                     featureLabel={slot.featureLabel}
+                    siblingChoices={entry.classChoices}
+                    disabled={isMutuallyExcludedFilled(slot.definition.featureName, entry.classChoices)}
                   />
                 );
               })}

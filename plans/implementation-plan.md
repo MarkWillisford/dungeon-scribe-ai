@@ -1,6 +1,6 @@
 # Dungeon Scribe AI 1.1 — Implementation Plan
 
-## Status (as of 2026-03-19)
+## Status (as of 2026-03-28)
 
 All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown significantly beyond the original plan through additional phases.
 
@@ -15,19 +15,28 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 | 6    | Navigation (Expo Router)     | **COMPLETE** + `entry.tsx` added (PR #12)                                                                                                                                                   |
 | 7    | Shared UI components         | **COMPLETE** + 18 direct-entry components (PR #12)                                                                                                                                          |
 | 8    | Game data                    | **COMPLETE** + massively extended (races, classes, archetypes, feats, traits, spells, templates, domains, rage powers, rogue talents, animal companions, deities, class choice definitions) |
-| 9    | Testing                      | **COMPLETE** — 657 tests, 35 suites, all thresholds passing (PR #6)                                                                                                                         |
+| 9    | Testing                      | **COMPLETE** — 690 tests, 36 suites, all thresholds passing                                                                                                                                 |
 | 10   | CI/CD (GitHub Actions + EAS) | **COMPLETE** — `ci.yml`, `build-staging.yml`, `build-production.yml`                                                                                                                        |
 
 ### Currently in flight
 
-| Work                                             | Plan                                      | Status                          |
-| ------------------------------------------------ | ----------------------------------------- | ------------------------------- |
-| `ValidationReportSheet` + validation wiring      | `direct-entry-ui-design.md`               | NOT STARTED                     |
-| Feats expansion (~215 more to target)            | `data-scraping/feats-traits-expansion.md` | IN PROGRESS (1,785/2,000+)      |
-| Traits expansion (~450 more to target)           | `data-scraping/feats-traits-expansion.md` | IN PROGRESS (458/900+)          |
-| Seed all collections to Firestore staging → prod | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready) |
-| Data quality + admin review system               | `data-quality-admin-review.md`            | NOT STARTED                     |
-| Enter Rissi — validate model end-to-end          | —                                         | NOT STARTED                     |
+| Work                                                | Plan                                      | Status                                      |
+| --------------------------------------------------- | ----------------------------------------- | ------------------------------------------- |
+| `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED                                 |
+| Magic items — types + equipment cleanup (PR 1)      | `magic-items.md`                          | IN PROGRESS — `MW/magic-items-types` branch |
+| Magic items — data scraping (PR 2)                  | `magic-items.md`                          | NOT STARTED — blocked on PR 1 merge         |
+| Feats expansion                                     | `data-scraping/feats-traits-expansion.md` | IN PROGRESS — PR #18 open (2,587 feats)     |
+| Traits expansion                                    | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PR #19 open (971 traits)     |
+| Class choices (Cavalier/Inquisitor/Oracle/Bard)     | `data-scraping/class-choices-database.md` | **COMPLETE** — PR #20 open                  |
+| `{chosen_deity}` token resolution in ClassChoiceRow | `data-scraping/class-choices-database.md` | NOT STARTED — domains show unfiltered       |
+| Seed all collections to Firestore staging → prod    | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)             |
+| Data quality + admin review system                  | `data-quality-admin-review.md`            | NOT STARTED                                 |
+| `Effect.type` enum review                           | `src/types/base.ts`                       | NOT STARTED — see note below                |
+| Enter Rissi — validate model end-to-end             | —                                         | NOT STARTED                                 |
+
+#### Note: `Effect.type` enum needs redesign
+
+`Effect.type` in `src/types/base.ts` currently has values: `'bonus' | 'special' | 'damage' | 'resistance' | 'penalty' | 'custom'`. These are too vague to be useful — a scraper writing feat data doesn't know which to use, so they invent their own (e.g. `skill_bonus`, `save_dc_bonus`, `caster_level_bonus`, `spell_like_ability`). The enum mixes semantic categories (what kind of thing it is) with mechanical categories (how it applies). Before PR 2 data scraping begins, this should be redesigned to be unambiguous and cover the full range of Pathfinder mechanical effects. Consider consulting the PF1e rules to enumerate the actual modifier categories the engine needs to handle.
 
 ---
 
