@@ -245,10 +245,7 @@ export class EquipmentDatabaseService {
     };
   }
 
-  static createMagicItemFromTemplate(
-    template: EquipmentTemplate,
-    _options?: { quantity?: number },
-  ): CharacterMagicItem {
+  static createMagicItemFromTemplate(template: EquipmentTemplate): CharacterMagicItem {
     return {
       instanceId: `${template.id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
       definitionId: template.id,
