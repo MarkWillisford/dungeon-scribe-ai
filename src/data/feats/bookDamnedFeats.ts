@@ -7,7 +7,8 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
     name: 'Chain Mastery',
     description:
       'You can treat a spiked chain as a one-handed martial weapon. You retain the option to wield it two-handed, and doing so grants a +2 bonus on combat maneuver checks to disarm or trip foes with your spiked chain.',
-    shortDescription: 'Spiked chain becomes one-handed martial; +2 disarm/trip CMB when two-handed.',
+    shortDescription:
+      'Spiked chain becomes one-handed martial; +2 disarm/trip CMB when two-handed.',
     source: 'Pathfinder Campaign Setting: Book of the Damned',
     types: ['combat'],
     prerequisites: [
@@ -38,7 +39,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'chosen_skill',
+        target: 'special.chosen_skill',
         value: 2,
         bonusType: BonusType.PROFANE,
         source: 'Damned Disciple',
@@ -52,14 +53,15 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
     name: 'Damned Soldier',
     description:
       "You can select either a sentinel or exalted boon through Fiendish Obedience; this choice is permanent. You gain a +1 profane bonus on weapon damage rolls with your god's favored weapon.",
-    shortDescription: "Choose sentinel/exalted boon path; +1 profane damage with deity's favored weapon.",
+    shortDescription:
+      "Choose sentinel/exalted boon path; +1 profane damage with deity's favored weapon.",
     source: 'Pathfinder Campaign Setting: Book of the Damned',
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'fiendish_obedience' }],
     effects: [
       {
         type: 'damage',
-        target: 'favored_weapon',
+        target: 'special.favored_weapon',
         value: 1,
         bonusType: BonusType.PROFANE,
         source: 'Damned Soldier',
@@ -86,7 +88,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'damage',
-        target: 'spiked_chain',
+        target: 'special.spiked_chain',
         value: 0,
         bonusType: BonusType.UNTYPED,
         source: 'Dance of Chains',
@@ -112,7 +114,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'natural_attack',
+        target: 'special.natural_attack',
         source: 'Deadly Horns',
       },
     ],
@@ -136,7 +138,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Fiendish Obedience',
       },
     ],
@@ -160,7 +162,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Soul-Powered Magic',
       },
     ],

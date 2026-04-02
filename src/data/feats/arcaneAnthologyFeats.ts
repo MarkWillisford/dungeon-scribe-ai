@@ -9,14 +9,15 @@ export const ARCANE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     name: 'Avid Spellbook Reader',
     description:
       'You gain a +2 bonus on Spellcraft checks for deciphering arcane magical writing. Additionally, you can benefit from up to two preparation rituals simultaneously, provided you have access to both rituals while preparing spells and prepare at least three spells of 1st level or higher from each source book.',
-    shortDescription: '+2 Spellcraft to decipher arcane writing; use two preparation rituals at once.',
+    shortDescription:
+      '+2 Spellcraft to decipher arcane writing; use two preparation rituals at once.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Ability to prepare arcane spells' }],
     effects: [
       {
         type: 'bonus',
-        target: 'spellcraft',
+        target: 'special.spellcraft',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Avid Spellbook Reader',
@@ -43,7 +44,7 @@ export const ARCANE_ANTHOLOGY_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Painful Blow',
       },
     ],
@@ -55,7 +56,8 @@ export const ARCANE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     name: 'Ritualistic Preparation',
     description:
       'You can treat spellbooks with preparation rituals as if they were prayer books or meditation books. Additionally, you may take the Avid Spellbook Reader feat without meeting its standard prerequisites.',
-    shortDescription: 'Use spellbooks as prayer/meditation books; bypass Avid Spellbook Reader prereqs.',
+    shortDescription:
+      'Use spellbooks as prayer/meditation books; bypass Avid Spellbook Reader prereqs.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
     types: ['general'],
     prerequisites: [
@@ -69,7 +71,7 @@ export const ARCANE_ANTHOLOGY_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Ritualistic Preparation',
       },
     ],
@@ -93,7 +95,7 @@ export const ARCANE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'chosen_school',
+        target: 'special.chosen_school',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Spell Denial',

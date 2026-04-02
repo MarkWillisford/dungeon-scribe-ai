@@ -207,7 +207,8 @@ export type SenseType =
   | 'blindsight'
   | 'blindsense'
   | 'tremorsense'
-  | 'scent';
+  | 'scent'
+  | 'lifesense';
 export type MovementType = 'fly' | 'swim' | 'burrow' | 'climb';
 export type ImmunityTarget =
   | DamageType

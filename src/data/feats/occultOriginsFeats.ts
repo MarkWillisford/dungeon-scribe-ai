@@ -17,7 +17,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'written_magic',
+        target: 'special.written_magic',
         value: 4,
         bonusType: BonusType.UNTYPED,
         source: 'Careful Reader',
@@ -40,7 +40,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Chakra Mandala',
       },
     ],
@@ -51,7 +51,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'cranial_adjustment',
     name: 'Cranial Adjustment',
     description:
-      'You can perform the hypnotism occult skill unlock without psychic magic. Those with psychic spells or Psychic Sensitivity feat gain an additional daily use. Sleight of Hand can replace Diplomacy for hypnotism (requiring 10 minutes of skull contact). A 1-hour adjustment grants either a +2 bonus or -2 penalty to the target\'s saving throws against mind-affecting emotion effects for 24 hours.',
+      "You can perform the hypnotism occult skill unlock without psychic magic. Those with psychic spells or Psychic Sensitivity feat gain an additional daily use. Sleight of Hand can replace Diplomacy for hypnotism (requiring 10 minutes of skull contact). A 1-hour adjustment grants either a +2 bonus or -2 penalty to the target's saving throws against mind-affecting emotion effects for 24 hours.",
     shortDescription: 'Perform hypnotism without psychic magic; adjust saves vs. emotion effects.',
     source: 'Pathfinder Player Companion: Occult Origins',
     types: ['general'],
@@ -61,7 +61,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 2,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Cranial Adjustment',
       },
     ],
@@ -72,8 +72,9 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'cranial_implantation',
     name: 'Cranial Implantation',
     description:
-      'You can perform phrenology using sharp implements rather than fingertips, dealing 1d3 damage. Those with psychic spellcasting or Psychic Sensitivity gain an additional daily use. You can implant needles into a creature\'s brain (Heal check DC 25 + Hit Dice) to provide a +1 bonus on saving throws against emotion or fear spells but a -1 penalty on saves against electricity or pain spells. Self-implanted needles can be probed as a swift action while casting (dealing 1 + spell level damage) to gain +1d6 on concentration checks.',
-    shortDescription: 'Implant needles for save bonuses vs. fear/emotion; boost concentration checks.',
+      "You can perform phrenology using sharp implements rather than fingertips, dealing 1d3 damage. Those with psychic spellcasting or Psychic Sensitivity gain an additional daily use. You can implant needles into a creature's brain (Heal check DC 25 + Hit Dice) to provide a +1 bonus on saving throws against emotion or fear spells but a -1 penalty on saves against electricity or pain spells. Self-implanted needles can be probed as a swift action while casting (dealing 1 + spell level damage) to gain +1d6 on concentration checks.",
+    shortDescription:
+      'Implant needles for save bonuses vs. fear/emotion; boost concentration checks.',
     source: 'Pathfinder Player Companion: Occult Origins',
     types: ['general'],
     prerequisites: [
@@ -83,7 +84,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'emotion',
+        target: 'special.emotion',
         value: 1,
         bonusType: BonusType.UNTYPED,
         source: 'Cranial Implantation',
@@ -97,7 +98,8 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     name: 'Haruspicy',
     description:
       'Upon performing a successful coup de grace, you gain a +2 circumstance bonus on skill checks attempted as part of a single occult ritual or occult skill unlock performed within the next minute. Alternatively, you may gain a +1 caster level bonus on a single divination or necromancy spell. The ritual or spell must begin within 1 minute of the coup de grace.',
-    shortDescription: '+2 on occult ritual checks or +1 CL on divination/necromancy after a coup de grace.',
+    shortDescription:
+      '+2 on occult ritual checks or +1 CL on divination/necromancy after a coup de grace.',
     source: 'Pathfinder Player Companion: Occult Origins',
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_religion', ranks: 3 }],
@@ -106,7 +108,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 2,
         bonusType: BonusType.CIRCUMSTANCE,
-        target: 'special',
+        target: 'special.ability',
         source: 'Haruspicy',
       },
     ],
@@ -117,7 +119,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'overwhelming_phantom',
     name: 'Overwhelming Phantom',
     description:
-      'Your phantom gains the ability to possess living creatures three times daily as a standard action while fully manifested. The target makes a Will save (DC = 1/2 phantom\'s Hit Dice + Charisma modifier) to resist. The phantom maintains control for 1 minute per spiritualist level, with the victim receiving new saves each minute. This otherwise functions as greater possession.',
+      "Your phantom gains the ability to possess living creatures three times daily as a standard action while fully manifested. The target makes a Will save (DC = 1/2 phantom's Hit Dice + Charisma modifier) to resist. The phantom maintains control for 1 minute per spiritualist level, with the victim receiving new saves each minute. This otherwise functions as greater possession.",
     shortDescription: 'Phantom can possess living creatures 3/day while fully manifested.',
     source: 'Pathfinder Player Companion: Occult Origins',
     types: ['general'],
@@ -130,7 +132,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Overwhelming Phantom',
       },
     ],
@@ -141,8 +143,9 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'rhabdomancy',
     name: 'Rhabdomancy',
     description:
-      'You can perform the dowsing occult skill unlock even if you can\'t use psychic magic. If you can cast psychic spells or have the Psychic Sensitivity feat, you can use dowsing one additional time per day. Spending 1 minute casting sticks before a Survival check provides a +2 insight bonus. You may also cast sticks while using spells that locate creatures or objects to increase the caster level by 1.',
-    shortDescription: 'Perform dowsing without psychic magic; +2 insight on Survival; +1 CL on locate spells.',
+      "You can perform the dowsing occult skill unlock even if you can't use psychic magic. If you can cast psychic spells or have the Psychic Sensitivity feat, you can use dowsing one additional time per day. Spending 1 minute casting sticks before a Survival check provides a +2 insight bonus. You may also cast sticks while using spells that locate creatures or objects to increase the caster level by 1.",
+    shortDescription:
+      'Perform dowsing without psychic magic; +2 insight on Survival; +1 CL on locate spells.',
     source: 'Pathfinder Player Companion: Occult Origins',
     types: ['general'],
     prerequisites: [
@@ -152,7 +155,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'survival',
+        target: 'skill.survival',
         value: 2,
         bonusType: BonusType.INSIGHT,
         source: 'Rhabdomancy',
@@ -165,7 +168,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'ritual_hex',
     name: 'Ritual Hex',
     description:
-      'You can perform an occult ritual called Beseeching the Patron that temporarily grants access to an additional hex you don\'t already possess for 24 hours. You can choose a major hex (increasing skill check DCs by 10) or grand hex (increasing DCs by 20). Only one bonus hex from this ritual can be active at a time. The ritual takes 40 minutes using Knowledge (arcana) and (history) checks, 2 successes at DC 20. Failure causes 10% spell failure for 24 hours; success causes 1 hour of fatigue.',
+      "You can perform an occult ritual called Beseeching the Patron that temporarily grants access to an additional hex you don't already possess for 24 hours. You can choose a major hex (increasing skill check DCs by 10) or grand hex (increasing DCs by 20). Only one bonus hex from this ritual can be active at a time. The ritual takes 40 minutes using Knowledge (arcana) and (history) checks, 2 successes at DC 20. Failure causes 10% spell failure for 24 hours; success causes 1 hour of fatigue.",
     shortDescription: 'Ritual to temporarily gain a hex for 24 hours.',
     source: 'Pathfinder Player Companion: Occult Origins',
     types: ['general'],
@@ -179,7 +182,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Ritual Hex',
       },
     ],
@@ -203,7 +206,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Spectrum Sight',
       },
     ],
@@ -214,7 +217,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'spirit_symbiosis_oo',
     name: 'Spirit Symbiosis',
     description:
-      'When casting speak with dead, you may forgo the spell\'s normal effects to temporarily merge the summoned spirit into your phantom. This allows you to exchange your phantom\'s current emotional focus and associated abilities for a new one of your choice. The new emotional focus lasts for 10 minutes per class level before reverting.',
+      "When casting speak with dead, you may forgo the spell's normal effects to temporarily merge the summoned spirit into your phantom. This allows you to exchange your phantom's current emotional focus and associated abilities for a new one of your choice. The new emotional focus lasts for 10 minutes per class level before reverting.",
     shortDescription: "Swap your phantom's emotional focus temporarily via speak with dead.",
     source: 'Pathfinder Player Companion: Occult Origins',
     types: ['general'],
@@ -227,7 +230,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Spirit Symbiosis',
       },
     ],
@@ -249,7 +252,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'compulsion',
+        target: 'special.compulsion',
         value: 2,
         bonusType: BonusType.INSIGHT,
         source: 'Trepanation',
@@ -262,7 +265,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'truth_in_wine',
     name: 'Truth in Wine',
     description:
-      'You can perform psychometry occult skill unlock without psychic magic by consuming high-quality alcohol (10+ gp). With psychic casting ability or Psychic Sensitivity, use psychometry an additional time daily. Consuming quality alcohol grants a +2 circumstance bonus on Appraise and Sense Motive checks for 1 minute and increases the next divination spell\'s caster level by 1. Alcohol addiction increases these bonuses by 1 but also raises the addiction save DC.',
+      "You can perform psychometry occult skill unlock without psychic magic by consuming high-quality alcohol (10+ gp). With psychic casting ability or Psychic Sensitivity, use psychometry an additional time daily. Consuming quality alcohol grants a +2 circumstance bonus on Appraise and Sense Motive checks for 1 minute and increases the next divination spell's caster level by 1. Alcohol addiction increases these bonuses by 1 but also raises the addiction save DC.",
     shortDescription: '+2 Appraise/Sense Motive and +1 CL on divination from quality alcohol.',
     source: 'Pathfinder Player Companion: Occult Origins',
     types: ['general'],
@@ -270,14 +273,14 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'appraise',
+        target: 'special.appraise',
         value: 2,
         bonusType: BonusType.CIRCUMSTANCE,
         source: 'Truth in Wine',
       },
       {
         type: 'bonus',
-        target: 'sense_motive',
+        target: 'skill.sense_motive',
         value: 2,
         bonusType: BonusType.CIRCUMSTANCE,
         source: 'Truth in Wine',
