@@ -82,6 +82,12 @@ import { PSYCHIC_ANTHOLOGY_FEATS } from './psychicAnthologyFeats';
 import { POTIONS_POISONS_FEATS } from './potionsPoisonsFeats';
 import { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
 import { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
+import { TIER3_BATCH1_FEATS } from './tier3Batch1Feats';
+import { TIER3_BATCH2_FEATS } from './tier3Batch2Feats';
+import { TIER3_BATCH3_FEATS } from './tier3Batch3Feats';
+import { TIER3_BATCH4_FEATS } from './tier3Batch4Feats';
+import { TIER3_BATCH5_FEATS } from './tier3Batch5Feats';
+import { TIER3_BATCH6_FEATS } from './tier3Batch6Feats';
 import { ADVANCED_CLASS_ORIGINS_FEATS } from './advancedClassOriginsFeats';
 import { DRAGONSLAYER_FEATS } from './dragonslayerFeats';
 import { HALFLING_GOLARION_FEATS } from './halflingGolarionFeats';
@@ -180,6 +186,12 @@ export { PSYCHIC_ANTHOLOGY_FEATS } from './psychicAnthologyFeats';
 export { POTIONS_POISONS_FEATS } from './potionsPoisonsFeats';
 export { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
 export { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
+export { TIER3_BATCH1_FEATS } from './tier3Batch1Feats';
+export { TIER3_BATCH2_FEATS } from './tier3Batch2Feats';
+export { TIER3_BATCH3_FEATS } from './tier3Batch3Feats';
+export { TIER3_BATCH4_FEATS } from './tier3Batch4Feats';
+export { TIER3_BATCH5_FEATS } from './tier3Batch5Feats';
+export { TIER3_BATCH6_FEATS } from './tier3Batch6Feats';
 export { ADVANCED_CLASS_ORIGINS_FEATS } from './advancedClassOriginsFeats';
 export { DRAGONSLAYER_FEATS } from './dragonslayerFeats';
 export { HALFLING_GOLARION_FEATS } from './halflingGolarionFeats';
@@ -279,6 +291,12 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...POTIONS_POISONS_FEATS,
   ...KOBOLD_GOLARION_FEATS,
   ...GIANT_HUNTERS_HANDBOOK_FEATS,
+  ...TIER3_BATCH1_FEATS,
+  ...TIER3_BATCH2_FEATS,
+  ...TIER3_BATCH3_FEATS,
+  ...TIER3_BATCH4_FEATS,
+  ...TIER3_BATCH5_FEATS,
+  ...TIER3_BATCH6_FEATS,
   ...ADVANCED_CLASS_ORIGINS_FEATS,
   ...DRAGONSLAYER_FEATS,
   ...HALFLING_GOLARION_FEATS,
