@@ -49,11 +49,11 @@ Before writing new types, three things in `equipment.ts` need cleanup:
 
 The existing enum is incomplete for magic items (missing `eyes`, `headband`, `shoulders`) and uses `RING_LEFT`/`RING_RIGHT` (two ring slots) while PF1e wondrous items only need one `ring` slot (rings are tracked as individual items, not by finger). The `TWO_HANDED` slot is a _grip mode_, not a worn slot.
 
-**Resolution:** `ItemSlot` was added as a new unified type in `magicItems.ts`. `EquipmentSlot` was **preserved** (not removed) because existing tests depend on `EquipmentSlot.TWO_HANDED`. The two ring slots stay (since a character can wear two rings simultaneously), but PF1e body slots are added:
+**Resolution:** `ItemSlot` was added as a new unified type in `magicItems.ts`. `EquipmentSlot` was **preserved** (not removed) because existing tests depend on `EquipmentSlot.TWO_HANDED`. Ring items use a single `'ring'` slot on the item definition; left vs. right finger is tracked via `CharacterMagicItem.equippedSlot` using `EquipmentSlot.RING_LEFT`/`RING_RIGHT`:
 
 ```
 armor | belt | body | chest | eyes | feet | hands | head | headband
-neck | ring_left | ring_right | shield | shoulders | wrists
+neck | ring | shield | shoulders | wrists
 main_hand | off_hand | none
 ```
 
@@ -108,8 +108,7 @@ export type ItemSlot =
   | 'head'
   | 'headband'
   | 'neck'
-  | 'ring_left'
-  | 'ring_right'
+  | 'ring' // item definition slot — character equips to ring_left or ring_right (EquipmentSlot)
   | 'shield'
   | 'shoulders'
   | 'wrists'
@@ -834,7 +833,7 @@ This plan covers data model + static data + Firestore seeding only.
 
 All open questions resolved. Design is complete.
 
-- **Two ring slots:** Keep both `ring_left` / `ring_right` in `ItemSlot`.
+- **Two ring slots:** ✅ Resolved. Item definitions use a single `'ring'` slot in `ItemSlot`. Per-finger tracking (`ring_left`/`ring_right`) uses `EquipmentSlot` on `CharacterMagicItem.equippedSlot`.
 - **Wayfinder resonance powers:** ✅ Resolved (2026-03-28). Resonance lives on `IounStoneDefinition.resonancePower?: IounStoneResonancePower`. ~50 stones have resonance; ~5 don't (undefined = no resonance). All three grades of a stone share the same resonance power. The Wayfinder of Hidden Strength uses shape-based resonance that overrides the stone's power for 24h — modeled on its own wondrous item entry, not on the stone. Sources: Seekers of Secrets (primary), PFS Field Guide, PFS Primer, Inner Sea Combat.
 - **Intelligent artifact weapons:** All three overlays (`intelligentItem`, `artifactProperties`, `conditionalEffects`) can coexist on one object — TypeScript structural typing handles it.
 - **Antimagic field:** `grantedFeats` suppression enforced at runtime in modifier pipeline, not in types.

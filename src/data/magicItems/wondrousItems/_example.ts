@@ -1,5 +1,6 @@
 // EXAMPLE BATCH FILE — shows expected format for all wondrous item batch files.
-// Delete this file before opening the PR.
+// When copying this file to create a batch file: delete _example.ts from your PR.
+// When updating this file to add new patterns: keep it and commit the changes.
 //
 // NAMING: one exported array per file, named after the file:
 //   aB-batch1.ts  → export const wondrousItemsAB1: WondrousItemDefinition[]
@@ -376,6 +377,10 @@ export const wondrousItemsExample: WondrousItemDefinition[] = [
       {
         condition: 'wielder_class',
         classId: 'paladin',
+        // NOTE: these three SLAs share a single daily use — the paladin casts ONE per day.
+        // The type system has no shared-pool field; each entry carries usesPerDay: 1 as a
+        // per-spell limit. The game engine must enforce that only one of the three is used
+        // per day (e.g. via a shared-pool tag added in a future type revision).
         spellLikeAbilities: [
           {
             spellId: 'lesser_restoration',

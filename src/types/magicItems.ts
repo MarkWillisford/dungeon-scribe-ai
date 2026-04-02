@@ -234,7 +234,6 @@ export interface WondrousItemDefinition extends MagicItemDefinition {
 
 export interface RingDefinition extends MagicItemDefinition {
   category: 'ring';
-  // slot must be ring_left or ring_right
 }
 
 export interface StaffDefinition extends MagicItemDefinition {
@@ -371,7 +370,7 @@ export interface CharacterMagicItem {
   name: string; // denormalized for display
 
   equipped: boolean;
-  equippedSlot?: ItemSlot;
+  equippedSlot?: Exclude<ItemSlot, 'ring'> | 'ring_left' | 'ring_right'; // rings: use ring_left/ring_right to track which finger
   charges?: number; // current charges remaining
 
   // Identification state
