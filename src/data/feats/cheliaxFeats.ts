@@ -13,7 +13,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'feat', featId: 'improved_unarmed_strike' }],
     effects: [
       {
-        type: 'damage_bonus',
+        type: 'damage',
         target: 'unarmed',
         value: 0,
         bonusType: BonusType.UNTYPED,
@@ -37,7 +37,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'ac_bonus',
+        type: 'bonus',
         target: 'ac',
         value: 1,
         bonusType: BonusType.SHIELD,
@@ -202,7 +202,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'damage_bonus',
+        type: 'damage',
         target: 'grapple',
         value: 0,
         bonusType: BonusType.UNTYPED,
@@ -275,7 +275,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'ac_bonus',
+        type: 'bonus',
         target: 'ac',
         value: 0,
         bonusType: BonusType.DODGE,

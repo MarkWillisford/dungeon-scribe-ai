@@ -39,7 +39,7 @@ export const ORC_GOLARION_FEATS: FeatDefinition[] = [
       { type: 'special', description: 'Half-orc or orc' },
       { type: 'special', description: 'Worshiper of the orc fire deity' },
     ],
-    effects: [{ type: 'hp_bonus', target: 'healing', value: 1, bonusType: BonusType.UNTYPED, source: "Fire God's Blessing" }],
+    effects: [{ type: 'bonus', target: 'healing', value: 1, bonusType: BonusType.UNTYPED, source: "Fire God's Blessing" }],
     activationMode: 'conditional',
     tags: ['orc', 'half-orc', 'fire', 'healing', 'deity'],
   },

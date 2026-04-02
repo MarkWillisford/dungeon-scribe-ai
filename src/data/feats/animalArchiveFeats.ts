@@ -153,7 +153,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         target: 'handle_animal',
         value: 2,
         bonusType: BonusType.UNTYPED,
@@ -243,14 +243,14 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'special', description: 'Quadruped animal or magical beast' }],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         target: 'acrobatics',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Sure-Footed',
       },
       {
-        type: 'save_bonus',
+        type: 'bonus',
         target: 'reflex',
         value: 2,
         bonusType: BonusType.UNTYPED,
@@ -271,7 +271,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'special', description: 'Animal or magical beast' }],
     effects: [
       {
-        type: 'save_bonus',
+        type: 'bonus',
         target: 'fear',
         value: 4,
         bonusType: BonusType.MORALE,

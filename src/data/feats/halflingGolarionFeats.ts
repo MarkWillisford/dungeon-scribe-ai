@@ -156,7 +156,7 @@ export const HALFLING_GOLARION_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'race', raceName: 'Halfling' }],
     effects: [
       {
-        type: 'attack_bonus',
+        type: 'bonus',
         target: 'sling',
         value: 1,
         bonusType: BonusType.RACIAL,
@@ -250,7 +250,7 @@ export const HALFLING_GOLARION_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'proficiency', proficiency: 'sling' }],
     effects: [
       {
-        type: 'damage_bonus',
+        type: 'damage',
         target: 'sling',
         value: 1,
         bonusType: BonusType.UNTYPED,

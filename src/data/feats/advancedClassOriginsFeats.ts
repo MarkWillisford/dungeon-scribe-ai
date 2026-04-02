@@ -23,7 +23,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
         source: 'Ambush Sense',
       },
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         target: 'perception',
         value: 0,
         bonusType: BonusType.UNTYPED,
@@ -166,7 +166,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'damage_bonus',
+        type: 'damage',
         target: 'rapier',
         value: 0,
         bonusType: BonusType.UNTYPED,
@@ -190,7 +190,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'ac_bonus',
+        type: 'bonus',
         target: 'ac',
         value: 2,
         bonusType: BonusType.UNTYPED,
@@ -211,14 +211,14 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'class_feature', featureName: 'bardic knowledge' }],
     effects: [
       {
-        type: 'attack_bonus',
+        type: 'bonus',
         target: 'attack',
         value: 1,
         bonusType: BonusType.UNTYPED,
         source: 'Know Weakness',
       },
       {
-        type: 'damage_bonus',
+        type: 'damage',
         target: 'damage',
         value: 1,
         bonusType: BonusType.UNTYPED,

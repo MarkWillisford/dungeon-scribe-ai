@@ -37,7 +37,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'feat', featId: 'fiendish_obedience' }],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         target: 'chosen_skill',
         value: 2,
         bonusType: BonusType.PROFANE,
@@ -58,7 +58,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'feat', featId: 'fiendish_obedience' }],
     effects: [
       {
-        type: 'damage_bonus',
+        type: 'damage',
         target: 'favored_weapon',
         value: 1,
         bonusType: BonusType.PROFANE,
@@ -85,7 +85,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'damage_bonus',
+        type: 'damage',
         target: 'spiked_chain',
         value: 0,
         bonusType: BonusType.UNTYPED,

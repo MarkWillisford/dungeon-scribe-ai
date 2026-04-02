@@ -43,14 +43,14 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         target: 'diplomacy',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Conciliator',
       },
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         target: 'sense_motive',
         value: 2,
         bonusType: BonusType.UNTYPED,
@@ -233,14 +233,14 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'save_bonus',
+        type: 'bonus',
         target: 'divine',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Pure Legion Assault',
       },
       {
-        type: 'attack_bonus',
+        type: 'bonus',
         target: 'attack',
         value: 1,
         bonusType: BonusType.UNTYPED,

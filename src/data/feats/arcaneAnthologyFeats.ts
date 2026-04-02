@@ -15,7 +15,7 @@ export const ARCANE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'special', description: 'Ability to prepare arcane spells' }],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         target: 'spellcraft',
         value: 2,
         bonusType: BonusType.UNTYPED,
@@ -92,7 +92,7 @@ export const ARCANE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'save_bonus',
+        type: 'bonus',
         target: 'chosen_school',
         value: 2,
         bonusType: BonusType.UNTYPED,

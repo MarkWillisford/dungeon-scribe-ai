@@ -16,7 +16,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'save_bonus',
+        type: 'bonus',
         target: 'written_magic',
         value: 4,
         bonusType: BonusType.UNTYPED,
@@ -82,7 +82,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'save_bonus',
+        type: 'bonus',
         target: 'emotion',
         value: 1,
         bonusType: BonusType.UNTYPED,
@@ -151,7 +151,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         target: 'survival',
         value: 2,
         bonusType: BonusType.INSIGHT,
@@ -248,7 +248,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'save_bonus',
+        type: 'bonus',
         target: 'compulsion',
         value: 2,
         bonusType: BonusType.INSIGHT,
@@ -269,14 +269,14 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'skill', skillId: 'appraise', ranks: 3 }],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         target: 'appraise',
         value: 2,
         bonusType: BonusType.CIRCUMSTANCE,
         source: 'Truth in Wine',
       },
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         target: 'sense_motive',
         value: 2,
         bonusType: BonusType.CIRCUMSTANCE,

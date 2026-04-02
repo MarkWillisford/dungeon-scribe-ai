@@ -212,7 +212,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
       { type: 'class_feature', featureName: 'weapon training' },
       { type: 'race', raceName: 'Gnome' },
     ],
-    effects: [{ type: 'ac_bonus', target: 'ac', value: 0, bonusType: BonusType.DODGE, source: 'Witty Feint' }],
+    effects: [{ type: 'bonus', target: 'ac', value: 0, bonusType: BonusType.DODGE, source: 'Witty Feint' }],
     activationMode: 'conditional',
     tags: ['gnome', 'fighter', 'weapon training', 'feint', 'dodge'],
   },

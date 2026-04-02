@@ -13,7 +13,7 @@ export const HELLKNIGHT_FEATS: FeatDefinition[] = [
     prerequisites: [],
     effects: [
       {
-        type: 'damage_bonus',
+        type: 'damage',
         target: 'weapon',
         value: 1,
         bonusType: BonusType.UNTYPED,
@@ -105,7 +105,7 @@ export const HELLKNIGHT_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'damage_bonus',
+        type: 'damage',
         target: 'objects',
         value: 0,
         bonusType: BonusType.UNTYPED,

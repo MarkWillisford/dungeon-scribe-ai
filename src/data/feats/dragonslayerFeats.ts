@@ -13,7 +13,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'feat', featId: 'iron_will' }],
     effects: [
       {
-        type: 'save_bonus',
+        type: 'bonus',
         target: 'fear',
         value: 2,
         bonusType: BonusType.MORALE,
@@ -38,7 +38,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'save_bonus',
+        type: 'bonus',
         target: 'reflex',
         value: 0,
         bonusType: BonusType.SHIELD,
@@ -59,7 +59,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [
       {
-        type: 'attack_bonus',
+        type: 'bonus',
         target: 'attack',
         value: 2,
         bonusType: BonusType.CIRCUMSTANCE,
@@ -104,7 +104,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'skill', skillId: 'knowledge_arcana', ranks: 1 }],
     effects: [
       {
-        type: 'save_bonus',
+        type: 'bonus',
         target: 'all',
         value: 1,
         bonusType: BonusType.UNTYPED,
@@ -155,21 +155,21 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'attack_bonus',
+        type: 'bonus',
         target: 'attack',
         value: 1,
         bonusType: BonusType.UNTYPED,
         source: 'Dragon-Touched',
       },
       {
-        type: 'ac_bonus',
+        type: 'bonus',
         target: 'ac',
         value: 1,
         bonusType: BonusType.DODGE,
         source: 'Dragon-Touched',
       },
       {
-        type: 'save_bonus',
+        type: 'bonus',
         target: 'reflex',
         value: 2,
         bonusType: BonusType.UNTYPED,
@@ -239,7 +239,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'attack_bonus',
+        type: 'bonus',
         target: 'attack_of_opportunity',
         value: 2,
         bonusType: BonusType.UNTYPED,
@@ -260,7 +260,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'ability_score', ability: 'DEX', minimum: 15 }],
     effects: [
       {
-        type: 'ac_bonus',
+        type: 'bonus',
         target: 'ac',
         value: 2,
         bonusType: BonusType.DODGE,
