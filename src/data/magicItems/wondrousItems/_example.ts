@@ -248,21 +248,27 @@ export const wondrousItemsExample: WondrousItemDefinition[] = [
       },
     ],
 
+    // Independent pools: each spell has its own usesPerDay — wrap each in its own SlaBlock,
+    // or group them into one block with no block-level usesPerDay (per-spell values apply).
     spellLikeAbilities: [
       {
-        spellId: 'daylight',
-        spellName: 'Daylight',
-        casterLevel: 13,
-        usesPerDay: 0, // at will (from diamond charge)
-        activationAction: 'standard',
-      },
-      {
-        spellId: 'fireball',
-        spellName: 'Fireball',
-        casterLevel: 13,
-        usesPerDay: 0, // per ruby charge
-        saveDC: 20,
-        activationAction: 'standard',
+        spells: [
+          {
+            spellId: 'daylight',
+            spellName: 'Daylight',
+            casterLevel: 13,
+            usesPerDay: 0, // at will (from diamond charge)
+            activationAction: 'standard',
+          },
+          {
+            spellId: 'fireball',
+            spellName: 'Fireball',
+            casterLevel: 13,
+            usesPerDay: 0, // per ruby charge
+            saveDC: 20,
+            activationAction: 'standard',
+          },
+        ],
       },
     ],
   },
@@ -377,31 +383,31 @@ export const wondrousItemsExample: WondrousItemDefinition[] = [
       {
         condition: 'wielder_class',
         classId: 'paladin',
-        // NOTE: these three SLAs share a single daily use — the paladin casts ONE per day.
-        // The type system has no shared-pool field; each entry carries usesPerDay: 1 as a
-        // per-spell limit. The game engine must enforce that only one of the three is used
-        // per day (e.g. via a shared-pool tag added in a future type revision).
+        // Shared pool: the paladin gets ONE use per day — she picks which spell to cast.
+        // Set usesPerDay on the SlaBlock; omit it on individual spells.
         spellLikeAbilities: [
           {
-            spellId: 'lesser_restoration',
-            spellName: 'Lesser Restoration',
-            casterLevel: 5,
-            usesPerDay: 1,
-            activationAction: 'standard',
-          },
-          {
-            spellId: 'neutralize_poison',
-            spellName: 'Neutralize Poison',
-            casterLevel: 5,
-            usesPerDay: 1,
-            activationAction: 'standard',
-          },
-          {
-            spellId: 'remove_disease',
-            spellName: 'Remove Disease',
-            casterLevel: 5,
-            usesPerDay: 1,
-            activationAction: 'standard',
+            usesPerDay: 1, // shared — cast any ONE of the three per day
+            spells: [
+              {
+                spellId: 'lesser_restoration',
+                spellName: 'Lesser Restoration',
+                casterLevel: 5,
+                activationAction: 'standard',
+              },
+              {
+                spellId: 'neutralize_poison',
+                spellName: 'Neutralize Poison',
+                casterLevel: 5,
+                activationAction: 'standard',
+              },
+              {
+                spellId: 'remove_disease',
+                spellName: 'Remove Disease',
+                casterLevel: 5,
+                activationAction: 'standard',
+              },
+            ],
           },
         ],
       },
