@@ -104,6 +104,7 @@ import { GNOME_GOLARION_FEATS } from './gnomeGolarionFeats';
 import { TECHNOLOGY_GUIDE_FEATS } from './technologyGuideFeats';
 import { ORC_GOLARION_FEATS } from './orcGolarionFeats';
 import { OSIRION_FEATS } from './osirionFeats';
+import { AP_VOLUME_FEATS } from './apVolumeFeats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -208,6 +209,7 @@ export { GNOME_GOLARION_FEATS } from './gnomeGolarionFeats';
 export { TECHNOLOGY_GUIDE_FEATS } from './technologyGuideFeats';
 export { ORC_GOLARION_FEATS } from './orcGolarionFeats';
 export { OSIRION_FEATS } from './osirionFeats';
+export { AP_VOLUME_FEATS } from './apVolumeFeats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -313,6 +315,7 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...TECHNOLOGY_GUIDE_FEATS,
   ...ORC_GOLARION_FEATS,
   ...OSIRION_FEATS,
+  ...AP_VOLUME_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {
