@@ -271,12 +271,9 @@ export class ModifierPipelineService {
       }
     }
 
-    // Magic items with continuous effects
-    for (const item of character.equipment.magicItems.filter((i) => i.equipped && i.active)) {
-      for (const effect of item.continuousEffects) {
-        effects.push(effect);
-      }
-    }
+    // TODO: Magic item effects will be resolved via MagicItemDefinition.effects
+    // once the effect lookup pipeline is wired (PR 2 — magic item data + runtime).
+    void character.equipment.magicItems;
 
     return effects;
   }

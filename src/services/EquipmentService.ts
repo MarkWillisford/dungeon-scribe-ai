@@ -3,7 +3,6 @@ import {
   Weapon,
   Armor,
   Shield,
-  MagicItem,
   Gear,
   EquipmentSlot,
   EquipmentTemplate,
@@ -12,6 +11,7 @@ import {
   EncumbranceVariant,
   CarryingCapacity,
 } from '@/types/equipment';
+import { CharacterMagicItem } from '@/types/magicItems';
 import { Bonus, BonusType, Effect } from '@/types/base';
 import { ValidationResult } from '@/types/validation';
 import { EquipmentDatabaseService } from '@services/EquipmentDatabaseService';
@@ -61,7 +61,7 @@ export class EquipmentService {
       (s) => s.id !== itemId,
     );
     updatedCharacter.equipment.magicItems = updatedCharacter.equipment.magicItems.filter(
-      (m) => m.id !== itemId,
+      (m) => m.instanceId !== itemId,
     );
     updatedCharacter.equipment.gear = updatedCharacter.equipment.gear.filter(
       (g) => g.id !== itemId,
@@ -156,13 +156,9 @@ export class EquipmentService {
       } else if (this.isShield(item)) {
         bonuses.acBonuses.push(...this.calculateShieldBonuses(item));
       } else if (this.isMagicItem(item)) {
-        bonuses.acBonuses.push(...this.extractBonusesFromEffects(item.continuousEffects, 'ac'));
-        bonuses.saveBonuses.push(
-          ...this.extractBonusesFromEffects(item.continuousEffects, 'saves'),
-        );
-        bonuses.skillBonuses.push(
-          ...this.extractBonusesFromEffects(item.continuousEffects, 'skills'),
-        );
+        // TODO: Magic item effects will be resolved via MagicItemDefinition.effects
+        // once the modifier pipeline service is updated (PR 2).
+        void item;
       }
     }
 
@@ -269,22 +265,21 @@ export class EquipmentService {
   private static findItemById(
     character: Character,
     itemId: string,
-  ): Weapon | Armor | Shield | MagicItem | Gear | null {
-    const allItems = [
+  ): Weapon | Armor | Shield | CharacterMagicItem | Gear | null {
+    const baseItem = [
       ...character.equipment.weapons,
       ...character.equipment.armor,
       ...character.equipment.shields,
-      ...character.equipment.magicItems,
       ...character.equipment.gear,
-    ];
-
-    return allItems.find((item) => item.id === itemId) || null;
+    ].find((item) => item.id === itemId);
+    if (baseItem) return baseItem;
+    return character.equipment.magicItems.find((m) => m.instanceId === itemId) || null;
   }
 
   private static getEquippedItems(
     character: Character,
-  ): (Weapon | Armor | Shield | MagicItem | Gear)[] {
-    const equippedItems: (Weapon | Armor | Shield | MagicItem | Gear)[] = [];
+  ): (Weapon | Armor | Shield | CharacterMagicItem | Gear)[] {
+    const equippedItems: (Weapon | Armor | Shield | CharacterMagicItem | Gear)[] = [];
 
     for (const itemId of character.equipment.equippedSlots.values()) {
       const item = this.findItemById(character, itemId);
@@ -301,26 +296,24 @@ export class EquipmentService {
     itemId: string,
     equipped: boolean,
   ): void {
-    const allItems = [
+    const baseItem = [
       ...character.equipment.weapons,
       ...character.equipment.armor,
       ...character.equipment.shields,
-      ...character.equipment.magicItems,
-    ];
+    ].find((i) => i.id === itemId);
 
-    const item = allItems.find((i) => i.id === itemId);
-    if (!item) return;
-    if (this.isArmor(item)) {
-      item.equipped = equipped;
-    } else if (this.isShield(item)) {
-      item.equipped = equipped;
-    } else if (this.isMagicItem(item)) {
-      item.equipped = equipped;
+    if (baseItem) {
+      if (this.isArmor(baseItem)) baseItem.equipped = equipped;
+      else if (this.isShield(baseItem)) baseItem.equipped = equipped;
+      return;
     }
+
+    const magicItem = character.equipment.magicItems.find((m) => m.instanceId === itemId);
+    if (magicItem) magicItem.equipped = equipped;
   }
 
   private static validateSlotCompatibility(
-    item: Weapon | Armor | Shield | MagicItem | Gear,
+    item: Weapon | Armor | Shield | CharacterMagicItem | Gear,
     slot: EquipmentSlot,
   ): ValidationResult {
     if (this.isWeapon(item)) {
@@ -343,12 +336,13 @@ export class EquipmentService {
 
   private static checkSlotConflicts(
     character: Character,
-    item: Weapon | Armor | Shield | MagicItem | Gear,
+    item: Weapon | Armor | Shield | CharacterMagicItem | Gear,
     slot: EquipmentSlot,
   ): ValidationResult {
     const currentlyEquipped = character.equipment.equippedSlots.get(slot);
+    const itemId = this.isMagicItem(item) ? item.instanceId : item.id;
 
-    if (currentlyEquipped && currentlyEquipped !== item.id) {
+    if (currentlyEquipped && currentlyEquipped !== itemId) {
       return {
         isValid: false,
         errors: [`Slot ${slot} is already occupied. Unequip the current item first.`],
@@ -376,8 +370,8 @@ export class EquipmentService {
     );
   }
 
-  private static isMagicItem(item: unknown): item is MagicItem {
-    return typeof item === 'object' && item !== null && 'casterLevel' in item;
+  private static isMagicItem(item: unknown): item is CharacterMagicItem {
+    return typeof item === 'object' && item !== null && 'instanceId' in item;
   }
 
   private static calculateWeaponAttackBonuses(weapon: Weapon): Bonus[] {
@@ -487,15 +481,16 @@ export class EquipmentService {
   }
 
   private static calculateTotalWeight(character: Character): number {
-    const allItems = [
+    const baseWeight = [
       ...character.equipment.weapons,
       ...character.equipment.armor,
       ...character.equipment.shields,
-      ...character.equipment.magicItems,
       ...character.equipment.gear,
-    ];
+    ].reduce((total, item) => total + item.weight * item.quantity, 0);
 
-    return allItems.reduce((total, item) => total + item.weight * item.quantity, 0);
+    // TODO: look up magic item weight from MagicItemDefinition once that
+    // service exists (PR 2). For now, magic items contribute 0 to encumbrance.
+    return baseWeight;
   }
 
   private static calculateArmorCheckPenalty(character: Character): number {
