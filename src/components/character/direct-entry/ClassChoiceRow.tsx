@@ -13,6 +13,7 @@ import { ALL_MYSTERIES } from '@/data/mysteries/index';
 import { ALL_INQUISITIONS } from '@/data/inquisitions/index';
 import { ALL_REVELATIONS } from '@/data/revelations/index';
 import { ALL_CAVALIER_ORDERS } from '@/data/cavalierOrders/index';
+import { getDeityByName } from '@/data/deities/index';
 
 interface ClassChoiceRowProps {
   classId: string;
@@ -28,27 +29,32 @@ interface ClassChoiceRowProps {
   siblingChoices?: ClassChoice[];
   // Disabled when a mutually exclusive sibling choice is already filled (e.g. Inquisitor Domain vs Inquisition)
   disabled?: boolean;
+  // The deity name from the Identity section — used to resolve {chosen_deity} filter tokens
+  characterDeity?: string;
 }
 
-// Resolve {chosen_X} tokens in a collectionFilter using sibling class choices.
+// Resolve {chosen_X} tokens in a collectionFilter using sibling class choices
+// and character-level state (e.g. deity from the Identity section).
 // e.g. { mysteryId: '{chosen_mystery}' } → { mysteryId: 'battle' }
-// Tokens that don't match a sibling featureName (e.g. {chosen_deity}) are left unresolved.
+// e.g. { deityIds: '{chosen_deity}' } → { deityIds: 'milani' }
 function resolveFilterTokens(
   filter: Record<string, unknown>,
   siblingChoices: ClassChoice[],
+  characterDeity?: string,
 ): Record<string, unknown> {
   const resolved: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(filter)) {
     if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}')) {
-      const tokenName = value.slice(1, -1); // e.g. 'chosen_mystery'
-      if (tokenName.startsWith('chosen_')) {
+      const tokenName = value.slice(1, -1); // e.g. 'chosen_mystery' or 'chosen_deity'
+      if (tokenName === 'chosen_deity') {
+        resolved[key] = characterDeity || undefined;
+      } else if (tokenName.startsWith('chosen_')) {
         const featureKeyword = tokenName.slice('chosen_'.length); // e.g. 'mystery'
         const match = siblingChoices.find(
           (c) => c.featureName.toLowerCase() === featureKeyword,
         );
         resolved[key] = typeof match?.selection === 'string' ? match.selection : undefined;
       }
-      // {chosen_deity} and other non-class-choice tokens remain unresolved (future work)
     } else {
       resolved[key] = value;
     }
@@ -61,13 +67,22 @@ function buildCollectionItems(
   resolvedFilter: Record<string, unknown> = {},
 ): SearchItem[] {
   switch (collectionName) {
-    case 'domains':
-      return ALL_DOMAINS.map((d) => ({
+    case 'domains': {
+      const deityName = resolvedFilter.deityIds as string | undefined;
+      const deity = deityName ? getDeityByName(deityName) : undefined;
+      const deityDomainIds = deity
+        ? new Set([...deity.domains, ...deity.subdomains])
+        : null;
+      const pool = deityDomainIds
+        ? ALL_DOMAINS.filter((d) => deityDomainIds.has(d.id))
+        : ALL_DOMAINS;
+      return pool.map((d) => ({
         key: d.id,
         label: d.name,
         subLabel: d.description?.slice(0, 80),
-        category: d.druidAllowed ? 'Druid / Cleric' : 'Cleric',
+        category: deity ? undefined : (d.druidAllowed ? 'Druid / Cleric' : 'Cleric'),
       }));
+    }
     case 'ragepowers':
       return ALL_RAGE_POWERS.map((r) => ({
         key: r.id,
@@ -136,6 +151,7 @@ export function ClassChoiceRow({
   featureLabel,
   siblingChoices,
   disabled = false,
+  characterDeity,
 }: ClassChoiceRowProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
@@ -146,11 +162,12 @@ export function ClassChoiceRow({
       const resolvedFilter = resolveFilterTokens(
         definition.collectionFilter ?? {},
         siblingChoices ?? [],
+        characterDeity,
       );
       return buildCollectionItems(definition.collectionName, resolvedFilter);
     }
     return buildInlineItems(definition);
-  }, [definition, siblingChoices]);
+  }, [definition, siblingChoices, characterDeity]);
 
   // Resolve stored ID(s) back to human-readable labels for display.
   const currentSelection = useMemo(() => {
