@@ -19,7 +19,8 @@
 //   - target follows EffectTarget — e.g. 'ability.str', 'save.all', 'ac.natural', 'skill.perception'
 //   - For non-standard targets use compound notation: 'special.lay_on_hands_uses_per_day'
 //
-// AURA: array, items can have multiple schools. e.g. [{ strength: 'faint', school: 'abjuration' }]
+// AURA: array, items can have multiple schools.
+//   e.g. [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }]
 //
 // SOURCES: use the book abbreviation as a string. Common values:
 //   'Core Rulebook', 'Advanced Player\'s Guide', 'Ultimate Equipment', 'Ultimate Combat',
@@ -34,6 +35,7 @@
 // DO NOT modify index.ts — index wiring happens after all batches are done.
 
 import type { WondrousItemDefinition } from '@/types/magicItems';
+import { AuraStrength, MagicSchool } from '@/types/equipment';
 
 export const wondrousItemsExample: WondrousItemDefinition[] = [
   // ---- Example 1: simple numeric bonus ----------------------------------------
@@ -44,7 +46,7 @@ export const wondrousItemsExample: WondrousItemDefinition[] = [
     source: 'Core Rulebook',
     isOfficial: true,
 
-    aura: [{ strength: 'faint', school: 'transmutation' }],
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 5,
     slot: 'neck',
 
@@ -86,7 +88,7 @@ export const wondrousItemsExample: WondrousItemDefinition[] = [
     source: 'Core Rulebook',
     isOfficial: true,
 
-    aura: [{ strength: 'faint', school: 'transmutation' }],
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 5,
     slot: 'neck',
 
@@ -129,7 +131,7 @@ export const wondrousItemsExample: WondrousItemDefinition[] = [
     source: 'Core Rulebook',
     isOfficial: true,
 
-    aura: [{ strength: 'moderate', school: 'conjuration' }],
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
     casterLevel: 9,
     slot: 'none',
 
@@ -176,8 +178,8 @@ export const wondrousItemsExample: WondrousItemDefinition[] = [
     isOfficial: true,
 
     aura: [
-      { strength: 'strong', school: 'evocation' },
-      { strength: 'moderate', school: 'abjuration' },
+      { strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION },
+      { strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION },
     ],
     casterLevel: 13,
     slot: 'head',
