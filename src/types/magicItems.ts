@@ -17,8 +17,7 @@ export type ItemSlot =
   | 'head'
   | 'headband'
   | 'neck'
-  | 'ring_left'
-  | 'ring_right'
+  | 'ring' // item definition slot — character equips to ring_left or ring_right (EquipmentSlot)
   | 'shield'
   | 'shoulders'
   | 'wrists'

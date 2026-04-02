@@ -74,7 +74,7 @@ Per the data model decision: mundane weapons and armor do NOT have enhancement n
 | Category       | Slot                        | Requires Free Hand | Charges      | Spell-based      |
 | -------------- | --------------------------- | ------------------ | ------------ | ---------------- |
 | `wondrous`     | varies                      | no                 | sometimes    | no               |
-| `ring`         | ring_left / ring_right      | no                 | no           | no               |
+| `ring`         | ring                        | no                 | no           | no               |
 | `staff`        | none                        | yes                | 10 max       | yes (list)       |
 | `rod`          | none                        | yes                | varies       | sometimes        |
 | `wand`         | none                        | yes                | 50 max       | yes (1 spell)    |
@@ -672,6 +672,51 @@ Typecheck via full path:
 4. **Batch size** — 25 items per agent (go over only to complete variants of the last item).
 5. **File naming** — `wondrousItems/aB-batch1.ts`, `aB-batch2.ts`, etc. Each batch ~25 entries.
 6. **Agents do NOT modify index.ts** — index wiring happens after all batches for a range are complete.
+
+### Agent Conventions (type fixes from 2026-04-02)
+
+These corrections apply to all batch files:
+
+**`MagicSchool.UNIVERSAL`** — now added to the `MagicSchool` enum. Use `MagicSchool.UNIVERSAL`
+for items with a "universal" aura school (e.g. Admixture Vial, Arcane Battery). Do NOT
+substitute `MagicSchool.TRANSMUTATION` with a comment.
+
+**Ring slot** — All ring-slot items (rings, bands, wondrous items worn on a finger) use
+`slot: 'ring'` in their item definition. Left vs. right is a character-sheet concern (tracked
+via `CharacterMagicItem.equippedSlot` with `EquipmentSlot.RING_LEFT`/`RING_RIGHT`). The item
+definition never specifies which finger — that's up to the player.
+
+**Conditional bonuses** (`EffectCondition` on individual effects):
+Use the `condition` field on an `Effect` for bonuses that only apply sometimes:
+```typescript
+{
+  type: 'bonus',
+  bonusType: 'luck',
+  target: 'ac',
+  value: 1,
+  source: 'Item Name',
+  condition: {
+    type: 'weapon_type',           // or 'target_type', 'custom', 'range', etc.
+    params: { weaponType: 'firearm' },
+    description: 'against firearm attacks only',
+  },
+}
+```
+
+**Class/race/alignment-gated power blocks** (`conditionalEffects[]` on the item):
+Use `conditionalEffects[]` when an entirely different set of effects or spell-like abilities
+applies only when the wielder meets a condition (paladin, dwarf, lawful good, etc.):
+```typescript
+conditionalEffects: [
+  {
+    condition: 'wielder_class',
+    classId: 'paladin',
+    spellLikeAbilities: [...],
+    effects: [...],
+  },
+],
+```
+See `_example.ts` Examples 4 and 5 for complete patterns.
 
 ### d20pfsrd URL Patterns
 
