@@ -23,7 +23,8 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     name: 'Dispelling Blood',
     description:
       'As a swift action, you can alter the effects of your vishkanya venom to affect magic instead of flesh. When activated, the venom functions as a targeted dispel magic effect, using your character level as the caster level. This works against creatures even if they possess immunity to poison, and replaces the normal Dexterity damage from standard vishkanya venom.',
-    shortDescription: 'Alter vishkanya venom to function as targeted dispel magic as a swift action',
+    shortDescription:
+      'Alter vishkanya venom to function as targeted dispel magic as a swift action',
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['blood_hex'],
     prerequisites: [
@@ -35,7 +36,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Dispelling Blood',
       },
     ],
@@ -47,7 +48,8 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     name: 'Ghostbane Ichor',
     description:
       'Your venom is powerful enough to seep into the Ethereal Plane. As a swift action, you can alter your vishkanya venom so that it lasts a number of rounds equal to your Constitution modifier, grants the ghost touch special ability to weapons envenomed with it, and deals 1d6 extra damage against incorporeal creatures. This effect works on poison-immune creatures. The venom expends upon hitting a corporeal target, ending all granted effects.',
-    shortDescription: 'Alter vishkanya venom to grant ghost touch and deal extra damage to incorporeal creatures',
+    shortDescription:
+      'Alter vishkanya venom to grant ghost touch and deal extra damage to incorporeal creatures',
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['general'],
     prerequisites: [
@@ -59,7 +61,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Ghostbane Ichor',
       },
     ],
@@ -87,7 +89,8 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     name: 'Hemorrhaging Venom',
     description:
       'Your venomous spit causes devastating vascular damage. When a target fails its saving throw against your nagaji spit venom, it takes an additional 2d6 points of bleed damage in addition to all other effects. This bleeding damage can be stopped with a DC 15 Heal check or any effect that restores hit points. You also gain one additional daily use of the Spit Venom ability.',
-    shortDescription: 'Spit venom causes 2d6 bleed damage on a failed save; gain one extra daily use',
+    shortDescription:
+      'Spit venom causes 2d6 bleed damage on a failed save; gain one extra daily use',
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['combat'],
     prerequisites: [
@@ -101,7 +104,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Hemorrhaging Venom',
       },
     ],
@@ -140,7 +143,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Noxious Touch',
       },
     ],
@@ -152,7 +155,8 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     name: 'Poison Resin',
     description:
       'As a standard action, you can expend one use of your toxic skin ability to fashion your hardened toxic secretions into any simple light weapon. The weapon lasts for 1 hour. Once per minute, you can apply your grippli racial poison to attacks made with the weapon, up to a number of times per day equal to your Constitution modifier. Any non-grippli creature that wields the weapon is automatically exposed to the poison.',
-    shortDescription: 'Spend a use of toxic skin to craft a simple light weapon coated in grippli poison',
+    shortDescription:
+      'Spend a use of toxic skin to craft a simple light weapon coated in grippli poison',
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['general'],
     prerequisites: [
@@ -163,7 +167,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Poison Resin',
       },
     ],
@@ -203,7 +207,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Toxic Spray',
       },
     ],
@@ -228,7 +232,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Unraveling Blood',
       },
     ],
@@ -240,12 +244,11 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     name: 'Vaporous Potion',
     description:
       "You can brew potions that transform into inhalable vapor when exposed to air. The potion functions normally when consumed directly but can alternatively be thrown as a splash weapon with a 10-foot range increment. Upon impact, the vial shatters and releases vapor confined to a single square. Creatures in that square immediately gain the potion's benefits. The vapor persists 1d3+1 rounds if no creature is present; the first creature to enter the space receives the benefits. Creatures can hold their breath to avoid inhaling. Only one creature benefits per potion.",
-    shortDescription: 'Brew potions that can be thrown as splash weapons, releasing an inhalable vapor',
+    shortDescription:
+      'Brew potions that can be thrown as splash weapons, releasing an inhalable vapor',
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['item_creation'],
-    prerequisites: [
-      { type: 'feat', featId: 'brew_potion' },
-    ],
+    prerequisites: [{ type: 'feat', featId: 'brew_potion' }],
     effects: [],
     activationMode: 'passive',
     tags: ['potion', 'brewing', 'alchemy', 'thrown weapon'],
@@ -255,7 +258,8 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     name: 'Virulent Venom',
     description:
       'The poison that drips from your fangs is potent enough to burn through flesh and wood. Your Spit Venom ability deals 1d6 points of acid damage plus an additional 1d6 for every 3 Hit Dice you possess. This extra acid damage applies even if the target has poison immunity or succeeds on its Fortitude save. You also gain one additional daily use of the spit poison ability from the Spit Venom feat.',
-    shortDescription: 'Spit Venom deals acid damage even on saves or to poison-immune targets; gain one extra daily use',
+    shortDescription:
+      'Spit Venom deals acid damage even on saves or to poison-immune targets; gain one extra daily use',
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['combat'],
     prerequisites: [
@@ -267,7 +271,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Virulent Venom',
       },
     ],
@@ -279,7 +283,8 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     name: 'Viscous Venom',
     description:
       'Your venom is abnormally thick and adhesive. When you strike a target with your Spit Venom ability, the target becomes entangled in addition to being exposed to your nagaji poison. An entangled creature can escape via a DC 15 Strength check, a DC 15 Escape Artist check (full-round action), or by dealing 15 points of slashing damage to the substance. You also gain one additional daily use of the Spit Venom ability.',
-    shortDescription: 'Spit Venom entangles targets in addition to poisoning them; gain one extra daily use',
+    shortDescription:
+      'Spit Venom entangles targets in addition to poisoning them; gain one extra daily use',
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['combat'],
     prerequisites: [
@@ -291,7 +296,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Viscous Venom',
       },
     ],
@@ -303,7 +308,8 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     name: 'Warding Blood',
     description:
       'Over the course of 10 minutes, you can coat a 10-foot by 10-foot area with your blood, expending two uses of your venom. This creates a forbiddance magical effect in that area using your character level as caster level (maximum 20th). The save DC equals 15 + your Charisma modifier. Creatures taking damage from the forbiddance effect are also exposed to your vishkanya venom. If you have venom-altering abilities, you must select which effect applies when establishing the venomous area.',
-    shortDescription: 'Expend two venom uses to coat an area with a forbiddance effect that also exposes intruders to vishkanya venom',
+    shortDescription:
+      'Expend two venom uses to coat an area with a forbiddance effect that also exposes intruders to vishkanya venom',
     source: 'Pathfinder Player Companion: Potions & Poisons',
     types: ['combat'],
     prerequisites: [
@@ -316,7 +322,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Warding Blood',
       },
     ],

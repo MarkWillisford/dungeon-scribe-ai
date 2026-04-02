@@ -20,7 +20,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Critical Conduit',
       },
     ],
@@ -32,7 +32,8 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
     name: 'Extra Item Slot',
     description:
       'Choose one magic item slot not normally available to creatures of your body type. You can now use magic items in that slot. You can take this feat multiple times, selecting a different slot each time.',
-    shortDescription: 'Gain access to one extra magic item slot not normally available to your body type.',
+    shortDescription:
+      'Gain access to one extra magic item slot not normally available to your body type.',
     source: 'Pathfinder Player Companion: Animal Archive',
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Non-humanoid body shape' }],
@@ -41,7 +42,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Extra Item Slot',
       },
     ],
@@ -62,7 +63,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 1,
         bonusType: BonusType.UNTYPED,
-        target: 'caster_level',
+        target: 'spell.caster_level',
         source: 'Familiar Focus',
       },
     ],
@@ -83,7 +84,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Familiar Spell',
       },
     ],
@@ -95,7 +96,8 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
     name: 'Jumper',
     description:
       'You always count as having a running start when making jump checks using Acrobatics. Acrobatics becomes a class skill for you.',
-    shortDescription: 'Always count as having running start for jumps; Acrobatics is a class skill.',
+    shortDescription:
+      'Always count as having running start for jumps; Acrobatics is a class skill.',
     source: 'Pathfinder Player Companion: Animal Archive',
     types: ['general'],
     prerequisites: [
@@ -107,7 +109,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Jumper',
       },
     ],
@@ -132,7 +134,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Lithe Attacker',
       },
     ],
@@ -144,7 +146,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
     name: 'Master of Your Kind',
     description:
       "Your master gains a +2 bonus on Handle Animal checks with animals of your kind. You can use animal messenger, animal trance, or charm animal once daily as a spell-like ability (one total use, not per ability), limited to your own species, using your master's caster level and your Charisma modifier. Your master can grant an extra daily use by sacrificing a prepared spell or slot of equal or higher level as a standard action.",
-    shortDescription: "+2 Handle Animal for master; gain daily SLAs for your species.",
+    shortDescription: '+2 Handle Animal for master; gain daily SLAs for your species.',
     source: 'Pathfinder Player Companion: Animal Archive',
     types: ['general'],
     prerequisites: [
@@ -154,7 +156,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'handle_animal',
+        target: 'special.handle_animal',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Master of Your Kind',
@@ -180,7 +182,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Narrow Frame',
       },
     ],
@@ -192,7 +194,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
     name: 'Spell Sponge',
     description:
       "Whenever your master targets you with a harmless spell with a target of 'you,' the spell's duration is doubled as if modified by the Extend Spell metamagic feat. This does not affect spells with a duration of concentration, instantaneous, or permanent, or spells already modified by Extend Spell.",
-    shortDescription: "Harmless spells from your master targeting you have doubled duration.",
+    shortDescription: 'Harmless spells from your master targeting you have doubled duration.',
     source: 'Pathfinder Player Companion: Animal Archive',
     types: ['general'],
     prerequisites: [
@@ -204,7 +206,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Spell Sponge',
       },
     ],
@@ -225,7 +227,7 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Stable Gallop',
       },
     ],
@@ -244,14 +246,14 @@ export const ANIMAL_ARCHIVE_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'acrobatics',
+        target: 'skill.acrobatics',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Sure-Footed',
       },
       {
         type: 'bonus',
-        target: 'reflex',
+        target: 'special.reflex',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Sure-Footed',

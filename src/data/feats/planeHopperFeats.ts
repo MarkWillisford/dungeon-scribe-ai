@@ -129,9 +129,9 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'level', minimum: 3 }],
     effects: [
       {
-        type: 'spell_like_ability',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'darkness',
+        target: 'special.darkness',
         value: '1/day',
         source: 'Dark Affinity',
       },
@@ -242,7 +242,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'resource_increase',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
         target: 'crystalline_dust.rounds_per_day',
         value: 3,
@@ -305,7 +305,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'bonus_damage',
+        type: 'damage',
         bonusType: BonusType.UNTYPED,
         target: 'weapon.damage.chaotic_creatures',
         value: '1d6',
@@ -410,9 +410,9 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'spell_like_ability',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'glibness',
+        target: 'special.glibness',
         value: '1/day',
         source: 'Knight of the Twisted Word',
       },
@@ -472,7 +472,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'combat_maneuver_bonus',
+        target: 'cmb',
         value: -2,
         source: 'Marcher-Lord of the Cerulean Abyss',
         condition: {
@@ -484,7 +484,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'combat_maneuver_defense',
+        target: 'cmd',
         value: -2,
         source: 'Marcher-Lord of the Cerulean Abyss',
         condition: {
@@ -509,9 +509,9 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'race', raceName: 'Duskwalker' }],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'diplomacy',
+        target: 'skill.diplomacy',
         value: 3,
         source: 'Personal Chronicler',
         condition: {
@@ -544,7 +544,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     prerequisites: [],
     effects: [
       {
-        type: 'energy_resistance',
+        type: 'resistance',
         bonusType: BonusType.UNTYPED,
         target: 'energy_resistance.alignment_energy',
         value: 'character_level',
@@ -582,7 +582,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         bonusType: BonusType.UNTYPED,
         target: 'charisma_check.dream_entry_condition',
         value: 2,
@@ -698,7 +698,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         bonusType: BonusType.UNTYPED,
         target: 'skill.swim',
         value: 2,

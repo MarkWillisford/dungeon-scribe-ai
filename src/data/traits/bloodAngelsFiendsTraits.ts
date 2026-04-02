@@ -6,7 +6,7 @@ export const BLOOD_ANGELS_TRAITS: TraitDefinition[] = [
     id: 'adrift_boa',
     name: 'Adrift',
     description:
-      "You never felt accepted by your family. Your sense of alienation and difficulty connecting with those around you persists into adulthood, making you seem unusual to others who struggle to understand your motivations. You gain a +1 trait bonus on saving throws made to resist charm and compulsion effects.",
+      'You never felt accepted by your family. Your sense of alienation and difficulty connecting with those around you persists into adulthood, making you seem unusual to others who struggle to understand your motivations. You gain a +1 trait bonus on saving throws made to resist charm and compulsion effects.',
     shortDescription: '+1 trait bonus on saves vs. charm and compulsion effects.',
     source: 'Pathfinder Player Companion: Blood of Angels',
     category: 'race',
@@ -141,14 +141,15 @@ export const BLOOD_ANGELS_TRAITS: TraitDefinition[] = [
     name: 'Ethical Leader',
     description:
       'Your followers and cohorts are more willing to serve you because of their confidence in your strong moral position. You gain a +1 trait bonus to your Leadership score if all your cohorts and followers have an alignment within one step of your alignment.',
-    shortDescription: '+1 trait bonus to Leadership score if all followers are within one alignment step.',
+    shortDescription:
+      '+1 trait bonus to Leadership score if all followers are within one alignment step.',
     source: 'Pathfinder Player Companion: Blood of Angels',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Aasimar' }],
     effects: [
       {
         type: 'special',
-        target: 'leadership_score',
+        target: 'special.leadership_score',
         value: 1,
         bonusType: BonusType.TRAIT,
         source: 'Ethical Leader',
@@ -288,7 +289,8 @@ export const BLOOD_ANGELS_TRAITS: TraitDefinition[] = [
     name: "Planetar's Visions",
     description:
       "Ever since you were a child, you have experienced vivid dreams of cutting down hordes of shrieking, twisted demons. When you land a critical hit with a melee weapon against an evil outsider, you ignore an amount of that creature's damage reduction equal to your weapon's critical multiplier. This cannot reduce the outsider's damage reduction below 0.",
-    shortDescription: 'Critical hits vs. evil outsiders ignore DR equal to the weapon critical multiplier.',
+    shortDescription:
+      'Critical hits vs. evil outsiders ignore DR equal to the weapon critical multiplier.',
     source: 'Pathfinder Player Companion: Blood of Angels',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Aasimar (Angelkin)' }],
@@ -454,7 +456,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'arms_master_bof',
     name: 'Arms Master',
     description:
-      "The legendary battle prowess of your ancestors ensures that you have a certain amount of innate martial skill. You take a -2 penalty on attack rolls made with weapons with which you are not proficient instead of the normal -4.",
+      'The legendary battle prowess of your ancestors ensures that you have a certain amount of innate martial skill. You take a -2 penalty on attack rolls made with weapons with which you are not proficient instead of the normal -4.',
     shortDescription: 'Reduce the non-proficiency attack penalty from -4 to -2.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -474,7 +476,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'prayer_breaker',
     name: 'Prayer Breaker',
     description:
-      "If a divine spellcaster makes a concentration check to avoid losing a spell because of an injury you caused, increase the DC of that check by +2.",
+      'If a divine spellcaster makes a concentration check to avoid losing a spell because of an injury you caused, increase the DC of that check by +2.',
     shortDescription: 'Concentration DCs for divine spellcasters you injure increase by 2.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -495,8 +497,9 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'deaths_deputy',
     name: "Death's Deputy",
     description:
-      "You gain a +2 trait bonus on the damage dealt for any attack that would already reduce your target to negative hit points without this trait.",
-    shortDescription: '+2 damage on attacks that would already reduce the target to negative hit points.',
+      'You gain a +2 trait bonus on the damage dealt for any attack that would already reduce your target to negative hit points without this trait.',
+    shortDescription:
+      '+2 damage on attacks that would already reduce the target to negative hit points.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling (Grimspawn)' }],
@@ -515,8 +518,9 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'soul_eater_bof',
     name: 'Soul Eater',
     description:
-      "The act of murder allows you to draw vitality from fleeing souls. Whenever you use a coup de grace action to kill a creature (either by damage or through a failed Fortitude save), you gain a number of temporary hit points equal to half your character level (minimum 1) for 1 minute. These temporary hit points do not stack with multiple coups de grace.",
-    shortDescription: 'Gain temp HP equal to half your level (min 1) for 1 minute after a coup de grace kill.',
+      'The act of murder allows you to draw vitality from fleeing souls. Whenever you use a coup de grace action to kill a creature (either by damage or through a failed Fortitude save), you gain a number of temporary hit points equal to half your character level (minimum 1) for 1 minute. These temporary hit points do not stack with multiple coups de grace.',
+    shortDescription:
+      'Gain temp HP equal to half your level (min 1) for 1 minute after a coup de grace kill.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling (Grimspawn)' }],
@@ -536,7 +540,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'blood_stalker',
     name: 'Blood Stalker',
     description:
-      "Some infernal instinct makes it much easier for you to locate creatures whose blood you have drawn. You gain a +4 trait bonus on Survival checks made to track or follow a trail so long as you have dealt damage to the creature you are hunting within the last week.",
+      'Some infernal instinct makes it much easier for you to locate creatures whose blood you have drawn. You gain a +4 trait bonus on Survival checks made to track or follow a trail so long as you have dealt damage to the creature you are hunting within the last week.',
     shortDescription: '+4 on Survival checks to track creatures you have damaged in the last week.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -577,7 +581,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'bent_body',
     name: 'Bent Body',
     description:
-      "While nothing is actually reversed, your bones and limbs are slightly out of alignment. You gain a +2 trait bonus to CMD when resisting grapple attempts.",
+      'While nothing is actually reversed, your bones and limbs are slightly out of alignment. You gain a +2 trait bonus to CMD when resisting grapple attempts.',
     shortDescription: '+2 trait bonus to CMD against grapple attempts.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -598,7 +602,8 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     name: 'Tough Skin',
     description:
       "You retain a small amount of your ancestors' unyielding skin. You gain a +1 trait bonus to AC when opponents attempt to confirm critical hits with either bludgeoning or slashing weapons.",
-    shortDescription: '+1 trait bonus to AC against critical hit confirmation rolls with bludgeoning or slashing weapons.',
+    shortDescription:
+      '+1 trait bonus to AC against critical hit confirmation rolls with bludgeoning or slashing weapons.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling (Beastbrood)' }],
@@ -645,7 +650,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'superior_clutch',
     name: 'Superior Clutch',
     description:
-      "Your hands not only are bigger than normal, but also have a strong grip useful for wielding large weapons. You gain a +1 trait bonus on damage rolls when using weapons intended for creatures of a larger size.",
+      'Your hands not only are bigger than normal, but also have a strong grip useful for wielding large weapons. You gain a +1 trait bonus on damage rolls when using weapons intended for creatures of a larger size.',
     shortDescription: '+1 trait bonus on damage rolls with oversized weapons.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -666,7 +671,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'chain_master',
     name: 'Chain Master',
     description:
-      "Your fiendish ancestry has granted you unnatural skill with the chain, and your enemies know to stay away when you wield it as a weapon. You gain a +2 trait bonus on combat maneuver checks made to trip opponents with a spiked chain or whip.",
+      'Your fiendish ancestry has granted you unnatural skill with the chain, and your enemies know to stay away when you wield it as a weapon. You gain a +2 trait bonus on combat maneuver checks made to trip opponents with a spiked chain or whip.',
     shortDescription: '+2 on trip combat maneuvers with a spiked chain or whip.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -686,7 +691,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'pain_artist',
     name: 'Pain Artist',
     description:
-      "Some trace of your kyton heritage makes people realize you are capable of anything, especially when they are bound and at your mercy. You gain a +2 trait bonus on Intimidate checks made against helpless creatures.",
+      'Some trace of your kyton heritage makes people realize you are capable of anything, especially when they are bound and at your mercy. You gain a +2 trait bonus on Intimidate checks made against helpless creatures.',
     shortDescription: '+2 on Intimidate checks against helpless creatures.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -707,7 +712,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'deadly_rush',
     name: 'Deadly Rush',
     description:
-      "When you hurl yourself against a foe with reckless abandon, you often land particularly telling blows. You gain a +2 trait bonus on critical hit confirmation rolls made as part of a charge.",
+      'When you hurl yourself against a foe with reckless abandon, you often land particularly telling blows. You gain a +2 trait bonus on critical hit confirmation rolls made as part of a charge.',
     shortDescription: '+2 on critical hit confirmation rolls made during a charge.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -727,7 +732,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'flair_for_destruction',
     name: 'Flair for Destruction',
     description:
-      "You have a talent for striking objects at their weakest points. You gain a +1 trait bonus on weapon damage rolls when attacking objects and constructs.",
+      'You have a talent for striking objects at their weakest points. You gain a +1 trait bonus on weapon damage rolls when attacking objects and constructs.',
     shortDescription: '+1 trait bonus on damage rolls against objects and constructs.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -748,8 +753,9 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'buried_anxiety',
     name: 'Buried Anxiety',
     description:
-      "You laugh at what makes others tremble, but are secretly disturbed by a particular sort of mundane item. Pick a specific sort of object, color, sound, or similar relatively common phenomenon. You gain a +2 trait bonus on saving throws made to resist fear effects, except when you can see, hear, smell, or taste the particular phenomenon you have selected.",
-    shortDescription: '+2 on saves vs. fear effects, except when exposed to your chosen mundane trigger.',
+      'You laugh at what makes others tremble, but are secretly disturbed by a particular sort of mundane item. Pick a specific sort of object, color, sound, or similar relatively common phenomenon. You gain a +2 trait bonus on saving throws made to resist fear effects, except when you can see, hear, smell, or taste the particular phenomenon you have selected.',
+    shortDescription:
+      '+2 on saves vs. fear effects, except when exposed to your chosen mundane trigger.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling (Spitespawn)' }],
@@ -768,8 +774,9 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'shift_the_blame',
     name: 'Shift the Blame',
     description:
-      "You have learned many tricks to keep yourself from facing the consequences of your misdeeds. You gain a +1 trait bonus on Bluff and Diplomacy checks made to convince someone that another person is actually at fault for your actions.",
-    shortDescription: '+1 on Bluff and Diplomacy to convince others someone else is at fault for your actions.',
+      'You have learned many tricks to keep yourself from facing the consequences of your misdeeds. You gain a +1 trait bonus on Bluff and Diplomacy checks made to convince someone that another person is actually at fault for your actions.',
+    shortDescription:
+      '+1 on Bluff and Diplomacy to convince others someone else is at fault for your actions.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling (Spitespawn)' }],
@@ -796,7 +803,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'god_scorn',
     name: 'God Scorn',
     description:
-      "Your contempt for the gods and their sad little priests makes it easier to shake off the effects of their prayers. You gain a +1 trait bonus on saving throws against divine spells.",
+      'Your contempt for the gods and their sad little priests makes it easier to shake off the effects of their prayers. You gain a +1 trait bonus on saving throws against divine spells.',
     shortDescription: '+1 trait bonus on saving throws against divine spells.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -816,7 +823,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'repulsive_bof',
     name: 'Repulsive',
     description:
-      "Your repulsiveness causes people to almost instinctively shy away from making physical contact with you. You gain a +1 bonus to combat maneuver checks made for overrun and reposition actions.",
+      'Your repulsiveness causes people to almost instinctively shy away from making physical contact with you. You gain a +1 bonus to combat maneuver checks made for overrun and reposition actions.',
     shortDescription: '+1 on overrun and reposition combat maneuver checks.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -844,8 +851,9 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'repel_sin',
     name: 'Repel Sin',
     description:
-      "You have an instinctive revulsion for the sins that led to the rise of demons and subsequent downfall of qlippoth. You gain a +2 trait bonus on saving throws made against spells and effects with the evil descriptor.",
-    shortDescription: '+2 trait bonus on saves against spells and effects with the evil descriptor.',
+      'You have an instinctive revulsion for the sins that led to the rise of demons and subsequent downfall of qlippoth. You gain a +2 trait bonus on saving throws made against spells and effects with the evil descriptor.',
+    shortDescription:
+      '+2 trait bonus on saves against spells and effects with the evil descriptor.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling (The Motherless)' }],
@@ -864,7 +872,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'vile_kiss',
     name: 'Vile Kiss',
     description:
-      "You have learned how to exploit the natural disgust you provoke when in close proximity to others. You gain a +2 trait bonus on combat maneuver checks to perform a dirty trick combat maneuver for the purpose of making your opponent sickened.",
+      'You have learned how to exploit the natural disgust you provoke when in close proximity to others. You gain a +2 trait bonus on combat maneuver checks to perform a dirty trick combat maneuver for the purpose of making your opponent sickened.',
     shortDescription: '+2 on dirty trick combat maneuvers to sicken opponents.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -885,8 +893,9 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'anticipate_evil',
     name: 'Anticipate Evil',
     description:
-      "You can read subtle clues in the body language of fiends, allowing you to react just a bit faster than normal when dealing with such beings. You gain a +1 trait bonus on opposed Dexterity-based skill checks against outsiders with the evil subtype, and when initiative is tied with evil outsiders you always act first regardless of initiative modifier differences.",
-    shortDescription: '+1 on opposed Dex-based skill checks vs. evil outsiders; always win initiative ties against them.',
+      'You can read subtle clues in the body language of fiends, allowing you to react just a bit faster than normal when dealing with such beings. You gain a +1 trait bonus on opposed Dexterity-based skill checks against outsiders with the evil subtype, and when initiative is tied with evil outsiders you always act first regardless of initiative modifier differences.',
+    shortDescription:
+      '+1 on opposed Dex-based skill checks vs. evil outsiders; always win initiative ties against them.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling' }],
@@ -912,7 +921,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'beast_bully',
     name: 'Beast Bully',
     description:
-      "You have learned how to exploit the fear felt by creatures of the natural world when they sense the shadow in your soul. You can make an Intimidate check instead of a Handle Animal check when trying to handle or push an animal.",
+      'You have learned how to exploit the fear felt by creatures of the natural world when they sense the shadow in your soul. You can make an Intimidate check instead of a Handle Animal check when trying to handle or push an animal.',
     shortDescription: 'Use Intimidate in place of Handle Animal checks to handle or push animals.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -933,7 +942,8 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     name: 'Blessing of Darkness',
     description:
       "Whenever a spellcaster capable of channeling negative energy casts a beneficial spell on you, she acts as if she were one level higher for the purpose of determining that spell's effects.",
-    shortDescription: 'Spellcasters using negative energy channeling treat their level as 1 higher when casting beneficial spells on you.',
+    shortDescription:
+      'Spellcasters using negative energy channeling treat their level as 1 higher when casting beneficial spells on you.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling' }],
@@ -952,7 +962,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'born_damned',
     name: 'Born Damned',
     description:
-      "The inherent sacrilege that taints your soul sometimes crowds out lesser banes. You gain a +2 trait bonus on saving throws against curses and magical effects that produce curses.",
+      'The inherent sacrilege that taints your soul sometimes crowds out lesser banes. You gain a +2 trait bonus on saving throws against curses and magical effects that produce curses.',
     shortDescription: '+2 trait bonus on saving throws against curses and curse-producing effects.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -973,7 +983,8 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     name: 'Dark Magic Affinity',
     description:
       "Whenever you cast a spell with the evil descriptor, you act as if you were one level higher for the purpose of determining that spell's effects.",
-    shortDescription: 'Treat your caster level as 1 higher when casting spells with the evil descriptor.',
+    shortDescription:
+      'Treat your caster level as 1 higher when casting spells with the evil descriptor.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling' }],
@@ -992,8 +1003,9 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'wary_tiefling',
     name: 'Ever Wary',
     description:
-      "Constant fear that your fiendish nature might provoke a sudden attack ensures that you never completely let down your guard. During the surprise round and before your first action in combat, you can apply half your Dexterity bonus (if any) to your AC. You still count as flat-footed for the purposes of attacks and effects.",
-    shortDescription: 'Apply half your Dex bonus to AC during the surprise round and before your first action; still flat-footed.',
+      'Constant fear that your fiendish nature might provoke a sudden attack ensures that you never completely let down your guard. During the surprise round and before your first action in combat, you can apply half your Dexterity bonus (if any) to your AC. You still count as flat-footed for the purposes of attacks and effects.',
+    shortDescription:
+      'Apply half your Dex bonus to AC during the surprise round and before your first action; still flat-footed.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling' }],
@@ -1012,7 +1024,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'family_connections_bof',
     name: 'Family Connections',
     description:
-      "Your dark ancestry gives you a special insight into how to motivate or placate fiends and their kin. You gain a +2 trait bonus on Bluff and Diplomacy checks made against outsiders belonging to the evil subtype.",
+      'Your dark ancestry gives you a special insight into how to motivate or placate fiends and their kin. You gain a +2 trait bonus on Bluff and Diplomacy checks made against outsiders belonging to the evil subtype.',
     shortDescription: '+2 trait bonus on Bluff and Diplomacy against evil outsiders.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -1039,7 +1051,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'friendless_bof',
     name: 'Friendless',
     description:
-      "You have grown used to looking after yourself without help. You can make Heal checks on yourself for the purposes of treating deadly wounds, diseases, and poisons.",
+      'You have grown used to looking after yourself without help. You can make Heal checks on yourself for the purposes of treating deadly wounds, diseases, and poisons.',
     shortDescription: 'You can use Heal on yourself to treat deadly wounds, diseases, and poisons.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -1059,7 +1071,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'inciter_bof',
     name: 'Inciter',
     description:
-      "You always seem to know the perfect words to sow discord. You gain a +2 trait bonus on Bluff checks made to convince creatures to attack each other.",
+      'You always seem to know the perfect words to sow discord. You gain a +2 trait bonus on Bluff checks made to convince creatures to attack each other.',
     shortDescription: '+2 on Bluff checks to convince creatures to attack each other.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -1079,7 +1091,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'motherless_bof',
     name: 'Motherless',
     description:
-      "Your birth killed your mother, and you learned, even before words, how to manipulate others into looking after you. You gain a +2 trait bonus on Bluff and Disguise checks made to appear injured, sickly, or otherwise weakened.",
+      'Your birth killed your mother, and you learned, even before words, how to manipulate others into looking after you. You gain a +2 trait bonus on Bluff and Disguise checks made to appear injured, sickly, or otherwise weakened.',
     shortDescription: '+2 on Bluff and Disguise checks to appear injured, sickly, or weakened.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -1106,8 +1118,9 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'prideful_temper',
     name: 'Prideful Temper',
     description:
-      "Memories of the cruel abuse and taunts you suffered as a child cause you to strike back with great fury at anyone who slanders you. You gain a +1 trait bonus on attack rolls made against creatures that have insulted you until you successfully deal damage to that creature.",
-    shortDescription: '+1 on attack rolls against creatures that have insulted you, until you deal damage to them.',
+      'Memories of the cruel abuse and taunts you suffered as a child cause you to strike back with great fury at anyone who slanders you. You gain a +1 trait bonus on attack rolls made against creatures that have insulted you until you successfully deal damage to that creature.',
+    shortDescription:
+      '+1 on attack rolls against creatures that have insulted you, until you deal damage to them.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling' }],
@@ -1126,8 +1139,9 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'prolong_magic_bof',
     name: 'Prolong Magic',
     description:
-      "Constant drills and preparation allow you to get more out of your innate magic. Whenever you use a spell-like ability gained through your tiefling heritage, it automatically acts as if affected by the Extend Spell metamagic feat.",
-    shortDescription: 'Tiefling heritage spell-like abilities automatically function as if affected by Extend Spell.',
+      'Constant drills and preparation allow you to get more out of your innate magic. Whenever you use a spell-like ability gained through your tiefling heritage, it automatically acts as if affected by the Extend Spell metamagic feat.',
+    shortDescription:
+      'Tiefling heritage spell-like abilities automatically function as if affected by Extend Spell.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling' }],
@@ -1146,7 +1160,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'shadow_stabber',
     name: 'Shadow Stabber',
     description:
-      "An instinct for dishonorable conduct serves you well when fighting opponents who are blind, oblivious, or blundering around in the dark. You gain a +2 trait bonus on melee weapon damage rolls made against foes that cannot see you.",
+      'An instinct for dishonorable conduct serves you well when fighting opponents who are blind, oblivious, or blundering around in the dark. You gain a +2 trait bonus on melee weapon damage rolls made against foes that cannot see you.',
     shortDescription: '+2 trait bonus on melee damage rolls against foes that cannot see you.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -1166,8 +1180,9 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'suicidal_bof',
     name: 'Suicidal',
     description:
-      "Shame and horror fill your subconscious, and you never stop looking for ways to grant yourself the peace of the grave. Once per day as an immediate action, you can redirect any attack originally aimed at an adjacent creature to target yourself instead.",
-    shortDescription: 'Once per day as an immediate action, redirect an attack aimed at an adjacent creature to yourself.',
+      'Shame and horror fill your subconscious, and you never stop looking for ways to grant yourself the peace of the grave. Once per day as an immediate action, you can redirect any attack originally aimed at an adjacent creature to target yourself instead.',
+    shortDescription:
+      'Once per day as an immediate action, redirect an attack aimed at an adjacent creature to yourself.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling' }],
@@ -1185,8 +1200,7 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
   {
     id: 'twilight_zeal',
     name: 'Twilight Zeal',
-    description:
-      "You gain a +1 trait bonus on Will saving throws when in dim light or darkness.",
+    description: 'You gain a +1 trait bonus on Will saving throws when in dim light or darkness.',
     shortDescription: '+1 trait bonus on Will saves in dim light or darkness.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
@@ -1206,8 +1220,9 @@ export const BLOOD_FIENDS_TRAITS: TraitDefinition[] = [
     id: 'underling_bof',
     name: 'Underling',
     description:
-      "People tend to assume you either are, or are willing to become, a minor cog in some evil cabal or conspiracy. You gain a +2 trait bonus on Bluff and Diplomacy checks made to either join or imply that you already belong to an evil organization.",
-    shortDescription: '+2 on Bluff and Diplomacy to join or claim membership in evil organizations.',
+      'People tend to assume you either are, or are willing to become, a minor cog in some evil cabal or conspiracy. You gain a +2 trait bonus on Bluff and Diplomacy checks made to either join or imply that you already belong to an evil organization.',
+    shortDescription:
+      '+2 on Bluff and Diplomacy to join or claim membership in evil organizations.',
     source: 'Pathfinder Player Companion: Blood of Fiends',
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Tiefling' }],

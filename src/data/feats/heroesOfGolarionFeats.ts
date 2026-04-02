@@ -57,7 +57,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack_rolls',
+        target: 'attack.all',
         value: 1,
         bonusType: BonusType.UNTYPED,
         source: 'Consume Power',
@@ -69,7 +69,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
       },
       {
         type: 'bonus',
-        target: 'damage_rolls',
+        target: 'damage.melee',
         value: 1,
         bonusType: BonusType.UNTYPED,
         source: 'Consume Power',
@@ -162,7 +162,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack_rolls',
+        target: 'attack.all',
         value: 1,
         bonusType: BonusType.MORALE,
         source: 'Glorious Blaze',
@@ -175,7 +175,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
       },
       {
         type: 'bonus',
-        target: 'saving_throws',
+        target: 'save.all',
         value: 1,
         bonusType: BonusType.MORALE,
         source: 'Glorious Blaze',
@@ -272,7 +272,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack_rolls',
+        target: 'attack.all',
         value: -2,
         bonusType: BonusType.UNTYPED,
         source: 'Mental Derail',
@@ -381,7 +381,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'saving_throws.fortitude',
+        target: 'save.fortitude',
         value: 2,
         bonusType: BonusType.MORALE,
         source: 'Robust Stench',

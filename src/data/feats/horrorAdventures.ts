@@ -539,7 +539,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'saving_throws_vs_emotion',
+        target: 'save.all',
         value: 2,
         source: 'Lifeless Gaze',
       },
@@ -727,7 +727,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'ritual_skill_checks',
+        target: 'special.ritual_skill_checks',
         value: 4,
         condition: {
           type: 'custom',
@@ -926,7 +926,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throws_vs_enchantment',
+        target: 'save.all',
         value: 2,
         source: 'Twisted Love',
       },
@@ -969,7 +969,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throws_vs_charm_compulsion',
+        target: 'save.all',
         value: 2,
         condition: {
           type: 'custom',

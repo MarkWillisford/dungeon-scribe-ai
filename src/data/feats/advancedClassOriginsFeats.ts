@@ -7,7 +7,8 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     name: 'Ambush Sense',
     description:
       'You gain a bonus on Perception checks made to determine awareness for the surprise round of combat, and a dodge bonus to AC in any surprise round in which you get to act. These bonuses are equal to the bonus you gain from trap sense.',
-    shortDescription: 'Gain Perception and AC bonuses in surprise rounds equal to your trap sense bonus.',
+    shortDescription:
+      'Gain Perception and AC bonuses in surprise rounds equal to your trap sense bonus.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
     types: ['combat'],
     prerequisites: [
@@ -24,7 +25,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
       },
       {
         type: 'bonus',
-        target: 'perception',
+        target: 'skill.perception',
         value: 0,
         bonusType: BonusType.UNTYPED,
         source: 'Ambush Sense',
@@ -37,7 +38,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'amplified_hex',
     name: 'Amplified Hex',
     description:
-      'Whenever you use a hex, you may expend a prepared spell or spell slot of at least 1st level to augment the hex. The first time you do so in a day, you may choose one of the following: increase the hex\'s saving throw DC by 1, increase the hex\'s range by 30 feet (the hex must already have a range of at least 30 feet), or increase the hex\'s duration by 1 round (the hex must already have a duration of at least 1 round). Each subsequent time you use this ability in the same day, you must expend a spell slot 1 level higher than the last (2nd level for the second use, 3rd for the third, and so on).',
+      "Whenever you use a hex, you may expend a prepared spell or spell slot of at least 1st level to augment the hex. The first time you do so in a day, you may choose one of the following: increase the hex's saving throw DC by 1, increase the hex's range by 30 feet (the hex must already have a range of at least 30 feet), or increase the hex's duration by 1 round (the hex must already have a duration of at least 1 round). Each subsequent time you use this ability in the same day, you must expend a spell slot 1 level higher than the last (2nd level for the second use, 3rd for the third, and so on).",
     shortDescription: 'Expend spell slots to increase hex DC, range, or duration.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
     types: ['general'],
@@ -47,7 +48,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Amplified Hex',
       },
     ],
@@ -59,12 +60,13 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     name: 'Daggermark Lore',
     description:
       'Choose one specific poison. The number of consecutive saves required to cure that poison increases by 1, and the DC to neutralize the poison with magic increases by 5. An initial successful saving throw still prevents the poison from taking effect. If you have the poison lore class feature, you are treated as having the poison use class feature for the purpose of meeting feat prerequisites.',
-    shortDescription: 'Increase the saves to cure and magical neutralization DC for a chosen poison.',
+    shortDescription:
+      'Increase the saves to cure and magical neutralization DC for a chosen poison.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'craft_alchemy', ranks: 5 },
-      { type: 'special', description: 'Member of the Daggermark Poisoner\'s Guild' },
+      { type: 'special', description: "Member of the Daggermark Poisoner's Guild" },
       {
         type: 'special',
         description: 'Poison lore or poison use class feature',
@@ -75,7 +77,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Daggermark Lore',
       },
     ],
@@ -86,8 +88,9 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'eldritch_aid',
     name: 'Eldritch Aid',
     description:
-      'As a standard action, you can expend a prepared spell or spell slot of 1st level or higher to empower an allied spellcaster within close range (25 feet + 5 feet per 2 caster levels). If that ally casts a spell with an instantaneous duration of equal or lower level before the beginning of your next turn, the ally\'s caster level for that spell increases by 2. If you expend a spell slot of at least twice the level of the ally\'s spell, the caster level bonus increases to +4. Only the first qualifying spell the ally casts gains this benefit.',
-    shortDescription: 'Expend a spell to boost an ally\'s caster level by 2 (or 4 with a higher slot).',
+      "As a standard action, you can expend a prepared spell or spell slot of 1st level or higher to empower an allied spellcaster within close range (25 feet + 5 feet per 2 caster levels). If that ally casts a spell with an instantaneous duration of equal or lower level before the beginning of your next turn, the ally's caster level for that spell increases by 2. If you expend a spell slot of at least twice the level of the ally's spell, the caster level bonus increases to +4. Only the first qualifying spell the ally casts gains this benefit.",
+    shortDescription:
+      "Expend a spell to boost an ally's caster level by 2 (or 4 with a higher slot).",
     source: 'Pathfinder Player Companion: Advanced Class Origins',
     types: ['general'],
     prerequisites: [{ type: 'caster_level', minimum: 1 }],
@@ -96,7 +99,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 2,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Eldritch Aid',
       },
     ],
@@ -117,7 +120,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Expanded Spell Kenning',
       },
     ],
@@ -144,7 +147,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Expanded Studies',
       },
     ],
@@ -155,7 +158,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'fencing_grace',
     name: 'Fencing Grace',
     description:
-      'When wielding a rapier one-handed, you can add your Dexterity modifier instead of your Strength modifier to that weapon\'s damage. The rapier must be one appropriate for your size. You do not gain this benefit while fighting with two weapons or using flurry of blows, or any time another hand is otherwise occupied. If you have the panache class feature, you gain a +2 bonus to CMD against disarm attempts made while you are wielding a rapier as long as you have at least 1 panache point.',
+      "When wielding a rapier one-handed, you can add your Dexterity modifier instead of your Strength modifier to that weapon's damage. The rapier must be one appropriate for your size. You do not gain this benefit while fighting with two weapons or using flurry of blows, or any time another hand is otherwise occupied. If you have the panache class feature, you gain a +2 bonus to CMD against disarm attempts made while you are wielding a rapier as long as you have at least 1 panache point.",
     shortDescription: 'Add DEX to rapier damage instead of STR when wielding one-handed.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
     types: ['combat'],
@@ -167,7 +170,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'damage',
-        target: 'rapier',
+        target: 'special.rapier',
         value: 0,
         bonusType: BonusType.UNTYPED,
         source: 'Fencing Grace',
@@ -180,8 +183,9 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'fighting_frenzy_aco',
     name: 'Fighting Frenzy',
     description:
-      'When you are in a rage and an ally who also has this feat is in a rage within 60 feet of you, you don\'t take the normal -2 penalty to AC for being in a rage. If you would take a larger penalty to AC for being in a rage, reduce that penalty by 2.',
-    shortDescription: 'Negate the -2 AC penalty from rage when a raging ally with this feat is within 60 ft.',
+      "When you are in a rage and an ally who also has this feat is in a rage within 60 feet of you, you don't take the normal -2 penalty to AC for being in a rage. If you would take a larger penalty to AC for being in a rage, reduce that penalty by 2.",
+    shortDescription:
+      'Negate the -2 AC penalty from rage when a raging ally with this feat is within 60 ft.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
     types: ['combat', 'teamwork'],
     prerequisites: [
@@ -205,21 +209,22 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     name: 'Know Weakness',
     description:
       'When you successfully identify a creature with the appropriate Knowledge check, you gain a +1 bonus on attack and damage rolls against that creature for 1 round.',
-    shortDescription: 'Gain +1 attack and damage for 1 round after identifying a creature via Knowledge.',
+    shortDescription:
+      'Gain +1 attack and damage for 1 round after identifying a creature via Knowledge.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
     types: ['combat'],
     prerequisites: [{ type: 'class_feature', featureName: 'bardic knowledge' }],
     effects: [
       {
         type: 'bonus',
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         bonusType: BonusType.UNTYPED,
         source: 'Know Weakness',
       },
       {
         type: 'damage',
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         bonusType: BonusType.UNTYPED,
         source: 'Know Weakness',
@@ -247,7 +252,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Mad Magic',
       },
     ],
@@ -273,7 +278,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Onslaught',
       },
     ],
@@ -284,8 +289,9 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'pack_tactics',
     name: 'Pack Tactics',
     description:
-      'Your animal companion is treated as having all of your teamwork feats for the purpose of determining whether you receive a bonus from your teamwork feats. Your animal companion doesn\'t receive any bonuses from these feats unless it actually possesses the feats. The positioning and actions required by your teamwork feats must still be met.',
-    shortDescription: 'Your animal companion counts as having your teamwork feats for your bonus calculations.',
+      "Your animal companion is treated as having all of your teamwork feats for the purpose of determining whether you receive a bonus from your teamwork feats. Your animal companion doesn't receive any bonuses from these feats unless it actually possesses the feats. The positioning and actions required by your teamwork feats must still be met.",
+    shortDescription:
+      'Your animal companion counts as having your teamwork feats for your bonus calculations.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
     types: ['general'],
     prerequisites: [
@@ -297,7 +303,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Pack Tactics',
       },
     ],
@@ -308,8 +314,9 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     id: 'totem_beast_aco',
     name: 'Totem Beast',
     description:
-      'Select one animal aspect from the hunter class\'s animal focus class feature. Your animal companion gains the benefits of the selected animal aspect, treating its Hit Dice as its effective hunter level. Your animal companion also gains natural coloration suggestive of this aspect. This benefit does not stack if the companion is already under the benefit of the same animal aspect from the actual class feature.',
-    shortDescription: 'Grant your animal companion an animal focus aspect using its HD as hunter level.',
+      "Select one animal aspect from the hunter class's animal focus class feature. Your animal companion gains the benefits of the selected animal aspect, treating its Hit Dice as its effective hunter level. Your animal companion also gains natural coloration suggestive of this aspect. This benefit does not stack if the companion is already under the benefit of the same animal aspect from the actual class feature.",
+    shortDescription:
+      'Grant your animal companion an animal focus aspect using its HD as hunter level.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
     types: ['general'],
     prerequisites: [
@@ -321,7 +328,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Totem Beast',
       },
     ],
@@ -349,7 +356,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 1,
         bonusType: BonusType.UNTYPED,
-        target: 'grapple',
+        target: 'special.grapple',
         source: 'Unfair Grip',
       },
     ],

@@ -125,7 +125,7 @@ export const ARG_EXTRA_RACE_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'casterLevel',
+        target: 'special.casterLevel',
         value: 1,
         source: 'Lightbringer',
         condition: {
@@ -699,7 +699,13 @@ export const ARG_EXTRA_RACE_TRAITS_2: TraitDefinition[] = [
     subcategory: 'Human',
     prerequisites: [{ type: 'race', raceName: 'Human' }],
     effects: [
-      { type: 'special', bonusType: BonusType.TRAIT, target: 'reroll', value: 1, source: 'Heroic' },
+      {
+        type: 'special',
+        bonusType: BonusType.TRAIT,
+        target: 'special.reroll',
+        value: 1,
+        source: 'Heroic',
+      },
     ],
     tags: ['human', 'reroll', 'luck'],
   },
@@ -777,7 +783,7 @@ export const ARG_EXTRA_RACE_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'spellPenetration',
+        target: 'special.spellPenetration',
         value: 1,
         source: 'Hag Magic',
       },
@@ -812,7 +818,7 @@ export const ARG_EXTRA_RACE_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Hulking Changeling',
         condition: {

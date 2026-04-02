@@ -14,7 +14,15 @@ export const GOBLIN_GOLARION_FEATS: FeatDefinition[] = [
       { type: 'race', raceName: 'Goblin' },
       { type: 'skill', skillId: 'escape_artist', ranks: 1 },
     ],
-    effects: [{ type: 'special', value: 0, bonusType: BonusType.UNTYPED, target: 'special', source: 'Ankle Biter' }],
+    effects: [
+      {
+        type: 'special',
+        value: 0,
+        bonusType: BonusType.UNTYPED,
+        target: 'special.ability',
+        source: 'Ankle Biter',
+      },
+    ],
     activationMode: 'conditional',
     tags: ['goblin', 'bite', 'natural attack', 'grapple'],
   },
@@ -23,14 +31,22 @@ export const GOBLIN_GOLARION_FEATS: FeatDefinition[] = [
     name: 'Battle Singer',
     description:
       'When using bardic performance to inspire courage, you can sing in Goblin. Allies who do not speak Goblin gain no benefits. Allied goblins who hear your battle songs add the inspire courage bonus to all saving throws as a morale bonus.',
-    shortDescription: 'Inspire courage in Goblin adds the bonus to goblin allies\' saves.',
+    shortDescription: "Inspire courage in Goblin adds the bonus to goblin allies' saves.",
     source: 'Pathfinder Player Companion: Goblins of Golarion',
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Goblin' },
       { type: 'class_feature', featureName: 'bardic performance' },
     ],
-    effects: [{ type: 'special', value: 0, bonusType: BonusType.MORALE, target: 'saves', source: 'Battle Singer' }],
+    effects: [
+      {
+        type: 'special',
+        value: 0,
+        bonusType: BonusType.MORALE,
+        target: 'special.saves',
+        source: 'Battle Singer',
+      },
+    ],
     activationMode: 'conditional',
     tags: ['goblin', 'bard', 'bardic performance', 'inspire courage'],
   },
@@ -47,8 +63,20 @@ export const GOBLIN_GOLARION_FEATS: FeatDefinition[] = [
       { type: 'skill', skillId: 'disable_device', ranks: 1 },
     ],
     effects: [
-      { type: 'damage', target: 'fire', value: 0, bonusType: BonusType.UNTYPED, source: 'Burn! Burn! Burn!' },
-      { type: 'bonus', target: 'reflex', value: 4, bonusType: BonusType.COMPETENCE, source: 'Burn! Burn! Burn!' },
+      {
+        type: 'damage',
+        target: 'fire',
+        value: 0,
+        bonusType: BonusType.UNTYPED,
+        source: 'Burn! Burn! Burn!',
+      },
+      {
+        type: 'bonus',
+        target: 'special.reflex',
+        value: 4,
+        bonusType: BonusType.COMPETENCE,
+        source: 'Burn! Burn! Burn!',
+      },
     ],
     activationMode: 'conditional',
     tags: ['goblin', 'fire', 'alchemical', 'torch'],
@@ -58,7 +86,8 @@ export const GOBLIN_GOLARION_FEATS: FeatDefinition[] = [
     name: 'Combat Distraction',
     description:
       'As a full-round action, you perform distracting antics. Any creature other than a goblin within 5 feet takes a -2 penalty on Perception checks and concentration checks while you maintain this behavior. The penalty stacks with multiple goblins using this feat.',
-    shortDescription: 'Full-round action: -2 Perception and concentration to non-goblins within 5 ft.',
+    shortDescription:
+      'Full-round action: -2 Perception and concentration to non-goblins within 5 ft.',
     source: 'Pathfinder Player Companion: Goblins of Golarion',
     types: ['combat'],
     prerequisites: [
@@ -66,7 +95,15 @@ export const GOBLIN_GOLARION_FEATS: FeatDefinition[] = [
       { type: 'skill', skillId: 'acrobatics', ranks: 1 },
       { type: 'skill', skillId: 'escape_artist', ranks: 1 },
     ],
-    effects: [{ type: 'special', value: -2, bonusType: BonusType.UNTYPED, target: 'special', source: 'Combat Distraction' }],
+    effects: [
+      {
+        type: 'special',
+        value: -2,
+        bonusType: BonusType.UNTYPED,
+        target: 'special.ability',
+        source: 'Combat Distraction',
+      },
+    ],
     activationMode: 'conditional',
     tags: ['goblin', 'distraction', 'perception', 'concentration'],
   },
@@ -83,8 +120,20 @@ export const GOBLIN_GOLARION_FEATS: FeatDefinition[] = [
       { type: 'skill', skillId: 'handle_animal', ranks: 1 },
     ],
     effects: [
-      { type: 'bonus', target: 'dogs_horses', value: 2, bonusType: BonusType.MORALE, source: 'Dog Killer, Horse Hunter' },
-      { type: 'damage', target: 'dogs_horses', value: 2, bonusType: BonusType.MORALE, source: 'Dog Killer, Horse Hunter' },
+      {
+        type: 'bonus',
+        target: 'special.dogs_horses',
+        value: 2,
+        bonusType: BonusType.MORALE,
+        source: 'Dog Killer, Horse Hunter',
+      },
+      {
+        type: 'damage',
+        target: 'special.dogs_horses',
+        value: 2,
+        bonusType: BonusType.MORALE,
+        source: 'Dog Killer, Horse Hunter',
+      },
     ],
     activationMode: 'passive',
     tags: ['goblin', 'favored enemy', 'dogs', 'horses'],
@@ -94,14 +143,23 @@ export const GOBLIN_GOLARION_FEATS: FeatDefinition[] = [
     name: 'Lead from the Back',
     description:
       'During any round in which you gain the benefit of cover or concealment against at least one opponent and are not threatened, you can bark orders as a standard action. All allies within 30 feet gain a +1 bonus on all weapon damage rolls for 1 round.',
-    shortDescription: '+1 weapon damage to allies within 30 ft while you have cover and aren\'t threatened.',
+    shortDescription:
+      "+1 weapon damage to allies within 30 ft while you have cover and aren't threatened.",
     source: 'Pathfinder Player Companion: Goblins of Golarion',
     types: ['combat'],
     prerequisites: [
       { type: 'race', raceName: 'Goblin' },
       { type: 'skill', skillId: 'intimidate', ranks: 1 },
     ],
-    effects: [{ type: 'damage', target: 'allies', value: 1, bonusType: BonusType.UNTYPED, source: 'Lead from the Back' }],
+    effects: [
+      {
+        type: 'damage',
+        target: 'special.allies',
+        value: 1,
+        bonusType: BonusType.UNTYPED,
+        source: 'Lead from the Back',
+      },
+    ],
     activationMode: 'conditional',
     tags: ['goblin', 'leadership', 'cover', 'support'],
   },
@@ -110,14 +168,23 @@ export const GOBLIN_GOLARION_FEATS: FeatDefinition[] = [
     name: 'Letter Fury',
     description:
       'When someone reads, writes, or casts spells like glyph of warding or symbol in your presence, you can activate rage as an immediate action for 1 round without counting against daily rage rounds. Continuing beyond that round expends normal rage. You must wait at least 1 minute after rage ends before using this feat again.',
-    shortDescription: 'Enter rage as immediate action when witnessing reading/writing (free 1 round).',
+    shortDescription:
+      'Enter rage as immediate action when witnessing reading/writing (free 1 round).',
     source: 'Pathfinder Player Companion: Goblins of Golarion',
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Goblin' },
       { type: 'class_feature', featureName: 'rage' },
     ],
-    effects: [{ type: 'special', value: 0, bonusType: BonusType.UNTYPED, target: 'special', source: 'Letter Fury' }],
+    effects: [
+      {
+        type: 'special',
+        value: 0,
+        bonusType: BonusType.UNTYPED,
+        target: 'special.ability',
+        source: 'Letter Fury',
+      },
+    ],
     activationMode: 'conditional',
     tags: ['goblin', 'rage', 'barbarian', 'literacy', 'writing'],
   },
@@ -133,7 +200,15 @@ export const GOBLIN_GOLARION_FEATS: FeatDefinition[] = [
       { type: 'race', raceName: 'Goblin' },
       { type: 'skill', skillId: 'acrobatics', ranks: 1 },
     ],
-    effects: [{ type: 'special', value: 0, bonusType: BonusType.UNTYPED, target: 'special', source: 'Roll With It' }],
+    effects: [
+      {
+        type: 'special',
+        value: 0,
+        bonusType: BonusType.UNTYPED,
+        target: 'special.ability',
+        source: 'Roll With It',
+      },
+    ],
     activationMode: 'conditional',
     tags: ['goblin', 'acrobatics', 'damage avoidance', 'movement'],
   },
@@ -149,7 +224,15 @@ export const GOBLIN_GOLARION_FEATS: FeatDefinition[] = [
       { type: 'race', raceName: 'Goblin' },
       { type: 'skill', skillId: 'ride', ranks: 1 },
     ],
-    effects: [{ type: 'special', value: 0, bonusType: BonusType.UNTYPED, target: 'special', source: 'Saddle Shrieker' }],
+    effects: [
+      {
+        type: 'special',
+        value: 0,
+        bonusType: BonusType.UNTYPED,
+        target: 'special.ability',
+        source: 'Saddle Shrieker',
+      },
+    ],
     activationMode: 'conditional',
     tags: ['goblin', 'mount', 'ride', 'natural attack'],
   },
@@ -165,7 +248,15 @@ export const GOBLIN_GOLARION_FEATS: FeatDefinition[] = [
       { type: 'race', raceName: 'Goblin' },
       { type: 'class_feature', featureName: 'sneak attack' },
     ],
-    effects: [{ type: 'special', value: 0, bonusType: BonusType.UNTYPED, target: 'special', source: 'Vandal' }],
+    effects: [
+      {
+        type: 'special',
+        value: 0,
+        bonusType: BonusType.UNTYPED,
+        target: 'special.ability',
+        source: 'Vandal',
+      },
+    ],
     activationMode: 'passive',
     tags: ['goblin', 'sneak attack', 'objects', 'rogue'],
   },

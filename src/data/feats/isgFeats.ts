@@ -21,7 +21,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'stat_replacement',
+        type: 'ability_substitution',
         bonusType: BonusType.UNTYPED,
         target: 'attack_rolls.favored_weapon',
         value: 'WIS',
@@ -720,7 +720,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.RESISTANCE,
-        target: 'saving_throws.vs_divine_spells',
+        target: 'save.all',
         value: 1,
         source: 'Defy the Divine',
       },

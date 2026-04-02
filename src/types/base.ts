@@ -117,12 +117,164 @@ export interface EffectActivation {
   active: boolean;
 }
 
+// ---- Effect type system ----
+
+// The nature of the effect — controls how the pipeline interprets it.
+// 'special' contract: pipeline ignores it entirely; UI renders it as readable ability text only.
+// Items in the Feature Backlog use 'special' until their pipeline phase is built.
+export type EffectType =
+  | 'bonus' // numeric add — bonusType controls stacking
+  | 'penalty' // numeric subtract — always stacks
+  | 'damage' // damage dealt (weapon abilities, bonus on-hit damage)
+  | 'resistance' // DR / SR / energy resistance (own stacking rules)
+  | 'ability_substitution' // use one ability score in place of another
+  | 'grant_sense' // darkvision, blindsight, tremorsense, scent, etc.
+  | 'grant_movement' // grants a movement mode (fly, swim, burrow, climb)
+  | 'immunity' // immune to a condition, damage type, or school
+  | 'override' // replaces a stat value entirely
+  | 'special'; // qualitative — pipeline ignores; UI displays as ability text
+
+// Component types for EffectTarget
+export type AbilityScoreTarget = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha';
+// Uppercase refs used as VALUES in ability_substitution effects (e.g. value: 'DEX')
+export type AbilityScoreRef = 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
+export type SaveType = 'fortitude' | 'reflex' | 'will' | 'all';
+export type SkillName =
+  | 'acrobatics'
+  | 'appraise'
+  | 'bluff'
+  | 'climb'
+  | 'craft'
+  | 'diplomacy'
+  | 'disable_device'
+  | 'disguise'
+  | 'escape_artist'
+  | 'fly'
+  | 'handle_animal'
+  | 'heal'
+  | 'intimidate'
+  | 'knowledge_arcana'
+  | 'knowledge_dungeoneering'
+  | 'knowledge_engineering'
+  | 'knowledge_geography'
+  | 'knowledge_history'
+  | 'knowledge_local'
+  | 'knowledge_nature'
+  | 'knowledge_nobility'
+  | 'knowledge_planes'
+  | 'knowledge_religion'
+  | 'knowledge_martial' // Path of War
+  | 'linguistics'
+  | 'perception'
+  | 'perform'
+  | 'profession'
+  | 'ride'
+  | 'sense_motive'
+  | 'sleight_of_hand'
+  | 'spellcraft'
+  | 'stealth'
+  | 'survival'
+  | 'swim'
+  | 'use_magic_device'
+  | 'all';
+export type ACComponent =
+  | 'armor'
+  | 'shield'
+  | 'natural'
+  | 'deflection'
+  | 'dodge'
+  | 'insight'
+  | 'profane'
+  | 'sacred'
+  | 'size';
+export type AttackMode = 'melee' | 'ranged' | 'thrown' | 'all';
+export type SpeedType = 'base' | 'fly' | 'swim' | 'burrow' | 'climb';
+export type DamageType =
+  | 'fire'
+  | 'cold'
+  | 'electricity'
+  | 'acid'
+  | 'sonic'
+  | 'force'
+  | 'negative'
+  | 'positive'
+  | 'piercing'
+  | 'slashing'
+  | 'bludgeoning';
+export type SenseType =
+  | 'darkvision'
+  | 'low_light_vision'
+  | 'blindsight'
+  | 'blindsense'
+  | 'tremorsense'
+  | 'scent'
+  | 'lifesense';
+export type MovementType = 'fly' | 'swim' | 'burrow' | 'climb';
+export type ImmunityTarget =
+  | DamageType
+  | 'fear'
+  | 'poison'
+  | 'disease'
+  | 'sleep'
+  | 'paralysis'
+  | 'mind_affecting'
+  | 'bleed'
+  | 'death_effects'
+  | 'exhaustion'
+  | 'fatigue';
+
+// What the effect modifies. Template literal types enforce structure without a flat enum.
+// Rules:
+//   - Well-known stat paths use the typed template literals below for IDE autocomplete + validation.
+//   - Any compound path (namespace.detail) is accepted via `${string}.${string}` — this covers
+//     ability-substitution compound paths, maneuver-specific CMB/CMD, class resources, etc.
+//   - Bare single-word targets are only valid if explicitly listed.
+//   - 'special' is intentionally NOT a valid target — if type is 'special', use a descriptive
+//     compound key like 'special.ability' or 'special.your_feat_name'.
+export type EffectTarget =
+  // Well-known stat paths (IDE autocomplete + pipeline compatibility)
+  | `ability.${AbilityScoreTarget}`
+  | `save.${SaveType}`
+  | `skill.${SkillName}`
+  | `ac.${ACComponent}`
+  | 'ac' // misc AC (catch-all in pipeline)
+  | `attack.${AttackMode}`
+  | `damage.${AttackMode}`
+  | 'weapon.damage' // bonus on-hit damage (e.g. flaming, bane)
+  | `speed.${SpeedType}`
+  | `energy_resistance.${DamageType}`
+  | `energy_resistance` // unspecified energy resistance type
+  | `spell.${'save_dc' | 'caster_level' | 'caster_level_check' | 'concentration'}`
+  // Typed targets for structured effect types
+  | SenseType // for grant_sense
+  | MovementType // for grant_movement
+  | ImmunityTarget // for immunity
+  // Combat stats
+  | 'dr'
+  | 'sr'
+  | 'initiative'
+  | 'cmb'
+  | 'cmd'
+  // Hit points
+  | 'hp'
+  | 'hp.per_level'
+  // Known single-word misc targets
+  | 'sneak_attack'
+  | 'critical_confirmation'
+  | 'critical_threat_range'
+  | 'attack_of_opportunity'
+  // Compound path catch-all — accepts any 'namespace.detail' format.
+  // Use this for: CMB maneuver specifics (cmb.trip), class resources (resource.crystalline_dust),
+  // ability-substitution paths (skills.charisma_based, attack_rolls.favored_weapon),
+  // healing modifiers (healing.hp_per_die), special ability keys (special.ability), etc.
+  | `${string}.${string}`;
+
 // Effects system for modifiers
 export interface Effect {
-  type: string; // Effect type (bonus, penalty, special, override)
+  type: EffectType;
   bonusType?: BonusType | string; // Bonus type for stacking; defaults to UNTYPED if omitted
-  target: string; // What it affects (ability.str, ac.armor, save.reflex, etc.)
-  value: number | string; // Value or formula string
+  target: EffectTarget;
+  value: number | string; // numeric value or formula string; for ability_substitution use AbilityScoreRef
   source: string;
 
   condition?: EffectCondition;

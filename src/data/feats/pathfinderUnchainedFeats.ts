@@ -19,7 +19,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Champion of Anarchy',
@@ -51,7 +51,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Champion of Balance',
@@ -63,7 +63,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
       },
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Champion of Balance',
@@ -95,7 +95,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Champion of Destruction',
@@ -128,7 +128,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Champion of Freedom',
@@ -161,7 +161,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Champion of Grace',
@@ -193,7 +193,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Champion of Malevolence',
@@ -225,7 +225,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Champion of Righteousness',
@@ -258,7 +258,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Champion of Tranquility',
@@ -290,7 +290,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Champion of Tyranny',
@@ -328,7 +328,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'saving_throws',
+        target: 'save.all',
         value: 1,
         bonusType: BonusType.COMPETENCE,
         source: 'Esoteric Abjuration',
@@ -473,7 +473,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'spell_dc',
+        target: 'spell.save_dc',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Esoteric Illusion',
@@ -531,7 +531,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack_rolls',
+        target: 'attack.all',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Esoteric Transmutation',
@@ -604,7 +604,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'concentration',
+        target: 'spell.concentration',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Unstoppable Esotery',

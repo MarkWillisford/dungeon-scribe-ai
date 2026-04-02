@@ -194,7 +194,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Shark Tear',
         condition: {
@@ -206,7 +206,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Shark Tear',
         condition: {

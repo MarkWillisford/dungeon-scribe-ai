@@ -41,7 +41,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Dealmaker',
       },
@@ -53,7 +53,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Extremely Fashionable',
     description:
       'Whenever you are wearing clothing and/or jewelry worth at least 150 gp (and not otherwise covered in gore, sewage, or other things that mar your overall look), you gain a +1 trait bonus on Bluff, Diplomacy, and Intimidate checks. In addition, one of these skills (your choice) is always a class skill for you.',
-    shortDescription: '+1 Bluff, Diplomacy, Intimidate (wearing 150 gp+ attire); one becomes class skill',
+    shortDescription:
+      '+1 Bluff, Diplomacy, Intimidate (wearing 150 gp+ attire); one becomes class skill',
     source: "Adventurer's Armory",
     category: 'equipment',
     prerequisites: [],
@@ -111,7 +112,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Heirloom Weapon',
     description:
       'You possess a non-masterwork simple or martial weapon that has been passed down through your family. When you select this trait, choose one of the following benefits: proficiency with that specific weapon; a +1 trait bonus on attacks of opportunity made with that specific weapon; or a +2 trait bonus on one kind of combat maneuver performed with that specific weapon.',
-    shortDescription: 'Choose: proficiency, +1 AoO attack, or +2 one combat maneuver with your heirloom weapon',
+    shortDescription:
+      'Choose: proficiency, +1 AoO attack, or +2 one combat maneuver with your heirloom weapon',
     source: "Adventurer's Armory",
     category: 'equipment',
     prerequisites: [],
@@ -119,7 +121,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Heirloom Weapon',
       },
@@ -151,7 +153,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Improvisational Equipment',
       },
@@ -208,7 +210,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Power of Suggestion',
       },
@@ -220,7 +222,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Prehensile Whip',
     description:
       'Your whip functions as a rope with an integrated grappling hook. Attaching the whip to a surface or object is a standard action; detaching it is a full-round action.',
-    shortDescription: 'Your whip acts as a grappling hook rope (standard action to attach, full-round to detach)',
+    shortDescription:
+      'Your whip acts as a grappling hook rope (standard action to attach, full-round to detach)',
     source: "Adventurer's Armory",
     category: 'equipment',
     prerequisites: [],
@@ -228,7 +231,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Prehensile Whip',
       },
@@ -240,7 +243,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Quick Learner',
     description:
       'You pick up new weapons quickly through practical use. The first time you make an attack in a given combat with a weapon you are not proficient with, your non-proficiency penalty is only -2 instead of -4.',
-    shortDescription: 'First attack with non-proficient weapon: penalty reduced to -2 instead of -4',
+    shortDescription:
+      'First attack with non-proficient weapon: penalty reduced to -2 instead of -4',
     source: "Adventurer's Armory",
     category: 'equipment',
     prerequisites: [],
@@ -248,7 +252,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Quick Learner',
       },
@@ -264,13 +268,16 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     source: "Adventurer's Armory",
     category: 'equipment',
     prerequisites: [
-      { type: 'special', description: 'At least 1 rank in an appropriate Craft or Profession skill' },
+      {
+        type: 'special',
+        description: 'At least 1 rank in an appropriate Craft or Profession skill',
+      },
     ],
     effects: [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Rough and Ready',
         condition: {
@@ -287,7 +294,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Stage Magic',
     description:
       'You have trained extensively with alchemical items to enhance performances. When you use an appropriate alchemical item (such as alchemist fire, a smokestick, or a thunderstone) as part of a performance, you gain a +2 trait bonus on Perform checks for that performance. The alchemical item is expended but produces no harmful effects — it serves a purely aesthetic function within the performance.',
-    shortDescription: '+2 Perform when using an alchemical item (harmlessly) as part of a performance',
+    shortDescription:
+      '+2 Perform when using an alchemical item (harmlessly) as part of a performance',
     source: "Adventurer's Armory",
     category: 'equipment',
     prerequisites: [],
@@ -312,7 +320,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Stealthy Escape',
     description:
       'You are skilled at escaping from confinement without being noticed. When escaping from manacles, rope, or comparable restraints (but not grapples or similar combat effects), you may substitute a Sleight of Hand check for the Escape Artist check. After successfully escaping, you gain a +2 trait bonus on Bluff checks to pretend you are still bound.',
-    shortDescription: 'Use Sleight of Hand instead of Escape Artist for restraints; +2 Bluff to feign being bound after escape',
+    shortDescription:
+      'Use Sleight of Hand instead of Escape Artist for restraints; +2 Bluff to feign being bound after escape',
     source: "Adventurer's Armory",
     category: 'equipment',
     prerequisites: [],
@@ -337,7 +346,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Thrown-Together Fashion',
     description:
       'With a basic sewing kit or disguise kit, you can make a Disguise check to change one outfit into another outfit. The DC equals 10 + the gold piece difference between the two outfits costs. This process takes 10 minutes per 1-gp difference in the outfits costs.',
-    shortDescription: 'Use Disguise check to convert one outfit into another (DC 10 + gp difference)',
+    shortDescription:
+      'Use Disguise check to convert one outfit into another (DC 10 + gp difference)',
     source: "Adventurer's Armory",
     category: 'equipment',
     prerequisites: [],
@@ -345,7 +355,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Thrown-Together Fashion',
       },
@@ -374,7 +384,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage_roll',
+        target: 'damage.melee',
         value: 1,
         source: 'Ambush Training',
         condition: {
@@ -411,7 +421,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'carrying_capacity',
+        target: 'special.carrying_capacity',
         value: 2,
         source: 'Muscle of the Society',
       },
@@ -433,7 +443,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Clever Wordplay',
       },
@@ -442,7 +452,15 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'skill',
         label: 'Choose Charisma-based skill to use Intelligence for',
-        options: ['Bluff', 'Diplomacy', 'Disguise', 'Handle Animal', 'Intimidate', 'Perform', 'Use Magic Device'],
+        options: [
+          'Bluff',
+          'Diplomacy',
+          'Disguise',
+          'Handle Animal',
+          'Intimidate',
+          'Perform',
+          'Use Magic Device',
+        ],
         affectsEffects: true,
         effectTargetTemplate: 'skill_ability_override.{choice}.intelligence',
       },
@@ -489,7 +507,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'caster_level_check',
+        target: 'spell.caster_level_check',
         value: 2,
         source: 'Insistent Benefactor',
         condition: {
@@ -501,7 +519,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'spell_dc',
+        target: 'spell.save_dc',
         value: 2,
         source: 'Insistent Benefactor',
         condition: {
@@ -517,18 +535,17 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'pathfinders_focus',
     name: "Pathfinder's Focus",
     description:
-      "You may select a magnetic compass as your arcane bond class feature. You may spend 250 gp to upgrade this compass to a wayfinder, and you may further upgrade the wayfinder to a variant or unique version using the standard magic item improvement rules. Your bonded wayfinder must be held in hand to function as a bonded object.",
-    shortDescription: 'May choose a magnetic compass (upgradeable to wayfinder) as your arcane bond',
+      'You may select a magnetic compass as your arcane bond class feature. You may spend 250 gp to upgrade this compass to a wayfinder, and you may further upgrade the wayfinder to a variant or unique version using the standard magic item improvement rules. Your bonded wayfinder must be held in hand to function as a bonded object.',
+    shortDescription:
+      'May choose a magnetic compass (upgradeable to wayfinder) as your arcane bond',
     source: 'Pathfinder Society Primer',
     category: 'magic',
-    prerequisites: [
-      { type: 'class', className: 'Wizard' },
-    ],
+    prerequisites: [{ type: 'class', className: 'Wizard' }],
     effects: [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: "Pathfinder's Focus",
       },
@@ -541,8 +558,9 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'crowd_dodger',
     name: 'Crowd Dodger',
     description:
-      'You grew up navigating the tight alleyways and crowded streets of an urban environment. You gain a +2 trait bonus on Acrobatics checks to move through another creature\'s space and on Acrobatics checks to avoid attacks of opportunity when leaving a threatened square.',
-    shortDescription: '+2 Acrobatics to move through creature space and to avoid AoOs when leaving threatened squares',
+      "You grew up navigating the tight alleyways and crowded streets of an urban environment. You gain a +2 trait bonus on Acrobatics checks to move through another creature's space and on Acrobatics checks to avoid attacks of opportunity when leaving a threatened square.",
+    shortDescription:
+      '+2 Acrobatics to move through creature space and to avoid AoOs when leaving threatened squares',
     source: 'Quests and Campaigns',
     category: 'combat',
     prerequisites: [],
@@ -556,7 +574,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { requirement: 'moving through creature space or avoiding AoO' },
-          description: 'On Acrobatics checks to move through creature space or avoid attacks of opportunity',
+          description:
+            'On Acrobatics checks to move through creature space or avoid attacks of opportunity',
         },
       },
     ],
@@ -600,7 +619,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Firebug',
         condition: {
@@ -642,7 +661,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Inspiring',
     description:
       'Your faith in your allies is inspiring. Once per day as a standard action, you can speak words of encouragement to grant one ally within 30 feet who can see and hear you a +1 morale bonus. The ally may apply this bonus to any one d20 roll before the start of your next turn. You cannot target yourself with this ability, and you cannot grant this bonus to the same ally more than once in a 24-hour period.',
-    shortDescription: 'Once/day: grant one ally within 30 ft a +1 morale bonus on any d20 roll before your next turn',
+    shortDescription:
+      'Once/day: grant one ally within 30 ft a +1 morale bonus on any d20 roll before your next turn',
     source: 'Quests and Campaigns',
     category: 'combat',
     prerequisites: [],
@@ -650,7 +670,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Inspiring',
       },
@@ -711,8 +731,9 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'sworn_enemy',
     name: 'Sworn Enemy',
     description:
-      'You have trained long hours in the proper ways to defeat a particular type of creature, chosen from the ranger\'s favored enemy list. You gain a +1 trait bonus on attacks of opportunity against that enemy type.',
-    shortDescription: '+1 on attacks of opportunity vs one chosen enemy type (from ranger favored enemy list)',
+      "You have trained long hours in the proper ways to defeat a particular type of creature, chosen from the ranger's favored enemy list. You gain a +1 trait bonus on attacks of opportunity against that enemy type.",
+    shortDescription:
+      '+1 on attacks of opportunity vs one chosen enemy type (from ranger favored enemy list)',
     source: 'Quests and Campaigns',
     category: 'combat',
     prerequisites: [],
@@ -720,7 +741,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Sworn Enemy',
         condition: {
@@ -735,9 +756,19 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
         type: 'custom',
         label: 'Choose enemy type (from ranger favored enemy list)',
         options: [
-          'Aberrations', 'Animals', 'Constructs', 'Dragons', 'Fey',
-          'Humanoids (any)', 'Magical Beasts', 'Monstrous Humanoids', 'Oozes',
-          'Outsiders (any)', 'Plants', 'Undead', 'Vermin',
+          'Aberrations',
+          'Animals',
+          'Constructs',
+          'Dragons',
+          'Fey',
+          'Humanoids (any)',
+          'Magical Beasts',
+          'Monstrous Humanoids',
+          'Oozes',
+          'Outsiders (any)',
+          'Plants',
+          'Undead',
+          'Vermin',
         ],
         affectsEffects: false,
       },
@@ -757,7 +788,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage_roll',
+        target: 'damage.melee',
         value: 1,
         source: 'Vengeful',
         condition: {
@@ -775,8 +806,9 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'vandal',
     name: 'Vandal',
     description:
-      'You have a talent for breaking things. You gain a +2 bonus on Strength checks to break objects. When you deal damage to objects with a weapon, natural weapon, or unarmed attack, you ignore 2 points of the object\'s hardness.',
-    shortDescription: '+2 Strength checks to break objects; ignore 2 hardness when damaging objects',
+      "You have a talent for breaking things. You gain a +2 bonus on Strength checks to break objects. When you deal damage to objects with a weapon, natural weapon, or unarmed attack, you ignore 2 points of the object's hardness.",
+    shortDescription:
+      '+2 Strength checks to break objects; ignore 2 hardness when damaging objects',
     source: 'Heroes of the Wild',
     category: 'combat',
     prerequisites: [],
@@ -796,7 +828,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Vandal',
       },
@@ -809,8 +841,9 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'avid_reader',
     name: 'Avid Reader',
     description:
-      'As a youth, you voraciously consumed books and scrolls provided by an adventurer\'s guild or learned organization. You have internalized stories of bold adventurers. Choose one Knowledge skill; you may take 10 on checks with that skill even when distracted or threatened.',
-    shortDescription: 'Choose one Knowledge skill: may take 10 on that skill even when distracted or threatened',
+      "As a youth, you voraciously consumed books and scrolls provided by an adventurer's guild or learned organization. You have internalized stories of bold adventurers. Choose one Knowledge skill; you may take 10 on checks with that skill even when distracted or threatened.",
+    shortDescription:
+      'Choose one Knowledge skill: may take 10 on that skill even when distracted or threatened',
     source: 'Quests and Campaigns',
     category: 'social',
     prerequisites: [],
@@ -818,7 +851,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Avid Reader',
       },
@@ -828,9 +861,16 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
         type: 'skill',
         label: 'Choose Knowledge skill to take 10 under pressure',
         options: [
-          'Knowledge (arcana)', 'Knowledge (dungeoneering)', 'Knowledge (engineering)',
-          'Knowledge (geography)', 'Knowledge (history)', 'Knowledge (local)',
-          'Knowledge (nature)', 'Knowledge (nobility)', 'Knowledge (planes)', 'Knowledge (religion)',
+          'Knowledge (arcana)',
+          'Knowledge (dungeoneering)',
+          'Knowledge (engineering)',
+          'Knowledge (geography)',
+          'Knowledge (history)',
+          'Knowledge (local)',
+          'Knowledge (nature)',
+          'Knowledge (nobility)',
+          'Knowledge (planes)',
+          'Knowledge (religion)',
         ],
         affectsEffects: false,
       },
@@ -841,8 +881,9 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'competitive',
     name: 'Competitive',
     description:
-      'You grew up around competitive sporting events and have a driving need to be better than everyone else. When another creature within 30 feet attempts a skill check and you attempt the same skill check before that creature\'s next turn begins, you gain a +1 trait bonus on your check.',
-    shortDescription: '+1 on a skill check when competing with another creature attempting the same check within 30 ft',
+      "You grew up around competitive sporting events and have a driving need to be better than everyone else. When another creature within 30 feet attempts a skill check and you attempt the same skill check before that creature's next turn begins, you gain a +1 trait bonus on your check.",
+    shortDescription:
+      '+1 on a skill check when competing with another creature attempting the same check within 30 ft',
     source: 'Quests and Campaigns',
     category: 'social',
     prerequisites: [],
@@ -850,13 +891,14 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'skill_check',
+        target: 'skill.check',
         value: 1,
         source: 'Competitive',
         condition: {
           type: 'custom',
           params: { requirement: 'competing with nearby creature on same skill' },
-          description: 'When a creature within 30 ft attempts the same skill check before its next turn',
+          description:
+            'When a creature within 30 ft attempts the same skill check before its next turn',
         },
       },
     ],
@@ -887,7 +929,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Free Spirit',
       },
@@ -935,8 +977,9 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'gregarious',
     name: 'Gregarious',
     description:
-      'You are exceptionally skilled at making friends when you first meet them. Once per day when you make a Diplomacy check to improve a creature\'s attitude, you may roll twice and take the better result.',
-    shortDescription: 'Once/day: roll twice on a Diplomacy check to improve attitude, take the better result',
+      "You are exceptionally skilled at making friends when you first meet them. Once per day when you make a Diplomacy check to improve a creature's attitude, you may roll twice and take the better result.",
+    shortDescription:
+      'Once/day: roll twice on a Diplomacy check to improve attitude, take the better result',
     source: 'Quests and Campaigns',
     category: 'social',
     prerequisites: [],
@@ -944,7 +987,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Gregarious',
       },
@@ -956,7 +999,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Grim Optimism',
     description:
       'You have developed a coping mechanism that uses humor to put the horrors of life in perspective. As a standard action, you and all allies within 30 feet who can hear you gain a +2 morale bonus on saving throws against fear and pain effects for 1d4 rounds. A character cannot benefit from this ability more than once in a 24-hour period.',
-    shortDescription: 'Standard action: you and allies within 30 ft gain +2 morale saves vs fear/pain for 1d4 rounds (1/day per creature)',
+    shortDescription:
+      'Standard action: you and allies within 30 ft gain +2 morale saves vs fear/pain for 1d4 rounds (1/day per creature)',
     source: 'Quests and Campaigns',
     category: 'social',
     prerequisites: [],
@@ -964,7 +1008,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Grim Optimism',
       },
@@ -975,8 +1019,9 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'memorable',
     name: 'Memorable',
     description:
-      'You have an expressive personality that stays with people long after your first meeting. When you use Diplomacy or Intimidate to alter a creature\'s attitude, the attitude change lasts 1-1/2 times longer than normal. When you create a fear or mind-affecting effect with a duration of at least 2 rounds, the effect lasts 1 additional round.',
-    shortDescription: 'Diplomacy/Intimidate attitude changes last 1.5x longer; fear/mind effects you create last 1 extra round',
+      "You have an expressive personality that stays with people long after your first meeting. When you use Diplomacy or Intimidate to alter a creature's attitude, the attitude change lasts 1-1/2 times longer than normal. When you create a fear or mind-affecting effect with a duration of at least 2 rounds, the effect lasts 1 additional round.",
+    shortDescription:
+      'Diplomacy/Intimidate attitude changes last 1.5x longer; fear/mind effects you create last 1 extra round',
     source: 'Quests and Campaigns',
     category: 'social',
     prerequisites: [],
@@ -984,7 +1029,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Memorable',
       },
@@ -996,7 +1041,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Secret-Keeper',
     description:
       'You learned to guard information in a paranoid society where accusations of heresy or dissent carry severe consequences. You gain a +1 trait bonus on Bluff checks and a +1 trait bonus on saving throws against divinations, domination effects, and effects that would compel truthful speech.',
-    shortDescription: '+1 Bluff; +1 saves vs divinations, domination, and compelled truthful speech',
+    shortDescription:
+      '+1 Bluff; +1 saves vs divinations, domination, and compelled truthful speech',
     source: 'Quests and Campaigns',
     category: 'social',
     prerequisites: [],
@@ -1017,7 +1063,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { requirement: 'divinations, domination, compelled speech' },
-          description: 'Against divinations, domination effects, and effects that compel truthful speech',
+          description:
+            'Against divinations, domination effects, and effects that compel truthful speech',
         },
       },
     ],
@@ -1068,7 +1115,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Beastkin',
     description:
       'You were raised from infancy by a specific type of animal (such as wolves or apes). You gain a +1 trait bonus on Survival checks and can use speak with animals as a spell-like ability at will, but only to communicate with the type of animal that raised you.',
-    shortDescription: '+1 Survival; speak with animals at will (with your specific animal type only)',
+    shortDescription:
+      '+1 Survival; speak with animals at will (with your specific animal type only)',
     source: 'Heroes of the Wild',
     category: 'social',
     prerequisites: [],
@@ -1083,7 +1131,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Beastkin',
       },
@@ -1103,7 +1151,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Feral Speech',
     description:
       'You were raised among communities where individuals regularly communicated with wild creatures. You gain one of the following languages as a bonus language: Aklo, Aquan, Auran, Giant, Ignan, or Sylvan. With GM permission, you may select Druidic instead, though doing so may attract the ire of druids who view the language as exclusive to their order.',
-    shortDescription: 'Gain one bonus language: Aklo, Aquan, Auran, Giant, Ignan, or Sylvan (or Druidic with GM permission)',
+    shortDescription:
+      'Gain one bonus language: Aklo, Aquan, Auran, Giant, Ignan, or Sylvan (or Druidic with GM permission)',
     source: 'Heroes of the Wild',
     category: 'social',
     prerequisites: [],
@@ -1111,7 +1160,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Feral Speech',
       },
@@ -1130,8 +1179,9 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'self_reliant',
     name: 'Self-Reliant',
     description:
-      'You have always depended more on your own skills than on any equipment. You do not take a penalty on Craft checks when using improvised tools. You can attempt Craft checks without any tools at all (at the GM\'s discretion), though such attempts take a -2 penalty.',
-    shortDescription: 'No penalty for improvised tools on Craft checks; can attempt Craft without tools (at -2)',
+      "You have always depended more on your own skills than on any equipment. You do not take a penalty on Craft checks when using improvised tools. You can attempt Craft checks without any tools at all (at the GM's discretion), though such attempts take a -2 penalty.",
+    shortDescription:
+      'No penalty for improvised tools on Craft checks; can attempt Craft without tools (at -2)',
     source: 'Heroes of the Wild',
     category: 'social',
     prerequisites: [],
@@ -1139,7 +1189,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Self-Reliant',
       },
@@ -1153,7 +1203,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Distance Aptitude',
     description:
       'You were exposed to ancient elf gate magic or similar distance-spanning magic during your youth. Treat your caster level as 1 higher for the purpose of determining the range of spells and spell-like abilities.',
-    shortDescription: '+1 effective caster level for determining range of spells and spell-like abilities',
+    shortDescription:
+      '+1 effective caster level for determining range of spells and spell-like abilities',
     source: 'Quests and Campaigns',
     category: 'magic',
     prerequisites: [],
@@ -1161,7 +1212,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'caster_level',
+        target: 'spell.caster_level',
         value: 1,
         source: 'Distance Aptitude',
         condition: {
@@ -1186,7 +1237,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'spell_dc',
+        target: 'spell.save_dc',
         value: 1,
         source: 'Domineering',
         condition: {
@@ -1210,8 +1261,9 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'keen_appraiser',
     name: 'Keen Appraiser',
     description:
-      'You have handled many magical items and enchanted goods and have developed an eye for identifying magical properties. You gain a +1 trait bonus on Appraise checks. You only need to beat the DC by 2 on an Appraise check to identify a magical item\'s basic properties (though identifying its specific abilities still requires the normal margin).',
-    shortDescription: '+1 Appraise; need only beat DC by 2 to identify basic magical properties of items',
+      "You have handled many magical items and enchanted goods and have developed an eye for identifying magical properties. You gain a +1 trait bonus on Appraise checks. You only need to beat the DC by 2 on an Appraise check to identify a magical item's basic properties (though identifying its specific abilities still requires the normal margin).",
+    shortDescription:
+      '+1 Appraise; need only beat DC by 2 to identify basic magical properties of items',
     source: 'Quests and Campaigns',
     category: 'magic',
     prerequisites: [],
@@ -1226,7 +1278,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Keen Appraiser',
       },
@@ -1237,7 +1289,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'fey_protection',
     name: 'Fey Protection',
     description:
-      'A helpful fey visited your parents\' home at your birth, offering prophecy and magical gifts in exchange for hospitality and a drop of your blood. You gain a +1 trait bonus to AC against attacks of opportunity from fey creatures, and a +1 trait bonus on saving throws against effects produced by fey creatures.',
+      "A helpful fey visited your parents' home at your birth, offering prophecy and magical gifts in exchange for hospitality and a drop of your blood. You gain a +1 trait bonus to AC against attacks of opportunity from fey creatures, and a +1 trait bonus on saving throws against effects produced by fey creatures.",
     shortDescription: '+1 AC vs fey AoOs; +1 saves vs fey effects',
     source: 'Quests and Campaigns',
     category: 'magic',
@@ -1275,7 +1327,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Fortunate',
     description:
       'A divine blessing of luck and chance grants you good fortune with magic. Once per day when you use a spell or magic item with randomized effects (such as confusion, mirror image, prismatic spray, or a bag of tricks), you may roll twice before determining the result and select your preferred outcome.',
-    shortDescription: 'Once/day: roll twice for a spell or magic item with randomized effects and choose the better result',
+    shortDescription:
+      'Once/day: roll twice for a spell or magic item with randomized effects and choose the better result',
     source: 'Quests and Campaigns',
     category: 'magic',
     prerequisites: [],
@@ -1283,7 +1336,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Fortunate',
       },
@@ -1320,7 +1373,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Magical Flair',
     description:
       'You witnessed persecution of magic users in your youth and learned to obscure your spellcasting. Choose one school of magic. The Spellcraft DC to identify spells you cast from that school increases by 2. If a creature fails this check by 2 or fewer, it misidentifies your spell as another randomly determined spell of the same school and level.',
-    shortDescription: '+2 Spellcraft DC to identify your spells from one chosen school; near-misses misidentify the spell',
+    shortDescription:
+      '+2 Spellcraft DC to identify your spells from one chosen school; near-misses misidentify the spell',
     source: 'Quests and Campaigns',
     category: 'magic',
     prerequisites: [],
@@ -1328,7 +1382,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Magical Flair',
       },
@@ -1337,7 +1391,16 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'school',
         label: 'Choose school of magic to obscure',
-        options: ['Abjuration', 'Conjuration', 'Divination', 'Enchantment', 'Evocation', 'Illusion', 'Necromancy', 'Transmutation'],
+        options: [
+          'Abjuration',
+          'Conjuration',
+          'Divination',
+          'Enchantment',
+          'Evocation',
+          'Illusion',
+          'Necromancy',
+          'Transmutation',
+        ],
         affectsEffects: false,
       },
     ],
@@ -1347,8 +1410,9 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'mutant_eye',
     name: 'Mutant Eye',
     description:
-      'You have a minor magical mutation: a third eye in the middle of your forehead, caused by your parents\' exposure to uncontrolled magic before your birth. When uncovered and open, this eye grants you a +2 trait bonus on Sense Motive checks, which improves to +4 on checks to notice whether a character is under a mind-affecting effect. However, the visible mutation unsettles humanoids, imposing a -1 penalty on Bluff and Diplomacy checks against those who can perceive it.',
-    shortDescription: '+2 Sense Motive (+4 to detect mind-affecting); -1 Bluff and Diplomacy vs humanoids who see it',
+      "You have a minor magical mutation: a third eye in the middle of your forehead, caused by your parents' exposure to uncontrolled magic before your birth. When uncovered and open, this eye grants you a +2 trait bonus on Sense Motive checks, which improves to +4 on checks to notice whether a character is under a mind-affecting effect. However, the visible mutation unsettles humanoids, imposing a -1 penalty on Bluff and Diplomacy checks against those who can perceive it.",
+    shortDescription:
+      '+2 Sense Motive (+4 to detect mind-affecting); -1 Bluff and Diplomacy vs humanoids who see it',
     source: 'Quests and Campaigns',
     category: 'magic',
     prerequisites: [],
@@ -1397,7 +1461,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Scorned by Magic',
     description:
       'Magic seems a little more reluctant to affect you than others, whether from repeated exposure to remove curse or proximity to dead magic zones. Reduce the effective caster level of spells and spell-like abilities cast upon you by 1 when determining dispel checks against you and when those spells attempt to overcome your spell resistance.',
-    shortDescription: 'Spells targeting you are treated as CL -1 for dispel checks and overcoming your spell resistance',
+    shortDescription:
+      'Spells targeting you are treated as CL -1 for dispel checks and overcoming your spell resistance',
     source: 'Quests and Campaigns',
     category: 'magic',
     prerequisites: [],
@@ -1405,7 +1470,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Scorned by Magic',
       },
@@ -1419,7 +1484,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Green-Blooded',
     description:
       'You have a supernatural connection to nature that marks you as something beyond purely mortal. Select one 0-level druid spell. You may cast that spell once per day as a spell-like ability. Your caster level for this ability equals your character level.',
-    shortDescription: 'Cast one chosen 0-level druid spell once per day as a spell-like ability (CL = character level)',
+    shortDescription:
+      'Cast one chosen 0-level druid spell once per day as a spell-like ability (CL = character level)',
     source: 'Heroes of the Wild',
     category: 'magic',
     prerequisites: [],
@@ -1427,7 +1493,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Green-Blooded',
       },
@@ -1449,7 +1515,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Authoritarian',
     description:
       'You spent your formative years assisting clergy and developed a deep respect for institutional authority. When acting in service to a liege or leader you recognize as legitimate, you gain a +2 trait bonus on saving throws against fear and compulsion effects.',
-    shortDescription: '+2 saves vs fear and compulsion when serving a recognized legitimate authority',
+    shortDescription:
+      '+2 saves vs fear and compulsion when serving a recognized legitimate authority',
     source: 'Quests and Campaigns',
     category: 'faith',
     prerequisites: [],
@@ -1463,7 +1530,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { requirement: 'acting in service to a recognized legitimate authority' },
-          description: 'Against fear and compulsion when acting in service to a recognized legitimate authority',
+          description:
+            'Against fear and compulsion when acting in service to a recognized legitimate authority',
         },
       },
     ],
@@ -1482,7 +1550,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Called',
       },
@@ -1493,7 +1561,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'devoted_healer',
     name: 'Devoted Healer',
     description:
-      'You were raised alongside skilled healers and developed a commitment to others\' wellbeing. Whenever you take 20 on a Heal check to treat deadly wounds, you restore an additional 1d4 hit points to those you aid.',
+      "You were raised alongside skilled healers and developed a commitment to others' wellbeing. Whenever you take 20 on a Heal check to treat deadly wounds, you restore an additional 1d4 hit points to those you aid.",
     shortDescription: 'When taking 20 on Heal (treat deadly wounds), restore an extra 1d4 HP',
     source: 'Quests and Campaigns',
     category: 'faith',
@@ -1502,7 +1570,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Devoted Healer',
       },
@@ -1535,7 +1603,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { requirement: 'target is friendly or helpful' },
-          description: 'Against creatures already friendly or helpful toward you (replaces the +1 bonus)',
+          description:
+            'Against creatures already friendly or helpful toward you (replaces the +1 bonus)',
         },
       },
     ],
@@ -1546,7 +1615,8 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     name: 'Irrepressible',
     description:
       'Your hope for a brighter future blessed by the gods, combined with your powerful personality, allows you to force your way free of spells that cloud the mind. When making Will saving throws against charm and compulsion effects, you may substitute your Charisma modifier for your Wisdom modifier.',
-    shortDescription: 'Use Charisma instead of Wisdom on Will saves vs charm and compulsion effects',
+    shortDescription:
+      'Use Charisma instead of Wisdom on Will saves vs charm and compulsion effects',
     source: 'Quests and Campaigns',
     category: 'faith',
     prerequisites: [],
@@ -1554,7 +1624,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Irrepressible',
       },
@@ -1574,7 +1644,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Mystery Initiate',
       },
@@ -1585,7 +1655,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     id: 'patient_calm',
     name: 'Patient Calm',
     description:
-      'A community leader\'s patient influence helped you develop remarkable emotional control. Choose one Craft or Profession skill. When you take 10 with that chosen skill, treat the result as if you had rolled a 12 instead.',
+      "A community leader's patient influence helped you develop remarkable emotional control. Choose one Craft or Profession skill. When you take 10 with that chosen skill, treat the result as if you had rolled a 12 instead.",
     shortDescription: 'Choose one Craft or Profession: when taking 10, treat result as 12',
     source: 'Quests and Campaigns',
     category: 'faith',
@@ -1594,7 +1664,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Patient Calm',
       },

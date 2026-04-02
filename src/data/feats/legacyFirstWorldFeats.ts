@@ -9,7 +9,8 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     name: 'Biological Lattice',
     description:
       'Your vine-covered body can store items. As a move action, you may store an item you are carrying in your vines; doing so causes you to lose your fly speed. You may retrieve the stored item as a swift action or drop it as a free action, regaining your fly speed immediately upon either action.',
-    shortDescription: 'Store an item in your vines as a move action, temporarily losing your fly speed.',
+    shortDescription:
+      'Store an item in your vines as a move action, temporarily losing your fly speed.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['general'],
     prerequisites: [
@@ -26,12 +27,11 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     name: 'Centered Spell',
     description:
       "You can center the area of a spell with an area effect and duration of instantaneous on you, and exclude yourself from the effects of the spell. Your familiar is also excluded if it occupies your square and is at least one size category smaller than you. A centered spell does not use up a higher-level spell slot than the spell's actual level.",
-    shortDescription: 'Center an instantaneous area spell on yourself while excluding yourself from its effects.',
+    shortDescription:
+      'Center an instantaneous area spell on yourself while excluding yourself from its effects.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['metamagic'],
-    prerequisites: [
-      { type: 'skill', skillId: 'spellcraft', ranks: 3 },
-    ],
+    prerequisites: [{ type: 'skill', skillId: 'spellcraft', ranks: 3 }],
     effects: [],
     activationMode: 'conditional',
     tags: ['metamagic', 'spellcasting', 'area', 'self-exclusion'],
@@ -46,7 +46,11 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['story'],
     prerequisites: [
-      { type: 'special', description: 'You must permanently dwell in a settlement at least as large as a large town. You must also have a fey ancestor somewhere in your family line, or have The Wanderer background.' },
+      {
+        type: 'special',
+        description:
+          'You must permanently dwell in a settlement at least as large as a large town. You must also have a fey ancestor somewhere in your family line, or have The Wanderer background.',
+      },
     ],
     effects: [
       {
@@ -55,7 +59,11 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
         target: 'skill.bluff',
         value: 1,
         source: 'City-Locked',
-        condition: { type: 'custom', description: 'When interacting with NPCs who live in your settlement', params: {} },
+        condition: {
+          type: 'custom',
+          description: 'When interacting with NPCs who live in your settlement',
+          params: {},
+        },
       },
       {
         type: 'bonus',
@@ -63,7 +71,11 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
         target: 'skill.diplomacy',
         value: 1,
         source: 'City-Locked',
-        condition: { type: 'custom', description: 'When interacting with NPCs who live in your settlement', params: {} },
+        condition: {
+          type: 'custom',
+          description: 'When interacting with NPCs who live in your settlement',
+          params: {},
+        },
       },
       {
         type: 'bonus',
@@ -71,7 +83,11 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
         target: 'skill.sense_motive',
         value: 1,
         source: 'City-Locked',
-        condition: { type: 'custom', description: 'When interacting with NPCs who live in your settlement', params: {} },
+        condition: {
+          type: 'custom',
+          description: 'When interacting with NPCs who live in your settlement',
+          params: {},
+        },
       },
     ],
     activationMode: 'passive',
@@ -83,12 +99,11 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     name: 'Conduit Casting',
     description:
       "When you and an ally within 30 feet both have this feat, you may cast a spell or spell-like ability through her, provided the spell appears on her class list or she can cast it as a spell-like ability (excluding spells with personal range). Your ally must use an immediate action to serve as the conduit and maintain concentration as if she were casting the spell herself. If a concentration check fails, the spell is lost. The spell originates from your ally's position rather than yours, though you retain caster level, saving throw DC, and similar determinations. Your ally selects targets, areas affected, and makes any required attack rolls.",
-    shortDescription: 'Cast spells through an adjacent ally, originating the spell from their position.',
+    shortDescription:
+      'Cast spells through an adjacent ally, originating the spell from their position.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['teamwork'],
-    prerequisites: [
-      { type: 'skill', skillId: 'spellcraft', ranks: 3 },
-    ],
+    prerequisites: [{ type: 'skill', skillId: 'spellcraft', ranks: 3 }],
     effects: [],
     activationMode: 'conditional',
     tags: ['teamwork', 'spellcasting', 'fey', 'conduit'],
@@ -99,7 +114,8 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     name: 'Eerily Centered',
     description:
       "Your emotional detachment grants you unusual resistance to emotional magic. You gain a +4 racial bonus on saving throws against spells and effects with the emotion descriptor. Fear-based effects and morale bonuses function at half their normal duration (minimum 1 round). Any self-activated abilities granting morale bonuses—such as a barbarian's rage—consume daily uses or ability rounds at double the standard rate.",
-    shortDescription: 'Gain +4 on saves vs. emotion effects; fear and morale effects last half as long for you.',
+    shortDescription:
+      'Gain +4 on saves vs. emotion effects; fear and morale effects last half as long for you.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['general'],
     prerequisites: [
@@ -113,7 +129,11 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
         target: 'save.will',
         value: 4,
         source: 'Eerily Centered',
-        condition: { type: 'custom', description: 'Against spells and effects with the emotion descriptor', params: {} },
+        condition: {
+          type: 'custom',
+          description: 'Against spells and effects with the emotion descriptor',
+          params: {},
+        },
       },
     ],
     activationMode: 'passive',
@@ -125,11 +145,16 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     name: 'Embrace of the Dark Fey',
     description:
       'You have aggressive impulses from your dark fey bloodline that you manage with difficulty. You receive a +2 bonus on Intimidate checks; if you have 10 or more ranks in Intimidate, this bonus increases to +4. You also gain a +2 circumstance bonus on attack rolls to confirm critical hits. When a creature becomes shaken from your Intimidate checks, your damaging attacks against it deal 1 additional point of bleed damage.',
-    shortDescription: 'Gain bonuses on Intimidate checks and critical confirmation; shaken foes take bleed damage from your attacks.',
+    shortDescription:
+      'Gain bonuses on Intimidate checks and critical confirmation; shaken foes take bleed damage from your attacks.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['story'],
     prerequisites: [
-      { type: 'special', description: 'Evil fey ancestry (such as quickling or redcap) in your family line, or Shameful Heritage background' },
+      {
+        type: 'special',
+        description:
+          'Evil fey ancestry (such as quickling or redcap) in your family line, or Shameful Heritage background',
+      },
     ],
     effects: [
       {
@@ -142,10 +167,14 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.CIRCUMSTANCE,
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         source: 'Embrace of the Dark Fey',
-        condition: { type: 'custom', description: 'On attack rolls to confirm critical hits', params: {} },
+        condition: {
+          type: 'custom',
+          description: 'On attack rolls to confirm critical hits',
+          params: {},
+        },
       },
     ],
     activationMode: 'passive',
@@ -157,12 +186,17 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     name: 'Fascinated by the Mundane',
     description:
       'Your fey heritage gives you a displaced sense of wonder at ordinary things. You gain a +2 bonus on Charisma-based ability checks and skill checks other than Diplomacy checks. Upon completing the goal of making five saving throws against spells with the emotion descriptor or effects that would apply the fascinated condition, this bonus extends to Diplomacy checks as well, and you can increase any morale bonuses you receive by 1.',
-    shortDescription: 'Gain +2 on Charisma-based checks (except Diplomacy) from your fey wonder at the mundane.',
+    shortDescription:
+      'Gain +2 on Charisma-based checks (except Diplomacy) from your fey wonder at the mundane.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['story'],
     prerequisites: [
       { type: 'special', description: 'Fey ancestor in family line' },
-      { type: 'special', description: 'One of these backgrounds: Adopted by the Fey, Fey Meeting, or Met a Fantastic Creature' },
+      {
+        type: 'special',
+        description:
+          'One of these backgrounds: Adopted by the Fey, Fey Meeting, or Met a Fantastic Creature',
+      },
     ],
     effects: [
       {
@@ -171,7 +205,11 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
         target: 'skill.charisma_checks',
         value: 2,
         source: 'Fascinated by the Mundane',
-        condition: { type: 'custom', description: 'On Charisma-based ability checks and skill checks other than Diplomacy', params: {} },
+        condition: {
+          type: 'custom',
+          description: 'On Charisma-based ability checks and skill checks other than Diplomacy',
+          params: {},
+        },
       },
     ],
     activationMode: 'passive',
@@ -234,8 +272,9 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     id: 'introspective_performance',
     name: 'Introspective Performance',
     description:
-      "When you are the only creature affected by your bardic performance or raging song, any bonuses granted by that performance or raging song are calculated as though your class level were 4 higher. This feat does not permit you to activate performances you lack the actual class level to use.",
-    shortDescription: 'When solo-performing, treat your class level as 4 higher for performance or raging song bonuses.',
+      'When you are the only creature affected by your bardic performance or raging song, any bonuses granted by that performance or raging song are calculated as though your class level were 4 higher. This feat does not permit you to activate performances you lack the actual class level to use.',
+    shortDescription:
+      'When solo-performing, treat your class level as 4 higher for performance or raging song bonuses.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['general'],
     prerequisites: [
@@ -252,12 +291,11 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     name: 'Selfish Channel',
     description:
       'When you channel positive energy and you are the only creature healed by the channeled energy, you regain half again as many hit points (+50%) as normal. This exclusivity can occur naturally (no other living creatures in the area) or through selective channeling effects. This feat also applies to negative energy channeling for characters healed by such energy, provided they are the sole recipient of that channeled negative energy.',
-    shortDescription: 'Heal 50% more hit points when you are the only creature healed by your channeled energy.',
+    shortDescription:
+      'Heal 50% more hit points when you are the only creature healed by your channeled energy.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['general'],
-    prerequisites: [
-      { type: 'special', description: 'Channel energy class feature' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Channel energy class feature' }],
     effects: [],
     activationMode: 'conditional',
     tags: ['cleric', 'channel_energy', 'healing', 'fey'],
@@ -268,12 +306,11 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     name: 'Spell Synergy',
     description:
       "When a spell or spell-like ability affects both you and an adjacent ally who also possesses this feat simultaneously, you may use an immediate action to increase that spell's effective caster level by 3 for yourself only. This boost does not extend the spell's duration or modify its effects on other recipients, and it cannot combine with other caster level increases.",
-    shortDescription: 'When a spell affects you and an ally with this feat, use an immediate action to increase its caster level by 3 for you.',
+    shortDescription:
+      'When a spell affects you and an ally with this feat, use an immediate action to increase its caster level by 3 for you.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['teamwork'],
-    prerequisites: [
-      { type: 'skill', skillId: 'spellcraft', ranks: 5 },
-    ],
+    prerequisites: [{ type: 'skill', skillId: 'spellcraft', ranks: 5 }],
     effects: [],
     activationMode: 'conditional',
     tags: ['teamwork', 'spellcasting', 'caster_level', 'fey'],
@@ -284,7 +321,8 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     name: 'Step of the Flighty Fey',
     description:
       'A creature under the effect of your feather step spell-like ability gains DR 1/cold iron for the duration of the effect. At 8 Hit Dice, this improves to DR 2/cold iron. At 16 Hit Dice, this improves to DR 3/cold iron.',
-    shortDescription: 'Creatures affected by your feather step spell-like ability gain DR 1/cold iron (scaling with Hit Dice).',
+    shortDescription:
+      'Creatures affected by your feather step spell-like ability gain DR 1/cold iron (scaling with Hit Dice).',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['general'],
     prerequisites: [
@@ -301,7 +339,8 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     name: 'Strange Yield',
     description:
       'Once per day as a full-round action, you may extract a magical fruit from your symbiotic vines and roll percentile dice to randomly determine which common potion or oil it replicates from the 1st-level options. The magical fruit remains potent for 24 hours before losing its enchantment.',
-    shortDescription: 'Once per day, extract a magical fruit from your vines that replicates a random 1st-level potion or oil.',
+    shortDescription:
+      'Once per day, extract a magical fruit from your vines that replicates a random 1st-level potion or oil.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['general'],
     prerequisites: [
@@ -319,7 +358,8 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     name: 'Unfettered Rage',
     description:
       'When no allies are nearby, you can safely unleash the full extent of your fury. During a rage, when making a full melee attack and no allies are within 5 feet of you or your threatened squares, you may spend an additional rage round to make one extra attack at your highest base attack bonus. This comes with a -2 penalty to all attacks and AC until the start of your next turn. This ability does not stack with similar effects such as haste.',
-    shortDescription: 'While raging alone, spend an extra rage round to make one additional attack on a full attack, with a -2 penalty to attacks and AC.',
+    shortDescription:
+      'While raging alone, spend an extra rage round to make one additional attack on a full attack, with a -2 penalty to attacks and AC.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     types: ['combat'],
     prerequisites: [

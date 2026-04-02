@@ -87,7 +87,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'ability_score',
+        target: 'special.ability_score',
         value: 2,
         bonusType: BonusType.ENHANCEMENT,
         source: 'Regenerate Muscles',
@@ -212,7 +212,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         bonusType: BonusType.INSIGHT,
         source: "Sniper's Lantern",
@@ -323,7 +323,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'skill_climb',
+        target: 'skill.climb',
         value: 4,
         bonusType: BonusType.UNTYPED,
         source: 'Sure on Ice',
@@ -366,7 +366,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'skill_acrobatics',
+        target: 'skill.acrobatics',
         value: 2,
         bonusType: BonusType.RACIAL,
         source: 'Tail Weapon',

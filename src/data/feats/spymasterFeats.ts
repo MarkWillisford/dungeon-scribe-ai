@@ -6,7 +6,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     id: 'ascendant',
     name: 'Ascendant',
     description:
-      'You and your apparent allies gain a +2 bonus on skill checks to gain influence or request a favor. This bonus ends against individuals or organizations where you\'ve failed relevant checks. Sense Motive checks against you and allies increase by DC 2.',
+      "You and your apparent allies gain a +2 bonus on skill checks to gain influence or request a favor. This bonus ends against individuals or organizations where you've failed relevant checks. Sense Motive checks against you and allies increase by DC 2.",
     shortDescription: '+2 on influence/favor checks; Sense Motive against you is harder.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
     types: ['story'],
@@ -22,7 +22,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 2,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Ascendant',
       },
     ],
@@ -44,14 +44,14 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'diplomacy',
+        target: 'skill.diplomacy',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Conciliator',
       },
       {
         type: 'bonus',
-        target: 'sense_motive',
+        target: 'skill.sense_motive',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Conciliator',
@@ -65,7 +65,8 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     name: 'Golden League Tattoos',
     description:
       'You have impressive commemorative tattoos visible unless concealed or disguised. You may take 10 on Intimidate checks against viewers of the tattoos despite stress. Knowledge (local) becomes usable for the presence tactic in verbal duels, and successfully winning an exchange with this tactic prevents penalties if repeated within the same duel.',
-    shortDescription: 'Take 10 on Intimidate; use Knowledge (local) for verbal duel presence tactic.',
+    shortDescription:
+      'Take 10 on Intimidate; use Knowledge (local) for verbal duel presence tactic.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
     types: ['general'],
     prerequisites: [
@@ -79,7 +80,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Golden League Tattoos',
       },
     ],
@@ -106,7 +107,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'damage',
+        target: 'damage.melee',
         source: 'Inerrant Justice',
       },
     ],
@@ -118,13 +119,15 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     name: 'Infiltrator',
     description:
       'Once per day, when you successfully save against a divination effect, you learn what would have been revealed and can spend an immediate action to feed false information fitting your cover. Upon completing the story goal, whenever a spell or spell-like ability would reveal information about you, you can attempt a Will save to negate the reveal entirely or provide false details instead.',
-    shortDescription: 'Counter divinations with false info; Will save to negate info-gathering after goal.',
+    shortDescription:
+      'Counter divinations with false info; Will save to negate info-gathering after goal.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
     types: ['story'],
     prerequisites: [
       {
         type: 'special',
-        description: 'Must have adopted an assumed or secret identity associated with an enemy organization',
+        description:
+          'Must have adopted an assumed or secret identity associated with an enemy organization',
       },
     ],
     effects: [
@@ -132,7 +135,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Infiltrator',
       },
     ],
@@ -143,15 +146,16 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     id: 'magical_enigma',
     name: 'Magical Enigma',
     description:
-      'Select a class feature (bloodline power, eidolon evolutions, revelation, phantom abilities, spirit animal, or witch\'s familiar) and treat your class level as 1 higher or relevant ability score as 2 higher for calculating that power\'s effects. This enhances potency but does not grant access to higher-level abilities.',
-    shortDescription: 'Treat class level as +1 or ability score as +2 for one class feature\'s effects.',
+      "Select a class feature (bloodline power, eidolon evolutions, revelation, phantom abilities, spirit animal, or witch's familiar) and treat your class level as 1 higher or relevant ability score as 2 higher for calculating that power's effects. This enhances potency but does not grant access to higher-level abilities.",
+    shortDescription:
+      "Treat class level as +1 or ability score as +2 for one class feature's effects.",
     source: "Pathfinder Player Companion: Spymaster's Handbook",
     types: ['story'],
     prerequisites: [
       {
         type: 'special',
         description:
-          'Bloodline, eidolon, mystery, phantom, spirit animal, or witch\'s familiar class feature; unknown secret about magic or family history',
+          "Bloodline, eidolon, mystery, phantom, spirit animal, or witch's familiar class feature; unknown secret about magic or family history",
       },
     ],
     effects: [
@@ -159,7 +163,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 1,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Magical Enigma',
       },
     ],
@@ -171,7 +175,8 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     name: 'Oblivating Stare',
     description:
       'Targets of your hypnotic stare lose awareness of other creatures. When conditions permit taking 10 on skill checks, other creatures can attempt Stealth checks against the target without needing cover or concealment. If the target fails a Perception check by 5 or more, it forgets the stealthy creature existed. The effect ends and grants 24-hour immunity if the stare ends, the target takes damage, or circumstances change.',
-    shortDescription: 'Hypnotic stare targets lose awareness of nearby creatures; enables allied Stealth.',
+    shortDescription:
+      'Hypnotic stare targets lose awareness of nearby creatures; enables allied Stealth.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
     types: ['general'],
     prerequisites: [
@@ -184,7 +189,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Oblivating Stare',
       },
     ],
@@ -211,7 +216,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Puppet Master',
       },
     ],
@@ -223,7 +228,8 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     name: 'Pure Legion Assault',
     description:
       'You gain a +2 bonus on saving throws against divine spells, effects, and abilities from outsiders. When you make a saving throw against a divine spell, you gain a +1 bonus on attack rolls against the creature that cast it.',
-    shortDescription: '+2 saves vs. divine/outsider effects; +1 attack vs. divine casters you save against.',
+    shortDescription:
+      '+2 saves vs. divine/outsider effects; +1 attack vs. divine casters you save against.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
     types: ['combat'],
     prerequisites: [
@@ -234,14 +240,14 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'divine',
+        target: 'special.divine',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Pure Legion Assault',
       },
       {
         type: 'bonus',
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         bonusType: BonusType.UNTYPED,
         source: 'Pure Legion Assault',
@@ -261,8 +267,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     prerequisites: [
       {
         type: 'special',
-        description:
-          'Must have at least one enemy who wishes to outdo you',
+        description: 'Must have at least one enemy who wishes to outdo you',
       },
     ],
     effects: [
@@ -270,7 +275,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 1,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Rival',
       },
     ],
@@ -282,7 +287,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     name: 'Sense Loyalties',
     description:
       'After interacting with a target for at least 1 hour, you can make a DC 20 Sense Motive check to intuit their loyalty to a deity, patron, or government. The creature can oppose this with a Bluff check. You can attempt to identify one specific loyalty per 2 ranks of Sense Motive by introducing relevant topics into conversation. Introducing topics yourself may alert observers.',
-    shortDescription: 'Sense Motive to detect a target\'s loyalties after 1 hour of interaction.',
+    shortDescription: "Sense Motive to detect a target's loyalties after 1 hour of interaction.",
     source: "Pathfinder Player Companion: Spymaster's Handbook",
     types: ['general'],
     prerequisites: [
@@ -294,7 +299,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Sense Loyalties',
       },
     ],
@@ -306,7 +311,8 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     name: 'Supernatural Spy',
     description:
       'Select a class feature (alchemist discovery, arcane discovery, arcanist exploit, or magus arcana). Treat your Intelligence, Wisdom, or Charisma as 2 points higher when calculating effects and save DCs for that selected class feature. This enhances potency but does not grant additional abilities.',
-    shortDescription: 'Treat one ability score as +2 for a selected class feature\'s effects and DCs.',
+    shortDescription:
+      "Treat one ability score as +2 for a selected class feature's effects and DCs.",
     source: "Pathfinder Player Companion: Spymaster's Handbook",
     types: ['story'],
     prerequisites: [
@@ -321,7 +327,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 2,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Supernatural Spy',
       },
     ],
@@ -333,7 +339,8 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     name: 'Wily Warrior',
     description:
       'Once per day, you can use your ranks in Sense Motive in place of your total Will saving throw modifier when attempting a Will save. You must decide before making the save. Completion Benefit: Bluff and Intimidate DCs against you increase by 5.',
-    shortDescription: 'Use Sense Motive ranks as Will save 1/day; +5 DC vs. Bluff/Intimidate after goal.',
+    shortDescription:
+      'Use Sense Motive ranks as Will save 1/day; +5 DC vs. Bluff/Intimidate after goal.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
     types: ['story'],
     prerequisites: [
@@ -346,7 +353,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'will',
+        target: 'special.will',
         source: 'Wily Warrior',
       },
     ],

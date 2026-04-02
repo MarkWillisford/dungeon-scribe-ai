@@ -299,7 +299,7 @@ export const UW_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat.cmb_grapple_maintain',
+        target: 'cmb.grapple',
         value: 2,
         source: 'Kraken Style',
       },
@@ -845,7 +845,7 @@ export const UW_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'save.vs_prone',
+        target: 'save.reflex',
         value: 4,
         source: 'Monkey Moves',
       },

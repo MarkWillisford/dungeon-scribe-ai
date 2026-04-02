@@ -143,7 +143,7 @@ export const ARG_EXTRA_RACE_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'caster_level_check',
+        target: 'spell.caster_level_check',
         value: 1,
         source: 'Elven Arcanist',
         condition: { type: 'custom', params: {}, description: 'To overcome spell resistance' },
@@ -506,7 +506,7 @@ export const ARG_EXTRA_RACE_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Celestial Crusader',
         condition: { type: 'custom', params: {}, description: 'Against evil outsiders' },
@@ -861,7 +861,7 @@ export const ARG_EXTRA_RACE_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Vampire Hunter',
         condition: { type: 'custom', params: {}, description: 'Against undead' },

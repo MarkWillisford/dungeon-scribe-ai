@@ -438,14 +438,14 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         source: 'Blood Vengeance',
       },
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Blood Vengeance',
       },
@@ -469,7 +469,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         source: 'Born Alone',
         condition: { type: 'custom', params: {}, description: 'When at 0 or fewer HP' },
@@ -477,7 +477,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         source: 'Born Alone',
         condition: { type: 'custom', params: {}, description: 'When at 0 or fewer HP' },
@@ -568,7 +568,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Grudge Fighter',
         condition: {
@@ -580,7 +580,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Grudge Fighter',
         condition: {

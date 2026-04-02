@@ -483,7 +483,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'damage_reduction',
+        target: 'special.damage_reduction',
         value: 5,
         condition: {
           type: 'custom',
@@ -495,7 +495,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throws.paralysis',
+        target: 'save.all',
         value: 2,
         condition: {
           type: 'custom',

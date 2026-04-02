@@ -88,7 +88,7 @@ export const DTT_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat.attack_damage_vs_favored_enemy',
+        target: 'attack_and_damage.favored_enemy',
         value: 2,
         source: 'Dedicated Adversary',
         condition: { type: 'custom', params: {}, description: 'Against the chosen creature type' },
@@ -349,7 +349,7 @@ export const DTT_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'combat.ac',
+        target: 'ac',
         value: 2,
         source: 'Lightning Rager',
         condition: {

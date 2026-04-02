@@ -35,7 +35,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
     id: 'well_prepared',
     name: 'Well-Prepared',
     description:
-      "Angradd teaches that a good offense can be the best defense. You gain a +1 trait bonus on attack rolls made as part of a readied action, and a +1 trait bonus on caster level checks when casting a spell as a readied action.",
+      'Angradd teaches that a good offense can be the best defense. You gain a +1 trait bonus on attack rolls made as part of a readied action, and a +1 trait bonus on caster level checks when casting a spell as a readied action.',
     shortDescription: '+1 attack and caster level checks for readied actions',
     source: 'Inner Sea Gods',
     category: 'religion',
@@ -57,7 +57,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'caster_level',
+        target: 'spell.caster_level',
         value: 1,
         source: 'Well-Prepared',
         condition: {
@@ -139,7 +139,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Lessons of Chaldira',
       },
@@ -152,7 +152,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
     id: 'dragon_tracker',
     name: 'Dragon Tracker',
     description:
-      'You have developed expertise in identifying both obvious and subtle indicators of a dragon\'s presence or passage. You gain a +2 trait bonus on Survival checks made to track dragons, and you can attempt to track a dragon using Survival even without training, provided the check\'s DC is 15 or lower.',
+      "You have developed expertise in identifying both obvious and subtle indicators of a dragon's presence or passage. You gain a +2 trait bonus on Survival checks made to track dragons, and you can attempt to track a dragon using Survival even without training, provided the check's DC is 15 or lower.",
     shortDescription: '+2 Survival to track dragons; track dragons untrained if DC 15 or lower',
     source: 'Inner Sea Gods',
     category: 'religion',
@@ -178,7 +178,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
     id: 'dragonslayer',
     name: 'Dragonslayer',
     description:
-      'You possess exceptional skill in hunting and eliminating dragons, mirroring your patron god\'s preferred quarry. You gain a +1 trait bonus on attack rolls made against any creature with the dragon type.',
+      "You possess exceptional skill in hunting and eliminating dragons, mirroring your patron god's preferred quarry. You gain a +1 trait bonus on attack rolls made against any creature with the dragon type.",
     shortDescription: '+1 attack rolls against dragons',
     source: 'Inner Sea Gods',
     category: 'religion',
@@ -188,7 +188,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Dragonslayer',
         condition: {
@@ -216,7 +216,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Furious Vengeance',
       },
@@ -239,7 +239,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Extended Toil',
       },
@@ -282,7 +282,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
     id: 'blessed_orphan',
     name: 'Blessed Orphan',
     description:
-      "Folgrit has watched over you since childhood. Once per day, you may gain a +1 trait bonus on any single saving throw. The bonus may be applied after rolling but before the result is revealed.",
+      'Folgrit has watched over you since childhood. Once per day, you may gain a +1 trait bonus on any single saving throw. The bonus may be applied after rolling but before the result is revealed.',
     shortDescription: 'Once per day, +1 bonus on any saving throw (declare after rolling)',
     source: 'Inner Sea Gods',
     category: 'religion',
@@ -292,7 +292,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Blessed Orphan',
       },
@@ -306,7 +306,8 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
     name: 'Diseased Heart',
     description:
       'Your experience with infections has imbued your spirit with disease, making you a vector for sickness. When a creature uses blood drain or swallow whole attacks against you, it must make a Fortitude save (DC = 10 + your character level + your Constitution modifier) or become infected with filth fever as a poison effect.',
-    shortDescription: 'Creatures using blood drain or swallow whole on you must save vs filth fever',
+    shortDescription:
+      'Creatures using blood drain or swallow whole on you must save vs filth fever',
     source: 'Inner Sea Gods',
     category: 'religion',
     subcategory: 'Ghlaunder',
@@ -315,7 +316,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Diseased Heart',
       },
@@ -336,7 +337,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Potent Concoctions',
       },
@@ -421,7 +422,8 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
     name: 'Loyal Bond',
     description:
       'Your devotion to Grundinnar rewards those who prioritize protecting their allies. When casting spells that offer protection to an ally at your expense (such as shield other) or spells whose duration is divided when shared among many (such as water breathing or any of the communal spells), you gain a +1 bonus to caster level.',
-    shortDescription: '+1 caster level for protective/shared spells (e.g., shield other, communal spells)',
+    shortDescription:
+      '+1 caster level for protective/shared spells (e.g., shield other, communal spells)',
     source: 'Inner Sea Gods',
     category: 'religion',
     subcategory: 'Grundinnar',
@@ -430,7 +432,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'caster_level',
+        target: 'spell.caster_level',
         value: 1,
         source: 'Loyal Bond',
         condition: {
@@ -449,7 +451,8 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
     name: 'Wronged',
     description:
       'Your past experience of being exploited has sharpened your insight into the motives of those who would wrong you. You gain a +2 trait bonus on Sense Motive checks when dealing with male creatures of your race. The DC for male creatures to Intimidate you increases by 2.',
-    shortDescription: '+2 Sense Motive vs male creatures of your race; +2 DC to Intimidate you for them',
+    shortDescription:
+      '+2 Sense Motive vs male creatures of your race; +2 DC to Intimidate you for them',
     source: 'Inner Sea Gods',
     category: 'religion',
     subcategory: 'Gyronna',
@@ -502,7 +505,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
     id: 'light_sleeper',
     name: 'Light Sleeper',
     description:
-      "A blessing from Hanspur makes you a naturally light sleeper, alert even in rest. While sleeping, your modifier to Perception DCs is +5 instead of the normal +10.",
+      'A blessing from Hanspur makes you a naturally light sleeper, alert even in rest. While sleeping, your modifier to Perception DCs is +5 instead of the normal +10.',
     shortDescription: 'Perception DC penalty while sleeping reduced to +5 (from +10)',
     source: 'Inner Sea Gods',
     category: 'religion',
@@ -512,7 +515,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Light Sleeper',
       },
@@ -525,7 +528,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
     id: 'favored_prey',
     name: 'Favored Prey',
     description:
-      "Ketephys blesses those who pursue their quarry with dedication. You gain a +1 trait bonus on damage rolls when making bow attacks against a creature whose tracks you have successfully followed in the last hour.",
+      'Ketephys blesses those who pursue their quarry with dedication. You gain a +1 trait bonus on damage rolls when making bow attacks against a creature whose tracks you have successfully followed in the last hour.',
     shortDescription: '+1 bow damage vs creatures you have tracked in the last hour',
     source: 'Inner Sea Gods',
     category: 'religion',
@@ -541,7 +544,8 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: {},
-          description: 'With bow attacks against creatures whose tracks you followed in the last hour',
+          description:
+            'With bow attacks against creatures whose tracks you followed in the last hour',
         },
       },
     ],
@@ -554,7 +558,8 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
     name: 'Strict Judgment',
     description:
       "Your deep respect for Kols's teachings on the letter of the law manifests in your magical abilities. Any spells you cast that prescribe certain behaviors with a consequence for breaking these directives (such as mark of justice or geas) gain a +1 bonus to their save DC.",
-    shortDescription: '+1 save DC for spells prescribing behavior with consequences (mark of justice, geas)',
+    shortDescription:
+      '+1 save DC for spells prescribing behavior with consequences (mark of justice, geas)',
     source: 'Inner Sea Gods',
     category: 'religion',
     subcategory: 'Kols',
@@ -563,13 +568,14 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'spell.dc',
+        target: 'spell.save_dc',
         value: 1,
         source: 'Strict Judgment',
         condition: {
           type: 'custom',
           params: {},
-          description: 'For spells that prescribe behaviors with consequences (geas, mark of justice)',
+          description:
+            'For spells that prescribe behaviors with consequences (geas, mark of justice)',
         },
       },
     ],
@@ -581,8 +587,9 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
     id: 'strengths_fanfare',
     name: "Strength's Fanfare",
     description:
-      "Songs celebrating your strength and accomplishments enhance your physical prowess. When you are the subject of any sonic effect granting a morale bonus on attack or damage rolls, you also gain a +1 trait bonus on Strength-based skill checks and a +1 trait bonus on combat maneuver checks to bull rush, grapple, or reposition, as well as +1 to your CMD against those same maneuvers.",
-    shortDescription: '+1 Strength skills, bull rush/grapple/reposition CMB and CMD when benefiting from sonic morale bonuses',
+      'Songs celebrating your strength and accomplishments enhance your physical prowess. When you are the subject of any sonic effect granting a morale bonus on attack or damage rolls, you also gain a +1 trait bonus on Strength-based skill checks and a +1 trait bonus on combat maneuver checks to bull rush, grapple, or reposition, as well as +1 to your CMD against those same maneuvers.',
+    shortDescription:
+      '+1 Strength skills, bull rush/grapple/reposition CMB and CMD when benefiting from sonic morale bonuses',
     source: 'Inner Sea Gods',
     category: 'religion',
     subcategory: 'Kurgess',
@@ -597,7 +604,8 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: {},
-          description: 'While subject to a sonic effect granting a morale bonus on attack or damage rolls',
+          description:
+            'While subject to a sonic effect granting a morale bonus on attack or damage rolls',
         },
       },
       {
@@ -609,7 +617,8 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: {},
-          description: 'Bull rush, grapple, or reposition while subject to a sonic effect granting morale bonus on attack/damage',
+          description:
+            'Bull rush, grapple, or reposition while subject to a sonic effect granting morale bonus on attack/damage',
         },
       },
       {
@@ -621,7 +630,8 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: {},
-          description: 'Against bull rush, grapple, or reposition while subject to a sonic effect granting morale bonus on attack/damage',
+          description:
+            'Against bull rush, grapple, or reposition while subject to a sonic effect granting morale bonus on attack/damage',
         },
       },
     ],
@@ -641,7 +651,7 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'The Flexing Arm',
       },
@@ -676,13 +686,14 @@ export const ISG_RELIGION_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'caster_level',
+        target: 'spell.caster_level',
         value: 1,
         source: 'Gifted Medium',
         condition: {
           type: 'custom',
           params: {},
-          description: 'When casting divinations to contact other entities (commune, speak with dead)',
+          description:
+            'When casting divinations to contact other entities (commune, speak with dead)',
         },
       },
     ],

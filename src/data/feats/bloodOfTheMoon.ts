@@ -141,7 +141,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'damage_roll',
+        target: 'damage.melee',
         value: 2,
         source: 'Bear Hug',
         condition: { type: 'custom', params: {}, description: 'When grappling opponents' },
@@ -164,7 +164,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Ferocious Loyalty',
         condition: {
@@ -197,7 +197,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Motivating Display',
         condition: {
@@ -289,7 +289,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Swarm Strike',
         condition: {

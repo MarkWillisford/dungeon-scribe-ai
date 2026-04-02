@@ -38,7 +38,7 @@ export const BLOOD_SERIES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'saves.all',
+        target: 'save.all',
         value: 2,
         source: 'Beacon of Hope',
         condition: {
@@ -254,7 +254,7 @@ export const BLOOD_SERIES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.PROFANE,
-        target: 'saves.all',
+        target: 'save.all',
         value: 2,
         source: 'Damned',
         condition: {
@@ -479,7 +479,7 @@ export const BLOOD_SERIES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat.damage',
+        target: 'damage.melee',
         value: '1d4',
         source: 'Scorching Weapons',
         condition: {

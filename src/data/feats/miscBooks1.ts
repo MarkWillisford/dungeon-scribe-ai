@@ -83,7 +83,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat.cmb',
+        target: 'cmb',
         value: 2,
         source: 'Dirty Fighting',
         condition: { type: 'custom', params: {}, description: 'When flanking the target' },
@@ -217,7 +217,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat.dr',
+        target: 'dr',
         value: 1,
         source: 'Armored Juggernaut',
         condition: { type: 'custom', params: {}, description: 'When wearing heavy armor' },
@@ -359,7 +359,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.RACIAL,
-        target: 'saves.all',
+        target: 'save.all',
         value: 2,
         source: 'Angelic Blood',
         condition: {
@@ -454,7 +454,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat.dr',
+        target: 'dr',
         value: 1,
         source: 'Fiendish Resilience',
       },
@@ -552,7 +552,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'combat.attack',
+        target: 'attack.all',
         value: 1,
         source: 'Flagbearer',
         condition: {
@@ -564,7 +564,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'combat.damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Flagbearer',
         condition: {
@@ -629,7 +629,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat.cmb',
+        target: 'cmb',
         value: 2,
         source: 'Net Maneuvering',
         condition: { type: 'custom', params: {}, description: 'Trip and reposition with nets' },
@@ -965,7 +965,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'combat.attack',
+        target: 'attack.all',
         value: 1,
         source: 'Monster Hunter',
         condition: {
@@ -977,7 +977,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'combat.damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Monster Hunter',
         condition: {

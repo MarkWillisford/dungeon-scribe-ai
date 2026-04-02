@@ -40,7 +40,7 @@ export const MARTIAL_ARTS_FEATS_3: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat_maneuver_check',
+        target: 'cmb',
         value: -5,
         condition: {
           type: 'custom',
@@ -87,7 +87,7 @@ export const MARTIAL_ARTS_FEATS_3: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'bleed_damage',
+        target: 'special.bleed_damage',
         value: 1,
         condition: {
           type: 'custom',

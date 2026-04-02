@@ -277,7 +277,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Shoulder to Shoulder',
         condition: {
@@ -568,14 +568,14 @@ export const PSO_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'ability_score', ability: 'INT', minimum: 13 }],
     effects: [
       {
-        type: 'stat_replacement',
+        type: 'ability_substitution',
         bonusType: BonusType.UNTYPED,
         target: 'skills.diplomacy_persuasion',
         value: 'INT',
         source: 'Student of Philosophy',
       },
       {
-        type: 'stat_replacement',
+        type: 'ability_substitution',
         bonusType: BonusType.UNTYPED,
         target: 'skills.bluff_deception',
         value: 'INT',

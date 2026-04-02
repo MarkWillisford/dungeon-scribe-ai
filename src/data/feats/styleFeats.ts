@@ -20,7 +20,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.DODGE,
-        target: 'adjacent_ally_ac',
+        target: 'special.adjacent_ally_ac',
         value: 2,
         source: 'Archon Style',
         condition: {
@@ -202,7 +202,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'base_speed',
+        target: 'speed.base',
         value: 10,
         source: 'Azata Sprint',
         condition: {
@@ -338,7 +338,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_rolls',
+        target: 'attack.all',
         value: 2,
         source: 'Beastmaster Ire',
         condition: {
@@ -351,7 +351,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'damage_rolls',
+        target: 'damage.melee',
         value: 4,
         source: 'Beastmaster Ire',
         condition: {
@@ -386,7 +386,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'strength',
+        target: 'ability.str',
         value: 2,
         source: 'Blood Frenzy Style',
         condition: {
@@ -398,7 +398,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'constitution',
+        target: 'ability.con',
         value: 2,
         source: 'Blood Frenzy Style',
         condition: {
@@ -474,7 +474,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'cmb_overrun',
+        target: 'cmb.overrun',
         value: 4,
         source: 'Bulette Charge Style',
         condition: {
@@ -562,7 +562,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'cmb_bull_rush',
+        target: 'cmb.bull_rush',
         value: 2,
         source: 'Bull-Catcher Toss',
         condition: {
@@ -666,7 +666,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'cmb_grapple_or_trip',
+        target: 'cmb.grapple',
         value: 2,
         source: 'Stag Submission',
         condition: {
@@ -762,7 +762,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_rolls',
+        target: 'attack.all',
         value: 2,
         source: 'Cudgeler Style',
         condition: {
@@ -793,7 +793,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'cmb_trip',
+        target: 'cmb.trip',
         value: 2,
         source: 'Cudgeler Sweep',
         condition: {
@@ -848,7 +848,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throws_vs_fear',
+        target: 'save.all',
         value: 2,
         source: 'Deadhand Style',
         condition: {
@@ -882,7 +882,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throws_vs_fear',
+        target: 'save.all',
         value: 4,
         source: 'Deadhand Initiate',
         condition: {
@@ -942,7 +942,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.DODGE,
-        target: 'saving_throws',
+        target: 'save.all',
         value: 2,
         source: 'Kirin Style',
         condition: {
@@ -955,7 +955,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.DODGE,
-        target: 'ac_vs_aoo',
+        target: 'special.ac_vs_aoo',
         value: 2,
         source: 'Kirin Style',
         condition: {
@@ -992,7 +992,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'knowledge_checks_identify',
+        target: 'special.knowledge_checks_identify',
         value: 2,
         source: 'Kirin Strike',
       },
@@ -1043,7 +1043,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'stunning_fist_dc',
+        target: 'special.stunning_fist_dc',
         value: 2,
         source: 'Mantis Style',
         condition: {
@@ -1075,7 +1075,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_rolls',
+        target: 'attack.all',
         value: 2,
         source: 'Mantis Wisdom',
         condition: {
@@ -1292,7 +1292,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'cmb_trip',
+        target: 'cmb.trip',
         value: 2,
         source: 'Wolf Trip',
         condition: {

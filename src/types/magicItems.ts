@@ -348,9 +348,26 @@ export interface IounStoneDefinition extends MagicItemDefinition {
 
 export type IounStoneState = 'floating' | 'embedded' | 'wayfinder';
 
+// Recipe for reconstructing a generated item definition without a Firestore document.
+// Checked before definitionId lookup — if present, definitionId is undefined.
+export type GeneratedItemRecipe =
+  | {
+      recipe: 'wand' | 'potion' | 'scroll';
+      spellId: string;
+      spellLevel: number;
+      casterLevel: number;
+      casterClass: string;
+    }
+  | {
+      recipe: 'magic_weapon' | 'magic_armor' | 'magic_shield';
+      baseItemId: string;
+      enhancementBonus: number;
+      abilityIds: string[];
+    };
+
 export interface CharacterMagicItem {
   instanceId: string; // UUID, unique to this character's item
-  definitionId: string; // → MagicItemDefinition.id
+  definitionId?: string; // → MagicItemDefinition.id; undefined for generated items (use generatedFrom)
   name: string; // denormalized for display
 
   equipped: boolean;
@@ -364,6 +381,14 @@ export interface CharacterMagicItem {
 
   // Ioun stone only
   iounState?: IounStoneState;
+
+  // Generated items (wands, potions, scrolls, runtime-built magic weapons/armor/shields).
+  // When present, definitionId is undefined — call reconstructDefinition(generatedFrom) instead.
+  generatedFrom?: GeneratedItemRecipe;
+
+  // DM additions to a named item (e.g. Bane added to a Holy Avenger).
+  // Applied on top of the base definition at runtime.
+  additionalSpecialAbilities?: ItemSpecialAbility[];
 
   notes?: string;
   dmOverrides?: Record<string, unknown>;

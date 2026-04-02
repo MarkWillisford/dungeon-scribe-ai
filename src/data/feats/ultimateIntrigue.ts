@@ -265,7 +265,7 @@ export const UI_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat.feint',
+        target: 'skill.bluff',
         value: 2,
         source: 'Cloak and Dagger Subterfuge',
       },
@@ -967,7 +967,7 @@ export const UI_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'stat_replacement',
+        type: 'ability_substitution',
         bonusType: BonusType.UNTYPED,
         target: 'damage_rolls.starknife',
         value: 'DEX',

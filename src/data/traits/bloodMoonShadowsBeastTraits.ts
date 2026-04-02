@@ -19,7 +19,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'change_shape',
+        target: 'special.change_shape',
         value: 0,
         source: 'Mastery of Form',
         condition: {
@@ -47,7 +47,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         source: 'Traumatic Shift',
         condition: {
@@ -59,7 +59,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Traumatic Shift',
         condition: {
@@ -86,7 +86,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Fight with the Flock',
         condition: {
@@ -141,7 +141,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'change_shape_duration',
+        target: 'special.change_shape_duration',
         value: 0,
         source: 'Durable Change',
         condition: {
@@ -168,7 +168,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'hp_recovery',
+        target: 'special.hp_recovery',
         value: 0,
         source: 'Reviving Rest',
         condition: {
@@ -196,7 +196,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'ferocity',
+        target: 'special.ferocity',
         value: 0,
         source: 'Boar Resilience',
         condition: {
@@ -267,7 +267,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'charge',
+        target: 'special.charge',
         value: 0,
         source: 'Terrifying Lunge',
         condition: {
@@ -318,7 +318,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'movement',
+        target: 'speed.base',
         value: 0,
         source: 'Rat Squeeze',
         condition: {
@@ -376,7 +376,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Shoreline Skirmisher',
         condition: {
@@ -410,7 +410,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'surprise_round',
+        target: 'special.surprise_round',
         value: 0,
         source: 'Feline Instinct',
         condition: { type: 'custom', description: 'Always act in surprise round', params: {} },
@@ -456,7 +456,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         source: 'Lycanthropic Bloodlust',
         condition: {
@@ -484,7 +484,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'change_shape',
+        target: 'special.change_shape',
         value: 0,
         source: 'Shared Curse',
         condition: {
@@ -511,7 +511,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'caster_level_check',
+        target: 'spell.caster_level_check',
         value: 2,
         source: 'Child of the Moon',
         condition: { type: 'custom', description: 'On nights of the full moon', params: {} },
@@ -519,7 +519,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'concentration',
+        target: 'spell.concentration',
         value: 1,
         source: 'Child of the Moon',
         condition: { type: 'custom', description: 'On nights of the full moon', params: {} },
@@ -681,7 +681,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'save',
+        target: 'special.save',
         value: 0,
         source: 'Jinx Eater',
         condition: {
@@ -708,7 +708,7 @@ export const BLOOD_MOON_SHADOWS_BEAST_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'skill_check',
+        target: 'skill.check',
         value: 0,
         source: 'Fortune Found',
         condition: {

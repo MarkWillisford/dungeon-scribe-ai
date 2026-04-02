@@ -55,6 +55,10 @@ e2e/           — Maestro E2E tests
 
 Use absolute paths in all Bash commands. Never rely on relative paths or assume cwd.
 
+## Session Start
+
+At the start of every new session, run /prime before doing anything else.
+
 ## Rules
 
 - Never commit directly to main; use feature branches

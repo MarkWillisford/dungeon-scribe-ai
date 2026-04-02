@@ -7,7 +7,8 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     name: 'Courage in Numbers',
     description:
       'You gain a +2 morale bonus on saves against fear for every ally within 10 feet who possesses this feat (maximum +8).',
-    shortDescription: '+2 morale bonus on fear saves per ally with this feat within 10 ft (max +8).',
+    shortDescription:
+      '+2 morale bonus on fear saves per ally with this feat within 10 ft (max +8).',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
     types: ['teamwork'],
     prerequisites: [{ type: 'feat', featId: 'iron_will' }],
@@ -39,7 +40,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'reflex',
+        target: 'special.reflex',
         value: 0,
         bonusType: BonusType.SHIELD,
         source: 'Covering Shield',
@@ -60,7 +61,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         bonusType: BonusType.CIRCUMSTANCE,
         source: 'Death from Below',
@@ -86,7 +87,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Dragoncrafting',
       },
     ],
@@ -105,7 +106,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'all',
+        target: 'special.all',
         value: 1,
         bonusType: BonusType.UNTYPED,
         source: 'Dragonheart',
@@ -131,7 +132,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Dragonslayer',
       },
     ],
@@ -143,7 +144,8 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     name: 'Dragon-Touched',
     description:
       'Select one dragon kind (blue, green, silver, etc.). You gain a +2 bonus on Reflex saves against the breath weapons of dragons of the chosen kind, a +1 bonus on attack rolls against that dragon kind, and a +1 dodge bonus to AC against that dragon kind. Goal: Defeat a dragon of the chosen kind with CR equal to or greater than your character level. Completion Benefit: You may select a new dragon kind, and you gain a +2 bonus on initiative checks when facing a dragon of your selected kind.',
-    shortDescription: 'Gain attack, AC, and Reflex bonuses vs. a chosen dragon type; story feat with goals.',
+    shortDescription:
+      'Gain attack, AC, and Reflex bonuses vs. a chosen dragon type; story feat with goals.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
     types: ['story'],
     prerequisites: [
@@ -156,7 +158,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         bonusType: BonusType.UNTYPED,
         source: 'Dragon-Touched',
@@ -170,7 +172,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
       },
       {
         type: 'bonus',
-        target: 'reflex',
+        target: 'special.reflex',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Dragon-Touched',
@@ -196,7 +198,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: -1,
         bonusType: BonusType.UNTYPED,
-        target: 'natural_armor',
+        target: 'ac.natural',
         source: 'Flaying Critical',
       },
     ],
@@ -208,7 +210,8 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     name: 'Overwhelm',
     description:
       'You are considered to be flanking an opponent if at least one ally who also has this feat is threatening that opponent and the opponent is at least two size categories larger than the larger of you or your ally, regardless of your actual positioning.',
-    shortDescription: 'Flank large foes with an ally who has this feat if the foe is 2+ sizes larger.',
+    shortDescription:
+      'Flank large foes with an ally who has this feat if the foe is 2+ sizes larger.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
     types: ['combat', 'teamwork'],
     prerequisites: [],
@@ -217,7 +220,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Overwhelm',
       },
     ],
@@ -275,7 +278,8 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     name: 'Snoutgrip',
     description:
       "When a larger opponent misses you with a bite attack, you can attempt a grapple check (at -5 penalty) as an immediate action to seize your opponent's mouth. Upon success, you establish a grapple while preventing the target from using its bite attack, breath weapon, or spells requiring verbal components until it escapes the grapple. You may make this grapple attempt even if the target is out of your reach.",
-    shortDescription: 'Grapple a larger foe\'s snout on a missed bite to suppress breath weapon and bite.',
+    shortDescription:
+      "Grapple a larger foe's snout on a missed bite to suppress breath weapon and bite.",
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
     types: ['combat'],
     prerequisites: [
@@ -293,7 +297,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Snoutgrip',
       },
     ],
@@ -305,7 +309,8 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     name: 'Tandem Evasion',
     description:
       "When standing adjacent to an ally who also possesses this feat, you gain evasion against a dragon's breath weapon and tail sweep special attacks. If you already possess evasion, you instead gain improved evasion against those attacks.",
-    shortDescription: 'Gain evasion vs. dragon breath/tail sweep when adjacent to an ally with this feat.',
+    shortDescription:
+      'Gain evasion vs. dragon breath/tail sweep when adjacent to an ally with this feat.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
     types: ['combat', 'teamwork'],
     prerequisites: [
@@ -317,7 +322,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Tandem Evasion',
       },
     ],
@@ -338,7 +343,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
         type: 'special',
         value: 0,
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         source: 'Wingclipper',
       },
     ],

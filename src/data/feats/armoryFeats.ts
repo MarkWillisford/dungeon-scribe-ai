@@ -616,7 +616,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.SHIELD,
-        target: 'combat.ac',
+        target: 'ac',
         value: 1,
         source: 'Force Shield Mastery',
         condition: {
@@ -702,7 +702,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.RESISTANCE,
-        target: 'saves.all',
+        target: 'save.all',
         value: 1,
         source: 'Resistance Mastery',
         condition: {

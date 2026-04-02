@@ -19,7 +19,7 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack_of_opportunity_vs_aberrations',
+        target: 'special.attack_of_opportunity_vs_aberrations',
         value: 1,
         source: 'Aberration Hunter',
       },
@@ -111,8 +111,9 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'belem_pirate_dep',
     name: 'Belem Pirate',
     description:
-      "You have worked the hidden coves and bays of the island of Belem as a pirate, learning the sea routes and maritime customs of the Minata region. You gain a +1 trait bonus on Knowledge (geography) checks and Profession (sailor) checks, and one of these skills becomes a class skill for you.",
-    shortDescription: '+1 Knowledge (geography) and Profession (sailor); one becomes a class skill.',
+      'You have worked the hidden coves and bays of the island of Belem as a pirate, learning the sea routes and maritime customs of the Minata region. You gain a +1 trait bonus on Knowledge (geography) checks and Profession (sailor) checks, and one of these skills becomes a class skill for you.',
+    shortDescription:
+      '+1 Knowledge (geography) and Profession (sailor); one becomes a class skill.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',
     subcategory: 'Minata',
@@ -173,7 +174,7 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS: TraitDefinition[] = [
     effects: [
       {
         type: 'special',
-        target: 'starting_wealth',
+        target: 'special.starting_wealth',
         value: 900,
         bonusType: BonusType.UNTYPED,
         source: 'Chosen Child',
@@ -217,8 +218,9 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'conscientious_miner_dep',
     name: 'Conscientious Miner',
     description:
-      "You trained as a mithral miner in the tunnels of Jinin, developing a keen eye for valuable materials and underground work. You gain a +1 trait bonus on Appraise checks and a +1 trait bonus on Profession (miner) checks. Profession (miner) becomes a class skill for you.",
-    shortDescription: '+1 Appraise, +1 Profession (miner); Profession (miner) becomes a class skill.',
+      'You trained as a mithral miner in the tunnels of Jinin, developing a keen eye for valuable materials and underground work. You gain a +1 trait bonus on Appraise checks and a +1 trait bonus on Profession (miner) checks. Profession (miner) becomes a class skill for you.',
+    shortDescription:
+      '+1 Appraise, +1 Profession (miner); Profession (miner) becomes a class skill.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',
     subcategory: 'Jinin',
@@ -278,7 +280,8 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS: TraitDefinition[] = [
     name: 'Darklands Delver',
     description:
       "You have spent time exploring the underground passages of Tian Xia's Darklands and are familiar with its terrain and denizens. You gain a +1 trait bonus on Knowledge (dungeoneering) checks and a +1 trait bonus on Survival checks made in the Darklands. One of these two skills becomes a class skill for you.",
-    shortDescription: '+1 Knowledge (dungeoneering) and +1 Survival in the Darklands; one becomes a class skill.',
+    shortDescription:
+      '+1 Knowledge (dungeoneering) and +1 Survival in the Darklands; one becomes a class skill.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',
     subcategory: 'Tian Xia',
@@ -330,8 +333,9 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'dtang_ma_bloodline_dep',
     name: 'Dtang Ma Bloodline',
     description:
-      "You were born in Dtang Ma into one of its favored magical bloodlines. Select one of the following sorcerer bloodlines: fey, maestro, starsoul, or stormborn. Once per day, you may use one of your bloodline powers as if your sorcerer level were 1 higher than normal.",
-    shortDescription: 'Once per day, use one sorcerer bloodline power as if your level were 1 higher.',
+      'You were born in Dtang Ma into one of its favored magical bloodlines. Select one of the following sorcerer bloodlines: fey, maestro, starsoul, or stormborn. Once per day, you may use one of your bloodline powers as if your sorcerer level were 1 higher than normal.',
+    shortDescription:
+      'Once per day, use one sorcerer bloodline power as if your level were 1 higher.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',
     subcategory: 'Dtang Ma',
@@ -376,8 +380,9 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'guerilla_dep',
     name: 'Guerilla',
     description:
-      "You spent considerable time among the guerilla fighters operating in the rainforests of Dtang Ma and know the environment well. You gain a +1 trait bonus on Knowledge (nature) checks and a +1 trait bonus on Survival checks made in rainforest settings. One of these two skills becomes a class skill for you.",
-    shortDescription: '+1 Knowledge (nature) and +1 Survival in rainforests; one becomes a class skill.',
+      'You spent considerable time among the guerilla fighters operating in the rainforests of Dtang Ma and know the environment well. You gain a +1 trait bonus on Knowledge (nature) checks and a +1 trait bonus on Survival checks made in rainforest settings. One of these two skills becomes a class skill for you.',
+    shortDescription:
+      '+1 Knowledge (nature) and +1 Survival in rainforests; one becomes a class skill.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',
     subcategory: 'Dtang Ma',
@@ -406,7 +411,7 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'heart_of_clay_dep',
     name: 'Heart of Clay',
     description:
-      "You believe you are destined for service in the terra-cotta army of King Huang after death, and this faith fortifies you against hardship. You gain a +1 trait bonus on Fortitude saves.",
+      'You believe you are destined for service in the terra-cotta army of King Huang after death, and this faith fortifies you against hardship. You gain a +1 trait bonus on Fortitude saves.',
     shortDescription: '+1 Fortitude saves.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',
@@ -452,7 +457,7 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'honeyed_tongue_dep',
     name: 'Honeyed Tongue',
     description:
-      "You grew up in New Oppara of Amanandar and learned to bridge the cultural gap between Tian-Shu and Taldan customs. You gain a +1 trait bonus on Diplomacy checks, and Diplomacy becomes a class skill for you.",
+      'You grew up in New Oppara of Amanandar and learned to bridge the cultural gap between Tian-Shu and Taldan customs. You gain a +1 trait bonus on Diplomacy checks, and Diplomacy becomes a class skill for you.',
     shortDescription: '+1 Diplomacy; Diplomacy becomes a class skill.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',
@@ -542,7 +547,7 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'indentured_blacksmith_dep',
     name: 'Indentured Blacksmith',
     description:
-      "You were forced to make many of the weapons and shields that your captors in Kaoling used in war, giving you deep practical knowledge of arms and armor. Select either Craft (armor) or Craft (weapons). You gain a +1 trait bonus on checks with that skill, and it becomes a class skill for you.",
+      'You were forced to make many of the weapons and shields that your captors in Kaoling used in war, giving you deep practical knowledge of arms and armor. Select either Craft (armor) or Craft (weapons). You gain a +1 trait bonus on checks with that skill, and it becomes a class skill for you.',
     shortDescription: '+1 to Craft (armor) or Craft (weapons); it becomes a class skill.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',
@@ -572,7 +577,7 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'instigator_of_rebellion_dep',
     name: 'Instigator of Rebellion',
     description:
-      "Your dissatisfaction with the changes in Minkai has led you to organize public demonstrations against governmental authority. You gain a +1 trait bonus on Diplomacy and Intimidate checks.",
+      'Your dissatisfaction with the changes in Minkai has led you to organize public demonstrations against governmental authority. You gain a +1 trait bonus on Diplomacy and Intimidate checks.',
     shortDescription: '+1 Diplomacy and +1 Intimidate.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',
@@ -602,7 +607,7 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'intrepid_delver_dep',
     name: 'Intrepid Delver',
     description:
-      "One of the elder elves in Ayajinbo told you many stories of the Darklands beneath Jinin, and your nerves have hardened to horrors others can hardly fathom. You gain a +2 trait bonus on saving throws made to resist fear effects.",
+      'One of the elder elves in Ayajinbo told you many stories of the Darklands beneath Jinin, and your nerves have hardened to horrors others can hardly fathom. You gain a +2 trait bonus on saving throws made to resist fear effects.',
     shortDescription: '+2 saving throws against fear effects.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',

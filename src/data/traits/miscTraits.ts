@@ -54,7 +54,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Giant Slayer',
         condition: {
@@ -66,7 +66,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Giant Slayer',
         condition: {
@@ -152,7 +152,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
     id: 'framed',
     name: 'Framed',
     description:
-      'Someone you care about was falsely accused of murder by a fisherman who had been intimidated and manipulated by the crime lord Gaedren Lamm. Though the accused was eventually exonerated when the fisherman\'s coercion was exposed, the reputational damage was severe. You are determined to find Gaedren and gather evidence to fully clear the accused\'s name. Choose one of the following: Dropout — you were the accused; forced to leave your school or church after the false accusation, you gain a +1 trait bonus on Spellcraft checks, and Spellcraft is a class skill for you. Family Honor — the framed person was a family member; using your persuasive abilities, you extracted the truth, and you gain a +1 trait bonus on Bluff checks, and Bluff is a class skill for you.',
+      "Someone you care about was falsely accused of murder by a fisherman who had been intimidated and manipulated by the crime lord Gaedren Lamm. Though the accused was eventually exonerated when the fisherman's coercion was exposed, the reputational damage was severe. You are determined to find Gaedren and gather evidence to fully clear the accused's name. Choose one of the following: Dropout — you were the accused; forced to leave your school or church after the false accusation, you gain a +1 trait bonus on Spellcraft checks, and Spellcraft is a class skill for you. Family Honor — the framed person was a family member; using your persuasive abilities, you extracted the truth, and you gain a +1 trait bonus on Bluff checks, and Bluff is a class skill for you.",
     shortDescription: '+1 Spellcraft (class skill) or +1 Bluff (class skill)',
     source: "Curse of the Crimson Throne Player's Guide",
     category: 'campaign',
@@ -230,7 +230,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Sword Scion',
         condition: {
@@ -242,7 +242,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Sword Scion',
         condition: {
@@ -313,7 +313,8 @@ export const MISC_TRAITS: TraitDefinition[] = [
     name: 'Brigand',
     description:
       'You come from the River Kingdoms or the more lawless reaches of Brevoy, and have lived by ambushing travelers, bullying merchants, evading the law, and hiding in wild places. Facing trouble with the law or with rival criminals, you have joined an expedition into the Stolen Lands to disappear into places pursuers will not dare follow. You begin play with an extra 100 gp in ill-gotten gains, and gain a +1 trait bonus on Bluff, Diplomacy, Intimidate, and Sense Motive checks when dealing with brigands, thieves, bandits, and their ilk.',
-    shortDescription: '+100 gp starting wealth; +1 Bluff/Diplomacy/Intimidate/Sense Motive vs criminals',
+    shortDescription:
+      '+100 gp starting wealth; +1 Bluff/Diplomacy/Intimidate/Sense Motive vs criminals',
     source: "Kingmaker Player's Guide",
     category: 'campaign',
     subcategory: 'Kingmaker',
@@ -322,7 +323,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Brigand',
       },
@@ -333,7 +334,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
     id: 'noble_born',
     name: 'Noble Born',
     description:
-      'You have a distant connection to one of Brevoy\'s noble families. Though your immediate family lacks significant wealth or influence, you have decided to prove your worth independent of your family name by testing yourself in the Stolen Lands. Choose one of the following family heritages: Garess (+2 Appraise for natural stones/metals; ignore movement penalty for first 5 feet of rocky difficult terrain), Lebeda (bonus language: Dwarven, Elven, Gnome, Giant, Halfling, Skald, or Sylvan), Lodovka (+1 Swim; Swim is a class skill), Medvyed (+2 Diplomacy with fey; +1 Will vs fey spells/abilities), Orlovsky (+1 CMD; +1 to one of Acrobatics, Diplomacy, or Stealth), or Surtova (+2 damage against flat-footed opponents with light or one-handed weapons).',
+      "You have a distant connection to one of Brevoy's noble families. Though your immediate family lacks significant wealth or influence, you have decided to prove your worth independent of your family name by testing yourself in the Stolen Lands. Choose one of the following family heritages: Garess (+2 Appraise for natural stones/metals; ignore movement penalty for first 5 feet of rocky difficult terrain), Lebeda (bonus language: Dwarven, Elven, Gnome, Giant, Halfling, Skald, or Sylvan), Lodovka (+1 Swim; Swim is a class skill), Medvyed (+2 Diplomacy with fey; +1 Will vs fey spells/abilities), Orlovsky (+1 CMD; +1 to one of Acrobatics, Diplomacy, or Stealth), or Surtova (+2 damage against flat-footed opponents with light or one-handed weapons).",
     shortDescription: 'Choose one of six Brevic noble family bonuses',
     source: "Kingmaker Player's Guide",
     category: 'campaign',
@@ -479,7 +480,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
     id: 'inspired_by_greatness',
     name: 'Inspired by Greatness',
     description:
-      'Professor Lorrimor\'s career and discoveries motivated you to excel. As you honed your craft, you and the professor corresponded, and he was delighted to hear that he had directly or indirectly motivated you to strive for your full potential. His death has left you determined to honor his memory. Choose one spell you can cast. You always cast that spell at +1 caster level.',
+      "Professor Lorrimor's career and discoveries motivated you to excel. As you honed your craft, you and the professor corresponded, and he was delighted to hear that he had directly or indirectly motivated you to strive for your full potential. His death has left you determined to honor his memory. Choose one spell you can cast. You always cast that spell at +1 caster level.",
     shortDescription: '+1 caster level for one chosen spell',
     source: "Carrion Crown Player's Guide",
     category: 'campaign',
@@ -489,7 +490,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Inspired by Greatness',
       },
@@ -519,7 +520,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'On the Payroll',
       },
@@ -540,7 +541,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Subject of Study',
         condition: {
@@ -679,7 +680,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'concentration',
+        target: 'spell.concentration',
         value: 2,
         source: 'Riftwarden Orphan',
       },
@@ -887,7 +888,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'speed',
+        target: 'speed.base',
         value: 5,
         source: 'Fiendish Sprinter',
         condition: {
@@ -1168,7 +1169,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'concentration',
+        target: 'spell.concentration',
         value: 1,
         source: 'Arcane Temper',
       },
@@ -1464,7 +1465,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Savanna Hunter',
         condition: {

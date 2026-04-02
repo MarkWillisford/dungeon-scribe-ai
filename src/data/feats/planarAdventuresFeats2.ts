@@ -18,7 +18,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'planar_infusion',
+        target: 'special.planar_infusion',
         value: 0,
         condition: {
           type: 'custom',
@@ -45,7 +45,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'spell_list',
+        target: 'special.spell_list',
         value: 0,
         condition: {
           type: 'custom',
@@ -74,7 +74,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'natural_attacks',
+        target: 'special.natural_attacks',
         value: 0,
         condition: {
           type: 'custom',
@@ -105,7 +105,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'touch_attack_damage',
+        target: 'damage.melee',
         value: 0,
         condition: {
           type: 'custom',
@@ -136,7 +136,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.CIRCUMSTANCE,
-        target: 'acrobatics',
+        target: 'skill.acrobatics',
         value: 2,
         condition: {
           type: 'custom',
@@ -148,7 +148,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'land_speed',
+        target: 'speed.base',
         value: 10,
         condition: {
           type: 'custom',
@@ -207,7 +207,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat_maneuver_disarm',
+        target: 'cmb.disarm',
         value: 2,
         condition: {
           type: 'custom',
@@ -219,7 +219,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'sleight_of_hand',
+        target: 'skill.sleight_of_hand',
         value: 2,
         condition: {
           type: 'custom',
@@ -251,7 +251,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'conduit_feat_uses',
+        target: 'special.conduit_feat_uses',
         value: 5,
         condition: {
           type: 'custom',
@@ -279,7 +279,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throw',
+        target: 'save.all',
         value: 0,
         condition: {
           type: 'custom',
@@ -307,7 +307,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 0,
         condition: {
           type: 'custom',
@@ -335,7 +335,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'knowledge_planes',
+        target: 'skill.knowledge_planes',
         value: 2,
         condition: {
           type: 'custom',
@@ -347,7 +347,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'sense_motive',
+        target: 'skill.sense_motive',
         value: 2,
         condition: {
           type: 'custom',
@@ -373,7 +373,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'planar_trait',
+        target: 'special.planar_trait',
         value: 0,
         condition: {
           type: 'custom',
@@ -401,7 +401,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'stealth',
+        target: 'skill.stealth',
         value: 0,
         condition: {
           type: 'custom',
@@ -429,7 +429,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'terrain',
+        target: 'special.terrain',
         value: 0,
         condition: {
           type: 'custom',
@@ -471,7 +471,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'gravity_check',
+        target: 'special.gravity_check',
         value: 0,
         condition: {
           type: 'custom',
@@ -504,7 +504,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'falling_damage',
+        target: 'special.falling_damage',
         value: 0,
         condition: {
           type: 'custom',
@@ -536,7 +536,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'eidolon_alignment',
+        target: 'special.eidolon_alignment',
         value: 0,
         condition: {
           type: 'custom',
@@ -564,7 +564,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'movement_speed',
+        target: 'speed.base',
         value: 0,
         condition: {
           type: 'custom',
@@ -606,7 +606,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'touch_attack',
+        target: 'attack.melee',
         value: 0,
         condition: {
           type: 'custom',
@@ -634,7 +634,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'movement',
+        target: 'speed.base',
         value: 0,
         condition: {
           type: 'custom',
@@ -662,7 +662,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.CIRCUMSTANCE,
-        target: 'acrobatics',
+        target: 'skill.acrobatics',
         value: 0,
         condition: {
           type: 'custom',

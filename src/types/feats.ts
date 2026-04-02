@@ -1,4 +1,11 @@
-import { BonusType, Effect, EffectCondition, EffectActivation } from './base';
+import {
+  BonusType,
+  Effect,
+  EffectCondition,
+  EffectActivation,
+  EffectType,
+  EffectTarget,
+} from './base';
 
 // ---- Feat Types/Categories ----
 
@@ -56,9 +63,21 @@ export type FeatPrerequisite =
   | { type: 'mythic_tier'; minimum: number }
   | { type: 'special'; description: string };
 
+// ---- Spell-Like Ability granted by a feat ----
+
+export interface FeatSpellLikeAbility {
+  spellId: string;
+  spellName: string;
+  casterLevel: number;
+  usesPerDay: number; // 0 = at will
+  saveDC?: number;
+}
+
 // ---- Feat Effect (extends Effect with required bonusType) ----
 
-export interface FeatEffect extends Omit<Effect, 'bonusType'> {
+export interface FeatEffect extends Omit<Effect, 'bonusType' | 'type' | 'target'> {
+  type: EffectType;
+  target: EffectTarget;
   bonusType: BonusType;
   condition?: EffectCondition;
   activation?: EffectActivation;
@@ -86,6 +105,7 @@ export interface FeatDefinition {
   types: FeatType[];
   prerequisites: FeatPrerequisite[];
   effects: FeatEffect[];
+  spellLikeAbilities?: FeatSpellLikeAbility[];
   activationMode: 'passive' | 'toggle' | 'conditional';
   choices?: FeatChoice[];
   tags?: string[];

@@ -7,8 +7,9 @@ export const SERPENTS_SKULL_TRAITS: TraitDefinition[] = [
     id: 'boarded_in_cheliax',
     name: 'Boarded in Cheliax',
     description:
-      "You boarded the Jenivere at a Chelaxian port city, viewing the Mwangi Expanse through a distinctly romantic tinge shaped by legends of exotic treasures and strange beasts. You carry a detailed map of the Mwangi Expanse that grants a +2 competence bonus on all Knowledge (geography) checks regarding that region. You also begin the campaign with 200 gp worth of mundane equipment specifically suited for jungle exploration.",
-    shortDescription: '+2 Knowledge (geography) about Mwangi Expanse; 200 gp of jungle exploration gear',
+      'You boarded the Jenivere at a Chelaxian port city, viewing the Mwangi Expanse through a distinctly romantic tinge shaped by legends of exotic treasures and strange beasts. You carry a detailed map of the Mwangi Expanse that grants a +2 competence bonus on all Knowledge (geography) checks regarding that region. You also begin the campaign with 200 gp worth of mundane equipment specifically suited for jungle exploration.',
+    shortDescription:
+      '+2 Knowledge (geography) about Mwangi Expanse; 200 gp of jungle exploration gear',
     source: "Serpent's Skull Player's Guide",
     category: 'campaign',
     subcategory: "Serpent's Skull",
@@ -34,7 +35,7 @@ export const SERPENTS_SKULL_TRAITS: TraitDefinition[] = [
     id: 'boarded_in_mediogalti',
     name: 'Boarded in Mediogalti',
     description:
-      "You boarded the Jenivere in the pirate port of Ilizmagorti in Mediogalti, perhaps fleeing danger or seeking a fresh start. Life in this hazardous port has hardened you against toxins. You gain a +2 trait bonus on all saving throws against poison. In addition, you may select one of the following poisons to be immune to (gained through a painful conditioning process): blue whinnis, giant wasp poison, medium spider venom, small centipede poison, or spider vine poison.",
+      'You boarded the Jenivere in the pirate port of Ilizmagorti in Mediogalti, perhaps fleeing danger or seeking a fresh start. Life in this hazardous port has hardened you against toxins. You gain a +2 trait bonus on all saving throws against poison. In addition, you may select one of the following poisons to be immune to (gained through a painful conditioning process): blue whinnis, giant wasp poison, medium spider venom, small centipede poison, or spider vine poison.',
     shortDescription: '+2 saves vs poison; immunity to one chosen poison',
     source: "Serpent's Skull Player's Guide",
     category: 'campaign',
@@ -59,7 +60,7 @@ export const SERPENTS_SKULL_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'save_vs_poison',
+        target: 'special.save_vs_poison',
         value: 2,
         source: 'Boarded in Mediogalti',
       },
@@ -71,8 +72,9 @@ export const SERPENTS_SKULL_TRAITS: TraitDefinition[] = [
     id: 'boarded_in_mwangi_expanse',
     name: 'Boarded in Mwangi Expanse',
     description:
-      "You boarded the Jenivere in the Mwangi Expanse, where you have lived or recently traveled. Familiarity with jungle environments has given you both linguistic and naturalistic knowledge. You gain Polyglot as a bonus language and a +1 trait bonus on all Knowledge (nature) checks regarding jungle terrain and creatures.",
-    shortDescription: 'Bonus language: Polyglot; +1 Knowledge (nature) about jungle terrain and creatures',
+      'You boarded the Jenivere in the Mwangi Expanse, where you have lived or recently traveled. Familiarity with jungle environments has given you both linguistic and naturalistic knowledge. You gain Polyglot as a bonus language and a +1 trait bonus on all Knowledge (nature) checks regarding jungle terrain and creatures.',
+    shortDescription:
+      'Bonus language: Polyglot; +1 Knowledge (nature) about jungle terrain and creatures',
     source: "Serpent's Skull Player's Guide",
     category: 'campaign',
     subcategory: "Serpent's Skull",
@@ -105,7 +107,7 @@ export const SERPENTS_SKULL_TRAITS: TraitDefinition[] = [
     id: 'boarded_in_the_shackles',
     name: 'Boarded in the Shackles',
     description:
-      "A life of weal and woe on the sea and amid the pirate-controlled lands of the Shackles has toughened you to a variety of hardships. You may choose one saving throw type — Fortitude, Reflex, or Will — and gain a +1 trait bonus on all saving throws of that type.",
+      'A life of weal and woe on the sea and amid the pirate-controlled lands of the Shackles has toughened you to a variety of hardships. You may choose one saving throw type — Fortitude, Reflex, or Will — and gain a +1 trait bonus on all saving throws of that type.',
     shortDescription: '+1 to all saves of one chosen type (Fortitude, Reflex, or Will)',
     source: "Serpent's Skull Player's Guide",
     category: 'campaign',
@@ -128,8 +130,9 @@ export const SERPENTS_SKULL_TRAITS: TraitDefinition[] = [
     id: 'boarded_in_varisia',
     name: 'Boarded in Varisia',
     description:
-      "You traveled from the northern lands to Garund, lacking familiarity with the jungle environment. Your exotic origin provides unusual advantages among jungle inhabitants. Choose one of the following benefits: gain a +2 trait bonus on all Bluff checks made against jungle inhabitants and natives, or treat spells with the mind-affecting descriptor as being cast at +1 caster level higher when cast against jungle creatures and natives.",
-    shortDescription: 'Choose: +2 Bluff vs jungle inhabitants, or +1 caster level for mind-affecting spells vs jungle creatures',
+      'You traveled from the northern lands to Garund, lacking familiarity with the jungle environment. Your exotic origin provides unusual advantages among jungle inhabitants. Choose one of the following benefits: gain a +2 trait bonus on all Bluff checks made against jungle inhabitants and natives, or treat spells with the mind-affecting descriptor as being cast at +1 caster level higher when cast against jungle creatures and natives.',
+    shortDescription:
+      'Choose: +2 Bluff vs jungle inhabitants, or +1 caster level for mind-affecting spells vs jungle creatures',
     source: "Serpent's Skull Player's Guide",
     category: 'campaign',
     subcategory: "Serpent's Skull",
@@ -176,7 +179,7 @@ export const SERPENTS_SKULL_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'save_vs_disease',
+        target: 'special.save_vs_disease',
         value: 1,
         source: 'Colonial',
       },
@@ -198,7 +201,7 @@ export const SERPENTS_SKULL_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'starting_wealth',
+        target: 'special.starting_wealth',
         value: 300,
         source: 'Get the Cargo Through',
       },
@@ -210,8 +213,9 @@ export const SERPENTS_SKULL_TRAITS: TraitDefinition[] = [
     id: 'jenivere_crew',
     name: 'Jenivere Crew',
     description:
-      "You are an experienced sailor who has served aboard the Jenivere cargo vessel since its departure from Magnimar. Your time at sea has honed your practical skills. Choose one of the following skills: Acrobatics, Climb, Knowledge (nature), Knowledge (geography), Swim, or Survival. You gain a +1 trait bonus on checks with the chosen skill, and it is always a class skill for you.",
-    shortDescription: '+1 to one chosen ship skill (Acrobatics, Climb, Know. nature/geography, Swim, or Survival); becomes class skill',
+      'You are an experienced sailor who has served aboard the Jenivere cargo vessel since its departure from Magnimar. Your time at sea has honed your practical skills. Choose one of the following skills: Acrobatics, Climb, Knowledge (nature), Knowledge (geography), Swim, or Survival. You gain a +1 trait bonus on checks with the chosen skill, and it is always a class skill for you.',
+    shortDescription:
+      '+1 to one chosen ship skill (Acrobatics, Climb, Know. nature/geography, Swim, or Survival); becomes class skill',
     source: "Serpent's Skull Player's Guide",
     category: 'campaign',
     subcategory: "Serpent's Skull",
@@ -220,13 +224,29 @@ export const SERPENTS_SKULL_TRAITS: TraitDefinition[] = [
       {
         type: 'skill',
         label: 'Choose a skill',
-        options: ['Acrobatics', 'Climb', 'Knowledge (nature)', 'Knowledge (geography)', 'Swim', 'Survival'],
+        options: [
+          'Acrobatics',
+          'Climb',
+          'Knowledge (nature)',
+          'Knowledge (geography)',
+          'Swim',
+          'Survival',
+        ],
         affectsEffects: true,
         effectTargetTemplate: 'skill.{choice}',
       },
     ],
     effects: [],
-    tags: ['sailor', 'acrobatics', 'climb', 'swim', 'survival', 'knowledge_nature', 'knowledge_geography', 'class-skill'],
+    tags: [
+      'sailor',
+      'acrobatics',
+      'climb',
+      'swim',
+      'survival',
+      'knowledge_nature',
+      'knowledge_geography',
+      'class-skill',
+    ],
   },
 
   {

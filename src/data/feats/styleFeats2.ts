@@ -38,7 +38,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'intimidate_demoralize',
+        target: 'skill.intimidate',
         value: 2,
         source: 'Boar Ferocity',
         condition: {
@@ -122,7 +122,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.DODGE,
-        target: 'ac_vs_melee',
+        target: 'special.ac_vs_melee',
         value: 4,
         source: 'Crane Wing',
         condition: {
@@ -175,7 +175,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saves_vs_sleep_paralysis_stun',
+        target: 'save.all',
         value: 2,
         source: 'Dragon Style',
         condition: {
@@ -332,7 +332,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'cmb_bull_rush_or_trip',
+        target: 'cmb.bull_rush',
         value: 4,
         source: 'Janni Tempest',
         condition: {
@@ -946,7 +946,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_on_charge',
+        target: 'attack.melee',
         value: 1,
         source: 'Demonic Style',
         condition: {
@@ -1069,7 +1069,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'melee_attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Dolphin Style',
         condition: {
@@ -1143,7 +1143,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'melee_attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Dragonfly Style',
         condition: {
@@ -1178,7 +1178,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'melee_attack',
+        target: 'attack.melee',
         value: 2,
         source: 'Dragonfly Wings',
         condition: {

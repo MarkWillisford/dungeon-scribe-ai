@@ -58,7 +58,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat_maneuver',
+        target: 'cmb',
         value: 2,
         source: 'Aldori Artistry',
         condition: {
@@ -92,7 +92,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'skill_intimidate',
+        target: 'skill.intimidate',
         value: 2,
         source: 'Aldori Dueling Disciple',
         condition: {
@@ -176,7 +176,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'weapon_damage',
+        target: 'weapon.damage',
         value: 2,
         source: 'Aldori Style',
         condition: {
@@ -312,7 +312,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_rolls',
+        target: 'attack.all',
         value: 1,
         source: 'Cold Celerity',
         condition: {
@@ -343,7 +343,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'scroll_caster_level',
+        target: 'spell.caster_level',
         value: 1,
         source: 'Cypher Magic',
         condition: {
@@ -355,7 +355,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'caster_level_check',
+        target: 'spell.caster_level_check',
         value: 2,
         source: 'Cypher Magic',
         condition: {
@@ -454,7 +454,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'combat_maneuver_check',
+        target: 'cmb',
         value: 1,
         source: 'Duelist of the Shrouded Lake',
         condition: {
@@ -509,7 +509,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throws',
+        target: 'save.all',
         value: 1,
         source: "Eagle's Resolve",
         condition: {
@@ -536,7 +536,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'skill_acrobatics',
+        target: 'skill.acrobatics',
         value: 2,
         source: 'Expert Boarder',
         condition: {
@@ -548,7 +548,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'skill_climb',
+        target: 'skill.climb',
         value: 2,
         source: 'Expert Boarder',
         condition: {
@@ -675,7 +675,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat_maneuver_check',
+        target: 'cmb',
         value: 4,
         source: 'Forceful Charge',
         condition: {
@@ -711,7 +711,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throws',
+        target: 'save.all',
         value: 2,
         source: "Garen's Discipline",
         condition: {

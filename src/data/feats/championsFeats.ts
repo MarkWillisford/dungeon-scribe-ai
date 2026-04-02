@@ -54,7 +54,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'stat_replacement',
+        type: 'ability_substitution',
         bonusType: BonusType.UNTYPED,
         target: 'skills.charisma_based',
         value: 'WIS',
@@ -380,7 +380,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat.ranged_attack',
+        target: 'attack.ranged',
         value: 2,
         source: 'Friendly Fire',
         condition: {

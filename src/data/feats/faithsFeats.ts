@@ -53,7 +53,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.RESISTANCE,
-        target: 'saving_throws.vs_divine_spells',
+        target: 'save.all',
         value: 2,
         source: 'Atheist Abjurations',
       },
@@ -156,7 +156,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.RESISTANCE,
-        target: 'saving_throws.vs_opposing_divine',
+        target: 'save.all',
         value: 2,
         source: 'Divine Defiance',
         condition: {
@@ -256,7 +256,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'saving_throws.will.vs_mind_affecting',
+        target: 'save.will',
         value: 2,
         source: 'Ironclad Logic',
       },
@@ -421,7 +421,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'saving_throws.will.vs_language_dependent',
+        target: 'save.will',
         value: 2,
         source: 'Philosophical Minded',
       },
@@ -579,7 +579,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.SACRED,
-        target: 'saving_throws.vs_evil_effects',
+        target: 'save.all',
         value: 2,
         source: 'Sacred Defense',
       },

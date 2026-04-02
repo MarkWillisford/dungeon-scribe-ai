@@ -385,7 +385,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'wild_empathy',
+        target: 'skill.wild_empathy',
         value: 4,
         source: 'Wildspeak',
         condition: {
@@ -919,7 +919,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.CIRCUMSTANCE,
-        target: 'combat.cmd',
+        target: 'cmd',
         value: 4,
         source: 'Solid Stance',
         condition: {
@@ -1033,7 +1033,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat.attack_rolls',
+        target: 'attack.all',
         value: 1,
         source: 'Linked Resonance',
         condition: {
@@ -1045,7 +1045,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saves.all',
+        target: 'save.all',
         value: 1,
         source: 'Linked Resonance',
         condition: {

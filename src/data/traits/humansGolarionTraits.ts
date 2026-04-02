@@ -57,7 +57,7 @@ export const HUMANS_GOLARION_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'combat.cmb',
+        target: 'cmb',
         value: 1,
         source: 'Bred for War',
       },
@@ -146,7 +146,7 @@ export const HUMANS_GOLARION_TRAITS: TraitDefinition[] = [
     id: 'horse_lord_ig',
     name: 'Horse Lord',
     description:
-      "You grew up horse racing along the plains of Paresh, dreaming of competing in the legendary Histaqen competition. You gain a +2 trait bonus on Handle Animal checks and a +1 trait bonus on Ride checks. Both bonuses apply only to horses.",
+      'You grew up horse racing along the plains of Paresh, dreaming of competing in the legendary Histaqen competition. You gain a +2 trait bonus on Handle Animal checks and a +1 trait bonus on Ride checks. Both bonuses apply only to horses.',
     shortDescription: '+2 Handle Animal and +1 Ride, for horses only.',
     source: 'Pathfinder Player Companion: Humans of Golarion',
     category: 'race',
@@ -177,7 +177,8 @@ export const HUMANS_GOLARION_TRAITS: TraitDefinition[] = [
     name: 'Ice Walker',
     description:
       'You grew up in the frozen north, where walking on ice is a daily necessity. You gain a +1 trait bonus on saving throws against attacks that deal cold damage. You ignore Acrobatics skill penalties for walking on icy surfaces and can move across ice at your normal speed.',
-    shortDescription: '+1 save vs. cold; ignore Acrobatics penalties on ice; move at normal speed on ice.',
+    shortDescription:
+      '+1 save vs. cold; ignore Acrobatics penalties on ice; move at normal speed on ice.',
     source: 'Pathfinder Player Companion: Humans of Golarion',
     category: 'race',
     subcategory: 'Kellid',
@@ -243,7 +244,7 @@ export const HUMANS_GOLARION_TRAITS: TraitDefinition[] = [
     id: 'market_rat_ig',
     name: 'Market Rat',
     description:
-      "You come from a family of merchants, or you dwelt amid the many booths of a market, begging to survive. Either way, you know how to identify value and navigate local social customs. You gain a +1 trait bonus on Appraise and Knowledge (local) checks.",
+      'You come from a family of merchants, or you dwelt amid the many booths of a market, begging to survive. Either way, you know how to identify value and navigate local social customs. You gain a +1 trait bonus on Appraise and Knowledge (local) checks.',
     shortDescription: '+1 trait bonus on Appraise and Knowledge (local) checks.',
     source: 'Pathfinder Player Companion: Humans of Golarion',
     category: 'race',
@@ -297,7 +298,8 @@ export const HUMANS_GOLARION_TRAITS: TraitDefinition[] = [
     name: 'Open Palm of Irori',
     description:
       'You have studied the martial philosophy of Irori as practiced by Vudrani warriors and monks. You gain a +1 trait bonus on Acrobatics and Knowledge (religion) checks. Once per day as a swift action, if you possess a ki pool, you may channel your ki during an unarmed strike to gain a +2 trait bonus on one damage roll; this additional damage is precision damage.',
-    shortDescription: '+1 Acrobatics and Knowledge (religion); once/day channel ki for +2 unarmed damage (precision).',
+    shortDescription:
+      '+1 Acrobatics and Knowledge (religion); once/day channel ki for +2 unarmed damage (precision).',
     source: 'Pathfinder Player Companion: Humans of Golarion',
     category: 'race',
     subcategory: 'Vudrani',

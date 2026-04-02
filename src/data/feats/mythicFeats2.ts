@@ -222,14 +222,14 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'skill_diplomacy',
+        target: 'skill.diplomacy',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Persuasive (Mythic)',
       },
       {
         type: 'bonus',
-        target: 'skill_intimidate',
+        target: 'skill.intimidate',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Persuasive (Mythic)',
@@ -264,7 +264,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack_ranged_close',
+        target: 'attack.ranged',
         value: 2,
         bonusType: BonusType.UNTYPED,
         condition: { type: 'custom', description: 'Within 30 feet', params: {} },
@@ -272,7 +272,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       },
       {
         type: 'bonus',
-        target: 'damage_ranged_close',
+        target: 'damage.ranged',
         value: 2,
         bonusType: BonusType.UNTYPED,
         condition: { type: 'custom', description: 'Within 30 feet', params: {} },
@@ -294,7 +294,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'surge_result',
+        target: 'special.surge_result',
         value: 1,
         bonusType: BonusType.UNTYPED,
         source: 'Potent Surge (Mythic)',
@@ -453,7 +453,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'ac_ally_shield',
+        target: 'special.ac_ally_shield',
         value: 3,
         bonusType: BonusType.SHIELD,
         condition: {
@@ -508,14 +508,14 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'skill_heal',
+        target: 'skill.heal',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Self-Sufficient (Mythic)',
       },
       {
         type: 'bonus',
-        target: 'skill_survival',
+        target: 'skill.survival',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Self-Sufficient (Mythic)',
@@ -738,14 +738,14 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'skill_stealth',
+        target: 'skill.stealth',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Stealthy (Mythic)',
       },
       {
         type: 'bonus',
-        target: 'skill_escape_artist',
+        target: 'skill.escape_artist',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Stealthy (Mythic)',
@@ -809,14 +809,14 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack_thrown_improvised',
+        target: 'attack.thrown',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Throw Anything (Mythic)',
       },
       {
         type: 'bonus',
-        target: 'damage_thrown_improvised',
+        target: 'damage.thrown',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Throw Anything (Mythic)',

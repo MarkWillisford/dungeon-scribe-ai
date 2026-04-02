@@ -9,7 +9,7 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS_2: TraitDefinition[] = [
     id: 'privileged_slave_dep',
     name: 'Privileged Slave',
     description:
-      "You were enslaved by the hobgoblins of Kaoling, and obeyed your masters dutifully, turning your back on comrades in order to find favor with your slavers — all the while plotting your escape. You gain a +1 trait bonus on Bluff checks, and Bluff becomes a class skill for you.",
+      'You were enslaved by the hobgoblins of Kaoling, and obeyed your masters dutifully, turning your back on comrades in order to find favor with your slavers — all the while plotting your escape. You gain a +1 trait bonus on Bluff checks, and Bluff becomes a class skill for you.',
     shortDescription: '+1 Bluff; Bluff becomes a class skill.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',
@@ -100,7 +100,7 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'leadership_score',
+        target: 'special.leadership_score',
         value: 1,
         source: 'Rebel Leader',
       },
@@ -202,7 +202,8 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS_2: TraitDefinition[] = [
     name: 'Snake Bleeder',
     description:
       'You have learned the art of poison-making from the nagas of Nagajor. You gain a +2 trait bonus on Craft (alchemy) checks when brewing poisons, and Craft (alchemy) becomes a class skill for you.',
-    shortDescription: '+2 Craft (alchemy) for brewing poisons; Craft (alchemy) becomes a class skill.',
+    shortDescription:
+      '+2 Craft (alchemy) for brewing poisons; Craft (alchemy) becomes a class skill.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',
     subcategory: 'Nagajor',
@@ -361,7 +362,8 @@ export const DRAGON_EMPIRES_PRIMER_TRAITS_2: TraitDefinition[] = [
     name: 'Trench Navigator',
     description:
       'You have experience navigating the hazardous waters and underwater trenches of the Xidao Gulf. You gain a +1 trait bonus on Knowledge (geography) checks and a +1 trait bonus on Profession (sailor) checks, and one of these skills becomes a class skill for you.',
-    shortDescription: '+1 Knowledge (geography) and +1 Profession (sailor); one becomes a class skill.',
+    shortDescription:
+      '+1 Knowledge (geography) and +1 Profession (sailor); one becomes a class skill.',
     source: 'Pathfinder Player Companion: Dragon Empires Primer',
     category: 'regional',
     subcategory: 'Xidao',

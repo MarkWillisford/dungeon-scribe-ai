@@ -14,7 +14,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Ancestral Enmity',
@@ -75,7 +75,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'skill_escape_artist',
+        target: 'skill.escape_artist',
         value: 5,
         bonusType: BonusType.COMPETENCE,
         source: 'Bag of Bones',

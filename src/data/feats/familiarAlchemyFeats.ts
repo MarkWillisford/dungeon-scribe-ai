@@ -34,14 +34,14 @@ export const FAMILIAR_ALCHEMY_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.NATURAL,
-        target: 'familiar_natural_armor',
+        target: 'special.familiar_natural_armor',
         value: 2,
         source: 'Resilient Familiar',
       },
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'familiar_saves',
+        target: 'special.familiar_saves',
         value: 2,
         source: 'Resilient Familiar',
       },
@@ -81,7 +81,7 @@ export const FAMILIAR_ALCHEMY_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'perception',
+        target: 'skill.perception',
         value: 2,
         source: 'Vigilant Familiar',
         condition: {
@@ -93,7 +93,7 @@ export const FAMILIAR_ALCHEMY_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'sense_motive',
+        target: 'skill.sense_motive',
         value: 2,
         source: 'Vigilant Familiar',
         condition: {
@@ -123,7 +123,7 @@ export const FAMILIAR_ALCHEMY_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'familiar_perception',
+        target: 'special.familiar_perception',
         value: 4,
         source: "Familiar's Clarity",
       },
@@ -179,14 +179,14 @@ export const FAMILIAR_ALCHEMY_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'familiar_intelligence',
+        target: 'special.familiar_intelligence',
         value: 2,
         source: 'Familiar Focus',
       },
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'familiar_saves_vs_magic',
+        target: 'special.familiar_saves_vs_magic',
         value: 2,
         source: 'Familiar Focus',
       },
@@ -208,7 +208,7 @@ export const FAMILIAR_ALCHEMY_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'familiar_constitution',
+        target: 'special.familiar_constitution',
         value: 2,
         source: "Mauler's Endurance",
       },
@@ -328,7 +328,7 @@ export const FAMILIAR_ALCHEMY_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'alchemical_item_save_dc',
+        target: 'special.alchemical_item_save_dc',
         value: 2,
         source: 'Master Alchemist',
       },
@@ -418,7 +418,7 @@ export const FAMILIAR_ALCHEMY_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'alchemical_item_save_dc',
+        target: 'special.alchemical_item_save_dc',
         value: 1,
         source: 'Alchemical Affinity',
       },

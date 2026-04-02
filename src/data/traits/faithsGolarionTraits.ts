@@ -23,14 +23,17 @@ export const FAITHS_GOLARION_TRAITS: TraitDefinition[] = [
     source: "Disciple's Doctrine",
     category: 'faith',
     prerequisites: [
-      { type: 'special', description: 'Must be a hunter or have access to the animal aspect class feature' },
+      {
+        type: 'special',
+        description: 'Must be a hunter or have access to the animal aspect class feature',
+      },
       { type: 'special', description: 'Must choose a Shoanti quah' },
     ],
     effects: [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'animal_aspect',
+        target: 'special.animal_aspect',
         value: 0,
         source: 'Aspect of the Quah',
       },
@@ -67,7 +70,7 @@ export const FAITHS_GOLARION_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'any_roll',
+        target: 'special.any_roll',
         value: 1,
         source: 'Dogged',
         condition: {
@@ -216,7 +219,7 @@ export const FAITHS_GOLARION_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'spell_like_ability',
+        target: 'special.spell_like_ability',
         value: 1,
         source: 'Self-Sustaining',
       },

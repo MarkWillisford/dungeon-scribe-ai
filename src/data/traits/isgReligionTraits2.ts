@@ -29,7 +29,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 1,
         source: 'Empty Heart, Full Heart',
         condition: {
@@ -57,7 +57,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Agent of Chance',
         condition: {
@@ -85,7 +85,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Always Threatening',
         condition: {
@@ -113,7 +113,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 2,
         source: 'Steady Strength',
         condition: {
@@ -141,7 +141,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'combat.cmb',
+        target: 'cmb',
         value: 1,
         source: 'Serpentine Squeeze',
         condition: {
@@ -153,7 +153,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'combat.cmd',
+        target: 'cmd',
         value: 1,
         source: 'Serpentine Squeeze',
         condition: {
@@ -171,7 +171,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
     id: 'magics_might',
     name: "Magic's Might",
     description:
-      "Your natural affinity for magic, honed through devotion to Yuelral, the elven goddess of magic, allows you to affect even those who resist it. You gain a +1 trait bonus on caster level checks to overcome spell resistance.",
+      'Your natural affinity for magic, honed through devotion to Yuelral, the elven goddess of magic, allows you to affect even those who resist it. You gain a +1 trait bonus on caster level checks to overcome spell resistance.',
     shortDescription: '+1 on caster level checks to overcome spell resistance',
     source: 'Inner Sea Gods',
     category: 'religion',
@@ -181,7 +181,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 1,
         source: "Magic's Might",
         condition: {
@@ -283,7 +283,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 1,
         source: 'Affinity for the Elements',
         condition: {
@@ -389,7 +389,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 1,
         source: 'Flames of Hell',
         condition: {
@@ -445,7 +445,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Shaper of Reality',
         condition: {
@@ -463,7 +463,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
     id: 'worthless_pawn',
     name: 'Worthless Pawn',
     description:
-      'Your patron Great Old One views you as a disposable instrument, yet this bleak relationship grants a strange boon: you may prepare and cast spells whose alignment is in opposition to your patron\'s. Each time you cast such an opposing spell, you suffer 1 point of Wisdom damage per spell level. This trait does not grant access to spell trigger or completion items that oppose your patron\'s alignment.',
+      "Your patron Great Old One views you as a disposable instrument, yet this bleak relationship grants a strange boon: you may prepare and cast spells whose alignment is in opposition to your patron's. Each time you cast such an opposing spell, you suffer 1 point of Wisdom damage per spell level. This trait does not grant access to spell trigger or completion items that oppose your patron's alignment.",
     shortDescription: 'Cast opposing-alignment spells at cost of 1 Wis damage per spell level',
     source: 'Inner Sea Gods',
     category: 'religion',
@@ -473,7 +473,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Worthless Pawn',
         condition: {
@@ -501,13 +501,14 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 2,
         source: 'Propitiation',
         condition: {
           type: 'custom',
           params: {},
-          description: 'Daily chosen skill (Appraise/Bluff/Craft/Diplomacy/Intimidate/Knowledge local)',
+          description:
+            'Daily chosen skill (Appraise/Bluff/Craft/Diplomacy/Intimidate/Knowledge local)',
         },
       },
     ],
@@ -612,7 +613,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.TRAIT,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Know the Land',
         condition: {

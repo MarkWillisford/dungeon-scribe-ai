@@ -24,7 +24,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Child of Infamy',
       },
@@ -35,8 +35,9 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
     id: 'conspiracy_hunter',
     name: 'Conspiracy Hunter',
     description:
-      "You have long heard rumors of dark deeds afoot in Westcrown—missing shipments, unexplained disappearances, and shadowy criminal organizations—and you are determined to uncover the truth. Choose one of the following skills: Bluff, Diplomacy, Knowledge (local), Perception, Sense Motive, or Stealth. You gain a +1 trait bonus on that skill, and it is always a class skill for you.",
-    shortDescription: '+1 on one chosen skill (Bluff, Diplomacy, Knowledge [local], Perception, Sense Motive, or Stealth); class skill',
+      'You have long heard rumors of dark deeds afoot in Westcrown—missing shipments, unexplained disappearances, and shadowy criminal organizations—and you are determined to uncover the truth. Choose one of the following skills: Bluff, Diplomacy, Knowledge (local), Perception, Sense Motive, or Stealth. You gain a +1 trait bonus on that skill, and it is always a class skill for you.',
+    shortDescription:
+      '+1 on one chosen skill (Bluff, Diplomacy, Knowledge [local], Perception, Sense Motive, or Stealth); class skill',
     source: "Council of Thieves Player's Guide",
     category: 'campaign',
     subcategory: 'Council of Thieves',
@@ -46,19 +47,36 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
       {
         type: 'skill',
         label: 'Choose a skill',
-        options: ['Bluff', 'Diplomacy', 'Knowledge (local)', 'Perception', 'Sense Motive', 'Stealth'],
+        options: [
+          'Bluff',
+          'Diplomacy',
+          'Knowledge (local)',
+          'Perception',
+          'Sense Motive',
+          'Stealth',
+        ],
         affectsEffects: true,
         effectTargetTemplate: 'skill.{choice}',
       },
     ],
-    tags: ['bluff', 'diplomacy', 'knowledge', 'perception', 'sense_motive', 'stealth', 'westcrown', 'conspiracy'],
+    tags: [
+      'bluff',
+      'diplomacy',
+      'knowledge',
+      'perception',
+      'sense_motive',
+      'stealth',
+      'westcrown',
+      'conspiracy',
+    ],
   },
   {
     id: 'diabolist_raised',
     name: 'Diabolist Raised',
     description:
       "You were raised in devil-possessed Cheliax and have grown up with a thorough understanding of diabolism and infernal politics. You gain a +1 bonus on Bluff, Diplomacy, Intimidate, and Sense Motive checks made against Westcrown's nobility. You also gain a +1 bonus on all saving throws made against mind-affecting attacks from devils.",
-    shortDescription: '+1 Bluff, Diplomacy, Intimidate, Sense Motive vs Westcrown nobility; +1 saves vs devil mind-affecting',
+    shortDescription:
+      '+1 Bluff, Diplomacy, Intimidate, Sense Motive vs Westcrown nobility; +1 saves vs devil mind-affecting',
     source: "Council of Thieves Player's Guide",
     category: 'campaign',
     subcategory: 'Council of Thieves',
@@ -125,20 +143,29 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
         },
       },
     ],
-    tags: ['bluff', 'diplomacy', 'intimidate', 'sense_motive', 'devils', 'cheliax', 'westcrown', 'nobility', 'mind-affecting'],
+    tags: [
+      'bluff',
+      'diplomacy',
+      'intimidate',
+      'sense_motive',
+      'devils',
+      'cheliax',
+      'westcrown',
+      'nobility',
+      'mind-affecting',
+    ],
   },
   {
     id: 'infernal_bastard',
     name: 'Infernal Bastard',
     description:
       'You are a tiefling who has endured an exceptionally difficult life—perhaps an escaped slave, a family shame kept in hiding, or a homeless vagabond. Rather than the typical tiefling resistances, you gain a +2 bonus on all saving throws made against cold, electricity, and fire effects. In addition, rather than the typical tiefling darkness spell-like ability, you may choose any one 0-level spell that you can use at will as a spell-like ability.',
-    shortDescription: '+2 saves vs cold, electricity, and fire; choose one 0-level spell usable at will (replaces tiefling defaults)',
+    shortDescription:
+      '+2 saves vs cold, electricity, and fire; choose one 0-level spell usable at will (replaces tiefling defaults)',
     source: "Council of Thieves Player's Guide",
     category: 'campaign',
     subcategory: 'Council of Thieves',
-    prerequisites: [
-      { type: 'race', raceName: 'Tiefling' },
-    ],
+    prerequisites: [{ type: 'race', raceName: 'Tiefling' }],
     effects: [
       {
         type: 'bonus',
@@ -155,7 +182,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Infernal Bastard',
       },
@@ -176,7 +203,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Shadow Child',
       },
@@ -187,8 +214,9 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
     id: 'the_pathfinders_exile',
     name: "The Pathfinder's Exile",
     description:
-      "You have a secret contact in the Pathfinder Society and have been tasked with investigating the exiled Pathfinder lodge of Delvehaven in Westcrown and reporting your findings to the Grand Lodge in Absalom. You begin play with a functional wayfinder (value 500 gp) that you have committed to repaying. The wayfinder grants a +2 circumstance bonus on Survival checks to avoid becoming lost, and can emit light (as the light spell, CL 5th) as a standard action.",
-    shortDescription: 'Begin with a wayfinder (500 gp debt); +2 Survival vs getting lost; emit light at will',
+      'You have a secret contact in the Pathfinder Society and have been tasked with investigating the exiled Pathfinder lodge of Delvehaven in Westcrown and reporting your findings to the Grand Lodge in Absalom. You begin play with a functional wayfinder (value 500 gp) that you have committed to repaying. The wayfinder grants a +2 circumstance bonus on Survival checks to avoid becoming lost, and can emit light (as the light spell, CL 5th) as a standard action.',
+    shortDescription:
+      'Begin with a wayfinder (500 gp debt); +2 Survival vs getting lost; emit light at will',
     source: "Council of Thieves Player's Guide",
     category: 'campaign',
     subcategory: 'Council of Thieves',
@@ -209,7 +237,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: "The Pathfinder's Exile",
       },
@@ -220,7 +248,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
     id: 'westcrown_firebrand',
     name: 'Westcrown Firebrand',
     description:
-      'You are from Westcrown and have grown frustrated with the city\'s tyranny and oppression, and you seek to join a resistance movement against the corrupt rulers. You gain a +1 trait bonus on Initiative checks. In addition, when you act during a surprise round, you gain a +1 trait bonus on all attack rolls.',
+      "You are from Westcrown and have grown frustrated with the city's tyranny and oppression, and you seek to join a resistance movement against the corrupt rulers. You gain a +1 trait bonus on Initiative checks. In addition, when you act during a surprise round, you gain a +1 trait bonus on all attack rolls.",
     shortDescription: '+1 Initiative; +1 attack rolls during a surprise round',
     source: "Council of Thieves Player's Guide",
     category: 'campaign',
@@ -237,7 +265,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Westcrown Firebrand',
         condition: {

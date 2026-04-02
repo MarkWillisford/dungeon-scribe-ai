@@ -67,7 +67,7 @@ export const MONSTER_HUNTER_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'combat.damage',
+        target: 'damage.melee',
         value: 2,
         source: 'Creature Focus',
         condition: {

@@ -230,7 +230,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Poisonous Slayer',
         condition: {
@@ -494,7 +494,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'concentration',
+        target: 'spell.concentration',
         value: 4,
         source: 'Shadow Caster',
         condition: {
@@ -544,7 +544,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Corpse Hunter',
         condition: { type: 'custom', params: {}, description: 'Against undead' },
@@ -624,7 +624,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Dragonslayer',
         condition: {
@@ -725,7 +725,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Deck Fighter',
         condition: {
@@ -830,7 +830,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'caster_level',
+        target: 'spell.caster_level',
         value: 1,
         source: 'Gifted Medium',
         condition: {
@@ -1222,7 +1222,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Opportunistic',
         condition: {

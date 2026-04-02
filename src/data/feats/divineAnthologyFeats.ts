@@ -16,7 +16,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         bonusType: BonusType.UNTYPED,
         target: 'initiative',
         value: 'bravery_bonus',
@@ -38,7 +38,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'bab', minimum: 3 }],
     effects: [
       {
-        type: 'combat_bonus',
+        type: 'bonus',
         bonusType: BonusType.COMPETENCE,
         target: 'CMD.vs_acrobatics_through_threatened',
         value: 2,
@@ -70,7 +70,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
         target: 'deific_obedience.effective_hit_dice',
         value: 2,
@@ -95,7 +95,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'insight_bonus',
+        type: 'bonus',
         bonusType: BonusType.INSIGHT,
         target: 'd20_roll.deity_approved_action',
         value: 'WIS_modifier',
@@ -171,9 +171,9 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'spell_like_ability',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'domain_spell_1st_level',
+        target: 'special.domain_spell_1st_level',
         value: 1,
         source: 'Minor Miracle',
         condition: {
@@ -214,7 +214,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
         target: 'incoming_divine_spell.caster_level',
         value: 2,
@@ -227,9 +227,9 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
         },
       },
       {
-        type: 'healing_bonus',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'hp_restored_per_healing_die',
+        target: 'healing.hp_per_die',
         value: 1,
         source: 'Reward of the Faithful',
         condition: {
@@ -258,14 +258,14 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'escape_artist',
+        target: 'skill.escape_artist',
         value: 'bravery_bonus',
         source: 'Unbound Bravery',
       },
       {
-        type: 'combat_bonus',
+        type: 'bonus',
         bonusType: BonusType.UNTYPED,
         target: 'CMB.escape_grapple',
         value: 'bravery_bonus',
@@ -289,16 +289,16 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'skill_bonus',
+        type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'intimidate',
+        target: 'skill.intimidate',
         value: 'bravery_bonus',
         source: 'Undaunted Bravery',
       },
       {
-        type: 'combat_bonus',
+        type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'intimidate_dc_vs_self',
+        target: 'special.intimidate_dc_vs_self',
         value: 'bravery_bonus',
         source: 'Undaunted Bravery',
       },

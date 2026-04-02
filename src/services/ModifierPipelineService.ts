@@ -177,7 +177,7 @@ export class ModifierPipelineService {
         let target = effect.target;
         let source = effect.source;
         for (const [key, val] of Object.entries(charFeat.choices)) {
-          target = target.replace(`{${key}}`, val);
+          target = target.replace(`{${key}}`, val) as typeof effect.target;
           source = source.replace(`{${key}}`, val);
         }
 

@@ -45,7 +45,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         bonusType: BonusType.INSIGHT,
         source: 'Cunning Killer',
@@ -58,7 +58,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
       },
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         bonusType: BonusType.INSIGHT,
         source: 'Cunning Killer',
@@ -151,7 +151,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'stat_replacement',
+        type: 'ability_substitution',
         target: 'skill.climb',
         value: 0,
         bonusType: BonusType.UNTYPED,
@@ -163,7 +163,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
         },
       },
       {
-        type: 'stat_replacement',
+        type: 'ability_substitution',
         target: 'skill.swim',
         value: 0,
         bonusType: BonusType.UNTYPED,
@@ -196,7 +196,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'meditation_bonus',
+        target: 'special.meditation_bonus',
         value: 2,
         bonusType: BonusType.INSIGHT,
         source: 'Greater Meditation Master',
@@ -497,7 +497,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'special',
-        target: 'enemy',
+        target: 'special.enemy',
         value: 0,
         bonusType: BonusType.UNTYPED,
         source: 'Venomous Stare',
