@@ -517,7 +517,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'cmb_overrun',
+        target: 'cmb.overrun',
         value: 4,
         bonusType: BonusType.UNTYPED,
         condition: {
@@ -591,7 +591,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack_rolls',
+        target: 'attack.all',
         value: 2,
         bonusType: BonusType.UNTYPED,
         condition: {

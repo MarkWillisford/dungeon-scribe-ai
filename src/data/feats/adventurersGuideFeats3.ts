@@ -19,9 +19,9 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'spirit_rebuke_ability',
+        target: 'special.spirit_rebuke_ability',
         value: 0,
         source: 'Spirit Rebuke',
         condition: {
@@ -50,9 +50,9 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'perception_invisible_spirits',
+        target: 'special.perception_invisible_spirits',
         value: 0,
         source: 'Spirit Sight',
         condition: {
@@ -80,7 +80,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throw_electricity',
+        target: 'save.reflex',
         value: 2,
         source: 'Storm-Lashed',
         condition: {
@@ -114,7 +114,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.CIRCUMSTANCE,
-        target: 'interrogation_teamwork',
+        target: 'special.interrogation_teamwork',
         value: 5,
         source: 'Tag-Team Interrogation',
         condition: {
@@ -142,9 +142,9 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     prerequisites: [{ type: 'feat', featId: 'animal_affinity' }],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'flanking_larger_opponents',
+        target: 'special.flanking_larger_opponents',
         value: 0,
         source: 'Tribal Hunter',
         condition: {
@@ -169,9 +169,9 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     prerequisites: [],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'tribal_scar_benefit',
+        target: 'special.tribal_scar_benefit',
         value: 0,
         source: 'Tribal Scars',
         condition: {
@@ -203,14 +203,14 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'disguise',
+        target: 'skill.disguise',
         value: 2,
         source: 'Twilight Tattoo',
       },
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'sleight_of_hand_conceal',
+        target: 'special.sleight_of_hand_conceal',
         value: 2,
         source: 'Twilight Tattoo',
         condition: {
@@ -222,7 +222,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throw_will_scrying',
+        target: 'save.all',
         value: 2,
         source: 'Twilight Tattoo',
         condition: {
@@ -254,9 +254,9 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'bluff_feint_ability_score',
+        target: 'special.bluff_feint_ability_score',
         value: 0,
         source: 'Unblinking Flame Feint',
         condition: {
@@ -292,7 +292,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'stunning_fist_dc',
+        target: 'special.stunning_fist_dc',
         value: 2,
         source: 'Unblinking Flame Fist',
         condition: {
@@ -323,9 +323,9 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'death_threshold_constitution',
+        target: 'special.death_threshold_constitution',
         value: 4,
         source: 'Unbreakable',
         condition: {
@@ -359,9 +359,9 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'thrown_weapon_range_increment',
+        target: 'special.thrown_weapon_range_increment',
         value: 2,
         source: 'Unfolding Wind Strike',
         condition: {
@@ -395,9 +395,9 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'full_attack_with_move_thrown',
+        target: 'special.full_attack_with_move_thrown',
         value: 0,
         source: 'Unfolding Wind Rush',
         condition: {
@@ -432,7 +432,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'strength_check_break_object',
+        target: 'special.strength_check_break_object',
         value: 4,
         source: 'Untwisting Iron Strength',
         condition: {
@@ -442,9 +442,9 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
         },
       },
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'hardness_penetration',
+        target: 'special.hardness_penetration',
         value: 0,
         source: 'Untwisting Iron Strength',
         condition: {
@@ -477,9 +477,9 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'damage_reduction_adamantine',
+        target: 'special.damage_reduction_adamantine',
         value: 0,
         source: 'Untwisting Iron Skin',
         condition: {

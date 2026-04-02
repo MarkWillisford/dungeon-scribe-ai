@@ -100,7 +100,7 @@ export const ACG_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'sneak_attack.dice',
+        target: 'sneak_attack',
         value: 1,
         source: 'Accomplished Sneak Attacker',
       },

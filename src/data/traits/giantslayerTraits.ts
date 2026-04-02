@@ -7,8 +7,9 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     id: 'artifact_hunter_gs',
     name: 'Artifact Hunter',
     description:
-      'You possess extensive knowledge of legendary magic items and artifacts, gained through years of dedicated research into mythical relics and their histories. You gain a +1 trait bonus on Spellcraft checks to identify the properties of magic items and a +1 trait bonus on Use Magic Device checks. One of these two skills (your choice) is always a class skill for you. When you first encounter an artifact, there is a 50% base chance that you recognize it, +1% per character level. If you successfully recognize an artifact, you learn the artifact\'s name, origin, and something of that artifact\'s powers, abilities, or dangers, as determined by the GM.',
-    shortDescription: '+1 Spellcraft (ID items), Use Magic Device; one class skill; 50%+1%/level chance to recognize artifacts',
+      "You possess extensive knowledge of legendary magic items and artifacts, gained through years of dedicated research into mythical relics and their histories. You gain a +1 trait bonus on Spellcraft checks to identify the properties of magic items and a +1 trait bonus on Use Magic Device checks. One of these two skills (your choice) is always a class skill for you. When you first encounter an artifact, there is a 50% base chance that you recognize it, +1% per character level. If you successfully recognize an artifact, you learn the artifact's name, origin, and something of that artifact's powers, abilities, or dangers, as determined by the GM.",
+    shortDescription:
+      '+1 Spellcraft (ID items), Use Magic Device; one class skill; 50%+1%/level chance to recognize artifacts',
     source: "Giantslayer Player's Guide",
     category: 'campaign',
     subcategory: 'Giantslayer',
@@ -36,7 +37,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Artifact Hunter',
       },
@@ -85,8 +86,9 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     id: 'dwarf_trained',
     name: 'Dwarf-Trained',
     description:
-      "You were trained by dwarves and have learned combat tactics developed over centuries to fight giants and orcs. You gain a +2 dodge bonus to AC against creatures with the giant subtype (this bonus does not stack with the dwarf or gnome defensive training racial trait) and a +1 trait bonus on attack rolls against creatures with the orc subtype (this bonus does not stack with the dwarf hatred racial trait). You cannot be a dwarf or gnome to select this trait.",
-    shortDescription: '+2 dodge AC vs giants; +1 attack vs orcs (no stack with dwarf/gnome racial bonuses)',
+      'You were trained by dwarves and have learned combat tactics developed over centuries to fight giants and orcs. You gain a +2 dodge bonus to AC against creatures with the giant subtype (this bonus does not stack with the dwarf or gnome defensive training racial trait) and a +1 trait bonus on attack rolls against creatures with the orc subtype (this bonus does not stack with the dwarf hatred racial trait). You cannot be a dwarf or gnome to select this trait.',
+    shortDescription:
+      '+2 dodge AC vs giants; +1 attack vs orcs (no stack with dwarf/gnome racial bonuses)',
     source: "Giantslayer Player's Guide",
     category: 'campaign',
     subcategory: 'Giantslayer',
@@ -107,7 +109,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Dwarf-Trained',
         condition: {
@@ -123,8 +125,9 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     id: 'giant_blooded',
     name: 'Giant-Blooded',
     description:
-      "You have giant ancestry somewhere in your bloodline, manifesting as increased size relative to others of your race and minor physical features such as distinctive hair color, skin tone, or oversized hands. When you wield a weapon that is larger than your size, the penalty on attack rolls for using an inappropriately sized weapon is reduced by half. You also gain a +2 trait bonus to your Combat Maneuver Defense against awesome blow combat maneuvers. If you are a dwarf, your stability racial trait applies to awesome blow combat maneuvers as well.",
-    shortDescription: 'Half penalty for oversized weapons; +2 CMD vs awesome blow; dwarves apply stability to awesome blow',
+      'You have giant ancestry somewhere in your bloodline, manifesting as increased size relative to others of your race and minor physical features such as distinctive hair color, skin tone, or oversized hands. When you wield a weapon that is larger than your size, the penalty on attack rolls for using an inappropriately sized weapon is reduced by half. You also gain a +2 trait bonus to your Combat Maneuver Defense against awesome blow combat maneuvers. If you are a dwarf, your stability racial trait applies to awesome blow combat maneuvers as well.',
+    shortDescription:
+      'Half penalty for oversized weapons; +2 CMD vs awesome blow; dwarves apply stability to awesome blow',
     source: "Giantslayer Player's Guide",
     category: 'campaign',
     subcategory: 'Giantslayer',
@@ -145,7 +148,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Giant-Blooded',
       },
@@ -166,7 +169,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Giantslayer Scion',
       },
@@ -177,7 +180,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     id: 'orphaned_by_giants',
     name: 'Orphaned by Giants',
     description:
-      'Your parents were killed by giants during a raid on your peaceful mountain settlement. You became an orphan and have dedicated your life to avenging your family\'s deaths. You gain a +1 trait bonus on attack rolls against creatures with the giant subtype and a +2 trait bonus on rolls to confirm critical hits against creatures with the giant subtype.',
+      "Your parents were killed by giants during a raid on your peaceful mountain settlement. You became an orphan and have dedicated your life to avenging your family's deaths. You gain a +1 trait bonus on attack rolls against creatures with the giant subtype and a +2 trait bonus on rolls to confirm critical hits against creatures with the giant subtype.",
     shortDescription: '+1 attack vs giants; +2 to confirm critical hits vs giants',
     source: "Giantslayer Player's Guide",
     category: 'campaign',
@@ -187,7 +190,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Orphaned by Giants',
         condition: {
@@ -199,7 +202,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         source: 'Orphaned by Giants',
         condition: {
@@ -215,8 +218,9 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     id: 'roll_with_it',
     name: 'Roll With It',
     description:
-      "You have been trained in defensive techniques against giant combatants and know how to roll with their powerful strikes to reduce damage. You gain a +1 trait bonus on Reflex saving throws. Once per day, when a creature with the giant subtype successfully confirms a critical hit against you with a weapon or a slam attack (not a spell or special ability), you can roll with the attack and take normal damage from the blow as if the critical had not been confirmed. You cannot use this ability if you are denied your Dexterity bonus to AC. If you are a dwarf or gnome, you may use this ability twice per day.",
-    shortDescription: '+1 Reflex; 1/day (2/day for dwarves/gnomes) negate a confirmed crit from a giant',
+      'You have been trained in defensive techniques against giant combatants and know how to roll with their powerful strikes to reduce damage. You gain a +1 trait bonus on Reflex saving throws. Once per day, when a creature with the giant subtype successfully confirms a critical hit against you with a weapon or a slam attack (not a spell or special ability), you can roll with the attack and take normal damage from the blow as if the critical had not been confirmed. You cannot use this ability if you are denied your Dexterity bonus to AC. If you are a dwarf or gnome, you may use this ability twice per day.',
+    shortDescription:
+      '+1 Reflex; 1/day (2/day for dwarves/gnomes) negate a confirmed crit from a giant',
     source: "Giantslayer Player's Guide",
     category: 'campaign',
     subcategory: 'Giantslayer',
@@ -232,7 +236,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Roll With It',
       },
@@ -243,8 +247,9 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     id: 'student_of_giantkind',
     name: 'Student of Giantkind',
     description:
-      "You have developed considerable expertise regarding giant races through dedicated study of their history and societies, gaining insight into their thinking and combat abilities. You gain a +1 trait bonus on Diplomacy checks against creatures with the giant subtype and a +1 trait bonus on Knowledge (local) checks regarding creatures with the giant subtype. One of these two skills (your choice) is always a class skill for you. You also learn the Giant language at no cost toward your language allotments.",
-    shortDescription: '+1 Diplomacy and Knowledge (local) vs giants; one class skill; gain Giant language',
+      'You have developed considerable expertise regarding giant races through dedicated study of their history and societies, gaining insight into their thinking and combat abilities. You gain a +1 trait bonus on Diplomacy checks against creatures with the giant subtype and a +1 trait bonus on Knowledge (local) checks regarding creatures with the giant subtype. One of these two skills (your choice) is always a class skill for you. You also learn the Giant language at no cost toward your language allotments.',
+    shortDescription:
+      '+1 Diplomacy and Knowledge (local) vs giants; one class skill; gain Giant language',
     source: "Giantslayer Player's Guide",
     category: 'campaign',
     subcategory: 'Giantslayer',
@@ -277,7 +282,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Student of Giantkind',
       },
@@ -288,7 +293,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     id: 'trunau_native',
     name: 'Trunau Native',
     description:
-      "You were born and raised in Trunau, a human settlement within the orc-dominated Hold of Belkzen. You have taken the Standing Vow to defend the town against all threats and to resist capture by orcs. You begin play with a masterwork dagger called a hopeknife, typically worn on a chain beneath clothing. You also gain a +1 trait bonus on Will saving throws.",
+      'You were born and raised in Trunau, a human settlement within the orc-dominated Hold of Belkzen. You have taken the Standing Vow to defend the town against all threats and to resist capture by orcs. You begin play with a masterwork dagger called a hopeknife, typically worn on a chain beneath clothing. You also gain a +1 trait bonus on Will saving throws.',
     shortDescription: '+1 Will saves; begin play with a masterwork hopeknife dagger',
     source: "Giantslayer Player's Guide",
     category: 'campaign',
@@ -305,7 +310,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Trunau Native',
       },
@@ -316,8 +321,9 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     id: 'vexing_defender',
     name: 'Vexing Defender',
     description:
-      'You specialize in combat against larger opponents and excel at harassing them from multiple angles. You gain a +1 trait bonus on Acrobatics checks, and Acrobatics is always a class skill for you. You also gain a +4 trait bonus on Acrobatics checks to move through an enemy\'s space without provoking an attack of opportunity, provided that enemy is larger than you.',
-    shortDescription: '+1 Acrobatics; class skill; +4 Acrobatics to move through larger enemy space without AoO',
+      "You specialize in combat against larger opponents and excel at harassing them from multiple angles. You gain a +1 trait bonus on Acrobatics checks, and Acrobatics is always a class skill for you. You also gain a +4 trait bonus on Acrobatics checks to move through an enemy's space without provoking an attack of opportunity, provided that enemy is larger than you.",
+    shortDescription:
+      '+1 Acrobatics; class skill; +4 Acrobatics to move through larger enemy space without AoO',
     source: "Giantslayer Player's Guide",
     category: 'campaign',
     subcategory: 'Giantslayer',
@@ -339,7 +345,8 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: {},
-          description: 'To move through the space of an enemy larger than you without provoking an AoO',
+          description:
+            'To move through the space of an enemy larger than you without provoking an AoO',
         },
       },
     ],

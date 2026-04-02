@@ -209,7 +209,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saves.all',
+        target: 'save.all',
         value: 2,
         source: 'Vim and Vigor',
         condition: {

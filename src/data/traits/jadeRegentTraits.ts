@@ -8,7 +8,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
     id: 'best_friend',
     name: 'Best Friend',
     description:
-      "You have grown up alongside one of two NPCs — Ameiko or Sandru — and aspire to follow their adventurous path. If your best friend is Ameiko, you gain a +2 trait bonus on Diplomacy checks and Diplomacy becomes a class skill for you. If your best friend is Sandru, you gain a +2 trait bonus on Bluff checks and Bluff becomes a class skill for you. Regardless of your choice, you gain a +1 trait bonus on all attack rolls against enemies threatening your best friend.",
+      'You have grown up alongside one of two NPCs — Ameiko or Sandru — and aspire to follow their adventurous path. If your best friend is Ameiko, you gain a +2 trait bonus on Diplomacy checks and Diplomacy becomes a class skill for you. If your best friend is Sandru, you gain a +2 trait bonus on Bluff checks and Bluff becomes a class skill for you. Regardless of your choice, you gain a +1 trait bonus on all attack rolls against enemies threatening your best friend.',
     shortDescription:
       '+2 Diplomacy (Ameiko) or Bluff (Sandru); chosen skill becomes class skill; +1 attack vs enemies threatening your best friend.',
     source: "Jade Regent Player's Guide",
@@ -19,7 +19,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Best Friend',
         condition: {
@@ -77,7 +77,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Childhood Crush',
         condition: {
@@ -113,7 +113,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Foster Child',
         condition: {
@@ -166,7 +166,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Friend of the Family',
         condition: {
@@ -183,7 +183,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
     id: 'hero_worship',
     name: 'Hero Worship',
     description:
-      "You possess an intense admiration for either Ameiko or Shalelu, viewing one of them as a hero worthy of emulation. If you chose Ameiko as your hero, you gain a +2 trait bonus on concentration checks. If you chose Shalelu as your hero, you gain a +1 trait bonus to AC against attacks of opportunity. Regardless of your choice, you also gain a +1 trait bonus on all attack rolls against foes that threaten your hero.",
+      'You possess an intense admiration for either Ameiko or Shalelu, viewing one of them as a hero worthy of emulation. If you chose Ameiko as your hero, you gain a +2 trait bonus on concentration checks. If you chose Shalelu as your hero, you gain a +1 trait bonus to AC against attacks of opportunity. Regardless of your choice, you also gain a +1 trait bonus on all attack rolls against foes that threaten your hero.',
     shortDescription:
       '+2 concentration (Ameiko) or +1 AC vs AoO (Shalelu); +1 attack vs enemies threatening your hero.',
     source: "Jade Regent Player's Guide",
@@ -194,7 +194,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Hero Worship',
         condition: {
@@ -259,7 +259,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Student Survivalist',
         condition: {
@@ -276,7 +276,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
     id: 'younger_sibling',
     name: 'Younger Sibling',
     description:
-      "You are the younger sibling of an established Sandpoint NPC — Ameiko, Sandru, or Shalelu. You may be a different race than your chosen sibling through adoption. If your sibling is Ameiko, you gain a +1 trait bonus on Will saves. If your sibling is Sandru, you gain a +1 trait bonus on Fortitude saves. If your sibling is Shalelu, you gain a +1 trait bonus on Reflex saves. Regardless of your choice, you gain a +1 trait bonus on all attack rolls against foes threatening your older sibling.",
+      'You are the younger sibling of an established Sandpoint NPC — Ameiko, Sandru, or Shalelu. You may be a different race than your chosen sibling through adoption. If your sibling is Ameiko, you gain a +1 trait bonus on Will saves. If your sibling is Sandru, you gain a +1 trait bonus on Fortitude saves. If your sibling is Shalelu, you gain a +1 trait bonus on Reflex saves. Regardless of your choice, you gain a +1 trait bonus on all attack rolls against foes threatening your older sibling.',
     shortDescription:
       '+1 Will (Ameiko), Fortitude (Sandru), or Reflex (Shalelu); +1 attack vs enemies threatening your sibling.',
     source: "Jade Regent Player's Guide",
@@ -287,7 +287,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Younger Sibling',
         condition: {
@@ -305,7 +305,16 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
         affectsEffects: false,
       },
     ],
-    tags: ['campaign', 'jade-regent', 'npc', 'saving-throws', 'will', 'fortitude', 'reflex', 'attack'],
+    tags: [
+      'campaign',
+      'jade-regent',
+      'npc',
+      'saving-throws',
+      'will',
+      'fortitude',
+      'reflex',
+      'attack',
+    ],
   },
 ];
 

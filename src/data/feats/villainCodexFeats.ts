@@ -19,7 +19,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'cmb_drag',
+        target: 'cmb.drag',
         value: 2,
         condition: {
           type: 'custom',
@@ -46,7 +46,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'acrobatics_aoo',
+        target: 'special.acrobatics_aoo',
         value: -1,
         condition: {
           type: 'custom',
@@ -78,7 +78,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: -2,
         condition: {
           type: 'custom',
@@ -103,9 +103,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'skill', skillId: 'craft', ranks: 1 }],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'crafting_cost',
+        target: 'special.crafting_cost',
         value: 0,
         condition: {
           type: 'custom',
@@ -131,7 +131,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'skill_points_per_level',
+        target: 'skill.points_per_level',
         value: 1,
         source: 'Cunning',
       },
@@ -154,9 +154,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'toxic_uses_per_day',
+        target: 'special.toxic_uses_per_day',
         value: 1,
         source: 'Deadly Kiss',
       },
@@ -263,7 +263,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
         target: 'critical_threat_range',
         value: 0,
@@ -310,7 +310,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'cmb_drag',
+        target: 'cmb.drag',
         value: 2,
         condition: {
           type: 'custom',
@@ -320,9 +320,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
         source: 'Improved Balor Whip',
       },
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'free_attack',
+        target: 'special.free_attack',
         value: 0,
         condition: {
           type: 'custom',
@@ -382,9 +382,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'derring_do_deed',
+        target: 'special.derring_do_deed',
         value: 0,
         condition: {
           type: 'custom',
@@ -425,9 +425,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
         source: "Musketeer's Dodge",
       },
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'movement',
+        target: 'speed.base',
         value: 0,
         condition: {
           type: 'custom',
@@ -456,9 +456,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'pistol_whip_deed',
+        target: 'special.pistol_whip_deed',
         value: 0,
         condition: {
           type: 'custom',
@@ -498,9 +498,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
         source: "Musketeer's Sidestep",
       },
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'movement',
+        target: 'speed.base',
         value: 0,
         condition: {
           type: 'custom',
@@ -530,7 +530,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         condition: {
           type: 'custom',
@@ -542,7 +542,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throw',
+        target: 'save.all',
         value: -1,
         condition: {
           type: 'custom',
@@ -566,9 +566,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'ability_score', ability: 'CON', minimum: 13 }],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'disease_ability_damage',
+        target: 'special.disease_ability_damage',
         value: 0,
         condition: {
           type: 'custom',
@@ -621,9 +621,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     prerequisites: [{ type: 'proficiency', proficiency: 'Exotic Weapon Proficiency (firearms)' }],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'reload_firearm',
+        target: 'special.reload_firearm',
         value: 0,
         condition: {
           type: 'custom',
@@ -651,9 +651,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'sheathe_weapon',
+        target: 'special.sheathe_weapon',
         value: 0,
         condition: {
           type: 'custom',
@@ -679,7 +679,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'damage',
+        target: 'damage.melee',
         value: '1d6',
         condition: {
           type: 'custom',
@@ -721,9 +721,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'failed_assassination',
+        target: 'special.failed_assassination',
         value: 0,
         condition: {
           type: 'custom',
@@ -755,9 +755,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.ARMOR,
-        target: 'target_armor_bonus',
+        target: 'special.target_armor_bonus',
         value: -1,
         condition: {
           type: 'custom',
@@ -789,9 +789,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_action',
+        target: 'attack.melee',
         value: 0,
         condition: {
           type: 'custom',
@@ -824,9 +824,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'full_round_action',
+        target: 'special.full_round_action',
         value: 0,
         condition: {
           type: 'custom',
@@ -857,9 +857,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'two_weapon_fighting',
+        target: 'special.two_weapon_fighting',
         value: 0,
         condition: {
           type: 'custom',
@@ -889,9 +889,9 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'vishkanya_toxic',
+        target: 'special.vishkanya_toxic',
         value: 0,
         condition: {
           type: 'custom',
@@ -904,7 +904,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'toxic_uses_per_day',
+        target: 'special.toxic_uses_per_day',
         value: 1,
         source: 'Vishkanya Perfume',
       },

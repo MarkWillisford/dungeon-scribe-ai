@@ -61,7 +61,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'fire_retribution_damage',
+        target: 'special.fire_retribution_damage',
         value: 0,
         condition: {
           type: 'custom',
@@ -122,7 +122,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'natural_attack_slam',
+        target: 'special.natural_attack_slam',
         value: 0,
         condition: {
           type: 'custom',
@@ -295,7 +295,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'carrying_capacity_strength',
+        target: 'special.carrying_capacity_strength',
         value: 4,
         condition: {
           type: 'custom',

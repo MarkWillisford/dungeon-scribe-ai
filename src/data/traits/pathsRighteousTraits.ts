@@ -198,7 +198,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Strength of Submission',
         condition: {
@@ -210,7 +210,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Strength of Submission',
         condition: {
@@ -329,7 +329,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     id: 'andolettas_consolation',
     name: "Andoletta's Consolation",
     description:
-      "A follower or agent of Andoletta once offered you unconventional comfort during a time of personal loss, and the memory of that kindness fortifies you against emotional manipulation. You gain a +2 trait bonus on saving throws against emotion and fear effects. If you have immunity to fear, you instead gain a +4 trait bonus on saves against emotion effects.",
+      'A follower or agent of Andoletta once offered you unconventional comfort during a time of personal loss, and the memory of that kindness fortifies you against emotional manipulation. You gain a +2 trait bonus on saving throws against emotion and fear effects. If you have immunity to fear, you instead gain a +4 trait bonus on saves against emotion effects.',
     shortDescription: '+2 saves vs emotion and fear; +4 vs emotion if immune to fear',
     source: 'Divine Anthology',
     category: 'religion',
@@ -351,7 +351,8 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     name: 'Enemy of Delusion',
     description:
       "You once witnessed injustice perpetrated by someone acting under delusion or ignorance, and Andoletta's teachings guide you to grant clarity to those similarly afflicted. Once per day, when you confirm a critical hit, successfully use a smite attack, or use lay on hands against a creature suffering from a charm or compulsion effect, you may invoke Andoletta to grant the creature clarity. If the original effect allowed a saving throw, the creature may attempt a new saving throw against it; success ends the effect immediately.",
-    shortDescription: 'Once/day grant a new save vs charm/compulsion on crit, smite, or lay on hands',
+    shortDescription:
+      'Once/day grant a new save vs charm/compulsion on crit, smite, or lay on hands',
     source: 'Divine Anthology',
     category: 'religion',
     subcategory: 'Andoletta',
@@ -524,8 +525,9 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     id: 'folgrits_bounty',
     name: "Folgrit's Bounty",
     description:
-      "Your training in sacred hearth-keeping and culinary preparation grants you a +1 trait bonus on Profession (cook) checks. You may prepare a nourishing meal for up to eight people with 1 hour of work (costing 20 gp). Each person who consumes a portion (taking 10 minutes) within one day gains a +1 morale bonus applicable to any single skill check or attack roll of their choice within the next 8 hours; the bonus must be designated before the roll. A creature cannot benefit from another such meal for 24 hours after receiving this benefit.",
-    shortDescription: '+1 Profession (cook); cook morale meals granting +1 to one roll within 8 hours',
+      'Your training in sacred hearth-keeping and culinary preparation grants you a +1 trait bonus on Profession (cook) checks. You may prepare a nourishing meal for up to eight people with 1 hour of work (costing 20 gp). Each person who consumes a portion (taking 10 minutes) within one day gains a +1 morale bonus applicable to any single skill check or attack roll of their choice within the next 8 hours; the bonus must be designated before the roll. A creature cannot benefit from another such meal for 24 hours after receiving this benefit.',
+    shortDescription:
+      '+1 Profession (cook); cook morale meals granting +1 to one roll within 8 hours',
     source: 'Divine Anthology',
     category: 'religion',
     subcategory: 'Folgrit',
@@ -569,8 +571,9 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     id: 'oathkeepers_vow',
     name: "Oathkeeper's Vow",
     description:
-      "Your training in the sacred art of oath-making under Kols has expanded your arsenal as a paladin. The following spells are added to your paladin spell list: command (1st), forbid action (1st), suggestion restricted to fulfilling prior promises (2nd), lesser geas (3rd), and geas/quest (4th).",
-    shortDescription: 'Adds command, forbid action, suggestion, lesser geas, geas/quest to paladin list',
+      'Your training in the sacred art of oath-making under Kols has expanded your arsenal as a paladin. The following spells are added to your paladin spell list: command (1st), forbid action (1st), suggestion restricted to fulfilling prior promises (2nd), lesser geas (3rd), and geas/quest (4th).',
+    shortDescription:
+      'Adds command, forbid action, suggestion, lesser geas, geas/quest to paladin list',
     source: 'Divine Anthology',
     category: 'religion',
     subcategory: 'Kols',
@@ -593,7 +596,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     id: 'relentless_duty',
     name: 'Relentless Duty',
     description:
-      "Your upbringing instilled a commitment to keeping promises. Once per day, you may take 10 on a skill check attempted as part of fulfilling a prior promise, even if you are distracted or in combat.",
+      'Your upbringing instilled a commitment to keeping promises. Once per day, you may take 10 on a skill check attempted as part of fulfilling a prior promise, even if you are distracted or in combat.',
     shortDescription: 'Once/day take 10 on a skill check made to fulfill a promise, even in combat',
     source: 'Divine Anthology',
     category: 'religion',
@@ -623,7 +626,8 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     name: 'Avowed Inspiration',
     description:
       "You channel divine inspiration similar to Ragathiel's focused wrath. Once per day, when you attack an opponent who damaged you earlier in the same battle, you may use a move action to inspire your visible allies. Each ally within 30 feet who can see you gains a +2 morale bonus to their next attack roll.",
-    shortDescription: 'Once/day move action: allies in 30 ft gain +2 morale on next attack vs foe that hurt you',
+    shortDescription:
+      'Once/day move action: allies in 30 ft gain +2 morale on next attack vs foe that hurt you',
     source: 'Divine Anthology',
     category: 'religion',
     subcategory: 'Ragathiel',
@@ -632,7 +636,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         source: 'Avowed Inspiration',
         condition: {
@@ -677,8 +681,9 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     id: 'ancestors_blade',
     name: "Ancestor's Blade",
     description:
-      "You have trained with a weapon inherited from a venerable ancestor who revered Shizuru. At character creation you receive an heirloom masterwork weapon worth up to 400 gp. You also gain a +1 trait bonus on attack rolls with weapons of that type when you smite evil.",
-    shortDescription: 'Start with heirloom masterwork weapon (up to 400 gp); +1 attack with that weapon type when smiting evil',
+      'You have trained with a weapon inherited from a venerable ancestor who revered Shizuru. At character creation you receive an heirloom masterwork weapon worth up to 400 gp. You also gain a +1 trait bonus on attack rolls with weapons of that type when you smite evil.',
+    shortDescription:
+      'Start with heirloom masterwork weapon (up to 400 gp); +1 attack with that weapon type when smiting evil',
     source: 'Divine Anthology',
     category: 'religion',
     subcategory: 'Shizuru',
@@ -703,7 +708,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     id: 'pristine_reputation',
     name: 'Pristine Reputation',
     description:
-      "You come from a particularly respected family, religious order, school, or similar organization devoted to Shizuru, and you leverage that heritage to strengthen your sense of self. Once per day, when you fail a saving throw against a charm or compulsion effect, you may attempt that save again. If you do, you gain a +2 trait bonus to the reroll and must use the new result.",
+      'You come from a particularly respected family, religious order, school, or similar organization devoted to Shizuru, and you leverage that heritage to strengthen your sense of self. Once per day, when you fail a saving throw against a charm or compulsion effect, you may attempt that save again. If you do, you gain a +2 trait bonus to the reroll and must use the new result.',
     shortDescription: 'Once/day reroll a failed save vs charm or compulsion with +2 trait bonus',
     source: 'Divine Anthology',
     category: 'religion',
@@ -733,7 +738,8 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     name: 'Guardian Smite',
     description:
       "You were trained by Trudd's paladins to serve as a blessed, living barrier against enemies who threaten those you hold dear. Once per day when using smite evil against a foe, you may choose to halve the damage dealt to that enemy in exchange for reducing its speed to 5 feet for 1 round.",
-    shortDescription: 'Once/day smite evil: halve damage dealt, but target speed reduced to 5 ft for 1 round',
+    shortDescription:
+      'Once/day smite evil: halve damage dealt, but target speed reduced to 5 ft for 1 round',
     source: 'Divine Anthology',
     category: 'religion',
     subcategory: 'Trudd',
@@ -756,8 +762,9 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     id: 'mighty_protector',
     name: 'Mighty Protector',
     description:
-      "In your youth you witnessed a tragedy befalling an innocent and swore to Trudd to become strong enough to prevent such things. Once per day when you hit an enemy with a melee attack, you may use a free action to attempt an aid another action. If successful, an adjacent ally gains a +4 bonus to AC instead of the normal +2 for that round against the targeted foe.",
-    shortDescription: 'Once/day free aid another on melee hit: adjacent ally gains +4 AC (instead of +2) vs that foe',
+      'In your youth you witnessed a tragedy befalling an innocent and swore to Trudd to become strong enough to prevent such things. Once per day when you hit an enemy with a melee attack, you may use a free action to attempt an aid another action. If successful, an adjacent ally gains a +4 bonus to AC instead of the normal +2 for that round against the targeted foe.',
+    shortDescription:
+      'Once/day free aid another on melee hit: adjacent ally gains +4 AC (instead of +2) vs that foe',
     source: 'Divine Anthology',
     category: 'religion',
     subcategory: 'Trudd',
@@ -780,8 +787,9 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     id: 'blind_zeal',
     name: 'Blind Zeal',
     description:
-      "You received training from followers of Vildeis in sensory compensation. You do not need to make a skill check to move at full speed despite blindness. The penalties from blindness apply only to Acrobatics, Ride, Sleight of Hand, and Stealth checks (–4 penalty). You also gain Blind-Fight as a bonus feat. These benefits are lost if you gain sight but are regained if you become blind again.",
-    shortDescription: 'Blind-Fight bonus feat; reduced blindness penalties; move full speed while blind',
+      'You received training from followers of Vildeis in sensory compensation. You do not need to make a skill check to move at full speed despite blindness. The penalties from blindness apply only to Acrobatics, Ride, Sleight of Hand, and Stealth checks (–4 penalty). You also gain Blind-Fight as a bonus feat. These benefits are lost if you gain sight but are regained if you become blind again.',
+    shortDescription:
+      'Blind-Fight bonus feat; reduced blindness penalties; move full speed while blind',
     source: 'Divine Anthology',
     category: 'religion',
     subcategory: 'Vildeis',
@@ -801,14 +809,18 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     id: 'resilient_martyr',
     name: 'Resilient Martyr',
     description:
-      "You once interposed yourself between an innocent and a dangerous evil threat, suffering significant blood loss and narrowly escaping death, and Vildeis blessed your recovery. You recover twice as many hit points and points of ability damage as normal when you rest, or three times as many when you take total bed rest.",
+      'You once interposed yourself between an innocent and a dangerous evil threat, suffering significant blood loss and narrowly escaping death, and Vildeis blessed your recovery. You recover twice as many hit points and points of ability damage as normal when you rest, or three times as many when you take total bed rest.',
     shortDescription: 'Recover 2x HP and ability damage per rest; 3x on total bed rest',
     source: 'Divine Anthology',
     category: 'religion',
     subcategory: 'Vildeis',
     prerequisites: [
       { type: 'deity', deityName: 'Vildeis' },
-      { type: 'special', description: 'Must have interposed yourself between an innocent and a dangerous evil threat' },
+      {
+        type: 'special',
+        description:
+          'Must have interposed yourself between an innocent and a dangerous evil threat',
+      },
     ],
     effects: [
       {
@@ -855,7 +867,8 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     name: 'Natural Magic',
     description:
       "Yuelral's teachings on the fundamental connection between magic and nature have broadened your understanding of spells. You select two 0-level druid spells. Those spells are treated as being on your class spell list and as spells known for every spellcasting class you possess.",
-    shortDescription: 'Two 0-level druid spells added to all your spellcasting class lists and spells known',
+    shortDescription:
+      'Two 0-level druid spells added to all your spellcasting class lists and spells known',
     source: 'Divine Anthology',
     category: 'religion',
     subcategory: 'Yuelral',

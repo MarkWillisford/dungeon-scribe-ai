@@ -243,7 +243,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Coordinated Shot',
         condition: {
@@ -346,7 +346,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 2,
         source: 'Distracting Charge',
         condition: {
@@ -523,7 +523,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 2,
         source: 'Horde Charge',
         condition: {
@@ -536,7 +536,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'damage_roll',
+        target: 'damage.melee',
         value: 2,
         source: 'Horde Charge',
         condition: {
@@ -875,7 +875,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'concentration',
+        target: 'spell.concentration',
         value: 4,
         source: 'Shielded Caster',
         condition: {
@@ -1113,7 +1113,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Timely Coordination',
         condition: {

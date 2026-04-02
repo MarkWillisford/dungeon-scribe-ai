@@ -20,7 +20,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'stat_replacement',
+        type: 'ability_substitution',
         bonusType: BonusType.UNTYPED,
         target: 'attack_rolls.glaive',
         value: 'DEX',
@@ -68,7 +68,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'stat_replacement',
+        type: 'ability_substitution',
         bonusType: BonusType.UNTYPED,
         target: 'attack_rolls.bow',
         value: 'WIS',
@@ -147,7 +147,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
         },
       },
       {
-        type: 'stat_bonus_to_damage',
+        type: 'bonus',
         bonusType: BonusType.UNTYPED,
         target: 'damage.flame_blade',
         value: 'CHA',
@@ -251,7 +251,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'stat_bonus_to_damage',
+        type: 'bonus',
         bonusType: BonusType.UNTYPED,
         target: 'damage.starknife',
         value: 'WIS',

@@ -44,7 +44,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saves.all',
+        target: 'save.all',
         value: 4,
         condition: {
           type: 'custom',
@@ -177,7 +177,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'combat.attack',
+        target: 'attack.all',
         value: 1,
         condition: {
           type: 'custom',
@@ -368,7 +368,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'combat.attack',
+        target: 'attack.all',
         value: 4,
         condition: {
           type: 'custom',

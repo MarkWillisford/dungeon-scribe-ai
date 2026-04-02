@@ -30,7 +30,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'attached',
     name: 'Attached',
     description:
-      'You have a strong emotional attachment to a person or object that you are terrified of losing. The GM chooses the object of your attachment. Whenever the object of your attachment is threatened, in danger, or in someone else\'s possession, you take a -1 penalty on Will saving throws and a -2 penalty on saving throws against fear effects. If you lose the object of your attachment, replace this drawback with the Doubt drawback.',
+      "You have a strong emotional attachment to a person or object that you are terrified of losing. The GM chooses the object of your attachment. Whenever the object of your attachment is threatened, in danger, or in someone else's possession, you take a -1 penalty on Will saving throws and a -2 penalty on saving throws against fear effects. If you lose the object of your attachment, replace this drawback with the Doubt drawback.",
     shortDescription: '-1 Will saves and -2 vs. fear when attachment is threatened.',
     source: 'Ultimate Campaign',
     category: 'social',
@@ -46,7 +46,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { trigger: 'attachment_threatened' },
-          description: 'When the object of attachment is threatened, in danger, or in someone else\'s possession',
+          description:
+            "When the object of attachment is threatened, in danger, or in someone else's possession",
         },
       },
       {
@@ -58,7 +59,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { trigger: 'attachment_threatened' },
-          description: 'When the object of attachment is threatened, in danger, or in someone else\'s possession',
+          description:
+            "When the object of attachment is threatened, in danger, or in someone else's possession",
         },
       },
     ],
@@ -69,7 +71,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'avarice',
     name: 'Avarice',
     description:
-      "You have a lust for wealth. Whenever you receive your cut of any treasure, you must receive at least 10% more in value than any other single party member or you become irritable and irrational, taking a -2 penalty on all Charisma-based skill checks and on Will saving throws to resist compulsion effects for 1 week.",
+      'You have a lust for wealth. Whenever you receive your cut of any treasure, you must receive at least 10% more in value than any other single party member or you become irritable and irrational, taking a -2 penalty on all Charisma-based skill checks and on Will saving throws to resist compulsion effects for 1 week.',
     shortDescription: 'Must receive 10% more treasure than allies or suffer penalties for 1 week.',
     source: 'Ultimate Campaign',
     category: 'social',
@@ -79,7 +81,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Avarice',
       },
@@ -91,9 +93,9 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'bitter',
     name: 'Bitter',
     description:
-      'You have been betrayed so many times in your life that you have difficulty accepting help from others. When you receive healing from an ally\'s class feature, spell, or spell-like ability, reduce the amount of that healing by 1 hit point.',
+      "You have been betrayed so many times in your life that you have difficulty accepting help from others. When you receive healing from an ally's class feature, spell, or spell-like ability, reduce the amount of that healing by 1 hit point.",
     shortDescription: 'Healing from allies is reduced by 1 hp.',
-    source: 'Antihero\'s Handbook',
+    source: "Antihero's Handbook",
     category: 'social',
     subcategory: 'Drawback',
     prerequisites: [],
@@ -101,13 +103,14 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'healing_received',
+        target: 'special.healing_received',
         value: -1,
         source: 'Bitter',
         condition: {
           type: 'custom',
           params: { trigger: 'ally_healing' },
-          description: 'When receiving healing from an ally\'s class feature, spell, or spell-like ability',
+          description:
+            "When receiving healing from an ally's class feature, spell, or spell-like ability",
         },
       },
     ],
@@ -118,7 +121,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'burned',
     name: 'Burned',
     description:
-      'You were badly burned by fire at some point in your past—perhaps in a volcanic eruption, a conflagration, or a group of torchbearing villagers. Your scars are a constant reminder of fire\'s destructive power. You take a -1 penalty on saving throws against fire effects. In addition, while you are adjacent to an open flame or on fire, you take a -1 penalty on all attack rolls, saving throws, and skill checks. This second penalty persists for 1 round after you are no longer adjacent to flames or on fire. If the fire was instantaneous, the penalty persists for 1 round after the effect ends. These two penalties don\'t stack.',
+      "You were badly burned by fire at some point in your past—perhaps in a volcanic eruption, a conflagration, or a group of torchbearing villagers. Your scars are a constant reminder of fire's destructive power. You take a -1 penalty on saving throws against fire effects. In addition, while you are adjacent to an open flame or on fire, you take a -1 penalty on all attack rolls, saving throws, and skill checks. This second penalty persists for 1 round after you are no longer adjacent to flames or on fire. If the fire was instantaneous, the penalty persists for 1 round after the effect ends. These two penalties don't stack.",
     shortDescription: '-1 on saves vs. fire; -1 to attacks, saves, and skills near open flames.',
     source: 'Quests and Campaigns',
     category: 'social',
@@ -140,7 +143,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'attack',
+        target: 'attack.melee',
         value: -1,
         source: 'Burned',
         condition: {
@@ -157,7 +160,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'condescending',
     name: 'Condescending',
     description:
-      'You were raised to believe that those of your race, ethnicity, or nation are the only people truly worth knowing and respecting. You take a -5 penalty on Diplomacy and Intimidate checks to improve other creatures\' attitudes toward you.',
+      "You were raised to believe that those of your race, ethnicity, or nation are the only people truly worth knowing and respecting. You take a -5 penalty on Diplomacy and Intimidate checks to improve other creatures' attitudes toward you.",
     shortDescription: '-5 on Diplomacy and Intimidate checks to improve creature attitudes.',
     source: 'Quests and Campaigns',
     category: 'social',
@@ -206,7 +209,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Cowardly',
       },
@@ -218,8 +221,9 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'cruelty',
     name: 'Cruelty',
     description:
-      'You were rewarded as a child for flaunting your victory over others as completely as possible, and you discovered you enjoyed the feeling of rubbing your foes\' faces in the dirt. When there is a dying or helpless enemy within 30 feet of you, you take a -2 penalty on attack rolls made against foes that are neither dying nor helpless.',
-    shortDescription: '-2 on attacks against non-dying, non-helpless foes when a fallen enemy is within 30 ft.',
+      "You were rewarded as a child for flaunting your victory over others as completely as possible, and you discovered you enjoyed the feeling of rubbing your foes' faces in the dirt. When there is a dying or helpless enemy within 30 feet of you, you take a -2 penalty on attack rolls made against foes that are neither dying nor helpless.",
+    shortDescription:
+      '-2 on attacks against non-dying, non-helpless foes when a fallen enemy is within 30 ft.',
     source: 'Quests and Campaigns',
     category: 'social',
     subcategory: 'Drawback',
@@ -228,13 +232,14 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'attack',
+        target: 'attack.melee',
         value: -2,
         source: 'Cruelty',
         condition: {
           type: 'custom',
           params: { trigger: 'dying_enemy_nearby' },
-          description: 'When a dying or helpless enemy is within 30 feet, against non-dying non-helpless foes',
+          description:
+            'When a dying or helpless enemy is within 30 feet, against non-dying non-helpless foes',
         },
       },
     ],
@@ -272,7 +277,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'doubt',
     name: 'Doubt',
     description:
-      'You lack confidence in your abilities or in the universe\'s mercy. Whenever you fail a skill or ability check, you take a -4 penalty on that type of skill or ability check for the next hour.',
+      "You lack confidence in your abilities or in the universe's mercy. Whenever you fail a skill or ability check, you take a -4 penalty on that type of skill or ability check for the next hour.",
     shortDescription: '-4 on the same skill or ability check for 1 hour after failing.',
     source: 'Ultimate Campaign',
     category: 'social',
@@ -282,13 +287,14 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Doubt',
         condition: {
           type: 'custom',
           params: { trigger: 'failed_check' },
-          description: '-4 penalty on the same type of skill or ability check for 1 hour after failing',
+          description:
+            '-4 penalty on the same type of skill or ability check for 1 hour after failing',
         },
       },
     ],
@@ -300,7 +306,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Empty Mask',
     description:
       'You have hidden your true identity for so long while evading your political enemies that you have lost your own sense of self. You take a -1 penalty on Will saving throws against compulsions, and a -2 penalty against compulsion effects from foes who know your true identity.',
-    shortDescription: '-1 on Will saves vs. compulsions; -2 if the caster knows your true identity.',
+    shortDescription:
+      '-1 on Will saves vs. compulsions; -2 if the caster knows your true identity.',
     source: "Spymaster's Handbook",
     category: 'social',
     subcategory: 'Drawback',
@@ -338,7 +345,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'entomophobe',
     name: 'Entomophobe',
     description:
-      'A terrifying encounter with insects during your childhood left you with a deep-seated aversion to vermin. You take a -2 penalty on attack rolls against vermin and a -2 penalty on saving throws against the nauseated condition from a swarm\'s distraction ability.',
+      "A terrifying encounter with insects during your childhood left you with a deep-seated aversion to vermin. You take a -2 penalty on attack rolls against vermin and a -2 penalty on saving throws against the nauseated condition from a swarm's distraction ability.",
     shortDescription: '-2 on attacks against vermin; -2 on saves vs. swarm distraction.',
     source: "Antihero's Handbook",
     category: 'social',
@@ -348,7 +355,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'attack',
+        target: 'attack.melee',
         value: -2,
         source: 'Entomophobe',
         condition: {
@@ -366,7 +373,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { trigger: 'swarm_distraction' },
-          description: 'Against the nauseated condition from a swarm\'s distraction ability',
+          description: "Against the nauseated condition from a swarm's distraction ability",
         },
       },
     ],
@@ -378,7 +385,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Envy',
     description:
       'You were raised in a culture that prizes success and looks down on failure. You have a deep compulsion to steal or acquire by other means at least 10 gp worth of valuables each day. If you fail to do so, you must succeed at a DC 20 Will save or take a -1 penalty on Will saves, Reflex saves, and concentration checks. These penalties are cumulative (maximum -5), but reset to 0 after you succeed at the save.',
-    shortDescription: 'Must steal or acquire 10 gp daily or take cumulative -1 penalties (max -5) on Will, Reflex, and concentration.',
+    shortDescription:
+      'Must steal or acquire 10 gp daily or take cumulative -1 penalties (max -5) on Will, Reflex, and concentration.',
     source: 'Quests and Campaigns',
     category: 'social',
     subcategory: 'Drawback',
@@ -387,7 +395,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Envy',
         condition: {
@@ -480,13 +488,14 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Forgetful',
         condition: {
           type: 'custom',
           params: { trigger: 'leaving_location', dc: 10, check: 'wisdom' },
-          description: 'DC 10 Wisdom check when leaving a location after 1+ hours or lose a random mundane item',
+          description:
+            'DC 10 Wisdom check when leaving a location after 1+ hours or lose a random mundane item',
         },
       },
     ],
@@ -498,7 +507,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Foul Brand',
     description:
       'You bear the symbol of an evil deity burned into your flesh. If the symbol is on your hand, you take a -1 penalty on Disable Device, Disguise, and Sleight of Hand checks. If it is on your face, you take a -2 penalty on Bluff, Diplomacy, and Disguise checks. This brand does not count as a holy symbol for the purposes of a divine focus for spellcasting.',
-    shortDescription: 'Brand on hand: -1 to Disable Device, Disguise, Sleight of Hand. Brand on face: -2 to Bluff, Diplomacy, Disguise.',
+    shortDescription:
+      'Brand on hand: -1 to Disable Device, Disguise, Sleight of Hand. Brand on face: -2 to Bluff, Diplomacy, Disguise.',
     source: 'Champions of Corruption',
     category: 'social',
     subcategory: 'Drawback',
@@ -507,7 +517,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Foul Brand',
       },
@@ -574,7 +584,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Haunting Regret',
     description:
       'You argued frequently with a relative who has since died and cannot rest. This spirit appears around you at inopportune times, distracting you with its presence and the regret you feel for your inability to resolve your dispute. You take a -2 penalty on concentration checks and on saving throws against swarm distraction and mind-affecting effects.',
-    shortDescription: '-2 on concentration checks and saves vs. swarm distraction and mind-affecting effects.',
+    shortDescription:
+      '-2 on concentration checks and saves vs. swarm distraction and mind-affecting effects.',
     source: 'Quests and Campaigns',
     category: 'social',
     subcategory: 'Drawback',
@@ -583,7 +594,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'concentration',
+        target: 'spell.concentration',
         value: -2,
         source: 'Haunting Regret',
       },
@@ -607,7 +618,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'headstrong',
     name: 'Headstrong',
     description:
-      'You feel compelled to correct every action and argument that contradicts your worldview. Whenever you witness an action or hear an argument that contradicts your alignment, you must attempt to stop or correct that action or argument. If you either don\'t try to stop it or fail in your attempt to stop it (as adjudicated by the GM), you become shaken for 1 hour.',
+      "You feel compelled to correct every action and argument that contradicts your worldview. Whenever you witness an action or hear an argument that contradicts your alignment, you must attempt to stop or correct that action or argument. If you either don't try to stop it or fail in your attempt to stop it (as adjudicated by the GM), you become shaken for 1 hour.",
     shortDescription: 'Must oppose alignment-violating actions; fail and become shaken for 1 hour.',
     source: 'Ultimate Campaign',
     category: 'social',
@@ -623,7 +634,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { trigger: 'failed_to_stop_alignment_violation' },
-          description: 'Become shaken for 1 hour when failing to oppose alignment-violating actions',
+          description:
+            'Become shaken for 1 hour when failing to oppose alignment-violating actions',
         },
       },
     ],
@@ -634,7 +646,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'hedonistic',
     name: 'Hedonistic',
     description:
-      'You enjoy life\'s pleasures and must indulge yourself at every opportunity. Each day, you must spend at least 10 gp in treasure or spend 1 hour engaged in entertainment or pleasure, or you must succeed at a DC 20 Fortitude save or start the next day fatigued. The fatigue lasts 4 hours or until you indulge yourself.',
+      "You enjoy life's pleasures and must indulge yourself at every opportunity. Each day, you must spend at least 10 gp in treasure or spend 1 hour engaged in entertainment or pleasure, or you must succeed at a DC 20 Fortitude save or start the next day fatigued. The fatigue lasts 4 hours or until you indulge yourself.",
     shortDescription: 'Must spend 10 gp or spend 1 hr on pleasure each day or become fatigued.',
     source: 'Ultimate Campaign',
     category: 'social',
@@ -650,7 +662,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { trigger: 'deprivation_dc20_fort', dc: 20 },
-          description: 'DC 20 Fort save if no 10 gp spent or 1 hour pleasure; fail = fatigued next day for 4 hours',
+          description:
+            'DC 20 Fort save if no 10 gp spent or 1 hour pleasure; fail = fatigued next day for 4 hours',
         },
       },
     ],
@@ -662,7 +675,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Helpless',
     description:
       'You watched a loved one suffer a terrible fate and were unable to do anything to help. The first time per combat encounter that an ally within 30 feet falls unconscious or dies as a result of an attack, you are dazed until the end of your next turn.',
-    shortDescription: 'Dazed until end of next turn the first time per encounter an ally within 30 ft falls unconscious or dies.',
+    shortDescription:
+      'Dazed until end of next turn the first time per encounter an ally within 30 ft falls unconscious or dies.',
     source: "Antihero's Handbook",
     category: 'social',
     subcategory: 'Drawback',
@@ -677,7 +691,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { trigger: 'ally_falls_30ft', frequency: 'once_per_encounter' },
-          description: 'First time per encounter an ally within 30 feet falls unconscious or dies from an attack',
+          description:
+            'First time per encounter an ally within 30 feet falls unconscious or dies from an attack',
         },
       },
     ],
@@ -698,14 +713,14 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Impatient',
       },
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'attack',
+        target: 'attack.melee',
         value: -1,
         source: 'Impatient',
         condition: {
@@ -781,7 +796,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Insatiable',
       },
@@ -861,7 +876,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'attack',
+        target: 'attack.melee',
         value: -1,
         source: 'Loner',
         condition: {
@@ -918,7 +933,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Magical Klutz',
     description:
       'You were born in a region rife with unpredictable magic, and this has left its mark on your relationship with magical items. When activating a magic item blindly, roll twice and take the lower result on Use Magic Device checks. When making a Reflex saving throw against an effect produced by a magic item, roll twice and take the lower result.',
-    shortDescription: 'Roll twice and take lower on UMD blind activations and Reflex saves vs. magic item effects.',
+    shortDescription:
+      'Roll twice and take lower on UMD blind activations and Reflex saves vs. magic item effects.',
     source: "Spymaster's Handbook",
     category: 'social',
     subcategory: 'Drawback',
@@ -927,13 +943,14 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Magical Klutz',
         condition: {
           type: 'custom',
           params: { trigger: 'umd_blind_or_reflex_vs_magic_item' },
-          description: 'Roll twice take lower on UMD blind activation and Reflex saves vs. magic item effects',
+          description:
+            'Roll twice take lower on UMD blind activation and Reflex saves vs. magic item effects',
         },
       },
     ],
@@ -954,13 +971,14 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Mark of Slavery',
         condition: {
           type: 'custom',
           params: { trigger: 'failed_skill_check' },
-          description: '-2 on skill checks and attack rolls until end of next turn after failing a skill check',
+          description:
+            '-2 on skill checks and attack rolls until end of next turn after failing a skill check',
         },
       },
     ],
@@ -1064,7 +1082,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Nervous',
         condition: {
@@ -1115,24 +1133,29 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'occult_bargain',
     name: 'Occult Bargain',
     description:
-      'You gain your magical abilities from a source that demands anonymity. Each day you must invoke this entity\'s name through speech or writing, or you cannot regain spell slots. You take a -1 penalty on concentration checks.',
+      "You gain your magical abilities from a source that demands anonymity. Each day you must invoke this entity's name through speech or writing, or you cannot regain spell slots. You take a -1 penalty on concentration checks.",
     shortDescription: '-1 on concentration; must invoke patron name daily or lose spell recovery.',
     source: "Spymaster's Handbook",
     category: 'social',
     subcategory: 'Drawback',
-    prerequisites: [{ type: 'special', description: 'Must be able to cast 0-level and 1st-level spells as a class feature' }],
+    prerequisites: [
+      {
+        type: 'special',
+        description: 'Must be able to cast 0-level and 1st-level spells as a class feature',
+      },
+    ],
     effects: [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'concentration',
+        target: 'spell.concentration',
         value: -1,
         source: 'Occult Bargain',
       },
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'spell_recovery',
+        target: 'special.spell_recovery',
         value: 0,
         source: 'Occult Bargain',
         condition: {
@@ -1159,7 +1182,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Oppressive Expectations',
         condition: {
@@ -1186,7 +1209,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'attack',
+        target: 'attack.melee',
         value: -2,
         source: 'Overprotective',
         condition: {
@@ -1225,7 +1248,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Paranoid',
         condition: {
@@ -1243,7 +1266,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Power-Hungry',
     description:
       'You crave power above all things, and your lust for it makes you susceptible to those who promise it to you. You take a -2 penalty on Will saving throws against charm and compulsion effects from any creature that promises you wealth or power.',
-    shortDescription: '-2 on Will saves vs. charm and compulsion from creatures promising wealth or power.',
+    shortDescription:
+      '-2 on Will saves vs. charm and compulsion from creatures promising wealth or power.',
     source: 'Ultimate Campaign',
     category: 'social',
     subcategory: 'Drawback',
@@ -1258,7 +1282,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { descriptor: 'charm_compulsion', trigger: 'promises_wealth_or_power' },
-          description: 'Against charm and compulsion effects from creatures promising wealth or power',
+          description:
+            'Against charm and compulsion effects from creatures promising wealth or power',
         },
       },
     ],
@@ -1269,8 +1294,9 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'pride',
     name: 'Pride',
     description:
-      'You can\'t abide challenges to your dignity, authority, or honor. When a creature challenges your dignity, honor, or authority (as adjudicated by the GM), you take a -2 penalty on Diplomacy checks and Sense Motive checks involving that creature until it apologizes.',
-    shortDescription: '-2 on Diplomacy and Sense Motive against a creature that challenged your honor until it apologizes.',
+      "You can't abide challenges to your dignity, authority, or honor. When a creature challenges your dignity, honor, or authority (as adjudicated by the GM), you take a -2 penalty on Diplomacy checks and Sense Motive checks involving that creature until it apologizes.",
+    shortDescription:
+      '-2 on Diplomacy and Sense Motive against a creature that challenged your honor until it apologizes.',
     source: 'Ultimate Campaign',
     category: 'social',
     subcategory: 'Drawback',
@@ -1285,7 +1311,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { trigger: 'creature_challenged_honor' },
-          description: 'Against a creature that challenged your dignity, honor, or authority (until it apologizes)',
+          description:
+            'Against a creature that challenged your dignity, honor, or authority (until it apologizes)',
         },
       },
       {
@@ -1297,7 +1324,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { trigger: 'creature_challenged_honor' },
-          description: 'Against a creature that challenged your dignity, honor, or authority (until it apologizes)',
+          description:
+            'Against a creature that challenged your dignity, honor, or authority (until it apologizes)',
         },
       },
     ],
@@ -1309,7 +1337,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Provincial',
     description:
       'You have a difficult time with change, and you resist ideas or concepts outside your worldview. Whenever you interact with a creature of a different religion or alignment than yourself, you take a -2 penalty on Diplomacy and Sense Motive checks.',
-    shortDescription: '-2 on Diplomacy and Sense Motive with creatures of different religion or alignment.',
+    shortDescription:
+      '-2 on Diplomacy and Sense Motive with creatures of different religion or alignment.',
     source: 'Ultimate Campaign',
     category: 'social',
     subcategory: 'Drawback',
@@ -1357,7 +1386,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Righteous Indignation',
         condition: {
@@ -1375,7 +1404,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { descriptor: 'emotion', excludes: 'fear' },
-          description: 'Against emotion descriptor spells (excluding those with the fear descriptor)',
+          description:
+            'Against emotion descriptor spells (excluding those with the fear descriptor)',
         },
       },
     ],
@@ -1416,7 +1446,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Secret Shame',
     description:
       'You harbor guilt over something shameful that, if revealed, would cause you to lose standing with a specific group you care about. You take a -1 penalty on saving throws against fear effects, and the DC of Intimidate checks to demoralize you is reduced by 1. If you are normally immune to fear, you instead lose that immunity.',
-    shortDescription: '-1 on fear saves; Intimidate DC to demoralize you reduced by 1; lose fear immunity.',
+    shortDescription:
+      '-1 on fear saves; Intimidate DC to demoralize you reduced by 1; lose fear immunity.',
     source: "Spymaster's Handbook",
     category: 'social',
     subcategory: 'Drawback',
@@ -1437,13 +1468,14 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Secret Shame',
         condition: {
           type: 'custom',
           params: { trigger: 'intimidate_demoralize_dc' },
-          description: 'DC of Intimidate checks to demoralize you is reduced by 1; lose fear immunity if applicable',
+          description:
+            'DC of Intimidate checks to demoralize you is reduced by 1; lose fear immunity if applicable',
         },
       },
     ],
@@ -1455,7 +1487,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Self-Doubting',
     description:
       'You lack confidence in your abilities and are easily shaken by setbacks. The first time each day that you fail a Will saving throw or skill check, you take a -2 penalty on the next Will saving throw or skill check of that kind.',
-    shortDescription: 'First daily failure on a Will save or skill check imposes -2 on the next of that type.',
+    shortDescription:
+      'First daily failure on a Will save or skill check imposes -2 on the next of that type.',
     source: "Antihero's Handbook",
     category: 'social',
     subcategory: 'Drawback',
@@ -1464,13 +1497,14 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Self-Doubting',
         condition: {
           type: 'custom',
           params: { trigger: 'first_daily_will_or_skill_failure' },
-          description: 'First time per day failing a Will save or skill check imposes -2 on next of that type',
+          description:
+            'First time per day failing a Will save or skill check imposes -2 on next of that type',
         },
       },
     ],
@@ -1574,7 +1608,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'sleepy',
     name: 'Sleepy',
     description:
-      'You need more sleep than most people to function properly. You must sleep at least 12 hours per night in order to gain the benefits of a full night\'s rest. In addition, you take a -2 penalty on all saving throws against sleep effects.',
+      "You need more sleep than most people to function properly. You must sleep at least 12 hours per night in order to gain the benefits of a full night's rest. In addition, you take a -2 penalty on all saving throws against sleep effects.",
     shortDescription: 'Requires 12 hours of sleep; -2 on saves vs. sleep effects.',
     source: 'Quests and Campaigns',
     category: 'social',
@@ -1601,8 +1635,9 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'spooked',
     name: 'Spooked',
     description:
-      'A terrifying brush with a supernatural creature in your past has left you perpetually unnerved. When you first perceive a fey, outsider, or undead creature within 60 feet, you must succeed at a Will save (DC 15 + creature\'s Charisma modifier) or become shaken for 1d4 rounds. Even if you are normally immune to fear effects, you still must make this save but gain a +4 bonus.',
-    shortDescription: 'Will save (DC 15 + Cha) when first perceiving fey, outsider, or undead within 60 ft or become shaken.',
+      "A terrifying brush with a supernatural creature in your past has left you perpetually unnerved. When you first perceive a fey, outsider, or undead creature within 60 feet, you must succeed at a Will save (DC 15 + creature's Charisma modifier) or become shaken for 1d4 rounds. Even if you are normally immune to fear effects, you still must make this save but gain a +4 bonus.",
+    shortDescription:
+      'Will save (DC 15 + Cha) when first perceiving fey, outsider, or undead within 60 ft or become shaken.',
     source: 'Quests and Campaigns',
     category: 'social',
     subcategory: 'Drawback',
@@ -1617,7 +1652,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { trigger: 'perceive_fey_outsider_undead_60ft', save_dc: '15_plus_cha' },
-          description: 'Will save DC 15 + creature Cha when first perceiving fey/outsider/undead within 60 ft or shaken 1d4 rounds',
+          description:
+            'Will save DC 15 + creature Cha when first perceiving fey/outsider/undead within 60 ft or shaken 1d4 rounds',
         },
       },
     ],
@@ -1628,7 +1664,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'stigmatized',
     name: 'Stigmatized',
     description:
-      'Somewhere in your past you were shunned and ostracized, and even in new environments among strangers, you feel the weight of inadequate socialization. You take a -3 penalty on Diplomacy checks to gather information or improve a creature\'s attitude.',
+      "Somewhere in your past you were shunned and ostracized, and even in new environments among strangers, you feel the weight of inadequate socialization. You take a -3 penalty on Diplomacy checks to gather information or improve a creature's attitude.",
     shortDescription: '-3 on Diplomacy to gather information or improve attitudes.',
     source: "Antihero's Handbook",
     category: 'social',
@@ -1644,7 +1680,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { use: 'gather_info_or_improve_attitude' },
-          description: 'To gather information or improve a creature\'s attitude',
+          description: "To gather information or improve a creature's attitude",
         },
       },
     ],
@@ -1671,7 +1707,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
         condition: {
           type: 'custom',
           params: { trigger: 'post_combat_fort_save', dc: '10_plus_rounds' },
-          description: 'Fortitude save (DC 10 + rounds in combat) after combat or fatigued 10 min per round fought',
+          description:
+            'Fortitude save (DC 10 + rounds in combat) after combat or fatigued 10 min per round fought',
         },
       },
     ],
@@ -1717,7 +1754,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Umbral Unmasking',
     description:
       'You cast no shadow or have a visibly monstrous shadow that is difficult to conceal. This is observable under normal light conditions, and observers can notice it with a DC 15 Wisdom check or appropriate Perception check. The effect cannot be concealed by misdirection, nondetection, or most illusions — only magic that affects shadows directly (such as invisibility) can obscure it.',
-    shortDescription: 'Cast no shadow or have a monstrous shadow visible in normal light (DC 15 Wis to notice).',
+    shortDescription:
+      'Cast no shadow or have a monstrous shadow visible in normal light (DC 15 Wis to notice).',
     source: 'Champions of Corruption',
     category: 'social',
     subcategory: 'Drawback',
@@ -1726,7 +1764,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Umbral Unmasking',
       },
@@ -1739,7 +1777,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Unlearned',
     description:
       'You are not well educated and know only what you need to know to get by in your chosen profession. Choose one Knowledge skill — you may attempt untrained checks with it as normal. You cannot attempt untrained checks with any other Knowledge skills, regardless of the DC. When accessing a library, you may attempt an untrained Knowledge check with a -2 penalty.',
-    shortDescription: 'Can only attempt untrained Knowledge checks for one chosen skill; -2 when using a library.',
+    shortDescription:
+      'Can only attempt untrained Knowledge checks for one chosen skill; -2 when using a library.',
     source: 'Quests and Campaigns',
     category: 'social',
     subcategory: 'Drawback',
@@ -1748,7 +1787,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Unlearned',
       },
@@ -1789,13 +1828,14 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Vain',
         condition: {
           type: 'custom',
           params: { trigger: 'failed_opposed_cha_check' },
-          description: '-2 on all Charisma-based checks for 24 hours after failing an opposed Charisma check',
+          description:
+            '-2 on all Charisma-based checks for 24 hours after failing an opposed Charisma check',
         },
       },
     ],
@@ -1849,8 +1889,9 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     id: 'warded_against_nature',
     name: 'Warded Against Nature',
     description:
-      'Animals do not willingly approach within 30 feet of you unless you or the animal\'s master succeeds at a DC 20 Handle Animal, Ride, or wild empathy check. Class-granted animal companions, familiars, and mounts are not affected by this drawback.',
-    shortDescription: 'Animals avoid within 30 ft (DC 20 Handle Animal/Ride/wild empathy to override).',
+      "Animals do not willingly approach within 30 feet of you unless you or the animal's master succeeds at a DC 20 Handle Animal, Ride, or wild empathy check. Class-granted animal companions, familiars, and mounts are not affected by this drawback.",
+    shortDescription:
+      'Animals avoid within 30 ft (DC 20 Handle Animal/Ride/wild empathy to override).',
     source: 'Champions of Corruption',
     category: 'social',
     subcategory: 'Drawback',
@@ -1859,13 +1900,14 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'special',
+        target: 'special.ability',
         value: 0,
         source: 'Warded Against Nature',
         condition: {
           type: 'custom',
           params: { trigger: 'animal_aversion_30ft', override_dc: 20 },
-          description: 'Animals avoid you within 30 ft; DC 20 Handle Animal/Ride/wild empathy overrides',
+          description:
+            'Animals avoid you within 30 ft; DC 20 Handle Animal/Ride/wild empathy overrides',
         },
       },
     ],
@@ -1916,7 +1958,8 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
     name: 'Zealous',
     description:
       'You are fanatical in your beliefs, ruled by emotion over reason. When you attack a creature you know worships a different religion than you, you take a -5 penalty on the attack roll. However, you gain a +2 trait bonus on the damage roll with your first attack against that creature.',
-    shortDescription: '-5 on attack vs. different-religion targets; +2 damage on first attack against them.',
+    shortDescription:
+      '-5 on attack vs. different-religion targets; +2 damage on first attack against them.',
     source: 'Ultimate Campaign',
     category: 'social',
     subcategory: 'Drawback',
@@ -1925,7 +1968,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'attack',
+        target: 'attack.melee',
         value: -5,
         source: 'Zealous',
         condition: {
@@ -1937,7 +1980,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         source: 'Zealous',
         condition: {

@@ -49,7 +49,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Arcane Vendetta',
@@ -95,7 +95,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
       },
       {
         type: 'bonus',
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         bonusType: BonusType.MORALE,
         source: 'Demon Hunter',
@@ -140,7 +140,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'stat_replacement',
+        type: 'ability_substitution',
         target: 'attack_and_damage.scimitar',
         value: 'DEX',
         bonusType: BonusType.UNTYPED,
@@ -170,7 +170,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'saving_throw',
+        target: 'save.all',
         value: 4,
         bonusType: BonusType.UNTYPED,
         source: 'Desert Dweller',
@@ -199,7 +199,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         bonusType: BonusType.MORALE,
         source: 'Desperate Battler',
@@ -211,7 +211,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
       },
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         bonusType: BonusType.MORALE,
         source: 'Desperate Battler',
@@ -282,7 +282,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'saving_throw',
+        target: 'save.all',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Fey Foundling',
@@ -310,7 +310,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'saving_throw',
+        target: 'save.all',
         value: 2,
         bonusType: BonusType.UNTYPED,
         source: 'Focused Discipline',
@@ -322,7 +322,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
       },
       {
         type: 'bonus',
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         bonusType: BonusType.MORALE,
         source: 'Focused Discipline',
@@ -334,7 +334,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
       },
       {
         type: 'bonus',
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         bonusType: BonusType.MORALE,
         source: 'Focused Discipline',
@@ -406,7 +406,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'saving_throw',
+        target: 'save.all',
         value: 2,
         bonusType: BonusType.MORALE,
         source: 'Free Spirit',

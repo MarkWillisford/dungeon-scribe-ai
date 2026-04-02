@@ -395,7 +395,7 @@ export const MTT_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'touch_spell_range',
+        target: 'special.touch_spell_range',
         value: 10,
         source: 'Lunging Spell Touch',
         condition: {

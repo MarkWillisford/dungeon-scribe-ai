@@ -275,7 +275,7 @@ export const BUFF_PRESETS: SavedBuff[] = [
       {
         type: 'bonus',
         bonusType: BonusType.RESISTANCE,
-        target: 'save.fort',
+        target: 'save.fortitude',
         value: 1,
         source: 'Resistance',
       },

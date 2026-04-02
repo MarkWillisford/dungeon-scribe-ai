@@ -1218,7 +1218,7 @@ export const INNER_SEA_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'caster_level_check',
+        target: 'spell.caster_level_check',
         value: 1,
         source: 'Ley Line Sensitive',
         condition: {

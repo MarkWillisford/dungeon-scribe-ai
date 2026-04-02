@@ -241,7 +241,7 @@ export type WeaponProficiency = 'simple' | 'martial' | 'exotic';
 export type WeaponHandedness = 'light' | 'one-handed' | 'two-handed';
 export type ArmorWeight = 'light' | 'medium' | 'heavy';
 export type ShieldWeight = 'buckler' | 'light' | 'heavy' | 'tower';
-export type DamageType = 'bludgeoning' | 'piercing' | 'slashing';
+export type WeaponDamageType = 'bludgeoning' | 'piercing' | 'slashing';
 export type GearCategory =
   | 'adventuring'
   | 'alchemical'
@@ -270,7 +270,7 @@ export interface WeaponDefinition {
   damageS: string;
   damageM: string;
   critical: string;
-  damageType: DamageType[];
+  damageType: WeaponDamageType[];
   special: string[];
   range: number;
   isThrown: boolean;

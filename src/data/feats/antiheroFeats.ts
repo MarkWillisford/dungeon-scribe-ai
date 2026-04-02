@@ -48,7 +48,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'combat.attack',
+        target: 'attack.all',
         value: 2,
         source: 'Deceitful Incompetence',
         condition: {

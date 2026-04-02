@@ -35,7 +35,7 @@ export const ACG_EXTRA_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         source: 'Disorienting Maneuver',
         condition: {
@@ -185,7 +185,7 @@ export const ACG_EXTRA_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'concentration',
+        target: 'spell.concentration',
         value: 4,
         source: 'Raging Concentration',
         condition: {
@@ -249,7 +249,7 @@ export const ACG_EXTRA_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'spell.dc',
+        target: 'spell.save_dc',
         value: 2,
         source: 'Spell Bane',
         condition: {
@@ -492,7 +492,7 @@ export const ACG_EXTRA_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack',
+        target: 'attack.melee',
         value: 2,
         source: 'Moonlight Stalker',
         condition: {
@@ -504,7 +504,7 @@ export const ACG_EXTRA_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'damage',
+        target: 'damage.melee',
         value: 2,
         source: 'Moonlight Stalker',
         condition: {
@@ -828,7 +828,7 @@ export const ACG_EXTRA_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Underhanded Teamwork',
         condition: {

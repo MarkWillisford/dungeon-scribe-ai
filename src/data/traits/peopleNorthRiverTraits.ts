@@ -18,7 +18,7 @@ export const PEOPLE_NORTH_RIVER_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Big Game Hunter',
         condition: { type: 'custom', description: 'Against Large or larger creatures', params: {} },
@@ -48,7 +48,7 @@ export const PEOPLE_NORTH_RIVER_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Call of the Longships',
         condition: { type: 'custom', description: 'While aboard a vessel at sea', params: {} },
@@ -71,7 +71,7 @@ export const PEOPLE_NORTH_RIVER_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'd20_roll',
+        target: 'special.d20_roll',
         value: 0,
         source: "Huldra's Luck",
         condition: { type: 'custom', description: 'Once per day', params: {} },
@@ -336,7 +336,7 @@ export const PEOPLE_NORTH_RIVER_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'movement',
+        target: 'speed.base',
         value: 0,
         source: 'Snowstepper',
         condition: {
@@ -411,7 +411,7 @@ export const PEOPLE_NORTH_RIVER_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Mivoni Duelist',
         condition: {
@@ -603,7 +603,7 @@ export const PEOPLE_NORTH_RIVER_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'range_increment_penalty',
+        target: 'special.range_increment_penalty',
         value: 0,
         source: 'Wasteland Hunter',
         condition: {
@@ -654,7 +654,7 @@ export const PEOPLE_NORTH_RIVER_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'movement',
+        target: 'speed.base',
         value: 0,
         source: 'Destined Pioneer',
         condition: {

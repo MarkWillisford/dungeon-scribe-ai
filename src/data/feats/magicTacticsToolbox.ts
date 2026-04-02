@@ -53,7 +53,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.ENHANCEMENT,
-        target: 'ability_score',
+        target: 'special.ability_score',
         value: 2,
         source: 'Ability Mastery',
         condition: {
@@ -464,7 +464,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'occult_ritual_skill_checks',
+        target: 'special.occult_ritual_skill_checks',
         value: 2,
         source: 'Practiced Ritualist',
         condition: {
@@ -512,7 +512,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.RESISTANCE,
-        target: 'saving_throws',
+        target: 'save.all',
         value: 1,
         source: 'Resistance Mastery',
         condition: {
@@ -557,7 +557,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.NATURAL,
-        target: 'AC',
+        target: 'ac',
         value: 1,
         source: 'Scale and Skin',
         condition: {

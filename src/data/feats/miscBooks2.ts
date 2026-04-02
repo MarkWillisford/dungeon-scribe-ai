@@ -66,7 +66,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.COMPETENCE,
-        target: 'knowledge_local',
+        target: 'skill.knowledge_local',
         value: 5,
         source: 'Commander of Goblinkind',
         condition: {
@@ -96,7 +96,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.COMPETENCE,
-        target: 'bluff',
+        target: 'skill.bluff',
         value: 4,
         source: 'Warmonger',
         condition: {
@@ -108,7 +108,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.COMPETENCE,
-        target: 'diplomacy',
+        target: 'skill.diplomacy',
         value: 4,
         source: 'Warmonger',
         condition: {
@@ -226,7 +226,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Mutual Hatred',
         condition: {
@@ -239,7 +239,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'damage_roll',
+        target: 'damage.melee',
         value: 1,
         source: 'Mutual Hatred',
         condition: {
@@ -300,7 +300,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throw',
+        target: 'save.all',
         value: 2,
         source: 'Aversion Tolerance',
         condition: {
@@ -435,7 +435,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 2,
         source: 'Night Stalker',
         condition: {
@@ -575,7 +575,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'survival',
+        target: 'skill.survival',
         value: 2,
         source: 'Planar Survivor',
         condition: {
@@ -587,7 +587,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throw',
+        target: 'save.all',
         value: 2,
         source: 'Planar Survivor',
         condition: {

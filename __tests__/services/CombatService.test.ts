@@ -138,7 +138,7 @@ describe('CombatService.getCombatAbilityEffects', () => {
     expect(effects.find((e) => e.target === 'ac.dodge' && e.source === 'Haste')?.value).toBe(1);
     expect(effects.find((e) => e.target === 'save.reflex')?.bonusType).toBe(BonusType.DODGE);
     expect(effects.find((e) => e.target === 'attack.all')?.value).toBe(1);
-    expect(effects.find((e) => e.target === 'speed')?.value).toBe(30);
+    expect(effects.find((e) => e.target === 'speed.base')?.value).toBe(30);
   });
 
   it('Combat Expertise applies penalty to attacks and dodge bonus to AC', () => {

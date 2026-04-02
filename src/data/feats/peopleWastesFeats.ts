@@ -48,7 +48,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         source: 'Agent of Purity',
         condition: {
@@ -247,7 +247,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'caster_level_check',
+        target: 'spell.caster_level_check',
         value: 2,
         source: 'Runic Charge',
         condition: {
@@ -353,7 +353,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     id: 'signature_strike_triumph',
     name: 'Signature Strike Triumph',
     description:
-      "With an effortless flourish, you strike terror into your foes and inspire your allies. When using Signature Strike Style to impose the shaken condition on a creature, the duration extends to 1d4+1 rounds instead of the standard 1d3 rounds. Additionally, upon confirming a critical hit against a marked creature, one visible ally within 60 feet may attempt a new saving throw against one ongoing emotion, fear, or mind-affecting effect from the marked creature. If successful and the effect has 24 hours or less remaining, it ends entirely; if more than 24 hours remain, it is suppressed for 1 minute.",
+      'With an effortless flourish, you strike terror into your foes and inspire your allies. When using Signature Strike Style to impose the shaken condition on a creature, the duration extends to 1d4+1 rounds instead of the standard 1d3 rounds. Additionally, upon confirming a critical hit against a marked creature, one visible ally within 60 feet may attempt a new saving throw against one ongoing emotion, fear, or mind-affecting effect from the marked creature. If successful and the effect has 24 hours or less remaining, it ends entirely; if more than 24 hours remain, it is suppressed for 1 minute.',
     shortDescription:
       "Extend shaken duration from Signature Strike Style; critical hits against marked creatures let nearby allies reroll saves against that creature's mind effects.",
     source: 'Pathfinder Player Companion: People of the Wastes',
@@ -438,12 +438,13 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throw',
+        target: 'save.all',
         value: 2,
         source: 'Spell Drinker',
         condition: {
           type: 'custom',
-          description: "Against the triggering creature's spells and spell-like abilities while temporary hit points last",
+          description:
+            "Against the triggering creature's spells and spell-like abilities while temporary hit points last",
           params: {},
         },
       },
@@ -497,7 +498,15 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     ],
     effects: [],
     activationMode: 'conditional',
-    tags: ['style', 'firearm', 'pistol-whip', 'combat_maneuver', 'prone', 'gunslinger', 'swift_action'],
+    tags: [
+      'style',
+      'firearm',
+      'pistol-whip',
+      'combat_maneuver',
+      'prone',
+      'gunslinger',
+      'swift_action',
+    ],
   },
 
   {

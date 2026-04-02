@@ -467,7 +467,7 @@ export const OA_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'save.mind_affecting',
+        target: 'save.all',
         value: 2,
         source: 'Focused Phantom',
         condition: {
@@ -496,7 +496,7 @@ export const OA_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'save.sleep_effects',
+        target: 'save.will',
         value: 4,
         source: 'Lucid Dreamer',
       },

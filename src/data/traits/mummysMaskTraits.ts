@@ -6,7 +6,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     id: 'blood_of_pharaohs',
     name: 'Blood of Pharaohs',
     description:
-      "Long ago, one of your ancestors ruled over the lands of Osirion. Although you are many generations removed and the line of descent is hard to prove, his or her blood still runs in your veins. You gain a +1 trait bonus on Will saves and a +1 trait bonus on Knowledge (nobility) checks, and Knowledge (nobility) is always a class skill for you. You may also select Ancient Osiriani as a bonus language.",
+      'Long ago, one of your ancestors ruled over the lands of Osirion. Although you are many generations removed and the line of descent is hard to prove, his or her blood still runs in your veins. You gain a +1 trait bonus on Will saves and a +1 trait bonus on Knowledge (nobility) checks, and Knowledge (nobility) is always a class skill for you. You may also select Ancient Osiriani as a bonus language.',
     shortDescription:
       '+1 Will saves, +1 Knowledge (nobility) (class skill), and Ancient Osiriani as a bonus language.',
     source: "Mummy's Mask Player's Guide",
@@ -50,7 +50,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     id: 'devotee_of_the_old_gods',
     name: 'Devotee of the Old Gods',
     description:
-      "Your family has long venerated the ancient deities of Osirion—gods such as Anubis, Osiris, Ra, and Set—maintaining their faith despite the religious shifts in modern Osirion. You gain a +1 trait bonus on Knowledge (history) and Knowledge (religion) checks, and one of those two skills (your choice) is always a class skill for you. You also gain a +1 trait bonus on saving throws against divine magic.",
+      'Your family has long venerated the ancient deities of Osirion—gods such as Anubis, Osiris, Ra, and Set—maintaining their faith despite the religious shifts in modern Osirion. You gain a +1 trait bonus on Knowledge (history) and Knowledge (religion) checks, and one of those two skills (your choice) is always a class skill for you. You also gain a +1 trait bonus on saving throws against divine magic.',
     shortDescription:
       '+1 Knowledge (history) and Knowledge (religion); one becomes a class skill; +1 saves vs. divine magic.',
     source: "Mummy's Mask Player's Guide",
@@ -89,10 +89,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
       {
         type: 'skill',
         label: 'Choose a class skill',
-        options: [
-          'Knowledge (history)',
-          'Knowledge (religion)',
-        ],
+        options: ['Knowledge (history)', 'Knowledge (religion)'],
         affectsEffects: false,
       },
     ],
@@ -103,7 +100,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     id: 'foreign_opportunist',
     name: 'Foreign Opportunist',
     description:
-      "You are an outsider to Osirion who has come to profit from the looting of ancient tombs, particularly those in the newly opened necropolis of Wati. You gain a +2 trait bonus on Appraise checks, and Appraise is always a class skill for you. In addition, you can sell Ancient Osirion relics for 60% of their listed price rather than the standard 50%.",
+      'You are an outsider to Osirion who has come to profit from the looting of ancient tombs, particularly those in the newly opened necropolis of Wati. You gain a +2 trait bonus on Appraise checks, and Appraise is always a class skill for you. In addition, you can sell Ancient Osirion relics for 60% of their listed price rather than the standard 50%.',
     shortDescription:
       '+2 Appraise (class skill); sell Ancient Osirion relics for 60% of listed price.',
     source: "Mummy's Mask Player's Guide",
@@ -128,7 +125,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'relic_sale_price',
+        target: 'special.relic_sale_price',
         value: 0,
         source: 'Foreign Opportunist',
         condition: {
@@ -145,7 +142,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     id: 'inquisitive_archaeologist',
     name: 'Inquisitive Archaeologist',
     description:
-      "You have long been fascinated by the ancient architecture of Osirion and have studied it extensively, hoping to explore the recently opened necropolis of Wati firsthand. You gain a +2 trait bonus on Knowledge (engineering) checks, and Knowledge (engineering) is always a class skill for you. In addition, you gain a +2 trait bonus on Perception checks to find concealed or secret doors in structures built in the style of Ancient Osirion.",
+      'You have long been fascinated by the ancient architecture of Osirion and have studied it extensively, hoping to explore the recently opened necropolis of Wati firsthand. You gain a +2 trait bonus on Knowledge (engineering) checks, and Knowledge (engineering) is always a class skill for you. In addition, you gain a +2 trait bonus on Perception checks to find concealed or secret doors in structures built in the style of Ancient Osirion.',
     shortDescription:
       '+2 Knowledge (engineering) (class skill); +2 Perception to find hidden doors in Ancient Osirion structures.',
     source: "Mummy's Mask Player's Guide",
@@ -188,8 +185,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     name: 'Mummy-Cursed',
     description:
       "One of your ancestors encountered a mummy's curse while exploring an ancient tomb, and though the curse has faded through the generations, it has left your bloodline with a heightened resistance to such effects. You gain a +2 trait bonus on saving throws against curses and curse effects (including mummy rot and spells with the curse descriptor), and a +2 trait bonus on saving throws against a mummy's aura of despair.",
-    shortDescription:
-      '+2 saves vs. curses and curse effects; +2 saves vs. mummy aura of despair.',
+    shortDescription: '+2 saves vs. curses and curse effects; +2 saves vs. mummy aura of despair.',
     source: "Mummy's Mask Player's Guide",
     category: 'campaign',
     subcategory: "Mummy's Mask",
@@ -203,7 +199,8 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
         source: 'Mummy-Cursed',
         condition: {
           type: 'custom',
-          description: 'Against curses, curse effects, mummy rot, and spells with the curse descriptor',
+          description:
+            'Against curses, curse effects, mummy rot, and spells with the curse descriptor',
           params: {},
         },
       },
@@ -250,12 +247,13 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'death_threshold',
+        target: 'special.death_threshold',
         value: 0,
         source: 'Resurrected',
         condition: {
           type: 'custom',
-          description: 'Do not die until hp reaches negative (Con score + 4) instead of negative Con score',
+          description:
+            'Do not die until hp reaches negative (Con score + 4) instead of negative Con score',
           params: {},
         },
       },
@@ -351,7 +349,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'disable_device_magic_traps',
+        target: 'special.disable_device_magic_traps',
         value: 0,
         source: 'Trap Finder',
         condition: {
@@ -368,9 +366,8 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     id: 'undead_crusader',
     name: 'Undead Crusader',
     description:
-      "You have dedicated yourself to eliminating the undead threat from Golarion, and have spent years studying their weaknesses and training to combat them. You gain a +1 trait bonus on damage rolls against undead creatures. You also gain a +1 trait bonus on Knowledge (religion) checks, and Knowledge (religion) is always a class skill for you.",
-    shortDescription:
-      '+1 damage vs. undead; +1 Knowledge (religion) (class skill).',
+      'You have dedicated yourself to eliminating the undead threat from Golarion, and have spent years studying their weaknesses and training to combat them. You gain a +1 trait bonus on damage rolls against undead creatures. You also gain a +1 trait bonus on Knowledge (religion) checks, and Knowledge (religion) is always a class skill for you.',
+    shortDescription: '+1 damage vs. undead; +1 Knowledge (religion) (class skill).',
     source: "Mummy's Mask Player's Guide",
     category: 'campaign',
     subcategory: "Mummy's Mask",
@@ -379,7 +376,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage',
+        target: 'damage.melee',
         value: 1,
         source: 'Undead Crusader',
         condition: {
@@ -410,9 +407,8 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     id: 'wati_native',
     name: 'Wati Native',
     description:
-      "You are a native of Wati who knows the city intimately, including its streets and secrets. Having grown up in the shadow of the necropolis, you have explored its edges many times but have always respectfully avoided entering the tombs themselves. You gain a +2 trait bonus on saving throws against fear effects. You also gain a +1 trait bonus on Knowledge (local) checks, and Knowledge (local) is always a class skill for you.",
-    shortDescription:
-      '+2 saves vs. fear; +1 Knowledge (local) (class skill).',
+      'You are a native of Wati who knows the city intimately, including its streets and secrets. Having grown up in the shadow of the necropolis, you have explored its edges many times but have always respectfully avoided entering the tombs themselves. You gain a +2 trait bonus on saving throws against fear effects. You also gain a +1 trait bonus on Knowledge (local) checks, and Knowledge (local) is always a class skill for you.',
+    shortDescription: '+2 saves vs. fear; +1 Knowledge (local) (class skill).',
     source: "Mummy's Mask Player's Guide",
     category: 'campaign',
     subcategory: "Mummy's Mask",

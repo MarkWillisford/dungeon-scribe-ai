@@ -705,7 +705,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'bonus',
-        target: 'attack',
+        target: 'attack.melee',
         value: 1,
         bonusType: BonusType.SACRED,
         source: 'Reward of Grace',

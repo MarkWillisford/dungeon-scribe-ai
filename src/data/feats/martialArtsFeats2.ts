@@ -21,9 +21,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'damage_roll',
+        target: 'damage.melee',
         value: 0,
         source: 'One-Inch Punch',
         condition: {
@@ -56,9 +56,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'condition_staggered',
+        target: 'special.condition_staggered',
         value: 1,
         source: 'Overhead Flip',
         condition: {
@@ -89,9 +89,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'damage_roll',
+        target: 'damage.melee',
         value: 0,
         source: 'Painful Collision',
         condition: {
@@ -122,9 +122,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'targeted_strike',
+        target: 'special.targeted_strike',
         value: 0,
         source: 'Pinpoint Jab',
         condition: {
@@ -154,9 +154,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'ki_pool',
+        target: 'special.ki_pool',
         value: 1,
         source: 'Practical Kata',
         condition: {
@@ -189,9 +189,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'combat_maneuver_drag',
+        target: 'cmb.drag',
         value: 0,
         source: 'Reverse Somersault Throw',
         condition: {
@@ -224,9 +224,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'condition_shaken',
+        target: 'special.condition_shaken',
         value: 1,
         source: 'Savage Leap',
         condition: {
@@ -257,9 +257,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'combat_maneuver_grapple',
+        target: 'cmb.grapple',
         value: 0,
         source: 'Savage Slam',
         condition: {
@@ -293,7 +293,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: -1,
         source: 'Sculpting the River',
         condition: {
@@ -329,9 +329,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'natural_weapon_attack',
+        target: 'attack.melee',
         value: 0,
         source: 'Shapeshifter Savage',
         condition: {
@@ -367,7 +367,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.ENHANCEMENT,
-        target: 'natural_armor',
+        target: 'ac.natural',
         value: 1,
         source: 'Shapeshifter Style',
         condition: {
@@ -379,7 +379,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.ENHANCEMENT,
-        target: 'base_speed',
+        target: 'speed.base',
         value: 5,
         source: 'Shapeshifter Style',
         condition: {
@@ -448,9 +448,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'combat_maneuver',
+        target: 'cmb',
         value: 0,
         source: 'Shielded Staff Ambush',
         condition: {
@@ -484,9 +484,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_penalty',
+        target: 'special.attack_penalty',
         value: 0,
         source: 'Shielded Staff Master',
         condition: {
@@ -558,7 +558,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.ENHANCEMENT,
-        target: 'attack_and_damage',
+        target: 'special.attack_and_damage',
         value: 0,
         source: 'Shikigami Manipulation',
         condition: {
@@ -590,7 +590,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       {
         type: 'penalty',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: -2,
         source: 'Shikigami Mimicry',
         condition: {
@@ -618,9 +618,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     prerequisites: [{ type: 'special', description: 'Catch Off-Guard or Throw Anything' }],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'improvised_weapon_damage',
+        target: 'special.improvised_weapon_damage',
         value: 1,
         source: 'Shikigami Style',
         condition: {
@@ -656,7 +656,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'damage_roll',
+        target: 'damage.melee',
         value: 2,
         source: 'Smashing Impact',
         condition: {
@@ -686,7 +686,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
         target: 'attack_of_opportunity',
         value: 0,
@@ -719,9 +719,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'combat_maneuver',
+        target: 'cmb',
         value: 0,
         source: 'Stick-Fighting Maneuver',
         condition: {
@@ -751,7 +751,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.ENHANCEMENT,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Stick-Fighting Style',
         condition: {
@@ -782,9 +782,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'threatened_area_damage',
+        target: 'special.threatened_area_damage',
         value: 0,
         source: 'Storm of Blades',
         condition: {
@@ -817,9 +817,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'condition_stupefied',
+        target: 'special.condition_stupefied',
         value: 0,
         source: 'Stupefying Strike',
         condition: {
@@ -852,9 +852,9 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     ],
     effects: [
       {
-        type: 'special_rule',
+        type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'combat_maneuver_disarm',
+        target: 'cmb.disarm',
         value: 0,
         source: 'Sweeping Disarm',
         condition: {

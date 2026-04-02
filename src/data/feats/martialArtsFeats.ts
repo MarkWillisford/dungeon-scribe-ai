@@ -21,7 +21,7 @@ export const MARTIAL_ARTS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 2,
         source: 'Arming Grab',
         condition: {
@@ -146,7 +146,7 @@ export const MARTIAL_ARTS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'damage_roll',
+        target: 'damage.melee',
         value: 2,
         source: 'Crushing Impact',
         condition: {
@@ -296,7 +296,7 @@ export const MARTIAL_ARTS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.ALCHEMICAL,
-        target: 'STR_DEX_CON',
+        target: 'special.STR_DEX_CON',
         value: 2,
         source: 'Gather Might',
         condition: {
@@ -346,7 +346,7 @@ export const MARTIAL_ARTS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Improvisational Focus',
         condition: {
@@ -545,7 +545,7 @@ export const MARTIAL_ARTS_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'melee_attack_roll',
+        target: 'attack.melee',
         value: 1,
         source: 'Octopus Focus',
         condition: {

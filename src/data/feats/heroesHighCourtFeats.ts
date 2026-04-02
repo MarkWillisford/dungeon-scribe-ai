@@ -55,7 +55,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'special',
-        target: 'alignment_aura',
+        target: 'special.alignment_aura',
         value: 0,
         bonusType: BonusType.UNTYPED,
         source: 'Conceal Aura',
@@ -116,7 +116,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'special',
-        target: 'counterspell',
+        target: 'special.counterspell',
         value: 0,
         bonusType: BonusType.UNTYPED,
         source: 'Countering Loophole',
@@ -166,7 +166,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'special',
-        target: 'saving_throws',
+        target: 'save.all',
         value: 0,
         bonusType: BonusType.UNTYPED,
         source: 'Ennobled Resistances',
@@ -229,7 +229,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throws.fear',
+        target: 'save.all',
         value: 4,
         source: 'Inured to Draconic Majesty',
         condition: {
@@ -340,7 +340,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'special',
-        target: 'verbal_duel',
+        target: 'special.verbal_duel',
         value: 0,
         bonusType: BonusType.UNTYPED,
         source: 'Righteous Orator',
@@ -403,7 +403,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_rolls',
+        target: 'attack.all',
         value: 1,
         source: 'Self-Exiled Noble',
         condition: {
@@ -430,7 +430,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'special',
-        target: 'sense_truth_magic',
+        target: 'special.sense_truth_magic',
         value: 0,
         bonusType: BonusType.UNTYPED,
         source: 'Sense Magical Interrogation',
@@ -458,7 +458,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'ally_reroll',
+        target: 'special.ally_reroll',
         value: 2,
         source: 'Student of Sulunai',
         condition: {
@@ -485,7 +485,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     effects: [
       {
         type: 'special',
-        target: 'sense_motive_dc_against_you',
+        target: 'special.sense_motive_dc_against_you',
         value: 0,
         bonusType: BonusType.UNTYPED,
         source: 'Veiled Contempt',

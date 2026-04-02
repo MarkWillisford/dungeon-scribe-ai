@@ -96,7 +96,7 @@ export const ISR_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.RACIAL,
-        target: 'saves.all',
+        target: 'save.all',
         value: 2,
         source: 'Surface Survivalist',
         condition: {
@@ -359,7 +359,7 @@ export const ISR_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.RACIAL,
-        target: 'attack_rolls',
+        target: 'attack.all',
         value: 1,
         source: 'Strix Hatred',
         condition: { type: 'custom', params: {}, description: 'Against humans' },
@@ -942,7 +942,7 @@ export const ISR_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'attack_rolls',
+        target: 'attack.all',
         value: 2,
         source: 'Pack Tactics',
         condition: {
@@ -994,7 +994,7 @@ export const ISR_FEATS: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.RACIAL,
-        target: 'saves.all',
+        target: 'save.all',
         value: 2,
         source: 'Toxic Recovery',
         condition: { type: 'custom', params: {}, description: 'Against poison effects' },

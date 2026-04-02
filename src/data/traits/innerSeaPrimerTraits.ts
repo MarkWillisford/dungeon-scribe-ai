@@ -46,14 +46,14 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'attack_vs_slavers',
+        target: 'special.attack_vs_slavers',
         value: 1,
         source: 'Andoren Freedom Fighter',
       },
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage_vs_slavers',
+        target: 'special.damage_vs_slavers',
         value: 1,
         source: 'Andoren Freedom Fighter',
       },
@@ -157,7 +157,7 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'swordlords_page',
     name: "Swordlord's Page",
     description:
-      "You have received training under the Aldori swordlords of Brevoy, though you have not yet achieved full swordlord status yourself. You gain a +1 attack bonus to confirm critical hits when using an edged weapon you are proficient with.",
+      'You have received training under the Aldori swordlords of Brevoy, though you have not yet achieved full swordlord status yourself. You gain a +1 attack bonus to confirm critical hits when using an edged weapon you are proficient with.',
     shortDescription: '+1 to confirm critical hits with edged weapons',
     source: 'Pathfinder Player Companion: Inner Sea Primer',
     category: 'regional',
@@ -500,7 +500,7 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'winters_soul',
     name: "Winter's Soul",
     description:
-      "The eternal winter of Irrisen is as much a part of you as it is the land. You may cast ray of frost once per day as a spell-like ability, using your highest caster level (or CL 1st if you lack caster levels).",
+      'The eternal winter of Irrisen is as much a part of you as it is the land. You may cast ray of frost once per day as a spell-like ability, using your highest caster level (or CL 1st if you lack caster levels).',
     shortDescription: 'Cast ray of frost 1/day as spell-like ability',
     source: 'Pathfinder Player Companion: Inner Sea Primer',
     category: 'regional',
@@ -644,7 +644,8 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
     name: 'Pesh Addict',
     description:
       'You have a history with pesh addiction, which may or may not have been overcome. Your past struggles with the narcotic substance have provided unique insights into that subculture. Your starting wealth is reduced to half the normal amount. You gain a +1 trait bonus on Bluff, Knowledge (local), and Sense Motive checks, and one of these three skills (your choice) becomes a class skill for you. This trait may only be taken at 1st level.',
-    shortDescription: '+1 Bluff, Knowledge (local), Sense Motive; one becomes class skill; half starting wealth',
+    shortDescription:
+      '+1 Bluff, Knowledge (local), Sense Motive; one becomes class skill; half starting wealth',
     source: 'Pathfinder Player Companion: Inner Sea Primer',
     category: 'regional',
     subcategory: 'Katapesh',
@@ -720,7 +721,7 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'damage_vs_demons_evil_fey',
+        target: 'special.damage_vs_demons_evil_fey',
         value: 2,
         source: "Treerazor's Bane",
       },
@@ -953,7 +954,7 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'signaler',
     name: 'Signaler',
     description:
-      "By observing Imperial military practices in Molthune, you have learned to employ flags, smoke signals, and other methods to send secret messages. You gain a +5 trait bonus on Bluff checks to receive secret messages and a +5 trait bonus on Sense Motive checks to intercept messages.",
+      'By observing Imperial military practices in Molthune, you have learned to employ flags, smoke signals, and other methods to send secret messages. You gain a +5 trait bonus on Bluff checks to receive secret messages and a +5 trait bonus on Sense Motive checks to intercept messages.',
     shortDescription: '+5 Bluff to receive secret messages, +5 Sense Motive to intercept messages',
     source: 'Pathfinder Player Companion: Inner Sea Primer',
     category: 'regional',
@@ -1175,7 +1176,7 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'technic_tinkerer',
     name: 'Technic Tinkerer',
     description:
-      "You have uncovered minor secrets of the Technic League and mastered a modest bit of magic. Select one 0-level spell; you may cast it once per day as a spell-like ability using your highest caster level (or CL 1st if you have no caster level).",
+      'You have uncovered minor secrets of the Technic League and mastered a modest bit of magic. Select one 0-level spell; you may cast it once per day as a spell-like ability using your highest caster level (or CL 1st if you have no caster level).',
     shortDescription: 'Cast one chosen 0-level spell 1/day as spell-like ability',
     source: 'Pathfinder Player Companion: Inner Sea Primer',
     category: 'regional',
@@ -1196,7 +1197,7 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'touched_by_the_sky',
     name: 'Touched by the Sky',
     description:
-      "You obtained a rare vial of fluid from crashed Numerian wreckage on the plains. After consuming it to avoid detection, you gained a supernatural ability. You can stabilize a dying creature with a touch as a standard action.",
+      'You obtained a rare vial of fluid from crashed Numerian wreckage on the plains. After consuming it to avoid detection, you gained a supernatural ability. You can stabilize a dying creature with a touch as a standard action.',
     shortDescription: 'Stabilize a dying creature with a touch (standard action)',
     source: 'Pathfinder Player Companion: Inner Sea Primer',
     category: 'regional',
@@ -1372,7 +1373,8 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
     name: 'Acolyte of Razmir',
     description:
       'You are either a current adherent of the Razmiri faith or a former follower who has since abandoned it. You gain a +1 trait bonus on Knowledge (local) and Knowledge (religion) checks, one of these two skills becomes a class skill for you, and the bonus increases to +2 when checks specifically involve details of the Razmiri faith.',
-    shortDescription: '+1 Knowledge (local) and (religion); +2 for Razmiri details; one class skill',
+    shortDescription:
+      '+1 Knowledge (local) and (religion); +2 for Razmiri details; one class skill',
     source: 'Pathfinder Player Companion: Inner Sea Primer',
     category: 'regional',
     subcategory: 'Razmiran',
@@ -1562,7 +1564,7 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'armor_check_penalty',
+        target: 'special.armor_check_penalty',
         value: 1,
         source: 'Sargavan Guard',
       },
@@ -1648,7 +1650,7 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.TRAIT,
-        target: 'concentration',
+        target: 'spell.concentration',
         value: 2,
         source: 'Abendego Spellpiercer',
       },
@@ -1873,7 +1875,7 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
     id: 'ustalavic_noble',
     name: 'Ustalavic Noble',
     description:
-      "You hail from an aristocratic family in Ustalav whose former prominence has faded over time. You gain a +1 trait bonus on Diplomacy checks, a +1 trait bonus on Knowledge (nobility) checks, and your starting money is increased by 100 gp.",
+      'You hail from an aristocratic family in Ustalav whose former prominence has faded over time. You gain a +1 trait bonus on Diplomacy checks, a +1 trait bonus on Knowledge (nobility) checks, and your starting money is increased by 100 gp.',
     shortDescription: '+1 Diplomacy, +1 Knowledge (nobility), +100 gp starting wealth',
     source: 'Pathfinder Player Companion: Inner Sea Primer',
     category: 'regional',
@@ -1897,7 +1899,7 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
       {
         type: 'special',
         bonusType: BonusType.UNTYPED,
-        target: 'starting_wealth',
+        target: 'special.starting_wealth',
         value: 100,
         source: 'Ustalavic Noble',
       },
@@ -1931,7 +1933,8 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
     name: 'Varisian Wanderer',
     description:
       'You were raised among or have spent time with a group of Varisian nomads, whether travelers, Sczarni criminals, or entertainers, and have learned their ways. Select one skill: Perform (any type), Profession (fortuneteller), or Sleight of Hand. You receive a +1 trait bonus to the chosen skill and it becomes a class skill regardless of your character class.',
-    shortDescription: '+1 to Perform, Profession (fortuneteller), or Sleight of Hand (choice); class skill',
+    shortDescription:
+      '+1 to Perform, Profession (fortuneteller), or Sleight of Hand (choice); class skill',
     source: 'Pathfinder Player Companion: Inner Sea Primer',
     category: 'regional',
     subcategory: 'Varisia',

@@ -17,7 +17,7 @@ export const ISWG_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'skill_bluff',
+        target: 'skill.bluff',
         value: 4,
         source: 'Secret Signs',
         condition: {
@@ -64,7 +64,7 @@ export const ISWG_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'skill_sense_motive',
+        target: 'skill.sense_motive',
         value: 3,
         source: 'Shrewd Tactician',
         condition: {
@@ -91,7 +91,7 @@ export const ISWG_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throws',
+        target: 'save.all',
         value: 1,
         source: 'Stoic',
         condition: {
@@ -124,7 +124,7 @@ export const ISWG_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'constitution_check_stabilize',
+        target: 'special.constitution_check_stabilize',
         value: 5,
         source: 'Survivor',
         condition: {
@@ -168,7 +168,7 @@ export const ISWG_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'skill_acrobatics',
+        target: 'skill.acrobatics',
         value: 2,
         source: 'Taldan Duelist',
         condition: {
@@ -211,7 +211,7 @@ export const ISWG_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'caster_level',
+        target: 'spell.caster_level',
         value: 1,
         source: 'Varisian Tattoo',
         condition: {

@@ -32,7 +32,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'skill_handle_animal',
+        target: 'skill.handle_animal',
         value: 2,
         source: 'Horse Whisperer',
         condition: {
@@ -44,7 +44,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'skill_ride',
+        target: 'skill.ride',
         value: 2,
         source: 'Horse Whisperer',
         condition: {
@@ -176,7 +176,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'skill_intimidate',
+        target: 'skill.intimidate',
         value: 3,
         source: 'Masked by Fear',
         condition: {
@@ -205,7 +205,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.CIRCUMSTANCE,
-        target: 'skill_bluff',
+        target: 'skill.bluff',
         value: 4,
         source: 'Masked Intent',
         condition: {
@@ -358,7 +358,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'occult_ritual_skill_check',
+        target: 'special.occult_ritual_skill_check',
         value: 3,
         source: 'Ritual Mask',
         condition: {
@@ -409,7 +409,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.MORALE,
-        target: 'saving_throw',
+        target: 'save.all',
         value: 2,
         source: 'Scarlet Rose Devotion',
         condition: {
@@ -437,7 +437,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'knowledge_skills',
+        target: 'skill.all',
         value: 2,
         source: 'Scholar',
         condition: {
@@ -511,7 +511,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throws',
+        target: 'save.all',
         value: 2,
         source: 'Sisterhood Dedication',
         condition: {
@@ -578,7 +578,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throw_reflex',
+        target: 'save.reflex',
         value: 1,
         source: 'Sisterhood Style',
         condition: {
@@ -590,7 +590,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'saving_throw_will',
+        target: 'save.will',
         value: 1,
         source: 'Sisterhood Style',
         condition: {
@@ -621,7 +621,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.UNTYPED,
-        target: 'skill_perception',
+        target: 'skill.perception',
         value: 1,
         source: 'Spirit Beacon',
         condition: {
@@ -646,7 +646,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
       {
         type: 'bonus',
         bonusType: BonusType.INSIGHT,
-        target: 'saving_throw_will',
+        target: 'save.will',
         value: 1,
         source: 'Spirit Beacon',
         condition: {

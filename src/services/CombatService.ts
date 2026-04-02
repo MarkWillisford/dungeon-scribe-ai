@@ -145,7 +145,7 @@ export class CombatService {
         {
           type: 'bonus',
           bonusType: BonusType.ENHANCEMENT,
-          target: 'speed',
+          target: 'speed.base',
           value: 30,
           source: 'Haste',
         },
