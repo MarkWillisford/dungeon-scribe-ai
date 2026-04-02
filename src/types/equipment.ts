@@ -57,6 +57,7 @@ export enum MagicSchool {
   ILLUSION = 'illusion',
   NECROMANCY = 'necromancy',
   TRANSMUTATION = 'transmutation',
+  UNIVERSAL = 'universal',
 }
 
 export interface WeaponSpecialAbility {

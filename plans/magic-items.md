@@ -49,11 +49,11 @@ Before writing new types, three things in `equipment.ts` need cleanup:
 
 The existing enum is incomplete for magic items (missing `eyes`, `headband`, `shoulders`) and uses `RING_LEFT`/`RING_RIGHT` (two ring slots) while PF1e wondrous items only need one `ring` slot (rings are tracked as individual items, not by finger). The `TWO_HANDED` slot is a _grip mode_, not a worn slot.
 
-**Resolution:** `ItemSlot` was added as a new unified type in `magicItems.ts`. `EquipmentSlot` was **preserved** (not removed) because existing tests depend on `EquipmentSlot.TWO_HANDED`. The two ring slots stay (since a character can wear two rings simultaneously), but PF1e body slots are added:
+**Resolution:** `ItemSlot` was added as a new unified type in `magicItems.ts`. `EquipmentSlot` was **preserved** (not removed) because existing tests depend on `EquipmentSlot.TWO_HANDED`. Ring items use a single `'ring'` slot on the item definition; left vs. right finger is tracked via `CharacterMagicItem.equippedSlot` using `EquipmentSlot.RING_LEFT`/`RING_RIGHT`:
 
 ```
 armor | belt | body | chest | eyes | feet | hands | head | headband
-neck | ring_left | ring_right | shield | shoulders | wrists
+neck | ring | shield | shoulders | wrists
 main_hand | off_hand | none
 ```
 
@@ -74,7 +74,7 @@ Per the data model decision: mundane weapons and armor do NOT have enhancement n
 | Category       | Slot                        | Requires Free Hand | Charges      | Spell-based      |
 | -------------- | --------------------------- | ------------------ | ------------ | ---------------- |
 | `wondrous`     | varies                      | no                 | sometimes    | no               |
-| `ring`         | ring_left / ring_right      | no                 | no           | no               |
+| `ring`         | ring                        | no                 | no           | no               |
 | `staff`        | none                        | yes                | 10 max       | yes (list)       |
 | `rod`          | none                        | yes                | varies       | sometimes        |
 | `wand`         | none                        | yes                | 50 max       | yes (1 spell)    |
@@ -108,8 +108,7 @@ export type ItemSlot =
   | 'head'
   | 'headband'
   | 'neck'
-  | 'ring_left'
-  | 'ring_right'
+  | 'ring' // item definition slot — character equips to ring_left or ring_right (EquipmentSlot)
   | 'shield'
   | 'shoulders'
   | 'wrists'
@@ -673,6 +672,51 @@ Typecheck via full path:
 5. **File naming** — `wondrousItems/aB-batch1.ts`, `aB-batch2.ts`, etc. Each batch ~25 entries.
 6. **Agents do NOT modify index.ts** — index wiring happens after all batches for a range are complete.
 
+### Agent Conventions (type fixes from 2026-04-02)
+
+These corrections apply to all batch files:
+
+**`MagicSchool.UNIVERSAL`** — now added to the `MagicSchool` enum. Use `MagicSchool.UNIVERSAL`
+for items with a "universal" aura school (e.g. Admixture Vial, Arcane Battery). Do NOT
+substitute `MagicSchool.TRANSMUTATION` with a comment.
+
+**Ring slot** — All ring-slot items (rings, bands, wondrous items worn on a finger) use
+`slot: 'ring'` in their item definition. Left vs. right is a character-sheet concern (tracked
+via `CharacterMagicItem.equippedSlot` with `EquipmentSlot.RING_LEFT`/`RING_RIGHT`). The item
+definition never specifies which finger — that's up to the player.
+
+**Conditional bonuses** (`EffectCondition` on individual effects):
+Use the `condition` field on an `Effect` for bonuses that only apply sometimes:
+```typescript
+{
+  type: 'bonus',
+  bonusType: 'luck',
+  target: 'ac',
+  value: 1,
+  source: 'Item Name',
+  condition: {
+    type: 'weapon_type',           // or 'target_type', 'custom', 'range', etc.
+    params: { weaponType: 'firearm' },
+    description: 'against firearm attacks only',
+  },
+}
+```
+
+**Class/race/alignment-gated power blocks** (`conditionalEffects[]` on the item):
+Use `conditionalEffects[]` when an entirely different set of effects or spell-like abilities
+applies only when the wielder meets a condition (paladin, dwarf, lawful good, etc.):
+```typescript
+conditionalEffects: [
+  {
+    condition: 'wielder_class',
+    classId: 'paladin',
+    spellLikeAbilities: [...],
+    effects: [...],
+  },
+],
+```
+See `_example.ts` Examples 4 and 5 for complete patterns.
+
 ### d20pfsrd URL Patterns
 
 | Category         | URL Pattern                                                                                                         |
@@ -789,7 +833,7 @@ This plan covers data model + static data + Firestore seeding only.
 
 All open questions resolved. Design is complete.
 
-- **Two ring slots:** Keep both `ring_left` / `ring_right` in `ItemSlot`.
+- **Two ring slots:** ✅ Resolved. Item definitions use a single `'ring'` slot in `ItemSlot`. Per-finger tracking (`ring_left`/`ring_right`) uses `EquipmentSlot` on `CharacterMagicItem.equippedSlot`.
 - **Wayfinder resonance powers:** ✅ Resolved (2026-03-28). Resonance lives on `IounStoneDefinition.resonancePower?: IounStoneResonancePower`. ~50 stones have resonance; ~5 don't (undefined = no resonance). All three grades of a stone share the same resonance power. The Wayfinder of Hidden Strength uses shape-based resonance that overrides the stone's power for 24h — modeled on its own wondrous item entry, not on the stone. Sources: Seekers of Secrets (primary), PFS Field Guide, PFS Primer, Inner Sea Combat.
 - **Intelligent artifact weapons:** All three overlays (`intelligentItem`, `artifactProperties`, `conditionalEffects`) can coexist on one object — TypeScript structural typing handles it.
 - **Antimagic field:** `grantedFeats` suppression enforced at runtime in modifier pipeline, not in types.

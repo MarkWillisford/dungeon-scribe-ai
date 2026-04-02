@@ -1,5 +1,6 @@
 // EXAMPLE BATCH FILE — shows expected format for all wondrous item batch files.
-// Delete this file before opening the PR.
+// When copying this file to create a batch file: delete _example.ts from your PR.
+// When updating this file to add new patterns: keep it and commit the changes.
 //
 // NAMING: one exported array per file, named after the file:
 //   aB-batch1.ts  → export const wondrousItemsAB1: WondrousItemDefinition[]
@@ -18,9 +19,18 @@
 //   - Use 'immunity' for full immunities
 //   - target follows EffectTarget — e.g. 'ability.str', 'save.all', 'ac.natural', 'skill.perception'
 //   - For non-standard targets use compound notation: 'special.lay_on_hands_uses_per_day'
+//   - For conditional effects (only applies sometimes), add a `condition` field to the Effect:
+//       condition: { type: 'weapon_type', params: { weaponType: 'firearm' }, description: '...' }
+//       condition: { type: 'target_type', params: { creatureType: 'undead' }, description: '...' }
+//       condition: { type: 'custom', params: { descriptor: 'fire' }, description: '...' }
+//   - For powers gated on the wielder (class, race, alignment), use conditionalEffects[] on the item
 //
 // AURA: array, items can have multiple schools.
 //   e.g. [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }]
+//   Use MagicSchool.UNIVERSAL for items with a universal aura school.
+//
+// SLOT: use 'ring' for ring-slot items (rings, bands, etc.).
+//   Left vs right is a character-sheet decision tracked via EquipmentSlot, not on the definition.
 //
 // SOURCES: use the book abbreviation as a string. Common values:
 //   'Core Rulebook', 'Advanced Player\'s Guide', 'Ultimate Equipment', 'Ultimate Combat',
@@ -36,6 +46,8 @@
 
 import type { WondrousItemDefinition } from '@/types/magicItems';
 import { AuraStrength, MagicSchool } from '@/types/equipment';
+// ConditionalEffect is only needed for class/race/alignment-gated powers (e.g. Holy Avenger, Bracers of the Merciful Knight)
+// For simple conditional bonuses (only vs. bullets, only vs. undead), use the `condition` field on Effect instead.
 
 export const wondrousItemsExample: WondrousItemDefinition[] = [
   // ---- Example 1: simple numeric bonus ----------------------------------------
@@ -236,21 +248,168 @@ export const wondrousItemsExample: WondrousItemDefinition[] = [
       },
     ],
 
+    // Independent pools: each spell has its own usesPerDay — wrap each in its own SlaBlock,
+    // or group them into one block with no block-level usesPerDay (per-spell values apply).
     spellLikeAbilities: [
       {
-        spellId: 'daylight',
-        spellName: 'Daylight',
-        casterLevel: 13,
-        usesPerDay: 0, // at will (from diamond charge)
-        activationAction: 'standard',
+        spells: [
+          {
+            spellId: 'daylight',
+            spellName: 'Daylight',
+            casterLevel: 13,
+            usesPerDay: 0, // at will (from diamond charge)
+            activationAction: 'standard',
+          },
+          {
+            spellId: 'fireball',
+            spellName: 'Fireball',
+            casterLevel: 13,
+            usesPerDay: 0, // per ruby charge
+            saveDC: 20,
+            activationAction: 'standard',
+          },
+        ],
       },
+    ],
+  },
+
+  // ---- Example 4: conditional effects (EffectCondition vs ConditionalEffect) ----------
+  //
+  // EffectCondition (condition field on Effect): the bonus only applies sometimes.
+  //   Use for: "only vs. firearms", "only vs. undead", "only for fire spells", etc.
+  //   This is the more common case for wondrous items.
+  //
+  // ConditionalEffect (conditionalEffects[] on the item): entirely different powers for
+  //   different wielders — class-gated, race-gated, or alignment-gated abilities.
+  //   Use for: "paladin only", "dwarf only", "lawful good only" power blocks.
+  {
+    id: 'wondrous-amulet-bullet-protection-1',
+    name: 'Amulet of Bullet Protection +1',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
+    casterLevel: 5,
+    slot: 'neck',
+
+    price: 1500,
+    weight: 0,
+
+    description:
+      'This amulet grants the wearer a +1 luck bonus to AC against firearm attacks.',
+
+    construction: {
+      feats: ['Craft Wondrous Item'],
+      spells: ['bullet shield'],
+      cost: 750,
+    },
+    physicalStats: {
+      hardness: 0,
+      hitPoints: 1,
+      breakDC: 10,
+    },
+
+    activationCategory: 'continuous',
+
+    effects: [
       {
-        spellId: 'fireball',
-        spellName: 'Fireball',
-        casterLevel: 13,
-        usesPerDay: 0, // per ruby charge
-        saveDC: 20,
-        activationAction: 'standard',
+        // Conditional effect: bonus only applies vs. firearm attacks.
+        // Use `condition` on the Effect for "only applies sometimes" bonuses.
+        type: 'bonus',
+        bonusType: 'luck',
+        target: 'ac',
+        value: 1,
+        source: 'Amulet of Bullet Protection +1',
+        condition: {
+          type: 'weapon_type',
+          params: { weaponType: 'firearm' },
+          description: 'against firearm attacks only',
+        },
+      },
+    ],
+  },
+
+  // ---- Example 5: ConditionalEffect — class-gated power block -------------------
+  //
+  // Bracers of the Merciful Knight: standard bonuses apply to all wielders,
+  // but the paladin-only spell-like abilities use conditionalEffects[].
+  {
+    id: 'wondrous-bracers-merciful-knight',
+    name: 'Bracers of the Merciful Knight',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 5,
+    slot: 'wrists',
+
+    price: 15700,
+    weight: 1,
+
+    description:
+      "These silver bracers are etched with images of angelic figures. They provide a +2 armor bonus to AC. " +
+      "If the wearer is a paladin, once per day she may use lesser restoration, neutralize poison, or remove disease " +
+      "as a spell-like ability.",
+
+    construction: {
+      feats: ['Craft Wondrous Item'],
+      spells: ['lesser restoration', 'neutralize poison', 'remove disease'],
+      cost: 7850,
+    },
+    physicalStats: {
+      hardness: 10,
+      hitPoints: 5,
+      breakDC: 20,
+    },
+
+    activationCategory: 'continuous',
+
+    effects: [
+      {
+        // Applies to all wielders
+        type: 'bonus',
+        bonusType: 'armor',
+        target: 'ac.armor',
+        value: 2,
+        source: 'Bracers of the Merciful Knight',
+      },
+    ],
+
+    // Powers that only apply to a specific class go in conditionalEffects[].
+    // The pipeline skips these if the condition isn't met.
+    conditionalEffects: [
+      {
+        condition: 'wielder_class',
+        classId: 'paladin',
+        // Shared pool: the paladin gets ONE use per day — she picks which spell to cast.
+        // Set usesPerDay on the SlaBlock; omit it on individual spells.
+        spellLikeAbilities: [
+          {
+            usesPerDay: 1, // shared — cast any ONE of the three per day
+            spells: [
+              {
+                spellId: 'lesser_restoration',
+                spellName: 'Lesser Restoration',
+                casterLevel: 5,
+                activationAction: 'standard',
+              },
+              {
+                spellId: 'neutralize_poison',
+                spellName: 'Neutralize Poison',
+                casterLevel: 5,
+                activationAction: 'standard',
+              },
+              {
+                spellId: 'remove_disease',
+                spellName: 'Remove Disease',
+                casterLevel: 5,
+                activationAction: 'standard',
+              },
+            ],
+          },
+        ],
       },
     ],
   },

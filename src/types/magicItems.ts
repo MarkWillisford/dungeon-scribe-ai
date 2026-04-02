@@ -17,8 +17,7 @@ export type ItemSlot =
   | 'head'
   | 'headband'
   | 'neck'
-  | 'ring_left'
-  | 'ring_right'
+  | 'ring' // item definition slot — character equips to ring_left or ring_right (EquipmentSlot)
   | 'shield'
   | 'shoulders'
   | 'wrists'
@@ -70,9 +69,21 @@ export interface ItemSpellLikeAbility {
   spellId: string;
   spellName: string;
   casterLevel: number;
-  usesPerDay: number; // 0 = at will
+  usesPerDay?: number; // 0 = at will; omit when SlaBlock.usesPerDay provides the shared pool
   saveDC?: number;
   activationAction: ActivationAction;
+}
+
+// SlaBlock groups one or more SLAs with a shared daily pool.
+//   usesPerDay on the block  → shared pool: the wielder picks one spell per use
+//   usesPerDay absent        → independent: each spell uses its own ItemSpellLikeAbility.usesPerDay
+//
+// Examples:
+//   [{ spells: [{ spellId: 'fly', usesPerDay: 3, ... }] }]              — 3/day independent
+//   [{ usesPerDay: 1, spells: [fly, invisibility, ...] }]               — choose one per day
+export interface SlaBlock {
+  usesPerDay?: number; // shared pool across all spells in this block; 0 = at will
+  spells: ItemSpellLikeAbility[];
 }
 
 // ---------------------------------------------------------------------------
@@ -88,7 +99,7 @@ export interface ConditionalEffect {
   creatureType?: string; // for Bane / Dwarven Thrower pattern
   enhancementBonus?: number; // replaces base enhancement when condition met
   effects?: Effect[];
-  spellLikeAbilities?: ItemSpellLikeAbility[];
+  spellLikeAbilities?: SlaBlock[];
 }
 
 // ---------------------------------------------------------------------------
@@ -102,7 +113,7 @@ export interface ItemSpecialAbility {
   bonusEquivalent?: number; // omit for non-standard abilities (Holy Avenger aura, etc.)
   casterLevel: number;
   effects: Effect[];
-  spellLikeAbilities?: ItemSpellLikeAbility[];
+  spellLikeAbilities?: SlaBlock[];
   alignmentRequired?: Alignment[];
   conditionalEffects?: ConditionalEffect[];
 }
@@ -119,7 +130,7 @@ export interface ScalingTier {
   // What changes at this tier — any combination
   enhancementBonus?: number;
   additionalEffects?: Effect[];
-  additionalSpellLikeAbilities?: ItemSpellLikeAbility[];
+  additionalSpellLikeAbilities?: SlaBlock[];
   additionalGrantedFeats?: string[];
   notes?: string; // free text for complex unlocks
 }
@@ -213,7 +224,7 @@ export interface MagicItemDefinition {
 
   effects: Effect[];
   grantedFeats?: string[]; // feat IDs — suppressed in antimagic field
-  spellLikeAbilities?: ItemSpellLikeAbility[];
+  spellLikeAbilities?: SlaBlock[];
   conditionalEffects?: ConditionalEffect[]; // class/race/alignment-gated powers (e.g. Bracers of the Merciful Knight, Holy Avenger)
   useMagicDeviceDC?: number;
 
@@ -235,7 +246,6 @@ export interface WondrousItemDefinition extends MagicItemDefinition {
 
 export interface RingDefinition extends MagicItemDefinition {
   category: 'ring';
-  // slot must be ring_left or ring_right
 }
 
 export interface StaffDefinition extends MagicItemDefinition {
@@ -372,7 +382,7 @@ export interface CharacterMagicItem {
   name: string; // denormalized for display
 
   equipped: boolean;
-  equippedSlot?: ItemSlot;
+  equippedSlot?: Exclude<ItemSlot, 'ring'> | 'ring_left' | 'ring_right'; // rings: use ring_left/ring_right to track which finger
   charges?: number; // current charges remaining
 
   // Identification state
