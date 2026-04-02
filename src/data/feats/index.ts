@@ -82,6 +82,22 @@ import { PSYCHIC_ANTHOLOGY_FEATS } from './psychicAnthologyFeats';
 import { POTIONS_POISONS_FEATS } from './potionsPoisonsFeats';
 import { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
 import { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
+import { ADVANCED_CLASS_ORIGINS_FEATS } from './advancedClassOriginsFeats';
+import { DRAGONSLAYER_FEATS } from './dragonslayerFeats';
+import { HALFLING_GOLARION_FEATS } from './halflingGolarionFeats';
+import { ANIMAL_ARCHIVE_FEATS } from './animalArchiveFeats';
+import { SPYMASTER_FEATS } from './spymasterFeats';
+import { BOOK_DAMNED_FEATS } from './bookDamnedFeats';
+import { OCCULT_ORIGINS_FEATS } from './occultOriginsFeats';
+import { CHELIAX_FEATS } from './cheliaxFeats';
+import { HELLKNIGHT_FEATS } from './hellknightFeats';
+import { DISTANT_REALMS_FEATS } from './distantRealmsFeats';
+import { ARCANE_ANTHOLOGY_FEATS } from './arcaneAnthologyFeats';
+import { GOBLIN_GOLARION_FEATS } from './goblinGolarionFeats';
+import { GNOME_GOLARION_FEATS } from './gnomeGolarionFeats';
+import { TECHNOLOGY_GUIDE_FEATS } from './technologyGuideFeats';
+import { ORC_GOLARION_FEATS } from './orcGolarionFeats';
+import { OSIRION_FEATS } from './osirionFeats';
 
 export { CORE_FEATS } from './core';
 export { CORE_EXTRA_FEATS } from './core-extra';
@@ -164,6 +180,22 @@ export { PSYCHIC_ANTHOLOGY_FEATS } from './psychicAnthologyFeats';
 export { POTIONS_POISONS_FEATS } from './potionsPoisonsFeats';
 export { KOBOLD_GOLARION_FEATS } from './koboldGolarionFeats';
 export { GIANT_HUNTERS_HANDBOOK_FEATS } from './giantHunterFeats';
+export { ADVANCED_CLASS_ORIGINS_FEATS } from './advancedClassOriginsFeats';
+export { DRAGONSLAYER_FEATS } from './dragonslayerFeats';
+export { HALFLING_GOLARION_FEATS } from './halflingGolarionFeats';
+export { ANIMAL_ARCHIVE_FEATS } from './animalArchiveFeats';
+export { SPYMASTER_FEATS } from './spymasterFeats';
+export { BOOK_DAMNED_FEATS } from './bookDamnedFeats';
+export { OCCULT_ORIGINS_FEATS } from './occultOriginsFeats';
+export { CHELIAX_FEATS } from './cheliaxFeats';
+export { HELLKNIGHT_FEATS } from './hellknightFeats';
+export { DISTANT_REALMS_FEATS } from './distantRealmsFeats';
+export { ARCANE_ANTHOLOGY_FEATS } from './arcaneAnthologyFeats';
+export { GOBLIN_GOLARION_FEATS } from './goblinGolarionFeats';
+export { GNOME_GOLARION_FEATS } from './gnomeGolarionFeats';
+export { TECHNOLOGY_GUIDE_FEATS } from './technologyGuideFeats';
+export { ORC_GOLARION_FEATS } from './orcGolarionFeats';
+export { OSIRION_FEATS } from './osirionFeats';
 
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
@@ -247,6 +279,22 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...POTIONS_POISONS_FEATS,
   ...KOBOLD_GOLARION_FEATS,
   ...GIANT_HUNTERS_HANDBOOK_FEATS,
+  ...ADVANCED_CLASS_ORIGINS_FEATS,
+  ...DRAGONSLAYER_FEATS,
+  ...HALFLING_GOLARION_FEATS,
+  ...ANIMAL_ARCHIVE_FEATS,
+  ...SPYMASTER_FEATS,
+  ...BOOK_DAMNED_FEATS,
+  ...OCCULT_ORIGINS_FEATS,
+  ...CHELIAX_FEATS,
+  ...HELLKNIGHT_FEATS,
+  ...DISTANT_REALMS_FEATS,
+  ...ARCANE_ANTHOLOGY_FEATS,
+  ...GOBLIN_GOLARION_FEATS,
+  ...GNOME_GOLARION_FEATS,
+  ...TECHNOLOGY_GUIDE_FEATS,
+  ...ORC_GOLARION_FEATS,
+  ...OSIRION_FEATS,
 ];
 
 export function initializeFeatRegistry(): void {
