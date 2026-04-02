@@ -196,7 +196,7 @@ export interface MagicItemDefinition {
   source: string;
   isOfficial: boolean;
 
-  aura: MagicAura;
+  aura: MagicAura[]; // array because items can have multiple schools (e.g. "moderate abjuration and faint transmutation")
   casterLevel: number;
   slot: ItemSlot;
   requiresFreeHand?: boolean;
@@ -214,6 +214,7 @@ export interface MagicItemDefinition {
   effects: Effect[];
   grantedFeats?: string[]; // feat IDs — suppressed in antimagic field
   spellLikeAbilities?: ItemSpellLikeAbility[];
+  conditionalEffects?: ConditionalEffect[]; // class/race/alignment-gated powers (e.g. Bracers of the Merciful Knight, Holy Avenger)
   useMagicDeviceDC?: number;
 
   // Overlays — any combination may be present simultaneously

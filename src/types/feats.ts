@@ -112,6 +112,12 @@ export interface FeatDefinition {
 
   isCustom?: boolean;
   createdBy?: string;
+
+  // TODO: Add `repeatable?: boolean` and `maxTaken?: number` to support feats that can be taken
+  // more than once (e.g. Extra Channel, Spell Focus taken for different schools, Toughness at
+  // mythic tier). Validation service must check CharacterFeat[] count against maxTaken before
+  // allowing a second selection. When repeatable is true and the feat has a `choices` field,
+  // each instance must have a different choice (e.g. Spell Focus: Evocation ≠ Spell Focus: Illusion).
 }
 
 // ---- Character's Feat Instance (runtime state, stored on Character) ----
