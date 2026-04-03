@@ -343,7 +343,7 @@ Export names: `wondrousItemsAB1` through `wondrousItemsAB13`
 292. Briar Bomb
 293. Bridle of Charon
 294. Bridle of Tricks
-295. Brilliant Bulwark
+295. Brilliant Bulwark — SKIP (magic shield, not wondrous; seed in magic shields batch)
 296. Brilliant Flash Symbol
 297. Brooch of Amber Sparks
 298. Brooch of Blending
@@ -618,8 +618,8 @@ Export names: `wondrousItemsCD1` through `wondrousItemsCD11`
 
 ### cD-batch10.ts (items 226–250)
 
-226. Dragon Herald Vestments
-227. Dragonbane Divination Sticks
+226. Dragon Herald Vestments — SKIP (magic armor, not wondrous; seed in magic armor batch)
+227. Dragonbone Divination Sticks (note: plan had typo "Dragonbane")
 228. Drinking Horn of Bottomless Valor
 229. Drinking Horn of the Panacea
 230. Drum of Advance and Retreat
