@@ -1,0 +1,200 @@
+import type { WondrousItemDefinition } from '@/types/magicItems';
+import { AuraStrength, MagicSchool } from '@/types/equipment';
+
+export const wondrousItemsMP7: WondrousItemDefinition[] = [
+  {
+    id: 'wondrous-pearl-of-power-1st',
+    name: 'Pearl of Power (1st)',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 17,
+    slot: 'none',
+    price: 1000,
+    weight: 0,
+    description:
+      'This lustrous white pearl allows a spellcaster who prepares spells to recall any one spell that they had prepared ' +
+      'and then cast that day. The spell is then prepared again, just as if it had not been cast. The spell must be of ' +
+      '1st level or lower.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['creator must be able to cast spells of the spell level to be recalled'], cost: 500 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.pearl_of_power_recall', value: 0, source: 'Pearl of Power (1st)' }],
+  },
+  {
+    id: 'wondrous-pearl-of-power-2nd',
+    name: 'Pearl of Power (2nd)',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 17,
+    slot: 'none',
+    price: 4000,
+    weight: 0,
+    description: 'As Pearl of Power (1st), but recalls a spell of 2nd level or lower.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['creator must be able to cast 2nd-level spells'], cost: 2000 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.pearl_of_power_recall', value: 0, source: 'Pearl of Power (2nd)' }],
+  },
+  {
+    id: 'wondrous-pearl-of-power-3rd',
+    name: 'Pearl of Power (3rd)',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 17,
+    slot: 'none',
+    price: 9000,
+    weight: 0,
+    description: 'As Pearl of Power (1st), but recalls a spell of 3rd level or lower.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['creator must be able to cast 3rd-level spells'], cost: 4500 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.pearl_of_power_recall', value: 0, source: 'Pearl of Power (3rd)' }],
+  },
+  {
+    id: 'wondrous-pearl-of-the-sirines',
+    name: 'Pearl of the Sirines',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [
+      { strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION },
+      { strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION },
+    ],
+    casterLevel: 8,
+    slot: 'none',
+    price: 15300,
+    weight: 0,
+    description:
+      'When clasped firmly in hand or held to the breast, this pearl grants the capacity to breathe in water as if in ' +
+      'clean fresh air. It provides a swim speed of 60 feet and allows underwater spellcasting and action without restrictions.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['freedom of movement', 'water breathing'], cost: 8150 },
+    activationCategory: 'use_activated',
+    effects: [
+      { type: 'special', target: 'special.pearl_sirines_water_breathing', value: 0, source: 'Pearl of the Sirines' },
+      { type: 'grant_movement', target: 'swim', value: 60, source: 'Pearl of the Sirines' },
+    ],
+  },
+  {
+    id: 'wondrous-gravewatch-pendant',
+    name: 'Gravewatch Pendant',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
+    casterLevel: 3,
+    slot: 'neck',
+    price: 8000,
+    weight: 1,
+    description:
+      'This iron ring on a bone necklace emits blue light that repels undead. Undead take a -2 penalty on attack rolls ' +
+      'against the wearer while incorporeal undead suffer a -4 penalty. However, undead gain a +4 bonus to detect the wearer.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['protection from evil'], cost: 4000 },
+    activationCategory: 'continuous',
+    effects: [
+      { type: 'special', target: 'special.gravewatch_pendant_undead_penalty', value: 0, source: 'Gravewatch Pendant' },
+    ],
+  },
+  {
+    id: 'wondrous-periapt-of-health',
+    name: 'Periapt of Health',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
+    casterLevel: 5,
+    slot: 'neck',
+    price: 7500,
+    weight: 0,
+    description: 'This blue gemstone on a silver chain grants the wearer immunity to all diseases, including supernatural diseases.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['remove disease'], cost: 3750 },
+    activationCategory: 'continuous',
+    effects: [{ type: 'immunity', target: 'disease', value: 0, source: 'Periapt of Health' }],
+  },
+  {
+    id: 'wondrous-periapt-of-proof-against-poison',
+    name: 'Periapt of Proof against Poison',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
+    casterLevel: 5,
+    slot: 'neck',
+    price: 27000,
+    weight: 0,
+    description:
+      'This brilliant-cut black gem on a delicate silver chain grants the wearer immunity to poison. Toxins already affecting ' +
+      'the character when donning the periapt continue their effects.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['neutralize poison'], cost: 13500 },
+    activationCategory: 'continuous',
+    effects: [{ type: 'immunity', target: 'poison', value: 0, source: 'Periapt of Proof against Poison' }],
+  },
+  {
+    id: 'wondrous-periapt-of-wound-closure',
+    name: 'Periapt of Wound Closure',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 10,
+    slot: 'neck',
+    price: 15000,
+    weight: 0,
+    description:
+      'A bright blue stone on a silver chain. The wearer automatically stabilizes if HP falls below 0 (unless fatal). ' +
+      'Doubles normal healing rates and enables recovery from wounds that wouldn\'t normally heal naturally. ' +
+      'Bleeding damage is negated, though ability damage/drain from bleeding still applies.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['heal'], cost: 7500 },
+    activationCategory: 'continuous',
+    effects: [
+      { type: 'special', target: 'special.periapt_wound_closure_stabilize', value: 0, source: 'Periapt of Wound Closure' },
+      { type: 'immunity', target: 'bleed', value: 0, source: 'Periapt of Wound Closure' },
+    ],
+  },
+  {
+    id: 'wondrous-phylactery-of-faithfulness',
+    name: 'Phylactery of Faithfulness',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
+    casterLevel: 1,
+    slot: 'headband',
+    price: 1000,
+    weight: 0,
+    description:
+      'A small box holding sacred texts on a leather cord worn across the forehead. The wearer gains awareness of actions ' +
+      'or items that could negatively impact their alignment and divine relationship, including magical effects, and ' +
+      'receives this information before acting if they pause to reflect.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['detect chaos', 'detect evil', 'detect good', 'detect law'], cost: 500 },
+    activationCategory: 'continuous',
+    effects: [{ type: 'special', target: 'special.phylactery_faithfulness_alignment_warning', value: 0, source: 'Phylactery of Faithfulness' }],
+  },
+  {
+    id: 'wondrous-philter-of-love',
+    name: 'Philter of Love',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.ENCHANTMENT }],
+    casterLevel: 15,
+    slot: 'none',
+    price: 3000,
+    weight: 0,
+    description:
+      'This potion compels the drinker to fall madly in love with the first creature perceived afterward. Their attitude ' +
+      'becomes helpful, and romantic attraction develops if possible. Effects persist permanently unless dispelled via ' +
+      'break enchantment, dispel magic, limited wish, miracle, remove curse, or wish.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['charm monster', 'permanency'], cost: 1500 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.philter_of_love_charm', value: 0, source: 'Philter of Love' }],
+  },
+  // Deferred items (AoN pages did not render):
+  // Iron Guard Pauldrons, Juggernaut's Pauldrons, Purifying Pearl, Prophet's Pectoral,
+  // Pelt of the Beast, Pelt of the Wolf, Pendant of the Blood Scarab, Pendant of the Souk,
+  // Knowledge Pendant, Pendulate Divan of the Emperor, Periapt of Placebos,
+  // Periapt of Proof Against Paralysis, Periapt of Protection from Curses,
+  // Periapt of Temporary Familiar, Perilous Puzzle Box, Pestilence Clasp, Philanderous Compact
+];
