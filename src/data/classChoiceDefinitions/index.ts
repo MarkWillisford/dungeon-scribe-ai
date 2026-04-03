@@ -14,6 +14,7 @@ import { cavalierDefinitions } from './cavalier';
 import { inquisitorDefinitions } from './inquisitor';
 import { oracleDefinitions } from './oracle';
 import { bardDefinitions } from './bard';
+import { skaldDefinitions } from './skald';
 
 export {
   fighterDefinitions,
@@ -31,6 +32,7 @@ export {
   inquisitorDefinitions,
   oracleDefinitions,
   bardDefinitions,
+  skaldDefinitions,
 };
 
 export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
@@ -49,6 +51,7 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...inquisitorDefinitions,
   ...oracleDefinitions,
   ...bardDefinitions,
+  ...skaldDefinitions,
 ];
 
 export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined =>
