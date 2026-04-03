@@ -255,7 +255,6 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'It has AC 16, 10 hit points, and hardness 6.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['animate objects', 'finger of death', 'fly'], cost: 11000 },
     physicalStats: { hardness: 6, hitPoints: 10, breakDC: 20 },
-    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.mask_skull_finger_of_death', value: 0, source: 'Mask of the Skull' }],
   },
