@@ -1,0 +1,172 @@
+import type { WondrousItemDefinition } from '@/types/magicItems';
+import { AuraStrength, MagicSchool } from '@/types/equipment';
+
+export const wondrousItemsRZ4: WondrousItemDefinition[] = [
+  {
+    id: 'wondrous-scabbard-of-keen-edges',
+    name: 'Scabbard of Keen Edges',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 5,
+    slot: 'none',
+    price: 16000,
+    weight: 1,
+    description:
+      'Black scabbard with silver runes depicting bladed weapons. Adjusts to fit any blade up to greatsword size. ' +
+      'Up to three times per day on command, casts keen edge on any blade placed within it.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['keen edge'], cost: 8000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'command_word',
+    spellLikeAbilities: [
+      { spells: [{ spellId: 'keen_edge', spellName: 'Keen Edge', casterLevel: 5, usesPerDay: 3, activationAction: 'standard' }] },
+    ],
+    effects: [{ type: 'special', target: 'special.scabbard_keen_edges', value: 0, source: 'Scabbard of Keen Edges' }],
+  },
+  {
+    id: 'wondrous-scabbard-of-many-blades',
+    name: 'Scabbard of Many Blades',
+    category: 'wondrous',
+    source: 'Advanced Class Guide',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 9,
+    slot: 'none',
+    price: 5000,
+    weight: 3,
+    description:
+      'This extradimensional scabbard holds up to 4 two-handed weapons or 8 one-handed/light weapons. The wearer can swap ' +
+      'a drawn weapon with a stored one as a move action (swift with Quick Draw). Excludes shields, gauntlets, and wands.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['secret chest'], cost: 2500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.scabbard_many_blades_swap', value: 0, source: 'Scabbard of Many Blades' }],
+  },
+  {
+    id: 'wondrous-scabbard-of-stanching',
+    name: 'Scabbard of Stanching',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
+    casterLevel: 5,
+    slot: 'none',
+    price: 5000,
+    weight: 2,
+    description:
+      'Red leather sheath with gold filigree fitting any bladed slashing weapon. When worn, automatically stops bleed effects ' +
+      'on the wearer. Cannot counteract bleeds requiring DC 16+ caster level or Heal check.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['cure light wounds'], cost: 2500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'continuous',
+    effects: [{ type: 'special', target: 'special.scabbard_stanching_bleed_stop', value: 0, source: 'Scabbard of Stanching' }],
+  },
+  {
+    id: 'wondrous-scabbard-of-vigor',
+    name: 'Scabbard of Vigor',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 5,
+    slot: 'none',
+    price: 1800,
+    weight: 3,
+    description:
+      'Grants a weapon an enhancement bonus once per day when drawn. Bonus strength and duration are inversely related: ' +
+      '+4 for 1 round, +3 for 3 rounds, +2 for 5 rounds, or +1 for 10 rounds.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['greater magic weapon'], cost: 900 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.scabbard_vigor_temp_enhancement', value: 0, source: 'Scabbard of Vigor' }],
+  },
+  {
+    id: 'wondrous-scarab-of-protection',
+    name: 'Scarab of Protection',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [
+      { strength: AuraStrength.STRONG, school: MagicSchool.ABJURATION },
+      { strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY },
+    ],
+    casterLevel: 18,
+    slot: 'neck',
+    price: 38000,
+    weight: 0,
+    description:
+      'This jade beetle medallion grants SR 20 and absorbs energy-draining attacks, death effects, and negative energy effects. ' +
+      'After absorbing 12 such attacks, the scarab is destroyed.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['death ward', 'spell resistance'], cost: 19000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'continuous',
+    effects: [
+      { type: 'bonus', target: 'sr', value: 20, source: 'Scarab of Protection' },
+      { type: 'special', target: 'special.scarab_protection_absorb', value: 0, source: 'Scarab of Protection' },
+    ],
+  },
+  {
+    id: 'wondrous-golembane-scarab',
+    name: 'Golembane Scarab',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.DIVINATION }],
+    casterLevel: 8,
+    slot: 'neck',
+    price: 2500,
+    weight: 0,
+    description:
+      'This beetle-shaped neck pin detects golems within 60 feet (standard action to concentrate). Allows the wearer to ' +
+      'combat golems with weapons, unarmed, or natural attacks as if golems had no damage reduction.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['detect magic'], cost: 1250 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'continuous',
+    effects: [{ type: 'special', target: 'special.golembane_scarab_bypass_dr', value: 0, source: 'Golembane Scarab' }],
+  },
+  {
+    id: 'wondrous-seekers-sight',
+    name: "Seeker's Sight",
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.DIVINATION }],
+    casterLevel: 8,
+    slot: 'none',
+    price: 12000,
+    weight: 1,
+    description:
+      'This firearm sight attaches to two-handed firearms (removable as full-round). The wielder can spend a full-round ' +
+      'to locate invisible creatures within line of sight, or fire a single shot bypassing the target\'s invisibility.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['true seeing'], cost: 6000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.seekers_sight_invisibility', value: 0, source: "Seeker's Sight" }],
+  },
+  {
+    id: 'wondrous-seers-tea',
+    name: "Seer's Tea",
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
+    casterLevel: 3,
+    slot: 'none',
+    price: 550,
+    weight: 0,
+    description:
+      'Brewed and consumed unfiltered, the drinker reads leaf patterns for augury. As a material component for augury, ' +
+      'eliminates the focus and produces divination-quality results instead.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['augury'], cost: 275 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.seers_tea_augury', value: 0, source: "Seer's Tea" }],
+  },
+  // Deferred items (AoN pages did not render):
+  // Scabbard of the Efreet, Scabbard of the Lost Kiss, Scabbard of True Death,
+  // Scarab (Insect), Scarecrow Lure, Scarf of the Suggestive Dance,
+  // Scarves of the Stinging Dancer, School of Eyes, Scrap Collector's Strap,
+  // Scroll (Riffle), Sea Silk Shell, Seafarer's Waders, Seafaring Stanchions,
+  // Seamless Skin, Secret Pen, Secure Paypack, Seeking Lens
+];
