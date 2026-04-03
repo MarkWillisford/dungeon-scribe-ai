@@ -18,6 +18,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'When rung as a standard action, it creates a 30-foot-radius burst that functions as dispel magic ' +
       'targeting psychic and mind-affecting effects. The bell can be rung 3 times per day.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['dispel magic'], cost: 10000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.golden_bell_dispel', value: 0, source: "Master's Perfect Golden Bell" }],
   },
@@ -37,6 +38,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'treat gillman targets as if from aboleth sources, imposing additional Will save penalties. Once daily, the wearer ' +
       'can trigger dominate person (Will DC 18) in Aboleth, followed by potential modify memory casting (Will DC 17) on the same target.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['dominate person', 'modify memory'], cost: 17000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.masters_call_dominate', value: 0, source: "Masters' Call" }],
   },
@@ -56,6 +58,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'a rate of one 10-foot cube per 10 minutes, or break through rock at one 10-foot cube per hour. When wielded as a weapon, ' +
       'it functions as a Gargantuan +3 adamantine warhammer, inflicting 4d6 base damage.',
     construction: { feats: ['Craft Wondrous Item', 'Craft Magic Arms and Armor'], spells: ['move earth'], cost: 13348 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.mattock_titans_excavation', value: 0, source: 'Mattock of the Titans' }],
   },
@@ -75,6 +78,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'resist a dragon\'s frightful presence aura. Once per day, the wearer can breathe energy matching the dragon type the helm ' +
       'resembles, dealing 7d6 damage with a Reflex save DC 16.',
     construction: { feats: ['Craft Wondrous Item'], spells: ["dragon's breath"], cost: 9000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', bonusType: 'competence', target: 'skill.intimidate', value: 4, source: 'Maw of the Wyrm' },
@@ -97,6 +101,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'creatures within 100 feet of the wearer, they must succeed at a concentration check (DC 15 + twice the summon ability level). ' +
       'Failed checks waste the ability entirely, while successful checks reduce summoned creatures to just one.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['dimensional anchor'], cost: 16000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.medallion_demonic_disruption', value: 0, source: 'Medallion of Demonic Disruption' }],
   },
@@ -115,6 +120,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'This neck pendant, typically crafted from bronze, copper, or silver, grants the wearer the ability to read the thoughts ' +
       'of others, as with the spell detect thoughts.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['detect thoughts'], cost: 6000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.medallion_thoughts_detect', value: 0, source: 'Medallion of Thoughts' }],
   },
@@ -134,6 +140,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'unconscious from drowning, she can remain unconscious for up to 10 minutes before making Constitution checks to avoid ' +
       'asphyxiation. The wearer regains consciousness at 0 HP one round after escaping water, then the medallion disintegrates.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['air bubble'], cost: 500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.drowning_medallion_protection', value: 0, source: 'Drowning Medallion' }],
   },
@@ -153,6 +160,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'mind-affecting spells, spell-like abilities, and supernatural abilities. If the wearer fails a save against domination or ' +
       'confusion, they receive an additional saving throw. If the second save succeeds, the medallion loses its magic.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['protection from evil'], cost: 1750 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'resistance', target: 'save.mind_affecting', value: 2, source: 'Mind Sentinel Medallion' },
@@ -174,6 +182,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'saving throws. Once per day as a free action, it bestows false life on the wearer. When placed on the neck of a dead body, ' +
       'it preserves the body indefinitely via gentle repose.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['false life', 'gentle repose', 'resistance'], cost: 1750 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'resistance', target: 'save.all', value: 1, source: 'Star Medallion' },
@@ -194,6 +203,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'This finger-sized stone grants the consumer neutralize poison effects and provides a +4 bonus on saving throws against ' +
       'addiction for 24 hours. The item is consumed upon use.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['neutralize poison'], cost: 800 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', target: 'save.poison', value: 4, source: 'Medicinal Bezoar', condition: { type: 'custom', params: {}, description: 'vs. addiction for 24 hours' } },
@@ -215,6 +225,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'it increases the caster\'s effective level by one. When used to perform a harrowing over a grave or burial site, the spirit ' +
       'of the interred body influences the harrowing — for each card drawn related to the past, the harrower draws twice and chooses.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['speak with dead'], cost: 1250 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.mediums_harrow_mat', value: 0, source: "Medium's Harrow Mat" }],
   },
@@ -235,6 +246,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'can trigger a petrifying ray attack (ranged touch, 100 ft range) forcing a DC 19 Fortitude save; failure results in ' +
       'permanent petrification.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['alarm', 'flesh to stone'], cost: 22500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'special', target: 'special.meduseion_petrify_aura', value: 0, source: 'Meduseion' },
@@ -255,6 +267,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'This metal lockbox is designed to contain technological items that might otherwise be dangerous. Items placed inside are ' +
       'protected from glitches and meltdowns, and the safe itself is hardened against fire and electricity damage.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['fire trap', 'secret chest'], cost: 5000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.meltdown_safe_protection', value: 0, source: 'Meltdown Safe' }],
   },
@@ -275,6 +288,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'them to roll twice on their next attack or save, taking the worse result. The image fades at the start of the bearer\'s ' +
       'next turn. The item has 3 uses per day.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['mirror image'], cost: 3500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.mirror_guarding_reflections', value: 0, source: 'Mirror of Guarding Reflections' }],
   },
@@ -296,6 +310,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'communicate with and release trapped creatures. If destroyed (hardness 1, 5 HP), all prisoners escape.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['imprisonment'], cost: 100000 },
     physicalStats: { hardness: 1, hitPoints: 5, breakDC: 10 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.mirror_life_trapping', value: 0, source: 'Mirror of Life Trapping' }],
   },
@@ -318,6 +333,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       '25 feet, scrying distant locations including other planes, creating a temporary portal for travel, and once weekly ' +
       'answering a short question about a creature shown in the mirror.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['clairaudience/clairvoyance', 'detect thoughts', 'gate', 'legend lore'], cost: 87500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.mirror_mental_prowess', value: 0, source: 'Mirror of Mental Prowess' }],
   },
@@ -338,6 +354,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'both to vanish. Functions up to 4 times daily. Destroying it (hardness 1, 5 HP) causes all duplicates to disappear.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['clone'], cost: 46000 },
     physicalStats: { hardness: 1, hitPoints: 5, breakDC: 10 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'command_word',
     effects: [{ type: 'special', target: 'special.mirror_opposition_duplicate', value: 0, source: 'Mirror of Opposition' }],
   },
@@ -357,6 +374,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'Diplomacy and Knowledge (religion) checks. The wearer can ask a deity one question daily (via commune) and perform a ' +
       'touch-based atonement ritual once weekly.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['atonement', 'commune', 'guidance'], cost: 9000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', bonusType: 'competence', target: 'skill.diplomacy', value: 5, source: 'Mitre of the Hierophant' },
@@ -380,6 +398,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
       'round against nearby creatures. They operate as single-HD mindless undead with hardness 3 and 10 HP that restore at midnight.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['alarm', 'animate dead'], cost: 4000 },
     physicalStats: { hardness: 3, hitPoints: 10, breakDC: 15 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.mockingskull_sentry', value: 0, source: 'Mockingskull' }],
   },

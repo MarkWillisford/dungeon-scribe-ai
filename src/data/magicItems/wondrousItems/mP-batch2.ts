@@ -19,6 +19,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'an invisible slashing attack once daily against targets within 100 feet, dealing 2d4+2 points of force damage. The mask can reshape ' +
       'itself into a cap or conceal itself as a free action.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['animate rope', 'magic missile', 'resistance'], cost: 1500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'resistance', target: 'save.fortitude', value: 2, source: 'Mask of Cutting Flesh' },
@@ -44,6 +45,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'patron deity matches the mask\'s associated deity, additional powers unlock: casting magic missile (3rd-level caster) ' +
       'via the black side and disguise self via the white side, each usable once daily.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['detect magic', 'disguise self', 'magic missile', 'read magic'], cost: 2500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     spellLikeAbilities: [
       { spells: [
@@ -70,6 +72,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'the form possesses (darkvision 60 feet, low-light vision, or scent) and receives a +4 size bonus to Strength, -2 penalty to ' +
       'Dexterity, and +1 natural armor bonus.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['giant form I'], cost: 15000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', target: 'ability.str', value: 4, bonusType: 'size', source: 'Mask of Giants (Lesser)' },
@@ -93,6 +96,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'If the giant form has energy immunities or resistances, the wearer gains resistance 20 to that energy type. Statistics improve ' +
       'to +6 size bonus to Strength, -2 penalty to Dexterity, +4 size bonus to Constitution, and +4 natural armor bonus.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['giant form I'], cost: 45000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', target: 'ability.str', value: 6, bonusType: 'size', source: 'Mask of Giants (Greater)' },
@@ -117,6 +121,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'It grants a +10 competence bonus on Bluff checks made to lie and a +5 competence bonus on Bluff checks made to feint, ' +
       'though it penalizes hidden message attempts with a -5 modifier.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['innocence', 'stone shape'], cost: 4000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'competence', target: 'skill.bluff', value: 10, source: 'Mask of Stony Demeanor', condition: { type: 'custom', params: {}, description: 'to lie only' } },
@@ -140,6 +145,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'or penetrates magical disguises using divination magic, that observer becomes blinded for 1d4 minutes (Fortitude DC 16 negates). ' +
       'The wearer gains a brief mental impression of the perpetrator, sufficient for scrying or teleportation attempts. Functions once per day.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['blindness/deafness'], cost: 1250 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.mask_cursed_eye_scry_retaliation', value: 0, source: 'Mask of the Cursed Eye' }],
   },
@@ -159,6 +165,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'the wearer\'s words in their own language. The mask also grants a +5 competence bonus on Diplomacy checks and on Bluff ' +
       'checks to tell a lie by replicating local idioms. Does not function on the Material Plane.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['tongues'], cost: 19000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'competence', target: 'skill.diplomacy', value: 5, source: 'Mask of the Far Traveler' },
@@ -181,6 +188,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'effect making their face appear to reveal skull and muscle beneath the skin. Observers within 100 feet must pass a Will save ' +
       '(DC 13) or become frightened or shaken depending on Hit Dice. True seeing negates the illusion.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['disguise self', 'scare'], cost: 3600 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.mask_krenshar_fear', value: 0, source: 'Mask of the Krenshar' }],
   },
@@ -200,6 +208,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'The wearer can expend a charge to gain darkvision 60 feet, see invisibility, deathwatch, or a +5 competence bonus on ' +
       'Perception checks. Each ability lasts 30 minutes and multiple effects can stack. Charges restore after 24 hours.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['darkvision', 'deathwatch', 'see invisibility'], cost: 3000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.mask_mantis_charges', value: 0, source: 'Mask of the Mantis' }],
   },
@@ -218,6 +227,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'This magical headpiece features a rabbit design with large felt ears. The wearer gains a +2 morale bonus to initiative ' +
       'and fear saving throws, plus they always count as having a running start for Acrobatics jump checks.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['jump', 'remove fear'], cost: 6000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'morale', target: 'initiative', value: 2, source: 'Mask of the Rabbit Prince' },
@@ -245,6 +255,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'It has AC 16, 10 hit points, and hardness 6.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['animate objects', 'finger of death', 'fly'], cost: 11000 },
     physicalStats: { hardness: 6, hitPoints: 10, breakDC: 20 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.mask_skull_finger_of_death', value: 0, source: 'Mask of the Skull' }],
   },
@@ -264,6 +275,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'with rage. The light wood is magically reinforced to grant a +1 armor bonus. Once per day as a free action, the wearer can ' +
       'cause the mask to contort ferociously, causing a single creature within 15 feet to make a DC 14 Will save or become frightened.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['cause fear', 'mage armor'], cost: 1850 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', target: 'ac', value: 1, bonusType: 'armor', source: 'Ferocious War Mask' },
@@ -285,6 +297,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'This dark leather mask has geometric patterns meant to appear intimidating. It covers the face while leaving the mouth ' +
       'and eyes exposed. The wearer gains the ability to attempt to bull rush and grapple without provoking attacks of opportunity.',
     construction: { feats: ['Craft Wondrous Item'], spells: ["bull's strength", "cat's grace", 'expeditious retreat'], cost: 2500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.grapplers_mask_no_aoo', value: 0, source: "Grappler's Mask" }],
   },
@@ -304,6 +317,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       '5 minutes. While submerged with air remaining, the mask converts speech into water vibrations, enabling normal communication ' +
       'with others wearing hollow masks within 60 feet. Requires equal replenishment time after use.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['air bubble', 'message'], cost: 1500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.hollow_mask_underwater_breathing', value: 0, source: 'Hollow Mask' }],
   },
@@ -323,6 +337,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'deity, they gain a +2 competence bonus on Heal and Intimidate checks. Additionally, the wearer can cast cause fear and cure ' +
       'light wounds once daily each.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['cause fear', 'shadow conjuration'], cost: 1050 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', bonusType: 'competence', target: 'skill.heal', value: 2, source: 'Holy Mask of the Living God', condition: { type: 'custom', params: {}, description: 'worshiper of Razmir only' } },
@@ -345,6 +360,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'throws against visual effects, including gaze attacks and sight-based illusions. Once daily, the wearer can activate the ' +
       'gemstone to force a creature within 30 feet to make a DC 15 Fortitude save or face petrification for one minute.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['flesh to stone', 'resistance'], cost: 5000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', target: 'save.visual', value: 4, source: 'Medusa Mask' },
@@ -367,6 +383,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'The transformation lasts 5 minutes and requires a standard action to activate (provokes AoOs). If the wearer cannot ' +
       'fit in their original form\'s space upon reverting, they shift to the nearest available location.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['miasmatic form'], cost: 11500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.miasmatic_mask_gaseous_form', value: 0, source: 'Miasmatic Mask' }],
   },
@@ -385,6 +402,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'This wooden mask resembles a miser\'s gaunt visage. It grants the wearer the scent ability limited to detecting coins ' +
       'and gems. The mask provides a +5 competence bonus on Appraise checks made to ascertain the value of gems.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['bloodhound'], cost: 1500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'competence', target: 'skill.appraise', value: 5, source: "Miser's Mask", condition: { type: 'custom', params: {}, description: 'gem valuation only' } },
@@ -407,6 +425,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'can be swapped with other eye slot items. It provides a +4 resistance bonus on saving throws against disease. The wearer ' +
       'can cast remove disease once daily on a touched creature.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['remove disease'], cost: 3750 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', bonusType: 'resistance', target: 'save.disease', value: 4, source: 'Plague Mask' },
@@ -430,6 +449,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'This magical doctor\'s mask offers a +2 resistance bonus against nauseating scents and immunity to a specific disease ' +
       'selected during creation. Additionally, it obscures the wearer\'s alignment from magical detection, registering as neutral.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['misdirection', 'remove disease'], cost: 1000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'resistance', target: 'save.nausea', value: 2, source: "Plaguebringer's Mask" },
@@ -451,6 +471,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'This magical mask provides enhanced perception against fearful creatures and increased slashing damage against living foes. ' +
       'It allows the user to cast confusion twice daily. However, donning the mask inflicts 1 point of Charisma damage.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['confusion', 'deathwatch'], cost: 6000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'special', target: 'special.reapers_mask_enhanced_perception', value: 0, source: "Reaper's Mask" },
@@ -475,6 +496,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'A pink conch shell with leather straps and clear viewing mask that enables underwater breathing. The wearer gains a ' +
       '+4 competence bonus on Perception checks underwater and can detect magical auras as if having cast detect magic.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['air bubble', 'detect magic'], cost: 3000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'competence', target: 'skill.perception', value: 4, source: 'Seashell Diving Mask', condition: { type: 'custom', params: {}, description: 'underwater only' } },
@@ -497,6 +519,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'aren\'t immune to fear and a +1 profane bonus on damage with slashing weapons against living creatures. Donning the mask ' +
       'inflicts 1 point of Charisma damage as the wearer\'s thoughts become tangled with images of murder.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['deathwatch', 'rage'], cost: 750 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'competence', target: 'skill.perception', value: 2, source: 'Skin Mask', condition: { type: 'custom', params: {}, description: 'vs. creatures not immune to fear' } },
@@ -520,6 +543,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'to Stealth. Once daily, the wearer can mimic the appearance of an observed creature within 60 feet for one hour, providing a ' +
       '+10 bonus on related Disguise checks. The mask also grants a +1 bonus on attack and damage rolls against the mimicked creature.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['disguise self', 'rage'], cost: 1750 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', target: 'skill.stealth', value: 5, source: "Stalker's Mask" },
@@ -542,6 +566,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'vermin shape matching the mask\'s design, the wearer can speak normally and gains extended duration — 3 additional hours ' +
       'for wild shape or 7 extra minutes for the spell.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['vermin shape I'], cost: 5040 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.vermin_mask_extended_duration', value: 0, source: 'Vermin Mask' }],
   },
@@ -560,6 +585,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
       'This wicker and insect-resin mask renders the wearer immune to swarm distraction attacks. Additionally, once per day ' +
       'the wearer can transform into an insect as per vermin shape I.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['vermin shape I'], cost: 4800 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'immunity', target: 'special.swarm_distraction', value: 0, source: 'Visage of the Broodlord' },

@@ -18,6 +18,7 @@ export const wondrousItemsMP7: WondrousItemDefinition[] = [
       'and then cast that day. The spell is then prepared again, just as if it had not been cast. The spell must be of ' +
       '1st level or lower.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['creator must be able to cast spells of the spell level to be recalled'], cost: 500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.pearl_of_power_recall', value: 0, source: 'Pearl of Power (1st)' }],
   },
@@ -34,6 +35,7 @@ export const wondrousItemsMP7: WondrousItemDefinition[] = [
     weight: 0,
     description: 'As Pearl of Power (1st), but recalls a spell of 2nd level or lower.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['creator must be able to cast 2nd-level spells'], cost: 2000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.pearl_of_power_recall', value: 0, source: 'Pearl of Power (2nd)' }],
   },
@@ -50,6 +52,7 @@ export const wondrousItemsMP7: WondrousItemDefinition[] = [
     weight: 0,
     description: 'As Pearl of Power (1st), but recalls a spell of 3rd level or lower.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['creator must be able to cast 3rd-level spells'], cost: 4500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.pearl_of_power_recall', value: 0, source: 'Pearl of Power (3rd)' }],
   },
@@ -71,6 +74,7 @@ export const wondrousItemsMP7: WondrousItemDefinition[] = [
       'When clasped firmly in hand or held to the breast, this pearl grants the capacity to breathe in water as if in ' +
       'clean fresh air. It provides a swim speed of 60 feet and allows underwater spellcasting and action without restrictions.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['freedom of movement', 'water breathing'], cost: 8150 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'special', target: 'special.pearl_sirines_water_breathing', value: 0, source: 'Pearl of the Sirines' },
@@ -92,6 +96,7 @@ export const wondrousItemsMP7: WondrousItemDefinition[] = [
       'This iron ring on a bone necklace emits blue light that repels undead. Undead take a -2 penalty on attack rolls ' +
       'against the wearer while incorporeal undead suffer a -4 penalty. However, undead gain a +4 bonus to detect the wearer.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['protection from evil'], cost: 4000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'special', target: 'special.gravewatch_pendant_undead_penalty', value: 0, source: 'Gravewatch Pendant' },
@@ -110,6 +115,7 @@ export const wondrousItemsMP7: WondrousItemDefinition[] = [
     weight: 0,
     description: 'This blue gemstone on a silver chain grants the wearer immunity to all diseases, including supernatural diseases.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['remove disease'], cost: 3750 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'immunity', target: 'disease', value: 0, source: 'Periapt of Health' }],
   },
@@ -128,6 +134,7 @@ export const wondrousItemsMP7: WondrousItemDefinition[] = [
       'This brilliant-cut black gem on a delicate silver chain grants the wearer immunity to poison. Toxins already affecting ' +
       'the character when donning the periapt continue their effects.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['neutralize poison'], cost: 13500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'immunity', target: 'poison', value: 0, source: 'Periapt of Proof against Poison' }],
   },
@@ -147,6 +154,7 @@ export const wondrousItemsMP7: WondrousItemDefinition[] = [
       'Doubles normal healing rates and enables recovery from wounds that wouldn\'t normally heal naturally. ' +
       'Bleeding damage is negated, though ability damage/drain from bleeding still applies.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['heal'], cost: 7500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'special', target: 'special.periapt_wound_closure_stabilize', value: 0, source: 'Periapt of Wound Closure' },
@@ -169,6 +177,7 @@ export const wondrousItemsMP7: WondrousItemDefinition[] = [
       'or items that could negatively impact their alignment and divine relationship, including magical effects, and ' +
       'receives this information before acting if they pause to reflect.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['detect chaos', 'detect evil', 'detect good', 'detect law'], cost: 500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.phylactery_faithfulness_alignment_warning', value: 0, source: 'Phylactery of Faithfulness' }],
   },
@@ -188,6 +197,7 @@ export const wondrousItemsMP7: WondrousItemDefinition[] = [
       'becomes helpful, and romantic attraction develops if possible. Effects persist permanently unless dispelled via ' +
       'break enchantment, dispel magic, limited wish, miracle, remove curse, or wish.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['charm monster', 'permanency'], cost: 1500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.philter_of_love_charm', value: 0, source: 'Philter of Love' }],
   },

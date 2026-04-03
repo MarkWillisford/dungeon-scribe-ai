@@ -18,6 +18,7 @@ export const wondrousItemsMP6: WondrousItemDefinition[] = [
       'equivalent to holy water. Good creatures can command it to cast consecrate and searing light once daily each. Evil ' +
       'bearers suffer a permanent negative level while holding it.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['bless water', 'consecrate', 'daylight', 'searing light'], cost: 11000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.orb_golden_heaven', value: 0, source: 'Orb of Golden Heaven' }],
   },
@@ -39,6 +40,7 @@ export const wondrousItemsMP6: WondrousItemDefinition[] = [
       'This 8-inch diameter glass sphere grants the possessor control over weather. Once daily cast control weather; once monthly ' +
       'conjure storm of vengeance; continuous endure elements protection.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['control weather', 'endure elements', 'storm of vengeance'], cost: 24000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.orb_of_storms_weather', value: 0, source: 'Orb of Storms' }],
   },
@@ -57,6 +59,7 @@ export const wondrousItemsMP6: WondrousItemDefinition[] = [
       'This small holy symbol made of stained glass in a gold frame allows the holder to project the symbol\'s image within ' +
       '15 feet. If the bearer is a paladin, they can use lay on hands through the symbol at 15-foot range instead of touch.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['sacred bond'], cost: 5000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.ornament_healing_light_ranged_loh', value: 0, source: 'Ornament of Healing Light' }],
   },
@@ -75,6 +78,7 @@ export const wondrousItemsMP6: WondrousItemDefinition[] = [
       'Contains a single 1st-level spell. If the bearer is a spontaneous caster with the spell on their class list, they ' +
       'may use spell slots to cast it as if it were a spell known.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['creator must know the spell'], cost: 250 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.page_spell_knowledge', value: 0, source: 'Page of Spell Knowledge (1st)' }],
   },
@@ -91,6 +95,7 @@ export const wondrousItemsMP6: WondrousItemDefinition[] = [
     weight: 0,
     description: 'As Page of Spell Knowledge (1st), but contains a 2nd-level spell.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['creator must know the spell'], cost: 1000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.page_spell_knowledge', value: 0, source: 'Page of Spell Knowledge (2nd)' }],
   },
@@ -107,6 +112,7 @@ export const wondrousItemsMP6: WondrousItemDefinition[] = [
     weight: 0,
     description: 'As Page of Spell Knowledge (1st), but contains a 3rd-level spell.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['creator must know the spell'], cost: 2250 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.page_spell_knowledge', value: 0, source: 'Page of Spell Knowledge (3rd)' }],
   },
@@ -125,6 +131,7 @@ export const wondrousItemsMP6: WondrousItemDefinition[] = [
       'These shoulder armor pieces feature bull engravings. The wearer may roll twice and take the better result when performing ' +
       'a bull rush. They also provide a +2 enhancement bonus to CMD against bull rushes.',
     construction: { feats: ['Craft Wondrous Item'], spells: ["bull's strength"], cost: 5000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'enhancement', target: 'cmd', value: 2, source: 'Pauldrons of the Bull', condition: { type: 'custom', params: {}, description: 'vs. bull rush only' } },
@@ -145,6 +152,7 @@ export const wondrousItemsMP6: WondrousItemDefinition[] = [
       'Mithral shoulder pieces with an embossed viper motif. They provide a +2 dodge bonus to AC vs. attacks of opportunity ' +
       'and +2 CMD against bull rush, grapple, reposition, and trip maneuvers.',
     construction: { feats: ['Craft Wondrous Item'], spells: ["cat's grace"], cost: 1500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'dodge', target: 'ac', value: 2, source: 'Pauldrons of the Serpent', condition: { type: 'custom', params: {}, description: 'vs. attacks of opportunity only' } },
@@ -167,6 +175,7 @@ export const wondrousItemsMP6: WondrousItemDefinition[] = [
       'moves through your threatened space via Acrobatics without triggering an AoO, a shadowy lion emerges and strikes using ' +
       'your BAB + DEX mod vs. touch AC, dealing 2d6 piercing damage (x2 crit) on success.',
     construction: { feats: ['Craft Wondrous Item', 'Craft Magic Arms and Armor'], spells: ['spectral hand'], cost: 5400 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.watchful_lion_spectral_strike', value: 0, source: 'Pauldrons of the Watchful Lion' }],
   },
@@ -186,6 +195,7 @@ export const wondrousItemsMP6: WondrousItemDefinition[] = [
       'on grapple or melee strikes. Combined with standard armor spikes, damage increases to 1d6 (Small) or 1d8 (Medium), ' +
       'using whichever enhancement bonus is higher.',
     construction: { feats: ['Craft Wondrous Item', 'Craft Magic Arms and Armor'], spells: ['bleed'], cost: 7175 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'damage', target: 'special.demonspike_armor_spikes', value: 0, source: 'Demonspike Pauldrons' },

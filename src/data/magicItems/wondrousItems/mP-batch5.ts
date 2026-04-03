@@ -18,6 +18,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
       'necromancer designates it as their bonded object, they may spontaneously exchange any prepared wizard necromancy spell ' +
       'for another wizard necromancy spell they know, provided the new spell is equal to or lower in level.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['create undead'], cost: 10000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.necromancers_athame_swap', value: 0, source: "Necromancer's Athame" }],
   },
@@ -37,6 +38,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
       'to willing drinkers and prevents accidental liquid entry. Fluids remain undiluted even if submerged, enabling potion ' +
       'consumption underwater. Liquids placed inside do not succumb to temperature or time.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['gentle repose'], cost: 500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.neverspill_goblet', value: 0, source: 'Neverspill Goblet' }],
   },
@@ -55,6 +57,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
       'A narrow vial containing 5 doses of thick liquid that grants low-light vision for 1 hour when applied to eyes. ' +
       'Users experience a -2 penalty on saving throws against light-based effects and develop light sensitivity.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['beast shape I'], cost: 125 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'special', target: 'special.nightdrops_low_light_vision', value: 0, source: 'Nightdrops' },
@@ -77,6 +80,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
       'the Plateau of Leng and spells such as weird, nightmare, and phantasmal killer. Lasts 1 hour but causes temporary ' +
       'blindness (1d4 rounds) and 1d4 Wisdom damage. DC 11 Will save or both effects are permanent.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['blindness', 'true seeing'], cost: 125 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'special', target: 'special.nightmare_tears_true_seeing', value: 0, source: 'Nightmare Tears' },
@@ -98,6 +102,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
       'touch attack, provides +10 to Survival tracking checks against the coated target. Grants +1 on Bluff, Knowledge, ' +
       'Perception, Sense Motive, Survival checks, and attack/damage rolls against the affected creature for 1 hour.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['bestow curse'], cost: 850 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', target: 'skill.survival', value: 10, source: 'Oil of Attraction', condition: { type: 'custom', params: {}, description: 'tracking coated creature only' } },
@@ -118,6 +123,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
       'This grayish oil silences firearms when applied. A single vial works on one-handed or two-handed firearms for one hour. ' +
       'Five vials silence a Large siege firearm, ten vials for Huge. Cannot suppress noise from siege engines exceeding Huge size.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['silence'], cost: 125 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.oil_silence_firearm', value: 0, source: 'Oil of Silence' }],
   },
@@ -136,6 +142,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
       'This herbal preparation contains belladonna, mandrake, and foxglove mixed into rendered fats. When rubbed over the skin, ' +
       'it grants the subject the ability to fly (as overland flight) for up to 9 hours.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['overland flight'], cost: 1125 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'grant_movement', target: 'fly', value: 40, source: 'Flying Ointment' }],
   },
@@ -158,6 +165,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
       'a single curse or restores ability damage from undead attacks. Functions similarly to lesser restoration or remove curse ' +
       'with a +5 bonus. Can address combined curse-and-disease afflictions (like mummy rot) requiring two checks.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['lesser restoration', 'remove curse', 'remove disease'], cost: 2000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.purifying_ointment_remove', value: 0, source: 'Purifying Ointment' }],
   },
@@ -176,6 +184,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
       'This unguent comes in a 3-inch diameter jar containing 5 applications. It can detoxify poisons (as neutralize poison ' +
       'with +5 bonus), cure diseases (as remove disease with +5 bonus), or heal 1d8+5 points of damage (as cure light wounds).',
     construction: { feats: ['Craft Wondrous Item'], spells: ['cure light wounds', 'neutralize poison', 'remove disease'], cost: 2000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.restorative_ointment', value: 0, source: 'Restorative Ointment' }],
   },
@@ -195,6 +204,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
       'spells. On command word, grants a +5 insight bonus on Craft (alchemy), Knowledge (arcana), Knowledge (nature), or ' +
       'Spellcraft checks related to spell research or formula extraction. Can be used 5 times before cracking and losing all magic.',
     construction: { feats: ['Craft Wondrous Item', 'Scribe Scroll'], spells: ['read magic'], cost: 3500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', bonusType: 'competence', target: 'skill.spellcraft', value: 2, source: 'Orb of Arcane Research', condition: { type: 'custom', params: {}, description: 'spell research only' } },
@@ -217,6 +227,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
       'Will saves or be compelled to touch it. First touch deals 1d2 CON and 1d2 WIS damage (DC 15 negates). The user gains ' +
       'a +4 enhancement bonus to Charisma for 1 hour per point of damage dealt.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['bestow curse', "eagle's splendor"], cost: 5000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'command_word',
     effects: [{ type: 'special', target: 'special.orb_consumption_drain', value: 0, source: 'Orb of Consumption' }],
   },
@@ -236,6 +247,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
       'focus evil-descriptor spells, it provides a +1 caster level bonus. Good creatures carrying it suffer one permanent ' +
       'negative level that persists only while holding the item.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['dread bolt'], cost: 9000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', target: 'spell.caster_level', value: 1, source: 'Orb of Foul Abaddon', condition: { type: 'custom', params: {}, description: 'evil descriptor spells only' } },

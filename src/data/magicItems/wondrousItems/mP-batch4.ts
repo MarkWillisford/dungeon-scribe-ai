@@ -22,6 +22,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'shimmering copy of the sword formed of white light that deals 4d8 force damage, or 8d6 force damage if the target ' +
       'stands on sacred ground (plus a daze effect for 1 round). DC 14 Will save halves damage and negates daze.',
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['arrow of law'], cost: 11930 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.monastic_warden_force_blade', value: 0, source: 'Monastic Warden' }],
   },
@@ -41,6 +42,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'area and see exactly what occurred in that area during the past 24 hours. The observation takes one minute and provides ' +
       'clear visual details but no auditory information.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['legend lore', 'vision'], cost: 33000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.monocle_investigator_past_sight', value: 0, source: 'Monocle of the Investigator' }],
   },
@@ -61,6 +63,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'pulls the wearer\'s attention away, allowing them to roll saving throws twice and take the better result (1/day). ' +
       'After activation, vision blurs and read magic ceases.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['augury', 'read magic'], cost: 2500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.eldritch_monocle_read_magic', value: 0, source: "Eldritch Scholar's Monocle" }],
   },
@@ -79,6 +82,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       "This monocle grants its wearer a +5 competence bonus on Sense Motive checks. Though it fits over only one eye, " +
       "it takes up the entire eyes slot.",
     construction: { feats: ['Craft Wondrous Item'], spells: ['zone of truth'], cost: 1700 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'bonus', bonusType: 'competence', target: 'skill.sense_motive', value: 5, source: "Inquisitor's Monocle" }],
   },
@@ -101,6 +105,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'like a candle within 5 feet and grants a +5 bonus to Knowledge checks regarding creature vulnerabilities. It rapidly ' +
       'opens to relevant pages and can cast a specific spell once daily.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['discovery torch', 'know the enemy'], cost: 8000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'bonus', target: 'skill.knowledge', value: 5, source: "Monster Killer's Folio", condition: { type: 'custom', params: {}, description: 'creature vulnerabilities only' } }],
   },
@@ -120,6 +125,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'to shape metal instead — though metal shaping is limited to one-tenth the normal volume. Creating weapons requires a ' +
       'successful Craft (weapons) check, and items cannot be masterwork.',
     construction: { feats: ['Craft Wondrous Item'], spells: ["bear's endurance", 'stone shape'], cost: 12500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'bonus', bonusType: 'enhancement', target: 'ability.str', value: 4, source: "Mountainshaper's Girdle" }],
   },
@@ -139,6 +145,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'normal when determining carrying capacity. The bonus applies exclusively to encumbrance calculations, not to combat ' +
       'or other strength-based checks.',
     construction: { feats: ['Craft Wondrous Item'], spells: ["bull's strength"], cost: 500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'bonus', target: 'special.carrying_capacity', value: 8, source: 'Muleback Cords' }],
   },
@@ -157,6 +164,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'This iridescent scale adheres to the forehead and enhances the wearer\'s gaze. It grants the wearer a +2 enhancement ' +
       'bonus to Charisma and the ability to fascinate a single creature within 30 feet once per day (Will DC 16 negates).',
     construction: { feats: ['Craft Wondrous Item'], spells: ['eagle\'s splendor', 'hypnotism'], cost: 3000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', bonusType: 'enhancement', target: 'ability.cha', value: 2, source: 'Naga-Scale Bindi' },
@@ -178,6 +186,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'any caster. When applied to scales (standard action), reptilian creatures gain the ability to cast the imbued spells ' +
       'if they meet Hit Dice and ability score requirements.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['imbue with spell ability'], cost: 700 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.nagaji_scale_polish_imbue', value: 0, source: 'Nagaji Scale Polish' }],
   },
@@ -198,6 +207,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'drawing on life force. First spell per level has no penalty; additional spells require concentration checks (DC 15 + spell ' +
       'level) and cause fatigue; casting while fatigued risks exhaustion.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['blood transcription'], cost: 12500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.nail_of_blood_dead_zone_casting', value: 0, source: 'Nail of Blood' }],
   },
@@ -216,6 +226,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'This platinum medallion on a heavy chain grants the wearer immunity to harmful vapors and gases — including cloudkill, ' +
       'stinking cloud, and inhaled poisons — while enabling breathing in any environment, including underwater and in a vacuum.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['alter self'], cost: 4500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'immunity', target: 'special.harmful_vapors', value: 0, source: 'Necklace of Adaptation' },
@@ -236,6 +247,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'This item enables aquatic creatures to breathe air and become amphibious, allowing indefinite land survival. It also ' +
       'grants a movement speed of 30 feet or provides a +10 enhancement bonus to existing speeds of 30+ feet.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['air breathing', 'expeditious retreat'], cost: 5000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
       { type: 'special', target: 'special.necklace_air_adaptation_amphibious', value: 0, source: 'Necklace of Air Adaptation' },
@@ -257,6 +269,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'weapons or alchemist\'s bombs as a move action. Each tooth adds 1d4 slashing damage and increases splash damage by ' +
       '2 points per tooth used. The necklace is depleted once all teeth are consumed.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['greater magic fang'], cost: 925 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'damage', target: 'special.bloody_incisors_splash', value: 0, source: 'Necklace of Bloody Incisors' }],
   },
@@ -280,6 +293,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'concealment ends for 1 minute if the wearer touches a construct or attacks anyone. Constructs with Intelligence 3+ ' +
       'may attempt a DC 18 Will save to overcome the effect.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['invisibility', 'locate object'], cost: 66000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.necklace_construct_aversion', value: 0, source: 'Necklace of Construct Aversion' }],
   },
@@ -300,6 +314,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'body reforms within 60 feet, restored to life. If the gem breaks early, the body materializes immediately. ' +
       'The necklace becomes inert after resurrection.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['nondetection', 'trap the soul', 'true resurrection'], cost: 60000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.necklace_ensured_return_resurrection', value: 0, source: 'Necklace of Ensured Return' }],
   },
@@ -318,6 +333,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'This item appears to be a string of beads. Each bead can be detached and thrown as a ranged touch attack (max range 70 ft). ' +
       'Each bead detonates as a fireball (Reflex DC 14 half). Type I contains one 5d6 bead and two 3d6 beads.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['fireball'], cost: 825 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.necklace_fireballs', value: 0, source: 'Necklace of Fireballs (Type I)' }],
   },
@@ -335,6 +351,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
     description:
       'As Necklace of Fireballs Type I, but contains one 5d6 bead, two 3d6 beads, and two 2d6 beads.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['fireball'], cost: 1350 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.necklace_fireballs', value: 0, source: 'Necklace of Fireballs (Type II)' }],
   },
@@ -352,6 +369,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
     description:
       'As Necklace of Fireballs Type I, but contains one 7d6 bead, two 5d6 beads, and two 3d6 beads.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['fireball'], cost: 2175 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.necklace_fireballs', value: 0, source: 'Necklace of Fireballs (Type III)' }],
   },
@@ -371,6 +389,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'effective level when determining the size of his ki pool and the level-based effects of his ki pool ability ' +
       '(such as bypassing damage reduction).',
     construction: { feats: ['Craft Wondrous Item'], spells: ['calm emotions', "owl's wisdom"], cost: 8000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [{ type: 'bonus', target: 'special.ki_pool_effective_level', value: 4, source: 'Necklace of Ki Serenity' }],
   },
@@ -394,6 +413,7 @@ export const wondrousItemsMP4: WondrousItemDefinition[] = [
       'for recalling 1st-level or 0-level spells. Once per day the wearer may counterspell targeted magic using dispel magic with ' +
       'a bonus of 12 + unused jewels. Success allows recalling a spell of equal or lower level.',
     construction: { feats: ['Craft Wondrous Item'], spells: ['dancing lights', 'dispel magic', 'wandering star motes'], cost: 21000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.necklace_netted_stars_pearl_counterspell', value: 0, source: 'Necklace of Netted Stars' }],
   },

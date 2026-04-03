@@ -30,6 +30,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['divide mind', 'possession', 'tower of iron will V'],
       cost: 45000,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
@@ -71,6 +72,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['cause fear', 'command'],
       cost: 1750,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'continuous',
 
@@ -124,6 +126,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['resistance', 'status'],
       cost: 250,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'continuous',
 
@@ -217,6 +220,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['mass cure light wounds'],
       cost: 5000,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
@@ -255,6 +259,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['minor creation'],
       cost: 2500,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
@@ -291,6 +296,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['charm person'],
       cost: 1000,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'continuous',
 
@@ -327,6 +333,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['beast shape III'],
       cost: 6250,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
@@ -381,6 +388,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['explode head', 'suffocation'],
       cost: 25000,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
@@ -416,6 +424,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['stoneskin'],
       cost: 38000,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'continuous',
 
@@ -457,6 +466,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['greater age resistance'],
       cost: 25000,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'continuous',
 
@@ -494,6 +504,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['death ward'],
       cost: 24000,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'continuous',
 
@@ -534,6 +545,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['spell resistance'],
       cost: 45000,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'continuous',
 
@@ -572,6 +584,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['contagion'],
       cost: 6700,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
@@ -614,6 +627,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['stoneskin'],
       cost: 47500,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'continuous',
 
@@ -657,6 +671,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['deeper darkness'],
       cost: 3000,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
@@ -697,6 +712,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['shield other'],
       cost: 6100,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
@@ -734,6 +750,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['modify memory'],
       cost: 3750,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
@@ -771,6 +788,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['locate object', 'scent trail'],
       cost: 2800,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
@@ -808,6 +826,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['vampiric touch'],
       cost: 3000,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
@@ -846,6 +865,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['major creation'],
       cost: 2000,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
@@ -883,6 +903,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['clairaudience/clairvoyance'],
       cost: 5000,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'continuous',
 
@@ -929,6 +950,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       spells: ['alter self', 'nondetection'],
       cost: 12500,
     },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
 
     activationCategory: 'use_activated',
 
