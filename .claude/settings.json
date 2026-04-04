@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:aonprd.com)",
+      "WebFetch(domain:www.aonprd.com)",
+      "WebFetch(domain:d20pfsrd.com)",
+      "WebFetch(domain:www.d20pfsrd.com)",
+      "Write(src/data/**)",
+      "Edit(src/data/**)",
+      "Write(/home/markw/worktrees/*/src/data/**)",
+      "Edit(/home/markw/worktrees/*/src/data/**)"
+    ]
+  }
+}
