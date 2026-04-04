@@ -49,6 +49,7 @@ export interface BloodlinePower {
 }
 
 export interface BloodlineEntry extends ClassOptionBase {
+  classIds: ('sorcerer' | 'bloodrager')[]; // which classes can select this bloodline
   bloodlineArcana: string; // text description of passive benefit
   powers: BloodlinePower[];
   bonusSpells: string[]; // 9 entries — index 0 = level 1 bonus spell name

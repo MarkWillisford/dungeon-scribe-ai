@@ -29,6 +29,8 @@ import { monkDefinitions } from './monk';
 import { antiPaladinDefinitions } from './antipaladin';
 import { warpriestDefinitions } from './warpriest';
 import { alchemistDefinitions } from './alchemist';
+import { sorcererDefinitions } from './sorcerer';
+import { bloodragerDefinitions } from './bloodrager';
 
 export {
   fighterDefinitions,
@@ -61,6 +63,8 @@ export {
   antiPaladinDefinitions,
   warpriestDefinitions,
   alchemistDefinitions,
+  sorcererDefinitions,
+  bloodragerDefinitions,
 };
 
 export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
@@ -94,6 +98,8 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...antiPaladinDefinitions,
   ...warpriestDefinitions,
   ...alchemistDefinitions,
+  ...sorcererDefinitions,
+  ...bloodragerDefinitions,
 ];
 
 export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined =>
