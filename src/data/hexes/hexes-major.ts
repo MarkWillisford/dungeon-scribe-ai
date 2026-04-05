@@ -261,6 +261,7 @@ export const hexesMajor: HexEntry[] = [
     hexTier: 'major',
     description:
       "(Tiefling Only) The witch robs creatures within 30 feet of their speech abilities for a number of rounds equal to the witch's Intelligence bonus (Will negates). On willing targets, the effect lasts for a number of hours equal to the witch's Intelligence bonus. The witch can thereafter mimic stolen voices as vocal alteration.",
+    prerequisites: [{ type: 'race', raceName: 'tiefling' }],
     source: 'pf1e-ppc-dtt',
     isOfficial: true,
     visibility: 'global',

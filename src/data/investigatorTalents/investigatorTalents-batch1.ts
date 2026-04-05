@@ -19,7 +19,7 @@ export const investigatorTalentsBatch1: InvestigatorTalentEntry[] = [
     id: 'investigator-talent-amazing-inspiration',
     name: 'Amazing Inspiration',
     description:
-      'Requires 7th level investigator. When using inspiration, the investigator rolls a d8 instead of a d6. At 20th level, the investigator rolls 2d8 and adds both results.',
+      'Requires 7th level investigator. When using inspiration, the investigator rolls a d8 instead of a d6. At 20th level, the investigator rolls 2d8 and takes the higher result.',
     prerequisites: [{ type: 'level', minimum: 7, class: 'investigator' }],
     source: 'pf1e-acg',
     isOfficial: true,

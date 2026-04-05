@@ -51,7 +51,10 @@ export const hexesBatch2: HexEntry[] = [
     hexTier: 'standard',
     description:
       '(Goblin Only) The witch can assume a viscous mud form, gaining the ooze creature type, the squeeze ability, a 10-foot land speed, a 20-foot swim speed, DR 10/slashing, and cold resistance 10. At 10th level the land and swim speeds double. This hex requires the swamp hag hex as a prerequisite.',
-    prerequisites: [{ type: 'special', description: 'swamp hag hex' }],
+    prerequisites: [
+      { type: 'race', raceName: 'goblin' },
+      { type: 'special', description: 'swamp hag hex' },
+    ],
     source: 'pf1e-mc',
     isOfficial: true,
     visibility: 'global',

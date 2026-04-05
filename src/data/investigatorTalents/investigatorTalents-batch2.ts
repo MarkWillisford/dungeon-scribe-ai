@@ -1,4 +1,4 @@
-// Batch 2 | first: investigator-talent-rogue-talent | last: investigator-talent-twilight-talon-improvisation | count: 20
+// Batch 2 | first: investigator-talent-rogue-talent | last: investigator-talent-twilight-talon-improvisation | count: 18
 // Sources: Advanced Class Guide (pf1e-acg), Advanced Class Origins (pf1e-aco), Inner Sea Intrigue (pf1e-ppc-isi)
 // InvestigatorTalentEntry = ClassOptionBase (base fields only)
 

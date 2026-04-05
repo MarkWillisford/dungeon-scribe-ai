@@ -67,4 +67,4 @@ export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined
   ALL_CLASS_CHOICE_DEFINITIONS.find((d) => d.id === id);
 
 export const getDefinitionsForClass = (className: string): ClassChoiceDefinition[] =>
-  ALL_CLASS_CHOICE_DEFINITIONS.filter((d) => d.className === className);
+  ALL_CLASS_CHOICE_DEFINITIONS.filter((d) => d.className === className.toLowerCase());
