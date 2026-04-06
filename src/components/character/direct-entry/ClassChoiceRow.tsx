@@ -20,9 +20,11 @@ import { getDeityByName } from '@/data/deities/index';
 import { ALL_NINJA_TRICKS } from '@/data/ninjaTricks/index';
 import { ALL_SLAYER_TALENTS } from '@/data/slayerTalents/index';
 import { ALL_MAGUS_ARCANA } from '@/data/magusArcana/index';
-import type { NinjaTrickEntry, SlayerTalentEntry } from '@/types/classOptions';
+import type { NinjaTrickEntry, SlayerTalentEntry, AlchemistDiscoveryEntry } from '@/types/classOptions';
 import { ALL_FEATS } from '@/data/feats/index';
 import type { FeatType } from '@/types/feats';
+import { ALL_WARPRIEST_BLESSINGS } from '@/data/warpriestBlessings/index';
+import { ALL_ALCHEMIST_DISCOVERIES } from '@/data/alchemistDiscoveries/index';
 
 interface ClassChoiceRowProps {
   classId: string;
@@ -184,6 +186,35 @@ function buildCollectionItems(
         label: a.name,
         subLabel: a.description?.slice(0, 80),
       }));
+    case 'warpriestblessings': {
+      const deityName = resolvedFilter.deityIds as string | undefined;
+      const deity = deityName ? getDeityByName(deityName) : undefined;
+      const deityDomainIds = deity
+        ? new Set([...deity.domains, ...deity.subdomains])
+        : null;
+      const pool = deityDomainIds
+        ? ALL_WARPRIEST_BLESSINGS.filter((b) =>
+            deityDomainIds.has(b.id.replace('warpriest-blessing-', ''))
+          )
+        : ALL_WARPRIEST_BLESSINGS;
+      return pool.map((b) => ({
+        key: b.id,
+        label: b.name,
+        subLabel: b.minorPower.slice(0, 80),
+      }));
+    }
+    case 'alchemistdiscoveries': {
+      const tier = resolvedFilter.discoveryTier as AlchemistDiscoveryEntry['discoveryTier'] | undefined;
+      const pool = tier
+        ? ALL_ALCHEMIST_DISCOVERIES.filter((d) => d.discoveryTier === tier)
+        : ALL_ALCHEMIST_DISCOVERIES;
+      return pool.map((d) => ({
+        key: d.id,
+        label: d.name,
+        subLabel: d.description?.slice(0, 80),
+        category: d.discoveryTier === 'grand' ? 'Grand Discovery' : undefined,
+      }));
+    }
     case 'feats': {
       const featTypes = resolvedFilter.featTypes as FeatType[] | undefined;
       const isCombatFeat = resolvedFilter.isCombatFeat as boolean | undefined;
