@@ -17,6 +17,12 @@ import { ALL_HEXES } from '@/data/hexes/index';
 import { ALL_ARCANIST_EXPLOITS } from '@/data/arcanistExploits/index';
 import { ALL_INVESTIGATOR_TALENTS } from '@/data/investigatorTalents/index';
 import { getDeityByName } from '@/data/deities/index';
+import { ALL_NINJA_TRICKS } from '@/data/ninjaTricks/index';
+import { ALL_SLAYER_TALENTS } from '@/data/slayerTalents/index';
+import { ALL_MAGUS_ARCANA } from '@/data/magusArcana/index';
+import type { NinjaTrickEntry, SlayerTalentEntry } from '@/types/classOptions';
+import { ALL_FEATS } from '@/data/feats/index';
+import type { FeatType } from '@/types/feats';
 
 interface ClassChoiceRowProps {
   classId: string;
@@ -148,6 +154,54 @@ function buildCollectionItems(
         label: t.name,
         subLabel: t.description?.slice(0, 80),
       }));
+    case 'ninjatricks': {
+      const tier = resolvedFilter.trickTier as NinjaTrickEntry['trickTier'] | undefined;
+      const pool = tier
+        ? ALL_NINJA_TRICKS.filter((t) => t.trickTier === tier)
+        : ALL_NINJA_TRICKS;
+      return pool.map((t) => ({
+        key: t.id,
+        label: t.name,
+        subLabel: t.description?.slice(0, 80),
+        category: t.trickTier === 'master' ? 'Master Tricks' : 'Tricks',
+      }));
+    }
+    case 'slayertalents': {
+      const tier = resolvedFilter.talentTier as SlayerTalentEntry['talentTier'] | undefined;
+      const pool = tier
+        ? ALL_SLAYER_TALENTS.filter((t) => t.talentTier === tier)
+        : ALL_SLAYER_TALENTS;
+      return pool.map((t) => ({
+        key: t.id,
+        label: t.name,
+        subLabel: t.description?.slice(0, 80),
+        category: t.talentTier === 'advanced' ? 'Advanced Talents' : 'Talents',
+      }));
+    }
+    case 'magusarcana':
+      return ALL_MAGUS_ARCANA.map((a) => ({
+        key: a.id,
+        label: a.name,
+        subLabel: a.description?.slice(0, 80),
+      }));
+    case 'feats': {
+      const featTypes = resolvedFilter.featTypes as FeatType[] | undefined;
+      const isCombatFeat = resolvedFilter.isCombatFeat as boolean | undefined;
+      const isTeamworkFeat = resolvedFilter.isTeamworkFeat as boolean | undefined;
+      let pool = ALL_FEATS;
+      if (featTypes && featTypes.length > 0) {
+        pool = pool.filter((f) => featTypes.some((t) => f.types.includes(t)));
+      } else if (isCombatFeat) {
+        pool = pool.filter((f) => f.types.includes('combat'));
+      } else if (isTeamworkFeat) {
+        pool = pool.filter((f) => f.types.includes('teamwork'));
+      }
+      return pool.map((f) => ({
+        key: f.id,
+        label: f.name,
+        subLabel: f.description?.slice(0, 80),
+      }));
+    }
     default:
       return [];
   }
