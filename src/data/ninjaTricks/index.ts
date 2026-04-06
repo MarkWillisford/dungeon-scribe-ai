@@ -1,4 +1,7 @@
 import type { NinjaTrickEntry } from '@/types/classOptions';
+import { ninjaTricksStandard } from './ninjaTricks-standard';
+import { ninjaTricksMaster } from './ninjaTricks-master';
 
-// Batch data lives in MW/data-ninja-slayer-magus — merge that first.
-export const ALL_NINJA_TRICKS: NinjaTrickEntry[] = [];
+export { ninjaTricksStandard, ninjaTricksMaster };
+
+export const ALL_NINJA_TRICKS: NinjaTrickEntry[] = [...ninjaTricksStandard, ...ninjaTricksMaster];
