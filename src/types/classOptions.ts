@@ -66,12 +66,34 @@ export interface MysteryEntry extends ClassOptionBase {
   finalRevelation: string; // text description of 20th-level ability
 }
 
-// ---- Rogue Talent (Rogue, Ninja — shared pool) ----
+// ---- Rogue Talent (Rogue) ----
 // Collection: 'roguetalents'
 
 export interface RogueTalentEntry extends ClassOptionBase {
   talentTier: 'standard' | 'advanced'; // advanced requires class level 10+
 }
+
+// ---- Ninja Trick (Ninja) ----
+// Collection: 'ninjatricks'
+// Note: the "Rogue Talent" ninja trick lets a ninja pick from the roguetalents pool,
+// but the ninja trick pool itself is a separate collection.
+
+export interface NinjaTrickEntry extends ClassOptionBase {
+  trickTier: 'standard' | 'master'; // master requires ninja level 10+
+}
+
+// ---- Slayer Talent (Slayer) ----
+// Collection: 'slayertalents'
+
+export interface SlayerTalentEntry extends ClassOptionBase {
+  talentTier: 'standard' | 'advanced'; // advanced requires slayer level 10+
+}
+
+// ---- Magus Arcana (Magus) ----
+// Collection: 'magusarcana'
+// Base fields are sufficient — no collection-specific additions needed.
+
+export type MagusArcanaEntry = ClassOptionBase;
 
 // ---- Rage Power (Barbarian, Skald) ----
 // Collection: 'ragepowers'
