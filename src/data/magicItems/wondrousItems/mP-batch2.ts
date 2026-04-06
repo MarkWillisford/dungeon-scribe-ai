@@ -231,7 +231,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'morale', target: 'initiative', value: 2, source: 'Mask of the Rabbit Prince' },
-      { type: 'bonus', bonusType: 'morale', target: 'save.fear', value: 2, source: 'Mask of the Rabbit Prince' },
+      { type: 'bonus', bonusType: 'morale', target: 'save.will', value: 2, source: 'Mask of the Rabbit Prince', condition: { type: 'custom', params: {}, description: 'vs. fear effects' } },
     ],
   },
   {
@@ -362,7 +362,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
     physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'bonus', target: 'save.visual', value: 4, source: 'Medusa Mask' },
+      { type: 'bonus', target: 'save.all', value: 4, source: 'Medusa Mask', condition: { type: 'custom', params: {}, description: 'vs. visual effects (gaze attacks and sight-based illusions)' } },
       { type: 'special', target: 'special.medusa_mask_petrify', value: 0, source: 'Medusa Mask' },
     ],
   },
@@ -427,7 +427,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
     physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'bonus', bonusType: 'resistance', target: 'save.disease', value: 4, source: 'Plague Mask' },
+      { type: 'bonus', bonusType: 'resistance', target: 'save.fortitude', value: 4, source: 'Plague Mask', condition: { type: 'custom', params: {}, description: 'vs. disease' } },
     ],
     spellLikeAbilities: [
       { spells: [{ spellId: 'remove_disease', spellName: 'Remove Disease', casterLevel: 5, usesPerDay: 1, activationAction: 'standard' }] },
@@ -451,7 +451,7 @@ export const wondrousItemsMP2: WondrousItemDefinition[] = [
     physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'resistance', target: 'save.nausea', value: 2, source: "Plaguebringer's Mask" },
+      { type: 'bonus', bonusType: 'resistance', target: 'save.fortitude', value: 2, source: "Plaguebringer's Mask", condition: { type: 'custom', params: {}, description: 'vs. nauseating effects' } },
       { type: 'immunity', target: 'disease', value: 0, source: "Plaguebringer's Mask", condition: { type: 'custom', params: {}, description: 'specific disease chosen at creation' } },
     ],
   },

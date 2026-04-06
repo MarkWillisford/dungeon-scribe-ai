@@ -58,7 +58,7 @@ export const wondrousItemsRZ11: WondrousItemDefinition[] = [
     physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'morale', target: 'save.fear', value: 2, source: 'Torc of Lionheart Fury' },
+      { type: 'bonus', bonusType: 'morale', target: 'save.will', value: 2, source: 'Torc of Lionheart Fury', condition: { type: 'custom', params: {}, description: 'vs. fear effects' } },
     ],
   },
   {

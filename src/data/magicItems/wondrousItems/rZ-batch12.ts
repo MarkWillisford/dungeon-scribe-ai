@@ -61,7 +61,7 @@ export const wondrousItemsRZ12: WondrousItemDefinition[] = [
     effects: [
       { type: 'bonus', bonusType: 'armor', target: 'ac', value: 1, source: 'Snakeskin Tunic' },
       { type: 'bonus', bonusType: 'enhancement', target: 'ability.dex', value: 2, source: 'Snakeskin Tunic' },
-      { type: 'bonus', bonusType: 'resistance', target: 'save.poison', value: 2, source: 'Snakeskin Tunic' },
+      { type: 'bonus', bonusType: 'resistance', target: 'save.fortitude', value: 2, source: 'Snakeskin Tunic', condition: { type: 'custom', params: {}, description: 'vs. poison' } },
     ],
   },
   {

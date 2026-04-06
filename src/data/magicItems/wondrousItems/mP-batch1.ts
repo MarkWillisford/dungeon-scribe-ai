@@ -184,13 +184,13 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       {
         type: 'bonus',
         bonusType: 'morale',
-        target: 'save.fear',
+        target: 'save.will',
         value: 2,
         source: 'Malleable Monument',
         condition: {
           type: 'custom',
           params: {},
-          description: 'followers of the deity within 100 feet',
+          description: 'vs. fear effects; followers of the deity within 100 feet',
         },
       },
     ],
@@ -592,9 +592,10 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
       {
         type: 'bonus',
         bonusType: 'resistance',
-        target: 'save.disease',
+        target: 'save.fortitude',
         value: 4,
         source: 'Mantle of Spores',
+        condition: { type: 'custom', params: {}, description: 'vs. disease' },
       },
       {
         type: 'damage',

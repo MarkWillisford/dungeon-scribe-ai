@@ -60,7 +60,7 @@ export const wondrousItemsRZ10: WondrousItemDefinition[] = [
     physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'insight', target: 'save.spell_school', value: 1, source: 'Runeward Tattoo' },
+      { type: 'bonus', bonusType: 'insight', target: 'save.all', value: 1, source: 'Runeward Tattoo', condition: { type: 'custom', params: {}, description: 'vs. spells and SLAs of the keyed school' } },
     ],
   },
   {

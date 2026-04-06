@@ -82,7 +82,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
     activationCategory: 'use_activated',
     effects: [
       { type: 'bonus', bonusType: 'competence', target: 'skill.intimidate', value: 4, source: 'Maw of the Wyrm' },
-      { type: 'bonus', bonusType: 'insight', target: 'save.fear', value: 4, source: 'Maw of the Wyrm', condition: { type: 'custom', params: {}, description: 'vs. dragon frightful presence only' } },
+      { type: 'bonus', bonusType: 'insight', target: 'save.will', value: 4, source: 'Maw of the Wyrm', condition: { type: 'custom', params: {}, description: 'vs. dragon frightful presence only' } },
     ],
   },
   {
@@ -163,7 +163,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
     physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'resistance', target: 'save.mind_affecting', value: 2, source: 'Mind Sentinel Medallion' },
+      { type: 'bonus', bonusType: 'resistance', target: 'save.will', value: 2, source: 'Mind Sentinel Medallion', condition: { type: 'custom', params: {}, description: 'vs. mind-affecting effects' } },
     ],
   },
   {
@@ -206,7 +206,7 @@ export const wondrousItemsMP3: WondrousItemDefinition[] = [
     physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'bonus', target: 'save.poison', value: 4, source: 'Medicinal Bezoar', condition: { type: 'custom', params: {}, description: 'vs. addiction for 24 hours' } },
+      { type: 'bonus', target: 'save.fortitude', value: 4, source: 'Medicinal Bezoar', condition: { type: 'custom', params: {}, description: 'vs. poison/addiction for 24 hours' } },
     ],
   },
   {
