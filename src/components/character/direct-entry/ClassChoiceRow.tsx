@@ -17,6 +17,10 @@ import { ALL_HEXES } from '@/data/hexes/index';
 import { ALL_ARCANIST_EXPLOITS } from '@/data/arcanistExploits/index';
 import { ALL_INVESTIGATOR_TALENTS } from '@/data/investigatorTalents/index';
 import { ALL_BLOODLINES } from '@/data/bloodlines/index';
+import { ALL_SHAMAN_SPIRITS } from '@/data/shamanSpirits/index';
+import { ALL_EIDOLON_EVOLUTIONS } from '@/data/eidolonEvolutions/index';
+import { ALL_MESMERIST_TRICKS } from '@/data/mesmeristTricks/index';
+import type { ShamanSpiritEntry, EidolonEvolutionEntry, MesmeristTrickEntry } from '@/types/classOptions';
 import { ALL_WILD_TALENTS } from '@/data/kineticistWildTalents/index';
 import { ALL_OCCULTIST_FOCUS_POWERS } from '@/data/occultistFocusPowers/index';
 import { ALL_PHRENIC_AMPLIFICATIONS } from '@/data/phrenicAmplifications/index';
@@ -248,6 +252,43 @@ function buildCollectionItems(
         subLabel: f.description?.slice(0, 80),
       }));
     }
+    case 'shamanspirits': {
+      const wanderingOnly = resolvedFilter.wanderingOnly as boolean | undefined;
+      const pool = wanderingOnly
+        ? ALL_SHAMAN_SPIRITS.filter((s: ShamanSpiritEntry) => s.wanderingSpirit)
+        : (ALL_SHAMAN_SPIRITS as ShamanSpiritEntry[]);
+      return pool.map((s: ShamanSpiritEntry) => ({
+        key: s.id,
+        label: s.name,
+        subLabel: s.description?.slice(0, 80),
+      }));
+    }
+    case 'eidolonevolutions': {
+      const summonerType = resolvedFilter.summonerType as 'apg' | 'unchained' | undefined;
+      const pool = summonerType
+        ? ALL_EIDOLON_EVOLUTIONS.filter((e: EidolonEvolutionEntry) => !e.summoner || e.summoner === summonerType)
+        : (ALL_EIDOLON_EVOLUTIONS as EidolonEvolutionEntry[]);
+      return pool.map((e: EidolonEvolutionEntry) => ({
+        key: e.id,
+        label: e.name,
+        subLabel: e.description?.slice(0, 80),
+        category:
+          e.evolutionPointCost === 4
+            ? '4-Point Evolutions'
+            : e.evolutionPointCost === 3
+              ? '3-Point Evolutions'
+              : e.evolutionPointCost === 2
+                ? '2-Point Evolutions'
+                : '1-Point Evolutions',
+      }));
+    }
+    case 'mesmeristtricks':
+      return (ALL_MESMERIST_TRICKS as MesmeristTrickEntry[]).map((t: MesmeristTrickEntry) => ({
+        key: t.id,
+        label: t.name,
+        subLabel: t.description?.slice(0, 80),
+        category: t.trickTier === 'masterful' ? 'Masterful Tricks' : 'Standard Tricks',
+      }));
     case 'wildtalents': {
       const talentType = resolvedFilter.talentType as string | undefined;
       const pool = talentType
