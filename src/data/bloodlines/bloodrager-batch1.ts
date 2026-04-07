@@ -6,7 +6,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Aberrant',
     classIds: ['bloodrager'],
     description: "There is a taint in your blood that is both alien and bizarre. When you bloodrage, this manifests in peculiar and terrifying ways.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Staggering Strike',
@@ -64,7 +63,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Abyssal',
     classIds: ['bloodrager'],
     description: "Generations ago, a demon spread its filth into the essence of your bloodline. While it doesn't manifest in all of your kin, in those moments when you're bloodraging, you embody its terrifying presence.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Claws',
@@ -122,7 +120,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Aquatic',
     classIds: ['bloodrager'],
     description: "The anger in your blood rises from the ocean depths, seeded by descent from undersea empires, creeping ichthyic infiltrators into remote seaside villages, or something deeper still.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Underwater Attacks',
@@ -180,7 +177,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Arcane',
     classIds: ['bloodrager'],
     description: "The eldritch nature of the blood coursing through your veins transforms you into a spell-breaking terror.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Disruptive Bloodrage',
@@ -238,7 +234,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Black Blood',
     classIds: ['bloodrager'],
     description: "Contact with the black blood of Orv - by you or one of your ancestors - transformed your bloodline. This necromantic taint in your blood mutates you into something peculiar.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Black Blood',
@@ -296,7 +291,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Celestial',
     classIds: ['bloodrager'],
     description: "By way of a celestial ancestor or divine intervention, the blood of angels fills your body with a holy potency, granting you a majestic visage and angelic powers when you enter your bloodrage.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Angelic Attacks',
@@ -354,7 +348,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Destined',
     classIds: ['bloodrager'],
     description: "Your bloodline is destined for great things. When you bloodrage, you exude a greatness that makes all but the most legendary creatures seem lesser.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Destined Strike',
@@ -412,7 +405,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Draconic',
     classIds: ['bloodrager'],
     description: "At some point in your family's history, a dragon interbred with your bloodline. Now, the sublime monster's ancient power fuels your bloodrage.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Claws',
@@ -470,7 +462,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Elemental',
     classIds: ['bloodrager'],
     description: "At 1st level, select one of the four elements: air, earth, fire, or water. This selection cannot be changed. Your abilities are based on this element.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Elemental Strikes',
@@ -528,7 +519,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Fey',
     classIds: ['bloodrager'],
     description: "One of your ancestors was fey, or the fey realm somehow intermixed with your bloodline. It affects your bloodrage in tricky and surprising ways.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Confusing Critical',
@@ -586,7 +576,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Hag',
     classIds: ['bloodrager'],
     description: "Hags interbreed with other races frequently, and those children who escape their grasp may pass their heritage on to later generations before it reemerges. The potent humors that accompany hag blood are better suited to a bloodrager's ferocity than to traditional spellcasting.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Evil Eye',
@@ -638,7 +627,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Infernal',
     classIds: ['bloodrager'],
     description: "The Pit lives in your blood. Maybe one of your ancestors was seduced by the powers of Hell or made a deal with a devil. Either way, its corruption seethes within your lineage.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Hellfire Strike',
@@ -696,7 +684,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Kyton',
     classIds: ['bloodrager'],
     description: "Just as an eclipse drives animals wild, so too does the darkness unleash a madness from deep within you.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Painful Strike',
@@ -754,7 +741,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Martyred',
     classIds: ['bloodrager'],
     description: "One of your ancestors paid the ultimate price for her beliefs. This distant relative martyred herself out of a devout dedication to some specific cause, and that sacrifice has infused you with power that you can use for good - or for ill.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Ancestral Strikes',
@@ -812,7 +798,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Medusa',
     classIds: ['bloodrager'],
     description: "Ancient medusa blood runs through your veins, granting you fearsome powers of petrification and serpentine resilience when you enter your bloodrage.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Gaze',
@@ -870,7 +855,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Naga',
     classIds: ['bloodrager'],
     description: "The blood of the powerful, serpentine aberrations known as nagas runs through your veins, fueling your bloodrage.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Serpent Fangs',
@@ -928,7 +912,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Phoenix',
     classIds: ['bloodrager'],
     description: "Your bloodline descends from a phoenix or someone touched by its immortal fire. When you bloodrage, you channel phoenix fire to sear enemies and restore the vitality of allies.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Dispelling Strikes',
@@ -986,7 +969,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Salamander',
     classIds: ['bloodrager'],
     description: "Salamanders are fierce warriors and master smiths, and you wield their might and mastery of metal by birthright.",
-    bloodlineArcana: "",
     powers: [
       {
         name: "Serpent's Tail",
@@ -1044,7 +1026,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Shadow',
     classIds: ['bloodrager'],
     description: "Your fury absorbs light, warmth, and strength. The darkness of the Shadow Plane flows through your bloodline, granting you command over shadows.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Shadow Vision',
@@ -1101,7 +1082,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Shapechanger',
     classIds: ['bloodrager'],
     description: "The blood of doppelgangers, faceless stalkers, lycanthropes, or other shapechangers courses through your veins.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Shifting Aspect',
@@ -1159,7 +1139,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Sphinx',
     classIds: ['bloodrager'],
     description: "Your lineage traces to those who traded riddles with ancient sphinxes, and you carry their blend of arcane power and violent fury. Though typically scholarly, you become terrifying when bloodraging.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Claws',
@@ -1218,7 +1197,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Undead',
     classIds: ['bloodrager'],
     description: "The taint of undeath runs in your family's veins. When you bloodrage, this manifests in frightening powers drawn from beyond the grave.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Frightful Charger',
@@ -1276,7 +1254,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Verdant',
     classIds: ['bloodrager'],
     description: "Your body is suffused with raw plant life. When you bloodrage, your plantlike characteristics bolster your durability and grant you some control over vegetation.",
-    bloodlineArcana: "",
     powers: [
       {
         name: 'Verdant Growth',
@@ -1334,7 +1311,6 @@ export const bloodragerBloodlinesBatch1: BloodlineEntry[] = [
     name: 'Vestige',
     classIds: ['bloodrager'],
     description: "You are the descendant of great heroes from a lost civilization. Their accumulated battle experience flows through your blood.",
-    bloodlineArcana: "",
     powers: [
       {
         name: "Warrior's Discipline",
