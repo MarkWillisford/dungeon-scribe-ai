@@ -1,5 +1,6 @@
 import type { MagicWeaponDefinition } from '@/types/magicItems';
 import { AuraStrength, MagicSchool } from '@/types/equipment';
+import { Alignment } from '@/types/base';
 
 export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
   // 114 — NOTE: AP/setting-source items in the 8,310–10,114 gp range may precede these in a complete sorted list
@@ -40,7 +41,7 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
     activationCategory: 'use_activated', effects: [],
     baseWeaponId: 'trident', enhancementBonus: 2, weaponSpecialAbilities: [
-      { id: 'holy', name: 'Holy', description: '+2d6 damage against evil creatures; evil creatures struck on a critical hit gain 1 negative level (Fort DC 14 negates).', bonusEquivalent: 2, casterLevel: 7, effects: [], alignmentRequired: ['lawful_good', 'neutral_good', 'chaotic_good'] },
+      { id: 'holy', name: 'Holy', description: '+2d6 damage against evil creatures; evil creatures struck on a critical hit gain 1 negative level (Fort DC 14 negates).', bonusEquivalent: 2, casterLevel: 7, effects: [], alignmentRequired: [Alignment.LawfulGood, Alignment.NeutralGood, Alignment.ChaoticGood] },
     ],
   },
   // 117
@@ -164,7 +165,7 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
     activationCategory: 'use_activated', effects: [],
     baseWeaponId: 'heavy_mace', enhancementBonus: 2, weaponSpecialAbilities: [
-      { id: 'holy', name: 'Holy', description: '+2d6 damage against evil creatures; evil creatures struck on a critical hit gain 1 negative level (Fort DC 14 negates).', bonusEquivalent: 2, casterLevel: 7, effects: [], alignmentRequired: ['lawful_good', 'neutral_good', 'chaotic_good'] },
+      { id: 'holy', name: 'Holy', description: '+2d6 damage against evil creatures; evil creatures struck on a critical hit gain 1 negative level (Fort DC 14 negates).', bonusEquivalent: 2, casterLevel: 7, effects: [], alignmentRequired: [Alignment.LawfulGood, Alignment.NeutralGood, Alignment.ChaoticGood] },
     ],
   },
   // 126
@@ -238,7 +239,7 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
     activationCategory: 'use_activated', effects: [],
     baseWeaponId: 'longsword', enhancementBonus: 2, weaponSpecialAbilities: [
-      { id: 'holy', name: 'Holy', description: '+2d6 damage against evil creatures; evil creatures struck on a critical hit gain 1 negative level (Fort DC 14 negates).', bonusEquivalent: 2, casterLevel: 7, effects: [], alignmentRequired: ['lawful_good', 'neutral_good', 'chaotic_good'] },
+      { id: 'holy', name: 'Holy', description: '+2d6 damage against evil creatures; evil creatures struck on a critical hit gain 1 negative level (Fort DC 14 negates).', bonusEquivalent: 2, casterLevel: 7, effects: [], alignmentRequired: [Alignment.LawfulGood, Alignment.NeutralGood, Alignment.ChaoticGood] },
     ],
   },
 ];
