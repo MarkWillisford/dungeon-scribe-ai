@@ -3,4 +3,5 @@
 export * from './armorAbilities-batch1';
 export * from './armorAbilities-batch2';
 export * from './specificArmor-batch1';
+export * from './specificArmor-batch2';
 export * from './specificShields-batch1';
