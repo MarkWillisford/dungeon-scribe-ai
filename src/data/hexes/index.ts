@@ -1,4 +1,9 @@
 import type { HexEntry } from '@/types/classOptions';
+import { hexesBatch1 } from './hexes-batch1';
+import { hexesBatch2 } from './hexes-batch2';
+import { hexesMajor } from './hexes-major';
+import { hexesGrand } from './hexes-grand';
 
-// Batch data lives in MW/data-hexes-arcanist-investigator — merge that first.
-export const ALL_HEXES: HexEntry[] = [];
+export { hexesBatch1, hexesBatch2, hexesMajor, hexesGrand };
+
+export const ALL_HEXES: HexEntry[] = [...hexesBatch1, ...hexesBatch2, ...hexesMajor, ...hexesGrand];
