@@ -4,3 +4,4 @@ export * from './rings-batch1';
 export * from './rings-batch2';
 export * from './rings-batch3';
 export * from './rings-batch4';
+export * from './rings-recovered';
