@@ -53,8 +53,6 @@ e2e/           — Maestro E2E tests
 `$PROJ_DIR` is set at session start to the project root:
 `/mnt/c/Users/Markw/Documents/Development Projects/Dungeon Scribe AI 1.1`
 
-Use absolute paths in all Bash commands. Never rely on relative paths or assume cwd.
-
 ## Session Start
 
 At the start of every new session, run /prime before doing anything else.

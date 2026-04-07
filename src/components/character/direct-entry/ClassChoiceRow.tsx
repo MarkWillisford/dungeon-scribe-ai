@@ -13,6 +13,9 @@ import { ALL_MYSTERIES } from '@/data/mysteries/index';
 import { ALL_INQUISITIONS } from '@/data/inquisitions/index';
 import { ALL_REVELATIONS } from '@/data/revelations/index';
 import { ALL_CAVALIER_ORDERS } from '@/data/cavalierOrders/index';
+import { ALL_HEXES } from '@/data/hexes/index';
+import { ALL_ARCANIST_EXPLOITS } from '@/data/arcanistExploits/index';
+import { ALL_INVESTIGATOR_TALENTS } from '@/data/investigatorTalents/index';
 import { getDeityByName } from '@/data/deities/index';
 
 interface ClassChoiceRowProps {
@@ -124,6 +127,26 @@ function buildCollectionItems(
         key: o.id,
         label: o.name,
         subLabel: o.classSkills.join(', '),
+      }));
+    case 'hexes':
+      return ALL_HEXES.map((h) => ({
+        key: h.id,
+        label: h.name,
+        subLabel: h.description?.slice(0, 80),
+        category: h.hexTier === 'grand' ? 'Grand Hexes' : h.hexTier === 'major' ? 'Major Hexes' : 'Hexes',
+      }));
+    case 'arcanistexploits':
+      return ALL_ARCANIST_EXPLOITS.map((e) => ({
+        key: e.id,
+        label: e.name,
+        subLabel: e.description?.slice(0, 80),
+        category: e.exploitTier === 'greater' ? 'Greater Exploits' : 'Exploits',
+      }));
+    case 'investigatortalents':
+      return ALL_INVESTIGATOR_TALENTS.map((t) => ({
+        key: t.id,
+        label: t.name,
+        subLabel: t.description?.slice(0, 80),
       }));
     default:
       return [];
