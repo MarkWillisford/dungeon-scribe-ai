@@ -7,3 +7,4 @@ export * from './specificWeapons-batch4';
 export * from './specificWeapons-batch5';
 export * from './specificWeapons-batch6';
 export * from './weaponAbilities-batch1';
+export * from './weaponAbilities-batch2';
