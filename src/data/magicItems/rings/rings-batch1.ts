@@ -281,6 +281,4 @@ export const ringsBatch1: RingDefinition[] = [
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.ring_forcefangs_absorb_fire', value: 0, source: 'Ring of Forcefangs' }],
   },
-  // Still deferred: Ring of Spell Knowledge I/II, Ring of the Grasping Grave,
-  // Ring of Planar Focus, Ring of Sacred Mistletoe, Ring of Strength Sapping, Soultether Ring
 ];

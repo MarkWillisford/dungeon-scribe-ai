@@ -164,5 +164,4 @@ export const ringsBatch4: RingDefinition[] = [
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.ring_spell_storing_10lvl', value: 0, source: 'Ring of Spell Storing, Major' }],
   },
-  // Still deferred: Ring of Inner Fortitude Greater
 ];

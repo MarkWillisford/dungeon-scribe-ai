@@ -221,7 +221,4 @@ export const ringsBatch3: RingDefinition[] = [
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.ring_shooting_stars', value: 0, source: 'Ring of Shooting Stars' }],
   },
-  // Still deferred: Ring of Revelation Greater/Superior, Ring of Inner Fortitude Minor/Major,
-  // Ring of Energy Shroud, Ring of Arcane Mastery, Ring of Spell Knowledge IV,
-  // Ring of the Ecclesiarch, Ring of Return, Ring of Friend Shield
 ];

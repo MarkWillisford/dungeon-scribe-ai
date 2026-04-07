@@ -130,10 +130,4 @@ export const ringsBatch2: RingDefinition[] = [
     activationCategory: 'continuous',
     effects: [{ type: 'special', target: 'special.dungeon_ring_jailer_tracking', value: 0, source: "Dungeon Ring, Jailer's" }],
   },
-  // Still deferred: Ring of Climbing Improved, Ring of Curing, Ring of Foe Focus,
-  // Ring of Jumping Improved, Ring of Ki Mastery, Ring of Revelation Lesser,
-  // Ring of Swimming Improved, Ring of Transposition, Ring of Tactical Precision,
-  // Decoy Ring, Ring of Craft Magic, Ring of Ectoplasmic Invigoration,
-  // Ring of the Troglodyte, Steelhand Circle, Ring of Spell Knowledge III,
-  // Ring of the Sea Strider, Ring of Retribution
 ];
