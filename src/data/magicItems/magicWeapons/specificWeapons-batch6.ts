@@ -39,7 +39,9 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['detect evil', 'holy smite'], cost: 8657 },
     physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
     activationCategory: 'use_activated', effects: [],
-    baseWeaponId: 'trident', enhancementBonus: 2, weaponSpecialAbilities: ['holy'],
+    baseWeaponId: 'trident', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'holy', name: 'Holy', description: '+2d6 damage against evil creatures; evil creatures struck on a critical hit gain 1 negative level (Fort DC 14 negates).', bonusEquivalent: 2, casterLevel: 7, effects: [], alignmentRequired: ['lawful_good', 'neutral_good', 'chaotic_good'] },
+    ],
   },
   // 117
   {
@@ -65,7 +67,9 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['fireball', 'scorching ray', 'flame blade'], cost: 10357 },
     physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
     activationCategory: 'command_word', effects: [],
-    baseWeaponId: 'longsword', enhancementBonus: 1, weaponSpecialAbilities: ['flaming_burst'],
+    baseWeaponId: 'longsword', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'flaming_burst', name: 'Flaming Burst', description: '+1d6 fire damage on hit; +1d10 extra fire damage on a ×2 critical, +2d10 on ×3, +3d10 on ×4.', bonusEquivalent: 2, casterLevel: 12, effects: [] },
+    ],
   },
   // 119
   {
@@ -159,7 +163,9 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['heal', 'holy smite', 'sunburst'], cost: 19276 },
     physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
     activationCategory: 'use_activated', effects: [],
-    baseWeaponId: 'heavy_mace', enhancementBonus: 2, weaponSpecialAbilities: ['holy'],
+    baseWeaponId: 'heavy_mace', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'holy', name: 'Holy', description: '+2d6 damage against evil creatures; evil creatures struck on a critical hit gain 1 negative level (Fort DC 14 negates).', bonusEquivalent: 2, casterLevel: 7, effects: [], alignmentRequired: ['lawful_good', 'neutral_good', 'chaotic_good'] },
+    ],
   },
   // 126
   {
@@ -188,7 +194,9 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     effects: [
       { type: 'bonus', bonusType: 'resistance', target: 'save.all', value: 8, source: 'Frost Brand', condition: { type: 'custom', params: {}, description: 'vs. fire effects' } },
     ],
-    baseWeaponId: 'longsword', enhancementBonus: 3, weaponSpecialAbilities: ['frost'],
+    baseWeaponId: 'longsword', enhancementBonus: 3, weaponSpecialAbilities: [
+      { id: 'frost', name: 'Frost', description: 'Deals +1d6 cold damage on a successful hit.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
   },
   // 128
   {
@@ -201,7 +209,9 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['telekinesis'], cost: 30312 },
     physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
     activationCategory: 'use_activated', effects: [],
-    baseWeaponId: 'warhammer', enhancementBonus: 2, weaponSpecialAbilities: ['returning'],
+    baseWeaponId: 'warhammer', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'returning', name: 'Returning', description: 'When thrown, returns to the thrower at the start of their next turn.', bonusEquivalent: 1, casterLevel: 7, effects: [] },
+    ],
   },
   // 129
   {
@@ -227,6 +237,8 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['holy aura', 'holy smite', 'greater dispel magic'], cost: 60630 },
     physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
     activationCategory: 'use_activated', effects: [],
-    baseWeaponId: 'longsword', enhancementBonus: 2, weaponSpecialAbilities: ['holy'],
+    baseWeaponId: 'longsword', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'holy', name: 'Holy', description: '+2d6 damage against evil creatures; evil creatures struck on a critical hit gain 1 negative level (Fort DC 14 negates).', bonusEquivalent: 2, casterLevel: 7, effects: [], alignmentRequired: ['lawful_good', 'neutral_good', 'chaotic_good'] },
+    ],
   },
 ];
