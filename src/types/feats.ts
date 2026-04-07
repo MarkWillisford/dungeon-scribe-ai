@@ -39,7 +39,7 @@ export type FeatChoiceKey = 'weapon' | 'skill' | 'school' | 'ability' | 'custom'
 
 // ---- Prerequisites (structured, machine-checkable) ----
 
-export type FeatPrerequisite =
+export type Prerequisite =
   | {
       type: 'ability_score';
       ability: 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
@@ -55,6 +55,7 @@ export type FeatPrerequisite =
       // Dynamic: prereq feat must match the same choice as the feat being validated (e.g. GWF → WF same weapon)
       matchChoiceKey?: FeatChoiceKey;
     }
+  | { type: 'evolution'; evolutionId: string }
   | { type: 'skill'; skillId: string; ranks: number }
   | { type: 'class_feature'; featureName: string }
   | { type: 'proficiency'; proficiency: string }
@@ -63,6 +64,9 @@ export type FeatPrerequisite =
   | { type: 'mythic_tier'; minimum: number }
   | { type: 'special'; description: string }
   | { type: 'evolution'; evolutionId: string };
+
+// Backwards-compatible alias — prefer Prerequisite in new code
+export type FeatPrerequisite = Prerequisite;
 
 // ---- Spell-Like Ability granted by a feat ----
 

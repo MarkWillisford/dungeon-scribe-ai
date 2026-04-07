@@ -4,8 +4,9 @@
 // ClassChoiceDefinition (classChoices.ts) routes to these collections at runtime.
 // All descriptions are text — mechanical effects are wired by the modifier pipeline.
 
+import { Prerequisite } from './feats';
 import { Effect } from './base';
-import { FeatPrerequisite } from './feats';
+import { SpecialAbility } from './specialAbilities';
 
 // ---- Base type shared by all option collection documents ----
 
@@ -13,7 +14,7 @@ export interface ClassOptionBase {
   id: string;
   name: string;
   description: string;
-  prerequisites?: FeatPrerequisite[];
+  prerequisites?: Prerequisite[];
 
   // ContentMetadata
   source: string; // 'pf1e-core' | 'pf1e-apg' | '3.5e' | 'homebrew' | etc.
@@ -131,49 +132,74 @@ export type InvestigatorTalentEntry = ClassOptionBase;
 // ---- Shaman Spirit ----
 // Collection: 'shamanspirits'
 
-export interface ShamanSpiritAbility {
-  name: string;
-  type: 'Su' | 'Sp' | 'Ex'; // spell-like, supernatural, or extraordinary
-  description: string;
-  levelGained?: number; // class level at which this ability is gained (optional if implicit)
-  uses?: {
-    formula?: string; // e.g. '3 + Cha modifier'
-    perDay?: number;  // fixed uses per day
-    current: number;  // runtime state — 0 at rest
-  };
-  effects?: Effect[];
-}
-
 export interface ShamanSpiritEntry extends ClassOptionBase {
   classIds?: string[]; // ['shaman'] or ['shaman', 'spirit-warrior-archetype']
   spiritSpells: string[]; // 9 entries — index 0 = level 1 spirit spell name
-  hexList?: string[]; // hex ids available to this spirit's shaman
-  wanderingSpirit: boolean; // can this spirit be taken as a wandering spirit?
   abilities: {
-    spirit: ShamanSpiritAbility;        // gained at level 1
-    greater: ShamanSpiritAbility;       // gained at level 6
-    true: ShamanSpiritAbility;          // gained at level 12
-    manifestation: ShamanSpiritAbility; // gained at level 20
+    spirit: SpecialAbility;        // 1st level — usable 3 + Wis modifier times per day
+    greater: SpecialAbility;       // 8th level
+    true: SpecialAbility;          // 16th level
+    manifestation: SpecialAbility; // 20th level — permanent
   };
+  hexList: string[]; // hex IDs available to the shaman when this spirit is chosen
+  wanderingSpirit: boolean; // true if this spirit can be selected as a wandering (secondary) spirit
 }
 
-// ---- Eidolon Evolution (Summoner / Unchained Summoner) ----
-// Collection: 'eidolonEvolutions'
+// ---- Eidolon Evolution (Summoner, Summoner (Unchained) — shared pool) ----
+// Collection: 'eidolonevolutions'
+
+export type EidolonForm =
+  | 'biped'
+  | 'quadruped'
+  | 'serpentine'
+  | 'aquatic'
+  | 'avian'
+  | 'mounted'
+  | 'tauric'
+  | 'vermious';
+
+export type EidolonSubtype =
+  | 'aberrant'
+  | 'aeon'
+  | 'agathion'
+  | 'ancestor'
+  | 'angel'
+  | 'archon'
+  | 'astral'
+  | 'azata'
+  | 'daemon'
+  | 'deepwater'
+  | 'demon'
+  | 'devil'
+  | 'div'
+  | 'elemental'
+  | 'genie'
+  | 'inevitable'
+  | 'kami'
+  | 'kyton'
+  | 'plant'
+  | 'protean'
+  | 'psychopomp'
+  | 'radiant'
+  | 'shadow'
+  | 'storykin'
+  | 'twinned'
+  | 'void';
 
 export interface EidolonEvolutionEntry extends ClassOptionBase {
   evolutionPointCost: 1 | 2 | 3 | 4;
-  canBeTakenMultipleTimes?: boolean;
-  summoner?: 'apg' | 'unchained' | 'both'; // which summoner variant can use this
-  formRestrictions?: string[]; // e.g. ['biped', 'quadruped'] — forms that can take this
-  subtypeRestrictions?: string[]; // e.g. ['undead'] — subtypes that can take this
-  effects: Effect[];
+  canBeTakenMultipleTimes?: boolean; // default false
+  effects: Effect[]; // structured grants (attacks, senses, movement, stat bonuses, etc.)
+  summoner?: 'apg' | 'unchained'; // absent = available to both summoner versions
+  formRestrictions?: EidolonForm[]; // APG only — absent = any base form
+  subtypeRestrictions?: EidolonSubtype[]; // Unchained only — absent = any subtype
 }
 
-// ---- Mesmerist Trick (Mesmerist) ----
-// Collection: 'mesmeristTricks'
+// ---- Mesmerist Trick ----
+// Collection: 'mesmeristtricks'
 
 export interface MesmeristTrickEntry extends ClassOptionBase {
-  trickTier: 'standard' | 'masterful'; // masterful tricks available at 12th level
+  trickTier: 'standard' | 'masterful'; // masterful tricks require mesmerist level 5+
 }
 
 // ---- Wild Talent (Kineticist) ----
