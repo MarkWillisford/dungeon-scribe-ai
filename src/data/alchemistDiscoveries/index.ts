@@ -1,12 +1,12 @@
 import type { AlchemistDiscoveryEntry } from '@/types/classOptions';
-import { alchemistDiscoveriesApg } from './alchemist-discoveries-apg';
-import { alchemistDiscoveriesUm } from './alchemist-discoveries-um';
-import { alchemistDiscoveriesArgBos } from './alchemist-discoveries-arg-bos';
-import { alchemistDiscoveriesIsmcHogDr } from './alchemist-discoveries-ismc-hog-dr';
-import { alchemistDiscoveriesUcUwCocCop } from './alchemist-discoveries-uc-uw-coc-cop';
-import { alchemistDiscoveriesAcgMisc1 } from './alchemist-discoveries-acg-misc1';
-import { alchemistDiscoveriesSmallSources1 } from './alchemist-discoveries-small-sources1';
-import { alchemistDiscoveriesSmallSources2 } from './alchemist-discoveries-small-sources2';
+import { alchemistDiscoveriesApg } from './raw/alchemist-discoveries-apg';
+import { alchemistDiscoveriesUm } from './raw/alchemist-discoveries-um';
+import { alchemistDiscoveriesArgBos } from './raw/alchemist-discoveries-arg-bos';
+import { alchemistDiscoveriesIsmcHogDr } from './raw/alchemist-discoveries-ismc-hog-dr';
+import { alchemistDiscoveriesUcUwCocCop } from './raw/alchemist-discoveries-uc-uw-coc-cop';
+import { alchemistDiscoveriesAcgMisc1 } from './raw/alchemist-discoveries-acg-misc1';
+import { alchemistDiscoveriesSmallSources1 } from './raw/alchemist-discoveries-small-sources1';
+import { alchemistDiscoveriesSmallSources2 } from './raw/alchemist-discoveries-small-sources2';
 
 export {
   alchemistDiscoveriesApg,
