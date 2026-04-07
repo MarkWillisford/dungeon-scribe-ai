@@ -64,7 +64,7 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     description: '+1 flaming burst longsword. On command (speaking "flame"), the blade erupts in fire, dealing an additional 1d6 fire damage per hit; on a critical it deals an extra 1d10 fire damage. The wielder may also use a standard action to project a 5-foot-radius burst of fire centered on themselves (4d6 fire, Ref DC 18 half) once per round while the flame is active.',
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['fireball', 'scorching ray', 'flame blade'], cost: 10357 },
     physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
-    activationCategory: 'command', effects: [],
+    activationCategory: 'command_word', effects: [],
     baseWeaponId: 'longsword', enhancementBonus: 1, weaponSpecialAbilities: ['flaming_burst'],
   },
   // 119
@@ -93,7 +93,7 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     description: '+1 short sword. Provides a +4 bonus to attack rolls and damage rolls when used to make a sneak attack. The wielder can also activate the sword as a free action to become invisible (as the invisibility spell) for up to 3 rounds per day (non-consecutive).',
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['invisibility'], cost: 11155 },
     physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
-    activationCategory: 'command', effects: [],
+    activationCategory: 'command_word', effects: [],
     baseWeaponId: 'shortsword', enhancementBonus: 1, weaponSpecialAbilities: [],
   },
   // 121
@@ -132,7 +132,7 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     description: '+2 composite longbow (+2 Str). Once per week when drawing the string, the wielder may swear an oath against one visible target: the bow gains +5 competence on attack rolls vs. that enemy, ignores concealment and cover, deals +2d6 bonus damage against them, and the target cannot benefit from a miss chance. The wielder suffers –1 penalty on all attack rolls and damage rolls against any other target until the sworn enemy is slain or 7 days pass.',
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['discern lies', 'true strike'], cost: 13100 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 20 },
-    activationCategory: 'command', effects: [],
+    activationCategory: 'command_word', effects: [],
     baseWeaponId: 'composite_longbow', enhancementBonus: 2, weaponSpecialAbilities: [],
   },
   // 124
@@ -171,7 +171,7 @@ export const specificWeaponsBatch6: MagicWeaponDefinition[] = [
     description: '+2 bastard sword that can be wielded as a one-handed martial weapon by anyone proficient with longswords. Against undead and evil outsiders, functions as a +4 bastard sword. On command, emits light equivalent to a daylight spell. On a hit against an undead creature, the target must succeed at a DC 20 Fortitude save or become blinded and staggered for 1d4 rounds.',
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['daylight', 'sunbeam'], cost: 25167 },
     physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
-    activationCategory: 'command', effects: [],
+    activationCategory: 'command_word', effects: [],
     baseWeaponId: 'bastard_sword', enhancementBonus: 2, weaponSpecialAbilities: [],
   },
   // 127
