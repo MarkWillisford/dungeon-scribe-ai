@@ -129,6 +129,7 @@ export const slayerTalentsStandard: SlayerTalentEntry[] = [
     talentTier: 'standard',
     description:
       "A catfolk slayer can select one of the following catfolk rogue talents in place of a slayer talent: deadly scratch, graceful faller, nimble climber, or vicious claws. Any talent effects based on rogue level use the slayer's class level. The slayer must fulfill any prerequisites.",
+    prerequisites: [{ type: 'race', raceName: 'catfolk' }],
     source: 'pf1e-ppc-dtt',
     isOfficial: true,
     visibility: 'global',
@@ -227,6 +228,7 @@ export const slayerTalentsStandard: SlayerTalentEntry[] = [
     talentTier: 'standard',
     description:
       'Samsaran only. When his studied target is of the dragon, fey, outsider, or undead type, the slayer gains a +2 insight bonus to his AC against its attacks and on saving throws.',
+    prerequisites: [{ type: 'race', raceName: 'samsaran' }],
     source: 'pf1e-ppc-mah',
     isOfficial: true,
     visibility: 'global',
@@ -238,6 +240,7 @@ export const slayerTalentsStandard: SlayerTalentEntry[] = [
     talentTier: 'standard',
     description:
       'Samsaran only. Once per day, the slayer can attempt a Knowledge check as if he had a number of ranks equal to his slayer level. A slayer can use this talent one additional time per day for every 5 slayer levels he has.',
+    prerequisites: [{ type: 'race', raceName: 'samsaran' }],
     source: 'pf1e-ppc-mah',
     isOfficial: true,
     visibility: 'global',
@@ -249,6 +252,7 @@ export const slayerTalentsStandard: SlayerTalentEntry[] = [
     talentTier: 'standard',
     description:
       'Samsaran only. When a slayer fails a saving throw against a fear effect, he can attempt the saving throw a second time to reduce the severity of the effect. Additionally, the DC of Intimidate checks to demoralize him increases by 2.',
+    prerequisites: [{ type: 'race', raceName: 'samsaran' }],
     source: 'pf1e-ppc-mah',
     isOfficial: true,
     visibility: 'global',
@@ -260,6 +264,7 @@ export const slayerTalentsStandard: SlayerTalentEntry[] = [
     talentTier: 'standard',
     description:
       'Samsaran only. If a slayer deals sneak attack damage to a creature unaware of his presence while standing on higher ground than his target, the sneak attack deals maximum damage instead of rolling.',
+    prerequisites: [{ type: 'race', raceName: 'samsaran' }],
     source: 'pf1e-ppc-mah',
     isOfficial: true,
     visibility: 'global',
@@ -271,6 +276,7 @@ export const slayerTalentsStandard: SlayerTalentEntry[] = [
     talentTier: 'standard',
     description:
       'Samsaran only. The slayer can cast silent image as a spell-like ability once per day for every 2 slayer levels he has, using his slayer level as his caster level.',
+    prerequisites: [{ type: 'race', raceName: 'samsaran' }],
     source: 'pf1e-ppc-mah',
     isOfficial: true,
     visibility: 'global',
@@ -282,6 +288,7 @@ export const slayerTalentsStandard: SlayerTalentEntry[] = [
     talentTier: 'standard',
     description:
       'Samsaran only. Once per day, the slayer can take a move action to gain the benefit of a combat feat he does not have. This effect lasts for 1 minute per slayer level he has.',
+    prerequisites: [{ type: 'race', raceName: 'samsaran' }],
     source: 'pf1e-ppc-mah',
     isOfficial: true,
     visibility: 'global',

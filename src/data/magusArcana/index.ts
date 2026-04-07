@@ -12,3 +12,11 @@ export const ALL_MAGUS_ARCANA: MagusArcanaEntry[] = [
   ...magusArcanaSupp1,
   ...magusArcanaSupp2,
 ];
+
+export const getMagusArcanaById = (id: string): MagusArcanaEntry | undefined =>
+  ALL_MAGUS_ARCANA.find((a) => a.id === id);
+
+export const getMagusArcanaByName = (name: string): MagusArcanaEntry | undefined => {
+  const lower = name.toLowerCase();
+  return ALL_MAGUS_ARCANA.find((a) => a.name.toLowerCase() === lower);
+};
