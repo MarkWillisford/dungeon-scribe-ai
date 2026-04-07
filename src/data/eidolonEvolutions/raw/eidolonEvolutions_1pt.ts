@@ -1,0 +1,664 @@
+// 1-Point Eidolon Evolutions — APG Summoner + cross-listed shared evolutions
+// Source: https://www.aonprd.com/SummonerEvolutions.aspx
+// Count: 31 entries
+
+import type { EidolonEvolutionEntry } from '@/types/classOptions';
+
+export const eidolonEvolutionsApg1pt: EidolonEvolutionEntry[] = [
+  {
+    id: 'evolution-basic-magic',
+    name: 'Basic Magic',
+    description:
+      'An eidolon learns to cast a basic spell as a spell-like ability. The eidolon can cast one of the following spells once per day as a spell-like ability: acid splash, dancing lights, daze, detect magic, flare, ghost sound, light, mage hand, ray of frost, stabilize, or touch of fatigue. The eidolon must have a Charisma score of at least 10 to select this evolution. This evolution can be selected more than once. Each time, the eidolon gains a different spell-like ability. At 4th level, the eidolon can cast each of these spells three times per day for 2 evolution points instead of 1.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.basic-magic',
+        value: 0,
+        source: 'Eidolon Evolution — Basic Magic',
+      },
+    ],
+    prerequisites: [
+      { type: 'ability_score', ability: 'CHA', minimum: 10 },
+    ],
+    summoner: 'apg',
+    source: 'pf1e-um',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-bite',
+    name: 'Bite',
+    description:
+      'An eidolon grows a fierce set of teeth, giving it a bite attack. This attack is a primary attack. The bite deals 1d6 points of damage (1d8 if Large, 2d6 if Huge). If the eidolon already has a bite attack, the bite attack instead increases the eidolon\'s Strength modifier multiplier on that attack\'s damage roll to 1-1/2.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.natural-attack-bite',
+        value: 0,
+        source: 'Eidolon Evolution — Bite',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-bleed',
+    name: 'Bleed',
+    description:
+      'An eidolon\'s natural attacks are capable of causing wounds that continue to bleed. Choose one type of natural attack. That attack causes 1d6 bleed damage. This evolution can be selected more than once. Its effects do not stack. Each time the eidolon selects this evolution, it applies to a different attack.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.bleed',
+        value: 0,
+        source: 'Eidolon Evolution — Bleed',
+      },
+    ],
+    summoner: 'apg',
+    source: 'pf1e-champions-corruption',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-claws',
+    name: 'Claws',
+    description:
+      'An eidolon has a pair of claws at the end of its limbs, giving it two claw attacks. These attacks are primary attacks. The claws deal 1d4 points of damage (1d6 if Large, 1d8 if Huge). The eidolon must have the limbs evolution to select this evolution. This evolution can be selected once per limbs evolution the eidolon possesses.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.natural-attack-claws',
+        value: 0,
+        source: 'Eidolon Evolution — Claws',
+      },
+    ],
+    prerequisites: [
+      { type: 'evolution', evolutionId: 'evolution-limbs' },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-climb',
+    name: 'Climb',
+    description:
+      'An eidolon develops the ability to climb up vertical surfaces using its claws or its body. The eidolon gains a climb speed equal to its base speed. This evolution can be selected more than once. Each additional time it is selected, the eidolon\'s climb speed increases by 20 feet.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'grant_movement',
+        target: 'climb',
+        value: 30,
+        source: 'Eidolon Evolution — Climb',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-gills',
+    name: 'Gills',
+    description:
+      'An eidolon has gills and can breathe underwater indefinitely.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.gills',
+        value: 0,
+        source: 'Eidolon Evolution — Gills',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-hooves',
+    name: 'Hooves',
+    description:
+      'An eidolon has a pair of hooves at the end of its limbs, giving it two hoof attacks. These attacks are secondary attacks. The hooves deal 1d4 points of damage (1d6 if Large, 1d8 if Huge). The eidolon must have the limbs evolution to select this evolution. Alternatively, the eidolon can replace the claws from the base form with hooves. This evolution can be selected once per limbs evolution the eidolon possesses.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.natural-attack-hooves',
+        value: 0,
+        source: 'Eidolon Evolution — Hooves',
+      },
+    ],
+    prerequisites: [
+      { type: 'evolution', evolutionId: 'evolution-limbs' },
+    ],
+    summoner: 'apg',
+    source: 'pf1e-um',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-improved-damage',
+    name: 'Improved Damage',
+    description:
+      'One of the eidolon\'s natural attacks is particularly fierce. Select one natural attack form and increase the damage die by one step. This evolution can be selected more than once. Its effects do not stack. Each time the eidolon selects this evolution, it applies to a different natural attack.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.improved-damage',
+        value: 0,
+        source: 'Eidolon Evolution — Improved Damage',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-improved-natural-armor',
+    name: 'Improved Natural Armor',
+    description:
+      'An eidolon\'s hide grows thick and tough, giving it a +2 bonus to its natural armor. This evolution can be selected more than once, but each additional time after the first it requires 5 additional summoner levels (5th, 10th, 15th, and 20th).',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'bonus',
+        bonusType: 'natural',
+        target: 'ac.natural',
+        value: 2,
+        source: 'Eidolon Evolution — Improved Natural Armor',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-low-light-vision',
+    name: 'Low-Light Vision',
+    description:
+      'An eidolon gains low-light vision, enabling it to see twice as far as a human in conditions of dim light.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'grant_sense',
+        target: 'low_light_vision',
+        value: 0,
+        source: 'Eidolon Evolution — Low-Light Vision',
+      },
+    ],
+    summoner: 'apg',
+    source: 'pf1e-um',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-magic-attacks',
+    name: 'Magic Attacks',
+    description:
+      'An eidolon is infused with magic, allowing it to treat all of its natural attacks as if they were magic for the purpose of overcoming damage reduction. If the summoner is 10th level or higher, all of the eidolon\'s natural attacks are treated as the same alignment as the eidolon for the purpose of overcoming damage reduction.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.magic-attacks',
+        value: 0,
+        source: 'Eidolon Evolution — Magic Attacks',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-mount',
+    name: 'Mount',
+    description:
+      'An eidolon is properly formed to serve as a combat-trained mount. The eidolon must be at least one size category larger than the summoner. The eidolon must have a quadruped, aquatic, or serpentine base form to take this evolution.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.mount',
+        value: 0,
+        source: 'Eidolon Evolution — Mount',
+      },
+    ],
+    formRestrictions: ['quadruped', 'aquatic', 'serpentine'],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-pincers',
+    name: 'Pincers',
+    description:
+      'An eidolon grows a pair of pincers at the end of one of its limbs, giving it two pincer attacks. These attacks are secondary attacks. The pincers deal 1d6 points of damage (1d8 if Large, 2d6 if Huge). Pincers gain a +2 bonus on combat maneuver checks made to grapple. The eidolon must have the limbs (arms) evolution to take this evolution. Alternatively, the eidolon can replace the claws from the base form with pincers. This evolution can be selected once per limbs evolution the eidolon possesses.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.natural-attack-pincers',
+        value: 0,
+        source: 'Eidolon Evolution — Pincers',
+      },
+    ],
+    prerequisites: [
+      { type: 'evolution', evolutionId: 'evolution-limbs' },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-pounce-apg',
+    name: 'Pounce',
+    description:
+      'An eidolon gains quick reflexes, allowing it to make a full attack after a charge. The eidolon must have a quadruped base form to take this evolution.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.pounce',
+        value: 0,
+        source: 'Eidolon Evolution — Pounce',
+      },
+    ],
+    formRestrictions: ['quadruped'],
+    summoner: 'apg',
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-pull',
+    name: 'Pull',
+    description:
+      'An eidolon gains the ability to pull creatures closer with a successful attack. Select one type of natural attack. Whenever the eidolon makes a successful attack of the selected type, it can attempt a free combat maneuver check. If successful, the target is pulled 5 feet closer to the eidolon. This ability only works on creatures within the eidolon\'s reach. This evolution requires the eidolon to have a reach of at least 10 feet. This evolution can be selected more than once. Each time it applies to a different attack.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.pull',
+        value: 0,
+        source: 'Eidolon Evolution — Pull',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-push',
+    name: 'Push',
+    description:
+      'An eidolon gains the ability to push creatures away with a successful attack. Select one type of natural attack. Whenever the eidolon makes a successful attack of the selected type, it can attempt a free combat maneuver check. If successful, the target is pushed 5 feet directly away from the eidolon. This evolution can be selected more than once. Each time it applies to a different attack.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.push',
+        value: 0,
+        source: 'Eidolon Evolution — Push',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-reach',
+    name: 'Reach',
+    description:
+      'One of an eidolon\'s attacks is capable of striking at foes at a distance. Pick one attack. The eidolon\'s reach with that attack increases by 5 feet.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.reach',
+        value: 5,
+        source: 'Eidolon Evolution — Reach',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-resistance',
+    name: 'Resistance',
+    description:
+      'An eidolon is shielded against one energy type, gaining resistance 5 against that energy type. The energy type must be chosen from the following list: acid, cold, electricity, fire, or sonic. This resistance increases by 5 for every 5 levels the summoner possesses, to a maximum of resistance 20 at 20th level. This evolution can be selected more than once. Each time it applies to a different energy type.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'resistance',
+        target: 'energy_resistance',
+        value: 5,
+        source: 'Eidolon Evolution — Resistance',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-scent',
+    name: 'Scent',
+    description:
+      'An eidolon develops a keen sense of smell. The eidolon gains the scent special ability, allowing it to detect opponents within 30 feet by sense of smell. If the opponent is upwind, the range increases to 60 feet; if downwind, it drops to 15 feet. Strong scents can be detected at twice the ranges noted above. The eidolon can detect the direction of the scent if it is within 5 feet. The eidolon can track opponents using the Survival skill.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'grant_sense',
+        target: 'scent',
+        value: 0,
+        source: 'Eidolon Evolution — Scent',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-shared-evolution',
+    name: 'Shared Evolution',
+    description:
+      'Select a 1-point or 2-point evolution the eidolon has. As a standard action, the eidolon can touch the summoner and transfer the selected evolution to him. The summoner gains the benefits of the selected evolution for 10 minutes per summoner level. This ability only works on evolutions whose effects can be applied to a humanoid form. This evolution is only available to twinned eidolons.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.shared-evolution',
+        value: 0,
+        source: 'Eidolon Evolution — Shared Evolution',
+      },
+    ],
+    prerequisites: [
+      { type: 'special', description: 'Twinned eidolon only' },
+    ],
+    source: 'pf1e-legacy-first-world',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-skilled',
+    name: 'Skilled',
+    description:
+      'An eidolon becomes particularly adept at a specific skill, gaining a +8 racial bonus on that skill. This evolution can be selected more than once. Each time it applies to a different skill.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'bonus',
+        bonusType: 'racial',
+        target: 'skill.perception',
+        value: 8,
+        source: 'Eidolon Evolution — Skilled',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-slam',
+    name: 'Slam',
+    description:
+      'An eidolon can make a powerful slam attack with one of its limbs. This attack is a primary attack. The slam deals 1d8 points of damage (2d6 if Large, 2d8 if Huge). The eidolon must have the limbs (arms) evolution to take this evolution. Alternatively, the eidolon can replace the claws from the base form with slams. This evolution can be selected once per limbs evolution the eidolon possesses.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.natural-attack-slam',
+        value: 0,
+        source: 'Eidolon Evolution — Slam',
+      },
+    ],
+    prerequisites: [
+      { type: 'evolution', evolutionId: 'evolution-limbs' },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-slippery',
+    name: 'Slippery',
+    description:
+      'An eidolon\'s body is naturally slick, granting it a +4 bonus to its CMD to resist grapple attempts and on Escape Artist checks.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'bonus',
+        bonusType: 'untyped',
+        target: 'cmd',
+        value: 4,
+        source: 'Eidolon Evolution — Slippery',
+      },
+      {
+        type: 'bonus',
+        bonusType: 'untyped',
+        target: 'skill.escape_artist',
+        value: 4,
+        source: 'Eidolon Evolution — Slippery',
+      },
+    ],
+    summoner: 'apg',
+    source: 'pf1e-champions-corruption',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-sticky',
+    name: 'Sticky',
+    description:
+      'An eidolon\'s body is covered in a sticky secretion, granting it a +4 bonus on combat maneuver checks made to initiate or maintain a grapple.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'bonus',
+        bonusType: 'untyped',
+        target: 'cmb',
+        value: 4,
+        source: 'Eidolon Evolution — Sticky',
+      },
+    ],
+    summoner: 'apg',
+    source: 'pf1e-champions-corruption',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-sting',
+    name: 'Sting',
+    description:
+      'An eidolon possesses a long, barbed stinger at the end of its tail, granting it a sting attack. This attack is a primary attack. The sting deals 1d4 points of damage (1d6 if Large, 1d8 if Huge). The eidolon must have the tail evolution to take this evolution. This evolution can be selected once per tail evolution the eidolon possesses.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.natural-attack-sting',
+        value: 0,
+        source: 'Eidolon Evolution — Sting',
+      },
+    ],
+    prerequisites: [
+      { type: 'evolution', evolutionId: 'evolution-tail' },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-swim',
+    name: 'Swim',
+    description:
+      'An eidolon grows fins and a powerful tail, allowing it to swim through the water with ease. The eidolon gains a swim speed equal to its base speed. This evolution can be selected more than once. Each additional time it is selected, the eidolon\'s swim speed increases by 20 feet.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'grant_movement',
+        target: 'swim',
+        value: 30,
+        source: 'Eidolon Evolution — Swim',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-tail',
+    name: 'Tail',
+    description:
+      'An eidolon grows a long, powerful tail. The eidolon gains a +2 racial bonus on Acrobatics checks made to balance. This evolution can be selected more than once.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'bonus',
+        bonusType: 'racial',
+        target: 'skill.acrobatics',
+        value: 2,
+        source: 'Eidolon Evolution — Tail',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-tail-slap',
+    name: 'Tail Slap',
+    description:
+      'An eidolon can use its tail to bash nearby foes, granting it a tail slap attack. This attack is a secondary attack. The tail slap deals 1d6 points of damage (1d8 if Large, 2d6 if Huge). The eidolon must have the tail evolution to take this evolution. This evolution can be selected once per tail evolution the eidolon possesses.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.natural-attack-tail-slap',
+        value: 0,
+        source: 'Eidolon Evolution — Tail Slap',
+      },
+    ],
+    prerequisites: [
+      { type: 'evolution', evolutionId: 'evolution-tail' },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-tentacle',
+    name: 'Tentacle',
+    description:
+      'An eidolon possesses a long, sinuous tentacle, granting it a tentacle attack. This attack is a secondary attack. The tentacle deals 1d4 points of damage (1d6 if Large, 1d8 if Huge). This evolution can be selected more than once, granting one additional tentacle attack per selection.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.natural-attack-tentacle',
+        value: 0,
+        source: 'Eidolon Evolution — Tentacle',
+      },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-unnatural-aura',
+    name: 'Unnatural Aura',
+    description:
+      'Animals do not willingly approach the eidolon unless the animal\'s handler succeeds at a DC 25 Handle Animal, Ride, or wild empathy check.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.unnatural-aura',
+        value: 0,
+        source: 'Eidolon Evolution — Unnatural Aura',
+      },
+    ],
+    summoner: 'apg',
+    source: 'pf1e-um',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-wing-buffet',
+    name: 'Wing Buffet',
+    description:
+      'An eidolon learns to use its wings to batter foes, granting it two wing buffet attacks. These attacks are secondary attacks. The wing buffets deal 1d4 points of damage (1d6 if Large, 1d8 if Huge). The eidolon must have the flight evolution that includes wings to take this evolution.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.natural-attack-wing-buffet',
+        value: 0,
+        source: 'Eidolon Evolution — Wing Buffet',
+      },
+    ],
+    prerequisites: [
+      { type: 'evolution', evolutionId: 'evolution-flight' },
+    ],
+    source: 'pf1e-apg',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+];
