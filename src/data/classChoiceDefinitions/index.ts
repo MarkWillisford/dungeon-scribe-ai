@@ -20,6 +20,10 @@ import { arcanistDefinitions } from './arcanist';
 import { investigatorDefinitions } from './investigator';
 import { sorcererDefinitions } from './sorcerer';
 import { bloodragerDefinitions } from './bloodrager';
+import { kineticistDefinitions } from './kineticist';
+import { occultistDefinitions } from './occultist';
+import { psychicDefinitions } from './psychic';
+import { spiritualistDefinitions } from './spiritualist';
 
 export {
   fighterDefinitions,
@@ -43,6 +47,10 @@ export {
   investigatorDefinitions,
   sorcererDefinitions,
   bloodragerDefinitions,
+  kineticistDefinitions,
+  occultistDefinitions,
+  psychicDefinitions,
+  spiritualistDefinitions,
 };
 
 export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
@@ -67,6 +75,10 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...investigatorDefinitions,
   ...sorcererDefinitions,
   ...bloodragerDefinitions,
+  ...kineticistDefinitions,
+  ...occultistDefinitions,
+  ...psychicDefinitions,
+  ...spiritualistDefinitions,
 ];
 
 export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined =>
