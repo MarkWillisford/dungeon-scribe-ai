@@ -1,0 +1,227 @@
+import type { AlchemistDiscoveryEntry } from '@/types/classOptions';
+
+export const alchemistDiscoveriesIsmcHogDr: AlchemistDiscoveryEntry[] = [
+  // ---- Inner Sea Monster Codex (ISMC) ----
+  {
+    id: 'alchemist-discovery-cytillesh-bomb',
+    name: 'Cytillesh Bomb',
+    discoveryTier: 'standard',
+    description:
+      "When the alchemist creates a bomb, he can infuse it with cytillesh extract. Cytillesh bombs deal 1d4 points of damage, plus 1d4 points of damage for every odd-numbered level, instead of 1d6. Creatures that take a direct hit from a cytillesh bomb are sickened for 1 round per alchemist level unless they succeed at Fortitude saves. If a creature is rendered unconscious from this bomb or any other attack before it is able to remove the sickened condition, the victim loses all memory from the last hour and cannot form new memories for 8 hours. The lost and prevented memories might return later as dreams, and can be restored with a restoration spell. This discovery doesn't stack with other discoveries that alter an alchemist's bomb.",
+    source: 'pf1e-ismc',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-precise-poison',
+    name: 'Precise Poison',
+    discoveryTier: 'standard',
+    description:
+      "The alchemist is adept at delivering poison to the most vulnerable areas of his targets. When the alchemist confirms a critical hit with a poisoned weapon, he increases the save DC of the poison by an amount equal to the weapon's critical multiplier.",
+    source: 'pf1e-ismc',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-method-to-the-madness',
+    name: 'Method to the Madness',
+    discoveryTier: 'standard',
+    description:
+      'The alchemist has learned to channel his madness into one of his alchemist class abilities. When the alchemist takes this discovery, he chooses one of either bombs or extracts. If he selects bombs, he uses his Charisma bonus in place of his Intelligence bonus when determining the bonus to damage and the saving throw DCs of his bombs. If the alchemist selects extracts, he uses his Charisma bonus in place of his Intelligence bonus to calculate bonus extracts per day. The alchemist must have the madness extraordinary ability to take this discovery. This discovery can be taken twice, allowing the alchemist to select both bombs and extracts.',
+    source: 'pf1e-ismc',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-monstrous-graft',
+    name: 'Monstrous Graft',
+    discoveryTier: 'standard',
+    description:
+      'The alchemist can replace up to four of his own amputated limbs with those of a monstrous beast of the same size category. If the grafted limb is an arm, the alchemist gains either a climb speed of 15 feet or a claw or slam natural attack that deals 1d6 points of damage (1d4 for a Small alchemist). If the grafted limb is a leg, the alchemist gains one of the following benefits: a +5 bonus to land speed, a swim speed of 15 feet, or a +5 bonus on Acrobatics checks when jumping. For each limb the alchemist replaces in this manner, he takes a -2 penalty to Wisdom as he loses his sense of self. Derros are immune to this penalty.',
+    source: 'pf1e-ismc',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-sleeper-agent',
+    name: 'Sleeper Agent',
+    discoveryTier: 'standard',
+    description:
+      "The alchemist learns how to create a sleeper agent, whom he releases back into its original society none the wiser. The alchemist can create a sleeper agent in a ritual that takes 1 minute; the target must be unconscious for the ritual's duration. At any time during the next year, as long as he is within 1 mile of the sleeper agent, the alchemist can activate the agent's programming. When the sleeper agent is activated, treat her as if she were the target of a dominate person spell with a caster level equal to the alchemist's level at the time the sleeper agent was created. If the sleeper agent is killed or the dominate person effect's duration expires, the sleeper agent is permanently released from the alchemist's control. The alchemist can also release any sleeper agent as a free action. The alchemist can have one active sleeper agent for every 6 alchemist levels he possesses. An alchemist must be at least 12th level before selecting this discovery.",
+    source: 'pf1e-ismc',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-subsumed-spirit',
+    name: 'Subsumed Spirit',
+    discoveryTier: 'standard',
+    description:
+      "As the alchemist grows in power, his parasitic twin laps up a portion of his soul, like a dog feeding on its master's scraps. The alchemist's parasitic twin can now manifest or hide within the alchemist's torso as a move action. As a standard action, the alchemist can cause his manifested twin to babble, driving listeners insane. All creatures without the insanity special ability that are within 60 feet of the alchemist must succeed at a Will save or be affected by confusion for 1 round per alchemist level. The alchemist can urge his parasitic twin to babble a number of times per day equal to 3 + the alchemist's Intelligence modifier. Creatures that successfully save can't be affected by this effect for 24 hours. The alchemist is immune to its sibling's babbling. This is a sonic, mind-affecting compulsion effect. The alchemist must have the parasitic twin discovery before selecting this discovery.",
+    source: 'pf1e-ismc',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-sunlight-acclimation',
+    name: 'Sunlight Acclimation',
+    discoveryTier: 'standard',
+    description:
+      'Time spent in the bright light of day has partially inured the alchemist to its effects. When the alchemist would normally take Constitution damage as a result of vulnerability to sunlight, he can attempt a DC 11 Fortitude saving throw to negate the effects. The DC of this saving throw increases by 1 for each hour after the first spent in sunlight within the last 24 hours.',
+    source: 'pf1e-ismc',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  // ---- Heroes of Golarion (HoG) ----
+  {
+    id: 'alchemist-discovery-constructive-dyes',
+    name: 'Constructive Dyes',
+    discoveryTier: 'standard',
+    description:
+      'The alchemist\'s dyes congeal and solidify, allowing him to make physical objects from them. The alchemist can expend two uses of his daily bombs to create a nonmagical object, as minor creation, using his alchemist level as the spell\'s caster level. The alchemist must be at least 8th level and have the divine inks discovery before selecting this discovery.',
+    source: 'pf1e-ppc-hog',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-divine-inks',
+    name: 'Divine Inks',
+    discoveryTier: 'standard',
+    description:
+      "The alchemist can develop special pigments and combine them with his alchemical reagents to create unique dyes that cling to the empty space around him, allowing him to paint images in the air to fool his enemies. By expending two daily uses of his bombs, he can use the dyes to create an image in a space adjacent to him, as silent image, using his alchemist level as the spell's caster level. The image he creates remains for a number of minutes equal to his alchemist level. He can dismiss this image as a standard action.",
+    source: 'pf1e-ppc-hog',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-explosive-calligraphy',
+    name: 'Explosive Calligraphy',
+    discoveryTier: 'standard',
+    description:
+      "The alchemist can create especially volatile pigments that detonate when agitated. This requires expending one daily use of his bombs, but otherwise functions as explosive runes except that it deals damage as one of the alchemist's bombs. The alchemist can expend an additional daily use of his bombs to apply one discovery that applies to his bombs, such as acid bomb or dispelling bomb, to the runes created with this discovery. An alchemist must be at least 6th level before selecting this discovery.",
+    source: 'pf1e-ppc-hog',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-greater-constructive-dyes',
+    name: 'Greater Constructive Dyes',
+    discoveryTier: 'standard',
+    description:
+      "The alchemist expands the set of objects he can create with his constructive dyes. The alchemist can expend one additional use of his daily bombs when using his constructive dyes discovery to create objects, as major creation. The alchemist must be at least 10th level and have the constructive dyes and divine inks discoveries before selecting this discovery.",
+    source: 'pf1e-ppc-hog',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-greater-divine-inks',
+    name: 'Greater Divine Inks',
+    discoveryTier: 'standard',
+    description:
+      "The alchemist's unique dyes allow him to create lifelike images. If he expends an additional daily use of his bombs, the image he creates with the divine inks discovery also produces sound, smell, and heat, as major image. The alchemist must be at least 6th level and must have the divine inks and improved divine inks discoveries before selecting this discovery.",
+    source: 'pf1e-ppc-hog',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-improved-divine-inks',
+    name: 'Improved Divine Inks',
+    discoveryTier: 'standard',
+    description:
+      "The alchemist's unique dyes allow him to create images accompanied by sound. If he expends an additional daily use of his bombs, the image he creates with the divine inks discovery also produces minor sounds, as minor image. The alchemist must be at least 4th level and must have the divine inks discovery before selecting this discovery.",
+    source: 'pf1e-ppc-hog',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-living-pigment',
+    name: 'Living Pigment',
+    discoveryTier: 'standard',
+    description:
+      "The alchemist infuses his inks and dyes with a spark of animating force. As a standard action, he can expend one daily use of his bombs and a 1st-level extract he has prepared to create a creature, as summon monster I, using his level as the spell's caster level. The extract is expended as if the alchemist had consumed it. The alchemist can expend a higher-level extract when using this ability to create a creature using a summon monster spell of a level equal to the level of extract expended. For example, if the alchemist expends a 4th-level extract, he can create a creature as if using summon monster IV. Additionally, the alchemist can expend an additional use of his daily bombs when creating a creature in this way to grant the creature the celestial or fiendish template. The alchemist must have the divine inks discovery before selecting this discovery.",
+    source: 'pf1e-ppc-hog',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  // ---- Distant Realms (DR) ----
+  {
+    id: 'alchemist-discovery-anguish-bomb',
+    name: 'Anguish Bomb',
+    discoveryTier: 'standard',
+    description:
+      'You can throw bombs infused with psychic trauma. This discovery allows other alchemists to duplicate the anguish bombs used by mnemostillers.',
+    source: 'pf1e-ppc-dr',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-dread-bomb',
+    name: 'Dread Bomb',
+    discoveryTier: 'standard',
+    description:
+      'Your anguish bombs are tainted with fear and dread. Creatures who take damage from your anguish bombs become frightened for 1d6 rounds. A target that succeeds at a Will saving throw is instead shaken for a single round. An alchemist must be 6th level and have the anguish bomb class feature or the anguish bomb discovery before selecting this discovery.',
+    source: 'pf1e-ppc-dr',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-melancholy-bomb',
+    name: 'Melancholy Bomb',
+    discoveryTier: 'standard',
+    description:
+      'Your anguish bombs are filled with memories of sadness and regret. Creatures who take damage from your anguish bombs are also affected as per crushing despair for 1 round per alchemist level, or a single round if the target succeeds at a Will saving throw. An alchemist must be 10th level and have the anguish bomb class feature or the anguish bomb discovery before selecting this discovery.',
+    source: 'pf1e-ppc-dr',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-substantiating-bomb',
+    name: 'Substantiating Bomb',
+    discoveryTier: 'standard',
+    description:
+      'Your bombs are infused with ectoplasm and a longing for life, lending ethereal creatures a measure of substance. You can throw a bomb that inflicts no damage but instead creates a 10-foot-radius cloud of fog that functions as fog cloud and lasts for 1 round per alchemist level. Incorporeal creatures that pass through this cloud become partially solid, taking half damage from nonmagic attacks and full damage from magic weapons, spells, and spell-like abilities. This effect lasts for the duration of the smoke cloud, even if the incorporeal creature moves outside the cloud\'s area. A creature affected by the cloud can attempt a Will saving throw to negate the substantiating effects of this bomb. An alchemist must be 10th level before selecting this discovery.',
+    source: 'pf1e-ppc-dr',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-grand-rasugen',
+    name: 'Grand Rasugen',
+    discoveryTier: 'standard',
+    description:
+      'The alchemist\'s rasugen now grants a +6 alchemical bonus on all saving throws, 4 temporary hit points per alchemist level, and immunity to disease, mind-affecting effects, and poison. The alchemist takes a -6 penalty to Intelligence and a -2 penalty to Charisma and Wisdom as long as the grand rasugen persists. An alchemist must be at least 16th level and have the greater rasugen discovery before selecting this discovery.',
+    source: 'pf1e-ppc-dr',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'alchemist-discovery-greater-rasugen',
+    name: 'Greater Rasugen',
+    discoveryTier: 'standard',
+    description:
+      'The alchemist\'s rasugen now grants a +4 alchemical bonus on all saving throws, 3 temporary hit points per alchemist level, and immunity to mind-affecting effects. The alchemist takes a -4 penalty to Intelligence as long as the greater rasugen persists. An alchemist must be at least 12th level and able to brew a rasugen before selecting this discovery.',
+    source: 'pf1e-ppc-dr',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+];

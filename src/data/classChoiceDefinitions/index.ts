@@ -18,6 +18,8 @@ import { skaldDefinitions } from './skald';
 import { witchDefinitions } from './witch';
 import { arcanistDefinitions } from './arcanist';
 import { investigatorDefinitions } from './investigator';
+import { sorcererDefinitions } from './sorcerer';
+import { bloodragerDefinitions } from './bloodrager';
 
 export {
   fighterDefinitions,
@@ -39,6 +41,8 @@ export {
   witchDefinitions,
   arcanistDefinitions,
   investigatorDefinitions,
+  sorcererDefinitions,
+  bloodragerDefinitions,
 };
 
 export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
@@ -61,6 +65,8 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...witchDefinitions,
   ...arcanistDefinitions,
   ...investigatorDefinitions,
+  ...sorcererDefinitions,
+  ...bloodragerDefinitions,
 ];
 
 export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined =>
