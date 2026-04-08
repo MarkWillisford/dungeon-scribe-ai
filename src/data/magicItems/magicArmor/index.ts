@@ -11,3 +11,5 @@ export * from './shieldAbilities-batch3';
 export * from './specificArmor-batch1';
 export * from './specificArmor-batch2';
 export * from './specificShields-batch1';
+export * from './specificShields-batch2';
+export * from './specificShields-batch3';
