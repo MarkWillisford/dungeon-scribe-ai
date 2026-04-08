@@ -21,7 +21,7 @@ import { getDeityByName } from '@/data/deities/index';
 import { ALL_NINJA_TRICKS } from '@/data/ninjaTricks/index';
 import { ALL_SLAYER_TALENTS } from '@/data/slayerTalents/index';
 import { ALL_MAGUS_ARCANA } from '@/data/magusArcana/index';
-import type { NinjaTrickEntry, SlayerTalentEntry, AlchemistDiscoveryEntry } from '@/types/classOptions';
+import type { NinjaTrickEntry, SlayerTalentEntry, AlchemistDiscoveryEntry, BloodlineClassId } from '@/types/classOptions';
 import { ALL_FEATS } from '@/data/feats/index';
 import type { FeatType } from '@/types/feats';
 import { ALL_WARPRIEST_BLESSINGS } from '@/data/warpriestBlessings/index';
@@ -217,9 +217,9 @@ function buildCollectionItems(
       }));
     }
     case 'bloodlines': {
-      const classId = resolvedFilter.classIds as string | undefined;
+      const classId = resolvedFilter.classIds as BloodlineClassId | undefined;
       const pool = classId
-        ? ALL_BLOODLINES.filter((b) => b.classIds.includes(classId as 'sorcerer' | 'bloodrager'))
+        ? ALL_BLOODLINES.filter((b) => b.classIds.includes(classId))
         : ALL_BLOODLINES;
       return pool.map((b) => ({
         key: b.id,
