@@ -61,7 +61,8 @@ export type FeatPrerequisite =
   | { type: 'race'; raceName: string }
   | { type: 'caster_level'; minimum: number }
   | { type: 'mythic_tier'; minimum: number }
-  | { type: 'special'; description: string };
+  | { type: 'special'; description: string }
+  | { type: 'evolution'; evolutionId: string };
 
 // ---- Spell-Like Ability granted by a feat ----
 

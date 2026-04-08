@@ -430,7 +430,7 @@ export const eidolonEvolutionsApg1pt: EidolonEvolutionEntry[] = [
       {
         type: 'bonus',
         bonusType: 'racial',
-        target: 'skill.perception',
+        target: 'special.chosen_skill',
         value: 8,
         source: 'Eidolon Evolution — Skilled',
       },

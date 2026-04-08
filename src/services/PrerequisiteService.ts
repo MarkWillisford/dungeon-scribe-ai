@@ -193,6 +193,8 @@ export class PrerequisiteService {
         return `Mythic Tier ${prereq.minimum}`;
       case 'special':
         return prereq.description;
+      case 'evolution':
+        return `Evolution: ${prereq.evolutionId}`;
     }
   }
 }

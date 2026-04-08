@@ -1,7 +1,7 @@
 // Shaman Spirits | All 17 spirits
 // Sources: Advanced Class Guide (pf1e-acg) × 16, Wilderness Origins (pf1e-ppc-wo) × 1,
 //          Horror Realms (pf1e-horror-realms) × 1
-// count: 18
+// count: 17
 
 import type { ShamanSpiritEntry } from '@/types/classOptions';
 

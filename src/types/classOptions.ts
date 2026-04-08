@@ -4,6 +4,7 @@
 // ClassChoiceDefinition (classChoices.ts) routes to these collections at runtime.
 // All descriptions are text — mechanical effects are wired by the modifier pipeline.
 
+import { Effect } from './base';
 import { FeatPrerequisite } from './feats';
 
 // ---- Base type shared by all option collection documents ----
@@ -102,11 +103,49 @@ export type InvestigatorTalentEntry = ClassOptionBase;
 // ---- Shaman Spirit ----
 // Collection: 'shamanspirits'
 
+export interface ShamanSpiritAbility {
+  name: string;
+  type: 'Su' | 'Sp' | 'Ex'; // spell-like, supernatural, or extraordinary
+  description: string;
+  levelGained?: number; // class level at which this ability is gained (optional if implicit)
+  uses?: {
+    formula?: string; // e.g. '3 + Cha modifier'
+    perDay?: number;  // fixed uses per day
+    current: number;  // runtime state — 0 at rest
+  };
+  effects?: Effect[];
+}
+
 export interface ShamanSpiritEntry extends ClassOptionBase {
+  classIds?: string[]; // ['shaman'] or ['shaman', 'spirit-warrior-archetype']
   spiritSpells: string[]; // 9 entries — index 0 = level 1 spirit spell name
-  spiritAbility: string; // text description of the spirit ability
   hexList?: string[]; // hex ids available to this spirit's shaman
   wanderingSpirit: boolean; // can this spirit be taken as a wandering spirit?
+  abilities: {
+    spirit: ShamanSpiritAbility;        // gained at level 1
+    greater: ShamanSpiritAbility;       // gained at level 6
+    true: ShamanSpiritAbility;          // gained at level 12
+    manifestation: ShamanSpiritAbility; // gained at level 20
+  };
+}
+
+// ---- Eidolon Evolution (Summoner / Unchained Summoner) ----
+// Collection: 'eidolonEvolutions'
+
+export interface EidolonEvolutionEntry extends ClassOptionBase {
+  evolutionPointCost: 1 | 2 | 3 | 4;
+  canBeTakenMultipleTimes?: boolean;
+  summoner?: 'apg' | 'unchained' | 'both'; // which summoner variant can use this
+  formRestrictions?: string[]; // e.g. ['biped', 'quadruped'] — forms that can take this
+  subtypeRestrictions?: string[]; // e.g. ['undead'] — subtypes that can take this
+  effects: Effect[];
+}
+
+// ---- Mesmerist Trick (Mesmerist) ----
+// Collection: 'mesmeristTricks'
+
+export interface MesmeristTrickEntry extends ClassOptionBase {
+  trickTier: 'standard' | 'masterful'; // masterful tricks available at 12th level
 }
 
 // ---- Wild Talent (Kineticist) ----
