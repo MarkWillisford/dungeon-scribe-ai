@@ -42,6 +42,11 @@ export interface DomainEntry extends ClassOptionBase {
 // ---- Bloodline (Sorcerer, Bloodrager — shared pool) ----
 // Collection: 'bloodlines'
 
+// Classes/archetypes that can select bloodlines.
+// To add a new class, extend this union — no bloodline entry data changes needed
+// if the new class draws from an existing pool (e.g. Eldritch Scion uses { classIds: 'sorcerer' }).
+export type BloodlineClassId = 'sorcerer' | 'bloodrager';
+
 export interface BloodlinePower {
   name: string;
   description: string;
@@ -49,7 +54,8 @@ export interface BloodlinePower {
 }
 
 export interface BloodlineEntry extends ClassOptionBase {
-  bloodlineArcana: string; // text description of passive benefit
+  classIds: BloodlineClassId[]; // which classes can select this bloodline
+  bloodlineArcana?: string; // sorcerer only; bloodrager bloodlines have no arcana mechanic
   powers: BloodlinePower[];
   bonusSpells: string[]; // 9 entries — index 0 = level 1 bonus spell name
   bonusFeats: string[]; // feat names to choose from at levels 7, 13, 19
@@ -66,12 +72,34 @@ export interface MysteryEntry extends ClassOptionBase {
   finalRevelation: string; // text description of 20th-level ability
 }
 
-// ---- Rogue Talent (Rogue, Ninja — shared pool) ----
+// ---- Rogue Talent (Rogue) ----
 // Collection: 'roguetalents'
 
 export interface RogueTalentEntry extends ClassOptionBase {
   talentTier: 'standard' | 'advanced'; // advanced requires class level 10+
 }
+
+// ---- Ninja Trick (Ninja) ----
+// Collection: 'ninjatricks'
+// Note: the "Rogue Talent" ninja trick lets a ninja pick from the roguetalents pool,
+// but the ninja trick pool itself is a separate collection.
+
+export interface NinjaTrickEntry extends ClassOptionBase {
+  trickTier: 'standard' | 'master'; // master requires ninja level 10+
+}
+
+// ---- Slayer Talent (Slayer) ----
+// Collection: 'slayertalents'
+
+export interface SlayerTalentEntry extends ClassOptionBase {
+  talentTier: 'standard' | 'advanced'; // advanced requires slayer level 10+
+}
+
+// ---- Magus Arcana (Magus) ----
+// Collection: 'magusarcana'
+// Base fields are sufficient — no collection-specific additions needed.
+
+export type MagusArcanaEntry = ClassOptionBase;
 
 // ---- Rage Power (Barbarian, Skald) ----
 // Collection: 'ragepowers'
@@ -180,4 +208,22 @@ export type InquisitionEntry = ClassOptionBase;
 
 export interface RevelationEntry extends ClassOptionBase {
   mysteryId: string; // e.g. 'battle', 'bones', 'flame' — matches MysteryEntry.id
+}
+
+// ---- Warpriest Blessing ----
+// Collection: 'warpriestblessings'
+// Warpriests select 2 blessings at creation, each tied to a domain their deity grants.
+// Each blessing has a minor power (level 1+) and a major power (level 10+).
+
+export interface WarpriestBlessingEntry extends ClassOptionBase {
+  minorPower: string; // description of the minor blessing power (available from level 1)
+  majorPower: string; // description of the major blessing power (available from level 10)
+}
+
+// ---- Alchemist Discovery ----
+// Collection: 'alchemistdiscoveries'
+// Standard discoveries available at level 2+; grand discoveries only at level 20.
+
+export interface AlchemistDiscoveryEntry extends ClassOptionBase {
+  discoveryTier: 'standard' | 'grand'; // grand discoveries require level 20
 }
