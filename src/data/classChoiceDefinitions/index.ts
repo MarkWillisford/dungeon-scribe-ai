@@ -27,6 +27,8 @@ import { samuraiDefinitions } from './samurai';
 import { brawlerDefinitions } from './brawler';
 import { hunterDefinitions } from './hunter';
 import { gunslingerDefinitions } from './gunslinger';
+import { barbarianUnchainedDefinitions } from './barbarianUnchained';
+import { rogueUnchainedDefinitions } from './rogueUnchained';
 import { shamanDefinitions } from './shaman';
 import { summonerDefinitions } from './summoner';
 import { mesmeristDefinitions } from './mesmerist';
@@ -64,6 +66,8 @@ export {
   brawlerDefinitions,
   hunterDefinitions,
   gunslingerDefinitions,
+  barbarianUnchainedDefinitions,
+  rogueUnchainedDefinitions,
   shamanDefinitions,
   summonerDefinitions,
   mesmeristDefinitions,
@@ -102,6 +106,8 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...brawlerDefinitions,
   ...hunterDefinitions,
   ...gunslingerDefinitions,
+  ...barbarianUnchainedDefinitions,
+  ...rogueUnchainedDefinitions,
   ...shamanDefinitions,
   ...summonerDefinitions,
   ...mesmeristDefinitions,
