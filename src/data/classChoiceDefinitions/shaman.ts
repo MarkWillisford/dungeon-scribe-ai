@@ -20,8 +20,8 @@ export const shamanDefinitions: ClassChoiceDefinition[] = [
     className: 'shaman',
     featureName: 'Wandering Spirit',
     description:
-      'At 4th level, a shaman can forge a temporary bond with a second spirit each day after 8 hours of rest. She gains that spirit\'s spirit ability, its spirit hexes (without gaining the actual hexes), and can prepare one spell from its spirit spell list in place of a shaman spell. This choice may change each day.',
-    selectionMode: { type: 'at_class_levels', levels: [4] },
+      'At 4th level, a shaman can forge a temporary bond with a second spirit each day after 8 hours of rest. She gains that spirit\'s spirit ability, its spirit hexes (without gaining the actual hexes), and can prepare one spell from its spirit spell list in place of a shaman spell. This choice resets after 8 hours of rest — treat like daily spell preparation.',
+    selectionMode: { type: 'special' },
     optionSource: 'collection',
     collectionName: 'shamanspirits',
     collectionFilter: { wanderingOnly: true },
