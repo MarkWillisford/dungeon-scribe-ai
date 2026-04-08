@@ -42,6 +42,11 @@ export interface DomainEntry extends ClassOptionBase {
 // ---- Bloodline (Sorcerer, Bloodrager — shared pool) ----
 // Collection: 'bloodlines'
 
+// Classes/archetypes that can select bloodlines.
+// To add a new class, extend this union — no bloodline entry data changes needed
+// if the new class draws from an existing pool (e.g. Eldritch Scion uses { classIds: 'sorcerer' }).
+export type BloodlineClassId = 'sorcerer' | 'bloodrager';
+
 export interface BloodlinePower {
   name: string;
   description: string;
@@ -49,7 +54,7 @@ export interface BloodlinePower {
 }
 
 export interface BloodlineEntry extends ClassOptionBase {
-  classIds: ('sorcerer' | 'bloodrager')[]; // which classes can select this bloodline
+  classIds: BloodlineClassId[]; // which classes can select this bloodline
   bloodlineArcana?: string; // sorcerer only; bloodrager bloodlines have no arcana mechanic
   powers: BloodlinePower[];
   bonusSpells: string[]; // 9 entries — index 0 = level 1 bonus spell name
