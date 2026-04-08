@@ -24,7 +24,7 @@ export const kineticistDefinitions: ClassChoiceDefinition[] = [
             id: 'air',
             name: 'Air',
             description:
-              'The kineticist channels wind and electricity. Simple blast: air blast (physical) or electric blast (energy). Defense: shroud of water.',
+              'The kineticist channels wind and electricity. Simple blast: air blast (physical) or electric blast (energy). Defense: air shroud.',
           },
           {
             id: 'earth',
@@ -49,7 +49,6 @@ export const kineticistDefinitions: ClassChoiceDefinition[] = [
       {
         id: 'kineticist-element-supplemental',
         name: 'Supplemental Elements',
-        minClassLevel: 1,
         options: [
           {
             id: 'void',
