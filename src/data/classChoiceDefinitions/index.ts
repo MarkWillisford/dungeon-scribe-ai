@@ -25,6 +25,10 @@ import { samuraiDefinitions } from './samurai';
 import { brawlerDefinitions } from './brawler';
 import { hunterDefinitions } from './hunter';
 import { gunslingerDefinitions } from './gunslinger';
+import { monkDefinitions } from './monk';
+import { antiPaladinDefinitions } from './antipaladin';
+import { warpriestDefinitions } from './warpriest';
+import { alchemistDefinitions } from './alchemist';
 
 export {
   fighterDefinitions,
@@ -53,6 +57,10 @@ export {
   brawlerDefinitions,
   hunterDefinitions,
   gunslingerDefinitions,
+  monkDefinitions,
+  antiPaladinDefinitions,
+  warpriestDefinitions,
+  alchemistDefinitions,
 };
 
 export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
@@ -82,6 +90,10 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...brawlerDefinitions,
   ...hunterDefinitions,
   ...gunslingerDefinitions,
+  ...monkDefinitions,
+  ...antiPaladinDefinitions,
+  ...warpriestDefinitions,
+  ...alchemistDefinitions,
 ];
 
 export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined =>
