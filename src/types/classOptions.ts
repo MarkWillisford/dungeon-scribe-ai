@@ -163,3 +163,21 @@ export type InquisitionEntry = ClassOptionBase;
 export interface RevelationEntry extends ClassOptionBase {
   mysteryId: string; // e.g. 'battle', 'bones', 'flame' — matches MysteryEntry.id
 }
+
+// ---- Warpriest Blessing ----
+// Collection: 'warpriestblessings'
+// Warpriests select 2 blessings at creation, each tied to a domain their deity grants.
+// Each blessing has a minor power (level 1+) and a major power (level 10+).
+
+export interface WarpriestBlessingEntry extends ClassOptionBase {
+  minorPower: string; // description of the minor blessing power (available from level 1)
+  majorPower: string; // description of the major blessing power (available from level 10)
+}
+
+// ---- Alchemist Discovery ----
+// Collection: 'alchemistdiscoveries'
+// Standard discoveries available at level 2+; grand discoveries only at level 20.
+
+export interface AlchemistDiscoveryEntry extends ClassOptionBase {
+  discoveryTier: 'standard' | 'grand'; // grand discoveries require level 20
+}
