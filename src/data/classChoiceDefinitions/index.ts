@@ -18,17 +18,8 @@ import { skaldDefinitions } from './skald';
 import { witchDefinitions } from './witch';
 import { arcanistDefinitions } from './arcanist';
 import { investigatorDefinitions } from './investigator';
-import { ninjaDefinitions } from './ninja';
-import { slayerDefinitions } from './slayer';
-import { magusDefinitions } from './magus';
-import { samuraiDefinitions } from './samurai';
-import { brawlerDefinitions } from './brawler';
-import { hunterDefinitions } from './hunter';
-import { gunslingerDefinitions } from './gunslinger';
-import { monkDefinitions } from './monk';
-import { antiPaladinDefinitions } from './antipaladin';
-import { warpriestDefinitions } from './warpriest';
-import { alchemistDefinitions } from './alchemist';
+import { sorcererDefinitions } from './sorcerer';
+import { bloodragerDefinitions } from './bloodrager';
 
 export {
   fighterDefinitions,
@@ -50,17 +41,8 @@ export {
   witchDefinitions,
   arcanistDefinitions,
   investigatorDefinitions,
-  ninjaDefinitions,
-  slayerDefinitions,
-  magusDefinitions,
-  samuraiDefinitions,
-  brawlerDefinitions,
-  hunterDefinitions,
-  gunslingerDefinitions,
-  monkDefinitions,
-  antiPaladinDefinitions,
-  warpriestDefinitions,
-  alchemistDefinitions,
+  sorcererDefinitions,
+  bloodragerDefinitions,
 };
 
 export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
@@ -83,17 +65,8 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...witchDefinitions,
   ...arcanistDefinitions,
   ...investigatorDefinitions,
-  ...ninjaDefinitions,
-  ...slayerDefinitions,
-  ...magusDefinitions,
-  ...samuraiDefinitions,
-  ...brawlerDefinitions,
-  ...hunterDefinitions,
-  ...gunslingerDefinitions,
-  ...monkDefinitions,
-  ...antiPaladinDefinitions,
-  ...warpriestDefinitions,
-  ...alchemistDefinitions,
+  ...sorcererDefinitions,
+  ...bloodragerDefinitions,
 ];
 
 export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined =>

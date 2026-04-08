@@ -16,6 +16,7 @@ import { ALL_CAVALIER_ORDERS } from '@/data/cavalierOrders/index';
 import { ALL_HEXES } from '@/data/hexes/index';
 import { ALL_ARCANIST_EXPLOITS } from '@/data/arcanistExploits/index';
 import { ALL_INVESTIGATOR_TALENTS } from '@/data/investigatorTalents/index';
+import { ALL_BLOODLINES } from '@/data/bloodlines/index';
 import { getDeityByName } from '@/data/deities/index';
 import { ALL_NINJA_TRICKS } from '@/data/ninjaTricks/index';
 import { ALL_SLAYER_TALENTS } from '@/data/slayerTalents/index';
@@ -213,6 +214,17 @@ function buildCollectionItems(
         label: d.name,
         subLabel: d.description?.slice(0, 80),
         category: d.discoveryTier === 'grand' ? 'Grand Discovery' : undefined,
+      }));
+    }
+    case 'bloodlines': {
+      const classId = resolvedFilter.classIds as string | undefined;
+      const pool = classId
+        ? ALL_BLOODLINES.filter((b) => b.classIds.includes(classId as 'sorcerer' | 'bloodrager'))
+        : ALL_BLOODLINES;
+      return pool.map((b) => ({
+        key: b.id,
+        label: b.name,
+        subLabel: b.bloodlineArcana?.slice(0, 80) ?? b.description?.slice(0, 80),
       }));
     }
     case 'feats': {

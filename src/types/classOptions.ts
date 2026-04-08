@@ -49,7 +49,8 @@ export interface BloodlinePower {
 }
 
 export interface BloodlineEntry extends ClassOptionBase {
-  bloodlineArcana: string; // text description of passive benefit
+  classIds: ('sorcerer' | 'bloodrager')[]; // which classes can select this bloodline
+  bloodlineArcana?: string; // sorcerer only; bloodrager bloodlines have no arcana mechanic
   powers: BloodlinePower[];
   bonusSpells: string[]; // 9 entries — index 0 = level 1 bonus spell name
   bonusFeats: string[]; // feat names to choose from at levels 7, 13, 19
