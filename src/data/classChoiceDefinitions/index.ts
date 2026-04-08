@@ -18,6 +18,13 @@ import { skaldDefinitions } from './skald';
 import { witchDefinitions } from './witch';
 import { arcanistDefinitions } from './arcanist';
 import { investigatorDefinitions } from './investigator';
+import { ninjaDefinitions } from './ninja';
+import { slayerDefinitions } from './slayer';
+import { magusDefinitions } from './magus';
+import { samuraiDefinitions } from './samurai';
+import { brawlerDefinitions } from './brawler';
+import { hunterDefinitions } from './hunter';
+import { gunslingerDefinitions } from './gunslinger';
 
 export {
   fighterDefinitions,
@@ -39,6 +46,13 @@ export {
   witchDefinitions,
   arcanistDefinitions,
   investigatorDefinitions,
+  ninjaDefinitions,
+  slayerDefinitions,
+  magusDefinitions,
+  samuraiDefinitions,
+  brawlerDefinitions,
+  hunterDefinitions,
+  gunslingerDefinitions,
 };
 
 export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
@@ -61,6 +75,13 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...witchDefinitions,
   ...arcanistDefinitions,
   ...investigatorDefinitions,
+  ...ninjaDefinitions,
+  ...slayerDefinitions,
+  ...magusDefinitions,
+  ...samuraiDefinitions,
+  ...brawlerDefinitions,
+  ...hunterDefinitions,
+  ...gunslingerDefinitions,
 ];
 
 export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined =>
