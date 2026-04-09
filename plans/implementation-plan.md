@@ -22,7 +22,8 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 
 | Work                                                | Plan                                      | Status                                                    |
 | --------------------------------------------------- | ----------------------------------------- | --------------------------------------------------------- |
-| `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED                                               |
+| **Ruleset system** (types, presets, service, Redux) | `ruleset-system.md`                       | NOT STARTED — **prerequisite for validation**             |
+| `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED — blocked on Ruleset system                   |
 | Magic items — types + equipment cleanup (PR 1)      | `magic-items.md`                          | IN PROGRESS — `MW/magic-items-types` branch               |
 | Magic items — data scraping (PR 2)                  | `magic-items.md`                          | NOT STARTED — blocked on PR 1 merge                       |
 | Feats expansion                                     | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PRs #18, #24, #25, #26 open (~2,908 feats) |
@@ -33,6 +34,10 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 | Data quality + admin review system                  | `data-quality-admin-review.md`            | NOT STARTED                                               |
 | `Effect.type` enum review                           | `src/types/base.ts`                       | NOT STARTED — see note below                              |
 | Enter Rissi — validate model end-to-end             | —                                         | NOT STARTED                                               |
+
+#### Note: Campaign ruleset management UI — out of scope for current phase
+
+The Ruleset system (`ruleset-system.md`) covers types, Firestore structure, presets, `RulesetService`, and Redux. The **UI for DMs to create/edit/manage campaign rulesets** is explicitly out of scope until campaign management screens are built in a later phase. The data layer ships first; the UI follows.
 
 #### Note: `Effect.type` enum needs redesign
 
