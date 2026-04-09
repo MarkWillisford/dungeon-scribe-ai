@@ -46,18 +46,6 @@ export const specificWeaponsBatch12: MagicWeaponDefinition[] = [
     baseWeaponId: 'longsword', enhancementBonus: 2, weaponSpecialAbilities: [],
   },
   // 279
-  {
-    id: 'weapon-sword-of-subtlety',
-    name: 'Sword of Subtlety',
-    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
-    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ILLUSION }],
-    casterLevel: 7, slot: 'none', price: 22310, weight: 2,
-    description: '+1 short sword with a thin, dull gray blade. Provides a +4 bonus on attack and damage rolls when the wielder uses it to deliver a sneak attack, making it particularly valuable for rogues and similar characters.',
-    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['blur'], cost: 11155 },
-    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
-    activationCategory: 'use_activated', effects: [],
-    baseWeaponId: 'shortsword', enhancementBonus: 1, weaponSpecialAbilities: [],
-  },
   // 280
   {
     id: 'weapon-erratic-blade',
@@ -74,18 +62,6 @@ export const specificWeaponsBatch12: MagicWeaponDefinition[] = [
     ],
   },
   // 281
-  {
-    id: 'weapon-sword-of-the-planes',
-    name: 'Sword of the Planes',
-    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
-    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
-    casterLevel: 15, slot: 'none', price: 22315, weight: 4,
-    description: 'Longsword whose power fluctuates based on location and opponent. On the Material Plane, it functions as a +1 longsword, but on any elemental planes its enhancement bonus increases to +2. On the Astral or Ethereal Plane, or against native creatures of those planes, it acts as a +3 longsword. On any other plane or against outsiders, the weapon reaches its full power as a +4 longsword.',
-    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['plane shift'], cost: 11315 },
-    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
-    activationCategory: 'continuous', effects: [],
-    baseWeaponId: 'longsword', enhancementBonus: 1, weaponSpecialAbilities: [],
-  },
   // 282
   {
     id: 'weapon-hooked-massacre',
@@ -156,18 +132,6 @@ export const specificWeaponsBatch12: MagicWeaponDefinition[] = [
     ],
   },
   // 287
-  {
-    id: 'weapon-nine-lives-stealer',
-    name: 'Nine Lives Stealer',
-    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
-    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
-    casterLevel: 13, slot: 'none', price: 23057, weight: 4,
-    description: '+2 longsword that possesses a life-draining capability usable nine times total. Upon a critical hit, the target must succeed at a DC 20 Fortitude save or die. Successful saves preserve the ability without consuming a charge; failed uses expend a charge. Once all nine uses are exhausted, the sword becomes a standard +2 longsword. Good-aligned wielders incur two negative levels while carrying the sword; these vanish upon release but cannot be removed by restoration magic while held.',
-    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['finger of death'], cost: 11528 },
-    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
-    activationCategory: 'use_activated', effects: [],
-    baseWeaponId: 'longsword', enhancementBonus: 2, weaponSpecialAbilities: [],
-  },
   // 288
   {
     id: 'weapon-bloodstone-impaler',

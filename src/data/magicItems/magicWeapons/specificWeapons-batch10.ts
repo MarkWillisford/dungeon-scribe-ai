@@ -267,18 +267,6 @@ export const specificWeaponsBatch10: MagicWeaponDefinition[] = [
     ],
   },
   // 245
-  {
-    id: 'weapon-trident-of-fish-command',
-    name: 'Trident of Fish Command',
-    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
-    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ENCHANTMENT }],
-    casterLevel: 7, slot: 'none', price: 18650, weight: 4,
-    description: '+1 trident with a 6-foot haft. Up to three times daily, the wielder can charm up to 14 Hit Dice of aquatic animals (DC 16 Will save, with a +5 bonus if the animals are under attack). Affected animals cannot be more than 30 feet apart, and the wielder gains the ability to communicate with them as per speak with animals. On a failed save, the animals refuse to approach within 10 feet of the wielder.',
-    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['charm animals', 'speak with animals'], cost: 9325 },
-    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
-    activationCategory: 'command_word', effects: [],
-    baseWeaponId: 'trident', enhancementBonus: 1, weaponSpecialAbilities: [],
-  },
   // 246
   {
     id: 'weapon-treekeepers-staff-elf',

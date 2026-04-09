@@ -232,18 +232,6 @@ export const specificWeaponsBatch4: MagicWeaponDefinition[] = [
     baseWeaponId: 'kukri', enhancementBonus: 1, weaponSpecialAbilities: [],
   },
   {
-    id: 'weapon-everbloom-thorn',
-    name: 'Everbloom Thorn',
-    category: 'magic_weapon', source: 'Paths of the Righteous', isOfficial: true,
-    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
-    casterLevel: 10, slot: 'none', price: 6320, weight: 2,
-    description: '+1 morningstar that transforms into a non-radiating rose pendant as a move action (true seeing pierces the disguise). Once per day as part of an initiative check: snap to weapon form and add Charisma bonus (min +1) to the roll.',
-    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['magic aura', 'shrink item'], cost: 3160 },
-    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
-    activationCategory: 'use_activated', effects: [],
-    baseWeaponId: 'morningstar', enhancementBonus: 1, weaponSpecialAbilities: [],
-  },
-  {
     id: 'weapon-inheritors-light',
     name: "Inheritor's Light",
     category: 'magic_weapon', source: 'Inner Sea Gods', isOfficial: true,

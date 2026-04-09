@@ -235,18 +235,6 @@ export const specificWeaponsBatch8: MagicWeaponDefinition[] = [
     ],
   },
   // 192
-  {
-    id: 'weapon-blade-of-binding',
-    name: 'Blade of Binding',
-    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
-    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
-    casterLevel: 3, slot: 'none', price: 12350, weight: 8,
-    description: '+1 greatsword bearing decorative lock motifs. Upon successfully striking a creature of the wielder\'s size or smaller, the wielder may initiate a grapple as a free action without provoking attacks of opportunity; success grants a +5 bonus to subsequent grapple checks. During grappling, the blade transforms into a metal chain, which can be left in place to entangle the target (Escape Artist DC 20, break DC 28, hardness 10, 10 hp; creatures entangled by the chain must succeed at a concentration check [DC 17] to cast spells). Another creature may grab the handle and revert the chain to sword form. If destroyed, the weapon gains the broken condition.',
-    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['animate rope'], cost: 6350 },
-    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
-    activationCategory: 'use_activated', effects: [],
-    baseWeaponId: 'greatsword', enhancementBonus: 1, weaponSpecialAbilities: [],
-  },
   // 193
   {
     id: 'weapon-gorums-thorn',

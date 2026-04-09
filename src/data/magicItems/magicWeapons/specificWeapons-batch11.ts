@@ -231,20 +231,6 @@ export const specificWeaponsBatch11: MagicWeaponDefinition[] = [
     baseWeaponId: 'greatsword', enhancementBonus: 2, weaponSpecialAbilities: [],
   },
   // 267
-  {
-    id: 'weapon-flame-tongue',
-    name: 'Flame Tongue',
-    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
-    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
-    casterLevel: 12, slot: 'none', price: 20715, weight: 4,
-    description: '+1 flaming burst longsword. Once per day, the sword can blast forth a fiery ray at any target within 30 feet as a ranged touch attack. The ray deals 4d6 points of fire damage on a successful hit.',
-    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['fireball', 'flame blade', 'scorching ray'], cost: 10515 },
-    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
-    activationCategory: 'command_word', effects: [],
-    baseWeaponId: 'longsword', enhancementBonus: 1, weaponSpecialAbilities: [
-      { id: 'flaming_burst', name: 'Flaming Burst', description: 'Deals an additional 1d6 fire damage on each hit; on a critical hit, deals an additional 1d10 (or more on higher crit multipliers) fire damage.', bonusEquivalent: 2, casterLevel: 12, effects: [] },
-    ],
-  },
   // 268
   {
     id: 'weapon-scoundrels-sword-cane',
