@@ -14,6 +14,12 @@ import { cavalierDefinitions } from './cavalier';
 import { inquisitorDefinitions } from './inquisitor';
 import { oracleDefinitions } from './oracle';
 import { bardDefinitions } from './bard';
+import { skaldDefinitions } from './skald';
+import { witchDefinitions } from './witch';
+import { arcanistDefinitions } from './arcanist';
+import { investigatorDefinitions } from './investigator';
+import { sorcererDefinitions } from './sorcerer';
+import { bloodragerDefinitions } from './bloodrager';
 
 export {
   fighterDefinitions,
@@ -31,6 +37,12 @@ export {
   inquisitorDefinitions,
   oracleDefinitions,
   bardDefinitions,
+  skaldDefinitions,
+  witchDefinitions,
+  arcanistDefinitions,
+  investigatorDefinitions,
+  sorcererDefinitions,
+  bloodragerDefinitions,
 };
 
 export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
@@ -49,10 +61,16 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...inquisitorDefinitions,
   ...oracleDefinitions,
   ...bardDefinitions,
+  ...skaldDefinitions,
+  ...witchDefinitions,
+  ...arcanistDefinitions,
+  ...investigatorDefinitions,
+  ...sorcererDefinitions,
+  ...bloodragerDefinitions,
 ];
 
 export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined =>
   ALL_CLASS_CHOICE_DEFINITIONS.find((d) => d.id === id);
 
 export const getDefinitionsForClass = (className: string): ClassChoiceDefinition[] =>
-  ALL_CLASS_CHOICE_DEFINITIONS.filter((d) => d.className === className);
+  ALL_CLASS_CHOICE_DEFINITIONS.filter((d) => d.className === className.toLowerCase());
