@@ -75,7 +75,7 @@ export const specificWeaponsBatch5: MagicWeaponDefinition[] = [
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
     casterLevel: 12, slot: 'none', price: 7806, weight: 1,
     description: '+1 mithral sickle that functions as a divine focus for druids. It can store spells, but only those from the druid spell list or the Air, Earth, Fire, Water, or nature bond domain lists.',
-    construction: { feats: ['Craft Magic Arms and Armor'], spells: [], cost: 4306, creatorRequirements: ['Druid of at least 12th level'] },
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: [], cost: 4306 },
     physicalStats: { hardness: 17, hitPoints: 5, breakDC: 18 },
     activationCategory: 'use_activated', effects: [],
     baseWeaponId: 'sickle', enhancementBonus: 1, weaponSpecialAbilities: [],

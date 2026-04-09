@@ -13,6 +13,8 @@ export * from './specificArmor-batch2';
 export * from './specificArmor-batch3';
 export * from './specificArmor-batch4';
 export * from './specificArmor-batch5';
+export * from './specificArmor-batch6';
+export * from './specificArmor-batch7';
 export * from './specificShields-batch1';
 export * from './specificShields-batch2';
 export * from './specificShields-batch3';
