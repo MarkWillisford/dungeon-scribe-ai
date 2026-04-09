@@ -186,22 +186,6 @@ export const specificShieldsBatch2: MagicArmorDefinition[] = [
     baseArmorId: 'tower_shield', enhancementBonus: 2, armorSpecialAbilities: [],
   },
   {
-    id: 'shield-winged-shield',
-    name: 'Winged Shield',
-    category: 'magic_armor', source: 'PRPG Core Rulebook', isOfficial: true,
-    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
-    casterLevel: 5, slot: 'shield', price: 17257, weight: 10,
-    description: 'This heavy wooden shield has a +3 enhancement bonus. Arching bird wings are carved into the face of the shield. Once per day, it can be commanded to fly (as the spell), carrying the wielder. The shield can carry up to 133 pounds and move at 60 feet per round, or up to 266 pounds and move at 40 feet per round.',
-    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['fly'], cost: 8707 },
-    physicalStats: { hardness: 5, hitPoints: 15, breakDC: 22 },
-    activationCategory: 'command_word',
-    effects: [],
-    spellLikeAbilities: [
-      { spells: [{ spellId: 'fly', spellName: 'Fly', casterLevel: 5, usesPerDay: 1, activationAction: 'standard' }] },
-    ],
-    baseArmorId: 'heavy_wooden_shield', enhancementBonus: 3, armorSpecialAbilities: [],
-  },
-  {
     id: 'shield-of-the-mazeborn',
     name: 'Shield of the Mazeborn',
     category: 'magic_armor', source: 'Melee Tactics Toolbox', isOfficial: true,

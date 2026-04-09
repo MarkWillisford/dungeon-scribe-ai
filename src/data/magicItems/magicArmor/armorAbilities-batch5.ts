@@ -14,13 +14,6 @@ export const armorAbilitiesBatch5: ItemSpecialAbility[] = [
   },
 
   // +3 bonus equivalent (Ultimate Equipment)
-  {
-    id: 'armor_determination',
-    name: 'Determination',
-    description: 'Once per day, when the wearer is reduced to 0 or fewer hit points (but not killed outright), they automatically stabilize and immediately gain 2d8+10 temporary hit points. These temporary hit points last for 1 minute.',
-    bonusEquivalent: 3, casterLevel: 10,
-    effects: [],
-  },
 
   // +3 bonus equivalent
   {
@@ -34,35 +27,10 @@ export const armorAbilitiesBatch5: ItemSpecialAbility[] = [
   },
 
   // +3 bonus equivalent
-  {
-    id: 'armor_shadow_greater',
-    name: 'Shadow (Greater)',
-    description: 'As shadow, but grants a +15 competence bonus on Stealth checks.',
-    bonusEquivalent: 3, casterLevel: 15,
-    effects: [
-      { type: 'bonus', bonusType: 'competence', target: 'skill.stealth', value: 15, source: 'Greater Shadow Armor' },
-    ],
-  },
 
   // +3 bonus equivalent
-  {
-    id: 'armor_slick_greater',
-    name: 'Slick (Greater)',
-    description: 'As slick, but grants a +15 competence bonus on Escape Artist checks.',
-    bonusEquivalent: 3, casterLevel: 15,
-    effects: [
-      { type: 'bonus', bonusType: 'competence', target: 'skill.escape_artist', value: 15, source: 'Greater Slick Armor' },
-    ],
-  },
 
   // +3 bonus equivalent
-  {
-    id: 'armor_energy_resistance_improved',
-    name: 'Energy Resistance (Improved)',
-    description: 'Grants resistance 20 to one energy type (acid, cold, electricity, fire, or sonic), chosen at creation.',
-    bonusEquivalent: 3, casterLevel: 11,
-    effects: [],
-  },
 
   // +5 bonus equivalent
   {
@@ -83,11 +51,4 @@ export const armorAbilitiesBatch5: ItemSpecialAbility[] = [
   },
 
   // +4 bonus equivalent
-  {
-    id: 'armor_energy_resistance_greater',
-    name: 'Energy Resistance (Greater)',
-    description: 'Grants resistance 30 to one energy type (acid, cold, electricity, fire, or sonic), chosen at creation.',
-    bonusEquivalent: 4, casterLevel: 15,
-    effects: [],
-  },
 ];

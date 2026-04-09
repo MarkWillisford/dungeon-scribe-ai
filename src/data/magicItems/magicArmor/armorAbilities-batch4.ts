@@ -6,15 +6,6 @@ import type { ItemSpecialAbility } from '@/types/magicItems';
 export const armorAbilitiesBatch4: ItemSpecialAbility[] = [
   // +3 bonus equivalent
   {
-    id: 'armor_invulnerability',
-    name: 'Invulnerability',
-    description: 'Grants the wearer DR 5/magic.',
-    bonusEquivalent: 3, casterLevel: 18,
-    effects: [
-      { type: 'bonus', bonusType: 'untyped', target: 'dr', value: 5, source: 'Invulnerability Armor', condition: { type: 'custom', params: {}, description: 'DR 5/magic' } },
-    ],
-  },
-  {
     id: 'armor_sensing',
     name: 'Sensing',
     description: 'When the wearer is blinded, in total darkness (without darkvision or see in darkness), or in magical darkness (without see in darkness), the armor activates to grant blindsight with a 5-foot range and blindsense with a 60-foot range. These abilities end immediately when the wearer regains sight. Deliberately closing one\'s eyes does not trigger the armor\'s abilities.',
@@ -22,26 +13,10 @@ export const armorAbilitiesBatch4: ItemSpecialAbility[] = [
     effects: [],
   },
   {
-    id: 'armor_spell_resistance_15',
-    name: 'Spell Resistance (15)',
-    description: 'Grants the wearer spell resistance 15.',
-    bonusEquivalent: 3, casterLevel: 15,
-    effects: [
-      { type: 'bonus', bonusType: 'enhancement', target: 'sr', value: 15, source: 'Armor Spell Resistance 15' },
-    ],
-  },
-  {
     id: 'armor_titanic',
     name: 'Titanic',
     description: 'The wearer is considered one size category larger for effects dependent on size, such as swallow whole and trample. Once per day as a command action, the wearer can enlarge themselves as per the enlarge person spell for 1 minute, even if the wearer is not humanoid. Once per minute as a free action, the wearer may apply the armor\'s enhancement bonus to a single Strength check, combat maneuver check, or to CMD against a combat maneuver. The armor check penalty increases by an amount equal to the enhancement bonus due to the armor\'s substantial bulk.',
     bonusEquivalent: 3, casterLevel: 7,
-    effects: [],
-  },
-  {
-    id: 'armor_wild',
-    name: 'Wild',
-    description: 'The armor melds into the wearer\'s body when they use wild shape (or a similar ability). The enhancement bonus is preserved but no armor check penalty, arcane spell failure, or maximum Dex bonus applies while in wild shape.',
-    bonusEquivalent: 3, casterLevel: 9,
     effects: [],
   },
   {
@@ -91,24 +66,6 @@ export const armorAbilitiesBatch4: ItemSpecialAbility[] = [
     effects: [],
   },
   {
-    id: 'armor_shadow_improved',
-    name: 'Shadow (Improved)',
-    description: 'As shadow, but grants a +10 competence bonus on Stealth checks.',
-    bonusEquivalent: 2, casterLevel: 10,
-    effects: [
-      { type: 'bonus', bonusType: 'competence', target: 'skill.stealth', value: 10, source: 'Improved Shadow Armor' },
-    ],
-  },
-  {
-    id: 'armor_slick_improved',
-    name: 'Slick (Improved)',
-    description: 'As slick, but grants a +10 competence bonus on Escape Artist checks.',
-    bonusEquivalent: 2, casterLevel: 10,
-    effects: [
-      { type: 'bonus', bonusType: 'competence', target: 'skill.escape_artist', value: 10, source: 'Improved Slick Armor' },
-    ],
-  },
-  {
     id: 'armor_venom_eating',
     name: 'Venom-eating',
     description: 'When the wearer successfully saves against a poison attack, the armor absorbs the poison dose and stores it for later use. Stored doses can be applied to weapons as a standard action without risk of self-poisoning. The armor can store a maximum number of doses equal to its enhancement bonus; all stored doses must be the same poison type. Successfully saving against a different poison type replaces all stored doses with the new type. This ability applies only to leather-based armor (leather, studded leather, dragonhide).',
@@ -122,22 +79,6 @@ export const armorAbilitiesBatch4: ItemSpecialAbility[] = [
     name: 'Denying',
     description: 'Once per day, when the wearer would suffer a critical hit or sneak attack, they can automatically negate the critical or sneak attack, treating it as a normal attack. If the attack would be both a critical hit and a sneak attack, the wearer chooses which effect to negate before damage is rolled. This ability applies only to heavy armor.',
     bonusEquivalent: 4, casterLevel: 13,
-    effects: [],
-  },
-  {
-    id: 'armor_spell_resistance_17',
-    name: 'Spell Resistance (17)',
-    description: 'Grants the wearer spell resistance 17.',
-    bonusEquivalent: 4, casterLevel: 15,
-    effects: [
-      { type: 'bonus', bonusType: 'enhancement', target: 'sr', value: 17, source: 'Armor Spell Resistance 17' },
-    ],
-  },
-  {
-    id: 'armor_energy_resistance',
-    name: 'Energy Resistance',
-    description: 'Grants resistance 10 to one energy type (acid, cold, electricity, fire, or sonic), chosen at creation.',
-    bonusEquivalent: 2, casterLevel: 7,
     effects: [],
   },
   {
@@ -157,22 +98,6 @@ export const armorAbilitiesBatch4: ItemSpecialAbility[] = [
     effects: [],
   },
   {
-    id: 'armor_fortification_heavy',
-    name: 'Fortification (Heavy)',
-    description: '75% chance to negate a critical hit or sneak attack, treating it as a normal hit.',
-    bonusEquivalent: 5, casterLevel: 13,
-    effects: [],
-  },
-  {
-    id: 'armor_spell_resistance_19',
-    name: 'Spell Resistance (19)',
-    description: 'Grants the wearer spell resistance 19.',
-    bonusEquivalent: 5, casterLevel: 15,
-    effects: [
-      { type: 'bonus', bonusType: 'enhancement', target: 'sr', value: 19, source: 'Armor Spell Resistance 19' },
-    ],
-  },
-  {
     id: 'armor_unbowed',
     name: 'Unbowed',
     description: 'When the wearer would be reduced to 0 hit points or fewer by a damaging attack, they may use an immediate action to negate all of that attack\'s damage. This destroys the armor and creates an explosion dealing 1d6 points of piercing damage per point of the armor\'s AC bonus within 10 feet of the wearer (the wearer is excluded). A DC 20 Reflex save halves this damage. This ability applies only to heavy armor.',
@@ -180,28 +105,10 @@ export const armorAbilitiesBatch4: ItemSpecialAbility[] = [
     effects: [],
   },
   {
-    id: 'armor_righteous',
-    name: 'Righteous',
-    description: 'Grants the wearer a +2 sacred bonus on saving throws against evil spells and against spells and effects from evil outsiders. The wearer radiates a faint good aura as if they were a good outsider of equivalent HD. Evil characters who don this armor take 2 points of damage per round.',
-    bonusEquivalent: 2, casterLevel: 9,
-    effects: [
-      { type: 'bonus', bonusType: 'sacred', target: 'save.all', value: 2, source: 'Righteous Armor', condition: { type: 'custom', params: {}, description: 'vs. evil spells and evil outsider effects' } },
-    ],
-  },
-  {
     id: 'armor_unbound',
     name: 'Unbound',
     description: 'Once per day on command, the wearer can activate an effect functioning as the righteous might spell for 10 rounds, granting DR 5/lawful (instead of the standard DR/evil or DR/good). Any lawful creature that dons this armor gains one permanent negative level for as long as they wear it; this penalty cannot be removed by restoration spells and vanishes only upon removal. The armor typically displays chaotic religious iconography and requires a chaotic creator.',
     bonusEquivalent: 3, casterLevel: 10,
     effects: [],
-  },
-  {
-    id: 'armor_unrighteous',
-    name: 'Unrighteous',
-    description: 'Grants the wearer a +2 profane bonus on saving throws against divine spells and against spells and effects from good outsiders. The wearer radiates a faint evil aura as if they were an evil outsider of equivalent HD.',
-    bonusEquivalent: 1, casterLevel: 5,
-    effects: [
-      { type: 'bonus', bonusType: 'profane', target: 'save.all', value: 2, source: 'Unrighteous Armor', condition: { type: 'custom', params: {}, description: 'vs. divine spells and good outsider effects' } },
-    ],
   },
 ];

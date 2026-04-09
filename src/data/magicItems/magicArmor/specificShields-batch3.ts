@@ -95,18 +95,6 @@ export const specificShieldsBatch3: MagicArmorDefinition[] = [
     baseArmorId: 'tower_shield', enhancementBonus: 1, armorSpecialAbilities: [],
   },
   {
-    id: 'shield-absorbing-shield',
-    name: 'Absorbing Shield',
-    category: 'magic_armor', source: 'PRPG Core Rulebook', isOfficial: true,
-    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.TRANSMUTATION }],
-    casterLevel: 17, slot: 'shield', price: 50170, weight: 15,
-    description: 'This +1 heavy steel shield has a flat black coloring that appears to absorb light. It can disintegrate an object it touches once every two days via command, functioning as the disintegrate spell but requiring a melee touch attack. This ability works only as an attack, not when activated defensively against incoming strikes.',
-    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['disintegrate'], cost: 25170 },
-    physicalStats: { hardness: 10, hitPoints: 20, breakDC: 23 },
-    activationCategory: 'command_word', effects: [],
-    baseArmorId: 'heavy_steel_shield', enhancementBonus: 1, armorSpecialAbilities: [],
-  },
-  {
     id: 'shield-elysian-shield',
     name: 'Elysian Shield',
     category: 'magic_armor', source: 'Ultimate Equipment', isOfficial: true,

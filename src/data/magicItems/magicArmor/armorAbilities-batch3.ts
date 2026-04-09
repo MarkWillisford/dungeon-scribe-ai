@@ -29,13 +29,6 @@ export const armorAbilitiesBatch3: ItemSpecialAbility[] = [
     effects: [],
   },
   {
-    id: 'armor_expeditious',
-    name: 'Expeditious',
-    description: 'Grants an enhancement bonus of +5 feet to the wearer\'s base land speed. This ability only applies to light armor.',
-    bonusEquivalent: 1, casterLevel: 3,
-    effects: [],
-  },
-  {
     id: 'armor_amorphous',
     name: 'Amorphous',
     description: 'Grants a +5 competence bonus on Escape Artist checks and to CMD against grapple combat maneuvers. Once per day, the wearer can assume a liquid form that can pass through any space through which thick mud could reasonably flow. While in liquid form, movement speed decreases by 10 feet and only move actions are permitted; the effect lasts up to 1 minute or until the wearer uses a move action to revert to normal. Must be crafted from leather, fabric, or another flexible, organic material.',
@@ -73,15 +66,6 @@ export const armorAbilitiesBatch3: ItemSpecialAbility[] = [
     bonusEquivalent: 1, casterLevel: 5,
     effects: [
       { type: 'bonus', bonusType: 'competence', target: 'skill.acrobatics', value: 5, source: 'Corsair Armor' },
-    ],
-  },
-  {
-    id: 'armor_creeping',
-    name: 'Creeping',
-    description: 'The armor\'s check penalty does not apply to Stealth checks. Once per day as a command word, the wearer gains a bonus on Stealth checks equal to the armor\'s enhancement bonus for 1 minute.',
-    bonusEquivalent: 1, casterLevel: 7,
-    effects: [
-      { type: 'bonus', bonusType: 'competence', target: 'skill.stealth', value: 5, source: 'Creeping Armor', condition: { type: 'custom', params: {}, description: 'No armor check penalty to Stealth; daily bonus equals enhancement bonus' } },
     ],
   },
   {
@@ -124,24 +108,10 @@ export const armorAbilitiesBatch3: ItemSpecialAbility[] = [
 
   // ~+2 bonus equivalent (or ~2,000–9,999 gp flat)
   {
-    id: 'armor_adhesive',
-    name: 'Adhesive',
-    description: 'The armor is covered in a magical adhesive. Any creature that hits the wearer with a natural attack or unarmed strike must succeed at a DC 14 Reflex save or become stuck to the armor (as sovereign glue). A stuck creature can escape with a DC 20 Escape Artist check or by dealing 5 points of damage to itself.',
-    bonusEquivalent: 2, casterLevel: 8,
-    effects: [],
-  },
-  {
     id: 'armor_spiteful',
     name: 'Spiteful',
     description: 'This ability requires the wearer to possess the panache class feature. When an enemy\'s melee attack would reduce the wearer to below 0 hit points, the wearer may expend 1 panache point as an immediate action to make a single melee attack against the attacker. This counterattack occurs before the wearer becomes unconscious or dies.',
     bonusEquivalent: 2, casterLevel: 7,
-    effects: [],
-  },
-  {
-    id: 'armor_hosteling',
-    name: 'Hosteling',
-    description: 'As a full-round action, the wearer can store a single willing creature of up to Large size in a small extradimensional space within the armor. The stored creature is in suspended animation. The creature can be released as a free action adjacent to the wearer.',
-    bonusEquivalent: 2, casterLevel: 9,
     effects: [],
   },
   {
@@ -170,31 +140,10 @@ export const armorAbilitiesBatch3: ItemSpecialAbility[] = [
     effects: [],
   },
   {
-    id: 'armor_brawling',
-    name: 'Brawling',
-    description: 'Grants the wearer a +2 bonus on unarmed attack and damage rolls, including combat maneuver checks made to grapple. Unarmed strikes count as magic weapons for the purpose of bypassing damage reduction. These bonuses do not apply to natural weapons. This quality applies only to light armor.',
-    bonusEquivalent: 3, casterLevel: 5,
-    effects: [],
-  },
-  {
     id: 'armor_cotraveling',
     name: 'Cotraveling',
     description: 'The wearer can attune up to five willing creatures by touching them, each corresponding to one arm of a spiral embroidered on the armor. Once per day as a free action, when the wearer is transported to another plane via a spell or effect, they may activate the armor to bring all attuned creatures within 30 feet along with them. All five attunement slots deactivate after use regardless of how many creatures traveled; the wearer must wait 24 hours before attuning new creatures.',
     bonusEquivalent: 3, casterLevel: 14,
-    effects: [],
-  },
-  {
-    id: 'armor_fortification_moderate',
-    name: 'Fortification (Moderate)',
-    description: '50% chance to negate a critical hit or sneak attack, treating it as a normal hit.',
-    bonusEquivalent: 3, casterLevel: 13,
-    effects: [],
-  },
-  {
-    id: 'armor_ghost_touch',
-    name: 'Ghost Touch',
-    description: 'The armor\'s enhancement bonus applies against the touch attacks of incorporeal creatures. The armor can be donned or removed by an incorporeal creature.',
-    bonusEquivalent: 3, casterLevel: 15,
     effects: [],
   },
 ];
