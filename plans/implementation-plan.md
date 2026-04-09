@@ -22,7 +22,8 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 
 | Work                                                | Plan                                      | Status                                                    |
 | --------------------------------------------------- | ----------------------------------------- | --------------------------------------------------------- |
-| `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED                                               |
+| **Ruleset system** (types, presets, service, Redux) | `ruleset-system.md`                       | NOT STARTED — **prerequisite for validation**             |
+| `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED — blocked on Ruleset system                   |
 | Magic items — types + equipment cleanup (PR 1)      | `magic-items.md`                          | IN PROGRESS — `MW/magic-items-types` branch               |
 | Magic items — data scraping (PR 2)                  | `magic-items.md`                          | NOT STARTED — blocked on PR 1 merge                       |
 | Feats expansion                                     | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PRs #18, #24, #25, #26 open (~2,908 feats) |
@@ -33,6 +34,10 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 | Data quality + admin review system                  | `data-quality-admin-review.md`            | NOT STARTED                                               |
 | `Effect.type` enum review                           | `src/types/base.ts`                       | NOT STARTED — see note below                              |
 | Enter Rissi — validate model end-to-end             | —                                         | NOT STARTED                                               |
+
+#### Note: Campaign ruleset management UI — out of scope for current phase
+
+The Ruleset system (`ruleset-system.md`) covers types, Firestore structure, presets, `RulesetService`, and Redux. The **UI for DMs to create/edit/manage campaign rulesets** is explicitly out of scope until campaign management screens are built in a later phase. The data layer ships first; the UI follows.
 
 #### Note: `Effect.type` enum needs redesign
 
@@ -738,6 +743,9 @@ Firestore collection: `classChoiceDefinitions/{id}`. Key types: `ClassChoiceDefi
 - [ ] Run remaining scraping agents (deities, animal companions, rage powers, rogue talents) once plans written
 - [ ] Seed 3.5e prestige classes (Hathran, Dweomerkeeper, Radiant Servant, Prestige Paladin) as campaign content
 - [ ] Build 23 direct-entry UI components (`src/components/character/direct-entry/`)
+  - **TODO (Eidolon Evolution Pool):** Summoner eidolon evolutions use `selectionMode: { type: 'at_class_levels', levels: [...] }` as a build-log tracking pattern (one entry per evolution point spent). Proper gameplay requires a dedicated pool manager UI: total points available by level, running balance, add/remove evolution picker. This is not a standard `ClassChoiceRow` — it needs its own component, likely `EidolonEvolutionPool.tsx`.
+  - **TODO (Wandering Spirit Daily Reset):** Shaman wandering spirit uses `selectionMode: { type: 'special' }`. The UI needs a daily-reset component (analogous to spell preparation) that triggers after 8 hours of rest. Reads available spirits from `shamanspirits` collection filtered by `wanderingOnly: true`. Likely lives in a dedicated `WanderingSpiritPicker.tsx` component that integrates with the rest/long-rest flow.
+  - **TODO (Evolution Prerequisite Enforcement):** The `Prerequisite` union includes a `{ type: 'evolution'; evolutionId: string }` variant (added with eidolon evolution work) and `PrerequisiteService.formatPrerequisite` handles it for display. However, `PrerequisiteService.checkSingle` has no `case 'evolution':` — it falls through to `default: return false`, meaning any evolution that lists another evolution as a prerequisite will always fail validation silently. This is latent today (no evolution data currently uses prerequisites) but must be implemented before the eidolon evolution picker enforces selection rules. **Fix:** add a `case 'evolution':` to `checkSingle` that looks up the character's current eidolon evolutions and checks whether `evolutionId` is present.
 - [ ] Wire direct-entry screen into navigation (`app/(tabs)/characters/[id]/entry.tsx`)
 - [ ] Enter Rissi — validate model end-to-end
 - [ ] Kah-Mei session — capture character, stress-test template model
