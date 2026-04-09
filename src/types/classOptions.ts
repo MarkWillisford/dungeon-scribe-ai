@@ -139,12 +139,52 @@ export interface ShamanSpiritEntry extends ClassOptionBase {
 
 // ---- Wild Talent (Kineticist) ----
 // Collection: 'wildtalents'
-// Kineticist choice architecture warrants its own design pass — this is a placeholder.
+// Prerequisites are talent names (strings), not FeatPrerequisite — use Omit to override.
 
-export interface WildTalentEntry extends ClassOptionBase {
-  element: string; // 'aether' | 'air' | 'earth' | 'fire' | 'water' | 'void' | 'wood' | string
+export interface KineticistWildTalentEntry extends Omit<ClassOptionBase, 'prerequisites'> {
+  prerequisites?: string[]; // prerequisite talent names
+  element: string; // 'aether' | 'air' | 'earth' | 'fire' | 'water' | 'void' | 'wood' | 'universal'
   talentType: 'infusion' | 'utility';
-  requiredElement?: string; // some talents are locked to a specific element
+  infusionType?: 'form' | 'substance'; // only when talentType === 'infusion'
+  burnCost: number;
+  requiredLevel: number;
+  associatedBlasts?: string[]; // blast types this infusion can be applied to (only for infusions)
+}
+
+// Keep deprecated alias for backward compatibility
+/** @deprecated Use KineticistWildTalentEntry */
+export type WildTalentEntry = KineticistWildTalentEntry;
+
+// ---- Occultist Focus Power ----
+// Collection: 'occultistfocuspowers'
+// Filtered at runtime by the occultist's chosen implement school.
+
+export type OccultistSchool =
+  | 'abjuration'
+  | 'conjuration'
+  | 'divination'
+  | 'enchantment'
+  | 'evocation'
+  | 'illusion'
+  | 'necromancy'
+  | 'transmutation';
+
+export interface OccultistFocusPowerEntry extends ClassOptionBase {
+  school: OccultistSchool;
+  focusCost: number; // mental focus points spent to activate
+  isBasePower: boolean; // true = the free base power granted by the school
+  requiredLevel?: number; // minimum occultist level to select
+  isSacredImplementPower?: boolean; // true = requires a specific deity's sacred implement
+}
+
+// ---- Phrenic Amplification (Psychic) ----
+// Collection: 'phrenicamplifications'
+// Prerequisites are amplification names (strings).
+
+export interface PhrenicAmplificationEntry extends Omit<ClassOptionBase, 'prerequisites'> {
+  prerequisites?: string[]; // prerequisite amplification names
+  amplificationTier: 'standard' | 'major';
+  phrenicPointCost: number; // points spent from phrenic pool
 }
 
 // ---- Cavalier Order ----
