@@ -17,6 +17,9 @@ import { ALL_HEXES } from '@/data/hexes/index';
 import { ALL_ARCANIST_EXPLOITS } from '@/data/arcanistExploits/index';
 import { ALL_INVESTIGATOR_TALENTS } from '@/data/investigatorTalents/index';
 import { ALL_BLOODLINES } from '@/data/bloodlines/index';
+import { ALL_WILD_TALENTS } from '@/data/kineticistWildTalents/index';
+import { ALL_OCCULTIST_FOCUS_POWERS } from '@/data/occultistFocusPowers/index';
+import { ALL_PHRENIC_AMPLIFICATIONS } from '@/data/phrenicAmplifications/index';
 import { getDeityByName } from '@/data/deities/index';
 import { ALL_NINJA_TRICKS } from '@/data/ninjaTricks/index';
 import { ALL_SLAYER_TALENTS } from '@/data/slayerTalents/index';
@@ -245,6 +248,37 @@ function buildCollectionItems(
         subLabel: f.description?.slice(0, 80),
       }));
     }
+    case 'wildtalents': {
+      const talentType = resolvedFilter.talentType as string | undefined;
+      const pool = talentType
+        ? ALL_WILD_TALENTS.filter((t) => t.talentType === talentType)
+        : ALL_WILD_TALENTS;
+      return pool.map((t) => ({
+        key: t.id,
+        label: t.name,
+        subLabel: t.description?.slice(0, 80),
+        category:
+          t.talentType === 'infusion'
+            ? t.infusionType === 'form'
+              ? 'Form Infusions'
+              : 'Substance Infusions'
+            : t.element.charAt(0).toUpperCase() + t.element.slice(1),
+      }));
+    }
+    case 'occultistfocuspowers':
+      return ALL_OCCULTIST_FOCUS_POWERS.filter((p) => !p.isBasePower).map((p) => ({
+        key: p.id,
+        label: p.name,
+        subLabel: p.description?.slice(0, 80),
+        category: p.school.charAt(0).toUpperCase() + p.school.slice(1),
+      }));
+    case 'phrenicamplifications':
+      return ALL_PHRENIC_AMPLIFICATIONS.map((a) => ({
+        key: a.id,
+        label: a.name,
+        subLabel: a.description?.slice(0, 80),
+        category: a.amplificationTier === 'major' ? 'Major Amplifications' : 'Amplifications',
+      }));
     default:
       return [];
   }
