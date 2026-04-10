@@ -6,7 +6,7 @@ export const hunterDefinitions: ClassChoiceDefinition[] = [
     className: 'hunter',
     featureName: 'Precise Companion',
     description:
-      'At 2nd level, a hunter chooses either Precise Shot or Outflank as a bonus feat. She does not need to meet the prerequisites. If she chooses Outflank, she automatically grants this feat to her animal companion as well.',
+      'At 2nd level, a hunter chooses either Precise Shot or Outflank as a bonus feat (prerequisites waived). If she chooses Outflank, her animal companion automatically gains the feat as well. This choice is permanent.',
     selectionMode: { type: 'at_class_levels', levels: [2] },
     optionSource: 'inline',
     optionGroups: [
