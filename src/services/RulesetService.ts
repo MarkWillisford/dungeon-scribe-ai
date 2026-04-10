@@ -94,7 +94,7 @@ export class RulesetService {
    * The caller is responsible for persisting the updated character to Firestore.
    */
   static syncCharacterRuleset(
-    characterRuleset: Ruleset,
+    _characterRuleset: Ruleset,
     campaignRuleset: Ruleset,
   ): Ruleset {
     return { ...campaignRuleset };

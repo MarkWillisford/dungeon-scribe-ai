@@ -14,6 +14,7 @@ import { db } from '@config/firebase';
 import type { Character } from '@/types';
 import type { CharacterSummary } from '@/types/character';
 import type { EquipmentSlot } from '@/types/equipment';
+import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
 
 export class FirebaseCharacterService {
   private static readonly COLLECTION = 'characters';
@@ -172,6 +173,11 @@ export class FirebaseCharacterService {
       typeof (data.createdAt as { toDate?: unknown }).toDate === 'function'
     ) {
       character.createdAt = (data.createdAt as { toDate(): Date }).toDate();
+    }
+
+    // Schema migration: backfill ruleset for documents written before v1.2.0
+    if (!character.ruleset) {
+      character.ruleset = { ...PRESET_PF1E_STANDARD };
     }
 
     return character;
