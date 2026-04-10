@@ -1,0 +1,338 @@
+import type { MagicWeaponDefinition } from '@/types/magicItems';
+import { AuraStrength, MagicSchool } from '@/types/equipment';
+
+export const specificWeaponsBatch16: MagicWeaponDefinition[] = [
+  // 376
+  {
+    id: 'weapon-infecting-spike',
+    name: 'Infecting Spike',
+    category: 'magic_weapon', source: 'Melee Tactics Toolbox', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.NECROMANCY }],
+    casterLevel: 6, slot: 'none', price: 42350, weight: 2,
+    description: 'Corroded armor spike that attaches to armor lacking spikes, creating +2 armor spikes that inflict red ache disease on struck creatures (DC 15 Fortitude negates). The wearer gains immunity to red ache and a +4 bonus on saves against other diseases. The armor degrades at 1d4 damage daily after 24 hours, and removal requires one minute and leaves the armor broken or destroyed.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['contagion'], cost: 21350 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'armor_spikes', enhancementBonus: 2, weaponSpecialAbilities: [],
+  },
+  // 377
+  {
+    id: 'weapon-staff-of-the-hooded-cobra',
+    name: 'Staff of the Hooded Cobra',
+    category: 'magic_weapon', source: 'Pathfinder #84: Pyramid of the Sky Pharaoh', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION }],
+    casterLevel: 7, slot: 'none', price: 42400, weight: 2,
+    description: '+3 defending darkwood quarterstaff with a cobra-headed tip. Once per day on a successful hit, the wielder can trigger the cobra head to bite, dealing an additional 1d6 damage and injecting poison (Fort DC 20). The poison deals 1d2 Strength and 1d2 Constitution damage each round for 6 rounds (cured by 2 consecutive saves).',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['poison', 'shield of faith'], cost: 21360 },
+    physicalStats: { hardness: 5, hitPoints: 10, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'quarterstaff', enhancementBonus: 3, weaponSpecialAbilities: [
+      { id: 'defending', name: 'Defending', description: 'The wielder can transfer some or all of the weapon enhancement bonus as an AC bonus.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 378
+  {
+    id: 'weapon-summoners-sorrow',
+    name: "Summoner's Sorrow",
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION }],
+    casterLevel: 9, slot: 'none', price: 42816, weight: 10,
+    description: '+2 cold iron glaive that inflicts an additional 2d6 damage when striking summoned creatures and eidolons. Once per round after dealing damage to a summoned or illusory creature, the wielder may attempt a dispel check as a free action, using base attack bonus in place of caster level. Once per day as a free action, the wielder may attempt to dismiss an extraplanar creature it has damaged (Will DC 17 negates). The wielder cannot both dispel and dismiss in the same round.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['dismissal', 'dispel magic'], cost: 21566 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'glaive', enhancementBonus: 2, weaponSpecialAbilities: [],
+  },
+  // 379
+  {
+    id: 'weapon-jackals-blade',
+    name: "Jackal's Blade",
+    category: 'magic_weapon', source: 'Pathfinder Comics #12', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
+    casterLevel: 13, slot: 'none', price: 43375, weight: 8,
+    description: '+2 unholy falchion with a worn, aged handle and an unpleasant grip that remains razor-sharp. Acts as a bane weapon against paladins and lawful good clerics. Serves as a divine focus for worshippers of Lamashtu, granting a +4 bonus on concentration checks when used while casting spells.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['bane', 'unholy blight'], cost: 22875 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'falchion', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'unholy', name: 'Unholy', description: 'Deals an extra 2d6 damage against good creatures.', bonusEquivalent: 2, casterLevel: 7, effects: [] },
+    ],
+  },
+  // 380
+  {
+    id: 'weapon-feast-of-rats',
+    name: 'Feast of Rats',
+    category: 'magic_weapon', source: 'Blood of Shadows', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.ILLUSION }],
+    casterLevel: 19, slot: 'none', price: 45125, weight: 0,
+    description: '+1 stalking light melee shadowcraft weapon sacred to Lao Shu Po. Three times per day as a standard action, the weapon disperses into a shadowy fog functioning as fog cloud for 1 minute. Creatures within the fog take 1d6 damage per round and must succeed at a DC 19 Fortitude save or be nauseated for 1 round. The wielder can dismiss the effect early via move action when adjacent to the fog. Functions as an unholy symbol and divine focus for Lao Shu Po.',
+    construction: { feats: ['Craft Magic Arms and Armor', 'Create Reliquary Arms and Shields'], spells: ['deeper darkness', 'fog cloud', 'major creation', 'shadow weapon'], cost: 22712 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'command_word', effects: [],
+    baseWeaponId: 'shortsword', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 381
+  {
+    id: 'weapon-axe-of-forced-life',
+    name: 'Axe of Forced Life',
+    category: 'magic_weapon', source: "Undead Slayer's Handbook", isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 9, slot: 'none', price: 45310, weight: 6,
+    description: '+3 battleaxe etched with an ouroboros. Once per round when striking an undead creature with DR/bludgeoning, DR/good, DR/magic, or DR/piercing, the weapon reduces that DR by 5 (minimum 0) for 1 round. A confirmed critical hit reduces DR by up to 15 points. Once daily as a move action, the wielder can ignite the ouroboros to emit candlelight for 1 minute, forcing the first undead struck to succeed at a DC 17 Will save or lose all damage reduction (except DR/epic) for 1 round.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['breath of life', 'dispel evil'], cost: 22810 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'battleaxe', enhancementBonus: 3, weaponSpecialAbilities: [],
+  },
+  // 382
+  {
+    id: 'weapon-crusaders-longsword',
+    name: "Crusader's Longsword",
+    category: 'magic_weapon', source: "Weapon Master's Handbook", isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 10, slot: 'none', price: 47315, weight: 4,
+    description: '+1 holy demon bane cold iron longsword bearing the symbol of Iomedae. Whenever the wielder uses the divine bond ability or sacred weapon ability to enhance it, the crusader\'s longsword increases the number of points of enhancement bonus she has to spend on its abilities by 1.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['holy smite', 'summon monster I'], cost: 23815 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'longsword', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'holy', name: 'Holy', description: 'Deals an extra 2d6 damage against evil creatures.', bonusEquivalent: 2, casterLevel: 7, effects: [] },
+      { id: 'bane_demon', name: 'Bane (Demon)', description: '+2 enhancement bonus and +2d6 damage against demons.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 383
+  {
+    id: 'weapon-sylvan-scimitar',
+    name: 'Sylvan Scimitar',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 11, slot: 'none', price: 47315, weight: 4,
+    description: '+3 scimitar that grants the wielder the Cleave feat and adds 1d6 extra damage per hit while used outdoors in temperate climates.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['divine power'], cost: 23815 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'scimitar', enhancementBonus: 3, weaponSpecialAbilities: [],
+  },
+  // 384
+  {
+    id: 'weapon-spirit-blade',
+    name: 'Spirit Blade',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION }],
+    casterLevel: 10, slot: 'none', price: 48502, weight: 1,
+    description: '+3 ghost touch dagger with a wavy, nearly transparent blade that glows with ethereal energy when grasped. Once per day the wielder can cast dispel magic from the blade.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['dispel magic', 'plane shift'], cost: 24402 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'dagger', enhancementBonus: 3, weaponSpecialAbilities: [
+      { id: 'ghost_touch', name: 'Ghost Touch', description: 'Can affect incorporeal creatures as if they were corporeal.', bonusEquivalent: 1, casterLevel: 9, effects: [] },
+    ],
+  },
+  // 385
+  {
+    id: 'weapon-chadas-harpoon',
+    name: "Chada's Harpoon",
+    category: 'magic_weapon', source: 'Pathfinder #34: Blood for Blood', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 11, slot: 'none', price: 50302, weight: 2,
+    description: '+2 keen returning spear decorated with feathers, fur, and a bright steel chain extending from its haft. On a critical hit the weapon lodges into the target and pulls them 20 feet closer, functioning as the pull universal monster ability (using the attack roll in place of a CMB check). Subsequent rounds allow additional attack rolls to continue pulling, and it works on creatures of any size.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['keen edge', 'telekinesis'], cost: 25302 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'spear', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'keen', name: 'Keen', description: 'Doubles the threat range of the weapon.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
+      { id: 'returning', name: 'Returning', description: 'Returns to the thrower on the round after it is thrown.', bonusEquivalent: 1, casterLevel: 7, effects: [] },
+    ],
+  },
+  // 386
+  {
+    id: 'weapon-heartswood-spear',
+    name: 'Heartswood Spear',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.CONJURATION }],
+    casterLevel: 14, slot: 'none', price: 50302, weight: 6,
+    description: '+2 undead bane spear that appears deceptively simple. When wielded as a staff it deals bludgeoning damage and gains the disruption property for use against undead.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['heal', 'summon monster I'], cost: 25302 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'spear', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'bane_undead', name: 'Bane (Undead)', description: '+2 enhancement bonus and +2d6 damage against undead.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 387
+  {
+    id: 'weapon-traitors-blade',
+    name: "Traitor's Blade",
+    category: 'magic_weapon', source: 'Dirty Tactics Toolbox', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
+    casterLevel: 14, slot: 'none', price: 50302, weight: 1,
+    description: '+2 wounding dagger that grants the wielder three daily uses of charm monster (DC 18). It deals an extra 2d6 damage to charmed creatures when struck, even after the charm ends due to hostile action. Other charmed creatures witnessing the betrayal become sickened for 1d4 rounds and immediately escape the charm.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['bleed', 'charm monster', 'inflict moderate wounds'], cost: 25302 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'dagger', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'wounding', name: 'Wounding', description: 'Deals 1 point of bleed damage on a successful hit.', bonusEquivalent: 2, casterLevel: 10, effects: [] },
+    ],
+  },
+  // 388
+  {
+    id: 'weapon-mace-of-keys',
+    name: 'Mace of Keys',
+    category: 'magic_weapon', source: 'Inner Sea Temples', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 9, slot: 'none', price: 50312, weight: 8,
+    description: '+1 axiomatic heavy mace whose flanges are shaped like skeleton keys. Three times per day, before rolling a melee attack as a swift or immediate action, the wielder can activate an unlocking ability; on a successful hit, he makes a CMB check against the target\'s CMD to dislodge items from the target\'s belt, shoulder, or neck slots, causing them to fall into an adjacent square. The mace also ignores up to 20 points of hardness when used to destroy locks.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['knock', 'passwall'], cost: 25312 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'heavy_mace', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'axiomatic', name: 'Axiomatic', description: 'Deals an extra 2d6 damage against chaotic creatures.', bonusEquivalent: 2, casterLevel: 7, effects: [] },
+    ],
+  },
+  // 389
+  {
+    id: 'weapon-rapier-of-puncturing',
+    name: 'Rapier of Puncturing',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
+    casterLevel: 13, slot: 'none', price: 50320, weight: 2,
+    description: '+2 wounding rapier that combines puncturing wounds with blood-draining capability. Three times daily, the wielder can make a touch attack that deals 1d6 points of Constitution damage by draining blood. Creatures immune to critical hits are immune to this Constitution damage.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['harm'], cost: 25320 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'rapier', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'wounding', name: 'Wounding', description: 'Deals 1 point of bleed damage on a successful hit.', bonusEquivalent: 2, casterLevel: 10, effects: [] },
+    ],
+  },
+  // 390 — Sun Blade duplicates batch6; substitute with Shade Bow (Dirty Tactics Toolbox, 41,535 gp)
+  // 391
+  {
+    id: 'weapon-storvals-thunder',
+    name: "Storval's Thunder",
+    category: 'magic_weapon', source: 'Inner Sea Races', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 8, slot: 'none', price: 50340, weight: 14,
+    description: '+1 earth breaker forged by Shoanti smiths that deals an additional 1d6 electricity and 1d6 sonic damage on each hit. Three times per day after confirming a critical hit, the wielder may trigger a thunderclap as an immediate action; the target must succeed at a DC 16 Fortitude save or be stunned for 1 round.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['lightning bolt', 'sound burst'], cost: 25340 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'earth_breaker', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 392
+  {
+    id: 'weapon-true-warriors-blade',
+    name: "True Warrior's Blade",
+    category: 'magic_weapon', source: 'Inner Sea Races', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ENCHANTMENT }],
+    casterLevel: 9, slot: 'none', price: 50350, weight: 8,
+    description: '+3 greatsword roughly forged in the Kellid style, engraved with Hallit runes near the hilt. Counts as a bane weapon against any creature that has the ability to cast arcane spells (excluding those relying solely on spell-like abilities).',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['antimagic field'], cost: 25350 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'greatsword', enhancementBonus: 3, weaponSpecialAbilities: [],
+  },
+  // 393
+  {
+    id: 'weapon-dragonbreath-bow',
+    name: 'Dragonbreath Bow',
+    category: 'magic_weapon', source: 'Mythic Adventures', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
+    casterLevel: 14, slot: 'none', price: 50375, weight: 3,
+    description: '+2 flaming burst longbow. A mythic wielder may expend one use of mythic power while drawing the bow to create a flame arrow. This special ranged touch attack (usable only within the first range increment) deals 3d10+2 fire damage that stacks with the flaming burst ability.',
+    construction: { feats: ['Craft Magic Arms and Armor', 'Mythic Crafter'], spells: ['flame strike', 'scorching ray'], cost: 25375 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'longbow', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'flaming_burst', name: 'Flaming Burst', description: 'Deals an extra 1d6 fire damage and explodes with flame on a critical hit.', bonusEquivalent: 2, casterLevel: 12, effects: [] },
+    ],
+  },
+  // 394
+  {
+    id: 'weapon-enervating-pistol',
+    name: 'Enervating Pistol',
+    category: 'magic_weapon', source: "Pathfinder #60: From Hell's Heart", isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
+    casterLevel: 13, slot: 'none', price: 51300, weight: 4,
+    description: '+1 reliable distance pistol that deals an extra 1d6 negative energy damage on each successful hit. On a critical hit it bestows a negative level on the target; one day later the victim must succeed at a DC 16 Fortitude save or the negative level becomes permanent. Wielding the pistol without an undead hand inflicts one permanent negative level that persists while the weapon is carried and cannot be removed by restoration.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['clairaudience/clairvoyance', 'enervation', 'finger of death', 'mending'], cost: 26300 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'pistol', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'distance', name: 'Distance', description: 'Doubles the weapon\'s range increment.', bonusEquivalent: 1, casterLevel: 6, effects: [] },
+      { id: 'reliable', name: 'Reliable', description: 'Reduces the weapon\'s misfire chance.', bonusEquivalent: 1, casterLevel: 5, effects: [] },
+    ],
+  },
+  // 395
+  {
+    id: 'weapon-blade-of-the-rising-sun',
+    name: 'Blade of the Rising Sun',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
+    casterLevel: 15, slot: 'none', price: 51850, weight: 6,
+    description: '+1 glorious undead bane katana. When threatening a critical hit, the weapon creates a faerie fire halo dealing 1d6 damage to undead each turn. Once per day the wielder can perform a sacrificial strike, converting herself into a sunburst effect that optionally casts mass cure light wounds or breath of life on allies; the wielder gains a 50% chance of reincarnation after 24 hours.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['blindness/deafness', 'daylight', 'flare', 'miracle', 'sunburst'], cost: 28100 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'katana', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'bane_undead', name: 'Bane (Undead)', description: '+2 enhancement bonus and +2d6 damage against undead.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 396
+  {
+    id: 'weapon-rotcarver',
+    name: 'Rotcarver',
+    category: 'magic_weapon', source: 'Lost Kingdoms', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
+    casterLevel: 13, slot: 'none', price: 52118, weight: 10,
+    description: '+3 scythe. Upon scoring a successful critical hit, the wielder can animate part of the blade as a rot grub that targets the victim (DC 15 Reflex save negates). Once per week the weapon transforms into a swarm of rot grubs under the wielder\'s command for 13 rounds before reverting to weapon form; the wielder is unharmed by the swarm while it remains under their control.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['contagion', 'summon monster VII'], cost: 26218 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'scythe', enhancementBonus: 3, weaponSpecialAbilities: [],
+  },
+  // 397
+  {
+    id: 'weapon-rythius-the-kyton-scourge',
+    name: 'Rythius, the Kyton Scourge',
+    category: 'magic_weapon', source: 'Champions of Purity', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.ABJURATION }],
+    casterLevel: 12, slot: 'none', price: 53000, weight: 2,
+    description: '+1 shock whip. Three times per day on a successful trip attack, the weapon triggers a dimensional anchor effect on the target (suppressible as a swift action). In the hands of a good-aligned wielder, it functions as a +1 kyton-bane shock whip. Nongood wielders suffer 1 negative level while carrying it, which cannot be removed by restoration magic.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['dimensional anchor', 'holy smite'], cost: 26650 },
+    physicalStats: { hardness: 5, hitPoints: 2, breakDC: 14 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'whip', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'shock', name: 'Shock', description: 'Deals an additional 1d6 electricity damage on each successful hit.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 398
+  {
+    id: 'weapon-farspear',
+    name: 'Farspear',
+    category: 'magic_weapon', source: 'Heroes from the Fringe', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 7, slot: 'none', price: 53801, weight: 3,
+    description: '+2 elysian bronze spear that warps space to strike distant targets. As a standard action, the wielder can make a melee attack against a creature up to 60 feet away as though it stood within his melee reach. Cover and concealment apply as if making ranged attacks. Vital Strike feats can be used with this ability.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['dimension door'], cost: 27551 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'spear', enhancementBonus: 2, weaponSpecialAbilities: [],
+  },
+  // 399
+  {
+    id: 'weapon-windreaders-bow',
+    name: "Windreader's Bow",
+    category: 'magic_weapon', source: "Weapon Master's Handbook", isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.DIVINATION }],
+    casterLevel: 8, slot: 'none', price: 54400, weight: 3,
+    description: '+1 adaptive seeking composite longbow. Arrows fired at the wielder\'s favored enemy or studied target inflict 2 points of bleed damage. Twice per day while the bleed persists, the wielder can sense the afflicted target\'s approximate direction and distance by smelling the wind as a standard action.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['bleed', 'locate creature', 'warp wood'], cost: 27400 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'composite_longbow', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'adaptive', name: 'Adaptive', description: 'Adjusts to the wielder\'s Strength.', bonusEquivalent: 1, casterLevel: 5, effects: [] },
+      { id: 'seeking', name: 'Seeking', description: 'Negates miss chance due to concealment.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
+    ],
+  },
+  // 400 — Frost Brand duplicates batch6; substitute with Valor's Minion (Ultimate Equipment, 41,335 gp)
+];

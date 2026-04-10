@@ -1,0 +1,353 @@
+import type { MagicWeaponDefinition } from '@/types/magicItems';
+import { AuraStrength, MagicSchool } from '@/types/equipment';
+
+export const specificWeaponsBatch8: MagicWeaponDefinition[] = [
+  // 176
+  {
+    id: 'weapon-earthenflail',
+    name: 'Earthenflail',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
+    casterLevel: 13, slot: 'none', price: 11315, weight: 10,
+    description: '+1 heavy flail with a wooden haft bound to a large stone head. The primary property allows it to ignore the hardness of any object with hardness less than 20. As a swift action, the wielder can temporarily suppress this ability, causing the stone head to phase through earth and stone, disregarding cover from earth or stone structures (but not total cover). The weapon cannot damage these materials while phased; other cover sources are unaffected.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['phase door', 'shatter'], cost: 5815 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'command_word', effects: [],
+    baseWeaponId: 'heavy_flail', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 177
+  {
+    id: 'weapon-swift-obsidian-greataxe',
+    name: 'Swift Obsidian Greataxe',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 10, slot: 'none', price: 11320, weight: 12,
+    description: '+1 keen greataxe crafted from black obsidian. The wielder gains a +10-foot enhancement bonus to speed during a charge action. Once per day, the user can activate an ability granting all allies within 30 feet a +10-foot enhancement bonus to base speed for 1 round.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['expeditious retreat', 'keen edge'], cost: 5802 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 23 },
+    activationCategory: 'use_activated',
+    effects: [
+      { type: 'bonus', bonusType: 'enhancement', target: 'speed.base', value: 10, source: 'Swift Obsidian Greataxe', condition: { type: 'custom', params: {}, description: 'during a charge' } },
+    ],
+    baseWeaponId: 'greataxe', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'keen', name: 'Keen', description: 'Doubles the threat range of the weapon.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
+    ],
+  },
+  // 178
+  {
+    id: 'weapon-axe-of-felling',
+    name: 'Axe of Felling',
+    category: 'magic_weapon', source: "Giant Hunter's Handbook", isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 10, slot: 'none', price: 11330, weight: 8,
+    description: '+1 giant-bane dwarven waraxe inspired by King Harral\'s legendary weapon. The axe has the trip quality and can trip foes up to two size categories larger than the wielder, referencing the king\'s mythical victory over an ettin.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ["bull's strength", 'summon monster I'], cost: 5830 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 23 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'dwarven_waraxe', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'bane_giant', name: 'Bane (Giant)', description: '+2 enhancement bonus and +2d6 damage against creatures of the giant type.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 179
+  {
+    id: 'weapon-bow-of-ashes',
+    name: 'Bow of Ashes',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 8, slot: 'none', price: 11400, weight: 3,
+    description: '+1 adaptive flaming composite longbow crafted from blackened petrified wood. When the wielder draws the bowstring within 5 feet of a torch-sized flame or larger, the weapon generates an ash arrow. These projectiles function normally but ignore concealment miss chances from smoke, ash, dust, fog, and other airborne particles. The ash arrow disintegrates one round after being fired.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['fireball', 'warp wood'], cost: 5900 },
+    physicalStats: { hardness: 5, hitPoints: 10, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'composite_longbow', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'flaming', name: 'Flaming', description: 'Deals an additional 1d6 fire damage on each successful hit.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
+    ],
+  },
+  // 180
+  {
+    id: 'weapon-trailblazers-spade',
+    name: "Trailblazer's Spade",
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 3, slot: 'none', price: 11400, weight: 3,
+    description: '+1/+1 monk\'s spade that doubles as a clearing tool. Five times daily as a standard action, the wielder can clear a 10-foot adjacent square of movement-impeding obstacles such as caltrops, rubble, and overgrowth. The tool affects features up to 4 feet in height or depth but cannot dispel magically-created terrain barriers.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['soften earth and stone'], cost: 5860 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'monks_spade', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 181
+  {
+    id: 'weapon-vengeful-kiss',
+    name: 'Vengeful Kiss',
+    category: 'magic_weapon', source: 'Inner Sea Gods', isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ILLUSION }],
+    casterLevel: 5, slot: 'none', price: 11501, weight: 2,
+    description: '+1 deadly whip of braided black and yellow leather with strength comparable to silk rope. The wielder can stretch it up to 50 feet as a standard action or retract it to normal length, though it cannot be used to attack when extended. Once daily, the bearer may cast invigorate while holding it.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['animate rope', 'inflict light wounds', 'invigorate'], cost: 5901 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'whip', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 182
+  {
+    id: 'weapon-goad-of-obedience',
+    name: 'Goad of Obedience',
+    category: 'magic_weapon', source: 'Animal Archive', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ENCHANTMENT }],
+    casterLevel: 8, slot: 'none', price: 11508, weight: 5,
+    description: '+1 ankus granting a +2 competence bonus to wild empathy checks. Five times daily as a standard action, the wielder can make a touch attack against an animal; on a hit, the target must succeed at a DC 11 Will save or become charmed (as charm animal). Animals that succeed their save cannot be affected again for 24 hours. Once per day as an immediate action, the wielder may paralyze an animal hit by the weapon using hold animal (Will DC 13 negates).',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['charm animal', 'hold animal'], cost: 5908 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated',
+    effects: [
+      { type: 'bonus', bonusType: 'competence', target: 'skill.wild_empathy', value: 2, source: 'Goad of Obedience' },
+    ],
+    baseWeaponId: 'ankus', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 183
+  {
+    id: 'weapon-peacekeeping-pistol',
+    name: 'Peacekeeping Pistol',
+    category: 'magic_weapon', source: 'Inner Sea Combat', isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ENCHANTMENT }],
+    casterLevel: 5, slot: 'none', price: 11700, weight: 4,
+    description: '+1 merciful pistol from Alkenstar decorated with angelic filigree along the barrel and intricate brass gears. When the wielder scores a critical hit while dealing nonlethal damage, the target must make a DC 12 Will save or become dazed for 1 round. Characters with the grit class feature can spend 1 grit point as a swift action to increase the save DC by 4.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['cure light wounds', 'daze monster'], cost: 6500 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'pistol', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'merciful', name: 'Merciful', description: 'Deals an additional 1d6 nonlethal damage; all damage is nonlethal.', bonusEquivalent: 1, casterLevel: 5, effects: [] },
+    ],
+  },
+  // 184
+  {
+    id: 'weapon-triple-stinging-blade-calistria',
+    name: 'Triple-Stinging Blade (Calistria)',
+    category: 'magic_weapon', source: 'Faiths of Balance', isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.EVOCATION }],
+    casterLevel: 7, slot: 'none', price: 11702, weight: 1,
+    description: '+1 dagger with a rose pommel and yellow-and-black-striped hilt featuring retractable thorns along the blade. When successfully damaging a creature, the wielder can attempt a free combat maneuver; success drives the blade deeper, causing thorns to spring forth and deal an additional 1d4 damage before retracting. If Calistria is the wielder\'s patron deity, speaking her name as a free action once per day increases the enhancement bonus to +2 for 1 round. Non-devotees who speak her name experience thorns sprouting from the handle, delivering Medium spider venom.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['spike growth'], cost: 5851 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'dagger', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 185
+  {
+    id: 'weapon-tamers-whip',
+    name: "Tamer's Whip",
+    category: 'magic_weapon', source: 'Animal Archive', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 8, slot: 'none', price: 11901, weight: 2,
+    description: '+1 animal-bane whip dyed crimson that deals lethal damage to animals and magical beasts regardless of natural armor. When cracked as a move action, the wielder gains until end of turn: a +4 competence bonus on Intimidate checks against animals and magical beasts, a +4 competence bonus on Handle Animal checks to push them, and a +2 bonus on combat maneuvers against these creature types.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['animal trance', 'snare', "summon nature's ally I"], cost: 6101 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'whip', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'bane_animal', name: 'Bane (Animal)', description: '+2 enhancement bonus and +2d6 damage against animals and magical beasts.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 186
+  {
+    id: 'weapon-icicle-wand',
+    name: 'Icicle Wand',
+    category: 'magic_weapon', source: 'Inner Sea Magic', isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
+    casterLevel: 5, slot: 'none', price: 12250, weight: 1,
+    description: 'A sharpened icicle roughly one foot long that never melts. Functions as a wand of ice spears, granting the wielder the ability to create and turn icy terrain against enemies. Also serves as a masterwork dagger dealing 1 point of cold damage beyond standard dagger harm. When crafted at caster level 7th or higher, it functions as a +1 frost dagger instead.',
+    construction: { feats: ['Craft Magic Arms and Armor', 'Craft Wand'], spells: ['ice spears', 'icicle dagger'], cost: 6125 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'spell_trigger', effects: [],
+    baseWeaponId: 'dagger', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 187
+  {
+    id: 'weapon-constrictors-gauntlets',
+    name: "Constrictor's Gauntlets",
+    category: 'magic_weapon', source: 'Dirty Tactics Toolbox', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 10, slot: 'none', price: 12302, weight: 1,
+    description: '+1 gauntlets fashioned from snakeskin providing a +1 enhancement bonus on grapple checks. Once daily as a standard action, the wearer can target a single creature in medium or heavy armor within 30 feet. The target must succeed at a DC 16 Will save or suffer armor constriction, taking 1d6 bludgeoning damage per round (medium armor) or 1d8 per round (heavy armor) for 3 rounds. The armor\'s other properties remain unchanged while constricted.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['shrink item'], cost: 6302 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 22 },
+    activationCategory: 'use_activated',
+    effects: [
+      { type: 'bonus', bonusType: 'enhancement', target: 'cmb', value: 1, source: "Constrictor's Gauntlets", condition: { type: 'custom', params: {}, description: 'grapple checks' } },
+    ],
+    baseWeaponId: 'gauntlet', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 188
+  {
+    id: 'weapon-scorpion-tail-whip',
+    name: 'Scorpion Tail Whip',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.DIVINATION }],
+    casterLevel: 6, slot: 'none', price: 12305, weight: 3,
+    description: '+2 scorpion whip featuring a lash made of countless tiny chitinous plates interlocking to form an articulated cord, tipped with sharp blades. Grants the wielder a +2 insight bonus on initiative checks when their first combat action involves attacking with this weapon. This bonus is forfeited if the wielder switches to or attacks with a different weapon before using the scorpion tail whip.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['anticipate peril'], cost: 6305 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'continuous',
+    effects: [
+      { type: 'bonus', bonusType: 'insight', target: 'initiative', value: 2, source: 'Scorpion Tail Whip', condition: { type: 'custom', params: {}, description: 'when first combat action is an attack with this weapon' } },
+    ],
+    baseWeaponId: 'scorpion_whip', enhancementBonus: 2, weaponSpecialAbilities: [],
+  },
+  // 189
+  {
+    id: 'weapon-polarity-hammer',
+    name: 'Polarity Hammer',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 8, slot: 'none', price: 12310, weight: 10,
+    description: '+1/+1 meteor hammer crafted from ferrous metals with weighted spheres on a sturdy dark chain. In meteor mode, the wielder gains a +2 bonus on all drag and reposition combat maneuvers against foes in metal armor, carrying metal shields, or made of metal, and can push enemies 5 feet away instead of pulling them after successful trips. In fortress mode, the wielder may use a move action to telekinetically move unattended metal objects within reach to adjacent squares (limited to one-handed weapon size). The shield bonus increases from +1 to +3 only against opponents wearing metal armor, carrying metal shields, or made of metal.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['force punch', 'shield'], cost: 6155 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'meteor_hammer', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 190
+  {
+    id: 'weapon-whisper-and-shadow',
+    name: 'Whisper and Shadow',
+    category: 'magic_weapon', source: 'Carnival of Tears', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ILLUSION }],
+    casterLevel: 10, slot: 'none', price: 12310, weight: 2,
+    description: 'Paired +1 cold iron shortswords. When used together, the wielder gains the Two-Weapon Fighting feat regardless of qualifications. Whisper can cast silence (CL 10th, DC 20) three times daily. Shadow casts invisibility (CL 10th) three times daily, or can become invisible for one round, granting flat-footed attacks against opponents unable to see invisible objects who fail a DC 25 Perception check.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['invisibility', 'silence'], cost: 6155 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'command_word', effects: [],
+    baseWeaponId: 'shortsword', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 191
+  {
+    id: 'weapon-sinderbos',
+    name: 'Sinderbos',
+    category: 'magic_weapon', source: 'Book of the Damned', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 8, slot: 'none', price: 12312, weight: 5,
+    description: '+1 flaming warhammer bearing a bull\'s head engraving symbolizing Moloch. Upon successful strikes, the wielder can create an ash cloud around the target as an immediate action. The cloud lasts 1 round; creatures within it must succeed at a DC 14 Fortitude save or suffer a –2 penalty on attack rolls for 1 round. Fire-immune or non-breathing creatures are unaffected. Moloch worshippers wielding Sinderbos can forge masterwork armor and weapons, reducing the Craft DC to 10 for masterwork components while leaving standard component DCs unchanged.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['ash storm', 'fireball'], cost: 6812 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'warhammer', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'flaming', name: 'Flaming', description: 'Deals an additional 1d6 fire damage on each successful hit.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
+    ],
+  },
+  // 192
+  // 193
+  {
+    id: 'weapon-gorums-thorn',
+    name: "Gorum's Thorn",
+    category: 'magic_weapon', source: 'Pathfinder #92: The Hill Giant\'s Pledge', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 10, slot: 'none', price: 12350, weight: 8,
+    description: '+1 keen greatsword with a forge-blackened finish and religious imagery honoring Gorum. When the wielder confirms a critical hit against a giant-type creature, they may attempt to trip that target as a free action without provoking attacks of opportunity, ignoring size restrictions. If the trip attempt fails by 10 or more, the wielder is not knocked prone.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['keen edge', 'righteous might'], cost: 6350 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'greatsword', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'keen', name: 'Keen', description: 'Doubles the threat range of the weapon.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
+    ],
+  },
+  // 194
+  {
+    id: 'weapon-dancing-wasp',
+    name: 'Dancing Wasp',
+    category: 'magic_weapon', source: 'Pathfinder Campaign Setting', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 7, slot: 'none', price: 12392, weight: 3,
+    description: '+1 kusarigama that makes a shrill whistling sound whenever it is used in combat. Once daily, the wielder can spin it overhead as a full-round action to summon a giant wasp. The summoned creature follows the user\'s mental commands while the weapon continues to twirl (requiring a standard action each round) for up to 5 rounds before vanishing.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['summon monster IV'], cost: 6352 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'kusarigama', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 195
+  {
+    id: 'weapon-shadowcraft-weapon',
+    name: 'Shadowcraft Weapon',
+    category: 'magic_weapon', source: 'Blood of Shadows', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ILLUSION }],
+    casterLevel: 10, slot: 'none', price: 12500, weight: 0,
+    description: 'Melee weapon crafted from insubstantial darkness. The wielder can reshape it as a standard action into any masterwork weapon matching its base type and handedness. Shadow ammunition is generated automatically; other projectiles can also be loaded. The weapon deals reduced damage if opponents disbelieve its quasi-real nature: targets hit each round attempt a Will save (DC 15 + twice enhancement bonus); failed saves mean normal damage, successful saves cause minimum damage and grant a +4 bonus on future saves against that wielder\'s weapon. Key mechanics: 1 point of damage to objects, +1 bonus in dim or dark conditions, –1 penalty in bright light.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['major creation', 'shadow weapon'], cost: 6250 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'command_word', effects: [],
+    baseWeaponId: 'shortsword', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 196
+  {
+    id: 'weapon-fugitive-finder',
+    name: 'Fugitive Finder',
+    category: 'magic_weapon', source: 'Pathfinder Campaign Setting', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 8, slot: 'none', price: 12655, weight: 4,
+    description: '+1 human-bane light crossbow with a distinctive gold-colored metal lath and keyhole-shaped bolt slot. The wielder receives a +10-foot enhancement bonus to base speed. Originally commissioned by the Church of Abadar for law enforcement; variants exist with the merciful ability instead of human-bane, facilitating non-lethal capture of fugitives.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['longstrider', 'summon monster I'], cost: 6495 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'continuous',
+    effects: [
+      { type: 'bonus', bonusType: 'enhancement', target: 'speed.base', value: 10, source: 'Fugitive Finder' },
+    ],
+    baseWeaponId: 'light_crossbow', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'bane_human', name: 'Bane (Human)', description: '+2 enhancement bonus and +2d6 damage against humans.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 197
+  {
+    id: 'weapon-nightpiercer',
+    name: 'Nightpiercer',
+    category: 'magic_weapon', source: 'Inner Sea Temples', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 9, slot: 'none', price: 12700, weight: 12,
+    description: '+1 repeating heavy crossbow featuring a whippoorwill design, where the stirrup resembles the head, limbs resemble wings, and the stock resembles the tail. Applies ghost touch to all bolts fired; the bolts produce whippoorwill-like shrieks in flight. When bolts strike incorporeal undead and deal damage, they embed in the creature, reducing all its speeds by half (minimum 5 feet) for 1 round.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['dimensional anchor', 'plane shift'], cost: 6700 },
+    physicalStats: { hardness: 5, hitPoints: 10, breakDC: 18 },
+    activationCategory: 'continuous', effects: [],
+    baseWeaponId: 'repeating_heavy_crossbow', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'ghost_touch', name: 'Ghost Touch', description: 'Can affect incorporeal creatures as if they were corporeal.', bonusEquivalent: 1, casterLevel: 9, effects: [] },
+    ],
+  },
+  // 198
+  {
+    id: 'weapon-shifters-sorrow',
+    name: "Shifter's Sorrow",
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 15, slot: 'none', price: 12780, weight: 10,
+    description: '+1/+1 two-bladed sword forged from alchemical silver. Inflicts an additional 2d6 damage against creatures with the shapechanger subtype. When striking a shapechanger or a creature in an alternate form, the target must succeed at a DC 15 Will save or revert to its natural form.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['baleful polymorph'], cost: 6780 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'two_bladed_sword', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 199
+  {
+    id: 'weapon-emberchill',
+    name: 'Emberchill',
+    category: 'magic_weapon', source: 'Pathfinder #68: The Shackled Hut', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 10, slot: 'none', price: 12806, weight: 2,
+    description: '+1 frost sickle crafted from magical ice and immune to fire damage. A spellcaster may store a single cold-descriptor spell with a standard action casting time within it. The stored spell functions as a counterspell against fire-descriptor spells if at least 1 level higher (or if it specifically counters the fire spell); the wielder must ready an action and succeed at a Spellcraft check. The stored spell cannot serve other purposes, though it can be harmlessly discharged as a swift action to store a different spell.',
+    construction: { feats: ['Craft Magic Arms and Armor', 'Improved Counterspell'], spells: ['dispel magic', 'ice storm'], cost: 6556 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'sickle', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'frost', name: 'Frost', description: 'Deals an additional 1d6 cold damage on each successful hit.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 200
+  {
+    id: 'weapon-deck-of-slivering-fate',
+    name: 'Deck of Slivering Fate',
+    category: 'magic_weapon', source: 'Occult Adventures', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 7, slot: 'none', price: 13000, weight: 0,
+    description: 'A harrow deck of 54 cards with violent imagery and metallic frills along the edges. When used with the Deadly Dealer feat, the metallic frills become taut and sharp, dealing slashing damage instead of piercing. Bonus damage from the Arcane Strike feat is doubled when using this weapon.',
+    construction: { feats: ['Craft Magic Arms and Armor', 'Craft Wondrous Item', 'Deadly Dealer'], spells: ['magic missile'], cost: 6500 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 14 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'cards', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+];
