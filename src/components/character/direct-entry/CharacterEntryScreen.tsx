@@ -1,10 +1,12 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, ScrollView, Pressable, StyleSheet, SafeAreaView } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { OrnateTab } from '@/components/ui/OrnateTab';
 import { CharacterEntryHeader } from './CharacterEntryHeader';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setActiveTab, type EntryTabKey, type TabStatus } from '@/store/slices/characterEntrySlice';
+import { setActiveTab, setValidationWarnings, type EntryTabKey, type TabStatus } from '@/store/slices/characterEntrySlice';
+import { DraftValidationService } from '@/services/DraftValidationService';
+import { ValidationReportSheet } from './ValidationReportSheet';
 import { IdentitySection } from './IdentitySection';
 import { AbilityScoreEntryPanel } from './AbilityScoreEntryPanel';
 import { LevelIncrementSlots } from './LevelIncrementSlots';
@@ -89,13 +91,23 @@ function useTabStatus(): Record<EntryTabKey, TabStatus> {
 
 // ---- Main screen ----
 
+// Minimal Ruleset for validation until PR #49 merges and the Redux ruleset slice is available.
+// After rebase onto post-#49 main, read from: useAppSelector(state => state.ruleset.activeRuleset)
+const DEFAULT_VALIDATION_RULESET = {
+  optionalRules: { fractionalBABSaves: false },
+  validationSettings: { maxTraits: 2 },
+} as const;
+
 export function CharacterEntryScreen() {
   const { colors, fantasy } = useTheme();
   const dispatch = useAppDispatch();
   const activeTab = useAppSelector((state) => state.characterEntry.activeTab);
+  const draft = useAppSelector((state) => state.characterEntry.draft);
   const warnings = useAppSelector((state) => state.characterEntry.validationWarnings);
   const lastValidatedAt = useAppSelector((state) => state.characterEntry.lastValidatedAt);
   const tabStatus = useTabStatus();
+
+  const [showValidationSheet, setShowValidationSheet] = useState(false);
 
   const unacknowledgedCount = warnings.filter((w) => !w.isAcknowledged).length;
   const showValidationFAB = lastValidatedAt !== null;
@@ -106,10 +118,10 @@ export function CharacterEntryScreen() {
   );
 
   const handleValidate = useCallback(() => {
-    // Validation logic will be wired in the validation PR
-    // For now, just mark the timestamp so the FAB appears
-    dispatch({ type: 'characterEntry/setValidationWarnings', payload: [] });
-  }, [dispatch]);
+    const newWarnings = DraftValidationService.validate(draft, DEFAULT_VALIDATION_RULESET);
+    dispatch(setValidationWarnings(newWarnings));
+    setShowValidationSheet(true);
+  }, [draft, dispatch]);
 
   const handleSave = useCallback(() => {
     // Save logic will be wired when the characters service is connected
@@ -179,7 +191,11 @@ export function CharacterEntryScreen() {
             },
           ]}
           onPress={() => {
-            // Opens ValidationReportSheet — wired in validation PR
+            if (lastValidatedAt !== null) {
+              setShowValidationSheet(true); // re-open existing results
+            } else {
+              handleValidate(); // run validation first time
+            }
           }}
           accessibilityRole="button"
           accessibilityLabel={
@@ -198,6 +214,15 @@ export function CharacterEntryScreen() {
           )}
         </Pressable>
       )}
+
+      <ValidationReportSheet
+        visible={showValidationSheet}
+        onClose={() => setShowValidationSheet(false)}
+        onSave={() => {
+          setShowValidationSheet(false);
+          handleSave();
+        }}
+      />
     </SafeAreaView>
   );
 }
