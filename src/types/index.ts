@@ -13,6 +13,7 @@ import { Buff, SavedBuff, BuffPackage } from './buff';
 import { MythicProgression } from './mythic';
 import { ResourcePool } from './resources';
 import { AppliedTemplate, GrantedBonus, LevelUpDecision, CharacterCRTracking } from './templates';
+import { Ruleset, CampaignRulesetLink } from './ruleset';
 
 export interface Character {
   info: CharacterInfo;
@@ -46,6 +47,11 @@ export interface Character {
   // Combat runtime — from HL
   buffs: Buff[];
   savedBuffs: (SavedBuff | BuffPackage)[];
+
+  // Ruleset — always present; embedded snapshot of the rules governing this character
+  ruleset: Ruleset;
+  // Present when character is linked to a campaign
+  campaignRulesetLink?: CampaignRulesetLink;
 
   // Version tracking
   schemaVersion: string;
@@ -85,3 +91,4 @@ export * from './classOptions';
 export * from './deities';
 export * from './animalCompanions';
 export * from './magicItems';
+export * from './ruleset';
