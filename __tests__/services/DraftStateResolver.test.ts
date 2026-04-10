@@ -21,9 +21,42 @@ jest.mock('@/utils/characterComputations', () => ({
     }, 0);
     return Math.floor(raw);
   }),
-  computeBaseFort: jest.fn(() => 0),
+  // Standard saves — +2 base bonus applied once per character if any class has Good progression.
+  // Fighter/Cleric: Good Fort; Cleric/Wizard: Good Will; nobody: Good Ref (in this mock).
+  computeBaseFort: jest.fn((classes: { className: string; level: number }[]) => {
+    const hasGood = classes.some((c) => c.className === 'Fighter' || c.className === 'Cleric');
+    const prog = classes.reduce((sum, c) => {
+      if (c.className === 'Fighter' || c.className === 'Cleric') return sum + Math.floor(c.level / 2);
+      return sum + Math.floor(c.level / 3);
+    }, 0);
+    return (hasGood ? 2 : 0) + prog;
+  }),
   computeBaseRef: jest.fn(() => 0),
-  computeBaseWill: jest.fn(() => 0),
+  computeBaseWill: jest.fn((classes: { className: string; level: number }[]) => {
+    const hasGood = classes.some((c) => c.className === 'Cleric' || c.className === 'Wizard');
+    const prog = classes.reduce((sum, c) => {
+      if (c.className === 'Cleric' || c.className === 'Wizard') return sum + Math.floor(c.level / 2);
+      return sum + Math.floor(c.level / 3);
+    }, 0);
+    return (hasGood ? 2 : 0) + prog;
+  }),
+  computeBaseFortFractional: jest.fn((classes: { className: string; level: number }[]) => {
+    const hasGood = classes.some((c) => c.className === 'Fighter' || c.className === 'Cleric');
+    const raw = classes.reduce((sum, c) => {
+      if (c.className === 'Fighter' || c.className === 'Cleric') return sum + c.level / 2;
+      return sum + c.level / 3;
+    }, 0);
+    return (hasGood ? 2 : 0) + Math.floor(raw);
+  }),
+  computeBaseRefFractional: jest.fn(() => 0),
+  computeBaseWillFractional: jest.fn((classes: { className: string; level: number }[]) => {
+    const hasGood = classes.some((c) => c.className === 'Cleric' || c.className === 'Wizard');
+    const raw = classes.reduce((sum, c) => {
+      if (c.className === 'Cleric' || c.className === 'Wizard') return sum + c.level / 2;
+      return sum + c.level / 3;
+    }, 0);
+    return (hasGood ? 2 : 0) + Math.floor(raw);
+  }),
   lookupClassData: jest.fn((className: string) => {
     const data: Record<string, { classFeatures: { name: string; level: number; description: string }[]; spellcasting: { type: string } }> = {
       Fighter: {
@@ -525,6 +558,50 @@ describe('DraftStateResolver', () => {
       expect(finalStandard).toBe(0);
       // Fractional: floor(0.75 + 0.5) = floor(1.25) = 1
       expect(finalFractional).toBe(1);
+    });
+  });
+
+  describe('saves in snapshot', () => {
+    it('snapshot includes baseFortitude, baseReflex, baseWill', () => {
+      const draft = blankDraft();
+      draft.classes = [
+        { id: '1', className: 'Fighter', level: 2, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
+      ];
+
+      const timeline = DraftStateResolver.buildTimeline(draft);
+      const snapshot = timeline.checkpoints[1].snapshot; // after Fighter 2
+
+      // Fighter has Good Fort: 2 + floor(2/2) = 3; Poor Ref: floor(2/3) = 0; Poor Will: floor(2/3) = 0
+      expect(snapshot.classes.baseFortitude).toBe(3);
+      expect(snapshot.classes.baseReflex).toBe(0);
+      expect(snapshot.classes.baseWill).toBe(0);
+    });
+
+    it('fractional saves: sum fractions then floor', () => {
+      const draft = blankDraft();
+      // Rogue1/Wizard1: standard Will = floor(1/3)+floor(1/2)+2 = 0+0+2 = 2
+      // Fractional Will: 2 + floor(1/3 + 1/2) = 2 + floor(0.83) = 2+0=2... same
+      // Use Fighter1/Wizard1: Fort standard = 2+floor(1/2)+floor(1/3) = 2+0+0 = 2
+      // Fractional Fort: 2 + floor(1/2 + 1/3) = 2 + floor(0.83) = 2 (same)
+      // Fighter3/Wizard3: Fort standard = 2+floor(3/2)+floor(3/3) = 2+1+1 = 4
+      // Fractional Fort: 2 + floor(3/2+3/3) = 2 + floor(1.5+1) = 2+2 = 4 (same)
+      // Use Cleric1/Fighter1: Fort standard = 2+floor(1/2)+floor(1/2) = 2+0+0 = 2
+      // Fractional: 2 + floor(0.5+0.5) = 2+1 = 3 — diverges!
+      draft.classes = [
+        { id: '1', className: 'Cleric', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
+        { id: '2', className: 'Fighter', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
+      ];
+
+      const mockRuleset = { optionalRules: { fractionalBABSaves: true } } as Parameters<typeof DraftStateResolver.buildTimeline>[1];
+
+      const standardTimeline = DraftStateResolver.buildTimeline(draft);
+      const fractionalTimeline = DraftStateResolver.buildTimeline(draft, mockRuleset);
+
+      const idx = standardTimeline.checkpoints.length - 1;
+      // Standard Fort: Cleric(Good)=2+floor(1/2), Fighter(Good)=floor(1/2) = 2+0+0=2
+      expect(standardTimeline.checkpoints[idx].snapshot.classes.baseFortitude).toBe(2);
+      // Fractional Fort: 2 + floor(0.5+0.5) = 3
+      expect(fractionalTimeline.checkpoints[idx].snapshot.classes.baseFortitude).toBe(3);
     });
   });
 });

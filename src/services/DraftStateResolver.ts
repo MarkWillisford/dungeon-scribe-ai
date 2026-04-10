@@ -22,6 +22,12 @@ type Ruleset = {
 import {
   computeTotalBAB,
   computeTotalBABFractional,
+  computeBaseFort,
+  computeBaseFortFractional,
+  computeBaseRef,
+  computeBaseRefFractional,
+  computeBaseWill,
+  computeBaseWillFractional,
   lookupClassData,
 } from '@/utils/characterComputations';
 
@@ -49,6 +55,9 @@ export interface DraftCharacterSnapshot {
   abilityScores: Record<AbilityKey, { total: number }>;
   classes: {
     baseAttackBonus: number[]; // Iterative attack array, e.g. [12, 7, 2]
+    baseFortitude: number;
+    baseReflex: number;
+    baseWill: number;
     totalLevel: number; // HD at this checkpoint
     classes: Array<{
       name: string;
@@ -310,6 +319,15 @@ export class DraftStateResolver {
     const totalBAB = useFractional
       ? computeTotalBABFractional(partialClasses)
       : computeTotalBAB(partialClasses);
+    const baseFortitude = useFractional
+      ? computeBaseFortFractional(partialClasses)
+      : computeBaseFort(partialClasses);
+    const baseReflex = useFractional
+      ? computeBaseRefFractional(partialClasses)
+      : computeBaseRef(partialClasses);
+    const baseWill = useFractional
+      ? computeBaseWillFractional(partialClasses)
+      : computeBaseWill(partialClasses);
 
     // Build iterative attack array: [bab, bab-5, bab-10, ...]
     const babArray: number[] = [];
@@ -326,7 +344,7 @@ export class DraftStateResolver {
       return { name: entry.className, level: entry.level, classFeatures: features };
     });
 
-    return { baseAttackBonus: babArray, totalLevel: hd, classes };
+    return { baseAttackBonus: babArray, baseFortitude, baseReflex, baseWill, totalLevel: hd, classes };
   }
 
   private static buildFeatsSnapshot(
