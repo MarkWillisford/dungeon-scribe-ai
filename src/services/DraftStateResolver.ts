@@ -96,6 +96,30 @@ export interface ECLTimeline {
 
 export class DraftStateResolver {
   /**
+   * A snapshot representing a character with no class levels, feats, or skills.
+   * Used when a prestige class is taken at ECL 1 — there is no "before" state,
+   * so all numeric prerequisites are trivially unmet.
+   */
+  static readonly EMPTY_SNAPSHOT: DraftCharacterSnapshot = {
+    abilityScores: {
+      str: { total: 10 }, dex: { total: 10 }, con: { total: 10 },
+      int: { total: 10 }, wis: { total: 10 }, cha: { total: 10 },
+    },
+    classes: {
+      baseAttackBonus: [0],
+      baseFortitude: 0,
+      baseReflex: 0,
+      baseWill: 0,
+      totalLevel: 0,
+      classes: [],
+    },
+    feats: { feats: [] },
+    skills: {},
+    info: { race: { name: '' } },
+    spellcasting: { pools: [] },
+  };
+
+  /**
    * Build the full ECL timeline for a CharacterDraft.
    * Each checkpoint represents one ECL step with the character's state at that point.
    *
