@@ -2,10 +2,55 @@ import type { MagicArmorDefinition } from '@/types/magicItems';
 import { AuraStrength, MagicSchool } from '@/types/equipment';
 
 // Gap-fill for specific shields not yet covered in batch1–batch3.
-// Non-magical special material shields (Darkwood Buckler, Darkwood Shield,
-// Mithral Heavy Shield, Living Steel Heavy Shield) are omitted —
-// they belong in mundane/special-material equipment data.
 export const specificShieldsFill: MagicArmorDefinition[] = [
+  {
+    id: 'shield-living-steel-heavy-shield',
+    name: 'Living Steel Heavy Shield',
+    category: 'magic_armor', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 1, slot: 'shield', price: 120, weight: 15,
+    description: 'This nonmagical heavy steel shield is made of living steel. It repairs itself over time, healing 1 hit point of damage per day. It can also repair breaks and sunder damage at the rate of 2 hit points per day for 10 days.',
+    construction: { feats: [], spells: [], cost: 60 },
+    physicalStats: { hardness: 15, hitPoints: 20, breakDC: 25 },
+    activationCategory: 'continuous', effects: [],
+    baseArmorId: 'heavy_steel_shield', enhancementBonus: 1, armorSpecialAbilities: [],
+  },
+  {
+    id: 'shield-darkwood-buckler',
+    name: 'Darkwood Buckler',
+    category: 'magic_armor', source: 'Core Rulebook', isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 1, slot: 'shield', price: 203, weight: 2.5,
+    description: 'This nonmagical buckler is made of darkwood, making it lighter than a standard buckler. Its armor check penalty is reduced by 2 (to 0) and its weight is halved.',
+    construction: { feats: [], spells: [], cost: 101 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 17 },
+    activationCategory: 'continuous', effects: [],
+    baseArmorId: 'buckler', enhancementBonus: 1, armorSpecialAbilities: [],
+  },
+  {
+    id: 'shield-darkwood-shield',
+    name: 'Darkwood Shield',
+    category: 'magic_armor', source: 'Core Rulebook', isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 1, slot: 'shield', price: 257, weight: 5,
+    description: 'This nonmagical heavy wooden shield is made of darkwood. It has no armor check penalty and weighs half as much as a standard heavy wooden shield.',
+    construction: { feats: [], spells: [], cost: 128 },
+    physicalStats: { hardness: 5, hitPoints: 15, breakDC: 20 },
+    activationCategory: 'continuous', effects: [],
+    baseArmorId: 'heavy_wooden_shield', enhancementBonus: 1, armorSpecialAbilities: [],
+  },
+  {
+    id: 'shield-mithral-heavy-shield',
+    name: 'Mithral Heavy Shield',
+    category: 'magic_armor', source: 'Core Rulebook', isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 1, slot: 'shield', price: 1020, weight: 5,
+    description: 'This nonmagical heavy steel shield is made of mithral, reducing its weight and armor check penalty. It is treated as a light shield for the purpose of proficiency.',
+    construction: { feats: [], spells: [], cost: 510 },
+    physicalStats: { hardness: 15, hitPoints: 20, breakDC: 22 },
+    activationCategory: 'continuous', effects: [],
+    baseArmorId: 'heavy_steel_shield', enhancementBonus: 1, armorSpecialAbilities: [],
+  },
   {
     id: 'shield-zombie-skin-shield',
     name: 'Zombie Skin Shield',
