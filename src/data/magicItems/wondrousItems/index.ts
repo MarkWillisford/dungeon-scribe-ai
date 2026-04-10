@@ -65,8 +65,9 @@ import { wondrousItemsMP7 } from './mP-batch7';
 import { wondrousItemsMP8 } from './mP-batch8';
 import { wondrousItemsMP9 } from './mP-batch9';
 import { wondrousItemsMPRecovered } from './mP-recovered';
+import { wondrousItemsMPFill } from './mP-fill';
 
-// R–Z (Doug, 15 batches + recovered)
+// R–Z (Doug, 15 batches + recovered + fill)
 import { wondrousItemsRZ1 } from './rZ-batch1';
 import { wondrousItemsRZ2 } from './rZ-batch2';
 import { wondrousItemsRZ3 } from './rZ-batch3';
@@ -83,6 +84,9 @@ import { wondrousItemsRZ13 } from './rZ-batch13';
 import { wondrousItemsRZ14 } from './rZ-batch14';
 import { wondrousItemsRZ15 } from './rZ-batch15';
 import { wondrousItemsRZRecovered } from './rZ-recovered';
+import { wondrousItemsRZFill1 } from './rZ-fill1';
+import { wondrousItemsRZFill2 } from './rZ-fill2';
+import { wondrousItemsRZFill3 } from './rZ-fill3';
 
 export const ALL_WONDROUS_ITEMS: WondrousItemDefinition[] = [
   ...wondrousItemsAB1, ...wondrousItemsAB2, ...wondrousItemsAB3, ...wondrousItemsAB4,
@@ -100,9 +104,10 @@ export const ALL_WONDROUS_ITEMS: WondrousItemDefinition[] = [
   ...wondrousItemsHL9,
   ...wondrousItemsMP1, ...wondrousItemsMP2, ...wondrousItemsMP3, ...wondrousItemsMP4,
   ...wondrousItemsMP5, ...wondrousItemsMP6, ...wondrousItemsMP7, ...wondrousItemsMP8,
-  ...wondrousItemsMP9, ...wondrousItemsMPRecovered,
+  ...wondrousItemsMP9, ...wondrousItemsMPRecovered, ...wondrousItemsMPFill,
   ...wondrousItemsRZ1, ...wondrousItemsRZ2, ...wondrousItemsRZ3, ...wondrousItemsRZ4,
   ...wondrousItemsRZ5, ...wondrousItemsRZ6, ...wondrousItemsRZ7, ...wondrousItemsRZ8,
   ...wondrousItemsRZ9, ...wondrousItemsRZ10, ...wondrousItemsRZ11, ...wondrousItemsRZ12,
   ...wondrousItemsRZ13, ...wondrousItemsRZ14, ...wondrousItemsRZ15, ...wondrousItemsRZRecovered,
+  ...wondrousItemsRZFill1, ...wondrousItemsRZFill2, ...wondrousItemsRZFill3,
 ];
