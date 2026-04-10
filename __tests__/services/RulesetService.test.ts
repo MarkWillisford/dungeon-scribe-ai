@@ -99,6 +99,30 @@ describe('RulesetService', () => {
     });
   });
 
+  describe('getGlobalPreset', () => {
+    it('returns a global preset when it exists', async () => {
+      mockFirestore.doc.mockReturnValue({});
+      mockFirestore.getDoc.mockResolvedValue({
+        exists: () => true,
+        id: 'preset-pf1e-standard',
+        data: () => ({ ...baseRuleset, id: 'preset-pf1e-standard', visibility: 'global' }),
+      });
+
+      const result = await RulesetService.getGlobalPreset('preset-pf1e-standard');
+      expect(result).not.toBeNull();
+      expect(result?.id).toBe('preset-pf1e-standard');
+      expect(result?.visibility).toBe('global');
+    });
+
+    it('returns null when global preset does not exist', async () => {
+      mockFirestore.doc.mockReturnValue({});
+      mockFirestore.getDoc.mockResolvedValue({ exists: () => false });
+
+      const result = await RulesetService.getGlobalPreset('preset-missing');
+      expect(result).toBeNull();
+    });
+  });
+
   describe('getRuleset', () => {
     it('returns ruleset when it exists', async () => {
       mockFirestore.doc.mockReturnValue({});

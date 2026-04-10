@@ -8,32 +8,59 @@ import {
   deleteDoc,
   query,
   where,
+  type CollectionReference,
+  type DocumentReference,
 } from 'firebase/firestore';
 import { db } from '@config/firebase';
 import type { Ruleset } from '@/types/ruleset';
 
+/**
+ * Firestore path structure:
+ *   User rulesets:   users/{uid}/rulesets/{rulesetId}
+ *   Global presets:  rulesets/{rulesetId}
+ */
 export class RulesetService {
-  private static readonly USER_COLLECTION = 'rulesets'; // users/{uid}/rulesets/{id}
-  private static readonly GLOBAL_COLLECTION = 'rulesets'; // top-level rulesets/{id}
+  // ---- Path builders ----
+
+  private static userRulesetsCol(uid: string): CollectionReference {
+    return collection(db, 'users', uid, 'rulesets');
+  }
+
+  private static userRulesetDoc(uid: string, rulesetId: string): DocumentReference {
+    return doc(db, 'users', uid, 'rulesets', rulesetId);
+  }
+
+  private static globalPresetsCol(): CollectionReference {
+    return collection(db, 'rulesets');
+  }
+
+  private static globalPresetDoc(rulesetId: string): DocumentReference {
+    return doc(db, 'rulesets', rulesetId);
+  }
 
   // ---- Read ----
 
   static async getUserRulesets(uid: string): Promise<Ruleset[]> {
-    const ref = collection(db, 'users', uid, this.USER_COLLECTION);
-    const snapshot = await getDocs(ref);
+    const snapshot = await getDocs(this.userRulesetsCol(uid));
     return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }) as Ruleset);
   }
 
   static async getGlobalPresets(): Promise<Ruleset[]> {
-    const ref = collection(db, this.GLOBAL_COLLECTION);
-    const q = query(ref, where('visibility', '==', 'global'));
+    const q = query(this.globalPresetsCol(), where('visibility', '==', 'global'));
     const snapshot = await getDocs(q);
     return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }) as Ruleset);
   }
 
+  /** Fetch a single global preset by ID (e.g. when resolving a CampaignRulesetLink). */
+  static async getGlobalPreset(rulesetId: string): Promise<Ruleset | null> {
+    const snapshot = await getDoc(this.globalPresetDoc(rulesetId));
+    if (!snapshot.exists()) return null;
+    return { id: snapshot.id, ...snapshot.data() } as Ruleset;
+  }
+
+  /** Fetch a user-owned ruleset by ID. Returns null if not found. */
   static async getRuleset(uid: string, rulesetId: string): Promise<Ruleset | null> {
-    const ref = doc(db, 'users', uid, this.USER_COLLECTION, rulesetId);
-    const snapshot = await getDoc(ref);
+    const snapshot = await getDoc(this.userRulesetDoc(uid, rulesetId));
     if (!snapshot.exists()) return null;
     return { id: snapshot.id, ...snapshot.data() } as Ruleset;
   }
@@ -52,9 +79,7 @@ export class RulesetService {
       updatedAt: now,
     };
 
-    const ref = collection(db, 'users', uid, this.USER_COLLECTION);
-    const docRef = await addDoc(ref, data as unknown as Record<string, unknown>);
-
+    const docRef = await addDoc(this.userRulesetsCol(uid), data as unknown as Record<string, unknown>);
     return { id: docRef.id, ...data };
   }
 
@@ -75,15 +100,12 @@ export class RulesetService {
       updatedAt: new Date().toISOString(),
     };
 
-    const ref = doc(db, 'users', uid, this.USER_COLLECTION, rulesetId);
-    await updateDoc(ref, updated as unknown as Record<string, unknown>);
-
+    await updateDoc(this.userRulesetDoc(uid, rulesetId), updated as unknown as Record<string, unknown>);
     return updated;
   }
 
   static async deleteRuleset(uid: string, rulesetId: string): Promise<void> {
-    const ref = doc(db, 'users', uid, this.USER_COLLECTION, rulesetId);
-    await deleteDoc(ref);
+    await deleteDoc(this.userRulesetDoc(uid, rulesetId));
   }
 
   // ---- Campaign sync ----
