@@ -27,10 +27,7 @@ type Ruleset = {
 
 // ---- Helpers ----
 
-let _warnCounter = 0;
-function warnId(prefix: string): string {
-  return `${prefix}-${++_warnCounter}`;
-}
+type WarnId = (prefix: string) => string;
 
 function warn(
   id: string,
@@ -41,6 +38,12 @@ function warn(
   return { id, section, message, detail, isAcknowledged: false };
 }
 
+/** Creates a fresh ID generator scoped to a single validate() call. */
+function makeWarnId(): WarnId {
+  let seq = 0;
+  return (prefix: string) => `${prefix}-${++seq}`;
+}
+
 // ---- DraftValidationService ----
 
 export class DraftValidationService {
@@ -49,7 +52,7 @@ export class DraftValidationService {
    * Returns an array of warnings (empty = clean).
    */
   static validate(draft: CharacterDraft, ruleset: Ruleset): EntryValidationWarning[] {
-    _warnCounter = 0; // reset so IDs are deterministic per validate() call
+    const warnId = makeWarnId(); // scoped counter — safe under parallel calls and test isolation
 
     const timeline = DraftStateResolver.buildTimeline(draft, ruleset);
     const { totalHD } = timeline;
@@ -58,20 +61,20 @@ export class DraftValidationService {
     const intMod = abilityModifier(intTotal);
 
     return [
-      ...this.checkIdentity(draft),
-      ...this.checkAbilities(draft, totalHD),
-      ...this.checkLevelIncrements(draft, totalHD),
-      ...this.checkClassPrerequisites(draft, ruleset, timeline),
-      ...this.checkFeatPrerequisites(draft, ruleset, timeline),
-      ...this.checkTraitCount(draft, ruleset),
-      ...this.checkSkillRanks(draft, totalHD, intMod),
-      ...this.checkSpellcastingAdvancement(draft),
+      ...this.checkIdentity(draft, warnId),
+      ...this.checkAbilities(draft, totalHD, warnId),
+      ...this.checkLevelIncrements(draft, totalHD, warnId),
+      ...this.checkClassPrerequisites(draft, ruleset, timeline, warnId),
+      ...this.checkFeatPrerequisites(draft, ruleset, timeline, warnId),
+      ...this.checkTraitCount(draft, ruleset, warnId),
+      ...this.checkSkillRanks(draft, totalHD, intMod, warnId),
+      ...this.checkSpellcastingAdvancement(draft, warnId),
     ];
   }
 
   // ---- Identity ----
 
-  private static checkIdentity(draft: CharacterDraft): EntryValidationWarning[] {
+  private static checkIdentity(draft: CharacterDraft, warnId: WarnId): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
 
     if (!draft.name.trim()) {
@@ -92,6 +95,7 @@ export class DraftValidationService {
   private static checkAbilities(
     draft: CharacterDraft,
     totalHD: number,
+    warnId: WarnId,
   ): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
     const keys: (keyof typeof draft.abilities)[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
@@ -110,6 +114,7 @@ export class DraftValidationService {
           ),
         );
       }
+      // Covers all abilities including CON — no separate CON check needed below
       if (total <= 0) {
         w.push(
           warn(
@@ -121,19 +126,6 @@ export class DraftValidationService {
       }
     }
 
-    if (totalHD === 0) return w; // can't check CON meaningfully with no HD
-
-    const conTotal = abilityTotal(draft.abilities.con);
-    if (conTotal <= 0) {
-      w.push(
-        warn(
-          warnId('ability-con-zero'),
-          'abilities',
-          'CON total is 0 or less — living characters require positive Constitution.',
-        ),
-      );
-    }
-
     return w;
   }
 
@@ -142,6 +134,7 @@ export class DraftValidationService {
   private static checkLevelIncrements(
     draft: CharacterDraft,
     totalHD: number,
+    warnId: WarnId,
   ): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
     const expected = Math.floor(totalHD / 4);
@@ -179,6 +172,7 @@ export class DraftValidationService {
     draft: CharacterDraft,
     ruleset: Ruleset,
     timeline: ECLTimeline,
+    warnId: WarnId,
   ): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
 
@@ -317,6 +311,7 @@ export class DraftValidationService {
     draft: CharacterDraft,
     ruleset: Ruleset,
     timeline: ECLTimeline,
+    warnId: WarnId,
   ): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
 
@@ -326,8 +321,12 @@ export class DraftValidationService {
       const featDef = getFeatById(slot.featId);
       if (!featDef || featDef.prerequisites.length === 0) continue;
 
-      const snapshot = DraftStateResolver.snapshotAtECL(draft, slot.availableAtLevel, ruleset);
-      if (!snapshot) continue;
+      // snapshotBeforeECL: prerequisites must be met *before* the feat is taken.
+      // Returns null at ECL 1 (no prior state) — use EMPTY_SNAPSHOT so prereqs are
+      // correctly evaluated as unmet rather than silently skipped.
+      const snapshot =
+        DraftStateResolver.snapshotBeforeECL(draft, slot.availableAtLevel, ruleset) ??
+        DraftStateResolver.EMPTY_SNAPSHOT;
 
       // Cast snapshot as Character — structurally compatible for the fields PrerequisiteService reads
       const result = PrerequisiteService.checkPrerequisites(
@@ -355,6 +354,7 @@ export class DraftValidationService {
   private static checkTraitCount(
     draft: CharacterDraft,
     ruleset: Ruleset,
+    warnId: WarnId,
   ): EntryValidationWarning[] {
     const maxTraits = ruleset.validationSettings.maxTraits;
     if (draft.traits.length <= maxTraits) return [];
@@ -375,6 +375,7 @@ export class DraftValidationService {
     draft: CharacterDraft,
     totalHD: number,
     intMod: number,
+    warnId: WarnId,
   ): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
 
@@ -419,7 +420,7 @@ export class DraftValidationService {
 
   // ---- Spellcasting advancement ----
 
-  private static checkSpellcastingAdvancement(draft: CharacterDraft): EntryValidationWarning[] {
+  private static checkSpellcastingAdvancement(draft: CharacterDraft, warnId: WarnId): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
 
     for (const entry of draft.classes) {

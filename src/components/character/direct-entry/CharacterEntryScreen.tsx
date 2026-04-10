@@ -190,13 +190,9 @@ export function CharacterEntryScreen() {
               backgroundColor: unacknowledgedCount > 0 ? fantasy.gold : '#4CAF50',
             },
           ]}
-          onPress={() => {
-            if (lastValidatedAt !== null) {
-              setShowValidationSheet(true); // re-open existing results
-            } else {
-              handleValidate(); // run validation first time
-            }
-          }}
+          onPress={() => setShowValidationSheet(true)}
+          // FAB only renders when lastValidatedAt !== null (showValidationFAB).
+          // First-run validation is triggered by the header Validate button (handleValidate).
           accessibilityRole="button"
           accessibilityLabel={
             unacknowledgedCount > 0

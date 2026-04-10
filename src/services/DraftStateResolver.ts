@@ -221,20 +221,20 @@ export class DraftStateResolver {
     withECL.sort((a, b) => a.atECL - b.atECL);
 
     // Merge base sequence with positioned acquired LA decisions.
-    // `atECL` refers to the position in the FINAL sequence (after all insertions).
+    // `atECL` is the 1-based position in the FINAL timeline (after all insertions).
+    // We use result.length as the position counter — it naturally tracks all items
+    // placed so far (base + previously inserted acquired), so `result.length === atECL - 1`
+    // means the next push will land at position atECL.
     const base: LevelUpDecision[] = [...inherited, ...classLevels];
     const result: LevelUpDecision[] = [];
     let baseIdx = 0;
-    let currentECL = 0;
 
     for (const { decision, atECL } of withECL) {
-      // Advance base sequence until we've placed enough decisions before this ECL
-      while (baseIdx < base.length && currentECL < atECL - 1) {
+      // Drain base decisions until the next item in result will be at position atECL
+      while (baseIdx < base.length && result.length < atECL - 1) {
         result.push(base[baseIdx++]);
-        currentECL++;
       }
       result.push(decision);
-      currentECL++;
     }
 
     // Append remaining base decisions
