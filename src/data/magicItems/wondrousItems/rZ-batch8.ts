@@ -1,0 +1,173 @@
+import type { WondrousItemDefinition } from '@/types/magicItems';
+import { AuraStrength, MagicSchool } from '@/types/equipment';
+
+export const wondrousItemsRZ8: WondrousItemDefinition[] = [
+  {
+    id: 'wondrous-stole-of-justice',
+    name: 'Stole of Justice',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
+    casterLevel: 5,
+    slot: 'shoulders',
+    price: 18000,
+    weight: 1,
+    description:
+      'Black stole with golden scales embroidery. +5 competence on Sense Motive. Zone of truth for up to 5 min/day. ' +
+      'Detect alignment spells give 3-round info on next turn. Inquisitors get jurist weapon bonuses during judgment.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['zone of truth'], cost: 9000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    effects: [
+      { type: 'bonus', bonusType: 'competence', target: 'skill.sense_motive', value: 5, source: 'Stole of Justice' },
+    ],
+  },
+  {
+    id: 'wondrous-stone-familiar',
+    name: 'Stone Familiar',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
+    casterLevel: 3,
+    slot: 'none',
+    price: 6000,
+    weight: 2,
+    description:
+      'Life-sized stone carving of a Tiny animal. Hardness 8, 20 HP. Witches can store up to 500 spell levels (cantrips = 1/2) ' +
+      'and transfer spells between it and their living familiar. Identifying it reveals stored spells.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['share memory'], cost: 3000 },
+    physicalStats: { hardness: 8, hitPoints: 20, breakDC: 20 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.stone_familiar_spell_storage', value: 0, source: 'Stone Familiar' }],
+  },
+  {
+    id: 'wondrous-stone-horse-courser',
+    name: 'Stone Horse (Courser)',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 14,
+    slot: 'none',
+    price: 10000,
+    weight: 6000,
+    description:
+      'A full-sized stone horse figurine that animates on command into a living horse (courser statistics). Hardness 10 in ' +
+      'stone form. Can be ridden and functions as a normal horse while animated.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['animate objects', 'flesh to stone'], cost: 5000 },
+    physicalStats: { hardness: 10, hitPoints: 30, breakDC: 25 },
+    activationCategory: 'command_word',
+    effects: [{ type: 'special', target: 'special.stone_horse_animate', value: 0, source: 'Stone Horse (Courser)' }],
+  },
+  {
+    id: 'wondrous-stone-horse-destrier',
+    name: 'Stone Horse (Destrier)',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 14,
+    slot: 'none',
+    price: 14800,
+    weight: 6000,
+    description:
+      'As the courser but animates into a heavy warhorse (destrier statistics). Hardness 10 in stone form. Functions as a ' +
+      'heavy warhorse for combat and riding while animated.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['animate objects', 'flesh to stone'], cost: 7400 },
+    physicalStats: { hardness: 10, hitPoints: 30, breakDC: 25 },
+    activationCategory: 'command_word',
+    effects: [{ type: 'special', target: 'special.stone_horse_animate', value: 0, source: 'Stone Horse (Destrier)' }],
+  },
+  {
+    id: 'wondrous-stone-of-alarm',
+    name: 'Stone of Alarm',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
+    casterLevel: 3,
+    slot: 'none',
+    price: 2700,
+    weight: 2,
+    description:
+      'Enchanted stone cube that adheres to objects when activated. Triggers a loud alarm audible up to a quarter-mile when ' +
+      'someone touches the object without the proper command word. Screech continues for 1 hour.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['alarm'], cost: 1350 },
+    physicalStats: { hardness: 8, hitPoints: 5, breakDC: 15 },
+    activationCategory: 'command_word',
+    effects: [{ type: 'special', target: 'special.stone_of_alarm', value: 0, source: 'Stone of Alarm' }],
+  },
+  {
+    id: 'wondrous-stone-of-good-luck',
+    name: 'Stone of Good Luck (Luckstone)',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.EVOCATION }],
+    casterLevel: 5,
+    slot: 'none',
+    price: 20000,
+    weight: 0,
+    description:
+      'This small bit of agate grants its possessor a +1 luck bonus on saving throws, ability checks, and skill checks.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['divine favor'], cost: 10000 },
+    physicalStats: { hardness: 8, hitPoints: 3, breakDC: 15 },
+    activationCategory: 'continuous',
+    effects: [
+      { type: 'bonus', bonusType: 'luck', target: 'save.all', value: 1, source: 'Stone of Good Luck (Luckstone)' },
+      { type: 'bonus', bonusType: 'luck', target: 'skill.all', value: 1, source: 'Stone of Good Luck (Luckstone)' },
+    ],
+  },
+  {
+    id: 'wondrous-stonemist-cloak',
+    name: 'Stonemist Cloak',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [
+      { strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION },
+      { strength: AuraStrength.FAINT, school: MagicSchool.ILLUSION },
+    ],
+    casterLevel: 3,
+    slot: 'shoulders',
+    price: 3500,
+    weight: 1,
+    description:
+      'Stone-gray shoulder garment. +5 competence on Stealth in rocky/mountainous terrain with hood raised. Once daily, ' +
+      'generate obscuring mist.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['invisibility', 'obscuring mist'], cost: 1750 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    effects: [
+      { type: 'bonus', bonusType: 'competence', target: 'skill.stealth', value: 5, source: 'Stonemist Cloak', condition: { type: 'custom', params: {}, description: 'rocky/mountainous terrain only, hood raised' } },
+    ],
+  },
+  {
+    id: 'wondrous-sustaining-spoon',
+    name: 'Sustaining Spoon',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
+    casterLevel: 5,
+    slot: 'none',
+    price: 5400,
+    weight: 0,
+    description:
+      'When placed in an empty container, fills it with thick pasty gruel that provides complete nutrition. Tastes like warm ' +
+      'wet cardboard. Produces enough daily to feed up to four humans.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['create food and water'], cost: 2700 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.sustaining_spoon_food', value: 0, source: 'Sustaining Spoon' }],
+  },
+  // Stone Salve already in rZ-batch3, skipped here
+  // Deferred items (AoN pages did not render):
+  // Stinging Stiletto, Stone of Alliance, Stone of Conjuring Earth Elementals,
+  // Stone of Tomb Warding, Stone (Canopic), Stone (Fortifying), Stone (Missive),
+  // Stone (Nightstone of Sorrow), Stone (Scavenger's), Stormlure, Stubborn Nail,
+  // Subtle Slippers, Summon-Slave Crystal, Summoner Slayer Eyes, Summoning Shackle,
+  // Suppression Gem, Swarm Bullet
+];

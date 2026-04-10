@@ -1,0 +1,130 @@
+import type { WondrousItemDefinition } from '@/types/magicItems';
+import { AuraStrength, MagicSchool } from '@/types/equipment';
+
+export const wondrousItemsRZ13: WondrousItemDefinition[] = [
+  {
+    id: 'wondrous-vest-of-escape',
+    name: 'Vest of Escape',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [
+      { strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION },
+      { strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION },
+    ],
+    casterLevel: 4,
+    slot: 'chest',
+    price: 5200,
+    weight: 0,
+    description:
+      'Hidden pockets with enchanted lockpicks grant +4 competence on Disable Device and +6 competence on Escape Artist.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['knock', 'grease'], cost: 2600 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'continuous',
+    effects: [
+      { type: 'bonus', bonusType: 'competence', target: 'skill.disable_device', value: 4, source: 'Vest of Escape' },
+      { type: 'bonus', bonusType: 'competence', target: 'skill.escape_artist', value: 6, source: 'Vest of Escape' },
+    ],
+  },
+  {
+    id: 'wondrous-vest-of-surgery',
+    name: 'Vest of Surgery',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
+    casterLevel: 5,
+    slot: 'chest',
+    price: 3000,
+    weight: 4,
+    description:
+      'Emerald chest garment with four pockets. Provides healer\'s kit benefit for Heal checks. 1/day DC 20 Heal to treat ' +
+      'deadly wounds restoring 1d4 ability damage instead of HP.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['lesser restoration'], cost: 1500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'continuous',
+    effects: [{ type: 'special', target: 'special.vest_surgery_healers_kit', value: 0, source: 'Vest of Surgery' }],
+  },
+  {
+    id: 'wondrous-vest-of-the-cockroach',
+    name: 'Vest of the Cockroach',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.NECROMANCY }],
+    casterLevel: 3,
+    slot: 'chest',
+    price: 16000,
+    weight: 2,
+    description:
+      'Red-brown padded vest. Grants rogues the resiliency talent, or if already possessed, increases HP gained to 2 per ' +
+      'rogue level instead of 1.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['false life'], cost: 8000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'continuous',
+    effects: [{ type: 'special', target: 'special.vest_cockroach_resiliency', value: 0, source: 'Vest of the Cockroach' }],
+  },
+  {
+    id: 'wondrous-all-tools-vest',
+    name: 'All Tools Vest',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
+    casterLevel: 1,
+    slot: 'chest',
+    price: 1800,
+    weight: 5,
+    description:
+      'Leather vest with metal buttons. 1/day command word summons all standard tools for any one Craft skill into pockets. ' +
+      'Tools last 24 hours or until another creature touches them.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['summon instrument'], cost: 900 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'command_word',
+    effects: [{ type: 'special', target: 'special.all_tools_vest_summon', value: 0, source: 'All Tools Vest' }],
+  },
+  {
+    id: 'wondrous-druids-vestment',
+    name: "Druid's Vestment",
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 10,
+    slot: 'body',
+    price: 3750,
+    weight: 0,
+    description:
+      'Light green garment with plant/animal embroidery worn over normal clothing or armor. Characters with wild shape gain ' +
+      'one additional use per day.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['polymorph'], cost: 1375 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'continuous',
+    effects: [{ type: 'special', target: 'special.druids_vestment_extra_wild_shape', value: 0, source: "Druid's Vestment" }],
+  },
+  {
+    id: 'wondrous-mnemonic-vestment',
+    name: 'Mnemonic Vestment',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 17,
+    slot: 'body',
+    price: 5000,
+    weight: 1,
+    description:
+      'Blue silk robe with embossed runes. 1/day spontaneous casters can cast a spell from a written source (scroll, spellbook) ' +
+      'if it\'s on their spell list and uses an appropriate slot. Requires 24 hours of continuous wear to activate.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['mnemonic enhancer'], cost: 2500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.mnemonic_vestment_cast_from_scroll', value: 0, source: 'Mnemonic Vestment' }],
+  },
+  // Deferred items (AoN pages did not render):
+  // Verdict of the Nether Courts, Vest of Resonating Fortitude, Vest of Stable Mutation,
+  // Vest of the Deep, Vest of the Vengeful Tracker, Vest (Deadshot), Vest (Mushroom),
+  // Vest (Versatile), Vial of Reckless Courage, Visage of the Bound, Void Dust,
+  // Void Pennant, Voidstick, Volatile Vaporizer, Wand Key Ring, Wand Protector,
+  // Wanderlust Map, Warding Lips, Warlord's Scabbard
+];
