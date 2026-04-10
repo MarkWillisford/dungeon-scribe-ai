@@ -237,27 +237,6 @@ export const wondrousItemsRZFill2: WondrousItemDefinition[] = [
     effects: [{ type: 'special', target: 'special.skyspirit_stone_burn', value: 0, source: 'Skyspirit Stone' }],
   },
   {
-    id: 'wondrous-slippers-of-cloud-walking',
-    name: 'Slippers of Cloud Walking',
-    category: 'wondrous',
-    source: 'Ultimate Equipment',
-    isOfficial: true,
-    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
-    casterLevel: 11,
-    slot: 'feet',
-    price: 4400,
-    weight: 1,
-    description:
-      'These slippers allow the wearer to walk on air (as air walk) for up to 10 minutes per day. This ability functions ' +
-      'only when traversing natural or magical mist and fog, including fog-like gases from spells such as acid fog, cloudkill, ' +
-      'incendiary cloud, or stinking cloud. The wearer can walk atop such clouds but experiences normal effects when ' +
-      'walking through them.',
-    construction: { feats: ['Craft Wondrous Item'], spells: ['wind walk'], cost: 2200 },
-    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
-    activationCategory: 'use_activated',
-    effects: [{ type: 'special', target: 'special.slippers_cloud_walking', value: 0, source: 'Slippers of Cloud Walking' }],
-  },
-  {
     id: 'wondrous-slippers-of-the-primordial-wilds',
     name: 'Slippers of the Primordial Wilds',
     category: 'wondrous',
@@ -1784,26 +1763,6 @@ export const wondrousItemsRZFill2: WondrousItemDefinition[] = [
     physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [{ type: 'special', target: 'special.viper_tattoo_summon', value: 0, source: 'Viper Tattoo' }],
-  },
-  {
-    id: 'wondrous-weapon-tattoo',
-    name: 'Weapon Tattoo',
-    category: 'wondrous',
-    source: 'Dirty Tactics Toolbox',
-    isOfficial: true,
-    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
-    casterLevel: 5,
-    slot: 'none',
-    price: 10000,
-    weight: 0,
-    description:
-      'A tattoo that stores a single weapon sized for the bearer. When empty, appears as an empty sword sheath. When a ' +
-      'weapon is stored, displays that weapon\'s form. Storing takes a full-round action; retrieval requires only a swift ' +
-      'action. Occupies one arm and summons the weapon into that arm\'s hand automatically. Cannot summon if the hand is occupied.',
-    construction: { feats: ['Inscribe Magical Tattoo'], spells: ['disguise weapon'], cost: 5000 },
-    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
-    activationCategory: 'use_activated',
-    effects: [{ type: 'special', target: 'special.weapon_tattoo_store', value: 0, source: 'Weapon Tattoo' }],
   },
   {
     id: 'wondrous-teleporting-climbing-rig',
