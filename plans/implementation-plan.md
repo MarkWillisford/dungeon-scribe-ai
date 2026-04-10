@@ -1,6 +1,6 @@
 # Dungeon Scribe AI 1.1 — Implementation Plan
 
-## Status (as of 2026-03-28)
+## Status (as of 2026-04-09)
 
 All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown significantly beyond the original plan through additional phases.
 
@@ -22,8 +22,8 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 
 | Work                                                | Plan                                      | Status                                                    |
 | --------------------------------------------------- | ----------------------------------------- | --------------------------------------------------------- |
-| **Ruleset system** (types, presets, service, Redux) | `ruleset-system.md`                       | NOT STARTED — **prerequisite for validation**             |
-| `ValidationReportSheet` + validation wiring         | `direct-entry-ui-design.md`               | NOT STARTED — blocked on Ruleset system                   |
+| **Ruleset system** (types, presets, service, Redux) | `ruleset-system.md`                       | **COMPLETE** — PR #49 (merged)                            |
+| Draft Validation System (`DraftStateResolver`, `DraftValidationService`, `ValidationReportSheet`) | `draft-validation-system.md` | NOT STARTED — ruleset system now unblocked |
 | Magic items — types + equipment cleanup (PR 1)      | `magic-items.md`                          | IN PROGRESS — `MW/magic-items-types` branch               |
 | Magic items — data scraping (PR 2)                  | `magic-items.md`                          | NOT STARTED — blocked on PR 1 merge                       |
 | Feats expansion                                     | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PRs #18, #24, #25, #26 open (~2,908 feats) |
