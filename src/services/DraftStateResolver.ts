@@ -6,13 +6,22 @@
 // The resulting DraftCharacterSnapshot at each checkpoint is structurally compatible
 // with the fields PrerequisiteService.checkSingle reads from Character, so it can
 // be cast via `snapshot as unknown as Character` for those calls.
+//
+// NOTE: Ruleset type defined locally until PR #49 merges and @/types/ruleset is available.
+// After rebase onto post-#49 main, replace this with: import type { Ruleset } from '@/types/ruleset';
 
 import type { CharacterDraft, DraftClassEntry, AbilityKey } from '@/types/characterDraft';
+
+// Minimal Ruleset shape — only the fields DraftStateResolver needs.
+// Replace with the real Ruleset import after PR #49 merges.
+type Ruleset = {
+  optionalRules: {
+    fractionalBABSaves: boolean;
+  };
+};
 import {
   computeTotalBAB,
-  computeBaseFort,
-  computeBaseRef,
-  computeBaseWill,
+  computeTotalBABFractional,
   lookupClassData,
 } from '@/utils/characterComputations';
 
@@ -80,15 +89,16 @@ export class DraftStateResolver {
   /**
    * Build the full ECL timeline for a CharacterDraft.
    * Each checkpoint represents one ECL step with the character's state at that point.
+   *
+   * Pass `ruleset` to apply optional rules (e.g. fractionalBABSaves).
    */
-  static buildTimeline(draft: CharacterDraft): ECLTimeline {
+  static buildTimeline(draft: CharacterDraft, ruleset?: Ruleset): ECLTimeline {
     const decisions = this.buildDecisionSequence(draft);
 
     const checkpoints: ECLCheckpoint[] = [];
     let ecl = 0;
     let hd = 0;
 
-    // Running class totals for snapshot computation
     const runningClassLevels = new Map<string, number>();
 
     for (const decision of decisions) {
@@ -103,7 +113,7 @@ export class DraftStateResolver {
       }
 
       const partialClasses = this.buildPartialClassEntries(runningClassLevels);
-      const snapshot = this.buildSnapshot(draft, partialClasses, ecl, hd);
+      const snapshot = this.buildSnapshot(draft, partialClasses, ecl, hd, ruleset);
 
       checkpoints.push({ ecl, hd, decision, snapshot });
     }
@@ -122,8 +132,12 @@ export class DraftStateResolver {
    * Get the character snapshot at a specific ECL (state *after* that ECL step).
    * Returns null if ECL is out of range.
    */
-  static snapshotAtECL(draft: CharacterDraft, ecl: number): DraftCharacterSnapshot | null {
-    const timeline = this.buildTimeline(draft);
+  static snapshotAtECL(
+    draft: CharacterDraft,
+    ecl: number,
+    ruleset?: Ruleset,
+  ): DraftCharacterSnapshot | null {
+    const timeline = this.buildTimeline(draft, ruleset);
     return timeline.checkpoints.find((c) => c.ecl === ecl)?.snapshot ?? null;
   }
 
@@ -132,9 +146,13 @@ export class DraftStateResolver {
    * before making the decision at that ECL. Used for prereq checks.
    * Returns null if ECL <= 1 (no prior state).
    */
-  static snapshotBeforeECL(draft: CharacterDraft, ecl: number): DraftCharacterSnapshot | null {
+  static snapshotBeforeECL(
+    draft: CharacterDraft,
+    ecl: number,
+    ruleset?: Ruleset,
+  ): DraftCharacterSnapshot | null {
     if (ecl <= 1) return null;
-    return this.snapshotAtECL(draft, ecl - 1);
+    return this.snapshotAtECL(draft, ecl - 1, ruleset);
   }
 
   // ---- Private: decision sequence ----
@@ -142,9 +160,59 @@ export class DraftStateResolver {
   private static buildDecisionSequence(draft: CharacterDraft): LevelUpDecision[] {
     const inherited = this.collectInheritedLA(draft);
     const classLevels = this.expandClassLevels(draft);
-    const acquired = this.collectAcquiredLA(draft, classLevels.length + inherited.length);
 
-    return [...inherited, ...classLevels, ...acquired];
+    // Partition acquired templates by whether they have a specified ECL position
+    type TaggedLA = { decision: LADecision; atECL: number };
+    const withECL: TaggedLA[] = [];
+    const atEnd: LADecision[] = [];
+
+    for (const t of draft.templates) {
+      if (t.appliedAs !== 'LA' || t.isFreeGrant || t.acquired !== 'acquired') continue;
+      const laCount = t.laValue ?? 0;
+      for (let i = 0; i < laCount; i++) {
+        const decision: LADecision = {
+          type: 'la_payment',
+          templateId: t.templateId ?? t.id,
+          templateName: t.templateName,
+        };
+        if (t.acquiredAtECL !== undefined) {
+          // Each LA payment for multi-LA templates occupies consecutive ECL slots
+          withECL.push({ decision, atECL: t.acquiredAtECL + i });
+        } else {
+          atEnd.push(decision);
+        }
+      }
+    }
+
+    // Sort by target ECL so we can merge in order
+    withECL.sort((a, b) => a.atECL - b.atECL);
+
+    // Merge base sequence with positioned acquired LA decisions.
+    // `atECL` refers to the position in the FINAL sequence (after all insertions).
+    const base: LevelUpDecision[] = [...inherited, ...classLevels];
+    const result: LevelUpDecision[] = [];
+    let baseIdx = 0;
+    let currentECL = 0;
+
+    for (const { decision, atECL } of withECL) {
+      // Advance base sequence until we've placed enough decisions before this ECL
+      while (baseIdx < base.length && currentECL < atECL - 1) {
+        result.push(base[baseIdx++]);
+        currentECL++;
+      }
+      result.push(decision);
+      currentECL++;
+    }
+
+    // Append remaining base decisions
+    while (baseIdx < base.length) {
+      result.push(base[baseIdx++]);
+    }
+
+    // Append acquired templates with no specified ECL at the end
+    result.push(...atEnd);
+
+    return result;
   }
 
   /** Inherited LA templates consume ECL slots before any class levels. */
@@ -176,34 +244,6 @@ export class DraftStateResolver {
     );
   }
 
-  /**
-   * Acquired LA templates are placed after all class levels by default.
-   * If acquiredAtECL is set, they're placed at that ECL instead.
-   */
-  private static collectAcquiredLA(
-    draft: CharacterDraft,
-    baseOffset: number,
-  ): LADecision[] {
-    return draft.templates
-      .filter(
-        (t) =>
-          t.appliedAs === 'LA' &&
-          !t.isFreeGrant &&
-          t.acquired === 'acquired',
-      )
-      .flatMap((t) =>
-        Array.from({ length: t.laValue ?? 0 }, () => ({
-          type: 'la_payment' as const,
-          templateId: t.templateId ?? t.id,
-          templateName: t.templateName,
-        })),
-      );
-    // Note: acquiredAtECL-based reordering would require sorting the full sequence.
-    // For direct-entry characters, defaulting acquired templates to end-of-class is
-    // a documented known limitation (see plans/draft-validation-system.md).
-    void baseOffset;
-  }
-
   // ---- Private: partial state ----
 
   private static buildPartialClassEntries(
@@ -226,12 +266,13 @@ export class DraftStateResolver {
     partialClasses: DraftClassEntry[],
     ecl: number,
     hd: number,
+    ruleset?: Ruleset,
   ): DraftCharacterSnapshot {
     return {
       abilityScores: this.buildAbilityScores(draft, hd),
-      classes: this.buildClassesSnapshot(partialClasses, hd),
+      classes: this.buildClassesSnapshot(partialClasses, hd, ruleset),
       feats: this.buildFeatsSnapshot(draft, ecl),
-      skills: this.buildSkillsSnapshot(draft),
+      skills: this.buildSkillsSnapshot(draft, hd),
       info: { race: { name: draft.raceName } },
       spellcasting: this.buildSpellcastingSnapshot(partialClasses),
     };
@@ -252,15 +293,9 @@ export class DraftStateResolver {
         (slot) => slot.ability === key && slot.atHD <= currentHD,
       ).length;
 
-      const total =
-        score.base +
-        score.racial +
-        score.inherent +
-        score.enhancement +
-        score.other +
-        appliedIncrements;
-
-      result[key] = { total };
+      result[key] = {
+        total: score.base + score.racial + score.inherent + score.enhancement + score.other + appliedIncrements,
+      };
     }
 
     return result;
@@ -269,8 +304,12 @@ export class DraftStateResolver {
   private static buildClassesSnapshot(
     partialClasses: DraftClassEntry[],
     hd: number,
+    ruleset?: Ruleset,
   ): DraftCharacterSnapshot['classes'] {
-    const totalBAB = computeTotalBAB(partialClasses);
+    const useFractional = ruleset?.optionalRules.fractionalBABSaves ?? false;
+    const totalBAB = useFractional
+      ? computeTotalBABFractional(partialClasses)
+      : computeTotalBAB(partialClasses);
 
     // Build iterative attack array: [bab, bab-5, bab-10, ...]
     const babArray: number[] = [];
@@ -283,14 +322,8 @@ export class DraftStateResolver {
 
     const classes = partialClasses.map((entry) => {
       const classData = lookupClassData(entry.className);
-      const features = (classData?.classFeatures ?? []).filter(
-        (f) => f.level <= entry.level,
-      );
-      return {
-        name: entry.className,
-        level: entry.level,
-        classFeatures: features,
-      };
+      const features = (classData?.classFeatures ?? []).filter((f) => f.level <= entry.level);
+      return { name: entry.className, level: entry.level, classFeatures: features };
     });
 
     return { baseAttackBonus: babArray, totalLevel: hd, classes };
@@ -302,20 +335,22 @@ export class DraftStateResolver {
   ): DraftCharacterSnapshot['feats'] {
     const feats = draft.featSlots
       .filter((slot) => slot.availableAtLevel <= ecl && slot.featId)
-      .map((slot) => ({
-        featId: slot.featId!,
-        choices: {},
-      }));
-
+      .map((slot) => ({ featId: slot.featId!, choices: {} }));
     return { feats };
   }
 
+  /**
+   * Best-case skill ranks: at any checkpoint with HD = N, the most ranks a character
+   * could possibly have in any skill is min(totalRanksInSkill, N).
+   * This gives prereq checks the benefit of the doubt without requiring per-level tracking.
+   */
   private static buildSkillsSnapshot(
     draft: CharacterDraft,
+    currentHD: number,
   ): Record<string, { ranks: number }> {
     const result: Record<string, { ranks: number }> = {};
     for (const [key, entry] of Object.entries(draft.skills)) {
-      result[key] = { ranks: entry.ranks };
+      result[key] = { ranks: Math.min(entry.ranks, currentHD) };
     }
     return result;
   }
@@ -323,18 +358,12 @@ export class DraftStateResolver {
   private static buildSpellcastingSnapshot(
     partialClasses: DraftClassEntry[],
   ): DraftCharacterSnapshot['spellcasting'] {
-    const pools: Array<{ baseCasterLevel: number; baseClass: string }> = [];
-
-    for (const entry of partialClasses) {
-      const classData = lookupClassData(entry.className);
-      if (classData && classData.spellcasting.type !== 'None') {
-        pools.push({
-          baseCasterLevel: entry.level,
-          baseClass: entry.className,
-        });
-      }
-    }
-
+    const pools = partialClasses
+      .filter((entry) => {
+        const classData = lookupClassData(entry.className);
+        return classData && classData.spellcasting.type !== 'None';
+      })
+      .map((entry) => ({ baseCasterLevel: entry.level, baseClass: entry.className }));
     return { pools };
   }
 }

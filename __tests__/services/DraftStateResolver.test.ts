@@ -5,12 +5,21 @@ import { Alignment } from '@/types/base';
 // Mock class data so tests don't depend on the full class catalog
 jest.mock('@/utils/characterComputations', () => ({
   computeTotalBAB: jest.fn((classes: { className: string; level: number }[]) => {
-    // Fighter = Full BAB, Wizard = Low BAB, Rogue = Medium BAB
+    // Fighter = Full BAB (1.0), Wizard = Low BAB (0.5), Rogue = Medium BAB (0.75)
     return classes.reduce((sum, c) => {
       if (c.className === 'Fighter') return sum + c.level;
       if (c.className === 'Wizard') return sum + Math.floor(c.level * 0.5);
-      return sum + Math.floor(c.level * 0.75); // default
+      return sum + Math.floor(c.level * 0.75); // default (Rogue, etc.)
     }, 0);
+  }),
+  computeTotalBABFractional: jest.fn((classes: { className: string; level: number }[]) => {
+    // Fractional: sum raw fractions, floor once
+    const raw = classes.reduce((sum, c) => {
+      if (c.className === 'Fighter') return sum + c.level;
+      if (c.className === 'Wizard') return sum + c.level * 0.5;
+      return sum + c.level * 0.75; // default (Rogue, etc.)
+    }, 0);
+    return Math.floor(raw);
   }),
   computeBaseFort: jest.fn(() => 0),
   computeBaseRef: jest.fn(() => 0),
@@ -296,14 +305,24 @@ describe('DraftStateResolver', () => {
       expect(at5).toHaveLength(2);
     });
 
-    it('skills passed through as-is from draft', () => {
+    it('skills capped at currentHD — best-case assumption', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      // draft has perception: 5, spellcraft: 3
+      draft.classes = [{ id: '1', className: 'Fighter', level: 5, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
 
-      const snapshot = DraftStateResolver.buildTimeline(draft).checkpoints[0].snapshot;
+      const timeline = DraftStateResolver.buildTimeline(draft);
 
-      expect(snapshot.skills['perception']?.ranks).toBe(5);
-      expect(snapshot.skills['spellcraft']?.ranks).toBe(3);
+      // At HD 1: max possible ranks in any skill is 1
+      expect(timeline.checkpoints[0].snapshot.skills['perception']?.ranks).toBe(1);
+      expect(timeline.checkpoints[0].snapshot.skills['spellcraft']?.ranks).toBe(1);
+
+      // At HD 3: spellcraft (total 3) fully available; perception (total 5) capped at 3
+      expect(timeline.checkpoints[2].snapshot.skills['perception']?.ranks).toBe(3);
+      expect(timeline.checkpoints[2].snapshot.skills['spellcraft']?.ranks).toBe(3);
+
+      // At HD 5: perception (total 5) fully available
+      expect(timeline.checkpoints[4].snapshot.skills['perception']?.ranks).toBe(5);
+      expect(timeline.checkpoints[4].snapshot.skills['spellcraft']?.ranks).toBe(3);
     });
 
     it('race name passed from draft', () => {
@@ -397,6 +416,115 @@ describe('DraftStateResolver', () => {
       draft.classes = [{ id: '1', className: 'Fighter', level: 3, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
 
       expect(DraftStateResolver.snapshotBeforeECL(draft, 1)).toBeNull();
+    });
+  });
+
+  describe('acquiredAtECL ordering', () => {
+    it('acquired LA with acquiredAtECL is inserted at the specified position', () => {
+      const draft = blankDraft();
+      draft.classes = [{ id: '1', className: 'Fighter', level: 4, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.templates = [{
+        id: 'tpl-1',
+        templateId: 'werewolf',
+        templateName: 'Werewolf',
+        appliedAs: 'LA',
+        laValue: 1,
+        acquired: 'acquired',
+        acquiredAtECL: 3,
+        isFreeGrant: false,
+      }];
+
+      const timeline = DraftStateResolver.buildTimeline(draft);
+
+      // Sequence: Fighter1, Fighter2, AcqLA(ECL3), Fighter3, Fighter4
+      expect(timeline.checkpoints).toHaveLength(5);
+      expect(timeline.checkpoints[0].decision).toMatchObject({ type: 'class', className: 'Fighter', classLevel: 1 });
+      expect(timeline.checkpoints[1].decision).toMatchObject({ type: 'class', className: 'Fighter', classLevel: 2 });
+      expect(timeline.checkpoints[2].decision).toMatchObject({ type: 'la_payment', templateName: 'Werewolf' });
+      expect(timeline.checkpoints[3].decision).toMatchObject({ type: 'class', className: 'Fighter', classLevel: 3 });
+      expect(timeline.checkpoints[4].decision).toMatchObject({ type: 'class', className: 'Fighter', classLevel: 4 });
+    });
+
+    it('acquired LA without acquiredAtECL appended at end', () => {
+      const draft = blankDraft();
+      draft.classes = [{ id: '1', className: 'Fighter', level: 3, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.templates = [{
+        id: 'tpl-1',
+        templateId: 'werewolf',
+        templateName: 'Werewolf',
+        appliedAs: 'LA',
+        laValue: 1,
+        acquired: 'acquired',
+        isFreeGrant: false,
+      }];
+
+      const timeline = DraftStateResolver.buildTimeline(draft);
+
+      // Sequence: Fighter1, Fighter2, Fighter3, AcqLA
+      expect(timeline.checkpoints).toHaveLength(4);
+      expect(timeline.checkpoints[3].decision.type).toBe('la_payment');
+    });
+
+    it('multi-LA acquired template with acquiredAtECL places payments consecutively', () => {
+      const draft = blankDraft();
+      draft.classes = [{ id: '1', className: 'Fighter', level: 5, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.templates = [{
+        id: 'tpl-1',
+        templateId: 'half-dragon',
+        templateName: 'Half-Dragon',
+        appliedAs: 'LA',
+        laValue: 2,
+        acquired: 'acquired',
+        acquiredAtECL: 3,
+        isFreeGrant: false,
+      }];
+
+      const timeline = DraftStateResolver.buildTimeline(draft);
+
+      // Sequence: F1, F2, LA(ECL3), LA(ECL4), F3, F4, F5
+      expect(timeline.checkpoints).toHaveLength(7);
+      expect(timeline.checkpoints[2].decision.type).toBe('la_payment');
+      expect(timeline.checkpoints[3].decision.type).toBe('la_payment');
+      expect(timeline.checkpoints[4].decision).toMatchObject({ type: 'class', classLevel: 3 });
+    });
+  });
+
+  describe('fractional BAB', () => {
+    it('standard BAB: each class contribution floored individually', () => {
+      const draft = blankDraft();
+      // Wizard 1 standard: floor(1 * 0.5) = 0
+      draft.classes = [{ id: '1', className: 'Wizard', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+
+      const timeline = DraftStateResolver.buildTimeline(draft);
+      expect(timeline.checkpoints[0].snapshot.classes.baseAttackBonus[0]).toBe(0);
+    });
+
+    it('fractional BAB: sum fractions then floor, giving higher BAB for multiclass', () => {
+      const draft = blankDraft();
+      // Fighter 1 (full, 1.0) + Wizard 1 (low, 0.5) = 1.5 → floor = 1
+      // Standard: floor(1) + floor(0.5) = 1 + 0 = 1 (same here)
+      // Fighter 1 + Wizard 1 + Wizard 1 = 1.0 + 0.5 + 0.5 = 2.0 → floor = 2
+      // Standard would be: 1 + floor(2*0.5) = 1 + 1 = 2 (also same)
+      // Use a case that diverges: Fighter2/Wizard1 = 2+0=2 standard vs floor(2+0.5)=2 fractional
+      // Rogue3/Wizard3 = floor(3*0.75)+floor(3*0.5) = 2+1=3 standard vs floor(3*0.75+3*0.5)=floor(2.25+1.5)=floor(3.75)=3
+      // Rogue1/Wizard1 = floor(0.75)+floor(0.5)=0+0=0 standard vs floor(0.75+0.5)=floor(1.25)=1 fractional
+      draft.classes = [
+        { id: '1', className: 'Rogue', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
+        { id: '2', className: 'Wizard', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
+      ];
+
+      const mockRuleset = { optionalRules: { fractionalBABSaves: true } } as Parameters<typeof DraftStateResolver.buildTimeline>[1];
+
+      const standardTimeline = DraftStateResolver.buildTimeline(draft);
+      const fractionalTimeline = DraftStateResolver.buildTimeline(draft, mockRuleset);
+
+      const finalStandard = standardTimeline.checkpoints[1].snapshot.classes.baseAttackBonus[0];
+      const finalFractional = fractionalTimeline.checkpoints[1].snapshot.classes.baseAttackBonus[0];
+
+      // Standard: floor(0.75) + floor(0.5) = 0 + 0 = 0
+      expect(finalStandard).toBe(0);
+      // Fractional: floor(0.75 + 0.5) = floor(1.25) = 1
+      expect(finalFractional).toBe(1);
     });
   });
 });
