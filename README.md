@@ -1,143 +1,151 @@
 # Dungeon Scribe AI
 
-Pathfinder 1e character manager & combat tracker built with React Native, Expo, and Firebase.
+> **Status:** Active development — targeting iOS/Android GA
 
-This project merges the best of two earlier apps: **Dungeon Scribe AI** (comprehensive Pathfinder type system, service layer, character creation) and **Hero's Ledger** (working combat tracker, campaign management, fantasy visual theme, Firebase backend) into a single modern TypeScript codebase.
+**Pathfinder 1e character management and combat tracking for iOS and Android.**
+
+Built for players and Dungeon Masters who need a real tool — not a glorified PDF viewer. Designed from the ground up to handle the full complexity of Pathfinder 1e: multiclass characters, templates, prestige class prerequisites, epic levels, 3.5e ports, and homebrew. AI-powered features are on the near-term roadmap, built on top of a structured game data layer assembled by a multi-agent pipeline.
+
+---
+
+## What It Does
+
+**Character management** — Full Pathfinder 1e character sheet with automatic computation of BAB, saves, AC, skills, spells per day, and ability score breakdowns. Every modifier is traceable to its source.
+
+**Direct-entry import** — Freeform 10-tab editor for importing existing paper characters with no required entry order. Validates on demand; warns but never hard-blocks. Reconstructs the ECL timeline to check prerequisites level-by-level and suggests class reorderings that would resolve conflicts.
+
+**Ruleset system** — Configurable rulesets per character or campaign: allowed source collections, optional rules (Elephant in the Room feat tax removal, Relaxed Entry, fractional BAB/saves, gestalt, mythic, Path of War), explicit item bans, and DM-granted campaign rewards. Three built-in presets: PF1e Standard, PF1e Society, and Go Nuts. Campaign rulesets sync to all linked characters with version-aware drift detection.
+
+**Combat tracker** — Initiative, HP tracking, buff/debuff toggles, attack resolution, and a full dice roller with roll history.
+
+---
+
+## Screenshots
+
+> _Screenshots coming soon — drop simulator captures here._
+
+| Character Entry | Combat Tracker | Ruleset Config |
+| --------------- | -------------- | -------------- |
+| _(screenshot)_  | _(screenshot)_ | _(screenshot)_ |
+
+---
 
 ## Tech Stack
 
-- **TypeScript** -- strict mode, path aliases (`@/*`)
-- **React Native** (Expo SDK 54)
-- **Expo Router** -- file-based navigation with auth gating
-- **Redux Toolkit** -- global state with typed hooks
-- **Firebase** -- Auth, Firestore, Storage (staging + production environments)
-- **NativeWind** -- Tailwind CSS for React Native
-- **React Native Reanimated** -- animations and gestures
+| Layer            | Technology                                 |
+| ---------------- | ------------------------------------------ |
+| Framework        | React Native + Expo SDK 54                 |
+| Navigation       | Expo Router (file-based, auth-gated)       |
+| State management | Redux Toolkit                              |
+| Backend          | Firebase (Auth + Firestore + Storage)      |
+| Styling          | NativeWind (Tailwind CSS for React Native) |
+| Language         | TypeScript (strict mode)                   |
+| Testing          | Jest + React Native Testing Library        |
+| CI/CD            | GitHub Actions + EAS Build                 |
 
-## Prerequisites
+---
 
-- Node.js 20+
-- npm
-- Expo CLI (`npx expo`)
-- Firebase CLI (for deploying rules): included as devDependency
+## Engineering Highlights
 
-## Getting Started
+### Type System
 
-```bash
-# Clone the repo
-git clone git@github.com:MarkWillisford/dungeon-scribe-ai.git
-cd "Dungeon Scribe AI 1.1"
+A 30+ interface TypeScript model covering the full Pathfinder 1e rules surface: ability score layers, BAB/save progressions, feat prerequisites and chains, spell slot tables, archetype feature replacements, class choice definitions (domains, bloodlines, mysteries, rage powers, talents, hexes, exploits, and more), magic item overlays, templates with CR/LA tracking, and a versioned ruleset model. Designed to be the authoritative data contract between the game rules and every service that touches them.
 
-# Install dependencies (--legacy-peer-deps required due to testing library peer dep)
-npm install --legacy-peer-deps
+### AI-Assisted Game Data Pipeline
 
-# Set up environment variables
-cp .env.example .env
-# Fill in your Firebase config values in .env (see Firebase Setup below)
+The game data — ~2,600 feats, 971 traits, ~2,500 spells, 1,176 archetypes, 492 templates, 271 deities, and hundreds of class-specific options across 23 class choice collections — was assembled using a multi-agent scraping pipeline. A scout agent fetches source pages from the Pathfinder SRD, produces a numbered manifest, and passes batches to scraper agents that extract and validate each entry against the TypeScript schema. Output goes directly into typed seed scripts. The pipeline produced **~442,000 lines of structured, type-safe game data across 538 data files** without hand-entry.
 
-# Start the dev server
-npx expo start
-```
+### Services
 
-## Running on a Device
+Pure business logic services, each independently testable without Firebase:
 
-Install **Expo Go** from the App Store (iOS) or Google Play (Android). The app requires Expo SDK 54, so make sure your Expo Go version supports SDK 54.
+- **ModifierPipelineService** — Aggregates all active modifier sources (gear, buffs, feats, racial traits, class abilities), deduplicates by Pathfinder bonus type stacking rules, and resolves the final computed value for any stat.
+- **PrerequisiteService** — Validates feat prerequisites against a character snapshot. Handles feat chains with choice-key matching (Greater Weapon Focus requires Weapon Focus _with the same weapon_).
+- **AbilityScoreService** — Resolves the layered ability score model: base + racial + inherent + level increments + enhancement + other bonuses, with per-source traceability.
+- **CombatService** — Derives all combat statistics from character state: iterative attack bonus strings, touch/flat-footed AC, CMB/CMD, damage resolution.
+- **FormulaService** — Parses and evaluates dice notation and stat-reference expressions.
+- **RulesetService** — Full CRUD for user rulesets; global preset retrieval; character ruleset sync with campaign version tracking.
 
-```bash
-# Standard start (local network — phone and computer must be on same Wi-Fi)
-npx expo start
+### Prerequisite Engine
 
-# Tunnel mode (recommended for WSL2 or when local network doesn't work)
-npx expo start --tunnel
+The `DraftStateResolver` reconstructs a full ECL timeline from a character draft, walking level by level and computing ability scores, BAB, saves, feats, and caster levels at each checkpoint. `DraftValidationService` then checks every feat slot and prestige class entry against the character's state _at the moment they made that choice_ — not their final state. Flags ordering issues and suggests class reorderings that would resolve conflicts. Supports override acknowledgment (trust the player) and cross-section navigation (tap a warning to jump to the relevant section).
 
-# Clear Metro cache if you see stale code after changes
-npx expo start --tunnel --clear
-```
+### Testing
 
-Scan the QR code with your phone camera (iOS) or the Expo Go app (Android) to open the app.
+690 tests across 36 suites covering all services, Redux slices, and UI components. Full branch protection on `main`: typecheck, lint, and full test suite must pass before merge.
 
-## Firebase Setup
-
-1. Go to [Firebase Console](https://console.firebase.google.com) and create a project
-2. Enable **Authentication** (Email/Password sign-in method)
-3. Enable **Cloud Firestore** (start in test mode)
-4. Register a **Web app** in Project Settings and copy the config values
-5. Paste the config values into your `.env` file
-6. Set the Firebase project alias and deploy rules:
-
-```bash
-npx firebase use --add <your-project-id> --alias staging
-npx firebase deploy --only firestore:rules --project staging
-npx firebase deploy --only firestore:indexes --project staging
-```
-
-## Available Scripts
-
-| Command                         | Description                                 |
-| ------------------------------- | ------------------------------------------- |
-| `npm start`                     | Start Expo dev server                       |
-| `npm run ios`                   | Start on iOS simulator                      |
-| `npm run android`               | Start on Android emulator                   |
-| `npm run web`                   | Start in web browser                        |
-| `npm test`                      | Run Jest test suite                         |
-| `npm run test:coverage`         | Run tests with coverage report              |
-| `npm run lint`                  | Lint with ESLint                            |
-| `npm run lint:fix`              | Lint and auto-fix                           |
-| `npm run format`                | Format with Prettier                        |
-| `npm run typecheck`             | TypeScript type checking                    |
-| `npm run firebase:deploy-rules` | Deploy Firestore + Storage rules to staging |
+---
 
 ## Project Structure
 
 ```
-app/            Expo Router screens (file-based routing)
+app/                    Expo Router screens (auth, characters, combat, campaigns)
 src/
-  types/        TypeScript interfaces (Pathfinder data model, 30+ interfaces)
-  store/        Redux Toolkit slices and typed hooks
-  services/     Business logic (pure) + Firebase I/O
-  config/       Firebase initialization, environment config
-  theme/        Colors, fonts, shadows, animations (Hero's Ledger visual port)
-  data/         Static game data (races, classes, skills)
-  components/   Reusable UI components
-  hooks/        Custom React hooks
-__tests__/      Jest tests (services, store, components, integration)
-e2e/            Maestro E2E tests
+  types/                TypeScript interfaces (Pathfinder data model, 30+ interfaces)
+  services/             Business logic (pure) + Firebase I/O
+  store/                Redux Toolkit slices and typed hooks
+  components/           React Native UI (combat tracker, character entry, shared primitives)
+  data/                 Static game data (438 seed files → Firestore)
+  config/               Firebase init, environment configuration
+  theme/                Colors, fonts, shadows, animation constants
+__tests__/              Jest tests (services, store, components, integration)
+scripts/db/             Firestore seed scripts
+plans/                  Design specs and implementation plans
 ```
 
-## Testing
+---
+
+## Roadmap
+
+### Now
+
+- **Draft validation system** — ECL timeline resolver + prerequisite validator + ValidationReportSheet UI
+- **Firestore seeding** — Push all static collections to staging and production
+
+### Next
+
+- **Quick Build wizard** — Guided step-by-step character creation for new players
+- **Campaign management UI** — DM tools for ruleset management, handouts, and session tracking
+- **Enter Rissi** — End-to-end validation of a real level-24 multiclass character; the system integration test
+
+### AI Features
+
+The structured game data layer — 30+ typed interfaces, ~442,000 lines of validated game content — is the foundation the AI features are built on. Planned:
+
+- Natural language rules queries ("Can my character take Arcane Strike at level 7?")
+- Character build suggestions based on feat availability, class synergies, and campaign ruleset
+- Encounter generation and encounter balance estimation
+- In-session DM assistant: condition lookups, spell descriptions, roll narration
+
+### General Availability
+
+- iOS + Android release
+
+---
+
+## Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npx expo start
+
+# Run tests
 npm test
+
+# Type check
+npm run typecheck
+
+# Lint
+npm run lint
 ```
 
-The test suite is organized into three layers:
+Requires `.env` with Firebase credentials — see `.env.example`. Two Firebase environments (staging + production):
 
-- **Service unit tests** -- pure logic functions (character calculations, ability scores, validation)
-- **Component tests** -- React Native component rendering and interaction
-- **Integration tests** -- Redux store + service layer working together
+```bash
+npm run firebase:deploy-rules
+```
 
-Current count: **351 tests**.
-
-All tests must pass before merging. Pre-commit hooks enforce linting and formatting via Husky + lint-staged.
-
-## Architecture
-
-- **Service layer split:** Pure logic services (CharacterService, AbilityScoreService, ValidationService) are separated from Firebase I/O services (FirebaseAuthService, FirebaseCharacterService). This keeps business logic testable without mocking Firebase.
-- **State management:** Redux Toolkit with typed hooks (`useAppSelector`, `useAppDispatch`). Async operations use RTK thunks that call into the service layer.
-- **Routing:** Expo Router provides file-based navigation. Routes are auth-gated so unauthenticated users are redirected to sign-in.
-- **Styling:** NativeWind (Tailwind for RN) with Hero's Ledger's fantasy theme -- custom colors (fantasy-gold, parchment, ink), Cinzel + Libre Baskerville fonts, contextual color schemes for combat, tavern, adventure, and manager views.
-
-## Deployment
-
-The project uses EAS Build with three profiles:
-
-- **development** -- internal builds with dev client
-- **staging** -- staging Firebase environment for QA
-- **production** -- production Firebase environment for release
-
-## Phase Roadmap
-
-- **Phase 1 (current):** Scaffold + Character Management -- project init, type system, theme, Redux store, Firebase config, navigation, UI components, game data
-- **Phase 2:** Combat System -- initiative tracker, turn management, HP/condition tracking, combat log
-- **Phase 3:** Campaigns & Social -- campaign creation, player invites, shared character sheets, session notes
-- **Phase 4:** Advanced Features -- buff/debuff stacking, spell tracking, advanced rule automation
+Three EAS build profiles: `development` (internal dev client), `staging`, and `production`.
