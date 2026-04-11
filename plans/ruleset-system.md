@@ -1,10 +1,25 @@
 # Ruleset System — Design & Implementation Plan
 
-## 2026-04-08
+## 2026-04-09
 
-## Status: NOT STARTED
+## Status: COMPLETE — PR #49
 
-No code has been written for this system. This document captures all design decisions made in design discussion. It is a prerequisite for the Draft Validation System (`plans/draft-validation-system.md`).
+All five implementation phases are done. Files shipped:
+
+| File | Change |
+| --- | --- |
+| `src/types/ruleset.ts` | New — all Ruleset types |
+| `src/types/index.ts` | Added `ruleset: Ruleset`, `campaignRulesetLink?` to `Character`; exported ruleset types |
+| `src/types/characterDraft.ts` | Added `acquiredAtECL?` to `DraftTemplateEntry` |
+| `src/data/rulesets/presets.ts` | New — three system presets |
+| `scripts/db/seedRulesets.ts` | New — idempotent upsert to `rulesets/` collection |
+| `src/services/RulesetService.ts` | New — typed path builders, full CRUD, `getGlobalPreset`, `syncCharacterRuleset` |
+| `src/store/slices/rulesetSlice.ts` | New — Redux slice |
+| `src/store/store.ts` | Wired `rulesetReducer` |
+| `src/services/CharacterService.ts` | Default `ruleset` to `PRESET_PF1E_STANDARD`; bumped schema to `1.2.0` |
+| `src/services/FirebaseCharacterService.ts` | Migration: backfill `PRESET_PF1E_STANDARD` on pre-v1.2.0 documents |
+
+See open items table below for what remains deferred. Original design spec follows.
 
 ---
 
@@ -454,31 +469,16 @@ campaigns/{id}/ruleset              ← Embedded ruleset snapshot on campaign do
 12. Wire ruleset into each validation check
 13. Update tests
 
+**Phase E is deferred** — `DraftValidationService` does not exist yet. This happens in the Draft Validation System PR. The updated signature is already documented in `plans/draft-validation-system.md`.
+
 ---
 
 ## Open Items
 
 | Item                                                                | Status                           | Blocking                               |
 | ------------------------------------------------------------------- | -------------------------------- | -------------------------------------- |
+| Phase E — Wire ruleset into `DraftValidationService`                | NOT STARTED — deferred to validation PR | Draft Validation System PR        |
 | Syren's subset definition — which EitR rules does Mark's table use? | PAUSED — needs Mark input        | `eitrMode: 'syrens_subset'` validation |
 | PF Society banned item list                                         | PAUSED — needs research          | Society preset completeness            |
 | EitR feat/prereq data (lookup table, removed feats, merged feats)   | Separate data plan — NOT STARTED | `eitrMode: 'full'` validation          |
 | Campaign ruleset management UI                                      | Out of scope for current phase   | Campaign management screens (future)   |
-
----
-
-## Files to Create / Modify
-
-| File                                        | Change                                                                     |
-| ------------------------------------------- | -------------------------------------------------------------------------- |
-| `src/types/ruleset.ts`                      | New — all Ruleset types                                                    |
-| `src/types/character.ts`                    | Add `ruleset: Ruleset`, `campaignRulesetLink?`                             |
-| `src/types/characterDraft.ts`               | Add `acquiredAtECL?: number` to `DraftTemplateEntry`                       |
-| `src/data/rulesets/presets.ts`              | New — system presets                                                       |
-| `scripts/db/seedRulesets.ts`                | New — seed presets to Firestore                                            |
-| `src/services/RulesetService.ts`            | New — Firestore CRUD                                                       |
-| `src/store/slices/rulesetSlice.ts`          | New — Redux slice                                                          |
-| `src/services/DraftValidationService.ts`    | Update validate() signature + ruleset-driven checks                        |
-| `__tests__/services/RulesetService.test.ts` | New — service tests                                                        |
-| `plans/draft-validation-system.md`          | Update validator signature, rename acquiredAtHD → acquiredAtECL            |
-| `plans/implementation-plan.md`              | Add Ruleset system as prereq for validation; note campaign UI out of scope |
