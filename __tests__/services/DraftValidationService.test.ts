@@ -1,6 +1,7 @@
 import { DraftValidationService } from '@services/DraftValidationService';
 import type { CharacterDraft, DraftClassEntry } from '@/types/characterDraft';
 import { Alignment } from '@/types/base';
+import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
 
 // ---- Mocks ----
 
@@ -112,10 +113,7 @@ import { PrerequisiteService } from '@services/PrerequisiteService';
 
 // ---- Helpers ----
 
-const DEFAULT_RULESET = {
-  optionalRules: { fractionalBABSaves: false },
-  validationSettings: { maxTraits: 2 },
-};
+const DEFAULT_RULESET = PRESET_PF1E_STANDARD;
 
 function blankDraft(): CharacterDraft {
   return {
