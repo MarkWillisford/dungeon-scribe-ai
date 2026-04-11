@@ -882,7 +882,7 @@ export const wondrousItemsMPFill: WondrousItemDefinition[] = [
     physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'bonus', bonusType: 'morale', target: 'save.next', value: 5, source: 'Parting Glass', condition: { type: 'custom', params: {}, description: 'next saving throw within 24 hours after toast' } },
+      { type: 'bonus', bonusType: 'morale', target: 'save.all', value: 5, source: 'Parting Glass', condition: { type: 'custom', params: {}, description: 'next saving throw within 24 hours after toast' } },
     ],
   },
   {

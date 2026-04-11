@@ -4,7 +4,7 @@ import { AuraStrength, MagicSchool } from '@/types/equipment';
 
 export const wondrousItemsMPRecovered: WondrousItemDefinition[] = [
   {
-    id: 'wondrous-manacles-thorned',
+    id: 'wondrous-thorned-manacles',
     name: 'Thorned Manacles',
     category: 'wondrous', source: 'Ultimate Equipment', isOfficial: true,
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION }],
@@ -110,7 +110,7 @@ export const wondrousItemsMPRecovered: WondrousItemDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 5, breakDC: 20 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'resistance', target: 'save.fire', value: 4, source: 'Iron Guard Pauldrons' },
+      { type: 'bonus', bonusType: 'resistance', target: 'save.reflex', value: 4, source: 'Iron Guard Pauldrons', condition: { type: 'custom', params: {}, description: 'vs. fire effects' } },
     ],
   },
   {

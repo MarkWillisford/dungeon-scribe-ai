@@ -61,7 +61,7 @@ export const wondrousItemsMP5: WondrousItemDefinition[] = [
     activationCategory: 'use_activated',
     effects: [
       { type: 'special', target: 'special.nightdrops_low_light_vision', value: 0, source: 'Nightdrops' },
-      { type: 'penalty', target: 'save.light', value: -2, source: 'Nightdrops' },
+      { type: 'penalty', target: 'save.fortitude', value: -2, source: 'Nightdrops', condition: { type: 'custom', params: {}, description: 'vs. light-based effects' } },
     ],
   },
   {
