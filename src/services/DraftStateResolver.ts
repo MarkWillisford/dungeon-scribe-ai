@@ -7,18 +7,8 @@
 // with the fields PrerequisiteService.checkSingle reads from Character, so it can
 // be cast via `snapshot as unknown as Character` for those calls.
 //
-// NOTE: Ruleset type defined locally until PR #49 merges and @/types/ruleset is available.
-// After rebase onto post-#49 main, replace this with: import type { Ruleset } from '@/types/ruleset';
-
 import type { CharacterDraft, DraftClassEntry, AbilityKey } from '@/types/characterDraft';
-
-// Minimal Ruleset shape — only the fields DraftStateResolver needs.
-// Replace with the real Ruleset import after PR #49 merges.
-type Ruleset = {
-  optionalRules: {
-    fractionalBABSaves: boolean;
-  };
-};
+import type { Ruleset } from '@/types/ruleset';
 import {
   computeTotalBAB,
   computeTotalBABFractional,

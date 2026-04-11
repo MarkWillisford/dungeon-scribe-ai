@@ -3,12 +3,10 @@
 // Returns an array of EntryValidationWarning. Warnings are non-blocking —
 // the user can acknowledge them or override individual checks.
 //
-// NOTE: Uses a local minimal Ruleset type until PR #49 merges.
-// After rebase onto post-#49 main, replace with: import type { Ruleset } from '@/types/ruleset';
-
 import type { CharacterDraft } from '@/types/characterDraft';
 import type { EntryValidationWarning } from '@/store/slices/characterEntrySlice';
 import type { Character } from '@/types';
+import type { Ruleset } from '@/types/ruleset';
 import { DraftStateResolver, type ECLTimeline } from './DraftStateResolver';
 import { PrerequisiteService } from './PrerequisiteService';
 import { getFeatById } from '@/data/feats';
@@ -17,13 +15,6 @@ import {
   abilityTotal,
   abilityModifier,
 } from '@/utils/characterComputations';
-
-// Minimal Ruleset shape — only the fields DraftValidationService needs.
-// Replace with the real Ruleset import after PR #49 merges.
-type Ruleset = {
-  optionalRules: { fractionalBABSaves: boolean };
-  validationSettings: { maxTraits: number };
-};
 
 // ---- Helpers ----
 

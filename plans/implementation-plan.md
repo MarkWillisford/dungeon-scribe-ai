@@ -1,6 +1,6 @@
 # Dungeon Scribe AI 1.1 — Implementation Plan
 
-## Status (as of 2026-04-09)
+## Status (as of 2026-04-11)
 
 All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown significantly beyond the original plan through additional phases.
 
@@ -23,7 +23,7 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 | Work                                                | Plan                                      | Status                                                    |
 | --------------------------------------------------- | ----------------------------------------- | --------------------------------------------------------- |
 | **Ruleset system** (types, presets, service, Redux) | `ruleset-system.md`                       | **COMPLETE** — PR #49 (merged)                            |
-| Draft Validation System (`DraftStateResolver`, `DraftValidationService`, `ValidationReportSheet`) | `draft-validation-system.md` | NOT STARTED — ruleset system now unblocked |
+| **Draft Validation System** (`DraftStateResolver`, `DraftValidationService`, `ValidationReportSheet`) | `draft-validation-system.md` | **COMPLETE** — PR #50 open (awaiting review) |
 | Magic items — types + equipment cleanup (PR 1)      | `magic-items.md`                          | IN PROGRESS — `MW/magic-items-types` branch               |
 | Magic items — data scraping (PR 2)                  | `magic-items.md`                          | NOT STARTED — blocked on PR 1 merge                       |
 | Feats expansion                                     | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PRs #18, #24, #25, #26 open (~2,908 feats) |
@@ -39,9 +39,9 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 
 The Ruleset system (`ruleset-system.md`) covers types, Firestore structure, presets, `RulesetService`, and Redux. The **UI for DMs to create/edit/manage campaign rulesets** is explicitly out of scope until campaign management screens are built in a later phase. The data layer ships first; the UI follows.
 
-#### Note: `Effect.type` enum needs redesign
+#### Note: `Effect.type` enum — COMPLETE
 
-`Effect.type` in `src/types/base.ts` currently has values: `'bonus' | 'special' | 'damage' | 'resistance' | 'penalty' | 'custom'`. These are too vague to be useful — a scraper writing feat data doesn't know which to use, so they invent their own (e.g. `skill_bonus`, `save_dc_bonus`, `caster_level_bonus`, `spell_like_ability`). The enum mixes semantic categories (what kind of thing it is) with mechanical categories (how it applies). Before PR 2 data scraping begins, this should be redesigned to be unambiguous and cover the full range of Pathfinder mechanical effects. Consider consulting the PF1e rules to enumerate the actual modifier categories the engine needs to handle.
+`Effect.type` and `Effect.target` were locked down in PR #29 (merged). Valid values: `'bonus' | 'special' | 'damage' | 'resistance' | 'penalty' | 'custom'`.
 
 ---
 

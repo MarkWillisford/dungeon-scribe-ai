@@ -6,6 +6,7 @@ import { CharacterEntryHeader } from './CharacterEntryHeader';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setActiveTab, setValidationWarnings, type EntryTabKey, type TabStatus } from '@/store/slices/characterEntrySlice';
 import { DraftValidationService } from '@/services/DraftValidationService';
+import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
 import { ValidationReportSheet } from './ValidationReportSheet';
 import { IdentitySection } from './IdentitySection';
 import { AbilityScoreEntryPanel } from './AbilityScoreEntryPanel';
@@ -91,13 +92,6 @@ function useTabStatus(): Record<EntryTabKey, TabStatus> {
 
 // ---- Main screen ----
 
-// Minimal Ruleset for validation until PR #49 merges and the Redux ruleset slice is available.
-// After rebase onto post-#49 main, read from: useAppSelector(state => state.ruleset.activeRuleset)
-const DEFAULT_VALIDATION_RULESET = {
-  optionalRules: { fractionalBABSaves: false },
-  validationSettings: { maxTraits: 2 },
-} as const;
-
 export function CharacterEntryScreen() {
   const { colors, fantasy } = useTheme();
   const dispatch = useAppDispatch();
@@ -105,6 +99,7 @@ export function CharacterEntryScreen() {
   const draft = useAppSelector((state) => state.characterEntry.draft);
   const warnings = useAppSelector((state) => state.characterEntry.validationWarnings);
   const lastValidatedAt = useAppSelector((state) => state.characterEntry.lastValidatedAt);
+  const ruleset = useAppSelector((state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD);
   const tabStatus = useTabStatus();
 
   const [showValidationSheet, setShowValidationSheet] = useState(false);
@@ -118,10 +113,10 @@ export function CharacterEntryScreen() {
   );
 
   const handleValidate = useCallback(() => {
-    const newWarnings = DraftValidationService.validate(draft, DEFAULT_VALIDATION_RULESET);
+    const newWarnings = DraftValidationService.validate(draft, ruleset);
     dispatch(setValidationWarnings(newWarnings));
     setShowValidationSheet(true);
-  }, [draft, dispatch]);
+  }, [draft, ruleset, dispatch]);
 
   const handleSave = useCallback(() => {
     // Save logic will be wired when the characters service is connected
