@@ -183,7 +183,7 @@ export const specificWeaponsBatch3: MagicWeaponDefinition[] = [
     baseWeaponId: 'naval_hook', enhancementBonus: 1, weaponSpecialAbilities: [],
   },
   {
-    id: 'weapon-forgefahers-sledge',
+    id: 'weapon-forgefathers-sledge',
     name: "Forgefather's Sledge",
     category: 'magic_weapon', source: 'Inner Sea Gods', isOfficial: true,
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }, { strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
@@ -191,7 +191,8 @@ export const specificWeaponsBatch3: MagicWeaponDefinition[] = [
     description: 'Dwarven-face warhammer that transforms into a blacksmithing hammer on command. Provides fire resistance 1. When placed in fire for 1+ minute, the head glows and deals +1 fire damage for 1d4 minutes.',
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['resist energy', 'shrink item'], cost: 2312 },
     physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
-    activationCategory: 'use_activated', effects: [],
+    activationCategory: 'use_activated',
+    effects: [{ type: 'bonus', bonusType: 'untyped', target: 'energy_resistance.fire', value: 1, source: "Forgefather's Sledge" }],
     baseWeaponId: 'warhammer', enhancementBonus: 1, weaponSpecialAbilities: [],
   },
   {

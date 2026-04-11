@@ -127,7 +127,7 @@ export const specificWeaponsBatch10: MagicWeaponDefinition[] = [
   },
   // 235
   {
-    id: 'weapon-tigresss-strand',
+    id: 'weapon-tigress-strand',
     name: "Tigress's Strand",
     category: 'magic_weapon', source: 'Lost Treasures', isOfficial: true,
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],

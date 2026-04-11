@@ -26,13 +26,6 @@ export const weaponAbilitiesBatch2: ItemSpecialAbility[] = [
     effects: [],
   },
   {
-    id: 'corrosive',
-    name: 'Corrosive',
-    description: 'Deals +1d6 acid damage on a successful hit.',
-    bonusEquivalent: 1, casterLevel: 10,
-    effects: [],
-  },
-  {
     id: 'courageous',
     name: 'Courageous',
     description: 'Grants the wielder a morale bonus on saving throws against fear equal to half the weapon\'s enhancement bonus (minimum +1).',

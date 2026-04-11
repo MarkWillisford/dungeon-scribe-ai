@@ -47,18 +47,6 @@ export const specificWeaponsBatch14: MagicWeaponDefinition[] = [
     baseWeaponId: 'warhammer', enhancementBonus: 3, weaponSpecialAbilities: [],
   },
   // 329
-  {
-    id: 'weapon-gauntlets-of-skill-at-arms',
-    name: 'Gauntlets of Skill at Arms',
-    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
-    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
-    casterLevel: 8, slot: 'hands', price: 30302, weight: 1,
-    description: 'Leather gauntlets with silvered steel plates. The wearer is considered proficient with longbows, composite longbows, longswords, rapiers, shortbows, composite shortbows, and any weapon with "elven" in its name. If already proficient with such a weapon, the wearer gains a +1 competence bonus on attack and damage rolls with it. Both gauntlets must be worn for effectiveness.',
-    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['heroism'], cost: 15151 },
-    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
-    activationCategory: 'continuous', effects: [],
-    baseWeaponId: 'unarmed_strike', enhancementBonus: 1, weaponSpecialAbilities: [],
-  },
   // 330
   {
     id: 'weapon-devil-catcher',
@@ -264,7 +252,7 @@ export const specificWeaponsBatch14: MagicWeaponDefinition[] = [
   },
   // 344
   {
-    id: 'weapon-fire-goddesss-blade',
+    id: 'weapon-fire-goddess-blade',
     name: "Fire Goddess's Blade",
     category: 'magic_weapon', source: 'Mythic Origins', isOfficial: true,
     aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.CONJURATION }],

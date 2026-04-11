@@ -334,5 +334,4 @@ export const specificWeaponsBatch16: MagicWeaponDefinition[] = [
       { id: 'seeking', name: 'Seeking', description: 'Negates miss chance due to concealment.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
     ],
   },
-  // 400 — Frost Brand duplicates batch6; substitute with Valor's Minion (Ultimate Equipment, 41,335 gp)
 ];

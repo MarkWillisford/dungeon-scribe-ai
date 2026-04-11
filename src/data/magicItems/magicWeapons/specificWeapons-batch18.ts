@@ -158,7 +158,8 @@ export const specificWeaponsBatch18: MagicWeaponDefinition[] = [
     description: '+3 wounding dragon-bane greatsword of folded blue steel featuring ancient runes that glow with electric flame near dragonkind. Critical hits against dragons trigger an additional 1d10 acid damage and 1d10 fire damage. The wielder gains a +4 resistance bonus on saves against dragon breath weapons, spell-like abilities, and spells.',
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['bleed', 'summon monster I'], cost: 45000 },
     physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
-    activationCategory: 'use_activated', effects: [],
+    activationCategory: 'continuous',
+    effects: [{ type: 'bonus', bonusType: 'resistance', target: 'save.all', value: 4, source: 'Dragon-Bane Greatsword', condition: { type: 'custom', params: {}, description: 'vs. dragon breath weapons, SLAs, and spells' } }],
     baseWeaponId: 'greatsword', enhancementBonus: 3, weaponSpecialAbilities: [
       { id: 'wounding', name: 'Wounding', description: 'Deals 1 point of bleed damage on a successful hit.', bonusEquivalent: 2, casterLevel: 10, effects: [] },
       { id: 'bane_dragon', name: 'Bane (Dragon)', description: '+2 enhancement bonus and +2d6 damage against dragons.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
@@ -174,7 +175,8 @@ export const specificWeaponsBatch18: MagicWeaponDefinition[] = [
     description: '+3 shock sansetsukon that automatically resizes to its wielder. The wielder gains electricity resistance 10 while holding the weapon. On the first critical hit each round, it unleashes a chain lightning effect dealing 5d6 electricity damage to the primary target (DC 19 Reflex half) and arcing to up to five secondary targets within 30 feet (DC 17 Reflex half).',
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['chain lightning', 'lightning bolt', 'resist energy'], cost: 45308 },
     physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
-    activationCategory: 'use_activated', effects: [],
+    activationCategory: 'continuous',
+    effects: [{ type: 'bonus', bonusType: 'untyped', target: 'energy_resistance.electricity', value: 10, source: 'Ikarikurusai, the Raging Cyclone' }],
     baseWeaponId: 'sansetsukon', enhancementBonus: 3, weaponSpecialAbilities: [
       { id: 'shock', name: 'Shock', description: 'Deals an additional 1d6 electricity damage on each successful hit.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
     ],

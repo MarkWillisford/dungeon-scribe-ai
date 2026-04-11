@@ -41,7 +41,7 @@ export const specificWeaponsBatch1: MagicWeaponDefinition[] = [
   {
     id: 'weapon-sleep-arrow',
     name: 'Sleep Arrow',
-    category: 'magic_weapon', source: 'Core Rulebook', isOfficial: true,
+    category: 'magic_weapon', source: 'PRPG Core Rulebook', isOfficial: true,
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ENCHANTMENT }],
     casterLevel: 5, slot: 'none', price: 132, weight: 0,
     description: 'White arrow with white fletching. Deals nonlethal damage. Target must make DC 11 Will save or fall asleep.',
@@ -180,7 +180,7 @@ export const specificWeaponsBatch1: MagicWeaponDefinition[] = [
   {
     id: 'weapon-unerring-grenade',
     name: 'Unerring Grenade',
-    category: 'magic_weapon', source: 'Pathfinder #91', isOfficial: true,
+    category: 'magic_weapon', source: 'Pathfinder #91: Battle of Bloodmarch Hills', isOfficial: true,
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.DIVINATION }],
     casterLevel: 9, slot: 'none', price: 266, weight: 1,
     description: 'Negates miss chances from concealment when thrown. Veers toward target (creature or grid intersection). Otherwise functions as normal fuse grenade (DC 16 Ref for half).',
@@ -192,7 +192,7 @@ export const specificWeaponsBatch1: MagicWeaponDefinition[] = [
   {
     id: 'weapon-screaming-bolt',
     name: 'Screaming Bolt',
-    category: 'magic_weapon', source: 'Core Rulebook', isOfficial: true,
+    category: 'magic_weapon', source: 'PRPG Core Rulebook', isOfficial: true,
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ENCHANTMENT }],
     casterLevel: 5, slot: 'none', price: 267, weight: 0,
     description: 'Emits a loud cry when fired. Enemies within 20 ft of trajectory: DC 14 Will or shaken 1 round. Mind-affecting fear effect.',
@@ -257,7 +257,7 @@ export const specificWeaponsBatch1: MagicWeaponDefinition[] = [
   {
     id: 'weapon-earthfire-shuriken',
     name: 'Earthfire Shuriken',
-    category: 'magic_weapon', source: 'Pathfinder #50', isOfficial: true,
+    category: 'magic_weapon', source: 'Pathfinder #50: Night of Frozen Shadows', isOfficial: true,
     aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
     casterLevel: 12, slot: 'none', price: 400, weight: 0,
     description: '+1 flaming burst shuriken with volcanic imagery. Target DC 15 Ref or catches fire (1d6 fire/round until extinguished).',
@@ -266,7 +266,7 @@ export const specificWeaponsBatch1: MagicWeaponDefinition[] = [
     activationCategory: 'use_activated', effects: [],
     baseWeaponId: 'shuriken', enhancementBonus: 1,
     weaponSpecialAbilities: [{
-      id: 'flaming-burst', name: 'Flaming Burst',
+      id: 'flaming_burst', name: 'Flaming Burst',
       description: '+1d6 fire damage, +1d10 fire on crit (or +2d10 for x3, +3d10 for x4).',
       bonusEquivalent: 2, casterLevel: 12, effects: [],
     }],

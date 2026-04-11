@@ -101,7 +101,7 @@ export const specificWeaponsBatch8: MagicWeaponDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 5, breakDC: 16 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'bonus', bonusType: 'competence', target: 'skill.wild_empathy', value: 2, source: 'Goad of Obedience' },
+      { type: 'special', target: 'special.goad_of_obedience_wild_empathy', value: 2, source: 'Goad of Obedience' },
     ],
     baseWeaponId: 'ankus', enhancementBonus: 1, weaponSpecialAbilities: [],
   },

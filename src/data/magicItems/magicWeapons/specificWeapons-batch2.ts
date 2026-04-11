@@ -102,7 +102,7 @@ export const specificWeaponsBatch2: MagicWeaponDefinition[] = [
   {
     id: 'weapon-dimensional-grenade',
     name: 'Dimensional Grenade',
-    category: 'magic_weapon', source: 'Pathfinder #71', isOfficial: true,
+    category: 'magic_weapon', source: 'Pathfinder #71: Rasputin Must Die!', isOfficial: true,
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
     casterLevel: 7, slot: 'none', price: 1450, weight: 1,
     description: 'Teleports to target location (up to 680 ft, no attack roll, ignores cover). Detonates start of next turn: 3d6 force in 15 ft (DC 15 Ref half). Damaged creatures DC 16 Will or dazed 1 round. Single use.',
@@ -126,7 +126,7 @@ export const specificWeaponsBatch2: MagicWeaponDefinition[] = [
   {
     id: 'weapon-javelin-of-lightning',
     name: 'Javelin of Lightning',
-    category: 'magic_weapon', source: 'Core Rulebook', isOfficial: true,
+    category: 'magic_weapon', source: 'PRPG Core Rulebook', isOfficial: true,
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.EVOCATION }],
     casterLevel: 5, slot: 'none', price: 1500, weight: 2,
     description: 'When thrown, transforms into 5d6 lightning bolt (DC 14 Ref half). Consumed on use.',
@@ -206,7 +206,7 @@ export const specificWeaponsBatch2: MagicWeaponDefinition[] = [
     activationCategory: 'use_activated', effects: [],
     baseWeaponId: 'bolt', enhancementBonus: 1,
     weaponSpecialAbilities: [{
-      id: 'bane-water-outsider', name: 'Bane (Outsider, Water)',
+      id: 'bane_water_outsider', name: 'Bane (Outsider, Water)',
       description: '+2 enhancement and +2d6 damage vs. water outsiders.',
       bonusEquivalent: 1, casterLevel: 8, effects: [],
     }],
@@ -239,7 +239,7 @@ export const specificWeaponsBatch2: MagicWeaponDefinition[] = [
   {
     id: 'weapon-slaying-arrow',
     name: 'Slaying Arrow',
-    category: 'magic_weapon', source: 'Core Rulebook', isOfficial: true,
+    category: 'magic_weapon', source: 'PRPG Core Rulebook', isOfficial: true,
     aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
     casterLevel: 13, slot: 'none', price: 2282, weight: 0,
     description: 'Keyed to a creature type/subtype. On hit vs. that type: DC 20 Fort or 50 damage. Applies even to creatures immune to Fort saves. Death effect vs. living. Single use.',
@@ -251,7 +251,7 @@ export const specificWeaponsBatch2: MagicWeaponDefinition[] = [
   {
     id: 'weapon-slaying-arrow-greater',
     name: 'Slaying Arrow, Greater',
-    category: 'magic_weapon', source: 'Core Rulebook', isOfficial: true,
+    category: 'magic_weapon', source: 'PRPG Core Rulebook', isOfficial: true,
     aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
     casterLevel: 13, slot: 'none', price: 4057, weight: 0,
     description: 'As slaying arrow but DC 23 Fort, 100 damage on failure.',
