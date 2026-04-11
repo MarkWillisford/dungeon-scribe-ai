@@ -379,7 +379,7 @@ describe('DraftValidationService', () => {
         { id: '2', traitName: 'B', category: 'Magic', description: '' },
         { id: '3', traitName: 'C', category: 'Faith', description: '' },
       ];
-      const ruleset = { ...DEFAULT_RULESET, validationSettings: { maxTraits: 3 } };
+      const ruleset = { ...DEFAULT_RULESET, validationSettings: { ...DEFAULT_RULESET.validationSettings, maxTraits: 3 } };
       draft.levelIncrementSlots = [{ atHD: 4, ability: 'str' }];
       const warnings = DraftValidationService.validate(draft, ruleset);
       expect(warnings.filter((w) => w.section === 'traits')).toHaveLength(0);
