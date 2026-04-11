@@ -4,7 +4,9 @@
 // ClassChoiceDefinition (classChoices.ts) routes to these collections at runtime.
 // All descriptions are text — mechanical effects are wired by the modifier pipeline.
 
-import { FeatPrerequisite } from './feats';
+import { Prerequisite } from './feats';
+import { Effect } from './base';
+import { SpecialAbility } from './specialAbilities';
 
 // ---- Base type shared by all option collection documents ----
 
@@ -12,7 +14,7 @@ export interface ClassOptionBase {
   id: string;
   name: string;
   description: string;
-  prerequisites?: FeatPrerequisite[];
+  prerequisites?: Prerequisite[];
 
   // ContentMetadata
   source: string; // 'pf1e-core' | 'pf1e-apg' | '3.5e' | 'homebrew' | etc.
@@ -131,10 +133,73 @@ export type InvestigatorTalentEntry = ClassOptionBase;
 // Collection: 'shamanspirits'
 
 export interface ShamanSpiritEntry extends ClassOptionBase {
+  classIds?: string[]; // ['shaman'] or ['shaman', 'spirit-warrior-archetype']
   spiritSpells: string[]; // 9 entries — index 0 = level 1 spirit spell name
-  spiritAbility: string; // text description of the spirit ability
-  hexList?: string[]; // hex ids available to this spirit's shaman
-  wanderingSpirit: boolean; // can this spirit be taken as a wandering spirit?
+  abilities: {
+    spirit: SpecialAbility;        // 1st level — usable 3 + Wis modifier times per day
+    greater: SpecialAbility;       // 8th level
+    true: SpecialAbility;          // 16th level
+    manifestation: SpecialAbility; // 20th level — permanent
+  };
+  hexList: string[]; // hex IDs available to the shaman when this spirit is chosen
+  wanderingSpirit: boolean; // true if this spirit can be selected as a wandering (secondary) spirit
+}
+
+// ---- Eidolon Evolution (Summoner, Summoner (Unchained) — shared pool) ----
+// Collection: 'eidolonevolutions'
+
+export type EidolonForm =
+  | 'biped'
+  | 'quadruped'
+  | 'serpentine'
+  | 'aquatic'
+  | 'avian'
+  | 'mounted'
+  | 'tauric'
+  | 'vermious';
+
+export type EidolonSubtype =
+  | 'aberrant'
+  | 'aeon'
+  | 'agathion'
+  | 'ancestor'
+  | 'angel'
+  | 'archon'
+  | 'astral'
+  | 'azata'
+  | 'daemon'
+  | 'deepwater'
+  | 'demon'
+  | 'devil'
+  | 'div'
+  | 'elemental'
+  | 'genie'
+  | 'inevitable'
+  | 'kami'
+  | 'kyton'
+  | 'plant'
+  | 'protean'
+  | 'psychopomp'
+  | 'radiant'
+  | 'shadow'
+  | 'storykin'
+  | 'twinned'
+  | 'void';
+
+export interface EidolonEvolutionEntry extends ClassOptionBase {
+  evolutionPointCost: 1 | 2 | 3 | 4;
+  canBeTakenMultipleTimes?: boolean; // default false
+  effects: Effect[]; // structured grants (attacks, senses, movement, stat bonuses, etc.)
+  summoner?: 'apg' | 'unchained'; // absent = available to both summoner versions
+  formRestrictions?: EidolonForm[]; // APG only — absent = any base form
+  subtypeRestrictions?: EidolonSubtype[]; // Unchained only — absent = any subtype
+}
+
+// ---- Mesmerist Trick ----
+// Collection: 'mesmeristtricks'
+
+export interface MesmeristTrickEntry extends ClassOptionBase {
+  trickTier: 'standard' | 'masterful'; // masterful tricks require mesmerist level 5+
 }
 
 // ---- Wild Talent (Kineticist) ----

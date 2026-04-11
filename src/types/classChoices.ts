@@ -38,6 +38,12 @@ export type ClassChoiceSelectionMode =
       startLevel: number;
       count?: number;
       canRepeat?: boolean;
+    }
+  | {
+      // Requires custom UI handling — not a standard build-time picker.
+      // e.g. Shaman wandering spirit (resets daily like spell preparation),
+      //      any feature that resets on rest or has non-standard selection logic.
+      type: 'special';
     };
 
 // ---- Option Group ----

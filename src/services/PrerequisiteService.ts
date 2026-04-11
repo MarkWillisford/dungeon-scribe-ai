@@ -191,8 +191,12 @@ export class PrerequisiteService {
         return `Caster level ${prereq.minimum}`;
       case 'mythic_tier':
         return `Mythic Tier ${prereq.minimum}`;
+      case 'evolution':
+        return `Evolution: ${prereq.evolutionId}`;
       case 'special':
         return prereq.description;
+      case 'evolution':
+        return `Evolution: ${prereq.evolutionId}`;
     }
   }
 }
