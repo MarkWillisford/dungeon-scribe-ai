@@ -425,6 +425,26 @@ const characterEntrySlice = createSlice({
       }
     },
 
+    reorderTemplates(state, action: PayloadAction<string[]>) {
+      // action.payload is ordered array of template ids
+      const map = new Map(state.draft.templates.map((t) => [t.id, t]));
+      state.draft.templates = action.payload
+        .map((id) => map.get(id))
+        .filter(Boolean) as typeof state.draft.templates;
+      state.isDirty = true;
+    },
+
+    setTemplateAcquiredAtECL(
+      state,
+      action: PayloadAction<{ id: string; acquiredAtECL: number | undefined }>,
+    ) {
+      const t = state.draft.templates.find((t) => t.id === action.payload.id);
+      if (t) {
+        t.acquiredAtECL = action.payload.acquiredAtECL;
+        state.isDirty = true;
+      }
+    },
+
     // ---- Combat stats ----
 
     setCombatField(
@@ -637,6 +657,8 @@ export const {
   addTemplate,
   removeTemplate,
   updateTemplate,
+  reorderTemplates,
+  setTemplateAcquiredAtECL,
   setCombatField,
   setSkillEntry,
   addTrait,
