@@ -11,7 +11,7 @@ export const stavesBatch2: StaffDefinition[] = [
     description: 'Spider climb (1), web (1), summon spider (as summon monster III, 1d3 giant spiders, 2).',
     construction: { feats: ['Craft Staff'], spells: ['spider climb', 'web', 'summon monster III'], cost: 15400 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'spider_climb', spellName: 'Spider Climb', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'web', spellName: 'Web', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
@@ -27,7 +27,7 @@ export const stavesBatch2: StaffDefinition[] = [
     description: 'Shocking grasp (1), lightning bolt (2), chain lightning (3).',
     construction: { feats: ['Craft Staff'], spells: ['shocking grasp', 'lightning bolt', 'chain lightning'], cost: 15950 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'shocking_grasp', spellName: 'Shocking Grasp', spellLevel: 1, casterLevel: 11, chargesRequired: 1 },
       { spellId: 'lightning_bolt', spellName: 'Lightning Bolt', spellLevel: 3, casterLevel: 11, chargesRequired: 2 },
@@ -43,7 +43,7 @@ export const stavesBatch2: StaffDefinition[] = [
     description: 'Stinking cloud (1), cloudkill (2).',
     construction: { feats: ['Craft Staff'], spells: ['stinking cloud', 'cloudkill'], cost: 17100 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'stinking_cloud', spellName: 'Stinking Cloud', spellLevel: 3, casterLevel: 9, chargesRequired: 1 },
       { spellId: 'cloudkill', spellName: 'Cloudkill', spellLevel: 5, casterLevel: 9, chargesRequired: 2 },
@@ -58,7 +58,7 @@ export const stavesBatch2: StaffDefinition[] = [
     description: 'Disguise self (1), invisibility (1), nondetection (1), greater invisibility (2).',
     construction: { feats: ['Craft Staff'], spells: ['disguise self', 'invisibility', 'nondetection', 'greater invisibility'], cost: 20900 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'disguise_self', spellName: 'Disguise Self', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'invisibility', spellName: 'Invisibility', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
@@ -75,7 +75,7 @@ export const stavesBatch2: StaffDefinition[] = [
     description: 'Ice storm (1), wall of ice (2), cone of cold (3).',
     construction: { feats: ['Craft Staff'], spells: ['ice storm', 'wall of ice', 'cone of cold'], cost: 20700 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'ice_storm', spellName: 'Ice Storm', spellLevel: 4, casterLevel: 10, chargesRequired: 1 },
       { spellId: 'wall_of_ice', spellName: 'Wall of Ice', spellLevel: 4, casterLevel: 10, chargesRequired: 2 },
@@ -91,7 +91,7 @@ export const stavesBatch2: StaffDefinition[] = [
     description: 'Dancing lights (1), flare (1), daylight (2), sunburst (3).',
     construction: { feats: ['Craft Staff'], spells: ['dancing lights', 'daylight', 'flare', 'sunburst'], cost: 25750 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'dancing_lights', spellName: 'Dancing Lights', spellLevel: 0, casterLevel: 15, chargesRequired: 1 },
       { spellId: 'flare', spellName: 'Flare', spellLevel: 0, casterLevel: 15, chargesRequired: 1 },
@@ -108,7 +108,7 @@ export const stavesBatch2: StaffDefinition[] = [
     description: 'Dimension door (1), fly (1), teleport (2). Also grants +10 ft enhancement to base speed.',
     construction: { feats: ['Craft Staff'], spells: ['dimension door', 'fly', 'teleport'], cost: 27200 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated',
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger',
     effects: [{ type: 'bonus', bonusType: 'enhancement', target: 'speed.base', value: 10, source: 'Staff of Travel' }],
     spells: [
       { spellId: 'dimension_door', spellName: 'Dimension Door', spellLevel: 4, casterLevel: 9, chargesRequired: 1 },
@@ -125,7 +125,7 @@ export const stavesBatch2: StaffDefinition[] = [
     description: 'Ray of enfeeblement (1), ray of exhaustion (1), scorching ray (1), enervation (2), disintegrate (3).',
     construction: { feats: ['Craft Staff'], spells: ['ray of enfeeblement', 'ray of exhaustion', 'scorching ray', 'enervation', 'disintegrate'], cost: 28600 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'ray_of_enfeeblement', spellName: 'Ray of Enfeeblement', spellLevel: 1, casterLevel: 11, chargesRequired: 1 },
       { spellId: 'ray_of_exhaustion', spellName: 'Ray of Exhaustion', spellLevel: 3, casterLevel: 11, chargesRequired: 1 },

@@ -11,7 +11,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Shield (1), shield of faith (1), shield other (1), shield of law (3).',
     construction: { feats: ['Craft Staff'], spells: ['shield', 'shield of faith', 'shield other', 'shield of law'], cost: 31000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'shield', spellName: 'Shield', spellLevel: 1, casterLevel: 15, chargesRequired: 1 },
       { spellId: 'shield_of_faith', spellName: 'Shield of Faith', spellLevel: 1, casterLevel: 15, chargesRequired: 1 },
@@ -28,7 +28,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Dispel magic (1), resist energy (1), shield (1), dismissal (2), lesser globe of invulnerability (2), repulsion (3).',
     construction: { feats: ['Craft Staff'], spells: ['dispel magic', 'resist energy', 'shield', 'dismissal', 'lesser globe of invulnerability', 'repulsion'], cost: 41000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'dispel_magic', spellName: 'Dispel Magic', spellLevel: 3, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'resist_energy', spellName: 'Resist Energy', spellLevel: 2, casterLevel: 13, chargesRequired: 1 },
@@ -47,7 +47,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Stinking cloud (1), summon swarm (1), unseen servant (1), cloudkill (2), minor creation (2), summon monster VI (3).',
     construction: { feats: ['Craft Staff'], spells: ['stinking cloud', 'summon swarm', 'unseen servant', 'cloudkill', 'minor creation', 'summon monster VI'], cost: 41000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'stinking_cloud', spellName: 'Stinking Cloud', spellLevel: 3, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'summon_swarm', spellName: 'Summon Swarm', spellLevel: 2, casterLevel: 13, chargesRequired: 1 },
@@ -66,7 +66,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Detect secret doors (1), locate object (1), tongues (1), locate creature (2), prying eyes (2), true seeing (3).',
     construction: { feats: ['Craft Staff'], spells: ['detect secret doors', 'locate object', 'tongues', 'locate creature', 'prying eyes', 'true seeing'], cost: 41000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'detect_secret_doors', spellName: 'Detect Secret Doors', spellLevel: 1, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'locate_object', spellName: 'Locate Object', spellLevel: 2, casterLevel: 13, chargesRequired: 1 },
@@ -85,7 +85,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Hideous laughter (1), sleep (1), suggestion (1), crushing despair (2), mind fog (2), mass suggestion (3).',
     construction: { feats: ['Craft Staff'], spells: ['hideous laughter', 'sleep', 'suggestion', 'crushing despair', 'mind fog', 'mass suggestion'], cost: 41000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'hideous_laughter', spellName: 'Hideous Laughter', spellLevel: 2, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'sleep', spellName: 'Sleep', spellLevel: 1, casterLevel: 13, chargesRequired: 1 },
@@ -104,7 +104,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Fireball (1), magic missile (1), shatter (1), ice storm (2), wall of force (2), chain lightning (3).',
     construction: { feats: ['Craft Staff'], spells: ['fireball', 'magic missile', 'shatter', 'ice storm', 'wall of force', 'chain lightning'], cost: 41000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'fireball', spellName: 'Fireball', spellLevel: 3, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'magic_missile', spellName: 'Magic Missile', spellLevel: 1, casterLevel: 13, chargesRequired: 1 },
@@ -123,7 +123,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Disguise self (1), major image (1), mirror image (1), persistent image (2), rainbow pattern (2), mislead (3).',
     construction: { feats: ['Craft Staff'], spells: ['disguise self', 'major image', 'mirror image', 'persistent image', 'rainbow pattern', 'mislead'], cost: 41000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'disguise_self', spellName: 'Disguise Self', spellLevel: 1, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'major_image', spellName: 'Major Image', spellLevel: 3, casterLevel: 13, chargesRequired: 1 },
@@ -142,7 +142,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Cause fear (1), ghoul touch (1), halt undead (1), enervation (2), waves of fatigue (2), circle of death (3).',
     construction: { feats: ['Craft Staff'], spells: ['cause fear', 'circle of death', 'enervation', 'ghoul touch', 'halt undead', 'waves of fatigue'], cost: 41000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'cause_fear', spellName: 'Cause Fear', spellLevel: 1, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'ghoul_touch', spellName: 'Ghoul Touch', spellLevel: 2, casterLevel: 13, chargesRequired: 1 },
@@ -161,7 +161,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Alter self (1), blink (1), expeditious retreat (1), baleful polymorph (2), polymorph (2), disintegrate (3).',
     construction: { feats: ['Craft Staff'], spells: ['alter self', 'blink', 'expeditious retreat', 'baleful polymorph', 'polymorph', 'disintegrate'], cost: 41000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'alter_self', spellName: 'Alter Self', spellLevel: 2, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'blink', spellName: 'Blink', spellLevel: 3, casterLevel: 13, chargesRequired: 1 },
@@ -180,7 +180,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Fog cloud (1), gust of wind (1), wind wall (1), ice storm (2), sleet storm (2), control weather (3).',
     construction: { feats: ['Craft Staff'], spells: ['fog cloud', 'gust of wind', 'wind wall', 'ice storm', 'sleet storm', 'control weather'], cost: 42033 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'fog_cloud', spellName: 'Fog Cloud', spellLevel: 2, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'gust_of_wind', spellName: 'Gust of Wind', spellLevel: 2, casterLevel: 13, chargesRequired: 1 },
@@ -199,7 +199,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Move earth (1), passwall (1).',
     construction: { feats: ['Craft Staff'], spells: ['move earth', 'passwall'], cost: 42900 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'move_earth', spellName: 'Move Earth', spellLevel: 6, casterLevel: 11, chargesRequired: 1 },
       { spellId: 'passwall', spellName: 'Passwall', spellLevel: 5, casterLevel: 11, chargesRequired: 1 },
@@ -214,7 +214,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Arcane eye (1), arcane sight (1), see invisibility (1), prying eyes (2), scrying (2), true seeing (3).',
     construction: { feats: ['Craft Staff'], spells: ['arcane eye', 'arcane sight', 'see invisibility', 'prying eyes', 'scrying', 'true seeing'], cost: 45416 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'arcane_eye', spellName: 'Arcane Eye', spellLevel: 4, casterLevel: 11, chargesRequired: 1 },
       { spellId: 'arcane_sight', spellName: 'Arcane Sight', spellLevel: 3, casterLevel: 11, chargesRequired: 1 },
@@ -233,7 +233,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: '+2 quarterstaff. Charm animal (1), speak with animals (1), barkskin (2), summon nature\'s ally VI (3), wall of thorns (3), animate plants (4). Pass without trace at will (no charge).',
     construction: { feats: ['Craft Magic Arms and Armor', 'Craft Staff'], spells: ['animate plants', 'barkskin', 'charm animal', 'pass without trace', 'speak with animals', "summon nature's ally VI", 'wall of thorns'], cost: 50500 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated',
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger',
     effects: [],
     spells: [
       { spellId: 'charm_animal', spellName: 'Charm Animal', spellLevel: 1, casterLevel: 13, chargesRequired: 1 },
@@ -252,7 +252,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Heal (1), raise dead (5 charges).',
     construction: { feats: ['Craft Staff'], spells: ['heal', 'raise dead'], cost: 79700 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'heal', spellName: 'Heal', spellLevel: 6, casterLevel: 11, chargesRequired: 1 },
       { spellId: 'raise_dead', spellName: 'Raise Dead', spellLevel: 5, casterLevel: 11, chargesRequired: 3 },
@@ -267,7 +267,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Dimension door (1), passwall (1), astral projection (2), greater teleport (2), phase door (2).',
     construction: { feats: ['Craft Staff'], spells: ['astral projection', 'dimension door', 'greater teleport', 'passwall', 'phase door'], cost: 115950 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'dimension_door', spellName: 'Dimension Door', spellLevel: 4, casterLevel: 17, chargesRequired: 1 },
       { spellId: 'passwall', spellName: 'Passwall', spellLevel: 5, casterLevel: 17, chargesRequired: 1 },
@@ -285,7 +285,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: 'Bless (1), cure moderate wounds (1), freedom of movement (1), hold person 5th (1), prayer (1), searing light (1), cure critical wounds (2), flame strike (2), righteous might (2), true seeing (2).',
     construction: { feats: ['Craft Staff'], spells: ['bless', 'cure moderate wounds', 'freedom of movement', 'hold person', 'prayer', 'searing light', 'cure critical wounds', 'flame strike', 'righteous might', 'true seeing'], cost: 110000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'bless', spellName: 'Bless', spellLevel: 1, casterLevel: 15, chargesRequired: 1 },
       { spellId: 'cure_moderate_wounds', spellName: 'Cure Moderate Wounds', spellLevel: 2, casterLevel: 15, chargesRequired: 1 },
@@ -308,7 +308,7 @@ export const stavesBatch3: StaffDefinition[] = [
     description: '+2 luck to AC and saves. +2 quarterstaff. 1 charge = triple crit for 1 round. Retributive strike.',
     construction: { feats: ['Craft Magic Arms and Armor', 'Craft Staff'], spells: ['continual flame', 'fireball', 'levitate', 'lightning bolt', 'magic missile', 'ray of enfeeblement', 'cone of cold', 'globe of invulnerability', 'hold monster', 'wall of force'], cost: 117500 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated',
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger',
     effects: [
       { type: 'bonus', bonusType: 'luck', target: 'ac', value: 2, source: 'Staff of Power' },
       { type: 'bonus', bonusType: 'luck', target: 'save.all', value: 2, source: 'Staff of Power' },

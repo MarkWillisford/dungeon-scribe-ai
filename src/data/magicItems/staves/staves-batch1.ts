@@ -11,7 +11,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Create water (1), stabilize (1), bless (2).',
     construction: { feats: ['Craft Staff'], spells: ['create water', 'stabilize', 'bless'], cost: 3600 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'create_water', spellName: 'Create Water', spellLevel: 0, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'stabilize', spellName: 'Stabilize', spellLevel: 0, casterLevel: 8, chargesRequired: 1 },
@@ -27,7 +27,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Shield (1), magic missile (2).',
     construction: { feats: ['Craft Staff'], spells: ['shield', 'magic missile'], cost: 4000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'shield', spellName: 'Shield', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'magic_missile', spellName: 'Magic Missile', spellLevel: 1, casterLevel: 8, chargesRequired: 2 },
@@ -42,7 +42,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Ghost sound (1), mage hand (1), prestidigitation (1), silent image (2).',
     construction: { feats: ['Craft Staff'], spells: ['ghost sound', 'mage hand', 'prestidigitation', 'silent image'], cost: 4400 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'ghost_sound', spellName: 'Ghost Sound', spellLevel: 0, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'mage_hand', spellName: 'Mage Hand', spellLevel: 0, casterLevel: 8, chargesRequired: 1 },
@@ -59,7 +59,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Know direction (1), pass without trace (1), summon nature\'s ally I (2).',
     construction: { feats: ['Craft Staff'], spells: ['know direction', 'pass without trace', "summon nature's ally I"], cost: 4800 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'know_direction', spellName: 'Know Direction', spellLevel: 0, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'pass_without_trace', spellName: 'Pass Without Trace', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -75,7 +75,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Lesser rejuvenate eidolon (1), unfetter (1), lesser evolution surge (2).',
     construction: { feats: ['Craft Staff'], spells: ['lesser rejuvenate eidolon', 'unfetter', 'lesser evolution surge'], cost: 7200 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'lesser_rejuvenate_eidolon', spellName: 'Lesser Rejuvenate Eidolon', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'unfetter', spellName: 'Unfetter', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -91,7 +91,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Chord of shards (1), saving finale (1), allegro (2).',
     construction: { feats: ['Craft Staff'], spells: ['chord of shards', 'saving finale', 'allegro'], cost: 7400 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'chord_of_shards', spellName: 'Chord of Shards', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'saving_finale', spellName: 'Saving Finale', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -107,7 +107,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Comprehend languages (1), detect thoughts (2), tongues (2).',
     construction: { feats: ['Craft Staff'], spells: ['comprehend languages', 'detect thoughts', 'tongues'], cost: 7200 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'comprehend_languages', spellName: 'Comprehend Languages', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'detect_thoughts', spellName: 'Detect Thoughts', spellLevel: 2, casterLevel: 8, chargesRequired: 2 },
@@ -123,7 +123,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Charm person (1), charm monster (2).',
     construction: { feats: ['Craft Staff'], spells: ['charm person', 'charm monster'], cost: 8800 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'charm_person', spellName: 'Charm Person', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'charm_monster', spellName: 'Charm Monster', spellLevel: 4, casterLevel: 8, chargesRequired: 2 },
@@ -138,7 +138,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Burning hands (1), fireball (2), wall of fire (3).',
     construction: { feats: ['Craft Staff'], spells: ['burning hands', 'fireball', 'wall of fire'], cost: 9475 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'burning_hands', spellName: 'Burning Hands', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'fireball', spellName: 'Fireball', spellLevel: 3, casterLevel: 8, chargesRequired: 2 },
@@ -154,7 +154,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Reduce person (1), reduce animal (2), shrink item (2), mass reduce person (4).',
     construction: { feats: ['Craft Staff'], spells: ['reduce person', 'reduce animal', 'shrink item', 'mass reduce person'], cost: 10000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'reduce_person', spellName: 'Reduce Person', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'reduce_animal', spellName: 'Reduce Animal', spellLevel: 2, casterLevel: 8, chargesRequired: 2 },
@@ -171,7 +171,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Bless (1), remove fear (1), prayer (2), remove paralysis (2).',
     construction: { feats: ['Craft Staff'], spells: ['bless', 'remove fear', 'prayer', 'remove paralysis'], cost: 10400 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'bless', spellName: 'Bless', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'remove_fear', spellName: 'Remove Fear', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -188,7 +188,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Create water (1), goodberry (1), purify food and drink (1), cup of dust (2), feast of ashes (2).',
     construction: { feats: ['Craft Staff'], spells: ['create water', 'goodberry', 'purify food and drink', 'cup of dust', 'feast of ashes'], cost: 10400 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'create_water', spellName: 'Create Water', spellLevel: 0, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'goodberry', spellName: 'Goodberry', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -206,7 +206,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Bane (1), cause fear (1), command (1), magic weapon (1), align weapon (2).',
     construction: { feats: ['Craft Staff'], spells: ['bane', 'cause fear', 'command', 'magic weapon', 'align weapon'], cost: 10400 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'bane', spellName: 'Bane', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'cause_fear', spellName: 'Cause Fear', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -224,7 +224,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Twisted darkwood staff with insect knots. Summon swarm (1), insect plague (3).',
     construction: { feats: ['Craft Staff'], spells: ['summon swarm', 'insect plague'], cost: 11400 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'summon_swarm', spellName: 'Summon Swarm', spellLevel: 2, casterLevel: 9, chargesRequired: 1 },
       { spellId: 'insect_plague', spellName: 'Insect Plague', spellLevel: 5, casterLevel: 9, chargesRequired: 3 },
@@ -239,7 +239,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Forced quiet (1), interrogation (1), oppressive boredom (2).',
     construction: { feats: ['Craft Staff'], spells: ['forced quiet', 'interrogation', 'oppressive boredom'], cost: 11800 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'forced_quiet', spellName: 'Forced Quiet', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'interrogation', spellName: 'Interrogation', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -255,7 +255,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Glitterdust (1), daylight (2), searing light (2).',
     construction: { feats: ['Craft Staff'], spells: ['glitterdust', 'daylight', 'searing light'], cost: 11600 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'glitterdust', spellName: 'Glitterdust', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'daylight', spellName: 'Daylight', spellLevel: 3, casterLevel: 8, chargesRequired: 2 },
@@ -271,7 +271,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Enlarge person (1), reduce person (1), shrink item (2), mass enlarge person (3), mass reduce person (3).',
     construction: { feats: ['Craft Staff'], spells: ['enlarge person', 'reduce person', 'shrink item', 'mass enlarge person', 'mass reduce person'], cost: 13075 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'enlarge_person', spellName: 'Enlarge Person', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'reduce_person', spellName: 'Reduce Person', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -289,7 +289,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Detect snares and pits (1), endure elements (1), longstrider (1), pass without trace (1), freedom of movement (2).',
     construction: { feats: ['Craft Staff'], spells: ['detect snares and pits', 'endure elements', 'freedom of movement', 'longstrider', 'pass without trace'], cost: 13600 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'detect_snares_pits', spellName: 'Detect Snares and Pits', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'endure_elements', spellName: 'Endure Elements', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -307,7 +307,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Corrosive touch (1), acid arrow (2), acid fog (3).',
     construction: { feats: ['Craft Staff'], spells: ['corrosive touch', 'acid arrow', 'acid fog'], cost: 14300 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'corrosive_touch', spellName: 'Corrosive Touch', spellLevel: 1, casterLevel: 11, chargesRequired: 1 },
       { spellId: 'acid_arrow', spellName: 'Acid Arrow', spellLevel: 2, casterLevel: 11, chargesRequired: 2 },
@@ -323,7 +323,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'White ash with silver runes. Cure serious wounds (1), lesser restoration (1), remove blindness/deafness (2), remove disease (3).',
     construction: { feats: ['Craft Staff'], spells: ['cure serious wounds', 'lesser restoration', 'remove blindness/deafness', 'remove disease'], cost: 14800 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'cure_serious_wounds', spellName: 'Cure Serious Wounds', spellLevel: 3, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'lesser_restoration', spellName: 'Lesser Restoration', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
@@ -340,7 +340,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Align weapon (good only, 1), detect evil (1), holy smite (2), magic circle against evil (2).',
     construction: { feats: ['Craft Staff'], spells: ['align weapon', 'detect evil', 'holy smite', 'magic circle against evil'], cost: 14800 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'align_weapon', spellName: 'Align Weapon (Good)', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'detect_evil', spellName: 'Detect Evil', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -357,7 +357,7 @@ export const stavesBatch1: StaffDefinition[] = [
     description: 'Shatter (1), sound burst (1), shout (2).',
     construction: { feats: ['Craft Staff'], spells: ['shatter', 'sound burst', 'shout'], cost: 18000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'shatter', spellName: 'Shatter', spellLevel: 2, casterLevel: 10, chargesRequired: 1 },
       { spellId: 'sound_burst', spellName: 'Sound Burst', spellLevel: 2, casterLevel: 10, chargesRequired: 1 },

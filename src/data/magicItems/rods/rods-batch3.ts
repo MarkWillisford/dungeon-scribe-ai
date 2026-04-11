@@ -16,7 +16,7 @@ function mmRod(
     category: 'rod', source, isOfficial: true,
     aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.UNIVERSAL }],
     casterLevel: 17, slot: 'none', price, weight: 5,
-    description: `3/day ${desc} ${nameBase === tierLabel.trim() ? '' : `(${featName} feat).`} ${tier === 'lesser' ? 'Lesser' : tier === 'normal' ? 'Normal' : 'Greater'}: up to ${maxLevel}-level spells.`,
+    description: `3/day ${desc} (${featName} feat). ${tier === 'lesser' ? 'Lesser' : tier === 'normal' ? 'Normal' : 'Greater'}: up to ${maxLevel}-level spells.`,
     construction: { feats: ['Craft Rod', featName], spells: [], cost: Math.floor(price / 2) },
     physicalStats: { hardness: 10, hitPoints: 10, breakDC: 27 },
     requiresFreeHand: true, activationCategory: 'use_activated', effects: [],

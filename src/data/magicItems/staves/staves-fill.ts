@@ -12,7 +12,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Align weapon (chaos only, 1), detect law (1), chaos hammer (2), magic circle against law (2).',
     construction: { feats: ['Craft Staff'], spells: ['align weapon', 'chaos hammer', 'detect law', 'magic circle against law'], cost: 14800 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'align_weapon', spellName: 'Align Weapon (Chaos)', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'detect_law', spellName: 'Detect Law', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -29,7 +29,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Align weapon (law only, 1), detect chaos (1), magic circle against chaos (2), order\'s wrath (2).',
     construction: { feats: ['Craft Staff'], spells: ['align weapon', 'detect chaos', 'magic circle against chaos', "order's wrath"], cost: 14800 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'align_weapon', spellName: 'Align Weapon (Law)', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'detect_chaos', spellName: 'Detect Chaos', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -46,7 +46,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Align weapon (evil only, 1), detect good (1), magic circle against good (2), unholy blight (2).',
     construction: { feats: ['Craft Staff'], spells: ['align weapon', 'detect good', 'magic circle against good', 'unholy blight'], cost: 14800 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'align_weapon', spellName: 'Align Weapon (Evil)', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'detect_good', spellName: 'Detect Good', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -65,7 +65,7 @@ export const stavesFill: StaffDefinition[] = [
     description: '+1/+1 quarterstaff. Wielder may apply one metamagic feat to spells cast from the staff (extra charges = level increase). Ray of enfeeblement (1), spectral hand (1), vampiric touch (2).',
     construction: { feats: ['Craft Magic Arms and Armor', 'Craft Staff'], spells: ['ray of enfeeblement', 'spectral hand', 'vampiric touch'], cost: 15300 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'ray_of_enfeeblement', spellName: 'Ray of Enfeeblement', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'spectral_hand', spellName: 'Spectral Hand', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
@@ -81,7 +81,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Castigate (1), command (1), zone of truth (1), denounce (2).',
     construction: { feats: ['Craft Staff'], spells: ['castigate', 'command', 'denounce', 'zone of truth'], cost: 16000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'castigate', spellName: 'Castigate', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'command', spellName: 'Command', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -98,7 +98,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Transforms into a string or wind instrument as a swift action, granting +5 competence bonus to Perform checks. Ghost sound (1), piercing shriek (1), sculpt sound (2), wall of sound (2).',
     construction: { feats: ['Craft Staff'], spells: ['ghost sound', 'piercing shriek', 'sculpt sound', 'wall of sound'], cost: 16000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'ghost_sound', spellName: 'Ghost Sound', spellLevel: 0, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'piercing_shriek', spellName: 'Piercing Shriek', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
@@ -118,7 +118,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Deathwatch (1), detect undead (1), gentle repose (1), death ward (2), speak with dead (2).',
     construction: { feats: ['Craft Staff'], spells: ['death ward', 'deathwatch', 'detect undead', 'gentle repose', 'speak with dead'], cost: 16400 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'deathwatch', spellName: 'Deathwatch', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'detect_undead', spellName: 'Detect Undead', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -136,7 +136,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Transforms into a +2 lance as a swift action. Bless weapon (1, staff only), shield other (1), discern lies (2), holy sword (4, staff only).',
     construction: { feats: ['Craft Magic Arms and Armor', 'Craft Staff'], spells: ['bless weapon', 'discern lies', 'holy sword', 'shield other'], cost: 18810 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'bless_weapon', spellName: 'Bless Weapon', spellLevel: 1, casterLevel: 10, chargesRequired: 1 },
       { spellId: 'shield_other', spellName: 'Shield Other', spellLevel: 2, casterLevel: 10, chargesRequired: 1 },
@@ -153,7 +153,7 @@ export const stavesFill: StaffDefinition[] = [
     description: '+1/+1 quarterstaff with four carved animal faces. Aspect of the falcon (1), aspect of the bear (1), aspect of the stag (2), aspect of the wolf (3).',
     construction: { feats: ['Craft Magic Arms and Armor', 'Craft Staff'], spells: ['aspect of the bear', 'aspect of the falcon', 'aspect of the stag', 'aspect of the wolf'], cost: 19100 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'aspect_of_the_falcon', spellName: 'Aspect of the Falcon', spellLevel: 1, casterLevel: 9, chargesRequired: 1 },
       { spellId: 'aspect_of_the_bear', spellName: 'Aspect of the Bear', spellLevel: 2, casterLevel: 9, chargesRequired: 1 },
@@ -170,7 +170,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Bear\'s endurance (1), bull\'s strength (1), cat\'s grace (1), greater magic weapon (1).',
     construction: { feats: ['Craft Staff'], spells: ["bear's endurance", "bull's strength", "cat's grace", 'greater magic weapon'], cost: 20800 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'bears_endurance', spellName: "Bear's Endurance", spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'bulls_strength', spellName: "Bull's Strength", spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
@@ -187,7 +187,7 @@ export const stavesFill: StaffDefinition[] = [
     description: '+1/+1 quarterstaff. On a hit, spend 1 charge to curse target (rounds = remaining charges): -2 penalty on saves vs. staff spells and -2 AC vs. staff attacks. Blindness/deafness (1), ill omen (1), baleful polymorph (2), bestow curse (2).',
     construction: { feats: ['Craft Magic Arms and Armor', 'Craft Staff'], spells: ['baleful polymorph', 'bestow curse', 'blindness/deafness', 'ill omen'], cost: 22050 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'blindness_deafness', spellName: 'Blindness/Deafness', spellLevel: 2, casterLevel: 9, chargesRequired: 1 },
       { spellId: 'ill_omen', spellName: 'Ill Omen', spellLevel: 1, casterLevel: 9, chargesRequired: 1 },
@@ -207,7 +207,7 @@ export const stavesFill: StaffDefinition[] = [
     description: '+1 flaming quarterstaff made of fused bleached bones with an unholy flame at its head. Retains flaming property when uncharged. False life (1), ray of enfeeblement (1), scorching ray (1), fireball (2), animate dead (3).',
     construction: { feats: ['Craft Magic Arms and Armor', 'Craft Staff'], spells: ['animate dead', 'false life', 'fireball', 'ray of enfeeblement', 'scorching ray'], cost: 27133 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'false_life', spellName: 'False Life', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'ray_of_enfeeblement', spellName: 'Ray of Enfeeblement', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
@@ -230,7 +230,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Cedar staff that develops brass decorations resembling the owner\'s preferred instrument. Calm emotions (1), glibness (1), hypnotic pattern (1), pyrotechnics (1), enthrall (2), major image (2), sculpt sound (2).',
     construction: { feats: ['Craft Staff'], spells: ['calm emotions', 'enthrall', 'glibness', 'hypnotic pattern', 'major image', 'pyrotechnics', 'sculpt sound'], cost: 24400 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'calm_emotions', spellName: 'Calm Emotions', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'glibness', spellName: 'Glibness', spellLevel: 3, casterLevel: 8, chargesRequired: 1 },
@@ -250,7 +250,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Iron rods, copper gears, and silver screws that constantly shift. Can become a Medium animated object 1/day for up to 10 minutes. Make whole (1), mending (1), animate objects (2).',
     construction: { feats: ['Craft Staff'], spells: ['animate objects', 'make whole', 'mending'], cost: 24900 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'make_whole', spellName: 'Make Whole', spellLevel: 2, casterLevel: 11, chargesRequired: 1 },
       { spellId: 'mending', spellName: 'Mending', spellLevel: 0, casterLevel: 11, chargesRequired: 1 },
@@ -266,7 +266,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Walnut shaft with a forked top resembling a dowsing rod and beast horns, containing a delicate gemstone. Augury (1), speak with dead (1), divination (2), commune (3).',
     construction: { feats: ['Craft Staff'], spells: ['augury', 'commune', 'divination', 'speak with dead'], cost: 30608 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'augury', spellName: 'Augury', spellLevel: 2, casterLevel: 9, chargesRequired: 1 },
       { spellId: 'speak_with_dead', spellName: 'Speak with Dead', spellLevel: 3, casterLevel: 9, chargesRequired: 1 },
@@ -287,7 +287,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Rough stone staff that feels and weighs like light wood. Arcane lock (1), grease (1), wind wall (1), wall of fire (2), wall of ice (2), wall of stone (3).',
     construction: { feats: ['Craft Staff'], spells: ['arcane lock', 'grease', 'wall of fire', 'wall of ice', 'wall of stone', 'wind wall'], cost: 27050 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'arcane_lock', spellName: 'Arcane Lock', spellLevel: 2, casterLevel: 9, chargesRequired: 1 },
       { spellId: 'grease', spellName: 'Grease', spellLevel: 1, casterLevel: 9, chargesRequired: 1 },
@@ -306,7 +306,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Topped by a swirling cloudy stone and wrapped with black iron filigree. Gust of wind (1), stone shape (1), air walk (2), control winds (2), spike stones (2).',
     construction: { feats: ['Craft Staff'], spells: ['air walk', 'control winds', 'gust of wind', 'spike stones', 'stone shape'], cost: 27000 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'gust_of_wind', spellName: 'Gust of Wind', spellLevel: 2, casterLevel: 9, chargesRequired: 1 },
       { spellId: 'stone_shape', spellName: 'Stone Shape', spellLevel: 3, casterLevel: 9, chargesRequired: 1 },
@@ -328,7 +328,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Teak shaft decorated with hammered gold and silver coins. Identify (1), locate object (1), magic aura (1), secret chest (2), legend lore (3).',
     construction: { feats: ['Craft Staff'], spells: ['identify', 'legend lore', 'locate object', 'magic aura', 'secret chest'], cost: 30016 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'identify', spellName: 'Identify', spellLevel: 1, casterLevel: 11, chargesRequired: 1 },
       { spellId: 'locate_object', spellName: 'Locate Object', spellLevel: 2, casterLevel: 11, chargesRequired: 1 },
@@ -346,7 +346,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Dark wooden shaft with chalklike stone between black clawlike protrusions. Alarm (1), magic mouth (1), phantom trap (1), explosive runes (2), fire trap (2), sepia snake sigil (2).',
     construction: { feats: ['Craft Staff'], spells: ['alarm', 'explosive runes', 'fire trap', 'magic mouth', 'phantom trap', 'sepia snake sigil'], cost: 36525 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'alarm', spellName: 'Alarm', spellLevel: 1, casterLevel: 8, chargesRequired: 1 },
       { spellId: 'magic_mouth', spellName: 'Magic Mouth', spellLevel: 2, casterLevel: 8, chargesRequired: 1 },
@@ -365,7 +365,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Hollow wooden staff that amplifies the wielder\'s voice with booming insistence. Suggestion (1), tongues (1), denounce (2), glibness (2), mass suggestion (4).',
     construction: { feats: ['Craft Staff'], spells: ['denounce', 'glibness', 'mass suggestion', 'suggestion', 'tongues'], cost: 28600 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'suggestion', spellName: 'Suggestion', spellLevel: 3, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'tongues', spellName: 'Tongues', spellLevel: 3, casterLevel: 13, chargesRequired: 1 },
@@ -387,7 +387,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Gnarled wooden staff embedded with thorns. Blindness/deafness (1), charm person (1), hold person (1), inflict moderate wounds (1), baleful polymorph (2), bestow curse (2), vampiric touch (2).',
     construction: { feats: ['Craft Staff'], spells: ['baleful polymorph', 'bestow curse', 'blindness/deafness', 'charm person', 'hold person', 'inflict moderate wounds', 'vampiric touch'], cost: 28350 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'blindness_deafness', spellName: 'Blindness/Deafness', spellLevel: 2, casterLevel: 9, chargesRequired: 1 },
       { spellId: 'charm_person', spellName: 'Charm Person', spellLevel: 1, casterLevel: 9, chargesRequired: 1 },
@@ -409,8 +409,8 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Silver staff with mithral spheres at each end. Functions as a +2/+2 quarterstaff and grants +2 enhancement bonus to Intelligence even when uncharged. Bull\'s strength (1), enlarge person (1), telekinesis (3), flesh to stone (4).',
     construction: { feats: ['Craft Magic Arms and Armor', 'Craft Staff'], spells: ["bull's strength", 'enlarge person', 'flesh to stone', "fox's cunning", 'telekinesis'], cost: 29300 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated',
-    effects: [{ type: 'bonus', bonusType: 'enhancement', target: 'ability.intelligence', value: 2, source: 'Staff of Mithral Might' }],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger',
+    effects: [{ type: 'bonus', bonusType: 'enhancement', target: 'ability.int', value: 2, source: 'Staff of Mithral Might' }],
     spells: [
       { spellId: 'bulls_strength', spellName: "Bull's Strength", spellLevel: 2, casterLevel: 11, chargesRequired: 1 },
       { spellId: 'enlarge_person', spellName: 'Enlarge Person', spellLevel: 1, casterLevel: 11, chargesRequired: 1 },
@@ -427,7 +427,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Obsidian staff resembling a starlit night sky. When fully charged, wielder may shatter it to open a portal to a chosen plane for 1 minute (no concentration). Planar adaptation (1), planar binding (2), plane shift (5).',
     construction: { feats: ['Craft Staff'], spells: ['planar adaptation', 'planar binding', 'plane shift'], cost: 31980 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'planar_adaptation', spellName: 'Planar Adaptation', spellLevel: 5, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'planar_binding', spellName: 'Planar Binding', spellLevel: 6, casterLevel: 13, chargesRequired: 2 },
@@ -447,7 +447,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Scorched and twisted wood set with a crystal sphere filled with swirling smoke. Darkness (1), ray of enfeeblement (1), vampiric touch (1), enervation (2), summon shadow (as summon monster V, 2), call devourer (as planar binding, 3).',
     construction: { feats: ['Craft Staff'], spells: ['darkness', 'enervation', 'planar binding', 'ray of enfeeblement', 'summon monster V', 'vampiric touch'], cost: 34650 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'darkness', spellName: 'Darkness', spellLevel: 2, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'ray_of_enfeeblement', spellName: 'Ray of Enfeeblement', spellLevel: 1, casterLevel: 13, chargesRequired: 1 },
@@ -466,8 +466,8 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Dragon bone staff wrapped in scales, tied to one chromatic dragon type (black, blue, green, red, or white). Grants +2 natural armor bonus and a 1d8 bite attack. Fly (1), protection from energy (1), dragon\'s breath (2), form of the dragon II (4).',
     construction: { feats: ['Craft Staff'], spells: ['alter self', "dragon's breath", 'fly', 'form of the dragon II', 'protection from energy'], cost: 40500 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated',
-    effects: [{ type: 'bonus', bonusType: 'natural_armor', target: 'ac', value: 2, source: 'Dragon Staff' }],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger',
+    effects: [{ type: 'bonus', bonusType: 'natural', target: 'ac.natural', value: 2, source: 'Dragon Staff' }],
     spells: [
       { spellId: 'fly', spellName: 'Fly', spellLevel: 3, casterLevel: 13, chargesRequired: 1 },
       { spellId: 'protection_from_energy', spellName: 'Protection from Energy', spellLevel: 3, casterLevel: 13, chargesRequired: 1 },
@@ -487,7 +487,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Smoky spirals adorn the length of this staff with an almost hypnotic effect. Deep slumber (1), ray of exhaustion (1), dream (2), nightmare (2), waves of fatigue (2), symbol of sleep (3).',
     construction: { feats: ['Craft Staff'], spells: ['deep slumber', 'dream', 'nightmare', 'ray of exhaustion', 'symbol of sleep', 'waves of fatigue'], cost: 49216 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'deep_slumber', spellName: 'Deep Slumber', spellLevel: 3, casterLevel: 9, chargesRequired: 1 },
       { spellId: 'ray_of_exhaustion', spellName: 'Ray of Exhaustion', spellLevel: 3, casterLevel: 9, chargesRequired: 1 },
@@ -506,7 +506,7 @@ export const stavesFill: StaffDefinition[] = [
     description: 'Crystal staff sculpted into dozens of grasping, distorted hands that transforms to match the wielder\'s hands. Mage hand at will (no charge). Forceful hand (1), interposing hand (1), clenched fist (2), grasping hand (2), crushing hand (3).',
     construction: { feats: ['Craft Staff'], spells: ['clenched fist', 'crushing hand', 'forceful hand', 'grasping hand', 'interposing hand', 'mage hand'], cost: 90100 },
     physicalStats: { hardness: 5, hitPoints: 10, breakDC: 17 },
-    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'use_activated', effects: [],
+    requiresFreeHand: true, maximumCharges: 10, activationCategory: 'spell_trigger', effects: [],
     spells: [
       { spellId: 'forceful_hand', spellName: 'Forceful Hand', spellLevel: 6, casterLevel: 17, chargesRequired: 1 },
       { spellId: 'interposing_hand', spellName: 'Interposing Hand', spellLevel: 5, casterLevel: 17, chargesRequired: 1 },
