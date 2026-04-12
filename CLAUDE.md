@@ -65,3 +65,14 @@ At the start of every new session, run /prime before doing anything else.
 - Pre-commit hooks enforce lint + format via Husky + lint-staged
 - Never include `Co-Authored-By: Claude` in commit messages
 - Never include `🤖 Generated with [Claude Code](https://claude.com/claude-code)` in PR descriptions or any other output
+
+## Git Standard — Orient Before Acting
+
+- Run `git status` and `git branch` before any git operation. Never assume what branch you're on or what's staged. Read the state first, every time.
+- Check for worktrees with `git worktree list` if anything seems ambiguous — you may be in a secondary worktree pointing at a different branch than expected.
+- Never commit directly to main/master. If on main, create a feature branch first. Ask Mark what branch naming convention the repo uses.
+- Never push without confirming branch and remote tracking. `git status` shows this — check it before `git push`.
+- When a new window opens, establish context before doing any work: current branch, uncommitted changes, remote status. This is the first action, not an afterthought.
+- Uncommitted work from a prior session may exist. Check `git status` before starting. Don't assume a clean slate.
+- Always commit and push before closing a session if changes were made. Untracked local changes don't survive context switches.
+- Never force push without explicit instruction.
