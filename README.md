@@ -12,11 +12,11 @@ Built for players and Dungeon Masters who need a real tool — not a glorified P
 
 **Character management** — Full Pathfinder 1e character sheet with automatic computation of BAB, saves, AC, skills, spells per day, and ability score breakdowns. Every modifier is traceable to its source.
 
-**Direct-entry import** — Freeform 10-tab editor for importing existing paper characters with no required entry order. Validates on demand; warns but never hard-blocks. Reconstructs the ECL timeline to check prerequisites level-by-level and suggests class reorderings that would resolve conflicts.
+**Direct-entry import** — Freeform 10-tab editor for importing existing paper characters with no required entry order. Validates on demand; warns but never hard-blocks. Reconstructs the ECL (Effective Character Level) timeline to check prerequisites level-by-level and suggests class reorderings that would resolve conflicts.
 
 **Ruleset system** — Configurable rulesets per character or campaign: allowed source collections, optional rules (Elephant in the Room feat tax removal, Relaxed Entry, fractional BAB/saves, gestalt, mythic, Path of War), explicit item bans, and DM-granted campaign rewards. Three built-in presets: PF1e Standard, PF1e Society, and Go Nuts. Campaign rulesets sync to all linked characters with version-aware drift detection.
 
-**Combat tracker** — Initiative, HP tracking, buff/debuff toggles, attack resolution, and a full dice roller with roll history.
+**Combat tracker** — Initiative, HP tracking, buff/debuff toggles, attack resolution, and a full dice roller with roll history. Buffs and debuffs resolve through the same modifier pipeline as the character sheet — toggle Haste and your attack strings update live.
 
 ---
 
@@ -50,10 +50,6 @@ Built for players and Dungeon Masters who need a real tool — not a glorified P
 ### Type System
 
 A 30+ interface TypeScript model covering the full Pathfinder 1e rules surface: ability score layers, BAB/save progressions, feat prerequisites and chains, spell slot tables, archetype feature replacements, class choice definitions (domains, bloodlines, mysteries, rage powers, talents, hexes, exploits, and more), magic item overlays, templates with CR/LA tracking, and a versioned ruleset model. Designed to be the authoritative data contract between the game rules and every service that touches them.
-
-### AI-Assisted Game Data Pipeline
-
-The game data — ~2,600 feats, 971 traits, ~2,500 spells, 1,176 archetypes, 492 templates, 271 deities, and hundreds of class-specific options across 23 class choice collections — was assembled using a multi-agent scraping pipeline. A scout agent fetches source pages from the Pathfinder SRD, produces a numbered manifest, and passes batches to scraper agents that extract and validate each entry against the TypeScript schema. Output goes directly into typed seed scripts. The pipeline produced **~442,000 lines of structured, type-safe game data across 538 data files** without hand-entry.
 
 ### Services
 
@@ -110,7 +106,7 @@ plans/                  Design specs and implementation plans
 
 ### AI Features
 
-The structured game data layer — 30+ typed interfaces, ~442,000 lines of validated game content — is the foundation the AI features are built on. Planned:
+The structured game data layer — 30+ typed interfaces covering the full Pathfinder 1e rules surface — is the foundation the AI features are built on. Planned:
 
 - Natural language rules queries ("Can my character take Arcane Strike at level 7?")
 - Character build suggestions based on feat availability, class synergies, and campaign ruleset
