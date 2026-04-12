@@ -94,7 +94,7 @@ export const specificArmorBatch1: MagicArmorDefinition[] = [
     description: '+4 full plate with demonic spikes. The clawed gauntlets count as +3 claws (1d6 damage). Each day the wearer dons the armor, they must make a DC 15 Will save or have their alignment shift one step toward chaotic evil.',
     construction: { feats: ['Craft Magic Arms and Armor'], spells: ['magic vestment'], cost: 26130 },
     physicalStats: { hardness: 10, hitPoints: 80, breakDC: 30 },
-    activationCategory: 'use_activated', effects: [],
+    activationCategory: 'continuous', effects: [],
     baseArmorId: 'full_plate', enhancementBonus: 4, armorSpecialAbilities: [],
   },
   {

@@ -190,7 +190,7 @@ export const specificArmorBatch3: MagicArmorDefinition[] = [
     physicalStats: { hardness: 5, hitPoints: 20, breakDC: 22 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'resistance', target: 'saving_throw.all', value: 1, source: 'Studded Leather of Resistance' },
+      { type: 'bonus', bonusType: 'resistance', target: 'save.all', value: 1, source: 'Studded Leather of Resistance' },
     ],
     baseArmorId: 'studded_leather',
     enhancementBonus: 3,
@@ -271,7 +271,7 @@ export const specificArmorBatch3: MagicArmorDefinition[] = [
     effects: [
       { type: 'bonus', bonusType: 'sacred', target: 'spell.concentration', value: 2, source: 'Cassock of the Clergy', condition: { type: 'custom', params: {}, description: 'cast defensively' } },
     ],
-    baseArmorId: 'leather',
+    baseArmorId: 'padded',
     enhancementBonus: 1,
     armorSpecialAbilities: [],
   },
@@ -331,7 +331,7 @@ export const specificArmorBatch3: MagicArmorDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 80, breakDC: 30 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'bonus', bonusType: 'sacred', target: 'saving_throw.all', value: 2, source: "Honor's Panoply", condition: { type: 'custom', params: {}, description: 'vs. evil spells and evil casters' } },
+      { type: 'bonus', bonusType: 'sacred', target: 'save.all', value: 2, source: "Honor's Panoply", condition: { type: 'custom', params: {}, description: 'vs. evil spells and evil casters' } },
     ],
     baseArmorId: 'full_plate',
     enhancementBonus: 1,

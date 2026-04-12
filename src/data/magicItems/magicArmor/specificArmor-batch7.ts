@@ -67,7 +67,7 @@ export const specificArmorBatch7: MagicArmorDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 80, breakDC: 30 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'resistance', target: 'energy_resistance', value: 10, source: 'Gelugon Plate', condition: { type: 'custom', params: { descriptor: 'cold' }, description: 'cold resistance 10' } },
+      { type: 'bonus', bonusType: 'untyped', target: 'energy_resistance', value: 10, source: 'Gelugon Plate', condition: { type: 'custom', params: { descriptor: 'cold' }, description: 'cold resistance 10' } },
     ],
     spellLikeAbilities: [
       { spells: [{ spellId: 'wall_of_ice', spellName: 'Wall of Ice', casterLevel: 7, usesPerDay: 3, activationAction: 'standard' }] },
@@ -218,7 +218,7 @@ export const specificArmorBatch7: MagicArmorDefinition[] = [
     physicalStats: { hardness: 5, hitPoints: 30, breakDC: 24 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'resistance', target: 'energy_resistance', value: 10, source: 'Hamatula Hide', condition: { type: 'custom', params: { descriptor: 'fire' }, description: 'fire resistance 10 while raging' } },
+      { type: 'bonus', bonusType: 'untyped', target: 'energy_resistance', value: 10, source: 'Hamatula Hide', condition: { type: 'custom', params: { descriptor: 'fire' }, description: 'fire resistance 10 while raging' } },
     ],
     baseArmorId: 'hide',
     enhancementBonus: 1,
@@ -301,11 +301,11 @@ export const specificArmorBatch7: MagicArmorDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 80, breakDC: 30 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'resistance', target: 'energy_resistance', value: 5, source: 'Invincible Armor', condition: { type: 'custom', params: { descriptor: 'acid' }, description: 'acid resistance 5' } },
-      { type: 'resistance', target: 'energy_resistance', value: 5, source: 'Invincible Armor', condition: { type: 'custom', params: { descriptor: 'cold' }, description: 'cold resistance 5' } },
-      { type: 'resistance', target: 'energy_resistance', value: 5, source: 'Invincible Armor', condition: { type: 'custom', params: { descriptor: 'electricity' }, description: 'electricity resistance 5' } },
-      { type: 'resistance', target: 'energy_resistance', value: 5, source: 'Invincible Armor', condition: { type: 'custom', params: { descriptor: 'fire' }, description: 'fire resistance 5' } },
-      { type: 'resistance', target: 'energy_resistance', value: 5, source: 'Invincible Armor', condition: { type: 'custom', params: { descriptor: 'sonic' }, description: 'sonic resistance 5' } },
+      { type: 'bonus', bonusType: 'untyped', target: 'energy_resistance', value: 5, source: 'Invincible Armor', condition: { type: 'custom', params: { descriptor: 'acid' }, description: 'acid resistance 5' } },
+      { type: 'bonus', bonusType: 'untyped', target: 'energy_resistance', value: 5, source: 'Invincible Armor', condition: { type: 'custom', params: { descriptor: 'cold' }, description: 'cold resistance 5' } },
+      { type: 'bonus', bonusType: 'untyped', target: 'energy_resistance', value: 5, source: 'Invincible Armor', condition: { type: 'custom', params: { descriptor: 'electricity' }, description: 'electricity resistance 5' } },
+      { type: 'bonus', bonusType: 'untyped', target: 'energy_resistance', value: 5, source: 'Invincible Armor', condition: { type: 'custom', params: { descriptor: 'fire' }, description: 'fire resistance 5' } },
+      { type: 'bonus', bonusType: 'untyped', target: 'energy_resistance', value: 5, source: 'Invincible Armor', condition: { type: 'custom', params: { descriptor: 'sonic' }, description: 'sonic resistance 5' } },
     ],
     baseArmorId: 'full_plate',
     enhancementBonus: 2,
@@ -345,7 +345,7 @@ export const specificArmorBatch7: MagicArmorDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 55, breakDC: 26 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'bonus', bonusType: 'luck', target: 'saving_throw.all', value: 1, source: 'Luck Mail, Greater' },
+      { type: 'bonus', bonusType: 'luck', target: 'save.all', value: 1, source: 'Luck Mail, Greater' },
     ],
     spellLikeAbilities: [
       { spells: [{ spellId: 'moment_of_greatness', spellName: 'Moment of Greatness', casterLevel: 3, usesPerDay: 1, activationAction: 'standard' }] },
@@ -428,7 +428,7 @@ export const specificArmorBatch7: MagicArmorDefinition[] = [
     physicalStats: { hardness: 5, hitPoints: 30, breakDC: 24 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'competence', target: 'saving_throw.all', value: 2, source: 'Otyugh Hide', condition: { type: 'custom', params: {}, description: 'vs. disease, poison, nausea, sickness' } },
+      { type: 'bonus', bonusType: 'competence', target: 'save.all', value: 2, source: 'Otyugh Hide', condition: { type: 'custom', params: {}, description: 'vs. disease, poison, nausea, sickness' } },
     ],
     baseArmorId: 'hide',
     enhancementBonus: 1,
@@ -447,7 +447,7 @@ export const specificArmorBatch7: MagicArmorDefinition[] = [
     effects: [],
     spellLikeAbilities: [
       { spells: [
-        { spellId: 'bleed', spellName: 'Bleed', casterLevel: 5, usesPerDay: -1, activationAction: 'standard' },
+        { spellId: 'bleed', spellName: 'Bleed', casterLevel: 5, usesPerDay: 0, activationAction: 'standard' },
         { spellId: 'interrogation', spellName: 'Interrogation', casterLevel: 5, usesPerDay: 1, activationAction: 'standard' },
       ]},
     ],

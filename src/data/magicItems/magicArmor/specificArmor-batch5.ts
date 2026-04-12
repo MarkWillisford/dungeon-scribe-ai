@@ -58,7 +58,7 @@ export const specificArmorBatch5: MagicArmorDefinition[] = [
     physicalStats: { hardness: 5, hitPoints: 20, breakDC: 22 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'bonus', bonusType: 'untyped', target: 'saving_throw.all', value: 4, source: 'Howling Skull Armor', condition: { type: 'custom', params: {}, description: 'vs. fear effects' } },
+      { type: 'bonus', bonusType: 'untyped', target: 'save.all', value: 4, source: 'Howling Skull Armor', condition: { type: 'custom', params: {}, description: 'vs. fear effects' } },
     ],
     baseArmorId: 'studded_leather',
     enhancementBonus: 3,
@@ -93,7 +93,7 @@ export const specificArmorBatch5: MagicArmorDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 60, breakDC: 28 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'bonus', bonusType: 'sacred', target: 'saving_throw.all', value: 2, source: 'Raiment of the Shining Crusade', condition: { type: 'custom', params: {}, description: 'vs. channeled negative energy and negative levels' } },
+      { type: 'bonus', bonusType: 'sacred', target: 'save.all', value: 2, source: 'Raiment of the Shining Crusade', condition: { type: 'custom', params: {}, description: 'vs. channeled negative energy and negative levels' } },
     ],
     baseArmorId: 'half_plate',
     enhancementBonus: 1,
@@ -354,7 +354,7 @@ export const specificArmorBatch5: MagicArmorDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 55, breakDC: 26 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'profane', target: 'saving_throw.all', value: 3, source: 'Suit of Inverted Jade', condition: { type: 'custom', params: {}, description: 'vs. disease, mind-affecting, poison, sleep, and stunning' } },
+      { type: 'bonus', bonusType: 'profane', target: 'save.all', value: 3, source: 'Suit of Inverted Jade', condition: { type: 'custom', params: {}, description: 'vs. disease, mind-affecting, poison, sleep, and stunning' } },
     ],
     baseArmorId: 'chainmail',
     enhancementBonus: 3,
@@ -372,7 +372,7 @@ export const specificArmorBatch5: MagicArmorDefinition[] = [
     description: 'This magical leather armor functions as a +2 improved shadow leather armor and provides the wearer the ability to cast vanish as a quickened spell-like ability five times daily. Mythic wearers may expend one use of mythic power when activating vanish to become incorporeal for 1 round.',
     construction: { feats: ['Craft Magic Arms and Armor', 'Mythic Crafter'], spells: ['vanish', 'ethereal jaunt'], cost: 12660 },
     physicalStats: { hardness: 5, hitPoints: 15, breakDC: 20 },
-    activationCategory: 'spell_trigger',
+    activationCategory: 'use_activated',
     effects: [],
     spellLikeAbilities: [
       { spells: [{ spellId: 'vanish', spellName: 'Vanish', casterLevel: 11, usesPerDay: 5, activationAction: 'swift' }] },

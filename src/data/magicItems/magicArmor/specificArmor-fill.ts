@@ -117,7 +117,7 @@ export const specificArmorFill: MagicArmorDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 20, breakDC: 22 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'luck', target: 'saves.all', value: 1, source: 'Calamitous Mail' },
+      { type: 'bonus', bonusType: 'luck', target: 'save.all', value: 1, source: 'Calamitous Mail' },
     ],
     baseArmorId: 'chain_shirt',
     enhancementBonus: 1,
@@ -186,7 +186,7 @@ export const specificArmorFill: MagicArmorDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 40, breakDC: 26 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'luck', target: 'saves.all', value: 1, source: "Lucky Drunk's Mail" },
+      { type: 'bonus', bonusType: 'luck', target: 'save.all', value: 1, source: "Lucky Drunk's Mail" },
     ],
     baseArmorId: 'chainmail',
     enhancementBonus: 1,
@@ -567,7 +567,7 @@ export const specificArmorFill: MagicArmorDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 30, breakDC: 24 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'bonus', bonusType: 'resistance', target: 'saves.vs_electricity_wind_weather', value: 4, source: 'Skyplate Armor' },
+      { type: 'bonus', bonusType: 'resistance', target: 'save.all', value: 4, source: 'Skyplate Armor' },
     ],
     baseArmorId: 'steel_lamellar',
     enhancementBonus: 1,

@@ -45,8 +45,8 @@ export const specificArmorBatch6: MagicArmorDefinition[] = [
     effects: [],
     spellLikeAbilities: [
       { spells: [
-        { spellId: 'detect_magic', spellName: 'Detect Magic', casterLevel: 3, usesPerDay: -1, activationAction: 'standard' },
-        { spellId: 'read_magic', spellName: 'Read Magic', casterLevel: 3, usesPerDay: -1, activationAction: 'standard' },
+        { spellId: 'detect_magic', spellName: 'Detect Magic', casterLevel: 3, usesPerDay: 0, activationAction: 'standard' },
+        { spellId: 'read_magic', spellName: 'Read Magic', casterLevel: 3, usesPerDay: 0, activationAction: 'standard' },
         { spellId: 'comprehend_languages', spellName: 'Comprehend Languages', casterLevel: 3, usesPerDay: 1, activationAction: 'standard' },
       ]},
     ],
@@ -158,8 +158,8 @@ export const specificArmorBatch6: MagicArmorDefinition[] = [
     effects: [],
     spellLikeAbilities: [
       { spells: [
-        { spellId: 'light', spellName: 'Light', casterLevel: 12, usesPerDay: -1, activationAction: 'standard' },
-        { spellId: 'stabilize', spellName: 'Stabilize', casterLevel: 12, usesPerDay: -1, activationAction: 'standard' },
+        { spellId: 'light', spellName: 'Light', casterLevel: 12, usesPerDay: 0, activationAction: 'standard' },
+        { spellId: 'stabilize', spellName: 'Stabilize', casterLevel: 12, usesPerDay: 0, activationAction: 'standard' },
       ]},
     ],
     baseArmorId: 'chain_shirt',
@@ -177,8 +177,8 @@ export const specificArmorBatch6: MagicArmorDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 80, breakDC: 30 },
     activationCategory: 'use_activated',
     effects: [
-      { type: 'bonus', bonusType: 'enhancement', target: 'ability.strength', value: 4, source: 'Clockwork Armor', condition: { type: 'custom', params: {}, description: 'when wound' } },
-      { type: 'bonus', bonusType: 'enhancement', target: 'ability.constitution', value: 4, source: 'Clockwork Armor', condition: { type: 'custom', params: {}, description: 'when wound' } },
+      { type: 'bonus', bonusType: 'enhancement', target: 'ability.str', value: 4, source: 'Clockwork Armor', condition: { type: 'custom', params: {}, description: 'when wound' } },
+      { type: 'bonus', bonusType: 'enhancement', target: 'ability.con', value: 4, source: 'Clockwork Armor', condition: { type: 'custom', params: {}, description: 'when wound' } },
     ],
     baseArmorId: 'full_plate',
     enhancementBonus: 2,
@@ -230,7 +230,7 @@ export const specificArmorBatch6: MagicArmorDefinition[] = [
     effects: [],
     spellLikeAbilities: [
       { spells: [
-        { spellId: 'daylight', spellName: 'Daylight', casterLevel: 15, usesPerDay: -1, activationAction: 'standard' },
+        { spellId: 'daylight', spellName: 'Daylight', casterLevel: 15, usesPerDay: 0, activationAction: 'standard' },
         { spellId: 'sunburst', spellName: 'Sunburst', casterLevel: 15, usesPerDay: 1, activationAction: 'standard' },
       ]},
     ],
@@ -410,7 +410,7 @@ export const specificArmorBatch6: MagicArmorDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 55, breakDC: 26 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'untyped', target: 'ac.touch', value: 4, source: 'Flashguard Plate', condition: { type: 'custom', params: {}, description: 'vs. ray attacks' } },
+      { type: 'bonus', bonusType: 'untyped', target: 'ac.deflection', value: 4, source: 'Flashguard Plate', condition: { type: 'custom', params: {}, description: 'vs. ray attacks' } },
     ],
     baseArmorId: 'breastplate',
     enhancementBonus: 1,

@@ -156,7 +156,7 @@ export const specificArmorBatch4: MagicArmorDefinition[] = [
     physicalStats: { hardness: 15, hitPoints: 55, breakDC: 28 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'resistance', target: 'saving_throw.all', value: 4, source: 'Elven Vengeance', condition: { type: 'custom', params: {}, description: 'vs. spells from specific demon lord\'s followers' } },
+      { type: 'bonus', bonusType: 'resistance', target: 'save.all', value: 4, source: 'Elven Vengeance', condition: { type: 'custom', params: {}, description: 'vs. spells from specific demon lord\'s followers' } },
     ],
     baseArmorId: 'chainmail',
     enhancementBonus: 2,
@@ -191,7 +191,7 @@ export const specificArmorBatch4: MagicArmorDefinition[] = [
     physicalStats: { hardness: 10, hitPoints: 55, breakDC: 26 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', bonusType: 'untyped', target: 'ac.touch', value: 4, source: 'Numerian Resistance Plate', condition: { type: 'custom', params: {}, description: 'vs. ray attacks' } },
+      { type: 'bonus', bonusType: 'untyped', target: 'ac.deflection', value: 4, source: 'Numerian Resistance Plate', condition: { type: 'custom', params: {}, description: 'vs. ray attacks' } },
     ],
     baseArmorId: 'breastplate',
     enhancementBonus: 2,

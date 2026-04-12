@@ -202,7 +202,7 @@ export const armorAbilitiesFill: ItemSpecialAbility[] = [
     description: 'The wearer gains a +3 resistance bonus on saving throws against poison.',
     bonusEquivalent: 1, casterLevel: 7,
     effects: [
-      { type: 'bonus', bonusType: 'resistance', target: 'saves.vs_poison', value: 3, source: 'Poison-Resistant Armor' },
+      { type: 'bonus', bonusType: 'resistance', target: 'save.fortitude', value: 3, source: 'Poison-Resistant Armor' },
     ],
   },
   {
@@ -211,7 +211,7 @@ export const armorAbilitiesFill: ItemSpecialAbility[] = [
     description: 'The wearer gains a +2 enhancement bonus on concentration checks. Occultists with the mental focus class feature can attune to the armor over 1 hour once per day to gain one additional mental focus point, forfeited if the armor is removed. Medium armor only.',
     bonusEquivalent: 1, casterLevel: 5,
     effects: [
-      { type: 'bonus', bonusType: 'enhancement', target: 'spell.concentration', value: 2, source: 'Mental Focus Armor' },
+      { type: 'bonus', bonusType: 'competence', target: 'spell.concentration', value: 2, source: 'Mental Focus Armor' },
     ],
   },
   {
@@ -265,7 +265,7 @@ export const armorAbilitiesFill: ItemSpecialAbility[] = [
     description: 'The wearer gains a +2 resistance bonus on Will saves and immunity to possession and mental control (including charm and compulsion effects). When donned while already affected, the wearer receives another saving throw. Medium or heavy armor only.',
     bonusEquivalent: 2, casterLevel: 12,
     effects: [
-      { type: 'bonus', bonusType: 'resistance', target: 'saves.will', value: 2, source: 'Mind Buttressing Armor' },
+      { type: 'bonus', bonusType: 'resistance', target: 'save.will', value: 2, source: 'Mind Buttressing Armor' },
     ],
   },
   {
