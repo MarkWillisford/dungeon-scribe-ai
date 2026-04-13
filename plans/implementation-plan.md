@@ -1,6 +1,6 @@
 # Dungeon Scribe AI 1.1 — Implementation Plan
 
-## Status (as of 2026-04-11)
+## Status (as of 2026-04-13)
 
 All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown significantly beyond the original plan through additional phases.
 
@@ -13,33 +13,34 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 | 4    | Redux store                  | **COMPLETE** + `characterEntrySlice` added (PR #12)                                                                                                                                         |
 | 5    | Firebase config + services   | **COMPLETE**                                                                                                                                                                                |
 | 6    | Navigation (Expo Router)     | **COMPLETE** + `entry.tsx` added (PR #12)                                                                                                                                                   |
-| 7    | Shared UI components         | **COMPLETE** + 18 direct-entry components (PR #12)                                                                                                                                          |
+| 7    | Shared UI components         | **COMPLETE** + 18 direct-entry components (PR #12) + `ValidationReportSheet` (PR #50)                                                                                                       |
 | 8    | Game data                    | **COMPLETE** + massively extended (races, classes, archetypes, feats, traits, spells, templates, domains, rage powers, rogue talents, animal companions, deities, class choice definitions) |
 | 9    | Testing                      | **COMPLETE** — 690 tests, 36 suites, all thresholds passing                                                                                                                                 |
 | 10   | CI/CD (GitHub Actions + EAS) | **COMPLETE** — `ci.yml`, `build-staging.yml`, `build-production.yml`                                                                                                                        |
 
 ### Currently in flight
 
-| Work                                                | Plan                                      | Status                                                    |
-| --------------------------------------------------- | ----------------------------------------- | --------------------------------------------------------- |
-| **Ruleset system** (types, presets, service, Redux) | `ruleset-system.md`                       | **COMPLETE** — PR #49 (merged)                            |
-| **Draft Validation System** (`DraftStateResolver`, `DraftValidationService`, `ValidationReportSheet`) | `draft-validation-system.md` | **COMPLETE** — PR #50 open (awaiting review) |
-| Magic items — types + equipment cleanup (PR 1)      | `magic-items.md`                          | IN PROGRESS — `MW/magic-items-types` branch               |
-| Magic items — data scraping (PR 2)                  | `magic-items.md`                          | NOT STARTED — blocked on PR 1 merge                       |
-| Feats expansion                                     | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PRs #18, #24, #25, #26 open (~2,908 feats) |
-| Traits expansion                                    | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — PR #19 open (971/900+ traits)              |
-| Class choices (Cavalier/Inquisitor/Oracle/Bard)     | `data-scraping/class-choices-database.md` | **COMPLETE** — PR #20 open                                |
-| `{chosen_deity}` token resolution in ClassChoiceRow | `data-scraping/class-choices-database.md` | NOT STARTED — domains show unfiltered                     |
-| Seed all collections to Firestore staging → prod    | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)                           |
-| Data quality + admin review system                  | `data-quality-admin-review.md`            | NOT STARTED                                               |
-| `Effect.type` enum review                           | `src/types/base.ts`                       | NOT STARTED — see note below                              |
-| Enter Rissi — validate model end-to-end             | —                                         | NOT STARTED                                               |
+| Work                                                                                                  | Plan                                      | Status                                       |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------- | -------------------------------------------- |
+| **Ruleset system** (types, presets, service, Redux)                                                   | `ruleset-system.md`                       | **COMPLETE** — PR #49 (merged)               |
+| **Draft Validation System** (`DraftStateResolver`, `DraftValidationService`, `ValidationReportSheet`) | `draft-validation-system.md`              | **COMPLETE** — PR #50 (merged)               |
+| **Source normalization** (`normalizeSource`, `GameDataSource`, wired into all seed scripts)           | —                                         | **COMPLETE** — PR #55 (merged)               |
+| Magic items — types + equipment cleanup (PR 1)                                                        | `magic-items.md`                          | **COMPLETE** — PR #23 (merged)               |
+| Magic items — data scraping (PR 2)                                                                    | `magic-items.md`                          | IN PROGRESS — Doug PRs #51–54 open           |
+| Feats expansion                                                                                       | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — all PRs merged (~2,908 feats) |
+| Traits expansion                                                                                      | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — merged (971/900+ traits)      |
+| Class choices (all major classes)                                                                     | `data-scraping/class-choices-database.md` | **COMPLETE** — all PRs merged (#37–#46)      |
+| `{chosen_deity}` token resolution in ClassChoiceRow                                                   | `data-scraping/class-choices-database.md` | **COMPLETE** — fixed in ClassChoiceRow       |
+| `Effect.type` enum review                                                                             | `src/types/base.ts`                       | **COMPLETE** — PR #29 (merged)               |
+| Seed all collections to Firestore staging → prod                                                      | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)              |
+| Data quality + admin review system                                                                    | `data-quality-admin-review.md`            | NOT STARTED                                  |
+| Enter Rissi — validate model end-to-end                                                               | —                                         | NOT STARTED                                  |
 
 #### Note: Campaign ruleset management UI — out of scope for current phase
 
 The Ruleset system (`ruleset-system.md`) covers types, Firestore structure, presets, `RulesetService`, and Redux. The **UI for DMs to create/edit/manage campaign rulesets** is explicitly out of scope until campaign management screens are built in a later phase. The data layer ships first; the UI follows.
 
-#### Note: `Effect.type` enum — COMPLETE
+#### Note: `Effect.type` enum — COMPLETE (PR #29)
 
 `Effect.type` and `Effect.target` were locked down in PR #29 (merged). Valid values: `'bonus' | 'special' | 'damage' | 'resistance' | 'penalty' | 'custom'`.
 
