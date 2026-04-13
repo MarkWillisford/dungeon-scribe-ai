@@ -18,6 +18,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_NINJA_TRICKS } from '../../src/data/ninjaTricks/index';
 import type { NinjaTrickEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -65,7 +66,10 @@ async function seedNinjaTricks(tricks: NinjaTrickEntry[]): Promise<void> {
   for (const chunk of chunks) {
     const batch = db.batch();
     chunk.forEach((trick) => {
-      batch.set(db.collection('ninjatricks').doc(trick.id), trick);
+      batch.set(db.collection('ninjatricks').doc(trick.id), {
+        ...trick,
+        source: normalizeSource(trick.source),
+      });
     });
     await batch.commit();
     totalWritten += chunk.length;

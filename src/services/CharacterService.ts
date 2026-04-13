@@ -8,9 +8,10 @@ import { BABProgression, SaveProgression } from '@/types/base';
 import { ClassFeature } from '@/types/classes';
 import { AbilityScoreService } from '@services/AbilityScoreService';
 import { getClassByName } from '@data/classes';
+import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
 
 export class CharacterService {
-  private static readonly CURRENT_SCHEMA_VERSION = '1.1.0';
+  private static readonly CURRENT_SCHEMA_VERSION = '1.2.0';
 
   /**
    * Creates a default character from creation parameters
@@ -90,6 +91,8 @@ export class CharacterService {
 
       buffs: [],
       savedBuffs: [],
+
+      ruleset: { ...PRESET_PF1E_STANDARD },
 
       schemaVersion: this.CURRENT_SCHEMA_VERSION,
       lastUpdated: new Date(),

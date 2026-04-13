@@ -18,6 +18,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_SPELLS } from '../../src/data/spells/index';
 import type { Spell } from '../../src/types/spells';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -89,7 +90,7 @@ async function seedSpells(spells: Spell[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((spell) => {
       const ref = db.collection('spells').doc(); // auto-ID
-      batch.set(ref, spell);
+      batch.set(ref, { ...spell, source: normalizeSource(spell.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;

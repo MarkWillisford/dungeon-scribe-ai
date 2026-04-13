@@ -1,0 +1,57 @@
+// UC-Only 1-Point Eidolon Evolutions
+// Source: Pathfinder Unchained (pf1e-unchained) + Horror Realms (pf1e-horror-realms)
+// Count: 2 entries
+// Excluded from this file (shared with APG): Bite, Claws, Climb, Gills, Improved Damage,
+//   Improved Natural Armor, Magic Attacks, Mount, Pincers, Pull, Push, Reach, Resistance,
+//   Scent, Shared Evolution, Skilled, Slam, Sting, Swim, Tail, Tail Slap, Tentacle, Wing Buffet
+
+import type { EidolonEvolutionEntry } from '@/types/classOptions';
+
+export const eidolonEvolutionsUc1pt: EidolonEvolutionEntry[] = [
+  {
+    id: 'evolution-basic-psychic-magic',
+    name: 'Basic Psychic Magic',
+    description:
+      'The eidolon learns to cast a psychic cantrip as a spell-like ability. Select one spell from the following list: dancing lights, detect magic, ghost sound, grave words, know direction, lullaby, mage hand, open/close, or telekinetic projectile. The eidolon can cast this spell at will as a psychic spell requiring thought and emotion components. The caster level for this ability equals the eidolon\'s total number of Hit Dice minus 2 (minimum 1st). The save DC for this ability is 10 + 1/2 the eidolon\'s HD + the eidolon\'s Charisma modifier. This evolution can be selected more than once. Each time, the eidolon gains a different spell from the list. The eidolon must have an aberrant subtype and a Charisma score of at least 10 to select this evolution.',
+    evolutionPointCost: 1,
+    canBeTakenMultipleTimes: true,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.basic-psychic-magic',
+        value: 0,
+        source: 'Eidolon Evolution — Basic Psychic Magic',
+      },
+    ],
+    prerequisites: [
+      { type: 'ability_score', ability: 'CHA', minimum: 10 },
+    ],
+    subtypeRestrictions: ['aberrant'],
+    summoner: 'unchained',
+    source: 'pf1e-horror-realms',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-tentacle-mass',
+    name: 'Tentacle Mass',
+    description:
+      'The eidolon grows a thick mass of writhing tentacles in place of one of its natural attacks, granting it a tentacle mass primary natural attack. The tentacle mass deals 1d8 points of damage (2d6 if Large, 2d8 if Huge). If the eidolon also has the grab evolution linked to its tentacle mass, it can grapple creatures up to the same size as the eidolon (rather than one size smaller) and qualifies for the constrict evolution without requiring a serpentine base form. The eidolon must have an aberrant subtype to select this evolution.',
+    evolutionPointCost: 1,
+    effects: [
+      {
+        type: 'special',
+        target: 'special.natural-attack-tentacle-mass',
+        value: 0,
+        source: 'Eidolon Evolution — Tentacle Mass',
+      },
+    ],
+    subtypeRestrictions: ['aberrant'],
+    summoner: 'unchained',
+    source: 'pf1e-horror-realms',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+];

@@ -1,0 +1,251 @@
+// Batch 1 | Items 1-22 (Astounding Avoidance → See in Darkness)
+// Sources: Occult Adventures (pf1e-oa), Blood of the Beast (pf1e-blood-of-the-beast),
+//          Occult Realms (pf1e-or), Occult Origins (pf1e-oo), Heroes of Golarion (pf1e-hog)
+// Count: 22
+
+import type { MesmeristTrickEntry } from '@/types/classOptions';
+
+export const mesmeristTricksBatch1: MesmeristTrickEntry[] = [
+  {
+    id: 'mesmerist-trick-astounding-avoidance',
+    name: 'Astounding Avoidance',
+    trickTier: 'standard',
+    description:
+      "The subject can avoid damage from magical and unusual attacks. The mesmerist can trigger this trick when the subject attempts a saving throw against an attack or spell that normally deals half damage on a successful save, before the subject rolls the save. If the subject succeeds at her save, she takes no damage. If the mesmerist is 12th level or higher, the subject takes only half damage if she fails her save. The benefits of this trick don't stack with those of the evasion or stalwart class features.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-break-stupor',
+    name: 'Break Stupor',
+    trickTier: 'standard',
+    description:
+      "The mesmerist can trigger this trick when the subject is affected by a condition such as fascination or magical sleep that would normally end if the subject took damage or was subject to an obvious threat. The trick sends a momentary phantom threat and sensation of pain, ending the effect. This trick acts quickly enough that a sleeping creature does not fall prone or drop held items if the mesmerist uses it immediately. The mesmerist can also trigger this trick on a confused subject, but doing so causes that subject to attack the mesmerist on its next turn.",
+    source: 'pf1e-blood-of-the-beast',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-chain-of-eyes',
+    name: 'Chain of Eyes',
+    trickTier: 'standard',
+    description:
+      "The subject can share her senses with the mesmerist. The mesmerist triggers chain of eyes by closing his eyes and concentrating on the implanted subject, allowing the mesmerist to see and hear everything the target experiences with her own senses of sight and hearing (including any special senses or magical effects). Once triggered, chain of eyes lasts for 1 minute per mesmerist level or until the mesmerist shifts his field of vision back to himself as a free action. While viewing events from the target's perspective, the mesmerist is flat-footed, even if he can see himself from another perspective.",
+    source: 'pf1e-oo',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-compel-alacrity',
+    name: 'Compel Alacrity',
+    trickTier: 'standard',
+    description:
+      "A dash of mental speed lets the subject push past her physical limits to avoid an enemy. The mesmerist can trigger this trick when the subject begins her turn within an enemy's reach. The subject can move 10 feet as a free action without provoking attacks of opportunity. The distance the subject can move increases by 5 feet for every 5 levels the mesmerist possesses, to a maximum of 30 feet at 20th level. The subject can't move farther than her speed in this way. The movement from this trick doesn't count against the subject's movement speed for that round.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-enchanting-words',
+    name: 'Enchanting Words',
+    trickTier: 'standard',
+    description:
+      "The mesmerist can trigger this trick whenever the subject attempts a Diplomacy or Intimidate check to adjust a creature's attitude. The subject can use the mesmerist's Charisma modifier instead of her own Charisma modifier on the check. If the subject uses Intimidate, the adjustment in attitude lasts an additional number of minutes equal to 10 x the mesmerist's Charisma modifier (minimum of 10 additional minutes).",
+    source: 'pf1e-blood-of-the-beast',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-false-flanker',
+    name: 'False Flanker',
+    trickTier: 'standard',
+    description:
+      "A duplicate of the mesmerist appears momentarily, as though he were fighting in tandem with the subject. The mesmerist can trigger this trick when the subject moves into or begins her turn in a square where she threatens an enemy. An illusory duplicate of the mesmerist appears in any unoccupied space adjacent to that enemy. This duplicate counts as threatening the enemy for the purposes of determining flanking, but can't actually make attacks. The duplicate disappears at the end of the turn during which the trick is triggered. This is an illusion (figment) effect, and a creature that interacts with the false flanker can attempt a saving throw to disbelieve the effect.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-fearsome-guise',
+    name: 'Fearsome Guise',
+    trickTier: 'standard',
+    description:
+      "While this trick is implanted, the subject's appearance is altered, as disguise self. The mesmerist can trigger this trick when the subject attacks a creature. When triggered, the illusion briefly makes the subject appear as a hideous monster before the illusion ends. The mesmerist then makes an Intimidate check to demoralize the target of the attack, following the normal restrictions for Intimidate (the target must be within 30 feet and able to see and hear the subject). This is an illusion (glamer) effect.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-fleet-in-shadows',
+    name: 'Fleet in Shadows',
+    trickTier: 'standard',
+    description:
+      "The mesmerist can trigger this trick whenever the target enters an area with dim or darker light. The subject can move double its normal speed (up to an additional 30 feet) for 1 round, but only while moving through areas of dim or darker light. Additionally, the subject can move at its normal speed and use the bonus speed from this trick in areas of total darkness, even if it cannot see.",
+    source: 'pf1e-or',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-gift-of-will',
+    name: 'Gift of Will',
+    trickTier: 'standard',
+    description:
+      "The mesmerist can trigger this trick when the subject attempts a Will saving throw, attempts a Sense Motive check, or is the target of an Intimidate check to demoralize her. When triggered for a saving throw, the subject uses the mesmerist's Will saving throw bonus in place of her own. When triggered for a Sense Motive check or to resist demoralization, the subject adds the mesmerist's Charisma bonus as a morale bonus on the check or to the DC of the Intimidate check. The mesmerist can't implant this trick on himself.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-levitation-buffer',
+    name: 'Levitation Buffer',
+    trickTier: 'standard',
+    description:
+      "The mesmerist can trigger this trick when an enemy moves adjacent to the subject or the subject begins her turn with an adjacent enemy. The mesmerist can either lift enemies slightly, reducing their speed by half and imposing a -4 penalty to their CMD against bull rush, drag, and reposition combat maneuvers for 1 round (Will negates), or push them away using a bull rush combat maneuver check with a CMB equal to the mesmerist's level plus his Charisma modifier. The speed reduction and CMD penalty don't stack with those from hostile levitation.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-life-revier',
+    name: 'Life Revier',
+    trickTier: 'standard',
+    description:
+      "The mesmerist triggers this trick when the subject attempts an Intelligence or Knowledge check to remember a previous experience. The subject receives flashes of her entire life up to that point. She may use the mesmerist's Charisma modifier instead of her Intelligence modifier on the check, and she can attempt the check untrained. The subject cannot learn information she has not previously read, heard, or otherwise experienced during her life when using this ability.",
+    source: 'pf1e-blood-of-the-beast',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-linked-reaction',
+    name: 'Linked Reaction',
+    trickTier: 'standard',
+    description:
+      "A hive mind allows the mesmerist and an ally to share one another's reaction times. The mesmerist can trigger this trick when either the subject or the mesmerist is surprised and the other isn't (even if the mesmerist would normally be unable to take actions because of being surprised). Both the mesmerist and the subject can act in this surprise round. The mesmerist can't implant this trick on himself.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-mask-misery',
+    name: 'Mask Misery',
+    trickTier: 'standard',
+    description:
+      "The subject can shrug off a debilitating condition temporarily before succumbing to it. The mesmerist can trigger this trick when the subject gains a minor condition from the touch treatment class feature list. The subject ignores the effects of the condition for 1d4 rounds, after which the condition takes full effect. The ignored rounds count against the condition's total duration. If an effect imposes multiple eligible conditions simultaneously, all of them are ignored. At 6th level or higher, the mesmerist can also suppress moderate conditions with this trick, and minor conditions are ended entirely rather than merely suppressed. The mesmerist doesn't need to have touch treatment to select or use this trick.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-meek-facade',
+    name: 'Meek Facade',
+    trickTier: 'standard',
+    description:
+      "The subject magically seems like a weak target, goading an enemy into attacking her. The mesmerist can trigger this trick when the subject misses a creature with an attack (even if it's part of a full attack in which she hits that creature with another attack). The enemy must attack no one other than the subject, and the subject gains a +2 dodge bonus to AC against the triggering enemy's attacks. Both of these effects last for 1 round. The bonus to AC increases by 1 for every 5 levels the mesmerist possesses. This is a mind-affecting compulsion effect.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-mesmeric-mirror',
+    name: 'Mesmeric Mirror',
+    trickTier: 'standard',
+    description:
+      "An illusory image appears near the subject to throw off attackers. The mesmerist can trigger this trick when the subject is attacked or becomes the target of a spell that requires an attack roll. One duplicate of the subject appears, and the attacker must determine randomly which it hits (as mirror image). For every 5 class levels the mesmerist possesses, one additional image appears, to a maximum of five images at 20th level. Each image lasts for 1 minute per mesmerist level or until destroyed. This is an illusion (figment) effect.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-mesmeric-pantomime',
+    name: 'Mesmeric Pantomime',
+    trickTier: 'standard',
+    description:
+      "By orchestrating the movement of his ally's body, the mesmerist imparts to that ally his own skill at a physical task. The mesmerist can trigger this trick when the subject attempts a Strength- or Dexterity-based skill check. The subject either uses the mesmerist's bonus on the skill check in place of her own or gains a morale bonus on the check equal to the mesmerist's Charisma bonus, whichever results in a higher modifier. The mesmerist can't implant this trick on himself.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-misdirection',
+    name: 'Misdirection',
+    trickTier: 'standard',
+    description:
+      "The mesmerist can trigger this trick when the subject makes an attack or casts a spell that requires an attack roll. The mesmerist makes a Bluff check to feint against the target of the attack. Unlike a normal feint, this works regardless of whether the attack is a melee attack. If the feint succeeds, the target loses its Dexterity bonus to AC against that attack. No additional effects that would normally apply on a successful feint apply. This is an illusion (glamer) effect.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-psychic-impression',
+    name: 'Psychic Impression',
+    trickTier: 'standard',
+    description:
+      "Objects retain psychic impressions of those who come in contact with them, and a powerful mind can read these impressions. The mesmerist can trigger this trick when the subject touches an object that another creature with an Intelligence score of 3 or more has touched in the last 10 minutes. The mesmerist receives a psychic impression of the emotional state of the last such creature to touch the object. This impression contains no images or languages and can't show the mesmerist who the creature was if the mesmerist doesn't already know.",
+    source: 'pf1e-hog',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-psychosomatic-surge',
+    name: 'Psychosomatic Surge',
+    trickTier: 'standard',
+    description:
+      "Psychic magic soothes the subject, alleviating her wounds temporarily. The mesmerist can trigger this trick when the subject takes damage. The subject gains a number of temporary hit points equal to 1d8 + 1/2 the mesmerist's level. If the damage from the triggering attack would have reduced the subject to 0 hit points or fewer, this trick grants an additional 1d8 temporary hit points. These temporary hit points last for 1 hour or until discharged.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-reflect-fear',
+    name: 'Reflect Fear',
+    trickTier: 'standard',
+    description:
+      "The mesmerist can trigger this trick when the subject is affected by a fear effect or targeted by an Intimidate demoralize attempt. The subject suppresses the triggering fear effect for 1d4 rounds, and the creature causing the effect must attempt a Will save or become shaken for 1 round. The suppressed rounds count toward the original fear effect's remaining duration. If the suppression period lasts longer than the fear effect's remaining duration, the subject avoids the fear effect entirely.",
+    source: 'pf1e-or',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-reflection-of-weakness',
+    name: 'Reflection of Weakness',
+    trickTier: 'standard',
+    description:
+      "Psychic feedback causes an enemy to suffer from the same weakening effect it imposes on the subject. The mesmerist can trigger this trick when an attack or spell used by an enemy causes the subject to take ability damage, ability drain, bleed damage, or a minor or moderate condition listed under the touch treatment class feature. When triggered by ability damage, ability drain, or bleed damage, the amount of damage or drain the subject takes is reduced by 2 points (to a minimum of 0 points), and the creature that made the attack or cast the spell takes 2 points of ability damage to an ability score of the mesmerist's choice (Will negates). When triggered by a condition, the subject is still affected by the condition, but the attacker takes a condition of the mesmerist's choice for 1 round from the minor or moderate condition lists of the touch treatment class feature (Will negates). The mesmerist doesn't need to have touch treatment to select or use this trick.",
+    source: 'pf1e-oa',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'mesmerist-trick-see-in-darkness',
+    name: 'See in Darkness',
+    trickTier: 'standard',
+    description:
+      "The subject gains darkvision with a range of 60 feet for 1 minute. The mesmerist can trigger this trick when the subject moves into an area of darkness.",
+    source: 'pf1e-or',
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+  },
+];
