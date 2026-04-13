@@ -5,6 +5,7 @@
 // The player's actual selections are stored as ClassChoice[] on ClassEntry (see classes.ts).
 
 import { FeatPrerequisite } from './feats';
+import type { GameDataSource } from './gameData';
 
 // ---- Selection Mode ----
 // Describes when and how many times a choice is made.
@@ -38,6 +39,12 @@ export type ClassChoiceSelectionMode =
       startLevel: number;
       count?: number;
       canRepeat?: boolean;
+    }
+  | {
+      // Requires custom UI handling — not a standard build-time picker.
+      // e.g. Shaman wandering spirit (resets daily like spell preparation),
+      //      any feature that resets on rest or has non-standard selection logic.
+      type: 'special';
     };
 
 // ---- Option Group ----
@@ -94,7 +101,7 @@ export interface ClassChoiceDefinition {
   levelFilterTable?: Record<number, Record<string, unknown>>;
 
   // ContentMetadata
-  source: string; // 'pf1e-core' | 'pf1e-apg' | '3.5e' | 'homebrew' | etc.
+  source: string | GameDataSource; // string during static data phase; GameDataSource after Firestore migration
   isOfficial: boolean;
   createdBy?: string; // userId, absent for official content
   visibility: 'global' | 'campaign' | 'private';

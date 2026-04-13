@@ -1,3 +1,5 @@
+import type { GameDataSource } from './gameData';
+
 // ---- Spellcasting ----
 
 export interface Spellcasting {
@@ -94,7 +96,7 @@ export interface Spell {
   savingThrow: string;
   spellResistance: string;
   description: string;
-  source: string;
+  source: string | GameDataSource; // string during static data phase; GameDataSource after Firestore migration
 }
 
 export interface KnownSpell extends Spell {

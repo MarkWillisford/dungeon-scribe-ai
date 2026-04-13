@@ -15,6 +15,7 @@
 
 import * as admin from 'firebase-admin';
 import { ALL_DEITIES } from '../../src/data/deities/index';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -51,7 +52,7 @@ async function seed(): Promise<void> {
     const batch = db.batch();
     chunk.forEach((deity) => {
       const ref = db.collection('deities').doc(deity.id);
-      batch.set(ref, deity); // upsert — overwrites if exists, creates if not
+      batch.set(ref, { ...deity, source: normalizeSource(deity.source) }); // upsert — overwrites if exists, creates if not
     });
     await batch.commit();
     totalWritten += chunk.length;

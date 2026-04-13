@@ -1,5 +1,7 @@
 // src/types/animalCompanions.ts
 
+import type { GameDataSource } from './gameData';
+
 export interface AnimalCompanionProgressionTier {
   atDruidLevel: 4 | 7; // druid/ranger level when this tier activates
   sizeChange?: string; // e.g. 'Medium to Large' — omit if no size change
@@ -33,7 +35,7 @@ export interface AnimalCompanionEntry {
   progressionTiers: AnimalCompanionProgressionTier[]; // [] if no progression
 
   // ContentMetadata
-  source: string;
+  source: string | GameDataSource; // string during static data phase; GameDataSource after Firestore migration
   isOfficial: boolean;
   visibility: 'global' | 'campaign' | 'private';
   campaignId?: string;

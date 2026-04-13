@@ -18,6 +18,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_SLAYER_TALENTS } from '../../src/data/slayerTalents/index';
 import type { SlayerTalentEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -65,7 +66,10 @@ async function seedSlayerTalents(talents: SlayerTalentEntry[]): Promise<void> {
   for (const chunk of chunks) {
     const batch = db.batch();
     chunk.forEach((talent) => {
-      batch.set(db.collection('slayertalents').doc(talent.id), talent);
+      batch.set(db.collection('slayertalents').doc(talent.id), {
+        ...talent,
+        source: normalizeSource(talent.source),
+      });
     });
     await batch.commit();
     totalWritten += chunk.length;

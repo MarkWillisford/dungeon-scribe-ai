@@ -5,6 +5,7 @@ import combatReducer from './slices/combatSlice';
 import themeReducer from './slices/themeSlice';
 import uiReducer from './slices/uiSlice';
 import characterEntryReducer from './slices/characterEntrySlice';
+import rulesetReducer from './slices/rulesetSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     theme: themeReducer,
     ui: uiReducer,
     characterEntry: characterEntryReducer,
+    ruleset: rulesetReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

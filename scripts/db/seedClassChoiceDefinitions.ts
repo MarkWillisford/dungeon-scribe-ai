@@ -17,6 +17,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_CLASS_CHOICE_DEFINITIONS } from '../../src/data/classChoiceDefinitions/index';
 import type { ClassChoiceDefinition } from '../../src/types/classChoices';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -70,7 +71,7 @@ async function seedClassChoiceDefinitions(defs: ClassChoiceDefinition[]): Promis
     const batch = db.batch();
     chunk.forEach((def) => {
       const ref = db.collection('classChoiceDefinitions').doc(def.id);
-      batch.set(ref, def);
+      batch.set(ref, { ...def, source: normalizeSource(def.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;

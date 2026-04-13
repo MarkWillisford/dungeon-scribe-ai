@@ -1,5 +1,6 @@
 import { Effect, Alignment } from './base';
 import type { MagicAura } from './equipment';
+import type { GameDataSource } from './gameData';
 
 // ---------------------------------------------------------------------------
 // Slot type — worn location for magic items
@@ -204,7 +205,7 @@ export interface MagicItemDefinition {
   id: string;
   name: string;
   category: MagicItemCategory;
-  source: string;
+  source: string | GameDataSource; // string during static data phase; GameDataSource after Firestore migration
   isOfficial: boolean;
 
   aura: MagicAura[]; // array because items can have multiple schools (e.g. "moderate abjuration and faint transmutation")
