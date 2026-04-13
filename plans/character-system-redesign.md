@@ -780,12 +780,12 @@ interface ClassChoice {
 
 ### Next: Implementation Queue
 
-1. **Seed `ClassChoiceDefinition` data** — Start with Cleric (domains), then Fighter, Rogue, Wizard, Sorcerer, Ranger, Barbarian; use batch seed script to Firestore
-2. **Seed `Domain` collection** — All PF1e core domains + APG domains, with domain spells and powers
-3. **Add prerequisites to `ClassEntry`** — reuse `FeatPrerequisite` shape for prestige class entry requirements
-4. **Seed 3.5e prestige classes** — Hathran, Dweomerkeeper, Radiant Servant, Prestige Paladin as campaign content
-5. **Build direct-entry UI** — implement 23 components in `src/components/character/direct-entry/`, following spec in `plans/direct-entry-ui-design.md`
-6. **Enter Rissi** — validate model end-to-end with a real character
+1. ~~**Seed `ClassChoiceDefinition` data**~~ — **DONE** — all major classes complete (PRs #37–#46 merged)
+2. ~~**Seed `Domain` collection`**~~ — **DONE** — 181 domains seeded
+3. ~~**Build direct-entry UI**~~ — **DONE** — 19 components built and wired (PRs #12, #50 merged)
+4. **Seed all collections to Firestore** — scripts ready; not yet run against staging
+5. **Seed 3.5e prestige classes** — Hathran, Dweomerkeeper, Radiant Servant, Prestige Paladin as campaign content — NOT STARTED
+6. **Enter Rissi** — validate model end-to-end with a real character — NOT STARTED
 
 ### Parallel (not blockers)
 

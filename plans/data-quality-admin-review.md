@@ -2,9 +2,11 @@
 
 ## 2026-03-17
 
-## Status (as of 2026-03-19): NOT STARTED
+## Status (as of 2026-04-13): NOT STARTED
 
 No code has been written for this plan. `verificationStatus` does not exist in any type file, seed script, or service. The admin screen does not exist. Everything below is the design spec ready to implement.
+
+**Source normalization note (PR #55, merged 2026-04-11):** The source field across all collections is now a `GameDataSource` object `{ bookId, bookName, publisher, page? }` rather than a raw string. This affects the detection strategy for unknown sources — see updated Seed Script Tagging Strategy below.
 
 ---
 
@@ -119,9 +121,11 @@ At seed-script authoring time, scan each collection's batch files for:
 
 1. Files containing `// TODO: manually verify`
 2. Files containing `// PAGE_FETCH_FAILED`
-3. Entries with `source: 'pf1e-unknown'`
+3. Entries with `source: 'pf1e-unknown'` in static data files — after `normalizeSource()` runs, these become `source.bookId === 'unknown'` in Firestore
 
 Tag those `needs_review` or `stub` as appropriate. All others default to `verified`.
+
+**Note on source normalization (PR #55):** All seed scripts now call `normalizeSource()` which converts raw source strings to `GameDataSource` objects before writing to Firestore. A raw `'pf1e-unknown'` string becomes `{ bookId: 'unknown', bookName: 'Unknown Source', publisher: 'Unknown' }`. When querying Firestore to find candidates for review, use `where('source.bookId', '==', 'unknown')` as an additional signal alongside `verificationStatus`.
 
 ---
 
