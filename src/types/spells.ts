@@ -1,4 +1,5 @@
 import type { GameDataSource } from './gameData';
+import type { DataQualityFields } from './base';
 
 // ---- Spellcasting ----
 
@@ -70,7 +71,7 @@ export interface CLBonus {
 
 // ---- Spell Definition ----
 
-export interface Spell {
+export interface Spell extends DataQualityFields {
   name: string;
   // Map of class name to spell level — e.g. { wizard: 3, sorcerer: 3, magus: 3 }
   // Queryable in Firestore: where('classLevels.wizard', '==', 3)

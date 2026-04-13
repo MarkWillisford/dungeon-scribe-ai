@@ -1,6 +1,7 @@
 // src/types/animalCompanions.ts
 
 import type { GameDataSource } from './gameData';
+import type { DataQualityFields } from './base';
 
 export interface AnimalCompanionProgressionTier {
   atDruidLevel: 4 | 7; // druid/ranger level when this tier activates
@@ -14,7 +15,7 @@ export interface AnimalCompanionProgressionTier {
   specialQualitiesGained?: string[]; // new SQs that activate at this tier
 }
 
-export interface AnimalCompanionEntry {
+export interface AnimalCompanionEntry extends DataQualityFields {
   id: string; // kebab-case: 'wolf', 'leopard', 'giant-eagle', 'giant-mantis'
   name: string;
   companionType: 'animal' | 'magical beast' | 'plant' | 'vermin' | 'aberration' | 'accursed';

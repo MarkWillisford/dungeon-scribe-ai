@@ -8,7 +8,9 @@ export type LevelUpDecision =
 
 // ---- Applied Templates (paid — carry ECL machinery) ----
 
-export interface AppliedTemplate {
+import type { DataQualityFields } from './base';
+
+export interface AppliedTemplate extends DataQualityFields {
   templateId: string; // Reference to template definition in Firestore
   name: string; // Snapshotted name
   appliedAs: 'la' | 'cr';

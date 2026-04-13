@@ -1,4 +1,4 @@
-import { Effect, Alignment } from './base';
+import { Effect, Alignment, DataQualityFields } from './base';
 import type { MagicAura } from './equipment';
 import type { GameDataSource } from './gameData';
 
@@ -201,7 +201,7 @@ export type MagicItemCategory =
 // MagicAura, AuraStrength, MagicSchool are imported from equipment.ts
 // ---------------------------------------------------------------------------
 
-export interface MagicItemDefinition {
+export interface MagicItemDefinition extends DataQualityFields {
   id: string;
   name: string;
   category: MagicItemCategory;
