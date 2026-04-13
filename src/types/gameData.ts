@@ -26,7 +26,7 @@ export interface GameDataSource {
  * Content visibility level — controls access and distribution.
  * Used by seed scripts to determine Firestore visibility settings.
  */
-export type ContentVisibility = 'public' | 'private' | 'campaign';
+export type ContentVisibility = 'global' | 'private' | 'campaign';
 
 /**
  * Template-provided source info (from scrapers).

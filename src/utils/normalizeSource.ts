@@ -814,7 +814,7 @@ export function normalizeSource(
       bookId: 'unknown',
       bookName: 'Unknown Source',
       publisher: 'Unknown',
-      page,
+      ...(page !== undefined && { page }),
     };
   }
 
@@ -835,7 +835,7 @@ export function normalizeSource(
       bookId: 'unknown',
       bookName: 'Unknown Source',
       publisher: 'Unknown',
-      page: pageNum,
+      ...(pageNum !== undefined && { page: pageNum }),
     };
   }
 

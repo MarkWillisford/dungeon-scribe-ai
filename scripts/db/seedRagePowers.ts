@@ -56,7 +56,8 @@ async function seedRagePowers(powers: ClassOptionBase[]): Promise<void> {
 
   const bySource: Record<string, number> = {};
   powers.forEach((p) => {
-    bySource[p.source] = (bySource[p.source] ?? 0) + 1;
+    const key = typeof p.source === 'string' ? p.source : p.source.bookId;
+    bySource[key] = (bySource[key] ?? 0) + 1;
   });
   console.log('By source:', bySource);
 

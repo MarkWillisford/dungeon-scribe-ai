@@ -62,7 +62,8 @@ async function seedWildTalents(talents: KineticistWildTalentEntry[]): Promise<vo
 
   const bySource: Record<string, number> = {};
   talents.forEach((t) => {
-    bySource[t.source] = (bySource[t.source] ?? 0) + 1;
+    const key = typeof t.source === 'string' ? t.source : t.source.bookId;
+    bySource[key] = (bySource[key] ?? 0) + 1;
   });
   console.log('By source:', bySource);
 

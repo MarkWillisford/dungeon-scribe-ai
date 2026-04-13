@@ -7,6 +7,8 @@
 // ---- Prestige class boons (Sentinel 3/6/9, Evangelist 3/6/9, Exalted 3/6/9) ----
 // Boons are text descriptions only — mechanical effects wired by modifier pipeline.
 
+import type { GameDataSource } from './gameData';
+
 export interface DeityBoonTier {
   tier: 1 | 2 | 3;
   description: string;
@@ -42,7 +44,7 @@ export interface DeityEntry {
   boons?: DeityBoons;
 
   // ContentMetadata
-  source: string; // 'pf1e-core' | 'pf1e-apg' | '3.5e' | 'homebrew' | etc.
+  source: string | GameDataSource; // string during static data phase; GameDataSource after Firestore migration
   createdBy?: string;
   visibility: 'global' | 'campaign' | 'private';
   campaignId?: string;
