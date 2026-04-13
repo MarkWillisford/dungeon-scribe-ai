@@ -55,6 +55,7 @@ export interface DraftTemplateEntry {
   crValue?: number;
   laValue?: number;
   acquired?: 'inherited' | 'acquired' | 'either';
+  acquiredAtECL?: number; // ECL at which an acquired template was obtained (for timeline placement)
   isFreeGrant: boolean;
   freeGrantNote?: string; // description for free grants
   grantedBy?: string; // e.g. "DM (campaign grant)"

@@ -20,7 +20,7 @@ export const samuraiDefinitions: ClassChoiceDefinition[] = [
     className: 'samurai',
     featureName: 'Weapon Expertise',
     description:
-      'At 3rd level, a samurai selects one type of weapon for weapon expertise. He can draw that weapon as a free action, gains +2 on critical confirmation rolls with it, and his samurai levels count as fighter levels for weapon-related feat prerequisites.',
+      'At 3rd level, a samurai selects one weapon from the following list. He can draw that weapon as a free action (as Quick Draw), gains a +2 bonus on critical confirmation rolls with it, and his samurai levels count as fighter levels for weapon-focused feats with it. This choice is permanent.',
     selectionMode: { type: 'at_class_levels', levels: [3] },
     optionSource: 'inline',
     optionGroups: [

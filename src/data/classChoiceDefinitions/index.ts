@@ -20,6 +20,22 @@ import { arcanistDefinitions } from './arcanist';
 import { investigatorDefinitions } from './investigator';
 import { sorcererDefinitions } from './sorcerer';
 import { bloodragerDefinitions } from './bloodrager';
+import { ninjaDefinitions } from './ninja';
+import { slayerDefinitions } from './slayer';
+import { magusDefinitions } from './magus';
+import { samuraiDefinitions } from './samurai';
+import { brawlerDefinitions } from './brawler';
+import { hunterDefinitions } from './hunter';
+import { gunslingerDefinitions } from './gunslinger';
+import { barbarianUnchainedDefinitions } from './barbarianUnchained';
+import { rogueUnchainedDefinitions } from './rogueUnchained';
+import { shamanDefinitions } from './shaman';
+import { summonerDefinitions } from './summoner';
+import { mesmeristDefinitions } from './mesmerist';
+import { kineticistDefinitions } from './kineticist';
+import { occultistDefinitions } from './occultist';
+import { psychicDefinitions } from './psychic';
+import { spiritualistDefinitions } from './spiritualist';
 
 export {
   fighterDefinitions,
@@ -43,6 +59,22 @@ export {
   investigatorDefinitions,
   sorcererDefinitions,
   bloodragerDefinitions,
+  ninjaDefinitions,
+  slayerDefinitions,
+  magusDefinitions,
+  samuraiDefinitions,
+  brawlerDefinitions,
+  hunterDefinitions,
+  gunslingerDefinitions,
+  barbarianUnchainedDefinitions,
+  rogueUnchainedDefinitions,
+  shamanDefinitions,
+  summonerDefinitions,
+  mesmeristDefinitions,
+  kineticistDefinitions,
+  occultistDefinitions,
+  psychicDefinitions,
+  spiritualistDefinitions,
 };
 
 export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
@@ -67,6 +99,22 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...investigatorDefinitions,
   ...sorcererDefinitions,
   ...bloodragerDefinitions,
+  ...ninjaDefinitions,
+  ...slayerDefinitions,
+  ...magusDefinitions,
+  ...samuraiDefinitions,
+  ...brawlerDefinitions,
+  ...hunterDefinitions,
+  ...gunslingerDefinitions,
+  ...barbarianUnchainedDefinitions,
+  ...rogueUnchainedDefinitions,
+  ...shamanDefinitions,
+  ...summonerDefinitions,
+  ...mesmeristDefinitions,
+  ...kineticistDefinitions,
+  ...occultistDefinitions,
+  ...psychicDefinitions,
+  ...spiritualistDefinitions,
 ];
 
 export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined =>

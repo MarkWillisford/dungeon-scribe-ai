@@ -132,6 +132,53 @@ export function computeBaseWill(classes: DraftClassEntry[]): number {
   return computeBaseSave(classes, 'will');
 }
 
+// ---- Fractional BAB / saves (optional rule) ----
+// Standard: floor each class's contribution individually, then sum.
+// Fractional: sum raw fractions across all classes, floor once at the end.
+// The +2 base bonus for good saves applies in both modes (once per character).
+
+export function computeTotalBABFractional(classes: DraftClassEntry[]): number {
+  const raw = classes.reduce((sum, c) => {
+    const data = lookupClassData(c.className);
+    if (!data) return sum + c.level * 0.75;
+    switch (data.babProgression) {
+      case BABProgression.Full:   return sum + c.level;
+      case BABProgression.Medium: return sum + c.level * 0.75;
+      case BABProgression.Low:    return sum + c.level * 0.5;
+      default:                    return sum + c.level * 0.75;
+    }
+  }, 0);
+  return Math.floor(raw);
+}
+
+function computeBaseSaveFractional(
+  classes: DraftClassEntry[],
+  saveType: 'fortitude' | 'reflex' | 'will',
+): number {
+  const hasGood = classes.some((c) => {
+    const data = lookupClassData(c.className);
+    return data !== null && data.saves[saveType] === SaveProgression.Good;
+  });
+  const raw = classes.reduce((sum, c) => {
+    const data = lookupClassData(c.className);
+    if (!data) return sum + c.level / 3;
+    return sum + (data.saves[saveType] === SaveProgression.Good ? c.level / 2 : c.level / 3);
+  }, 0);
+  return (hasGood ? 2 : 0) + Math.floor(raw);
+}
+
+export function computeBaseFortFractional(classes: DraftClassEntry[]): number {
+  return computeBaseSaveFractional(classes, 'fortitude');
+}
+
+export function computeBaseRefFractional(classes: DraftClassEntry[]): number {
+  return computeBaseSaveFractional(classes, 'reflex');
+}
+
+export function computeBaseWillFractional(classes: DraftClassEntry[]): number {
+  return computeBaseSaveFractional(classes, 'will');
+}
+
 // ---- ECL ----
 
 export function computeECL(

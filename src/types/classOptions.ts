@@ -4,7 +4,10 @@
 // ClassChoiceDefinition (classChoices.ts) routes to these collections at runtime.
 // All descriptions are text — mechanical effects are wired by the modifier pipeline.
 
-import { FeatPrerequisite } from './feats';
+import { Prerequisite } from './feats';
+import { Effect } from './base';
+import { SpecialAbility } from './specialAbilities';
+import type { GameDataSource } from './gameData';
 
 // ---- Base type shared by all option collection documents ----
 
@@ -12,10 +15,10 @@ export interface ClassOptionBase {
   id: string;
   name: string;
   description: string;
-  prerequisites?: FeatPrerequisite[];
+  prerequisites?: Prerequisite[];
 
   // ContentMetadata
-  source: string; // 'pf1e-core' | 'pf1e-apg' | '3.5e' | 'homebrew' | etc.
+  source: string | GameDataSource; // string during static data phase; GameDataSource after Firestore migration
   createdBy?: string; // userId; absent for official content
   visibility: 'global' | 'campaign' | 'private';
   campaignId?: string;
@@ -131,20 +134,123 @@ export type InvestigatorTalentEntry = ClassOptionBase;
 // Collection: 'shamanspirits'
 
 export interface ShamanSpiritEntry extends ClassOptionBase {
+  classIds?: string[]; // ['shaman'] or ['shaman', 'spirit-warrior-archetype']
   spiritSpells: string[]; // 9 entries — index 0 = level 1 spirit spell name
-  spiritAbility: string; // text description of the spirit ability
-  hexList?: string[]; // hex ids available to this spirit's shaman
-  wanderingSpirit: boolean; // can this spirit be taken as a wandering spirit?
+  abilities: {
+    spirit: SpecialAbility; // 1st level — usable 3 + Wis modifier times per day
+    greater: SpecialAbility; // 8th level
+    true: SpecialAbility; // 16th level
+    manifestation: SpecialAbility; // 20th level — permanent
+  };
+  hexList: string[]; // hex IDs available to the shaman when this spirit is chosen
+  wanderingSpirit: boolean; // true if this spirit can be selected as a wandering (secondary) spirit
+}
+
+// ---- Eidolon Evolution (Summoner, Summoner (Unchained) — shared pool) ----
+// Collection: 'eidolonevolutions'
+
+export type EidolonForm =
+  | 'biped'
+  | 'quadruped'
+  | 'serpentine'
+  | 'aquatic'
+  | 'avian'
+  | 'mounted'
+  | 'tauric'
+  | 'vermious';
+
+export type EidolonSubtype =
+  | 'aberrant'
+  | 'aeon'
+  | 'agathion'
+  | 'ancestor'
+  | 'angel'
+  | 'archon'
+  | 'astral'
+  | 'azata'
+  | 'daemon'
+  | 'deepwater'
+  | 'demon'
+  | 'devil'
+  | 'div'
+  | 'elemental'
+  | 'genie'
+  | 'inevitable'
+  | 'kami'
+  | 'kyton'
+  | 'plant'
+  | 'protean'
+  | 'psychopomp'
+  | 'radiant'
+  | 'shadow'
+  | 'storykin'
+  | 'twinned'
+  | 'void';
+
+export interface EidolonEvolutionEntry extends ClassOptionBase {
+  evolutionPointCost: 1 | 2 | 3 | 4;
+  canBeTakenMultipleTimes?: boolean; // default false
+  effects: Effect[]; // structured grants (attacks, senses, movement, stat bonuses, etc.)
+  summoner?: 'apg' | 'unchained'; // absent = available to both summoner versions
+  formRestrictions?: EidolonForm[]; // APG only — absent = any base form
+  subtypeRestrictions?: EidolonSubtype[]; // Unchained only — absent = any subtype
+}
+
+// ---- Mesmerist Trick ----
+// Collection: 'mesmeristtricks'
+
+export interface MesmeristTrickEntry extends ClassOptionBase {
+  trickTier: 'standard' | 'masterful'; // masterful tricks require mesmerist level 5+
 }
 
 // ---- Wild Talent (Kineticist) ----
 // Collection: 'wildtalents'
-// Kineticist choice architecture warrants its own design pass — this is a placeholder.
+// Prerequisites are talent names (strings), not FeatPrerequisite — use Omit to override.
 
-export interface WildTalentEntry extends ClassOptionBase {
-  element: string; // 'aether' | 'air' | 'earth' | 'fire' | 'water' | 'void' | 'wood' | string
+export interface KineticistWildTalentEntry extends Omit<ClassOptionBase, 'prerequisites'> {
+  prerequisites?: string[]; // prerequisite talent names
+  element: string; // 'aether' | 'air' | 'earth' | 'fire' | 'water' | 'void' | 'wood' | 'universal'
   talentType: 'infusion' | 'utility';
-  requiredElement?: string; // some talents are locked to a specific element
+  infusionType?: 'form' | 'substance'; // only when talentType === 'infusion'
+  burnCost: number;
+  requiredLevel: number;
+  associatedBlasts?: string[]; // blast types this infusion can be applied to (only for infusions)
+}
+
+// Keep deprecated alias for backward compatibility
+/** @deprecated Use KineticistWildTalentEntry */
+export type WildTalentEntry = KineticistWildTalentEntry;
+
+// ---- Occultist Focus Power ----
+// Collection: 'occultistfocuspowers'
+// Filtered at runtime by the occultist's chosen implement school.
+
+export type OccultistSchool =
+  | 'abjuration'
+  | 'conjuration'
+  | 'divination'
+  | 'enchantment'
+  | 'evocation'
+  | 'illusion'
+  | 'necromancy'
+  | 'transmutation';
+
+export interface OccultistFocusPowerEntry extends ClassOptionBase {
+  school: OccultistSchool;
+  focusCost: number; // mental focus points spent to activate
+  isBasePower: boolean; // true = the free base power granted by the school
+  requiredLevel?: number; // minimum occultist level to select
+  isSacredImplementPower?: boolean; // true = requires a specific deity's sacred implement
+}
+
+// ---- Phrenic Amplification (Psychic) ----
+// Collection: 'phrenicamplifications'
+// Prerequisites are amplification names (strings).
+
+export interface PhrenicAmplificationEntry extends Omit<ClassOptionBase, 'prerequisites'> {
+  prerequisites?: string[]; // prerequisite amplification names
+  amplificationTier: 'standard' | 'major';
+  phrenicPointCost: number; // points spent from phrenic pool
 }
 
 // ---- Cavalier Order ----
