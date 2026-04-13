@@ -7,6 +7,7 @@
 import { Prerequisite } from './feats';
 import { Effect } from './base';
 import { SpecialAbility } from './specialAbilities';
+import type { GameDataSource } from './gameData';
 
 // ---- Base type shared by all option collection documents ----
 
@@ -17,7 +18,7 @@ export interface ClassOptionBase {
   prerequisites?: Prerequisite[];
 
   // ContentMetadata
-  source: string; // 'pf1e-core' | 'pf1e-apg' | '3.5e' | 'homebrew' | etc.
+  source: string | GameDataSource; // string during static data phase; GameDataSource after Firestore migration
   createdBy?: string; // userId; absent for official content
   visibility: 'global' | 'campaign' | 'private';
   campaignId?: string;
@@ -136,9 +137,9 @@ export interface ShamanSpiritEntry extends ClassOptionBase {
   classIds?: string[]; // ['shaman'] or ['shaman', 'spirit-warrior-archetype']
   spiritSpells: string[]; // 9 entries — index 0 = level 1 spirit spell name
   abilities: {
-    spirit: SpecialAbility;        // 1st level — usable 3 + Wis modifier times per day
-    greater: SpecialAbility;       // 8th level
-    true: SpecialAbility;          // 16th level
+    spirit: SpecialAbility; // 1st level — usable 3 + Wis modifier times per day
+    greater: SpecialAbility; // 8th level
+    true: SpecialAbility; // 16th level
     manifestation: SpecialAbility; // 20th level — permanent
   };
   hexList: string[]; // hex IDs available to the shaman when this spirit is chosen

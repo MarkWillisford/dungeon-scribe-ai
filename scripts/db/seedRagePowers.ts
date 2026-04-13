@@ -18,6 +18,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_RAGE_POWERS } from '../../src/data/ragePowers/index';
 import type { ClassOptionBase } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -55,7 +56,8 @@ async function seedRagePowers(powers: ClassOptionBase[]): Promise<void> {
 
   const bySource: Record<string, number> = {};
   powers.forEach((p) => {
-    bySource[p.source] = (bySource[p.source] ?? 0) + 1;
+    const key = typeof p.source === 'string' ? p.source : p.source.bookId;
+    bySource[key] = (bySource[key] ?? 0) + 1;
   });
   console.log('By source:', bySource);
 
@@ -71,7 +73,7 @@ async function seedRagePowers(powers: ClassOptionBase[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((power) => {
       const ref = db.collection('ragepowers').doc(power.id);
-      batch.set(ref, power);
+      batch.set(ref, { ...power, source: normalizeSource(power.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;

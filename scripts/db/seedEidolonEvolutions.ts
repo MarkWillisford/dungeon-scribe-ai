@@ -19,6 +19,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_EIDOLON_EVOLUTIONS } from '../../src/data/eidolonEvolutions/index';
 import type { EidolonEvolutionEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -75,7 +76,7 @@ async function seedEidolonEvolutions(evolutions: EidolonEvolutionEntry[]): Promi
     const batch = db.batch();
     chunk.forEach((evolution) => {
       const ref = db.collection('eidolonevolutions').doc(evolution.id);
-      batch.set(ref, evolution);
+      batch.set(ref, { ...evolution, source: normalizeSource(evolution.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;

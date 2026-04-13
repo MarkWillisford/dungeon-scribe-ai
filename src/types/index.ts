@@ -92,3 +92,4 @@ export * from './deities';
 export * from './animalCompanions';
 export * from './magicItems';
 export * from './ruleset';
+export * from './gameData';

@@ -19,6 +19,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_WILD_TALENTS } from '../../src/data/kineticistWildTalents/index';
 import type { KineticistWildTalentEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -54,12 +55,15 @@ async function seedWildTalents(talents: KineticistWildTalentEntry[]): Promise<vo
 
   const infusions = talents.filter((t) => t.talentType === 'infusion');
   const utilities = talents.filter((t) => t.talentType === 'utility');
-  console.log(`  Infusions: ${infusions.length} (${infusions.filter((t) => t.infusionType === 'form').length} form, ${infusions.filter((t) => t.infusionType === 'substance').length} substance)`);
+  console.log(
+    `  Infusions: ${infusions.length} (${infusions.filter((t) => t.infusionType === 'form').length} form, ${infusions.filter((t) => t.infusionType === 'substance').length} substance)`,
+  );
   console.log(`  Utilities: ${utilities.length}`);
 
   const bySource: Record<string, number> = {};
   talents.forEach((t) => {
-    bySource[t.source] = (bySource[t.source] ?? 0) + 1;
+    const key = typeof t.source === 'string' ? t.source : t.source.bookId;
+    bySource[key] = (bySource[key] ?? 0) + 1;
   });
   console.log('By source:', bySource);
 
@@ -75,7 +79,7 @@ async function seedWildTalents(talents: KineticistWildTalentEntry[]): Promise<vo
     const batch = db.batch();
     chunk.forEach((talent) => {
       const ref = db.collection('wildtalents').doc(talent.id);
-      batch.set(ref, talent);
+      batch.set(ref, { ...talent, source: normalizeSource(talent.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;

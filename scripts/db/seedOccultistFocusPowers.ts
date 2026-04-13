@@ -19,6 +19,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_OCCULTIST_FOCUS_POWERS } from '../../src/data/occultistFocusPowers/index';
 import type { OccultistFocusPowerEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -70,7 +71,7 @@ async function seedFocusPowers(powers: OccultistFocusPowerEntry[]): Promise<void
     const batch = db.batch();
     chunk.forEach((power) => {
       const ref = db.collection('occultistfocuspowers').doc(power.id);
-      batch.set(ref, power);
+      batch.set(ref, { ...power, source: normalizeSource(power.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;
