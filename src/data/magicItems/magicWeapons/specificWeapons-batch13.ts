@@ -1,0 +1,333 @@
+import type { MagicWeaponDefinition } from '@/types/magicItems';
+import { AuraStrength, MagicSchool } from '@/types/equipment';
+
+export const specificWeaponsBatch13: MagicWeaponDefinition[] = [
+  // 301
+  {
+    id: 'weapon-spirit-caller',
+    name: 'Spirit Caller',
+    category: 'magic_weapon', source: 'Pathfinder Campaign Setting', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.NECROMANCY }],
+    casterLevel: 9, slot: 'none', price: 25302, weight: 2,
+    description: '+1 ghost touch mere club (nephrite jade) that can trap incorporeal undead and ghosts. A struck incorporeal undead or ghost must succeed at a DC 16 Will save or become imprisoned within the weapon. While occupied, the mere glows with candlelight brightness and functions as a +2 ghost touch undead bane mere club. The trapped spirit is consumed after one hour, though ghosts still rejuvenate normally. Only one spirit at a time; the wielder may release trapped spirits as a standard action.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['magic jar', 'plane shift'], cost: 12651 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'club', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'ghost_touch', name: 'Ghost Touch', description: 'Can affect incorporeal creatures as if they were corporeal.', bonusEquivalent: 1, casterLevel: 9, effects: [] },
+    ],
+  },
+  // 302
+  {
+    id: 'weapon-slavers-cane',
+    name: "Slaver's Cane",
+    category: 'magic_weapon', source: 'Champions of Balance', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 10, slot: 'none', price: 25305, weight: 4,
+    description: '+1 adamantine light mace studded with cruel spikes and chains around the grip. The wielder gains a +4 bonus to CMD versus disarm attempts against the weapon. Once per day, a command word creates a 10-foot-radius resilient sphere around a target within 90 feet (Reflex DC 16 negates), lasting 10 minutes.',
+    construction: { feats: ['Craft Magic Arms and Armor', 'Enlarge Spell'], spells: ['resilient sphere'], cost: 12652 },
+    physicalStats: { hardness: 20, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'command_word', effects: [],
+    baseWeaponId: 'light_mace', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 303
+  {
+    id: 'weapon-dwarfbond-hammer',
+    name: 'Dwarfbond Hammer',
+    category: 'magic_weapon', source: 'Pathfinder Campaign Setting', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 7, slot: 'none', price: 25312, weight: 5,
+    description: '+1 warhammer that can be thrown with a 20-foot range increment. When hurled by a dwarf, it gains the returning property and functions as a +2 returning warhammer. Against giant-type creatures, the weapon deals an additional 1d8 damage.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['telekinesis'], cost: 12656 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'warhammer', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 304
+  {
+    id: 'weapon-screaming-blade',
+    name: 'Screaming Blade',
+    category: 'magic_weapon', source: 'Dungeoneer\'s Handbook', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 10, slot: 'none', price: 25315, weight: 4,
+    description: '+2 longsword holding the hideous captured screams of a torture victim. When drawn, discordant howls audible to any creature within earshot grant the wielder a +5 competence bonus on Intimidate checks. Spellcasters within 60 feet must succeed at concentration checks (DC 15 + spell level) or fail; other creatures take a -2 penalty on concentration-based skill checks and cannot take 10. Evil wielders with bardic performance treat the screams as a masterwork instrument, increasing fear DCs by 1. Silence suppresses all magical effects except the enhancement bonus.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['sound burst'], cost: 12658 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated',
+    effects: [
+      { type: 'bonus', bonusType: 'competence', target: 'skill.intimidate', value: 5, source: 'Screaming Blade' },
+    ],
+    baseWeaponId: 'longsword', enhancementBonus: 2, weaponSpecialAbilities: [],
+  },
+  // 305
+  {
+    id: 'weapon-red-crusaders-quill',
+    name: "Red Crusader's Quill",
+    category: 'magic_weapon', source: 'Inner Sea Gods', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.NECROMANCY }],
+    casterLevel: 10, slot: 'none', price: 25320, weight: 2,
+    description: '+3 rapier with a lotus petal guard. The tip can be used as a mundane writing instrument, producing any color of ink the wielder desires. Once daily as a free action after confirming a critical hit, the wielder may inscribe an arcane mark on the target. Once monthly, the wielder can instead inscribe a mark of justice; activating a new mark of justice ends any previous one created with this weapon.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['arcane mark', 'mark of justice'], cost: 12660 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'rapier', enhancementBonus: 3, weaponSpecialAbilities: [],
+  },
+  // 306
+  // 307
+  {
+    id: 'weapon-frozen-crossbow',
+    name: 'Frozen Crossbow',
+    category: 'magic_weapon', source: 'Pathfinder Campaign Setting', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 8, slot: 'none', price: 25700, weight: 8,
+    description: '+2 frost repeating heavy crossbow that functions underwater. When empty and reloaded, it creates magical icicle bolts; the icicle bolt and its wielder ignore all penalties for using a ranged weapon underwater. Icicle bolts deal standard cold damage and melt 1 round after leaving the crossbow.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['freedom of movement', 'icicle dagger'], cost: 12850 },
+    physicalStats: { hardness: 5, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'heavy_crossbow_repeating', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'frost', name: 'Frost', description: 'Deals an additional 1d6 cold damage on each successful hit.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 308
+  // 309
+  {
+    id: 'weapon-daikyu-of-commanding-presence',
+    name: 'Daikyu of Commanding Presence',
+    category: 'magic_weapon', source: 'Dragon Empires Primer', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
+    casterLevel: 12, slot: 'none', price: 26000, weight: 3,
+    description: '+2 seeking composite longbow of asymmetric Minkai design that automatically adjusts its Strength rating to match the wielder\'s Strength bonus. Once daily, the user can fire an arrow that creates a daylight effect for 1d6 rounds, granting allies within 120 feet a +2 morale bonus on saves vs fear and +1 morale bonus on charge attack rolls. Cavaliers and samurai treat this as their banner ability (five class levels higher for morale bonus calculation) and can use challenge against foes in the bow\'s first range increment. A dishonorable wielder (oni, traitor) takes a permanent negative level while carrying it.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ["bull's strength", 'daylight', 'heroism', 'true seeing'], cost: 13000 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'composite_longbow', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'seeking', name: 'Seeking', description: 'Negates concealment miss chances against ranged attacks.', bonusEquivalent: 1, casterLevel: 12, effects: [] },
+    ],
+  },
+  // 310
+  {
+    id: 'weapon-shard-of-winter',
+    name: 'Shard of Winter',
+    category: 'magic_weapon', source: 'People of the North', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ENCHANTMENT }],
+    casterLevel: 9, slot: 'none', price: 26302, weight: 1,
+    description: '+1 frost dagger with an ice-blue blade and bone handle. Once daily, a winter witch can activate the weapon to cast a cold-descriptor spell from her familiar\'s stored spells even if unprepared, using her normal casting mechanics; the spell cannot be modified by metamagic.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['ice storm', 'telepathic bond'], cost: 13151 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'dagger', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'frost', name: 'Frost', description: 'Deals an additional 1d6 cold damage on each successful hit.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 311
+  {
+    id: 'weapon-density-hammer',
+    name: 'Density Hammer',
+    category: 'magic_weapon', source: 'Pathfinder Campaign Setting', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION }],
+    casterLevel: 9, slot: 'none', price: 26340, weight: 15,
+    description: '+3 earth breaker adorned with chrysoberyl gems. The wielder is immune to petrification, but whenever a petrification effect targets the user, the hammer\'s weight doubles and its enhancement bonus decreases by 1 for 24 hours. When the enhancement bonus reaches 0, petrification immunity is lost and the weapon gains the fragile property.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['stone to flesh'], cost: 13170 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 22 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'earth_breaker', enhancementBonus: 3, weaponSpecialAbilities: [],
+  },
+  // 312
+  {
+    id: 'weapon-calistrian-kiss',
+    name: 'Calistrian Kiss',
+    category: 'magic_weapon', source: 'Inner Sea Gods', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.NECROMANCY }],
+    casterLevel: 7, slot: 'none', price: 26380, weight: 7,
+    description: '+1 heartseeker elven curve blade with shifting black and yellow patterns resembling a wasp. Three poison storage slots in the hilt allow poisons to be added or drawn as a swift action. Creatures struck suffer a -4 penalty on saves against poison applied to the blade, and poison duration increases by 2 rounds/intervals. Attempts to cure such poison via skill or magic also take a -4 penalty.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['death knell', 'pernicious poison'], cost: 13190 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'elven_curve_blade', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'heartseeker', name: 'Heartseeker', description: 'Automatically confirms critical threats against living creatures with discernible anatomy.', bonusEquivalent: 1, casterLevel: 7, effects: [] },
+    ],
+  },
+  // 313
+  {
+    id: 'weapon-dakaks-tusks',
+    name: "Dakak's Tusks",
+    category: 'magic_weapon', source: 'Pathfinder Campaign Setting', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.NECROMANCY }],
+    casterLevel: 9, slot: 'none', price: 26616, weight: 13,
+    description: 'A pair of +1 vicious heavy picks connected by a sinew cord, each with a darkwood shaft and weathered tusk. The wielder can recover an unattended pick as a swift action. When both picks hit an opponent in the same round, they additionally deal 1d4 points of bleed damage.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['bleed', 'enervation'], cost: 13308 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'heavy_pick', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'vicious', name: 'Vicious', description: 'On a successful hit, deals an additional 2d6 damage to the target and 1d6 damage to the wielder.', bonusEquivalent: 1, casterLevel: 9, effects: [] },
+    ],
+  },
+  // 314
+  {
+    id: 'weapon-shatterstone-hammer',
+    name: 'Shatterstone Hammer',
+    category: 'magic_weapon', source: 'Heroes of the Wild', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 7, slot: 'none', price: 26712, weight: 15,
+    description: '+1 warhammer with a stone head magically treated to be as hard as metal. Deals double damage against unattended stone and earthen objects and functions as a bane weapon against earth elementals and clay/stone constructs. Once daily on a successful hit, the wielder can force a target to be slowed (DC 14 Will save negates).',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['shatter', 'slow'], cost: 13356 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'warhammer', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 315
+  {
+    id: 'weapon-angelfall-bow',
+    name: 'Angelfall Bow',
+    category: 'magic_weapon', source: 'Pathfinder Campaign Setting', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 7, slot: 'none', price: 26900, weight: 3,
+    description: '+1 composite longbow (+5 Str) of ebony decorated with black feathers, smelling faintly of brimstone. Three times daily as a swift action, the wielder can imbue an arrow with raging energy; on a successful hit the attack triggers an automatic trip using the attack roll as the CMB check, and flying targets must succeed at a DC 25 Fly check or fall. Once daily, when targeted by a spell or spell-like ability with the light descriptor, the wielder can make an immediate dispel check at the bow\'s caster level to counter the effect.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['dust of twilight', 'thundering drums'], cost: 13450 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'composite_longbow', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 316
+  {
+    id: 'weapon-scimitar-of-the-striking-wing',
+    name: 'Scimitar of the Striking Wing',
+    category: 'magic_weapon', source: 'Pathfinder Campaign Setting', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 11, slot: 'none', price: 27000, weight: 4,
+    description: '+2 bronze scimitar featuring an eagle motif on the pommel. The wielder can fly without having to maintain concentration, as if affected by the fly spell, for up to 20 rounds each day (not necessarily consecutive), with a +5 bonus on Fly checks. While holding the scimitar, the user can cast feather fall at will.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['feather fall', 'fly'], cost: 13500 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'scimitar', enhancementBonus: 2, weaponSpecialAbilities: [],
+  },
+  // 317
+  {
+    id: 'weapon-sporeblade',
+    name: 'Sporeblade',
+    category: 'magic_weapon', source: 'Pathfinder Campaign Setting', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.NECROMANCY }],
+    casterLevel: 13, slot: 'none', price: 27815, weight: 1,
+    description: '+2 keen short sword with a dull gray blade covered in fungal growths that cycle through bright colors. On a critical hit the sporeblade releases spores; the target must succeed at a DC 20 Fortitude save or take 1d4 Constitution damage and be fatigued for 1 hour. This ability triggers at most once per round.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['contagion'], cost: 13907 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'shortsword', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'keen', name: 'Keen', description: 'Doubles the threat range of the weapon.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
+    ],
+  },
+  // 318
+  {
+    id: 'weapon-mount-splitting-pick',
+    name: 'Mount-Splitting Pick (Dwarf)',
+    category: 'magic_weapon', source: 'Inner Sea Races', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 6, slot: 'none', price: 28008, weight: 6,
+    description: '+2 adamantine heavy pick that serves as both digging tool and weapon. Functions as a bane weapon against all creatures possessing the earth subtype. Reserved for dwarven craftsmen and warriors.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['soften earth and stone'], cost: 14004 },
+    physicalStats: { hardness: 20, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'heavy_pick', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'bane_earth', name: 'Bane (Earth Subtype)', description: '+2 enhancement bonus and +2d6 damage against creatures with the earth subtype.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 319
+  {
+    id: 'weapon-rose-knights-blade',
+    name: "Rose Knight's Blade",
+    category: 'magic_weapon', source: 'Pathfinder Campaign Setting', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION }],
+    casterLevel: 10, slot: 'none', price: 28015, weight: 2,
+    description: '+1 benevolent mithral longsword with a blooming rose crossguard and vines wound around the hilt. Three times daily, the wielder can attempt a new save against one mind-affecting condition (dazed, frightened, nauseated, panicked, paralyzed, shaken, staggered, or stunned). Alternatively, the wielder may expend one daily use to touch the blade to an adjacent ally as a standard action, removing one such mind-affecting condition from that creature.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['aid', 'break enchantment'], cost: 14157 },
+    physicalStats: { hardness: 15, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'longsword', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 320
+  {
+    id: 'weapon-marrowcracker',
+    name: 'Marrowcracker',
+    category: 'magic_weapon', source: 'Magical Marketplace', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.NECROMANCY }],
+    casterLevel: 9, slot: 'none', price: 28312, weight: 5,
+    description: '+2 cleaving warhammer with a haft carved to resemble a femur bone. On a confirmed critical hit against any corporeal creature with a skeletal system, it deals an additional 1d4 points of Strength or Dexterity damage (wielder\'s choice).',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['calcific touch', 'divine power', 'ray of enfeeblement'], cost: 14156 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'warhammer', enhancementBonus: 2, weaponSpecialAbilities: [],
+  },
+  // 321
+  {
+    id: 'weapon-thundering-blade-of-sugimatu',
+    name: 'The Thundering Blade of the House of Sugimatu',
+    category: 'magic_weapon', source: 'Dragon Empires Primer', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 7, slot: 'none', price: 28415, weight: 9,
+    description: '+1 thundering naginata, ancestral weapon of the Sugimatu family. Once per day as a standard action, the wielder can strike the blade against the ground, causing it to ring with a deafening clangor that functions as the shout spell. Imposes a permanent negative level on any dishonorable wielder (oni, traitors, kinslayers) that cannot be removed while the weapon is held.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['blindness/deafness', 'shout'], cost: 14207 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'naginata', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'thundering', name: 'Thundering', description: 'On a critical hit deals 1d8 sonic damage and may deafen the target.', bonusEquivalent: 1, casterLevel: 5, effects: [] },
+    ],
+  },
+  // 322
+  {
+    id: 'weapon-vaultbow',
+    name: 'Vaultbow',
+    category: 'magic_weapon', source: 'Inner Sea Gods', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.CONJURATION }],
+    casterLevel: 13, slot: 'none', price: 28550, weight: 4,
+    description: '+1 light repeating crossbow of mahogany with gold trim, containing an extradimensional space that holds up to 20 bolts (loaded as a move action that provokes). The weapon weighs the same regardless of stored bolts. Three times daily, the wielder can transform a bolt into a chain that entangles targets on a successful hit; Large or smaller creatures must make a DC 15 Reflex save or lose flight capability if wing-dependent, and escape requires DC 30 Strength, CMB, or Escape Artist. Chains persist for 5 rounds. Abadar worshippers treat it as a standard light crossbow for proficiency and feats.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['chain of perdition', 'secret chest'], cost: 14275 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'light_crossbow_repeating', enhancementBonus: 1, weaponSpecialAbilities: [],
+  },
+  // 323
+  {
+    id: 'weapon-nine-fold-spirit-sword',
+    name: 'Nine-Fold Spirit Sword',
+    category: 'magic_weapon', source: 'Dragon Empires Primer', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 9, slot: 'none', price: 28800, weight: 4,
+    description: '+1 ghost touch nine-ring broadsword of silvery-gray steel with nine golden rings threaded through its spine that glow with magical power. Blue and purple silk streamers hang from the pommel. The sword holds 9 charges (one per ring) that can be spent as swift actions: 1 charge grants undead bane for 1 minute; 2 charges attempt to banish a possessing creature (DC 17 Will); 3 charges attempt to destroy a single undead creature (DC 17 Will). Spell resistance does not apply. One charge regenerates each week.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['dispel evil', 'disrupting weapon', 'plane shift', 'summon monster I'], cost: 14400 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'nine_ring_broadsword', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'ghost_touch', name: 'Ghost Touch', description: 'Can affect incorporeal creatures as if they were corporeal.', bonusEquivalent: 1, casterLevel: 9, effects: [] },
+    ],
+  },
+  // 324
+  {
+    id: 'weapon-net-of-snaring',
+    name: 'Net of Snaring',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
+    casterLevel: 11, slot: 'none', price: 28940, weight: 6,
+    description: '+1 distance net with a slightly adhesive texture. Three times daily, speaking a command word and making a ranged touch attack (40-foot range) causes the net to expand by two size categories; the target must succeed at a DC 25 Reflex save or become entangled. While maintaining the control rope, the wielder can attempt grapple actions as free actions without provoking. Speaking the command word again shrinks the net to normal size if no creature remains trapped.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['levitate', 'permanency', 'shrink item', 'web'], cost: 14470 },
+    physicalStats: { hardness: 0, hitPoints: 5, breakDC: 14 },
+    activationCategory: 'command_word', effects: [],
+    baseWeaponId: 'net', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'distance', name: 'Distance', description: 'Doubles the weapon\'s range increment.', bonusEquivalent: 1, casterLevel: 6, effects: [] },
+    ],
+  },
+  // 325
+  {
+    id: 'weapon-tenacious-atlatl-dart',
+    name: 'Tenacious Atlatl Dart',
+    category: 'magic_weapon', source: 'Ranged Tactics Toolbox', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION }],
+    casterLevel: 7, slot: 'none', price: 29101, weight: 2,
+    description: '+1 returning atlatl dart that functions as a javelin when thrown. Its returning property works even when fired as ammunition through an atlatl, preventing destruction. Twice daily, when the dart successfully strikes a foe benefiting from an abjuration spell or ability, it automatically attempts a dispel check against that effect (as dispel magic) before returning to the wielder.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['dispel magic', 'telekinesis'], cost: 14551 },
+    physicalStats: { hardness: 5, hitPoints: 2, breakDC: 14 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'atlatl_dart', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'returning', name: 'Returning', description: 'Returns to the thrower\'s hand at the end of the round.', bonusEquivalent: 1, casterLevel: 7, effects: [] },
+    ],
+  },
+];

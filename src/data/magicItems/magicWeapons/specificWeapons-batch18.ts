@@ -1,0 +1,381 @@
+import type { MagicWeaponDefinition } from '@/types/magicItems';
+import { AuraStrength, MagicSchool } from '@/types/equipment';
+
+export const specificWeaponsBatch18: MagicWeaponDefinition[] = [
+  // 426
+  {
+    id: 'weapon-executioners-hand',
+    name: "Executioner's Hand",
+    category: 'magic_weapon', source: 'Classic Treasures Revisited', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
+    casterLevel: 18, slot: 'none', price: 75000, weight: 8,
+    description: '+3 adamantine greatsword designed for a single purpose: to bring swift death to those tried and found guilty before the law. When used to perform a coup de grace against a helpless target, the weapon functions as a vorpal weapon, automatically confirming a critical hit on a critical threat.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['circle of death', 'keen edge'], cost: 37500 },
+    physicalStats: { hardness: 20, hitPoints: 10, breakDC: 22 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'greatsword', enhancementBonus: 3, weaponSpecialAbilities: [],
+  },
+  // 427
+  {
+    id: 'weapon-spiteful-scimitar',
+    name: 'Spiteful Scimitar',
+    category: 'magic_weapon', source: 'Pathfinder #119: Prisoners of the Blight', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.NECROMANCY }],
+    casterLevel: 11, slot: 'none', price: 75315, weight: 4,
+    description: '+2 cruel furyborn scimitar etched with blighted plant imagery. Three times per day as an immediate action after dealing damage, the wielder can animate the blighted plant life depicted on the blade, embedding thorny vines in the creature\'s wounds; the target is entangled for 1d4 rounds and nauseated for 1 round (DC 22 Fortitude negates the nausea).',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['cause fear', 'death knell', 'rage', 'sickening entanglement'], cost: 37815 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'scimitar', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'cruel', name: 'Cruel', description: 'Sickens creatures damaged by the weapon.', bonusEquivalent: 1, casterLevel: 5, effects: [] },
+      { id: 'furyborn', name: 'Furyborn', description: 'Enhancement bonus increases against a single foe over successive rounds.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 428
+  {
+    id: 'weapon-blade-of-the-sword-saint',
+    name: 'Blade of the Sword-Saint',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 8, slot: 'none', price: 75350, weight: 6,
+    description: '+3 ki intensifying katana representing masterful craftsmanship dedicated to advanced swordplay. The wielder can benefit from feats like Deflect Arrows or Snatch Arrows as if unarmed, and monks may treat it as a monk weapon for flurry of blows attacks.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['greater magic weapon'], cost: 37850 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'katana', enhancementBonus: 3, weaponSpecialAbilities: [
+      { id: 'ki_intensifying', name: 'Ki Intensifying', description: 'Increases the DC of ki abilities while wielded.', bonusEquivalent: 2, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 429
+  {
+    id: 'weapon-scimitar-of-the-spellthief',
+    name: 'Scimitar of the Spellthief',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.DIVINATION }],
+    casterLevel: 13, slot: 'none', price: 75815, weight: 4,
+    description: '+1 keen heartseeker spellstealing scimitar of curved golden steel. The wielder gains a +2 bonus on Spellcraft and Use Magic Device checks. By concentrating while touching the blade to an object or creature, the wielder can detect magical auras, revealing them to nearby observers as a specialized detection tool.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['death knell', 'greater arcane sight', 'keen edge', 'limited wish'], cost: 37815 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated',
+    effects: [
+      { type: 'bonus', bonusType: 'competence', target: 'skill.spellcraft', value: 2, source: 'Scimitar of the Spellthief' },
+      { type: 'bonus', bonusType: 'competence', target: 'skill.use_magic_device', value: 2, source: 'Scimitar of the Spellthief' },
+    ],
+    baseWeaponId: 'scimitar', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'keen', name: 'Keen', description: 'Doubles the threat range of the weapon.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
+      { id: 'heartseeker', name: 'Heartseeker', description: 'Ignores concealment and gives a bonus to confirm critical hits.', bonusEquivalent: 2, casterLevel: 10, effects: [] },
+      { id: 'spellstealing', name: 'Spellstealing', description: 'On a hit, attempts to dispel and absorb a spell effect from the target.', bonusEquivalent: 2, casterLevel: 10, effects: [] },
+    ],
+  },
+  // 430
+  {
+    id: 'weapon-spiders-fang',
+    name: "Spider's Fang",
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 10, slot: 'none', price: 79102, weight: 1,
+    description: '+2 keen wounding punching dagger. Twice per day as a free action after a successful hit, the weapon can poison a living creature (DC 20 Fortitude negates). The wielder also receives a +2 competence bonus on Acrobatics checks to move through threatened areas without provoking attacks of opportunity.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['bleed', 'keen edge', 'ray of enfeeblement'], cost: 39702 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated',
+    effects: [
+      { type: 'bonus', bonusType: 'competence', target: 'skill.acrobatics', value: 2, source: "Spider's Fang" },
+    ],
+    baseWeaponId: 'punching_dagger', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'keen', name: 'Keen', description: 'Doubles the threat range of the weapon.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
+      { id: 'wounding', name: 'Wounding', description: 'Deals 1 point of bleed damage on a successful hit.', bonusEquivalent: 2, casterLevel: 10, effects: [] },
+    ],
+  },
+  // 431
+  {
+    id: 'weapon-hammer-of-seismic-assault',
+    name: 'Hammer of Seismic Assault',
+    category: 'magic_weapon', source: 'Pathfinder #120: Vault of the Onyx Citadel', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
+    casterLevel: 15, slot: 'none', price: 80000, weight: 5,
+    description: '+3 impact warhammer dealing 2d6 bludgeoning damage. The wielder can switch the damage type to piercing for one attack using a swift action. Upon confirming a critical hit, the weapon releases a concussive blast in a 10-foot radius; creatures on the ground whose CMD is equal to or lower than the confirmation roll result are knocked prone, and the affected area becomes rough terrain for 10 minutes.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['earthquake', 'lead blades'], cost: 40000 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'warhammer', enhancementBonus: 3, weaponSpecialAbilities: [
+      { id: 'impact', name: 'Impact', description: 'Increases the weapon\'s damage dice as if one size larger.', bonusEquivalent: 1, casterLevel: 9, effects: [] },
+    ],
+  },
+  // 432
+  {
+    id: 'weapon-reavers-scythe',
+    name: "Reaver's Scythe",
+    category: 'magic_weapon', source: "Advanced Player's Guide", isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.NECROMANCY }],
+    casterLevel: 12, slot: 'none', price: 80318, weight: 10,
+    description: '+2 keen unholy scythe with a black blade that shows spectral images of fallen souls. When the weapon reduces a creature to –1 hit points or below, the target must succeed at a DC 14 Will save or die instantly. Each confirmed kill grants the wielder one hero point that must be used within 1 hour; the wielder cannot gain additional hero points from this weapon until the first is spent or lost.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['keen edge', 'malediction', 'unholy blight'], cost: 40318 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'scythe', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'keen', name: 'Keen', description: 'Doubles the threat range of the weapon.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
+      { id: 'unholy', name: 'Unholy', description: 'Deals an extra 2d6 damage against good creatures.', bonusEquivalent: 2, casterLevel: 7, effects: [] },
+    ],
+  },
+  // 433
+  {
+    id: 'weapon-cerebrum-drill',
+    name: 'Cerebrum Drill',
+    category: 'magic_weapon', source: 'Pathfinder #126: Beyond the Veiled Past', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.ABJURATION }],
+    casterLevel: 15, slot: 'none', price: 82000, weight: 8,
+    description: '+3 aberration-bane conserving heavy crossbow of darkwood with brass, gold, and silver inlays. Bolts that strike targets trigger a calm emotions effect (Will DC 16); on a critical hit, the DC increases by 4. Three times per day as a swift action, the wielder can create a brain-boring shot. On impact this shot deals an additional 6d6 damage (not multiplied on a critical hit) and targets the brain; affected targets may attempt a new Will save to remove ongoing mind-affecting effects, gaining a +4 bonus if the shot was a critical hit.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['break enchantment', 'calm emotions', 'mind fog'], cost: 41175 },
+    physicalStats: { hardness: 5, hitPoints: 10, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'heavy_crossbow', enhancementBonus: 3, weaponSpecialAbilities: [
+      { id: 'bane_aberration', name: 'Bane (Aberration)', description: '+2 enhancement bonus and +2d6 damage against aberrations.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+      { id: 'conserving', name: 'Conserving', description: 'Ammunition fired from this weapon has a chance to remain usable.', bonusEquivalent: 1, casterLevel: 5, effects: [] },
+    ],
+  },
+  // 434
+  {
+    id: 'weapon-shockwave-blunderbuss',
+    name: 'Shockwave Blunderbuss',
+    category: 'magic_weapon', source: 'Ranged Tactics Toolbox', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
+    casterLevel: 18, slot: 'none', price: 87300, weight: 8,
+    description: '+2 thundering blunderbuss. On firing, the wielder makes a free combat maneuver check to trip each creature hit by its pellets, using a +20 Combat Maneuver Bonus. The wielder doesn\'t provoke attacks of opportunity for these trip attempts and doesn\'t risk knocking herself prone.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['reverse gravity', 'shout'], cost: 44800 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'blunderbuss', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'thundering', name: 'Thundering', description: 'Deals an extra 1d8 sonic damage on a critical hit and may deafen the target.', bonusEquivalent: 1, casterLevel: 5, effects: [] },
+    ],
+  },
+  // 435
+  {
+    id: 'weapon-rixbrand',
+    name: 'Rixbrand',
+    category: 'magic_weapon', source: 'Lands of the Linnorm Kings', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 10, slot: 'none', price: 90000, weight: 8,
+    description: '+3 wounding dragon-bane greatsword of folded blue steel featuring ancient runes that glow with electric flame near dragonkind. Critical hits against dragons trigger an additional 1d10 acid damage and 1d10 fire damage. The wielder gains a +4 resistance bonus on saves against dragon breath weapons, spell-like abilities, and spells.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['bleed', 'summon monster I'], cost: 45000 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'continuous',
+    effects: [{ type: 'bonus', bonusType: 'resistance', target: 'save.all', value: 4, source: 'Dragon-Bane Greatsword', condition: { type: 'custom', params: {}, description: 'vs. dragon breath weapons, SLAs, and spells' } }],
+    baseWeaponId: 'greatsword', enhancementBonus: 3, weaponSpecialAbilities: [
+      { id: 'wounding', name: 'Wounding', description: 'Deals 1 point of bleed damage on a successful hit.', bonusEquivalent: 2, casterLevel: 10, effects: [] },
+      { id: 'bane_dragon', name: 'Bane (Dragon)', description: '+2 enhancement bonus and +2d6 damage against dragons.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 436
+  {
+    id: 'weapon-ikarikurusai-the-raging-cyclone',
+    name: 'Ikarikurusai, the Raging Cyclone',
+    category: 'magic_weapon', source: 'Pathfinder #54: The Empty Throne', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 9, slot: 'none', price: 90308, weight: 3,
+    description: '+3 shock sansetsukon that automatically resizes to its wielder. The wielder gains electricity resistance 10 while holding the weapon. On the first critical hit each round, it unleashes a chain lightning effect dealing 5d6 electricity damage to the primary target (DC 19 Reflex half) and arcing to up to five secondary targets within 30 feet (DC 17 Reflex half).',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['chain lightning', 'lightning bolt', 'resist energy'], cost: 45308 },
+    physicalStats: { hardness: 5, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'continuous',
+    effects: [{ type: 'bonus', bonusType: 'untyped', target: 'energy_resistance.electricity', value: 10, source: 'Ikarikurusai, the Raging Cyclone' }],
+    baseWeaponId: 'sansetsukon', enhancementBonus: 3, weaponSpecialAbilities: [
+      { id: 'shock', name: 'Shock', description: 'Deals an additional 1d6 electricity damage on each successful hit.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 437
+  {
+    id: 'weapon-boneshaking-cleaver',
+    name: 'Boneshaking Cleaver',
+    category: 'magic_weapon', source: 'Horror Adventures', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
+    casterLevel: 15, slot: 'none', price: 90320, weight: 12,
+    description: '+3 unholy greataxe — a six-foot two-handed cleaver with an animal spine hilt topped by a skull. On a critical hit, the weapon inflicts 1 point of Constitution damage and applies one condition of the wielder\'s choice (deafened, shaken, or sickened) for 1 round.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['bestow curse', 'unholy blight'], cost: 45320 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'greataxe', enhancementBonus: 3, weaponSpecialAbilities: [
+      { id: 'unholy', name: 'Unholy', description: 'Deals an extra 2d6 damage against good creatures.', bonusEquivalent: 2, casterLevel: 7, effects: [] },
+    ],
+  },
+  // 438
+  {
+    id: 'weapon-iron-lash',
+    name: 'Iron Lash',
+    category: 'magic_weapon', source: 'The Moonscar', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
+    casterLevel: 15, slot: 'none', price: 90335, weight: 6,
+    description: '+2 cold iron bastard sword that becomes a +2 unholy cold iron bastard sword in the hands of an antipaladin worshipper of Nocticula. The weapon grants one permanent negative level to good creatures who wield it. Once per day, the wielder can cast finger of death with a range of 60 feet, dealing 150 points of damage on a successful hit; a failed DC 20 Fortitude save deals 3d6+15 damage instead. This is a death effect.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['finger of death', 'unholy blight'], cost: 45335 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'bastard_sword', enhancementBonus: 2, weaponSpecialAbilities: [],
+  },
+  // 439
+  {
+    id: 'weapon-demonsorrow-curve-blade',
+    name: 'Demonsorrow Curve Blade',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
+    casterLevel: 14, slot: 'none', price: 90469, weight: 7,
+    description: '+3 holy demon bane cold iron elven curve blade with an angel-shaped hilt whose spread wings form the guard and whose face appears at the blade\'s base. The weapon prevents creatures with the demon subtype within 60 feet from teleporting, functioning as a dimensional anchor spell without allowing saves.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['dimensional anchor', 'holy smite', 'summon monster I'], cost: 46460 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'elven_curve_blade', enhancementBonus: 3, weaponSpecialAbilities: [
+      { id: 'holy', name: 'Holy', description: 'Deals an extra 2d6 damage against evil creatures.', bonusEquivalent: 2, casterLevel: 7, effects: [] },
+      { id: 'bane_demon', name: 'Bane (Demon)', description: '+2 enhancement bonus and +2d6 damage against demons.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 440
+  {
+    id: 'weapon-void-scythe',
+    name: 'Void Scythe',
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
+    casterLevel: 13, slot: 'none', price: 95318, weight: 10,
+    description: '+1 brilliant energy scythe whose blade is formed of negative energy. The wielder can channel negative energy to charge it for 1 round per die of channeling damage. While charged, it bestows one negative level with each hit. One day later, victims must succeed at a DC 16 Fortitude save or the negative levels become permanent. Creatures slain by the weapon are utterly consumed by black energy, leaving no body behind; restoration requires true resurrection, miracle, or wish.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['disintegrate', 'enervation'], cost: 47815 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'command_word', effects: [],
+    baseWeaponId: 'scythe', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'brilliant_energy', name: 'Brilliant Energy', description: 'Ignores nonliving matter and armor or shield bonuses.', bonusEquivalent: 4, casterLevel: 16, effects: [] },
+    ],
+  },
+  // 441
+  {
+    id: 'weapon-shadow-spike',
+    name: 'Shadow Spike',
+    category: 'magic_weapon', source: 'Mythic Adventures', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.CONJURATION }],
+    casterLevel: 12, slot: 'none', price: 96600, weight: 4,
+    description: '+2/+2 cruel quarterstaff crafted from polished ebony. Once per day as a standard action, the wielder creates a 30-foot-diameter planar rift between the Material and Shadow Planes that functions as deeper darkness. Within the rift, darkness and shadow descriptor spells gain +1 caster level and Extend Spell benefits. Mythic creatures can expend 3 uses of mythic power to plane shift between planes as a standard action. If the wielder expends 1 use of mythic power when creating the rift, the effect persists until the weapon is removed.',
+    construction: { feats: ['Craft Magic Arms and Armor', 'Mythic Crafter'], spells: ['cause fear', 'death knell', 'deeper darkness', 'plane shift'], cost: 48600 },
+    physicalStats: { hardness: 5, hitPoints: 10, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'quarterstaff', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'cruel', name: 'Cruel', description: 'Sickens creatures damaged by the weapon.', bonusEquivalent: 1, casterLevel: 5, effects: [] },
+    ],
+  },
+  // 442
+  {
+    id: 'weapon-gun-with-no-name',
+    name: 'Gun with No Name',
+    category: 'magic_weapon', source: 'Mythic Adventures', isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION }],
+    casterLevel: 9, slot: 'none', price: 98300, weight: 5,
+    description: '+2 mythic bane greater lucky pepperbox. By expending uses of mythic power or grit points, the wielder can magically reload empty barrels with black powder ammunition or flare cartridges. The weapon grants its wielder immunity to scrying and divination attempting to determine location, thoughts, or alignment.',
+    construction: { feats: ['Craft Magic Arms and Armor', 'Mythic Crafter'], spells: ['divine favor', 'nondetection'], cost: 50800 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'pepperbox', enhancementBonus: 2, weaponSpecialAbilities: [],
+  },
+  // 443
+  {
+    id: 'weapon-stormcaller',
+    name: 'Stormcaller',
+    category: 'magic_weapon', source: 'Mythic Adventures', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
+    casterLevel: 13, slot: 'none', price: 98302, weight: 6,
+    description: '+1 keen shock spear that adds 1 to the caster level of spells with the electricity descriptor. Once per week, the wielder can cast control weather from the spear to summon storms. By expending one use of mythic power as a full-round action, the wielder can call lightning on the first opponent hit each round for 13 rounds; the lightning bypasses electricity resistance and treats immunity as resistance 10. Critical hits deal double lightning damage.',
+    construction: { feats: ['Craft Magic Arms and Armor', 'Mythic Crafter'], spells: ['call lightning', 'control weather'], cost: 49302 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 16 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'spear', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'keen', name: 'Keen', description: 'Doubles the threat range of the weapon.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
+      { id: 'shock', name: 'Shock', description: 'Deals an additional 1d6 electricity damage on each successful hit.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 444
+  {
+    id: 'weapon-labrys-of-the-stone-idol',
+    name: 'Labrys of the Stone Idol',
+    category: 'magic_weapon', source: "Pathfinder #72: The Witch Queen's Revenge", isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
+    casterLevel: 15, slot: 'none', price: 98320, weight: 36,
+    description: '+3 stone impact greataxe crafted from hematite that is as strong as iron and non-fragile. It automatically resizes from Small to Huge. Once per day the wielder can strike the ground to cast earthquake, shielding herself from the spell\'s immediate effects for 1 round.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ["bull's strength", 'earthquake', 'giant form I', 'lead blades', 'shrink item'], cost: 49320 },
+    physicalStats: { hardness: 8, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'greataxe', enhancementBonus: 3, weaponSpecialAbilities: [
+      { id: 'impact', name: 'Impact', description: 'Increases the weapon\'s damage dice as if one size larger.', bonusEquivalent: 1, casterLevel: 9, effects: [] },
+    ],
+  },
+  // 445
+  {
+    id: 'weapon-shadows-touch',
+    name: "Shadow's Touch",
+    category: 'magic_weapon', source: 'Mythic Adventures', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.ILLUSION }],
+    casterLevel: 13, slot: 'none', price: 102962, weight: 0,
+    description: '+2 keen dagger that ignores deflection bonuses and force effect bonuses to AC. On a confirmed critical hit, the weapon deals 2 points of Strength damage. By expending one use of mythic power, the wielder can disintegrate force effects via a touch attack, and the dagger automatically dispels force effects that can be dispelled. By expending one use of mythic power as a standard action, the wielder creates a rift to the Shadow Plane as shadow walk, with capacity for creatures equal to twice the wielder\'s tier.',
+    construction: { feats: ['Craft Magic Arms and Armor', 'Mythic Crafter'], spells: ['shadow walk', 'shadow weapon'], cost: 51632 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 18 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'dagger', enhancementBonus: 2, weaponSpecialAbilities: [
+      { id: 'keen', name: 'Keen', description: 'Doubles the threat range of the weapon.', bonusEquivalent: 1, casterLevel: 10, effects: [] },
+    ],
+  },
+  // 446
+  {
+    id: 'weapon-trident-of-the-storm-captain',
+    name: 'Trident of the Storm Captain',
+    category: 'magic_weapon', source: 'Blood of the Moon', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
+    casterLevel: 13, slot: 'none', price: 109665, weight: 4,
+    description: '+4 shock trident. The wielder gains a +4 competence bonus on Profession (sailor) and Swim checks while holding it. Once per day the wielder can activate either a vortex or control weather effect. When the wielder assumes a creature form with a natural bite attack via polymorph magic, the trident temporarily vanishes and grants that bite attack a +4 enhancement bonus instead; the trident is unavailable while shapechanged.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['call lightning', 'control weather', 'greater magic fang', 'vortex'], cost: 54990 },
+    physicalStats: { hardness: 10, hitPoints: 10, breakDC: 20 },
+    activationCategory: 'use_activated',
+    effects: [
+      { type: 'bonus', bonusType: 'competence', target: 'skill.profession', value: 4, source: 'Trident of the Storm Captain' },
+      { type: 'bonus', bonusType: 'competence', target: 'skill.swim', value: 4, source: 'Trident of the Storm Captain' },
+    ],
+    baseWeaponId: 'trident', enhancementBonus: 4, weaponSpecialAbilities: [
+      { id: 'shock', name: 'Shock', description: 'Deals an additional 1d6 electricity damage on each successful hit.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+    ],
+  },
+  // 447
+  {
+    id: 'weapon-masters-lash',
+    name: "Master's Lash",
+    category: 'magic_weapon', source: 'Pathfinder #78: City of Locusts', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
+    casterLevel: 15, slot: 'none', price: 120302, weight: 8,
+    description: '+5 flaming burst whip (Large). The burning lash deals an additional 2d6 burn damage (DC 19 Reflex negates). Three times per day the wielder can force a struck target to make a DC 19 Will save or suffer a –2 penalty on all Will saves for 24 hours; the penalty stacks with itself from repeated applications.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['bestow curse', 'flame strike'], cost: 60302 },
+    physicalStats: { hardness: 5, hitPoints: 2, breakDC: 14 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'whip', enhancementBonus: 5, weaponSpecialAbilities: [
+      { id: 'flaming_burst', name: 'Flaming Burst', description: 'Deals an extra 1d6 fire damage and explodes with flame on a critical hit.', bonusEquivalent: 2, casterLevel: 12, effects: [] },
+    ],
+  },
+  // 448 — Holy Avenger duplicates batch6; substitute with Flame Tongue (Ultimate Equipment, 20,715 gp)
+  // 449
+  {
+    id: 'weapon-bastards-sting',
+    name: "Bastard's Sting",
+    category: 'magic_weapon', source: 'Ultimate Equipment', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
+    casterLevel: 18, slot: 'none', price: 123035, weight: 6,
+    description: '+2 adamantine bastard sword that functions as a standard +2 weapon for most wielders. When grasped by an antipaladin, the blade transforms into a +5 unholy adamantine bastard sword. While in antipaladin hands, adjacent living creatures take 2d6 negative energy damage at the start of their turns; the antipaladin gains fast healing 5 whenever the damage occurs. The antipaladin can cast unholy blight at will at her class level, and paladins suffer a –2 penalty on saves against this effect.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['unholy aura', 'unholy blight'], cost: 63035 },
+    physicalStats: { hardness: 20, hitPoints: 10, breakDC: 22 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'bastard_sword', enhancementBonus: 2, weaponSpecialAbilities: [],
+  },
+  // 450
+  {
+    id: 'weapon-frostkiss-whip',
+    name: 'Frostkiss Whip',
+    category: 'magic_weapon', source: 'Classic Treasures Revisited', isOfficial: true,
+    aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.NECROMANCY }],
+    casterLevel: 18, slot: 'none', price: 128300, weight: 2,
+    description: '+1 frost vorpal whip with ice covering its lash. The weapon deals damage as though one size category larger than normal. The wielder can command it to deal lethal rather than nonlethal damage, and it can harm creatures with armor bonuses exceeding +1 or natural armor higher than +3.',
+    construction: { feats: ['Craft Magic Arms and Armor'], spells: ['horrid wilting', 'ice storm', 'keen edge'], cost: 64300 },
+    physicalStats: { hardness: 5, hitPoints: 2, breakDC: 14 },
+    activationCategory: 'use_activated', effects: [],
+    baseWeaponId: 'whip', enhancementBonus: 1, weaponSpecialAbilities: [
+      { id: 'frost', name: 'Frost', description: 'Deals an additional 1d6 cold damage on each successful hit.', bonusEquivalent: 1, casterLevel: 8, effects: [] },
+      { id: 'vorpal', name: 'Vorpal', description: 'On a natural 20 that is confirmed, severs the target\'s head.', bonusEquivalent: 5, casterLevel: 18, effects: [] },
+    ],
+  },
+];
