@@ -18,6 +18,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_MAGUS_ARCANA } from '../../src/data/magusArcana/index';
 import type { MagusArcanaEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -59,7 +60,10 @@ async function seedMagusArcana(arcana: MagusArcanaEntry[]): Promise<void> {
   for (const chunk of chunks) {
     const batch = db.batch();
     chunk.forEach((entry) => {
-      batch.set(db.collection('magusarcana').doc(entry.id), entry);
+      batch.set(db.collection('magusarcana').doc(entry.id), {
+        ...entry,
+        source: normalizeSource(entry.source),
+      });
     });
     await batch.commit();
     totalWritten += chunk.length;

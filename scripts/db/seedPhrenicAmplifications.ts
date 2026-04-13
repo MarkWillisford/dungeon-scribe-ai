@@ -19,6 +19,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_PHRENIC_AMPLIFICATIONS } from '../../src/data/phrenicAmplifications/index';
 import type { PhrenicAmplificationEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -49,8 +50,12 @@ function chunkArray<T>(arr: T[], size: number): T[][] {
   return chunks;
 }
 
-async function seedPhrenicAmplifications(amplifications: PhrenicAmplificationEntry[]): Promise<void> {
-  console.log(`\nSeeding ${amplifications.length} phrenic amplifications to project: ${PROJECT_ID}`);
+async function seedPhrenicAmplifications(
+  amplifications: PhrenicAmplificationEntry[],
+): Promise<void> {
+  console.log(
+    `\nSeeding ${amplifications.length} phrenic amplifications to project: ${PROJECT_ID}`,
+  );
 
   const standard = amplifications.filter((a) => a.amplificationTier === 'standard');
   const major = amplifications.filter((a) => a.amplificationTier === 'major');
@@ -68,7 +73,7 @@ async function seedPhrenicAmplifications(amplifications: PhrenicAmplificationEnt
     const batch = db.batch();
     chunk.forEach((amp) => {
       const ref = db.collection('phrenicamplifications').doc(amp.id);
-      batch.set(ref, amp);
+      batch.set(ref, { ...amp, source: normalizeSource(amp.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;

@@ -18,6 +18,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_DOMAINS } from '../../src/data/domains/index';
 import type { DomainEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -65,7 +66,7 @@ async function seedDomains(domains: DomainEntry[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((domain) => {
       const ref = db.collection('domains').doc(domain.id);
-      batch.set(ref, domain);
+      batch.set(ref, { ...domain, source: normalizeSource(domain.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;

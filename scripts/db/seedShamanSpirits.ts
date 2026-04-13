@@ -19,6 +19,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_SHAMAN_SPIRITS } from '../../src/data/shamanSpirits/index';
 import type { ShamanSpiritEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -67,7 +68,7 @@ async function seedShamanSpirits(spirits: ShamanSpiritEntry[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((spirit) => {
       const ref = db.collection('shamanspirits').doc(spirit.id);
-      batch.set(ref, spirit);
+      batch.set(ref, { ...spirit, source: normalizeSource(spirit.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;

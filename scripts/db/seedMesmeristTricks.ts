@@ -19,6 +19,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_MESMERIST_TRICKS } from '../../src/data/mesmeristTricks/index';
 import type { MesmeristTrickEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -70,7 +71,7 @@ async function seedMesmeristTricks(tricks: MesmeristTrickEntry[]): Promise<void>
     const batch = db.batch();
     chunk.forEach((trick) => {
       const ref = db.collection('mesmeristtricks').doc(trick.id);
-      batch.set(ref, trick);
+      batch.set(ref, { ...trick, source: normalizeSource(trick.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;
