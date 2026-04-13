@@ -1,6 +1,6 @@
 // Wondrous Items — re-exports all batch files
 // Engineer 1 (Mark): A–L batches
-// Engineer 2 (Doug): M–Z batches (not yet written)
+// Engineer 2 (Doug): M–Z batches
 
 import type { WondrousItemDefinition } from '@/types/magicItems';
 
@@ -54,49 +54,60 @@ import { wondrousItemsHL7 } from './hL-batch7';
 import { wondrousItemsHL8 } from './hL-batch8';
 import { wondrousItemsHL9 } from './hL-batch9';
 
-// M–Z batches will be imported here once Doug's work is merged.
+// M–P (Doug, 9 batches + recovered)
+import { wondrousItemsMP1 } from './mP-batch1';
+import { wondrousItemsMP2 } from './mP-batch2';
+import { wondrousItemsMP3 } from './mP-batch3';
+import { wondrousItemsMP4 } from './mP-batch4';
+import { wondrousItemsMP5 } from './mP-batch5';
+import { wondrousItemsMP6 } from './mP-batch6';
+import { wondrousItemsMP7 } from './mP-batch7';
+import { wondrousItemsMP8 } from './mP-batch8';
+import { wondrousItemsMP9 } from './mP-batch9';
+import { wondrousItemsMPRecovered } from './mP-recovered';
+import { wondrousItemsMPFill } from './mP-fill';
+
+// R–Z (Doug, 15 batches + recovered + fill)
+import { wondrousItemsRZ1 } from './rZ-batch1';
+import { wondrousItemsRZ2 } from './rZ-batch2';
+import { wondrousItemsRZ3 } from './rZ-batch3';
+import { wondrousItemsRZ4 } from './rZ-batch4';
+import { wondrousItemsRZ5 } from './rZ-batch5';
+import { wondrousItemsRZ6 } from './rZ-batch6';
+import { wondrousItemsRZ7 } from './rZ-batch7';
+import { wondrousItemsRZ8 } from './rZ-batch8';
+import { wondrousItemsRZ9 } from './rZ-batch9';
+import { wondrousItemsRZ10 } from './rZ-batch10';
+import { wondrousItemsRZ11 } from './rZ-batch11';
+import { wondrousItemsRZ12 } from './rZ-batch12';
+import { wondrousItemsRZ13 } from './rZ-batch13';
+import { wondrousItemsRZ14 } from './rZ-batch14';
+import { wondrousItemsRZ15 } from './rZ-batch15';
+import { wondrousItemsRZRecovered } from './rZ-recovered';
+import { wondrousItemsRZFill1 } from './rZ-fill1';
+import { wondrousItemsRZFill2 } from './rZ-fill2';
+import { wondrousItemsRZFill3 } from './rZ-fill3';
 
 export const ALL_WONDROUS_ITEMS: WondrousItemDefinition[] = [
-  ...wondrousItemsAB1,
-  ...wondrousItemsAB2,
-  ...wondrousItemsAB3,
-  ...wondrousItemsAB4,
-  ...wondrousItemsAB5,
-  ...wondrousItemsAB6,
-  ...wondrousItemsAB7,
-  ...wondrousItemsAB8,
-  ...wondrousItemsAB9,
-  ...wondrousItemsAB10,
-  ...wondrousItemsAB11,
-  ...wondrousItemsAB12,
+  ...wondrousItemsAB1, ...wondrousItemsAB2, ...wondrousItemsAB3, ...wondrousItemsAB4,
+  ...wondrousItemsAB5, ...wondrousItemsAB6, ...wondrousItemsAB7, ...wondrousItemsAB8,
+  ...wondrousItemsAB9, ...wondrousItemsAB10, ...wondrousItemsAB11, ...wondrousItemsAB12,
   ...wondrousItemsAB13,
-  ...wondrousItemsCD1,
-  ...wondrousItemsCD2,
-  ...wondrousItemsCD3,
-  ...wondrousItemsCD4,
-  ...wondrousItemsCD5,
-  ...wondrousItemsCD6,
-  ...wondrousItemsCD7,
-  ...wondrousItemsCD8,
-  ...wondrousItemsCD9,
-  ...wondrousItemsCD10,
-  ...wondrousItemsCD11,
-  ...wondrousItemsEG1,
-  ...wondrousItemsEG2,
-  ...wondrousItemsEG3,
-  ...wondrousItemsEG4,
-  ...wondrousItemsEG5,
-  ...wondrousItemsEG6,
-  ...wondrousItemsEG7,
-  ...wondrousItemsEG8,
+  ...wondrousItemsCD1, ...wondrousItemsCD2, ...wondrousItemsCD3, ...wondrousItemsCD4,
+  ...wondrousItemsCD5, ...wondrousItemsCD6, ...wondrousItemsCD7, ...wondrousItemsCD8,
+  ...wondrousItemsCD9, ...wondrousItemsCD10, ...wondrousItemsCD11,
+  ...wondrousItemsEG1, ...wondrousItemsEG2, ...wondrousItemsEG3, ...wondrousItemsEG4,
+  ...wondrousItemsEG5, ...wondrousItemsEG6, ...wondrousItemsEG7, ...wondrousItemsEG8,
   ...wondrousItemsEG9,
-  ...wondrousItemsHL1,
-  ...wondrousItemsHL2,
-  ...wondrousItemsHL3,
-  ...wondrousItemsHL4,
-  ...wondrousItemsHL5,
-  ...wondrousItemsHL6,
-  ...wondrousItemsHL7,
-  ...wondrousItemsHL8,
+  ...wondrousItemsHL1, ...wondrousItemsHL2, ...wondrousItemsHL3, ...wondrousItemsHL4,
+  ...wondrousItemsHL5, ...wondrousItemsHL6, ...wondrousItemsHL7, ...wondrousItemsHL8,
   ...wondrousItemsHL9,
+  ...wondrousItemsMP1, ...wondrousItemsMP2, ...wondrousItemsMP3, ...wondrousItemsMP4,
+  ...wondrousItemsMP5, ...wondrousItemsMP6, ...wondrousItemsMP7, ...wondrousItemsMP8,
+  ...wondrousItemsMP9, ...wondrousItemsMPRecovered, ...wondrousItemsMPFill,
+  ...wondrousItemsRZ1, ...wondrousItemsRZ2, ...wondrousItemsRZ3, ...wondrousItemsRZ4,
+  ...wondrousItemsRZ5, ...wondrousItemsRZ6, ...wondrousItemsRZ7, ...wondrousItemsRZ8,
+  ...wondrousItemsRZ9, ...wondrousItemsRZ10, ...wondrousItemsRZ11, ...wondrousItemsRZ12,
+  ...wondrousItemsRZ13, ...wondrousItemsRZ14, ...wondrousItemsRZ15, ...wondrousItemsRZRecovered,
+  ...wondrousItemsRZFill1, ...wondrousItemsRZFill2, ...wondrousItemsRZFill3,
 ];
