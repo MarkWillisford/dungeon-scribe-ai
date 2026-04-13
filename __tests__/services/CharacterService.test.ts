@@ -299,7 +299,7 @@ describe('CharacterService', () => {
       const json = JSON.stringify(character);
       const imported = CharacterService.importFromJSON(json);
 
-      expect(imported.schemaVersion).toBe('1.1.0');
+      expect(imported.schemaVersion).toBe('1.2.0');
     });
   });
 

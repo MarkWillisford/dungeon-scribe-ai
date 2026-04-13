@@ -17,6 +17,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_ALCHEMIST_DISCOVERIES } from '../../src/data/alchemistDiscoveries/index';
 import type { AlchemistDiscoveryEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -63,7 +64,10 @@ async function seedAlchemistDiscoveries(discoveries: AlchemistDiscoveryEntry[]):
   for (const chunk of chunks) {
     const batch = db.batch();
     chunk.forEach((entry) => {
-      batch.set(db.collection('alchemistdiscoveries').doc(entry.id), entry);
+      batch.set(db.collection('alchemistdiscoveries').doc(entry.id), {
+        ...entry,
+        source: normalizeSource(entry.source),
+      });
     });
     await batch.commit();
     totalWritten += chunk.length;

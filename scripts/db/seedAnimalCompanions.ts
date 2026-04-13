@@ -21,6 +21,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_ANIMAL_COMPANIONS } from '../../src/data/animalCompanions/index';
 import type { AnimalCompanionEntry } from '../../src/types/animalCompanions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -56,9 +57,7 @@ function chunkArray<T>(arr: T[], size: number): T[][] {
 
 // --- Seed ---
 async function seedAnimalCompanions(companions: AnimalCompanionEntry[]): Promise<void> {
-  console.log(
-    `\nSeeding ${companions.length} animal companions to project: ${PROJECT_ID}`,
-  );
+  console.log(`\nSeeding ${companions.length} animal companions to project: ${PROJECT_ID}`);
   console.log(`Collection: ${COLLECTION}`);
   console.log('NOTE: Upsert-only — existing campaign/homebrew companions are preserved.\n');
 
@@ -82,7 +81,7 @@ async function seedAnimalCompanions(companions: AnimalCompanionEntry[]): Promise
     chunk.forEach((companion) => {
       // Document ID = companion.id — deterministic and idempotent
       const ref = db.collection(COLLECTION).doc(companion.id);
-      batch.set(ref, companion);
+      batch.set(ref, { ...companion, source: normalizeSource(companion.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;

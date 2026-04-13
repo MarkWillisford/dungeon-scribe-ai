@@ -19,6 +19,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_HEXES } from '../../src/data/hexes/index';
 import type { HexEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -72,7 +73,7 @@ async function seedHexes(hexes: HexEntry[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((hex) => {
       const ref = db.collection('hexes').doc(hex.id);
-      batch.set(ref, hex);
+      batch.set(ref, { ...hex, source: normalizeSource(hex.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;

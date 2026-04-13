@@ -19,6 +19,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_INVESTIGATOR_TALENTS } from '../../src/data/investigatorTalents/index';
 import type { InvestigatorTalentEntry } from '../../src/types/classOptions';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -66,7 +67,7 @@ async function seedInvestigatorTalents(talents: InvestigatorTalentEntry[]): Prom
     const batch = db.batch();
     chunk.forEach((talent) => {
       const ref = db.collection('investigatortalents').doc(talent.id);
-      batch.set(ref, talent);
+      batch.set(ref, { ...talent, source: normalizeSource(talent.source) });
     });
     await batch.commit();
     totalWritten += chunk.length;

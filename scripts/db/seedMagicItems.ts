@@ -20,6 +20,7 @@
 
 import * as admin from 'firebase-admin';
 import type { MagicItemDefinition } from '../../src/types/magicItems';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 
 // TODO: replace with real import once data exists
 // import { ALL_MAGIC_ITEMS } from '../../src/data/magicItems/index';
@@ -70,7 +71,7 @@ async function seed(): Promise<void> {
 
     for (const item of slice) {
       const ref = collectionRef.doc(item.id);
-      batch.set(ref, item, { merge: true });
+      batch.set(ref, { ...item, source: normalizeSource(item.source) }, { merge: true });
     }
 
     await batch.commit();

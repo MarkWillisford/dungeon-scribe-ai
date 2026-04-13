@@ -1,30 +1,32 @@
 # Data Quality & Admin Review System
 
-## 2026-03-17
+## 2026-03-17 (revised 2026-04-13)
 
-## Status (as of 2026-03-19): NOT STARTED
+## Status (as of 2026-04-13): NOT STARTED
 
-No code has been written for this plan. `verificationStatus` does not exist in any type file, seed script, or service. The admin screen does not exist. Everything below is the design spec ready to implement.
+No code has been written for this plan. `verificationStatus` does not exist in any type file, seed script, or service. The admin UI does not exist. Everything below is the design spec ready to implement.
+
+**Source normalization note (PR #55, merged 2026-04-11):** The source field across all collections is now a `GameDataSource` object `{ bookId, bookName, publisher, page? }` rather than a raw string. When querying Firestore to find unverified entries, `source.bookId === 'unknown'` is a useful secondary signal.
 
 ---
 
 ### Problem
 
-Scraped game data collections contain entries in three states of completeness:
+Scraped game data contains entries we haven't personally verified. Without a system to track this, unverified entries get seeded to Firestore and silently used in character builders as if they were authoritative — which they may not be.
 
-| Status           | Meaning                                                                                              | Current count                                                  |
-| ---------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| **verified**     | Stats confirmed directly from official source                                                        | ~95% of entries                                                |
-| **needs_review** | Stats present but sourced from community research; plausible but not confirmed against physical book | ~10–15 entries (Puma, Seal, Sheep, Unicorn, etc.)              |
-| **stub**         | Placeholder data only; no usable stats found (AONPRD JS-rendered, not in SRD)                        | ~14 animal companion entries; likely more in other collections |
+**Goal:** Tag every entry with a verification status, hide known-broken entries from players, and give admins a frictionless way to confirm data as they naturally encounter it in the app — no separate review queue required.
 
-These exist today in animal companions (`ds-animalcompanions-scraping`) but the same
-pattern will arise in every scraped collection. Without a system to track and surface
-them, stub entries will be silently seeded to Firestore and corrupt gameplay.
+---
 
-**Goal:** Add a `verificationStatus` field to all collection types, use it to gate
-visibility at query time, and build an admin-facing review queue so unverified/stub
-entries can be manually resolved against physical source books.
+## Verification Status Values
+
+| Status         | Meaning                                                          |
+| -------------- | ---------------------------------------------------------------- |
+| `needs_review` | Default for all seeded entries — not yet confirmed by a human    |
+| `verified`     | An admin has looked at this entry and confirmed it looks correct |
+| `stub`         | Clearly broken or empty — hidden from all player-facing pickers  |
+
+Everything starts as `needs_review`. Admins mark things `verified` as they encounter them naturally while using the app. Admins mark things `stub` when they spot an entry that's clearly wrong or empty.
 
 ---
 
@@ -33,13 +35,11 @@ entries can be manually resolved against physical source books.
 This plan covers:
 
 1. Type interface changes (all collection types)
-2. Seed script tagging for existing collections
-3. Firestore service query updates
-4. Admin review screen (`app/admin/data-review.tsx`)
-5. Admin navigation entry
-
-This does **not** change anything for regular users — unverified entries are visible
-(with a badge) and stub entries are hidden. No gameplay logic changes.
+2. Seed scripts — default all entries to `needs_review`
+3. Firestore service query updates (hide `stub` from players)
+4. Admin inline confirm button (shown whenever admin views any data entry)
+5. Player-facing `needs_review` badge
+6. Admin dashboard — optional progress view
 
 ---
 
@@ -51,29 +51,10 @@ This does **not** change anything for regular users — unverified entries are v
 // Add to: AnimalCompanionEntry, DomainEntry, SpellEntry, ClassChoiceDefinition,
 //          RagePowerEntry, RogueTalentEntry, TemplateEntry, DeityEntry, FeatEntry
 verificationStatus: 'verified' | 'needs_review' | 'stub';
-adminNotes?: string; // free-text; shown in admin review queue
+adminNotes?: string; // free-text; admin can note what's wrong or what source was used
 ```
 
-### File: `src/types/animalCompanions.ts`
-
-```typescript
-export interface AnimalCompanionEntry {
-  // ... existing fields unchanged ...
-  verificationStatus: 'verified' | 'needs_review' | 'stub';
-  adminNotes?: string;
-}
-```
-
-Apply the same two-field addition to:
-
-- `src/types/classOptions.ts` — `DomainEntry`, `RagePowerEntry`, `RogueTalentEntry`
-- `src/types/spells.ts` — `SpellEntry`
-- `src/types/classChoices.ts` — `ClassChoiceDefinition`
-- `src/types/templates.ts` — `TemplateEntry`
-- `src/types/deities.ts` — `DeityEntry`
-- `src/types/feats.ts` — `FeatEntry`
-
-### Shared type helper (optional, avoids repetition)
+### Shared type helper
 
 ```typescript
 // src/types/base.ts — add to existing file
@@ -83,233 +64,193 @@ export interface DataQualityFields {
 }
 ```
 
-Then spread into each interface: `extends DataQualityFields` or just duplicate the two
-fields — either is fine, pick what keeps the types readable.
+Then add `extends DataQualityFields` (or duplicate the two fields) to each collection interface.
 
 ---
 
-## Seed Script Tagging Strategy
+## Seed Script Strategy
 
-Every entry in every seed script needs a `verificationStatus`. The rule is simple:
+**Every entry in every seed script gets `verificationStatus: 'needs_review'`.**
 
+No manual scanning, no per-entry tagging decisions. Just set the default and move on. The only exception is entries that are clearly empty/placeholder at seed time — those can be tagged `stub` explicitly:
+
+```typescript
+// Default — use for everything
+verificationStatus: 'needs_review',
+
+// Only when the entry is demonstrably broken (empty stat block, all-zero progressions, etc.)
+verificationStatus: 'stub',
 ```
-verified      → confirmed directly from d20pfsrd or AONPRD at scrape time
-needs_review  → stats from community/forum source, or marked with "TODO: verify"
-stub          → empty progressionTiers AND/OR all-placeholder ability scores
-```
 
-### Animal Companions — known status assignments
-
-**`needs_review`** (has TODO comment in source file):
-
-- Puma, Seal, Sheep (batch_005 / batch_006)
-- Unicorn (batch_007)
-
-**`stub`** (no usable stats found):
+**Known stubs in animal companions** (empty stat blocks, confirmed at scrape time):
 
 - Squirrel Giant Tree, Stag Beetle, Trilobite Giant, Trout, Tuatara Giant
 - Turkey, Turtle (plain), Ursine Charger, Viper Giant, Whale Shark
-- Wombat Giant, Woodpecker Giant, Wyvern Skeletal (batch_006 / batch_007)
+- Wombat Giant, Woodpecker Giant, Wyvern Skeletal
 
-**`verified`** — all remaining ~185 entries
-
-### Other collections
-
-At seed-script authoring time, scan each collection's batch files for:
-
-1. Files containing `// TODO: manually verify`
-2. Files containing `// PAGE_FETCH_FAILED`
-3. Entries with `source: 'pf1e-unknown'`
-
-Tag those `needs_review` or `stub` as appropriate. All others default to `verified`.
+All other entries — including entries that previously had TODO comments or community-sourced stats — get `needs_review`. The admin will confirm them inline over time as they use the app.
 
 ---
 
 ## Firestore Service Changes
 
-### Animal companions picker (future — Phase 3e)
+### All player-facing pickers
 
 ```typescript
-// When building companion list for character sheet:
-query(
-  collection(db, 'animalcompanions'),
-  where('verificationStatus', '!=', 'stub'), // hide stubs from players
-  orderBy('name'),
-);
+// Hide stub entries from all player-facing queries
+query(collection(db, collectionName), where('verificationStatus', '!=', 'stub'), orderBy('name'));
 ```
 
-### All other collection pickers
+`needs_review` entries are visible to players — they just show a warning badge (see below). Only `stub` entries are hidden.
 
-Same pattern: add `where('verificationStatus', '!=', 'stub')` to any query that
-feeds a player-facing picker. `needs_review` entries are still visible to regular
-users — they just get a badge (see UI below).
-
-### Admin review query
-
-```typescript
-// For the admin review screen:
-query(
-  collection(db, collectionName),
-  where('verificationStatus', 'in', ['needs_review', 'stub']),
-  orderBy('name'),
-);
-```
+**Firestore index note:** `where('verificationStatus', '!=', 'stub')` combined with `orderBy('name')` requires a composite index. Add it to `firestore.indexes.json` before deploying.
 
 ---
 
-## Admin Review Screen
+## Admin Inline Confirm Button
 
-### Location
+This is the primary review workflow. No separate queue screen needed.
 
-`app/admin/data-review.tsx` — gated behind admin role check (same pattern as any
-future admin screens). Route: `/admin/data-review`.
+### How it works
 
-### Layout
+When an admin is logged in, every data entry displayed anywhere in the app — feat picker rows, animal companion cards, domain lists, spell entries, etc. — shows a small status pill in the corner:
 
 ```
-┌────────────────────────────────────────┐
-│  DATA REVIEW QUEUE                     │
-│  [All Collections ▾]  [Status: All ▾] │
-├────────────────────────────────────────┤
-│  ● animalcompanions (13 stub, 4 review)│
-│  ● domains (0 issues)                  │
-│  ● spells (N issues)                   │
-│  ...                                    │
-├────────────────────────────────────────┤
-│  STUB  │ Stag Beetle                   │
-│        │ animalcompanions              │
-│        │ Not in vermin companion list  │
-│        │                    [Resolve ▶]│
-├────────────────────────────────────────┤
-│  REVIEW│ Puma                          │
-│        │ animalcompanions              │
-│        │ Stats from Paizo forum post;  │
-│        │ verify against PRG:UW p.182   │
-│        │                    [Resolve ▶]│
-└────────────────────────────────────────┘
+┌─ Power Attack ────────────────────────────┐
+│  +1 to hit / +2 damage when -1 to hit    │
+│                                [needs review ▾] │
+└───────────────────────────────────────────┘
 ```
 
-### Resolve drawer / modal
+Tapping the pill opens a quick action sheet:
 
-Tapping **Resolve** opens a bottom sheet showing:
+```
+┌─ Power Attack ────────────────┐
+│  Mark this entry as:          │
+│                               │
+│  ✓  Verified — looks correct  │
+│  ✗  Stub — broken or empty    │
+│  ·  Keep as needs review      │
+│                               │
+│  [Admin notes (optional)]     │
+│  [________________________]   │
+│                               │
+│       [Save]  [Cancel]        │
+└───────────────────────────────┘
+```
 
-- All current field values for the entry (read-only display)
-- `adminNotes` field (editable text area)
-- Status selector: `stub` → `needs_review` → `verified`
-- **Save** — writes updated `verificationStatus` + `adminNotes` to Firestore
+Selecting **Verified** or **Stub** writes the update to Firestore immediately. The pill updates in-place. No navigation away, no separate screen.
 
-No inline stat editing in this MVP — the intent is for the admin to verify against
-a physical book and then either mark it verified or note what needs fixing. Full
-stat editing can be added later via the homebrew/campaign content editing path.
+If the entry is already `verified`, the pill shows a green checkmark instead — still tappable if the admin wants to revise.
 
-### Collection summary chips
-
-Header chips show a count per collection. Tapping filters the list. Zero-issue
-collections show a green checkmark — gives at-a-glance status of data health.
-
----
-
-## Badge in Player-Facing UI
-
-For `needs_review` entries visible to regular users, show a small amber `⚠` badge
-in the companion/spell/feat picker row. Tapping it shows a tooltip:
-
-> "This entry's stats are unconfirmed. It may differ from your physical sourcebook."
-
-Do **not** block selection — the player can still use it. This is a warning, not a
-hard error.
-
----
-
-## Implementation Steps
-
-### Phase A — Type changes + seed tagging
-
-1. **Branch:** `MW/data-quality-fields`
-2. Add `verificationStatus` + `adminNotes?` to all collection type interfaces
-3. Add `verificationStatus` to every existing seed script entry:
-   - Animal companions: tag stubs and needs_review per the list above
-   - Other collections: scan for TODO/PAGE_FETCH_FAILED/pf1e-unknown markers
-4. Run `npm run typecheck` — all new fields must be present or TS will catch missing ones
-5. Run tests — no logic changes, all tests should still pass
-
-### Phase B — Service query updates
-
-6. Add `where('verificationStatus', '!=', 'stub')` to all player-facing Firestore queries
-7. This is a no-op until data is seeded with the new field — existing docs without the
-   field will still be returned. Clean seeding order: Phase A merged → re-seed → Phase B queries active.
-
-### Phase C — Admin screen
-
-8. Create `app/admin/` directory with `_layout.tsx` (admin role gate)
-9. Build `app/admin/data-review.tsx` — list view with collection filter + status filter
-10. Build resolve bottom sheet (status selector + adminNotes textarea + Save)
-11. Wire up admin navigation entry (settings screen or dedicated admin tab)
-
-### Phase D — Player badge
-
-12. Add `⚠ unconfirmed` badge to picker row components for `needs_review` entries
-13. Add tooltip on tap
-
----
-
-## Admin Role Gate
-
-Today the app has no admin/user role distinction in the UI. The simplest approach
-for the gate:
+### Admin role gate
 
 ```typescript
 // src/services/AdminService.ts
-const ADMIN_UIDS = ['your-firebase-uid-here']; // env var or Firestore config doc
+const ADMIN_UIDS = ['your-firebase-uid-here']; // hardcoded for now, env var later
 
 export function isAdmin(uid: string): boolean {
   return ADMIN_UIDS.includes(uid);
 }
 ```
 
-Longer term: add a `role: 'user' | 'admin'` field to the Firestore `users/{uid}`
-document and read it at login. But the hardcoded list is fine for now — there's
-only one admin (you).
+The confirm pill is rendered only when `isAdmin(currentUser.uid)` is true. Regular users never see it.
+
+---
+
+## Player-Facing Badge
+
+For `needs_review` entries visible to regular users, show a small amber `⚠` badge in picker rows. Tapping shows a tooltip:
+
+> "This entry's stats are unconfirmed. It may differ from your physical sourcebook."
+
+Do **not** block selection — the player can still use it. This is informational, not a hard error.
+
+---
+
+## Admin Dashboard (optional, Phase 2)
+
+A simple progress screen at `app/admin/data-review.tsx` showing how far along verification is per collection:
+
+```
+┌─ Data Quality ─────────────────────────┐
+│  feats            2,401 ✓  186 ⚠  0 ✗ │
+│  traits             891 ✓   80 ⚠  0 ✗ │
+│  animalcompanions   185 ✓   18 ⚠ 13 ✗ │
+│  domains            161 ✓   20 ⚠  0 ✗ │
+│  spells           2,200 ✓  300 ⚠  0 ✗ │
+│  ...                                   │
+└────────────────────────────────────────┘
+```
+
+This is a progress view, not a worklist. The actual confirming happens inline throughout the app. Build this after the inline confirm button is working.
+
+---
+
+## Implementation Phases
+
+### Phase A — Type changes
+
+1. **Branch:** `MW/data-quality-fields`
+2. Add `verificationStatus` + `adminNotes?` to all collection type interfaces (via `DataQualityFields` in `base.ts`)
+3. Run `npm run typecheck` — TS will catch every seed script missing the field
+4. Run tests — no logic changes, all should pass
+
+### Phase B — Seed script defaults
+
+5. Add `verificationStatus: 'needs_review'` to every entry in every seed script
+6. Tag known animal companion stubs as `verificationStatus: 'stub'`
+7. Re-run typecheck to confirm all entries covered
+
+### Phase C — Service query updates
+
+8. Add `where('verificationStatus', '!=', 'stub')` to all player-facing Firestore queries
+9. Add composite indexes to `firestore.indexes.json`
+10. This is a no-op until data is re-seeded — seed after Phase A/B are merged
+
+### Phase D — Admin inline confirm + player badge
+
+11. Build `src/services/AdminService.ts` — `isAdmin()` helper
+12. Build `src/components/shared/VerificationStatusPill.tsx` — the tappable status pill
+13. Build the confirm action sheet (status selector + adminNotes + Save)
+14. Wire `AdminService.updateVerificationStatus(collectionName, docId, status, notes)` to Firestore
+15. Add `VerificationStatusPill` to all picker row components — renders only when admin is logged in
+16. Add `⚠` player badge for `needs_review` entries in picker rows (non-admin users)
+
+### Phase E — Admin dashboard (optional)
+
+17. Create `app/admin/_layout.tsx` (admin role gate)
+18. Build `app/admin/data-review.tsx` — per-collection counts of verified/needs_review/stub
 
 ---
 
 ## Files to Create / Modify
 
-| File                                                | Change                                                                                   |
-| --------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `src/types/animalCompanions.ts`                     | Add `verificationStatus`, `adminNotes?`                                                  |
-| `src/types/classOptions.ts`                         | Add `verificationStatus`, `adminNotes?` to DomainEntry, RagePowerEntry, RogueTalentEntry |
-| `src/types/spells.ts`                               | Add `verificationStatus`, `adminNotes?`                                                  |
-| `src/types/classChoices.ts`                         | Add `verificationStatus`, `adminNotes?`                                                  |
-| `src/types/templates.ts`                            | Add `verificationStatus`, `adminNotes?`                                                  |
-| `src/types/deities.ts`                              | Add `verificationStatus`, `adminNotes?`                                                  |
-| `src/types/feats.ts`                                | Add `verificationStatus`, `adminNotes?`                                                  |
-| `scripts/db/seed*.ts` (all)                         | Tag every entry with `verificationStatus`                                                |
-| `src/services/Firebase*Service.ts` (picker queries) | Add `!= 'stub'` filter                                                                   |
-| `app/admin/_layout.tsx`                             | New — admin role gate                                                                    |
-| `app/admin/data-review.tsx`                         | New — review queue screen                                                                |
-| `src/services/AdminService.ts`                      | New — isAdmin() helper                                                                   |
-| `src/components/shared/UnconfirmedBadge.tsx`        | New — amber ⚠ badge for needs_review                                                     |
-
----
-
-## Open Questions
-
-- **Firestore inequality filter note:** `where('verificationStatus', '!=', 'stub')` requires
-  a composite index if combined with `orderBy('name')`. Add the index in `firestore.indexes.json`
-  or Firestore will throw at runtime and provide a link to create it.
-- **Re-seeding strategy:** Adding fields to existing documents is non-destructive. The seed
-  scripts use upsert — running them again after Phase A merges will add `verificationStatus`
-  to existing docs without touching anything else.
-- **Does `needs_review` affect combat?** No. The data is used in the Animal Companion
-  builder (Phase 3e, not yet built). By the time that screen exists, we should have
-  resolved most `needs_review` entries manually.
+| File                                                | Change                                                                            |
+| --------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `src/types/base.ts`                                 | Add `DataQualityFields` interface                                                 |
+| `src/types/animalCompanions.ts`                     | Add `verificationStatus`, `adminNotes?`                                           |
+| `src/types/classOptions.ts`                         | Add to `DomainEntry`, `RagePowerEntry`, `RogueTalentEntry`                        |
+| `src/types/spells.ts`                               | Add `verificationStatus`, `adminNotes?`                                           |
+| `src/types/classChoices.ts`                         | Add `verificationStatus`, `adminNotes?`                                           |
+| `src/types/templates.ts`                            | Add `verificationStatus`, `adminNotes?`                                           |
+| `src/types/deities.ts`                              | Add `verificationStatus`, `adminNotes?`                                           |
+| `src/types/feats.ts`                                | Add `verificationStatus`, `adminNotes?`                                           |
+| `scripts/db/seed*.ts` (all)                         | Set `verificationStatus: 'needs_review'` on every entry; `stub` for known empties |
+| `src/services/Firebase*Service.ts` (picker queries) | Add `where('verificationStatus', '!=', 'stub')` filter                            |
+| `firestore.indexes.json`                            | Add composite indexes for `verificationStatus != stub` + `orderBy('name')`        |
+| `src/services/AdminService.ts`                      | New — `isAdmin()`, `updateVerificationStatus()`                                   |
+| `src/components/shared/VerificationStatusPill.tsx`  | New — tappable status pill shown to admins on any data entry                      |
+| `src/components/shared/UnconfirmedBadge.tsx`        | New — amber ⚠ badge shown to players on `needs_review` entries                    |
+| `app/admin/_layout.tsx`                             | New (Phase E) — admin role gate                                                   |
+| `app/admin/data-review.tsx`                         | New (Phase E) — per-collection progress dashboard                                 |
 
 ---
 
 ## Status
 
-- [ ] Phase A — Type changes + seed tagging
-- [ ] Phase B — Service query updates
-- [ ] Phase C — Admin screen
-- [ ] Phase D — Player badge
+- [ ] Phase A — Type changes
+- [ ] Phase B — Seed script defaults
+- [ ] Phase C — Service query updates
+- [ ] Phase D — Admin inline confirm + player badge
+- [ ] Phase E — Admin dashboard (optional)
