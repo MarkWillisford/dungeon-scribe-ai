@@ -271,7 +271,7 @@ export const wondrousItemsRZ1: WondrousItemDefinition[] = [
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'armor', target: 'ac', value: 5, source: 'Robe of the Archmagi' },
-      { type: 'bonus', target: 'sr', value: 18, source: 'Robe of the Archmagi' },
+      { type: 'resistance', target: 'sr', value: 18, source: 'Robe of the Archmagi' },
       { type: 'bonus', bonusType: 'resistance', target: 'save.all', value: 4, source: 'Robe of the Archmagi' },
       { type: 'bonus', bonusType: 'enhancement', target: 'special.caster_level_sr_check', value: 2, source: 'Robe of the Archmagi' },
     ],

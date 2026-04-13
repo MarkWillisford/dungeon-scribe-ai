@@ -551,7 +551,7 @@ export const wondrousItemsMP1: WondrousItemDefinition[] = [
 
     effects: [
       {
-        type: 'bonus',
+        type: 'resistance',
         target: 'sr',
         value: 21,
         source: 'Mantle of Spell Resistance',

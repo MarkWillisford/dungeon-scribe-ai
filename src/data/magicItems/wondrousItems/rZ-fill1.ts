@@ -299,7 +299,7 @@ export const wondrousItemsRZFill1: WondrousItemDefinition[] = [
     physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
     activationCategory: 'continuous',
     effects: [
-      { type: 'bonus', target: 'sr', value: 18, source: 'Robe of the Resplendent Thespian' },
+      { type: 'resistance', target: 'sr', value: 18, source: 'Robe of the Resplendent Thespian' },
       { type: 'bonus', bonusType: 'resistance', target: 'save.all', value: 4, source: 'Robe of the Resplendent Thespian' },
       { type: 'bonus', bonusType: 'enhancement', target: 'special.caster_level_sr_check', value: 2, source: 'Robe of the Resplendent Thespian' },
     ],
@@ -460,7 +460,7 @@ export const wondrousItemsRZFill1: WondrousItemDefinition[] = [
     activationCategory: 'continuous',
     effects: [
       { type: 'bonus', bonusType: 'armor', target: 'ac', value: 5, source: 'Robes of the Defender' },
-      { type: 'bonus', target: 'sr', value: 20, source: 'Robes of the Defender' },
+      { type: 'resistance', target: 'sr', value: 20, source: 'Robes of the Defender' },
     ],
   },
   {
