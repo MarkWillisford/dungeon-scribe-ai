@@ -1,0 +1,170 @@
+import type { WondrousItemDefinition } from '@/types/magicItems';
+import { AuraStrength, MagicSchool } from '@/types/equipment';
+
+export const wondrousItemsRZ5: WondrousItemDefinition[] = [
+  {
+    id: 'wondrous-shackles-of-durance-vile',
+    name: 'Shackles of Durance Vile',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ENCHANTMENT }],
+    casterLevel: 9,
+    slot: 'wrists',
+    price: 16200,
+    weight: 2,
+    description:
+      'Enchanted iron manacles that impose domination on helpless/restrained/consenting targets via command word (1/day). ' +
+      'Hardness 15, 20 HP, break DC 30, Escape Artist DC 35.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['dominate person'], cost: 8200 },
+    physicalStats: { hardness: 15, hitPoints: 20, breakDC: 30 },
+    activationCategory: 'command_word',
+    effects: [{ type: 'special', target: 'special.shackles_durance_vile_dominate', value: 0, source: 'Shackles of Durance Vile' }],
+  },
+  {
+    id: 'wondrous-shawl-of-life-keeping',
+    name: 'Shawl of Life-Keeping',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
+    casterLevel: 3,
+    slot: 'shoulders',
+    price: 1000,
+    weight: 1,
+    description:
+      'Store up to 10 HP daily via command word. When reduced to -1 HP or below, the shawl automatically restores stored ' +
+      'energy. Cannot prevent death. While storing, another creature holding the shawl imposes -2 Fort/Reflex vs. that holder.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['cure light wounds', 'stabilize'], cost: 500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'command_word',
+    effects: [{ type: 'special', target: 'special.shawl_life_keeping_store_hp', value: 0, source: 'Shawl of Life-Keeping' }],
+  },
+  {
+    id: 'wondrous-sheath-of-bladestealth',
+    name: 'Sheath of Bladestealth',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ILLUSION }],
+    casterLevel: 5,
+    slot: 'none',
+    price: 5000,
+    weight: 2,
+    description:
+      'Fits any bladed slashing weapon. When a weapon is placed inside, both sheath and weapon become invisible (as invisibility) ' +
+      'until drawn. Grants +5 on Sleight of Hand to conceal the weapon.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['invisibility'], cost: 2500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'continuous',
+    effects: [
+      { type: 'bonus', target: 'skill.sleight_of_hand', value: 5, source: 'Sheath of Bladestealth', condition: { type: 'custom', params: {}, description: 'weapon concealment only' } },
+    ],
+  },
+  {
+    id: 'wondrous-shirt-of-immolation',
+    name: 'Shirt of Immolation',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
+    casterLevel: 10,
+    slot: 'chest',
+    price: 8000,
+    weight: 1,
+    description:
+      'When grappled, the shirt ignites automatically dealing 1d6+10 fire damage every round to anyone grappling the wearer. ' +
+      'Flames spare the wearer. Persists 1 round per grapple engagement, max 10 rounds/day.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['fire shield'], cost: 4000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'continuous',
+    effects: [{ type: 'damage', target: 'special.shirt_immolation_grapple_fire', value: 0, source: 'Shirt of Immolation' }],
+  },
+  {
+    id: 'wondrous-quick-runners-shirt',
+    name: "Quick Runner's Shirt",
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 5,
+    slot: 'chest',
+    price: 1000,
+    weight: 0,
+    description:
+      'Lightweight garment with embroidered winged feet. Once per day as a swift action, take an additional move action to move, ' +
+      'then immediately end your turn losing unspent actions. Requires 24 hours of continuous wear to activate.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['haste'], cost: 500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.quick_runners_shirt_extra_move', value: 0, source: "Quick Runner's Shirt" }],
+  },
+  {
+    id: 'wondrous-unfettered-shirt',
+    name: 'Unfettered Shirt',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [
+      { strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION },
+      { strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION },
+    ],
+    casterLevel: 7,
+    slot: 'chest',
+    price: 10000,
+    weight: 0,
+    description:
+      'Loose, ruffled garment for unrestricted movement. Once per day, grants freedom of movement for 10 minutes.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ["cat's grace", 'freedom of movement'], cost: 5000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    spellLikeAbilities: [
+      { spells: [{ spellId: 'freedom_of_movement', spellName: 'Freedom of Movement', casterLevel: 7, usesPerDay: 1, activationAction: 'standard' }] },
+    ],
+    effects: [{ type: 'special', target: 'special.unfettered_shirt_freedom', value: 0, source: 'Unfettered Shirt' }],
+  },
+  {
+    id: 'wondrous-shoes-of-lightning-leaping',
+    name: 'Shoes of Lightning Leaping',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 6,
+    slot: 'feet',
+    price: 10500,
+    weight: 1,
+    description:
+      'Once per day, transform into lightning and travel up to 50 ft in a straight line. Deals 6d6 electricity damage to ' +
+      'creatures in path (as lightning bolt). If blocked, materialize adjacent to obstacle and become staggered 1 round.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['expeditious retreat', 'lightning bolt'], cost: 5250 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.shoes_lightning_leaping', value: 0, source: 'Shoes of Lightning Leaping' }],
+  },
+  {
+    id: 'wondrous-shroud-of-disintegration',
+    name: 'Shroud of Disintegration',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 11,
+    slot: 'none',
+    price: 3300,
+    weight: 10,
+    description:
+      'Burial wrappings with fine embroidery. When a body is placed within and command word spoken, the body is converted ' +
+      'to dust. Functions only once before becoming regular cloth.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['disintegrate'], cost: 1650 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'command_word',
+    effects: [{ type: 'special', target: 'special.shroud_disintegration', value: 0, source: 'Shroud of Disintegration' }],
+  },
+  // Deferred items (AoN pages did not render):
+  // Sentinel Scorpion, Seven-Sided Coin, Shackles of Compliance, Shadow Fletching,
+  // Shadow Piercings, Shawl of Shadowy Disguise, Shawl of the Crone,
+  // Shawl of the Lingering Phantom, Shawl (Seafoam), Sheath (Vanishing),
+  // Shell of Sending, Shimmering Kilt, Shoes of the Firewalker, Shoes (Haunted),
+  // Shrinking Berries, Shroud of Venom, Shroud (Dead Man's)
+];

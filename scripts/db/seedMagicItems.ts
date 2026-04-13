@@ -21,10 +21,17 @@
 import * as admin from 'firebase-admin';
 import type { MagicItemDefinition } from '../../src/types/magicItems';
 import { normalizeSource } from '../../src/utils/normalizeSource';
+import { ALL_RINGS } from '../../src/data/magicItems/rings/index';
+import { ALL_STAVES } from '../../src/data/magicItems/staves/index';
+import { ALL_RODS } from '../../src/data/magicItems/rods/index';
 
-// TODO: replace with real import once data exists
-// import { ALL_MAGIC_ITEMS } from '../../src/data/magicItems/index';
-const ALL_MAGIC_ITEMS: MagicItemDefinition[] = [];
+// Wondrous items (M-Z) will be added here once PRs #51 merges and the
+// wondrous index is updated to include Doug's batches.
+const ALL_MAGIC_ITEMS: MagicItemDefinition[] = [
+  ...ALL_RINGS,
+  ...ALL_STAVES,
+  ...ALL_RODS,
+];
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
