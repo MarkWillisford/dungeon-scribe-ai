@@ -20,6 +20,7 @@ import * as admin from 'firebase-admin';
 import { ALL_PHRENIC_AMPLIFICATIONS } from '../../src/data/phrenicAmplifications/index';
 import type { PhrenicAmplificationEntry } from '../../src/types/classOptions';
 import { normalizeSource } from '../../src/utils/normalizeSource';
+import { sleep, chunkArray } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -41,14 +42,6 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
-
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  const chunks: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    chunks.push(arr.slice(i, i + size));
-  }
-  return chunks;
-}
 
 async function seedPhrenicAmplifications(
   amplifications: PhrenicAmplificationEntry[],
@@ -76,6 +69,7 @@ async function seedPhrenicAmplifications(
       batch.set(ref, { ...amp, source: normalizeSource(amp.source) });
     });
     await batch.commit();
+    await sleep(500);
     totalWritten += chunk.length;
     console.log(`  Written: ${totalWritten}/${amplifications.length}`);
   }

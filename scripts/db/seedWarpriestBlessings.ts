@@ -18,6 +18,7 @@ import * as admin from 'firebase-admin';
 import { ALL_WARPRIEST_BLESSINGS } from '../../src/data/warpriestBlessings/index';
 import type { WarpriestBlessingEntry } from '../../src/types/classOptions';
 import { normalizeSource } from '../../src/utils/normalizeSource';
+import { sleep, chunkArray } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -40,12 +41,6 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  const chunks: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) chunks.push(arr.slice(i, i + size));
-  return chunks;
-}
-
 async function seedWarpriestBlessings(blessings: WarpriestBlessingEntry[]): Promise<void> {
   console.log(`\nSeeding ${blessings.length} warpriest blessings to project: ${PROJECT_ID}`);
 
@@ -65,6 +60,7 @@ async function seedWarpriestBlessings(blessings: WarpriestBlessingEntry[]): Prom
       });
     });
     await batch.commit();
+    await sleep(500);
     totalWritten += chunk.length;
     console.log(`  Written: ${totalWritten}/${blessings.length}`);
   }

@@ -18,6 +18,7 @@
 
 import { spawnSync } from 'child_process';
 import * as path from 'path';
+import { sleepSync } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const SCRIPTS_DIR = __dirname;
@@ -106,6 +107,7 @@ for (const script of SCRIPTS) {
   if (!passed) {
     console.error(`\n✗ ${script} failed (exit code ${exitCode})`);
   }
+  sleepSync(3000);
 }
 
 // --- Summary ---

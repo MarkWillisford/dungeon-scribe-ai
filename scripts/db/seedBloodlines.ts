@@ -19,6 +19,7 @@ import * as admin from 'firebase-admin';
 import { ALL_BLOODLINES } from '../../src/data/bloodlines/index';
 import type { ClassOptionBase } from '../../src/types/classOptions';
 import { normalizeSource } from '../../src/utils/normalizeSource';
+import { sleep, chunkArray } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -41,15 +42,6 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
-
-// --- Helpers ---
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  const chunks: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    chunks.push(arr.slice(i, i + size));
-  }
-  return chunks;
-}
 
 async function seedBloodlines(bloodlines: ClassOptionBase[]): Promise<void> {
   console.log(`\nSeeding ${bloodlines.length} bloodlines to project: ${PROJECT_ID}`);
@@ -76,6 +68,7 @@ async function seedBloodlines(bloodlines: ClassOptionBase[]): Promise<void> {
       batch.set(ref, { ...bloodline, source: normalizeSource(bloodline.source) });
     });
     await batch.commit();
+    await sleep(500);
     totalWritten += chunk.length;
     console.log(`  Written: ${totalWritten}/${bloodlines.length}`);
   }

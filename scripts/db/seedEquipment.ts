@@ -27,6 +27,7 @@ import type {
   GearDefinition,
 } from '../../src/types/equipment';
 import { normalizeSource } from '../../src/utils/normalizeSource';
+import { sleep, chunkArray } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -50,15 +51,6 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
-// --- Helpers ---
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  const chunks: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    chunks.push(arr.slice(i, i + size));
-  }
-  return chunks;
-}
-
 type EquipmentItem = { id: string; source: string };
 
 async function seedCollection(collectionName: string, items: EquipmentItem[]): Promise<void> {
@@ -79,6 +71,7 @@ async function seedCollection(collectionName: string, items: EquipmentItem[]): P
       batch.set(ref, { ...item, source: normalizeSource(item.source) });
     });
     await batch.commit();
+    await sleep(500);
     totalWritten += chunk.length;
     console.log(`    Written: ${totalWritten}/${items.length}`);
   }
