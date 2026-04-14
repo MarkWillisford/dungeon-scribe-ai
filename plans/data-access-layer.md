@@ -2,7 +2,15 @@
 
 ## 2026-04-13
 
-## Status: NOT STARTED
+## Status: Phase A — IN PROGRESS (PR #58 open)
+
+### Phase A changes (2026-04-14)
+
+Three issues surfaced during code review and fixed before merge:
+
+- **`EquipmentDatabaseService.initialize()`** — added `.catch()` that resets `_initPromise = null` before re-throwing, so a rejected init is retryable rather than permanently cached.
+- **`ClassSelector`** — added `getCoreClassesSync()` to `GameDataService` (mirrors `getRaceGroupsSync()` pattern); used as `useState` lazy initializer so first render has data and tests work without async effect flushing.
+- **`GameDataService.getContextFromStore()`** — `campaignId: undefined` added with a wire-up comment. No campaigns slice exists yet; this field must be connected to `state.campaigns.activeCampaignId` when that slice is built.
 
 ---
 

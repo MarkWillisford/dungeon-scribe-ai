@@ -344,6 +344,17 @@ maestro test e2e/
 - `__tests__/mocks/firebase.ts` — Firebase mock (auth, Firestore, storage)
 - `e2e/` — Maestro E2E test directory
 
+**Known issue — full-suite OOM in WSL worktrees:**
+
+Running `npm test -- --maxWorkers=1` across all suites in sequence exhausts the Node heap (confirmed pre-Phase-A, not caused by any specific PR). The static game data (2,500+ feats, all classes, races, etc.) accumulates in memory across suites in one process and eventually causes `FATAL ERROR: Reached heap limit Allocation failed`. Individual suites run fine.
+
+Options to investigate:
+- `--workerThreads` flag (Jest 29+) — threads share memory differently than processes
+- `--logHeapUsage` to identify which suite tips the balance
+- Splitting the Jest config into two projects (services vs. components) so they run in separate processes with independent heaps
+- `--maxWorkers=2` with `--isolateModules` to force module teardown between suites
+- Raising the Node heap limit via `NODE_OPTIONS=--max-old-space-size=4096` in the test script
+
 **Coverage targets:**
 
 - Services: 90%+ line coverage
