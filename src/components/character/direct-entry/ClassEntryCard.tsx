@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
@@ -11,7 +11,7 @@ import {
   toggleClassPrereqOverride,
 } from '@/store/slices/characterEntrySlice';
 import { type DraftClassEntry } from '@/types/characterDraft';
-import { getDefinitionsForClass } from '@/data/classChoiceDefinitions/index';
+import { GameDataService } from '@/services/GameDataService';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { type ClassChoice } from '@/types/classes';
 
@@ -133,9 +133,13 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [choicesExpanded, setChoicesExpanded] = useState(false);
+  const [definitions, setDefinitions] = useState<ClassChoiceDefinition[]>([]);
   const characterDeity = useAppSelector((state) => state.characterEntry.draft.deity);
 
-  const definitions = getDefinitionsForClass(entry.className);
+  useEffect(() => {
+    GameDataService.getClassChoiceDefinitions(entry.className).then(setDefinitions);
+  }, [entry.className]);
+
   const allSlots = definitions.flatMap((def) => deriveChoiceSlots(def, entry.level));
   const hasChoices = allSlots.length > 0;
 

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
@@ -6,33 +6,7 @@ import { useAppDispatch } from '@/store/hooks';
 import { upsertClassChoice } from '@/store/slices/characterEntrySlice';
 import { type ClassChoice } from '@/types/classes';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
-import { ALL_DOMAINS } from '@/data/domains/index';
-import { ALL_RAGE_POWERS } from '@/data/ragePowers/index';
-import { ALL_ROGUE_TALENTS } from '@/data/rogueTalents/index';
-import { ALL_MYSTERIES } from '@/data/mysteries/index';
-import { ALL_INQUISITIONS } from '@/data/inquisitions/index';
-import { ALL_REVELATIONS } from '@/data/revelations/index';
-import { ALL_CAVALIER_ORDERS } from '@/data/cavalierOrders/index';
-import { ALL_HEXES } from '@/data/hexes/index';
-import { ALL_ARCANIST_EXPLOITS } from '@/data/arcanistExploits/index';
-import { ALL_INVESTIGATOR_TALENTS } from '@/data/investigatorTalents/index';
-import { ALL_BLOODLINES } from '@/data/bloodlines/index';
-import { ALL_SHAMAN_SPIRITS } from '@/data/shamanSpirits/index';
-import { ALL_EIDOLON_EVOLUTIONS } from '@/data/eidolonEvolutions/index';
-import { ALL_MESMERIST_TRICKS } from '@/data/mesmeristTricks/index';
-import type { ShamanSpiritEntry, EidolonEvolutionEntry, MesmeristTrickEntry } from '@/types/classOptions';
-import { ALL_WILD_TALENTS } from '@/data/kineticistWildTalents/index';
-import { ALL_OCCULTIST_FOCUS_POWERS } from '@/data/occultistFocusPowers/index';
-import { ALL_PHRENIC_AMPLIFICATIONS } from '@/data/phrenicAmplifications/index';
-import { getDeityByName } from '@/data/deities/index';
-import { ALL_NINJA_TRICKS } from '@/data/ninjaTricks/index';
-import { ALL_SLAYER_TALENTS } from '@/data/slayerTalents/index';
-import { ALL_MAGUS_ARCANA } from '@/data/magusArcana/index';
-import type { NinjaTrickEntry, SlayerTalentEntry, AlchemistDiscoveryEntry, BloodlineClassId } from '@/types/classOptions';
-import { ALL_FEATS } from '@/data/feats/index';
-import type { FeatType } from '@/types/feats';
-import { ALL_WARPRIEST_BLESSINGS } from '@/data/warpriestBlessings/index';
-import { ALL_ALCHEMIST_DISCOVERIES } from '@/data/alchemistDiscoveries/index';
+import { GameDataService } from '@/services/GameDataService';
 
 interface ClassChoiceRowProps {
   classId: string;
@@ -81,250 +55,6 @@ function resolveFilterTokens(
   return resolved;
 }
 
-function buildCollectionItems(
-  collectionName: string,
-  resolvedFilter: Record<string, unknown> = {},
-): SearchItem[] {
-  switch (collectionName) {
-    case 'domains': {
-      const deityName = resolvedFilter.deityIds as string | undefined;
-      const deity = deityName ? getDeityByName(deityName) : undefined;
-      const deityDomainIds = deity
-        ? new Set([...deity.domains, ...deity.subdomains])
-        : null;
-      const pool = deityDomainIds
-        ? ALL_DOMAINS.filter((d) => deityDomainIds.has(d.id))
-        : ALL_DOMAINS;
-      return pool.map((d) => ({
-        key: d.id,
-        label: d.name,
-        subLabel: d.description?.slice(0, 80),
-        category: deity ? undefined : (d.druidAllowed ? 'Druid / Cleric' : 'Cleric'),
-      }));
-    }
-    case 'ragepowers':
-      return ALL_RAGE_POWERS.map((r) => ({
-        key: r.id,
-        label: r.name,
-        subLabel: r.description?.slice(0, 80),
-      }));
-    case 'roguetalents':
-      return ALL_ROGUE_TALENTS.map((t) => ({
-        key: t.id,
-        label: t.name,
-        subLabel: t.description?.slice(0, 80),
-        category: t.talentTier === 'advanced' ? 'Advanced Talents' : 'Talents',
-      }));
-    case 'mysteries':
-      return ALL_MYSTERIES.map((m) => ({
-        key: m.id,
-        label: m.name,
-        subLabel: m.classSkills.slice(0, 3).join(', '),
-      }));
-    case 'inquisitions':
-      return ALL_INQUISITIONS.map((i) => ({
-        key: i.id,
-        label: i.name,
-        subLabel: i.description?.slice(0, 80),
-      }));
-    case 'revelations': {
-      const mysteryId = resolvedFilter.mysteryId as string | undefined;
-      const pool = mysteryId
-        ? ALL_REVELATIONS.filter((r) => r.mysteryId === mysteryId)
-        : ALL_REVELATIONS;
-      return pool.map((r) => ({
-        key: r.id,
-        label: r.name,
-        subLabel: r.description?.slice(0, 80),
-      }));
-    }
-    case 'cavalierorders':
-      return ALL_CAVALIER_ORDERS.map((o) => ({
-        key: o.id,
-        label: o.name,
-        subLabel: o.classSkills.join(', '),
-      }));
-    case 'hexes':
-      return ALL_HEXES.map((h) => ({
-        key: h.id,
-        label: h.name,
-        subLabel: h.description?.slice(0, 80),
-        category: h.hexTier === 'grand' ? 'Grand Hexes' : h.hexTier === 'major' ? 'Major Hexes' : 'Hexes',
-      }));
-    case 'arcanistexploits':
-      return ALL_ARCANIST_EXPLOITS.map((e) => ({
-        key: e.id,
-        label: e.name,
-        subLabel: e.description?.slice(0, 80),
-        category: e.exploitTier === 'greater' ? 'Greater Exploits' : 'Exploits',
-      }));
-    case 'investigatortalents':
-      return ALL_INVESTIGATOR_TALENTS.map((t) => ({
-        key: t.id,
-        label: t.name,
-        subLabel: t.description?.slice(0, 80),
-      }));
-    case 'ninjatricks': {
-      const tier = resolvedFilter.trickTier as NinjaTrickEntry['trickTier'] | undefined;
-      const pool = tier
-        ? ALL_NINJA_TRICKS.filter((t) => t.trickTier === tier)
-        : ALL_NINJA_TRICKS;
-      return pool.map((t) => ({
-        key: t.id,
-        label: t.name,
-        subLabel: t.description?.slice(0, 80),
-        category: t.trickTier === 'master' ? 'Master Tricks' : 'Tricks',
-      }));
-    }
-    case 'slayertalents': {
-      const tier = resolvedFilter.talentTier as SlayerTalentEntry['talentTier'] | undefined;
-      const pool = tier
-        ? ALL_SLAYER_TALENTS.filter((t) => t.talentTier === tier)
-        : ALL_SLAYER_TALENTS;
-      return pool.map((t) => ({
-        key: t.id,
-        label: t.name,
-        subLabel: t.description?.slice(0, 80),
-        category: t.talentTier === 'advanced' ? 'Advanced Talents' : 'Talents',
-      }));
-    }
-    case 'magusarcana':
-      return ALL_MAGUS_ARCANA.map((a) => ({
-        key: a.id,
-        label: a.name,
-        subLabel: a.description?.slice(0, 80),
-      }));
-    case 'warpriestblessings': {
-      const deityName = resolvedFilter.deityIds as string | undefined;
-      const deity = deityName ? getDeityByName(deityName) : undefined;
-      const deityDomainIds = deity
-        ? new Set([...deity.domains, ...deity.subdomains])
-        : null;
-      const pool = deityDomainIds
-        ? ALL_WARPRIEST_BLESSINGS.filter((b) =>
-            deityDomainIds.has(b.id.replace('warpriest-blessing-', ''))
-          )
-        : ALL_WARPRIEST_BLESSINGS;
-      return pool.map((b) => ({
-        key: b.id,
-        label: b.name,
-        subLabel: b.minorPower.slice(0, 80),
-      }));
-    }
-    case 'alchemistdiscoveries': {
-      const tier = resolvedFilter.discoveryTier as AlchemistDiscoveryEntry['discoveryTier'] | undefined;
-      const pool = tier
-        ? ALL_ALCHEMIST_DISCOVERIES.filter((d) => d.discoveryTier === tier)
-        : ALL_ALCHEMIST_DISCOVERIES;
-      return pool.map((d) => ({
-        key: d.id,
-        label: d.name,
-        subLabel: d.description?.slice(0, 80),
-        category: d.discoveryTier === 'grand' ? 'Grand Discovery' : undefined,
-      }));
-    }
-    case 'bloodlines': {
-      const classId = resolvedFilter.classIds as BloodlineClassId | undefined;
-      const pool = classId
-        ? ALL_BLOODLINES.filter((b) => b.classIds.includes(classId))
-        : ALL_BLOODLINES;
-      return pool.map((b) => ({
-        key: b.id,
-        label: b.name,
-        subLabel: b.bloodlineArcana?.slice(0, 80) ?? b.description?.slice(0, 80),
-      }));
-    }
-    case 'feats': {
-      const featTypes = resolvedFilter.featTypes as FeatType[] | undefined;
-      const isCombatFeat = resolvedFilter.isCombatFeat as boolean | undefined;
-      const isTeamworkFeat = resolvedFilter.isTeamworkFeat as boolean | undefined;
-      let pool = ALL_FEATS;
-      if (featTypes && featTypes.length > 0) {
-        pool = pool.filter((f) => featTypes.some((t) => f.types.includes(t)));
-      } else if (isCombatFeat) {
-        pool = pool.filter((f) => f.types.includes('combat'));
-      } else if (isTeamworkFeat) {
-        pool = pool.filter((f) => f.types.includes('teamwork'));
-      }
-      return pool.map((f) => ({
-        key: f.id,
-        label: f.name,
-        subLabel: f.description?.slice(0, 80),
-      }));
-    }
-    case 'shamanspirits': {
-      const wanderingOnly = resolvedFilter.wanderingOnly as boolean | undefined;
-      const pool = wanderingOnly
-        ? ALL_SHAMAN_SPIRITS.filter((s: ShamanSpiritEntry) => s.wanderingSpirit)
-        : (ALL_SHAMAN_SPIRITS as ShamanSpiritEntry[]);
-      return pool.map((s: ShamanSpiritEntry) => ({
-        key: s.id,
-        label: s.name,
-        subLabel: s.description?.slice(0, 80),
-      }));
-    }
-    case 'eidolonevolutions': {
-      const summonerType = resolvedFilter.summonerType as 'apg' | 'unchained' | undefined;
-      const pool = summonerType
-        ? ALL_EIDOLON_EVOLUTIONS.filter((e: EidolonEvolutionEntry) => !e.summoner || e.summoner === summonerType)
-        : (ALL_EIDOLON_EVOLUTIONS as EidolonEvolutionEntry[]);
-      return pool.map((e: EidolonEvolutionEntry) => ({
-        key: e.id,
-        label: e.name,
-        subLabel: e.description?.slice(0, 80),
-        category:
-          e.evolutionPointCost === 4
-            ? '4-Point Evolutions'
-            : e.evolutionPointCost === 3
-              ? '3-Point Evolutions'
-              : e.evolutionPointCost === 2
-                ? '2-Point Evolutions'
-                : '1-Point Evolutions',
-      }));
-    }
-    case 'mesmeristtricks':
-      return (ALL_MESMERIST_TRICKS as MesmeristTrickEntry[]).map((t: MesmeristTrickEntry) => ({
-        key: t.id,
-        label: t.name,
-        subLabel: t.description?.slice(0, 80),
-        category: t.trickTier === 'masterful' ? 'Masterful Tricks' : 'Standard Tricks',
-      }));
-    case 'wildtalents': {
-      const talentType = resolvedFilter.talentType as string | undefined;
-      const pool = talentType
-        ? ALL_WILD_TALENTS.filter((t) => t.talentType === talentType)
-        : ALL_WILD_TALENTS;
-      return pool.map((t) => ({
-        key: t.id,
-        label: t.name,
-        subLabel: t.description?.slice(0, 80),
-        category:
-          t.talentType === 'infusion'
-            ? t.infusionType === 'form'
-              ? 'Form Infusions'
-              : 'Substance Infusions'
-            : t.element.charAt(0).toUpperCase() + t.element.slice(1),
-      }));
-    }
-    case 'occultistfocuspowers':
-      return ALL_OCCULTIST_FOCUS_POWERS.filter((p) => !p.isBasePower).map((p) => ({
-        key: p.id,
-        label: p.name,
-        subLabel: p.description?.slice(0, 80),
-        category: p.school.charAt(0).toUpperCase() + p.school.slice(1),
-      }));
-    case 'phrenicamplifications':
-      return ALL_PHRENIC_AMPLIFICATIONS.map((a) => ({
-        key: a.id,
-        label: a.name,
-        subLabel: a.description?.slice(0, 80),
-        category: a.amplificationTier === 'major' ? 'Major Amplifications' : 'Amplifications',
-      }));
-    default:
-      return [];
-  }
-}
-
 function buildInlineItems(definition: ClassChoiceDefinition): SearchItem[] {
   if (!definition.optionGroups) return [];
   return definition.optionGroups.flatMap((group) =>
@@ -351,17 +81,21 @@ export function ClassChoiceRow({
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [pickerItems, setPickerItems] = useState<SearchItem[]>([]);
 
-  const pickerItems: SearchItem[] = useMemo(() => {
+  useEffect(() => {
     if (definition.optionSource === 'collection' && definition.collectionName) {
       const resolvedFilter = resolveFilterTokens(
         definition.collectionFilter ?? {},
         siblingChoices ?? [],
         characterDeity,
       );
-      return buildCollectionItems(definition.collectionName, resolvedFilter);
+      GameDataService.getClassChoiceItems(definition.collectionName, resolvedFilter).then(
+        setPickerItems,
+      );
+    } else {
+      setPickerItems(buildInlineItems(definition));
     }
-    return buildInlineItems(definition);
   }, [definition, siblingChoices, characterDeity]);
 
   // Resolve stored ID(s) back to human-readable labels for display.

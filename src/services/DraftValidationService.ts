@@ -9,7 +9,7 @@ import type { Character } from '@/types';
 import type { Ruleset } from '@/types/ruleset';
 import { DraftStateResolver, type ECLTimeline } from './DraftStateResolver';
 import { PrerequisiteService } from './PrerequisiteService';
-import { getFeatById } from '@/data/feats';
+import { GameDataService } from '@/services/GameDataService';
 import {
   lookupClassData,
   abilityTotal,
@@ -42,7 +42,7 @@ export class DraftValidationService {
    * Run all validation checks against a CharacterDraft.
    * Returns an array of warnings (empty = clean).
    */
-  static validate(draft: CharacterDraft, ruleset: Ruleset): EntryValidationWarning[] {
+  static async validate(draft: CharacterDraft, ruleset: Ruleset): Promise<EntryValidationWarning[]> {
     const warnId = makeWarnId(); // scoped counter — safe under parallel calls and test isolation
 
     const timeline = DraftStateResolver.buildTimeline(draft, ruleset);
@@ -51,12 +51,17 @@ export class DraftValidationService {
     const intTotal = abilityTotal(draft.abilities.int);
     const intMod = abilityModifier(intTotal);
 
+    const [classPrereqWarnings, featPrereqWarnings] = await Promise.all([
+      this.checkClassPrerequisites(draft, ruleset, timeline, warnId),
+      this.checkFeatPrerequisites(draft, ruleset, timeline, warnId),
+    ]);
+
     return [
       ...this.checkIdentity(draft, warnId),
       ...this.checkAbilities(draft, totalHD, warnId),
       ...this.checkLevelIncrements(draft, totalHD, warnId),
-      ...this.checkClassPrerequisites(draft, ruleset, timeline, warnId),
-      ...this.checkFeatPrerequisites(draft, ruleset, timeline, warnId),
+      ...classPrereqWarnings,
+      ...featPrereqWarnings,
       ...this.checkTraitCount(draft, ruleset, warnId),
       ...this.checkSkillRanks(draft, totalHD, intMod, warnId),
       ...this.checkSpellcastingAdvancement(draft, warnId),
@@ -159,12 +164,12 @@ export class DraftValidationService {
 
   // ---- Class prerequisites ----
 
-  private static checkClassPrerequisites(
+  private static async checkClassPrerequisites(
     draft: CharacterDraft,
     ruleset: Ruleset,
     timeline: ECLTimeline,
     warnId: WarnId,
-  ): EntryValidationWarning[] {
+  ): Promise<EntryValidationWarning[]> {
     const w: EntryValidationWarning[] = [];
 
     for (const entry of draft.classes) {
@@ -209,10 +214,12 @@ export class DraftValidationService {
       // Feats (by name — prestige prereqs list feat names, not IDs)
       if (prereqs.feats) {
         for (const featName of prereqs.feats) {
-          const hasFeat = snapshot.feats.feats.some((f) => {
-            const def = getFeatById(f.featId);
-            return def?.name.toLowerCase() === featName.toLowerCase();
-          });
+          const featDefs = await Promise.all(
+            snapshot.feats.feats.map((f) => GameDataService.getFeatById(f.featId)),
+          );
+          const hasFeat = featDefs.some(
+            (def) => def?.name.toLowerCase() === featName.toLowerCase(),
+          );
           if (!hasFeat) {
             unmet.push(`Feat: ${featName}`);
           }
@@ -298,18 +305,18 @@ export class DraftValidationService {
 
   // ---- Feat prerequisites ----
 
-  private static checkFeatPrerequisites(
+  private static async checkFeatPrerequisites(
     draft: CharacterDraft,
     ruleset: Ruleset,
     timeline: ECLTimeline,
     warnId: WarnId,
-  ): EntryValidationWarning[] {
+  ): Promise<EntryValidationWarning[]> {
     const w: EntryValidationWarning[] = [];
 
     for (const slot of draft.featSlots) {
       if (!slot.featId || slot.prereqOverride) continue;
 
-      const featDef = getFeatById(slot.featId);
+      const featDef = await GameDataService.getFeatById(slot.featId);
       if (!featDef || featDef.prerequisites.length === 0) continue;
 
       // snapshotBeforeECL: prerequisites must be met *before* the feat is taken.
@@ -320,7 +327,7 @@ export class DraftValidationService {
         DraftStateResolver.EMPTY_SNAPSHOT;
 
       // Cast snapshot as Character — structurally compatible for the fields PrerequisiteService reads
-      const result = PrerequisiteService.checkPrerequisites(
+      const result = await PrerequisiteService.checkPrerequisites(
         snapshot as unknown as Character,
         featDef,
       );

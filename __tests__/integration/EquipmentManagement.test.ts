@@ -37,8 +37,8 @@ const createTestCharacter = (): Character => {
 describe('Equipment Management Integration', () => {
   let character: Character;
 
-  beforeEach(() => {
-    EquipmentDatabaseService.initialize();
+  beforeEach(async () => {
+    await EquipmentDatabaseService.initialize();
     character = createTestCharacter();
   });
 
@@ -46,8 +46,8 @@ describe('Equipment Management Integration', () => {
   // 1. Create weapons from database, add to character inventory
   // -----------------------------------------------------------------------
   describe('Create weapons from database and add to inventory', () => {
-    test('should look up a weapon template and add it to inventory', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword');
+    test('should look up a weapon template and add it to inventory', async () => {
+      const longswordTemplate = await EquipmentDatabaseService.getEquipmentById('longsword');
       expect(longswordTemplate).not.toBeNull();
 
       const updated = EquipmentService.addItemToCharacter(character, longswordTemplate!);
@@ -60,8 +60,8 @@ describe('Equipment Management Integration', () => {
       expect(updated.equipment.weapons[0].enhancement).toBe(0);
     });
 
-    test('should create weapon with correct properties from template', () => {
-      const daggerTemplate = EquipmentDatabaseService.getEquipmentById('dagger')!;
+    test('should create weapon with correct properties from template', async () => {
+      const daggerTemplate = (await EquipmentDatabaseService.getEquipmentById('dagger'))!;
       const updated = EquipmentService.addItemToCharacter(character, daggerTemplate);
 
       const dagger = updated.equipment.weapons[0];
@@ -76,8 +76,8 @@ describe('Equipment Management Integration', () => {
   // 2. Create armor from database, equip it, verify AC bonus applied
   // -----------------------------------------------------------------------
   describe('Create armor, equip it, verify AC bonus', () => {
-    test('should equip leather armor and see ARMOR-type AC bonus', () => {
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!;
+    test('should equip leather armor and see ARMOR-type AC bonus', async () => {
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!;
       let updated = EquipmentService.addItemToCharacter(character, leatherTemplate);
 
       const armorId = updated.equipment.armor[0].id;
@@ -94,8 +94,8 @@ describe('Equipment Management Integration', () => {
       expect(armorBonuses[0].source).toBe('Leather');
     });
 
-    test('should equip chain shirt and see higher AC bonus', () => {
-      const chainShirtTemplate = EquipmentDatabaseService.getEquipmentById('chain_shirt')!;
+    test('should equip chain shirt and see higher AC bonus', async () => {
+      const chainShirtTemplate = (await EquipmentDatabaseService.getEquipmentById('chain_shirt'))!;
       let updated = EquipmentService.addItemToCharacter(character, chainShirtTemplate);
 
       const armorId = updated.equipment.armor[0].id;
@@ -114,9 +114,9 @@ describe('Equipment Management Integration', () => {
   // 3. Equip a shield alongside armor, verify AC stacks correctly
   // -----------------------------------------------------------------------
   describe('Equip shield alongside armor, verify AC stacks', () => {
-    test('should produce separate ARMOR and SHIELD AC bonuses when both equipped', () => {
+    test('should produce separate ARMOR and SHIELD AC bonuses when both equipped', async () => {
       // Add and equip leather armor
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!;
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!;
       let updated = EquipmentService.addItemToCharacter(character, leatherTemplate);
       const armorId = updated.equipment.armor[0].id;
       const armorResult = EquipmentService.equipItem(updated, armorId, EquipmentSlot.BODY);
@@ -124,7 +124,7 @@ describe('Equipment Management Integration', () => {
       updated = armorResult.data!;
 
       // Add and equip heavy shield
-      const heavyShieldTemplate = EquipmentDatabaseService.getEquipmentById('heavy_shield')!;
+      const heavyShieldTemplate = (await EquipmentDatabaseService.getEquipmentById('heavy_shield'))!;
       updated = EquipmentService.addItemToCharacter(updated, heavyShieldTemplate);
       const shieldId = updated.equipment.shields[0].id;
       const shieldResult = EquipmentService.equipItem(updated, shieldId, EquipmentSlot.OFF_HAND);
@@ -151,8 +151,8 @@ describe('Equipment Management Integration', () => {
   // 4. Unequip items, verify bonuses removed
   // -----------------------------------------------------------------------
   describe('Unequip items, verify bonuses removed', () => {
-    test('should remove AC bonus when armor is unequipped', () => {
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!;
+    test('should remove AC bonus when armor is unequipped', async () => {
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!;
       let updated = EquipmentService.addItemToCharacter(character, leatherTemplate);
       const armorId = updated.equipment.armor[0].id;
 
@@ -171,8 +171,8 @@ describe('Equipment Management Integration', () => {
       expect(updated.equipment.equippedSlots.get(EquipmentSlot.BODY)).toBeUndefined();
     });
 
-    test('should remove weapon bonuses when weapon is unequipped', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('should remove weapon bonuses when weapon is unequipped', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
       let updated = EquipmentService.addItemToCharacter(character, longswordTemplate);
       updated.equipment.weapons[0].enhancement = 2;
       const weaponId = updated.equipment.weapons[0].id;
@@ -198,9 +198,9 @@ describe('Equipment Management Integration', () => {
   // 5. Slot conflicts -- equipping new armor replaces old armor
   // -----------------------------------------------------------------------
   describe('Slot conflicts', () => {
-    test('should fail to equip new armor in BODY slot when slot is already occupied', () => {
+    test('should fail to equip new armor in BODY slot when slot is already occupied', async () => {
       // Add and equip leather armor
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!;
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!;
       let updated = EquipmentService.addItemToCharacter(character, leatherTemplate);
       const leatherId = updated.equipment.armor[0].id;
       const leatherResult = EquipmentService.equipItem(updated, leatherId, EquipmentSlot.BODY);
@@ -208,7 +208,7 @@ describe('Equipment Management Integration', () => {
       updated = leatherResult.data!;
 
       // Add chain shirt and attempt to equip to same BODY slot
-      const chainShirtTemplate = EquipmentDatabaseService.getEquipmentById('chain_shirt')!;
+      const chainShirtTemplate = (await EquipmentDatabaseService.getEquipmentById('chain_shirt'))!;
       updated = EquipmentService.addItemToCharacter(updated, chainShirtTemplate);
       const chainShirtId = updated.equipment.armor[1].id;
       const chainResult = EquipmentService.equipItem(updated, chainShirtId, EquipmentSlot.BODY);
@@ -219,9 +219,9 @@ describe('Equipment Management Integration', () => {
       expect(chainResult.errors[0]).toContain('already occupied');
     });
 
-    test('should allow equipping after unequipping the previous item', () => {
+    test('should allow equipping after unequipping the previous item', async () => {
       // Add and equip leather armor
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!;
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!;
       let updated = EquipmentService.addItemToCharacter(character, leatherTemplate);
       const leatherId = updated.equipment.armor[0].id;
       const leatherResult = EquipmentService.equipItem(updated, leatherId, EquipmentSlot.BODY);
@@ -231,7 +231,7 @@ describe('Equipment Management Integration', () => {
       updated = EquipmentService.unequipItem(updated, EquipmentSlot.BODY);
 
       // Now equip chain shirt
-      const chainShirtTemplate = EquipmentDatabaseService.getEquipmentById('chain_shirt')!;
+      const chainShirtTemplate = (await EquipmentDatabaseService.getEquipmentById('chain_shirt'))!;
       updated = EquipmentService.addItemToCharacter(updated, chainShirtTemplate);
       const chainShirtId = updated.equipment.armor[1].id;
       const chainResult = EquipmentService.equipItem(updated, chainShirtId, EquipmentSlot.BODY);
@@ -250,8 +250,8 @@ describe('Equipment Management Integration', () => {
   // 6. Create magic items with enhancement bonuses, verify bonus calculation
   // -----------------------------------------------------------------------
   describe('Magic items with enhancement bonuses', () => {
-    test('should calculate +1 enhanced weapon attack and damage bonuses', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('should calculate +1 enhanced weapon attack and damage bonuses', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
       let updated = EquipmentService.addItemToCharacter(character, longswordTemplate);
 
       // Set as +1 longsword
@@ -272,8 +272,8 @@ describe('Equipment Management Integration', () => {
       expect(bonuses.damageBonuses[0].value).toBe(1);
     });
 
-    test('should calculate +3 enhanced armor AC bonus', () => {
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!;
+    test('should calculate +3 enhanced armor AC bonus', async () => {
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!;
       let updated = EquipmentService.addItemToCharacter(character, leatherTemplate);
 
       // Set as +3 leather armor
@@ -291,8 +291,8 @@ describe('Equipment Management Integration', () => {
       expect(armorBonuses[0].value).toBe(5);
     });
 
-    test('should calculate +2 enhanced shield AC bonus', () => {
-      const heavyShieldTemplate = EquipmentDatabaseService.getEquipmentById('heavy_shield')!;
+    test('should calculate +2 enhanced shield AC bonus', async () => {
+      const heavyShieldTemplate = (await EquipmentDatabaseService.getEquipmentById('heavy_shield'))!;
       let updated = EquipmentService.addItemToCharacter(character, heavyShieldTemplate);
 
       // Set as +2 heavy shield
@@ -310,8 +310,8 @@ describe('Equipment Management Integration', () => {
       expect(shieldBonuses[0].value).toBe(4);
     });
 
-    test('should not give masterwork attack bonus when weapon has enhancement', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('should not give masterwork attack bonus when weapon has enhancement', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
       let updated = EquipmentService.addItemToCharacter(character, longswordTemplate);
 
       // +1 longsword is also masterwork, but masterwork bonus should NOT stack
@@ -334,12 +334,12 @@ describe('Equipment Management Integration', () => {
   // 7. Encumbrance calculation with multiple items
   // -----------------------------------------------------------------------
   describe('Encumbrance calculation with multiple items', () => {
-    test('should track total weight as items are added', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!; // 4 lbs
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!; // 15 lbs
-      const heavyShieldTemplate = EquipmentDatabaseService.getEquipmentById('heavy_shield')!; // 15 lbs
-      const backpackTemplate = EquipmentDatabaseService.getEquipmentById('backpack')!; // 2 lbs
-      const ropeTemplate = EquipmentDatabaseService.getEquipmentById('rope_silk')!; // 5 lbs
+    test('should track total weight as items are added', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!; // 4 lbs
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!; // 15 lbs
+      const heavyShieldTemplate = (await EquipmentDatabaseService.getEquipmentById('heavy_shield'))!; // 15 lbs
+      const backpackTemplate = (await EquipmentDatabaseService.getEquipmentById('backpack'))!; // 2 lbs
+      const ropeTemplate = (await EquipmentDatabaseService.getEquipmentById('rope_silk'))!; // 5 lbs
 
       let updated = character;
       updated = EquipmentService.addItemToCharacter(updated, longswordTemplate);
@@ -352,13 +352,13 @@ describe('Equipment Management Integration', () => {
       expect(updated.equipment.totalWeight).toBe(41);
     });
 
-    test('should calculate encumbrance level with heavy load', () => {
+    test('should calculate encumbrance level with heavy load', async () => {
       // STR 15 carrying capacity: light = 175, medium = 350, heavy = 525
       character.equipment.encumbranceSettings.enabled = true;
       character.equipment.encumbranceSettings.variant = EncumbranceVariant.CORE_RULES;
 
       // Add full plate (50 lbs) several times to push weight up
-      const fullPlateTemplate = EquipmentDatabaseService.getEquipmentById('full_plate')!;
+      const fullPlateTemplate = (await EquipmentDatabaseService.getEquipmentById('full_plate'))!;
       let updated = character;
 
       // Add a lot of heavy items to exceed medium load (350 lbs)
@@ -373,11 +373,11 @@ describe('Equipment Management Integration', () => {
       expect(encumbrance).toBe(EncumbranceLevel.HEAVY);
     });
 
-    test('should report overloaded when exceeding heavy capacity', () => {
+    test('should report overloaded when exceeding heavy capacity', async () => {
       character.equipment.encumbranceSettings.enabled = true;
       character.equipment.encumbranceSettings.variant = EncumbranceVariant.CORE_RULES;
 
-      const fullPlateTemplate = EquipmentDatabaseService.getEquipmentById('full_plate')!;
+      const fullPlateTemplate = (await EquipmentDatabaseService.getEquipmentById('full_plate'))!;
       let updated = character;
 
       // 11 x 50 = 550 lbs, exceeds heavy (525)
@@ -391,11 +391,11 @@ describe('Equipment Management Integration', () => {
       expect(encumbrance).toBe(EncumbranceLevel.OVERLOADED);
     });
 
-    test('should report light load for a lightly equipped character', () => {
+    test('should report light load for a lightly equipped character', async () => {
       character.equipment.encumbranceSettings.enabled = true;
       character.equipment.encumbranceSettings.variant = EncumbranceVariant.CORE_RULES;
 
-      const daggerTemplate = EquipmentDatabaseService.getEquipmentById('dagger')!; // 1 lb
+      const daggerTemplate = (await EquipmentDatabaseService.getEquipmentById('dagger'))!; // 1 lb
       let updated = EquipmentService.addItemToCharacter(character, daggerTemplate);
 
       expect(updated.equipment.totalWeight).toBe(1);
@@ -409,8 +409,8 @@ describe('Equipment Management Integration', () => {
   // 8. Equip a two-handed weapon, verify it takes correct slot
   // -----------------------------------------------------------------------
   describe('Two-handed weapon slot handling', () => {
-    test('should equip greatsword to TWO_HANDED slot', () => {
-      const greatswordTemplate = EquipmentDatabaseService.getEquipmentById('greatsword')!;
+    test('should equip greatsword to TWO_HANDED slot', async () => {
+      const greatswordTemplate = (await EquipmentDatabaseService.getEquipmentById('greatsword'))!;
       let updated = EquipmentService.addItemToCharacter(character, greatswordTemplate);
 
       const weaponId = updated.equipment.weapons[0].id;
@@ -425,9 +425,9 @@ describe('Equipment Management Integration', () => {
       expect(updated.equipment.equippedSlots.get(EquipmentSlot.OFF_HAND)).toBeUndefined();
     });
 
-    test('should clear two-handed weapon when equipping a one-handed weapon to main hand', () => {
-      const greatswordTemplate = EquipmentDatabaseService.getEquipmentById('greatsword')!;
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('should clear two-handed weapon when equipping a one-handed weapon to main hand', async () => {
+      const greatswordTemplate = (await EquipmentDatabaseService.getEquipmentById('greatsword'))!;
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
 
       let updated = EquipmentService.addItemToCharacter(character, greatswordTemplate);
       updated = EquipmentService.addItemToCharacter(updated, longswordTemplate);
@@ -448,8 +448,8 @@ describe('Equipment Management Integration', () => {
       expect(updated.equipment.equippedSlots.get(EquipmentSlot.TWO_HANDED)).toBeUndefined();
     });
 
-    test('should equip longbow to TWO_HANDED slot and track attack bonuses', () => {
-      const longbowTemplate = EquipmentDatabaseService.getEquipmentById('longbow')!;
+    test('should equip longbow to TWO_HANDED slot and track attack bonuses', async () => {
+      const longbowTemplate = (await EquipmentDatabaseService.getEquipmentById('longbow'))!;
       let updated = EquipmentService.addItemToCharacter(character, longbowTemplate);
 
       // Make it a +1 longbow
@@ -473,10 +473,10 @@ describe('Equipment Management Integration', () => {
   // 9. Add multiple weapons and verify inventory management
   // -----------------------------------------------------------------------
   describe('Multiple weapons and inventory management', () => {
-    test('should track multiple weapons independently in inventory', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
-      const daggerTemplate = EquipmentDatabaseService.getEquipmentById('dagger')!;
-      const greatswordTemplate = EquipmentDatabaseService.getEquipmentById('greatsword')!;
+    test('should track multiple weapons independently in inventory', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
+      const daggerTemplate = (await EquipmentDatabaseService.getEquipmentById('dagger'))!;
+      const greatswordTemplate = (await EquipmentDatabaseService.getEquipmentById('greatsword'))!;
 
       let updated = character;
       updated = EquipmentService.addItemToCharacter(updated, longswordTemplate);
@@ -494,9 +494,9 @@ describe('Equipment Management Integration', () => {
       expect(uniqueIds.size).toBe(3);
     });
 
-    test('should remove one weapon without affecting others', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
-      const daggerTemplate = EquipmentDatabaseService.getEquipmentById('dagger')!;
+    test('should remove one weapon without affecting others', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
+      const daggerTemplate = (await EquipmentDatabaseService.getEquipmentById('dagger'))!;
 
       let updated = character;
       updated = EquipmentService.addItemToCharacter(updated, longswordTemplate);
@@ -512,9 +512,9 @@ describe('Equipment Management Integration', () => {
       expect(updated.equipment.weapons[0].name).toBe('Dagger');
     });
 
-    test('should equip main-hand and off-hand weapons simultaneously', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
-      const daggerTemplate = EquipmentDatabaseService.getEquipmentById('dagger')!;
+    test('should equip main-hand and off-hand weapons simultaneously', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
+      const daggerTemplate = (await EquipmentDatabaseService.getEquipmentById('dagger'))!;
 
       let updated = character;
       updated = EquipmentService.addItemToCharacter(updated, longswordTemplate);
@@ -537,9 +537,9 @@ describe('Equipment Management Integration', () => {
       expect(updated.equipment.equippedSlots.get(EquipmentSlot.OFF_HAND)).toBe(daggerId);
     });
 
-    test('should update total weight as weapons are added and removed', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!; // 4 lbs
-      const spearTemplate = EquipmentDatabaseService.getEquipmentById('spear')!; // 6 lbs
+    test('should update total weight as weapons are added and removed', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!; // 4 lbs
+      const spearTemplate = (await EquipmentDatabaseService.getEquipmentById('spear'))!; // 6 lbs
 
       let updated = EquipmentService.addItemToCharacter(character, longswordTemplate);
       expect(updated.equipment.totalWeight).toBe(4);
@@ -559,15 +559,15 @@ describe('Equipment Management Integration', () => {
   //     dodge and untyped stack
   // -----------------------------------------------------------------------
   describe('Bonus stacking rules', () => {
-    test('typed (ARMOR) bonuses from equipment should not stack -- only highest applies', () => {
+    test('typed (ARMOR) bonuses from equipment should not stack -- only highest applies', async () => {
       // In Pathfinder, if two different sources grant an armor bonus,
       // only the highest armor bonus applies.
       // EquipmentService returns raw bonuses per equipped item.
       // We verify that both are reported, allowing upstream code
       // to apply the stacking rule (take highest of same type).
 
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!; // AC +2
-      const chainShirtTemplate = EquipmentDatabaseService.getEquipmentById('chain_shirt')!; // AC +4
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!; // AC +2
+      const chainShirtTemplate = (await EquipmentDatabaseService.getEquipmentById('chain_shirt'))!; // AC +4
 
       let updated = character;
       updated = EquipmentService.addItemToCharacter(updated, leatherTemplate);
@@ -600,9 +600,9 @@ describe('Equipment Management Integration', () => {
       expect(newArmorBonuses[0].value).toBe(4);
     });
 
-    test('ARMOR and SHIELD typed bonuses should both apply (different types stack)', () => {
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!;
-      const bucklerTemplate = EquipmentDatabaseService.getEquipmentById('buckler')!;
+    test('ARMOR and SHIELD typed bonuses should both apply (different types stack)', async () => {
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!;
+      const bucklerTemplate = (await EquipmentDatabaseService.getEquipmentById('buckler'))!;
 
       let updated = character;
       updated = EquipmentService.addItemToCharacter(updated, leatherTemplate);
@@ -628,9 +628,9 @@ describe('Equipment Management Integration', () => {
       expect(shieldBonuses[0].value).toBe(1); // Buckler +1
     });
 
-    test('enhancement bonuses on armor are part of the ARMOR typed bonus (combined)', () => {
+    test('enhancement bonuses on armor are part of the ARMOR typed bonus (combined)', async () => {
       // A +2 leather armor: base AC 2 + enhancement 2 = 4 total, reported as a single ARMOR bonus
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!;
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!;
       let updated = EquipmentService.addItemToCharacter(character, leatherTemplate);
       updated.equipment.armor[0].enhancement = 2;
 
@@ -645,8 +645,8 @@ describe('Equipment Management Integration', () => {
       expect(armorBonuses[0].value).toBe(4); // 2 base + 2 enhancement
     });
 
-    test('enhancement bonuses on shield are part of the SHIELD typed bonus (combined)', () => {
-      const heavyShieldTemplate = EquipmentDatabaseService.getEquipmentById('heavy_shield')!;
+    test('enhancement bonuses on shield are part of the SHIELD typed bonus (combined)', async () => {
+      const heavyShieldTemplate = (await EquipmentDatabaseService.getEquipmentById('heavy_shield'))!;
       let updated = EquipmentService.addItemToCharacter(character, heavyShieldTemplate);
       updated.equipment.shields[0].enhancement = 1;
 
@@ -661,8 +661,8 @@ describe('Equipment Management Integration', () => {
       expect(shieldBonuses[0].value).toBe(3); // 2 base + 1 enhancement
     });
 
-    test('weapon attack bonuses: masterwork gives enhancement +1 only when no magic enhancement', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('weapon attack bonuses: masterwork gives enhancement +1 only when no magic enhancement', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
 
       // Masterwork only
       let updated = EquipmentService.addItemToCharacter(character, longswordTemplate);

@@ -2,8 +2,7 @@ import type { Character } from '@/types';
 import type { CharacterFeat, FeatDefinition, FeatPrerequisite } from '@/types/feats';
 import type { Skills, Skill } from '@/types/skills';
 import type { AbilityScores } from '@/types/abilities';
-import { getClassByName } from '@/data/classes';
-import { getFeatById } from '@/data/feats';
+import { GameDataService } from '@/services/GameDataService';
 
 export interface PrerequisiteResult {
   met: boolean;
@@ -21,18 +20,18 @@ export class PrerequisiteService {
    * When omitted (e.g. browsing available feats), `matchChoiceKey` prereqs fall back to
    * checking that the prereq feat exists at all.
    */
-  static checkPrerequisites(
+  static async checkPrerequisites(
     character: Character,
     feat: FeatDefinition,
     characterFeatInstance?: CharacterFeat,
-  ): PrerequisiteResult {
+  ): Promise<PrerequisiteResult> {
     const unmet: FeatPrerequisite[] = [];
     const reasons: string[] = [];
 
     for (const prereq of feat.prerequisites) {
-      if (!this.checkSingle(character, prereq, characterFeatInstance)) {
+      if (!(await this.checkSingle(character, prereq, characterFeatInstance))) {
         unmet.push(prereq);
-        reasons.push(this.describe(prereq, characterFeatInstance));
+        reasons.push(await this.describe(prereq, characterFeatInstance));
       }
     }
 
@@ -42,23 +41,27 @@ export class PrerequisiteService {
   /**
    * Get all feats a character currently qualifies for (excluding already-taken feats).
    */
-  static getAvailableFeats(character: Character, allFeats: FeatDefinition[]): FeatDefinition[] {
+  static async getAvailableFeats(character: Character, allFeats: FeatDefinition[]): Promise<FeatDefinition[]> {
     const currentFeatIds = new Set(character.feats.feats.map((f) => f.featId));
-    return allFeats.filter((feat) => {
-      // Choice-based feats (e.g. Weapon Focus) can be taken multiple times with different choices
+    const results: FeatDefinition[] = [];
+    for (const feat of allFeats) {
       const alreadyTaken = currentFeatIds.has(feat.id) && !feat.choices?.length;
-      return !alreadyTaken && this.checkPrerequisites(character, feat).met;
-    });
+      if (!alreadyTaken) {
+        const result = await this.checkPrerequisites(character, feat);
+        if (result.met) results.push(feat);
+      }
+    }
+    return results;
   }
 
   /**
    * Check a single prerequisite.
    */
-  private static checkSingle(
+  private static async checkSingle(
     character: Character,
     prereq: FeatPrerequisite,
     characterFeatInstance?: CharacterFeat,
-  ): boolean {
+  ): Promise<boolean> {
     switch (prereq.type) {
       case 'ability_score': {
         const keyMap: Record<string, keyof AbilityScores> = {
@@ -110,19 +113,23 @@ export class PrerequisiteService {
           cls.classFeatures.some((f) => f.name.toLowerCase() === prereq.featureName.toLowerCase()),
         );
 
-      case 'proficiency':
+      case 'proficiency': {
         // Proficiencies live on static class data, not on the character's ClassEntry
-        return character.classes.classes.some((cls) => {
-          const classData = getClassByName(cls.name);
-          return (
-            classData?.weaponProficiencies?.some((p) =>
-              p.toLowerCase().includes(prereq.proficiency.toLowerCase()),
-            ) ||
-            classData?.armorProficiencies?.some((p) =>
-              p.toLowerCase().includes(prereq.proficiency.toLowerCase()),
-            )
-          );
-        });
+        const profChecks = await Promise.all(
+          character.classes.classes.map(async (cls) => {
+            const classData = await GameDataService.getClassByName(cls.name);
+            return (
+              classData?.weaponProficiencies?.some((p) =>
+                p.toLowerCase().includes(prereq.proficiency.toLowerCase()),
+              ) ||
+              classData?.armorProficiencies?.some((p) =>
+                p.toLowerCase().includes(prereq.proficiency.toLowerCase()),
+              )
+            );
+          }),
+        );
+        return profChecks.some(Boolean);
+      }
 
       case 'race':
         return character.info.race.name.toLowerCase() === prereq.raceName.toLowerCase();
@@ -156,7 +163,7 @@ export class PrerequisiteService {
   /**
    * Describe a prerequisite in human-readable text.
    */
-  private static describe(prereq: FeatPrerequisite, characterFeatInstance?: CharacterFeat): string {
+  private static async describe(prereq: FeatPrerequisite, characterFeatInstance?: CharacterFeat): Promise<string> {
     switch (prereq.type) {
       case 'ability_score':
         return `${prereq.ability} ${prereq.minimum}+`;
@@ -167,7 +174,8 @@ export class PrerequisiteService {
           ? `${prereq.class} level ${prereq.minimum}`
           : `Character level ${prereq.minimum}`;
       case 'feat': {
-        const featName = getFeatById(prereq.featId)?.name ?? prereq.featId;
+        const featDef = await GameDataService.getFeatById(prereq.featId);
+        const featName = featDef?.name ?? prereq.featId;
         if (prereq.choiceRequirement) {
           return `Feat: ${featName} (${prereq.choiceRequirement.key}: ${prereq.choiceRequirement.value})`;
         }

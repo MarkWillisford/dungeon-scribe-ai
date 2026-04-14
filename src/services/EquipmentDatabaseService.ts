@@ -16,28 +16,33 @@ import type {
 } from '@/types/equipment';
 import { Size } from '@/types/base';
 import type { Effect } from '@/types/base';
-import { ALL_WEAPONS, ALL_ARMOR, ALL_SHIELDS, ALL_GEAR } from '@/data/equipment';
+import { GameDataService } from '@/services/GameDataService';
 
 export class EquipmentDatabaseService {
   private static _weaponTemplates: EquipmentTemplate[] = [];
   private static _armorTemplates: EquipmentTemplate[] = [];
   private static _shieldTemplates: EquipmentTemplate[] = [];
   private static _gearTemplates: EquipmentTemplate[] = [];
-  private static _initialized = false;
+  private static _initPromise: Promise<void> | null = null;
 
-  static initialize(): void {
-    if (this._initialized) return;
-
-    this._weaponTemplates = ALL_WEAPONS.map(this._weaponDefToTemplate);
-    this._armorTemplates = ALL_ARMOR.map(this._armorDefToTemplate);
-    this._shieldTemplates = ALL_SHIELDS.map(this._shieldDefToTemplate);
-    this._gearTemplates = ALL_GEAR.map(this._gearDefToTemplate);
-
-    this._initialized = true;
+  static initialize(): Promise<void> {
+    if (this._initPromise) return this._initPromise;
+    this._initPromise = Promise.all([
+      GameDataService.getWeapons(),
+      GameDataService.getArmor(),
+      GameDataService.getShields(),
+      GameDataService.getGear(),
+    ]).then(([weapons, armor, shields, gear]) => {
+      this._weaponTemplates = weapons.map(this._weaponDefToTemplate);
+      this._armorTemplates = armor.map(this._armorDefToTemplate);
+      this._shieldTemplates = shields.map(this._shieldDefToTemplate);
+      this._gearTemplates = gear.map(this._gearDefToTemplate);
+    });
+    return this._initPromise;
   }
 
-  static getAllEquipment(): EquipmentTemplate[] {
-    this.initialize();
+  static async getAllEquipment(): Promise<EquipmentTemplate[]> {
+    await this.initialize();
     return [
       ...this._weaponTemplates,
       ...this._armorTemplates,
@@ -46,8 +51,8 @@ export class EquipmentDatabaseService {
     ];
   }
 
-  static getEquipmentByCategory(category: string): EquipmentTemplate[] {
-    this.initialize();
+  static async getEquipmentByCategory(category: string): Promise<EquipmentTemplate[]> {
+    await this.initialize();
 
     switch (category.toLowerCase()) {
       case 'weapons':
@@ -63,7 +68,7 @@ export class EquipmentDatabaseService {
     }
   }
 
-  static searchEquipment(
+  static async searchEquipment(
     query: string,
     filters?: {
       category?: string;
@@ -72,10 +77,10 @@ export class EquipmentDatabaseService {
       maxPrice?: number;
       maxWeight?: number;
     },
-  ): EquipmentTemplate[] {
-    this.initialize();
+  ): Promise<EquipmentTemplate[]> {
+    await this.initialize();
 
-    let results = this.getAllEquipment();
+    let results = await this.getAllEquipment();
 
     if (query.trim()) {
       const searchTerm = query.toLowerCase();
@@ -118,9 +123,9 @@ export class EquipmentDatabaseService {
     return results.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  static getEquipmentById(id: string): EquipmentTemplate | null {
-    this.initialize();
-    return this.getAllEquipment().find((item) => item.id === id) || null;
+  static async getEquipmentById(id: string): Promise<EquipmentTemplate | null> {
+    await this.initialize();
+    return (await this.getAllEquipment()).find((item) => item.id === id) ?? null;
   }
 
   static createWeaponFromTemplate(
