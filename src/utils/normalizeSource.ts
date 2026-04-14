@@ -971,6 +971,8 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
     publisher: 'Paizo',
   },
   'pf1e-seekers': { bookId: 'seekers', bookName: 'Seekers of Secrets', publisher: 'Paizo' },
+  'pf1e-pcs-pop': { bookId: 'pcs-pop', bookName: 'Paths of Prestige', publisher: 'Paizo' },
+  'pf1e-poth': { bookId: 'poth', bookName: 'Path of the Hellknight', publisher: 'Paizo' },
   'pf1e-gm': { bookId: 'gm', bookName: 'Gods and Magic', publisher: 'Paizo' },
   'pf1e-cg': { bookId: 'cg', bookName: 'Cities of Golarion', publisher: 'Paizo' },
   'pf1e-dk': { bookId: 'dk', bookName: 'Dark Markets: A Guide to Katapesh', publisher: 'Paizo' },
@@ -1244,6 +1246,7 @@ const FULL_NAME_MAP: Record<string, string> = {
   'advanced race guide': 'pf1e-arg',
   'advanced class guide': 'pf1e-acg',
   'pathfinder unchained': 'pf1e-unchained',
+  unchained: 'pf1e-unchained', // after "Pathfinder " prefix is stripped
 
   // Hardcover expansions
   'occult adventures': 'pf1e-oa',
@@ -1425,6 +1428,8 @@ const FULL_NAME_MAP: Record<string, string> = {
   'princes of darkness, book of the damned vol. i': 'pf1e-pod',
   'chronicles campaign setting': 'pf1e-pcc',
   'seekers of secrets': 'pf1e-seekers',
+  'paths of prestige': 'pf1e-pcs-pop',
+  'path of the hellknight': 'pf1e-poth',
   'gods and magic': 'pf1e-gm',
   'cities of golarion': 'pf1e-cg',
   'dark markets, a guide to katapesh': 'pf1e-dk',
@@ -1525,6 +1530,16 @@ export function normalizeSource(
 
   // Trim whitespace
   sourceStr = sourceStr.trim();
+
+  // Handle dual-source strings like "Inner Sea World Guide / Paths of Prestige"
+  // Take the first part that resolves to a known source.
+  if (sourceStr.includes(' / ')) {
+    const parts = sourceStr.split(' / ');
+    for (const part of parts) {
+      const result = normalizeSource(part.trim(), pageNum);
+      if (result.bookId !== 'unknown') return result;
+    }
+  }
 
   // Check direct match first (fastest path)
   if (COMPLETE_MAP[sourceStr]) {
