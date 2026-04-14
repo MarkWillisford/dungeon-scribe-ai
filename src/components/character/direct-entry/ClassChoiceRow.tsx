@@ -94,7 +94,7 @@ export function ClassChoiceRow({
         setPickerItems,
       );
     } else {
-      setPickerItems(buildInlineItems(definition));
+      Promise.resolve(buildInlineItems(definition)).then(setPickerItems);
     }
   }, [definition, siblingChoices, characterDeity]);
 
