@@ -32,12 +32,18 @@ export class EquipmentDatabaseService {
       GameDataService.getArmor(),
       GameDataService.getShields(),
       GameDataService.getGear(),
-    ]).then(([weapons, armor, shields, gear]) => {
-      this._weaponTemplates = weapons.map(this._weaponDefToTemplate);
-      this._armorTemplates = armor.map(this._armorDefToTemplate);
-      this._shieldTemplates = shields.map(this._shieldDefToTemplate);
-      this._gearTemplates = gear.map(this._gearDefToTemplate);
-    });
+    ])
+      .then(([weapons, armor, shields, gear]) => {
+        this._weaponTemplates = weapons.map(this._weaponDefToTemplate);
+        this._armorTemplates = armor.map(this._armorDefToTemplate);
+        this._shieldTemplates = shields.map(this._shieldDefToTemplate);
+        this._gearTemplates = gear.map(this._gearDefToTemplate);
+      })
+      .catch((e: unknown) => {
+        // Clear the cached promise so callers can retry after a transient failure.
+        this._initPromise = null;
+        throw e;
+      });
     return this._initPromise;
   }
 

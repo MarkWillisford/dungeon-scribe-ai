@@ -14,7 +14,11 @@ interface ClassSelectorProps {
 export function ClassSelector({ selectedClass, onSelectClass, testID }: ClassSelectorProps) {
   const { colors, fantasy, isDark } = useTheme();
   const [expandedClass, setExpandedClass] = useState<string | null>(selectedClass);
-  const [coreClasses, setCoreClasses] = useState<ClassData[]>([]);
+  // Sync initializer ensures first render has real data (no flicker).
+  // Phase B: replace with useState([]) once getCoreClasses is a true async Firestore call.
+  const [coreClasses, setCoreClasses] = useState<ClassData[]>(() =>
+    GameDataService.getCoreClassesSync(),
+  );
 
   useEffect(() => {
     GameDataService.getCoreClasses().then(setCoreClasses);

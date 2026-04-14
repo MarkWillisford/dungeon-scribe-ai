@@ -119,6 +119,8 @@ export class GameDataService {
     const state = store.getState();
     return {
       userId: state.auth.user?.uid ?? '',
+      // Phase B: wire to state.campaigns.activeCampaignId when campaigns slice is added.
+      campaignId: undefined,
       ruleset: state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD,
     };
   }
@@ -437,6 +439,16 @@ export class GameDataService {
   }
 
   // ---- Classes --------------------------------------------------------------------
+
+  /**
+   * Synchronous core class accessor. Phase A: returns static data immediately.
+   * Used by ClassSelector as the useState lazy initializer so the first render
+   * has real data (no empty-state flicker, tests work without async effect support).
+   * Phase B: remove this and update ClassSelector to accept an empty initial state.
+   */
+  static getCoreClassesSync(): ClassData[] {
+    return CORE_CLASSES;
+  }
 
   static async getCoreClasses(_context?: QueryContext): Promise<ClassData[]> {
     return CORE_CLASSES;
