@@ -894,7 +894,7 @@ export function normalizeSource(
       bookId: `ap${num}`,
       bookName: `Pathfinder Adventure Path #${num}`,
       publisher: 'Paizo',
-      page: pageNum,
+      ...(pageNum !== undefined && { page: pageNum }),
     };
     console.warn(`[normalizeSource] Inferred Adventure Path from: "${sourceStr}" → ap${num}`);
     return result;
@@ -909,7 +909,7 @@ export function normalizeSource(
     bookId: 'unknown',
     bookName: cleaned,
     publisher: 'Unknown',
-    page: pageNum,
+    ...(pageNum !== undefined && { page: pageNum }),
   };
 }
 
