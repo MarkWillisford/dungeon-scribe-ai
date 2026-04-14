@@ -1627,6 +1627,22 @@ export function normalizeSource(
     }
   }
 
+  // Adventure Path Player's Guide free PDFs — e.g. "Rise of the Runelords Player's Guide"
+  const pgMatch = cleaned.match(/^(.+?)\s+Player['\u2019]s Guide$/i);
+  if (pgMatch) {
+    const apName = pgMatch[1];
+    const apSlug = apName
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+    return {
+      bookId: `pg-${apSlug}`,
+      bookName: `${apName} Player's Guide`,
+      publisher: 'Paizo',
+      ...(pageNum !== undefined && { page: pageNum }),
+    };
+  }
+
   // Couldn't match — log warning and return fallback
   console.warn(
     `[normalizeSource] Unknown source: "${sourceStr}" (tried cleaned: "${cleaned}"). Returning unknown fallback.`,
