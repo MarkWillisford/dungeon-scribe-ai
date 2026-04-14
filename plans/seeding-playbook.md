@@ -4,7 +4,7 @@
 
 **Seed scripts written:** 24 existing + 10 new = 34 total  
 **Orchestrator:** `scripts/db/seedAll.ts`  
-**Seeded to staging:** NOT STARTED  
+**Seeded to staging:** COMPLETE (2026-04-14) — 34/34 scripts passed  
 **Seeded to prod:** NOT STARTED
 
 ---
@@ -127,10 +127,17 @@ Foundation → class option collections → class choice definitions → supplem
 
 ## Verification
 
-After seeding staging:
+### Programmatic (not yet built)
 
-1. Check Firestore console — document counts should match static array lengths
-2. Spot-check 1–2 documents per collection for correct shape and normalized `source` field
+A `scripts/db/verifySeeding.ts` script would be the right tool here — query each Firestore collection, compare doc counts to static array lengths, spot-check a document or two for shape and source normalization. Not built yet; manual console spot-check was done instead for the initial staging seed.
+
+### Manual (done for staging, 2026-04-14)
+
+1. Firebase console spot-check — document counts confirmed across sampled collections
+2. All 34 seed scripts reported expected write counts with no unknown-source fallbacks remaining
+
+### App-level (pending)
+
 3. Navigate to a class choice row in the app against staging (e.g., Oracle mysteries) — picker should load items from Firestore
 
-After staging is verified, seed production using the same `seedAll.ts` with `FIREBASE_PROJECT_ID` overridden to the prod project ID.
+After staging is verified end-to-end, seed production using the same `seedAll.ts` with `FIREBASE_PROJECT_ID` overridden to the prod project ID.
