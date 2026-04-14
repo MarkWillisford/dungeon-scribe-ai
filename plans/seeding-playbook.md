@@ -16,8 +16,8 @@ Phase B of the data-access-layer refactor swaps `GameDataService` static imports
 Audit (verified 2026-04-14):
 
 - 24 seed scripts existed; 13 collections served by `GameDataService` had no seed script
-- 10 new scripts cover all 13 missing collections (equipment uses one script for 4 collections)
-- Doug's PRs #51–54 were confirmed merged before audit
+- 10 new scripts cover all 13 missing collections (`seedEquipment.ts` handles 4 collections)
+- Doug's PRs #51–54 confirmed merged before audit
 
 ---
 
@@ -36,23 +36,30 @@ Audit (verified 2026-04-14):
 | `seedRaces.ts`          | `races`                               | `ALL_EXPANDED_RACES`                                  |
 | `seedEquipment.ts`      | `weapons`, `armor`, `shields`, `gear` | `ALL_WEAPONS`, `ALL_ARMOR`, `ALL_SHIELDS`, `ALL_GEAR` |
 
+**Note on classes and races:** `ExpandedClassData` and `ExpandedRaceData` have no `id` field. Firestore document ID is derived from `name` (lowercase, non-alphanumeric chars → hyphens). Phase B queries these by name filter, not by document ID lookup.
+
+**Note on equipment:** IDs could collide across categories (e.g., a weapon and armor both named "dagger"). Separate Firestore collections (`weapons`, `armor`, `shields`, `gear`) avoid this and match GameDataService's separate `getWeapons()` / `getArmor()` / `getShields()` / `getGear()` methods.
+
 ---
 
 ## Orchestrator
 
-`scripts/db/seedAll.ts` — runs all 34 scripts in the correct order via `child_process.spawnSync`. Supports `--dry-run` (passes through to all child scripts). Prints a pass/fail summary.
+`scripts/db/seedAll.ts` — runs all 34 scripts in dependency order via `child_process.spawnSync`. Streams output in real time. Supports `--dry-run`. Prints a pass/fail summary. Continues on individual failures but exits non-zero if any script failed.
 
 ---
 
 ## Prerequisites (one-time setup)
 
 ```bash
-# 1. Download service account key from Firebase Console:
-#    Project Settings → Service Accounts → Generate New Private Key
-# 2. Set credentials:
+# Download service account key from Firebase Console:
+# Project Settings → Service Accounts → Generate New Private Key
+
 export GOOGLE_APPLICATION_CREDENTIALS=/path/to/serviceAccount.json
-# 3. Default target is staging (dungeon-scribe-ai-stagin-b4fb5)
-#    Override for prod:
+
+# Target staging (default — baked into all scripts):
+# No FIREBASE_PROJECT_ID override needed
+
+# Override for prod:
 export FIREBASE_PROJECT_ID=<prod-project-id>
 ```
 
@@ -61,10 +68,10 @@ export FIREBASE_PROJECT_ID=<prod-project-id>
 ## Seed to Staging
 
 ```bash
-# Dry run first
+# Dry run first — catches import errors and reports counts without writing
 npx tsx scripts/db/seedAll.ts --dry-run
 
-# Full run against staging (default)
+# Full run against staging
 npx tsx scripts/db/seedAll.ts
 ```
 
@@ -112,7 +119,7 @@ Foundation → class option collections → class choice definitions → supplem
 29. seedWarpriestBlessings
 30. seedAlchemistDiscoveries
 31. seedEidolonEvolutions
-32. seedClassChoiceDefinitions
+32. seedClassChoiceDefinitions ← depends on option collections
 33. seedRulesets
 34. seedMagicItems
 
@@ -124,4 +131,6 @@ After seeding staging:
 
 1. Check Firestore console — document counts should match static array lengths
 2. Spot-check 1–2 documents per collection for correct shape and normalized `source` field
-3. Navigate to a class choice row in the app (e.g., Oracle mysteries) — picker should load from Firestore
+3. Navigate to a class choice row in the app against staging (e.g., Oracle mysteries) — picker should load items from Firestore
+
+After staging is verified, seed production using the same `seedAll.ts` with `FIREBASE_PROJECT_ID` overridden to the prod project ID.
