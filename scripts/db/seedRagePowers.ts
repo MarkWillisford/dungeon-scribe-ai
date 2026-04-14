@@ -42,6 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedRagePowers(powers: ClassOptionBase[]): Promise<void> {
   console.log(`\nSeeding ${powers.length} rage powers to project: ${PROJECT_ID}`);

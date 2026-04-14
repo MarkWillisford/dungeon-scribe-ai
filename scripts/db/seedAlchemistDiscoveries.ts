@@ -40,6 +40,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedAlchemistDiscoveries(discoveries: AlchemistDiscoveryEntry[]): Promise<void> {
   const byTier: Record<string, number> = {};

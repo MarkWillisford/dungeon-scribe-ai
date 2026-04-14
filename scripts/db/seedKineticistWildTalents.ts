@@ -42,6 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedWildTalents(talents: KineticistWildTalentEntry[]): Promise<void> {
   console.log(`\nSeeding ${talents.length} wild talents to project: ${PROJECT_ID}`);

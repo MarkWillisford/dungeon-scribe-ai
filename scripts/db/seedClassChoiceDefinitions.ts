@@ -41,6 +41,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedClassChoiceDefinitions(defs: ClassChoiceDefinition[]): Promise<void> {
   console.log(`\nSeeding ${defs.length} class choice definitions to project: ${PROJECT_ID}`);

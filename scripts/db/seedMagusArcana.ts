@@ -41,6 +41,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedMagusArcana(arcana: MagusArcanaEntry[]): Promise<void> {
   console.log(`\nSeeding ${arcana.length} magus arcana to project: ${PROJECT_ID}`);

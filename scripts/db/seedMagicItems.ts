@@ -52,6 +52,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seed(): Promise<void> {
   console.log(`Seeding ${ALL_MAGIC_ITEMS.length} magic items to '${COLLECTION}'...`);

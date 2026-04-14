@@ -42,6 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedFocusPowers(powers: OccultistFocusPowerEntry[]): Promise<void> {
   console.log(`\nSeeding ${powers.length} occultist focus powers to project: ${PROJECT_ID}`);

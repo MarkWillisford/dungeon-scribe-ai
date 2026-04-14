@@ -42,6 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedInquisitions(inquisitions: ClassOptionBase[]): Promise<void> {
   console.log(`\nSeeding ${inquisitions.length} inquisitions to project: ${PROJECT_ID}`);

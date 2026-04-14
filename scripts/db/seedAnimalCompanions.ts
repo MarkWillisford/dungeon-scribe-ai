@@ -46,6 +46,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 // --- Seed ---
 async function seedAnimalCompanions(companions: AnimalCompanionEntry[]): Promise<void> {

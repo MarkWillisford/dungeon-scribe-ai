@@ -42,6 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedEidolonEvolutions(evolutions: EidolonEvolutionEntry[]): Promise<void> {
   console.log(`\nSeeding ${evolutions.length} eidolon evolutions to project: ${PROJECT_ID}`);

@@ -42,6 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedFeats(feats: FeatDefinition[]): Promise<void> {
   console.log(`\nSeeding ${feats.length} feats to project: ${PROJECT_ID}`);

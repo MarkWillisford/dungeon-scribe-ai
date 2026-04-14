@@ -50,6 +50,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 type EquipmentItem = { id: string; source: string };
 

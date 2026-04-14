@@ -40,6 +40,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedWarpriestBlessings(blessings: WarpriestBlessingEntry[]): Promise<void> {
   console.log(`\nSeeding ${blessings.length} warpriest blessings to project: ${PROJECT_ID}`);

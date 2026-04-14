@@ -41,6 +41,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedTemplates(templates: TemplateDefinition[]): Promise<void> {
   console.log(`\nSeeding ${templates.length} templates to project: ${PROJECT_ID}`);

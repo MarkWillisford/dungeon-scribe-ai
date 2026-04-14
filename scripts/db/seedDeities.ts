@@ -30,6 +30,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seed(): Promise<void> {
   console.log(`Seeding ${ALL_DEITIES.length} deities to project: ${PROJECT_ID}`);

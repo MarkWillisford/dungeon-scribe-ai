@@ -41,6 +41,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedSlayerTalents(talents: SlayerTalentEntry[]): Promise<void> {
   console.log(`\nSeeding ${talents.length} slayer talents to project: ${PROJECT_ID}`);

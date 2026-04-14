@@ -42,6 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedRevelations(revelations: ClassOptionBase[]): Promise<void> {
   console.log(`\nSeeding ${revelations.length} revelations to project: ${PROJECT_ID}`);

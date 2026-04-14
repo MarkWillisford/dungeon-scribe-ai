@@ -43,6 +43,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedRogueTalents(talents: RogueTalentEntry[]): Promise<void> {
   console.log(`\nSeeding ${talents.length} rogue talents to project: ${PROJECT_ID}`);

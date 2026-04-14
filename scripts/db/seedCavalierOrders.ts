@@ -42,6 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedCavalierOrders(orders: ClassOptionBase[]): Promise<void> {
   console.log(`\nSeeding ${orders.length} cavalier orders to project: ${PROJECT_ID}`);

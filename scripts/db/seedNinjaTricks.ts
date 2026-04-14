@@ -41,6 +41,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedNinjaTricks(tricks: NinjaTrickEntry[]): Promise<void> {
   console.log(`\nSeeding ${tricks.length} ninja tricks to project: ${PROJECT_ID}`);

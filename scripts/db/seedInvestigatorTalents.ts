@@ -43,6 +43,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedInvestigatorTalents(talents: InvestigatorTalentEntry[]): Promise<void> {
   console.log(`\nSeeding ${talents.length} investigator talents to project: ${PROJECT_ID}`);

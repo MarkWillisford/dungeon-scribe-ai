@@ -43,6 +43,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 /** Derive a stable Firestore document ID from class name. */
 function classDocId(name: string): string {

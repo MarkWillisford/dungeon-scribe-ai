@@ -42,6 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedShamanSpirits(spirits: ShamanSpiritEntry[]): Promise<void> {
   console.log(`\nSeeding ${spirits.length} shaman spirits to project: ${PROJECT_ID}`);

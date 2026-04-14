@@ -42,6 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedMysteries(mysteries: ClassOptionBase[]): Promise<void> {
   console.log(`\nSeeding ${mysteries.length} mysteries to project: ${PROJECT_ID}`);

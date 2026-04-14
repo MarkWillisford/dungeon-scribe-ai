@@ -43,6 +43,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedHexes(hexes: HexEntry[]): Promise<void> {
   console.log(`\nSeeding ${hexes.length} hexes to project: ${PROJECT_ID}`);

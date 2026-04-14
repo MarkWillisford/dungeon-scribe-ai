@@ -41,6 +41,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedTraits(traits: TraitDefinition[]): Promise<void> {
   console.log(`\nSeeding ${traits.length} traits to project: ${PROJECT_ID}`);

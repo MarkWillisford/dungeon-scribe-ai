@@ -42,6 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedPhrenicAmplifications(
   amplifications: PhrenicAmplificationEntry[],
