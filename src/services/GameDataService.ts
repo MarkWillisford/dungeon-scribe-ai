@@ -10,8 +10,8 @@
  * context themselves. Pass context explicitly in tests or special cases.
  */
 
-import { store } from '@/store/store';
 import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import type { RootState } from '@/store/store';
 import type { Ruleset } from '@/types/ruleset';
 import type { SearchItem } from '@/components/ui/SearchPickerSheet';
 import type { FeatDefinition, FeatType } from '@/types/feats';
@@ -111,6 +111,11 @@ export class GameDataService {
    * Used as the default when callers don't pass context explicitly.
    */
   private static getContextFromStore(): QueryContext {
+    // Lazy require — avoids a top-level import of store.ts, which would transitively
+    // load every Redux slice (including large ones like characterEntrySlice) whenever
+    // any service imports GameDataService. The store is only resolved at call time.
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { store } = require('@/store/store') as { store: { getState(): RootState } };
     const state = store.getState();
     return {
       userId: state.auth.user?.uid ?? '',
