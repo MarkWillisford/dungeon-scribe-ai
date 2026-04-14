@@ -931,6 +931,92 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
     publisher: 'Paizo',
   },
 
+  // Generic / series-level codes
+  'pf1e-prg': { bookId: 'prg', bookName: 'Pathfinder Roleplaying Game', publisher: 'Paizo' },
+  'pf1e-adventurers-guide': {
+    bookId: 'adventurers-guide',
+    bookName: "Adventurer's Guide",
+    publisher: 'Paizo',
+  },
+
+  // Campaign Setting books (additional)
+  'pf1e-chr-righteous': {
+    bookId: 'chr-righteous',
+    bookName: 'Chronicle of the Righteous',
+    publisher: 'Paizo',
+  },
+  'pf1e-fg': { bookId: 'fg', bookName: 'Faction Guide', publisher: 'Paizo' },
+  'pf1e-fw': { bookId: 'fw', bookName: 'The First World, Realm of the Fey', publisher: 'Paizo' },
+  'pf1e-mwangi': { bookId: 'mwangi', bookName: 'The Mwangi Expanse', publisher: 'Paizo' },
+  'pf1e-rg': { bookId: 'rg', bookName: 'Rival Guide', publisher: 'Paizo' },
+  'pf1e-lk': { bookId: 'lk', bookName: 'Lost Kingdoms', publisher: 'Paizo' },
+  'pf1e-dog-cs': { bookId: 'dog-cs', bookName: 'Dungeons of Golarion', publisher: 'Paizo' },
+  'pf1e-qje': { bookId: 'qje', bookName: 'Qadira, Jewel of the East', publisher: 'Paizo' },
+  'pf1e-ctr': { bookId: 'ctr', bookName: 'Classic Treasures Revisited', publisher: 'Paizo' },
+  'pf1e-hap': {
+    bookId: 'hap',
+    bookName: 'Horsemen of the Apocalypse: Book of the Damned Vol. 3',
+    publisher: 'Paizo',
+  },
+  'pf1e-botd1': {
+    bookId: 'botd1',
+    bookName: 'Book of the Damned Vol. 1: Princes of Darkness',
+    publisher: 'Paizo',
+  },
+
+  // Pathfinder Chronicles series
+  'pf1e-pcc': {
+    bookId: 'pcc',
+    bookName: 'Pathfinder Chronicles Campaign Setting',
+    publisher: 'Paizo',
+  },
+  'pf1e-seekers': { bookId: 'seekers', bookName: 'Seekers of Secrets', publisher: 'Paizo' },
+  'pf1e-gm': { bookId: 'gm', bookName: 'Gods and Magic', publisher: 'Paizo' },
+  'pf1e-cg': { bookId: 'cg', bookName: 'Cities of Golarion', publisher: 'Paizo' },
+  'pf1e-dk': { bookId: 'dk', bookName: 'Dark Markets: A Guide to Katapesh', publisher: 'Paizo' },
+  'pf1e-pod': {
+    bookId: 'pod',
+    bookName: 'Princes of Darkness, Book of the Damned Vol. I',
+    publisher: 'Paizo',
+  },
+
+  // Player Companion books (additional)
+  'pf1e-ppc-dhh': {
+    bookId: 'ppc-dhh',
+    bookName: "Pathfinder Player Companion: Demon Hunter's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-dsh': {
+    bookId: 'ppc-dsh',
+    bookName: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-dugh': {
+    bookId: 'ppc-dugh',
+    bookName: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-sph': {
+    bookId: 'ppc-sph',
+    bookName: "Pathfinder Player Companion: Spymaster's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-ghh': {
+    bookId: 'ppc-ghh',
+    bookName: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-mrm': {
+    bookId: 'ppc-mrm',
+    bookName: "Pathfinder Player Companion: Merchant's Manifest",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-dd2': {
+    bookId: 'ppc-dd2',
+    bookName: "Pathfinder Player Companion: Disciple's Doctrine",
+    publisher: 'Paizo',
+  },
+
   // Missing PPC codes found in data
   'pf1e-ppc-por': {
     bookId: 'ppc-por',
@@ -1290,6 +1376,72 @@ const FULL_NAME_MAP: Record<string, string> = {
   'undead slayer': 'pf1e-ppc-ush2',
   'chronicle of legends': 'pf1e-ppc-chr',
   'heroes of the high court': 'pf1e-ppc-hothc',
+
+  // --- entries already in SHORT_CODE_MAP but missing from here ---
+  'arcane anthology': 'pf1e-ppc-aa',
+  'champions of purity': 'pf1e-champions-purity',
+  'champions of corruption': 'pf1e-champions-corruption',
+  'blood of the beast': 'pf1e-blood-of-the-beast',
+  'inner sea intrigue': 'pf1e-isi',
+  'distant realms': 'pf1e-pcs-dr',
+  "elemental master's handbook": 'pf1e-emh',
+  'elemental masters handbook': 'pf1e-emh',
+  "plane-hopper's handbook": 'pf1e-plane-hoppers-handbook',
+  'psychic anthology': 'pf1e-psychic-anthology',
+  "healer's handbook": 'pf1e-ppc-healh',
+  "monster hunter's handbook": 'pf1e-mhh',
+  'wilderness origins': 'pf1e-wo',
+  'legacy of the first world': 'pf1e-legacy-first-world',
+  'blood of the sea': 'pf1e-ppc-bos',
+  'cohorts & companions': 'pf1e-cohorts',
+  'cohorts and companions': 'pf1e-cohorts',
+  'planes of power': 'pf1e-pots',
+  'the inner sea world guide': 'pf1e-iswg',
+  'society primer': 'pf1e-ppc-psp',
+  'campaign setting': 'pf1e-pcs',
+  'player companion': 'pf1e-pp',
+  'roleplaying game': 'pf1e-prg',
+  core: 'pf1e-core',
+  'blood of orcs': 'pf1e-or', // maps to Orcs of Golarion — same source content
+
+  // --- new books ---
+  "adventurer's guide": 'pf1e-adventurers-guide',
+  'chronicle of the righteous': 'pf1e-chr-righteous',
+  'faction guide': 'pf1e-fg',
+  'the first world, realm of the fey': 'pf1e-fw',
+  'first world, realm of the fey': 'pf1e-fw',
+  'the mwangi expanse': 'pf1e-mwangi',
+  'mwangi expanse': 'pf1e-mwangi',
+  'rival guide': 'pf1e-rg',
+  'lost kingdoms': 'pf1e-lk',
+  'dungeons of golarion': 'pf1e-dog-cs',
+  'qadira, jewel of the east': 'pf1e-qje',
+  'classic treasures revisited': 'pf1e-ctr',
+  'horsemen of the apocalypse: book of the damned vol. 3': 'pf1e-hap',
+  'horsemen of the apocalypse: book of the damned, vol. 3': 'pf1e-hap',
+  'book of the damned - volume 3: horsemen of the apocalypse': 'pf1e-hap',
+  'book of the damned — volume 3: horsemen of the apocalypse': 'pf1e-hap',
+  'book of the damned - volume 1: princes of darkness': 'pf1e-botd1',
+  'princes of darkness, book of the damned vol. i': 'pf1e-pod',
+  'chronicles campaign setting': 'pf1e-pcc',
+  'seekers of secrets': 'pf1e-seekers',
+  'gods and magic': 'pf1e-gm',
+  'cities of golarion': 'pf1e-cg',
+  'dark markets, a guide to katapesh': 'pf1e-dk',
+  'dark markets: a guide to katapesh': 'pf1e-dk',
+  "demon hunter's handbook": 'pf1e-ppc-dhh',
+  "dragonslayer's handbook": 'pf1e-ppc-dsh',
+  "dungeoneer's handbook": 'pf1e-ppc-dugh',
+  "spymaster's handbook": 'pf1e-ppc-sph',
+  "giant hunter's handbook": 'pf1e-ppc-ghh',
+  "merchant's manifest": 'pf1e-ppc-mrm',
+  "disciple's doctrine": 'pf1e-ppc-dd2',
+
+  // Adventure Path named collections (not numbered)
+  'curse of the crimson throne': 'pf1e-ap', // AP series, no specific number
+  'skull & shackles adventure path': 'pf1e-ap',
+  'skull & shackles ap': 'pf1e-ap',
+  'wrath of the righteous adventure path': 'pf1e-ap',
 };
 
 /**
@@ -1419,6 +1571,9 @@ export function normalizeSource(
     }
   }
 
+  // Strip trailing year annotation, e.g. "Ultimate Magic (2011)" → "Ultimate Magic"
+  cleaned = cleaned.replace(/\s*\(\d{4}\)\s*$/, '').trim();
+
   // Try full name lookup (case-insensitive)
   const normalizedName = cleaned.toLowerCase();
   const fullNameMatch = FULL_NAME_MAP[normalizedName];
@@ -1435,18 +1590,26 @@ export function normalizeSource(
     return result;
   }
 
-  // Special case: Adventure Path with just number
-  const apMatch = cleaned.match(/^Adventure Path #?(\d+)$/i);
-  if (apMatch) {
-    const num = apMatch[1];
-    const result = {
-      bookId: `ap${num}`,
-      bookName: `Pathfinder Adventure Path #${num}`,
-      publisher: 'Paizo',
-      ...(pageNum !== undefined && { page: pageNum }),
-    };
-    console.warn(`[normalizeSource] Inferred Adventure Path from: "${sourceStr}" → ap${num}`);
-    return result;
+  // Adventure Path patterns — all resolve to "Pathfinder Adventure Path #N"
+  // Handles: "Adventure Path #N", "Adventure Path #N: Subtitle", "AP #N", "AP #N: Subtitle",
+  //          "#N: Subtitle" (from "PFRPG Pathfinder #N"), "N: Subtitle" (bare number)
+  const apPatterns = [
+    /^Adventure Path #?(\d+)(?:[:\s].*)?$/i,
+    /^AP #?(\d+)(?:[:\s].*)?$/i,
+    /^#(\d+)(?:[:\s].*)?$/,
+    /^(\d{1,3}): .+/, // "14: Children of the Void" etc.
+  ];
+  for (const pat of apPatterns) {
+    const m = cleaned.match(pat);
+    if (m) {
+      const num = m[1];
+      return {
+        bookId: `ap${num}`,
+        bookName: `Pathfinder Adventure Path #${num}`,
+        publisher: 'Paizo',
+        ...(pageNum !== undefined && { page: pageNum }),
+      };
+    }
   }
 
   // Couldn't match — log warning and return fallback
