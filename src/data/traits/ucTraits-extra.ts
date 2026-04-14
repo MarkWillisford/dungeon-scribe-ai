@@ -10,6 +10,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You know how to take advantage of enemies who are unprepared for your assault. You gain a +1 trait bonus on initiative checks. In addition, once per day when you make an attack of opportunity, you gain a +2 trait bonus on the attack roll.',
     shortDescription: '+1 initiative; +2 on one AoO per day',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -30,6 +31,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have a tendency for rash behavior, often disregarding your own safety as you move across the battlefield. You gain a +1 bonus on Acrobatics checks, and Acrobatics is always a class skill for you.',
     shortDescription: '+1 on Acrobatics; Acrobatics is a class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -50,6 +52,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Your life as a member of an unpopular ethnic group has given you an uncanny knack for avoiding detection. You gain a +1 trait bonus to Will saves and a +2 trait bonus on saving throws against divination effects.',
     shortDescription: '+1 Will saves; +2 saves vs divination',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -82,6 +85,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have spent your youth moving up and down treacherous waterways on rafts and boats. You gain a +1 trait bonus on Acrobatics checks and a +1 trait bonus on Swim checks. One of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 Acrobatics and +1 Swim; one becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -117,6 +121,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You learned to swim right after you learned to walk. As a youth, a near-drowning made you particularly wary of the water, forcing you to learn how to swim with great skill. You gain a +1 trait bonus on damage dealt with daggers and a +1 trait bonus on Swim checks. Swim is always a class skill for you.',
     shortDescription: '+1 dagger damage; +1 Swim; Swim is a class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -137,6 +142,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You are difficult to sway from your beliefs. You gain a +1 trait bonus on saving throws against effects that cause the confused, dazed, fascinated, or stunned condition.',
     shortDescription: '+1 saves vs confused, dazed, fascinated, stunned',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -163,6 +169,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Due to a protracted extravagance of-drink and a youth spent in a tavern, you have a remarkably strong constitution when dealing with alcohol and drugs. You gain a +2 trait bonus on Fortitude saves against poison and drugs, and a +4 trait bonus on Fortitude saves to avoid the effects of alcohol.',
     shortDescription: '+2 Fort vs poison/drugs; +4 Fort vs alcohol',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -188,6 +195,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have escaped from bondage on more than one occasion and are a master of slipping free from any sort of restraint. You gain a +1 trait bonus on Stealth checks and a +1 trait bonus on Escape Artist checks. One of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 Stealth and +1 Escape Artist; one becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -223,6 +231,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You are skilled at fighting with objects not traditionally considered weapons. You gain a +2 trait bonus on attack rolls with improvised weapons.',
     shortDescription: '+2 trait bonus on attack rolls with improvised weapons',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -248,6 +257,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have fought in several battles and have learned to draw your weapon quickly. You gain a +1 trait bonus on initiative checks. When you draw a weapon, you may also make a free Intimidate check to demoralize one foe within 30 feet who can see you.',
     shortDescription: '+1 initiative; free Intimidate on weapon draw',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -268,6 +278,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have seen so many sights that nothing amazes you anymore. You gain a +1 trait bonus on saving throws against illusion effects and a +1 trait bonus on Sense Motive checks.',
     shortDescription: '+1 saves vs illusion; +1 Sense Motive',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -300,6 +311,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Even when you are in danger, you keep your cool and continue to fire your weapon. You gain a +2 trait bonus on attacks of opportunity made with ranged weapons.',
     shortDescription: '+2 on AoOs with ranged weapons',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -325,6 +337,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You are not easily frightened and will stand your ground in the face of danger. You gain a +1 trait bonus on Fortitude saves and a +1 trait bonus on Will saves against fear effects.',
     shortDescription: '+1 Fort saves; +1 Will vs fear',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -357,6 +370,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have lived a life of hard labor. You gain a +1 trait bonus on Fortitude saves.',
     shortDescription: '+1 Fortitude saves',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -377,6 +391,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'A traumatic experience long ago left you with a disfiguring scar. The ugly wound still pains you, making you tough and thick-skinned. You gain a +2 trait bonus on all Intimidate checks, and a +1 natural armor bonus to your AC.',
     shortDescription: '+2 Intimidate; +1 natural armor',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -398,6 +413,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You adhere to practices that predate modern religion. You gain a +1 trait bonus on Knowledge (nature) checks, and Knowledge (nature) is always a class skill for you.',
     shortDescription: '+1 Knowledge (nature); class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -418,6 +434,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You are resistant to the magic of other faiths. You gain a +2 trait bonus on Will saves against divine spells.',
     shortDescription: '+2 Will saves vs divine spells',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -443,6 +460,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       "Torag's sacred fires burn within your heart. You gain a +1 trait bonus on Knowledge (engineering) checks and a +1 trait bonus on Knowledge (religion) checks. One of these skills (your choice) is always a class skill for you.",
     shortDescription: '+1 Knowledge (engineering) and (religion); one becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -478,6 +496,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You wield the might of your faith with power and clarity. Once per day as a free action, you may treat your caster level as 2 levels higher when casting a single divine spell.',
     shortDescription: 'Once per day, +2 caster level on one divine spell',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [],
@@ -490,6 +509,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Some divine agent watches over you. You gain a +1 trait bonus on all saving throws against charm and compulsion effects.',
     shortDescription: '+1 saves vs charm and compulsion',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -515,6 +535,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Your knowledge of the gods tells you exactly which rites and rituals please them. Once per day, when you fail a saving throw against an effect created by a divine spellcaster, you may reroll that saving throw. You must take the new result, even if it is worse.',
     shortDescription: 'Reroll one failed save vs divine spellcaster per day',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [],
@@ -527,6 +548,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You are so attuned to the spiritual world that it is sometimes difficult to tell the living from the dead. You gain a +2 trait bonus on Perception checks to avoid being surprised by a foe.',
     shortDescription: '+2 Perception vs surprise',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -552,6 +574,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Your sleep is filled with visions of the future that border on the prophetic. Once per day, you may reroll a single Will save. You must take the new result, even if it is worse.',
     shortDescription: 'Reroll one Will save per day',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [],
@@ -564,6 +587,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You hear shadows whispering dark truths to you. You gain a +1 trait bonus on Knowledge (planes) checks and Knowledge (religion) checks. One of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 Knowledge (planes) and (religion); one becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -599,6 +623,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Instructed at a young age in the tenets of the faith, you were told the stories of the undead creatures that prey upon the living. You gain a +1 trait bonus on weapon damage against undead.',
     shortDescription: '+1 weapon damage vs undead',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -624,6 +649,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You were born and raised in an area plagued by natural disasters or animals run wild, and as a result you have learned to fend off the forces of nature. You gain a +1 trait bonus on saving throws against the extraordinary and supernatural abilities of animals, magical beasts, and vermin.',
     shortDescription: '+1 saves vs abilities of animals, magical beasts, vermin',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -650,6 +676,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You realize that extravagant positive thinking can be the best way to survive hardship. You gain a +2 trait bonus on saving throws against fear effects.',
     shortDescription: '+2 saves vs fear',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -675,6 +702,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Your faith drives your fighting. Once per day as a swift action, you can cry out a prayer to your deity. The next melee or ranged attack you make before the end of your turn gains a +1 morale bonus on the attack roll and, if successful, deals an additional 1d6 points of damage.',
     shortDescription: '1/day swift action: +1 attack and +1d6 damage on next attack',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [],
@@ -688,6 +716,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Being caught up in the wonder of magical learning, you may have tried your hand at resistance and counterspelling before even learning the basics of spellcasting. You gain a +1 trait bonus on Linguistics checks and a +1 trait bonus on Spellcraft checks to identify the properties of magic items.',
     shortDescription: '+1 Linguistics; +1 Spellcraft to identify magic items',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -708,6 +737,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Your breadth of study has given you access to knowledge that few of your classmates possess. You gain a +1 trait bonus on Knowledge (arcana) checks and a +1 trait bonus on Spellcraft checks. One of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 Knowledge (arcana) and Spellcraft; one becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -743,6 +773,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'The secrets of ancient fallen civilizations fascinate you, and you have spent many months learning their secrets. You gain a +1 trait bonus on Knowledge (arcana) checks, and Knowledge (arcana) is always a class skill for you. In addition, you may choose up to three spells from the wizard spell list and treat them as one level lower when casting them (minimum 1st level).',
     shortDescription: '+1 Knowledge (arcana); class skill; cast up to 3 wizard spells at -1 level',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -763,6 +794,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Your innate magic provides you with a small source of healing power. Once per day, you can gain 1 hit point when casting a spell. This effect is activated as a free action while casting the spell.',
     shortDescription: '1/day gain 1 HP when casting a spell',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -775,6 +807,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have been told that you will one day perform a great act of might. Once per day, you may gain a +1 trait bonus on a single Strength check or Strength-based skill check.',
     shortDescription: '1/day +1 on a Strength check or Strength-based skill check',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -787,6 +820,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Growing up, you were always more resistant to magic than most of the other children around you. You gain a +2 trait bonus on all saving throws against illusion effects.',
     shortDescription: '+2 saves vs illusion',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -812,6 +846,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You are skilled in creating alchemical items. You gain a +2 trait bonus on all Craft (alchemy) checks to create alchemical items. Furthermore, when you fail a Craft (alchemy) check by 5 or more but do not roll a natural 1, you do not ruin any raw materials or have to pay that cost again.',
     shortDescription: '+2 Craft (alchemy); failed checks do not ruin materials',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -832,6 +867,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have endured much in your time and are not easily shaken. You gain a +2 trait bonus on saving throws against fear effects and a +1 trait bonus on saving throws against enchantment effects.',
     shortDescription: '+2 saves vs fear; +1 saves vs enchantment',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -869,6 +905,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Your study of transformative magic has given you insight into the nature of polymorphing. Whenever you cast a spell of the polymorph subschool, the duration is increased by 1 round.',
     shortDescription: '+1 round duration on polymorph spells',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -881,6 +918,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You were born or raised in a land constantly besieged by outside forces or monsters. You gain a +1 trait bonus on saving throws against spells and effects with the fear descriptor, and a +1 trait bonus on all saving throws during the first round of combat.',
     shortDescription: '+1 saves vs fear; +1 all saves in first round of combat',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -906,6 +944,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have an innate talent for using magical weaponry and those weapons work quickly in your hands. You gain a +1 trait bonus on Craft checks made to craft magic or masterwork weapons.',
     shortDescription: '+1 Craft checks to craft magic/masterwork weapons',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -918,6 +957,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have always been fascinated by magic in all its forms. You gain a +1 trait bonus on Knowledge (arcana) checks. Additionally, whenever you identify a magic item, roll twice and take the higher result.',
     shortDescription: '+1 Knowledge (arcana); roll twice to identify magic items',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -939,6 +979,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have always found yourself in a position where others look to you for guidance and direction. All cohorts, followers, or summoned creatures under your leadership gain a +1 morale bonus on Will saves to avoid mind-affecting effects. If you ever take the Leadership feat, you gain a +1 trait bonus to your Leadership score.',
     shortDescription: 'Cohorts/followers get +1 Will vs mind-affecting; +1 Leadership score',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [],
@@ -951,6 +992,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Your position in society grants you special privileges. Choose one of the following skills: Diplomacy, Intimidate, or Knowledge (local). You gain a +1 trait bonus on checks with that skill, and it is always a class skill for you.',
     shortDescription: '+1 on Diplomacy, Intimidate, or Knowledge (local); becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -980,6 +1022,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You grew up in a region of dense forests and logging operations. You gain a +1 trait bonus on Knowledge (nature) checks and a +1 trait bonus on Survival checks when in forests. Knowledge (nature) is always a class skill for you.',
     shortDescription: '+1 Knowledge (nature); +1 Survival in forests; class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1000,6 +1043,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Your first job was serving in a civilian militia in your hometown. Choose one of the following skills: Profession (soldier), Ride, or Survival. You gain a +1 trait bonus on checks with that skill, and it is always a class skill for you.',
     shortDescription: '+1 on Profession (soldier), Ride, or Survival; becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1029,6 +1073,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have spent your life telling lies and have become adept at it. You gain a +1 trait bonus on Bluff or Intimidate checks and one of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 on Bluff or Intimidate; becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1059,6 +1104,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Bluff, Diplomacy, Intimidate when wearing 150+ gp clothing; one becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1116,6 +1162,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You are a gifted artist, either with music, writing, or visual arts. You gain a +1 trait bonus on Perform checks, and Perform is always a class skill for you.',
     shortDescription: '+1 on Perform; Perform is a class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1136,6 +1183,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You are well-versed in a wide range of subjects. You gain a +1 trait bonus on Knowledge (history) checks and a +1 trait bonus on Knowledge (local) checks. One of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 Knowledge (history) and (local); one becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1171,6 +1219,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You grew up among thieves, smugglers, or others who communicate through innuendo and doublespeak. You gain a +5 trait bonus on Bluff checks made to pass secret messages.',
     shortDescription: '+5 Bluff for secret messages',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1196,6 +1245,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have always had a way with animals, and they seem to trust you. You gain a +1 trait bonus on Handle Animal checks, and Handle Animal is always a class skill for you.',
     shortDescription: '+1 on Handle Animal; Handle Animal is a class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1216,6 +1266,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You spent time working under artisans, gaining aitated bonus equal to half your level (minimum 1) on all Craft or Profession checks to earn a living. You gain a +1 trait bonus on Craft checks.',
     shortDescription: '+1 on Craft checks',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1236,6 +1287,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You bear a tattoo that identifies you as a member of a noble bloodline or blessed group. You gain a +1 trait bonus on Will saves.',
     shortDescription: '+1 on Will saves',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1256,6 +1308,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have spent years honing your performing skills. You gain a +1 trait bonus on one type of Perform check and a +1 trait bonus on Sense Motive checks. One of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 on one Perform and Sense Motive; one becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1292,6 +1345,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 on Disable Device, Escape Artist, or Sleight of Hand; becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1321,6 +1375,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have spent your life getting into and out of trouble. You gain a +1 trait bonus on Escape Artist checks and a +1 trait bonus on Initiative checks.',
     shortDescription: '+1 Escape Artist; +1 Initiative',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1348,6 +1403,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You were born tough and physically resilient. You gain a +1 trait bonus on Fortitude saves.',
     shortDescription: '+1 Fortitude saves',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1368,6 +1424,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You always know the best way to assist your companions. When using the aid another action, you grant a +3 bonus instead of the normal +2.',
     shortDescription: 'Aid another grants +3 instead of +2',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [],
@@ -1380,6 +1437,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have been blessed by a deity of nature or you have spent many years living in the wilderness. You gain a +1 trait bonus on Knowledge (nature) checks and Survival checks. One of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 Knowledge (nature) and Survival; one becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1415,6 +1473,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You are known as the life of every social gathering. You gain a +1 trait bonus on Bluff checks and a +1 trait bonus on Diplomacy checks. One of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 Bluff and Diplomacy; one becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1450,6 +1509,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You are not easily shaken or frightened, and you never back down. You gain a +1 trait bonus on Will saves against fear effects.',
     shortDescription: '+1 Will saves vs fear',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1475,6 +1535,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Even when all seems lost you hold out for the best. You gain a +1 trait bonus on saving throws against fear effects.',
     shortDescription: '+1 saves vs fear',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1500,6 +1561,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Your desire to free your allies is so strong that it gives you extra prowess in battle against those who would impede your efforts. You gain a +1 trait bonus on attack rolls and damage rolls against slavers or on any roll to free someone from bondage.',
     shortDescription: '+1 attack and damage vs slavers; +1 to free captives',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [],
@@ -1512,6 +1574,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'Your devotion to art is all-consuming. You gain a +1 trait bonus on Perform checks and a +1 trait bonus on Craft checks. One of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 Perform and Craft; one becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1547,6 +1610,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have a way with words that allows you to defuse even the most heated arguments. You gain a +1 trait bonus on Diplomacy checks. In addition, you receive a +1 trait bonus on Diplomacy checks to mediate a dispute between two parties that do not include yourself.',
     shortDescription: '+1 Diplomacy; additional +1 when mediating disputes',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1567,6 +1631,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You grew up on the docks, learning to fight from sailors and dockworkers. You gain a +1 trait bonus on damage rolls with brass knuckles and improvised weapons.',
     shortDescription: '+1 damage with brass knuckles and improvised weapons',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [],
@@ -1579,6 +1644,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have dedicated your life to destroying undead. You gain a +1 trait bonus on damage rolls against undead creatures and a +1 trait bonus on Knowledge (religion) checks relating to undead.',
     shortDescription: '+1 damage vs undead; +1 Knowledge (religion) about undead',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -1604,6 +1670,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
       'You have always had a talent for learning languages. You gain a +1 trait bonus on Linguistics checks and you begin play with one additional language of your choice.',
     shortDescription: '+1 Linguistics; one additional starting language',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [

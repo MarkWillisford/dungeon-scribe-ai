@@ -7,6 +7,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Balor Whip',
     types: ['combat'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When performing a drag maneuver with a whip, you may choose not to move with your target. The target can only be dragged to a position adjacent to you, even if your check result would allow greater distance. You gain a +2 bonus on drag combat maneuver checks when using a whip. This bonus does not stack with Improved Drag bonuses. Balor Whip counts as Improved Drag for the purpose of qualifying for Quick Drag.',
     shortDescription: 'Drag foes to you with a whip; +2 on drag maneuver checks.',
@@ -37,6 +38,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Coordinated Capture',
     types: ['combat', 'teamwork'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you and one or more allies possessing this feat threaten the same enemy, that enemy incurs a penalty on Acrobatics checks and concentration checks to avoid triggering attacks of opportunity equal to the number of creatures with this feat threatening the target (maximum 5).',
     shortDescription:
@@ -66,6 +68,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Covering Fire',
     types: ['combat', 'teamwork'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you hit a foe with a firearm for which you have Weapon Focus, that creature takes a -2 penalty on attack rolls for 1 round against any other ally who also has this feat (this becomes a -4 penalty on attacks of opportunity). This penalty does not stack with itself. A penalty imposed by one ally with this feat does not apply to attacks against you, allowing mutual covering between allies.',
     shortDescription:
@@ -97,6 +100,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Craft Shoddy Item',
     types: ['item_creation'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       "You can craft deliberately flawed items, paying only 1/5 of the item's price for raw materials (instead of the standard 1/3). The DC and crafting time remain unchanged. Shoddy items have hardness reduced by 2 and hit points halved. Weapons take damage equal to their damage output each use; armor takes damage matching the wearer's HP loss from successful attacks. Non-weapon/armor items have a 10% daily chance of gaining the broken condition. Detection requires DC 15 Appraise or Craft check with intentional inspection. Items cannot be masterwork, special materials, or single-use.",
     shortDescription: 'Craft intentionally flawed items at 1/5 material cost, concealing defects.',
@@ -123,6 +127,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Cunning',
     types: ['general'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'You gain 1 additional skill point per Hit Die. Upon taking this feat, you immediately receive a number of skill points equal to your current Hit Dice. Whenever your Hit Dice increase thereafter, you gain one bonus skill point.',
     shortDescription: 'Gain 1 bonus skill point per Hit Die, retroactively and going forward.',
@@ -144,6 +149,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Deadly Kiss',
     types: ['general'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a swift action when applying venom to a weapon or object, you can convert your vishkanya venom into a contact poison lasting 1d4 rounds. The converted venom has a 1-minute onset time and appears indistinguishable from saliva or blood. Additionally, you gain one extra daily use of your toxic racial trait.',
     shortDescription:
@@ -169,6 +175,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Favored Community',
     types: ['general'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       "Select one permanent, stationary settlement as your favored community. While in that settlement, you gain a +2 bonus on Initiative checks and Knowledge (geography), Perception, Stealth, and Survival checks. If you already possess the ranger's favored terrain class feature and your favored community would also be a favored terrain, increase the favored terrain bonus by 2 within that settlement. These bonuses do not stack with other effects that provide favored terrain bonuses.",
     shortDescription:
@@ -250,6 +257,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Greater Balor Whip',
     types: ['combat'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you use Improved Balor Whip to make a single attack at your highest attack bonus, your critical threat range with the whip expands to 19-20. Additionally, you gain a +4 bonus on critical confirmation rolls when threatening a critical hit with that attack.',
     shortDescription:
@@ -296,6 +304,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Improved Balor Whip',
     types: ['combat'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you succeed at a drag attempt with your whip against a non-adjacent target and the target ends the drag adjacent to you, as a free action you can make a single attack against the target at your highest attack bonus using the melee weapon held in your other hand. You also gain a +2 bonus on drag combat maneuver checks when using a whip. This bonus does not stack with Greater Drag bonuses.',
     shortDescription:
@@ -341,6 +350,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Improved Position of Strength',
     types: ['combat'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'While wielding one or more proficient weapons, you gain the Position of Strength bonus on Intimidate checks against creatures armed with fewer weapons than you are currently wielding.',
     shortDescription:
@@ -372,6 +382,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: "Musketeer's Daring",
     types: ['combat', 'panache'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When rolling d6s for the derring-do deed, rolling a natural 5 or 6 allows you to roll an additional d6 and add it to the result. The total number of d6s you can roll remains capped at your Dexterity modifier (minimum 1). You can trigger only one bonus d6 roll per use of derring-do.',
     shortDescription: 'Derring-do deed grants bonus d6 on natural 5 or 6 (not just 6).',
@@ -403,6 +414,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: "Musketeer's Dodge",
     types: ['combat', 'grit'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       "When you activate the gunslinger's dodge deed to move, that movement does not provoke attacks of opportunity, and you gain a +4 dodge bonus to Armor Class during that movement.",
     shortDescription: "Gunslinger's dodge movement provokes no AoO and grants +4 dodge AC.",
@@ -445,6 +457,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: "Musketeer's Reposition",
     types: ['combat', 'grit'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you hit an opponent with a two-handed firearm while using the pistol-whip deed, you may substitute a reposition combat maneuver for the standard prone effect. The repositioned foe cannot be moved closer to you, and this reposition does not provoke attacks of opportunity.',
     shortDescription:
@@ -477,6 +490,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: "Musketeer's Sidestep",
     types: ['combat', 'panache'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you activate the dodging panache deed, the movement granted does not provoke attacks of opportunity from any creature. Additionally, you gain a +2 dodge bonus to your Armor Class during this movement.',
     shortDescription: 'Dodging panache deed movement provokes no AoO and grants +2 dodge AC.',
@@ -518,6 +532,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: "Nature's Wrath",
     types: ['general'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'You lose your immunity to morale bonuses and emotion-descriptor effects, and take a -1 penalty on saving throws against anger or rage emotion effects. In exchange, you gain a +1 bonus on attack rolls targeting humanoid creatures. This feat reflects a plant creature imbued with primal rage against civilization.',
     shortDescription:
@@ -560,6 +575,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Plague Resistance',
     types: ['general'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you take ability score damage or drain as the result of a disease, roll the damage or drain for each ability score twice and take the lower result. Other effects of the disease apply normally.',
     shortDescription: 'Roll disease ability damage/drain twice and take the lower result.',
@@ -587,6 +603,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Position of Strength',
     types: ['combat'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'While wielding one or more proficient weapons, you gain a +4 bonus on Intimidate checks against unarmed creatures (this bonus does not stack with Intimidating Prowess). When you successfully demoralize an unarmed creature using Intimidate, that creature is shaken as long as you remain armed and they remain unarmed, up to a maximum of 1 minute. Creatures with natural attacks or whose unarmed strikes deal lethal damage are considered armed for this purpose.',
     shortDescription:
@@ -614,6 +631,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Protective Line',
     types: ['combat', 'teamwork'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you are adjacent to an ally who also has this feat, you do not provoke attacks of opportunity while loading a firearm.',
     shortDescription:
@@ -641,6 +659,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Quick Stow',
     types: ['combat'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'Sheathing a weapon no longer provokes attacks of opportunity. You can combine sheathing a weapon with a move action to both draw and stow in one action. With Two-Weapon Fighting, you can sheathe two light weapons or one one-handed weapon in the time normally required for one. When you acquire an item through picking it up, Sleight of Hand theft, or a combat maneuver, you can stow the item as part of that same action. You may attempt to hide stowed items with a Sleight of Hand check at a -20 penalty, opposed by Perception.',
     shortDescription:
@@ -671,6 +690,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Reap the Infirm',
     types: ['combat'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       "You can use a creature's diseased state against it. You deal an additional 1d6 points of precision damage when you hit a diseased creature with a weapon attack. You also gain a +2 bonus on combat maneuver checks against diseased creatures.",
     shortDescription: '+1d6 precision damage and +2 CMB vs. diseased creatures.',
@@ -709,6 +729,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Terrifying Assassination',
     types: ['combat'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you fail a death attack, fail an assassinate attempt (ninja master trick or slayer advanced talent), the target becomes shaken for 2d4 rounds instead of simply surviving unaffected.',
     shortDescription: 'Failed assassination or death attack leaves target shaken for 2d4 rounds.',
@@ -742,6 +763,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Twin Fang Style',
     types: ['combat', 'style'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'While using this style with paired daggers or kama, when you make a full attack and hit a creature with both weapons, you reduce its armor bonus to AC by 1 until the beginning of your next turn. This reduction stacks (from multiple hits in the same full attack) to a minimum armor bonus of +0.',
     shortDescription:
@@ -776,6 +798,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Twin Fang Strike',
     types: ['combat'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When using Twin Fang Style with two daggers or two kama, you can strike with both weapons simultaneously during an attack action. Both attacks incur a -4 penalty. You apply precision damage and effects that trigger on a hit only once, even if both attacks hit.',
     shortDescription: 'Attack action: strike with both daggers/kama simultaneously at -4 each.',
@@ -810,6 +833,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Twin Fang Lunge',
     types: ['combat'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'While using Twin Fang Style, you can spend a full-round action to move up to twice your speed and then use Twin Fang Strike as if you were taking the attack action.',
     shortDescription: 'Full-round action: move up to 2x speed then use Twin Fang Strike.',
@@ -845,6 +869,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Two-Weapon Grace',
     types: ['combat'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'You can apply the benefits of Fencing Grace, Slashing Grace, or Starry Grace while wielding two weapons, but your two-weapon fighting penalties increase by 2 on all attack rolls (minimum penalty -2). Your off-hand weapon deals damage based on half your Dexterity bonus instead of half your Strength modifier. If you attack without your off-hand weapon, you retain the grace feat benefits even with an occupied other hand. Two-Weapon Grace counts as Double Slice for purposes of qualifying for the Two-Weapon Rend feat.',
     shortDescription:
@@ -878,6 +903,7 @@ export const VILLAIN_CODEX_FEATS: FeatDefinition[] = [
     name: 'Vishkanya Perfume',
     types: ['general'],
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a swift action, you can expend one daily use of your toxic racial trait to transform your venom into an inhaled poison for 1d4 rounds. During this duration, you select one adjacent enemy to expose to the poisoned gas. The venom functions as an inhaled poison with a DC that is 2 lower than normal. You also gain one extra daily use of your toxic racial trait.',
     shortDescription:

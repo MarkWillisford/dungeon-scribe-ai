@@ -10,6 +10,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
       "You are an exceptional shapechanger. When you assume your bestial form, you may select one additional feature from your shapechange ability's options and gain that benefit while in bestial form.",
     shortDescription: 'Gain one additional feature when assuming bestial form',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -25,6 +26,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
     description: 'You can assume your bestial form as a move action instead of a standard action.',
     shortDescription: 'Assume bestial form as a move action',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -44,6 +46,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
       'You can take the form of a bat whose appearance is static and cannot be changed each time you assume this form. You gain a +10 racial bonus on Disguise checks to appear as a bat. Transforming from werebat-kin to bat shape takes a standard action. This ability otherwise functions as beast shape II with corresponding ability score adjustments. If you wear a bat pelt, you may adopt the appearance of that specific bat instead of your normal form.',
     shortDescription: 'Transform into a bat (functions as beast shape II)',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -69,6 +72,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
       'When you use your change shape ability, you gain a fly speed. With a light load and no armor or light armor, you have a fly speed of 30 feet with poor maneuverability. With a medium or heavy load or in medium or heavy armor, you have a fly speed of 20 feet with clumsy maneuverability.',
     shortDescription: 'Gain a fly speed when using change shape',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'bab', minimum: 5 },
@@ -85,6 +89,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
       'When you use Bat Shape to become a bat, you can choose to become a bat or a dire bat.',
     shortDescription: 'When using Bat Shape, can choose to become a dire bat instead',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -106,6 +111,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
     shortDescription:
       'On critical hit with bite, clamp foe in place if confirmation roll beats CMD',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_focus' },
@@ -126,6 +132,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
       'You can crush your foes with your powerful arms. You can attempt to grapple foes caught by your Beartrap Bite feat without provoking attacks of opportunity. In addition, you gain a +2 bonus on damage rolls when grappling opponents.',
     shortDescription: 'Grapple foes caught by Beartrap Bite without AoO; +2 damage when grappling',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 17 },
@@ -158,6 +165,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 morale on attacks vs. enemies threatening feat-sharing allies; +2 when an ally is downed',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [
@@ -186,6 +194,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
       'When you use Dazzling Display to demoralize foes, your Intimidate check while using Dazzling Display also applies to allies within 30 feet who can see you. Allies affected in this way gain a +1 morale bonus on attack rolls and skill checks for a number of rounds equal to the number of rounds they would normally be shaken.',
     shortDescription: 'Dazzling Display also grants nearby allies +1 morale on attacks and skills',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -217,6 +226,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
       'At the beginning of combat, after initiative is rolled but before the first round of combat begins, you can attempt a Bluff check as a free action. Each aware opponent must succeed at a Sense Motive check (DC equal to your Bluff check result) or treat you as if you were unaware at the start of combat. Opponents who are unaware of all foes cannot act during the surprise round.',
     shortDescription: 'Bluff check at start of combat to appear unaware and act in surprise round',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_initiative' },
@@ -235,6 +245,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
     shortDescription:
       'Activate Dazzling Display as an immediate action after sneak attack or critical hit',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'dazzling_display' },
@@ -256,6 +267,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 circumstance AC per adjacent feat-sharing ally; immunity to rat swarm distraction',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [
@@ -283,6 +295,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 attack on AoO, +1 more per ally with this feat also threatening the target',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [
@@ -313,6 +326,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
     shortDescription:
       'Attacks of opportunity slow foes; enough damage lets you trip as a free action',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -331,6 +345,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
       "You have studied the manner in which wolves bring down their prey. While using Wolf Style, you gain a +2 bonus on trip attempts made as part of attacks of opportunity. After successfully tripping an opponent, you may use a free action to choose an unoccupied space adjacent to both you and the creature's original space, and the tripped creature lands prone in that space.",
     shortDescription: '+2 to trip AoOs in Wolf Style; choose where tripped foe lands',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -364,6 +379,7 @@ export const BLOOD_OF_THE_MOON_FEATS: FeatDefinition[] = [
     shortDescription:
       'In Wolf Style, savage prone foes with swift action for ability damage or fatigue',
     source: 'Blood of the Moon',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 17 },

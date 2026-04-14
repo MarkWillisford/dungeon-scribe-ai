@@ -10,6 +10,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
       'A close relative of yours was a famous actor or actress who died under compromising circumstances. Rather than diminishing your family reputation, the scandal only enhanced it. You have grown up in the shadow of this notoriety. You gain a +1 trait bonus on Perform (act) checks, and Perform (act) is always a class skill for you. You also begin play with 300 gp as inherited funds to spend as you wish.',
     shortDescription: '+1 Perform (act); class skill; begin with 300 gp',
     source: "Council of Thieves Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Council of Thieves',
     prerequisites: [],
@@ -39,6 +40,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 on one chosen skill (Bluff, Diplomacy, Knowledge [local], Perception, Sense Motive, or Stealth); class skill',
     source: "Council of Thieves Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Council of Thieves',
     prerequisites: [],
@@ -78,6 +80,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Bluff, Diplomacy, Intimidate, Sense Motive vs Westcrown nobility; +1 saves vs devil mind-affecting',
     source: "Council of Thieves Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Council of Thieves',
     prerequisites: [],
@@ -163,6 +166,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 saves vs cold, electricity, and fire; choose one 0-level spell usable at will (replaces tiefling defaults)',
     source: "Council of Thieves Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Council of Thieves',
     prerequisites: [{ type: 'race', raceName: 'Tiefling' }],
@@ -196,6 +200,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
       "You have grown up in Westcrown and have adapted to the city's curse-born darkness and the night-horrors that plague it after dark. When attacking targets in areas of dim light, you do not suffer the standard 20% miss chance on attack rolls for being in poorly lit conditions.",
     shortDescription: 'No 20% miss chance when attacking in dim light',
     source: "Council of Thieves Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Council of Thieves',
     prerequisites: [],
@@ -218,6 +223,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Begin with a wayfinder (500 gp debt); +2 Survival vs getting lost; emit light at will',
     source: "Council of Thieves Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Council of Thieves',
     prerequisites: [],
@@ -251,6 +257,7 @@ export const COUNCIL_OF_THIEVES_TRAITS: TraitDefinition[] = [
       "You are from Westcrown and have grown frustrated with the city's tyranny and oppression, and you seek to join a resistance movement against the corrupt rulers. You gain a +1 trait bonus on Initiative checks. In addition, when you act during a surprise round, you gain a +1 trait bonus on all attack rolls.",
     shortDescription: '+1 Initiative; +1 attack rolls during a surprise round',
     source: "Council of Thieves Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Council of Thieves',
     prerequisites: [],

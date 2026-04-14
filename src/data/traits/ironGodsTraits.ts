@@ -10,6 +10,7 @@ export const IRON_GODS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Choose weapons (+2 damage vs. Technic League) or spells (+1 spell save DC vs. Technic League).',
     source: "Iron Gods Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Iron Gods',
     prerequisites: [],
@@ -36,6 +37,7 @@ export const IRON_GODS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Choose Disable Device or Knowledge (engineering): +1 (or +3 with Technologist feat), class skill, counts as Technologist.',
     source: "Iron Gods Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Iron Gods',
     prerequisites: [],
@@ -67,6 +69,7 @@ export const IRON_GODS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Gain Androffan as a bonus language; roll twice for timeworn tech item glitches and choose the result.',
     source: "Iron Gods Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Iron Gods',
     prerequisites: [],
@@ -102,6 +105,7 @@ export const IRON_GODS_TRAITS: TraitDefinition[] = [
       'You are deeply concerned about the robots infesting the wilderness of Numeria. The discovery of a deactivated robot beneath Torch—and the possibility of more lurking in undiscovered ruins—has motivated you to explore the caves below the town and assess the true extent of the threat. You gain a +1 trait bonus on attack rolls against robots and a +1 dodge bonus to AC against attacks made by robots.',
     shortDescription: '+1 attack rolls vs. robots; +1 dodge bonus to AC vs. robot attacks.',
     source: "Iron Gods Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Iron Gods',
     prerequisites: [],
@@ -142,6 +146,7 @@ export const IRON_GODS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Begin with a 100 gp skymetal bauble; keep it for +2 Will vs. emotion/fear, or sell for 100 gp.',
     source: "Iron Gods Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Iron Gods',
     prerequisites: [],
@@ -181,6 +186,7 @@ export const IRON_GODS_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 Knowledge to identify alien creatures; +1 (or +3 with Technologist) Knowledge (geography) as class skill; counts as Technologist for alien ID and geography.',
     source: "Iron Gods Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Iron Gods',
     prerequisites: [],

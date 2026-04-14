@@ -12,6 +12,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain bonuses against blighted creatures and terrain knowledge; once per day cast a purifying spell as a spell-like ability.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -70,6 +71,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Imbue crafted magic items with your alignment, sickening creatures of opposing alignment who use them.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       {
@@ -90,6 +92,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use pistol-whip even with a broken firearm; expend 1 grit on a hit to clear a misfire-caused broken condition.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['grit'],
     prerequisites: [
       {
@@ -123,6 +126,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Craft firearms with a reduced misfire chance by 1, at a 10% increase in construction cost.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       {
@@ -147,6 +151,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day, randomly convert the energy type of an elemental spell when casting it.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -162,6 +167,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'In areas of primal magic, spend 1 burn to randomly transform your kinetic blast into a different simple blast type.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -183,6 +189,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Declare a primal strike before attacking; on a hit the target must save or be confused for 1 round.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       {
@@ -212,6 +219,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Craft magic weapons, armor, or shields that suffer reduced penalties from the broken condition.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       {
@@ -236,6 +244,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Deliver a touch spell during a charge action, gaining +2 to overcome SR and a 19-20 critical threat range.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       {
@@ -269,6 +278,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Called shots and targeted strikes can shake foes; precision attacks leave identifying marks on targets.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       {
@@ -320,6 +330,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Foes shaken by Signature Strike Style take -2 AC and cannot make attacks of opportunity against your combat maneuvers.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       {
@@ -357,6 +368,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       "Extend shaken duration from Signature Strike Style; critical hits against marked creatures let nearby allies reroll saves against that creature's mind effects.",
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       {
@@ -398,6 +410,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Split firearm damage between fire and physical damage; spend 1 grit to add the flaming special ability for one shot.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['grit'],
     prerequisites: [
       {
@@ -422,6 +435,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       "Once per hour, successfully saving against a spell grants temporary hit points and a +2 bonus on saves against that creature's spells.",
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -461,6 +475,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain bonuses on pistol-whip attack and trip maneuver; knocking foes prone prevents their opportunity attacks against your firearms.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       {
@@ -481,6 +496,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'After knocking a foe prone with pistol-whip, use a swift action to push them away or pistol-whip a second adjacent foe for free.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       {
@@ -517,6 +533,7 @@ export const PEOPLE_WASTES_FEATS: FeatDefinition[] = [
     shortDescription:
       'After knocking a foe prone with pistol-whip, fire your firearm as a move action with no penalty against the prone target and +1 critical multiplier.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       {

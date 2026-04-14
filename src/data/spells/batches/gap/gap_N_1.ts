@@ -25,6 +25,7 @@ export const GAP_SPELLS_N_1: Spell[] = [
     description:
       'Creatures within the area need only 2 hours of uninterrupted sleep to recover from injuries and regain spells. Each additional 2-hour block of sleep beyond the first counts as a full day of rest for natural healing and disease/poison recovery. Affected sleepers gain vivid dreams tracking their recovery and may wake if their condition worsens. Benefits are lost if any affected creature is disturbed during the 8-hour period, and creatures can only benefit from this spell once per week.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Nature's Exile",
@@ -47,6 +48,7 @@ export const GAP_SPELLS_N_1: Spell[] = [
     description:
       "This curse makes the target hostile to the natural world. All animals treat the cursed creature as an enemy. The target's animal companion (if any) takes a –2 penalty on attack rolls, skill checks, and saving throws but does not become hostile. The target also takes a –10 penalty on Survival checks as natural conditions actively hinder it. This curse can be removed with break enchantment, limited wish, miracle, remove curse, or wish.",
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Nature's Paths",
@@ -77,6 +79,7 @@ export const GAP_SPELLS_N_1: Spell[] = [
     description:
       "The target instinctively navigates wilderness terrain with ease, treating trackless terrain as though a trail or road existed, and terrain with a trail or road as though a highway existed. Up to one additional creature per caster level traveling with the target gains the same benefit. This spell functions only outdoors and does not work in magically altered terrain.",
     source: 'Pathfinder Campaign Setting: Rival Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Nature's Ravages",
@@ -99,6 +102,7 @@ export const GAP_SPELLS_N_1: Spell[] = [
     description:
       "This spell accelerates decomposition of a corpse, aging it by up to 1 day per 2 caster levels (maximum 10 days at 20th level). Effects include crumbled clothing, rotted or liquefied flesh, maggot infestations, and the infiltration of surrounding vegetation. This deterioration hampers autopsies and can prevent raise dead from functioning, though resurrection and true resurrection may still work.",
     source: 'Pathfinder Player Companion: Undead Slayer\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Nature's Ravages, Greater",
@@ -121,6 +125,7 @@ export const GAP_SPELLS_N_1: Spell[] = [
     description:
       "This spell functions like nature's ravages, but it ages corpses years rather than days—up to 1 year per caster level (maximum 20 years at 20th level).",
     source: 'Pathfinder Player Companion: Undead Slayer\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Nauseating Dart',
@@ -145,6 +150,7 @@ export const GAP_SPELLS_N_1: Spell[] = [
     description:
       "You project a poisonous stinger about the size of a quill at a creature within range, as though fired from a blowgun. You must succeed at a ranged attack roll to hit. On a hit, the stinger deals 1d2 piercing damage and injects a poison that nauseates the target for 1 round unless the target succeeds at a Fortitude save.",
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Nauseating Trail',
@@ -176,6 +182,7 @@ export const GAP_SPELLS_N_1: Spell[] = [
     description:
       'The target emits nauseating vapors that fill each square it moves through, persisting across a number of squares equal to 4 times the caster level. The vapors do not obscure sight but nauseate creatures as stinking cloud. The target is immune to its own vapors. Any creature entering or ending its turn in an affected square must succeed at a Fortitude save or become nauseated while in the square and for 1d4+1 rounds afterward.',
     source: 'Pathfinder Roleplaying Game Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Necromantic Burden',
@@ -198,5 +205,6 @@ export const GAP_SPELLS_N_1: Spell[] = [
     description:
       "If the target undead fails its Will save, its effective Hit Dice for the purpose of determining whether it remains under another creature's control doubles (maximum twice the caster's level). If this increase causes the undead's effective HD to exceed a controller's maximum HD threshold, the undead is immediately freed. Other creatures may then attempt to take control within their own HD limits.",
     source: 'Pathfinder Player Companion: Undead Slayer\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
 ];

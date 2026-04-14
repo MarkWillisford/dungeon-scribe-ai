@@ -16,6 +16,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'You establish a psychic link between participants, enabling them to perceive each other\'s emotional conditions and communicate fundamental emotional concepts. The connection persists across distances on the same plane, terminating if a subject relocates to another plane or dies.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pain Strike',
@@ -31,6 +32,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You rack the targeted creature with agony, inflicting 1d6 points of nonlethal damage per round. The target becomes sickened and you gain a +4 circumstance bonus on Intimidate checks against it.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Painful Revelation',
@@ -46,6 +48,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'You augment an existing illusion to damage creatures that see through it. When a creature disbelieves the targeted illusion, it takes 1d6 points of nonlethal damage for every 2 caster levels (maximum 10d6) and becomes staggered for 1d4 rounds. A successful Will save reduces damage by half and negates the staggered condition. The spell ends after triggering.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Paladin's Sacrifice",
@@ -60,6 +63,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You open a divine conduit to redirect damage and adverse effects from another creature to yourself instead. When a nearby ally is hit by an attack or fails a save, you can cast this spell to absorb all resulting damage and effects. Your resistances and immunities apply normally, but you cannot otherwise reduce the harm. If the effect also targets you, you suffer consequences for both yourself and the spared creature.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pale Flame',
@@ -76,6 +80,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions similarly to produce flame but creates subdued flames that emit only dim light, visible up to 100 feet away. Damage is 2d6 fire damage plus 1 per caster level (maximum +5), or 2d6 plus 2 per caster level (maximum +10) against plants. The flames cast light only half the distance of a torch and cannot start fires brighter than dim light.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Paranoia',
@@ -92,6 +97,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The affected creature perceives all others as enemies and becomes hostile to everything except itself. It must take attacks of opportunity when triggered. When surrounded by two or more creatures, the target suffers a -2 penalty to attack rolls, weapon damage rolls, ability checks, skill checks, and saving throws.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Parasitic Soul',
@@ -107,6 +113,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions similarly to magic jar but transfers a trapped soul (from a soul gem, soul bind, or trap the soul) into an unwilling target\'s body. The target creature dies upon a failed save, and the transferred soul permanently inhabits the body. The trapped soul does not receive a saving throw to resist transfer. You must remain within range to dismiss the spell.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Particulate Form',
@@ -121,6 +128,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'Affected creatures appear normal but become particle-based, gaining fast healing 1 and immunity to bleed damage and precision damage effects. Fast healing increases at caster levels 10, 15, and 20. Targets may end the effect as a swift action to regain 5d6 hit points and make additional saving throws against disease or poison.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pass without Trace',
@@ -135,6 +143,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'Affected subjects leave no footprints or scent trail while moving, making non-magical tracking impossible.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Path of Glory',
@@ -151,6 +160,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'You designate glowing squares that provide dim illumination. Starting the following turn, you can expand the glowing area by four additional 5-foot squares as a swift action, with each new square adjacent to previously glowing ones. Allies that end their turns on a glowing square (including one who falls unconscious in the square) are healed of 1 point of damage.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Path of the Winds',
@@ -167,6 +177,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You summon powerful winds equivalent to a windstorm across a designated path. During round one, debris Small-sized or smaller gets blown outward (50% chance either direction). You move unimpeded while others face wind effects. From round two onward, the effect\'s edges function as a wind wall. Over water, it creates a channel up to 40 feet deep. As a move action each turn, you can rotate the effect up to 45 degrees at one end or move it up to 50 feet along its current orientation.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Peacemaker's Parley",
@@ -184,6 +195,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell allows you to influence unfriendly or hostile creatures within the area, potentially improving their attitudes toward you. After casting, make a Diplomacy check against affected creatures as a free action, gaining a +2 sacred bonus against those who failed their saves. Targets quickly revert to their previous attitude if threatened or treated poorly afterward.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Peerless Integrity',
@@ -200,6 +212,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'This illusion conceals actual alignments, making affected creatures appear lawful good to divination magic. Creatures gain a +2 circumstance modifier on Bluff and Diplomacy checks. The spell does not block other divination types or protect against alignment-based harm effects.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pellet Blast',
@@ -216,6 +229,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'You create an explosion of conjured metal projectiles inflicting 1d8 points of piercing damage per two caster levels (maximum 5d8). Damage is subject to damage reduction. Using special material components—cold iron (50 gp), silver (20 gp), or adamantine (100 gp)—allows the blast to penetrate corresponding damage reduction types.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Penumbral Disguise',
@@ -231,6 +245,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'The spell grants a competence bonus equal to caster level on Disguise and Stealth checks in normal, dim, or dark light. Observers in dim or dark conditions can only discern general information like shape and action, but not precise appearance or identifying details. Bright light reveals normal appearance.',
     source: 'Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Perfect Placement',
@@ -245,6 +260,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'Targets receive a +1 insight bonus to AC and Reflex saves. This bonus increases to +3 specifically against attacks of opportunity.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pernicious Poison',
@@ -260,6 +276,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell weakens a target\'s poison defenses: the target incurs a -4 penalty on saves against poison, toxic effects persist for another 2 frequency increments extending durations, and attempts to cure the poisoned target with skill or magic take a -4 penalty.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pernicious Pranksters',
@@ -276,6 +293,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'You summon intangible whimsical forces that perform combat maneuvers (dirty trick, disarm, steal, or trip) against foes each round. These incorporeal entities gain bonuses equal to caster level plus your primary spellcasting ability modifier, with an additional +4 bonus if targets cannot perceive invisible creatures. The pranksters randomly select targets and maneuvers, though you may attempt a DC 20 skill check to influence their actions.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Persuasive Goad',
@@ -291,6 +309,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes',
     description: "Your eyes flash, dealing 1d6 nonlethal damage to the target. For one minute afterward, you gain a +4 circumstance bonus on Intimidate checks against the target.",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phantom Blood',
@@ -305,6 +324,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'You bolster your life energy. When a temporary effect modifying Constitution (such as barbarian rage or bloodrager bloodrage) ends, if the resulting hit point loss would render you unconscious or dead, you instead gain temporary hit points equal to your caster level (maximum 10). Each casting provides this benefit only once.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phantom Chariot',
@@ -321,6 +341,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a magical heavy chariot with four horse-like creatures to pull it. The vehicle accommodates up to six passengers including the driver and produces no sound. The chariot and team function as a single entity with AC 19 and hit points equal to 10 plus 2 per caster level (maximum 50 HP). The conjured team gains abilities based on caster level, similar to the phantom steed spell.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phantom Driver',
@@ -337,6 +358,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'This conjuration creates a Small or Medium humanoid creature capable of operating any vehicle. The phantom cannot engage in combat but commands animals pulling muscle-powered vehicles. It has customizable physical features, AC 20 (Small) or 19 (Medium), and 7 + 1 per caster level hit points. It possesses a 30-foot land speed and makes driver skill checks using your caster level plus Intelligence modifier.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phantom Hunt',
@@ -351,6 +373,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'You and one animal companion gain darkvision to 100 feet, tremorsense to 20 feet, and a 40-foot enhancement bonus to movement speed. You can track at full speed without penalty, or gain +4 to Survival checks if you already possess this ability. The spell\'s effects immediately cease if you or your animal companion attack or are attacked by another creature.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phantom Limb',
@@ -365,6 +388,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell grants replacement of missing body parts using phantom appendages with full functionality, including natural attacks and extraordinary abilities (but not supernatural ones). Alternatively, the caster may choose: Extra Arms (two phantom claws), Extra Legs (speed boost and trip/overrun defense), Mermaid\'s Tail (swim speed), or Phantom Wings (flight).',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phase Door',
@@ -381,6 +405,7 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'no',
     description: 'This conjuration creates an invisible ethereal passage through wooden, plaster, or stone walls. Only the caster can use it initially, though one Medium or smaller creature may accompany them. The passage does not allow light, sound, or spell effects through it. It can be made permanent via permanency and is subject to dispel magic.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phase Step',
@@ -396,5 +421,6 @@ export const GAP_SPELLS_P_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You instantly transfer a touched creature to a designated point within range. It functions similarly to dimension door, but requires you to have line of sight and line of effect to the destination.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
 ];

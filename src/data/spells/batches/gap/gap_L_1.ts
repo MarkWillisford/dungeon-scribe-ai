@@ -18,6 +18,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The caster envelops a target area in summery conditions where the ambient temperature never falls below 70 degrees Fahrenheit. Cold-subtyped creatures take fire damage (1d4 plus 1 per 2 caster levels, maximum 1d4+5) at the start of their turns with no saving throw. Evil dragons, fey, and giants must succeed at Will saves when taking damage or become shaken for 1 round. Creatures attempting to cast cold spells in the area must make Will saves or their spells fail; one successful save allows continued cold spell casting for the duration.",
     source: 'Pathfinder Player Companion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Languid Bomb Admixture',
@@ -35,6 +36,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "This extract modifies an alchemist's magical reserves to alter bomb properties. Only one bomb admixture effect can be active at a time; drinking a new admixture ends the previous one. When a bomb hits a direct target, up to four creatures are affected: the primary target plus three additional splash-damage recipients (alchemist's choice). Affected creatures must succeed at a Will save or become fatigued. The effect does not interact with bomb-modifying discoveries.",
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Languid Venom',
@@ -57,6 +59,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "This spell extends a poison's activation timeline, allowing the caster to delay onset by up to 1 hour per caster level. The target doesn't save upon initial exposure but rather at the end of the extended onset period. If neutralized before onset completes, the poison becomes harmless. Multiple doses produce cumulative effects normally. Detection is difficult—spells like Detect Poison require a caster level check against DC 11 + caster level. Craft (alchemy) or Wisdom checks to identify the poison receive a +10 DC increase. When cast on venomous creatures, it delays their natural poison delivery on their next attack.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lash of the Astradaemon',
@@ -73,6 +76,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The caster causes one of their hands to elongate and sprout fearsome translucent claws that radiate a cold phosphorescence. This grants a primary natural attack dealing 1d6 slashing damage (1d4 for Small casters). Targets struck must succeed at a Fortitude save or gain 1 negative level. Successful saves grant immunity to further negative levels from this casting. Each negative level inflicted grants the caster 5 temporary hit points lasting 1 hour. The claw does not interfere with spellcasting or other hand-based actions. Usage is limited to 1 attack per 2 caster levels, reverting to normal after all attacks are delivered or after 24 hours.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lead Anchor',
@@ -107,6 +111,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "This evocation causes the affected creature to experience increased buoyancy that results in swift sinking, independent of the target's actual density or equipment weight. The subject gains the ability to traverse underwater floors but must succeed at a DC 20 Swim check to ascend toward the surface or remain above the seafloor. The spell serves dual purposes—enabling underwater exploration and creating hazards for air-breathing adversaries in aquatic environments.",
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lead Plating',
@@ -136,6 +141,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The caster surrounds the target in a thin lead coating. This protective layer doesn't restrict the target's movement or functionality, but protects it from the effects of radiation and prevents the penetration of many divination spells. The lead coating does not extend to the target's equipment.",
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Leashed Shackles',
@@ -152,6 +158,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The spell creates magical restraints of force that bind to the target's limbs and anchor to a designated object or location within 30 feet. The caster must select the anchor point (ground, wall, or sturdy structure) at casting. The target becomes entangled and cannot move beyond 30 feet from the anchor. While the shackles themselves cannot be directly attacked, they can be dispelled. If the anchor point is destroyed, the target regains mobility but remains entangled.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lend Judgment',
@@ -167,6 +174,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The caster establishes a conduit of divine knowledge between themselves and an ally. The recipient gains benefits from one of the caster's active judgments. The ally loses this benefit if the caster cannot use judgments, changes judgments, becomes frightened, or falls unconscious. When multiple judgments are active, only one is shared, selected at casting time.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lend Judgment, Greater',
@@ -182,6 +190,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "Functions identically to lend judgment, except the ally receives benefits from all of the caster's active judgments simultaneously, rather than just one.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Leshy Swarm',
@@ -205,6 +214,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The caster summons nature spirits inhabiting temporary plant bodies. These creatures function similarly to standard leshys but are Tiny and simpler-minded, using rat swarm statistics without disease or scent abilities. They gain darkvision (60 ft.) and immunity to electricity, mind-affecting effects, paralysis, poison, polymorph, sleep, sonic, and stunning effects. The caster directs the swarm via standard actions (or move actions if speaking Druidic or Sylvan). The leshys are confused by their sudden possession of new bodies and attack most creatures except the caster and plant-type creatures.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Liberating Command',
@@ -228,6 +238,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       'When cast, this spell allows a restrained target to make an Escape Artist check to escape as an immediate action. The caster grants a competence bonus equal to twice their caster level, with a maximum bonus of +20. The spell provides no benefit if the target cannot escape through normal Escape Artist means, such as when affected by hold person or paralyzed by Strength damage.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Blast',
@@ -250,6 +261,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       'This spell requires vegetation to function. The caster draws life force from surrounding plant life and unleashes it in a line against undead enemies. It deals 1d6 positive energy damage per caster level (maximum 12d6 at 12th level) to undead creatures in the area. The spell blights vegetation in a 5-foot radius per caster level (maximum 60 feet), causing all vegetation in that area to immediately wither and die. Plant creatures remain unaffected.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Bubble',
@@ -276,6 +288,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The spell creates a constant and moveable 1-inch shell of tolerable living conditions around affected creatures. This protection enables subjects to breathe in any environment (underwater, vacuum) and grants immunity to harmful gases, inhaled diseases, poisons, and spells like cloudkill. Additionally, it protects against temperature and pressure extremes similar to endure elements. The spell does not provide protection against negative or positive energy planes, improve visibility in poor conditions, or enable normal movement in restrictive environments like water.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Channel',
@@ -291,6 +304,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       'This transmutation spell enables creatures with negative energy affinity to benefit from positive energy healing. When the subject receives healing effects that would normally heal hit points only for living creatures (such as cure light wounds or channel positive energy), they gain temporary hit points equal to half the normal healing amount. These temporary hit points expire when the spell\'s duration ends.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Conduit',
@@ -307,6 +321,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "You utilize life conduit to share hit points with your eidolon. While this spell is active, you can spend a swift action to transfer 1d6 hit points between you and your eidolon, either taking damage yourself and healing your eidolon or healing yourself and damaging your eidolon. If your eidolon moves farther than 50 feet from you, this spell ends.",
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Conduit, Improved',
@@ -323,6 +338,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       'Functions identically to life conduit but allows transferring 2d6 hit points per swift action.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Conduit, Greater',
@@ -339,6 +355,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       'Functions identically to life conduit but allows transferring 3d6 hit points per swift action.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Current',
@@ -365,6 +382,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The caster infuses water current with positive energy. When the current moves living creatures at the start of their turn, they heal 1d6 hit points per 10 feet of the current's speed (maximum 6d6). Undead creatures in the same area take equivalent damage instead.",
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life of Crime',
@@ -394,6 +412,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "This enchantment unleashes the basest instincts of iniquity in a target, making criminal behavior their overriding motivation. The affected creature cannot benefit from teamwork feats or aid another actions, nor accept harmless magical effects from allies. The target compulsively moves stealthily, lies habitually, and must make hourly Will saves (or each round during combat) or behave as if affected by a crime wave spell for one round. Removal requires remove curse with a higher caster level, or wishes or miracles.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Pact',
@@ -422,6 +441,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The spell binds targets' life forces together. When any target drops below 0 hit points, that creature automatically drains 1 hit point from all willing targets within 30 feet who have at least 1 hit point remaining. The drained hit points provide magical healing to the triggering creature, potentially preventing death. This healing cannot raise the triggering creature above 1 hit point. The pact triggers once per round and only from hit point damage, not death effects.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Shield',
@@ -438,6 +458,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The caster generates a protective field of positive energy around themselves. When undead creatures strike the caster in melee combat, they sustain positive energy damage equal to half the harm they inflicted. This counterattack damage is calculated after accounting for the caster's damage reduction and defensive abilities. The spell remains active until it has dealt 5 damage points per caster level (capped at 50 total), at which point it dissipates.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Light Lance',
@@ -455,6 +476,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The caster manifests a glorious beam of brilliant radiance that acts as a +1 holy lance suitable for the caster's size. The spell requires a free hand at casting, and the lance cannot be transferred or abandoned without ending the spell prematurely. The caster may use a standard action to hold the lance aloft as a light source, creating bright illumination within a 90-foot radius. When held skyward for multiple rounds, the lance projects a visible beam skyward, becoming observable at progressively greater distances in darkness: 2 additional miles the second round, 4 miles the third round, continuing to expand by 2-mile increments per additional round.",
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Light Prison',
@@ -477,6 +499,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The caster projects luminous rays that form a containment barrier around each target. Affected creatures that fail their save find themselves enclosed in the light prison. While confined, creatures retain normal functionality for attacks, spellcasting, and actions. However, attempting to breach the barrier inflicts 1d6 points of damage and blinds the creature for 1 round. These effects bypass additional saving throws. The confinement terminates once a creature successfully exits the light cage.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lightfingers',
@@ -492,6 +515,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "This spell employs subtle telekinetic force to compel a target to release a single non-magical item they're carrying. The item must weigh no more than 1 pound per caster level. The target receives a Perception check against the spell's save DC to detect the dropped item. The caster selects which item drops, provided both the target and item are visible. The spell cannot cause loss of held items or worn objects, including jewelry. Alternatively, the caster may use this spell to execute a single disarm or steal combat maneuver, substituting caster level for base attack bonus and highest mental ability modifier for Strength, provoking no attacks of opportunity.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lightning Arc',
@@ -514,6 +538,7 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The caster generates an electrical arc connecting two targets. It deals 1d6 points of electricity damage per caster level (maximum 15d6) to both targets and creatures in the connecting line. The spell requires line of effect between targets. The lightning ignites combustibles and damages objects in its path, with particular effectiveness against metals with low melting points (lead, gold, copper, silver, bronze).",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lightning Conductor',
@@ -536,5 +561,6 @@ export const GAP_SPELLS_L_1: Spell[] = [
     description:
       "The caster absorbs electrical damage up to 18 points initially. Once 6 or more points are stored, the energy can be discharged as a swift action to charge a hand or metal weapon. As a standard action, the caster delivers the energy via melee touch attack or 30-foot ray, dealing 1d6 points of electricity damage for every 6 points stored. The maximum storage capacity increases by 6 points per 2 levels beyond 5th, reaching 60 points at 19th level. The spell becomes unavailable if the caster has electricity immunity or resistance.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 ];

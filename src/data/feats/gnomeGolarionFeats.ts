@@ -9,6 +9,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
       "As a full-round action, extol the virtues of your magic school to one creature within 30 feet. Make a Bluff check opposed by the target's Sense Motive; success imposes a -2 penalty on saves against your next spell from that school. Universalists select a school each use but the penalty is only -1.",
     shortDescription: 'Bluff to impose -2 save penalty vs. your next spell from your school.',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 1 },
@@ -34,6 +35,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
       'You can deceive creatures into trading valuable possessions for worthless items. Make a Bluff check to convince a target to exchange their item for yours, with modifiers for obvious value disparities. On success, an opposed Appraise check determines how long the target believes the false assessment (1 round base, +1 round per 5 you exceed). Cannot be used in combat, vs. hostile creatures, or vs. INT 3 or lower.',
     shortDescription: 'Bluff to trick targets into trading valuables for worthless items.',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'appraise', ranks: 5 },
@@ -59,6 +61,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
       'As a swift action, spend 1 ki point and make a Bluff check by posing an impossible question to a creature. If the creature fails, you either cause it to lose its next action or gain a +2 damage bonus against it for 1 round.',
     shortDescription: 'Spend ki + Bluff to make a foe lose its action or take +2 damage.',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 1 },
@@ -84,6 +87,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
       'When attempting a Diplomacy check to influence a creature with a plausible connection to your sorcerous bloodline, you may instead make a Bluff check.',
     shortDescription: 'Use Bluff instead of Diplomacy vs. creatures related to your bloodline.',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 1 },
@@ -109,6 +113,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
       'As a standard action, make a Bluff check against one favored enemy type. Creatures of that type within 60 feet must succeed at a Will save or become angered — gaining Power Attack benefits (attack penalty for damage bonus). Those already having Power Attack increase both penalty and bonus. Effects end when combat concludes. Requires targets to understand you.',
     shortDescription: 'Taunt favored enemies into using Power Attack involuntarily.',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 1 },
@@ -134,6 +139,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
       'You can maintain concentration on one spell of the illusion school as a swift action. This does not affect spells from other schools or illusion spells whose durations do not rely on concentration.',
     shortDescription: 'Maintain concentration on one illusion spell as a swift action.',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Gnome' }],
     effects: [
@@ -155,6 +161,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
       'You gain an additional three uses per day of your gnome spell-like abilities (dancing lights, ghost sound, prestidigitation). You may allocate these uses flexibly or apply them to substitute 0-level spells.',
     shortDescription: '+3 daily uses of gnome racial spell-like abilities.',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -179,6 +186,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
       'When restrained or imprisoned, make a Bluff check vs. a creature within 30 feet to emphasize your harmlessness. Success grants a +5 bonus on your next Escape Artist check. Creatures aware of your danger gain +4 to resist; cruel creatures that succeed impose a -5 penalty on your Escape Artist checks.',
     shortDescription: 'Bluff captors for +5 Escape Artist; risky if they see through it.',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 5 },
@@ -204,6 +212,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
       'As a standard action, pantomime predator or prey behavior, expend one wild shape use, and make a Bluff check. Creatures within 30 feet that fail a Will save become either frightened for 1 round/druid level (fear) or regard you as harmless for 1 minute (contempt), ignoring you unless attacked.',
     shortDescription: 'Expend wild shape to frighten or become "harmless" to nearby creatures.',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 1 },
@@ -229,6 +238,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
       'When you activate a rod of wonder, roll d% to determine the effect. If you wish, you can roll d% again and use the second result. You can only use this ability once per round.',
     shortDescription: 'Reroll rod of wonder results once per round.',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'iron_will' },
@@ -254,6 +264,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
       'You may use the Bluff skill to feint while raging. The effect of the feint lasts only until the first time you hit the target.',
     shortDescription: 'Feint with Bluff while raging (effect ends on first hit).',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 1 },
@@ -280,6 +291,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Figment illusions create a flanking-capable threatening square (+1 spell level).',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [
       { type: 'feat', featId: 'spell_focus_illusion' },
@@ -305,6 +317,7 @@ export const GNOME_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Successful feint grants dodge AC equal to weapon training bonus vs. that foe.',
     source: 'Pathfinder Player Companion: Gnomes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 1 },

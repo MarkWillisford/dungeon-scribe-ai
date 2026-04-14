@@ -16,6 +16,7 @@ export const xsistaid: DeityEntry = {
   sacredColors: ['brown', 'white'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -34,6 +35,7 @@ export const zaigasnar: DeityEntry = {
   sacredColors: ['iron gray', 'red'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -53,6 +55,7 @@ export const zelishkar: DeityEntry = {
   sacredColors: ['orange', 'red'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -70,6 +73,7 @@ export const aroden: DeityEntry = {
   symbol: `An unblinking divine eye balanced between earth and the heavens`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -88,6 +92,7 @@ export const osiris: DeityEntry = {
   sacredAnimal: `Ram`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -106,6 +111,7 @@ export const wadjet: DeityEntry = {
   sacredAnimal: `Uraeus`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -124,6 +130,7 @@ export const bes: DeityEntry = {
   sacredAnimal: `Lion`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -142,6 +149,7 @@ export const isis: DeityEntry = {
   sacredAnimal: `Kite`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -160,6 +168,7 @@ export const khepri: DeityEntry = {
   sacredAnimal: `Scarab beetle`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -178,6 +187,7 @@ export const neith: DeityEntry = {
   sacredAnimal: `Bee`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

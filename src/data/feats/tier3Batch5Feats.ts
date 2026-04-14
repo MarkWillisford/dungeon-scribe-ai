@@ -13,6 +13,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       'When activating magic items or spell-like abilities, you can add convincing words and gestures so observers think you cast a spell. Spellcraft checks to identify what you "cast" are opposed by your Bluff check. Identification DC becomes 20 + spell level instead of 15 + spell level.',
     shortDescription: 'Disguise magic item/SLA use as spellcasting via Bluff.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'magical_aptitude' },
@@ -38,6 +39,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       'You can craft magical tattoos inked into willing or helpless creatures. Tattoos occupy standard magic item slots without interfering with worn items. One tattoo per slot. Follow wondrous item creation rules. Can be destroyed via dispel magic, erase (Will negates), or physical damage (2 points per CL). Priced as slotless items.',
     shortDescription: 'Create magical tattoos that occupy item slots without blocking worn items.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       { type: 'skill', skillId: 'craft_tattoo', ranks: 5 },
@@ -62,6 +64,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       'As a standard action, convert an active figment illusion into a damaging attack. Choose melee touch attack or allow a save (Fort or Reflex). Deals 1d6 damage per spell level. Damage type matches what the illusion depicts (acid, bludgeoning, cold, electricity, fire, piercing, or slashing). Disbelief reduces damage. Ends the illusion.',
     shortDescription: 'Convert a figment illusion into a 1d6/spell level damaging attack.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'spell_focus_illusion' },
@@ -86,6 +89,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       'Darkness descriptor spells you cast that affect an area also entangle creatures that fail their saves. Non-saving spells allow a Reflex save. Entanglement persists while in the area plus 1 round after leaving. You are unaffected. Uses a spell slot 1 level higher.',
     shortDescription: 'Darkness spells entangle creatures in the area (+1 spell level).',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [
       { type: 'feat', featId: 'tenebrous_spell' },
@@ -111,6 +115,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 CL and DC in darkness; penalty in bright light (+1 spell level for most).',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [
@@ -132,6 +137,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       "Your spell gains the darkness descriptor. The affected creature/object radiates darkness in a 10 ft radius (as darkness spell). Nonmagical light doesn't work in this area; magical light only works if spell level exceeds the umbral spell's base level. +2 spell level. Cannot apply to instantaneous spells or those without creature/object targets.",
     shortDescription: 'Spell target radiates 10 ft darkness (+2 spell level).',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [{ type: 'feat', featId: 'tenebrous_spell' }],
     effects: [
@@ -155,6 +161,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       'You gain a +5 circumstance bonus on Bluff checks to convince people your masked persona and true identity are different people, and on Disguise checks to maintain your masked persona.',
     shortDescription: '+5 Bluff and Disguise for maintaining a masked dual identity.',
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -188,6 +195,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       'You can apply one stylized magic option without penalty to spell identification DC. You may apply up to two extra options, each reducing the identification DC by 5 per option.',
     shortDescription: 'Free first stylized option; additional options reduce ID DC by 5 each.',
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'stylized_spell' },
@@ -213,6 +221,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       "You gain the vigilante's renown social talent, allowing you to build a reputation in a community. At 9th level, you may select this feat again for the great renown talent.",
     shortDescription: 'Gain vigilante renown social talent for your masked persona.',
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -237,6 +246,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       'Your masked persona represents a concept, granting bonuses: Faith (+2 Diplomacy with faithful, +2 Intimidate vs. enemies of faith), Fear (+3 Intimidate), Hope (+3 Diplomacy), Leadership (+2 Leadership score), Mystery (+2 Disguise/Stealth), The People (+2 influence crowds), Trust (+2 Bluff/Diplomacy requests). Choose one per level.',
     shortDescription: 'Choose a symbol for your persona granting social skill bonuses.',
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Disguise 1 rank or dual identity class feature' },
@@ -260,6 +270,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       "When you apply Stylized Spell metamagic to a spell you've mastered via Spell Mastery, you do not increase the spell slot used.",
     shortDescription: 'Free Stylized Spell on Spell Mastery spells (no slot increase).',
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'spell_mastery' },
@@ -286,6 +297,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       "You can modify your spells' apparent components on the fly. When applying stylized magic, make a caster level check (DC = 5 + 2x spell level + 5 per modification). Failure wastes the spell.",
     shortDescription: 'Apply stylized magic spontaneously with a caster level check.',
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 5 },
@@ -313,6 +325,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
     shortDescription:
       'Daily self-harm obedience for resistances, agony strikes, and scaling boons.',
     source: 'Pathfinder Campaign Setting: Occult Mysteries',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'heal', ranks: 3 }],
     effects: [
@@ -334,6 +347,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       "As a swift action before casting, calculate the digital root of the spell's name. Spellcraft check (DC 10 + spell level + digital root): success grants +1 CL, failure imposes -1 CL. If you don't cast the intended spell, it's expended. Usable times per day equal to caster level.",
     shortDescription: 'Swift action Spellcraft check for +1/-1 CL based on spell name numerology.',
     source: 'Pathfinder Campaign Setting: Occult Mysteries',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -359,6 +373,7 @@ export const TIER3_BATCH5_FEATS: FeatDefinition[] = [
       'When using Sacred Geometry, you can use d8s instead of d6s for your dice pool. You may mix d6s and d8s freely, limited by Knowledge (engineering) ranks.',
     shortDescription: 'Use d8s instead of d6s for Sacred Geometry dice pool.',
     source: 'Pathfinder Campaign Setting: Occult Mysteries',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'sacred_geometry' },

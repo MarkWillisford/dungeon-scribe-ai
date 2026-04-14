@@ -9,6 +9,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
       "You can use acupuncture techniques to treat curses. Using an acupuncture kit (equivalent to a healer's kit), you spend 1 hour performing treatment and make a Heal check against the curse's DC. If you exceed the DC by 10 or more, the curse's effects are suppressed for 1d4 days. If you exceed the DC by 20 or more, the curse is permanently removed. This ability targets curses and spells with the curse descriptor.",
     shortDescription: 'Use Heal checks to suppress or remove curses via acupuncture',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'heal', ranks: 5 }],
     effects: [],
@@ -23,6 +24,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use a Fly check as an immediate action to cause an attack to miss while airborne',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'skill', skillId: 'fly', ranks: 10 }],
     effects: [
@@ -45,6 +47,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain cultural boons and spell-like abilities from a lost civilization through daily ritual',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_history', ranks: 3 },
@@ -65,6 +68,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
       "Your birth was marked by a notable astrological event, granting you one of six possible boons. Apparent Retrograde: +1 luck bonus on Reflex saves; natural 1s on Reflex saves don't auto-fail. Conjunction: Teamwork feat bonuses all increase by 1. Eclipse: Soft cover treated as hard cover for you. Meteor Shower: Cumulative +1 dodge bonus to AC against ranged attacks per attack beyond the first (max +4). Passing Comet: +2 insight bonus on occult skill unlock checks. Sun Sign: Light descriptor spells treated as 1 spell level higher.",
     shortDescription: 'Choose a boon tied to an astrological event at birth',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Must be taken at 1st level' }],
     effects: [],
@@ -79,6 +83,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     shortDescription:
       'When treating deadly wounds, the target heals the higher of your Heal check result or the normal amount',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'heal', ranks: 5 }],
     effects: [],
@@ -92,6 +97,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
       'You follow the philosophy of Pao-Lung and cannot worship any deities. When you roll a natural 1, or fail an ability check, caster level check, saving throw, or skill check by 5 or more, you may designate that specific type of check. For the next 24 hours, you gain a +1 bonus on checks of that type, increasing by an additional +1 for each additional failure. The bonus ends immediately upon a successful check of the designated type.',
     shortDescription: 'Failing checks grants escalating bonuses on that check type for 24 hours',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -111,6 +117,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Allow a patient to use your Heal check result instead of their own saving throw vs. disease or poison',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'incredible_healer_bota' }],
     effects: [],
@@ -125,6 +132,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Fly at double speed in a straight line, forcing adjacent flying creatures to make Fly checks or be blown back',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'turbulent_takeoff' },
@@ -150,6 +158,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+3 to detect astrological events; astrological event bonuses +1 and penalties -1',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 1 },
@@ -175,6 +184,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
       'You can draw additional power from celestial phenomena, harnessing their influence for longer than their natural duration. Astrological effects with a duration of less than 24 hours have their duration increased by 50%. Astrological effects with a duration of 24 hours or more gain an additional day of duration.',
     shortDescription: 'Astrological effects last 50% longer (sub-24h) or gain +1 day (24h+)',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'saoc_brethren_initiate' },
@@ -194,6 +204,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Step toward reach weapon users as an immediate action to gain +4 AC against the attack',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'step_up' },
@@ -219,6 +230,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     shortDescription:
       'While in Skyseeker Style, gain +1 melee damage per size category larger than you',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -246,6 +258,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     shortDescription:
       'While in Skyseeker Style, deal damage as if weapon is one size larger and gain +4 to sunder vs larger foes',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -274,6 +287,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 morale bonus on relevant ability/skill checks while pursuing a sworn daily oath; -1 penalty for 24h if oath broken',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -301,6 +315,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Taking flight from the ground forces threatening foes to make Reflex saves or lose attacks of opportunity',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'skill', skillId: 'fly', ranks: 5 }],
     effects: [],
@@ -315,6 +330,7 @@ export const BLOOD_ANCIENTS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+15 ft. fly speed in strong winds, scaling up by +15 ft. per wind category above strong',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Acrobatics 3 ranks or Fly 3 ranks' }],
     effects: [

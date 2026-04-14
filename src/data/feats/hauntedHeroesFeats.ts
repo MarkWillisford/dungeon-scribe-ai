@@ -10,6 +10,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Possessed creatures roll twice and take better result on saves to end possession effects you enable',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -24,6 +25,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel a medium spirit legend for its spirit bonus and seance boon for 1 hour/level, then cede control for equal duration',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Spirit Ridden or spirit class feature' }],
     effects: [],
@@ -38,6 +40,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 vs death effects and remain conscious at negative HP when possessed by uncontrolled undead; +4 to resist ending possession',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Spell Focus (Necromancy)' }],
     effects: [
@@ -66,6 +69,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'As a swift action for 1 round, imbued weapon damages incorporeal creatures as magical (or ghost touch at +2 enhancement) and can deal precision damage',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 1 },
@@ -83,6 +87,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Reduce two-weapon fighting penalties by 2 (min –1); possessed hand acts independently when you are incapacitated',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'possessed_hand' }],
     effects: [],
@@ -97,6 +102,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Detach your possessed hand as a full-round action; it acts as an animate hand; can become your familiar',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'hands_autonomy' },
@@ -114,6 +120,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain one Knowledge and one other skill as class skills; 1/day gain +1/2 level bonus to one of those skills as a swift action',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'possessed_hand' }],
     effects: [],
@@ -127,6 +134,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
       "While your possessed hand isn't carrying anything, you gain darkvision with a range of 60 feet and cannot be flanked.",
     shortDescription: 'While possessed hand is empty, gain darkvision 60 ft. and cannot be flanked',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'possessed_hand' }],
     effects: [],
@@ -141,6 +149,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Harvest ectoplasm from defeated haunts and incorporeal undead to use as material components or crafting funds for enchantment/necromancy',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       { type: 'special', description: 'Any one item creation feat or Craft (alchemy) 3 ranks' },
@@ -157,6 +166,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       "Your spiritualist phantom's abilities are calculated as if your class level were 4 higher (max = character level)",
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'Phantom' }],
     effects: [],
@@ -171,6 +181,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 insight on attacks/damage with possessed hand and on Disable Device/Sleight of Hand; 1/day swift-retrieve small item; –2 concentration',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -223,6 +234,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'As a full-round action, stagger incorporeal undead or possessing entities within 30 ft (Will negates); staggered possessors allow host a new save to break free',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'iron_will' },
@@ -240,6 +252,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       "Prepare offerings to improve a nonhumanoid creature's attitude by one step (Will negates); usable 3 + Wis modifier times per day",
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -254,6 +267,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'As a standard action, attack a haunt for weapon dice + enhancement bonus damage; Vital Strike feats apply',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_religion', ranks: 1 },
@@ -271,6 +285,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Attacks on possessed creatures also damage the possessing entity; possessor gets Will save for half damage; incorporeal possessors take full damage',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'vital_strike' },
@@ -288,6 +303,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain a permanent invisible spirit companion that functions as unseen servant (CL = character level); effective Strength increases with level',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'caster_level', minimum: 8 }],
     effects: [],
@@ -302,6 +318,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'While wearing an oni mask (50 gp), gain a primary gore attack (1d4); if you have poison use, applying poison to it is a move action',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_planes', ranks: 3 },
@@ -319,6 +336,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '1/day perform a seance to gain temporary skill ranks equal to your level in a chosen skill (treated as class skill) for 1 hour/level',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -333,6 +351,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 competence on Knowledge checks vs. incorporeal creatures; while possessed, attempt Will saves as swift action to act normally for 1 round',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -360,6 +379,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend 1 inspiration as a swift action to grant allies within 30 ft. a +4 insight bonus on attacks vs. one monster type for 1 round',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Inspirational expertise investigator talent' },
@@ -390,6 +410,7 @@ export const HAUNTED_HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'While compelled, confused, or possessed, attempt a Will save each turn to take one mental action freely; other actions still obey the effect',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Base Will save bonus +2' }],
     effects: [],

@@ -13,6 +13,7 @@ export const OSIRION_FEATS: FeatDefinition[] = [
       'Through black market connections, you gain a resource pool worth 100 gp for acquiring illegal or illicit items and services. This functions similarly to the Profits of Kalistrade feat but is restricted to contraband such as drugs, poisons, evil magic items, slaves, dead bodies, and secret information.',
     shortDescription: 'Gain a 100 gp resource pool for black market contraband.',
     source: 'Pathfinder Companion: Osirion, Land of the Pharaohs',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'appraise', ranks: 4 },
@@ -38,6 +39,7 @@ export const OSIRION_FEATS: FeatDefinition[] = [
       'Creatures cannot use the scent ability to track you, though they can still track you through standard means. Creatures with scent can detect your presence by smell at half the normal distance, but cannot pinpoint your location with scent.',
     shortDescription: 'Creatures with scent cannot track you; detection range halved.',
     source: 'Pathfinder Companion: Osirion, Land of the Pharaohs',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'stealth', ranks: 3 },
@@ -62,6 +64,7 @@ export const OSIRION_FEATS: FeatDefinition[] = [
       'When you pass within 5 feet of a trap, you are entitled to an automatic Perception check to notice the trap. This check is made at a -10 penalty, or -5 if you are moving at half speed and taking no actions other than moving.',
     shortDescription: 'Automatic Perception check at -10 (-5 at half speed) when near traps.',
     source: 'Pathfinder Companion: Osirion, Land of the Pharaohs',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'perception', ranks: 6 },
@@ -86,6 +89,7 @@ export const OSIRION_FEATS: FeatDefinition[] = [
       'You gain a +2 circumstance bonus on Stealth checks in urban areas; this bonus increases to +4 in crowds. You gain a +1 dodge bonus to AC when threatened by 2 or more enemies.',
     shortDescription: '+2/+4 Stealth in urban/crowds; +1 dodge AC when threatened by 2+ foes.',
     source: 'Pathfinder Companion: Osirion, Land of the Pharaohs',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -115,6 +119,7 @@ export const OSIRION_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 social skills in Osirion; +5 on knowledge/research about ancient Osirion.',
     source: 'Pathfinder Companion: Osirion, Land of the Pharaohs',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_history', ranks: 4 },
@@ -147,6 +152,7 @@ export const OSIRION_FEATS: FeatDefinition[] = [
       'You gain a +1 bonus (sacred or profane based on alignment) to Will saves, Diplomacy checks, and Survival checks. These bonuses double to +2 on consecrated ground of your faith. You receive a 20% discount on non-magical religious items, including holy water.',
     shortDescription: '+1 sacred/profane Will, Diplomacy, Survival; +2 on consecrated ground.',
     source: 'Pathfinder Companion: Osirion, Land of the Pharaohs',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_geography', ranks: 2 },
@@ -185,6 +191,7 @@ export const OSIRION_FEATS: FeatDefinition[] = [
       "As a standard action, attempt a disarm or trip with your whip. On success, gain an additional disarm or trip against a target adjacent to the first and within your whip's reach using the same bonus. You may also use your whip for reposition maneuvers at -4 CMB, only moving the target toward you.",
     shortDescription: 'Chain disarm/trip with whip to adjacent target; reposition at -4.',
     source: 'Pathfinder Companion: Osirion, Land of the Pharaohs',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_finesse' },
@@ -209,6 +216,7 @@ export const OSIRION_FEATS: FeatDefinition[] = [
       "When a swarm attacks you by ending its turn in your space, you may attempt a Reflex save (DC = swarm's distraction DC + 10) to avoid damage. Success also negates poison, blood drain, or comparable effects. Improved evasion extends to swarm encounters. You still face Fortitude saves against distraction if your turn begins in a swarm's space.",
     shortDescription: 'Reflex save to avoid swarm damage; improved evasion applies.',
     source: 'Pathfinder Companion: Osirion, Land of the Pharaohs',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },

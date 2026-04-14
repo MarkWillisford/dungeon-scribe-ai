@@ -11,6 +11,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Summoned evil outsider appears in blackfire blast damaging nearby nonevil creatures',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'sacred_summons' }],
     effects: [],
@@ -27,6 +28,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Standard action unarmed strike that can chain to two more targets at full BAB',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'cleave' },
@@ -44,6 +46,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       'When you deal damage using Cerberus Style, the target cannot take 5-foot steps until the start of your next turn and is barred from dimensional travel, functioning as the dimensional anchor spell for 1 round. Spell resistance applies; your caster level equals your character level for resistance checks.',
     shortDescription: 'Cerberus Style hits prevent 5-ft steps and dimensional travel for 1 round',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'cerberus_style_phb' },
@@ -60,6 +63,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       'When you strike from three directions, you channel deadly force into each blow. You may apply the benefits of Vital Strike, Improved Vital Strike, and Greater Vital Strike to all attacks made using Cerberus Style.',
     shortDescription: 'Apply Vital Strike benefits to all Cerberus Style attacks',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'cerberus_snare_phb' },
@@ -78,6 +82,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       'You survived death through sheer luck, having narrowly escaped a fatal accident or catastrophe. Once per day, if you would die from an attack or failed saving throw, you may use an immediate action to reroll that attack or save; you must accept the second result. At 11th level, this ability can be used twice per day.',
     shortDescription: 'Once per day reroll an attack or save that would kill you',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Duskwalker' }],
     effects: [],
@@ -92,6 +97,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       "Once per day teleport to Material Plane via Cynosure's star pools, always very familiar",
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'lady_lucks_guidance' },
@@ -108,6 +114,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       'Instead of affecting only yourself, you generate a cloud of crystalline dust in a 10-foot radius centered on you. You maintain the cloud as a free action while remaining in its area; it consumes 2 rounds of crystalline dust per round of activation. Wind of 11+ mph disperses it immediately. If you also have Gilded Weapons, chaotic creatures entering the cloud must succeed at a Fortitude save (DC = 10 + half your character level + your Charisma modifier) or become sickened for 1 round.',
     shortDescription: 'Project crystalline dust as a 10-ft radius cloud benefiting allies',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Aphorite' },
@@ -125,6 +132,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       'You have observed the dark stalkers and adopted some of their tricks. You can cast darkness once per day as a spell-like ability, using your character level as the caster level. At 7th character level, you also gain the ability to cast deeper darkness once per day as a spell-like ability, using your character level as the caster level.',
     shortDescription: 'Cast darkness 1/day; deeper darkness 1/day at level 7',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'level', minimum: 3 }],
     effects: [
@@ -146,6 +154,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       "When you successfully counterspell or dispel a spell once per day, you may deconstruct it to recover crystalline dust rounds equal to half the spell's level (rounded down). Recovery cannot exceed your maximum crystalline dust rounds.",
     shortDescription: 'Successful counterspell or dispel recovers crystalline dust rounds',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -168,6 +177,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'When reduced below 0 HP by a foe, take an immediate standard action to attack that foe',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Duskwalker' }],
     effects: [],
@@ -182,6 +192,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Automatically arrive unhindered in the Dimension of Dreams without Charisma checks',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 17 },
@@ -201,6 +212,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day attempt an impossible action in the Dimension of Dreams while in physical form',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 15 },
@@ -218,6 +230,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       "You've fought enough specters that doing so has become second nature. You can activate your ghost hunter ability as a swift action to grant your weapons the ghost touch special ability, and you gain one additional daily use of your ghost hunter ability.",
     shortDescription: 'Activate ghost hunter as swift action; gain 1 extra daily use',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 7 },
@@ -235,6 +248,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       'You gain 3 additional rounds per day to use your crystalline dust ability. This feat may be selected up to two additional times (three total), with each selection stacking to grant up to 9 additional rounds per day.',
     shortDescription: 'Gain 3 extra crystalline dust rounds per day (stackable up to 3 times)',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Aphorite' },
@@ -259,6 +273,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       "You sense the minute imperfections in the otherwise ordered structure of your foes' weapons and armor. When performing a sunder combat maneuver, you ignore hardness equal to your Intelligence modifier.",
     shortDescription: 'Ignore hardness equal to your INT modifier when sundering',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -280,6 +295,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ghost hunter ghost touch effect extends to allies within 30 ft; 1 extra daily use',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'race', raceName: 'Duskwalker' },
@@ -297,6 +313,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Swift action: coat weapons with crystalline dust to deal +1d6 damage to chaotic creatures',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'race', raceName: 'Aphorite' },
@@ -328,6 +345,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Extra Planar Mentor use/day, alignment word SLA, and weekly greater planar ally for your mentor',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'improved_planar_mentor' },
@@ -345,6 +363,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       "Your planar mentor's influence grows as you advance. You can activate your Planar Mentor boon one additional time per day. While the boon is active, your weapons and natural weapons overcome damage reduction as though they were weapons of your mentor's alignment (neutral grants cold iron and silver DR bypass). Once daily while benefiting from the boon, cast one alignment-based spell-like ability (CL = character level): chaotic (chaos hammer, magic circle against law, or summon monster IV [chaotic outsiders]); evil (magic circle against good, summon monster IV [evil outsiders], or unholy blight); good (holy smite, magic circle against evil, or summon monster IV [good outsiders]); lawful (magic circle against chaos, order's wrath, or summon monster IV [lawful outsiders]); neutral (bestow curse, prayer, or summon monster IV [unaligned outsiders]). Using this spell-like ability ends the boon.",
     shortDescription: 'Extra Planar Mentor use/day, alignment DR bypass, and daily alignment SLA',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'planar_mentor' },
@@ -362,6 +381,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Stellar Wanderer brings 8 passengers and arrives within 1d% miles of destination',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'stellar_wanderer' },
@@ -379,6 +399,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Three times per day increase speed by up to base speed for 1 turn; lose same next round',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Fey creature type or Fey Obedience (Shyka)' },
@@ -398,6 +419,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       'You have earned recognition from Count Ranalc and received a title in his exiled court. Once per day, you can cast glibness as a spell-like ability. Your caster level equals your Hit Dice.',
     shortDescription: 'Cast glibness once per day as a spell-like ability',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Fey creature type or Fey Obedience (Count Ranalc)' },
@@ -428,6 +450,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day double overland travel speed for up to 9 creatures on a DC 25 Knowledge (geography) check',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_geography', ranks: 5 },
@@ -445,6 +468,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'When reduced below 0 HP, move up to 2x base speed and attempt to hide in cover',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Duskwalker' }],
     effects: [],
@@ -459,6 +483,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Creatures you damaged this round take -2 to CMB and CMD until your next turn',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Fey creature type or Fey Obedience (Ragadahn)' },
@@ -505,6 +530,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain a nosoi (raven or whippoorwill) familiar that upgrades to true nosoi at level 5',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [{ type: 'race', raceName: 'Duskwalker' }],
     effects: [
@@ -540,6 +566,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Bond with an outsider mentor for alignment-based energy resistance and bonus benefits',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -574,6 +601,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Reroll one failed impossible action per day; +2 CHA checks on dream entry condition',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 15 },
@@ -599,6 +627,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       'Your trained vigilance allows you to deploy your crystalline dust defenses with exceptional speed. You can activate your crystalline dust ability as an immediate action when you are targeted by an attack, rather than requiring a standard action.',
     shortDescription: 'Activate crystalline dust as an immediate action when targeted by an attack',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'swift_crystalline_dust' },
@@ -617,6 +646,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Counter a summoning spell to immediately summon your own nonevil creatures at -2 spell levels',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -636,6 +666,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Create crystalline dust spell equations that function as scrolls requiring one free hand',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       { type: 'feat', featId: 'scribe_scroll' },
@@ -655,6 +686,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'On melee hit, activate a prepared spell equation (3rd level or lower) as an immediate action targeting the struck creature',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'scribe_scroll' },
@@ -674,6 +706,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       "You have gained Desna's trust, and she has taught you her realm's secrets. Once per week, you may access the pools of Cynosure for instant planar transportation, functioning as the plane shift spell, allowing travel from Cynosure to any plane.",
     shortDescription: 'Once per week use Cynosure pools to plane shift to any plane',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 15 },
@@ -691,6 +724,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2/+4 Swim bonus; ignore shallow bog movement penalties; deep bogs cost 2 squares',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -715,6 +749,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
       'You can activate your crystalline dust ability as a swift action instead of as a move action, allowing you to use it while still taking a standard action in the same round.',
     shortDescription: 'Activate crystalline dust as a swift action instead of a move action',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Aphorite' },
@@ -732,6 +767,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Three times per day roll 3d20 and take the middle result for an attack, save, or skill check',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Fey creature type or Fey Obedience (Magdh)' },
@@ -753,6 +789,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain a second impossible action attempt per day in the Dimension of Dreams; risk disadvantage on arrival',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 17 },
@@ -772,6 +809,7 @@ export const PLANE_HOPPER_FEATS: FeatDefinition[] = [
     shortDescription:
       "Twice per day redirect lethal damage from an ally within 30 ft to yourself (as paladin's sacrifice)",
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Duskwalker' }],
     effects: [],

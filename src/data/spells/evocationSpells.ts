@@ -25,6 +25,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "This spell creates a crackling, spherical storm cloud that flies at the caster's direction with a 20-foot fly speed and perfect maneuverability. When it enters a creature's space, it deals 3d6 electricity damage (Reflex save negates). The sphere provides 20% concealment and illuminates like a candle. It moves via the caster's move action or remains stationary, and disperses if it exceeds range limits.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Air Geyser',
@@ -48,6 +49,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster creates a powerful blast of air capable of flinging an opponent upward. On a failed save, targets take 2d6 bludgeoning damage and are hurled upward 5 feet per caster level. Collisions with solid objects cause additional damage as if from a fall. Successful saves reduce damage by half with no movement effect.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Archon's Trumpet",
@@ -71,6 +73,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "When cast, this spell produces a booming report, as if from a trumpet archon's mighty horn, causing all creatures in the affected cone to become paralyzed for 1d4 rounds.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Ardor's Onslaught",
@@ -93,6 +96,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell unleashes zealous conviction to damage enemies with metallic energy. Only creatures with neutral alignment components take harm. Purely neutral creatures suffer 1d8 damage per 2 caster levels (max 5d8), while neutral outsiders take 1d6 per caster level (max 10d6) and become nauseated for 1d6 rounds. Creatures with mixed neutral alignments take half damage, reducible to one-quarter on successful saves. Will saves halve damage and negate nausea effects.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arrow of Law',
@@ -116,6 +120,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster fires a shimmering arrow of pure order from their holy symbol at any one target in range as a ranged touch attack. Chaotic creatures take 1d8 damage per two caster levels (max 5d8). Chaotic outsiders take 1d6 per caster level (max 10d6) and become dazed for one round. A successful Will save halves damage and negates the daze effect. Neutral-aligned creatures take half damage with no daze effect. The spell has no effect on lawful creatures.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burning Arc',
@@ -140,6 +145,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "An arc of flame leaps from the caster's fingers, burning a number of nearby enemies. The spell deals 1d6 points of fire damage per caster level (maximum 10d6) to the primary target. Each secondary target struck receives half the damage dice of the previous target, rounded down. All targets may attempt Reflex saves for half damage, with secondary targets having a DC that is 2 lower than the primary target's DC. No target can be hit multiple times.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burning Hands',
@@ -163,6 +169,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "A cone of searing flame shoots from the caster's fingertips. Creatures caught in the effect take 1d4 points of fire damage per caster level (maximum 5d4). Flammable materials ignite if exposed to the flames, and characters may extinguish burning items using a full-round action.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Call Lightning',
@@ -186,6 +193,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'After casting, the spellcaster may call down lightning bolts dealing 3d6 electricity damage per bolt. Each subsequent round allows a standard action to call another bolt. The caster may summon a total number of bolts equal to caster level (maximum 10). When cast outdoors in stormy conditions, each bolt instead deals 3d10 damage. The spell functions indoors or underground but not underwater.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Call Lightning Storm',
@@ -209,6 +217,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell functions as call lightning, except each lightning bolt deals 5d6 points of electricity damage (or 5d10 if created outdoors in a stormy area), and the caster may call a maximum of 15 bolts. Like call lightning, the caster may call bolts immediately or use a standard action each round to call additional bolts.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chain Lightning',
@@ -234,6 +243,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The spell generates an electrical discharge originating from the caster's fingertips that strikes one object or creature initially, then arcs to other targets. Primary damage is 1d6 points of electricity damage per caster level (maximum 20d6). Secondary bolts deal equal damage and can strike up to caster level targets within 30 feet of the primary target. Each target receives a Reflex save for half damage; secondary bolts have DC reduced by 2. No target may be struck multiple times.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chaos Hammer',
@@ -257,6 +267,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell creates a multicolored explosion of leaping, ricocheting energy that harms only lawful and neutral creatures. Chaotic creatures take no damage. Lawful creatures take 1d8 per two caster levels (max 5d8) and are slowed for 1d6 rounds; lawful outsiders take 1d6 per caster level (max 10d6) and are also slowed. Neutral creatures take half damage with no slow effect. A successful Will save reduces damage by half and negates the slow effect.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cone of Cold',
@@ -281,6 +292,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "This evocation spell generates an area of extreme cold, originating at the caster's hand and extending outward in a cone. The spell inflicts 1d6 points of cold damage per caster level (maximum 15d6).",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Darkness',
@@ -315,6 +327,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This evocation reduces illumination by one step within a 20-foot radius of the targeted object—from bright to normal light, normal to dim, or dim to complete darkness. The spell has no effect in already-dark areas. Nonmagical light sources cannot penetrate the darkness; only magical light from higher-level spells increases visibility. When cast on small objects placed under lightproof coverings, the effect becomes blocked. Darkness counters and dispels light spells of equal or lower level.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Daylight',
@@ -349,6 +362,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The spell causes a touched object to produce bright illumination extending 60 feet in radius. An additional 60-foot radius receives increased light intensity. Creatures suffering penalties in bright light experience them within the magical radius. The effect does not function as true daylight for creatures damaged by sunlight. If placed in light-proof containers, effects cease until revealed. When overlapping with magical darkness of equal or lower level, daylight negates that darkness effect.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Delayed Blast Fireball',
@@ -373,6 +387,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell functions similarly to fireball but is significantly more potent, dealing 1d6 points of fire damage per caster level (maximum 20d6). It produces a glowing bead that can detonate immediately or be delayed for up to 5 rounds. The caster sets the delay upon spell completion, which cannot be changed unless someone touches the bead. A creature can pick up and throw the bead as a thrown weapon (10-foot range increment). If handled within 1 round of detonation, there is a 25% chance it detonates while being held.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Detonate',
@@ -398,6 +413,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster floods themselves with elemental energy that detonates one round after casting. Upon detonation, the spellcaster selects one damage type: acid, cold, electricity, or fire. The explosion deals 1d8 points of damage per caster level (maximum 10d8) within 15 feet, and half damage to targets between 15 and 30 feet. The caster takes half damage automatically without a saving throw, though applicable energy resistance or immunity can reduce this damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ear-Piercing Scream',
@@ -429,6 +445,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster unleashes a powerful scream, inaudible to all but a single target. The target becomes dazed for 1 round and sustains 1d6 sonic damage per 2 caster levels (maximum 5d6). A successful Fortitude save negates the daze and reduces damage by half.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Elemental Assessor',
@@ -453,6 +470,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell creates a ray of spiraling colors that strikes a single target. The caster must succeed on a ranged touch attack. Upon impact, the ray inflicts 2d6 damage each from acid, cold, electricity, and fire simultaneously. Whichever damage type proves most effective persists for 1d4 additional rounds, dealing another 4d6 points of that type of damage per round.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Elemental Aura',
@@ -476,6 +494,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "This spell generates an aura dealing 2d6 points of energy damage to adjacent creatures when cast and at the start of the caster's turn. The caster selects one element type, each providing additional effects: acid causes ongoing damage and sickness; cold causes fatigue; electricity causes staggering for one round; fire ignites targets. Creatures may attempt Reflex saves to halve damage and negate additional effects. Only one such aura can be active simultaneously per caster.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Elemental Touch',
@@ -500,6 +519,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "Upon casting, elemental energy infuses the caster's hands. The caster selects one damage type and gains a melee touch attack dealing 1d6 points of that energy type. The spell applies to unarmed strikes, single claw attacks, or single slam attacks. Each element provides unique additional effects: acid inflicts ongoing damage and may sicken; cold may fatigue; electricity may stagger; fire may ignite targets.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Shield',
@@ -525,6 +545,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The spell surrounds the caster with protective flames that deal 1d6 points of damage + 1 point per caster level (maximum +15) to melee attackers. The caster chooses between a chill shield (blue/green flames providing fire resistance 10) or warm shield (violet/red flames providing cold resistance 10). Reach weapon users are excluded from taking damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fireball',
@@ -549,6 +570,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The spell generates a searing explosion of flame that detonates with a low roar and deals 1d6 points of fire damage per caster level (maximum 10d6) to every creature within the area. The caster points and designates the detonation location; a glowing bead travels there and explodes unless it hits an obstruction first. The spell ignites combustibles and can melt metals with low melting points.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flame Strike',
@@ -572,6 +594,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This evocation generates a vertical column of divine fire that inflicts 1d6 points of damage per caster level (maximum 15d6). Damage splits evenly: half derives from fire, while the other half stems from divine energy and cannot be mitigated by fire resistance.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flaming Sphere',
@@ -596,6 +619,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "A burning sphere of fire moves at the caster's direction, traveling 30 feet per round and ascending or jumping up to 30 feet. When it enters a space with a creature, it stops moving for the round and deals 3d6 points of fire damage (Reflex save to negate). The sphere ignites flammable materials and provides torch-like illumination. The caster controls its movement via move actions; otherwise it remains stationary.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Force Punch',
@@ -619,6 +643,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster's hand becomes charged with telekinetic energy. A successful melee touch attack inflicts 1d4 force damage per caster level (maximum 10d4) and pushes the target in a straight line up to 5 feet per two caster levels. Larger creatures experience reduced push distance: 5 feet less for each size category above Medium. A successful Fortitude save negates the movement while retaining full damage.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gust of Wind',
@@ -642,6 +667,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'Creates a 50-mph wind blast affecting all creatures in its path. Flying creatures suffer a -4 penalty to Fly checks. Tiny or smaller flying creatures must make a DC 25 Fly check or be pushed back 2d6x10 feet with 2d6 damage. Ground-based Tiny or smaller creatures are knocked down and rolled 1d4x10 feet, taking 1d4 nonlethal damage per 10 feet. Medium or smaller creatures must succeed at a DC 15 Strength check to advance. All creatures take a -4 penalty on ranged attacks and Perception checks within the effect. The spell extinguishes unprotected flames and can disperse gases.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hellfire Ray',
@@ -666,6 +692,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster unleashes blazing hellfire from their hands. At 11th level, one ray is produced; additional rays appear for every 4 caster levels beyond that (maximum three rays at 19th level). Each ray requires a ranged touch attack and inflicts 1d6 points of damage per caster level (maximum 15d6). Damage splits equally: half fire damage and half unholy power not reduced by fire resistance. All rays fire simultaneously at targets within 30 feet of each other. If a creature dies from this spell, it must make a Will save or its soul is damned to Hell.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Smite',
@@ -689,6 +716,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell channels divine power to strike enemies. Only evil and neutral creatures are harmed; good creatures are unaffected. Evil creatures take 1d8 damage per two caster levels (max 5d8), or 1d6 per caster level (max 10d6) for evil outsiders, plus blinding for one round. A successful Will save halves damage and prevents blindness. Neutral creatures take half damage without blindness and can further reduce it by half with a successful save.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Word',
@@ -712,6 +740,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "This spell affects only non-good creatures with a single Will save applying to all effects. Creatures with HD equal to caster level become deafened for 1d4 rounds. Those with HD up to caster level -1 are also blinded 2d4 rounds. Those with HD up to caster level -5 become paralyzed and helpless for 1d10 minutes. Those with HD up to caster level -10 are killed (undead are destroyed); save negates death, dealing 3d6 damage plus 1 per caster level (max +25) instead. When cast on the caster's home plane, non-good extraplanar creatures are banished for at least 24 hours.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hydraulic Push',
@@ -735,6 +764,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster generates a quick blast of water that knocks over and soaks one creature or square. The spell functions as a bull rush maneuver where the caster's CMB equals caster level plus the highest of Intelligence, Wisdom, or Charisma modifiers. The bull rush provokes no attack of opportunity. Additionally, it extinguishes normal (but not magical) fires in the target area.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hydraulic Torrent',
@@ -758,6 +788,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This evocation conjures a forceful water stream functioning as a bull rush attack against creatures and movable objects along a 60-foot line. The caster makes a combat maneuver check using their caster level plus the highest of Intelligence, Wisdom, or Charisma modifiers. Against immovable obstacles, the caster performs a Strength check to potentially destroy the target. The spell extinguishes normal fires in its path but leaves magical flames unaffected.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ice Storm',
@@ -782,6 +813,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The spell summons destructive hailstones that deal 3d6 points of bludgeoning damage and 2d6 points of cold damage upon casting. Following this initial strike, heavy precipitation persists throughout the spell's duration, imposing a -4 penalty on Perception skill checks and rendering the entire area as difficult terrain. Upon expiration, all precipitation vanishes without lasting environmental consequences.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Light',
@@ -818,6 +850,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The spell makes a touched object glow like a torch, shedding normal light in a 20-foot radius from the point touched, and increasing the light level for an additional 20 feet by one step. It has no effect in normal or bright light. The caster may only maintain one active light spell; casting a new one dispels the previous. The spell can counter or dispel darkness spells of equal or lower level.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lightning Bolt',
@@ -842,6 +875,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster releases a powerful stroke of electrical energy that deals 1d6 points of electricity damage per caster level (maximum 10d6) to each creature within its area. The bolt originates at the caster's fingertips and can ignite flammable materials, damage objects, and melt metals with low melting points. If the bolt breaks through a barrier, it may continue beyond if the spell's range allows.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Missile',
@@ -865,6 +899,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "A magical projectile emanates from the caster's finger and unerringly strikes its target for 1d4+1 points of force damage. The spell bypasses melee combat interference as long as the target lacks total cover or concealment. Additional missiles become available at higher caster levels (two at 3rd, three at 5th, four at 7th, five maximum at 9th+). Multiple missiles can strike one creature or several, but each missile hits only one target.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Order's Wrath",
@@ -888,6 +923,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This evocation spell manifests as a three-dimensional grid of energy targeting chaotic and neutral (non-lawful) creatures. Chaotic creatures take 1d8 damage per two caster levels (max 5d8), or 1d6 per caster level (max 10d6) for chaotic outsiders, and become dazed for one round. A Will save halves damage and negates the daze. Neutral creatures take half damage without daze and can save for an additional 50% reduction.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Produce Flame',
@@ -911,6 +947,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster conjures bright flames in their open hand that provide illumination without causing harm to the caster or equipment. The caster makes touch or ranged touch attacks dealing fire damage equal to 1d6 + 1 point per caster level (maximum +5). The flames can be hurled up to 120 feet using ranged touch attacks with identical damage. Each attack reduces the spell's remaining duration by 1 minute. The spell is ineffective underwater.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'River of Wind',
@@ -934,6 +971,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This evocation creates a forceful wind current extending 120 feet in a chosen direction from the caster. Initial contact inflicts 4d6 nonlethal damage and knocks creatures prone; a successful save halves damage and negates the prone condition. Each turn a creature spends within the wind takes 2d6 nonlethal damage, is pushed 20 feet downwind, and becomes prone (or takes 1d6 damage with a successful save). Creatures with freedom of movement or air subtype are unaffected.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scorching Ray',
@@ -957,6 +995,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster unleashes a searing beam of fire. At 3rd level and beyond, the spellcaster may launch one ray plus an additional ray for every four levels above 3rd (maximum three rays at 11th level). Each ray requires a ranged touch attack to hit and deals 4d6 points of fire damage. All rays must be directed at targets within 30 feet of one another and released simultaneously, though individual rays may strike the same or different targets.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shard of Chaos',
@@ -980,6 +1019,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster hurls a multicolored chaotic energy shard at a target. Lawful creatures take 1d8 damage per two caster levels (max 5d8). Lawful outsiders take 1d6 damage per caster level (max 10d6) and become slowed for one round; a successful save halves damage and negates the slow effect. The spell has no effect on chaotic creatures and deals half damage to neutral-aligned ones, who also avoid the slow effect.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shocking Grasp',
@@ -1003,6 +1043,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster delivers a melee touch attack dealing 1d6 points of electricity damage per caster level (maximum 5d6). When attacking, the caster gains a +3 bonus on attack rolls if the opponent is wearing metal armor, carrying a metal weapon, or is made of metal.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shout',
@@ -1026,6 +1067,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster emits an ear-splitting yell that deafens and damages creatures in its path. Affected creatures become deafened for 2d6 rounds and sustain 5d6 points of sonic damage. A successful Fortitude save eliminates the deafness and halves damage. Brittle or crystalline objects and creatures receive 1d6 sonic damage per caster level (maximum 15d6). The spell cannot penetrate a silence spell.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sound Burst',
@@ -1050,6 +1092,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The spell creates a tremendous cacophony that damages all creatures in its radius. Each affected creature takes 1d8 sonic damage. Those affected must make a Fortitude save or become stunned for one round. Creatures unable to hear avoid the stun effect but still take damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spark',
@@ -1082,6 +1125,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This cantrip allows a caster to ignite an unattended, Fine-sized flammable object. Unlike using flint and steel, it functions in any weather conditions and requires significantly less time to successfully ignite materials.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sunbeam',
@@ -1105,6 +1149,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster generates one radiant beam per three caster levels (maximum six at 18th level) during the spell's duration. Each beam delivers 4d6 points of damage and causes permanent blindness unless a Reflex save succeeds. Creatures harmed by sunlight take double damage. Undead creatures take 1d6 points of damage per caster level (maximum 20d6) and may be destroyed outright. Fungi, mold, oozes, and slimes receive ultraviolet damage equivalent to undead creatures.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sunburst',
@@ -1129,6 +1174,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'A globe of searing radiance explodes from a chosen point, blinding all creatures within and dealing 6d6 damage. A creature to which sunlight is harmful or unnatural takes double damage. A successful Reflex save negates blindness and halves damage. Undead creatures take 1d6 per caster level (max 25d6), with destruction possible on failed saves for light-vulnerable undead. The ultraviolet light generated by the spell deals damage to fungi, mold, oozes, and slimes just as if they were undead creatures. The spell dispels darkness effects below 9th level.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unholy Blight',
@@ -1152,6 +1198,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell summons unholy power manifesting as a cold, cloying miasma of greasy darkness. Only good and neutral creatures suffer harm. Good creatures take 1d8 damage per two caster levels (max 5d8), or 1d6 per level (max 10d6) for good outsiders, plus the sickened condition for 1d4 rounds. A Will save halves damage and negates sickening. Neutral creatures take half damage and are not sickened; they can save for quarter damage. Evil creatures are unaffected.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Fire',
@@ -1176,6 +1223,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'A blazing curtain of violet fire creates a wall dealing 2d4 points of fire damage to creatures within 10 feet and 1d4 points of fire damage to those past 10 feet but within 20 feet. Creatures passing through suffer 2d6 points of fire damage + 1 point of fire damage per caster level (maximum +20). Undead take double damage. Cold damage of 20+ points per 5-foot section extinguishes that portion.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Force',
@@ -1200,6 +1248,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "This spell creates an invisible wall of pure force that cannot move and resists destruction. The wall is immune to dispel magic but can be destroyed by mage's disjunction or disintegrate. It has hardness 30 and hit points equal to 20 per caster level. The barrier blocks breath weapons and spells in both directions. Dimension door, teleport, and similar effects bypass it. Ethereal creatures are blocked but may circumvent it through material barriers. Gaze attacks function through the wall.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Sound',
@@ -1224,6 +1273,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The spell creates a silent, translucent sound barrier that bursts with discordant noise when touched by an object or creature. It functions like a wind wall, deflecting arrows, debris, and Small or smaller flying creatures harmlessly. Triggering the barrier deals 2d4 sonic damage within 10 feet. Passing through or touching the wall inflicts 2d6 sonic damage plus 1 point per caster level (maximum +20). A silence spell temporarily suppresses it, but it returns when silence ends.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_002 ─────────────────────────────────────────────────────────────
@@ -1267,6 +1317,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'An invisible vertical curtain of wind appears. It is 2 feet thick and of considerable strength. It is a roaring blast sufficient to blow away any bird smaller than an eagle, or tear papers and similar materials from unsuspecting hands. (A Reflex save allows a creature to maintain its grasp on an object.) Tiny and Small flying creatures cannot pass through the barrier. Loose materials and cloth garments fly upward when caught in a wind wall. Arrows and bolts are deflected upward and miss, while any other normal ranged weapon passing through the wall has a 30% miss chance. (A giant-thrown boulder, a siege engine projectile, and other massive ranged weapons are not affected.) Gases, most gaseous breath weapons, and creatures in gaseous form cannot pass through the wall (although it is no barrier to incorporeal creatures). While the wall must be vertical, you can shape it in any continuous path along the ground that you like. It is possible to create cylindrical or square wind walls to enclose specific points.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Winds of Vengeance',
@@ -1298,6 +1349,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You surround yourself with a buffeting shroud of supernatural, tornado-force winds. These winds grant you a fly speed of 60 feet with perfect maneuverability. Neither your armor nor your load affects this fly speed. The winds shield you from any other wind effects, and form a shell of breathable air around you, allowing you to fly and breathe underwater or in outer space. Ranged weapons (including giant-thrown boulders, siege weapon projectiles, and other massive ranged weapons) passing through the winds are deflected by the winds and automatically miss you. Gases and most gaseous breath weapons cannot pass through the winds. In addition, when a creature hits you with a melee attack, you can shape your winds so they lash out at that creature as an immediate action. The creature must make a Fortitude saving throw or take 5d8 points of bludgeoning damage and be knocked prone (if on the ground). On a failed save, Huge flying creatures are checked and Large-sized or smaller flying creatures are blown away instead of knocked prone. On a successful save, the damage is halved and the creature is not knocked prone (or checked or blown away).',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Word of Chaos',
@@ -1325,6 +1377,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "Any nonchaotic creature within the area of a word of chaos spell suffers the following ill effects, depending on their Hit Dice. HD equal to caster level: Deafened (Will negates). HD up to one less than caster level: Stunned, deafened (Will negates). HD up to five less than caster level: Confused, stunned, deafened (Will reduces confusion to 1 round). HD up to ten less than caster level: Killed, confused, stunned, deafened (Will reduces death to 3d6 + 1 per caster level damage, maximum +25). The effects are cumulative and concurrent. A successful saving throw negates or reduces the effect. Deafness lasts for 1d4 rounds. Stun lasts for 1 round. Confusion lasts for 1d10 minutes. These effects do not stack with themselves. On the caster's home plane, nonchaotic extraplanar creatures within the area are instantly banished back to their home planes for at least 24 hours (Will save at –4 penalty negates). Creatures whose HD exceed the caster's level are unaffected by word of chaos.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wrathful Mantle',
@@ -1353,6 +1406,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'A shimmering mantle of light shrouds the subject, casting light like a torch. The subject gains a +1 resistance bonus on all saving throws per four caster levels (maximum +5 at 20th level). As a swift action, the subject may end the effect early to cause the light to burst outward, dealing 2d8 points of force damage to all creatures within 5 feet.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_A_1 ─────────────────────────────────────────────────────────────
@@ -1370,6 +1424,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster inflicts bolts of vicious energy on a creature summoned through planar ally or similar magic. The target must succeed at a Fortitude save or suffer penalties on all saves and checks against the caster (maximum -10 penalty) for one hour. Additionally, creatures demanding payment reduce their fees by up to 60%. Affected beings grow resentful and may twist orders toward malicious purposes or seek revenge. The spell provides no benefit against creatures immune to nonlethal damage.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_A_2 ─────────────────────────────────────────────────────────────
@@ -1388,6 +1443,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This sonic evocation affects chaotic evil, chaotic good, lawful evil, and lawful good creatures based on their Hit Dice relative to caster level. Effects scale from sickened (at caster level) to killed (at caster level -10), with intermediate effects including staggered and nauseated conditions. Creatures receive a Will save to reduce or negate effects. When cast on the caster\'s home plane, all affected extraplanar creatures are banished for at least 24 hours.',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arcane Concordance',
@@ -1403,6 +1459,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'A blue and gold radiance surrounds the caster, enhancing arcane spells within the effect area. Allied spellcasters gain a +1 bonus to saving throw DCs for their arcane spells. Additionally, their arcane spells can be cast with one metamagic feat applied—Enlarge Spell, Extend Spell, Silent Spell, or Still Spell—without increasing spell level or casting time.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Augmenting Wall',
@@ -1419,6 +1476,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster creates a shimmering elemental energy wall. Upon casting, one energy type (acid, cold, electricity, or fire) is selected. The wall augments ranged weapons and ammunition passing through it, adding 1d6 points of energy damage of the specified type in addition to their normal damage. The spell does not affect melee weapons or non-thrown items. The caster may restrict the wall to affect only ranged weapons moving in a chosen direction, which reduces the spell\'s duration by half.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_B_1 ─────────────────────────────────────────────────────────────
@@ -1437,6 +1495,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster creates lightning globes that move at 20 feet per round with perfect maneuverability. Additional globes appear at higher caster levels (3 at 11th, 4 at 15th, 5 at 19th). When a globe enters a creature\'s space, it stops and deals 3d6 points of electricity damage, with a Reflex save for negation. Creatures in metal armor suffer a -4 penalty on saves. The caster uses move actions to direct all spheres.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Battering Blast',
@@ -1452,6 +1511,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster hurls a spike-covered force sphere at a target via ranged touch attack, dealing 1d6 points of force damage per two caster levels (maximum 5d6). Each successful hit triggers a bull rush attempt using the caster's highest mental ability modifier as the force's Strength bonus. Struck creatures must make Reflex saves or fall prone if the bull rush succeeds. Unattended objects weighing up to 25 pounds per caster level are pushed 20 feet away.",
     source: 'Pathfinder Campaign Setting: Dungeons of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Beacon of Guilt',
@@ -1467,6 +1527,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell places an invisible ward on an object. When a creature first tries to move the object, the next creature to touch it becomes cursed. The target must make a Will save or become surrounded by an aura of twinkling red light that functions as faerie fire. The curse cannot be dispelled but can be removed via break enchantment, limited wish, miracle, remove curse, or wish.',
     source: 'Pathfinder Roleplaying Game: Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bestow Planar Infusion I',
@@ -1481,6 +1542,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell draws upon the latent planar energy of the caster's surroundings, allowing temporary infusion of a creature with the plane's power. The recipient gains that plane's basic infusion for the duration. Has no effect on the Material Plane and ends if the target leaves the plane. Once infused, creatures attune to that plane for 24 hours.",
     source: 'Pathfinder Campaign Setting: Planes of Power',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Betraying Sting',
@@ -1495,6 +1557,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster unleashes divine power against those who wrongly trusted them in the form of a yellow-and-black bolt of energy. It affects only creatures with indifferent, friendly, or helpful attitudes toward the caster. Damage dealt is 1d8 points per 2 caster levels.',
     source: 'Pathfinder Campaign Setting: Inner Sea Temples',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bit of Luck',
@@ -1509,6 +1572,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster obtains a luck reservoir containing 1 point per 2 caster levels. When making attack rolls or skill checks, the caster may expend 1 point to gain a +1d8 luck bonus to the d20 roll. The bonus can be applied before or after results are revealed. At 8th level, 4 points provide a +2d8 bonus; at 16th level, 8 points provide a +3d8 bonus. The spell terminates when all points are consumed.',
     source: 'Pathfinder Player Companion: Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Biting Words',
@@ -1524,6 +1588,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell allows a caster to channel magic through their voice to damage opponents. As a standard action, the caster can make a ranged touch attack against a target within 30 feet, dealing 1d6 + Strength or Charisma modifier (whichever is higher) in bludgeoning, piercing, and slashing damage. Each attack reduces the spell\'s duration by 1 minute. Shouting instead of speaking removes the language-dependent descriptor but reduces damage to 1d4 + half modifier.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blacklight',
@@ -1540,6 +1605,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes or no (object)',
     description: "The caster generates an area of total darkness that resists even darkvision perception, though the caster maintains normal vision within it. External viewers cannot penetrate the obscured zone. The spell may target a fixed location or attach to a mobile object/creature, moving accordingly. The spell counters or dispels light magic of equal or lower intensity.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blade Barrier',
@@ -1556,6 +1622,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'An immobile vertical curtain of force-based whirling blades materializes. Creatures passing through take 1d6 points of damage per caster level (maximum 15d6) with a Reflex save for half damage. If created where creatures exist, they can save to avoid it entirely. The barrier grants +4 bonus to AC and +2 bonus on Reflex saves to those behind it.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blasphemy',
@@ -1572,6 +1639,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell inflicts graduated effects based on target HD compared to caster level. Equal to caster level: dazed for 1 round. Up to CL-1: weakened (2d6 Strength for 2d4 rounds) and dazed. Up to CL-5: paralyzed for 1d10 minutes, weakened, and dazed. Up to CL-10: killed (or 3d6+CL damage on save), paralyzed, weakened, and dazed. On the caster\'s home plane, nonevil extraplanar creatures are instantly banished.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blast of Wind',
@@ -1588,6 +1656,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This evocation spell creates an intense 90 mph wind effect. It functions similarly to gust of wind, with a key enhancement: affected creatures are treated as one size category smaller for determining the spell\'s effects. For every 4 caster levels beyond 7th, creatures suffer an additional size category reduction, with a maximum of three categories smaller at 15th caster level.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blazing Rainbow',
@@ -1604,6 +1673,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates multicolored solid light in one of two configurations. Bow option: generates a magical bow (long or short) with automatic proficiency that produces +1 seeking brilliant energy arrows; targets struck are surrounded by faerie fire and dazzled for 1 minute; fires arrows equal to caster level. Bridge option: forms a passageway 5 ft. wide and up to 10 ft. long per caster level; allies gain Wisdom bonus to checks, saves, and CMD against forced movement.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blinding Ray',
@@ -1620,6 +1690,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster fires blinding rays of sunlight. One ray initially, plus one additional ray for every four levels beyond 3rd (maximum three at 11th level). Each ray requires a ranged touch attack. On a hit, the target must save or be blinded for 1 round. Creatures with light blindness, light sensitivity, or vulnerability to bright light who fail must save or be blinded for 1d4 rounds and take 1d4 damage per two caster levels (maximum 5d4).',
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blistering Invective',
@@ -1636,6 +1707,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Special (negates fire damage only)',
     description: 'The caster unleashes an insulting tirade so vicious that enemies who hear it are physically scorched. The spell functions by making an Intimidate check to demoralize each enemy within 30 feet. Demoralized enemies take 1d10 fire damage and must succeed at a Reflex save or catch fire.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_B_2 ─────────────────────────────────────────────────────────────
@@ -1653,6 +1725,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster's unarmed strikes manifest as bolts of fire or glowing red crows which fly to strike a target. The caster can make unarmed strike or flurry of blows attacks as though the target were within threatened range. Each successful hit deals unarmed strike damage with half fire damage and half negative energy damage (which does not heal undead).",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Song',
@@ -1667,6 +1740,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell functions similarly to imbue with spell ability, but permits transfer only of bard spells from conjuration (healing), enchantment, and transmutation schools. The imbued spells persist for one day. The caster must shed blood during casting — if unable to take bleed damage, casting is impossible. Each spell transferred costs the caster 5 hit points permanently until the spell ends or discharges.',
     source: 'Pathfinder Player Companion: Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bolt of Glory',
@@ -1683,6 +1757,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell fires a ray of positive energy that deals variable damage based on the target\'s nature. Neutral outsiders and Material/Elemental Plane natives: 1d6 damage per 2 caster levels (max 7d6). Evil outsiders, undead, and Negative Energy Plane natives: 1d6 damage per caster level (max 15d6). All other creatures: no damage.',
     source: 'Pathfinder Chronicles Campaign Setting',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Borrow Fortune',
@@ -1697,6 +1772,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell allows you to immediately reroll a d20 die before success or failure is known, keeping the more favorable result. However, for the next two rounds following casting, you must roll two dice each time a d20 roll is called for, keeping the less favorable result.',
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brightest Light',
@@ -1712,6 +1788,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions like daylight but with extended duration. As a swift action once during the spell\'s duration, the caster can attempt to dispel a magical darkness effect within 60 feet by making a dispel check (1d20 + caster level) against DC 11 + the darkness effect\'s caster level. Success ends the darkness; failure dims the spell\'s light to torch brightness for the remaining duration.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brilliant Inspiration',
@@ -1727,6 +1804,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The caster establishes a mental connection with the target, offering advice and encouragement. When the target makes attack rolls, ability checks, or skill checks, they roll two d20s and take the better result. The spell\'s effect terminates if any roll is a natural 20, as the brilliant advice is spent.',
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burn Corruption',
@@ -1743,6 +1821,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell creates violet flames that damage creatures and foliage in the targeted area. Most creatures take 1d8 fire damage per 2 caster levels (maximum 7d8). Outsiders with chaotic and evil subtypes, or those tainted by demons, instead take 1d6 fire damage per caster level (maximum 15d6). This fire damage bypasses the fire resistance granted by the demon subtype but cannot penetrate other forms of fire resistance or immunity.",
     source: 'Pathfinder Roleplaying Game: Wrath of the Righteous Adventure Path',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burning Entanglement',
@@ -1758,6 +1837,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell mirrors the entangle spell but ignites the vegetation. Creatures beginning their turn entangled suffer 4d6 fire damage (Reflex for half). Those in the area but not entangled take 2d6 fire damage (Reflex negates). Smoke creates concealment: creatures see clearly within 5 feet, but attacks beyond that suffer 20% miss chance. Upon duration expiration, vines burn away completely.',
     source: 'Pathfinder Player Companion: Elemental Master\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burning Gaze',
@@ -1773,6 +1853,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell enables your eyes to burn like hot coals, allowing you to set objects or foes alight with a glance. As a standard action, you may target a single creature or object within 30 feet. Targeted creatures must succeed at a Fortitude save or take 1d6 fire damage. Unattended objects don't get a save. Creatures damaged must make a Reflex save or catch fire. The spell does not grant an actual gaze attack.",
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst Bonds',
@@ -1787,6 +1868,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "This spell unleashes divine force against restraints, dealing 1d6 points of damage per caster level to the target object (maximum 5d6), ignoring hardness of 10 or less. Against creatures grappling the caster, if the target fails its save, an immediate grapple break attempt is allowed as a free action with +1 luck bonus to CMB per caster level (maximum +5). Can be cast without concentration checks while grappled or pinned.",
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst of Force',
@@ -1803,6 +1885,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster releases telekinetic force in an expanding wave, dealing 1d6 points of force damage per caster level (maximum 15d6) to all other creatures in the area. Those who succeed on a Fortitude save take half damage. Creatures failing the save must also make a Reflex save or be knocked prone.",
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst of Radiance',
@@ -1819,6 +1902,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This evocation creates a brilliant flash of shimmering light. Non-evil creatures become either blinded for 1d4 rounds or dazzled for 1d4 rounds if they succeed on a Reflex save. Evil creatures take 1d4 damage per caster level (maximum 5d4) regardless of save success.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst With Light',
@@ -1834,6 +1918,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The target creature becomes infused with magical radiance, suffering 2d6 damage (2d8 if undead). The creature emits bright light in a 30-foot radius. A successful Will save halves damage and negates the light effect. The effect persists an additional round per 4 caster levels (maximum 5 rounds at 20th level). Adjacent creatures failing saves take half damage and become blinded for one round.',
     source: 'Pathfinder Roleplaying Game: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_C_1 ─────────────────────────────────────────────────────────────
@@ -1851,6 +1936,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'Upon consuming this extract, the alchemist modifies their bombs so that when a bomb hits a direct target, it generates an invisible cubical prison composed of a solid wall of force matching the bomb\'s splash area. The cage has hardness 20 and hit points equal to 20 per alchemist level. Only one cage may exist at a time.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Call the Void',
@@ -1865,6 +1951,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster becomes surrounded by an aura of nothingness. Creatures adjacent when cast and at turn start take 2d6 damage and become fatigued, unable to breathe, and unable to speak or cast spells with verbal components. A Reflex save halves damage and negates fatigue, but breathing and speaking restrictions apply regardless.',
     source: 'Dragon Empires Primer',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Campfire Wall',
@@ -1881,6 +1968,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates a visible barrier of light and fire around a campfire-sized heat source. The barrier grants total concealment between sides, deals 1d6 fire damage to those passing through from outside, and outlines them with torch-like light for 1d6 minutes. Spell ends if the fire source is extinguished or moved.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chain of Perdition',
@@ -1897,6 +1985,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'A magical force chain materializes with hooks at each end. It executes combat maneuvers (dirty trick, drag, reposition, trip) using the caster\'s level and relevant ability modifier. It cannot be damaged by physical attacks but is vulnerable to dispel magic, disintegrate, sphere of annihilation, or rod of cancellation.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chains of Fire',
@@ -1912,6 +2001,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell mirrors chain lightning mechanics but substitutes fire damage for electrical damage, allowing the caster to affect multiple targets within specified distance constraints.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Channel the Gift',
@@ -1926,6 +2016,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless) or no',
     description: 'The caster channels magical power to fuel a target\'s spellcasting. The next spell cast by the target (3rd level or lower) uses the caster\'s spell slot instead. When targeting oneself, the caster may spontaneously cast any prepared spell of 3rd level or lower without expending its slot.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chord of Shards',
@@ -1941,6 +2032,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'A bard performing bardic performance can strike a chord that transforms into razor-sharp crystalline shards, dealing 2d6 points of piercing damage to all creatures in the cone area.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cleanse',
@@ -1955,6 +2047,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'The spell infuses the caster with positive energy, healing 4d8 points of damage + 1 point per caster level (maximum +25) and removing ability damage, blinded, confused, dazzled, deafened, diseased, exhausted, fatigued, nauseated, poisoned, and sickened conditions. Also functions as break enchantment on one effect.',
     source: 'Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cleansing Fire',
@@ -1971,6 +2064,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell creates a fiery ring that deals 2d6 fire damage to creatures passing through (4d6 to undead). It automatically attempts to dispel evil-descriptor spell effects within its area each round and counterspells any evil spells cast within the ring.',
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Clenched Fist',
@@ -1986,6 +2080,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'An enhanced version of interposing hand, this spell creates a magical hand capable of attacking, pushing, or striking an opponent. The hand attacks once per round dealing 1d8+11 damage, may stun targets via Fortitude save, and can also perform bull rush maneuvers.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cold Ice Strike',
@@ -2002,6 +2097,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster creates a shredding flurry of ice slivers blasting from the hand in a line, dealing 1d6 points of cold damage per caster level (maximum 15d6).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Consecrate',
@@ -2018,6 +2114,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell sanctifies an area with positive energy, granting a +3 sacred bonus to the DC to resist positive channeled energy. Undead suffer -1 penalty on attack rolls, damage rolls, and saves, and cannot be created or summoned there. Counters and dispels desecrate.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contact Entity I',
@@ -2032,6 +2129,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The spell sends a magical message to eldritch entities of a particular kind within range. Contacted creatures know the spell\'s origin location but must reach it independently.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contact Entity II',
@@ -2046,6 +2144,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The spell sends a magical message to eldritch entities of a particular kind within range. Contacted creatures know the spell\'s origin location but must reach it independently.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contact Entity III',
@@ -2060,6 +2159,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The spell sends a magical message to eldritch entities of a particular kind within range. Contacted creatures know the spell\'s origin location but must reach it independently.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contact Entity IV',
@@ -2074,6 +2174,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The spell sends a magical message to eldritch entities of a particular kind within 500 miles. Contacted creatures know the spell\'s origin location but must reach it independently.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contagious Flame',
@@ -2089,6 +2190,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster launches multiple fire beams. The spell begins with three rays at 11th level, gaining one additional ray every four levels (maximum five). Each ray deals 4d6 fire damage and requires a ranged touch attack. On subsequent rounds, new rays originate from previously damaged creatures.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_C_2 ─────────────────────────────────────────────────────────────
@@ -2105,6 +2207,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'This spell allows the caster to place another spell upon themselves that activates under specified conditions. The companion spell must affect the caster\'s person and be no higher than one-third the caster\'s level (maximum 6th level). Only one contingency may be active at a time.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contingent Action',
@@ -2119,6 +2222,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants the target an additional action (standard, move, or swift) that activates when a caster-defined condition is met. The target designates a readied action to execute when triggered. The spell discharges after triggering.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contingent Scroll',
@@ -2133,6 +2237,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell transfers a scroll\'s magical power to the caster, allowing it to trigger under specified conditions similar to contingency. The scroll is destroyed in the process. The scroll\'s spell level cannot exceed one-fourth the caster\'s caster level (maximum 5th).',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Continual Flame',
@@ -2148,6 +2253,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'A torch-bright magical, heatless flame manifests on a touched object without generating heat or consuming oxygen. The flame cannot be extinguished through smothering. Counters and dispels darkness effects of equal or lower spell levels.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Controlled Fireball',
@@ -2164,6 +2270,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell functions like fireball but allows the caster to choose squares equal to their Intelligence or Charisma bonus that take minimum damage instead of full damage. Skill checks to identify this spell incorrectly identify it as standard fireball.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cosmic Ray',
@@ -2178,6 +2285,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster launches a ray of cosmic energy. On a successful ranged touch attack, the target sustains 1d6 points of damage per caster level (maximum 20d6). A failed Fortitude save causes the target to become sickened and emit toxic cosmic radiation, sickening creatures within 5 feet.',
     source: 'People of the Stars',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Creeping Ice',
@@ -2193,6 +2301,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell creates a slowly expanding sheet of ice on horizontal surfaces. Ice thickness equals 1 inch per caster level. Each round the ice expands 1 foot in all directions. Creatures can break through with a Strength check (DC 15 + caster level).',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Crown of Glory',
@@ -2208,6 +2317,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster gains a +4 enhancement bonus to Charisma. Creatures with fewer than 8 HD must make a Will save to attempt hostile actions; those failing become enthralled for the duration. The caster gains telepathic communication and can issue three mass suggestions to lower HD creatures.',
     source: 'Pathfinder Chronicles Campaign Setting',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Crushing Hand',
@@ -2223,6 +2333,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This 9th-level spell combines capabilities of interposing hand, grasping hand, and forceful hand. It creates a magical hand that can attack (dealing 2d6+12 damage while grappling), defend, or perform bull rush maneuvers.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Night',
@@ -2239,6 +2350,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'By touching the ground, the caster curses an area to remain in perpetual darkness similar to an endless night curse. The focus gemstones merge into the cursed area.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_D_1 ─────────────────────────────────────────────────────────────
@@ -2257,6 +2369,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Each creature in the area takes 1d8 points of damage per spell level determined by the highest-level evil spell affecting that creature or in its magical repertoire. Applies to prepared spells, spontaneous spellcaster knowledge, spell-like abilities, and willing beneficiaries of evil spells. Creatures suffering harmful effects from evil spells involuntarily are unaffected.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dancing Darkness',
@@ -2273,6 +2386,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster generates darkness manifestations that reduce illumination by one step within a 20-foot radius per sphere. These spheres must remain within 10 feet of each other but move independently at up to 100 feet per round without requiring concentration. The effect dissipates if the distance from the caster exceeds the spell\'s range. This spell may be made permanent through permanency.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dancing Lights',
@@ -2289,6 +2403,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster generates up to four light sources resembling lanterns, torches, or glowing spheres, or a faintly glowing humanoid shape. The lights remain within 10 feet of each other and move at the caster\'s direction without requiring concentration, up to 100 feet per round. Lights extinguish if they exceed spell range. Only one active casting permitted; casting anew dispels previous versions.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dark-Light',
@@ -2305,6 +2420,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster produces a powerful light that affects all sighted creatures that do not possess light sensitivity. Creatures making successful saves become dazzled for 1 round per caster level, while those failing saves are blinded for the same duration.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Daybreak Arrow',
@@ -2320,6 +2436,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless, object)',
     description: 'Enchants projectiles with radiant energy. Creatures sensitive to bright light suffer related penalties for one round after being struck. Undead and light-vulnerable creatures take an extra 1d6 damage from affected ammunition. Enchanted projectiles emit light equivalent to a sunrod for one round post-firing.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deadly Finale',
@@ -2335,6 +2452,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Requires an active bardic performance. Immediately ends the performance, dealing 2d8 points of sonic damage to each target. Each affected creature also takes 3d6 points of bleed damage lasting 1d6 rounds. A successful Fortitude save negates the bleed damage but not the sonic damage.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Deadman's Contingency",
@@ -2349,6 +2467,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'Functions similarly to contingency but activates only after the caster\'s death, triggering 1d6 rounds following death. All spell parameters must be determined during casting. Permitted companion spells include: animate dead, disintegrate, fireball, gentle repose, magic mouth, major image, permanent image, sending, stinking cloud, and teleport object.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deafening Song Bolt',
@@ -2364,6 +2483,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Produces three tangible bolts of arcane energy through song. Each bolt requires a ranged touch attack and inflicts 3d10 points of sonic damage. Targets become deafened for 1d6 rounds upon being struck. All three bolts fire simultaneously.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Decapitate',
@@ -2378,6 +2498,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Cast as an immediate response to a confirmed critical hit dealing slashing damage. If the target fails its save and has a head, the triggering attack gains an additional 4d6 damage and increases its critical multiplier by 1. If this reduces the target to 0 hp or below, the creature is instantly decapitated and dies unless it can survive decapitation. Even with a successful save, the critical hit deals an extra 4d6 damage.',
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deeper Darkness',
@@ -2393,6 +2514,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Functions like the darkness spell but reduces light levels by two steps. Bright light becomes dim light, normal light becomes darkness, and existing dim or dark areas become supernaturally dark. Even creatures with darkvision cannot see within the spell\'s confines. Does not stack with itself; can counter or dispel any light spell of equal or lower level.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Defending Sword',
@@ -2409,6 +2531,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'Creates a force sword functioning similarly to mage\'s sword, but dealing 3d6 points of force damage. Initially hovers near the caster, granting a +4 shield bonus to AC while inactive. Upon a foe within close range dealing damage or forcing a failed save, the sword activates and attacks that target, ending the AC benefit. The sword cannot switch targets.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Defensive Shock',
@@ -2424,6 +2547,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster becomes surrounded by electrical energy that damages creatures making physical contact. Any creature striking with its body or a handheld weapon takes 1d6 points of electricity damage per two caster levels (maximum 6d6). Damage dice are halved (rounded down) after each discharge, until reaching zero dice and ending the spell.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Desecrate',
@@ -2440,6 +2564,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Imbues an area with negative energy, granting undead creatures +1 profane bonuses to attack rolls, damage rolls, and saving throws. Undead created or summoned within gain +1 hp per HD. Doubles these bonuses if cast near an altar dedicated to the caster\'s deity, and allows animate dead to create double the normal undead. Counters and dispels consecrate.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_D_2 ─────────────────────────────────────────────────────────────
@@ -2458,6 +2583,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'A cone of sparkling, diamond-hard slivers deals 1d6 points of slashing damage per caster level (maximum 10d6). The magical slivers count as both adamantine and cold iron for overcoming damage reduction. Reduces object hardness by 1 point per 2 caster levels (capped at 10 points).',
     source: 'Pathfinder 24: The Final Wish',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dictum',
@@ -2474,6 +2600,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Targets non-lawful creatures within radius. Effects scale by target HD compared to caster level: equal to CL — deafened 1d4 rounds; up to CL-1 — staggered 2d4 rounds and deafened; up to CL-5 — paralyzed 1d10 minutes, staggered, and deafened; up to CL-10 — killed, then paralyzed, staggered, and deafened. On caster\'s home plane, non-lawful extraplanar creatures are instantly banished for at least 24 hours (Will save at -4 penalty negates).',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Discordant Blast',
@@ -2490,6 +2617,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Generates a wave of thunder and force. All creatures in the affected area sustain 3d6 sonic damage and experience a bull rush effect (CMB = caster level + Charisma modifier) that does not trigger attacks of opportunity. Cannot penetrate silence effects or comparable magical silence.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Discovery Torch',
@@ -2505,6 +2633,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a 20-foot radius of bright light resembling flame (no heat or oxygen consumption). Allies within the illuminated area gain a +2 enhancement bonus to Perception, Sense Motive checks, and Knowledge checks to identify creatures within the same area. For inquisitors maintaining an active judgment, the light radius doubles to 40 feet.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Distracting Cacophony',
@@ -2521,6 +2650,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Fills an area with loud and discordant noise, making concentration difficult. Casting spells within the area requires a concentration check (DC 15 + spell level). All other concentration checks in the area have their DC increased by 5. Perception checks involving hearing receive a +5 DC increase.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Distressing Tone',
@@ -2536,6 +2666,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Produces a powerful tone that vibrates living flesh. Affected targets must make a saving throw or suffer the sickened condition. Creatures possessing immunity to critical hits are also immune to this spell\'s effects.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divine Favor',
@@ -2550,6 +2681,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: "Invokes divine power to gain a luck bonus on attack and weapon damage rolls equal to +1 for every three caster levels (minimum +1, maximum +3). The bonus doesn't apply to spell damage.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divine Power',
@@ -2564,6 +2696,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'Grants a +1 luck bonus per three caster levels (maximum +6) on attack rolls, weapon damage rolls, Strength checks, and Strength-based skill checks. Grants temporary hit points equal to caster level and an extra attack at full base attack bonus during full-attack actions (does not stack with haste or speed weapons).',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divine Trident',
@@ -2580,6 +2713,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Creates an immaterial electrical trident that functions as a melee touch weapon dealing 1d8 points of electricity damage + 1 point per 2 caster levels (maximum +10). Since the weapon lacks physical form, the caster's Strength modifier doesn't contribute to damage. The electricity can ignite flammable materials.",
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dousing Rain',
@@ -2596,6 +2730,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Summons rainfall within the affected area. Nonmagical fires are automatically extinguished, and all creatures and objects in the area gain fire resistance 5. The water conducts electricity, causing creatures to take an extra electricity damage point when struck. At caster levels 6, 12, and 18, the fire resistance and additional electricity damage each increase.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Draconic Reservoir',
@@ -2611,6 +2746,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Functions similarly to protection from energy, absorbing 6 points per caster level of one energy type (maximum 60 points). Each round as a swift action, the subject can release 1d6 absorbed points into a melee attack as energy damage. Releasing energy doesn\'t create additional absorption capacity. Does not stack with protection from energy but overlaps with resist energy (draconic reservoir absorbs first).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Dragon's Breath",
@@ -2627,6 +2763,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster breathes out a blast of energy dealing 1d6 points of energy damage per caster level (maximum 12d6). Energy type and area depends on dragon scale used: black/green/copper = acid; blue/bronze = electricity; gold/red/brass = fire; silver/white = cold. Black, blue, bronze, brass, and copper dragons create 60-foot lines; others create 30-foot cones.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dread Bolt',
@@ -2643,6 +2780,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Hurls a crackling missile of darkness at a single target (ranged touch attack). Good creatures take 1d8 points per two caster levels (maximum 5d8); good outsiders take 1d6 per caster level (maximum 10d6) and become sickened for 1 round. A successful Will save reduces damage by half and prevents the sickened condition. Neutral creatures take half damage. Evil creatures are unaffected.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_E_1 ─────────────────────────────────────────────────────────────
@@ -2661,6 +2799,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'When you cast earthquake, an intense but highly localized tremor rips the ground. Effects depend on terrain: caves cause roof collapse (8d6 damage, Reflex DC 20 half); cliffs create landslides; open ground causes falls and fissures 40 feet deep (Reflex DC 20 avoids); structures take 100 points of damage; bodies of water drain temporarily. Creatures pinned beneath rubble take 1d6 nonlethal damage per minute. Spellcasters on the ground must succeed at Concentration checks (DC 20 + spell level) to cast spells.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ectoplasmic Eruption',
@@ -2676,6 +2815,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'You cause an eruption of ectoplasm that deals 6d6 bludgeoning damage to all creatures in the area and entangles them for a number of rounds equal to your caster level. The spell affects ethereal and incorporeal creatures normally and can force incorporeal creatures partially onto the Material Plane with a failed Will save.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ectoplasmic Hand',
@@ -2691,6 +2831,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'You manifest a ghostly, animated hand through the ectoplasmic veil to manipulate objects, attack creatures, and deliver touch spells at a distance. The hand has hardness 10, hit points equal to 10 + your caster level, AC 24, and attacks using your base attack bonus with damage modified by your spellcasting ability modifier. It can deliver touch spells of 6th level or lower, manipulate unattended objects (up to 5 lbs. per caster level), and perform combat maneuvers such as bull rush, disarm, drag, steal, or trip.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ectoplasmic Snare',
@@ -2705,6 +2846,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'You generate a ghostly tendril to grapple or entangle a target via ranged touch attack. A successful Reflex save leaves the target merely entangled. Failure results in grappling and 1d6+4 bludgeoning damage. You maintain the grapple through concentration, with the snare\'s CMB equal to 6 + your caster level and CMD equal to 16 + your caster level. The ectoplasmic tether has hardness 10 and hit points equal to your caster level + Constitution modifier + 10.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Emergency Force Sphere',
@@ -2721,6 +2863,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This protective spell creates a hemispherical force dome with hardness 20 and hit points equal to 10 per caster level. The dome functions similarly to wall of force but offers overhead coverage. When standing on flat ground, the dome\'s base forms an approximately watertight seal. Debris from collapsing structures tends to slide down the curved surface. A successful DC 20 Craft (stonemasonry), Knowledge (engineering), or Profession (architect/engineer) check allows debris to remain in a dome configuration after the spell ends.',
     source: 'Pathfinder Chronicles: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_E_2 ─────────────────────────────────────────────────────────────
@@ -2739,6 +2882,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'You solidify ethereal substance into invisible transdimensional blades. Movement through affected areas is at half speed, even for incorporeal beings. Entering a 5-foot cube containing these shards inflicts 1d8 points of piercing and slashing damage and requires a Reflex save or 1 point of bleed damage. Bleed damage stacks. Stationary creatures take no damage unless moving in combat. Forcibly moved creatures suffer a -4 penalty on saves; creatures able to perceive invisible or ethereal objects gain a +4 bonus. The effect functions as a magical trap with a Perception DC of 25 + spell level.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Explode Head',
@@ -2754,6 +2898,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This evocation causes mounting pressure within a target\'s cranium. Creatures with 20 hit points or fewer die instantly, with their head exploding and scattering debris; nearby creatures must succeed at a Reflex save or take 2d6 slashing damage. Targets exceeding 20 HP take 1d6 damage per caster level (max 20d6), with a Fortitude save for half. If the damage would render the target disabled or dying, they die with explosive results.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Extreme Buoyancy',
@@ -2768,6 +2913,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The target's buoyancy becomes and stays swiftly rising, regardless of how dense the target and its gear are. The target must succeed at a DC 20 Swim check to submerge itself or remain submerged.",
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_F_1 ─────────────────────────────────────────────────────────────
@@ -2786,6 +2932,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'A pale glow surrounds and outlines the subjects. Outlined subjects shed light as candles. Outlined creatures do not benefit from the concealment normally provided by darkness (though a 2nd-level or higher magical darkness effect functions normally), blur, displacement, invisibility, or similar effects. The light is too dim to have any special effect on undead or dark-dependent creatures. Outlined creatures take a -20 penalty on Stealth checks. The color of the glow is your choice at the time of casting: blue, green, or violet.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fiery Runes',
@@ -2801,6 +2948,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This enchantment imbues a weapon with a magical fire rune. When the wielder successfully hits an opponent in melee combat, they can use a swift action to trigger the rune, dealing fire damage. The spell scales with caster level: 1d4+1 at 3rd, reaching 5d4+5 at 11th level (increasing by 1d4+1 every 2 levels beyond 3rd). If the target has spell resistance, a caster level check occurs upon discharge; if successful, the rune activates normally; if resisted, the spell ends.',
     source: 'Pathfinder Player Companion: Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Final Sacrifice',
@@ -2815,6 +2963,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This evocation spell disrupts conjuring energies within a summoned creature, causing violent detonation. On a failed Fortitude save, the target dies immediately. All creatures within 20 feet take 1d4 damage per spell level of the original summoning spell. Damage type is fire unless the creature has cold or water subtypes, then it becomes cold damage. Those caught in the explosion can attempt Reflex saves for half damage. The spell can target a summoner\'s eidolon, though eidolons receive a +4 Fortitude bonus unless the caster is the eidolon\'s own summoner.',
     source: 'Pathfinder Player Companion: Monster Summoner\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Breath',
@@ -2831,6 +2980,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You can unleash up to three successive cones of flame during the spell\'s duration, each activated as a standard action. The first cone inflicts 4d6 fire damage, the second deals 2d6 damage, and the third deals 1d6 damage. All affected creatures within the cone area may attempt a Reflex save for half damage. The spell concludes after the third flame cone is discharged.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire of Entanglement',
@@ -2845,6 +2995,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell wraps a creature in flames that restrict movement when you use your smite evil ability against the target, causing it to become entangled for the spell\'s duration. If the target begins its turn adjacent to you, it cannot move at all, treating you as an immobile object. A successful Reflex save reduces the effect to only 1 round instead of the full duration.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire of Judgment',
@@ -2859,6 +3010,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This evocation engulfs the next target of your smite evil ability in positive energy flames. The affected creature suffers 1d6 damage at the start of each turn, plus an additional 1d6 whenever it attacks anyone besides you. Against outsiders with evil alignment, evil-aligned dragons, or undead, damage increases to 1d10 per instance. A successful Will save reduces the effect to just one round. The damage bypasses damage reduction and originates from divine sources.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire of Vengeance',
@@ -2874,6 +3026,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'When cast, this spell prepares your next smite evil attack. Upon striking the target, holy flames flare up when the target attacks someone other than you. If the target makes any attack not directed at you during the smite evil duration, it suffers 3d8 fire damage. The spell ends once triggered or when the smite evil effect expires.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Snake',
@@ -2890,6 +3043,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a line of flames shaped as desired, affecting up to one 5-foot square per caster level. Creatures in the path take 1d6 points of fire damage per caster level (maximum 15d6).',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Sneeze',
@@ -2905,6 +3059,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'Upon casting, you experience repeated sneezing as a standard action each round. Each time you sneeze, you produce a 10-foot-long cone of fire and wind. Creatures in the cone sustain 2d6 fire damage with a successful Reflex save reducing this by half. Those failing the initial save must succeed at a Fortitude check or become prone from the wind blast.',
     source: 'Pathfinder Player Companion: Goblins of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Storm',
@@ -2921,6 +3076,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'When cast, this spell fills an area with sheets of roaring flame. Natural vegetation and plant creatures can be excluded from harm. All other creatures in the affected region suffer 1d6 fire damage per caster level (maximum 20d6). Those failing their save catch fire and take 4d6 damage each round until extinguished via a full-round action requiring a DC 20 Reflex save.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fire's Friend",
@@ -2936,6 +3092,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You become surrounded by protective flames that harm others but leave you and your possessions unharmed, providing illumination equivalent to a torch. When an enemy attacks with a melee weapon lacking reach or grapples with you, they sustain 1d6 points of fire damage and must succeed at a Reflex save or catch fire. Additionally, whenever you end movement in the same space as a flammable object or creature, that target must succeed at a Reflex save or ignite.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Firestream',
@@ -2952,6 +3109,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'A torrent of flame extends from your hand, inflicting 2d6 fire damage to all creatures in its path. The spell ignites flammable materials and harms objects. It can melt metals with lower melting points including lead, gold, copper, silver, and bronze. The effect stops at barriers unless damage breaks through them. While concentrating, you may select a new area each round.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flame Blade',
@@ -2968,6 +3126,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You manifest an immaterial blade of flame wielded like a scimitar. It functions as a melee touch attack dealing 1d8 fire damage plus 1 point per two caster levels (maximum +10). The spell\'s damage does not benefit from Strength modifiers since the blade lacks physical substance. The effect can ignite flammable materials.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flare',
@@ -2984,6 +3143,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This cantrip generates a bright burst of light. When directed at a creature, it causes the target to become dazzled for 1 minute unless it makes a successful Fortitude save. The spell has no effect on sightless creatures or those already dazzled.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flare Burst',
@@ -3000,6 +3160,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions similarly to flare, but with expanded scope. Rather than affecting a single creature, it affects all creatures in a 10-foot-radius burst from the target point.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_F_2 ─────────────────────────────────────────────────────────────
@@ -3018,6 +3179,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'This evocation spell causes flames to ignite in the targeted area, dealing 1d6 points of fire damage for every 3 caster levels you have (maximum 5d6) to creatures entering or beginning their turn within the burning squares. Affected creatures also catch fire unless they succeed at a Reflex save. The burning area and adjacent squares become smoky, providing concealment. You may concentrate as a standard action to ignite adjacent 5-foot squares. Heavy precipitation extinguishes the spell, while strong winds spread the flames downwind but windstorm-force or stronger winds eliminate them entirely.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flickering Lights',
@@ -3034,6 +3196,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell causes illumination to fluctuate between absolute darkness and blinding brightness. At the start of each creature\'s turn, a percentile die determines the light level: 1-10 supernatural darkness, 11-25 darkness, 26-50 dim light, 51-90 normal light, 91-100 bright light. Supernatural darkness blocks even darkvision. Bright light affects creatures with light blindness or sensitivity.',
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Floating Disk',
@@ -3050,6 +3213,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You create a slightly concave, circular plane of force capable of carrying loads. The disk floats approximately 3 feet above ground, remains level, and moves at your normal speed within range. It maintains a 5-foot interval from you and can carry 100 pounds of weight per caster level or up to 2 gallons of liquid. The disk disappears if you move beyond spell range or attempt to position it more than 3 feet from the surface beneath it.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flurry of Snowballs',
@@ -3066,6 +3230,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You propel icy spheres toward enemies in a cone pattern. All creatures caught within the burst take 4d6 points of cold damage from the impact of the frozen projectiles.',
     source: 'Pathfinder Player Companion: People of the North',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Force Hook Charge',
@@ -3081,6 +3246,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a magical hook made of force that strikes a target while pulling you toward it. You make a ranged touch attack; success deals force damage equal to 1 point per caster level. Regardless of whether the attack connects, the hook draws you in a straight line to an adjacent square near the target, provoking opportunity attacks normally. The hook prevents falling during this movement, allowing traversal over pits and elevation changes.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Force Sword',
@@ -3097,6 +3263,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You manifest a magical longsword composed of pure force. Initially functioning as a +1 weapon, it scales to +2 at 8th caster level and +3 at 13th level. The weapon can be wielded by you or given to another creature. Unlike physical weapons, force swords resist conventional damage but remain vulnerable to specific spells like dispel magic and disintegrate. When targeting creatures with spell resistance, you must succeed on a caster level check against their resistance; failure dispels the spell.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forcecage',
@@ -3113,6 +3280,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell manifests an immobile, invisible cubic containment of either force bars or solid force walls at your discretion. Creatures too large to fit inside cannot be affected. The structure blocks teleportation and ethereal travel. It has hardness 30 and hit points equal to 20 per caster level. A sphere of annihilation or rod of cancellation destroys it instantly. The barred cage has half-inch force bands allowing small creatures to escape; occupants gain cover against weapons. The windowless cell has solid force walls with no egress.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forceful Hand',
@@ -3129,6 +3297,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as interposing hand, but grants the magical hand the ability to perform bull rush attacks against a selected opponent. The hand receives one bull rush attempt per round without provoking attacks of opportunity. Its Combat Maneuver Bonus uses your caster level instead of base attack bonus, plus +8 for Strength (27) and +1 for being Large. The hand can pursue targets without movement restrictions and may be redirected to a new target as a move action.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forceful Strike',
@@ -3144,6 +3313,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell combines melee weapon damage with an additional blast of concussive force. When cast during a melee attack, unarmed strike, or natural weapon attack, it deals normal weapon damage plus extra force damage equal to 1d4 points per caster level (maximum of 10d4). The spell also grants a free combat maneuver check using your caster level as a bonus to attempt a bull rush against the struck target. A successful Fortitude saving throw reduces the force damage by half and negates the bull rush effect.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Freezing Sphere',
@@ -3160,6 +3330,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You launch a frigid globe of cold energy dealing 1d6 cold damage per caster level (max 15d6) to creatures in the burst. Water-type creatures take 1d8 per level (max 15d8) and become staggered for 1d4 rounds. When striking water, it freezes the liquid to a depth of 6 inches in a 40-foot radius for 1 round/level, potentially trapping swimming creatures (DC 25 Strength or Escape Artist check to break free). You may hold the charge for up to 1 round/level before it detonates centered on you.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Frigid Touch',
@@ -3175,6 +3346,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'Your hand glows with a pale blue radiance. A melee touch attack delivers 4d6 points of cold damage, with the target becoming staggered for 1 round. If the attack scores a critical hit, the staggered condition extends to 1 minute instead.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Frost Fall',
@@ -3191,6 +3363,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This chilling spell covers an area with frost, inflicting 2d6 points of cold damage to all creatures within it. Those initially damaged must succeed at a Fortitude save or become staggered for one round. The affected region persists throughout the spell\'s duration, dealing 1d6 points of cold damage to any creature starting its turn there (with a Fortitude save for half damage), though staggering does not occur on subsequent rounds.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Furious Fire Barrage',
@@ -3207,6 +3380,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You create one or two fireballs held in your free hands. Each can be thrown up to 300 feet, dealing 1d6 points of fire damage per caster level (maximum 10d6) in a 10-foot radius. You can channel anger as a full-round action to generate additional flame balls during the spell\'s duration, throwing them as standard actions. Creating new balls requires the ability to feel anger and does not work under calm emotions.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_G_1 ─────────────────────────────────────────────────────────────
@@ -3224,6 +3398,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell creates a light wind directed at the target from a chosen direction. It provides a +2 circumstance bonus on saves against very hot conditions, severe heat, and saves against clouds, vapors, and gases (such as cloudkill, stinking cloud, and inhaled poisons). The spell requires air to be present for casting.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghost Whip',
@@ -3239,6 +3414,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'Creates an ethereal whip that functions as a ghost touch weapon. The wielder gains proficiency regardless of normal restrictions. Attacks ignore cover through objects, pass through creatures, and treat total cover as 50% concealment. Against incorporeal and undead creatures, the whip inflicts lethal damage and enables drag and reposition maneuvers beyond those available with a standard whip.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_G_2 ─────────────────────────────────────────────────────────────
@@ -3257,6 +3433,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as interposing hand, except that the hand can also grapple one opponent. The hand makes one grapple attempt per round without provoking attacks of opportunity. Its CMB and CMD use the caster\'s caster level as its base attack bonus, with a +10 bonus for its Strength score of 31 and a +1 bonus for being Large. The hand restrains but does not harm grappled creatures. The caster may redirect it to a new target as a move action, use it for bull rush, or have it interpose itself like interposing hand.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gusting Sphere',
@@ -3273,6 +3450,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'A swirling wind sphere moves 30 feet per round in directions you designate. When it encounters a Medium or smaller creature, it performs a bull rush combat maneuver using your caster level as its base attack bonus. The target takes 1d6 nonlethal bludgeoning damage regardless of whether the bull rush succeeds. The sphere creates severe wind conditions (-4 penalty on ranged attacks) and can ascend or jump up to 30 feet. It rolls over obstacles under 4 feet tall and requires a move action from the caster to maintain movement.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_H_1 ─────────────────────────────────────────────────────────────
@@ -3291,6 +3469,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'see text',
     description: 'This consecration spell creates a holy site with four primary effects: it establishes a magic circle against evil ward; it increases the DC to resist positive energy channeling by +4 (sacred bonus) while reducing the DC to resist negative energy by 4; dead bodies within cannot be transformed into undead creatures; and a single spell effect can be anchored to the site for one year, applying to all creatures or those matching specified alignment/faith criteria. Allowable effects include spells like aid, bless, daylight, detect magic, and zone of truth. Only one hallow spell can affect an area at a time, and it counters (but does not dispel) unhallow.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heatstroke',
@@ -3307,6 +3486,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "A shimmering red beam extends from the caster's finger. The caster must make a successful ranged touch attack to strike the intended target. The ray deals 1d4 points of nonlethal damage, causing the target to suffer from heatstroke as its body temperature dramatically increases. The spell functions similarly to ray of exhaustion. Characters wearing heavy clothing or armor of any sort take a -4 penalty on their saves.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Helping Hand',
@@ -3322,6 +3502,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The caster creates a ghostly hand to locate and guide a creature within 5 miles. The hand searches for a subject matching a physical description provided at casting (race, gender, appearance). Search time varies by distance, ranging from 1 round for targets 100 feet away to 4 hours for those at the 5-mile maximum. Once located, the hand beckons the creature and points toward the caster if the subject agrees to follow, moving at up to 240 feet per round. The subject faces no compulsion to follow. The ghostly hand has no physical form, cannot engage in combat, and cannot pass through solid objects.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heroic Fortune',
@@ -3336,6 +3517,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The spell grants the touched creature 1 hero point that must be expended before the duration ends or it is lost. This bonus point is spent before any existing hero points the target possesses.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Sword',
@@ -3351,6 +3533,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The caster channels holy power into a melee weapon, which functions as a +5 holy weapon with enhanced bonuses and damage. It emits a magic circle against evil effect that automatically renews if dispelled. The spell ends if the weapon leaves the caster\'s hand for 1 round. Only one such weapon may exist at a time per caster. When cast on existing magical weapons, this spell\'s effects supersede the weapon\'s normal properties.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Whisper',
@@ -3367,6 +3550,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster whispers a word in the primordial language of good that harms evil creatures and empowers good ones. Evil creatures in the burst must succeed on a Fortitude save or become sickened for 1 round per caster level. Evil outsiders with the evil subtype, evil-aligned dragons, and undead also take 2d8 points of damage upon failed saves. Good-aligned creatures in the burst gain a +2 sacred bonus to attack and damage rolls for 1 round.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_H_2 ─────────────────────────────────────────────────────────────
@@ -3385,6 +3569,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The caster produces horn sounds audible up to 2 miles away under normal outdoor conditions. The spell generates three distinct notes, each as loud as a dragon\'s roar. The caster can produce these sounds at any point during the round as free actions, with each note being adjustable in length. This flexibility allows users to send simple coded messages via the horn\'s varying tones.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hungry Darkness',
@@ -3401,6 +3586,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'Creates an area of intense blackness similar to deeper darkness, but filled with unseen fangs and ravenous maws. Creatures beginning their turn within the darkness suffer 3d6 force damage and 2 Constitution damage each round. Upon leaving the area, creatures continue taking 1d6 bleed damage per round until receiving magical healing or entering bright light. Spell resistance prevents damage from the effect but not from the darkness itself.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hurricane Blast',
@@ -3417,6 +3603,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The caster generates a severe blast of air (approximately 50 mph) affecting all creatures in the burst radius. Tiny or smaller creatures on the ground are knocked down and rolled 1d4x10 feet, taking 1d4 nonlethal damage per 10 feet. Small creatures are knocked prone or blown back if flying. Medium creatures cannot advance against the wind. All creatures suffer -4 penalty on ranged attacks and Listen checks. Unprotected flames extinguish; protected flames have 50% chance of extinguishing.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_IJK ─────────────────────────────────────────────────────────────
@@ -3442,6 +3629,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You generate a blast of intense cold, coating all solid surfaces in the area with a thin layer of ice. Creatures in the area take 1d6 points of cold damage + 1 per caster level (maximum +10) and fall prone unless they succeed at a Reflex save for half damage and to avoid falling. Moving through the icy area requires a DC 10 Acrobatics check at half speed or the creature falls prone. Individual 5-foot ice squares have hardness 0 and 3 hit points each. The ice persists for 1 minute per caster level in normal conditions, longer in cold climates, and indefinitely in arctic regions.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Icy Prison',
@@ -3464,6 +3652,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You encase a target in solid ice 1 inch thick per caster level. If the target fails its save, it is rendered helpless but can still breathe normally; the ice blocks line of effect. A successful Reflex save reduces the effect to the entangled condition. Regardless of the save, the target takes 1 point of cold damage per caster level each round it remains helpless or entangled. The ice has hardness 0 and 3 hit points per inch of thickness. A helpless or entangled creature can attempt a Strength check (DC 15 + caster level) as a full-round action to break free. A mass version (Icy Prison, Mass) at 9th level affects one creature per level.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Imbue Army Special Ability',
@@ -3486,6 +3675,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You grant an army one of your special abilities. All units in the affected army gain the chosen ability in addition to their existing special abilities, functioning as if all units possess it. This spell is used in mass combat rules.',
     source: 'Pathfinder Player Companion: Quests & Campaigns',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Imbue Hex',
@@ -3508,6 +3698,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "You transfer a single hex you know to a touched creature, granting that recipient the ability to use it. The hex functions based on your caster level rather than the recipient's. The recipient must have a minimum Intelligence and Wisdom of 9 and be capable of speaking and moving freely. Once the recipient uses the hex, the spell ends, though the hex's effects persist. Only standard hexes qualify; major or grand hexes cannot be transferred. You lose access to the transferred hex until the spell ends.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Imbue with Elemental Might',
@@ -3529,6 +3720,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "You transfer your elemental assault ability to the touched creature. The recipient must have Intelligence 5 or higher to use the ability. The transferred ability functions identically to your version. Once cast, you cannot use your elemental assault until the spell's duration ends.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Imbue with Spell Ability',
@@ -3550,6 +3742,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You transfer some of your prepared spells to another creature. The recipient must have at least Intelligence 5 and Wisdom 9. Only abjuration, divination, and conjuration (healing) spells may be transferred. The number of spells depends on recipient Hit Dice: 2 or fewer HD receives one 1st-level spell; 3-4 HD receives one or two 1st-level spells; 5+ HD receives one or two 1st-level spells and one 2nd-level spell. You cannot prepare replacements for transferred spells until the imbued spells are used or the spell is dismissed.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Implosion',
@@ -3571,6 +3764,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "You cause a destructive resonance within a creature's body. Each round you maintain concentration, you can target one corporeal creature, dealing damage equal to 10 times your caster level if it fails a Fortitude save. You cannot target the same creature twice during a single casting. The spell has no effect on gaseous or incorporeal creatures.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Incorporeal Chains',
@@ -3593,6 +3787,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You summon ghostly chains that bind incorporeal creatures. You make a single CMB check using your caster level plus your Intelligence modifier, applying the result against all targets. Targets successfully grappled take 1d8 + spellcasting ability modifier damage and gain the grappled condition. The chains gain a +5 bonus on subsequent grapple checks. Each round the grapple is maintained, targets take additional 1d8 + ability modifier damage. The spell ends if you move out of range of the grappled creatures.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Interposing Hand',
@@ -3617,6 +3812,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You create a Large magic hand between you and one opponent, providing +4 cover AC against that target. The hand maintains its position regardless of where you move or how the opponent tries to get around it, and is immune to deception via darkness, invisibility, or disguise. The hand has hit points equal to your current HP and AC 20 (-1 size, +11 natural). Creatures under 2,000 pounds moving past the hand are slowed to half speed. You can redirect the hand to a new target as a move action.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Invisibility Purge',
@@ -3639,6 +3835,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You emanate an aura that negates all forms of invisibility. Anything invisible becomes visible while in the area. The spell functions against most supernatural invisibility, though certain creatures like invisible stalkers are immune.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Jolting Portent',
@@ -3661,6 +3858,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'A glowing red aura of vengeance surrounds the target. Once per round when the target makes an attack or casts a spell, it must succeed at a Fortitude save or take 4d6 + your relevant ability modifier in electricity damage. As an immediate action, you may dismiss the spell when the target confirms a critical hit to negate the critical (the attack still deals normal damage) and daze the creature for 1 round.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Judgment Light',
@@ -3684,6 +3882,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell functions only when you have at least one active judgment. Upon casting, it produces effects corresponding to each of your active judgments: Destruction (4d8 fire damage, shaken 1d4 rounds, Will half and negates condition); Healing (restores 1d8 + Wisdom modifier HP to allies); Justice (reveals hidden and invisible creatures, -20 Stealth penalty for 1 round/level); Piercing (reduces enemy SR by 5 for 1 round/level); Protection (+2 sacred bonus to AC and CMD for 1 round/level); Purity (grants allies an additional save against one effect with +2 sacred bonus); Resiliency (DR 3/magic for 1 round/level); Resistance (energy resistance 5 for 1 round/level); Smiting (weapons count as magic, aligned, and adamantine for 1 round/level).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ki Shout',
@@ -3706,6 +3905,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You unleash a blast of sonic energy at an opponent, dealing 1d6 points of sonic damage per caster level (maximum 20d6) and stunning the target for 1 round. A successful Fortitude save reduces damage by half and negates the stun.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_L_1 ─────────────────────────────────────────────────────────────
@@ -3742,6 +3942,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "This evocation causes the affected creature to experience increased buoyancy that results in swift sinking, independent of the target's actual density or equipment weight. The subject gains the ability to traverse underwater floors but must succeed at a DC 20 Swim check to ascend toward the surface or remain above the seafloor. The spell serves dual purposes—enabling underwater exploration and creating hazards for air-breathing adversaries in aquatic environments.",
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Leashed Shackles',
@@ -3758,6 +3959,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The spell creates magical restraints of force that bind to the target's limbs and anchor to a designated object or location within 30 feet. The caster must select the anchor point (ground, wall, or sturdy structure) at casting. The target becomes entangled and cannot move beyond 30 feet from the anchor. While the shackles themselves cannot be directly attacked, they can be dispelled. If the anchor point is destroyed, the target regains mobility but remains entangled.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Light Lance',
@@ -3775,6 +3977,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster manifests a glorious beam of brilliant radiance that acts as a +1 holy lance suitable for the caster's size. The spell requires a free hand at casting, and the lance cannot be transferred or abandoned without ending the spell prematurely. The caster may use a standard action to hold the lance aloft as a light source, creating bright illumination within a 90-foot radius. When held skyward for multiple rounds, the lance projects a visible beam skyward, becoming observable at progressively greater distances in darkness: 2 additional miles the second round, 4 miles the third round, continuing to expand by 2-mile increments per additional round.",
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Light Prison',
@@ -3797,6 +4000,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster projects luminous rays that form a containment barrier around each target. Affected creatures that fail their save find themselves enclosed in the light prison. While confined, creatures retain normal functionality for attacks, spellcasting, and actions. However, attempting to breach the barrier inflicts 1d6 points of damage and blinds the creature for 1 round. These effects bypass additional saving throws. The confinement terminates once a creature successfully exits the light cage.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lightning Arc',
@@ -3819,6 +4023,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster generates an electrical arc connecting two targets. It deals 1d6 points of electricity damage per caster level (maximum 15d6) to both targets and creatures in the connecting line. The spell requires line of effect between targets. The lightning ignites combustibles and damages objects in its path, with particular effectiveness against metals with low melting points (lead, gold, copper, silver, bronze).",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_L_2 ─────────────────────────────────────────────────────────────
@@ -3837,6 +4042,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "This extract modifies your magical reserves to alter all bombs created during the duration. Only one bomb admixture can be active simultaneously; drinking another replaces the previous effect. When you throw a bomb hitting a direct target, lashes of electrical energy are released from the bomb, coalescing on the direct target and up to three creatures that take damage from the bomb's splash. Affected creatures must succeed at a Reflex save or take 1d6 electrical damage each time they move more than 5 feet as a move action throughout the effect's duration.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Order',
@@ -3853,6 +4059,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "This spell amplifies a creature's vulnerability to lawful attackers. When cast on a chaotic target, it makes the creature more susceptible to the attacks of lawful creatures, doubling damage from lawful sources. Targets with both chaotic alignment and subtype also become sickened for 1 round when hit by lawful attackers. The spell only affects chaotic creatures; nonchaotic targets are unaffected. While active, the target cannot be affected by other spells containing 'litany' in their titles.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Righteousness',
@@ -3869,6 +4076,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "This spell makes evil targets vulnerable to good-aligned attackers. If the target is evil, it receives double damage from good-aligned creatures. Those with the evil subtype additionally become dazzled for 1d4 rounds when struck by good-aligned attacks. The spell produces no effect against non-evil creatures. While affected, the target cannot be targeted by other spells containing 'litany' in their titles.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Thunder',
@@ -3885,6 +4093,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster invokes a thunderous boom upon an enemy. The target experiences two primary effects: deafness that persists until the condition is removed, plus confusion lasting one round. Additionally, while affected by this spell, the creature cannot be targeted by other spells containing the word 'litany' in their titles.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_M_1 ─────────────────────────────────────────────────────────────
@@ -3901,6 +4110,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You mingle the power of your mind and body to exert force beyond your reach. You can perform combat maneuvers via telekinesis or deliver a telekinetic unarmed strike using your own damage values, substituting your primary spellcasting ability modifier for Strength when calculating damage.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Meteor Swarm',
@@ -3917,6 +4127,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You call down four 2-foot-diameter spheres of fire. Direct hits deal 2d6 bludgeoning damage and impose a -4 penalty on fire damage saves. Each sphere explodes in a 40-foot radius dealing 6d6 fire damage. Creatures in the area of multiple explosions must make separate saves but fire resistance applies only once to the total.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Miracle',
@@ -3931,6 +4142,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You channel divine energy to produce a miraculous effect. Miracle can duplicate any cleric spell of 8th level or lower, any other spell of 7th level or lower, undo harmful effects like feeblemind or insanity, or produce effects of comparable power. Powerful requests may require 25,000 gp in powdered diamond. Requests misaligned with your deity\'s nature are refused.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_M_2 ─────────────────────────────────────────────────────────────
@@ -3948,6 +4160,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a fist-sized, heated metal sphere and hurl it as a splash weapon. Direct contact inflicts 2d6 fire damage. Creatures within 5 feet of impact take 1d6 fire damage (Reflex half). Affected creatures sustain an additional 1d6 fire damage per round for 1d3 rounds unless cooled by water or taking 5 or more cold damage.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Morning Sun',
@@ -3964,6 +4177,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a miniature fist-sized sphere of sunlight at a chosen location within range. The sphere emits bright light in a 60-foot burst. Creatures that are damaged or destroyed by sunlight must succeed at a Fortitude save or become staggered for 1d4+1 rounds after departing the illuminated zone. The immobile sphere inflicts 10d6 fire damage to anything touching it or passing within 5 feet (Reflex half).',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Motes of Dusk And Dawn',
@@ -3980,6 +4194,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You generate up to four motes that you control independently. Each mote produces either light or darkness affecting a 20-foot radius, increasing or decreasing the illumination level by up to two categories. The motes must remain within 10 feet of each other but move at up to 100 feet per round. They function without concentration and dissipate if they exceed spell range.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mydriatic Spontaneity',
@@ -3995,6 +4210,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "The spell causes alternating flashes of light and shadow within the target's eyes, forcing rapid dilation and contraction of the pupils. Effects include nausea for the duration. Each round, pupils randomly become dilated or contracted, causing blindness or the dazzled condition depending on light exposure. Creatures gain advantage on Stealth checks against the affected target.",
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mydriatic Spontaneity, Mass',
@@ -4010,6 +4226,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions identically to mydriatic spontaneity but affects multiple targets, none of which may be more than 30 feet apart.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_N_2 ─────────────────────────────────────────────────────────────
@@ -4045,6 +4262,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The target can maintain neutral buoyancy in water without effort, neither sinking nor rising. The creature can swim vertically with equal ease and maintain position while performing complex tasks or while incapacitated.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Night of Blades',
@@ -4073,6 +4291,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You create an immobile wall of tiny, whirling black blades in an area you designate. Any creature passing through or entering a space occupied by the wall takes 1d4 points of damage per caster level (maximum 10d4). A successful Reflex save halves this damage. The wall cannot be created in a space occupied by a Small or larger creature.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Numerological Evocation',
@@ -4094,6 +4313,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'Drawing on the Path of Numbers, you roll 1d6 per 2 caster levels and allocate each die exactly once among: damage type (determined by a 1–8 table mapping to energy types and force), number of primary targets, range (10 ft. × sum of allocated dice), and remaining dice summed for base damage. Primary targets make Reflex saves for half damage; secondary targets take 50% of primary damage (rounded up) and negate it on a successful save.',
     source: 'Pathfinder Player Companion: People of the Stars',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_P_1 ─────────────────────────────────────────────────────────────
@@ -4111,6 +4331,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You rack the targeted creature with agony, inflicting 1d6 points of nonlethal damage per round. The target becomes sickened and you gain a +4 circumstance bonus on Intimidate checks against it.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pale Flame',
@@ -4127,6 +4348,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions similarly to produce flame but creates subdued flames that emit only dim light, visible up to 100 feet away. Damage is 2d6 fire damage plus 1 per caster level (maximum +5), or 2d6 plus 2 per caster level (maximum +10) against plants. The flames cast light only half the distance of a torch and cannot start fires brighter than dim light.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Path of the Winds',
@@ -4143,6 +4365,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You summon powerful winds equivalent to a windstorm across a designated path. During round one, debris Small-sized or smaller gets blown outward (50% chance either direction). You move unimpeded while others face wind effects. From round two onward, the effect\'s edges function as a wind wall. Over water, it creates a channel up to 40 feet deep. As a move action each turn, you can rotate the effect up to 45 degrees at one end or move it up to 50 feet along its current orientation.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_P_2 ─────────────────────────────────────────────────────────────
@@ -4160,6 +4383,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You produce an ear-splitting shriek that only the target perceives while observers see silent screaming. The target experiences wracking pain from the scream, becoming staggered. The spell fails against deaf creatures and cannot penetrate silence effects.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pilfering Hand',
@@ -4175,6 +4399,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'You create an invisible telekinetic force for manipulating objects. Two usage options exist: an Abrupt Maneuver allowing instantaneous disarm or steal combat maneuvers using caster level as Combat Maneuver Bonus plus relevant ability modifier, or a Careful Maneuver permitting Disable Device or Sleight of Hand checks requiring full concentration until completion.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pinecone Bomb',
@@ -4190,6 +4415,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You infuse a pinecone with magical power, then throw it to a target or point within range where it detonates on impact. The explosion deals 1d6 points of piercing damage per 2 caster levels (maximum 5d6) to all creatures in the affected radius.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Poison Breath',
@@ -4206,6 +4432,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You expel a cone-shaped burst of toxic mist from your mouth, subjecting everyone caught in the area to a deadly poison, as per the poison spell.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Polar Ray',
@@ -4222,6 +4449,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'A freezing blue-white ray emerges from your hand, requiring a ranged touch attack. It deals 1d6 points of cold damage per caster level (maximum 25d6) plus 1d4 points of Dexterity drain.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prismatic Spray',
@@ -4237,6 +4465,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell creates a cone of seven colored light beams. Creatures with 8 HD or fewer are automatically blinded for 2d4 rounds. Each creature is randomly struck by one or more beams with distinct magical effects determined by rolling 1d8: red (fire damage), orange (acid damage), yellow (electricity damage), green (poison), blue (flesh to stone), indigo (insanity), violet (planar banishment), or double strikes rolling again.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Profane Nimbus',
@@ -4252,6 +4481,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You become surrounded by a shadowy aura resembling your deity\'s unholy symbol. When good creatures strike with unarmed attacks, natural weapons, or handheld melee weapons, they take 1d6 points of damage + 1 point per caster level (maximum +15) in retaliation. Reach weapons bypass this effect. You gain resistance to good-descriptor magical attacks, taking half damage, and can negate damage entirely from such attacks with successful Reflex saves.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protective Penumbra',
@@ -4267,6 +4497,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell keeps the target slightly in shadow. Creatures with light blindness, light sensitivity, or vulnerability to sunlight (vampires, wraiths) ignore related penalties. The target gains a +2 bonus on saving throws against nonmagical bright light hazards like glare or sunburn.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pyrotechnic Eruption',
@@ -4282,6 +4513,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'Jets of flame erupt from the ground and surround the target. Damage begins at 1d6 per caster level (maximum 15d6), with the target attempting a Reflex save for half. Each subsequent round, damage is reduced by half the number of dice until the spell expires. The flames persist around the target even if it teleports. Anyone touching the target takes damage matching the last save amount.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_R_1 ─────────────────────────────────────────────────────────────
@@ -4300,6 +4532,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'A freezing beam of air and ice emerges from your finger. You must succeed on a ranged touch attack to affect the target. The spell inflicts 1d3 points of cold damage upon a successful hit.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rebuke',
@@ -4316,6 +4549,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "Your wrathful words inflict physical damage to enemies within range. Standard enemies take 1d8 points of damage per two caster levels (maximum 5d8) and become staggered for one round. Half the damage is sonic; the other half derives from divine power and resists sonic reduction. Against foes who worship your deity, the spell proves more devastating, dealing 1d6 points of damage per caster level (maximum 10d6) and stunning them for 1d4 rounds. A successful Fortitude save halves damage and negates the staggering or stunning effect. The spell functions regardless of whether enemies hear it but is negated by magical silence.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Recharge',
@@ -4330,6 +4564,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'The spell restores up to 1 charge per caster level to a battery, or half that amount to rechargeable technological items. A 20% chance exists that the battery is destroyed during the attempt. If charges exceed the item\'s capacity, the object must make a Fortitude save or suffer 1d6 electricity damage per excess charge. You must declare the number of charges being restored before casting.',
     source: 'Pathfinder Campaign Setting: Technology Guide (2014)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reflexive Barrier',
@@ -4345,6 +4580,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no (harmless)',
     description: "You create a deflective force barrier to protect a single target. The recipient gains a deflection bonus to its AC equal to half your caster level, lasting until the start of your next turn. This spell functions as a reaction to incoming attacks, but must be cast before the attack's outcome is determined.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rend Body I',
@@ -4359,6 +4595,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "You use telekinetic force to lacerate and rend a target creature's body. The spell inflicts 1d6 points of damage per caster level (maximum 10d6). If damage exceeds half the target's maximum hit points, one randomly determined limb is violently severed and thrown 15 feet away in a random direction. The victim suffers 1 point of bleed damage per 2 caster levels. This bleeding stops via DC 15 Heal check or healing magic, though limb restoration requires powerful healing such as heal or regeneration. If damage reduces the creature below 0 hit points, all limbs are affected. Creatures lacking discernible anatomy or limbs are immune.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resilient Sphere',
@@ -4374,6 +4611,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'A shimmering force globe surrounds a creature (if small enough to fit). The sphere contains its subject throughout the spell\'s duration and functions like a wall of force, though it may be dispelled. Subjects inside maintain normal respiration. The sphere cannot be moved physically by external forces or by occupants struggling within.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resounding Blow',
@@ -4389,6 +4627,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "This spell requires you to wield a melee weapon. Upon a successful melee attack, your weapon generates a thunderous clash, dealing 1d6 sonic damage without harming the weapon itself. When using judgment or smite ability, a successful hit staggers the target for one round (negated by Fortitude save). On a critical hit, the target becomes stunned for one round and deafened for 1d6 rounds (both effects negated by Fortitude save); if judgment or smite is active, only one save is made against all effects. The spell ends immediately if the weapon is released. It stacks with the thundering weapon property.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_R_2 ─────────────────────────────────────────────────────────────
@@ -4406,6 +4645,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'A touched object produces shimmering light (as per light) that causes shadows to shift constantly in a 20-foot radius. The effect removes racial Stealth bonuses and suppresses visual camouflage bonuses within the area. Additionally, creatures gain a +2 bonus on saving throws against pattern subschool illusions and effects while in the illuminated zone.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ricochet Shot',
@@ -4420,6 +4660,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless, object)',
     description: "The spell enchants a projectile weapon to redirect shots. When the wielder hits a primary target, the projectile ricochets toward a secondary target within 20 feet instead of being destroyed. The secondary attack uses the same base attack bonus but gains no enhancement bonuses or magical benefits from the weapon. Firearm ricochets target normal AC rather than touch AC. The wielder can ricochet one projectile per three caster levels (maximum six at 18th level). Once that limit is reached, the spell ends.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ride the Lightning',
@@ -4435,6 +4676,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "You transform into lightning as a standard action and travel in a straight line up to 120 feet, rematerializing as a free action without provoking opportunity attacks. Creatures in the lightning's path sustain 10d6 points of electrical damage and are staggered for 1 round, with a successful Reflex save halving damage and negating the staggered condition. Objects in the path are damaged; combustible items ignite and low-melting-point metals melt. If the path is blocked, you materialize in the nearest open space before the barrier. You gain immunity to electricity while the spell remains active.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rope Tornado',
@@ -4451,6 +4693,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "The spell creates a whirlwind that knocks grounded creatures prone and forces flying creatures to make DC 25 Fly checks or fall. Huge or larger creatures gain +2 on Reflex saves; Medium and smaller creatures take a -2 penalty. The tornado extinguishes nonmagical flames, disperses clouds, and scatters unattended objects throughout the affected line.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Runic Overload',
@@ -4466,6 +4709,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "The spell activates magical runes to explosive intensity. When cast on a creature bearing magical runes (such as a rune giant), it inflicts 1d6 points of sonic damage per caster level (maximum 20d6) and stuns for one round, with spell resistance applying. Alternatively, it can target other magical runes like those from arcane mark or explosive runes, creating a 5-foot-radius burst dealing 1d8 points of sonic damage per 2 caster levels (maximum 10d8). The spell preserves targeted runes' function and cannot affect mundane runic markings.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S1 ─────────────────────────────────────────────────────────────
@@ -4484,6 +4728,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster becomes surrounded by golden light shaped like their deity's holy symbol. Evil creatures striking the caster with unarmed strikes, natural weapons, or handheld weapons take 1d6 points of damage + 1 point per caster level (maximum +15). Creatures using reach weapons avoid this effect. The caster also takes half damage from evil-descriptor magical attacks, and negates that damage entirely on a successful Reflex save.",
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sacred Space',
@@ -4508,6 +4753,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "This spell sanctifies an area with heavenly power. The DC to resist spells with the good descriptor or channeled energy that harms evil outsiders increases by +2. Evil outsiders suffer a -1 penalty on attack rolls, damage rolls, and saving throws within the space, and cannot be called or summoned into it. These benefits double if a permanent religious fixture dedicated to the caster's deity or a good-aligned higher power exists in the area. The caster cannot cast this spell where another deity's permanent fixture stands.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sanctify Corpse',
@@ -4531,6 +4777,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell infuses a dead body with positive energy, preventing necromantic transformation into undead creatures. Attempts to raise the corpse as an undead automatically fail. If the subject was slain by creatures that spawn undead (such as shadows, vampires, or wraiths), that effect is postponed until the spell ends. The protection can be renewed daily through repeated casting or made permanent via a permanency spell (requires 9th-level caster, costs 500 gp).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Saving Finale',
@@ -4547,6 +4794,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'A bard with an active bardic performance can use this spell to immediately end that performance when a creature within range affected by the bardic performance fails a saving throw, allowing the subject to immediately reroll the failed saving throw.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scouring Winds',
@@ -4564,6 +4812,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This evocation summons a stinging sandstorm that obscures all vision within the area. The caster may reposition the storm up to 30 feet as a move action each turn. Creatures within the affected area sustain 3d6 piercing damage every round. The zone functions as a windstorm per the environmental rules.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Screaming Flames',
@@ -4588,6 +4837,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'A wall of flames rushes forward with skull-shaped tendrils. Creatures in its path must succeed on a Reflex save or take fire damage (1d8 per 2 caster levels, maximum 5d8). Those taking fire damage must also attempt a Will save or suffer 1d3 Wisdom damage. Deaf creatures gain a +4 circumstance bonus on Will saves. If using sanity rules, affected creatures take 1d6 sanity damage instead of Wisdom damage.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Screech',
@@ -4605,6 +4855,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster produces a shrill, piercing shriek, startling those around them into dropping their guard. Affected enemies must succeed on a Fortitude save or immediately provoke attacks of opportunity from threatening foes. The caster and allies remain unaffected.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Searing Light',
@@ -4621,6 +4872,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster projects a blast of light from their palm via a ranged touch attack. Damage varies by target type: normal creatures take 1d8 per two caster levels (max 5d8); undead take 1d6 per caster level (max 10d6); undead vulnerable to bright light take 1d8 per caster level (max 10d8); constructs or inanimate objects take 1d6 per two caster levels (max 5d6).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sending',
@@ -4652,6 +4904,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell enables you to contact a specific familiar creature and transmit a message not exceeding 25 words. The recipient recognizes the sender if previously known. Even creatures with minimal Intelligence can receive the message, though their ability to respond depends on their cognitive capacity. The target is not required to act on the communication. When the recipient occupies a different plane, transmission success drops to 95%, with local conditions potentially reducing this further.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S2_1 ─────────────────────────────────────────────────────────────
@@ -4669,6 +4922,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Produces a loud resonance that shatters brittle objects or damages crystalline creatures in a 5-foot spread. Can target a single solid object (up to 10 pounds per caster level) or inflict 1d6 sonic damage per caster level (max 10d6) to crystalline creatures with a Fortitude save for half.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sheet Lightning',
@@ -4685,6 +4939,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Produces a brilliant electrical discharge dealing 1 point of electricity damage to all creatures in a 20-foot radius, primarily dazing living creatures for 1 round on a failed save or dazzling them on a success. Metallic armor wearers suffer a -2 penalty to their save attempts.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Darkness',
@@ -4700,6 +4955,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Surrounds the caster with magical darkness, achieving total concealment while maintaining their own vision. Opponents know which squares the caster occupies, preventing Stealth attempts unless all adjacent squares also contain darkness. Creatures with darkvision are unaffected.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Dawn',
@@ -4715,6 +4971,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Manifests a disk of sunlight on one arm that damages melee attackers with 1d6 fire damage plus 1 per caster level (max +15). The shield provides illumination as if it were a continual flame spell and does not stack with similar auras like fire shield.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shifting Shadows',
@@ -4731,6 +4988,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Creates shifting shadows that obscure creature appearances within the area, allowing any creature to treat another in the area as an allied threatening creature for flanking purposes. When one creature provokes an attack of opportunity, allies must succeed at a Reflex save or lose an available opportunity attack that round.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shining Cord',
@@ -4746,6 +5004,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates a magical silver connection between the caster and a target via ranged touch attack, granting the caster enhanced perception and spell identification abilities, plus a dodge bonus to AC. If either party moves beyond 30 feet, the cord releases a force blast potentially stunning the one who moved away.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shining Scales',
@@ -4761,6 +5020,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "Envelops the caster in silvery radiance manifesting as scales, providing a +5 armor bonus to AC and enabling natural attacks to overcome damage reduction as though good and silver weapons. The caster can discharge the spell as a swift action to infuse breath weapons with silver light, imposing a -4 penalty to evil creatures' Reflex saves and negating evasion.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shock Arrow',
@@ -4777,6 +5037,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates an electrical arrow with two applications: either hurled as a ranged touch attack dealing 1d6 electricity damage plus 1 per caster level (max +5), or fired upward to create a brief visual display resembling a holy symbol that produces thunder and light without harming creatures.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shroud of Darkness',
@@ -4792,6 +5053,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Reduces perceived light levels by two steps for affected targets—bright light becomes dim, normal becomes darkness, and dim or dark areas become supernaturally dark. Even creatures with darkvision cannot penetrate the magical darkness.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Siege Scatter',
@@ -4808,6 +5070,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Unleashes a roiling blast of rough rock and dirt, dealing 1d6 slashing damage per 2 caster levels (capped at 5d6) to all creatures in the area. Creatures failing their Reflex save are knocked prone and displaced to the area\'s edge, suffering additional bludgeoning damage; creatures with stability bonuses or stationary the previous round gain +4 to their save.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sign of Wrath',
@@ -4824,6 +5087,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'A glowing wrath symbol appears beneath the caster, dealing 1d6 force damage per caster level (maximum 15d6) to nearby creatures and pushing them away via bull rush. The caster is unaffected and may exempt up to one creature per 4 caster levels from the spell\'s effects.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Silverlight',
@@ -4839,6 +5103,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a silvery light emanating from a touched object in a 20-foot bright radius with 20 feet of dim light beyond. Creatures susceptible to alchemical silver within the bright light become dazzled and sickened unless they succeed on a Fortitude save; these effects disappear 1 round after leaving the silverlight.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sirocco',
@@ -4855,6 +5120,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'A scorching downward wind blast deals 4d6 fire damage +1 per caster level and forces creatures prone; successful Fortitude saves halve damage and negate the prone condition. Flying creatures may fall unless they succeed at DC 15 Fly checks. Water subtype creatures suffer a -4 save penalty and double damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Smite Abomination',
@@ -4869,6 +5135,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "Grants the caster paladin-like abilities against undead foes, with melee attacks gaining a bonus equal to the higher of Charisma or Wisdom modifier on attack rolls and caster level on damage rolls. Melee strikes bypass the target's damage reduction; bonuses do not stack with an actual paladin's smite ability.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S2_2 ─────────────────────────────────────────────────────────────
@@ -4887,6 +5154,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Allows the caster to emit up to three sonic cones over the spell's duration, dealing decreasing damage (4d4, 2d4, then 1d4 respectively). The caster cannot use their voice for magical purposes and must speak at a shout until all cones are expended.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sonic Thrust',
@@ -4902,6 +5170,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Produces a sweeping rush of sound that can hurl creatures or objects away; attack rolls determine if items hit specific targets, with hurled weapons dealing standard damage and other objects dealing 1d6 per 25 pounds. Creatures receive Will saves and spell resistance to negate the effect.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spear of Purity',
@@ -4918,6 +5187,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Hurls a beam of holy light as a ranged touch attack; evil creatures take escalating damage with evil outsiders suffering increased harm and blindness (Will save halves and prevents blindness). Neutral creatures take half damage with no blinding, while good creatures are unaffected.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellblight Jinx',
@@ -4933,6 +5203,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Inflicts burning sensations on spellcasters when they cast spells or use spell-like abilities, manifesting as visible violet flame. Each time an afflicted caster casts a spell or uses a spell-like ability, they must succeed at a concentration check (DC 15 + double spell level) or lose the slot and become staggered for one round.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellcasting Contract, Lesser',
@@ -4947,6 +5218,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Allows the caster to imbue a target with any prepared spells (not limited to specific schools), functioning like imbue with spell ability but requiring a written contract outlining spell details and expiration terms. The caster gains a profane bonus to AC, saves, and checks equal to the highest spell level imbued.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spirit-Bound Blade',
@@ -4961,6 +5233,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "Wraps a weapon in hardened ectoplasm granting it the ghost touch property. The caster infuses emotional energy to grant one additional special ability from a list (vicious, returning, cruel, menacing, cunning, mimetic, heartseeker, or keen) based on the emotion chosen. Spiritualists gain a bonus when their phantom's emotional focus matches the chosen emotion.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spiritual Ally',
@@ -4977,6 +5250,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "A force construct manifesting as a divine servant attacks designated foes using the caster's base attack bonus plus Wisdom modifier, dealing 1d10 force damage plus a bonus based on caster level. The ally moves at 30 feet (perfect flight), threatens adjacent squares, can flank enemies, and cannot be damaged by physical attacks.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spiritual Squire',
@@ -4993,6 +5267,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "Creates a force construct that serves as an assistant rather than a combatant, able to retrieve items, carry objects, aid allies, and help don armor. The spiritual squire's aid another uses the caster's base attack bonus plus Wisdom modifier and cannot be damaged by physical attacks.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spiritual Weapon',
@@ -5009,6 +5284,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "A force-based weapon materializes and attacks designated foes under the caster's direction, dealing 1d8 damage plus bonus points based on caster level using the caster's base attack bonus modified by Wisdom. The weapon can strike incorporeal creatures and may be redirected each round as a move action.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spontaneous Immolation',
@@ -5024,6 +5300,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Triggers spontaneous combustion in a target, dealing 3d6 fire damage and igniting the victim on a failed Fortitude save (halved on success). Each subsequent round the burning target may attempt another save to extinguish the flames; failure results in an additional 1d6 fire damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spotlight',
@@ -5039,6 +5316,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Creates a mobile area of bright light centered on one target while simultaneously suppressing other light sources surrounding it, imposing a -20 penalty to Stealth checks and negating darkness-based concealment. If the target succeeds on its save, the bright light remains stationary at that location rather than following the creature.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S3 ─────────────────────────────────────────────────────────────
@@ -5064,6 +5342,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You gain the ability to discharge three rays of steam once per round as a standard action; when you first cast the spell you also discharge three additional rays immediately. Each ray requires a ranged touch attack and deals 4d6 points of fire damage. These rays function both underwater and above water without a caster level check.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stormbolts',
@@ -5088,6 +5367,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'Lightning spills from your body in all directions, dealing 1d8 points of electricity damage per caster level (maximum 20d8) to all creatures in the area and stunning them for 1 round. A successful Fortitude save halves the damage and negates the stunning effect.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Suppressing Stone',
@@ -5111,6 +5391,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "You enchant an orbiting ioun stone, gaining a +1 resistance bonus on saving throws against mind-affecting effects per 4 caster levels (maximum +5). When you fail a mind-affecting saving throw, you may sacrifice the ioun stone (permanently converting it to a dull gray stone) to suppress that effect for 1 round per 2,500 gp of the stone's original value (minimum 1 round). The suppression doesn't pause the effect's duration.",
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Storms',
@@ -5144,6 +5425,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell functions like symbol of death but creates a storm instead. When triggered, the 30-foot radius centered on the symbol fills with powerful winds (75 mph). Each round, electricity bolts randomly strike creatures within range for 10d6 points of damage (Reflex save for half). This spell has no hit point activation limit.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sympathetic Vibration',
@@ -5167,6 +5449,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'By attuning yourself to a structure, you create a damaging vibration within it. The effect deals 2d10 points of damage per round to the target structure, ignoring hardness. The spell only functions on freestanding structures—surrounding stone disperses the vibration otherwise. It cannot target creatures or constructs.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_T_1 ─────────────────────────────────────────────────────────────
@@ -5183,6 +5466,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'Functions similarly to contingency but allows you to invest a spell (max level 1/4 your level, capped at 3rd) into an occultist implement matching the spell\'s school. The spell must affect only you personally. Casting reduces the implement\'s mental focus by 2 points. The effect ends automatically when mental focus refreshes. Unlike contingency, multiple talismanic implements can be active simultaneously, though each implement holds only one such spell. Having any talismanic implements prevents other contingency effects from functioning.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Tamer's Lash",
@@ -5199,6 +5483,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a 15-foot sonic whip dealing 1d4 sonic damage. It functions as a whip but lacks physical substance, preventing use for combat maneuvers, sundering, or disarming. When striking an animal, the target must succeed at a Will save or be unable to attack the caster for 1d3 rounds. An affected animal within 30 feet must spend its first action moving away if able. Combat-trained animals, animal companions, and creatures with Hit Dice exceeding caster level + 4 receive a +4 circumstance bonus on saves. This intimidation effect is a mind-affecting fear effect.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Charge',
@@ -5214,6 +5499,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You use telekinetic force to launch an allied creature across the battlefield within spell range. The target flies just above the ground during transit, though you can elevate them over obstacles if desired. Movement provokes attacks of opportunity normally. When landing adjacent to an enemy, the target may spend an immediate action to make a melee attack against that opponent, gaining a +2 bonus on the attack roll.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Projectile',
@@ -5228,6 +5514,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You hurl an object weighing no more than 5 pounds at a target. A ranged attack roll (not a touch attack) determines success. Upon hitting, the spell deals 1d6 points of bludgeoning damage to both the target and the object. The object\'s physical properties do not alter damage type or other attack characteristics, regardless of whether it is a weapon or magical item.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Sphere',
@@ -5244,6 +5531,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'This spell operates similarly to resilient sphere but reduces the weight of contents to one-sixteenth normal. You can telekinetically lift anything weighing 5,000 pounds or less within the sphere. Control extends to medium range (100 feet + 10 feet per caster level). You may move the sphere and its contents (totaling 5,000 lbs or less) by concentrating, moving it up to 30 feet per round as a standard action. The sphere descends at 60 feet per round when not concentrated upon, and you may telekinetically move it even from inside.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Storm',
@@ -5260,6 +5548,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You generate a destructive wave of telekinetic energy. Creatures within the 40-foot radius take damage equal to 1d6 points per caster level (maximum 20d6). Those affected become dazed and stunned for one round. A successful Fortitude save reduces damage by half and eliminates the dazed and stunned conditions. The spell damages objects and can penetrate barriers if the initial damage is sufficient. You may designate any number of creatures to be immune to the spell\'s effects, provided they can be targeted.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Strikes',
@@ -5275,6 +5564,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "You enchant a touched creature's limbs with telekinetic force. For the spell's duration, the target's unarmed attacks or natural weapons inflict an additional 1d4 points of force damage on each successful unarmed melee attack.",
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thundering Drums',
@@ -5291,6 +5581,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You strike the ground, creating a thunderous effect. Any creature in the area takes 1d8 points of sonic damage per caster level (maximum 5d8) and is knocked prone. A successful Fortitude save reduces damage by half and prevents the prone condition.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thunderstomp',
@@ -5306,6 +5597,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a ground-based ripple effect to attempt tripping an opponent. The trip combat maneuver check uses your caster level instead of base attack bonus and applies your spellcasting ability modifier (Intelligence for magi/wizards, Wisdom for druids/rangers, Charisma for bloodragers/sorcerers) rather than Strength. The spell provokes no attacks of opportunity and requires both caster and target to maintain ground contact.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_T_2 ─────────────────────────────────────────────────────────────
@@ -5324,6 +5616,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You create an immobile, force-based sphere of customizable color with half above ground and half below. Up to nine additional Medium creatures may occupy the space and pass freely through the barrier. The spell terminates if you leave. Interior temperature maintains 70 degrees F within the 0-100 degree F exterior range. It shields against environmental hazards and withstands winds below hurricane force. The exterior appears opaque while transparent from inside, providing total concealment to occupants.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Torrent of Elemental Rage',
@@ -5340,6 +5633,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'A shimmering elemental torrent manifests as a horizontal whirlwind combining winds, flame, ice shrapnel, and metal fragments. Creatures in the effect take 8d6 points of damage—2d6 points of fire damage, 2d6 points of cold damage, 2d6 points of sonic damage, and 2d6 points of slashing damage that overcomes adamantine damage reduction. The effect persists while concentrating, affects creatures passing through it, and can be repositioned each turn without sweeping through intermediate spaces.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Combustion',
@@ -5355,6 +5649,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "Your successful melee touch attack ignites the target in flame, dealing 1d6 fire damage. If the target fails its Reflex save, it catches fire. On subsequent rounds, any creatures adjacent to the burning target (including the caster) must each succeed at a Reflex save or take 1d4 points of fire damage.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tracking Mark',
@@ -5369,6 +5664,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You gain supernatural tracking abilities against the target. When making Survival checks to track the marked creature, treat the DC as 5 lower than normal. Additionally, you gain a +5 bonus on Perception checks to notice the target using Stealth or recognize it if using Disguise.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Transfer Familiar',
@@ -5383,6 +5679,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell enables temporary transfer of familiar control to another willing creature. All three parties—caster, familiar, and recipient—must all be touching each other when you cast this spell. The recipient gains standard familiar benefits including spell sharing and communication abilities, while the original owner temporarily loses these advantages. The spell fails if the target already possesses a familiar.',
     source: 'Pathfinder Player Companion: Familiar Folio',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Trial By Fire',
@@ -5398,6 +5695,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "You subject a touched creature to divine flame, testing alignment purity. If the target's alignment differs from your deity's alignment by more than one step, the spell inflicts 1d6 points of damage per 2 caster levels (maximum 5d6). Half this damage comes from fire; the other half derives from divine power and bypasses fire resistance. Additionally, if the target's alignment directly opposes yours (law versus chaos or good versus evil), you may make an Intimidate check as a free action to demoralize the creature.",
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Trial of Fire and Acid',
@@ -5413,6 +5711,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The spell coats the target in burning acid that inflicts 1d6 points of acid damage and 1d6 points of fire damage each round. Each round, the affected creature may attempt a Fortitude save to reduce damage by half. The effect ends if the target is doused in water, though rolling on the ground provides no relief from either the fire or acid.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Twilight Knife',
@@ -5429,6 +5728,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You conjure a sentient force blade that attacks your chosen opponent each round. The weapon employs your base attack bonus plus either your Intelligence or Charisma modifier (whichever is higher). It deals 1d4 force damage with dagger-like critical properties and can execute sneak attacks for an additional 1d6 force damage per four caster levels when the target lacks a Dexterity bonus or is flanked. The knife cannot be harmed physically but can be destroyed by dispel magic, disintegrate, sphere of annihilation, or rod of cancellation.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_U_1 ─────────────────────────────────────────────────────────────
@@ -5459,6 +5759,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'Your body sheds intense light. All creatures within 30 feet that can see you are dazzled (no save). Creatures with light sensitivity must succeed at a Reflex save or be blinded while within the emanation. This light functions as daylight for the purpose of dispelling magical darkness effects; when the light overlaps magical darkness, both effects temporarily suppress in the overlap area, leaving normal ambient light conditions. Dazzled and blinded conditions from this spell end when the spell expires or the creature moves out of line of sight.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_U_2 ─────────────────────────────────────────────────────────────
@@ -5491,6 +5792,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You project an aura of unruffled composure backed by invisible force. When a creature attempts to make melee contact with you, it encounters an invisible barrier of force. The creature may choose to abandon the attempt or push through—if it pushes through, a force wave erupts dealing 1d4 points of force damage per caster level (maximum 10d4) and pushing the creature back 5 feet. If the creature cannot be pushed back, it takes an additional 2d4 points of force damage. A Fortitude save halves the damage.',
     source: "Pathfinder Player Companion: Disciple's Doctrine",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unhallow',
@@ -5521,6 +5823,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'Unhallow makes a particular site, building, or structure an unholy site. This has three major effects. First, the site is warded by a magic circle against good effect. Second, the DC to resist negative channeled energy within the area gains a +4 sacred bonus, and the DC to resist positive energy is reduced by 4 (spell resistance does not apply to this effect on non-druids). Third, you may choose to permanently fix a single spell effect to the area. This anchored spell functions throughout the entire site regardless of its normal duration and affects all creatures (or a chosen subgroup) for one year. Unhallow counters but does not dispel hallow. Only one unhallow effect may be in place on a particular area at a time.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unholy Sword',
@@ -5545,6 +5848,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You channel evil power into a melee weapon, granting it a +5 enhancement bonus on attack and damage rolls. The weapon deals an additional 2d6 points of damage against good-aligned opponents and generates a magic circle against good effect that moves with the weapon. When the protective circle dissipates, the weapon automatically creates a new one at no action cost. The spell ends one round after the weapon leaves your grasp. Only one unholy sword may exist per caster at a time. When cast on an existing magical weapon, its normal properties are temporarily suppressed. This spell is incompatible with other weapon-enhancing spells and does not function on artifacts.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unwelcome Halo',
@@ -5573,6 +5877,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'You cause the target to emit a glowing halo that sheds normal light in a 20-foot radius and increases the light level by one step for an additional 20 feet beyond that. The creature cannot gain concealment or total concealment from nonmagical darkness, and remains visible even if outside the normal line of sight in dim or darker conditions. When this light overlaps with magical darkness, both effects temporarily suppress in the overlapping area, leaving normal ambient light in that area.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_VWYZ ─────────────────────────────────────────────────────────────
@@ -5598,6 +5903,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "A cloud of searing ash materializes around the target's face. On a failed save, the creature takes 1d6 fire damage and becomes blinded. The target must save each round to avoid repeated damage and blindness effects. Only creatures with discernible anatomy and a single head can be blinded; undead, constructs, and creatures without vision are damaged but not blinded. Moderate winds (11+ mph) disperse the cloud in 2 rounds; strong winds (21+ mph) disperse it in 1 round. The spell is ineffective underwater.",
     source: 'Pathfinder Adventure Path #24: The Final Wish',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vengeful Comets',
@@ -5614,6 +5920,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster conjures miniature comets that orbit overhead, creating snow and cold wind. These provide a circumstance bonus to saving throws against fire effects equal to the number of comets present. When the caster is affected by an offensive spell from another creature, they may use an immediate action to fire a comet as retaliation. The comet requires a ranged touch attack and deals 1d6 bludgeoning damage plus 3d6 cold damage, plus additional cold damage equal to the spell's level. If retaliating against a fire-descriptor spell, the caster may fire two comets instead of one.",
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Violent Misfire',
@@ -5636,6 +5943,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The spell creates a chaotic charge within the black powder loaded in a target firearm. On the next firing, the weapon automatically misfires. If this causes an explosion, the radius doubles and deals maximum damage plus 1d6 additional fire damage per 2 caster levels (max 10d6) to the wielder. For advanced firearms experiencing a second consecutive misfire, no explosion occurs but the additional damage still applies.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vitriolic Mist',
@@ -5659,6 +5967,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell functions similarly to fire shield, but instead wraps the caster in yellow or green acidic mist. It deals acid damage to attackers and protects you against acid damage. This spell does not shed light.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Volcanic Storm',
@@ -5683,6 +5992,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "Upon casting, chunks of hot volcanic rock and clumps of ash pound down, dealing 3d6 bludgeoning and 2d6 fire damage to all creatures in the area. This damage occurs once at casting. For the spell's remaining duration, heavy ash falls continuously. Affected creatures suffer a -4 penalty to Perception checks, and the entire area becomes difficult terrain. When the spell ends, all materials vanish with no lasting effects besides initial damage.",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vortex',
@@ -5707,6 +6017,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster generates an immobile whirlpool in any liquid body large enough to contain it. Large or smaller creatures contacting the effect must succeed on a Reflex save or incur 3d6 bludgeoning damage. Medium or smaller creatures failing their initial save must make another to avoid being drawn into the vortex, where they sustain 1d8 damage each round with no saving option. The caster may eject suspended creatures at will. Boats equal to or shorter than the vortex's width take 6d6 damage and become caught; captains may make a DC 25 Profession (sailor) check to halve damage and avoid entrapment.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wake of Light',
@@ -5724,6 +6035,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       "The caster and their mount create a glowing heavenly mist trail that persists for the spell's duration. Good creatures treat terrain with the mist as normal ground, while evil creatures treat it as difficult terrain. Neutral creatures experience no effect. The mist floats 1 foot above ground, provides no concealment, and does not impede sight or movement through obstacles. The spell requires the caster to remain mounted; dismounting immediately ends the spell's effects.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Ectoplasm',
@@ -5748,6 +6060,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster manifests a barrier of ectoplasm containing restless spirits. The wall is immovable, 1 inch thick per caster level, and blocks ethereal and incorporeal creatures. One selected side radiates a fear aura within 10 feet, causing creatures to become shaken or panicked (if 4 HD or fewer) for 1 round per caster level. Each 10-foot section has 2 hit points per inch of thickness. Destroyed sections are filled by remaining ectoplasm, maintaining a contiguous barrier.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Ice',
@@ -5772,6 +6085,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'The caster creates either a thick ice wall or dome. The ice plane is 1 inch thick per caster level and can be oriented in various configurations. Each 10-foot section has 3 hit points per inch of thickness. Fire deals full damage. Breaking through deals 1d6 cold damage plus 1 per caster level. The hemisphere form is equally durable but deals no breach damage.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Light',
@@ -5796,6 +6110,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This evocation creates an immobile curtain of brilliant white light that blocks line of sight and sheds bright illumination 60 feet in all directions. Creatures adjacent to the wall become blinded while nearby and for 1d4 rounds after leaving—though closing eyes or succeeding at a Fortitude save negates this for one round. Passing through the wall automatically blinds creatures. Shadow plane creatures within 5 feet gain 1d4 negative levels per round (Fortitude negates), with a -4 penalty if crossing the wall.',
     source: "Pathfinder Module: The Dragon's Demand",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Split Illumination',
@@ -5822,6 +6137,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This spell creates an immobile curtain of light with contrasting effects on each side. One side emits bright illumination extending 60 feet, while the opposite side radiates darkness to an equal distance. The illumination effect shifts conditions by up to two steps toward brightness or shadow. The wall blocks vision from either side and cannot be seen through.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Water Shield',
@@ -5845,6 +6161,7 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'A protective vortex of clear acid surrounds the caster. The spell provides half damage from acid and fire-based attacks, with no damage on a successful Reflex save. Melee attackers take 1d6 points of acid damage + 1 point per 2 caster levels (maximum +10). Those with spell resistance can apply it to negate this effect, and creatures with exceptional reach weapons avoid the retaliation damage.',
     source: 'Pathfinder Adventure Path #24: The Final Wish',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Whirlwind',
@@ -5862,5 +6179,6 @@ export const EVOCATION_SPELLS: Spell[] = [
     description:
       'This evocation creates a mobile cyclone traveling at 60 feet per round that the caster controls or programs. Creatures contacted must succeed on Reflex saves or take 3d6 damage. Medium or smaller creatures failing a second save become suspended within the cyclone, taking 1d8 damage per round. The caster can eject suspended creatures at will.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 ];

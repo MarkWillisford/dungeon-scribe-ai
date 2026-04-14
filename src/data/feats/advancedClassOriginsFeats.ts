@@ -10,6 +10,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain Perception and AC bonuses in surprise rounds equal to your trap sense bonus.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -41,6 +42,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
       "Whenever you use a hex, you may expend a prepared spell or spell slot of at least 1st level to augment the hex. The first time you do so in a day, you may choose one of the following: increase the hex's saving throw DC by 1, increase the hex's range by 30 feet (the hex must already have a range of at least 30 feet), or increase the hex's duration by 1 round (the hex must already have a duration of at least 1 round). Each subsequent time you use this ability in the same day, you must expend a spell slot 1 level higher than the last (2nd level for the second use, 3rd for the third, and so on).",
     shortDescription: 'Expend spell slots to increase hex DC, range, or duration.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'hex' }],
     effects: [
@@ -63,6 +65,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Increase the saves to cure and magical neutralization DC for a chosen poison.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'craft_alchemy', ranks: 5 },
@@ -92,6 +95,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       "Expend a spell to boost an ally's caster level by 2 (or 4 with a higher slot).",
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'caster_level', minimum: 1 }],
     effects: [
@@ -113,6 +117,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
       'When you use your spell kenning class feature, you can select a spell from the druid or witch spell list in addition to your normal options.',
     shortDescription: 'Add druid and witch spell lists to your spell kenning options.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'spell kenning' }],
     effects: [
@@ -134,6 +139,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
       'You add 7th-level spells to your spell list for purposes of using spell completion and spell trigger magic items. Hunters add 7th-level druid spells; warpriests add 7th-level cleric spells. This does not grant the ability to cast these spells.',
     shortDescription: 'Add 7th-level spells to your spell list for magic item activation.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 17 },
@@ -161,6 +167,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
       "When wielding a rapier one-handed, you can add your Dexterity modifier instead of your Strength modifier to that weapon's damage. The rapier must be one appropriate for your size. You do not gain this benefit while fighting with two weapons or using flurry of blows, or any time another hand is otherwise occupied. If you have the panache class feature, you gain a +2 bonus to CMD against disarm attempts made while you are wielding a rapier as long as you have at least 1 panache point.",
     shortDescription: 'Add DEX to rapier damage instead of STR when wielding one-handed.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -187,6 +194,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Negate the -2 AC penalty from rage when a raging ally with this feat is within 60 ft.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -212,6 +220,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +1 attack and damage for 1 round after identifying a creature via Knowledge.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'class_feature', featureName: 'bardic knowledge' }],
     effects: [
@@ -240,6 +249,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
       'You can cast spells from any class that grants you spells while in a bloodrage. When you use moment of clarity during a rage, you retain the benefits of your rage. If you have the greater bloodrage class feature, you gain a +1 bonus to the save DCs of spells you cast while in a bloodrage.',
     shortDescription: 'Cast spells during bloodrage; +1 spell DC with greater bloodrage.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       {
@@ -266,6 +276,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
       'If you use Power Attack with the first melee attack you make during a surprise round, you can sneak attack even if you are not flanking your target and it is not denied its Dexterity bonus to AC.',
     shortDescription: 'Sneak attack with Power Attack during surprise rounds without flanking.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -293,6 +304,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Your animal companion counts as having your teamwork feats for your bonus calculations.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -318,6 +330,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Grant your animal companion an animal focus aspect using its HD as hunter level.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -342,6 +355,7 @@ export const ADVANCED_CLASS_ORIGINS_FEATS: FeatDefinition[] = [
       'When performing a grapple combat maneuver, you gain a +1 bonus on checks to maintain your grapple, and your grappled foes take a -1 penalty on checks to escape your grapple.',
     shortDescription: '+1 to maintain grapple; foes take -1 to escape your grapple.',
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },

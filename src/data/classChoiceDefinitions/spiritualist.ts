@@ -61,6 +61,7 @@ export const spiritualistDefinitions: ClassChoiceDefinition[] = [
     ],
     source: 'pf1e-oa',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
     visibility: 'global',
     rev: 1,
   },

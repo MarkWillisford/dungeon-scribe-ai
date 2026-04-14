@@ -9,6 +9,7 @@ export const DISTANT_REALMS_FEATS: FeatDefinition[] = [
       "As a standard action, you can attempt a DC 10 Perform (sing) check to aid an ally who also possesses this feat. Success allows your ally's spells cast before your next turn that normally deal acid, cold, electricity, or fire damage to instead deal sonic damage. Spells already dealing sonic damage are converted to half sonic and half divine damage.",
     shortDescription: 'Aid an ally to convert their elemental spell damage to sonic.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'perform_sing', ranks: 3 }],
     effects: [
@@ -30,6 +31,7 @@ export const DISTANT_REALMS_FEATS: FeatDefinition[] = [
       "When casting pattern subschool spells, you can choose a specific creature type or subtype to shield from the spell's full effects. Affected creatures of that type reduce the spell's save DC by 4. At 11th caster level and every 4 levels after, you can protect an additional creature type (max four at 19th). Multiple subtypes on a single creature stack the DC reduction.",
     shortDescription: 'Reduce pattern spell DCs by 4 for chosen creature types.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'pattern_message' },
@@ -55,6 +57,7 @@ export const DISTANT_REALMS_FEATS: FeatDefinition[] = [
       'Whenever you have a weapon imbued with the bane special quality, that weapon is considered good and lawful for the purpose of overcoming damage reduction.',
     shortDescription: 'Bane weapons count as good and lawful for DR purposes.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'bane' }],
     effects: [
@@ -76,6 +79,7 @@ export const DISTANT_REALMS_FEATS: FeatDefinition[] = [
       'You can use your lay on hands or the healing granted by fervor on allies with this feat as a swift action.',
     shortDescription: 'Lay on hands or fervor on allies with this feat as a swift action.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'special', description: 'Fervor or lay on hands class feature' }],
     effects: [
@@ -97,6 +101,7 @@ export const DISTANT_REALMS_FEATS: FeatDefinition[] = [
       'Your thrown weapons glow with holy light, illuminating a 20-foot-radius area where they fall for 1 round. A target damaged by one of these weapons becomes dazzled for 1 round.',
     shortDescription: 'Thrown weapons illuminate and dazzle targets.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'point_blank_shot' },
@@ -122,6 +127,7 @@ export const DISTANT_REALMS_FEATS: FeatDefinition[] = [
       "When you make a single ranged attack with a thrown weapon, that weapon temporarily transforms into pure holy light, overcoming the target's damage reduction, if any.",
     shortDescription: 'Single thrown attacks overcome all DR as holy light.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'lantern_style' },
@@ -151,6 +157,7 @@ export const DISTANT_REALMS_FEATS: FeatDefinition[] = [
       'When you hit a creature with a thrown weapon, both the target and creatures within 20 feet must make a Will save (DC = 10 + half character level + Charisma modifier) or become shaken. A creature that succeeds at its save or that damages you after becoming shaken becomes immune for 24 hours.',
     shortDescription: 'Thrown weapon hits cause shaken in 20 ft area (Will negates).',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'lantern_light' },
@@ -181,6 +188,7 @@ export const DISTANT_REALMS_FEATS: FeatDefinition[] = [
       'You gain access to specialized tricks for the floating disk spell: Disk Rider (Fly 3 ranks), Defensive Disk (Fly 3 ranks + Shield Proficiency), Drifting Defense (Fly 6 ranks + Mobility + Shield Proficiency), Expanded Disk (Fly 3 ranks + Heighten Spell), Force Check (Fly 3 ranks + Catch Off-Guard or Improved Bull Rush), and Spurn Gravity (Fly 6 ranks). Each modifies how floating disk functions.',
     shortDescription: 'Unlock six specialized tricks for the floating disk spell.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Ability to cast floating disk' }],
     effects: [
@@ -202,6 +210,7 @@ export const DISTANT_REALMS_FEATS: FeatDefinition[] = [
       'Whenever a healing spell or effect would restore you to above your maximum hit points, you can redirect excess hit points to an adjacent ally who has this feat. This only applies to effects requiring an action to activate; passive healing like fast healing or regeneration does not qualify.',
     shortDescription: 'Redirect excess healing to an adjacent ally with this feat.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [
@@ -223,6 +232,7 @@ export const DISTANT_REALMS_FEATS: FeatDefinition[] = [
       "When you cast a spell from the pattern subschool, you can embed a short message within the effect. You designate any number of the spell's targets to receive this encoded message, regardless of language, but only a creature failing its save against your pattern spell can receive your message. The message is delivered visually. During each round you concentrate to maintain a pattern spell, you can change the message and targets.",
     shortDescription: 'Embed visual messages in pattern spells for targets who fail their saves.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'caster_level', minimum: 3 }],
     effects: [
@@ -244,6 +254,7 @@ export const DISTANT_REALMS_FEATS: FeatDefinition[] = [
       'When you use channel energy, you can focus on one creature within range whose hit points are below 0 that would be healed by your channel energy. No other creatures are healed, but the target creature is restored to 0 hit points before the normal healing takes effect.',
     shortDescription: 'Focus channel energy to restore one dying creature to 0 HP first.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Channel energy 3d6' }],
     effects: [
@@ -265,6 +276,7 @@ export const DISTANT_REALMS_FEATS: FeatDefinition[] = [
       'When you are concentrating to maintain a spell from the pattern subschool, you can move any area effects associated with that spell by up to 10 feet as a move action. Creatures in the new area must attempt saves as normal. For pattern spells that already permit movement (like rainbow pattern), the distance increases by 50%.',
     shortDescription: 'Move pattern spell areas 10 ft as a move action while concentrating.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'spell_focus_illusion' },

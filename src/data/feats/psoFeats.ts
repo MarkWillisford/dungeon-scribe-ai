@@ -14,6 +14,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       'You can spend a standard action to bolster your animal companion, familiar, or mount. The companion gains a +2 morale bonus on attack rolls and saving throws until the start of your next turn. At 10th level this bonus increases to +4.',
     shortDescription: 'Grant animal companion +2 morale on attacks and saves as a standard action',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'animal companion, familiar, or mount' }],
     effects: [],
@@ -27,6 +28,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       'Your cohort or followers benefit from your dedication. Your cohort gains a +2 morale bonus on Will saves against fear and compulsion effects. Additionally, whenever your cohort or a follower would be killed or rendered unconscious, you gain a +1 morale bonus on attack and damage rolls for 1 minute.',
     shortDescription: 'Cohort gains +2 Will vs. fear; you gain +1 attack/damage when ally falls',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'leadership' }],
     effects: [],
@@ -40,6 +42,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       'You may select a familiar from a broader list of eligible creatures. When selecting your familiar, you may choose any creature on the standard list or any creature on the expanded familiar list for your race or region, subject to GM approval.',
     shortDescription: 'Select a familiar from an expanded list of eligible creatures',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'familiar' }],
     effects: [],
@@ -53,6 +56,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       "Your familiar can use any teamwork feat you know, treating you as if you also had the feat for the purpose of activating the feat's effects. Your familiar must be adjacent to you to use this feat.",
     shortDescription: 'Your familiar can use your teamwork feats as if it had them',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['general', 'teamwork'],
     prerequisites: [
       { type: 'class_feature', featureName: 'familiar' },
@@ -70,6 +74,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ferocious Loyalty bonus increases to +4 attack and adds +2 damage when ally falls',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'ferocious_loyalty' },
@@ -86,6 +91,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       'Your familiar can deliver touch spells for you at a greater range. Instead of requiring your familiar to touch the target in the same round you cast the spell, your familiar may deliver the touch spell up to 1 round later per caster level you possess (maximum 5 rounds).',
     shortDescription: 'Familiar can delay delivering your touch spells for up to 1 round/level',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'familiar' },
@@ -102,6 +108,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       "You may take a monstrous humanoid or magical beast as a cohort instead of a humanoid. The cohort's level is treated as 2 lower than normal for purposes of Leadership score calculations. The cohort must have an Intelligence score of at least 3.",
     shortDescription: 'Take a monstrous humanoid or magical beast as your Leadership cohort',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'leadership' }],
     effects: [],
@@ -116,6 +123,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Make a secondary melee attack against a different target when charging while mounted',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'mounted_combat' },
@@ -132,6 +140,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       'You gain the services of a loyal retainer — a 1st-level NPC of a class appropriate to your needs. This NPC does not fight for you but provides non-combat assistance. The retainer levels up at half your rate and can be replaced if lost after 1 week of searching.',
     shortDescription: 'Gain a loyal non-combat retainer NPC who assists you',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'level', minimum: 3 }],
     effects: [],
@@ -145,6 +154,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       'You are skilled at fighting with improvised weapons. You do not take the –4 penalty on attack rolls when using improvised weapons. Additionally, improvised weapons you wield deal damage as if they were one size larger than their actual size.',
     shortDescription: 'No penalty with improvised weapons; deal damage as if one size larger',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -159,6 +169,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Perception when adjacent to ally with this feat; prevent surprise if ally is alert',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'perception', ranks: 1 }],
     effects: [
@@ -186,6 +197,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Redirect attacks targeting your companion to yourself as an immediate action',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'class_feature', featureName: 'animal companion, familiar, or mount' }],
     effects: [],
@@ -200,6 +212,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Your animal companion or familiar learns one additional trick beyond its limit',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'animal companion or familiar' }],
     effects: [],
@@ -213,6 +226,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       "Your cohort is unusually capable. Your cohort's effective cohort level is treated as 1 higher than normal for the purpose of determining its statistics, and it gains one additional feat.",
     shortDescription: 'Cohort counts as 1 level higher and gains an extra feat',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'leadership' }],
     effects: [],
@@ -232,6 +246,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Grant allies within 30 ft. one of your teamwork feats for 3 rounds as a standard action',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -249,6 +264,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       "Animals regard you as non-threatening. You receive a +4 bonus on Handle Animal checks and wild animals don't attack you unless provoked or directed. You can cast speak with animals once per day as a spell-like ability (CL = your character level).",
     shortDescription: "+4 Handle Animal; animals don't attack unprovoked; speak with animals 1/day",
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'handle_animal', ranks: 3 }],
     effects: [
@@ -271,6 +287,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 attack and +1 AC per adjacent ally with this feat all attacking the same target',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [],
     effects: [
@@ -310,6 +327,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Allies within 30 ft. gain +2 attack vs. flat-footed foes in your favored terrain',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_nature', ranks: 5 }],
     effects: [],
@@ -326,6 +344,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       'You gain a +1 trait bonus to Armor Class against opponents that are two or more CR higher than your current level. In addition, you treat your Armor Class as 1 point higher for the purpose of determining whether you are struck by a critical hit.',
     shortDescription: '+1 AC vs. opponents 2+ CR higher than your level',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -357,6 +376,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       'You are skilled at throwing weapons while prone. You do not take penalties on ranged attack rolls when you are prone with a thrown weapon. Additionally, you do not provoke attacks of opportunity for throwing weapons while prone.',
     shortDescription: 'No penalty or AoO when throwing weapons while prone',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -371,6 +391,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use Disguise instead of Bluff to hide; +4 Bluff/Disguise when maintaining cover identity',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'disguise', ranks: 3 },
@@ -387,6 +408,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       "You can make a Knowledge check as a move action instead of a standard action when attempting to identify a monster's abilities and weaknesses. Additionally, you gain a +2 bonus on the first attack roll made against a creature you successfully identified with a Knowledge check in the current combat.",
     shortDescription: 'Identify monsters as a move action; +2 on first attack vs. identified foe',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_dungeoneering', ranks: 1 }],
     effects: [],
@@ -401,6 +423,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 competence on research/untrained Knowledge checks; make any Knowledge untrained with library access',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_history', ranks: 3 }],
     effects: [
@@ -428,6 +451,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 Disguise; change appearance as a standard action; maintain disguise while speaking',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'disguise', ranks: 5 },
@@ -452,6 +476,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       'You can craft melee weapons without having access to the Craft (weapons) skill at the required rank, treating your ranks in Craft (armor) or another appropriate Craft skill as half their value for the purpose of crafting melee weapons. Additionally, you reduce the time required to craft a melee weapon by 25%.',
     shortDescription: 'Craft melee weapons using substitute Craft skills; 25% faster crafting',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'craft_magic_arms_and_armor' },
@@ -468,6 +493,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       'You can prepare your spells in half the normal time. Instead of requiring 1 hour to prepare spells, you need only 30 minutes. This feat also halves the time required to refresh your spells if you have a class feature that allows you to do so.',
     shortDescription: 'Prepare spells in half the normal time (30 minutes instead of 1 hour)',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Ability to prepare spells' }],
     effects: [],
@@ -482,6 +508,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Knowledge (arcana/history) on ancient civilizations; identify ancient items as 2 levels higher',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 1 },
@@ -523,6 +550,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       'Your training in the Pathfinder Society has made you resilient. You gain a +1 bonus on Reflex saves and a +1 bonus on Fortitude saves against traps and environmental hazards.',
     shortDescription: '+1 Reflex saves and +1 Fortitude saves vs. traps and environmental hazards',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must be associated with the Pathfinder Society' },
@@ -564,6 +592,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use Intelligence instead of Charisma for Diplomacy (persuasion) and Bluff (lying)',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'INT', minimum: 13 }],
     effects: [
@@ -593,6 +622,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       "Once per day, use a spell slot to cast a spell from another class's spell list",
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Ability to cast spells spontaneously' },
@@ -612,6 +642,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       "You have been trained in the Andoren art of falconry. You gain a trained eagle or hawk as a familiar (even if you cannot normally have a familiar), treating your character level as your effective wizard level for this purpose. The bird can deliver messages, scout, and attack as directed. If you already have a familiar, it instead gains a fly speed of 40 ft. (average) if it doesn't already have one.",
     shortDescription: 'Gain a trained eagle or hawk familiar regardless of class',
     source: 'Faction Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'handle_animal', ranks: 3 },
@@ -629,6 +660,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Intimidate and +1 Bluff in Cheliax or with Chelish citizens; treated as Chelish citizen',
     source: 'Faction Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -672,6 +704,7 @@ export const PSO_FEATS: FeatDefinition[] = [
       'You are inured to the dangers of desert travel. You gain a +4 bonus on Constitution checks and Fortitude saves made to resist the effects of fatigue, exhaustion, and hot environments. You also gain a +2 bonus on Survival checks in desert terrain.',
     shortDescription: '+4 Fort vs. fatigue/heat; +2 Survival in deserts',
     source: 'Faction Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -711,6 +744,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Knowledge (history) on Osirion; identify Osiriani items at CL+2; +2 Linguistics on Osiriani',
     source: 'Faction Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_history', ranks: 3 }],
     effects: [
@@ -750,6 +784,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Mount gains +2 HP/HD; +2 Ride; mount speed +10 ft. and no fatigue from travel',
     source: 'Faction Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'ride', ranks: 5 },
@@ -775,6 +810,7 @@ export const PSO_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 dodge AC and +1d6 AoO damage when fighting with spear two-handed; use longspear adjacent without penalty',
     source: 'Faction Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_focus' },

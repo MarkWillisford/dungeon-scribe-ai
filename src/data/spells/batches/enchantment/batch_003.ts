@@ -27,6 +27,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'This spell functions like symbol of death, except that all creatures within the radius of a symbol of persuasion instead become charmed by the caster (as the charm monster spell) for 1 hour per caster level. Unlike symbol of death, symbol of persuasion has no hit point limit; once triggered, a symbol of persuasion simply remains active for 10 minutes per caster level.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Sleep',
@@ -52,6 +53,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'This spell functions like symbol of death, except that all creatures of 10 HD or less within 60 feet of the symbol instead fall into a catatonic slumber for 3d6x10 minutes. Unlike with the sleep spell, sleeping creatures cannot be awakened by non-magical means before this time expires. Symbol of sleep has no hit point limit; once triggered, a symbol of sleep simply remains active for 10 minutes per caster level.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Strife',
@@ -77,6 +79,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'This spell functions like symbol of death, except that all creatures within the radius of a symbol of strife are compelled to attack the nearest conscious creature for 1 round per caster level (similar to the confusion spell\'s "attack nearest creature" effect). Affected creatures continue attacking even after leaving the area. If no other creatures are visible, they act normally. Once triggered, the symbol remains active for 10 minutes per caster level. Symbol of strife can be made permanent with a permanency spell cast by an 18th-level or higher caster for 25,000 gp.',
     source: 'Pathfinder RPG Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Stunning',
@@ -102,6 +105,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'This spell functions like symbol of death, except that all creatures within 60 feet of a symbol of stunning instead become stunned for 1d6 rounds.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tactical Acumen',
@@ -137,6 +141,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'This spell grants tactical mastery to the caster and nearby allies. Whenever you or an affected ally would gain a bonus on attack rolls or to AC due to battlefield position, such as flanking, higher ground, or cover, you gain an additional +1 insight bonus. This bonus increases by +1 for every five caster levels above 5th, with a maximum enhancement of +4.',
     source: 'Pathfinder RPG Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tactical Miscalculation',
@@ -160,6 +165,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'The spell causes a target to become overly defensive, preventing it from recognizing tactical opportunities. Whenever a creature the target threatens would provoke an attack of opportunity from the target, the target must succeed at a Will save or be unable to make the attack of opportunity against that creature.',
     source: 'Pathfinder RPG Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telempathic Projection',
@@ -183,6 +189,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This spell alters the target's mood, adjusting its attitude toward you or another creature you designate by one step either positively or negatively. Alternatively, it can enhance your or an ally's skill checks in Bluff, Diplomacy, Intimidate, Perform, or Sense Motive, granting a +5 insight bonus against the spell's target with no save required. When used this way, the spell ends immediately after the skill check completes.",
     source: 'Pathfinder RPG Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Terrible Remorse',
@@ -206,6 +213,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'This spell fills a target with deep regret, compelling self-harm. Each round, the affected creature must save or inflict 1d8 points of damage + its Strength modifier to itself using an item held in its hand or with unarmed attacks. If the creature succeeds on its save, it becomes staggered for one round, takes a -2 penalty to AC, and the spell terminates.',
     source: 'Pathfinder RPG Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'They Know',
@@ -238,6 +246,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This spell instills paranoid fear in a target, making them believe another intelligent creature knows their deepest secret. While in combat or urgent situations, this compulsion doesn't prevent action, but otherwise forces the target to investigate how much the other individual knows. The target becomes shaken for the spell's duration, and their paranoia escalates, potentially leading to confession, confrontation, bribery, or attack. The spell fails if the target genuinely believes they have nothing to hide.",
     source: 'Pathfinder RPG Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thought Worm I',
@@ -261,6 +270,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This spell implants a mental suggestion that reduces the target's resistance to psychic intrusion, imposing a -2 penalty on Will saves against all mind-affecting spells and effects throughout the spell's duration.",
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thought Worm II',
@@ -284,6 +294,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'This spell functions as thought worm I, except it imposes a -4 penalty on Will saves against all mind-affecting spells and effects. This spell can be undercast as thought worm I.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thought Worm III',
@@ -307,6 +318,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This spell functions as thought worm I, except even on a successful save, the target takes a -2 penalty on Will saves against the caster's mind-affecting effects. On a failed save, the target takes a -4 penalty on Will saves against all mind-affecting effects. This spell can be undercast.",
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thought Worm IV',
@@ -330,6 +342,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This spell functions as thought worm I, except on a failed save, the target takes a -6 penalty on Will saves against all mind-affecting effects; on a successful save, the target takes a -3 penalty on Will saves against the caster's mind-affecting effects. This spell can be undercast.",
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Toilsome Chant',
@@ -353,6 +366,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "You can cast this spell as part of the action to begin an inspire competence bardic performance. The inspire competence bonus from that performance persists for as long as is necessary to complete the target's next skill check using the chosen skill (up to a maximum of 1 hour per caster level), even if you cease your bardic performance.",
     source: 'Pathfinder RPG Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Idiocy',
@@ -385,6 +399,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "With a touch, you reduce the target's mental faculties. The target takes a 1d6 penalty to Intelligence, Wisdom, and Charisma (minimum score of 1). These penalties cannot reduce any of the affected scores below 1. The ability score reduction may prevent the target from casting spells if the penalties drop the relevant ability score below the minimum threshold required for spells of that level.",
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Madness',
@@ -408,6 +423,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'You cause the target to become dazed. A dazed creature can take no actions but is not helpless and is still aware of its surroundings. The dazed creature can still move at its normal speed.',
     source: 'Pathfinder Chronicles Campaign Setting',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Mercy',
@@ -431,6 +447,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This spell restricts a creature's weapon attacks to deal only nonlethal damage for the spell's duration. The enchantment does not convert damage against creatures or objects immune to nonlethal damage — such targets still take lethal injury. The affected weapon retains all its standard characteristics and functions normally in all other respects.",
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Truthtelling',
@@ -454,6 +471,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This spell functions identically to zone of truth, except that the target temporarily assumes the semblance of a being of perfect order, like an archon or inevitable, making it visibly apparent to observers that the spell is active. The divine appearance is momentary and doesn't enable the target to impersonate a different race.",
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Triggered Suggestion',
@@ -486,6 +504,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'This spell functions similarly to suggestion, but it is limited to specifying a condition that triggers a special activity. The subject does not remember that you made the suggestion, becoming aware of the compulsion only when the trigger occurs. For example, you could compel a palace guard to attack the king when they are alone together, with the guard having no memory of the suggestion until the trigger activates.',
     source: 'Pathfinder RPG Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unadulterated Loathing',
@@ -517,6 +536,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'The caster imbues a target with intense revulsion toward a designated creature. Once cast, the target maintains a minimum 60-foot distance from the object of loathing. Approaching within this range causes the target to become nauseated until separation is reestablished. If moving beyond 60 feet would create obvious physical danger, the target receives a second save to negate the spell. This spell counters reckless infatuation.',
     source: 'Pathfinder RPG Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unbreakable Heart',
@@ -548,6 +568,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'This enchantment provides the recipient a +4 morale bonus on saving throws against mind-affecting effects that rely on negative emotions such as fear or despair, or effects that force the target to harm allies (such as confusion). Existing such effects become suppressed while the spell is active. Charmed creatures gain advantage on saves if ordered to harm true allies. This spell does not protect against positive emotion effects, and calm emotions can counter it.',
     source: "Pathfinder RPG Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unconscious Agenda',
@@ -571,6 +592,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This spell implants a hidden compulsion requiring the target to perform a specific action when predetermined circumstances occur. The caster must describe both the desired action and its trigger condition in no more than 20 words each. The spell affects conscious or unconscious humanoids who understand the caster's language. When triggered, the target acts under compulsion similar to dominate person for up to one hour. Detection via magic detection requires a higher caster level, and removal requires break enchantment or similar powerful magic — dispel magic proves ineffective.",
     source: 'Pathfinder RPG Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unnatural Lust',
@@ -601,6 +623,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This spell compels a target to experience intense desire for a designated creature or object within range that the target can perceive. On their next turn, the affected creature must rush to the subject and passionately kiss or caress that subject, taking no other actions. Creatures that wouldn't naturally feel attraction to the target receive a +4 bonus on their saving throw.",
     source: 'Pathfinder RPG Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unprepared Combatant',
@@ -624,6 +647,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This enchantment imposes a -4 penalty on initiative checks and Reflex saves on the targeted creature for the spell's duration. The effect represents magical disruption of the target's combat readiness and reflexive responses.",
     source: 'Pathfinder RPG Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unshakable Zeal',
@@ -648,6 +672,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'This spell imbues a target with boundless enthusiasm and faith in its ultimate triumph. When the target fails any attack roll, save, skill check, concentration check, or ability check, it gains a +4 morale bonus on its next attempt at that same check within one round. Additionally, the target can dismiss the spell as a free action to negate fear or emotion effects currently affecting itself.',
     source: 'Pathfinder RPG Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Untold Wonder',
@@ -680,6 +705,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This enchantment fills a target's mind with childlike wonder, allowing that creature to marvel at things that would be debilitating to others. Emotion-based penalties convert into morale bonuses at half value. Additionally, existing morale bonuses increase by 1, and the target gains a +2 bonus on saves against pattern subschool illusions due to their newfound appreciation for such effects.",
     source: 'Pathfinder RPG Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unwitting Ally',
@@ -703,6 +729,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This spell confuses the target's perception of allies and enemies. The affected creature treats the caster as an ally for flanking purposes and won't take hostile actions against the caster's enemies due to this enchantment.",
     source: "Pathfinder RPG Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Utter Contempt',
@@ -727,6 +754,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This enchantment spell causes the target to develop hostility toward other creatures. Specifically, the target's attitude toward all creatures other than itself worsens by two steps. The effect essentially isolates the affected creature socially by degrading how it perceives and interacts with everyone around it.",
     source: 'Pathfinder RPG Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vengeful Outrage',
@@ -750,6 +778,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "The caster issues a magical compulsion forcing a creature to seek out and destroy a designated enemy who has caused harm — real or perceived — to the target. The enemy must be identifiable by description or sight. While not actively pursuing the enemy, the target suffers penalties from this spell as long as it is not actively trying to reach the enemy. Upon combat engagement, the target gains a +6 morale bonus to Strength and Constitution, a +3 morale bonus on Will saves, and immunity to the shaken and frightened conditions. If the designated enemy is the target's friend or loved one, the target receives an additional saving throw upon combat engagement to overcome the spell.",
     source: 'Pathfinder RPG Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vexing Miscalculation',
@@ -773,6 +802,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This enchantment disrupts an opponent's accuracy through supernatural misfortune. The affected creature cannot generate critical threats throughout the spell's duration, even if rolling a natural 20. A roll of 20 still results in a successful attack regardless of the defender's AC, but cannot be confirmed for critical damage. The spell ends immediately after thwarting one critical threat.",
     source: 'Pathfinder Player Companion: Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wartrain Mount',
@@ -797,6 +827,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'The caster grants a target animal the combat training general purpose (per Handle Animal skill rules). This replaces any previous trained purpose and tricks the creature knew. Upon spell expiration, the animal reverts to its former trained purpose and known tricks.',
     source: 'Pathfinder RPG Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Waves of Ecstasy',
@@ -821,6 +852,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'The caster produces waves of intense pleasure affecting targets in range. Those impacted are stunned for 1 round and are staggered for the remainder of the spell. Creatures successfully saving become staggered only on the first round, then function normally afterward.',
     source: 'Pathfinder RPG Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wrath',
@@ -845,6 +877,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "The caster focuses anger against a chosen enemy within sight. The spell grants a +1 morale bonus per three caster levels (minimum +1, maximum +3) on attack rolls and weapon damage rolls against that designated foe. This bonus also applies to caster level checks to overcome the target's spell resistance. At 12th level, the caster gains the benefits of the Improved Critical feat against the designated creature, though this does not stack with other threat range expansion effects.",
     source: "Pathfinder RPG Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Yellow Sign',
@@ -877,6 +910,7 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       "This spell functions similarly to symbol of death, but affected creatures become dominated by Hastur rather than killed. Dominated creatures aid Hastur's minions and worshipers. True worshipers of Hastur can command affected creatures, with conflicting commands resolved through opposed Charisma checks. Effects last 1 round per caster level, and the symbol remains active for 10 minutes per caster level. A 1% chance exists that Hastur personally controls the target, lasting 1 day per level with uncontrollable commands. Affected creatures become vulnerable to Hastur's fulvous dreams ability indefinitely. The spell can be made permanent with a permanency spell cast by an 18th-level or higher caster for 40,000 gp.",
     source: 'Pathfinder RPG Bestiary 4',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Zone of Truth',
@@ -909,5 +943,6 @@ export const ENCHANTMENT_BATCH_003: Spell[] = [
     description:
       'Creatures within the area of a zone of truth spell cannot speak any deliberate and intentional lies. Each creature in the area receives a saving throw when the spell activates or upon entering the zone. Affected creatures are aware of this enchantment and may choose silence or evasive truthful statements rather than lie outright. Once creatures depart the area, normal speech restrictions no longer apply.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 ];

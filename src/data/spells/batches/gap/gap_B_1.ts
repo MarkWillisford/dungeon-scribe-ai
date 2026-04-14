@@ -18,6 +18,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The target is compelled into a fit of bizarre, uncontrollable babbling and becomes nauseated. Nearby creatures within 30 feet who hear the babbling must succeed at Will saves or become fascinated while the effect continues. Once a creature is no longer fascinated, it cannot be fascinated again by the same casting. Creatures with Intelligence 2 or lower are unaffected.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Badger's Ferocity",
@@ -32,6 +33,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "This spell functions similarly to keen edge, affecting multiple weapons while requiring the caster's concentration. The caster selects which weapons are affected, with a limit of one weapon per creature. If a creature's affected weapon moves beyond the spell's range, the effect terminates for that weapon.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Balance of Suffering',
@@ -47,6 +49,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes; see text',
     description: 'The spell transfers life force from an initial living target to a secondary target. The initial target takes 9d6 + 1 point per caster level damage, halved on a successful Will save. The secondary target either regains hit points equal to damage dealt (if living) or takes equivalent damage (if undead). The secondary target may also make a Will save to halve effects. Spell resistance applies to both targets.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Baleful Shadow Transmutation',
@@ -63,6 +66,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster infuses a target's shadow with Shadow Plane energies, making it resemble a different creature and deceiving the target into believing it has transformed. A successful Will save disbelieves the effect. If the Will save fails, a Fortitude save determines if the transformation is permanent. The spell causes loss of extraordinary, supernatural, and spell-like abilities, plus spellcasting. The target gains the abilities and scores of the new form while retaining non-magical class features. Incorporeal creatures and shapechangers are immune.",
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ball Lightning',
@@ -79,6 +83,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster creates lightning globes that move at 20 feet per round with perfect maneuverability. Additional globes appear at higher caster levels (3 at 11th, 4 at 15th, 5 at 19th). When a globe enters a creature\'s space, it stops and deals 3d6 points of electricity damage, with a Reflex save for negation. Creatures in metal armor suffer a -4 penalty on saves. The caster uses move actions to direct all spheres.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ban Corruption',
@@ -95,6 +100,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell removes corruption-related abilities from creatures within the emanation. Abilities associated with corruptions cease to function, as if they were magically dispelled. Corruption marks persist, but their benefits are suppressed. Creatures failing saves lose gifts for the spell's duration even if leaving the area, while successful saves grant immunity to repeated castings.",
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Banish Seeming',
@@ -109,6 +115,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'Through a melee touch attack, the caster can dispel illusions or restore creatures to their natural form. The spell functions similarly to dispel magic but grants a +2 enhancement bonus on dispel checks and targets only magical illusions or form changes from supernatural effects. When multiple appearance-altering effects exist, the caster may dispel one effect per four caster levels, prioritizing higher-level spells first. Affected creatures cannot change form again for 1 round per caster level.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Banishing Blade',
@@ -124,6 +131,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (see text)',
     description: 'The spell enchants a weapon to create pushing force. The first time each round the weapon strikes a creature, the weapon attempts a free bull rush combat maneuver check using 1d20 plus caster level, without provoking attacks of opportunity. Extraplanar creatures whose Hit Dice do not exceed caster level must make Will saves if pushed 10+ feet; failed saves banish them to their home plane and end the spell.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Banshee Blast',
@@ -140,6 +148,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster produces a cone of spectral energy resembling screaming elven ghosts dealing 1d4 damage per caster level (maximum 15d4). Creatures making a successful Reflex save take half damage. Any creature failing the Reflex save must succeed at a Will save or become panicked for 1 round/level.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Baphomet's Blessing",
@@ -155,6 +164,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: "This transmutation transforms the target's head into that of a bull. The subject's Intelligence drops to 2 and gains a gore melee attack with a +2 bonus on attack and damage rolls. Damage scales by size: 1d6+Str (Small), 1d8+Str (Medium), 2d6+Str (Large+). The creature retains its original type, class levels, BAB, saves, and hit points. Spellcasting uses the reduced Intelligence score. Undead, incorporeal, and gaseous creatures are unaffected.",
     source: 'Pathfinder Roleplaying Game: The Worldwound Incursion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Barbed Chains',
@@ -172,6 +182,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: "The caster summons a chain that strikes a target within range, either dealing 1d6 slashing damage or attempting a trip maneuver using the caster's BAB plus spellcasting ability modifier. On a successful hit or maneuver, the target must make a Will save or become shaken for 1d4 rounds. Additional chains are summoned at higher levels (two at 4th, three at 7th, four at 10th). Multiple chains can target the same creature, but shaken does not stack.",
     source: "Pathfinder Roleplaying Game: Villain Codex",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Bard's Escape",
@@ -187,6 +198,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'This teleportation spell allows the caster to instantly relocate themselves and allied creatures to new positions within range. The destinations need not have line of sight or line of effect, but must be open, solid surfaces. This spell otherwise functions as dimension door except for the noted differences regarding multiple creatures.',
     source: 'Pathfinder Roleplaying Game Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Barghest Feast',
@@ -202,6 +214,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell grants the recipient the power to gain bonuses by consuming non-evil humanoid corpses. The feeding process requires 1 full round per Hit Die the creature had and triggers attacks of opportunity. For every 2 rounds spent consuming a corpse, the target receives a +1 profane bonus to attack rolls, saving throws, and skill checks, with a maximum bonus of +5.',
     source: 'Pathfinder Adventure Path #117: Assault on Longshadow',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Barrow Haze',
@@ -217,6 +230,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: "This necromantic spell generates dark vaporous clouds comparable to fog cloud but with a supernatural connection to the caster. The black mist does not obstruct the caster's vision. When any portion of the haze remains within 30 feet of the caster, creatures within the fog count as being in range for hex abilities with a 30-foot maximum range, effectively extending the caster's hex range through the cloud.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Battering Blast',
@@ -232,6 +246,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster hurls a spike-covered force sphere at a target via ranged touch attack, dealing 1d6 points of force damage per two caster levels (maximum 5d6). Each successful hit triggers a bull rush attempt using the caster's highest mental ability modifier as the force's Strength bonus. Struck creatures must make Reflex saves or fall prone if the bull rush succeeds. Unattended objects weighing up to 25 pounds per caster level are pushed 20 feet away.",
     source: 'Pathfinder Campaign Setting: Dungeons of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Battle Trance',
@@ -248,6 +263,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster becomes a focused instrument of combat. Benefits include the ferocity monster ability, temporary hit points equal to 1d6 plus caster level (maximum +10), and a +4 morale bonus on saves against mind-affecting effects. Movement is restricted — the caster cannot withdraw or intentionally move away from creatures that attacked them. Casting inflicts 4 points of Intelligence damage and imposes a -5 penalty on concentration checks.',
     source: 'Pathfinder Roleplaying Game: Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Battlemind Link',
@@ -263,6 +279,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The caster merges thoughts with an ally, enabling coordinated combat. Both participants roll initiative and use the higher die result. In melee or ranged attacks against the same target, both combatants use the higher attack roll die. When both cast spells targeting identical areas or creatures, affected creatures receive a -2 penalty on saving throws. Benefits cease if either participant cannot see the other or becomes unconscious or helpless.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Beacon of Guilt',
@@ -278,6 +295,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell places an invisible ward on an object. When a creature first tries to move the object, the next creature to touch it becomes cursed. The target must make a Will save or become surrounded by an aura of twinkling red light that functions as faerie fire. The curse cannot be dispelled but can be removed via break enchantment, limited wish, miracle, remove curse, or wish.',
     source: 'Pathfinder Roleplaying Game: Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Beacon of Luck',
@@ -292,6 +310,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster creates a 30-foot-radius burst of luck. The caster gains a +2 sacred bonus on all saving throws while active. As an immediate action before a saving throw is made, allies within the area can choose to roll twice and take the better result. Once a creature uses this benefit, it cannot benefit again for 24 hours.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Beanstalk',
@@ -308,6 +327,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster plants the material components in soil, and upon spell completion, a large beanstalk emerges. It supports creatures up to Huge size with a maximum combined weight of 2,000 pounds and features adequate handholds and footholds for climbing as if it were knotted rope (Climb DC 5). When the 24-hour duration ends, the beanstalk rapidly withers.',
     source: 'Pathfinder Adventure Path #91: Battle of Bloodmarch Hill',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Bear's Endurance",
@@ -322,6 +342,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell grants the subject a +4 enhancement bonus to Constitution, adding the usual benefits to hit points, Fortitude saves, Constitution checks, and so forth. Temporary hit points from the Constitution boost disappear when Constitution returns to normal.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Beastspeak',
@@ -336,6 +357,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'This divination allows spellcasters in animal form to speak normally, including when casting spells with verbal components. The caster may cast the spell while in animal form using appropriate somatic elements for that creature type. This effect functions with polymorph abilities and wild shape transformations.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bed of Iron',
@@ -350,6 +372,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This enchantment allows wearers to rest comfortably while donning medium or heavy protective gear. The affected individuals avoid experiencing fatigue the following day despite sleeping in full armor, making this beneficial for armored warriors requiring proper rest during campaigns.',
     source: 'Pathfinder Player Companion: Knights of the Inner Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Befuddled Combatant',
@@ -366,6 +389,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: "This enchantment floods the target's mind with swirling images and baffling thoughts, undermining combat effectiveness. While affected, all ability DCs (spells, spell-like abilities, supernatural abilities, and extraordinary abilities) decrease by 4. Physical attacks deal minimum damage. The curse only impacts effects created during the spell's duration.",
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Beloved of the Forge',
@@ -380,6 +404,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: "The spell grants an innate sense of the direction to the caster's home or the place where they last attempted a Craft check, with a +10 insight bonus on Survival checks to navigate back. Items in possession gain a +2 luck bonus on saving throws against spells and effects. The caster also gains a +5 luck bonus on Craft checks for creating or repairing objects in trained Craft skills.",
     source: 'Pathfinder Player Companion: Heroes of the Street',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bereave',
@@ -396,6 +421,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell creates an overwhelming feeling of loss where affected creatures no longer count as allies to others. They always register as enemies for flanking, bane, bless, and similar effects. Allies must succeed at melee touch attacks to deliver touch spells to affected targets. Affected creatures cannot voluntarily fail saving throws even for beneficial effects like cure spells.",
     source: 'Pathfinder Campaign Setting: Inner Sea Temples',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bestow Auras',
@@ -410,6 +436,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell enables a caster to transfer one or more paladin or antipaladin auras to another creature. The caster maintains personal aura benefits while the target becomes the aura\'s center. For example, transferring aura of courage preserves the caster\'s fear immunity while granting the target a +4 morale bonus on fear saves. Certain auras cannot be transferred, such as those affecting only the caster.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bestow Curse',
@@ -425,6 +452,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster places a curse on the subject, choosing from three standard options: a -6 decrease to an ability score (minimum 1), a -4 penalty on attack rolls/saves/ability checks/skill checks, or a 50% chance each turn the target acts normally (otherwise takes no action). Casters may invent custom curses of equivalent power. The curse cannot be dispelled but may be removed via break enchantment, limited wish, miracle, remove curse, or wish.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bestow Grace',
@@ -439,6 +467,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "This spell allows a caster to bestow divine grace on another good creature for a short amount of time, infusing that creature with a portion of holy virtue. Upon touching the recipient, the caster grants a sacred bonus to saving throws equal to the target's Charisma bonus (if any) on all saving throws.",
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bestow Grace of the Champion',
@@ -454,6 +483,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell channels good and lawful power into the target, granting temporary paladin-like abilities including detect evil at will, immunity to disease and fear, lay on hands usable once (self only), smite evil usable once, Charisma bonus added to all saving throws, and the ability to use spell completion/trigger items as a paladin. Unused abilities are lost when the spell expires. Has no effect on existing paladins.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bestow Insight',
@@ -469,6 +499,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "The caster selects a single skill in which they possess at least one rank. The target receives a +2 insight bonus to skill checks using that ability and gains training status in it. This bonus increases by 1 for every four caster levels (maximum +6). Additionally, the target may once during the spell's duration choose to roll twice on a single check and use the better result, which terminates all other spell effects.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bestow Planar Infusion I',
@@ -483,6 +514,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell draws upon the latent planar energy of the caster's surroundings, allowing temporary infusion of a creature with the plane's power. The recipient gains that plane's basic infusion for the duration. Has no effect on the Material Plane and ends if the target leaves the plane. Once infused, creatures attune to that plane for 24 hours.",
     source: 'Pathfinder Campaign Setting: Planes of Power',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bestow Weapon Proficiency',
@@ -499,6 +531,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell enables a subject to wield any single weapon type (including exotic weapons) as though proficient with it, provided the recipient holds the weapon. The effect lasts for the spell\'s duration.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Betraying Sting',
@@ -513,6 +546,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster unleashes divine power against those who wrongly trusted them in the form of a yellow-and-black bolt of energy. It affects only creatures with indifferent, friendly, or helpful attitudes toward the caster. Damage dealt is 1d8 points per 2 caster levels.',
     source: 'Pathfinder Campaign Setting: Inner Sea Temples',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bilocation',
@@ -529,6 +563,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: "This spell creates an identical copy of the caster and their possessions within range. Both bodies exist simultaneously and share the same statistics and resources. Damage to either body reduces the caster's hit points. Actions are pooled between both bodies — taking a standard action with one prevents the other from doing likewise that round. Both bodies can provide flanking bonuses. Upon spell termination, the caster chooses which body persists.",
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bind Sage',
@@ -544,6 +579,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No and yes (see text)',
     description: 'This spell functions as a variant of planar binding designed specifically to summon caulborn — immortal, prophetic outsiders known for vast knowledge. The caster can only compel the bound caulborn to provide information using Knowledge skills or detect thoughts. Other demands automatically fail.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Binding',
@@ -560,6 +596,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This enchantment creates a magical restraint to hold a creature. The caster may employ up to six assistants whose spellcasting increases caster level. The spell offers six versions (Chaining, Slumber, Bound Slumber, Hedged Prison, Metamorphosis, Minimus Containment), each with different durations and save DC modifiers. The binding resists dispel magic but yields to antimagic field or mage\'s disjunction.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Binding Earth',
@@ -575,6 +612,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Upon a failed save, earth and stone terrain becomes difficult ground that damages the target. Creatures moving through such areas take 1d6 damage per 5 feet traversed. Those with burrow speed or earth glide ability ignore this effect. When cast on unattended objects resting on stone or earth, the ground warps around them, requiring a DC 15 Strength check to extract.',
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bit of Luck',
@@ -589,6 +627,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster obtains a luck reservoir containing 1 point per 2 caster levels. When making attack rolls or skill checks, the caster may expend 1 point to gain a +1d8 luck bonus to the d20 roll. The bonus can be applied before or after results are revealed. At 8th level, 4 points provide a +2d8 bonus; at 16th level, 8 points provide a +3d8 bonus. The spell terminates when all points are consumed.',
     source: 'Pathfinder Player Companion: Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bite the Hand',
@@ -604,6 +643,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell compels a summoned creature to attack the being who summoned it to the best of its ability. If the summoner is absent, the creature follows previous instructions. The spell does not affect called creatures, eidolons, or bonded creatures like a paladin\'s mount or wizard\'s familiar.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Biting Words',
@@ -619,6 +659,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell allows a caster to channel magic through their voice to damage opponents. As a standard action, the caster can make a ranged touch attack against a target within 30 feet, dealing 1d6 + Strength or Charisma modifier (whichever is higher) in bludgeoning, piercing, and slashing damage. Each attack reduces the spell\'s duration by 1 minute. Shouting instead of speaking removes the language-dependent descriptor but reduces damage to 1d4 + half modifier.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Black Mark',
@@ -634,6 +675,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster inscribes a black mark on the target's skin no larger than the caster's hand. When activated, the target becomes shaken while in water beyond 5 feet from shore. While active, aquatic creatures, water-subtype creatures, and those with swim speeds become hostile to the marked target (excluding non-aquatic animals). Functions similarly to mark of justice for removal purposes.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Black Spot',
@@ -648,6 +690,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: "This necromantic curse manifests as an intangible, illusory black mark above the target's head that cannot be concealed. It creates a 10-foot aura where allies gain +2 bonus on weapon attack and damage rolls against the target while the cursed creature suffers -4 penalty on saving throws against death effects. Daily Fortitude saves are required; failure results in 1 point of Constitution damage that resists healing. Death occurs if Constitution reaches 0.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Black Sword of War',
@@ -662,6 +705,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless, object)',
     description: "Restricted to followers of the Horseman of War. Upon casting, the targeted weapon becomes glossy black and gains the ability to inflict bleed damage when dealing hit point damage. The bleed damage equals half the caster's level, with a maximum of 5 bleed damage.",
     source: 'Pathfinder Module: The Moonscar',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Black Tentacles',
@@ -678,6 +722,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell manifests rubbery black tentacles that emerge from the ground. Each round, they make combat maneuver checks (using caster level as BAB, +4 Strength bonus, +1 size bonus) to grapple all creatures in the area. Successful grapples deal 1d6+4 damage and impose the grappled condition. The tentacles gain +5 on subsequent grapple checks against already-grappled foes but cannot move or pin them. The area becomes difficult terrain.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blacklight',
@@ -694,6 +739,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes or no (object)',
     description: "The caster generates an area of total darkness that resists even darkvision perception, though the caster maintains normal vision within it. External viewers cannot penetrate the obscured zone. The spell may target a fixed location or attach to a mobile object/creature, moving accordingly. The spell counters or dispels light magic of equal or lower intensity.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blade Barrier',
@@ -710,6 +756,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'An immobile vertical curtain of force-based whirling blades materializes. Creatures passing through take 1d6 points of damage per caster level (maximum 15d6) with a Reflex save for half damage. If created where creatures exist, they can save to avoid it entirely. The barrier grants +4 bonus to AC and +2 bonus on Reflex saves to those behind it.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blade Lash',
@@ -724,6 +771,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell causes a melee weapon to elongate and become whip-like. As part of casting, the caster can attempt a trip combat maneuver against one creature within 20 feet, gaining a +10 bonus on the roll. After the maneuver, the weapon returns to its normal form.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blade of Bright Victory',
@@ -739,6 +787,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: "This spell strengthens the connection between a paladin and their divine bond weapon, granting it the ghost touch property and the ability to affect incorporeal creatures. The caster can change the weapon's damage type (bludgeoning, piercing, or slashing) as a swift action. The spell also provides a sacred bonus to CMD against disarm and sunder attempts equal to half the caster level.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blade of Dark Triumph',
@@ -754,6 +803,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: "This spell strengthens the connection between an antipaladin's fiendish boon weapon and its unholy spirit. The weapon gains the ghost touch property and the ability to affect incorporeal creatures. The caster can adjust the weapon's damage type as a swift action. The spell provides a profane bonus to CMD against disarm and sunder attempts equal to half the caster level.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blade of Light',
@@ -769,6 +819,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell enchants a weapon with pure sunlight. The affected weapon sheds light as if daylight had been cast on it and functions as both magical and good-aligned for damage reduction. Against undead creatures, the weapon grants +2 sacred bonus to attack rolls and inflicts an additional 1d6 damage. For incorporeal undead, it gains the ghost touch ability. The weapon automatically confirms critical hits against foes vulnerable to sunlight.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blade Snare',
@@ -783,6 +834,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: "This protective spell creates an invisible magical field that allows weapons to approach but impedes their withdrawal. When struck in melee, the caster makes a caster level check against the attacker's CMD. Success traps the weapon or limb; failure allows normal retraction. Trapped weapons can be abandoned, but retained limbs give the attacker the grappled condition. Only one limb/weapon can be snared simultaneously.",
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Blade Tutor's Spirit",
@@ -798,6 +850,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster summons an insubstantial spirit of force that hovers around fists or melee weapons. This spirit reduces penalties from voluntary combat actions (Power Attack, fighting defensively, or charging) by 1 point plus an additional 1 point per 5 caster levels, with a minimum penalty of 0.',
     source: 'Pathfinder Player Companion: Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blasphemy',
@@ -814,6 +867,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell inflicts graduated effects based on target HD compared to caster level. Equal to caster level: dazed for 1 round. Up to CL-1: weakened (2d6 Strength for 2d4 rounds) and dazed. Up to CL-5: paralyzed for 1d10 minutes, weakened, and dazed. Up to CL-10: killed (or 3d6+CL damage on save), paralyzed, weakened, and dazed. On the caster\'s home plane, nonevil extraplanar creatures are instantly banished.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blast Barrier',
@@ -830,6 +884,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell creates a rippling barrier of loose natural materials that provides total cover to Large or smaller creatures. The wall requires concentration to maintain and has AC 9, hardness 0, and 5 hit points per caster level. When destroyed or concentration ends, it explodes dealing 2d6 slashing damage and 1d6 sonic damage per 3 caster levels (maximum 6d6) to adjacent creatures, with Reflex saves for half.',
     source: 'Pathfinder Player Companion: Giant Hunter\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blast of Wind',
@@ -846,6 +901,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This evocation spell creates an intense 90 mph wind effect. It functions similarly to gust of wind, with a key enhancement: affected creatures are treated as one size category smaller for determining the spell\'s effects. For every 4 caster levels beyond 7th, creatures suffer an additional size category reduction, with a maximum of three categories smaller at 15th caster level.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blaze of Glory',
@@ -863,6 +919,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster becomes unconscious but releases a wave of holy energy. This spell can be cast as a standard action (reducing caster to -1 HP but stable) or as an immediate action when dropped below 0 HP. Good creatures within range heal 1d6 per two caster levels; evil creatures take equivalent damage (Will save halves). All creatures are affected by prayer for 1 round per caster level.',
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blazing Rainbow',
@@ -879,6 +936,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates multicolored solid light in one of two configurations. Bow option: generates a magical bow (long or short) with automatic proficiency that produces +1 seeking brilliant energy arrows; targets struck are surrounded by faerie fire and dazzled for 1 minute; fires arrows equal to caster level. Bridge option: forms a passageway 5 ft. wide and up to 10 ft. long per caster level; allies gain Wisdom bonus to checks, saves, and CMD against forced movement.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bleed for Your Master',
@@ -895,6 +953,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: "This enchantment compels the caster's bonded creature to throw itself in front of a blow or shield the caster from an effect. If triggered by an attack roll, the creature absorbs the damage instead of the caster. If triggered by an area effect allowing Reflex saves, the creature provides cover bonuses (+2 or +4 depending on size comparison) and automatically fails its save. After taking damage, the target becomes shaken for one minute.",
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blend With Surroundings',
@@ -910,6 +969,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell allows a creature to assume the appearance of an inanimate object such as a statue, furniture, a tree, a bush, or a rock of similar size. While stationary, the target gains a +20 bonus to Stealth checks and can use Stealth while observed. Armor blends with the illusion, negating its Stealth penalty. If the target moves, the spell immediately terminates.',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bless Army',
@@ -926,6 +986,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell imbues military forces with enhanced morale and confidence. Affected units receive a +1 bonus on OM and Morale checks.',
     source: 'Pathfinder Player Companion: Quests & Campaigns',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bless Water',
@@ -941,6 +1002,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (object)',
     description: 'This transmutation spell imbues a flask (1 pint) of water with positive energy, turning it into holy water.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bless Weapon',
@@ -955,6 +1017,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: "This enchantment allows a weapon to strike true against evil opponents. The weapon gains a +1 enhancement bonus equivalent for penetrating damage reduction of evil creatures and striking evil incorporeal beings, though no actual bonus is granted. The weapon becomes good-aligned. All critical hit rolls against evil foes are automatically successful, so every threat is a critical hit. This critical hit benefit does not apply to weapons with critical-hit-related magical properties.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blessed Fist',
@@ -970,6 +1033,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This enchantment allows the recipient to be treated as armed during unarmed combat, preventing attacks of opportunity. For those already possessing unarmed strike capabilities (monks or those with Improved Unarmed Strike), the spell grants a +1 enhancement bonus to attack and damage rolls and strikes count as good-aligned weapons for overcoming damage reduction.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blessing of Courage and Life',
@@ -986,6 +1050,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "This prayer grants sustained aid to an injured target. While active, the recipient gains a +2 morale bonus on saving throws made against fear and death effects. At any point, the target can terminate the spell using a swift action to trigger healing of 1d8 points of damage +1 point per caster level (maximum +10), but forfeits the saving throw bonus.",
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blessing of Fervor',
@@ -1000,6 +1065,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell empowers allies to choose one bonus each round: increase speed by 30 feet; stand up as swift action without provoking attacks of opportunity; make one extra attack with highest base attack bonus; gain +2 bonus on attack rolls and +2 dodge bonus to AC and Reflex saves; or cast a single 2nd-level or lower spell with enlarge, extend, silent, or still metamagic applied. Does not stack with haste.',
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blessing of Liberty',
@@ -1014,6 +1080,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell grants the caster a luck bonus to CMD and saving throws against movement-restricting effects equal to +1 per 6 caster levels (minimum +1, maximum +3). The caster can also terminate the spell early to gain a +20 foot enhancement bonus to base speed for 1 round per whole minute of duration remaining.',
     source: 'Pathfinder Player Companion: Heroes of the Street',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blessing of the Mole',
@@ -1028,6 +1095,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Targets receive darkvision 30 feet and a +2 competence bonus on Stealth checks.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blessing of the Salamander',
@@ -1043,6 +1111,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants the target creature slick, clammy skin and regenerative abilities: fast healing 5, fire resistance 20, and a +2 competence bonus to Combat Maneuver Defense.',
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blessing of the Watch',
@@ -1059,6 +1128,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: "This enchantment works similarly to the bless spell but with geographical restrictions — it works only in the caster's home city and in areas under the jurisdiction of the city watch. The symbol of the associated deity appears above the heads of those affected.",
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blessings of Luck and Resolve',
@@ -1075,6 +1145,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "This enchantment grants recipients a +2 morale bonus on saving throws against fear effects. For creatures with fearless racial traits, immunity to fear is granted instead. If a save against fear fails, the affected creature may use an immediate action to reroll the save with a +4 morale bonus, accepting whatever result occurs.",
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blight',
@@ -1089,6 +1160,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This necromantic spell causes a single plant to wither. Plant creatures take 1d6 points of damage per level (maximum 15d6) and may make a Fortitude save for half damage. Non-creature plants receive no save and immediately die.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blightburn Weapon',
@@ -1103,6 +1175,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes (object)',
     description: 'The spell transforms a weapon into pure blightburn material. Affected weapons function normally but inflict 2d6 points of fire damage each round in contact with creatures touched or struck. Additionally, the weapon radiates a 10-foot aura causing blightburn sickness (a disease with DC matching the spell).',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blinding Ray',
@@ -1119,6 +1192,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster fires blinding rays of sunlight. One ray initially, plus one additional ray for every four levels beyond 3rd (maximum three at 11th level). Each ray requires a ranged touch attack. On a hit, the target must save or be blinded for 1 round. Creatures with light blindness, light sensitivity, or vulnerability to bright light who fail must save or be blinded for 1d4 rounds and take 1d4 damage per two caster levels (maximum 5d4).',
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blistering Invective',
@@ -1135,6 +1209,7 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Special (negates fire damage only)',
     description: 'The caster unleashes an insulting tirade so vicious that enemies who hear it are physically scorched. The spell functions by making an Intimidate check to demoralize each enemy within 30 feet. Demoralized enemies take 1d10 fire damage and must succeed at a Reflex save or catch fire.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloatbomb',
@@ -1150,5 +1225,6 @@ export const GAP_SPELLS_B_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Upon a failed Fortitude save, the spell kills the target if its Hit Dice do not exceed half the caster's level. The corpse then rapidly decays. If any creature touches the body within the duration, it explodes in a 10-foot-radius burst, inflicting 3d6 points of acid damage (Reflex half).",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
 ];

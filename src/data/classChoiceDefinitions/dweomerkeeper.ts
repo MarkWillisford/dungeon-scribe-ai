@@ -28,6 +28,7 @@ export const dweomerkeeperDefinitions: ClassChoiceDefinition[] = [
     },
     source: '3.5e',
     isOfficial: false,
+    verificationStatus: 'needs_review' as const,
     visibility: 'campaign',
     rev: 1,
   },

@@ -13,6 +13,7 @@ export const sorcererDefinitions: ClassChoiceDefinition[] = [
     collectionFilter: { classIds: 'sorcerer' },
     source: 'pf1e-core',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
     visibility: 'global',
     rev: 1,
   },

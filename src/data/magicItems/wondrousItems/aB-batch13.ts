@@ -12,6 +12,7 @@ export const wondrousItemsAB13: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 5,
@@ -86,6 +87,7 @@ export const wondrousItemsAB13: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: "Pathfinder Player Companion: Quests & Campaigns",
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 5,
@@ -137,6 +139,7 @@ export const wondrousItemsAB13: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ENCHANTMENT }],
     casterLevel: 5,
@@ -189,6 +192,7 @@ export const wondrousItemsAB13: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder Player Companion: People of the Sands',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 9,

@@ -16,6 +16,7 @@ export const ng: DeityEntry = {
   sacredColors: ['silver'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -35,6 +36,7 @@ export const shyka: DeityEntry = {
   sacredColors: ['white'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -54,6 +56,7 @@ export const theLostPrince: DeityEntry = {
   sacredColors: ['black', 'gray'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -73,6 +76,7 @@ export const countRanalc: DeityEntry = {
   sacredColors: ['black', 'gray'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -92,6 +96,7 @@ export const theLanternKing: DeityEntry = {
   sacredColors: ['black', 'gold'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -111,6 +116,7 @@ export const theGreenMother: DeityEntry = {
   sacredColors: ['green', 'red'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -130,6 +136,7 @@ export const ragadahn: DeityEntry = {
   sacredColors: ['blue'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -149,6 +156,7 @@ export const ayrzul: DeityEntry = {
   sacredColors: ['brown', 'gray'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -168,6 +176,7 @@ export const hshurha: DeityEntry = {
   sacredColors: ['white', 'yellow'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -187,6 +196,7 @@ export const kelizandri: DeityEntry = {
   sacredColors: ['blue', 'green'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

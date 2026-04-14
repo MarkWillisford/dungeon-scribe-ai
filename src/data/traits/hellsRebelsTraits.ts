@@ -11,6 +11,7 @@ export const HELLS_REBELS_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Knowledge (nobility); class skill; Noble Scion feat loses Charisma prerequisite',
     source: "Hell's Rebels Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Rebels",
     prerequisites: [],
@@ -40,6 +41,7 @@ export const HELLS_REBELS_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 one Perform skill; all Perform class skills; +1 DC on language-dependent effects',
     source: "Hell's Rebels Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Rebels",
     prerequisites: [],
@@ -81,6 +83,7 @@ export const HELLS_REBELS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Choose: +1 attack and damage, or +1 spell save DCs vs House Thrune and Asmodeus worshipers',
     source: "Hell's Rebels Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Rebels",
     prerequisites: [],
@@ -107,6 +110,7 @@ export const HELLS_REBELS_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Disguise; class skill; aura suppression vs detect spells; +1 saves vs mind-affecting',
     source: "Hell's Rebels Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Rebels",
     prerequisites: [],
@@ -147,6 +151,7 @@ export const HELLS_REBELS_TRAITS: TraitDefinition[] = [
       "You were raised among Kintargo's performance community—whether through family connections at the Opera House or as a street busker—and have mastered the art of cloaking scathing political commentary in harmless-seeming entertainment. You gain a +1 trait bonus on Linguistics checks, and Linguistics is always a class skill for you. You also gain a +2 trait bonus on all saving throws against fear effects.",
     shortDescription: '+1 Linguistics; class skill; +2 saves vs fear',
     source: "Hell's Rebels Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Rebels",
     prerequisites: [],
@@ -181,6 +186,7 @@ export const HELLS_REBELS_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Stealth; class skill; +2 on one Silver Ravens Organization check per phase',
     source: "Hell's Rebels Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Rebels",
     prerequisites: [],
@@ -210,6 +216,7 @@ export const HELLS_REBELS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Treat Cha as 14 (or +2) for rebellion teams; +1 Leadership score if you take Leadership feat',
     source: "Hell's Rebels Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Rebels",
     prerequisites: [],
@@ -232,6 +239,7 @@ export const HELLS_REBELS_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Perception; class skill; +1 DC on illusion (pattern) spells; +1 saves vs illusions',
     source: "Hell's Rebels Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Rebels",
     prerequisites: [],
@@ -273,6 +281,7 @@ export const HELLS_REBELS_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Knowledge (local); once per day roll twice on one ability score type skill check',
     source: "Hell's Rebels Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Rebels",
     prerequisites: [],
@@ -317,6 +326,7 @@ export const HELLS_REBELS_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 on one Knowledge skill tied to chosen mystery; class skill; once per day roll twice',
     source: "Hell's Rebels Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Rebels",
     prerequisites: [],

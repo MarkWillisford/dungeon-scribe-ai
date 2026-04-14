@@ -16,6 +16,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "This spell functions identically to restoration but exclusively affects eidolons. A lesser version (Summoner 2) functions like lesser restoration, requires no material component, and takes 3 rounds to cast.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic (2011)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resurgent Transformation',
@@ -31,6 +32,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'none',
     description: "This spell remains dormant until you drop to one-quarter hit points or lower. Upon triggering, you gain a +4 enhancement bonus to Constitution and Strength, damage reduction 5/-, and haste benefits. You heal 4d8 points of damage + 1 point per caster level (maximum +25) and suffer 1d4 points of Intelligence and Wisdom damage. The transformation lasts for 1 round per caster level. Upon expiration, you become exhausted and take 1d4 points of Constitution damage. Using a second transformation within 24 hours inflicts additional Constitution damage and risks death unless a DC 15 Fortitude save succeeds.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resurrection',
@@ -46,6 +48,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "This spell functions similarly to raise dead but can restore life to any deceased creature regardless of physical condition. So long as some small portion of the creature's body still exists, it can be resurrected. The creature can have been dead no longer than 10 years per caster level. Upon casting, the creature is immediately restored to full hit points, vigor, and health, with no loss of prepared spells. The resurrected creature gains one permanent negative level or, if 1st level, takes 2 points of Constitution drain instead. The spell can resurrect those killed by death effects or destroyed undead but cannot restore those who died of old age. Constructs, elementals, outsiders, and undead cannot be resurrected.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Retribution',
@@ -61,6 +64,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes',
     description: "The spell targets creatures who have attacked you within the previous round using melee, ranged, natural weapons, or spells requiring attack rolls. The target suffers a -4 penalty on attack rolls, skills checks, and ability checks. A successful Fortitude save reduces the penalty duration to 1 round only. Targets sharing your deity receive a -2 penalty to their saving throw.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Retributive Reparations',
@@ -76,6 +80,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes',
     description: "When a creature takes the cursed item from you, it must make a Will save. Failure results in the creature becoming fatigued. Each round the item isn't returned, the creature must save again. A second failure causes exhaustion. As long as the victim of the curse is actively working to return the object, its exhaustion is reduced to fatigue. The induced fatigue and exhaustion cannot be removed by normal means, though immunities function normally. The curse ends via remove curse or returning the item. Only one object can have this spell active at a time.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Retrieve Item',
@@ -91,6 +96,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'no',
     description: "You enchant a specific nonliving item while holding it. Once cast, the item can be summoned by speaking a predetermined word and snapping fingers, causing it to appear instantly in your hand. The spell fails if another creature possesses the item at the time of summoning.",
     source: 'Pathfinder Chronicles: Classic Treasures Revisited (2010)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Returning Weapon',
@@ -106,6 +112,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes (harmless, object)',
     description: "For the duration of the spell, the target weapon acts as if it had the returning weapon special ability. The spell can serve as a prerequisite for the returning weapon special ability on magic items.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Revealing Light',
@@ -121,6 +128,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'no',
     description: 'A touched object produces shimmering light (as per light) that causes shadows to shift constantly in a 20-foot radius. The effect removes racial Stealth bonuses and suppresses visual camouflage bonuses within the area. Additionally, creatures gain a +2 bonus on saving throws against pattern subschool illusions and effects while in the illuminated zone.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Revenant Armor',
@@ -135,6 +143,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'no',
     description: "When the wearer becomes unconscious or dies in combat, the armor is immediately brought to life as a Medium-sized animated object. The animated suit moves shambling with 20-foot speed while containing the wearer's body, preventing them from being helpless. The armor gains average hit points and metal-based abilities if metallic. It resists being knocked prone without provoking attacks. Allies may direct its movement, though it refuses areas requiring skill checks. When grappled, it uses the caster's level as Strength and CMB equals 1 + caster level + armor's Strength modifier. The spell ends if the wearer is reduced to dust, becomes conscious, or is removed from the armor.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reversion',
@@ -150,6 +159,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'none',
     description: "You establish an imperfect replica of yourself within the Akashic Record at the time the spell is cast. You must have hit points equal to or greater than half your maximum to cast. When reduced below half maximum hit points during the spell's duration, you can use an immediate action to absorb energy from the replica, regaining 1d8 plus 1 point per caster level (maximum +5) hit points. A greater version (Cleric 5, Psychic 4, Wizard 5) heals 3d8+1/level (max +15), and a mass version (Cleric 6, Psychic 5, Wizard 6) affects one creature per level, each healing 1d8+1/level (max +25).",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reviving Finale',
@@ -166,6 +176,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "You must maintain an active bardic performance to cast this spell. Upon casting, the bardic performance ends immediately, and all allies within the spell's area recover 2d6 hit points. The spell provides no benefit to undead creatures.",
     source: 'Advanced Player\'s Guide (2010)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ricochet Shot',
@@ -180,6 +191,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes (harmless, object)',
     description: "The spell enchants a projectile weapon to redirect shots. When the wielder hits a primary target, the projectile ricochets toward a secondary target within 20 feet instead of being destroyed. The secondary attack uses the same base attack bonus but gains no enhancement bonuses or magical benefits from the weapon. Firearm ricochets target normal AC rather than touch AC. The wielder can ricochet one projectile per three caster levels (maximum six at 18th level). Once that limit is reached, the spell ends.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ride the Lightning',
@@ -195,6 +207,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes',
     description: "You transform into lightning as a standard action and travel in a straight line up to 120 feet, rematerializing as a free action without provoking opportunity attacks. Creatures in the lightning's path sustain 10d6 points of electrical damage and are staggered for 1 round, with a successful Reflex save halving damage and negating the staggered condition. Objects in the path are damaged; combustible items ignite and low-melting-point metals melt. If the path is blocked, you materialize in the nearest open space before the barrier. You gain immunity to electricity while the spell remains active.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ride the Waves',
@@ -210,6 +223,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "The spell grants the target the ability to breathe water and a swim speed of 30 feet. The recipient gains a +8 bonus on swimming checks and may take 10 on Swim checks even while distracted or endangered. The target can use the run action while swimming in straight lines. Notably, the spell does not make the target unable to breathe air, maintaining dual respiratory capability.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Riding Possession',
@@ -224,6 +238,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes',
     description: "You project your soul into a host body as an undetected observer with limited influence. Unlike standard possession, the host remains fully in control and unaware of the intrusion. You cannot communicate directly with the host but may cast mind-affecting spells or additional riding possession effects, provided they function as purely mental actions. Only the host can be targeted, regardless of the spell's normal parameters. If the host succeeds on a saving throw against such spells, it becomes aware of the possession and gains another save. Protection from evil and similar effects don't expel you from the host, but they do prevent you from casting further spells until those effects expire.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rift of Ruin',
@@ -241,6 +256,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell creates an extradimensional rift on horizontal surfaces. Creatures must succeed at a Reflex save to avoid falling in. The rift contains razor-sharp blades and boiling pools of acid, strange chewing vermin, and writhing shards of ice representing chaotic Abyssal manifestations. Falling creatures take 6d6 damage; those inside take an additional 6d6 damage each round (randomly acid, bludgeoning, cold, electricity, fire, piercing, slashing, or sonic), with Reflex saves for half. Climb DC is 25. When duration ends, creatures are expelled, take double damage, and become prone. The caster may dismiss it early as a standard action to summon Abyssal denizens instead.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Righteous Blood',
@@ -256,6 +272,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'The spell infuses a good-aligned target with holy energy. When an evil-subtype creature damages the target with a slashing or piercing melee weapon, it takes 1d6 points of damage from divine power each time it successfully hits the target. If the target possesses the good subtype or an aura of good ability (such as paladins or certain clerics), damage increases to 2d6 points instead. Creatures lacking the evil subtype or wielding reach weapons avoid this effect entirely.',
     source: "Pathfinder Player Companion: Demon Hunter's Handbook (2013)",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Righteous Condemnation',
@@ -271,6 +288,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes',
     description: 'When creatures of chaotic, neutral, or evil alignment cast spells targeting you, they must make a Will save or suffer a -4 penalty on Intelligence, Wisdom, and Charisma-based checks during the spell\'s duration. Creatures with only neutral alignment components receive a +4 bonus on their save. Penalties stack, so chaotic evil spellcasters incur an -8 penalty total.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rigor Mortis',
@@ -286,6 +304,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes',
     description: "The spell causes joint stiffness and swelling, inflicting 1d6 points of nonlethal damage per caster level. The target incurs a -4 Dexterity penalty and 10-foot movement speed reduction lasting 1 minute per caster level. Another creature can spend one minute and attempt a DC 25 Heal check to end these effects early. A successful Fortitude save halves the damage and negates the Dexterity penalty and movement reduction.",
     source: 'Pathfinder Roleplaying Game Horror Adventures (2016)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rising Water',
@@ -302,6 +321,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'no',
     description: "You manifest a cylinder of calm water on solid ground or atop existing water. The water forms rapidly without displacing creatures or objects, though anything present becomes submerged. Unconscious air-breathers drown immediately; conscious ones can hold their breath. Movement through the cylinder at normal speed requires a successful DC 10 Swim check (otherwise, creatures move at one-quarter speed). The water persists in its cylindrical form regardless of gravity, allowing creatures to enter and exit freely. Upon spell conclusion, the water vanishes, dropping any swimmers to the ground below.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Rival's Weald",
@@ -317,6 +337,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes',
     description: "This transformation spell converts targets into living trees resembling their original forms. Creatures receive a +4 bonus on Fortitude saves if placed in fatal tree conditions (underwater, airborne, etc.). Failed Will saves cause targets to lose awareness and mental function, reverting to tree-like cognition. Successful Will saves allow observation and communication via speak with plants or with other trees. Over one year, the target's appearance gradually becomes indistinguishable from a common tree. The spell automatically dispels existing polymorph effects. While active, targets cannot assume alternative forms. Incorporeal, gaseous, and plant creatures are immune.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'River Whip',
@@ -334,6 +355,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'no',
     description: "You create flowing fresh water forming a whip sized appropriately for you. Attacks are made as melee touch attacks rather than standard attacks. Each successful strike deals damage and douses the target with 1 pint of water. Fire subtype creatures take an additional 1d6 damage. Targets on fire gain a +2 bonus on saving throws to extinguish flames. The spell discharges after successfully striking a creature a number of times equal to your caster level. The water produced matches that from the create water spell.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Roaming Pit',
@@ -350,6 +372,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'no',
     description: "This spell operates similarly to create pit but produces a mobile pit. You may direct it up to 20 feet per move action while keeping it on suitable horizontal surfaces. When the pit's movement overlaps a creature's space, that creature must succeed at a Reflex save or fall in. Creatures avoiding the pit relocate to the nearest safe location. Those already in the pit travel with it when repositioned.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rock Whip',
@@ -366,6 +389,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'no',
     description: "You create a non-magical whip weapon dealing 1d8 bludgeoning damage. You gain proficiency and immunity to disarm/sunder attempts. The whip passes through natural stone, ignoring stone-based cover. Unlike normal whips, armor and natural armor provide no protection against this weapon's damage, though it deals no damage to earth subtype outsiders. Successful strikes allow free bull rush attempts using caster level and primary casting ability modifier instead of base attack bonus and Strength.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rope Tornado',
@@ -382,6 +406,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes',
     description: "The spell creates a whirlwind that knocks grounded creatures prone and forces flying creatures to make DC 25 Fly checks or fall. Huge or larger creatures gain +2 on Reflex saves; Medium and smaller creatures take a -2 penalty. The tornado extinguishes nonmagical flames, disperses clouds, and scatters unattended objects throughout the affected line.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ropeweave',
@@ -396,6 +421,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'no',
     description: "This transmutation enchantment causes a rope to expand and reshape itself into one of four distinct structures: a rope bridge (spans up to 10 feet per caster level horizontally, max 100 feet, 5 feet wide), a rope hammock (suspendable at 5-30 feet height with concealment), a rope ladder (vertical structure extending up to 100 feet), or a trip line (tangled mass occupying up to 10 contiguous 5-foot squares). Each form can sustain up to 1,000 pounds plus 200 pounds per caster level (max 3,000 lbs). Each 5-foot section has break DC 23, AC 11, and 1 hp per caster level (max 10 hp).",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rotgut',
@@ -410,6 +436,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes (object)',
     description: "This spell transforms target water into cheap alcohol (beer, grog, mead, rum, or wine) of your choice. While the resulting liquid tastes poor, it functions as standard alcohol for intoxication purposes. The spell cannot affect holy water, potions, magical liquids, or water that is part of a living creature's body.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rumbling Fury',
@@ -425,6 +452,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes',
     description: "You generate a localized earthquake affecting creatures in a cone. A single trip attack roll is made and applied against all targets in the area. Creatures failing their resistance are knocked prone. You don't provoke opportunity attacks for the trip attempt itself (though casting the spell does), and cannot accidentally trip yourself. This spell differs from standard trip mechanics by affecting any creature touching the ground regardless of size. At GM discretion, environmental effects may occur, such as loose stones falling or items toppling.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rune of Durability',
@@ -439,6 +467,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'no',
     description: "You inscribe an angular rune on a weapon's surface to enhance its durability. A weapon that bears this rune multiplies its hit points by 2, as if it were one size category larger than it actually is. Multiple runes of this type on the same weapon provide no additional benefit.",
     source: 'Pathfinder Companion: Dwarves of Golarion (2009)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rune of Ruin',
@@ -454,6 +483,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'no',
     description: "This curse spell damages magical items. The target object is reduced to 1/4 hit points, gains the broken condition, and appears worn. Numeric bonuses decrease by 1 for every 3 caster levels (minimum +0). Other magical qualities fail 50% of the time when used. For intelligent magical items, Ego remains unchanged. Such weapons have 50% success with spells/spell-like abilities and 25% chance of forgetting their special purpose. If an intelligent weapon was dominating its wielder when failing the save, the wielder gains an immediate save (+4 bonus) to regain control. The spell has no effect on magical artifacts.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rune of Rule',
@@ -468,6 +498,7 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "This spell inscribes a magical rune on another creature using specially prepared paint. The rune lasts 24 hours or until activated as a swift action. You select one of seven rune effects: Charity (+5 insight bonus on rolls benefiting others), Generosity (boost consumable magic item caster level by 2), Humility (no attacks of opportunity for 1 round), Kindness (enhance aid another or healing spells), Love (increase charm spell save DC or convert damage to nonlethal), Temperance (retry failed save against poison/disease/drugs), or Zeal (+3 Will saves and language-dependent save DC +1 for 1 round). Only one rune may be placed on a creature at a time, and you cannot place it on yourself.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Runic Overload',
@@ -483,5 +514,6 @@ export const GAP_SPELLS_R_2: Spell[] = [
     spellResistance: 'yes',
     description: "The spell activates magical runes to explosive intensity. When cast on a creature bearing magical runes (such as a rune giant), it inflicts 1d6 points of sonic damage per caster level (maximum 20d6) and stuns for one round, with spell resistance applying. Alternatively, it can target other magical runes like those from arcane mark or explosive runes, creating a 5-foot-radius burst dealing 1d8 points of sonic damage per 2 caster levels (maximum 10d8). The spell preserves targeted runes' function and cannot affect mundane runic markings.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 ];

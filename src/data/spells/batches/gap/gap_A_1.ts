@@ -16,6 +16,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell suppresses the effects of a single curse on a creature without restoring damage or drain caused by the curse. It works on curses that require remove curse plus additional measures (like lycanthropy), but cannot suppress curses that cannot be removed by remove curse. Each curse can only be suppressed once by abeyance, regardless of caster, and the spell does not allow divesting cursed objects, though it can suppress curses contracted from objects.',
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ablative Barrier',
@@ -32,6 +33,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates invisible layers of solid force that provide a +2 armor bonus to AC. The first 5 points of lethal damage per attack converts to nonlethal damage. Against attacks already dealing nonlethal damage, the target gains DR 5/—. The spell discharges after converting 5 points of damage per caster level (maximum 50 points total).',
     source: 'Pathfinder Player Companion: Armor Masters Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ablative Sphere',
@@ -46,6 +48,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'None',
     description: 'A crystalline, web-like globe materializes around the caster, initially providing improved cover. The barrier permits spells to pass through without obstruction. The sphere measures one inch thick per caster level, possesses hardness 5, and contains 3 hit points per inch of thickness. As damage accumulates, protection diminishes progressively: after losing one-third of its hit points, it grants standard cover; at two-thirds damage, only partial cover remains. Once reduced to zero hit points, the globe shatters and any excess damage transfers to the caster.',
     source: 'Pathfinder Player Companion: Dungeoneer\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Aboleth's Lung",
@@ -60,6 +63,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell allows touched creatures to breathe water freely, but they lose the ability to breathe air. The caster divides the total duration equally among all touched creatures. The spell has no effect on creatures that already possess water-breathing ability.",
     source: 'Pathfinder Player Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Absolution',
@@ -74,6 +78,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell purges impure thoughts from the target\'s mind. It ends all charm or compulsion effects affecting the target, including harmless ones like heroism. If forced actions violated the target\'s alignment, monastic vows, paladin oath, or conduct code, those actions no longer cause loss of class abilities or divine spellcasting. Unlike atonement, this spell cannot reverse alignment changes, effect willing transgressions, induce alignment shifts, or restore abilities lost from past misdeeds. Success depends on alignment compatibility: automatic if caster and target share alignment or patron deity; 5% per caster level if alignments are one step apart; automatic failure otherwise.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Absorb Rune',
@@ -88,6 +93,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This abjuration allows the caster to lay their hand upon a magical glyph, symbol, or other magical spell effect and attempt to absorb its essence. The caster must succeed at a caster level check (DC = 10 + target spell\'s caster level). Success removes the rune and places it on the silk glove in inert form. Within the spell\'s duration, the caster can transfer it to another surface as a standard action, restoring its function or dissipating it harmlessly. This version affects runes equivalent to 3rd-level spells or lower.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Absorb Toxicity',
@@ -102,6 +108,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster becomes immune to diseases and poisons encountered while the spell is active. When exposed to such afflictions, the caster may choose to absorb them, which ends the general immunity but grants specific immunity to that particular affliction. The absorbed toxin can be transferred to another creature via melee touch attack. If the transfer succeeds, the target makes a save (using whichever DC is higher: the spell\'s or the affliction\'s) or suffers immediate effects. If the spell expires before transfer occurs, the caster is exposed to the absorbed affliction but gains a +2 bonus on relevant saves. Recasting the spell resets its duration rather than allowing absorption of multiple toxins simultaneously.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Absorbing Barrier',
@@ -117,6 +124,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'This abjuration protects creatures and objects in its area from ranged weapon attacks. Beneficiaries gain damage reduction 20/magic against ranged weapons. The spell\'s protective effect persists until it prevents a cumulative total of 20 points of damage per caster level (capped at 200 points), at which point the spell ends. The caster can customize the area\'s shape or exclude specific zones as needed.',
     source: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Absorbing Inhalation',
@@ -132,6 +140,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell grants the caster inhuman strength and capacity to inhale gas, fog, smoke, mist, or similar cloud effects without harm. For magical clouds, a caster level check is required (DC 11 + the cloud\'s caster level). The inhaled cloud is removed from the area. The caster may retain the cloud harmlessly for up to 1 round per spell level while holding their breath. As a standard action, the caster can expel the cloud as a breath weapon in a 60-foot cone. Creatures experience the cloud\'s normal effects with applicable saving throws and spell resistance checks. If the spell duration expires before the cloud is released, the caster suffers the cloud\'s effects and automatically fails any saving throw against it.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Abstemiousness',
@@ -146,6 +155,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This transmutation spell magically enhances simple food, providing enough nutrition to sustain a Medium or smaller creature for a full day. The spell does not create food itself, so it cannot prevent starvation alone, but it can extend limited food supplies over extended periods.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Absurdity',
@@ -162,6 +172,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell makes targets perceive intimidation and threats as laughably absurd. Intimidation attempts appear as exaggerated facial expressions or awkward speech. Fear-inducing effects become objects of ridicule. The spell grants immunity to the spooked condition and provides a 50% chance to negate shaken or scared conditions from any source, including Intimidate skill checks. Other fear-related spell effects function normally. However, affected creatures suffer a -10 penalty on Sense Motive checks to avoid surprise and detect threats, plus a -2 initiative penalty.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Abundant Ammunition',
@@ -177,6 +188,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell replenishes nonmagical ammunition or shuriken from a touched container each round. At the start of each round this spell replaces any ammunition taken from the container the round before. Previously taken ammunition vanishes when replaced. The spell works with masterwork items but not special materials or alchemical treatments. If cast alongside enhancement spells like align weapon or magic weapon, the conjured projectiles gain those enhancements.',
     source: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Abyssal Vermin',
@@ -191,6 +203,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell infuses a target with power from the Abyss, granting it the fiendish creature simple template. The vermin gains damage reduction and resistances based on Hit Dice thresholds. It also gains spell resistance equal to CR + 6 and can use smite good once per day as a swift action against good opponents, adding Charisma bonus to attacks and HD to damage. Vermin under the caster\'s command automatically fail saves. The spell has no effect on vermin already possessing the fiendish template.',
     source: 'Pathfinder Player Companion: Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Accept Affliction',
@@ -207,6 +220,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell allows the caster to transfer the effects of afflictions such as curses, diseases, and poisons from the target creature to themselves. It can also transfer conditions including blinded, deafened, fatigued, nauseated, shaken, and sickened. All transferred affliction details (save DCs, duration, removal conditions) remain unchanged but now affect the caster. After transferring an affliction, the caster may cure it using any available method.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Accursed Glare',
@@ -222,6 +236,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster channels a curse through their gaze. A failed save causes the target to obsessively doubt its decisions and suffer misfortune. When the cursed creature makes an attack roll or saving throw, it must roll twice and take the lower result. Additionally, during casting, any ally within range may attempt an Intimidate check (DC equals the spell\'s save DC) as a move action. Success grants a +2 bonus to the caster\'s level check against spell resistance.',
     source: 'Pathfinder Player Companion: Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Acid Maw',
@@ -237,6 +252,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell enhances an animal companion's bite with acid damage. The bite deals an extra 1d4 acid damage, with an additional 1d4 damage on the following round. The acid persists for 1 round per 4 caster levels (maximum 6 rounds at caster level 20). Multiple bites don't stack ongoing damage, but the duration resets if a newer bite would extend it beyond the previous duration. The acid does not harm the animal companion.",
     source: 'Pathfinder Player Companion: Animal Archive',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Acid Splash',
@@ -254,6 +270,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster launches a small acid orb at a target, requiring a successful ranged touch attack. The spell inflicts 1d3 points of acid damage and the acid disperses after one round has elapsed.',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Acidic Spray',
@@ -271,6 +288,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'A spray of acid erupts from the caster\'s outstretched hand, dealing 1d6 points of acid damage per caster level (maximum 15d6) to each creature within its area (Reflex half). This acid continues to burn for 1 round, dealing 1d6 points of acid damage per two caster levels (maximum 7d6) to any creature that failed its saving throw against the spell (a second Reflex save on the creature\'s turn negates this additional damage).',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Adhesive Blood',
@@ -285,6 +303,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: "When cast, this transmutation causes the caster's blood to become adhesive upon exposure to air. Any piercing or slashing weapon that successfully damages the caster becomes stuck unless the wielder makes a successful Reflex saving throw. A creature may attempt to dislodge a stuck weapon as a standard action with a Strength check against the spell's DC. The adhesive can be dissolved by strong alcohol or universal solvent. The glue deteriorates five rounds after the caster's death or when the spell duration expires. The effect is negated in underwater or airless environments.",
     source: 'Pathfinder Player Companion: Blood of the Night',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Adhesive Spittle',
@@ -300,6 +319,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster can spit a sticky substance once per spell duration as a standard action. This substance functions similarly to a tanglefoot bag but requires no attack roll to hit. The spell\'s DC applies instead of standard tanglefoot bag DCs for all counteracting measures. The adhesive remains active for 2d4 rounds after being expelled.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Adjustable Disguise',
@@ -315,6 +335,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'None',
     description: 'This spell operates similarly to disguise self but allows the caster to alter the disguise (within the limitations of disguise self) as a swift action during the spell\'s duration. The caster may change their appearance to different humanoid forms such as varying ages, races, genders, and professions. The number of alterations permitted equals the caster\'s level.',
     source: 'Pathfinder Player Companion: Spymaster\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Adoration',
@@ -330,6 +351,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This enchantment makes the target the subject of adoration by those whom it tries to affect with Diplomacy or during performance combat. When the target is not engaged in combat, it gains a +2 morale bonus on all Diplomacy checks used to influence creatures. During performance combat, the target receives a +2 morale bonus on all performance combat checks.',
     source: 'Pathfinder Player Companion: Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Adroit Retrieval',
@@ -344,6 +366,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants supernatural ability to retrieve small stored items with enhanced speed. The target can withdraw items either as a move action without provoking attacks of opportunity, or as a swift action that does provoke such attacks. The effect only works for items weighing less than 1 pound per caster level, with a maximum of 15 pounds.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Advanced Scurvy',
@@ -359,6 +382,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell inflicts an advanced scurvy condition on the target. The victim becomes constantly fatigued and experiences debilitating effects: a -1 penalty to Strength and Dexterity-based checks due to bone pain, increased bleeding damage (+1 point per bleed effect), loose teeth, and halved natural healing rates. The disease can be cured through magical healing or proper nutrition.',
     source: 'Pathfinder Player Companion: Pirates of the Inner Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aerial Tracks',
@@ -375,6 +399,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell causes the air in the area to ripple where creatures have flown through it up to 1 day ago per caster level. Glowing wisps make the aerial tracks visible without penalties from poor lighting. The affected area moves with the caster, enabling pursuit of flying creatures across distances. Other creatures may follow the trail if they remain within range and move with the caster. Tracking difficulty uses the same DC as tracking creatures across soft ground.',
     source: 'Pathfinder Player Companion: Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aggravate Affliction',
@@ -389,6 +414,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This necromantic spell forces all recurring afflictions (those with frequency, including curses, diseases, and poisons) on a target creature to trigger immediately. The creature must make an immediate saving throw per each affliction\'s normal rules to resist its effects. A successful saving throw does not count toward ending the affliction, and the extra save doesn\'t alter when the next regular save occurs. The spell only affects afflictions that have a frequency; those without recurring triggers remain unaffected.',
     source: 'Pathfinder Player Companion: Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Agonize',
@@ -404,6 +430,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster inflicts bolts of vicious energy on a creature summoned through planar ally or similar magic. The target must succeed at a Fortitude save or suffer penalties on all saves and checks against the caster (maximum -10 penalty) for one hour. Additionally, creatures demanding payment reduce their fees by up to 60%. Affected beings grow resentful and may twist orders toward malicious purposes or seek revenge. The spell provides no benefit against creatures immune to nonlethal damage.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Agonizing Rebuke',
@@ -420,6 +447,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster instills apprehension in the target about attacking them. Each time the target makes an attack against you, targets you with a harmful spell, or otherwise takes an action that would harm you, it takes 2d6 points of nonlethal damage.',
     source: 'Pathfinder Player Companion: Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aid',
@@ -436,6 +464,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants the target a +1 morale bonus on attack rolls and saves against fear effects, plus temporary hit points equal to 1d8 + caster level (maximum 1d8+10 temporary hit points at 10th caster level or higher).',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Air Bubble',
@@ -451,6 +480,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell fashions a pocket of breathable air around the target\'s head or object. The effect enables underwater respiration in airless environments or shields objects from water damage. Firearms within the bubble can be loaded from airtight powder containers and fired underwater, though shots suffer standard penalties for water passage.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Air of Authority',
@@ -466,6 +496,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'None',
     description: 'The caster develops an unmistakable air of authority, which clouds creatures\' minds so they perceive the caster as their superior. Affected creatures receive a Will save to see through the deception. Those who fail view the caster as they would their direct superior. The spell accounts for varying hierarchies, potentially creating conflicting perceptions that trigger additional saves.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Akashic Communion',
@@ -480,6 +511,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'None',
     description: 'The caster attempts to access the Akashic Record, an extraplanar repository of all historical experiences. This grants one Knowledge skill check per 3 caster levels, each with a +10 insight bonus. The caster gains proficiency in Knowledge skills for these checks and may reroll failed checks. The GM rolls secretly; results on a natural 1 are wildly inaccurate. The spell requires continuous concentration; any interruption ends it. Once used for a specific topic, the spell cannot be reused for that same subject until the caster gains another level.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Akashic Form',
@@ -494,6 +526,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates a backup record of the caster\'s physical form within the Akashic Record. The record preserves current hit points, physical ability scores, and conditions like ability damage, disease, negative levels, and poison. If the caster drops below 0 HP or dies from a non-mind-affecting death effect, they can discard their current body and restore themselves using the stored record on their next turn. The original corpse vanishes, and the caster may either reappear where their body fell or materialize within 500 feet without equipment. The caster retains their original mind and mental effects, but sheds physical conditions not present when the record was created.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alacrity',
@@ -508,6 +541,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'None',
     description: 'This spell\'s energy quickens your steps, allowing fancy footwork. The caster gains a +10-foot enhancement bonus to speed and a +1 dodge bonus to AC. These bonuses don\'t stack with haste or similar effects. While affected by alacrity, the caster can take 5-foot steps in difficult terrain.',
     source: 'Pathfinder Player Companion: Adventurer\'s Armory 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alchemical Allocation',
@@ -522,6 +556,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'None',
     description: 'The spell creates a pale aura to emanate from your mouth. When you consume a potion or elixir during the round after using this extract, you can spit it back into its container as a free action. You receive all benefits from the potion or elixir without consuming it. The extract allows you to gain benefits from only one potion or elixir per use.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Align Weapon',
@@ -537,6 +572,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes (harmless, object)',
     description: 'This spell imbues a weapon with chaotic, evil, good, or lawful alignment as the caster chooses. An aligned weapon can bypass damage reduction of creatures with opposing alignments. The spell cannot be cast on natural weapons or on weapons already possessing alignment.',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Allegro',
@@ -551,6 +587,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell requires maintaining an active bardic performance. While maintaining that performance, you gain benefits identical to the haste spell. The spell ends if your bardic performance ceases or is interrupted. As an immediate action during bardic performance, you may dismiss allegro to reroll either a Reflex save or Dexterity-based skill check before results are revealed. Allegro dispels and is dispelled by slow.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alleviate Addiction',
@@ -567,6 +604,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The subject ignores the effects of addictions. The subject can naturally recover from damage dealt by the drug if she is under the effects of this spell for the entire duration of her rest.',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alleviate Corruption',
@@ -581,6 +619,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell offers two applications: (1) Combat Corruption reduces target\'s corruption stage by 1; (2) Remove Corruption eliminates 1 manifestation level and reduces related power scaling. Both require a caster level check (DC = 10 + double manifestation level + triple corruption stage). Failing by 5+ causes the caster to contract the target\'s corruption. A creature benefits only once weekly from this spell.',
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Allied Cloak',
@@ -595,6 +634,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'An animated cloak or similar garment provides a +2 shield bonus to AC. Each round during your turn, you can use a free action to direct the cloak to aid another action for skill checks, attack rolls, or AC. The cloak uses a bonus equal to your caster level plus your key spellcasting ability modifier.',
     source: 'Pathfinder Player Companion: Cohorts & Companions',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alluring Light',
@@ -612,6 +652,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster emits a soft glow that compels enemies who fail their save to approach the caster. Affected targets must use their move action to approach you at the beginning of each of their turns for 1 round per caster level, moving via the most direct path while avoiding obvious hazards. The compulsion ends if the affected creature becomes the target of a hostile action. The initial flash of light also increases the light level within the area by one step, up to normal light, for 1 round per caster level.',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alluring Spores',
@@ -628,6 +669,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell creates a burst of spores that weaken the mind. Affected creatures must make a Fortitude save or suffer a -1 penalty on saving throws against the caster\'s enchantment spells. This penalty increases to -2 for creatures sexually attracted to the caster.',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ally Across Time',
@@ -644,6 +686,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster establishes cubes of temporal possibility where alternate timelines intersect. As a free action, they summon a duplicate of themselves from parallel existence within a visible cube, lasting until turn\'s end. The duplicate possesses the caster\'s statistics with hit points equal to caster level, threatens adjacent squares, and possesses any teamwork feats. The duplicate cannot voluntarily leave its summoning space and may use aid another once per existence. Only one duplicate can be summoned before the spell concludes.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alpha Instinct',
@@ -660,6 +703,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'None',
     description: 'The spell causes animals to perceive the caster as socially superior. Animal attitudes improve by one step, and the caster gains a +2 morale bonus on Handle Animal checks. Helpful animals provide basic assistance but flee from combat. Once during the spell\'s duration, the caster can issue a nonverbal command within 60 feet, sending animals to forage. After one hour, they return with food sufficient for one meal per caster plus additional servings equal to caster level.',
     source: 'Pathfinder Player Companion: Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alter Musical Instrument',
@@ -675,6 +719,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes (object)',
     description: 'The spell allows a caster to alter how an instrument sounds, making it resemble a different instrument type. The change can range from minor adjustments to major transformations. All other properties remain unchanged—volume, pitch range, and playing method stay the same.',
     source: 'Pathfinder Player Companion: Alchemy Manual',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alter Summoned Monster',
@@ -690,6 +735,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell allows you to replace a creature summoned via conjuration magic with an alternative creature of equal or lower spell level from summon monster or summon nature\'s ally spells. The replacement cannot be summoned into incompatible environments. Creatures under your control receive no saving throw; others may attempt Will saves. The new creature retains the target\'s damage and conditions, inherits curses/diseases/poisons/penalties, but other magical effects don\'t transfer. The spell\'s duration remains unchanged. Eidolons cannot be targeted.',
     source: 'Pathfinder Player Companion: Familiar Folio',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Amnesia',
@@ -706,6 +752,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell causes a target to lose most of its memories; its skills, past, and even its name become mysteries to it. While the victim retains basic language abilities and can perform routine tasks, it loses all class abilities, feats, and skill ranks acquired before the spell\'s effects. The target maintains base attack bonus, saving throws, Combat Maneuver Bonus/Defense, experience points, Hit Dice, and hit points. Recovery requires casting heal, limited wish, miracle, psychic surgery, or wish.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Amplify Stench',
@@ -720,6 +767,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'None',
     description: 'This spell enhances a caster\'s natural stench ability in two ways: the save DC increases by 2, and failed saves result in nausea rather than sickness. For creatures already subject to a foul stench variant that causes nausea, the stench\'s radius doubles instead. The spell requires the caster to possess a stench special ability to function.',
     source: 'Pathfinder Player Companion: Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Analyze Aura',
@@ -734,6 +782,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'This divination spell allows you to peer into the aura of one target creature or object, gaining valuable information about its condition and nature. Each round you may examine one of four aura types: Alignment Aura (reveals alignment and aura type/power), Emotion Aura (shows emotional state and grants +2 circumstance bonus to social skill checks), Health Aura (discloses physical condition, wounds, poison, disease), or Magic Aura (determines number and power of magical auras present).',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ancestral Communion',
@@ -748,6 +797,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'None',
     description: 'The spell allows you to contact ancestral spirits for knowledge assistance. Consulting with spirits is a full-round action. Before making a Knowledge check, you gain a +4 insight bonus. If you\'ve already failed a Knowledge check, you can consult your ancestors and retry it. The bonus increases to +6 at 7th caster level and +8 at 11th caster level.',
     source: 'Pathfinder Player Companion: People of the Stars',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ancestral Gift',
@@ -764,6 +814,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'None',
     description: 'A ghostly ancestral manifestation appears bearing a weapon of the caster\'s choice. The conjured weapon may be any simple, martial, or dwarven type, featuring a +1 enhancement bonus and one weapon special ability. The caster gains proficiency regardless of training, and only the caster may wield it—removal causes immediate dismissal. If conjured with flaming, frost, shock, or thundering properties, the spell gains the corresponding descriptor.',
     source: 'Pathfinder Player Companion: People of the Stars',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ancestral Memory',
@@ -778,6 +829,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'None',
     description: 'This divination spell allows casters to access ancestral knowledge relevant to their current situation. Success is determined by a d% roll against 70% plus the caster\'s level. On failure, the caster gains a +5 insight bonus on all Intelligence-based skill checks for the duration. On success, the caster receives both the bonus and specific information from an ancestor\'s experience that directly addresses the character\'s current problem.',
     source: 'Pathfinder Player Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ancestral Regression',
@@ -793,6 +845,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This transmutation effect transforms a drow target into a surface elf form. The drow loses darkvision and light-blindness racial abilities, gaining low-light vision instead. The spell maintains the subject\'s alignment and personality while concealing alignment status similar to an undetectable alignment effect. The recipient gains a +10 bonus on Disguise checks to pass as an elf.',
     source: 'Pathfinder Player Companion: Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Anchored Step',
@@ -807,6 +860,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'None',
     description: 'The spell causes powerful tendrils to grow out of the bottom of your feet or footwear, partially anchoring you to the ground. This grants a +10 bonus to CMD against bull rush, overrun, pull, push, reposition, and trip maneuvers, plus effects attempting to move you or cause prone conditions. However, movement speed decreases by 10 feet (minimum 5 feet). The spell requires touching the ground to function.',
     source: 'Pathfinder Roleplaying Game: Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Angelic Aspect',
@@ -822,6 +876,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell provides low-light vision, darkvision 60 feet, acid/cold resistance 10, DR 5/evil, feathered wings with 30-foot flight speed (average maneuverability), and makes natural/wielded weapons count as good-aligned for damage reduction purposes.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Animal Ambassador',
@@ -838,6 +893,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell compels a single animal to travel to a designated location and deliver a message to an identified creature. It temporarily grants sentience to the target creature, awakening its mental faculties. The animal gains the ability to speak one language known to the caster and can receive up to 5 skill ranks in social skills—limited by the animal\'s Hit Dice. The message may be verbal or delivered alongside a physical object. The enhanced mental abilities fade within 2d6 minutes after message delivery.',
     source: 'Pathfinder Roleplaying Game: Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Animal Messenger',
@@ -854,6 +910,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This enchantment compels a tiny animal to travel to a designated location. The caster mentally impresses a specific place or landmark on the animal, which must be simple since the creature relies on the caster\'s knowledge. A small item or note can be attached to the animal. The animal waits at the destination until the spell duration expires, then resumes normal activities. The spell cannot affect tamed or trained animals like familiars or animal companions.',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Animal Purpose Training',
@@ -870,6 +927,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster instills the target animal with a general purpose, which may include fighting, guarding, heavy labor, hunting, performance, or riding—but excludes combat training. This new purpose overrides any previously trained purposes and tricks. Upon spell expiration, the animal reverts to its previous trained purpose and known tricks.',
     source: 'Pathfinder Player Companion: Animal Archive',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Animal Trance',
@@ -886,6 +944,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster\'s swaying motions and music (or singing, or chanting) compel animals and magical beasts to do nothing but watch you. Only creatures with an Intelligence score of 1 or 2 qualify as targets for fascination. The spellcaster rolls 2d6 to determine total Hit Dice of creatures affected, selecting closest targets first.',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Animate Plants',
@@ -900,6 +959,7 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'This transmutation spell grants inanimate plants with mobility and a semblance of life. Animated plants attack designated targets as animated objects of appropriate size. The caster can control up to one Large plant per three levels, with larger plants counting as multiple creatures (Huge = 2, Gargantuan = 4, Colossal = 8). The spell cannot affect plant creatures or nonliving plant material. Alternatively, the caster may use an entangle effect lasting 1 hour per caster level, affecting all plants within range.',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Animus Mine',
@@ -915,5 +975,6 @@ export const GAP_SPELLS_A_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster implants a mental defensive mechanism triggering against thought manipulation attempts. When any creature uses a mind-affecting effect against the caster, it triggers psychic backlash dealing 1d6 points of damage per caster level (maximum 10d6) and staggers the target for 1d4 rounds. A successful Will save reduces damage by half and negates the staggered condition. The original effect still functions normally. The caster may suppress the trigger via swift action for one round. Only one mental mine may be active simultaneously.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 ];

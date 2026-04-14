@@ -17,6 +17,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants the target a 5-foot-radius aura. When creatures within this aura sustain at least 5 points of piercing, slashing, or bleed damage from a single attack, burning blood sprays in a randomly determined adjacent square, dealing 1d6 fire damage to that square\'s occupant and 1 splash damage to creatures within 5 feet. Only one spray activates per creature per round. Creatures lacking blood are unaffected.',
     source: 'Pathfinder Roleplaying Game: Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Boil',
@@ -31,6 +32,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "Over three rounds, this spell gradually raises a target's blood temperature. Each round the creature gets a new save attempt — success prevents that round's effect but doesn't end the spell. Round 1: target becomes fatigued. Round 2: capillaries burst, dealing 1d6 Constitution damage. Round 3: blood boils, dealing 1d6 damage per caster level (max 15d6); if alive, target becomes exhausted.",
     source: 'Pathfinder Player Companion: Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Crow Strike',
@@ -46,6 +48,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster's unarmed strikes manifest as bolts of fire or glowing red crows which fly to strike a target. The caster can make unarmed strike or flurry of blows attacks as though the target were within threatened range. Each successful hit deals unarmed strike damage with half fire damage and half negative energy damage (which does not heal undead).",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood in the Water',
@@ -62,6 +65,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The caster must self-inflict 1 point of piercing or slashing damage, causing 1 point of bleed damage. While active, all sharks, depth feeders, and creatures with blood frenzy ability within the area gain +2 to Strength and Constitution, suffer -2 AC penalty, and treat the effect as blood frenzy. The spell immediately ends if the caster stops bleeding.',
     source: 'Pathfinder Roleplaying Game: Skull & Shackles Adventure Path',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Mist',
@@ -79,6 +83,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell creates a rust-colored toxic algae mist. Creatures within gain concealment and must save or suffer 1d4 points of Wisdom damage, becoming enraged to attack nearest creature as per confused condition rules. Affected creatures remain enraged throughout the spell's duration. A creature only needs to save once per exposure.",
     source: 'Pathfinder Roleplaying Game: Bestiary 3',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood of the Martyr',
@@ -93,6 +98,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell causes the target to bleed from all orifices with blood infused with positive energy. On a failed save, the subject takes 1d6 points of bleed damage per 4 caster levels (maximum 4d6). Other creatures can spend a full-round action supping the blood to heal twice the damage amount. The subject can self-heal at half the rate. Once the bleeding stops or duration ends, the blood loses its healing properties.",
     source: 'Pathfinder Campaign Setting: Chronicle of the Righteous',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Rage',
@@ -109,6 +115,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Affected creatures gain escalating combat bonuses as they sustain injury. They receive a cumulative +2 morale bonus to Strength and -1 AC penalty for every 5 damage points taken, capping at +10 Strength and -5 AC. These bonuses last until the spell expires or the target falls unconscious.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Salvation',
@@ -123,6 +130,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'This protective spell grants immunity to damaging area effects you personally cast. Additionally, you may dismiss the spell as an immediate action if caught in another caster\'s damaging area spell, gaining immunity to that specific casting.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Sentinel',
@@ -137,6 +145,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: "The caster infuses an animal sculpture with life by adding blood and saliva to its mouth. The animated creature functions as a familiar bonded to the caster, using the caster's level to determine familiar abilities. However, it grants neither the Alertness feat nor special animal type abilities. If destroyed, the caster suffers 2 points of Intelligence drain.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Song',
@@ -151,6 +160,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell functions similarly to imbue with spell ability, but permits transfer only of bard spells from conjuration (healing), enchantment, and transmutation schools. The imbued spells persist for one day. The caster must shed blood during casting — if unable to take bleed damage, casting is impossible. Each spell transferred costs the caster 5 hit points permanently until the spell ends or discharges.',
     source: 'Pathfinder Player Companion: Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Tentacles',
@@ -165,6 +175,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: "The caster generates one writhing tentacle per caster level from their chest using their own blood. These appendages can attack a single target within 15 feet as a standard action or multiple targets (one per 5 caster levels) using a full-round action. Each tentacle uses the caster's BAB plus higher of Constitution or Charisma. Tentacles deal 2d6 damage and grant temporary hit points equal to damage dealt (max = max HP; last 1 hour).",
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Ties',
@@ -180,6 +191,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: "This spell requires one target to be a bound, pinned, or helpless creature within reach (the hostage), while the second must be a family member. If both fail saves, the family member takes any damage conferred to the hostage up to a maximum of 10 points per caster level daily. The transferred damage bypasses damage reduction and resistances. Distant relations gain +2 to saves; parent-child or sibling pairs take -2 penalties.",
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Transcription',
@@ -195,6 +207,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'By consuming one pint of blood from a deceased spellcaster (killed within the last 24 hours), the caster can learn a spell that individual knew. The caster selects one spell available to the dead spellcaster (must be on their own spell list) and gains knowledge of it for 24 hours, during which the spell may be written down or taught to a familiar.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloodbath',
@@ -209,6 +222,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster cuts themselves with a dagger, taking 1d6 bleed damage. While maintaining this self-inflicted bleeding, each target bleeds for 1d6 points of damage at the beginning of their turns. Target bleeding ends if they receive magical healing or if the caster's bleeding ceases. The spell fails if the caster is immune to bleed damage.",
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloodstone Mirror',
@@ -223,6 +237,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'This protective abjuration spell shields the caster from mind-affecting effects and spells granting others control of actions. When exposed to such effects, the caster can dispel the triggering spell as an immediate action and redirect it to another creature within 30 feet. The redirected spell uses the original DC, but the caster is treated as the caster.',
     source: 'Pathfinder Adventure Path #140: Eulogy for Roslar\'s Coffer',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloodsworn Retribution',
@@ -237,6 +252,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster inflicts self-injury and swears a blood oath of vengeance. They choose damage up to 25 hit points, which cannot be healed while active. When performing actions directly advancing the oath\'s completion, the caster gains a morale bonus equal to damage taken divided by 5. Upon oath completion or voluntary abandonment, the spell terminates and damage becomes healable.',
     source: 'Pathfinder Player Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloody Arrows',
@@ -251,6 +267,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No (harmless)',
     description: "This necromantic enchantment causes a target's ranged weapon attacks dealing piercing or slashing damage to inflict bleeding wounds. Each successful strike applies 1 point of bleed damage to the victim. Unlike standard bleed effects, these wounds stack cumulatively, reaching a maximum equal to half the caster's level (maximum 5 points at 10th caster level).",
     source: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloody Claws',
@@ -265,6 +282,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "The spell enables a touched living creature to inflict bleed damage when making natural attacks so long as the attack deals slashing or piercing damage. The bleeding effect equals half the caster's level, capped at the creature's maximum damage for that specific attack. Bleed damage does not stack; when two or more attacks deal bleed damage, take the worse effect.",
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloody Tears and Jagged Smile',
@@ -279,6 +297,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster's eyes turn black and weep blood while teeth become jagged fangs. The spell grants a bite attack dealing 1d3 damage (Small) or 1d4 damage (Medium). Caster gains a +4 profane bonus on Intimidate checks and on spell DCs for spells with the fear descriptor. The caster perceives creatures using deathwatch ability.",
     source: 'Pathfinder Adventure Path #71: Rasputin Must Die!',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blot',
@@ -294,6 +313,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (object)',
     description: "The spell renders all written text and symbols on surfaces illegible as smears, affecting books, stone carvings, and tattoos equally. Spellbooks and magical items containing writing may save against the effect. Against magical writing created by spell effects (glyphs, symbols), blot instead functions as dispel magic capable of targeting all such effects in the area. The spell does not affect artifact writing.",
     source: 'Pathfinder Player Companion: Goblins of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blurred Movement',
@@ -309,6 +329,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: "This spell operates similarly to blur, but the obscuring effect activates only when you move at least 10 feet on your turn and ceases at the end of your movement. It primarily defends against opportunity attacks during your turn. If movement exceeds twice your speed in a single turn, the blurring continues until your next turn begins.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Body Capacitance',
@@ -324,6 +345,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: "When you sustain electrical damage during this spell's active period, some energy accumulates on your skin like a held touch spell charge. You may release stored electricity via melee touch attack, gaining a +3 bonus on the attack roll if your opponent is wearing metal armor, is carrying a metal weapon, or is made of metal. The touch attack delivers electricity damage equal to half the electrical damage you received after casting. The spell ends after a successful melee touch attack.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Body Double',
@@ -339,6 +361,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster selects a primary and secondary target within range. Upon failing its save, the primary target's appearance, scent, sounds, and mannerisms change to match those of the secondary target. If both are the same size category, they become indistinguishable. When adjacent, actions targeting one target have a 50% chance of affecting the other instead.",
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bolt of Glory',
@@ -355,6 +378,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell fires a ray of positive energy that deals variable damage based on the target\'s nature. Neutral outsiders and Material/Elemental Plane natives: 1d6 damage per 2 caster levels (max 7d6). Evil outsiders, undead, and Negative Energy Plane natives: 1d6 damage per caster level (max 15d6). All other creatures: no damage.',
     source: 'Pathfinder Chronicles Campaign Setting',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bolts of Bedevilment',
@@ -371,6 +395,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'You can fire one ray per round that dazes one living creature for 1d3 rounds.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bone Flense',
@@ -385,6 +410,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "When a targeted creature is struck by specific weapons, bone near the wound sprouts razor-sharp spurs. A successful Fortitude save negates the effect. The spell deals 1d6 piercing damage per caster level, followed by 1d4 bleed damage per round for half the spell's duration. The victim becomes sickened during bleeding. No effect on boneless creatures.",
     source: 'Pathfinder Adventure Path #82: Secrets of the Sphinx',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Boneshatter',
@@ -399,6 +425,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell causes a target's bones or exoskeleton to splinter, dealing 1d6 damage per caster level (max 15d6). Targets become exhausted for 1 minute per caster level. Those succeeding at Fortitude saves take half damage and become fatigued instead. Objects made of bone, chitin, or similar material take 50% additional damage. No effect on creatures lacking skeletons or hard carapaces.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Book Ward',
@@ -413,6 +440,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell functions similarly to protection from energy but offers protection exclusively against acid and fire damage. Beyond damage protection, the affected item becomes completely waterproof (this protection extends to other liquids as well, such as alcohol and oil).',
     source: 'Pathfinder Chronicles: Seekers of Secrets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Borrow Corruption',
@@ -428,6 +456,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: "The caster temporarily gains any stains and gifts that corruption grants to the touched creature while the target retains them. If gifts have limited uses, the caster has none remaining. The caster takes 1d3 Wisdom drain upon casting.",
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Borrow Fortune',
@@ -442,6 +471,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell allows you to immediately reroll a d20 die before success or failure is known, keeping the more favorable result. However, for the next two rounds following casting, you must roll two dice each time a d20 roll is called for, keeping the less favorable result.',
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bouncing Bomb Admixture',
@@ -456,6 +486,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: "This extract modifies your magical reserve to alter your next bomb's behavior. You can only maintain one bomb admixture effect at a time; drinking another replaces the previous one. When you throw your next bomb during the extract's duration, choose one target that would normally be hit by the bomb's splash damage — that target is affected as if it suffered a direct hit from the bomb instead.",
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bountiful Banquet',
@@ -472,6 +503,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster conjures an elaborate feast. Though the physical feast vanishes after one hour, creatures that partake remain nourished and sated for 24 hours. The spellcaster can specify dish types and beverages, with the feast automatically adjusting to reflect the caster\'s tradition.',
     source: "Pathfinder Player Companion: Quests & Campaigns",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bow Spirit',
@@ -487,6 +519,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: "This spell creates a shapeless force that hovers about you, taking ammunition from your quiver and firing it. You can spend a swift action each round to direct the spirit to fire arrows or bolts using your base attack bonus plus Dexterity modifier, including bonuses from ranged attack feats and ammunition properties. Attacks don't provoke attacks of opportunity.",
     source: 'Pathfinder Roleplaying Game: Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brand of Conformity',
@@ -502,6 +535,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "This transmutation curse etches a national, organizational, or order symbol onto the target, inflicting 1 point of damage. The recipient loses the ability to speak and comprehend their racial language and homeland or primary culture's language (if different). The spell never suppresses Common or Undercommon.",
     source: "Pathfinder Roleplaying Game: Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brand of Hobbling',
@@ -517,6 +551,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "This curse spell etches a magical brand on the target, inflicting 1d6 points of damage. The primary effect reduces all of the target's movement speeds by half (rounded down to the next 5-foot increment). The brand persists even if concealed by clothing or physically removed.",
     source: "Pathfinder Roleplaying Game: Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brand of Tracking',
@@ -532,6 +567,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "This transmutation curse etches an eye symbol or lawful institution mark onto the target, inflicting 1d6 damage. The brand enables the caster to determine the target's direction and distance twice daily as a standard action, functioning within a range of 1 mile per caster level. Ineffective beyond range or on other planes. Blocked by divination-warding spells.",
     source: "Pathfinder Roleplaying Game: Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Breath of Life',
@@ -547,6 +583,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (harmless) or yes; see text',
     description: 'The spell restores 5d8 points of damage + 1 point per caster level (maximum +25). Unlike typical healing magic, this spell can revive recently deceased creatures if cast within one round of death. The target stabilizes if its hit points exceed negative values equal to its Constitution score. The spell cannot restore life to those slain by death effects. It damages undead rather than healing them.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brightest Light',
@@ -562,6 +599,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions like daylight but with extended duration. As a swift action once during the spell\'s duration, the caster can attempt to dispel a magical darkness effect within 60 feet by making a dispel check (1d20 + caster level) against DC 11 + the darkness effect\'s caster level. Success ends the darkness; failure dims the spell\'s light to torch brightness for the remaining duration.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brightest Night',
@@ -576,6 +614,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell grants low-light vision to affected creatures. Those already possessing this ability experience enhanced vision, seeing four times as far in conditions of dim light. Additionally, creatures positioned within 10 feet of spell beneficiaries cannot gain concealment from dim light conditions.',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brilliant Inspiration',
@@ -591,6 +630,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The caster establishes a mental connection with the target, offering advice and encouragement. When the target makes attack rolls, ability checks, or skill checks, they roll two d20s and take the better result. The spell\'s effect terminates if any roll is a natural 20, as the brilliant advice is spent.',
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bristle',
@@ -605,6 +645,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell grants a creature the ability to trade defensive capability for offensive power. Each round as a swift action, the target can reduce its natural armor bonus to AC and gain an equal enhancement bonus to damage rolls from natural attacks. The maximum reduction/bonus equals 1 point per 3 caster levels (capped at -5/+5 at 15th level). The creature cannot reduce natural armor below 0.",
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brittle Portal',
@@ -620,6 +661,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (object)',
     description: 'This spell weakens structural integrity by reducing the hardness of any non-magical surface within its area by 2 points per caster level. The caster designates a flat surface as the spell\'s center, and the hardness reduction persists throughout the spell\'s duration.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brow Gasher',
@@ -634,6 +676,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (harmless, object)',
     description: "The spell enchants a slashing weapon to inflict a grievous forehead wound. Upon hitting a living creature, the caster can discharge the spell as a free action to create a gash on the target's forehead that deals bleed damage equal to half the caster level. Each turn the target takes bleed damage, it receives cumulative -1 attack penalties. At -3 penalty, all targets gain concealment. At -5 penalty, the target becomes blinded.",
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Build Trust',
@@ -648,6 +691,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster gains a +2 circumstance bonus on all Charisma checks and Charisma-based skill checks when interacting with the target. When failing such checks against the target, the caster can reroll as an immediate action (granting the target a new save to end the spell). The target becomes disillusioned when the spell ends but does not turn hostile. Attacking or taking obvious hostile action terminates the spell immediately.',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Bull's Strength",
@@ -662,6 +706,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The subject gains a +4 enhancement bonus to Strength, adding the usual benefits to melee attack rolls, melee damage rolls, and other uses of the Strength modifier.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bullet Shield',
@@ -676,6 +721,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants the warded creature a +4 deflection bonus to AC against firearm and ranged attacks, with an additional +1 to the bonus for every five caster levels (maximum +8 at 20th level).',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bullet Ward',
@@ -690,6 +736,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster tosses adamantine bullets into the air where they hover protectively nearby. The number of bullets equals half the caster level (maximum 4). When an opponent attacks with a firearm, the caster can use an immediate action to designate one hovering bullet to block the attack, increasing AC against that attack by 10. This destroys the bullet regardless of whether the attack hits.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bungle',
@@ -705,6 +752,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The affected creature incurs a -20 penalty on its next attack roll or check that requires a d20 roll. The targeted action must be deliberately chosen by the creature during its turn. The spell has no effect on creatures possessing more than 10 Hit Dice.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Buoyancy',
@@ -719,6 +767,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (object)',
     description: 'The spell makes affected creatures or objects extremely buoyant — they naturally float on water at least 1 foot deep. Creatures attempting to deliberately submerge must succeed at a DC 20 Swim check each round to remain underwater. The spell ends if the creature or object spends at least 1 round on dry land.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burdened Thoughts',
@@ -735,6 +784,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell mentally burdens a target creature with awareness of earthly responsibilities and weight. Affected creatures gain heavy encumbrance and lose flying ability (those already aloft must land immediately). If the target exceeds the caster's size by three or more categories, it becomes staggered as an additional effect.",
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burn Corruption',
@@ -751,6 +801,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell creates violet flames that damage creatures and foliage in the targeted area. Most creatures take 1d8 fire damage per 2 caster levels (maximum 7d8). Outsiders with chaotic and evil subtypes, or those tainted by demons, instead take 1d6 fire damage per caster level (maximum 15d6). This fire damage bypasses the fire resistance granted by the demon subtype but cannot penetrate other forms of fire resistance or immunity.",
     source: 'Pathfinder Roleplaying Game: Wrath of the Righteous Adventure Path',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burning Disarm',
@@ -766,6 +817,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (object)',
     description: "The spell instantly heats a metal object to extreme temperatures. A creature holding the item may make a Reflex save to drop it without taking damage. Damage dealt is 1d4 points of fire damage per caster level (maximum 5d4). The item itself remains unharmed and doesn't get hot enough to ignite flammable objects. When cast underwater, the spell deals half damage.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burning Entanglement',
@@ -781,6 +833,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell mirrors the entangle spell but ignites the vegetation. Creatures beginning their turn entangled suffer 4d6 fire damage (Reflex for half). Those in the area but not entangled take 2d6 fire damage (Reflex negates). Smoke creates concealment: creatures see clearly within 5 feet, but attacks beyond that suffer 20% miss chance. Upon duration expiration, vines burn away completely.',
     source: 'Pathfinder Player Companion: Elemental Master\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burning Gaze',
@@ -796,6 +849,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell enables your eyes to burn like hot coals, allowing you to set objects or foes alight with a glance. As a standard action, you may target a single creature or object within 30 feet. Targeted creatures must succeed at a Fortitude save or take 1d6 fire damage. Unattended objects don't get a save. Creatures damaged must make a Reflex save or catch fire. The spell does not grant an actual gaze attack.",
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burning Sands',
@@ -813,6 +867,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster creates a layer of hot sand 1 foot deep and constantly shifting, transforming the terrain into difficult ground. Periodic flames rise from the sand, dealing 1d4 fire damage to creatures ending their turn in contact with the ground within the area. The sand vanishes at duration\'s end.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst Bonds',
@@ -827,6 +882,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "This spell unleashes divine force against restraints, dealing 1d6 points of damage per caster level to the target object (maximum 5d6), ignoring hardness of 10 or less. Against creatures grappling the caster, if the target fails its save, an immediate grapple break attempt is allowed as a free action with +1 luck bonus to CMB per caster level (maximum +5). Can be cast without concentration checks while grappled or pinned.",
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst of Adrenaline',
@@ -841,6 +897,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: "The spell allows a caster to draw upon the body's inner reserves of strength. When about to make a d20 roll based on Strength, Dexterity, or Constitution, the caster gains a +8 enhancement bonus to one of those ability scores for that specific roll. However, the caster becomes fatigued for 1 round afterward.",
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst of Force',
@@ -857,6 +914,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster releases telekinetic force in an expanding wave, dealing 1d6 points of force damage per caster level (maximum 15d6) to all other creatures in the area. Those who succeed on a Fortitude save take half damage. Creatures failing the save must also make a Reflex save or be knocked prone.",
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst of Glory',
@@ -874,6 +932,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "Affected allies receive a +1 sacred bonus on attack rolls and saves against fear effects, plus 1 temporary hit point per caster level (maximum 20). The caster emanates a white or golden radiance equal to a torch for the spell's duration, which can be suppressed as a free action.",
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst of Insight',
@@ -888,6 +947,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell allows you to plumb the depths of your mind for insight before making a d20 roll based on Intelligence, Wisdom, or Charisma. The caster gains a +8 enhancement bonus to whichever of these three ability scores applies to the roll. The character becomes dazed for 1 round following the spell\'s use.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst of Nettles',
@@ -904,6 +964,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster releases a burst of barbed, acid-filled nettles. Affected creatures take 3d6 points of damage plus 1d6 points of acid damage on the following round. Creatures making a successful Reflex save take half damage from the initial burst and no damage on the subsequent round.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst of Radiance',
@@ -920,6 +981,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This evocation creates a brilliant flash of shimmering light. Non-evil creatures become either blinded for 1d4 rounds or dazzled for 1d4 rounds if they succeed on a Reflex save. Evil creatures take 1d4 damage per caster level (maximum 5d4) regardless of save success.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst of Speed',
@@ -934,6 +996,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: "Until the end of your turn, you gain a +20-foot bonus to speed (or +10-foot bonus if wearing Medium or Heavy armor), your movement does not provoke attacks of opportunity, and you can move through larger creatures' spaces but cannot end movement in an occupied space.",
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst With Light',
@@ -949,6 +1012,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The target creature becomes infused with magical radiance, suffering 2d6 damage (2d8 if undead). The creature emits bright light in a 30-foot radius. A successful Will save halves damage and negates the light effect. The effect persists an additional round per 4 caster levels (maximum 5 rounds at 20th level). Adjacent creatures failing saves take half damage and become blinded for one round.',
     source: 'Pathfinder Roleplaying Game: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Business Booms',
@@ -963,6 +1027,7 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: "This spell magically enhances a building's appeal through decorative improvements and increased activity. The caster must spend one day of downtime promoting the business immediately after casting. The spell then maintains heightened activity for a number of days equal to half the caster's level (maximum 5 days). If the caster promotes a different building while this spell is active, it ends immediately.",
     source: 'Pathfinder Player Companion: Quests & Campaigns',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Bomber's Eye",
@@ -977,5 +1042,6 @@ export const GAP_SPELLS_B_2: Spell[] = [
     spellResistance: 'No',
     description: 'This extract enhances throwing weapon capability in two ways. It increases the effective range of any thrown weapon by 10 feet. Additionally, the caster gains a +1 insight bonus on attack rolls made with thrown weapons while the effect remains active.',
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
 ];

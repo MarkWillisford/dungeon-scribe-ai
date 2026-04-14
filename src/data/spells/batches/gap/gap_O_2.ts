@@ -26,6 +26,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     description:
       "This spell must be cast in response to a cavalier's challenge, an inquisitor's judgment, a paladin's smite ability, or similar magic that causes you to become a designated favored enemy. The weapon grants you a +5 insight bonus to AC and CMD against attacks from the creature that initiated the triggering ability. The spell immediately ends if you release the weapon. The spell fails if cast outside the triggering conditions.",
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Oracle's Burden",
@@ -50,6 +51,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     description:
       "You transfer the hindrances of your oracle's curse to another creature while retaining the benefits of your own curse. The target suffers all the hindrances of your oracle's curse but none of the benefits, while you continue to experience the full effects of your curse. This spell has no effect if you do not have the oracle's curse class feature.",
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Oracle's Vessel",
@@ -73,6 +75,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     description:
       "The target receives all the benefits of your oracle's curse without suffering any of the associated penalties. The benefit may be limited or nonexistent depending on the curse type and the target's class features. For example, a fighter receiving the haunted curse would gain no benefit since they cannot cast spells and derive no advantage from bonus spells known.",
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Orb of the Void',
@@ -99,6 +102,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     description:
       "You create a small weightless sphere of pure negative energy that floats in the air. As a move action, you can move the sphere up to 30 feet. Any living creature that occupies the same space as the sphere gains one negative level (Fortitude save negates). Creatures that pass through the sphere's space or end their turn in it also gain negative levels. After 24 hours, these negative levels may become permanent if the creature fails additional saving throws. Multiple orbs that occupy the same space fuse, using the higher DC and the longer remaining duration. Undead creatures instead gain 2d4 x 5 temporary hit points (duration 1 hour) when affected by the sphere.",
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Orchid's Drop",
@@ -123,6 +127,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     description:
       "This extract transforms your mutagen into a healing tonic for the duration of the spell. While under this extract's effects, consuming a dose of mutagen heals you for 2d10 points of damage and grants a +2 alchemical bonus to all saving throws for the spell's remaining duration.",
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Order's Wrath",
@@ -149,6 +154,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     description:
       "You channel lawful power to smite your enemies. The power takes the form of a three-dimensional grid of energy. Only chaotic and neutral (not lawful) creatures are harmed. Chaotic creatures take 1d8 points of damage per two caster levels (maximum 5d8), or 1d6 points of damage per caster level (maximum 10d6) if they are chaotic outsiders. Neutral creatures take half the damage dealt to chaotic creatures. A successful Will save reduces damage by half (to one-quarter for neutral creatures). Chaotic creatures that fail their save are also dazed for 1 round. Lawful creatures are unaffected.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Out of Sight',
@@ -176,6 +182,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     description:
       "This spell affects the memories of observers rather than making you invisible. Creatures perceive you normally while the spell is active. However, when they stop observing you, they must succeed at a Will save or lose all memory of your presence and actions during the spell's duration. The memory alteration is instantaneous but can be reversed with modify memory or similar magic. Observers retain awareness of other environmental changes—for example, a guard remembers running and notices an unlocked door but forgets they were pursuing you specifically.",
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Outbreak',
@@ -207,6 +214,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     description:
       "You cause any diseased creatures in the area to become extremely contagious. Each affected creature is overcome by a fit of wracking coughs, becoming fatigued and exposing any creatures within 10 feet to the diseases it carries. A creature that succeeds on its Fortitude save is only fatigued for 1 round and does not expose nearby creatures to disease.",
     source: 'Pathfinder Roleplaying Game Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Overlook',
@@ -234,6 +242,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     description:
       "This enchantment makes others dismiss your presence. You gain a +20 bonus to Stealth checks (this does not stack with other spells or effects that enhance Stealth). You can hide without requiring cover or concealment, and you can hide while being directly observed. Observers may retain vague memories of seeing you but attach no significance to them. This spell has no effect on creatures immune to compulsions or mind-affecting effects. Any aggressive or conspicuous action immediately ends the spell for all creatures that witness it.",
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Overwhelming Poison',
@@ -264,6 +273,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     description:
       "You amplify the potency of a poison. The affected poison becomes resistant to delay poison effects and its DC to neutralize with neutralize poison increases by 5. The poison uses its own saving throw DC or this spell's DC, whichever is higher. When cast on a poisoned creature, the spell affects one selected dose of poison currently affecting the target, or a random one if you do not specify. If cast on a venomous creature, the spell affects the first dose of poison delivered by that creature before the spell expires.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Owl's Wisdom",
@@ -298,6 +308,7 @@ export const GAP_SPELLS_O_2: Spell[] = [
     description:
       "The transmuted creature becomes wiser. The spell grants a +4 enhancement bonus to Wisdom, adding the usual benefit to Wisdom-related skills. Wisdom-based spellcasters (such as clerics and druids) who receive this spell do not gain any additional bonus spells for the increased Wisdom, but the save DCs for their spells increase.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Owl's Wisdom, Mass",
@@ -328,5 +339,6 @@ export const GAP_SPELLS_O_2: Spell[] = [
     description:
       "This spell functions like owl's wisdom, except that it affects multiple creatures.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 ];

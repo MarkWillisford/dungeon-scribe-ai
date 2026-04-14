@@ -15,6 +15,7 @@ export const hathor: DeityEntry = {
   sacredAnimal: `Cow`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -33,6 +34,7 @@ export const selket: DeityEntry = {
   sacredAnimal: `Scorpion`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -51,6 +53,7 @@ export const anubis: DeityEntry = {
   sacredAnimal: `Jackal`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -69,6 +72,7 @@ export const horus: DeityEntry = {
   sacredAnimal: `Falcon`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -87,6 +91,7 @@ export const maat: DeityEntry = {
   sacredAnimal: `Leopard`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -105,6 +110,7 @@ export const ra: DeityEntry = {
   sacredAnimal: `Falcon`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -123,6 +129,7 @@ export const thoth: DeityEntry = {
   sacredAnimal: `Ibis`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -141,6 +148,7 @@ export const ptah: DeityEntry = {
   sacredAnimal: `Bull`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -159,6 +167,7 @@ export const bastet: DeityEntry = {
   sacredAnimal: `Cat`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -177,6 +186,7 @@ export const nephthys: DeityEntry = {
   sacredAnimal: `Kite`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

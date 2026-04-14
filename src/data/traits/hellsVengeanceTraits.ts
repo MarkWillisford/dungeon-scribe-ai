@@ -11,6 +11,7 @@ export const HELLS_VENGEANCE_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Sense Motive; class skill; 1/day appear neutral vs good effects targeting evil',
     source: "Hell's Vengeance Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Vengeance",
     prerequisites: [{ type: 'special', description: 'Must be neutral evil alignment' }],
@@ -40,6 +41,7 @@ export const HELLS_VENGEANCE_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Summon monster +1 round for devils; +1 Cha checks vs planar binding devils; 10% cheaper planar ally',
     source: "Hell's Vengeance Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Vengeance",
     prerequisites: [],
@@ -62,6 +64,7 @@ export const HELLS_VENGEANCE_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Diplomacy, Knowledge (planes), Knowledge (religion); one is class skill; gain Infernal language',
     source: "Hell's Vengeance Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Vengeance",
     prerequisites: [],
@@ -105,6 +108,7 @@ export const HELLS_VENGEANCE_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Knowledge (nobility); class skill; +1 Cha checks vs nobles; Noble Scion needs no Cha prereq; starting equipment',
     source: "Hell's Vengeance Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Vengeance",
     prerequisites: [],
@@ -145,6 +149,7 @@ export const HELLS_VENGEANCE_TRAITS: TraitDefinition[] = [
       "You thrive on unpredictability and volatile behavior, cherishing your freedom from others' control. In lawful Cheliax, you manage your chaotic nature while seeking opportunities to act without restraint, often working with House Thrune for the rewards and the liberty it offers to pursue your darker instincts. You gain a +2 trait bonus on initiative checks. Once per day, when an ally is within 10 feet of you, you may reroll a single attack roll or skill check before the outcome of that roll is determined; you must take the result of the second roll, even if it is worse.",
     shortDescription: '+2 initiative; 1/day reroll attack or skill check when ally within 10 ft',
     source: "Hell's Vengeance Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Vengeance",
     prerequisites: [{ type: 'special', description: 'Must be chaotic evil alignment' }],
@@ -174,6 +179,7 @@ export const HELLS_VENGEANCE_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Choose: +1 attack and damage vs Iomedae followers, or +1 spell save DC vs same',
     source: "Hell's Vengeance Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Vengeance",
     prerequisites: [],
@@ -200,6 +206,7 @@ export const HELLS_VENGEANCE_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Bluff; class skill; 1/day reroll Will save when adjacent to a Chelish human ally',
     source: "Hell's Vengeance Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Vengeance",
     prerequisites: [{ type: 'race', raceName: 'Halfling' }],
@@ -229,6 +236,7 @@ export const HELLS_VENGEANCE_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Knowledge (planes); class skill; proficiency with chosen Hellknight order weapon; +1 CMD vs sunder/disarm for that weapon',
     source: "Hell's Vengeance Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Vengeance",
     prerequisites: [],
@@ -278,6 +286,7 @@ export const HELLS_VENGEANCE_TRAITS: TraitDefinition[] = [
       'You are a native of Longacre, a town on the southwestern fringes of the Whisperwood, and have established yourself as a local troublemaker—a thug, enforcer, and petty thief. You work with fellow miscreant Cimri Staelish and have agreed to participate in a burglary of a tannery outside town. You gain a +1 trait bonus on Intimidate checks, and Intimidate is always a class skill for you. You also gain a +1 trait bonus on weapon damage rolls when flanking a foe with an ally.',
     shortDescription: '+1 Intimidate; class skill; +1 weapon damage when flanking',
     source: "Hell's Vengeance Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Vengeance",
     prerequisites: [],
@@ -312,6 +321,7 @@ export const HELLS_VENGEANCE_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Knowledge (planes); class skill; gain Infernal; +2 Will saves vs mind-affecting from good outsiders',
     source: "Hell's Vengeance Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Vengeance",
     prerequisites: [],
@@ -352,6 +362,7 @@ export const HELLS_VENGEANCE_TRAITS: TraitDefinition[] = [
       'You serve House Thrune as a paid informant, reporting your observations to authorities and occasionally carrying out assigned tasks, with an eye toward eventual promotion within the organization. You gain a +1 trait bonus on Diplomacy checks to gather information, Disguise checks, and Knowledge (local) checks. One of these three skills (your choice) is always a class skill for you.',
     shortDescription: '+1 Diplomacy (gather info), Disguise, Knowledge (local); one is class skill',
     source: "Hell's Vengeance Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Hell's Vengeance",
     prerequisites: [],

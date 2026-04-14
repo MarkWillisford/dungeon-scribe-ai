@@ -18,6 +18,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'This evocation spell causes flames to ignite in the targeted area, dealing 1d6 points of fire damage for every 3 caster levels you have (maximum 5d6) to creatures entering or beginning their turn within the burning squares. Affected creatures also catch fire unless they succeed at a Reflex save. The burning area and adjacent squares become smoky, providing concealment. You may concentrate as a standard action to ignite adjacent 5-foot squares. Heavy precipitation extinguishes the spell, while strong winds spread the flames downwind but windstorm-force or stronger winds eliminate them entirely.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flesh Puppet',
@@ -33,6 +34,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'This necromantic spell animates a corpse as a disguised zombie under your control. The zombie appears alive with normal movement and voice. Control occurs through an ephemeral magical string (100 feet + 10 feet per caster level) requiring a swift action per command. The zombie can speak up to 25 words per round but cannot attack, cast spells, or perform complex tasks. Detecting the disguise requires an opposed Perception check against your Disguise check (with caster level bonus). The string has hardness 0 and 1 hp.',
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flesh Wall',
@@ -49,6 +51,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'You animate corpses into a vertical wall of joined flesh and limbs. The wall occupies 2 feet of thickness and each 5-foot section has 12 hit points with DR 5/slashing. You can detach 5-foot sections as human zombies under your control, or cause sections to constrict and fill breaches. The wall makes slam attacks against adjacent enemies and creatures attempting to force through must succeed at a Strength check (DC 15 + caster level) or become trapped, taking 3d6 crushing damage.',
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fleshwarping Swarm',
@@ -65,6 +68,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions similarly to summon swarm. Creatures failing their save against the swarm\'s distraction effect experience limb distortion and become vulnerable to transmutation magic, suffering a -4 penalty to Dexterity and on saving throws against transmutation effects for 1 hour per caster level.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fleshworm Infestation',
@@ -81,6 +85,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'Upon successful touch, parasitic worms manifest in the target\'s body. Each round, the target makes a Fortitude save: on a failed save, it takes 1d6 hit point damage, 2 points of Dexterity damage, and becomes staggered for 1 round. On a successful save, it takes no damage but becomes sickened for 1 round instead. The spell cannot be ended early by remove disease or heal as reinfestation occurs. Protection from evil negates effects while overlapping in duration. Dispel evil automatically terminates the infestation.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flickering Lights',
@@ -97,6 +102,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell causes illumination to fluctuate between absolute darkness and blinding brightness. At the start of each creature\'s turn, a percentile die determines the light level: 1-10 supernatural darkness, 11-25 darkness, 26-50 dim light, 51-90 normal light, 91-100 bright light. Supernatural darkness blocks even darkvision. Bright light affects creatures with light blindness or sensitivity.',
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Floating Disk',
@@ -113,6 +119,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'You create a slightly concave, circular plane of force capable of carrying loads. The disk floats approximately 3 feet above ground, remains level, and moves at your normal speed within range. It maintains a 5-foot interval from you and can carry 100 pounds of weight per caster level or up to 2 gallons of liquid. The disk disappears if you move beyond spell range or attempt to position it more than 3 feet from the surface beneath it.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flotsam Vessel',
@@ -129,6 +136,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'This conjuration spell assembles a functional raft that remains unaffected by non-magical river hazards like rapids or shallows. Each 5-foot section accommodates two Medium passengers or 300 pounds of cargo. The vessel always travels downstream for speed calculations, regardless of actual heading direction.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flurry of Snowballs',
@@ -145,6 +153,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'You propel icy spheres toward enemies in a cone pattern. All creatures caught within the burst take 4d6 points of cold damage from the impact of the frozen projectiles.',
     source: 'Pathfinder Player Companion: People of the North',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Focused Scrutiny',
@@ -159,6 +168,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'This divination spell grants you heightened awareness of a target creature\'s mannerisms, reactions, and body language. You gain a +10 bonus on Perception, Sense Motive, and Survival checks attempted against the target creature, as well as a +5 bonus on Diplomacy and Intimidate checks attempted against it.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Follow Aura',
@@ -174,6 +184,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'You select one alignment category (chaotic, evil, good, or lawful) and can track creatures bearing a strong or overwhelming aura of that alignment. The tracking functions like the scent ability, following aura traces on the ground rather than actual odor, though you gain no bonus to Perception checks. At 10th level, you can also track moderate alignment auras.',
     source: 'Pathfinder Roleplaying Game Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Font of Spirit Magic',
@@ -190,6 +201,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'You amplify magic tied to your spirit and wandering spirit, granting allies within the area a +2 bonus on caster level checks and concentration checks, as well as to spell DCs when casting related spells. The bonus type depends on alignment — sacred for good, profane for evil, or your choice for neutral.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fool's Forbiddance",
@@ -206,6 +218,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You use performance and antics to establish a protective zone that hampers enemies entering it. Affected foes must make an immediate Will save. Those who fail become confused as long as they are in the area and for 1 round after they leave. Those who succeed are instead staggered as long as they are in the area and for 1 round after they leave.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fool's Gold (Villain Codex)",
@@ -220,6 +233,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'This illusion spell temporarily transforms copper or silver items to appear as gold. You can affect up to 1 gp worth of material per level. Coins change value proportionally, while crafted items appear worth 5x (silver) or 50x (copper) their actual value. A DC 25 Appraise check reveals the deception, as can successful saving throws by creatures examining the affected items.',
     source: 'Pathfinder Roleplaying Game Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fool's Teleport",
@@ -235,6 +249,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell renders you invisible while creating a visual and auditory display that makes it appear as if you had teleported away. Additional creatures can be affected if they maintain contact with each other and at least one touches you. Observers making a Spellcraft check can attempt a Will save to identify the spell as an illusion; success reveals it as fool\'s teleport rather than actual teleportation magic, though the invisibility effect persists regardless.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fool's Gold",
@@ -249,6 +264,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This transmutation spell enchants gold pieces to weaken targets\' defenses against your magic. When a creature possessing marked gold pieces must attempt a saving throw against your spell, spell-like ability, or supernatural ability, it must first make a Will save. Failure imposes a -2 penalty on all subsequent saves against your magic while holding the gold. Additionally, if the creature fails a saving throw against a non-harmless magic effect with duration, that duration doubles.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Force Anchor',
@@ -266,6 +282,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You create an anchor of pure force that immediately skewers your target on a successful ranged touch attack. On a hit, it deals 1d4 force damage per 2 caster levels (maximum 5d4) and lodges in the target\'s torso. The weightless anchor restricts movement through spaces smaller than the creature\'s size and prevents incorporeal creatures from passing through solid objects. When the target moves through a square with another creature, that square counts as two squares of movement.',
     source: "Pathfinder Player Companion: Undead Slayer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Force Hook Charge',
@@ -281,6 +298,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a magical hook made of force that strikes a target while pulling you toward it. You make a ranged touch attack; success deals force damage equal to 1 point per caster level. Regardless of whether the attack connects, the hook draws you in a straight line to an adjacent square near the target, provoking opportunity attacks normally. The hook prevents falling during this movement, allowing traversal over pits and elevation changes.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Force Sword',
@@ -297,6 +315,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You manifest a magical longsword composed of pure force. Initially functioning as a +1 weapon, it scales to +2 at 8th caster level and +3 at 13th level. The weapon can be wielded by you or given to another creature. Unlike physical weapons, force swords resist conventional damage but remain vulnerable to specific spells like dispel magic and disintegrate. When targeting creatures with spell resistance, you must succeed on a caster level check against their resistance; failure dispels the spell.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forcecage',
@@ -313,6 +332,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell manifests an immobile, invisible cubic containment of either force bars or solid force walls at your discretion. Creatures too large to fit inside cannot be affected. The structure blocks teleportation and ethereal travel. It has hardness 30 and hit points equal to 20 per caster level. A sphere of annihilation or rod of cancellation destroys it instantly. The barred cage has half-inch force bands allowing small creatures to escape; occupants gain cover against weapons. The windowless cell has solid force walls with no egress.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forceful Hand',
@@ -329,6 +349,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as interposing hand, but grants the magical hand the ability to perform bull rush attacks against a selected opponent. The hand receives one bull rush attempt per round without provoking attacks of opportunity. Its Combat Maneuver Bonus uses your caster level instead of base attack bonus, plus +8 for Strength (27) and +1 for being Large. The hand can pursue targets without movement restrictions and may be redirected to a new target as a move action.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forceful Strike',
@@ -344,6 +365,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell combines melee weapon damage with an additional blast of concussive force. When cast during a melee attack, unarmed strike, or natural weapon attack, it deals normal weapon damage plus extra force damage equal to 1d4 points per caster level (maximum of 10d4). The spell also grants a free combat maneuver check using your caster level as a bonus to attempt a bull rush against the struck target. A successful Fortitude saving throw reduces the force damage by half and negates the bull rush effect.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forest Friend',
@@ -358,6 +380,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'Affected creatures experience no movement penalties or skill check reductions from undergrowth. Forested cover reduces miss chances by 10% below normal. When navigating trees, subjects gain a +5 circumstance bonus to Acrobatics and Climb checks. Rangers in their preferred terrain may additionally apply their terrain bonus to these checks.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Forest's Sense",
@@ -373,6 +396,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This divination allows you to locate a target creature within range provided it remains within 10 feet of living plants or fungi. You must identify the target through physical characteristics like build, clothing, size, or tracks; line of effect is unnecessary. The nearby vegetation functions as a scrying sensor, extending your hearing, smell, and touch through all plants and fungi within 10 feet of the target, enabling you to assess object sizes and potentially overhear conversations. For one day after casting, you gain a +5 insight bonus on Survival checks to track creatures sensed via this spell.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Foretell Failure',
@@ -387,6 +411,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'This divination spell enables you to gain insight before attempting a d20 roll. The spell magically informs you whether the action will succeed if you roll a 10 or better on the d20 roll involved. You must commit to the attempt if success is assured under those conditions; otherwise, you may pursue an alternative action. The action must be completable within a single round.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Form Validation',
@@ -401,6 +426,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'To cast this spell, you need a bit of hair, a fingernail clipping, or some other portion of a creature that is no more than one week old per caster level. Upon touching the target creature, you instantly determine whether they match the creature from which you obtained the sample. The spell can be cast before touching the target to maintain discretion, and it functions on dead bodies or partial remains to verify identity.',
     source: 'Pathfinder Campaign Setting: Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fortune's Path",
@@ -415,6 +441,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'You peer into a silver mirror to receive a divination about near-future events. You roll percentile dice and add your caster level (maximum +10) to determine accuracy and specificity. Results range from receiving no clear vision to accurately foreseeing a major event likely occurring within the next week, potentially including location details at the GM\'s discretion.',
     source: "Pathfinder Player Companion: Disciple's Doctrine",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fox's Cunning",
@@ -429,6 +456,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The target gains a +4 enhancement bonus to Intelligence, which improves Intelligence-based skill checks and spell save DCs. Spellcasters do not gain bonus spells from the increased Intelligence, and the spell provides no additional skill ranks.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fox's Cunning, Mass",
@@ -443,6 +471,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: "This spell functions like fox's cunning, except that it affects multiple creatures.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fractions of Heal and Harm',
@@ -457,6 +486,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell modifies your next instantaneous area damage spell (3rd level or lower) cast before the end of your next turn. The affected spell deals only 75% of its normal damage, with the remaining 25% converted into healing for you. For example, if you cast this spell and followed it with a fireball that would normally deal 40 hit points of damage, the fireball instead deals 30 hit points of damage and heals you of 10 hit points.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Free Spirit',
@@ -471,6 +501,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'This abjuration grants freedom of movement benefits alongside a +4 bonus against fear saving throws. However, it intoxicates you, imposing a -2 penalty on attack rolls, ability checks, skill checks, and concentration checks for the spell\'s duration. If you somehow remove or avoid these penalties, the spell\'s duration ends.',
     source: 'Pathfinder Campaign Setting: Inner Sea Temples',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Free Swim',
@@ -485,6 +516,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell grants underwater mobility similar to freedom of movement, allowing normal movement and attacks without typical underwater combat penalties. However, it provides no protection against grapples, paralysis, or movement-impeding magic like solid fog, slow, or web.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Freedom',
@@ -499,6 +531,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell liberates a subject from magical constraints and physical restrictions on movement. The spell removes effects such as binding, entanglement, grappling, imprisonment, maze, paralysis, petrification, pinning, sleep, slow, stunning, temporal stasis, and web. To free a creature from imprisonment or maze specifically, you must know the creature\'s name and background, and must cast the spell at the location where it was entombed or banished into the maze.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Freedom's Toast",
@@ -514,6 +547,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "When you raise a flagon and toast freedom, the target teleports up to 15 feet to a location within your line of sight. If the target was prone, it can arrive standing. Non-magical restraints (ropes, manacles, etc.) are left behind, freeing the target. For magical restraints, you make a caster level check (DC = 11 + restraint's caster level) to prevent them from traveling with the target.",
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Freezing Sphere',
@@ -530,6 +564,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You launch a frigid globe of cold energy dealing 1d6 cold damage per caster level (max 15d6) to creatures in the burst. Water-type creatures take 1d8 per level (max 15d8) and become staggered for 1d4 rounds. When striking water, it freezes the liquid to a depth of 6 inches in a 40-foot radius for 1 round/level, potentially trapping swimming creatures (DC 25 Strength or Escape Artist check to break free). You may hold the charge for up to 1 round/level before it detonates centered on you.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Frigid Souls',
@@ -546,6 +581,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell creates a fear-based haunt centered on frozen environments. Creatures entering the affected zone must make a Will save or gain spell resistance (11 + caster level) against abjuration effects protecting against cold damage. The haunt cannot voluntarily lower this resistance and attempts dispel checks every 30 minutes against active cold-protection abjurations, starting with highest-level effects first.',
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Frigid Touch',
@@ -561,6 +597,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'Your hand glows with a pale blue radiance. A melee touch attack delivers 4d6 points of cold damage, with the target becoming staggered for 1 round. If the attack scores a critical hit, the staggered condition extends to 1 minute instead.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Frost Fall',
@@ -577,6 +614,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This chilling spell covers an area with frost, inflicting 2d6 points of cold damage to all creatures within it. Those initially damaged must succeed at a Fortitude save or become staggered for one round. The affected region persists throughout the spell\'s duration, dealing 1d6 points of cold damage to any creature starting its turn there (with a Fortitude save for half damage), though staggering does not occur on subsequent rounds.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Frost Mammoth',
@@ -594,6 +632,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell conjures a massive creature of snow and ice shaped like a woolly mammoth with solid ice tusks, occupying a 15-foot space. The creature uses a mastodon\'s statistics but gains the cold subtype, conferring immunity to cold and vulnerability to fire. You control it telepathically, and it can serve as a mount. At 17th level, the mammoth adds an additional 1d6 points of cold damage with each physical attack.',
     source: "Pathfinder Roleplaying Game Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fumblestep',
@@ -608,6 +647,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: "The spell coats a target's feet in slick ectoplasm that retains some psychic connection to your mind. While active, the target suffers a -1 penalty on Reflex saves and Acrobatics checks. As a standard action during the spell's duration, you may discharge the spell to perform a trip combat maneuver using your caster level instead of base attack bonus and your highest modifier among Charisma, Intelligence, or Wisdom instead of Strength. The trip attempt provokes no attack of opportunity and cannot be affected by feats that modify trip maneuvers.",
     source: 'Pathfinder Player Companion: Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fungal Infestation',
@@ -623,6 +663,7 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell causes necrotic fungus to make the target\'s flesh soft and fragile, with toadstools, ringworm, and other disgusting fungal growths sprouting from its skin. The afflicted creature takes 1d3 points of Charisma damage and any physical attack against it automatically adds 1d6 points of bleed damage.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Furious Fire Barrage',
@@ -639,5 +680,6 @@ export const GAP_SPELLS_F_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You create one or two fireballs held in your free hands. Each can be thrown up to 300 feet, dealing 1d6 points of fire damage per caster level (maximum 10d6) in a 10-foot radius. You can channel anger as a full-round action to generate additional flame balls during the spell\'s duration, throwing them as standard actions. Creating new balls requires the ability to feel anger and does not work under calm emotions.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
   },
 ];

@@ -29,6 +29,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'A magical arrow of acid springs from your hand and speeds to its target. You must succeed on a ranged touch attack to hit your target. The arrow deals 2d4 points of acid damage with no splash damage. For every three caster levels you possess, the acid, unless neutralized, lasts for another round, dealing another 2d4 points of damage in that round.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster I',
@@ -66,6 +67,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell summons an extraplanar creature (typically an outsider, elemental, or magical beast native to another plane). It appears where you designate and acts immediately, on your turn. It attacks your opponents to the best of its ability. If you can communicate with the creature, you can direct it not to attack, to attack particular enemies, or to perform other actions. The spell conjures one of the creatures from the 1st-level list on Table: Summon Monster. You choose which kind of creature to summon, and you can change that choice each time you cast the spell. A summoned monster cannot summon or otherwise conjure another creature, nor can it use any teleportation or planar travel abilities. Creatures summoned using this spell cannot use spells or spell-like abilities that duplicate spells with expensive material components.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster II',
@@ -103,6 +105,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon monster I, except that you can summon one creature from the 2nd-level list or 1d3 creatures of the same kind from the 1st-level list.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster III',
@@ -139,6 +142,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon monster I, except that you can summon one creature from the 3rd-level list, 1d3 creatures of the same kind from the 2nd-level list, or 1d4+1 creatures of the same kind from the 1st-level list.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster IV',
@@ -176,6 +180,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon monster I, except that you can summon one creature from the 4th-level list, 1d3 creatures of the same kind from the 3rd-level list, or 1d4+1 creatures of the same kind from a lower-level list.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster V',
@@ -212,6 +217,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon monster I, except that you can summon one creature from the 5th-level list, 1d3 creatures of the same kind from the 4th-level list, or 1d4+1 creatures of the same kind from a lower-level list.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster VI',
@@ -246,6 +252,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon monster I, except that you can summon one creature from the 6th-level list, 1d3 creatures of the same kind from the 5th-level list, or 1d4+1 creatures of the same kind from a lower-level list.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster VII',
@@ -279,6 +286,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon monster I, except that you can summon one creature from the 7th-level list, 1d3 creatures of the same kind from the 6th-level list, or 1d4+1 creatures of the same kind from a lower-level list.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster VIII',
@@ -311,6 +319,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon monster I, except that you can summon one creature from the 8th-level list, 1d3 creatures of the same kind from the 7th-level list, or 1d4+1 creatures of the same kind from a lower-level list.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster IX',
@@ -343,6 +352,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon monster I, except that you can summon one creature from the 9th-level list, 1d3 creatures of the same kind from the 8th-level list, or 1d4+1 creatures of the same kind from a lower-level list.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally I",
@@ -365,6 +375,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell summons a natural creature. It appears where you designate and acts immediately, on your turn. It attacks your opponents to the best of its ability. If you can communicate with the creature, you can direct it not to attack, to attack particular enemies, or to perform other actions as you direct. A summoned monster cannot summon or otherwise conjure another creature, nor can it use any teleportation or planar travel abilities.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally II",
@@ -387,6 +398,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions like summon nature's ally I, except that you can summon one 2nd-level creature or 1d3 1st-level creatures of the same kind.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally III",
@@ -409,6 +421,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions like summon nature's ally I, except that you can summon one 3rd-level creature, 1d3 2nd-level creatures of the same kind, or 1d4+1 1st-level creatures of the same kind.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally IV",
@@ -431,6 +444,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions like summon nature's ally I, except that you can summon one 4th-level creature, 1d3 3rd-level creatures of the same kind, or 1d4+1 lower-level creatures of the same kind.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally V",
@@ -453,6 +467,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions like summon nature's ally I, except that you can summon one 5th-level creature, 1d3 4th-level creatures of the same kind, or 1d4+1 lower-level creatures of the same kind.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally VI",
@@ -475,6 +490,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions like summon nature's ally I, except that you can summon one 6th-level creature, 1d3 5th-level creatures of the same kind, or 1d4+1 lower-level creatures of the same kind.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally VII",
@@ -497,6 +513,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions like summon nature's ally I, except that you can summon one 7th-level creature, 1d3 6th-level creatures of the same kind, or 1d4+1 lower-level creatures of the same kind.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally VIII",
@@ -519,6 +536,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions like summon nature's ally I, except that you can summon one 8th-level creature, 1d3 7th-level creatures of the same kind, or 1d4+1 lower-level creatures of the same kind.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally IX",
@@ -541,6 +559,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions like summon nature's ally I, except that you can summon one 9th-level creature, 1d3 8th-level creatures of the same kind, or 1d4+1 lower-level creatures of the same kind.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Swarm',
@@ -574,6 +593,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You summon a swarm of bats, rats, or spiders (your choice), which attacks all other creatures within its area. (You may summon the swarm so that it shares the area of other creatures.) If no living creatures are within its area, the swarm attacks or pursues the nearest creature as best it can. The caster has no control over its target or direction of travel.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unseen Servant',
@@ -607,6 +627,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "An unseen servant is an invisible, mindless, shapeless force that performs simple tasks at your command. It can run and fetch things, open unstuck doors, and hold chairs, as well as clean and mend. The servant can perform only one activity at a time, but it repeats the same activity over and over again if told to do so as long as you remain within range. It has an effective Strength score of 2 (so it can lift 20 pounds or drag 100 pounds). It can trigger traps and such, but it can exert only 20 pounds of force, which is not enough to activate certain pressure plates and other devices. It can't perform tasks that require a skill check with a DC higher than 10 or that require a check using a skill that can't be used untrained. Its speed is 15 feet. It cannot attack in any way.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Water',
@@ -638,6 +659,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell generates wholesome, drinkable water, just like clean rain water. Water can be created in an area as small as will actually contain the liquid, or in an area three times as large—possibly creating a downpour or filling many small receptacles. This water disappears after 1 day if not consumed.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Food and Water',
@@ -660,6 +682,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The food that this spell creates is simple fare of your choice—highly nourishing, if rather bland. Food so created decays and becomes inedible within 24 hours, although it can be kept fresh for another 24 hours by casting a purify food and drink spell on it. The water created by this spell is just like water conjured by the create water spell.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fog Cloud',
@@ -694,6 +717,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'A bank of fog billows out from the point you designate. The fog obscures all sight, including darkvision, beyond 5 feet. A creature within 5 feet has concealment (attacks have a 20% miss chance). Creatures farther away have total concealment (50% miss chance, and the attacker cannot use sight to locate the target). A moderate wind (11+ mph) disperses the fog in 4 rounds; a strong wind (21+ mph) disperses the fog in 1 round. This spell does not function underwater.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Web',
@@ -718,6 +742,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Web creates a many-layered mass of strong, sticky strands. These strands trap those caught in them. The strands are similar to spider webs but far larger and tougher. These masses must be anchored to two or more solid and diametrically opposed points or else the web collapses upon itself and disappears. Creatures caught within a web become grappled by the sticky fibers. Attacking the web with fire damage (at least 5 points in a single attack) destroys a 5-foot-square section of web and deals 2d4 fire damage to any creature in that square.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloudkill',
@@ -742,6 +767,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell generates a bank of fog, similar to a fog cloud, except that its vapors are yellowish green and poisonous. These vapors automatically kill any living creature with 3 or fewer HD (no save). A living creature with 4 to 6 HD is slain unless it succeeds on a Fortitude save (in which case it takes 1d4 points of Constitution damage on your turn each round while in the cloud). A living creature with 6 or more HD takes 1d4 points of Constitution damage on your turn each round while in the cloud (a successful Fortitude save halves this damage). Cloudkill moves away from you at 10 feet per round, rolling along the surface of the ground. Because the vapors are heavier than air, they sink to the lowest level of the land, even pouring down den or sinkhole openings.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stinking Cloud',
@@ -776,6 +802,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Stinking cloud creates a bank of writhing green vapors so nauseating that they prevent effective actions. Each living creature in the cloud becomes nauseated. This condition lasts as long as the creature is in the cloud and for 1d4+1 rounds after it leaves. (Roll separately for each nauseated character.) Any creature that succeeds on its save but remains in the cloud must continue to save each round on your turn. This is a poison effect.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sleet Storm',
@@ -811,6 +838,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "Driving sleet blocks all sight (even darkvision) within it and causes the ground in the area to be icy. A creature can walk within or through the area of sleet at half normal speed with a DC 10 Acrobatics check. Failure means it can't move in that round, while failure by 5 or more means it falls (see the Acrobatics skill for details). The sleet extinguishes torches and small fires.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Solid Fog',
@@ -843,6 +871,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like fog cloud, but in addition to obscuring sight, the solid fog is so thick that any creature attempting to move through it progresses at a speed of 5 feet, regardless of its normal speed, and it takes a -2 penalty on all melee attack and melee damage rolls. The vapors prevent effective ranged weapon attacks (except for magic rays and the like). A creature or object that falls into solid fog is slowed so that each 10 feet of vapor that it passes through reduces the damage from the fall by 1d6. A creature cannot take a 5-foot step while in solid fog.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Acid Fog',
@@ -868,6 +897,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like solid fog, but it is also filled with acid. In addition to the movement penalties and attack penalties, the acid fog deals 2d6 points of acid damage per round to all creatures and objects within it.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Minor Creation',
@@ -900,6 +930,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You create a nonmagical, unattended object of nonliving, vegetable matter. The volume of the object cannot exceed 1 cubic foot per caster level. You must succeed on an appropriate skill check to make a complex item. Attempting to use any created object as a material component causes the spell to fail.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Major Creation',
@@ -930,6 +961,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like minor creation, except that you can also create an object of mineral nature: stone, crystal, metal, or the like. The duration of the created item varies with its relative hardness and rarity: Vegetable matter 2 hr./level; Stone, crystal, base metals 1 hr./level; Precious metals 20 min./level; Gems 10 min./level; Rare metals 1 round/level. Attempting to use any created object as a material component causes the spell to fail.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dimension Door',
@@ -961,6 +993,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You instantly transfer yourself from your current location to any other spot within range. You always arrive at exactly the spot desired—whether by simply visualizing the area or by stating direction. After using this spell, you can't take any other actions until your next turn. You can bring along objects as long as their weight doesn't exceed your maximum load. You may also bring one additional willing Medium or smaller creature (carrying gear or objects up to its maximum load) or its equivalent per three caster levels. A Large creature counts as two Medium creatures, a Huge creature counts as two Large creatures, and so forth. All creatures to be transported must be in contact with one another, and at least one of those creatures must be in contact with you.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleport',
@@ -994,6 +1027,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell instantly transports you to a designated destination, which may be as distant as 100 miles per caster level. Interplanar travel is not possible. You may also bring one additional willing Medium or smaller creature per three caster levels. Bringing larger creatures affects the number you may bring as per dimension door. All creatures to be transported must be in contact with one another. You must have some clear idea of the location and layout of the destination. The clearer your mental image, the more likely the teleportation works. Areas of strong physical or magical energy may make teleportation more hazardous or even impossible.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleport, Greater',
@@ -1024,6 +1058,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like teleport, except that there is no range limit and there is no chance you arrive off target. In addition, you need not have seen the destination, but in that case you must have at least a reliable description of the place to which you are teleporting. If you attempt to teleport with insufficient information (or with misleading information), you disappear and simply reappear in your original location. Interplanar travel is not possible.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleportation Circle',
@@ -1048,6 +1083,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You create a circle on the floor or other horizontal surface that teleports, as greater teleport, any creature who stands on it to a designated destination. Once you designate the destination for the circle, you can't change it. The spell fails if you attempt to set the circle to transport creatures into a solid object, to a place with which you are not familiar and have no clear description of, or to another plane.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plane Shift',
@@ -1080,6 +1116,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You move yourself or some other creature to another plane of existence or alternate dimension. If several willing persons link hands in a circle, as many as eight can be affected by the plane shift at the same time. Precise accuracy as to a particular arrival location on the intended plane is nigh impossible. From the Material Plane, you can reach any other plane, though you appear 5 to 500 miles (5d%) from your intended destination. Plane shift transports creatures instantaneously and then ends. The creatures need to find their own way back.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Word of Recall',
@@ -1102,6 +1139,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "Word of recall teleports you instantly back to your sanctuary when the word is uttered. You must designate the sanctuary when you prepare the spell, and it must be a very familiar place. The actual point of arrival is a designated area no larger than 10 feet by 10 feet. You can be transported any distance within a plane but cannot travel between planes. You can transport, in addition to yourself, any objects you carry, as long as their weight doesn't exceed your maximum load. You may also bring one additional willing Medium or smaller creature per three caster levels.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mount',
@@ -1134,6 +1172,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You summon a light horse or a pony (your choice) to serve you as a mount. The steed serves willingly and well. The mount comes with a bit and bridle and a riding saddle.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secret Chest',
@@ -1158,6 +1197,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You hide a chest on the Ethereal Plane for as long as 60 days and can retrieve it at will. The chest can contain up to 1 cubic foot of material per caster level (regardless of the chest's actual size, which is irrelevant). If any living creatures are in the chest, there is a 75% chance that the spell simply fails. Once the chest is hidden, you can retrieve it by concentrating (a standard action), and it appears next to you. The chest and its contents are undetectable by nonmagical means while on the Ethereal Plane. After 60 days, there is a cumulative 5% chance per day that the chest is lost. If the replica is destroyed, the chest is lost.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phantom Steed',
@@ -1189,6 +1229,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You conjure a Large, quasi-real, horse-like creature. This creature can be ridden only by you or by the one person for whom you specifically created the mount. A phantom steed has a black head and body, gray mane and tail, and smoke-colored, insubstantial hooves that make no sound. It does not fight, but animals shun it and refuse to attack it. The mount is AC 18 (–1 size, +4 natural armor, +5 Dex) and has 7 hit points + 1 hit point per caster level. If it loses all its hit points, the phantom steed disappears. A phantom steed has a speed of 20 feet per two caster levels, to a maximum of 100 feet at 10th level or higher. It can bear its rider's weight plus up to 10 pounds per caster level.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secure Shelter',
@@ -1214,6 +1255,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You conjure a sturdy cottage or lodge made of material that is common in the area where the spell is cast. The floor is level, clean, and dry. The lodging resembles a normal cottage, with a sturdy door, two shuttered windows, and a small fireplace. The door, shutters, and even chimney are secure against intrusion, the former two being arcane locked and the latter secured by an alarm spell. In addition, these three areas are protected by a ward against evil effect. Finally, an unseen servant is conjured to provide service to you for the duration of the shelter.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Magnificent Mansion",
@@ -1239,6 +1281,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You conjure up an extradimensional dwelling that has a single entrance on the plane from which the spell was cast. The entry point looks like a faint shimmering in the air that is 4 feet wide and 8 feet high. Only those you designate may enter the mansion, and the portal is shut and made invisible behind you when you enter. You may open it again from your own side at will. Once observers have passed beyond the entrance, they are in a magnificent foyer with numerous chambers beyond. The atmosphere is clean, fresh, and warm.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Faithful Hound",
@@ -1262,6 +1305,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You conjure up a phantom watchdog that is invisible to everyone but yourself. It then guards the area where you conjured it (it does not move). To you, the hound looks like a large, normally colored dog that glows with a faint magical aura. The hound immediately starts barking loudly if any Small or larger creature approaches within 30 feet of it. The hound also barks if it detects invisible creatures within 30 feet. The hound can be instructed to bark loudly when a specific condition is met. The hound can't be attacked or harmed by physical attacks, but dispel magic, disintegrate, a sphere of annihilation, or a rod of cancellation affects it. When the spell duration expires, the phantom hound disappears. The hound attacks any creature that enters its area.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gate',
@@ -1286,6 +1330,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "Casting a gate spell has two effects. First, it creates an interdimensional connection between your plane of existence and a plane you specify, allowing travel between those two planes in either direction. Second, you may then call a particular individual or kind of being through the gate. The gate itself is a circular hoop or disk from 5 to 20 feet in diameter (caster's choice) oriented in the direction you desire when it comes into existence (typically vertical and facing you). It is a two-dimensional window looking into the plane you specified when casting the spell.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Ally, Lesser',
@@ -1310,6 +1355,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "By casting this spell, you request your deity to send you an outsider (of up to 6 HD) of the deity's choice. If you serve no particular deity, the spell is a general plea answered by a creature sharing your philosophical alignment. The creature requires payment for its services. Tasks can be mundane or dangerous, and the payment varies accordingly: 100 gp per HD for a task taking up to 1 minute per level, 500 gp per HD for up to 1 hour per level, 1,000 gp per HD for up to 1 day per level. Some tasks require immediate payment before they'll perform the service, while others require only payment on completion.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Ally',
@@ -1334,6 +1380,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like lesser planar ally, except that you may call a single outsider of up to 12 HD, or up to two outsiders of the same kind, whose Hit Dice total no more than 12.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Ally, Greater',
@@ -1358,6 +1405,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like lesser planar ally, except that you may call a single outsider of up to 18 HD, or up to three outsiders of the same kind whose Hit Dice total no more than 18.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Binding, Lesser',
@@ -1380,6 +1428,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "Casting this spell attempts a dangerous act: to lure a creature from another plane to a specifically prepared trap, which must lie within the spell's range. The called creature is held in the trap until it agrees to perform one service in return for its freedom. The trap is simply a magic circle spell (a circle of conjuration magic) of the appropriate alignment inward. The creature can attempt to break free with a Charisma check (DC 15 + 1/2 your caster level + your Charisma modifier). If the creature breaks free, it can escape or attack you.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Binding',
@@ -1403,6 +1452,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like lesser planar binding, except that you may call a single creature of up to 12 HD, or up to three creatures of the same kind whose Hit Dice total no more than 12. Each creature gets a Will save and Spell Resistance check.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Binding, Greater',
@@ -1426,6 +1476,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like lesser planar binding, except that you may call a single creature of up to 18 HD, or up to three creatures of the same kind whose Hit Dice total no more than 18.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shambler',
@@ -1449,6 +1500,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The shambler spell creates 1d4+2 shambling mounds with the advanced template. These shambling mounds come into being in a location you specify and immediately begin to grow from the surrounding vegetation. They are completely under your control and will perform any task you ask of them to the best of their ability. In time, they pursue and return to their home territory if so directed. If ordered to guard a specific location (rather than to attack or perform other actions), the shamblers remain in that area for 7 months rather than 7 days.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Elemental Swarm',
@@ -1473,6 +1525,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell opens a portal to an Elemental Plane and calls elementals through it. You call and command a number of elementals over a period of time. You first summon 2d4 Large elementals, then 1d4 Huge elementals, then 1 greater elemental. The descriptor of the spell depends on which type of elemental you call. All the summoned elementals have maximum hit points per HD. Once you have summoned the elementals, they serve you for the duration of the spell. The elemental can't summon or otherwise conjure another creature.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Storm of Vengeance',
@@ -1496,6 +1549,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You create a huge black storm cloud. Each round you maintain concentration, the storm generates a different effect. Round 1: Acid rain and deafening thunder. Round 2: Six bolts of lightning strike random creatures (10d6 electricity damage, Reflex DC negates). Round 3: Hail pelts area (5d6 bludgeoning damage). Rounds 4+: Rain and wind reduce visibility to 5 feet and impose severe movement penalties. Spellcasting in the area requires Concentration checks. If the spell duration expires while you are still concentrating, the storm dissipates normally.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Incendiary Cloud',
@@ -1520,6 +1574,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "An incendiary cloud spell creates a cloud of roiling smoke shot through with white-hot embers. The smoke obscures all sight as a fog cloud does. In addition, the white-hot embers within the cloud deal 6d6 points of fire damage to everything within the cloud on your turn each round. All targets can make Reflex saves each round to take half damage. As with a cloudkill spell, the smoke moves away from you at 10 feet per round. Figure out the smoke's new spread each round based on its new point of origin, which is 10 feet farther away from where you were when you cast the spell. By concentrating, you can make the cloud move as much as 60 feet each round.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   // ─────────────────────────────────────────────
   // ADVANCED PLAYER'S GUIDE
@@ -1547,6 +1602,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You create an extradimensional hole in the ground measuring 10 feet across and 10 feet deep per 2 caster levels (maximum depth of 30 feet). The pit appears where you designate and must be adjacent to you on a solid horizontal surface. Creatures within the area of the pit when it is created may attempt a Reflex save to avoid falling in. Creatures adjacent to the newly formed pit's edge that fail their save also fall in. Creatures at the edge can make DC 20 Climb checks to scramble out. When the spell ends, the pit disappears and all creatures within it rise safely to the surface.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spiked Pit',
@@ -1571,6 +1627,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as create pit, except that the pit is filled with iron spikes along the bottom and walls. Creatures that fall into the pit take 2d6 points of piercing damage from the spikes in addition to any damage from the fall. Creatures that are moved into the walls of the pit also take the spiking damage. Climbing the walls of a spiked pit requires a DC 20 Climb check.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Acid Pit',
@@ -1597,6 +1654,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as create pit, except that the pit is 100 feet deep (maximum) and is filled with a pool of acid 5 feet deep at the bottom. Any creature that falls into the pit takes falling damage (from the fall) as well as 2d6 points of acid damage per round spent in contact with the acid at the bottom of the pit. Items that fall into the pit may be damaged by the acid as well.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hungry Pit',
@@ -1621,6 +1679,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as create pit, except that the pit is 100 feet deep (maximum) and the walls of the pit are lined with teeth that crush and grind those within. Each round, every creature within the pit takes 4d6 points of bludgeoning damage from the grinding walls (Reflex half). In addition, the pit attempts to engulf those within it as a free action, using your spell DC + your Charisma modifier as its CMB. Success means the creature is pinned. Pinned creatures take an additional 4d6 points of bludgeoning damage each round.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stumble Gap',
@@ -1645,6 +1704,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You create a shallow extra-dimensional hole perfectly sized to trip anyone who steps into the area. This hole is only 6 inches deep but is unstable enough to cause a creature to stumble. Any creature that enters the area of this spell must make a Reflex save. On a failed save, the creature trips and falls prone in an adjacent square, taking 1d6 points of damage. On a successful save, the creature is not tripped but still suffers a –1 penalty on all rolls and checks for 1 round. The hole can affect only one creature per round.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aqueous Orb',
@@ -1679,6 +1739,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You create a rolling sphere of churning water that can engulf those it strikes. The aqueous orb can move up to 30 feet per round, rolling over barriers less than 10 feet tall. Medium or smaller creatures it moves over must make Reflex saves or be engulfed and carried along. The orb extinguishes any nonmagical fires it encounters. It can attempt to dispel magical fire effects as if it were a targeted dispel magic.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stone Call',
@@ -1712,6 +1773,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "A rain of small rocks falls in the area. On the first round, the falling rocks deal 2d6 points of bludgeoning damage to every creature in the area. For the remainder of the spell's duration, the rocks cover the ground in the area, making it difficult terrain. When the spell ends, the rocks disappear.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Eidolon',
@@ -1735,6 +1797,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You open a rift between dimensions that allows your eidolon to appear. Treat this as if you had summoned your eidolon normally, except that it only remains with you for the duration of this spell. The spell has no effect if your eidolon is already present on your plane of existence.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   // ─────────────────────────────────────────────
   // ULTIMATE MAGIC
@@ -1773,6 +1836,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as summon monster I, except that you summon 1d3 Tiny or smaller animals, such as bats, lizards, monkeys, rats, ravens, toads, or weasels. All the summoned creatures must be of the same kind.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Conjure Black Pudding',
@@ -1797,6 +1861,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You summon a black pudding, which appears adjacent to you. The black pudding is uncontrolled and automatically attacks nearby opponents. You cannot direct its actions. If no other creatures are nearby, the pudding may attack you. The pudding's natural split ability works normally, though all portions of the pudding vanish when the spell ends.",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Minor Ally',
@@ -1819,6 +1884,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions as summon nature's ally I, except that you summon 1d3 Tiny or smaller animals such as bats, lizards, monkeys, rats, ravens, toads, or weasels.",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Corrosive Consumption',
@@ -1842,6 +1908,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Upon touching the target, you cause an acidic patch to form on the creature that grows larger and more destructive each round. Round 1: 1 point of acid damage per caster level (maximum 15 points). Round 2: 1d4 points of acid damage per caster level (maximum 15d4). Round 3: 1d6 points of acid damage per caster level (maximum 15d6). As a full-round action, the target can attempt to scrape off the patch or use at least 1 gallon of liquid to wash off the acid, halving the damage for the current round and ending the spell.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   // ─────────────────────────────────────────────
   // ULTIMATE COMBAT
@@ -1876,6 +1943,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like mount, except that you can summon up to six light horses or ponies. You divide the duration in 2-hour increments among the summoned mounts.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phantom Steed, Communal',
@@ -1906,6 +1974,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like phantom steed, except that you can conjure up to six steeds. You divide the duration in 1-hour/level increments among the steeds conjured.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   // ─────────────────────────────────────────────
   // ULTIMATE INTRIGUE
@@ -1932,6 +2001,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You conjure a fine wooden carriage with whatever cosmetic embellishments you desire. It is open-topped but can carry up to six Medium or Small passengers (as well as a driver), which arrive seated within it. Two quasi-real light horses arrive already harnessed and ready to drive, with a coachman serving as an unseen servant driver. The carriage cannot travel faster than 40 feet per round, and the coachman can handle only basic, noncombat driving. When the spell ends, the carriage, horses, and coachman disappear.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   // ─────────────────────────────────────────────
   // INNER SEA RACES / SETTING SOURCES
@@ -1958,6 +2028,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You call upon the might of your totem creature to aid you. The creature summoned must be one venerated by your clan; if you are not part of a clan, you may summon from any of the standard totem creature lists. The spell otherwise functions as summon nature's ally III.",
     source: 'Humans of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Giant Ally I',
@@ -1981,6 +2052,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions like summon nature's ally VI, except that the casting time is 1 standard action and the giant summoned is one of the following: cave giant, hill giant, marsh giant, river giant, slag giant, stone giant, or wood giant.",
     source: 'Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Giant Ally II',
@@ -2004,6 +2076,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon giant ally I, except that you can summon one desert giant, fire giant, frost giant, or jungle giant, 1d3 lesser giants from the first list, or 1d4+1 lesser giants.',
     source: 'Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Giant Ally III',
@@ -2027,6 +2100,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon giant ally II, except that you can summon one ash giant or cloud giant, 1d3 giants from the second list, 1d4+1 giants from the first list, or 1d6+2 minor giants.',
     source: 'Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_001 ─────────────────────────────────────────────────────────────
@@ -2053,6 +2127,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell operates identically to summon monster V, with the restriction that it exclusively summons host devils. These airborne devils are alternatively referred to as gaavs and magaavs.',
     source: 'Pathfinder Campaign Setting: Rival Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Instrument',
@@ -2075,6 +2150,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This cantrip conjures a single handheld musical instrument of the caster's selection. The instrument materializes either in the caster's hands or at their feet, at their discretion. It is of standard quality for its type. Only one instrument manifests per casting, and it will function solely for the caster. The caster cannot summon instruments too large for two-handed manipulation. The conjured instrument vanishes when the spell's duration ends.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Kami',
@@ -2097,6 +2173,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions similarly to Summon Nature's Ally V. The caster may summon one kodama, 1d3 fukujin, or 1d4+1 shikigami. All of these summoned creatures are varieties of kami.",
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Laborers',
@@ -2120,6 +2197,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell summons humanoid petitioners from a plane of the caster's choice. These creatures perform labor tasks but cannot engage in combat or travel to dangerous locations. They enhance downtime activities within settlements by increasing Influence or Labor effects by 50%, up to a maximum bonus of 1 additional point per 2 caster levels. The spell's alignment matches the summoned petitioners' home plane. Feats that increase summoned creature numbers do not affect this spell.",
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Lesser Psychopomp',
@@ -2143,6 +2221,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell operates similar to summon monster, except it summons either 1d3 esobok psychopomps or 1d4+1 nosoi psychopomps instead.',
     source: 'Pathfinder Adventure Path #80: Empty Graves',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Meladaemon',
@@ -2174,6 +2253,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions like summon monster, except it summons a single meladaemon.',
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Minor Ally',
@@ -2196,6 +2276,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This conjuration spell functions similarly to summon nature's ally I. The caster summons between one and three Tiny or smaller animals, such as bats, lizards, monkeys, rats, ravens, toads, or weasels. All summoned creatures must be of the same type.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Minor Monster',
@@ -2229,6 +2310,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions identically to summon monster I, but the caster can summon 1d3 Tiny or smaller animals such as bats, lizards, monkeys, rats, ravens, toads, or weasels. All summoned animals must be the same creature type. Casters may apply one alignment-appropriate template to these animals, consistent with summon monster I guidelines.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster I',
@@ -2265,6 +2347,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell conjures an extraplanar creature, typically an outsider, elemental, or magical beast from another plane. The creature appears where designated and acts immediately on the caster's turn. It attacks opponents to the best of its ability, though the caster can direct it to avoid attacking or target specific enemies if communication is possible. One creature from the 1st-level list may be chosen, with a different option available each casting. Summoned creatures cannot summon others, use teleportation, or employ planar travel abilities. They also cannot cast spells requiring expensive material components. Creatures marked with an asterisk receive celestial templates if the caster is good, fiendish templates if evil, or the caster may choose if neutral.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster II',
@@ -2300,6 +2383,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions identically to Summon Monster I but allows summoning one creature from the 2nd-level list or 1d3 creatures of the same kind from the 1st-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster III',
@@ -2333,6 +2417,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions like Summon Monster I, allowing summoning of one 3rd-level creature, 1d3 creatures from the 2nd-level list, or 1d4+1 creatures from the 1st-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster IV',
@@ -2368,6 +2453,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions like Summon Monster I, permitting summoning of one 4th-level creature, 1d3 from the 3rd-level list, or 1d4+1 from any lower-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster V',
@@ -2402,6 +2488,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions like Summon Monster I, allowing summoning of one 5th-level creature, 1d3 from the 4th-level list, or 1d4+1 from any lower-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster VI',
@@ -2435,6 +2522,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions like Summon Monster I, permitting summoning of one 6th-level creature, 1d3 from the 5th-level list, or 1d4+1 from any lower-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster VII',
@@ -2466,6 +2554,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions like Summon Monster I, enabling summoning of one 7th-level creature, 1d3 from the 6th-level list, or 1d4+1 from any lower-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster VIII',
@@ -2497,6 +2586,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions like Summon Monster I, allowing summoning of one 8th-level creature, 1d3 from the 7th-level list, or 1d4+1 from any lower-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster IX',
@@ -2520,6 +2610,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions like Summon Monster I, permitting summoning of one 9th-level creature, 1d3 from the 8th-level list, or 1d4+1 from any lower-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally I",
@@ -2542,6 +2633,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell brings a natural creature to aid the caster, typically selecting from animals, fey, magical beasts, elementals, or giants. The summoned ally acts immediately on the caster's turn and fights enemies to the best of its ability. Communication allows directing the creature to avoid attacking, target specific foes, or perform other tasks. Summoned creatures cannot summon others, use teleportation, or employ spell-like abilities with expensive material components. Creatures must be compatible with their environment.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally II",
@@ -2564,6 +2656,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "Functions identically to Summon Nature's Ally I, except the caster summons either a single 2nd-level creature or multiple 1st-level creatures of the same kind.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally III",
@@ -2586,6 +2679,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions like earlier versions, permitting summoning of one 3rd-level creature, multiple 2nd-level creatures, or numerous 1st-level creatures of matching type.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally IV",
@@ -2608,6 +2702,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions similarly to earlier versions, enabling summoning of progressively more powerful single creatures or multiple weaker ones.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally V",
@@ -2630,6 +2725,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Works like previous versions, allowing summoning of 5th-level creatures, multiple 4th-level creatures, or numerous weaker creatures.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally VI",
@@ -2652,6 +2748,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Operates identically to lower versions with increased creature options at the 6th level.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally VII",
@@ -2674,6 +2771,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions like earlier spells, permitting summoning of 7th-level creatures or multiple weaker allies.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally VIII",
@@ -2696,6 +2794,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions identically to earlier versions with 8th-level creature options available.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally IX",
@@ -2718,6 +2817,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Works like previous versions, enabling summoning of 9th-level creatures or multiple lower-level allies.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Ship',
@@ -2755,6 +2855,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The caster manifests a ship by holding a miniature model matching the intended vessel type. The spell assembles a seaworthy ship with all necessary sailing equipment but no crew or cargo. The ship must materialize in sufficient water depth. When the spell ends or is dismissed, the ship disassembles over one minute. Duration extends by recasting. Maximum ship size depends on caster level, ranging from keelboat (7th level) through galley (17th level).',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Stampede',
@@ -2779,6 +2880,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster conjures a herd of aurochs or similar animals that immediately stampedes in an indicated direction. The herd occupies a 20-foot-radius space and travels at 120 feet per round in a straight line. Creatures in the herd's path sustain 4d6+9 damage points per round from being trampled, though a successful Reflex save reduces this to half. If the stampede encounters obvious hazards (cliffs, fire) or solid barriers, it halts and moves in a randomly determined direction until encountering another obstacle or the spell ends.",
     source: 'Pathfinder Campaign Setting: Chronicle of the Righteous',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Swarm',
@@ -2803,6 +2905,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster summons a swarm of their choice among three options: bats, rats, or spiders. The summoned swarm attacks all creatures within its vicinity, except the caster. If no living enemies occupy its space, the swarm attacks or pursues the nearest creature as best it can. The summoner cannot direct the swarm's targeting or movement.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Thanadaemon',
@@ -2827,6 +2930,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions similarly to summon monster, except it summons a single thanadaemon instead. The caster can only cast this spell in an area containing sufficient open water to accommodate the daemon's skiff, or when on the Astral or Ethereal Plane.",
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Totem Creature',
@@ -2850,6 +2954,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell allows spellcasters who revere natural forces and totem animals to summon creatures associated with their clan. The caster can only summon creatures from their specific clan's list. The spell functions identically to summon nature's ally III, with seven clan options available: Moon Clan, Axe Clan, Hawk Clan, Spire Clan, Sun Clan, Skull Clan, and Wind Clan. Each clan grants access to specific animals and elemental creatures.",
     source: 'Pathfinder Player Companion: Humans of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Vanth',
@@ -2873,6 +2978,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell operates similarly to summon monster, except it specifically summons a single vanth psychopomp creature rather than other summoned beings.',
     source: 'Pathfinder Adventure Path #80: Empty Graves',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleport',
@@ -2904,6 +3010,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The spell transports you up to 100 miles per caster level instantly. You may bring objects within your load capacity and additional willing creatures (1 Medium or smaller per three levels). Success depends on familiarity with destination, with a chart determining accuracy outcomes including on-target, off-target, similar area, and mishap results.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleport, Greater',
@@ -2926,6 +3033,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions like teleport with no range limit and no chance of arriving off-target. Requires reliable destination description even without direct viewing. Failed attempts return caster to origin point.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleport Object',
@@ -2948,6 +3056,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell operates similarly to teleport but transports an object rather than a creature. Non-creature entities and magical effects cannot be affected. Objects may optionally be sent to the Ethereal Plane, leaving behind a faintly magical point at the origin. A successful dispel magic spell targeting that location retrieves the object from the Ethereal Plane.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleport Structure',
@@ -2971,6 +3080,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell enables a caster to instantly relocate an unoccupied building within a settlement district they control to another unoccupied lot or series of lots in the same district. The destination area must be suitable for the building type and cannot violate settlement placement restrictions. All owners must consent to the teleportation, or the spell fails. The spell functions only on buildings occupying a number of lots equal to one-fourth of the caster's level.",
     source: 'Pathfinder Player Companion: Quests & Campaigns',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleportation Circle',
@@ -2995,6 +3105,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell creates a subtle floor circle that automatically teleports creatures standing upon it to a predetermined destination, functioning similarly to a greater teleport effect. The caster must designate the destination when creating the circle and cannot alter it afterward. The spell cannot function if the destination involves a solid object, an unfamiliar location, or another plane. The circle appears nearly invisible unless deliberately marked. The spell can be made permanent through the permanency spell.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Trade Items',
@@ -3018,6 +3129,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell causes the caster's focus object and a targeted object to swap positions instantaneously. The target item appears in the caster's hand or falls to their square if they cannot hold it. The spell's difficulty increases based on similarity between objects — factors like matching type, material, weight, or being part of the same set add to the DC. Objects of higher value or bonded items are harder to swap away.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Transport via Plants',
@@ -3040,6 +3152,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell allows casters to enter any living plant of equal size or larger and traverse to another plant of the same kind across any distance in a single round. The destination plant must be alive; if it isn't, the spell fails and the caster is ejected from the entry plant. Casters may transport objects up to their maximum carrying capacity, plus additional willing creatures: one Medium or smaller creature per three caster levels, with size equivalencies (Large = 2 Medium; Huge = 4 Medium, etc.). All transported creatures must maintain physical contact with each other and at least one must touch the caster. The spell cannot transport creatures through plant creatures themselves. If the occupied plant is destroyed, all transported creatures and the caster are slain.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Trap the Soul',
@@ -3063,6 +3176,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell traps a creature's life force and body into a gem. Two casting methods exist: spell completion (standard action with Will save allowed) or trigger object (automatic entrapment without save when creature accepts inscribed object). The DC increases by 2 if the creature's name is spoken during casting, and spell resistance is ignored if the name is spoken. Powerful extraplanar creatures may be compelled to serve upon release.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tree Stride',
@@ -3085,6 +3199,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell allows you to step into living trees and teleport between trees of the same species. Transport distances vary by tree type — oaks, ash, and yew trees allow 3,000 ft. range, while other varieties have shorter ranges. You can move into trees up to once per caster level, with each transport requiring a full-round action. Remaining inside a tree is possible, but you are ejected when the spell ends. If the tree is destroyed, you are killed unless you exit first.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'True Creation',
@@ -3108,6 +3223,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This effect allows the caster to manifest a tangible, nonmagical, unattended item of any material composition. The created object's volume cannot surpass 1 cubic foot per caster level. Intricate objects demand successful Craft skill checks. The created items may function as material spell components. Material components valued at five times the item's standard gold piece cost (with a minimum expenditure of 1 gp) are required.",
     source: 'Pathfinder Chronicles Campaign Setting',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'True Resurrection',
@@ -3131,6 +3247,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell resurrects creatures that have been dead up to 10 years per caster level. It functions similarly to raise dead but can restore beings whose bodies are destroyed, provided the caster identifies them unambiguously through birth or death details. The revived creature regains full hit points, health, and prepared spells from when they died, with no negative levels or Constitution loss. It works on those killed by death effects or transformed into undead and destroyed. The spell can resurrect elementals and outsiders but cannot affect constructs, undead, or those who died of old age.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unseen Crew',
@@ -3155,6 +3272,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This conjuration creates invisible, shapeless forces functioning as sailor crew members. Each performs maritime duties such as tying off ropes, hoisting sails, swabbing decks, and other such duties. The crew members possess Strength 10 and Profession (sailor) scores based on half caster level plus relevant modifier. They cannot fight, communicate, or defend themselves, and have 20-foot base speed. Dissipation occurs if damage exceeds 1 point per caster level from area attacks.',
     source: 'Pathfinder Player Companion: Pirates of the Inner Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unseen Engineers',
@@ -3178,6 +3296,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster summons an invisible team of tiny engineers to rapidly construct a mechanical trap. The engineers must remain within range or the spell terminates. Construction duration equals the trap's challenge rating in rounds. The caster uses their Craft (traps) skill with a +5 bonus to determine success. Failed construction leaves materials at the location. If the spell expires before completion, construction automatically fails. The engineers move at the caster's base speed, carry only necessary materials, cannot attack, cannot be killed, and dissipate after taking 12 damage from area effects with no saving throws.",
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unseen Servant',
@@ -3201,6 +3320,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell creates an invisible magical force that performs simple domestic tasks. The servant can fetch items, open normal doors and drawers, hold objects, and perform cleaning and mending. It functions as a single-task worker with an effective Strength of 2 (20 lb. lift capacity, 100 lb. drag capacity). The creature cannot attack, fly, swim, or climb. It cannot succeed at skill checks above DC 10 or use trained-only skills. Base speed is 15 feet. The servant dissipates after taking 6 points of area damage and ceases existing if sent beyond spell range.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Urban Step',
@@ -3224,6 +3344,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This conjuration creates a magical link between two accessible doors or portals. The caster can traverse one portal to instantly appear at the other. Both portals must be open and unobstructed when you cast the spell and enter the first portal. The spell permits transporting objects within carrying capacity but prohibits bringing other creatures along. Subsequent creatures attempting passage do not teleport. The effect concludes after the caster uses it.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vomit Swarm',
@@ -3247,6 +3368,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The caster ejects a spider swarm that attacks nearby creatures. The swarm begins adjacent to the caster and moves independently unless no living targets exist in its area, then it moves in a chosen direction. The caster may spend a standard action concentrating to redirect the swarm; otherwise it continues forward. At 7th or higher caster level, wasps can be summoned instead. At 13th or higher caster level, army ants become available.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vomit Twin',
@@ -3269,6 +3391,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster produces a disgusting ooze copy of themselves in an adjacent square. When the caster takes a move action, the twin may also move. At the start of each turn, the caster can instantly swap places with their twin without triggering attacks of opportunity. The twin possesses 30 feet of movement, has AC equal to 10 plus half the caster's level, and hit points equal to the caster level. Upon reaching zero hit points, the twin is destroyed but can be recreated as a standard action if duration remains. Only one twin may exist at any given time.",
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Walk through Space',
@@ -3292,6 +3415,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell enables the caster to teleport up to 30 feet as a move action. The destination must be unoccupied and within line of sight. Alternatively, you may spend a move action to teleport from a prone position to standing. The teleportation does not trigger attacks of opportunity.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_002 ─────────────────────────────────────────────────────────────
@@ -3317,6 +3441,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'An immobile vertical wall of spinning cogs and gears materializes. Creatures passing through take 1d6 piercing and slashing damage per 2 caster levels (maximum 10d6), with a successful Reflex save reducing this by half. The wall must remain flat and cannot occupy the same space as creatures or objects. It provides cover (+4 AC bonus, +2 Reflex save bonus). The wall is 1 inch thick per 4 caster levels, and its thickness can be halved to double its area. Each 5-foot section has 30 hit points per inch of thickness and hardness 9. Breaking through requires a DC 25 + 2 per inch Strength check, or a natural 20 critical hit to damage sections. The bronze cannot be repurposed or sold.',
     source: 'Pathfinder Player Companion: Heroes of the Street (2015)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Iron',
@@ -3347,6 +3472,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The caster conjures a flat, vertical iron wall that materializes in the surrounding area. The wall is 1 inch thick per four caster levels and can be doubled in area by halving thickness. Each 5-foot section has 30 hit points per inch of thickness with hardness 10. The wall can be shaped to fit available space but must remain flat. Alternatively, the wall can be created unattached to surfaces, allowing it to be tipped over as a crushing weapon. An unattached wall is 50% likely to fall in either direction unless creatures push it. A DC 40 Strength check is required to deliberately tip it. Large or smaller creatures failing Reflex saves take 10d6 damage from the falling wall. Iron created by the spell degrades naturally and cannot be used for crafting or sale.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Lava',
@@ -3372,6 +3498,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster creates a vertical lava barrier approximately 1 inch thick per 4 caster levels. The wall's maximum height cannot exceed half its width (minimum 5 feet). The structure has hardness 4 and 90 hit points per section. Weapons striking it sustain 2d6 fire damage; unarmed attackers take 2d6 fire damage. Creatures may traverse the wall as a full-round action with a DC 25 Strength check; failure pushes them back. Burrowing creatures can pass through normally. Crossing inflicts 20d6 fire damage. The wall radiates heat like a wall of fire from both sides. As a move action, the caster can direct an eruption at targets within 60 feet, requiring a ranged touch attack. Successful hits deal 10d6 fire damage and reduce the wall by 1d4 sections. Damage continues 1d3 rounds after exposure at half intensity.",
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Mist',
@@ -3396,6 +3523,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The caster conjures a stationary vertical wall of misty vapor. The straight wall measures 1 foot thick with a maximum length of 10 feet per caster level. It obscures vision, granting concealment (20% miss chance) against creatures on the other side. A creature occupying the same square as the wall experiences neither benefit nor penalty from concealment. Alternatively, a denser wall version reduces maximum length to 5 feet per caster level but hinders movement. Creatures entering must succeed on a DC 15 Strength check or become entangled and unable to move until the start of their next turn. Creatures beginning their turn within the wall move freely in any direction. Only severe winds (31+ mph) disperse the wall, requiring 1 round to do so.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook (2017)",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Stone',
@@ -3431,6 +3559,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell creates a rock wall merging with adjoining stone surfaces. The wall measures 1 inch thick per four caster levels and can be doubled in area by halving thickness. It cannot occupy space with creatures or objects. Unlike similar spells, this wall permits nearly any shape. It need not be vertical or require a firm foundation, but must merge with existing stone. It can bridge chasms or form ramps; spans exceeding 20 feet require arching and buttressing, reducing area by half. The wall withstands standard destruction methods. Each 5-foot section has hardness 8 and 15 hit points per inch of thickness. Breaching requires a Strength check (DC 20 + 2 per inch). Creatures may avoid entrapment with successful Reflex saves.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Thorns',
@@ -3454,6 +3583,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell conjures a barrier of dense, tangled brush covered in sharp thorns approximately finger-length. Creatures moving through or forced into the wall sustain piercing damage each round equal to 25 minus the creature's AC, excluding Dexterity and dodge bonuses. Creatures with AC 25 or higher (without those bonuses) take no damage. Creatures can force passage via Strength checks as full-round actions, gaining 5 feet of movement per 5 points exceeding DC 20. Trapped creatures may remain still to avoid additional damage or wait for spell expiration. Creatures with abilities to traverse overgrown terrain pass through unharmed at normal speed. Edged weapons create 1-foot-deep passages after 10 minutes of work; magical fire destroys the wall in 10 minutes. Normal fire cannot harm it.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Waves of Blood',
@@ -3486,6 +3616,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster generates torrents of roiling blood to push opponents away. The spell executes a bull rush combat maneuver against all creatures in the area using a single check applied to each target. The caster's CMB equals caster level plus the highest of Intelligence, Wisdom, or Charisma modifier. This bull rush does not provoke attacks of opportunity. Creatures must succeed at a Fortitude save or become sickened for 1d6 rounds. The affected area becomes slick for one round, requiring a DC 10 Acrobatics check to move through it. Creatures falling prone from this check must make another Fortitude save or remain sickened until standing.",
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Web',
@@ -3510,6 +3641,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell generates a many-layered mass of strong, sticky strands that function similarly to giant spiderwebs. The web must anchor to at least two opposing solid points or it collapses. Creatures caught within become grappled by the sticky fibers, though attacking webbed creatures does not cause the attacker to become grappled. Those in the effect area when cast must succeed at a Reflex save or gain the grappled condition. Escape requires a combat maneuver check or Escape Artist check as a standard action. Movement through the web counts as difficult terrain and requires checks to avoid becoming grappled. The web provides cover (5 or more feet) or total cover (20 or more feet) between combatants. Fire destroys one 5-foot square per round, dealing 2d4 fire damage to creatures in burning webs. The spell can become permanent via the permanency spell.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Web Bolt',
@@ -3532,6 +3664,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster launches a fist-sized blob of webbing at a target creature, which must succeed at a Reflex save or become affected as though caught in a web spell limited to the creature's own space. If the target succeeds or breaks free, the webbing dissolves and provides no difficult terrain. The spell requires the target to be positioned on or adjacent to a solid surface capable of supporting the webbing.",
     source: 'Pathfinder Roleplaying Game Advanced Race Guide (2012)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Web Cloud',
@@ -3555,6 +3688,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'A caster generates a billowing mass of flame-resistant adhesive webbing that behaves similarly to cloudkill, moving away from the caster at 10 feet per round along the ground. The webbing sinks to the lowest terrain, even filling depressions and openings, but cannot enter liquids or function underwater. Creatures caught within must save each round or become trapped; trapped creatures remain ensnared even after the cloud passes. The webbing is flammable but possesses fire resistance 5.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide (2012)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Web Shelter',
@@ -3589,6 +3723,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The caster generates a sticky webbed shelter featuring a hinged door sized for Medium creatures. Its opaque walls measure one inch thick and grant total cover to occupants. Only Fine creatures possessing negligible Strength become ensnared; other creatures escape freely without checks or actions. The adhesive surface retains twigs, leaves, and soil for camouflage. The structure provides waterproofing and insulation when sealed. The webbing has zero hardness and two hit points per five-foot square. Fire damages it normally. Upon spell termination, the webbing rapidly decays.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic (2011)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Whip of Ants',
@@ -3622,6 +3757,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions identically to whip of spiders but summons army ants instead. The wielder makes melee touch attacks, inflicting damage as if attacked by an army ant swarm (3d6 points of damage plus poison and distraction). The swarm whip cannot be destroyed by weapon damage, resists area effects (taking half again as much damage), and remains immune to single-target spells. As a standard action, the caster may transform the whip into an actual army ant swarm with 16 hit points, lasting 2 rounds maximum or until the spell duration ends.',
     source: 'Pathfinder Roleplaying Game Advanced Class Guide (2014)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Whip of Centipedes',
@@ -3655,6 +3791,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell operates similarly to whip of spiders, but creates a centipede-based swarm weapon instead. Strikes with the whip inflict damage as if attacked by a centipede swarm (2d6 points of damage plus poison and distraction). The whip cannot perform bull rush, grapple, or trip maneuvers and remains immune to weapon damage. As a standard action, the caster may transform the whip into an actual centipede swarm with 10 hit points that persists for 2 rounds or until the spell ends.',
     source: 'Pathfinder Roleplaying Game Advanced Class Guide (2014)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Whip of Spiders',
@@ -3686,6 +3823,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The caster summons hundreds of tiny spiders that form a whip-like construct. This weapon functions as a normal whip but requires melee touch attacks instead of regular attacks. Targets struck take swarm damage equivalent to a spider swarm attack: 1d6 points of damage plus poison and distraction effects. The spider whip can damage creatures with armor or natural armor that normal whips cannot affect. The whip cannot perform bull rush, grapple, or trip maneuvers. It remains subject to concealment and cover miss chances but is immune to weapon damage, cannot be staggered or reduced to a dying condition, and resists single-target spells. Area-effect spells deal half again normal damage to it. As a standard action, the caster may transform the whip into an actual spider swarm with 3 hit points, lasting 2 rounds maximum.',
     source: 'Pathfinder Roleplaying Game Advanced Class Guide (2014)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wicker Horse',
@@ -3715,6 +3853,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "Animated plant material (reeds, grasses, creepers, or thin branches) forms a wicker horse with riding saddle. The construct retains its wickerlike appearance while functioning as either a light horse or pony with construct traits. It counts as both animal and construct for spell purposes. The horse gains extra hit points equal to the caster's level. Based on material composition, it gains special abilities: reeds grant Swim skill ranks, grasses grant the Run feat and Acrobatics ranks, creepers grant Climb and Stealth ranks, and branches grant a continual barkskin effect. Only the caster can ride it, and it accepts no Handle Animal commands. The spell requires suitable plant material in the environment. The horse dissipates when the spell ends or it loses all hit points.",
     source: 'Pathfinder Roleplaying Game Villain Codex (2016)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wing Bounty',
@@ -3737,6 +3876,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster's wings produce an array of colorful, edible berries (2d4 berries plus 2 berries per caster level). Each berry functions identically to a goodberry spell. The caster may designate one berry to be poisonous (striped toadstool effect). Only the caster and druids of 5th level or higher can identify the poisoned berry without magical assistance.",
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness (2017)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wooden Phalanx',
@@ -3759,6 +3899,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The caster summons 1d4+2 wood golems with the advanced template. These constructs assist the caster in combat, complete assigned missions, or function as bodyguards. Only one casting may remain active simultaneously; casting again dispels any previous casting.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic (2011)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Word of Beckoning',
@@ -3782,6 +3923,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell works similarly to sending, allowing contact with a familiar creature and transmission of a message. It additionally grants the recipient knowledge of a command word that, when spoken within one round of learning it, summons the caster to the nearest open space adjacent to the recipient. The caster can be transported any distance on the same plane but cannot traverse between planes. The spell can transport objects up to the caster's maximum carrying capacity, plus one additional willing Medium or smaller creature per three caster levels. Larger creatures count as multiples: Large counts as 2 Medium, Huge counts as 4 Medium. All transported creatures must maintain contact with each other, and at least one must touch the caster.",
     source: "Pathfinder Adventure Path #131: The Reaper's Right Hand (2018)",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Word of Recall',
@@ -3804,6 +3946,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell instantly transports you to a designated sanctuary — a very familiar location you choose when preparing the spell. The arrival point is limited to a 10-foot by 10-foot area. Travel occurs within a single plane only; planar travel is impossible. You may transport yourself plus objects within your maximum load capacity. Additionally, you can bring one willing Medium or smaller creature per three caster levels (or equivalent based on size conversions). All transported creatures must maintain contact with each other, and at least one must touch you. Exceeding capacity causes spell failure. Unwilling creatures cannot be transported. A creature's Will save or Spell Resistance prevents items it possesses from being teleported. Unattended nonmagical objects receive no save.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_A_1 ─────────────────────────────────────────────────────────────
@@ -3822,6 +3965,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates invisible layers of solid force that provide a +2 armor bonus to AC. The first 5 points of lethal damage per attack converts to nonlethal damage. Against attacks already dealing nonlethal damage, the target gains DR 5/—. The spell discharges after converting 5 points of damage per caster level (maximum 50 points total).',
     source: 'Pathfinder Player Companion: Armor Masters Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Abundant Ammunition',
@@ -3837,6 +3981,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell replenishes nonmagical ammunition or shuriken from a touched container each round. At the start of each round this spell replaces any ammunition taken from the container the round before. Previously taken ammunition vanishes when replaced. The spell works with masterwork items but not special materials or alchemical treatments. If cast alongside enhancement spells like align weapon or magic weapon, the conjured projectiles gain those enhancements.',
     source: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Accept Affliction',
@@ -3853,6 +3998,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell allows the caster to transfer the effects of afflictions such as curses, diseases, and poisons from the target creature to themselves. It can also transfer conditions including blinded, deafened, fatigued, nauseated, shaken, and sickened. All transferred affliction details (save DCs, duration, removal conditions) remain unchanged but now affect the caster. After transferring an affliction, the caster may cure it using any available method.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Acid Splash',
@@ -3870,6 +4016,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster launches a small acid orb at a target, requiring a successful ranged touch attack. The spell inflicts 1d3 points of acid damage and the acid disperses after one round has elapsed.',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Acidic Spray',
@@ -3887,6 +4034,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'A spray of acid erupts from the caster\'s outstretched hand, dealing 1d6 points of acid damage per caster level (maximum 15d6) to each creature within its area (Reflex half). This acid continues to burn for 1 round, dealing 1d6 points of acid damage per two caster levels (maximum 7d6) to any creature that failed its saving throw against the spell (a second Reflex save on the creature\'s turn negates this additional damage).',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Adhesive Spittle',
@@ -3902,6 +4050,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster can spit a sticky substance once per spell duration as a standard action. This substance functions similarly to a tanglefoot bag but requires no attack roll to hit. The spell\'s DC applies instead of standard tanglefoot bag DCs for all counteracting measures. The adhesive remains active for 2d4 rounds after being expelled.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Air Bubble',
@@ -3917,6 +4066,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell fashions a pocket of breathable air around the target\'s head or object. The effect enables underwater respiration in airless environments or shields objects from water damage. Firearms within the bubble can be loaded from airtight powder containers and fired underwater, though shots suffer standard penalties for water passage.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alleviate Addiction',
@@ -3933,6 +4083,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The subject ignores the effects of addictions. The subject can naturally recover from damage dealt by the drug if she is under the effects of this spell for the entire duration of her rest.',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alluring Spores',
@@ -3949,6 +4100,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell creates a burst of spores that weaken the mind. Affected creatures must make a Fortitude save or suffer a -1 penalty on saving throws against the caster\'s enchantment spells. This penalty increases to -2 for creatures sexually attracted to the caster.',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ally Across Time',
@@ -3965,6 +4117,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster establishes cubes of temporal possibility where alternate timelines intersect. As a free action, they summon a duplicate of themselves from parallel existence within a visible cube, lasting until turn\'s end. The duplicate possesses the caster\'s statistics with hit points equal to caster level, threatens adjacent squares, and possesses any teamwork feats. The duplicate cannot voluntarily leave its summoning space and may use aid another once per existence. Only one duplicate can be summoned before the spell concludes.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alter Summoned Monster',
@@ -3980,6 +4133,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell allows you to replace a creature summoned via conjuration magic with an alternative creature of equal or lower spell level from summon monster or summon nature\'s ally spells. The replacement cannot be summoned into incompatible environments. Creatures under your control receive no saving throw; others may attempt Will saves. The new creature retains the target\'s damage and conditions, inherits curses/diseases/poisons/penalties, but other magical effects don\'t transfer. The spell\'s duration remains unchanged. Eidolons cannot be targeted.',
     source: 'Pathfinder Player Companion: Familiar Folio',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ancestral Gift',
@@ -3996,6 +4150,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'A ghostly ancestral manifestation appears bearing a weapon of the caster\'s choice. The conjured weapon may be any simple, martial, or dwarven type, featuring a +1 enhancement bonus and one weapon special ability. The caster gains proficiency regardless of training, and only the caster may wield it—removal causes immediate dismissal. If conjured with flaming, frost, shock, or thundering properties, the spell gains the corresponding descriptor.',
     source: 'Pathfinder Player Companion: People of the Stars',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_A_2 ─────────────────────────────────────────────────────────────
@@ -4013,6 +4168,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell transports affected creatures to a random plane, functioning similarly to plane shift but with unpredictable destinations. Subjects always appear in a location that is not inherently harmful, but the exact destination is otherwise random. Only creatures not currently on their home plane can be affected, though they may randomly end up returning home. Creatures transported by this spell cannot be affected by another casting for 24 hours.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Apport Animal',
@@ -4028,6 +4184,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell functions similarly to apport object but targets animals instead. It can only teleport normal, non-magical creatures of the animal type. The spell can send the animal to a designated location or prepare it for retrieval as a swift action later.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Apport Object',
@@ -4043,6 +4200,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (object)',
     description: 'This spell transports a small nonmagical object between locations using one of two methods. The "sending" mode functions similarly to teleport object, but limits the object size and range to 25 feet + 5 feet per 2 levels. The caster can place items in open spaces, containers, pockets, or hands without requiring line of sight. The "receiving" mode allows the caster to prepare an object beforehand with a mental trigger, summoning it as a swift action later.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aquatic Cavalry',
@@ -4059,6 +4217,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell summons hippocampi to function as combat-trained mounts. The summoned creatures avoid fighting but will defend themselves if attacked. Should any hippocampus engage in combat, the spell\'s duration converts from hours to rounds remaining.',
     source: 'Pathfinder Player Companion: Blood of the Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arcane Pocket',
@@ -4075,6 +4234,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This conjuration spell creates an extradimensional space within a pouch or pocket. It can contain only 10 pounds per caster level, and regardless of contents, always weighs 3 pounds. The pocket is immune to overloading or rupturing (excess items simply spill out), has no adverse interactions with other extradimensional spaces, and grants a +1 bonus on Sleight of Hand checks to conceal contents.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arid Refuge',
@@ -4091,6 +4251,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This conjuration creates a small stone building on any relatively flat nonliving surface underwater. The caster designates individuals who can pass through a force membrane door without resistance; others must succeed at a DC 28 Strength check to enter. The shelter provides eight bunks and basic furnishings, maintains breathable air, and keeps internal temperature at 70°F. The spell functions exclusively underwater.',
     source: 'Pathfinder Player Companion: Blood of the Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Army Across Time',
@@ -4107,6 +4268,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell operates similarly to ally across time with two key modifications. First, you can summon one duplicate per caster level before the spell ends. Second, you can have up to one duplicate in existence at a time for every 3 caster levels you have.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arrow Eruption',
@@ -4123,6 +4285,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster duplicates the arrow or crossbow bolt used to kill a creature in the previous round and launches copies at up to 15 enemies within a 30-foot radius of the corpse. A single attack roll applies to all arrows. The duplicated projectiles retain all the intrinsic magical properties of the arrow that killed the original creature as well as those passed on to it by your bow.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ash Storm',
@@ -4140,6 +4303,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Driving ash blocks all sight (even darkvision) within the spell\'s area of effect, and falling cinders cause the ground in the area to become difficult terrain.',
     source: 'Pathfinder Player Companion: Plane-Hopper\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_B_1 ─────────────────────────────────────────────────────────────
@@ -4157,6 +4321,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes; see text',
     description: 'The spell transfers life force from an initial living target to a secondary target. The initial target takes 9d6 + 1 point per caster level damage, halved on a successful Will save. The secondary target either regains hit points equal to damage dealt (if living) or takes equivalent damage (if undead). The secondary target may also make a Will save to halve effects. Spell resistance applies to both targets.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Barbed Chains',
@@ -4174,6 +4339,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "The caster summons a chain that strikes a target within range, either dealing 1d6 slashing damage or attempting a trip maneuver using the caster's BAB plus spellcasting ability modifier. On a successful hit or maneuver, the target must make a Will save or become shaken for 1d4 rounds. Additional chains are summoned at higher levels (two at 4th, three at 7th, four at 10th). Multiple chains can target the same creature, but shaken does not stack.",
     source: "Pathfinder Roleplaying Game: Villain Codex",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Bard's Escape",
@@ -4189,6 +4355,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This teleportation spell allows the caster to instantly relocate themselves and allied creatures to new positions within range. The destinations need not have line of sight or line of effect, but must be open, solid surfaces. This spell otherwise functions as dimension door except for the noted differences regarding multiple creatures.',
     source: 'Pathfinder Roleplaying Game Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Beanstalk',
@@ -4205,6 +4372,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster plants the material components in soil, and upon spell completion, a large beanstalk emerges. It supports creatures up to Huge size with a maximum combined weight of 2,000 pounds and features adequate handholds and footholds for climbing as if it were knotted rope (Climb DC 5). When the 24-hour duration ends, the beanstalk rapidly withers.',
     source: 'Pathfinder Adventure Path #91: Battle of Bloodmarch Hill',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bilocation',
@@ -4221,6 +4389,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "This spell creates an identical copy of the caster and their possessions within range. Both bodies exist simultaneously and share the same statistics and resources. Damage to either body reduces the caster's hit points. Actions are pooled between both bodies — taking a standard action with one prevents the other from doing likewise that round. Both bodies can provide flanking bonuses. Upon spell termination, the caster chooses which body persists.",
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bind Sage',
@@ -4236,6 +4405,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No and yes (see text)',
     description: 'This spell functions as a variant of planar binding designed specifically to summon caulborn — immortal, prophetic outsiders known for vast knowledge. The caster can only compel the bound caulborn to provide information using Knowledge skills or detect thoughts. Other demands automatically fail.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Black Tentacles',
@@ -4252,6 +4422,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The spell manifests rubbery black tentacles that emerge from the ground. Each round, they make combat maneuver checks (using caster level as BAB, +4 Strength bonus, +1 size bonus) to grapple all creatures in the area. Successful grapples deal 1d6+4 damage and impose the grappled condition. The tentacles gain +5 on subsequent grapple checks against already-grappled foes but cannot move or pin them. The area becomes difficult terrain.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Blade Tutor's Spirit",
@@ -4267,6 +4438,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster summons an insubstantial spirit of force that hovers around fists or melee weapons. This spirit reduces penalties from voluntary combat actions (Power Attack, fighting defensively, or charging) by 1 point plus an additional 1 point per 5 caster levels, with a minimum penalty of 0.',
     source: 'Pathfinder Player Companion: Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blaze of Glory',
@@ -4284,6 +4456,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster becomes unconscious but releases a wave of holy energy. This spell can be cast as a standard action (reducing caster to -1 HP but stable) or as an immediate action when dropped below 0 HP. Good creatures within range heal 1d6 per two caster levels; evil creatures take equivalent damage (Will save halves). All creatures are affected by prayer for 1 round per caster level.',
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blessing of Courage and Life',
@@ -4300,6 +4473,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "This prayer grants sustained aid to an injured target. While active, the recipient gains a +2 morale bonus on saving throws made against fear and death effects. At any point, the target can terminate the spell using a swift action to trigger healing of 1d8 points of damage +1 point per caster level (maximum +10), but forfeits the saving throw bonus.",
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_B_2 ─────────────────────────────────────────────────────────────
@@ -4319,6 +4493,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell creates a rust-colored toxic algae mist. Creatures within gain concealment and must save or suffer 1d4 points of Wisdom damage, becoming enraged to attack nearest creature as per confused condition rules. Affected creatures remain enraged throughout the spell's duration. A creature only needs to save once per exposure.",
     source: 'Pathfinder Roleplaying Game: Bestiary 3',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bountiful Banquet',
@@ -4335,6 +4510,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster conjures an elaborate feast. Though the physical feast vanishes after one hour, creatures that partake remain nourished and sated for 24 hours. The spellcaster can specify dish types and beverages, with the feast automatically adjusting to reflect the caster\'s tradition.',
     source: "Pathfinder Player Companion: Quests & Campaigns",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bow Spirit',
@@ -4350,6 +4526,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "This spell creates a shapeless force that hovers about you, taking ammunition from your quiver and firing it. You can spend a swift action each round to direct the spirit to fire arrows or bolts using your base attack bonus plus Dexterity modifier, including bonuses from ranged attack feats and ammunition properties. Attacks don't provoke attacks of opportunity.",
     source: 'Pathfinder Roleplaying Game: Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Breath of Life',
@@ -4365,6 +4542,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless) or yes; see text',
     description: 'The spell restores 5d8 points of damage + 1 point per caster level (maximum +25). Unlike typical healing magic, this spell can revive recently deceased creatures if cast within one round of death. The target stabilizes if its hit points exceed negative values equal to its Constitution score. The spell cannot restore life to those slain by death effects. It damages undead rather than healing them.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burning Sands',
@@ -4382,6 +4560,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster creates a layer of hot sand 1 foot deep and constantly shifting, transforming the terrain into difficult ground. Periodic flames rise from the sand, dealing 1d4 fire damage to creatures ending their turn in contact with the ground within the area. The sand vanishes at duration\'s end.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burst of Nettles',
@@ -4398,6 +4577,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster releases a burst of barbed, acid-filled nettles. Affected creatures take 3d6 points of damage plus 1d6 points of acid damage on the following round. Creatures making a successful Reflex save take half damage from the initial burst and no damage on the subsequent round.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_C_1 ─────────────────────────────────────────────────────────────
@@ -4415,6 +4595,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions similarly to instant summons but exclusively summons controlled constructs. The caster can retrieve the construct at will. If the construct is destroyed or no longer under the caster\'s control, the spell fails.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Call Spirit',
@@ -4430,6 +4611,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster attempts to manifest a specific deceased humanoid\'s spirit by speaking its name. Unwilling spirits can resist via Will save; success typically brings a malevolent spirit in its place. The spirit appears as a wispy form and can speak in languages it knew in life. The caster may ask up to one question per caster level per round.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Call the Godspawn',
@@ -4446,6 +4628,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell summons an uncontrollable godspawn (thunder behemoth with advanced and entropic templates) after a week-long ritual involving humanoid sacrifice. The caster gains exhaustion during the ritual. The godspawn attacks indiscriminately upon arrival.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Callback',
@@ -4461,6 +4644,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'When the target takes damage within range, it immediately teleports to the caster\'s space after the damage is applied. The caster can optionally specify a damage threshold before activation.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Callback, Greater',
@@ -4476,6 +4660,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions identically to callback with extended range of 1 mile/level and duration of 1 hour/level.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cape of Wasps',
@@ -4491,6 +4676,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'You summon a wasp swarm occupying your 5-foot space without attacking you. The swarm provides partial concealment against ranged attacks. Any creature hitting you in melee takes 2d6 swarm damage and poison. As a free action, you may direct the swarm to grant a 20-foot fly speed (poor maneuverability).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Carrying Wind',
@@ -4506,6 +4692,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'A wind spirit surrounds the caster, granting a +10-foot enhancement bonus to base speed and fly speed. Those without flight gain a 10-foot fly speed with poor maneuverability. Bonuses scale at caster level 10-14 (+20 feet, average) and 15+ (+30 feet, average).',
     source: 'Elemental Master\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Caustic Eruption',
@@ -4523,6 +4710,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The spell deals 1d6 points of acid damage per caster level (maximum 20d6) on initial impact. Creatures that fail their saves take an additional 1d6 points of acid damage per 2 caster levels (maximum 10d6) on the caster\'s turn in each of the next 2 rounds, unless the acid is neutralized or washed away.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cave Fangs',
@@ -4540,6 +4728,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a magical trap on stone surfaces triggering when Small or larger creatures pass through. Caster chooses stalactites (3d8 bludgeoning/piercing damage, rubble, potential pinning) or stalagmites (3d8 piercing, prone condition, then functions as spike stones for 1 minute/level). Trap has DC 30 Perception and Disable Device checks.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Celestial Healing',
@@ -4556,6 +4745,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants fast healing 1 to a wounded creature anointed with celestial blood or holy water. The recipient radiates a good aura for the duration.',
     source: 'Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Celestial Healing, Greater',
@@ -4572,6 +4762,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Functions as celestial healing but grants fast healing 4 and causes the target to radiate the aura of a good cleric.',
     source: 'Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chains of Light',
@@ -4588,6 +4779,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Glowing golden chains of pure light immobilize the target. The target becomes paralyzed and may attempt a new saving throw each round to break free. While restrained, the creature cannot use extradimensional travel abilities.',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Clashing Rocks',
@@ -4604,6 +4796,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster conjures two massive stone formations that appear 30 feet away on opposite sides of a target and rush toward it. A ranged touch attack determines a hit, dealing 20d6 bludgeoning damage and knocking prone. A failed Reflex save also buries the target. On a miss, nearby creatures take 10d6 damage with a Reflex save for half.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Climbing Beanstalk',
@@ -4620,6 +4813,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'This spell creates a sturdy beanstalk growing to 10 feet plus 5 feet per 2 caster levels. The plant provides numerous handholds with a climb DC of 5. Weight capacity is 200 pounds plus 50 pounds per caster level.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloud of Seasickness',
@@ -4637,6 +4831,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions similarly to stinking cloud, except affected creatures become sickened rather than nauseated. Can be made permanent with a permanency spell.',
     source: 'Skull & Shackles AP',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cold Iron Fetters',
@@ -4652,6 +4847,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Magical shackles materialize around the target\'s limbs, halving movement speeds and worsening flying maneuverability by two steps. Targets with cold iron damage reduction cannot use supernatural or spell-like movement abilities.',
     source: 'Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Companion Transposition',
@@ -4667,6 +4863,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster exchanges positions with a designated companion creature via teleportation. Post-casting, the caster cannot act until the next turn, and the companion becomes staggered until its next turn ends.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Conjure Deadfall',
@@ -4682,6 +4879,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'A conjured metal cube covered with sharp spikes falls from midair. A 5-foot square deals 1d6 per caster level (max 15d6); larger areas deal proportionally less. The block must start at least 10 feet above targets.',
     source: "Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_C_2 ─────────────────────────────────────────────────────────────
@@ -4700,6 +4898,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'A successful melee touch attack delivers 1d4 points of acid damage for each caster level, capped at 5d4 maximum damage.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Armaments',
@@ -4715,6 +4914,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster generates a single non-magical weapon, shield, or armor piece. Success requires passing an appropriate Craft check. Failed checks result in items with the broken condition. Cold iron items cannot be created through this spell.',
     source: 'Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Demiplane, Lesser',
@@ -4731,6 +4931,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates a small extradimensional demiplane accessible only to the caster. The caster decides the environment and basic features of the demiplane.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Demiplane',
@@ -4747,6 +4948,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates a larger extradimensional demiplane. An instantaneous casting makes the demiplane permanent.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Demiplane, Greater',
@@ -4763,6 +4965,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates a massive extradimensional demiplane. An instantaneous casting makes the demiplane permanent.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Drug',
@@ -4778,6 +4981,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell manifests doses of specific substances including aether, flayleaf, opium, keif, scour, shiver, or zerk. Created doses must be used within one minute or dissolve. The spell creates drugs that cannot be sold.',
     source: 'Book of the Damned',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Creeping Doom',
@@ -4793,6 +4997,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This conjuration summons four massive insect swarms functioning as centipede swarms with 60 hit points each dealing 4d6 damage per swarm attack. The caster can command swarms to move independently within 100 feet.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cruel Jaunt',
@@ -4809,6 +5014,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster gains fear-detection abilities within range. Once per round, the caster may teleport to a frightened creature within range, arriving in a random open space within 20 feet. After teleporting, no additional actions are permitted that round.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curative Distillation',
@@ -4824,6 +5030,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The caster concentrates healing potential from the material component to maximize its restorative effects. Restores 1d8 + 1 point per caster level (maximum +10) hit points and grants the target benefits from the material component.',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Critical Wounds',
@@ -4839,6 +5046,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like cure light wounds, except that it cures 4d8 points of damage + 1 point per caster level (maximum +20). This spell damages undead creatures.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Critical Wounds, Mass',
@@ -4854,6 +5062,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like mass cure light wounds except it cures 4d8 points of damage + 1 point per caster level (maximum +40).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Light Wounds',
@@ -4869,6 +5078,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'The caster channels positive energy through touch, restoring 1d8 points of damage + 1 point per caster level (maximum +5) to living creatures. The spell damages undead instead.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Light Wounds, Mass',
@@ -4884,6 +5094,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like cure light wounds, except that it heals 1d8 points of damage + 1 point per caster level (maximum +25) to multiple creatures simultaneously.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Moderate Wounds',
@@ -4899,6 +5110,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like cure light wounds, except that it cures 2d8 points of damage + 1 point per caster level (maximum +10).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Moderate Wounds, Mass',
@@ -4914,6 +5126,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like mass cure light wounds except it cures 2d8 points of damage + 1 point per caster level (maximum +30).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Serious Wounds',
@@ -4929,6 +5142,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like cure light wounds, except that it cures 3d8 points of damage + 1 point per caster level (maximum +15).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Serious Wounds, Mass',
@@ -4944,6 +5158,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like mass cure light wounds except it cures 3d8 points of damage + 1 point per caster level (maximum +35).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Dragonflies',
@@ -4959,6 +5174,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell curses a target with elemental energy that interferes with flight. When the creature attempts to fly more than 5 feet above ground, paper insects manifest to hinder movement. Flight maneuverability decreases by one step for every 3 caster levels.',
     source: 'Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cushioning Bands',
@@ -4975,6 +5191,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell creates protective force bands granting DR 2 against piercing or slashing attacks. The target takes reduced damage from constriction, falling, burial, and crushing effects. The spell absorbs up to 12 points of damage per caster level (maximum 120) before being discharged.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_D_1 ─────────────────────────────────────────────────────────────
@@ -4993,6 +5210,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions like dimension door, except you leave behind a burst of fire. Choose one corner of your starting square. A 10-foot-radius burst of flame explodes from that corner the moment you leave, dealing 4d6 points of fire damage.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Delay Disease',
@@ -5008,6 +5226,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Grants temporary immunity to disease for one day. Any disease encountered during this period is prevented from affecting the target until the spell ends. If the target already has an active disease, the caster must succeed on a caster level check against the disease\'s DC to suspend its effects. Provides no healing for damage already sustained.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Delay Poison',
@@ -5023,6 +5242,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Any poison in the subject\'s system or any poison to which it is exposed during the spell\'s duration does not affect the subject until the spell\'s duration has expired. Cannot reverse damage already inflicted by poisoning.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Desperate Weapon',
@@ -5039,6 +5259,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Conjures a one-handed improvised weapon from nearby surroundings dealing 1d6 points of damage for a Medium creature (1d4 for Small). The caster chooses bludgeoning, piercing, or slashing damage. The object loses magical properties if dropped. The spell terminates if the weapon leaves the caster\'s possession.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_D_2 ─────────────────────────────────────────────────────────────
@@ -5056,6 +5277,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No and yes (object)',
     description: "Establishes a dimensional link between two designated locations within range, requiring line of effect to both. As a swift action, the caster may teleport to either location as if using dimension door. The spell discharges once the caster has used it to teleport a number of times equal to one-fourth caster level (maximum 5 times).",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divine Illumination',
@@ -5071,6 +5293,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates shafts of blue light that illuminate all undead in the area. Affected undead suffer a -20 penalty to Stealth checks. Increases ambient light by one step in a 5-foot radius around each affected creature. Invisible undead remain unseen but their locations are pinpointed. Undead must make a Will save or lose channel resistance and suffer a -2 penalty on saving throws against positive energy effects.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Draconic Ally',
@@ -5087,6 +5310,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Conjures a semi-living intelligent draconic servant that loyally obeys and serves the caster. Functions as a pseudodragon with abilities from one of three dragon form spells. Possesses a breath weapon usable once daily and can travel beyond the spell\'s range to complete tasks. Only one such ally may exist at a time.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Feast',
@@ -5102,6 +5326,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "Causes the target to experience vivid dreams of a rich feast during their next sleep period (within 8 hours). Upon waking, the recipient feels fully nourished as though they had consumed a complete meal. Requires at least one hour of uninterrupted sleep. Spellcasters who have prepared this spell may expend it during their own sleep without using a spell slot.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Travel',
@@ -5118,6 +5343,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Transports the caster and allies into the Dimension of Dreams to travel through a target creature's dreamscape. Takes approximately one hour to reach the destination. Accuracy depends on familiarity with the target dreamer. Possible outcomes: On Target, Off Target, Similar Area, or Mishap (1d10 damage and reroll). Can target creatures on other planes (1d4+1 additional hours). If the target awakens, travelers may be brought to its plane or pushed to another dreamscape.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Voyage',
@@ -5134,6 +5360,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions like dream travel but transports via a fantastical vehicle of the caster\'s own devising that halves travel time. No chance of arriving off-target. Psychic vehicle buffers minds from harmful emotional effects and fear. The caster can make multiple trips within the duration. Can optionally increase to 10 creatures per caster level (reduces duration to 1 hour, requires extended casting).',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Drunkard's Breath",
@@ -5150,6 +5377,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions like stinking cloud, except the effect is barely visible and does not obscure vision. The nausea effect resembles that of an extreme hangover. This is a poison effect.',
     source: 'Pathfinder 14: Children of the Void',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Duplicate Familiar',
@@ -5166,6 +5394,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "Creates a duplicate of the caster's familiar. The familiar's master can utilize the duplicate as though it were the actual familiar in every way, with one limitation: the bonus special ability from more than one familiar at a time is not gained. Upon duration expiration, the duplicate deteriorates to nothing.",
     source: 'Pathfinder Player Companion: Familiar Folio',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dust of Twilight',
@@ -5182,6 +5411,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a shower of iridescent black particles that extinguishes mundane light sources like torches and lanterns, and dispels light-descriptor spells of 2nd level or lower. Affected creatures must succeed at a Fortitude save or become fatigued.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_E_1 ─────────────────────────────────────────────────────────────
@@ -5201,6 +5431,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'You summon a flight of giant eagles to transport you and your allies through the air. The eagles prioritize avoiding combat but will defend themselves if attacked. If combat occurs, the spell\'s duration changes from hours to rounds (maintaining the same numerical value).',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Eaglesoul',
@@ -5217,6 +5448,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell invokes a good-aligned outsider\'s power, granting you a +2 morale bonus on Perception checks against evil, a +2 bonus on initiative, and the constant ability to detect evil. Once during the spell\'s duration, you may activate a surge of holy power (swift action) converting remaining hours to rounds and granting: +2 sacred bonus to AC, +4 sacred bonus to Strength, acid and fire resistance 5, +5 sacred bonus on Intimidate against evil, fast healing 2, and automatic confirmation of critical threats against evil opponents. The surge activates automatically when you attack evil outsiders. Nongood casters are sickened (neutral) or staggered (evil) for the spell\'s duration.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Entice Fey, Lesser',
@@ -5233,6 +5465,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This conjuration functions similarly to lesser planar ally but calls a fey with appealing offerings. You must succeed at a Knowledge (nature) or Perform check (DC = 20 + target\'s HD) to entice the fey. The fey may refuse if unimpressed by the offer; if it refuses, no spell components are expended.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Entice Fey',
@@ -5249,6 +5482,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions as entice fey, lesser, but calls one fey of 12 Hit Dice or fewer, or up to two fey whose total Hit Dice do not exceed 12. Called fey appear within 30 feet of each other.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Entice Fey, Greater',
@@ -5265,6 +5499,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions as entice fey, lesser, but calls one fey of 18 Hit Dice or fewer, or up to three fey whose total Hit Dice do not exceed 18. No two called fey may appear more than 30 feet apart.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_E_2 ─────────────────────────────────────────────────────────────
@@ -5282,6 +5517,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'You enter a cataleptic meditative state and move to the Ethereal Plane, cocooned in a protective envelope. The envelope provides total cover from Ethereal Plane creatures, has AC 10, hardness 5, and hit points equal to twice your caster level. It is immune to bludgeoning damage. When the spell ends, you remain asleep for 1 round before returning to the Material Plane and become staggered for 1 additional round.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ethereal Envelopment',
@@ -5297,6 +5533,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell forces an unwilling creature to the Ethereal Plane and traps it in a cocoon of ethereal fibers. The target initially enters a cataleptic state as if unconscious but may attempt Will saves each round to awaken. Once awake, the creature is pinned, with escape requiring successful grapple or Escape Artist checks against your caster level-based CMB/CMD. If the creature breaks free or the spell is dismissed, it returns to the Material Plane.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Euphoric Cloud',
@@ -5314,6 +5551,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'You create an intoxicating fog bank similar to fog cloud. Living creatures within the cloud become fascinated and remain fascinated while in the cloud plus 1d4+1 rounds afterward. Creatures that succeed at their saves but remain in the cloud must continue saving each round on your turn.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Evaluator's Lens",
@@ -5329,6 +5567,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'You create an insubstantial lens of force 4 inches in diameter that hovers in front of your face. You roll twice on saving throws against spells with the figment or pattern descriptor, taking the higher result. You gain a +10 enhancement bonus on Appraise checks and never wildly misjudge an item\'s value. Upon identifying magical properties, you immediately attempt a Spellcraft check as if detect magic had been cast for 3 rounds. The lens cannot determine artifact properties.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Expeditious Construction',
@@ -5346,6 +5585,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'You create a low wall or simple structure of packed earth or loose stone measuring 3 feet thick, 3 feet tall, and 10 feet long per 3 caster levels. The structure must appear in unoccupied spaces on earthen or stone surfaces. It provides cover equivalent to a low wall and can be climbed with a DC 5 Climb check; Large and larger creatures bypass the check entirely. Alternatively, you may create a shorter, thicker berm with steep slopes that impose movement penalties and Acrobatics/Ride checks for traversal.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Expel Blood',
@@ -5361,6 +5601,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'You animate the target\'s blood, forcing it from the victim\'s body to form a corrupted water elemental. The target suffers 2d4 Constitution damage unless it succeeds at the Fortitude save. On a failed save, blood pools and becomes a fiendish water elemental matching the target\'s size (maximum Large). This elemental lacks the vortex ability but gains blood drain (1d3 Constitution damage during grapple) and Improved Grapple as a bonus feat. The caster cannot control it, but it never attacks the caster.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_F_1 ─────────────────────────────────────────────────────────────
@@ -5379,6 +5620,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This conjuration creates a hidden extradimensional meadow accessible through a portal resembling a circle of toadstools enclosing a 10-foot square. The caster controls entry and can reshape the space within the spell\'s volume limits. The refuge features an idyllic twilight setting with surrounding fruit and nut trees providing sustenance for up to four creatures per caster level daily. The environment maintains comfortable, temperate conditions. The space includes ethereal servants (two per caster level) functioning like unseen servant spells but visible and mobile throughout the meadow. External conditions cannot affect this sealed space.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'False Resurrection',
@@ -5395,6 +5637,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'Rather than restoring a soul to life, this spell summons a shadow demon with the advanced simple template to possess the body. If the target\'s spell resistance is overcome, the creature\'s soul may refuse the possession and choose true resurrection instead. When the spell ends or the demon is expelled, the body becomes soulless. Attempts to identify this spell with a skill check incorrectly identify it as resurrection due to the ruse descriptor.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fey Gate',
@@ -5411,6 +5654,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell functions similarly to the planar travel function of gate, but functions exclusively between the Material Plane and the Fey World. It creates a circular portal filled with obscuring gray fog. Travelers passing through are randomly repositioned within the Fey World. When the duration ends, the caster may attempt a DC 30 Spellcraft check; success extends the portal\'s existence for 1d4+1 additional days. Those exiting through the portal always return to its original casting location. The spell ensures arrival on solid ground but provides no protection against environmental hazards or creatures present there.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fiery Shuriken',
@@ -5428,6 +5672,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You conjure flaming shuriken that hover nearby. These projectiles can be launched immediately or held for later use. Each requires a ranged touch attack and inflicts 1d8 fire damage. You may launch shuriken as a swift action (one) or standard action (multiple) on subsequent rounds without provoking attacks of opportunity. Unspent shuriken vanish when the spell\'s duration expires.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Seeds',
@@ -5444,6 +5689,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell transforms plant materials into two distinct weapon types. You can create acorn grenades — splash weapons with 20-foot range increments dealing 1d4 points of fire damage per caster level (maximum 20d4) with adjacent creatures taking splash damage. Alternatively, you may craft holly berry bombs placed within 200 feet that detonate on command, dealing 1d8 points of fire damage + 1 point per caster level in a 5-foot radius with Reflex save for half damage.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flame Steed',
@@ -5460,6 +5706,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell creates a flame-based mount functioning similarly to phantom steed. The creature is immune to fire with resistance 10 to acid, cold, and electricity. When attacked, it automatically exhales a 15-foot cone of smoke and ash as a free action. Creatures in the cone must succeed at a Fortitude save or become sickened for 1d6 rounds after leaving. The smoke provides concealment as per obscuring mist and persists for one round.',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flash Flood',
@@ -5477,6 +5724,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You summon a rushing wave that strikes all creatures in its path. Those in the area must make a Reflex save or sustain 1d6 points of bludgeoning damage per 2 caster levels (maximum 10d6). The wave executes a bull rush combat maneuver against all creatures regardless of size, using your caster level plus your highest mental ability modifier for the CMB. The affected terrain floods for 1 round per caster level — becoming deep bog terrain on land or raising water level by 5 feet if cast on water.',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flash Forward',
@@ -5492,6 +5740,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You cheat the laws of time and enter into combat before reverting back to your original position. As part of casting, you execute a charge attack against an enemy, resolving it normally with all applicable modifiers and consequences. Upon completing the charge, you instantly teleport back to your original location as a free action. All damage dealt and conditions acquired persist after returning.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_F_2 ─────────────────────────────────────────────────────────────
@@ -5510,6 +5759,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions similarly to summon swarm. Creatures failing their save against the swarm\'s distraction effect experience limb distortion and become vulnerable to transmutation magic, suffering a -4 penalty to Dexterity and on saving throws against transmutation effects for 1 hour per caster level.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fleshworm Infestation',
@@ -5526,6 +5776,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'Upon successful touch, parasitic worms manifest in the target\'s body. Each round, the target makes a Fortitude save: on a failed save, it takes 1d6 hit point damage, 2 points of Dexterity damage, and becomes staggered for 1 round. On a successful save, it takes no damage but becomes sickened for 1 round instead. The spell cannot be ended early by remove disease or heal as reinfestation occurs. Protection from evil negates effects while overlapping in duration. Dispel evil automatically terminates the infestation.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flotsam Vessel',
@@ -5542,6 +5793,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This conjuration spell assembles a functional raft that remains unaffected by non-magical river hazards like rapids or shallows. Each 5-foot section accommodates two Medium passengers or 300 pounds of cargo. The vessel always travels downstream for speed calculations, regardless of actual heading direction.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Font of Spirit Magic',
@@ -5558,6 +5810,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You amplify magic tied to your spirit and wandering spirit, granting allies within the area a +2 bonus on caster level checks and concentration checks, as well as to spell DCs when casting related spells. The bonus type depends on alignment — sacred for good, profane for evil, or your choice for neutral.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Force Anchor',
@@ -5575,6 +5828,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You create an anchor of pure force that immediately skewers your target on a successful ranged touch attack. On a hit, it deals 1d4 force damage per 2 caster levels (maximum 5d4) and lodges in the target\'s torso. The weightless anchor restricts movement through spaces smaller than the creature\'s size and prevents incorporeal creatures from passing through solid objects. When the target moves through a square with another creature, that square counts as two squares of movement.',
     source: "Pathfinder Player Companion: Undead Slayer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Frost Mammoth',
@@ -5592,6 +5846,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell conjures a massive creature of snow and ice shaped like a woolly mammoth with solid ice tusks, occupying a 15-foot space. The creature uses a mastodon\'s statistics but gains the cold subtype, conferring immunity to cold and vulnerability to fire. You control it telepathically, and it can serve as a mount. At 17th level, the mammoth adds an additional 1d6 points of cold damage with each physical attack.',
     source: "Pathfinder Roleplaying Game Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fumblestep',
@@ -5606,6 +5861,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "The spell coats a target's feet in slick ectoplasm that retains some psychic connection to your mind. While active, the target suffers a -1 penalty on Reflex saves and Acrobatics checks. As a standard action during the spell's duration, you may discharge the spell to perform a trip combat maneuver using your caster level instead of base attack bonus and your highest modifier among Charisma, Intelligence, or Wisdom instead of Strength. The trip attempt provokes no attack of opportunity and cannot be affected by feats that modify trip maneuvers.",
     source: 'Pathfinder Player Companion: Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_G_1 ─────────────────────────────────────────────────────────────
@@ -5625,6 +5881,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell conjures vividly colored poisonous mushrooms that materialize on any solid surface. Starting the following round, the caster can use a move action each round to trigger spore release. Creatures adjacent to or occupying mushroom squares must attempt a Fortitude save or become sickened for 1d4 rounds. Multiple failed saves do not worsen the condition but extend duration by 1d4 rounds per additional failure. Mushrooms are Tiny constructs (AC 7, 30 hp, break DC 20) that do not provide cover. When destroyed, they release one final spore cloud.',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Genesis',
@@ -5641,6 +5898,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell enables a caster to establish a personalized demiplane of limited size. The plane initially expands at 1 foot per day in radius until reaching 180 feet. The creator dictates environmental conditions including atmosphere, water presence, temperature, and terrain configuration. The spell prohibits creating living creatures or structures within it. By recasting while inside the demiplane\'s boundaries, the caster can expand it by an additional 60 feet per casting.',
     source: 'Pathfinder Chronicles Campaign Setting',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Genius Avaricious',
@@ -5658,6 +5916,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell creates one of three effects based on the value of the sacrifice. Corrupted Coin (1,500 gp): a lucky or unlucky coin lasting 1 month that grants a +1 bonus per 3 caster levels to Appraise, Bluff, Craft, and Profession checks, and functions as augury once daily with the caster\'s telepathic influence. Mammon\'s Mantle (3,000 gp): a swallowed coin that provides +1 Charisma per 3 caster levels, immunity to poison, disease, and aging, automatic stabilization below 0 hp, and healing via consuming gold (1 hp per 20 gp); lasts 1 day per caster level. Gold Guardian (6,000 gp): animates a pile of 100,000 coins as a controllable construct for 1 month, losing 100 gp daily thereafter. Swallowing the focus coin causes any offspring to be born as a tiefling.',
     source: 'Pathfinder Adventure Path #30: The Twice-Damned Prince',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Getaway',
@@ -5673,6 +5932,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell requires initial casting at a predetermined destination with all affected creatures present within 30 feet. Once active, the caster may trigger teleportation as a swift action, moving all designated creatures (or their remains and gear) within 30 feet to the original casting location. Creatures outside the 30-foot range at the time of triggering remain behind. Selected creatures may choose not to participate. Travel is confined to a single plane.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Geyser',
@@ -5690,6 +5950,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell creates a column of boiling water that knocks creatures upward and damages them. A failed Reflex save results in 3d6 fire damage plus falling damage; a successful save halves the damage and negates the falling damage. An additional hemispherical spray deals 1d6 fire damage per round to all creatures within a radius equal to half the geyser\'s height.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghost Wolf',
@@ -5705,6 +5966,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The spell creates a Large, quasi-real, wolflike creature made of roiling black smoke that functions similarly to phantom steed. The wolf has a fear aura: creatures with fewer than 6 Hit Dice within 30 feet (except the rider) must make a Will save or become shaken for 1d4 rounds. The rider may direct one bite attack per round as a free action (bite +10, 1d8+6 damage); after attacking, the duration becomes 1 round per caster level. The wolf has AC 18 and 7 hp + 1 per caster level. Its speed scales with caster level (20 ft. per 2 levels, maximum 100 ft.). At caster levels 8, 10, 12, and 14, the mount gains enhanced movement and flight capabilities.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Glitterdust',
@@ -5721,6 +5983,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'A cloud of golden particles covers all creatures and objects in the affected area, causing blindness and revealing invisible creatures. The dust cannot be removed and persists for the spell\'s duration. Blinded creatures may make new saving throws at the end of their turns to end the blindness effect. All affected creatures take a -40 penalty on Stealth checks.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gloomblind Bolts',
@@ -5738,6 +6001,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster produces bolts of negative energy infused with shadow from the Shadow Plane. One bolt can be fired, plus an additional bolt for every four levels beyond 5th (maximum three bolts at 13th level). All bolts must target creatures within 30 feet of each other and require ranged touch attacks to connect. Each bolt inflicts 4d6 damage to living creatures or heals 4d6 to undead creatures. Targets struck must succeed on a Reflex save or become blinded for 1 round.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Glue Seal',
@@ -5753,6 +6017,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The spell creates a sticky glue coating on surfaces or items. Creatures in the affected area must make a Reflex save or become entangled. Escape requires a combat maneuver check or Escape Artist check as a standard action. The glued area is difficult terrain. When applied to items, the spell can immobilize objects or prevent separation from connected items. Creatures using sticky items must succeed on saves or become stuck. Sticky armor or clothing imposes a -10 circumstance penalty on Escape Artist and combat maneuver checks related to grappling.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_G_2 ─────────────────────────────────────────────────────────────
@@ -5771,6 +6036,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell functions like black tentacles, but the conjured appendages target creatures\' eyes and ears and tug at their hair, clothes, and equipment using dirty trick combat maneuvers rather than grapple attempts. The tentacles\' CMB equals caster level + 4 (Strength bonus) + 1 (size bonus). A d% roll determines the condition inflicted: 1-20 blinded, 21-40 deafened, 41-60 entangled, 61-80 shaken (fear effect), 81-100 sickened (poison effect).',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gravel Vortex',
@@ -5788,6 +6054,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The initial casting deals 5d6 bludgeoning damage to all creatures in the affected area. For the spell\'s remaining duration, fine dust continuously rains down, imposing a -4 penalty on Perception checks for non-stone giants and treating the entire area as difficult terrain. The gravel and dust vanish completely upon spell expiration.',
     source: 'Pathfinder Adventure Path #93: Forge of the Giant God',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grease',
@@ -5803,6 +6070,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The spell creates a slippery grease coating on surfaces or objects. Creatures in the area must make a Reflex save or fall. Movement through greased areas requires a DC 10 Acrobatics check and occurs at half speed; failure prevents movement that round, and failure by 5 or more causes falling. Stationary creatures do not need to check. When applied to items, non-wielded objects are always affected; wielded items require the bearer to make a save. The wearer or wielder gains a +10 circumstance bonus on Escape Artist checks and grapple-related combat maneuver checks.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grease, Greater',
@@ -5818,6 +6086,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell functions as grease, except it has a medium range, can affect multiple objects or areas (one per 2 caster levels), and requires surface coverage to be contiguous when targeting multiple squares.',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grove of Respite',
@@ -5834,6 +6103,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The caster conjures a sheltered grove with trees and spring water that appears regardless of terrain or season. The area provides temperate conditions similar to a tiny hut spell. It produces clean drinking water and ripe fruit functioning as a goodberry spell for up to eight people. An alarm spell automatically alerts the caster when creatures enter. Upon expiration, the grove vanishes entirely, though any nourishment or healing effects persist.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guardian Armor',
@@ -5849,6 +6119,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell teleports the suit of armor you are wearing off your body and onto an ally within range. If the target already wears armor, that armor falls undamaged into an adjacent square.',
     source: 'Pathfinder Player Companion: Armor Master\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guardian Wasps',
@@ -5865,6 +6136,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The spell summons wasps that build a nest in a designated location. The spell fizzles if the swarm is disrupted before casting completes. Once constructed, the nest functions as an alarm, detecting intruders without the password who approach within 20 feet. The swarm then attacks the nearest intruder. After the spell ends, any remaining wasps and the nest vanish.',
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_H_1 ─────────────────────────────────────────────────────────────
@@ -5882,6 +6154,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster exhales hallucinogenic smoke in a 30-foot cone, either immediately or in a later round. Creatures failing a Fortitude save become nauseated for 1 round per caster level while experiencing disorienting visions. Those succeeding on the save are instead sickened for 1d4 rounds. If the caster does not expel the smoke by spell\'s end, they suffer the effects themselves. The spell enhances augury casting, treating the caster\'s level as 5 higher for determining meaningful reply chances.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heal',
@@ -5897,6 +6170,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell channels positive energy to eliminate numerous adverse conditions including ability damage, blinded, confused, dazed, dazzled, deafened, diseased, exhausted, fatigued, feebleminded, insanity, nauseated, poisoned, sickened, and stunned. The spell restores hit points equal to 10 per caster level (maximum 150 at 15th level). It does not remove negative levels or restore permanently drained ability scores. Against undead, it functions as the harm spell instead.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heal Mount',
@@ -5912,6 +6186,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "This spell mirrors the functionality of the heal spell but applies exclusively to a paladin's special mount, typically a horse. It restores the mount's health using the same mechanics as the standard heal spell.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Healing Flames',
@@ -5929,6 +6204,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster releases a blast of holy flames that washes over all creatures in the area. Damage and healing equal 1d8 points per 2 caster levels (maximum 5d8). Evil creatures take damage (half fire, half divine power immune to fire resistance). Neutral enemies take only fire damage. Neutral allies receive half healing compared to good creatures. All damage from evil creatures and neutral enemies can be reduced by a successful Reflex save.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Healing Token',
@@ -5944,6 +6220,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (object)',
     description: "The caster imbues touched holy symbols with divine power, converting them into healing tokens. While the caster carries their divine focus, token holders may request healing as a standard action. The caster becomes silently aware of the plea and can respond with an immediate action before their next turn ends. Healing comes from either a supernatural ability or a healing subschool spell/spell-like ability with casting time not exceeding one standard action. Multi-target healing spells affect the requesting creature plus other token holders within normal spell range.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Hero's Defiance",
@@ -5959,6 +6236,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'none',
     description: 'This spell activates instantly before you would drop to 0 or fewer hit points. You expend a use of your lay on hands ability, healing yourself as if you had used that ability normally, plus an extra 1d6 hit points. If the healing restores you above 0 hit points, you remain conscious and may continue acting that round. The spell has no effect if you have exhausted your lay on hands uses.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Heroes' Feast",
@@ -5975,6 +6253,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The caster manifests an elaborate feast complete with table, chairs, service items, food and beverages. Consumption requires one hour, after which benefits activate. Participants gain healing from sickness, nausea, poison, and disease effects. Each creature receives temporary hit points (1d8 + caster level bonus, maximum +10), plus a +1 morale bonus to attacks and Will saves. Additionally, recipients gain +4 morale bonus on saving throws against poison and fear effects for 12 hours. Any interruption nullifies all spell effects.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Javelin',
@@ -5992,6 +6271,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster creates a shimmering javelin of holy energy for ranged touch attacks. Against evil creatures, it deals 1d6 damage per hit plus 1d6 additional damage at the start of each round the javelin remains embedded. Impaled creatures suffer a -2 penalty on attack rolls and skill checks. The javelin can be removed as a move action with a successful DC 12 Strength check. The conjured javelin glows like a torch, revealing invisible creatures, though darkness spells suppress this light.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_H_2 ─────────────────────────────────────────────────────────────
@@ -6009,6 +6289,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster establishes a dimensional link with the target. When attacked or targeted by a damage-dealing spell, the caster may use an immediate action to swap positions with the linked creature via teleportation, causing the target to receive the triggering attack or spell instead. The swap fails if the target cannot safely fit in the new space, if the destination is occupied or unsafe, or if the target is unconscious or dead. The spell discharges after one successful teleportation.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_IJK ─────────────────────────────────────────────────────────────
@@ -6034,6 +6315,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You encase a target creature in ice (hardness 0, 3 hit points per inch of thickness, 1 inch per caster level thick) for 1d4 rounds. The target is paralyzed and helpless during this time but remains aware of its surroundings. After the duration expires, the target teleports to a designated safe location you specify and the ice melts away. If the ice is destroyed before the teleportation completes, the spell fails and the creature is not teleported.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ice Spears',
@@ -6058,6 +6340,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You summon one giant icicle per 4 caster levels, each erupting from the ground in a 5-foot square you designate. Each spear is 10 feet tall and deals 2d6 points of piercing damage and 2d6 points of cold damage to any creature in its square. Each spear attempts a trip combat maneuver using your caster level plus your highest mental ability score modifier. Multiple spears targeting the same creature grant cumulative bonuses. On ice or snow-covered terrain, saving throw DCs increase by 2 and trip bonuses increase by 4. The spears remain as obstacles with hardness 5 and 30 hit points each.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Icicle Dagger',
@@ -6089,6 +6372,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You create a masterwork dagger made of ice that deals an additional 1 point of cold damage on each hit. The dagger melts if dropped for more than 1 round. At caster level 6, the dagger becomes a +1 frost dagger. At caster level 11, the dagger gains the returning property, reforming in your hand before the beginning of your next turn if thrown.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Infernal Challenger',
@@ -6114,6 +6398,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You conjure a bearded devil to a designated area, which appears and identifies itself. You must designate a sole mortal challenger. The devil attempts to kill only that challenger and cannot leave the testing ground. The devil vanishes if it is defeated, the challenger is slain, the challenger leaves the area, or the devil takes damage from any non-challenger source. No other creatures may occupy the testing ground during casting. If cast for purposes other than Hell Knight order tests, the spell gains the evil descriptor.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Infernal Healing',
@@ -6138,6 +6423,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You anoint a wounded creature with fiendish magic, granting it fast healing 1. This healing cannot repair damage caused by silver weapons, good-aligned weapons, or spells or effects with the good descriptor. The target detects as evil during the duration, though its actual alignment is unaffected. A greater version (Infernal Healing, Greater) at 4th level grants fast healing 4 and causes the target to detect as an evil cleric.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Insect Plague',
@@ -6168,6 +6454,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You summon a number of wasp swarms equal to one per 3 caster levels (maximum six at 18th level). The swarms must form a contiguous area where each swarm touches at least one other. They can overlap with other creatures and automatically attack any creatures sharing their space. Once positioned, the swarms remain stationary and do not pursue fleeing enemies.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inspiring Recovery',
@@ -6199,6 +6486,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You call upon divine power to restore a creature. The spell restores 1d8 hit points per 2 caster levels (maximum 10d8) to the target, deals the same amount to undead, or revives a recently deceased creature (within 1 round) whose negative hit points do not exceed their Constitution score. When a creature is revived, all conscious allies within 60 feet gain a +2 morale bonus on attack rolls, damage rolls, and saving throws for 1 minute. Creatures slain by death effects cannot be revived.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Armor',
@@ -6222,6 +6510,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You create a suit of magical force armor that instantly envelops your body and can display a religious holy symbol. The armor type depends on your caster level: chainmail at 5th or lower, banded mail at 6th-8th, half-plate at 9th-11th, and full plate at 12th or higher. Alternatively, you may choose a lesser armor type and gain magical enhancement bonuses (+1 to +3) in exchange. The spell replaces any worn armor or garments, rendering them inaccessible until the spell ends. Force construction allows it to affect incorporeal creatures.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Clot',
@@ -6254,6 +6543,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The target immediately stops all bleeding effects. The target takes full damage from attacks but produces no blood, so wounds do not attract creatures sensitive to blood. If the recipient suffers a new bleeding effect during the duration, that bleeding ends and the spell terminates immediately.',
     source: 'Pathfinder Player Companion: Blood of the Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Portrait',
@@ -6288,6 +6578,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You create a painted portrait on a flat surface depicting yourself or a creature you can see. No Craft check is required. The portrait is monochromatic and low quality for sale purposes, but accurate enough to identify the subject or serve as a target for the enter image spell. The image reflects your perception, including any disguises the subject wears. The portrait has the durability of normal paint.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Restoration',
@@ -6311,6 +6602,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You cast this spell as an immediate action when a summoned creature you control drops to 0 or fewer hit points. Rather than disappearing, the creature receives healing of 4d8 + 1 hit point per caster level (maximum 4d8+10). If healing brings the creature to 1 or more hit points, it survives. Creatures slain by death effects cannot benefit from this spell. Summoners may target their eidolon.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Summons',
@@ -6334,6 +6626,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You place an arcane mark on an item, then inscribe its name invisibly on a sapphire. Afterward, you can summon the item by speaking a special word you set at casting and crushing the gem; the item appears instantly in your hand. Only you can activate this spell. If another creature possesses the item when you attempt to summon it, the summons fails but reveals the possessor's identity and location. A greater version (Instant Summons, Greater) at 8th level can target up to one object per 3 caster levels.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Weapon',
@@ -6366,6 +6659,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You manifest a melee weapon constructed from force energy, sized appropriately for you. The weapon functions as a masterwork weapon of its type and grants you proficiency with it. It has hardness 20 with standard hit points for a weapon of its type. As a force effect, it can strike and damage incorporeal creatures. The weapon dissipates if released from your grasp at the start of the following round.',
     source: 'Pathfinder Player Companion: Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Interplanetary Teleport',
@@ -6388,6 +6682,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as teleport but with unlimited range, allowing travel to other planets or worlds. You need a clear understanding of the destination world rather than direct observation. Specific planetary locations guarantee safe arrival without risk of failure; vague destinations result in a safe landing zone. The spell fails if no viable landing area exists.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Invigorating Repose',
@@ -6410,6 +6705,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You amplify your next use of a resurrection spell. When you cast raise dead, the target is restored to full hit points. When you cast breath of life, it can revive a dead target as long as you cast it within a number of rounds equal to half your caster level, and the healing is treated as empowered. Using any resurrection spell discharges this effect.',
     source: 'Pathfinder Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Iron Stake',
@@ -6443,6 +6739,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You create and hurl a 1-foot cold iron spike at a target as a ranged touch attack. The spike is treated as both magical and cold iron for overcoming damage reduction. It deals 1d6 points of damage per 2 caster levels (maximum 10d6). Creatures with cold iron damage reduction that take damage become sickened for 1 round. They must also make a Fortitude save or spend a number of rounds equal to your caster level needing to succeed at concentration checks (DC 15 + 2 x spell level) to cast spells or use spell-like abilities.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Irradiate',
@@ -6475,6 +6772,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You flood the area with dangerous radiation. The intensity of the radiation depends on your caster level: low at CL 6 or lower, medium at CL 7-9, high at CL 10-16, and severe at CL 17+. Creatures within the zone experience the exposure only once; the radiation does not persist after the spell. The save DC is set by the spell rather than the standard radiation DC.',
     source: 'Pathfinder Campaign Setting: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Janni's Jaunt",
@@ -6507,6 +6805,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as plane shift, but can transport only willing creatures and only to an Elemental Plane, the Astral Plane, or the Material Plane.',
     source: 'Pathfinder Campaign Setting: Planes of Power',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Jester's Jaunt",
@@ -6529,6 +6828,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You teleport the target to a space you can see within 30 feet of the target. The destination must be on solid ground and must not be inherently hazardous to the creature being teleported.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Joyful Rapture',
@@ -6553,6 +6853,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'All allies within the area are freed from any harmful emotion effects. Additionally, each ally in the area heals 1d4 points of ability damage of your choice from Intelligence, Wisdom, or Charisma.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ki Arrow',
@@ -6574,6 +6875,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You imbue an arrow with your personal power and hurl it at a target up to 100 feet away. Make a ranged attack roll. If it hits, the target takes damage as if you had hit it with a single unarmed strike (including Strength bonus).',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "King's Castle",
@@ -6596,6 +6898,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You exchange positions with an adjacent ally. You teleport to your ally's space while your ally moves to your former location.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Knell of the Depths',
@@ -6618,6 +6921,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You inflict a cursed watery fate on the target. The recipient takes a -10 penalty on Swim checks and automatically sinks 15 feet per round when in any body of liquid. The creature avoids sinking only when standing on solid ground capable of supporting its weight, even if submerged.',
     source: 'Pathfinder Player Companion: Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_L_1 ─────────────────────────────────────────────────────────────
@@ -6649,6 +6953,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster surrounds the target in a thin lead coating. This protective layer doesn't restrict the target's movement or functionality, but protects it from the effects of radiation and prevents the penetration of many divination spells. The lead coating does not extend to the target's equipment.",
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Leshy Swarm',
@@ -6672,6 +6977,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster summons nature spirits inhabiting temporary plant bodies. These creatures function similarly to standard leshys but are Tiny and simpler-minded, using rat swarm statistics without disease or scent abilities. They gain darkvision (60 ft.) and immunity to electricity, mind-affecting effects, paralysis, poison, polymorph, sleep, sonic, and stunning effects. The caster directs the swarm via standard actions (or move actions if speaking Druidic or Sylvan). The leshys are confused by their sudden possession of new bodies and attack most creatures except the caster and plant-type creatures.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Conduit',
@@ -6688,6 +6994,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You utilize life conduit to share hit points with your eidolon. While this spell is active, you can spend a swift action to transfer 1d6 hit points between you and your eidolon, either taking damage yourself and healing your eidolon or healing yourself and damaging your eidolon. If your eidolon moves farther than 50 feet from you, this spell ends.",
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Conduit, Improved',
@@ -6704,6 +7011,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions identically to life conduit but allows transferring 2d6 hit points per swift action.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Conduit, Greater',
@@ -6720,6 +7028,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Functions identically to life conduit but allows transferring 3d6 hit points per swift action.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Current',
@@ -6746,6 +7055,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster infuses water current with positive energy. When the current moves living creatures at the start of their turn, they heal 1d6 hit points per 10 feet of the current's speed (maximum 6d6). Undead creatures in the same area take equivalent damage instead.",
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Shield',
@@ -6762,6 +7072,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster generates a protective field of positive energy around themselves. When undead creatures strike the caster in melee combat, they sustain positive energy damage equal to half the harm they inflicted. This counterattack damage is calculated after accounting for the caster's damage reduction and defensive abilities. The spell remains active until it has dealt 5 damage points per caster level (capped at 50 total), at which point it dissipates.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_L_2 ─────────────────────────────────────────────────────────────
@@ -6781,6 +7092,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell conjures chains of energy that lash upward from the ground and hamper the target's movement, causing them to become entangled. The spell fails against flying creatures or those not on solid ground. While affected, the target cannot be targeted by other spells with 'litany' in their title.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Escape',
@@ -6798,6 +7110,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "The caster invokes divine power to rescue an ally from a grapple. The target loses the grappled and pinned conditions and is teleported 10 feet. The spell requires available space at the destination; without it, the casting fails.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_M_1 ─────────────────────────────────────────────────────────────
@@ -6816,6 +7129,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a swarm of mischievous monkeys that follows your commands. The swarm uses monkey swarm statistics and performs distraction attacks that can cause deafness and nausea for 1 minute on a failed save. The swarm can perform one disarm or steal combat maneuver per turn as a free action, using your caster level plus your relevant ability modifier (Intelligence for wizards, Wisdom for druids/oracles, Charisma for bards/sorcerers/summoners) as its CMB. Stolen items take swarm damage each round.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Maddening Oubliette',
@@ -6831,6 +7145,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The targeted creature is transported to a nightmarish extradimensional prison. Each round, the target may attempt a Will save to escape, with penalties increasing for each round spent confined (-1 cumulative penalty up to -5). Upon escape, the creature returns to its original location or nearest available space and suffers confusion for a number of rounds equal to the imprisonment duration, or permanent insanity if confined for 10 or more rounds.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mage Armor',
@@ -6847,6 +7162,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'An invisible but tangible field of force surrounds the subject of a mage armor spell, providing a +4 armor bonus to AC. Unlike mundane armor, mage armor entails no armor check penalty, arcane spell failure chance, or speed reduction. Since mage armor is made of force, incorporeal creatures cannot bypass it.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Maze',
@@ -6862,6 +7178,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You banish the subject to an extradimensional labyrinth. Each round on its turn, the subject may attempt a DC 20 Intelligence check as a full-round action to escape. When it escapes or after 10 minutes have passed, the subject returns to the space it occupied when it disappeared. Minotaurs are immune to this spell.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Maze of Madness and Suffering',
@@ -6878,6 +7195,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "This spell functions like maze but with heightened danger. The escape DC is 22. Each round, creatures encounter different maze sections with specific effects based on a d100 roll: Circus (1-20, Will save or lesser madness), Haunted Forest (21-40, frightened and slashing damage), Hellscape (41-60, paralyzed and fire damage), Oasis of Respite (61-80, fascination and lethargy), Strange City (81-100, Wisdom damage or sanity damage).",
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mighty Fist of the Earth',
@@ -6894,6 +7212,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You manifest a rock-sized projectile that launches toward an enemy. You make an unarmed strike attack roll against the target. On a hit, the rock inflicts bludgeoning damage matching your unarmed strike damage. If you maintain a ki pool with at least 1 point, the rock counts as a ki strike.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_M_2 ─────────────────────────────────────────────────────────────
@@ -6911,6 +7230,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You manifest a Small minion out of mud that follows your commands. The creature has AC 12, 10 hit points, Strength 5, and a 30-foot movement speed and swim speed. It can perform unseen servant tasks plus activities its Strength allows (up to 50 pounds). You may direct it to make a trip maneuver using a CMB equal to your caster level plus spellcasting ability modifier; resolving the trip immediately ends the spell.',
     source: 'Pathfinder Roleplaying Game Monster Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mudball',
@@ -6928,6 +7248,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure and launch a single ball of sticky mud at an enemy via ranged touch attack. Success results in the target becoming blinded. Each round at the start of its turn, an affected creature may attempt a Reflex save to remove the mud. The mudball can also be wiped off by the creature or an adjacent creature as a standard action.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Murderous Crow',
@@ -6945,6 +7266,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a supernaturally vicious crow with one of four alignment templates (celestial, entropic, fiendish, or resolute). The creature gains Improved Steal as a bonus feat and an eye rake attack. If both claw attacks strike the same living opponent in one round, the target must make a DC 13 Reflex save or suffer blindness lasting 1d4 days or until magically healed.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Music of the Spheres',
@@ -6962,6 +7284,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell amplifies underlying cosmic harmonies. All creatures beginning their turn within 20 feet gain fast healing 5, resistance 10 to all energy types, and a +3 sacred bonus on saving throws against poison and disease. Creatures entering the area do not benefit until their next turn begins.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_N_1 ─────────────────────────────────────────────────────────────
@@ -6988,6 +7311,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You project a poisonous stinger about the size of a quill at a creature within range, as though fired from a blowgun. You must succeed at a ranged attack roll to hit. On a hit, the stinger deals 1d2 piercing damage and injects a poison that nauseates the target for 1 round unless the target succeeds at a Fortitude save.",
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Nauseating Trail',
@@ -7019,6 +7343,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The target emits nauseating vapors that fill each square it moves through, persisting across a number of squares equal to 4 times the caster level. The vapors do not obscure sight but nauseate creatures as stinking cloud. The target is immune to its own vapors. Any creature entering or ending its turn in an affected square must succeed at a Fortitude save or become nauseated while in the square and for 1d4+1 rounds afterward.',
     source: 'Pathfinder Roleplaying Game Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_N_2 ─────────────────────────────────────────────────────────────
@@ -7054,6 +7379,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You detoxify any sort of venom in the creature or object touched. The caster makes a caster level check (1d20 + caster level) against each poison's DC; on a success the poison is neutralized and temporary effects end, though instantaneous damage such as hit point loss or ability damage is not reversed. Alternatively, the spell can suppress poison in a creature or object for 10 minutes per level (Will negates). A poisonous creature or object touched becomes temporarily nonpoisonous for the duration.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_O_1 ─────────────────────────────────────────────────────────────
@@ -7087,6 +7413,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'A misty vapor arises around you. It is stationary once created. The vapor obscures all sight, including darkvision, beyond 5 feet. A creature 5 feet away has concealment (attacks have a 20% miss chance). Creatures farther away have total concealment (50% miss chance, and the attacker cannot use sight to locate the target). A moderate wind (11+ mph) disperses the fog in 4 rounds; a strong wind (21+ mph) disperses the fog in 1 round. A fireball, flame strike, or similar spell burns away the fog in the spell\'s area. This spell does not function underwater.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_P_1 ─────────────────────────────────────────────────────────────
@@ -7105,6 +7432,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You designate glowing squares that provide dim illumination. Starting the following turn, you can expand the glowing area by four additional 5-foot squares as a swift action, with each new square adjacent to previously glowing ones. Allies that end their turns on a glowing square (including one who falls unconscious in the square) are healed of 1 point of damage.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pellet Blast',
@@ -7121,6 +7449,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You create an explosion of conjured metal projectiles inflicting 1d8 points of piercing damage per two caster levels (maximum 5d8). Damage is subject to damage reduction. Using special material components—cold iron (50 gp), silver (20 gp), or adamantine (100 gp)—allows the blast to penetrate corresponding damage reduction types.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Penumbral Disguise',
@@ -7136,6 +7465,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The spell grants a competence bonus equal to caster level on Disguise and Stealth checks in normal, dim, or dark light. Observers in dim or dark conditions can only discern general information like shape and action, but not precise appearance or identifying details. Bright light reveals normal appearance.',
     source: 'Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pernicious Pranksters',
@@ -7152,6 +7482,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You summon intangible whimsical forces that perform combat maneuvers (dirty trick, disarm, steal, or trip) against foes each round. These incorporeal entities gain bonuses equal to caster level plus your primary spellcasting ability modifier, with an additional +4 bonus if targets cannot perceive invisible creatures. The pranksters randomly select targets and maneuvers, though you may attempt a DC 20 skill check to influence their actions.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phantom Chariot',
@@ -7168,6 +7499,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a magical heavy chariot with four horse-like creatures to pull it. The vehicle accommodates up to six passengers including the driver and produces no sound. The chariot and team function as a single entity with AC 19 and hit points equal to 10 plus 2 per caster level (maximum 50 HP). The conjured team gains abilities based on caster level, similar to the phantom steed spell.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phantom Driver',
@@ -7184,6 +7516,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This conjuration creates a Small or Medium humanoid creature capable of operating any vehicle. The phantom cannot engage in combat but commands animals pulling muscle-powered vehicles. It has customizable physical features, AC 20 (Small) or 19 (Medium), and 7 + 1 per caster level hit points. It possesses a 30-foot land speed and makes driver skill checks using your caster level plus Intelligence modifier.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phase Door',
@@ -7200,6 +7533,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This conjuration creates an invisible ethereal passage through wooden, plaster, or stone walls. Only the caster can use it initially, though one Medium or smaller creature may accompany them. The passage does not allow light, sound, or spell effects through it. It can be made permanent via permanency and is subject to dispel magic.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phase Step',
@@ -7215,6 +7549,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You instantly transfer a touched creature to a designated point within range. It functions similarly to dimension door, but requires you to have line of sight and line of effect to the destination.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_P_2 ─────────────────────────────────────────────────────────────
@@ -7233,6 +7568,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell temporarily converts deadly poisons into intoxicating effects. When a subject affected by this spell encounters poison, instead of normal poisoning, it experiences intoxication with a -2 penalty on attacks, saves, and checks for the duration of the spell. Once the spell expires, the original poison\'s effects apply. The spell does not affect poisons that occurred before casting.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pillar of Life',
@@ -7250,6 +7586,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'Creates a pillar radiating light like a sunrod. Adjacent living creatures can use a standard action to touch it and recover 2d8 points of damage + 1 point per caster level (maximum +20). Undead creatures entering the pillar sustain 1d6 points of damage per caster level (maximum 10d6), or 1d8 per caster level (maximum 10d8) if vulnerable to bright light. Each creature benefits or suffers only once per casting.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Inquiry',
@@ -7266,6 +7603,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'see text',
     description: 'This conjuration spell summons an outsider to answer questions or gather information about a specific topic. The creature can attempt relevant Knowledge checks or leave for 1d4 hours to research. Information quality depends on a caster level roll. The outsider remains for up to 10 minutes before departing. Restrictions include a maximum 18 HD, prohibition on unique outsiders, and no mythic-ranked creatures.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Refuge',
@@ -7282,6 +7620,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell creates a pocket of Material Plane conditions on other planes, suppressing harmful environmental effects like toxic atmospheres, extreme temperatures, and lack of air. It generates edible plants adapted to the local environment. The spell requires a solid surface at least as large as its area to function and can be made permanent via permanency (11th level caster, 7,500 gp cost).',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pocketful of Vipers',
@@ -7297,6 +7636,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell places a magical ward on a container. When an unauthorized creature opens it without speaking the command word, the spell summons 1d3 venomous snakes that emerge and attack that creature for 1 round per caster level before vanishing. The snakes only attack other creatures if they are themselves attacked first.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Poisonous Balm',
@@ -7313,6 +7653,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell heals the target for 3d8 + caster level (maximum +15) hit points while secretly infusing it with an inert toxin. You can activate the poison later as a standard action, dealing 1d3 Strength damage per round for 6 rounds. The target gains a Fortitude save each round to end the effect. The toxin remains dormant for 1 hour before the spell expires harmlessly.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Poisonous Cloud',
@@ -7330,6 +7671,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell creates a toxic fog bank similar to fog cloud. Creatures failing Fortitude saves take 1d2 points of Constitution damage per round while within the cloud. Those succeeding on the save must make new attempts each subsequent round. The spell can be made permanent via permanency (13th level caster, 12,500 gp cost).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protective Spirit',
@@ -7345,6 +7687,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The spell creates an invisible protective force around you. When a creature makes an attack of opportunity against you, the spirit makes an immediate counterattack using your base attack bonus plus Dexterity modifier. A successful hit causes the triggering attack to automatically miss but deals no damage. The spirit can defend against a number of attacks equal to your Dexterity bonus (minimum 1) per round.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Purging Finale',
@@ -7360,6 +7703,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You must maintain an active bardic performance to cast this spell. Upon casting, the bardic performance ends immediately and removes one selected condition from an affected creature: cowering, dazzled, exhausted, paralyzed, shaken, or stunned.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Purified Calling',
@@ -7375,6 +7719,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'Upon casting, you begin the ritual to summon your eidolon, which appears at full hit points without damage or ability score penalties. Any temporary negative conditions affecting your eidolon are immediately removed. Permanent conditions and ability drain remain unaffected.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Purify Body',
@@ -7390,6 +7735,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This restorative spell restores 3d8 + 1 per caster level (maximum +20) hit points. Excess healing converts to temporary hit points lasting 1 hour. The spell eliminates pain effects, removes physical ability score damage from Strength, Dexterity, and Constitution, and cures: blinded, dazzled, deafened, nauseated, paralyzed, and sickened conditions.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_R_1 ─────────────────────────────────────────────────────────────
@@ -7408,6 +7754,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a magical arrow cloud affecting creatures and objects in a designated area, requiring line of sight. Each creature and object takes 1d6 points of piercing damage per caster level (maximum 20d6). If the material component arrows share a uniform composition like cold iron, the conjured arrows match that material.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rain of Frogs',
@@ -7424,6 +7771,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You summon a swarm of poisonous frogs, which attacks all other creatures within its area. The summoned swarm uses centipede swarm statistics but possesses the animal type. The poison deals Constitution damage instead of Dexterity damage. You cannot control the swarm\'s target or movement direction; it automatically attacks nearby living creatures or pursues the nearest creature available.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Raise Animal Companion',
@@ -7439,6 +7787,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell operates identically to raise dead, with the limitation that it exclusively targets an animal companion, familiar, or paladin\'s bonded mount. The spell enables resurrection of these specific companion creatures rather than standard humanoid characters.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Raise Dead',
@@ -7454,6 +7803,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell restores life to a dead creature deceased no longer than one day per caster level, provided the soul willingly returns. The resurrected creature gains two permanent negative levels (or Constitution drain if 1st level). Prepared spells have a 50% loss chance; non-preparing casters risk losing spell slots. The spell cures normal diseases and poisons but not magical ones or curses. The body must be whole, and equipment remains unaffected. Undead, constructs, elementals, outsiders, and creatures killed by death effects cannot be raised.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rampart',
@@ -7471,6 +7821,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a massive rampart of hard-packed earth and stone 5 feet thick. The structure cannot occupy the same space as another creature or object. Each 5-foot section has hardness 0 and 180 hit points. A breached section loses all hit points. Breaking through requires a Strength check (DC 60), while climbing over requires a Climb check (DC 20).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Realm Retribution',
@@ -7486,6 +7837,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "You imbue a touched creature's attacks with alignment properties matching your own alignment (chaotic, evil, good, or lawful). When you possess a multi-component alignment (such as lawful good), you select which component to apply. The spell triggers when the target either confirms a critical hit against or takes damage from a creature. The affected creature must then attempt a Will save. Upon failure, that creature is transported to the Outer Planes matching your alignment, as per plane shift, and the spell terminates.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Refuge',
@@ -7501,6 +7853,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You enchant a specially prepared object with teleportation magic. When the recipient speaks a command word while breaking or rending the item, they and their carried possessions (up to heavy load capacity) instantly transport to your abode. Only the possessor is affected, though familiar or animal companions in contact with them may also travel. You may modify the spell so you teleport to within 10 feet of the item possessor when activated, gaining general awareness of the possessor\'s location and situation, though this modification becomes mandatory once chosen.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Regenerate',
@@ -7516,6 +7869,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell restores severed body parts including fingers, toes, hands, feet, arms, legs, tails, or even heads of multi-headed creatures, repairs broken bones, and regenerates damaged organs. Physical regeneration completes in 1 round if severed members are present and touching the creature, otherwise taking 2d10 rounds. The spell additionally heals 4d8 damage plus 1 per caster level (maximum +35), removes exhaustion and fatigue conditions, and eliminates all nonlethal damage. The spell is ineffective on nonliving creatures and undead.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reincarnate Spy',
@@ -7531,6 +7885,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "This spell operates similarly to reincarnate but allows you to shape the new body to match a specific creature, preserving appropriate age category and sex. If a race result doesn't match the desired size, it's rerolled. The resurrected subject gains a +5 bonus on Disguise checks to impersonate the target creature due to similar physical features, though penalties may apply for racial differences. The spell automatically leaves you with a small piece of the creature's new body, typically a lock of hair, useful for divination magic and similar effects.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rejuvenate Eidolon',
@@ -7546,6 +7901,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "By placing your hand on your eidolon, you cause its wounds to close and its form to solidify. The spell heals 3d10 points of damage plus 1 point per caster level (maximum +10). A lesser version (Summoner 1) heals 1d10+1/level (max +5), and a greater version (Summoner 5) heals 5d10+1/level (max +20).",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic (2011)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Release the Hounds',
@@ -7562,6 +7918,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This summoning spell conjures a pack of canines functioning as a unified swarm under your command. The creatures use winter wolf statistics but lose their breath weapon, cold subtype, and cold abilities. Instead, they gain swarm classification with 3d6 damage attacks and distraction (DC 17). When damaging opponents, the pack can immediately attempt trip combat maneuvers. The swarm lacks damage reduction and immunity; targeted effects deal only 25% normal damage, and non-damage effects have 25% success likelihood.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox (2016)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reloading Hands',
@@ -7577,6 +7934,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless, object)',
     description: 'Once per round, phantom hands load a single ranged weapon or firearm with conjured ammunition. The conjured ammunition counts as magical for overcoming damage reduction and attacking incorporeal creatures, but maintains standard characteristics (normal bullets, pellets, and black powder for firearms). The conjured ammunition ceases to exist one round after removal from the weapon or at spell duration\'s end, whichever occurs first.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat (2011)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Blindness/Deafness',
@@ -7592,6 +7950,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "This spell cures blindness or deafness (your choice), whether the effect is normal or magical in nature. The spell cannot restore lost eyes or ears but repairs damaged sensory organs. The spell counters and dispels blindness/deafness.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Disease',
@@ -7607,6 +7966,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell cures all diseases affecting the target by requiring caster level checks (1d20 + caster level) against each disease\'s DC. Success eliminates that disease. The spell also eliminates certain hazards and parasites like green slime. Because its effect is instantaneous, the spell provides no protection against reinfection from future exposure to the same disease.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Paralysis',
@@ -7622,6 +7982,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "This spell frees creatures from the effects of temporary paralysis or related magic, including spells and effects that cause a creature to gain the staggered condition. Single-target casting negates paralysis entirely. When targeting two creatures, each receives another Will save with a +4 resistance bonus. For three or four targets, each gets another Will save with a +2 resistance bonus. The spell does not restore ability scores reduced by penalties, damage, or drain.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Radioactivity',
@@ -7637,6 +7998,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'You remove active radiation effects from a target via a caster level check against the radiation\'s Fortitude DC. The spell restores 1d4 Constitution drain and 1d4 Strength drain caused specifically by radiation exposure. When applied to an area, it clears radiation from a 20-foot radius. The spell cannot neutralize naturally radioactive materials themselves, so radiation returns if those materials remain present.',
     source: 'Pathfinder Campaign Setting: Technology Guide (2014)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Sickness',
@@ -7652,6 +8014,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "The spell allows you to quell feelings of illness and nausea in the target, giving it a +4 morale bonus on saving throws against disease, nausea, and sickened effects. If the target is already experiencing one of these conditions when the spell is cast, that effect becomes suppressed for the spell's duration.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic (2011)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Replenish Ki',
@@ -7667,6 +8030,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "You attune the target's internal store of supernatural energy to the cosmos, replenishing its ki pool. You regain 2 ki points if self-targeted, or grant 1 ki point to another creature. The spell cannot exceed the target's maximum ki pool capacity and has no effect on creatures lacking a ki pool.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resplendent Mansion',
@@ -7683,6 +8047,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "This conjuration produces a luxurious mansion with customizable interior spaces and furnishings. You mentally envision the structure's layout and décor. All created fixtures function normally indoors but vanish if removed. Mundane items appear as needed, while external magical devices retain functionality. The spell provides servants and provisions comparable to a mage's magnificent mansion. Each exterior entrance features an alarm (audible or mental) with distinct indicators. The mansion adapts to terrain but cannot manifest on water, unstable ground creates a 10% daily collapse risk, and the structure causes no harm to creatures during manifestation.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Restful Cloak',
@@ -7698,6 +8063,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'A worn cloak becomes a canvas tent accommodating four Medium-sized creatures in an adjacent flat area. Creatures inside regain 1 HP hourly beyond normal rest benefits. Fatigued creatures lose that condition after resting 1 hour within the tent, though only once per spell casting. The tent reverts to a cloak when duration expires. If moved before duration ends, the spell terminates immediately. The spell fails if no suitable flat area exists adjacent to the caster.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Restoration',
@@ -7713,6 +8079,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell removes temporary negative levels or one permanent negative level (requiring diamond dust worth 1,000 gp). The spell cannot remove more than one permanent negative level per target within a 1-week period. It heals all temporary ability damage, restores permanently drained ability points (caster\'s choice if multiple), and eliminates fatigue or exhaustion. A lesser version (Alchemist 2, Cleric 2, Druid 2, Paladin 1) requires no material component and dispels magical effects reducing ability scores or cures 1d4 points of temporary ability damage to one score. A greater version (Cleric 7) uses 5,000 gp diamond dust and dispels all permanent and temporary negative levels, restores all drained ability scores, and cures insanity and confusion effects.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_R_2 ─────────────────────────────────────────────────────────────
@@ -7730,6 +8097,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "This spell functions identically to restoration but exclusively affects eidolons. A lesser version (Summoner 2) functions like lesser restoration, requires no material component, and takes 3 rounds to cast.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic (2011)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resurgent Transformation',
@@ -7745,6 +8113,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'none',
     description: "This spell remains dormant until you drop to one-quarter hit points or lower. Upon triggering, you gain a +4 enhancement bonus to Constitution and Strength, damage reduction 5/-, and haste benefits. You heal 4d8 points of damage + 1 point per caster level (maximum +25) and suffer 1d4 points of Intelligence and Wisdom damage. The transformation lasts for 1 round per caster level. Upon expiration, you become exhausted and take 1d4 points of Constitution damage. Using a second transformation within 24 hours inflicts additional Constitution damage and risks death unless a DC 15 Fortitude save succeeds.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resurrection',
@@ -7760,6 +8129,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "This spell functions similarly to raise dead but can restore life to any deceased creature regardless of physical condition. So long as some small portion of the creature's body still exists, it can be resurrected. The creature can have been dead no longer than 10 years per caster level. Upon casting, the creature is immediately restored to full hit points, vigor, and health, with no loss of prepared spells. The resurrected creature gains one permanent negative level or, if 1st level, takes 2 points of Constitution drain instead. The spell can resurrect those killed by death effects or destroyed undead but cannot restore those who died of old age. Constructs, elementals, outsiders, and undead cannot be resurrected.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Retrieve Item',
@@ -7775,6 +8145,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "You enchant a specific nonliving item while holding it. Once cast, the item can be summoned by speaking a predetermined word and snapping fingers, causing it to appear instantly in your hand. The spell fails if another creature possesses the item at the time of summoning.",
     source: 'Pathfinder Chronicles: Classic Treasures Revisited (2010)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Returning Weapon',
@@ -7790,6 +8161,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless, object)',
     description: "For the duration of the spell, the target weapon acts as if it had the returning weapon special ability. The spell can serve as a prerequisite for the returning weapon special ability on magic items.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reversion',
@@ -7805,6 +8177,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'none',
     description: "You establish an imperfect replica of yourself within the Akashic Record at the time the spell is cast. You must have hit points equal to or greater than half your maximum to cast. When reduced below half maximum hit points during the spell's duration, you can use an immediate action to absorb energy from the replica, regaining 1d8 plus 1 point per caster level (maximum +5) hit points. A greater version (Cleric 5, Psychic 4, Wizard 5) heals 3d8+1/level (max +15), and a mass version (Cleric 6, Psychic 5, Wizard 6) affects one creature per level, each healing 1d8+1/level (max +25).",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reviving Finale',
@@ -7821,6 +8194,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "You must maintain an active bardic performance to cast this spell. Upon casting, the bardic performance ends immediately, and all allies within the spell's area recover 2d6 hit points. The spell provides no benefit to undead creatures.",
     source: 'Advanced Player\'s Guide (2010)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rift of Ruin',
@@ -7838,6 +8212,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell creates an extradimensional rift on horizontal surfaces. Creatures must succeed at a Reflex save to avoid falling in. The rift contains razor-sharp blades and boiling pools of acid, strange chewing vermin, and writhing shards of ice representing chaotic Abyssal manifestations. Falling creatures take 6d6 damage; those inside take an additional 6d6 damage each round (randomly acid, bludgeoning, cold, electricity, fire, piercing, slashing, or sonic), with Reflex saves for half. Climb DC is 25. When duration ends, creatures are expelled, take double damage, and become prone. The caster may dismiss it early as a standard action to summon Abyssal denizens instead.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rising Water',
@@ -7854,6 +8229,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "You manifest a cylinder of calm water on solid ground or atop existing water. The water forms rapidly without displacing creatures or objects, though anything present becomes submerged. Unconscious air-breathers drown immediately; conscious ones can hold their breath. Movement through the cylinder at normal speed requires a successful DC 10 Swim check (otherwise, creatures move at one-quarter speed). The water persists in its cylindrical form regardless of gravity, allowing creatures to enter and exit freely. Upon spell conclusion, the water vanishes, dropping any swimmers to the ground below.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'River Whip',
@@ -7871,6 +8247,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "You create flowing fresh water forming a whip sized appropriately for you. Attacks are made as melee touch attacks rather than standard attacks. Each successful strike deals damage and douses the target with 1 pint of water. Fire subtype creatures take an additional 1d6 damage. Targets on fire gain a +2 bonus on saving throws to extinguish flames. The spell discharges after successfully striking a creature a number of times equal to your caster level. The water produced matches that from the create water spell.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Roaming Pit',
@@ -7887,6 +8264,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "This spell operates similarly to create pit but produces a mobile pit. You may direct it up to 20 feet per move action while keeping it on suitable horizontal surfaces. When the pit's movement overlaps a creature's space, that creature must succeed at a Reflex save or fall in. Creatures avoiding the pit relocate to the nearest safe location. Those already in the pit travel with it when repositioned.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rock Whip',
@@ -7903,6 +8281,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "You create a non-magical whip weapon dealing 1d8 bludgeoning damage. You gain proficiency and immunity to disarm/sunder attempts. The whip passes through natural stone, ignoring stone-based cover. Unlike normal whips, armor and natural armor provide no protection against this weapon's damage, though it deals no damage to earth subtype outsiders. Successful strikes allow free bull rush attempts using caster level and primary casting ability modifier instead of base attack bonus and Strength.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S1 ─────────────────────────────────────────────────────────────
@@ -7930,6 +8309,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The caster touches a recipient to create a sympathetic field of healing energies between them. Once cast, both participants may cast touch-range conjuration (healing) spells on each other while within close range (25 feet plus 5 feet per 2 caster levels). Removing either bracelet immediately ends the spell.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sand Whirlwind',
@@ -7954,6 +8334,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The spell creates a swirling sand cloud that strikes a target, causing blindness and impairing speech. Affected creatures must make Concentration checks to speak, with increased DCs when casting spells. A successful save prevents blindness but not the speech impediment.',
     source: 'Taldor, Echoes of Glory',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sealed Sending',
@@ -7972,6 +8353,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell allows a caster to create a magical scroll containing a message of up to 50 words in any language they speak. The scroll materializes at any location the caster has previously viewed on their current plane. Upon spell duration expiration or once the recipient finishes reading, the scroll vanishes without trace. This spell cannot be detected, traced, or blocked by any spell of a lower level.',
     source: 'Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Seamantle',
@@ -7996,6 +8378,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The caster surrounds themselves within a churning column of pure elemental water up to 30 feet high. Benefits include a swim speed matching land speed and improved cover (+8 AC bonus, +4 Reflex saves) against foes without freedom of movement effects. The water blocks fire spells but allows enemies to attempt them via caster level checks. The caster can form a 30-foot reach slam attack and extinguish normal fires or use dispel magic effects against magical flames. Fire weapons striking the caster are suppressed for 1d4 rounds if the wielder fails a Fortitude save.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secluded Grimoire',
@@ -8013,6 +8396,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell transports a spellbook to a random safe location on the Ethereal Plane where it persists indefinitely. The targeted spellbook dissolves into quickly fading lines of energy and runes. The caster can retrieve it by concentrating as a standard action. Only one spellbook may be stored this way at a time; the spell cannot affect another spellbook if one already exists on the Ethereal Plane. Any ongoing magical effects on the spellbook continue normally.',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Second Wind',
@@ -8030,6 +8414,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This healing spell requires the caster to have fewer than one-quarter of their total hit points remaining. Upon casting, the character summons invigorating air to fill their lungs, healing 2d8 points of damage + 1 point per caster level (maximum +10). The spell can be cast as a swift action during the caster's turn or as an immediate action when reduced below 0 hit points. The spell is ineffective for creatures that do not breathe.",
     source: "Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secret Coffer',
@@ -8055,6 +8440,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell allows a caster to hide a small coffer on the Ethereal Plane. The container measures approximately 1 foot square and can hold up to 1 cubic foot of material. The spell automatically fails if any living creature attempts to enter the coffer. The coffer remains safely hidden for 14 days before risking permanent loss on the Ethereal Plane; after this period, there is a cumulative 5% daily chance of permanent loss. The caster retrieves it by concentrating as a standard action while holding the replica.',
     source: 'Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secret Vault',
@@ -8080,6 +8466,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as secret chest but applies to small structures, vaults, or large chests. Unlike the standard spell, living occupants within the vault do not invalidate the spell. While stored on the Ethereal Plane, residents do not require sustenance or air but cannot depart except through magical means like plane shift. After 360 days, there is a cumulative 1% daily chance of permanent loss.',
     source: 'Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sepia Snake Sigil',
@@ -8104,6 +8491,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell inscribes a hidden magical symbol in text of at least 25 words. When someone deliberately reads the enspelled text, a large sepia serpent materializes and attacks the reader. A successful Reflex save causes the serpent to dissipate. On a failed save, the target is engulfed in a shimmering amber field of force and immobilized in suspended animation, neither aging nor requiring sustenance. The sigil can be removed via dispel magic.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S2_1 ─────────────────────────────────────────────────────────────
@@ -8121,6 +8509,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Creates magical masterwork restraints (manacles or fetters) that manifest on touch. The caster can deliver them via touch attack with a subsequent Reflex save to bind the target, or cast during a full-round action to potentially bind two creatures together. Enhanced options unlock at higher caster levels, including mithral variants and optional dimensional anchor effects.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Bomb Admixture',
@@ -8136,6 +8525,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Modifies the caster\'s bombs so that when one hits a direct target, a shadowy substance covers the direct target and up to three creatures damaged by splash. Affected creatures must succeed at a Fortitude save or gain concealment while also treating all other creatures as having concealment.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Invasion',
@@ -8152,6 +8542,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Opens a rift to the Plane of Shadow, reducing light levels and enhancing shadow subschool spells by 20% (maximum 90% effect). When dismissed as a standard action, there is a cumulative 5% chance per round the spell remained active to summon an evangelist or interlocutor kyton, which remains for rounds equal to the spell\'s remaining duration.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Signifer's Rally",
@@ -8168,6 +8559,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Allows the caster to bring willing allies to their location in a burst of brimstone. Affected allies appear adjacent to the caster and may roll initiative if needed, retaining their ability to act. The spell cannot function in areas protected against evil creatures.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Silver Darts',
@@ -8184,6 +8576,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates a burst of silver projectiles functioning as silver weapons, dealing 1d6 piercing damage per caster level (maximum 10d6). Creatures with armor bonuses exceeding +4 or natural armor bonuses exceeding +4 take only half damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slick Walls',
@@ -8200,6 +8593,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Coats all walls and ceilings in a designated area with a slick substance; the DC of all Climb checks for affected surfaces increases by twice the caster level (maximum +20), preventing creatures from taking 10 on such checks even with climb speeds. Has no effect on magical walls.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slipstream',
@@ -8216,6 +8610,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Generates a wave of water that enhances the target\'s movement speed by 10 feet on level ground and 20 feet downhill, with no uphill bonus. Additionally increases swim speed by 20 feet or grants a swim speed of 20 feet to targets lacking one.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slowing Mud',
@@ -8231,6 +8626,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Coats targets in thick, adhesive mud that functions as both a slowing effect and blindness. Affected creatures can use standard actions to clear mud from eyes or full-round actions to remove enough mud to end the slowing effect. Water-based effects or immersion removes all mud within one round.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S2_2 ─────────────────────────────────────────────────────────────
@@ -8250,6 +8646,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Conjures a projectile of packed ice that deals 1d6 cold damage per caster level (maximum 5d6) on impact. The target must succeed at a Fortitude save or become staggered for one round.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Solid Note',
@@ -8266,6 +8663,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Materializes a single musical note with physical form sized roughly like an outstretched hand, which can be positioned within range as a hook, door blocker, or pulley. The note has an effective Strength of 10 + caster level and disappears if attacked successfully or overcome by combat maneuvers.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Song of Healing',
@@ -8281,6 +8679,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "Requires an active bardic performance; while the performance continues, affected creatures gain fast healing 2. Upon performance cessation, targets receive healing (1d8 plus caster level, max +15) and are cured of exhaustion, fatigue, nausea, paralysis, sickness, and being stunned.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Songbird',
@@ -8296,6 +8695,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Summons uplifting music from the outer planes to bolster musical activities, providing three benefits: a +3 bonus to Perform checks, no action cost for bardic performance activation, or +1 to sonic descriptor spell save DCs — depending on which is used in the same round.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Soothing Mud',
@@ -8313,6 +8713,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Creates an area of therapeutic mud that functions as difficult terrain and restores 1 hit point per round to creatures beginning their turn in it. Creatures fully submerged for one minute gain healing of ability score damage once daily per creature.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Soothing Word',
@@ -8328,6 +8729,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Reduces the severity of harmful conditions by one step: nauseated becomes sickened, stunned becomes dazed, exhausted becomes fatigued, frightened becomes shaken, and paralyzed becomes staggered. The spell only affects these specific conditions and maintains their original duration.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spectral Scout',
@@ -8344,6 +8746,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a spectral creature shaped like a Tiny or smaller animal that is incorporeal, unable to attack, and has only 1 hit point. It can communicate with the caster and relay information it has directly witnessed with perfect clarity including sights, sounds, and smells, but lacks interpretation abilities.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spindrift Spritz',
@@ -8360,6 +8763,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'When a creature attempts to resist fatigue, fear, sickness, or staggered effects, the caster grants that target an additional saving throw, allowing them to use the better of two rolls.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spiral Ascent',
@@ -8375,6 +8779,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Transforms the caster into a helical beam of divine energy for instantaneous upward teleportation within range. The destination must be a familiar location or within line of sight, positioned within 10 feet directly above the caster. Fails if the arrival location is occupied or unavailable.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spiral Descent',
@@ -8390,6 +8795,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Mirrors spiral ascent but transports the caster and held objects downward from their current position. Functions identically to its counterpart except the destination lies below rather than above the starting location.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spore Burst',
@@ -8405,6 +8811,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Enchants a willing plant creature with toxic mushrooms that sprout from its body. As a standard action, the target releases a cloud of toxic spores in a 20-foot-radius spread, forcing affected creatures to make Fortitude saves or become sickened for 1d6 rounds. Caster and all plant creatures are immune.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S3 ─────────────────────────────────────────────────────────────
@@ -8424,6 +8831,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Upon casting this spell, you target a living creature that has –1 or fewer hit points. That creature is automatically stabilized and does not lose any further hit points. If the creature later takes damage, it continues dying normally.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stone Discus',
@@ -8449,6 +8857,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You conjure one or more stone discuses that fly toward enemies. You create additional discuses at 7th and 11th caster levels. Each discus can be configured with either a blunt edge (bludgeoning) or sharp edge (slashing), dealing 4d6 damage per hit as a ranged attack. All discuses must target creatures within 30 feet of each other. At higher caster levels the discuses gain special material properties: magic and silver (5th), cold iron (10th), and adamantine (15th).',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stone Shield',
@@ -8476,6 +8885,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "A stone slab rises from the ground between you and a chosen opponent, granting you cover (+4 bonus to AC, +2 bonus on Reflex saves). The shield has hardness 8 and 15 hit points. If an opponent's attack misses you by 4 or fewer, it strikes the shield instead. The spell ends when the shield is destroyed. You must be adjacent to earth or stone to cast this spell.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Storm of Blades',
@@ -8500,6 +8910,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You create floating copies of the sword used as the material component and hurl them at a single target. You create one sword for every 2 caster levels (maximum five at 10th level). Each blade requires a separate ranged attack roll using the same threat range, critical modifier, and damage as a normal weapon of that type. The swords vanish after hitting or missing.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Storm Step',
@@ -8517,6 +8928,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You transform into a bolt of lightning and teleport to a location within range. Creatures and objects in your path take 1d8 electricity damage per 2 caster levels (maximum 5d8); a successful Reflex save halves this damage. If your path intersects a solid barrier, you damage it; if you break through, you continue within your range, otherwise movement stops adjacent to the barrier.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Straitjacket',
@@ -8541,6 +8953,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'A magical straitjacket materializes around a target. You make a combat maneuver check using your caster level + 5 as your bonus. On success, the target is restrained and cannot perform actions requiring hands or arms, including spellcasting with somatic or material components. After 1 round of restraint, the target gains an extra saving throw against a confused, curse, fear, or madness effect of your choice. The escape DC equals 10 + caster level + highest of your Int, Wis, or Cha modifier.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Accuser',
@@ -8566,6 +8979,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You summon a single accuser devil (zebub) from Hell, functioning similarly to summon monster spells. These hideous flying creatures resemble an infant torso with the body and wings of an enormous fly. They excel as spies and can grant visions of what they have witnessed to others.',
     source: 'Book of the Damned - Volume 1: Princes of Darkness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Ancestral Guardian',
@@ -8590,6 +9004,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You summon two transparent dwarf ancestor spirits armed with traditional dwarven weapons. They function similarly to spiritual weapons but can target different enemies and deal physical damage instead of force damage. The spirits cannot be permanently harmed and operate like summon monster creatures.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Cacodaemon',
@@ -8614,6 +9029,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions identically to a summon monster spell of the appropriate level, except it always summons a single cacodaemon.',
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Cacodaemon, Greater',
@@ -8638,6 +9054,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon cacodaemon, except it summons 1d4+1 cacodaemons instead of a single one.',
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Ceustodaemon',
@@ -8662,6 +9079,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions identically to a summon monster spell of the appropriate level, except it always summons a single ceustodaemon.',
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Derghodaemon',
@@ -8686,6 +9104,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions identically to a summon monster spell of the appropriate level, except it always summons a single derghodaemon.',
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Elder Worm',
@@ -8703,6 +9122,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions like summon nature's ally VIII, but instead you conjure a purple worm with the giant creature simple template.",
     source: 'Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Erodaemon',
@@ -8727,6 +9147,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions identically to a summon monster spell of the appropriate level, except it always summons a single erodaemon.',
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Flight of Eagles',
@@ -8760,6 +9181,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You summon 1d4+1 giant eagles that can engage in combat or function as mounts at your discretion. The summoned creatures remain under your control for the duration of the spell.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Froghemoth',
@@ -8777,6 +9199,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions identically to summon nature's ally IX, except the caster summons a froghemoth instead of other typical nature allies.",
     source: 'Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Genie, Lesser',
@@ -8801,6 +9224,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon monster I, but summons one janni instead of other creatures.',
     source: 'Pathfinder Player Companion: People of the Sands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Genie',
@@ -8825,6 +9249,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon genie, lesser, but summons one djinni or 1d3 jann.',
     source: 'Pathfinder Player Companion: People of the Sands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Genie, Greater',
@@ -8849,6 +9274,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like summon genie, lesser, but summons one shaitan, 1d3 djinni, or 1d4+1 jann.',
     source: 'Pathfinder Player Companion: People of the Sands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sundered Serpent Coil',
@@ -8874,6 +9300,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'A Large decapitated serpent emerges from the ground to grapple a designated creature within 5 feet. As a standard action, you may command the snake to release its grappled target and direct it to attack a different creature. This spell functions similarly to black tentacles but with a single animated snake.',
     source: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Surface Excursion',
@@ -8908,6 +9335,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You transport yourself and touched allies to the nearest sky-facing surface directly above your current location. Magical beacons visible only to you and targeted creatures appear at both origin and destination, allowing return teleportation. If the departure area becomes blocked by solid matter when you return, travelers take 1d6 damage and relocate to nearby open space within 100 feet.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Swarm of Fangs',
@@ -8933,6 +9361,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You create a swarm of thousands of flying, animated fangs that attack all creatures in their space. You can move the swarm up to 40 feet per round as a move action. If undirected, the swarm automatically moves toward the nearest creature. All creatures in the swarm's area take 2d6 points of damage when it appears and again at the end of each round's movement.",
     source: 'Pathfinder Campaign Setting: Occult Mysteries',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Swipe',
@@ -8950,6 +9379,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "You magically seize a held object from another creature's grasp. Make a combat maneuver check with a bonus equal to your caster level plus the highest of your Intelligence, Wisdom, or Charisma modifier. On success, the item teleports to one of your free hands or to your feet. On failure, the target retains the item.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sylvan Hideaway',
@@ -8974,6 +9404,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You create an extradimensional underground chamber accessible through a camouflaged, lockable 5-foot-square trap door (hardness 10, 20 hp per caster level). The chamber accommodates two creatures per caster level (maximum 12 levels). When the spell expires, all contents are expelled to the nearest available surface space.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Healing',
@@ -8999,6 +9430,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like symbol of death but heals instead. When triggered, living creatures within 60 feet receive healing equal to 2d8 + 1 point per caster level (maximum +15). Undead and creatures harmed by positive energy take equivalent damage, with a Will save for half. The symbol functions only once per creature per 24 hours.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_T_1 ─────────────────────────────────────────────────────────────
@@ -9016,6 +9448,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You mark your current location and condition when casting. This creates an imperceptible beacon allowing you to return to that exact spot and restore your prior state (HP, conditions, durations) via standard action before the spell expires. The spell does not restore used items, charges, or spells. Bystanders perceive only a teleportation. Discharge incurs temporary negative levels—one per 2 rounds elapsed since casting—disappearing after 24 hours. Alternatively, discharging as an immediate action consumes the focus entirely.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thorn Javelin',
@@ -9033,6 +9466,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a wooden thorn sized as a javelin in your open hand, usable with proficiency. Creatures hit by the thorn must make a Fortitude save or become sickened for 1 round. When thrown, another thorn appears automatically. Any javelin leaving your grasp vanishes at turn\'s end. Each javelin attack reduces the spell\'s remaining duration by 1 minute, ending the spell once duration reaches zero.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tidal Surge',
@@ -9050,6 +9484,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This water-conjuring spell produces different effects depending on the environment. On land, it creates an onrushing surge of water 10 feet high in a 30-foot cone dealing 1d6 bludgeoning damage per 2 caster levels (max 10d6). The surge extinguishes non-magical fires and suppresses magical fire as if dispel magic were cast. Failed Reflex saves result in creatures being pushed 1d4x5 feet away and Medium or smaller creatures being knocked prone. In bodies of water at least 30 feet wide, the caster may shape it as either a cone or 60-foot line, with damage increased to 1d10 per 2 caster levels plus the same push/prone effects on failed saves.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_T_2 ─────────────────────────────────────────────────────────────
@@ -9068,6 +9503,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a slime coating on your hand. Upon a successful melee touch attack, the slime transfers to the target and functions as green slime, dealing 1d3 points of Constitution damage per round. The slime can be destroyed through standard green slime removal methods (scraping, freezing, burning, cutting, sunlight, or remove disease spell). If the slime kills its host, it consumes the body and dies. The slime cannot transfer to other creatures and perishes if separated from the original target.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Treacherous Teleport',
@@ -9084,6 +9520,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell operates similarly to the standard teleport spell, but allows you to intentionally cause any number of accompanying creatures to either suffer a mishap or arrive in a specific different location you visualize simultaneously with the original destination, or both. The spell carries the ruse descriptor, meaning attempts to identify it through skill checks will mistakenly reveal it as the standard teleport spell.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tsunami',
@@ -9101,6 +9538,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You generate a massive water wave traveling in a predetermined straight line at 60 feet per round over open water or 30 feet per round on land or underwater. Struck creatures take 8d6 bludgeoning damage and face a special combat maneuver check for potential knockdown and displacement. Carried creatures can attempt escape as standard actions, suffering an additional 6d6 damage if unsuccessful. Objects Huge or smaller get swept along; larger structures take damage without hardness reduction. Solid barriers taller than the wave create gaps. Freedom of movement prevents a creature from being carried along but does not prevent damage.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_U_1 ─────────────────────────────────────────────────────────────
@@ -9131,6 +9569,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'You draw forth a living memory from the target\'s subconscious—a construct replica that resembles the target and embodies its negative self-image. The replica uses clockwork angel statistics (modified: Intelligence 10, no clockwork trait, no enhance weapon ability, no electricity vulnerability). You do not control it; it single-mindedly attacks the target. While the replica is visible, the target rolls d% each round to determine behavioral effects, ranging from no effect to being nauseated, with potential penalties on attack rolls, saving throws, and skill checks.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_U_2 ─────────────────────────────────────────────────────────────
@@ -9166,6 +9605,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as life current, except that it infuses the current with negative energy instead of positive energy. The current heals undead creatures and harms living creatures.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_VWYZ ─────────────────────────────────────────────────────────────
@@ -9193,6 +9633,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "Upon casting, bristly growths erupt from your body. When you strike a target with a natural weapon or unarmed strike, you deal an additional 1d6 damage, and the struck creature must make a Reflex save or become entangled for the spell's duration. Those who succeed on the save gain immunity to the entangled effect for one round. Victims may use a standard action to remove the vines but risk becoming entangled again from subsequent strikes.",
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vinetrap',
@@ -9209,6 +9650,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Thorny vines erupt around the target, progressively restricting movement. The subject gets an initial Reflex save; failure means base speed reduces by 5 feet immediately, with additional 5-foot reductions each round unless another save succeeds, until reaching half the original speed. A full-round action allows the subject or adjacent creature to tear vines away, resetting the penalty to 5 feet. Fire damage of 20 or more points or dispel magic ends the effect prematurely. Speed cannot drop below 5 feet regardless of base speed.',
     source: 'Pathfinder Campaign Setting: Chronicle of the Righteous',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Viper Bomb Admixture',
@@ -9225,6 +9667,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This alchemist extract modifies your bombs during its duration. When you hit a target directly with a bomb, up to four vipers are released from the bomb. One viper attacks the direct hit target, while the others target up to three creatures damaged by splash damage. The conjured vipers make melee touch attacks using your base attack bonus plus Intelligence modifier. On a successful hit, they deal 1d4 plus your Intelligence modifier in damage and poison the target as if from a venomous snake. The vipers disappear after attacking. Only one bomb admixture effect can be active at a time.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Walk the Plank',
@@ -9249,6 +9692,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'This spell creates a pit similar to create pit, but fills the lower portion with saltwater. The top 10 feet remain open. Falls into the pit deal only 1d3 nonlethal damage. Huge or larger creatures can escape as a move action without climbing checks. The spell summons one advanced shark per 4 caster levels (maximum four), which immediately attack any creature falling in. Alternatively, two sharks can be replaced with one great white shark. When the spell ends, creatures rise with the pit bottom while conjured water and sharks vanish.',
     source: 'Pathfinder Roleplaying Game Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Brine',
@@ -9274,6 +9718,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'The caster conjures a thick seawater barrier with a directional current. Creatures swimming against the current expend extra movement. Those beginning their turn inside are pushed by the current before acting. The wall provides cover against outside attacks and deflects physical ranged weapons unless exceptionally large. Submerged creatures face standard underwater combat penalties. The barrier blocks gases and liquids while preventing water mixing at edges.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Water of Maddening',
@@ -9297,6 +9742,7 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       "This conjuration produces a toxic liquid disguised as pure water. When consumed or applied to a creature's skin, the victim must succeed on a Fortitude save or suffer 1d6 points of Intelligence damage and 1d6 points of Dexterity damage. Those who succeed become sickened for 1d4 rounds instead. Drinking the fluid imposes a -4 penalty to the save. The spell generates approximately 2 ounces per casting and functions similarly to unholy water.",
     source: 'Pathfinder Roleplaying Game Book of the Damned',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Winter's Grasp",
@@ -9322,5 +9768,6 @@ export const CONJURATION_SPELLS: Spell[] = [
     description:
       'Ice encrusts the ground, radiating supernatural cold and making it hard for creatures to maintain their balance. The icy surface functions as normal ice, requiring double movement to enter and increasing Acrobatics DC by 5. Creatures beginning their turn in the affected area suffer 1d6 cold damage and receive a -2 penalty on saving throws against cold descriptor spells for 1 round.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
 ];

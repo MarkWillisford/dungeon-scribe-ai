@@ -14,6 +14,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       "You may use your Wisdom modifier in place of your Strength or Dexterity modifier on attack rolls with your deity's favored weapon.",
     shortDescription: "Use WIS instead of STR/DEX on attack rolls with deity's favored weapon",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -39,6 +40,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       'You can use two warpriest blessings simultaneously. As a swift action, you can activate two blessings at once, gaining both their minor benefits. These blessings must be from two different domains.',
     shortDescription: 'Activate two warpriest blessings simultaneously as a swift action',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'blessings' },
@@ -59,6 +61,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       'You can identify haunts as if using detect undead and are treated as one level higher for the purpose of channeling energy to destroy or damage haunts. Additionally, when you destroy a haunt, you regain a number of hit points equal to your level.',
     shortDescription: 'Better haunt detection/destruction; regain HP when destroying haunts',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -82,6 +85,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Abadar's crossbow fighting style: flanking bonus, fast reload, ignore concealment",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Abadar' },
@@ -103,6 +107,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       "You have mastered Asmodeus's divine fighting style with the mace. At the basic level, when you attack with a heavy mace and deal damage, the target takes a -2 penalty to AC against your attacks for 1 round. At the advanced level, a creature damaged by your mace must succeed at a Will save (DC 10 + your Strength modifier + your level) or be compelled to follow a one-word command as a free action. At the ultimate level, your mace attacks deal an additional 1d6 fire damage, and creatures you command become shaken for 1 round.",
     shortDescription: "Asmodeus's mace style: AC penalty, command word, bonus fire damage",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Asmodeus' },
@@ -124,6 +129,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       "You have mastered Calistria's divine fighting style with the whip. At the basic level, you treat the whip as a weapon that can deal lethal damage without penalty and can use it to disarm opponents without provoking attacks of opportunity. At the advanced level, when you make a successful trip or disarm maneuver with a whip, the target becomes flat-footed until the start of its next turn. At the ultimate level, your whip attacks have a chance to entangle the target, and entangled opponents cannot take attacks of opportunity.",
     shortDescription: "Calistria's whip style: lethal whip, maneuver mastery, entangle",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Calistria' },
@@ -146,6 +152,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Cayden's dual-weapon style with rapier and tankard; drink as swift action for attack bonus",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Cayden Cailean' },
@@ -168,6 +175,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Desna's starknife style: DEX to attack/damage, dazzle on hit, returning throws",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Desna' },
@@ -190,6 +198,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Erastil's longbow style: bonus damage against foes threatening allies, blessed arrow",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Erastil' },
@@ -212,6 +221,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Gorum's greatsword style: reroll attack rolls once per round (advanced: twice)",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Gorum' },
@@ -233,6 +243,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       "You have mastered Gozreh's divine fighting style with the trident. At the basic level, you gain a +2 bonus on combat maneuver checks to disarm or trip opponents with a trident, and do not provoke attacks of opportunity when doing so. At the advanced level, when you score a hit with a trident, you can push your opponent back 5 feet as a free action. At the ultimate level, once per day, as a full-round action you may hurl your trident to call down a lightning bolt along its path.",
     shortDescription: "Gozreh's trident style: maneuver mastery, push back, lightning strike",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Gozreh' },
@@ -255,6 +266,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Iomedae's longsword style: grant ally AC bonus, improved criticals, holy/vorpal blade",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Iomedae' },
@@ -277,6 +289,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Irori's unarmed style: bonus damage against chosen target, penetrate DR, stagger",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Irori' },
@@ -299,6 +312,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Lamashtu's falchion style: mark target for -2 AC, penetrate DR, bestial deformity on crit",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Lamashtu' },
@@ -320,6 +334,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       "You have mastered Nethys's divine fighting style with the quarterstaff. At the basic level, once per round as a free action after a successful hit with a quarterstaff, you can cause the target to become dazzled for 1 round (Will save DC 10 + your Wisdom modifier + your ranks in Spellcraft negates). At the advanced level, the target can instead be blinded. At the ultimate level, you can use both ends of the quarterstaff simultaneously — once on your turn to channel a touch spell, and once on a readied action.",
     shortDescription: "Nethys's quarterstaff style: dazzle/blind on hit, dual-channel touch spells",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Nethys' },
@@ -342,6 +357,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Norgorber's short sword style: precision damage, no Sneak Attack required, contact poison",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Norgorber' },
@@ -364,6 +380,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Pharasma's dagger style: ghost touch vs undead, instant undead destruction on crit",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Pharasma' },
@@ -385,6 +402,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       "You have mastered Rovagug's divine fighting style with the greataxe. At the basic level, when you deal damage with a greataxe, you can attempt to sunder a worn or carried item on the same attack as a free action. At the advanced level, your sunder attempts with greataxes do not provoke attacks of opportunity and ignore the first 5 points of hardness. At the ultimate level, once per day, as a full-round action you can make a single greataxe attack that deals damage to everything in a 10-foot line from you to the target.",
     shortDescription: "Rovagug's greataxe style: free sunder, ignore hardness, line attack",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Rovagug' },
@@ -407,6 +425,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Sarenrae's scimitar style: DEX to damage, nonlethal option, swift touch spells",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Sarenrae' },
@@ -429,6 +448,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Shelyn's glaive style: trip mastery, nonlethal attacks, fascinate nearby foes",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Shelyn' },
@@ -451,6 +471,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Torag's warhammer style: study for double/triple damage, stagger on save failure",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Torag' },
@@ -473,6 +494,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Urgathoa's scythe style: negative level on crit, temp HP from damage, create zombies",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Urgathoa' },
@@ -495,6 +517,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       "Zon-Kuthon's spiked chain style: bleed damage, free trip, reduce natural armor",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must worship Zon-Kuthon' },
@@ -519,6 +542,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel energy to impose -2 on attacks, saves, and skills rather than dealing damage',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -538,6 +562,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       'You can channel divine energy with a thought. You can channel energy as a swift action, but doing so expends two uses of channel energy.',
     shortDescription: 'Channel energy as a swift action (costs 2 uses)',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -558,6 +583,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 caster level vs SR for domain spells; channel energy deals/heals one extra die',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -584,6 +610,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       'Your birth was particularly auspicious, and you have always had an instinctive link to the divine. Whenever you channel energy, your channeling DC is increased by 1.',
     shortDescription: '+1 to channel energy DC',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel energy' }],
     effects: [
@@ -609,6 +636,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       'Your channel energy can affect different types of creatures. Choose one type of creature affected by your channel energy (undead or living). Once per day, when you channel energy, you can choose to affect the other type of creature instead.',
     shortDescription: 'Once per day, channel energy can target the opposite creature type',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel energy' }],
     effects: [],
@@ -623,6 +651,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       'Your weapons strike with divine power against evil. Your weapons are treated as good-aligned for the purpose of overcoming damage reduction. Additionally, when you attack an evil creature, you deal 1 additional point of damage. This is not multiplied on a critical hit.',
     shortDescription: 'Weapons overcome evil DR; +1 damage against evil creatures',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must be good-aligned' },
@@ -649,6 +678,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       'Your weapons strike with dark power against good. Your weapons are treated as evil-aligned for the purpose of overcoming damage reduction. Additionally, when you attack a good creature, you deal 1 additional point of damage. This is not multiplied on a critical hit.',
     shortDescription: 'Weapons overcome good DR; +1 damage against good creatures',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must be evil-aligned' },
@@ -675,6 +705,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       'You can channel a domain power through your unarmed strikes. As a swift action before making a melee attack, you can deliver a domain power that normally requires a melee touch attack through your unarmed strike or natural weapon instead. The attack counts as a melee touch attack for the purposes of delivering the power.',
     shortDescription: 'Deliver a melee touch domain power through an unarmed strike',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'class_feature', featureName: 'domain' },
@@ -693,6 +724,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       'CHA mod to saves vs. charm/compulsion; once/day reroll a failed mind-affecting save',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -711,6 +743,7 @@ export const ISG_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 to saves vs divine spells; +2 vs divine spells from worshipers of opposed deity',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must worship a deity' },
@@ -736,6 +769,7 @@ export const ISG_FEATS: FeatDefinition[] = [
       'Your faith protects you from harm. Once per day, as an immediate action, you can add your Charisma modifier as a bonus on one saving throw you are about to make.',
     shortDescription: 'Once per day, add CHA modifier to a saving throw as an immediate action',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },

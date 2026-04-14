@@ -10,6 +10,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
       'You are as at home in the cities of mankind as your elven ancestors are within the forests. You do not treat crowds as difficult terrain and gain a +5 circumstance bonus on Stealth checks when using a crowd as cover.',
     shortDescription: 'Ignore crowd difficult terrain; +5 Stealth when using a crowd as cover.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'stealth', ranks: 1 },
@@ -27,6 +28,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Hide while observed in rocky terrain or underground; hide in open near rocky terrain.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 17 },
@@ -47,6 +49,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day, create a modified obscuring mist (1 round/level, 10-ft radius).',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: "Mbe'ke dwarf" }],
     effects: [],
@@ -61,6 +64,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 caster level for divine spells in bright light; fire/light spells deal +1 damage.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Ability to cast divine spells' },
@@ -80,6 +84,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
       'Rumors abound that winter half-orcs spend so much time in the snow that a thin layer of ice covers their skin. You gain cold resistance 3. If you already have cold resistance, it is increased by 3 instead.',
     shortDescription: 'Gain cold resistance 3, or increase existing cold resistance by 3.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 15 },
@@ -97,6 +102,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day, fill a vial with water that becomes a 1st-level druid spell potion.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Shoreborn half-elf' }],
     effects: [],
@@ -111,6 +117,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +2 circumstance bonus on skill checks of one mental stat, usable modifier times/day.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Rainkin half-orc with the skilled alternate racial trait' },
@@ -127,6 +134,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Enhanced Cloud Invocation: 1 min/level, dismissible, mobile, and usable in increments.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'cloud_invocation' },
@@ -144,6 +152,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       'As a standard action, throw a bludgeoning weapon and attempt a free trip maneuver on hit.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -164,6 +173,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     description: 'You can use the Hammer Throw feat against targets at any range and of any size.',
     shortDescription: 'Hammer Throw works against targets at any range and of any size.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -187,6 +197,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Confirming a critical hit grants all allies within 30 ft a +2 morale bonus on attacks for 1 round.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 15 },
@@ -204,6 +215,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Attempt a free trip on any hit with a thrown bludgeoning weapon, even during a full attack.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -227,6 +239,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
       'Half-elves experience time differently from other races, and you have learned to take advantage of this unique temporal perception. Once per day, as a standard action, you can gain the benefits of haste until the end of your next turn.',
     shortDescription: 'Once per day, gain the benefits of haste until the end of your next turn.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 5 },
@@ -244,6 +257,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Treat targets as flat-footed in difficult terrain; +2 attack vs. flat-footed from higher ground.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -261,6 +275,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
       'You can embed sand into cestuses you wear. Sand-embedded cestuses gain +1 hardness and +5 hit points. While wearing sand-embedded cestuses, you can perform a dirty trick maneuver to blind an opponent in place of a melee attack without provoking an attack of opportunity. This action causes the sand to be removed from the cestuses. A single cestus can be embedded as a full-round action, but incurs a -4 penalty on the dirty trick check.',
     shortDescription: 'Embed sand in cestuses to enable a no-AoO blind dirty trick maneuver.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -277,6 +292,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
       'Wildborn who grow up together develop a heightened attunement to the presence of others, maintaining this ability throughout their lives. You are aware of the location of all allies within 60 feet, even if they are hiding, invisible, or otherwise could not normally be detected.',
     shortDescription: 'Always aware of all allies within 60 ft, even hidden or invisible.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'perception', ranks: 3 },
@@ -294,6 +310,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       'When alone, enter focused state for +1d6 melee damage for rounds/day equal to HD.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 17 },
@@ -312,6 +329,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Swift action: 10% miss chance; or move action: concealment; while in rocky terrain or underground.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -330,6 +348,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
       'Your connection to the earth enables you to find the perfect spot to hide among the stone. You gain a +4 bonus on Stealth checks while in areas of rocky terrain or while underground.',
     shortDescription: '+4 Stealth in rocky terrain or underground.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -348,6 +367,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 morale bonus on attack and damage at half HP or below; scales to +3 at 15th level.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'bab', minimum: 1 },
@@ -364,6 +384,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
       "Snowborn half-elves inherit curiosity about other cultures and excel at relating to unfamiliar groups. You can attempt a Diplomacy check to improve someone's attitude even if you do not speak a common language, though the other party must still have an Intelligence of 3 or higher.",
     shortDescription: 'Attempt Diplomacy to change attitudes without a shared language.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'diplomacy', ranks: 3 },
@@ -380,6 +401,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
       'You take after your long-lived elven parent more than other half-elves. While your lifespan is not any longer than usual, age weighs less heavily on your shoulders. You gain a +4 racial bonus to resist any effect that would magically age you or otherwise displace you in time. Additionally, you reduce all penalties gained from magical aging by 1.',
     shortDescription: '+4 racial bonus vs. magical aging; reduce magical aging penalties by 1.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Half-elf' }],
     effects: [],
@@ -394,6 +416,7 @@ export const HEROES_FROM_FRINGE_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 on Knowledge (history) checks; once per day cast object reading as a spell-like ability.',
     source: 'Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 15 },

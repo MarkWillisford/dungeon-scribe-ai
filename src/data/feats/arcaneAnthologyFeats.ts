@@ -12,6 +12,7 @@ export const ARCANE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Spellcraft to decipher arcane writing; use two preparation rituals at once.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Ability to prepare arcane spells' }],
     effects: [
@@ -33,6 +34,7 @@ export const ARCANE_ANTHOLOGY_FEATS: FeatDefinition[] = [
       'When using Vital Strike (or its improved versions), struck creatures must treat the damage dealt as continuous damage until the beginning of your next turn, requiring concentration checks to cast spells. You can use this ability twice per day, or three times per day with a BAB of +12 or higher.',
     shortDescription: 'Vital Strike damage counts as continuous for concentration checks 2-3/day.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'vital_strike' },
@@ -59,6 +61,7 @@ export const ARCANE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use spellbooks as prayer/meditation books; bypass Avid Spellbook Reader prereqs.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 1 },
@@ -85,6 +88,7 @@ export const ARCANE_ANTHOLOGY_FEATS: FeatDefinition[] = [
       'Select one school of magic. You gain a +2 bonus on all saving throws against spells of that school. You can take this feat multiple times, selecting a different school each time.',
     shortDescription: '+2 saves vs. one chosen spell school (can be taken multiple times).',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {

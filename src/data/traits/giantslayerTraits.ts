@@ -11,6 +11,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Spellcraft (ID items), Use Magic Device; one class skill; 50%+1%/level chance to recognize artifacts',
     source: "Giantslayer Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Giantslayer',
     prerequisites: [],
@@ -51,6 +52,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       'You harbor a deep hatred of dragons, stemming from various possible origins—your ancestors were renowned dragonslayers, you suffered a personal tragedy involving dragons, or you were inspired by tales of legendary dragon hunters. This obsession has motivated you to study dragon combat and defensive techniques extensively. You gain a +1 dodge bonus to AC against creatures with the dragon type and a +2 trait bonus on Reflex saving throws against breath weapon attacks.',
     shortDescription: '+1 dodge AC vs dragons; +2 Reflex saves vs breath weapons',
     source: "Giantslayer Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Giantslayer',
     prerequisites: [],
@@ -90,6 +92,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 dodge AC vs giants; +1 attack vs orcs (no stack with dwarf/gnome racial bonuses)',
     source: "Giantslayer Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Giantslayer',
     prerequisites: [{ type: 'special', description: 'Cannot be a dwarf or gnome' }],
@@ -129,6 +132,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Half penalty for oversized weapons; +2 CMD vs awesome blow; dwarves apply stability to awesome blow',
     source: "Giantslayer Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Giantslayer',
     prerequisites: [],
@@ -162,6 +166,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       "Your heritage includes a famed ancestor whose mighty battles against giant foes are the stuff of legend. That ancestor's reputation creates a psychological advantage when you confront giants. You take no penalty on Intimidate checks against creatures with the giant subtype that are larger than you. You also gain a +1 trait bonus to the DC of any fear-based effects you use against creatures with the giant subtype.",
     shortDescription: 'No Intimidate penalty vs larger giants; +1 DC on fear effects vs giants',
     source: "Giantslayer Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Giantslayer',
     prerequisites: [],
@@ -183,6 +188,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       "Your parents were killed by giants during a raid on your peaceful mountain settlement. You became an orphan and have dedicated your life to avenging your family's deaths. You gain a +1 trait bonus on attack rolls against creatures with the giant subtype and a +2 trait bonus on rolls to confirm critical hits against creatures with the giant subtype.",
     shortDescription: '+1 attack vs giants; +2 to confirm critical hits vs giants',
     source: "Giantslayer Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Giantslayer',
     prerequisites: [],
@@ -222,6 +228,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Reflex; 1/day (2/day for dwarves/gnomes) negate a confirmed crit from a giant',
     source: "Giantslayer Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Giantslayer',
     prerequisites: [],
@@ -251,6 +258,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Diplomacy and Knowledge (local) vs giants; one class skill; gain Giant language',
     source: "Giantslayer Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Giantslayer',
     prerequisites: [],
@@ -296,6 +304,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
       'You were born and raised in Trunau, a human settlement within the orc-dominated Hold of Belkzen. You have taken the Standing Vow to defend the town against all threats and to resist capture by orcs. You begin play with a masterwork dagger called a hopeknife, typically worn on a chain beneath clothing. You also gain a +1 trait bonus on Will saving throws.',
     shortDescription: '+1 Will saves; begin play with a masterwork hopeknife dagger',
     source: "Giantslayer Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Giantslayer',
     prerequisites: [],
@@ -325,6 +334,7 @@ export const GIANTSLAYER_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Acrobatics; class skill; +4 Acrobatics to move through larger enemy space without AoO',
     source: "Giantslayer Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Giantslayer',
     prerequisites: [],

@@ -13,6 +13,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Opponents take –2 (or –1 if acted) on saves vs. your spells during a surprise round.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -28,6 +29,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Act during surprise rounds even if you fail your Perception check (total defense only).',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'alertness' }],
     effects: [],
@@ -43,6 +45,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Flat-footed foes in the surprise round remain flat-footed until their first full-round action.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'improved_initiative' }],
     effects: [],
@@ -58,6 +61,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend 1 panache on a dirty trick to make the condition require a Will save to remove.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'panache'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -77,6 +81,7 @@ export const DTT_FEATS: FeatDefinition[] = [
       "Choose a specific creature type (such as wolf, frost giant, goblin, or babau demon). You gain the ranger's favored enemy class ability against this particular type of creature with a bonus of +2. This does not qualify you for prerequisites requiring the favored enemy class feature. If you later gain the favored enemy class feature, you may exchange this feat for another feat you meet the requirements for that specifically requires favored enemy. You can take this feat multiple times; each time it applies to a different creature type.",
     shortDescription: 'Gain +2 favored enemy bonus against one specific creature type.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -106,6 +111,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       "Vital Strike with a poisoned weapon extends the poison's duration by one frequency and removes onset time.",
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'vital_strike' },
@@ -125,6 +131,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'On a confirmed critical hit, also apply a dirty trick condition for 1 round.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'critical'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -146,6 +153,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Combine a dirty trick and disarm maneuver into a single full-round action check.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -167,6 +175,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Combine a dirty trick and grapple maneuver into a single full-round action check.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -189,6 +198,7 @@ export const DTT_FEATS: FeatDefinition[] = [
       "Choose a specific piece of equipment (such as a cloak, heavy blade scabbard, or sunrod). You can use any equipment trick related to the chosen item as long as you meet the trick's prerequisites. If the equipment would normally function as an improvised weapon, you may treat it as either a standard weapon or improvised weapon based on which benefits you most. You can take this feat multiple times; each time it applies to a new type of equipment.",
     shortDescription: 'Learn combat applications for a chosen piece of equipment.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -203,6 +213,7 @@ export const DTT_FEATS: FeatDefinition[] = [
       'You reduce the penalty on your Stealth checks to stay hidden while sniping by 10. The normal penalty for sniping is –20, so with this feat it is reduced to –10.',
     shortDescription: 'Reduce the Stealth penalty for sniping by 10 (from –20 to –10).',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'stealth', ranks: 3 }],
     effects: [
@@ -230,6 +241,7 @@ export const DTT_FEATS: FeatDefinition[] = [
       'You can use your impromptu sneak attack ability one additional time per day. You can take this feat multiple times; its effects stack.',
     shortDescription: 'Gain one additional use of impromptu sneak attack per day.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'impromptu sneak attack' }],
     effects: [],
@@ -245,6 +257,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day, swap a favored enemy subtype as a swift action for character level rounds.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'bab', minimum: 5 },
@@ -266,6 +279,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'After an overrun that knocks a flat-footed foe prone, drop prone to attempt a free grapple.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'improved_overrun' }],
     effects: [],
@@ -281,6 +295,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'An adjacent stationary ally may use your Stealth check result if it is higher than theirs.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'stealth', ranks: 1 }],
     effects: [],
@@ -295,6 +310,7 @@ export const DTT_FEATS: FeatDefinition[] = [
       'You can make an Intimidate check as a free action to demoralize an opponent who is flat-footed when you attack that opponent.',
     shortDescription: 'Demoralize a flat-footed foe as a free action when you attack them.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'intimidate', ranks: 1 }],
     effects: [],
@@ -310,6 +326,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'You and an adjacent ally with Lookout both lose flat-footed when either of you acts.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'lookout' }],
     effects: [],
@@ -325,6 +342,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend inspiration to reroll sneak attack dice showing 1s (or 1s and 2s with advanced talents).',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'inspiration' },
@@ -343,6 +361,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Enter rage as an immediate action during a surprise round and gain +2 insight bonus to AC.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'rage' }],
     effects: [
@@ -371,6 +390,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Make two sniping attacks at your highest bonus as a full-round action, then re-hide; both attacks at –2.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'expert_sniper' },
@@ -390,6 +410,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend 1 grit to load a firearm with poison, then spray it in a 15-foot cone as a standard action.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['grit'],
     prerequisites: [{ type: 'special', description: 'Amateur Gunslinger or grit class feature' }],
     effects: [],
@@ -405,6 +426,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       "Sacrifice Power Attack bonus damage to raise a poison's save DC by 1 (plus more at higher BAB).",
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'power_attack' },
@@ -423,6 +445,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Even if you fail your surprise-round Perception check, you can cast a self-targeting abjuration spell.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'combat_reflexes' },
@@ -441,6 +464,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       "Ratfolk can enter larger allies' spaces and treat them as having your teamwork feats.",
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'ratfolk' },
@@ -459,6 +483,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       "On a confirmed critical sneak attack, roll extra sneak attack dice equal to the weapon's crit multiplier.",
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'critical'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },
@@ -478,6 +503,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'One chosen dirty trick condition requires a full-round action (instead of a standard) to remove.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -499,6 +525,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Demoralize during a surprise round: exceed DC by 10 to make the target frightened instead of shaken.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'frightening_ambush' },
@@ -517,6 +544,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Infuse a Fortitude-save spell with poison; failed saves trigger immediate poison exposure. +1 spell level.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [
       { type: 'skill', skillId: 'craft_poison', ranks: 5 },
@@ -539,6 +567,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       "Sacrifice sneak attack dice to raise a poison's save DC by 1 per die foregone.",
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'bab', minimum: 5 },
@@ -557,6 +586,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Enchantment spells that a target fails also trigger an automatic dirty trick maneuver. +1 spell level.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [
       { type: 'caster_level', minimum: 1 },
@@ -575,6 +605,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Your poisons are hidden from magical detection unless the caster succeeds at a caster level check (DC 10 + your level).',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 5 },
@@ -594,6 +625,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       '+5 Sense Motive vs. lies about contracts; caught liars take –2 on saves vs. your abilities.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'caster_level', minimum: 1 },
@@ -625,6 +657,7 @@ export const DTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain a wasp familiar (greensting scorpion stats with fly speed); worshipers of Calistria only.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Chaotic neutral alignment, worshiper of Calistria' },

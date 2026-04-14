@@ -16,6 +16,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You designate one enemy and one willing ally. The enemy receives a Will save at each turn\'s start; success ends the spell. Both remain visible and audible to all, but cannot physically interact with creatures except each other. Their offensive abilities only affect one another, though environmental effects persist. The spell ends if either becomes unconscious, dies, or the effect is dispelled.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pick Your Poison',
@@ -32,6 +33,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell temporarily converts deadly poisons into intoxicating effects. When a subject affected by this spell encounters poison, instead of normal poisoning, it experiences intoxication with a -2 penalty on attacks, saves, and checks for the duration of the spell. Once the spell expires, the original poison\'s effects apply. The spell does not affect poisons that occurred before casting.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Piercing Shriek',
@@ -47,6 +49,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You produce an ear-splitting shriek that only the target perceives while observers see silent screaming. The target experiences wracking pain from the scream, becoming staggered. The spell fails against deaf creatures and cannot penetrate silence effects.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pilfering Hand',
@@ -62,6 +65,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'You create an invisible telekinetic force for manipulating objects. Two usage options exist: an Abrupt Maneuver allowing instantaneous disarm or steal combat maneuvers using caster level as Combat Maneuver Bonus plus relevant ability modifier, or a Careful Maneuver permitting Disable Device or Sleight of Hand checks requiring full concentration until completion.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pillar of Life',
@@ -79,6 +83,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'Creates a pillar radiating light like a sunrod. Adjacent living creatures can use a standard action to touch it and recover 2d8 points of damage + 1 point per caster level (maximum +20). Undead creatures entering the pillar sustain 1d6 points of damage per caster level (maximum 10d6), or 1d8 per caster level (maximum 10d8) if vulnerable to bright light. Each creature benefits or suffers only once per casting.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pinecone Bomb',
@@ -94,6 +99,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You infuse a pinecone with magical power, then throw it to a target or point within range where it detonates on impact. The explosion deals 1d6 points of piercing damage per 2 caster levels (maximum 5d6) to all creatures in the affected radius.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Placebo Effect',
@@ -110,6 +116,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell allows a subject to temporarily stop experiencing symptoms from a single ongoing affliction or condition. The affected condition may include: blinded, cursed, dazed, deafened, diseased, fatigued, frightened, nauseated, panicked, paralyzed, poisoned, shaken, sickened, staggered, or stunned. If the condition has a duration, it becomes suspended while the spell remains active. The spell only affects one instance of a condition type. It neither removes existing damage nor prevents future exposure to such conditions.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plague Bearer',
@@ -125,6 +132,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You cause the target to carry virulent diseases without showing symptoms. Adjacent creatures must succeed at Fortitude saves or contract illness as if affected by contagion. The target itself remains unaffected and symptom-free. Contagion ceases when the spell ends, though infected creatures remain diseased.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plague Carrier',
@@ -140,6 +148,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: "The target's natural attacks become vectors for filth fever, with a DC calculated as 10 + 1/2 of the creature's Hit Dice + creature's Constitution modifier.",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plague Storm',
@@ -156,6 +165,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'You create a hideous gray cloud, similar to fog cloud, that occasionally crackles with foul-smelling bolts of sickly green lightning. Affected creatures must save or contract one of eleven diseases chosen by you. The disease takes effect immediately with no onset delay, and the save DC increases by +2. The cloud moves away from you at 10 feet per round, sinking to lower terrain.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Inquiry',
@@ -172,6 +182,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'see text',
     description: 'This conjuration spell summons an outsider to answer questions or gather information about a specific topic. The creature can attempt relevant Knowledge checks or leave for 1d4 hours to research. Information quality depends on a caster level roll. The outsider remains for up to 10 minutes before departing. Restrictions include a maximum 18 HD, prohibition on unique outsiders, and no mythic-ranked creatures.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Refuge',
@@ -188,6 +199,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell creates a pocket of Material Plane conditions on other planes, suppressing harmful environmental effects like toxic atmospheres, extreme temperatures, and lack of air. It generates edible plants adapted to the local environment. The spell requires a solid surface at least as large as its area to function and can be made permanent via permanency (11th level caster, 7,500 gp cost).',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Planeslayer's Call",
@@ -205,6 +217,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You strengthen allied magic against particular outsiders. You select one alignment subtype (chaotic, evil, good, or lawful). Affected allies gain +2 bonus on caster level checks to overcome spell resistance and their spells disregard the initial 10 points of energy resistance when targeting outsiders matching that alignment subtype. The spell adopts the opposing alignment descriptor.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planetarium',
@@ -221,6 +234,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell projects a celestial display showing the night sky based on your current location and the local time, allowing you to observe the heavens and all of its celestial bodies and features even during the daytime, indoors, or underground. The projection remains visible within the sphere\'s radius; outside it becomes indistinct.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Play Instrument',
@@ -235,6 +249,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'The spell allows you to play one instrument of your choice as if you had 1 rank in the appropriate Perform skill. You may also use improvised instruments, such as a barrel as a drum or a bow as a harp, treating them as if they were actual musical instruments.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plundered Power',
@@ -251,6 +266,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'The spell requires sacrificing a creature to create a bloodstone holding one of its racial spell-like abilities. The stone can be used once daily by any creature holding it, with the ability\'s effects remaining unchanged from when the original creature lived.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pocketful of Vipers',
@@ -266,6 +282,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell places a magical ward on a container. When an unauthorized creature opens it without speaking the command word, the spell summons 1d3 venomous snakes that emerge and attack that creature for 1 round per caster level before vanishing. The snakes only attack other creatures if they are themselves attacked first.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Poison',
@@ -281,6 +298,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You infect a target with venom through a melee touch attack, dealing 1d3 Constitution damage per round for 6 rounds. Affected creatures may attempt a Fortitude save each round to negate damage and end the poison.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Poison Breath',
@@ -297,6 +315,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You expel a cone-shaped burst of toxic mist from your mouth, subjecting everyone caught in the area to a deadly poison, as per the poison spell.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Poisoned Egg',
@@ -312,6 +331,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no (object)',
     description: 'The spell converts an egg\'s contents into small centipede poison (injury, DC 11, frequency 1/round for 4 rounds, effect 1 Dexterity damage, cure 1 save). At duration\'s end, the poison reverts to harmless egg substance. The egg must be whole and unbroken (raw or cooked). When applied to weapons, you have no chance of self-poisoning.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Poisoner's Exchange",
@@ -327,6 +347,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'You ingest one poison without harm, then regurgitate a different poison of your choice into a container. A Craft (alchemy) check is required against the new poison\'s DC. Success creates the desired poison; failure results in an inert substance. Rolling a natural 1 exposes you to the original poison (unless protected by venom immunity). The new poison\'s cost cannot exceed the original poison\'s cost.',
     source: 'Alchemy Manual',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Poisonous Balm',
@@ -343,6 +364,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell heals the target for 3d8 + caster level (maximum +15) hit points while secretly infusing it with an inert toxin. You can activate the poison later as a standard action, dealing 1d3 Strength damage per round for 6 rounds. The target gains a Fortitude save each round to end the effect. The toxin remains dormant for 1 hour before the spell expires harmlessly.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Poisonous Cloud',
@@ -360,6 +382,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell creates a toxic fog bank similar to fog cloud. Creatures failing Fortitude saves take 1d2 points of Constitution damage per round while within the cloud. Those succeeding on the save must make new attempts each subsequent round. The spell can be made permanent via permanency (13th level caster, 12,500 gp cost).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Polar Midnight',
@@ -376,6 +399,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell darkens an area by two illumination steps and inflicts 5d6 cold damage plus 1d6 Dexterity damage per round to creatures within it. Fortitude saves negate only the Dexterity damage. Stationary creatures become encased in ice equivalent to wall of ice, rendered helpless and unable to breathe. Dead bodies transform to solid ice after 1 round, requiring true resurrection, miracle, or wish to revive. You may move the effect 10 feet per round as a move action.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Polar Ray',
@@ -392,6 +416,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'A freezing blue-white ray emerges from your hand, requiring a ranged touch attack. It deals 1d6 points of cold damage per caster level (maximum 25d6) plus 1d4 points of Dexterity drain.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Positive Pulse',
@@ -407,6 +432,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'Undead creatures must succeed at a Will save or take 1d6 damage plus 1 point per 2 caster levels (maximum +5). Living creatures gain a +2 bonus on saving throws against death effects, energy drain, negative energy, and haunt effects for 1 round.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Possess Object',
@@ -421,6 +447,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'You transfer your mind to a single object, animating it as if using animate objects, except your mind controls the object as if it were your own body. Functions similarly to magic jar. You cannot speak or cast spells while possessing the object. Temporarily suspends disease, poisons, and afflictions while your original body is effectively dead.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Possession',
@@ -435,6 +462,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You transfer your soul into a target creature\'s body within spell range. Your physical form appears dead. Upon successful possession, you retain mental attributes (Intelligence, Wisdom, Charisma, level, class abilities) while using the host\'s physical attributes and hit points. The host\'s consciousness remains aware but cannot act. You can return to your original body as a standard action or when the spell expires.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Possession Trap',
@@ -449,6 +477,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'This protective ward ensnares possession attempts. If a creature tries to possess you via magic jar or similar effects, it must succeed at a Will save or be shunted into this spell\'s focus gem. The creature remains contained as though trapped in a magic jar. If the save succeeds, normal possession rules apply. You always become aware of possession attempts. The effect ends once triggered.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pox Pustules',
@@ -464,6 +493,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell inflicts a painful, itching rash on the target creature. The target becomes sickened and suffers a -4 penalty to Dexterity (minimum 0). By spending a move action to scratch, the target can remove the sickened condition temporarily until the start of its next turn, though the Dexterity penalty persists.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prediction of Failure',
@@ -479,6 +509,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell causes the target to experience the anguish and suffering of every bitter failure it will ever experience, rendering it permanently shaken and sickened. A successful save reduces duration to 1 round/level. For spellcasters who fail the save, the spell additionally inflicts a random minor spellblight.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Preserve',
@@ -493,6 +524,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'Food, water, plants, and other perishable objects affected by the spell remain as fresh as they were when the spell was cast. The spell protects against similar spoilage effects and works on severed body parts per gentle repose rules. It can be made permanent via permanency.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Preserve Grace',
@@ -508,6 +540,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'The spell grants a creature the ability to foresee moral consequences, as if the creature were wearing a phylactery of faithfulness. The magic\'s guidance emphasizes protecting beauty and promotes peaceful solutions and compassion.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Primal Scream',
@@ -523,6 +556,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'You release a powerful vocalization that removes enchantment and paralysis effects. It functions similarly to break enchantment but targets only you and only affects those two effect types. You can use this spell even while paralyzed or unable to speak due to enchantment, with specific limitations regarding silence, gags, or non-magical speech impediments.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prismatic Spray',
@@ -538,6 +572,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell creates a cone of seven colored light beams. Creatures with 8 HD or fewer are automatically blinded for 2d4 rounds. Each creature is randomly struck by one or more beams with distinct magical effects determined by rolling 1d8: red (fire damage), orange (acid damage), yellow (electricity damage), green (poison), blue (flesh to stone), indigo (insanity), violet (planar banishment), or double strikes rolling again.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Profane Nimbus',
@@ -553,6 +588,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You become surrounded by a shadowy aura resembling your deity\'s unholy symbol. When good creatures strike with unarmed attacks, natural weapons, or handheld melee weapons, they take 1d6 points of damage + 1 point per caster level (maximum +15) in retaliation. Reach weapons bypass this effect. You gain resistance to good-descriptor magical attacks, taking half damage, and can negate damage entirely from such attacks with successful Reflex saves.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prosperous Room',
@@ -567,6 +603,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The enchanted room produces additional capital—one extra unit of Goods, Labor, Influence, or Magic (or one of each type if the room generates multiple). If the room generates gp, it generates 25% more. You cannot interact with the affected room or the spell ends immediately.',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protective Penumbra',
@@ -582,6 +619,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell keeps the target slightly in shadow. Creatures with light blindness, light sensitivity, or vulnerability to sunlight (vampires, wraiths) ignore related penalties. The target gains a +2 bonus on saving throws against nonmagical bright light hazards like glare or sunburn.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protective Spirit',
@@ -597,6 +635,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'The spell creates an invisible protective force around you. When a creature makes an attack of opportunity against you, the spirit makes an immediate counterattack using your base attack bonus plus Dexterity modifier. A successful hit causes the triggering attack to automatically miss but deals no damage. The spirit can defend against a number of attacks equal to your Dexterity bonus (minimum 1) per round.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Asylum',
@@ -613,6 +652,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'You create an internal mental landscape where you can spend up to 15 minutes without any time passing for your body. Within this mindscape, you gain perfect recall of any text, conversation, or image encountered within the past week per caster level. You may consult materials with eidetic memory clarity and prepare a single spell if capable of spell preparation. Mind-affecting effects continue expending duration while inside the asylum.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Crush I',
@@ -628,6 +668,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You invade a creature\'s mind causing internal damage. Will save success inflicts the sickened condition for 1 round. Failed Will save requires a Fortitude save (+4 bonus if target above half HP); failed Fortitude reduces target to -1 HP (dying). Successful Fortitude save deals 3d6 points of damage + 1 point per caster level (cannot reduce below -1 HP) and inflicts sickened. No effect on creatures lacking Intelligence scores.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Crush II',
@@ -643,6 +684,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'As psychic crush I, but on Fortitude success, deals 5d6 points of damage + 1 point per caster level. The Fortitude bonus of +4 only applies at full HP; +2 bonus above half HP. This spell can be undercast.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Crush III',
@@ -658,6 +700,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'As psychic crush I, but Fortitude success deals 7d6 points of damage + 1 per caster level; Will success deals 1 point per caster level. The Fortitude bonus of +2 applies at full HP only. This spell can be undercast.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Crush IV',
@@ -673,6 +716,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'As psychic crush I, but both saves deal 9d6 points of damage + 1 per caster level. Creatures below half HP automatically fail the Fortitude save. This spell can be undercast.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Crush V',
@@ -688,6 +732,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'As psychic crush I, but both saves deal 11d6 points of damage + 1 per caster level. Creatures below half HP take a -2 penalty on the Will save. This spell can be undercast.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Leech',
@@ -704,6 +749,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The target suffers from lethargy and becomes fatigued for the spell\'s duration. While fatigued and within range, you gain a +2 enhancement bonus to Strength and Dexterity. On a successful saving throw, the target is only fatigued for 1d4 rounds with no bonus granted to you. The spell has no effect on creatures already fatigued.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Surgery',
@@ -719,6 +765,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell cures mental ability score damage and restores permanently drained points from Intelligence, Wisdom, and Charisma. It eliminates ongoing insanity, confusion, and fear effects. The spell can remove enchantment spells and mental afflictions if they are 6th level or lower (when dispel magic would not work). It also removes all memory-altering effects and can restore memories to perfect clarity.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychonaut Manifestation',
@@ -735,6 +782,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'This mind-altering spell induces a hallucinatory mental journey producing real physical effects. You receive a +4 alchemical bonus to one random ability score paired with a -2 penalty to a related ability (Strength/Intelligence, Dexterity/Wisdom, or Constitution/Charisma are inversely linked). Each round, you can attempt a Will save to shift the bonuses to a different ability pair. Success allows reassignment; failure causes you to become dazed for one round instead.',
     source: 'Occult Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Pugwampi's Grace",
@@ -751,6 +799,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell mimics the unluck aura of pugwampi gremlins. An affected creature must roll two d20s whenever a situation calls for a d20 roll and use the lower result. The spell has no effect on animals, gremlins, or gnolls. Any luck bonus to d20 rolls negates the spell\'s effects (though not its duration).',
     source: 'Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pup Shape',
@@ -766,6 +815,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This transmutation reduces the target creature to Small size (or one category smaller), grants 1 HD maximum, and imposes ability penalties while adding Dexterity and natural armor bonuses. Non-evil creatures must succeed at a Will save to attack the transformed creature, as they feel protective toward the young-seeming form.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Purge Spirit',
@@ -780,6 +830,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This necromantic spell inflicts 1d6 damage per caster level (maximum 10d6) and staggers the target for one round. A successful save reduces damage by half and negates the staggered effect. The spell affects incorporeal and ethereal creatures, haunts, astrally projected beings, mediums channeling spirits, and phantoms.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Purging Finale',
@@ -795,6 +846,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You must maintain an active bardic performance to cast this spell. Upon casting, the bardic performance ends immediately and removes one selected condition from an affected creature: cowering, dazzled, exhausted, paralyzed, shaken, or stunned.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Purified Calling',
@@ -810,6 +862,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'no',
     description: 'Upon casting, you begin the ritual to summon your eidolon, which appears at full hit points without damage or ability score penalties. Any temporary negative conditions affecting your eidolon are immediately removed. Permanent conditions and ability drain remain unaffected.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Purify Body',
@@ -825,6 +878,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This restorative spell restores 3d8 + 1 per caster level (maximum +20) hit points. Excess healing converts to temporary hit points lasting 1 hour. The spell eliminates pain effects, removes physical ability score damage from Strength, Dexterity, and Constitution, and cures: blinded, dazzled, deafened, nauseated, paralyzed, and sickened conditions.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Puzzle Box',
@@ -841,6 +895,7 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'When cast on a creature, this spell strips weapon and shield proficiencies and prevents use of magic items and skill tools, imposing a -5 penalty. Effects last 1 round per level. The target can make skill checks as move actions to restore individual items. When cast on a touched object, the spell renders it puzzling to use for anyone attempting it, lasting permanently.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pyrotechnic Eruption',
@@ -856,5 +911,6 @@ export const GAP_SPELLS_P_2: Spell[] = [
     spellResistance: 'yes',
     description: 'Jets of flame erupt from the ground and surround the target. Damage begins at 1d6 per caster level (maximum 15d6), with the target attempting a Reflex save for half. Each subsequent round, damage is reduced by half the number of dice until the spell expires. The flames persist around the target even if it teleports. Anyone touching the target takes damage matching the last save amount.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
 ];

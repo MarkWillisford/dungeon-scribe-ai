@@ -26,6 +26,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'This spell operates identically to summon monster V, with the restriction that it exclusively summons host devils. These airborne devils are alternatively referred to as gaavs and magaavs.',
     source: 'Pathfinder Campaign Setting: Rival Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Instrument',
@@ -48,6 +49,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This cantrip conjures a single handheld musical instrument of the caster's selection. The instrument materializes either in the caster's hands or at their feet, at their discretion. It is of standard quality for its type. Only one instrument manifests per casting, and it will function solely for the caster. The caster cannot summon instruments too large for two-handed manipulation. The conjured instrument vanishes when the spell's duration ends.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Kami',
@@ -70,6 +72,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This spell functions similarly to Summon Nature's Ally V. The caster may summon one kodama, 1d3 fukujin, or 1d4+1 shikigami. All of these summoned creatures are varieties of kami.",
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Laborers',
@@ -93,6 +96,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This spell summons humanoid petitioners from a plane of the caster's choice. These creatures perform labor tasks but cannot engage in combat or travel to dangerous locations. They enhance downtime activities within settlements by increasing Influence or Labor effects by 50%, up to a maximum bonus of 1 additional point per 2 caster levels. The spell's alignment matches the summoned petitioners' home plane. Feats that increase summoned creature numbers do not affect this spell.",
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Lesser Psychopomp',
@@ -116,6 +120,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'This spell operates similar to summon monster, except it summons either 1d3 esobok psychopomps or 1d4+1 nosoi psychopomps instead.',
     source: 'Pathfinder Adventure Path #80: Empty Graves',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Meladaemon',
@@ -147,6 +152,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions like summon monster, except it summons a single meladaemon.',
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Minor Ally',
@@ -169,6 +175,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This conjuration spell functions similarly to summon nature's ally I. The caster summons between one and three Tiny or smaller animals, such as bats, lizards, monkeys, rats, ravens, toads, or weasels. All summoned creatures must be of the same type.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Minor Monster',
@@ -202,6 +209,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'This spell functions identically to summon monster I, but the caster can summon 1d3 Tiny or smaller animals such as bats, lizards, monkeys, rats, ravens, toads, or weasels. All summoned animals must be the same creature type. Casters may apply one alignment-appropriate template to these animals, consistent with summon monster I guidelines.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster I',
@@ -238,6 +246,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This spell conjures an extraplanar creature, typically an outsider, elemental, or magical beast from another plane. The creature appears where designated and acts immediately on the caster's turn. It attacks opponents to the best of its ability, though the caster can direct it to avoid attacking or target specific enemies if communication is possible. One creature from the 1st-level list may be chosen, with a different option available each casting. Summoned creatures cannot summon others, use teleportation, or employ planar travel abilities. They also cannot cast spells requiring expensive material components. Creatures marked with an asterisk receive celestial templates if the caster is good, fiendish templates if evil, or the caster may choose if neutral.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster II',
@@ -273,6 +282,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions identically to Summon Monster I but allows summoning one creature from the 2nd-level list or 1d3 creatures of the same kind from the 1st-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster III',
@@ -306,6 +316,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions like Summon Monster I, allowing summoning of one 3rd-level creature, 1d3 creatures from the 2nd-level list, or 1d4+1 creatures from the 1st-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster IV',
@@ -341,6 +352,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions like Summon Monster I, permitting summoning of one 4th-level creature, 1d3 from the 3rd-level list, or 1d4+1 from any lower-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster V',
@@ -375,6 +387,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions like Summon Monster I, allowing summoning of one 5th-level creature, 1d3 from the 4th-level list, or 1d4+1 from any lower-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster VI',
@@ -408,6 +421,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions like Summon Monster I, permitting summoning of one 6th-level creature, 1d3 from the 5th-level list, or 1d4+1 from any lower-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster VII',
@@ -439,6 +453,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions like Summon Monster I, enabling summoning of one 7th-level creature, 1d3 from the 6th-level list, or 1d4+1 from any lower-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster VIII',
@@ -470,6 +485,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions like Summon Monster I, allowing summoning of one 8th-level creature, 1d3 from the 7th-level list, or 1d4+1 from any lower-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Monster IX',
@@ -493,6 +509,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions like Summon Monster I, permitting summoning of one 9th-level creature, 1d3 from the 8th-level list, or 1d4+1 from any lower-level list.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally I",
@@ -515,6 +532,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This spell brings a natural creature to aid the caster, typically selecting from animals, fey, magical beasts, elementals, or giants. The summoned ally acts immediately on the caster's turn and fights enemies to the best of its ability. Communication allows directing the creature to avoid attacking, target specific foes, or perform other tasks. Summoned creatures cannot summon others, use teleportation, or employ spell-like abilities with expensive material components. Creatures must be compatible with their environment.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally II",
@@ -537,6 +555,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "Functions identically to Summon Nature's Ally I, except the caster summons either a single 2nd-level creature or multiple 1st-level creatures of the same kind.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally III",
@@ -559,6 +578,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions like earlier versions, permitting summoning of one 3rd-level creature, multiple 2nd-level creatures, or numerous 1st-level creatures of matching type.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally IV",
@@ -581,6 +601,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions similarly to earlier versions, enabling summoning of progressively more powerful single creatures or multiple weaker ones.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally V",
@@ -603,6 +624,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Works like previous versions, allowing summoning of 5th-level creatures, multiple 4th-level creatures, or numerous weaker creatures.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally VI",
@@ -625,6 +647,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Operates identically to lower versions with increased creature options at the 6th level.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally VII",
@@ -647,6 +670,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions like earlier spells, permitting summoning of 7th-level creatures or multiple weaker allies.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally VIII",
@@ -669,6 +693,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions identically to earlier versions with 8th-level creature options available.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Summon Nature's Ally IX",
@@ -691,6 +716,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Works like previous versions, enabling summoning of 9th-level creatures or multiple lower-level allies.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Ship',
@@ -728,6 +754,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'The caster manifests a ship by holding a miniature model matching the intended vessel type. The spell assembles a seaworthy ship with all necessary sailing equipment but no crew or cargo. The ship must materialize in sufficient water depth. When the spell ends or is dismissed, the ship disassembles over one minute. Duration extends by recasting. Maximum ship size depends on caster level, ranging from keelboat (7th level) through galley (17th level).',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Stampede',
@@ -752,6 +779,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "The caster conjures a herd of aurochs or similar animals that immediately stampedes in an indicated direction. The herd occupies a 20-foot-radius space and travels at 120 feet per round in a straight line. Creatures in the herd's path sustain 4d6+9 damage points per round from being trampled, though a successful Reflex save reduces this to half. If the stampede encounters obvious hazards (cliffs, fire) or solid barriers, it halts and moves in a randomly determined direction until encountering another obstacle or the spell ends.",
     source: 'Pathfinder Campaign Setting: Chronicle of the Righteous',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Swarm',
@@ -776,6 +804,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "The caster summons a swarm of their choice among three options: bats, rats, or spiders. The summoned swarm attacks all creatures within its vicinity, except the caster. If no living enemies occupy its space, the swarm attacks or pursues the nearest creature as best it can. The summoner cannot direct the swarm's targeting or movement.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Thanadaemon',
@@ -800,6 +829,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This spell functions similarly to summon monster, except it summons a single thanadaemon instead. The caster can only cast this spell in an area containing sufficient open water to accommodate the daemon's skiff, or when on the Astral or Ethereal Plane.",
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Totem Creature',
@@ -823,6 +853,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This spell allows spellcasters who revere natural forces and totem animals to summon creatures associated with their clan. The caster can only summon creatures from their specific clan's list. The spell functions identically to summon nature's ally III, with seven clan options available: Moon Clan, Axe Clan, Hawk Clan, Spire Clan, Sun Clan, Skull Clan, and Wind Clan. Each clan grants access to specific animals and elemental creatures.",
     source: 'Pathfinder Player Companion: Humans of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Vanth',
@@ -846,6 +877,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'This spell operates similarly to summon monster, except it specifically summons a single vanth psychopomp creature rather than other summoned beings.',
     source: 'Pathfinder Adventure Path #80: Empty Graves',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleport',
@@ -877,6 +909,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'The spell transports you up to 100 miles per caster level instantly. You may bring objects within your load capacity and additional willing creatures (1 Medium or smaller per three levels). Success depends on familiarity with destination, with a chart determining accuracy outcomes including on-target, off-target, similar area, and mishap results.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleport, Greater',
@@ -899,6 +932,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'Functions like teleport with no range limit and no chance of arriving off-target. Requires reliable destination description even without direct viewing. Failed attempts return caster to origin point.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleport Object',
@@ -921,6 +955,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'This spell operates similarly to teleport but transports an object rather than a creature. Non-creature entities and magical effects cannot be affected. Objects may optionally be sent to the Ethereal Plane, leaving behind a faintly magical point at the origin. A successful dispel magic spell targeting that location retrieves the object from the Ethereal Plane.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleport Structure',
@@ -944,6 +979,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This spell enables a caster to instantly relocate an unoccupied building within a settlement district they control to another unoccupied lot or series of lots in the same district. The destination area must be suitable for the building type and cannot violate settlement placement restrictions. All owners must consent to the teleportation, or the spell fails. The spell functions only on buildings occupying a number of lots equal to one-fourth of the caster's level.",
     source: 'Pathfinder Player Companion: Quests & Campaigns',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleportation Circle',
@@ -968,6 +1004,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'This spell creates a subtle floor circle that automatically teleports creatures standing upon it to a predetermined destination, functioning similarly to a greater teleport effect. The caster must designate the destination when creating the circle and cannot alter it afterward. The spell cannot function if the destination involves a solid object, an unfamiliar location, or another plane. The circle appears nearly invisible unless deliberately marked. The spell can be made permanent through the permanency spell.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Trade Items',
@@ -991,6 +1028,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This spell causes the caster's focus object and a targeted object to swap positions instantaneously. The target item appears in the caster's hand or falls to their square if they cannot hold it. The spell's difficulty increases based on similarity between objects — factors like matching type, material, weight, or being part of the same set add to the DC. Objects of higher value or bonded items are harder to swap away.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Transport via Plants',
@@ -1013,6 +1051,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This spell allows casters to enter any living plant of equal size or larger and traverse to another plant of the same kind across any distance in a single round. The destination plant must be alive; if it isn't, the spell fails and the caster is ejected from the entry plant. Casters may transport objects up to their maximum carrying capacity, plus additional willing creatures: one Medium or smaller creature per three caster levels, with size equivalencies (Large = 2 Medium; Huge = 4 Medium, etc.). All transported creatures must maintain physical contact with each other and at least one must touch the caster. The spell cannot transport creatures through plant creatures themselves. If the occupied plant is destroyed, all transported creatures and the caster are slain.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Trap the Soul',
@@ -1036,6 +1075,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This spell traps a creature's life force and body into a gem. Two casting methods exist: spell completion (standard action with Will save allowed) or trigger object (automatic entrapment without save when creature accepts inscribed object). The DC increases by 2 if the creature's name is spoken during casting, and spell resistance is ignored if the name is spoken. Powerful extraplanar creatures may be compelled to serve upon release.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tree Stride',
@@ -1058,6 +1098,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'This spell allows you to step into living trees and teleport between trees of the same species. Transport distances vary by tree type — oaks, ash, and yew trees allow 3,000 ft. range, while other varieties have shorter ranges. You can move into trees up to once per caster level, with each transport requiring a full-round action. Remaining inside a tree is possible, but you are ejected when the spell ends. If the tree is destroyed, you are killed unless you exit first.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'True Creation',
@@ -1081,6 +1122,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "This effect allows the caster to manifest a tangible, nonmagical, unattended item of any material composition. The created object's volume cannot surpass 1 cubic foot per caster level. Intricate objects demand successful Craft skill checks. The created items may function as material spell components. Material components valued at five times the item's standard gold piece cost (with a minimum expenditure of 1 gp) are required.",
     source: 'Pathfinder Chronicles Campaign Setting',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'True Resurrection',
@@ -1104,6 +1146,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'This spell resurrects creatures that have been dead up to 10 years per caster level. It functions similarly to raise dead but can restore beings whose bodies are destroyed, provided the caster identifies them unambiguously through birth or death details. The revived creature regains full hit points, health, and prepared spells from when they died, with no negative levels or Constitution loss. It works on those killed by death effects or transformed into undead and destroyed. The spell can resurrect elementals and outsiders but cannot affect constructs, undead, or those who died of old age.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unseen Crew',
@@ -1128,6 +1171,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'This conjuration creates invisible, shapeless forces functioning as sailor crew members. Each performs maritime duties such as tying off ropes, hoisting sails, swabbing decks, and other such duties. The crew members possess Strength 10 and Profession (sailor) scores based on half caster level plus relevant modifier. They cannot fight, communicate, or defend themselves, and have 20-foot base speed. Dissipation occurs if damage exceeds 1 point per caster level from area attacks.',
     source: 'Pathfinder Player Companion: Pirates of the Inner Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unseen Engineers',
@@ -1151,6 +1195,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "The caster summons an invisible team of tiny engineers to rapidly construct a mechanical trap. The engineers must remain within range or the spell terminates. Construction duration equals the trap's challenge rating in rounds. The caster uses their Craft (traps) skill with a +5 bonus to determine success. Failed construction leaves materials at the location. If the spell expires before completion, construction automatically fails. The engineers move at the caster's base speed, carry only necessary materials, cannot attack, cannot be killed, and dissipate after taking 12 damage from area effects with no saving throws.",
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unseen Servant',
@@ -1174,6 +1219,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'This spell creates an invisible magical force that performs simple domestic tasks. The servant can fetch items, open normal doors and drawers, hold objects, and perform cleaning and mending. It functions as a single-task worker with an effective Strength of 2 (20 lb. lift capacity, 100 lb. drag capacity). The creature cannot attack, fly, swim, or climb. It cannot succeed at skill checks above DC 10 or use trained-only skills. Base speed is 15 feet. The servant dissipates after taking 6 points of area damage and ceases existing if sent beyond spell range.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Urban Step',
@@ -1197,6 +1243,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'This conjuration creates a magical link between two accessible doors or portals. The caster can traverse one portal to instantly appear at the other. Both portals must be open and unobstructed when you cast the spell and enter the first portal. The spell permits transporting objects within carrying capacity but prohibits bringing other creatures along. Subsequent creatures attempting passage do not teleport. The effect concludes after the caster uses it.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vomit Swarm',
@@ -1220,6 +1267,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'The caster ejects a spider swarm that attacks nearby creatures. The swarm begins adjacent to the caster and moves independently unless no living targets exist in its area, then it moves in a chosen direction. The caster may spend a standard action concentrating to redirect the swarm; otherwise it continues forward. At 7th or higher caster level, wasps can be summoned instead. At 13th or higher caster level, army ants become available.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vomit Twin',
@@ -1242,6 +1290,7 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       "The caster produces a disgusting ooze copy of themselves in an adjacent square. When the caster takes a move action, the twin may also move. At the start of each turn, the caster can instantly swap places with their twin without triggering attacks of opportunity. The twin possesses 30 feet of movement, has AC equal to 10 plus half the caster's level, and hit points equal to the caster level. Upon reaching zero hit points, the twin is destroyed but can be recreated as a standard action if duration remains. Only one twin may exist at any given time.",
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Walk through Space',
@@ -1265,5 +1314,6 @@ export const CONJURATION_BATCH_001: Spell[] = [
     description:
       'This spell enables the caster to teleport up to 30 feet as a move action. The destination must be unoccupied and within line of sight. Alternatively, you may spend a move action to teleport from a prone position to standing. The teleportation does not trigger attacks of opportunity.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
 ];

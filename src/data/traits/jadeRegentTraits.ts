@@ -12,6 +12,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 Diplomacy (Ameiko) or Bluff (Sandru); chosen skill becomes class skill; +1 attack vs enemies threatening your best friend.',
     source: "Jade Regent Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Jade Regent',
     prerequisites: [],
@@ -47,6 +48,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
       "You recently worked as a guard for Sandru's caravan but left to pursue adventuring. Sandru seemed to understand, and even gave you some good tips on how best to survive potential challenges. You gain a +1 trait bonus on Survival checks, and Survival becomes a class skill for you.",
     shortDescription: '+1 Survival; Survival becomes a class skill.',
     source: "Jade Regent Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Jade Regent',
     prerequisites: [],
@@ -70,6 +72,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Once per day, DC 15 Cha check for +1 saves rest of day; +1 attack vs enemies threatening your crush.',
     source: "Jade Regent Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Jade Regent',
     prerequisites: [],
@@ -106,6 +109,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 to a chosen Knowledge skill (class skill); +1 attack vs enemies threatening Koya.',
     source: "Jade Regent Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Jade Regent',
     prerequisites: [],
@@ -152,6 +156,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
       "Your family maintained a longstanding friendship with the Mvashtis. Before her death, the elderly Niska Mvashti extracted a promise from you: to accompany her daughter Koya if she ever embarked on an extended journey. Though such a journey seemed unlikely, you accepted. Since making this vow you've experienced an uncanny sensation of being watched over, as if Niska herself ensures your vigilance. You gain a +1 trait bonus on Perception checks, and Perception becomes a class skill for you. You also gain a +1 trait bonus on all attack rolls against enemies threatening Koya.",
     shortDescription: '+1 Perception (class skill); +1 attack vs enemies threatening Koya.',
     source: "Jade Regent Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Jade Regent',
     prerequisites: [],
@@ -187,6 +192,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 concentration (Ameiko) or +1 AC vs AoO (Shalelu); +1 attack vs enemies threatening your hero.',
     source: "Jade Regent Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Jade Regent',
     prerequisites: [],
@@ -223,6 +229,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 hp from cure spells (Koya) or +1 Acrobatics/class skill and +1 attack vs Shalelu threats (Shalelu).',
     source: "Jade Regent Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Jade Regent',
     prerequisites: [],
@@ -245,6 +252,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
       'You were raised by Shalelu, a skilled survivalist from Sandpoint, who taught you wilderness skills and tactics. She treated you as a younger sibling and mentored you in her craft. You gain a +2 trait bonus on all Survival checks, Survival becomes a class skill for you, and you gain a +1 trait bonus on attack rolls against foes that threaten your mentor, Shalelu.',
     shortDescription: '+2 Survival (class skill); +1 attack vs enemies threatening Shalelu.',
     source: "Jade Regent Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Jade Regent',
     prerequisites: [],
@@ -280,6 +288,7 @@ export const JADE_REGENT_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Will (Ameiko), Fortitude (Sandru), or Reflex (Shalelu); +1 attack vs enemies threatening your sibling.',
     source: "Jade Regent Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Jade Regent',
     prerequisites: [],

@@ -35,6 +35,7 @@ export const gloryHeroismSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -71,6 +72,7 @@ export const gloryHonorSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -108,6 +110,7 @@ export const gloryHubrisSubdomain: DomainEntry = {
   grantedClassSkills: ['Intimidate'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -144,6 +147,7 @@ export const gloryLegendSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -182,6 +186,7 @@ export const goodAgathionSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -218,6 +223,7 @@ export const goodArchonSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -254,6 +260,7 @@ export const goodAzataSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -290,6 +297,7 @@ export const goodFriendshipSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -326,6 +334,7 @@ export const goodRedemptionSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -364,6 +373,7 @@ export const healingMedicineSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -400,6 +410,7 @@ export const healingRestorationSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -436,6 +447,7 @@ export const healingResurrectionSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -486,6 +498,7 @@ export const knowledgeAeonSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -523,6 +536,7 @@ export const knowledgeEducationSubdomain: DomainEntry = {
   grantedClassSkills: ['Knowledge (local)'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -560,6 +574,7 @@ export const knowledgeEspionageSubdomain: DomainEntry = {
   grantedClassSkills: ['Knowledge (local)'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -608,6 +623,7 @@ export const knowledgeMemorySubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -656,6 +672,7 @@ export const knowledgeThoughtSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -694,6 +711,7 @@ export const lawArchonSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -730,6 +748,7 @@ export const lawDevilSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -766,6 +785,7 @@ export const lawInevitableSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -802,6 +822,7 @@ export const lawJudgmentSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -838,6 +859,7 @@ export const lawKytonSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -875,6 +897,7 @@ export const lawLegislationSubdomain: DomainEntry = {
   grantedClassSkills: ['Knowledge (local)'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -911,6 +934,7 @@ export const lawLoyaltySubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -947,6 +971,7 @@ export const lawSlaverySubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -983,6 +1008,7 @@ export const lawTyrannySubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

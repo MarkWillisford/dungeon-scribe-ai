@@ -19,6 +19,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'Upon casting this spell, you target a living creature that has –1 or fewer hit points. That creature is automatically stabilized and does not lose any further hit points. If the creature later takes damage, it continues dying normally.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stabilize Powder',
@@ -42,6 +43,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You decrease the misfire range of a single loaded firearm by 1 + 1 per five caster levels (maximum +5, minimum misfire 0) for the ammunition currently loaded into that firearm.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stabilize Pressure',
@@ -78,6 +80,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You instantly stabilize the pressure in and around the touched creature, adjusting it to match current environmental conditions. The spell provides no assistance adapting to subsequent pressure changes.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stage Fright',
@@ -104,6 +107,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'Affected creatures that fail their saving throws are gripped with dread of failure and take a –4 penalty on ability checks, skill checks, and any checks that require concentration.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Staggering Fall',
@@ -120,6 +124,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You intensify the impact of a falling or knocked-prone creature, dealing an extra 1d6 points of damage on impact. If the target fails its Will save, it becomes staggered for the spell's duration. Each round the staggered creature may attempt a new Will save as a free action to end the condition. A creature under this spell must take a standard action to stand up.",
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stalwart Resolve',
@@ -137,6 +142,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'The recipient ignores the effects of ability damage and penalties to a single ability score of your choice. Ability damage that equals or exceeds the actual ability score still causes unconsciousness or death as normal. This spell has no effect on ability drain.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stave Off Corruption',
@@ -160,6 +166,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You grant the target a +2 circumstance bonus on saving throws against the advancement of its corruption. Multiple castings do not stack, nor do they stack with morale, profane, or sacred bonuses targeting the same corruption.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stay the Hand',
@@ -177,6 +184,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You prevent a creature from following through with a melee attack. If the target fails its Will save, the attack action is completely wasted. On a successful save, the creature may still attack but suffers a –5 penalty on its attack and damage rolls. Regardless of the save result, the target takes a –2 penalty on attack and damage rolls against the creature it originally targeted for the spell's duration.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Steal Breath',
@@ -202,6 +210,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You extract the air from a target creature's lungs. On a failed save, the creature takes 2d6 points of damage and cannot speak, use breath weapons, or do anything else requiring breathing for 1 round. A visible line of swirling air leaves the target's mouth and enters yours. The spell ends if the target moves out of range or line of effect. Creatures that don't breathe are unaffected.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Steal Voice',
@@ -218,6 +227,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You cause the target's throat to constrict, inflicting the croak spellblight condition. The target cannot cast spells with verbal components or speak coherently while under this effect.",
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Steal Years',
@@ -241,6 +251,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You drain youth from the target, aging it by 1d4 years per two caster levels (maximum 5d4) while reducing your apparent age by the same amount. Physical ability scores adjust if age category changes occur. The stolen youth does not extend actual lifespan—death occurs at the same predetermined time. When the spell ends, you become fatigued for 1d4 hours.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Steal Years, Greater',
@@ -264,6 +275,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like steal years, except it drains 1d6 years per two caster levels (maximum 10d6) and lasts 1 day per caster level.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Steam Ray Fusillade',
@@ -287,6 +299,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You gain the ability to discharge three rays of steam once per round as a standard action; when you first cast the spell you also discharge three additional rays immediately. Each ray requires a ranged touch attack and deals 4d6 points of fire damage. These rays function both underwater and above water without a caster level check.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stench of Prey',
@@ -303,6 +316,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'The target emits a scent that predators identify as that of vulnerable prey. The closest 1d4+1 predatory creatures within 30 feet must succeed on Will saves or be compelled to attack the target; predators with the scent ability are affected within 60 feet. The spell does not affect constructs, undead, or creatures with unnatural aura or animal-repelling effects.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stoke the Inner Fire',
@@ -319,6 +333,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You increase the natural heat within your body, channeling it into your weapons and armor. As a swift action, you can grant one weapon you hold the flaming weapon property for 1 round (flaming burst for creatures with the fire subtype). Additionally, creatures that strike you unarmed take 1 point of fire damage, and those grappling you take 1 point of fire damage per round (1d6 for fire subtype creatures).',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stolen Light',
@@ -343,6 +358,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You capture a visual image within a gem worth at least 500 gp, recording everything visible in a 30-foot cone from the gem (or a single detailed object). The gem becomes opaque after casting. When activated with a command word as a standard action, the stored image projects for 1 minute per caster level. The gem becomes unusable after the image is released. This spell can be made permanent via the permanency spell.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stone Discus',
@@ -368,6 +384,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You conjure one or more stone discuses that fly toward enemies. You create additional discuses at 7th and 11th caster levels. Each discus can be configured with either a blunt edge (bludgeoning) or sharp edge (slashing), dealing 4d6 damage per hit as a ranged attack. All discuses must target creatures within 30 feet of each other. At higher caster levels the discuses gain special material properties: magic and silver (5th), cold iron (10th), and adamantine (15th).',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stone Shield',
@@ -395,6 +412,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "A stone slab rises from the ground between you and a chosen opponent, granting you cover (+4 bonus to AC, +2 bonus on Reflex saves). The shield has hardness 8 and 15 hit points. If an opponent's attack misses you by 4 or fewer, it strikes the shield instead. The spell ends when the shield is destroyed. You must be adjacent to earth or stone to cast this spell.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Storm of Blades',
@@ -419,6 +437,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You create floating copies of the sword used as the material component and hurl them at a single target. You create one sword for every 2 caster levels (maximum five at 10th level). Each blade requires a separate ranged attack roll using the same threat range, critical modifier, and damage as a normal weapon of that type. The swords vanish after hitting or missing.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Storm Step',
@@ -436,6 +455,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You transform into a bolt of lightning and teleport to a location within range. Creatures and objects in your path take 1d8 electricity damage per 2 caster levels (maximum 5d8); a successful Reflex save halves this damage. If your path intersects a solid barrier, you damage it; if you break through, you continue within your range, otherwise movement stops adjacent to the barrier.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stormbolts',
@@ -460,6 +480,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'Lightning spills from your body in all directions, dealing 1d8 points of electricity damage per caster level (maximum 20d8) to all creatures in the area and stunning them for 1 round. A successful Fortitude save halves the damage and negates the stunning effect.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Straitjacket',
@@ -484,6 +505,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'A magical straitjacket materializes around a target. You make a combat maneuver check using your caster level + 5 as your bonus. On success, the target is restrained and cannot perform actions requiring hands or arms, including spellcasting with somatic or material components. After 1 round of restraint, the target gains an extra saving throw against a confused, curse, fear, or madness effect of your choice. The escape DC equals 10 + caster level + highest of your Int, Wis, or Cha modifier.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Strand of the Tangled Knot',
@@ -507,6 +529,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You impose a –10 penalty on the next single attack made against you. Additionally, if that attack would be a critical hit, it is instead treated as a normal hit.',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Strangling Hair',
@@ -523,6 +546,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'Your hair animates to grapple and constrict an opponent. The hair makes grapple checks using your caster level as base attack bonus plus your Intelligence or Charisma modifier. A successful grapple deals 1d6 damage (or your unarmed strike damage, whichever is greater) and imposes the grappled condition. The hair gains a +5 bonus on grapple checks against already-grappled opponents. Each subsequent successful check deals an additional 1d6 damage. You may designate new targets as a move action.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stricken Heart',
@@ -548,6 +572,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'Your hand becomes covered with a writhing black aura. You make a melee touch attack dealing 2d6 points of negative energy damage. The target becomes staggered for 1 round, or staggered for 1 minute if the attack is a critical hit. Creatures immune to precision damage cannot be staggered by this spell.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Strip Scales',
@@ -571,6 +596,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You temporarily weaken the natural armor of a scaly creature, reducing its racial natural armor bonus by 1 point per 3 caster levels for the spell's duration.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Strong Wings',
@@ -587,6 +613,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You enhance the flight capabilities of a creature that has wings. The target's fly speed increases by 10 feet and its maneuverability improves by one category (maximum good). This is an enhancement bonus. The spell has no effect on creatures without wings or wings that cannot fly.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stunning Finale',
@@ -604,6 +631,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You must have a bardic performance in effect to cast this spell. You end your performance with a sensory assault that stuns targeted creatures for 1 round. Those that succeed on their saving throw are staggered for 1 round instead.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sturdy Tree Fort',
@@ -627,6 +655,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You cause a large tree to rapidly grow and develop a wooden structure within it. The tree reaches heights of up to 5 feet per caster level, with trunk thickness of 1 foot per 4 caster levels. You can create wooden rooms in 10-foot cubes adjacent to the trunk. The structure grants improved cover through arrow slits and functions like a secure shelter. Designated creatures gain climbing bonuses, and the structure provides camouflage in forested environments.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Substitute Trail',
@@ -643,6 +672,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You alter the tracking evidence left by creatures you have recently encountered, making their trail appear to have been created by a familiar creature type instead. Trackers who exceed the Survival DC by an amount equal to your caster level detect magical manipulation; true seeing or similar magic reveals the trail's actual nature.",
     source: 'Pathfinder Campaign Setting: Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Suffocation',
@@ -666,6 +696,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You remove the air from a target's lungs, causing rapid asphyxiation. A successful Fortitude save leaves the target merely staggered for 1 round. On a failed save, the target falls unconscious (0 hp) the next round, drops to –1 hp the following round, and dies the round after. Each round the target may delay that round's effects with a successful Fortitude save. Only affects living creatures that breathe.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Suffocation, Mass',
@@ -689,6 +720,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions as suffocation, except it affects multiple creatures within close range and lasts for 1 round per caster level.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Accuser',
@@ -714,6 +746,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You summon a single accuser devil (zebub) from Hell, functioning similarly to summon monster spells. These hideous flying creatures resemble an infant torso with the body and wings of an enormous fly. They excel as spies and can grant visions of what they have witnessed to others.',
     source: 'Book of the Damned - Volume 1: Princes of Darkness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Ancestral Guardian',
@@ -738,6 +771,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You summon two transparent dwarf ancestor spirits armed with traditional dwarven weapons. They function similarly to spiritual weapons but can target different enemies and deal physical damage instead of force damage. The spirits cannot be permanently harmed and operate like summon monster creatures.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Cacodaemon',
@@ -762,6 +796,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions identically to a summon monster spell of the appropriate level, except it always summons a single cacodaemon.',
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Cacodaemon, Greater',
@@ -786,6 +821,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like summon cacodaemon, except it summons 1d4+1 cacodaemons instead of a single one.',
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Ceustodaemon',
@@ -810,6 +846,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions identically to a summon monster spell of the appropriate level, except it always summons a single ceustodaemon.',
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Derghodaemon',
@@ -834,6 +871,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions identically to a summon monster spell of the appropriate level, except it always summons a single derghodaemon.',
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Elder Worm',
@@ -851,6 +889,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "This spell functions like summon nature's ally VIII, but instead you conjure a purple worm with the giant creature simple template.",
     source: 'Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Erodaemon',
@@ -875,6 +914,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions identically to a summon monster spell of the appropriate level, except it always summons a single erodaemon.',
     source: 'Book of the Damned - Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Flight of Eagles',
@@ -908,6 +948,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You summon 1d4+1 giant eagles that can engage in combat or function as mounts at your discretion. The summoned creatures remain under your control for the duration of the spell.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Froghemoth',
@@ -925,6 +966,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "This spell functions identically to summon nature's ally IX, except the caster summons a froghemoth instead of other typical nature allies.",
     source: 'Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Genie, Lesser',
@@ -949,6 +991,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like summon monster I, but summons one janni instead of other creatures.',
     source: 'Pathfinder Player Companion: People of the Sands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Genie',
@@ -973,6 +1016,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like summon genie, lesser, but summons one djinni or 1d3 jann.',
     source: 'Pathfinder Player Companion: People of the Sands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summon Genie, Greater',
@@ -997,6 +1041,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like summon genie, lesser, but summons one shaitan, 1d3 djinni, or 1d4+1 jann.',
     source: 'Pathfinder Player Companion: People of the Sands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summoner Conduit',
@@ -1020,6 +1065,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You create a mystical link between a summoned creature and its summoner. When the targeted creature takes spell damage, the summoner is also considered a target of that spell and may use its normal defenses including saving throws and spell resistance. The effect does not apply if the summoner is on a different plane.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sun Metal',
@@ -1036,6 +1082,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'The target weapon ignites with harmless flames. When the wielder successfully strikes with the weapon, it deals an additional 1d4 points of fire damage. This extra damage does not multiply on critical hits. The spell is incompatible with the flaming weapon property, other fire-damage effects, and frost or cold-damage weapon abilities. Immersion in water terminates the effect immediately.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Sun's Disdain",
@@ -1068,6 +1115,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You curse the target to be hostile to sunlight. The creature gains light blindness and is blinded for 1 round when exposed to bright light such as sunlight or the daylight spell. While in bright light, the creature is dazzled. The target also takes increased damage from sunlight-based spells such as searing light, sunbeam, and sunburst.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Sun's Disdain, Mass",
@@ -1091,6 +1139,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "This spell functions like sun's disdain, except it affects one creature per caster level within range.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sunder Breaker',
@@ -1107,6 +1156,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You place an invisible protective ward on the target. When a creature successfully performs a sunder combat maneuver against the target, the attacker's weapon sustains 1d6 points of damage per caster level (maximum 10d6). If a natural weapon was used, the attacker takes half damage. The attacker may attempt a Fortitude save to halve the damage. Spell resistance applies to this damage.",
     source: 'Pathfinder Player Companion: Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sundered Serpent Coil',
@@ -1132,6 +1182,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'A Large decapitated serpent emerges from the ground to grapple a designated creature within 5 feet. As a standard action, you may command the snake to release its grappled target and direct it to attack a different creature. This spell functions similarly to black tentacles but with a single animated snake.',
     source: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sundering Shards',
@@ -1148,6 +1199,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'When the wielder successfully performs a sunder combat maneuver destroying an object, the destroyed item shatters into jagged shards dealing 1d6 points of piercing and slashing damage to whoever possessed it. Adjacent creatures must succeed at a Reflex save or take the same damage from flying fragments. Shards inherit special material properties from the original item. The spell ends once this shattering effect activates.',
     source: 'Pathfinder Player Companion: Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sunstalker',
@@ -1165,6 +1217,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'The touched creature becomes invisible while standing in direct sunlight or bright magical light from spells like daylight. If an action breaks invisibility but the spell remains active, the creature can reactivate invisibility as a standard action while in sunlight. In normal (non-bright) light, the creature gains concealment (20% miss chance) instead.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Suppressing Stone',
@@ -1188,6 +1241,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You enchant an orbiting ioun stone, gaining a +1 resistance bonus on saving throws against mind-affecting effects per 4 caster levels (maximum +5). When you fail a mind-affecting saving throw, you may sacrifice the ioun stone (permanently converting it to a dull gray stone) to suppress that effect for 1 round per 2,500 gp of the stone's original value (minimum 1 round). The suppression doesn't pause the effect's duration.",
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Surefoot Boots',
@@ -1211,6 +1265,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You enchant your footwear to improve balance on difficult terrain. While this spell is in effect, you treat any Acrobatics skill check to balance as though you had rolled a 20.',
     source: "Pathfinder Player Companion: Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Surface Excursion',
@@ -1245,6 +1300,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You transport yourself and touched allies to the nearest sky-facing surface directly above your current location. Magical beacons visible only to you and targeted creatures appear at both origin and destination, allowing return teleportation. If the departure area becomes blocked by solid matter when you return, travelers take 1d6 damage and relocate to nearby open space within 100 feet.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Surmount Affliction',
@@ -1261,6 +1317,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You temporarily suppress a single harmful condition affecting you. Choose one of the following: blinded, confused, dazed, dazzled, deafened, fatigued, frightened, paralyzed, shaken, or sickened. The spell does not end the effect causing the condition; it merely suspends the condition for its duration. When the spell ends, the condition resumes if its source persists.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Suspend Drowning',
@@ -1278,6 +1335,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You halt the drowning process for affected creatures. Targets immediately stop drowning and cannot suffocate for the spell's duration. Any target at fewer than 1 hit point from drowning returns to 1 hit point. Targets can breathe, drink, and communicate normally during the spell but cannot draw additional air. When the effect ends, drowning resumes unless the creature reaches an environment where it can breathe naturally.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Swallow Your Fear',
@@ -1294,6 +1352,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "Subjects currently experiencing fear gain a +2 morale bonus to Strength and Constitution, a +1 morale bonus on Will saves, and a –2 penalty to AC. Frightened targets remain stationary and become confused (treating self-harm results as inaction). Panicked targets also remain in place with confusion lasting the spell's duration.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Swarm of Fangs',
@@ -1319,6 +1378,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You create a swarm of thousands of flying, animated fangs that attack all creatures in their space. You can move the swarm up to 40 feet per round as a move action. If undirected, the swarm automatically moves toward the nearest creature. All creatures in the swarm's area take 2d6 points of damage when it appears and again at the end of each round's movement.",
     source: 'Pathfinder Campaign Setting: Occult Mysteries',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Swarm Skin',
@@ -1342,6 +1402,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You convert all of your soft tissue into swarms of insects or other creatures and send them to do your bidding, leaving your skeleton and equipment behind. You retain consciousness through the swarms and control their actions. You have a caster-level point budget to create swarms of various types (spider, rat, crab, wasp, centipede, leech, or army ant). Swarms persist until destroyed or recalled to reform your body.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sweat Poison',
@@ -1358,6 +1419,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "Glands along your neck, back, or wrists swell and exude a viscous injury poison (Fortitude DC 14; frequency 1/round for 4 rounds; effect 1d2 Str damage; cure 1 save). You can apply the poison to weapons as a move action, with each application reducing the spell's duration by 1 minute. Note: you are not immune and risk self-poisoning without the poison use class feature.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Swift Girding',
@@ -1381,6 +1443,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You select a number of targets and the same number of suits of armor, immediately clothing each willing, unarmored target in their matched suit. The armor must be empty and properly sized for the target. Creatures armored by this spell are considered to have donned the armor properly.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Swipe',
@@ -1398,6 +1461,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You magically seize a held object from another creature's grasp. Make a combat maneuver check with a bonus equal to your caster level plus the highest of your Intelligence, Wisdom, or Charisma modifier. On success, the item teleports to one of your free hands or to your feet. On failure, the target retains the item.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sword to Snake',
@@ -1421,6 +1485,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You cause an item to partially transform into a venomous animal. When a creature manipulates the affected item, it animates and delivers a bite attack before the triggering action. The attack bonus equals your caster level plus spellcasting modifier; non-magical weapons deal 1d4 piercing damage. Bite victims suffer poison effects identical to a venomous snake (1/round for 6 rounds, 1d2 Constitution damage, 1 save to cure).',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sylvan Hideaway',
@@ -1445,6 +1510,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You create an extradimensional underground chamber accessible through a camouflaged, lockable 5-foot-square trap door (hardness 10, 20 hp per caster level). The chamber accommodates two creatures per caster level (maximum 12 levels). When the spell expires, all contents are expelled to the nearest available surface space.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Debauchery',
@@ -1470,6 +1536,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like symbol of death but triggers lustful compulsion instead. When triggered, all creatures within 60 feet that fail their Will save are compelled to rush to the nearest creature to caress and kiss it, taking no other actions. The effect persists for 1 round per caster level even if targets move away from the symbol.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Dispelling',
@@ -1494,6 +1561,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like symbol of death except it grants no saving throws and is not subject to spell resistance. When triggered, all creatures within 40 feet of the symbol experience the effects of a greater dispel magic area dispel. The dispel check result is determined at casting time.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Distraction',
@@ -1528,6 +1596,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "This spell functions like symbol of death but produces fascination rather than death. Creatures within the symbol's radius become fascinated by the symbol for 10 minutes per caster level. The spell has no hit point activation limit. Affected creatures attempt to stay within the symbol's area; the effect ends if their view is completely blocked.",
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Exsanguination',
@@ -1560,6 +1629,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like symbol of death except creatures failing saves experience uncontrolled bleeding from facial orifices, taking 1d6 bleed damage immediately and becoming sickened while bleeding. A DC 15 Heal check or magical healing ends bleeding temporarily, but it resumes each round while the creature remains within 60 feet of the symbol. This spell affects creatures regardless of current hit points.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Healing',
@@ -1585,6 +1655,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like symbol of death but heals instead. When triggered, living creatures within 60 feet receive healing equal to 2d8 + 1 point per caster level (maximum +15). Undead and creatures harmed by positive energy take equivalent damage, with a Will save for half. The symbol functions only once per creature per 24 hours.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Laughter',
@@ -1610,6 +1681,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like symbol of death but produces uncontrollable laughter (as hideous laughter) for 1 round per caster level instead of death. There is no hit point limit for activation and it remains active for 1 minute per caster level. It can be made permanent via permanency (10th-level caster, 5,000 gp).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Slowing',
@@ -1634,6 +1706,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like symbol of death except affected creatures are slowed (as the slow spell) for 1 round per caster level instead of killed. It can be made permanent via permanency (11th-level caster, 10,000 gp).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Storms',
@@ -1667,6 +1740,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like symbol of death but creates a storm instead. When triggered, the 30-foot radius centered on the symbol fills with powerful winds (75 mph). Each round, electricity bolts randomly strike creatures within range for 10d6 points of damage (Reflex save for half). This spell has no hit point activation limit.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Striking',
@@ -1693,6 +1767,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell creates a magical sigil that, when triggered, produces a shadowy construct threatening its area as if it were a Medium creature wielding a magic version of the weapon used as the material component. The shadow attacks using your caster level plus the relevant ability modifier. Creatures may attempt saves for half damage.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Vulnerability',
@@ -1717,6 +1792,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like symbol of death but weakens magical protections instead. Creatures within range suffer a –4 penalty to spell resistance and saving throws, with energy resistances and damage reduction each reduced by 10 (minimum 0). Effects persist within 60 feet of the symbol plus 1 round per caster level after leaving the area. Can be made permanent via permanency (18th-level caster, 25,000 gp).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sympathetic Vibration',
@@ -1740,6 +1816,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'By attuning yourself to a structure, you create a damaging vibration within it. The effect deals 2d10 points of damage per round to the target structure, ignoring hardness. The spell only functions on freestanding structures—surrounding stone disperses the vibration otherwise. It cannot target creatures or constructs.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sympathetic Wounds',
@@ -1763,6 +1840,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell works similarly to shield other but reverses the damage transfer direction. Some of the damage you take transfers to the targeted creature instead. You must have at least as many Hit Dice as the target creature or the spell fails. Only one instance of this spell can affect a target creature at any given time.',
     source: 'Pathfinder Chronicles: Gods and Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Synapse Overload',
@@ -1779,6 +1857,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "Your touch causes the target's mind to unleash a vast overflowing torrent of information, causing its synapses to violently trigger. The target takes 1d6 points of electricity damage per caster level (maximum 15d6) and is staggered for 1 minute. A successful Fortitude save does not reduce damage but negates the staggered condition.",
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Synaptic Pulse',
@@ -1797,6 +1876,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You emit a pulsating mental blast that stuns all creatures within 30 feet for 1 round.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Synaptic Pulse, Greater',
@@ -1815,6 +1895,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'You emit an enhanced mental blast that stuns all creatures within 30 feet for 1d4 rounds. Creatures that succeed on their Will save become sickened for 1 round instead.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Synaptic Scramble',
@@ -1832,6 +1913,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You disrupt a target's mental faculties in two ways. First, the creature loses the ability to communicate coherently: it cannot speak, attempt deceptive messages, write, or use telepathy, though it can still vocalize for non-communicative purposes such as spell components. Second, when attempting move or standard actions, the result is determined randomly: 20% movement, 20% other move action, 20% attack, 20% other standard action, 20% intended action.",
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Synesthesia',
@@ -1849,6 +1931,7 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       "You cause the target's sensory input to be processed by the wrong senses (noise triggers colors, smells create sounds, etc.). The target moves at half speed, has a 20% miss chance on attacks, takes a –4 penalty to AC, –4 to skill checks and Reflex saves, and must make concentration checks to cast spells (DC = spell's save DC + spell level). Concealment-negating effects do not reduce the miss chance.",
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Synesthesia, Mass',
@@ -1866,5 +1949,6 @@ export const GAP_SPELLS_S3: Spell[] = [
     description:
       'This spell functions like synesthesia, except it affects multiple creatures within 30 feet of each other at medium range.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 ];

@@ -15,6 +15,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       "+2 (or +4 with 10+ ranks) on Handle Animal; non-hostile animals won't attack you unprovoked",
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -41,6 +42,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 Bluff to mislead with true statements; truth-detection only catches outright lies',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -72,6 +74,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 on initiative, Perception, Stealth, and Survival in favored terrains; leave no trail',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'favored terrain' }],
     effects: [
@@ -119,6 +122,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
       'You can speak with animals as if using the speak with animals spell. This ability works with all animals as defined by the animal type, not just a particular species. You do not need to use the same language the animal would naturally use — the communication is instinctual.',
     shortDescription: 'Speak with all animals as the speak with animals spell at will',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -137,6 +141,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once/day: apply favored enemy bonus to any creature, or double it vs. actual favored enemy',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'favored enemy' }],
     effects: [],
@@ -152,6 +157,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 Disguise to blend into natural environments; +4 Bluff to feint vs. animals and magical beasts',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'disguise', ranks: 1 },
@@ -195,6 +201,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Perfectly recall maps and visual layouts; +4 Knowledge (geography); never lost on known paths',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'INT', minimum: 13 }],
     effects: [
@@ -218,6 +225,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Treat all planes as favored terrain; adapt to planar environments in 24 hours',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'favored terrain' },
@@ -236,6 +244,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once/day: enemies within 30 ft make Will save or become shaken for 1d4 rounds',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -254,6 +263,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once/day: when healing with lay on hands or healing spell, also remove one debilitating condition',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -275,6 +285,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Critical hits with natural weapons: target must save or become staggered for 1 round',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 8 },
@@ -293,6 +304,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       "+2 Perception and saves vs. environmental hazards in chosen animal's habitat; low-light vision",
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -324,6 +336,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Wild shape transformations are subtle; observers need Perception check (DC 10 + druid level) to notice',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'wild shape' }],
     effects: [],
@@ -339,6 +352,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       "+2 to favored terrain bonus in chosen terrain; move at normal speed through that terrain's natural difficult terrain",
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'favored terrain' },
@@ -357,6 +371,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain secondary natural attacks from three totem animals; use wild empathy with magical beasts',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -376,6 +391,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Convey simple concepts to animals; +4 wild empathy with terrain-matched animals',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'wild empathy' },
@@ -407,6 +423,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+10 Disguise to hide identity in alternate form; magical ID requires CL check to pierce',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'wild shape' },
@@ -443,6 +460,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'No Bluff penalty for wild or dangerous lies; lie as a free action once per round',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'bluff', ranks: 5 }],
     effects: [],
@@ -458,6 +476,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Find illegal goods as if settlement is one size larger; +4 Diplomacy to gather urban information',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'diplomacy', ranks: 3 },
@@ -489,6 +508,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Bluff/Diplomacy when unarmed; add half level on Disguise to appear as a commoner',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'bab', minimum: 1 },
@@ -524,6 +544,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ignore crowd/light urban difficult terrain; +4 Acrobatics to move through occupied squares',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -555,6 +576,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+5 Bluff to appear inattentive while observing; can lip-read targets within 30 ft',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'perception', ranks: 3 },
@@ -586,6 +608,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'On critical hit: impose –2 attacks, –10 ft speed, or –2 Perception for 1 minute',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 6 }],
     effects: [],
@@ -601,6 +624,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       "Standard action: Bluff vs. Sense Motive in 30 ft — failures can't make AoOs or immediate actions until your next turn",
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'bluff', ranks: 5 }],
     effects: [],
@@ -616,6 +640,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use Perception instead of Appraise for alchemical items; +4 Appraise on alchemical components',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'perception', ranks: 3 },
@@ -647,6 +672,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'After improving attitude by 2+ steps, free Bluff check to implant a false suggestion',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -666,6 +692,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Bluff to pose as an acquaintance; only –5 (not –10) when disguised as a specific person',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 3 },
@@ -697,6 +724,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain 1 panache/day; spend it when casting to make spell identification harder (+2 Spellcraft DC)',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -715,6 +743,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'In any hamlet+ settlement, 1 hour of searching finds an NPC willing to give minor assistance',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -733,6 +762,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       "+2 Linguistics to decipher codes; mimic accents of known languages (DC 15); recognize thieves' cant",
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'linguistics', ranks: 3 }],
     effects: [
@@ -757,6 +787,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1/endangered ally (max +4) on attacks, skills, or saves in high-stakes situations',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'CHA', minimum: 13 }],
     effects: [],
@@ -771,6 +802,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
       "You can disguise your spellcasting to look like ordinary gestures or mundane activity. When you cast a spell, you can make a Bluff check to disguise the casting. The DC of the Bluff check equals the observer's Spellcraft check result. You take a –2 penalty on your concentration check when doing so.",
     shortDescription: 'Bluff vs. Spellcraft to disguise spellcasting; –2 concentration penalty',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 3 },
@@ -789,6 +821,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 Bluff to create diversions for Stealth; hostile creatures deprioritize you as a target',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -819,6 +852,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
       'You know how to navigate markets and negotiate prices. When in an urban settlement, you can buy items for 10% less than the listed price and sell items for 10% more than the default price. You gain a +4 bonus on Appraise checks in urban settings, and you always know the approximate going rate for common goods and services.',
     shortDescription: 'Buy for 10% less, sell for 10% more; +4 Appraise in urban settings',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'appraise', ranks: 3 },
@@ -846,6 +880,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use Perception or Survival (whichever is higher) to track; +2 Survival to track in urban areas',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'perception', ranks: 3 },
@@ -877,6 +912,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Don/remove disguise in 1/4 normal time; create disguise in 2d4 minutes; partial disguise as standard action',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'disguise', ranks: 3 }],
     effects: [],
@@ -892,6 +928,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Chosen combat maneuver: witnesses must save or be shaken 1 round on your success',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 5 },
@@ -910,6 +947,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 CMD vs. bull rush/drag/overrun/reposition; +6 on solid stone or packed earth',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -941,6 +979,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Unarmed and improvised weapons crit on 19–20; previously unseen enemies are flat-footed to your first attack',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -960,6 +999,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Urban terrain counts as normal terrain; +2 Acrobatics in cities; take 10 on Acrobatics in combat to avoid AoOs',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'DEX', minimum: 13 }],
     effects: [
@@ -984,6 +1024,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 Diplomacy/Knowledge (local) with criminal organizations; weekly minor favor from underworld contacts',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'diplomacy', ranks: 5 },
@@ -1027,6 +1068,7 @@ export const HEROES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Both +1 attack and saves when adjacent to a Linked Resonance ally; +2 if same class/archetype',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general', 'teamwork'],
     prerequisites: [{ type: 'bab', minimum: 3 }],
     effects: [

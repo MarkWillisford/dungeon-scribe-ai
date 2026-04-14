@@ -30,6 +30,7 @@ export const GAP_SPELLS_N_2: Spell[] = [
     description:
       'You deplete the necromantic vitality animating an undead creature, inducing lethargy. Dark wisps of energy emanate from the target and it becomes staggered for the duration. If the target already has the staggered condition (as zombies do), it is dazed for 1 round instead.',
     source: 'Pathfinder Roleplaying Game Bestiary 4',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Negative Reaction',
@@ -58,6 +59,7 @@ export const GAP_SPELLS_N_2: Spell[] = [
     description:
       "The target's actions and words fail to impress. The target takes a –10 penalty on all Bluff, Diplomacy, and Intimidate checks as well as any performance combat checks it attempts.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Nereid's Grace",
@@ -79,6 +81,7 @@ export const GAP_SPELLS_N_2: Spell[] = [
     description:
       'When unarmored, you gain a deflection bonus to your AC and CMD equal to your Charisma bonus (maximum +3). This maximum increases by 1 for every 6 character levels, reaching a maximum of +6 at 18th level.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Neutral Buoyancy',
@@ -112,6 +115,7 @@ export const GAP_SPELLS_N_2: Spell[] = [
     description:
       'The target can maintain neutral buoyancy in water without effort, neither sinking nor rising. The creature can swim vertically with equal ease and maintain position while performing complex tasks or while incapacitated.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Neutralize Poison',
@@ -145,6 +149,7 @@ export const GAP_SPELLS_N_2: Spell[] = [
     description:
       "You detoxify any sort of venom in the creature or object touched. The caster makes a caster level check (1d20 + caster level) against each poison's DC; on a success the poison is neutralized and temporary effects end, though instantaneous damage such as hit point loss or ability damage is not reversed. Alternatively, the spell can suppress poison in a creature or object for 10 minutes per level (Will negates). A poisonous creature or object touched becomes temporarily nonpoisonous for the duration.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Night Blindness',
@@ -178,6 +183,7 @@ export const GAP_SPELLS_N_2: Spell[] = [
     description:
       "The target's vision is impaired as though the light level were one step lower: bright light appears as normal, normal as dim, and dim as darkness. Darkvision, low-light vision, and see in darkness provide no benefit. As a side effect the subject gains a +4 bonus on saving throws against blindness or dazzling from bright light. Remove blindness/deafness dispels this curse.",
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Night of Blades',
@@ -206,6 +212,7 @@ export const GAP_SPELLS_N_2: Spell[] = [
     description:
       'You create an immobile wall of tiny, whirling black blades in an area you designate. Any creature passing through or entering a space occupied by the wall takes 1d4 points of damage per caster level (maximum 10d4). A successful Reflex save halves this damage. The wall cannot be created in a space occupied by a Small or larger creature.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Nixie's Lure",
@@ -237,6 +244,7 @@ export const GAP_SPELLS_N_2: Spell[] = [
     description:
       "You emit an unearthly and infectious song that affects up to 24 Hit Dice of creatures. Affected targets move toward you by the most direct route possible. Creatures forced to enter dangerous terrain receive a second saving throw. Victims who come within 5 feet of you become fascinated and can take no actions other than defending themselves for the spell's duration.",
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Numerological Evocation',
@@ -258,5 +266,6 @@ export const GAP_SPELLS_N_2: Spell[] = [
     description:
       'Drawing on the Path of Numbers, you roll 1d6 per 2 caster levels and allocate each die exactly once among: damage type (determined by a 1–8 table mapping to energy types and force), number of primary targets, range (10 ft. × sum of allocated dice), and remaining dice summed for base damage. Primary targets make Reflex saves for half damage; secondary targets take 50% of primary damage (rounded up) and negate it on a successful save.',
     source: 'Pathfinder Player Companion: People of the Stars',
+    verificationStatus: 'needs_review' as const,
   },
 ];

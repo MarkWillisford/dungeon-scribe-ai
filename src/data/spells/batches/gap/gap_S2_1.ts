@@ -17,6 +17,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Creates magical masterwork restraints (manacles or fetters) that manifest on touch. The caster can deliver them via touch attack with a subsequent Reflex save to bind the target, or cast during a full-round action to potentially bind two creatures together. Enhanced options unlock at higher caster levels, including mithral variants and optional dimensional anchor effects.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Anchor',
@@ -33,6 +34,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Binds the target's shadow to its current location, restricting movement. The target moves freely within 5 feet but must make bull rush checks to move farther, with penalties increasing by distance. The spell ends if the target teleports or leaves the plane.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Barbs',
@@ -50,6 +52,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Conjures a shadowy spiked chain functioning as a +2 vicious spiked chain, with enhancement bonuses increasing at higher caster levels. The chain radiates darkness in a 10-foot radius, reducing illumination by one step. Upon spell conclusion the caster may attempt a Will save to negate damage from the weapon\'s vicious quality.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Bomb Admixture',
@@ -65,6 +68,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Modifies the caster\'s bombs so that when one hits a direct target, a shadowy substance covers the direct target and up to three creatures damaged by splash. Affected creatures must succeed at a Fortitude save or gain concealment while also treating all other creatures as having concealment.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Claws',
@@ -81,6 +85,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a pair of shadowy claws over the caster\'s hands made of semi-real material. The claws deal 1d4 damage (1d3 if Small) plus 1 point of Strength ability damage with each attack. A successful Fortitude save prevents the ability score reduction.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Dragon Aspect',
@@ -97,6 +102,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Grants the caster a quasi-real dragon form with two claw attacks (1d6 plus caster level) and one bite (1d8 plus caster level), plus shadowy wings for flight at base speed. These shadow weapons deal half damage initially, but creatures who believe in their reality suffer full damage. A Will save after the first strike grants half damage for the remainder of the spell.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Endurance',
@@ -113,6 +119,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Conjures shadow wisps that trigger when the caster drops below 0 HP or becomes unconscious, immediately stabilizing the caster and transporting them to the Shadow Plane while a shadow duplicate appears in their place. The duplicate has 25% of the caster\'s hit points, deals reduced damage, and operates at 1/4 caster level, lasting until the second duration expires or the duplicate is destroyed.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Invasion',
@@ -129,6 +136,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Opens a rift to the Plane of Shadow, reducing light levels and enhancing shadow subschool spells by 20% (maximum 90% effect). When dismissed as a standard action, there is a cumulative 5% chance per round the spell remained active to summon an evangelist or interlocutor kyton, which remains for rounds equal to the spell\'s remaining duration.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Jaunt',
@@ -145,6 +153,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Teleports the caster between shadows to a destination within range without requiring line of sight. Upon arrival, a shadowy duplicate remains at the origin and the caster may make an immediate Stealth check. For one round following teleportation, the caster gains 20% concealment from enveloping shadows.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow of Doubt',
@@ -161,6 +170,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Generates a shadowy aura rooted in a target's inner weaknesses, dimming illumination and forcing Will saves each turn or becoming staggered. Good-aligned targets take a -4 penalty on saving throws against this effect while evil-aligned targets gain a +4 bonus instead.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Projection',
@@ -176,6 +186,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: "Allows the caster to transfer their consciousness into their shadow, which becomes an independent undead creature. The physical body lies comatose during projection, while the shadow gains darkvision, flight, and melee attacks but retains the caster's hit points and Hit Dice. If the shadow is destroyed, the caster returns to their body at -1 HP.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Transmutation',
@@ -192,6 +203,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Suffuses a target with energy from the Shadow Plane, altering its form to match a Shadow Plane creature by replicating transmutation effects including polymorph, enlarge person, and reduce person. Creatures interacting with the target may make Will saves to disbelieve, reducing damage from natural attacks to 20% and limiting special abilities to 20% success against skeptics.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Trap',
@@ -207,6 +219,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Immobilizes a target by anchoring their shadow to the ground, rendering them entangled and unable to move more than 5 feet from their starting position. Flying creatures can only hover or descend. The spell fails on creatures without shadows and terminates if the target enters complete darkness.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadowbard',
@@ -224,6 +237,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: "Conjures a quasi-real phantom singer appearing as a shadowy duplicate that automatically follows the caster. The singer cannot be damaged but can be dispelled, and performs bardic performances chosen by the caster. Rounds spent do not count against the caster's own bardic performance pool.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadowfade',
@@ -239,6 +253,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Grants the target invisibility to darkvision users in darkness and concealment in dim light. The effect provides no benefit in normal or bright light and automatically ends if the target takes hostile action or enters bright illumination.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadowform',
@@ -255,6 +270,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Transforms the target's body into mystic shadow material from the Shadow Plane, making the physical form quasi-real. Attackers must succeed at a Will save to affect the target normally; those who fail deal only one-fifth damage and reduce special effects to 20% potency. Objects automatically succeed at saving throws against this spell.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadowmind',
@@ -270,6 +286,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Dims targets' perceptions of light and shadow, making them perceive their surroundings as one light level darker than reality. Low-light vision and darkvision don't penetrate the effect since it is an illusion rather than actual darkness. Even creatures unaffected by magical darkness experience vision loss.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadowy Haven',
@@ -284,6 +301,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Creates an extradimensional refuge similar to rope trick, accessed through a 5-foot floor section that borders the Shadow Plane. The hidden space shelters up to 10 creatures of any size and blocks divination magic. Entrance requires dim lighting; the portal closes in brighter or darker environments, potentially trapping occupants.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shamefully Overdressed',
@@ -300,6 +318,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Compels the target to perceive their clothing as unfashionable and embarrassing, forcing a move action each round to remove worn items from random equipment slots. The target becomes sickened (1d3 rounds) if forced to touch discarded items. The character can take whatever other actions it chooses.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Shapechanger's Gift",
@@ -315,6 +334,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Grants a willing target the ability to assume an animal, humanoid, or monstrous humanoid form. The target retains its original ability scores and natural armor while gaining physical features of the chosen form, which cannot possess a fly speed. The recipient can shift between natural form and the selected shape as a standard action.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Shaper's Touch",
@@ -329,6 +349,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: "Creates an alchemical residue allowing the caster to reshape any non-magical, unattended object with hardness 19 or lower. Soft objects (hardness 9 or less) allow reshaping 1 cubic foot per round; harder materials permit 1/4 cubic foot per round. The reshaped object reverts to its original form after 24 hours.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Share Language',
@@ -343,6 +364,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Grants a touched creature the ability to comprehend and communicate in one language the caster knows, with additional languages possible at higher caster levels (up to 5 at 20th level). The recipient gains only linguistic knowledge. The spell does not affect the target\'s disposition toward others.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Share Skin',
@@ -357,6 +379,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: "Allows the caster to inhabit an animal's body similarly to magic jar. The body vanishes while the effect lasts and the caster does not require a receptacle. A greater version (Witch 8) targets any creature rather than just animals.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shared Sacrifice',
@@ -372,6 +395,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates a damage-sharing link between the caster and a target; the caster takes only half damage from hit point damage, with the remainder transferred to the target. Non-hit-point harm such as charm effects, ability damage, level drain, and death effects cannot be shared through the link. The spell ends if caster and target move out of range.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shared Suffering',
@@ -387,6 +411,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster infuses a dagger with dark energy and stabs themselves, taking 1d6 damage plus 1d6 per 2 caster levels beyond 1st (maximum 5d6 at 9th). The target receives equivalent damage plus a bonus based on the caster\'s primary ability modifier. This bypasses protective magic like shield other.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shared Training',
@@ -402,6 +427,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: "Grants a selected teamwork feat to nearby allies who need not meet the feat's prerequisites. At higher caster levels (9th, 13th, 17th), the caster can share two, three, or four teamwork feats respectively.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shared Wrath',
@@ -418,6 +444,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Grants multiple willing subjects the same bonuses that the wrath spell provides, but all recipients focus their benefits when attacking a single designated foe selected by the caster. Functions identically to wrath except it affects multiple targets with unified focus.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sharesister',
@@ -432,6 +459,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Allows the caster to share magical benefits with an ally of the same gender by accepting negative levels to grant the target an insight bonus to caster level and spell save DCs. At higher caster levels (11th and 17th), additional negative levels can be taken to increase the bonus.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shatter',
@@ -447,6 +475,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Produces a loud resonance that shatters brittle objects or damages crystalline creatures in a 5-foot spread. Can target a single solid object (up to 10 pounds per caster level) or inflict 1d6 sonic damage per caster level (max 10d6) to crystalline creatures with a Fortitude save for half.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sheet Lightning',
@@ -463,6 +492,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Produces a brilliant electrical discharge dealing 1 point of electricity damage to all creatures in a 20-foot radius, primarily dazing living creatures for 1 round on a failed save or dazzling them on a success. Metallic armor wearers suffer a -2 penalty to their save attempts.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield Companion',
@@ -477,6 +507,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Mirrors the effects of shield other but exclusively targets the caster's animal companion or familiar. Permits spellcasters who gain these companions through alternative class features, archetypes, or prestige classes to prepare and cast this spell as a 1st-level option.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Darkness',
@@ -492,6 +523,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Surrounds the caster with magical darkness, achieving total concealment while maintaining their own vision. Opponents know which squares the caster occupies, preventing Stealth attempts unless all adjacent squares also contain darkness. Creatures with darkvision are unaffected.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Dawn',
@@ -507,6 +539,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Manifests a disk of sunlight on one arm that damages melee attackers with 1d6 fire damage plus 1 per caster level (max +15). The shield provides illumination as if it were a continual flame spell and does not stack with similar auras like fire shield.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Fortification',
@@ -521,6 +554,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Creates a magical barrier that protects a target's vital areas, providing a 25% chance to negate critical hits or sneak attacks and convert them to normal damage. The effect does not stack with similar fortification abilities.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Shards',
@@ -535,6 +569,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Transforms a wielded shield into orbiting shards (2 plus 1 per 2 caster levels, max 12) that can be directed to attack adjacent foes as a move action. The shards deal slashing and piercing damage and are treated as magic weapons; they reform into the original shield when the spell ends.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Wings',
@@ -550,6 +585,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Manifests five flaming wings providing a fly speed of 50 feet with average maneuverability. Each time the caster sustains fire damage, one wing disappears and grants fire resistance 30 for the remainder of that round. When reduced to a single wing, maneuverability becomes poor; losing the final wing grants complete fire immunity for an additional minute.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield Speech',
@@ -564,6 +600,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Allows secure communication between the caster and one target within range, with divination unable to spy on the protected exchange. The spell protects only spoken communication; written words and sign language remain unshielded.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield the Banner',
@@ -578,6 +615,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Safeguards a tribal standard or banner so that non-tribal members attempting to attack or touch it must succeed at a Will save or be prevented, functioning similarly to sanctuary for standards. Also increases the banner\'s hardness by 2 and adds 10 hit points for the duration.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shifted Steps',
@@ -594,6 +632,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: "Makes a target's sounds appear to emanate from a different location within range, which the caster can manipulate while concentrating. The spell deceives creatures relying on sound-based senses but cannot fool other detection methods like normal vision or tremorsense.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shifting Shadows',
@@ -610,6 +649,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Creates shifting shadows that obscure creature appearances within the area, allowing any creature to treat another in the area as an allied threatening creature for flanking purposes. When one creature provokes an attack of opportunity, allies must succeed at a Reflex save or lose an available opportunity attack that round.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shining Cord',
@@ -625,6 +665,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates a magical silver connection between the caster and a target via ranged touch attack, granting the caster enhanced perception and spell identification abilities, plus a dodge bonus to AC. If either party moves beyond 30 feet, the cord releases a force blast potentially stunning the one who moved away.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shining Scales',
@@ -640,6 +681,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: "Envelops the caster in silvery radiance manifesting as scales, providing a +5 armor bonus to AC and enabling natural attacks to overcome damage reduction as though good and silver weapons. The caster can discharge the spell as a swift action to infuse breath weapons with silver light, imposing a -4 penalty to evil creatures' Reflex saves and negating evasion.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shock Arrow',
@@ -656,6 +698,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates an electrical arrow with two applications: either hurled as a ranged touch attack dealing 1d6 electricity damage plus 1 per caster level (max +5), or fired upward to create a brief visual display resembling a holy symbol that produces thunder and light without harming creatures.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shock Shield',
@@ -671,6 +714,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: "An invisible protective disk grants a +2 shield bonus to AC, negates magic missile attacks, and works against incorporeal touch attacks. The caster may dismiss the shield as a free action, causing it to deal 1d6 electrical damage to all creatures within a 5-foot burst, including the caster.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shocking Image',
@@ -687,6 +731,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions similarly to mirror image, creating illusory duplicates of the caster that discharge an electric shock dealing 2d6 electricity damage when destroyed through melee attacks. Spell resistance applies only to the initial damage; failure makes targets immune to subsequent damage from this spell.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shroud of Darkness',
@@ -702,6 +747,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Reduces perceived light levels by two steps for affected targets—bright light becomes dim, normal becomes darkness, and dim or dark areas become supernaturally dark. Even creatures with darkvision cannot penetrate the magical darkness.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shroud of Innocuity',
@@ -717,6 +763,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Grants affected creatures an ordinary, unremarkable appearance tailored to each observer\'s cultural context, plus a +2 bonus to Diplomacy checks. Creatures with negative attitudes toward the target may attempt a Will save to see through the effect upon first encounter.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sickening Entanglement',
@@ -733,6 +780,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Functions similarly to entangle but enhances plants with an irritating sap. Creatures entering the affected area or ending their turn there must make a Fortitude save or become sickened for the duration and an additional 1d4 rounds afterward, classified as a poison effect.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Siege Scatter',
@@ -749,6 +797,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Unleashes a roiling blast of rough rock and dirt, dealing 1d6 slashing damage per 2 caster levels (capped at 5d6) to all creatures in the area. Creatures failing their Reflex save are knocked prone and displaced to the area\'s edge, suffering additional bludgeoning damage; creatures with stability bonuses or stationary the previous round gain +4 to their save.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sign of the Faithful',
@@ -763,6 +812,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Functions similarly to the message spell but transmits only that the caster is a worshiper of a designated deity. The spell conveys meaning nonverbally and bypasses language barriers.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sign of Wrath',
@@ -779,6 +829,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'A glowing wrath symbol appears beneath the caster, dealing 1d6 force damage per caster level (maximum 15d6) to nearby creatures and pushing them away via bull rush. The caster is unaffected and may exempt up to one creature per 4 caster levels from the spell\'s effects.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Signifer's Rally",
@@ -795,6 +846,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Allows the caster to bring willing allies to their location in a burst of brimstone. Affected allies appear adjacent to the caster and may roll initiative if needed, retaining their ability to act. The spell cannot function in areas protected against evil creatures.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Silence',
@@ -811,6 +863,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates an area of complete silence where all sound ceases, preventing verbal spellcasting and blocking sound-based effects. The silenced zone can be centered on a mobile creature or fixed to a location, and those within gain immunity to sonic and language-based attacks.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Silent Table',
@@ -827,6 +880,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Muffles sounds and sonic effects originating inside the area for anyone outside; Perception checks to hear sounds leaving the zone increase by 20 DC and saving throw DCs for sonic effects decrease by 2. The spell does not affect sounds entering the area or perception checks of creatures within it.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Silt Sphere',
@@ -843,6 +897,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'An underwater-only spell that creates an illusory silt cloud surrounding the caster that moves with them, granting total concealment to creatures initially within it (partial to those entering later). The spell ends if the caster attacks.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Silver Darts',
@@ -859,6 +914,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates a burst of silver projectiles functioning as silver weapons, dealing 1d6 piercing damage per caster level (maximum 10d6). Creatures with armor bonuses exceeding +4 or natural armor bonuses exceeding +4 take only half damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Silverlight',
@@ -874,6 +930,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a silvery light emanating from a touched object in a 20-foot bright radius with 20 feet of dim light beyond. Creatures susceptible to alchemical silver within the bright light become dazzled and sickened unless they succeed on a Fortitude save; these effects disappear 1 round after leaving the silverlight.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Siphon Magic',
@@ -888,6 +945,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Strips one ongoing magical effect from a touched creature and claims it as the caster\'s own. The caster can specify a particular spell effect or target the highest-level spell first. If successful, any remaining duration transfers to the caster, who may attempt a new saving throw if applicable.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Siphon Might',
@@ -902,6 +960,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Weakens a target's physical strength while channeling that drained power to an adjacent ally. The subject suffers a Strength penalty of 1d6 + 1 per 2 caster levels (maximum 1d6 + 5), reducible by half with a Fortitude save. An adjacent creature gains an equal enhancement bonus to Strength.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sirocco',
@@ -918,6 +977,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'A scorching downward wind blast deals 4d6 fire damage +1 per caster level and forces creatures prone; successful Fortitude saves halve damage and negate the prone condition. Flying creatures may fall unless they succeed at DC 15 Fly checks. Water subtype creatures suffer a -4 save penalty and double damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Skeleton Crew',
@@ -932,6 +992,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Animates humanoid corpses into 1 HD skeletons that function as obedient crew members with maritime skills. The skeletons can perform ship duties but cannot speak, attack, or defend themselves. They don\'t count against the caster\'s undead control limit.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Skin Tag',
@@ -947,6 +1008,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Infuses a malign spirit into consumable items; when consumed, the spell embeds itself in the target\'s skin creating wrinkled tags resembling a face. The caster can remotely cause the affected creature to become sickened or remotely cast hexes and specific spells through the embedded spirit once per day.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Skinsend',
@@ -961,6 +1023,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: "Causes the caster's own skin to peel off and animate as a magical creature under their control, while the consciousness transfers between body and animated skin at will. The skinless body drops to 0 hit points and cannot heal naturally; the skin duplicate has Strength 3, damage reduction against piercing/slashing, and compression ability.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Skyshroud',
@@ -977,6 +1040,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a hemispherical display showing the actual sky above the casting location, bypassing physical obstructions like stone or rock. Functions for purposes requiring sky visibility, spell preparation, and divine obediences, though it cannot support spells drawing direct power from the sky.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slave to Sin',
@@ -993,6 +1057,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Exploits an evil creature's susceptibility to one of the seven deadly sins, manifesting a glowing rune on the target's body. Each round, the target must make a Will save or become sickened and staggered while wallowing in its targeted sin; successful saves result in only the sickened condition.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slay Living',
@@ -1008,6 +1073,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Attempts to slay a living target through contact; on a successful melee touch attack, the target sustains 12d6 damage + 1 per caster level, reduced to 3d6 + 1 per caster level with a successful Fortitude save. Even with a successful save, the target may still die from accumulated damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sleepwalk',
@@ -1024,6 +1090,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Enables an unconscious or sleeping creature to rise and move in a half-awake state while remaining helpless otherwise, moving at half speed limited to one move action per round. Taking damage forces a new saving throw; if failed, the spell ends and the creature awakens.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slick Walls',
@@ -1040,6 +1107,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Coats all walls and ceilings in a designated area with a slick substance; the DC of all Climb checks for affected surfaces increases by twice the caster level (maximum +20), preventing creatures from taking 10 on such checks even with climb speeds. Has no effect on magical walls.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slipstream',
@@ -1056,6 +1124,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: 'Generates a wave of water that enhances the target\'s movement speed by 10 feet on level ground and 20 feet downhill, with no uphill bonus. Additionally increases swim speed by 20 feet or grants a swim speed of 20 feet to targets lacking one.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slough',
@@ -1071,6 +1140,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Causes the target to suffer 1d4 Constitution damage each round as skin deteriorates and splits. Once 5+ points of Constitution damage accumulate, the skin completely sheds, imposing penalties to saving throws against disease, poison, and pain, as well as Charisma-based skill checks (except Intimidate) until the damage heals.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slow Suffocation',
@@ -1086,6 +1156,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Prevents the target from breathing, simulating suffocation mechanics. The enchantment can be dispelled by strong stimulants, effects increasing Constitution, or physical trauma of 10+ damage from a single attack. Creatures without respiratory systems are immune.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slowing Mud',
@@ -1101,6 +1172,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Coats targets in thick, adhesive mud that functions as both a slowing effect and blindness. Affected creatures can use standard actions to clear mud from eyes or full-round actions to remove enough mud to end the slowing effect. Water-based effects or immersion removes all mud within one round.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Smite Abomination',
@@ -1115,6 +1187,7 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'No',
     description: "Grants the caster paladin-like abilities against undead foes, with melee attacks gaining a bonus equal to the higher of Charisma or Wisdom modifier on attack rolls and caster level on damage rolls. Melee strikes bypass the target's damage reduction; bonuses do not stack with an actual paladin's smite ability.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Smug Narcissism',
@@ -1131,5 +1204,6 @@ export const GAP_SPELLS_S2_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Compels the target to become obsessed with their own appearance and superiority, constantly seeking reflective surfaces and suffering a -2 penalty to all skill checks due to distraction. In combat, the target prioritizes self-protection and defensive magic over offense, focusing on preventing damage to their appearance.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 ];

@@ -13,6 +13,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Summon good-aligned creatures with summon monster; summoned creatures gain Diehard',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must be good alignment' },
@@ -30,6 +31,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
       'When your divine aura matches the alignment subtype of the creature you are summoning, you can summon that creature as a standard action rather than with a 1-round casting time. Creatures summoned this way cannot act until your next turn, but they are not flat-footed and can make attacks of opportunity.',
     shortDescription: 'Summon creatures matching your divine aura as a standard action',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'aura class feature' },
@@ -47,6 +49,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
       'You draw upon a sense of inner calm to bolster your will. You may use your Wisdom modifier in place of your Charisma modifier on any Charisma-based skill checks and Charisma-based ability checks. This does not affect the save DCs of any abilities, spells, or effects that use Charisma.',
     shortDescription: 'Use Wisdom instead of Charisma on Charisma-based skill and ability checks',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -73,6 +76,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 on Sense Motive to detect lies; use Sense Motive as a move action for deception',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -100,6 +104,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
       'You can use deception in the service of good without moral compromise. You add your Wisdom modifier as a bonus on Bluff checks in addition to your Charisma modifier. Furthermore, you do not lose paladin levels or cleric domains for using Bluff in service of your faith.',
     shortDescription: 'Add Wisdom to Bluff checks; no alignment penalty for good-faith deception',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -131,6 +136,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
       'Your spirit radiates a divine light that can reveal hidden evil. You can use detect evil as a spell-like ability at will, with a caster level equal to your character level. This ability is always active but requires your focus to process the information.',
     shortDescription: 'Use detect evil at will as a spell-like ability',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 11 },
@@ -148,6 +154,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
       'When an adjacent ally is struck by an attack that would deal damage, you can spend an immediate action to take half the damage in their stead. The ally takes the other half. You must be willing and aware of the attack to use this ability.',
     shortDescription: "Take half of an adjacent ally's damage as an immediate action",
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -166,6 +173,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channeling positive energy shakes evil creatures within the burst on failed Will save',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel positive energy' },
@@ -185,6 +193,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Cure spells heal additional HP equal to Wisdom modifier on good-aligned targets',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -204,6 +213,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Fire a ray that blinds evil creatures for 1 round; dazzled 1 minute afterward',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must be good alignment' },
@@ -231,6 +241,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
       'Your connection to your fiendish patron grants you energy resistance that scales with your devotion. (1 damnation feat) Gain resistance 5 to one energy type your patron resists; (2 feats) Add resistance 5 to another energy type; (3 feats) Gain immunity to one energy type your patron resists; (4 feats) Your creature type becomes outsider (native) and you gain immunity to one energy type your patron has immunity to.',
     shortDescription: 'Scale energy resistance/immunity based on total damnation feats possessed',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['damnation'],
     prerequisites: [
       { type: 'special', description: 'Must be evil alignment' },
@@ -263,6 +274,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Evil descriptor spells gain higher DCs, cheaper metamagic, and greater effective caster level',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['damnation'],
     prerequisites: [
       { type: 'special', description: 'Must be evil alignment' },
@@ -295,6 +307,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Conceal true alignment from detection; effectiveness scales with damnation feat count',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['damnation'],
     prerequisites: [
       { type: 'special', description: 'Must be evil alignment' },
@@ -313,6 +326,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Scale Intimidate bonuses and fear escalation based on number of damnation feats',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['damnation'],
     prerequisites: [
       { type: 'special', description: 'Must be evil alignment' },
@@ -344,6 +358,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use an adjacent ally as cover; missed attacks redirect to the ally (Champions of Corruption)',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general', 'teamwork'],
     prerequisites: [],
     effects: [],
@@ -359,6 +374,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Damaging area spells affecting allies shake enemies on failed save; ally gets free move',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general', 'teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'spellcraft', ranks: 1 }],
     effects: [],
@@ -374,6 +390,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       "+2 on ranged attacks through an ally's space; misses may hit the ally instead",
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'feat', featId: 'precise_shot' }],
     effects: [
@@ -402,6 +419,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 to Acrobatics/Climb/Stealth (ally takes –2); swap positions when falling as an immediate action',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general', 'teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'acrobatics', ranks: 3 }],
     effects: [
@@ -430,6 +448,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       "Missed splash weapons redirected by ally's melee touch attack (Champions of Corruption)",
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -445,6 +464,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Flanking grants Power Attack-style bonus damage; reckless attacks may also hit the ally',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'power_attack' },
@@ -465,6 +485,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Summon evil-aligned creatures as a standard action; creature acts on your next turn',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must be evil alignment' },
@@ -483,6 +504,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Attract evil followers and cohort; cruelty increases Vile Leadership score, mercy decreases it',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 7 },
@@ -501,6 +523,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Take heavy damage to Intimidate attacker as an immediate action; crits cause sickened instead',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'skill_focus_intimidate' }],
     effects: [],
@@ -516,6 +539,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Reflect bright light to dazzle one creature within 30 ft on failed Fortitude save',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -534,6 +558,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Summoned evil outsiders harder to break free; bargain for cooperation when control uses are spent',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_planes', ranks: 5 },
@@ -553,6 +578,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Sneak attack or negative energy touch shackles target: –2 on their saves vs. your abilities for 1 min',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -575,6 +601,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Slashing/piercing attacks cause 1d6 fire bleed damage per round until magically healed',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 6 },
@@ -593,6 +620,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Touch attack transmits a carried disease; target saves or becomes infected (1/day)',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -614,6 +642,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'One attack per full attack sickens the target on a failed Fortitude save for 1 round',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -634,6 +663,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Successful lies force a Will save; target believes the lie for 24 hours on failure',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 15 },
@@ -653,6 +683,7 @@ export const CHAMPIONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Dirty trick also deals 1d4 nonlethal per 2 levels and –2 morale penalty on attacks vs. you',
     source: 'Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_dirty_trick' },

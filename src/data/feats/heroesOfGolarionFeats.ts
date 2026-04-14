@@ -9,6 +9,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
       'You can select a magical beast from the druid animal companion list to serve as your animal companion, acquiring and advancing it using the same mechanics as your class feature. You can dismiss it as your class allows. You must satisfy any additional prerequisites for companions with an Intelligence score of 3 or higher.',
     shortDescription: 'Select a magical beast as your animal companion.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'handle_animal', ranks: 7 },
@@ -28,6 +29,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
       'Your beast companion gains the abilities and bonuses found in the mastery entry within its stat block. You must meet the minimum level requirement listed in the companion entry to access these abilities. If you obtain a new beast companion of a different type, you keep this feat but may not yet qualify for its mastery benefits.',
     shortDescription: 'Your beast companion gains mastery abilities from its stat block.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'beast_speaker' },
@@ -49,6 +51,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day, destroy a magic item to regain hit points and gain a +1 attack/damage bonus.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'spellcraft', ranks: 3 },
@@ -90,6 +93,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
       "As a swift action, you may spend 1 grit point to convert your gun's damage into acid, cold, electricity, or fire damage for 1 round. You may select a different damage type each time you use this ability. The shot retains its status as a ranged weapon attack for purposes of critical hit multipliers and abilities like Deadly Aim.",
     shortDescription: 'Spend 1 grit to convert firearm damage to an energy type for 1 round.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'grit'],
     prerequisites: [
       {
@@ -110,6 +114,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Bluff vs non-wyrwoods; they take -2 on Diplomacy and Sense Motive vs you.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Wyrwood race' }],
     effects: [
@@ -137,6 +142,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Appear as a statue while motionless; double critical threat range vs unaware foes.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'stealth', ranks: 5 },
@@ -154,6 +160,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Dance in sunlight to grant allies a morale bonus on attacks, skills, and saves.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Goblin race' },
@@ -198,6 +205,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel a 3rd-level or lower arcane spell through an Arcane Strike force bullet.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 15 },
@@ -218,6 +226,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Link an ioun stone to your core to increase its numerical bonuses and penalties by 1.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Wyrwood race' }],
     effects: [],
@@ -231,6 +240,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
       'You can craft new wyrwoods through a specialized ritual. You must spend one month in isolation with a Small wooden construct, using a flawless ioun stone worth at least 10,000 gp as the core component. Each week you must succeed at a Craft (carpentry or sculpture) check against DC 30. Successful completion transforms the construct into a humanoid wyrwood with commoner-level abilities. Failed checks require restarting the process, though materials can be salvaged.',
     shortDescription: 'Craft a new wyrwood construct through a month-long ritual.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       { type: 'feat', featId: 'craft_construct' },
@@ -249,6 +259,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Arcane Strike unarmed hits grant temporary hit points equal to the Arcane Strike bonus.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'arcane_strike' },
@@ -267,6 +278,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Swift action: Will save or target takes -2 on attacks and Str/Dex skills until end of its turn.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Goblin race' }],
     effects: [
@@ -293,6 +305,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
       'You can use your hypnotic stare class feature without relying on visual perception. You do not need to attempt concentration checks to maintain your hypnotic stare while blinded.',
     shortDescription: 'Use hypnotic stare while blind without concentration checks.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'hypnotic stare' }],
     effects: [],
@@ -307,6 +320,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       "Use your body as an implement; treat occultist level as 1 higher for that school's focus powers.",
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['conduit'],
     prerequisites: [
       { type: 'level', minimum: 5 },
@@ -325,6 +339,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
       'When you use your painful stare ability, the target must succeed at a Will saving throw (DC = 10 + half your mesmerist level + your Charisma modifier) or become confused for 1 round. Regardless of the outcome, a creature cannot be affected by this ability again for 24 hours.',
     shortDescription: 'Painful stare forces Will save or target is confused for 1 round.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 11 },
@@ -341,6 +356,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
       'As a full-round action, you can perform a discordant chant that forces each enemy within 15 feet who can hear you to succeed at a Will save (DC = 10 + half your character level + your Charisma modifier) or become dazed for 1 round. A creature cannot be affected by this ability more than once per 24-hour period. This is a mind-affecting effect.',
     shortDescription: 'Full-round action: Will save or enemies within 15 ft are dazed for 1 round.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Goblin race' }],
     effects: [],
@@ -355,6 +371,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend 2 grit as an immediate action to retrieve and reload missed firearm ammunition.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'grit'],
     prerequisites: [
       {
@@ -376,6 +393,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Allies within 5 ft who have fought with you gain +2 morale on Fortitude saves.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Goblin race' }],
     effects: [
@@ -403,6 +421,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Your fire damage affects incorporeal creatures and ignores their damage reduction.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Goblin race' },
@@ -420,6 +439,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Arcane Strike enables force bullets dealing 1d4 force damage per 5 caster levels, no ammo needed.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'arcane_strike' },
@@ -438,6 +458,7 @@ export const HEROES_OF_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'On first hit of a full attack, make a Sleight of Hand vs CMD to treat foe as flat-footed for your next attack.',
     source: 'Heroes of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'deft_hands' },

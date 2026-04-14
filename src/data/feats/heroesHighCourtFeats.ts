@@ -10,6 +10,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 (or +4 with 10+ ranks) on Diplomacy or Intimidate vs commoners in chosen settlement.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -44,6 +45,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Suppress your alignment aura for 24 hours, treating it as one strength weaker for detection.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -78,6 +80,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 (or +4 with 10+ ranks) on discovery checks when using the influence system.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -111,6 +114,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       'When you counterspell a charm or compulsion, redirect it back at the original caster.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'improved_counterspell' }],
     effects: [
@@ -139,6 +143,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Enhanced Noble Scion benefits: extra abilities based on your chosen Noble Scion type.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -158,6 +163,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       'When boosting a saving throw with investiture, also apply the same bonus to a second saving throw type.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'investiture' },
@@ -188,6 +194,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
       'You have developed a deeper wellspring of investiture energy. You gain 2 additional investiture points. You can take this feat multiple times; the effects stack.',
     shortDescription: 'Gain 2 additional investiture points. Can be taken multiple times.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'investiture' }],
     effects: [],
@@ -203,6 +210,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain one additional vested power from the invested regent list. Can be taken multiple times.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'vested power' }],
     effects: [],
@@ -218,6 +226,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 saves vs draconic/supernatural fear; reduce fear conditions by one step on failed saves.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -250,6 +259,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
       "You have a scholar's eye for the letter of magical law. Through careful study of a scroll's wording before casting, you can squeeze a second use from the magic before it is consumed. You may use a scroll twice before it is consumed. The second use of the scroll occurs normally and expends the scroll after the spell is cast.",
     shortDescription: 'Use a scroll twice before it is consumed.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'spellcraft', ranks: 1 }],
     effects: [],
@@ -265,6 +275,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Bluff and Knowledge (nobility); goal to be accepted as a false noble earns followers.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -299,6 +310,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
       'You receive a regular allowance from your noble family or from an inheritance. At the beginning of every week, you receive 100 gp that you can spend only on services and nonmaterial goods, such as hiring entertainers, messengers, mounts, servants, transport, or workers; enhancing your lifestyle quality; securing invitations to exclusive events or entry to restricted locations; or paying for lodgings, stabling, taxes, and tolls. This gold cannot be used to purchase weapons, armor, or other physical items.',
     shortDescription: 'Receive 100 gp per week usable only for services and nonmaterial goods.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -317,6 +329,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Substitute BAB for ranks in Bluff, Diplomacy, or Sense Motive; that skill becomes a class skill.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -335,6 +348,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Expend smite evil to apply its bonuses to verbal duel tactic checks against evil creatures.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'smite evil' }],
     effects: [
@@ -363,6 +377,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Oracle curse treated as 1 level lower; no extra casting time for Enlarge/Extend on divination spells.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -384,6 +399,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Disguise (class skill); +1 attack/damage vs former family; goal leads to expanded bonuses.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -425,6 +441,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Automatically know when subjected to zone of truth, detect thoughts, or similar truth magic.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'sense_motive', ranks: 3 }],
     effects: [
@@ -452,6 +469,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
       'You have studied the legendary courtly teachings of Sulunai, a master advisor known for guiding nobles to better decisions through thoughtful counsel. When you use an ability that allows another creature to reroll a check (such as the aid another action in certain contexts, or a bardic performance that grants rerolls), the creature gains a +2 insight bonus on the reroll. This bonus applies only when your assistance directly enables the reroll.',
     shortDescription: 'Creatures you help reroll a check gain a +2 insight bonus on that reroll.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_nobility', ranks: 3 }],
     effects: [
@@ -480,6 +498,7 @@ export const HEROES_HIGH_COURT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Raise Sense Motive DC against you to 20 + Bluff ranks; double for allegiance checks.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'bluff', ranks: 3 }],
     effects: [

@@ -33,6 +33,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "The caster rolls a d20 and selects that result number. During the spell's duration, whenever the target creature rolls that specific number on any type of dice, they gain two options: either reroll the result or add a +2 luck bonus to it. The creature must decide before knowing the outcome. Only one Lucky Number effect can affect a creature at once; casting it again replaces the previous result.",
     source: 'Pathfinder Campaign Setting: Occult Mysteries',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Army',
@@ -54,6 +55,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'The spell enchants all manufactured weapons held by nearby allies within range, granting each weapon a +1 enhancement bonus to attack and damage rolls for every 5 caster levels, with a maximum bonus of +4.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Boulder',
@@ -76,6 +78,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "This spell functions similarly to magic stone but affects up to three boulders (rocks up to two size categories smaller than the caster). It enhances the boulder's damage by one step and grants a +1 enhancement bonus on attack and damage rolls. The enchanted boulders can be used with rock throwing abilities or as siege engine ammunition.",
     source: 'Pathfinder Roleplaying Game Monster Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Fang',
@@ -97,6 +100,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'The spell grants one natural weapon or unarmed strike of the subject a +1 enhancement bonus on attack and damage rolls. It may affect slam attacks, bites, fists, or other natural weapons, but does not convert unarmed strikes from nonlethal to lethal damage. It can be made permanent via the permanency spell.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Fang, Greater',
@@ -118,6 +122,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell functions like magic fang but provides a +1 per four caster levels (maximum +5) enhancement bonus. The bonus does not bypass damage reduction except for magic. Alternatively, all natural weapons gain a +1 enhancement bonus regardless of caster level. Also makeable permanent.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Siege Engine',
@@ -139,6 +144,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell enhances an indirect fire siege engine with a +1 enhancement bonus on targeting rolls and damage rolls. When applied to direct-fire siege weapons, it functions as the magic weapon spell.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Siege Engine, Greater',
@@ -161,6 +167,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This version grants indirect-fire siege engines an enhancement bonus on targeting and damage rolls of +1 per four caster levels (maximum +5). For direct-fire weapons, it functions as greater magic weapon.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Stone',
@@ -182,6 +189,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'The spell enchants up to three pebbles (sling-bullet sized) to strike with enhanced force. When thrown, they have a 20-foot range increment; when slung, they function as sling bullets with 50-foot range increment. The stones gain a +1 enhancement bonus on attack and damage rolls. A successful ranged attack deals 1d6+1 damage normally, or 2d6+2 damage against undead creatures.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Vestment',
@@ -203,6 +211,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'The spell grants an enhancement bonus of +1 per four caster levels, with a maximum of +5 at 20th level, applied to a suit of armor or shield. Regular clothing counts as armor granting no AC bonus for spell purposes.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Weapon',
@@ -234,6 +243,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "This spell provides a +1 enhancement bonus on attack and damage rolls. The bonus does not stack with masterwork bonuses. Natural weapons cannot be affected, though monks' unarmed strikes qualify as weapons under this spell.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Weapon, Greater',
@@ -266,6 +276,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'Enhancement bonus increases to +1 per four caster levels (maximum +5). The spell affects projectiles similarly, with projectiles losing enhancement after use. Siege engines and ammunition also qualify.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magical Beast Shape',
@@ -289,6 +300,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This transmutation allows casters to assume the form of a magical beast between Diminutive and Huge size. The spell functions similarly to beast shape IV but grants specific abilities based on the creature form chosen. The caster gains movement speeds (burrow, climb, fly, swim), sensory abilities (blindsense, blindsight, darkvision, etc.), and special attacks or defenses if the magical beast possesses them, including breath weapons (up to 12d6 damage), poison immunity bonuses, and energy resistances or vulnerabilities matching the assumed form.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magnifying Chime',
@@ -311,6 +323,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "The caster causes a touched object to vibrate and emit sonic energy once per round as a loud, dangerous chime. The sound's strength increases over time. In the round after casting, the chime inflicts 1d6 points of sonic damage to all creatures and objects within 5 feet of the target. Each subsequent round increases damage by 1d6 and expands the radius by an additional 5 feet in all directions. A successful Fortitude save reduces that round's damage by half.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Make Whole',
@@ -332,6 +345,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "This transmutation spell repairs damage similar to mending but with greater potency, restoring 1d6 points of damage per level when cast on an object or construct creature (maximum 5d6). It can restore destroyed magic items below 0 hit points if the caster level is at least double the item's level. However, charged items like wands and single-use items cannot be repaired this way. The spell bypasses construct immunities to magic.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Malfunction',
@@ -353,6 +367,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell functions similarly to the confusion spell but exclusively targets constructs. Rather than causing the target to babble incoherently, an affected construct takes no actions during its turn, though it may still make attacks of opportunity.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Marid's Mastery",
@@ -383,6 +398,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'The spell grants recipients a +1 bonus on attack and damage rolls if it and its opponent are touching water. If the opponent or the target is touching the ground, the target takes a -4 penalty on attack and damage rolls.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mark of Buoyancy',
@@ -417,6 +433,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "The spell makes a touched object effectively weightless and causes it to float upward if unattended, rising to a height equal to twice the caster's level. The object can be moved normally and is buoyant enough to carry additional weight of up to 10 pounds per caster level, potentially allowing transportation of small objects or creatures.",
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Marching Chant',
@@ -438,6 +455,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'The caster invigorates allies through continuous singing or chanting (requiring concentration). Affected allies can hustle while this effect persists. This movement functions as a walk rather than a hustle for purposes of nonlethal damage and fatigue accumulation. The caster may maintain concentration on this spell while hustling simultaneously.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Master's Mutation",
@@ -460,6 +478,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'The caster can grant up to two selected abilities to a controlled summoned creature. Available options include movement types (burrow, climb, fly, swim), sensory abilities (darkvision, low-light vision), special attacks (constrict, grab, rake, poison, trample, trip), and other traits (ferocity, jet, scent, water breathing). Alternatively, primary natural attacks can be replaced with different attack types dealing equivalent damage. Summoners may target their eidolon with this spell.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Masterwork Transformation',
@@ -483,6 +502,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This transmutation converts ordinary items into masterwork equivalents, improving their quality. The caster may affect 50 ammunition pieces as one weapon and can choose the appearance change.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Lucubration",
@@ -504,6 +524,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell allows you to instantly prepare any single spell of 5th level or lower that you have actually cast within the past 24 hours. The recovered spell is then stored in your mind as if prepared through normal preparation. If the spell requires material components, you must provide them yourself before the spell becomes usable.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Meld into Stone',
@@ -526,6 +547,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This transmutation spell allows you to merge with the stone along with up to 100 pounds of non-living gear. While merged, you remain aware of time passage and can cast self-targeted spells. You can hear external sounds but cannot see outside. Partial stone destruction deals 5d6 damage; complete destruction requires a Fortitude save or instant death (5d6 damage even on success). You exit voluntarily before duration ends, or suffer 5d6 damage if expelled. Stone to flesh expels you and deals 5d6 damage; stone shape deals 3d6 damage without expulsion; transmute rock to mud requires a save or causes instant death.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mending',
@@ -557,6 +579,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "This transmutation spell restores 1d4 hit points to damaged objects. When an object with the broken condition is restored to at least half its original hit points, that condition is removed. All object pieces must be present for the spell to work. Magic items can be repaired if the caster's level equals or exceeds the item's caster level. Destroyed magic items regain structural integrity but not magical properties. The spell does not affect creatures or constructs, nor does it repair items that have been warped or transmuted, though it can still repair damage to such items.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Merge with Familiar',
@@ -578,6 +601,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "The spell allows a familiar or spirit animal that is at least one size category smaller than the caster to merge harmlessly into the caster's body. During the spell's duration, the caster and target may separate or merge at will as a move action. While merged, the familiar cannot be targeted or affected by most attacks but still suffers ongoing effects. It can receive beneficial effects originating from the caster.",
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Metabolic Molting',
@@ -600,6 +624,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "The spell encases the subject in a jeweled protective shell matching iron's durability (hardness 10, 150 hp). For 7 days, the subject enters suspended animation and heals 5 hit points per Hit Die daily, plus recovers 2 points of ability damage/drain. After 7 days, the shell crumbles and severed limbs, bones, and organs regenerate. A 5,000+ gp gemstone enables resurrection if death occurred within 1 hour, with the creature stabilizing at 0 hp and gaining 1 permanent negative level.",
     source: 'Pathfinder Player Companion: Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mighty Strength',
@@ -621,6 +646,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "This spell functions identically to bull's strength but provides a more potent effect, granting a +8 enhancement bonus to Strength rather than the standard +4 bonus of the base spell.",
     source: 'Pathfinder Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mirror Polish',
@@ -643,6 +669,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'The spell polishes a metal item to reflective quality suitable for use as a mirror. The effect is instantaneous but does not protect against future damage or corrosion. The spell only works on metal items with smooth, continuous surfaces (such as breastplates, helms, shields, or swords), not on textured items like maces, chainmail, or scale mail.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mirror Transport',
@@ -665,6 +692,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "This spell operates similarly to mirror hideaway. When a creature enters the target mirror, it may expend a swift action to exit through another mirror within 500 feet using dimension door mechanics. The transport works one-way only. The creature must be able to fit through an opening matching the mirror's size to successfully exit. Each use of transport reduces the spell's remaining duration by 1 hour.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mnemonic Enhancer',
@@ -689,6 +717,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "This spell grants two possible effects. The caster selects one version upon casting. Prepare option: The caster readies up to three additional spell levels for preparation. Cantrips count as half a level. These spells are prepared and cast normally. Retain option: The caster recovers any spell of 3rd level or lower cast within one round before initiating this spell, restoring it to the caster's mind. Either version results in the spell(s) disappearing after 24 hours if not cast.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Monkey Fish',
@@ -718,6 +747,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "The spell alters the caster's hands and feet to improve climbing and swimming abilities. It grants a 10 foot climb speed and swim speed. The spell becomes ineffective if the caster wears medium or heavy armor or carries a medium or heavy load.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Monstrous Extremities',
@@ -740,6 +770,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "The caster transforms one arm or leg of a touched creature into an alternative form of similar proportions — options include a tentacle, hoof, or wing. The target requires approximately 10 minutes to acclimate to the modified limb's operation. These new forms do not grant enhanced movement, flight, swimming, or running capabilities. However, they function as natural weapons usable in secondary attacks during full-attack actions, employing base attack bonus -5 plus half Strength modifier. The subject cannot wield objects or equipment intended for the transformed extremity. Multiple applications of this spell are possible.",
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Monstrous Physique I',
@@ -763,6 +794,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This transmutation spell allows you to assume the form of any Small or Medium monstrous humanoid. You gain certain movement abilities if present in your chosen form, including climb, flight, swimming, darkvision, low-light vision, and scent. For Small forms, you gain +2 Dexterity and +1 natural armor. For Medium forms, you gain +2 Strength and +2 natural armor. Aquatic subtypes grant the amphibious subtype.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Monstrous Physique II',
@@ -786,6 +818,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell functions as monstrous physique I but allows you to assume the form of a Tiny or Large monstrous humanoid. Tiny forms grant +4 Dexterity, -2 Strength, +1 natural armor. Large forms grant +4 Strength, -2 Dexterity, +4 natural armor. Additional abilities such as grab, pull, and push may be gained.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Monstrous Physique III',
@@ -809,6 +842,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell functions as monstrous physique II but allows you to assume the form of a Diminutive or Huge monstrous humanoid. Diminutive forms grant +6 Dexterity, -4 Strength, +2 natural armor. Huge forms grant +6 Strength, -4 Dexterity, +6 natural armor. Additional abilities such as breath weapons and constrict may be gained.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Monstrous Physique IV',
@@ -832,6 +866,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "This spell functions as monstrous physique III and grants the full range of abilities including all movement types, special sensory abilities, and powerful combat abilities. The caster can also assume the monstrous humanoid's supernatural abilities if they meet the minimum caster level requirement.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Move Earth',
@@ -856,6 +891,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This transmutation spell moves soil and earth materials, potentially shifting hillsides and dunes without violently disturbing the surface. The earth responds with glacial fluidity to achieve the desired terrain changes. Trees, structures, and rock formations remain largely unaffected except for elevation shifts. The spell cannot tunnel, move rock formations, or effectively trap creatures. Primary applications include moat construction and battlefield terrain preparation. It has no effect on earth elementals or creatures.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mutagenic Touch',
@@ -878,6 +914,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell allows an alchemist currently under mutagen effects to transfer the mutagen to another creature via touch attack. The recipient gains half the alchemical bonus to physical ability scores but suffers double the mental ability score penalty. If mental scores drop below 3, the target becomes confused for the remaining duration. The spell works with greater or advanced mutagen discoveries, always providing half physical bonuses and double mental penalties. Antitoxin can end the effect early with 50% success chance.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Naga Shape I',
@@ -901,6 +938,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This transmutation allows you to assume the form of any Large naga type. You gain a +4 size bonus to Strength, -2 penalty to Dexterity, and +4 natural armor bonus. Unlike beast shape II, you keep your own head when using this spell and can cast spells with verbal and somatic components, even though the naga form does not have hands. You may gain movement abilities and senses from the assumed form.',
     source: 'Pathfinder Player Companion: Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Naga Shape II',
@@ -924,6 +962,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell functions as naga shape I with additional special abilities including constrict, grab, hypnosis, poison, and sneak attack +2d6.',
     source: 'Pathfinder Player Companion: Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Naga Shape III',
@@ -947,6 +986,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell functions as naga shape I with enhanced abilities including tremorsense 60 feet, bleed, and sneak attack +3d6.',
     source: 'Pathfinder Player Companion: Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Natural Rhythm',
@@ -969,6 +1009,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "This spell enhances a creature's capacity to inflict harm on a specific opponent through repeated natural attacks. When the target successfully strikes an adversary with a natural attack, it gains a cumulative +1 bonus to damage rolls against that particular opponent (capped at +5). A missed attack resets all accumulated bonuses to zero.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Negate Aroma',
@@ -991,6 +1032,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "This spell allows casters to eliminate natural and unnatural odors from targets. Affected creatures cannot be tracked by scent or use stench abilities. However, negate aroma does not prevent the target from acquiring outside smells or odors, and applying pungent substances negates the spell's benefits until removed.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Oasis',
@@ -1014,6 +1056,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This transmutation spell functions on the Material Plane and redirects underground water toward the surface, creating a permanent spring. Output is 5 gallons of pure drinking water per caster level hourly under normal conditions. If suitable terrain exists, a pond may form. Existing springs within 1 mile have their output reduced accordingly; springs reduced to zero gallons per hour dry up. Desert casting requires a DC 25 caster level check, with output reduced to 1 gallon per caster level daily. Terrain-specific complications include erosion blockage in dry areas, freezing in arctic regions, and parasitic contamination in tropical environments.',
     source: 'Pathfinder Player Companion: Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ooze Form I',
@@ -1037,6 +1080,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell allows transformation into a Small or Medium ooze form, granting movement speeds, blindsense or blindsight, acid damage resistance, and various combat abilities (slam, constrict, grab) depending on form size.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ooze Form II',
@@ -1060,6 +1104,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell functions as ooze form I but allows transformation into larger ooze forms (Tiny or Large), with enhanced combat abilities and improved natural armor.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ooze Form III',
@@ -1083,6 +1128,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell functions as ooze form II but allows transformation into Diminutive or Huge ooze forms, with the full range of ooze combat abilities including engulf.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Open-Close',
@@ -1105,6 +1151,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This transmutation cantrip allows a caster to open or close doors, chests, boxes, windows, bags, pouches, bottles, barrels, or similar containers remotely. The spell fails if anything physically resists the action, such as bars or locks. It cannot affect objects exceeding 30 pounds or items sized for enormous creatures.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Overland Flight',
@@ -1134,6 +1181,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'This spell functions similarly to fly, granting flight at 40 feet per round (or 30 feet with medium/heavy armor or load). The caster gains a bonus to Fly checks equal to half their caster level. Unlike standard flight, the spell permits hustling without fatigue during extended travel, enabling approximately 64 miles per 8-hour flight period at standard speed.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Owl's Wisdom",
@@ -1168,6 +1216,7 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       'The spell grants a +4 enhancement bonus to Wisdom, adding the usual benefit to Wisdom-related skills. Wisdom-based spellcasters do not gain bonus spells but their spell save DCs increase.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Orchid's Drop",
@@ -1190,5 +1239,6 @@ export const TRANSMUTATION_BATCH_006: Spell[] = [
     description:
       "This alchemical extract, derived from sun orchid nectar, transforms an alchemist's mutagen into a healing tonic. While affected by the spell, drinking your mutagen heals 2d10 damage points. Additionally, you gain a +2 alchemical bonus on all saving throws for the spell's duration.",
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
 ];

@@ -11,6 +11,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
       "As a standard action, you can cast a ray spell that requires a ranged touch attack and deliver the effect through your melee weapon, either through a melee attack or as a ranged attack. If you deliver this spell as a melee attack, this functions as the magus spellstrike ability. If you deliver the spell as a ranged attack, the spell is a ranged touch attack that discharges from your weapon and applies the weapon's enhancement bonus to the spell's damage. When fired in this way, the spell uses the weapon's critical threat range, but the spell effect deals only x2 damage on a successful critical hit. You can use a ranged touch attack spell that targets more than one creature (such as scorching ray), but you make only one attack through your weapon to deliver one ranged touch effect; additional ranged touch attacks from the spell are wasted and have no effect.",
     shortDescription: 'Cast ray spells through your melee weapon as melee or ranged attacks.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Diverse training class feature' }],
     effects: [],
@@ -26,6 +27,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Your inspire action ability affects all allies within 30 feet instead of one.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Inspire action class feature' }],
     effects: [],
@@ -41,6 +43,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Unlock the two-item set bonus when wearing at least two items from a magical item set.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'level', minimum: 5 }],
     effects: [],
@@ -56,6 +59,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Your enhance arrows ability grants access to additional magical properties including corrosive, ghost touch, limning, and planar.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Enhance arrows class feature' }],
     effects: [],
@@ -71,6 +75,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel an instantaneous area-effect spell through your melee weapon, centered on yourself.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'arcing_weapon' },
@@ -88,6 +93,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
       'You are a master at raining arrows upon your foes. You can use your hail of arrows ability one additional time per day.',
     shortDescription: 'Use your hail of arrows ability one additional time per day.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Hail of arrows class feature' }],
     effects: [],
@@ -101,6 +107,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     description: 'You can perform an additional spell synthesis once per day.',
     shortDescription: 'Use your spell synthesis ability one additional time per day.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Spell synthesis class feature' }],
     effects: [],
@@ -116,6 +123,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Unlock three-, four-, and five-item set bonuses; gain +2 on Use Magic Device checks with five or more magic items.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'collectors_boon' },
@@ -147,6 +155,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day, cast two spells from different spellcasting classes simultaneously as a full-round action.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Combined spells class feature' }],
     effects: [],
@@ -162,6 +171,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Creatures that fail their save against your breath weapon suffer lingering energy damage each round.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'level', class: 'dragon_disciple', minimum: 3 }],
     effects: [],
@@ -177,6 +187,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Choose one spell; you can use special magic tricks with that spell that go beyond its normal effects.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -197,6 +208,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Your sneak attacks impose a Will save penalty equal to your sneak attack dice for 1 round.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Ranged legerdemain class feature' }],
     effects: [],
@@ -212,6 +224,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use death attacks with ranged weapons from within 30 feet, extending range with additional study rounds.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Death attack class feature' }],
     effects: [],
@@ -227,6 +240,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day, cast any spell as if it were one of your prepared spells or spells known by expending a matching spell slot.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Secret class feature' }],
     effects: [],
@@ -242,6 +256,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Encase yourself in a darkness effect with caster level equal to your shadowdancer level; adjust light level as a standard action.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Shadow illusion class feature' }],
     effects: [],
@@ -256,6 +271,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
       'When using hail of arrows, you can target up to two targets for every arcane archer level you have.',
     shortDescription: 'Your hail of arrows can target up to two creatures per arcane archer level.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Hail of arrows class feature' }],
     effects: [],
@@ -271,6 +287,7 @@ export const CHRONICLE_LEGENDS_FEATS: FeatDefinition[] = [
     shortDescription:
       'When you parry an attack, you may also attempt a dirty trick, disarm, or sunder maneuver with a +2 morale bonus without provoking attacks of opportunity.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Riposte class feature' }],
     effects: [

@@ -17,6 +17,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Critical threats made by the affected creature automatically fail to confirm. However, guaranteed critical confirmations from class features remain unaffected.',
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contingency',
@@ -31,6 +32,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'None',
     description: 'This spell allows the caster to place another spell upon themselves that activates under specified conditions. The companion spell must affect the caster\'s person and be no higher than one-third the caster\'s level (maximum 6th level). Only one contingency may be active at a time.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contingent Action',
@@ -45,6 +47,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants the target an additional action (standard, move, or swift) that activates when a caster-defined condition is met. The target designates a readied action to execute when triggered. The spell discharges after triggering.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contingent Scroll',
@@ -59,6 +62,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell transfers a scroll\'s magical power to the caster, allowing it to trigger under specified conditions similar to contingency. The scroll is destroyed in the process. The scroll\'s spell level cannot exceed one-fourth the caster\'s caster level (maximum 5th).',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contingent Venom',
@@ -74,6 +78,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'see text',
     description: 'This spell functions similarly to languid venom but allows the caster to set specific triggering conditions based on visual/audible cues or physical contact with objects/substances/creatures. The poison\'s onset can occur immediately or be delayed up to 1 round per caster level after triggering.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Continual Flame',
@@ -89,6 +94,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'A torch-bright magical, heatless flame manifests on a touched object without generating heat or consuming oxygen. The flame cannot be extinguished through smothering. Counters and dispels darkness effects of equal or lower spell levels.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Control Construct',
@@ -103,6 +109,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster seizes command of a construct from its original master. While concentrating, the caster directs it as though they were its creator. Each round, a Spellcraft check (DC 10 + construct\'s HD) maintains control. The original creator can attempt to regain control via opposed Spellcraft checks.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Control Plants',
@@ -117,6 +124,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster can command plant creatures for a short period. Plants understand vocal commands regardless of language and won\'t attack the caster. Self-destructive commands are ignored.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Control Summoned Creature',
@@ -133,6 +141,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell allows the caster to seize control of a summoned creature by disrupting the bond between it and its summoner. The original summoner can attempt to regain control through an opposed Spellcraft check as a standard action.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Control Vermin',
@@ -147,6 +156,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster and designated allies can use Handle Animal and Ride checks to influence targeted vermin as if they were animals with animal-level intelligence.',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Controlled Fireball',
@@ -163,6 +173,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell functions like fireball but allows the caster to choose squares equal to their Intelligence or Charisma bonus that take minimum damage instead of full damage. Skill checks to identify this spell incorrectly identify it as standard fireball.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Conversing Wind',
@@ -178,6 +189,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'None',
     description: 'This spell operates similarly to whispering wind but enables two-way communication. After delivering an initial message, it waits for 1 round, copies what it hears, and returns at the same speed. The wind continues this pattern until the duration expires or dismissal occurs.',
     source: 'Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Coordinated Effort',
@@ -192,6 +204,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster selects a teamwork feat they possess and shares its benefits with willing allies through magical connection. Allies gain the feat\'s advantages without requiring the feat themselves, though the caster must participate in the circumstances triggering the bonus.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Corpse Hammer',
@@ -206,6 +219,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster draws destroyed undead remains into a fused mass that attacks as a move action using caster level as base attack bonus. Damage is 1d6 per three caster levels (maximum 6d6). Skeletal components grant slashing damage, fleshy components grant bludgeoning.',
     source: 'Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Corrosive Touch',
@@ -222,6 +236,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'A successful melee touch attack delivers 1d4 points of acid damage for each caster level, capped at 5d4 maximum damage.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Corruption Resistance',
@@ -237,6 +252,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This protective spell reduces damage from alignment-based magical effects by 5 points (increasing to 10 at 7th level, 15 at 11th level). The caster selects one alignment type to protect against.',
     source: 'Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cosmic Ray',
@@ -251,6 +267,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster launches a ray of cosmic energy. On a successful ranged touch attack, the target sustains 1d6 points of damage per caster level (maximum 20d6). A failed Fortitude save causes the target to become sickened and emit toxic cosmic radiation, sickening creatures within 5 feet.',
     source: 'People of the Stars',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Counterbalancing Aura',
@@ -265,6 +282,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell creates an oscillating bronze aura granting targets +4 deflection bonus to AC and +4 resistance bonus on saving throws. It provides spell resistance against neutral-aligned casters and protects from possession. Melee attackers of neutral alignment suffer sickening or nauseating effects.',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Countless Eyes',
@@ -279,6 +297,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The target sprouts extra eyes across its body, gaining all-around vision and immunity to flanking.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Covetous Aura',
@@ -294,6 +313,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'The spell creates an aura allowing the caster to immediately gain the benefit of any harmless spell of 3rd level or lower cast within range as if it had also targeted the caster. Once the caster gains a spell benefit, the aura ends.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Covetous Urge',
@@ -310,6 +330,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The curse compels the target toward insatiable greed, forcing attempts to steal valuables (100+ gp) visible in new areas.',
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Coward's Cowl",
@@ -325,6 +346,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'The creature gains +1 morale bonuses to AC and saves/readied attack rolls when avoiding enemies, or can increase spell DCs by 1 for readied actions. Moving toward threats ends the spell immediately. The target suffers -2 penalty on saves against fear.',
     source: 'Agents of Evil',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Coward's Lament",
@@ -341,6 +363,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Forces a target to engage the caster in melee. Each round the target avoids attacking the caster, it accumulates a cumulative -1 penalty to AC, attack rolls, and saves (capped at -5). Penalties reset when the target attacks the caster in melee. The spell terminates if the caster moves away.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Crafter's Curse",
@@ -356,6 +379,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This curse imposes a -5 penalty on all Craft skill checks for the spell\'s duration.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Crafter's Fortune",
@@ -370,6 +394,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants the target a +5 luck bonus on its next Craft skill check.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Crafter's Nightmare",
@@ -386,6 +411,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell creates a poltergeist-like haunt that imposes a -5 penalty on Craft, Profession, magic item crafting, and occult ritual checks within the affected area. Failed checks by 5+ also deal 1d6 damage.',
     source: 'Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Armaments',
@@ -401,6 +427,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster generates a single non-magical weapon, shield, or armor piece. Success requires passing an appropriate Craft check. Failed checks result in items with the broken condition. Cold iron items cannot be created through this spell.',
     source: 'Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Demiplane, Lesser',
@@ -417,6 +444,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates a small extradimensional demiplane accessible only to the caster. The caster decides the environment and basic features of the demiplane.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Demiplane',
@@ -433,6 +461,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates a larger extradimensional demiplane. An instantaneous casting makes the demiplane permanent.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Demiplane, Greater',
@@ -449,6 +478,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates a massive extradimensional demiplane. An instantaneous casting makes the demiplane permanent.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Drug',
@@ -464,6 +494,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell manifests doses of specific substances including aether, flayleaf, opium, keif, scour, shiver, or zerk. Created doses must be used within one minute or dissolve. The spell creates drugs that cannot be sold.',
     source: 'Book of the Damned',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Holds',
@@ -478,6 +509,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'The spell creates a path of graspable handholds on earthen, plaster, stone, or wooden walls. Handholds appear in pairs approximately 3 feet apart, 10 inches long and protruding about 6 inches. The path can extend up to 30 feet plus 10 additional feet per 3 caster levels (maximum 90 feet).',
     source: "Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Mindscape',
@@ -494,6 +526,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster creates an immersive mental realm that both the caster and target enter. The environment has customizable shape, size, and gravity traits. Creatures within cannot act in the physical world. The spell ends when the caster departs or either participant drops below 0 hit points.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Mindscape, Greater',
@@ -510,6 +543,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions as create mindscape but affects one creature per caster level, lasts 1 day/level, and the caster can control multiple believable creatures simultaneously within the mindscape.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Soul Gem',
@@ -525,6 +559,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster draws forth a dying or recently deceased creature\'s life force, capturing it in a soul gem. A living creature that fails its save dies. Gems crumble after the spell expires, freeing the soul. Resurrection attempts against a trapped soul require a caster check.',
     source: 'Book of the Damned',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Treasure Map',
@@ -539,6 +574,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell extracts a body part from a deceased creature (dead no more than 24 hours) and creates a magical map showing valuable locations the creature knew in life, revealing one treasure source per three caster levels.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Variant Mummy',
@@ -554,6 +590,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions identically to create undead but produces one of three variant mummy types: bog mummy, ice mummy, or Tomb Guardian mummy.',
     source: 'Pathfinder AP #81: Shifting Sands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Creeping Doom',
@@ -569,6 +606,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'This conjuration summons four massive insect swarms functioning as centipede swarms with 60 hit points each dealing 4d6 damage per swarm attack. The caster can command swarms to move independently within 100 feet.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Creeping Ice',
@@ -584,6 +622,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell creates a slowly expanding sheet of ice on horizontal surfaces. Ice thickness equals 1 inch per caster level. Each round the ice expands 1 foot in all directions. Creatures can break through with a Strength check (DC 15 + caster level).',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Crime of Opportunity',
@@ -600,6 +639,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell instills a sudden criminal urge in the target, forcing them to perform a criminal act as though under the effect of the crime wave spell.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Crime Wave',
@@ -616,6 +656,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This enchantment compels affected creatures toward theft and destructive behavior. Each round, targets roll percentile dice determining actions: acting suspiciously (1-25), attempting theft (26-50), destroying objects (51-75), or attacking nearby creatures (76-100).',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Crimson Breath',
@@ -630,6 +671,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster\'s salivary glands transform to fill with potent venom. A ranged touch attack delivers a dose of "breath of the mantis god" poison. The Fortitude save DC matches the spell\'s DC.',
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Crimson Confession',
@@ -644,6 +686,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster places a personal rune on an object. The mark can be visible or invisible. Creatures other than the caster that touch the warded object and fail a Fortitude save have their skin turn bright red for 1 hour per level. The ward cannot be dispelled but can be removed by the caster or erase.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Crown of Glory',
@@ -659,6 +702,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster gains a +4 enhancement bonus to Charisma. Creatures with fewer than 8 HD must make a Will save to attempt hostile actions; those failing become enthralled for the duration. The caster gains telepathic communication and can issue three mass suggestions to lower HD creatures.',
     source: 'Pathfinder Chronicles Campaign Setting',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cruel Jaunt',
@@ -675,6 +719,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster gains fear-detection abilities within range. Once per round, the caster may teleport to a frightened creature within range, arriving in a random open space within 20 feet. After teleporting, no additional actions are permitted that round.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Crusader's Edge",
@@ -690,6 +735,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'This enchantment imbues a melee weapon with holy energy, granting it the bane quality against evil outsiders. Upon scoring a critical hit against such creatures, the caster deals normal critical damage and nauseates the target for 1d3 rounds (reducible to sickened via Fortitude save).',
     source: 'Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Crushing Hand',
@@ -705,6 +751,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This 9th-level spell combines capabilities of interposing hand, grasping hand, and forceful hand. It creates a magical hand that can attack (dealing 2d6+12 damage while grappling), defend, or perform bull rush maneuvers.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cultural Adaptation',
@@ -719,6 +766,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'None',
     description: 'This spell enables adapting to a specific culture by granting native accent proficiency, appropriate body language, and cultural awareness. Provides +2 circumstance bonuses to Diplomacy and Disguise checks with culture members. Enchantment charm spell DCs increase by 1 against the target culture\'s natives.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curative Distillation',
@@ -734,6 +782,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The caster concentrates healing potential from the material component to maximize its restorative effects. Restores 1d8 + 1 point per caster level (maximum +10) hit points and grants the target benefits from the material component.',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Critical Wounds',
@@ -749,6 +798,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like cure light wounds, except that it cures 4d8 points of damage + 1 point per caster level (maximum +20). This spell damages undead creatures.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Critical Wounds, Mass',
@@ -764,6 +814,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like mass cure light wounds except it cures 4d8 points of damage + 1 point per caster level (maximum +40).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Light Wounds',
@@ -779,6 +830,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'The caster channels positive energy through touch, restoring 1d8 points of damage + 1 point per caster level (maximum +5) to living creatures. The spell damages undead instead.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Light Wounds, Mass',
@@ -794,6 +846,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like cure light wounds, except that it heals 1d8 points of damage + 1 point per caster level (maximum +25) to multiple creatures simultaneously.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Moderate Wounds',
@@ -809,6 +862,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like cure light wounds, except that it cures 2d8 points of damage + 1 point per caster level (maximum +10).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Moderate Wounds, Mass',
@@ -824,6 +878,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like mass cure light wounds except it cures 2d8 points of damage + 1 point per caster level (maximum +30).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Serious Wounds',
@@ -839,6 +894,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like cure light wounds, except that it cures 3d8 points of damage + 1 point per caster level (maximum +15).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cure Serious Wounds, Mass',
@@ -854,6 +910,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (harmless); see text',
     description: 'This spell functions like mass cure light wounds except it cures 3d8 points of damage + 1 point per caster level (maximum +35).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Befouled Fortune',
@@ -869,6 +926,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This curse prevents the target from receiving luck bonuses or rolling multiple times to take better results. Most significantly, the first time each turn the target would succeed at an attack, saving throw, or skill check, it must roll twice and use the worse of the two results.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Burning Sleep',
@@ -884,6 +942,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'A curse activates one hour after the creature next falls asleep, causing it to burst into flame and take 1d6 fire damage per 2 caster levels (maximum 8d6), then catch fire dealing 2d6 fire damage per round until extinguished.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Disgust',
@@ -900,6 +959,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This curse compels a creature to avoid proximity to a specific trigger. When within 30 feet of an aware trigger, the target becomes sickened and feels compelled to leave. A successful Will save suppresses the urge to flee but the sickened condition persists.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Dragonflies',
@@ -915,6 +975,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell curses a target with elemental energy that interferes with flight. When the creature attempts to fly more than 5 feet above ground, paper insects manifest to hinder movement. Flight maneuverability decreases by one step for every 3 caster levels.',
     source: 'Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Fell Seasons',
@@ -931,6 +992,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster touches the ground to drastically alter regional weather patterns through an unseasonable weather curse. The focus becomes integrated into the cursed area and remains retrievable only if the curse is lifted.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Keeping',
@@ -947,6 +1009,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This curse prevents the target from selling, bartering, or giving away any possessions except ordinary currency. The affected creature can purchase items but cannot subsequently sell them.',
     source: 'Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Magic Negation',
@@ -962,6 +1025,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'The spell disrupts a target\'s capacity to utilize magical energies, imposing the negated spellblight condition. Dispel checks attempting to remove this spellblight suffer a -5 penalty.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Night',
@@ -978,6 +1042,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'By touching the ground, the caster curses an area to remain in perpetual darkness similar to an endless night curse. The focus gemstones merge into the cursed area.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of the Outcast',
@@ -994,6 +1059,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'When affected creatures attempt Bluff, Diplomacy, Intimidate, or Perform checks, they must roll twice and use the lower result. Additionally, initial attitudes of encountered creatures decrease by one step.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Unexpected Death',
@@ -1009,6 +1075,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Upon successful melee touch attack, a 1d100 roll occurs each round. Rolling 01-05 triggers the spell, dealing 8d6 + 1 per caster level damage (or 2d6 + 1 per caster level with successful save). A result of 06-100 means nothing occurs. The curse ends once triggered or when duration expires.',
     source: 'Pathfinder AP #89: Palace of Fallen Stars',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse Terrain, Lesser',
@@ -1025,6 +1092,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'Curses land with three unnatural hazards using minor perilous demesne curse effects; manifestations are unpredictable.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse Terrain',
@@ -1041,6 +1109,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'Curses land with four unnatural hazards using major perilous demesne curse effects.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse Terrain, Greater',
@@ -1057,6 +1126,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'Curses land with six unnatural hazards using greater perilous demesne curse effects.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse Terrain, Supreme',
@@ -1073,6 +1143,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'Curses land with seven unnatural hazards using grand perilous demesne curse effects.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse Water',
@@ -1088,6 +1159,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (object)',
     description: 'This incantation converts a flask of water into unholy water. The resulting liquid damages good outsiders similarly to how holy water affects undead and evil outsiders.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse, Major',
@@ -1103,6 +1175,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell operates similarly to bestow curse, with the key difference being that the DC to remove the curse equals the save DC +5, making it significantly harder to dispel.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cursed Earth',
@@ -1119,6 +1192,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell imposes a terrible curse upon land. The caster selects one of three effects: Famine (halving plant growth and food production), Living Death (causing Small+ creatures killed there to rise as uncontrolled zombies after 24 hours), or Plague (requiring daily Fortitude saves or contracting disease).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cursed Treasure',
@@ -1134,6 +1208,7 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes (object), then yes',
     description: 'Caster enchants treasure or a treasure container with a curse matching any bestow curse option. The next creature taking the treasure triggers the curse unless succeeding at Will save. Caster is immune if they take the treasure first.',
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cushioning Bands',
@@ -1150,5 +1225,6 @@ export const GAP_SPELLS_C_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell creates protective force bands granting DR 2 against piercing or slashing attacks. The target takes reduced damage from constriction, falling, burial, and crushing effects. The spell absorbs up to 12 points of damage per caster level (maximum 120) before being discharged.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 ];

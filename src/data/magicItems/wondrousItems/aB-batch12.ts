@@ -14,6 +14,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
     casterLevel: 9,
@@ -87,6 +88,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
     casterLevel: 5,
@@ -175,6 +177,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.NECROMANCY }],
     casterLevel: 5,
@@ -225,6 +228,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 3,
@@ -280,6 +284,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Advanced Class Guide',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ENCHANTMENT }],
     casterLevel: 7,
@@ -346,6 +351,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: "Adventurer's Guide",
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.EVOCATION }],
     casterLevel: 12,
@@ -413,6 +419,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 3,
@@ -465,6 +472,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: "Adventurer's Armory 2",
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 9,
@@ -511,6 +519,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: "Adventurer's Armory 2",
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 9,
@@ -557,6 +566,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: "Adventurer's Armory 2",
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 9,
@@ -611,6 +621,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Dungeons of Golarion',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [
       { strength: AuraStrength.MODERATE, school: MagicSchool.DIVINATION },
@@ -675,6 +686,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
     casterLevel: 4,
@@ -737,6 +749,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: "Pathfinder Adventure Path #75: Demon's Heresy",
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION }],
     casterLevel: 9,
@@ -833,6 +846,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder #88: Valley of the Brain Collectors',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.NECROMANCY }],
     casterLevel: 9,
@@ -883,6 +897,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder Adventure Path #127: Crownfall',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.DIVINATION }],
     casterLevel: 9,
@@ -934,6 +949,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Advanced Class Guide',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 7,
@@ -987,6 +1003,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Inner Sea Intrigue',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ENCHANTMENT }],
     casterLevel: 3,
@@ -1039,6 +1056,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
     casterLevel: 11,
@@ -1097,6 +1115,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Planar Adventures',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
     casterLevel: 3,
@@ -1151,6 +1170,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder: Spiral of Bones #5',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 14,
@@ -1204,6 +1224,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Knights of the Inner Sea',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 5,
@@ -1248,6 +1269,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Knights of the Inner Sea',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 5,
@@ -1292,6 +1314,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Knights of the Inner Sea',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 5,
@@ -1352,6 +1375,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Horror Adventures',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.EVOCATION }],
     casterLevel: 3,
@@ -1412,6 +1436,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [
       { strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION },
@@ -1472,6 +1497,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Advanced Race Guide',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 3,
@@ -1532,6 +1558,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Core Rulebook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
     casterLevel: 1,
@@ -1582,6 +1609,7 @@ export const wondrousItemsAB12: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Core Rulebook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 9,

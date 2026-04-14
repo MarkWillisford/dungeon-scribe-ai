@@ -10,6 +10,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'You have learned to use your bite as a natural weapon. This is a primary attack that deals 1d6 points of damage.',
     shortDescription: 'Gain a primary bite attack dealing 1d6 damage',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 1 },
@@ -27,6 +28,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       "When serving as a commander using the mass combat rules, you can add your class level to your army's Morale checks in place of your Charisma modifier.",
     shortDescription: 'Add class level instead of Charisma to army Morale checks',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'hobgoblin' }],
     effects: [],
@@ -40,6 +42,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'When the target of your challenge ability is killed or knocked unconscious, you can declare a new challenge target within 30 feet as an immediate action. You may chain additional challenges equal to your Charisma bonus (minimum 1) without counting against your daily uses.',
     shortDescription: 'Declare a new challenge target when your current target is defeated',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'class_feature', featureName: 'challenge' },
@@ -57,6 +60,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       '+5 competence on goblinoid-related checks; +2 leadership score for goblinoid followers',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -87,6 +91,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Bluff and Diplomacy as class skills; +4 competence to incite others to violence',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -129,6 +134,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'When a flat-footed creature is unaware of your presence and you successfully grapple it, you can attempt a second grapple combat maneuver check to pin the creature as a free action.',
     shortDescription: 'Pin an unaware grappled foe as a free action',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -146,6 +152,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'Once per round when you damage a creature that is shaken, frightened, or panicked, you can choose to deal half your normal damage in order to extend the duration of its fear condition by 1 round.',
     shortDescription: "Deal half damage to extend a frightened foe's fear by 1 round",
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -163,6 +170,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'If you act in the surprise round of a combat, as a free action you can attempt a single Intimidate check to demoralize a creature within 30 feet.',
     shortDescription: 'Demoralize a foe as a free action during the surprise round',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'intimidating_prowess' }],
     effects: [],
@@ -176,6 +184,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'You may use Intimidate, rather than Bluff, to attempt a feint against a creature within your melee reach.',
     shortDescription: 'Feint using Intimidate instead of Bluff',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'intimidating_prowess' }],
     effects: [],
@@ -190,6 +199,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'You gain spell-like abilities based on your draconic aspect color, each usable once per day. Black grants corrosive touch and darkness; Blue grants minor image and shocking grasp; Green grants entangle and gust of wind; Red grants burning hands and pyrotechnics; White grants a cold-damage burning hands and fog cloud. You can use this feat instead of Draconic Breath or Draconic Glide to qualify for Draconic Paragon.',
     shortDescription: 'Gain draconic spell-like abilities based on your aspect color',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'draconic_aspect' },
@@ -206,6 +216,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       "You can control, guide, and communicate with slurks as if they understood Draconic. You can also spend a standard action to manipulate the nodules on the slurk's back to activate its slime ability.",
     shortDescription: 'Control and communicate with slurks; activate their slime ability',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'race', raceName: 'kobold' }],
     effects: [],
@@ -220,6 +231,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'You gain a +1 bonus on attack rolls and damage rolls against creatures whose hatred racial trait or favored enemy class feature applies to you.',
     shortDescription: '+1 attack and damage vs. creatures that specifically hate your kind',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -261,6 +273,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'When you and an ally with this feat both threaten the same creature, you need only hit with at least one claw attack (rather than two) to use your rend ability.',
     shortDescription: 'Trigger rend with just one claw hit when flanking with a teamwork ally',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'rend' },
@@ -277,6 +290,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'During rage, fire and acid damage no longer suppress your regeneration from functioning on the following round; instead, they reduce hit points regained by regeneration by 2 per round until the end of your next turn.',
     shortDescription: 'Rage prevents fire/acid from fully shutting down regeneration',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'class_feature', featureName: 'rage' },
@@ -294,6 +308,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'You gain a +2 bonus on saves made to resist aversions to objects, sounds, and materials appropriate to your vampire type. When confronted with such things, you can attempt a saving throw immediately instead of after 1 round.',
     shortDescription: '+2 save vs. vampire aversions; react to them immediately',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Vampire' }],
     effects: [
@@ -322,6 +337,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Transform your animal companion or familiar into an undead creature with fast healing 5',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Dhampir or vampire, nongood alignment' },
@@ -338,6 +354,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
     description: 'You can breathe water as well as air.',
     shortDescription: 'Breathe water as well as air',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Hold breath ability' }],
     effects: [],
@@ -351,6 +368,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'You gain a tail swipe attack usable at full base attack bonus –5 during a full attack, dealing 1d4 damage (Medium) plus half Strength modifier. On a critical hit, you can attempt a trip maneuver as a free action against the target.',
     shortDescription: 'Gain a secondary tail swipe attack; critical hits can trip',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 5 },
@@ -368,6 +386,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'You gain a bite attack. This is a primary natural attack that deals 1d3 points of damage.',
     shortDescription: 'Gain a primary bite attack dealing 1d3 damage',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'race', raceName: 'ratfolk' }],
     effects: [],
@@ -381,6 +400,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'Once daily when you need a mundane item, you happen to have one available. The item must cost no more than 25 gp plus 5 gp per level, and you must pay its cost when you "find" it. You cannot obtain magical items or specific keyed items.',
     shortDescription: 'Once per day produce a mundane item you might plausibly have packed',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'ratfolk' }],
     effects: [],
@@ -395,6 +415,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'Foes without a swim speed provoke attacks of opportunity from you when underwater. This does not apply to creatures under freedom of movement effects.',
     shortDescription: 'Non-swimmers provoke attacks of opportunity from you underwater',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_reflexes' },
@@ -411,6 +432,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       "You eliminate the AC penalty normally imposed by blood frenzy. Additionally, if both claw attacks connect during frenzied combat, you may perform a rend attack dealing bonus damage equal to one claw's damage plus 1.5× Strength modifier.",
     shortDescription: 'Remove the AC penalty of blood frenzy; add rend when both claws hit',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Blood frenzy ability, sahuagin race' }],
     effects: [],
@@ -426,6 +448,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Ignore size Stealth penalties and gain +2 attack vs. flat-footed in dim light',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'skill_focus_stealth' },
@@ -460,6 +483,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Extra Stunning Fist use; +1 DC on madness effects; stun causes Wisdom damage',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -481,6 +505,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'By expending 1 ki point as a swift action, channel cosmic madness into your next unarmed strike. A miss inflicts 2 Wisdom damage to you. A successful hit deals normal damage plus 1d4+1 Wisdom damage to the target, reducible to 2 damage with a Will save (DC = 10 + ½ level + Wisdom modifier).',
     shortDescription: 'Spend ki to deal Wisdom damage with unarmed strikes; miss harms yourself',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 17 },
@@ -504,6 +529,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Madness save penalty while striking; spend ki to disintegrate foes killed by Stunning Fist',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 19 },
@@ -530,6 +556,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'While activating Demonic Style, when you successfully bull rush a target during a charge, you may immediately trigger Great Cleave as if you had used a standard action. The bull rush target must be the first target of the Great Cleave attack sequence.',
     shortDescription: 'Trigger Great Cleave after a charge bull rush in Demonic Style',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'cleave' },
@@ -553,6 +580,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'Select one type of native outsider. You count as both human and that race for effects related to race, including traits, feat prerequisites, spells, and magic items. You must possess the necessary physical features.',
     shortDescription: 'Count as a specific native outsider race in addition to human',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'human' }],
     effects: [],
@@ -566,6 +594,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'You gain a +2 bonus on Survival checks on planes other than the Material Plane and a +2 bonus on saving throws against hazards encountered in such environments. With 10+ Survival ranks, the Survival bonus increases to +4. This bonus does not stack with the Self-Sufficient feat.',
     shortDescription: '+2 Survival and saves vs. planar hazards off the Material Plane',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_planes', ranks: 3 },
@@ -608,6 +637,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       "As a standard action, attempt a combat maneuver check against a creature no more than one size category larger than you (provoking an attack of opportunity). If successful, you disable one arm or natural attack of your choice for 1 round, plus 1 additional round for every 5 by which you exceed the target's CMD. The target can restore the limb as a standard action.",
     shortDescription: "Disable a foe's arm or natural attack with a successful combat maneuver",
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -625,6 +655,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'You can move at full speed while using Acrobatics to balance on narrow surfaces without becoming flat-footed or losing your Dexterity bonus to AC. You also gain a +4 bonus on Climb checks to catch yourself while falling and a +4 bonus on saves against effects that would cause you to fall into pits.',
     shortDescription: 'Balance at full speed without penalties; +4 saves against falling into pits',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'DEX', minimum: 13 }],
     effects: [
@@ -652,6 +683,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Deliver coup de grace to unconscious/bound/pinned targets as a standard action',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -665,6 +697,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'As a standard action, coat a weapon with decomposing waste or virulent filth. The next successful attack exposes the target to filth fever. On a critical hit, the onset time reduces to 1 round, with a save DC of 10 + ½ base attack bonus + Intelligence modifier.',
     shortDescription: 'Coat a weapon to expose the next target to filth fever',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_dungeoneering', ranks: 1 },
@@ -682,6 +715,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       "Replace your animal companion with a magical beast cohort. The creature's effective cohort level scales with your effective druid level (from cohort level 4 at druid level 7 to level 12 at druid level 20). Eligible creatures include griffons, pegasi, worgs, manticores, and other magical beasts. This feat counts as Leadership for prerequisite purposes; you cannot have both simultaneously.",
     shortDescription: 'Replace your animal companion with a magical beast cohort',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'handle_animal', ranks: 7 },
@@ -698,6 +732,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'When using Turn Undead, undead creatures that fail their saving throw catch fire with holy flames. This divine fire functions like normal fire but cannot be extinguished by water—only negative energy healing of 5+ HP will extinguish the flames.',
     shortDescription: 'Undead that fail against Turn Undead catch divine fire',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'turn_undead' },
@@ -714,6 +749,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'Expend two uses of your channel energy or lay on hands ability as a full-round action to increase your healing or damage output by 50%.',
     shortDescription: 'Spend two channel/lay on hands uses to heal or deal 50% more',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Channel energy or lay on hands class feature' },
@@ -729,6 +765,7 @@ export const MISC_FEATS_2: FeatDefinition[] = [
       'When you create undead, they gain one teamwork feat you know as a bonus feat, functioning only when cooperating with you or other undead you created. Undead controlled via Command Undead or similar abilities also gain a bonus teamwork feat you know while under your control. Intelligent undead cannot benefit from this feat.',
     shortDescription: 'Undead you create or control gain one of your teamwork feats',
     source: 'Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'special', description: 'Any teamwork feat; ability to control or create undead' },

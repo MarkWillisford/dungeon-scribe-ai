@@ -10,6 +10,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 morale bonus on fear saves per ally with this feat within 10 ft (max +8).',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'feat', featId: 'iron_will' }],
     effects: [
@@ -31,6 +32,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
       "While using a shield of the type to which your Shield Focus feat applies, you gain a bonus on Reflex saves against area of effect attacks. The bonus equals your shield's base bonus to armor class plus any bonuses granted by feats or class abilities. Enhancement bonuses on the shield do not apply to this bonus.",
     shortDescription: 'Gain Reflex save bonus vs. area attacks equal to shield base AC bonus.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -56,6 +58,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
       'You have been trained to fight flying creatures. You gain a +2 circumstance bonus on attack rolls against flying opponents when you have set a weapon against a charge, or when you are allowed an attack of opportunity against the flying opponent.',
     shortDescription: '+2 attack vs. flying foes on set-against-charge or AoOs.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [
@@ -77,6 +80,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
       "You can create a variety of dragoncraft items from materials gathered from the bodies of true dragons. You must harvest appropriate materials within 48 hours of a dragon's death by succeeding on a Heal check (DC 10 + dragon's CR). Crafting time is 1 hour per 100 gp of items produced. Craftable items include dragonfire (2d6 fire damage reagent), draconic perfume (+2 on social checks), dragon's blood (heals 1d4 and grants save bonuses), dragon's gut (2d4 acid splash weapon), and dragonskin grip (+2 CMD vs. disarm).",
     shortDescription: 'Harvest dragon materials to craft alchemical dragoncraft items.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'craft', ranks: 5 },
@@ -101,6 +105,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
       'You gain a +1 bonus on all saving throws against auras, breath weapons, spell-like abilities, spells, supernatural abilities, and other special attacks of creatures with the dragon type.',
     shortDescription: '+1 on all saves vs. dragon special attacks.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_arcana', ranks: 1 }],
     effects: [
@@ -122,6 +127,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
       "When you confirm a critical hit against an opponent possessing a breath weapon ability, you may forgo the additional critical damage. Instead, the target is prevented from using its breath weapon for a number of rounds equal to twice the weapon's critical multiplier, beyond any standard recharge time the ability specifies.",
     shortDescription: 'On a crit, forgo extra damage to suppress breath weapon for rounds.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 4 },
@@ -147,6 +153,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain attack, AC, and Reflex bonuses vs. a chosen dragon type; story feat with goals.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -188,6 +195,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
       "Whenever you score a critical hit, your opponent takes a -1 penalty to its natural armor bonus for the duration of the encounter. This penalty is cumulative, but cannot reduce an opponent's natural armor bonus below 0.",
     shortDescription: 'Critical hits reduce foe natural armor by 1 (cumulative).',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'critical'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },
@@ -213,6 +221,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Flank large foes with an ally who has this feat if the foe is 2+ sizes larger.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [],
     effects: [
@@ -234,6 +243,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
       'Whenever an opponent of at least one size category larger than yourself attempts a combat maneuver attack against you, you gain a +2 bonus on any allowed attacks of opportunity. If the opponent can execute such maneuvers without triggering attacks of opportunity, you instead receive a +2 bonus to your CMD against those specific maneuvers.',
     shortDescription: '+2 on AoOs or CMD when larger foes attempt combat maneuvers on you.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_expertise' },
@@ -259,6 +269,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
       'You gain a +2 dodge bonus to armor class against attacks of opportunity from opponents that are not adjacent to you. Special: This feat counts as Dodge for the purpose of meeting prerequisites for Mobility and Spring Attack.',
     shortDescription: '+2 dodge AC vs. AoOs from non-adjacent foes; counts as Dodge for prereqs.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'ability_score', ability: 'DEX', minimum: 15 }],
     effects: [
@@ -281,6 +292,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     shortDescription:
       "Grapple a larger foe's snout on a missed bite to suppress breath weapon and bite.",
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_expertise' },
@@ -312,6 +324,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain evasion vs. dragon breath/tail sweep when adjacent to an ally with this feat.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -336,6 +349,7 @@ export const DRAGONSLAYER_FEATS: FeatDefinition[] = [
       'Whenever you confirm a critical hit against an opponent that uses wings to fly, you can forgo the extra critical damage to instead prevent it from flying for a number of rounds equal to twice the critical multiplier of your attack. If the target was airborne when struck, it must succeed at a DC 20 Fly check or suffer falling damage.',
     shortDescription: 'On a crit vs. winged flier, forgo extra damage to ground it for rounds.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 9 }],
     effects: [

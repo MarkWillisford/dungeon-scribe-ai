@@ -17,6 +17,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This extract modifies your magical reserves to alter all bombs created during the duration. Only one bomb admixture can be active simultaneously; drinking another replaces the previous effect. When you throw a bomb hitting a direct target, lashes of electrical energy are released from the bomb, coalescing on the direct target and up to three creatures that take damage from the bomb's splash. Affected creatures must succeed at a Reflex save or take 1d6 electrical damage each time they move more than 5 feet as a move action throughout the effect's duration.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lily Pad Stride',
@@ -39,6 +40,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This spell enables the caster to walk across liquid surfaces by creating magical aquatic plants at each footstep. Creatures of equal or smaller size can follow using Acrobatics checks (DC 10) to maintain half speed, or accept a -5 penalty to move at normal speed. Failed checks result in falling through the plants, which accumulates penalties for subsequent followers. The lily pads disappear once the caster moves beyond spell range or the duration expires.",
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Limp Lash',
@@ -60,6 +62,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "The caster manifests a dark whip-shaped field of energy that wraps around an enemy's neck, leaving everything except the head paralyzed. Upon a successful ranged touch attack, the target sustains a 1d6 penalty to Strength, Dexterity, and Constitution each round. When any of these ability scores reaches 1, the target becomes paralyzed (except the head, which retains full sensory function and speech capability). The whip extends up to 20 feet, has 15 hit points, and hardness 5. Penalties cease immediately when the spell ends.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Line In The Sand',
@@ -76,6 +79,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "The caster creates a glowing crimson line around the area. Within this zone, the spellcaster gains bonus attacks of opportunity each round equal to their relevant ability modifier (Intelligence for magi and wizards, Charisma for bloodragers and sorcerers). However, this does not allow more than one attack against any single creature per action that provokes an opportunity attack.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Linked Legacy',
@@ -101,6 +105,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This spell enables affected creatures to automatically share information gained from successful Knowledge checks or monster identification rolls as free actions. All spell targets receive shared information instantly. The spell ceases functioning for all targets if any move beyond close range of the caster until they reunite within range.",
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lipstitch',
@@ -122,6 +127,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This silent spell magically stitches the target's lips tightly together if it fails a saving throw, preventing speech, bite attacks, spellcasting, and command word activation. The victim suffers 1d6 damage from the stitching process. The thread can be removed through: a DC 20 Strength check as a standard action; piercing or slashing weapon cuts as a full-round action; or a DC 20 Heal check performed over one minute. The first two removal methods cause 1d6 damage plus 1 bleed damage and create a 20% chance of failing spellcasts with verbal components until bleeding stops. The spell affects only one mouth per casting and has no effect on creatures without mouths.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Admonition',
@@ -138,6 +144,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "The caster points out the target's faults and failures, causing them to become staggered for 1 round. While affected, the target cannot be the target of another spell that has the word 'litany' in the title.",
     source: "Pathfinder Player Companion: Disciple's Doctrine",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Defense',
@@ -153,6 +160,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "When invoked, this spell reinforces your defensive capabilities. The enhancement bonus from your armor doubles, and you gain immunity to fear effects. Additionally, while under this spell's influence, you cannot be targeted by other spells containing 'litany' in their titles.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Dependability',
@@ -170,6 +178,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "When cast, this enchantment causes one creature to take the average result of its next attack roll, saving throw, skill check, or ability check. The affected target cannot be targeted by other spells containing 'litany' in their title during the duration.",
     source: "Pathfinder Player Companion: Disciple's Doctrine",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Duty',
@@ -186,6 +195,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "The caster recites a mantra or phrase that reminds them of their duty, gaining the ability to reroll a failed save against mind-controlling spells and a +2 bonus versus enchantment effects for one round. The spell can only reroll saves that failed within the previous round, and the target cannot be affected by other spells with 'litany' in their title while this effect is active.",
     source: "Pathfinder Player Companion: Disciple's Doctrine",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Entanglement',
@@ -203,6 +213,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This spell conjures chains of energy that lash upward from the ground and hamper the target's movement, causing them to become entangled. The spell fails against flying creatures or those not on solid ground. While affected, the target cannot be targeted by other spells with 'litany' in their title.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Escape',
@@ -220,6 +231,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "The caster invokes divine power to rescue an ally from a grapple. The target loses the grappled and pinned conditions and is teleported 10 feet. The spell requires available space at the destination; without it, the casting fails.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Order',
@@ -236,6 +248,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This spell amplifies a creature's vulnerability to lawful attackers. When cast on a chaotic target, it makes the creature more susceptible to the attacks of lawful creatures, doubling damage from lawful sources. Targets with both chaotic alignment and subtype also become sickened for 1 round when hit by lawful attackers. The spell only affects chaotic creatures; nonchaotic targets are unaffected. While active, the target cannot be affected by other spells containing 'litany' in their titles.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Righteousness',
@@ -252,6 +265,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This spell makes evil targets vulnerable to good-aligned attackers. If the target is evil, it receives double damage from good-aligned creatures. Those with the evil subtype additionally become dazzled for 1d4 rounds when struck by good-aligned attacks. The spell produces no effect against non-evil creatures. While affected, the target cannot be targeted by other spells containing 'litany' in their titles.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of the Red Crusader',
@@ -267,6 +281,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This necromantic spell causes each time the target creature takes piercing or slashing damage, it takes 1 point of bleed damage; this bleed damage stacks with itself. Additionally, affected targets cannot be targeted by other spells containing 'litany' in the title.",
     source: "Pathfinder Player Companion: Disciple's Doctrine",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Thunder',
@@ -283,6 +298,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "The caster invokes a thunderous boom upon an enemy. The target experiences two primary effects: deafness that persists until the condition is removed, plus confusion lasting one round. Additionally, while affected by this spell, the creature cannot be targeted by other spells containing the word 'litany' in their titles.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Truth',
@@ -299,6 +315,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "The caster uses a tirade against deceit to suppress illusions affecting the target. The spell suppresses any illusion spells or effects for its duration and prevents the target from gaining benefits from concealment. Additionally, while under this effect, the target cannot be targeted by other spells containing 'litany' in their title.",
     source: 'Pathfinder Campaign Setting: Qadira, Jewel of the East',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Vengeance',
@@ -315,6 +332,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "The spell makes your enemy feel the pain of blows more sharply. Attackers gain a +5 sacred or profane bonus (based on caster alignment) to damage rolls against the target. The affected creature cannot be targeted by other spells containing 'litany' in their title while under this effect.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Warding',
@@ -330,6 +348,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "The spell grants two primary benefits. First, the caster gains the ability to make two additional attacks of opportunity this round. Second, they receive a +2 sacred bonus to AC against attacks of opportunity. While under this effect, the target cannot be targeted by another spell containing the word 'litany' in its title.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Weakness',
@@ -346,6 +365,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "The caster's proclamation weakens the target creature. The affected creature becomes fatigued for 1 round. While subject to this spell, the target cannot be the target of another spell that has the word 'litany' in the title.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Liveoak',
@@ -361,6 +381,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This spell animates a healthy, Huge oak tree into a treant guardian. The caster establishes a triggering phrase of up to one word per caster level. Only one tree can be affected at a time; casting on another tree ends the previous effect. If dispelled, the tree roots itself where it stands. If released voluntarily by the caster, the tree attempts to return to its original location before rooting.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Long Arm',
@@ -384,6 +405,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       'Your arms temporarily grow in length, increasing your reach with those limbs by 5 feet.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Longshot',
@@ -414,6 +436,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       'This transmutation spell diminishes distance penalties when using ranged weapons. The caster receives a +10-foot bonus to the range increment of any weapon they employ while the spell remains active.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Longstrider',
@@ -435,6 +458,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       'This spell gives you a +10 foot enhancement bonus to your base speed. It has no effect on other modes of movement, such as burrow, climb, fly, or swim.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Longstrider, Greater',
@@ -456,6 +480,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       'Functions as longstrider but provides a +20-foot enhancement bonus to base speed and +10-foot enhancement bonus to other movement modes (burrow, climb, fly, swim). Does not grant movement modes not already possessed.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lose the Trail',
@@ -472,6 +497,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This spell enables targets to obscure their tracks when fleeing from a pursuer. The magic increases the DC of any Survival checks made to track the spell's targets by 2 per level of the caster.",
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lost Legacy',
@@ -503,6 +529,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "The spell imposes a curse preventing the target from using Diplomacy, wild empathy, or similar abilities to improve others' attitudes. Creatures with friendly or helpful attitudes must make Will saves during each interaction or become indifferent. Upon curse removal, creatures regain their previous positive impressions if attitudes haven't declined below indifferent.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lost Locale',
@@ -521,6 +548,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This enchantment spell functions similarly to lost passage but impacts a significantly wider geographical region. The magic can be made permanent through the permanency spell at a cost of 90,000 gp.",
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lost Passage',
@@ -539,6 +567,7 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This enchantment confounds creatures' senses of direction, interferes with recognizing landmarks, and causes them to misjudge distances and angles. Affected creatures must make a Survival check to avoid becoming lost. Those failing their saves incur penalties equal to double the caster level on Survival checks, treat all squares as difficult terrain (persisting 1 hour per caster level after leaving), lose benefits from terrain-ignoring effects, and suffer a -4 Dexterity penalty. The spell can be made permanent via the permanency spell for 10,000 gp.",
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Lover's Vengeance",
@@ -568,5 +597,6 @@ export const GAP_SPELLS_L_2: Spell[] = [
     description:
       "This spell imbues the caster or a romantic partner with vengeful fury against a specified enemy who has wronged them. When cast on the caster, they gain rage benefits upon next combat with that foe. When cast on a lover (within 1 hour of intimate contact), the lover gains rage benefits when encountering that enemy. The rage lasts 1 round per caster level. If the triggering creature is a current or former romantic interest, the rage benefits double. The spell functions as a contingency effect for stacking purposes.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 ];

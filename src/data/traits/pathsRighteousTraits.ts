@@ -11,6 +11,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'You have studied apocryphal texts and may select apocryphal subdomains associated with your patron deity. In some cases you can access subdomains from domains your deity does not normally grant (marked with an asterisk); when a subdomain modifies two domains, you must choose one you actually have access to.',
     shortDescription: 'May select apocryphal subdomains for your patron deity',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -31,6 +32,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'You studied "The Majestic Book of the Prime Ascended" and gained a measure of magical training from its teachings. You can cast one 0-level spell from the sorcerer/wizard spell list as a spell-like ability once per day.',
     shortDescription: 'Cast one chosen cantrip 1/day as spell-like ability',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -51,6 +53,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'Your studies of the "Prime Archmage" chapter of divine texts have honed your magical intellect. Select either Knowledge (arcana) or Spellcraft; you gain a +1 trait bonus on that skill and it is a class skill for you.',
     shortDescription: '+1 to Knowledge (arcana) or Spellcraft; class skill',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -71,6 +74,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'Your studies of the "Prime Commander" chapter and firsthand accounts of battles at the Worldwound have prepared you to fight the demonic hordes. You gain a +1 trait bonus on attack rolls against outsiders with the chaotic subtype.',
     shortDescription: '+1 attack rolls vs chaotic outsiders',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -91,6 +95,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'Your steadfast faith provides a bulwark against despair. You gain a +2 trait bonus on saving throws against spells with the emotion, fear, or pain descriptor. Once per day, you may choose to increase this bonus to +4 for a single saving throw before you roll.',
     shortDescription: '+2 saves vs emotion/fear/pain; once/day +4 instead',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -111,6 +116,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'Through disciplined meditation and mindfulness, you have trained your mind to react swiftly. Once per day, you may add your Wisdom modifier to a single initiative check.',
     shortDescription: 'Once/day add Wisdom modifier to one initiative check',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -131,6 +137,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'Your training in the "Prime Conspirator" chapter has taught you that concealing your true identity is essential to keeping secrets. Once per day when making a Disguise check, you may roll twice and take the higher result.',
     shortDescription: 'Once/day roll Disguise twice, take higher result',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -151,6 +158,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'Through disciplined faith, you can maintain your spell preparation despite minor interruptions. You ignore the first interruption during rest for the purpose of determining how long you need to rest in full to regain the capacity to prepare spells, provided the interruption lasts no more than 15 minutes. Any spells you cast during such an interruption do not count against your daily limit when you wake and prepare spells.',
     shortDescription: 'Ignore one rest interruption (up to 15 min) per night for spell prep',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -171,6 +179,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       "Your training in deception through necessity has sharpened your ability to mislead. You gain a +3 trait bonus on Bluff checks when they are opposed by another creature's Sense Motive check.",
     shortDescription: '+3 Bluff when opposed by Sense Motive',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -191,6 +200,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       "Your devotion to Razmir's church teaches that submission is its own form of power. Whenever you are under the effects of a compulsion effect, you gain a +1 trait bonus on attack and damage rolls.",
     shortDescription: '+1 attack and damage while under a compulsion effect',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     subcategory: 'Razmir',
     prerequisites: [],
@@ -229,6 +239,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'Your path to enlightenment runs through the study of history. You gain a +1 trait bonus on Knowledge (history) checks, and Knowledge (history) is a class skill for you.',
     shortDescription: '+1 Knowledge (history); class skill',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -249,6 +260,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'You value established customs and aristocratic conventions as part of your faith. You gain a +1 trait bonus on Knowledge (nobility) checks, and Knowledge (nobility) is a class skill for you.',
     shortDescription: '+1 Knowledge (nobility); class skill',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -269,6 +281,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'You have faced intimidation and bullying throughout your upbringing for following your path of freedom, and the experience has made you resilient to fear-based manipulation. The DC to demoralize you with an Intimidate check increases by 2.',
     shortDescription: 'DC to demoralize you with Intimidate +2',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -289,6 +302,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'You have escaped slavery or other imprisonment and have vowed never to be shackled again. You gain a +1 trait bonus on Escape Artist checks, and Escape Artist is a class skill for you.',
     shortDescription: '+1 Escape Artist; class skill',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -309,6 +323,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'Your modest academic exposure outside your primary pursuits grants a measure of general knowledge. Once per day, you may attempt a Knowledge (geography), Knowledge (history), or Knowledge (local) check untrained with a +2 trait bonus.',
     shortDescription: 'Once/day attempt one untrained Knowledge check with +2 bonus',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -332,6 +347,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'A follower or agent of Andoletta once offered you unconventional comfort during a time of personal loss, and the memory of that kindness fortifies you against emotional manipulation. You gain a +2 trait bonus on saving throws against emotion and fear effects. If you have immunity to fear, you instead gain a +4 trait bonus on saves against emotion effects.',
     shortDescription: '+2 saves vs emotion and fear; +4 vs emotion if immune to fear',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Andoletta',
     prerequisites: [{ type: 'deity', deityName: 'Andoletta' }],
@@ -354,6 +370,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Once/day grant a new save vs charm/compulsion on crit, smite, or lay on hands',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Andoletta',
     prerequisites: [{ type: 'deity', deityName: 'Andoletta' }],
@@ -378,6 +395,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'You aspire to join Angradd in the afterlife through righteous combat, and your faith fuels your martial aggression. You gain a +1 trait bonus on all melee attack rolls when you charge.',
     shortDescription: '+1 melee attack rolls when charging',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Angradd',
     prerequisites: [{ type: 'deity', deityName: 'Angradd' }],
@@ -404,6 +422,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       "Witnessing a dwarven warrior's courageous act performed in Angradd's name during your early combat experience inspired you to share that courage with others. Once per day, when you generate an effect that grants a morale bonus, increase that bonus by 1 for all creatures affected.",
     shortDescription: 'Once/day increase a morale bonus you generate by 1',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Angradd',
     prerequisites: [{ type: 'deity', deityName: 'Angradd' }],
@@ -428,6 +447,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'You once dozed off during an important task but received a divine vision from Arqueros that roused you in time to prevent failure. You gain a +3 trait bonus on Perception checks attempted while you are alone on guard duty.',
     shortDescription: '+3 Perception while alone on guard duty',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Arqueros',
     prerequisites: [{ type: 'deity', deityName: 'Arqueros' }],
@@ -454,6 +474,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       "Arqueros's example as the Golden Bulwark inspires you to give your all for those you protect. Once per day, when an adjacent ally becomes the target of an attack before the attack roll is made, you may use an immediate action to redirect that attack to yourself instead.",
     shortDescription: 'Once/day redirect an adjacent ally attack to yourself as immediate action',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Arqueros',
     prerequisites: [{ type: 'deity', deityName: 'Arqueros' }],
@@ -478,6 +499,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'You once escaped a perilous situation in your youth through divine intervention after beseeching Chaldira Zuzaristan. Once per day, when making a skill check, you may roll twice and take the better result.',
     shortDescription: 'Once/day roll a skill check twice, take the better result',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Chaldira',
     prerequisites: [{ type: 'deity', deityName: 'Chaldira' }],
@@ -499,6 +521,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       "You believe that mischief is a sacred method of humbling your adversaries, in accordance with Chaldira's teachings. When you perform a dirty trick combat maneuver while your smite evil bonus applies to combat maneuver checks, you do not provoke attacks of opportunity. If you already have an ability that prevents such attacks of opportunity (such as Improved Dirty Trick), you instead gain a +2 trait bonus on dirty trick combat maneuver checks against creatures that are the targets of your smite.",
     shortDescription: 'No AoO on dirty trick while smiting; or +2 dirty trick CMB vs smite target',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Chaldira',
     prerequisites: [{ type: 'deity', deityName: 'Chaldira' }],
@@ -529,6 +552,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Profession (cook); cook morale meals granting +1 to one roll within 8 hours',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Folgrit',
     prerequisites: [{ type: 'deity', deityName: 'Folgrit' }],
@@ -550,6 +574,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       "You were called to defend home or family during a critical moment and gained unexpected clarity through Folgrit's grace. Once per day when you use lay on hands, you may also cure the target of 1d4 points of Intelligence, Wisdom, or Charisma damage (your choice).",
     shortDescription: 'Once/day lay on hands also cures 1d4 ability damage (INT, WIS, or CHA)',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Folgrit',
     prerequisites: [{ type: 'deity', deityName: 'Folgrit' }],
@@ -575,6 +600,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Adds command, forbid action, suggestion, lesser geas, geas/quest to paladin list',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Kols',
     prerequisites: [
@@ -599,6 +625,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'Your upbringing instilled a commitment to keeping promises. Once per day, you may take 10 on a skill check attempted as part of fulfilling a prior promise, even if you are distracted or in combat.',
     shortDescription: 'Once/day take 10 on a skill check made to fulfill a promise, even in combat',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Kols',
     prerequisites: [{ type: 'deity', deityName: 'Kols' }],
@@ -629,6 +656,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Once/day move action: allies in 30 ft gain +2 morale on next attack vs foe that hurt you',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Ragathiel',
     prerequisites: [{ type: 'deity', deityName: 'Ragathiel' }],
@@ -655,6 +683,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       "Evil influences once sought to shape your values, but Ragathiel's inspiration guided you toward moral conduct instead. You gain a +2 trait bonus on Sense Motive checks to see through an evil creature's Bluff attempts.",
     shortDescription: '+2 Sense Motive vs evil creatures bluffing',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Ragathiel',
     prerequisites: [{ type: 'deity', deityName: 'Ragathiel' }],
@@ -685,6 +714,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Start with heirloom masterwork weapon (up to 400 gp); +1 attack with that weapon type when smiting evil',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Shizuru',
     prerequisites: [{ type: 'deity', deityName: 'Shizuru' }],
@@ -711,6 +741,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'You come from a particularly respected family, religious order, school, or similar organization devoted to Shizuru, and you leverage that heritage to strengthen your sense of self. Once per day, when you fail a saving throw against a charm or compulsion effect, you may attempt that save again. If you do, you gain a +2 trait bonus to the reroll and must use the new result.',
     shortDescription: 'Once/day reroll a failed save vs charm or compulsion with +2 trait bonus',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Shizuru',
     prerequisites: [{ type: 'deity', deityName: 'Shizuru' }],
@@ -741,6 +772,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Once/day smite evil: halve damage dealt, but target speed reduced to 5 ft for 1 round',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Trudd',
     prerequisites: [
@@ -766,6 +798,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Once/day free aid another on melee hit: adjacent ally gains +4 AC (instead of +2) vs that foe',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Trudd',
     prerequisites: [{ type: 'deity', deityName: 'Trudd' }],
@@ -791,6 +824,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Blind-Fight bonus feat; reduced blindness penalties; move full speed while blind',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Vildeis',
     prerequisites: [{ type: 'deity', deityName: 'Vildeis' }],
@@ -812,6 +846,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       'You once interposed yourself between an innocent and a dangerous evil threat, suffering significant blood loss and narrowly escaping death, and Vildeis blessed your recovery. You recover twice as many hit points and points of ability damage as normal when you rest, or three times as many when you take total bed rest.',
     shortDescription: 'Recover 2x HP and ability damage per rest; 3x on total bed rest',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Vildeis',
     prerequisites: [
@@ -843,6 +878,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
       "Your deep appreciation for gemstones' natural beauty, as taught by Yuelral, provides a steadying influence provided you carry sufficient wealth in bejeweled objects. As long as you carry bejeweled items totaling at least 200 gp × your character level in combined value, you gain a +1 trait bonus on all Will saving throws and a +2 trait bonus on a single Charisma-based skill check of your choice.",
     shortDescription: '+1 Will saves; +2 one Cha skill; requires gems worth 200 gp × level',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Yuelral',
     prerequisites: [{ type: 'deity', deityName: 'Yuelral' }],
@@ -870,6 +906,7 @@ export const PATHS_RIGHTEOUS_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Two 0-level druid spells added to all your spellcasting class lists and spells known',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     subcategory: 'Yuelral',
     prerequisites: [{ type: 'deity', deityName: 'Yuelral' }],

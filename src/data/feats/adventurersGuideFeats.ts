@@ -7,6 +7,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Additional Affiliations',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You have an expansive personality and can forge more affiliations than normal. Increase your affiliation slot total by 2. Normally you have a number of affiliation slots equal to your Charisma modifier + 1 (minimum 1). You can take this feat multiple times; each time you do so, your number of affiliation slots increases by 2.',
     shortDescription: 'Gain 2 additional affiliation slots; can be taken multiple times',
@@ -21,6 +22,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Agile Maiden',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "The Gray Maidens' signature armor hinders you less than others. For the purpose of class features (such as a ranger's combat style, a barbarian's fast movement, or a magus's spellcasting), you treat Gray Maiden plate as medium armor or heavy armor, whichever is more beneficial to a given ability. This does not affect the armor's statistics, and it is still considered heavy armor for all other purposes.",
     shortDescription: 'Treat Gray Maiden plate as medium or heavy armor for class features',
@@ -43,6 +45,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Aldori Artistry',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You can do more with your blade than slash and stab. Choose one of the following combat maneuvers: disarm, reposition, steal, sunder, or trip. You gain a +2 bonus when performing the selected maneuver while wielding an Aldori dueling sword. This bonus does not stack with the bonus provided by a combat maneuver feat with "improved" in its name (such as Improved Trip). You can select this feat multiple times, choosing a different combat maneuver each time.',
     shortDescription: '+2 on one chosen combat maneuver while wielding an Aldori dueling sword',
@@ -77,6 +80,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Aldori Dueling Disciple',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'Your prowess in Aldori swordplay grants you bravado. You gain a +2 morale bonus on Intimidate checks to demoralize opponents, and the DC of any attempt to demoralize you increases by 2. When you are participating in a duel, these bonuses increase to +4.',
     shortDescription: '+2 morale on Intimidate to demoralize; +4 during duels',
@@ -111,6 +115,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Aldori Dueling Mastery',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You have mastered the impenetrable Aldori fighting style. You gain a +2 bonus on initiative checks as long as you start combat with an Aldori dueling sword in your hand. As long as you wield only a single Aldori dueling sword in one hand (not using a shield, an off-hand weapon, armor spikes, unarmed strikes, or natural weapons), you gain a +2 shield bonus to your AC. If you wield the sword in two hands, this bonus drops to a +1 shield bonus to AC. Although the dueling sword deals slashing damage, you treat it as a piercing weapon for the purpose of bypassing damage reduction.',
     shortDescription:
@@ -159,6 +164,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Aldori Style',
     types: ['combat', 'style'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You have learned the classic Aldori dueling stance. While using Aldori Style and wielding only a single Aldori dueling sword in one hand (not using a shield, an off-hand weapon, armor spikes, unarmed strikes, or natural weapons), when you fight defensively or use Combat Expertise, you gain a +2 bonus on weapon damage rolls.',
     shortDescription:
@@ -196,6 +202,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Aldori Style Aegis',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "Baron Aldori's dueling style is at its strongest when employed in one-on-one duels. Adjusting to a reverse grip and keeping your blade in motion, you parry your rival's strikes with ease. While using Aldori Style, at the beginning of your turn, you can designate a focused target as a swift action. This designation lasts until the beginning of your next turn, and you take a -2 penalty to your AC against all other creatures' attacks for that duration. As an immediate action while using Combat Expertise or fighting defensively, you can attempt to parry the focused target's attack. This functions as the swashbuckler's opportune parry and riposte deed, except that it does not cost panache and you cannot riposte.",
     shortDescription:
@@ -221,6 +228,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Aldori Style Conquest',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'Defense is now second nature to you, and your blade punishes those who try to attack and fail. When you attempt to parry an attack using Aldori Style Aegis, you do not take any penalties on the attack roll incurred from using Combat Expertise or fighting defensively.',
     shortDescription: 'No attack roll penalties when parrying with Aldori Style Aegis',
@@ -246,6 +254,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Al-Zabriti-Trained Horse',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'This horse was trained by the Al-Zabriti tribespeople. It knows more tricks and is more loyal to its rider than most mounts. This horse automatically knows the tricks included in the combat riding trick (attack, come, defend, down, guard, and heel), and these tricks do not count against the normal maximum number of tricks the horse can learn. The Handle Animal DC to get the horse to perform a trick is reduced by 5, and the DC to teach the horse new tricks is reduced by 5.',
     shortDescription: 'Horse knows combat riding tricks for free; Handle Animal DCs reduced by 5',
@@ -260,6 +269,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Armored Rider',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "You are accustomed to riding while wearing armor, and your armor doesn't hinder your riding skills. You don't take the usual armor check penalty on Ride checks. If you are knocked unconscious while in a saddle, you always remain in the saddle. Normally, if you are knocked unconscious while riding, you have a 50% chance to stay in the saddle (75% if you're in a military saddle).",
     shortDescription: 'No armor check penalty on Ride; always stay in saddle when unconscious',
@@ -277,6 +287,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Aspis Partner',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You have earned the attention of the Aspis Consortium and can call in favors when necessary. Whenever you are in a settlement that is the size of a small town or larger, you can purchase (but not sell) items through your Aspis contacts. Treat your current settlement as though it were a metropolis to determine its base value and available magic items. You pay a 5% markup for such items, and orders take 3d6 days to be delivered through Consortium channels. You can pay an additional 1,000 gp to have your item magically delivered to you in 1d3 days instead.',
     shortDescription: 'Purchase items as if in a metropolis through Aspis Consortium contacts',
@@ -291,6 +302,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Cold Celerity',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You are a child of the frozen north, and you draw strength from the biting cold and unforgiving conditions. When you are in conditions of severe cold (below 0 degrees F), you gain a +2 bonus on initiative checks and a +1 bonus on attack rolls. In addition, you gain the bonus on attack rolls for 1 round after any round in which you take cold damage.',
     shortDescription:
@@ -331,6 +343,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Cypher Magic',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "Your intimacy with runes and the mysteries of ancient arcana has taught you secret ways to draw greater power from magical writings. The Cyphermages of Riddleport initially devised these unusual methods, but they have since spread far and wide through the Inner Sea region. You cast spells from scrolls at 1 caster level higher than the scroll's caster level. In addition, you gain a +2 bonus on caster level checks to activate a scroll with a higher caster level than your own.",
     shortDescription:
@@ -374,6 +387,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Cypher Script',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'Through researching lengthy, ancient, arcane scripts salvaged from Thassilonian ruins, you have discovered a more efficient method of recording spells. Any spell you scribe in your spellbook costs half as much as normal and takes up only half the room it normally would (round all fractions up). As with the Cypher Magic feat, Cypher Script was originally developed by the Cyphermages of Riddleport.',
     shortDescription: 'Spells scribed in spellbook cost half gold and take half space',
@@ -393,6 +407,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Devil Sense',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You instinctively sense the presence of fiends. At the beginning of your turn each round, if you are within 60 feet of an outsider with the evil subtype, you instinctively sense that something unholy is near. You may experience this sense as an unpleasant smell or taste (such as sulfur), as gooseflesh on your arms or neck, or as an ineffable sense of dread. This sense does not alert you to the direction of the outsider. Anything that can thwart or mislead detect evil can likewise block this sense.',
     shortDescription: 'Sense evil outsiders within 60 feet at the start of each turn',
@@ -413,6 +428,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Duelist of the Roaring Falls',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You have embraced the Roaring Falls method of Aldori swordplay, known for its elegant, sweeping strikes. When you use an Aldori dueling sword to deal damage to a shaken, frightened, or panicked foe, you can add your Dexterity bonus to damage rolls instead of your Strength bonus. If you can already add your Dexterity bonus to damage rolls, you instead gain a +1 competence bonus on damage rolls made with an Aldori dueling sword. When you attempt a dueling parry during a duel, the penalty on your attack roll to parry is reduced from -5 to -3. To gain these benefits, you must be wielding only an Aldori dueling sword.',
     shortDescription: 'Add Dex to damage vs. frightened foes; reduced parry penalty in duels',
@@ -436,6 +452,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Duelist of the Shrouded Lake',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You have embraced the Shrouded Lake style of Aldori swordplay, known for its circuitous footwork. When attempting to bull rush or reposition a foe, you gain a +1 insight bonus on the combat maneuver check and a +4 dodge bonus to your AC against attacks of opportunity you provoke. You also gain a +1 insight bonus to your CMD against bull rush and reposition attempts. When you attempt a dueling dodge during a duel, your bonus to AC increases to +6. To gain these benefits, you must be wielding only an Aldori dueling sword.',
     shortDescription:
@@ -500,6 +517,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: "Eagle's Resolve",
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "You are resolute in your opposition to slavery and oppression, and the very thought of mental control disgusts you. You receive a +1 bonus on saving throws against mind-affecting effects. When you succeed at such a saving throw, you gain a +2 morale bonus on all attack rolls, damage rolls, and saving throws against the source of that effect for a number of rounds equal to the spell's level, or if the effect is not a spell, for a number of rounds equal to one-third the Hit Dice of the creature that created the effect.",
     shortDescription:
@@ -528,6 +546,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Expert Boarder',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "You are as comfortable dangling from a ship's rigging as you are on stable land. Acrobatics and Climb are class skills for you. You gain a +2 bonus on Acrobatics and Climb checks to climb or swing on a rope or ship's rigging. You do not provoke attacks of opportunity from climbing or swinging on a rope or ship's rigging.",
     shortDescription: '+2 Acrobatics/Climb on rigging; no AoOs from climbing or swinging on ropes',
@@ -567,6 +586,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Extra Spontaneous Spell Mastery',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You are able to spontaneously cast spells you have mastered more frequently than your peers. You gain one additional use of your spontaneous spell mastery ability per day. You can take this feat multiple times.',
     shortDescription: 'Gain one additional use of spontaneous spell mastery per day',
@@ -586,6 +606,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: "Falcon's Cry",
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You inspire others to throw off the shackles of oppression. As a standard action, you can grant everyone within 60 feet who is able to see and hear you the ability to roll twice when attempting an Escape Artist check, a Will save against compulsions, or a Strength check to break chains, manacles, or similar bonds. Such checks must be attempted before the beginning of your next turn. You can do this once per day, plus one additional time for every 3 character levels that you have.',
     shortDescription:
@@ -604,6 +625,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Falling Water Gambit',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You have integrated both the Roaring Falls and Shrouded Lake techniques of Aldori swordplay into a seamless union. When attacking a creature denied its Dexterity bonus to AC because of your successful feint, you increase the threat range of your Aldori dueling sword by 1 (typically to 18-20/x2), and gain a +2 bonus on attack rolls to confirm critical hits. After you make a dueling dodge or succeed at a dueling parry during a duel, you can make an attack of opportunity against the foe who attacked you if that foe is shaken, frightened, or panicked. To gain these benefits, you must be wielding only an Aldori dueling sword.',
     shortDescription:
@@ -644,6 +666,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Fanged Crown Massacre',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'Driven by your loyalty to a fallen queen, you can inspire your allies to brutal acts. Whenever an ally within 30 feet makes an attack, you can attempt a DC 10 Perform (oratory) check as an immediate action. If you are successful, the ally gains a +2 morale bonus on her attack roll. If an attack affected in this way would normally deal nonlethal damage, it deals lethal damage instead. This ability has no effect if your ally cannot hear you speak or understand your words.',
     shortDescription: 'Immediate action: +2 morale on ally attack roll; nonlethal becomes lethal',
@@ -663,6 +686,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: 'Forceful Charge',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "This animal's charges move its enemies. Once per round when this animal companion hits an opponent with a charge attack, it can initiate a bull rush against that target as a free action. If it moves its full speed as part of the charge, it gains a +4 bonus on its combat maneuver check to resolve this bull rush.",
     shortDescription: 'Animal companion can bull rush on a charge hit; +4 CMC if moving full speed',
@@ -695,6 +719,7 @@ export const ADVENTURERS_GUIDE_FEATS: FeatDefinition[] = [
     name: "Garen's Discipline",
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "You've learned to defend yourself against spell and storm with dazzling flourishes of your weapon. Whenever you use Combat Expertise, fight defensively, or take the total defense action, choose a type of saving throw. Once per round before attempting a saving throw using the selected save, you gain a +2 bonus on that save. If you have a base attack bonus of +11 or higher, this bonus increases to +3. If you have a base attack bonus of +16 or higher, the bonus instead increases to +4.",
     shortDescription: '+2 bonus on chosen save type when fighting defensively; scales with BAB',

@@ -9,6 +9,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Select one advanced weapon training option for a weapon group you already have weapon training in.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'level', minimum: 5, class: 'fighter' },
@@ -26,6 +27,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use a monk weapon as if it were an unarmed strike for feat and ability purposes.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_focus', matchChoiceKey: 'weapon' },
@@ -44,6 +46,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use chosen weapon with class abilities requiring unarmed strikes; count character level as monk level for per-day feat uses.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'ascetic_style_wmh' },
@@ -63,6 +66,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Deal monk unarmed strike damage (character level −4) with the chosen weapon.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'ascetic_form_wmh' },
@@ -82,6 +86,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'No penalty to ranged disarm; can use steal maneuver with ranged weapon; disarmed items scatter with high attack rolls.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['targeting'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -101,6 +106,7 @@ export const WMH_FEATS: FeatDefinition[] = [
       'You can knock airborne foes from the sky with your ranged attacks. You do not take the standard –2 penalty on the attack roll to perform a ranged trip. You can attempt a ranged trip combat maneuver against a flying creature. A flying creature tripped by this feat falls at up to 100 feet per round and is entangled until it lands. The creature takes falling damage when it lands and lands prone.',
     shortDescription: 'No penalty to ranged trip; can trip flying creatures, causing them to fall.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['targeting'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -121,6 +127,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Lodge a ranged weapon in the target with a swift action, imposing a –2 penalty on rolls until removed.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -140,6 +147,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Make a melee attack to deflect incoming ranged attacks against you or an adjacent ally.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -159,6 +167,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Make a single melee attack using all full-attack rolls; on 2+ hits, target may suffer a condition.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 9 },
@@ -176,6 +185,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'During a full attack with an appropriate melee weapon, adjacent squares count as difficult terrain for enemies.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 5 },
@@ -193,6 +203,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain three additional utility shot options: open/close objects, trigger traps, and activate objects.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'marksmans_utility' },
@@ -211,6 +222,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain limited daily uses of a gunslinger deed (dead shot, startling shot, or targeting).',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 11 },
@@ -228,6 +240,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'When you hit a creature grappling an ally, that ally can use your attack roll to escape the grapple.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -247,6 +260,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Perform the utility shot deed with a ranged weapon; gunslingers gain +4 bonus and can do it for free.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 6 },
@@ -264,6 +278,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'When your first full-attack swing misses or is deflected, immediately make an unarmed attack with the same bonus.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -281,6 +296,7 @@ export const WMH_FEATS: FeatDefinition[] = [
       'Your thrown weapons bounce off your targets and return to your hands. When you make a ranged attack with an appropriate thrown weapon, the weapon returns to your hand immediately after the attack is resolved, whether or not the attack is successful. This feat does not function with bullets, thrown ammunition (such as darts or shuriken), splash weapons, or improvised weapons.',
     shortDescription: 'Thrown weapons return to your hand immediately after each attack.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'quick_draw' },
@@ -299,6 +315,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Extend Cut from the Air to massive projectiles and spell-generated ranged attacks.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -319,6 +336,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per round, use your BAB instead of a saving throw bonus against a targeted Reflex-save or non-melee effect.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -340,6 +358,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Make a targeted melee attack (as the targeting deed) twice per day plus additional times at higher BAB.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -359,6 +378,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain special abilities based on the special material your weapon is made from.',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 7 },
@@ -376,6 +396,7 @@ export const WMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Maintain two fighting styles simultaneously (one of which must be a weapon style feat).',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['style', 'combat'],
     prerequisites: [
       { type: 'special', description: 'Any two style feats from different styles' },

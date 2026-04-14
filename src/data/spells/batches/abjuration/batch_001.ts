@@ -24,6 +24,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "This protective ward provides the target with nine uses of emergency abilities. The recipient can activate any of the following as an immediate action, with a combined limit of nine total uses before the spell ends: Cat's Luck (reroll a failed save), Fortitude (negate critical hits or sneak attacks — roll damage normally instead), Rejuvenate (heal 3d6 HP when reduced to 0 or fewer hit points; stabilizes if still at negative HP), Shake Off (remove one condition: blinded, confused, cowering, dazed, dazzled, entangled, exhausted, fatigued, frightened, nauseated, panicked, shaken, sickened, or staggered), Shimmy Out (automatically escape a grapple or pin), or Stay Up (remain upright when tripped or knocked prone).",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Node of Blasting',
@@ -46,6 +47,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "The caster imbues an object with psychic energy that triggers when touched by a creature with a mind. The activation deals 6d6 points of damage to the creature touching the object and causes the creature to be staggered for 1 minute. A successful Will save halves damage and negates the staggered condition. The spell functions as a magical trap with a Perception DC and Disable Device DC both equal to 25 plus the spell's level (28 total). Trapfinding class feature users and those with the read aura occult skill unlock can detect it.",
     source: 'Pathfinder Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Nondetection',
@@ -81,6 +83,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "The protected creature or object becomes resistant to detection by divination magic such as clairaudience/clairvoyance and locate object spells, as well as divination magic items like crystal balls. When attempting divination against the warded target, the diviner must succeed on a caster level check (1d20 + caster level) against DC 11 + the nondetection caster's level. If cast on the caster or their possessed item, the DC becomes 15 + caster level. When cast on creatures, the spell protects both the creature and its equipment.",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Numerological Resistance',
@@ -102,6 +105,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective magic enables casters to roll 5d8, creating a customizable pool. The caster allocates dice to determine: the energy type being resisted (matched to one die result), the number of affected creatures (one die), duration in rounds (one die), and sums two remaining dice for resistance points granted. All affected creatures must remain within spell range.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Oath of Peace',
@@ -123,6 +127,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'Upon casting, you make a temporary oath of peace, granting you superior defenses but meaning you cannot attack for the duration of the oath. The spell provides a +5 sacred bonus to Armor Class and saving throws, plus damage reduction 10 against evil. If you make a direct or indirect attack or show any hostility toward any creature, the spell immediately ends.',
     source: "Pathfinder Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Obscure Object',
@@ -155,6 +160,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'The spell hides an object from location by divination (scrying) effects, such as the scrying spell or a crystal ball. Divination attempts targeting the object automatically fail, or fail to perceive it if the divination is aimed at a nearby location, object, or person instead.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Obscure Poison',
@@ -188,6 +194,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This abjuration makes poison difficult to detect or identify. Detection magic requires a successful caster level check against a DC of 15 plus your caster level. Even when detected, identification checks face a +10 DC increase. When cast on venomous creatures, it obscures all their natural poisons similarly.',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Paladin's Sacrifice",
@@ -209,6 +216,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This divine spell allows you to redirect damage and harmful effects from another creature to yourself instead. When a target within range takes damage from an attack or fails a saving throw, you can cast this spell to absorb all resulting wounds and adverse effects. Your resistances and immunities apply normally, but you cannot otherwise reduce the damage. If the effect also targets you, you suffer consequences for both yourself and the spared target.',
     source: "Pathfinder Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Peace Bond',
@@ -242,6 +250,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "The caster creates glowing runes of peace — one initially, plus an additional rune for every two levels above 1st (maximum five runes at 9th level). An identical symbol manifests on the caster's forehead and cannot be concealed. Each rune illuminates a 5-foot cube, preventing spells cast by the caster (up to 3rd level with defined areas) from affecting those cubes. Area spells like fireball cannot damage creatures or items within protected squares; however, effects such as stinking cloud enter normally. The spell provides no protection against spell-like or supernatural area effects.",
     source: 'Pathfinder Player Companion: Faiths of Balance',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Peacebond',
@@ -263,6 +272,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "The spell locks a weapon in place on its owner's body, or within the weapon's sheath or holster. Drawing the weapon requires a standard action and a successful Strength check (DC equals the saving throw DC), with attacks of opportunity provoked regardless of success or failure. A greater version (levels 4-5 depending on class) affects multiple weapons and has additional effects for weapons that are not sheathed when cast.",
     source: 'Pathfinder Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Aegis',
@@ -286,6 +296,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'The caster weaves planar essence into a protective shield. You select one elemental or energy trait and take half damage from attacks of that type. Enemies hitting you with melee, natural, or unarmed attacks suffer 3d6 points of damage plus 1 point per caster level (maximum +20) matching your chosen essence type. Effects allowing saves for half damage grant no damage on successful saves.',
     source: 'Pathfinder Planar Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pressure Adaptation',
@@ -320,6 +331,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'The spell enables rapid pressure acclimation. A target adjusts to 100 feet of new pressure (or the entire shift, in the case of an instantaneous shift within its native range) after just one successful Fortitude saving throw instead of the usual five.',
     source: 'Pathfinder Bestiary 5',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prismatic Sphere',
@@ -342,6 +354,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective spell creates an immobile, opaque globe of shimmering, multicolored light surrounding the caster. The caster can move freely through it without harm, but it blocks projectiles and spells from passing outward. Attackers passing through experience effects from each color sequentially, similar to a prismatic wall. Creatures with fewer than 8 Hit Dice within the sphere risk blindness for 2d4 x 10 minutes. The sphere can be made permanent via the permanency spell.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prismatic Wall',
@@ -364,6 +377,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This abjuration creates a vertical, opaque wall — a shimmering, multicolored plane of light that protects you from all forms of attack. The barrier consists of seven distinct colored layers, each providing different protective effects and requiring specific counterspells to dispel in sequential order. Creatures with fewer than 8 Hit Dice within 20 feet risk blindness from viewing the wall. The caster can safely pass through and remain near it without harm. The spell can be made permanent via the permanency spell.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Arrows',
@@ -394,6 +408,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'The spell grants the recipient damage reduction 10/magic against ranged weapons. The protection persists until the spell has prevented a total of 10 points of damage per caster level (maximum 100 points), at which point it ends. A communal version exists at level 3 that distributes duration among multiple touched creatures with identical mechanics.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Chaos',
@@ -425,6 +440,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective spell mirrors protection from evil but functions against chaotic entities instead. It provides a +2 deflection bonus and +2 resistance bonus to saves versus attacks from chaotic creatures. The recipient gains an additional saving throw against control effects from chaotic beings, and chaotic summoned creatures cannot physically contact the protected target. A communal variant at level 2 allows the caster to distribute the duration among multiple touched creatures.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Energy',
@@ -460,6 +476,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective magic grants temporary energy immunity against one chosen type (acid, cold, electricity, fire, or sonic). The spell absorbs up to 12 points per caster level of energy damage (to a maximum of 120 points at 10th level) before discharging. A communal variant is available at one spell level higher, distributing duration among multiple touched creatures.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Evil',
@@ -490,6 +507,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective ward creates a magical barrier around the subject at a distance of 1 foot. It provides three benefits: a +2 deflection bonus to AC and +2 resistance bonus on saves against evil creatures; a new saving throw against possession and mental control effects (charm and compulsion) with a +2 morale bonus; and prevention of bodily contact by evil summoned creatures. Protection from Evil, Communal functions identically but allows the caster to divide the duration in 1-minute intervals among the creatures touched, and is available as a 2nd-level spell.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Good',
@@ -520,6 +538,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective magic mirrors the protection from evil spell but reverses its alignment focus. Rather than shielding against evil entities, it guards against good-aligned attackers, granting deflection and resistance bonuses against their assaults. The target also gains a fresh saving throw against control attempts by good creatures, and benevolent summoned beings cannot physically contact the protected individual.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Law',
@@ -550,6 +569,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective charm functions identically to protection from evil, but instead guards against lawful creatures. The spell grants deflection and resistance bonuses against attacks from lawful beings. The recipient gains a new saving throw to break free from control by lawful creatures, and lawful summoned creatures cannot touch the target. A communal variant at level 2 allows the caster to distribute the duration among multiple touched creatures.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Natural Attacks',
@@ -582,6 +602,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "The caster selects one type of natural attack (bite, claw, gore, hoof, pincers, slam, sting, swarm, tail slap, talon, tentacle, or wing). The target then gains DR 5/— against all attacks from natural weapons of the selected type for the spell's duration.",
     source: 'Pathfinder Bestiary 4',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Outsiders',
@@ -604,6 +625,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective magic shields a creature from attacks by outsiders of a chosen racial subtype, prevents mental domination by such creatures, and blocks summoned outsiders of that type. Only specific outsider racial subtypes — including angel, azata, demon, oni, psychopomp, and protean — can be selected; alignment or general subtypes cannot be chosen. The spell creates a magical barrier providing +4 deflection bonus to AC and +4 resistance bonus on saves against the chosen subtype, grants an additional saving throw against mental control effects with a +4 morale bonus, and prevents physical contact from summoned creatures of that subtype.',
     source: 'Pathfinder Bestiary 4',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Spells',
@@ -627,6 +649,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'Protected subjects receive an enhancement of +8 resistance bonus on saving throws against spells and spell-like abilities. This protection does not extend to supernatural or extraordinary abilities.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Spores',
@@ -658,6 +681,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "This protective magic grants a touched creature immunity to harmful spore effects and fungal afflictions. The spell provides complete immunity to creatures affected by specific environmental hazards like brown mold, green slime, and similar threats of Challenge Rating 6 or lower. It also blocks poison, disease, and infestation attacks from fungal creatures of CR 6 or lower. Against more powerful fungal hazards or creatures, the target gains a bonus on saving throws equal to half the caster's level. However, the spell offers no protection against infestations caused by specific spells.",
     source: 'Pathfinder Bestiary 6',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Technology',
@@ -680,6 +704,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective enchantment creates a magical barrier one foot from the subject that moves with them. It provides a +2 deflection bonus to AC and a +2 resistance bonus on saving throws against technological objects and robot-type creatures. The target also receives an additional saving throw against existing technological mental control effects (including pharmaceuticals), gaining a +2 morale bonus on this save. Success suppresses such effects for the duration, and the creature becomes immune to new technological mental control attempts while protected.',
     source: 'Pathfinder Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Punishing Armor',
@@ -710,6 +735,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective incantation surrounds you with a shimmering ethereal layer. When any creature inflicts nonlethal damage upon you, that attacker immediately sustains half the nonlethal damage they dealt. The attacking creature may attempt a Fortitude save to negate this reflected damage entirely.',
     source: 'Pathfinder Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Radiation Ward',
@@ -741,6 +767,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective magic grants the recipient a +4 bonus on saving throws against radiation-based effects. Additionally, the warded creature immediately perceives when entering a radiation area and can identify the radiation intensity level (low, medium, high, or severe) present in that space.',
     source: 'Pathfinder Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rebuke Technology',
@@ -763,6 +790,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This abjuration spell shrouds the targeted technological object or creature (such as a robot or a nanotech swarm) with magical energy. If the target fails its save, it becomes inert and unable to function — or unconscious if it is a living creature — for the duration. Affected creatures can attempt another Fortitude save at the end of their turn after the first full round to potentially end the effect early.',
     source: 'Pathfinder Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Curse',
@@ -793,6 +821,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "This spell eliminates curses affecting creatures or objects through a caster level check against each curse's DC. While it successfully removes curses from creatures and enables removal of cursed items like weapons or armor, it cannot directly dispel curses from such magical items themselves. The spell also counters and dispels bestow curse.",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Fear',
@@ -821,6 +850,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'The spell grants subjects a +4 morale bonus against fear effects for 10 minutes. If a subject is already under a fear effect, that effect becomes suppressed while the spell is active. The spell also counters and dispels cause fear.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Repel Vermin',
@@ -850,6 +880,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "The spell creates an invisible barrier that holds back vermin. Weaker vermin (those with Hit Dice less than one-third the caster's level) cannot cross it. Stronger creatures may attempt a Will save to penetrate the barrier, but doing so inflicts 2d6 points of damage, and contact with the barrier causes pain that deters most vermin from crossing.",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Repulsion',
@@ -879,6 +910,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This spell creates an invisible protective field around the caster. Any creature entering or within this field must make a save or becomes unable to approach the caster for the duration. Affected creatures retain the ability to attack with ranged weapons, cast spells, and engage other enemies. The repulsion effect does not trigger if the caster moves toward the affected creature, nor are creatures forced back — they simply cannot advance closer while the spell remains active.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resist Energy',
@@ -915,6 +947,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "This protective abjuration allows casters to grant resist energy 10 against the energy type chosen (acid, cold, electricity, fire, or sonic). The resistance increases to 20 at 7th level and 30 at 11th level. The spell protects the recipient's equipment as well, and overlaps with but does not stack with protection from energy. A communal version at 3rd level allows dividing the duration in 10-minute intervals among multiple touched creatures.",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resistance',
@@ -949,6 +982,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This abjuration grants the target magical protection by bestowing a +1 resistance bonus on saves. The effect can be made permanent through the permanency spell.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rite of Bodily Purity',
@@ -972,6 +1006,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "This spell bolsters your body's natural defenses against harmful substances. You receive a +2 resistance bonus on saving throws to resist diseases, drugs, and poisons. Additionally, if you fail a save against these afflictions, you may spend the remaining duration as an immediate action to reroll once. The bonus applies to the reroll, after which the spell terminates.",
     source: 'Pathfinder Player Companion: Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rite of Centered Mind',
@@ -995,6 +1030,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This spell enhances mental awareness to resist external influences. It grants a +1 bonus on saves against mind-affecting effects, increasing to +2 against emotion or fear effects. If a mind-affecting save fails during the duration, the caster may spend the remaining duration as an immediate action to reroll that save, accepting the second result regardless of outcome. The +2 bonus applies to the reroll, after which the spell ends.',
     source: 'Pathfinder Player Companion: Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rune of Warding',
@@ -1017,6 +1053,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'The caster inscribes magical runes on a door or entryway border. These runes function similarly to a glyph of warding (blast glyph) but remain permanently visible. Unlike standard glyphs of warding, these runes interact with other magical protections in the same way glyphs do, allowing multiple defenses in one location.',
     source: 'Pathfinder Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sanctuary',
@@ -1038,6 +1075,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective enchantment shields a creature from direct assault. Any opponent attempting to directly attack the warded creature, even with a targeted spell, must attempt a Will save. Those who fail cannot proceed with their attack, losing that action. The spell permits the protected creature to cast non-damaging spells and take other non-offensive actions. The warded individual cannot initiate attacks without dispelling the magic. Area-of-effect spells bypass this protection entirely.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield',
@@ -1068,6 +1106,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This abjuration produces an invisible shield of force that hovers in front of you. The spell provides two primary benefits: it negates magic missile attacks directed at the caster, and it grants a +4 shield bonus to AC. This bonus applies against incorporeal touch attacks, since it is a force effect. The spell carries no armor check penalty or arcane spell failure chance, making it particularly valuable for spellcasters.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Faith',
@@ -1090,6 +1129,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective enchantment creates a shimmering, magical field around the target that averts and deflects attacks. The spell grants a +2 deflection bonus to Armor Class, increasing by an additional +1 for every six caster levels, with a maximum +5 deflection bonus achievable at 18th level.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Law',
@@ -1114,6 +1154,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "A blue luminous shield surrounds subjects with four protective effects: each protected creature gains a +4 deflection bonus to AC and a +4 resistance bonus on saves against all attacks; protected creatures gain spell resistance 25 against chaotic spells and spells cast by chaotic creatures; protection from possession and mental influence similar to protection from chaos; and when a chaotic creature successfully strikes a protected creature, the attacker becomes slowed (Will save negates using this spell's DC).",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield Other',
@@ -1136,6 +1177,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective spell creates a connection between caster and target. The warded creature gains a +1 deflection bonus to AC and a +1 resistance bonus on saves. More significantly, the subject takes only half damage from all wounds and attacks while the caster absorbs the remaining damage. This effect excludes ability damage, level drain, charm effects, and death effects. The spell terminates if caster and subject move beyond range.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Absorption',
@@ -1158,6 +1200,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'When you successfully counterspell a 3rd-level or lower spell using dispel magic or normal counterspelling methods, you absorb that spell. For wizards, this restores any single spell cast since last preparation. For sorcerers, it restores one spell slot. The recovered spell or slot must be equal to or lower than the spell you counterspelled. The greater version at 8th level allows absorption of counterspelled spells up to 6th level.',
     source: 'Pathfinder Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Immunity',
@@ -1179,6 +1222,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'The spell grants immunity to one specified spell per four caster levels, limited to spells of 4th level or lower. The recipient gains unbeatable spell resistance against the named spells. Protection extends to spell-like effects from magic items and innate creature abilities, but not supernatural or extraordinary abilities like breath weapons. Only one spell immunity variant can affect a creature simultaneously. A communal variant at 5th level allows dividing the duration among multiple touched creatures. A greater version at 8th level covers spells of 8th level or lower.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Resistance',
@@ -1200,6 +1244,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'The recipient gains spell resistance equal to 12 + your caster level. This protective enchantment grants the target a defensive barrier against magical effects.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Turning',
@@ -1222,6 +1267,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'Spells and spell-like effects targeted on you are turned back upon the original caster. The effect only applies to targeted spells, not area or touch-range effects. The spell protects seven to ten (1d4+6) spell levels worth of incoming magic. When a higher-level spell exceeds remaining turning capacity, damage is split proportionally between you and the caster, or non-damaging effects have an equal chance affecting either party. If both caster and target have active turning effects, a resonating field occurs determined by a percentile roll.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sphere of Warding',
@@ -1244,6 +1290,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       "This abjuration creates a glowing energy barrier that affects incorporeal creatures in two ways. First, incorporeal beings must make a Will save to enter the sphere's space; failure prevents passage as if blocked by a wall of force. Success allows movement through, but creatures taking turns within the sphere suffer force damage equal to 1d6 plus 1 per caster level (maximum +10). The spell's second function targets possession: creatures using magic jar or similar effects are immediately ejected upon entering, returning the host's spirit and ending the possession. The possessing creature takes damage without a save and exits the sphere's perimeter.",
     source: 'Pathfinder Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stoneskin',
@@ -1276,6 +1323,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'The protected creature gains DR 10/adamantine, reducing weapon damage by 10 points per hit. Adamantine weapons bypass this protection. The spell ends once it prevents a total of 10 points of damage per caster level (maximum 150 points). A communal variant allows the caster to divide the duration among multiple touched creatures.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stunning Barrier',
@@ -1304,6 +1352,7 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This protective charm surrounds you with a magical aura providing a +1 deflection bonus to AC and a +1 resistance bonus on saves. Any melee attacker becomes stunned for one round unless they succeed on a Will save. The spell ends after stunning a single opponent. A greater version at level 3 offers +2 bonuses and persists until it has stunned multiple creatures equal to your caster level.',
     source: "Pathfinder Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Suppress Charms and Compulsions',
@@ -1334,5 +1383,6 @@ export const ABJURATION_BATCH_001: Spell[] = [
     description:
       'This abjuration allows casters to choose between two effects. The first grants affected creatures a +4 morale bonus on saving throws against charm and compulsion effects for 10 minutes. Alternatively, the caster may suppress existing charm and compulsion effects through concentration, automatically suppressing any new effects that target protected creatures. Upon ending concentration, suppressed effects resume their remaining durations.',
     source: 'Pathfinder Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 ];

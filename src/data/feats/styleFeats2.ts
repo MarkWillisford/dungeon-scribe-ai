@@ -11,6 +11,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Unarmed strikes deal bludgeoning or slashing; tear flesh for 2d6 extra when hitting one foe twice in a round',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -28,6 +29,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Add piercing damage to unarmed strikes; +2 Intimidate to demoralize; free Intimidate after piercing hit in Boar Style',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -59,6 +61,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Demoralize as a move action; Boar Style flesh-tearing causes 1d6 bleed per round (persists after style switch)',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -80,6 +83,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Fighting defensively gives only –2 attack penalty; +1 additional dodge bonus to AC while fighting defensively or using total defense',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'dodge' },
@@ -111,6 +115,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       '+4 dodge bonus vs melee when fighting defensively with a hand free; deflect one melee attack while using total defense',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'crane_style' },
@@ -143,6 +148,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Fighting defensively only –1 attack penalty; counterattack with AoO when Crane Wing deflects or opponent misses by 4 or less',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'crane_style' },
@@ -165,6 +171,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       '+2 save vs sleep/paralysis/stun; ignore difficult terrain when charging; charge through allies; 1.5× Str on first unarmed strike each round',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 15 },
@@ -196,6 +203,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Dragon Style unarmed damage becomes 2× Str on first attack, 1.5× on others; crits or Stunning Fist also shake the target',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 15 },
@@ -216,6 +224,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       '+1 Stunning Fist/day; expend 2 Stunning Fist uses for a 15-ft cone dealing unarmed damage and shaking targets (Will half)',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 15 },
@@ -238,6 +247,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       '+1 Elemental Fist/day; Wis bonus to fire damage rolls; deal 1d6 fire on a miss while using Elemental Fist',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -258,6 +268,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       '+1 Elemental Fist/day; fire resistance = BAB or monk level; Elemental Fist fire targets must save or catch on fire',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 15 },
@@ -279,6 +290,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Expend 2 Elemental Fist uses for a 15-ft fire cone; targets take unarmed + Elemental Fist fire damage and catch on fire (Reflex half)',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 15 },
@@ -303,6 +315,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Charging gives only –1 AC penalty; flanking opponents gain only +1 attack bonus vs you',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -321,6 +334,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'After hitting with an unarmed strike in Janni Style, +4 to bull rush or trip that opponent as your next attack; no AoO provoked',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -354,6 +368,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Always have running start for jumps in Janni Style; jumping charge unarmed strikes roll damage dice twice',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -376,6 +391,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'When an opponent makes an AoO against you for movement, spend a swift action to retaliate with an unarmed strike',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -394,6 +410,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Retaliatory unarmed strikes cost a free action instead of swift; may make up to Wis modifier retaliatory strikes per turn',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -413,6 +430,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Retaliatory unarmed strikes resolve before triggering AoOs; a successful hit imposes –2 attack and damage on the triggering attack',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -435,6 +453,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       '+1 Elemental Fist/day; Wis bonus to acid damage rolls; deal 1d6 acid on a miss while using Elemental Fist',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -455,6 +474,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       '+1 Elemental Fist/day; acid resistance = BAB or monk level; Elemental Fist acid targets must save or be staggered 1 round',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 15 },
@@ -476,6 +496,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Expend 2 Elemental Fist uses for a 20-ft acid column within 30 ft; failed Reflex staggers 1 round',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 15 },
@@ -500,6 +521,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Unarmed strikes deal slashing damage; +2 CMD vs bull rush/overrun/trip after slashing hit; critical hit causes 1d4 bleed for 2 rounds',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -517,6 +539,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Full-round action in Tiger Style with a free hand: double-handed unarmed strike; on hit, free bull rush with +2 CMB',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -535,6 +558,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Apply Power Attack penalty to AC instead of attack rolls; once per round swift action to move half speed toward a recently struck target',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -557,6 +581,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Second or subsequent unarmed strikes against the same target in a round deal +1d6 damage',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -578,6 +603,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'After each unarmed hit in Jabbing Style, move 5 ft adjacent to the struck opponent without provoking AoOs; no 5-ft step next turn',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'dodge' },
@@ -601,6 +627,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Jabbing Style bonus damage increases to 2d6 on second hit and 4d6 on third+ hit against the same target',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'dodge' },
@@ -627,6 +654,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
       'You can grapple a foe with only one hand at no penalty. You do not lose your Dexterity bonus to AC while pinning an opponent.',
     shortDescription: 'Grapple with one hand at no penalty; retain Dex bonus to AC while pinning',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_grapple' },
@@ -648,6 +676,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'In Grabbing Style, move grapple action lets you drag at full speed; a subsequent move at half speed requires no additional CMB check',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'grabbing_style' },
@@ -669,6 +698,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'While grappling two opponents in Grabbing Style, use grapple to move or damage both simultaneously',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'grabbing_drag' },
@@ -693,6 +723,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'When full attacking one target with unarmed strikes, total all damage before applying damage reduction',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -714,6 +745,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'After a Pummeling Style full attack that hits, attempt a free reposition or trip combat maneuver',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_reposition' },
@@ -737,6 +769,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Charge and make a full attack or flurry of blows at the end using Pummeling Style against a single target',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -760,6 +793,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Apply Improved Unarmed Strike feat effects and unarmed augments to one chosen monk weapon',
     source: "Pathfinder Player Companion: Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_focus' },
@@ -781,6 +815,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Chosen weapon works with all unarmed class abilities; treated as full character level for monk-level-based feat uses per day',
     source: "Pathfinder Player Companion: Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'ascetic_style' },
@@ -803,6 +838,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Deal damage as monk unarmed strike (character level –4) with chosen weapon; count as having still mind for prerequisites',
     source: "Pathfinder Player Companion: Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'ascetic_form' },
@@ -827,6 +863,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'While blinded: no Str/Dex skill penalties, +4 hearing/smell Perception, gain scent 10 ft, count as 10 Perception ranks for Blind-Fight feat prerequisites',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'blind_fight' },
@@ -844,6 +881,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'While blinded in Blinded Blade Style, automatically pinpoint creatures within melee reach (blindsense); count as 15 Perception ranks for Greater Blind-Fight prerequisites',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'blinded_blade_style' },
@@ -864,6 +902,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
       'While using this style, you can use your Vicious Stomp feat against any opponent within 10 feet of you, as long as it is within your natural reach.',
     shortDescription: 'Use Vicious Stomp against any opponent within 10 feet and natural reach',
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 15 },
@@ -887,6 +926,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Full attacking a prone adjacent opponent in Brute Style grants an extra unarmed strike at highest BAB',
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 19 },
@@ -911,6 +951,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Successful overrun/trip in Brute Style that causes prone deals 1d6 Str damage and halves speed (Fort save reduces to 1 Str, negates speed)',
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 23 },
@@ -937,6 +978,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
       'While using this style, when you use the charge action, the bonus on your attack roll increases by 1 and you deal 2 additional points of damage with melee attacks made as part of the charge.',
     shortDescription: '+1 attack roll on charges; +2 damage on charge melee attacks',
     source: 'Pathfinder Roleplaying Game: Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'power_attack' },
@@ -967,6 +1009,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Successful bull rush on a charge in Demonic Style grants +2 melee damage per 5 ft moved, lasting until end of next turn',
     source: 'Pathfinder Roleplaying Game: Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'demonic_style' },
@@ -988,6 +1031,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'AoOs with unarmed strikes deal 1 nonlethal damage; failed Will DC (10 + 1/2 level + Cha) staggers the target 1 round',
     source: 'Pathfinder Roleplaying Game: Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'combat_reflexes' },
@@ -1009,6 +1053,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Targets staggered by Diabolic Style cannot benefit from morale bonuses for 1 minute; further staggered effects from your AoOs last 2 rounds',
     source: 'Pathfinder Roleplaying Game: Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'combat_reflexes' },
@@ -1032,6 +1077,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'First successful AoO each round in Diabolic Style may apply Vital Strike effects',
     source: 'Pathfinder Roleplaying Game: Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'combat_reflexes' },
@@ -1059,6 +1105,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       "+1 melee attack vs creatures flanked by 2+ allies (while you aren't flanking); ignore aid another AC bonuses",
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -1091,6 +1138,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Standard action underwater: move half swim speed, melee attack, retreat to starting position — movement and attack provoke no AoOs',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'dolphin_style' },
@@ -1110,6 +1158,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Full-round action underwater: circle a path up to one swim-move in length, threatening all spaces and providing flanking; no AoOs',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'dolphin_dart' },
@@ -1132,6 +1181,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Add Wis to Acrobatics checks; +1 melee attack vs same-or-smaller opponents when adjacent to a vertical surface',
     source: 'Pathfinder Player Companion: Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -1165,6 +1215,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Dragonfly Style attack bonus increases to +2 vs opponents up to two sizes larger; use creatures as vertical surfaces (hostile: Acrobatics vs CMD)',
     source: 'Pathfinder Player Companion: Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -1202,6 +1253,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       '+1 Elemental Fist/day; Elemental Fist deals electricity damage; +4 CMB to grapple creatures hit with electric Elemental Fist for 1 round',
     source: 'Pathfinder Player Companion: Blood of the Sea',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -1223,6 +1275,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       "Combat maneuver checks made as AoOs with longsword, rapier, or elven weapons don't provoke AoOs",
     source: "Pathfinder Player Companion: Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'elven_battle_training' },
@@ -1242,6 +1295,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'While in Elven Battle Style, add Int modifier to weapon damage instead of other ability modifiers',
     source: "Pathfinder Player Companion: Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -1263,6 +1317,7 @@ export const STYLE_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'While in Elven Battle Style and fighting defensively/total defense/Combat Expertise, opponents that miss you provoke an AoO (once per round)',
     source: "Pathfinder Player Companion: Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },

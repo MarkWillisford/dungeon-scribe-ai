@@ -23,6 +23,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'This spell works similarly to confusion but targets only constructs. When determining a confused construct\'s actions, rolling 26–50 results in the construct "twitches spasmodically." A successful Will save limits the confusion effect to just 1 round instead of the spell\'s full duration.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Saddle Surge',
@@ -44,6 +45,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "This spell creates synchronization between a mounted paladin and their steed. For every 5 feet the mount moves each round, the caster gains a +1 competence bonus on Ride checks and both creatures receive a +1 morale bonus on damage rolls for one round. These bonuses max out at the caster's level. The spell immediately terminates if the caster dismounts, gets knocked off, or becomes separated from the mount in any way.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Salvage',
@@ -66,6 +68,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "This spell magically reconstructs damaged ships by reassembling hull pieces, sails, masts, and rigging. Decayed wood solidifies and torn sails reweave themselves. Once repairs complete, an air bubble forms around the vessel; if submerged, the ship surfaces with a splash. The spell's effects become permanent once the duration ends — dispelling cannot reverse them. However, casting dispel magic during the repair process interrupts reconstruction, leaving the ship in its current condition. Starting a new salvage spell adjusts duration based on prior repairs completed.",
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Savage Maw',
@@ -95,6 +98,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'The spell transforms your teeth into razor-sharp fangs, granting you a bite attack dealing 1d4 damage plus Strength modifier. Critical hits with this attack inflict 1 point of bleed damage; if you already possess a bite attack, critical hits instead deal 2 points of bleed damage. The bite counts as a secondary attack when used in full-attack actions, made at base attack bonus -5 with half Strength modifier damage. You gain proficiency with this attack. The spell can be ended early by making a bestial roar as a swift action. When dismissed this way, you can make an Intimidate check to demoralize all foes within 30 feet that can hear the roar.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sawtooth Terrain',
@@ -118,6 +122,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "When cast, this spell causes long, serrated blades to shoot out from random points within the targeted area. Creatures present at casting must succeed at a Reflex save or take 3d8 piercing damage plus 2d6 bleed damage. Failed saves also reduce movement speed by half for 24 hours (removable via cure spell or successful Heal check). Throughout the spell's duration, the area functions as difficult terrain, dealing 1d8 piercing damage to creatures moving through it. The spell can be applied to floors, walls, doors, ceilings, or other flat surfaces within range.",
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scale Spikes',
@@ -150,6 +155,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'The spell causes scales to grow jagged spikes that function as +1 armor spikes, with automatic proficiency granted to the subject.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scale Spikes, Greater',
@@ -182,6 +188,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'This enhanced version of scale spikes provides an enhancement bonus on attack and damage rolls equal to +1 for every 4 caster levels (maximum +5). The bonus does not bypass damage reduction except for magic.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scamper',
@@ -203,6 +210,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The spell grants the animal companion astonishing agility and speed until the end of its turn. It enables the companion to move at full speed while using Acrobatics and provides a competence bonus equal to twice the caster's level (maximum +20 at 10th level) on Acrobatics checks. This bonus specifically applies when avoiding attacks of opportunity or moving through squares occupied by enemies.",
     source: 'Pathfinder Player Companion: Animal Archive',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scent Trail',
@@ -225,6 +233,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'The caster or willing touched creature creates an invisible scent trail. Designated creatures gain a +20 competence bonus on any Survival checks for tracking. Creatures with scent ability receive a +10 competence bonus on Wisdom or Survival checks instead. The caster can embed scent messages along the trail, requiring one move action per word or emotion. Recipients must succeed on DC 20 Survival checks (with -1 penalty per message element) to decode messages. The spell requires functional olfactory senses and allows backtracking through complex terrain despite repeated crossings.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scorching Ash Form',
@@ -248,6 +257,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "This spell functions similarly to gaseous form but transforms the target into a visible swirl of hot ash and smoke rather than translucent gas. The target gains the fire subtype. Any creature beginning its turn in the target's space takes 2d6 fire damage. Those creatures must make a Fortitude save (DC 15, +1 per previous check) or suffer smoke inhalation effects.",
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sculpt Simulacrum',
@@ -269,6 +279,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "This spell allows the caster to make cosmetic modifications to a simulacrum creature. The changes are physical rather than illusory, functioning similarly to the disguise self spell but with permanent alterations to appearance. The spell specifies that this does not change any of the simulacrum's abilities — only its physical appearance is affected.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sculpt Sound',
@@ -290,6 +301,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'This transmutation allows casters to alter sounds produced by creatures or objects. Practitioners can generate sounds where silence exists, diminish audible sounds, or convert sounds into different ones. All affected creatures or objects must be transmuted in the same way. Once the transmutation is made, you cannot change it. Practitioners cannot fabricate unfamiliar words. A spellcaster whose voice is changed dramatically is unable to cast spells with verbal components.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sculpted Cape',
@@ -312,6 +324,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'The spell causes your cape, cloak, or shawl to stiffen and maintain its shape regardless of removal. The garment gains hardness 2 and hit points equal to your caster level. It can support 1 pound of weight per caster level. When not being worn, a sculpted cape can provide cover to a character.',
     source: 'Pathfinder Player Companion: Familiar Folio',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sea of Dust',
@@ -335,6 +348,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'This potent druid spell causes all areas of water to which you have line of effect to recede as if you had cast control water. Water recedes at 1 foot depth per hour through evaporation or ground absorption. A -4 Constitution penalty applies when resisting hot climate effects, and daily water requirements double due to thirst. After 24 hours, plant creatures and inanimate plants suffer 1d6 nonlethal damage hourly, bypassing hardness and damage reduction. Aquatic creatures not completely immersed must attempt hourly DC 20 Constitution checks, taking 1d6 nonlethal damage and fatigue upon failure. After one week, moderate winds create sandstorms with 50% hourly probability. After one month, the terrain becomes shallow bog (25% chance of deep bog pockets; 5% chance of quicksand-like dust drifts). The affected region remains desertlike until dispelled.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sea Stallion',
@@ -357,6 +371,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'This spell functions like sea steed, with enhanced mounted benefits. While mounted on the target, the caster also gains the amphibious quality and melee attacks function as if under the effect of freedom of movement. These benefits are not polymorph effects. Upon dismounting, the rider retains amphibious quality for up to 1 minute. All benefits resume when remounting.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sea Steed',
@@ -379,6 +394,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The spell transforms a mounted creature by granting it piscine scales that cover its body and growing fins in place of feet. The target gains the aquatic subtype, the amphibious quality, and a swim speed equal to its base speed prior to the spell's effect. However, the creature's base speed decreases by 10 feet (with a minimum of 10 feet).",
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secret Page',
@@ -401,6 +417,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "This transmutation alters a page's appearance to display entirely different content. A caster can substitute spell text with another spell of equal or lower level they know. The spell works on pages but not scrolls, though scrolls can be concealed using this magic. The caster establishes a special word to reveal original contents and can toggle between hidden and visible forms at will. Repeating the word twice removes the spell entirely. Comprehend languages alone cannot expose the hidden text; detect magic shows dim magic but not contents; true seeing reveals hidden material presence but requires comprehend languages combination to expose actual content. The spell can be dispelled normally, and erase destroys hidden writings. Explosive runes or sepia snake sigil can be layered onto secret pages.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Seismic Fissure',
@@ -424,6 +441,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The caster channels tectonic energy to split the ground beneath them. Creatures positioned directly in the fissure's path must make a Reflex save to avoid falling into the rift. Those standing adjacent to the opening must also succeed at a Reflex save or be knocked prone from the resulting tremors. The spell functions exclusively on natural terrain such as dirt, earth, sand, or stone.",
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Body',
@@ -446,6 +464,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'The caster transforms into a living shadow from the Plane of Shadow. The caster appears as an unattached shadow in bright or normal light and gains total concealment in dim light or darkness. Against darkvision it provides concealment rather than total concealment. The form is incorporeal for most purposes but cannot fly or pass through solid objects or creatures. The caster can traverse any surface (horizontal, vertical, liquids) at normal speed and is unaffected by difficult terrain. The caster cannot manipulate objects or make physical attacks; equipment merges with shadow form. The caster can speak and cast spells, and can deliver touch spells via incorporeal touch attacks; spells with material components require the Eschew Materials feat.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shapechange',
@@ -469,6 +488,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'This transmutation spell enables you to assume various creature forms. The ability functions as several shapeshifting spells including alter self, beast shape IV, elemental body IV, form of the dragon III, giant form II, and plant shape III depending on what form you take. You may change forms once per round using a free action, which occurs either immediately before or after your regular action, but not during it.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Shapechanger's Gift",
@@ -492,6 +512,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'The spell permits transforming the target into an animal (following beast shape I rules), a humanoid (using alter self guidelines), or a monstrous humanoid (via monstrous physique I mechanics). The chosen form cannot possess a fly speed. The subject retains their ability scores and natural armor bonus while adopting other statistics from the appropriate transformation spell. The creature may shift between natural and chosen forms as a standard action.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Shapechanger's Gift, Greater",
@@ -515,6 +536,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "Functions identically to shapechanger's gift but expands available forms to include animals, elementals, fey, humanoids, monstrous humanoids, and vermin. The chosen form may now have a fly speed.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Shaper's Touch",
@@ -536,6 +558,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The spell creates an alchemical residue on your hands enabling reshaping of non-magical objects with hardness 19 or less. Objects with hardness 9 or lower reshape like soft clay at 1 cubic foot per round. Harder objects (hardness 10+) reshape at 1/4 cubic foot per round. The reshaped object retains its new shape for 24 hours before returning to its original shape. The caster must reshape the entire target within the spell's duration — partial reshaping of large objects like walls causes the spell to fail with no effect.",
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Share Shape',
@@ -558,6 +581,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'This spell functions similarly to beast shape II, but with a critical restriction. The caster can only assume the form of an animal matching the type of their animal companion or familiar. The spell becomes ineffective if the familiar or companion is not classified as an animal.',
     source: 'Pathfinder Player Companion: Animal Archive',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shifting Sand',
@@ -582,6 +606,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The caster causes an earthen or sandy surface to shift and churn within the area. The effect obliterates tracks and functions as difficult terrain. Acrobatics checks within the area incur penalties equal to the caster's level (maximum +10). Creatures entering or beginning their turn in the shifting sand must make a Reflex save each round or become entangled until the beginning of their next turn. If entangled creatures attempt to move, they must make a second Reflex save or fall prone. Dwarves and creatures with stability racial traits may apply this bonus to saving throws. As a move action, the caster can reposition the sand up to 10 feet in any direction, carrying along entangled or prone creatures.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shillelagh',
@@ -603,6 +628,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The caster's non-magical club or quarterstaff transforms into a weapon with a +1 enhancement bonus to attack and damage rolls. When cast on a quarterstaff, both ends receive the enhancement. The weapon deals damage as if two size categories larger: a Small weapon inflicts 1d8 damage, Medium deals 2d6, and Large deals 3d6, each modified by the +1 enhancement bonus. These benefits apply only when the caster wields the weapon; if another creature uses it, the spell's effects cease functioning.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shrink Item',
@@ -624,6 +650,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "This spell reduces a non-magical item to approximately 1/16th its normal size in each dimension, effectively reducing it by four size categories. The caster may optionally change the shrunken object's composition to resemble cloth. Objects can be restored to normal size and composition by tossing them onto a solid surface or through a verbal command from the original caster. The spell works on nearly any item, including fires and fuel. When made permanent via a permanency spell, the affected object can be shrunk and expanded indefinitely, though only by the original caster.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sickening Strikes',
@@ -646,6 +673,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The caster becomes infused with disease. Any creature struck by the caster's melee attack must succeed at a Fortitude save or suffer the sickened condition for 1 minute. Creatures that are immune to disease are immune to this sickened effect.",
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Siege of Trees',
@@ -667,6 +695,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The spell animates inanimate plants to function as light catapults. Each affected plant requires a standard action to aim before initial firing and when targeting changes. The caster's level determines the catapult's accuracy bonus. Plants automatically load themselves with rocks and boulders, though the caster may supply ammunition. A free action commands one or all trees to cease firing. The tree will not load flaming ammunition, and these catapults cannot utilize fire-based energy siege shot.",
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Siege of Trees, Greater',
@@ -688,6 +717,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'This higher-level variant of siege of trees functions identically to the base spell but affects larger plant sizes, with each plant operating as a catapult matching its own size category.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Silk to Steel',
@@ -709,6 +739,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'This transmutation enchantment temporarily infuses an ordinary scarf with steel-like strength while preserving its natural weight and flexibility. Each turn, the caster may choose one of two functions: employ it defensively to gain a +2 shield bonus to AC, or wield it offensively as though it were a whip.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sky Steed',
@@ -731,6 +762,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The spell causes the target creature to sprout angelic wings and gains a fly speed equal to its base speed with average maneuverability. Additionally, the creature receives a bonus on Fly checks matching the caster's level.",
     source: 'Pathfinder Player Companion: Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sky Swim',
@@ -753,6 +785,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'The spell enables the target to swim through air as if moving through water. Creatures with existing swim speeds can move through air at that same speed; others must make Swim checks to navigate. Wind conditions are treated as water conditions: still air equals calm water, light/moderate wind equals rough water, strong/severe wind equals stormy water, and stronger winds are impassable. The spell does not grant air-breathing capability to creatures that cannot normally breathe air.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slow',
@@ -786,6 +819,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'Affected creatures move and attack at drastically reduced rates. They become staggered, able to take only one move action or standard action per turn, not both. They suffer a -1 penalty to attack rolls, AC, and Reflex saves. Movement speed is reduced to half normal (rounded to nearest 5-foot increment), affecting jump distances accordingly. Multiple slow effects do not stack. This spell counters and dispels haste.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Snake Staff',
@@ -808,6 +842,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "This spell transforms ordinary wooden objects into animated snakes that attack the caster's foes. The caster can telepathically direct the snakes' actions as a free action while maintaining sight of them. The number and types of snakes created depend on caster level, with options ranging from venomous snakes and constrictor snakes to advanced and giant variants. Each snake type requires different wooden material (sticks, staffs, logs) and consumes a varying number of the caster's available total snakes.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Snow Shape',
@@ -831,6 +866,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'This spell allows casters to form a mass of snow into any shape that suits your purpose, as per the spell stone shape. While crude objects are achievable, fine details prove difficult. A successful Craft (weapons) check enables creation of functional bladed weapons. Upon creation, the item solidifies into super-hard ice with hardness 5 and 10 hit points per inch of thickness. Fire damage is doubled against these weapons. Users suffer a -2 penalty on attack rolls due to the slippery nature, though the weapon inflicts an additional 1 point of cold damage. The weapon remains functional for 24 hours before degrading completely.',
     source: 'Pathfinder Player Companion: People of the North',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Soften Earth and Stone',
@@ -854,6 +890,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'This spell transforms natural, unworked earth and stone within its area. Wet earth becomes thick mud, dry earth becomes loose sand or dirt, and stone becomes soft clay that is easily molded or chopped. Magical, enchanted, or worked stone remains unaffected, as do earth/stone creatures. Creatures caught in the resulting mud must succeed on a Reflex save or become immobilized for 1d2 rounds. Those succeeding move at half speed without charging capability. Loose dirt similarly impedes movement at half speed. The spell can affect cavern ceilings and cliff faces, potentially causing collapses.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Solidify Earth',
@@ -886,6 +923,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'The spell compacts stone, dirt, and earth within the affected region. Creatures that burrow experience difficult terrain and become entangled for one round (Reflex save negates). Tremorsense becomes ineffective in the area. Creatures with the earth mastery special ability double their bonus on attack and damage rolls when both they and targets contact the affected zone.',
     source: "Pathfinder Player Companion: Monster Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sonic Form',
@@ -910,6 +948,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The caster transforms into semisolid sound while maintaining relative shape. The caster suffers no penalties for squeezing through spaces and can move through areas as if three size categories smaller. The caster can make melee touch attacks dealing 1d6 points of sonic damage + 1 point per caster level. The caster is incorporeal but cannot pass through solid objects or creatures. Equipment and magic items work as usual. The caster cannot enter areas affected by silence spells. If caught in a silence effect, the caster takes 1d6 points of sonic damage per caster level when the spell is cast and at the round's end while within it. Fortitude saves reduce damage by half. If duration ends while occupying an impossible space, the caster takes 3d6 damage and relocates to the nearest valid square.",
     source: 'Pathfinder Player Companion: Blood of the Night',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellstaff',
@@ -932,6 +971,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The caster stores one prepared spell within a wooden quarterstaff. Only one spell can be stored at a time, and the caster cannot maintain more than one spellstaff simultaneously. The stored spell can be cast as though it were among prepared spells but doesn't consume the caster's daily allotment. Material components required for the stored spell are expended when it's placed in the staff rather than when cast.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellsword',
@@ -962,6 +1002,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "This spell creates an extradimensional space within a weapon, allowing the caster to merge a magic rod or staff into it. The wielder can then use either the weapon or the merged rod/staff for attacks, applying the weapon's attack bonus to the rod/staff's effects. When the spell ends, the rod or staff is ejected; if the weapon is destroyed during the spell, so is the merged rod or staff.",
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spider Climb',
@@ -995,6 +1036,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'The affected creature gains the ability to climb and travel on vertical surfaces or even traverse ceilings as well as a spider does, requiring free hands. The subject receives a climb speed of 20 feet and a +8 racial bonus on Climb skill checks. The creature does not need to make Climb checks on vertical or horizontal surfaces and maintains its Dexterity bonus to AC while climbing. The creature cannot use the run action while climbing.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spider Climb, Communal',
@@ -1025,6 +1067,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'This spell functions identically to spider climb but allows dividing the duration in 10-minute intervals among the creatures touched.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spike Growth',
@@ -1047,6 +1090,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "This transmutation spell causes ground-covering vegetation in the spell's area to become very hard and sharply pointed without changing its appearance. In barren terrain, roots function similarly. The spell works in most outdoor environments except open water, ice, heavy snow, sandy deserts, or bare stone. Creatures moving through the affected area sustain 1d4 piercing damage per 5 feet of movement. Those taking damage must succeed on a Reflex save or suffer foot/leg injuries reducing land speed by half for 24 hours. A cure spell restores hit points and removes penalties, or another character can spend 10 minutes treating injuries with a successful Heal check (DC equals spell save DC). Only rogues can locate this magical trap using Perception (DC 28). It cannot be disabled via Disable Device.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spike Stones',
@@ -1070,6 +1114,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The spell causes rocky ground, stone floors, and similar surfaces to transform into sharp, camouflaged spikes. Creatures moving through the affected zone travel at half speed and sustain 1d8 points of piercing damage for each 5 feet of movement. After taking damage, creatures must succeed on a Reflex save or suffer reduced speed (half normal) for 24 hours or until healed by cure spells. Alternatively, another character can remove this penalty by spending 10 minutes providing medical care and succeeding on a Heal check matching the spell's save difficulty class.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spiked Armor',
@@ -1092,6 +1137,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'The spell causes thousands of tiny iron spikes like porcupine quills to sprout from the targeted armor or shield. These spikes do not injure the wearer but function as armor or shield spikes. Natural weapon attacks against the wearer deal 1 point of piercing damage per hit. Donning or removing affected armor requires twice the normal time. At 5th caster level, spikes gain a +1 enhancement bonus to attack and damage rolls (increasing to +2 at 10th level). At 15th level, the spikes gain the anarchic weapon quality.',
     source: 'Pathfinder Player Companion: Familiar Folio',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spit Venom',
@@ -1114,6 +1160,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The caster delivers a venom stream via ranged touch attack. On a successful hit, the target experiences blindness lasting one round. Additionally, the target must make a Fortitude save or be poisoned by black adder venom; the DC in successive rounds of the poison is equal to the spell's DC.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Squeeze',
@@ -1136,6 +1183,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       'The spell grants the target exceptional flexibility independent of size and mass. The affected creature can navigate through tight spaces with reduced penalties: areas at least half its size present no squeezing penalty, while spaces at least one-quarter width allow movement using standard squeezing penalties for half-size passages.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Statue',
@@ -1158,6 +1206,7 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "The spell transforms the subject into solid stone, including worn garments and equipment. The stone form gains hardness 8 while retaining original hit points. The subject maintains sensory perception (sight, hearing, smell) but does not require food or air. Physical damage manifests as scratches or serious injury depending on severity. The subject may freely alternate between statue and normal form as a free action throughout the spell's duration.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Steal Size',
@@ -1180,5 +1229,6 @@ export const TRANSMUTATION_BATCH_008: Spell[] = [
     description:
       "This transmutation spell reduces the target's size by one category (functioning as reduce person), while simultaneously increasing the caster's size by one category (as if affected by enlarge person, provided the caster qualifies). The spell creates a linked effect between caster and target — if either effect is dispelled or the spell otherwise ends for either participant, both creatures return to their normal sizes.",
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
 ];

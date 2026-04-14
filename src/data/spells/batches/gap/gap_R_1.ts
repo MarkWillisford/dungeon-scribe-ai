@@ -17,6 +17,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You animate rubble, gravel, or small stones into a dangerous swarm occupying a 10-foot space. The animated debris deals 1d6 hit points damage and causes distraction (DC 12) to creatures within it. As a move action, you direct the rubble to move up to 10 feet per round. When attacked, it functions as a Medium animated object using the young creature simple template with swarm subtype.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Raiment of Command',
@@ -32,6 +33,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: 'You are surrounded by an illusion of authority that makes others perceive you as a legitimate authority figure, granting a +5 bonus to Diplomacy and Intimidate checks. When impersonating a specific authority figure you have met, you gain +10 competence bonus on Disguise checks and related Bluff checks. Creatures with Intelligence 3 or higher take a -2 penalty on opposed checks against you, including Sense Motive (to detect bluffing) and Perception (to notice Stealth), as they unconsciously defer to the perceived authority.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rain of Arrows',
@@ -48,6 +50,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a magical arrow cloud affecting creatures and objects in a designated area, requiring line of sight. Each creature and object takes 1d6 points of piercing damage per caster level (maximum 20d6). If the material component arrows share a uniform composition like cold iron, the conjured arrows match that material.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rain of Frogs',
@@ -64,6 +67,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: 'You summon a swarm of poisonous frogs, which attacks all other creatures within its area. The summoned swarm uses centipede swarm statistics but possesses the animal type. The poison deals Constitution damage instead of Dexterity damage. You cannot control the swarm\'s target or movement direction; it automatically attacks nearby living creatures or pursues the nearest creature available.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Raise Animal Companion',
@@ -79,6 +83,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell operates identically to raise dead, with the limitation that it exclusively targets an animal companion, familiar, or paladin\'s bonded mount. The spell enables resurrection of these specific companion creatures rather than standard humanoid characters.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Raise Dead',
@@ -94,6 +99,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell restores life to a dead creature deceased no longer than one day per caster level, provided the soul willingly returns. The resurrected creature gains two permanent negative levels (or Constitution drain if 1st level). Prepared spells have a 50% loss chance; non-preparing casters risk losing spell slots. The spell cures normal diseases and poisons but not magical ones or curses. The body must be whole, and equipment remains unaffected. Undead, constructs, elementals, outsiders, and creatures killed by death effects cannot be raised.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rampart',
@@ -111,6 +117,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a massive rampart of hard-packed earth and stone 5 feet thick. The structure cannot occupy the same space as another creature or object. Each 5-foot section has hardness 0 and 180 hit points. A breached section loses all hit points. Breaking through requires a Strength check (DC 60), while climbing over requires a Climb check (DC 20).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Raven's Flight",
@@ -125,6 +132,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'none',
     description: 'This transmutation must be the first action taken during your turn. In a burst of shadowy feathers, you turn into a Tiny blurred shape reminiscent of a black raven until the beginning of your next turn. You gain 50 feet flying speed with good maneuverability and apply size modifiers accordingly, though ability scores remain unchanged. Until the beginning of your next turn, you can take only the 5-foot step, move, run, or withdraw actions. If dispelled mid-flight, you descend 60 feet the following turn before falling normally.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ray of Frost',
@@ -141,6 +149,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes',
     description: 'A freezing beam of air and ice emerges from your finger. You must succeed on a ranged touch attack to affect the target. The spell inflicts 1d3 points of cold damage upon a successful hit.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Realm Retribution',
@@ -156,6 +165,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: "You imbue a touched creature's attacks with alignment properties matching your own alignment (chaotic, evil, good, or lawful). When you possess a multi-component alignment (such as lawful good), you select which component to apply. The spell triggers when the target either confirms a critical hit against or takes damage from a creature. The affected creature must then attempt a Will save. Upon failure, that creature is transported to the Outer Planes matching your alignment, as per plane shift, and the spell terminates.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Reaper's Coterie",
@@ -171,6 +181,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: "The spell enchants a weapon to draw spiritual essence from defeated enemies. When the weapon reduces a living creature to 0 or fewer hit points, it gains a +1 profane bonus to damage rolls. This bonus increases by 1 for each additional creature defeated with that weapon, reaching a maximum bonus equal to half the caster's level.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rebuke',
@@ -187,6 +198,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes',
     description: "Your wrathful words inflict physical damage to enemies within range. Standard enemies take 1d8 points of damage per two caster levels (maximum 5d8) and become staggered for one round. Half the damage is sonic; the other half derives from divine power and resists sonic reduction. Against foes who worship your deity, the spell proves more devastating, dealing 1d6 points of damage per caster level (maximum 10d6) and stunning them for 1d4 rounds. A successful Fortitude save halves damage and negates the staggering or stunning effect. The spell functions regardless of whether enemies hear it but is negated by magical silence.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Recentering Drone',
@@ -201,6 +213,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You emit a calming subsonic drone that allows the targets to temporarily refocus their mental state. Creatures experiencing dazzled, fatigued, shaken, or sickened conditions ignore those penalties while the spell persists. More severe conditions receive mitigation: blinded becomes dazzled, exhausted becomes fatigued, frightened becomes shaken, and nauseated becomes sickened. Once the spell ends, original condition penalties resume if underlying causes remain.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Recharge',
@@ -215,6 +228,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'The spell restores up to 1 charge per caster level to a battery, or half that amount to rechargeable technological items. A 20% chance exists that the battery is destroyed during the attempt. If charges exceed the item\'s capacity, the object must make a Fortitude save or suffer 1d6 electricity damage per excess charge. You must declare the number of charges being restored before casting.',
     source: 'Pathfinder Campaign Setting: Technology Guide (2014)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Recoil Fire',
@@ -229,6 +243,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'The spell causes a targeted firearm to discharge spontaneously with extreme recoil. The wielder or carrier must make effort to maintain grip, becoming flat-footed until their next turn begins. If already flat-footed, they are instead knocked prone. Any loaded ammunition discharges and is wasted.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Recorporeal Incarnation',
@@ -243,6 +258,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell allows you to magically overlay a corpse\'s appearance onto a living creature. The deceased body must be fresh (dead no more than 24 hours or preserved via gentle repose). The living target gains the corpse\'s physical appearance, size, immunities, weapon proficiencies, weaknesses, and spell resistance. The spell provides a +20 circumstance bonus on Disguise checks to impersonate the deceased individual. The spell is notably difficult to detect—it produces no magical aura on the target, resists true seeing, and triggers undead-detection spells despite not actually making the target undead. The effect persists for weeks equal to caster level or until the focus item moves beyond 30 feet from the target.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Red Hand of the Killer',
@@ -257,6 +273,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes',
     description: "The spell reaches out across space to brand the killer of the corpse you used as a focus for this spell. The killer's right hand becomes permanently stained red and cannot be removed through normal means, though magical or mundane concealment is possible. For non-humanoid creatures lacking a right hand, the stain manifests elsewhere on the body. The spell affects only the direct killer, not accomplices, and requires the killer to be on the same plane when cast.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Redcap's Touch",
@@ -271,6 +288,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless, object)',
     description: 'You infuse a hat with blood, granting its wearer a +2 bonus on damage rolls. Additionally, the wearer regains 1d4 hit points whenever they deliver the killing blow to a living creature while wearing the enchanted hat.',
     source: 'Pathfinder Player Companion: Heroes from the Fringe (2018)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reflexive Barrier',
@@ -286,6 +304,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no (harmless)',
     description: "You create a deflective force barrier to protect a single target. The recipient gains a deflection bonus to its AC equal to half your caster level, lasting until the start of your next turn. This spell functions as a reaction to incoming attacks, but must be cast before the attack's outcome is determined.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Refuge',
@@ -301,6 +320,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: 'You enchant a specially prepared object with teleportation magic. When the recipient speaks a command word while breaking or rending the item, they and their carried possessions (up to heavy load capacity) instantly transport to your abode. Only the possessor is affected, though familiar or animal companions in contact with them may also travel. You may modify the spell so you teleport to within 10 feet of the item possessor when activated, gaining general awareness of the possessor\'s location and situation, though this modification becomes mandatory once chosen.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Regenerate',
@@ -316,6 +336,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell restores severed body parts including fingers, toes, hands, feet, arms, legs, tails, or even heads of multi-headed creatures, repairs broken bones, and regenerates damaged organs. Physical regeneration completes in 1 round if severed members are present and touching the creature, otherwise taking 2d10 rounds. The spell additionally heals 4d8 damage plus 1 per caster level (maximum +35), removes exhaustion and fatigue conditions, and eliminates all nonlethal damage. The spell is ineffective on nonliving creatures and undead.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reincarnate Spy',
@@ -331,6 +352,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes',
     description: "This spell operates similarly to reincarnate but allows you to shape the new body to match a specific creature, preserving appropriate age category and sex. If a race result doesn't match the desired size, it's rerolled. The resurrected subject gains a +5 bonus on Disguise checks to impersonate the target creature due to similar physical features, though penalties may apply for racial differences. The spell automatically leaves you with a small piece of the creature's new body, typically a lock of hair, useful for divination magic and similar effects.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reinvigorating Wind',
@@ -348,6 +370,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You release a magical breath creating a gentle wind that revitalizes nearby allies. Sleeping allies awaken immediately; fascinated allies break free of fascination and become shaken; flat-footed allies lose that condition; allies under confusion, fear, paralysis, slowness, or stun effects experience reduced durations (1d4 rounds per target, rolled separately); and prone allies may stand as an immediate action, triggering opportunity attacks normally.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rejuvenate Eidolon',
@@ -363,6 +386,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: "By placing your hand on your eidolon, you cause its wounds to close and its form to solidify. The spell heals 3d10 points of damage plus 1 point per caster level (maximum +10). A lesser version (Summoner 1) heals 1d10+1/level (max +5), and a greater version (Summoner 5) heals 5d10+1/level (max +20).",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic (2011)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Release the Hounds',
@@ -379,6 +403,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: 'This summoning spell conjures a pack of canines functioning as a unified swarm under your command. The creatures use winter wolf statistics but lose their breath weapon, cold subtype, and cold abilities. Instead, they gain swarm classification with 3d6 damage attacks and distraction (DC 17). When damaging opponents, the pack can immediately attempt trip combat maneuvers. The swarm lacks damage reduction and immunity; targeted effects deal only 25% normal damage, and non-damage effects have 25% success likelihood.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox (2016)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reloading Hands',
@@ -394,6 +419,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless, object)',
     description: 'Once per round, phantom hands load a single ranged weapon or firearm with conjured ammunition. The conjured ammunition counts as magical for overcoming damage reduction and attacking incorporeal creatures, but maintains standard characteristics (normal bullets, pellets, and black powder for firearms). The conjured ammunition ceases to exist one round after removal from the weapon or at spell duration\'s end, whichever occurs first.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat (2011)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Blindness/Deafness',
@@ -409,6 +435,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "This spell cures blindness or deafness (your choice), whether the effect is normal or magical in nature. The spell cannot restore lost eyes or ears but repairs damaged sensory organs. The spell counters and dispels blindness/deafness.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Disease',
@@ -424,6 +451,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell cures all diseases affecting the target by requiring caster level checks (1d20 + caster level) against each disease\'s DC. Success eliminates that disease. The spell also eliminates certain hazards and parasites like green slime. Because its effect is instantaneous, the spell provides no protection against reinfection from future exposure to the same disease.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Paralysis',
@@ -439,6 +467,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "This spell frees creatures from the effects of temporary paralysis or related magic, including spells and effects that cause a creature to gain the staggered condition. Single-target casting negates paralysis entirely. When targeting two creatures, each receives another Will save with a +4 resistance bonus. For three or four targets, each gets another Will save with a +2 resistance bonus. The spell does not restore ability scores reduced by penalties, damage, or drain.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Radioactivity',
@@ -454,6 +483,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'You remove active radiation effects from a target via a caster level check against the radiation\'s Fortitude DC. The spell restores 1d4 Constitution drain and 1d4 Strength drain caused specifically by radiation exposure. When applied to an area, it clears radiation from a 20-foot radius. The spell cannot neutralize naturally radioactive materials themselves, so radiation returns if those materials remain present.',
     source: 'Pathfinder Campaign Setting: Technology Guide (2014)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Sickness',
@@ -469,6 +499,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "The spell allows you to quell feelings of illness and nausea in the target, giving it a +4 morale bonus on saving throws against disease, nausea, and sickened effects. If the target is already experiencing one of these conditions when the spell is cast, that effect becomes suppressed for the spell's duration.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic (2011)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rend Body I',
@@ -483,6 +514,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes',
     description: "You use telekinetic force to lacerate and rend a target creature's body. The spell inflicts 1d6 points of damage per caster level (maximum 10d6). If damage exceeds half the target's maximum hit points, one randomly determined limb is violently severed and thrown 15 feet away in a random direction. The victim suffers 1 point of bleed damage per 2 caster levels. This bleeding stops via DC 15 Heal check or healing magic, though limb restoration requires powerful healing such as heal or regeneration. If damage reduces the creature below 0 hit points, all limbs are affected. Creatures lacking discernible anatomy or limbs are immune.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Renovation',
@@ -497,6 +529,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: "This transmutation spell allows you to permanently reorganize rooms within a structure you previously constructed as a downtime activity. You can remap the building layout as desired, repositioning each room as though newly constructed. However, modifications cannot alter construction costs or room benefits, and the structure must remain in its original district location. If you don't solely own the building, all owners must provide written consent before casting; otherwise the spell immediately fails.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Repel Metal or Stone',
@@ -513,6 +546,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: 'You generate waves of invisible energy that roll forth from you, propelling metal or stone objects away. Objects larger than 3 inches in diameter that are fixed in place, and loose items exceeding 500 pounds, remain unaffected. Other materials including armored creatures move backward at 40 feet per round. Items such as armor and weapons drag their bearers along. Even magical items with metal components are repelled unless blocked by an antimagic field. Creatures may release carried items or shields. The waves of energy continue to sweep down the set path for the spell\'s duration, persisting independently after casting.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Replenish Ki',
@@ -528,6 +562,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "You attune the target's internal store of supernatural energy to the cosmos, replenishing its ki pool. You regain 2 ki points if self-targeted, or grant 1 ki point to another creature. The spell cannot exceed the target's maximum ki pool capacity and has no effect on creatures lacking a ki pool.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reprobation',
@@ -543,6 +578,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes',
     description: "This curse expels a target from their religion as divine punishment. The target is marked with a magical symbol visible only to members of your faith, signaling transgression against religious tenets. The target cannot benefit from helpful spells cast by faithful members and is treated as an enemy for spell effects originating from your faith. Divine spellcasters, prestige class members, or those with faith-based abilities lose access to those abilities while marked. The curse can be dispelled through standard curse removal methods, atonement spells requiring caster level checks, or remove curse cast by faithful members of your faith. If the target did not commit any acts or misdeeds against your faith, the spell does not affect it but affects you instead.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Repugnant Taste',
@@ -558,6 +594,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "The target creature secretes a foul liquid that makes it repugnant to most living creatures. When struck by bite attacks or swallow whole abilities, attackers must succeed at a Fortitude save or become nauseated until the end of their next turn. Subsequent failed saves against the same spell inflict the sickened condition instead.",
     source: "Pathfinder Player Companion: Monster Hunter's Handbook (2017)",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resilient Sphere',
@@ -573,6 +610,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes',
     description: 'A shimmering force globe surrounds a creature (if small enough to fit). The sphere contains its subject throughout the spell\'s duration and functions like a wall of force, though it may be dispelled. Subjects inside maintain normal respiration. The sphere cannot be moved physically by external forces or by occupants struggling within.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resist Starvation',
@@ -587,6 +625,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "The spell prevents the starvation DC penalty from increasing if the target refrains from eating on the day of casting. However, it only functions if the target hasn't already attempted at least one Constitution check to avoid starvation.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resonating Word',
@@ -602,6 +641,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You speak a powerful word causing potentially fatal vibrations in a target. The creature must save each round, with escalating effects based on failed saves. Round 1: 5d6 sonic damage plus staggered condition (1 round); successful save halves damage and negates staggered. Round 2: 5d6 damage plus stunned condition (1 round); successful save halves damage and negates stunning. Round 3: 10d6 damage plus stunned condition (1d4+1 rounds); successful save halves damage and negates stunning.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resounding Blow',
@@ -617,6 +657,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: "This spell requires you to wield a melee weapon. Upon a successful melee attack, your weapon generates a thunderous clash, dealing 1d6 sonic damage without harming the weapon itself. When using judgment or smite ability, a successful hit staggers the target for one round (negated by Fortitude save). On a critical hit, the target becomes stunned for one round and deafened for 1d6 rounds (both effects negated by Fortitude save); if judgment or smite is active, only one save is made against all effects. The spell ends immediately if the weapon is released. It stacks with the thundering weapon property.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resounding Clang',
@@ -632,6 +673,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (object)',
     description: "The spell creates resonating vibrations affecting metallic objects within the area. Wielders of metal weapons suffer a -1 penalty on attack rolls, while users of metal tools take a -1 penalty on related skill checks. Armor-wearers increase their armor check penalty by 1. These penalties increase by 1 at 8th caster level and every 4 levels thereafter, reaching a maximum of -4 at 16th level. Only items composed primarily of metal are affected; items with minor metal components remain unaffected. Creatures made entirely of metal face penalties on attack rolls, damage rolls, skill checks, and Reflex saves.",
     source: 'Pathfinder Player Companion: People of the River (2014)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Respectful Quiet',
@@ -647,6 +689,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell renders all targeted creatures silent similarly to the silence spell, but with distinct mechanics. The silence affects only each individual creature\'s space and does not extend outward. Notably, this is a one-way effect—external sounds can still reach the silenced creatures. Additionally, affected creatures receive a +10 circumstance bonus on Stealth checks.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resplendent Mansion',
@@ -663,6 +706,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: "This conjuration produces a luxurious mansion with customizable interior spaces and furnishings. You mentally envision the structure's layout and décor. All created fixtures function normally indoors but vanish if removed. Mundane items appear as needed, while external magical devices retain functionality. The spell provides servants and provisions comparable to a mage's magnificent mansion. Each exterior entrance features an alarm (audible or mental) with distinct indicators. The mansion adapts to terrain but cannot manifest on water, unstable ground creates a 10% daily collapse risk, and the structure causes no harm to creatures during manifestation.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rest Eternal',
@@ -678,6 +722,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: "This curse prevents a dead creature's spirit from returning. Any spell attempting to communicate with the dead creature, restore it to life, or transform it into undead must succeed on a caster level check (DC = 11 + caster's level). The curse cannot be dispelled but can be negated with remove curse or break enchantment.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Restful Cloak',
@@ -693,6 +738,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'no',
     description: 'A worn cloak becomes a canvas tent accommodating four Medium-sized creatures in an adjacent flat area. Creatures inside regain 1 HP hourly beyond normal rest benefits. Fatigued creatures lose that condition after resting 1 hour within the tent, though only once per spell casting. The tent reverts to a cloak when duration expires. If moved before duration ends, the spell terminates immediately. The spell fails if no suitable flat area exists adjacent to the caster.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Restful Sleep',
@@ -707,6 +753,7 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You must cast this spell before resting. While active, subjects enjoy restorative sleep. Those completing a full night\'s rest regain hit points equal to twice their character level, while those resting a full day regain triple their character level in hit points. Significant interruptions (such as waking) negate all healing benefits and terminate the spell\'s effects for that subject. The healing gained counts as natural recovery and cannot address conditions requiring magical healing specifically.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Restoration',
@@ -722,5 +769,6 @@ export const GAP_SPELLS_R_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell removes temporary negative levels or one permanent negative level (requiring diamond dust worth 1,000 gp). The spell cannot remove more than one permanent negative level per target within a 1-week period. It heals all temporary ability damage, restores permanently drained ability points (caster\'s choice if multiple), and eliminates fatigue or exhaustion. A lesser version (Alchemist 2, Cleric 2, Druid 2, Paladin 1) requires no material component and dispels magical effects reducing ability scores or cures 1d4 points of temporary ability damage to one score. A greater version (Cleric 7) uses 5,000 gp diamond dust and dispels all permanent and temporary negative levels, restores all drained ability scores, and cures insanity and confusion effects.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 ];

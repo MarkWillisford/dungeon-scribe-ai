@@ -12,6 +12,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Demoralize opponents as an immediate action when they miss an ally you aided.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'bodyguard' },
@@ -31,6 +32,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain a +1 circumstance bonus on attack and damage rolls against lawbreakers you witnessed.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Lawful alignment' },
@@ -75,6 +77,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
       "You awaken draconic power within your bloodline by selecting one dragon type. You gain that dragon's associated heritage ability, with save DCs calculated as 10 + 1/2 your Hit Dice + your Charisma modifier. Options include: Chromatic (shroud arms in elemental energy as a swift action for 1 round, adding 1d6 energy damage to unarmed strikes, usable 3 + Charisma bonus times daily); Esoteric (project a psychic barrage within 15 feet as a standard action, potentially dazing the target for 1 round, usable once per 4 character levels); Imperial (emit a command aura in a 10-foot radius for 1 round granting allies +2 Will saves against fear while enemies suffer -2 penalties, usable 3 + Charisma bonus times daily); Metallic (gain energy resistance 5 against your chosen element until your next turn, usable 3 + Charisma bonus times daily); Outer (generate an alien aura in a 5-foot radius that sickens enemies failing a Will save, usable once per 4 character levels); Primal (create an elemental aura in a 10-foot radius dealing 1d6 damage and creating difficult terrain, usable once per 4 character levels); Drake (gain +10 enhancement bonus to speed for 1 round, usable 3 + Charisma bonus times daily); Linnorm (curse melee attackers as an immediate action imposing -2 penalties on their checks and rolls for 1 round, usable once per 4 character levels). You can take this feat only once. If you gain a bloodrager or sorcerer bloodline, you must choose draconic.",
     shortDescription: 'Awaken a draconic heritage ability based on a chosen dragon type.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'CHA', minimum: 13 }],
     effects: [],
@@ -90,6 +93,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Unlock additional draconic manifestation powers tied to your draconic bloodline type.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Access to natural claw attacks' },
@@ -108,6 +112,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Accept a -2 AC penalty in melee to add Wisdom modifier to unarmed damage against attackers.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -127,6 +132,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'While in Linnorm Style, gain bonuses against attackers and make retaliatory strikes before falling unconscious.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -161,6 +167,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Make an immediate retaliatory unarmed strike when allowing hits via Linnorm Vengeance; once per day force attackers to save or be stunned when struck down.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -182,6 +189,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +2 on Appraise and Spellcraft checks to identify items; exceeding DC by 5+ reveals additional details.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Wyvaran' }],
     effects: [
@@ -222,6 +230,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +4 (or +8 after a week of study) on Craft checks to recreate objects you have observed.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Wyvaran' }],
     effects: [
@@ -251,6 +260,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Forego your tail attack to gain +2 CMD and on combat maneuver checks until your next turn.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Dragon creature type' },
@@ -282,6 +292,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Unarmed attacks deal slashing damage; use a swift action to free grappled allies when striking their grappler.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -302,6 +313,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'While in Tatzlwyrm Style, use an Escape Artist check result as your CMD against grapple attempts.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -323,6 +335,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       "While in Tatzlwyrm Style, maintain grapples without your arms and gain a swift unarmed strike when your CMB exceeds the target's by 10+.",
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -345,6 +358,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Cast one draconic bloodline or domain spell twice per day as a spell-like ability.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 6 },
@@ -363,6 +377,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       "While in this style, include daggers, whips, and related weapons in flurry of blows or brawler's flurry attacks.",
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'exotic_weapon_proficiency_whip' },
@@ -382,6 +397,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'After hitting with a whip while in Wyvern Fury Style, use a swift action to let one ally move past that foe without provoking attacks of opportunity.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'exotic_weapon_proficiency_whip' },
@@ -402,6 +418,7 @@ export const LEGACY_DRAGONS_FEATS: FeatDefinition[] = [
     shortDescription:
       "While in Wyvern Fury Style, gain an extra 5-foot step during a flurry of blows or brawler's flurry.",
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'exotic_weapon_proficiency_whip' },

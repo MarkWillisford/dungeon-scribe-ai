@@ -9,6 +9,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
       'You gain a +4 bonus on saving throws against written magical effects, including explosive runes, glyph of warding, illusory script, symbol of death, and similar magic. This bonus also applies to curses, madness, possession, or comparable effects triggered by reading written materials.',
     shortDescription: '+4 saves vs. written magical effects and reading-triggered curses.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'linguistics', ranks: 3 },
@@ -33,6 +34,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
       'You inscribe chakra symbols using scars, tattoos, or henna to maintain kundalini balance. When failing a Fortitude save to sustain awakened chakras, the damage you take is reduced to half the normal amount.',
     shortDescription: 'Halve damage from failed Fortitude saves to sustain chakras.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'ki pool' }],
     effects: [
@@ -54,6 +56,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
       "You can perform the hypnotism occult skill unlock without psychic magic. Those with psychic spells or Psychic Sensitivity feat gain an additional daily use. Sleight of Hand can replace Diplomacy for hypnotism (requiring 10 minutes of skull contact). A 1-hour adjustment grants either a +2 bonus or -2 penalty to the target's saving throws against mind-affecting emotion effects for 24 hours.",
     shortDescription: 'Perform hypnotism without psychic magic; adjust saves vs. emotion effects.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Deft Hands or Trepanation' }],
     effects: [
@@ -76,6 +79,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Implant needles for save bonuses vs. fear/emotion; boost concentration checks.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Self-Sufficient or Trepanation' },
@@ -101,6 +105,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 on occult ritual checks or +1 CL on divination/necromancy after a coup de grace.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_religion', ranks: 3 }],
     effects: [
@@ -122,6 +127,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
       "Your phantom gains the ability to possess living creatures three times daily as a standard action while fully manifested. The target makes a Will save (DC = 1/2 phantom's Hit Dice + Charisma modifier) to resist. The phantom maintains control for 1 minute per spiritualist level, with the victim receiving new saves each minute. This otherwise functions as greater possession.",
     shortDescription: 'Phantom can possess living creatures 3/day while fully manifested.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'phantom' },
@@ -147,6 +153,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Perform dowsing without psychic magic; +2 insight on Survival; +1 CL on locate spells.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_nature', ranks: 3 },
@@ -171,6 +178,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
       "You can perform an occult ritual called Beseeching the Patron that temporarily grants access to an additional hex you don't already possess for 24 hours. You can choose a major hex (increasing skill check DCs by 10) or grand hex (increasing DCs by 20). Only one bonus hex from this ritual can be active at a time. The ritual takes 40 minutes using Knowledge (arcana) and (history) checks, 2 successes at DC 20. Failure causes 10% spell failure for 24 hours; success causes 1 hour of fatigue.",
     shortDescription: 'Ritual to temporarily gain a hex for 24 hours.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 4 },
@@ -196,6 +204,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
       'You can perform the read aura occult skill unlock without psychic magic. Those with psychic spellcasting or Psychic Sensitivity gain an extra daily use. You can conduct an aura reading as a full-round action once per day, and after successfully using detect thoughts on a creature within 30 feet, you may read their aura as a full-round action. With a ki pool, you can spend 1 point as a swift action for an additional daily use.',
     shortDescription: 'Read auras without psychic magic; extra uses with ki pool.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'alertness' },
@@ -220,6 +229,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
       "When casting speak with dead, you may forgo the spell's normal effects to temporarily merge the summoned spirit into your phantom. This allows you to exchange your phantom's current emotional focus and associated abilities for a new one of your choice. The new emotional focus lasts for 10 minutes per class level before reverting.",
     shortDescription: "Swap your phantom's emotional focus temporarily via speak with dead.",
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Ability to cast speak with dead' },
@@ -244,6 +254,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
       "You can perform faith healing occult skill unlocks without psychic magic. Characters with psychic spellcasting or Psychic Sensitivity gain an additional daily use. You can perform a 1-hour trepanation procedure using a healer's kit or surgeon's tools, requiring a Heal check (DC = 20 + target's Hit Dice). Success grants the target a +2 insight bonus on saving throws against curses, possession, and enchantment (compulsion) spells for 1 day per character level. Failed checks inflict 1d3 damage to Intelligence, Wisdom, and Charisma. Self-trepanation increases the DC by 5.",
     shortDescription: 'Perform trepanation for +2 insight saves vs. curses/possession/compulsion.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'heal', ranks: 5 },
@@ -268,6 +279,7 @@ export const OCCULT_ORIGINS_FEATS: FeatDefinition[] = [
       "You can perform psychometry occult skill unlock without psychic magic by consuming high-quality alcohol (10+ gp). With psychic casting ability or Psychic Sensitivity, use psychometry an additional time daily. Consuming quality alcohol grants a +2 circumstance bonus on Appraise and Sense Motive checks for 1 minute and increases the next divination spell's caster level by 1. Alcohol addiction increases these bonuses by 1 but also raises the addiction save DC.",
     shortDescription: '+2 Appraise/Sense Motive and +1 CL on divination from quality alcohol.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'appraise', ranks: 3 }],
     effects: [

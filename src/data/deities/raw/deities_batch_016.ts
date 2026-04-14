@@ -15,6 +15,7 @@ export const yamatsumi: DeityEntry = {
   sacredAnimal: `Ram`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -51,6 +52,7 @@ export const heiFeng: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -69,6 +71,7 @@ export const sunWukong: DeityEntry = {
   sacredAnimal: `Monkey`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -87,6 +90,7 @@ export const generalSusumu: DeityEntry = {
   sacredAnimal: `Horse`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -105,6 +109,7 @@ export const yaezhing: DeityEntry = {
   sacredAnimal: `Tiger`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -123,6 +128,7 @@ export const fumeiyoshi: DeityEntry = {
   sacredAnimal: `Wolf`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -141,6 +147,7 @@ export const laoShuPo: DeityEntry = {
   sacredAnimal: `Rat`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -159,6 +166,7 @@ export const ladyNanbyo: DeityEntry = {
   sacredAnimal: `Crow`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -196,6 +204,7 @@ export const abraxas: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -233,6 +242,7 @@ export const aldinach: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

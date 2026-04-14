@@ -10,6 +10,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You have learned how to release the energy of a spell, allowing it to be cast a second time. An echoing spell is not expended when cast; it can be used again on the following round. Once an echoing spell is used again, it is expended as normal. An echoing spell uses up a spell slot three levels higher than the spell's actual level.",
     shortDescription: 'Cast spell again next round without expending it, uses +3 levels',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -23,6 +24,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You can create illusions that seem to threaten nearby creatures. A threatening illusion created by a figment or shadow spell occupies the square in which it appears and is treated as if it threatens all squares within its reach. It is treated as an ally for the purposes of flanking. An opponent in a square threatened by a threatening illusion who is aware the illusion is not real is not considered flanked unless the illusion also threatens the ally's position. A threatening illusion uses up a spell slot one level higher than the spell's actual level.",
     shortDescription: 'Figment/shadow illusions can flank with allies, uses +1 level',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [
       {
@@ -42,6 +44,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You can increase the range of your spells. You can alter a spell with a range of close, medium, or long to increase its range by 100%. A vast spell uses up a spell slot one level higher than the spell's actual level.",
     shortDescription: 'Double spell range, uses +1 level',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -56,6 +59,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can make a second attempt at failed hexes. When you target a creature with a hex that cannot target the same creature more than once per day, and that creature succeeds at its saving throw against the hex, you can target the creature with the same hex a second time before the end of your next turn. If the second attempt fails, you can make no further attempts to use that hex on that creature for 1 day.',
     shortDescription: 'Retry a failed hex once against same target',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'hex' }],
     effects: [],
@@ -69,6 +73,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'With a pointed strike, you unleash a dark blight on your target. Whenever you confirm a critical hit with a spell or spell-like ability, the target is affected as if you had cast the spell blight on it.',
     shortDescription: 'Critical hits with spells apply blight effect',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['critical'],
     prerequisites: [{ type: 'caster_level', minimum: 5 }],
     effects: [],
@@ -82,6 +87,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Your critical hits with spells inflict two conditions from the blight spell instead of one.',
     shortDescription: 'Blighted Critical applies two effects instead of one',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['critical'],
     prerequisites: [
       { type: 'feat', featId: 'blighted_critical' },
@@ -98,6 +104,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can channel your divine energy into your shield to protect nearby allies. As a swift action, you can spend one use of your channel energy ability to grant your shield bonus to AC (including any enhancement bonus) as a sacred bonus to AC to all adjacent allies until the beginning of your next turn. This does not stack with other shield bonuses.',
     shortDescription: 'Spend channel energy to grant shield bonus to adjacent allies',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -114,6 +121,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can detect the magical expertise of others. When you use a detect spell (such as detect magic or detect evil) you may spend a standard action to attempt to identify the classes, feats, and current hit points of a creature within the area of the spell. The creature must be within 30 feet, and you must have maintained the detect spell for at least 3 rounds. The creature can attempt a Will save (DC 10 + 1/2 your level + your Intelligence modifier) to resist this effect.',
     shortDescription: "Use detect spells to identify target's classes, feats, and HP",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -130,6 +138,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Your bardic performance can damage as well as inspire. Whenever you are using bardic performance to create a competence bonus on attack rolls, any allies within 30 feet of you deal an extra 1d6 points of sonic damage with successful weapon attacks. This damage stacks with other energy damage a weapon might deal. Discordant Voice lasts as long as the bard continues the bardic performance.',
     shortDescription: 'Allies deal +1d6 sonic damage during bardic performance',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'bardic performance' },
@@ -146,6 +155,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You are the living embodiment of your sorcerous heritage. Select one sorcerer bloodline. You must have Skill Focus in the class skill that bloodline grants to a sorcerer at 1st level. You gain the first-level bloodline power for the selected bloodline. For purposes of using that power, treat your sorcerer level as equal to your character level - 2, even if you have levels in sorcerer. You do not gain any of the other bloodline abilities.',
     shortDescription: 'Gain 1st-level bloodline power (sorcerer level = character level - 2)',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -164,6 +174,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'The power of your sorcerous heritage is impressive. You gain either the 3rd-level or the 9th-level power (your choice) of the bloodline you selected with the Eldritch Heritage feat. For purposes of using that power, treat your sorcerer level as equal to your character level - 2, even if you have levels in sorcerer.',
     shortDescription: 'Gain 3rd or 9th level bloodline power',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 15 },
@@ -181,6 +192,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Your sorcerous heritage is as potent as that of a true sorcerer. You gain an additional power from the bloodline you selected with the Eldritch Heritage feat. You gain the 15th-level bloodline power. For purposes of using that power, treat your sorcerer level as equal to your character level - 2, even if you have levels in sorcerer.',
     shortDescription: 'Gain 15th-level bloodline power',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 17 },
@@ -198,6 +210,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "Your familiar is more capable than others of its kind. Select an evolution from the list of 1-point evolutions available to a summoner's eidolon. Your familiar has this evolution. The familiar must conform to any limitations of the evolution. For instance, no familiar can take the mount evolution.",
     shortDescription: 'Familiar gains a 1-point eidolon evolution',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -215,6 +228,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "The appearance of creatures you conjure with summon monster spells has beenitated through your magical research to be more powerful. Each creature you conjure with any summon monster spell gains one evolution from the list of 1-point evolutions available to a summoner's eidolon.",
     shortDescription: 'Summoned monsters gain a 1-point eidolon evolution',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'augment_summoning' },
@@ -236,6 +250,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You are a living font of minor magical power. You know two additional cantrips or orisons (chosen from your class's spell list).",
     shortDescription: 'Learn two additional cantrips or orisons',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Ability to cast cantrips or orisons' }],
     effects: [],
@@ -249,6 +264,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "Your eidolon has more evolutions than normal. Your eidolon's evolution pool increases by 1.",
     shortDescription: '+1 evolution point for eidolon',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'eidolon' }],
     effects: [],
@@ -262,6 +278,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can set more ranger traps than normal. You can set ranger traps two additional times per day.',
     shortDescription: '+2 ranger traps per day',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'ranger trap' }],
     effects: [],
@@ -275,6 +292,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You can implant a bomb in a willing or helpless creature. As a full-round action, you may implant a bomb inside a willing or helpless creature. The bomb does not harm the creature implanted and does not trigger the delayed bomb discovery. The bomb detonates after a number of rounds equal to your Intelligence modifier (minimum 1 round) or upon the creature's death, whichever comes first. The bomb deals damage as if the implanted creature were the target, affecting all other creatures within the bomb's splash radius as normal.",
     shortDescription: 'Implant a bomb inside a willing or helpless creature',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'bomb' },
@@ -291,6 +309,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Your channeled positive energy is irresistible to nearby undead. As a standard action, you may channel positive energy to fascinate all undead within 30 feet for a number of rounds equal to your Charisma modifier (minimum 1). Undead that succeed on a Will save (using the DC of your channel energy ability) are unaffected. This is a mind-affecting effect.',
     shortDescription: 'Channel energy to fascinate undead',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -307,6 +326,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "Your summoned creatures are infused with the power of the moon. Creatures you summon shed light as a light spell. They are also treated as if they were under the effects of a magic fang spell. These bonuses last for the duration of the summon monster or summon nature's ally spell.",
     shortDescription: 'Summoned creatures shed light and gain magic fang effect',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'spell_focus' },
@@ -326,6 +346,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Your summoned creatures are bathed in sunlight. Creatures you summon shed light as a daylight spell. They gain the effects of a protection from evil spell. In addition, they count as sunlight for the purposes of harming creatures vulnerable to sunlight.',
     shortDescription: 'Summoned creatures shed daylight and gain protection from evil',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'moonlight_summons' },
@@ -346,6 +367,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Your summoned creatures are enhanced by starlight. Creatures you summon gain the effects of the Blind-Fight feat. At the start of each of their turns, they attempt to dispel any ongoing darkness effect within 5 feet (caster level check, using your caster level). They also gain a +4 bonus on saves against blindness and pattern effects.',
     shortDescription: 'Summoned creatures gain Blind-Fight and can dispel darkness',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'moonlight_summons' },
@@ -366,6 +388,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You know the principles of magic well enough to disguise your spellcasting. When casting a spell, you may attempt to conceal the nature of the spell you are casting. Opponents attempting to identify the spell you are casting must make a Spellcraft check against the DC of the spell + your Bluff modifier. If they fail, they misidentify the spell as a different spell of your choice (of the same level).',
     shortDescription: 'Use Bluff to disguise spells you cast',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 5 },
@@ -382,6 +405,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can transform a 1st-level spell into a hex. Select one 1st-level spell in your witch spell list. You can learn that spell as a hex, and can use that hex three times per day. This is a spell-like ability. You use your witch level as the caster level for the spell hex.',
     shortDescription: 'Convert a 1st-level spell into a hex usable 3/day',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'major hex' }],
     effects: [],
@@ -396,6 +420,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can split the effect of one of your targeted hexes, affecting another creature you can see. When you use one of your hexes (not a major hex or a grand hex) that targets a single creature, you can apply the same hex to another creature as a free action.',
     shortDescription: 'Apply a hex to a second target as a free action',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'hex' },
@@ -412,6 +437,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can split the effect of one of your targeted major hexes, affecting another creature you can see. When you use one of your major hexes (not a grand hex) that targets a single creature, you can apply the same hex to another creature as a free action.',
     shortDescription: 'Apply a major hex to a second target as a free action',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'major hex' },
@@ -429,6 +455,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can combine your metamagic and your spontaneous casting ability with greater ease than others. Pick a single spell that you are able to cast spontaneously. When you apply metamagic feats to that spell, you can cast it without increasing the casting time.',
     shortDescription: 'Apply metamagic to chosen spell without increased casting time',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Spontaneous caster, ability to cast the chosen spell' },
@@ -445,6 +472,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can convert any spell into an attack. As a standard action, you can sacrifice a prepared spell or unused spell slot of 1st level or higher and transform it into a ray, targeting any foe within 30 feet as a ranged touch attack. This attack deals 2d6 points of damage plus an additional 1d6 points of damage for every level of the spell or spell slot you sacrificed. 0-level spells cannot be sacrificed in this manner.',
     shortDescription: 'Sacrifice spell slot for 2d6 + 1d6/level ranged touch attack',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'arcane spellcasting' },
@@ -461,6 +489,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can convert any spell into a defense. As an immediate action, you can sacrifice a prepared spell or unused spell slot of 1st level or higher and gain a deflection bonus to AC equal to the level of the spell or spell slot you sacrificed + 1. This bonus lasts until the beginning of your next turn. 0-level spells cannot be sacrificed in this manner.',
     shortDescription: 'Sacrifice spell slot for deflection bonus to AC until next turn',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'arcane spellcasting' },
@@ -477,6 +506,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can use your channel energy to bless a weapon, suit of armor, or shield. As a standard action, you can spend one use of your channel energy to grant a single weapon, suit of armor, or shield within 30 feet a +1 sacred bonus to attack and damage rolls (if a weapon) or AC (if armor or shield) for a number of rounds equal to your Charisma modifier (minimum 1 round).',
     shortDescription: 'Spend channel energy to grant +1 sacred bonus to equipment',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel energy' }],
     effects: [],
@@ -490,6 +520,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can expend a large amount of channeling power to bring a recently deceased creature back to life. As a full-round action, you can expend three uses of your channel energy ability to restore a dead creature to life as if you had cast the breath of life spell. The creature must have been dead for no longer than 1 round per two cleric levels.',
     shortDescription: 'Spend 3 channel uses to cast breath of life',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -509,6 +540,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can imbue weapons and shields with divine power, turning them into holy symbols. You are able to create any weapon, armor, or shield that also functions as a holy (or unholy) symbol. The item must be masterwork quality. When worn or wielded, the item functions as a divine focus for spellcasting.',
     shortDescription: 'Craft weapons/shields that double as holy symbols',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       {
@@ -527,6 +559,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can use a weapon you created with magic to strike at an opponent, and the weapon then falls apart. When using a weapon that you created using a spell (such as spiritual weapon or flame blade), you can choose to gain a +2 bonus on one attack roll with that weapon. If you do, the weapon is destroyed after the attack, whether or not it hits.',
     shortDescription: '+2 on one attack with conjured weapon, destroying it',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -545,6 +578,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You can convert a spell to interfere with an enemy's attack. As an immediate action, when an enemy within 30 feet hits an ally with an attack, you can sacrifice a prepared divine spell or unused spell slot of 1st level or higher to force the attacker to reroll the attack and use the lower result.",
     shortDescription: 'Sacrifice divine spell to force enemy attack reroll',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Divine spellcaster, caster level 10th' }],
     effects: [],
@@ -558,6 +592,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "Your spells cause fear in those they damage. Any creature that takes damage from a fearsome spell must make a Will save against the spell's DC or become shaken for a number of rounds equal to the spell's level. If the creature is already shaken, it becomes frightened instead. A fearsome spell uses up a spell slot two levels higher than the spell's actual level.",
     shortDescription: 'Spell damage causes shaken condition, uses +2 levels',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -571,6 +606,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You can use your summoner connection to slam the ground and knock enemies prone. While your eidolon is summoned, you can, as a standard action, command the eidolon to slam the ground. Every creature within 10 feet of the eidolon (other than you) must succeed at a Reflex save (DC 10 + 1/2 your summoner level + your eidolon's Strength modifier) or fall prone.",
     shortDescription: 'Eidolon slams ground to knock nearby creatures prone',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'eidolon' }],
     effects: [],
@@ -584,6 +620,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Chanting and cursing, you can deliver a hex through your unarmed strike. When you gain this feat, choose one hex that you can use to affect no more than one opponent. If you make a successful unarmed strike against an opponent, in addition to dealing your unarmed strike damage, you can use a swift action to deliver the effects of the chosen hex to that opponent. Doing so does not provoke attacks of opportunity.',
     shortDescription: 'Deliver hex through unarmed strike as swift action',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'hex' },
@@ -601,6 +638,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Once per day, the bonuses from your judgment are particularly powerful. Once per day, you can treat your inquisitor level as 3 higher for the purposes of determining the bonuses granted by one of your active judgments.',
     shortDescription: 'Once/day, treat inquisitor level as +3 for judgment bonuses',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'judgment' },
@@ -617,6 +655,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can move through magical terrain effects with ease. You can walk through any magical terrain effect (such as entangle, spike growth, or web) at your normal speed and without taking any damage or suffering any other adverse effect. However, other hazards of the terrain (such as unstable footing in a swamp) still affect you.',
     shortDescription: 'Move through magical terrain effects unhindered',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -633,6 +672,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You can throw an enemy's spell back at it. As an immediate action, when you are targeted by a spell or are in the area of a spell, you can sacrifice a prepared spell or unused spell slot of a level equal to or higher than the incoming spell. Make a caster level check (1d20 + your caster level) against a DC of 15 + the incoming spell's caster level. If you succeed, the spell has no effect on you and you can redirect it back at the caster, using the original caster's caster level and save DC.",
     shortDescription: 'Sacrifice spell slot to reflect enemy spell back at caster',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'improved_counterspell' },
@@ -649,6 +689,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can use your bottled creatures to summon extraplanar allies. You can add summon monster spells to your formula book and prepare them as extracts. When you drink a summon monster extract, the summoned creature appears adjacent to you.',
     shortDescription: 'Alchemist can prepare summon monster spells as extracts',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'bottled ally discovery' },
@@ -665,6 +706,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can use your channel energy to remove a condition from a single creature. As a standard action, you may spend one use of your channel energy ability to remove one of the following conditions from a single creature within 30 feet: dazed, fatigued, shaken, sickened, or staggered.',
     shortDescription: 'Spend channel energy use to remove a condition from one creature',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -681,6 +723,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'When you channel positive energy, you heal yourself more than others. When you channel positive energy to heal living creatures, you heal an amount of additional hit points equal to your Charisma modifier.',
     shortDescription: 'Heal extra HP equal to CHA modifier when channeling',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -697,6 +740,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'When you channel positive energy, you can take a small portion of the energy to bless yourself with a sacred bonus. Each time you channel positive energy to heal living creatures, you gain a +1 sacred bonus on attack rolls for a number of rounds equal to your Charisma modifier (minimum 1 round).',
     shortDescription: '+1 sacred bonus on attack rolls when channeling positive energy',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -721,6 +765,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Undead you raise or create are tougher than normal. Undead creatures you raise or create with any spell gain a +1 enhancement bonus to their natural armor and a +1 resistance bonus on all saving throws.',
     shortDescription: 'Created undead gain +1 natural armor and +1 on saves',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -740,6 +785,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can summon more creatures. Each time you cast a summoning spell that conjures more than one creature, add one to the total number of creatures summoned.',
     shortDescription: '+1 creature when summoning multiple creatures',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'augment_summoning' },
@@ -756,6 +802,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You do not need to make concentration checks when affected by vigorous or violent motion, weather, or entangled. You gain a +2 bonus on all other concentration checks.',
     shortDescription: 'Auto-pass some concentration checks, +2 on others',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Combat Casting' }],
     effects: [],
@@ -769,6 +816,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can marshal vast armies of undead. When determining the number of Hit Dice of undead you can control with spells like animate dead, you may add your caster level to the normal limit. This stacks with similar effects that increase the number of Hit Dice you control (such as the Command Undead feat or desecrate).',
     shortDescription: 'Control additional Hit Dice of undead equal to caster level',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'spell_focus' },
@@ -785,6 +833,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can choose to channel positive or negative energy. You may channel either positive or negative energy, regardless of your alignment or deity. Each time you channel energy, you choose whether to channel positive or negative energy. If your class restricts the type of energy you can channel, you lose two of your daily uses of channel energy each time you channel the type of energy you could not normally channel.',
     shortDescription: 'Channel either positive or negative energy',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -801,6 +850,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Using the word of healing ability, you can cure a small amount of damage to a creature you touch. You may use your lay on hands ability from a range of 30 feet. Using the word of healing ability otherwise works as normal for lay on hands.',
     shortDescription: 'Use lay on hands at 30 feet range',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'lay on hands' }],
     effects: [],
@@ -814,6 +864,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Choose chaos, evil, good, or law. You can channel your divine energy to affect outsiders and creatures with the chosen alignment subtype. Instead of its normal effect, you can choose to have your channel energy affect only outsiders and creatures with the chosen alignment subtype within its area. You must make this choice each time you channel energy. If you choose to affect creatures with the chosen alignment subtype, your channel energy has no effect on other creatures. The amount of damage dealt or healed is otherwise unchanged.',
     shortDescription: 'Channel energy affects only creatures of chosen alignment subtype',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel energy' }],
     effects: [],
@@ -835,6 +886,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Using foul powers of necromancy, you can command undead creatures, making them into your servants. As a standard action, you can use one of your uses of channel negative energy to enslave undead within 30 feet. Undead receive a Will save to negate the effect. The DC for this Will save is equal to 10 + 1/2 your cleric level + your Charisma modifier. Undead that fail their saves fall under your control, obeying your commands to the best of their ability. Intelligent undead receive a new saving throw each day.',
     shortDescription: 'Use channel negative energy to enslave undead',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -851,6 +903,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You sacrifice your natural spell ability to transform faster. You can wild shape as a move action or a swift action. However, you can only take the form of a creature one size category larger or smaller than your normal form, and the form cannot have any extraordinary abilities. If you use this as a swift action, the effect lasts for a number of rounds equal to your druid level.',
     shortDescription: 'Wild shape as move or swift action with limitations',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'wild shape' },
@@ -867,6 +920,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Your channeled energy can protect your allies with a divine shield. When channeling positive energy, you can choose to forego the normal healing effect and instead grant all living creatures in the area a sacred bonus to AC equal to 1 + 1 for every 4 cleric levels you possess. This bonus lasts for 1 round.',
     shortDescription: 'Channel energy to grant sacred AC bonus instead of healing',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -883,6 +937,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can channel positive energy to create a luminous shield. When you channel positive energy, you can choose one ally within 30 feet. That ally gains a shield of light that grants the ally a deflection bonus to AC equal to 1 + 1 per 5 cleric levels and also sheds light as a daylight spell for a number of rounds equal to your Charisma modifier.',
     shortDescription: 'Channel energy to create light shield granting deflection bonus',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -899,6 +954,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Select one spell from a school of magic you have chosen with the Spell Focus feat. Treat your caster level as being two higher for all level-variable effects of that spell. Every time you gain an even level in the spellcasting class you chose this feat for, you can choose a new spell to replace the spell you chose with this feat.',
     shortDescription: '+2 caster level for one spell, changeable at even levels',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -916,6 +972,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can sacrifice a prepared spell in order to spontaneously cast your specialized spell. By sacrificing a prepared spell of the same level or higher, you may spontaneously cast your specialized spell. The specialized spell is treated as its normal level, regardless of the level of the spell slot used to cast it. You can apply any metamagic feats you possess to this spell when you cast it this way, as long as the modified level does not exceed the level of the sacrificed spell.',
     shortDescription: 'Spontaneously cast specialized spell by sacrificing equal-level spell',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -933,6 +990,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You are unequaled at the casting of one particular spell. Pick one spell which you have the ability to cast. Whenever you cast that spell you may apply any one metamagic feat you have to that spell without affecting its level or casting time, as long as the total modified level of the spell does not use a spell slot above 9th level. In addition, if you have other feats which allow you to apply a set numerical bonus to any aspect of this spell (such as Spell Focus, Spell Penetration, Weapon Focus [ray], and so on), double the bonus granted by that feat when applied to this spell.',
     shortDescription: 'One free metamagic and doubled numerical feat bonuses for chosen spell',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Spellcraft 15 ranks, at least three metamagic feats' },
@@ -949,6 +1007,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can deliver one of your blessings as a swift action. Choose one of your blessings that normally requires a standard action to use. You can expend two of your daily uses of blessings to deliver that blessing as a swift action instead.',
     shortDescription: 'Use chosen blessing as swift action for 2 uses',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'blessings' },
@@ -965,6 +1024,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You can magically mark your spells for later identification. Any spell you cast can be tagged with a personal sigil that identifies you as the caster. This works like arcane mark, but only affects spells you cast. A tagged spell allows others to use Spellcraft to identify you as the caster.',
     shortDescription: 'Your spells carry an identifying magical signature',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -978,6 +1038,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Calling upon higher powers, you cause undead to flee from the might of your channeled energy. You can, as a standard action, use one of your uses of channel positive energy to cause all undead within 30 feet of you to flee, as if panicked. Undead receive a Will save to negate the effect. The DC for this Will save is equal to 10 + 1/2 your cleric level + your Charisma modifier. Undead that fail their saves flee for 1 minute. Intelligent undead receive a new saving throw each round to end the effect.',
     shortDescription: 'Channel positive energy to make undead flee',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -994,6 +1055,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "Your faith speeds you in battle and further strengthens your mind against your enemies' tricks. You gain a +1 bonus on initiative checks and a +2 bonus on concentration checks made to cast a spell or use a spell-like ability when casting on the defensive or while grappled.",
     shortDescription: '+1 initiative, +2 concentration when defensive casting or grappled',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -1020,6 +1082,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You empower your witch spells by pointing at your victims with your athame. You can use a dagger as an additional focus component for all your witch patron spells. When you do, the spell's DC increases by 1. Additionally, you can use the dagger as a melee touch attack to deliver touch spells. You must be holding the dagger to gain the bonus.",
     shortDescription: '+1 DC to patron spells when using dagger as focus',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'patron' },
@@ -1037,6 +1100,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You extend the benefits of your judgment to an ally. You can, as a swift action, extend the effects of one of your active judgments to one adjacent ally. The ally gains the benefits of the judgment for 1 round. Your judgment is otherwise unchanged. Using this feat has no effect on your judgment's effects for yourself.",
     shortDescription: 'Extend one active judgment to adjacent ally for 1 round',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'level', minimum: 1, class: 'inquisitor' },
@@ -1054,6 +1118,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You can direct a failed spell against a different target. Whenever a bouncing spell targeting a single creature has no effect on its intended target (whether due to spell resistance or a successful saving throw) you may, as a swift action, redirect it against a different eligible target within range. The redirected spell behaves in all ways as if its new target were the original target for the spell. Spells that affect a target in any way (including a lesser effect from a successful saving throw) may not be redirected. A bouncing spell uses up a spell slot one level higher than the spell's actual level.",
     shortDescription: 'Redirect failed single-target spell to new target, uses +1 level',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -1067,6 +1132,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "Your magical energies cling to enemies, interfering with their spellcasting. Targets affected by a disruptive spell must make concentration checks when casting spells for a number of rounds equal to the original spell level. The DC of this concentration check is equal to the DC of the disruptive spell. A disruptive spell uses up a spell slot one level higher than the spell's actual level.",
     shortDescription: 'Targets must make concentration checks to cast, uses +1 level',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -1080,6 +1146,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "When casting a spell that affects more than one creature, one of the targets of the spell is treated as if your caster level were 2 higher than it actually is. A focused spell uses up a spell slot one level higher than the spell's actual level.",
     shortDescription: 'One target of multi-target spell treated as CL +2, uses +1 level',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -1093,6 +1160,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You can make an instantaneous area effect spell remain in the area for 2 additional rounds. Anyone in the affected area during this time takes damage equal to the original spell's damage minus 1d6 per round. The spell's save DC does not change, and it otherwise follows the normal rules for the spell. A lingering spell uses up a spell slot one level higher than the spell's actual level.",
     shortDescription: 'Area spell persists for 2 extra rounds at reduced damage, uses +1 level',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -1106,6 +1174,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "Your allies need not fear friendly fire from your spells. When casting a selective spell with an area effect and a duration of instantaneous, you can choose a number of targets in the area equal to your ability modifier (minimum 1) used for that spell's casting. These targets are excluded from the effects of your spell. A selective spell uses up a spell slot one level higher than the spell's actual level.",
     shortDescription: 'Exclude allies from area spell effects, uses +1 level',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [{ type: 'special', description: 'Spellcraft 10 ranks' }],
     effects: [],
@@ -1119,6 +1188,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You can sicken creatures with your spells. Any creature that takes damage from a sickening spell must make a Fortitude save against the spell's DC or become sickened for a number of rounds equal to the original level of the spell. If the creature is already sickened, it becomes nauseated for 1 round. A sickening spell uses up a spell slot two levels higher than the spell's actual level.",
     shortDescription: 'Spell damage sickens targets, uses +2 levels',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -1132,6 +1202,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You can conjure your spells into existence with a thunderous sound. A thundering spell causes creatures that take damage from the spell to be deafened for a number of rounds equal to the original level of the spell. If the creature is already deafened, it is stunned for 1 round. Creatures that save against the spell's primary effect are not deafened. A thundering spell uses up a spell slot two levels higher than the spell's actual level.",
     shortDescription: 'Spell damage deafens targets, uses +2 levels',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -1145,6 +1216,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "Your study of defensive techniques allows you to replace living matter with logical constructs. You can modify a spell with an emotion component to be cast without that component. A logical spell uses up a spell slot one level higher than the spell's actual level.",
     shortDescription: 'Remove emotion component from spell, uses +1 level',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -1158,6 +1230,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       "You can extend your shield's protection to adjacent allies when channeling energy. When you use channeled shield wall, you can extend the protection to all allies within 10 feet.",
     shortDescription: 'Channeled Shield Wall protects allies within 10 feet',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'channeled_shield_wall' }],
     effects: [],
@@ -1171,6 +1244,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'Evil outsiders take damage when they attempt to use certain abilities while anchored by your channeled energy. When an evil outsider that you have affected with your Alignment Channel (evil) uses a spell-like ability, spell, or supernatural ability, it takes damage equal to your channel energy damage dice.',
     shortDescription: 'Evil outsiders take channel damage when using abilities',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'alignment_channel' },
@@ -1187,6 +1261,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       'You extend your understanding of death through your spells. Your thanatopic spells can now affect creatures that have immunity to death effects, treating them as if they did not have that immunity. Undead targeted by a thanatopic spell are still destroyed if they fail their save.',
     shortDescription: 'Thanatopic spells bypass death effect immunity entirely',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [
       { type: 'feat', featId: 'thanatopic_spell' },

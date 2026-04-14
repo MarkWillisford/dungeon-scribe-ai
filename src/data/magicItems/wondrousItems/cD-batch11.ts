@@ -9,6 +9,7 @@ export const wondrousItemsCD11: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder Society Field Guide',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION }],
     casterLevel: 9,
@@ -58,6 +59,7 @@ export const wondrousItemsCD11: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Dragon Empires Primer',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 1,

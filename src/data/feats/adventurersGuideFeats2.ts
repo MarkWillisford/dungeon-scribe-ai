@@ -7,6 +7,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Gray Maiden Initiate',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You gain affiliation with the Gray Maidens and select two training focuses from the following options: Avenging Knight (+1 bonus on damage rolls against any creature that dealt damage to you during the previous round); Deeper Indoctrination (+1 bonus on Will saving throws, except -2 penalty when resisting charm or compulsion effects from lawful evil creatures); Faceless Maiden (+2 bonus on Intimidate checks while wearing Gray Maiden plate); Gray Maiden Adept (arcane spell failure chance of Gray Maiden plate reduced by 5%); Gray Maiden Endurance (gain 2 hit points and can sleep in armor without fatigue); Korvosan Acceptance (+1 bonus on Diplomacy and Knowledge [local] checks, one becomes a class skill); Scarred (-1 penalty on Diplomacy and Disguise checks, but +2 bonus on Intimidate checks and saving throws against pain effects); Tamed and Broken (gain temporary hit points equal to spell level when affected by an enemy compulsion effect).',
     shortDescription: 'Join Gray Maidens; choose two training focuses granting various bonuses',
@@ -24,6 +25,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Horse Whisperer',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You gain a +2 bonus on Handle Animal and Ride checks to handle or ride horses. You can make a single Handle Animal check to command all horses within 60 feet simultaneously. Opponents can make a DC 20 Handle Animal check as an immediate action to protect their animal companion or mount from being influenced; if successful, that creature cannot be affected by this feat again for 1 hour.',
     shortDescription: '+2 on Handle Animal/Ride for horses; command multiple horses at once',
@@ -63,6 +65,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Improved Forceful Charge',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'Your animal companion can perform bull rush maneuvers against targets up to two size categories larger than itself. If it pushes the target at least 10 feet as a result of this bull rush, it can attempt a trip combat maneuver check against the target as a free action. This trip attempt follows standard rules regarding attacks of opportunity.',
     shortDescription: 'Animal companion bull rushes larger foes; trip if pushed 10+ feet',
@@ -82,6 +85,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Improved Horse Whisperer',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'With a successful DC 20 Handle Animal check, you can communicate with a horse as if you were using speak with animals for 1 round. The horse remains constrained by its intelligence regarding what it can understand and accomplish.',
     shortDescription: 'Communicate with horses via DC 20 Handle Animal check',
@@ -100,6 +104,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Improved Mounted Archery',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You take no penalty when using a ranged weapon while mounted and taking a double move action. The penalty while your mount is running is reduced to -2.',
     shortDescription: 'No penalty for ranged attacks while double-moving mounted; -2 at run',
@@ -118,6 +123,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: "Legionnaire's Inspiration",
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'As a standard action, you can select one creature you can see. All allies within 30 feet who are able to see and hear you gain a +1 morale bonus to their Armor Class against that creature for a number of rounds equal to your Charisma bonus (minimum 1 round). You can do this once per day, plus one additional time for every 3 character levels you have.',
     shortDescription: 'Grant allies +1 morale AC vs one target as standard action',
@@ -146,6 +152,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Mask Focus',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'While benefiting from the Nameless One feat, the mask you wear to gain the benefits of that feat satisfies the focus component of any spell you cast that requires a mask. Once per day, you can apply the Extend Spell metamagic feat to a spell without increasing its spell level by adding your mask as a focus component; when applied this way, the duration increase applies only to effects targeting yourself, not other creatures affected by the spell. For shamans and mediums, when you use a supernatural ability granted by your spirit, you increase your effective class level by 1 when determining the effects of that ability.',
     shortDescription:
@@ -165,6 +172,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Masked by Fear',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'By donning a mask etched with your greatest terrors, you are able to eschew fear completely. While benefiting from the Nameless One feat, when you suffer the cowering, frightened, or panicked condition, that condition causes you to act as if shaken instead of imposing its normal effects. In addition, whenever you attempt a skill check (normally Intimidate) to demoralize an opponent, you gain a +3 bonus on the check.',
     shortDescription: 'While masked, reduce fear conditions to shaken; +3 on demoralize checks',
@@ -196,6 +204,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Masked Intent',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "While you're benefiting from the Nameless One feat, your intentions become difficult to read. You gain a +4 circumstance bonus on opposed Bluff checks, and increase the DC by 4 of checks to gather information about you using Diplomacy, to answer questions about you or your abilities or weaknesses using the appropriate Knowledge skill, or to identify any spells or spell-like abilities that you cast using Spellcraft. If you have 10 or more ranks in any of these skills, the bonus for that skill or increase to that DC increases to +8.",
     shortDescription:
@@ -225,6 +234,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Mounted Blade',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'When you use the Ride-By Attack feat, if your attack hits, you can also make an attack against a target adjacent to your original target. You take a -5 penalty on this additional attack, which does not benefit from any effects of a charge.',
     shortDescription: 'After a Ride-By Attack hit, make an extra attack vs. adjacent foe at -5',
@@ -243,6 +253,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Mounted Onslaught',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'On your turn, you can overrun more than one creature. Each overrun combat maneuver check beyond the first takes a cumulative -5 penalty. If you fail to overrun a target, your movement ends. Your mount can make only a single hoof attack against one target that is knocked prone by your overrun (not one per prone opponent). Normally you can perform only one overrun combat maneuver per round.',
     shortDescription: 'Overrun multiple creatures in one turn with cumulative -5 penalties',
@@ -261,6 +272,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Nameless One',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You perform an 8-hour ritual costing 200 gp to completely sever your former identity. You eschew all of your former identities, going as far as to render your former name completely inaccessible to discover by mortal means. You adopt a descriptive title instead and create a special mask. Scrying or location attempts targeting your eschewed identities reveal only darkness. You are immune to effects requiring use of your name (e.g., named bullet). You cannot wear magic items in the head slot while using the mask, and cannot impersonate specific individuals. Successful Knowledge checks reveal your new title rather than old identities. Revealing your connection to past identities causes immediate loss of benefits and inflicts 1d4 permanent negative levels, requiring atonement to restore the feat.',
     shortDescription:
@@ -276,6 +288,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Perfect Style',
     types: ['combat', 'style'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'Upon selecting this feat, you choose one House of Perfection (permanent choice). You gain energy resistance 5 based on your house: Monastery of Untwisting Iron (acid resistance 5), Monastery of Unblinking Flame (fire resistance 5), or Monastery of Unfolding Wind (electricity resistance 5). You gain a ki pool with 2 points, increasing by 1 at 9th level and every 4 levels thereafter. This resistance stacks with racial or class feature resistances. You can select this feat multiple times, each time choosing a different House of Perfection.',
     shortDescription:
@@ -308,6 +321,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Purifying Channel',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'When you channel positive energy to heal, one creature that you exclude from your channeling takes an amount of fire damage equal to the die result you roll for healing, and is dazzled for 1 round by the light of these flames. A successful saving throw against your channel energy halves the fire damage and negates the dazzled effect.',
     shortDescription: 'When healing via channel, deal fire damage to one excluded creature',
@@ -326,6 +340,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Redistributed Might',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "Whenever an effect would grant you an enhancement or morale bonus to your Strength score (such as via bull's strength or a skald's inspired rage performance), you can instead apply that bonus to your Dexterity score. You select which ability receives the bonus when you first obtain it.",
     shortDescription: 'Redirect Strength enhancement or morale bonuses to Dexterity instead',
@@ -346,6 +361,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Ritual Mask',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "When using the Nameless One feat's masked identity, you can attempt all required skill checks for occult rituals you know, even if untrained in such a skill. If trained in the relevant skill, you receive a +3 bonus on your skill check. For characters with spirit class features (shaman or medium), once per day when you use a supernatural ability granted to you by your spirit, you increase your effective class level by 1 when determining the effects of that supernatural ability.",
     shortDescription:
@@ -378,6 +394,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Rugged Northerner',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You treat extreme cold conditions as severe cold, and severe cold as normal cold weather. Normal cold weather imposes no penalties on you. You cannot become fatigued from frostbite or hypothermia. This feat is unaffiliated; a creature need not be affiliated with the Mammoth Lords to select this feat.',
     shortDescription: 'Downgrade cold condition severity; immune to frostbite/hypothermia fatigue',
@@ -395,6 +412,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Scarlet Rose Devotion',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'Through the bond of sisterhood, you can inspire your allies to overcome terrible threats. When allies within 30 feet make saving throws, you may use an immediate action to attempt a DC 10 Perform (oratory) check. Success grants the ally a +2 morale bonus on her saving throw. The ability requires that the ally can hear and understand your speech.',
     shortDescription:
@@ -429,6 +447,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Scholar',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You have graduated from one of the many colleges, universities, and specialized schools of higher learning scattered throughout the Inner Sea region. Select any two Knowledge skills and gain a +2 bonus on checks with those skills. If you have 10 or more ranks in one of these Knowledge skills, the bonus increases to +4 for that skill. This feat is unaffiliated; a creature need not be affiliated with the Magaambya to select this feat.',
     shortDescription: '+2 (or +4 at 10 ranks) on two chosen Knowledge skills',
@@ -457,6 +476,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: "Serren's Masterstroke",
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'Once per round when you hit a foe you have successfully feinted against via a melee attack using an Aldori dueling sword, you deal an extra 2d6 points of precision damage. This damage increases to 3d6 at base attack bonus +11 and 4d6 at base attack bonus +16. This precision damage does not stack with sneak attack or similar effects, and defenses against sneak attack also protect against this damage.',
     shortDescription: 'After feinting, deal 2d6-4d6 precision damage with Aldori dueling sword',
@@ -475,6 +495,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Sinister Reputation',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'After spending 8 hours cultivating your local legend and succeeding at an Intimidate check (DC varies by settlement size: Thorp 10, Hamlet 12, Village 15, Small town 18, Large town 20, Small city 25, Large city 30, Metropolis 35), your reputation becomes known in that settlement. You can then attempt Intimidate checks to demoralize creatures with fewer Hit Dice as a swift action, and using Intimidate to change friendly behavior takes half the normal time. Benefits last for a number of days equal to half your level plus your Charisma modifier, and only apply within the settlement while not disguised. Vigilantes gain automatic benefits in their area of renown.',
     shortDescription:
@@ -494,6 +515,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Sisterhood Dedication',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'When using Sisterhood Style with a longsword and shield, the saving throw bonus increases to +2 and you extend half that bonus (+1) to allies within 20 feet. Additionally, you may select two teamwork feats you possess and grant either one feat to two allies or both feats to a single ally within 20 feet as a swift action, lasting until your next turn begins.',
     shortDescription:
@@ -530,6 +552,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Sisterhood Rampart',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "When utilizing Sisterhood Style, you and nearby allies receive an extra +1 to shield bonuses from Shield Wall. Additionally, everyone in this formation adds their shield bonus to AC against bull rush attempts. You and adjacent allies do not provide soft cover against allies' attacks.",
     shortDescription:
@@ -565,6 +588,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Sisterhood Style',
     types: ['combat', 'style'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You gain a +1 bonus on Reflex and Will saving throws while using this style with a longsword and shield. Additionally, upon entering the stance, you may select a teamwork feat you possess and grant it to an ally within 10 feet as a swift action, lasting until the start of your next turn.',
     shortDescription: '+1 Reflex and Will saves; grant a teamwork feat to an ally within 10 feet',
@@ -609,6 +633,7 @@ export const ADVENTURERS_GUIDE_FEATS_2: FeatDefinition[] = [
     name: 'Spirit Beacon',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'Select one spirit category (fey, outsiders, or undead including haunts). You receive a +1 bonus on Perception and Sense Motive checks against those creatures, increasing to +2 if you have 10 or more ranks in either skill. Additionally, you gain a +1 dodge bonus to your Armor Class against creatures of the chosen type, and a +1 insight bonus on Will saving throws against supernatural abilities of that type. Loss of your Dexterity bonus to AC also removes these bonuses. As a drawback, fey, outsiders, and undead creatures gain a +2 bonus on Perception checks to notice you. This feat can be selected up to three times, each time choosing a different creature type.',
     shortDescription:

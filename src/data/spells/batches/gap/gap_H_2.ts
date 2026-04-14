@@ -16,6 +16,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell operates identically to the dismissal spell but requires the creature\'s consent to cast. It sends a willing extraplanar being back to its home plane.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Horn of Pursuit',
@@ -32,6 +33,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'no',
     description: 'The caster produces horn sounds audible up to 2 miles away under normal outdoor conditions. The spell generates three distinct notes, each as loud as a dragon\'s roar. The caster can produce these sounds at any point during the round as free actions, with each note being adjustable in length. This flexibility allows users to send simple coded messages via the horn\'s varying tones.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hostile Juxtaposition',
@@ -47,6 +49,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster establishes a dimensional link with the target. When attacked or targeted by a damage-dealing spell, the caster may use an immediate action to swap positions with the linked creature via teleportation, causing the target to receive the triggering attack or spell instead. The swap fails if the target cannot safely fit in the new space, if the destination is occupied or unsafe, or if the target is unconscious or dead. The spell discharges after one successful teleportation.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Howling Agony',
@@ -62,6 +65,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'yes',
     description: "The caster inflicts wracking pains through the targets' bodies. Affected creatures experience a -2 penalty to AC, attacks, melee damage rolls, and Reflex saving throws. They must succeed at a concentration check (DC equals spell DC) to cast spells. However, targets can spend a move action vocally screaming to act without penalties for the remainder of that turn. Creatures incapable of vocalization suffer the spell's full effects.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hunger for Flesh',
@@ -77,6 +81,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell causes physical transformation including a distended belly and longer and sharper front teeth. The affected creature becomes staggered and gains a bite attack dealing 1d6 damage (Medium) or 1d4 (Small). Each turn has a 25% chance the creature must attack the nearest same-type creature. After successfully biting applicable creatures, the target loses the staggered condition temporarily, regaining it if bite attacks cease.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hungry Darkness',
@@ -93,6 +98,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'yes',
     description: 'Creates an area of intense blackness similar to deeper darkness, but filled with unseen fangs and ravenous maws. Creatures beginning their turn within the darkness suffer 3d6 force damage and 2 Constitution damage each round. Upon leaving the area, creatures continue taking 1d6 bleed damage per round until receiving magical healing or entering bright light. Spell resistance prevents damage from the effect but not from the darkness itself.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hungry Earth',
@@ -108,6 +114,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'no',
     description: 'The caster causes the ground to grapple creatures within the affected zone. Each round, all creatures touching the ground are targeted by a grapple combat maneuver. The earth\'s CMB equals 5 + your caster level. Successive successful grapple checks produce escalating effects: first check causes the grappled condition; second check forces the target prone; third check buries the creature, requiring it to hold its breath or suffocate.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Hunter's Blessing",
@@ -122,6 +129,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'The caster designates a creature type (matching ranger favored enemy categories) and terrain type (matching ranger favored terrain categories). Spell recipients gain +2 sacred bonuses on Bluff, Perception, Sense Motive, and Survival checks against the selected creature type, plus +2 on attack and damage rolls against that type. Additionally, recipients receive +2 sacred bonuses on initiative, Perception, Stealth, and Survival checks within the designated terrain.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Hunter's Eye",
@@ -136,6 +144,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This divination spell sharpens the caster\'s perceptive abilities against obfuscating effects targeting a single creature. The caster perceives invisible or ethereal targets as if using see invisibility, and gains a +20 competence bonus on Perception checks to locate the target. The spell negates concealment from fog, mist, blur, displacement, and invisibility effects affecting only that creature.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Hunter's Friend",
@@ -150,6 +159,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'no',
     description: 'This transmutation spell allows you to share one of the following class abilities with your companion for every 4 caster levels you possess: camouflage, favored enemy, favored terrain, hide in plain sight, resist nature\'s lure, swift tracker, trackless step, venom immunity, and woodland stride. The caster must possess the ability to share it with their animal companion.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Hunter's Howl",
@@ -166,6 +176,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'none',
     description: 'The caster emits a primal howl that instills fear in opponents within range. For the spell\'s duration, affected creatures are treated as favored enemies, granting the caster +2 bonuses on weapon attack and damage rolls, plus +2 bonuses on Bluff, Knowledge, Perception, Sense Motive, and Survival checks against them. If a target is already a designated favored enemy, it becomes shaken instead.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Hunter's Lore",
@@ -180,6 +191,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'none',
     description: "The spell enables casters to gain knowledge of enemy vulnerabilities. By spending a full-round action, the caster may take 20 on Knowledge skill checks to identify a foe's weaknesses, provided the target is within line of sight and the caster has at least one rank in the relevant Knowledge skill. The spell also allows untrained Knowledge checks to determine monster weaknesses.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Huntmaster's Spear",
@@ -194,6 +206,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'yes (harmless, object)',
     description: "The caster enchants a spear to function as a +1 weapon against one selected creature type from the ranger's favored enemy list. The spell can be discharged for a powerful attack with an 18-20 critical range and x3 multiplier. When used during a charge, the caster gains +30 feet to base speed. For masterwork spears, the spell adds bane abilities and bypasses most damage reduction. The spear is destroyed after the discharged attack.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hurricane Blast',
@@ -210,6 +223,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'no',
     description: 'The caster generates a severe blast of air (approximately 50 mph) affecting all creatures in the burst radius. Tiny or smaller creatures on the ground are knocked down and rolled 1d4x10 feet, taking 1d4 nonlethal damage per 10 feet. Small creatures are knocked prone or blown back if flying. Medium creatures cannot advance against the wind. All creatures suffer -4 penalty on ranged attacks and Listen checks. Unprotected flames extinguish; protected flames have 50% chance of extinguishing.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hydrophobia',
@@ -226,6 +240,7 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'yes',
     description: 'Affected creatures must succeed at a Will save or develop an intense fear of drowning. Targets submerged in water must exhaust all efforts to escape, suffering 1d6 points of nonlethal damage per round from thrashing and water ingestion. Even when out of water, affected targets cannot consume potions or willingly interact with fluids during the spell\'s duration.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hymn of Peace',
@@ -242,5 +257,6 @@ export const GAP_SPELLS_H_2: Spell[] = [
     spellResistance: 'yes',
     description: 'When subjects attempt to attack another creature or object, or perform aggressive or damaging actions toward a creature or object, they must make a Will save. Success allows normal attacks; failure prevents the attack and wastes that action. Creatures not taking violent actions are unaffected by this spell.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
 ];

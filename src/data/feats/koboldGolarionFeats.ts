@@ -10,6 +10,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 CL vs SR on verbal arcane spells; language-dependent spells understood by all intelligent creatures when spoken in Draconic.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'caster_level', minimum: 5 },
@@ -35,6 +36,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Learn an additional ranger trap and access both extraordinary and supernatural versions of known traps.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'learn_ranger_trap' },
@@ -52,6 +54,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use Cha, Int, or Wis instead of Con for Fortitude saves and negative HP threshold.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -77,6 +80,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Grapple a prone Medium or Large opponent to mount them; they must win a grapple check to stand.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_expertise' },
@@ -102,6 +106,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     description: 'Prone creatures are denied their Dexterity bonus to AC against your attacks.',
     shortDescription: 'Prone creatures lose their Dex bonus to AC against your attacks.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_expertise' },
@@ -128,6 +133,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 bonus on combat maneuver checks against opponents denied their Dex bonus to AC.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'combat_expertise' },
@@ -153,6 +159,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain one ranger trap usable Wis-mod times per day (minimum 1); non-rangers only access extraordinary versions.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'survival', ranks: 5 }],
     effects: [
@@ -175,6 +182,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 spell save DC against targets that are blinded, dying, entangled, exhausted, frightened, helpless, nauseated, panicked, paralyzed, or stunned.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Ability to cast spells' },
@@ -200,6 +208,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1d6 sneak attack damage against targets suffering from specific conditions.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Sneak attack class feature' },
@@ -225,6 +234,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain the benefits of a second kobold scale color in addition to your original.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Draconic Aspect feat or dragon-scaled racial trait' },
@@ -250,6 +260,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Metallic-sheen scales; +2 Diplomacy with good creatures; Cha +2 for channeling positive energy.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Good alignment' },
@@ -282,6 +293,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 CL for dragon domain spells; divine casting qualifies for Dragon Disciple; can cast blood of dragons bonus spells as divine.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Ability to spontaneously cast divine spells' },
@@ -314,6 +326,7 @@ export const KOBOLD_GOLARION_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ignore Str penalty to damage with racial natural weapons and Weapon Focus weapons.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Weapon Focus feat or natural weapon' },

@@ -17,6 +17,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell operates similarly to magic mouth but targets a skull. When triggered, the skull produces wild and unnerving cackles before delivering its message. Creatures hearing the cackles must make a Will save or become shaken for 1d4 rounds.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cacophonous Call',
@@ -33,6 +34,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell fills the target\'s mind with a blaring cacophony of discordant sounds, causing the nauseated condition on a failed save.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cacophonous Call, Mass',
@@ -49,6 +51,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell functions identically to cacophonous call but affects multiple targets simultaneously.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Caging Bomb Admixture',
@@ -64,6 +67,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'Upon consuming this extract, the alchemist modifies their bombs so that when a bomb hits a direct target, it generates an invisible cubical prison composed of a solid wall of force matching the bomb\'s splash area. The cage has hardness 20 and hit points equal to 20 per alchemist level. Only one cage may exist at a time.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Calamitous Flailing',
@@ -79,6 +83,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The victim\'s attacks careen wildly, endangering itself and those around it. The target gains a 25% miss chance on all attack rolls. When an attack misses due to this effect, it targets an ally within range, or the caster if no allies are available.',
     source: 'Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Calculated Luck',
@@ -93,6 +98,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster rolls 3d8 and assigns each die result to one of three benefits: vulnerability to a specific energy type, a +1 caster level bonus to spells of a particular school, or a +2 luck bonus to specific d20 rolls based on the Eight Basic Energies table.',
     source: 'Occult Mysteries',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Call Animal',
@@ -109,6 +115,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'This spell summons the nearest wild animal of a designated type. The animal travels under its own power and arrives with an indifferent attitude. If no suitable animal can reach the caster within the duration, the spell fails.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Call Construct',
@@ -124,6 +131,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions similarly to instant summons but exclusively summons controlled constructs. The caster can retrieve the construct at will. If the construct is destroyed or no longer under the caster\'s control, the spell fails.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Call Spirit',
@@ -139,6 +147,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster attempts to manifest a specific deceased humanoid\'s spirit by speaking its name. Unwilling spirits can resist via Will save; success typically brings a malevolent spirit in its place. The spirit appears as a wispy form and can speak in languages it knew in life. The caster may ask up to one question per caster level per round.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Call the Godspawn',
@@ -155,6 +164,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell summons an uncontrollable godspawn (thunder behemoth with advanced and entropic templates) after a week-long ritual involving humanoid sacrifice. The caster gains exhaustion during the ritual. The godspawn attacks indiscriminately upon arrival.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Call the Void',
@@ -169,6 +179,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster becomes surrounded by an aura of nothingness. Creatures adjacent when cast and at turn start take 2d6 damage and become fatigued, unable to breathe, and unable to speak or cast spells with verbal components. A Reflex save halves damage and negates fatigue, but breathing and speaking restrictions apply regardless.',
     source: 'Dragon Empires Primer',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Callback',
@@ -184,6 +195,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'When the target takes damage within range, it immediately teleports to the caster\'s space after the damage is applied. The caster can optionally specify a damage threshold before activation.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Callback, Greater',
@@ -199,6 +211,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions identically to callback with extended range of 1 mile/level and duration of 1 hour/level.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Calm Air',
@@ -215,6 +228,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'This abjuration disperses fog, dust, and airborne particles while reducing wind strength by one step per four caster levels (minimum light wind). Magical wind/cloud effects are suppressed; suppressing them requires a caster level check (DC 11 + effect\'s caster level).',
     source: 'Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Calm Animals',
@@ -231,6 +245,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell soothes and quiets animals (Intelligence 1 or 2 only), rendering them docile and harmless. All subjects must be the same kind. Maximum affected creatures equal 2d4 + caster level in Hit Dice. Affected animals don\'t attack or flee but defend themselves if attacked.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Calm Spirit',
@@ -245,6 +260,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell temporarily pacifies agitated incorporeal undead and haunts. Affected entities cannot perform violent acts or activate haunt abilities, though they may defend themselves. Haunts don\'t receive saving throws but require a caster level check (DC 10 + haunt CR).',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Campfire Wall',
@@ -261,6 +277,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates a visible barrier of light and fire around a campfire-sized heat source. The barrier grants total concealment between sides, deals 1d6 fire damage to those passing through from outside, and outlines them with torch-like light for 1d6 minutes. Spell ends if the fire source is extinguished or moved.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Canopic Conversion',
@@ -276,6 +293,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This powerful spell deals 1d6 damage per caster level (maximum 20d6). If the damage kills the target, the spell pulls organs into canopic jars and the corpse revives as a dune mummy after 1d4 rounds. The mummy isn\'t automatically controlled, but jar holders gain protective benefits and communication abilities.',
     source: 'Osirion, Land of Pharaohs',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cape of Wasps',
@@ -291,6 +309,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'You summon a wasp swarm occupying your 5-foot space without attacking you. The swarm provides partial concealment against ranged attacks. Any creature hitting you in melee takes 2d6 swarm damage and poison. As a free action, you may direct the swarm to grant a 20-foot fly speed (poor maneuverability).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Carrion Compass',
@@ -305,6 +324,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell animates one of the target undead\'s organs (heart, brain, or eyeball), which floats and leads the caster toward the creature\'s most recent controller, creator, or the location causing its animation. The organ moves at 30 feet per round and cannot travel more than 5 miles from the casting location.',
     source: 'Undead Slayer\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Carrying Wind',
@@ -320,6 +340,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'A wind spirit surrounds the caster, granting a +10-foot enhancement bonus to base speed and fly speed. Those without flight gain a 10-foot fly speed with poor maneuverability. Bonuses scale at caster level 10-14 (+20 feet, average) and 15+ (+30 feet, average).',
     source: 'Elemental Master\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Carve Passage',
@@ -336,6 +357,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell allows excavation of snow, earth, dust, sand, and loose/packed rocks or ice filling one 5-ft. cube per level. If buried, the caster can create space around themselves and tunnel with remaining cubes. Has no effect on earth creatures or solid rock.',
     source: 'Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cast Out',
@@ -350,6 +372,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster makes a melee touch attack dealing 2d8 points of damage + 1 point per caster level (maximum +15). The spell disrupts magical control effects by making dispel checks against magic jar, ghost malevolence, and enchantment (compulsion) spells, prioritizing highest-level effects. A successful Will save reduces damage by half.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Castigate',
@@ -366,6 +389,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster compels the target to beg for forgiveness. A failed save causes cowering in fear; a successful save causes the target to be shaken for 1 round. Each round a cowering subject may attempt a new save. Creatures worshiping the same deity as the caster suffer a -2 penalty on saves.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Castigate, Mass',
@@ -382,6 +406,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell functions identically to castigate but affects multiple creatures within 30 ft. of each other.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Cat's Grace",
@@ -396,6 +421,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell grants the recipient a +4 enhancement bonus to Dexterity, improving their AC, Reflex saves, and other Dexterity-based abilities.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Catatonia',
@@ -410,6 +436,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell induces a death-like catatonic state where the target appears dead to observers (DC 20 Heal check to recognize life). The creature counts as dead for effects targeting living creatures but isn\'t undead. The subject remains helpless and can be killed normally.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Caustic Eruption',
@@ -427,6 +454,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell deals 1d6 points of acid damage per caster level (maximum 20d6) on initial impact. Creatures that fail their saves take an additional 1d6 points of acid damage per 2 caster levels (maximum 10d6) on the caster\'s turn in each of the next 2 rounds, unless the acid is neutralized or washed away.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Caustic Safeguard',
@@ -442,6 +470,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell imbues an object with an acidic ward dealing 1d6 acid damage per 2 caster levels (maximum 10d6) to any creature other than the caster who touches it. The caster can designate one creature per 4 caster levels to safely handle the warded object.',
     source: 'Agents of Evil',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cave Fangs',
@@ -459,6 +488,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a magical trap on stone surfaces triggering when Small or larger creatures pass through. Caster chooses stalactites (3d8 bludgeoning/piercing damage, rubble, potential pinning) or stalagmites (3d8 piercing, prone condition, then functions as spike stones for 1 minute/level). Trap has DC 30 Perception and Disable Device checks.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Celestial Companion',
@@ -473,6 +503,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell grants divine protection to a companion creature. The target receives spell resistance against evil casters, a bonus to saving throws, and damage reduction. Affected creatures may develop a celestial appearance.',
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Celestial Healing',
@@ -489,6 +520,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants fast healing 1 to a wounded creature anointed with celestial blood or holy water. The recipient radiates a good aura for the duration.',
     source: 'Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Celestial Healing, Greater',
@@ -505,6 +537,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Functions as celestial healing but grants fast healing 4 and causes the target to radiate the aura of a good cleric.',
     source: 'Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ceremony',
@@ -519,6 +552,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster channels divine power to create one of four core ceremonies: funeral, holiday fete, marriage, or naming, plus two domain-based ceremonies. Each grants affected subjects a sacred or profane boon lasting 1 hour per caster level. Only subjects within one alignment step of the caster\'s deity qualify.',
     source: 'Quests & Campaigns',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chain of Perdition',
@@ -535,6 +569,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'A magical force chain materializes with hooks at each end. It executes combat maneuvers (dirty trick, drag, reposition, trip) using the caster\'s level and relevant ability modifier. It cannot be damaged by physical attacks but is vulnerable to dispel magic, disintegrate, sphere of annihilation, or rod of cancellation.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chains of Fire',
@@ -550,6 +585,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell mirrors chain lightning mechanics but substitutes fire damage for electrical damage, allowing the caster to affect multiple targets within specified distance constraints.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chains of Light',
@@ -566,6 +602,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'Glowing golden chains of pure light immobilize the target. The target becomes paralyzed and may attempt a new saving throw each round to break free. While restrained, the creature cannot use extradimensional travel abilities.',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Challenge Evil',
@@ -582,6 +619,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster compels an evil creature toward combat, granting a +2 sacred bonus on all melee attacks against it. If the target doesn\'t attack the caster by turn\'s end, it becomes sickened. The spell terminates if the caster moves away from the target.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chameleon Stride',
@@ -597,6 +635,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'The caster becomes difficult to perceive through translucence, gaining a +4 bonus to Stealth checks and 20% concealment (miss chance) against creatures more than 5 feet away.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chameleon Stride, Greater',
@@ -613,6 +652,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'An enhanced version of chameleon stride affecting all allies within 10 feet at casting. Affected creatures can see each other normally. Benefit is lost if creatures exit the area.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Champion's Bout",
@@ -629,6 +669,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes; see text',
     description: 'This enchantment enables two willing champions to engage in combat without outside interference. Any creature attempting to aid or hinder either participant must succeed at a Will save or forfeit its action. If a creature successfully intervenes, the spell terminates immediately.',
     source: 'Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Channel the Gift',
@@ -643,6 +684,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless) or no',
     description: 'The caster channels magical power to fuel a target\'s spellcasting. The next spell cast by the target (3rd level or lower) uses the caster\'s spell slot instead. When targeting oneself, the caster may spontaneously cast any prepared spell of 3rd level or lower without expending its slot.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Charge Object',
@@ -657,6 +699,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell infuses an item with minor psychic energy, allowing detection by detect psychic significance. The caster can imprint ownership history and personal information that can be revealed through object reading or psychometry.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Charitable Impulse',
@@ -673,6 +716,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell compels affected creatures toward charitable behaviors rather than violence. Subjects follow prioritized actions: healing injured creatures, giving away weapons, casting beneficial spells, distributing possessions. Subjects cannot attack or take attacks of opportunity but may defend themselves.',
     source: 'Chronicle of the Righteous',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Charm Animal',
@@ -689,6 +733,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell functions identically to charm person but affects creatures of the animal type instead of humanoids. It makes the target regard the caster as a friend. Requesting unusual actions may require an opposed Charisma check.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Charm Fey',
@@ -705,6 +750,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This enchantment spell functions identically to charm person but affects fey creatures instead of humanoids.',
     source: 'The First World, Realm of the Fey',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Charnel House',
@@ -722,6 +768,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster sacrifices a living creature to manifest a grisly illusion of viscera and gore. Creatures entering must succeed at a Will save or become sickened for 1d6 rounds. The floor becomes slippery, requiring DC 10 Acrobatics checks to move at half speed.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Charon's Dispensation",
@@ -736,6 +783,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants affected targets immunity to the harmful effects of touching or drinking from the River Styx and a +4 profane bonus on saves against memory-altering effects like modify memory or mindwipe.',
     source: 'Book of the Damned',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chastise',
@@ -750,6 +798,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'The caster gains a +5 bonus on Bluff, Diplomacy, and Intimidate skill checks when persuading listeners that they face trouble from authorities or legal consequences if they refuse the caster\'s requests.',
     source: 'Faction Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Cheetah's Sprint",
@@ -764,6 +813,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'If the caster takes a charge or run action before their turn ends, they can move up to 10 times their base land speed. This is an enhancement bonus affecting only land movement.',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chord of Shards',
@@ -779,6 +829,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'A bard performing bardic performance can strike a chord that transforms into razor-sharp crystalline shards, dealing 2d6 points of piercing damage to all creatures in the cone area.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Circle of Clarity',
@@ -794,6 +845,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Creates a magical emanation granting creatures +4 bonus on saves against figments and glamers. Negates non-total concealment and provides a perception bonus equal to half caster level (max +10).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Clarion Call',
@@ -808,6 +860,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The subject can produce a sound like the blast of a mighty horn by miming the action, and can speak in a booming voice that carries easily over great distances, lowering the DC of any check to hear what is said by -15.',
     source: 'Knights of the Inner Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Clashing Rocks',
@@ -824,6 +877,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster conjures two massive stone formations that appear 30 feet away on opposite sides of a target and rush toward it. A ranged touch attack determines a hit, dealing 20d6 bludgeoning damage and knocking prone. A failed Reflex save also buries the target. On a miss, nearby creatures take 10d6 damage with a Reflex save for half.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Clay Skin',
@@ -838,6 +892,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The recipient\'s skin hardens to a clay-like consistency, providing DR 5/adamantine. The protective effect lasts until it has absorbed damage equal to 5 points times the caster\'s level (maximum total of 50 points).',
     source: 'Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cleanse',
@@ -852,6 +907,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'The spell infuses the caster with positive energy, healing 4d8 points of damage + 1 point per caster level (maximum +25) and removing ability damage, blinded, confused, dazzled, deafened, diseased, exhausted, fatigued, nauseated, poisoned, and sickened conditions. Also functions as break enchantment on one effect.',
     source: 'Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cleansing Fire',
@@ -868,6 +924,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell creates a fiery ring that deals 2d6 fire damage to creatures passing through (4d6 to undead). It automatically attempts to dispel evil-descriptor spell effects within its area each round and counterspells any evil spells cast within the ring.',
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Clear Grove',
@@ -883,6 +940,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'This transmutation spell clears vegetation from a designated area, moving trees and shrubs to create a 20-foot-radius open space. The spell cannot affect plant creatures. Vegetation returns when the duration expires.',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Clenched Fist',
@@ -898,6 +956,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'An enhanced version of interposing hand, this spell creates a magical hand capable of attacking, pushing, or striking an opponent. The hand attacks once per round dealing 1d8+11 damage, may stun targets via Fortitude save, and can also perform bull rush maneuvers.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cleromancy',
@@ -912,6 +971,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster casts bones and groups matching results. For the spell\'s duration, the caster gains a luck bonus equal to one selected dice result on any d20 roll, applicable to a number of rolls matching the group\'s die count.',
     source: 'Occult Mysteries',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Climbing Beanstalk',
@@ -928,6 +988,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'This spell creates a sturdy beanstalk growing to 10 feet plus 5 feet per 2 caster levels. The plant provides numerous handholds with a climb DC of 5. Weight capacity is 200 pounds plus 50 pounds per caster level.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloak of Chaos',
@@ -943,6 +1004,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell creates a protective chaotic aura providing: +4 deflection bonus to AC and +4 resistance bonus on saves; spell resistance 25 against lawful spells; protection from possession and mental influence; and forces lawful melee attackers to make a Will save or become confused for 1 round.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloak of Dreams',
@@ -960,6 +1022,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster emanates a soporific aroma causing living creatures beginning their turn or ending movement within 5 feet to fall asleep for 1 minute. Sleeping targets are helpless but awaken with a standard action or if wounded. Creatures with scent suffer a -4 penalty on saves.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloak of Secrets',
@@ -976,6 +1039,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'Creates an invisible bubble that filters speech from inside the area, causing outside listeners to hear an altered conversation. Listeners can make DC 15 Sense Motive checks to detect the deception. The bubble obscures spell verbal components and imposes a -5 penalty to Spellcraft checks.',
     source: 'Heroes of the Street',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloak of Shade',
@@ -990,6 +1054,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This protective charm reduces environmental sun damage by one severity level and lessens sunlight-related penalties by 1 point. Does not protect against direct sunlight effects on light-sensitive creatures.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloak of Shadows',
@@ -1006,6 +1071,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'Wraps the caster in a protective mantle of semireal shadow providing: 20% miss chance, +5 competence bonus to Stealth, and DR 5/good. Also negates sunlight vulnerabilities. In dim light or darkness against foes without darkvision, enhances to 50% miss chance and +10 Stealth bonus.',
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloak of Winds',
@@ -1021,6 +1087,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell envelops a target in whirling wind. Benefits include immunity to being checked or blown away by windstorm-level winds, a -4 penalty to ranged attacks against the subject, and the ability to knock tiny or smaller attackers prone.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Clone',
@@ -1036,6 +1103,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates an inert duplicate of a creature. When the original dies, its soul transfers to the clone. Requires a piece of flesh with a volume of at least 1 cubic inch from the living original. The duplicate requires 2d4 months to grow and gains two permanent negative levels.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloud of Seasickness',
@@ -1053,6 +1121,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions similarly to stinking cloud, except affected creatures become sickened rather than nauseated. Can be made permanent with a permanency spell.',
     source: 'Skull & Shackles AP',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cognitive Block',
@@ -1069,6 +1138,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell impedes mental spellcasting by forcing targets to add a thought component to any spell or spell-like ability used, increasing the DC of any concentration checks by 10 unless the target takes a move action to center their mind.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Coin Shot',
@@ -1083,6 +1153,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless, object)',
     description: 'The spell transforms coins into projectile weapons with bullet-like velocity (20-foot range increment). Different coin types deal varying damage: copper (1d4), silver (1d6), gold (1d8), platinum (1d10). All gain +1 bonus damage per 2 caster levels (max +10).',
     source: 'Heroes of the Street',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cold Ice Strike',
@@ -1099,6 +1170,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster creates a shredding flurry of ice slivers blasting from the hand in a line, dealing 1d6 points of cold damage per caster level (maximum 15d6).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cold Iron Fetters',
@@ -1114,6 +1186,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'Magical shackles materialize around the target\'s limbs, halving movement speeds and worsening flying maneuverability by two steps. Targets with cold iron damage reduction cannot use supernatural or spell-like movement abilities.',
     source: 'Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Collaborative Thaumaturgy',
@@ -1128,6 +1201,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'This spell allows a caster to apply one metamagic effect (Enlarge, Extend, Silent, or Still Spell) to an ally\'s spell without increasing its level or casting time. Multiple castings enable stronger effects: two applications allow Empower Spell, while three allow Maximize or Widen Spell.',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Command Plants',
@@ -1142,6 +1216,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell grants control over plant creatures, allowing them to understand the caster and perceive their actions favorably. Affected plants won\'t attack the caster. Plants refuse suicidal or obviously harmful commands.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Commune with Birds',
@@ -1156,6 +1231,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'The caster emits a bird call audible up to one mile away, allowing understanding of avian responses to a single question over the next 10 minutes. Birds reply as if the caster had asked them the question using speak with animals.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Commune With Texts',
@@ -1170,6 +1246,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'This spell enables rapid absorption of knowledge from books, scrolls, or texts. The caster can locate relevant information on any topic within the collection, attempt Knowledge checks as if trained, and gains a +2 bonus to applicable Knowledge checks.',
     source: 'Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Companion Life Link',
@@ -1184,6 +1261,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell establishes a magical connection allowing the caster to sense when the target creature is wounded or killed, and vice versa. As a free action, the caster may summon the target back if able and willing.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Companion Mind Link',
@@ -1200,6 +1278,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'While maintaining line of sight, the caster gains telepathic communication with their animal companion and can command it via swift action rather than move action. Handle Animal checks automatically succeed.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Companion Transposition',
@@ -1215,6 +1294,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster exchanges positions with a designated companion creature via teleportation. Post-casting, the caster cannot act until the next turn, and the companion becomes staggered until its next turn ends.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Compassionate Ally',
@@ -1231,6 +1311,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'When an injured ally is observed, the target creature immediately disengages and rushes to provide aid using curative spells, magic items, or Heal checks. The creature remains until wounds are fully healed or the spell expires, but can defend itself if needed.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Compel Hostility',
@@ -1247,6 +1328,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes; see text',
     description: 'The caster can use an immediate action to redirect attacks from creatures threatening them toward the caster instead when those creatures target allies. The targeted creature must overcome spell resistance and can make a Will saving throw to resist.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Compel Tongue',
@@ -1263,6 +1345,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell grants a target creature the ability to read, understand, and speak one language the caster knows. The recipient can only speak and write in the granted language for the duration, though comprehension of other languages remains unaffected.',
     source: 'Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Compel Tongue, Mass',
@@ -1279,6 +1362,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions as compel tongue but affects multiple targets within 30 feet of each other.',
     source: 'Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Compelling Rant',
@@ -1294,6 +1378,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster delivers a bewildering monologue causing listeners to take Wisdom damage while viewing the speaker favorably. Creatures with 5+ HD can attempt a save.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Compulsive Liar',
@@ -1310,6 +1395,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell compels the target to speak only falsehoods. Lies need not be convincing or consistent, but cannot be true. The effect extends to non-verbal communication. Permits metaphorical speech and fictional references.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Concealed Breath',
@@ -1324,6 +1410,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell removes the creature\'s need to breathe, preventing drowning and immunity to inhaled poisons. While holding its breath, a creature cannot speak or cast spells with a verbal component unless using Silent Spell.',
     source: 'Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Condensed Ether',
@@ -1339,6 +1426,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell thickens the boundary between the Ethereal and Material Planes, significantly impeding movement through the area. Creatures move at half speed and cannot take 5-foot steps. They suffer -2 AC and Reflex penalties. Ranged attacks are ineffective, and magic rays have a 20% miss chance.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Conditional Curse',
@@ -1354,6 +1442,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell operates similarly to bestow curse but requires specifying a condition that breaks the curse. The target understands this condition innately. The condition must be achievable within one year and be expressible in 25 words or fewer. Removing via break enchantment or remove curse is DC +5 harder.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Conditional Favor',
@@ -1368,6 +1457,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Cast immediately before another spell on the same willing creature. Creates a conditional binding tied to the paired spell. If the spell\'s recipient violates the oath or prohibition while conditional favor remains in effect, the paired spell is undone as if never cast.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Confess',
@@ -1384,6 +1474,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster asks the target a single question. On the subject\'s next action, it must answer truthfully or suffer 1d6 points of damage per two caster levels (maximum 5d6) and become sickened for 2d4 rounds. A successful Will save negates the sickening and halves the damage.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Conjuration Foil',
@@ -1399,6 +1490,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (object)',
     description: 'The spell grants affected creatures a +4 bonus on saving throws against teleportation effects. Creatures attempting to enter or exit the area via summoning or teleportation take damage equal to 1d6 points per spell level of the triggering effect and arrive at random locations. A successful Will save halves damage and prevents misdirection.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Conjure Deadfall',
@@ -1414,6 +1506,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'A conjured metal cube covered with sharp spikes falls from midair. A 5-foot square deals 1d6 per caster level (max 15d6); larger areas deal proportionally less. The block must start at least 10 feet above targets.',
     source: "Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Consecrate',
@@ -1430,6 +1523,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell sanctifies an area with positive energy, granting a +3 sacred bonus to the DC to resist positive channeled energy. Undead suffer -1 penalty on attack rolls, damage rolls, and saves, and cannot be created or summoned there. Counters and dispels desecrate.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Constricting Coils',
@@ -1446,6 +1540,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This enchantment functions similarly to hold monster but adds constriction damage. The affected target takes 1d6+6 points of bludgeoning damage each round that it fails its save. A successful saving throw ends both the paralysis and constriction effects.',
     source: 'Pathfinder AP #42',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contact Entity I',
@@ -1460,6 +1555,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell sends a magical message to eldritch entities of a particular kind within range. Contacted creatures know the spell\'s origin location but must reach it independently.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contact Entity II',
@@ -1474,6 +1570,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell sends a magical message to eldritch entities of a particular kind within range. Contacted creatures know the spell\'s origin location but must reach it independently.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contact Entity III',
@@ -1488,6 +1585,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell sends a magical message to eldritch entities of a particular kind within range. Contacted creatures know the spell\'s origin location but must reach it independently.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contact Entity IV',
@@ -1502,6 +1600,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell sends a magical message to eldritch entities of a particular kind within 500 miles. Contacted creatures know the spell\'s origin location but must reach it independently.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contact High',
@@ -1516,6 +1615,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster, while affected by a drug, can transfer its effects to others through melee touch attacks. Recipients experience the drug\'s effects without suffering ability damage or addiction risk. Cannot transmit effects from potions, poisons, elixirs, or mutagens.',
     source: 'Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contact Nalfeshnee',
@@ -1530,6 +1630,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'None',
     description: 'The caster enters a trance, becoming helpless while contacting a nalfeshnee demon skilled in a chosen Knowledge skill. Each round, one question may be asked. Each answer inflicts 1d4 ability drain to Intelligence, Wisdom, or Charisma unless a Will save succeeds.',
     source: 'Demons Revisited',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contagious Flame',
@@ -1545,6 +1646,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster launches multiple fire beams. The spell begins with three rays at 11th level, gaining one additional ray every four levels (maximum five). Each ray deals 4d6 fire damage and requires a ranged touch attack. On subsequent rounds, new rays originate from previously damaged creatures.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contagious Suggestion',
@@ -1561,6 +1663,7 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions similar to suggestion but allows affected creatures to spread the enchantment to others. Targets must communicate the suggestion to new creatures, who make saving throws. The spell affects creatures totaling Hit Dice equal to caster level.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contagious Zeal',
@@ -1577,5 +1680,6 @@ export const GAP_SPELLS_C_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The target receives +2 morale bonus to attack and weapon damage rolls, gains 1d6 temporary hit points, and a +4 morale bonus on saves against fear. Once per round, the target may grant these same benefits to another creature within range.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 ];

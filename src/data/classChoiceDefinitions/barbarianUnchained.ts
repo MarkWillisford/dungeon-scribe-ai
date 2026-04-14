@@ -16,6 +16,7 @@ export const barbarianUnchainedDefinitions: ClassChoiceDefinition[] = [
     collectionName: 'ragepowers',
     source: 'pf1e-unchained',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
     visibility: 'global',
     rev: 1,
   },

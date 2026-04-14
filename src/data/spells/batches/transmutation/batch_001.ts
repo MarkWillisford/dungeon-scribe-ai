@@ -23,6 +23,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "The caster absorbs the next object their hand touches into their body. If already holding an object, they may attempt to absorb it; otherwise, touching an object requires a separate standard action. The spell can absorb any nonmagical, nonliving object weighing no more than 1 pound per caster level, with containers and contents counting as a single object. Objects possessed by other creatures receive a Fortitude save to prevent absorption. The absorbed object melds with the caster's hand, remains under their carrying capacity, and can be dismissed to reappear in that hand or fall to the ground. Multiple castings allow absorption of additional items, with one item per hand maximum.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Accelerate Poison',
@@ -46,6 +47,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "This transmutation spell accelerates poison onset in a touched creature. If the poison has an onset time, its effects begin immediately. For poisons without an onset time, the frequency doubles—requiring two saving throws and dealing damage twice per round or minute, though duration halves. The spell does not modify the poison's cure condition. When multiple poisons affect the target, the caster chooses which one is affected if they administered it; otherwise, the effect applies randomly.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Acute Senses',
@@ -68,6 +70,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'The affected creature receives enhanced sensory perception through this transmutation magic. The spell provides a +10 bonus to Perception checks initially. This bonus increases to +20 at 8th caster level and reaches its maximum of +30 at 16th caster level.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Adjustable Polymorph',
@@ -100,6 +103,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "This spell functions like alter self, but grants the caster the ability to adjust their disguise as a swift action within alter self limitations. The spellcaster can change between different forms multiple times during the spell's duration. The total number of form changes permitted equals the caster's character level.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Age Resistance',
@@ -122,6 +126,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This spell allows you to ignore the physical detriments of being middle-aged. Specifically, you disregard the -1 penalties to Strength, Dexterity, and Constitution that normally accrue at middle age, while retaining bonuses to Intelligence, Wisdom, and Charisma. The spell does not alter appearance or prevent death from old age, and penalties from old or venerable age still apply fully.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Air Breathing',
@@ -155,6 +160,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "The transmuted creatures gain the ability to breathe air freely. The caster divides the spell's duration equally among all touched creatures. The spell does not prevent creatures from breathing water.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Air Step',
@@ -187,6 +193,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This spell functions similarly to air walk but with significant limitations. You can only rise 1 foot off the ground and cannot pass over liquid. The air beneath you is unstable, allowing you to ignore difficult terrain under 1 foot high and avoid triggering weight-based effects. Trackers suffer a -10 penalty following your path. However, the unstable footing reduces your speed by 10 feet (minimum 5 feet) and imposes a -4 penalty to Acrobatics, Climb, and Ride checks. With 1 rank in Fly, your speed penalty disappears and you can cross liquid at half speed. With 5 Fly ranks, you traverse liquid at full speed without skill penalties.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Air Walk',
@@ -209,6 +216,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'The recipient gains the ability to walk on air as if traversing solid ground. Upward movement functions like climbing a hill, with a maximum 45-degree angle at half normal speed. Strong winds (21+ mph) affect movement, pushing the walker 5 feet per round for each 5 mph of wind speed. If the spell expires while airborne, the subject descends gradually at 60 feet per round for 1d6 rounds before falling. The caster can also use this spell on trained mounts with proper preparation and a successful Handle Animal check (DC 25).',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alchemical Tinkering',
@@ -230,6 +238,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This transmutation spell allows you to convert one alchemical item or firearm into another of the same or lesser monetary value. Magic items remain unaffected. When the spell expires, any alchemical items that were used during the transformation are ruined and cannot be salvaged, while firearms return to their original form.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Allfood',
@@ -252,6 +261,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This transmutation spell allows a caster to convert a single object into edible matter digestible by any living creature. The resulting substance has a bland flavor and gooey texture. One pound sustains a Medium creature for one day. Objects of similar nature nearby count as one for casting purposes. The spell cannot affect items with magical or exceptional qualities. The transformed object retains its original hardness for sunder attempts and other standard object interactions, but has 0 hardness for consumption purposes. Objects producing energy, such as burning torches or hot coals, continue functioning normally and can damage creatures attempting to eat them.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alter River',
@@ -276,6 +286,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "This transmutation allows you to manipulate freshwater river flows in two ways. The first option alters current speed by up to 1 mph per 2 caster levels, affecting how quickly the water moves creatures and objects downstream. The second option redirects the river's course in your chosen direction, causing it to surge over natural banks and potentially create flooding while conforming to terrain shape. The spell cannot force water uphill. It may be made permanent through permanency or combined with spells like move earth for lasting effects.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alter Self',
@@ -309,6 +320,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This transmutation allows you to reshape your body into any Small or Medium humanoid form. You may gain sensory abilities from your new shape, including darkvision, low-light vision, scent, and a swim speed. Assuming a Small form grants a Dexterity increase, while a Medium form provides a Strength boost. The spell lasts for one minute per caster level and can be dismissed early.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alter Winds',
@@ -332,6 +344,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'The caster enhances or diminishes natural (non-magical) wind effects within a 10-foot radius around a touched point. The spell increases or decreases wind intensity by one step. Maximum affected wind force depends on caster level: Light (levels 1-3), Moderate (levels 4-9), Strong (levels 10-15), or Severe (level 16+). Magical wind effects remain unaffected.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Amplify Elixir',
@@ -353,6 +366,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This alchemical extract enhances the potency of consumed potions and elixirs during its duration. Any potion or elixir consumed while the extract is active gains empowered effects, with all variable numeric effects increased by fifty percent. For potions lacking variable numeric effects, the duration doubles instead. The spell provides no benefit if the consumed item has no variable effects or instantaneous duration. Additionally, it affects oils targeting the user but not those applied to equipment.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Animal Aspect',
@@ -385,6 +399,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'The caster gains beneficial qualities from a chosen animal while maintaining their base form and size. Worn armor adjusts to fit the new shape. The caster selects one animal aspect: frog (Acrobatics bonus and improved jumping), gorilla (increased unarmed damage and grapple benefits), monkey (Climb bonus and Throw Anything feat), otter (swim speed and extended breath-holding), raccoon (Disable Device, Sleight of Hand, and Stealth bonuses), raptor (enhanced base speed), or tree lizard (climb speed). Only one animal aspect spell can be active simultaneously.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Animal Growth',
@@ -406,6 +421,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "This transmutation spell enlarges a target creature to twice its normal size and eight times its weight, advancing it to the next size category. The animal gains a +8 bonus to Strength and +4 to Constitution (including 2 extra hit points per Hit Die), while suffering a -2 penalty to Dexterity. Natural armor increases by 2. The spell adjusts the creature's AC, attack rolls, and damage accordingly. Space and reach change appropriately, but speed remains unaffected. Equipment worn enlarges similarly without affecting magical properties. Multiple size-increasing effects do not stack, and the spell provides no control over the enlarged animal.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Animal Shapes',
@@ -428,6 +444,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "The caster transforms up to one willing creature per caster level into the same animal form. The transformation functions similarly to beast shape III. Affected creatures remain animals until the spell's duration expires or the caster dismisses it. Individual subjects can return to normal form as a full-round action, ending the effect for themselves only.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Animate Objects',
@@ -449,6 +466,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'The caster infuses inanimate objects with mobility and semblance of life. Each animated object immediately attacks designated targets. Non-magical materials may be animated; one Small object or equivalent number of larger objects (Medium counts as two, Large as four, Huge as eight, Gargantuan as sixteen, Colossal as thirty-two). The designated target may be changed as a move action. Objects carried or worn by creatures cannot be affected. The spell can be made permanent with a permanency spell.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Animate Rope',
@@ -470,6 +488,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This spell enables a caster to animate a nonliving rope-like object. The rope responds to commands including coil, loop, tie, and knot variations. The animated rope must be thrown within one foot of its target using a ranged touch attack. It cannot damage but can entangle creatures failing a Reflex save. Spellcasters bound by the rope face a DC 15 + spell level concentration check to cast. Entangled creatures escape with a DC 20 check. The rope itself remains nonmagical.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ant Haul',
@@ -502,6 +521,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "This spell triples a creature's carrying capacity without affecting actual Strength or encumbrance penalties from armor. The spell allows the target to carry significantly more weight while maintaining normal armor restrictions.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Anthropomorphic Animal',
@@ -525,6 +545,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "The spell transforms a touched animal into a bipedal hybrid combining animal and humanoid characteristics, similar to a lycanthrope's hybrid form. The creature retains its original size, type, and ability scores while losing most natural attacks except bite. It gains one pair of manipulative limbs (or grows arms if limbless), increased Intelligence to 3, and the ability to speak one known language. The creature cannot wield manufactured weapons but can make unarmed strikes dealing appropriate damage for its size. The spell can be made permanent via a permanency spell cast by an 11th-level caster for 7,500 gp.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aspect of the Bear',
@@ -547,6 +568,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'The caster gains a +2 enhancement bonus to natural armor and a +2 enhancement bonus on CMB rolls. Additionally, the spell allows the caster to perform bull rush, grapple, and overrun combat maneuvers without provoking attacks of opportunity.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aspect of the Falcon',
@@ -569,6 +591,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'The caster undergoes a physical transformation gaining raptor-like eyes and head feathers. Benefits include a +3 competence bonus on Perception checks, a +1 competence bonus on ranged attacks, and an expanded critical threat range of 19-20/x3 for bows and crossbows. This critical multiplier improvement does not stack with other effects that expand weapon threat ranges, such as the Improved Critical feat or keen weapons.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aspect of the Nightingale',
@@ -600,6 +623,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'The caster takes on nightingale characteristics, with their voice becoming clear and pleasant. They gain a +2 competence bonus on Perform (sing) checks and a +2 competence bonus on Diplomacy checks. Once per minute, if subject to a charm effect allowing a saving throw, the caster may roll twice and use the more favorable result.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aspect of the Stag',
@@ -622,6 +646,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This transmutation spell grants the caster physical stag characteristics including elongated features and antlers. Benefits include a +2 dodge bonus to AC against opportunity attacks, a 20-foot speed increase, and the ability to move through undergrowth at normal speed. When struck by an opportunity attack, the caster can make an immediate antler attack using their highest base attack bonus plus Strength or Dexterity modifier, dealing 1d8 piercing damage (1d6 if Small) with a critical multiplier of 19-20/x2.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aspect of the Wolf',
@@ -644,6 +669,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This transmutation spell grants the caster wolfish physical traits. The body becomes more rugged with elongated ears, sharp fangs, and fur growth. The spell provides a +4 enhancement bonus to Strength and Dexterity, grants the scent ability, gives a +2 enhancement bonus on trip combat maneuvers, and allows the caster to execute trip attacks as swift actions without provoking opportunity attacks.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Atavism',
@@ -665,6 +691,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This transmutation spell awakens an animal\'s primal ancestry, applying the advanced creature template and granting +2 bonuses to rolls and damage, +4 to AC and CMD, and +2 hit points per HD. The animal loses access to trained tricks except "attack" for the spell\'s duration and has no effect on creatures already advanced.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Awaken',
@@ -687,6 +714,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This spell grants human-like sentience to an animal or tree through a magical transformation. An awakened tree gains plant-type characteristics with Intelligence, Wisdom, and Charisma scores determined by rolling 3d6 each. It develops human-like mobility and sensory capabilities. An awakened animal receives 3d6 Intelligence, +1d3 Charisma, and +2 Hit Dice, transforming into a magical beast type. The spell cannot affect creatures already possessing Intelligence greater than 2. The awakened being gains speech capability in languages the caster knows. The awakened creature becomes friendly toward the caster but requires explicit communication regarding tasks.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Awaken Construct',
@@ -709,6 +737,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "This transmutation grants a mindless construct sentience by amplifying its animating force. The caster must succeed at a Spellcraft check (DC 15 + construct's Hit Dice); if the construct has a master present, this becomes an opposed check. The awakened construct becomes free-willed, breaking any previous control bonds. Its Intelligence becomes 3d6, Charisma increases by 2d6, and it gains appropriate feats and skills. It speaks one language from its creator plus one additional language per point of Intelligence bonus. Alignment is GM-determined but typically within one step of the creator's.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Badger's Ferocity",
@@ -730,6 +759,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "This spell functions similarly to keen edge but affects multiple weapons and requires caster concentration. The caster selects which weapons to affect, with a limit of one weapon per creature. If a creature's weapon exceeds the spell's range, the spell ends for that weapon.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Baleful Polymorph',
@@ -760,6 +790,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "This transmutation spell permanently transforms a target creature into a Small or smaller animal with no more than 1 Hit Die. The subject receives a Fortitude save to resist. If the transformation would be fatal, they gain a +4 bonus. Those failing the save must make a Will save; failure causes loss of extraordinary and supernatural abilities, spell-like abilities, and spellcasting. The creature adopts its new animal form's ability scores but retains class levels, hit points, and non-magical class features. Polymorph effects are automatically dispelled, and the target cannot assume other forms while affected. Incorporeal, gaseous creatures, and those with the shapechanger subtype are immune or can revert as a standard action.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Baphomet's Blessing",
@@ -783,6 +814,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "The caster transforms the target's head into a bull's head. The creature's Intelligence drops to 2, and it gains a gore melee attack usable as either a primary or secondary attack with a +2 bonus to both attack and damage rolls. Damage varies by size: 1d6 + Strength modifier (Small), 1d8 + Strength modifier (Medium), or 2d6 + Strength modifier (Large or larger). The target retains its type, class, levels, Hit Dice, base attack bonus, save bonuses, and hit points. It keeps all class features and can still cast spells using its new Intelligence score. Head slot items meld into the body; passive items function but activated items don't. The target becomes immune to other polymorph spells for the duration. Undead, incorporeal, or gaseous creatures cannot be affected.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Barkskin',
@@ -804,6 +836,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "This transmutation spell toughens a creature's skin by granting a +2 enhancement bonus to natural armor. The bonus increases by 1 for every three caster levels above 3rd, reaching a maximum of +5 at 12th level. The enhancement stacks with existing natural armor but not with other enhancement bonuses to natural armor. Creatures without natural armor are treated as having an effective bonus of +0.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Batrachian Surge',
@@ -831,6 +864,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This transmutation spell grants temporary amphibian-based enhancements. The caster selects one of four benefits: gills for underwater breathing, enhanced leaping with Acrobatics bonuses equal to caster level, a swim speed matching base land speed, or an extended tongue increasing reach by 5 feet for touch spells. Armor adjusts automatically. Only one batrachian surge can be active simultaneously.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Bear's Endurance",
@@ -866,6 +900,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'The spell grants the subject a +4 enhancement bonus to Constitution, which increases hit points, Fortitude saves, Constitution checks, and related benefits. Hit points gained from this temporary Constitution increase are not temporary hit points and disappear when Constitution returns to normal.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Beast Shape I',
@@ -889,6 +924,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'When you cast this spell, you can assume the form of any Small or Medium creature of the animal type. If the form you assume has any of the following abilities, you gain the listed ability: climb 30 feet, fly 30 feet (average maneuverability), swim 30 feet, darkvision 60 feet, low-light vision, scent. Small animal form: +2 size bonus to Dexterity and a +1 natural armor bonus. Medium animal form: +2 size bonus to Strength and a +2 natural armor bonus.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Beast Shape II',
@@ -912,6 +948,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This spell functions as beast shape I, except that you can also assume the form of a Tiny or Large creature of the animal type. Tiny animal form: +4 size bonus to Dexterity, -2 penalty to Strength, and a +1 natural armor bonus. Large animal form: +4 size bonus to Strength, -2 penalty to Dexterity, and a +4 natural armor bonus. You can also gain the following special abilities: grab, pounce, and trip.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Beast Shape III',
@@ -935,6 +972,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This spell functions as beast shape II, except that you can also assume the form of a Diminutive or Huge creature of the animal type, or a Small or Medium creature of the magical beast type. Diminutive animal: +6 Dexterity, -4 Strength, +1 natural armor. Huge animal: +6 Strength, -4 Dexterity, +6 natural armor. Small magical beast: +4 Dexterity, +2 natural armor. Medium magical beast: +4 Strength, +4 natural armor. Additional special abilities available include: burrow 30 feet, climb 90 feet, fly 90 feet (good maneuverability), swim 90 feet, blindsense 30 feet, darkvision 60 feet, low-light vision, scent, and tremorsense 30 feet.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Beast Shape IV',
@@ -958,6 +996,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This spell functions as beast shape III, except that you can also assume the form of a Tiny or Large creature of the magical beast type. Tiny magical beast: +8 Dexterity, -2 Strength, +3 natural armor. Large magical beast: +6 Strength, -2 Dexterity, +6 natural armor. Additional special abilities available include: breath weapon, energy resistance, and immunity to one element.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Billowing Skirt',
@@ -988,6 +1027,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'The enchanted garment allows the wearer to control their descent through the air, gaining the benefits of feather fall. Additionally, the wearer may attempt a DC 15 Fly skill check as a move action to remain stationary in the air for one round.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bladed Dash',
@@ -1009,6 +1049,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'You move up to 30 feet in a straight line in any direction without provoking attacks of opportunity. During this movement, you may make a single melee attack at your highest base attack bonus against one creature you pass adjacent to. You gain a circumstance bonus on the attack roll equal to your highest modifier between Intelligence and Charisma. You must end in an unoccupied square. The spell functions with any melee weapon despite its name. A higher-level version (Greater Bladed Dash at levels 5) allows attacks against multiple creatures during the dash, with each creature attacked only once.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blink',
@@ -1030,6 +1071,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "The caster rapidly alternates between the Material Plane and Ethereal Plane, appearing to flicker in and out of existence. Physical attacks against the caster have a 50% miss chance, though this reduces to 20% if the attacker can strike ethereal creatures or see invisible beings. The caster's own attacks similarly suffer a 20% miss chance. Targeted spells against the caster have a 50% failure chance unless the attacker can affect invisible, ethereal creatures. Area damage is halved, falling damage is halved, and the caster can move through solid objects. The caster gains the ability to see and interact with ethereal creatures while maintaining partial visibility. Force effects and abjurations function normally against the blinking caster.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Armor',
@@ -1059,6 +1101,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'Your blood hardens like iron when exposed to air. Whenever you sustain at least 5 points of piercing or slashing damage, your armor gains a +1 enhancement bonus to AC. Regular clothing counts as armor providing no base AC bonus. This enhancement bonus stacks with itself but not with other enhancement bonuses, capping at +5. The spell is ineffective underwater or in airless environments.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Money',
@@ -1080,6 +1123,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "This spell allows a caster to cut their hand, taking 1d6 damage, to create a material component needed for another spell cast that same round. Valuable components (over 1 gp) require additional Strength damage: 1 point base plus 1 extra point per full 500 gp of value. The created components revert to blood if unused by round's end. Magic items cannot be created this way. Characters without blood or those immune to Strength damage cannot use this spell to create expensive components.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Scent',
@@ -1113,6 +1157,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'The spell magnifies a target\'s ability to smell injured creatures, granting them the scent ability specifically for detecting and locating those below full hit points. Creatures below half health or suffering bleed damage register as "strong scents." Orcs and raging creatures gain combat bonuses against creatures they can smell through this spell.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloodhound',
@@ -1135,6 +1180,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       'This transmutation grants you the scent special ability, enabling you to track creatures by smell. You gain an 8-point competence bonus on Perception checks using smell and a 4-point competence bonus on Survival checks for scent-based tracking. However, you suffer a -4 penalty on saves against odor-related effects like stench abilities and stinking cloud. Additionally, a creature under the effects of bloodhound can detect poison by scent with a DC 20 Perception check.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Boiling Blood',
@@ -1165,6 +1211,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "The spell causes targeted creatures' blood to boil, inflicting 1 fire damage per round to those failing their save. Creatures without blood are unaffected. Creatures with the orc subtype take no fire damage but instead gain a +2 morale bonus to Strength.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Bomber's Eye",
@@ -1186,6 +1233,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "This alchemical extract enhances the user's throwing weapon proficiency. It increases the effective range of any thrown weapon by 10 feet and grants a +1 insight bonus to attack rolls made with thrown weapons.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Borrow Skill',
@@ -1207,6 +1255,7 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "This transmutation spell allows the caster to temporarily access one known skill from a touched creature. The caster makes a single skill check using the target's skill ranks but modified by the caster's own ability modifier. If the check takes longer than the spell's duration or requires extended time, it fails, forcing reliance on the caster's own skill ranks instead. If the borrowed skill qualifies as a class skill for the caster, they gain the standard +3 bonus on checks using that skill.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bouncy Body',
@@ -1228,5 +1277,6 @@ export const TRANSMUTATION_BATCH_001: Spell[] = [
     description:
       "The target's body becomes flexible and rubbery, granting a +2 circumstance bonus on grapple combat maneuver checks, Escape Artist checks, and to CMD against grapple attempts. Falls are treated as 20 feet shorter (minimum 0) for damage calculation. When falling against a hard surface, the target can make an Acrobatics check (DC = distance fallen) to bounce upward half the distance fallen on success.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 ];

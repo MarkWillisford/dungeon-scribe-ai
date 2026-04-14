@@ -16,6 +16,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'no (object); yes (see text)',
     description: 'This spell functions as glyph of warding, except that a blast glyph deals damage up to 10d8 and a spell glyph can store a spell of 6th level or lower.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Golden Guise',
@@ -30,6 +31,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell temporarily converts an object into gold, altering its properties. Weapons suffer reduced hardness (half) and gain the fragile quality; piercing and slashing weapons take a -2 damage penalty (minimum 1). Armor check penalties increase by 2 while armor or shield bonuses decrease by 2. Gold has hardness 5.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Goodberry',
@@ -44,6 +46,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell enchants freshly picked berries to provide nutritional sustenance equivalent to a meal for a Medium creature. Each berry heals 1 point of damage when consumed, with a maximum cumulative healing of 8 points per 24-hour period. Druids of 3rd level or higher can identify affected berries.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grace',
@@ -58,6 +61,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'none',
     description: 'Your movement does not provoke attacks of opportunity for the duration of this spell.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grappling Scarf',
@@ -72,6 +76,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'no',
     description: 'A worn scarf frays into hook-like shapes and extends up to 100 feet, functioning as a grappling hook with a 20-foot range increment. The scarf becomes as strong and easy to climb as a knotted silk rope despite retaining its weight. Upon the spell duration\'s end, it returns to its normal form.',
     source: 'Pathfinder Player Companion: Adventurer\'s Armory 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grasp',
@@ -86,6 +91,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell functions as an immediate action when a climber fails a Climb check and would fall. The caster attempts another Climb check as a free action with a -2 penalty. Each successive use of this spell in the same climb increases the penalty by 2. Success prevents falling but halts progress.',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grasping Depths',
@@ -103,6 +109,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster manifests restless spirits of those who died at sea. When creatures enter the affected water area, the haunt automatically grabs and drags victims underwater at initiative count 10, dealing 1d6 nonlethal damage per round while descending 10 feet (reduced to 5 feet with a successful DC 15 Swim check). Victims suffer reduced breath-holding capacity, limited actions unless they succeed at Will saves, and additional damage if dragged to the bottom. The haunt deteriorates as it affects creatures, losing 1d6 hit points per round per affected creature. Haunt statistics: Perception DC 30 to notice, hit points 5 per caster level, trigger proximity, no reset.',
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grasping Hand',
@@ -119,6 +126,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as interposing hand, except that the hand can also grapple one opponent. The hand makes one grapple attempt per round without provoking attacks of opportunity. Its CMB and CMD use the caster\'s caster level as its base attack bonus, with a +10 bonus for its Strength score of 31 and a +1 bonus for being Large. The hand restrains but does not harm grappled creatures. The caster may redirect it to a new target as a move action, use it for bull rush, or have it interpose itself like interposing hand.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grasping Tentacles',
@@ -135,6 +143,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell functions like black tentacles, but the conjured appendages target creatures\' eyes and ears and tug at their hair, clothes, and equipment using dirty trick combat maneuvers rather than grapple attempts. The tentacles\' CMB equals caster level + 4 (Strength bonus) + 1 (size bonus). A d% roll determines the condition inflicted: 1-20 blinded, 21-40 deafened, 41-60 entangled, 61-80 shaken (fear effect), 81-100 sickened (poison effect).',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grasping Vine',
@@ -149,6 +158,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'none',
     description: 'A long, thin vine sprouts from the caster\'s body, typically from the center of the chest or the palm of an outstretched hand. The vine extends up to 20 feet and can deliver touch spells, retrieve unattended objects (maximum 20 lbs), pass held items to creatures, disable traps or locks (with a Disable Device check at a -2 penalty), or perform other GM-approved tasks. The vine cannot attack, threaten squares, or wield weapons.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grave Words',
@@ -164,6 +174,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'none',
     description: 'This occult cantrip forces a corpse to babble randomly for one round. The caster has a 10% chance of extracting useful information such as dungeon warnings, magical item command words, or vague warnings about the future. The GM secretly determines whether information is useful and what the corpse reveals. The corpse must have a mouth to speak. Cannot be cast repeatedly on the same corpse. Does not affect undead creatures. Works on corpses of any age.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gravel Vortex',
@@ -181,6 +192,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The initial casting deals 5d6 bludgeoning damage to all creatures in the affected area. For the spell\'s remaining duration, fine dust continuously rains down, imposing a -4 penalty on Perception checks for non-stone giants and treating the entire area as difficult terrain. The gravel and dust vanish completely upon spell expiration.',
     source: 'Pathfinder Adventure Path #93: Forge of the Giant God',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gravity Sphere',
@@ -196,6 +208,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'no',
     description: 'The caster modifies local gravity within a 30-foot sphere, choosing one of three effects: increased gravity (higher fall damage), reduced gravity (lower fall damage), or zero gravity (floating). The spell calculates fall damage based on distance traveled within the affected area versus outside it. Multiple gravity-altering effects can coexist; if conflicts arise, higher-level spells supersede lower-level ones, or the lower-level spell simply fails.',
     source: 'Pathfinder Player Companion: People of the Stars',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gravity Well',
@@ -210,6 +223,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'no',
     description: 'The spell doubles a target\'s weight and halves its movement speed, jumping distance, and carrying capacity. Flying creatures experience worsened maneuverability (reduced by two steps) and must succeed at a DC 25 Fly check to remain airborne. The spell can be negated by freedom of movement and is negated by reverse gravity.',
     source: 'Pathfinder Player Companion: Dragonslayer\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grease',
@@ -225,6 +239,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'no',
     description: 'The spell creates a slippery grease coating on surfaces or objects. Creatures in the area must make a Reflex save or fall. Movement through greased areas requires a DC 10 Acrobatics check and occurs at half speed; failure prevents movement that round, and failure by 5 or more causes falling. Stationary creatures do not need to check. When applied to items, non-wielded objects are always affected; wielded items require the bearer to make a save. The wearer or wielder gains a +10 circumstance bonus on Escape Artist checks and grapple-related combat maneuver checks.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grease, Greater',
@@ -240,6 +255,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell functions as grease, except it has a medium range, can affect multiple objects or areas (one per 2 caster levels), and requires surface coverage to be contiguous when targeting multiple squares.',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grim Stalker',
@@ -256,6 +272,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'The caster binds spirits of ill fate to an object, focusing their wrath onto the next creature that touches the object. Once affected, victims experience haunting effects including nightmares, an imposed shaken condition when damaged, and a phantasmal killer effect when reduced below 10% health. Victims may conduct a ritual costing 450 gp in reagents to force manifestation of a modified Nessian warhound that deals negative energy damage.',
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grove of Respite',
@@ -272,6 +289,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'no',
     description: 'The caster conjures a sheltered grove with trees and spring water that appears regardless of terrain or season. The area provides temperate conditions similar to a tiny hut spell. It produces clean drinking water and ripe fruit functioning as a goodberry spell for up to eight people. An alarm spell automatically alerts the caster when creatures enter. Upon expiration, the grove vanishes entirely, though any nourishment or healing effects persist.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guardian Armor',
@@ -287,6 +305,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell teleports the suit of armor you are wearing off your body and onto an ally within range. If the target already wears armor, that armor falls undamaged into an adjacent square.',
     source: 'Pathfinder Player Companion: Armor Master\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guardian Monument, Lesser',
@@ -302,6 +321,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'yes',
     description: 'Creates a protective aura granting human defenders within the area damage reduction 2/magic. The protection persists if creatures leave and reenter the area. The spell suspends if the focus object moves but resumes when replaced.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guardian Monument',
@@ -317,6 +337,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as guardian monument, lesser, except it grants human defenders within the area damage reduction 4/magic instead of DR 2/magic.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guardian of Faith',
@@ -332,6 +353,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'no',
     description: 'The recipient receives the benefits of shield of faith combined with the caster\'s choice of one protection spell: protection from chaos, evil, good, or law. As a move action, the target may transfer this spell to a touched ally, making them the new recipient. The spell\'s alignment descriptor matches the chosen protection spell.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guardian Wasps',
@@ -348,6 +370,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'no',
     description: 'The spell summons wasps that build a nest in a designated location. The spell fizzles if the swarm is disrupted before casting completes. Once constructed, the nest functions as an alarm, detecting intruders without the password who approach within 20 feet. The swarm then attacks the nearest intruder. After the spell ends, any remaining wasps and the nest vanish.',
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guarding Knowledge',
@@ -362,6 +385,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'none',
     description: 'The caster selects a specific monster type and one of its special attacks previously identified through Knowledge checks or research. This grants a +4 insight bonus on saving throws against that specific attack. Using a trophy from an identical monster variety increases the bonus to +6. The bonus does not extend to saves against other monsters\' similar abilities, spell-like abilities, or class or equipment-derived attacks.',
     source: 'Pathfinder Player Companion: Monster Hunter\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guards and Wards',
@@ -377,6 +401,7 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'varies',
     description: 'This spell creates multiple protective effects throughout a warded area. Fog obscures vision beyond 5 feet (20% miss chance within 5 feet; 50% beyond). All doors in the area become arcane locked. Webs fill stairs and regrow within 10 minutes if destroyed. Intruders have a 50% chance of believing they are moving in the opposite direction. One door per caster level is disguised as a wall via silent image. Additionally, the caster may choose one optional effect: dancing lights in four corridors, magic mouth in two locations, stinking cloud in two locations, gust of wind in one area, or suggestion in a 5-foot square. The entire ward radiates strong abjuration magic.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gusting Sphere',
@@ -393,5 +418,6 @@ export const GAP_SPELLS_G_2: Spell[] = [
     spellResistance: 'yes',
     description: 'A swirling wind sphere moves 30 feet per round in directions you designate. When it encounters a Medium or smaller creature, it performs a bull rush combat maneuver using your caster level as its base attack bonus. The target takes 1d6 nonlethal bludgeoning damage regardless of whether the bull rush succeeds. The sphere creates severe wind conditions (-4 penalty on ranged attacks) and can ascend or jump up to 30 feet. It rolls over obstacles under 4 feet tall and requires a move action from the caster to maintain movement.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
 ];

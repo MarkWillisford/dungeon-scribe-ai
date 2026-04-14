@@ -10,6 +10,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Absorb nearby incorporeal undead or haunts at 0 HP, trapping them in your body at the cost of daily Con/Wis damage',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -30,6 +31,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once/day when channeling energy, your divine aura fatigues or staggers opposing-alignment creatures in the area',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -51,6 +53,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 morale bonus on bite attack and damage rolls until end of next turn after damaging a living creature with a bite',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Bite attack' }],
     effects: [
@@ -79,6 +82,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Adjacent attackers dealing bleed damage risk blindness; you can self-inflict 1 bleed as a standard action to trigger the effect',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 2 },
@@ -96,6 +100,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Selected spell-like ability can be redirected to a new target as a swift action if it has no effect on the first',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'caster_level', minimum: 4 },
@@ -113,6 +118,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Killing a coup de grace with your Weapon Focus weapon forces nearby foes to save or become shaken for 1 minute',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'dazzling_display' },
@@ -132,6 +138,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Animal companion or mount gains Intimidate as class skill and can demoralize foes after hitting with natural attacks as a move action',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'handle_animal', ranks: 4 },
@@ -150,6 +157,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Three times/day, deal yourself 1d6 damage to reroll a failed save vs charm or compulsion (must accept second result)',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -168,6 +176,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Swallowed creatures must save each turn or gain a negative level; undead gain temp HP from each negative level inflicted',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 6 },
@@ -189,6 +198,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Targeted harmful spells transfer to failed dispellers (by 5+); uses a spell slot 2 levels higher',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -203,6 +213,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Substitute a Knowledge skill for Intimidate to demoralize intelligent creatures of CR 2+ that can understand you',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -223,6 +234,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'After confirming a critical hit with unarmed strike vs undead, spend swift action and 2 channel energy uses to destroy it (Will save negates)',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'channel_smite' },
@@ -242,6 +254,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Selected spell-like ability forces concentration checks on affected creatures for 1 round',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'caster_level', minimum: 4 },
@@ -259,6 +272,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Cast a detection spell 2/day (SLA); complete goal to gain +2 resistance saves and +2 deflection AC vs evil (doubled vs summoned evil)',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -279,6 +293,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Engulfed/smothered opponents must save (Will DC 10 + 1/2 HD + Str) or be shaken 1 round',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Engulf or smother universal monster ability' },
@@ -295,6 +310,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Engulfed/smothered opponents must save (Will DC 10 + 1/2 HD + Str) or be staggered 1 round',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'engulf_revulsion' },
@@ -312,6 +328,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Deal yourself 4 Con damage (irreducible) to reroll a failed save vs possession/domination; success grants 24-hour immunity',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 15 },
@@ -330,6 +347,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
       'Once per round, when you successfully pin an opponent, that opponent takes double the normal damage from your blood drain.',
     shortDescription: 'When you pin an opponent, your blood drain deals double damage',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       {
@@ -362,6 +380,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Touch another creature to transfer a fear effect from them to yourself for its remaining duration',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -380,6 +399,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Selected spell-like ability shakes targets for rounds equal to spell level; durations stack with existing shaken',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'caster_level', minimum: 6 },
@@ -397,6 +417,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Craft fleshwarped creatures and fleshcraft grafts using alchemical techniques',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       { type: 'skill', skillId: 'craft_alchemy', ranks: 5 },
@@ -415,6 +436,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 (or +4 with 10+ ranks) Diplomacy/Sense Motive with ghosts/haunts during communication; completion bonus: +2 effective caster level for spirit communication',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -448,6 +470,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Shapeshifting creates bloody difficult terrain, sickens witnesses (Fort save), and imposes a 1d4-round cooldown between changes',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [{ type: 'special', description: 'Shapechanger subtype' }],
     effects: [],
@@ -462,6 +485,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Full-round action: consume a helpless humanoid as a critical bite + swallow whole; witnesses save or be shaken 1d4 rounds',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       {
@@ -481,6 +505,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Detect adjacent incorporeal creatures through walls; identify them with Knowledge (religion) –5; deny cover bonus on readied attacks as they emerge',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -499,6 +524,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
       "Choose one of your spell-like abilities, subject to the restrictions below. You can use that ability as an intensified spell-like ability three times per day (or less, if the ability is usable only once or twice per day). When intensified, the maximum number of the ability's damage dice increases by 5 levels. You can only select a spell-like ability duplicating a spell with a level equal to or less than 1/2 your caster level (round down) – 1.",
     shortDescription: 'Selected spell-like ability has maximum damage dice increased by 5 levels',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'caster_level', minimum: 4 },
@@ -516,6 +542,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'When you attach to a creature, it must save or be shaken while you remain attached',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Attach universal monster ability' }],
     effects: [],
@@ -530,6 +557,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 insight on Will vs emotion, +2 insight Bluff; mind-readers become shaken 2d4 rounds; failed Diplomacy vs you by 5+ triggers shaken 2d4 rounds',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'iron_will' },
@@ -562,6 +590,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Selected instantaneous area spell-like ability persists until start of next turn; creatures entering the area are affected',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'caster_level', minimum: 4 },
@@ -579,6 +608,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Self-inflict irreducible damage during rituals to roll twice on next skill check and (vs fear/phantasm) increase save DC by 1',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 4 },
@@ -597,6 +627,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+5 Knowledge (planes) vs evil outsiders; caster level +2 for summon monster duration when summoning evil outsiders',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -628,6 +659,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Temporarily gain Craft Construct to build one golem; completion: permanently gain Craft Construct and 10% cost reduction on cheaper constructs',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -648,6 +680,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Full-round action: new save vs ingested poison; success purges it but causes 1 round nauseated and creates difficult terrain',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'great_fortitude' }],
     effects: [],
@@ -662,6 +695,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'A summoned creature gains the stench ability but is drawn from the next lower summoning list',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'spell_focus_conjuration' },
@@ -679,6 +713,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Selected touch/close/medium spell-like ability has its range increased one step (touch→close, close→medium, medium→long)',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'caster_level', minimum: 4 },
@@ -696,6 +731,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ritual coup de grace of a sentient creature: grant one prepared/known spell +2 attack/CMB or +2 CL vs SR for 24 hours',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 4 },
@@ -716,6 +752,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Sacrifice creature(s) with HD ≥ 2× ritual level to grant all casters +4 on ritual skill checks',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'mutilating_ritualist' },
@@ -748,6 +785,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Selected emotion/fear spell-like ability imposes –2 on saves vs your emotion/fear effects and –1 vs others for 24 hours on failed save',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'caster_level', minimum: 4 },
@@ -769,6 +807,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Full-round attack vs undead: controller within 120 ft must save or lose control for 10 minutes; uncontrolled undead attacks its controller',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Channel positive energy 4d6' }],
     effects: [],
@@ -783,6 +822,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Selected damaging spell-like ability sickens targets that fail their save for rounds equal to spell level',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'caster_level', minimum: 6 },
@@ -800,6 +840,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once/day, appear as living humanoid (alter self); masks alignment; ends at sundown or on failed Reflex save after taking lethal damage',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 7 },
@@ -817,6 +858,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       "Full-round action: see through a spawn's eyes (your body is blinded); if spawn drops to 0 HP you are blinded and dazed 1d6 rounds",
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -834,6 +876,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Communicate with absorbed spirits; Diplomacy to improve attitude; each Diplomacy check costs 1 Wis damage (irreducible until release)',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -857,6 +900,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Creatures attempting to remove your curse effects must roll the caster level check twice and take the worse result',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -877,6 +921,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend 3 channel negative energy uses: touch attack implants harmful suggestion (Will save); target suffers 1 Wis damage/day until acted upon or resisted',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Channel negative energy 6d6; evil alignment' },
@@ -893,6 +938,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Selected emotion/fear spell-like ability: on failed save, target must save each sleep or suffer nightmare; DC drops by 2 on each success',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'caster_level', minimum: 6 },
@@ -914,6 +960,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 saves vs enchantments, +2 Bluff/Diplomacy vs pursuer; completion: successful enchantment saves are not revealed to the caster',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -942,6 +989,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'While conscious via ferocity at 0 HP, make a full attack; but lose most Cha/Dex/Int skills and concentration-based abilities until above 0 HP',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 19 },
@@ -959,6 +1007,7 @@ export const HORROR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 saves and opposed Cha checks vs charm/compulsion from chaotic sources or alignment-opposite creatures; stacks with Unimpeachable Honor',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'iron_will' },
