@@ -60,9 +60,14 @@ function toDocId(name: string): string {
 
 /** Fetch all docs from a collection, filtered to global visibility only. */
 async function fetchAll<T>(collectionName: string): Promise<T[]> {
-  const q = query(collection(db, collectionName), where('visibility', '==', 'global'));
-  const snap = await getDocs(q);
-  return snap.docs.map((d) => d.data() as T);
+  try {
+    const q = query(collection(db, collectionName), where('visibility', '==', 'global'));
+    const snap = await getDocs(q);
+    return snap.docs.map((d) => d.data() as T);
+  } catch (e) {
+    console.error(`FirestoreGameDataConnector: failed to fetch ${collectionName}:`, e);
+    return [];
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -70,6 +75,20 @@ async function fetchAll<T>(collectionName: string): Promise<T[]> {
 // ---------------------------------------------------------------------------
 
 export class FirestoreGameDataConnector implements GameDataConnector {
+  /** In-flight promise dedup — prevents thundering herd on concurrent calls. */
+  private static inflight = new Map<string, Promise<unknown>>();
+
+  private static dedup<T>(key: string, fetcher: () => Promise<T>): Promise<T> {
+    const existing = this.inflight.get(key);
+    if (existing) return existing as Promise<T>;
+
+    const promise = fetcher().finally(() => {
+      this.inflight.delete(key);
+    });
+    this.inflight.set(key, promise);
+    return promise;
+  }
+
   // ---- Deity (internal helper) -----------------------------------------------
 
   private async getDeityByName(name: string): Promise<DeityEntry | null> {
@@ -77,13 +96,18 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     const cached = GameDataCache.get<DeityEntry>(cacheKey);
     if (cached) return cached;
 
-    const q = query(collection(db, 'deities'), where('name', '==', name), limit(1));
-    const snap = await getDocs(q);
-    if (snap.empty) return null;
+    try {
+      const q = query(collection(db, 'deities'), where('name', '==', name), limit(1));
+      const snap = await getDocs(q);
+      if (snap.empty) return null;
 
-    const result = snap.docs[0].data() as DeityEntry;
-    GameDataCache.set(cacheKey, result, TTL.OFFICIAL);
-    return result;
+      const result = snap.docs[0].data() as DeityEntry;
+      GameDataCache.set(cacheKey, result, TTL.OFFICIAL);
+      return result;
+    } catch (e) {
+      console.error(`FirestoreGameDataConnector: failed to fetch deity "${name}":`, e);
+      return null;
+    }
   }
 
   // ---- Class choice options ---------------------------------------------------
@@ -98,6 +122,7 @@ export class FirestoreGameDataConnector implements GameDataConnector {
 
     let results: ClassOptionBase[];
 
+    try {
     switch (collectionName) {
       case 'revelations': {
         const q = filters.mysteryId
@@ -257,6 +282,10 @@ export class FirestoreGameDataConnector implements GameDataConnector {
 
     GameDataCache.set(cacheKey, results);
     return results;
+    } catch (e) {
+      console.error(`FirestoreGameDataConnector: failed to fetch ${collectionName}:`, e);
+      return [];
+    }
   }
 
   // ---- Feats -----------------------------------------------------------------
@@ -266,22 +295,36 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     const cached = GameDataCache.get<FeatDefinition[]>(cacheKey);
     if (cached) return cached;
 
-    // Phase B: fetch all global feats, filter client-side.
-    // Full query-level filtering (types, source) is Phase C / search refactor.
-    const q = query(collection(db, 'feats'), where('visibility', '==', 'global'));
-    const snap = await getDocs(q);
-    let results = snap.docs.map((d) => d.data() as FeatDefinition);
+    try {
+      // Phase B: fetch all global feats, filter client-side.
+      // Full query-level filtering (types, source) is Phase C / search refactor.
+      const allCacheKey = 'feats/__all';
+      let all = GameDataCache.get<FeatDefinition[]>(allCacheKey);
+      if (!all) {
+        all = await FirestoreGameDataConnector.dedup(allCacheKey, async () => {
+          const q = query(collection(db, 'feats'), where('visibility', '==', 'global'));
+          const snap = await getDocs(q);
+          const fetched = snap.docs.map((d) => d.data() as FeatDefinition);
+          GameDataCache.set(allCacheKey, fetched);
+          return fetched;
+        });
+      }
 
-    if (filter?.featTypes && filter.featTypes.length > 0) {
-      results = results.filter((f) => filter.featTypes!.some((t) => f.types.includes(t)));
-    } else if (filter?.isCombatFeat) {
-      results = results.filter((f) => f.types.includes('combat'));
-    } else if (filter?.isTeamworkFeat) {
-      results = results.filter((f) => f.types.includes('teamwork'));
+      let results = all;
+      if (filter?.featTypes && filter.featTypes.length > 0) {
+        results = results.filter((f) => filter.featTypes!.some((t) => f.types.includes(t)));
+      } else if (filter?.isCombatFeat) {
+        results = results.filter((f) => f.types.includes('combat'));
+      } else if (filter?.isTeamworkFeat) {
+        results = results.filter((f) => f.types.includes('teamwork'));
+      }
+
+      GameDataCache.set(cacheKey, results);
+      return results;
+    } catch (e) {
+      console.error('FirestoreGameDataConnector: failed to fetch feats:', e);
+      return [];
     }
-
-    GameDataCache.set(cacheKey, results);
-    return results;
   }
 
   async getFeatById(id: string): Promise<FeatDefinition | null> {
@@ -289,12 +332,17 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     const cached = GameDataCache.get<FeatDefinition>(cacheKey);
     if (cached) return cached;
 
-    const snap = await getDoc(doc(db, 'feats', id));
-    if (!snap.exists()) return null;
+    try {
+      const snap = await getDoc(doc(db, 'feats', id));
+      if (!snap.exists()) return null;
 
-    const result = snap.data() as FeatDefinition;
-    GameDataCache.set(cacheKey, result);
-    return result;
+      const result = snap.data() as FeatDefinition;
+      GameDataCache.set(cacheKey, result);
+      return result;
+    } catch (e) {
+      console.error(`FirestoreGameDataConnector: failed to fetch feat "${id}":`, e);
+      return null;
+    }
   }
 
   // ---- Traits ----------------------------------------------------------------
@@ -333,13 +381,18 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     const cached = GameDataCache.get<ExpandedClassData>(cacheKey);
     if (cached) return cached;
 
-    // Seed scripts store classes with name-derived document IDs.
-    const snap = await getDoc(doc(db, 'classes', toDocId(name)));
-    if (!snap.exists()) return null;
+    try {
+      // Seed scripts store classes with name-derived document IDs.
+      const snap = await getDoc(doc(db, 'classes', toDocId(name)));
+      if (!snap.exists()) return null;
 
-    const result = snap.data() as ExpandedClassData;
-    GameDataCache.set(cacheKey, result);
-    return result;
+      const result = snap.data() as ExpandedClassData;
+      GameDataCache.set(cacheKey, result);
+      return result;
+    } catch (e) {
+      console.error(`FirestoreGameDataConnector: failed to fetch class "${name}":`, e);
+      return null;
+    }
   }
 
   async getClassChoiceDefinitions(classId: string): Promise<ClassChoiceDefinition[]> {
@@ -347,15 +400,20 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     const cached = GameDataCache.get<ClassChoiceDefinition[]>(cacheKey);
     if (cached) return cached;
 
-    const q = query(
-      collection(db, 'classChoiceDefinitions'),
-      where('classIds', 'array-contains', classId),
-    );
-    const snap = await getDocs(q);
-    const results = snap.docs.map((d) => d.data() as ClassChoiceDefinition);
+    try {
+      const q = query(
+        collection(db, 'classChoiceDefinitions'),
+        where('classIds', 'array-contains', classId),
+      );
+      const snap = await getDocs(q);
+      const results = snap.docs.map((d) => d.data() as ClassChoiceDefinition);
 
-    GameDataCache.set(cacheKey, results);
-    return results;
+      GameDataCache.set(cacheKey, results);
+      return results;
+    } catch (e) {
+      console.error(`FirestoreGameDataConnector: failed to fetch class choice definitions for "${classId}":`, e);
+      return [];
+    }
   }
 
   async getSpellTables() {
@@ -371,22 +429,27 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     const cached = GameDataCache.get<RaceGroups>(cacheKey);
     if (cached) return cached;
 
-    const [core, featured, uncommon, flex] = await Promise.all([
-      getDocs(query(collection(db, 'races'), where('category', '==', 'Core'))),
-      getDocs(query(collection(db, 'races'), where('category', '==', 'Featured'))),
-      getDocs(query(collection(db, 'races'), where('category', '==', 'Uncommon'))),
-      getDocs(query(collection(db, 'races'), where('flexibleAbilityBonus', '==', true))),
-    ]);
+    try {
+      const [core, featured, uncommon, flex] = await Promise.all([
+        getDocs(query(collection(db, 'races'), where('visibility', '==', 'global'), where('category', '==', 'Core'))),
+        getDocs(query(collection(db, 'races'), where('visibility', '==', 'global'), where('category', '==', 'Featured'))),
+        getDocs(query(collection(db, 'races'), where('visibility', '==', 'global'), where('category', '==', 'Uncommon'))),
+        getDocs(query(collection(db, 'races'), where('visibility', '==', 'global'), where('flexibleAbilityBonus', '==', true))),
+      ]);
 
-    const result: RaceGroups = {
-      core: core.docs.map((d) => d.data()) as RaceGroups['core'],
-      featured: featured.docs.map((d) => d.data()) as RaceGroups['featured'],
-      uncommon: uncommon.docs.map((d) => d.data()) as RaceGroups['uncommon'],
-      flexibleAbility: flex.docs.map((d) => d.data()) as RaceGroups['flexibleAbility'],
-    };
+      const result: RaceGroups = {
+        core: core.docs.map((d) => d.data()) as RaceGroups['core'],
+        featured: featured.docs.map((d) => d.data()) as RaceGroups['featured'],
+        uncommon: uncommon.docs.map((d) => d.data()) as RaceGroups['uncommon'],
+        flexibleAbility: flex.docs.map((d) => d.data()) as RaceGroups['flexibleAbility'],
+      };
 
-    GameDataCache.set(cacheKey, result);
-    return result;
+      GameDataCache.set(cacheKey, result);
+      return result;
+    } catch (e) {
+      console.error('FirestoreGameDataConnector: failed to fetch race groups:', e);
+      return { core: [], featured: [], uncommon: [], flexibleAbility: [] };
+    }
   }
 
   // ---- Equipment -------------------------------------------------------------

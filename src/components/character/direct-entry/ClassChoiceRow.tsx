@@ -82,6 +82,7 @@ export function ClassChoiceRow({
   const [pickerItems, setPickerItems] = useState<SearchItem[]>([]);
 
   useEffect(() => {
+    let stale = false;
     if (definition.optionSource === 'collection' && definition.collectionName) {
       const resolvedFilter = resolveFilterTokens(
         definition.collectionFilter ?? {},
@@ -89,11 +90,12 @@ export function ClassChoiceRow({
         characterDeity,
       );
       GameDataService.getClassChoiceItems(definition.collectionName, resolvedFilter)
-        .then(setPickerItems)
+        .then((items) => { if (!stale) setPickerItems(items); })
         .catch((e) => console.error('Failed to load class choice items:', e));
     } else {
-      Promise.resolve(buildInlineItems(definition)).then(setPickerItems);
+      Promise.resolve(buildInlineItems(definition)).then((items) => { if (!stale) setPickerItems(items); });
     }
+    return () => { stale = true; };
   }, [definition, siblingChoices, characterDeity]);
 
   // Resolve stored ID(s) back to human-readable labels for display.
