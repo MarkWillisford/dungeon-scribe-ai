@@ -347,12 +347,40 @@ Affected callers to migrate:
 - `ClassSelector.tsx`
 - `CharacterEntryScreen.tsx` (rulesets preset only)
 
-### Phase B — Firestore backend
+### Phase B — Firestore backend (two-layer architecture)
 
-1. Create `FirestoreGameDataSource` with query + visibility + source filtering
-2. Swap `GameDataService` internals from static imports to Firestore calls
-3. Add `GameDataCache` (in-memory only, no persistence yet)
-4. Requires: all collections seeded to Firestore staging
+Phase B is split into a connector interface and a concrete Firestore implementation. This keeps all Firestore-specific code in one place so the data source can be swapped later (e.g. when search and AI architecture decisions are made) without touching callers.
+
+**Layer 1 — `GameDataConnector` (interface)**
+Defines what any data source must provide. Lives at `src/services/GameDataConnector.ts`. No Firestore imports.
+
+**Layer 2 — `FirestoreGameDataConnector` (implementation)**
+Concrete Firestore implementation of `GameDataConnector`. All Firebase Admin / Firestore SDK calls live here. Lives at `src/services/FirestoreGameDataConnector.ts`.
+
+`GameDataService` holds a reference to the active connector and delegates all data fetching through it:
+
+```typescript
+class GameDataService {
+  private static connector: GameDataConnector = new FirestoreGameDataConnector();
+  static async getFeatById(id: string, context?: QueryContext) {
+    return GameDataService.connector.getFeatById(
+      id,
+      context ?? GameDataService.getContextFromStore(),
+    );
+  }
+}
+```
+
+**Search for initial fire test (7 users)**
+Firestore prefix queries only — `name >= query AND name <= query\uf8ff`. Not full-text. Acceptable for the initial test. Full-text search architecture is a separate decision, deferred until proper architectural input is available. The connector interface is designed so a search-capable implementation can be dropped in later.
+
+**Steps:**
+
+1. Define `GameDataConnector` interface covering all collections
+2. Implement `FirestoreGameDataConnector` with visibility + source + ruleset filtering
+3. Wire `GameDataService` to use the connector instead of static `@/data/` imports
+4. Add `GameDataCache` (in-memory, session lifetime only — AsyncStorage persistence deferred to Phase D)
+5. Static TS files remain in codebase for seeding but are no longer imported by app code — Metro stops bundling them
 
 ### Phase C — Local homebrew
 
@@ -390,15 +418,9 @@ Campaign-scoped queries add `campaignId` to the relevant indexes. Define in `fir
 
 ### Firestore does not support full-text search
 
-Firestore only supports prefix matching (`WHERE name >= 'pow' AND name <= 'pow\uf8ff'`). A user typing "attack" will not find "Power Attack". This is a fundamental Firestore limitation and must be decided before Phase B.
+Firestore only supports prefix matching (`WHERE name >= 'pow' AND name <= 'pow\uf8ff'`). A user typing "attack" will not find "Power Attack".
 
-Options:
-
-- **Prefix-only search** — simplest, probably acceptable for most use cases (users type "Power" to find "Power Attack"). Implement first; revisit if feedback is bad.
-- **Client-side filter after prefix fetch** — fetch the prefix-matching set, then filter client-side for substring matches. Works for small result sets; degrades on large ones.
-- **Algolia / Typesense** — proper full-text search, requires a separate service and indexing pipeline. Best experience, most complexity. Defer until user feedback demands it.
-
-**Decision needed before Phase B begins.** The plan proceeds with prefix-only search as the MVP assumption.
+**Decision: deferred.** The connector pattern isolates this — `FirestoreGameDataConnector` ships with prefix-only search for the initial fire test (7 users). When proper architectural input is available, a search-capable connector replaces it without touching `GameDataService` or any caller. Options under consideration: cache-warming + minisearch (in-memory full-text, free), Algolia (paid, best UX), Typesense (self-hosted), or a different database entirely for the catalog layer.
 
 ### `PrerequisiteService` and `DraftValidationService` migration complexity
 
