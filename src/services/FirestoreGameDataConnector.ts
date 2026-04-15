@@ -1,0 +1,429 @@
+/**
+ * FirestoreGameDataConnector — production GameDataConnector backed by Firestore.
+ *
+ * Phase B: replaces StaticGameDataConnector as the runtime data source.
+ * All Firestore SDK calls are isolated here — GameDataService and callers
+ * never import from firebase/firestore directly.
+ *
+ * Search (Phase B): prefix queries only — `name >= query AND name <= query\uf8ff`.
+ * Full-text search is a separate architectural decision, deferred until proper
+ * input is available. When that decision is made, swap this connector.
+ *
+ * Visibility (Phase B): queries `WHERE visibility == 'global'` only.
+ * Campaign content support is Phase C (requires active campaignId from store).
+ *
+ * Caching: all results cached in GameDataCache (in-memory, session lifetime).
+ * AsyncStorage persistence is Phase D.
+ */
+
+import { collection, query, where, getDocs, getDoc, doc, limit } from 'firebase/firestore';
+import { db } from '@/config/firebase';
+import { SPELL_TABLES } from '@/data/classes/index';
+
+import type { FeatDefinition } from '@/types/feats';
+import type { TraitDefinition } from '@/types/traits';
+import type { ClassChoiceDefinition } from '@/types/classChoices';
+import type { ExpandedClassData } from '@/data/classes/types';
+import type { ClassData } from '@/data/classes';
+import type {
+  ClassOptionBase,
+  ShamanSpiritEntry,
+  EidolonEvolutionEntry,
+} from '@/types/classOptions';
+import type {
+  WeaponDefinition,
+  ArmorDefinition,
+  ShieldDefinition,
+  GearDefinition,
+} from '@/types/equipment';
+import type { DeityEntry } from '@/types/deities';
+
+import { GameDataCache, TTL } from './GameDataCache';
+import type {
+  GameDataConnector,
+  ClassChoiceCollection,
+  ClassChoiceFilters,
+} from './GameDataConnector';
+import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+/** Slugify a name to the Firestore document ID format used by seed scripts. */
+function toDocId(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+/** Fetch all docs from a collection, filtered to global visibility only. */
+async function fetchAll<T>(collectionName: string): Promise<T[]> {
+  const q = query(collection(db, collectionName), where('visibility', '==', 'global'));
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => d.data() as T);
+}
+
+// ---------------------------------------------------------------------------
+// FirestoreGameDataConnector
+// ---------------------------------------------------------------------------
+
+export class FirestoreGameDataConnector implements GameDataConnector {
+  // ---- Deity (internal helper) -----------------------------------------------
+
+  private async getDeityByName(name: string): Promise<DeityEntry | null> {
+    const cacheKey = `deities/name/${name}`;
+    const cached = GameDataCache.get<DeityEntry>(cacheKey);
+    if (cached) return cached;
+
+    const q = query(collection(db, 'deities'), where('name', '==', name), limit(1));
+    const snap = await getDocs(q);
+    if (snap.empty) return null;
+
+    const result = snap.docs[0].data() as DeityEntry;
+    GameDataCache.set(cacheKey, result, TTL.OFFICIAL);
+    return result;
+  }
+
+  // ---- Class choice options ---------------------------------------------------
+
+  async getClassChoiceOptions(
+    collectionName: ClassChoiceCollection,
+    filters: ClassChoiceFilters,
+  ): Promise<ClassOptionBase[]> {
+    const cacheKey = `${collectionName}/${JSON.stringify(filters)}`;
+    const cached = GameDataCache.get<ClassOptionBase[]>(cacheKey);
+    if (cached) return cached;
+
+    let results: ClassOptionBase[];
+
+    switch (collectionName) {
+      case 'revelations': {
+        const q = filters.mysteryId
+          ? query(
+              collection(db, collectionName),
+              where('visibility', '==', 'global'),
+              where('mysteryId', '==', filters.mysteryId),
+            )
+          : query(collection(db, collectionName), where('visibility', '==', 'global'));
+        const snap = await getDocs(q);
+        results = snap.docs.map((d) => d.data() as ClassOptionBase);
+        break;
+      }
+
+      case 'bloodlines': {
+        const q = filters.classId
+          ? query(
+              collection(db, collectionName),
+              where('visibility', '==', 'global'),
+              where('classIds', 'array-contains', filters.classId),
+            )
+          : query(collection(db, collectionName), where('visibility', '==', 'global'));
+        const snap = await getDocs(q);
+        results = snap.docs.map((d) => d.data() as ClassOptionBase);
+        break;
+      }
+
+      case 'shamanspirits': {
+        const q = filters.wanderingOnly
+          ? query(
+              collection(db, collectionName),
+              where('visibility', '==', 'global'),
+              where('wanderingSpirit', '==', true),
+            )
+          : query(collection(db, collectionName), where('visibility', '==', 'global'));
+        const snap = await getDocs(q);
+        results = snap.docs.map((d) => d.data() as ClassOptionBase);
+        break;
+      }
+
+      case 'wildtalents': {
+        const q = filters.talentType
+          ? query(
+              collection(db, collectionName),
+              where('visibility', '==', 'global'),
+              where('talentType', '==', filters.talentType),
+            )
+          : query(collection(db, collectionName), where('visibility', '==', 'global'));
+        const snap = await getDocs(q);
+        results = snap.docs.map((d) => d.data() as ClassOptionBase);
+        break;
+      }
+
+      case 'ninjatricks': {
+        const q = filters.trickTier
+          ? query(
+              collection(db, collectionName),
+              where('visibility', '==', 'global'),
+              where('trickTier', '==', filters.trickTier),
+            )
+          : query(collection(db, collectionName), where('visibility', '==', 'global'));
+        const snap = await getDocs(q);
+        results = snap.docs.map((d) => d.data() as ClassOptionBase);
+        break;
+      }
+
+      case 'roguetalents':
+      case 'slayertalents': {
+        const q = filters.talentTier
+          ? query(
+              collection(db, collectionName),
+              where('visibility', '==', 'global'),
+              where('talentTier', '==', filters.talentTier),
+            )
+          : query(collection(db, collectionName), where('visibility', '==', 'global'));
+        const snap = await getDocs(q);
+        results = snap.docs.map((d) => d.data() as ClassOptionBase);
+        break;
+      }
+
+      case 'alchemistdiscoveries': {
+        const q = filters.discoveryTier
+          ? query(
+              collection(db, collectionName),
+              where('visibility', '==', 'global'),
+              where('discoveryTier', '==', filters.discoveryTier),
+            )
+          : query(collection(db, collectionName), where('visibility', '==', 'global'));
+        const snap = await getDocs(q);
+        results = snap.docs.map((d) => d.data() as ClassOptionBase);
+        break;
+      }
+
+      case 'domains': {
+        const all = await fetchAll<ClassOptionBase>('domains');
+        if (filters.deityName) {
+          const deity = await this.getDeityByName(filters.deityName);
+          if (deity) {
+            const allowed = new Set([...deity.domains, ...deity.subdomains]);
+            results = all.filter((d) => allowed.has(d.id));
+          } else {
+            results = all;
+          }
+        } else {
+          results = all;
+        }
+        break;
+      }
+
+      case 'warpriestblessings': {
+        const all = await fetchAll<ClassOptionBase>('warpriestblessings');
+        if (filters.deityName) {
+          const deity = await this.getDeityByName(filters.deityName);
+          if (deity) {
+            const allowed = new Set([...deity.domains, ...deity.subdomains]);
+            results = all.filter((b) => allowed.has(b.id.replace('warpriest-blessing-', '')));
+          } else {
+            results = all;
+          }
+        } else {
+          results = all;
+        }
+        break;
+      }
+
+      case 'eidolonevolutions': {
+        // Firestore `in` doesn't reliably handle null — fetch all and filter client-side.
+        const all = await fetchAll<EidolonEvolutionEntry>(collectionName);
+        results = (
+          filters.summonerType
+            ? all.filter((e) => !e.summoner || e.summoner === filters.summonerType)
+            : all
+        ) as ClassOptionBase[];
+        break;
+      }
+
+      case 'occultistfocuspowers': {
+        // Exclude base powers (isBasePower === true) at query time.
+        const q = query(
+          collection(db, collectionName),
+          where('visibility', '==', 'global'),
+          where('isBasePower', '==', false),
+        );
+        const snap = await getDocs(q);
+        results = snap.docs.map((d) => d.data() as ClassOptionBase);
+        break;
+      }
+
+      default: {
+        // Simple collections with no filter support
+        const q = query(collection(db, collectionName), where('visibility', '==', 'global'));
+        const snap = await getDocs(q);
+        results = snap.docs.map((d) => d.data() as ClassOptionBase);
+        break;
+      }
+    }
+
+    GameDataCache.set(cacheKey, results);
+    return results;
+  }
+
+  // ---- Feats -----------------------------------------------------------------
+
+  async getFeats(filter?: FeatFilter): Promise<FeatDefinition[]> {
+    const cacheKey = `feats/${JSON.stringify(filter ?? {})}`;
+    const cached = GameDataCache.get<FeatDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    // Phase B: fetch all global feats, filter client-side.
+    // Full query-level filtering (types, source) is Phase C / search refactor.
+    const q = query(collection(db, 'feats'), where('visibility', '==', 'global'));
+    const snap = await getDocs(q);
+    let results = snap.docs.map((d) => d.data() as FeatDefinition);
+
+    if (filter?.featTypes && filter.featTypes.length > 0) {
+      results = results.filter((f) => filter.featTypes!.some((t) => f.types.includes(t)));
+    } else if (filter?.isCombatFeat) {
+      results = results.filter((f) => f.types.includes('combat'));
+    } else if (filter?.isTeamworkFeat) {
+      results = results.filter((f) => f.types.includes('teamwork'));
+    }
+
+    GameDataCache.set(cacheKey, results);
+    return results;
+  }
+
+  async getFeatById(id: string): Promise<FeatDefinition | null> {
+    const cacheKey = `feats/${id}`;
+    const cached = GameDataCache.get<FeatDefinition>(cacheKey);
+    if (cached) return cached;
+
+    const snap = await getDoc(doc(db, 'feats', id));
+    if (!snap.exists()) return null;
+
+    const result = snap.data() as FeatDefinition;
+    GameDataCache.set(cacheKey, result);
+    return result;
+  }
+
+  // ---- Traits ----------------------------------------------------------------
+
+  async getTraits(): Promise<TraitDefinition[]> {
+    const cacheKey = 'traits/all';
+    const cached = GameDataCache.get<TraitDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    const results = await fetchAll<TraitDefinition>('traits');
+    GameDataCache.set(cacheKey, results);
+    return results;
+  }
+
+  // ---- Classes ---------------------------------------------------------------
+
+  async getClasses(): Promise<ExpandedClassData[]> {
+    const cacheKey = 'classes/all';
+    const cached = GameDataCache.get<ExpandedClassData[]>(cacheKey);
+    if (cached) return cached;
+
+    const results = await fetchAll<ExpandedClassData>('classes');
+    GameDataCache.set(cacheKey, results);
+    return results;
+  }
+
+  async getCoreClasses(): Promise<ClassData[]> {
+    // Firestore 'classes' collection holds ExpandedClassData which is a superset
+    // of ClassData. Fetch all and return as ClassData[].
+    const all = await this.getClasses();
+    return all as unknown as ClassData[];
+  }
+
+  async getClassByName(name: string): Promise<ExpandedClassData | null> {
+    const cacheKey = `classes/${name.toLowerCase()}`;
+    const cached = GameDataCache.get<ExpandedClassData>(cacheKey);
+    if (cached) return cached;
+
+    // Seed scripts store classes with name-derived document IDs.
+    const snap = await getDoc(doc(db, 'classes', toDocId(name)));
+    if (!snap.exists()) return null;
+
+    const result = snap.data() as ExpandedClassData;
+    GameDataCache.set(cacheKey, result);
+    return result;
+  }
+
+  async getClassChoiceDefinitions(classId: string): Promise<ClassChoiceDefinition[]> {
+    const cacheKey = `classChoiceDefinitions/${classId}`;
+    const cached = GameDataCache.get<ClassChoiceDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    const q = query(
+      collection(db, 'classChoiceDefinitions'),
+      where('classIds', 'array-contains', classId),
+    );
+    const snap = await getDocs(q);
+    const results = snap.docs.map((d) => d.data() as ClassChoiceDefinition);
+
+    GameDataCache.set(cacheKey, results);
+    return results;
+  }
+
+  async getSpellTables() {
+    // Spell progression tables are mathematical config, not catalog content.
+    // Static data is used here intentionally — no Firestore read needed.
+    return SPELL_TABLES;
+  }
+
+  // ---- Races -----------------------------------------------------------------
+
+  async getRaceGroups(): Promise<RaceGroups> {
+    const cacheKey = 'races/groups';
+    const cached = GameDataCache.get<RaceGroups>(cacheKey);
+    if (cached) return cached;
+
+    const [core, featured, uncommon, flex] = await Promise.all([
+      getDocs(query(collection(db, 'races'), where('category', '==', 'Core'))),
+      getDocs(query(collection(db, 'races'), where('category', '==', 'Featured'))),
+      getDocs(query(collection(db, 'races'), where('category', '==', 'Uncommon'))),
+      getDocs(query(collection(db, 'races'), where('flexibleAbilityBonus', '==', true))),
+    ]);
+
+    const result: RaceGroups = {
+      core: core.docs.map((d) => d.data()) as RaceGroups['core'],
+      featured: featured.docs.map((d) => d.data()) as RaceGroups['featured'],
+      uncommon: uncommon.docs.map((d) => d.data()) as RaceGroups['uncommon'],
+      flexibleAbility: flex.docs.map((d) => d.data()) as RaceGroups['flexibleAbility'],
+    };
+
+    GameDataCache.set(cacheKey, result);
+    return result;
+  }
+
+  // ---- Equipment -------------------------------------------------------------
+
+  async getWeapons(): Promise<WeaponDefinition[]> {
+    const cacheKey = 'weapons/all';
+    const cached = GameDataCache.get<WeaponDefinition[]>(cacheKey);
+    if (cached) return cached;
+    const results = await fetchAll<WeaponDefinition>('weapons');
+    GameDataCache.set(cacheKey, results);
+    return results;
+  }
+
+  async getArmor(): Promise<ArmorDefinition[]> {
+    const cacheKey = 'armor/all';
+    const cached = GameDataCache.get<ArmorDefinition[]>(cacheKey);
+    if (cached) return cached;
+    const results = await fetchAll<ArmorDefinition>('armor');
+    GameDataCache.set(cacheKey, results);
+    return results;
+  }
+
+  async getShields(): Promise<ShieldDefinition[]> {
+    const cacheKey = 'shields/all';
+    const cached = GameDataCache.get<ShieldDefinition[]>(cacheKey);
+    if (cached) return cached;
+    const results = await fetchAll<ShieldDefinition>('shields');
+    GameDataCache.set(cacheKey, results);
+    return results;
+  }
+
+  async getGear(): Promise<GearDefinition[]> {
+    const cacheKey = 'gear/all';
+    const cached = GameDataCache.get<GearDefinition[]>(cacheKey);
+    if (cached) return cached;
+    const results = await fetchAll<GearDefinition>('gear');
+    GameDataCache.set(cacheKey, results);
+    return results;
+  }
+}
