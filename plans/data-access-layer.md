@@ -2,7 +2,7 @@
 
 ## 2026-04-13
 
-## Status: Phase A — IN PROGRESS (PR #58 open)
+## Status: Phase A — COMPLETE (PR #58 merged) | Phase B — UNBLOCKED
 
 ### Phase A changes (2026-04-14)
 
@@ -19,7 +19,7 @@ Three issues surfaced during code review and fixed before merge:
 The app currently loads the entire game database into memory at boot via static TypeScript imports:
 
 ```typescript
-import { ALL_FEATS } from '@/data/feats/index';        // ~2,600 entries
+import { ALL_FEATS } from '@/data/feats/index'; // ~2,600 entries
 import { ALL_DOMAINS } from '@/data/domains/index';
 import { ALL_HEXES } from '@/data/hexes/index';
 // ... 20+ more collections in ClassChoiceRow alone
@@ -29,16 +29,16 @@ This defeats the purpose of having Firestore. The bundle ships with ~442,000 lin
 
 **Affected files (current runtime imports from `@/data/`):**
 
-| File | Collections imported |
-|---|---|
-| `ClassChoiceRow.tsx` | ALL_DOMAINS, ALL_RAGE_POWERS, ALL_ROGUE_TALENTS, ALL_MYSTERIES, ALL_INQUISITIONS, ALL_REVELATIONS, ALL_CAVALIER_ORDERS, ALL_HEXES, ALL_ARCANIST_EXPLOITS, ALL_INVESTIGATOR_TALENTS, ALL_BLOODLINES, ALL_SHAMAN_SPIRITS, ALL_EIDOLON_EVOLUTIONS, ALL_MESMERIST_TRICKS, ALL_WILD_TALENTS, ALL_OCCULTIST_FOCUS_POWERS, ALL_PHRENIC_AMPLIFICATIONS, ALL_NINJA_TRICKS, ALL_SLAYER_TALENTS, ALL_MAGUS_ARCANA, ALL_FEATS, ALL_WARPRIEST_BLESSINGS, ALL_ALCHEMIST_DISCOVERIES, getDeityByName |
-| `FeatPickerSheet.tsx` | Feats |
-| `TraitsSection.tsx` | Traits |
-| `EquipmentDatabaseService.ts` | ALL_WEAPONS, ALL_ARMOR, ALL_SHIELDS, ALL_GEAR |
-| `PrerequisiteService.ts` | getFeatById, getClassByName |
-| `DraftValidationService.ts` | getFeatById |
-| `ClassSelector.tsx` | CORE_CLASSES |
-| `CharacterEntryScreen.tsx` | PRESET_PF1E_STANDARD |
+| File                          | Collections imported                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ClassChoiceRow.tsx`          | ALL_DOMAINS, ALL_RAGE_POWERS, ALL_ROGUE_TALENTS, ALL_MYSTERIES, ALL_INQUISITIONS, ALL_REVELATIONS, ALL_CAVALIER_ORDERS, ALL_HEXES, ALL_ARCANIST_EXPLOITS, ALL_INVESTIGATOR_TALENTS, ALL_BLOODLINES, ALL_SHAMAN_SPIRITS, ALL_EIDOLON_EVOLUTIONS, ALL_MESMERIST_TRICKS, ALL_WILD_TALENTS, ALL_OCCULTIST_FOCUS_POWERS, ALL_PHRENIC_AMPLIFICATIONS, ALL_NINJA_TRICKS, ALL_SLAYER_TALENTS, ALL_MAGUS_ARCANA, ALL_FEATS, ALL_WARPRIEST_BLESSINGS, ALL_ALCHEMIST_DISCOVERIES, getDeityByName |
+| `FeatPickerSheet.tsx`         | Feats                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `TraitsSection.tsx`           | Traits                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `EquipmentDatabaseService.ts` | ALL_WEAPONS, ALL_ARMOR, ALL_SHIELDS, ALL_GEAR                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `PrerequisiteService.ts`      | getFeatById, getClassByName                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `DraftValidationService.ts`   | getFeatById                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `ClassSelector.tsx`           | CORE_CLASSES                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `CharacterEntryScreen.tsx`    | PRESET_PF1E_STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ---
 
@@ -67,6 +67,7 @@ Personal homebrew: NOT in Firestore (see below)
 ### 3. Local-first for user homebrew
 
 Users never write directly to global Firestore collections. Personal homebrew lives on-device in AsyncStorage. This prevents:
+
 - Spam / flood attacks on the shared DB
 - Accidental pollution of the official data layer
 - Write permission complexity
@@ -74,6 +75,7 @@ Users never write directly to global Firestore collections. Personal homebrew li
 ### 4. Sharing via promotion
 
 The only path from local homebrew → Firestore is explicit promotion:
+
 - User exports their homebrew as a shareable JSON payload (copy to clipboard, share sheet, QR code)
 - A DM imports the payload and reviews it
 - DM promotes it to the campaign's Firestore collection (`visibility: 'campaign'`)
@@ -84,6 +86,7 @@ There is no self-serve write path to Firestore for end users.
 ### 5. Merged results at query time
 
 The unified query layer is the only interface callers use. It transparently:
+
 1. Queries Firestore for global + campaign content
 2. Queries AsyncStorage for personal homebrew
 3. Merges results, resolves conflicts, and returns a single list
@@ -108,7 +111,7 @@ class GameDataService {
   // Class options (domains, bloodlines, hexes, etc.)
   static getClassChoiceOptions(
     collection: ClassChoiceCollection,
-    context: QueryContext
+    context: QueryContext,
   ): Promise<ClassOptionBase[]>;
 
   // Classes
@@ -144,8 +147,8 @@ Every query carries context so the service knows what content to include:
 ```typescript
 interface QueryContext {
   userId: string;
-  campaignId?: string;       // If set, include campaign-visibility content for this campaign
-  ruleset: Ruleset;          // Drives source filtering (allowedSources)
+  campaignId?: string; // If set, include campaign-visibility content for this campaign
+  ruleset: Ruleset; // Drives source filtering (allowedSources)
   includePersonal?: boolean; // Include user's local homebrew (default: true)
 }
 ```
@@ -185,7 +188,7 @@ class FirestoreGameDataSource {
   private static async query<T>(
     collection: string,
     filters: GameDataFilters,
-    context: QueryContext
+    context: QueryContext,
   ): Promise<T[]>;
 }
 
@@ -197,6 +200,7 @@ interface GameDataFilters {
 ```
 
 **Visibility filter logic:**
+
 ```
 WHERE visibility == 'global'
   OR (visibility == 'campaign' AND campaignId IN character.campaigns)
@@ -204,6 +208,7 @@ WHERE visibility == 'global'
 ```
 
 **Source filter logic:**
+
 ```
 WHERE source IN ruleset.allowedSources
   OR id IN ruleset.itemOverrides.allowed[].id
@@ -224,10 +229,10 @@ class LocalHomebrewSource {
 interface HomebrewExportPayload {
   version: string;
   exportedAt: string;
-  exportedBy: string;       // userId
+  exportedBy: string; // userId
   collection: string;
   items: unknown[];
-  signature?: string;       // Future: tamper detection
+  signature?: string; // Future: tamper detection
 }
 ```
 
@@ -250,6 +255,7 @@ class GameDataCache {
 ```
 
 Cache TTL defaults:
+
 - Static official data (feats, classes, races): 24 hours (rarely changes)
 - Campaign content: 30 minutes (DM may be updating)
 - Search results: 5 minutes
@@ -331,6 +337,7 @@ static async searchFeats(query: string, context: QueryContext): Promise<FeatDefi
 4. Zero behavior change; sets up the seam for Phase B
 
 Affected callers to migrate:
+
 - `ClassChoiceRow.tsx` — largest change (20+ collection imports → one service)
 - `FeatPickerSheet.tsx`
 - `TraitsSection.tsx`
@@ -386,6 +393,7 @@ Campaign-scoped queries add `campaignId` to the relevant indexes. Define in `fir
 Firestore only supports prefix matching (`WHERE name >= 'pow' AND name <= 'pow\uf8ff'`). A user typing "attack" will not find "Power Attack". This is a fundamental Firestore limitation and must be decided before Phase B.
 
 Options:
+
 - **Prefix-only search** — simplest, probably acceptable for most use cases (users type "Power" to find "Power Attack"). Implement first; revisit if feedback is bad.
 - **Client-side filter after prefix fetch** — fetch the prefix-matching set, then filter client-side for substring matches. Works for small result sets; degrades on large ones.
 - **Algolia / Typesense** — proper full-text search, requires a separate service and indexing pipeline. Best experience, most complexity. Defer until user feedback demands it.
@@ -400,18 +408,18 @@ Both services use `getFeatById()` synchronously today. Making `GameDataService` 
 
 The data quality plan (in progress) adds `verificationStatus: 'verified' | 'needs_review' | 'stub'` to every collection entry. The `FirestoreGameDataSource` query layer must filter `WHERE verificationStatus != 'stub'` on all player-facing queries. This filter must be wired into Phase B alongside the visibility and source filters — not added as an afterthought.
 
-### Phase B is blocked on Firestore seeding
+### Phase B blocker — CLEARED (2026-04-14)
 
-Phase B requires all game data collections seeded to Firestore staging. Phase A (service scaffold + caller migration) can proceed immediately against static imports. Phase B cannot start until seeding is complete.
+All 38 game data collections are seeded to Firestore staging. `verifySeeding.ts` passed with 36/36 count checks and 0 unknown-source entries (10,962 docs). Phase B can begin.
 
 ---
 
 ## Open Questions
 
-| Question | Notes |
-|---|---|
+| Question                                                             | Notes                                                                                                                                                 |
+| -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Should `GameDataCache` use AsyncStorage or a dedicated SQLite layer? | AsyncStorage is already in the project and sufficient for MVP. SQLite (via expo-sqlite) is better for search but adds complexity. Revisit in Phase D. |
-| QR code sharing for homebrew? | Nice UX but requires a QR library. Defer to Phase C+. Share sheet with JSON file is sufficient for MVP. |
-| Signature/tamper detection on export payloads? | Future. Not blocking for MVP. |
-| Pagination on large collections (feats: ~2,600)? | Firestore query cursors. Search results paginate at 50; full lists (e.g., class choices) load all. Implement in Phase B. |
-| Full-text search solution? | See Known Constraints above. Decision needed before Phase B. |
+| QR code sharing for homebrew?                                        | Nice UX but requires a QR library. Defer to Phase C+. Share sheet with JSON file is sufficient for MVP.                                               |
+| Signature/tamper detection on export payloads?                       | Future. Not blocking for MVP.                                                                                                                         |
+| Pagination on large collections (feats: ~2,600)?                     | Firestore query cursors. Search results paginate at 50; full lists (e.g., class choices) load all. Implement in Phase B.                              |
+| Full-text search solution?                                           | See Known Constraints above. Decision needed before Phase B.                                                                                          |

@@ -127,9 +127,28 @@ Foundation → class option collections → class choice definitions → supplem
 
 ## Verification
 
-### Programmatic (not yet built)
+### Programmatic — COMPLETE (2026-04-14)
 
-A `scripts/db/verifySeeding.ts` script would be the right tool here — query each Firestore collection, compare doc counts to static array lengths, spot-check a document or two for shape and source normalization. Not built yet; manual console spot-check was done instead for the initial staging seed.
+`scripts/db/verifySeeding.ts` — built and run against staging. For each of the 38 Firestore collections it:
+
+1. Uses Firestore `count()` aggregation to compare doc count against static array length (PASS / WARN ≤5 / FAIL)
+2. Samples up to 5 docs and checks `source.bookId !== 'unknown'`
+
+**Final result (2026-04-14):**
+
+```
+Count checks: 36 passed, 0 warned, 0 failed
+Source checks: 0 collection(s) with unknown source entries
+Total: 10,962 docs in Firestore, 10,959 expected
+```
+
+Note: Traits shows 1020 in Firestore vs 1017 in static data — 3 orphaned docs from a pre-fix run. Harmless; upserts never delete, and the 3 docs match valid entries.
+
+Run at any time:
+
+```bash
+npx tsx scripts/db/verifySeeding.ts
+```
 
 ### Manual (done for staging, 2026-04-14)
 
