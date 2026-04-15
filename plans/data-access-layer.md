@@ -2,7 +2,7 @@
 
 ## 2026-04-13
 
-## Status: Phase A — COMPLETE (PR #58 merged) | Phase B — UNBLOCKED
+## Status: Phase A — COMPLETE (PR #58 merged) | Phase B — IN PROGRESS (branch `MW/data-access-layer`)
 
 ### Phase A changes (2026-04-14)
 
@@ -349,38 +349,54 @@ Affected callers to migrate:
 
 ### Phase B — Firestore backend (two-layer architecture)
 
+**2026-04-14: Connector layer BUILT.** Branch: `MW/data-access-layer`. 877 tests passing.
+
 Phase B is split into a connector interface and a concrete Firestore implementation. This keeps all Firestore-specific code in one place so the data source can be swapped later (e.g. when search and AI architecture decisions are made) without touching callers.
 
-**Layer 1 — `GameDataConnector` (interface)**
-Defines what any data source must provide. Lives at `src/services/GameDataConnector.ts`. No Firestore imports.
+**Files created:**
 
-**Layer 2 — `FirestoreGameDataConnector` (implementation)**
-Concrete Firestore implementation of `GameDataConnector`. All Firebase Admin / Firestore SDK calls live here. Lives at `src/services/FirestoreGameDataConnector.ts`.
+| File                                         | Purpose                                                               |
+| -------------------------------------------- | --------------------------------------------------------------------- |
+| `src/services/GameDataConnector.ts`          | Interface + `ClassChoiceCollection` union + `ClassChoiceFilters` type |
+| `src/services/GameDataCache.ts`              | In-memory TTL cache. TTL: 24h official, 30m campaign, 5m search       |
+| `src/services/FirestoreGameDataConnector.ts` | Production connector. All Firebase SDK calls here                     |
+| `src/services/StaticGameDataConnector.ts`    | Test connector. Wraps static `@/data/` imports                        |
 
-`GameDataService` holds a reference to the active connector and delegates all data fetching through it:
+**`GameDataService` wired to active connector:**
 
 ```typescript
 class GameDataService {
-  private static connector: GameDataConnector = new FirestoreGameDataConnector();
-  static async getFeatById(id: string, context?: QueryContext) {
-    return GameDataService.connector.getFeatById(
-      id,
-      context ?? GameDataService.getContextFromStore(),
-    );
+  private static _connector: GameDataConnector | null = null;
+  private static get connector() {
+    return this._connector ?? (this._connector = new FirestoreGameDataConnector());
   }
+  static setConnector(connector: GameDataConnector) {
+    this._connector = connector;
+  } // tests only
 }
 ```
 
+**Test injection pattern** (`beforeAll` in test files that need real game data):
+
+```typescript
+GameDataService.setConnector(new StaticGameDataConnector());
+```
+
+**`jest.setup.ts`** — `firebase/firestore` SDK is globally mocked to prevent validation errors in tests that never call `setConnector`.
+
+**Phase B concession:** `getCoreClassesSync()` and `getRaceGroupsSync()` remain backed by static imports. Used as `useState` lazy initializers — Phase B cleanup once those components accept empty initial state.
+
 **Search for initial fire test (7 users)**
-Firestore prefix queries only — `name >= query AND name <= query\uf8ff`. Not full-text. Acceptable for the initial test. Full-text search architecture is a separate decision, deferred until proper architectural input is available. The connector interface is designed so a search-capable implementation can be dropped in later.
+No search methods implemented yet — `getClassChoiceItems` fetches full collections and maps to `SearchItem[]`. Full-text search architecture is a separate decision, deferred until proper architectural input is available. The connector interface is designed so a search-capable implementation can be dropped in later.
 
-**Steps:**
+**Remaining Phase B steps:**
 
-1. Define `GameDataConnector` interface covering all collections
-2. Implement `FirestoreGameDataConnector` with visibility + source + ruleset filtering
-3. Wire `GameDataService` to use the connector instead of static `@/data/` imports
-4. Add `GameDataCache` (in-memory, session lifetime only — AsyncStorage persistence deferred to Phase D)
-5. Static TS files remain in codebase for seeding but are no longer imported by app code — Metro stops bundling them
+1. ~~Define `GameDataConnector` interface covering all collections~~ ✓
+2. ~~Implement `FirestoreGameDataConnector` with visibility filtering~~ ✓
+3. ~~Wire `GameDataService` to use the connector instead of static `@/data/` imports~~ ✓
+4. ~~Add `GameDataCache` (in-memory, session lifetime only)~~ ✓
+5. ~~Static TS files remain in codebase for seeding but are no longer imported by app code~~ ✓
+6. Open PR, merge, remove Phase B concession sync accessors (Phase B cleanup)
 
 ### Phase C — Local homebrew
 
