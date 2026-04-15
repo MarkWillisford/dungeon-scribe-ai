@@ -53,7 +53,7 @@ export const ISG_FEATS: FeatDefinition[] = [
   //   — already in database (acg.ts), skipped
 
   {
-    id: 'haunt_scavenger',
+    id: 'haunt_scavenger_isg',
     name: 'Haunt Scavenger',
     description:
       'You can identify haunts as if using detect undead and are treated as one level higher for the purpose of channeling energy to destroy or damage haunts. Additionally, when you destroy a haunt, you regain a number of hit points equal to your level.',

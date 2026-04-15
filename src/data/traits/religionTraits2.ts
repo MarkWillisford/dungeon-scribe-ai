@@ -59,7 +59,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['damage', 'strength', 'melee'],
   },
   {
-    id: 'furious_vengeance',
+    id: 'furious_vengeance_r2',
     name: 'Furious Vengeance',
     description:
       'Once per day as an immediate action, you gain a +1 trait bonus on a single attack roll. In addition, if the target has damaged you within the last round, you deal 1 additional point of damage on a successful hit.',
@@ -72,7 +72,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['attack', 'damage', 'vengeance'],
   },
   {
-    id: 'strengths_fanfare',
+    id: 'strengths_fanfare_r2',
     name: "Strength's Fanfare",
     description:
       'When you are the subject of any sonic effect that grants a morale bonus on attack or damage rolls, you also gain a +1 trait bonus on Strength-based skill checks; on combat maneuver checks to bull rush, grapple, and reposition; and to your CMD against those combat maneuvers.',
@@ -86,7 +86,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['strength', 'cmb', 'cmd', 'sonic'],
   },
   {
-    id: 'the_flexing_arm',
+    id: 'the_flexing_arm_r2',
     name: 'The Flexing Arm',
     description:
       'You are practiced at using physical might to escape your bonds. You can use Strength instead of Dexterity as your base ability for Escape Artist skill checks to free yourself from bondage. Additionally, you gain a +1 trait bonus on such Escape Artist checks.',
@@ -153,7 +153,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['weapon', 'draw', 'concealed'],
   },
   {
-    id: 'fatal_trapper',
+    id: 'fatal_trapper_r2',
     name: 'Fatal Trapper',
     description:
       'Your patron grants you expertise at creating or disabling traps. You gain a +1 trait bonus on Craft (traps) checks, as well as a +1 trait bonus on Disable Device checks to disable traps.',
@@ -266,7 +266,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['disable_device', 'clockwork', 'craft'],
   },
   {
-    id: 'structural_knowledge',
+    id: 'structural_knowledge_r2',
     name: 'Structural Knowledge',
     description:
       'You are blessed with an insight into architecture and artifice. You gain a +1 trait bonus on Knowledge (engineering) checks, and Knowledge (engineering) is a class skill for you.',
@@ -385,7 +385,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['diplomacy', 'leadership', 'inspire'],
   },
   {
-    id: 'river_freedom',
+    id: 'river_freedom_r2',
     name: 'River Freedom',
     description:
       'While touching flowing water, you gain a +2 trait bonus on saving throws against effects that would hamper your movement.',
@@ -575,7 +575,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['save', 'disease', 'plague'],
   },
   {
-    id: 'diseased_heart',
+    id: 'diseased_heart_r2',
     name: 'Diseased Heart',
     description:
       'Your work with infections has infused your spirit with disease. Any creature that performs a blood drain or swallow whole attack on you must succeed at a Fortitude saving throw (DC = 10 + your character level + your Constitution modifier) or become infected with filth fever.',
@@ -590,7 +590,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
 
   // ==================== APSU ====================
   {
-    id: 'dragon_tracker',
+    id: 'dragon_tracker_r2',
     name: 'Dragon Tracker',
     description:
       "You have been taught to identify the subtle and not-so-subtle signs of a dragon's passage. You gain a +2 trait bonus on Survival checks to track dragons and can track dragons untrained if the DC is 15 or lower.",
@@ -612,7 +612,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['survival', 'tracking', 'dragons'],
   },
   {
-    id: 'dragonslayer',
+    id: 'dragonslayer_r2',
     name: 'Dragonslayer',
     description: 'You gain a +1 trait bonus on attack rolls against creatures of the dragon type.',
     shortDescription: '+1 attack vs dragons',
@@ -687,7 +687,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['save', 'poison', 'drink'],
   },
   {
-    id: 'reckless_luck',
+    id: 'reckless_luck_r2',
     name: 'Reckless Luck',
     description:
       'When you make a charge attack in the surprise round or first round of combat, you gain a +2 trait bonus to your AC for 1 round.',
@@ -740,7 +740,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
 
   // ==================== NETHYS (extra) ====================
   {
-    id: 'magics_might',
+    id: 'magics_might_r2',
     name: "Magic's Might",
     description:
       'Your natural affinity for magic allows you to affect even those who resist it. You gain a +1 trait bonus on caster level checks to overcome spell resistance.',
@@ -789,7 +789,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['spellcraft', 'knowledge_arcana', 'magic'],
   },
   {
-    id: 'shaper_of_reality',
+    id: 'shaper_of_reality_r2',
     name: 'Shaper of Reality',
     description:
       'Once per day, you can cast either a conjuration spell or a transmutation spell at +1 caster level.',
@@ -817,7 +817,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['stabilize', 'death', 'survival'],
   },
   {
-    id: 'gifted_medium',
+    id: 'gifted_medium_r2',
     name: 'Gifted Medium',
     description:
       'You gain a +1 trait bonus on your caster level when using divinations to reach out to other entities, such as commune or speak with dead.',
@@ -914,7 +914,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['knowledge_geography', 'knowledge_nature', 'nature'],
   },
   {
-    id: 'elemental_resilience',
+    id: 'elemental_resilience_r2',
     name: 'Elemental Resilience',
     description:
       'Choose one of the following energy types: acid, cold, electricity, or fire. You gain a +1 trait bonus on saving throws against spells with that descriptor.',
@@ -1021,7 +1021,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['survival', 'summoning', 'bestial'],
   },
   {
-    id: 'unspeakable_bond',
+    id: 'unspeakable_bond_r2',
     name: 'Unspeakable Bond',
     description:
       'You are an ally of the unclean creatures of the world. You gain a +2 trait bonus on Diplomacy checks when dealing with creatures of the aberration type.',
@@ -1101,7 +1101,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
 
   // ==================== ASMODEUS (extra) ====================
   {
-    id: 'flames_of_hell',
+    id: 'flames_of_hell_r2',
     name: 'Flames of Hell',
     description:
       'Your hellish bond strengthens your ability to channel powers of the divine. Add 1 to the DC of saving throws made to resist the effects of your channel energy ability.',
@@ -1237,7 +1237,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
 
   // ==================== DESNA (extra) ====================
   {
-    id: 'agent_of_chance',
+    id: 'agent_of_chance_r2',
     name: 'Agent of Chance',
     description:
       'Once per day, you can allow an adjacent ally to reroll a skill check as an immediate action before the result is revealed. The ally must take the second roll, even if it is worse.',
@@ -1250,7 +1250,7 @@ export const RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['reroll', 'skill', 'luck', 'ally'],
   },
   {
-    id: 'accident_resistant',
+    id: 'accident_resistant_r2',
     name: 'Accident Resistant',
     description:
       'You gain a +2 trait bonus on Reflex saves when denied your Dexterity bonus or during a surprise round.',

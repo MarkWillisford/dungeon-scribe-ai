@@ -592,7 +592,7 @@ export const BLOOD_SERIES_FEATS: FeatDefinition[] = [
     tags: ['ifrit', 'elemental', 'racial', 'fire', 'fast healing'],
   },
   {
-    id: 'elemental_overload',
+    id: 'elemental_overload_boe',
     name: 'Elemental Overload',
     description:
       'When you deal energy damage of your associated element type, you can overload targets exposed to that damage. Creatures that take energy damage from your spells or spell-like abilities must succeed at a Fortitude save (DC 10 + 1/2 your level + your Charisma modifier) or be staggered for 1 round.',

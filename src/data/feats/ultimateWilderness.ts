@@ -348,7 +348,7 @@ export const UW_FEATS: FeatDefinition[] = [
 
   // ==================== STYLE FEATS: LINNORM ====================
   {
-    id: 'linnorm_style',
+    id: 'linnorm_style_uw',
     name: 'Linnorm Style',
     description:
       'While using this style, you take a -2 penalty to your AC. Whenever you take damage from a melee attack, the attacker takes 1d4 points of energy damage of a type you choose when you enter the style (acid, cold, electricity, or fire).',
@@ -382,7 +382,7 @@ export const UW_FEATS: FeatDefinition[] = [
     tags: ['style', 'elemental', 'retribution', 'monk'],
   },
   {
-    id: 'linnorm_vengeance',
+    id: 'linnorm_vengeance_uw',
     name: 'Linnorm Vengeance',
     description:
       'While using Linnorm Style, the retribution damage increases to 2d4 points of the chosen energy type. In addition, when you are the target of a confirmed critical hit, the retribution damage increases to 4d4 points.',
@@ -390,7 +390,7 @@ export const UW_FEATS: FeatDefinition[] = [
     source: 'Ultimate Wilderness',
     types: ['combat', 'style'],
     prerequisites: [
-      { type: 'feat', featId: 'linnorm_style' },
+      { type: 'feat', featId: 'linnorm_style_uw' },
       { type: 'feat', featId: 'improved_unarmed_strike' },
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
       { type: 'bab', minimum: 6 },
@@ -400,7 +400,7 @@ export const UW_FEATS: FeatDefinition[] = [
     tags: ['style', 'elemental', 'retribution', 'damage'],
   },
   {
-    id: 'linnorm_wrath',
+    id: 'linnorm_wrath_uw',
     name: 'Linnorm Wrath',
     description:
       'While using Linnorm Style, if you are knocked unconscious or killed by an attack, the attacker takes energy damage equal to double the normal retribution damage and must succeed at a Fortitude save or be affected by a condition based on the energy type chosen.',
@@ -408,8 +408,8 @@ export const UW_FEATS: FeatDefinition[] = [
     source: 'Ultimate Wilderness',
     types: ['combat', 'style'],
     prerequisites: [
-      { type: 'feat', featId: 'linnorm_style' },
-      { type: 'feat', featId: 'linnorm_vengeance' },
+      { type: 'feat', featId: 'linnorm_style_uw' },
+      { type: 'feat', featId: 'linnorm_vengeance_uw' },
       { type: 'feat', featId: 'improved_unarmed_strike' },
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
       { type: 'bab', minimum: 9 },

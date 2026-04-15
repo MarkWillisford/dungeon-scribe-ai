@@ -1104,7 +1104,7 @@ export const APG_TRAITS: TraitDefinition[] = [
     tags: ['concentration', 'casting'],
   },
   {
-    id: 'beast_of_the_society',
+    id: 'beast_of_the_society_apg',
     name: 'Beast of the Society',
     description:
       'A druid of the Pathfinder Society has shown you the ways of the wild. You gain a +1 bonus on Knowledge (nature) checks, and Knowledge (nature) is always a class skill for you. Your wild shape ability lasts for an additional 2 rounds.',

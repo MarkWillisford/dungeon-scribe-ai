@@ -366,7 +366,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
   // ==================== MAGICAL MARKETPLACE (2013) ====================
 
   {
-    id: 'extend_the_bulwark',
+    id: 'extend_the_bulwark_mm',
     name: 'Extend the Bulwark',
     description:
       'You can use your heavy armor to protect adjacent allies. As a free action, you may grant an adjacent ally who also has this feat a circumstance bonus to AC equal to half the armor bonus provided by your armor. This bonus lasts for 1 round. While providing this bonus, you gain no AC benefit from your armor.',
