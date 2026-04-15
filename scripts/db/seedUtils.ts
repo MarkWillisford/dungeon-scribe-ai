@@ -1,6 +1,16 @@
 /**
  * seedUtils.ts — Shared utilities for seed scripts
+ *
+ * Loads .env.local on import so GOOGLE_APPLICATION_CREDENTIALS and any other
+ * local overrides are available to all seed/verify scripts without needing
+ * to export them manually before each run.
  */
+
+import { config } from 'dotenv';
+import { resolve } from 'path';
+
+// Load .env.local from the repo root (two levels up from scripts/db/)
+config({ path: resolve(__dirname, '../../.env.local') });
 
 /** Pause execution for `ms` milliseconds. Use between batch commits to avoid rate-limiting. */
 export const sleep = (ms: number): Promise<void> =>

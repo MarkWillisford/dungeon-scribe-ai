@@ -14,6 +14,10 @@
  *   npx tsx scripts/db/verifySeeding.ts
  */
 
+import { config } from 'dotenv';
+import { resolve } from 'path';
+config({ path: resolve(__dirname, '../../.env.local') });
+
 import * as admin from 'firebase-admin';
 import { ALL_EXPANDED_RACES } from '../../src/data/races/index';
 import { ALL_EXPANDED_CLASSES } from '../../src/data/classes/index';
