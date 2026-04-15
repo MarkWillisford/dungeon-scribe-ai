@@ -10,11 +10,7 @@ import type { Ruleset } from '@/types/ruleset';
 import { DraftStateResolver, type ECLTimeline } from './DraftStateResolver';
 import { PrerequisiteService } from './PrerequisiteService';
 import { GameDataService } from '@/services/GameDataService';
-import {
-  lookupClassData,
-  abilityTotal,
-  abilityModifier,
-} from '@/utils/characterComputations';
+import { lookupClassData, abilityTotal, abilityModifier } from '@/utils/characterComputations';
 
 // ---- Helpers ----
 
@@ -42,7 +38,10 @@ export class DraftValidationService {
    * Run all validation checks against a CharacterDraft.
    * Returns an array of warnings (empty = clean).
    */
-  static async validate(draft: CharacterDraft, ruleset: Ruleset): Promise<EntryValidationWarning[]> {
+  static async validate(
+    draft: CharacterDraft,
+    ruleset: Ruleset,
+  ): Promise<EntryValidationWarning[]> {
     const warnId = makeWarnId(); // scoped counter — safe under parallel calls and test isolation
 
     const timeline = DraftStateResolver.buildTimeline(draft, ruleset);
@@ -186,8 +185,9 @@ export class DraftValidationService {
 
       // Get the snapshot BEFORE that ECL (the character state when the decision was made).
       // snapshotBeforeECL returns null at ECL 1 — no prior state means all prereqs are unmet.
-      const snapshot = DraftStateResolver.snapshotBeforeECL(draft, firstCheckpoint.ecl, ruleset)
-        ?? DraftStateResolver.EMPTY_SNAPSHOT;
+      const snapshot =
+        DraftStateResolver.snapshotBeforeECL(draft, firstCheckpoint.ecl, ruleset) ??
+        DraftStateResolver.EMPTY_SNAPSHOT;
 
       const prereqs = classData.prerequisites;
       const unmet: string[] = [];
@@ -204,7 +204,8 @@ export class DraftValidationService {
       if (prereqs.skills) {
         for (const { name, ranks } of prereqs.skills) {
           const key = name.toLowerCase().replace(/\s+/g, '_');
-          const have = snapshot.skills[key]?.ranks ?? snapshot.skills[name.toLowerCase()]?.ranks ?? 0;
+          const have =
+            snapshot.skills[key]?.ranks ?? snapshot.skills[name.toLowerCase()]?.ranks ?? 0;
           if (have < ranks) {
             unmet.push(`${name} ${ranks} ranks (have ${have})`);
           }
@@ -213,10 +214,10 @@ export class DraftValidationService {
 
       // Feats (by name — prestige prereqs list feat names, not IDs)
       if (prereqs.feats) {
+        const featDefs = await Promise.all(
+          snapshot.feats.feats.map((f) => GameDataService.getFeatById(f.featId)),
+        );
         for (const featName of prereqs.feats) {
-          const featDefs = await Promise.all(
-            snapshot.feats.feats.map((f) => GameDataService.getFeatById(f.featId)),
-          );
           const hasFeat = featDefs.some(
             (def) => def?.name.toLowerCase() === featName.toLowerCase(),
           );
@@ -418,7 +419,10 @@ export class DraftValidationService {
 
   // ---- Spellcasting advancement ----
 
-  private static checkSpellcastingAdvancement(draft: CharacterDraft, warnId: WarnId): EntryValidationWarning[] {
+  private static checkSpellcastingAdvancement(
+    draft: CharacterDraft,
+    warnId: WarnId,
+  ): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
 
     for (const entry of draft.classes) {

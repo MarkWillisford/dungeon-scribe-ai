@@ -74,9 +74,7 @@ function resolveSpellTableKey(
   expandedClasses: ExpandedClassData[],
 ): string {
   for (const cls of contributors) {
-    const data = expandedClasses.find(
-      (c) => c.name.toLowerCase() === cls.className.toLowerCase(),
-    );
+    const data = expandedClasses.find((c) => c.name.toLowerCase() === cls.className.toLowerCase());
     if (data?.spellcasting.spellTableKey) return data.spellcasting.spellTableKey;
   }
   // Default to full 9-level prepared
@@ -86,11 +84,12 @@ function resolveSpellTableKey(
 /**
  * Check if any contributing class grants domain/school bonus slots.
  */
-function hasDomainSlots(contributors: DraftClassEntry[], expandedClasses: ExpandedClassData[]): boolean {
+function hasDomainSlots(
+  contributors: DraftClassEntry[],
+  expandedClasses: ExpandedClassData[],
+): boolean {
   return contributors.some((cls) => {
-    const data = expandedClasses.find(
-      (c) => c.name.toLowerCase() === cls.className.toLowerCase(),
-    );
+    const data = expandedClasses.find((c) => c.name.toLowerCase() === cls.className.toLowerCase());
     return data?.spellcasting.domainSlots === true;
   });
 }
@@ -247,7 +246,10 @@ function PoolCard({ pool, abilityMod, expandedClasses, spellTables }: PoolCardPr
     () => resolveSpellTableKey(contributors, pool.poolType, expandedClasses),
     [contributors, pool.poolType, expandedClasses],
   );
-  const domainSlots = useMemo(() => hasDomainSlots(contributors, expandedClasses), [contributors, expandedClasses]);
+  const domainSlots = useMemo(
+    () => hasDomainSlots(contributors, expandedClasses),
+    [contributors, expandedClasses],
+  );
 
   const spellTable = spellTables[tableKey];
   const tableRow = spellTable && esl > 0 ? spellTable[Math.min(esl, spellTable.length) - 1] : null;
@@ -517,13 +519,12 @@ export function SpellcastingSection() {
   const [spellTables, setSpellTables] = useState<Record<string, SpellProgressionTable>>({});
 
   useEffect(() => {
-    Promise.all([
-      GameDataService.getExpandedClasses(),
-      GameDataService.getSpellTables(),
-    ]).then(([classes, tables]) => {
-      setExpandedClasses(classes);
-      setSpellTables(tables);
-    });
+    Promise.all([GameDataService.getExpandedClasses(), GameDataService.getSpellTables()])
+      .then(([classes, tables]) => {
+        setExpandedClasses(classes);
+        setSpellTables(tables);
+      })
+      .catch((e) => console.error('Failed to load spellcasting data:', e));
   }, []);
 
   const abilityMods = useMemo(

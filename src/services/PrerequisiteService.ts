@@ -41,7 +41,10 @@ export class PrerequisiteService {
   /**
    * Get all feats a character currently qualifies for (excluding already-taken feats).
    */
-  static async getAvailableFeats(character: Character, allFeats: FeatDefinition[]): Promise<FeatDefinition[]> {
+  static async getAvailableFeats(
+    character: Character,
+    allFeats: FeatDefinition[],
+  ): Promise<FeatDefinition[]> {
     const currentFeatIds = new Set(character.feats.feats.map((f) => f.featId));
     const results: FeatDefinition[] = [];
     for (const feat of allFeats) {
@@ -163,7 +166,10 @@ export class PrerequisiteService {
   /**
    * Describe a prerequisite in human-readable text.
    */
-  private static async describe(prereq: FeatPrerequisite, characterFeatInstance?: CharacterFeat): Promise<string> {
+  private static async describe(
+    prereq: FeatPrerequisite,
+    characterFeatInstance?: CharacterFeat,
+  ): Promise<string> {
     switch (prereq.type) {
       case 'ability_score':
         return `${prereq.ability} ${prereq.minimum}+`;
@@ -203,8 +209,8 @@ export class PrerequisiteService {
         return `Evolution: ${prereq.evolutionId}`;
       case 'special':
         return prereq.description;
-      case 'evolution':
-        return `Evolution: ${prereq.evolutionId}`;
+      default:
+        return `Unknown prerequisite: ${(prereq as { type: string }).type}`;
     }
   }
 }

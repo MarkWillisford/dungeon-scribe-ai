@@ -66,7 +66,11 @@ async function seedRogueTalents(talents: RogueTalentEntry[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((talent) => {
       const ref = db.collection('roguetalents').doc(talent.id);
-      batch.set(ref, { ...talent, source: normalizeSource(talent.source) });
+      batch.set(ref, {
+        ...talent,
+        source: normalizeSource(talent.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

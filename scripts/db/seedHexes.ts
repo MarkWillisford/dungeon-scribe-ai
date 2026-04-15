@@ -66,7 +66,11 @@ async function seedHexes(hexes: HexEntry[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((hex) => {
       const ref = db.collection('hexes').doc(hex.id);
-      batch.set(ref, { ...hex, source: normalizeSource(hex.source) });
+      batch.set(ref, {
+        ...hex,
+        source: normalizeSource(hex.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

@@ -42,10 +42,14 @@ export function RaceSelector({
   const [expandedRace, setExpandedRace] = useState<string | null>(selectedRace?.name ?? null);
   // Sync initializer ensures first render has real data (no flicker; tests work without async effects).
   // Phase B: switch to empty initial state + useEffect when data comes from Firestore.
-  const [raceGroups, setRaceGroups] = useState<RaceGroups>(() => GameDataService.getRaceGroupsSync());
+  const [raceGroups, setRaceGroups] = useState<RaceGroups>(() =>
+    GameDataService.getRaceGroupsSync(),
+  );
 
   useEffect(() => {
-    GameDataService.getRaceGroups().then(setRaceGroups);
+    GameDataService.getRaceGroups()
+      .then(setRaceGroups)
+      .catch((e) => console.error('Failed to load race groups:', e));
   }, []);
 
   const raceSections = useMemo(

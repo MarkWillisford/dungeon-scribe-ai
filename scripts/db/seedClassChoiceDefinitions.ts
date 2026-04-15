@@ -64,7 +64,11 @@ async function seedClassChoiceDefinitions(defs: ClassChoiceDefinition[]): Promis
     const batch = db.batch();
     chunk.forEach((def) => {
       const ref = db.collection('classChoiceDefinitions').doc(def.id);
-      batch.set(ref, { ...def, source: normalizeSource(def.source) });
+      batch.set(ref, {
+        ...def,
+        source: normalizeSource(def.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

@@ -43,9 +43,7 @@ function resolveFilterTokens(
         resolved[key] = characterDeity || undefined;
       } else if (tokenName.startsWith('chosen_')) {
         const featureKeyword = tokenName.slice('chosen_'.length); // e.g. 'mystery'
-        const match = siblingChoices.find(
-          (c) => c.featureName.toLowerCase() === featureKeyword,
-        );
+        const match = siblingChoices.find((c) => c.featureName.toLowerCase() === featureKeyword);
         resolved[key] = typeof match?.selection === 'string' ? match.selection : undefined;
       }
     } else {
@@ -90,9 +88,9 @@ export function ClassChoiceRow({
         siblingChoices ?? [],
         characterDeity,
       );
-      GameDataService.getClassChoiceItems(definition.collectionName, resolvedFilter).then(
-        setPickerItems,
-      );
+      GameDataService.getClassChoiceItems(definition.collectionName, resolvedFilter)
+        .then(setPickerItems)
+        .catch((e) => console.error('Failed to load class choice items:', e));
     } else {
       Promise.resolve(buildInlineItems(definition)).then(setPickerItems);
     }
@@ -132,7 +130,10 @@ export function ClassChoiceRow({
       <Pressable
         onPress={() => setPickerOpen(true)}
         disabled={!hasItems || disabled}
-        style={[styles.row, { borderBottomColor: colors.border.DEFAULT, opacity: disabled ? 0.4 : 1 }]}
+        style={[
+          styles.row,
+          { borderBottomColor: colors.border.DEFAULT, opacity: disabled ? 0.4 : 1 },
+        ]}
         accessibilityRole="button"
         accessibilityLabel={`${featureLabel}: ${disabled ? 'not available — mutually exclusive choice already made' : (currentSelection ?? 'not set')}`}
         accessibilityHint={disabled ? undefined : 'Tap to change selection'}
@@ -143,7 +144,11 @@ export function ClassChoiceRow({
             style={[
               styles.selection,
               {
-                color: disabled ? colors.text.tertiary : (currentSelection ? colors.text.primary : colors.text.tertiary),
+                color: disabled
+                  ? colors.text.tertiary
+                  : currentSelection
+                    ? colors.text.primary
+                    : colors.text.tertiary,
                 fontStyle: disabled || !currentSelection ? 'italic' : 'normal',
               },
             ]}
@@ -156,7 +161,9 @@ export function ClassChoiceRow({
               🔍
             </Text>
           )}
-          {(!hasItems || disabled) && <Text style={[styles.searchIcon, { color: colors.text.tertiary }]}>—</Text>}
+          {(!hasItems || disabled) && (
+            <Text style={[styles.searchIcon, { color: colors.text.tertiary }]}>—</Text>
+          )}
         </View>
       </Pressable>
 

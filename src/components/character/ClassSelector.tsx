@@ -21,7 +21,9 @@ export function ClassSelector({ selectedClass, onSelectClass, testID }: ClassSel
   );
 
   useEffect(() => {
-    GameDataService.getCoreClasses().then(setCoreClasses);
+    GameDataService.getCoreClasses()
+      .then(setCoreClasses)
+      .catch((e) => console.error('Failed to load core classes:', e));
   }, []);
 
   const handleClassPress = (cls: ClassData) => {

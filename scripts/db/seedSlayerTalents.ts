@@ -65,6 +65,7 @@ async function seedSlayerTalents(talents: SlayerTalentEntry[]): Promise<void> {
       batch.set(db.collection('slayertalents').doc(talent.id), {
         ...talent,
         source: normalizeSource(talent.source),
+        visibility: 'global' as const,
       });
     });
     await batch.commit();

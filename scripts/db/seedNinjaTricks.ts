@@ -65,6 +65,7 @@ async function seedNinjaTricks(tricks: NinjaTrickEntry[]): Promise<void> {
       batch.set(db.collection('ninjatricks').doc(trick.id), {
         ...trick,
         source: normalizeSource(trick.source),
+        visibility: 'global' as const,
       });
     });
     await batch.commit();

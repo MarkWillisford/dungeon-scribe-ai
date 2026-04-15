@@ -67,7 +67,11 @@ async function seedPhrenicAmplifications(
     const batch = db.batch();
     chunk.forEach((amp) => {
       const ref = db.collection('phrenicamplifications').doc(amp.id);
-      batch.set(ref, { ...amp, source: normalizeSource(amp.source) });
+      batch.set(ref, {
+        ...amp,
+        source: normalizeSource(amp.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

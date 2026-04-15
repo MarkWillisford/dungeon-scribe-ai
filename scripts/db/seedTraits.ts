@@ -64,7 +64,11 @@ async function seedTraits(traits: TraitDefinition[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((trait) => {
       const ref = db.collection('traits').doc(trait.id);
-      batch.set(ref, { ...trait, source: normalizeSource(trait.source) });
+      batch.set(ref, {
+        ...trait,
+        source: normalizeSource(trait.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

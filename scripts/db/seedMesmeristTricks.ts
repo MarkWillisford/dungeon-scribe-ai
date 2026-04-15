@@ -65,7 +65,11 @@ async function seedMesmeristTricks(tricks: MesmeristTrickEntry[]): Promise<void>
     const batch = db.batch();
     chunk.forEach((trick) => {
       const ref = db.collection('mesmeristtricks').doc(trick.id);
-      batch.set(ref, { ...trick, source: normalizeSource(trick.source) });
+      batch.set(ref, {
+        ...trick,
+        source: normalizeSource(trick.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

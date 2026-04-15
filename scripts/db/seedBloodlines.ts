@@ -66,7 +66,11 @@ async function seedBloodlines(bloodlines: ClassOptionBase[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((bloodline) => {
       const ref = db.collection('bloodlines').doc(bloodline.id);
-      batch.set(ref, { ...bloodline, source: normalizeSource(bloodline.source) });
+      batch.set(ref, {
+        ...bloodline,
+        source: normalizeSource(bloodline.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

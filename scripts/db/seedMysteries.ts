@@ -66,7 +66,11 @@ async function seedMysteries(mysteries: ClassOptionBase[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((mystery) => {
       const ref = db.collection('mysteries').doc(mystery.id);
-      batch.set(ref, { ...mystery, source: normalizeSource(mystery.source) });
+      batch.set(ref, {
+        ...mystery,
+        source: normalizeSource(mystery.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

@@ -59,7 +59,11 @@ async function seedDomains(domains: DomainEntry[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((domain) => {
       const ref = db.collection('domains').doc(domain.id);
-      batch.set(ref, { ...domain, source: normalizeSource(domain.source) });
+      batch.set(ref, {
+        ...domain,
+        source: normalizeSource(domain.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

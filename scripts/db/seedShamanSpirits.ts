@@ -62,7 +62,11 @@ async function seedShamanSpirits(spirits: ShamanSpiritEntry[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((spirit) => {
       const ref = db.collection('shamanspirits').doc(spirit.id);
-      batch.set(ref, { ...spirit, source: normalizeSource(spirit.source) });
+      batch.set(ref, {
+        ...spirit,
+        source: normalizeSource(spirit.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

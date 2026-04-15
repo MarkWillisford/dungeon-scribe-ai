@@ -137,7 +137,9 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const characterDeity = useAppSelector((state) => state.characterEntry.draft.deity);
 
   useEffect(() => {
-    GameDataService.getClassChoiceDefinitions(entry.className).then(setDefinitions);
+    GameDataService.getClassChoiceDefinitions(entry.className)
+      .then(setDefinitions)
+      .catch((e) => console.error('Failed to load class choice definitions:', e));
   }, [entry.className]);
 
   const allSlots = definitions.flatMap((def) => deriveChoiceSlots(def, entry.level));
@@ -299,7 +301,10 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
                     takenAtLevel={slot.takenAtLevel}
                     featureLabel={slot.featureLabel}
                     siblingChoices={entry.classChoices}
-                    disabled={isMutuallyExcludedFilled(slot.definition.featureName, entry.classChoices)}
+                    disabled={isMutuallyExcludedFilled(
+                      slot.definition.featureName,
+                      entry.classChoices,
+                    )}
                     characterDeity={characterDeity}
                   />
                 );

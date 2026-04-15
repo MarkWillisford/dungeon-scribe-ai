@@ -66,7 +66,11 @@ async function seedInquisitions(inquisitions: ClassOptionBase[]): Promise<void> 
     const batch = db.batch();
     chunk.forEach((inquisition) => {
       const ref = db.collection('inquisitions').doc(inquisition.id);
-      batch.set(ref, { ...inquisition, source: normalizeSource(inquisition.source) });
+      batch.set(ref, {
+        ...inquisition,
+        source: normalizeSource(inquisition.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

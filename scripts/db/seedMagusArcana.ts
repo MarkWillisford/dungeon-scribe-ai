@@ -59,6 +59,7 @@ async function seedMagusArcana(arcana: MagusArcanaEntry[]): Promise<void> {
       batch.set(db.collection('magusarcana').doc(entry.id), {
         ...entry,
         source: normalizeSource(entry.source),
+        visibility: 'global' as const,
       });
     });
     await batch.commit();

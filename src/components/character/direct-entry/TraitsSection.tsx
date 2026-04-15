@@ -91,7 +91,9 @@ export function TraitsSection() {
   const [allTraitDefs, setAllTraitDefs] = useState<TraitDefinition[]>([]);
 
   useEffect(() => {
-    GameDataService.getAllTraits().then(setAllTraitDefs);
+    GameDataService.getAllTraits()
+      .then(setAllTraitDefs)
+      .catch((e) => console.error('Failed to load traits:', e));
   }, []);
 
   const traitSearchItems = useMemo<SearchItem[]>(

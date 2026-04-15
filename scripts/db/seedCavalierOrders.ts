@@ -66,7 +66,11 @@ async function seedCavalierOrders(orders: ClassOptionBase[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((order) => {
       const ref = db.collection('cavalierorders').doc(order.id);
-      batch.set(ref, { ...order, source: normalizeSource(order.source) });
+      batch.set(ref, {
+        ...order,
+        source: normalizeSource(order.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

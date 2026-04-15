@@ -84,7 +84,11 @@ async function seedSpells(spells: Spell[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((spell) => {
       const ref = db.collection('spells').doc(); // auto-ID
-      batch.set(ref, { ...spell, source: normalizeSource(spell.source) });
+      batch.set(ref, {
+        ...spell,
+        source: normalizeSource(spell.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

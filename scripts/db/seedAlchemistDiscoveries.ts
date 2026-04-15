@@ -63,6 +63,7 @@ async function seedAlchemistDiscoveries(discoveries: AlchemistDiscoveryEntry[]):
       batch.set(db.collection('alchemistdiscoveries').doc(entry.id), {
         ...entry,
         source: normalizeSource(entry.source),
+        visibility: 'global' as const,
       });
     });
     await batch.commit();

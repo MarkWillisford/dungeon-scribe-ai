@@ -70,7 +70,11 @@ async function seedEidolonEvolutions(evolutions: EidolonEvolutionEntry[]): Promi
     const batch = db.batch();
     chunk.forEach((evolution) => {
       const ref = db.collection('eidolonevolutions').doc(evolution.id);
-      batch.set(ref, { ...evolution, source: normalizeSource(evolution.source) });
+      batch.set(ref, {
+        ...evolution,
+        source: normalizeSource(evolution.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

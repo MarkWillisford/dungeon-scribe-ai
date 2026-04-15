@@ -66,7 +66,11 @@ async function seedRagePowers(powers: ClassOptionBase[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((power) => {
       const ref = db.collection('ragepowers').doc(power.id);
-      batch.set(ref, { ...power, source: normalizeSource(power.source) });
+      batch.set(ref, {
+        ...power,
+        source: normalizeSource(power.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

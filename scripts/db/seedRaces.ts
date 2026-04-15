@@ -74,7 +74,11 @@ async function seedRaces(races: ExpandedRaceData[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((race) => {
       const ref = db.collection('races').doc(raceDocId(race.name));
-      batch.set(ref, { ...race, source: normalizeSource(race.source) });
+      batch.set(ref, {
+        ...race,
+        source: normalizeSource(race.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

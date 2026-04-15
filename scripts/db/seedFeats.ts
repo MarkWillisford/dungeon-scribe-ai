@@ -65,7 +65,11 @@ async function seedFeats(feats: FeatDefinition[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((feat) => {
       const ref = db.collection('feats').doc(feat.id);
-      batch.set(ref, { ...feat, source: normalizeSource(feat.source) });
+      batch.set(ref, {
+        ...feat,
+        source: normalizeSource(feat.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

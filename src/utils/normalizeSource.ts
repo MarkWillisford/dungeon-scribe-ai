@@ -1567,7 +1567,7 @@ export function normalizeSource(
   // Check direct match first (fastest path)
   if (COMPLETE_MAP[sourceStr]) {
     const result = { ...COMPLETE_MAP[sourceStr] };
-    if (pageNum) result.page = pageNum;
+    if (pageNum !== undefined) result.page = pageNum;
     return result;
   }
 
@@ -1618,14 +1618,14 @@ export function normalizeSource(
   const fullNameMatch = FULL_NAME_MAP[normalizedName];
   if (fullNameMatch && COMPLETE_MAP[fullNameMatch]) {
     const result = { ...COMPLETE_MAP[fullNameMatch] };
-    if (pageNum) result.page = pageNum;
+    if (pageNum !== undefined) result.page = pageNum;
     return result;
   }
 
   // Check if the cleaned version matches any direct code
   if (COMPLETE_MAP[cleaned]) {
     const result = { ...COMPLETE_MAP[cleaned] };
-    if (pageNum) result.page = pageNum;
+    if (pageNum !== undefined) result.page = pageNum;
     return result;
   }
 

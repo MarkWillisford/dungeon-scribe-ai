@@ -73,7 +73,11 @@ async function seedWildTalents(talents: KineticistWildTalentEntry[]): Promise<vo
     const batch = db.batch();
     chunk.forEach((talent) => {
       const ref = db.collection('wildtalents').doc(talent.id);
-      batch.set(ref, { ...talent, source: normalizeSource(talent.source) });
+      batch.set(ref, {
+        ...talent,
+        source: normalizeSource(talent.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

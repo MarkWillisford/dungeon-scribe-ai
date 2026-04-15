@@ -69,7 +69,11 @@ async function seedCollection(collectionName: string, items: EquipmentItem[]): P
     const batch = db.batch();
     chunk.forEach((item) => {
       const ref = db.collection(collectionName).doc(item.id);
-      batch.set(ref, { ...item, source: normalizeSource(item.source) });
+      batch.set(ref, {
+        ...item,
+        source: normalizeSource(item.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

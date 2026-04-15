@@ -76,7 +76,11 @@ async function seed(): Promise<void> {
 
     for (const item of slice) {
       const ref = collectionRef.doc(item.id);
-      batch.set(ref, { ...item, source: normalizeSource(item.source) }, { merge: true });
+      batch.set(
+        ref,
+        { ...item, source: normalizeSource(item.source), visibility: 'global' as const },
+        { merge: true },
+      );
     }
 
     await batch.commit();

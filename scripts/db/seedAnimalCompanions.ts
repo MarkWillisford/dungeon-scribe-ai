@@ -74,7 +74,11 @@ async function seedAnimalCompanions(companions: AnimalCompanionEntry[]): Promise
     chunk.forEach((companion) => {
       // Document ID = companion.id — deterministic and idempotent
       const ref = db.collection(COLLECTION).doc(companion.id);
-      batch.set(ref, { ...companion, source: normalizeSource(companion.source) });
+      batch.set(ref, {
+        ...companion,
+        source: normalizeSource(companion.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

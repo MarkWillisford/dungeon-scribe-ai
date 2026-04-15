@@ -67,7 +67,7 @@ async function seedTemplates(templates: TemplateDefinition[]): Promise<void> {
     chunk.forEach((template) => {
       // Use template.id (kebab-case) as the Firestore document ID
       const ref = db.collection('templates').doc(template.id);
-      batch.set(ref, template);
+      batch.set(ref, { ...template, visibility: 'global' as const });
     });
     await batch.commit();
     await sleep(500);

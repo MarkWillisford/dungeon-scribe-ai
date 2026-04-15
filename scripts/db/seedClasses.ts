@@ -74,7 +74,11 @@ async function seedClasses(classes: ExpandedClassData[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((cls) => {
       const ref = db.collection('classes').doc(classDocId(cls.name));
-      batch.set(ref, { ...cls, source: normalizeSource(cls.source) });
+      batch.set(ref, {
+        ...cls,
+        source: normalizeSource(cls.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
     await sleep(500);

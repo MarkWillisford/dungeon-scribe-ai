@@ -48,7 +48,11 @@ async function seed(): Promise<void> {
     const batch = db.batch();
     chunk.forEach((deity) => {
       const ref = db.collection('deities').doc(deity.id);
-      batch.set(ref, { ...deity, source: normalizeSource(deity.source) }); // upsert — overwrites if exists, creates if not
+      batch.set(ref, {
+        ...deity,
+        source: normalizeSource(deity.source),
+        visibility: 'global' as const,
+      }); // upsert — overwrites if exists, creates if not
     });
     await batch.commit();
     await sleep(500);

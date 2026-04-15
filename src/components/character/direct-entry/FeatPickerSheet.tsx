@@ -78,9 +78,13 @@ function buildPrereqSummary(feat: FeatDefinition): string | undefined {
 }
 
 let FEAT_ITEMS_CACHE: FeatItem[] | null = null;
+let FEAT_ITEMS_CACHE_AT = 0;
+const FEAT_CACHE_TTL = 30 * 60 * 1000; // 30 minutes
 
 async function getFeatItems(): Promise<FeatItem[]> {
-  if (FEAT_ITEMS_CACHE) return FEAT_ITEMS_CACHE;
+  if (FEAT_ITEMS_CACHE && Date.now() - FEAT_ITEMS_CACHE_AT < FEAT_CACHE_TTL) {
+    return FEAT_ITEMS_CACHE;
+  }
   const feats = await GameDataService.getAllFeats();
   FEAT_ITEMS_CACHE = feats.map((f) => ({
     key: f.id,
@@ -88,6 +92,7 @@ async function getFeatItems(): Promise<FeatItem[]> {
     types: f.types,
     prereqSummary: buildPrereqSummary(f),
   }));
+  FEAT_ITEMS_CACHE_AT = Date.now();
   return FEAT_ITEMS_CACHE;
 }
 
@@ -113,7 +118,9 @@ export function FeatPickerSheet({ visible, title, onSelect, onClose }: FeatPicke
   const [allItems, setAllItems] = useState<FeatItem[]>([]);
 
   useEffect(() => {
-    getFeatItems().then(setAllItems);
+    getFeatItems()
+      .then(setAllItems)
+      .catch((e) => console.error('Failed to load feats:', e));
   }, []);
 
   const filtered = useMemo(() => {

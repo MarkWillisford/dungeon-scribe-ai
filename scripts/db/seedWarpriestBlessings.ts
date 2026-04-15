@@ -58,6 +58,7 @@ async function seedWarpriestBlessings(blessings: WarpriestBlessingEntry[]): Prom
       batch.set(db.collection('warpriestblessings').doc(entry.id), {
         ...entry,
         source: normalizeSource(entry.source),
+        visibility: 'global' as const,
       });
     });
     await batch.commit();
