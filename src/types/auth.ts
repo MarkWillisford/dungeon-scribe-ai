@@ -8,7 +8,7 @@ export interface AppUser {
   createdAt?: string; // ISO 8601 — kept as string for Redux serializability
   lastLogin?: string; // ISO 8601 — kept as string for Redux serializability
   campaigns?: string[]; // Campaign IDs
-  role?: 'player' | 'dm';
+  role?: 'player' | 'dm' | 'admin';
 }
 
 export interface UserPreferences {
