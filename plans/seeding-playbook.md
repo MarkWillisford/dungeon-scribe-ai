@@ -77,9 +77,18 @@ npx tsx scripts/db/seedAll.ts
 
 ## Seed to Production
 
+Production seeding requires `--confirm-production` and an interactive confirmation
+that echoes the project ID. This prevents accidental writes from env-var typos or
+shell-state carryover.
+
 ```bash
 export FIREBASE_PROJECT_ID=<prod-project-id>
-npx tsx scripts/db/seedAll.ts
+
+# Dry run first — always
+npx tsx scripts/db/seedAll.ts --dry-run
+
+# Production run — requires flag + interactive project ID confirmation
+npx tsx scripts/db/seedAll.ts --confirm-production
 ```
 
 ---

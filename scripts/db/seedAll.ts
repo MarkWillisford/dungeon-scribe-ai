@@ -18,10 +18,51 @@
 
 import { spawnSync } from 'child_process';
 import * as path from 'path';
+import * as readline from 'readline';
 import { sleepSync } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
+const CONFIRM_PRODUCTION = process.argv.includes('--confirm-production');
 const SCRIPTS_DIR = __dirname;
+const STAGING_PROJECT = 'dungeon-scribe-ai-stagin-b4fb5';
+
+/**
+ * If the target project is not staging, require explicit --confirm-production
+ * flag and an interactive confirmation prompt before proceeding.
+ */
+async function guardProduction(projectId: string): Promise<void> {
+  if (projectId === STAGING_PROJECT) return;
+  if (DRY_RUN) return; // dry-run is always safe
+
+  if (!CONFIRM_PRODUCTION) {
+    console.error(
+      `\n${'!'.repeat(60)}\n` +
+        `ERROR: Target project "${projectId}" is NOT staging.\n` +
+        `To seed a non-staging project, you must pass --confirm-production.\n` +
+        `\nUsage:\n` +
+        `  npx tsx scripts/db/seedAll.ts --confirm-production\n` +
+        `${'!'.repeat(60)}\n`,
+    );
+    process.exit(1);
+  }
+
+  // Interactive confirmation even with the flag
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  const answer = await new Promise<string>((resolve) => {
+    rl.question(
+      `\n⚠️  You are about to seed PRODUCTION project: ${projectId}\n` +
+        `   This will upsert documents across all ${SCRIPTS.length} collections.\n` +
+        `   Type the project ID to confirm: `,
+      resolve,
+    );
+  });
+  rl.close();
+
+  if (answer.trim() !== projectId) {
+    console.error('\nConfirmation did not match. Aborting.');
+    process.exit(1);
+  }
+}
 
 const SCRIPTS: string[] = [
   // Foundation — no dependencies
@@ -73,59 +114,68 @@ interface ScriptResult {
   exitCode: number;
 }
 
-const results: ScriptResult[] = [];
+async function main(): Promise<void> {
+  const projectId = process.env.FIREBASE_PROJECT_ID ?? STAGING_PROJECT;
 
-console.log(`\n${'='.repeat(60)}`);
-console.log('seedAll — Running all seed scripts');
-console.log(
-  `Target project: ${process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5'}`,
-);
-if (DRY_RUN) console.log('Mode: DRY RUN (no writes)');
-console.log(`Scripts to run: ${SCRIPTS.length}`);
-console.log('='.repeat(60));
+  console.log(`\n${'='.repeat(60)}`);
+  console.log('seedAll — Running all seed scripts');
+  console.log(`Target project: ${projectId}`);
+  if (DRY_RUN) console.log('Mode: DRY RUN (no writes)');
+  console.log(`Scripts to run: ${SCRIPTS.length}`);
+  console.log('='.repeat(60));
 
-for (const script of SCRIPTS) {
-  const scriptPath = path.join(SCRIPTS_DIR, script);
-  const args = ['tsx', scriptPath];
-  if (DRY_RUN) args.push('--dry-run');
+  await guardProduction(projectId);
 
-  console.log(`\n${'─'.repeat(60)}`);
-  console.log(`▶ ${script}`);
-  console.log('─'.repeat(60));
+  const results: ScriptResult[] = [];
 
-  const result = spawnSync('npx', args, {
-    stdio: 'inherit',
-    env: process.env,
-    shell: false,
-  });
+  for (const script of SCRIPTS) {
+    const scriptPath = path.join(SCRIPTS_DIR, script);
+    const args = ['tsx', scriptPath];
+    if (DRY_RUN) args.push('--dry-run');
 
-  const exitCode = result.status ?? 1;
-  const passed = exitCode === 0;
+    console.log(`\n${'─'.repeat(60)}`);
+    console.log(`▶ ${script}`);
+    console.log('─'.repeat(60));
 
-  results.push({ script, status: passed ? 'passed' : 'failed', exitCode });
+    const result = spawnSync('npx', args, {
+      stdio: 'inherit',
+      env: process.env,
+      shell: false,
+    });
 
-  if (!passed) {
-    console.error(`\n✗ ${script} failed (exit code ${exitCode})`);
+    const exitCode = result.status ?? 1;
+    const passed = exitCode === 0;
+
+    results.push({ script, status: passed ? 'passed' : 'failed', exitCode });
+
+    if (!passed) {
+      console.error(`\n✗ ${script} failed (exit code ${exitCode})`);
+    }
+    sleepSync(3000);
   }
-  sleepSync(3000);
+
+  // --- Summary ---
+  console.log(`\n${'='.repeat(60)}`);
+  console.log('SUMMARY');
+  console.log('='.repeat(60));
+
+  const passed = results.filter((r) => r.status === 'passed');
+  const failed = results.filter((r) => r.status === 'failed');
+
+  passed.forEach((r) => console.log(`  ✓ ${r.script}`));
+  failed.forEach((r) => console.log(`  ✗ ${r.script} (exit code ${r.exitCode})`));
+
+  console.log(`\nResult: ${passed.length}/${results.length} passed`);
+
+  if (failed.length > 0) {
+    console.error(`\n${failed.length} script(s) failed. See above for details.`);
+    process.exit(1);
+  } else {
+    console.log('\nAll scripts completed successfully.');
+  }
 }
 
-// --- Summary ---
-console.log(`\n${'='.repeat(60)}`);
-console.log('SUMMARY');
-console.log('='.repeat(60));
-
-const passed = results.filter((r) => r.status === 'passed');
-const failed = results.filter((r) => r.status === 'failed');
-
-passed.forEach((r) => console.log(`  ✓ ${r.script}`));
-failed.forEach((r) => console.log(`  ✗ ${r.script} (exit code ${r.exitCode})`));
-
-console.log(`\nResult: ${passed.length}/${results.length} passed`);
-
-if (failed.length > 0) {
-  console.error(`\n${failed.length} script(s) failed. See above for details.`);
+main().catch((err) => {
+  console.error('seedAll failed:', err);
   process.exit(1);
-} else {
-  console.log('\nAll scripts completed successfully.');
-}
+});
