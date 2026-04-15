@@ -193,6 +193,14 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
     bookName: 'Heroes of Golarion',
     publisher: 'Paizo',
   },
+  'pf1e-ddr': { bookId: 'ddr', bookName: 'Dungeon Denizens Revisited', publisher: 'Paizo' },
+  'pf1e-andoran': { bookId: 'andoran', bookName: 'Andoran, Spirit of Liberty', publisher: 'Paizo' },
+  'pf1e-motff': { bookId: 'motff', bookName: 'Master of the Fallen Fortress', publisher: 'Paizo' },
+  'pf1e-pfs-scenario': {
+    bookId: 'pfs-scenario',
+    bookName: 'Pathfinder Society Scenario',
+    publisher: 'Paizo',
+  },
   'pf1e-heroes-of-golarion': {
     bookId: 'hog',
     bookName: 'Heroes of Golarion',
@@ -413,6 +421,11 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
   'pf1e-ppc-ahh': {
     bookId: 'ppc-ahh',
     bookName: 'Pathfinder Player Companion: Advanced Heritages Handbook',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-antih': {
+    bookId: 'ppc-antih',
+    bookName: "Pathfinder Player Companion: Antihero's Handbook",
     publisher: 'Paizo',
   },
   'pf1e-ppc-aoe': {
@@ -1327,7 +1340,17 @@ const FULL_NAME_MAP: Record<string, string> = {
   'cheliax, empire of devils': 'pf1e-cheliax',
   'sargava, the lost colony': 'pf1e-sargava',
   'osirion, land of pharaohs': 'pf1e-osirion',
+  'osirion, land of the pharaohs': 'pf1e-osirion',
   'osirion, legacy of pharaohs': 'pf1e-osirion',
+  'heroes of golarion': 'pf1e-hog',
+  'dungeon denizens revisited': 'pf1e-ddr',
+  'andoran, spirit of liberty': 'pf1e-andoran',
+  'harrow handbook': 'pf1e-harrow',
+  'the harrow handbook': 'pf1e-harrow',
+  'master of the fallen fortress': 'pf1e-motff',
+  'society scenario': 'pf1e-pfs-scenario',
+  'martial arts handbook': 'pf1e-ppc-mah',
+  "antihero's handbook": 'pf1e-ppc-antih',
   'concordance of rivals': 'pf1e-concordance',
   'book of the damned': 'pf1e-botm',
 
@@ -1574,6 +1597,7 @@ export function normalizeSource(
     'Pathfinder Campaign Setting ',
     'Pathfinder Chronicles: ',
     'Pathfinder Companion: ',
+    'Pathfinder Module: ',
     'Pathfinder ',
     'PFRPG ',
     'PRPG ',
