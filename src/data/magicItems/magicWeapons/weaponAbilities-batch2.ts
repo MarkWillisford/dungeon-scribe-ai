@@ -1,0 +1,193 @@
+import type { ItemSpecialAbility } from '@/types/magicItems';
+import { Alignment } from '@/types/base';
+
+// Ultimate Equipment + other sources weapon special abilities.
+export const weaponAbilitiesBatch2: ItemSpecialAbility[] = [
+  // +1 bonus equivalent — UE and other sources
+  {
+    id: 'agile',
+    name: 'Agile',
+    description: 'When making an attack with this weapon, the wielder can use their Dexterity modifier instead of Strength on attack and damage rolls. Only applicable to light melee weapons.',
+    bonusEquivalent: 1, casterLevel: 5,
+    effects: [],
+  },
+  {
+    id: 'allying',
+    name: 'Allying',
+    description: 'As a free action, the wielder can grant an adjacent ally a bonus on attack rolls equal to the weapon\'s enhancement bonus until the start of the wielder\'s next turn. The wielder does not gain this bonus themselves while it is active.',
+    bonusEquivalent: 1, casterLevel: 5,
+    effects: [],
+  },
+  {
+    id: 'conductive',
+    name: 'Conductive',
+    description: 'Allows the wielder to use a supernatural or spell-like ability that requires a melee touch attack through the weapon. If the ability normally does not require an attack roll, it still benefits from the weapon\'s enhancement bonus to hit.',
+    bonusEquivalent: 1, casterLevel: 8,
+    effects: [],
+  },
+  {
+    id: 'courageous',
+    name: 'Courageous',
+    description: 'Grants the wielder a morale bonus on saving throws against fear equal to half the weapon\'s enhancement bonus (minimum +1).',
+    bonusEquivalent: 1, casterLevel: 8,
+    effects: [],
+  },
+  {
+    id: 'cruel',
+    name: 'Cruel',
+    description: 'When the wielder strikes a shaken, frightened, or panicked creature, the target becomes sickened for 1 round in addition to taking normal damage.',
+    bonusEquivalent: 1, casterLevel: 5,
+    effects: [],
+  },
+  {
+    id: 'distracting',
+    name: 'Distracting',
+    description: 'When the weapon strikes a target, the wielder gains a +2 circumstance bonus on Bluff skill checks against that target until the end of the wielder\'s next turn.',
+    bonusEquivalent: 1, casterLevel: 6,
+    effects: [],
+  },
+  {
+    id: 'dueling',
+    name: 'Dueling',
+    description: 'Grants a +4 enhancement bonus to initiative. If the wielder has the Quick Draw feat, they can draw this weapon as part of making their initiative roll.',
+    bonusEquivalent: 1, casterLevel: 5,
+    effects: [],
+  },
+  {
+    id: 'furious',
+    name: 'Furious',
+    description: 'While the wielder is raging (or in a similar emotional state), the weapon\'s enhancement bonus increases by 2. The weapon is particularly difficult to wield when not in this state, imposing a –1 penalty to attack rolls.',
+    bonusEquivalent: 1, casterLevel: 8,
+    effects: [],
+  },
+  {
+    id: 'grayflame',
+    name: 'Grayflame',
+    description: 'Channels positive or negative energy through the weapon. When activated (swift action), it deals +1d6 damage to undead (if positive) or living creatures (if negative). Damage type mirrors the channeling energy.',
+    bonusEquivalent: 1, casterLevel: 6,
+    effects: [],
+  },
+  {
+    id: 'huntsman',
+    name: 'Huntsman',
+    description: 'Grants the wielder a +2 bonus on attack rolls and damage rolls against the favored enemy of their choice (if they have the favored enemy class feature). If the wielder lacks favored enemy, this ability has no effect.',
+    bonusEquivalent: 1, casterLevel: 7,
+    effects: [],
+  },
+  {
+    id: 'impact',
+    name: 'Impact',
+    description: 'Increases the damage die of the weapon by one step (e.g., 1d8 to 1d10). Only applicable to bludgeoning weapons.',
+    bonusEquivalent: 1, casterLevel: 9,
+    effects: [],
+  },
+  {
+    id: 'leveraging',
+    name: 'Leveraging',
+    description: 'Grants a +2 bonus on combat maneuver checks made with the weapon, including trip and bull rush.',
+    bonusEquivalent: 1, casterLevel: 5,
+    effects: [],
+  },
+  {
+    id: 'ominous',
+    name: 'Ominous',
+    description: 'On a hit, the wielder may attempt a free Intimidate check to demoralize the target. This attempt does not provoke attacks of opportunity.',
+    bonusEquivalent: 1, casterLevel: 6,
+    effects: [],
+  },
+  {
+    id: 'planar',
+    name: 'Planar',
+    description: 'Functions as a bane weapon against creatures with the extraplanar subtype, granting +2 to attack and +2d6 damage against any creature not native to the current plane.',
+    bonusEquivalent: 1, casterLevel: 9,
+    effects: [],
+  },
+  {
+    id: 'reliable',
+    name: 'Reliable',
+    description: 'Reduces the misfire range of a firearm by 1 (minimum 0). A reliable firearm with a misfire range of 1 never misfires on a natural 1.',
+    bonusEquivalent: 1, casterLevel: 8,
+    effects: [],
+  },
+  {
+    id: 'sneaky',
+    name: 'Sneaky',
+    description: 'Grants an extra 1d6 sneak attack damage when the target is denied their Dexterity bonus to AC. Does not stack with the rogue sneak attack class feature, but applies for characters who lack it.',
+    bonusEquivalent: 1, casterLevel: 5,
+    effects: [],
+  },
+  {
+    id: 'stalking',
+    name: 'Stalking',
+    description: 'Against the last creature the wielder damaged with this weapon, it grants a scaling bonus to attack and damage: +1 if damaged in the last minute, +2 in the last 24 hours, +3 if it bears a permanent scar.',
+    bonusEquivalent: 1, casterLevel: 7,
+    effects: [],
+  },
+  {
+    id: 'training',
+    name: 'Training',
+    description: 'Grants the wielder one teamwork feat (chosen at creation) as a bonus feat for as long as the weapon is held. The wielder must meet all prerequisites for that feat.',
+    bonusEquivalent: 1, casterLevel: 9,
+    effects: [],
+  },
+
+  // +2 bonus equivalent — burst variants and others
+  {
+    id: 'corrosive_burst',
+    name: 'Corrosive Burst',
+    description: 'Deals +1d6 acid damage on a successful hit. On a confirmed critical hit, deals an extra 1d10 acid damage (2d10 for ×3 crit, 3d10 for ×4). Subsumes the corrosive property.',
+    bonusEquivalent: 2, casterLevel: 12,
+    effects: [],
+  },
+  {
+    id: 'flaming_burst',
+    name: 'Flaming Burst',
+    description: 'Deals +1d6 fire damage on a successful hit. On a confirmed critical hit, deals an extra 1d10 fire damage (2d10 for ×3 crit, 3d10 for ×4). Subsumes the flaming property.',
+    bonusEquivalent: 2, casterLevel: 12,
+    effects: [],
+  },
+  {
+    id: 'icy_burst',
+    name: 'Icy Burst',
+    description: 'Deals +1d6 cold damage on a successful hit. On a confirmed critical hit, deals an extra 1d10 cold damage (2d10 for ×3 crit, 3d10 for ×4). Subsumes the frost property.',
+    bonusEquivalent: 2, casterLevel: 10,
+    effects: [],
+  },
+  {
+    id: 'shocking_burst',
+    name: 'Shocking Burst',
+    description: 'Deals +1d6 electricity damage on a successful hit. On a confirmed critical hit, deals an extra 1d10 electricity damage (2d10 for ×3 crit, 3d10 for ×4). Subsumes the shock property.',
+    bonusEquivalent: 2, casterLevel: 10,
+    effects: [],
+  },
+  {
+    id: 'dispelling',
+    name: 'Dispelling',
+    description: 'On a confirmed critical hit, acts as a targeted dispel magic (CL equals the weapon\'s caster level) against the target. Only one effect is dispelled per critical.',
+    bonusEquivalent: 2, casterLevel: 12,
+    effects: [],
+  },
+  {
+    id: 'nullifying',
+    name: 'Nullifying',
+    description: 'On a successful hit, the target must succeed at a Will save (DC 10 + weapon enhancement bonus) or lose access to one randomly determined supernatural or spell-like ability for 1d4 rounds.',
+    bonusEquivalent: 2, casterLevel: 11,
+    effects: [],
+  },
+
+  // +3 bonus equivalent
+  {
+    id: 'repositioning',
+    name: 'Repositioning',
+    description: 'On a successful hit, the wielder can attempt a reposition combat maneuver against the struck target as a free action without provoking attacks of opportunity.',
+    bonusEquivalent: 2, casterLevel: 10,
+    effects: [],
+  },
+  {
+    id: 'transformative',
+    name: 'Transformative',
+    description: 'As a standard action, the weapon can be changed to mimic any other melee weapon of the same general type (one-handed, two-handed, or light). It retains all magical abilities when transformed.',
+    bonusEquivalent: 2, casterLevel: 10,
+    effects: [],
+  },
+];

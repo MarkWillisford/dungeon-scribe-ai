@@ -1,0 +1,132 @@
+import type { WondrousItemDefinition } from '@/types/magicItems';
+import { AuraStrength, MagicSchool } from '@/types/equipment';
+
+export const wondrousItemsRZ12: WondrousItemDefinition[] = [
+  {
+    id: 'wondrous-trumpet-of-spirit-speaking',
+    name: 'Trumpet of Spirit Speaking',
+    category: 'wondrous',
+    source: 'Occult Mysteries',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.NECROMANCY }],
+    casterLevel: 6,
+    slot: 'none',
+    price: 6500,
+    weight: 1,
+    description:
+      'Collapsible segmented metal cone. When placed against a corpse\'s lips, pose up to 3 questions to the deceased (as speak ' +
+      'with dead). Responses emerge as quiet ghostly whispers from the horn.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['speak with dead'], cost: 3250 },
+    physicalStats: { hardness: 5, hitPoints: 3, breakDC: 15 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.trumpet_spirit_speaking', value: 0, source: 'Trumpet of Spirit Speaking' }],
+  },
+  {
+    id: 'wondrous-tunic-of-careful-casting',
+    name: 'Tunic of Careful Casting',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
+    casterLevel: 3,
+    slot: 'chest',
+    price: 5000,
+    weight: 1,
+    description:
+      'Woolen tunic with silver and black embroidered chain patterns. Provides +2 bonus on concentration checks.',
+    construction: { feats: ['Craft Wondrous Item', 'Combat Casting'], spells: [], cost: 2500 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'continuous',
+    effects: [{ type: 'bonus', target: 'special.concentration', value: 2, source: 'Tunic of Careful Casting' }],
+  },
+  {
+    id: 'wondrous-snakeskin-tunic',
+    name: 'Snakeskin Tunic',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [
+      { strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION },
+      { strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION },
+    ],
+    casterLevel: 8,
+    slot: 'chest',
+    price: 8000,
+    weight: 2,
+    description:
+      'Form-fitting garment of giant snake scales. +1 armor bonus to AC, +2 enhancement to Dexterity, +2 resistance on saves vs. poison.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ["cat's grace", 'delay poison'], cost: 4000 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'continuous',
+    effects: [
+      { type: 'bonus', bonusType: 'armor', target: 'ac', value: 1, source: 'Snakeskin Tunic' },
+      { type: 'bonus', bonusType: 'enhancement', target: 'ability.dex', value: 2, source: 'Snakeskin Tunic' },
+      { type: 'bonus', bonusType: 'resistance', target: 'save.fortitude', value: 2, source: 'Snakeskin Tunic', condition: { type: 'custom', params: {}, description: 'vs. poison' } },
+    ],
+  },
+  {
+    id: 'wondrous-unguent-of-timelessness',
+    name: 'Unguent of Timelessness',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 3,
+    slot: 'none',
+    price: 150,
+    weight: 0,
+    description:
+      'Ointment slowing time on formerly living matter (wood, paper, corpses). 1 year = 1 day for treated substance, which ' +
+      'gains +1 resistance on all saves. Persists indefinitely but dispellable. One flask treats 8 Medium objects.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['gentle repose'], cost: 75 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.unguent_timelessness', value: 0, source: 'Unguent of Timelessness' }],
+  },
+  {
+    id: 'wondrous-universal-solvent',
+    name: 'Universal Solvent',
+    category: 'wondrous',
+    source: 'Core Rulebook',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
+    casterLevel: 3,
+    slot: 'none',
+    price: 50,
+    weight: 0,
+    description:
+      'Dissolves sovereign glue, tanglefoot bags, and other adhesives when applied as a standard action.',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['acid arrow'], cost: 25 },
+    physicalStats: { hardness: 0, hitPoints: 1, breakDC: 10 },
+    activationCategory: 'use_activated',
+    effects: [{ type: 'special', target: 'special.universal_solvent_dissolve', value: 0, source: 'Universal Solvent' }],
+  },
+  {
+    id: 'wondrous-vambraces-of-defense',
+    name: 'Vambraces of Defense',
+    category: 'wondrous',
+    source: 'Ultimate Equipment',
+    isOfficial: true,
+    aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
+    casterLevel: 5,
+    slot: 'wrists',
+    price: 6000,
+    weight: 3,
+    description:
+      'Steel arm guards providing +1 deflection bonus to AC. Once daily as an immediate action with a free hand, deflect ' +
+      'an incoming ranged weapon attack preventing all damage (as Deflect Arrows).',
+    construction: { feats: ['Craft Wondrous Item'], spells: ['shield'], cost: 3000 },
+    physicalStats: { hardness: 10, hitPoints: 5, breakDC: 20 },
+    activationCategory: 'continuous',
+    effects: [
+      { type: 'bonus', bonusType: 'deflection', target: 'ac', value: 1, source: 'Vambraces of Defense' },
+    ],
+  },
+  // Deferred items (AoN pages did not render):
+  // Trollbone, Trophy Box, Truefaith Vestments, Tuned Bowstring,
+  // Tunic of Deadly Might, Tunic (Shadow Jumper's), Tunic (Shadowbond),
+  // Unctuous Waders, Universal Lock, Urn of Smoldering Shapes,
+  // Vambraces of the Genie, Vambraces of the Tactician, Vambraces (Duelist's),
+  // Vambraces (Inquisitor's Bastion), Vambraces (Merciful),
+  // Veil of Attentiveness, Veil of Fleeting Glances, Veil of Veils, Venombane Lozenges
+];
