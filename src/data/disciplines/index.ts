@@ -6,7 +6,13 @@
 
 import type { DisciplineDefinition } from '@/types/initiating';
 
-export const ALL_DISCIPLINES: DisciplineDefinition[] = [];
+import { POW_DISCIPLINES } from './pow';
+import { POW_EXTENDED_DISCIPLINES } from './pow-extended';
+
+export const ALL_DISCIPLINES: DisciplineDefinition[] = [
+  ...POW_DISCIPLINES,
+  ...POW_EXTENDED_DISCIPLINES,
+];
 
 export function getDisciplineById(id: string): DisciplineDefinition | undefined {
   return ALL_DISCIPLINES.find((d) => d.id === id);
