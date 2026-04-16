@@ -1,8 +1,8 @@
 # Admin Panel
 
-## Status: NOT STARTED (2026-04-15)
+## Status: Phase A — IN PROGRESS (PR #61 open) | Phases B–E — NOT STARTED
 
-Admin role system (PR #60) is complete and merged. This plan covers everything built on top of it.
+Admin role system (PR #60) merged 2026-04-16. Phase A nav shell (PR #61) is in progress.
 
 ---
 

@@ -1,6 +1,6 @@
 # Dungeon Scribe AI 1.1 — Implementation Plan
 
-## Status (as of 2026-04-15)
+## Status (as of 2026-04-16)
 
 All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown significantly beyond the original plan through additional phases.
 
@@ -32,14 +32,14 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 | Class choices (all major classes)                                                                     | `data-scraping/class-choices-database.md` | **COMPLETE** — all PRs merged (#37–#46)                                 |
 | `{chosen_deity}` token resolution in ClassChoiceRow                                                   | `data-scraping/class-choices-database.md` | **COMPLETE** — fixed in ClassChoiceRow                                  |
 | `Effect.type` enum review                                                                             | `src/types/base.ts`                       | **COMPLETE** — PR #29 (merged)                                          |
-| **Data access layer Phase A** — `GameDataService` unified async API                                  | `data-access-layer.md`                    | IN PROGRESS — PR #58 open                                               |
-| **Data access layer Phase B** — `GameDataConnector`, `FirestoreGameDataConnector`, `GameDataCache`   | `data-access-layer.md`                    | IN PROGRESS — PR #59 open                                               |
+| **Data access layer Phase A** — `GameDataService` unified async API                                  | `data-access-layer.md`                    | **COMPLETE** — PR #58 (merged)                                          |
+| **Data access layer Phase B** — `GameDataConnector`, `FirestoreGameDataConnector`, `GameDataCache`   | `data-access-layer.md`                    | **COMPLETE** — PR #59 (merged)                                          |
 | **Data quality fields** — `verificationStatus` + `adminNotes` on all collection types (Doug)         | `data-quality-admin-review.md`            | IN PROGRESS — PR #57 open                                               |
 | **Seeding** — all 38 official collections to Firestore staging                                       | `seeding-playbook.md`                     | **COMPLETE** — 10,962 docs, 36/36 verified (2026-04-14)                 |
 | **Seeding** — 5 campaign prestige classes for Rissi                                                  | `seeding-playbook.md`                     | **COMPLETE** — PR #62; staging patched (2026-04-15)                     |
 | **Seeding** — production                                                                              | `seeding-playbook.md`                     | NOT STARTED                                                             |
-| **Admin role system** — Firebase Custom Claims, `AdminService`, Firestore rules                      | `admin-panel.md`                          | IN PROGRESS — PR #60 open                                               |
-| **Admin panel Phase A** — nav shell, settings entry, role gate                                       | `admin-panel.md`                          | IN PROGRESS — PR #61 open (depends on #60)                              |
+| **Admin role system** — Firebase Custom Claims, `AdminService`, Firestore rules                      | `admin-panel.md`                          | **COMPLETE** — PR #60 (merged)                                          |
+| **Admin panel Phase A** — nav shell, settings entry, role gate                                       | `admin-panel.md`                          | IN PROGRESS — PR #61 open                                               |
 | **Admin panel Phases B–E** — data quality, inline review, dashboard, custom content creation        | `admin-panel.md`                          | NOT STARTED                                                             |
 | Data quality + admin review system (superseded by admin-panel.md)                                    | `data-quality-admin-review.md`            | Superseded — see `admin-panel.md` Phases B–D                            |
 | Enter Rissi — validate model end-to-end                                                              | —                                         | NOT STARTED                                                             |
