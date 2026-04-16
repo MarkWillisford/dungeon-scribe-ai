@@ -34,6 +34,7 @@ export const besmara: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -69,6 +70,7 @@ export const groetus: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -106,6 +108,7 @@ export const hanspur: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -143,6 +146,7 @@ export const nocticulaRedeemed: DeityEntry = {
   },
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -159,6 +163,7 @@ export const speakersOfTheDepths: DeityEntry = {
   symbol: `An eyeless serpent twisted into an infinity symbol to feed upon its own tail`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -196,6 +201,7 @@ export const achaekek: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -213,6 +219,7 @@ export const dhalavei: DeityEntry = {
   symbol: `Six feminine arms forming a hexagon shape`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -232,6 +239,7 @@ export const lissala: DeityEntry = {
   sacredColors: ['gold', 'green'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -250,6 +258,7 @@ export const ahPook: DeityEntry = {
   sacredAnimal: `maggot`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -287,6 +296,7 @@ export const ahriman: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

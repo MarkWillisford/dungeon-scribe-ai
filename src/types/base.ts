@@ -1,5 +1,13 @@
 // Base types and enums used throughout the application
 
+// Data quality tracking — added to all seeded game data collections
+export type VerificationStatus = 'verified' | 'needs_review' | 'stub';
+
+export interface DataQualityFields {
+  verificationStatus: VerificationStatus;
+  adminNotes?: string;
+}
+
 export enum Size {
   Fine = 'Fine',
   Diminutive = 'Diminutive',

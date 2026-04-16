@@ -1,4 +1,4 @@
-import { BonusType } from './base';
+import { BonusType, DataQualityFields } from './base';
 
 // ---- Trait Categories ----
 
@@ -50,7 +50,7 @@ export interface TraitChoice {
 
 // ---- Trait Definition (data template — stored in registry) ----
 
-export interface TraitDefinition {
+export interface TraitDefinition extends DataQualityFields {
   id: string;
   name: string;
   description: string;

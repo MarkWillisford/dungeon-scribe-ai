@@ -1,8 +1,8 @@
 // Gap spells — letter E part 1 (first half alphabetically)
 // Gap metadata: {"letters":"E_1","totalChecked":95,"newSpells":36,"skipped":59}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_E_1: Spell[] = [
+export const GAP_SPELLS_E_1: SpellDefinition[] = [
   {
     name: 'Eagle Aerie',
     classLevels: { druid: 6, summoner: 6, unchainedSummoner: 6 },
@@ -19,6 +19,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'You summon a flight of giant eagles to transport you and your allies through the air. The eagles prioritize avoiding combat but will defend themselves if attacked. If combat occurs, the spell\'s duration changes from hours to rounds (maintaining the same numerical value).',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Eagle Eye',
@@ -34,6 +35,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'You create a magical sensor positioned above you, up to the spell\'s maximum range. You perceive through normal vision from this elevated vantage point with 360-degree rotation capability. The spell does not penetrate solid surfaces but functions normally through foliage.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Eagle's Splendor",
@@ -48,6 +50,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The targeted creature gains a +4 enhancement bonus to Charisma, improving Charisma-based skill checks and saving throw DCs for Charisma-based spells. Spellcasters relying on Charisma do not gain bonus spells from the increase but do benefit from higher spell save DCs.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Eagle's Splendor, Mass",
@@ -62,6 +65,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell functions like eagle\'s splendor, except that it affects multiple creatures. Each affected creature gains a +4 enhancement bonus to Charisma.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Eaglesoul',
@@ -78,6 +82,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell invokes a good-aligned outsider\'s power, granting you a +2 morale bonus on Perception checks against evil, a +2 bonus on initiative, and the constant ability to detect evil. Once during the spell\'s duration, you may activate a surge of holy power (swift action) converting remaining hours to rounds and granting: +2 sacred bonus to AC, +4 sacred bonus to Strength, acid and fire resistance 5, +5 sacred bonus on Intimidate against evil, fast healing 2, and automatic confirmation of critical threats against evil opponents. The surge activates automatically when you attack evil outsiders. Nongood casters are sickened (neutral) or staggered (evil) for the spell\'s duration.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Early Judgment',
@@ -92,6 +97,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'You show the target a brief glimpse of the reward or punishment that awaits it when it dies, presenting a mental image of its destined plane in the afterlife. Good-aligned targets become fascinated, neutral-aligned targets become confused, and evil-aligned targets become shaken.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ears of the City',
@@ -106,6 +112,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The target receives a stream of past scenes and pieces of conversations related to local people and events. Each round, the target can make a Diplomacy or Perception check to gather information as if spending 1d4 hours interviewing locals, though concentration on this effect renders the target blind and deaf.',
     source: 'Pathfinder Player Companion: Heroes of the Street',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Earsend',
@@ -120,6 +127,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'The target\'s ear detaches and becomes a Fine construct with a fly speed equal to the target\'s base speed and a bonus on Fly checks equal to half the caster\'s level. The target maintains hearing through the animated ear as if it were still attached, and may direct its movement.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Earthquake',
@@ -136,6 +144,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'When you cast earthquake, an intense but highly localized tremor rips the ground. Effects depend on terrain: caves cause roof collapse (8d6 damage, Reflex DC 20 half); cliffs create landslides; open ground causes falls and fissures 40 feet deep (Reflex DC 20 avoids); structures take 100 points of damage; bodies of water drain temporarily. Creatures pinned beneath rubble take 1d6 nonlethal damage per minute. Spellcasters on the ground must succeed at Concentration checks (DC 20 + spell level) to cast spells.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Echo',
@@ -152,6 +161,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'You reproduce a sound from up to 1 round prior at its original volume from a designated area. Special sound effects do not replicate. You can concentrate as a standard action to alter the echo, change its source within the area, or use a Bluff check to create a distraction for hiding (bonus equals your caster level).',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ectoplasmic Eruption',
@@ -167,6 +177,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'You cause an eruption of ectoplasm that deals 6d6 bludgeoning damage to all creatures in the area and entangles them for a number of rounds equal to your caster level. The spell affects ethereal and incorporeal creatures normally and can force incorporeal creatures partially onto the Material Plane with a failed Will save.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ectoplasmic Hand',
@@ -182,6 +193,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'You manifest a ghostly, animated hand through the ectoplasmic veil to manipulate objects, attack creatures, and deliver touch spells at a distance. The hand has hardness 10, hit points equal to 10 + your caster level, AC 24, and attacks using your base attack bonus with damage modified by your spellcasting ability modifier. It can deliver touch spells of 6th level or lower, manipulate unattended objects (up to 5 lbs. per caster level), and perform combat maneuvers such as bull rush, disarm, drag, steal, or trip.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ectoplasmic Snare',
@@ -196,6 +208,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'You generate a ghostly tendril to grapple or entangle a target via ranged touch attack. A successful Reflex save leaves the target merely entangled. Failure results in grappling and 1d6+4 bludgeoning damage. You maintain the grapple through concentration, with the snare\'s CMB equal to 6 + your caster level and CMD equal to 16 + your caster level. The ectoplasmic tether has hardness 10 and hit points equal to your caster level + Constitution modifier + 10.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ego Whip I',
@@ -212,6 +225,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Choose Intelligence, Wisdom, or Charisma. The target takes a -2 penalty to that ability score and is staggered for the first round it is affected. A successful saving throw negates the staggered condition and reduces the penalty duration to 1 round.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ego Whip II',
@@ -228,6 +242,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell functions as ego whip I, but the target takes a -4 penalty to the chosen ability score. On a failed save, the target is also staggered for 1d4 rounds. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ego Whip III',
@@ -244,6 +259,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell functions as ego whip I, but the target takes a -6 penalty to the chosen ability score. On a failed save, the target is also staggered for 1d6 rounds. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ego Whip IV',
@@ -260,6 +276,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell functions as ego whip I, but the target takes a -8 penalty to the chosen ability score. On a failed save, the target is also staggered for 1d8 rounds. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ego Whip V',
@@ -276,6 +293,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell functions as ego whip I, but the target takes a -10 penalty to the chosen ability score. On a failed save, the target is also staggered for 1d10 rounds. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Eldritch Fever',
@@ -291,6 +309,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The target gains the eldritch ague spellblight. This spellblight impairs the target\'s ability to cast spells, causing intermittent difficulties with spellcasting.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Elemental Speech',
@@ -306,6 +325,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell allows you to communicate with creatures associated with a chosen element. You select one elemental type at casting: Air allows you to converse in Auran with creatures possessing the air subtype or fly speed; Earth allows Terran with creatures possessing the earth subtype or burrow speed; Fire allows Ignan with fire subtype creatures; Water allows Aquan with water subtype or swim speed creatures. The spell enables communication with creatures of Intelligence 1 or higher but does not guarantee favorable reactions.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Embrace Destiny',
@@ -320,6 +340,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'Upon casting, you roll a d20 and record the result. At any point during the spell\'s duration, you may use that recorded roll in place of a single ability check, attack roll, initiative check, saving throw, or skill check. The result must be used instead of rolling; you cannot choose to use it after seeing the result. Only one instance of this spell may be active on a character simultaneously.',
     source: 'Pathfinder Campaign Setting: Lost Kingdoms',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Emergency Force Sphere',
@@ -336,6 +357,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'This protective spell creates a hemispherical force dome with hardness 20 and hit points equal to 10 per caster level. The dome functions similarly to wall of force but offers overhead coverage. When standing on flat ground, the dome\'s base forms an approximately watertight seal. Debris from collapsing structures tends to slide down the curved surface. A successful DC 20 Craft (stonemasonry), Knowledge (engineering), or Profession (architect/engineer) check allows debris to remain in a dome configuration after the spell ends.',
     source: 'Pathfinder Chronicles: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Emotive Block',
@@ -352,6 +374,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'You create an emotional block in the target\'s mind, adding an emotion component to each spell or spell-like ability it uses. This component requirement applies in addition to existing components. The target cannot cast spells or use spell-like abilities while affected by non-harmless emotion or fear effects.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Empathy Conduit',
@@ -366,6 +389,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell establishes a conduit allowing you to redirect spells between a bonded creature and its master. Depending on which creatures successfully resist the spell, you gain flexibility in targeting. Only creature-targeting spells work through this effect, and affected creatures can attempt additional saves when targeted indirectly.',
     source: 'Pathfinder Player Companion: Familiar Folio',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enchantment Foil',
@@ -380,6 +404,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'You gain a +4 bonus on saving throws against enchantment spells. Upon successfully saving against an enchantment, you identify it as if passing a Spellcraft check. You may choose to act as though the save failed, gaining a +20 bonus on Bluff checks to convince others you are enchanted. Magic used to detect this deception requires a caster level check (DC 15 + your caster level).',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enchantment Sight',
@@ -395,6 +420,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'Your irises become purplish. Within 60 feet, enchanted creatures appear to glow with white light around their heads. The glow\'s intensity indicates spell level (faint/moderate/strong/overwhelming). Charm subschool effects glow scarlet; compulsion effects glow emerald. As a move action, you may attempt a Spellcraft check (DC 15 + spell level) to identify specific enchantment effects on visible targets. Enchantment sight can be made permanent with a permanency spell cast by a caster of 9th level or higher, at a cost of 2,500 gp.',
     source: 'Pathfinder Player Companion: Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enemy Insight',
@@ -409,6 +435,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'You create a mental connection with willing participants (requiring Intelligence 3+). One favored enemy type is selected, and connected allies receive half your favored enemy bonus against that creature type. The connection terminates if any target exceeds the spell\'s range.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Enemy's Heart",
@@ -424,6 +451,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'You perform a coup de grace with a slashing weapon against a helpless, adjacent living target. Upon the target\'s death, you consume its heart, gaining 1d8 temporary hit points +1 per Hit Die of the target and a profane bonus to Strength, similar to death knell. If the target survives the initial attack, the spell persists and can be attempted again while you concentrate.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enhance Water',
@@ -438,6 +466,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This transmutation converts ordinary water into drinkable alcohol — typically ale, beer, mead, or wine of moderate quality. The spell simultaneously purifies the water by removing poisons, diseases, minerals, and toxins. Contaminant presence affects the beverage\'s color and body but not its alcohol content. The spell cannot affect unholy water, potions, or other magically-infused liquids.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enhanced Diplomacy',
@@ -452,6 +481,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The touched creature gains a +2 competence bonus on a single Diplomacy or Intimidate check. The recipient must decide to apply the bonus before rolling. Note: this is a 3.5E spell included for compatibility.',
     source: 'Pathfinder Companion: Taldor, Echoes of Glory',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enshroud Thoughts',
@@ -467,6 +497,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'This protective spell shields your mind from external mental intrusion, specifically blocking divination and enchantment spells targeting thoughts or memories. When another creature attempts a mind-affecting spell against you, that caster must succeed at a caster level check (DC 11 + your caster level) or the spell fails. Non-thought-based detection effects remain unaffected.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Entice Fey, Lesser',
@@ -483,6 +514,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'This conjuration functions similarly to lesser planar ally but calls a fey with appealing offerings. You must succeed at a Knowledge (nature) or Perform check (DC = 20 + target\'s HD) to entice the fey. The fey may refuse if unimpressed by the offer; if it refuses, no spell components are expended.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Entice Fey',
@@ -499,6 +531,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions as entice fey, lesser, but calls one fey of 12 Hit Dice or fewer, or up to two fey whose total Hit Dice do not exceed 12. Called fey appear within 30 feet of each other.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Entice Fey, Greater',
@@ -515,6 +548,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions as entice fey, lesser, but calls one fey of 18 Hit Dice or fewer, or up to three fey whose total Hit Dice do not exceed 18. No two called fey may appear more than 30 feet apart.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enticing Adulation',
@@ -530,6 +564,7 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The target creature is filled with a deep desire to protect and care for you, fawning over your needs. If you are harmed, you gain combat bonuses and the target attacks your aggressor. Should you fall below 0 hit points, the target must make a second Will save or continue defending your body for the spell\'s duration.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Entrap Spirit',
@@ -544,5 +579,6 @@ export const GAP_SPELLS_E_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'You trap a target incorporeal creature or haunt inside a silver mirror focus. While trapped, the target cannot be affected by any means. If the mirror breaks, the creature escapes and returns to its original location. If the mirror belonged to the target, it suffers a -2 penalty on its saving throw.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 ];

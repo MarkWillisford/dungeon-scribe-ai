@@ -16,6 +16,7 @@ export const kelinahat: DeityEntry = {
   sacredColors: ['black', 'light blue'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -35,6 +36,7 @@ export const kroina: DeityEntry = {
   sacredColors: ['green', 'violet'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -54,6 +56,7 @@ export const lymnieris: DeityEntry = {
   sacredColors: ['red', 'white'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -73,6 +76,7 @@ export const neshen: DeityEntry = {
   sacredColors: ['iron gray', 'red'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -92,6 +96,7 @@ export const olheon: DeityEntry = {
   sacredColors: ['blue', 'gold'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -111,6 +116,7 @@ export const ragathiel: DeityEntry = {
   sacredColors: ['crimson', 'gold'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -130,6 +136,7 @@ export const smiad: DeityEntry = {
   sacredColors: ['gold', 'red'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -149,6 +156,7 @@ export const svarozic: DeityEntry = {
   sacredColors: ['black', 'white'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -168,6 +176,7 @@ export const tanagaar: DeityEntry = {
   sacredColors: ['black', 'gold'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -187,6 +196,7 @@ export const vildeis: DeityEntry = {
   sacredColors: ['red', 'white'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

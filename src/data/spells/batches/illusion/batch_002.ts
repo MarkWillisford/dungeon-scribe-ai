@@ -1,8 +1,8 @@
 // Illusion spells — batch 002
 // Batch metadata: {"school":"illusion","batchNum":"002","startSpell":"after: Subjective Reality","lastSpell":"Zone of Silence","nextSpell":"DONE","nextUrl":null,"spellsInBatch":17}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ILLUSION_BATCH_002: Spell[] = [
+export const ILLUSION_BATCH_002: SpellDefinition[] = [
   {
     name: 'Symbol of Mirroring',
     classLevels: { arcanist: 2, mesmerist: 2, occultist: 2, sorcerer: 2, witch: 2, wizard: 2 },
@@ -27,6 +27,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       "This spell functions as symbol of death, but instead of dealing damage it creates illusory duplicates of each creature within 60 feet of the symbol when triggered. These duplicates function as mirror image, moving with the original creatures and mimicking their movements, sounds, and actions exactly. When each duplicate is destroyed, a replacement appears on the creature's next turn. The images persist while creatures remain within 60 feet of the symbol, and for 1 round per caster level after they leave. Once triggered, the symbol remains active for 10 minutes per caster level. The spell can be made permanent with permanency (10th-level caster minimum, 5,000 gp).",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thought Echo',
@@ -49,6 +50,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       "This spell implants a mental echo of up to 25 words that masks the target's surface thoughts. When a creature attempts to read the target's surface thoughts, it perceives only this echo unless it succeeds at a caster level check (DC 11 + caster level). If you cast this spell on yourself, the DC increases to 15 + caster level. When self-cast, you can change the echoed thoughts as a standard action while concentrating, but each change reduces the remaining duration by 1 minute. The spell does not block telepathy or deeper mind-reading effects.",
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Triggered Hallucination',
@@ -82,6 +84,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       "This spell functions similarly to audiovisual hallucination but remains dormant until a specific condition you set occurs. You must overcome the target's spell resistance when casting, but the target does not attempt a Will save to disbelieve until the trigger activates. When casting, you establish the triggering condition—it can be as general or specific as desired, but must be based on an audible, tactile, olfactory, or visual stimulus, and cannot rely on non-perceptible qualities such as alignment. When triggered, the hallucination can include auditory, olfactory, visual, tactile, and thermal elements, including intelligible speech.",
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Twilight Haze',
@@ -106,6 +109,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       'You create a gray haze that obscures sight (as fog cloud) and causes the illumination level within it to drop one step (as darkness). Because the haze is an illusion rather than physical fog, it is unaffected by wind and can be cast underwater.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Twine Double',
@@ -129,6 +133,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       'This spell functions similarly to simulacrum but creates a duplicate of only the caster from cloth and twine rather than ice and snow. The duplicate appears identical to you except for balls of twine for eyes (DC 10 Perception to notice). It wears copies of your clothing and gear; magical item copies are nonfunctional but radiate the appropriate magical auras. Scrying attempts targeting you have a 50% chance of targeting the double instead. The double cannot attack, has no special abilities, and gains a +0 bonus on all saves and checks. You may control it with verbal commands (free action) or telepathically (standard action), and can perceive through its senses. The double has hit points equal to half your own and reverts to cloth and twine when destroyed. It qualifies as an animated object.',
     source: 'Cheliax: Empire of Devils',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Umbral Weapon',
@@ -152,6 +157,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       'A shadowy afterimage trails the targeted melee weapon, enabling it to potentially deal damage even on missed attacks. Once per round, when the wielder misses a creature, the wielder may immediately reroll the attack against that creature. If the reroll succeeds, the spell deals 1d8 points of cold damage plus 1 additional point per 2 caster levels (maximum +10) to the creature. If the target has spell resistance, a caster level check must be made against that resistance the first time the spell successfully deals damage. If the target successfully resists, the spell is dispelled.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undetectable Trap',
@@ -175,6 +181,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       'This illusion obscures a trap, preventing detection magic from identifying it or its magical aura. Creatures benefiting from the find traps spell do not gain automatic detection within 10 feet of this trap, nor do they receive the associated Perception bonus against it. The caster adds half his caster level to the Perception DC for any creature without the trapfinding class ability to detect the trap. A ranger with the ranger traps class feature may cast this spell simultaneously when setting a ranger trap without increasing the casting time. This benefit does not apply to ordinary traps created through the Craft (traps) skill.',
     source: 'Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vacuous Vessel',
@@ -197,6 +204,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       'This illusion makes a single bag, chest, sack, or other container appear and feel completely empty. The spell fails if the container exceeds 1 cubic foot per caster level in volume. Any creature looking into or reaching into the container must succeed at a Will save or perceive it as empty. Items inside the container remain physically present but are imperceptible to affected creatures—they become noticeable only when removed from the container or encountered by a creature unaffected by the spell. Casting this spell on a different container or adding new items to the current container immediately ends the spell.',
     source: 'Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vanish',
@@ -219,6 +227,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       'This spell functions as the invisibility spell, but with a shorter duration of 1 round per caster level, to a maximum of 5 rounds. As with invisibility, the magical effect immediately ends if the subject attacks any other creature.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Veil',
@@ -249,6 +258,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       "You instantly change the appearance of the subjects and then maintain that appearance for the spell's duration. You can make the subjects appear to be anything you wish. The subjects look, feel, and smell just like the creatures or objects you make them appear to be. You must succeed on a Disguise check (+10 bonus) to duplicate a specific individual's appearance. When the spell is cast, you can grant one or more of the subjects the ability to pass their own Will saves so that they may see through the illusion. Unwilling creatures receive Will saves to see through the veil (spell resistance applies to these saves). Creatures that interact with the subjects can attempt Will saves to disbelieve, but spell resistance does not apply to these disbelief saves. Subjects revert to their true appearances if slain.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ventriloquism',
@@ -272,6 +282,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       'You can make your voice—or any sound that you can normally make vocally—seem to issue from someplace else. You can speak in any language you know. With respect to such voices and sounds, anyone who hears the sound and makes a successful saving throw recognizes it as illusory (but still hears it).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Village Veil',
@@ -296,6 +307,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       'This illusion covers an area to make viewers believe it has suffered some sort of catastrophic damage—a fire, a tornado, a bandit raid, a plague, and so on. You set the general parameters for the disaster type, and the illusion fills in the realistic details automatically. At the time of casting, you can designate any number of creatures with a particular set of physical features (such as all creatures of a particular race, gender, or age category) to be immune to the illusion and see the area as it actually is. Non-immune creatures that fail their saves perceive the area as valueless and generally leave it without further investigation. Creatures with a reason for suspicion get a new saving throw with a +2 bonus when they directly interact with the illusion. Multiple castings of this spell can expand the affected area, provided the caster uses the same disaster type and immunity parameters each time. Divergent parameters cause the entire illusion to vanish.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vision of Doom',
@@ -319,6 +331,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       'This spell functions exactly as the nightmare spell. Additionally, you may attach a secondary spell to be delivered when the target awakens. The secondary spell must be prepared and cast immediately after this spell, adding its casting time to the total. The secondary spell must be 6th level or lower, must affect only one creature (the target of the nightmare), and cannot deal hit point damage. Range is irrelevant for delivery, though touch attacks still require a successful touch attack roll within the nightmare context. The target may save against the secondary spell if applicable. For example, a cleric could attach bestow curse but not blade barrier (area effect), destruction (too high level), or inflict moderate wounds (deals damage).',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vision of Hell',
@@ -355,6 +368,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       'You overlay a realistic illusion of a terrifying hellscape upon the area. Structures, equipment, and creatures within the area retain their normal appearance but gain an infernal aspect. You are unaffected by the imagery. Other creatures in the area that fail their Will saves become shaken and take a –2 penalty on saving throws against fear effects while they remain in the area. Devils and lawful evil creatures are completely unaffected by this spell.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wandering Star Motes',
@@ -379,6 +393,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       'You create sparkling motes of bright light that shoot toward one target and swirl around it in a complex pattern. The motes radiate light as if they were a sunrod, negating any concealment the target would otherwise have. The target must make a Will save or be dazed for 1 round and must make a new save each subsequent round or remain dazed. When a target succeeds on its saving throw, the motes jump to the nearest enemy within 30 feet that has not yet succeeded on a save against this casting. A creature that successfully saves cannot be affected again by this casting. The spell ends when no valid new targets exist within range.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Weird',
@@ -402,6 +417,7 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       'This spell functions like phantasmal killer, except it can affect more than one creature. Only the affected creatures see the phantasmal attackers assailing them, though you see the attackers as shadowy shapes. Creatures that succeed on their Fortitude saves still take 3d6 points of damage and are stunned for 1 round. They also take 1d4 points of Strength damage.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Zone of Silence',
@@ -425,5 +441,6 @@ export const ILLUSION_BATCH_002: Spell[] = [
     description:
       "By casting zone of silence, you manipulate sound waves in your immediate vicinity so that you and those within the spell's area can converse normally, yet no one outside can hear your voices or any other noises from within, including language-dependent or sonic spell effects. The effect moves with you and affects anyone who enters the area. Those who leave the area are no longer affected. A successful DC 20 Linguistics check to read lips can still reveal what's said inside a zone of silence.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 ];

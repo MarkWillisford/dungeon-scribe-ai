@@ -1,8 +1,8 @@
 // Gap spells — letter S part 2b (Sn-Sq, second half)
 // Gap metadata: {"letters":"S2_2","totalChecked":79,"newSpells":42,"skipped":37}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_S2_2: Spell[] = [
+export const GAP_SPELLS_S2_2: SpellDefinition[] = [
   {
     name: 'Snapdragon Fireworks',
     school: 'Transmutation',
@@ -18,6 +18,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Produces decorative fireworks shaped like dragons; each round the caster designates a 5-foot square within range and launches a pyrotechnic that deals 1d4 fire damage and inflicts the dazzled condition on creatures in the target square (Reflex save for half damage and negation of dazzled).',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Snare',
@@ -32,6 +33,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Transforms a flexible cord into a magical trap that blends seamlessly into surroundings, either lifting a creature upward (dealing 1d6 damage) or entangling it when triggered. Escape requires a DC 23 Escape Artist or Strength check as a full-round action; the snare has AC 7 and 5 hit points.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Snowball',
@@ -49,6 +51,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Conjures a projectile of packed ice that deals 1d6 cold damage per caster level (maximum 5d6) on impact. The target must succeed at a Fortitude save or become staggered for one round.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Solid Note',
@@ -65,6 +68,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Materializes a single musical note with physical form sized roughly like an outstretched hand, which can be positioned within range as a hook, door blocker, or pulley. The note has an effective Strength of 10 + caster level and disappears if attacked successfully or overcome by combat maneuvers.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Song of Discord',
@@ -82,6 +86,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Compels affected creatures to turn against each other; each round targets have a 50% chance to attack their nearest neighbor while those unaffected act normally. Creatures employ their most powerful abilities in combat but avoid harming unconscious targets.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Song of Healing',
@@ -97,6 +102,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: "Requires an active bardic performance; while the performance continues, affected creatures gain fast healing 2. Upon performance cessation, targets receive healing (1d8 plus caster level, max +15) and are cured of exhaustion, fatigue, nausea, paralysis, sickness, and being stunned.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Songbird',
@@ -112,6 +118,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Summons uplifting music from the outer planes to bolster musical activities, providing three benefits: a +3 bonus to Perform checks, no action cost for bardic performance activation, or +1 to sonic descriptor spell save DCs — depending on which is used in the same round.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sonic Scream',
@@ -128,6 +135,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: "Allows the caster to emit up to three sonic cones over the spell's duration, dealing decreasing damage (4d4, 2d4, then 1d4 respectively). The caster cannot use their voice for magical purposes and must speak at a shout until all cones are expended.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sonic Thrust',
@@ -143,6 +151,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Produces a sweeping rush of sound that can hurl creatures or objects away; attack rolls determine if items hit specific targets, with hurled weapons dealing standard damage and other objects dealing 1d6 per 25 pounds. Creatures receive Will saves and spell resistance to negate the effect.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Soothe Construct',
@@ -157,6 +166,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: "Soothes the elemental spirit of a targeted construct, reducing its chance of going berserk by 1d4% per four caster levels (maximum 5d4%). If the construct is already berserk and the caster is its master, grants an immediate roll to end the berserk state and reset the berserk chance to zero.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Soothing Mud',
@@ -174,6 +184,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Creates an area of therapeutic mud that functions as difficult terrain and restores 1 hit point per round to creatures beginning their turn in it. Creatures fully submerged for one minute gain healing of ability score damage once daily per creature.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Soothing Word',
@@ -189,6 +200,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Reduces the severity of harmful conditions by one step: nauseated becomes sickened, stunned becomes dazed, exhausted becomes fatigued, frightened becomes shaken, and paralyzed becomes staggered. The spell only affects these specific conditions and maintains their original duration.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sotto Voce',
@@ -204,6 +216,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'A dry, rasping whisper afflicts living creatures with 4 or fewer Hit Dice, forcing a Will save or inflicting the shaken condition for one round.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spawn Ward',
@@ -218,6 +231,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Shields a recipient against undead abilities by providing resistance to energy drain and blood drain attacks from undead creatures. Prevents the target from becoming an undead spawn if killed while the effect is active.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Speak with Haunt',
@@ -233,6 +247,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Stirs a haunt to a limited sense of awareness, allowing it to answer questions at one per two caster levels, limited to what the original creature knew in life. Haunts with significantly different alignments may resist or attempt deception. Cannot be recast on the same haunt within one week.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Speak with Soul',
@@ -247,6 +262,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Enables full conversation with a deceased creature\'s soul at the location of death or wherever the soul resides. Unlike similar divination magic, the soul is neither compelled to speak nor bound to truthfulness. The soul generally recalls only what it knew in life.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spear of Purity',
@@ -263,6 +279,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Hurls a beam of holy light as a ranged touch attack; evil creatures take escalating damage with evil outsiders suffering increased harm and blindness (Will save halves and prevents blindness). Neutral creatures take half damage with no blinding, while good creatures are unaffected.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spectral Saluqi',
@@ -278,6 +295,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: "Conjures an undead canine with the caster's alignment that can communicate telepathically, perceive ethereal beings, and attack them. Functions as a yeth hound but hovers slightly above ground and the caster is immune to its frightening bark ability. The hound's bite counts as aligned to any alignment the caster possesses.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spectral Scout',
@@ -294,6 +312,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a spectral creature shaped like a Tiny or smaller animal that is incorporeal, unable to attack, and has only 1 hit point. It can communicate with the caster and relay information it has directly witnessed with perfect clarity including sights, sounds, and smells, but lacks interpretation abilities.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Speechreader's Sight",
@@ -308,6 +327,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Grants the ability to read lips with perfect accuracy from creatures within 100 feet speaking languages the caster understands, providing exact wording of conversation. Maintaining this ability requires moderate concentration and imposes a -4 penalty on other Perception checks while actively in use.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Scourge',
@@ -322,6 +342,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Manifests a whip of bluish-purple magical energy to strip protective enchantments from a target; if the target has harmless spells or effects, it must make a Will save or lose all such protections instantly. If the target lacks beneficial magical effects, it becomes confused for 1d4 rounds instead.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellbane',
@@ -337,6 +358,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a zone where the caster selects specific spells to suppress (one per five caster levels), functioning like antimagic field but only preventing the selected spells. The effect can negate antimagic field itself; artifacts and deity-cast effects remain unaffected.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellblight Jinx',
@@ -352,6 +374,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: "Inflicts burning sensations on spellcasters when they cast spells or use spell-like abilities, manifesting as visible violet flame. Each time an afflicted caster casts a spell or uses a spell-like ability, they must succeed at a concentration check (DC 15 + double spell level) or lose the slot and become staggered for one round.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellcasting Contract, Lesser',
@@ -366,6 +389,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Allows the caster to imbue a target with any prepared spells (not limited to specific schools), functioning like imbue with spell ability but requiring a written contract outlining spell details and expiration terms. The caster gains a profane bonus to AC, saves, and checks equal to the highest spell level imbued.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellcrash, Lesser',
@@ -380,6 +404,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Generates disruptive magical energy that forces the target to lose prepared spells or spell slots each round, starting with 3rd-level and descending. Spontaneous casters lose 3rd-level slots with the same progression. The target may attempt a Will save each round to end the effect.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellcurse',
@@ -395,6 +420,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: "Disrupts spell energy affecting the target, causing it to crackle with destructive force dealing 1d6 damage for each spell with a duration of 1 round or greater currently affecting it. The spells affecting the target remain in effect and are not dispelled.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellscar',
@@ -410,6 +436,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a localized area where any spell, spell-like ability, or magic item activation automatically triggers a primal magic event unless the caster succeeds on a concentration check (DC 15 + twice the spell level). The caster gains a +4 insight bonus to concentration checks within their own spellscar.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellsteal',
@@ -424,6 +451,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: "Creates a disruptive magical blast forcing the target to lose a prepared spell or spell slot (starting with 3rd-level and descending). The caster can then cast the stolen spell on their next turn if it appears on their spell list. The spell has no effect on spell-like abilities.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spindrift Spritz',
@@ -440,6 +468,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'When a creature attempts to resist fatigue, fear, sickness, or staggered effects, the caster grants that target an additional saving throw, allowing them to use the better of two rolls.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spiral Ascent',
@@ -455,6 +484,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Transforms the caster into a helical beam of divine energy for instantaneous upward teleportation within range. The destination must be a familiar location or within line of sight, positioned within 10 feet directly above the caster. Fails if the arrival location is occupied or unavailable.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spiral Descent',
@@ -470,6 +500,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Mirrors spiral ascent but transports the caster and held objects downward from their current position. Functions identically to its counterpart except the destination lies below rather than above the starting location.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spirit Call',
@@ -485,6 +516,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: "Summons nature spirits tied to the caster's domain or spirit heritage, creating a consecrated zone. Within the affected area, spells from the caster's spirit or domain magic list gain a +1 caster level boost, and spellcasters casting such magic receive a +4 insight bonus to concentration checks for those spells.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spirit Share',
@@ -499,6 +531,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Enables the caster to deliver a single dose of potable liquid from their possession into a willing touched recipient as a standard action. Functions with beneficial liquids including alcoholic beverages, potions, and elixirs, but excludes harmful substances like poisons.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spirit-Bound Blade',
@@ -513,6 +546,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: "Wraps a weapon in hardened ectoplasm granting it the ghost touch property. The caster infuses emotional energy to grant one additional special ability from a list (vicious, returning, cruel, menacing, cunning, mimetic, heartseeker, or keen) based on the emotion chosen. Spiritualists gain a bonus when their phantom's emotional focus matches the chosen emotion.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spiritual Ally',
@@ -529,6 +563,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: "A force construct manifesting as a divine servant attacks designated foes using the caster's base attack bonus plus Wisdom modifier, dealing 1d10 force damage plus a bonus based on caster level. The ally moves at 30 feet (perfect flight), threatens adjacent squares, can flank enemies, and cannot be damaged by physical attacks.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spiritual Squire',
@@ -545,6 +580,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: "Creates a force construct that serves as an assistant rather than a combatant, able to retrieve items, carry objects, aid allies, and help don armor. The spiritual squire's aid another uses the caster's base attack bonus plus Wisdom modifier and cannot be damaged by physical attacks.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spiritual Weapon',
@@ -561,6 +597,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: "A force-based weapon materializes and attacks designated foes under the caster's direction, dealing 1d8 damage plus bonus points based on caster level using the caster's base attack bonus modified by Wisdom. The weapon can strike incorporeal creatures and may be redirected each round as a move action.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spite',
@@ -575,6 +612,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Allows a witch to bind a prepared touch-range spell into a tattoo on her body. When an opponent hits the caster with a melee attack or successful combat maneuver, the stored spell automatically triggers against that attacker without requiring a touch attack roll. Only one spite effect can be maintained at a time.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Splinter Spell Resistance',
@@ -589,6 +627,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: "Creates a magical aura around a weapon so that the first time each round it damages a creature with spell resistance, that creature's spell resistance is reduced by 5 for 1 round. Multiple hits don't stack the reduction within the same round.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spontaneous Immolation',
@@ -604,6 +643,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Triggers spontaneous combustion in a target, dealing 3d6 fire damage and igniting the victim on a failed Fortitude save (halved on success). Each subsequent round the burning target may attempt another save to extinguish the flames; failure results in an additional 1d6 fire damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spore Burst',
@@ -619,6 +659,7 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'No',
     description: 'Enchants a willing plant creature with toxic mushrooms that sprout from its body. As a standard action, the target releases a cloud of toxic spores in a 20-foot-radius spread, forcing affected creatures to make Fortitude saves or become sickened for 1d6 rounds. Caster and all plant creatures are immune.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spotlight',
@@ -634,5 +675,6 @@ export const GAP_SPELLS_S2_2: Spell[] = [
     spellResistance: 'Yes',
     description: "Creates a mobile area of bright light centered on one target while simultaneously suppressing other light sources surrounding it, imposing a -20 penalty to Stealth checks and negating darkness-based concealment. If the target succeeds on its save, the bright light remains stationary at that location rather than following the creature.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 ];

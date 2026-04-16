@@ -10,6 +10,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You have studied the workings of anatomy, either as a student at university or as an apprentice mortician or necromancer. You know where to aim your blows to strike vital organs. You get a +1 trait bonus on all rolls made to confirm critical hits.',
     shortDescription: '+1 trait bonus to confirm critical hits',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [],
@@ -22,6 +23,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       "You have worn armor as long as you can remember, either as part of your training to become a knight's squire or simply because you were seeking to emulate your favorite hero. When you wear armor of any sort, reduce that suit's armor check penalty by 1, to a minimum check penalty of 0.",
     shortDescription: 'Reduce armor check penalty by 1',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [],
@@ -34,6 +36,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You were bullied often as a child, and you are now always ready to defend yourself with swift strikes. You gain a +1 trait bonus on attacks of opportunity.',
     shortDescription: '+1 trait bonus on attacks of opportunity',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -55,6 +58,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       "Your childhood was brutal, yet you persevered primarily through force of will and the hope that no matter how difficult things became, as long as you kept a level head you'd make it through. You gain a +2 trait bonus on saving throws against fear effects.",
     shortDescription: '+2 trait bonus on saves vs fear',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -76,6 +80,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Growing up in a rough neighborhood or a dangerous environment has honed your senses. You gain a +1 trait bonus on Reflex saves.',
     shortDescription: '+1 trait bonus on Reflex saves',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -96,6 +101,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       "You wouldn't have lived to make it out of childhood without the aid of a sibling, friend, or companion you could always count on to distract your enemies long enough for you to do a little extra damage on the sly. When you hit a foe you are flanking, you deal 1 additional point of damage (this damage is added to your base damage, and is multiplied on a critical hit). This additional damage is a trait bonus.",
     shortDescription: '+1 damage when flanking',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -117,6 +123,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You were trained in a tradition of swordplay that teaches the use of bladed weapons for both offense and defense. You gain a +1 trait bonus on attacks of opportunity made with daggers, swords, and similar bladed weapons.',
     shortDescription: '+1 trait bonus on AoOs with bladed weapons',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -142,6 +149,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       "You made your first kill at a very young age and found the task of extinguishing the life of another creature much easier than extinguishing a candle. You deal additional damage equal to your weapon's critical hit modifier when you score a successful critical hit with a weapon; this additional damage is added to the final total, and is not multiplied on a critical hit. This extra damage is a trait bonus.",
     shortDescription: 'Extra damage equal to weapon crit modifier on critical hits',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [],
@@ -154,6 +162,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You were bullied often as a child, but never quite developed an offensive response. Instead, you became adept at anticipating sudden attacks and reacting to danger quickly. You gain a +2 trait bonus on initiative checks.',
     shortDescription: '+2 trait bonus on initiative checks',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -174,6 +183,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Growing up in a violent neighborhood or rife with plague has made you tougher than most. You gain a +1 trait bonus on Fortitude saves.',
     shortDescription: '+1 trait bonus on Fortitude saves',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -194,6 +204,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You were particularly eager to learn a particular weapon as a child, and shared your enthusiasm with a mentor or instructor. You gain a +1 trait bonus on damage rolls with a single weapon of your choice.',
     shortDescription: '+1 trait bonus on damage with a chosen weapon',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -222,6 +233,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Your time spent studying the greatest warriors of the Society has taught you new defensive techniques. You gain a +1 trait bonus to Armor Class when wearing medium or heavy armor.',
     shortDescription: '+1 trait bonus to AC in medium or heavy armor',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -249,6 +261,7 @@ export const APG_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 trait bonus on saves vs charm and compulsion; birthmark serves as divine focus',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -274,6 +287,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'As the oldest child in your family, you were called upon to care for your younger siblings. You gain a +1 trait bonus on Heal checks.',
     shortDescription: '+1 trait bonus on Heal checks',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -295,6 +309,7 @@ export const APG_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 on Knowledge (nobility) and Knowledge (religion); one becomes class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -330,6 +345,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Your faith in the natural world or one of the gods of nature makes it easy for you to pick up new tricks when dealing with animals and plants. You gain a +1 trait bonus on Knowledge (geography) and Knowledge (nature) checks, and one of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 on Knowledge (geography) and Knowledge (nature); one becomes class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -365,6 +381,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Your mentor, the person who taught you the most about your faith, had a way of making complicated things easy to understand. His patience and eloquence were the perfect foil to your own occasionally difficult personality. You gain a +1 bonus on Diplomacy checks, and Diplomacy is always a class skill for you.',
     shortDescription: '+1 on Diplomacy; Diplomacy is a class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -385,6 +402,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'The fates watch over you. Whenever you are under the effect of a luck bonus of any kind, that bonus increases by 1.',
     shortDescription: 'All luck bonuses increased by 1',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [],
@@ -397,6 +415,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You were raised with heretical views that have made it difficult for you to accept most religious beliefs and, as a result, you tend to rely on yourself. As long as you do not possess any levels in a class that grants divine spellcasting, you gain a +1 trait bonus on all saving throws made against divine spells.',
     shortDescription: '+1 trait bonus on saves vs divine spells (if no divine casting class)',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -423,6 +442,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You were born in a region where your faith was not popular, but you never abandoned it. Your constant struggle to maintain your own faith has bolstered your drive. You receive a +1 trait bonus on Will saves.',
     shortDescription: '+1 trait bonus on Will saves',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -443,6 +463,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Your body is a sacred conduit of divine energy. Whenever you channel energy, you gain a +1 trait bonus to the save DC of your channel energy.',
     shortDescription: '+1 trait bonus to channel energy save DC',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [],
@@ -455,6 +476,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You were exposed to a potent source of positive energy as a child, perhaps growing up near a sacred landmark or holy site. As a standard action, you may automatically stabilize a dying creature merely by touching it.',
     shortDescription: 'Stabilize dying creature with a touch as standard action',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [],
@@ -467,6 +489,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Your great faith and devotion to the afterlife has granted you a wider perspective on the nature of existence. You gain a +1 trait bonus on Knowledge (history) and Knowledge (planes) checks, and one of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 on Knowledge (history) and Knowledge (planes); one becomes class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -503,6 +526,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Your apprenticeship or schooling gave you a keen understanding of the workings of magic. You gain a +1 trait bonus on Spellcraft checks, and Spellcraft is always a class skill for you.',
     shortDescription: '+1 on Spellcraft; Spellcraft is a class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -523,6 +547,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Your childhood was either dominated by lessons of some sort (whether musical, academic, or other) or by a strict regimen of meditation and focus. This has since given you the ability to maintain your focus even when distractions might otherwise affect you. You gain a +2 trait bonus on concentration checks.',
     shortDescription: '+2 trait bonus on concentration checks',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -535,6 +560,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You have always been intrigued by magic, possibly because you were the young apprentice of a magician or witch. You gain a +1 bonus on Use Magic Device checks, and Use Magic Device is always a class skill for you.',
     shortDescription: '+1 on Use Magic Device; UMD is a class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -555,6 +581,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Your interest in magic was extravagant and well-served by your instructors. Pick one spell when you choose this trait — from this point on, whenever you cast that spell, its effects manifest at +1 caster level.',
     shortDescription: '+1 caster level for one chosen spell',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -568,6 +595,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You apprenticed for a time to a craftsman who often built magic items, and you picked up many of his tricks. Whenever you craft a magic item, you reduce the required gp cost to make the item by 5%.',
     shortDescription: 'Reduce magic item crafting cost by 5%',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -580,6 +608,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       "You were raised, either wholly or in part, by a magical creature, perhaps even one who passed itself off as a member of your race. This close exposure to magic has given you a knack for it. Pick a class when you gain this trait — your caster level in that class gains a +2 trait bonus as long as this bonus doesn't raise your caster level above your current Hit Dice.",
     shortDescription: '+2 trait bonus to caster level in one class (max = HD)',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -593,6 +622,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       "One of your parents was a gifted spellcaster who not only used metamagic often, but developed many metamagic feats before passing away. Pick one spell when you choose this trait. When you apply metamagic feats to this spell that add at least 1 level to the spell, treat its actual level as 1 lower for determining the spell's final adjusted level.",
     shortDescription: 'Reduce metamagic cost of one spell by 1 level',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -607,6 +637,7 @@ export const APG_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 on Knowledge (arcana) and Knowledge (engineering); one becomes class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -642,6 +673,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'While others affect a reverent tone when handling magical devices, possibly even addressing them, you treat them as you would any other tool. You may use your Intelligence modifier when making Use Magic Device checks instead of your Charisma modifier.',
     shortDescription: 'Use Int instead of Cha for Use Magic Device checks',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -654,6 +686,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Your great faith in yourself or a higher power grants you the ability to shrug off the effects of foes who attempt to interfere with your spellcasting. You gain a +1 trait bonus on concentration checks.',
     shortDescription: '+1 trait bonus on concentration checks',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -666,6 +699,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You have always had a knack for making things. You gain a +1 trait bonus on Craft checks, and the cost of creating magic items is reduced by 5%.',
     shortDescription: '+1 on Craft checks; reduce magic item creation cost by 5%',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -686,6 +720,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You have a talent for channeling volatile energies. Once per day as a swift action, you can increase the DC of a spell you cast by 1.',
     shortDescription: 'Once per day, +1 spell DC as swift action',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -699,6 +734,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       "You were adopted and raised by someone not of your actual race, and you learned a skill or trait from your adoptive parents and culture. As a result, you may select a race trait from your adoptive parents' race.",
     shortDescription: 'Select a race trait from another race',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [],
@@ -712,6 +748,7 @@ export const APG_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 on Bluff/Diplomacy vs attracted characters; +1 spell DC for language-dependent spells',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [],
@@ -724,6 +761,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You grew up on the streets of a large city, and as a result you have developed a knack for picking pockets and hiding small objects on your person. You gain a +1 trait bonus on Sleight of Hand checks, and Sleight of Hand is always a class skill for you.',
     shortDescription: '+1 on Sleight of Hand; Sleight of Hand is a class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -744,6 +782,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You had a knack for getting yourself into trouble as a child, and as a result developed a silver tongue at an early age. You gain a +1 trait bonus on Bluff checks, and Bluff is always a class skill for you.',
     shortDescription: '+1 on Bluff; Bluff is a class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -764,6 +803,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You were born and raised in rugged badlands or steep mountains, and you have become something of an expert at evading the predators, extractors, slavers, and other dangerous forces that dwell there. You gain a +1 trait bonus on Stealth checks, and Stealth is always a class skill for you. This trait bonus increases to +2 in hilly or rocky areas.',
     shortDescription: '+1 on Stealth (+2 in hilly/rocky areas); Stealth is a class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -784,6 +824,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You have come from a family that has prospered in the trade business. You gain a +1 trait bonus on Appraise checks, and Appraise is always a class skill for you.',
     shortDescription: '+1 on Appraise; Appraise is a class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -804,6 +845,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Your childhood was tough, and your parents had to make every copper stretch. You gain a +1 bonus on Survival checks, and Survival is always a class skill for you.',
     shortDescription: '+1 on Survival; Survival is a class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -824,6 +866,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You were born into a rich family, perhaps even combatant of the nobility, and even though you turned to adventuring, you enjoy a generous starting wealth. You start with an additional 900 gp.',
     shortDescription: 'Start with 900 extra gold',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [],
@@ -836,6 +879,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You discovered at an early age that someone you trusted, perhaps a mentor or family member, had been involved in criminal activity. You gain a +1 trait bonus on Sense Motive checks, and Sense Motive is always a class skill for you.',
     shortDescription: '+1 on Sense Motive; Sense Motive is a class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -856,6 +900,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You grew up in an environment where the weights and the bullies thrived. As a result, you learned how to intimidate others. You gain a +1 trait bonus on Intimidate checks, and Intimidate is always a class skill for you.',
     shortDescription: '+1 on Intimidate; Intimidate is a class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -876,6 +921,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You hail from a settlement where diplomacy and order is the norm. You gain a +1 trait bonus on Knowledge (local) and Knowledge (nobility) checks, and one of these skills (your choice) is always a class skill for you.',
     shortDescription: '+1 on Knowledge (local) and Knowledge (nobility); one becomes class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -911,6 +957,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'As a child, you put in long hours on combat drills, and even learned the basics of war before you began your adventuring career. You gain a +2 trait bonus on initiative checks.',
     shortDescription: '+2 trait bonus on initiative checks',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'race',
     subcategory: 'Elf',
     prerequisites: [{ type: 'race', raceName: 'Elf' }],
@@ -932,6 +979,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You were exiled from your homeland for some reason. You gain a +2 trait bonus on initiative checks.',
     shortDescription: '+2 trait bonus on initiative checks',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'race',
     subcategory: 'Half-Elf',
     prerequisites: [{ type: 'race', raceName: 'Half-Elf' }],
@@ -954,6 +1002,7 @@ export const APG_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 on Diplomacy, Knowledge (local), or Sense Motive (your choice); becomes class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'race',
     subcategory: 'Human',
     prerequisites: [{ type: 'race', raceName: 'Human' }],
@@ -984,6 +1033,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'When weaker-willed minds would be overwhelmed by a spell, your training allows you to maintain your composure and concentrate on the task at hand. You gain a +2 trait bonus on saving throws against charm and compulsion effects.',
     shortDescription: '+2 trait bonus on saves vs charm and compulsion',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -1010,6 +1060,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Your sharp intellect and cunning observation allow you to browbeat and humiliate others through your command of the facts. You may use your Intelligence modifier when making Intimidate checks instead of your Charisma modifier.',
     shortDescription: 'Use Int instead of Cha for Intimidate checks',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [],
@@ -1022,6 +1073,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       "Your cunning and logic are more than a match for another's eloquence and grace. Choose one Charisma-based skill. You may use your Intelligence modifier when making checks with that skill instead of your Charisma modifier.",
     shortDescription: 'Use Int instead of Cha for one Cha-based skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [],
@@ -1051,6 +1103,7 @@ export const APG_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Use Intelligence instead of Charisma for Diplomacy (persuade) and Bluff (lie convincingly)',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1072,6 +1125,7 @@ export const APG_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Use Wis instead of Str/Con/Dex for one physical skill; it becomes class skill',
     source: 'Ultimate Campaign',
+    verificationStatus: 'needs_review' as const,
     category: 'religion',
     prerequisites: [],
     effects: [],
@@ -1085,6 +1139,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Either from an inherent knack or careful study, you have mastered the use of a cantrip. Choose a 0-level spell. You may cast that spell once per day as a spell-like ability. The caster level for this ability is equal to your character level.',
     shortDescription: 'Cast one chosen 0-level spell once per day as spell-like ability',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -1098,6 +1153,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'You have often found yourself in situations where a lack of focus could get you killed. You gain a +2 trait bonus on concentration checks.',
     shortDescription: '+2 trait bonus on concentration checks',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -1110,6 +1166,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'A druid of the Pathfinder Society has shown you the ways of the wild. You gain a +1 bonus on Knowledge (nature) checks, and Knowledge (nature) is always a class skill for you. Your wild shape ability lasts for an additional 2 rounds.',
     shortDescription: '+1 Knowledge (nature); class skill; +2 rounds wild shape',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -1130,6 +1187,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'Thanks to your studies of the arcane arts taught at a Pathfinder Lodge, you deal +1 damage when using force effects (such as magic missile, wall of force, etc.).',
     shortDescription: '+1 damage with force spells',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -1142,6 +1200,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'The Living God Aroden keeps a special watch over you. You may channel energy 1 additional time per day.',
     shortDescription: '+1 channel energy use per day',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [],
@@ -1154,6 +1213,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       "Your religious ones have entrusted you with the task of watching over the city's inhabitants. You gain a +1 trait bonus on Perception checks, and Perception is always a class skill for you.",
     shortDescription: '+1 on Perception; Perception is a class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1174,6 +1234,7 @@ export const APG_TRAITS: TraitDefinition[] = [
       'From exploring the ancient ruins dotting the landscape, you have developed a keen eye for spotting traps. You gain a +1 trait bonus on Knowledge (dungeoneering) and Perception checks made to notice and identify traps.',
     shortDescription: '+1 on Knowledge (dungeoneering) and Perception to find traps',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [

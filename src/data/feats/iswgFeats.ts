@@ -15,6 +15,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       'Auto-acclimated to altitude; +2 competence on Survival checks at high elevation.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'endurance' }],
     effects: [
@@ -44,6 +45,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
       'You deal +2 damage with weapon attacks made against any target you have witnessed casting an arcane spell (not using a spell-like ability) in the last 5 rounds. You must have successfully identified the spell with a Spellcraft check to know without a doubt that the spell is arcane.',
     shortDescription: '+2 weapon damage against targets you have witnessed casting arcane spells.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'spellcraft', ranks: 1 }],
     effects: [
@@ -78,6 +80,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Knowledge (planes) vs. demons; +2 morale on attacks and SR checks vs. recognized demons.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_planes', ranks: 6 }],
     effects: [
@@ -131,6 +134,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use DEX instead of STR on attack and damage rolls with a one-handed scimitar.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -165,6 +169,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       'Reduced heat severity, half water needs, and +4 vs. thirst/glare/mirage effects.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'favored terrain (desert)' }],
     effects: [
@@ -194,6 +199,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 morale on melee attack and damage when fighting alone with no nearby allies.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -234,6 +240,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once/day: open third eye for 1 min granting darkvision, detect magic, +8 Perception vs. invisible, and +1 CL on divinations.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 4 },
@@ -277,6 +284,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 HP per healing die from magical healing; +2 vs. death effects; -1 vs. cold iron.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Can only be selected at 1st level.' }],
     effects: [
@@ -305,6 +313,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 saves vs. fear; +2 morale on attacks/damage/CMB for 1 round when a fear effect fails against you.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -369,6 +378,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       'Divination focus substitutes material components up to 1,000 gp; using both grants +1 caster level.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Ability to cast divination spells' }],
     effects: [
@@ -398,6 +408,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 morale on saves vs. mind-affecting effects and on checks to escape grapples or bonds.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -441,6 +452,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once/day as a move action, heal 1d8 + HD when at half HP or below (no deity required).',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Cannot have a patron deity.' }],
     effects: [],
@@ -456,6 +468,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       'Your spells cannot harm plants; plant-enhancing/healing spells gain +1 caster level.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Follower of the Green Faith' }],
     effects: [
@@ -484,6 +497,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       'Casting while performing does not cost a round of performance; can switch performances as a swift action when casting.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'bardic music' }],
     effects: [],
@@ -499,6 +513,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 Will vs. enchantments; once/day draw a Harrow card for a +2 bonus on a d20 roll of the matching suit.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -526,6 +541,7 @@ export const ISWG_FEATS: FeatDefinition[] = [
       'You descend from Hermea or are the offspring of a Hermean union. Select two skills that share the same ability modifier. Both of those skills become class skills for you. Note that Hermean agents may take interest in you.',
     shortDescription: 'Two skills with the same ability modifier become class skills for you.',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Can only be selected at 1st level.' }],
     effects: [],

@@ -13,6 +13,7 @@ export const chugarra: DeityEntry = {
   allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
   source: 'pf1e-book-of-the-damned',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -29,6 +30,7 @@ export const chupurvagasti: DeityEntry = {
   allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
   source: 'pf1e-book-of-the-damned',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -45,6 +47,7 @@ export const gavidya: DeityEntry = {
   allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
   source: 'pf1e-book-of-the-damned',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -61,6 +64,7 @@ export const hydim: DeityEntry = {
   allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
   source: 'pf1e-book-of-the-damned',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -77,6 +81,7 @@ export const ioramvol: DeityEntry = {
   allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
   source: 'pf1e-book-of-the-damned',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -93,6 +98,7 @@ export const maeha: DeityEntry = {
   allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
   source: 'pf1e-book-of-the-damned',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -109,6 +115,7 @@ export const onamahli: DeityEntry = {
   allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
   source: 'pf1e-book-of-the-damned',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -125,6 +132,7 @@ export const rahu: DeityEntry = {
   allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
   source: 'pf1e-book-of-the-damned',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -141,6 +149,7 @@ export const rytara: DeityEntry = {
   allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
   source: 'pf1e-book-of-the-damned',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -157,6 +166,7 @@ export const taraksun: DeityEntry = {
   allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
   source: 'pf1e-book-of-the-damned',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

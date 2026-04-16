@@ -12,6 +12,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Call 2 extra HD of outsiders of a chosen subtype and get better terms when using planar ally or planar binding.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'spell_focus_conjuration' },
@@ -48,6 +49,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'On a critical hit against a summoned creature, force it to make a Will save or be dismissed to its home plane.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['critical'],
     prerequisites: [
       { type: 'special', description: 'Arcane Strike or Disruptive' },
@@ -67,6 +69,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Make an attack of opportunity against summoned creatures as they appear in your threatened squares.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Arcane Strike or Disruptive' },
@@ -102,6 +105,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend an immediate action during a Dimensional Awareness attack of opportunity to banish a summoned creature via a Spellcraft check.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Arcane Strike or Disruptive' },
@@ -123,6 +127,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
       'Whenever you attempt a dispel check based on your caster level, you gain a +2 bonus on the check.',
     shortDescription: 'Gain a +2 bonus on dispel checks.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Ability to cast dispel magic' }],
     effects: [
@@ -146,6 +151,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Add two creatures of your choice to the summon monster list for each applicable spell level.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Ability to cast a summon monster spell' }],
     effects: [],
@@ -161,6 +167,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain an additional +2 bonus on dispel checks (stacks with Dispel Focus for a total of +4).',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'dispel_focus' },
@@ -187,6 +194,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'When using animal focus, gain access to planar aspects (Air, Chaotic, Cold, Earth, Evil, Fire, Good, Lawful, Shadow, Water) in addition to animal aspects.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_planes', ranks: 5 },
@@ -205,6 +213,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Possess a summoned creature as per magic jar without a receptacle; costs +2 spell levels.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [
       { type: 'feat', featId: 'spell_focus_conjuration' },
@@ -223,6 +232,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Shadow spells with the shadow descriptor are 20% more real; costs +1 spell level.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [{ type: 'feat', featId: 'spell_focus_illusion' }],
     effects: [],
@@ -238,6 +248,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       "Add a guardian spirit creature to your summon monster III or summon nature's ally III list; it retains memories between summonings.",
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -258,6 +269,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Transform a summoned creature into a magical tattoo for storage, then release it later.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Inscribe Magical Tattoo or Varisian Tattoo' },
@@ -276,6 +288,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Steal a summoned creature by converting it into your tattoo and taking control of it with an opposed Spellcraft check.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Inscribe Magical Tattoo or Varisian Tattoo' },
@@ -296,6 +309,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'While a summoned creature is stored as a tattoo via Tattoo Attunement, gain one of its elemental resistances.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Inscribe Magical Tattoo or Varisian Tattoo' },
@@ -329,6 +343,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Apply alternative summoning templates (aerial, aqueous, chthonic, dark, fiery, primordial) in place of the standard celestial/fiendish options.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 1 },
@@ -347,6 +362,7 @@ export const MONSTER_SUMMONER_FEATS: FeatDefinition[] = [
     shortDescription:
       "Apply alternative templates (aerial, aqueous, chthonic, fiery, primordial) to summon nature's ally instead of granting Augment Summoning benefits.",
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'augment_summoning' },

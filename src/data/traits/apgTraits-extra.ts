@@ -15,6 +15,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       "You bear a tattoo of your deity's holy symbol or another sacred image. You gain a +1 trait bonus on all saving throws.",
     shortDescription: '+1 trait bonus on all saving throws',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -37,6 +38,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'You bear a strong hatred for demons and the damage they wreak. You gain a +2 trait bonus on Diplomacy checks made to influence good-aligned creatures.',
     shortDescription: '+2 trait bonus on Diplomacy vs good-aligned creatures',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -58,6 +60,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'You have a knack for sensing the appearance of the undead before others do. You gain a +2 trait bonus on Perception checks when trying to locate undead, and you can attempt such a check if undead are within 30 feet that you cannot see.',
     shortDescription: '+2 trait bonus on Perception to detect undead',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -79,6 +82,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'You are convinced that you are alive in order to achieve a great purpose. You gain a +1 trait bonus on Will saves against fear effects, and on Constitution checks made to stabilize when dying.',
     shortDescription: '+1 trait bonus vs fear; +1 to stabilize',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -109,6 +113,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'Growing up, you were always around liars, and you developed a knack for distinguishing truth from fiction. You gain a +2 trait bonus on Sense Motive checks.',
     shortDescription: '+2 trait bonus on Sense Motive',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -129,6 +134,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'You have dabbled in one or more of the other schools of magic. Pick one spell from a school of magic other than your own. You may cast that spell as if it were one level higher than it actually is.',
     shortDescription: 'Cast one off-school spell at +1 level',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [],
@@ -144,6 +150,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'You were trained as a transmuter, and your studies of changing and rearranging matter have given you a +1 trait bonus on caster level checks made to overcome spell resistance when casting a transmutation spell.',
     shortDescription: '+1 to overcome SR with transmutation spells',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -171,6 +178,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'You have served in distant lands, adapting to hostile environments. You gain a +1 trait bonus on Knowledge (religion) checks, and Knowledge (religion) is always a class skill for you.',
     shortDescription: '+1 Knowledge (religion), class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -194,6 +202,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'You were raised in the wide, open grasslands. You gain a +1 trait bonus on Knowledge (nature) checks, and Knowledge (nature) is always a class skill for you.',
     shortDescription: '+1 Knowledge (nature), class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -220,6 +229,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'Your keen senses lead you to hidden treasures. You gain a +2 trait bonus on Perception checks related to metals, jewels, and gemstones.',
     shortDescription: '+2 Perception for metals, jewels, gemstones',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Dwarf' }],
     effects: [
@@ -245,6 +255,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'Disorientation in the lightless depths beneath the earth is a possibly fatal occurrence, but you learned to fight in cramped quarters at a young age. While underground, you receive a +2 trait bonus to initiative checks and a +1 trait bonus on weapon damage rolls for critical hits (this damage is multiplied on a critical hit).',
     shortDescription: '+2 initiative and +1 crit damage underground',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Dwarf' }],
     effects: [
@@ -268,6 +279,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       "You've spent your entire life thumbing your nose at the establishment and getting away with it. You gain a +1 trait bonus on Escape Artist checks and a +1 trait bonus on Initiative checks.",
     shortDescription: '+1 Escape Artist and +1 initiative',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Gnome' }],
     effects: [
@@ -297,6 +309,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       "As a child, your parents sent you to a distant wizard's tower as an apprentice so that you could learn the arcane arts. Unfortunately, you had no aptitude for magic. However, your time at the academy was not wasted, for you learned a great deal about defending yourself against magic. You gain a +1 trait bonus on saves against arcane spells.",
     shortDescription: '+1 trait bonus on saves vs arcane spells',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Half-Elf' }],
     effects: [
@@ -320,6 +333,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'You are used to living on the outskirts of civilized lands and being ostracized by the people around you. You gain a +1 trait bonus on Survival skill checks, and Survival is always a class skill for you.',
     shortDescription: '+1 Survival, class skill',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Half-Orc' }],
     effects: [
@@ -343,6 +357,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'Your parents instilled in you a strong belief in the right to freedom, and you gain a +1 trait bonus on any skill check or attack roll made during the process of escaping captivity.',
     shortDescription: '+1 on checks to escape captivity',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Halfling' }],
     effects: [],
@@ -357,6 +372,7 @@ export const APG_EXTRA_TRAITS: TraitDefinition[] = [
       'Growing up, you spent a good deal of your time in libraries, reading whatever you could find. You gain a +1 trait bonus on Knowledge (arcana) checks and a +1 trait bonus on Knowledge (history) checks.',
     shortDescription: '+1 Knowledge (arcana) and +1 Knowledge (history)',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'race',
     prerequisites: [{ type: 'race', raceName: 'Human' }],
     effects: [

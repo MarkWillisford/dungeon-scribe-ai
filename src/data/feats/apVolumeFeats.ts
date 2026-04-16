@@ -16,6 +16,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       "When activating bane, you select a deity or religion other than your own. The bane effect applies exclusively to that religion's followers.",
     shortDescription: 'Bane targets followers of a chosen religion.',
     source: 'Pathfinder #132: The Six-Legend Soul',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'bane' }],
     effects: [
@@ -37,6 +38,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'You gain a +2 morale bonus on attack and damage rolls against targets damaged by an ally with this feat in the last round. When an ally with this feat dies within 30 feet, you gain the effects of haste for 1 round.',
     shortDescription: '+2 morale attack/damage vs. foes your allies hit; haste when ally dies.',
     source: 'Pathfinder #132: The Six-Legend Soul',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'bab', minimum: 4 }],
     effects: [
@@ -64,6 +66,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
     description: 'When you charge or run, you treat difficult terrain as normal terrain.',
     shortDescription: 'Ignore difficult terrain while charging or running.',
     source: 'Pathfinder #132: The Six-Legend Soul',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -89,6 +92,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'You can craft a crown from defeated dragon or magical beast remains, functioning as a headband of alluring charisma. Bonus: +2 at CR 5/level 5, +4 at CR 10/level 10, +6 at CR 15/level 15.',
     shortDescription: 'Craft a CHA headband from dragon/magical beast remains.',
     source: 'Pathfinder #132: The Six-Legend Soul',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 5 },
@@ -113,6 +117,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       "When using detect magic, if a spell's caster used a holy symbol as a divine focus, you perceive a ghostly image of the deity's holy symbol as part of the spell's aura. Divination-blocking effects suppress this.",
     shortDescription: 'Detect magic reveals divine focus holy symbols in spell auras.',
     source: 'Pathfinder #132: The Six-Legend Soul',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Ability to cast detect magic' }],
     effects: [
@@ -134,6 +139,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'When using Step Up and Strike, you can make an additional attack with your offhand weapon using your highest BAB. Both attacks take normal TWF penalties.',
     shortDescription: 'Extra offhand attack when using Step Up and Strike.',
     source: 'Pathfinder #132: The Six-Legend Soul',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -162,6 +168,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'When saving against enchantment effects that cannot affect animals (like charm person), you may roll twice and take the better result.',
     shortDescription: "Roll twice vs. enchantments that don't affect animals.",
     source: 'Pathfinder #132: The Six-Legend Soul',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -186,6 +193,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'You gain +2 on Bluff checks and CMB checks vs. lawful creatures, increasing to +4 against creatures with the lawful subtype.',
     shortDescription: '+2 Bluff/CMB vs. lawful; +4 vs. lawful subtype.',
     source: 'Pathfinder #132: The Six-Legend Soul',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 5 },
@@ -218,6 +226,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ignore ability damage penalties for one chosen score until damage equals the score.',
     source: 'Pathfinder #132: The Six-Legend Soul',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -242,6 +251,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'When an adjacent ally with this feat attempts a concentration check to cast defensively, you can make a CMB check as an immediate action. Your ally uses whichever result is better.',
     shortDescription: 'Help adjacent allies cast defensively using your CMB check.',
     source: 'Pathfinder #132: The Six-Legend Soul',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'special', description: 'Base attack bonus +3 or ability to cast 2nd-level spells' },
@@ -267,6 +277,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'You can reduce the casting time of prepared conjuration (summoning) spells by one round (minimum one standard action). Casting this way requires a Fortitude save (DC 15 + spell level) or become fatigued.',
     shortDescription: 'Reduce summoning spell casting time by 1 round; risk fatigue.',
     source: "Pathfinder: Curse of the Crimson Throne Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -293,6 +304,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'You gain a hippogriff as your animal companion. You gain +2 on Ride checks while riding it. Within 20 feet of your hippogriff, it gains +2 on saves vs. fear.',
     shortDescription: 'Gain a hippogriff animal companion; +2 Ride and fear save bonuses.',
     source: "Pathfinder: Curse of the Crimson Throne Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'ride', ranks: 6 },
@@ -317,6 +329,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'You gain +2 on Acrobatics and Climb checks (+4 at 10+ ranks). You can take 10 on Climb checks even when distracted. Fall damage is reduced by 1d6, stacking with Acrobatics checks.',
     shortDescription: '+2 Acrobatics/Climb; take 10 on Climb; reduce fall damage by 1d6.',
     source: "Pathfinder: Curse of the Crimson Throne Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -351,6 +364,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Will with gnoll trophy; +2 attack/damage vs. gnolls and Lamashtu minions.',
     source: "Pathfinder: Legacy of Fire Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['achievement'],
     prerequisites: [
       {
@@ -384,6 +398,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
     description: 'You gain fire resistance 5 and a +2 bonus on all saves against fire effects.',
     shortDescription: 'Fire resistance 5 and +2 saves vs. fire.',
     source: "Pathfinder: Legacy of Fire Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['achievement'],
     prerequisites: [
       {
@@ -417,6 +432,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'Select one charm or compulsion spell you can cast. You can use it once daily as a spell-like ability at your normal CL and DC. You may swap the chosen spell when you gain a spellcasting class level.',
     shortDescription: '1/day charm or compulsion spell as SLA.',
     source: "Pathfinder: Legacy of Fire Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['achievement'],
     prerequisites: [
       {
@@ -443,6 +459,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'You gain a single-use supernatural ability that activates automatically when you would die, leaving you alive and unaffected by the killing attack. Recharges each time you are resurrected.',
     shortDescription: 'Auto-cheat-death once; recharges on resurrection.',
     source: "Pathfinder: Legacy of Fire Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['achievement'],
     prerequisites: [{ type: 'special', description: 'Die and be brought back at least twice' }],
     effects: [
@@ -464,6 +481,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'Healing spells targeting others are maximized as though using Maximize Spell without increased casting time. When using healing spells to damage foes, they gain +4 to save DC instead.',
     shortDescription: 'Maximize healing spells on allies; +4 DC when using healing to harm.',
     source: "Pathfinder: Legacy of Fire Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['achievement'],
     prerequisites: [
       {
@@ -491,6 +509,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'You gain a +2 natural armor bonus but take a -2 penalty on all Charisma-based skill checks.',
     shortDescription: '+2 natural armor; -2 CHA-based skill checks.',
     source: "Pathfinder: Legacy of Fire Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['achievement'],
     prerequisites: [
       {
@@ -525,6 +544,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'When you confirm a critical hit, the opponent must make a Fortitude save (DC 10 + your STR or DEX modifier) or be stunned for 1 round.',
     shortDescription: 'Crits stun foes for 1 round (Fort negates).',
     source: "Pathfinder: Legacy of Fire Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['achievement'],
     prerequisites: [{ type: 'special', description: 'Confirm at least 50 critical hits' }],
     effects: [
@@ -546,6 +566,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'You move at 3/4 normal speed in desert sand instead of half speed. You gain +2 on Survival checks to find food and water and to avoid getting lost in deserts.',
     shortDescription: 'Faster desert movement; +2 Survival in deserts.',
     source: "Pathfinder: Legacy of Fire Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -572,6 +593,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'You gain a +1 bonus on attack rolls and +2 on weapon damage rolls against Large or larger creatures.',
     shortDescription: '+1 attack and +2 damage vs. Large+ creatures.',
     source: "Pathfinder: Rise of the Runelords Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -600,6 +622,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'Select Magnimar, Korvosa, or Riddleport as your home city. You gain +1 on Reflex saves. Magnimar: +2 Diplomacy. Korvosa: +2 Intimidate. Riddleport: +2 Bluff. Must be taken at 1st level; cannot have Country Born or Lone Wolf.',
     shortDescription: '+1 Reflex and +2 to one social skill based on home city. 1st level only.',
     source: "Pathfinder: Rise of the Runelords Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -626,6 +649,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'Once per day you can ignore a fatigue or exhaustion effect. You gain +1 on Will saves. Must be taken at 1st level; cannot have City Born or Lone Wolf.',
     shortDescription: '1/day ignore fatigue/exhaustion; +1 Will saves. 1st level only.',
     source: "Pathfinder: Rise of the Runelords Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: '1st-level character; cannot have City Born or Lone Wolf' },
@@ -649,6 +673,7 @@ export const AP_VOLUME_FEATS: FeatDefinition[] = [
       'You have a 50% chance to stabilize when dying. You gain +1 on Fortitude saves. Must be taken at 1st level; cannot have City Born or Country Born.',
     shortDescription: '50% auto-stabilize when dying; +1 Fortitude saves. 1st level only.',
     source: "Pathfinder: Rise of the Runelords Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {

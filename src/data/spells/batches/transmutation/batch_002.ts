@@ -1,8 +1,8 @@
 // Transmutation spells — batch 002
 // Batch metadata: {"school":"transmutation","batchNum":"002","startSpell":"Bowstaff","lastSpell":"Dwarven Veil","nextSpell":"Eagle Eye","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/e/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_002: Spell[] = [
+export const TRANSMUTATION_BATCH_002: SpellDefinition[] = [
   {
     name: 'Bowstaff',
     classLevels: { inquisitor: 1, paladin: 1, ranger: 1 },
@@ -23,6 +23,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This transmutation spell grants a bow the rigidity and toughness of forged steel, enabling melee combat use. A shortbow functions as a club, while a longbow serves as a quarterstaff. The bow maintains its original hit points and hardness values. Any enhancement bonuses apply to melee attack and damage rolls, and compatible weapon qualities transfer to melee attacks.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brand',
@@ -45,6 +46,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'Brand etches an indelible rune or mark of no more than 6 characters onto a creature, inflicting 1 point of damage. The mark appears on exposed skin and can be hidden by clothing or scraped away (causing 1d6 damage), though it returns when wounds heal.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brand, Greater',
@@ -67,6 +69,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This spell functions like Brand but inflicts 1d6 damage and cannot be removed by nonmagical means. The brand blazes as bright as a torch when brought within 30 feet of a visible symbol of your faith, causing the bearer to be sickened while blazing. The brand is removable only by methods that eliminate a mark of justice.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Break',
@@ -89,6 +92,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'You attempt to damage an object. On a failed Fortitude save, the target gains the broken condition. If cast on an already-broken item, a failed save destroys it instead.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Break, Greater',
@@ -112,6 +116,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'You release destructive energy that affects all Medium or smaller objects in the area. Objects gain the broken condition unless they succeed at a Fortitude save; broken objects that fail are destroyed. Magic items can be broken but not destroyed; objects in your possession are not immune.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Bull's Strength",
@@ -148,6 +153,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'The subject becomes stronger. The spell grants a +4 enhancement bonus to Strength, adding the usual benefits to melee attack rolls, melee damage rolls, and other uses of the Strength modifier.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Bull's Strength, Mass",
@@ -180,6 +186,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "This spell functions identically to Bull's Strength but affects multiple creatures.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Burrow',
@@ -201,6 +208,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'The affected creature gains the ability to burrow through earth and stone. It can move at 15 feet per round through sand, loose soil, or gravel (reduced to 10 feet if wearing medium or heavy armor or carrying medium or heavy loads), or at 5 feet per round through solid stone. Burrowing requires only as much concentration as normal movement, permitting the creature to attack or cast spells. The creature cannot charge or run while burrowing. Loose material collapses behind the target one round after departure. The spell does not provide the ability to breathe underground.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Calcific Touch',
@@ -223,6 +231,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'Your touch progressively transmutes creatures into stone. Once per round, you may deliver a touch attack dealing 1d4 points of Dexterity damage and slowing the target (as the spell) for 1 round. A successful Fortitude save negates the slow but not the ability damage. Reaching 0 Dexterity causes permanent petrification, reversible via break enchantment, restoration, or stone to flesh.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Call Weapon',
@@ -244,6 +253,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'You telekinetically summon a melee weapon from a willing ally within 30 feet, pulling it into your hand. The weapon retains magical energy for the remainder of the round, providing you a +2 circumstance bonus to both attack and damage rolls. The ally must willingly surrender the weapon, though unconscious or dying individuals count as willing provided the weapon remains in contact with their body.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Carry Companion',
@@ -266,6 +276,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'You transform a willing animal or magical beast into a miniature stone figurine small enough to fit in one hand. The creature becomes mindless and inert, similar to a flesh to stone effect. You can restore the creature by placing the figurine down, touching it, and speaking a command word. The spell persists until dispelled or voluntarily ended.',
     source: 'Pathfinder Player Companion: Knights of the Inner Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Cat's Grace",
@@ -299,6 +310,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'The affected creature gains a +4 enhancement bonus to Dexterity, providing standard improvements to armor class, Reflex saving throws, and other Dexterity-based uses.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Cat's Grace, Mass",
@@ -328,6 +340,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "This spell functions identically to Cat's Grace but affects multiple creatures.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cauterizing Weapon',
@@ -350,6 +363,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'You infuse a weapon with energy that impairs accelerated healing. The affected weapon or ammunition is treated as acid, cold, electricity, and fire specifically for negating creature regeneration. At 8th caster level, the weapon gains silver and cold iron properties for this purpose. At 11th caster level, it also counts as chaotic, evil, good, and lawful for negating regeneration.',
     source: 'Pathfinder Player Companion: Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Caustic Blood',
@@ -383,6 +397,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'You infuse your blood with corrosive acid. When you take piercing or slashing damage, acidic blood sprays toward the attacker in a 10-foot line, dealing 1d6 points of acid damage per caster level (maximum 15d6, Reflex save for half). The spray damages the first creature or object contacted. The acidic blood then continues burning that target for 1 additional round, inflicting 1d6 acid damage per 2 caster levels (maximum 7d6). A second successful Reflex save negates this lingering damage.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Certain Grip',
@@ -405,6 +420,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This spell grants the target a +4 competence bonus on Climb checks, Acrobatics balance checks, and CMD against bull rush, drag, reposition, and trip maneuvers. The affected creature becomes immune to disarm combat maneuvers.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chameleon Scales',
@@ -426,6 +442,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This spell allows temporary alteration of your skin, hide, or scale coloration within options appropriate to your race. It eliminates penalties when using the Disguise skill to appear as a different race, provided that race shares the same skin, hide, or scale type and color.',
     source: 'Pathfinder Player Companion: Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Channel Vigor',
@@ -447,6 +464,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This spell allows you to concentrate your mental, physical, and spiritual energy into one of four aspects. You may redirect your focus as a move action each round. Channeling through your limbs provides haste effects; mental focus yields skill and ranged attack bonuses; spiritual focus enhances Will saves and social skills; torso focus strengthens Fortitude saves and concentration checks.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Changestaff',
@@ -469,6 +487,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "You transform a specially prepared quarterstaff into a Huge treant-like creature approximately 24 feet tall. When the staff's end is planted in the ground and a special command spoken, it becomes a creature resembling and fighting like a treant. The staff-treant obeys spoken commands and defends you but cannot communicate with actual treants or control trees. If reduced to 0 or fewer hit points, it crumbles to powder and the staff is destroyed. Otherwise, upon spell duration expiration or dismissal, the staff returns to normal form and may be reused as a focus for subsequent castings.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Cheetah's Sprint",
@@ -490,6 +509,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This spell channels magical energy through your body to enhance movement. If you take a charge or run action before your turn ends, you can move up to 10 times your base land speed. The movement boost applies as an enhancement bonus and only affects land speed; it has no effect on burrow, climb, fly, or swim movement. The spell enhances jumping distance proportionally to the speed increase.',
     source: 'Pathfinder Player Companion: Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chill Metal',
@@ -513,6 +533,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "Chill metal renders metal extremely cold. Unattended non-magical metal receives no save, while magical items are granted saving throws. Items in a creature's possession use the creature's save bonus unless the item's bonus is superior. Cold damage escalates over the spell's duration: rounds 1 and 7 cause no harm, rounds 2 and 6 deal 1d4 cold damage, and rounds 3 through 5 deal 2d4 cold damage. Heat damage negates cold damage point-for-point. Underwater, the spell creates ice around affected metal rather than dealing damage. Chill metal counters and dispels heat metal.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Claim Identity',
@@ -546,6 +567,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "You transform into a flawless copy of the target's facial features and identifying traits, gaining a +10 bonus on Disguise checks to impersonate them with no penalties for race, age, size, or gender differences. The target becomes unremarkable, and other polymorph magic cannot restore their original appearance during the spell's duration.",
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloud Shape',
@@ -569,6 +591,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "You assume a massive cloud form resembling gaseous form, but with a Colossal appearance spanning 30 feet. You select the cloud's general appearance, which becomes fixed. The transformation renders you indistinguishable from an actual cloud through normal observation, though detect magic reveals a moderate transmutation aura. Your flight speed in cloud form is 30 feet.",
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Codespeak',
@@ -601,6 +624,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This spell enables recipients to speak a shared magical language incomprehensible to outsiders. The written form becomes gibberish after expiration unless the same caster reapplies it to the identical group. Specialized codebreakers can decipher pages through difficult Linguistics checks, while a tongues spell penetrates the encoding.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Control Water',
@@ -625,6 +649,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "This spell provides two distinct effects. Lower Water reduces water depth by up to 2 feet per caster level, creating a depression or whirlpool in vast bodies. Raise Water increases water height, potentially flooding nearby land. Both versions allow flexibility in adjusting the area's horizontal dimensions.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Control Weather',
@@ -647,6 +672,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'You alter local atmospheric conditions appropriate to the current season and climate. The spell allows general weather control (wind direction and intensity) but not precise targeting such as directing lightning strikes. Effects persist for the listed duration or until you designate new weather via standard action. Druids receive doubled duration and a 3-mile radius.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Control Winds',
@@ -670,6 +696,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'You manipulate wind patterns within the affected area, choosing from four directional patterns: downdraft, updraft, rotation, or blast. Wind strength can be increased or decreased by one level per three caster levels. Creatures must make Fortitude saves each round to resist wind effects. The spell permits creating a calm eye up to 80 feet in diameter and allows limiting the cylindrical area as needed.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Crafter's Fortune",
@@ -691,6 +718,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The target gains a +5 luck bonus on its next Craft skill check.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cup of Dust',
@@ -714,6 +742,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "You inflict unquenchable thirst on the target upon a failed save. The affected creature experiences dehydration effects as detailed in environmental rules. The spell cannot deal more nonlethal damage than the target's current hit points. Drinking provides no relief from the curse's effects, though imbibed liquids produce their normal effects such as from poisons or potions. Removal requires spells like break enchantment, limited wish, miracle, remove curse, or wish.",
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cyclic Reincarnation',
@@ -736,6 +765,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This spell returns a deceased creature to life in a new body matching its original race. The reincarnated being appears similar enough to pass as offspring or kin of its former self. Non-humanoid creatures have a 75% chance of returning as youths with the young creature template (or as juveniles for age-category creatures like dragons). The spell functions similarly to reincarnate but allows restoration of those killed by death effects or destroyed undead, though non-humanoids restored this way always return as youths.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dance of a Hundred Cuts',
@@ -757,6 +787,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'You become an exceptional combat dancer, gaining morale bonuses to melee attacks, melee damage, Acrobatics checks, and AC equal to +1 per 3 caster levels (capped at +5). The AC bonus requires maintaining Dexterity. The spell requires constant movement: you must move at least 10 feet or make a melee attack each round, or the spell ends immediately.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dance of a Thousand Cuts',
@@ -778,6 +809,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This spell functions as dance of a hundred cuts, except you also gain the benefits of haste.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Damp Powder',
@@ -800,6 +832,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This spell ruins ammunition already loaded in a firearm by introducing moisture. Firing the affected ammunition automatically fails without any misfire chance, requiring a full-round action to clear the weapon before reloading. Those aware of the spell (via DC 16 Spellcraft check) can use a standard action to safely remove the compromised ammunition, destroying it in the process.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Darkvision',
@@ -822,6 +855,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'The spell grants the subject the ability to see 60 feet in complete darkness, appearing in black and white but otherwise functioning like normal sight. It can be made permanent via the permanency spell.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deft Digits',
@@ -852,6 +886,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This spell animates a glove or gauntlet, allowing you to manipulate it remotely with a fly speed of 30 feet. You can perform Disable Device and Sleight of Hand checks through the glove, though checks at distance incur a +5 DC penalty (or +20 without line of sight). The glove can lift and drag objects using your level as Strength, but cannot wield weapons effectively.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Delayed Consumption',
@@ -873,6 +908,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "This extract allows you to consume a second extract of up to 4th level whose effects are delayed. The companion extract must be consumed the next round or wasted. You can trigger it as an immediate action during the spell's duration. Only one delayed consumption can be active at a time; casting a second dispels the first.",
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Delectable Flesh',
@@ -897,6 +933,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "You designate one creature as the hunger's object. Other creatures within 15 feet must save or become depraved, gaining bite and claw attacks plus the scent ability. Affected creatures attack the target relentlessly as if confused, dropping held items. The effect ends if they lose sight or smell of the target for one minute or if they succeed on a save after attacking. Those who break free suffer penalties within 15 feet of the target.",
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Destabilize Powder',
@@ -919,6 +956,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "This spell increases the misfire range of a loaded firearm's ammunition by 1, plus an additional 1 per five caster levels (maximum +5 increase). If the firearm user recognizes the spell before firing, they may spend a standard action to clear and destroy the affected ammunition.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Detoxify',
@@ -950,6 +988,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "The spell neutralizes a creature's ability to inflict poison through any method, including weapons, spells, auras, and constant abilities. The affected creature cannot deliver poison, though they gain no poison resistance themselves.",
     source: "Pathfinder Roleplaying Game Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Devolution',
@@ -972,6 +1011,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "This spell causes an eidolon to lose evolutions, with the highest-cost evolutions disappearing first. It removes one evolution plus one additional evolution per five caster levels. Ties are resolved randomly. Related evolutions or abilities are lost if their prerequisites fail during the spell's duration.",
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Diminish Plants',
@@ -994,6 +1034,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'The spell offers two distinct effects. The Prune Growth version reduces vegetation to about one-third size within long range, automatically negating enhancement spells like entangle and plant growth. Casters can shape the affected area as a circle, semicircle, or quarter-circle, with selective exclusions available. The Stunt Growth version affects all normal plants within one-half mile, halving their productivity for the following year. Neither version affects plant creatures.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Disable Construct',
@@ -1015,6 +1056,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'You make a melee touch attack to disrupt the magical energy animating a construct. A failed save renders the target helpless, though it gains a new save each round. Constructs normally immune to magic receive a +4 bonus on saves against this spell.',
     source: 'Pathfinder Roleplaying Game Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Disintegrate',
@@ -1037,6 +1079,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'A green ray deals 2d6 damage per caster level (maximum 40d6). Creatures reduced to 0 hit points are entirely disintegrated. Against objects, it disintegrates up to a 10-foot cube of nonliving matter. Successful Fortitude saves reduce damage to 5d6.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Disfiguring Touch',
@@ -1067,6 +1110,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "You inflict a painful curse through touch that causes hideous disfigurement. You choose the deformity's appearance, often reflecting demonic patrons. The target suffers one of these penalties: a -2 ability score decrease (minimum 1), a -2 penalty to attack rolls or saving throws, or a 5-foot land speed reduction. You may create equivalent custom effects.",
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dissolution',
@@ -1089,6 +1133,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "The spell causes a touched item to become invisible and intangible to the world. The item ages normally and maintains its condition while hidden. Only miracle or wish can locate it. Upon duration's end, the item reappears at its original location, or nearby if space is unavailable, with potential planar displacement if relocated over 5 feet.",
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divine Vessel',
@@ -1111,6 +1156,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This spell allows an oracle to dramatically increase in size by one category, gaining double height and eight times weight. You gain substantial ability bonuses (+6 to Strength and Constitution), natural armor, darkvision, and spell resistance. The spell offers four aspect options: anarchic, axiomatic, celestial, or fiendish, each providing distinct benefits including damage reduction, energy resistances, flight capability, and alignment-specific natural weapons or attacks. Equipment enlarges proportionally, but thrown items return to normal size.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Drain Poison',
@@ -1142,6 +1188,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "This spell allows you to extract poison from a creature's fang and apply it to a weapon magically without self-harm. The poison activates upon striking a target, being touched, or being manually wiped away. The spell fails if the source creature is summoned, dead longer than one minute, or already had its poison extracted. Natural 1 attack rolls still risk self-exposure.",
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dragonvoice',
@@ -1163,6 +1210,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'This spell magically modifies your vocal cords to mimic dragon vocalizations. It provides a +6 circumstance bonus to Charisma checks and related skill checks when interacting with dragons. Additionally, your voice becomes significantly louder, reducing distance and obstruction penalties to Perception checks by half.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dust Form',
@@ -1186,6 +1234,7 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       'Your body and equipment transform into dust composition while maintaining humanoid form. Benefits include no penalties for squeezing, movement through smaller spaces, and incorporeal-like status. Nonmagical attacks inflict half damage, while magical attacks function normally. Equipment remains usable. If duration expires in an unusable space, you take 3d6 damage and relocate to the nearest valid location.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dwarven Veil',
@@ -1207,5 +1256,6 @@ export const TRANSMUTATION_BATCH_002: Spell[] = [
     description:
       "The spell enhances the target's dwarven or dwarf-like qualities, making it appear more attractive, personable, and worthy of respect and admiration by dwarves. The recipient gains a +2 circumstance bonus to interaction checks with dwarves, including Diplomacy and Intimidate attempts. The target remains recognizable as itself throughout the spell's duration.",
     source: 'Pathfinder Player Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
 ];

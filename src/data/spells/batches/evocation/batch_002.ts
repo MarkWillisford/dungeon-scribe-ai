@@ -1,8 +1,8 @@
 // Evocation spells — batch 002
 // Batch metadata: {"school":"evocation","batchNum":"002","startSpell":"Wind Wall","lastSpell":"Wrathful Mantle","nextSpell":"DONE","nextUrl":null,"spellsInBatch":4}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const EVOCATION_BATCH_002: Spell[] = [
+export const EVOCATION_BATCH_002: SpellDefinition[] = [
   {
     name: 'Wind Wall',
     classLevels: {
@@ -43,6 +43,7 @@ export const EVOCATION_BATCH_002: Spell[] = [
     description:
       'An invisible vertical curtain of wind appears. It is 2 feet thick and of considerable strength. It is a roaring blast sufficient to blow away any bird smaller than an eagle, or tear papers and similar materials from unsuspecting hands. (A Reflex save allows a creature to maintain its grasp on an object.) Tiny and Small flying creatures cannot pass through the barrier. Loose materials and cloth garments fly upward when caught in a wind wall. Arrows and bolts are deflected upward and miss, while any other normal ranged weapon passing through the wall has a 30% miss chance. (A giant-thrown boulder, a siege engine projectile, and other massive ranged weapons are not affected.) Gases, most gaseous breath weapons, and creatures in gaseous form cannot pass through the wall (although it is no barrier to incorporeal creatures). While the wall must be vertical, you can shape it in any continuous path along the ground that you like. It is possible to create cylindrical or square wind walls to enclose specific points.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Winds of Vengeance',
@@ -74,6 +75,7 @@ export const EVOCATION_BATCH_002: Spell[] = [
     description:
       'You surround yourself with a buffeting shroud of supernatural, tornado-force winds. These winds grant you a fly speed of 60 feet with perfect maneuverability. Neither your armor nor your load affects this fly speed. The winds shield you from any other wind effects, and form a shell of breathable air around you, allowing you to fly and breathe underwater or in outer space. Ranged weapons (including giant-thrown boulders, siege weapon projectiles, and other massive ranged weapons) passing through the winds are deflected by the winds and automatically miss you. Gases and most gaseous breath weapons cannot pass through the winds. In addition, when a creature hits you with a melee attack, you can shape your winds so they lash out at that creature as an immediate action. The creature must make a Fortitude saving throw or take 5d8 points of bludgeoning damage and be knocked prone (if on the ground). On a failed save, Huge flying creatures are checked and Large-sized or smaller flying creatures are blown away instead of knocked prone. On a successful save, the damage is halved and the creature is not knocked prone (or checked or blown away).',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Word of Chaos',
@@ -101,6 +103,7 @@ export const EVOCATION_BATCH_002: Spell[] = [
     description:
       "Any nonchaotic creature within the area of a word of chaos spell suffers the following ill effects, depending on their Hit Dice. HD equal to caster level: Deafened (Will negates). HD up to one less than caster level: Stunned, deafened (Will negates). HD up to five less than caster level: Confused, stunned, deafened (Will reduces confusion to 1 round). HD up to ten less than caster level: Killed, confused, stunned, deafened (Will reduces death to 3d6 + 1 per caster level damage, maximum +25). The effects are cumulative and concurrent. A successful saving throw negates or reduces the effect. Deafness lasts for 1d4 rounds. Stun lasts for 1 round. Confusion lasts for 1d10 minutes. These effects do not stack with themselves. On the caster's home plane, nonchaotic extraplanar creatures within the area are instantly banished back to their home planes for at least 24 hours (Will save at –4 penalty negates). Creatures whose HD exceed the caster's level are unaffected by word of chaos.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wrathful Mantle',
@@ -129,5 +132,6 @@ export const EVOCATION_BATCH_002: Spell[] = [
     description:
       'A shimmering mantle of light shrouds the subject, casting light like a torch. The subject gains a +1 resistance bonus on all saving throws per four caster levels (maximum +5 at 20th level). As a swift action, the subject may end the effect early to cause the light to burst outward, dealing 2d8 points of force damage to all creatures within 5 feet.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
 ];

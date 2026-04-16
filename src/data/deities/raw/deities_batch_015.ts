@@ -15,6 +15,7 @@ export const sekhmet: DeityEntry = {
   sacredAnimal: `Lion`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -33,6 +34,7 @@ export const sobek: DeityEntry = {
   sacredAnimal: `Crocodile`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -51,6 +53,7 @@ export const set: DeityEntry = {
   sacredAnimal: `Sha`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -69,6 +72,7 @@ export const apep: DeityEntry = {
   sacredAnimal: `Snake`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -105,6 +109,7 @@ export const shizuru: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -141,6 +146,7 @@ export const tsukiyo: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -159,6 +165,7 @@ export const qiZhong: DeityEntry = {
   sacredAnimal: `Crane`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -177,6 +184,7 @@ export const kofusachi: DeityEntry = {
   sacredAnimal: `Dog`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -195,6 +203,7 @@ export const daikitsu: DeityEntry = {
   sacredAnimal: `Fox`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -213,6 +222,7 @@ export const nalinivati: DeityEntry = {
   sacredAnimal: `Snake`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

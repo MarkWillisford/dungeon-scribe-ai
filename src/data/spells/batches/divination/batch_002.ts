@@ -1,8 +1,8 @@
 // Divination spells — batch 002
 // Batch metadata: {"school":"divination","batchNum":"002","startSpell":"Puzzle Box (skipped, Enchantment) → Read Magic","lastSpell":"Symbol of Scrying","nextSpell":"Tactical Insight","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/t/tactical-insight/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const DIVINATION_BATCH_002: Spell[] = [
+export const DIVINATION_BATCH_002: SpellDefinition[] = [
   {
     name: 'Read Magic',
     classLevels: {
@@ -40,6 +40,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'By means of read magic, you can decipher magical inscriptions on objects—books, scrolls, weapons, and the like—that would otherwise be unintelligible. This deciphering does not normally invoke the magic contained in the writing, although it may do so in the case of a cursed or trapped scroll. Furthermore, once the spell is cast and you have read the magical inscription, you are thereafter able to read that particular writing without recasting the spell. The duration of the spell is sufficient for you to read text at the rate of one page (250 words) per minute. After the duration expires, the magical writing becomes unintelligible again. Using the spell to read a scroll does not allow you to use it or its magic in any way. Read magic can be made permanent with a permanency spell.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Read Weather',
@@ -70,6 +71,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This divination spell forecasts weather conditions at your current location over the following 48 hours, providing advance warning of storms and tornadoes. The spell reveals only naturally occurring weather patterns and cannot account for magical effects that might alter atmospheric conditions.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remote Viewing',
@@ -98,6 +100,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "The caster enters a trance and projects their psychic senses to a distant location, gaining impressions rather than visual details. The spell requires specifying distance and direction. It reveals psychic impressions of a location—for instance, a fey forest might appear as a tree city, or an evil palace could seem like a dark fortress. During the hour-long casting, the caster's body becomes unconscious and helpless, unaware of surroundings.",
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Replay Tracks',
@@ -128,6 +131,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This divination enables reconstruction of past events at your location by analyzing tracks and signs. It reveals occurrences in chronological or reverse order based on your focus direction. Imagery lacks sufficient clarity for precise identification. You may make Survival checks while maintaining concentration, though only events tied to your spell focus appear. Creatures using pass without trace or leaving no detectable traces remain absent from visualized events.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Residual Tracking',
@@ -152,6 +156,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "By touching a footprint, the caster receives a clear mental image of the creature that made it, showing its exact appearance at the moment of the footprint's creation, including distinctive features, expressions, gear, equipment, and anything carried. The spell works on any footprint, such as revealing both a horse and any rider present when the hoofprint was made.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Retrocognition',
@@ -179,6 +184,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This divination enables you to perceive psychic impressions from prior occurrences at your present location. The spell reveals impressions in hourly increments, beginning with the most recent hour. Psychically traumatic events require concentration checks (DC 20, 30, or 40) to maintain focus. At 13th or higher caster level, you may access longer timeframes—1 week, 1 year, or 1 century per minute, depending on your level.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reveal Emotions',
@@ -207,6 +213,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "The spell creates an area where creatures emit colored auras reflecting their emotional states. Those within the area constantly glow with emotion-representing colors and continue glowing for 1d4 rounds after leaving. Emotionless or unaffected creatures display a dull purple hue while in the spell's area.",
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reveal Mirage',
@@ -237,6 +244,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This spell enables the caster to focus on a single visible point and determine whether terrain features are illusory. It grants a Will save to disbelieve terrain-affecting illusions (glamer subschool) from a distance, as if interacted with directly. The spell affects magical effects like hallucinatory terrain and mirage arcana, plus naturally occurring mirages.',
     source: 'Osirion, Legacy of Pharaohs',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reveal True Shape',
@@ -266,6 +274,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "This divination spell makes the true form of a magically disguised or transformed creature visible by overlaying a perfect illusion of their genuine appearance. It works on both physical transformations and illusory disguises but does not force actual shape-changing. The effect persists even if the target attempts new transformations or illusions during the spell's duration. It cannot reveal invisible creatures, defeat effects like blur or displacement, or penetrate ordinary disguises.",
     source: 'Pathfinder #19: Howl of the Carrion King',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Revelation',
@@ -293,6 +302,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'The caster gains temporary understanding of how a single puzzle, device, or trap functions, receiving an insight bonus to checks for disabling, manipulating, or solving it equal to caster level (maximum +10). This insight cannot be shared with others. Alternatively, the GM may grant a communicable clue that persists after the spell ends.',
     source: 'Pathfinder Chronicles: Seekers of Secrets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Riversight',
@@ -323,6 +333,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "This divination allows viewing events along a natural watercourse. The caster can observe anything on or within the river or within 15 feet of the river's banks. Viewpoint changes require a standard action; following movement is a free action. Downriver range extends 2 miles per caster level; upriver extends 0.5 miles per caster level. Dams, reservoirs, estuaries, and saltwater obstruct the sensor.",
     source: 'People of the River',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rumormonger',
@@ -350,6 +361,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "The caster speaks a brief anecdote or news item, which allows them to track its spread through crowds. Creatures who heard and repeated the rumor glow silver within range. The caster can follow the rumor's path through spreaders until reaching someone who did not repeat it. Alternatively, the spell traces a rumor backward to its source; those in the chain attempt Will saves to block the trace. Disguised creatures do not glow unless wearing the same disguise from casting time.",
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rune Trace',
@@ -380,6 +392,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "By touching and examining a carved or written rune, the caster divines information about its nature. Physical contact with bare fingers triggers the effect without activating the rune itself. Upon completion, the caster learns the rune's age (within specific timeframes), gains a +5 bonus on skill checks related to dispelling or disabling magical runes, learns the language or unique nature of the rune, and learns its general purpose (decorative, informational, defensive, or warning).",
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sand Table',
@@ -409,6 +422,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This divination spell creates a tactical scale model on a flat surface showing terrain, troop positions, and creature locations within a 1-mile radius as viewed from 1,000 feet overhead. The model displays Small or larger creatures as indistinct specks and marks war camps with banner symbols. It provides a static snapshot that does not update during its duration. The spell cannot detect invisible, incorporeal, or underground creatures, nor those indoors, submerged, under cover, or flying above 1,000 feet. Observers may attempt Stealth checks to hide on the model, though at a -10 penalty. Any disturbance to the surface immediately ends the spell.',
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scrying',
@@ -442,6 +456,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'You can observe a creature at any distance. If the target fails its Will save, you can see and hear the subject and approximately 10 feet of the area around it. An image appears in the focus object. If the subject moves, the sensor follows at up to 150 feet per round. Note that the target may notice the scrying sensor with a Perception check. Divination spells can be used through the sensor with a 5% chance per caster level of operating correctly.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scrying, Greater',
@@ -473,6 +488,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This spell functions like scrying, except as noted above. Detection and divination spells used through the sensor function reliably (not dependent on a percentage chance), including message, read magic, and tongues.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'See Alignment',
@@ -501,6 +517,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "Upon casting, you select a single alignment. Creatures of that alignment glow with a ghostly radiance visible only to you while within your sight. Other creatures cannot perceive this radiance. Spells that obscure alignment, such as undetectable alignment, also block this spell's effect.",
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'See Beyond',
@@ -531,6 +548,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This divination spell attunes your mind and perception to the spirit world. You receive a +5 circumstance bonus on Perception checks, increasing to +10 on Perception checks to find invisible creatures or objects, incorporeal creatures or objects, or things that exist only on the Ethereal Plane. Additionally, you can activate ethereal vision as a swift action to see through solid objects (as if using a ring of x-ray vision) for 5 rounds, after which the spell ends.',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'See Invisibility',
@@ -566,6 +584,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'You can see any objects or beings that are invisible within your range of vision, as well as any that are ethereal, as if they were normally visible. Such creatures are visible to you as translucent shapes, allowing you to discern their locations. The spell does not reveal the method of invisibility, nor does it reveal illusions or allow you to see through solid objects. See invisibility can be made permanent with a permanency spell.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'See Through Stone',
@@ -591,6 +610,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'The target gains the ability to see through solid rock as if it were glass, penetrating up to 1 foot of stone per caster level. Vision functions normally without requiring light sources, though low-light vision and darkvision do not enhance this ability. Metal (1 or more inches thick) or wood and dirt (3 or more feet thick) blocks vision. The spell provides no tactical advantage against concealed creatures—stone remains an obstacle to attacks.',
     source: 'Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Seed Spies',
@@ -622,6 +642,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This spell functions similarly to insect spies, but creates magically intelligent seeds instead of insects. The seeds can hear but not see. They fly at a speed of 10 feet (good maneuverability), but they cannot crawl or climb, although they can cling to rough, soft, or sticky creatures or surfaces.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Seek Thoughts',
@@ -659,6 +680,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'You scan the surface thoughts of creatures within range. Rather than reading specific thoughts, you detect the number of creatures who are thinking about a specific question or topic within range, as well as their location if they are visible to you. Creatures can make Will saves to prevent detection. You may maintain concentration while conversing normally, though others can succeed on a DC 25 Sense Motive check to notice your distraction.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sense Fear',
@@ -696,6 +718,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'You can detect frightened creatures within 30 feet and identify their level of fear (from spooked through horrified). You can determine direction but not exact location, unless the creature is within 5 feet where you gain a blindsense-like awareness.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sense Madness',
@@ -725,6 +748,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This spell allows detection of mental disturbances in creatures. On the first concentration round, you identify the presence of madness, addiction, sanity damage, or magical compulsions. With additional concentration, you learn specific details about sanity damage and can attempt Sense Motive and Spellcraft checks to identify exact conditions and spells affecting the target, gaining bonuses on subsequent dispel attempts.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sense Spirit Magic',
@@ -748,6 +772,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "You gain enhanced sensitivity to magic tied to your primary spirit and wandering spirits, including spells from those spirits' magic lists and related spell-like abilities. Benefits include a +10 circumstance bonus on Spellcraft checks to identify such spells within range, a +2 circumstance bonus on saving throws against them, and you are never flat-footed against attacks from these spells that require attack rolls.",
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sense Vitals',
@@ -776,6 +801,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'Your eyes glow blood red, revealing vital points of creatures within 30 feet. This grants you the ability to make sneak attacks with manufactured weapons, dealing an extra 1d6 precision damage. The bonus damage increases by 1d6 for every 3 levels above 3rd, to a maximum of +5d6 at 15th level. This additional precision damage stacks with other sources of precision damage.',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sensory Amplifier',
@@ -805,6 +831,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'The spell enhances sensory perception for all living creatures within the area except you. Recipients gain a +5 bonus to Perception checks. Sighted creatures receive low-light vision, and creatures with smell gain the scent ability. When creatures in the area take damage, they suffer an additional 2d6 points of the same damage type on the first hit each round.',
     source: 'Occult Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shadow Memory',
@@ -837,6 +864,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "This divination requires destroying an artwork bearing the victim's image. You gain assassin-focused knowledge in one of three categories: hidden passages within the target's residence (providing enhanced perception and secret-detection abilities); compromising personal information (granting bonuses to deception checks and penalties to the target's saves); or physical vulnerabilities (revealing defensive capabilities and guaranteeing critical hits). The benefits persist for one month or until the target's death, whichever occurs first. Only one active target is permitted simultaneously.",
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Share Memory',
@@ -867,6 +895,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "You momentarily link minds with the target to exchange a single memory lasting no longer than one minute. Options include showing the target one of your memories, showing the target one of its own memories, or viewing one of the target's memories.",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Share Senses',
@@ -896,6 +925,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "You meditate to reshape your familiar link, allowing you to perceive through the familiar's senses. You can hear, see, or smell what the familiar experiences (selecting one sense per casting). You gain nonmagical special sensory abilities your familiar possesses but use your own Perception skill. The spell does not function through magical or supernatural sensory enhancements and cannot penetrate darkness unless the familiar sees in such conditions. The connection is detectable as a scrying sensor.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sift',
@@ -922,6 +952,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'You examine an area as though conducting a careful search. You make a Perception check with a -5 penalty, modified for conditions, with no distance penalty. Results are compared against DCs for hidden features such as secret doors, traps, or treasure. You must see the target area and can only detect details perceivable through sight or touch. Sift detects only objects and features, not actual creatures.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Signs of the Land',
@@ -947,6 +978,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This spell functions similarly to commune with nature but reveals up to three details about your current territory regarding bodies of water, features, minerals, or plants. Upon discovering each feature, you automatically learn which skills apply to locating it and gain 1d6 Discovery Points toward finding it.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Skim',
@@ -981,6 +1013,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This divination enables expedited reading, completing texts in one-quarter the normal timeframe. When paired with comprehend languages, you read incomprehensible material four times faster. For fragmented or complex texts requiring ability or skill checks (such as Linguistics), the spell provides a +8 bonus on the check plus bonuses to Research checks within libraries.',
     source: 'Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Soulseeker',
@@ -1012,6 +1045,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "This divination spell allows you to identify a soul's judgment status or post-judgment fate. You must identify the target soul unambiguously or use the deceased's skull as a focus. Souls of differing alignment may attempt a Will save to resist. The spell fails if the subject lives or has been destroyed. For unjudged souls, it provides location estimates in the River of Souls or Purgatory. For judged souls, it identifies their planar destination and location as a petitioner.",
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Speak Local Language',
@@ -1042,6 +1076,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This spell functions similarly to tongues but grants the touched creature the ability to speak and understand only one regional human language that the caster knows. The selected language cannot be dead or extinct. The target speaks with native pronunciation but gains no cultural knowledge or altered appearance.',
     source: 'Heroes of the Street',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Speak with Animals',
@@ -1069,6 +1104,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'You can communicate with animals and receive answers to questions, though the spell does not increase their friendliness or attitude. Cautious animals tend to be evasive; less intelligent ones may make trivial or inane remarks. Friendly animals might perform favors or services.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Speak with Plants',
@@ -1095,6 +1131,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "You gain the ability to communicate with normal plants and plant creatures, asking questions and receiving answers. Plant perception is limited to their immediate vicinity, making detailed descriptions unlikely. The spell does not improve plant creatures' disposition. Wary plants may be evasive; less intelligent ones may offer inane comments. Friendly plant creatures might perform favors.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Speak with Plane',
@@ -1126,6 +1163,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "You tap into a sentient plane's consciousness to ask questions. You may ask one question per two caster levels. If the plane's alignment differs significantly from yours, it may attempt a Will save to resist. Standard bonuses apply (+20 for planes, +15 for demiplanes, with adjustments for alignment strength or wild magic traits). Planes subjected to this spell within the past week are immune.",
     source: "Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Speak with Waves',
@@ -1151,6 +1189,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This spell functions similarly to stone tell but allows conversations only with a body of standing or flowing fresh water at least as large as you are. Flowing water can generally communicate about upstream events but not downstream ones.',
     source: "Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Speechreader's Sight",
@@ -1186,6 +1225,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This divination allows you to read the lips of visible creatures speaking languages you understand with perfect accuracy, capturing exact wording. However, it does not help decode hidden meanings or slang. The ability requires moderate concentration, imposing a -4 penalty to Perception checks while using it. The spell can be made permanent via a permanency spell for 2,500 gp.',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Gauge',
@@ -1217,6 +1257,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This divination reveals spells known or prepared by the target, with the number revealed equal to your caster level. The spell reveals lowest-level spells first (excluding cantrips), progressing through spell levels. It cannot reveal spells of 4th level or higher, spell-like abilities, or other special abilities. The spell has no effect on non-spellcasters or those without relevant prepared spells.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spherescry',
@@ -1245,6 +1286,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "This divination enables remote observation through spheres containing a portion of your body matter (minimum: a single digit's worth). You perceive visual and auditory information within a 20-foot radius centered on the sphere, with the radius moving if the sphere relocates. Unlike standard scrying, no additional spells function through the sphere, and it operates without detectable magical indicators or standard detection methods.",
     source: 'Classic Treasures Revisited',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spirit Bonds',
@@ -1274,6 +1316,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This divination spell allows you to establish awareness connections with up to one willing creature or object per 3 caster levels within 30 feet during casting. By concentrating as a full-round action, you can ascertain direction, distance, and emotional or health status of creatures, or damage state and activation history of objects. Additionally, you may telepathically deliver a single message of up to 25 words to participating creatures, though doing so severs that specific connection.',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Starsight',
@@ -1305,6 +1348,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This divination allows you to view the night sky and celestial bodies as though conditions were clear, penetrating non-magical light pollution and natural obstructions like forest canopies. The spell grants a +2 insight bonus to Knowledge (geography) checks about stars and planets, and to Survival checks to avoid becoming lost. It functions only during nighttime, outdoors, and above ground.',
     source: 'People of the Stars',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Status',
@@ -1334,6 +1378,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This divination spell enables you to mentally monitor separated allies. You become aware of the direction, distance, and general condition of touched creatures, including whether they are unharmed, wounded, disabled, unconscious, dying, or affected by conditions such as poisoning, disease, or confusion. The spell functions across unlimited distances on the same plane until a subject leaves the plane or dies.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stone Tell',
@@ -1360,6 +1405,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       "You gain the ability to communicate with stones. Stones convey information about what or who has touched them and reveal concealed or hidden things behind or under them. Stone responses include complete descriptions when questioned. However, a stone's limited perspective, perception, and knowledge may restrict the information it can provide. The spell works with both natural and worked stone.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Storm Sight',
@@ -1391,6 +1437,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'You step into a magical or naturally occurring storm and commune directly with the power of the wind and rain. You can detect intelligent creatures (Intelligence 3+) within 400 feet through concentrated observation. Progressive concentration phases reveal: creature presence (1 minute), approximate distance (after 2 rounds), and direction (after 3 rounds). You also gain initiative bonuses and immunity to concentration checks caused by wind or storms.',
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sure Casting',
@@ -1421,6 +1468,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This divination spell grants temporary insight into magical defenses. When you cast the next spell within one round, treat your caster level as 5 points higher for the purpose of overcoming spell resistance only. This bonus does not affect damage, range, or other caster level-dependent effects, and applies only to the first spell cast after using this ability.',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Revelation',
@@ -1451,6 +1499,7 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'This spell functions like symbol of death but activates only against invisible creatures, those under illusion (glamer) effects, shapechangers, or magically transformed beings. It outlines affected targets with pale light similar to faerie fire, lasting 10 minutes per caster level without revealing true forms. Once triggered, the symbol remains active for 10 minutes per caster level. The spell can be made permanent via a permanency spell (minimum 12th-level caster) for 10,000 gp.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Scrying',
@@ -1483,5 +1532,6 @@ export const DIVINATION_BATCH_002: Spell[] = [
     description:
       'When triggered, this spell creates a scrying sensor linked to you, functioning similarly to a scrying spell. You become immediately aware of activation if conscious, or awaken from normal sleep. You can observe the area through the symbol as if using the scrying spell. The symbol remains active for 10 minutes per caster level after being triggered. Unlike symbol of death, this is not classified as a magical trap and can be made permanent with a permanency spell (minimum 13th-level caster) for 10,000 gp.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 ];

@@ -36,6 +36,7 @@ export const earthMetalSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -72,6 +73,7 @@ export const earthPetrificationSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -107,6 +109,7 @@ export const earthRadiationSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -144,6 +147,7 @@ export const evilCannibalismSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -179,6 +183,7 @@ export const evilCorruptionSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -214,6 +219,7 @@ export const evilDaemonSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -249,6 +255,7 @@ export const evilDemodandSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -284,6 +291,7 @@ export const evilDemonSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -319,6 +327,7 @@ export const evilDevilSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -354,6 +363,7 @@ export const evilFearSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -389,6 +399,7 @@ export const evilKytonSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -424,6 +435,7 @@ export const evilPlagueSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -461,6 +473,7 @@ export const fireArsonSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -497,6 +510,7 @@ export const fireAshSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -533,6 +547,7 @@ export const fireSmokeSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -570,6 +585,7 @@ export const evilDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -606,6 +622,7 @@ export const fireDomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -642,6 +659,7 @@ export const gloryDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -677,6 +695,7 @@ export const goodDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -712,6 +731,7 @@ export const healingDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -759,6 +779,7 @@ export const knowledgeDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -794,6 +815,7 @@ export const lawDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -829,6 +851,7 @@ export const liberationDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -864,6 +887,7 @@ export const luckDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -900,6 +924,7 @@ export const madnessDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -935,6 +960,7 @@ export const magicDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

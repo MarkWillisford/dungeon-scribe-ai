@@ -10,6 +10,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Will saves, +1 Knowledge (nobility) (class skill), and Ancient Osiriani as a bonus language.',
     source: "Mummy's Mask Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Mummy's Mask",
     prerequisites: [],
@@ -54,6 +55,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Knowledge (history) and Knowledge (religion); one becomes a class skill; +1 saves vs. divine magic.',
     source: "Mummy's Mask Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Mummy's Mask",
     prerequisites: [],
@@ -104,6 +106,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 Appraise (class skill); sell Ancient Osirion relics for 60% of listed price.',
     source: "Mummy's Mask Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Mummy's Mask",
     prerequisites: [],
@@ -146,6 +149,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 Knowledge (engineering) (class skill); +2 Perception to find hidden doors in Ancient Osirion structures.',
     source: "Mummy's Mask Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Mummy's Mask",
     prerequisites: [],
@@ -187,6 +191,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
       "One of your ancestors encountered a mummy's curse while exploring an ancient tomb, and though the curse has faded through the generations, it has left your bloodline with a heightened resistance to such effects. You gain a +2 trait bonus on saving throws against curses and curse effects (including mummy rot and spells with the curse descriptor), and a +2 trait bonus on saving throws against a mummy's aura of despair.",
     shortDescription: '+2 saves vs. curses and curse effects; +2 saves vs. mummy aura of despair.',
     source: "Mummy's Mask Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Mummy's Mask",
     prerequisites: [],
@@ -228,6 +233,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 saves vs. death effects; do not die until hp drops to negative (Con + 4).',
     source: "Mummy's Mask Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Mummy's Mask",
     prerequisites: [],
@@ -269,6 +275,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Bluff and Diplomacy vs. sphinxes; +1 on checks to decipher puzzles/riddles; Sphinx as bonus language.',
     source: "Mummy's Mask Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Mummy's Mask",
     prerequisites: [],
@@ -328,6 +335,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Disable Device (class skill); can use Disable Device to disarm magic traps.',
     source: "Mummy's Mask Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Mummy's Mask",
     prerequisites: [],
@@ -369,6 +377,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
       'You have dedicated yourself to eliminating the undead threat from Golarion, and have spent years studying their weaknesses and training to combat them. You gain a +1 trait bonus on damage rolls against undead creatures. You also gain a +1 trait bonus on Knowledge (religion) checks, and Knowledge (religion) is always a class skill for you.',
     shortDescription: '+1 damage vs. undead; +1 Knowledge (religion) (class skill).',
     source: "Mummy's Mask Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Mummy's Mask",
     prerequisites: [],
@@ -410,6 +419,7 @@ export const MUMMYS_MASK_TRAITS: TraitDefinition[] = [
       'You are a native of Wati who knows the city intimately, including its streets and secrets. Having grown up in the shadow of the necropolis, you have explored its edges many times but have always respectfully avoided entering the tombs themselves. You gain a +2 trait bonus on saving throws against fear effects. You also gain a +1 trait bonus on Knowledge (local) checks, and Knowledge (local) is always a class skill for you.',
     shortDescription: '+2 saves vs. fear; +1 Knowledge (local) (class skill).',
     source: "Mummy's Mask Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: "Mummy's Mask",
     prerequisites: [],

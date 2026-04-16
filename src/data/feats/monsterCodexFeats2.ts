@@ -7,6 +7,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Ogre Crush',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'Your unarmed strike damage increases by one step when you are grappling creatures smaller than you. You also gain the constrict special ability, dealing an amount of damage equal to either the slam damage for a creature of your size or your unarmed strike damage, whichever is greater.',
     shortDescription:
@@ -26,6 +27,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Old as Dust',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'You have been dead for so long you have become quite difficult to kill. When reduced to 0 hit points, you cannot be killed unless your body is completely destroyed with fire, doused in holy water, or damaged by a cure spell or channeled positive energy after reaching 0 HP. At 0 HP, you remain unconscious until healed or until the following midnight, when you regain 1 hit point per Hit Die and awaken.',
     shortDescription:
@@ -43,6 +45,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Powerful Tongue',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'Unlike others of your kind, you are able to pull your prey toward yourself. Your tongue attack gains the pull special ability. At the start of your turn, if your tongue is attached to a target of your size or smaller and you succeed at a combat maneuver check, you can pull the target 5 feet closer to you as a free action.',
     shortDescription:
@@ -59,6 +62,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Raging Brute',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       "Once per day as a free action, you can enter a fury that lasts 1 minute, gaining the benefits of one barbarian rage power you select when taking this feat. Your effective barbarian level for qualifying for rage powers equals your total Hit Dice minus 3. If the rage power would normally end a barbarian's rage when used, the ability ends immediately and you become fatigued. Standard barbarian rage benefits and penalties do not apply. This feat may be taken multiple times; each additional selection adds another rage power and one extra daily use. When activated, you may use any or all rage powers gained through this feat.",
     shortDescription:
@@ -75,6 +79,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Regenerate Muscles',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a free action, you can deactivate your regeneration for 1 minute, gaining a +2 enhancement bonus to Strength during that time. Your regeneration remains disabled for an additional minute after this ability ends. You may terminate this effect early as a free action, but may only activate it when your regeneration is currently functioning.',
     shortDescription:
@@ -105,6 +110,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Savage Critical',
     types: ['critical'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you use Vital Strike or confirm a critical hit, you may add your sneak attack damage to the damage from the attack. This ability does not apply to attacks that already incorporate sneak attack damage.',
     shortDescription:
@@ -122,6 +128,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Serpentine Compression',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'Your slippery scales and lithe musculature allow you to navigate tight spaces. You gain the compression universal monster ability, allowing you to move through an area as small as one-quarter your space without squeezing, or one-eighth your space when squeezing.',
     shortDescription:
@@ -135,6 +142,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Shadow Shroud',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'Using a portion of your innate magic, you cloak your body in darkness to evade attacks. As an immediate action, you can surround yourself with shifting darkness that grants concealment against a single attack. You can use this ability once per day, gaining one additional daily use at caster levels 5, 10, 15, and 20 for your racial darkness spell-like ability.',
     shortDescription:
@@ -151,6 +159,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Shared Stash',
     types: ['teamwork'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'You can exchange equipment with willing allies sharing your square. You can draw a weapon from an ally sharing your square as a free action, or draw a hidden weapon or any other object from them as a move action. You may also take a held object from a willing ally in the same square as you as a free action. Non-weapon exchanges provoke attacks of opportunity. Both you and your ally must have this feat for it to function.',
     shortDescription:
@@ -169,6 +178,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Sleeper',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'You heal 1 hit point per 10 minutes as long as you are surrounded by at least 5 feet of dirt or stone on all sides and take no actions.',
     shortDescription:
@@ -185,6 +195,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Smoking Boulder',
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you throw a rock as part of an attack action and hit your target, you can cause the boulder to emit a 10-foot-radius spread of heavy smoke. The smoke lasts for 1d4 rounds.',
     shortDescription:
@@ -201,6 +212,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: "Sniper's Lantern",
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       "You can use your dancing lights racial ability to create one orb of penetrating light that grants a +2 insight bonus on all ranged attacks made against targets within 5 feet of the light's location. The light can be repositioned as a move action. You can use this ability once per day, gaining one additional daily use when the caster level for your dancing lights racial ability reaches 5th, 10th, 15th, and 20th.",
     shortDescription:
@@ -230,6 +242,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Sonic Croak',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       "Instead of its normal frightening effect, you can use your terrifying croak to deal 1d4 points of sonic damage to creatures in a 15-foot cone (Fortitude half). The saving throw DC matches your terrifying croak's DC. For every 3 Hit Dice you possess, the damage dealt increases by 1d4. The Throat Pouch feat increases the size of this feat's cone by 5 feet for every 6 HD you have, not every 2 HD.",
     shortDescription:
@@ -247,6 +260,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Sprinting Troll',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a free action, you can boost your land speed by 10 feet for 1 minute. During this enhanced speed period and for an additional minute afterward, your regeneration becomes inactive. You may terminate this effect early as a free action, but may only activate it when your regeneration is currently active.',
     shortDescription: 'Temporarily disable regeneration to gain +10 feet land speed for 1 minute.',
@@ -263,6 +277,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Staggering Blow',
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       "When using Vital Strike, you can take a -2 penalty on your attack roll to also make the attack a staggering strike. If the attack succeeds, the target must make a Fortitude save (DC = 10 + 1/2 your character level + your Strength modifier) or become staggered until the start of your next turn. A creature that fails its save is immune to this feat's effects for 24 hours after recovery. This feat does not affect constructs, oozes, plants, undead, incorporeal creatures, or creatures immune to critical hits.",
     shortDescription:
@@ -281,6 +296,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Strangler',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you successfully entangle a creature with a lasso and exceed its CMD by 5 or more, the creature cannot speak above a whisper. The target must succeed at a concentration check (DC = 20 + your CMB + spell level) to cast spells with verbal components, use command word items, or perform magic requiring speech. Additionally, the Escape Artist DC to slip free of your lasso equals 15 or your CMD, whichever is higher.',
     shortDescription:
@@ -297,6 +313,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Stunning Croak',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       "The terrifying force of your croak disorients and debilitates your enemies. When activating your terrifying croak ability, you may choose to stun one creature within 30 feet for 1 round. On a successful Fortitude save, the target becomes staggered for 1 round instead. The save DC matches your terrifying croak ability's DC.",
     shortDescription:
@@ -315,6 +332,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Sure on Ice',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'You can move across icy and snowy surfaces without penalty and do not need to attempt Acrobatics checks to run or charge on ice. You gain a +4 bonus on Climb checks to climb ice.',
     shortDescription:
@@ -341,6 +359,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Swift Swimmer',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description: 'Your swim speed increases by 15 feet.',
     shortDescription: 'Swim speed increases by 15 feet.',
     prerequisites: [
@@ -355,6 +374,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Tail Weapon',
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'You gain the ability to make a tail slap attack as a secondary natural weapon dealing 1d6 points of bludgeoning damage. You also receive a +2 racial bonus on Acrobatics checks to balance and to your CMD against maneuvers that attempt to move you from your square.',
     shortDescription:
@@ -384,6 +404,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Telepathic Distraction',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a standard action, you can focus your telepathy on one creature within range to weaken its mental defenses. The target must succeed at a Will save (DC = 10 + 1/2 your Hit Dice + your Charisma modifier) or take 1d6 nonlethal damage and suffer a -2 penalty against mind-affecting effects for 1d6 rounds. This ability is itself a mind-affecting effect. You may use this ability a number of times per day equal to 1/2 your Hit Dice.',
     shortDescription:
@@ -400,6 +421,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Throat Pouch',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'The range of your terrifying croak ability increases by 5 feet for every 2 Hit Dice you have (maximum 30-foot increase). Additionally, while speaking boggard or vocalizing wordlessly, you may swell your throat pouch as a free action to reduce the Perception DC to hear your voice by an amount equal to your Hit Dice. The benefits of Throat Pouch and any feats that use it as a prerequisite are available only while you are wearing light, medium, or no armor.',
     shortDescription:
@@ -416,6 +438,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Tough as Iron',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'When you gain an enhancement bonus to your natural armor, that bonus increases by 2. This has no effect if your natural armor bonus is +0 or you do not have an enhancement bonus increasing your natural armor bonus.',
     shortDescription: 'Enhancement bonuses to natural armor increase by 2.',
@@ -431,6 +454,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Venomous Spray',
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'You gain the ability to spit venom as a secondary ranged attack with a 5-foot range. This natural attack does not trigger attacks of opportunity. Targets must make a Fortitude save against your poison DC or suffer blindness for 1d4 rounds in addition to normal poison effects. Venom spitting cannot occur in the same round as a bite attack, and after spitting you cannot use either ability for 1d4 rounds.',
     shortDescription:
@@ -444,6 +468,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Vestigial Head',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'You were born with a parasitic vestigial head featuring its own stunted brain. When making Will saves against hostile effects, there is a 25% chance the effect targets the vestigial head instead of you. If this occurs, you are treated as if you had succeeded at your saving throw, and instead become sickened for 1d4 rounds or the duration of the effect, whichever is longer. This feat can be taken twice; the second time increases the chance to 50% but does not grant an additional vestigial head.',
     shortDescription:
@@ -457,6 +482,7 @@ export const MONSTER_CODEX_FEATS_2: FeatDefinition[] = [
     name: 'Warren Digger',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     description:
       'You gain a burrow speed of 10 feet through earth, sand, or soil. This feat can be taken multiple times; each additional selection adds 10 feet to your burrow speed, to a maximum of your base land speed.',
     shortDescription:

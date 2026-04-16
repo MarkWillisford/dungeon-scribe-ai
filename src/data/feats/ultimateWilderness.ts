@@ -10,6 +10,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'Your bond with your animal companion or familiar is unusually close. The abilities of your animal companion or familiar are calculated as though your class were 4 levels higher, to a maximum effective druid level equal to your character level. If you have more than one animal companion or familiar, choose one to receive this benefit.',
     shortDescription: 'Effective druid level +4 for companion (max = character level)',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -36,6 +37,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You are treated as both an animal and your actual creature type for the purpose of effects that target animals. You can voluntarily fail any saving throw against an effect that specifically targets animals.',
     shortDescription: 'Count as animal for effects targeting animals',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -52,6 +54,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'Choose one animal. You gain a +2 bonus on Diplomacy and Intimidate checks when interacting with creatures of that type. In addition, you gain a +2 bonus on Knowledge (nature) checks regarding your totem beast.',
     shortDescription: '+2 Diplomacy, Intimidate, and Knowledge (nature) regarding chosen animal',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Nature Soul' }],
     effects: [],
@@ -73,6 +76,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'Your levels of druid and ranger stack for the purpose of determining the abilities of your animal companion and wild shape. Add your ranger levels to your druid levels to determine when you gain access to new wild shape forms and the total duration of wild shape per day.',
     shortDescription: 'Stack druid + ranger levels for companion and wild shape',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'favored enemy' },
@@ -89,6 +93,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'When you use the aid another action to help an animal companion, familiar, or mount, the bonus you grant increases by 2. In addition, when your animal companion, familiar, or mount is adjacent to you, it gains a +2 morale bonus on saving throws against fear effects.',
     shortDescription: 'Better aid another for companions; adjacent companions get +2 vs fear',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -105,6 +110,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You can train an animal to learn a trick in 1 day by increasing the DC of the Handle Animal check by 10. You can also teach an animal a trick that is not on the normal list of tricks by increasing the DC by 5.',
     shortDescription: 'Train animals faster and teach unusual tricks',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'handle_animal', ranks: 5 }],
     effects: [],
@@ -118,6 +124,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'When you apply your animal focus to yourself, choose one of the animal aspects you know. The bonus granted by that animal aspect increases by 1 (or by 2 if you are 8th level or higher).',
     shortDescription: '+1 (or +2 at 8th) to one chosen animal focus aspect',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'animal focus' }],
     effects: [],
@@ -141,6 +148,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You gain a +2 bonus on all Knowledge (nature) checks and Survival checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.',
     shortDescription: '+2 Knowledge (nature) and Survival (+4 at 10 ranks)',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -169,6 +177,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You can use the druid spell detect poison and the ranger spell know direction as spell-like abilities at will. Your caster level for these abilities is equal to your Hit Dice.',
     shortDescription: 'At-will detect poison and know direction as SLAs',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'nature_soul' }],
     effects: [],
@@ -182,6 +191,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You gain a plant companion as if you had the druid class feature. Your effective druid level for this plant companion is equal to your character level -3. This feat does not give you the ability to have an animal companion.',
     shortDescription: 'Gain a plant companion (effective level = character level -3)',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'nature_magic' },
@@ -198,6 +208,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'When you cast a spell with a target of "you" from the druid or ranger spell list, you can choose to share it with your plant companion as though it were an animal companion affected by the share spells ability.',
     shortDescription: 'Share personal druid/ranger spells with plant companion',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'plant_companion' },
@@ -214,6 +225,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'When you are in wild shape, you are treated as one size larger for the purpose of calculating CMB, CMD, and any size-based special attacks you use or that are used against you.',
     shortDescription: 'Wild shape counts as one size larger for CMB/CMD',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'wild shape' },
@@ -230,6 +242,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'If you are a multiclassed druid, your non-druid levels count as druid levels for the purpose of determining your wild shape ability, up to a maximum of 4 levels.',
     shortDescription: 'Up to 4 non-druid levels count for wild shape',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'wild shape' },
@@ -254,6 +267,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'When you use wild shape to take the form of an animal, you can expend an additional daily use of wild shape to add the celestial or fiendish template to your animal form. You gain the template abilities appropriate for your druid level.',
     shortDescription: 'Add celestial/fiendish template when using wild shape',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'wild shape' },
@@ -270,6 +284,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You gain the ability to cast a small number of spells drawn from the druid spell list. You can cast dancing lights, detect magic, and faerie fire each once per day as spell-like abilities. If you have 7 or more Hit Dice, you can also cast lesser confusion and glitterdust once per day.',
     shortDescription: 'Gain fey-themed spell-like abilities',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'nature_magic' },
@@ -289,6 +304,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You can use your Wisdom modifier instead of your Strength modifier on grapple combat maneuver checks. In addition, you gain a +2 bonus on grapple combat maneuver checks to maintain a grapple.',
     shortDescription: 'Use Wis for grapple checks; +2 to maintain grapple',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_grapple' },
@@ -314,6 +330,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using Kraken Style, when you succeed at a grapple combat maneuver check to deal damage, you can deal your Wisdom modifier in additional damage. This damage is untyped.',
     shortDescription: 'Add Wis modifier damage when dealing damage with grapple',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'kraken_style' },
@@ -332,6 +349,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using Kraken Style, when you succeed at a grapple combat maneuver check to pin a creature, you can attempt a second grapple check to deal damage as a free action. If this succeeds, the pinned creature must succeed at a Fortitude save or fall unconscious for 1 round.',
     shortDescription: 'Pinned creatures may fall unconscious',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'kraken_style' },
@@ -354,6 +372,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using this style, you take a -2 penalty to your AC. Whenever you take damage from a melee attack, the attacker takes 1d4 points of energy damage of a type you choose when you enter the style (acid, cold, electricity, or fire).',
     shortDescription: '-2 AC but attackers take 1d4 elemental damage',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -388,6 +407,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using Linnorm Style, the retribution damage increases to 2d4 points of the chosen energy type. In addition, when you are the target of a confirmed critical hit, the retribution damage increases to 4d4 points.',
     shortDescription: 'Retribution damage increases to 2d4 (4d4 on crits)',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'linnorm_style_uw' },
@@ -406,6 +426,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using Linnorm Style, if you are knocked unconscious or killed by an attack, the attacker takes energy damage equal to double the normal retribution damage and must succeed at a Fortitude save or be affected by a condition based on the energy type chosen.',
     shortDescription: 'Double retribution damage + condition if knocked out or killed',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'linnorm_style_uw' },
@@ -427,6 +448,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using this style, you do not take the -5 penalty on Stealth checks for moving at more than half speed. In addition, you gain a +2 bonus on Stealth checks while in dim light or darkness.',
     shortDescription: 'No Stealth penalty for movement; +2 Stealth in dim light',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'skill', skillId: 'stealth', ranks: 1 },
@@ -456,6 +478,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using Owl Style, you can use the charge action while using Stealth. You take no penalty to Stealth for charging, though you still take the normal -2 penalty to AC for charging.',
     shortDescription: 'Charge while using Stealth',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'owl_style' },
@@ -473,6 +496,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using Owl Style, when you charge a creature that is unaware of your presence, you deal an additional 2d6 points of precision damage on your first attack. This damage increases to 4d6 if you have 10 or more ranks in Stealth.',
     shortDescription: '+2d6 precision damage on charge from stealth (+4d6 at 10 ranks)',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'owl_style' },
@@ -493,6 +517,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using this style, you can use a hand that is holding a weapon or shield to attempt a grapple combat maneuver check, though you take a -4 penalty on the check if you do so.',
     shortDescription: 'Grapple with a hand holding weapon/shield at -4 penalty',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_grapple' },
@@ -509,6 +534,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using Grabbing Style, the penalty on grapple checks from holding a weapon or shield is reduced to -2. In addition, when you succeed at a grapple check to move a creature, you can move it into a space occupied by an ally.',
     shortDescription: 'Reduce weapon grapple penalty to -2; drag into ally spaces',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'grabbing_style' },
@@ -527,6 +553,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using Grabbing Style, you take no penalty on grapple checks from holding a weapon or shield. You can even wield a two-handed weapon and still make grapple attempts with that hand.',
     shortDescription: 'No penalty to grapple while holding weapons or shields',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'grabbing_style' },
@@ -548,6 +575,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'When you charge a creature on the ground from a higher elevation, you deal additional damage equal to the number of dice of falling damage you would take for that height (minimum 1d6). This damage is not multiplied on a critical hit.',
     shortDescription: 'Extra damage when charging from higher ground',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'acrobatics', ranks: 3 },
@@ -565,6 +593,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'When you are making a full attack against a creature you are flanking, you can take a 5-foot step between each attack. You must remain flanking the creature with the same ally each time you take a 5-foot step. You cannot take more total 5-foot steps than your number of attacks.',
     shortDescription: '5-foot step between each attack while flanking',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'dodge' },
@@ -583,6 +612,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While climbing, you are not denied your Dexterity bonus to AC. In addition, if you succeed on a Climb check by 5 or more, you do not need to make additional Climb checks to avoid falling when taking damage.',
     shortDescription: 'Keep Dex to AC while climbing; resist falling from damage',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'skill', skillId: 'climb', ranks: 5 }],
     effects: [],
@@ -596,6 +626,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'Your natural armor bonus increases by 1. You can take this feat multiple times. Its effects stack.',
     shortDescription: '+1 natural armor bonus',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -620,6 +651,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'Choose one of your natural attack forms. The damage for this natural attack increases by one step on the following list: 1d2, 1d3, 1d4, 1d6, 1d8, 2d6, 3d6, 4d6, 6d6, 8d6, 12d6.',
     shortDescription: 'Increase damage die of one natural attack by one step',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       { type: 'bab', minimum: 4 },
@@ -645,6 +677,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'As an immediate action, you can attempt a Climb check (DC = the surface DC + 10) to catch yourself while falling near a climbable surface. If successful, you arrest your fall and take no falling damage.',
     shortDescription: 'Immediate action Climb check to catch yourself falling',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'climb', ranks: 1 }],
     effects: [],
@@ -658,6 +691,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You can use the charge action to make a thrown weapon attack instead of a melee attack. All other requirements of the charge action still apply.',
     shortDescription: 'Charge with thrown weapons',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'point_blank_shot' }],
     effects: [],
@@ -671,6 +705,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You gain a +2 bonus on all Knowledge (local) checks and a +2 bonus on Sense Motive checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.',
     shortDescription: '+2 Knowledge (local) and Sense Motive (+4 at 10 ranks)',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -700,6 +735,7 @@ export const UW_FEATS: FeatDefinition[] = [
     description: 'You gain an additional daily use of your wild shape ability.',
     shortDescription: '+1 daily use of wild shape',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'wild shape' }],
     effects: [
@@ -721,6 +757,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You can use your wild empathy ability to affect magical beasts with an Intelligence score of 1 or 2 as if they were animals. You take a -4 penalty on such checks.',
     shortDescription: 'Wild empathy works on magical beasts (Int 1-2) at -4',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'wild empathy' },
@@ -739,6 +776,7 @@ export const UW_FEATS: FeatDefinition[] = [
       "You can use summon nature's ally I once per day as a spell-like ability with a caster level equal to your Hit Dice. At 5th level, you can use summon nature's ally II instead, and at 9th level you can use summon nature's ally III.",
     shortDescription: "Summon nature's ally as SLA (scales with level)",
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'nature_magic' },
@@ -756,6 +794,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You can decipher Druidic as though it were a mundane language with a DC 25 Linguistics check. If you succeed, you can read and understand Druidic for 24 hours. You cannot speak or write Druidic with this feat.',
     shortDescription: 'Read Druidic with DC 25 Linguistics check',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'linguistics', ranks: 1 }],
     effects: [],
@@ -769,6 +808,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You gain 2 claw attacks that deal 1d4 points of damage each (1d3 if Small). These are primary natural attacks. When you have other natural attacks, these become secondary natural attacks instead.',
     shortDescription: 'Gain 2 claw natural attacks (1d4)',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -785,6 +825,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'When you use wild shape, polymorph, or a similar ability to take the form of a beast, you gain a +2 bonus on Perception and Survival checks for the duration of the transformation.',
     shortDescription: '+2 Perception and Survival while in beast form',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'wild shape' }],
     effects: [],
@@ -800,6 +841,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'When you and an ally who also has this feat both cast spells that deal energy damage of different types on the same round, and the areas overlap, the overlapping area deals an additional 2d6 points of damage of a combined energy type.',
     shortDescription: 'Combined elemental spells deal extra damage in overlap',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'caster_level', minimum: 1 }],
     effects: [],
@@ -815,6 +857,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You add your Wisdom bonus on Acrobatics checks and can crawl at half speed as a move action without provoking attacks of opportunity. While prone, you are not denied your Dexterity bonus to AC.',
     shortDescription: 'Add Wis to Acrobatics; crawl safely; keep Dex to AC while prone',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -833,6 +876,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using Monkey Style, you gain a climb speed equal to your base land speed, and you do not need to make Climb checks to traverse a vertical surface. In addition, you gain a +4 bonus on saving throws against effects that would cause you to fall prone.',
     shortDescription: 'Gain climb speed; +4 vs prone effects',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'monkey_style' },
@@ -860,6 +904,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While using Monkey Style, as a standard action you can make one unarmed attack and attempt a dirty trick combat maneuver against the same target. If your attack hits, you gain a +4 bonus on the dirty trick check.',
     shortDescription: 'Combine unarmed attack with dirty trick; +4 if attack hits',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'monkey_style' },
@@ -882,6 +927,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'When you use wild shape to assume an animal form, you retain the ability to speak normally. You can cast spells with verbal components while in wild shape as long as you can speak.',
     shortDescription: 'Speak normally while in wild shape',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'wild shape' },
@@ -898,6 +944,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'While in your bestial form, you can cast spells of 1st level or lower that have a casting time of 1 standard action or less without reverting to your natural form. You can use this ability a number of times per day equal to your Charisma modifier (minimum 1).',
     shortDescription: 'Cast low-level spells in bestial form',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'skinwalker' },
@@ -914,6 +961,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You gain an animal companion as if you were a druid of your character level -3. Unlike a druid, this animal companion does not gain the ability to share spells. This feat functions like the druid animal companion ability, except that your effective druid level is equal to your character level -3.',
     shortDescription: 'Gain animal companion (effective level = character level -3)',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'nature_soul' },
@@ -931,6 +979,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You gain a +2 bonus on Diplomacy and Intimidate checks made against animals and magical beasts. In addition, you gain a +2 bonus on Handle Animal checks.',
     shortDescription: '+2 Diplomacy/Intimidate vs animals and +2 Handle Animal',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'nature_soul' }],
     effects: [
@@ -952,6 +1001,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You may move through any sort of undergrowth (such as natural thorns, briars, overgrown areas, and similar terrain) at your normal speed and without taking damage or suffering any other impairment.',
     shortDescription: 'Move through undergrowth at full speed without impairment',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'nature_soul' },
@@ -968,6 +1018,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You can track creatures across any terrain. You gain the track class feature as a ranger of your character level. If you already have this ability, you gain a +2 bonus on Survival checks to follow tracks.',
     shortDescription: 'Gain track ability or +2 to Survival for tracking',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'nature_soul' },
@@ -997,6 +1048,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'As a full-round action, you and all allies adjacent to you can simultaneously move up to your respective speeds in any directions. This movement provokes attacks of opportunity as normal. All allies must be able to see or hear you to benefit from this feat.',
     shortDescription: 'You and adjacent allies simultaneously scatter-move',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -1010,6 +1062,7 @@ export const UW_FEATS: FeatDefinition[] = [
       "You receive a +4 dodge bonus to AC against attacks of opportunity provoked by moving through a larger creature's threatened area. In addition, you gain a +2 bonus on Acrobatics checks to move through a larger creature's space.",
     shortDescription: '+4 dodge AC vs AoO and +2 Acrobatics through larger creatures',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'dodge' },
@@ -1040,6 +1093,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You can identify natural plants and fungi with a DC 10 Knowledge (nature) check. You can create herbal remedies that function as alchemical items. Creating an herbal remedy takes 1 hour and requires a Craft (alchemy) or Profession (herbalist) check.',
     shortDescription: 'Identify plants and craft herbal remedies',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_nature', ranks: 1 }],
     effects: [],
@@ -1053,6 +1107,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You can predict weather conditions 24 hours in advance with a DC 15 Survival check. For every 5 by which you exceed the DC, you can predict an additional day in advance. You also gain a +2 bonus on Survival checks to avoid getting lost.',
     shortDescription: 'Predict weather; +2 Survival to avoid getting lost',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'survival', ranks: 5 }],
     effects: [
@@ -1079,6 +1134,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'When you are flanking with an ally who also has this feat, you gain a +4 bonus on attack rolls instead of the normal +2 flanking bonus. However, when you miss with a melee attack while flanking, you must make a second attack roll against the ally; on a hit, the ally takes the damage instead.',
     shortDescription: '+4 flanking bonus instead of +2 but risk hitting ally',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'bab', minimum: 4 }],
     effects: [],
@@ -1092,6 +1148,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'Your animal companion gains the ferocity universal monster ability, allowing it to continue fighting even when below 0 hit points. It is not staggered while using this ability.',
     shortDescription: 'Animal companion gains ferocity (fight below 0 HP)',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Animal companion class feature' },
@@ -1108,6 +1165,7 @@ export const UW_FEATS: FeatDefinition[] = [
       'You can communicate with your animal companion as though you shared a common language. This does not give your animal companion the ability to understand other speakers, nor does it make your companion more intelligent. This communication is empathic and limited to simple concepts.',
     shortDescription: 'Empathic communication with animal companion',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Animal companion class feature' },

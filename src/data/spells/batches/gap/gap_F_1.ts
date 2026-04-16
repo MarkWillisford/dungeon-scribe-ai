@@ -1,8 +1,8 @@
 // Gap spells — letter F part 1 (first half alphabetically: Fable Tapestry through Flash Forward)
 // Gap metadata: {"letters":"F_1","totalChecked":160,"newSpells":49,"skipped":111}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_F_1: Spell[] = [
+export const GAP_SPELLS_F_1: SpellDefinition[] = [
   {
     name: 'Fable Tapestry',
     classLevels: { bard: 5 },
@@ -19,6 +19,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This ability is restricted to members of a specific ethnic nomadic group. The caster uses shadows and colors from a family scarf to create legendary folkloric figures. The spell functions similarly to shadow conjuration emulating summon monster I, with the limitation that only one instance of the same character can exist at any time. These shadow creatures possess 40% of normal reality and come from a specific list including creatures like a freelance thief, fey giant toad, con artist, carousing champion, evasive slip, or bearded devil.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fabricate Disguise',
@@ -33,6 +34,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'You change outfits or create a disguise out of materials you are wearing or carrying, using styling, makeup, piercings, and similar superficial modifications. The spell cannot alter your body or change object structures but produces an immediate non-magical disguise. Effectiveness depends on a Disguise skill check.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Face of the Devourer',
@@ -48,6 +50,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell transforms the target\'s face into a hideous shape, such as a half-melted visage with insect legs instead of teeth, seeping pits instead of eyes, and suckered tongues dangling from its misshapen mouth. The exact appearance varies randomly and does not impair senses or breathing. The target gains a +4 circumstance bonus on Intimidate checks and a bite attack if it lacks one naturally (1d6 for Medium, 1d4 for Small, 1d8 for Large), usable as a primary or secondary attack.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Faerie Fire',
@@ -64,6 +67,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'A pale glow surrounds and outlines the subjects. Outlined subjects shed light as candles. Outlined creatures do not benefit from the concealment normally provided by darkness (though a 2nd-level or higher magical darkness effect functions normally), blur, displacement, invisibility, or similar effects. The light is too dim to have any special effect on undead or dark-dependent creatures. Outlined creatures take a -20 penalty on Stealth checks. The color of the glow is your choice at the time of casting: blue, green, or violet.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fair Is Foul',
@@ -79,6 +83,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This transmutation curse inflicts a random disfiguring or painful mutation upon the target. The caster may consult a provided table of arcane malignancies, each presenting distinct mechanical penalties ranging from movement impairments to skill check reductions. The curse persists permanently unless removed through break enchantment, limited wish, miracle, remove curse, or wish spells; standard dispelling cannot eliminate it.',
     source: 'Pathfinder Player Companion: Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fairy Ring Retreat',
@@ -95,6 +100,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'This conjuration creates a hidden extradimensional meadow accessible through a portal resembling a circle of toadstools enclosing a 10-foot square. The caster controls entry and can reshape the space within the spell\'s volume limits. The refuge features an idyllic twilight setting with surrounding fruit and nut trees providing sustenance for up to four creatures per caster level daily. The environment maintains comfortable, temperate conditions. The space includes ethereal servants (two per caster level) functioning like unseen servant spells but visible and mobile throughout the meadow. External conditions cannot affect this sealed space.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fallback Strategy',
@@ -109,6 +115,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'While active, you may reroll one attack roll, combat maneuver check, or skill check before the results are revealed. The second result must be accepted regardless of outcome. The spell concludes once the reroll is used. Only one instance of this spell may affect the caster simultaneously.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'False Face',
@@ -124,6 +131,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell alters details of your appearance so that you are no longer recognizable as yourself. The new appearance must remain within normal parameters for your race, ethnicity, and gender. While you cannot control specific appearance details, you may choose to recreate a previously-used appearance, enabling you to maintain established identities across castings.',
     source: 'Pathfinder Player Companion: Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'False Future',
@@ -139,6 +147,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell obscures a target\'s future by preventing divinations from revealing their true actions or experiences. Instead, divinations show an alternate future the caster describes during casting. Targets can save to resist initially, and divination casters can save to disbelieve the illusion. The spell remains undetectable by standard magic detection but greater detect magic can reveal it.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'False Resurrection',
@@ -155,6 +164,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'Rather than restoring a soul to life, this spell summons a shadow demon with the advanced simple template to possess the body. If the target\'s spell resistance is overcome, the creature\'s soul may refuse the possession and choose true resurrection instead. When the spell ends or the demon is expelled, the body becomes soulless. Attempts to identify this spell with a skill check incorrectly identify it as resurrection due to the ruse descriptor.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Familiar Double',
@@ -172,6 +182,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell functions as project image, except the illusory duplicate appears in your familiar\'s square and moves when your familiar moves.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Familiar Figment',
@@ -187,6 +198,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell creates an illusory duplicate of your familiar that moves erratically around your familiar\'s space, frequently moving through the familiar\'s body. Attacks directed at the familiar have a 50% miss chance, with missed strikes targeting the figment instead. Unlike mirror image, the figment persists after being struck. As a swift action, the familiar can direct the figment to make a melee touch attack using your base attack bonus and the familiar\'s Dexterity modifier. Successful hits cause the target to be treated as flanked until the familiar\'s turn ends.',
     source: 'Pathfinder Player Companion: Animal Archive',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Familiar Melding',
@@ -201,6 +213,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'Your soul projects into your familiar\'s body, taking control while leaving the familiar\'s consciousness intact. Your physical body appears dead to observers during this time. While inhabiting the familiar, you retain your Intelligence, Wisdom, Charisma, level, class, base attack bonus, base save bonuses, alignment, and mental abilities. The familiar\'s body keeps its own physical attributes, hit points, natural abilities, and automatic abilities. You can use the familiar\'s abilities, including spells and spell-like abilities, though somatic components require appropriate limbs and speech requires the familiar\'s language ability. As a standard action, you may return to your body if within range. If the familiar is slain while you inhabit it and your body remains in range, your soul safely returns to your original body. If the familiar is out of range when killed, you die.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fastidiousness',
@@ -215,6 +228,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'Your person and your equipment stay clean and dry. Dust and moisture slough off immediately; even when you are completely soiled, your appearance reverts to a pristine state over the course of 1 minute. You gain a +2 circumstance bonus on Fortitude saving throws against inhaled and ingested diseases.',
     source: 'Pathfinder Player Companion: Disciple\'s Doctrine',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fear the Sun',
@@ -229,6 +243,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'Affected creatures gain light blindness. When exposed to bright light, affected targets are blinded for 1 full round and are dazzled in successive rounds. If cast in bright light, targets become immediately blinded and dazzled starting at their next turn.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fearsome Duplicate',
@@ -245,6 +260,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'This illusion spell creates an enlarged, menacing phantom version of yourself up to two size categories larger. The duplicate can communicate and perform social interactions (Bluff, Diplomacy, Intimidate) with a +2 bonus on Intimidate checks. You perceive through the duplicate but take a -4 penalty to Perception checks while controlling it. The duplicate requires a standard action each round to maintain control and vanishes if attacked, damaged, or moved beyond spell range.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Feast of Ashes',
@@ -260,6 +276,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This curse inflicts unrelenting hunger on the victim. Upon failing their save, the target begins starving and the spell deals nonlethal damage limited to the target\'s current hit points. Food provides no relief — eating actually nauseates the creature for 1 round unless they succeed at a DC 12 Fortitude save, though consumables retain their other effects (poisons, potions, etc.). The curse responds to break enchantment, limited wish, miracle, remove curse, or wish spells.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Feast On Fear',
@@ -275,6 +292,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'Each round, you can target a single living creature and strike it with fear-inducing power. Targets who fail become panicked for 1d4 rounds, and you gain 5 temporary hit points (which disappear after 1 hour). After panic ends, the creature remains shaken for 10 minutes per caster level and automatically panics again if it sees you during this period. Temporary hit points from multiple creatures stack.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fester',
@@ -289,6 +307,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell channels necrotic energy to impede healing. The affected creature gains spell resistance equal to 12 + your caster level against effects that restore hit points or grant temporary hit points. Additionally, healing from effects bypassing spell resistance becomes halved. A successful Fortitude save reduces duration to a single round.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fester, Mass',
@@ -303,6 +322,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as fester, but targets one creature per level, no two of which can be more than 30 feet apart.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fey Gate',
@@ -319,6 +339,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell functions similarly to the planar travel function of gate, but functions exclusively between the Material Plane and the Fey World. It creates a circular portal filled with obscuring gray fog. Travelers passing through are randomly repositioned within the Fey World. When the duration ends, the caster may attempt a DC 30 Spellcraft check; success extends the portal\'s existence for 1d4+1 additional days. Those exiting through the portal always return to its original casting location. The spell ensures arrival on solid ground but provides no protection against environmental hazards or creatures present there.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fiendish Wrath',
@@ -335,6 +356,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This enchantment causes affected creatures to enter a combat frenzy, granting a +2 morale bonus to Strength and Constitution, plus a +1 morale bonus on Will saves. When a creature makes two successful claw or unarmed strikes against an enemy in the same round, it can perform a rend attack dealing additional damage equivalent to its normal strike damage plus 1.5 times its Strength modifier.',
     source: 'Pathfinder Player Companion: Plane-Hopper\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fiery Runes',
@@ -350,6 +372,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This enchantment imbues a weapon with a magical fire rune. When the wielder successfully hits an opponent in melee combat, they can use a swift action to trigger the rune, dealing fire damage. The spell scales with caster level: 1d4+1 at 3rd, reaching 5d4+5 at 11th level (increasing by 1d4+1 every 2 levels beyond 3rd). If the target has spell resistance, a caster level check occurs upon discharge; if successful, the rune activates normally; if resisted, the spell ends.',
     source: 'Pathfinder Player Companion: Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fiery Shuriken',
@@ -367,6 +390,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You conjure flaming shuriken that hover nearby. These projectiles can be launched immediately or held for later use. Each requires a ranged touch attack and inflicts 1d8 fire damage. You may launch shuriken as a swift action (one) or standard action (multiple) on subsequent rounds without provoking attacks of opportunity. Unspent shuriken vanish when the spell\'s duration expires.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Final Sacrifice',
@@ -381,6 +405,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This evocation spell disrupts conjuring energies within a summoned creature, causing violent detonation. On a failed Fortitude save, the target dies immediately. All creatures within 20 feet take 1d4 damage per spell level of the original summoning spell. Damage type is fire unless the creature has cold or water subtypes, then it becomes cold damage. Those caught in the explosion can attempt Reflex saves for half damage. The spell can target a summoner\'s eidolon, though eidolons receive a +4 Fortitude bonus unless the caster is the eidolon\'s own summoner.',
     source: 'Pathfinder Player Companion: Monster Summoner\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Find Fault',
@@ -395,6 +420,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You gain insight into a target\'s weaknesses, as if you had made an appropriate Knowledge skill check with a result equal to 20 + your caster level. Your first melee or ranged attack before the end of your next turn receives a +5 insight bonus. However, the spell fails if the target is polymorphed, disguised, or concealed by illusion and you are unaware of its true form.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Find Quarry',
@@ -409,6 +435,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'You can sense whether a well-known creature you can clearly visualize is within a 20-mile radius and determine its distance, direction, movement status, speed, and mode of travel. The detection radius expands by 5 miles for every two caster levels above 10th, reaching a maximum 45-mile radius at 20th level. Anything preventing locate creature from functioning also blocks find quarry.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Breath',
@@ -425,6 +452,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You can unleash up to three successive cones of flame during the spell\'s duration, each activated as a standard action. The first cone inflicts 4d6 fire damage, the second deals 2d6 damage, and the third deals 1d6 damage. All affected creatures within the cone area may attempt a Reflex save for half damage. The spell concludes after the third flame cone is discharged.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire of Entanglement',
@@ -439,6 +467,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell wraps a creature in flames that restrict movement when you use your smite evil ability against the target, causing it to become entangled for the spell\'s duration. If the target begins its turn adjacent to you, it cannot move at all, treating you as an immobile object. A successful Reflex save reduces the effect to only 1 round instead of the full duration.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire of Judgment',
@@ -453,6 +482,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This evocation engulfs the next target of your smite evil ability in positive energy flames. The affected creature suffers 1d6 damage at the start of each turn, plus an additional 1d6 whenever it attacks anyone besides you. Against outsiders with evil alignment, evil-aligned dragons, or undead, damage increases to 1d10 per instance. A successful Will save reduces the effect to just one round. The damage bypasses damage reduction and originates from divine sources.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire of Vengeance',
@@ -468,6 +498,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'When cast, this spell prepares your next smite evil attack. Upon striking the target, holy flames flare up when the target attacks someone other than you. If the target makes any attack not directed at you during the smite evil duration, it suffers 3d8 fire damage. The spell ends once triggered or when the smite evil effect expires.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Seeds',
@@ -484,6 +515,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell transforms plant materials into two distinct weapon types. You can create acorn grenades — splash weapons with 20-foot range increments dealing 1d4 points of fire damage per caster level (maximum 20d4) with adjacent creatures taking splash damage. Alternatively, you may craft holly berry bombs placed within 200 feet that detonate on command, dealing 1d8 points of fire damage + 1 point per caster level in a 5-foot radius with Reflex save for half damage.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Snake',
@@ -500,6 +532,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a line of flames shaped as desired, affecting up to one 5-foot square per caster level. Creatures in the path take 1d6 points of fire damage per caster level (maximum 15d6).',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Sneeze',
@@ -515,6 +548,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'Upon casting, you experience repeated sneezing as a standard action each round. Each time you sneeze, you produce a 10-foot-long cone of fire and wind. Creatures in the cone sustain 2d6 fire damage with a successful Reflex save reducing this by half. Those failing the initial save must succeed at a Fortitude check or become prone from the wind blast.',
     source: 'Pathfinder Player Companion: Goblins of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Storm',
@@ -531,6 +565,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'When cast, this spell fills an area with sheets of roaring flame. Natural vegetation and plant creatures can be excluded from harm. All other creatures in the affected region suffer 1d6 fire damage per caster level (maximum 20d6). Those failing their save catch fire and take 4d6 damage each round until extinguished via a full-round action requiring a DC 20 Reflex save.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Trail',
@@ -547,6 +582,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'When cast, flammable liquid oozes from your pores and combusts without harming you. Each time you move, you leave a fire trail lasting 1 round. Maximum trail length per round depends on size: Small/Medium up to 60 feet, Large up to 30 feet (10 wide), Huge up to 15 feet (15 wide). Creatures starting their turn adjacent to the trail take 1d6 fire damage. Those starting within or entering the trail take 1d6 + 1 per caster level damage (max +10), applied each time they enter.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Trap',
@@ -562,6 +598,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This abjuration spell creates a fiery detonation when someone unauthorized opens a protected object. When triggered, the explosion fills the area within a 5-foot radius around the spell\'s center and deals 1d4 points of fire damage + 1 point per caster level (maximum +20). The protected item remains unharmed. Knock spells do not bypass it. Failed dispel magic attempts do not trigger it. The caster and attuned individuals can use the object safely.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fire's Friend",
@@ -577,6 +614,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You become surrounded by protective flames that harm others but leave you and your possessions unharmed, providing illumination equivalent to a torch. When an enemy attacks with a melee weapon lacking reach or grapples with you, they sustain 1d6 points of fire damage and must succeed at a Reflex save or catch fire. Additionally, whenever you end movement in the same space as a flammable object or creature, that target must succeed at a Reflex save or ignite.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Firebelly',
@@ -591,6 +629,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes (see text)',
     description: 'This spell generates magical warmth in your stomach, providing fire resistance 5 and making your abdomen warm to the touch without causing harm. As a standard action, you can expel a 15-foot cone of flames dealing 1d4 fire damage (Reflex half, SR applies). Each activation reduces the spell\'s remaining time by one minute.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Firebrand',
@@ -606,6 +645,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You mark multiple allies with a flaming rune that provides torch-like illumination without dealing damage. While active, marked creatures gain fire immunity against your fire spells. Their weapons deal an additional 1d6 points of fire damage on a hit. As a swift action, marked creatures can fire a beam at targets within 30 feet (ranged touch attack) dealing 6d6 points of fire damage. Using this ray ability ends the spell\'s effects for that creature.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Firefall',
@@ -621,6 +661,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'This transmutation spell causes a fire to erupt into a geyser of dazzlingly bright liquid flame. The caster selects a fire source up to a 20-foot cube, which is immediately extinguished (though magical fires resist extinguishment). If a fire creature serves as the source, it takes 1 damage per caster level. The spell creates a hemispherical burst with a 60-foot radius — all creatures and objects sustain 5d6 fire damage and risk catching aflame; Reflex save for half and to avoid ignition. Creatures within 120 feet of the original fire source are blinded for 1d4+1 rounds unless they succeed at a Will save.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Firestream',
@@ -637,6 +678,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'A torrent of flame extends from your hand, inflicting 2d6 fire damage to all creatures in its path. The spell ignites flammable materials and harms objects. It can melt metals with lower melting points including lead, gold, copper, silver, and bronze. The effect stops at barriers unless damage breaks through them. While concentrating, you may select a new area each round.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Firewalker's Meditation",
@@ -652,6 +694,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell enables you to mentally suppress pain\'s negative effects while remaining aware of sensations. You gain damage reduction 5/magic, fire resistance 10, and a +4 bonus on saving throws against pain effects. The spell is discharged after preventing 10 points of damage per caster level (max 100 points). As an immediate action when taking applicable damage, you can expend the remaining duration to gain DR 10/magic, fire resistance 30, and immunity to pain effects for 3 rounds, after which the spell ends.',
     source: 'Pathfinder Player Companion: Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flame Blade',
@@ -668,6 +711,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You manifest an immaterial blade of flame wielded like a scimitar. It functions as a melee touch attack dealing 1d8 fire damage plus 1 point per two caster levels (maximum +10). The spell\'s damage does not benefit from Strength modifiers since the blade lacks physical substance. The effect can ignite flammable materials.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flame Steed',
@@ -684,6 +728,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell creates a flame-based mount functioning similarly to phantom steed. The creature is immune to fire with resistance 10 to acid, cold, and electricity. When attacked, it automatically exhales a 15-foot cone of smoke and ash as a free action. Creatures in the cone must succeed at a Fortitude save or become sickened for 1d6 rounds after leaving. The smoke provides concealment as per obscuring mist and persists for one round.',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flames of the Faithful',
@@ -699,6 +744,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes (object, harmless)',
     description: 'A glowing rune appears on a single weapon, granting that weapon the flaming property and adding 1d6 fire damage per hit. For inquisitors using their judgment class feature, the weapon gains the flaming burst property instead. The spell only functions while you wield the weapon. If the weapon leaves your hand, the effect ends immediately. The spell\'s effects do not stack with existing flaming or flaming burst properties.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flare',
@@ -715,6 +761,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This cantrip generates a bright burst of light. When directed at a creature, it causes the target to become dazzled for 1 minute unless it makes a successful Fortitude save. The spell has no effect on sightless creatures or those already dazzled.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flare Burst',
@@ -731,6 +778,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions similarly to flare, but with expanded scope. Rather than affecting a single creature, it affects all creatures in a 10-foot-radius burst from the target point.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flash Fire',
@@ -745,6 +793,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'yes (object); see text',
     description: 'This transmutation spell causes a firearm to discharge with an intense flash of light, regardless of whether it\'s loaded. All creatures within 15 feet must make a Fortitude save or suffer blindness for 1d4 rounds. The firearm\'s wielder incurs a -4 penalty to this save. If ammunition is present, it is expended by the effect.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flash Flood',
@@ -762,6 +811,7 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'You summon a rushing wave that strikes all creatures in its path. Those in the area must make a Reflex save or sustain 1d6 points of bludgeoning damage per 2 caster levels (maximum 10d6). The wave executes a bull rush combat maneuver against all creatures regardless of size, using your caster level plus your highest mental ability modifier for the CMB. The affected terrain floods for 1 round per caster level — becoming deep bog terrain on land or raising water level by 5 feet if cast on water.',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flash Forward',
@@ -777,5 +827,6 @@ export const GAP_SPELLS_F_1: Spell[] = [
     spellResistance: 'no',
     description: 'You cheat the laws of time and enter into combat before reverting back to your original position. As part of casting, you execute a charge attack against an enemy, resolving it normally with all applicable modifiers and consequences. Upon completing the charge, you instantly teleport back to your original location as a free action. All damage dealt and conditions acquired persist after returning.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
 ];

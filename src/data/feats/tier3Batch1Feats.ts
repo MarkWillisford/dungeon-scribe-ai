@@ -13,6 +13,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 racial saves vs. arcane spells plus hag heritage ability; risk of evil aura.',
     source: 'Pathfinder Player Companion: Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: "Iron Will or Mother's Gift" },
@@ -37,6 +38,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'You can join a changeling coven even without the coven hex, with effective witch level equal to half your character level. You select one 0-level witch spell and cast it 3/day as a spell-like ability (CL = character level, DC = 10 + INT mod).',
     shortDescription: 'Join a coven without the hex; gain a 0-level witch SLA 3/day.',
     source: 'Pathfinder Player Companion: Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 11 },
@@ -62,6 +64,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
     shortDescription:
       'Resist cursed item compulsion; save bonus vs. curses from carried cursed items.',
     source: 'Pathfinder Player Companion: Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -83,6 +86,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'Your changeling coven can cast three more spells each day from its list of spell-like abilities. If multiple members of your coven take this feat, the benefits stack.',
     shortDescription: '+3 daily coven SLAs (stacks across coven members).',
     source: 'Pathfinder Player Companion: Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Changeling' },
@@ -108,6 +112,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
     shortDescription:
       "Access coven members' familiar abilities; +5 Spellcraft for familiar spell sharing.",
     source: 'Pathfinder Player Companion: Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'special', description: 'Coven hex or Coven-Touched' },
@@ -133,6 +138,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'You can imbue curse-descriptor spells into objects. The spell targets the next creature to interact with the object. Only the first creature is affected. The cursed object remains active for 1 day per caster level. Uses a spell slot 1 level higher.',
     shortDescription: 'Imbue curse spells into objects as traps (+1 spell level).',
     source: 'Pathfinder Player Companion: Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [
@@ -154,6 +160,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       "When all three coven members with this feat cast the same spell in the same round, they resolve it once on the last caster's initiative and may apply one metamagic feat (Empower, Enlarge, Extend, Maximize, or Widen) without altering the spell slot. Casters need not possess the metamagic feat.",
     shortDescription: 'Coven members cast same spell together to apply free metamagic.',
     source: 'Pathfinder Player Companion: Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'feat', featId: 'allied_spellcaster' }],
     effects: [
@@ -175,6 +182,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       "You gain a +2 bonus on saves against curses. Once per day as a standard action, touch a cursed creature and attempt a character level check against the curse's DC. Success removes the curse but transfers it to you.",
     shortDescription: '+2 saves vs. curses; 1/day transfer a curse from an ally to yourself.',
     source: 'Pathfinder Player Companion: Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Great Fortitude or Iron Will' }],
     effects: [
@@ -196,6 +204,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'When you confirm a critical hit, you may transfer one curse affecting you to the target (Will DC = 10 + BAB negates). The curse lasts 1d4 minutes or remaining duration, whichever is less. If the target saves or you have no curses, the target must roll twice on its next check and take the worse result.',
     shortDescription: 'On crit, transfer a curse to the target or impose disadvantage.',
     source: 'Pathfinder Player Companion: Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'critical'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },
@@ -222,6 +231,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       "When you use dispel magic or greater dispel magic against a magical trap and your caster level check surpasses the trap's Disable Device DC, the trap becomes inoperative for 1d4 minutes rather than 1d4 rounds.",
     shortDescription: 'Dispel magic suppresses traps for minutes instead of rounds.',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Ability to cast dispel magic or greater dispel magic' },
@@ -245,6 +255,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'Once per day, you may reroll either a Disable Device or Sleight of Hand check. You must decide after the attempt but before results are revealed. You must take the second result.',
     shortDescription: '1/day reroll a Disable Device or Sleight of Hand check.',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'deft_hands' }],
     effects: [
@@ -266,6 +277,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       "Your mind-affecting spells can affect mindless oozes and vermin as if they weren't mindless, but has no effect on other creature types. Uses a spell slot 2 levels higher.",
     shortDescription: 'Mind-affecting spells work on mindless oozes and vermin (+2 spell level).',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [
       { type: 'feat', featId: 'spell_focus_enchantment' },
@@ -290,6 +302,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'You gain a +2 bonus on checks to identify magic item properties. You need only exceed the DC by 5 (instead of 10) to determine whether an item is cursed.',
     shortDescription: '+2 identify magic items; detect curses at DC+5 instead of DC+10.',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'spellcraft', ranks: 5 },
@@ -314,6 +327,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       "You may use the Stealth skill to hide from any creature attempting to perceive you using blindsight or blindsense, even if you are clearly in that creature's perceptual field. This provides no advantage against other perception types.",
     shortDescription: 'Use Stealth to hide from blindsight and blindsense.',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'skill_focus_stealth' },
@@ -338,6 +352,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'While wearing a valuable nonmagical item (worth 5%+ of character wealth) in a magic item slot, you gain a +1 bonus on a corresponding skill. Belt/chest/shoulders: +1 Intimidate. Body/feet/neck: +1 Diplomacy. Eyes/hands/headband: +1 Bluff. Head/ring/wrists: +1 Perform.',
     shortDescription: '+1 skill bonus from valuable nonmagical items in magic item slots.',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -359,6 +374,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'When you reposition an enemy into a hazardous location (pit, blade barrier, etc.), the enemy is treated as having triggered the hazard and takes a -2 penalty to AC and saves to mitigate it.',
     shortDescription: 'Repositioned enemies take -2 AC and saves vs. triggered hazards.',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -385,6 +401,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
     shortDescription:
       'Torches are simple weapons; +10 ft light radius; 1/day reroll vs. light extinguish.',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -406,6 +423,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'You gain a 1st-level cohort (torchbearer) with no followers, who must be 3+ levels below you and can only take alchemist, bard, fighter, ranger, or rogue levels. They must have Torch Handling at 1st level and require no compensation. At 8th level, this feat automatically upgrades to Leadership.',
     shortDescription: 'Gain a torchbearer cohort; upgrades to Leadership at level 8.',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'level', minimum: 5 }],
     effects: [
@@ -429,6 +447,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'You gain a +4 bonus on Diplomacy checks to access black markets without paying gold. Failed checks by less than 10 have no consequences. You can use Diplomacy to treat a black market/settlement as one size category larger for base value, available items, and purchase limits (1/week).',
     shortDescription: '+4 Diplomacy for black market access; expand market size 1/week.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -451,6 +470,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
     shortDescription:
       'Roll twice on black market Diplomacy/Knowledge (local); track in cities with Diplomacy.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'diplomacy', ranks: 1 },
@@ -475,6 +495,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'Diplomacy checks to access black markets take only 5d4 minutes. You gain the Crime modifier of an accessed black market for Bluff, Diplomacy, Profession, and Sleight of Hand when earning money. Capital spending limits are treated as 5 points higher.',
     shortDescription: 'Faster black market access; gain Crime modifier for earning checks.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_local', ranks: 5 }],
     effects: [
@@ -496,6 +517,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       "You can imbue an ingested poison with a spell of 3rd level or lower that targets creatures and has a casting time under 1 minute. When the poison is ingested, the target receives the spell's effects. Crafting takes 2 hours for poisons ≤250 gp, or 1 day per 1,000 gp. Raw materials cost half the poison's base price.",
     shortDescription: 'Imbue ingested poisons with spells up to 3rd level.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       { type: 'feat', featId: 'brew_potion' },
@@ -521,6 +543,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       "When consuming pesh, you gain a +2 bonus on saves against emotion and fear effects. Once per day, if you fail such a save while under pesh's initial effect, you may retry 1 round later at the same DC.",
     shortDescription: '+2 saves vs. emotion/fear on pesh; 1/day retry a failed save.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Sahir-Afiyun feat or pesh addict' }],
     effects: [
@@ -542,6 +565,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'When you take a dose of pesh, you gain temporary hit points equal to your total Hit Dice for 1 hour. Temporary hit points from additional doses do not stack.',
     shortDescription: 'Gain temp HP equal to HD for 1 hour when taking pesh.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Sahir-Afiyun feat or pesh addict' }],
     effects: [
@@ -563,6 +587,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       "When reduced to 0 or fewer HP while under pesh's initial effect, you can end that effect as an immediate action to gain temporary HP equal to your Constitution score for 1 hour. You become sickened for 1d6 hours afterward.",
     shortDescription: 'End pesh effect when dying for temp HP equal to CON; sickened afterward.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Sahir-Afiyun feat or pesh addict' }],
     effects: [
@@ -584,6 +609,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
       'You reduce Constitution or Wisdom damage from pesh by 1. You can add sahir-afiyun spells to your class spell list: one spell of your highest castable level or two spells one level lower. All such spells require pesh as a material component. Can be taken multiple times.',
     shortDescription: 'Reduce pesh ability damage by 1; add pesh-powered spells to your list.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'spell_focus' },
@@ -609,6 +635,7 @@ export const TIER3_BATCH1_FEATS: FeatDefinition[] = [
     shortDescription:
       '+5 Sleight of Hand to conceal objects; always take 10 on urban Perception/Stealth/SoH.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'perception', ranks: 5 },

@@ -12,6 +12,7 @@ export const TIER3_BATCH6_FEATS: FeatDefinition[] = [
       'When using Cleave or Great Cleave, you can apply Vital Strike (or Improved/Greater) extra damage to the initial target. You take self-inflicted damage equal to the extra damage dealt, which cannot be reduced by DR.',
     shortDescription: 'Add Vital Strike damage to Cleave at the cost of self-damage.',
     source: 'Pathfinder Player Companion: The Harrow Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -39,6 +40,7 @@ export const TIER3_BATCH6_FEATS: FeatDefinition[] = [
       'You gain +2 on Intimidate while not raging. When failing a save against fear, you may enter rage instead of succumbing. You cannot voluntarily end rage until the fear effect expires or you exhaust rage rounds. No benefit if already raging.',
     shortDescription: '+2 Intimidate; enter rage instead of fearing.',
     source: 'Pathfinder Player Companion: The Harrow Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'iron_will' },
@@ -63,6 +65,7 @@ export const TIER3_BATCH6_FEATS: FeatDefinition[] = [
       'When casting summoning spells/SLAs, draw two harrow cards to grant summoned creatures a +4 enhancement bonus to ability scores matching drawn suits (+6 if both match). Alignment matches double duration; opposite matches halve it. Summoned creatures reflect drawn cards visually.',
     shortDescription: "Draw harrow cards to enhance summoned creatures' ability scores.",
     source: 'Pathfinder Player Companion: The Harrow Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'harrowed' }],
     effects: [
@@ -85,6 +88,7 @@ export const TIER3_BATCH6_FEATS: FeatDefinition[] = [
     shortDescription:
       'Sacrifice your flanking bonus to grant +1 flanking to all allies vs. same foe.',
     source: 'Pathfinder Player Companion: The Harrow Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -112,6 +116,7 @@ export const TIER3_BATCH6_FEATS: FeatDefinition[] = [
       'As a standard action, throw a hammer at an opponent within 20 feet. On a hit, the hammer rebounds to your square. With Snatch Arrows, you can catch it. Does not work against incorporeal creatures (without ghost touch), adhesive creatures, or underwater.',
     shortDescription: 'Thrown hammer rebounds to you on a hit within 20 ft.',
     source: 'Pathfinder Player Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'proficiency', proficiency: 'hammer' },
@@ -136,6 +141,7 @@ export const TIER3_BATCH6_FEATS: FeatDefinition[] = [
       'Take -2 on ranged axe attacks to bounce/slide it along the ground. Against flat-footed, running, or charging targets, this bypasses shield bonuses to AC. A successful hit grants a free trip attempt (no counter-trip on failure). Requires clear ground.',
     shortDescription: 'Bounce axe throw to bypass shields and trip; -2 attack penalty.',
     source: 'Pathfinder Player Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -160,6 +166,7 @@ export const TIER3_BATCH6_FEATS: FeatDefinition[] = [
       'Flanking creatures do not gain the +2 flanking bonus against you. This does not prevent sneak attacks or being denied your Dexterity bonus. Losing your DEX bonus to AC negates this feat.',
     shortDescription: "Flankers don't get +2 attack bonus against you.",
     source: 'Pathfinder Player Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -187,6 +194,7 @@ export const TIER3_BATCH6_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 saves vs. hag/witch abilities; crits let allies re-save vs. their effects.',
     source: 'Pathfinder Player Companion: People of the North',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'iron_will' }],
     effects: [
@@ -210,6 +218,7 @@ export const TIER3_BATCH6_FEATS: FeatDefinition[] = [
       'You gain a +2 bonus on Knowledge checks if you have 1-5 ranks in that skill. This does not stack with Skill Focus. You can make untrained Knowledge checks with DCs up to 15.',
     shortDescription: '+2 on Knowledge checks with 1-5 ranks; untrained checks up to DC 15.',
     source: 'Pathfinder Campaign Setting: Seekers of Secrets',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: '2 ranks each in 5 different Knowledge skills' },
@@ -233,6 +242,7 @@ export const TIER3_BATCH6_FEATS: FeatDefinition[] = [
       "As part of your movement or a 5-foot step, move into the space of a willing ally of your size or smaller, displacing them into the space you left. This provokes no AoOs and doesn't count against the ally's next turn movement.",
     shortDescription: 'Swap positions with an adjacent willing ally as part of movement.',
     source: 'Pathfinder Campaign Setting: Seekers of Secrets',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [

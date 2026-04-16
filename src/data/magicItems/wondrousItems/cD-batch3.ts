@@ -9,6 +9,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
     casterLevel: 7,
@@ -60,6 +61,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.ABJURATION }],
     casterLevel: 19,
@@ -145,6 +147,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ILLUSION }],
     casterLevel: 3,
@@ -195,6 +198,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: "Pathfinder Chronicles: Dark Markets, A Guide to Katapesh",
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 20,
@@ -240,6 +244,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder Society Field Guide',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.EVOCATION }],
     casterLevel: 5,
@@ -284,6 +289,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder Adventure Path #63: The Asylum Stone',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 3,
@@ -329,6 +335,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder Adventure Path #63: The Asylum Stone',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
     casterLevel: 9,
@@ -393,6 +400,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: "Pathfinder Player Companion: Merchant's Manifest",
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
     casterLevel: 3,
@@ -440,6 +448,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: "Pathfinder Player Companion: Merchant's Manifest",
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [
       { strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION },
@@ -487,6 +496,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder Player Companion: Magical Marketplace',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
     casterLevel: 3,
@@ -548,6 +558,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ENCHANTMENT }],
     casterLevel: 7,
@@ -596,6 +607,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 9,
@@ -642,6 +654,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Lost Treasures',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 12,
@@ -688,6 +701,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Lost Treasures',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.CONJURATION }],
     casterLevel: 9,
@@ -740,6 +754,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Lost Treasures',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 11,
@@ -794,6 +809,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Lost Treasures',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 10,
@@ -847,6 +863,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Lost Treasures',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.UNIVERSAL }],
     casterLevel: 1,
@@ -892,6 +909,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Core Rulebook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
     casterLevel: 7,
@@ -938,6 +956,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Core Rulebook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 11,
@@ -987,6 +1006,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.EVOCATION }],
     casterLevel: 7,
@@ -1058,6 +1078,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder Campaign Setting: Construct Handbook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 11,
@@ -1105,6 +1126,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 7,
@@ -1163,6 +1185,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [
       { strength: AuraStrength.STRONG, school: MagicSchool.ABJURATION },
@@ -1240,6 +1263,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Pathfinder Player Companion: Goblins of Golarion',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.EVOCATION }],
     casterLevel: 3,
@@ -1291,6 +1315,7 @@ export const wondrousItemsCD3: WondrousItemDefinition[] = [
     category: 'wondrous',
     source: 'Advanced Player\'s Guide',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.DIVINATION }],
     casterLevel: 9,

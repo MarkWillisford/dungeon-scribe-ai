@@ -1,8 +1,8 @@
 // Enchantment spells — batch 001
 // Batch metadata: {"school":"enchantment","batchNum":"001","startSpell":"after: Euphoric Tranquility","lastSpell":"Instant Enemy","nextSpell":"Intensify Psyche","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/i/intensify-psyche/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ENCHANTMENT_BATCH_001: Spell[] = [
+export const ENCHANTMENT_BATCH_001: SpellDefinition[] = [
   {
     name: 'Fairness',
     classLevels: { cleric: 1, oracle: 1, inquisitor: 2, paladin: 2 },
@@ -25,6 +25,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell compels affected humanoid creatures to trade fairly with others to the best of their knowledge. Those subject to the magic cannot participate in exchanges they know would unfairly benefit one party, and must work to prevent such unfair transactions. The spell prevents the affected from engaging in deceptive deals. A symbol of the associated deity appears above the heads of those affected, making their status immediately visible to observers. The caster must worship the associated deity to cast this spell.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'False Alibi',
@@ -49,6 +50,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This spell functions like modify memory but with a narrower application. The caster eliminates up to the last 5 minutes of the target's memory and substitutes it with an alternative memory or no memory at all, triggered by a specific condition the caster establishes. For instance, a caster might affect an assassin so that upon completing a murder, the spell activates and replaces the assassination memory with one of discovering the body and handling the weapon. Multiple castings can affect the same target with different triggers. Once a condition activates and alters memories, that particular trigger no longer functions unless another false alibi casting specifies the same trigger.",
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'False Belief',
@@ -73,6 +75,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This enchantment temporarily modifies a target's recollection, allowing the caster to eliminate, change, or implant a memory of up to 1 hour in length. When the spell expires, the genuine memory resurfaces while the false version diminishes to vague dreamlike impressions. The implanted memory appears authentic to the subject, preventing detection by truth-verification magic or abilities that compel honesty.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Feeblemind',
@@ -97,6 +100,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This spell reduces the target's Intelligence and Charisma scores to 1 each. The affected creature is unable to use Intelligence- or Charisma-based skills, cast spells, understand language, or communicate coherently. However, the target retains awareness of allies and can protect them. The condition persists until removed by heal, limited wish, miracle, or wish spells. Notably, a creature that can cast arcane spells, such as a sorcerer or a wizard, takes a -4 penalty on its saving throw.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fleeting Memory',
@@ -120,6 +124,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "The spell creates a gap in the target's memory, preventing the target from remembering anything that happens from the time you cast the spell until the duration ends. Memory loss only takes effect upon spell termination — if dispelled early, no memories are erased. The target forgets that you cast a spell regardless of whether the save succeeds. A mass version exists at higher spell levels affecting multiple creatures.",
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Foe to Friend',
@@ -143,6 +148,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This spell redirects an enemy's imminent attack. When an opponent is about to strike an ally, the caster can force the attack against a valid target of your choice instead or the attack is negated. Additionally, the target is considered an ally for determining flanking for 1 round.",
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forbid Action',
@@ -166,6 +172,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'The caster forbids the target a single course of action, which it avoids to the best of its ability. Five options exist: Attack (preventing attack rolls or targeted spells/abilities), Cast (blocking spellcasting), Communicate (preventing speech, messages, writing, telepathy, though verbal components for other purposes remain allowed), Draw (preventing item readiness), or Move (preventing location changes while allowing others to move the target).',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forbid Action, Greater',
@@ -189,6 +196,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell functions as forbid action, but affects one creature per caster level, no two of which can be more than 30 ft. apart, and lasts 1 round per level. All creatures receive the same forbidden action.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forced Repentance',
@@ -212,6 +220,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "The spell compels an evil being lacking the evil creature type to contemplate its misdeeds and become overwhelmed by remorse. The affected target immediately falls prone and audibly confesses all wrongdoings to the caster throughout the spell's duration. The enchantment terminates immediately if the caster loses line of sight or the target takes damage.",
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forgetful Slumber',
@@ -236,6 +245,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This spell functions similarly to deep slumber but affects only one creature with 10 or fewer Hit Dice. The affected creature awakens with amnesia regarding the five minutes preceding the spell's casting. No effect short of a miracle or wish can restore memories lost by this spell.",
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Foster Hatred',
@@ -259,6 +269,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "The caster amplifies targets' existing prejudices toward a chosen creature type (or subtype if humanoid or outsider). Creatures with completely positive opinions automatically succeed their saves, while those with existing hatred (such as dwarves' racial ability) suffer a -4 penalty. Failed saves render affected creatures hostile toward all creatures of the chosen type and cause them to never treat them as allies for the spell's duration. Affected beings interpret all actions by the target type negatively. The spell allows focusing on subsets, such as worshipers of specific deities, rather than entire creature types.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Frozen Note',
@@ -283,6 +294,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'The caster produces a sustained musical note that mesmerizes nearby creatures. Those affected become paralyzed and oblivious to their surroundings so long as you maintain the note. Maintaining concentration requires absolute focus — any damage, action, or movement ends the spell immediately. Creatures may attempt new saves each round until they fail. Those with Hit Dice 4 or more greater than caster level are immune; those with 4 or more fewer Hit Dice than caster level get no save. Barriers between the caster and targets grant +2 circumstance bonuses per barrier. If a creature loses barrier protection, it must save again; if it gains protection, it receives a new save.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fumbletongue',
@@ -306,6 +318,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This enchantment prevents intelligible speech. The target's attempts to communicate come out as a useless mix of unconnected words and noises regardless of language. Spellcasting with verbal components faces a 20% failure chance, and magic item activation via command word has a 20% error rate. The spell does not affect telepathic communication or creatures lacking spoken language.",
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Geas, Lesser',
@@ -329,6 +342,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'A lesser geas places a magical command on a creature to carry out some service or refrain from some action or course of activity, as defined by you. The creature must have 7 or fewer Hit Dice and be able to understand you. Non-compliance triggers a -2 penalty to each ability score daily, up to a maximum of -8. The spell is removable via break enchantment, limited wish, remove curse, miracle, or wish.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Geas/Quest',
@@ -352,6 +366,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This spell operates similarly to lesser geas but affects creatures of any Hit Dice and allows no saving throw. When the subject cannot comply for 24 hours, it suffers a -3 penalty to each ability score, accumulating daily up to -12 total (minimum 1). Penalties cease 24 hours after resuming compliance. It can be ended by remove curse (if the caster's caster level is at least 2 higher), limited wish, miracle, or wish, but not break enchantment. Clerics call this spell quest; bards, sorcerers, and wizards use geas.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Good Hope',
@@ -375,6 +390,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This enchantment grants affected creatures a +2 morale bonus on saving throws, attack rolls, ability checks, skill checks, and weapon damage rolls. Good hope counters and dispels crushing despair.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grand Destiny',
@@ -406,6 +422,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'The spell grants the target a +4 competence bonus that it can choose to apply before rolling any attack roll, caster level check, saving throw, or skill check. The bonus applies to two rolls before expiration, with additional uses granted at 12th and 15th caster levels. Only one grand destiny spell may affect a creature at once.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gullibility',
@@ -438,6 +455,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This enchantment muddles a target's judgment, imposing a -10 penalty on Sense Motive checks for the spell's duration. Creatures attempting deception against the target gain a +10 bonus on their Bluff checks. The spell shifts how believable lies appear: impossible lies become far-fetched, far-fetched lies seem unlikely, and unlikely lies appear credible. Notably, the glibness spell provides no additional benefit when used against someone affected by gullibility.",
     source: 'Pathfinder Player Companion: Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Haunting Reminder',
@@ -468,6 +486,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "The caster attempts an Intimidate check during casting to make the target act friendly. Once triggered (when the target reports coercion, attacks the caster, or acts in ways threatening to the caster's objectives), it imposes the shaken condition for one day per caster level and imposes a -2 penalty on saving throws against the caster's fear-descriptor spells.",
     source: "Pathfinder Roleplaying Game Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Haze of Dreams',
@@ -492,6 +511,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "The spell fills an enemy's head with waking dreams, causing the target to move at half normal speed, affecting jumping distance accordingly. The spell does not stack with other haze of dreams effects or with the slow spell.",
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heckle',
@@ -524,6 +544,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "The caster badgers and nitpicks the subject of the spell until its mood sours. The target's attitude shifts one step toward hostile regarding the caster and creatures within 30 feet. Additionally, the target suffers a -2 penalty on attack rolls, saving throws, and checks relying on Intelligence, Wisdom, or Charisma.",
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hermean Potential',
@@ -548,6 +569,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'The spell grants recipients enhanced mental clarity for perfecting their actions. On the next attack roll, saving throw, ability check, or skill check the target attempts, it rolls twice and takes the more favorable result. For every 5 caster levels, the target gains one additional use of this doubled-roll benefit, reaching a maximum of 5 rolls at 20th level. The spell is countered and dispelled by ill omen, though it cannot itself dispel that opposing magic.',
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heroic Finale',
@@ -571,6 +593,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell requires an active bardic performance to cast. When used, the caster terminates their current performance and grants one affected creature within range the ability to take either a move action or standard action of their choosing.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heroic Invocation',
@@ -594,6 +617,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This enchantment grants recipients several combat advantages. Affected creatures receive a +4 morale bonus on attack and damage rolls, gain 2d8+4 temporary hit points, and become immune to both fear and charm effects throughout the spell's duration. Once the magical effect ends, subjects become fatigued.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heroism',
@@ -629,6 +653,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell imbues a single creature with great bravery and morale in battle. The target gains a +2 morale bonus on attack rolls, saves, and skill checks.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heroism, Greater',
@@ -660,6 +685,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell functions like heroism, except the creature gains a +4 morale bonus on attack rolls, saves, and skill checks, immunity to fear effects, and temporary hit points equal to your caster level (maximum 20).',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hideous Laughter',
@@ -684,6 +710,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell afflicts the subject with uncontrollable laughter that forces the subject prone and unable to act, though not helpless. On subsequent turns, the creature may attempt a new save as a full-round action. Those with Intelligence 2 or lower are unaffected, and creatures of different types than the caster get a +4 save bonus.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hold Animal',
@@ -707,6 +734,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This spell functions like hold person, except that it affects an animal instead of a humanoid. The subject becomes paralyzed and freezes in place. It is aware and breathes normally but cannot take any actions, even speech. Each round on its turn, the subject may attempt a new saving throw to end the effect as a full-round action that doesn't provoke attacks of opportunity.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hold Fey',
@@ -740,6 +768,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This spell functions identically to hold person, but targets fey creatures instead of humanoids. The subject becomes paralyzed, remaining aware and breathing normally but unable to take actions or speak. Each round on its turn, the subject may attempt a new saving throw to end the effect as a full-round action that doesn't provoke attacks of opportunity. Winged fey cannot fly and fall; swimming fey cannot swim.",
     source: 'Pathfinder Campaign Setting: The First World, Realm of the Fey',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hold Monster',
@@ -775,6 +804,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell functions like hold person, except that it affects any living creature that fails its Will save.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hold Monster, Mass',
@@ -799,6 +829,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell functions like hold monster, except it affects multiple creatures. Any living creature that fails its Will save becomes paralyzed.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hold Person',
@@ -838,6 +869,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "The subject becomes paralyzed and freezes in place. It is aware and breathes normally but cannot take any actions, even speech. Each round on its turn, the subject may attempt a new saving throw to end the effect as a full-round action that doesn't provoke attacks of opportunity. Winged creatures that are paralyzed cannot flap their wings and fall; swimmers cannot swim and may drown.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hold Person, Mass',
@@ -862,6 +894,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell functions like hold person, except it affects multiple humanoid creatures. Each subject becomes paralyzed and freezes in place. Each round on its turn, each subject may attempt a new saving throw to end the effect as a full-round action.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hollow Heroism',
@@ -896,6 +929,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "The spell mirrors heroism but allows the caster to reverse it within medium range (100 feet plus 10 feet per caster level) as a standard action. When reversed, the target loses bonuses and instead takes a -2 penalty on attack rolls, saving throws, and skill checks until the spell's duration ends (no save). Skill checks to identify this spell incorrectly result in recognizing it as heroism due to the ruse descriptor.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hoodwink',
@@ -920,6 +954,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "The spell clouds targets' perception, making them see only rough shapes and hear muffled sounds, though they clearly hear the caster's voice. Affected creatures automatically fail Perception checks with DC greater than 5, move at half speed without guidance, treat attacked creatures as having concealment, and must succeed at DC 10 Acrobatics checks to move faster than half speed. The spell ends immediately for any target attacked by non-hoodwinked creatures.",
     source: 'Pathfinder Roleplaying Game Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hymn of Mercy',
@@ -944,6 +979,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell functions like touch of mercy, except it affects all creatures within a 30-foot-radius burst centered on you. Affected creatures are compelled to deal only nonlethal damage with weapon attacks for the duration.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hypnotism',
@@ -968,6 +1004,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'The caster uses gestures and a droning incantation to fascinate up to 2d4 HD worth of creatures. Affected creatures react as two steps friendlier in attitude, allowing a single brief, reasonable request. Creatures gain a +2 bonus to saves when in combat; a -2 penalty applies if affecting only one non-combatant. A creature that fails its saving throw does not remember that you enspelled it.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Id Insinuation I',
@@ -991,6 +1028,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "The caster invades a target's mind, isolating parts of its mind and preventing the target from functioning in a coherent manner. The affected creature becomes confused for the duration.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Id Insinuation II',
@@ -1014,6 +1052,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell functions as id insinuation I but targets two creatures. On the first round of confusion, affected targets roll twice on the confusion table and the caster selects which result applies. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Id Insinuation III',
@@ -1037,6 +1076,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell functions as id insinuation I but targets three creatures. During the first 2 rounds of confusion, affected targets roll twice and the caster chooses the result. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Id Insinuation IV',
@@ -1060,6 +1100,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This spell functions as id insinuation I but targets four creatures. On round one, the caster selects each target's confusion result without rolling. On subsequent rounds, targets roll twice and the caster selects the result. This spell can be undercast.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ill Omen',
@@ -1084,6 +1125,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'The spell inflicts misfortune on the target, forcing them to roll twice and take the less favorable result on their next d20 roll. At higher caster levels (every 5 levels), this effect applies to additional d20 rolls, reaching a maximum of five rolls at 20th caster level. Aware targets who can speak and have a free hand may spend a move action to utter a brief prayer or good luck charm to negate one reroll.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Implant Urge',
@@ -1115,6 +1157,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "The spell creates an unconscious desire in the target toward a goal you establish. This effect grants a -5 penalty on Diplomacy checks requesting actions aligned with that goal. The target also suffers a -2 penalty on saving throws against mind-affecting compulsion effects pushing them toward their implanted objective. Divination magic reveals this urge as their primary concern, and those examining the target's thoughts can identify the implanted nature with a successful caster level check.",
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Implanted Projection',
@@ -1138,6 +1181,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This enchantment operates similarly to telempathic projection, but with a delayed activation mechanism. Upon casting, the caster selects a command word or phrase unknown to the target. When another creature speaks this trigger phrase to the target, the dormant effect activates, with that speaker treated as the original caster for purposes of the spell's effects.",
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Insanity',
@@ -1161,6 +1205,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'The spell causes the target to suffer from a continuous confusion effect. The affected creature experiences ongoing confusion permanently. Notably, remove curse does not work against this effect, but greater restoration, heal, limited wish, miracle, or wish can restore the creature to normalcy.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Enemy',
@@ -1183,6 +1228,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       "This enchantment allows you to temporarily designate a target creature as your favored enemy. You select one of your existing favored enemy types, and for the spell's duration, the target is treated as that enemy type for all related purposes.",
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Intensify Psyche',
@@ -1217,6 +1263,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'The spell induces a euphoric state that heightens sensory perception. The affected creature receives a +2 competence bonus on Diplomacy, Handle Animal, Perform, and Sense Motive checks. Additionally, save DCs for spells or effects with emotion or pain descriptors cast by the target increase by 1. However, heightened sensitivity imposes a -2 penalty on saving throws against spells and effects with the emotion or pain descriptor.',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inveigle Monster',
@@ -1241,6 +1288,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'This spell operates identically to inveigle person but applies to any living creature rather than only humanoids, with an extended duration measured in days per caster level instead of hours. The target becomes extremely amiable and treats all living creatures as friendly. Hostile acts toward the target end the spell. The inveigled creature attempts to fulfill multiple requests in the same manner as it would favors for its true friends.',
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inveigle Person',
@@ -1265,6 +1313,7 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'The spell causes a target to become extremely amiable and treat all living creatures as friendly. Hostile acts toward the target end the spell. The inveigled creature attempts to fulfill multiple requests in the same manner as it would favors for its true friends. When conflicting requests arise, the creature typically chooses the more reasonable option, though overriding this preference requires a successful opposed Charisma check as if under multiple mental control effects.',
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Irresistible Dance',
@@ -1288,5 +1337,6 @@ export const ENCHANTMENT_BATCH_001: Spell[] = [
     description:
       'The target experiences an overwhelming compulsion to dance continuously. This imposes a -4 penalty to Armor Class and a -10 penalty on Reflex saves, while negating shield bonuses. The dancing creature provokes attacks of opportunity each round. A successful Will save reduces the duration to just 1 round instead of the full duration.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 ];

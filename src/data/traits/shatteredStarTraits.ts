@@ -11,6 +11,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Diplomacy and Intimidate in Magnimar; start with noble outfit and signet ring',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [],
@@ -50,6 +51,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
       'You have learned secrets from the Grand Lodge that allow you to maintain your wild shape for longer periods. When using wild shape to transform into a Small or Medium animal, the transformation lasts 2 hours per druid level instead of 1 hour per druid level.',
     shortDescription: 'Wild shape into Small/Medium animals lasts 2 hours per druid level',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [
@@ -81,6 +83,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
       'Your experience as a Pathfinder has deepened your understanding of rage. You may use your barbarian rage ability for 3 additional rounds per day.',
     shortDescription: '+3 rounds of barbarian rage per day',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [
@@ -106,6 +109,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
       'Your training with the Pathfinder Society has taught you the vital weak points on humanoids and monsters. You gain a +1 trait bonus on damage rolls from sneak attacks.',
     shortDescription: '+1 damage on sneak attacks',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [
@@ -131,6 +135,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
       'Your time spent studying the greatest warriors of the Society taught you new defensive skills while wearing armor. You gain a +1 trait bonus to Armor Class when wearing medium or heavy armor.',
     shortDescription: '+1 AC when wearing medium or heavy armor',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [
@@ -161,6 +166,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
       'Your extensive study of divine powers within the Grand Lodge has enhanced your healing abilities. You may channel energy one additional time per day.',
     shortDescription: 'Channel energy one additional time per day',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [
@@ -187,6 +193,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 to one of Handle Animal/Knowledge (geography)/Linguistics/Survival; bonus language',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [],
@@ -210,6 +217,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
       "You were raised in one of Magnimar's Sczarni gangs but never fully belonged. The Pathfinder Society recognized your potential and recruited you as an agent. You have since left the criminal organization, but retain skills from your former life. You gain a +2 trait bonus on Bluff checks made to pass hidden messages, and when delivering a coup de grace attack, you deal an additional 1d6 points of damage.",
     shortDescription: '+2 Bluff to pass hidden messages; +1d6 damage on coup de grace',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [],
@@ -249,6 +257,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
       'Through extensive study and training with accomplished spellcasters affiliated with the Pathfinder Society, you have expanded your magical capabilities. You gain one additional 0-level spell slot.',
     shortDescription: 'Gain one additional 0-level spell slot',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [
@@ -274,6 +283,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
       'Your study of destructive magic within the Pathfinder Society has enhanced your spellcasting power. Whenever you cast a spell that deals damage, you gain a +1 trait bonus to the total damage dealt. This damage is considered force damage regardless of the type of damage dealt by the spell.',
     shortDescription: '+1 damage when casting damage spells; that bonus damage is force damage',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [
@@ -304,6 +314,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
       "You have gained access to martial arts knowledge from rare ancient texts within the Pathfinder Society's archives. You increase your ki pool by 1 point.",
     shortDescription: '+1 point in ki pool',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [
@@ -329,6 +340,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
       'You have access to the vast treasure trove of musical knowledge in the vaults beneath the Grand Lodge in Absalom. You can use bardic performance for 3 additional rounds per day.',
     shortDescription: '+3 rounds of bardic performance per day',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [
@@ -355,6 +367,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Knowledge (history) in Varisia; +2 Knowledge (history) about Magnimar; +2 to receive monument boons',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [],
@@ -407,6 +420,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Varisian: +1 Knowledge (geography) and +1 damage in surprise round with scarf/starknife. Shoanti: +1 Survival in Varisia and +1 critical confirmation with earth breaker/klar',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [{ type: 'special', description: 'Must be of Shoanti or Varisian ethnicity' }],
@@ -435,6 +449,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
       'You became a Pathfinder to pursue wealth through acquiring and selling rare relics throughout Varisia. You gain a +1 trait bonus on Appraise checks and a +4 bonus on Perception checks made to distinguish statue-like creatures (like caryatid columns and gargoyles) from actual sculptures.',
     shortDescription: '+1 Appraise; +4 Perception to identify statue-like creatures',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [],
@@ -470,6 +485,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Choose: -1 armor check penalty on one armor type, -1 two-weapon primary penalty, or +2 Intimidate to demoralize',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [],
@@ -497,6 +513,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
       "Access to the courageous powers of Golarion's ancient paladin orders through the Society's historical records has bolstered your resolve. You gain an additional +1 trait bonus on saving throws made against fear effects, which stacks with your aura of courage.",
     shortDescription: '+1 additional saving throw bonus vs fear (stacks with aura of courage)',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [
@@ -523,6 +540,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 initiative; +2 Survival in favored terrains (stacks with favored terrain)',
     source: "Shattered Star Player's Guide",
+    verificationStatus: 'needs_review' as const,
     category: 'campaign',
     subcategory: 'Shattered Star',
     prerequisites: [

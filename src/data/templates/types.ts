@@ -1,6 +1,7 @@
 // TemplateDefinition — static data shape for the Firestore 'templates' collection.
 // Seed scripts only — authoritative copy lives in Firestore at runtime.
 
+import type { DataQualityFields } from '@/types/base';
 import { TemplateFeature } from '@/types/templates';
 
 // Provenance — discriminated union replaces overlapping boolean fields
@@ -62,7 +63,7 @@ export interface CRTierDefinition {
   features: TemplateFeature[]; // imported from @/types/templates — not redefined
 }
 
-export interface TemplateDefinition {
+export interface TemplateDefinition extends DataQualityFields {
   id: string; // kebab-case: 'half-dragon', 'druid-creature'
   name: string;
   description: string;

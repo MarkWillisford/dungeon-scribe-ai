@@ -35,6 +35,7 @@ export const RTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Attempt a disarm combat maneuver with a ranged weapon as a full-round action, using Dex instead of Str.',
     source: 'Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -53,6 +54,7 @@ export const RTT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Attempt a trip combat maneuver with a ranged weapon as a full-round action, using Dex instead of Str.',
     source: 'Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -71,6 +73,7 @@ export const RTT_FEATS: FeatDefinition[] = [
     shortDescription:
       "+1 per ally with feat who recently attacked nearby target (max +4); allies don't grant cover.",
     source: 'Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'feat', featId: 'point_blank_shot' }],
     effects: [

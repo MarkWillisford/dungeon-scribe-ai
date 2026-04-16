@@ -1,8 +1,8 @@
 // Gap spells — letter U part 1 (first half alphabetically)
 // Gap metadata: {"letters":"U_1","totalChecked":52,"newSpells":14,"skipped":29}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_U_1: Spell[] = [
+export const GAP_SPELLS_U_1: SpellDefinition[] = [
   {
     name: 'Umbral Infusion',
     classLevels: {
@@ -34,6 +34,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'You infuse the target mindless undead with the advanced creature template for the duration, granting it +2 on all rolls, +2 to special ability DCs, +4 to AC and CMD, and 2 additional hit points per Hit Die. However, your control over the creature becomes unreliable—each time you give it a command, there is a 50% chance it acts as if uncontrolled. An uncontrolled undead creature affected by this spell attacks living creatures it encounters.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Umbral Infusion, Mass',
@@ -61,6 +62,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'This spell functions as umbral infusion, except it affects multiple mindless undead creatures. Each target gains the advanced creature template: +2 on all rolls, +2 to special ability DCs, +4 to AC and CMD, and 2 additional hit points per Hit Die. Control over each creature has a 50% failure chance per command.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Umbral Strike',
@@ -97,6 +99,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'You generate a bolt of dark energy and make a ranged touch attack that ignores normal concealment (but not total concealment). On a hit, the target takes 1d6 points of damage per caster level (maximum 20d6), split evenly between cold damage and negative energy damage. A shroud of shadow envelops the target, blinding it for the duration of the spell. A successful Fortitude save halves the damage and prevents the blindness.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unbearable Brightness',
@@ -125,6 +128,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'Your body sheds intense light. All creatures within 30 feet that can see you are dazzled (no save). Creatures with light sensitivity must succeed at a Reflex save or be blinded while within the emanation. This light functions as daylight for the purpose of dispelling magical darkness effects; when the light overlaps magical darkness, both effects temporarily suppress in the overlap area, leaving normal ambient light conditions. Dazzled and blinded conditions from this spell end when the spell expires or the creature moves out of line of sight.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unbreakable Construct',
@@ -150,6 +154,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'You strengthen a construct\'s natural defenses. If the target construct has damage reduction/adamantine, that DR increases by 5. If the construct has hardness instead, its hardness increases by 5. This spell has no effect on a construct that lacks both DR/adamantine and hardness.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Uncanny Reminder',
@@ -178,6 +183,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'You draw forth a living memory from the target\'s subconscious—a construct replica that resembles the target and embodies its negative self-image. The replica uses clockwork angel statistics (modified: Intelligence 10, no clockwork trait, no enhance weapon ability, no electricity vulnerability). You do not control it; it single-mindedly attacks the target. While the replica is visible, the target rolls d% each round to determine behavioral effects, ranging from no effect to being nauseated, with potential penalties on attack rolls, saving throws, and skill checks.',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undead Anatomy I',
@@ -207,6 +213,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'You assume the form of a Small or Medium humanoid-shaped undead creature. You gain a bite attack (1d6 for Medium, 1d4 for Small) and two claw or slam attacks, plus darkvision 60 ft. If the form you adopt possesses the following abilities, you gain them as well: climb 30 ft., fly 30 ft. (average maneuverability), swim 30 ft., low-light vision, scent. If Small, you gain +2 Dexterity and +1 natural armor. If Medium, you gain +2 Strength and +2 natural armor. While in undead form, you are treated as undead for the purposes of channeled energy and cure/inflict spells only.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undead Anatomy II',
@@ -235,6 +242,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'This spell functions as undead anatomy I, except you can assume the form of a Tiny or Large humanoid-shaped undead creature. You gain movement speeds up to 60 ft. for climb, fly (good maneuverability), or swim if the form possesses them. Additional abilities available based on form: blood drain, DR 5/bludgeoning, freeze, grab, mimicry, pounce, shadowless, sound mimicry, trip. You gain a +4 bonus on saving throws against mind-affecting effects, disease, poison, sleep, and stunning effects. Tiny: +4 Dexterity, –2 Strength, +1 natural armor. Large: +4 Strength, –2 Dexterity, +4 natural armor. You also gain any vulnerabilities of the assumed form.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undead Anatomy III',
@@ -263,6 +271,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'This spell functions as undead anatomy II, except you can assume the form of a Diminutive or Huge humanoid-shaped undead creature. Additional abilities available based on form: burrow 30 ft., all-around vision, blindsense 30 ft., constrict, disease, DR 5/—, fear aura, jet, natural cunning, overwhelming, poison, rake, trample, unnatural aura, web. You gain resistance 20 to an energy type matching the undead form and a +8 bonus on saving throws against mind-affecting effects, disease, poison, sleep, and stunning effects. Diminutive: +6 Dexterity, –4 Strength, +1 natural armor. Huge: +6 Strength, –4 Dexterity, +6 natural armor.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undead Anatomy IV',
@@ -289,6 +298,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'This spell functions as undead anatomy III, except you can also assume incorporeal undead forms (Tiny to Huge). Movement speeds available: burrow 60 ft., fly 120 ft. (good), swim 120 ft. Additional sensory abilities: blindsense 60 ft., darkvision 90 ft., lifesense 60 ft., tremorsense 60 ft. Additional abilities available based on form: breath weapon, DR 10/magic and silver, DR 15/bludgeoning and magic, fast healing 5, fiery death, fire aura, incorporeal touch attacks, rend, roar, spikes. You gain resistance 30 to an energy type matching the undead form and a +8 bonus on saving throws against mind-affecting effects, disease, poison, sleep, and stunning effects. Tiny: –2 Strength, +8 Dexterity, +3 natural armor. Large: +6 Strength, –2 Dexterity, +2 Constitution, +6 natural armor.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undead Beacon',
@@ -316,6 +326,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'You shroud an area in unclean influence, making creatures within more vulnerable to detection and attack by undead. Creatures that fail their saving throws become easier for undead to notice: undead within 60 feet gain a +4 bonus on Perception checks to detect affected creatures, a +4 bonus on saving throws against abilities of affected creatures, and a +1 profane bonus on attack rolls against affected creatures. Undead can also ignore lesser concealment when attacking affected creatures. This spell also functions as a haunt (Notice DC 20 Perception; 2 hp per caster level; trigger: proximity; reset: none).',
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undeath Inversion',
@@ -344,6 +355,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'You invert the target undead creature\'s relationship with positive and negative energy for the duration. The target takes damage from negative energy and is healed by positive energy as if it were a living creature. Any negative energy abilities the target possesses convert to equivalent positive energy effects. The target cannot impose negative levels while under this spell\'s effect, but it remains undead for all other purposes. The target may attempt a new Will save each round as a full-round action to end the effect.',
     source: 'Pathfinder Player Companion: Undead Slayer\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Underbrush Decoy',
@@ -369,6 +381,7 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'You cause a plant to rustle noisily, distracting nearby creatures. You may make a Bluff check using your caster level plus your Wisdom modifier in place of your normal Bluff modifier; this Bluff affects all creatures within 30 feet of the plant. The plant and any creatures that are aware of the distraction count as distracted. Creatures might not be distracted if they detect you casting the spell or otherwise anticipate your subterfuge.',
     source: 'Pathfinder Roleplaying Game: Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Undine's Curse",
@@ -395,5 +408,6 @@ export const GAP_SPELLS_U_1: Spell[] = [
     description:
       'You curse the target, removing its ability to breathe automatically. While the target is conscious and capable of taking physical actions, it continues to breathe normally. However, if the target becomes unconscious or otherwise unable to take physical actions, it stops breathing and must hold its breath or begin suffocating. Creatures that do not need to breathe are immune to this spell.',
     source: 'Pathfinder Roleplaying Game: Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
 ];

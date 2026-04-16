@@ -1,8 +1,8 @@
 // Transmutation spells — batch 007
 // Batch metadata: {"school":"transmutation","batchNum":"007","startSpell":"Overstimulate","lastSpell":"Rusting Grasp","nextSpell":"Sabotage Construct","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/s/sabotage-construct/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_007: Spell[] = [
+export const TRANSMUTATION_BATCH_007: SpellDefinition[] = [
   {
     name: 'Overstimulate',
     classLevels: {
@@ -35,6 +35,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'The spell grants the target the ferocity ability, allowing it to remain conscious and fight despite having negative hit points. The target remains staggered, loses 1 HP per round, and dies when reaching a negative HP total equal to its Constitution score.',
     source: 'Pathfinder Campaign Setting: Inner Sea Temples',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Owl's Wisdom",
@@ -71,6 +72,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       "The spell grants a +4 enhancement bonus to Wisdom, which benefits Wisdom-related skills. Clerics, druids, and rangers (and other Wisdom-based spellcasters) who receive owl's wisdom do not gain any additional bonus spells for the increased Wisdom, but the save DCs for their spells increase.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Owl's Wisdom, Mass",
@@ -105,6 +107,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       "This spell functions like owl's wisdom, except that it affects multiple creatures.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Paragon Surge',
@@ -140,6 +143,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'Half-elf only. You transform into a paragon of both races, something greater than elf or human alone. Your physical form is unchanged, and you retain all extraordinary and supernatural abilities along with your equipment. You gain a +2 enhancement bonus to Dexterity and Intelligence. You may also treat yourself as if you possessed one feat of your choice for which you meet the prerequisites, selected at the time of casting. Daily feat selection locks in for subsequent castings that day.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Parchment Swarm',
@@ -167,6 +171,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You tear parchment into shreds, creating flying fragments that swarm around a target creature and deliver thousands of tiny paper cuts. Using normal parchment deals 1d6 points of magical slashing damage per caster level (maximum 15d6). If a magic scroll serves as the material component, you can apply stored spell effects: 1st-level spells trigger on a failed Reflex save, while 2nd-level and higher spells can affect a 20-foot-radius spread instead.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Passwall',
@@ -193,6 +198,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You create a passage through wooden, plaster, or stone walls, but not through metal or other harder materials. The passage extends 10 feet deep, with an additional 5 feet per three caster levels above 9th level (maximum 25 feet deep at 18th level). Multiple castings can combine to breach thick walls. When the spell ends or is dismissed, creatures inside are ejected from the nearest exit. Passwall can be used to create a hidden chamber within a thick wall.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pattern Recognition',
@@ -217,6 +223,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'Your senses become preternaturally keen. You gain an insight bonus equal to one-half your caster level (minimum +1, maximum +10) on Perception checks. The same bonus applies to Survival checks for tracking. The spell does not grant the Track feat, trapfinding, or the ability to disable traps, though it works alongside existing abilities you possess.',
     source: "Pathfinder Companion: Second Darkness Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Perceive Cues',
@@ -247,6 +254,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'Your senses become preternaturally keen, and you gain insight into subtle behavioral cues. You gain a +5 competence bonus on Perception and Sense Motive checks for the duration.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Persistent Vigor',
@@ -275,6 +283,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You gain fast healing 2 and become immune to bleed effects and the sickened and nauseated conditions. When you successfully save against a disease or poison, that effect ends immediately. If you fail a save against a disease or poison, you may dismiss this spell to reroll that save with a +4 bonus, accepting the new result regardless of outcome.',
     source: 'Pathfinder Roleplaying Game Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Adaptation',
@@ -309,6 +318,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You adapt to the environment of a particular plane of existence, becoming immune to its harmful environmental effects including toxicity, extreme temperatures, and lack of breathable air. You also gain energy resistance 20 against one energy type prevalent on that plane. The spell provides no benefit when cast on your native plane of existence.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Adaptation, Mass',
@@ -340,6 +350,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell functions like planar adaptation, except that it affects multiple creatures within range.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planned Assault',
@@ -366,6 +377,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'After studying a situation for at least 1 minute, targets who execute their pre-declared actions gain bonuses to their first round of action. They receive a +2 sacred bonus to AC, saving throws, and checks, which increases to +4 at 10th caster level and +6 at 15th caster level.',
     source: 'Pathfinder Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plant Growth',
@@ -391,6 +403,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell has two versions. Overgrowth causes existing vegetation in an area to thicken and spread, reducing movement to 5 feet per round (10 feet for Large or larger creatures) and increasing DCs of plant-enhancing spells by 4 for one day. Enrichment causes all plants within range to become more fertile, increasing their productivity by one-third over one year. The spell counters diminish plants and has no effect on plant creatures.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plant Shape I',
@@ -420,6 +433,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You can assume the form of any Small or Medium creature of the plant type. You gain certain natural abilities from your assumed form, including darkvision 60 feet, low-light vision, constrict, grab, and poison if the assumed form possesses them. You do not gain any abilities that a normal creature of that type would not have. Small plants grant +2 Constitution and +2 natural armor; Medium plants grant +2 Strength, +2 Constitution, and +2 natural armor.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plant Shape II',
@@ -449,6 +463,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell functions as plant shape I, except it also allows you to assume the form of a Large plant creature. If the creature has immunity or resistance to any energy type, you gain resistance 20 to that energy type. Large plant form grants a +4 Strength bonus, +2 Constitution bonus, and +4 natural armor bonus.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plant Shape III',
@@ -476,6 +491,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell functions as plant shape II, except it also allows you to assume the form of a Huge plant creature. You gain damage reduction, regeneration 5, and trample abilities if the assumed form possesses them. Huge plant form grants a +8 Strength bonus, –2 Dexterity penalty, +4 Constitution bonus, and +6 natural armor bonus.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plant Voice',
@@ -503,6 +519,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You grant a plant creature the ability to comprehend and speak languages you know. You may grant up to one language per 2 caster levels. The spell does not cause the plant creature to be predisposed toward you in any way, though it enables normal Charisma-based interaction. Plant creatures with Intelligence 2 or lower can only grasp basic concepts like friend, food, and danger. The spell has no effect on ordinary plants or fungus.',
     source: 'Pathfinder Player Companion: Cohorts and Companions',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planetary Adaptation',
@@ -531,6 +548,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You gain immunity to the harmful environmental effects of a particular Material Plane world, including such hazards as toxicity, extreme temperatures, and lack of air. This spell functions like planar adaptation but applies only to Material Plane worlds, with the void of space considered a single world for this purpose.',
     source: 'Pathfinder Campaign Setting: Distant Worlds',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planetary Adaptation, Mass',
@@ -558,6 +576,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell functions like planetary adaptation, except that it affects multiple creatures within range.',
     source: 'Pathfinder Campaign Setting: People of the Stars',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Polymorph',
@@ -586,6 +605,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell transforms a willing creature into an animal, humanoid, or elemental form. The spell has no effect on unwilling subjects. When the target assumes animal form, it functions as beast shape II. Elemental forms operate as elemental body I. Humanoid forms work like alter self. The subject may resume its normal form as a full-round action, and thereafter regains any spells previously prepared.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Polymorph Any Object',
@@ -612,6 +632,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell transforms an object or creature into a new form. Duration is determined by a table based on how radical the change is—the more similar the original and new forms, the longer the duration (from 20 minutes to permanent). Modifiers apply for same kingdom, class, size, relatedness, and intelligence. Physical ability scores of 10 are granted if the target lacks them; mental ability scores default to 5. The spell cannot create valuable materials like gold or magic items.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Polymorph Familiar',
@@ -639,6 +660,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You transform your familiar into any Small animal form. The familiar maintains all of its special abilities and continues to grant you the special ability associated with its normal shape. At 7th caster level this functions as beast shape II, at 9th level as beast shape III, and at 11th level as beast shape IV.',
     source: 'Pathfinder Roleplaying Game Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Polypurpose Panacea',
@@ -665,6 +687,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You produce one of several cantrip-level effects relating to health, well-being, and entertainment. Options include: analgesic (removes minor pain for 1 hour; +2 resistance bonus against pain effects), clarity (+1 competence bonus to one roll within 1 minute), hallucination (pleasant hallucinations for 1 hour with –2 Perception penalty), intoxication (simulates mild intoxication for 1 hour), lucid dream (controlled dreaming if taken within 1 hour of sleep), resistance (+1 resistance bonus on saves for 1 minute), sleep (restful sleep for 1 hour), sobriety (negates intoxication penalties for 1 hour), tenacity (1 temporary hit point for 1 minute), or wakefulness (prevents sleepiness for 2 hours with +5 resistance to sleep effects).',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pouncing Fury',
@@ -695,6 +718,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You may make a full attack using only claw attacks at the end of a charge, limited to one strike per claw. Only the first claw attack benefits from charge damage bonuses or special effects. Additionally, when executing an attack of opportunity with your claws, you may expend one additional use of your attacks of opportunity to make an additional claw attack against the target that provoked the attack.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prehensile Pilfer',
@@ -722,6 +746,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You grant a target with a prehensile tail the ability to execute dirty trick or steal combat maneuvers using the tail as a swift action during full-attack actions. The tail functions as a natural weapon with 5-foot reach. The spell provides no benefit to creatures without prehensile tails and has limited interaction with other extra-attack effects like haste.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Purify Food and Drink',
@@ -748,6 +773,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell renders spoiled, rotten, diseased, poisonous, or otherwise contaminated food and water safe for consumption. The spell cannot prevent future natural decay or contamination. It effectively neutralizes unholy water and similar significant food items but has no effect on any creatures or magical potions.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Putrefy Food and Drink',
@@ -773,6 +799,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell causes edible food to decay immediately and liquids to become undrinkable. Holy water and similar food and drink of significance are spoiled by putrefy food and drink, but the spell has no effect on creatures of any type, nor upon unholy water. You may alternatively target a single potion or elixir, which is destroyed if it fails its save.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pyrotechnics',
@@ -803,6 +830,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell transforms a fire into either blinding fireworks or a choking smoke cloud. Fireworks: The burst of lights blinds creatures within 120 feet who have line of sight for 1d4+1 rounds (Will negates, spell resistance applies). Smoke: The fire produces a smoke cloud 20 feet in all directions, blocking all vision. Creatures within the cloud take a –4 penalty to Strength and Dexterity that lasts for 1d4+1 rounds after leaving the area (Fortitude negates, no spell resistance).',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Quick Change',
@@ -842,6 +870,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       "For those with the change shape special quality, this spell permits reverting to your true form as a swift action. If enemies haven't discovered your authentic appearance, transforming back and attacking during the same turn denies foes their Dexterity modifier to AC against your initial attack.",
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Quick Throwing',
@@ -869,6 +898,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'Affected individuals can retrieve thrown weapons as a free action without needing the Quick Draw feat, permitting them to make their full normal rate of attacks with such weapons. This applies to rocks for creatures with the rock throwing ability but does not affect other ranged ammunition types.',
     source: 'Pathfinder Adventure Path #91: Battle of Bloodmarch Hill',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rags to Riches',
@@ -901,6 +931,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell upgrades a touched object to function as masterwork quality. Skill kits gain an insight bonus of +1 per four caster levels to relevant skill checks. Weapons and armor receive temporary hit points equal to caster level, with enhancement bonuses increased by 1 if already present. Objects with hardness gain +5 hardness.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rapid Repair',
@@ -927,6 +958,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell grants a targeted construct fast healing 5 for the duration, allowing it to heal 5 hit points per round. This does not stack with any existing fast healing the construct possesses. The healing provides no benefit once the construct reaches 0 hit points or is destroyed.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Raven's Flight",
@@ -958,6 +990,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You transform into a tiny, raven-like blurred form with a fly speed of 50 feet (good maneuverability). Size modifiers apply, though ability scores remain unchanged. You are limited to 5-foot steps, moving, running, or withdrawing actions only. If dispelled or when the spell ends while you are aloft, you descend 60 feet per round before falling normally.',
     source: 'Pathfinder Player Companion: Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reboot',
@@ -987,6 +1020,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You temporarily restore a destroyed construct to operational status at 1 hit point by whispering in the machine language of the First Ones. The construct obeys your commands while active and can receive further healing through spells like make whole. It reverts to destroyed status upon spell expiration or upon reaching 0 HP. Constructs with more than double your caster level in Hit Dice cannot be targeted.',
     source: 'Pathfinder Player Companion: People of the Stars',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Recharge Innate Magic',
@@ -1020,6 +1054,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'You channel magic energy into your own aura, recharging your innate magic abilities. You regain one use of all 0-level and 1st-level spell-like abilities you can use as a result of a racial trait.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reduce Animal',
@@ -1044,6 +1079,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       "This spell operates similarly to the reduce person spell but targets a single consenting animal. The creature's size category decreases by one step. Damage from the animal's natural attacks adjusts proportionally based on the new size, following standard weapon damage scaling conventions.",
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reduce Person',
@@ -1075,6 +1111,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell causes instant diminution of a humanoid creature, halving its height, length, and width and dividing its weight by 8. The target gains a +2 size bonus to Dexterity, a –2 size penalty to Strength (minimum 1), and a +1 size bonus to attack rolls and AC. Equipment reduces proportionally. Weapons deal reduced damage while carried but return to normal size if dropped. Reduce person counters and dispels enlarge person.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Refine Improvised Weapon',
@@ -1103,6 +1140,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell converts an everyday object into a functional weapon, transforming an improvised weapon into an equivalent simple or martial weapon of masterwork quality. The spell preserves the original appearance—a chair leg becomes a masterwork club, a butter knife becomes a masterwork dagger, and a pitchfork becomes a masterwork trident—while gaining the mechanical properties of proper weapons.',
     source: 'Pathfinder Roleplaying Game Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reincarnate',
@@ -1129,6 +1167,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell restores a deceased creature to life in a new body created from natural elements, provided death occurred within one week and the soul is willing. The creature retains its class abilities, feats, and skill ranks but gains two permanent negative levels (or 2 points of Constitution drain if 1st level). Ability scores adjust based on the new form. There is a 50% chance any prepared spells are lost; unused spell slots may be similarly affected. The creature gains all abilities of its new race but does not automatically speak its language.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reinforce Armaments',
@@ -1158,6 +1197,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell enhances a weapon or suit of armor. Normal equipment has its fragile quality negated and its hardness doubled. Masterwork or magical items receive only the hardness increase. A communal version at 2nd level can affect multiple objects, dividing the duration among them.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remarkable Legerdemain',
@@ -1183,6 +1223,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       "Your body and clothing flutter and distort subtly, allowing you to conceal items with uncanny skill. You may treat single-handed objects as coin-sized for Sleight of Hand checks to hide them on your person. You can conceal a maximum of one item per caster level simultaneously, though the spell does not alter the objects' actual sizes.",
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Repel Wood',
@@ -1207,6 +1248,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'Waves of energy push wooden objects away from you. Objects larger than 3 inches in diameter that are firmly fixed remain unaffected, but loose items and smaller fixed wooden objects are repelled at 40 feet per round. Wooden items such as shields, spears, and wooden-hafted weapons are pushed back along with creatures carrying them, though creatures can release such items. Even magical wooden items are affected. If you are standing on a ship, that ship is considered a fixed object relative to you.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resilient Reservoir',
@@ -1234,6 +1276,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell creates a magical well of retribution that stores damage you take. Each melee or touch-spell attack transfers 1 damage point into a pool (maximum equal to caster level, up to 20 points). You can spend accumulated points as an immediate action to gain insight bonuses to skill checks, attack rolls, damage rolls, or combat maneuver checks before rolling. You gain additional uses per five caster levels (maximum four times). If you reach negative hit points while the spell is active, remaining reservoir energy automatically detonates in a 15-foot-radius force blast dealing 1d6 force damage per 2 points remaining (maximum 10d6), with a Reflex save for half.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resinous Skin',
@@ -1262,6 +1305,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       "You gain DR 5/piercing and a +4 bonus to CMD against disarm attempts and on saving throws against forced dropping of held items. You gain a +2 bonus to grapple combat maneuvers. Enemies grappled by you take a –2 penalty when attempting to escape. Weapons striking you become stuck in your skin unless the wielder succeeds at a Reflex save; extracting such weapons requires a successful Strength check against the spell's DC. Unarmed strikes and natural weapons are unaffected.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resize Item',
@@ -1287,6 +1331,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell alters a magical weapon or armor piece to become up to two size categories larger or smaller than its current size. If the resized armor is being worn when the spell ends, it harmlessly falls away. The spell prevents growth that would exceed the containing space. The effect can be made permanent via permanency for 7,500 gp, fixing the item at one specific new size within two steps of its original dimensions.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Reverse Gravity',
@@ -1314,6 +1359,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell reverses gravity in its area of effect, causing all unattached objects and creatures to fall upward. They reach the top of the area in 1 round. If they strike a solid surface such as a ceiling, they take damage as from a normal fall. Creatures with appropriate handholds can attempt Reflex saves to secure themselves. Flying or levitating creatures can avoid falling. When the spell ends, affected objects and creatures fall downward normally.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Righteous Might',
@@ -1339,6 +1385,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'Your height doubles and your weight increases eightfold, advancing you to the next larger size category. You gain a +4 size bonus to Strength and Constitution, a –2 size penalty to Dexterity, and a +2 enhancement bonus to your natural armor. You also gain damage reduction 5/evil (or 5/good if you channel negative energy), which improves to DR 10/evil (or 10/good) at 15th caster level. Equipment enlarges proportionally, but thrown weapons revert to normal size and damage upon leaving your possession.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rope Trick',
@@ -1367,6 +1414,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'This spell causes a rope to stand perpendicular to the ground, anchored to an extradimensional space at its top. The space can hold up to eight creatures of any size and can support up to 16,000 pounds. Occupants remain hidden from divinations and most spells, though they can observe the outside through an invisible 3-foot-by-5-foot window. Spells cannot cross the extradimensional interface. Creatures inside drop out when the spell expires.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rubberskin',
@@ -1395,6 +1443,7 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       "Your skin becomes more elastic, distributing crushing damage efficiently. During the spell's duration, all bludgeoning damage and falling damage you take is converted to nonlethal damage. The spell has no effect if you are already immune to nonlethal damage.",
     source: 'Pathfinder Player Companion: Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rusting Grasp',
@@ -1419,5 +1468,6 @@ export const TRANSMUTATION_BATCH_007: Spell[] = [
     description:
       'Your touch corrodes iron and alloys. Against inanimate objects, you destroy a 3-foot-radius volume of metal instantly. In combat against armored opponents, a successful melee touch attack instantly destroys 1d6 points of AC gained from metal armor. Against armed foes, a successful touch destroys the weapon. Against ferrous creatures, the spell deals 3d6 points of damage + 1 per caster level (maximum +15) per round, lasting one round per caster level with one touch attack per round. Magic items are immune to this effect.',
     source: 'PRPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 ];

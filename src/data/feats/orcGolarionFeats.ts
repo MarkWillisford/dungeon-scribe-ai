@@ -16,6 +16,7 @@ export const ORC_GOLARION_FEATS: FeatDefinition[] = [
       'You gain the channel energy class feature, as a cleric, usable 2 times per day. Your effective cleric level equals your divine spellcasting class level minus 3. The daily uses are not modified by Charisma modifier.',
     shortDescription: 'Gain channel energy 2/day at divine caster level -3.',
     source: 'Pathfinder Player Companion: Orcs of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Ability to cast divine spells' },
@@ -42,6 +43,7 @@ export const ORC_GOLARION_FEATS: FeatDefinition[] = [
       'In combat, you gain 1 hit point of healing whenever you deal fire damage to an enemy, maximum once per round. If an attack causes a target to catch on fire, you heal each round that target takes fire damage.',
     shortDescription: 'Heal 1 HP when you deal fire damage to an enemy (1/round).',
     source: 'Pathfinder Player Companion: Orcs of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Half-orc or orc' },
@@ -66,6 +68,7 @@ export const ORC_GOLARION_FEATS: FeatDefinition[] = [
       'When raging and an attack reduces an enemy to negative hit points or kills it, you regain 1 round of rage. The enemy must have had at least as many Hit Dice as you. This benefit can only be gained once per round.',
     shortDescription: 'Regain 1 rage round when you drop a foe with equal or more HD (1/round).',
     source: 'Pathfinder Player Companion: Orcs of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Half-orc or orc' },
@@ -90,6 +93,7 @@ export const ORC_GOLARION_FEATS: FeatDefinition[] = [
       'Feats and abilities that allow an ally to rage or enhance a rage if adjacent to you persist as long as your ally is within 30 feet of you and can see you, rather than requiring adjacency. Allies must still meet original activation requirements.',
     shortDescription: 'Rage-sharing effects extend to 30 ft instead of requiring adjacency.',
     source: 'Pathfinder Player Companion: Orcs of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },

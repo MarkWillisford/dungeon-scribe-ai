@@ -14,6 +14,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Divine identification effects fail against you; cannot gain or be harmed by deity-specific magic',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -28,6 +29,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
       'You have delved into heretical texts and forbidden lore, granting you access to one spell from the cleric spell list that is not normally available to your class. Once you select the spell, you may prepare and cast it as though it were on your class spell list at the same spell level as it appears on the cleric list. You must be able to cast spells of the appropriate level.',
     shortDescription: 'Add one cleric spell from heretical texts to your class spell list',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_religion', ranks: 5 },
@@ -45,6 +47,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
       'Your rejection of the divine gives you a measure of protection against divine magic. You gain a +2 bonus on saving throws against divine spells. However, you cannot gain the benefit of divine spells cast on you willingly, and you treat all cure and inflict spells as having no effect when targeted at you intentionally.',
     shortDescription: '+2 saves vs. divine spells; cannot benefit from divine magic cast on you',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must not worship any deity, philosophy, or divine power' },
@@ -70,6 +73,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel energy as a ranged touch attack (30 ft) instead of a burst; no saving throw',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -88,6 +92,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 sacred/profane bonus to AC vs. spells and spell-like abilities; +2 in consecrate/desecrate area',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_religion', ranks: 3 },
@@ -114,6 +119,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel to auto-heal all creatures (min amount) and boost one target; cure spells give temp HP',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel positive energy' },
@@ -132,6 +138,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Bard and cleric levels stack for bardic performance and channel energy effects',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'bardic performance' },
@@ -150,6 +157,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 saves vs. spells/abilities from divine sources of a chosen opposing alignment',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_religion', ranks: 5 }],
     effects: [
@@ -178,6 +186,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       "Full cleric level for one domain's powers; one extra use per day of that domain's power",
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'domain' },
@@ -196,6 +205,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Apply Reach Spell to domain spells for free (no level increase or extra casting time)',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'reach_spell' },
@@ -214,6 +224,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Animal and familiar companions gain +2 Will and +1 sacred AC; communicate with any companion',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'animal companion or familiar' },
@@ -247,6 +258,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Will vs. enchantment/mind-affecting; 1/day reroll a failed Will save against such effects',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -273,6 +285,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 on concentration checks to cast defensively; 1/day swift-action meditative focus for 1 min',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -299,6 +312,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
       'Your years training in a monastery continue to improve your unarmed strike even as you pursue other classes. Add half the levels you have in classes other than monk to your monk level when determining your unarmed strike damage. This feat has no effect if you are not a monk.',
     shortDescription: 'Half your non-monk levels add to monk level for unarmed strike damage',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'still mind' },
@@ -317,6 +331,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain one oracle revelation from a chosen mystery at (level – 3) effective oracle level',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_religion', ranks: 5 },
@@ -335,6 +350,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 to Handle Animal, Knowledge (nature), and Survival; wild empathy uses character level',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'WIS', minimum: 13 }],
     effects: [
@@ -372,6 +388,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '1/day negate a hit or failed save as an immediate action (not against death spells)',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -389,6 +406,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
       'You draw on the blessings of multiple deities, allowing you to access one domain from a second deity you venerate. You gain the granted power and domain spell list of that domain as a secondary domain. However, you cannot use the granted power more than once per day regardless of class features that would otherwise allow extra uses.',
     shortDescription: 'Gain one domain from a second worshiped deity as a secondary domain',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'domain' },
@@ -408,6 +426,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Sense Motive and Will vs. language-dependent; retry failed Will save next turn',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'INT', minimum: 13 }],
     effects: [
@@ -438,6 +457,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Double INT mod on Knowledge checks with 1 min study; 1/day reroll a failed trained skill check',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'INT', minimum: 13 }],
     effects: [],
@@ -452,6 +472,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
       'By living in isolation in a particular region, you have become deeply attuned to its natural rhythms and hidden dangers. You gain a +4 bonus on Survival checks made in your home region. You also cannot be magically tracked or scryed while within your home region unless you are unconscious.',
     shortDescription: '+4 Survival in home region; cannot be tracked or scryed in home region',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'survival', ranks: 3 },
@@ -479,6 +500,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Treat any region spent 1+ weeks in as home; 1/week augury-like answer from ancestor spirits',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'regional_recluse' },
@@ -497,6 +519,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Full-round action: +10 Stealth and pass as a statue; pose ends immediately on any action',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -528,6 +551,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Standard action touch removes one poison/disease/curse on a successful CL check (WIS mod/day)',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -549,6 +573,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel energy affects living and undead simultaneously; one alignment-descriptor spell loses its descriptor',
     source: 'Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -570,6 +595,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 sacred bonus on saves vs. evil spells/effects; +4 vs. effects targeting good creatures',
     source: 'Faiths of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must be good alignment' },
@@ -596,6 +622,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 dodge to AC (+2 in light/no armor); bonus lost after making an attack of opportunity',
     source: 'Faiths of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -622,6 +649,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'When channeling to heal, all affected creatures also lose one chosen minor condition',
     source: 'Faiths of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel positive energy' },
@@ -640,6 +668,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Fire divine spells or channel positive energy give one ally temp HP (CHA mod) and endure elements',
     source: 'Faiths of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel positive energy' },
@@ -659,6 +688,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel energy damages evil outsiders or heals good outsiders as though undead/living',
     source: 'Faiths of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel energy' }],
     effects: [],
@@ -674,6 +704,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '1/day apply a cure spell or channel energy as a swift action instead of a standard action',
     source: 'Faiths of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel positive energy' },
@@ -692,6 +723,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel energy to harm undead can deal nonlethal damage; undead may choose to fail saves',
     source: 'Faiths of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel positive energy' },
@@ -713,6 +745,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel energy damages lawful or chaotic outsiders, or heals true neutral outsiders',
     source: 'Faiths of Balance',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -731,6 +764,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '1/day on a successful save vs. a spell, redirect the energy to cast a spell of equal or lower level for free',
     source: 'Faiths of Balance',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -751,6 +785,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel energy at half effect that heals all living (or damages all undead) ignoring alignment restrictions',
     source: 'Faiths of Balance',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -769,6 +804,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '1/day channel both energies simultaneously: one target healed, one damaged for full amounts',
     source: 'Faiths of Balance',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -788,6 +824,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 Diplomacy to mediate; roll twice when both parties willing; mediate even mindless creatures',
     source: 'Faiths of Balance',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -824,6 +861,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel energy damages good outsiders or heals evil outsiders as though undead/living',
     source: 'Faiths of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel energy' },
@@ -842,6 +880,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel negative energy: undead healed gain +2 attack/damage; living targets also sickened on failed save',
     source: 'Faiths of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel negative energy' },
@@ -860,6 +899,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '1/day maximize an evil-descriptor spell for free; you detect as evil for 24 hours afterward',
     source: 'Faiths of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'spellcraft', ranks: 5 },
@@ -879,6 +919,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel negative energy or evil spells to desecrate a 10-ft radius for 1 hour/cleric level',
     source: 'Faiths of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel negative energy' },
@@ -898,6 +939,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       '1/day prepare/cast one opposing-alignment divine spell at CL -2; descriptor matches your alignment',
     source: 'Faiths of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_religion', ranks: 7 },
@@ -917,6 +959,7 @@ export const FAITHS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel negative energy causes confusion (failed save) or staggered (success) instead of damage',
     source: 'Faiths of Corruption',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'channel negative energy' },

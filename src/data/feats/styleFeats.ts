@@ -10,6 +10,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       "While using this style, as a move action you can protect adjacent allies from a single opponent you currently threaten, granting those allies a +2 dodge bonus to AC against that opponent's next melee attack before your next turn. You take a –2 penalty to AC against that opponent until your next turn.",
     shortDescription: 'Protect adjacent allies with +2 dodge bonus; take –2 AC penalty vs that foe',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'combat_expertise' },
@@ -42,6 +43,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Reduce Archon Style AC penalty to –1; redirect one melee attack per round from ally to yourself',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'archon_style' },
@@ -61,6 +63,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'No AC penalty with Archon Style; swift action activation; allies AoO when you absorb a redirected hit',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'archon_diversion' },
@@ -83,6 +86,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Strikes against divine spellcasters sicken them 1d4 rounds (Fort save reduces to 1)',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -101,6 +105,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain improved uncanny dodge (as rogue of your level) while using Asura Style',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'asura_style' },
@@ -118,6 +123,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Replace one attack to dispel a harmless divine spell on target via dispel magic',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'asura_sight' },
@@ -137,6 +143,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       'While using this style, during any round in which you move at least 15 feet, you gain a +1 dodge bonus to AC. This bonus lasts until the beginning of your next turn.',
     shortDescription: '+1 dodge bonus to AC when you move 15+ feet in a round',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'dodge' },
@@ -168,6 +175,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Trip as swift action when movement AoO misses; trip bonus equals movement AoO AC bonus',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'agile_maneuvers' },
@@ -188,6 +196,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       '+10 ft base speed; ignore first 10 ft of difficult terrain penalty per round',
     source: 'Pathfinder Player Companion: Chronicle of Legends',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'agile_maneuvers' },
@@ -225,6 +234,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'No underwater penalties for unarmed strikes; add Wis modifier to Swim checks',
     source: "Pathfinder Player Companion: Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -244,6 +254,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Efficient underwater movement; charge unarmed strike adds 2× Str bonus to damage',
     source: "Pathfinder Player Companion: Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -264,6 +275,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain swim speed; on a successful charge hit, make a second charge attack against a different foe',
     source: "Pathfinder Player Companion: Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -287,6 +299,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Immediate action Handle Animal check to negate a hit on your adjacent animal companion',
     source: "Pathfinder Player Companion: Monster Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -305,6 +318,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       "Substitute your Handle Animal check for an adjacent animal companion's saving throw",
     source: "Pathfinder Player Companion: Monster Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -325,6 +339,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'When a foe harms your companion, you and companion gain +2 attack/+4 damage vs that foe until your next turn',
     source: "Pathfinder Player Companion: Monster Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -375,6 +390,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Str and Con, –2 AC; activated as immediate action when taking damage (aquatic subtype only)',
     source: 'Pathfinder Player Companion: Blood of the Sea',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -419,6 +435,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Unarmed/natural attacks add 1d6 bleed; once per 1d4 rounds make –5 attack for +2d6 bludgeoning',
     source: 'Pathfinder Player Companion: Blood of the Sea',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 15 },
@@ -439,6 +456,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Extra attacks vs bleeding enemies in reach (–2 AC each); Blood Frenzy Strike bleed increases to 2d6',
     source: 'Pathfinder Player Companion: Blood of the Sea',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 17 },
@@ -463,6 +481,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       'While using this style, you gain a +4 bonus on combat maneuver checks to overrun an opponent. Any magic ability or material that reduces your armor check penalty also reduces this bonus by the same amount. Characters with armor training can use this style in medium or light armor, gaining +3 or +2 respectively.',
     shortDescription: '+4 CMC bonus on overrun; reduced by armor check penalty reductions',
     source: "Pathfinder Player Companion: Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -495,6 +514,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Add Str bonus to Acrobatics jump; overrun multiple foes with cumulative –2 penalty per attempt',
     source: "Pathfinder Player Companion: Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 15 },
@@ -514,6 +534,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       'While using Bulette Charge Style, whenever you succeed at an overrun combat maneuver check, the overrun target takes damage equal to 1d8 (Medium) or 1d6 (Small) + 1/2 your armor bonus to AC + 1-1/2 times your Strength bonus.',
     shortDescription: 'Successful overruns deal 1d8 + ½ armor bonus + 1½ Str bonus damage',
     source: "Pathfinder Player Companion: Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 15 },
@@ -536,6 +557,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       'While using this style, when a creature charges you, you can make a trip combat maneuver against that charging creature as a free action. This trip attempt does not provoke attacks of opportunity.',
     shortDescription: 'Free trip attempt (no AoO) against creatures that charge you',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_trip' },
@@ -552,6 +574,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       'While using Bull-Catcher Style, when you successfully trip a charging opponent, you can immediately attempt a bull rush against that creature as a free action. You gain a +2 bonus on this bull rush combat maneuver check.',
     shortDescription: 'After tripping a charger, free bull rush attempt with +2 CMC bonus',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'bull_catcher_style' },
@@ -584,6 +607,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Bull rushed creatures take falling damage equal to distance moved instead of standard damage',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'bull_catcher_style' },
@@ -605,6 +629,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Charge through difficult terrain and ally squares without penalty; +1 dodge AC on charges',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'dodge' },
@@ -635,6 +660,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       'While using Charging Stag Style, when you charge and hit, your unarmed strike or natural weapon attack deals additional damage equal to twice your Strength modifier. You can make a charging attack against an opponent not in a straight line from your starting position, allowing you to curve your charge path.',
     shortDescription: 'Charge hits deal +2× Str modifier bonus damage; charge path may curve',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'charging_stag_style' },
@@ -654,6 +680,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'After a successful charge hit, free grapple or trip attempt with +2 CMC bonus',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'charging_stag_style' },
@@ -689,6 +716,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       'While using this style, when you successfully drag or reposition an opponent, you can move 5 feet as an immediate action during the maneuver, including into squares the opponent just vacated, even if you have already moved this round. This movement does not provoke attacks of opportunity.',
     shortDescription: 'Move 5 ft (no AoO) as an immediate action when you drag or reposition a foe',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -708,6 +736,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Drag/reposition forces Fort save or foe takes –2 atk/CMC/Dex skills until end of its next turn',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -729,6 +758,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Make unarmed attacks mid-drag/reposition; +1 attack per extra 5 ft at cumulative –5 penalty each',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -753,6 +783,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'No –4 penalty for nonlethal unarmed damage; +2 bonus on nonlethal attack rolls',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -783,6 +814,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 CMC bonus on trip attempts against creatures you hit with nonlethal damage this turn',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'cudgeler_style' },
@@ -815,6 +847,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Free nonlethal unarmed strike against a creature you just knocked prone with a trip',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'cudgeler_style' },
@@ -836,6 +869,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 vs fear; Intimidate DC vs you +4; spend 1 ki to shaken foes on hit (Will save)',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -869,6 +903,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 vs fear; Intimidate DC vs you +8; spend 1 ki to gain temp HP = 2× HD when targeted by fear',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 19 },
@@ -904,6 +939,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend 2 ki to auto-fail Deadhand Style shaken save on hit; already-shaken targets become frightened',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 23 },
@@ -928,6 +964,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Identify a foe (swift action, DC 15+CR); +2 dodge to saves and AoO AC vs identified creature',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -977,6 +1014,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 insight on creature-ID Knowledge checks; swift action adds 2× Int mod damage vs identified foes',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -1008,6 +1046,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Take 10 on Kirin identification checks; spend AoO use to move Int×5 ft when identified foe ends turn in range',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -1033,6 +1072,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       'You gain one additional Stunning Fist attempt per day. While using this style, you gain a +2 bonus to the DC of effects you deliver with your Stunning Fist.',
     shortDescription: '+1 Stunning Fist use/day; +2 to Stunning Fist DC while in style',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -1064,6 +1104,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Non-monk levels count half for Stunning Fist; remove effects via touch; +2 attack on Stunning Fist strikes',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -1097,6 +1138,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 Stunning Fist use/day; expend 2 uses on one attack to dazzle and stagger, then fatigue target',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -1118,6 +1160,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       'As a full-round action, you can ready two separate ranged attacks with your selected weapon, each with distinct triggering conditions. You take a –2 penalty on attack rolls for these readied actions. If you have the weapon training class feature for bows, crossbows, or firearms, you can apply this style to any weapon in that category.',
     shortDescription: 'Ready two ranged attacks as a full-round action at –2 to hit',
     source: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'precise_shot' },
@@ -1137,6 +1180,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ready two ranged attacks as a standard action instead of a full-round action',
     source: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'overwatch_style' },
@@ -1157,6 +1201,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       'While using Overwatch Style, as a full-round action you can ready up to four ranged attacks, each with its own triggering event. You take a –2 penalty on attack rolls made with these readied actions.',
     shortDescription: 'Ready up to four ranged attacks as a full-round action at –2 to hit each',
     source: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'overwatch_style' },
@@ -1180,6 +1225,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       'While using this style with at least one hand free, you gain a +1 shield bonus to AC.',
     shortDescription: '+1 shield bonus to AC while using the style with one hand free',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -1210,6 +1256,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Style shield bonus extends to CMD and touch AC; immediate-action grapple (–2 CMC) when foe misses',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'snapping_turtle_style' },
@@ -1229,6 +1276,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Style shield bonus increases to +2; enemies take –4 on critical confirmation rolls vs you',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'snapping_turtle_clutch' },
@@ -1263,6 +1311,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
       "While using this style, whenever you deal at least 10 points of damage to a foe with an attack of opportunity, that foe's base speed decreases by 5 feet until the end of its next turn.",
     shortDescription: 'AoOs dealing 10+ damage reduce foe speed by 5 ft until end of its next turn',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -1281,6 +1330,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 CMC bonus on trip attempts made as attacks of opportunity while in Wolf Style',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -1314,6 +1364,7 @@ export const STYLE_FEATS: FeatDefinition[] = [
     shortDescription:
       'Swift action on 10+ damage to prone foe: Fort save or permanent –2 Cha penalty',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 17 },

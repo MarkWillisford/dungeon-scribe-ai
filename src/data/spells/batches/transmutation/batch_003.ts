@@ -1,8 +1,8 @@
 // Transmutation spells — batch 003
 // Batch metadata: {"school":"transmutation","batchNum":"003","startSpell":"Eagle's Splendor","lastSpell":"Feather Step, Mass","nextSpell":"Ferment","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/f/ferment/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_003: Spell[] = [
+export const TRANSMUTATION_BATCH_003: SpellDefinition[] = [
   {
     name: "Eagle's Splendor",
     classLevels: {
@@ -37,6 +37,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       "The subject gains a +4 enhancement bonus to Charisma, adding the usual benefits to Charisma-based skill checks and to Charisma checks. Bards, paladins, and sorcerers (and other spellcasters who rely on Charisma) affected by this spell do not gain any additional bonus spells for the increased Charisma, but the save DCs for spells they cast while under this spell's effect do increase.",
     source: 'PFRPG Core',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Eagle's Splendor, Mass",
@@ -68,6 +69,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       "This spell functions like eagle's splendor, except that it affects multiple creatures.",
     source: 'PFRPG Core',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Earth Glide',
@@ -97,6 +99,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'The target can pass through stone, dirt, or almost any other sort of earth except metal as easily as a fish swims through water, traveling at a speed of 5 feet. If protected against fire damage, it can move through lava as well. Its burrowing leaves no tunnel or hole, nor does it create any ripple or other sign of its presence. A move earth spell cast on an area where the target is flung back 30 feet, stunning the creature for 1 round unless it succeeds on a DC 15 Fortitude save. This spell does not give the target the ability to breathe underground.',
     source: 'PFRPG Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Earth Tremor',
@@ -128,6 +131,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You strike the ground, sending a ripple of power along the ground. You select one of three areas: a 30-ft. line, a 20-ft. cone, or a 10-ft.-radius spread centered on yourself (your space is unaffected). The area becomes dense rubble, costing 2 squares of movement to enter. Creatures on the ground take 1d4 points of bludgeoning damage per caster level (maximum 10d4) or half on a successful save. Medium or smaller creatures that fail their save are knocked prone. This spell has no effect unless the caster is touching the ground and the affected area is earth, sand, or stone.',
     source: 'PFRPG Elemental Masters Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Echolocation',
@@ -156,6 +160,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You emit high-pitched noises and listen to their echoes, gaining blindsight to a range of 40 feet. The sounds are inaudible to most creatures, though dragons, creatures with the blindsense or blindsight extraordinary ability, and any creature that succeeds on a DC 20 Perception check can hear them. The ability becomes nonfunctional if you are deafened or within the area of a silence spell.',
     source: 'PFRPG Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Effortless Armor',
@@ -184,6 +189,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'Armor you wear no longer reduces your speed. In addition, the armor check penalty of the armor you are wearing is reduced by 1, plus an additional 1 for every five caster levels you have (maximum 5).',
     source: 'PFRPG Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Eldritch Conduit',
@@ -210,6 +216,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You outline a target creature in faint radiance. Once the target is marked, you can cast another spell with an area effect (cone, cylinder, line, or sphere) using the target as the point of origin. Using the conduit ends the spell immediately. The target must remain within close range when you use the conduit.',
     source: 'PFRPG Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Eldritch Conduit, Greater',
@@ -236,6 +243,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'This spell functions like eldritch conduit, except it affects multiple creatures. Using a creature as a conduit ends the effect on that individual target only.',
     source: 'PFRPG Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Elemental Body I',
@@ -265,6 +273,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'When you cast this spell, you can assume the form of a Small air, earth, fire, or water elemental. If you choose the air form, you gain a +2 size bonus to your Dexterity, a +2 natural armor bonus, a fly speed of 60 feet (perfect), darkvision 60 feet, and the ability to create a whirlwind. If you choose the earth form, you gain a +2 size bonus to your Strength, a +4 natural armor bonus, darkvision 60 feet, and the ability to earth glide. If you choose the fire form, you gain a +2 size bonus to your Dexterity, a +2 natural armor bonus, darkvision 60 feet, resist fire 20, vulnerability to cold, and a burn ability. If you choose the water form, you gain a +2 size bonus to your Constitution, a +4 natural armor bonus, a swim speed of 60 feet, darkvision 60 feet, the ability to create a vortex, and water breathing.',
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Elemental Body II',
@@ -293,6 +302,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'This spell functions as elemental body I, except that it also allows you to assume the form of a Medium air, earth, fire, or water elemental. The ability score bonuses increase to +4 (Dexterity or Strength as appropriate) and natural armor increases as well.',
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Elemental Body III',
@@ -321,6 +331,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'This spell functions as elemental body II, except that it also allows you to assume the form of a Large air, earth, fire, or water elemental. In addition, while in elemental form, you gain immunity to bleed damage, critical hits, and sneak attacks.',
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Elemental Body IV',
@@ -347,6 +358,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'This spell functions as elemental body III, except that it also allows you to assume the form of a Huge air, earth, fire, or water elemental. In addition, while in elemental form, you gain DR 5/—.',
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Elemental Mastery',
@@ -375,6 +387,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You gain mastery over the element that reflects your heritage. If you have the air elemental heritage (sylph), you gain a fly speed of 30 feet (average maneuverability) and a +1 circumstance bonus on attack rolls when both you and your opponent are airborne. If you have the earth elemental heritage (oread), you gain a burrow speed of 15 feet and a +1 circumstance bonus on attack rolls when both you and your opponent are touching the ground. If you have the fire elemental heritage (ifrit), all your speeds increase by 20 feet and you gain a +1 circumstance bonus on attack rolls against burning targets. If you have the water elemental heritage (undine), you gain a swim speed of 30 feet and a +1 circumstance bonus on attack rolls when both you and your opponent are touching water. Sulis may select any of the four elements but have a shorter duration.',
     source: 'PFRPG Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Elude Time',
@@ -399,6 +412,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You enter a state of suspended animation, similar to temporal stasis. You determine the amount of time you spend in this state when you cast the spell, up to the maximum duration. While in this state, no time passes for you, and no force or effect can harm you until the spell expires or is removed, such as by a successful dispel magic spell.',
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Emblazon Crest',
@@ -426,6 +440,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       "The subject touched is always able to display her proper crest and coat of arms for the duration of the spell. Any tabard, tunic, or shield worn or carried by the subject will display the character's coat of arms for the duration of the spell, even if the subject exchanges one shield for another.",
     source: 'PFRPG Ultimate Equipment',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Emblem of Greed',
@@ -457,6 +472,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You transform a melee weapon into a burning glaive of appropriate size with a +1 enhancement bonus and the flaming special ability. The wielder is automatically proficient with it and uses your caster level as her base attack bonus when wielding it. At caster level 14th the glaive gains the spell-storing ability; at 17th it gains flaming burst instead of flaming. The enhancement bonus increases to +2 at 15th level and +3 at 19th level. The spell supersedes any existing magical properties and does not stack with other weapon enhancement spells.',
     source: 'PFRPG Pathfinder #109',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Empower Holy Water',
@@ -483,6 +499,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You can empower one vial of holy water at 4th level, two at 8th level, and three at 12th level. When an empowered vial of holy water directly strikes an undead creature, it deals bonus damage equal to your caster level (maximum +10). Creatures in the splash area take half this bonus damage (maximum +5). This bonus damage is positive energy and affects only undead creatures.',
     source: 'PFRPG Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Endothermic Touch',
@@ -511,6 +528,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You reduce the metabolic functions of a reptilian or draconic creature. The target becomes staggered and moves at half its normal speed (round down to the next 5-foot increment), but can hold its breath for twice the normal duration.',
     source: 'PFRPG Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enemy Hammer',
@@ -536,6 +554,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       "You grab a creature with telekinesis and use it to batter nearby opponents or objects. Each round, as a standard action, you can attempt to hurl the target at any creature or object within 30 feet of it. Your attack bonus for this maneuver equals your caster level plus your Intelligence or Charisma modifier (whichever is higher). Damage depends on the target creature's size, from 1d4 (Fine) to 3d8 (Colossal). Each round the target can attempt a Fortitude save; success allows it to act normally, while failure leaves it prone and unable to act. Creatures who choose to resist gain a +4 circumstance bonus to their save. The spell ends if the target dies or is destroyed.",
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Energy Hack',
@@ -561,6 +580,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       "This spell can only be cast when you take 10 or more points of acid, cold, electricity, or fire damage from a spell or spell-like ability. The spell's descriptor matches the type of energy damage that triggered it. When you subsequently cast spells, spell-like abilities, or use certain class features (arcanist exploits, arcane school powers, bloodline powers, magus arcana, or hexes) that deal energy damage, you may change the energy type and descriptor to match the descriptors of energy hack, while all other effects remain unchanged. Casters with an arcane reservoir can spend 1 point as a free action when taking an additional 10+ points of matching damage to reset the duration and add new energy types.",
     source: 'PFRPG Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Energy Siege Shot',
@@ -588,6 +608,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'This spell converts the ammunition of a Large siege engine into pure energy. You choose an energy type when casting the spell: acid, cold, electricity, fire, sonic, or force. Ammunition from the siege engine deals the chosen energy type damage instead of its normal damage type, and this energy damage affects objects fully. Secondary effects vary by type: acid creates splash damage within 15 feet; cold generates an entangling ice sheen in a 20-foot area lasting 1d6 rounds; electricity staggers nearby creatures; fire causes ignition within 15 feet; sonic deafens targets within 20 feet; force has no extra effect. Greater Energy Siege Shot (6th level) functions identically but can affect siege engines of any size.',
     source: 'PFRPG Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enlarge Person',
@@ -619,6 +640,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       "This spell causes instant growth of a humanoid creature, doubling its height and multiplying its weight by 8. This increase changes the creature's size category to the next larger one. The target gains a +2 size bonus to Strength, a -2 size penalty to Dexterity (to a minimum of 1), and a -1 penalty on attack rolls and to AC due to its increased size. A Large humanoid creature has a space of 10 feet and a natural reach of 10 feet. Melee weapons deal more damage. Other magical effects that change size do not stack with this spell.",
     source: 'PFRPG Core',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enlarge Person, Mass',
@@ -648,6 +670,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'This spell functions like enlarge person, except that it affects multiple creatures.',
     source: 'PFRPG Core',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enlarge Tail',
@@ -678,6 +701,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'When you cast this spell, you gain 5 feet of reach, a +1 bonus on attack rolls, and a +2 bonus on damage rolls when attacking with your tail or tail weapons.',
     source: 'PFRPG Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enlightened Step',
@@ -705,6 +729,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'Through meditation and focused control of mystical energies, your steps become lighter than air. You gain the benefits of air walk. Additionally, you may expend the remaining duration as a swift action to gain a fly speed of 120 feet with perfect maneuverability for 1 minute, after which the spell ends.',
     source: 'PFRPG Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Entangle',
@@ -731,6 +756,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'This spell causes plants to reach up and entangle all creatures in the area of effect. Creatures that fail their save gain the entangled condition, but can break free by making a move action to attempt a DC 20 Strength or Escape Artist check. Creatures that succeed on the save can move through the area normally, but must save again at the end of each round they remain. Those who enter the area must also save or become entangled. The area becomes difficult terrain. If the plants in the area have thorns, entangled creatures take 1 point of damage each time they fail to break free.',
     source: 'PFRPG Core',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Entomb',
@@ -761,6 +787,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       "You designate an aboveground area and relocate it underground within a self-contained vault. The uppermost point of the vault is at a depth of up to 10 feet per caster level below the surface. The vault automatically maintains the area's original natural light, temperature, and air quality. You can choose to include a tunnel to the surface (up to 20 feet wide) or completely seal the vault. Existing underground materials are displaced downward rather than destroyed. Dispelling the spell returns the entombed area to the surface.",
     source: 'PFRPG Pathfinder #81',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enter Image',
@@ -793,6 +820,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You gain a dim awareness of the activities around any object in range that depicts your face or form. You can project your consciousness into one such object at a time, observing nearby creatures with normal senses but at a DC 10 higher for Perception checks. While inhabiting an image, your body is helpless but you can return as an immediate action. Three-dimensional representations (statues) can move and speak; two-dimensional ones (portraits) can talk and alter their depicted environment. The spell ends if you cease concentrating, it is dispelled, the image is destroyed, or your body is slain.',
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Erode Defenses',
@@ -819,6 +847,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       "This transmutation gradually weakens a target's protective abilities. Upon a failed saving throw, the creature loses 1 point from both its damage reduction and natural armor bonus each round. The target may attempt a new save each round; success stops further erosion but doesn't restore lost points. All penalties reverse when the spell expires. Only one instance of this spell can affect a particular target at a time.",
     source: 'PFRPG Pathfinder #48',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Eroding Ray',
@@ -845,6 +874,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You fire one ray, with an additional ray at higher levels (one extra ray per 4 levels beyond 3rd, maximum three rays at 11th level). Each ray requires a ranged touch attack and can only target constructs or objects. A successful hit deals 2d6 points of damage that bypasses hardness and damage reduction, causing the target to crumble.',
     source: 'PFRPG Pathfinder #46',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Eruptive Postules',
@@ -873,6 +903,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'Your skin erupts in swollen, pus-filled bumps that burst open if you are struck. Any creature attacking you with its body or a handheld weapon deals normal damage but simultaneously takes 1d6 acid damage. The attacker must succeed at a Fortitude save or become sickened for 1 round. If the attack is a critical hit, a failed save results in the attacker becoming nauseated instead of sickened. The acid damage affects swarms.',
     source: 'PFRPG Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Erase',
@@ -899,6 +930,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'Erase removes writings of either magical or mundane nature from a scroll or one or two pages of paper, parchment, or similar surfaces. It can remove explosive runes, a glyph of warding, a sepia snake sigil, or an arcane mark, but it cannot remove illusory script or a symbol spell. Nonmagical writing that you touch (and no one else holds) is automatically erased; otherwise there is a 90% chance of erasure. Magical writing requires a touch and a caster level check (1d20 + caster level, DC 15) to remove. A natural 1 always fails. If you fail to erase explosive runes, a glyph of warding, or a sepia snake sigil, you accidentally activate it instead.',
     source: 'PFRPG Core',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ether Step',
@@ -925,6 +957,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You step into the Ethereal Plane long enough to dodge a blow or confound a spell. You must cast this spell after being targeted by an attack or effect but before knowing its results. You become ethereal until the beginning of your next turn, similar to ethereal jaunt. Upon returning to the Material Plane, you can only take move actions or free actions on the following turn.',
     source: 'PFRPG Pathfinder #115',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ethereal Fists',
@@ -950,6 +983,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'Your hands reach simultaneously into the Ethereal and Material planes, granting you the ability to deal normal damage with claws, unarmed strikes, and touch-based spells against ethereal creatures. The spell negates miss chances from etherealness effects like the blink spell, though concealment-based miss chances remain in effect.',
     source: 'PFRPG Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ethereal Jaunt',
@@ -977,6 +1011,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You become ethereal, along with your equipment. You are invisible, insubstantial, and capable of moving in any direction, even up or down, at half your normal speed. As an ethereal creature, you can move through solid objects, including living creatures. You can see and hear the Material Plane within 60 feet, but everything looks gray and ephemeral. Force effects and abjurations affect you normally. Ethereal creatures cannot attack material creatures, and spells you cast while ethereal affect only other ethereal beings. If you materialize inside a solid object, you are shunted to the nearest open space and take 1d6 damage per 5 feet traveled.',
     source: 'PFRPG Core',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Etherealness',
@@ -1004,6 +1039,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'This spell functions like ethereal jaunt, except that you and other willing creatures joined by linked hands become ethereal. Besides yourself, you can bring one creature per three caster levels to the Ethereal Plane. Once ethereal, the subjects need not maintain physical contact with each other. When the spell expires, all affected creatures on the Ethereal Plane return to material existence.',
     source: 'PFRPG Core',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Evolution Surge, Lesser',
@@ -1028,6 +1064,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You cause your eidolon to take on new characteristics. This spell grants your eidolon one new evolution costing up to 2 evolution points. This evolution cannot be one that upgrades an existing evolution. The eidolon must meet all prerequisites for the selected evolution, and the number of natural attacks it possesses cannot exceed the normal limit for its base form.',
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Evolution Surge',
@@ -1052,6 +1089,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'This spell functions as lesser evolution surge, except it grants your eidolon one evolution costing up to 4 evolution points.',
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Evolution Surge, Greater',
@@ -1076,6 +1114,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'This spell functions as lesser evolution surge, except it grants your eidolon up to two evolutions with a combined cost not exceeding 6 evolution points.',
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Excruciating Deformation',
@@ -1105,6 +1144,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       "Your touch painfully warps the target's body. Each round the victim's limbs twist and contort uncontrollably, causing 2d6 points of nonlethal damage, 1 point of Dexterity damage, 1 point of Constitution damage, and a 10-foot reduction in speed. The affected creature may attempt a Fortitude save once per round as a free action on its turn to resist the spell's effects for that round.",
     source: 'PFRPG Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Expeditious Excavation',
@@ -1134,6 +1174,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You can excavate and move earth, dust, and sand up to a 5-foot cube. If you are buried, you can create a 5-foot cube around yourself. In combat, you can open a 5-foot-deep pit where a creature stands. Medium or smaller creatures fall prone unless succeeding on a Reflex save, which allows landing on feet or moving to an adjacent square. Escape from the pit requires a DC 5 Climb check. The spell can optionally create a debris cloud providing concealment for 1 round. This spell has no effect on solid rock or earth creatures.',
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Expeditious Retreat',
@@ -1164,6 +1205,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'This spell increases your base land speed by 30 feet. This constitutes an enhancement bonus. There is no effect on other modes of movement, such as burrow, climb, fly, or swim. As with any effect that increases your speed, this spell affects your jumping distance.',
     source: 'PFRPG Core',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Extreme Flexibility',
@@ -1193,6 +1235,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You gain a +1 dodge bonus to AC, a +4 circumstance bonus on Escape Artist checks and combat maneuver checks to escape a grapple, and a +4 circumstance bonus to CMD against grapple attempts.',
     source: 'PFRPG Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Eyes of the Void',
@@ -1220,6 +1263,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You gain the ability to perceive in absolute darkness. You gain darkvision allowing sight to 60 feet, even in magical darkness created by deeper darkness spells. While the vision becomes monochromatic, it functions normally otherwise. Your eyes turn completely black, though they appear white to anyone viewing you with darkvision.',
     source: 'PFRPG Pathfinder #64',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fabricate',
@@ -1246,6 +1290,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You convert material of one sort into a product that is of the same material. Creatures or magic items cannot be created or transmuted by the fabricate spell. The quality of items made by this spell is commensurate with the quality of material used as the basis for the new fabrication. If working with mineral materials (stone, metal, etc.), the target becomes 1 cubic foot per caster level instead. A Craft skill check may be required for items requiring specialized knowledge.',
     source: 'PFRPG Core',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fabricate Bullets',
@@ -1271,6 +1316,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'You convert base metal into ammunition. When you cast the spell, you choose the type of ammunition: the spell produces either two sling bullets, thirty firearm bullets, or ten uses of pellets from a single pound of lead or comparable soft metal.',
     source: 'PFRPG Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'False Age',
@@ -1300,6 +1346,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       "You select an age category within one step of your actual age (either older or younger). The spell alters your appearance to match the selected age category. Your ability scores adjust accordingly based on the chosen age category's modifiers.",
     source: 'PFRPG Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Feather Fall',
@@ -1330,6 +1377,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'The affected objects or creatures fall slowly. Feather fall instantly changes the rate at which the targets fall to a mere 60 feet per round (equivalent to the end of a fall from a few feet), and the subjects take no damage upon landing while the spell is in effect. However, when the spell duration expires, a normal rate of falling resumes.',
     source: 'PFRPG Core',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Feather Step',
@@ -1356,6 +1404,7 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'The subject of this spell ignores the adverse movement effects of difficult terrain, and can even take 5-foot steps in difficult terrain.',
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Feather Step, Mass',
@@ -1382,5 +1431,6 @@ export const TRANSMUTATION_BATCH_003: Spell[] = [
     description:
       'This spell functions identically to feather step, except that it affects multiple creatures.',
     source: 'PFRPG Advanced Players Guide',
+    verificationStatus: 'needs_review' as const,
   },
 ];

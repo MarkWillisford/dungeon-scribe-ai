@@ -22,6 +22,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Bonus to nonlethal bludgeoning sneak attack damage equal to sneak attack dice rolled',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Sneak attack +1d6' }],
     effects: [],
@@ -37,6 +38,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Roll sneak attack dice twice vs. flat-footed opponents with bludgeoning nonlethal attacks',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'sap_adept' },
@@ -54,6 +56,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
       'Your skill at drawing a weapon allows you to combine that action with a feint. When you draw a light weapon, you may make a Sleight of Hand check instead of a Bluff check to feint in combat. Other feats and abilities that modify feint attempts apply normally to this feint.',
     shortDescription: 'Use Sleight of Hand instead of Bluff to feint when drawing a light weapon',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'quick_draw' }],
     effects: [],
@@ -69,6 +72,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Treat as Far Shot with splash weapons, +1 splash square on hit, adjust miss direction',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -84,6 +88,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain access to all tricks for a chosen equipment type; can be taken multiple times',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -102,6 +107,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once/round deflect a ranged weapon attack with your shield, taking no damage',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -121,6 +127,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
       'You have mastered the use of customized armor. Choose two armor modifications (such as deflecting or jarring). You no longer suffer the drawbacks of wearing armor with those modifications. You can gain this feat multiple times; each time you take it, it applies to two different armor modifications.',
     shortDescription: 'Ignore drawbacks of two chosen armor modifications',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -136,6 +143,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Treat weapons with chosen modification as normal category for proficiency purposes',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -150,6 +158,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
       'You can quickly customize your armor on the fly. With 1 hour of work and access to masterwork armorsmithing tools, you can temporarily add an armor modification of your choice to your armor or temporarily remove an existing modification, at no cost. The modification remains for 8 hours. Other creatures wearing armor with your temporary modification treat that armor as one category more difficult and gain no benefit from the modification.',
     shortDescription: 'Spend 1 hour to temporarily add or remove an armor modification at no cost',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'craft_armor', ranks: 3 },
@@ -167,6 +176,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
       'You can quickly customize your weapon on the fly. With 1 hour of work and access to masterwork weaponsmithing tools, you can temporarily add a weapon modification of your choice to your weapon or temporarily remove an existing modification, at no cost. The modification remains for 8 hours. Other creatures using your weapon treat it as one category more difficult to wield and gain no benefit from the modification.',
     shortDescription: 'Spend 1 hour to temporarily add or remove a weapon modification at no cost',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'craft_weapons', ranks: 3 },
@@ -185,6 +195,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Stack an additional modification on already-modified gear; allies benefit from your temporary mods',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       {
@@ -206,6 +217,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend 10 min to grant allies Armor/Weapon Adept benefits for a chosen modification for 8 hours',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -223,6 +235,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
       'You are trained with a specific weapon type even when it has been mechanically altered. Select a weapon with which you are proficient. You are always considered proficient with modified versions of that weapon. Normally, a modified weapon is treated as one category more difficult to wield. Special: Warpriests with the focus weapon class feature may take this feat in place of a bonus Weapon Focus feat. Kensai magi may similarly use their chosen weapon.',
     shortDescription: 'Always proficient with modified versions of a chosen weapon type',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Proficiency with the selected weapon' }],
     effects: [],
@@ -238,6 +251,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Change dorn-dergar reach configuration as a swift action (normally move action)',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 4 },
@@ -256,6 +270,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Wield dorn-dergar one-handed; configuration change is full-round action (move with Darting Viper)',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'two_weapon_fighting' },
@@ -275,6 +290,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Wield grappling hook as piercing disarm/trip weapon; with whip proficiency use as reach weapon',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -290,6 +306,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       "No penalty for missing healer's kit; +2 bonus with kit; scale cure potions to Heal ranks",
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'heal', ranks: 1 }],
     effects: [
@@ -318,6 +335,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Craft poppet constructs and add augmentations; counts as Craft Magic Arms/Armor and Craft Wondrous Item for Craft Construct prerequisites',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [{ type: 'caster_level', minimum: 1 }],
     effects: [],
@@ -333,6 +351,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Select a poppet as your familiar; it gains augmentations and abilities as you level',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'caster_level', minimum: 3 },
@@ -351,6 +370,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'No penalty for improvised tools (1+ rank); treat normal tools as masterwork (3+ ranks)',
     source: "Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -373,6 +393,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'As a free action, grant adjacent ally (with this feat) half your armor bonus to AC for 1 round; you lose your armor bonus while doing so',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       {
@@ -392,6 +413,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
       'You can sacrifice your armor spikes to reduce incoming damage. When you take damage from a non-magical attack, you may use an immediate action to give your armor spikes the broken condition, reducing the damage you take by 5. If your armor spikes are already broken, they are instead destroyed. If you use masterwork armor spikes, you reduce the damage taken by 10 rather than 5.',
     shortDescription: 'Immediate action: break armor spikes to reduce damage by 5 (masterwork: 10)',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Proficiency with armor spikes' }],
     effects: [],
@@ -407,6 +429,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend 1 grit: special powder blast knocks you back and pushes hit targets back on failed Reflex save',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['grit'],
     prerequisites: [
       { type: 'skill', skillId: 'craft_alchemy', ranks: 3 },
@@ -425,6 +448,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend 2 grit total: fire a bullet simultaneously with a pistol-whip deed strike',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['grit'],
     prerequisites: [
       {
@@ -449,6 +473,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Meditate 10 min with transmutation item: gain +2 enhancement bonus to one ability score for 24 hours',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 3 },
@@ -481,6 +506,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Activate enchantment item (3rd+ level spell) to cast suggestion 1/day (more uses at higher Fort)',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 3 },
@@ -499,6 +525,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Activate illusion item to cast vanish (or invisibility/undetectable alignment with higher skills)',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'stealth', ranks: 3 },
@@ -518,6 +545,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Activate conjuration item to cast cure wounds (scales with uses and item spell level)',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 1 },
@@ -535,6 +563,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
       'You can channel necromancy magic from items to afflict foes with a curse. You can cause an item that has a necromancy spell of 2nd level or higher in its construction requirements to cast bestow curse as a spell-like ability. You gain one daily use, with additional uses when your base Fortitude save bonus reaches +9 and +12.',
     shortDescription: 'Activate necromancy item (2nd+ level spell) to cast bestow curse 1/day',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 3 },
@@ -553,6 +582,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Activate abjuration item (2nd+ level spell) to cast targeted dispel magic 1/day',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 3 },
@@ -571,6 +601,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       "Activate evocation item to cast burning hands (or lightning bolt) in the item's energy type",
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 1 },
@@ -589,6 +620,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Activate transmutation item (2nd+ level spell) to cast fly; use armor enhancement bonus on Fly checks',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 3 },
@@ -607,6 +639,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Activate abjuration item to create a force shield (bonus = 1/3 Fort save bonus)',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 3 },
@@ -639,6 +672,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Activate illusion item (1st+ level spell) to cast minor image 1/day (more uses at higher Fort)',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 2 },
@@ -657,6 +691,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Occultist implements count as magic items for item mastery; spend mental focus to activate without daily uses',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'class_feature', featureName: 'implements' },
@@ -675,6 +710,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use a racially linked item to activate racial spell-like abilities without spending daily uses',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 6 },
@@ -693,6 +729,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Meditate 10 min with abjuration item: +1 resistance to saves or 5 energy resistance for 24 hours',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 3 },
@@ -725,6 +762,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Activate conjuration healing item to cast lesser restoration (or remove blindness/paralysis with high skills)',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'heal', ranks: 5 },
@@ -744,6 +782,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       "Channel deity's holy symbol to make melee or ranged touch attacks dealing 1d6+half UMD ranks in energy damage",
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 4 },
@@ -761,6 +800,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
       'You can harness transmutation magic from items to move objects with your mind. You can cause an item that has a transmutation spell of 4th level or higher in its construction requirements to cast telekinesis as a spell-like ability. You gain one daily use, with additional uses when your base Fortitude save bonus reaches +9 and +11.',
     shortDescription: 'Activate transmutation item (4th+ level spell) to cast telekinesis 1/day',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 5 },
@@ -778,6 +818,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
       'You can channel conjuration magic from items to teleport short distances. You can cause an item that has a conjuration spell of 3rd level or higher in its construction requirements to cast dimension door as a spell-like ability. You gain one daily use, with additional uses when your base Fortitude save bonus reaches +9 and +12.',
     shortDescription: 'Activate conjuration item (3rd+ level spell) to cast dimension door 1/day',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 4 },
@@ -796,6 +837,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Activate divination item to gain darkvision 60 ft. or see invisibility 1/day',
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 2 },
@@ -813,6 +855,7 @@ export const ARMORY_FEATS: FeatDefinition[] = [
       'You can temporarily amplify the elemental energy in your enchanted weapon. As a swift action while wielding a magic weapon with a special ability that deals extra acid, cold, electricity, fire, or sonic damage on a hit, you deal an additional 1d4 points of that same energy type with each hit you make with that weapon for 1 round.',
     shortDescription: "Swift action: deal +1d4 of your weapon's energy type for 1 round",
     source: 'Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 2 },

@@ -6,6 +6,7 @@
 
 import { FeatPrerequisite } from './feats';
 import type { GameDataSource } from './gameData';
+import type { DataQualityFields } from './base';
 
 // ---- Selection Mode ----
 // Describes when and how many times a choice is made.
@@ -75,7 +76,7 @@ export interface ClassChoiceOption {
 
 // ---- Class Choice Definition ----
 
-export interface ClassChoiceDefinition {
+export interface ClassChoiceDefinition extends DataQualityFields {
   id: string; // e.g. 'cleric-domains', 'rogue-talent', 'sorcerer-bloodline'
   className: string; // 'cleric' | 'rogue' | 'sorcerer' | 'ranger' | etc.
   featureName: string; // Display name matched against ClassChoice.featureName on the character

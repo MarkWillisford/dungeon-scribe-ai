@@ -5,6 +5,7 @@ import {
   EffectActivation,
   EffectType,
   EffectTarget,
+  DataQualityFields,
 } from './base';
 
 // ---- Feat Types/Categories ----
@@ -100,7 +101,7 @@ export interface FeatChoice {
 
 // ---- Feat Definition (data template — stored in registry) ----
 
-export interface FeatDefinition {
+export interface FeatDefinition extends DataQualityFields {
   id: string;
   name: string;
   description: string;

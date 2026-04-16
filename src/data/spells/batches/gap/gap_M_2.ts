@@ -1,8 +1,8 @@
 // Gap spells — letter M part 2 (second half alphabetically)
 // Gap metadata: {"letters":"M_2","totalChecked":157,"newSpells":22,"skipped":135}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_M_2: Spell[] = [
+export const GAP_SPELLS_M_2: SpellDefinition[] = [
   {
     name: 'Mischievous Shadow',
     classLevels: { bard: 4, magus: 4, medium: 3, shaman: 4, sorcerer: 4, wizard: 4, spiritualist: 4, summoner: 4, witch: 4 },
@@ -18,6 +18,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'yes',
     description: "You direct spirits into the shadows of creatures that fail their saves, causing their shadows to display small horns, unusually long and slender arms, or other small discrepancies. At will (once per 10 minutes), mischievous shadows can impose a -8 penalty on attack rolls, combat maneuver checks, or Strength/Dexterity-based skill checks, or force spellcasters to make concentration checks (DC 15 + spell level).",
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Miserable Pity',
@@ -33,6 +34,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions similarly to sanctuary. Creatures attempting to attack the target who fail their saves experience a strong sense of pity toward the target, as if it were weak and pathetic. Should the target break the spell by attacking, any creature that failed its save gains a +2 morale bonus on attack rolls against the target for 1 minute.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mnemonic Siphon',
@@ -47,6 +49,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'no',
     description: 'You inscribe a rune on the target object. The rune remains dormant until the object finds its way into the hands of a spellcaster. When triggered, it has a 10% chance per round to absorb spells matching your spell list, granting you temporary knowledge of the absorbed spell for 24 hours. The rune can absorb up to one spell per two caster levels before discharging.',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Molten Orb',
@@ -62,6 +65,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a fist-sized, heated metal sphere and hurl it as a splash weapon. Direct contact inflicts 2d6 fire damage. Creatures within 5 feet of impact take 1d6 fire damage (Reflex half). Affected creatures sustain an additional 1d6 fire damage per round for 1d3 rounds unless cooled by water or taking 5 or more cold damage.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Moment of Greatness',
@@ -79,6 +83,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell grants affected creatures the ability to double any one morale bonus on a single roll or check before making the roll, if they currently benefit from any morale bonus. Once a creature uses this ability, the spell ends for that subject.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Morning Sun',
@@ -95,6 +100,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a miniature fist-sized sphere of sunlight at a chosen location within range. The sphere emits bright light in a 60-foot burst. Creatures that are damaged or destroyed by sunlight must succeed at a Fortitude save or become staggered for 1d4+1 rounds after departing the illuminated zone. The immobile sphere inflicts 10d6 fire damage to anything touching it or passing within 5 feet (Reflex half).',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Motes of Dusk And Dawn',
@@ -111,6 +117,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'no',
     description: 'You generate up to four motes that you control independently. Each mote produces either light or darkness affecting a 20-foot radius, increasing or decreasing the illumination level by up to two categories. The motes must remain within 10 feet of each other but move at up to 100 feet per round. They function without concentration and dissipate if they exceed spell range.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mud Buddy',
@@ -126,6 +133,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'no',
     description: 'You manifest a Small minion out of mud that follows your commands. The creature has AC 12, 10 hit points, Strength 5, and a 30-foot movement speed and swim speed. It can perform unseen servant tasks plus activities its Strength allows (up to 50 pounds). You may direct it to make a trip maneuver using a CMB equal to your caster level plus spellcasting ability modifier; resolving the trip immediately ends the spell.',
     source: 'Pathfinder Roleplaying Game Monster Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mudball',
@@ -143,6 +151,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure and launch a single ball of sticky mud at an enemy via ranged touch attack. Success results in the target becoming blinded. Each round at the start of its turn, an affected creature may attempt a Reflex save to remove the mud. The mudball can also be wiped off by the creature or an adjacent creature as a standard action.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Muffle Sound',
@@ -158,6 +167,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell grants affected allies a +4 bonus on Stealth checks while introducing complications for spellcasting. Targets suffer a 20% chance of spell failure when casting spells with verbal components or using abilities with audible components. The spell permits normal hearing and offers no defense against language-dependent or sonic effects.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Murderous Crow',
@@ -175,6 +185,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a supernaturally vicious crow with one of four alignment templates (celestial, entropic, fiendish, or resolute). The creature gains Improved Steal as a bonus feat and an eye rake attack. If both claw attacks strike the same living opponent in one round, the target must make a DC 13 Reflex save or suffer blindness lasting 1d4 days or until magically healed.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Music of the Spheres',
@@ -192,6 +203,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell amplifies underlying cosmic harmonies. All creatures beginning their turn within 20 feet gain fast healing 5, resistance 10 to all energy types, and a +3 sacred bonus on saving throws against poison and disease. Creatures entering the area do not benefit until their next turn begins.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mydriatic Spontaneity',
@@ -207,6 +219,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'yes',
     description: "The spell causes alternating flashes of light and shadow within the target's eyes, forcing rapid dilation and contraction of the pupils. Effects include nausea for the duration. Each round, pupils randomly become dilated or contracted, causing blindness or the dazzled condition depending on light exposure. Creatures gain advantage on Stealth checks against the affected target.",
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mydriatic Spontaneity, Mass',
@@ -222,6 +235,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions identically to mydriatic spontaneity but affects multiple targets, none of which may be more than 30 feet apart.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Swap, Major',
@@ -238,6 +252,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as mind swap but after 24 hours, both parties revert to their original hit points adjusted by new Constitution modifiers. This swap is reversible only through miracle, wish, or another casting of major mind swap.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Miasmal Dread (Half-Orc)',
@@ -255,6 +270,7 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'no',
     description: 'A cloud of sickly green mist pours from your mouth and coalesces around creatures in the cone. You make a single Intimidate check to demoralize opponents, comparing results against each foe\'s DC. All creatures whose DC is met or exceeded become demoralized. This variant is available to half-orcs and includes the mesmerist class.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Malediction (PZO9213)',
@@ -270,5 +286,6 @@ export const GAP_SPELLS_M_2: Spell[] = [
     spellResistance: 'yes',
     description: "You mark a target with corruption, damning its soul to Hell if death occurs within one minute. Affected creatures cannot be resurrected through normal means — only worshipers of Asmodeus or your deity can restore life via raise dead or resurrection. Miracle or wish work regardless. Pre-death countermeasures include break enchantment, dispel magic, or remove curse. You can dispel your own malediction by recasting on the same target.",
     source: "Pathfinder Chronicles: Princes of Darkness, Book of the Damned Vol. I",
+    verificationStatus: 'needs_review' as const,
   },
 ];

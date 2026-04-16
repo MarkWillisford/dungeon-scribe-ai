@@ -12,6 +12,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ignore underwater attack and damage penalties for bludgeoning/slashing weapons with Weapon Focus.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_focus' },
@@ -30,6 +31,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Reduce underwater ranged attack penalty to -1 per 5 feet instead of -2 per 5 feet.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'far_shot' },
@@ -49,6 +51,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Half-aquatic heritage: breathe water and air, gain amphibious/aquatic subtypes, and transform between feet and tail fin as a swift action.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -69,6 +72,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
       'You can hold your breath for twice as long as usual (4 rounds times your Constitution score instead of 2).',
     shortDescription: 'Hold your breath for twice as long (4 x CON rounds instead of 2).',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'CON', minimum: 15 }],
     effects: [],
@@ -84,6 +88,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day underwater, use hydraulic torrent as a spell-like ability (more uses at higher levels).',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Worshiper of Lysianassa or pearl seeker paladin archetype' },
@@ -102,6 +107,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain a swim speed equal to the lower of 30 ft or your base land speed; +2 racial bonus on Swim checks.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'skill_focus_swim' },
@@ -133,6 +139,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Modify a mist or fog spell to work underwater, clouding water with sediments at one-tenth duration; no spell slot increase.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -148,6 +155,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Expand your safe oceanic pressure zone by one zone, preventing pressure damage in that additional zone.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'swim', ranks: 5 }],
     effects: [],
@@ -164,6 +172,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Unarmed strikes deal piercing or bludgeoning; piercing unarmed strikes and bite attacks cause 1d6 bleed.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -183,6 +192,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'While in Shark Style: gain scent in water vs bleeding foes, +1 attack and damage against bleeding creatures.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -228,6 +238,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'While in Shark Style underwater with neutral/rising buoyancy: charge straight up, deal double damage, possibly leave target off-balance.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -249,6 +260,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Modify a fire spell to function freely underwater (no caster level check); requires a caster level check above water instead. No slot increase.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -264,6 +276,7 @@ export const AQUATIC_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day underwater, touch a creature to suppress its water-breathing magic for 5 minutes (more uses at higher levels).',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 5 },

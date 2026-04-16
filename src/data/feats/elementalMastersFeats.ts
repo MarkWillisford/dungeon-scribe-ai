@@ -12,6 +12,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Convert elemental spell damage to bludgeoning via high-pressure water, gaining the water descriptor.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -27,6 +28,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use an eye patch to ignore dazzled or reduce blindness to dazzled from visual stimuli.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -42,6 +44,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'When casting a water-descriptor spell, gain DR/piercing equal to spell level for 1 round.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [
@@ -71,6 +74,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Add +1 fire damage per die to evocation fire spells, or +2 while raging, with a Fortitude save or become fatigued.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 15 },
@@ -106,6 +110,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'After avoiding or ending fire damage, use an immediate action to gain fast healing 1 for rounds equal to your Hit Dice.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -134,6 +139,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Allies with this feat prevent attacks of opportunity against you for certain vulnerable actions.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [],
@@ -149,6 +155,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Landing two unarmed strikes on the same foe in one round lets you attempt a free swift-action bull rush.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -169,6 +176,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use a readied kinetic blast to counterspell any elemental-descriptor spell of equal or lower level.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Two basic blast wild talents from two different elements' },
@@ -188,6 +196,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Declare before an unarmed strike; on a failed Fortitude save the target is nauseated for 1 round.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -208,6 +217,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'As a move action while stationary in heavy armor and heavy shield, gain +1 armor and +1 shield bonus to AC.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -250,6 +260,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
       "You can move while gathering elemental power. When you take a move action to gather power, you can move up to half your base speed as part of that action. When you take a full-round action to gather power, you can move up to half your speed at the start of your turn. This movement provokes attacks of opportunity as normal and cannot be negated through Acrobatics. If you take damage during gathering or before releasing the blast, the concentration check DC increases by twice the blast's effective spell level.",
     shortDescription: 'Move up to half speed while gathering power as a kineticist.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 7 },
@@ -268,6 +279,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ignore concealment from fog, rain, smoke, and similar effects; treat total concealment from them as normal concealment within 10 feet.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'blind_fight' },
@@ -299,6 +311,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Expend a Stunning Fist use to make an unarmed strike that ignores hardness equal to monk level or 1/4 BAB.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -317,6 +330,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Count as two sizes larger against wind and current displacement effects; at 11 HD, ignore nonmagical wind movement entirely.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -332,6 +346,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       "Expend lay on hands to launch a fire blast from your weapon as a kineticist's fire blast.",
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'word_of_healing' },
@@ -351,6 +366,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +10 ft. enhancement bonus to speed while charging, running, or withdrawing; lost in heavy armor or heavy load.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'acrobatics', ranks: 5 }],
     effects: [
@@ -379,6 +395,7 @@ export const ELEMENTAL_MASTERS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Three times per day, project your bardic performance or raging song from a chosen square within 120 feet.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'perform', ranks: 5 },

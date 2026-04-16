@@ -13,6 +13,7 @@ export const zurapadyn: DeityEntry = {
   allowedClericAlignments: ['LG', 'LN', 'LE', 'NE'],
   source: 'pf1e-book-of-the-damned',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -30,6 +31,7 @@ export const aesocar: DeityEntry = {
   symbol: `Enclosed six-pointed star`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -47,6 +49,7 @@ export const myr: DeityEntry = {
   symbol: `Branching tree and its roots`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -64,6 +67,7 @@ export const jaidi: DeityEntry = {
   symbol: `Shepherd's crook bearing a sun`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -81,6 +85,7 @@ export const shelynPreEarthfall: DeityEntry = {
   symbol: `Songbird with a multicolored tail`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -98,6 +103,7 @@ export const elion: DeityEntry = {
   symbol: `Compass`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -115,6 +121,7 @@ export const amaznen: DeityEntry = {
   symbol: `Gears that resemble an eye`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -132,6 +139,7 @@ export const lissalaPreEarthfall: DeityEntry = {
   symbol: `Seven-pointed star`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -149,6 +157,7 @@ export const onos: DeityEntry = {
   symbol: `Swirling portal made of all four elements`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -166,6 +175,7 @@ export const acavna: DeityEntry = {
   symbol: `Crossed spears over a full moon`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

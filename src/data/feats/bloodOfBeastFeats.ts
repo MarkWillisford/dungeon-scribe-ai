@@ -10,6 +10,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Share space with any ally your size or larger; +2 shield AC with larger ally; aid another gives +1 extra bonus.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Swarming racial trait' }],
     effects: [
@@ -37,6 +38,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain insight bonus on attack and damage after identifying a low-Intelligence creature with a Knowledge check.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'bab', minimum: 2 },
@@ -81,6 +83,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Substitute Bluff for Intimidate when demoralizing; cannot feint and demoralize in the same turn.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'bluff', ranks: 5 }],
     effects: [],
@@ -95,6 +98,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Triggering painful stare on a grab attack imposes -4 CMD penalty on the target against that grapple.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 7 },
@@ -124,6 +128,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
       'Add your Wisdom bonus (if any) to the number of rounds that you gain the benefits of your meditation feats when using Combat Meditation.',
     shortDescription: 'Add Wisdom bonus to the duration of Combat Meditation benefits.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'meditation'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -142,6 +147,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
       'You may substitute your Dexterity modifier for your Strength modifier when making Climb and Swim checks. If you have a penalty to Strength, both the penalty and your Dexterity modifier apply. This feat provides no benefit to creatures that already use their Dexterity modifier for these skills, such as Tiny or smaller creatures.',
     shortDescription: 'Use Dexterity modifier instead of Strength for Climb and Swim checks.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'acrobatics', ranks: 1 },
@@ -186,6 +192,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Meditation grants +2 insight bonus (instead of +1) to split or apply to d20 rolls.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general', 'meditation'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -219,6 +226,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Count as human and your own race for character options; qualify as human for effects when in human form.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Change shape ability' },
@@ -240,6 +248,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Coordinate net attacks with allies to entangle creatures larger than normal; scale with additional allies.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'exotic_weapon_proficiency_net' },
@@ -257,6 +266,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day per target, attempt a Diplomacy check to recover from a failed Bluff, Intimidate, or Sleight of Hand check.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 1 },
@@ -275,6 +285,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Add 2 daily uses to a chosen luck-based feat (Black Cat, Lucky Halfling, or related). Stackable, max +6.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'black_cat' },
@@ -292,6 +303,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'After meditating, gain +1 (scaling to +4) on Will saves vs mental effects; +5 to feint/demoralize DC against you.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general', 'meditation'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 11 },
@@ -323,6 +335,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'After meditating, get one extra saving throw attempt 1 round later when failing against charm, compulsion, emotion, or fear.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general', 'meditation'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 19 },
@@ -342,6 +355,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Treat base speed as 10 ft faster when making Acrobatics checks that reduce movement speed.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Racial bonus to Dexterity' }],
     effects: [
@@ -370,6 +384,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Share a square with up to 2 other Rat Stack feat-holders; up to 4 if all also have Tunnel Rat.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -387,6 +402,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +1 melee damage per Rending Swarm ally in your square; coordinated hits deal extra 1d6+Str rending damage.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -418,6 +434,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'After meditating, gain low-light vision and scent (enhanced if already possessed) for 24 hours.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general', 'meditation'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 15 },
@@ -436,6 +453,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       "When changing shape, attempt a swift-action feint against an observer within 30 ft; -4 vs those who know you're a shapechanger.",
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'improved_feint' },
@@ -454,6 +472,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       '25% chance to negate critical hit or sneak attack bonus damage when sharing a square with another Squirming Pile feat-holder.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'skill', skillId: 'acrobatics', ranks: 5 },
@@ -471,6 +490,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       "Use Dazzling Display as a free action when changing shape; no weapon required; +5 enemy bonus if they know you're a shapechanger.",
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'dazzling_display' },
@@ -489,6 +509,7 @@ export const BLOOD_OF_BEAST_FEATS: FeatDefinition[] = [
     shortDescription:
       'Triggering painful stare also applies a Dexterity-damaging poison; usable once per 24 hours per target.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 11 },

@@ -17,7 +17,7 @@
 
 import * as admin from 'firebase-admin';
 import { ALL_SPELLS } from '../../src/data/spells/index';
-import type { Spell } from '../../src/types/spells';
+import type { SpellDefinition } from '../../src/types/spells';
 import { normalizeSource } from '../../src/utils/normalizeSource';
 import { sleep, chunkArray } from './seedUtils';
 
@@ -61,7 +61,7 @@ async function clearCollection(collectionName: string): Promise<void> {
   }
 }
 
-async function seedSpells(spells: Spell[]): Promise<void> {
+async function seedSpells(spells: SpellDefinition[]): Promise<void> {
   console.log(`\nSeeding ${spells.length} spells to project: ${PROJECT_ID}`);
 
   const bySchool: Record<string, number> = {};

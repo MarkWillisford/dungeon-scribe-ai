@@ -11,6 +11,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain affirmation storage, lesser confusion SLA, and +2 damage vs. lawful foes.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 10 },
@@ -43,6 +44,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +2 damage vs. good, evil, lawful, and chaotic creatures (bonuses stack).',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 10 },
@@ -87,6 +89,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain affirmation storage, counter alignment effects, and +2/+4 damage vs. lawful/good foes.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 10 },
@@ -120,6 +123,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain affirmation storage, freedom of movement, and +2/+4 damage vs. evil/lawful foes.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 10 },
@@ -153,6 +157,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain affirmation storage, paladin mercy removal, and +2 damage vs. evil foes.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 10 },
@@ -185,6 +190,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain affirmation storage, antipaladin cruelty application, and +2 damage vs. good foes.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 10 },
@@ -217,6 +223,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain affirmation storage, alignment protection, and +2/+4 damage vs. chaotic/evil foes.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 10 },
@@ -250,6 +257,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain affirmation storage, calm emotions SLA, and +2 damage vs. chaotic foes.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 10 },
@@ -282,6 +290,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain affirmation storage, hold person SLA, and +2/+4 damage vs. chaotic/good foes.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 10 },
@@ -317,6 +326,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Abjuration spells with geodes grant a +1 save bonus to one target and increase caster level for duration.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -353,6 +363,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Conjuration spells with prismatic sand grant phased protection to one summoned creature and increase range.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -375,6 +386,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Divination spells with verdant salts improve accuracy, Perception, or questions; greater effect raises DC.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -411,6 +423,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Enchantment spells with verdant salts impose a -2 penalty to one category of rolls on one target.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -440,6 +453,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Evocation spells with entropic resin damage one adjacent creature and increase damage dice with greater effect.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -462,6 +476,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Illusion spells with prismatic sand raise disbelief DC by 2 and increase spell range with greater effect.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -498,6 +513,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Necromancy spells with entropic resin cause one target to become shaken and increase damage dice with greater effect.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -520,6 +536,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       "Transmutation spells with geodes grant a +2 bonus to one physical ability's checks until your next turn.",
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -555,6 +572,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
       'Your stamina pool increases by 3 points. You can select this feat up to three times; each time you do, your stamina pool grows by an additional 3 points.',
     shortDescription: 'Increase your stamina pool by 3 points (can be taken up to 3 times).',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_stamina' },
@@ -574,6 +592,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain a secondary stamina pool equal to your Constitution modifier, usable only when primary pool is empty or fatigued.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -594,6 +613,7 @@ export const PATHFINDER_UNCHAINED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spells cast with esoteric components gain +2 on concentration checks and +2 effective caster level vs. dispel.',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {

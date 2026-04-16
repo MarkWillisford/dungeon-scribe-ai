@@ -1,8 +1,8 @@
 // Divination spells — batch 003
 // Batch metadata: {"school":"divination","batchNum":"003","startSpell":"Tactical Insight","lastSpell":"Witness","nextSpell":"DONE","nextUrl":null,"spellsInBatch":32}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const DIVINATION_BATCH_003: Spell[] = [
+export const DIVINATION_BATCH_003: SpellDefinition[] = [
   {
     name: 'Tactical Insight',
     classLevels: { bard: 6, inquisitor: 6 },
@@ -23,6 +23,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       "The caster selects a single army tactic and grants mastery of it to the target army for the spell's duration. This tactic may allow an army's total known tactics to exceed the normally permitted number.",
     source: 'Pathfinder Player Companion: Quests & Campaigns',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tap Inner Beauty',
@@ -45,6 +46,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The spell grants a +2 insight bonus on all Charisma ability checks and Charisma-based skill checks.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tectonic Communion',
@@ -67,6 +69,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'This spell functions similarly to commune with nature but with greater range and effectiveness. It works across a radius determined by caster level in natural settings, including underground areas. Casters gain additional information for every 2 levels above 13th. The spell cannot penetrate civilized areas — settlements, dungeons, and construction appear as dark and unknowable blots, though their locations remain detectable.',
     source: 'Pathfinder Player Companion: Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Technomancy',
@@ -90,6 +93,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'This spell operates similarly to detect magic but identifies technological objects instead. It grants the caster the Technologist feat for Knowledge (engineering) checks to identify technological item properties, or provides a +10 bonus on such checks if the caster already possesses that feat.',
     source: 'Pathfinder Campaign Setting: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telepathic Bond',
@@ -113,6 +117,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The caster establishes telepathic communication among themselves and multiple willing creatures (minimum Intelligence 3). All linked creatures can communicate telepathically regardless of language barriers. The bond functions across any distance except between planes. The caster may opt out at casting time. This spell can become permanent via the permanency spell, bonding two creatures per casting.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telepathy',
@@ -135,6 +140,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'This divination allows the caster to establish mental communication with creatures within 100 feet that possess a language. While one can address multiple beings simultaneously through this method, sustaining conversations with several recipients proves as demanding as speaking to and hearing multiple speakers at once.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thoughtsense',
@@ -158,6 +164,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The spell grants automatic detection and location of conscious creatures within 60 feet as though the caster possesses blindsight. Effects like nondetection and mind blank can block this ability. The spell distinguishes between sentient creatures (Intelligence 3+) and non-sentient creatures (Intelligence 1-2) but provides no other information.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Threefold Sight',
@@ -190,6 +197,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The spell allows you to perceive multiple possible futures simultaneously. When rolling for attacks, saves, or skill checks, you roll three d20s and use the middle result. If another ability would grant advantage or disadvantage on such rolls, that ability becomes ineffective and this spell ends immediately.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Timely Inspiration',
@@ -211,6 +219,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'This divination spell allows a caster to retroactively grant a creature a competence bonus after a failed attack roll or skill check. The bonus equals +1 per five caster levels, with a maximum of +3, potentially converting the failure to success.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tongues',
@@ -248,6 +257,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       "Grants the touched creature the ability to understand and speak any intelligent creature's language or dialect. The subject can speak one language at a time. Communication extends as far as the caster's voice carries. Does not influence the recipient creature's attitude. Can be made permanent via the permanency spell.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Trace Teleport',
@@ -271,6 +281,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       "The caster detects any teleportation effects beginning or ending within the spell's area, which moves with the caster. The spell reveals exact origin and endpoint locations for active teleportation events. Additionally, lingering traces of teleportation effects occurring up to one hour prior can be detected. The caster knows the precise timing of detected effects. Upon detecting an origin or endpoint, the caster may spend one round studying it and attempt a caster level check (DC 11 plus the teleportation effect's caster level, with a -5 penalty if the effect occurred more than one minute ago). Success grants a brief glimpse of the corresponding endpoint or origin point, sufficient for observation but lacking geographic knowledge for subsequent teleportation spells. No retries are permitted.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Track Ship',
@@ -294,6 +305,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       "The caster requires a physical piece from the target ship and a nautical chart to cast this spell. Once cast, a ship's icon appears and moves on the chart in real-time, tracking the vessel's location for the spell's duration. The spell only functions if the ship remains within the chart's mapped area. If the ship is destroyed (reaches 0 or fewer hit points), the icon transforms into a skull and crossbones symbol.",
     source: 'Pathfinder Player Companion: Pirates of the Inner Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Trapfinder's Focus",
@@ -316,6 +328,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'This spell provides two distinct benefits depending on whether the caster already possesses the trapfinding class ability. For those without trapfinding, it grants the ability of a rogue at half character level. For those with trapfinding, it adds a +5 competence bonus to Disable Device checks against mechanical traps and allows a reroll if a trap is accidentally triggered, with duration reduced by 1 minute per reroll used.',
     source: 'Pathfinder Campaign Setting: Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Traveling Dream',
@@ -338,6 +351,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       "When cast, the caster falls asleep for the spell's duration and creates an invisible magical sensor matching their body's exact size and shape. Unlike the arcane eye spell, children (no older than age 10) and animals can perceive this sensor. Sleeping creatures sense its presence and may incorporate the caster's image into their dreams. Force effects and abjuration spells that ward out creatures serve as effective barriers. The spell ends if dismissed, dispelled, or destroyed, causing the caster to awaken.",
     source: 'Pathfinder Chronicles: Gods and Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'True Appraisal',
@@ -360,6 +374,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       "The spell grants temporary insight into object valuation. The caster receives a +5 competence bonus on Appraise checks, can attempt an Appraise check to determine an object's value as a move action, and gains the ability to take 10 on such checks despite stress or distractions. Additionally, the caster knows when an Appraise check fails and never determines a wildly inaccurate price.",
     source: 'Pathfinder Campaign Setting: Inner Sea Temples',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'True Prognostication',
@@ -382,6 +397,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'This spell functions like divination but extends its range to peer up to 100 years into the future. Due to the inherent unpredictability of events in the distant future, the spell provides incredibly cryptic results when examining such distant timeframes.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'True Seeing',
@@ -416,6 +432,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The spell grants the subject vision to see through magical darkness, magical concealment effects, invisibility, illusions, and polymorphed creatures. It permits viewing into the Ethereal Plane within 120 feet but cannot penetrate solid objects, provide X-ray vision, or reveal mundane disguises and hiding.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'True Skill',
@@ -445,6 +462,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The caster selects one skill they can attempt checks with. Before the spell expires, the next skill check made with that selected skill grants an insight bonus equal to half the caster level (minimum of 1).',
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'True Strike',
@@ -475,6 +493,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The caster gains insight into the immediate future during their next attack. The next single attack roll made before the end of the next round receives a +20 insight bonus. Additionally, the caster ignores miss chances from concealment.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Truespeak',
@@ -496,6 +515,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The caster gains the ability to communicate intelligibly with any non-mindless creature within hearing range. Each creature perceives the caster as speaking its native language or communication method, and the caster understands their responses in their own native language. The spell does not increase creature friendliness or cooperation beyond normal. Non-sentient creatures may provide limited responses. Language-dependent effects from the caster can affect any non-mindless creature while this spell is active.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Twisted Futures',
@@ -527,6 +547,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'This divination spell disrupts fortunate outcomes by preventing affected creatures from rolling multiple times and selecting the highest result, or choosing die results instead of rolling. However, it does not prevent forced lower rolls. Cyclopes cannot use flash of insight to save against this spell.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undeath Sense',
@@ -558,6 +579,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The spell grants recipients awareness of undead creatures within 60 feet, with the ability to concentrate for enhanced detection details similar to detect undead, but requiring one fewer round of concentration to identify auras and their strengths.',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unerring Tracker',
@@ -579,6 +601,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       "This divination spell allows you to follow a creature's trail by touching signs of passage you've identified through Survival checks. The trail can be tracked for up to 24 hours and remains visible only to you. The spell cannot follow teleportation or planar travel, and fails against creatures using pass without trace, though it works on those under nondetection.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unravel Destiny',
@@ -600,6 +623,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The spell causes a target to suffer a cumulative -2 penalty on all ability checks, attack rolls, saving throws, and skill checks for every hero point possessed. Targets can spend hero points to reduce this penalty but take 2d6 damage per point spent while the spell remains active.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unspoken Name',
@@ -622,6 +646,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       "You designate a word, phrase, or name. When a creature within 1 mile uses that term to refer to you, you immediately learn that creature's name, appearance, and location, then the spell ends.",
     source: "Pathfinder Adventure Path #140: Eulogy for Roslar's Coffer",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vicarious View',
@@ -655,6 +680,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The caster plants a scrying sensor on a touched creature, object, or location, enabling visual and auditory perception of approximately 10 feet in all directions. The sensor tracks moving targets. Magically or supernaturally enhanced senses cannot function through this sensor, distinguishing it from standard scrying magic.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vision',
@@ -678,6 +704,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'Vision functions similarly to legend lore but operates faster. The caster poses a question and makes a check (1d20 + caster level, maximum +25) against a DC of 20 to 30 depending on information proximity. Upon completion, the caster becomes fatigued.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Voluminous Vocabulary',
@@ -715,6 +742,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'This divination spell grants a touched creature temporary ability to speak, understand, read, and write a chosen language for eight hours.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Watchful Animal',
@@ -738,6 +766,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The spell creates a scrying sensor on your animal companion or familiar, allowing it to function like the greater insect spy spell. The creature maintains its own decision-making ability while receiving your orders and transmitting sensory information back to you.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Whispering Lore',
@@ -760,6 +789,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'The spell allows you to receive whispered knowledge from terrain, granting a +4 insight bonus to specific Knowledge skills depending on your environment: nature for most terrains, dungeoneering underground, local in cities, planes on other planes.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wild Instinct',
@@ -781,6 +811,7 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       'This divination spell enhances sensory perception, granting a +5 bonus to Perception checks during surprise rounds. The caster remains aware of threats while sleeping and can awaken if danger is detected.',
     source: 'Pathfinder Player Companion: Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Witness',
@@ -811,5 +842,6 @@ export const DIVINATION_BATCH_003: Spell[] = [
     description:
       "The caster links their senses to a target creature, enabling perception through that creature's eyes and ears. The caster becomes blind and deaf when using the target's senses. A move action allows switching between the caster's own senses and the target's senses. The target's special abilities (like darkvision) are accessible instead of the caster's own.",
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 ];

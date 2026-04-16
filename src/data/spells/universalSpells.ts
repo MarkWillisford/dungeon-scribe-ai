@@ -1,6 +1,6 @@
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const UNIVERSAL_SPELLS: Spell[] = [
+export const UNIVERSAL_SPELLS: SpellDefinition[] = [
   // ─── Pre-existing content ────────────────────────────────────────────────────
 {
     name: 'Arcane Mark',
@@ -32,6 +32,7 @@ export const UNIVERSAL_SPELLS: Spell[] = [
     description:
       'This spell allows you to inscribe your personal rune or mark, which can consist of no more than six characters. The writing can be visible or invisible. An arcane mark spell enables you to etch the rune upon any substance without harm to the material upon which it is placed. If an invisible mark is made, a detect magic spell causes it to glow and be visible, though not necessarily understandable.\n\nSee invisibility, true seeing, a gem of seeing, or a robe of eyes likewise allows the user to see an invisible arcane mark. A read magic spell reveals the words, if any. The mark cannot be dispelled, but it can be removed by the caster or by an erase spell.\n\nIf an arcane mark is placed on a living being, the effect gradually fades in about a month.\n\nArcane mark must be cast on an object prior to casting instant summons on the same object.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Limited Wish',
@@ -66,6 +67,7 @@ export const UNIVERSAL_SPELLS: Spell[] = [
       '• Produce any other effect whose power level is in line with the above effects, such as a single creature automatically hitting on its next attack or taking a –7 penalty on its next saving throw.\n\n' +
       'A duplicated spell allows saving throws and spell resistance as normal, but the save DC is for a 7th-level spell. When a limited wish spell duplicates a spell with a material component that costs more than 1,000 gp, you must provide that component (in addition to the 1,500 gp diamond component for this spell).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Permanency',
@@ -100,6 +102,7 @@ export const UNIVERSAL_SPELLS: Spell[] = [
       "Alarm (9th, 2,500 gp); Animate objects (14th, 15,000 gp); Dancing lights (9th, 2,500 gp); Ghost sound (9th, 2,500 gp); Gust of wind (11th, 7,500 gp); Invisibility (10th, 5,000 gp); Mage's private sanctum (13th, 12,500 gp); Magic mouth (10th, 5,000 gp); Phase door (15th, 17,500 gp); Prismatic sphere (17th, 22,500 gp); Prismatic wall (16th, 20,000 gp); Shrink item (11th, 7,500 gp); Solid fog (12th, 10,000 gp); Stinking cloud (11th, 7,500 gp); Symbol of death (16th, 20,000 gp); Symbol of fear (14th, 15,000 gp); Symbol of insanity (16th, 20,000 gp); Symbol of pain (13th, 12,500 gp); Symbol of persuasion (14th, 15,000 gp); Symbol of sleep (16th, 20,000 gp); Symbol of stunning (15th, 17,500 gp); Symbol of weakness (15th, 17,500 gp); Teleportation circle (17th, 22,500 gp); Wall of fire (12th, 10,000 gp); Wall of force (13th, 12,500 gp); Web (10th, 5,000 gp).\n\n" +
       'Spells cast on other targets are vulnerable to dispel magic as normal. The GM may allow other spells to be made permanent.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prestidigitation',
@@ -131,6 +134,7 @@ export const UNIVERSAL_SPELLS: Spell[] = [
     description:
       'Prestidigitations are minor tricks that novice spellcasters use for practice. Once cast, a prestidigitation spell enables you to perform simple magical effects for 1 hour. The effects are minor and have severe limitations. A prestidigitation can slowly lift 1 pound of material. It can color, clean, or soil items in a 1-foot cube each round. It can chill, warm, or flavor 1 pound of nonliving material. It cannot deal damage or affect the concentration of spellcasters. Prestidigitation can create small objects, but they look crude and artificial. The materials created by a prestidigitation spell are extremely fragile, and they cannot be used as tools, weapons, or spell components. Finally, prestidigitation lacks the power to duplicate any other spell effects. Any actual change to an object (beyond just moving, cleaning, or soiling it) persists only 1 hour.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wish',
@@ -170,6 +174,7 @@ export const UNIVERSAL_SPELLS: Spell[] = [
       "• Undo a single recent event. The wish forces a reroll of any roll made within the last round (including your last turn). Reality reshapes itself to accommodate the new result. For example, a wish could undo an opponent's successful save, a foe's successful critical hit, or a friend's failed save. The reroll, however, may be as bad as or worse than the original roll. An unwilling target (such as an opponent who is the target of a harmful spell) can attempt a Will save to resist the wish and keep the original result.\n\n" +
       'A duplicated spell allows saving throws and spell resistance as normal (but the save DC is for a 9th-level spell). When a wish duplicates a spell with a material component that costs more than 10,000 gp, you must provide that component.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_001 ─────────────────────────────────────────────────────────────
@@ -192,5 +197,6 @@ export const UNIVERSAL_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'This spell allows a caster to apply one metamagic effect (Enlarge, Extend, Silent, or Still Spell) to an ally\'s spell without increasing its level or casting time. Multiple castings enable stronger effects: two applications allow Empower Spell, while three allow Maximize or Widen Spell.',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
   },
 ];

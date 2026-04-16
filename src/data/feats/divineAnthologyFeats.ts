@@ -9,6 +9,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
       'Your courage quickens your reflexes. You add the bonus from bravery to your initiative checks.',
     shortDescription: 'Add bravery bonus to initiative checks',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'bravery' },
@@ -34,6 +35,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 competence CMD vs. Acrobatics through threatened squares; +2 per allied feat-holder in reach',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'bab', minimum: 3 }],
     effects: [
@@ -62,6 +64,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
       "Your devotion makes you more flexible in accessing your deity's divine boons. You are treated as though you had 2 more Hit Dice than you actually do when determining which boons from your Deific Obedience feat are available to you. This does not accelerate boons tied to prestige class levels. In addition, whenever you gain a new boon through Deific Obedience, you may choose that boon from the evangelist, exalted, or sentinel boon categories. Each such choice is permanent.",
     shortDescription: 'Treated as +2 HD for Deific Obedience boons; choose boons from any category',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'deific_obedience' },
@@ -88,6 +91,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Swift action: gain WIS insight bonus on one d20 roll if action pleases deity',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -119,6 +123,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       "Access your patron deity's divine fighting style; initial and advanced technique benefits based on deity",
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       {
@@ -163,6 +168,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
       "Your faith allows you to perform small divine miracles. Select two domains associated with your deity. Once per day, by displaying your holy symbol and offering a supplication, you can cast the 1st-level spell associated with either of the two chosen domains as a spell-like ability. Your caster level for this ability equals your total Hit Dice, and the DC of any saving throw equals 10 + 1 + your Charisma modifier. You choose which domain's spell to use when you activate this ability.",
     shortDescription: 'Once/day cast 1st-level domain spell as SLA; CL = HD',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 12 },
@@ -207,6 +213,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Divine spells from fellow worshipers treat CL as +2; +1 HP per healing die from worshipers',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_religion', ranks: 1 },
@@ -251,6 +258,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Add bravery bonus to Escape Artist and grapple escapes; grant bonus to ally once/day',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'bravery' },
@@ -282,6 +290,7 @@ export const DIVINE_ANTHOLOGY_FEATS: FeatDefinition[] = [
       'It takes more than the average threat to intimidate you. You add your bravery bonus to Intimidate checks and to the DC of Intimidate checks made to demoralize you.',
     shortDescription: 'Add bravery bonus to Intimidate checks and to DC to demoralize you',
     source: 'Divine Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'bravery' },

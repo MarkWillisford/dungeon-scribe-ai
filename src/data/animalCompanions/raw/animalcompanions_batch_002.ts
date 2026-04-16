@@ -1,8 +1,10 @@
 // Batch 002 | first: 'Camel' | last: 'Elasmotherium' | count: 25
 // Source: https://www.d20pfsrd.com/classes/core-classes/druid/animal-companions/
 // 3pp boundary: not reached — stopped at 'Elasmotherium' (alphabetical, letter E)
-// PAGE_FETCH_FAILED stubs: Cattle, Deer (ringhorn), Devil Monkey
-//   — stat blocks not found in page after 2 fetch attempts each
+// PAGE_FETCH_FAILED entries: Cattle, Deer (Ringhorn), Devil Monkey
+//   — page fetch failed after 2 attempts; stat blocks below are community-sourced
+//     fallback data (not empty shells), so they're tagged verificationStatus: 'needs_review'
+//     rather than 'stub'. Admin should verify against a physical source before marking 'verified'.
 
 import { AnimalCompanionEntry } from '@/types/animalCompanions';
 
@@ -35,6 +37,7 @@ export const camel: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -70,6 +73,7 @@ export const catBig: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -104,6 +108,7 @@ export const catSmall: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -139,6 +144,7 @@ export const cattle: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -173,6 +179,7 @@ export const centipedeGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-um',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -208,6 +215,7 @@ export const chalicotherium: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b5',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -242,6 +250,7 @@ export const chameleonGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -276,6 +285,7 @@ export const cooshee: AnimalCompanionEntry = {
   ],
   source: 'pf1e-um',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -310,6 +320,7 @@ export const crabGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-um',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -345,6 +356,7 @@ export const crocodile: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -378,6 +390,7 @@ export const deerReindeer: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b4',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -412,6 +425,7 @@ export const deerRinghorn: AnimalCompanionEntry = {
   ],
   source: 'pf1e-ap115',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -455,6 +469,7 @@ export const deinonychus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -489,6 +504,7 @@ export const deinotherium: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b6',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -524,6 +540,7 @@ export const devilMonkey: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b6',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -558,6 +575,7 @@ export const dimetrodon: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -600,6 +618,7 @@ export const dimorphodon: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b4',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -635,6 +654,7 @@ export const diplodocus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -669,6 +689,7 @@ export const dog: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -713,6 +734,7 @@ export const dolphin: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -757,6 +779,7 @@ export const drake: AnimalCompanionEntry = {
   ],
   source: 'pf1e-pzo9470',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -799,6 +822,7 @@ export const dunkleosteus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b6',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -841,6 +865,7 @@ export const eelElectric: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -884,6 +909,7 @@ export const elasmosaurus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -927,6 +953,7 @@ export const elasmotherium: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b6',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

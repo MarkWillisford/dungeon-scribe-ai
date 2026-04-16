@@ -1,8 +1,8 @@
 // Gap spells — letters I-J-K
 // Gap metadata: {"letters":"IJK","totalChecked":134,"newSpells":91,"skipped":43}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_IJK: Spell[] = [
+export const GAP_SPELLS_IJK: SpellDefinition[] = [
   // ── I ──────────────────────────────────────────────────────────────────────
   {
     name: 'Ice Armor',
@@ -26,6 +26,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You create a suit of armor made from ice that provides protection equivalent to a breastplate (AC +6). The armor has hardness 0 and 30 hit points. It does not harm the wearer despite being cold to the touch. Fire and heat attacks degrade the armor, reducing its armor bonus by 1 for every 5 points of fire damage it takes; the spell ends when the bonus reaches 0. The armor grants a +2 circumstance bonus on Swim checks (except when diving). Druids can wear this armor without penalty.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ice Body',
@@ -48,6 +49,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "Your body transforms into animated ice. You gain the cold subtype and damage reduction 5/magic. You are immune to ability score damage, blindness, critical hits, deafness, disease, drowning, electricity, poison, and stunning, as well as all spells or attacks that affect your respiration or physiology. You cannot drink potions or play wind instruments while this spell is in effect. Your unarmed attacks deal club damage (1d4 for Small, 1d6 for Medium) plus 1 point of cold damage and count as armed. You can burrow through nonmagical ice and snow at your base speed. You can move through magical ice and snow with a successful caster level check (DC 11 + the effect's caster level), leaving no tunnel or hole.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ice Crystal Teleport',
@@ -71,6 +73,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You encase a target creature in ice (hardness 0, 3 hit points per inch of thickness, 1 inch per caster level thick) for 1d4 rounds. The target is paralyzed and helpless during this time but remains aware of its surroundings. After the duration expires, the target teleports to a designated safe location you specify and the ice melts away. If the ice is destroyed before the teleportation completes, the spell fails and the creature is not teleported.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ice Slick',
@@ -94,6 +97,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You generate a blast of intense cold, coating all solid surfaces in the area with a thin layer of ice. Creatures in the area take 1d6 points of cold damage + 1 per caster level (maximum +10) and fall prone unless they succeed at a Reflex save for half damage and to avoid falling. Moving through the icy area requires a DC 10 Acrobatics check at half speed or the creature falls prone. Individual 5-foot ice squares have hardness 0 and 3 hit points each. The ice persists for 1 minute per caster level in normal conditions, longer in cold climates, and indefinitely in arctic regions.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ice Spears',
@@ -118,6 +122,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You summon one giant icicle per 4 caster levels, each erupting from the ground in a 5-foot square you designate. Each spear is 10 feet tall and deals 2d6 points of piercing damage and 2d6 points of cold damage to any creature in its square. Each spear attempts a trip combat maneuver using your caster level plus your highest mental ability score modifier. Multiple spears targeting the same creature grant cumulative bonuses. On ice or snow-covered terrain, saving throw DCs increase by 2 and trip bonuses increase by 4. The spears remain as obstacles with hardness 5 and 30 hit points each.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Icicle Dagger',
@@ -149,6 +154,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You create a masterwork dagger made of ice that deals an additional 1 point of cold damage on each hit. The dagger melts if dropped for more than 1 round. At caster level 6, the dagger becomes a +1 frost dagger. At caster level 11, the dagger gains the returning property, reforming in your hand before the beginning of your next turn if thrown.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Icy Prison',
@@ -171,6 +177,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You encase a target in solid ice 1 inch thick per caster level. If the target fails its save, it is rendered helpless but can still breathe normally; the ice blocks line of effect. A successful Reflex save reduces the effect to the entangled condition. Regardless of the save, the target takes 1 point of cold damage per caster level each round it remains helpless or entangled. The ice has hardness 0 and 3 hit points per inch of thickness. A helpless or entangled creature can attempt a Strength check (DC 15 + caster level) as a full-round action to break free. A mass version (Icy Prison, Mass) at 9th level affects one creature per level.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Identifier's Eye",
@@ -193,6 +200,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You grant the target magical sensory acuity similar to detect magic. The target gains a +5 enhancement bonus on Spellcraft checks to identify the properties and command words of magic items and can attempt such checks untrained. This spell does not enable identification of artifacts.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Imbue Army Special Ability',
@@ -215,6 +223,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You grant an army one of your special abilities. All units in the affected army gain the chosen ability in addition to their existing special abilities, functioning as if all units possess it. This spell is used in mass combat rules.',
     source: 'Pathfinder Player Companion: Quests & Campaigns',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Imbue Hex',
@@ -237,6 +246,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You transfer a single hex you know to a touched creature, granting that recipient the ability to use it. The hex functions based on your caster level rather than the recipient's. The recipient must have a minimum Intelligence and Wisdom of 9 and be capable of speaking and moving freely. Once the recipient uses the hex, the spell ends, though the hex's effects persist. Only standard hexes qualify; major or grand hexes cannot be transferred. You lose access to the transferred hex until the spell ends.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Imbue with Addiction',
@@ -259,6 +269,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You cause the target to immediately become addicted to the drug used as the material component, as if the target had used the drug itself. Creatures already addicted to that substance take a -4 penalty on their saving throw against this effect.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Imbue with Aura',
@@ -280,6 +291,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You cause the target to radiate an aura identical to your own clerical aura. The target's actual alignment is unchanged, but detection spells sense only the false aura. Alignment-dependent magical effects function according to the imposed aura rather than the target's true alignment. When the spell ends, the target returns to its actual aura.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Imbue with Elemental Might',
@@ -301,6 +313,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You transfer your elemental assault ability to the touched creature. The recipient must have Intelligence 5 or higher to use the ability. The transferred ability functions identically to your version. Once cast, you cannot use your elemental assault until the spell's duration ends.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Imbue with Spell Ability',
@@ -322,6 +335,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You transfer some of your prepared spells to another creature. The recipient must have at least Intelligence 5 and Wisdom 9. Only abjuration, divination, and conjuration (healing) spells may be transferred. The number of spells depends on recipient Hit Dice: 2 or fewer HD receives one 1st-level spell; 3-4 HD receives one or two 1st-level spells; 5+ HD receives one or two 1st-level spells and one 2nd-level spell. You cannot prepare replacements for transferred spells until the imbued spells are used or the spell is dismissed.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Impart Mind',
@@ -344,6 +358,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You temporarily imbue a permanent magic item with sentience drawn from your own mind. The item gains ability scores of 10 in Intelligence, Wisdom, and Charisma, plus your alignment. It communicates through speech, understands one language you know, and gains random powers determined by the intelligent items table. Additional diamond dust in 100 gp increments can increase power rolls. When the spell ends, the item reverts to its previous non-intelligent state.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Impede Speech',
@@ -365,6 +380,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You inflict a curse that makes it difficult for the target to articulate words. Speaking becomes a move-equivalent action rather than a free action. When the target attempts to cast spells with verbal components, it has a 50% chance of miscasting and losing the spell. Spells with casting times shorter than 1 round require a full round to cast. Spells with casting times of 1 round or longer have their casting time doubled. This curse cannot be removed with dispel magic; it requires break enchantment, limited wish, miracle, remove curse, or wish.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Impenetrable Veil',
@@ -395,6 +411,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You enchant the target to become nearly undetectable. The spell grants a Stealth bonus equal to half your caster level, allows hiding without concealment or cover, allows evasion from blindsight and blindsense abilities, prevents tracking unless the target permits it, and forces divination users to succeed at a caster level check (DC equals the target's Stealth bonus) to gain information about the target. Failure prevents further detection attempts for the duration.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Implant False Reading',
@@ -417,6 +434,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You embed misleading psychometric impressions into an object. You can implant false information that would be discovered through object reading or psychometry abilities, including fabricated ownership histories or covert messages for psychically-sensitive allies. Creatures attempting to read the object via the object reading spell or psychometry skill must succeed at a Will save or receive false information. Successful saves allow the reader to distinguish false details from genuine history. The spell masks its own magical aura from detection, though other magical auras on the object remain visible.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Implosion',
@@ -438,6 +456,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You cause a destructive resonance within a creature's body. Each round you maintain concentration, you can target one corporeal creature, dealing damage equal to 10 times your caster level if it fails a Fortitude save. You cannot target the same creature twice during a single casting. The spell has no effect on gaseous or incorporeal creatures.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Impossible Angles',
@@ -462,6 +481,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You distort the angles and corners of the affected area into unnatural and impossible shapes. Creatures that fail their save become disoriented, treating the space as difficult terrain and gaining the sickened condition. Disoriented creatures that attempt to move must roll 1d8; on a result of 2-8, their movement rotates clockwise around their starting position. Only the first 5 feet of movement per round is affected. Creatures may attempt new saves each round and must save again if they re-enter after leaving the area.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Imprisonment',
@@ -483,6 +503,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You entomb the target in a state of suspended animation in a tiny sphere far beneath the ground. A freedom spell cast at the location of the imprisonment can free the creature. Standard divination spells cannot locate the imprisoned creature, but discern location can. Wish and miracle reveal the creature's location but cannot free it. If you know the target's name and details about its life, the target takes a -4 penalty on its saving throw.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Incendiary Runes',
@@ -506,6 +527,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'This spell functions as explosive runes, except it creates a surge of flames rather than an explosion of force. When triggered, the runes automatically deal 1d6 points of fire damage to any creatures and objects in adjacent squares, and those creatures and objects catch fire unless they succeed at Reflex saves.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Incessant Buzzing',
@@ -538,6 +560,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You conjure an imaginary wasp swarm that occupies a 10-foot sphere. As a move action each round, you can reposition it up to 40 feet. Creatures inside cannot concentrate on skills that require concentration. Spellcasters within the area must succeed at a caster level check (DC 20 + spell level) to cast spells; failure wastes the spell. While the buzzing is unpleasant, it does not drown out other noises or prevent communication.',
     source: 'Pathfinder Campaign Setting: Inner Sea Temples',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Incorporeal Chains',
@@ -560,6 +583,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You summon ghostly chains that bind incorporeal creatures. You make a single CMB check using your caster level plus your Intelligence modifier, applying the result against all targets. Targets successfully grappled take 1d8 + spellcasting ability modifier damage and gain the grappled condition. The chains gain a +5 bonus on subsequent grapple checks. Each round the grapple is maintained, targets take additional 1d8 + ability modifier damage. The spell ends if you move out of range of the grappled creatures.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Infernal Challenger',
@@ -585,6 +609,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You conjure a bearded devil to a designated area, which appears and identifies itself. You must designate a sole mortal challenger. The devil attempts to kill only that challenger and cannot leave the testing ground. The devil vanishes if it is defeated, the challenger is slain, the challenger leaves the area, or the devil takes damage from any non-challenger source. No other creatures may occupy the testing ground during casting. If cast for purposes other than Hell Knight order tests, the spell gains the evil descriptor.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Infernal Healing',
@@ -609,6 +634,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You anoint a wounded creature with fiendish magic, granting it fast healing 1. This healing cannot repair damage caused by silver weapons, good-aligned weapons, or spells or effects with the good descriptor. The target detects as evil during the duration, though its actual alignment is unaffected. A greater version (Infernal Healing, Greater) at 4th level grants fast healing 4 and causes the target to detect as an evil cleric.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inflict Pain',
@@ -643,6 +669,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You telepathically rack the target's mind and body with agonizing pain, imposing a -4 penalty on attack rolls, skill checks, and ability checks. A successful Will save reduces the duration to 1 round. A mass version (Inflict Pain, Mass) at higher levels affects one creature per level.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Influence Wild Magic',
@@ -676,6 +703,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You generate a stabilizing magical field in a 20-foot radius around yourself. Creatures within the area who fail concentration checks while casting spells in wild magic zones may roll twice for the wild magic effect and choose which result to apply.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Infuse Robot',
@@ -697,6 +725,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'Upon a failed Will save, a targeted robot is converted into a magical construct composed of wood, stone, flesh, or bone. The robot retains its original statistics but loses the robot subtype while retaining its Intelligence score. You can mentally command the infused robot as a free action while it remains within spell range. When the duration expires, the robot reverts to its normal form but becomes staggered for 1d4 rounds.',
     source: 'Pathfinder Campaign Setting: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Infuse Self',
@@ -720,6 +749,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You assume a partial aspect of a native outsider, choosing from aasimar, fetchling, ifrit, oread, suli, sylph, tiefling, undine, or similar races. The spell grants a +2 size bonus to one physical ability score of your choice, energy resistance 5 to one energy type relevant to the chosen race (if applicable), racial bonuses on saving throws or skills matching the assumed form, and darkvision or low-light vision as appropriate to the race.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Inheritor's Smite",
@@ -741,6 +771,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You channel righteous power into your weapon arm. You gain a +5 sacred bonus on the attack roll for your next melee attack before the end of your next turn. On a successful hit, you may attempt a bull rush combat maneuver with a +5 sacred bonus without provoking attacks of opportunity. If the maneuver exceeds the target's CMD by more than 5, you push the target further than the standard 5 feet without needing to move with it.",
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inhibiting Patterns',
@@ -766,6 +797,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You generate vibrant pillars of kaleidoscopic color rising from the ground. Creatures attempting to pass through must succeed at Will saves or become immobilized that turn, unable to act, though they may retry each round. One successful save allows a creature to move through all pillars. Creatures standing within a pillar gain the dazzled condition with no saving throw. Ranged attacks through pillars have a 50% miss chance; melee attacks within pillars suffer no penalty.',
     source: 'Pathfinder Campaign Setting: Distant Realms',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inner Focus',
@@ -796,6 +828,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You may ignore any divine focus components of your spells, allowing you to cast such spells without holding or revealing your holy or unholy symbol.',
     source: 'Pathfinder Player Companion: People of the Sands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Innocence',
@@ -817,6 +850,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You surround yourself with an aura of innocence and trustworthiness, granting a +10 competence bonus on Bluff checks specifically to convince others of your complete innocence and blamelessness. This bonus applies only to convincing others you are innocent and does not apply to other uses of Bluff such as feinting in combat, creating a diversion, or communicating secret messages.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Insect Plague',
@@ -847,6 +881,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You summon a number of wasp swarms equal to one per 3 caster levels (maximum six at 18th level). The swarms must form a contiguous area where each swarm touches at least one other. They can overlap with other creatures and automatically attack any creatures sharing their space. Once positioned, the swarms remain stationary and do not pursue fleeing enemies.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inspiring Recovery',
@@ -878,6 +913,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You call upon divine power to restore a creature. The spell restores 1d8 hit points per 2 caster levels (maximum 10d8) to the target, deals the same amount to undead, or revives a recently deceased creature (within 1 round) whose negative hit points do not exceed their Constitution score. When a creature is revived, all conscious allies within 60 feet gain a +2 morale bonus on attack rolls, damage rolls, and saving throws for 1 minute. Creatures slain by death effects cannot be revived.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Armor',
@@ -901,6 +937,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You create a suit of magical force armor that instantly envelops your body and can display a religious holy symbol. The armor type depends on your caster level: chainmail at 5th or lower, banded mail at 6th-8th, half-plate at 9th-11th, and full plate at 12th or higher. Alternatively, you may choose a lesser armor type and gain magical enhancement bonuses (+1 to +3) in exchange. The spell replaces any worn armor or garments, rendering them inaccessible until the spell ends. Force construction allows it to affect incorporeal creatures.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Clot',
@@ -933,6 +970,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'The target immediately stops all bleeding effects. The target takes full damage from attacks but produces no blood, so wounds do not attract creatures sensitive to blood. If the recipient suffers a new bleeding effect during the duration, that bleeding ends and the spell terminates immediately.',
     source: 'Pathfinder Player Companion: Blood of the Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Fake',
@@ -965,6 +1003,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You generate an illusory replica of a touched item. You can deliver this spell while stealing an object via Sleight of Hand or a steal combat maneuver, instantly replacing the genuine article with the illusion. The fake appears perfectly replicated; active examination via Appraise or Perception allows a Will save. The illusion is not a functional item and has no magical properties of the original.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Portrait',
@@ -999,6 +1038,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You create a painted portrait on a flat surface depicting yourself or a creature you can see. No Craft check is required. The portrait is monochromatic and low quality for sale purposes, but accurate enough to identify the subject or serve as a target for the enter image spell. The image reflects your perception, including any disguises the subject wears. The portrait has the durability of normal paint.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Restoration',
@@ -1022,6 +1062,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You cast this spell as an immediate action when a summoned creature you control drops to 0 or fewer hit points. Rather than disappearing, the creature receives healing of 4d8 + 1 hit point per caster level (maximum 4d8+10). If healing brings the creature to 1 or more hit points, it survives. Creatures slain by death effects cannot benefit from this spell. Summoners may target their eidolon.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Suffocation',
@@ -1044,6 +1085,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'This spell functions like slay living, killing the target through immediate suffocation. Creatures without respiratory systems are immune to this spell. A successful Fortitude save reduces the damage to 3d6 + 1/caster level instead of death. The target is also considered to have taken a dose of keif for the purpose of addiction and withdrawal effects.',
     source: 'Pathfinder Chronicles: Dark Markets, A Guide to Katapesh',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Summons',
@@ -1067,6 +1109,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You place an arcane mark on an item, then inscribe its name invisibly on a sapphire. Afterward, you can summon the item by speaking a special word you set at casting and crushing the gem; the item appears instantly in your hand. Only you can activate this spell. If another creature possesses the item when you attempt to summon it, the summons fails but reveals the possessor's identity and location. A greater version (Instant Summons, Greater) at 8th level can target up to one object per 3 caster levels.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Weapon',
@@ -1099,6 +1142,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You manifest a melee weapon constructed from force energy, sized appropriately for you. The weapon functions as a masterwork weapon of its type and grants you proficiency with it. It has hardness 20 with standard hit points for a weapon of its type. As a force effect, it can strike and damage incorporeal creatures. The weapon dissipates if released from your grasp at the start of the following round.',
     source: 'Pathfinder Player Companion: Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instigate Psychic Duel',
@@ -1122,6 +1166,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You initiate a psychic duel within a binary mindscape containing only you and the target. The spell ends when either combatant drops below 0 hit points or both mutually agree to end the duel. If the opponent refuses to release you, you must succeed at a Will save to escape. The binary mindscape appears illusory but is unaffected by disbelief.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instrument of Agony',
@@ -1143,6 +1188,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You cause a weapon to exude a palpable aura of divine fury, granting the wielder a +2 morale bonus on Intimidate checks. When the enchanted weapon hits a target, the wielder may spend a free action to trigger agony; the target must succeed at a Will save or become nauseated for 1d4+1 rounds. A successful save still results in the sickened condition for 1 round. The sickened effect is a mind-affecting ability.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Intellect Fortress I',
@@ -1165,6 +1211,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'Using the power of pure logic, you disrupt mental attacks. Intellect Fortress I suppresses all effects with the emotion and fear descriptors for its duration within the area. Intellect Fortress II (psychic 5) additionally reduces damage from mind-affecting effects by half. Intellect Fortress III (psychic 6) causes creatures succeeding on saves against fear or emotion effects to suffer no effects at all, even partial effects normally granted. Higher versions can be undercast.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Interplanetary Teleport',
@@ -1187,6 +1234,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'This spell functions as teleport but with unlimited range, allowing travel to other planets or worlds. You need a clear understanding of the destination world rather than direct observation. Specific planetary locations guarantee safe arrival without risk of failure; vague destinations result in a safe landing zone. The spell fails if no viable landing area exists.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Interposing Hand',
@@ -1211,6 +1259,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You create a Large magic hand between you and one opponent, providing +4 cover AC against that target. The hand maintains its position regardless of where you move or how the opponent tries to get around it, and is immune to deception via darkness, invisibility, or disguise. The hand has hit points equal to your current HP and AC 20 (-1 size, +11 natural). Creatures under 2,000 pounds moving past the hand are slowed to half speed. You can redirect the hand to a new target as a move action.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Interrogation',
@@ -1233,6 +1282,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You back your questions with magical pain, asking one question per 2 caster levels. The target either answers or takes 1d4 damage plus your Wisdom modifier. Answers are not magically compelled to be truthful, but lying imposes a -4 penalty on Bluff checks. A greater version (Interrogation, Greater) at 4th level allows one question per caster level and deals 1d8 + Wisdom bonus when unanswered.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Investigative Mind',
@@ -1266,6 +1316,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'When making Appraise, Knowledge, Linguistics, or Spellcraft checks, you roll twice and take the higher result. This ability cannot stack with other similar double-roll abilities on the same check. The spell discharges after a number of uses equal to your caster level.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Invigorate',
@@ -1288,6 +1339,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You banish feelings of weariness, temporarily removing the penalties from the fatigued or exhausted condition. This effect is illusory rather than actual rest. When the spell expires, the subject takes 1d6 nonlethal damage and the original conditions return. Only one invigorate spell can affect a creature at a time. A mass version (Invigorate, Mass) at bard 3/psychic 4 affects multiple touched creatures.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Invigorating Poison',
@@ -1310,6 +1362,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'The target metabolizes toxins beneficially. When poison would normally deal ability damage, the creature instead gains a +4 alchemical bonus to that ability score. The spell ends immediately upon triggering, but the bonus persists for minutes equal to the ability damage the poison would have dealt. If the poison causes multiple ability damages, each bonus has an independent duration. Non-damage poison effects apply normally.',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Invigorating Repose',
@@ -1332,6 +1385,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You amplify your next use of a resurrection spell. When you cast raise dead, the target is restored to full hit points. When you cast breath of life, it can revive a dead target as long as you cast it within a number of rounds equal to half your caster level, and the healing is treated as empowered. Using any resurrection spell discharges this effect.',
     source: 'Pathfinder Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Invisibility Alarm',
@@ -1362,6 +1416,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'This spell functions as alarm but triggers only when invisible creatures enter or exit the warded area, providing a different mental alarm depending on direction of travel. The spell does not aid you in sensing or pinpointing the location of an invisible creature within the area. Can be made permanent by a 9th-level or higher caster using permanency (2,500 gp).',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Invisibility Bubble',
@@ -1400,6 +1455,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You create a glamered bubble that renders the target completely invisible underwater by concealing the target and the water displaced by it. Works on Medium or smaller creatures. Other objects and creatures within the bubble also become invisible. Light sources inside do not illuminate beyond the bubble's edges. A Giant version (3rd level) affects a 10-foot radius and larger creatures. A Mass version (7th level) affects multiple creatures at long range.",
     source: 'Pathfinder Player Companion: Blood of the Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Invisibility Purge',
@@ -1422,6 +1478,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You emanate an aura that negates all forms of invisibility. Anything invisible becomes visible while in the area. The spell functions against most supernatural invisibility, though certain creatures like invisible stalkers are immune.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Invoke Deity',
@@ -1454,6 +1511,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You assume an aspect of your deity by selecting one domain benefit from domains you have access to. The spell grants physical transformations and supernatural abilities tied to that domain. You can switch between domain benefits during the duration by concentrating for 1 round (reducing remaining duration by 10 minutes), but cannot switch with less than 10 minutes remaining. Violating your deity's precepts terminates the spell and stuns you. Over 29 domain options are available, each providing distinct mechanical benefits.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Invoke Primal Power',
@@ -1475,6 +1533,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You must cast this spell while activating wild shape to assume a Large or larger animal form. You gain a +4 size bonus to Constitution and increase the natural armor bonus granted by the wild shape effect by 2. At caster level 13+, choose two additional abilities from: cold resistance 30, ferocity, giant slayer bonuses, powerful charge damage, rend, +20 ft. speed increase, trample, or trip. At caster level 17+, choose three. When the spell ends, the wild shape automatically ends as well.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Iron Stake',
@@ -1508,6 +1567,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You create and hurl a 1-foot cold iron spike at a target as a ranged touch attack. The spike is treated as both magical and cold iron for overcoming damage reduction. It deals 1d6 points of damage per 2 caster levels (maximum 10d6). Creatures with cold iron damage reduction that take damage become sickened for 1 round. They must also make a Fortitude save or spend a number of rounds equal to your caster level needing to succeed at concentration checks (DC 15 + 2 x spell level) to cast spells or use spell-like abilities.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Irradiate',
@@ -1540,6 +1600,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You flood the area with dangerous radiation. The intensity of the radiation depends on your caster level: low at CL 6 or lower, medium at CL 7-9, high at CL 10-16, and severe at CL 17+. Creatures within the zone experience the exposure only once; the radiation does not persist after the spell. The save DC is set by the spell rather than the standard radiation DC.',
     source: 'Pathfinder Campaign Setting: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Isolate',
@@ -1571,6 +1632,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You render the target imperceptible to their allies only. Neutral or hostile creatures can perceive the target normally. The target retains self-awareness and may speak verbal spell components and activate magic items, but effects that depend on ally awareness fail. Creatures with invisibility detection perceive both sight and sound of the target. A successful Will save reduces the duration to 1 round.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Itching Curse',
@@ -1603,6 +1665,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You inflict a distracting, unbearable itch on the target. The affected creature must use a move action each round to scratch or suffer a -1 penalty on attack rolls, saving throws, skill checks, and ability checks.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ── J ──────────────────────────────────────────────────────────────────────
@@ -1635,6 +1698,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'Your skin turns fiery red, mirroring the appearance of a ja noi (oni in hobgoblin form). You gain fast healing 3, though this ability cannot repair damage caused by acid or fire. When you fail a Will saving throw, you may dismiss this spell as an immediate action to reroll the save, but must take the second result.',
     source: 'Pathfinder Campaign Setting: Inner Sea Monster Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Janni's Jaunt",
@@ -1667,6 +1731,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'This spell functions as plane shift, but can transport only willing creatures and only to an Elemental Plane, the Astral Plane, or the Material Plane.',
     source: 'Pathfinder Campaign Setting: Planes of Power',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Jester's Jaunt",
@@ -1689,6 +1754,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You teleport the target to a space you can see within 30 feet of the target. The destination must be on solid ground and must not be inherently hazardous to the creature being teleported.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Jitterbugs',
@@ -1712,6 +1778,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You create a sensory illusion that makes the target believe it is covered in creeping, crawling, stinging bugs. The target becomes jittery and cannot remain still, suffering a -4 penalty on all Dexterity checks and Dexterity-based skill checks. The target cannot use the delay, ready, or total defense actions.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Jolting Portent',
@@ -1734,6 +1801,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'A glowing red aura of vengeance surrounds the target. Once per round when the target makes an attack or casts a spell, it must succeed at a Fortitude save or take 4d6 + your relevant ability modifier in electricity damage. As an immediate action, you may dismiss the spell when the target confirms a critical hit to negate the critical (the attack still deals normal damage) and daze the creature for 1 round.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Joyful Rapture',
@@ -1758,6 +1826,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'All allies within the area are freed from any harmful emotion effects. Additionally, each ally in the area heals 1d4 points of ability damage of your choice from Intelligence, Wisdom, or Charisma.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Judgment Light',
@@ -1781,6 +1850,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'This spell functions only when you have at least one active judgment. Upon casting, it produces effects corresponding to each of your active judgments: Destruction (4d8 fire damage, shaken 1d4 rounds, Will half and negates condition); Healing (restores 1d8 + Wisdom modifier HP to allies); Justice (reveals hidden and invisible creatures, -20 Stealth penalty for 1 round/level); Piercing (reduces enemy SR by 5 for 1 round/level); Protection (+2 sacred bonus to AC and CMD for 1 round/level); Purity (grants allies an additional save against one effect with +2 sacred bonus); Resiliency (DR 3/magic for 1 round/level); Resistance (energy resistance 5 for 1 round/level); Smiting (weapons count as magic, aligned, and adamantine for 1 round/level).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Judgment Undone',
@@ -1804,6 +1874,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You restore a willing petitioner to mortal life on the plane where they were sent. Upon completion, the petitioner returns in young adult form with all memories and class levels intact. Between 1d6+5 minutes after casting begins, a psychopomp olethros appears and demands cessation; casting can be paused for up to 1 minute without failure. Obtaining prior permission from a Purgatory agent avoids this encounter.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Jungle Mind',
@@ -1826,6 +1897,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You merge consciousness with the local animal hierarchy, gaining knowledge of all fauna within a 1-mile radius similar to commune with nature. After selecting one animal type, you can sense the location, movement, and size of those animals in the area; improve their starting attitude by one step; establish mental links with individual animals as a full-round action; and read surface thoughts and perceive through the animal's senses using your Perception skill. When targeting another creature's animal companion, the animal may make a Will save to negate. Using the mental link ability reduces remaining duration to 1 round/level. Despite the name, jungle mind functions in any terrain.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ── K ──────────────────────────────────────────────────────────────────────
@@ -1849,6 +1921,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The target treats one skill of your choice as a class skill.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Keep Watch',
@@ -1870,6 +1943,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "Affected creatures can remain awake and vigilant throughout the night while gaining the benefits of a full night's rest. Subjects recover hit points normally and wizards can prepare spells as if they slept 8 hours, and they avoid fatigue. The effect does not provide actual sleep or dreaming benefits. Any vigorous activity, including combat, ends the effect. Subjects remain vulnerable to sleep-inducing effects.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Keif Addiction',
@@ -1892,6 +1966,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'This spell functions as geas/quest, except the only allowed command is "use keif or refined keif." A lesser version (Keif Addiction, Lesser) at lower level functions as lesser geas with the same restriction, requiring a Will save to negate, and only affects creatures with 7 HD or fewer.',
     source: 'Pathfinder Chronicles: Dark Markets, A Guide to Katapesh',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Keif Vigor',
@@ -1927,6 +2002,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'The spell grants a +2 enhancement bonus to Strength. Once per round as a free action, the target may increase this enhancement bonus by 2 for one round, taking 1d6 nonlethal damage and reducing the duration by one round. Additional increases are possible at higher caster levels (up to +10 bonus at 15th level), with escalating damage and duration costs. When the spell expires, the subject becomes fatigued.',
     source: 'Pathfinder Chronicles: Dark Markets, A Guide to Katapesh',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ki Arrow',
@@ -1948,6 +2024,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You imbue an arrow with your personal power and hurl it at a target up to 100 feet away. Make a ranged attack roll. If it hits, the target takes damage as if you had hit it with a single unarmed strike (including Strength bonus).',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ki Leech',
@@ -1970,6 +2047,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You enter a receptive spiritual state. When you confirm a critical hit or reduce a living enemy to 0 or fewer hit points, you steal some of that creature's ki, restoring 1 ki point to your ki pool (provided you have at least 1 ki point available). This spell cannot exceed your maximum ki pool and does not stack with similar abilities. The spell has no effect unless you possess a ki pool.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ki Shout',
@@ -1992,6 +2070,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You unleash a blast of sonic energy at an opponent, dealing 1d6 points of sonic damage per caster level (maximum 20d6) and stunning the target for 1 round. A successful Fortitude save reduces damage by half and negates the stun.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "King's Castle",
@@ -2014,6 +2093,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You exchange positions with an adjacent ally. You teleport to your ally's space while your ally moves to your former location.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Knell of the Depths',
@@ -2036,6 +2116,7 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       'You inflict a cursed watery fate on the target. The recipient takes a -10 penalty on Swim checks and automatically sinks 15 feet per round when in any body of liquid. The creature avoids sinking only when standing on solid ground capable of supporting its weight, even if submerged.',
     source: 'Pathfinder Player Companion: Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Knight's Calling",
@@ -2059,5 +2140,6 @@ export const GAP_SPELLS_IJK: Spell[] = [
     description:
       "You compel a targeted enemy to approach you. On its turn, the target moves its speed toward you, avoiding other dangers along its path including movement that would provoke attacks of opportunity. The affected creature can only move and cannot take other actions. If the target's movement ends adjacent to you, you gain an attack of opportunity.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
 ];

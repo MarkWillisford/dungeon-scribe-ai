@@ -12,6 +12,7 @@ export const CORE_EXTRA_FEATS: FeatDefinition[] = [
       'You can use your bardic performance ability more often than normal. You can use bardic performance for 6 additional rounds per day.',
     shortDescription: 'Use bardic performance for 6 additional rounds per day',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'bardic performance' }],
     effects: [],
@@ -26,6 +27,7 @@ export const CORE_EXTRA_FEATS: FeatDefinition[] = [
       'You excel at defending yourself from all manner of combat maneuvers. You treat your total Hit Dice as your base attack bonus when calculating your Combat Maneuver Defense (see Chapter 8).',
     shortDescription: 'Use total Hit Dice as BAB for CMD',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -40,6 +42,7 @@ export const CORE_EXTRA_FEATS: FeatDefinition[] = [
       'Your critical hits cause opponents to become deafened. Whenever you score a critical hit against an opponent, the victim is permanently deafened. A successful Fortitude save reduces the deafness to 1 round. The DC of this Fortitude save is equal to 10 + your base attack bonus. This feat has no effect on deaf creatures.',
     shortDescription: 'Critical hits permanently deafen opponents (Fort negates)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'critical'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },

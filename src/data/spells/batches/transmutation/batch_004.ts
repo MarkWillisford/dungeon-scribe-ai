@@ -1,8 +1,8 @@
 // Transmutation spells — batch 004
 // Batch metadata: {"school":"transmutation","batchNum":"004","startSpell":"Ferment","lastSpell":"Gravity Bow","nextSpell":"Green Caress","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/g/green-caress/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_004: Spell[] = [
+export const TRANSMUTATION_BATCH_004: SpellDefinition[] = [
   {
     name: 'Ferment',
     classLevels: { alchemist: 1, bard: 1, cleric: 1, druid: 1, sorcerer: 1, wizard: 1, witch: 1 },
@@ -24,6 +24,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "This transmutation temporarily infuses a consumable liquid—including elixirs, extracts, potions, and poisons—with intoxicating properties. The caster must succeed at a caster level check to affect magical liquids (DC = 10 + item level) or poisons (DC equals the poison's save DC); otherwise the spell fails. If successful, the liquid adopts a flavor of the caster's choosing while maintaining the same effect. When consumed, the imbiber must make a Fortitude save or suffer a -2 penalty on attack rolls, saves, ability checks, and skill checks for the spell's remaining duration. Additionally, the DC to identify an affected magic liquid or poison increases by 5.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fey Form I',
@@ -56,6 +57,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'You transform into a Small or Medium fey creature. Base speed adjusts to match the new form (maximum 60 feet). You gain applicable abilities including climb, fly, or swim speeds, darkvision, low-light vision, scent, and boot stomp. If the form is aquatic, you can breathe both air and water. Any creature weaknesses are also acquired. Spells the creature has as spell-like abilities can be cast without verbal or somatic components and cannot be countered. Small fey forms grant +2 to Dexterity and Constitution; Medium fey forms grant +2 to Strength and Constitution.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fey Form II',
@@ -79,6 +81,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell functions like Fey Form I but extends to Tiny and Large fey forms with maximum speed of 90 feet. You gain expanded abilities including burrow speed, enhanced climb, fly, or swim speeds, and blindsense, along with numerous special abilities. Tiny forms provide +6 Dexterity and -2 Strength; Large forms provide +4 Strength and Constitution, and -2 Dexterity.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fey Form III',
@@ -102,6 +105,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell functions like Fey Form II but allows Diminutive and Huge fey forms. You gain additional abilities including tremorsense, fear aura, frightful presence, rend, and enhanced rock throwing. Energy resistance becomes 20. Diminutive forms grant +8 Dexterity and -4 Strength; Huge forms grant +6 Strength, +6 Constitution, and -4 Dexterity.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fey Form IV',
@@ -125,6 +129,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell functions like Fey Form III but imposes no speed limitations. You gain additional abilities including beguiling aura, fast healing 5, hide in plain sight, transparency, and vault. Energy resistance reaches 30 and you gain spell resistance equal to 6 plus your caster level.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fickle Winds',
@@ -147,6 +152,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "This protective spell generates moving wind barriers that shield targets similarly to a wind wall spell. The enchantment allows the protected creatures' projectiles to pass through while deflecting incoming attacks upward. Larger creatures require multiple target slots. The spell becomes ineffective in areas affected by higher-level wind or weather magic.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fiery Body',
@@ -169,6 +175,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transmutation spell converts your body into living flame. You gain immunity to fire damage and actually heal from fire attacks at a rate of 1 point per 3 points of damage. The spell provides protection against blindness, critical hits, ability damage, deafness, disease, drowning, electricity, poison, stunning, and spells affecting physiology or respiration. You receive a +6 enhancement bonus to Dexterity and gain a 40-foot fly speed with perfect maneuverability. Unarmed attacks deal an additional 3d6 fire damage, and you count as armed. Your bright flames dazzle those who do not avert their gaze. Fire spells you cast receive +1 to save DCs. However, entering water deals 2d6 damage per round and surrounds you with steam providing 50% concealment. Cold damage increases by 150%, and you take half damage from acid or electricity.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fins to Feet',
@@ -191,6 +198,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell transforms aquatic appendages into functional legs and feet, enabling land locomotion. The creature loses its swim speed but gains humanoid-appropriate movement (speed 30 for Medium or larger creatures, speed 20 for Small ones). Immersion in water for one round reverts the transformation; leaving water for one round reapplies it. The spell functions exclusively on creatures whose natural limbs are primarily adapted for swimming, such as merfolk and tritons. Notably, the spell grants no air-breathing capability.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'First World Revisions',
@@ -222,6 +230,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell allows a wayang to undergo transformation similar to ancestral regression. The target exchanges darkvision for low-light vision and gains a +20 bonus on Disguise checks to pass as a gnome, though the transformation remains imperfect enough that other wayangs who know the subject can still identify her true nature.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flame Arrow',
@@ -245,6 +254,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transmutation spell enchants ammunition to deal an additional 1d6 fire damage per hit. The flaming projectiles can ignite flammable objects or structures but will not ignite creatures they strike. The spell affects up to fifty pieces of ammunition simultaneously.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flaming Aura',
@@ -277,6 +287,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transmutation spell channels fire into your being. If you lack the fire subtype, the spell grants it to you. If you already possess the fire subtype, you instead manifest a 10-foot-radius aura of fire centered on you. Creatures entering or ending their turns within this aura must succeed at a Fortitude save or sustain 1d8 points of fire damage. The spell can be cast multiple times on yourself—first to gain the fire subtype, then again to create the flaming aura effect.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fleeting Defect',
@@ -298,6 +309,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "The spell temporarily inflicts the broken condition on a single solid object weighing up to 10 lbs per caster level. Attended objects receive a Fortitude save. When the spell ends, the object returns to normal condition; however, items destroyed during the spell's duration remain destroyed. When cast on a construct, a failed save imposes a -2 circumstance penalty on attack rolls, saving throws, skill checks, and ability checks for the spell's duration.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flesh to Ooze',
@@ -321,6 +333,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "This spell functions similarly to baleful polymorph but transforms the target into an ooze creature. The resulting ooze type depends on the target's Hit Dice: 3 HD or fewer become a gray ooze; 4-9 HD become a gelatinous cube or ochre jelly; 10+ HD become a black pudding. Alternatively, the caster may target inert flesh of sufficient mass to create an ooze of their choice. Equipment does not transform with the target and may be destroyed. If the ooze possesses the split ability, one resulting ooze retains the original creature's identity while the other remains mindless.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flesh to Stone',
@@ -343,6 +356,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'The spell transforms a living creature and all its carried possessions into a stationary stone statue. The subject becomes a mindless, inert statue, though it technically remains alive rather than dead. If the resulting stone form sustains damage, the creature will bear those injuries if restored. The magic only affects flesh-based creatures.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fleshcurdle',
@@ -366,6 +380,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "This spell warps a target's flesh, causing discoloration and functional impairment. The caster selects one of three effects: reducing one natural attack's accuracy and critical potential by a -2 penalty; decreasing the target's natural armor bonus by -4 (minimum +0); or halving one movement speed. Undead generally remain vulnerable, though creatures lacking flesh—including elementals, oozes, plants, gaseous beings, incorporeal entities, and skeletons—are immune to this spell's effects.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fleshy Facade',
@@ -396,6 +411,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "This transmutation spell causes an undead creature's flesh to appear healthy and natural, giving it the superficial appearance of a living being of its original type. Creatures using detection spells like detect undead must succeed at a saving throw to sense the target's true nature. An intelligent undead gains a significant bonus on Disguise checks to masquerade as alive or recently deceased. Physical features distinguishing undead (elongated teeth, claws, etc.) become less noticeable and the creature deals reduced damage. The spell is ineffective on skeletal creatures or those lacking flesh.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flexible Fury',
@@ -417,6 +433,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transmutation allows you to temporarily swap one of your current rage powers for another rage power you qualify for. Uses of the swapped rage power count toward any existing limitations. If you swap out a rage power required for others, the dependent powers become unavailable until the spell concludes. For instance, exchanging intimidating glare (which terrifying howl depends on) prevents terrifying howl use until the spell ends.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flexile Curse',
@@ -447,6 +464,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "This spell places a curse that reduces the hardness, armor bonus, and enhancement bonus of any armor or shield worn by the target by 1. The degradation accelerates—for each hour worn, these values decrease by an additional point. When hardness reaches zero, struck armor gains a 20% chance of becoming broken. If a magical item's enhancement bonus reaches zero, it loses all special abilities. Removing the equipment triggers recovery at a rate of 1 point per 2 hours. Broken items cease being broken once fully restored, and magical items regain their special abilities when enhancement bonuses are completely restored.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fluid Form',
@@ -470,6 +488,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "This transformation grants your body a slick, oily appearance with liquid-like qualities. Key effects include damage reduction of 10 against slashing attacks, extended reach of 10 feet, and the ability to pass through small holes or narrow openings, even mere cracks. You gain a 60-foot swim speed, can breathe both water and air, and acquire the water subtype for the spell's duration.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fly',
@@ -505,6 +524,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "The spell grants the recipient the ability to fly at 60 feet per round (40 feet in medium or heavy armor or carrying medium or heavy loads). Ascent occurs at half speed while descent happens at double speed, with good maneuverability. The subject maintains normal attack and spellcasting capability while airborne. A bonus on Fly skill checks equal to half the caster's level is granted. When the spell expires mid-flight, the recipient descends safely at 60 feet per round for 1d6 rounds. If ground is not reached within that timeframe, falling damage applies normally.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fly, Mass',
@@ -527,6 +547,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell functions as fly, save that it can target numerous creatures and lasts longer.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fool's Gold",
@@ -560,6 +581,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "This transmutation enchants gold pieces to weaken a creature's magical defenses. When a creature carrying the enchanted gold pieces makes its first saving throw against the caster's spell or magical ability, it must succeed at a Will save or suffer disadvantage on all subsequent saves against that caster's magic. Additionally, if the creature fails a saving throw against a non-harmless magical effect with a duration, that effect's duration doubles for the affected creature.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forced Mutation',
@@ -590,6 +612,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "This transmutation spell causes a target creature's body to twist and distort, reshaping into a grotesque figure. The affected creature suffers a -4 penalty to both Constitution and Charisma scores. Additionally, the caster selects one deformity from the mutant acquired template list (blind, deaf, fragile, fractured mind, lame, poor ability, spasms, or useless arm). The selected deformity must comply with the template's restrictions—for example, the lame deformity cannot be applied to creatures with base speeds below 20 feet.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forced Quiet',
@@ -612,6 +635,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell muffles sound around a target, preventing them from making loud vocalizations. Spellcasting remains unaffected. The target experiences a 2-point decrease to sonic effect DCs, gains +2 to saves against sonic effects, and receives a +4 circumstance bonus on Stealth checks.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Form of the Alien Dragon I',
@@ -635,6 +659,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'You transform into a Medium esoteric or outer dragon, gaining a +4 size bonus to Strength, +2 to Constitution, and +4 natural armor bonus. You receive a fly speed of 60 feet (poor), darkvision 60 feet, a breath weapon usable once per casting dealing 6d8 damage (Reflex save for half), and natural attacks including one bite (1d8), two claws (1d6), and two wing attacks (1d4). Different dragon types grant specific resistances and additional abilities.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Form of the Alien Dragon II',
@@ -658,6 +683,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell functions as Form of the Alien Dragon I but allows Large dragon forms. You gain a +6 size bonus to Strength, +4 to Constitution, and +6 natural armor bonus, fly speed 90 feet (poor), damage reduction 5/magic, and increased natural attacks (bite 2d6, claws 1d8, tail slap 1d8, wing attacks 1d6). Breath weapons deal 6d8 damage with 40-foot radius cones.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Form of the Alien Dragon III',
@@ -681,6 +707,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell functions as Form of the Alien Dragon II but permits Huge dragon forms. You gain a +10 size bonus to Strength, +8 to Constitution, and +8 natural armor bonus, fly speed 120 feet (poor), blindsense 60 feet, damage reduction 10/magic, frightful presence, and immunity to one energy type. Breath weapons deal 12d8 damage with a 1d4-round recharge.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Form of the Dragon I',
@@ -704,6 +731,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'You transform into a Medium chromatic or metallic dragon, gaining a +4 bonus to Strength, +2 to Constitution, +4 natural armor, flight at 60 feet, darkvision, and a breath weapon dealing 6d8 damage usable once per casting. You gain bite, claw, and wing attacks. Each dragon type grants specific breath weapon shapes, elemental resistance, and unique abilities like swim or burrow speeds.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Form of the Dragon II',
@@ -727,6 +755,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell functions as Form of the Dragon I but allows assuming a Large dragon form. You gain +6 Strength, +4 Constitution, +6 natural armor, 90-foot flight, damage reduction 5/magic, and breath weapons dealing 8d8 damage usable twice per casting.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Form of the Dragon III',
@@ -750,6 +779,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell functions as Form of the Dragon II but permits a Huge dragon form. You gain +10 Strength, +8 Constitution, +8 natural armor, 120-foot flight, blindsense, elemental immunity, damage reduction 10/magic, frightful presence, and 12d8 breath weapon damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Form of the Exotic Dragon I',
@@ -773,6 +803,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'You transform into a Medium imperial or primal dragon, gaining a +4 Strength bonus, +2 Constitution bonus, +4 natural armor, 60-foot fly speed (poor), 60-foot darkvision, a breath weapon dealing 6d8 damage, and natural attacks including one bite (1d8), two claws (1d6), plus either a gore attack (1d8) or two wing attacks (1d4). Druids may only assume primal dragon forms. Each dragon type provides specific energy resistance and additional abilities like swim speeds or burrow capabilities.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Form of the Exotic Dragon II',
@@ -796,6 +827,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell functions identically to Form of the Exotic Dragon I but allows Large dragon forms. Grants +6 Strength, +4 Constitution, +6 natural armor, 90-foot fly speed, damage reduction 5/magic, and 8d8 breath damage. Attack damage increases (bite 2d6, claws 1d8, tail slap 1d8).',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Form of the Exotic Dragon III',
@@ -819,6 +851,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell extends Form of the Exotic Dragon II to Huge dragons. Provides +10 Strength, +8 Constitution, +8 natural armor, 120-foot fly speed, blindsense 60 feet, 120-foot darkvision, damage reduction 10/magic, frightful presence, and energy immunity. Breath weapons deal 12d8 damage with 1d4-round recharge.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fox's Cunning",
@@ -841,6 +874,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transmutation grants the target a +4 enhancement bonus to Intelligence, which improves Intelligence-based skill checks and spell save DCs for affected casters. The spell does not provide additional bonus spells or skill ranks.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fox's Cunning, Mass",
@@ -863,6 +897,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "This spell functions identically to fox's cunning but affects multiple creatures simultaneously.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Frightful Aspect',
@@ -886,6 +921,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'The caster transforms into a larger, awful version of themselves, growing to Large size. Key benefits include a +6 size bonus to Strength, +4 to Constitution, +6 natural armor bonus, DR 10/magic, and spell resistance equal to 10 plus half caster level. The spell grants a 30-foot fear aura that causes enemy creatures to be shaken. When affected creatures hit with melee attacks, they become frightened for 1d4 rounds and lose aura immunity afterward. This aura functions as a fear and mind-affecting effect.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Frostbite',
@@ -908,6 +944,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transmutation spell delivers cold damage through a melee touch attack, dealing 1d6 points of nonlethal cold damage plus 1 point per level. The target becomes fatigued, with the condition persisting until nonlethal damage recovery. The spell cannot increase fatigue to exhaustion and can be used one time per level.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Frosty Aura',
@@ -940,6 +977,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transmutation spell channels cold energy into your body. If you lack the cold subtype, you gain it. If you already possess the cold subtype, you instead manifest a 10-foot-radius aura of cold centered on you. Creatures entering or ending their turns within this aura must make a Fortitude save or take 1d8 cold damage. Multiple castings stack, allowing you to first acquire the cold subtype, then activate the aura on a subsequent casting.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Full Pouch',
@@ -971,6 +1009,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "When cast as you draw out an alchemical item for use, this spell creates a duplicate of the target. The object must be an alchemical item, but not a dose of disease, a poison, a magic potion, or another type of consumable item. The newly created copy is delivered to your hand and functions identically to the original, though with reduced potency. Saves against the new alchemical item's effects use the original item's save DC or the save DC of this spell, whichever is higher.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fungal Blisters',
@@ -992,6 +1031,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transmutation spell causes horrible, fungal growths to erupt across your body, generating 1d2+1 blisters per 2 caster levels. When struck for more than 5 points of bludgeoning, piercing, or slashing damage in a single attack, one blister ruptures, releasing spores in a 5-foot radius. The spores inflict 1d6+1 damage per 2 caster levels to breathing creatures (Fortitude save negates), treated as a disease effect. You and plants are immune to the spore damage. If reduced to 0 or fewer hit points, all remaining blisters burst simultaneously. The spell cannot be cast while wearing heavy armor, and donning such armor during the duration causes all blisters to burst.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Funereal Weapon',
@@ -1014,6 +1054,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       "This transmutation enchantment surrounds a weapon with a faint silvery glow that illuminates a 5-foot area. The spell allows affected weapons to bypass undead damage reduction, ignoring 5 points of the creature's DR (except against epic DR). For instance, it completely negates a zombie's DR 5/slashing or reduces a lich's damage reduction. The spell cannot affect natural weapons and only impacts undead creature defenses.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fury of the Sun',
@@ -1036,6 +1077,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This curse inflicts the target with unbearable heat. Upon a failed save, the affected creature immediately endures severe heat conditions, sustains 1d4 points of nonlethal damage, and becomes fatigued from heatstroke. The target must attempt saving throws every 10 minutes (beginning at DC 15) as though experiencing severe heat. The target cannot avoid it using the normal methods for escaping heat dangers such as Survival checks or finding shade, because the heat originates internally.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gaseous Form',
@@ -1068,6 +1110,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transmutation converts the subject into a misty, translucent form. Material armor becomes ineffective, though Dexterity, deflection bonuses, and force-based protections persist. The creature gains DR 10/magic and immunity to poison, sneak attacks, and critical hits. The gaseous form cannot attack or cast spells requiring verbal, somatic, material, or focus components—unless using Silent Spell, Still Spell, or Eschew Materials feats. Supernatural abilities are lost. Flight speed is 10 feet with perfect maneuverability. The creature can pass through small openings but cannot enter liquids or manipulate objects.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Geniekind',
@@ -1091,6 +1134,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transformation spell allows you to assume the form of one of four genie types: djinni, efreeti, marid, or shaitan. You retain your basic physical appearance but shift in some way to become more akin to the genie type you chose. All forms grant a +2 racial bonus on saves versus paralysis, poison, sleep, and stunning; +4 enhancement bonus to natural armor; +2 enhancement bonus to Constitution; and +5 bonus on Diplomacy checks with creatures of matching elemental subtype. Type-specific benefits include flight (djinni), fire damage and resistance (efreeti), aquatic adaptation (marid), or burrowing ability (shaitan). Each form provides corresponding energy resistance of 10 points.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Giant Form I',
@@ -1114,6 +1158,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'You transform into any Large humanoid giant creature, gaining a +6 size bonus to Strength and -2 penalty to Dexterity, among other enhancements. Depending on the assumed form, you may gain abilities like darkvision, regeneration, rock throwing, or elemental resistances matching the original creature.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Giant Form II',
@@ -1137,6 +1182,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This spell functions as Giant Form I but permits transformation into Huge giant creatures such as cloud and storm giants. You gain a +8 size bonus to Strength, +6 size bonus to Constitution, and a +10-foot enhancement bonus to your speed, plus comparable special abilities to the lower-level version.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Giant Vermin',
@@ -1158,6 +1204,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transmutation spell converts normal-sized centipedes, scorpions, or spiders into giant versions of themselves. Only a single vermin type may be affected per casting. The quantity affected depends on caster level: at 9th level or lower, 3 centipedes, 1 scorpion, or 2 spiders; at 10th-13th, 4 centipedes, 2 scorpions, or 3 spiders; at 14th-17th, 6 centipedes, 3 scorpions, or 4 spiders; at 18th-19th, 8 centipedes, 4 scorpions, or 5 spiders; at 20th or higher, 12 centipedes, 6 scorpions, or 8 spiders. The created creatures will not harm the caster but follow only basic commands like "Attack" or "Defend."',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gift of the Deep',
@@ -1181,6 +1228,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transmutation grants sahuagin targets one selected mutation type. The caster chooses a single benefit applied to all targets: Four-Armed (extra limbs for attacks and items), Malenti (elf-like appearance with stat bonuses), Prehistoric (enlarged with armor boost), Shark-Blooded (enhanced bite and swim speed), Sightless (blindsense capability), or Spined (defensive damage reflection). The spell cannot affect already-mutated sahuagin or those under prior Gift of the Deep effects.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Glide',
@@ -1212,6 +1260,7 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'The caster becomes immune to fall damage and can move horizontally while descending. You can move up to 5 feet in any horizontal direction for every 1 foot you fall, at a speed of 60 feet per round. The spell terminates upon landing or when its duration expires. Wind effects can extend gliding distance, but the spell cannot gain altitude.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gravity Bow',
@@ -1233,5 +1282,6 @@ export const TRANSMUTATION_BATCH_004: Spell[] = [
     description:
       'This transmutation spell magnifies arrow and bolt damage by increasing their weight and density at impact. Any arrow fired from a bow or crossbow you are carrying when the spell is cast deals damage as if one size larger than it actually is. For example, a Medium longbow arrow normally inflicting 1d8 damage instead deals 2d6 damage. The effect applies only when you fire the weapon; if another creature uses your bow, arrows deal normal damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 ];

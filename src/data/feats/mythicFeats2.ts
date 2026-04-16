@@ -10,6 +10,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Non-mythic creatures cannot identify your illusion spells; mythic creatures add your tier to the DC.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'spell_focus_illusion' }],
     effects: [],
@@ -24,6 +25,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Use surge once per day; gain an additional daily surge use if you have mythic tiers.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'special', description: 'Great Fortitude, Iron Will, or Lightning Reflexes' },
@@ -40,6 +42,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Expend two mythic power uses to maximize your surge die result once per day.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'special', description: '6th mythic tier' }],
     effects: [],
@@ -54,6 +57,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Forgo extra strikes to stagger a target; spend mythic power to extend stagger duration.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'medusas_wrath' }],
     effects: [],
@@ -68,6 +72,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Deflect additional ranged attacks equal to half tier; spend mythic power to deflect rays.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'missile_shield' }],
     effects: [],
@@ -82,6 +87,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Mobility grants +6 dodge bonus; shift 5 feet when an attack of opportunity misses you.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'mobility' }],
     effects: [
@@ -109,6 +115,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Add half non-monk levels to monk level for AC; spend mythic power to boost effective monk level.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'monastic_legacy' }],
     effects: [],
@@ -123,6 +130,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Attack while using mount as cover; spend mythic power to negate mounted archery penalties.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'mounted_archery' }],
     effects: [],
@@ -137,6 +145,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Negate additional hits against mount per round equal to tier; substitute Ride check for mount Reflex save.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'mounted_combat' }],
     effects: [],
@@ -150,6 +159,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       'Your mythic power surpasses that of other mythic beings of your tier. Benefit: Your tier is considered 2 higher for the purposes of determining the potency of your mythic abilities, mythic feats, and mythic spells. This does not grant you access to abilities or spells that require a higher tier, nor does it grant you additional uses of mythic power or improve your surge die.',
     shortDescription: 'Treat your tier as 2 higher for determining mythic ability potency.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [],
     effects: [],
@@ -164,6 +174,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Learn mythic spells equal to tier; expend mythic power when casting to enhance effects.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'special', description: 'Ability to cast spells' }],
     effects: [],
@@ -177,6 +188,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       'You can use magic items and speak while in wild shape. Benefit: While in wild shape, you can activate spell completion and spell trigger magic items that you could use before wild shaping. You do not need to physically manipulate the item when using it in this way. You can also speak normally while in wild shape.',
     shortDescription: 'Activate magic items and speak normally while in wild shape.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'natural_spell' }],
     effects: [],
@@ -190,6 +202,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       'You dance across obstructed terrain with ease. Benefit: For every 2 tiers you possess, you can move through up to 5 feet of difficult terrain each round as if it were normal terrain (minimum 5 feet). This benefit stacks with the benefit of Nimble Moves and Acrobatic Steps.',
     shortDescription: 'Move through 5 feet of difficult terrain per 2 tiers as normal terrain.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'nimble_moves' }],
     effects: [],
@@ -203,6 +216,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       'Your attacks pierce through the toughest defenses. Benefit: When using Penetrating Strike or Greater Penetrating Strike, you ignore an additional point of damage reduction for every 3 tiers you possess. The effects of these feats now apply to damage reduction without a type (such as DR 10/-).',
     shortDescription: 'Ignore additional DR per 3 tiers; also applies to untyped damage reduction.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'penetrating_strike' }],
     effects: [],
@@ -217,6 +231,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Persuasive bonus increases by 2; spend mythic power to treat a check as a 20.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'persuasive' }],
     effects: [
@@ -245,6 +260,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       'You can target your foes precisely even while on the move. Benefit: You can use Pinpoint Targeting even if you move this round, but only if the distance you move is equal to or less than 5 feet per tier.',
     shortDescription: 'Use Pinpoint Targeting while moving up to 5 feet per tier.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'pinpoint_targeting' }],
     effects: [],
@@ -259,6 +275,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Point-Blank Shot bonus increases to +2; spend mythic power for additional bonus equal to half tier.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'point_blank_shot' }],
     effects: [
@@ -289,6 +306,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       'Your mythic surge is particularly powerful. Benefit: Whenever you use your surge ability, add 1 to your surge result.',
     shortDescription: 'Add 1 to your surge result whenever you surge.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [],
     effects: [
@@ -311,6 +329,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Power Attack grants +3 damage instead of +2; spend mythic power to negate attack penalties.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'power_attack' }],
     effects: [],
@@ -325,6 +344,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Apply giant simple template to wild shape forms; spend mythic power to combine both Powerful Shape effects.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'powerful_shape' }],
     effects: [],
@@ -339,6 +359,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Use augury at will; successful augury grants insight bonus equal to tier from guidance.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'prophetic_visionary' }],
     effects: [],
@@ -353,6 +374,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Quick Draw applies to any item; spend mythic power to retrieve two hidden items as a move action.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'quick_draw' }],
     effects: [],
@@ -366,6 +388,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       "Your racial heritage is even more pronounced than usual. Benefit: You gain a single racial trait of your choice from the race you picked when you took the non-mythic Racial Heritage feat. That racial trait cannot modify your size or ability scores. You also gain the racial language of the race (if any) if you don't already know it.",
     shortDescription: 'Gain a racial trait and language from the race chosen for Racial Heritage.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'racial_heritage' }],
     effects: [],
@@ -380,6 +403,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Rapid Reload applies to all crossbows and firearms; spend mythic power to reload without provoking AoOs.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'rapid_reload' }],
     effects: [],
@@ -393,6 +417,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       "You fire a hail of arrows or bolts with supernatural speed. Benefit: When using Rapid Shot, you can either ignore the feat's -2 penalty on attack rolls or make two additional attacks instead of one.",
     shortDescription: 'Ignore Rapid Shot penalty or make two additional attacks instead of one.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'rapid_shot' }],
     effects: [],
@@ -407,6 +432,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Rhetorical Flourish bonus increases by tier vs. non-mythic (half tier vs. mythic); reroll Bluff with mythic power.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'rhetorical_flourish' }],
     effects: [],
@@ -420,6 +446,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       'You can cut down multiple foes in a single mounted charge. Benefit: After hitting an opponent with a Ride-By Attack, you can continue to make attacks against additional targets. You gain one additional attack for every 3 mythic tiers you possess, and these additional attacks cannot exceed your normal full attack. Each attack after the first takes the appropriate multiple attack penalty, and you must move at least 10 feet between each attack.',
     shortDescription: 'Make additional attacks during Ride-By Attack; one extra per 3 tiers.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'ride_by_attack' }],
     effects: [],
@@ -434,6 +461,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Run at 7x speed (6x in heavy armor); gain tier+4 bonus on running jump; run longer before checks.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'run' }],
     effects: [],
@@ -448,6 +476,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Saving Shield grants +3 shield bonus to ally; negate an attack to make AoO against attacker.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'saving_shield' }],
     effects: [
@@ -475,6 +504,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Add tier to Scorpion Style duration; spend mythic power to slow target on failed Fortitude save.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat', 'style'],
     prerequisites: [{ type: 'feat', featId: 'scorpion_style' }],
     effects: [],
@@ -489,6 +519,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Channeling damage increases by 2x the number of excluded targets; spend mythic power to exclude more targets.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'selective_channeling' }],
     effects: [],
@@ -503,6 +534,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Self-Sufficient bonus increases by 2; spend mythic power to treat a Heal or Survival check as a 20.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'self_sufficient' }],
     effects: [
@@ -532,6 +564,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Shatter Defenses makes opponents flat-footed to all attacks, not just yours.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'shatter_defenses' }],
     effects: [],
@@ -546,6 +579,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Add shield bonus to touch AC; spend mythic power to add shield bonus to a Fortitude or Reflex save.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'shield_focus' }],
     effects: [],
@@ -560,6 +594,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Bull rush into wall deals 1d6 per 2 tiers; spend mythic power to add tier to bull rush check.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'shield_slam' }],
     effects: [],
@@ -573,6 +608,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       'You can fire multiple shots while on the run. Benefit: When using Shot on the Run, you can make two ranged attacks at your highest base attack bonus at any point during your movement, instead of just one.',
     shortDescription: 'Make two ranged attacks during Shot on the Run movement instead of one.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'shot_on_the_run' },
@@ -590,6 +626,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Always take 10 or 20 on your Skill Focus skill, even when rushed or threatened.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'skill_focus' }],
     effects: [],
@@ -604,6 +641,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Make immediate melee attack with caught thrown weapons; spend mythic power to do so without action.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'snatch_arrows' }],
     effects: [],
@@ -618,6 +656,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Sociable bonus applies automatically; use move action to grant +4 bonus for rounds equal to tier.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'sociable' }],
     effects: [],
@@ -632,6 +671,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Spell Focus bonus increases by 1; spend mythic power to force targets to roll saves twice (take lower).',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'spell_focus' }],
     effects: [],
@@ -646,6 +686,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Prepare Spell Mastery spells as full-round action; spend mythic power to prepare all at once.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'spell_mastery' }],
     effects: [],
@@ -660,6 +701,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Add half tier to caster level checks vs. spell resistance; full tier if you have Greater Spell Penetration.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'spell_penetration' }],
     effects: [],
@@ -674,6 +716,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Non-mythic casters provoke AoOs even when defensive; spend mythic power for ranged AoOs against casters.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'spellbreaker' }],
     effects: [],
@@ -688,6 +731,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Mounted charge staggers on failed Fortitude save for rounds equal to tier; spend mythic power to daze instead.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'spirited_charge' }],
     effects: [],
@@ -702,6 +746,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Change Spontaneous Metafocus target spell each morning when restoring spell slots.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'metamagic'],
     prerequisites: [{ type: 'feat', featId: 'spontaneous_metafocus' }],
     effects: [],
@@ -716,6 +761,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'No minimum movement required for Spring Attack; spend mythic power to avoid AoOs during movement.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'spring_attack' },
@@ -733,6 +779,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Stealthy bonus increases by 2; spend mythic power to treat Escape Artist or Stealth check as a 20.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'stealthy' }],
     effects: [
@@ -762,6 +809,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Take 5-foot step when making readied attack outside reach; spend mythic power to move full speed instead.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'strike_back' }],
     effects: [],
@@ -776,6 +824,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'When rerolling, roll two dice and take the higher result before adding Strong Comeback bonus.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'strong_comeback' }],
     effects: [],
@@ -790,6 +839,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Stunning Fist DC increases by half tier; usable multiple times per round; spend mythic power to use without daily use.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'stunning_fist' }],
     effects: [],
@@ -804,6 +854,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Add half tier to thrown weapon range; no penalty for improvised thrown weapons; spend mythic power to increase damage.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'throw_anything' }],
     effects: [
@@ -833,6 +884,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Unarmed strikes deal damage as one size larger; +1 per size category target exceeds you on CMBs and Stunning Fist DC.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'improved_unarmed_strike_mythic' }],
     effects: [],
@@ -846,6 +898,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       'Your body is supernaturally resilient. Benefit: You gain twice as many hit points from Toughness as normal. When your hit points drop below 0, you gain DR 10/epic. This DR stacks with any other DR/epic you might possess.',
     shortDescription: 'Double hit points from Toughness; gain DR 10/epic when below 0 hit points.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'toughness' }],
     effects: [],
@@ -860,6 +913,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Mount makes two hoof attacks on overrun knockdown; spend mythic power to auto-confirm a critical hit.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'trample' }],
     effects: [],
@@ -874,6 +928,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Bonus equal to half tier on trip CMB and CMD with quarterstaff; enemy failed trips provoke AoO.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'tripping_staff' }],
     effects: [],
@@ -888,6 +943,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Turn Undead range increases 10 ft per tier; non-mythic undead get penalty on saves; spend mythic power to destroy undead.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'turn_undead' }],
     effects: [],
@@ -901,6 +957,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
       'You can draw and quaff two drinks at once. Benefit: You can draw two potions or other beverages from accessible containers as a move action, and you can drink two potions or other beverages as a standard action. You must have both hands free to use this feat.',
     shortDescription: 'Draw two potions as a move action; drink two potions as a standard action.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'quick_draw' }],
     effects: [],
@@ -915,6 +972,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Apply the highest weapon enhancement bonus to the Two-Weapon Defense shield bonus.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'two_weapon_defense' }],
     effects: [],
@@ -929,6 +987,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Spend mythic power to negate two-weapon fighting attack penalties for rounds equal to tier.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'two_weapon_fighting' }],
     effects: [],
@@ -943,6 +1002,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Two-Weapon Rend damage increases to 2d8 + 2x Str; spend mythic power for bonus equal to twice tier.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'two_weapon_rend' }],
     effects: [],
@@ -957,6 +1017,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Add tier to caster level when animating undead; triple (not double) duration of command undead.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'undead_master' }],
     effects: [],
@@ -971,6 +1032,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Unseating a rider deals 1d6 falling damage per 2 tiers; reducible by Acrobatics or similar.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'unseat' }],
     effects: [],
@@ -985,6 +1047,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Mount always has running start for jumps; spend mythic power for +10/+20 jump bonus; vault over creatures when charging.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'mounted_combat' },
@@ -1003,6 +1066,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Vital Strike multiplies Strength, magic, and other normally-multiplied bonuses by the number of damage dice rolled.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'vital_strike' }],
     effects: [],
@@ -1017,6 +1081,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       '+1 to Bluff, Diplomacy, and Perform (oratory) per 3 tiers; +2 DC to language-dependent spells with 10+ ranks in two skills.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'voice_of_the_sibyl' }],
     effects: [],
@@ -1031,6 +1096,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Add half tier to initiative and concentration checks for defensive casting; stacks with Warrior Priest.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'warrior_priest' }],
     effects: [],
@@ -1045,6 +1111,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Use Dexterity instead of Strength on damage rolls; shield armor check penalty no longer applies to attacks.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'weapon_finesse' }],
     effects: [],
@@ -1059,6 +1126,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Weapon Focus and Greater Weapon Focus bonuses are doubled; spend mythic power for half-tier bonus on attacks.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'weapon_focus' }],
     effects: [],
@@ -1073,6 +1141,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Gain bonus equal to half tier on damage rolls with chosen weapon; stacks with Weapon Specialization bonuses.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [{ type: 'feat', featId: 'weapon_specialization' }],
     effects: [],
@@ -1087,6 +1156,7 @@ export const MYTHIC_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Witch knife adds +1 DC to all witch spells (+2 to patron spells); hand is still considered free.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'feat', featId: 'witch_knife' }],
     effects: [],

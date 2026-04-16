@@ -1,8 +1,8 @@
 // Gap spells — letter T part 1 (first half alphabetically)
 // Gap metadata: {"letters":"T_1","totalChecked":143,"newSpells":34,"skipped":109}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_T_1: Spell[] = [
+export const GAP_SPELLS_T_1: SpellDefinition[] = [
   {
     name: 'Tactical Adaptation',
     classLevels: { magus: 3 },
@@ -16,6 +16,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'You instantly master advanced combat techniques. Select one combat feat you meet the prerequisites for, treating your magus level as your base attack bonus for this purpose. The chosen feat functions for the spell\'s duration. Once selected for a casting, the feat choice cannot be changed for additional same-day castings. Only one tactical adaptation spell can benefit a creature at a time.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tactical Formation',
@@ -31,6 +32,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'Affected creatures must form an unbroken adjacent chain (linear or irregular). Each target gains a +2 deflection bonus to AC while staying within 5 feet of at least one other affected creature. Breaking this proximity ends the spell for that creature only.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tail Current',
@@ -46,6 +48,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'see text',
     description: 'This spell functions as tailwind except it creates a helpful current in water instead of in the air. It grants free movement while swimming rather than while flying and functions only underwater.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Talismanic Implement',
@@ -60,6 +63,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'Functions similarly to contingency but allows you to invest a spell (max level 1/4 your level, capped at 3rd) into an occultist implement matching the spell\'s school. The spell must affect only you personally. Casting reduces the implement\'s mental focus by 2 points. The effect ends automatically when mental focus refreshes. Unlike contingency, multiple talismanic implements can be active simultaneously, though each implement holds only one such spell. Having any talismanic implements prevents other contingency effects from functioning.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Tamer's Lash",
@@ -76,6 +80,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a 15-foot sonic whip dealing 1d4 sonic damage. It functions as a whip but lacks physical substance, preventing use for combat maneuvers, sundering, or disarming. When striking an animal, the target must succeed at a Will save or be unable to attack the caster for 1d3 rounds. An affected animal within 30 feet must spend its first action moving away if able. Combat-trained animals, animal companions, and creatures with Hit Dice exceeding caster level + 4 receive a +4 circumstance bonus on saves. This intimidation effect is a mind-affecting fear effect.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tar Ball',
@@ -91,6 +96,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'You hurl a burning tar projectile at an enemy. On impact, it deals 1d4 fire damage plus your Strength modifier. The tar continues burning on the target, dealing 1d4 fire damage each round for 1d4 rounds and imposing a -2 penalty to Dexterity during this time. The target can use a full-round action to extinguish the tar via a DC 15 Reflex save (with +2 bonus if rolling on ground) or applying at least 1 gallon of nonflammable liquid. Leaping into water or magical cooling effects automatically terminate the burn.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tar Pool',
@@ -107,6 +113,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'You transform ground into heated tar. Creatures in the affected zone suffer fire damage (1d6 per two caster levels, maximum 10d6) and must make a Reflex save or become entangled. Entangled creatures may attempt escape each round through saving throws or skill checks (Strength or Escape Artist, DC equals spell save DC). Movement through the area costs twice the normal distance and increases Acrobatics DC by 5. Creatures entering or starting turns in the zone take additional fire damage and must reattempt saves. Prone creatures suffer a -4 penalty on saves and escape attempts. Even escaped creatures take ongoing fire damage until the spell ends or they spend a full-round action removing the tar. Tar-covered creatures have a -4 penalty on Acrobatics and flying checks.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Targeted Bomb Admixture',
@@ -121,6 +128,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'When consumed as an extract, your magical reserve changes to alter bomb behavior. Bombs can only hit a direct target; they do not splash. Bombs deal base damage plus double your Intelligence modifier instead of just the standard bonus. Only one bomb admixture formula can be active simultaneously; drinking a new admixture ends the previous one. This effect does not interfere with other bomb modifications from discoveries.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tattoo Potion',
@@ -136,6 +144,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell infuses a potion with magical inks. The affected potion must be consumed within 1 minute or it dissipates. When drunk, rather than producing normal potion effects, the liquid transforms into a permanent magical tattoo on the drinker\'s chest—provided that slot remains empty. The tattoo persists until activated as a spell tattoo. If the target already bears a chest tattoo, the spell fails.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinesis',
@@ -150,6 +159,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes (object); see text',
     description: 'You can move objects or creatures through concentration, with three distinct applications. Sustained Force: moves objects up to 25 lbs per caster level (max 375 lbs) at 20 feet per round; objects can be manipulated like using one hand; requires Will save negatable by possessors. Combat Maneuver: once per round, perform bull rush, disarm, grapple, pin, or trip using caster level as Combat Maneuver Bonus and Intelligence/Charisma modifier instead of Strength/Dexterity; no attacks of opportunity provoked. Violent Thrust: hurl up to 1 object per caster level (max 15) within range; requires attack rolls using base attack bonus plus Intelligence/Charisma modifier; weapons deal normal damage, other objects deal 1d6-6d6 damage depending on density.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Assembly',
@@ -164,6 +174,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'You magically assemble a siege engine, reducing the number of workers required by one per two caster levels. Additional worker reductions apply with Knowledge (engineering) ranks—one extra reduction plus one per 5 ranks. The spell fails if the combined caster level and skill ranks cannot eliminate all worker requirements.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Charge',
@@ -179,6 +190,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You use telekinetic force to launch an allied creature across the battlefield within spell range. The target flies just above the ground during transit, though you can elevate them over obstacles if desired. Movement provokes attacks of opportunity normally. When landing adjacent to an enemy, the target may spend an immediate action to make a melee attack against that opponent, gaining a +2 bonus on the attack roll.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Maneuver',
@@ -193,6 +205,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell operates similarly to telekinesis but with limited application. It enables you to perform specific combat maneuvers through telekinetic force, including bull rush, disarm, drag, grapple (with pinning), reposition, steal, and trip actions against a target creature.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Projectile',
@@ -207,6 +220,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'You hurl an object weighing no more than 5 pounds at a target. A ranged attack roll (not a touch attack) determines success. Upon hitting, the spell deals 1d6 points of bludgeoning damage to both the target and the object. The object\'s physical properties do not alter damage type or other attack characteristics, regardless of whether it is a weapon or magical item.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Sphere',
@@ -223,6 +237,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'This spell operates similarly to resilient sphere but reduces the weight of contents to one-sixteenth normal. You can telekinetically lift anything weighing 5,000 pounds or less within the sphere. Control extends to medium range (100 feet + 10 feet per caster level). You may move the sphere and its contents (totaling 5,000 lbs or less) by concentrating, moving it up to 30 feet per round as a standard action. The sphere descends at 60 feet per round when not concentrated upon, and you may telekinetically move it even from inside.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Storm',
@@ -239,6 +254,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You generate a destructive wave of telekinetic energy. Creatures within the 40-foot radius take damage equal to 1d6 points per caster level (maximum 20d6). Those affected become dazed and stunned for one round. A successful Fortitude save reduces damage by half and eliminates the dazed and stunned conditions. The spell damages objects and can penetrate barriers if the initial damage is sufficient. You may designate any number of creatures to be immune to the spell\'s effects, provided they can be targeted.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Strikes',
@@ -254,6 +270,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "You enchant a touched creature's limbs with telekinetic force. For the spell's duration, the target's unarmed attacks or natural weapons inflict an additional 1d4 points of force damage on each successful unarmed melee attack.",
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telekinetic Volley',
@@ -268,6 +285,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no (object)',
     description: 'Touched items levitate within your space. Once per round as a standard action, you launch one item at a chosen target. Non-ammunition items are thrown normally; ammunition items are fired as if from specific weapons (crossbows, slings, blowguns, bows, atlatls, or firearms depending on ammunition type). The attack roll uses your caster level instead of base attack bonus and your higher Intelligence or Charisma modifier instead of Dexterity. The effective Strength bonus equals your higher Int/Cha modifier. Proficiency penalties do not apply to ammunition, though improvised weapons incur the standard -4 penalty. The spell ends once all items have been launched.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telepathic Censure',
@@ -282,6 +300,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You generate an invisible psychic interference that inhibits telepathic communication. When targeting a telepathic creature, it blocks both sending and receiving thoughts. Against non-telepathic creatures, it only prevents receiving telepathic messages. Those affected by this spell or that attempt to telepathically communicate with creatures under its effects are not innately aware that their communication is being inhibited. The spell disrupts telepathic bond effects and helm of telepathy messages but does not affect psychic abilities unrelated to communication, such as detect thoughts or psychic crush attacks.',
     source: "Pathfinder Player Companion: Demon Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telepathic Silence',
@@ -298,6 +317,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'Within the affected region, creatures cannot transmit or receive telepathic communications. Spellcasters attempting to cast spells with thought components must make concentration checks (DC = 20 + double the spell\'s level) to avoid losing the spell. The thoughts of creatures within the area cannot be detected, located, or read with thoughtsense, detect thoughts, or similar effects. The spell does not interfere with mind-affecting spells or those that do not require telepathic communication, such as mind thrust.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Temporal Divergence',
@@ -312,6 +332,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'You witness two divergent decisions and choose which to pursue. Select two different standard-action spells and cast both simultaneously, tracking all outcomes separately. After observing both results, choose which version of reality occurs, expending only that spell\'s resources. The unchosen spell consumes no action, spell slot, or components. Targets of the rejected spell do not expend resources defending against it. Using this spell multiple times in 24 hours requires a DC 25 Will save on subsequent castings; failure results in 24 hours of confusion.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Temporal Regression',
@@ -327,6 +348,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'You mark your current location and condition when casting. This creates an imperceptible beacon allowing you to return to that exact spot and restore your prior state (HP, conditions, durations) via standard action before the spell expires. The spell does not restore used items, charges, or spells. Bystanders perceive only a teleportation. Discharge incurs temporary negative levels—one per 2 rounds elapsed since casting—disappearing after 24 hours. Alternatively, discharging as an immediate action consumes the focus entirely.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Temporal Stasis',
@@ -341,6 +363,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You must succeed on a melee touch attack to cast this spell. Once successful, the target creature enters a state of suspended animation where time effectively stops for them. The subject does not age, bodily functions virtually cease, and no force can cause harm. This suspended state persists until dispelled through magic like dispel magic or freedom.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Terrain Bond',
@@ -357,6 +380,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'You invoke nature spirits to gain environmental adaptation. You treat the terrain you are in as your most favored terrain until this spell ends. The spell requires you to possess the favored terrain class feature to function.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thanatotic Fury',
@@ -371,6 +395,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell requires you to possess the giant subtype. When cast, you channel abilities from thanatotic titans. When you hit a creature capable of casting divine spells, that creature must succeed at a Will save or become unable to cast divine spells for 1d4 rounds and gain the shaken condition for the same duration. A successful save results in the shaken condition for only 1 round instead. Additionally, your attacks are treated as epic and evil for the purposes of overcoming damage reduction.',
     source: 'Pathfinder Adventure Path #91: Battle of Bloodmarch Hill',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thirsting Entanglement',
@@ -386,6 +411,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell operates identically to entangle, except the plants actively drain vitality from targets. Any creature that fails a save to avoid becoming entangled or fails a check to break free takes 1d2 points of Constitution damage.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thorn Javelin',
@@ -403,6 +429,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a wooden thorn sized as a javelin in your open hand, usable with proficiency. Creatures hit by the thorn must make a Fortitude save or become sickened for 1 round. When thrown, another thorn appears automatically. Any javelin leaving your grasp vanishes at turn\'s end. Each javelin attack reduces the spell\'s remaining duration by 1 minute, ending the spell once duration reaches zero.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thorny Entanglement',
@@ -418,6 +445,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell operates similarly to entangle but adds a thorn attack component. Plants attack creatures within 15 feet of the area using your caster level as base attack bonus plus your spellcasting ability modifier (Intelligence for witches; Wisdom for druids, rangers, and shamans). Thorn volleys function as thrown weapons dealing 2d6 piercing damage on hits. Creatures entering or ending turns in the spell\'s area automatically sustain 2d6 piercing damage.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Threefold Face',
@@ -432,6 +460,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'You develop two supplementary faces positioned around your head, each representing chosen personality traits. You gain all-around vision and immunity to flanking. Single-face effects like blindness or deafness only affect one face; three applications would be needed to blind you entirely. However, losing even one face to blindness eliminates all-around vision entirely. The spell provides no extra magic item slots or additional heads. Upon expiration, you acquire all accumulated conditions from all three faces simultaneously, whether beneficial or harmful.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Threefold Form',
@@ -446,6 +475,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'You create three idealized versions of yourself at different life ages, splitting into three separate bodies. The spell functions similarly to bilocation but with three bodies instead of two. Each body is affected by threefold aspect with a different idealized age. Beyond the age-related effects from threefold aspect, all three bodies share your other effects as normal for bilocation magic.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thunder Fire',
@@ -460,6 +490,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes (object); see text',
     description: 'When cast on a firearm, this spell creates a thunderous report, even if the firearm is not loaded. All creatures within 15 feet must make a Fortitude save or suffer deafness lasting 1 minute. The firearm\'s wielder takes a -4 penalty on this save and experiences a +1 increase to misfire range for 1d4 rounds. Any loaded ammunition is wasted if the firearm was loaded when targeted.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thundering Drums',
@@ -476,6 +507,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You strike the ground, creating a thunderous effect. Any creature in the area takes 1d8 points of sonic damage per caster level (maximum 5d8) and is knocked prone. A successful Fortitude save reduces damage by half and prevents the prone condition.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thunderstomp',
@@ -491,6 +523,7 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a ground-based ripple effect to attempt tripping an opponent. The trip combat maneuver check uses your caster level instead of base attack bonus and applies your spellcasting ability modifier (Intelligence for magi/wizards, Wisdom for druids/rangers, Charisma for bloodragers/sorcerers) rather than Strength. The spell provokes no attacks of opportunity and requires both caster and target to maintain ground contact.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tidal Surge',
@@ -508,5 +541,6 @@ export const GAP_SPELLS_T_1: Spell[] = [
     spellResistance: 'no',
     description: 'This water-conjuring spell produces different effects depending on the environment. On land, it creates an onrushing surge of water 10 feet high in a 30-foot cone dealing 1d6 bludgeoning damage per 2 caster levels (max 10d6). The surge extinguishes non-magical fires and suppresses magical fire as if dispel magic were cast. Failed Reflex saves result in creatures being pushed 1d4x5 feet away and Medium or smaller creatures being knocked prone. In bodies of water at least 30 feet wide, the caster may shape it as either a cone or 60-foot line, with damage increased to 1d10 per 2 caster levels plus the same push/prone effects on failed saves.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 ];

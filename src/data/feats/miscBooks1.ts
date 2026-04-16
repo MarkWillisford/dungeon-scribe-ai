@@ -10,6 +10,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'By performing a daily obedience to your chosen deity, you gain a boon related to that deity. The obedience takes 1 hour to perform, after which you gain the first boon appropriate to your deity.',
     shortDescription: 'Perform daily obedience to gain a divine boon',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must worship a deity' },
@@ -26,6 +27,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       "You have learned to specialize in the obedience of your deity, gaining access to the boons normally reserved for one of your deity's prestige classes (evangelist, exalted, or sentinel) without taking levels in that class.",
     shortDescription: 'Access a different set of obedience boons',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'deific_obedience' },
@@ -42,6 +44,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'By performing a daily obedience to a demon lord, you gain special boons. The obedience takes 1 hour and involves a depraved or destructive ritual specific to the demon lord.',
     shortDescription: 'Perform daily obedience to a demon lord for boons',
     source: 'Book of the Damned',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must worship a demon lord' },
@@ -58,6 +61,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'By performing a daily obedience to an empyreal lord, you gain special boons. The obedience takes 1 hour and involves a contemplative or charitable ritual specific to the empyreal lord.',
     shortDescription: 'Perform daily obedience to an empyreal lord for boons',
     source: 'Chronicle of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must worship an empyreal lord' },
@@ -77,6 +81,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
     shortDescription:
       '+2 to combat maneuvers when flanking; counts as Combat Expertise for maneuver feat prereqs',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -99,6 +104,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'When you successfully use a dirty trick combat maneuver against a foe who is unaware of you or considers you an ally, the penalty lasts for 1d4+1 rounds plus 1 round for every 5 by which your check exceeds the DC.',
     shortDescription: 'Dirty trick lasts longer against unaware foes',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_dirty_trick' },
@@ -117,6 +123,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
     shortDescription:
       'Feint as a move action; successful feint works against all your melee attacks',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'improved_feint' },
@@ -134,6 +141,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'While using Kitsune Style, when you successfully feint against a foe, that foe provokes an attack of opportunity from you.',
     shortDescription: 'Successful feint provokes an AoO',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'kitsune_style' },
@@ -152,6 +160,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'While using Kitsune Style, when you successfully feint against a foe, your first successful melee attack against that foe before the end of your turn deals additional damage equal to your Wisdom modifier.',
     shortDescription: 'Add Wis modifier to damage after successful feint',
     source: 'Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'kitsune_tricks' },
@@ -174,6 +183,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'When you use Weapon Finesse to make a melee attack with a weapon from a fighter weapon group for which you have weapon training, you can add your Dexterity modifier to the damage roll instead of your Strength modifier. This is treated as the weapon having the finesse quality.',
     shortDescription: 'Add Dex to damage with finesse weapons in a trained group',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_finesse' },
@@ -190,6 +200,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You can forge a spiritual bond with a weapon you wield, allowing you to invest it with magic weapon special abilities as a standard action by spending a number of points from your weapon training bonus. The ability lasts for 1 minute.',
     shortDescription: 'Invest weapons with temporary special abilities',
     source: "Weapon Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'class_feature', featureName: 'weapon training class feature' },
@@ -208,6 +219,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'When wearing heavy armor, you gain DR 1/--. At 7th level, this DR increases to 2/--. At 11th level, it increases to 3/--. If you are wearing adamantine armor, this DR stacks with the DR from the armor.',
     shortDescription: 'Gain DR/-- when wearing heavy armor',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'class_feature', featureName: 'armor training 2' },
@@ -233,6 +245,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'Select one type of armor (light, medium, or heavy) for which you have Armor Focus. While wearing armor of the selected type, you gain DR 2/-- if wearing medium armor or DR 3/-- if wearing heavy armor. Light armor grants DR 1/--.',
     shortDescription: 'Gain DR/-- from armor of chosen type',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'armor_focus' },
@@ -260,6 +273,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'When you successfully demoralize an opponent within your melee reach with an Intimidate check, you can make a melee attack against that creature as a swift action.',
     shortDescription: 'Swift action melee attack after successful Intimidate',
     source: 'Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -276,6 +290,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'Any opponents hit by your shield bash are also targeted by a free disarm or trip combat maneuver attempt at the same CMB. You may choose which before making the attempt.',
     shortDescription: 'Shield bash also attempts disarm or trip',
     source: 'Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_shield_bash' },
@@ -296,6 +311,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'When you hit a creature with a ranged attack, you can attempt a trip combat maneuver check against that creature as a free action. You use your Dexterity modifier in place of your Strength modifier for this combat maneuver check.',
     shortDescription: 'Trip at range with ranged attacks',
     source: 'Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -313,6 +329,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'When you hit a creature with a ranged attack, you can attempt a disarm combat maneuver check against that creature as a free action. You use your Dexterity modifier in place of your Strength modifier for this combat maneuver check.',
     shortDescription: 'Disarm at range with ranged attacks',
     source: 'Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -332,6 +349,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'Your unarmed strikes deal piercing or bludgeoning damage (your choice). On a confirmed critical hit with an unarmed strike, the target is sickened for 1 round per 4 character levels you possess (minimum 1 round).',
     shortDescription: 'Unarmed strikes deal piercing; sicken on crit',
     source: 'Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -350,6 +368,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You gain a +2 bonus on saving throws against effects with the evil descriptor and on Constitution checks to stabilize when you are dying. Furthermore, each time you take bleed or blood drain damage, each undead creature or creature with the evil subtype that is currently adjacent to you takes 1 point of damage.',
     shortDescription: '+2 to saves vs evil; blood damages adjacent evil/undead',
     source: 'Blood of Angels',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -379,6 +398,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You gain one of the following benefits based on the appearance of your flesh: brazen (fire resistance 5), golden (+1 natural armor bonus to AC), silver (+3 bonus on saves vs blindness and dazzle effects), or steel (+1 bonus on natural armor and gain DR 1/magic).',
     shortDescription: 'Metallic skin grants defensive benefits',
     source: 'Blood of Angels',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'angelic_blood' },
@@ -408,6 +428,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You gain a pair of gleaming feathered wings that grant you a fly speed of 30 feet with good maneuverability. If you are affected by a polymorph effect, these wings can be manifested if the new form would reasonably support them.',
     shortDescription: 'Gain wings with 30-ft fly speed (good)',
     source: 'Blood of Angels',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'angelic_blood' },
@@ -428,6 +449,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You can use darkness three times per day as a spell-like ability with a caster level equal to your character level.',
     shortDescription: 'Use darkness 3/day as a spell-like ability',
     source: 'Blood of Fiends',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'tiefling' },
@@ -444,6 +466,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You gain DR 1/-- that stacks with any other damage reduction you possess. This DR increases to 2/-- at 11th level and 3/-- at 15th level.',
     shortDescription: 'Gain DR 1/-- that stacks',
     source: 'Blood of Fiends',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'tiefling' },
@@ -471,6 +494,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'When wielding a light weapon, you can choose to take a -1 penalty on melee attack rolls and combat maneuver checks to gain a +2 bonus on melee damage rolls. When your base attack bonus reaches +4, and every 4 points thereafter, the penalty increases by -1 and the bonus on damage increases by +2. You must choose to use this feat before making an attack roll, and its effects last until your next turn.',
     shortDescription: 'Trade attack for damage with light weapons (like Power Attack)',
     source: 'Sargava, the Lost Colony',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -489,6 +513,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'Choose one domain granted by your deity. You gain the 1st-level domain power of that domain as a cleric of a level equal to your character level - 2 (minimum 1st level). If the domain power has uses per day, you can use it once per day.',
     shortDescription: "Gain a 1st-level domain power from your deity's domain",
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must worship a deity' },
@@ -512,6 +537,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'When you channel positive energy, you can choose to grant all living creatures healed by your channel a +2 morale bonus on saving throws against fear and exhaustion effects for a number of rounds equal to your Charisma modifier (minimum 1).',
     shortDescription: 'Channel energy grants +2 vs fear and exhaustion',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel positive energy' }],
     effects: [],
@@ -527,6 +553,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'If you make a successful bite attack against a living creature that is your size or larger, you gain temporary hit points equal to the damage you dealt. These temporary hit points last for 1 minute. You can gain a number of temporary hit points per day equal to twice your Hit Dice.',
     shortDescription: 'Gain temp HP from bite attacks',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Bite attack' },
@@ -546,6 +573,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
     shortDescription:
       'Allies within 30 ft gain +1 morale to attacks, damage, and saves vs fear/charm',
     source: 'Inner Sea World Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'ability_score', ability: 'CHA', minimum: 15 }],
     effects: [
@@ -586,6 +614,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You can use a divine focus to cast spells with material components of 100 gp or less without needing to provide those material components.',
     shortDescription: 'Use divine focus in place of material components up to 100 gp',
     source: 'Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Must worship a deity' },
@@ -604,6 +633,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You can treat a net as a one-handed ranged weapon with a range increment of 10 feet. You can use your Dexterity modifier for attack rolls with a net.',
     shortDescription: 'Treat net as one-handed ranged weapon',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'proficiency', proficiency: 'net' },
@@ -620,6 +650,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You can use a net to perform reposition and trip combat maneuvers. You gain a +2 bonus on these combat maneuver checks when using a net.',
     shortDescription: 'Trip and reposition with nets at +2',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'net_adept' },
@@ -647,6 +678,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You can treat any ally within 30 feet as an enemy for the purpose of flanking another creature. The ally does not grant the flanking bonus to you, but your attacks against the flanked creature benefit from the flanking bonus.',
     shortDescription: 'Use allies as flanking partners even without their participation',
     source: 'Heroes of the Streets',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_feint' },
@@ -666,6 +698,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'Allies who also have this feat do not provide soft cover to enemies against your ranged attacks. If an ally who also has this feat is in the area of your ranged attack, they gain a +4 dodge bonus to AC against the attack.',
     shortDescription: 'Allies with this feat do not provide soft cover',
     source: 'Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'point_blank_shot' },
@@ -684,6 +717,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You can combine your bardic performance and spellcasting. You can conceal the activity of casting a bard spell by blending it into your performance. Observers must succeed at a Perception or Sense Motive check (DC 15 + the level of the spell) to notice that you are also casting a spell while performing.',
     shortDescription: 'Hide spellcasting within bardic performance',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'bardic performance' },
@@ -702,6 +736,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You can expend 10 uses of lay on hands to cast raise dead as a spell-like ability, using your paladin level as your caster level.',
     shortDescription: 'Expend 10 lay on hands to raise dead',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 19 },
@@ -721,6 +756,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You gain a planar infusion based on the plane where you spent the most time in the past year (or where you were born, if another plane). Each plane grants a specific passive benefit.',
     shortDescription: 'Gain a passive benefit based on planar affinity',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_planes', ranks: 5 }],
     effects: [],
@@ -754,6 +790,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'Select one humanoid race. You count as both human and that race for the purpose of taking traits, feats, how spells and magic items affect you, and so on.',
     shortDescription: 'Count as both human and another humanoid race',
     source: 'Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'human' }],
     effects: [],
@@ -790,6 +827,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'Whenever you charge a foe from higher ground, or while flying or jumping, you gain a +5 bonus on attack rolls in place of the normal +2 bonus granted by charging.',
     shortDescription: '+5 instead of +2 on charge attacks from higher ground',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -804,6 +842,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
     description: 'You can drink a potion as a move action instead of a standard action.',
     shortDescription: 'Drink potions as a move action',
     source: "Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'orc' }],
     effects: [],
@@ -819,6 +858,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'When you are adjacent to a foe and make a ranged attack with a bow, you do not provoke an attack of opportunity. You still provoke attacks of opportunity from other adjacent foes as normal.',
     shortDescription: 'No AoO for ranged attacks with bows from one adjacent foe',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -834,6 +874,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       "Select a mythic path other than the path you selected at 1st tier. You gain that path's 1st-tier ability (the ability listed under the path at 1st tier).",
     shortDescription: "Gain another mythic path's 1st-tier ability",
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: '1st mythic tier' }],
     effects: [],
@@ -846,6 +887,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
     description: 'You can use your mythic power two additional times per day.',
     shortDescription: '+2 uses of mythic power per day',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: '1st mythic tier' }],
     effects: [
@@ -869,6 +911,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'While using this style, you do not need to attempt Perception checks to pinpoint the location of creatures within your melee reach. This functions similarly to blindsight with a range equal to your melee reach.',
     shortDescription: 'Effective blindsight within melee reach',
     source: 'Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'blind_fight' },
@@ -884,6 +927,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
     description: 'While using Blinded Blade Style, you gain blindsight with a range of 30 feet.',
     shortDescription: 'Gain blindsight 30 ft while using Blinded Blade Style',
     source: 'Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'blinded_competence' },
@@ -904,6 +948,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'Choose one skill. You gain the skill unlock powers for that skill as appropriate for your number of ranks in that skill.',
     shortDescription: 'Unlock advanced skill uses for one chosen skill',
     source: 'Pathfinder Unchained',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'skill', skillId: 'any', ranks: 5 }],
     effects: [],
@@ -926,6 +971,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You can add your Charisma modifier instead of your Wisdom modifier on Will saving throws against mind-affecting effects.',
     shortDescription: 'Use Cha instead of Wis for Will saves vs mind-affecting',
     source: 'Occult Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'CHA', minimum: 13 }],
     effects: [],
@@ -941,6 +987,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       "When you use the Heal skill to treat deadly wounds, you can restore a number of hit points equal to the result of your Heal check instead of just your target's level.",
     shortDescription: 'Heal check result = HP restored with treat deadly wounds',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'heal', ranks: 12 },
@@ -959,6 +1006,7 @@ export const MISC_FEATS_1: FeatDefinition[] = [
       'You gain a +1 insight bonus on attack rolls and a +1 insight bonus on damage rolls against creatures you have identified using a Knowledge check.',
     shortDescription: "+1 insight to attack and damage vs creatures you've identified",
     source: "Monster Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_arcana', ranks: 1 }],
     effects: [

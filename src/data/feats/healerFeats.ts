@@ -12,6 +12,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain a vigor pool; spend points to heal 1d6 HP per point spent (max 7d6) as a standard action',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'ability_score', ability: 'CON', minimum: 13 }],
     effects: [],
@@ -26,6 +27,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
       "You can modify a spell to include a condition that must be met before the spell's benefits apply to the target. The target of the spell must meet the condition you set before benefiting from the spell's effect. If the condition is never met, the spell's magic dissipates harmlessly at the end of its duration. A conditional spell uses up a spell slot one level higher than the spell's actual level.",
     shortDescription: 'Add a trigger condition to a spell; uses a slot one level higher',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -41,6 +43,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Infuse a target with a dormant healing spell that triggers on a set condition; uses a slot two levels higher',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [
       {
@@ -60,6 +63,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
       "You can activate healing magic through magic items. Once per day, you can activate a magic item that has a conjuration spell as part of its construction requirements to cast cure light wounds at the item's caster level. You gain additional daily uses of this ability at base Fortitude save bonus +4 (2 uses), +6 (3 uses), +8 (4 uses), +10 (5 uses), and +12 (6 uses). By expending multiple uses, you can cast higher-level cure spells: 2 uses for cure moderate wounds, 3 uses for cure serious wounds, 4 uses for cure critical wounds, and 5 uses for breath of life. Each higher-level spell requires the item to have a spell of matching or greater level as a construction requirement (2nd level for moderate wounds, 3rd for serious, 4th for critical, 5th for breath of life).",
     shortDescription: 'Activate magic items to cast cure spells; scales with base Fortitude bonus',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 1 },
@@ -78,6 +82,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain 1 extra vigor point; spend vigor as a swift action on natural 20s or threatened crits',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -97,6 +102,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Creatures that forgo saves against your healing spells take –4 on saves vs. your other targeted spells for 24 hours',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -112,6 +118,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Excess healing becomes temporary HP (up to 1/2 level, for 1 round/level); bonus to temp HP from healing abilities',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -127,6 +134,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Healing spells deal equal nonlethal damage; targets that fail saves also take –2 on saves and skill checks for 10 min/level',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Evil alignment' }],
     effects: [],
@@ -142,6 +150,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain 1 extra vigor point; spend vigor to recover 1d3 ability damage per point (STR, DEX, or CON)',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 15 },
@@ -161,6 +170,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain 1 extra vigor point; when foes provoke AoOs, spend vigor as a swift action to self-heal instead of attacking',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -180,6 +190,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain 1 temp HP/HD when using resolve; can be taken multiple times for additional temp HP',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'class_feature', featureName: 'resolve' },
@@ -198,6 +209,7 @@ export const HEALER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain 1 extra vigor point; vigor fatigue lasts 3 rounds (not 1 min); +2 saves vs. fatigue/exhaustion',
     source: "Healer's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },

@@ -12,6 +12,7 @@ export const magusDefinitions: ClassChoiceDefinition[] = [
     collectionName: 'magusarcana',
     source: 'pf1e-um',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
     visibility: 'global',
     rev: 1,
   },

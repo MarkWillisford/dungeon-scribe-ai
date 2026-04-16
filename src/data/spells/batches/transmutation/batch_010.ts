@@ -1,8 +1,8 @@
 // Transmutation spells — batch 010
 // Batch metadata: {"school":"transmutation","batchNum":"010","startSpell":"Winter's Grasp","lastSpell":"Zone of Foul Flames","nextSpell":"DONE","nextUrl":null,"spellsInBatch":8}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_010: Spell[] = [
+export const TRANSMUTATION_BATCH_010: SpellDefinition[] = [
   {
     name: 'Wizened Appearance',
     classLevels: {
@@ -34,6 +34,7 @@ export const TRANSMUTATION_BATCH_010: Spell[] = [
     description:
       "This transmutation alters a target's appearance to resemble an older version of itself. The caster specifies the desired age increase. The spell only modifies age-related physical characteristics like graying hair or age spots — no other appearance changes occur. Young creatures of Medium or smaller size may grow one size category to reach normal adult proportions, though this does not affect ability scores. The spell produces no mechanical age-related effects, such as dragon age category modifications or natural metamorphoses. Wizened Appearance and Youthful Appearance directly counter and dispel each other.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wood Shape',
@@ -58,6 +59,7 @@ export const TRANSMUTATION_BATCH_010: Spell[] = [
     description:
       'This spell allows the caster to form one existing piece of wood into any shape that suits your purpose. While basic structures like coffers and doors are feasible, intricate details cannot be achieved. Notably, there is a 30% chance that any configuration featuring moving parts will fail to function properly.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wooden Wing Shield',
@@ -85,6 +87,7 @@ export const TRANSMUTATION_BATCH_010: Spell[] = [
     description:
       "This transmutation spell converts your wings into a wooden defensive structure. Your wings transmute into a wooden barrier resembling a tower shield to block attacks, granting you a +4 shield bonus to AC. The magical effect terminates immediately if the caster moves during the spell's duration, which lasts for one round per caster level or ends prematurely upon movement.",
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'World Wave',
@@ -112,6 +115,7 @@ export const TRANSMUTATION_BATCH_010: Spell[] = [
     description:
       "The caster creates a surge of natural terrain that propels them across distances. A tsunami version creates a 30-foot-high tidal wave lasting 1 round/level, while a swell version creates a more controlled and gentle 5-foot-high wave lasting 1 hour/level. The wave moves at eight times the caster's base land speed and can accommodate one additional creature per level. Creatures with druid levels or strong natural connections take no damage, but aberrations, constructs, outsiders, and undead take 6d6 (tsunami) or 1d6 (swell) bludgeoning damage.",
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wrathful Weapon',
@@ -135,6 +139,7 @@ export const TRANSMUTATION_BATCH_010: Spell[] = [
     description:
       "This transmutation grants a touched melee weapon one of four alignment-based special abilities: anarchic, axiomatic, holy, or unholy. The spell's descriptor changes based on which ability is selected (chaos, law, good, or evil, respectively). The spell fails if the weapon already possesses the chosen ability. When a warpriest casts this spell on their sacred weapon, the duration doubles. Warpriests with unarmed strike designated as a sacred weapon may cast this spell on their unarmed strike instead of a traditional weapon.",
     source: 'Pathfinder Player Companion: Advanced Class Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Youthful Appearance',
@@ -164,6 +169,7 @@ export const TRANSMUTATION_BATCH_010: Spell[] = [
     description:
       "The caster makes a target appear younger by a specified amount. The spell alters only age-related physical features like hair color. It cannot change the target's overall appearance beyond aging effects, nor can it reduce size. This spell does not affect any age-based modifications to ability scores or other age-related effects.",
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Zephyr's Fleetness",
@@ -188,6 +194,7 @@ export const TRANSMUTATION_BATCH_010: Spell[] = [
     description:
       'This transmutation spell calls upon air spirits to enhance ally mobility. Each targeted creature receives a +30 foot enhancement bonus to its land speed and fly speed (if any). Additionally, targets can also move (and charge) through difficult terrain without penalty, allowing unimpeded movement across challenging ground.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Zone of Foul Flames',
@@ -214,5 +221,6 @@ export const TRANSMUTATION_BATCH_010: Spell[] = [
     description:
       "This transmutation effect creates a zone where fire-based magical abilities backfire against their users. The affected area appears unremarkable to casual observation but reveals a faint rippling effect in the air, as if of heat distortions, upon a successful Perception check (DC 20 + caster level). When creatures cast fire-descriptor spells or activate magical fire effects while in the zone, they take full damage from their own effects. Saving throws against this backlash damage use the spell's original save mechanics. All creatures within gain a +4 circumstance bonus on fire-effect saves, except when resisting their own magical fire. Nonmagical flames burn at reduced intensity but remain otherwise unaffected.",
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
 ];

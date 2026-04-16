@@ -11,6 +11,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use Strength for performance combat checks; bonus when bull rushing or sundering.',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 15 },
@@ -37,6 +38,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Expend ammunition to gain +4 on Intimidate or Perform checks for 1 round during performance combat.',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [
       { type: 'special', description: 'Amateur Gunslinger or grit class feature' },
@@ -62,6 +64,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Better Craft checks for firearm siege engine repair; reduced misfire penalties when leading a broken engine.',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'siege_engineer' },
@@ -88,6 +91,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
     shortDescription:
       "Expend 1 grit when readying a firearm shot to raise an injured spellcaster's concentration DC by 5.",
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'grit'],
     prerequisites: [
       { type: 'special', description: 'Amateur Gunslinger or grit class feature' },
@@ -117,6 +121,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
       'Once per day as an immediate action, you can reroll an attack roll with a firearm that would have resulted in a misfire. You must accept the second result, even if it also misfires.',
     shortDescription: 'Once per day, reroll a firearm misfire attack roll.',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'bab', minimum: 3 },
@@ -142,6 +147,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Add weapon training bonus to performance combat checks with qualifying weapons.',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [{ type: 'class_feature', featureName: 'weapon training' }],
     effects: [
@@ -164,6 +170,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Acquire an exotic monstrous creature as an animal companion or special mount.',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'handle_animal', ranks: 4 },
@@ -193,6 +200,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
       'Your monstrous mount gains the abilities and bonuses listed under Mastery in its stat block. You must meet the minimum character level specified for the mount to access these Mastery benefits. Without this feat, a monstrous mount is unable to use its Mastery abilities regardless of its advancement.',
     shortDescription: "Unlock your monstrous mount's Mastery abilities from its stat block.",
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'monstrous_mount' },
@@ -222,6 +230,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Add favored enemy bonus to performance combat checks against a favored enemy.',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [
       { type: 'bab', minimum: 5 },
@@ -248,6 +257,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
     shortDescription:
       "Expend a grit point to replace an ally's missed ranged attack roll with your own firearm attack roll.",
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'grit'],
     prerequisites: [
       { type: 'special', description: 'Amateur Gunslinger or grit class feature' },
@@ -275,6 +285,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Expend rage rounds while raging to gain a bonus on performance combat checks.',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [
       { type: 'feat', featId: 'intimidating_prowess' },
@@ -300,6 +311,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
     shortDescription:
       'Attempt an Acrobatics check vs. CMD when withdrawing to negate the performance combat penalty.',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -326,6 +338,7 @@ export const INNER_SEA_COMBAT_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 on performance combat checks while raging when retaliating against a foe that hit you last round.',
     source: 'Pathfinder Player Companion: Inner Sea Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [
       { type: 'bab', minimum: 3 },

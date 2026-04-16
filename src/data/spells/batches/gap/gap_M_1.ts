@@ -1,8 +1,8 @@
 // Gap spells — letter M part 1 (first half alphabetically)
 // Gap metadata: {"letters":"M_1","totalChecked":157,"newSpells":76,"skipped":81}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_M_1: Spell[] = [
+export const GAP_SPELLS_M_1: SpellDefinition[] = [
   {
     name: 'Mad Monkeys',
     classLevels: { bard: 3, druid: 3, sorcerer: 3, wizard: 3, summoner: 3 },
@@ -18,6 +18,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a swarm of mischievous monkeys that follows your commands. The swarm uses monkey swarm statistics and performs distraction attacks that can cause deafness and nausea for 1 minute on a failed save. The swarm can perform one disarm or steal combat maneuver per turn as a free action, using your caster level plus your relevant ability modifier (Intelligence for wizards, Wisdom for druids/oracles, Charisma for bards/sorcerers/summoners) as its CMB. Stolen items take swarm damage each round.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mad Sultan's Melody",
@@ -34,6 +35,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You produce musical tones that fascinate oozes, amorphous creatures, and non-bipedal beings associated with Outer Gods. The spell works on mindless creatures despite their typical immunity to mind-affecting effects. It persists without requiring maintenance each round and ends if fascination breaks on any target. The caster takes 1d4 Wisdom damage per casting (or 2d6 sanity damage if sanity rules apply). Bards with fascinate performance may use an alternative save DC. Targets become immune to future castings for 24 hours.',
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Maddening Oubliette',
@@ -49,6 +51,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The targeted creature is transported to a nightmarish extradimensional prison. Each round, the target may attempt a Will save to escape, with penalties increasing for each round spent confined (-1 cumulative penalty up to -5). Upon escape, the creature returns to its original location or nearest available space and suffers confusion for a number of rounds equal to the imprisonment duration, or permanent insanity if confined for 10 or more rounds.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mage Armor',
@@ -65,6 +68,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'An invisible but tangible field of force surrounds the subject of a mage armor spell, providing a +4 armor bonus to AC. Unlike mundane armor, mage armor entails no armor check penalty, arcane spell failure chance, or speed reduction. Since mage armor is made of force, incorporeal creatures cannot bypass it.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mage Hand',
@@ -79,6 +83,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You point your finger at an object and can lift it and move it at will from a distance. As a move action, you can propel the object as far as 15 feet in any direction, though the spell ends if the distance between you and the object exceeds the spell\'s range.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Crawl Space",
@@ -94,6 +99,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You merge with an adjacent stone surface, creating a 5-foot interior pocket. The spell requires sufficient stone volume. The pocket contains breathable air for one Medium creature plus one Tiny or smaller creature such as a familiar for the spell\'s duration. Upon expiration, you are expelled to the nearest adjacent open space.',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Decree",
@@ -108,6 +114,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You transmit a message of up to 25 words to all targeted creatures within range. You can filter recipients by observable criteria. The range can be set to any smaller radius you choose.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Disjunction",
@@ -123,6 +130,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: "All magical effects and magic items within the radius are disjoined. Spells and spell-like effects are unraveled and destroyed as with dispel magic. Permanent magic items must succeed at a Will save or become nonmagical for the spell's duration. An item in a creature's possession uses the higher of the item's own Will save bonus and the creature's Will save bonus. Natural 1s on such saves result in the item being destroyed instead. You also have a 1% chance per caster level of destroying an antimagic field. If targeting a single item, you impose a -5 penalty on the save. Artifacts can be targeted but only have a 1% per caster level chance of being affected. Destroying an artifact requires a DC 25 Will save or you permanently lose all spellcasting abilities.",
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Faithful Hound",
@@ -139,6 +147,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure an invisible phantom watchdog that guards a fixed location. The creature barks when any Small or larger creature approaches within 30 feet. If an intruder comes within 5 feet, the dog attacks with a +10 bonus, dealing 2d6+3 piercing damage per round. The watchdog can perceive invisible and ethereal creatures but ignores figments. It cannot be attacked but can be dispelled. The spell terminates if you move more than 100 feet away.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Lucubration",
@@ -153,6 +162,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You instantly prepare any one spell of 5th level or lower that you have used during the past 24 hours. The spell must have been actively cast, not merely prepared. The recovered spell becomes available in your mind as if normally prepared. If the recalled spell requires material components, you must supply them.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Magnificent Enclosure",
@@ -169,6 +179,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'see text',
     description: 'You create an invisible force barrier functioning as both an antimagic field and a spherical wall of force. The barrier suppresses magical effects within its radius, blocks spellcasting into, out of, and within the enclosure, and prevents teleportation effects. It has hardness 40 and 20 hit points per caster level. Summoned creatures and incorporeal undead are displaced unless they succeed at spell resistance checks.',
     source: 'Pathfinder Campaign Setting: Rival Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Magnificent Mansion",
@@ -185,6 +196,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You conjure a magnificent, spacious mansion that exists in an extradimensional space. The entrance portal is 4 feet wide and 8 feet tall. You designate who may enter. The interior contains multiple chambers furnished comfortably, sufficient food to serve a nine-course banquet for as many creatures as can fit in the mansion, and a number of unseen servant constructs equal to twice your caster level. The spell cannot be dispelled from outside.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Perusal",
@@ -199,6 +211,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You gain understanding of the touched book\'s contents equivalent to skimming its pages for 1 hour. This allows recognition of the topics discussed without enabling translation, code-breaking, or text memorization. You instantly receive any bonuses or effects the book would normally grant from one hour of reading.',
     source: 'Pathfinder Player Companion: Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Private Sanctum",
@@ -214,6 +227,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell ensures privacy for you and your companions. Anyone outside the area cannot see or hear into the area. Those inside can see and hear out normally. Divination spells cannot perceive anything within the area, and those inside are protected from detect thoughts. The spell can be made permanent with permanency.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Sword",
@@ -230,6 +244,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a shimmering force-based blade that attacks a designated opponent once each round on your turn. The sword\'s attack bonus equals your caster level plus your Intelligence (for wizards) or Charisma (for sorcerers) modifier, plus a +3 enhancement bonus. It deals 4d6+3 force damage with a 19-20 threat range and x2 critical multiplier. The sword can strike ethereal and incorporeal creatures. It has AC 13 and can be dispelled.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Circle Against Technology',
@@ -245,6 +260,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     target: 'see text',
     description: 'All creatures within the area gain protection from technology effects. Creatures already controlled by technology receive one save attempt to suppress such control; success maintains suppression while within the area. Robots can attempt saves and use spell resistance to avoid containment. This spell is not cumulative with protection from technology.',
     source: 'Pathfinder Campaign Setting: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Jar',
@@ -260,6 +276,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'By casting magic jar, you transfer your soul to the focus gem or crystal, leaving your body lifeless. You can then attempt to possess nearby bodies. You retain your own mental attributes while gaining access to the host body\'s physical capabilities. You can return to the gem at any time. If your body is destroyed while you are away, you may remain in the gem indefinitely or attempt another possession.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Mouth',
@@ -275,6 +292,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'This spell imbues the chosen object or creature with an enchanted mouth that suddenly appears and speaks its message the next time a specified event occurs. The message must be 25 or fewer words long. The mouth speaks in any language you know. The mouth cannot utter verbal components, command words, or activate magical effects. Triggers can be visual or audible and operate within 15 feet per caster level.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magnetic Field',
@@ -290,6 +308,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'You generate a powerful magnetic field that pulls unattended metal objects toward you and affects creatures wearing metal armor or wielding metal weapons. Creatures must succeed at Reflex saves or be dragged 5 feet closer to you. Creatures made primarily of metal suffer a -2 penalty on saves. Creatures failing by 5 or more are pulled an additional 5 feet per 5 points of failure.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Majestic Image',
@@ -305,6 +324,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You project your consciousness into an object within range that resembles you, functioning like enter image. Beyond observation and manipulation, you can interact socially with nearby creatures and leverage your normal interpersonal abilities. You gain a +5 bonus on Bluff checks and Diplomacy checks to make requests, and a +2 bonus on Intimidate checks, with size-based modifiers applied accordingly.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Make Lost',
@@ -321,6 +341,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell strips targets of their senses of direction and recent memories of travel. They immediately forget the route they took in the last hour (but not details of encounters along the way) and become lost.',
     source: 'Pathfinder Campaign Setting: Inner Sea Monster Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Malediction',
@@ -336,6 +357,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: "You corrupt a target's soul with fiendish blasphemy. If the target dies within one minute of being cursed, normal resurrection is impossible. Only worshippers of deities matching your alignment can easily restore the target to life. Other casters must succeed at a caster level check (DC = 10 + your caster level). Miracle or wish spells bypass this restriction. The curse can be removed by break enchantment, dispel magic, or remove curse before death. You can end your own malediction by recasting it on the same target.",
     source: 'Pathfinder Roleplaying Game Book of the Damned',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mantle of Doubt',
@@ -352,6 +374,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You wrap your mind in phantasms of crippling doubt that assail any who dare harm you. Creatures attacking you or attempting harmful effects must succeed at a Will save. Psychic spells and spell-like abilities impose a -4 penalty to the save. Failed saves cause creatures to become shaken, unable to flank, and unable to threaten nearby creatures for 1d4+1 rounds, with an additional -2 penalty on saves against mind-affecting effects. If the affected creature was already shaken, it becomes staggered for 1 round and takes 1d4 Wisdom and Charisma damage instead.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mantle of the Magic Warriors',
@@ -367,6 +390,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You create golden animal-shaped masks around the faces of the targets, granting each recipient one animal special ability from beast shape I. You may select different abilities for each target.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Marid's Mastery",
@@ -382,6 +406,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'The target gains a +1 bonus on attack and damage rolls when both the target and its opponent are in contact with water. However, if either combatant touches the ground, the target takes a -4 penalty on attack and damage rolls.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Marionette Possession',
@@ -397,6 +422,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: "Your consciousness inhabits a willing target's body while the target's soul remains helpless but aware. You retain your mental ability scores (Intelligence, Wisdom, Charisma) and abilities while using the host's physical attributes. The spell is blocked by protection from evil. If the host body dies, both you and the host perish if the host is beyond spell range.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mark of Blood',
@@ -412,6 +438,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You apply blood to a weapon, transferring your life essence to the next creature struck. After a successful weapon strike, the creature receives a Will save to negate the mark. If the mark takes effect, you can use a move action to sense the marked target\'s direction and distance. The effect persists until dispelled or removed via remove curse. If no weapon strike occurs within 1 minute, the magic fails.',
     source: "Pathfinder Roleplaying Game Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mark of Justice',
@@ -427,6 +454,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You mark a willing or restrained subject and designate a specific behavior that triggers the mark\'s curse. Once triggered, the mark curses the subject with effects identical to bestow curse. The mark cannot be dispelled and is removable only via break enchantment, limited wish, miracle, remove curse (at equal or higher caster level), or wish.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mark of Spite',
@@ -441,6 +469,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You make a ranged touch attack to place a mark on a victim. During the spell\'s duration, you may injure yourself as a standard action, dealing 1d8 plus your Strength modifier in damage. The marked target automatically takes twice this amount, bypassing any damage reduction, immunities, or resistances.',
     source: 'Pathfinder Player Companion: Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mark of the Reptile God',
@@ -456,6 +485,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You make a ranged touch attack that burns a handprint onto the target\'s flesh, dealing 1d6 acid damage. The mark glows green like a torch when within 60 feet of you, imposing a -2 penalty to the target\'s AC and a -2 penalty on saving throws against your spells. Daily, the target must succeed at a Fortitude save or take 1d4 Charisma damage (1 point permanent drain). Reaching 0 Charisma permanently transforms the victim into a small cave lizard. The mark cannot be dispelled; removal requires break enchantment, limited wish, miracle, remove curse, or wish.',
     source: 'Pathfinder Roleplaying Game Monster Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Marks of Forbiddance',
@@ -471,6 +501,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell brands two chosen creatures, restricting their ability to attack each other. Both targets must make Will saves to attempt attacks against one another, including targeted spells. Failed saves prevent the attack and waste the action. Area-of-effect abilities bypass this restriction.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Martial Marionette',
@@ -487,6 +518,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: "You partially control an opponent's limbs, imposing a -2 penalty on attacks directed at you due to uncontrolled motions. The affected creature cannot flank you or assist others in flanking you. When the target remains adjacent, you may use an immediate action to make the creature's limbs provide partial cover, granting you +2 to AC and +1 to Reflex saves against that specific attack.",
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Martial Telekinesis',
@@ -501,6 +533,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You mingle the power of your mind and body to exert force beyond your reach. You can perform combat maneuvers via telekinesis or deliver a telekinetic unarmed strike using your own damage values, substituting your primary spellcasting ability modifier for Strength when calculating damage.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Martyr's Bargain",
@@ -516,6 +549,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You cast this spell after attack rolls and saving throws are resolved but before damage is determined, delaying the damage from a spell or spell-like ability. The damage is postponed for a number of rounds equal to your caster level, then takes effect as maximized damage. Already-maximized spells gain no additional benefit. Only one martyr\'s bargain can affect you at a time; casting a new one while under an existing effect immediately triggers the delayed damage from the previous spell.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mask From Divination',
@@ -530,6 +564,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes (harmless, object)',
     description: 'This spell grants the target protection similar to nondetection while also blocking divination attempts to gather information about the wearer. The mask adheres during the spell\'s duration and increases DCs for skill checks to learn about or identify the target by 4. Divination spells that reveal presence require caster level checks to succeed, and scrying targeting the wearer fails unless the scrying caster succeeds at a caster level check.',
     source: "Pathfinder Roleplaying Game Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Masochistic Shadow',
@@ -545,6 +580,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: "You animate the target's shadow using energies from the Shadow Plane, instilling a maddening hunger for its owner's life energy. On a failed Will save, the target sustains 1d4 Strength damage as a quasi-real shadow manifests and attacks. Each subsequent round, the target must succeed at a Reflex save or take 1d4 additional Strength damage; success reduces damage to 1 point. If Strength reaches 0, the target perishes. Bright light grants +2 on Reflex saves; darkness imposes -2.",
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Massacre',
@@ -561,6 +597,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'A wave of death magic emanates from you in a line formation. It instantly eliminates living creatures with 17 or fewer Hit Dice, affecting up to 1d4 HD of creatures per caster level. Creatures with 18 or more HD cannot be affected. If the spell fails to kill any targets, unreleased energy detonates at the line\'s terminus, dealing 10d6 points of damage plus 1 point per caster level to occupants of that square.',
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Master's Escape",
@@ -576,6 +613,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell establishes an extradimensional connection enabling position swaps between you and a summoned creature. As a swift action, you can exchange places with the creature. Should the creature reach 0 or fewer hit points before activation, you may teleport to a visible space within 30 feet as an immediate action. Either effect concludes the spell. Summoners can designate their eidolon as the target.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Master's Mutation",
@@ -591,6 +629,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You enhance a summoned creature by granting it up to two abilities from the following list: burrow, climb, constrict, darkvision, ferocity, flight, grab, jet, low-light vision, poison, rake, scent, swim, trample, trip, or water breathing. Alternatively, you can replace primary natural attacks with different attacks dealing equivalent damage. Summoners may target their eidolon.',
     source: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mathematical Curse',
@@ -606,6 +645,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell utilizes the Path of Numbers. To cast, roll 3d8. Select one die result as the penalty value, one of the two remaining dice results to determine the affected d20 roll type, and the final die result as the duration in rounds. Only one mathematical curse can affect a creature at once; casting a new one replaces any existing curse on that target.',
     source: 'Pathfinder Campaign Setting: Occult Mysteries',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Maze',
@@ -621,6 +661,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You banish the subject to an extradimensional labyrinth. Each round on its turn, the subject may attempt a DC 20 Intelligence check as a full-round action to escape. When it escapes or after 10 minutes have passed, the subject returns to the space it occupied when it disappeared. Minotaurs are immune to this spell.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Maze of Madness and Suffering',
@@ -637,6 +678,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: "This spell functions like maze but with heightened danger. The escape DC is 22. Each round, creatures encounter different maze sections with specific effects based on a d100 roll: Circus (1-20, Will save or lesser madness), Haunted Forest (21-40, frightened and slashing damage), Hellscape (41-60, paralyzed and fire damage), Oasis of Respite (61-80, fascination and lethargy), Strange City (81-100, Wisdom damage or sanity damage).",
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Medusa's Bane",
@@ -651,6 +693,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: "Your eyes transform into reflective, mirror-like orbs. You gain complete protection from gaze attacks. As an immediate action, you may reflect an incoming gaze attack back at its source. The creature must save against its own gaze weapon or suffer its effects, even bypassing the creature's racial immunity to its own gaze attack, though other resistances remain intact. Once you use the reflection ability, the spell immediately ends.",
     source: 'Pathfinder Player Companion: Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Memorize Page',
@@ -666,6 +709,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You grant the recipient a perfect memory of the page you used as a focus component. The target can visualize the page with fine detail, including text and images. The number of pages that can be memorized equals the target\'s Intelligence modifier (minimum 1). A wizard can use this spell to copy magical writing into their spellbook, though the memorizer gains no magical properties from the writing itself.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Memory of Function',
@@ -680,6 +724,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You restore a broken object or damaged construct to a functional state, as if it were new and intact. The spell also restores full charges to items, recharges timeworn items (preventing glitching for 1 hour), heals construct hit point damage, and can restore destroyed constructs if major pieces are not missing. The spell fails if the target has been destroyed for more than 10 years per caster level.',
     source: 'Pathfinder Campaign Setting: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mental Barrier I',
@@ -694,6 +739,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You create a mental energy barrier granting a +4 shield bonus to AC and reducing damage from mind thrust I and II by half (quarter damage on a successful Will save).',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mental Barrier II',
@@ -708,6 +754,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You create a mental energy barrier granting a +6 shield bonus to AC and protecting against mind thrust I, II, and III (half damage, quarter on successful Will save). Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mental Barrier III',
@@ -722,6 +769,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You create a mental energy barrier providing a +8 shield bonus to AC. You are immune to mind thrust I and take half damage from mind thrust II-IV (quarter on successful Will save). Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mental Barrier IV',
@@ -736,6 +784,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'As mental barrier III with a 25% chance to negate critical hit and sneak attack additional damage (light fortification). You are immune to mind thrust I-II and take half damage from mind thrust III-V (quarter on successful Will save). Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mental Barrier V',
@@ -750,6 +799,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'As mental barrier III with a 50% chance to negate critical hit and sneak attack additional damage (moderate fortification). You are immune to mind thrust I-III and take half damage from mind thrust IV-VI (quarter on successful Will save). Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mental Block',
@@ -765,6 +815,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: "The spell prevents the target from accessing procedural memories and expertise. Affected creatures lose all skill ranks, known and prepared spells, activated feats, and their extraordinary, supernatural, and spell-like abilities that require activation. Passive abilities remain functional. The target may attempt a new Will save at the end of each turn to end the effect.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Message',
@@ -780,6 +831,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You can whisper messages and receive whispered replies from designated creatures within range. Those nearby can hear these messages with a DC 25 Perception check. The spell transmits sound rather than meaning and does not overcome language barriers. Physical barriers like stone, metal, wood, or dirt block transmission.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Meteor Swarm',
@@ -796,6 +848,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You call down four 2-foot-diameter spheres of fire. Direct hits deal 2d6 bludgeoning damage and impose a -4 penalty on fire damage saves. Each sphere explodes in a 40-foot radius dealing 6d6 fire damage. Creatures in the area of multiple explosions must make separate saves but fire resistance applies only once to the total.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Miasmal Dread',
@@ -813,6 +866,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You release a cloud of sickly green mist from your mouth that coalesces around creatures in the cone. You make a single Intimidate check to demoralize opponents, comparing the result against each foe\'s DC. All creatures whose DC is met or exceeded become demoralized.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Miasmatic Form',
@@ -828,6 +882,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell functions like gaseous form but your gaseous body poses a threat to nearby creatures. Two variants exist: a stinking cloud variant that nauseates creatures that fail Fortitude saves, and a poisonous cloud variant that deals 1d2 Constitution damage to creatures that fail saves (Fortitude halves). The poisonous variant requires the material component.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Microcosm',
@@ -844,6 +899,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: "You trap targets' minds in an immersive mental realm. Creatures with 10 HD or fewer get no save. Those with 11-15 HD escape after 10 minutes per caster level on a successful save. Those with 16+ HD negate the effect on a successful save. Affected creatures' bodies require food and water or face starvation. The microcosm cannot be escaped or entered via mindscape doors. Multiple affected creatures can interact within the shared mindscape. Only miracle or wish can terminate the effect.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mighty Fist of the Earth',
@@ -860,6 +916,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You manifest a rock-sized projectile that launches toward an enemy. You make an unarmed strike attack roll against the target. On a hit, the rock inflicts bludgeoning damage matching your unarmed strike damage. If you maintain a ki pool with at least 1 point, the rock counts as a ki strike.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Maze',
@@ -876,6 +933,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell forces the target to behave as if lost in a maze. The target cannot attack or cast spells and must take at least one move action each round to walk in a random direction at maximum speed. If movement leads into danger, the target gets a second save to prevent entering the hazard.',
     source: 'Pathfinder Campaign Setting: Inner Sea Monster Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Over Matter',
@@ -890,6 +948,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell transfers ability damage or drain between corresponding physical and mental ability scores. Correspondences are: Strength-Intelligence, Dexterity-Wisdom, Constitution-Charisma. The transfer can move any number of points in a single casting, though only between one paired set. The spell prevents reducing any ability score to zero.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Swap',
@@ -906,6 +965,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: "This enchantment functions like possession, but you switch minds with the target: the target's mind moves to your body and can control it while your mind controls the target's body. Both parties are effectively possessing each other.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Thrust I',
@@ -921,6 +981,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You divine the most vulnerable portions of your opponent\'s mind and overload it with a glut of psychic information, dealing 1d6 damage per caster level (maximum 5d6). This spell has no effect on creatures without Intelligence scores.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Thrust II',
@@ -936,6 +997,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as mind thrust I, dealing 1d8 damage per caster level (maximum 5d8). Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Thrust III',
@@ -951,6 +1013,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as mind thrust I, dealing 1d8 damage per caster level (maximum 10d8). Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Thrust IV',
@@ -966,6 +1029,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as mind thrust I, dealing 1d8 damage per caster level (maximum 15d8). On a failed save, the target is fatigued for 1 round. Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Thrust V',
@@ -981,6 +1045,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as mind thrust IV, dealing 1d8 damage per caster level (maximum 15d8). On a failed save, the target is exhausted for 1 round. On a successful save, the target is fatigued for 1 round. Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Thrust VI',
@@ -996,6 +1061,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as mind thrust IV, dealing 1d8 damage per caster level (maximum 20d8). On a failed save, the target is exhausted and stunned for 1 round. Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mindlocked Messenger',
@@ -1012,6 +1078,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You implant a message (up to 10 words per caster level) and recipient identity into a willing creature\'s mind. Attempting to communicate the message to anyone other than the intended recipient causes 1d6 minutes of amnesia. Mind-reading attempts or coercion likewise trigger temporary memory loss. Once delivered, the message is permanently erased from the target\'s memory.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mindscape Door',
@@ -1029,6 +1096,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell creates an imaginary doorway allowing entry into or escape from a mindscape. When cast outside a mindscape, you designate which creatures may perceive and use the door, connecting to a specific mindscape through a willing conduit creature (who may attempt a Will save to deny access). When cast inside a mindscape, a duplicate door appears in the real world. The spell can be cast as a full-round action during psychic duels. It cannot enter binary mindscapes but may exit them.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mindshock',
@@ -1044,6 +1112,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'none',
     description: 'You become infused with violent psychic energy. Your weapons, natural weapons, and unarmed strikes inflict an additional 1d4 points of nonlethal damage. Upon confirming a critical hit, the target becomes confused for 1 round due to pain. Creatures immune to critical hits, mind-affecting effects, or pain effects are unaffected.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Miracle',
@@ -1058,6 +1127,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: 'You channel divine energy to produce a miraculous effect. Miracle can duplicate any cleric spell of 8th level or lower, any other spell of 7th level or lower, undo harmful effects like feeblemind or insanity, or produce effects of comparable power. Powerful requests may require 25,000 gp in powdered diamond. Requests misaligned with your deity\'s nature are refused.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mirror Hideaway',
@@ -1072,6 +1142,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'no',
     description: 'You transform a mirror into a portal to an extradimensional space that can accommodate up to eight Medium creatures. Those inside are concealed from divinations and spells except those that function across planes. The portal becomes inactive if covered. Breaking or moving the mirror more than 5 feet ends the spell, expelling occupants and causing nausea for 1d6 rounds. Occupants can see and hear outward, but outsiders see only normal reflections.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mirror Mantis',
@@ -1088,6 +1159,7 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'yes',
     description: "The spell causes the target to see a crimson assassin wearing a mantis mask in place of their own reflection. Only the target perceives this illusion. Upon first viewing, the target must succeed at a Will save or become shaken (with -2 on fear-related saves) while viewing the reflection and for 3 rounds afterward. After a successful save, the creature gains immunity to being shaken by this caster's spell for 24 hours.",
     source: "Pathfinder Roleplaying Game Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mirror Strike',
@@ -1102,5 +1174,6 @@ export const GAP_SPELLS_M_1: Spell[] = [
     spellResistance: 'none',
     description: 'Your next melee attack splits to target two adjacent opponents. You compare your attack roll against both opponents\' AC values. Damage is split equally if both are hit or full damage if only one is hit. A +2 bonus applies if the targets are flanking you.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
 ];

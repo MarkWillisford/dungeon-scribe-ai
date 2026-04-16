@@ -14,6 +14,7 @@ export const sicva: DeityEntry = {
   symbol: `Virus`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -31,6 +32,7 @@ export const scal: DeityEntry = {
   symbol: `Burning meteor impacting the ground`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -48,6 +50,7 @@ export const ulon: DeityEntry = {
   symbol: `Black pentagon within a purple circle`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -67,6 +70,7 @@ export const aesdurath: DeityEntry = {
   sacredColors: ['crystal', 'white'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -86,6 +90,7 @@ export const ajids: DeityEntry = {
   sacredColors: ['brown', 'red'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -105,6 +110,7 @@ export const anogetz: DeityEntry = {
   sacredColors: ['gold', 'red'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -123,6 +129,7 @@ export const arlachramas: DeityEntry = {
   sacredColors: ['blue', 'pink'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -142,6 +149,7 @@ export const braismois: DeityEntry = {
   sacredColors: ['black', 'green'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -161,6 +169,7 @@ export const cixyron: DeityEntry = {
   sacredColors: ['red', 'yellow'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -180,6 +189,7 @@ export const corosbel: DeityEntry = {
   sacredColors: ['red', 'white'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

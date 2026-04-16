@@ -41,6 +41,7 @@ export const ram: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b2',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -76,6 +77,7 @@ export const rhinoceros: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -110,6 +112,7 @@ export const roc: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -145,6 +148,7 @@ export const saberToothedCat: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -175,6 +179,7 @@ export const caveSalamander: AnimalCompanionEntry = {
   ],
   source: 'pf1e-mc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -210,6 +215,7 @@ export const giantScorpion: AnimalCompanionEntry = {
   ],
   source: 'pf1e-um',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -232,6 +238,7 @@ export const seaHorse: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-b4',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -269,6 +276,7 @@ export const seal: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -305,6 +313,7 @@ export const shark: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -339,6 +348,7 @@ export const sheep: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -378,6 +388,7 @@ export const giantSkunk: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -413,6 +424,7 @@ export const snakeConstrictor: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -445,6 +457,7 @@ export const squid: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -468,6 +481,7 @@ export const squirrel: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -491,6 +505,7 @@ export const stagBeetle: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -525,6 +540,7 @@ export const stegosaurus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -561,6 +577,7 @@ export const styracosaurus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b4',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -591,6 +608,7 @@ export const trumpeterSwan: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b4',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -622,6 +640,7 @@ export const giantToad: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b2',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -657,6 +676,7 @@ export const thylacine: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -691,6 +711,7 @@ export const tortoise: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b4',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

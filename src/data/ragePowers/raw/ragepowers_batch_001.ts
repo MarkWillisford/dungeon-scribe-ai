@@ -15,6 +15,7 @@ export const ancestorTotemGreater: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-wo',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -26,6 +27,7 @@ export const ancestorTotemLesser: ClassOptionBase = {
     'Gain a +2 Insight Bonus to a skill (that you can use while raging) while raging.',
   source: 'pf1e-ppc-wo',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -41,6 +43,7 @@ export const ancestorTotem: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-wo',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -51,6 +54,7 @@ export const animalFury: ClassOptionBase = {
   description: 'Gain a bite attack while raging.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -62,6 +66,7 @@ export const armorRipper: ClassOptionBase = {
     'Gain a bonus to Sunder checks with your natural attacks while raging.',
   source: 'pf1e-ppc-botm',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -76,6 +81,7 @@ export const atavismTotemGreater: ClassOptionBase = {
   ],
   source: 'pf1e-prg-vc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -87,6 +93,7 @@ export const atavismTotemLesser: ClassOptionBase = {
     'You gain a bite attack; or if you already have a bite attack, it deals damage as if you were one size larger.',
   source: 'pf1e-prg-vc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -101,6 +108,7 @@ export const atavismTotem: ClassOptionBase = {
   ],
   source: 'pf1e-prg-vc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -111,6 +119,7 @@ export const auspiciousMark: ClassOptionBase = {
   description: 'Gain a bonus on a roll once per rage.',
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -126,6 +135,7 @@ export const battleRoar: ClassOptionBase = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -140,6 +150,7 @@ export const beastTotemGreater: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -150,6 +161,7 @@ export const beastTotemLesser: ClassOptionBase = {
   description: 'Gain two claw attacks while raging.',
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -164,6 +176,7 @@ export const beastTotem: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -178,6 +191,7 @@ export const bestialClimber: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -192,6 +206,7 @@ export const bestialLeaper: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -206,6 +221,7 @@ export const bestialSwimmer: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -220,6 +236,7 @@ export const bleedingBlow: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -238,6 +255,7 @@ export const bloodyBite: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-aoe',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -250,6 +268,7 @@ export const bloodyFist: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 12 }],
   source: 'pf1e-pzo9437',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -262,6 +281,7 @@ export const boarsCharge: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 12 }],
   source: 'pf1e-ppc-botm',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -273,6 +293,7 @@ export const boastingTaunt: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 6 }],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -284,6 +305,7 @@ export const bodyBludgeon: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 10 }],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -294,6 +316,7 @@ export const brawler: ClassOptionBase = {
   description: 'Gain Improved Unarmed Strike while raging.',
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -305,6 +328,7 @@ export const brawlerGreater: ClassOptionBase = {
   prerequisites: [{ type: 'special', description: 'brawler rage power' }],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -316,6 +340,7 @@ export const breathtaker: ClassOptionBase = {
     "While raging, whenever you make a successful melee attack against an opponent that is holding its breath, in addition to any other effects caused by that attack, the opponent loses a number of rounds of breath equal to your Strength modifier.",
   source: 'pf1e-ppc-potr',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -331,6 +356,7 @@ export const celestialTotemGreater: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-cop',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -342,6 +368,7 @@ export const celestialTotemLesser: ClassOptionBase = {
     'Whenever subjected to a spell that cures hp damage, heal 1 additional hp per caster level. In the case of non-spell healing effects (such as channeled energy or lay on hands), heal a number of additional hp equal to the class level of the character performing the magical healing.',
   source: 'pf1e-ppc-cop',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -357,6 +384,7 @@ export const celestialTotem: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-cop',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -371,6 +399,7 @@ export const chaosTotemGreater: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -382,6 +411,7 @@ export const chaosTotemLesser: ClassOptionBase = {
     'Gain a deflection bonus to AC and a resistance bonus against lawful spells and creatures while raging.',
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -397,6 +427,7 @@ export const chaosTotem: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -408,6 +439,7 @@ export const clearMind: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 8 }],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -420,6 +452,7 @@ export const comeAndGetMe: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 12 }],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -435,6 +468,7 @@ export const cripplingBlow: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -451,6 +485,7 @@ export const cultTotemGreater: ClassOptionBase = {
   ],
   source: 'pf1e-pzo1135',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -462,6 +497,7 @@ export const cultTotemLesser: ClassOptionBase = {
     "While the barbarian is raging, any morale bonuses or bonuses for flanking she gains on attack rolls are added to her damage rolls instead of her attack rolls. They are still morale bonuses, and they don't stack with other morale bonuses on damage rolls.",
   source: 'pf1e-pzo1135',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -477,6 +513,7 @@ export const cultTotem: ClassOptionBase = {
   ],
   source: 'pf1e-pzo1135',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -493,6 +530,7 @@ export const daemonTotemGreater: ClassOptionBase = {
   ],
   source: 'pf1e-pzo1135',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -504,6 +542,7 @@ export const daemonTotemLesser: ClassOptionBase = {
     'While raging, the barbarian gains a +2 bonus on saving throws against acid damage, death effects, disease, and poison. This bonus increases by 1 for each daemon totem rage power the barbarian has, excluding this one.',
   source: 'pf1e-pzo1135',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -519,6 +558,7 @@ export const daemonTotem: ClassOptionBase = {
   ],
   source: 'pf1e-pzo1135',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -534,6 +574,7 @@ export const deadlyAccuracy: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -546,6 +587,7 @@ export const deathlessFrenzy: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 12 }],
   source: 'pf1e-ppc-botm',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -558,6 +600,7 @@ export const disembowellingTusks: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 10 }],
   source: 'pf1e-ppc-botm',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -572,6 +615,7 @@ export const disruptive: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -587,6 +631,7 @@ export const dragonTotem: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -601,6 +646,7 @@ export const dragonTotemResilience: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -616,6 +662,7 @@ export const dragonTotemWings: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -631,6 +678,7 @@ export const eaterOfMagic: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -646,6 +694,7 @@ export const elementalRageGreater: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -658,6 +707,7 @@ export const elementalRageLesser: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 4 }],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -673,6 +723,7 @@ export const elementalRage: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -688,6 +739,7 @@ export const energyAbsorption: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -703,6 +755,7 @@ export const energyEruption: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -718,6 +771,7 @@ export const energyResistanceGreater: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -729,6 +783,7 @@ export const energyResistance: ClassOptionBase = {
     'Gain resistance to one type of elemental damage while raging.',
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -741,6 +796,7 @@ export const fearlessRage: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 12 }],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -760,6 +816,7 @@ export const feastingBite: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-aoe',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -775,6 +832,7 @@ export const feastOfBlood: ClassOptionBase = {
   ],
   source: 'pf1e-pzo9437',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -786,6 +844,7 @@ export const ferociousBeast: ClassOptionBase = {
     'Your animal companion also gains the benefits of rage though you must spend 1 additional round of rage per round if companion begins or ends its turn adjacent to you, and 2 additional rounds of rage per round if not.',
   source: 'pf1e-aa',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -801,6 +860,7 @@ export const ferociousBeastGreater: ClassOptionBase = {
   ],
   source: 'pf1e-aa',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -811,6 +871,7 @@ export const ferociousMount: ClassOptionBase = {
   description: 'Allow your mount to rage as well.',
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -825,6 +886,7 @@ export const ferociousMountGreater: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -839,6 +901,7 @@ export const ferociousTramplee: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -854,6 +917,7 @@ export const ferociousTrampleGreater: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -869,6 +933,7 @@ export const fiendTotem: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -884,6 +949,7 @@ export const fiendTotemGreater: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -894,6 +960,7 @@ export const fiendTotemLesser: ClassOptionBase = {
   description: 'Gain a gore attack while raging.',
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -906,6 +973,7 @@ export const fierceFortitude: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 8 }],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -917,6 +985,7 @@ export const fightResponse: ClassOptionBase = {
     "When a barbarian with this rage power attempts a saving throw against a fear effect, she can enter a rage as an immediate action (as long as she would normally be able to enter rage). This consumes 3 rounds of the barbarian's daily allotment of rage rounds, but the barbarian can maintain the rage each round on her turn normally. Any benefits from the barbarian's rage apply immediately, so she gains her bonus on Will saves against the effect that required the initial saving throw. Unlike most rage powers, this rage power's effects are useful only when the barbarian is not raging, so a skald can't grant this rage power to allies with raging song.",
   source: 'pf1e-pzo1135',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -928,6 +997,7 @@ export const fleshWound: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 10 }],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -940,6 +1010,7 @@ export const fueledByVengeance: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 6 }],
   source: 'pf1e-ppc-botm',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -952,6 +1023,7 @@ export const gearbreaker: ClassOptionBase = {
   prerequisites: [{ type: 'special', description: 'smasher rage power' }],
   source: 'pf1e-ppc-potr',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -966,6 +1038,7 @@ export const ghostRager: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -977,6 +1050,7 @@ export const goodForWhatAilsYou: ClassOptionBase = {
     'Drink alcohol to gain a new saving throw against a condition while raging.',
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -991,6 +1065,7 @@ export const greaterAnimalFury: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-coc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -1003,6 +1078,7 @@ export const groundBreaker: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 6 }],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -1018,6 +1094,7 @@ export const groundBreakerGreater: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -1029,6 +1106,7 @@ export const guardedLife: ClassOptionBase = {
     'Automatically stabilize when reduced to negative hit points while raging.',
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -1044,6 +1122,7 @@ export const guardedLifeGreater: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -1055,6 +1134,7 @@ export const guardedStance: ClassOptionBase = {
     'Gain a dodge bonus to AC while raging equal to 1 plus one for every four barbarian levels beyond 4th.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -1069,6 +1149,7 @@ export const hiveTotem: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -1083,6 +1164,7 @@ export const hiveTotemResilience: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -1099,6 +1181,7 @@ export const hiveTotemToxicity: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

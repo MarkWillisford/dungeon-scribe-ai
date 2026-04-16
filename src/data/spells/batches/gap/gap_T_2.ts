@@ -1,8 +1,8 @@
 // Gap spells — letter T part 2 (second half alphabetically)
 // Gap metadata: {"letters":"T_2","totalChecked":143,"newSpells":34,"skipped":109}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_T_2: Spell[] = [
+export const GAP_SPELLS_T_2: SpellDefinition[] = [
   {
     name: 'Time Shudder',
     classLevels: { magus: 2, psychic: 2, 'sorcerer/wizard': 2, summoner: 2, 'unchained summoner': 2 },
@@ -17,6 +17,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a temporal disturbance affecting all creatures within the area. Each round at the start of a creature\'s turn, a 50% chance determines the effect: the creature either gains the benefits of haste or suffers the effects of slow.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Time Stop',
@@ -31,6 +32,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'You accelerate to extraordinary speed, making all other creatures appear frozen. You may act freely for 1d4+1 rounds while others remain vulnerable to environmental effects but immune to direct attacks. You cannot interact with items held by frozen creatures or move them, though unattended items may be affected. You become undetectable during the spell and cannot enter antimagic fields while under its effect. Most spellcasters use the additional time to improve their defenses, summon allies, or flee from combat.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tiny Hut',
@@ -47,6 +49,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'You create an immobile, force-based sphere of customizable color with half above ground and half below. Up to nine additional Medium creatures may occupy the space and pass freely through the barrier. The spell terminates if you leave. Interior temperature maintains 70 degrees F within the 0-100 degree F exterior range. It shields against environmental hazards and withstands winds below hurricane force. The exterior appears opaque while transparent from inside, providing total concealment to occupants.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tireless Pursuers',
@@ -61,6 +64,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell functions as tireless pursuit, but affects multiple targets—you plus additional creatures based on caster level. It halves the damage caused by hustling and forced marching and negates fatigue from such exertion during the spell\'s duration. When the spell ends, any remaining nonlethal damage from travel causes affected creatures to become fatigued, or exhausted if already fatigued.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tireless Pursuit',
@@ -75,6 +79,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'The spell hardens your body against travel fatigue. It halves the damage caused by hustling and forced marching and negates fatigue from such exertion during the spell\'s duration. However, when the spell ends, any remaining nonlethal damage from travel causes you to become fatigued, or exhausted if already fatigued.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Titanic Anchoring',
@@ -89,6 +94,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'You gain enhanced stability and become nearly immovable. The spell provides immunity to pull and push special abilities; automatic failure of bull rush, grapple, overrun, reposition, and trip maneuvers from creatures of equal or smaller size; and a +10 bonus to Combat Maneuver Defense against such maneuvers from larger creatures.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tomb Legion',
@@ -105,6 +111,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'This necromantic spell functions similarly to shambler, but instead summons 1d4+2 mummies rather than shambling mounds. The caster creates a legion of undead mummies that persist for the specified duration and can be dismissed at the caster\'s discretion.',
     source: 'Pathfinder Companion: Osirion, Land of Pharaohs',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Torpid Reanimation',
@@ -120,6 +127,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell functions similarly to animate dead, but rather than gaining immediate control, you establish a trigger condition for animation—such as touch, a spoken word, sound, or time-based occurrence (within caster level days). You can manually trigger animation via standard action anytime. Uncontrolled undead created by this spell fall under your control as a free action if within 60 feet with line of sight. Once control is lost, it cannot be regained for that specific creature. Standard animate dead Hit Dice limits still apply.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Torrent of Elemental Rage',
@@ -136,6 +144,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: 'A shimmering elemental torrent manifests as a horizontal whirlwind combining winds, flame, ice shrapnel, and metal fragments. Creatures in the effect take 8d6 points of damage—2d6 points of fire damage, 2d6 points of cold damage, 2d6 points of sonic damage, and 2d6 points of slashing damage that overcomes adamantine damage reduction. The effect persists while concentrating, affects creatures passing through it, and can be repositioned each turn without sweeping through intermediate spaces.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch Injection',
@@ -150,6 +159,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'You hold a substance (elixir, infused extract, poison, or potion) which drains from its container into a magical sac in your body. During the spell\'s duration, the substance can be delivered via melee touch attack. Upon successful contact, the substance takes effect immediately, and the target receives normal saving throws as applicable. The spell provides protection to you from the substance stored, but non-poison-using characters face a 5% exposure risk when initially casting. Rolling a natural 1 on injection attempts also exposes you to the poison.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Blindness',
@@ -165,6 +175,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: "Your hand becomes engulfed in darkness, allowing you to perform melee touch attacks that coat a target's eyes in supernatural darkness. Each successful touch blinds the target for 1 round unless it makes a Fortitude save. You may attempt up to one touch attack per caster level, with any unused attacks expiring after 1 round per caster level.",
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Bloodletting',
@@ -179,6 +190,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This necromantic spell aggravates existing injuries, causing them to bleed profusely. When cast on a creature with current hit points below maximum, it inflicts 1 point of bleed damage each round and renders the target exhausted throughout the spell\'s duration. The effect ends if the caster or another character succeeds at a DC 15 Heal check or if any healing spell restores hit point damage.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Combustion',
@@ -194,6 +206,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: "Your successful melee touch attack ignites the target in flame, dealing 1d6 fire damage. If the target fails its Reflex save, it catches fire. On subsequent rounds, any creatures adjacent to the burning target (including the caster) must each succeed at a Reflex save or take 1d4 points of fire damage.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Gracelessness',
@@ -208,6 +221,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You use a touch attack to inflict clumsiness on a target. The creature suffers a Dexterity penalty equal to 1d6+1 per two caster levels (maximum 1d6+5), with the penalty unable to reduce Dexterity below 1. Secondary effects include: if the target moves beyond half its speed, it becomes prone. Flying creatures experience a one-step reduction in maneuverability. A successful Fortitude save halves the Dexterity penalty and eliminates the prone condition and maneuverability penalties.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Slime',
@@ -224,6 +238,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You create a slime coating on your hand. Upon a successful melee touch attack, the slime transfers to the target and functions as green slime, dealing 1d3 points of Constitution damage per round. The slime can be destroyed through standard green slime removal methods (scraping, freezing, burning, cutting, sunlight, or remove disease spell). If the slime kills its host, it consumes the body and dies. The slime cannot transfer to other creatures and perishes if separated from the original target.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tough Crowd',
@@ -238,6 +253,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You fortify your allies against attempts to control or mislead them. Affected creatures gain a +4 insight bonus on saving throws against the next enchantment or illusion spell cast upon them. Additionally, the DC for Bluff, Diplomacy, Disguise, or Intimidate checks targeting affected characters increases by 4 for the spell\'s duration.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tower of Iron Will I',
@@ -253,6 +269,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You project mental fortification granting spell resistance equal to 10 + double this spell\'s level against psychic magic and any mind-affecting effects. Creatures in the area gain protection except against your own spells. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tower of Iron Will II',
@@ -268,6 +285,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You project mental fortification granting spell resistance equal to 10 + double this spell\'s level against psychic magic and any mind-affecting effects. Creatures in the area gain protection except against your own spells. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tower of Iron Will III',
@@ -283,6 +301,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You project mental fortification granting spell resistance equal to 10 + double this spell\'s level against psychic magic and any mind-affecting effects. Creatures in the area gain protection except against your own spells. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tower of Iron Will IV',
@@ -298,6 +317,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You project mental fortification granting spell resistance equal to 10 + double this spell\'s level against psychic magic and any mind-affecting effects. Creatures in the area gain protection except against your own spells. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tower of Iron Will V',
@@ -313,6 +333,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You project mental fortification granting spell resistance equal to 10 + double this spell\'s level against psychic magic and any mind-affecting effects. Creatures in the area gain protection except against your own spells. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Toxic Gift',
@@ -328,6 +349,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You must be poisoned to cast this spell. The spell transfers the poison afflicting you to the target creature. The target experiences the same poison you have, except it uses this spell\'s DC instead of the poison\'s normal DC. If you have multiple poisons, you select which one to transfer.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Toxic Rupture',
@@ -343,6 +365,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: "You compress your hand to trigger internal bleeding within a target creature's venom glands. The affected creature must save against its own poison using this spell's DC. Upon failure, the creature is poisoned and suffers the full effect of its poison. Subsequent saving throws against the poison revert to the standard poison DC rather than the spell's DC.",
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tracking Mark',
@@ -357,6 +380,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You gain supernatural tracking abilities against the target. When making Survival checks to track the marked creature, treat the DC as 5 lower than normal. Additionally, you gain a +5 bonus on Perception checks to notice the target using Stealth or recognize it if using Disguise.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Trail of the Rose',
@@ -372,6 +396,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell generates a visible, misty illusory trail with a rose scent. You designate up to six creatures who can perceive the effect; others cannot see it. The designation requires genuine familiarity with each creature. When you move, the illusory scent creates a path. If designated creatures encounter a middle section of the trail, they cannot determine the direction traveled, making it ideal for backtracking through complex environments like mazes or cave systems.',
     source: 'Pathfinder Player Companion: Faiths of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Transfer Familiar',
@@ -386,6 +411,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell enables temporary transfer of familiar control to another willing creature. All three parties—caster, familiar, and recipient—must all be touching each other when you cast this spell. The recipient gains standard familiar benefits including spell sharing and communication abilities, while the original owner temporarily loses these advantages. The spell fails if the target already possesses a familiar.',
     source: 'Pathfinder Player Companion: Familiar Folio',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Transfer Tattoo',
@@ -400,6 +426,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This transmutation spell enables you to move one magical tattoo between creatures. The recipient can attempt a Fortitude save to resist the transfer; if successful, the spell fails and you become staggered for 1 round by the backlash of magical energy. A magical tattoo may be transferred from a deceased creature to a living host, provided the corpse has not been dead longer than one hour per caster level.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Trapfinder's Focus",
@@ -414,6 +441,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'For those without trapfinding, this spell grants the trapfinding ability of a rogue of half your character level. For those with the trapfinding class ability, it provides a +5 competence bonus on all Disable Device checks made to disarm mechanical (but not magical) traps. Additionally, if a Disable Device check fails and triggers a trap, you may attempt a second check using identical modifiers; success avoids triggering the trap (though disarming still fails). Each reroll reduces remaining spell duration by 1 minute.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Treacherous Teleport',
@@ -430,6 +458,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell operates similarly to the standard teleport spell, but allows you to intentionally cause any number of accompanying creatures to either suffer a mishap or arrive in a specific different location you visualize simultaneously with the original destination, or both. The spell carries the ruse descriptor, meaning attempts to identify it through skill checks will mistakenly reveal it as the standard teleport spell.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Treasure Stitching',
@@ -444,6 +473,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'You transform objects placed on embroidered cloth into a two-dimensional sewn representation for storage and transport. Any amount of weight can be stored as long as the pile stays within the cloth\'s dimensions (up to 10-foot cube). You can restore objects as a full-round action; anyone else must dispel the spell to recover items. Destruction of the cloth results in permanent loss of stored objects. Artifacts and unique objects cannot be affected.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tremor Blast',
@@ -459,6 +489,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You generate a localized earthquake effect that can knock creatures prone. Make a single combat maneuver check against each creature in the area. If your result meets or exceeds a target\'s CMD, that creature falls prone. This trip attempt does not provoke attacks of opportunity (though casting the spell does), and you won\'t be knocked prone if you miss by 10+ points. Unlike normal trip attempts, this spell can affect any creature touching the ground regardless of size. The feat Improved Trip provides no additional benefit.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Trial By Fire',
@@ -474,6 +505,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: "You subject a touched creature to divine flame, testing alignment purity. If the target's alignment differs from your deity's alignment by more than one step, the spell inflicts 1d6 points of damage per 2 caster levels (maximum 5d6). Half this damage comes from fire; the other half derives from divine power and bypasses fire resistance. Additionally, if the target's alignment directly opposes yours (law versus chaos or good versus evil), you may make an Intimidate check as a free action to demoralize the creature.",
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Trial of Fire and Acid',
@@ -489,6 +521,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'The spell coats the target in burning acid that inflicts 1d6 points of acid damage and 1d6 points of fire damage each round. Each round, the affected creature may attempt a Fortitude save to reduce damage by half. The effect ends if the target is doused in water, though rolling on the ground provides no relief from either the fire or acid.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tripvine',
@@ -503,6 +536,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'This spell animates a rope or vine to automatically trip creatures within a designated 10-foot-square area. The animated rope uses a Combat Maneuver Bonus equal to your caster level plus 2, and does not provoke attacks of opportunity. Targets that were running, jumping, or charging when tripped sustain 1d6 nonlethal damage. Creatures aware of the tripvine receive a +4 bonus to their Combat Maneuver Defense against it.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'True Form',
@@ -517,6 +551,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell removes any polymorph effect from a target creature, returning it to its true form, even against its will. Against polymorph spell effects (such as baleful polymorph or giant form), you make a caster level check (1d20 + caster level, capped at +15) versus DC 11 + the original effect\'s caster level. For creatures with supernatural shape-changing abilities (like lycanthropes), the target makes a Will save or reverts to true form. A failed initial save allows a second save as a full-round action; failure locks the creature in true form for the spell\'s duration.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tsunami',
@@ -534,6 +569,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'no',
     description: 'You generate a massive water wave traveling in a predetermined straight line at 60 feet per round over open water or 30 feet per round on land or underwater. Struck creatures take 8d6 bludgeoning damage and face a special combat maneuver check for potential knockdown and displacement. Carried creatures can attempt escape as standard actions, suffering an additional 6d6 damage if unsuccessful. Objects Huge or smaller get swept along; larger structures take damage without hardness reduction. Solid barriers taller than the wave create gaps. Freedom of movement prevents a creature from being carried along but does not prevent damage.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Twilight Knife',
@@ -550,6 +586,7 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You conjure a sentient force blade that attacks your chosen opponent each round. The weapon employs your base attack bonus plus either your Intelligence or Charisma modifier (whichever is higher). It deals 1d4 force damage with dagger-like critical properties and can execute sneak attacks for an additional 1d6 force damage per four caster levels when the target lacks a Dexterity bonus or is flanked. The knife cannot be harmed physically but can be destroyed by dispel magic, disintegrate, sphere of annihilation, or rod of cancellation.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Twisted Space',
@@ -564,5 +601,6 @@ export const GAP_SPELLS_T_2: Spell[] = [
     spellResistance: 'yes',
     description: 'You distort the space around a creature, twisting the path of its melee attacks unpredictably, but always toward a nearby creature that the target threatens. During the spell\'s duration (until the start of your next turn), any melee attacks made by the affected creature strike a randomly selected target instead of the originally intended target—though the random target must be one the creature threatens.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 ];

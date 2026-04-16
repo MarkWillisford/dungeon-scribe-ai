@@ -10,6 +10,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +4 Diplomacy/gather info with a chosen organization and access their services for free.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -38,6 +39,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       'Roll saves twice vs. friendly fire; story feat with goals tied to hunting down betrayers.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -65,6 +67,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
       "You share your mother's gift for working in groups. As a standard action, you can attempt a special aid another action (1d20 + your choice of your Intelligence or Charisma modifier; DC 10). If you succeed, you increase an adjacent spellcaster's caster level by 1 until the beginning of your next turn. If you also possess the covenant witch hex, this bonus applies to all coven members within 30 feet.",
     shortDescription: "Aid another to boost an adjacent spellcaster's caster level by 1.",
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Changeling' }],
     effects: [
@@ -87,6 +90,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain bonuses against a chosen corruption type; story feat tied to a cursed romantic bond.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -122,6 +126,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       'Roll saves twice against emotion and fear effects; story feat for emotionally detached characters.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -150,6 +155,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain bonuses to conceal hatred toward a chosen enemy group; story feat for relentless hunters.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -185,6 +191,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +2 vs. evil outsiders in social checks and SR against their magic; story feat.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -227,6 +234,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       'Halve exhaustion penalties and gain +3 to a skill by skipping rest; story feat for driven overachievers.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -255,6 +263,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       "Spend 1d4 hours in a town to gain +4 on a single Knowledge check from the Pathfinder Society's archives.",
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'associate' }],
     effects: [
@@ -277,6 +286,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use Red Mantis safe houses; pursuers take -10 to locate you and must beat a CL check to scry you.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'associate' }],
     effects: [
@@ -299,6 +309,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       "Three times per day, make an attack of opportunity when targeted by a smite, bypassing the attacker's DR.",
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'power_attack' },
@@ -324,6 +335,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       'Sunder active divine spell effects or spell-like abilities with a combat maneuver check.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'disruptive' },
@@ -349,6 +361,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       "Diplomacy check to compel a foe's next attack to deal nonlethal damage instead of lethal.",
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -371,6 +384,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       'Craft potions of cure/inflict light wounds from your blood daily; buy necromantic scrolls in any town.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'associate' }],
     effects: [
@@ -393,6 +407,7 @@ export const AGENTS_EVIL_FEATS: FeatDefinition[] = [
     shortDescription:
       'Buy evil-spell items at 10% discount and gain +4 on checks related to evil magic; story feat.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {

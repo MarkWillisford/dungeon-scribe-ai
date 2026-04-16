@@ -43,6 +43,7 @@ export const direRat: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -78,6 +79,7 @@ export const dragonflyGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -101,6 +103,7 @@ export const trilobiteGiant: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -124,6 +127,7 @@ export const trout: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -147,6 +151,7 @@ export const tuataraGiant: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -170,6 +175,7 @@ export const turkey: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -194,6 +200,7 @@ export const turtle: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -229,6 +236,7 @@ export const tyrannosaurus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -263,6 +271,7 @@ export const uintaceratops: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b5',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -288,6 +297,7 @@ export const ursineCharger: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -315,6 +325,7 @@ export const unicorn: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -338,6 +349,7 @@ export const viperGiant: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -372,6 +384,7 @@ export const vultureGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -406,6 +419,7 @@ export const walrus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b4',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -443,6 +457,7 @@ export const waspGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-um',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -476,6 +491,7 @@ export const weaselGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b2',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -499,6 +515,7 @@ export const whaleShark: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -533,6 +550,7 @@ export const wolf: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -556,6 +574,7 @@ export const wombatGiant: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -579,6 +598,7 @@ export const woodpeckerGiant: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -603,6 +623,7 @@ export const wyvernSkeletal: AnimalCompanionEntry = {
   progressionTiers: [],
   source: 'pf1e-unknown',
   isOfficial: false,
+  verificationStatus: 'needs_review' as const,
   visibility: 'private',
   rev: 1,
 };
@@ -633,6 +654,7 @@ export const zebra: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

@@ -1,4 +1,5 @@
 import type { GameDataSource } from './gameData';
+import type { DataQualityFields } from './base';
 
 // ---- Spellcasting ----
 
@@ -69,6 +70,13 @@ export interface CLBonus {
 }
 
 // ---- Spell Definition ----
+//
+// Two types, one shape:
+//   Spell           — character subdocument (used inside Spellcasting on a character)
+//   SpellDefinition — catalog entry (seeded into Firestore; carries admin quality fields)
+//
+// DataQualityFields live on SpellDefinition only so they never propagate into
+// character records via KnownSpell / PreparedSpell.
 
 export interface Spell {
   name: string;
@@ -98,6 +106,8 @@ export interface Spell {
   description: string;
   source: string | GameDataSource; // string during static data phase; GameDataSource after Firestore migration
 }
+
+export interface SpellDefinition extends Spell, DataQualityFields {}
 
 export interface KnownSpell extends Spell {
   classes: {

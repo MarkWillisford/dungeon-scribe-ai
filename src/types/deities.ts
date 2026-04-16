@@ -8,6 +8,7 @@
 // Boons are text descriptions only — mechanical effects wired by modifier pipeline.
 
 import type { GameDataSource } from './gameData';
+import type { DataQualityFields } from './base';
 
 export interface DeityBoonTier {
   tier: 1 | 2 | 3;
@@ -21,7 +22,7 @@ export interface DeityBoons {
   sentinel: DeityBoonTier[]; // exactly 3 entries
 }
 
-export interface DeityEntry {
+export interface DeityEntry extends DataQualityFields {
   id: string; // kebab-case: 'milani', 'iomedae', 'cayden-cailean'
   name: string;
   title?: string; // epithet: 'The Everbloom', 'The Inheritor'; absent for collective entities

@@ -15,6 +15,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'Your snakelike movement allows you to quickly recover from missed strikes. While using Snake Style, whenever you score a critical threat with your unarmed strike, you gain a +4 bonus on the critical confirmation roll. You also receive a +4 dodge bonus to AC against critical confirmation rolls made against you.',
     shortDescription: '+4 to confirm crits, +4 dodge AC vs crit confirmations',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -33,6 +34,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       "You can unleash attacks against an opponent that has committed to melee combat with you. While using Snake Style, when an opponent's attack misses you, you can make an unarmed strike against that opponent as an attack of opportunity. If this attack of opportunity hits, you can spend an immediate action to make another unarmed strike against the same opponent.",
     shortDescription: 'AoO on miss, immediate action extra strike if AoO hits',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -56,6 +58,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You call upon the burning wind of the djinn to empower your unarmed strikes. While using this style, you gain one additional elemental fist attempt per day. You must select electricity as the damage type when you use Elemental Fist while in this style. You gain a bonus on electricity damage rolls made with your unarmed strikes equal to your Wisdom bonus (if any).',
     shortDescription: 'Extra Elemental Fist/day, +Wis electricity damage on unarmed',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -75,6 +78,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You call upon the wind spirit of the djinn to grant you the power of flight. While using Djinn Style, you gain one additional Elemental Fist attempt per day. Your electricity damage bonus from Djinn Style increases to your Wisdom modifier + 2. While using this style and Elemental Fist to deal electricity damage, you gain a fly speed of 60 feet (average) for 1 round after each successful unarmed strike.',
     shortDescription: 'Extra Elemental Fist, +2 electricity, fly 60 ft. for 1 round on hit',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 15 },
@@ -95,6 +99,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You call upon the tornado-like fury of the djinn to deal devastating strikes. While using Djinn Style, as a standard action you can spend two Elemental Fist attempts to surround yourself with a whirlwind of electricity. Creatures adjacent to you take your unarmed strike damage plus electricity damage equal to your Wisdom modifier. A successful Reflex save (DC 10 + 1/2 your character level + your Wisdom modifier) halves this damage.',
     shortDescription: 'Standard action: adjacent AoE unarmed + electricity damage',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 17 },
@@ -118,6 +123,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'Your martial technique makes use of the ground itself to defend you against larger opponents. While using this style, your base becomes like the earth, giving you a +2 dodge bonus to AC against the attacks of creatures that are larger than you.',
     shortDescription: '+2 dodge AC vs creatures larger than you',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -136,6 +142,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'Your attacks against larger foes can send them reeling. While using Earth Child Style, you can trip a creature of any size, and you gain a +2 bonus on trip attempts against creatures that are larger than you.',
     shortDescription: 'Trip any size creature, +2 trip vs larger foes',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -155,6 +162,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'Even the mightiest giants fear your technique. While using Earth Child Style, when a creature that is larger than you misses you with a melee attack, you can make a trip attempt against that creature as an attack of opportunity. If you succeed, you can also make a Stunning Fist attempt against that creature as a free action.',
     shortDescription: 'AoO trip on miss by larger foe, free Stunning Fist on success',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -176,6 +184,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You call upon the power of the marid to empower your unarmed strikes with cold. While using this style, you gain one additional Elemental Fist attempt per day. You must select cold as the damage type when you use Elemental Fist while in this style. You gain a bonus on cold damage rolls made with your unarmed strikes equal to your Wisdom bonus (if any).',
     shortDescription: 'Extra Elemental Fist/day, +Wis cold damage on unarmed',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -195,6 +204,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You call upon the spirit of the marid to harness the power of cold. While using Marid Style, you gain one additional Elemental Fist attempt per day. Your cold damage bonus from Marid Style increases to your Wisdom modifier + 2. While using this style and Elemental Fist to deal cold damage, you can spend an additional Elemental Fist attempt to also entangle the target in ice for 1d4 rounds on a failed Fortitude save.',
     shortDescription: 'Extra Elemental Fist, +2 cold, entangle on cold hit',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 15 },
@@ -215,6 +225,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You call upon the freezing power of the marid to freeze your foes in their tracks. While using Marid Style, as a standard action you can spend two Elemental Fist attempts to create a 30-foot line of frigid water. Creatures in the area take your unarmed strike damage plus cold damage equal to your Wisdom modifier. A successful Reflex save (DC 10 + 1/2 your character level + your Wisdom modifier) halves this damage. Creatures that fail their save are also entangled in ice for 1d4 rounds.',
     shortDescription: '30-ft. line cold AoE, entangles on failed save',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 17 },
@@ -238,6 +249,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'Your mastery of the blade allows you to parry attacks with ease. While using this style, if you are wielding a weapon from the light blades or heavy blades weapon group and have the weapon in one hand with your other hand free, you gain a +1 shield bonus to AC.',
     shortDescription: '+1 shield AC with one-handed blade and free off-hand',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_expertise' },
@@ -269,6 +281,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'Your mastery of the blade allows you to riposte attacks with devastating precision. While using Swordplay Style, if a creature misses you with a melee attack, you can spend an attack of opportunity to make a disarm or trip combat maneuver against that creature.',
     shortDescription: 'AoO disarm/trip when missed by melee attack in Swordplay Style',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_expertise' },
@@ -288,6 +301,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'Although you are not a gunslinger, you have and can use grit. You gain a small amount of grit and the ability to perform a single 1st-level deed from the gunslinger deed class feature. You gain a number of grit points equal to your Wisdom modifier (minimum 1) and you can select a single 1st-level gunslinger deed. You can use this deed by spending grit points. You regain grit the same way a gunslinger does.',
     shortDescription: 'Gain grit pool (Wis mod) and one 1st-level gunslinger deed',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['grit', 'combat'],
     prerequisites: [
       { type: 'special', description: 'No levels in a class that has the grit class feature' },
@@ -311,6 +325,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You can avoid attacks of opportunity when firing a firearm in melee. You gain the following deed. You can spend 1 grit point when firing a firearm while threatened to avoid provoking attacks of opportunity for that shot.',
     shortDescription: 'Spend 1 grit to not provoke AoOs when firing in melee',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['grit', 'combat'],
     prerequisites: [
       { type: 'special', description: 'Grit class feature or Amateur Gunslinger feat' },
@@ -328,6 +343,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You have more grit than the common gunslinger. You gain 2 extra grit points at the start of each day, and your maximum number of grit points increases by 2.',
     shortDescription: '+2 grit points per day and +2 maximum',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['grit'],
     prerequisites: [
       { type: 'special', description: 'Grit class feature or Amateur Gunslinger feat' },
@@ -343,6 +359,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You leap through the air, shooting as you go. As a full-round action, you can spend 1 grit point to move up to your speed and make firearm attacks at your highest base attack bonus with each loaded firearm you are wielding. You make your attacks at any point during this movement, and if you have the Two-Weapon Fighting feat, you can fire both firearms at the same time. You can only fire each firearm once during this movement.',
     shortDescription: 'Spend 1 grit for move + full attacks with firearms',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['grit', 'combat'],
     prerequisites: [
       { type: 'special', description: 'Grit class feature or Amateur Gunslinger feat' },
@@ -362,6 +379,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You are so focused on your craft that you have become anonymous. You gain a +2 bonus on Bluff checks to maintain a disguise and on opposed Perception checks. If you spend 1 grit point, for the next 24 hours people find it hard to remember your description. Anyone attempting to describe or identify you must make a Will save (DC 10 + 1/2 your character level + your Wisdom modifier) or be unable to recall your physical features.',
     shortDescription: '+2 Bluff/Perception, spend grit to be forgettable for 24 hrs',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['grit'],
     prerequisites: [
       { type: 'special', description: 'Grit class feature or Amateur Gunslinger feat' },
@@ -387,6 +405,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       "You can ricochet a firearm shot off a hard surface to strike a target from a different angle. You can spend 1 grit point to make a ranged attack that can bounce off a wall or other hard surface. This allows you to ignore cover (but not total cover) between you and the target, and you can fire around corners. The ricochet shot has a maximum range of the firearm's first range increment.",
     shortDescription: 'Spend 1 grit to ignore cover by ricocheting firearm shots',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['grit', 'combat'],
     prerequisites: [
       { type: 'special', description: 'Grit class feature or Amateur Gunslinger feat' },
@@ -404,6 +423,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You are so well prepared that you always have exactly what you need. By spending 1 grit point as a move action, you can produce a single piece of mundane adventuring gear worth 50 gp or less. The item appears on your person and you can use it normally. The item disappears at the start of your next turn if it is not consumed.',
     shortDescription: 'Spend 1 grit to produce mundane gear worth 50 gp or less',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['grit'],
     prerequisites: [
       { type: 'special', description: 'Grit class feature or Amateur Gunslinger feat' },
@@ -420,6 +440,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You are known for performing a particular deed, and its execution is almost effortless for you. Select one deed that you have access to and that has a grit point cost of 1 or more. You can perform this deed for 1 fewer grit point (minimum 0).',
     shortDescription: 'Reduce grit cost of one deed by 1 (minimum 0)',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['grit'],
     prerequisites: [
       { type: 'special', description: 'Grit class feature' },
@@ -438,6 +459,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You are skilled at riding in a tight unit. You can share squares with other allies who also have this feat without penalty. You are still considered to control the squares you share with other allies. You can also end your movement in a square occupied by an ally with this feat, and they can end their movement in a square you occupy.',
     shortDescription: 'Share squares with allies who have this feat',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'ride', ranks: 3 }],
     effects: [],
@@ -451,6 +473,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'Your ranged attacks take advantage of the flanking provided by your allies. You receive a +2 bonus on ranged attack rolls made against a foe flanked by 1 or more allies with this feat.',
     shortDescription: '+2 ranged attack vs foes flanked by allies with this feat',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'point_blank_shot' },
@@ -467,6 +490,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You and your allies coordinate ranged attacks. When an ally who also has this feat makes a ranged attack and hits, you can make a single ranged attack as an immediate action against the same target. You must have a loaded or drawn ranged weapon ready.',
     shortDescription: 'Immediate action ranged attack when ally with feat hits',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'point_blank_shot' },
@@ -483,6 +507,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       "You and your allies rain arrows down upon your foes. When you ready an action to make a ranged attack, you can use the attack roll of an ally who also has this feat and who readied the same action. You use the higher of your attack roll or your ally's attack roll for your attack.",
     shortDescription: 'Use higher of your or allied ranged attack roll when readied',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'feat', featId: 'point_blank_shot' }],
     effects: [],
@@ -496,6 +521,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You are an expert at leading the charge. When an ally with this feat charges a creature that is within your threatened area, as an immediate action you can also charge that creature.',
     shortDescription: 'Immediate action charge when ally with feat charges foe you threaten',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'bab', minimum: 10 },
@@ -512,6 +538,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You have practiced escape routes with your allies. You do not provoke attacks of opportunity when moving through squares adjacent to allies who also have this feat.',
     shortDescription: 'No AoOs moving through squares adjacent to allies with this feat',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [],
@@ -525,6 +552,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'A successful feint by your ally causes the opponent to also lose their Dexterity bonus to AC against your next attack. When an ally who also has this feat successfully feints against an opponent, that opponent also loses their Dexterity bonus to AC against the next attack you make against them before the end of your next turn.',
     shortDescription: 'Foe loses Dex to AC against you when ally with feat feints',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'combat_reflexes' },
@@ -541,6 +569,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'Allies who feint for you have a greater impact. When an ally who also has this feat successfully feints against an opponent, that opponent provokes an attack of opportunity from you.',
     shortDescription: 'AoO when ally with feat successfully feints a foe',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'combat_reflexes' },
@@ -559,6 +588,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You and your allies are skilled at surrounding your foes. When you are flanking an opponent with an ally who also has this feat, you can take a 5-foot step as a free action at any point during your turn (even if you have already taken one).',
     shortDescription: 'Extra 5-ft. step when flanking with ally who has this feat',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -572,6 +602,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You and your allies are experts at creating openings. When an ally who also has this feat confirms a critical hit against an opponent that you also threaten, you can make an attack of opportunity against that opponent.',
     shortDescription: 'AoO when ally with feat confirms crit on foe you threaten',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'combat_reflexes' },
@@ -588,6 +619,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You and your allies are skilled at working together to trip your foes. Whenever an ally who also has this feat makes a trip attempt against a foe that you both threaten, you can spend an immediate action to grant your ally a +2 bonus on the trip attempt. If the trip attempt fails, you and your ally do not provoke attacks of opportunity from the target.',
     shortDescription: '+2 to ally trip attempts, no AoO on failure vs shared foes',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -602,6 +634,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You are so skilled at point-blank range that you do not provoke attacks of opportunity when firing the chosen weapon. Choose one type of ranged weapon. You do not provoke attacks of opportunity when firing the chosen weapon while threatened.',
     shortDescription: 'No AoO when firing chosen ranged weapon while threatened',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'weapon_specialization' }],
     effects: [],
@@ -616,6 +649,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'Your anatomical insight adds precision to your shots. As a standard action, you may make an attack with a bow or crossbow and add your Intelligence modifier on the damage roll. You must be within 30 feet of your target to deal this extra damage. Creatures immune to critical hits and sneak attacks are immune to this extra damage.',
     shortDescription: 'Standard action: +Int to bow/crossbow damage within 30 ft.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -633,6 +667,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You can apply poison to your weapons quickly and with deadly precision. When you apply poison as a move action, you can make a ranged touch attack to deliver the poison with a thrown weapon or apply it to a single piece of ammunition. The poison delivered this way has its DC increased by 2.',
     shortDescription: 'Apply poison as move action, +2 DC on thrown/ranged poison',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -650,6 +685,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'Your feints with your off-hand weapon fool opponents into dropping their defenses against both of your weapons. While using Two-Weapon Fighting to make melee attacks, you can forgo your first primary-hand melee attack to make a Bluff check to feint an opponent. If you successfully feint, that opponent is denied their Dexterity bonus to AC against all of your attacks until the end of your turn.',
     shortDescription: 'Forgo first attack to feint, deny Dex to AC against all attacks this turn',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -669,6 +705,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       "You deliver a pointed strike to the jaw. When you make a successful Stunning Fist attempt against an opponent that is grappled, helpless, or stunned, instead of dealing damage normally, you can cripple that opponent's mouth, dealing 1d6+1 points of damage. Until the damage is healed, the creature cannot use its mouth to attack (bite attacks, breath weapons, spells with verbal components, and similar abilities).",
     shortDescription: 'Stunning Fist cripples mouth, preventing bites/breath/verbal',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -686,6 +723,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       "When you deliver a crushing blow, you impair your target's movement. When you make a successful Stunning Fist attempt against an opponent that is grappled, helpless, or stunned, instead of dealing damage normally, you can cripple that opponent's limb, dealing 1d6+1 points of damage. Until the damage is healed, the target's speed is reduced by half (to a minimum of 5 feet) and the target takes a -4 penalty on Strength and Dexterity ability checks and skill checks.",
     shortDescription: 'Stunning Fist cripples limb: half speed, -4 Str/Dex checks',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -705,6 +743,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
     shortDescription:
       'Stunning Fist snaps neck: 2d6+2 damage, permanently staggered on failed Fort',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -726,6 +765,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You treat all weapons you are proficient with as if they had the performance weapon quality. When wielding such a weapon, you can attempt performance combat checks.',
     shortDescription: 'All proficient weapons count as performance weapons',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [],
     effects: [],
@@ -739,6 +779,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'Your critical hits are awe-inspiring feats of martial prowess. When you score a critical hit or a performance combat check, you can make a performance combat check as a free action. You gain a +2 bonus on this performance combat check.',
     shortDescription: 'Free performance combat check on crit with +2 bonus',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [
       { type: 'feat', featId: 'dazzling_display' },
@@ -755,6 +796,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You perform a mocking dance that enrages your foes. As a move action, you can take a 5-foot step and then make a performance combat check. If the check is successful, you can move an additional 5 feet.',
     shortDescription: 'Move action: 5-ft. step + performance check, extra 5 ft. on success',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [
       { type: 'feat', featId: 'acrobatic_steps' },
@@ -773,6 +815,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'You circle your enemy with a mocking display of martial superiority. When you hit an opponent with a melee attack, you can take a 5-foot step as a free action (even if you have already taken a 5-foot step this turn) and then make a performance combat check.',
     shortDescription: 'Free 5-ft. step + performance check on melee hit',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [
       { type: 'feat', featId: 'dodge' },
@@ -792,6 +835,7 @@ export const UCOMBAT_EXTRA_FEATS: FeatDefinition[] = [
       'With your dramatic, pointed attacks, you strike fear into the hearts of your enemies. When you score a critical hit with a melee weapon, you can make an Intimidate check as a free action to demoralize all foes within 30 feet who can see you. You gain a +2 bonus on this Intimidate check.',
     shortDescription: 'Free Intimidate vs all foes in 30 ft. on melee crit with +2 bonus',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [{ type: 'feat', featId: 'dazzling_display' }],
     effects: [],
