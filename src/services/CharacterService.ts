@@ -79,6 +79,13 @@ export class CharacterService {
         knownSpells: [],
         spellbooks: [],
       },
+      initiating: {
+        pools: [],
+        knownManeuvers: [],
+        readiedManeuvers: [],
+        knownStances: [],
+        activeStanceId: null,
+      },
       specialAbilities: { specialAbilities: [] },
       conditions: { activeConditions: [] },
       experience: { current: 0, nextLevel: 2000 },

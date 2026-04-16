@@ -3,6 +3,7 @@
 // Mechanical effects will be handled by a separate system.
 
 import { BABProgression, SaveProgression } from '@/types/base';
+import type { RecoveryMechanic } from '@/types/initiating';
 
 export type ClassCategory =
   | 'Core'
@@ -42,6 +43,15 @@ export interface SpellcastingData {
   domainSlots?: boolean; // true for Cleric/Druid (+1 domain/nature slot per spell level)
 }
 
+export interface InitiatingData {
+  type: 'Martial';
+  initiatingAbility: 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
+  ilProgression: 'full' | 'half';
+  disciplines: string[]; // disciplineIds — default access for this class
+  progressionTableKey: string; // key into INITIATING_TABLES (maneuvers/stances per level)
+  recoveryMechanic: RecoveryMechanic;
+}
+
 export interface ArchetypeData {
   name: string;
   className: string; // parent class
@@ -50,6 +60,13 @@ export interface ArchetypeData {
   modifiedFeatures: string[]; // class features altered
   newFeatures: ClassFeatureData[]; // archetype's own features
   source: string;
+  // Archetypes that GRANT initiating to a non-initiating class (e.g. Myrmidon on Fighter)
+  initiating?: InitiatingData;
+  // Archetypes that MODIFY an initiating class's discipline list
+  disciplineSwaps?: {
+    gained: string[]; // disciplineIds added
+    lost: string[]; // disciplineIds removed
+  };
 }
 
 export interface ExpandedClassData {
@@ -70,6 +87,8 @@ export interface ExpandedClassData {
   startingWealth?: string;
   classFeatures: ClassFeatureData[];
   spellcasting: SpellcastingData;
+  // Present on initiating classes (Stalker, Warder, Warlord, Harbinger, Mystic, Zealot, ToB classes)
+  initiating?: InitiatingData;
   prerequisites?: PrestigePrerequisites;
   alignment?: string; // e.g., "Any non-lawful", "Lawful Good"
   source: string;

@@ -777,6 +777,13 @@ const mockCharacter: Character = {
     spellFailure: 0,
   },
   spellcasting: { pools: [], preparedSpells: [], knownSpells: [], spellbooks: [] },
+  initiating: {
+    pools: [],
+    knownManeuvers: [],
+    readiedManeuvers: [],
+    knownStances: [],
+    activeStanceId: null,
+  },
   specialAbilities: { specialAbilities: [] },
   conditions: { activeConditions: [] },
   experience: { current: 15000, nextLevel: 23000 },

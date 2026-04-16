@@ -14,6 +14,9 @@ import { MythicProgression } from './mythic';
 import { ResourcePool } from './resources';
 import { AppliedTemplate, GrantedBonus, LevelUpDecision, CharacterCRTracking } from './templates';
 import { Ruleset, CampaignRulesetLink } from './ruleset';
+import { Initiating } from './initiating';
+
+export * from './initiating';
 
 export interface Character {
   info: CharacterInfo;
@@ -25,6 +28,7 @@ export interface Character {
   traits: CharacterTraits;
   equipment: Equipment;
   spellcasting: Spellcasting;
+  initiating: Initiating;
   specialAbilities: SpecialAbilities;
   conditions: Conditions;
   experience: Experience;
