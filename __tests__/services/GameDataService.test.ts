@@ -10,6 +10,7 @@
  */
 
 import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 
 // ---- Minimal test fixtures -------------------------------------------------------
 
@@ -89,8 +90,18 @@ const MOCK_RACE = {
 };
 
 const MOCK_RACE_DWARF = { ...MOCK_RACE, name: 'Dwarf', flexibleAbilityBonus: false };
-const MOCK_RACE_ELF = { ...MOCK_RACE, name: 'Elf', flexibleAbilityBonus: false, category: 'Featured' as const };
-const MOCK_RACE_TIEFLING = { ...MOCK_RACE, name: 'Tiefling', flexibleAbilityBonus: false, category: 'Uncommon' as const };
+const MOCK_RACE_ELF = {
+  ...MOCK_RACE,
+  name: 'Elf',
+  flexibleAbilityBonus: false,
+  category: 'Featured' as const,
+};
+const MOCK_RACE_TIEFLING = {
+  ...MOCK_RACE,
+  name: 'Tiefling',
+  flexibleAbilityBonus: false,
+  category: 'Uncommon' as const,
+};
 
 const MOCK_WEAPON = { id: 'longsword', name: 'Longsword', category: 'melee' };
 const MOCK_ARMOR = { id: 'chain-mail', name: 'Chain Mail', category: 'medium' };
@@ -144,12 +155,28 @@ jest.mock('@/data/ragePowers/index', () => ({
 }));
 jest.mock('@/data/rogueTalents/index', () => ({
   ALL_ROGUE_TALENTS: [
-    { id: 'bleeding-attack', name: 'Bleeding Attack', description: 'Causes bleed', talentTier: 'standard' },
-    { id: 'crippling-strike', name: 'Crippling Strike', description: 'Penalizes STR', talentTier: 'advanced' },
+    {
+      id: 'bleeding-attack',
+      name: 'Bleeding Attack',
+      description: 'Causes bleed',
+      talentTier: 'standard',
+    },
+    {
+      id: 'crippling-strike',
+      name: 'Crippling Strike',
+      description: 'Penalizes STR',
+      talentTier: 'advanced',
+    },
   ],
 }));
 jest.mock('@/data/mysteries/index', () => ({
-  ALL_MYSTERIES: [{ id: 'battle', name: 'Battle', classSkills: ['Intimidate', 'Knowledge (engineering)', 'Perception'] }],
+  ALL_MYSTERIES: [
+    {
+      id: 'battle',
+      name: 'Battle',
+      classSkills: ['Intimidate', 'Knowledge (engineering)', 'Perception'],
+    },
+  ],
 }));
 jest.mock('@/data/inquisitions/index', () => ({
   ALL_INQUISITIONS: [{ id: 'anger', name: 'Anger', description: 'Anger inquisition' }],
@@ -161,7 +188,13 @@ jest.mock('@/data/revelations/index', () => ({
   ],
 }));
 jest.mock('@/data/cavalierOrders/index', () => ({
-  ALL_CAVALIER_ORDERS: [{ id: 'order-of-the-star', name: 'Order of the Star', classSkills: ['Heal', 'Knowledge (religion)'] }],
+  ALL_CAVALIER_ORDERS: [
+    {
+      id: 'order-of-the-star',
+      name: 'Order of the Star',
+      classSkills: ['Heal', 'Knowledge (religion)'],
+    },
+  ],
 }));
 jest.mock('@/data/hexes/index', () => ({
   ALL_HEXES: [
@@ -172,8 +205,18 @@ jest.mock('@/data/hexes/index', () => ({
 }));
 jest.mock('@/data/arcanistExploits/index', () => ({
   ALL_ARCANIST_EXPLOITS: [
-    { id: 'potent-magic', name: 'Potent Magic', description: 'Stronger magic', exploitTier: 'standard' },
-    { id: 'quick-study', name: 'Quick Study', description: 'Quick learning', exploitTier: 'greater' },
+    {
+      id: 'potent-magic',
+      name: 'Potent Magic',
+      description: 'Stronger magic',
+      exploitTier: 'standard',
+    },
+    {
+      id: 'quick-study',
+      name: 'Quick Study',
+      description: 'Quick learning',
+      exploitTier: 'greater',
+    },
   ],
 }));
 jest.mock('@/data/investigatorTalents/index', () => ({
@@ -181,18 +224,35 @@ jest.mock('@/data/investigatorTalents/index', () => ({
 }));
 jest.mock('@/data/ninjaTricks/index', () => ({
   ALL_NINJA_TRICKS: [
-    { id: 'acrobatic-master', name: 'Acrobatic Master', description: 'Acrobatics bonus', trickTier: 'standard' },
-    { id: 'see-the-unseen', name: 'See the Unseen', description: 'See invisible', trickTier: 'master' },
+    {
+      id: 'acrobatic-master',
+      name: 'Acrobatic Master',
+      description: 'Acrobatics bonus',
+      trickTier: 'standard',
+    },
+    {
+      id: 'see-the-unseen',
+      name: 'See the Unseen',
+      description: 'See invisible',
+      trickTier: 'master',
+    },
   ],
 }));
 jest.mock('@/data/slayerTalents/index', () => ({
   ALL_SLAYER_TALENTS: [
-    { id: 'ranger-combat-style', name: 'Ranger Combat Style', description: 'Combat style', talentTier: 'standard' },
+    {
+      id: 'ranger-combat-style',
+      name: 'Ranger Combat Style',
+      description: 'Combat style',
+      talentTier: 'standard',
+    },
     { id: 'quarry', name: 'Quarry', description: 'Mark target', talentTier: 'advanced' },
   ],
 }));
 jest.mock('@/data/magusArcana/index', () => ({
-  ALL_MAGUS_ARCANA: [{ id: 'arcane-accuracy', name: 'Arcane Accuracy', description: 'Insight bonus to attack' }],
+  ALL_MAGUS_ARCANA: [
+    { id: 'arcane-accuracy', name: 'Arcane Accuracy', description: 'Insight bonus to attack' },
+  ],
 }));
 jest.mock('@/data/warpriestBlessings/index', () => ({
   ALL_WARPRIEST_BLESSINGS: [
@@ -201,66 +261,153 @@ jest.mock('@/data/warpriestBlessings/index', () => ({
 }));
 jest.mock('@/data/alchemistDiscoveries/index', () => ({
   ALL_ALCHEMIST_DISCOVERIES: [
-    { id: 'infuse-mutagen', name: 'Infuse Mutagen', description: 'Create extra mutagen', discoveryTier: 'standard' },
-    { id: 'grand-mutagen', name: 'Grand Mutagen', description: 'Huge mutagen', discoveryTier: 'grand' },
+    {
+      id: 'infuse-mutagen',
+      name: 'Infuse Mutagen',
+      description: 'Create extra mutagen',
+      discoveryTier: 'standard',
+    },
+    {
+      id: 'grand-mutagen',
+      name: 'Grand Mutagen',
+      description: 'Huge mutagen',
+      discoveryTier: 'grand',
+    },
   ],
 }));
 jest.mock('@/data/bloodlines/index', () => ({
   ALL_BLOODLINES: [
-    { id: 'aberrant-sorcerer', name: 'Aberrant', bloodlineArcana: 'Aberrant bonus', classIds: ['sorcerer'] },
+    {
+      id: 'aberrant-sorcerer',
+      name: 'Aberrant',
+      bloodlineArcana: 'Aberrant bonus',
+      classIds: ['sorcerer'],
+    },
     { id: 'aberrant-bloodrager', name: 'Aberrant', classIds: ['bloodrager'] },
   ],
 }));
 jest.mock('@/data/shamanSpirits/index', () => ({
   ALL_SHAMAN_SPIRITS: [
     { id: 'battle-spirit', name: 'Battle', description: 'Battle spirit', wanderingSpirit: true },
-    { id: 'heavens-spirit', name: 'Heavens', description: 'Heavens spirit', wanderingSpirit: false },
+    {
+      id: 'heavens-spirit',
+      name: 'Heavens',
+      description: 'Heavens spirit',
+      wanderingSpirit: false,
+    },
   ],
 }));
 jest.mock('@/data/eidolonEvolutions/index', () => ({
   ALL_EIDOLON_EVOLUTIONS: [
-    { id: 'limbs-arms', name: 'Limbs (Arms)', description: 'Extra arms', evolutionPointCost: 2, summoner: 'apg' },
+    {
+      id: 'limbs-arms',
+      name: 'Limbs (Arms)',
+      description: 'Extra arms',
+      evolutionPointCost: 2,
+      summoner: 'apg',
+    },
     { id: 'bite', name: 'Bite', description: 'Bite attack', evolutionPointCost: 1, summoner: null },
   ],
 }));
 jest.mock('@/data/mesmeristTricks/index', () => ({
   ALL_MESMERIST_TRICKS: [
-    { id: 'astute-perception', name: 'Astute Perception', description: 'Perception bonus', trickTier: 'standard' },
-    { id: 'time-skitter', name: 'Time Skitter', description: 'Extra move action', trickTier: 'masterful' },
+    {
+      id: 'astute-perception',
+      name: 'Astute Perception',
+      description: 'Perception bonus',
+      trickTier: 'standard',
+    },
+    {
+      id: 'time-skitter',
+      name: 'Time Skitter',
+      description: 'Extra move action',
+      trickTier: 'masterful',
+    },
   ],
 }));
 jest.mock('@/data/kineticistWildTalents/index', () => ({
   ALL_WILD_TALENTS: [
-    { id: 'extended-range', name: 'Extended Range', description: 'Longer range', talentType: 'infusion', infusionType: 'form', element: 'universal' },
-    { id: 'kinetic-blade', name: 'Kinetic Blade', description: 'Blade of energy', talentType: 'infusion', infusionType: 'substance', element: 'fire' },
-    { id: 'fire-blast', name: 'Fire Blast', description: 'Fire ranged attack', talentType: 'blast', element: 'fire' },
+    {
+      id: 'extended-range',
+      name: 'Extended Range',
+      description: 'Longer range',
+      talentType: 'infusion',
+      infusionType: 'form',
+      element: 'universal',
+    },
+    {
+      id: 'kinetic-blade',
+      name: 'Kinetic Blade',
+      description: 'Blade of energy',
+      talentType: 'infusion',
+      infusionType: 'substance',
+      element: 'fire',
+    },
+    {
+      id: 'fire-blast',
+      name: 'Fire Blast',
+      description: 'Fire ranged attack',
+      talentType: 'blast',
+      element: 'fire',
+    },
   ],
 }));
 jest.mock('@/data/occultistFocusPowers/index', () => ({
   ALL_OCCULTIST_FOCUS_POWERS: [
-    { id: 'base-focus', name: 'Base Focus', description: 'Base power', school: 'abjuration', isBasePower: true },
-    { id: 'abjuration-ward', name: 'Abjuration Ward', description: 'Ward allies', school: 'abjuration', isBasePower: false },
+    {
+      id: 'base-focus',
+      name: 'Base Focus',
+      description: 'Base power',
+      school: 'abjuration',
+      isBasePower: true,
+    },
+    {
+      id: 'abjuration-ward',
+      name: 'Abjuration Ward',
+      description: 'Ward allies',
+      school: 'abjuration',
+      isBasePower: false,
+    },
   ],
 }));
 jest.mock('@/data/phrenicAmplifications/index', () => ({
   ALL_PHRENIC_AMPLIFICATIONS: [
-    { id: 'biokinetic-healing', name: 'Biokinetic Healing', description: 'Heal with power', amplificationTier: 'minor' },
-    { id: 'relentless-healing', name: 'Relentless Healing', description: 'Force spell through', amplificationTier: 'major' },
+    {
+      id: 'biokinetic-healing',
+      name: 'Biokinetic Healing',
+      description: 'Heal with power',
+      amplificationTier: 'minor',
+    },
+    {
+      id: 'relentless-healing',
+      name: 'Relentless Healing',
+      description: 'Force spell through',
+      amplificationTier: 'major',
+    },
   ],
 }));
 jest.mock('@/data/deities/index', () => ({
   getDeityByName: jest.fn((name: string) => {
     if (name === 'Cayden Cailean') {
-      return { id: 'cayden-cailean', name: 'Cayden Cailean', domains: ['chaos', 'charm'], subdomains: ['azata', 'love'] };
+      return {
+        id: 'cayden-cailean',
+        name: 'Cayden Cailean',
+        domains: ['chaos', 'charm'],
+        subdomains: ['azata', 'love'],
+      };
     }
     return undefined;
   }),
 }));
 
-// ---- Re-import after mocks are registered ----------------------------------------
-// (jest.mock hoists, so the module re-import picks up mock implementations)
+// ---- Inject StaticGameDataConnector so tests use mocked @/data/ imports ----------
+// FirestoreGameDataConnector (the default) tries to connect to Firestore.
+// StaticGameDataConnector reads from @/data/ imports, which are mocked above.
 
 describe('GameDataService', () => {
+  beforeAll(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
   describe('getFeatById', () => {
     beforeEach(() => {
       const featsModule = jest.requireMock('@/data/feats/index');
@@ -376,7 +523,12 @@ describe('GameDataService', () => {
       racesModule.FEATURED_RACES = [MOCK_RACE_ELF];
       racesModule.UNCOMMON_RACES = [MOCK_RACE_TIEFLING];
       racesModule.FLEXIBLE_ABILITY_RACES = ['Human'];
-      racesModule.ALL_EXPANDED_RACES = [MOCK_RACE, MOCK_RACE_DWARF, MOCK_RACE_ELF, MOCK_RACE_TIEFLING];
+      racesModule.ALL_EXPANDED_RACES = [
+        MOCK_RACE,
+        MOCK_RACE_DWARF,
+        MOCK_RACE_ELF,
+        MOCK_RACE_TIEFLING,
+      ];
       const groups = GameDataService.getRaceGroupsSync();
       expect(groups).toHaveProperty('core');
       expect(groups).toHaveProperty('featured');
@@ -432,7 +584,9 @@ describe('GameDataService', () => {
     });
 
     test('domains — deity filter narrows to deity domains', async () => {
-      const items = await GameDataService.getClassChoiceItems('domains', { deityIds: 'Cayden Cailean' });
+      const items = await GameDataService.getClassChoiceItems('domains', {
+        deityIds: 'Cayden Cailean',
+      });
       // Cayden Cailean has domains: ['chaos','charm'], subdomains: ['azata','love']
       // Mock data has 'air' and 'fire', neither in deity's domains — returns empty
       expect(Array.isArray(items)).toBe(true);
@@ -466,7 +620,9 @@ describe('GameDataService', () => {
     });
 
     test('revelations — mystery filter narrows to matching mystery', async () => {
-      const items = await GameDataService.getClassChoiceItems('revelations', { mysteryId: 'battle' });
+      const items = await GameDataService.getClassChoiceItems('revelations', {
+        mysteryId: 'battle',
+      });
       expect(items).toHaveLength(1);
       expect(items[0].key).toBe('battle-cry');
     });
@@ -499,7 +655,9 @@ describe('GameDataService', () => {
     });
 
     test('ninjatricks — tier filter narrows results', async () => {
-      const items = await GameDataService.getClassChoiceItems('ninjatricks', { trickTier: 'master' });
+      const items = await GameDataService.getClassChoiceItems('ninjatricks', {
+        trickTier: 'master',
+      });
       expect(items).toHaveLength(1);
     });
 
@@ -509,7 +667,9 @@ describe('GameDataService', () => {
     });
 
     test('slayertalents — talent tier filter narrows results', async () => {
-      const items = await GameDataService.getClassChoiceItems('slayertalents', { talentTier: 'standard' });
+      const items = await GameDataService.getClassChoiceItems('slayertalents', {
+        talentTier: 'standard',
+      });
       expect(items).toHaveLength(1);
     });
 
@@ -524,7 +684,9 @@ describe('GameDataService', () => {
     });
 
     test('warpriestblessings — deity filter narrows to deity domains', async () => {
-      const items = await GameDataService.getClassChoiceItems('warpriestblessings', { deityIds: 'Cayden Cailean' });
+      const items = await GameDataService.getClassChoiceItems('warpriestblessings', {
+        deityIds: 'Cayden Cailean',
+      });
       expect(Array.isArray(items)).toBe(true);
     });
 
@@ -534,7 +696,9 @@ describe('GameDataService', () => {
     });
 
     test('alchemistdiscoveries — tier filter narrows results', async () => {
-      const items = await GameDataService.getClassChoiceItems('alchemistdiscoveries', { discoveryTier: 'grand' });
+      const items = await GameDataService.getClassChoiceItems('alchemistdiscoveries', {
+        discoveryTier: 'grand',
+      });
       expect(items).toHaveLength(1);
     });
 
@@ -544,7 +708,9 @@ describe('GameDataService', () => {
     });
 
     test('bloodlines — classId filter narrows results', async () => {
-      const items = await GameDataService.getClassChoiceItems('bloodlines', { classIds: 'sorcerer' });
+      const items = await GameDataService.getClassChoiceItems('bloodlines', {
+        classIds: 'sorcerer',
+      });
       expect(items).toHaveLength(1);
       expect(items[0].key).toBe('aberrant-sorcerer');
     });
@@ -583,7 +749,9 @@ describe('GameDataService', () => {
     });
 
     test('shamanspirits — wanderingOnly filter narrows results', async () => {
-      const items = await GameDataService.getClassChoiceItems('shamanspirits', { wanderingOnly: true });
+      const items = await GameDataService.getClassChoiceItems('shamanspirits', {
+        wanderingOnly: true,
+      });
       expect(items).toHaveLength(1);
       expect(items[0].key).toBe('battle-spirit');
     });
@@ -594,7 +762,9 @@ describe('GameDataService', () => {
     });
 
     test('eidolonevolutions — summonerType filter narrows results', async () => {
-      const items = await GameDataService.getClassChoiceItems('eidolonevolutions', { summonerType: 'apg' });
+      const items = await GameDataService.getClassChoiceItems('eidolonevolutions', {
+        summonerType: 'apg',
+      });
       expect(items.some((i) => i.key === 'bite')).toBe(true); // null summoner always included
       expect(items.some((i) => i.key === 'limbs-arms')).toBe(true);
     });
@@ -616,7 +786,9 @@ describe('GameDataService', () => {
     });
 
     test('wildtalents — talentType filter narrows results', async () => {
-      const items = await GameDataService.getClassChoiceItems('wildtalents', { talentType: 'infusion' });
+      const items = await GameDataService.getClassChoiceItems('wildtalents', {
+        talentType: 'infusion',
+      });
       expect(items).toHaveLength(2);
     });
 
@@ -639,7 +811,9 @@ describe('GameDataService', () => {
 
     test('phrenicamplifications — major tier categorized', async () => {
       const items = await GameDataService.getClassChoiceItems('phrenicamplifications');
-      expect(items.find((i) => i.key === 'relentless-healing')?.category).toBe('Major Amplifications');
+      expect(items.find((i) => i.key === 'relentless-healing')?.category).toBe(
+        'Major Amplifications',
+      );
     });
 
     test('unknown collection returns empty array', async () => {

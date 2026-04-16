@@ -1,3 +1,5 @@
+import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 import { PrerequisiteService } from '@services/PrerequisiteService';
 import { CharacterService } from '@services/CharacterService';
 import { ModifierPipelineService } from '@services/ModifierPipelineService';
@@ -63,6 +65,10 @@ function makeFeat(prereqs: FeatDefinition['prerequisites']): FeatDefinition {
 }
 
 describe('PrerequisiteService', () => {
+  beforeAll(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
+
   describe('checkPrerequisites', () => {
     test('feat with no prerequisites is always met', async () => {
       const char = createTestCharacter();

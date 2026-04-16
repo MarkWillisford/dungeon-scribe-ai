@@ -1,3 +1,5 @@
+import { GameDataService } from '@/services/GameDataService';
+import { StaticGameDataConnector } from '@/services/StaticGameDataConnector';
 import { EquipmentService } from '@/services/EquipmentService';
 import { EquipmentDatabaseService } from '@/services/EquipmentDatabaseService';
 import { CharacterService } from '@/services/CharacterService';
@@ -35,6 +37,10 @@ const createTestCharacter = (): Character => {
 };
 
 describe('Equipment Management Integration', () => {
+  beforeAll(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
+
   let character: Character;
 
   beforeEach(async () => {
@@ -124,7 +130,8 @@ describe('Equipment Management Integration', () => {
       updated = armorResult.data!;
 
       // Add and equip heavy shield
-      const heavyShieldTemplate = (await EquipmentDatabaseService.getEquipmentById('heavy_shield'))!;
+      const heavyShieldTemplate =
+        (await EquipmentDatabaseService.getEquipmentById('heavy_shield'))!;
       updated = EquipmentService.addItemToCharacter(updated, heavyShieldTemplate);
       const shieldId = updated.equipment.shields[0].id;
       const shieldResult = EquipmentService.equipItem(updated, shieldId, EquipmentSlot.OFF_HAND);
@@ -292,7 +299,8 @@ describe('Equipment Management Integration', () => {
     });
 
     test('should calculate +2 enhanced shield AC bonus', async () => {
-      const heavyShieldTemplate = (await EquipmentDatabaseService.getEquipmentById('heavy_shield'))!;
+      const heavyShieldTemplate =
+        (await EquipmentDatabaseService.getEquipmentById('heavy_shield'))!;
       let updated = EquipmentService.addItemToCharacter(character, heavyShieldTemplate);
 
       // Set as +2 heavy shield
@@ -337,7 +345,8 @@ describe('Equipment Management Integration', () => {
     test('should track total weight as items are added', async () => {
       const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!; // 4 lbs
       const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!; // 15 lbs
-      const heavyShieldTemplate = (await EquipmentDatabaseService.getEquipmentById('heavy_shield'))!; // 15 lbs
+      const heavyShieldTemplate =
+        (await EquipmentDatabaseService.getEquipmentById('heavy_shield'))!; // 15 lbs
       const backpackTemplate = (await EquipmentDatabaseService.getEquipmentById('backpack'))!; // 2 lbs
       const ropeTemplate = (await EquipmentDatabaseService.getEquipmentById('rope_silk'))!; // 5 lbs
 
@@ -646,7 +655,8 @@ describe('Equipment Management Integration', () => {
     });
 
     test('enhancement bonuses on shield are part of the SHIELD typed bonus (combined)', async () => {
-      const heavyShieldTemplate = (await EquipmentDatabaseService.getEquipmentById('heavy_shield'))!;
+      const heavyShieldTemplate =
+        (await EquipmentDatabaseService.getEquipmentById('heavy_shield'))!;
       let updated = EquipmentService.addItemToCharacter(character, heavyShieldTemplate);
       updated.equipment.shields[0].enhancement = 1;
 

@@ -1,13 +1,15 @@
 /**
  * GameDataService — unified data access layer for all game data.
  *
- * Phase A: backed by static TypeScript imports (zero behavior change).
- * Phase B: swap internals to Firestore queries (same public API).
+ * All reads go through the active GameDataConnector. The connector is
+ * swappable — production uses FirestoreGameDataConnector, tests inject
+ * StaticGameDataConnector via setConnector().
  *
- * All methods are async so Phase B requires no call-site changes.
- * QueryContext is optional on every call — defaults to reading from the Redux
- * store so callers (components and pure services alike) don't need to thread
- * context themselves. Pass context explicitly in tests or special cases.
+ * Phase A: StaticGameDataConnector (static @/data/ imports)
+ * Phase B: FirestoreGameDataConnector (Firestore, this file)
+ * Future:  Drop-in replacement connector when search architecture is decided
+ *
+ * All methods are async. QueryContext is optional — defaults to Redux store.
  */
 
 import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
@@ -36,39 +38,10 @@ import type {
   BloodlineClassId,
 } from '@/types/classOptions';
 
-// ---- Phase A static data imports -----------------------------------------------
-// These will be removed in Phase B when Firestore becomes the backing source.
-// Each import corresponds to one Firestore collection.
-
-import { ALL_DOMAINS } from '@/data/domains/index';
-import { ALL_RAGE_POWERS } from '@/data/ragePowers/index';
-import { ALL_ROGUE_TALENTS } from '@/data/rogueTalents/index';
-import { ALL_MYSTERIES } from '@/data/mysteries/index';
-import { ALL_INQUISITIONS } from '@/data/inquisitions/index';
-import { ALL_REVELATIONS } from '@/data/revelations/index';
-import { ALL_CAVALIER_ORDERS } from '@/data/cavalierOrders/index';
-import { ALL_HEXES } from '@/data/hexes/index';
-import { ALL_ARCANIST_EXPLOITS } from '@/data/arcanistExploits/index';
-import { ALL_INVESTIGATOR_TALENTS } from '@/data/investigatorTalents/index';
-import { ALL_BLOODLINES } from '@/data/bloodlines/index';
-import { ALL_SHAMAN_SPIRITS } from '@/data/shamanSpirits/index';
-import { ALL_EIDOLON_EVOLUTIONS } from '@/data/eidolonEvolutions/index';
-import { ALL_MESMERIST_TRICKS } from '@/data/mesmeristTricks/index';
-import { ALL_WILD_TALENTS } from '@/data/kineticistWildTalents/index';
-import { ALL_OCCULTIST_FOCUS_POWERS } from '@/data/occultistFocusPowers/index';
-import { ALL_PHRENIC_AMPLIFICATIONS } from '@/data/phrenicAmplifications/index';
-import { getDeityByName } from '@/data/deities/index';
-import { ALL_NINJA_TRICKS } from '@/data/ninjaTricks/index';
-import { ALL_SLAYER_TALENTS } from '@/data/slayerTalents/index';
-import { ALL_MAGUS_ARCANA } from '@/data/magusArcana/index';
-import { ALL_WARPRIEST_BLESSINGS } from '@/data/warpriestBlessings/index';
-import { ALL_ALCHEMIST_DISCOVERIES } from '@/data/alchemistDiscoveries/index';
-import { ALL_FEATS } from '@/data/feats/index';
-import { ALL_TRAITS } from '@/data/traits/index';
+// Phase B concession: sync accessors still need static data for the initial
+// render of ClassSelector and race pickers. Removed once those components
+// are updated to handle empty initial state (Phase B cleanup pass).
 import { CORE_CLASSES } from '@/data/classes';
-import { ALL_EXPANDED_CLASSES, SPELL_TABLES } from '@/data/classes/index';
-import { getDefinitionsForClass } from '@/data/classChoiceDefinitions/index';
-import { ALL_WEAPONS, ALL_ARMOR, ALL_SHIELDS, ALL_GEAR } from '@/data/equipment';
 import {
   CORE_RACES,
   FEATURED_RACES,
@@ -77,24 +50,25 @@ import {
   ALL_EXPANDED_RACES,
 } from '@/data/races';
 
+import { FirestoreGameDataConnector } from './FirestoreGameDataConnector';
+import type { GameDataConnector, ClassChoiceFilters } from './GameDataConnector';
+
 // ---- QueryContext ----------------------------------------------------------------
 
 export interface QueryContext {
   userId: string;
   campaignId?: string;
   ruleset: Ruleset;
-  includePersonal?: boolean; // include user's local homebrew (default: true)
+  includePersonal?: boolean;
 }
 
-// ---- Feat filter ----------------------------------------------------------------
+// ---- Supporting types -----------------------------------------------------------
 
 export interface FeatFilter {
   featTypes?: FeatType[];
   isCombatFeat?: boolean;
   isTeamworkFeat?: boolean;
 }
-
-// ---- Race groups return type ----------------------------------------------------
 
 export interface RaceGroups {
   core: ExpandedRaceData[];
@@ -106,20 +80,26 @@ export interface RaceGroups {
 // ---- GameDataService ------------------------------------------------------------
 
 export class GameDataService {
-  /**
-   * Build a QueryContext from the current Redux store state.
-   * Used as the default when callers don't pass context explicitly.
-   */
+  private static _connector: GameDataConnector | null = null;
+
+  private static get connector(): GameDataConnector {
+    if (!this._connector) {
+      this._connector = new FirestoreGameDataConnector();
+    }
+    return this._connector;
+  }
+
+  /** For tests only — inject a connector before any test runs. */
+  static setConnector(connector: GameDataConnector): void {
+    this._connector = connector;
+  }
+
   private static getContextFromStore(): QueryContext {
-    // Lazy require — avoids a top-level import of store.ts, which would transitively
-    // load every Redux slice (including large ones like characterEntrySlice) whenever
-    // any service imports GameDataService. The store is only resolved at call time.
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { store } = require('@/store/store') as { store: { getState(): RootState } };
     const state = store.getState();
     return {
       userId: state.auth.user?.uid ?? '',
-      // Phase B: wire to state.campaigns.activeCampaignId when campaigns slice is added.
+      // Phase C: wire to state.campaigns.activeCampaignId when campaigns slice is added.
       campaignId: undefined,
       ruleset: state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD,
     };
@@ -128,43 +108,110 @@ export class GameDataService {
   // ---- Class choice options -------------------------------------------------------
 
   /**
-   * Returns SearchItem[] for the given class choice collection, pre-filtered
-   * by the resolved filter map. Moves the switch logic out of ClassChoiceRow.
-   *
-   * Phase B: each case becomes a typed Firestore query against the named collection.
+   * Returns SearchItem[] for the given class choice collection.
+   * The connector supplies raw typed data; mapping to SearchItem[] stays here
+   * since it is presentation logic, not data access logic.
    */
   static async getClassChoiceItems(
     collectionName: string,
     filter: Record<string, unknown> = {},
-    _context?: QueryContext,
+    context?: QueryContext,
   ): Promise<SearchItem[]> {
+    const ctx = context ?? GameDataService.getContextFromStore();
+
+    // Feats are handled via their own connector methods, not getClassChoiceOptions.
+    if (collectionName === 'feats') {
+      const featFilter: FeatFilter = {
+        featTypes: filter.featTypes as FeatType[] | undefined,
+        isCombatFeat: filter.isCombatFeat as boolean | undefined,
+        isTeamworkFeat: filter.isTeamworkFeat as boolean | undefined,
+      };
+      const feats = await GameDataService.connector.getFeats(featFilter, ctx);
+      return feats.map((f) => ({
+        key: f.id,
+        label: f.name,
+        subLabel: f.description?.slice(0, 80),
+      }));
+    }
+
+    // All other class choice collections go through getClassChoiceOptions.
+    const validCollections = [
+      'domains',
+      'ragepowers',
+      'roguetalents',
+      'mysteries',
+      'inquisitions',
+      'revelations',
+      'cavalierorders',
+      'hexes',
+      'arcanistexploits',
+      'investigatortalents',
+      'ninjatricks',
+      'slayertalents',
+      'magusarcana',
+      'warpriestblessings',
+      'alchemistdiscoveries',
+      'bloodlines',
+      'shamanspirits',
+      'eidolonevolutions',
+      'mesmeristtricks',
+      'wildtalents',
+      'occultistfocuspowers',
+      'phrenicamplifications',
+    ];
+
+    if (!validCollections.includes(collectionName)) return [];
+
+    const filters: ClassChoiceFilters = {
+      deityName: filter.deityIds as string | undefined,
+      mysteryId: filter.mysteryId as string | undefined,
+      classId: filter.classIds as BloodlineClassId | undefined,
+      wanderingOnly: filter.wanderingOnly as boolean | undefined,
+      summonerType: filter.summonerType as 'apg' | 'unchained' | undefined,
+      talentType: filter.talentType as string | undefined,
+      trickTier: filter.trickTier as string | undefined,
+      talentTier: filter.talentTier as string | undefined,
+      discoveryTier: filter.discoveryTier as string | undefined,
+    };
+
+    const items = await GameDataService.connector.getClassChoiceOptions(
+      collectionName as Parameters<GameDataConnector['getClassChoiceOptions']>[0],
+      filters,
+      ctx,
+    );
+
+    // Map raw collection entries to SearchItem[], preserving per-collection
+    // presentation logic (tier categories, subLabel format, etc.).
+    return GameDataService.mapToSearchItems(collectionName, items);
+  }
+
+  /** Maps raw ClassOptionBase[] to SearchItem[] with collection-specific labels. */
+  private static mapToSearchItems(collectionName: string, items: unknown[]): SearchItem[] {
     switch (collectionName) {
-      case 'domains': {
-        const deityName = filter.deityIds as string | undefined;
-        const deity = deityName ? getDeityByName(deityName) : undefined;
-        const deityDomainIds = deity
-          ? new Set([...deity.domains, ...deity.subdomains])
-          : null;
-        const pool = deityDomainIds
-          ? ALL_DOMAINS.filter((d) => deityDomainIds.has(d.id))
-          : ALL_DOMAINS;
-        return pool.map((d) => ({
+      case 'domains':
+        return (
+          items as { id: string; name: string; description?: string; druidAllowed?: boolean }[]
+        ).map((d) => ({
           key: d.id,
           label: d.name,
           subLabel: d.description?.slice(0, 80),
-          category: deity ? undefined : (d.druidAllowed ? 'Druid / Cleric' : 'Cleric'),
+          category: d.druidAllowed ? 'Druid / Cleric' : 'Cleric',
         }));
-      }
 
       case 'ragepowers':
-        return ALL_RAGE_POWERS.map((r) => ({
-          key: r.id,
-          label: r.name,
-          subLabel: r.description?.slice(0, 80),
+      case 'inquisitions':
+      case 'investigatortalents':
+      case 'magusarcana':
+        return (items as { id: string; name: string; description?: string }[]).map((i) => ({
+          key: i.id,
+          label: i.name,
+          subLabel: i.description?.slice(0, 80),
         }));
 
       case 'roguetalents':
-        return ALL_ROGUE_TALENTS.map((t) => ({
+        return (
+          items as { id: string; name: string; description?: string; talentTier?: string }[]
+        ).map((t) => ({
           key: t.id,
           label: t.name,
           subLabel: t.description?.slice(0, 80),
@@ -172,181 +219,96 @@ export class GameDataService {
         }));
 
       case 'mysteries':
-        return ALL_MYSTERIES.map((m) => ({
+        return (items as { id: string; name: string; classSkills: string[] }[]).map((m) => ({
           key: m.id,
           label: m.name,
           subLabel: m.classSkills.slice(0, 3).join(', '),
         }));
 
-      case 'inquisitions':
-        return ALL_INQUISITIONS.map((i) => ({
-          key: i.id,
-          label: i.name,
-          subLabel: i.description?.slice(0, 80),
-        }));
-
-      case 'revelations': {
-        const mysteryId = filter.mysteryId as string | undefined;
-        const pool = mysteryId
-          ? ALL_REVELATIONS.filter((r) => r.mysteryId === mysteryId)
-          : ALL_REVELATIONS;
-        return pool.map((r) => ({
+      case 'revelations':
+        return (items as { id: string; name: string; description?: string }[]).map((r) => ({
           key: r.id,
           label: r.name,
           subLabel: r.description?.slice(0, 80),
         }));
-      }
 
       case 'cavalierorders':
-        return ALL_CAVALIER_ORDERS.map((o) => ({
+        return (items as { id: string; name: string; classSkills: string[] }[]).map((o) => ({
           key: o.id,
           label: o.name,
           subLabel: o.classSkills.join(', '),
         }));
 
       case 'hexes':
-        return ALL_HEXES.map((h) => ({
+        return (
+          items as { id: string; name: string; description?: string; hexTier?: string }[]
+        ).map((h) => ({
           key: h.id,
           label: h.name,
           subLabel: h.description?.slice(0, 80),
           category:
-            h.hexTier === 'grand'
-              ? 'Grand Hexes'
-              : h.hexTier === 'major'
-                ? 'Major Hexes'
-                : 'Hexes',
+            h.hexTier === 'grand' ? 'Grand Hexes' : h.hexTier === 'major' ? 'Major Hexes' : 'Hexes',
         }));
 
       case 'arcanistexploits':
-        return ALL_ARCANIST_EXPLOITS.map((e) => ({
+        return (
+          items as { id: string; name: string; description?: string; exploitTier?: string }[]
+        ).map((e) => ({
           key: e.id,
           label: e.name,
           subLabel: e.description?.slice(0, 80),
           category: e.exploitTier === 'greater' ? 'Greater Exploits' : 'Exploits',
         }));
 
-      case 'investigatortalents':
-        return ALL_INVESTIGATOR_TALENTS.map((t) => ({
-          key: t.id,
-          label: t.name,
-          subLabel: t.description?.slice(0, 80),
-        }));
-
-      case 'ninjatricks': {
-        const tier = filter.trickTier as NinjaTrickEntry['trickTier'] | undefined;
-        const pool = tier
-          ? ALL_NINJA_TRICKS.filter((t) => t.trickTier === tier)
-          : ALL_NINJA_TRICKS;
-        return pool.map((t) => ({
+      case 'ninjatricks':
+        return (items as NinjaTrickEntry[]).map((t) => ({
           key: t.id,
           label: t.name,
           subLabel: t.description?.slice(0, 80),
           category: t.trickTier === 'master' ? 'Master Tricks' : 'Tricks',
         }));
-      }
 
-      case 'slayertalents': {
-        const tier = filter.talentTier as SlayerTalentEntry['talentTier'] | undefined;
-        const pool = tier
-          ? ALL_SLAYER_TALENTS.filter((t) => t.talentTier === tier)
-          : ALL_SLAYER_TALENTS;
-        return pool.map((t) => ({
+      case 'slayertalents':
+        return (items as SlayerTalentEntry[]).map((t) => ({
           key: t.id,
           label: t.name,
           subLabel: t.description?.slice(0, 80),
           category: t.talentTier === 'advanced' ? 'Advanced Talents' : 'Talents',
         }));
-      }
 
-      case 'magusarcana':
-        return ALL_MAGUS_ARCANA.map((a) => ({
-          key: a.id,
-          label: a.name,
-          subLabel: a.description?.slice(0, 80),
-        }));
-
-      case 'warpriestblessings': {
-        const deityName = filter.deityIds as string | undefined;
-        const deity = deityName ? getDeityByName(deityName) : undefined;
-        const deityDomainIds = deity
-          ? new Set([...deity.domains, ...deity.subdomains])
-          : null;
-        const pool = deityDomainIds
-          ? ALL_WARPRIEST_BLESSINGS.filter((b) =>
-              deityDomainIds.has(b.id.replace('warpriest-blessing-', '')),
-            )
-          : ALL_WARPRIEST_BLESSINGS;
-        return pool.map((b) => ({
+      case 'warpriestblessings':
+        return (items as { id: string; name: string; minorPower: string }[]).map((b) => ({
           key: b.id,
           label: b.name,
           subLabel: b.minorPower.slice(0, 80),
         }));
-      }
 
-      case 'alchemistdiscoveries': {
-        const tier = filter.discoveryTier as AlchemistDiscoveryEntry['discoveryTier'] | undefined;
-        const pool = tier
-          ? ALL_ALCHEMIST_DISCOVERIES.filter((d) => d.discoveryTier === tier)
-          : ALL_ALCHEMIST_DISCOVERIES;
-        return pool.map((d) => ({
+      case 'alchemistdiscoveries':
+        return (items as AlchemistDiscoveryEntry[]).map((d) => ({
           key: d.id,
           label: d.name,
           subLabel: d.description?.slice(0, 80),
           category: d.discoveryTier === 'grand' ? 'Grand Discovery' : undefined,
         }));
-      }
 
-      case 'bloodlines': {
-        const classId = filter.classIds as BloodlineClassId | undefined;
-        const pool = classId
-          ? ALL_BLOODLINES.filter((b) => b.classIds.includes(classId))
-          : ALL_BLOODLINES;
-        return pool.map((b) => ({
+      case 'bloodlines':
+        return (
+          items as { id: string; name: string; bloodlineArcana?: string; description?: string }[]
+        ).map((b) => ({
           key: b.id,
           label: b.name,
           subLabel: b.bloodlineArcana?.slice(0, 80) ?? b.description?.slice(0, 80),
         }));
-      }
 
-      case 'feats': {
-        const featTypes = filter.featTypes as FeatType[] | undefined;
-        const isCombatFeat = filter.isCombatFeat as boolean | undefined;
-        const isTeamworkFeat = filter.isTeamworkFeat as boolean | undefined;
-        let pool = ALL_FEATS;
-        if (featTypes && featTypes.length > 0) {
-          pool = pool.filter((f) => featTypes.some((t) => f.types.includes(t)));
-        } else if (isCombatFeat) {
-          pool = pool.filter((f) => f.types.includes('combat'));
-        } else if (isTeamworkFeat) {
-          pool = pool.filter((f) => f.types.includes('teamwork'));
-        }
-        return pool.map((f) => ({
-          key: f.id,
-          label: f.name,
-          subLabel: f.description?.slice(0, 80),
-        }));
-      }
-
-      case 'shamanspirits': {
-        const wanderingOnly = filter.wanderingOnly as boolean | undefined;
-        const pool = wanderingOnly
-          ? (ALL_SHAMAN_SPIRITS as ShamanSpiritEntry[]).filter((s) => s.wanderingSpirit)
-          : (ALL_SHAMAN_SPIRITS as ShamanSpiritEntry[]);
-        return pool.map((s) => ({
+      case 'shamanspirits':
+        return (items as ShamanSpiritEntry[]).map((s) => ({
           key: s.id,
           label: s.name,
           subLabel: s.description?.slice(0, 80),
         }));
-      }
 
-      case 'eidolonevolutions': {
-        const summonerType = filter.summonerType as 'apg' | 'unchained' | undefined;
-        const pool = summonerType
-          ? (ALL_EIDOLON_EVOLUTIONS as EidolonEvolutionEntry[]).filter(
-              (e) => !e.summoner || e.summoner === summonerType,
-            )
-          : (ALL_EIDOLON_EVOLUTIONS as EidolonEvolutionEntry[]);
-        return pool.map((e) => ({
+      case 'eidolonevolutions':
+        return (items as EidolonEvolutionEntry[]).map((e) => ({
           key: e.id,
           label: e.name,
           subLabel: e.description?.slice(0, 80),
@@ -359,22 +321,26 @@ export class GameDataService {
                   ? '2-Point Evolutions'
                   : '1-Point Evolutions',
         }));
-      }
 
       case 'mesmeristtricks':
-        return (ALL_MESMERIST_TRICKS as MesmeristTrickEntry[]).map((t) => ({
+        return (items as MesmeristTrickEntry[]).map((t) => ({
           key: t.id,
           label: t.name,
           subLabel: t.description?.slice(0, 80),
           category: t.trickTier === 'masterful' ? 'Masterful Tricks' : 'Standard Tricks',
         }));
 
-      case 'wildtalents': {
-        const talentType = filter.talentType as string | undefined;
-        const pool = talentType
-          ? ALL_WILD_TALENTS.filter((t) => t.talentType === talentType)
-          : ALL_WILD_TALENTS;
-        return pool.map((t) => ({
+      case 'wildtalents':
+        return (
+          items as {
+            id: string;
+            name: string;
+            description?: string;
+            talentType: string;
+            infusionType?: string;
+            element: string;
+          }[]
+        ).map((t) => ({
           key: t.id,
           label: t.name,
           subLabel: t.description?.slice(0, 80),
@@ -385,18 +351,21 @@ export class GameDataService {
                 : 'Substance Infusions'
               : t.element.charAt(0).toUpperCase() + t.element.slice(1),
         }));
-      }
 
       case 'occultistfocuspowers':
-        return ALL_OCCULTIST_FOCUS_POWERS.filter((p) => !p.isBasePower).map((p) => ({
-          key: p.id,
-          label: p.name,
-          subLabel: p.description?.slice(0, 80),
-          category: p.school.charAt(0).toUpperCase() + p.school.slice(1),
-        }));
+        return (items as { id: string; name: string; description?: string; school: string }[]).map(
+          (p) => ({
+            key: p.id,
+            label: p.name,
+            subLabel: p.description?.slice(0, 80),
+            category: p.school.charAt(0).toUpperCase() + p.school.slice(1),
+          }),
+        );
 
       case 'phrenicamplifications':
-        return ALL_PHRENIC_AMPLIFICATIONS.map((a) => ({
+        return (
+          items as { id: string; name: string; description?: string; amplificationTier?: string }[]
+        ).map((a) => ({
           key: a.id,
           label: a.name,
           subLabel: a.description?.slice(0, 80),
@@ -408,77 +377,68 @@ export class GameDataService {
     }
   }
 
-  // ---- Feats ----------------------------------------------------------------------
+  // ---- Feats -----------------------------------------------------------------
 
-  static async getAllFeats(
-    filter?: FeatFilter,
-    _context?: QueryContext,
-  ): Promise<FeatDefinition[]> {
-    let pool = ALL_FEATS;
-    if (filter?.featTypes && filter.featTypes.length > 0) {
-      pool = pool.filter((f) => filter.featTypes!.some((t) => f.types.includes(t)));
-    } else if (filter?.isCombatFeat) {
-      pool = pool.filter((f) => f.types.includes('combat'));
-    } else if (filter?.isTeamworkFeat) {
-      pool = pool.filter((f) => f.types.includes('teamwork'));
-    }
-    return pool;
+  static async getAllFeats(filter?: FeatFilter, context?: QueryContext): Promise<FeatDefinition[]> {
+    const ctx = context ?? GameDataService.getContextFromStore();
+    return GameDataService.connector.getFeats(filter, ctx);
   }
 
-  static async getFeatById(
-    id: string,
-    _context?: QueryContext,
-  ): Promise<FeatDefinition | null> {
-    return ALL_FEATS.find((f) => f.id === id) ?? null;
+  static async getFeatById(id: string, context?: QueryContext): Promise<FeatDefinition | null> {
+    const ctx = context ?? GameDataService.getContextFromStore();
+    return GameDataService.connector.getFeatById(id, ctx);
   }
 
-  // ---- Traits ---------------------------------------------------------------------
+  // ---- Traits ----------------------------------------------------------------
 
-  static async getAllTraits(_context?: QueryContext): Promise<TraitDefinition[]> {
-    return ALL_TRAITS;
+  static async getAllTraits(context?: QueryContext): Promise<TraitDefinition[]> {
+    const ctx = context ?? GameDataService.getContextFromStore();
+    return GameDataService.connector.getTraits(ctx);
   }
 
-  // ---- Classes --------------------------------------------------------------------
+  // ---- Classes ---------------------------------------------------------------
 
   /**
-   * Synchronous core class accessor. Phase A: returns static data immediately.
-   * Used by ClassSelector as the useState lazy initializer so the first render
-   * has real data (no empty-state flicker, tests work without async effect support).
-   * Phase B: remove this and update ClassSelector to accept an empty initial state.
+   * Synchronous accessor — Phase B concession.
+   * ClassSelector uses this as a useState lazy initializer.
+   * Phase B cleanup: remove once ClassSelector accepts empty initial state.
    */
   static getCoreClassesSync(): ClassData[] {
     return CORE_CLASSES;
   }
 
-  static async getCoreClasses(_context?: QueryContext): Promise<ClassData[]> {
-    return CORE_CLASSES;
+  static async getCoreClasses(context?: QueryContext): Promise<ClassData[]> {
+    const ctx = context ?? GameDataService.getContextFromStore();
+    return GameDataService.connector.getCoreClasses(ctx);
   }
 
-  static async getClassByName(name: string): Promise<ExpandedClassData | null> {
-    return ALL_EXPANDED_CLASSES.find(
-      (c) => c.name.toLowerCase() === name.toLowerCase(),
-    ) ?? null;
+  static async getClassByName(
+    name: string,
+    context?: QueryContext,
+  ): Promise<ExpandedClassData | null> {
+    const ctx = context ?? GameDataService.getContextFromStore();
+    return GameDataService.connector.getClassByName(name, ctx);
   }
 
   static async getClassChoiceDefinitions(classId: string): Promise<ClassChoiceDefinition[]> {
-    return getDefinitionsForClass(classId);
+    return GameDataService.connector.getClassChoiceDefinitions(classId);
   }
 
-  static async getSpellTables(): Promise<typeof SPELL_TABLES> {
-    return SPELL_TABLES;
+  static async getSpellTables(): Promise<Record<string, SpellProgressionTable>> {
+    return GameDataService.connector.getSpellTables();
   }
 
-  static async getExpandedClasses(): Promise<ExpandedClassData[]> {
-    return ALL_EXPANDED_CLASSES;
+  static async getExpandedClasses(context?: QueryContext): Promise<ExpandedClassData[]> {
+    const ctx = context ?? GameDataService.getContextFromStore();
+    return GameDataService.connector.getClasses(ctx);
   }
 
-  // ---- Races ----------------------------------------------------------------------
+  // ---- Races -----------------------------------------------------------------
 
   /**
-   * Synchronous race group accessor. Phase A: returns static data immediately.
-   * Used by components as the useState lazy initializer so the first render has
-   * real data (no empty-state flicker, tests work without async effect support).
-   * Phase B: remove this and update components to accept an empty initial state.
+   * Synchronous accessor — Phase B concession.
+   * Race pickers use this as a useState lazy initializer.
+   * Phase B cleanup: remove once pickers accept empty initial state.
    */
   static getRaceGroupsSync(): RaceGroups {
     return {
@@ -489,27 +449,26 @@ export class GameDataService {
     };
   }
 
-  static async getRaceGroups(_context?: QueryContext): Promise<RaceGroups> {
-    return this.getRaceGroupsSync();
+  static async getRaceGroups(context?: QueryContext): Promise<RaceGroups> {
+    const ctx = context ?? GameDataService.getContextFromStore();
+    return GameDataService.connector.getRaceGroups(ctx);
   }
 
-  // ---- Equipment ------------------------------------------------------------------
-  // Phase B: these become Firestore queries against the equipment collections.
-  // EquipmentDatabaseService.initialize() will call these instead of static imports.
+  // ---- Equipment -------------------------------------------------------------
 
   static async getWeapons(): Promise<WeaponDefinition[]> {
-    return ALL_WEAPONS;
+    return GameDataService.connector.getWeapons();
   }
 
   static async getArmor(): Promise<ArmorDefinition[]> {
-    return ALL_ARMOR;
+    return GameDataService.connector.getArmor();
   }
 
   static async getShields(): Promise<ShieldDefinition[]> {
-    return ALL_SHIELDS;
+    return GameDataService.connector.getShields();
   }
 
   static async getGear(): Promise<GearDefinition[]> {
-    return ALL_GEAR;
+    return GameDataService.connector.getGear();
   }
 }

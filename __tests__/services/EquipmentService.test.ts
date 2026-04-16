@@ -1,3 +1,5 @@
+import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 import { EquipmentService } from '@services/EquipmentService';
 import { EquipmentDatabaseService } from '@services/EquipmentDatabaseService';
 import { Character } from '@/types';
@@ -29,6 +31,10 @@ const createMockCharacter = (): Character => {
 };
 
 describe('EquipmentService', () => {
+  beforeAll(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
+
   let mockCharacter: Character;
 
   beforeEach(async () => {
@@ -271,7 +277,8 @@ describe('EquipmentService', () => {
     });
 
     test('should calculate armor check penalty with masterwork reduction', async () => {
-      const studdedLeatherTemplate = (await EquipmentDatabaseService.getEquipmentById('studded_leather'))!;
+      const studdedLeatherTemplate =
+        (await EquipmentDatabaseService.getEquipmentById('studded_leather'))!;
       let updatedCharacter = EquipmentService.addItemToCharacter(
         mockCharacter,
         studdedLeatherTemplate,
