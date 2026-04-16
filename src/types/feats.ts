@@ -64,7 +64,10 @@ export type Prerequisite =
   | { type: 'caster_level'; minimum: number }
   | { type: 'mythic_tier'; minimum: number }
   | { type: 'special'; description: string }
-  | { type: 'evolution'; evolutionId: string };
+  | { type: 'evolution'; evolutionId: string }
+  | { type: 'initiator_level'; minimum: number }
+  | { type: 'maneuver_known'; maneuverId: string }
+  | { type: 'discipline_access'; disciplineId: string };
 
 // Backwards-compatible alias — prefer Prerequisite in new code
 export type FeatPrerequisite = Prerequisite;

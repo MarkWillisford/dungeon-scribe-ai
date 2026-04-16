@@ -34,6 +34,12 @@ export interface ClassEntry {
     chosenType?: 'divine' | 'arcane'; // Required when type === 'chosen'
   };
 
+  // For prestige/advancement classes: advances an existing initiating pool
+  initiatingAdvancement?: {
+    type: 'full' | 'half' | 'chosen';
+    chosenPool?: string;
+  };
+
   // Prestige class entry requirements (point-in-time validated)
   prerequisites?: FeatPrerequisite[];
 
