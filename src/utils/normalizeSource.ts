@@ -1212,6 +1212,18 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
     publisher: 'Player-Created',
   },
 
+  // Dreamscarred Press — Path of War initiating system (3pp, hosted on d20pfsrd with permission)
+  'dsp-pow': {
+    bookId: 'pow',
+    bookName: 'Path of War',
+    publisher: 'Dreamscarred Press',
+  },
+  'dsp-powe': {
+    bookId: 'powe',
+    bookName: 'Path of War: Expanded',
+    publisher: 'Dreamscarred Press',
+  },
+
   // External sources
   'd20pfsrd.com': {
     bookId: 'd20pfsrd',
@@ -1415,6 +1427,12 @@ const FULL_NAME_MAP: Record<string, string> = {
   "plane-hopper's handbook": 'pf1e-plane-hoppers-handbook',
   'psychic anthology': 'pf1e-psychic-anthology',
   "healer's handbook": 'pf1e-ppc-healh',
+
+  // --- Dreamscarred Press (Path of War) ---
+  'path of war': 'dsp-pow',
+  'path of war expanded': 'dsp-powe',
+  'path of war: expanded': 'dsp-powe',
+  'dreamscarred press': 'dsp-pow',
   "monster hunter's handbook": 'pf1e-mhh',
   'wilderness origins': 'pf1e-wo',
   'legacy of the first world': 'pf1e-legacy-first-world',
