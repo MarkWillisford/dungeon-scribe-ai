@@ -190,7 +190,7 @@ export const UC_TRAITS: TraitDefinition[] = [
     tags: ['save', 'fortitude'],
   },
   {
-    id: 'lessons_of_chaldira',
+    id: 'lessons_of_chaldira_uc',
     name: 'Lessons of Chaldira',
     description:
       'Your studies of the Chaldira Zuzaristan have given you a feel for fortune. Once per day, when you fail a saving throw, you can reroll the saving throw. You must take the new result, even if it is worse.',

@@ -122,7 +122,7 @@ export const FAITH_TRAITS: TraitDefinition[] = [
     tags: ['diplomacy', 'intelligence'],
   },
   {
-    id: 'eyes_of_the_wild',
+    id: 'eyes_of_the_wild_fw',
     name: 'Eyes of the Wild',
     description:
       'You are used to living in the wild, and are a keen observer. You gain a +2 trait bonus on Perception checks in natural settings.',

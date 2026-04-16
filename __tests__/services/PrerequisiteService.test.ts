@@ -1,3 +1,5 @@
+import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 import { PrerequisiteService } from '@services/PrerequisiteService';
 import { CharacterService } from '@services/CharacterService';
 import { ModifierPipelineService } from '@services/ModifierPipelineService';
@@ -64,62 +66,66 @@ function makeFeat(prereqs: FeatDefinition['prerequisites']): FeatDefinition {
 }
 
 describe('PrerequisiteService', () => {
+  beforeAll(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
+
   describe('checkPrerequisites', () => {
-    test('feat with no prerequisites is always met', () => {
+    test('feat with no prerequisites is always met', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
       expect(result.unmet).toHaveLength(0);
       expect(result.reasons).toHaveLength(0);
     });
 
-    test('ability score prerequisite met', () => {
+    test('ability score prerequisite met', async () => {
       const char = createTestCharacter({ str: 16 });
       const feat = makeFeat([{ type: 'ability_score', ability: 'STR', minimum: 13 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('ability score prerequisite not met', () => {
+    test('ability score prerequisite not met', async () => {
       const char = createTestCharacter({ str: 10 });
       const feat = makeFeat([{ type: 'ability_score', ability: 'STR', minimum: 13 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
       expect(result.unmet).toHaveLength(1);
       expect(result.reasons[0]).toContain('STR');
       expect(result.reasons[0]).toContain('13');
     });
 
-    test('BAB prerequisite met for level 1 fighter', () => {
+    test('BAB prerequisite met for level 1 fighter', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'bab', minimum: 1 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('BAB prerequisite not met', () => {
+    test('BAB prerequisite not met', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'bab', minimum: 6 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
-    test('level prerequisite met', () => {
+    test('level prerequisite met', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'level', minimum: 1 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('level prerequisite not met', () => {
+    test('level prerequisite not met', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'level', minimum: 5 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
-    test('feat prerequisite met when character has feat', () => {
+    test('feat prerequisite met when character has feat', async () => {
       const char = createTestCharacter();
       char.feats.feats.push({
         featId: 'power_attack',
@@ -130,18 +136,18 @@ describe('PrerequisiteService', () => {
         choices: {},
       });
       const feat = makeFeat([{ type: 'feat', featId: 'power_attack' }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('feat prerequisite not met when character lacks feat', () => {
+    test('feat prerequisite not met when character lacks feat', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'feat', featId: 'power_attack' }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
-    test('feat prerequisite with choiceRequirement met when choice matches', () => {
+    test('feat prerequisite with choiceRequirement met when choice matches', async () => {
       const char = createTestCharacter();
       char.feats.feats.push({
         featId: 'weapon_focus',
@@ -158,11 +164,11 @@ describe('PrerequisiteService', () => {
           choiceRequirement: { key: 'weapon', value: 'glaive' },
         },
       ]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('feat prerequisite with choiceRequirement not met when choice is wrong weapon', () => {
+    test('feat prerequisite with choiceRequirement not met when choice is wrong weapon', async () => {
       const char = createTestCharacter();
       char.feats.feats.push({
         featId: 'weapon_focus',
@@ -179,13 +185,13 @@ describe('PrerequisiteService', () => {
           choiceRequirement: { key: 'weapon', value: 'glaive' },
         },
       ]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
       expect(result.reasons[0]).toContain('Weapon Focus');
       expect(result.reasons[0]).toContain('glaive');
     });
 
-    test('feat prerequisite with choiceRequirement not met when character lacks the feat entirely', () => {
+    test('feat prerequisite with choiceRequirement not met when character lacks the feat entirely', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([
         {
@@ -194,11 +200,11 @@ describe('PrerequisiteService', () => {
           choiceRequirement: { key: 'weapon', value: 'glaive' },
         },
       ]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
-    test('feat prerequisite with choiceRequirement met when character has the feat twice with different choices', () => {
+    test('feat prerequisite with choiceRequirement met when character has the feat twice with different choices', async () => {
       const char = createTestCharacter();
       char.feats.feats.push({
         featId: 'weapon_focus',
@@ -223,7 +229,7 @@ describe('PrerequisiteService', () => {
           choiceRequirement: { key: 'weapon', value: 'glaive' },
         },
       ]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
@@ -242,7 +248,7 @@ describe('PrerequisiteService', () => {
         choices: { weapon: 'longsword' },
       };
 
-      test('met when prereq feat has the same choice as the instance', () => {
+      test('met when prereq feat has the same choice as the instance', async () => {
         const char = createTestCharacter();
         char.feats.feats.push(weaponFocusLongsword);
         const instance = {
@@ -250,11 +256,11 @@ describe('PrerequisiteService', () => {
           featId: 'weapon_specialization',
           choices: { weapon: 'longsword' },
         };
-        const result = PrerequisiteService.checkPrerequisites(char, weaponSpecDef, instance);
+        const result = await PrerequisiteService.checkPrerequisites(char, weaponSpecDef, instance);
         expect(result.met).toBe(true);
       });
 
-      test('not met when prereq feat has a different choice', () => {
+      test('not met when prereq feat has a different choice', async () => {
         const char = createTestCharacter();
         char.feats.feats.push(weaponFocusLongsword);
         const instance = {
@@ -262,138 +268,138 @@ describe('PrerequisiteService', () => {
           featId: 'weapon_specialization',
           choices: { weapon: 'glaive' },
         };
-        const result = PrerequisiteService.checkPrerequisites(char, weaponSpecDef, instance);
+        const result = await PrerequisiteService.checkPrerequisites(char, weaponSpecDef, instance);
         expect(result.met).toBe(false);
         expect(result.reasons[0]).toContain('Weapon Focus');
         expect(result.reasons[0]).toContain('glaive');
       });
 
-      test('not met when character lacks the prereq feat entirely', () => {
+      test('not met when character lacks the prereq feat entirely', async () => {
         const char = createTestCharacter();
         const instance = {
           ...weaponFocusLongsword,
           featId: 'weapon_specialization',
           choices: { weapon: 'longsword' },
         };
-        const result = PrerequisiteService.checkPrerequisites(char, weaponSpecDef, instance);
+        const result = await PrerequisiteService.checkPrerequisites(char, weaponSpecDef, instance);
         expect(result.met).toBe(false);
       });
 
-      test('falls back to "has feat at all" when no instance provided (browsing mode)', () => {
+      test('falls back to "has feat at all" when no instance provided (browsing mode)', async () => {
         const char = createTestCharacter();
         char.feats.feats.push(weaponFocusLongsword);
         // No characterFeatInstance — getAvailableFeats pattern
-        const result = PrerequisiteService.checkPrerequisites(char, weaponSpecDef);
+        const result = await PrerequisiteService.checkPrerequisites(char, weaponSpecDef);
         expect(result.met).toBe(true);
       });
 
-      test('reason includes resolved choice when instance provided', () => {
+      test('reason includes resolved choice when instance provided', async () => {
         const char = createTestCharacter();
         const instance = {
           ...weaponFocusLongsword,
           featId: 'weapon_specialization',
           choices: { weapon: 'longsword' },
         };
-        const result = PrerequisiteService.checkPrerequisites(char, weaponSpecDef, instance);
+        const result = await PrerequisiteService.checkPrerequisites(char, weaponSpecDef, instance);
         expect(result.reasons[0]).toContain('longsword');
       });
 
-      test('reason includes generic "same weapon" when no instance provided', () => {
+      test('reason includes generic "same weapon" when no instance provided', async () => {
         const char = createTestCharacter();
-        const result = PrerequisiteService.checkPrerequisites(char, weaponSpecDef);
+        const result = await PrerequisiteService.checkPrerequisites(char, weaponSpecDef);
         expect(result.reasons[0]).toContain('same weapon');
       });
     });
 
-    test('race prerequisite met', () => {
+    test('race prerequisite met', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'race', raceName: 'Human' }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('race prerequisite not met', () => {
+    test('race prerequisite not met', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'race', raceName: 'Elf' }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
-    test('special prerequisite is always met', () => {
+    test('special prerequisite is always met', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'special', description: 'Must have a familiar' }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('multiple prerequisites all met', () => {
+    test('multiple prerequisites all met', async () => {
       const char = createTestCharacter({ str: 16, dex: 14 });
       const feat = makeFeat([
         { type: 'ability_score', ability: 'STR', minimum: 13 },
         { type: 'bab', minimum: 1 },
       ]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('multiple prerequisites partially met', () => {
+    test('multiple prerequisites partially met', async () => {
       const char = createTestCharacter({ str: 16 });
       const feat = makeFeat([
         { type: 'ability_score', ability: 'STR', minimum: 13 },
         { type: 'bab', minimum: 6 },
       ]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
       expect(result.unmet).toHaveLength(1);
     });
 
-    test('ability_score with invalid ability key returns false', () => {
+    test('ability_score with invalid ability key returns false', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'ability_score', ability: 'LCK' as 'STR', minimum: 10 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
-    test('level prerequisite with class met', () => {
+    test('level prerequisite with class met', async () => {
       const char = createTestCharacter({ className: 'Fighter' });
       const feat = makeFeat([{ type: 'level', minimum: 1, class: 'Fighter' }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('level prerequisite with class not met when wrong class', () => {
+    test('level prerequisite with class not met when wrong class', async () => {
       const char = createTestCharacter({ className: 'Fighter' });
       const feat = makeFeat([{ type: 'level', minimum: 1, class: 'Wizard' }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
       expect(result.reasons[0]).toContain('Wizard');
     });
 
-    test('skill prerequisite met', () => {
+    test('skill prerequisite met', async () => {
       const char = createTestCharacter();
       char.skills.acrobatics.ranks = 5;
       const feat = makeFeat([{ type: 'skill', skillId: 'acrobatics', ranks: 5 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('skill prerequisite not met', () => {
+    test('skill prerequisite not met', async () => {
       const char = createTestCharacter();
       char.skills.acrobatics.ranks = 2;
       const feat = makeFeat([{ type: 'skill', skillId: 'acrobatics', ranks: 5 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
       expect(result.reasons[0]).toContain('acrobatics');
     });
 
-    test('skill prerequisite not met when skillId does not exist', () => {
+    test('skill prerequisite not met when skillId does not exist', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'skill', skillId: 'nonexistent_skill', ranks: 1 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
     });
 
-    test('class_feature prerequisite met', () => {
+    test('class_feature prerequisite met', async () => {
       const char = createTestCharacter({ className: 'Fighter' });
       char.classes.classes[0].classFeatures.push({
         name: 'Bravery',
@@ -402,34 +408,34 @@ describe('PrerequisiteService', () => {
         effects: [],
       });
       const feat = makeFeat([{ type: 'class_feature', featureName: 'Bravery' }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('class_feature prerequisite not met', () => {
+    test('class_feature prerequisite not met', async () => {
       const char = createTestCharacter({ className: 'Fighter' });
       const feat = makeFeat([{ type: 'class_feature', featureName: 'Sneak Attack' }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
       expect(result.reasons[0]).toContain('Sneak Attack');
     });
 
-    test('proficiency prerequisite met (Fighter has Martial weapons)', () => {
+    test('proficiency prerequisite met (Fighter has Martial weapons)', async () => {
       const char = createTestCharacter({ className: 'Fighter' });
       const feat = makeFeat([{ type: 'proficiency', proficiency: 'Martial weapons' }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('proficiency prerequisite not met', () => {
+    test('proficiency prerequisite not met', async () => {
       const char = createTestCharacter({ className: 'Fighter' });
       const feat = makeFeat([{ type: 'proficiency', proficiency: 'Exotic weapons' }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
       expect(result.reasons[0]).toContain('Exotic weapons');
     });
 
-    test('caster_level prerequisite met', () => {
+    test('caster_level prerequisite met', async () => {
       const char = createTestCharacter();
       const pool: SpellcastingPool = {
         baseClass: 'wizard',
@@ -446,19 +452,19 @@ describe('PrerequisiteService', () => {
       };
       char.spellcasting.pools.push(pool);
       const feat = makeFeat([{ type: 'caster_level', minimum: 5 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('caster_level prerequisite not met', () => {
+    test('caster_level prerequisite not met', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'caster_level', minimum: 5 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
       expect(result.reasons[0]).toContain('Caster level');
     });
 
-    test('mythic_tier prerequisite met', () => {
+    test('mythic_tier prerequisite met', async () => {
       const char = createTestCharacter();
       char.mythic = {
         tier: 3,
@@ -468,14 +474,14 @@ describe('PrerequisiteService', () => {
         tierHistory: [],
       };
       const feat = makeFeat([{ type: 'mythic_tier', minimum: 3 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(true);
     });
 
-    test('mythic_tier prerequisite not met (no mythic)', () => {
+    test('mythic_tier prerequisite not met (no mythic)', async () => {
       const char = createTestCharacter();
       const feat = makeFeat([{ type: 'mythic_tier', minimum: 1 }]);
-      const result = PrerequisiteService.checkPrerequisites(char, feat);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
       expect(result.met).toBe(false);
       expect(result.reasons[0]).toContain('Mythic Tier');
     });
@@ -506,14 +512,14 @@ describe('PrerequisiteService', () => {
       activationMode: 'passive',
     };
 
-    test('returns feats the character qualifies for', () => {
+    test('returns feats the character qualifies for', async () => {
       const char = createTestCharacter();
-      const available = PrerequisiteService.getAvailableFeats(char, [simpleFeat, hardFeat]);
+      const available = await PrerequisiteService.getAvailableFeats(char, [simpleFeat, hardFeat]);
       expect(available).toContainEqual(simpleFeat);
       expect(available).not.toContainEqual(hardFeat);
     });
 
-    test('excludes already-taken feats', () => {
+    test('excludes already-taken feats', async () => {
       const char = createTestCharacter();
       char.feats.feats.push({
         featId: 'simple_feat',
@@ -523,11 +529,11 @@ describe('PrerequisiteService', () => {
         active: true,
         choices: {},
       });
-      const available = PrerequisiteService.getAvailableFeats(char, [simpleFeat, hardFeat]);
+      const available = await PrerequisiteService.getAvailableFeats(char, [simpleFeat, hardFeat]);
       expect(available).not.toContainEqual(simpleFeat);
     });
 
-    test('does not exclude choice-based feats already taken (repeatable)', () => {
+    test('does not exclude choice-based feats already taken (repeatable)', async () => {
       const choiceFeat: FeatDefinition = {
         id: 'weapon_focus',
         name: 'Weapon Focus',
@@ -549,7 +555,7 @@ describe('PrerequisiteService', () => {
         active: true,
         choices: { weapon: 'longsword' },
       });
-      const available = PrerequisiteService.getAvailableFeats(char, [choiceFeat]);
+      const available = await PrerequisiteService.getAvailableFeats(char, [choiceFeat]);
       expect(available).toContainEqual(choiceFeat);
     });
   });

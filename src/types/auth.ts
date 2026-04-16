@@ -5,16 +5,16 @@ export interface AppUser {
   email: string;
   displayName: string;
   photoURL: string | null;
-  createdAt?: Date;
-  lastLogin?: Date;
+  createdAt?: string; // ISO 8601 — kept as string for Redux serializability
+  lastLogin?: string; // ISO 8601 — kept as string for Redux serializability
   campaigns?: string[]; // Campaign IDs
-  role?: 'player' | 'dm';
+  role?: 'player' | 'dm' | 'admin';
 }
 
 export interface UserPreferences {
   userId: string;
   activeCharacterId: string | null;
   theme: 'light' | 'dark';
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string; // ISO 8601
+  updatedAt: string; // ISO 8601
 }

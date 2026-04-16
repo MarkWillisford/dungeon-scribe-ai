@@ -1,3 +1,5 @@
+import { GameDataService } from '@services/GameDataService';
+import { StaticGameDataConnector } from '@services/StaticGameDataConnector';
 import { EquipmentService } from '@services/EquipmentService';
 import { EquipmentDatabaseService } from '@services/EquipmentDatabaseService';
 import { Character } from '@/types';
@@ -29,16 +31,20 @@ const createMockCharacter = (): Character => {
 };
 
 describe('EquipmentService', () => {
+  beforeAll(() => {
+    GameDataService.setConnector(new StaticGameDataConnector());
+  });
+
   let mockCharacter: Character;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     mockCharacter = createMockCharacter();
-    EquipmentDatabaseService.initialize();
+    await EquipmentDatabaseService.initialize();
   });
 
   describe('Equipment Management', () => {
-    test('should add weapon to character inventory', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('should add weapon to character inventory', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
       const updatedCharacter = EquipmentService.addItemToCharacter(
         mockCharacter,
         longswordTemplate,
@@ -50,8 +56,8 @@ describe('EquipmentService', () => {
       expect(updatedCharacter.equipment.weapons[0].equipped).toBe(false);
     });
 
-    test('should add armor to character inventory', () => {
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!;
+    test('should add armor to character inventory', async () => {
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!;
       const updatedCharacter = EquipmentService.addItemToCharacter(mockCharacter, leatherTemplate);
 
       expect(updatedCharacter.equipment.armor).toHaveLength(1);
@@ -59,8 +65,8 @@ describe('EquipmentService', () => {
       expect(updatedCharacter.equipment.armor[0].acBonus).toBe(2);
     });
 
-    test('should remove item from character inventory', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('should remove item from character inventory', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
       let updatedCharacter = EquipmentService.addItemToCharacter(mockCharacter, longswordTemplate);
 
       const weaponId = updatedCharacter.equipment.weapons[0].id;
@@ -69,8 +75,8 @@ describe('EquipmentService', () => {
       expect(updatedCharacter.equipment.weapons).toHaveLength(0);
     });
 
-    test('should equip weapon to main hand slot', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('should equip weapon to main hand slot', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
       let updatedCharacter = EquipmentService.addItemToCharacter(mockCharacter, longswordTemplate);
 
       const weaponId = updatedCharacter.equipment.weapons[0].id;
@@ -84,8 +90,8 @@ describe('EquipmentService', () => {
       expect(result.data!.equipment.equippedSlots.get(EquipmentSlot.MAIN_HAND)).toBe(weaponId);
     });
 
-    test('should unequip item and remove bonuses', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('should unequip item and remove bonuses', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
       let updatedCharacter = EquipmentService.addItemToCharacter(mockCharacter, longswordTemplate);
 
       const weaponId = updatedCharacter.equipment.weapons[0].id;
@@ -100,8 +106,8 @@ describe('EquipmentService', () => {
   });
 
   describe('Bonus Calculations', () => {
-    test('should calculate +1 sword bonuses correctly', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('should calculate +1 sword bonuses correctly', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
       let updatedCharacter = EquipmentService.addItemToCharacter(mockCharacter, longswordTemplate);
 
       updatedCharacter.equipment.weapons[0].enhancement = 1;
@@ -125,8 +131,8 @@ describe('EquipmentService', () => {
       expect(bonuses.damageBonuses[0].value).toBe(1);
     });
 
-    test('should apply armor bonuses to AC', () => {
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!;
+    test('should apply armor bonuses to AC', async () => {
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!;
       let updatedCharacter = EquipmentService.addItemToCharacter(mockCharacter, leatherTemplate);
 
       const armorId = updatedCharacter.equipment.armor[0].id;
@@ -141,8 +147,8 @@ describe('EquipmentService', () => {
       expect(bonuses.acBonuses[0].value).toBe(2);
     });
 
-    test('should calculate masterwork weapon bonus', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('should calculate masterwork weapon bonus', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
       let updatedCharacter = EquipmentService.addItemToCharacter(mockCharacter, longswordTemplate);
 
       updatedCharacter.equipment.weapons[0].masterwork = true;
@@ -163,8 +169,8 @@ describe('EquipmentService', () => {
       expect(bonuses.attackBonuses[0].source).toContain('(masterwork)');
     });
 
-    test('should not stack enhancement bonuses from masterwork and magic', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('should not stack enhancement bonuses from masterwork and magic', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
       let updatedCharacter = EquipmentService.addItemToCharacter(mockCharacter, longswordTemplate);
 
       updatedCharacter.equipment.weapons[0].masterwork = true;
@@ -186,7 +192,7 @@ describe('EquipmentService', () => {
   });
 
   describe('Encumbrance System', () => {
-    test('should calculate carrying capacity based on strength', () => {
+    test('should calculate carrying capacity based on strength', async () => {
       const capacity = EquipmentService.getCarryingCapacity(mockCharacter);
 
       // STR 15: (15-10)*15 + 100 = 175
@@ -195,7 +201,7 @@ describe('EquipmentService', () => {
       expect(capacity.heavy).toBe(525);
     });
 
-    test('should calculate encumbrance level correctly', () => {
+    test('should calculate encumbrance level correctly', async () => {
       mockCharacter.equipment.encumbranceSettings.enabled = true;
       mockCharacter.equipment.totalWeight = 100;
 
@@ -207,7 +213,7 @@ describe('EquipmentService', () => {
       expect(encumbranceMedium).toBe(EncumbranceLevel.MEDIUM);
     });
 
-    test('should respect disabled encumbrance setting', () => {
+    test('should respect disabled encumbrance setting', async () => {
       mockCharacter.equipment.encumbranceSettings.enabled = false;
       mockCharacter.equipment.totalWeight = 1000;
 
@@ -215,7 +221,7 @@ describe('EquipmentService', () => {
       expect(encumbrance).toBeNull();
     });
 
-    test('should handle simplified encumbrance variant', () => {
+    test('should handle simplified encumbrance variant', async () => {
       mockCharacter.equipment.encumbranceSettings.enabled = true;
       mockCharacter.equipment.encumbranceSettings.variant = EncumbranceVariant.SIMPLIFIED;
       mockCharacter.equipment.totalWeight = 300;
@@ -226,8 +232,8 @@ describe('EquipmentService', () => {
   });
 
   describe('Range Calculations', () => {
-    test('should calculate range penalties correctly', () => {
-      const shortbowTemplate = EquipmentDatabaseService.getEquipmentById('shortbow')!;
+    test('should calculate range penalties correctly', async () => {
+      const shortbowTemplate = (await EquipmentDatabaseService.getEquipmentById('shortbow'))!;
       const shortbow = EquipmentDatabaseService.createWeaponFromTemplate(shortbowTemplate);
 
       expect(EquipmentService.calculateRangePenalty(shortbow, 30)).toBe(0);
@@ -236,23 +242,23 @@ describe('EquipmentService', () => {
       expect(EquipmentService.calculateRangePenalty(shortbow, 150)).toBe(-4);
     });
 
-    test('should handle thrown weapons', () => {
-      const daggerTemplate = EquipmentDatabaseService.getEquipmentById('dagger')!;
+    test('should handle thrown weapons', async () => {
+      const daggerTemplate = (await EquipmentDatabaseService.getEquipmentById('dagger'))!;
       const dagger = EquipmentDatabaseService.createWeaponFromTemplate(daggerTemplate);
 
       expect(EquipmentService.calculateRangePenalty(dagger, 5)).toBe(0);
       expect(EquipmentService.calculateRangePenalty(dagger, 15)).toBe(-2);
     });
 
-    test('should return 0 penalty for melee weapons', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+    test('should return 0 penalty for melee weapons', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
       const longsword = EquipmentDatabaseService.createWeaponFromTemplate(longswordTemplate);
 
       expect(EquipmentService.calculateRangePenalty(longsword, 100)).toBe(0);
     });
 
-    test('should calculate effective range correctly', () => {
-      const longbowTemplate = EquipmentDatabaseService.getEquipmentById('longbow')!;
+    test('should calculate effective range correctly', async () => {
+      const longbowTemplate = (await EquipmentDatabaseService.getEquipmentById('longbow'))!;
       const longbow = EquipmentDatabaseService.createWeaponFromTemplate(longbowTemplate);
 
       expect(EquipmentService.getEffectiveRange(longbow)).toBe(1000);
@@ -260,9 +266,9 @@ describe('EquipmentService', () => {
   });
 
   describe('Weight and Penalty Calculations', () => {
-    test('should calculate total weight correctly', () => {
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
-      const leatherTemplate = EquipmentDatabaseService.getEquipmentById('leather')!;
+    test('should calculate total weight correctly', async () => {
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
+      const leatherTemplate = (await EquipmentDatabaseService.getEquipmentById('leather'))!;
 
       let updatedCharacter = EquipmentService.addItemToCharacter(mockCharacter, longswordTemplate);
       updatedCharacter = EquipmentService.addItemToCharacter(updatedCharacter, leatherTemplate);
@@ -270,8 +276,9 @@ describe('EquipmentService', () => {
       expect(updatedCharacter.equipment.totalWeight).toBe(19);
     });
 
-    test('should calculate armor check penalty with masterwork reduction', () => {
-      const studdedLeatherTemplate = EquipmentDatabaseService.getEquipmentById('studded_leather')!;
+    test('should calculate armor check penalty with masterwork reduction', async () => {
+      const studdedLeatherTemplate =
+        (await EquipmentDatabaseService.getEquipmentById('studded_leather'))!;
       let updatedCharacter = EquipmentService.addItemToCharacter(
         mockCharacter,
         studdedLeatherTemplate,
@@ -285,8 +292,8 @@ describe('EquipmentService', () => {
       expect(updatedCharacter.equipment.acPenalty).toBe(0);
     });
 
-    test('should calculate spell failure correctly', () => {
-      const chainShirtTemplate = EquipmentDatabaseService.getEquipmentById('chain_shirt')!;
+    test('should calculate spell failure correctly', async () => {
+      const chainShirtTemplate = (await EquipmentDatabaseService.getEquipmentById('chain_shirt'))!;
       let updatedCharacter = EquipmentService.addItemToCharacter(mockCharacter, chainShirtTemplate);
 
       updatedCharacter.equipment.armor[0].equipped = true;
@@ -297,11 +304,11 @@ describe('EquipmentService', () => {
   });
 
   describe('Two-Handed Weapon Conflicts', () => {
-    test('should handle two-handed weapon conflicts', () => {
-      const greatswordTemplate = EquipmentDatabaseService.getEquipmentById('greatsword')!;
+    test('should handle two-handed weapon conflicts', async () => {
+      const greatswordTemplate = (await EquipmentDatabaseService.getEquipmentById('greatsword'))!;
       let updatedCharacter = EquipmentService.addItemToCharacter(mockCharacter, greatswordTemplate);
 
-      const longswordTemplate = EquipmentDatabaseService.getEquipmentById('longsword')!;
+      const longswordTemplate = (await EquipmentDatabaseService.getEquipmentById('longsword'))!;
       updatedCharacter = EquipmentService.addItemToCharacter(updatedCharacter, longswordTemplate);
 
       const longswordId = updatedCharacter.equipment.weapons[1].id;
@@ -323,83 +330,83 @@ describe('EquipmentService', () => {
 });
 
 describe('EquipmentDatabaseService', () => {
-  beforeAll(() => {
-    EquipmentDatabaseService.initialize();
+  beforeAll(async () => {
+    await EquipmentDatabaseService.initialize();
   });
 
   describe('getEquipmentByCategory', () => {
-    it('returns weapons for category "weapons"', () => {
-      const weapons = EquipmentDatabaseService.getEquipmentByCategory('weapons');
+    it('returns weapons for category "weapons"', async () => {
+      const weapons = await EquipmentDatabaseService.getEquipmentByCategory('weapons');
       expect(weapons.length).toBeGreaterThan(0);
       expect(weapons.every((w) => w.category === 'Weapons')).toBe(true);
     });
 
-    it('returns armor for category "armor"', () => {
-      const armor = EquipmentDatabaseService.getEquipmentByCategory('armor');
+    it('returns armor for category "armor"', async () => {
+      const armor = await EquipmentDatabaseService.getEquipmentByCategory('armor');
       expect(armor.length).toBeGreaterThan(0);
       expect(armor.every((a) => a.category === 'Armor')).toBe(true);
     });
 
-    it('returns shields for category "shields"', () => {
-      const shields = EquipmentDatabaseService.getEquipmentByCategory('shields');
+    it('returns shields for category "shields"', async () => {
+      const shields = await EquipmentDatabaseService.getEquipmentByCategory('shields');
       expect(shields.length).toBeGreaterThan(0);
     });
 
-    it('returns gear for category "gear"', () => {
-      const gear = EquipmentDatabaseService.getEquipmentByCategory('gear');
+    it('returns gear for category "gear"', async () => {
+      const gear = await EquipmentDatabaseService.getEquipmentByCategory('gear');
       expect(gear.length).toBeGreaterThan(0);
     });
 
-    it('returns empty array for unknown category', () => {
-      const result = EquipmentDatabaseService.getEquipmentByCategory('potions');
+    it('returns empty array for unknown category', async () => {
+      const result = await EquipmentDatabaseService.getEquipmentByCategory('potions');
       expect(result).toHaveLength(0);
     });
   });
 
   describe('searchEquipment', () => {
-    it('returns all items when query is empty', () => {
-      const all = EquipmentDatabaseService.getAllEquipment();
-      const results = EquipmentDatabaseService.searchEquipment('');
+    it('returns all items when query is empty', async () => {
+      const all = await EquipmentDatabaseService.getAllEquipment();
+      const results = await EquipmentDatabaseService.searchEquipment('');
       expect(results.length).toBe(all.length);
     });
 
-    it('filters by name query', () => {
-      const results = EquipmentDatabaseService.searchEquipment('longsword');
+    it('filters by name query', async () => {
+      const results = await EquipmentDatabaseService.searchEquipment('longsword');
       expect(results.length).toBeGreaterThan(0);
       expect(results.some((r) => r.name.toLowerCase().includes('longsword'))).toBe(true);
     });
 
-    it('filters by category', () => {
-      const results = EquipmentDatabaseService.searchEquipment('', { category: 'Armor' });
+    it('filters by category', async () => {
+      const results = await EquipmentDatabaseService.searchEquipment('', { category: 'Armor' });
       expect(results.every((r) => r.category === 'Armor')).toBe(true);
     });
 
-    it('filters by subcategory', () => {
-      const results = EquipmentDatabaseService.searchEquipment('', {
+    it('filters by subcategory', async () => {
+      const results = await EquipmentDatabaseService.searchEquipment('', {
         subcategory: 'Light Armor',
       });
       expect(results.every((r) => r.subcategory === 'Light Armor')).toBe(true);
     });
 
-    it('filters by source', () => {
-      const all = EquipmentDatabaseService.getAllEquipment();
+    it('filters by source', async () => {
+      const all = await EquipmentDatabaseService.getAllEquipment();
       const firstSource = all[0].source;
-      const results = EquipmentDatabaseService.searchEquipment('', { source: firstSource });
+      const results = await EquipmentDatabaseService.searchEquipment('', { source: firstSource });
       expect(results.every((r) => r.source.toLowerCase() === firstSource.toLowerCase())).toBe(true);
     });
 
-    it('filters by maxPrice', () => {
-      const results = EquipmentDatabaseService.searchEquipment('', { maxPrice: 5 });
+    it('filters by maxPrice', async () => {
+      const results = await EquipmentDatabaseService.searchEquipment('', { maxPrice: 5 });
       expect(results.every((r) => r.basePrice <= 5)).toBe(true);
     });
 
-    it('filters by maxWeight', () => {
-      const results = EquipmentDatabaseService.searchEquipment('', { maxWeight: 5 });
+    it('filters by maxWeight', async () => {
+      const results = await EquipmentDatabaseService.searchEquipment('', { maxWeight: 5 });
       expect(results.every((r) => r.baseWeight <= 5)).toBe(true);
     });
 
-    it('returns results sorted by name', () => {
-      const results = EquipmentDatabaseService.searchEquipment('');
+    it('returns results sorted by name', async () => {
+      const results = await EquipmentDatabaseService.searchEquipment('');
       const names = results.map((r) => r.name);
       const sorted = [...names].sort((a, b) => a.localeCompare(b));
       expect(names).toEqual(sorted);

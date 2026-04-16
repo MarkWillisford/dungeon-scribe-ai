@@ -18,6 +18,7 @@
 import * as admin from 'firebase-admin';
 import { ALL_TEMPLATES } from '../../src/data/templates/index';
 import type { TemplateDefinition } from '../../src/data/templates/types';
+import { sleep, chunkArray } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -40,15 +41,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
-
-// --- Helpers ---
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  const chunks: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    chunks.push(arr.slice(i, i + size));
-  }
-  return chunks;
-}
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedTemplates(templates: TemplateDefinition[]): Promise<void> {
   console.log(`\nSeeding ${templates.length} templates to project: ${PROJECT_ID}`);
@@ -74,9 +67,10 @@ async function seedTemplates(templates: TemplateDefinition[]): Promise<void> {
     chunk.forEach((template) => {
       // Use template.id (kebab-case) as the Firestore document ID
       const ref = db.collection('templates').doc(template.id);
-      batch.set(ref, template);
+      batch.set(ref, { ...template, visibility: 'global' as const });
     });
     await batch.commit();
+    await sleep(500);
     totalWritten += chunk.length;
     console.log(`  Written: ${totalWritten}/${templates.length}`);
   }

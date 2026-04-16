@@ -2,7 +2,7 @@ import { ClassChoiceDefinition } from '@/types/classChoices';
 
 // Paladin mercies grouped by minimum class level at which they become available.
 // Core mercies from CRB + APG. All are inline — no collection query needed.
-const MERCY_OPTIONS = [
+export const MERCY_OPTIONS = [
   // Available from level 3
   { id: 'mercy-shaken', name: 'Shaken', description: 'The shaken condition is removed.' },
   { id: 'mercy-sickened', name: 'Sickened', description: 'The sickened condition is removed.' },

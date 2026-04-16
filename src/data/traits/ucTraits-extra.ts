@@ -331,7 +331,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
     tags: ['attack of opportunity', 'ranged'],
   },
   {
-    id: 'perseverance',
+    id: 'perseverance_uc',
     name: 'Perseverance',
     description:
       'You are not easily frightened and will stand your ground in the face of danger. You gain a +1 trait bonus on Fortitude saves and a +1 trait bonus on Will saves against fear effects.',
@@ -385,7 +385,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
     tags: ['save', 'fortitude'],
   },
   {
-    id: 'scarred',
+    id: 'scarred_uc',
     name: 'Scarred',
     description:
       'A traumatic experience long ago left you with a disfiguring scar. The ugly wound still pains you, making you tough and thick-skinned. You gain a +2 trait bonus on all Intimidate checks, and a +1 natural armor bonus to your AC.',
@@ -529,7 +529,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
     tags: ['save', 'charm', 'compulsion'],
   },
   {
-    id: 'propitiation',
+    id: 'propitiation_uc',
     name: 'Propitiation',
     description:
       'Your knowledge of the gods tells you exactly which rites and rituals please them. Once per day, when you fail a saving throw against an effect created by a divine spellcaster, you may reroll that saving throw. You must take the new result, even if it is worse.',
@@ -643,7 +643,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
     tags: ['damage', 'undead'],
   },
   {
-    id: 'warded_against_nature',
+    id: 'warded_against_nature_uc',
     name: 'Warded Against Nature',
     description:
       'You were born and raised in an area plagued by natural disasters or animals run wild, and as a result you have learned to fend off the forces of nature. You gain a +1 trait bonus on saving throws against the extraordinary and supernatural abilities of animals, magical beasts, and vermin.',
@@ -973,7 +973,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
   },
   // ==================== SOCIAL TRAITS ====================
   {
-    id: 'natural_born_leader',
+    id: 'natural_born_leader_uc',
     name: 'Natural-Born Leader',
     description:
       'You have always found yourself in a position where others look to you for guidance and direction. All cohorts, followers, or summoned creatures under your leadership gain a +1 morale bonus on Will saves to avoid mind-affecting effects. If you ever take the Leadership feat, you gain a +1 trait bonus to your Leadership score.',
@@ -1638,7 +1638,7 @@ export const UC_EXTRA_TRAITS: TraitDefinition[] = [
     tags: ['damage', 'improvised weapon', 'brass knuckles'],
   },
   {
-    id: 'undead_crusader',
+    id: 'undead_crusader_uc',
     name: 'Undead Crusader',
     description:
       'You have dedicated your life to destroying undead. You gain a +1 trait bonus on damage rolls against undead creatures and a +1 trait bonus on Knowledge (religion) checks relating to undead.',

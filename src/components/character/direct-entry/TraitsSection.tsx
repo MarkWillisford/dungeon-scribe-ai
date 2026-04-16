@@ -1,11 +1,12 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { addTrait, removeTrait } from '@/store/slices/characterEntrySlice';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
-import { ALL_TRAITS } from '@/data/traits/index';
+import { GameDataService } from '@/services/GameDataService';
 import { type DraftTrait } from '@/types/characterDraft';
+import type { TraitDefinition } from '@/types/traits';
 
 // ---- Category badge colors ----
 
@@ -78,15 +79,6 @@ function TraitCard({ trait }: TraitCardProps) {
   );
 }
 
-// ---- Trait search items ----
-
-const TRAIT_SEARCH_ITEMS: SearchItem[] = ALL_TRAITS.map((t) => ({
-  key: t.id,
-  label: t.name,
-  subLabel: (t.shortDescription ?? t.description)?.slice(0, 80),
-  category: categoryLabel(t.category),
-}));
-
 // ---- Main section ----
 
 const MAX_TRAITS_DEFAULT = 2;
@@ -96,15 +88,26 @@ export function TraitsSection() {
   const dispatch = useAppDispatch();
   const traits = useAppSelector((state) => state.characterEntry.draft.traits);
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [allTraitDefs, setAllTraitDefs] = useState<TraitDefinition[]>([]);
+
+  useEffect(() => {
+    GameDataService.getAllTraits()
+      .then(setAllTraitDefs)
+      .catch((e) => console.error('Failed to load traits:', e));
+  }, []);
+
+  const traitSearchItems = useMemo<SearchItem[]>(
+    () =>
+      allTraitDefs.map((t) => ({
+        key: t.id,
+        label: t.name,
+        subLabel: (t.shortDescription ?? t.description)?.slice(0, 80),
+        category: categoryLabel(t.category),
+      })),
+    [allTraitDefs],
+  );
 
   const overLimit = traits.length > MAX_TRAITS_DEFAULT;
-
-  // Map from trait id → SearchItem for lookup
-  const traitItemMap = useMemo(() => {
-    const map = new Map<string, SearchItem>();
-    TRAIT_SEARCH_ITEMS.forEach((item) => map.set(item.key, item));
-    return map;
-  }, []);
 
   const handleSelect = (item: SearchItem) => {
     // Avoid duplicates
@@ -113,7 +116,7 @@ export function TraitsSection() {
       return;
     }
     // Find the trait definition to pull category + description
-    const def = ALL_TRAITS.find((t) => t.id === item.key);
+    const def = allTraitDefs.find((t) => t.id === item.key);
     const draft: DraftTrait = {
       id: genId(),
       traitId: item.key,
@@ -188,7 +191,7 @@ export function TraitsSection() {
       <SearchPickerSheet
         visible={pickerOpen}
         title="Add Trait"
-        items={TRAIT_SEARCH_ITEMS}
+        items={traitSearchItems}
         onSelect={handleSelect}
         onClose={() => setPickerOpen(false)}
         placeholder="Search traits..."

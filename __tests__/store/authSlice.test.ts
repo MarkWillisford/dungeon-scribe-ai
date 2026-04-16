@@ -30,8 +30,8 @@ const mockUser: AppUser = {
   email: 'test@example.com',
   displayName: 'Test User',
   photoURL: null,
-  createdAt: new Date('2025-01-01'),
-  lastLogin: new Date('2025-06-01'),
+  createdAt: '2025-01-01T00:00:00.000Z',
+  lastLogin: '2025-06-01T00:00:00.000Z',
   campaigns: ['campaign-1'],
   role: 'player',
 };

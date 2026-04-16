@@ -87,7 +87,7 @@ export const INNER_SEA_TRAITS: TraitDefinition[] = [
 
   // ==================== REGIONAL TRAITS — CHELIAX ====================
   {
-    id: 'chelish_noble',
+    id: 'chelish_noble_isp',
     name: 'Chelish Noble',
     description:
       'You belong to one of the noble families of Cheliax, and your upbringing has given you a keen eye for political machinations. You gain a +1 trait bonus on Knowledge (nobility) checks and Knowledge (nobility) is always a class skill for you.',
@@ -145,7 +145,7 @@ export const INNER_SEA_TRAITS: TraitDefinition[] = [
     tags: ['knowledge', 'planes', 'cheliax', 'fiendish'],
   },
   {
-    id: 'shadow_child',
+    id: 'shadow_child_isp',
     name: 'Shadow Child',
     description:
       'You grew up in the shadowy underbelly of Chelish society, where the worship of Asmodeus and dark pacts are commonplace. You gain a +1 trait bonus on Stealth checks and Stealth is always a class skill for you.',
@@ -526,7 +526,7 @@ export const INNER_SEA_TRAITS: TraitDefinition[] = [
     tags: ['survival', 'fortitude', 'disease', 'mwangi', 'jungle'],
   },
   {
-    id: 'mwangi_scholar',
+    id: 'mwangi_scholar_isp',
     name: 'Mwangi Scholar',
     description:
       'You have studied the ancient ruins and relics of the Mwangi Expanse. You gain a +1 trait bonus on Knowledge (arcana) checks relating to ancient Mwangi civilizations and a +1 trait bonus on Linguistics checks. Linguistics is always a class skill for you.',
@@ -584,7 +584,7 @@ export const INNER_SEA_TRAITS: TraitDefinition[] = [
     tags: ['save', 'undead', 'lastwall'],
   },
   {
-    id: 'righteous_indignation',
+    id: 'righteous_indignation_isp',
     name: 'Righteous Indignation',
     description:
       'Growing up in Lastwall, you have been instilled with a burning hatred of the undead and the evil they represent. You gain a +1 trait bonus on attack rolls against undead creatures.',
@@ -791,7 +791,7 @@ export const INNER_SEA_TRAITS: TraitDefinition[] = [
 
   // ==================== REGIONAL TRAITS — LINNORM KINGS ====================
   {
-    id: 'viking_blood',
+    id: 'viking_blood_isp',
     name: 'Viking Blood',
     description:
       'You hail from the Lands of the Linnorm Kings, where only the strongest survive. The harsh northern climate has toughened you. You gain a +1 trait bonus on Fortitude saves against cold effects and a +1 trait bonus on Intimidate checks.',
@@ -823,7 +823,7 @@ export const INNER_SEA_TRAITS: TraitDefinition[] = [
 
   // ==================== CAMPAIGN TRAITS ====================
   {
-    id: 'conspiracy_hunter',
+    id: 'conspiracy_hunter_pcs',
     name: 'Conspiracy Hunter',
     description:
       'You have long heard rumors of sinister conspiracies lurking beneath the surface of civilized society. You gain a +1 trait bonus on Knowledge (local) checks and Knowledge (local) is always a class skill for you.',

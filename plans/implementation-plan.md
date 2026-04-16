@@ -1,6 +1,6 @@
 # Dungeon Scribe AI 1.1 — Implementation Plan
 
-## Status (as of 2026-04-13)
+## Status (as of 2026-04-15)
 
 All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown significantly beyond the original plan through additional phases.
 
@@ -15,26 +15,44 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 | 6    | Navigation (Expo Router)     | **COMPLETE** + `entry.tsx` added (PR #12)                                                                                                                                                   |
 | 7    | Shared UI components         | **COMPLETE** + 18 direct-entry components (PR #12) + `ValidationReportSheet` (PR #50)                                                                                                       |
 | 8    | Game data                    | **COMPLETE** + massively extended (races, classes, archetypes, feats, traits, spells, templates, domains, rage powers, rogue talents, animal companions, deities, class choice definitions) |
-| 9    | Testing                      | **COMPLETE** — 690 tests, 36 suites, all thresholds passing                                                                                                                                 |
+| 9    | Testing                      | **COMPLETE** — 877 tests, all thresholds passing                                                                                                                                            |
 | 10   | CI/CD (GitHub Actions + EAS) | **COMPLETE** — `ci.yml`, `build-staging.yml`, `build-production.yml`                                                                                                                        |
 
 ### Currently in flight
 
-| Work                                                                                                  | Plan                                      | Status                                       |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------- | -------------------------------------------- |
-| **Ruleset system** (types, presets, service, Redux)                                                   | `ruleset-system.md`                       | **COMPLETE** — PR #49 (merged)               |
-| **Draft Validation System** (`DraftStateResolver`, `DraftValidationService`, `ValidationReportSheet`) | `draft-validation-system.md`              | **COMPLETE** — PR #50 (merged)               |
-| **Source normalization** (`normalizeSource`, `GameDataSource`, wired into all seed scripts)           | —                                         | **COMPLETE** — PR #55 (merged)               |
-| Magic items — types + equipment cleanup (PR 1)                                                        | `magic-items.md`                          | **COMPLETE** — PR #23 (merged)               |
-| Magic items — data scraping (PR 2)                                                                    | `magic-items.md`                          | IN PROGRESS — Doug PRs #51–54 open           |
-| Feats expansion                                                                                       | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — all PRs merged (~2,908 feats) |
-| Traits expansion                                                                                      | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — merged (971/900+ traits)      |
-| Class choices (all major classes)                                                                     | `data-scraping/class-choices-database.md` | **COMPLETE** — all PRs merged (#37–#46)      |
-| `{chosen_deity}` token resolution in ClassChoiceRow                                                   | `data-scraping/class-choices-database.md` | **COMPLETE** — fixed in ClassChoiceRow       |
-| `Effect.type` enum review                                                                             | `src/types/base.ts`                       | **COMPLETE** — PR #29 (merged)               |
-| Seed all collections to Firestore staging → prod                                                      | `data-scraping/class-choices-database.md` | NOT STARTED (all scripts ready)              |
-| Data quality + admin review system                                                                    | `data-quality-admin-review.md`            | NOT STARTED                                  |
-| Enter Rissi — validate model end-to-end                                                               | —                                         | NOT STARTED                                  |
+| Work                                                                                                  | Plan                                      | Status                                                                  |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------------- |
+| **Ruleset system** (types, presets, service, Redux)                                                   | `ruleset-system.md`                       | **COMPLETE** — PR #49 (merged)                                          |
+| **Draft Validation System** (`DraftStateResolver`, `DraftValidationService`, `ValidationReportSheet`) | `draft-validation-system.md`              | **COMPLETE** — PR #50 (merged)                                          |
+| **Source normalization** (`normalizeSource`, `GameDataSource`, wired into all seed scripts)           | —                                         | **COMPLETE** — PR #55 (merged)                                          |
+| Magic items — types + equipment cleanup (PR 1)                                                        | `magic-items.md`                          | **COMPLETE** — PR #23 (merged)                                          |
+| Magic items — data scraping (PR 2)                                                                    | `magic-items.md`                          | **COMPLETE** — Doug PRs #51–54 merged                                   |
+| Feats expansion                                                                                       | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — all PRs merged (~2,908 feats)                            |
+| Traits expansion                                                                                      | `data-scraping/feats-traits-expansion.md` | **COMPLETE** — merged (971/900+ traits)                                 |
+| Class choices (all major classes)                                                                     | `data-scraping/class-choices-database.md` | **COMPLETE** — all PRs merged (#37–#46)                                 |
+| `{chosen_deity}` token resolution in ClassChoiceRow                                                   | `data-scraping/class-choices-database.md` | **COMPLETE** — fixed in ClassChoiceRow                                  |
+| `Effect.type` enum review                                                                             | `src/types/base.ts`                       | **COMPLETE** — PR #29 (merged)                                          |
+| **Data access layer Phase A** — `GameDataService` unified async API                                  | `data-access-layer.md`                    | IN PROGRESS — PR #58 open                                               |
+| **Data access layer Phase B** — `GameDataConnector`, `FirestoreGameDataConnector`, `GameDataCache`   | `data-access-layer.md`                    | IN PROGRESS — PR #59 open                                               |
+| **Data quality fields** — `verificationStatus` + `adminNotes` on all collection types (Doug)         | `data-quality-admin-review.md`            | IN PROGRESS — PR #57 open                                               |
+| **Seeding** — all 38 official collections to Firestore staging                                       | `seeding-playbook.md`                     | **COMPLETE** — 10,962 docs, 36/36 verified (2026-04-14)                 |
+| **Seeding** — 5 campaign prestige classes for Rissi                                                  | `seeding-playbook.md`                     | **COMPLETE** — PR #62; staging patched (2026-04-15)                     |
+| **Seeding** — production                                                                              | `seeding-playbook.md`                     | NOT STARTED                                                             |
+| **Admin role system** — Firebase Custom Claims, `AdminService`, Firestore rules                      | `admin-panel.md`                          | IN PROGRESS — PR #60 open                                               |
+| **Admin panel Phase A** — nav shell, settings entry, role gate                                       | `admin-panel.md`                          | IN PROGRESS — PR #61 open (depends on #60)                              |
+| **Admin panel Phases B–E** — data quality, inline review, dashboard, custom content creation        | `admin-panel.md`                          | NOT STARTED                                                             |
+| Data quality + admin review system (superseded by admin-panel.md)                                    | `data-quality-admin-review.md`            | Superseded — see `admin-panel.md` Phases B–D                            |
+| Enter Rissi — validate model end-to-end                                                              | —                                         | NOT STARTED                                                             |
+
+#### Note: Campaign content seeding — campaignId deferred (2026-04-15)
+
+`scripts/db/seedCampaignContent.ts` seeded 5 prestige classes (hathran, dweomerkeeper, radiant-servant-of-milani, prestige-paladin, nemesis) to staging. PR #62 fixed the three post-seed issues:
+
+1. **`CAMPAIGN_ID` placeholder** — script now requires `--campaign-id <id>` and fails hard without it. The 5 live class docs have `campaignId: 'FIXME-campaign-id'` (unchanged) and `visibility: 'global'` (temporary playtest workaround). Once a campaign document exists in Firestore, run `patchCampaignContent.ts --campaign-id <real-id>` to set the correct ID and revert visibility to `'campaign'`.
+
+2. **Radiant Servant name/identifier mismatch** — `radiantServant.ts` `className` corrected from `'radiant-servant'` to `'radiant servant'`; Firestore doc patched. The fixture uses `'Radiant Servant'` (lowercases to `'radiant servant'`) — all three now agree.
+
+3. **Prestige Paladin missing `ClassChoiceDefinition` entries** — `prestigePaladin.ts` created with Turn Undead/Channel Energy, Divine Bond, Mercy, and Weapon Training definitions. Seeded to Firestore staging.
 
 #### Note: Campaign ruleset management UI — out of scope for current phase
 
@@ -325,6 +343,18 @@ maestro test e2e/
 - `__tests__/fixtures/` — Shared test fixture builders (createMockCharacter, createMockAbilityScores, etc.)
 - `__tests__/mocks/firebase.ts` — Firebase mock (auth, Firestore, storage)
 - `e2e/` — Maestro E2E test directory
+
+**Known issue — full-suite OOM in WSL worktrees:**
+
+Running `npm test -- --maxWorkers=1` across all suites in sequence exhausts the Node heap (confirmed pre-Phase-A, not caused by any specific PR). The static game data (2,500+ feats, all classes, races, etc.) accumulates in memory across suites in one process and eventually causes `FATAL ERROR: Reached heap limit Allocation failed`. Individual suites run fine.
+
+Options to investigate:
+
+- `--workerThreads` flag (Jest 29+) — threads share memory differently than processes
+- `--logHeapUsage` to identify which suite tips the balance
+- Splitting the Jest config into two projects (services vs. components) so they run in separate processes with independent heaps
+- `--maxWorkers=2` with `--isolateModules` to force module teardown between suites
+- Raising the Node heap limit via `NODE_OPTIONS=--max-old-space-size=4096` in the test script
 
 **Coverage targets:**
 

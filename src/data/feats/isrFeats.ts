@@ -845,7 +845,7 @@ export const ISR_FEATS: FeatDefinition[] = [
 
   // ==================== KITSUNE FEATS (not already in database) ====================
   {
-    id: 'swift_kitsune_shapechanger',
+    id: 'swift_kitsune_shapechanger_isr',
     name: 'Swift Kitsune Shapechanger',
     description:
       'You can shift between your humanoid, hybrid, and fox forms with greater ease. You can assume any of your alternate forms as a swift action instead of a standard action.',

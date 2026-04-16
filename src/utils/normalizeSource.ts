@@ -193,6 +193,14 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
     bookName: 'Heroes of Golarion',
     publisher: 'Paizo',
   },
+  'pf1e-ddr': { bookId: 'ddr', bookName: 'Dungeon Denizens Revisited', publisher: 'Paizo' },
+  'pf1e-andoran': { bookId: 'andoran', bookName: 'Andoran, Spirit of Liberty', publisher: 'Paizo' },
+  'pf1e-motff': { bookId: 'motff', bookName: 'Master of the Fallen Fortress', publisher: 'Paizo' },
+  'pf1e-pfs-scenario': {
+    bookId: 'pfs-scenario',
+    bookName: 'Pathfinder Society Scenario',
+    publisher: 'Paizo',
+  },
   'pf1e-heroes-of-golarion': {
     bookId: 'hog',
     bookName: 'Heroes of Golarion',
@@ -413,6 +421,11 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
   'pf1e-ppc-ahh': {
     bookId: 'ppc-ahh',
     bookName: 'Pathfinder Player Companion: Advanced Heritages Handbook',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-antih': {
+    bookId: 'ppc-antih',
+    bookName: "Pathfinder Player Companion: Antihero's Handbook",
     publisher: 'Paizo',
   },
   'pf1e-ppc-aoe': {
@@ -689,6 +702,497 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
     publisher: 'Paizo',
   },
 
+  // Bestiary series
+  'pf1e-bestiary2': { bookId: 'bestiary2', bookName: 'Bestiary 2', publisher: 'Paizo' },
+  'pf1e-bestiary3': { bookId: 'bestiary3', bookName: 'Bestiary 3', publisher: 'Paizo' },
+  'pf1e-bestiary4': { bookId: 'bestiary4', bookName: 'Bestiary 4', publisher: 'Paizo' },
+  'pf1e-bestiary5': { bookId: 'bestiary5', bookName: 'Bestiary 5', publisher: 'Paizo' },
+  'pf1e-bestiary6': { bookId: 'bestiary6', bookName: 'Bestiary 6', publisher: 'Paizo' },
+
+  // Campaign Setting / hardcover expansions
+  'pf1e-isb': { bookId: 'isb', bookName: 'Inner Sea Bestiary', publisher: 'Paizo' },
+  'pf1e-ios': { bookId: 'ios', bookName: 'Isles of the Shackles', publisher: 'Paizo' },
+  'pf1e-tg': { bookId: 'tg', bookName: 'Technology Guide', publisher: 'Paizo' },
+  'pf1e-ma': { bookId: 'ma', bookName: 'Mythic Adventures', publisher: 'Paizo' },
+  'pf1e-isc': { bookId: 'isc', bookName: 'Inner Sea Combat', publisher: 'Paizo' },
+  'pf1e-isr': { bookId: 'isr', bookName: 'Inner Sea Races', publisher: 'Paizo' },
+  'pf1e-ist': { bookId: 'ist', bookName: 'Inner Sea Temples', publisher: 'Paizo' },
+  'pf1e-ismonsters': {
+    bookId: 'ismonsters',
+    bookName: 'Inner Sea Monster Codex',
+    publisher: 'Paizo',
+  },
+  'pf1e-isnpc': { bookId: 'isnpc', bookName: 'Inner Sea NPC Codex', publisher: 'Paizo' },
+  'pf1e-isfaiths': { bookId: 'isfaiths', bookName: 'Inner Sea Faiths', publisher: 'Paizo' },
+  'pf1e-ob': { bookId: 'ob', bookName: 'Occult Bestiary', publisher: 'Paizo' },
+  'pf1e-or2': { bookId: 'or2', bookName: 'Occult Realms', publisher: 'Paizo' },
+  'pf1e-deg': { bookId: 'deg', bookName: 'Dragon Empires Gazetteer', publisher: 'Paizo' },
+  'pf1e-aq': { bookId: 'aq', bookName: 'Aquatic Adventures', publisher: 'Paizo' },
+  'pf1e-ma2': { bookId: 'ma2', bookName: 'Mythic Adventures', publisher: 'Paizo' },
+  'pf1e-concordance': {
+    bookId: 'concordance',
+    bookName: 'Concordance of Rivals',
+    publisher: 'Paizo',
+  },
+  'pf1e-taldor': { bookId: 'taldor', bookName: 'Taldor, Echoes of Glory', publisher: 'Paizo' },
+  'pf1e-cheliax': { bookId: 'cheliax', bookName: 'Cheliax, Empire of Devils', publisher: 'Paizo' },
+  'pf1e-sargava': { bookId: 'sargava', bookName: 'Sargava, the Lost Colony', publisher: 'Paizo' },
+  'pf1e-osirion': {
+    bookId: 'osirion',
+    bookName: 'Osirion, Legacy of Pharaohs',
+    publisher: 'Paizo',
+  },
+  'pf1e-construct': { bookId: 'construct', bookName: 'Construct Handbook', publisher: 'Paizo' },
+  'pf1e-villain-codex': { bookId: 'villain-codex', bookName: 'Villain Codex', publisher: 'Paizo' },
+  'pf1e-darklands': { bookId: 'darklands', bookName: 'Darklands Revisited', publisher: 'Paizo' },
+  'pf1e-uf': { bookId: 'uf', bookName: 'Ultimate Feats', publisher: 'Paizo' },
+
+  // Player Companion books (additional)
+  'pf1e-ppc-pots': {
+    bookId: 'ppc-pots',
+    bookName: 'Pathfinder Player Companion: People of the Sands',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-potn': {
+    bookId: 'ppc-potn',
+    bookName: 'Pathfinder Player Companion: People of the North',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-potw': {
+    bookId: 'ppc-potw',
+    bookName: 'Pathfinder Player Companion: People of the Wastes',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-aco2': {
+    bookId: 'ppc-aco2',
+    bookName: 'Pathfinder Player Companion: Advanced Class Origins',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-aoe2': {
+    bookId: 'ppc-aoe2',
+    bookName: 'Pathfinder Player Companion: Agents of Evil',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-alm': {
+    bookId: 'ppc-alm',
+    bookName: 'Pathfinder Player Companion: Alchemy Manual',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-arx': {
+    bookId: 'ppc-arx',
+    bookName: 'Pathfinder Player Companion: Animal Archive',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-amh': {
+    bookId: 'ppc-amh',
+    bookName: "Pathfinder Player Companion: Armor Master's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-bog': {
+    bookId: 'ppc-bog',
+    bookName: 'Pathfinder Player Companion: Bastards of Golarion',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-bm': {
+    bookId: 'ppc-bm',
+    bookName: 'Pathfinder Player Companion: Black Markets',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-bsha': {
+    bookId: 'ppc-bsha',
+    bookName: 'Pathfinder Player Companion: Blood of Shadows',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-bota': {
+    bookId: 'ppc-bota',
+    bookName: 'Pathfinder Player Companion: Blood of the Ancients',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-cob2': {
+    bookId: 'ppc-cob2',
+    bookName: 'Pathfinder Player Companion: Champions of Balance',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-dtt3': {
+    bookId: 'ppc-dtt3',
+    bookName: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-da3': {
+    bookId: 'ppc-da3',
+    bookName: 'Pathfinder Player Companion: Divine Anthology',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-fap': {
+    bookId: 'ppc-fap',
+    bookName: 'Pathfinder Player Companion: Faiths & Philosophies',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-fob': {
+    bookId: 'ppc-fob',
+    bookName: 'Pathfinder Player Companion: Faiths of Balance',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-foc': {
+    bookId: 'ppc-foc',
+    bookName: 'Pathfinder Player Companion: Faiths of Corruption',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-fog': {
+    bookId: 'ppc-fog',
+    bookName: 'Pathfinder Player Companion: Faiths of Golarion',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-fop': {
+    bookId: 'ppc-fop',
+    bookName: 'Pathfinder Player Companion: Faiths of Purity',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-fov': {
+    bookId: 'ppc-fov',
+    bookName: 'Pathfinder Player Companion: Faiths of Valor',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-gnog': {
+    bookId: 'ppc-gnog',
+    bookName: 'Pathfinder Player Companion: Gnomes of Golarion',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-hff2': {
+    bookId: 'ppc-hff2',
+    bookName: 'Pathfinder Player Companion: Heroes from the Fringe',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-hod': {
+    bookId: 'ppc-hod',
+    bookName: 'Pathfinder Player Companion: Heroes of the Darklands',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-hog3': {
+    bookId: 'ppc-hog3',
+    bookName: 'Pathfinder Player Companion: Humans of Golarion',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-isp': {
+    bookId: 'ppc-isp',
+    bookName: 'Pathfinder Player Companion: Inner Sea Primer',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-kotis': {
+    bookId: 'ppc-kotis',
+    bookName: 'Pathfinder Player Companion: Knights of the Inner Sea',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-mtt5': {
+    bookId: 'ppc-mtt5',
+    bookName: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-mp': {
+    bookId: 'ppc-mp',
+    bookName: 'Pathfinder Player Companion: Magical Marketplace',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-mtt6': {
+    bookId: 'ppc-mtt6',
+    bookName: 'Pathfinder Player Companion: Melee Tactics Toolbox',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-msh2': {
+    bookId: 'ppc-msh2',
+    bookName: "Pathfinder Player Companion: Monster Summoner's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-psp': {
+    bookId: 'ppc-psp',
+    bookName: 'Pathfinder Player Companion: Pathfinder Society Primer',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-pp3': {
+    bookId: 'ppc-pp3',
+    bookName: 'Pathfinder Player Companion: Potions & Poisons',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-qge': {
+    bookId: 'ppc-qge',
+    bookName: 'Pathfinder Player Companion: Qadira, Gateway to the East',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-qc': {
+    bookId: 'ppc-qc',
+    bookName: 'Pathfinder Player Companion: Quests & Campaigns',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-rtt4': {
+    bookId: 'ppc-rtt4',
+    bookName: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-ush2': {
+    bookId: 'ppc-ush2',
+    bookName: "Pathfinder Player Companion: Undead Slayer's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-chr': {
+    bookId: 'ppc-chr',
+    bookName: 'Pathfinder Player Companion: Chronicle of Legends',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-vc': {
+    bookId: 'ppc-vc',
+    bookName: 'Pathfinder Player Companion: Villain Codex',
+    publisher: 'Paizo',
+  },
+
+  // Generic / series-level codes
+  'pf1e-prg': { bookId: 'prg', bookName: 'Pathfinder Roleplaying Game', publisher: 'Paizo' },
+  'pf1e-adventurers-guide': {
+    bookId: 'adventurers-guide',
+    bookName: "Adventurer's Guide",
+    publisher: 'Paizo',
+  },
+
+  // Campaign Setting books (additional)
+  'pf1e-chr-righteous': {
+    bookId: 'chr-righteous',
+    bookName: 'Chronicle of the Righteous',
+    publisher: 'Paizo',
+  },
+  'pf1e-fg': { bookId: 'fg', bookName: 'Faction Guide', publisher: 'Paizo' },
+  'pf1e-fw': { bookId: 'fw', bookName: 'The First World, Realm of the Fey', publisher: 'Paizo' },
+  'pf1e-mwangi': { bookId: 'mwangi', bookName: 'The Mwangi Expanse', publisher: 'Paizo' },
+  'pf1e-rg': { bookId: 'rg', bookName: 'Rival Guide', publisher: 'Paizo' },
+  'pf1e-lk': { bookId: 'lk', bookName: 'Lost Kingdoms', publisher: 'Paizo' },
+  'pf1e-dog-cs': { bookId: 'dog-cs', bookName: 'Dungeons of Golarion', publisher: 'Paizo' },
+  'pf1e-qje': { bookId: 'qje', bookName: 'Qadira, Jewel of the East', publisher: 'Paizo' },
+  'pf1e-ctr': { bookId: 'ctr', bookName: 'Classic Treasures Revisited', publisher: 'Paizo' },
+  'pf1e-hap': {
+    bookId: 'hap',
+    bookName: 'Horsemen of the Apocalypse: Book of the Damned Vol. 3',
+    publisher: 'Paizo',
+  },
+  'pf1e-botd1': {
+    bookId: 'botd1',
+    bookName: 'Book of the Damned Vol. 1: Princes of Darkness',
+    publisher: 'Paizo',
+  },
+
+  // Pathfinder Chronicles series
+  'pf1e-pcc': {
+    bookId: 'pcc',
+    bookName: 'Pathfinder Chronicles Campaign Setting',
+    publisher: 'Paizo',
+  },
+  'pf1e-seekers': { bookId: 'seekers', bookName: 'Seekers of Secrets', publisher: 'Paizo' },
+  'pf1e-pcs-pop': { bookId: 'pcs-pop', bookName: 'Paths of Prestige', publisher: 'Paizo' },
+  'pf1e-poth': { bookId: 'poth', bookName: 'Path of the Hellknight', publisher: 'Paizo' },
+  'pf1e-gm': { bookId: 'gm', bookName: 'Gods and Magic', publisher: 'Paizo' },
+  'pf1e-cg': { bookId: 'cg', bookName: 'Cities of Golarion', publisher: 'Paizo' },
+  'pf1e-dk': { bookId: 'dk', bookName: 'Dark Markets: A Guide to Katapesh', publisher: 'Paizo' },
+  'pf1e-pod': {
+    bookId: 'pod',
+    bookName: 'Princes of Darkness, Book of the Damned Vol. I',
+    publisher: 'Paizo',
+  },
+
+  // Player Companion books (additional)
+  'pf1e-ppc-dhh': {
+    bookId: 'ppc-dhh',
+    bookName: "Pathfinder Player Companion: Demon Hunter's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-dsh': {
+    bookId: 'ppc-dsh',
+    bookName: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-dugh': {
+    bookId: 'ppc-dugh',
+    bookName: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-sph': {
+    bookId: 'ppc-sph',
+    bookName: "Pathfinder Player Companion: Spymaster's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-ghh': {
+    bookId: 'ppc-ghh',
+    bookName: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-mrm': {
+    bookId: 'ppc-mrm',
+    bookName: "Pathfinder Player Companion: Merchant's Manifest",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-dd2': {
+    bookId: 'ppc-dd2',
+    bookName: "Pathfinder Player Companion: Disciple's Doctrine",
+    publisher: 'Paizo',
+  },
+
+  // Missing PPC codes found in data
+  'pf1e-ppc-por': {
+    bookId: 'ppc-por',
+    bookName: 'Pathfinder Player Companion: People of the River',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-dep': {
+    bookId: 'ppc-dep',
+    bookName: 'Pathfinder Player Companion: Dragon Empires Primer',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-oog': {
+    bookId: 'ppc-oog',
+    bookName: 'Pathfinder Player Companion: Orcs of Golarion',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-hhh': {
+    bookId: 'ppc-hhh',
+    bookName: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-bote': {
+    bookId: 'ppc-bote',
+    bookName: 'Pathfinder Player Companion: Blood of the Elements',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-boan': {
+    bookId: 'ppc-boa',
+    bookName: 'Pathfinder Player Companion: Blood of Angels',
+    publisher: 'Paizo',
+  },
+
+  // Campaign Setting codes
+  'pf1e-pcs-dr': {
+    bookId: 'pcs-dr',
+    bookName: 'Pathfinder Campaign Setting: Distant Realms',
+    publisher: 'Paizo',
+  },
+
+  // Alternate full-name codes
+  'pf1e-ultimate-wilderness': {
+    bookId: 'uw',
+    bookName: 'Ultimate Wilderness',
+    publisher: 'Paizo',
+  },
+  'pf1e-ue': {
+    bookId: 'ue',
+    bookName: 'Ultimate Equipment',
+    publisher: 'Paizo',
+  },
+  'pf1e-uc-campaign': {
+    bookId: 'uc-campaign',
+    bookName: 'Ultimate Campaign',
+    publisher: 'Paizo',
+  },
+  'pf1e-gmg': {
+    bookId: 'gmg',
+    bookName: 'GameMastery Guide',
+    publisher: 'Paizo',
+  },
+  'pf1e-iswg': {
+    bookId: 'iswg',
+    bookName: 'Inner Sea World Guide',
+    publisher: 'Paizo',
+  },
+  'pf1e-pfs': {
+    bookId: 'pfs',
+    bookName: 'Pathfinder Society Field Guide',
+    publisher: 'Paizo',
+  },
+  'pf1e-society': {
+    bookId: 'pfs',
+    bookName: 'Pathfinder Society',
+    publisher: 'Paizo',
+  },
+  'pf1e-bestiary': {
+    bookId: 'bestiary',
+    bookName: 'Bestiary',
+    publisher: 'Paizo',
+  },
+  'pf1e-monster-codex': {
+    bookId: 'monster-codex',
+    bookName: 'Monster Codex',
+    publisher: 'Paizo',
+  },
+  'pf1e-planar-adventures': {
+    bookId: 'planar-adventures',
+    bookName: 'Planar Adventures',
+    publisher: 'Paizo',
+  },
+  'pf1e-pcs': {
+    bookId: 'pcs',
+    bookName: 'Pathfinder Campaign Setting',
+    publisher: 'Paizo',
+  },
+  'pf1e-dw': {
+    bookId: 'dw',
+    bookName: 'Distant Worlds',
+    publisher: 'Paizo',
+  },
+  'pf1e-aa2': {
+    bookId: 'aa2',
+    bookName: "Adventurer's Armory 2",
+    publisher: 'Paizo',
+  },
+  'pf1e-aa1': {
+    bookId: 'aa1',
+    bookName: "Adventurer's Armory",
+    publisher: 'Paizo',
+  },
+  'pf1e-wmh': {
+    bookId: 'wmh',
+    bookName: "Weapon Master's Handbook",
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-botn': {
+    bookId: 'ppc-botn',
+    bookName: 'Pathfinder Player Companion: Blood of the Night',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-dog': {
+    bookId: 'ppc-dog',
+    bookName: 'Pathfinder Player Companion: Dwarves of Golarion',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-eog': {
+    bookId: 'ppc-eog',
+    bookName: 'Pathfinder Player Companion: Elves of Golarion',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-gnolls': {
+    bookId: 'ppc-gnolls',
+    bookName: 'Pathfinder Player Companion: Gnolls of the Dark Lands',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-gog': {
+    bookId: 'ppc-gog',
+    bookName: 'Pathfinder Player Companion: Goblins of Golarion',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-hog2': {
+    bookId: 'ppc-hog2',
+    bookName: 'Pathfinder Player Companion: Halflings of Golarion',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-kog': {
+    bookId: 'ppc-kog',
+    bookName: 'Pathfinder Player Companion: Kobolds of Golarion',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-potr2': {
+    bookId: 'ppc-potr2',
+    bookName: 'Pathfinder Player Companion: Paths of the Righteous',
+    publisher: 'Paizo',
+  },
+  'pf1e-ppc-pits': {
+    bookId: 'ppc-pits',
+    bookName: 'Pathfinder Player Companion: Pirates of the Inner Sea',
+    publisher: 'Paizo',
+  },
+
   // Misc/Unknown/Third-party
   'pf1e-misc': {
     bookId: 'misc',
@@ -741,23 +1245,231 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
  * This allows us to normalize "Core Rulebook" or "Pathfinder Core Rulebook" back to a canonical source.
  */
 const FULL_NAME_MAP: Record<string, string> = {
+  // Core rulebooks
   'core rulebook': 'pf1e-core',
-  'advanced players guide': 'pf1e-apg',
+  'pathfinder core rulebook': 'pf1e-core',
   "advanced player's guide": 'pf1e-apg',
+  'advanced players guide': 'pf1e-apg',
   'ultimate magic': 'pf1e-um',
   'ultimate combat': 'pf1e-uc',
+  'ultimate equipment': 'pf1e-ue',
+  'ultimate campaign': 'pf1e-uc-campaign',
+  'ultimate intrigue': 'pf1e-ui',
+  'ultimate wilderness': 'pf1e-uw',
   'advanced race guide': 'pf1e-arg',
   'advanced class guide': 'pf1e-acg',
   'pathfinder unchained': 'pf1e-unchained',
-  'pathfinder core rulebook': 'pf1e-core',
-  'ultimate intrigue': 'pf1e-ui',
-  'ultimate wilderness': 'pf1e-uw',
+  unchained: 'pf1e-unchained', // after "Pathfinder " prefix is stripped
+
+  // Hardcover expansions
   'occult adventures': 'pf1e-oa',
   'occult origins': 'pf1e-oo',
   'horror adventures': 'pf1e-ha',
-  'orcs of golarion': 'pf1e-or',
+  'planar adventures': 'pf1e-planar-adventures',
   'inner sea gods': 'pf1e-isg',
   'inner sea magic': 'pf1e-ismc',
+  'inner sea world guide': 'pf1e-iswg',
+  'orcs of golarion': 'pf1e-or',
+  'gamemastery guide': 'pf1e-gmg',
+  'game mastery guide': 'pf1e-gmg',
+  bestiary: 'pf1e-bestiary',
+  'monster codex': 'pf1e-monster-codex',
+  'distant worlds': 'pf1e-dw',
+  'pathfinder campaign setting': 'pf1e-pcs',
+  'society field guide': 'pf1e-pfs',
+  'pathfinder society field guide': 'pf1e-pfs',
+
+  // Equipment / gear books
+  "adventurer's armory": 'pf1e-aa1',
+  "adventurer's armory 2": 'pf1e-aa2',
+  "weapon master's handbook": 'pf1e-wmh',
+
+  // Player Companion full titles (after prefix strip these arrive without "Pathfinder Player Companion: ")
+  'blood of angels': 'pf1e-ppc-boa',
+  'blood of fiends': 'pf1e-ppc-bof',
+  'blood of the coven': 'pf1e-ppc-botc',
+  'blood of the night': 'pf1e-ppc-botn',
+  'blood of the moon': 'pf1e-ppc-botm',
+  'blood of the elements': 'pf1e-ppc-bote',
+  'dwarves of golarion': 'pf1e-ppc-dog',
+  'elves of golarion': 'pf1e-ppc-eog',
+  'gnolls of the dark lands': 'pf1e-ppc-gnolls',
+  'goblins of golarion': 'pf1e-ppc-gog',
+  'halflings of golarion': 'pf1e-ppc-hog2',
+  'kobolds of golarion': 'pf1e-ppc-kog',
+  'people of the river': 'pf1e-ppc-potr',
+  'people of the stars': 'pf1e-ppc-pos',
+  'paths of the righteous': 'pf1e-ppc-potr2',
+  'pirates of the inner sea': 'pf1e-ppc-pits',
+  'dragon empires primer': 'pf1e-ppc-dep',
+  'haunted heroes handbook': 'pf1e-ppc-hhh',
+  'orcs of golarion (ppc)': 'pf1e-ppc-oog',
+  'legacy of dragons': 'pf1e-lod',
+  'heroes of the wild': 'pf1e-ppc-hotw',
+  'heroes of the streets': 'pf1e-ppc-hots',
+  'heroes of the street': 'pf1e-ppc-hots',
+  "weapon master's handbook (ppc)": 'pf1e-wmh',
+
+  // Bestiary series
+  'bestiary 2': 'pf1e-bestiary2',
+  'bestiary 3': 'pf1e-bestiary3',
+  'bestiary 4': 'pf1e-bestiary4',
+  'bestiary 5': 'pf1e-bestiary5',
+  'bestiary 6': 'pf1e-bestiary6',
+
+  // Campaign Setting books (matched after prefix strip)
+  'inner sea bestiary': 'pf1e-isb',
+  'isles of the shackles': 'pf1e-ios',
+  'technology guide': 'pf1e-tg',
+  'mythic adventures': 'pf1e-ma',
+  'inner sea combat': 'pf1e-isc',
+  'inner sea races': 'pf1e-isr',
+  'inner sea temples': 'pf1e-ist',
+  'inner sea monster codex': 'pf1e-ismonsters',
+  'inner sea npc codex': 'pf1e-isnpc',
+  'inner sea faiths': 'pf1e-isfaiths',
+  'occult bestiary': 'pf1e-ob',
+  'occult realms': 'pf1e-or2',
+  'occult mysteries': 'pf1e-ob',
+  'dragon empires gazetteer': 'pf1e-deg',
+  'aquatic adventures': 'pf1e-aq',
+  'villain codex': 'pf1e-villain-codex',
+  'darklands revisited': 'pf1e-darklands',
+  'construct handbook': 'pf1e-construct',
+  'taldor, echoes of glory': 'pf1e-taldor',
+  'cheliax, empire of devils': 'pf1e-cheliax',
+  'sargava, the lost colony': 'pf1e-sargava',
+  'osirion, land of pharaohs': 'pf1e-osirion',
+  'osirion, land of the pharaohs': 'pf1e-osirion',
+  'osirion, legacy of pharaohs': 'pf1e-osirion',
+  'heroes of golarion': 'pf1e-hog',
+  'dungeon denizens revisited': 'pf1e-ddr',
+  'andoran, spirit of liberty': 'pf1e-andoran',
+  'harrow handbook': 'pf1e-harrow',
+  'the harrow handbook': 'pf1e-harrow',
+  'master of the fallen fortress': 'pf1e-motff',
+  'society scenario': 'pf1e-pfs-scenario',
+  'martial arts handbook': 'pf1e-ppc-mah',
+  "antihero's handbook": 'pf1e-ppc-antih',
+  'concordance of rivals': 'pf1e-concordance',
+  'book of the damned': 'pf1e-botm',
+
+  // Player Companion books (after prefix strip)
+  'people of the sands': 'pf1e-ppc-pots',
+  'people of the north': 'pf1e-ppc-potn',
+  'people of the wastes': 'pf1e-ppc-potw',
+  'advanced class origins': 'pf1e-ppc-aco2',
+  'agents of evil': 'pf1e-ppc-aoe2',
+  'alchemy manual': 'pf1e-ppc-alm',
+  'animal archive': 'pf1e-ppc-arx',
+  "armor master's handbook": 'pf1e-ppc-amh',
+  'armor master': 'pf1e-ppc-amh',
+  'armor masters handbook': 'pf1e-ppc-amh',
+  'bastards of golarion': 'pf1e-ppc-bog',
+  'black markets': 'pf1e-ppc-bm',
+  'blood of shadows': 'pf1e-ppc-bsha',
+  'blood of the ancients': 'pf1e-ppc-bota',
+  'champions of balance': 'pf1e-ppc-cob2',
+  'dirty tactics toolbox': 'pf1e-ppc-dtt3',
+  'divine anthology': 'pf1e-ppc-da3',
+  'faiths & philosophies': 'pf1e-ppc-fap',
+  'faiths and philosophies': 'pf1e-ppc-fap',
+  'faiths of balance': 'pf1e-ppc-fob',
+  'faiths of corruption': 'pf1e-ppc-foc',
+  'faiths of golarion': 'pf1e-ppc-fog',
+  'faiths of purity': 'pf1e-ppc-fop',
+  'faiths of valor': 'pf1e-ppc-fov',
+  'familiar folio': 'pf1e-ppc-fp',
+  'gnomes of golarion': 'pf1e-ppc-gnog',
+  'heroes from the fringe': 'pf1e-ppc-hff2',
+  'heroes of the darklands': 'pf1e-ppc-hod',
+  'humans of golarion': 'pf1e-ppc-hog3',
+  'inner sea primer': 'pf1e-ppc-isp',
+  'knights of the inner sea': 'pf1e-ppc-kotis',
+  'magic tactics toolbox': 'pf1e-ppc-mtt5',
+  'magical marketplace': 'pf1e-ppc-mp',
+  'melee tactics toolbox': 'pf1e-ppc-mtt6',
+  "monster summoner's handbook": 'pf1e-ppc-msh2',
+  'monster summoner': 'pf1e-ppc-msh2',
+  'pathfinder society primer': 'pf1e-ppc-psp',
+  'potions & poisons': 'pf1e-ppc-pp3',
+  'potions and poisons': 'pf1e-ppc-pp3',
+  'qadira, gateway to the east': 'pf1e-ppc-qge',
+  'quests & campaigns': 'pf1e-ppc-qc',
+  'quests and campaigns': 'pf1e-ppc-qc',
+  'ranged tactics toolbox': 'pf1e-ppc-rtt4',
+  "undead slayer's handbook": 'pf1e-ppc-ush2',
+  'undead slayer': 'pf1e-ppc-ush2',
+  'chronicle of legends': 'pf1e-ppc-chr',
+  'heroes of the high court': 'pf1e-ppc-hothc',
+
+  // --- entries already in SHORT_CODE_MAP but missing from here ---
+  'arcane anthology': 'pf1e-ppc-aa',
+  'champions of purity': 'pf1e-champions-purity',
+  'champions of corruption': 'pf1e-champions-corruption',
+  'blood of the beast': 'pf1e-blood-of-the-beast',
+  'inner sea intrigue': 'pf1e-isi',
+  'distant realms': 'pf1e-pcs-dr',
+  "elemental master's handbook": 'pf1e-emh',
+  'elemental masters handbook': 'pf1e-emh',
+  "plane-hopper's handbook": 'pf1e-plane-hoppers-handbook',
+  'psychic anthology': 'pf1e-psychic-anthology',
+  "healer's handbook": 'pf1e-ppc-healh',
+  "monster hunter's handbook": 'pf1e-mhh',
+  'wilderness origins': 'pf1e-wo',
+  'legacy of the first world': 'pf1e-legacy-first-world',
+  'blood of the sea': 'pf1e-ppc-bos',
+  'cohorts & companions': 'pf1e-cohorts',
+  'cohorts and companions': 'pf1e-cohorts',
+  'planes of power': 'pf1e-pots',
+  'the inner sea world guide': 'pf1e-iswg',
+  'society primer': 'pf1e-ppc-psp',
+  'campaign setting': 'pf1e-pcs',
+  'player companion': 'pf1e-pp',
+  'roleplaying game': 'pf1e-prg',
+  core: 'pf1e-core',
+  'blood of orcs': 'pf1e-or', // maps to Orcs of Golarion — same source content
+
+  // --- new books ---
+  "adventurer's guide": 'pf1e-adventurers-guide',
+  'chronicle of the righteous': 'pf1e-chr-righteous',
+  'faction guide': 'pf1e-fg',
+  'the first world, realm of the fey': 'pf1e-fw',
+  'first world, realm of the fey': 'pf1e-fw',
+  'the mwangi expanse': 'pf1e-mwangi',
+  'mwangi expanse': 'pf1e-mwangi',
+  'rival guide': 'pf1e-rg',
+  'lost kingdoms': 'pf1e-lk',
+  'dungeons of golarion': 'pf1e-dog-cs',
+  'qadira, jewel of the east': 'pf1e-qje',
+  'classic treasures revisited': 'pf1e-ctr',
+  'horsemen of the apocalypse: book of the damned vol. 3': 'pf1e-hap',
+  'horsemen of the apocalypse: book of the damned, vol. 3': 'pf1e-hap',
+  'book of the damned - volume 3: horsemen of the apocalypse': 'pf1e-hap',
+  'book of the damned — volume 3: horsemen of the apocalypse': 'pf1e-hap',
+  'book of the damned - volume 1: princes of darkness': 'pf1e-botd1',
+  'princes of darkness, book of the damned vol. i': 'pf1e-pod',
+  'chronicles campaign setting': 'pf1e-pcc',
+  'seekers of secrets': 'pf1e-seekers',
+  'paths of prestige': 'pf1e-pcs-pop',
+  'path of the hellknight': 'pf1e-poth',
+  'gods and magic': 'pf1e-gm',
+  'cities of golarion': 'pf1e-cg',
+  'dark markets, a guide to katapesh': 'pf1e-dk',
+  'dark markets: a guide to katapesh': 'pf1e-dk',
+  "demon hunter's handbook": 'pf1e-ppc-dhh',
+  "dragonslayer's handbook": 'pf1e-ppc-dsh',
+  "dungeoneer's handbook": 'pf1e-ppc-dugh',
+  "spymaster's handbook": 'pf1e-ppc-sph',
+  "giant hunter's handbook": 'pf1e-ppc-ghh',
+  "merchant's manifest": 'pf1e-ppc-mrm',
+  "disciple's doctrine": 'pf1e-ppc-dd2',
+
+  // Adventure Path named collections (not numbered)
+  'curse of the crimson throne': 'pf1e-ap', // AP series, no specific number
+  'skull & shackles adventure path': 'pf1e-ap',
+  'skull & shackles ap': 'pf1e-ap',
+  'wrath of the righteous adventure path': 'pf1e-ap',
 };
 
 /**
@@ -842,11 +1554,34 @@ export function normalizeSource(
   // Trim whitespace
   sourceStr = sourceStr.trim();
 
+  // Handle dual-source strings like "Inner Sea World Guide / Paths of Prestige"
+  // Take the first part that resolves to a known source.
+  if (sourceStr.includes(' / ')) {
+    const parts = sourceStr.split(' / ');
+    for (const part of parts) {
+      const result = normalizeSource(part.trim(), pageNum);
+      if (result.bookId !== 'unknown') return result;
+    }
+  }
+
   // Check direct match first (fastest path)
   if (COMPLETE_MAP[sourceStr]) {
     const result = { ...COMPLETE_MAP[sourceStr] };
-    if (pageNum) result.page = pageNum;
+    if (pageNum !== undefined) result.page = pageNum;
     return result;
+  }
+
+  // Dynamic Adventure Path code match: handles pf1e-ap29, pf1e-ap-123, etc.
+  // More reliable than the hardcoded list in generateAdventurePathMappings().
+  const apCodeMatch = sourceStr.match(/^pf1e-ap-?(\d+)$/);
+  if (apCodeMatch) {
+    const num = apCodeMatch[1];
+    return {
+      bookId: `ap${num}`,
+      bookName: `Pathfinder Adventure Path #${num}`,
+      publisher: 'Paizo',
+      ...(pageNum !== undefined && { page: pageNum }),
+    };
   }
 
   // Strip common prefixes and retry
@@ -858,6 +1593,11 @@ export function normalizeSource(
     'Pathfinder RPG ',
     'Pathfinder Player Companion: ',
     'Pathfinder Player Companion ',
+    'Pathfinder Campaign Setting: ',
+    'Pathfinder Campaign Setting ',
+    'Pathfinder Chronicles: ',
+    'Pathfinder Companion: ',
+    'Pathfinder Module: ',
     'Pathfinder ',
     'PFRPG ',
     'PRPG ',
@@ -870,34 +1610,61 @@ export function normalizeSource(
     }
   }
 
+  // Strip trailing year annotation, e.g. "Ultimate Magic (2011)" → "Ultimate Magic"
+  cleaned = cleaned.replace(/\s*\(\d{4}\)\s*$/, '').trim();
+
   // Try full name lookup (case-insensitive)
   const normalizedName = cleaned.toLowerCase();
   const fullNameMatch = FULL_NAME_MAP[normalizedName];
   if (fullNameMatch && COMPLETE_MAP[fullNameMatch]) {
     const result = { ...COMPLETE_MAP[fullNameMatch] };
-    if (pageNum) result.page = pageNum;
+    if (pageNum !== undefined) result.page = pageNum;
     return result;
   }
 
   // Check if the cleaned version matches any direct code
   if (COMPLETE_MAP[cleaned]) {
     const result = { ...COMPLETE_MAP[cleaned] };
-    if (pageNum) result.page = pageNum;
+    if (pageNum !== undefined) result.page = pageNum;
     return result;
   }
 
-  // Special case: Adventure Path with just number
-  const apMatch = cleaned.match(/^Adventure Path #?(\d+)$/i);
-  if (apMatch) {
-    const num = apMatch[1];
-    const result = {
-      bookId: `ap${num}`,
-      bookName: `Pathfinder Adventure Path #${num}`,
+  // Adventure Path patterns — all resolve to "Pathfinder Adventure Path #N"
+  // Handles: "Adventure Path #N", "Adventure Path #N: Subtitle", "AP #N", "AP #N: Subtitle",
+  //          "#N: Subtitle" (from "PFRPG Pathfinder #N"), "N: Subtitle" (bare number)
+  const apPatterns = [
+    /^Adventure Path #?(\d+)(?:[:\s].*)?$/i,
+    /^AP #?(\d+)(?:[:\s].*)?$/i,
+    /^#(\d+)(?:[:\s].*)?$/,
+    /^(\d{1,3}): .+/, // "14: Children of the Void" etc.
+  ];
+  for (const pat of apPatterns) {
+    const m = cleaned.match(pat);
+    if (m) {
+      const num = m[1];
+      return {
+        bookId: `ap${num}`,
+        bookName: `Pathfinder Adventure Path #${num}`,
+        publisher: 'Paizo',
+        ...(pageNum !== undefined && { page: pageNum }),
+      };
+    }
+  }
+
+  // Adventure Path Player's Guide free PDFs — e.g. "Rise of the Runelords Player's Guide"
+  const pgMatch = cleaned.match(/^(.+?)\s+Player['\u2019]s Guide$/i);
+  if (pgMatch) {
+    const apName = pgMatch[1];
+    const apSlug = apName
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+    return {
+      bookId: `pg-${apSlug}`,
+      bookName: `${apName} Player's Guide`,
       publisher: 'Paizo',
-      page: pageNum,
+      ...(pageNum !== undefined && { page: pageNum }),
     };
-    console.warn(`[normalizeSource] Inferred Adventure Path from: "${sourceStr}" → ap${num}`);
-    return result;
   }
 
   // Couldn't match — log warning and return fallback
@@ -909,7 +1676,7 @@ export function normalizeSource(
     bookId: 'unknown',
     bookName: cleaned,
     publisher: 'Unknown',
-    page: pageNum,
+    ...(pageNum !== undefined && { page: pageNum }),
   };
 }
 

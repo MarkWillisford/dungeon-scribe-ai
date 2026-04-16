@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { OrnatePanel } from '@/components/ui/OrnatePanel';
 import { FantasyDivider } from '@/components/ui/FantasyDivider';
-import {
-  CORE_RACES,
-  FEATURED_RACES,
-  UNCOMMON_RACES,
-  FLEXIBLE_ABILITY_RACES,
-  type ExpandedRaceData,
-} from '@/data/races';
+import { GameDataService, type RaceGroups } from '@/services/GameDataService';
+import type { ExpandedRaceData } from '@/data/races';
 
 interface RaceSelectorProps {
   selectedRace: ExpandedRaceData | null;
@@ -36,12 +31,6 @@ const ABILITY_LABELS: Record<string, string> = {
   charisma: 'CHA',
 };
 
-const RACE_SECTIONS = [
-  { title: 'Core Races', data: CORE_RACES },
-  { title: 'Featured Races', data: FEATURED_RACES },
-  { title: 'Uncommon Races', data: UNCOMMON_RACES },
-];
-
 export function RaceSelector({
   selectedRace,
   onSelectRace,
@@ -51,8 +40,29 @@ export function RaceSelector({
 }: RaceSelectorProps) {
   const { colors, fantasy, isDark } = useTheme();
   const [expandedRace, setExpandedRace] = useState<string | null>(selectedRace?.name ?? null);
+  // Sync initializer ensures first render has real data (no flicker; tests work without async effects).
+  // Phase B: switch to empty initial state + useEffect when data comes from Firestore.
+  const [raceGroups, setRaceGroups] = useState<RaceGroups>(() =>
+    GameDataService.getRaceGroupsSync(),
+  );
 
-  const isFlexibleRace = selectedRace && FLEXIBLE_ABILITY_RACES.includes(selectedRace.name);
+  useEffect(() => {
+    GameDataService.getRaceGroups()
+      .then(setRaceGroups)
+      .catch((e) => console.error('Failed to load race groups:', e));
+  }, []);
+
+  const raceSections = useMemo(
+    () => [
+      { title: 'Core Races', data: raceGroups.core },
+      { title: 'Featured Races', data: raceGroups.featured },
+      { title: 'Uncommon Races', data: raceGroups.uncommon },
+    ],
+    [raceGroups],
+  );
+
+  const isFlexibleRace =
+    selectedRace && raceGroups.flexibleAbility.some((r) => r.name === selectedRace.name);
 
   const handleRacePress = (race: ExpandedRaceData) => {
     setExpandedRace(race.name === expandedRace ? null : race.name);
@@ -153,7 +163,7 @@ export function RaceSelector({
   return (
     <View testID={testID}>
       <ScrollView>
-        {RACE_SECTIONS.map((section) => (
+        {raceSections.map((section) => (
           <View key={section.title}>
             <Text
               style={[

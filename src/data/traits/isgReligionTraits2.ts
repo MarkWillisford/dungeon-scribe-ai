@@ -569,7 +569,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
 
   // ==================== GREEN FAITH ====================
   {
-    id: 'eyes_of_the_wild',
+    id: 'eyes_of_the_wild_r2',
     name: 'Eyes of the Wild',
     description:
       'Your devotion to the Green Faith and the natural world has sharpened your awareness of your surroundings in the wilderness. You gain a +2 trait bonus on Perception checks in natural settings.',
@@ -596,7 +596,7 @@ export const ISG_RELIGION_TRAITS_2: TraitDefinition[] = [
     tags: ['perception', 'nature', 'wilderness', 'green-faith'],
   },
   {
-    id: 'know_the_land',
+    id: 'know_the_land_r2',
     name: 'Know the Land',
     description:
       'Your training in the ways of the Green Faith has given you a deep understanding of the natural world. You gain a +1 trait bonus on Knowledge (nature) and Survival checks. Additionally, one of these two skills (your choice) becomes a class skill for you.',

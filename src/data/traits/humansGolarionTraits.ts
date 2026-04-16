@@ -405,7 +405,7 @@ export const HUMANS_GOLARION_TRAITS: TraitDefinition[] = [
 
   // Varisian
   {
-    id: 'stargazer_ig',
+    id: 'stargazer_ig_hog',
     name: 'Stargazer',
     description:
       "You spent many years wandering the roads of Varisia and beyond, and during clear nights, you took to tracking the celestial bodies that adorn Golarion's skies. You gain a +1 trait bonus on Knowledge (geography) and Survival checks.",

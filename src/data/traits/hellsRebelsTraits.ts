@@ -209,7 +209,7 @@ export const HELLS_REBELS_TRAITS: TraitDefinition[] = [
     tags: ['stealth', 'silver ravens', 'rebellion', 'kintargo', 'history', 'organization'],
   },
   {
-    id: 'natural_born_leader',
+    id: 'natural_born_leader_hr',
     name: 'Natural Born Leader',
     description:
       "Throughout your life you have assumed leadership roles in a variety of situations—handling family emergencies, organizing pranks, or coordinating solutions at work. For the purpose of determining how many teams you can manage in the rebellion and any bonuses you gain on managed teams' actions, treat your Charisma score as 14 (or 2 points higher if your Charisma is already 14 or higher). In addition, if you take the Leadership feat, you gain a +1 trait bonus to your Leadership score.",

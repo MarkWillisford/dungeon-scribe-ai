@@ -37,6 +37,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedRulesets(): Promise<void> {
   console.log(`Project: ${PROJECT_ID}`);

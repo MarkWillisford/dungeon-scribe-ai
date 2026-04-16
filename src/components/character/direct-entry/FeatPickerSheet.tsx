@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, TextInput, Pressable, Modal, FlatList, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
-import { ALL_FEATS } from '@/data/feats/index';
+import { GameDataService } from '@/services/GameDataService';
 import { type FeatDefinition } from '@/types/feats';
 
 // ---- Feat type pill colors ----
@@ -78,15 +78,21 @@ function buildPrereqSummary(feat: FeatDefinition): string | undefined {
 }
 
 let FEAT_ITEMS_CACHE: FeatItem[] | null = null;
+let FEAT_ITEMS_CACHE_AT = 0;
+const FEAT_CACHE_TTL = 30 * 60 * 1000; // 30 minutes
 
-function getFeatItems(): FeatItem[] {
-  if (FEAT_ITEMS_CACHE) return FEAT_ITEMS_CACHE;
-  FEAT_ITEMS_CACHE = ALL_FEATS.map((f) => ({
+async function getFeatItems(): Promise<FeatItem[]> {
+  if (FEAT_ITEMS_CACHE && Date.now() - FEAT_ITEMS_CACHE_AT < FEAT_CACHE_TTL) {
+    return FEAT_ITEMS_CACHE;
+  }
+  const feats = await GameDataService.getAllFeats();
+  FEAT_ITEMS_CACHE = feats.map((f) => ({
     key: f.id,
     label: f.name,
     types: f.types,
     prereqSummary: buildPrereqSummary(f),
   }));
+  FEAT_ITEMS_CACHE_AT = Date.now();
   return FEAT_ITEMS_CACHE;
 }
 
@@ -109,8 +115,13 @@ interface FeatPickerSheetProps {
 export function FeatPickerSheet({ visible, title, onSelect, onClose }: FeatPickerSheetProps) {
   const { colors, fantasy, isDark } = useTheme();
   const [query, setQuery] = useState('');
+  const [allItems, setAllItems] = useState<FeatItem[]>([]);
 
-  const allItems = getFeatItems();
+  useEffect(() => {
+    getFeatItems()
+      .then(setAllItems)
+      .catch((e) => console.error('Failed to load feats:', e));
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();

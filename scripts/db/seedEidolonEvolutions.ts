@@ -20,6 +20,7 @@ import * as admin from 'firebase-admin';
 import { ALL_EIDOLON_EVOLUTIONS } from '../../src/data/eidolonEvolutions/index';
 import type { EidolonEvolutionEntry } from '../../src/types/classOptions';
 import { normalizeSource } from '../../src/utils/normalizeSource';
+import { sleep, chunkArray } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -41,14 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
-
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  const chunks: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    chunks.push(arr.slice(i, i + size));
-  }
-  return chunks;
-}
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedEidolonEvolutions(evolutions: EidolonEvolutionEntry[]): Promise<void> {
   console.log(`\nSeeding ${evolutions.length} eidolon evolutions to project: ${PROJECT_ID}`);
@@ -76,9 +70,14 @@ async function seedEidolonEvolutions(evolutions: EidolonEvolutionEntry[]): Promi
     const batch = db.batch();
     chunk.forEach((evolution) => {
       const ref = db.collection('eidolonevolutions').doc(evolution.id);
-      batch.set(ref, { ...evolution, source: normalizeSource(evolution.source) });
+      batch.set(ref, {
+        ...evolution,
+        source: normalizeSource(evolution.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
+    await sleep(500);
     totalWritten += chunk.length;
     console.log(`  Written: ${totalWritten}/${evolutions.length}`);
   }

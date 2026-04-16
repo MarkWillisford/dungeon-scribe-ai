@@ -163,7 +163,7 @@ export const OA_FEATS: FeatDefinition[] = [
 
   // ==================== POSSESSED HAND CHAIN ====================
   {
-    id: 'possessed_hand',
+    id: 'possessed_hand_oa',
     name: 'Possessed Hand',
     description:
       'One of your hands has an eerie sentience of its own. Your possessed hand grants you a +1 bonus on all Sleight of Hand checks, and you can retrieve a stored item as a swift action instead of a move action. The hand can also independently perform simple tasks like opening doors.',
@@ -185,7 +185,7 @@ export const OA_FEATS: FeatDefinition[] = [
     tags: ['possessed hand', 'hand'],
   },
   {
-    id: 'hands_autonomy',
+    id: 'hands_autonomy_oa',
     name: "Hand's Autonomy",
     description:
       'Your possessed hand can act more independently. The hand can make attacks of opportunity independently of your normal actions, using your base attack bonus and Strength modifier. It threatens all squares within your natural reach.',
@@ -193,13 +193,13 @@ export const OA_FEATS: FeatDefinition[] = [
     source: 'Occult Adventures',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [{ type: 'feat', featId: 'possessed_hand' }],
+    prerequisites: [{ type: 'feat', featId: 'possessed_hand_oa' }],
     effects: [],
     activationMode: 'passive',
     tags: ['possessed hand', 'hand', 'attacks of opportunity'],
   },
   {
-    id: 'hands_detachment',
+    id: 'hands_detachment_oa',
     name: "Hand's Detachment",
     description:
       'Your possessed hand can detach from your body and act independently. Once per day as a standard action, you can detach the hand. It has your hit points, AC, and saving throws, flies at 30 feet (perfect), and can manipulate objects and deliver touch spells. It lasts 10 minutes per character level.',
@@ -208,8 +208,8 @@ export const OA_FEATS: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'possessed_hand' },
-      { type: 'feat', featId: 'hands_autonomy' },
+      { type: 'feat', featId: 'possessed_hand_oa' },
+      { type: 'feat', featId: 'hands_autonomy_oa' },
       { type: 'level', minimum: 5 },
     ],
     effects: [],
@@ -217,7 +217,7 @@ export const OA_FEATS: FeatDefinition[] = [
     tags: ['possessed hand', 'hand', 'detach'],
   },
   {
-    id: 'hands_knowledge',
+    id: 'hands_knowledge_oa',
     name: "Hand's Knowledge",
     description:
       'Your possessed hand can grant you flashes of insight. You can use the hand to gain a +4 insight bonus on a single Knowledge check once per day. Additionally, the hand grants you the ability to read any language by touch for 1 minute per day.',
@@ -225,13 +225,13 @@ export const OA_FEATS: FeatDefinition[] = [
     source: 'Occult Adventures',
     verificationStatus: 'needs_review' as const,
     types: ['general'],
-    prerequisites: [{ type: 'feat', featId: 'possessed_hand' }],
+    prerequisites: [{ type: 'feat', featId: 'possessed_hand_oa' }],
     effects: [],
     activationMode: 'conditional',
     tags: ['possessed hand', 'hand', 'knowledge'],
   },
   {
-    id: 'hands_sight',
+    id: 'hands_sight_oa',
     name: "Hand's Sight",
     description:
       'Your possessed hand can see for you. You gain blindsight 30 feet for as long as your possessed hand is touching a solid surface. This blindsight is based on vibration and does not function against creatures that are not in contact with the same surface.',
@@ -240,8 +240,8 @@ export const OA_FEATS: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'possessed_hand' },
-      { type: 'feat', featId: 'hands_knowledge' },
+      { type: 'feat', featId: 'possessed_hand_oa' },
+      { type: 'feat', featId: 'hands_knowledge_oa' },
     ],
     effects: [],
     activationMode: 'conditional',
@@ -568,7 +568,7 @@ export const OA_FEATS: FeatDefinition[] = [
     tags: ['psychic', 'performance', 'phrenic'],
   },
   {
-    id: 'phantom_ally',
+    id: 'phantom_ally_oa',
     name: 'Phantom Ally',
     description:
       'Your phantom is especially skilled at aiding you and your allies. When your phantom uses the aid another action, the bonus it grants increases to +4 instead of +2. Your phantom can also use aid another as a move action instead of a standard action.',
