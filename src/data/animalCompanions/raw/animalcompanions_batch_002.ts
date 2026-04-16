@@ -1,8 +1,10 @@
 // Batch 002 | first: 'Camel' | last: 'Elasmotherium' | count: 25
 // Source: https://www.d20pfsrd.com/classes/core-classes/druid/animal-companions/
 // 3pp boundary: not reached — stopped at 'Elasmotherium' (alphabetical, letter E)
-// PAGE_FETCH_FAILED stubs: Cattle, Deer (ringhorn), Devil Monkey
-//   — stat blocks not found in page after 2 fetch attempts each
+// PAGE_FETCH_FAILED entries: Cattle, Deer (Ringhorn), Devil Monkey
+//   — page fetch failed after 2 attempts; stat blocks below are community-sourced
+//     fallback data (not empty shells), so they're tagged verificationStatus: 'needs_review'
+//     rather than 'stub'. Admin should verify against a physical source before marking 'verified'.
 
 import { AnimalCompanionEntry } from '@/types/animalCompanions';
 
