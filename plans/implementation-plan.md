@@ -62,6 +62,10 @@ The Ruleset system (`ruleset-system.md`) covers types, Firestore structure, pres
 
 `Effect.type` and `Effect.target` were locked down in PR #29 (merged). Valid values: `'bonus' | 'special' | 'damage' | 'resistance' | 'penalty' | 'custom'`.
 
+#### Note: Test suite needs memory / mock audit (2026-04-16)
+
+Running `npm test` unbounded kills the WSL2 VM; even at `--maxWorkers=2` we see six suites SIGTERMed mid-run (`authSlice`, `rulesetSlice`, `normalizeSource`, `FeatRegistryService`, `HPTracker`, `OrnateStatInput`). `jest.config.js` now caps workers at 2 locally (CI unaffected) as a stopgap — but the underlying problem is likely memory bleed between tests or bloated mocks holding too much in scope. Needs a dedicated pass: audit global mocks (`jest.setup.ts`, `jest.setup.components.ts`), check for tests that import full data files (`src/data/feats/*` is large), and add `workerIdleMemoryLimit` if leaks are confirmed. Tracked as a GitHub issue. This will only get worse as the suite grows.
+
 ---
 
 ## Context
