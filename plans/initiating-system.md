@@ -29,14 +29,15 @@ The initiating system is the martial analogue to spellcasting — characters lea
 
 ## Key Differences from Spellcasting (drives all design divergences)
 
-| Spellcasting                                 | Initiating                                                                |
-| -------------------------------------------- | ------------------------------------------------------------------------- |
-| Slots per level (`spellsPerDay: number[][]`) | Single flat readied count (`maneuversReadied: number`)                    |
-| Per-day recovery (8-hour rest)               | Per-encounter recovery (in-combat mechanics)                              |
-| No "stance" equivalent                       | Stances: always-on, one at a time, no readying                            |
-| Spell schools don't restrict access          | Disciplines restrict which maneuvers a class can learn                    |
-| Uniform recovery (rest)                      | Class-specific recovery mechanics (random grant, gambit, ki-fueled, etc.) |
-| N/A                                          | Discipline access can be swapped via archetypes or Martial Traditions     |
+| Spellcasting                                 | Initiating                                                                                         |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Slots per level (`spellsPerDay: number[][]`) | One readied count per pool (varies by class and level, looked up from progression table)           |
+| Per-day recovery (8-hour rest)               | Per-encounter recovery (primary full-round + secondary swift, class-specific)                      |
+| No "stance" equivalent                       | Stances: always-on, no readying; usually one active, but some high-level features allow two        |
+| Spell schools don't restrict access          | Classes grant access to specific disciplines; all maneuvers within those disciplines are available |
+| Uniform recovery (rest)                      | Each class has primary + secondary recovery methods (see RecoveryMechanics below)                  |
+| N/A                                          | Discipline access can be swapped via archetypes or Martial Traditions                              |
+| N/A                                          | Feats (Martial Study, etc.) grant maneuvers outside the class pool system                          |
 
 ---
 
@@ -58,7 +59,7 @@ export interface DisciplineDefinition {
   associatedWeaponGroups: string[];
   sourceSystem: DisciplineSourceSystem;
   source: GameDataSource;
-  isOfficial: boolean;
+  isOfficial: boolean; // true = published by Paizo (PF1e) or WotC (3.5e). Always false for Dreamscarred Press / 3rd party.
   visibility: 'global' | 'campaign' | 'private';
   campaignId?: string;
   rev: number;
@@ -75,7 +76,10 @@ export type ManeuverActionType =
   | 'free';
 
 export interface ManeuverPrerequisite {
-  disciplineManeuversKnown?: number; // N maneuvers from same discipline
+  // N maneuvers from same discipline. SELF-INCLUSIVE: the maneuver being learned counts
+  // toward this number. So "requires 2 Primal Fury" means you need 1 OTHER Primal Fury
+  // maneuver already known. canLearnManeuver() adds +1 to the current count when checking.
+  disciplineManeuversKnown?: number;
   requiredManeuverIds?: string[]; // Specific maneuver(s) required
   minimumInitiatorLevel?: number; // Derived: (maneuverLevel * 2) - 1
 }
@@ -131,17 +135,24 @@ export interface MartialTradition {
 }
 
 // ---- Recovery Mechanics ----
-export type RecoveryMechanic =
-  | { type: 'full_round_one' } // Swordsage
-  | { type: 'full_round_all' } // Warder
-  | { type: 'strike_recovers_all' } // Warblade
-  | { type: 'random_grant'; grantCount: number } // Crusader
-  | { type: 'swift_one'; resourceId?: string } // Stalker (ki cost)
-  | { type: 'gambit' } // Warlord
-  | { type: 'move_through_threatened' } // Harbinger
-  | { type: 'animus_fueled'; resourceId: string } // Mystic
-  | { type: 'conviction_fueled'; resourceId: string } // Zealot
+// Most classes have TWO recovery methods: a primary (full-round, recover all/most)
+// and a secondary (swift/move, recover one). Both are tracked per pool.
+export type RecoveryMethod =
+  | { type: 'full_round_one' } // Full-round action, recover one maneuver
+  | { type: 'full_round_all' } // Full-round action, recover all maneuvers
+  | { type: 'strike_recovers_all' } // Initiate a strike, recover all others
+  | { type: 'random_grant'; grantCount: number } // N random readied maneuvers granted per round
+  | { type: 'swift_one'; resourceId?: string } // Swift action, recover one (optional resource cost)
+  | { type: 'gambit' } // Gambit success recovers maneuvers
+  | { type: 'move_through_threatened' } // Move through threatened square, recover one
+  | { type: 'animus_fueled'; resourceId: string } // Spend animus to recover
+  | { type: 'conviction_fueled'; resourceId: string } // Spend conviction to recover
   | { type: 'custom'; description: string };
+
+export interface RecoveryMechanics {
+  primary: RecoveryMethod; // Main recovery (typically full-round)
+  secondary?: RecoveryMethod; // Quick recovery (typically swift action, recover one)
+}
 
 // ---- Initiating Pool (on Character — parallels SpellcastingPool) ----
 export interface InitiatingContributor {
@@ -154,7 +165,7 @@ export interface InitiatingContributor {
 
 export interface InitiatingPool {
   baseClass: string; // 'warblade', 'stalker'
-  initiatingAbility: 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
+  initiatingAbility: 'INT' | 'WIS' | 'CHA'; // Always a mental stat
   contributors: InitiatingContributor[];
   effectiveInitiatorLevel: number;
   maxManeuverLevel: number; // ceil(IL / 2), capped at 9
@@ -165,7 +176,7 @@ export interface InitiatingPool {
   bonusDisciplines: { disciplineId: string; source: string }[];
   removedDisciplines: { disciplineId: string; reason: string }[];
   martialTraditionId?: string; // If a tradition is active on this pool
-  recoveryMechanic: RecoveryMechanic;
+  recoveryMechanics: RecoveryMechanics;
   maneuverDC: {
     base: number; // 10 + maneuver level + ability mod
     abilityMod: number;
@@ -196,13 +207,31 @@ export interface KnownStance {
   poolBaseClass: string;
 }
 
+// ---- Feat-Granted Maneuvers ----
+// Feats like Martial Study grant maneuvers outside the class pool system.
+// These are tracked separately — they have their own readied rules and
+// do NOT count toward any pool's maneuversKnown/maneuversReadied limits.
+export interface FeatGrantedManeuver {
+  maneuverId: string;
+  maneuverName: string;
+  disciplineId: string;
+  level: number;
+  type: ManeuverType;
+  grantedByFeatId: string; // e.g. 'martial-study'
+  isReadied: boolean; // Feat-granted maneuvers have their own readied state
+  isExpended: boolean;
+}
+
 // ---- Top-level container (parallels Spellcasting) ----
 export interface Initiating {
   pools: InitiatingPool[];
   knownManeuvers: KnownManeuver[];
   readiedManeuvers: ReadiedManeuver[];
   knownStances: KnownStance[];
-  activeStanceId: string | null;
+  // Usually one active stance; some high-level class features (e.g. Stance Mastery) allow two
+  activeStanceIds: string[];
+  maxActiveStances: number; // Default 1; increased by class features
+  featGrantedManeuvers: FeatGrantedManeuver[];
 }
 ```
 
@@ -238,11 +267,11 @@ initiatingAdvancement?: {
 ```typescript
 export interface InitiatingData {
   type: 'Martial';
-  initiatingAbility: 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
+  initiatingAbility: 'INT' | 'WIS' | 'CHA'; // Always a mental stat
   ilProgression: 'full' | 'half';
   disciplines: string[]; // disciplineIds
   progressionTableKey: string; // key into INITIATING_TABLES
-  recoveryMechanic: RecoveryMechanic;
+  recoveryMechanics: RecoveryMechanics; // Primary + secondary recovery methods
 }
 ```
 
@@ -382,7 +411,7 @@ These archetypes add the full initiating system to standard Pathfinder classes. 
 
 | Archetype               | Base Class | IL   | Key Ability | Disciplines                                                                                                                                             | Trades Away                                                               |
 | ----------------------- | ---------- | ---- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| Primal Disciple         | Barbarian  | Full | STR or WIS  | Golden Lion, Piercing Thunder, Primal Fury, Thrashing Dragon                                                                                            | Rage abilities (partial)                                                  |
+| Primal Disciple         | Barbarian  | Full | WIS         | Golden Lion, Piercing Thunder, Primal Fury, Thrashing Dragon                                                                                            | Rage abilities (partial)                                                  |
 | Rubato                  | Bard       | Full | CHA         | Elemental Flux, Golden Lion, Mithral Current                                                                                                            | Some spell progression                                                    |
 | Myrmidon                | Fighter    | Full | WIS         | 4 chosen from: Broken Blade, Golden Lion, Iron Tortoise, Mithral Current, Piercing Thunder, Primal Fury, Scarlet Throne, Tempest Gale, Thrashing Dragon | Bonus feats at 2/6/10/14/18                                               |
 | Monk of the Silver Fist | Monk       | Full | WIS         | Eternal Guardian, Iron Tortoise, Mithral Current                                                                                                        | Some unarmed strike bonuses                                               |
@@ -475,7 +504,7 @@ Key functions:
 - `maxManeuverLevel(il)` — `Math.min(9, Math.ceil(il / 2))`
 - `getProgressionAtLevel(tableKey, classLevel)` — lookup from progression table
 - `computeManeuverDC(maneuverLevel, abilityMod, miscBonus)` — `10 + level + mod + misc`
-- `canLearnManeuver(maneuver, pool, knownManeuvers)` — discipline check, level check, prereq check
+- `canLearnManeuver(maneuver, pool, knownManeuvers)` — discipline check, level check, prereq check. **Self-inclusive prereqs:** when checking `disciplineManeuversKnown`, the maneuver being learned counts toward its own requirement (add +1 to current discipline count)
 - `buildPool(baseClassData, classLevel, contributors, bonusDisciplines, removedDisciplines)` — construct InitiatingPool
 - `getEffectiveDisciplines(pool)` — computes `accessibleDisciplines - removedDisciplines + bonusDisciplines`
 - `applyTradition(pool, tradition, removedDisciplineId)` — apply a martial tradition swap
