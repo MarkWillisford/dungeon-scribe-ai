@@ -4,8 +4,9 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
-import { setUser } from '@/store/slices/authSlice';
+import { setUser, setIsAdmin, setAuthInitialized } from '@/store/slices/authSlice';
 import { FirebaseAuthService } from '@/services/FirebaseAuthService';
+import { AdminService } from '@/services/AdminService';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { fontAssets } from '@/theme/fonts';
 import { initializeFeatRegistry } from '@/data/feats';
@@ -25,7 +26,7 @@ function RootNavigation() {
   const [fontsLoaded, fontError] = useFonts(fontAssets);
 
   useEffect(() => {
-    const unsubscribe = FirebaseAuthService.onAuthStateChanged((firebaseUser) => {
+    const unsubscribe = FirebaseAuthService.onAuthStateChanged(async (firebaseUser) => {
       if (firebaseUser) {
         store.dispatch(
           setUser({
@@ -35,9 +36,16 @@ function RootNavigation() {
             photoURL: firebaseUser.photoURL || null,
           }),
         );
+        // Resolve admin claim here — auth.currentUser is guaranteed non-null
+        // inside onAuthStateChanged, so isAdmin() won't race against session restore.
+        const adminStatus = await AdminService.isAdmin().catch(() => false);
+        store.dispatch(setIsAdmin(adminStatus));
       } else {
         store.dispatch(setUser(null));
+        store.dispatch(setIsAdmin(false));
       }
+      // Signal that Firebase auth has fully initialized (even if signed out).
+      store.dispatch(setAuthInitialized());
     });
     return unsubscribe;
   }, []);

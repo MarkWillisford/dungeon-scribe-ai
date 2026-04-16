@@ -40,6 +40,8 @@ describe('authSlice', () => {
   const initialState = {
     user: null,
     isAuthenticated: false,
+    isAdmin: false,
+    authInitialized: false,
     loading: false,
     error: null,
   };
@@ -78,6 +80,8 @@ describe('authSlice', () => {
       const stateWithError = {
         user: mockUser,
         isAuthenticated: true,
+        isAdmin: false,
+        authInitialized: false,
         loading: false,
         error: 'Some error',
       };
@@ -150,6 +154,8 @@ describe('authSlice', () => {
       const authenticatedState = {
         user: mockUser,
         isAuthenticated: true,
+        isAdmin: false,
+        authInitialized: true,
         loading: false,
         error: null,
       };
@@ -162,6 +168,8 @@ describe('authSlice', () => {
       const authenticatedState = {
         user: mockUser,
         isAuthenticated: true,
+        isAdmin: false,
+        authInitialized: true,
         loading: false,
         error: null,
       };

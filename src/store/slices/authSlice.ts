@@ -5,6 +5,8 @@ import { FirebaseAuthService } from '@/services/FirebaseAuthService';
 interface AuthState {
   user: AppUser | null;
   isAuthenticated: boolean;
+  isAdmin: boolean;
+  authInitialized: boolean; // true after onAuthStateChanged fires for the first time
   loading: boolean;
   error: string | null;
 }
@@ -12,6 +14,8 @@ interface AuthState {
 const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
+  isAdmin: false,
+  authInitialized: false,
   loading: false,
   error: null,
 };
@@ -79,6 +83,12 @@ const authSlice = createSlice({
     setUser(state, action: PayloadAction<AppUser | null>) {
       state.user = action.payload;
       state.isAuthenticated = action.payload !== null;
+    },
+    setIsAdmin(state, action: PayloadAction<boolean>) {
+      state.isAdmin = action.payload;
+    },
+    setAuthInitialized(state) {
+      state.authInitialized = true;
     },
     clearError(state) {
       state.error = null;
@@ -156,5 +166,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, clearError } = authSlice.actions;
+export const { setUser, setIsAdmin, setAuthInitialized, clearError } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, Text, ScrollView, StyleSheet } from 'react-native';
+import { SafeAreaView, View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { useTheme } from '@/hooks/useTheme';
@@ -16,6 +16,7 @@ export default function SettingsScreen() {
   const { colors, fantasy, isDark } = useTheme();
 
   const user = useAppSelector((state) => state.auth.user);
+  const isAdmin = useAppSelector((state) => state.auth.isAdmin);
 
   const handleToggleTheme = () => {
     dispatch(toggleTheme());
@@ -69,6 +70,23 @@ export default function SettingsScreen() {
             />
           </View>
         </OrnatePanel>
+
+        {isAdmin && (
+          <>
+            <View style={styles.sectionSpacer} />
+            <OrnatePanel title="Admin" testID="settings-admin-panel">
+              <TouchableOpacity
+                onPress={() => router.push('/admin')}
+                activeOpacity={0.7}
+                style={styles.adminRow}
+                testID="admin-panel-button"
+              >
+                <Text style={[styles.adminRowLabel, { color: fantasy.gold }]}>Admin Panel</Text>
+                <Text style={[styles.adminRowArrow, { color: colors.text.tertiary }]}>›</Text>
+              </TouchableOpacity>
+            </OrnatePanel>
+          </>
+        )}
 
         <FantasyDivider />
 
@@ -140,5 +158,19 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 8,
+  },
+  adminRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+  adminRowLabel: {
+    fontFamily: 'Cinzel',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  adminRowArrow: {
+    fontSize: 22,
   },
 });
