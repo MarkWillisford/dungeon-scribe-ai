@@ -492,15 +492,30 @@ When an archetype or tradition modifies disciplines:
 
 ## Phase 6: Service Layer
 
+### Initiator Level Calculation
+
+Initiator Level (IL) is distinct from character level. It determines the highest maneuver level a character can access and feeds into maneuver save DCs.
+
+**Formula:** `IL = (initiating class levels × 1) + floor(all other class levels / 2)`
+
+Each initiating pool calculates its own IL independently. Non-initiating class levels always contribute at half rate. When a character has two initiating pools, each pool treats the other initiating class as non-initiating for its own IL.
+
+**Examples:**
+
+- **Warder 4 / Fighter 10** → IL = 4 + floor(10/2) = **9** → max maneuver level = ceil(9/2) = **5**
+- **Stalker 6 / Warder 4** → Stalker pool IL = 6 + floor(4/2) = **8**; Warder pool IL = 4 + floor(6/2) = **7**
+- **Warblade 10** → IL = **10** → max maneuver level = **5**
+- **Warblade 20** → IL = **20** → max maneuver level = **9** (cap)
+
+**Max maneuver level** = `Math.min(9, Math.ceil(IL / 2))`
+
+**Minimum IL** = 1 if the character has any initiating class levels.
+
 ### New file: `src/services/InitiatingService.ts`
 
 Key functions:
 
-- `computeInitiatorLevel(pool, allClasses)` — IL calculation with multiclassing
-  - Full IL classes: all levels 1:1
-  - Non-initiating classes: `floor(levels / 2)` added to each pool
-  - Two initiating pools: other initiating class counts as non-initiating for each pool
-  - Minimum IL: 1 if character has any initiating levels
+- `computeInitiatorLevel(pool, allClasses)` — IL calculation per the formula above
 - `maxManeuverLevel(il)` — `Math.min(9, Math.ceil(il / 2))`
 - `getProgressionAtLevel(tableKey, classLevel)` — lookup from progression table
 - `computeManeuverDC(maneuverLevel, abilityMod, miscBonus)` — `10 + level + mod + misc`
