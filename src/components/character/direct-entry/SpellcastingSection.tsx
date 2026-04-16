@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -10,9 +10,9 @@ import {
 } from '@/store/slices/characterEntrySlice';
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { AutoComputedValue } from '@/components/ui/AutoComputedValue';
-import { SPELL_TABLES } from '@/data/classes/index';
-import { ALL_EXPANDED_CLASSES } from '@/data/classes/index';
+import { GameDataService } from '@/services/GameDataService';
 import { getAbilityModifier } from '@/utils/characterComputations';
+import type { ExpandedClassData, SpellProgressionTable } from '@/data/classes/types';
 import {
   type DraftSpellcastingPool,
   type DraftClassEntry,
@@ -71,11 +71,10 @@ function getContributors(
 function resolveSpellTableKey(
   contributors: DraftClassEntry[],
   poolType: 'divine' | 'arcane',
+  expandedClasses: ExpandedClassData[],
 ): string {
   for (const cls of contributors) {
-    const data = ALL_EXPANDED_CLASSES.find(
-      (c) => c.name.toLowerCase() === cls.className.toLowerCase(),
-    );
+    const data = expandedClasses.find((c) => c.name.toLowerCase() === cls.className.toLowerCase());
     if (data?.spellcasting.spellTableKey) return data.spellcasting.spellTableKey;
   }
   // Default to full 9-level prepared
@@ -85,11 +84,12 @@ function resolveSpellTableKey(
 /**
  * Check if any contributing class grants domain/school bonus slots.
  */
-function hasDomainSlots(contributors: DraftClassEntry[]): boolean {
+function hasDomainSlots(
+  contributors: DraftClassEntry[],
+  expandedClasses: ExpandedClassData[],
+): boolean {
   return contributors.some((cls) => {
-    const data = ALL_EXPANDED_CLASSES.find(
-      (c) => c.name.toLowerCase() === cls.className.toLowerCase(),
-    );
+    const data = expandedClasses.find((c) => c.name.toLowerCase() === cls.className.toLowerCase());
     return data?.spellcasting.domainSlots === true;
   });
 }
@@ -226,9 +226,11 @@ const gridStyles = StyleSheet.create({
 interface PoolCardProps {
   pool: DraftSpellcastingPool;
   abilityMod: number;
+  expandedClasses: ExpandedClassData[];
+  spellTables: Record<string, SpellProgressionTable>;
 }
 
-function PoolCard({ pool, abilityMod }: PoolCardProps) {
+function PoolCard({ pool, abilityMod, expandedClasses, spellTables }: PoolCardProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const classes = useAppSelector((state) => state.characterEntry.draft.classes);
@@ -241,12 +243,15 @@ function PoolCard({ pool, abilityMod }: PoolCardProps) {
   );
   const esl = useMemo(() => contributors.reduce((sum, c) => sum + c.level, 0), [contributors]);
   const tableKey = useMemo(
-    () => resolveSpellTableKey(contributors, pool.poolType),
-    [contributors, pool.poolType],
+    () => resolveSpellTableKey(contributors, pool.poolType, expandedClasses),
+    [contributors, pool.poolType, expandedClasses],
   );
-  const domainSlots = useMemo(() => hasDomainSlots(contributors), [contributors]);
+  const domainSlots = useMemo(
+    () => hasDomainSlots(contributors, expandedClasses),
+    [contributors, expandedClasses],
+  );
 
-  const spellTable = SPELL_TABLES[tableKey];
+  const spellTable = spellTables[tableKey];
   const tableRow = spellTable && esl > 0 ? spellTable[Math.min(esl, spellTable.length) - 1] : null;
 
   const dcBase = 10 + abilityMod;
@@ -510,6 +515,17 @@ export function SpellcastingSection() {
   const dispatch = useAppDispatch();
   const pools = useAppSelector((state) => state.characterEntry.draft.spellcastingPools);
   const abilities = useAppSelector((state) => state.characterEntry.draft.abilities);
+  const [expandedClasses, setExpandedClasses] = useState<ExpandedClassData[]>([]);
+  const [spellTables, setSpellTables] = useState<Record<string, SpellProgressionTable>>({});
+
+  useEffect(() => {
+    Promise.all([GameDataService.getExpandedClasses(), GameDataService.getSpellTables()])
+      .then(([classes, tables]) => {
+        setExpandedClasses(classes);
+        setSpellTables(tables);
+      })
+      .catch((e) => console.error('Failed to load spellcasting data:', e));
+  }, []);
 
   const abilityMods = useMemo(
     () => ({
@@ -545,7 +561,13 @@ export function SpellcastingSection() {
       )}
 
       {pools.map((pool) => (
-        <PoolCard key={pool.id} pool={pool} abilityMod={abilityMods[pool.castingAbility]} />
+        <PoolCard
+          key={pool.id}
+          pool={pool}
+          abilityMod={abilityMods[pool.castingAbility]}
+          expandedClasses={expandedClasses}
+          spellTables={spellTables}
+        />
       ))}
 
       <View style={styles.addRow}>

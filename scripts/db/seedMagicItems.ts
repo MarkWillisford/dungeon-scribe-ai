@@ -24,14 +24,11 @@ import { normalizeSource } from '../../src/utils/normalizeSource';
 import { ALL_RINGS } from '../../src/data/magicItems/rings/index';
 import { ALL_STAVES } from '../../src/data/magicItems/staves/index';
 import { ALL_RODS } from '../../src/data/magicItems/rods/index';
+import { sleep } from './seedUtils';
 
 // Wondrous items (M-Z) will be added here once PRs #51 merges and the
 // wondrous index is updated to include Doug's batches.
-const ALL_MAGIC_ITEMS: MagicItemDefinition[] = [
-  ...ALL_RINGS,
-  ...ALL_STAVES,
-  ...ALL_RODS,
-];
+const ALL_MAGIC_ITEMS: MagicItemDefinition[] = [...ALL_RINGS, ...ALL_STAVES, ...ALL_RODS];
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -55,6 +52,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seed(): Promise<void> {
   console.log(`Seeding ${ALL_MAGIC_ITEMS.length} magic items to '${COLLECTION}'...`);
@@ -78,10 +76,15 @@ async function seed(): Promise<void> {
 
     for (const item of slice) {
       const ref = collectionRef.doc(item.id);
-      batch.set(ref, { ...item, source: normalizeSource(item.source) }, { merge: true });
+      batch.set(
+        ref,
+        { ...item, source: normalizeSource(item.source), visibility: 'global' as const },
+        { merge: true },
+      );
     }
 
     await batch.commit();
+    await sleep(500);
     written += slice.length;
     console.log(`  Written ${written} / ${ALL_MAGIC_ITEMS.length}`);
   }

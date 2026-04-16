@@ -104,7 +104,7 @@ export const PEOPLE_NORTH_RIVER_TRAITS: TraitDefinition[] = [
   },
 
   {
-    id: 'warded_against_witchery',
+    id: 'warded_against_witchery_pon',
     name: 'Warded Against Witchery',
     description:
       'Training in Mendev has taught you to resist the arcane magics of those who would corrupt and enslave. You gain a +1 trait bonus on saving throws against spells and spell-like abilities cast by evil arcane spellcasters. You also gain a +1 trait bonus on Spellcraft checks made to identify spells cast by evil arcane spellcasters.',

@@ -19,6 +19,7 @@ import * as admin from 'firebase-admin';
 import { ALL_SLAYER_TALENTS } from '../../src/data/slayerTalents/index';
 import type { SlayerTalentEntry } from '../../src/types/classOptions';
 import { normalizeSource } from '../../src/utils/normalizeSource';
+import { sleep, chunkArray } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -40,12 +41,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
-
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  const chunks: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) chunks.push(arr.slice(i, i + size));
-  return chunks;
-}
+db.settings({ ignoreUndefinedProperties: true });
 
 async function seedSlayerTalents(talents: SlayerTalentEntry[]): Promise<void> {
   console.log(`\nSeeding ${talents.length} slayer talents to project: ${PROJECT_ID}`);
@@ -69,9 +65,11 @@ async function seedSlayerTalents(talents: SlayerTalentEntry[]): Promise<void> {
       batch.set(db.collection('slayertalents').doc(talent.id), {
         ...talent,
         source: normalizeSource(talent.source),
+        visibility: 'global' as const,
       });
     });
     await batch.commit();
+    await sleep(500);
     totalWritten += chunk.length;
     console.log(`  Written: ${totalWritten}/${talents.length}`);
   }

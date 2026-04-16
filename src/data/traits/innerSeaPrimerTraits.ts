@@ -751,7 +751,7 @@ export const INNER_SEA_PRIMER_TRAITS: TraitDefinition[] = [
     tags: ['linnorm_kings', 'diplomacy', 'fey', 'social'],
   },
   {
-    id: 'viking_blood',
+    id: 'viking_blood_isp2',
     name: 'Viking Blood',
     description:
       'You have the imposing physique and fearsome reputation characteristic of northern warriors. Your intimidating appearance and unpredictable demeanor give you an edge in social confrontations. You gain a +1 trait bonus on Intimidate checks and Intimidate is always a class skill for you.',

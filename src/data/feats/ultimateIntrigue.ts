@@ -474,7 +474,7 @@ export const UI_FEATS: FeatDefinition[] = [
     tags: ['skill', 'linguistics', 'intrigue'],
   },
   {
-    id: 'fox_shape',
+    id: 'fox_shape_ui',
     name: 'Fox Shape',
     description:
       'You can take the form of a fox. You can use your change shape racial ability to assume the form of a fox (as beast shape II). While in fox form, you gain a +10 bonus on Disguise checks to appear as a mundane fox.',
@@ -819,7 +819,7 @@ export const UI_FEATS: FeatDefinition[] = [
     tags: ['intrigue', 'disguise', 'identity', 'divination'],
   },
   {
-    id: 'feinting_flurry',
+    id: 'feinting_flurry_ui',
     name: 'Feinting Flurry',
     description:
       'When using flurry of blows or a similar ability that grants multiple attacks, you can replace your first attack with a feint attempt. If the feint succeeds, all remaining attacks in the flurry are made against a foe denied its Dexterity bonus to AC.',

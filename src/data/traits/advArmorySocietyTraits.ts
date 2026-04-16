@@ -49,7 +49,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     tags: ['diplomacy', 'trade', 'market', 'commerce'],
   },
   {
-    id: 'extremely_fashionable',
+    id: 'extremely_fashionable_aa',
     name: 'Extremely Fashionable',
     description:
       'Whenever you are wearing clothing and/or jewelry worth at least 150 gp (and not otherwise covered in gore, sewage, or other things that mar your overall look), you gain a +1 trait bonus on Bluff, Diplomacy, and Intimidate checks. In addition, one of these skills (your choice) is always a class skill for you.',
@@ -161,7 +161,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     tags: ['improvised', 'equipment', 'creative', 'penalty reduction'],
   },
   {
-    id: 'iron_liver',
+    id: 'iron_liver_aa',
     name: 'Iron Liver',
     description:
       'Whether through fortunate genetics or a lifetime of heavy drinking, your liver is especially resilient. You gain a +2 trait bonus on Fortitude saves against poison and drugs, and a +4 trait bonus on Fortitude saves against the effects of alcohol.',
@@ -260,7 +260,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     tags: ['weapon proficiency', 'penalty reduction', 'adaptability'],
   },
   {
-    id: 'rough_and_ready',
+    id: 'rough_and_ready_aa',
     name: 'Rough and Ready',
     description:
       'You have learned to use the tools of your trade as weapons. When using a tool of your trade (such as a shovel, pick, or blacksmith hammer) as a weapon, you do not take the improvised weapon penalty and gain a +1 trait bonus on attack rolls. Fragile items like lutes and brooms are not suitable for combat use.',
@@ -431,7 +431,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
 
   // ==================== SOCIAL TRAITS — Pathfinder Society Primer ====================
   {
-    id: 'clever_wordplay',
+    id: 'clever_wordplay_aa',
     name: 'Clever Wordplay',
     description:
       'Your cunning and logic allow you to talk your way out of (or into) situations. Choose one Charisma-based skill. You may use your Intelligence modifier instead of your Charisma modifier when making checks with that skill.',
@@ -555,7 +555,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
 
   // ==================== COMBAT TRAITS — Quests and Campaigns ====================
   {
-    id: 'crowd_dodger',
+    id: 'crowd_dodger_qac',
     name: 'Crowd Dodger',
     description:
       "You grew up navigating the tight alleyways and crowded streets of an urban environment. You gain a +2 trait bonus on Acrobatics checks to move through another creature's space and on Acrobatics checks to avoid attacks of opportunity when leaving a threatened square.",

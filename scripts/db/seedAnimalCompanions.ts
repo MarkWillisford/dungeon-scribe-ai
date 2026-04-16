@@ -22,6 +22,7 @@ import * as admin from 'firebase-admin';
 import { ALL_ANIMAL_COMPANIONS } from '../../src/data/animalCompanions/index';
 import type { AnimalCompanionEntry } from '../../src/types/animalCompanions';
 import { normalizeSource } from '../../src/utils/normalizeSource';
+import { sleep, chunkArray } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -45,15 +46,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
-
-// --- Helpers ---
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  const chunks: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    chunks.push(arr.slice(i, i + size));
-  }
-  return chunks;
-}
+db.settings({ ignoreUndefinedProperties: true });
 
 // --- Seed ---
 async function seedAnimalCompanions(companions: AnimalCompanionEntry[]): Promise<void> {
@@ -81,9 +74,14 @@ async function seedAnimalCompanions(companions: AnimalCompanionEntry[]): Promise
     chunk.forEach((companion) => {
       // Document ID = companion.id — deterministic and idempotent
       const ref = db.collection(COLLECTION).doc(companion.id);
-      batch.set(ref, { ...companion, source: normalizeSource(companion.source) });
+      batch.set(ref, {
+        ...companion,
+        source: normalizeSource(companion.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
+    await sleep(500);
     totalWritten += chunk.length;
     console.log(`  Written: ${totalWritten}/${companions.length}`);
   }

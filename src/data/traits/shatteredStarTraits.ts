@@ -75,7 +75,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
   },
 
   {
-    id: 'berserker_of_the_society',
+    id: 'berserker_of_the_society_ss',
     name: 'Berserker of the Society',
     description:
       'Your experience as a Pathfinder has deepened your understanding of rage. You may use your barbarian rage ability for 3 additional rounds per day.',
@@ -125,7 +125,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
   },
 
   {
-    id: 'defender_of_the_society',
+    id: 'defender_of_the_society_ss',
     name: 'Defender of the Society',
     description:
       'Your time spent studying the greatest warriors of the Society taught you new defensive skills while wearing armor. You gain a +1 trait bonus to Armor Class when wearing medium or heavy armor.',
@@ -155,7 +155,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
   },
 
   {
-    id: 'exalted_of_the_society',
+    id: 'exalted_of_the_society_ss',
     name: 'Exalted of the Society',
     description:
       'Your extensive study of divine powers within the Grand Lodge has enhanced your healing abilities. You may channel energy one additional time per day.',
@@ -268,7 +268,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
   },
 
   {
-    id: 'havoc_of_the_society',
+    id: 'havoc_of_the_society_ss',
     name: 'Havoc of the Society',
     description:
       'Your study of destructive magic within the Pathfinder Society has enhanced your spellcasting power. Whenever you cast a spell that deals damage, you gain a +1 trait bonus to the total damage dealt. This damage is considered force damage regardless of the type of damage dealt by the spell.',
@@ -323,7 +323,7 @@ export const SHATTERED_STAR_TRAITS: TraitDefinition[] = [
   },
 
   {
-    id: 'maestro_of_the_society',
+    id: 'maestro_of_the_society_ss',
     name: 'Maestro of the Society',
     description:
       'You have access to the vast treasure trove of musical knowledge in the vaults beneath the Grand Lodge in Absalom. You can use bardic performance for 3 additional rounds per day.',

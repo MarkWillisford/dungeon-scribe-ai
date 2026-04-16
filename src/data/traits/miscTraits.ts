@@ -711,7 +711,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
     tags: ['will', 'save'],
   },
   {
-    id: 'ex_asmodean',
+    id: 'ex_asmodean_fob',
     name: 'Ex-Asmodean',
     description:
       'You used to be a follower of Asmodeus but have since renounced the Prince of Darkness. Your time as one of his faithful has given you an understanding of his church. You gain a +1 trait bonus on Knowledge (religion) checks, and Knowledge (religion) becomes a class skill for you.',
@@ -794,7 +794,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
 
   // ==================== EQUIPMENT TRAITS — Melee/Ranged Tactics Toolbox ====================
   {
-    id: 'heirloom_weapon',
+    id: 'heirloom_weapon_mtt',
     name: 'Heirloom Weapon',
     description:
       'You carry a non-masterwork simple or martial weapon that has been passed down from generation to generation in your family. When you select this trait, choose a specific weapon. You gain proficiency with that specific weapon. In addition, you gain a +1 trait bonus to attack rolls with that weapon when you attempt to confirm a critical hit.',
@@ -1110,7 +1110,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
     tags: ['perception', 'save', 'sleep', 'paralysis', 'dragon'],
   },
   {
-    id: 'serpentine_squeeze',
+    id: 'serpentine_squeeze_kg',
     name: 'Serpentine Squeeze',
     description:
       'Your body is unusually lithe and you can fit into tight spaces with ease. You gain a +1 trait bonus on Escape Artist checks, and Escape Artist becomes a class skill for you.',
@@ -1365,7 +1365,7 @@ export const MISC_TRAITS: TraitDefinition[] = [
 
   // ==================== REGIONAL TRAITS — Various Nation Books ====================
   {
-    id: 'hermean_paragon',
+    id: 'hermean_paragon_iswg',
     name: 'Hermean Paragon',
     description:
       'You were raised on the island of Hermea, where only the best and brightest are welcomed. You gain a +1 trait bonus on any one saving throw of your choice.',

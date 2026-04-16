@@ -112,8 +112,8 @@ export function CharacterEntryScreen() {
     [dispatch],
   );
 
-  const handleValidate = useCallback(() => {
-    const newWarnings = DraftValidationService.validate(draft, ruleset);
+  const handleValidate = useCallback(async () => {
+    const newWarnings = await DraftValidationService.validate(draft, ruleset);
     dispatch(setValidationWarnings(newWarnings));
     setShowValidationSheet(true);
   }, [draft, ruleset, dispatch]);

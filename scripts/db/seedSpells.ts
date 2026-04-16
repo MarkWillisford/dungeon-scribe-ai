@@ -19,6 +19,7 @@ import * as admin from 'firebase-admin';
 import { ALL_SPELLS } from '../../src/data/spells/index';
 import type { Spell } from '../../src/types/spells';
 import { normalizeSource } from '../../src/utils/normalizeSource';
+import { sleep, chunkArray } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
@@ -41,15 +42,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
-
-// --- Helpers ---
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  const chunks: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    chunks.push(arr.slice(i, i + size));
-  }
-  return chunks;
-}
+db.settings({ ignoreUndefinedProperties: true });
 
 async function clearCollection(collectionName: string): Promise<void> {
   console.log(`Clearing collection: ${collectionName}...`);
@@ -63,6 +56,7 @@ async function clearCollection(collectionName: string): Promise<void> {
     const batch = db.batch();
     chunk.forEach((doc) => batch.delete(doc.ref));
     await batch.commit();
+    await sleep(500);
     console.log(`  Deleted ${chunk.length} documents`);
   }
 }
@@ -90,9 +84,14 @@ async function seedSpells(spells: Spell[]): Promise<void> {
     const batch = db.batch();
     chunk.forEach((spell) => {
       const ref = db.collection('spells').doc(); // auto-ID
-      batch.set(ref, { ...spell, source: normalizeSource(spell.source) });
+      batch.set(ref, {
+        ...spell,
+        source: normalizeSource(spell.source),
+        visibility: 'global' as const,
+      });
     });
     await batch.commit();
+    await sleep(500);
     totalWritten += chunk.length;
     console.log(`  Written: ${totalWritten}/${spells.length}`);
   }

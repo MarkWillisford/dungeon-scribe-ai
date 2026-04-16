@@ -1373,7 +1373,7 @@ export const UC_DRAWBACK_TRAITS: TraitDefinition[] = [
   },
 
   {
-    id: 'righteous_indignation',
+    id: 'righteous_indignation_ah',
     name: 'Righteous Indignation',
     description:
       'You have trouble controlling your temper when others behave in a way you find offensive. Whenever an enemy provokes an attack of opportunity from you, you must take it unless you succeed at a Will save (DC = 10 + your character level). You also take a -1 penalty on Will saving throws against spells with the emotion descriptor unless those spells also have the fear descriptor.',

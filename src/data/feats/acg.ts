@@ -486,7 +486,7 @@ export const ACG_FEATS: FeatDefinition[] = [
     tags: ['natural weapon', 'unarmed', 'monk'],
   },
   {
-    id: 'planar_focus',
+    id: 'planar_focus_acg',
     name: 'Planar Focus',
     description:
       'When you use your animal focus class feature, you can choose from the following additional options: Chaos (your natural attacks and unarmed strikes count as chaotic-aligned), Evil (gain a +1 profane bonus on attack rolls and saving throws), Good (gain a +1 sacred bonus on attack rolls and saving throws), Law (your natural attacks and unarmed strikes count as lawful-aligned).',
@@ -624,7 +624,7 @@ export const ACG_FEATS: FeatDefinition[] = [
 
   // ==================== ITEM CREATION ====================
   {
-    id: 'craft_poppet',
+    id: 'craft_poppet_acg',
     name: 'Craft Poppet',
     description:
       'You can create poppets, magical constructs that obey your commands. Creating a poppet takes 1 day for each 1,000 gp in its base price. To create a poppet, you must use up raw materials costing half of its base price.',

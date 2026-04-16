@@ -994,61 +994,6 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     tags: ['teamwork', 'movement', 'positioning'],
   },
   {
-    id: 'stone_dodger',
-    name: 'Stone Dodger',
-    description:
-      'You are practiced at avoiding rocks and boulders hurled by giants and other large creatures. When you can see an ally with this feat, you gain a +4 dodge bonus to AC against hurled rocks and similar thrown boulders. Additionally, you may make a Reflex save (DC = attack roll result) to take half damage from such attacks.',
-    shortDescription:
-      '+4 dodge AC vs. hurled rocks when visible ally with feat present; Reflex for half',
-    source: 'Pathfinder Society Scenario',
-    types: ['combat', 'teamwork'],
-    prerequisites: [],
-    effects: [
-      {
-        type: 'bonus',
-        bonusType: BonusType.DODGE,
-        target: 'ac',
-        value: 4,
-        source: 'Stone Dodger',
-        condition: {
-          type: 'custom',
-          description: 'Against hurled rocks when a visible ally with this feat is present',
-          params: {},
-        },
-      },
-    ],
-    activationMode: 'conditional',
-    tags: ['teamwork', 'defense', 'thrown'],
-  },
-  {
-    id: 'suppress_regeneration',
-    name: 'Suppress Regeneration',
-    description:
-      'You and your allies work together to keep a regenerating creature from recovering. When you hit a creature and suppress its regeneration for 1 round, allies with this feat who are adjacent to that creature can spend an attack of opportunity to extend the suppression duration by 1 additional round each.',
-    shortDescription:
-      'Allies can spend AoOs to extend your regeneration suppression by 1 round each',
-    source: 'Pathfinder Society Scenario',
-    types: ['combat', 'teamwork'],
-    prerequisites: [],
-    effects: [],
-    activationMode: 'conditional',
-    tags: ['teamwork', 'regeneration', 'combat'],
-  },
-  {
-    id: 'swing_about',
-    name: 'Swing About',
-    description:
-      'You can use an ally as an anchor point to reposition yourself in battle. As a move action, you can grab a willing adjacent ally and use them as a pivot point to swing yourself to any square adjacent to that ally without provoking attacks of opportunity.',
-    shortDescription:
-      'Grab adjacent willing ally and reposition to any square adjacent to them as move action',
-    source: 'Pathfinder Society Scenario',
-    types: ['combat', 'teamwork'],
-    prerequisites: [{ type: 'feat', featId: 'escape_route' }],
-    effects: [],
-    activationMode: 'conditional',
-    tags: ['teamwork', 'movement', 'positioning'],
-  },
-  {
     id: 'take_the_hit',
     name: 'Take the Hit',
     description:

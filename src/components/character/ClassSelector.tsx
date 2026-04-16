@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { FantasyDivider } from '@/components/ui/FantasyDivider';
-import { CORE_CLASSES, type ClassData } from '@/data/classes';
+import { GameDataService } from '@/services/GameDataService';
+import type { ClassData } from '@/data/classes';
 
 interface ClassSelectorProps {
   selectedClass: string | null;
@@ -13,6 +14,17 @@ interface ClassSelectorProps {
 export function ClassSelector({ selectedClass, onSelectClass, testID }: ClassSelectorProps) {
   const { colors, fantasy, isDark } = useTheme();
   const [expandedClass, setExpandedClass] = useState<string | null>(selectedClass);
+  // Sync initializer ensures first render has real data (no flicker).
+  // Phase B: replace with useState([]) once getCoreClasses is a true async Firestore call.
+  const [coreClasses, setCoreClasses] = useState<ClassData[]>(() =>
+    GameDataService.getCoreClassesSync(),
+  );
+
+  useEffect(() => {
+    GameDataService.getCoreClasses()
+      .then(setCoreClasses)
+      .catch((e) => console.error('Failed to load core classes:', e));
+  }, []);
 
   const handleClassPress = (cls: ClassData) => {
     setExpandedClass(cls.name === expandedClass ? null : cls.name);
@@ -30,7 +42,7 @@ export function ClassSelector({ selectedClass, onSelectClass, testID }: ClassSel
   return (
     <View testID={testID}>
       <ScrollView>
-        {CORE_CLASSES.map((cls) => {
+        {coreClasses.map((cls) => {
           const isSelected = selectedClass === cls.name;
           const isExpanded = expandedClass === cls.name;
           const level1Features = cls.classFeatures.filter((f) => f.level === 1);
