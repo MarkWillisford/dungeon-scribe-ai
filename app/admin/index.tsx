@@ -24,7 +24,8 @@ function AdminNavCard({ title, description, onPress, comingSoon = false }: Admin
 
   return (
     <TouchableOpacity
-      onPress={comingSoon ? undefined : onPress}
+      onPress={onPress}
+      disabled={comingSoon}
       activeOpacity={comingSoon ? 1 : 0.7}
       style={[styles.card, { opacity: comingSoon ? 0.5 : 1 }]}
     >

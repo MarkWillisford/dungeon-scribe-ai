@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { SafeAreaView, View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
@@ -6,7 +6,6 @@ import { useTheme } from '@/hooks/useTheme';
 import { toggleTheme } from '@/store/slices/themeSlice';
 import { logout } from '@/store/slices/authSlice';
 import { clearCharacters } from '@/store/slices/charactersSlice';
-import { AdminService } from '@/services/AdminService';
 import { OrnatePanel } from '@/components/ui/OrnatePanel';
 import { OrnateButton } from '@/components/ui/OrnateButton';
 import { FantasyDivider } from '@/components/ui/FantasyDivider';
@@ -15,15 +14,9 @@ export default function SettingsScreen() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { colors, fantasy, isDark } = useTheme();
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    AdminService.isAdmin()
-      .then(setIsAdmin)
-      .catch(() => setIsAdmin(false));
-  }, []);
 
   const user = useAppSelector((state) => state.auth.user);
+  const isAdmin = useAppSelector((state) => state.auth.isAdmin);
 
   const handleToggleTheme = () => {
     dispatch(toggleTheme());
