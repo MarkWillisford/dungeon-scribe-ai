@@ -1,8 +1,8 @@
 // Conjuration spells — batch 002
 // Batch metadata: {"school":"conjuration","batchNum":"002","startSpell":"Wall of Clockwork","lastSpell":"Word of Recall","nextSpell":"DONE","nextUrl":null,"spellsInBatch":19}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const CONJURATION_BATCH_002: Spell[] = [
+export const CONJURATION_BATCH_002: SpellDefinition[] = [
   {
     name: 'Wall of Clockwork',
     classLevels: { cleric: 5, sorcerer: 5, wizard: 5 },
@@ -25,6 +25,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       'An immobile vertical wall of spinning cogs and gears materializes. Creatures passing through take 1d6 piercing and slashing damage per 2 caster levels (maximum 10d6), with a successful Reflex save reducing this by half. The wall must remain flat and cannot occupy the same space as creatures or objects. It provides cover (+4 AC bonus, +2 Reflex save bonus). The wall is 1 inch thick per 4 caster levels, and its thickness can be halved to double its area. Each 5-foot section has 30 hit points per inch of thickness and hardness 9. Breaking through requires a DC 25 + 2 per inch Strength check, or a natural 20 critical hit to damage sections. The bronze cannot be repurposed or sold.',
     source: 'Pathfinder Player Companion: Heroes of the Street (2015)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Iron',
@@ -55,6 +56,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       'The caster conjures a flat, vertical iron wall that materializes in the surrounding area. The wall is 1 inch thick per four caster levels and can be doubled in area by halving thickness. Each 5-foot section has 30 hit points per inch of thickness with hardness 10. The wall can be shaped to fit available space but must remain flat. Alternatively, the wall can be created unattached to surfaces, allowing it to be tipped over as a crushing weapon. An unattached wall is 50% likely to fall in either direction unless creatures push it. A DC 40 Strength check is required to deliberately tip it. Large or smaller creatures failing Reflex saves take 10d6 damage from the falling wall. Iron created by the spell degrades naturally and cannot be used for crafting or sale.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Lava',
@@ -80,6 +82,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       "The caster creates a vertical lava barrier approximately 1 inch thick per 4 caster levels. The wall's maximum height cannot exceed half its width (minimum 5 feet). The structure has hardness 4 and 90 hit points per section. Weapons striking it sustain 2d6 fire damage; unarmed attackers take 2d6 fire damage. Creatures may traverse the wall as a full-round action with a DC 25 Strength check; failure pushes them back. Burrowing creatures can pass through normally. Crossing inflicts 20d6 fire damage. The wall radiates heat like a wall of fire from both sides. As a move action, the caster can direct an eruption at targets within 60 feet, requiring a ranged touch attack. Successful hits deal 10d6 fire damage and reduce the wall by 1d4 sections. Damage continues 1d3 rounds after exposure at half intensity.",
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Mist',
@@ -104,6 +107,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       'The caster conjures a stationary vertical wall of misty vapor. The straight wall measures 1 foot thick with a maximum length of 10 feet per caster level. It obscures vision, granting concealment (20% miss chance) against creatures on the other side. A creature occupying the same square as the wall experiences neither benefit nor penalty from concealment. Alternatively, a denser wall version reduces maximum length to 5 feet per caster level but hinders movement. Creatures entering must succeed on a DC 15 Strength check or become entangled and unable to move until the start of their next turn. Creatures beginning their turn within the wall move freely in any direction. Only severe winds (31+ mph) disperse the wall, requiring 1 round to do so.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook (2017)",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Stone',
@@ -139,6 +143,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       'This spell creates a rock wall merging with adjoining stone surfaces. The wall measures 1 inch thick per four caster levels and can be doubled in area by halving thickness. It cannot occupy space with creatures or objects. Unlike similar spells, this wall permits nearly any shape. It need not be vertical or require a firm foundation, but must merge with existing stone. It can bridge chasms or form ramps; spans exceeding 20 feet require arching and buttressing, reducing area by half. The wall withstands standard destruction methods. Each 5-foot section has hardness 8 and 15 hit points per inch of thickness. Breaching requires a Strength check (DC 20 + 2 per inch). Creatures may avoid entrapment with successful Reflex saves.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Thorns',
@@ -162,6 +167,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       "This spell conjures a barrier of dense, tangled brush covered in sharp thorns approximately finger-length. Creatures moving through or forced into the wall sustain piercing damage each round equal to 25 minus the creature's AC, excluding Dexterity and dodge bonuses. Creatures with AC 25 or higher (without those bonuses) take no damage. Creatures can force passage via Strength checks as full-round actions, gaining 5 feet of movement per 5 points exceeding DC 20. Trapped creatures may remain still to avoid additional damage or wait for spell expiration. Creatures with abilities to traverse overgrown terrain pass through unharmed at normal speed. Edged weapons create 1-foot-deep passages after 10 minutes of work; magical fire destroys the wall in 10 minutes. Normal fire cannot harm it.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Waves of Blood',
@@ -194,6 +200,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       "The caster generates torrents of roiling blood to push opponents away. The spell executes a bull rush combat maneuver against all creatures in the area using a single check applied to each target. The caster's CMB equals caster level plus the highest of Intelligence, Wisdom, or Charisma modifier. This bull rush does not provoke attacks of opportunity. Creatures must succeed at a Fortitude save or become sickened for 1d6 rounds. The affected area becomes slick for one round, requiring a DC 10 Acrobatics check to move through it. Creatures falling prone from this check must make another Fortitude save or remain sickened until standing.",
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Web',
@@ -218,6 +225,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       'This spell generates a many-layered mass of strong, sticky strands that function similarly to giant spiderwebs. The web must anchor to at least two opposing solid points or it collapses. Creatures caught within become grappled by the sticky fibers, though attacking webbed creatures does not cause the attacker to become grappled. Those in the effect area when cast must succeed at a Reflex save or gain the grappled condition. Escape requires a combat maneuver check or Escape Artist check as a standard action. Movement through the web counts as difficult terrain and requires checks to avoid becoming grappled. The web provides cover (5 or more feet) or total cover (20 or more feet) between combatants. Fire destroys one 5-foot square per round, dealing 2d4 fire damage to creatures in burning webs. The spell can become permanent via the permanency spell.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Web Bolt',
@@ -240,6 +248,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       "The caster launches a fist-sized blob of webbing at a target creature, which must succeed at a Reflex save or become affected as though caught in a web spell limited to the creature's own space. If the target succeeds or breaks free, the webbing dissolves and provides no difficult terrain. The spell requires the target to be positioned on or adjacent to a solid surface capable of supporting the webbing.",
     source: 'Pathfinder Roleplaying Game Advanced Race Guide (2012)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Web Cloud',
@@ -263,6 +272,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       'A caster generates a billowing mass of flame-resistant adhesive webbing that behaves similarly to cloudkill, moving away from the caster at 10 feet per round along the ground. The webbing sinks to the lowest terrain, even filling depressions and openings, but cannot enter liquids or function underwater. Creatures caught within must save each round or become trapped; trapped creatures remain ensnared even after the cloud passes. The webbing is flammable but possesses fire resistance 5.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide (2012)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Web Shelter',
@@ -297,6 +307,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       'The caster generates a sticky webbed shelter featuring a hinged door sized for Medium creatures. Its opaque walls measure one inch thick and grant total cover to occupants. Only Fine creatures possessing negligible Strength become ensnared; other creatures escape freely without checks or actions. The adhesive surface retains twigs, leaves, and soil for camouflage. The structure provides waterproofing and insulation when sealed. The webbing has zero hardness and two hit points per five-foot square. Fire damages it normally. Upon spell termination, the webbing rapidly decays.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic (2011)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Whip of Ants',
@@ -330,6 +341,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       'This spell functions identically to whip of spiders but summons army ants instead. The wielder makes melee touch attacks, inflicting damage as if attacked by an army ant swarm (3d6 points of damage plus poison and distraction). The swarm whip cannot be destroyed by weapon damage, resists area effects (taking half again as much damage), and remains immune to single-target spells. As a standard action, the caster may transform the whip into an actual army ant swarm with 16 hit points, lasting 2 rounds maximum or until the spell duration ends.',
     source: 'Pathfinder Roleplaying Game Advanced Class Guide (2014)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Whip of Centipedes',
@@ -363,6 +375,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       'This spell operates similarly to whip of spiders, but creates a centipede-based swarm weapon instead. Strikes with the whip inflict damage as if attacked by a centipede swarm (2d6 points of damage plus poison and distraction). The whip cannot perform bull rush, grapple, or trip maneuvers and remains immune to weapon damage. As a standard action, the caster may transform the whip into an actual centipede swarm with 10 hit points that persists for 2 rounds or until the spell ends.',
     source: 'Pathfinder Roleplaying Game Advanced Class Guide (2014)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Whip of Spiders',
@@ -394,6 +407,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       'The caster summons hundreds of tiny spiders that form a whip-like construct. This weapon functions as a normal whip but requires melee touch attacks instead of regular attacks. Targets struck take swarm damage equivalent to a spider swarm attack: 1d6 points of damage plus poison and distraction effects. The spider whip can damage creatures with armor or natural armor that normal whips cannot affect. The whip cannot perform bull rush, grapple, or trip maneuvers. It remains subject to concealment and cover miss chances but is immune to weapon damage, cannot be staggered or reduced to a dying condition, and resists single-target spells. Area-effect spells deal half again normal damage to it. As a standard action, the caster may transform the whip into an actual spider swarm with 3 hit points, lasting 2 rounds maximum.',
     source: 'Pathfinder Roleplaying Game Advanced Class Guide (2014)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wicker Horse',
@@ -423,6 +437,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       "Animated plant material (reeds, grasses, creepers, or thin branches) forms a wicker horse with riding saddle. The construct retains its wickerlike appearance while functioning as either a light horse or pony with construct traits. It counts as both animal and construct for spell purposes. The horse gains extra hit points equal to the caster's level. Based on material composition, it gains special abilities: reeds grant Swim skill ranks, grasses grant the Run feat and Acrobatics ranks, creepers grant Climb and Stealth ranks, and branches grant a continual barkskin effect. Only the caster can ride it, and it accepts no Handle Animal commands. The spell requires suitable plant material in the environment. The horse dissipates when the spell ends or it loses all hit points.",
     source: 'Pathfinder Roleplaying Game Villain Codex (2016)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wing Bounty',
@@ -445,6 +460,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       "The caster's wings produce an array of colorful, edible berries (2d4 berries plus 2 berries per caster level). Each berry functions identically to a goodberry spell. The caster may designate one berry to be poisonous (striped toadstool effect). Only the caster and druids of 5th level or higher can identify the poisoned berry without magical assistance.",
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness (2017)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wooden Phalanx',
@@ -467,6 +483,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       'The caster summons 1d4+2 wood golems with the advanced template. These constructs assist the caster in combat, complete assigned missions, or function as bodyguards. Only one casting may remain active simultaneously; casting again dispels any previous casting.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic (2011)',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Word of Beckoning',
@@ -490,6 +507,7 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       "This spell works similarly to sending, allowing contact with a familiar creature and transmission of a message. It additionally grants the recipient knowledge of a command word that, when spoken within one round of learning it, summons the caster to the nearest open space adjacent to the recipient. The caster can be transported any distance on the same plane but cannot traverse between planes. The spell can transport objects up to the caster's maximum carrying capacity, plus one additional willing Medium or smaller creature per three caster levels. Larger creatures count as multiples: Large counts as 2 Medium, Huge counts as 4 Medium. All transported creatures must maintain contact with each other, and at least one must touch the caster.",
     source: "Pathfinder Adventure Path #131: The Reaper's Right Hand (2018)",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Word of Recall',
@@ -512,5 +530,6 @@ export const CONJURATION_BATCH_002: Spell[] = [
     description:
       "This spell instantly transports you to a designated sanctuary — a very familiar location you choose when preparing the spell. The arrival point is limited to a 10-foot by 10-foot area. Travel occurs within a single plane only; planar travel is impossible. You may transport yourself plus objects within your maximum load capacity. Additionally, you can bring one willing Medium or smaller creature per three caster levels (or equivalent based on size conversions). All transported creatures must maintain contact with each other, and at least one must touch you. Exceeding capacity causes spell failure. Unwilling creatures cannot be transported. A creature's Will save or Spell Resistance prevents items it possesses from being teleported. Unattended nonmagical objects receive no save.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 ];

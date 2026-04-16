@@ -1,8 +1,8 @@
 // Gap spells — letters V-W-Y-Z
 // Gap metadata: {"letters":"VWYZ","totalChecked":101,"newSpells":62,"skipped":39}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_VWYZ: Spell[] = [
+export const GAP_SPELLS_VWYZ: SpellDefinition[] = [
   // ── V ──────────────────────────────────────────────────────────────────────
   {
     name: 'Vampiric Hunger',
@@ -20,6 +20,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This enchantment grants the target vampire-like fangs and a compulsion to consume blood. While affected, the recipient gains the ability to drain blood during grapples. When maintaining a pin, they inflict 1d4 Constitution damage and heal 5 hit points or gain 5 temporary hit points per round (maximum temporary hit points equal to normal hit points). If the target fails to drain blood before the spell expires, they become exhausted.',
     source: 'Pathfinder Player Companion: Faiths of Corruption',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Veil of Ash',
@@ -43,6 +44,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "A cloud of searing ash materializes around the target's face. On a failed save, the creature takes 1d6 fire damage and becomes blinded. The target must save each round to avoid repeated damage and blindness effects. Only creatures with discernible anatomy and a single head can be blinded; undead, constructs, and creatures without vision are damaged but not blinded. Moderate winds (11+ mph) disperse the cloud in 2 rounds; strong winds (21+ mph) disperse it in 1 round. The spell is ineffective underwater.",
     source: 'Pathfinder Adventure Path #24: The Final Wish',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vengeful Comets',
@@ -59,6 +61,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "The caster conjures miniature comets that orbit overhead, creating snow and cold wind. These provide a circumstance bonus to saving throws against fire effects equal to the number of comets present. When the caster is affected by an offensive spell from another creature, they may use an immediate action to fire a comet as retaliation. The comet requires a ranged touch attack and deals 1d6 bludgeoning damage plus 3d6 cold damage, plus additional cold damage equal to the spell's level. If retaliating against a fire-descriptor spell, the caster may fire two comets instead of one.",
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vengeful Stinger',
@@ -83,6 +86,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The caster grows a wasp-like tail with a stinger. When an adjacent creature hits you with a melee attack, you can make an attack of opportunity with the tail (even if it would not normally provoke one). The tail attack uses your full attack bonus plus a +2 sacred bonus, deals 1d8 damage plus Strength modifier, and the target must save or take 1d4 Dexterity damage from poison. The stinger is a light weapon with 19-20/x2 critical range; poison damage applies to confirmed critical hits.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Venomous Bolt',
@@ -99,6 +103,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This spell infuses a single arrow or crossbow bolt with natural venom upon firing. The projectile deals its standard damage plus the effects of a poison spell to any struck target. The enchantment must be used immediately; if the arrow is not fired right away, the spell dissipates without taking effect.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Venomous Promise',
@@ -122,6 +127,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "The caster infuses up to 25 words of information with poison during casting. If the target reveals this information—verbally, in writing, through gestures, or via mind-reading magic—the target immediately faces exposure to the poison and receives any applicable saving throw. The target instinctively knows revealing the information is dangerous but lacks understanding of the mechanism. The spell effect can be removed through neutralize poison, which requires the caster to succeed at a caster level check against the spell's save DC rather than against the poison's own DC.",
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vermin Shape I',
@@ -153,6 +159,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This spell allows you to assume the form of any Small or Medium vermin. You gain specific movement abilities (climb 30 ft., fly 30 ft., swim 30 ft.), senses (darkvision 60 ft., low-light vision, scent), and the lunge ability. You gain a +2 resistance bonus on saves against mind-affecting effects. Small vermin forms grant +2 Dexterity and +2 natural armor; Medium forms grant +2 Strength and +3 natural armor.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vestment of the Champion',
@@ -168,6 +175,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This spell functions similarly to magic vestment but with a key restriction: it only affects armor or a shield worn or carried by the caster. If another creature wears or carries the affected item, the spell becomes inactive but resumes functioning when the original caster possesses it again.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vigilant Rest',
@@ -202,6 +210,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The spell allows a sleeping target to maintain partial perception, avoiding the normal +10 Perception check penalty during rest. The sleeper can detect threats or unusual sounds and wake immediately and stand up from the sleeping position as a free action. If the target wakes but returns to sleep within the duration, sleep resumes without counting as interrupted.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vigor',
@@ -217,6 +226,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This transmutation spell grants the recipient a +1 competence bonus on a single melee damage roll. The caster must decide whether to apply the bonus before rolling. The effect does not influence ranged or spell attacks.',
     source: 'Pathfinder Player Companion: Orcs of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vile Dog Transformation',
@@ -249,6 +259,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This spell transforms dogs into monstrous evil creatures resembling hell hounds. Transformed dogs gain acidic bite attacks and a breath weapon dealing acid damage in a 10-foot cone. They possess resistance to acid, cold, and fire (5 points each). The caster can command up to five transformed dogs (one per three caster levels). Dogs dissolve into gore and bones when the spell ends. Dogs trained by the caster or in their care for 30 or more days take a -4 penalty on their saving throw.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vine Strike',
@@ -274,6 +285,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "Upon casting, bristly growths erupt from your body. When you strike a target with a natural weapon or unarmed strike, you deal an additional 1d6 damage, and the struck creature must make a Reflex save or become entangled for the spell's duration. Those who succeed on the save gain immunity to the entangled effect for one round. Victims may use a standard action to remove the vines but risk becoming entangled again from subsequent strikes.",
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vinetrap',
@@ -290,6 +302,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'Thorny vines erupt around the target, progressively restricting movement. The subject gets an initial Reflex save; failure means base speed reduces by 5 feet immediately, with additional 5-foot reductions each round unless another save succeeds, until reaching half the original speed. A full-round action allows the subject or adjacent creature to tear vines away, resetting the penalty to 5 feet. Fire damage of 20 or more points or dispel magic ends the effect prematurely. Speed cannot drop below 5 feet regardless of base speed.',
     source: 'Pathfinder Campaign Setting: Chronicle of the Righteous',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Violent Accident',
@@ -306,6 +319,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "The caster curses a target to experience a magically-empowered accident within 24 hours. The exact nature and timing remain uncontrolled by the caster. The magical accident deals damage equal to 1d8 times your caster level (maximum 5d8 points of damage), with damage type matching the accident's source. The target may make a Reflex save when the accident occurs to reduce damage by half. Only the intended target takes damage, despite others potentially being affected.",
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Violent Misfire',
@@ -328,6 +342,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The spell creates a chaotic charge within the black powder loaded in a target firearm. On the next firing, the weapon automatically misfires. If this causes an explosion, the radius doubles and deals maximum damage plus 1d6 additional fire damage per 2 caster levels (max 10d6) to the wielder. For advanced firearms experiencing a second consecutive misfire, no explosion occurs but the additional damage still applies.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Viper Bomb Admixture',
@@ -344,6 +359,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This alchemist extract modifies your bombs during its duration. When you hit a target directly with a bomb, up to four vipers are released from the bomb. One viper attacks the direct hit target, while the others target up to three creatures damaged by splash damage. The conjured vipers make melee touch attacks using your base attack bonus plus Intelligence modifier. On a successful hit, they deal 1d4 plus your Intelligence modifier in damage and poison the target as if from a venomous snake. The vipers disappear after attacking. Only one bomb admixture effect can be active at a time.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Virtue',
@@ -359,6 +375,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'With a touch, you infuse a creature with a tiny surge of life, granting the subject 1 temporary hit point.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Virtuoso Performance',
@@ -374,6 +391,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This spell allows a bard to maintain two bardic performances simultaneously. Starting a second performance costs 2 rounds of bardic performance instead of 1, with both performances requiring a total of 3 rounds per round of maintenance. When the spell ends, the caster chooses which performance stops. The spell does not stack with other methods of maintaining multiple bardic performances.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Virulence',
@@ -391,6 +409,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This necromantic spell forces all creatures in its radius—including the caster—to make immediate disease saving throws at a disadvantage. Failed saves trigger any dormant afflictions, while successful ones provide no progress toward curing diseases.',
     source: 'Pathfinder Adventure Path #81: Shifting Sands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Virulent Miasma',
@@ -422,6 +441,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This spell generates a disease-tainted fog similar to fog cloud. Creatures within the cloud suffer a -4 penalty on saving throws against disease effects while present and for 1d4+1 rounds afterward. A successful Fortitude save negates this penalty. Creatures with spell resistance that successfully resist the fog need not save again.',
     source: 'Pathfinder Roleplaying Game Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Visualization of the Body',
@@ -445,6 +465,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "The caster focuses on one physical ability score (Strength, Dexterity, or Constitution). If choosing Strength or Dexterity, gain a +5 bonus on associated skill checks. If choosing Constitution, maximum and current hit points increase by an amount equal to Hit Dice. During the spell's duration, the caster can expend remaining duration as an immediate action for a one-time enhancement: Constitution choice grants healing equal to 1d8 + your total character level; Dexterity grants +4 dodge bonus to Armor Class for 3 rounds; Strength grants +6 bonus on Strength checks for grappling and breaking objects for 1 minute.",
     source: 'Pathfinder Player Companion: Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Visualization of the Mind',
@@ -468,6 +489,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This meditative spell enhances one mental ability score—Charisma, Intelligence, or Wisdom. The caster gains a +5 bonus on ability checks and skill checks associated with that ability score. At any point, the caster may expend remaining duration as an immediate action to trigger a one-time mental enhancement: Charisma grants a +2 luck bonus on all d20 rolls for 1 minute; Intelligence provides skill ranks equal to Hit Dice in any untrained skill for 1 minute (treated as class skill); Wisdom allows an immediate retry of a failed Will save with a +4 bonus to resist the effect.',
     source: 'Pathfinder Player Companion: Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vitriolic Mist',
@@ -491,6 +513,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This spell functions similarly to fire shield, but instead wraps the caster in yellow or green acidic mist. It deals acid damage to attackers and protects you against acid damage. This spell does not shed light.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Volcanic Storm',
@@ -515,6 +538,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "Upon casting, chunks of hot volcanic rock and clumps of ash pound down, dealing 3d6 bludgeoning and 2d6 fire damage to all creatures in the area. This damage occurs once at casting. For the spell's remaining duration, heavy ash falls continuously. Affected creatures suffer a -4 penalty to Perception checks, and the entire area becomes difficult terrain. When the spell ends, all materials vanish with no lasting effects besides initial damage.",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vortex',
@@ -539,6 +563,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "The caster generates an immobile whirlpool in any liquid body large enough to contain it. Large or smaller creatures contacting the effect must succeed on a Reflex save or incur 3d6 bludgeoning damage. Medium or smaller creatures failing their initial save must make another to avoid being drawn into the vortex, where they sustain 1d8 damage each round with no saving option. The caster may eject suspended creatures at will. Boats equal to or shorter than the vortex's width take 6d6 damage and become caught; captains may make a DC 25 Profession (sailor) check to halve damage and avoid entrapment.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
 
   // ── W ──────────────────────────────────────────────────────────────────────
@@ -572,6 +597,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The spell makes the targets light enough to be carried by wind. Affected creatures suffer attack penalties as if under levitate effects (unless they possess a fly speed). They are treated as two size categories lighter for wind effects. Creatures with fly speeds can travel overland with wind currents via a DC 20 Fly check. Multiple creatures can be towed by a flying creature while linked together, each weighing only one-eighth their normal weight.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wake of Light',
@@ -589,6 +615,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "The caster and their mount create a glowing heavenly mist trail that persists for the spell's duration. Good creatures treat terrain with the mist as normal ground, while evil creatures treat it as difficult terrain. Neutral creatures experience no effect. The mist floats 1 foot above ground, provides no concealment, and does not impede sight or movement through obstacles. The spell requires the caster to remain mounted; dismounting immediately ends the spell's effects.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Walk the Plank',
@@ -613,6 +640,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This spell creates a pit similar to create pit, but fills the lower portion with saltwater. The top 10 feet remain open. Falls into the pit deal only 1d3 nonlethal damage. Huge or larger creatures can escape as a move action without climbing checks. The spell summons one advanced shark per 4 caster levels (maximum four), which immediately attack any creature falling in. Alternatively, two sharks can be replaced with one great white shark. When the spell ends, creatures rise with the pit bottom while conjured water and sharks vanish.',
     source: 'Pathfinder Roleplaying Game Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Brine',
@@ -638,6 +666,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The caster conjures a thick seawater barrier with a directional current. Creatures swimming against the current expend extra movement. Those beginning their turn inside are pushed by the current before acting. The wall provides cover against outside attacks and deflects physical ranged weapons unless exceptionally large. Submerged creatures face standard underwater combat penalties. The barrier blocks gases and liquids while preventing water mixing at edges.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Ectoplasm',
@@ -662,6 +691,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The caster manifests a barrier of ectoplasm containing restless spirits. The wall is immovable, 1 inch thick per caster level, and blocks ethereal and incorporeal creatures. One selected side radiates a fear aura within 10 feet, causing creatures to become shaken or panicked (if 4 HD or fewer) for 1 round per caster level. Each 10-foot section has 2 hit points per inch of thickness. Destroyed sections are filled by remaining ectoplasm, maintaining a contiguous barrier.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Ice',
@@ -686,6 +716,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The caster creates either a thick ice wall or dome. The ice plane is 1 inch thick per caster level and can be oriented in various configurations. Each 10-foot section has 3 hit points per inch of thickness. Fire deals full damage. Breaking through deals 1d6 cold damage plus 1 per caster level. The hemisphere form is equally durable but deals no breach damage.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Light',
@@ -710,6 +741,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This evocation creates an immobile curtain of brilliant white light that blocks line of sight and sheds bright illumination 60 feet in all directions. Creatures adjacent to the wall become blinded while nearby and for 1d4 rounds after leaving—though closing eyes or succeeding at a Fortitude save negates this for one round. Passing through the wall automatically blinds creatures. Shadow plane creatures within 5 feet gain 1d4 negative levels per round (Fortitude negates), with a -4 penalty if crossing the wall.',
     source: "Pathfinder Module: The Dragon's Demand",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Nausea',
@@ -728,6 +760,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The caster generates a see-through, shimmering barrier that distorts how creatures and objects appear to observers. Anyone passing through the wall experiences sudden vertigo, becoming nauseated for one round unless they succeed on a Fortitude save. Those who fail the save must also make a DC 12 Acrobatics check or fall prone. Creatures gain partial concealment (20% miss chance) against opponents on the opposite side. The wall must be vertical, rectangular, and continuous when cast; if broken during formation, the spell fails.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Silver',
@@ -745,6 +778,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The caster creates a wall of translucent silver energy that hums and vibrates at the slightest touch. Non-evil creatures and objects pass through unaffected. Evil-descriptor spells and effects treat it as a wall of force, blocking line of effect. Evil creatures passing through suffer 3d6 damage plus 1 per caster level (max +20) and become blinded for one round. Creatures vulnerable to silver (devils, lycanthropes) instead take 1d6 per caster level (max 15d6), become staggered for one round, and are permanently blinded. A successful Will save reduces damage by half and negates blinding and staggering effects.',
     source: "Pathfinder Roleplaying Game Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Split Illumination',
@@ -771,6 +805,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This spell creates an immobile curtain of light with contrasting effects on each side. One side emits bright illumination extending 60 feet, while the opposite side radiates darkness to an equal distance. The illumination effect shifts conditions by up to two steps toward brightness or shadow. The wall blocks vision from either side and cannot be seen through.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wandering Trail',
@@ -786,6 +821,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "This spell enables the caster to cause the trail left by the targets within range to automatically reroute, potentially taking any course within the area. The spell's manipulation can make a trail between half its original length or twice the original length. If tracking exceeds the caster level by the skill check amount, the tracker realizes magical manipulation occurred, though identifying the true path requires magic like true seeing.",
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wandering Weather',
@@ -802,6 +838,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This spell functions as control weather except you can opt for the weather to remain centered on you as you move.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Watchful Eye',
@@ -825,6 +862,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "This spell mimics protective magic similar to shield other. The caster must maintain line of effect to the target throughout the spell's duration.",
     source: 'Pathfinder Player Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Water of Maddening',
@@ -848,6 +886,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "This conjuration produces a toxic liquid disguised as pure water. When consumed or applied to a creature's skin, the victim must succeed on a Fortitude save or suffer 1d6 points of Intelligence damage and 1d6 points of Dexterity damage. Those who succeed become sickened for 1d4 rounds instead. Drinking the fluid imposes a -4 penalty to the save. The spell generates approximately 2 ounces per casting and functions similarly to unholy water.",
     source: 'Pathfinder Roleplaying Game Book of the Damned',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Water Shield',
@@ -871,6 +910,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'A protective vortex of clear acid surrounds the caster. The spell provides half damage from acid and fire-based attacks, with no damage on a successful Reflex save. Melee attackers take 1d6 points of acid damage + 1 point per 2 caster levels (maximum +10). Those with spell resistance can apply it to negate this effect, and creatures with exceptional reach weapons avoid the retaliation damage.',
     source: 'Pathfinder Adventure Path #24: The Final Wish',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Waterproof',
@@ -899,6 +939,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This abjuration makes touched objects impervious to mundane liquids like alcohol or oil for one day, though magical liquids can still affect them. When cast on creatures, their carried equipment gains this protection until dropped. The spell notably does not prevent combustible materials from igniting if exposed to air.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wave Form',
@@ -926,6 +967,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The caster becomes a wave of frothing water and moves in a chosen direction up to double their base movement speed without provoking attacks of opportunity. While transformed, the caster gains immunity to weapon attacks and effects targeting specific creatures. All creatures and unattended objects in the path suffer 4d6 bludgeoning damage and are knocked prone unless they succeed at a Reflex save.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wave Shield',
@@ -942,6 +984,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "The caster conjures a rushing torrent of water in the rough outline of a shield. This aqueous barrier protects against one physical or fire attack, granting damage reduction and fire resistance equal to half the caster's level (minimum 1) against that single attack. After reducing damage from one attack, the spell ends.",
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Weapon of Awe',
@@ -958,6 +1001,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This transmutation spell enchants a single weapon to become formidable and intimidating. The affected weapon gains a +2 sacred bonus to damage rolls. When it scores a critical hit, the target becomes shaken for one round without allowing a save. This qualifies as a mind-affecting fear effect. Ranged weapons apply these benefits to their ammunition. The spell cannot be cast on natural weapons, though unarmed strikes may be affected.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Weapons Against Evil',
@@ -973,6 +1017,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The spell causes affected weapons to emit pale light illuminating a 5-foot square. These weapons ignore the DR of evil creatures that have DR 5 or lower, as long as the damage reduction is not DR/epic.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Weaponwand',
@@ -995,6 +1040,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "This transmutation spell allows a caster to open a weapon's surface temporarily to insert a magic wand inside. Once housed, the weapon returns to normal form while containing the wand. The wielder can attack with either the weapon or wand, and when using wand effects requiring attack rolls, may substitute the weapon's attack bonus instead of the wand's standard bonus. Upon spell expiration, the wand ejects from the weapon. If the weapon breaks during the spell's duration, the enclosed wand breaks as well.",
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Whirlwind',
@@ -1012,6 +1058,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This evocation creates a mobile cyclone traveling at 60 feet per round that the caster controls or programs. Creatures contacted must succeed on Reflex saves or take 3d6 damage. Medium or smaller creatures failing a second save become suspended within the cyclone, taking 1d8 damage per round. The caster can eject suspended creatures at will.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Whispering Wind',
@@ -1037,6 +1084,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The caster sends a whisper-quiet message or sound on the wind to a familiar location within range. The spell travels unnoticed until reaching its destination, where it delivers a message of up to 25 words, other sounds lasting 1 round, or simply manifests as a faint air stirring. Speed is adjustable from 1 mile per hour to 1 mile per 10 minutes. The wind remains at the location until delivering its message. Cannot speak verbal components, use command words, or activate magical effects.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Widen Auras',
@@ -1052,6 +1100,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "This spell doubles the effective range of your paladin or antipaladin auras. For instance, a paladin's aura of courage would affect allies within 20 feet instead of the standard 10 feet.",
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wilderness Soldiers',
@@ -1068,6 +1117,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The caster animates nearby plants to aid in combat. By spending swift and/or standard actions, the caster can direct plant attacks with a bonus equal to base attack bonus plus Wisdom modifier. The caster can command trees to make melee attacks with 10-foot reach dealing 1d8 plus Wisdom modifier damage, or perform bull rush, drag, or reposition maneuvers. Undergrowth acts as a Medium creature attempting grapples, dealing 1d4 plus Wisdom modifier damage on successful checks. These plant constructs never provoke attacks of opportunity and do not count as allies for flanking purposes.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wind Walk',
@@ -1084,6 +1134,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "The caster transforms into a cloud-like vapor similar to gaseous form, enabling flight. Wind walkers normally fly at 10 feet per round with perfect maneuverability, or up to 600 feet per round with poor maneuverability if desired. They appear misty and translucent, with an 80% chance of being mistaken for clouds if wearing white. Subjects can shift between vaporous and physical form (5 rounds each). During the spell's final minute, wind walkers automatically descend 60 feet per round, serving as a warning of imminent expiration.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Windy Escape',
@@ -1100,6 +1151,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'The caster becomes briefly vaporous and insubstantial in response to an attack, allowing it to pass through harmlessly. The spell grants DR 10/magic against the triggering attack and immunity to poison, sneak attacks, and critical hit effects from that specific attack. However, it cannot be used against attacks of opportunity provoked by casting spells, using spell-like abilities, or other magical abilities that trigger such opportunities.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wing Thorns',
@@ -1124,6 +1176,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "The caster's wings develop poisonous thorns resembling daggers. These function as armor spikes and enable two wing attacks as primary natural weapons. Small creatures deal 1d3 bludgeoning and piercing damage plus Strength modifier. Creatures struck experience intense itching, gaining the sickened condition while the spell lasts unless they succeed at a Fortitude saving throw.",
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Winter Feathers',
@@ -1147,6 +1200,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "This abjuration thickens and fluffs a feathered target's plumage to provide cold resistance. The creature endures temperatures as low as -50°F without requiring Fortitude saves and gains protection for its equipment. The spell provides no defense against cold damage itself or environmental hazards like ice slickness or snow blindness. Optionally, the caster may turn the feathers white, granting a +4 circumstance bonus on Stealth checks to hide in ice and snow for the spell's duration.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Winter's Grasp",
@@ -1172,6 +1226,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'Ice encrusts the ground, radiating supernatural cold and making it hard for creatures to maintain their balance. The icy surface functions as normal ice, requiring double movement to enter and increasing Acrobatics DC by 5. Creatures beginning their turn in the affected area suffer 1d6 cold damage and receive a -2 penalty on saving throws against cold descriptor spells for 1 round.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'With the Wind',
@@ -1197,6 +1252,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This protective abjuration creates air currents surrounding the target, preventing it from being displaced by wind. The target remains unaffected by winds of less than windstorm force unless it chooses to move with them.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Word of Resolve',
@@ -1212,6 +1268,7 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       "This spell allows a caster to focus their aura on a single ally, enabling them to reroll a failed saving throw against charm or fear effects with a +4 sacred bonus. The spell's effectiveness depends on the caster possessing specific class abilities—it only affects fear effects if the caster has the aura of courage ability, and only affects charm effects if they have the aura of resolve ability.",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ── Z ──────────────────────────────────────────────────────────────────────
@@ -1230,5 +1287,6 @@ export const GAP_SPELLS_VWYZ: Spell[] = [
     description:
       'This transmutation spell grants affected allies enhanced mobility. Each target receives a +30 foot enhancement bonus to land speed and any existing fly speed. Additionally, targets can move and charge through difficult terrain without incurring movement penalties.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
 ];

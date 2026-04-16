@@ -9,6 +9,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
       'Your unarmed attacks inflict an additional 1d4 bleed damage to wounded foes. This does not combine with other special abilities, attacks, or items that provide bleed damage.',
     shortDescription: 'Unarmed attacks deal 1d4 bleed to wounded foes.',
     source: 'Pathfinder Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'improved_unarmed_strike' }],
     effects: [
@@ -30,6 +31,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
       'When wielding a spiked chain, you gain a +1 shield bonus to your AC. When you are fighting defensively or using the total defense action, this shield bonus increases to +2.',
     shortDescription: '+1 shield AC with spiked chain; +2 when fighting defensively.',
     source: 'Pathfinder Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -54,6 +56,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
       'When you damage an opponent with a Power Attack, you may make an immediate Intimidate check as a free action to attempt to demoralize your opponent.',
     shortDescription: 'Free Intimidate to demoralize when you hit with Power Attack.',
     source: 'Pathfinder Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'power_attack' },
@@ -78,6 +81,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
       'You can apply Stunning Fist effects when attacking with special monk weapons, not just unarmed strikes.',
     shortDescription: 'Apply Stunning Fist with special monk weapons.',
     source: 'Pathfinder Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'stunning_fist' }],
     effects: [
@@ -99,6 +103,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
       'You may throw your spiked chain as if it were a thrown weapon with a range increment of 10 feet and can make trip attacks when throwing it. Failing at this attack does not knock you prone.',
     shortDescription: 'Throw spiked chain (10 ft range) for ranged trip attacks.',
     source: 'Pathfinder Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -123,6 +128,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
     description: 'When making a trip attack, add your Dexterity bonus to your CMB.',
     shortDescription: 'Add DEX to CMB for trip attacks.',
     source: 'Pathfinder Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'improved_trip' }],
     effects: [
@@ -144,6 +150,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
       "Upon successfully tripping a foe with a whip, you may drop the weapon to entangle your target. The opponent can escape via a DC 10 Strength check, DC 15 Escape Artist check (adjusted by the whip's enhancement bonus), or a full-round action. A successful Strength check breaks the whip. Magical whip properties like flaming deal damage each round on your turn.",
     shortDescription: 'Trip with whip to entangle foe; drop whip to bind them.',
     source: 'Pathfinder Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'furys_fall' },
@@ -169,6 +176,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
     shortDescription:
       'Impale foes on piercing weapons to grapple; deal weapon damage while grappling.',
     source: 'Pathfinder Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_grapple' },
@@ -194,6 +202,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
       'When using an impaling weapon against an opponent already impaled via Hamatula Strike, grapple checks incur only a -2 penalty instead of the standard -4. Successfully landing such a grapple check inflicts an additional 1d6 damage.',
     shortDescription: 'Reduced grapple penalty and +1d6 damage against impaled foes.',
     source: 'Pathfinder Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'hamatula_strike' },
@@ -220,6 +229,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
       'Whenever you attack and damage an opponent in the surprise round, you may immediately make a second attack against the same opponent using the same attack bonus. The second attack does not treat the target as flat-footed. This ability requires carrying a light load or less.',
     shortDescription: 'Extra attack in surprise round after damaging a foe.',
     source: 'Pathfinder Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'hellcat_stealth' },
@@ -245,6 +255,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
       'You can attempt Stealth checks in normal or bright light conditions even while being observed, though with a -10 penalty.',
     shortDescription: 'Stealth in normal/bright light while observed at -10 penalty.',
     source: 'Pathfinder Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'skill_focus_stealth' },
@@ -269,6 +280,7 @@ export const CHELIAX_FEATS: FeatDefinition[] = [
       "While you are fighting defensively or using the total defense action, select one opponent. Add your Charisma bonus to your AC as a dodge bonus against that opponent's melee attacks until your next turn.",
     shortDescription: 'Add CHA as dodge AC vs. one foe while fighting defensively.',
     source: 'Pathfinder Companion: Cheliax, Empire of Devils',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 8 },

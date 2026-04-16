@@ -1,8 +1,8 @@
 // Gap spells — letter U part 2 (second half alphabetically)
 // Gap metadata: {"letters":"U_2","totalChecked":52,"newSpells":14,"skipped":29}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_U_2: Spell[] = [
+export const GAP_SPELLS_U_2: SpellDefinition[] = [
   {
     name: 'Unflappable Mien',
     classLevels: {
@@ -32,6 +32,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'You project an aura of unruffled composure backed by invisible force. When a creature attempts to make melee contact with you, it encounters an invisible barrier of force. The creature may choose to abandon the attempt or push through—if it pushes through, a force wave erupts dealing 1d4 points of force damage per caster level (maximum 10d4) and pushing the creature back 5 feet. If the creature cannot be pushed back, it takes an additional 2d4 points of force damage. A Fortitude save halves the damage.',
     source: "Pathfinder Player Companion: Disciple's Doctrine",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unhallow',
@@ -62,6 +63,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'Unhallow makes a particular site, building, or structure an unholy site. This has three major effects. First, the site is warded by a magic circle against good effect. Second, the DC to resist negative channeled energy within the area gains a +4 sacred bonus, and the DC to resist positive energy is reduced by 4 (spell resistance does not apply to this effect on non-druids). Third, you may choose to permanently fix a single spell effect to the area. This anchored spell functions throughout the entire site regardless of its normal duration and affects all creatures (or a chosen subgroup) for one year. Unhallow counters but does not dispel hallow. Only one unhallow effect may be in place on a particular area at a time.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unhallowed Blows',
@@ -92,6 +94,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'You empower the natural attacks or unarmed strikes of undead creatures, granting a +1 enhancement bonus on attack and damage rolls. Affected undead can deal lethal damage with unarmed strikes (though they do not gain the enhancement bonus when doing so). This spell can be made permanent with the permanency spell (minimum 9th caster level, 2,500 gp).',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unhallowed Blows, Greater',
@@ -122,6 +125,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'This spell functions as unhallowed blows, except the enhancement bonus scales with caster level (+1 per 4 caster levels, maximum +5) and applies to all of an undead creature\'s natural weapons. This spell can be made permanent with the permanency spell (minimum 11th caster level, 7,500 gp).',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unholy Ice',
@@ -149,6 +153,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'This spell functions as holy ice, except that it uses frozen unholy water rather than holy water. The ice wall or javelins deal damage to creatures susceptible to unholy water in the same way that holy ice harms creatures susceptible to holy water.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unholy Ice Weapon',
@@ -176,6 +181,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'This spell functions as holy ice weapon, except that it uses frozen unholy water instead of holy water. The weapon deals normal weapon damage plus 1 point of cold damage per caster level (maximum 10). Struck creatures take 1d4 unholy water damage if susceptible. The weapon melts if dropped for more than 1 round. At 6th caster level, the weapon gains the returning property when thrown.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unholy Sword',
@@ -200,6 +206,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'You channel evil power into a melee weapon, granting it a +5 enhancement bonus on attack and damage rolls. The weapon deals an additional 2d6 points of damage against good-aligned opponents and generates a magic circle against good effect that moves with the weapon. When the protective circle dissipates, the weapon automatically creates a new one at no action cost. The spell ends one round after the weapon leaves your grasp. Only one unholy sword may exist per caster at a time. When cast on an existing magical weapon, its normal properties are temporarily suppressed. This spell is incompatible with other weapon-enhancing spells and does not function on artifacts.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unlife Current',
@@ -233,6 +240,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'This spell functions as life current, except that it infuses the current with negative energy instead of positive energy. The current heals undead creatures and harms living creatures.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unliving Rage',
@@ -260,6 +268,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'You bolster undead creatures with necromantic energy that functions similarly to a barbarian\'s rage. Each affected undead gains a +2 profane bonus to Strength and Charisma, a +1 profane bonus on Will saving throws, and a –2 penalty to AC for the duration. This is not an emotion effect and is not suppressed by calm emotions or similar spells.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unlock Flesh',
@@ -286,6 +295,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'You cause the target\'s flesh to loosen around its skeletal structure. A living creature that fails its saving throw becomes staggered for the duration; it may attempt a new Fortitude saving throw as a standard action each round to end the effect. Corporeal undead take 1d6 points of damage per caster level (maximum 5d6); a successful save halves this damage. Incorporeal creatures and creatures without flesh are immune.',
     source: 'Pathfinder Adventure Path: Curse of the Crimson Throne',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unsettling Presence',
@@ -320,6 +330,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'You infuse an area with an unsettling, paranoid atmosphere. Creatures that fail their saving throws project an aura of unease that makes others suspicious of them: Handle Animal checks and all Charisma-based interaction skill checks targeting affected creatures take a penalty. Creatures interacting with an affected creature must succeed at Will saves or have their attitude worsened by one step. Sense Motive checks against affected creatures automatically assume dishonesty unless the affected creature succeeds at a Will save. This spell also functions as a haunt (Notice DC 20 Perception; 2 hp per caster level; trigger: proximity; reset: none).',
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unshakable Chill',
@@ -348,6 +359,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'You afflict the target with an unshakable chill. If the target fails its initial saving throw, it suffers the effects of severe cold for the duration: it takes 1d6 points of nonlethal cold damage and must make a saving throw against severe cold\'s DC every 10 minutes or take additional nonlethal damage. The target cannot warm itself through mundane means while this spell lasts.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unwelcome Halo',
@@ -376,6 +388,7 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'You cause the target to emit a glowing halo that sheds normal light in a 20-foot radius and increases the light level by one step for an additional 20 feet beyond that. The creature cannot gain concealment or total concealment from nonmagical darkness, and remains visible even if outside the normal line of sight in dim or darker conditions. When this light overlaps with magical darkness, both effects temporarily suppress in the overlapping area, leaving normal ambient light in that area.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unwilling Shield',
@@ -404,5 +417,6 @@ export const GAP_SPELLS_U_2: Spell[] = [
     description:
       'You create a mystic link between yourself and the target that forces the target to share your wounds. You gain a +1 luck bonus to AC and on saving throws. Whenever you take damage, half the damage is negated and the target instead takes that damage. Unlike shield other, the target does not choose this arrangement. Charm effects, ability damage, level draining, and death effects are not shared. The damage transfer stops if you and the target move beyond close range of each other.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
 ];

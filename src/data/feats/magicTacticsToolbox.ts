@@ -10,6 +10,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'Blood hex feats are supernatural curse effects powered by inflicting wounds. Blood hexes work only against targets you have recently damaged. The saving throw DC for a blood hex is 10 + 1/2 your character level + the highest of your Intelligence, Wisdom, or Charisma modifier. You can target the same creature with the same blood hex only once per 24 hours. The number of times per day you can use blood hexes equals the number of blood hex feats you possess, plus one additional use at 4th level and every 4 levels thereafter. Effects from different blood hexes can affect one creature simultaneously, but the same blood hex effect does not stack with itself. Blood hexes count as hexes for abilities that work against hexes. Shamans and witches gain special benefits with blood hexes and can use each blood hex an unlimited number of times per day (still respecting the 24-hour targeting restriction).',
     shortDescription: 'Use supernatural curse effects powered by dealing wounds',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Ability to deal hit point damage to a target' },
@@ -25,6 +26,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'As a standard action, you can target a creature you have dealt damage to with a metal weapon since your last turn. That creature must make a Will save or lose access to spell-like abilities it can use more than once daily for up to 1 minute or until fully healed. For shamans and witches, this hex prevents all spell-like ability use during its duration.',
     shortDescription: 'Curse a wounded foe to suppress its spell-like abilities',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -44,6 +46,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Meditate on a transmutation item to gain a +2 enhancement bonus to an ability score',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 3 },
@@ -75,6 +78,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Shift range penalties to damage when attacking with magic bonuses; ignore partial concealment for sneak attack',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'far_shot' },
@@ -91,6 +95,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       "When you throw a single alchemical item as a full-attack action, you gain a +2 bonus to the DC of any effects from that alchemical item. When your base attack bonus reaches +11 and every 5 points thereafter, the DC increases by an additional 2. This feat does not apply to an alchemist's bombs. Alchemists may take this feat as a discovery without meeting prerequisites, using their class level to determine their effective base attack bonus for calculating the feat's benefits.",
     shortDescription: 'Throw alchemical items as full attacks with increased DC',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'throw_anything' },
@@ -107,6 +112,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       "As a standard action, you can curse an enemy's combat accuracy if you have dealt damage to them within the last minute. The target must succeed at a Fortitude save or automatically fail to confirm all critical threats. This effect lasts for 1 round. For shamans or witches specifically, the curse prevents the target from dealing precision damage or sneak attack damage during the hex's duration.",
     shortDescription: 'Curse a wounded foe to prevent critical hit confirmations',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -126,6 +132,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spells granting movement types increase that speed by 10 ft, with no level increase',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [{ type: 'ability_score', ability: 'DEX', minimum: 13 }],
     effects: [],
@@ -139,6 +146,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       "As a standard action, you can curse a creature you have dealt ranged weapon damage to since your last turn began. The target must succeed at a Reflex save or you gain two benefits: you don't take penalties on ranged attacks against that creature for the first range increment, and you ignore any bonus to its Armor Class from cover (though total cover still applies). This effect lasts 1 minute. For shamans or witches, the ability applies to any ranged attack damage dealt since their last turn, and the benefits extend to all their ranged attacks against affected creatures.",
     shortDescription: 'Curse a wounded ranged foe to negate range penalties and cover AC bonuses',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -162,6 +170,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       "When casting a spell with the fire descriptor, you may accept a -1 penalty on attack rolls and reduce the saving throw DC by 1. In exchange, targets dealt fire damage automatically catch on fire. The burning damage is delayed until the targets' next turn, and each target can attempt a Reflex saving throw (DC = 10 + the spell's level + your spellcasting ability score modifier) to extinguish the flames before being damaged each round. You must declare use of this feat before making attack rolls or before your targets attempt their saving throws. This feat has no effect on spells that neither allow a saving throw nor require an attack roll.",
     shortDescription: 'Trade -1 attack/DC on fire spells to set targets ablaze',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -176,6 +185,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Curse a wounded foe to obscure its vision, granting concealment to targets of its ranged touch attacks',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -194,6 +204,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'Three times per day when you channel energy, you can apply the modifications of a chosen variant channeling ability to your channeled energy. If you already possess a variant channeling ability, the feat instead lets you channel energy without those modifications three times daily. The feat can be selected twice; selecting it a second time removes the daily use limit.',
     shortDescription: 'Alter channeled energy with variant channeling abilities 3/day',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'Domain class feature' },
@@ -211,6 +222,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       "When casting a spell with the cold descriptor, you may accept a -1 penalty on attack rolls and reduce the spell's saving throw DC by 1. In exchange, targets dealt cold damage have their movement speed reduced by 5 feet and cannot take 5-foot steps. This effect persists for 1 round + 1 round per 3 spell levels of the spell. You must commit to using this feat before making attack rolls or before targets attempt their saving throws. The feat does not function with spells that neither allow saving throws nor require attack rolls.",
     shortDescription: 'Trade -1 attack/DC on cold spells to slow targets and prevent 5-foot steps',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -224,6 +236,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'You can leverage illusion magic items for concealment purposes. You can cause an item with a 1st-level or higher illusion spell in its construction requirements to cast vanish. With 7 ranks in both Stealth and Use Magic Device, the feat expands to allow items with 2nd-level or higher illusion spells to cast either invisibility or undetectable alignment. You gain one use per day, with additional daily uses when your base Fortitude save bonus reaches +9 and +12.',
     shortDescription: 'Use illusion magic items to cast vanish or invisibility',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'stealth', ranks: 3 },
@@ -241,6 +254,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'As a full-round action, you can curse a wounded opponent. The creature must succeed at a Fortitude save or if it uses any of the following class abilities during the next minute, it must spend at least two daily uses or rounds of that ability: arcane pool, arcane reservoir, bardic performance, bloodrage, bomb, inspiration, ki pool, mental focus, mesmerist trick, phrenic pool, rage, or raging song. Characters with the shaman or witch class can activate this ability as a standard action instead.',
     shortDescription: 'Curse a wounded foe to double the resource cost of its class abilities',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -258,6 +272,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'When you trigger your painful stare, your target must succeed at a Will save (DC = 10 + 1/2 your mesmerist level + your Charisma modifier) or take a -6 penalty on Disable Device and Perception checks, plus a -2 penalty on Reflex saves for one minute. Targets with trap finding or trap sense abilities also lose those benefits for the duration if they fail the save.',
     shortDescription: 'Trigger painful stare to inflict perception/trap penalties on a foe',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'class_feature', featureName: 'Painful stare' },
@@ -274,6 +289,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'When attacking from magical concealment (such as displacement or invisibility spells), the first attack roll you make each round that is a critical threat is automatically confirmed as a critical hit.',
     shortDescription: 'Auto-confirm critical threats while attacking from magical concealment',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'blind_fight' },
@@ -290,6 +306,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       "Any morale bonus granted by an encouraging spell is increased by 1. An encouraging spell uses up a spell slot 1 level higher than the spell's actual level.",
     shortDescription: 'Increase morale bonuses from spells by 1 (level +1)',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -306,6 +323,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'Select one metamagic feat from the following list: Disruptive Spell, Ectoplasmic Spell, Furious Spell, Merciful Spell, or Piercing Spell. By accepting 1 point of burn, you can modify your kinetic blast to function as though you had applied the chosen metamagic effect. This feat may be taken multiple times, with each selection applying to a different metamagic option from the approved list.',
     shortDescription: 'Apply a selected metamagic effect to your kinetic blast for 1 burn',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'Kinetic blast' },
@@ -322,6 +340,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'You can use blood hexes two additional times per day. This feat can be taken multiple times; each instance grants two more daily uses of blood hexes. Characters who later take levels in shaman or witch classes may immediately replace this feat with any blood hex feat for which they meet the prerequisites.',
     shortDescription: 'Gain 2 additional daily uses of blood hexes',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 15 },
@@ -340,6 +359,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       "You gain one additional variant channeling ability matching your deity's domains, subdomains, or areas of concern. Three times daily, you can apply this variant's modifications to your channel energy, reducing the damage dealt or healing performed by your channeled energy as normal. Multiple variant abilities cannot be applied simultaneously. This feat can be selected multiple times. Upon selecting it twice, you gain the flexibility to use any variant channeling ability chosen with this feat whenever you channel energy.",
     shortDescription: 'Gain an additional variant channeling ability usable 3/day',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Channeling Variance feat or variant channeling ability' },
@@ -356,6 +376,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       "As a standard action, you can curse an enemy you have dealt damage to since your last turn. The target must succeed at a Will save or be unable to take a 5-foot step, delay an action, or ready an action for 1 round. For shamans or witches, this blood hex can target any creature damaged within the past minute, and affected creatures also have their movement rate halved during the effect's duration.",
     shortDescription: 'Curse a wounded foe to prevent 5-ft steps, delays, and readied actions',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -374,6 +395,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'You can activate an abjuration magic item to create a protective force barrier. When you use an item with an abjuration spell of 1st level or higher in its construction requirements, you can generate an effect functioning like the shield spell. The AC bonus equals 1/3 your base Fortitude save bonus (minimum +1). You gain one daily use of this ability, with additional uses at base Fortitude save bonuses of +6, +9, and +12.',
     shortDescription: 'Use an abjuration magic item to generate a shield spell effect',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 3 },
@@ -390,6 +412,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'As a standard action, you can curse an opponent you have damaged with a melee attack within the last minute. The target must succeed at a Reflex save or suffer a -10 penalty on any initiative check it makes in the next minute. For shamans or witches, this hex instead prevents the target from taking a full-attack action for 1 round, and can be extended using the cackle hex ability.',
     shortDescription: 'Curse a wounded melee foe with -10 initiative penalty',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -407,6 +430,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'You can dismiss pit spells (such as create pit, hungry pit, spiked pit) and wall spells (such as wall of fire, wall of ice) that you have cast, provided they have a duration of at least 1 round. You may dismiss these conjured effects as a standard action, following normal spell dismissal rules.',
     shortDescription: 'Dismiss pit and wall spells you have cast as a standard action',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -420,6 +444,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       "You treat your implements as magic items for purposes of item mastery feats. Spells known from each implement's associated school count as effective construction requirements. When activating an item mastery feat using an implement, you can expend mental focus points equal to half the feat's base Fortitude save bonus prerequisite to activate the feat without consuming one of its daily uses. Occultists with this feat may select item mastery feats instead of focus powers, provided they meet all prerequisites.",
     shortDescription: 'Use occultist implements as qualifying magic items for item mastery feats',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'class_feature', featureName: 'Implements class feature' },
@@ -436,6 +461,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'You can trigger your painful stare one additional time per round. This feat can be taken multiple times — once at 3rd level, again at 9th level, and once more at 15th level, with effects stacking. A mesmerist may take this feat instead of a bold stare improvement.',
     shortDescription: 'Trigger painful stare one additional time per round',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'class_feature', featureName: 'Painful stare' },
@@ -453,6 +479,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 bonus on occult ritual skill checks; increase ritual DCs and reduce secondary caster requirements',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 1 },
@@ -485,6 +512,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use a racial spell-like ability via a matching magic item without spending daily uses',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 6 },
@@ -503,6 +531,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Meditate with an abjuration item to gain saving throw resistance or energy resistance',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 3 },
@@ -533,6 +562,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'You can cause an item with a conjuration (healing) spell of 2nd level or higher in its construction requirements to cast lesser restoration. With 9 ranks in both Heal and Use Magic Device, you can instead cause an item with a conjuration (healing) spell of 3rd level or higher to cast either remove blindness/deafness or remove paralysis. You gain one daily use, with additional uses at base Fortitude save bonuses of +9 and +12.',
     shortDescription: 'Use a healing magic item to cast lesser restoration or remove conditions',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'heal', ranks: 5 },
@@ -551,6 +581,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +1 (or +2 at CL 10+) natural armor when affected by transmutation magic',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'CON', minimum: 13 }],
     effects: [
@@ -577,6 +608,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
       'When casting an electricity descriptor spell targeting one or more creatures, you may accept a -1 penalty on attack rolls and reduce the saving throw DC by 1. In exchange, the target closest to you that is dealt electricity damage by the spell becomes fatigued for 1 round. This effect cannot make an already fatigued creature become exhausted. You must declare use before rolling or before the target saves. The feat has no effect on spells lacking both saving throws and attack rolls.',
     shortDescription: 'Trade -1 attack/DC on electricity spells to fatigue the closest target hit',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -591,6 +623,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel divine power through your holy symbol as melee touch or ranged ray attacks',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 4 },
@@ -609,6 +642,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Curse a wounded foe with -6 penalty to a social skill (all three for shamans/witches)',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -629,6 +663,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Increase the spacing between targets of multi-target spells from 30 ft to 60 ft (level +1)',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [{ type: 'caster_level', minimum: 3 }],
     effects: [],
@@ -643,6 +678,7 @@ export const MAGIC_TACTICS_FEATS: FeatDefinition[] = [
     shortDescription:
       "Swift action: add 1d4 energy damage to a magic weapon's energy special ability for 1 round",
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['item_mastery'],
     prerequisites: [
       { type: 'skill', skillId: 'use_magic_device', ranks: 2 },

@@ -9,6 +9,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
       'Your stare robs your foe of all sight. When you trigger your painful stare, the target must succeed at a Will save (DC = 10 + half your mesmerist level + your Charisma modifier) or be blinded for 1 round.',
     shortDescription: 'Painful stare blinds target for 1 round on failed Will save.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'general'],
     prerequisites: [
       { type: 'level', minimum: 7 },
@@ -34,6 +35,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend extra trick uses to bounce a triggered mesmerist trick to new targets within 30 feet.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'mesmerist trick' }],
     effects: [
@@ -55,6 +57,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
       'Your stare bewilders your foe. When you trigger your painful stare, the target must succeed at a Will save (DC = 10 + half your mesmerist level + your Charisma modifier) or become confused for 1 round.',
     shortDescription: 'Painful stare confuses target for 1 round on failed Will save.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'general'],
     prerequisites: [
       { type: 'level', minimum: 7 },
@@ -80,6 +83,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Implant two mesmerist tricks as one contingent trick, triggering the appropriate one based on conditions.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Any two trick feats' }],
     effects: [
@@ -102,6 +106,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       "Gain expanded element's associated skills as class skills and a +1 bonus on those skills.",
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'expanded element' }],
     effects: [
@@ -124,6 +129,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Accepting 4+ burn increases your chance to negate critical hits and sneak attacks.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'elemental overflow' },
@@ -149,6 +155,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use kineticist level as caster level for crafting, and wild talents as spell prerequisites.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [{ type: 'level', minimum: 3 }],
     effects: [
@@ -171,6 +178,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Treat element-associated spells as utility wild talents, burning 1 point to cast them.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 1 },
@@ -196,6 +204,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Apply a selected metamagic feat to spells cast via Kinetic Invocation by spending additional burn.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [{ type: 'class_feature', featureName: 'metakinesis' }],
     effects: [
@@ -217,6 +226,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
       "Your stare cuts through your foe's defenses. When you trigger your painful stare, the damage dealt ignores 5 points of the target's damage reduction, unless that damage reduction is untyped (for example, DR 10/—).",
     shortDescription: "Painful stare damage ignores 5 points of the target's damage reduction.",
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'general'],
     prerequisites: [
       { type: 'level', minimum: 7 },
@@ -242,6 +252,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Painful stare causes target to lose Dex bonus to AC for 1 round on failed Will save.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'general'],
     prerequisites: [
       { type: 'level', minimum: 5 },
@@ -267,6 +278,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Implant a mesmerist trick in yourself as an immediate action when its trigger condition occurs.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'mesmerist tricks' }],
     effects: [
@@ -289,6 +301,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Implant a mesmerist spell as a contingency trick that activates under specified conditions.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'masterful tricks' },
@@ -314,6 +327,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Implant a mesmerist trick in two targets at once; only one receives the effect when triggered.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'mesmerist trick' }],
     effects: [
@@ -336,6 +350,7 @@ export const PSYCHIC_ANTHOLOGY_FEATS: FeatDefinition[] = [
     shortDescription:
       'Trigger an implanted trick by touch to replace it with any other mesmerist trick you know, at no daily use cost.',
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'mesmerist tricks' }],
     effects: [

@@ -10,6 +10,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       'When making a full attack against a corporeal foe, you can forgo multiple attacks to make one unarmed strike at your highest base attack bonus. For each attack foregone, add half your Strength modifier (minimum +0) to damage. On a successful hit, attempt a bull rush as a free action using your attack roll result instead of rolling separately, adding the same half-Strength bonus per foregone attack to the bull rush check. The bull rush does not provoke attacks of opportunity and does not move you from your position.',
     shortDescription: 'Forgo attacks to make one powerful unarmed strike and free bull rush.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -46,6 +47,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       'When using Savage Slam and successfully executing a grapple maneuver to knock an opponent prone, the target must make a Fortitude save (DC = 10 + your base attack bonus) or be staggered for 1 round. Oozes, incorporeal creatures, and creatures immune to critical hits cannot be affected by this staggering effect.',
     shortDescription: 'Savage Slam prone targets must save or be staggered for 1 round.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -81,6 +83,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       'When you successfully execute a bull rush that drives an opponent into another creature, both targets take 1d6 points of bludgeoning damage, plus an additional 1d6 points of bludgeoning damage for every 5 feet your original target has moved as a result of your bull rush.',
     shortDescription: 'Bull rushing a foe into another creature deals 1d6 damage per 5 feet moved.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -114,6 +117,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       "As a full-round action, you can expend 1 ki point or one daily martial flexibility use to target specific body areas with a limited version of the targeted strike deed. At BAB +6, target hands or legs; at BAB +11, target head or torso; at BAB +16, target two locations simultaneously. Opponents negate each effect with a Fortitude save (DC = 10 + BAB). Monks may substitute their class level for base attack bonus when determining this feat's effects.",
     shortDescription: 'Spend ki or martial flexibility to target body parts with unarmed strikes.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -147,6 +151,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       'When you hit an opponent already damaged in the current round with a melee attack, you may forgo dealing damage to instead regain 1 ki point. You can regain at most 1 ki point per minute, and no more than 1 ki point per four class levels per day.',
     shortDescription: 'Forgo damage on a follow-up hit to regain 1 ki point (limit 1/minute).',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -180,6 +185,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'After a successful drag, fall prone to fling the target prone in an opposite square.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -215,6 +221,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Move up to half speed during Savage Slam; slam damage also shakes the target.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_grapple' },
@@ -249,6 +256,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       'When you begin your turn grappling an opponent, instead of attempting a combat maneuver check to maintain the grapple, you can try to viciously slam your opponent down. As a standard action, make a grapple combat maneuver check. On success, you release the grapple and force the target prone in an adjacent unoccupied square; the opponent takes unarmed strike damage if landing on solid ground or objects. If attempting to throw the foe into hazardous terrain, the target gains a +4 bonus to its CMD against the maneuver.',
     shortDescription: 'From a grapple, slam target prone in adjacent square for unarmed damage.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_grapple' },
@@ -283,6 +291,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Repeated unarmed hits impose stacking -1 attack penalties on target vs. other creatures.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'dodge' },
@@ -317,6 +326,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Combine change shape with a natural weapon attack when using Shapeshifter Style.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'shapeshifter_style' },
@@ -355,6 +365,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Swift action to gain shapeshifting combat benefits: damage, climb, speed, or natural armor.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'bab', minimum: 3 },
@@ -402,6 +413,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       '+2 CMD vs. multiple maneuvers while in Shapeshifter Style; move action to escape grapple.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'shapeshifter_style' },
@@ -439,6 +451,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'After hitting with a shielded staff, perform a free combat maneuver as an immediate action.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -474,6 +487,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Remove shielded staff attack penalty; add shield enhancement bonus to AC bonus.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 17 },
@@ -510,6 +524,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Attach buckler or shield to staff/polearm/spear for +2 AC shield bonus while fighting two-handed.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -547,6 +562,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       "Apply magical item's caster level / 4 as enhancement bonus when used as improvised weapon.",
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'special', description: 'Catch Off-Guard or Throw Anything' },
@@ -581,6 +597,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       'While using Shikigami Style, you can accept a -2 penalty on attack rolls to grant an improvised weapon one of the following special qualities until the start of your next turn: blocking, brace, disarm, distracting, nonlethal, performance, or trip. When an improvised weapon already has the fragile quality or is broken, you may treat it as having the jagged quality instead.',
     shortDescription: 'Take -2 attack to grant improvised weapon a special quality for 1 round.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'special', description: 'Catch Off-Guard or Throw Anything' },
@@ -614,6 +631,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Improvised weapons deal damage as one size larger; +1 size per additional Shikigami feat.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [{ type: 'special', description: 'Catch Off-Guard or Throw Anything' }],
     effects: [
@@ -644,6 +662,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Bull rushing into barriers deals unarmed damage to both target and barrier; +2 damage on a charge.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 15 },
@@ -679,6 +698,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Missed melee attacks from your designated target provoke an attack of opportunity.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'stick_fighting_style' },
@@ -711,6 +731,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
       'When making a full attack exclusively with clubs, quarterstaffs, dan bongs, saps, or tonfas, you can perform a combat maneuver as an extra attack using your full base attack bonus.',
     shortDescription: 'During a full attack with stick weapons, add a combat maneuver at full BAB.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'stick_fighting_counter' },
@@ -745,6 +766,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       '+1 attack bonus with stick weapons; masterwork sticks gain blocking, disarm, distracting, performance, and trip.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [
@@ -775,6 +797,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Standard action creates a slashing vortex dealing STR/DEX mod damage to adjacent foes each round.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Weapon Focus with a slashing weapon' },
@@ -808,6 +831,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'Unarmed strike forces Fort save or target loses skill ranks and activated feats for 1d4 rounds.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -843,6 +867,7 @@ export const MARTIAL_ARTS_FEATS_2: FeatDefinition[] = [
     shortDescription:
       'After a successful disarm, attempt a second disarm vs. an adjacent foe at -5.',
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },

@@ -12,6 +12,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use an immediate action to demoralize a nearby attacker after taking enough piercing or slashing damage',
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Skill Focus (Intimidate)' }],
     effects: [],
@@ -27,6 +28,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel a damaging touch spell through an adjacent ally with this feat, who delivers it to a nearby enemy',
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'spellcraft', ranks: 1 }],
     effects: [],
@@ -42,6 +44,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain a cumulative +2 insight bonus on each subsequent attack of opportunity after a failed one in the same round',
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'combat_reflexes' }],
     effects: [
@@ -70,6 +73,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
       "When you successfully use the Antagonize feat's ability, you can cause the targeted creature to focus on a willing ally who also possesses this feat, as though that ally had activated the Antagonize ability instead.",
     shortDescription: "Redirect a foe's Antagonize hostility onto an ally who also has this feat",
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'feat', featId: 'antagonize' }],
     effects: [],
@@ -85,6 +89,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
     shortDescription:
       'An ally sacrifices social standing to grant you a +2 competence bonus on Charisma-based checks against shared witnesses',
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'bluff', ranks: 1 }],
     effects: [
@@ -114,6 +119,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
     shortDescription:
       'When an ally with this feat fails a save against a harmful AoE spell, enemies in the area take a –2 save penalty',
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [],
@@ -129,6 +135,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
     shortDescription:
       'While grappled, attempt a dirty trick against your grappler without penalty or provoking; bonus with Improved Dirty Trick',
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -144,6 +151,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Waste a spell slot to grant an ally a bonus on caster level checks to overcome spell resistance',
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'special', description: 'Spell Penetration or Bluff 3 ranks' },
@@ -162,6 +170,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
     shortDescription:
       'An ally helps disable a trap but becomes the target of its effects if you fail',
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [
@@ -190,6 +199,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
     shortDescription:
       'When you fail a save against a lasting mind-affecting effect, become dazzled for the first round instead',
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'iron_will' }],
     effects: [],
@@ -205,6 +215,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Allies exploit failed saves against AoE spells to impose a –2 save penalty on intelligent enemies in the area',
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [],
@@ -220,6 +231,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
     shortDescription:
       'Retrieve a held or carried item from an adjacent incapacitated ally as a swift action without provoking',
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [],
@@ -235,6 +247,7 @@ export const ANTIHERO_FEATS: FeatDefinition[] = [
     shortDescription:
       'When tripped or knocked prone by an enemy, immediately attempt a trip maneuver against any enemy within melee reach',
     source: "Antihero's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'lightning_reflexes' }],
     effects: [],

@@ -5,13 +5,13 @@
 // All descriptions are text — mechanical effects are wired by the modifier pipeline.
 
 import { Prerequisite } from './feats';
-import { Effect } from './base';
+import { Effect, DataQualityFields } from './base';
 import { SpecialAbility } from './specialAbilities';
 import type { GameDataSource } from './gameData';
 
 // ---- Base type shared by all option collection documents ----
 
-export interface ClassOptionBase {
+export interface ClassOptionBase extends DataQualityFields {
   id: string;
   name: string;
   description: string;

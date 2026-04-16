@@ -38,6 +38,7 @@ export const allosaurus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -73,6 +74,7 @@ export const amargasaurus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -108,6 +110,7 @@ export const ankylosaurus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -154,6 +157,7 @@ export const antGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-um',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -185,6 +189,7 @@ export const antelope: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b4',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -219,6 +224,7 @@ export const ape: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -253,6 +259,7 @@ export const archelon: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -288,6 +295,7 @@ export const arsinoitherium: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -323,6 +331,7 @@ export const aurochs: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b2',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -358,6 +367,7 @@ export const axeBeak: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -390,6 +400,7 @@ export const baboon: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -423,6 +434,7 @@ export const badger: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -458,6 +470,7 @@ export const baluchitherium: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -493,6 +506,7 @@ export const basilosaurus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b6',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -527,6 +541,7 @@ export const batDire: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -570,6 +585,7 @@ export const bear: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -613,6 +629,7 @@ export const beetleGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-um',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -655,6 +672,7 @@ export const bird: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -678,6 +696,7 @@ export const blackwispEgret: AnimalCompanionEntry = {
   progressionTiers: [], // Progression data unavailable — verify against PAP#91
   source: 'pf1e-ap91',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -713,6 +732,7 @@ export const brachiosaurus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -748,6 +768,7 @@ export const boar: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -782,6 +803,7 @@ export const bristleBoar: AnimalCompanionEntry = {
   ],
   source: 'pf1e-orcs',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -817,6 +839,7 @@ export const brontotherium: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b6',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -852,6 +875,7 @@ export const bullWar: AnimalCompanionEntry = {
   ],
   source: 'pf1e-orcs',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -882,6 +906,7 @@ export const bustard: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

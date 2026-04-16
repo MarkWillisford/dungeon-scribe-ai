@@ -34,6 +34,7 @@ export const jezelda: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -70,6 +71,7 @@ export const jubilex: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -107,6 +109,7 @@ export const kabriri: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -144,6 +147,7 @@ export const kostchtchie: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -181,6 +185,7 @@ export const mazmezz: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -218,6 +223,7 @@ export const mestama: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -255,6 +261,7 @@ export const nocticula: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -292,6 +299,7 @@ export const nurgal: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -329,6 +337,7 @@ export const orcus: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -366,6 +375,7 @@ export const pazuzu: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

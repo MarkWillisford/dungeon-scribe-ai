@@ -12,6 +12,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       "When dealing nonlethal melee damage to a creature only you threaten, make a Bluff check opposed by the target's Sense Motive. You deal extra nonlethal damage equal to half the difference (minimum 0). If the target is friendly or helpful, the extra damage equals the full difference. Max extra damage cannot exceed your HD.",
     shortDescription: 'Bluff for extra nonlethal damage vs. a foe only you threaten.',
     source: 'Pathfinder Player Companion: Bastards of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'solo_maneuvers' },
@@ -36,6 +37,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'When you successfully dirty trick an opponent already affected by a dirty trick condition, you can worsen it: dazzled→dazed, entangled→pinned, shaken→frightened, sickened→nauseated. The worsened condition replaces the previous one and lasts for the dirty trick duration or until removed with a standard action.',
     shortDescription: 'Escalate dirty trick conditions to worse versions.',
     source: 'Pathfinder Player Companion: Bastards of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'greater_dirty_trick' },
@@ -61,6 +63,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'When targeted by an AoE requiring a Reflex save, use an immediate action to force an adjacent enemy (within one size category) to save instead. If they fail, they take half damage and you avoid damage. If they succeed, you take full damage as if you failed.',
     shortDescription: 'Redirect AoE Reflex saves to an adjacent enemy.',
     source: 'Pathfinder Player Companion: Bastards of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -87,6 +90,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'Whenever you are the only one threatening an opponent, you gain a +1 bonus on combat maneuvers against that creature and a +1 bonus to CMD against combat maneuvers made by that creature.',
     shortDescription: "+1 CMB and CMD when you're the only one threatening a foe.",
     source: 'Pathfinder Player Companion: Bastards of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -108,6 +112,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'When within 30 feet of at least two other changelings, you gain a +2 bonus on concentration and dispel checks. If at least two of those changelings also have this feat, bonuses increase to +4.',
     shortDescription: '+2 concentration/dispel near other changelings (+4 if they have this feat).',
     source: 'Pathfinder Player Companion: Bastards of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'race', raceName: 'Changeling' }],
     effects: [
@@ -129,6 +134,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'You gain a natural bite attack dealing 1d4 damage. Once per day upon a successful bite attack, you can deal an additional 1d4 bleed damage. This feat may only be selected at 1st level.',
     shortDescription: 'Gain 1d4 bite attack; 1/day add 1d4 bleed on bite. 1st level only.',
     source: 'Pathfinder Player Companion: Bastards of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Dhampir' }],
     effects: [
@@ -150,6 +156,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'Once per day while sleeping, you can create a magical sensor (as arcane eye) that views your current location as it exists on the Shadow Plane. This lasts 1 minute per character level.',
     shortDescription: 'See the Shadow Plane version of your location while sleeping 1/day.',
     source: 'Pathfinder Player Companion: Bastards of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Fetchling' }],
     effects: [
@@ -171,6 +178,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'Your divination spells and spell-like abilities manifest at 1 caster level higher. Once per day while fully immersed in water, you can cast augury as a spell-like ability.',
     shortDescription: '+1 CL for divination; 1/day augury while immersed in water.',
     source: 'Pathfinder Player Companion: Bastards of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Gillman' }],
     effects: [
@@ -195,6 +203,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
     shortDescription:
       'Allies with this feat climb 5 ft on your success; +5 to catch falling allies.',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'climb', ranks: 5 }],
     effects: [
@@ -216,6 +225,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'By expending a move action to produce sound and listen for echoes, you gain blindsense 30 ft until your turn ends. This imposes a -4 penalty on Stealth. Cannot be used if deafened, unable to make noise, or in magically silenced areas.',
     shortDescription: 'Move action for blindsense 30 ft until end of turn (-4 Stealth).',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'blind_fight' },
@@ -241,6 +251,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'While in favored terrain, you apply half your favored terrain bonus to Acrobatics, Climb, and Swim checks.',
     shortDescription: 'Half favored terrain bonus to Acrobatics, Climb, and Swim.',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'favored terrain' }],
     effects: [
@@ -262,6 +273,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'When holding a light source in dim or darker conditions, foes within the light radius take a -1 penalty on attack rolls against other targets also within the radius. Blind creatures are unaffected.',
     shortDescription: '-1 attack penalty for foes in your light radius vs. other lit targets.',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -283,6 +295,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'When attacking with a light source as an improvised weapon, the target must Fort save (DC 10 + 1/2 level + DEX mod) or be dazzled for 1 round. On a crit, the target is blinded for 1 round instead. Blind targets are unaffected.',
     shortDescription: 'Light source attacks dazzle on hit (blind on crit).',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'catch_off_guard' }],
     effects: [
@@ -304,6 +317,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'You gain a +4 bonus on Perception checks to notice natural deposits of precious metals or minerals, and a +4 on Appraise checks to determine their worth. By scrutinizing a vein for 5 minutes, you determine its worth within 1,000 gp (max 50,000 gp).',
     shortDescription: '+4 Perception/Appraise for metals and minerals; estimate vein value.',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -332,6 +346,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'While in favored terrain, you gain a +5 ft movement speed bonus. The bonus increases to +10 ft if a visible creature matching a favored enemy type is present in the same terrain.',
     shortDescription: '+5 ft speed in favored terrain (+10 ft if favored enemy visible).',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'class_feature', featureName: 'favored enemy' },
@@ -356,6 +371,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'As a standard action, make a single ranged attack with an illuminated weapon/ammo. On a hit, allies in dim/darker areas gain +2 circumstance bonus vs. that target for 1 round. The target is treated as in bright light until the projectile is removed (move action, provokes).',
     shortDescription: 'Illuminated ranged attack grants allies +2 vs. that target.',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'point_blank_shot' },
@@ -382,6 +398,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       "As a standard action with a -2 attack penalty using a piercing or slashing weapon against a larger foe, on a hit dealing 1+ damage the target's speed is halved for 24 hours or until healed (DC 15 Heal or magical healing). Does not stack with itself or caltrops.",
     shortDescription: "Standard action attack to halve a larger foe's speed.",
     source: 'Pathfinder Campaign Setting: Rival Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -403,6 +420,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       "When you make a successful disarm or trip with Serpent Lash, you can make your additional attempt against any target within your whip's reach (not just adjacent). With a reposition, you can move the target to any point within reach.",
     shortDescription: 'Serpent Lash chain attacks can target anyone in whip reach.',
     source: 'Pathfinder Campaign Setting: Rival Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'serpent_lash' },
@@ -427,6 +445,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'You gain a +2 racial bonus on saving throws against mind-affecting effects, and a +2 racial bonus on Perception checks. Must be taken at 1st level.',
     shortDescription: '+2 racial saves vs. mind-affecting; +2 racial Perception. 1st level only.',
     source: 'Pathfinder Campaign Setting: Rival Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Humanoid, must be taken at 1st level' }],
     effects: [
@@ -455,6 +474,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'You can move up to half your speed instead of a 5-foot step when performing a coup de grace as a full-round action. The coup de grace does not provoke AoOs. Light or one-handed weapon only.',
     shortDescription: 'Move half speed during coup de grace without provoking.',
     source: 'Pathfinder Campaign Setting: Rival Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'dodge' },
@@ -483,6 +503,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'As a standard action, make an Intimidate check against a hostile target within 30 ft (DC = 10 + HD + WIS mod, or 10 + Sense Motive bonus if higher). Success forces the target into a duel for 1 round + 1 round per 5 you exceed the DC. The opponent cannot withdraw.',
     shortDescription: 'Intimidate to force a foe into a duel for multiple rounds.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -504,6 +525,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       "When you successfully parry a foe's melee attack (dueling parry or parry class feature), your next melee attack against the target does not allow the enemy to apply its Dexterity bonus to AC. Must attack before end of your next turn.",
     shortDescription: 'Successful parry denies target DEX to AC on your next attack.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -529,6 +551,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 performance check after charge/maneuver; +4 on next physical skill check.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [{ type: 'skill', skillId: 'acrobatics', ranks: 3 }],
     effects: [
@@ -550,6 +573,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'You gain a +2 bonus on Swim and Stealth checks while swimming in calm or rough water (not stormy). If you can act in a surprise round and start in water, you can take both a move and standard action.',
     shortDescription: '+2 Swim/Stealth while swimming; full surprise round from water.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -578,6 +602,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'When you spend a swift action to attempt a performance combat check, you gain +2 on the check. If you are shaken, sickened, or fatigued, these conditions are suppressed until end of your next turn.',
     shortDescription: '+2 performance check; suppresses shaken/sickened/fatigued for 1 round.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'performance'],
     prerequisites: [{ type: 'feat', featId: 'endurance' }],
     effects: [
@@ -599,6 +624,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'When performing a dueling dodge while wearing a cloak, you gain evasion. There is a 25% chance that critical hits or sneak attacks are negated (damage rolled normally instead). Lasts only until the triggering attack resolves. Does not stack with fortification.',
     shortDescription: 'Dueling dodge with cloak grants evasion and 25% crit/sneak attack negation.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -623,6 +649,7 @@ export const TIER3_BATCH2_FEATS: FeatDefinition[] = [
       'You automatically succeed at concentration checks for vigorous or violent motion while swimming or on a ship. You gain a +4 bonus on concentration checks to cast spells underwater.',
     shortDescription: 'Auto-pass concentration on ships/swimming; +4 concentration underwater.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [

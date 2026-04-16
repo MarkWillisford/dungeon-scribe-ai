@@ -12,6 +12,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Apply DEX to glaive attacks; wield glaive as one-handed; toggle reach as move action',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_focus' },
@@ -44,6 +45,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Roll derring-do/dare bonus die twice and take higher result; usable 1/day plus 1 per 4 levels',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Must possess a Dare, deeds, or inspiration class ability' },
@@ -60,6 +62,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
       "Old Deadeye's favor grants you prowess with a bow that far exceeds your own physical capabilities. When making ranged attacks with a bow, you can apply your Wisdom modifier to attack rolls in place of your Dexterity modifier.",
     shortDescription: 'Apply WIS instead of DEX to attack rolls with bows',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_focus' },
@@ -92,6 +95,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain HP or skill rank per prestige class level; +2 (or +4) bonus on one prestige class skill',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -114,6 +118,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+10 ft speed, +4 Acrobatics, add CHA to damage, and ignore 10 (or 30 vs undead) fire resistance while using flame blade',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       {
@@ -171,6 +176,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain Necril, +2 social skills with undead, add speak with dead/haunt to spells known',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Ability to cast 3rd-level spells' }],
     effects: [
@@ -244,6 +250,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Add WIS to starknife damage and gain returning on thrown starknife; 1/day per level',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'starry_grace' },
@@ -275,6 +282,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Reduce restrictions on one Thassilonian opposition school; gain Thassilonian (or alternate) language',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -302,6 +310,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +1 effective spellcaster level for prestige class levels that lack spell advancement',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'favored_prestige_class' }],
     effects: [],
@@ -317,6 +326,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Expend smite evil to sunder spell effects; add CHA vs evil outsiders/dragons/undead',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'class_feature', featureName: 'smite evil' }],
     effects: [],
@@ -331,6 +341,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
       'Rather than attempting a series of wild blows, you line up a perfect attack. As a move action, you can focus yourself. If you do, you receive a +4 bonus on the next melee attack roll you make before the end of your turn.',
     shortDescription: 'Spend a move action to gain +4 on your next melee attack roll this turn',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_expertise' },
@@ -363,6 +374,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Treat off-hand tankard as light mace; ignore sickened penalties on two-weapon attack/damage rolls',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'catch_off_guard' },
@@ -388,6 +400,7 @@ export const PATHS_RIGHTEOUS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Grant uncanny dodge (and improved uncanny dodge) to adjacent allies who can see and hear you',
     source: 'Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'alertness' },

@@ -1,8 +1,8 @@
 // Gap spells — letter O part 1 (first half alphabetically)
 // Gap metadata: {"letters":"O_1","totalChecked":34,"newSpells":12,"skipped":22}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_O_1: Spell[] = [
+export const GAP_SPELLS_O_1: SpellDefinition[] = [
   {
     name: 'Oath of Anonymity',
     classLevels: {
@@ -30,6 +30,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
     description:
       'This spell conceals your identity through magical means. It distorts your voice and subtly alters your body language and the appearance of your gear and any animals you use, whether as companions, mounts, or otherwise. The spell grants a +10 bonus to Disguise checks made to conceal your identity but not to impersonate a specific individual. It does not alter your creature type, apparent height, or body type. The distortions remain consistent, allowing those previously exposed to them to recognize the alternate persona you have created.',
     source: 'Pathfinder Campaign Setting: Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Oath of Justice',
@@ -55,6 +56,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
     description:
       'This spell seals a binding oath between two willing participants. The targets must clasp hands and swear their oath in the name of Kols. Similar to mark of justice, the spell penalizes oath-breakers with a visible facial mark recognizable to dwarves, imposing a -4 penalty to attempts to influence dwarves. The mark can be removed following the same procedures as mark of justice, or the other party can forgive the oath-breaker, causing the mark to disappear.',
     source: 'Pathfinder Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Object Possession, Lesser',
@@ -84,6 +86,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
     description:
       'You project your soul into an unattended Tiny or Small object, animating it. While possessing the object you gain the statistics of an animated object of its size with 1 construction point of abilities. You cannot use spells or other abilities while possessing the object. A spiritual tether connects your body to the possessed object; if you move beyond close range (25 ft. + 5 ft./2 levels) from your body, the connection breaks and your consciousness returns to your body. Your body is helpless while you possess the object.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Object Possession',
@@ -113,6 +116,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
     description:
       'This spell functions as object possession, lesser, except you can possess objects up to Large size with up to 3 construction points for Large objects. You can return your consciousness to your body as a standard action and attempt to possess a different object on a subsequent turn. Your body is helpless while you possess the object.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Object Possession, Greater',
@@ -140,6 +144,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
     description:
       'This spell functions as object possession, except you can possess objects up to Gargantuan size with up to 5 construction points, or target constructs as an alternative to objects. The spiritual tether extends to medium range. When possessing a construct, you gain control of its body and abilities. Your body is helpless while you possess the object or construct.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Obscured Script',
@@ -169,6 +174,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
     description:
       "You create a latent illusion that affects how creatures perceive the text of the touched document. You designate up to one creature per caster level as immune to the effect. Affected creatures must succeed at a Will save or have difficulty parsing the text—the Linguistics check DC to read the document increases by your caster level (maximum +10), and the Wisdom check DC to avoid drawing false conclusions increases equally. Creatures unaffected by the illusion gain a circumstance bonus on Bluff checks made in connection with false information in the document. Magical glyphs and runes are also obscured; the Perception DC to find traps using such marks increases by half your caster level (maximum +5). This spell can be made permanent with the permanency spell (minimum caster level 10th; 5,000 gp).",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Obscuring Mist',
@@ -200,6 +206,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
     description:
       'A misty vapor arises around you. It is stationary once created. The vapor obscures all sight, including darkvision, beyond 5 feet. A creature 5 feet away has concealment (attacks have a 20% miss chance). Creatures farther away have total concealment (50% miss chance, and the attacker cannot use sight to locate the target). A moderate wind (11+ mph) disperses the fog in 4 rounds; a strong wind (21+ mph) disperses the fog in 1 round. A fireball, flame strike, or similar spell burns away the fog in the spell\'s area. This spell does not function underwater.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Obsidian Flow',
@@ -229,6 +236,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
     description:
       'You transform the ground into a flow of molten glass that rapidly cools and solidifies into razor-sharp obsidian. Creatures in the burst take 1d6 points of fire damage per two caster levels (maximum 10d6) and become entangled by the hardened obsidian. A successful Reflex save halves the damage and negates the entanglement. Entangled creatures can free themselves with a move action and a successful Strength or Escape Artist check against the spell\'s DC. The affected area becomes difficult terrain, increasing Acrobatics DCs by 5. Charging through the area requires a successful DC 15 Acrobatics check, and creatures that fall prone in the area take an additional 1d6 points of damage from the sharp obsidian.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Old Salt's Curse",
@@ -255,6 +263,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
     description:
       "You afflict the target with a maritime curse that makes them perpetually sickened. Additionally, whenever the cursed creature is on or in water more than 1 mile from shore, it becomes staggered due to overwhelming seasickness. This curse cannot be removed with dispel magic. Remove curse or break enchantment can end the effect.",
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Oneiric Horror',
@@ -284,6 +293,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
     description:
       "You force the subject to perceive an imaginary nightmare creature attacking it. Each round, the subject uses its full-attack action to fight this illusory foe. Flying creatures can attempt Fly checks to hover in place. After each round of attacking the illusion, the subject may attempt another Will save to end the effect. Upon the spell's conclusion, the subject becomes fatigued for 1 minute.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Oneiric Horror, Greater',
@@ -313,6 +323,7 @@ export const GAP_SPELLS_O_1: Spell[] = [
     description:
       "This spell functions as oneiric horror, except the subject also suffers 1 point of Strength damage each round it fails its Will save against the nightmare creature. After the spell ends, the subject must succeed on a Fortitude save or be fatigued for a number of minutes equal to the number of rounds spent under the spell's influence.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Open and Shut',
@@ -341,5 +352,6 @@ export const GAP_SPELLS_O_1: Spell[] = [
     description:
       "You alter a portal's appearance, making a door appear closed when it is open, open when it is closed, or creating the illusion of a door opening or closing. After casting, you can alter the portal's apparent state as a move action. Creatures that attempt to physically interact with the door receive a Will save to disbelieve. Those who believe the illusion take a -5 penalty on Perception checks related to the door or creatures on the other side of it. The spell works on windows, gates, and similar openings.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
 ];

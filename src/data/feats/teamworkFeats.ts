@@ -9,6 +9,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You can use an adjacent ally as cover. As an immediate action, you can designate an adjacent ally to provide cover for you until the start of your next turn. You gain a +4 bonus to AC and Reflex saves from this cover. Any attack that misses you due to this cover has a 50% chance of hitting the ally instead.',
     shortDescription: 'Use adjacent ally as cover; attacks that miss may hit them',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [],
     effects: [],
@@ -22,6 +23,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'When you and an adjacent ally both have the rage class feature and are both raging, your Strength and Constitution bonuses from rage each increase by +2. This bonus also applies to any morale bonuses you gain from rage.',
     shortDescription: '+2 to Strength and Constitution bonuses from rage when adjacent raging ally',
     source: 'Orcs of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'race', raceName: 'half-orc or orc' },
@@ -63,6 +65,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       "You are skilled at watching your ally's back when in close combat. Whenever you and an adjacent ally with this feat are both flanked, you each gain a +2 bonus to AC against attacks from opponents flanking you.",
     shortDescription: '+2 AC against flanking opponents when adjacent ally also flanked',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'perception', ranks: 3 }],
     effects: [
@@ -89,6 +92,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       "You excel at protecting your ally's flanks in close combat. When you and an adjacent ally with this feat are both flanked, you can take an immediate action to negate the flanking for your ally until the start of your next turn. Your ally retains this benefit even if they move.",
     shortDescription: 'Negate flanking for adjacent ally as immediate action',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'back_to_back' },
@@ -105,6 +109,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       "You can coordinate your bardic performance or raging song with a nearby ally. When you are within 30 feet of an ally who also has this feat and is using bardic performance or raging song, you can use your own bardic performance to enhance theirs. Your ally's bardic performance or raging song is treated as if its effective level were 2 higher for the purpose of its effects.",
     shortDescription: "Enhance adjacent ally's bardic performance by +2 effective levels",
     source: 'Champions of Balance',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'special', description: 'Bardic performance or raging song class feature' },
@@ -121,6 +126,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Grant enemy attack bonus; their first attack on you provokes AoOs from allies',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'bluff', ranks: 5 }],
     effects: [],
@@ -134,6 +140,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'When you and an ally with this feat are both grappling the same opponent, you may attempt to deal damage to the grappled opponent as a swift action on your turn. This damage is equal to your unarmed strike or natural weapon damage plus your Strength modifier.',
     shortDescription: 'Deal damage as swift action to opponent you and ally both grapple',
     source: 'Orcs of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'race', raceName: 'half-orc or orc' }],
     effects: [],
@@ -147,6 +154,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       "You can include an ally in the area of your damaging spells to unsettle nearby enemies. When you cast an area spell that damages creatures and you include an ally in its area, all enemies that take damage from the spell are shaken for 1 round (Will negates, DC = 10 + spell level + casting ability modifier). The ally must not be immune to the spell's damage type.",
     shortDescription: 'Including ally in damaging area spell shakes enemies for 1 round',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'spellcraft', ranks: 1 }],
     effects: [],
@@ -160,6 +168,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       "You are adept at using your allies as cover while maneuvering around large foes. When you move through a larger creature's threatened area and an ally with this feat is adjacent to that creature, you gain a +1 dodge bonus to AC against attacks of opportunity provoked by that movement.",
     shortDescription: '+1 dodge AC vs. attacks of opportunity when moving past large foe near ally',
     source: 'Rival Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'dodge' },
@@ -191,6 +200,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You are skilled at treating wounds in the heat of battle. When you use the Heal skill to provide first aid, treat caltrop wounds, or treat poison on an ally with this feat, you do not provoke attacks of opportunity and may take 10 on the check even if threatened.',
     shortDescription: 'No AoO and take 10 on Heal checks on allies with this feat',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'heal', ranks: 5 }],
     effects: [],
@@ -204,6 +214,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       "Your harmonization with an ally's bardic performance can amplify its effects. When within 60 feet of an ally using a bardic performance or raging song, you can expend a round of your own bardic performance as a free action to increase the morale or competence bonuses granted by your ally's performance by +1 for that round.",
     shortDescription: "Expend bardic performance to boost ally's performance bonuses by +1",
     source: 'Champions of Balance',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'basic_harmony' },
@@ -221,6 +232,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You can assist an ally in disabling a trap. When an ally with this feat fails a Disable Device check to disarm a trap, you can spend an immediate action to allow them to immediately attempt the check again using your Disable Device bonus if it is higher than theirs.',
     shortDescription: 'Ally may immediately retry failed Disable Device check using your bonus',
     source: 'Pathfinder Module: Master of the Fallen Fortress',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'skill', skillId: 'disable_device', ranks: 1 },
@@ -237,6 +249,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You are adept at working with allies to target your foes with ranged attacks. Whenever an ally with this feat threatens an opponent in melee combat, you gain a +1 bonus on ranged attack rolls against that opponent. If your ally is flanking that opponent, this bonus increases to +2.',
     shortDescription: '+1 ranged attack vs. melee-threatened foe; +2 if ally flanking',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'feat', featId: 'point_blank_shot' }],
     effects: [
@@ -265,6 +278,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       "Expend bardic performance to increase the same performance's morale/competence bonuses by +1",
     source: 'Champions of Balance',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'basic_harmony' },
@@ -283,6 +297,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You use your ranged attacks to force enemies to keep their heads down, giving your allies the opportunity to act. As a standard action, you can use the aid another action with a ranged weapon. The ally you are aiding gains a +2 bonus to AC against the next attack made by the opponent you targeted, rather than you making an attack.',
     shortDescription: 'Use aid another with ranged weapon to grant ally +2 AC vs. targeted foe',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'feat', featId: 'point_blank_shot' }],
     effects: [
@@ -310,6 +325,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'When an ally fails a disarm combat maneuver against an opponent within your melee reach, you can make a disarm attempt against that opponent as an immediate action.',
     shortDescription: 'Attempt disarm as immediate action when ally fails disarm in your reach',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -324,6 +340,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Make AoO and disarm attempt as immediate action when ally fails disarm in your reach',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'disarm_partner' },
@@ -340,6 +357,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'When an ally charges a foe, you can take advantage of the distraction. Whenever an ally with this feat charges an opponent, you gain a +2 bonus on attack rolls against that opponent until the start of your next turn.',
     shortDescription: '+2 attack rolls vs. foe an ally just charged',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [],
     effects: [
@@ -366,6 +384,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You can combine your elemental spells with those of an ally to create powerful synergistic effects. When you cast a spell with an elemental descriptor and an ally with this feat casts a spell with a different elemental descriptor targeting the same area or creature within 1 round, both spells deal +1 die of damage of their respective types.',
     shortDescription: 'Combine elemental spells with ally for +1 die of damage each',
     source: 'Blood of the Elements',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'caster_level', minimum: 1 }],
     effects: [],
@@ -380,6 +399,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 competence bonus on Perform checks per participating ally with this feat (max +6)',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'perform', ranks: 5 }],
     effects: [
@@ -406,6 +426,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'Your assistance to your bonded partner is more effective than usual. When you use the aid another action to assist an ally who also has the Bonded Mind feat, the bonus granted by your aid another increases from +2 to +4.',
     shortDescription: 'Aid another grants +4 instead of +2 to allies with Bonded Mind',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'feat', featId: 'bonded_mind' }],
     effects: [],
@@ -419,6 +440,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       "You can extend the protection of your armor to an adjacent ally. As a swift action, you can grant an adjacent ally a circumstance bonus to AC equal to half your armor's armor bonus until the start of your next turn. While doing so, you lose your armor's armor bonus to your own AC.",
     shortDescription: 'Grant adjacent ally half your armor bonus to AC; lose armor bonus yourself',
     source: 'Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [],
     effects: [],
@@ -432,6 +454,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'When you and an adjacent ally are both raging, your reckless aggression is tempered by mutual encouragement. While raging and adjacent to an ally with this feat who is also raging, the penalty to AC from rage is reduced by 2 for both of you.',
     shortDescription: 'Reduce AC penalty from rage by 2 when adjacent raging ally has this feat',
     source: "Pathfinder Player Companion: Adventurer's Armory 2",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -449,6 +472,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 Will save per 5 damage dealt by adjacent ally (max +4) vs. mind-affecting effects',
     source: 'Orcs of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'hobgoblin_discipline' },
@@ -466,6 +490,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Aid another AC bonus also prevents ally from being flanked or flat-footed vs. that foe',
     source: 'Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -482,6 +507,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'Your familiar can share spells with the allies of its master. When you cast a spell with a target of "you" on your familiar, you can have that spell also affect up to one ally within 5 feet of your familiar per 3 caster levels you possess, as long as those allies also have this feat.',
     shortDescription: 'Spells cast on familiar can also affect nearby allies with this feat',
     source: 'Pathfinder Campaign Setting',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'special', description: 'Familiar with share spells ability' }],
     effects: [],
@@ -496,6 +522,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Grant ally +2 on bull rush/trip vs. larger foes; you can trip/bull rush creatures two sizes larger',
     source: 'Pathfinder Campaign Setting',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -514,6 +541,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'When you and an ally charge the same opponent in the same round, you overwhelm the target with your combined assault. If you charge an opponent in the same round that an ally with this feat charges the same opponent, you gain a +2 bonus on attack rolls and damage rolls on the first attack made as part of that charge.',
     shortDescription: '+2 attack and damage on charge when ally also charges same foe',
     source: 'Orcs of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'bab', minimum: 1 },
@@ -558,6 +586,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Duck and Cover ally with evasion/improved evasion takes reduced or no damage',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'feat', featId: 'duck_and_cover' }],
     effects: [],
@@ -571,6 +600,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You can share ongoing spells with your companion creature more effectively. When you have a spell with a duration of at least 1 round active and your companion creature is within 5 feet of you, you can divide the remaining duration of that spell between yourself and your companion. Each of you receives half the remaining duration.',
     shortDescription: 'Divide active spell duration between yourself and companion creature',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       {
@@ -589,6 +619,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You can swap places with allies of different sizes. When you use the Swap Places feat, you can switch places with a Small or Large ally without either of you provoking attacks of opportunity, as long as your ally is willing.',
     shortDescription: 'Swap Places also works with differently-sized allies without provoking AoOs',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'feat', featId: 'swap_places' }],
     effects: [],
@@ -603,6 +634,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Attempt dirty trick as immediate action when ally uses combat maneuver to add second condition',
     source: 'Pathfinder Society Scenario',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'combat_expertise' },
@@ -621,6 +653,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You can step in front of a charging foe to protect your ally. When a foe charges an ally with this feat, you can move up to your speed as an immediate action to place yourself in the path of the charge and become the new target of the charge. The foe must continue the charge against you.',
     shortDescription: 'Move up to speed as immediate action to intercept a charge aimed at an ally',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [],
     effects: [],
@@ -634,6 +667,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       "You can exploit the special qualities of your ally's weapon. When you are adjacent to an ally with this feat, you can treat your melee attacks as if they were made with your ally's weapon for the purpose of using the weapon's special qualities (such as bane, flaming, or vorpal). This does not grant you proficiency with the ally's weapon.",
     shortDescription: "Use an adjacent ally's weapon special qualities on your own attacks",
     source: 'Pathfinder Module: Master of the Fallen Fortress',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -651,6 +685,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       "When you use the aid another action to help an ally's attack roll against a specific opponent, that ally's attack ignores the opponent's shield bonus to AC.",
     shortDescription: "Aid another attack bonus also lets ally ignore target's shield AC bonus",
     source: 'Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -668,6 +703,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Feint in bright light to give adjacent ally the feint benefit instead of yourself',
     source: 'Pathfinder Campaign Setting',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 3 },
@@ -685,6 +721,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Flank opponents two or more size categories larger when ally also threatens them',
     source: 'Dungeon Denizens Revisited',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [],
     effects: [],
@@ -699,6 +736,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Sacred bonus to AC and saves equal to number of adjacent allies with feat (max +4)',
     source: 'Champions of Purity',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'bab', minimum: 3 },
@@ -741,6 +779,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Your melee hit causes allies to ignore up to 5 DR on that foe until your next turn',
     source: 'Pathfinder Society Scenario',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'bab', minimum: 6 }],
     effects: [],
@@ -755,6 +794,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 Intimidate and +2 morale bonus on Will saves when adjacent to allies with feat',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [
@@ -794,6 +834,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Allies within 60 ft with feat leave no tracks and gain +2 Survival in natural terrain',
     source: 'Pathfinder Campaign Setting',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'survival', ranks: 1 }],
     effects: [
@@ -820,6 +861,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You have developed a secret language of gestures and code words with your allies. When passing a secret message to an ally who also has this feat using Bluff, you gain a +5 circumstance bonus on the Bluff check.',
     shortDescription: '+5 circumstance bonus on Bluff to pass secret messages to allies with feat',
     source: 'Champions of Balance',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 1 },
@@ -850,6 +892,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You can channel healing magic to your companion creature from a distance. Whenever a spell or effect heals you of hit point damage and your companion creature is within 30 feet, you can redirect any portion of that healing to your companion instead.',
     shortDescription: 'Redirect healing spells to companion creature within 30 feet',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       {
@@ -869,6 +912,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 concentration per adjacent ally with feat aiding your concentration checks',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [
@@ -897,6 +941,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Make a bite attack as a swift action when flanking with an ally with this feat',
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'bab', minimum: 9 },
@@ -913,6 +958,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You can designate an ally to deliver your touch spells. When you cast a touch spell, you can designate an ally who also has the Bonded Mind feat as the toucher. That ally can deliver the spell as a touch attack on their next turn as if they had cast the spell themselves.',
     shortDescription: 'Designate Bonded Mind ally to deliver your touch spells on their turn',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'bonded_mind' },
@@ -932,6 +978,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       "Gain bonus on caster level check vs. SR equal to twice ally's die roll if they tried within 1 round",
     source: 'Pathfinder Society Scenario',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'feat', featId: 'spell_penetration' }],
     effects: [],
@@ -946,6 +993,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       "Once per round, copy a morale bonus from a nearby ally's spell/effect to one of your rolls",
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [],
@@ -960,6 +1008,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Throw splash weapon to ally who can redirect it at a different target as immediate action',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -973,6 +1022,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'Working in tandem, you and your allies are more skilled at avoiding notice. While you can see an ally with this feat and both of you are trying to use Stealth, you can take the highest die result among all participating allies and apply it to all of your Stealth checks.',
     shortDescription: 'Use highest die result among all allies with feat for all Stealth checks',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [],
@@ -987,6 +1037,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Move to stay adjacent to a moving ally as immediate action; become staggered until next turn',
     source: 'Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [],
@@ -1001,6 +1052,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'As immediate action, absorb up to half damage from attack hitting an adjacent Bonded Mind ally',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'bonded_mind' },
@@ -1018,6 +1070,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain evasion or improved evasion vs. dragon breath/tail sweep near ally with feat',
     source: 'Dungeon Denizens Revisited',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -1035,6 +1088,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Attempt Sleight of Hand as immediate action when ally uses Bluff to distract target',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 1 },
@@ -1052,6 +1106,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 on attack rolls and skill checks for readied actions triggered by ally actions',
     source: 'Pathfinder Module: Master of the Fallen Fortress',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [
@@ -1079,6 +1134,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 CMB to trip flanked foe, increasing by +1 each consecutive round (max +4)',
     source: 'Rival Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'combat_expertise' },
@@ -1095,6 +1151,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
       'You and an ally can swap your initiative rolls at the start of combat. At the start of a combat encounter, before sides are determined, you and an adjacent ally who also has this feat can swap your initiative die rolls with each other.',
     shortDescription: 'Swap initiative roll results with an adjacent ally before combat begins',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [],
@@ -1109,6 +1166,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Share saving throw results with nearby ally against enchantment/emotion effects',
     source: 'Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [],
@@ -1123,6 +1181,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Treated as one size larger for combat maneuvers when adjacent to Medium+ ally with feat',
     source: 'Kobolds of Golarion',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [{ type: 'special', description: 'Small size or smaller' }],
     effects: [],
@@ -1137,6 +1196,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Attack flanked foe recklessly; deal extra damage but risk hitting ally on misses',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'power_attack' },
@@ -1154,6 +1214,7 @@ export const TEAMWORK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Allies within 30 ft can make ranged attacks as immediate action when you use Broken Wing Gambit',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'broken_wing_gambit' },

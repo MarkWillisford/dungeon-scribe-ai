@@ -7,6 +7,7 @@ const testFeat: FeatDefinition = {
   name: 'Test Feat',
   description: 'A test feat',
   source: 'Test',
+  verificationStatus: 'needs_review',
   types: ['general'],
   prerequisites: [],
   effects: [],
@@ -19,6 +20,7 @@ const combatFeat: FeatDefinition = {
   name: 'Combat Test',
   description: 'A combat feat',
   source: 'Test',
+  verificationStatus: 'needs_review',
   types: ['combat'],
   prerequisites: [],
   effects: [

@@ -9,6 +9,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
       "You and your apparent allies gain a +2 bonus on skill checks to gain influence or request a favor. This bonus ends against individuals or organizations where you've failed relevant checks. Sense Motive checks against you and allies increase by DC 2.",
     shortDescription: '+2 on influence/favor checks; Sense Motive against you is harder.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -36,6 +37,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
       'You are skilled at defusing tense situations and mediating disputes. You gain a +2 bonus on Diplomacy checks to improve attitudes and on Sense Motive checks to determine enchantment effects on others.',
     shortDescription: '+2 Diplomacy to improve attitudes and Sense Motive vs. enchantments.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'diplomacy', ranks: 3 },
@@ -68,6 +70,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Take 10 on Intimidate; use Knowledge (local) for verbal duel presence tactic.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -94,6 +97,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
       'Once per day, you can choose to take the maximum possible weapon damage die roll rather than rolling when you hit a foe that is unaware of you or considers you an ally. Bonus dice from sneak attack, surprise attack, and Vital Strike are rolled normally. Upon completing the story goal, this becomes usable once per combat.',
     shortDescription: 'Maximize weapon damage once/day vs. unaware foes; once/combat after goal.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -122,6 +126,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Counter divinations with false info; Will save to negate info-gathering after goal.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -150,6 +155,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     shortDescription:
       "Treat class level as +1 or ability score as +2 for one class feature's effects.",
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -178,6 +184,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Hypnotic stare targets lose awareness of nearby creatures; enables allied Stealth.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Allure bold stare improvement' },
@@ -203,6 +210,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
       'When you succeed at a Diplomacy check to make a request by 5 or more, the DCs of additional requests you attempt increase by 1 per request, rather than the normal 5.',
     shortDescription: 'Successful requests only raise DC by 1 instead of 5 for follow-up requests.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -231,6 +239,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 saves vs. divine/outsider effects; +1 attack vs. divine casters you save against.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 1 },
@@ -263,6 +272,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
       'When you gain this feat, and every 2 character levels thereafter, either you gain 1 skill point or your Fame score increases by 1 (if using the reputation system from Ultimate Campaign).',
     shortDescription: 'Gain 1 skill point or +1 Fame every 2 levels.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -289,6 +299,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
       'After interacting with a target for at least 1 hour, you can make a DC 20 Sense Motive check to intuit their loyalty to a deity, patron, or government. The creature can oppose this with a Bluff check. You can attempt to identify one specific loyalty per 2 ranks of Sense Motive by introducing relevant topics into conversation. Introducing topics yourself may alert observers.',
     shortDescription: "Sense Motive to detect a target's loyalties after 1 hour of interaction.",
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_nobility', ranks: 1 },
@@ -314,6 +325,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     shortDescription:
       "Treat one ability score as +2 for a selected class feature's effects and DCs.",
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -342,6 +354,7 @@ export const SPYMASTER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use Sense Motive ranks as Will save 1/day; +5 DC vs. Bluff/Intimidate after goal.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 1 },

@@ -8,6 +8,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Spirit Rebuke',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You can channel your willpower against supernatural entities. Choose one spirit category: fey, outsiders, or undead. Once per day as a standard action, target a single visible spirit (or one possessing a creature within 30 feet) to either attempt a dispel check (using character level as caster level, DC 11 + spell level, +2 bonus when ending possession) or deal 1d6 damage per 2 character levels (Will save DC 10 + half character level + Charisma modifier halves). This feat may be selected up to three times; each selection targets a different spirit category and grants one additional daily use.',
     shortDescription: 'Once per day, dispel magic from or damage a chosen spirit type.',
@@ -39,6 +40,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Spirit Sight',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'Invisible fey, outsiders, and undead are treated as having only concealment rather than total concealment against you. Such creatures cannot gain the normal attack roll bonus granted by invisibility or ignore your Dexterity bonus to AC, though they retain any concealment benefit from physical cover or Stealth.',
     shortDescription:
@@ -72,6 +74,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Storm-Lashed',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You have developed resilience through prolonged exposure to severe weather. In rainy conditions, visibility is reduced only by one-quarter (instead of half) and you take only a -2 penalty on Perception checks. You are treated as one size category larger for the purposes of wind effects. Penalties on Perception checks from high winds are halved. You gain a +2 bonus on saving throws against effects with the electricity descriptor or that deal electricity damage.',
     shortDescription: 'Resist weather penalties; +2 saves vs. electricity effects.',
@@ -101,6 +104,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Tag-Team Interrogation',
     types: ['teamwork'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "When two characters with this feat work together to influence a creature's attitude, one uses Diplomacy while the other uses Intimidate simultaneously. If both checks succeed, the character using the feat chooses which skill's effect applies, and the unused check grants a +5 circumstance bonus to the chosen effect. If only one check succeeds, that skill's effect applies at half its normal duration. Mutual failure results in both checks' effects applying as normal.",
     shortDescription:
@@ -135,6 +139,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Tribal Hunter',
     types: ['combat', 'teamwork'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'When either you or an ally with this feat is adjacent to and flanking an opponent that is larger than either of you, you both are considered to be flanking the opponent as long as you remain adjacent to it.',
     shortDescription:
@@ -163,6 +168,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Tribal Scars',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You endured the grueling coming-of-age rituals of your tribe or following, and proudly bear the scars that grant you the blessings of your people. Choose one of the following benefits based on your affiliation — Bearpelt: +1 on Fortitude saves, +2 on Intimidate checks; Greattusk: +2 on bull rush and overrun combat maneuver checks, +2 on Ride checks; Ice Chasm: +1 on Reflex saves, +2 on Climb checks; Night Hunt: +2 on Perception and Survival checks; Raptorscale: +5 feet to base land speed, +2 on Acrobatics checks; Slothjaw: +1 on Will saves, +2 on Handle Animal checks.',
     shortDescription: 'Bear tribal scars granting a choice of skill and save bonuses.',
@@ -191,6 +197,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Twilight Tattoo',
     types: ['general'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'You possess a special tattoo that identifies you as a Twilight Talon when you speak a designated command word. The marking remains invisible and magically concealed, showing no magical aura while hidden and cannot be detected through magical observation. Upon speaking the command word, the tattoo becomes visible for 1 round before fading. You gain a +2 bonus on Disguise checks, a +2 bonus on Sleight of Hand checks to conceal small objects on your person, and a +2 bonus on Will saves against scrying attempts and mind-reading effects.',
     shortDescription:
@@ -242,6 +249,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Unblinking Flame Feint',
     types: ['combat', 'style'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'While using Perfect Style, you use your Wisdom modifier instead of your Charisma modifier when making Bluff checks to feint opponents. You can spend 1 ki point as a swift action to gain the benefits of Improved Feint for 1 round.',
     shortDescription: 'Use Wisdom for feinting; spend 1 ki for Improved Feint for 1 round.',
@@ -275,6 +283,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Unblinking Flame Fist',
     types: ['combat', 'style'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'When using Perfect Style, the save DC for your Stunning Fist attacks increases by 2 against flat-footed opponents. Additionally, when you spend 1 ki point to gain Improved Feint benefits for 1 round (via Unblinking Flame Feint), you can attempt a feint as part of your movement during a charge action.',
     shortDescription:
@@ -312,6 +321,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Unbreakable',
     types: ['combat'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "Each time you receive 1 hit point from your fighter's favored class bonus, you gain 1 additional hit point. Your effective Constitution score is treated as 4 higher than normal for the purposes of determining when you die from hit point loss.",
     shortDescription: 'Bonus HP from fighter favored class; effective Con +4 for death threshold.',
@@ -346,6 +356,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Unfolding Wind Strike',
     types: ['combat', 'style'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'While using Perfect Style, you double the range increment of thrown weapons. You can spend 1 ki point as a swift action to grant a number of thrown weapons equal to your Wisdom modifier either the returning or seeking weapon special ability for 1 round.',
     shortDescription:
@@ -379,6 +390,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Unfolding Wind Rush',
     types: ['combat', 'style'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'When using Perfect Style with thrown weapons, you can combine a full-attack action with a single move action. You forfeit your highest bonus attack but execute remaining attacks normally at any point during your movement. By spending 1 ki point as a swift action, you generate a wind barrier along your movement path functioning as wind wall for 1 round; this does not obstruct your own ranged attacks.',
     shortDescription:
@@ -418,6 +430,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Untwisting Iron Strength',
     types: ['combat', 'style'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       'When using Perfect Style, your attacks ignore an amount of hardness equal to your character level. You also gain a +4 bonus on Strength checks when breaking objects. By spending 1 ki point as a swift action, you gain the benefits of Improved Sunder for 1 round.',
     shortDescription:
@@ -463,6 +476,7 @@ export const ADVENTURERS_GUIDE_FEATS_3: FeatDefinition[] = [
     name: 'Untwisting Iron Skin',
     types: ['combat', 'style'],
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
     description:
       "Your training has tempered your flesh to resist blows as though it were forged iron. While using Perfect Style, you gain damage reduction equal to one-third your character level (maximum DR 6) vs. adamantine. Breaking items with hardness 10 or higher grants temporary DR 1/\u2014 for a number of rounds equal to half the broken item's hit points (maximum 10 rounds); this DR increases by 1 for every 5 points of hardness above 10. You may spend 1 ki point as a swift action to double either of these DR benefits for 1 round.",
     shortDescription:

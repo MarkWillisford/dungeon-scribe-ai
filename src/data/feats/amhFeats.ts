@@ -8,6 +8,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     description: 'Select one advanced armor training option. You learn that technique.',
     shortDescription: 'Learn one advanced armor training option.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'class_feature', featureName: 'armor training' },
@@ -24,6 +25,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'Select one type of armor, such as chain shirt or splint mail. The AC bonus granted by the selected armor increases by 1. This feat can be taken multiple times; each time, it applies to a different type of armor.',
     shortDescription: '+1 AC bonus from selected armor type.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 1 },
@@ -54,6 +56,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Reduce armor check penalty by 1 for selected armor; use character level for armor mastery feat prerequisites.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'armor_focus' },
@@ -71,6 +74,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       "Select one armor trick option (light armor tricks, medium armor tricks, heavy armor tricks, or shield tricks). You can use any armor tricks related to the chosen armor option if you meet the trick's prerequisites and are proficient with any armor that you use as part of the trick. You can gain Armor Trick multiple times.",
     shortDescription: 'Gain access to armor tricks for chosen armor category.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -84,6 +88,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       "You can exploit the special properties of your armor's material. You can use the associated ability twice per day. The ability available depends on your armor's special material (for example, adamantine armor lets you convert half of lethal damage to nonlethal as an immediate action after being hit).",
     shortDescription: "Activate your armor's special material ability twice per day.",
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 6 },
@@ -100,6 +105,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'You can use the ability granted by Armor Material Expertise two additional times per day.',
     shortDescription: '+2 additional daily uses of Armor Material Expertise.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'armor_material_expertise' },
@@ -117,6 +123,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       "When you would take falling damage, you can direct half the damage you would take to your armor instead. This damage ignores the armor's hardness.",
     shortDescription: 'Direct half of falling damage to your armor.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'class_feature', featureName: 'armor training' },
@@ -133,6 +140,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'Once per round when a foe successfully hits you with an attack of opportunity, you can expend a use of an attack of opportunity to take a 5-foot step. You can do this even if you have already taken a 5-foot step.',
     shortDescription: 'When hit by an AoO, expend an AoO to take a 5-foot step.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 6 },
@@ -150,6 +158,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'You can use Ironclad Reactions more than once per round, but not more than once for each act you take that provokes an attack of opportunity. Each 5-foot step taken this way still expends one of your available attacks of opportunity.',
     shortDescription: 'Use Ironclad Reactions once per act that provokes an AoO.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_reflexes' },
@@ -169,6 +178,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'You treat your size as one category larger for the purposes of determining the size of creatures against which you can attempt bull rush, drag, overrun, and trip combat maneuvers.',
     shortDescription: 'Treat size as one category larger for bull rush, drag, overrun, and trip.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 6 },
@@ -186,6 +196,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'When you are using Power Attack, you gain a +1 bonus to your CMD until the beginning of your next turn. When your base attack bonus reaches +4, and every 4 points thereafter, this bonus increases by another 1.',
     shortDescription: '+1 CMD (scaling) while using Power Attack.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -218,6 +229,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'When you successfully hit a creature that is no more than one size category larger than yourself while using Power Attack, that creature takes a –4 penalty to its CMD against combat maneuvers that move it or knock it prone until the start of your next turn.',
     shortDescription: 'Hits with Power Attack impose –4 CMD penalty vs. movement/trip maneuvers.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -238,6 +250,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'You treat your size as two categories larger for the purposes of determining the size of creatures against which you can attempt bull rush, drag, overrun, and trip combat maneuvers.',
     shortDescription: 'Treat size as two categories larger for bull rush, drag, overrun, and trip.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'poised_bearing' },
@@ -256,6 +269,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'When you are hit by a confirmed critical hit or a sneak attack, there is a 25% chance that the critical hit or sneak attack is negated and damage is instead rolled normally. This chance stacks with the light fortification and moderate fortification armor special abilities.',
     shortDescription: '25% chance to negate critical hits or sneak attacks.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 11 },
@@ -272,6 +286,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     description: "You add your armor's enhancement bonus as a bonus on your initiative checks.",
     shortDescription: 'Add armor enhancement bonus to initiative.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -290,6 +305,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       "When you fall 10 or more feet, you can direct half of the falling damage you would take to your shield instead. This damage ignores the shield's hardness.",
     shortDescription: 'Direct half of falling damage (10+ ft) to your shield.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'shield_focus' },
@@ -307,6 +323,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 AC against attacks of opportunity; counts as Dodge and Mobility for prerequisites.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'shield_focus' },
@@ -335,6 +352,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     description: "You add your shield's bonus to AC to the DC of feint attempts against you.",
     shortDescription: "Add shield's AC bonus to the DC of feints against you.",
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'shield_focus' },
@@ -352,6 +370,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'When you use the Ray Shield feat, your shield is not affected by the deflected ranged touch attack.',
     shortDescription: 'Your shield is unharmed when using Ray Shield to deflect attacks.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 17 },
@@ -371,6 +390,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'No AoO for bull rush/overrun while charging; +2 CMB if you have Improved Bull Rush or Improved Overrun.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'shield_focus' },
@@ -387,6 +407,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       "You can exploit the special properties of your shield's material. You can use the associated ability twice per day. The ability available depends on the shield's special material.",
     shortDescription: "Activate your shield's special material ability twice per day.",
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'shield_focus' },
@@ -403,6 +424,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'You can use the ability granted by Shield Material Expertise two additional times per day.',
     shortDescription: '+2 additional daily uses of Shield Material Expertise.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'shield_focus' },
@@ -421,6 +443,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Reduce shield arcane spell failure by 15%; complete somatic components with shield hand.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'shield_focus' },
@@ -437,6 +460,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'As a swift action, you can prevent yourself or an adjacent ally from provoking an attack of opportunity when standing from prone or when picking up an object from the ground.',
     shortDescription: 'Swift action: prevent AoO for standing from prone or picking up an object.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'shield_focus' },
@@ -453,6 +477,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'Creatures struck by your shield bash take a –2 penalty to their AC until the end of your next turn.',
     shortDescription: 'Shield bash imposes –2 AC penalty on target until your next turn.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_shield_bash' },
@@ -471,6 +496,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'After shield bash, swift action to trip at –5 penalty without provoking AoO.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_shield_bash' },
@@ -490,6 +516,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Tower shield armor check penalty reduced by 3; apply armor training benefits to tower shields.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'shield_focus' },
@@ -507,6 +534,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'While using this style, you gain a +4 bonus on combat maneuver checks to overrun an opponent. If you wear medium armor, you gain a +3 bonus instead, and if you wear light armor, you gain a +2 bonus instead.',
     shortDescription: '+4 bonus on overrun CMB while in heavy armor (lower in lighter armor).',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['style', 'combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -539,6 +567,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Jump bonus equal to STR while in Bulette style; overrun multiple foes with cumulative –2 penalty.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['style', 'combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 15 },
@@ -558,6 +587,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'While you are using Bulette Charge Style, whenever you succeed at an overrun combat maneuver check against a foe, that foe takes an amount of damage equal to 1d8 (if you are Medium) or 1d6 (if you are Small) + 1/2 your armor bonus to AC + 1-1/2 times your Strength bonus.',
     shortDescription: 'Successful overrun deals 1d8 + 1/2 armor bonus + 1.5× STR damage.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['style', 'combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 15 },
@@ -579,6 +609,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 attack rolls after moving 10+ ft; Mobility AC bonus vs. AoO from ranged attacks.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['style', 'combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -614,6 +645,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Move up to twice speed when using Shot on the Run or Spring Attack while in Spring-Heeled Style.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['style', 'combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -636,6 +668,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'While in Spring-Heeled Style, make two melee attacks against different targets when using Spring Attack or Shot on the Run.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['style', 'combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 17 },
@@ -658,6 +691,7 @@ export const AMH_FEATS: FeatDefinition[] = [
       'While using this style, treat the armor check penalty of your armor as if it were 1 less than normal, and the maximum Dexterity bonus to AC of your armor as if it were 1 higher than normal. These benefits stack with armor training.',
     shortDescription: 'Armor check penalty –1 and max Dex bonus +1 while in Swift Iron Style.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['style', 'combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -676,6 +710,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once/day (more at higher BAB) while in Swift Iron Style, treat all extra damage dice as 1s when hit.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['style', 'combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -695,6 +730,7 @@ export const AMH_FEATS: FeatDefinition[] = [
     shortDescription:
       'Armor does not reduce movement when charging, running, or taking only a move action.',
     source: "Armor Master's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['style', 'combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },

@@ -9,6 +9,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
       "You can infuse a spell with the devastating power of the Horsemen of the Apocalypse. When applied to a spell with an area of effect and instantaneous duration, all surfaces within the area become difficult terrain, and Climb, Fly, and Swim checks made within the area suffer a penalty equal to the spell's original spell level. These effects persist for a number of rounds equal to the spell's original spell level. The spell gains the evil descriptor. An apocalyptic spell uses a spell slot one level higher than the spell's actual level. An apocalyptic spell cannot be applied to spells with the good descriptor.",
     shortDescription: 'Area spell creates difficult terrain and skill penalties for several rounds',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -23,6 +24,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
       "You can modify a single-target spell to enforce law-like restrictions. When you cast an authoritative spell, select one prohibited action: moving closer to you, moving away from you, making melee attacks, making ranged attacks, casting offensive spells, or casting non-offensive spells. Creatures that fail their saving throw against the spell cannot perform the selected action on their next turn. The spell gains the lawful descriptor and functions as a mind-affecting compulsion effect. An authoritative spell uses a spell slot two levels higher than the spell's actual level. It cannot be applied to spells with the chaotic descriptor.",
     shortDescription: 'Single-target spell compels creatures to avoid one action type on failure',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -37,6 +39,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Failed Diplomacy checks only hurt attitude on failure by 10+; can speak across language barriers',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['conduit'],
     prerequisites: [
       { type: 'skill', skillId: 'diplomacy', ranks: 3 },
@@ -55,6 +58,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Shroud yourself in fire; melee attackers take 1d6 + half Know(planes) ranks fire damage',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'conduit'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_planes', ranks: 3 }],
     effects: [
@@ -83,6 +87,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Single-target spells impose -2 attack/damage or grant +2 morale on skills/saves for 1 round',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -97,6 +102,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Expend channel energy to grant invoke deity benefits or infuse an ally with deific power',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'alignment_channel' },
@@ -116,6 +122,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Swift action: gain a 1d6 slam natural attack for minutes/day equal to Know(planes) ranks',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['conduit'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_planes', ranks: 3 }],
     effects: [
@@ -144,6 +151,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Damaging spell gains death descriptor; undead become sickened; victims hard to resurrect',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -158,6 +166,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Negative energy field damages swarms and plant effects but harms you each turn',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['conduit'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_planes', ranks: 5 }],
     effects: [],
@@ -172,6 +181,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use dimension door (up to 2x base speed) once/day plus once per 5 Know(planes) ranks',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['conduit'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_planes', ranks: 9 }],
     effects: [],
@@ -186,6 +196,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Swift action lets you create shadow weapons as free actions for rounds equal to Know(planes) ranks',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'conduit'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_planes', ranks: 4 },
@@ -204,6 +215,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Roll damage dice one extra time with Vital Strike feats in light or heavy gravity areas',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'vital_strike' },
@@ -221,6 +233,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain the greater planar infusion ability for a plane you already have improved infusion for',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['conduit'],
     prerequisites: [
       { type: 'feat', featId: 'improved_planar_infusion' },
@@ -238,6 +251,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
       'When performing a Subjective Slam, the penalty to the combat maneuver check is reduced to -1 for every 100 feet of falling speed (rather than the normal penalty). The maximum damage you can deal increases to 12d6.',
     shortDescription: 'Subjective Slam has reduced CMB penalty and deals up to 12d6 damage',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 15 },
@@ -258,6 +272,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Treat deadly wounds faster with no kit penalty; exceed DC by 10 to add Know(planes) ranks to healing',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['conduit'],
     prerequisites: [
       { type: 'skill', skillId: 'heal', ranks: 1 },
@@ -275,6 +290,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Emit holy light; at 15 Know(planes) ranks, evil creatures within 30 ft must save or become sickened',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['conduit'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_planes', ranks: 1 }],
     effects: [],
@@ -289,6 +305,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ignore heavy gravity plane penalties; treat Strength as 4 higher for carrying capacity',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Strength 17 or the Endurance feat' }],
     effects: [
@@ -316,6 +333,7 @@ export const PLANAR_ADVENTURES_FEATS: FeatDefinition[] = [
     shortDescription:
       'Become functionally undead for energy effects; immune to soul targeting; lose morale bonuses',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['conduit'],
     prerequisites: [{ type: 'skill', skillId: 'knowledge_planes', ranks: 9 }],
     effects: [],

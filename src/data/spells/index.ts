@@ -1,4 +1,4 @@
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 import { ABJURATION_SPELLS } from './abjurationSpells';
 import { CONJURATION_SPELLS } from './conjurationSpells';
 import { DIVINATION_SPELLS } from './divinationSpells';
@@ -9,7 +9,7 @@ import { NECROMANCY_SPELLS } from './necromancySpells';
 import { TRANSMUTATION_SPELLS } from './transmutationSpells';
 import { UNIVERSAL_SPELLS } from './universalSpells';
 
-export const ALL_SPELLS: Spell[] = [
+export const ALL_SPELLS: SpellDefinition[] = [
   ...ABJURATION_SPELLS,
   ...CONJURATION_SPELLS,
   ...DIVINATION_SPELLS,

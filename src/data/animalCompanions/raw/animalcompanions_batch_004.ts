@@ -35,6 +35,7 @@ export const hippogriff: AnimalCompanionEntry = {
   ],
   source: 'pf1e-unknown', // Inner Sea Combat pg. 14
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -70,6 +71,7 @@ export const hippopotamus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b2',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -104,6 +106,7 @@ export const hobbeHound: AnimalCompanionEntry = {
   ],
   source: 'pf1e-unknown', // Pathfinder #119: Prisoners of the Blight pg. 89
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -135,6 +138,7 @@ export const horse: AnimalCompanionEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -170,6 +174,7 @@ export const huntingCactus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-unknown', // Ultimate Wilderness pg. 183
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -203,6 +208,7 @@ export const hyena: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -237,6 +243,7 @@ export const impalerShrike: AnimalCompanionEntry = {
   ],
   source: 'pf1e-unknown', // Pathfinder #97: In Hell's Bright Shadow pg. 83
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -271,6 +278,7 @@ export const kangaroo: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -306,6 +314,7 @@ export const kaprosuchus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b5',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -341,6 +350,7 @@ export const kentrosaurus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b6',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -375,6 +385,7 @@ export const leechGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-um',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -409,6 +420,7 @@ export const lizardGiantGecko: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -443,6 +455,7 @@ export const lizardMonitor: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -476,6 +489,7 @@ export const llama: AnimalCompanionEntry = {
   ],
   source: 'pf1e-unknown', // Ultimate Wilderness pg. 180 / Animal Archive pg. 28
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -511,6 +525,7 @@ export const locustGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-unknown', // Ultimate Wilderness pg. 185
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -546,6 +561,7 @@ export const mantaRay: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b2',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -581,6 +597,7 @@ export const mantisShrimpGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-unknown', // Ultimate Wilderness pg. 185
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -616,6 +633,7 @@ export const mantisGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-um',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -651,6 +669,7 @@ export const marax: AnimalCompanionEntry = {
   ],
   source: 'pf1e-unknown', // Pathfinder #90: The Divinity Drive pg. 87
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -681,6 +700,7 @@ export const marsupialDevil: AnimalCompanionEntry = {
   ],
   source: 'pf1e-unknown', // Ultimate Wilderness pg. 180
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -716,6 +736,7 @@ export const marsupialLion: AnimalCompanionEntry = {
   ],
   source: 'pf1e-unknown', // Ultimate Wilderness pg. 180
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -750,6 +771,7 @@ export const embolotherium: AnimalCompanionEntry = {
   ],
   source: 'pf1e-unknown', // Pathfinder Adventure Path #91
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -784,6 +806,7 @@ export const glyptodon: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b2',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -818,6 +841,7 @@ export const megalania: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -850,6 +874,7 @@ export const megaloceros: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b2',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

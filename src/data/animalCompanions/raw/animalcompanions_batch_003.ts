@@ -35,6 +35,7 @@ export const elephantMastodon: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -69,6 +70,7 @@ export const elk: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b3',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -103,6 +105,7 @@ export const enchanterHeron: AnimalCompanionEntry = {
   ],
   source: 'pf1e-ap121',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -133,6 +136,7 @@ export const eohippus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -167,6 +171,7 @@ export const eurypterid: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -201,6 +206,7 @@ export const faerieMount: AnimalCompanionEntry = {
   ],
   source: 'pf1e-ap119',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -231,6 +237,7 @@ export const falcon: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -265,6 +272,7 @@ export const frilledLizardGiant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -296,6 +304,7 @@ export const frog: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -327,6 +336,7 @@ export const frogFather: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b5',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -363,6 +373,7 @@ export const gallerok: AnimalCompanionEntry = {
   ],
   source: 'pf1e-ap118',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -397,6 +408,7 @@ export const gar: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b2',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -431,6 +443,7 @@ export const giantRaven: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b6',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -466,6 +479,7 @@ export const giganotosaurus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b6',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -499,6 +513,7 @@ export const giraffe: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b4',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -534,6 +549,7 @@ export const glidingTurtle: AnimalCompanionEntry = {
   ],
   source: 'pf1e-ap121',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -568,6 +584,7 @@ export const goblinDog: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b1',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -599,6 +616,7 @@ export const goliathFrog: AnimalCompanionEntry = {
   ],
   source: 'pf1e-b5',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -634,6 +652,7 @@ export const gorthek: AnimalCompanionEntry = {
   ],
   source: 'pf1e-mc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -667,6 +686,7 @@ export const griffon: AnimalCompanionEntry = {
   ],
   source: 'pf1e-isc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -703,6 +723,7 @@ export const grizzlyBear: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -738,6 +759,7 @@ export const gulperPlant: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -772,6 +794,7 @@ export const hammerheadShark: AnimalCompanionEntry = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -808,6 +831,7 @@ export const hippocampus: AnimalCompanionEntry = {
   ],
   source: 'pf1e-isc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

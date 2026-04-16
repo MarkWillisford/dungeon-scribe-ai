@@ -9,6 +9,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'When you use Accursed Hex to target a creature with one of your hexes a second time, that creature must roll its saving throw twice and take the lower result.',
     shortDescription: 'Targets re-hexed must roll saves twice and take the lower result',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'accursed_hex' },
@@ -26,6 +27,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 bonus increase on Acrobatics/Fly; spend mythic power to treat roll as natural 20',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'acrobatic' },
@@ -60,6 +62,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 bonus increase on Perception/Sense Motive; spend mythic power to treat roll as natural 20',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'alertness' },
@@ -94,6 +97,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel affects all creatures of chosen alignment at half effect; spend 2 mythic power for full effect',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'alignment_channel' },
@@ -111,6 +115,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 bonus increase on Handle Animal/Ride; spend mythic power to cast speak with animals',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'animal_affinity' },
@@ -145,6 +150,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Arcane Armor Training activates automatically; additional 20% spell failure reduction in light armor',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'arcane_armor_training' },
@@ -162,6 +168,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Trade half damage for trip/bull rush; spend mythic power to upgrade damage to d8s',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'arcane_blast' },
@@ -179,6 +186,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Arcane Shield grants deflection bonus +half tier; spend mythic power to extend duration',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'arcane_shield' },
@@ -196,6 +204,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Arcane Strike lasts 1 minute; spend mythic power to add magic weapon property',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'arcane_strike' },
@@ -213,6 +222,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Enhanced beast manifestations: improved darkvision, rending claws, better jumping, or initiative/Survival bonuses',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'aspect_of_the_beast' },
@@ -230,6 +240,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 bonus increase on Climb/Swim; spend mythic power to treat roll as natural 20',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'athletic' },
@@ -263,6 +274,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       "Creatures you summon are considered mythic for the purpose of interacting with other mythic creatures, but don't gain mythic abilities themselves. They are subject to mythic spells and effects as 1st-tier mythic creatures. Additionally, if a summoned creature has damage reduction, that reduction becomes DR/epic.",
     shortDescription: 'Summoned creatures count as mythic; their DR becomes DR/epic',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'augment_summoning' },
@@ -280,6 +292,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Increased bleed damage and DC by tier; spend mythic power to add Constitution bleed',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'critical', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'bleeding_critical' },
@@ -298,6 +311,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend mythic power as swift action to ignore all concealment miss chances for rounds equal to tier',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'blind_fight' },
@@ -315,6 +329,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Improvised weapon damage +tier; CMD bonus equal to tier vs. sunder/disarm of improvised weapons',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'catch_off_guard' },
@@ -332,6 +347,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Attack bonus equal to channel energy dice; on miss, spend mythic power to release channel energy anyway',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'channel_smite' },
@@ -349,6 +365,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ignore allies when charging; spend mythic power for additional overrun during same charge',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'charge_through' },
@@ -366,6 +383,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Cleave/Great Cleave can reach non-adjacent foes; spend mythic power to chain unlimited attacks',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'cleave' },
@@ -383,6 +401,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Additional +2 dodge AC with Combat Expertise; spend mythic power to negate penalties for 1 minute',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_expertise' },
@@ -409,6 +428,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Unlimited attacks of opportunity per round; spend mythic power to re-attack same foe when they move',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_reflexes' },
@@ -426,6 +446,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Higher DC vs. command undead, intelligent undead get no retry; +4 bonus protecting undead from mythic takeover',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'command_undead' },
@@ -442,6 +463,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'You can create any mythic magic item for which you have the appropriate item creation feat. Additionally, you gain a +5 bonus on skill checks when creating non-mythic magic items.',
     shortDescription: 'Create mythic magic items; +5 on skill checks for non-mythic item creation',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'special', description: 'Any item creation feat' },
@@ -472,6 +494,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Auto-confirm criticals vs. non-mythic; fortification must roll twice to negate',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },
@@ -488,6 +511,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'The number of critical feats you may apply on a critical hit increases by 1 for every 3 tiers you possess, in addition to the number granted by the base Critical Mastery feat.',
     shortDescription: 'Apply additional critical feats on criticals, scaling with tiers',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'critical_mastery' },
@@ -506,6 +530,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Coup de grace dazed/staggered non-mythic foes; Fortitude save penalty equal to tier',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'dastardly_finish' },
@@ -523,6 +548,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Dazzling Display as standard/move/swift action with penalties; spend mythic power to frighten instead of shake',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'dazzling_display' },
@@ -540,6 +566,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Deadly Aim grants +3 ranged damage (instead of +2), scaling by +3 per +4 BAB',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'deadly_aim' },
@@ -557,6 +584,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend mythic power on Deadly Stroke to potentially instantly kill non-mythic living creatures',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'deadly_stroke' },
@@ -574,6 +602,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Charging from above increases critical multiplier by 2; free trip attempt on successful aerial charge',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'death_from_above' },
@@ -591,6 +620,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 bonus increase on Bluff/Disguise; spend mythic power to treat roll as natural 20',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'deceitful' },
@@ -623,6 +653,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     description: 'The range of your darkvision increases by 10 feet per mythic tier.',
     shortDescription: 'Darkvision range increases by 10 feet per tier',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'deepsight' },
@@ -639,6 +670,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'You add half your mythic tier to your Combat Maneuver Defense (CMD). This bonus stacks with other bonuses to CMD.',
     shortDescription: '+half mythic tier to CMD',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'defensive_combat_training' },
@@ -656,6 +688,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Deflect additional ranged attacks per round equal to half tier; spend mythic power to deflect ray spells',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'deflect_arrows' },
@@ -673,6 +706,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 bonus increase on Disable Device/Sleight of Hand; spend mythic power to treat roll as natural 20',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'deft_hands' },
@@ -706,6 +740,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'You gain the benefits of Detect Expertise instantaneously, without the standard 3-round observation period. Additionally, non-mythic creatures lose their ability to make Will saves against this effect.',
     shortDescription: 'Detect Expertise benefits are immediate; non-mythic creatures cannot resist',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'detect_expertise' },
@@ -723,6 +758,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Defensive spellcasting DC further increased by half tier; non-mythic spellcasters always hindered',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'disruptive' },
@@ -738,6 +774,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     description: 'Thrown weapons wielded by you have twice their normal range.',
     shortDescription: 'Thrown weapon range doubled',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 17 },
@@ -756,6 +793,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Divine Interference penalty doubled; spend mythic power to triple the penalty',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'divine_interference' },
@@ -773,6 +811,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Dodge bonus increased by 1; spend mythic power as immediate action for +10 dodge vs. one attack',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'dodge' },
@@ -799,6 +838,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Dreadful Carnage affects non-mythic foes within 60 feet; spend mythic power to frighten instead of shake',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'dreadful_carnage' },
@@ -816,6 +856,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Drink alcohol as swift action for polypurpose panacea benefit; spend mythic power to remove conditions',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 19 },
@@ -832,6 +873,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       "You can follow two mythic paths. Upon selecting this feat, you gain a 1st-tier ability from a second mythic path. Whenever you gain a new path ability, you may select from either of your two paths' ability lists or from universal path abilities.",
     shortDescription: 'Follow two mythic paths; choose abilities from either path',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'special', description: '1st mythic tier' }],
     effects: [],
@@ -846,6 +888,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ignore up to –10 distance penalty on Perception; spend mythic power to eliminate all distance penalties for 1 round',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'eagle_eyes' },
@@ -863,6 +906,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain bloodline powers from Eldritch Heritage at character level (first power) or level –2 (others)',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'eldritch_heritage' },
@@ -880,6 +924,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel against any elemental subtype; spend mythic power to affect two subtypes simultaneously',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'elemental_channel' },
@@ -897,6 +942,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Elemental Fist deals 1d8 extra damage; bonus daily uses equal to tier; spend mythic power to apply to all attacks',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'elemental_fist' },
@@ -914,6 +960,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 to Elemental Focus DC; spend mythic power to force targets to roll saves twice (take lower)',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'elemental_focus' },
@@ -931,6 +978,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ignore standard concealment with bows; reroll total concealment miss chances',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'elven_accuracy' },
@@ -948,6 +996,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Endurance bonus increases by half tier; halve non-lethal damage from fatigue sources; rest in heavy armor',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'endurance' },
@@ -965,6 +1014,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Ignore material components up to 10 gp/tier; spend mythic power to increase this limit',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'eschew_materials' },
@@ -980,6 +1030,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     description: 'You gain two extra uses of mythic power each day.',
     shortDescription: '+2 daily uses of mythic power',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'special', description: '1st mythic tier' }],
     effects: [],
@@ -993,6 +1044,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'Choose one mythic ability from your path or from the universal path abilities that you meet the prerequisites for. You gain that path ability.',
     shortDescription: 'Gain one additional mythic path ability',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [{ type: 'special', description: '3rd mythic tier' }],
     effects: [],
@@ -1007,6 +1059,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend mythic power as swift action to ignore all range increment penalties until end of turn',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'far_shot' },
@@ -1022,6 +1075,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     description: 'You can use wild empathy as a swift action rather than a standard action.',
     shortDescription: 'Wild empathy as a swift action',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'fast_empathy' },
@@ -1039,6 +1093,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Fire Music damage ignores fire resistance up to tier; fiery summons gain fire resistance 5 and 1d4 fire on natural attacks',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'fire_music' },
@@ -1056,6 +1111,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+5 ft. base land speed regardless of armor or encumbrance; can take multiple times',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'fleet' },
@@ -1073,6 +1129,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'No Power Attack penalty on attacks of opportunity; spend mythic power to negate penalty for 1 round',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'furious_focus' },
@@ -1090,6 +1147,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain blur and vanish 1/day; bonus daily uses of gnome SLAs equal to half tier; CL for SLAs = level + tier',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'gnome_trickster' },
@@ -1107,6 +1165,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       "Gorgon's Fist dazes instead of staggers; spend mythic power before save to increase DC by half tier",
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'gorgons_fist' },
@@ -1123,6 +1182,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'Whenever you make a Fortitude saving throw against a spell, spell-like ability, or supernatural ability from a non-mythic source, roll twice and take the higher result.',
     shortDescription: 'Roll Fortitude saves twice vs. non-mythic sources; take higher result',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'great_fortitude' },
@@ -1139,6 +1199,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       "You can add your Wisdom modifier instead of your Strength or Dexterity modifier on damage rolls when attacking with your deity's favored weapon.",
     shortDescription: "Use Wisdom modifier on damage rolls with deity's favored weapon",
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'guided_hand' },
@@ -1156,6 +1217,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '1/day resist a harmful condition as immediate action (Will save + tier); on failure, delay onset',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'heroic_defiance' },
@@ -1173,6 +1235,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend mythic power as swift action to use Heroic Recovery again; add tier to Fortitude save',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'heroic_recovery' },
@@ -1190,6 +1253,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+half tier on bull rush checks and CMD vs. bull rush; AoO against bull rushers',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_bull_rush' },
@@ -1207,6 +1271,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Non-mythic creatures roll channel energy saves twice and take the lower result',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'improved_channel' },
@@ -1223,6 +1288,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'When counterspelling, you can use a spell of the same school that is the same or higher spell level as the target spell.',
     shortDescription: 'Counterspell using same-school spells of equal or higher level',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'improved_counterspell' },
@@ -1240,6 +1306,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Critical multiplier with chosen weapon +1 (max ×6); can be taken multiple times for different weapons',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_critical' },
@@ -1258,6 +1325,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+half tier on dirty trick checks and CMD vs. dirty tricks; AoO against dirty trick attempts',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_dirty_trick' },
@@ -1274,6 +1342,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'You gain a bonus equal to half your mythic tier on checks to disarm, and to your CMD when an opponent tries to disarm you. These bonuses stack with those from Improved Disarm. You can also make an attack of opportunity against any creature attempting to disarm you, unless that creature also has this feat.',
     shortDescription: '+half tier on disarm checks and CMD vs. disarm; AoO against disarm attempts',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_disarm' },
@@ -1290,6 +1359,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'You gain a bonus equal to half your mythic tier on checks to drag, and to your CMD when an opponent tries to drag you. These bonuses stack with those from Improved Drag. Additionally, you can make an attack of opportunity against any creature attempting to drag you, unless it also has this feat.',
     shortDescription: '+half tier on drag checks and CMD vs. drag; AoO against drag attempts',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_drag' },
@@ -1307,6 +1377,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 to familiar ability score per 3 tiers; familiar gains natural armor equal to tier; SR increased by tier',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'improved_familiar' },
@@ -1324,6 +1395,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+half tier on grapple checks and CMD vs. grapple; AoO against grapple attempts',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_grapple' },
@@ -1341,6 +1413,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Initiative bonus further increased by tier; spend mythic power to treat initiative roll as natural 20',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_initiative' },
@@ -1358,6 +1431,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+half tier on overrun checks and CMD vs. overrun; AoO against overrun attempts',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_overrun' },
@@ -1375,6 +1449,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+half tier on reposition checks and CMD vs. reposition; AoO against reposition attempts',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_reposition' },
@@ -1391,6 +1466,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'You gain a bonus equal to half your mythic tier on checks to attempt a steal combat maneuver, and to your CMD when an opponent attempts a steal against you. These bonuses stack with those from Improved Steal. Additionally, you can make an attack of opportunity against any creature attempting to steal from you, unless that creature also has this feat.',
     shortDescription: '+half tier on steal checks and CMD vs. steal; AoO against steal attempts',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_steal' },
@@ -1407,6 +1483,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'You gain stone tell as a spell-like ability usable once per day, with a caster level equal to twice your mythic tier.',
     shortDescription: 'Gain stone tell as SLA 1/day; CL = twice mythic tier',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'improved_stonecunning' },
@@ -1423,6 +1500,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       "You gain a bonus equal to half your mythic tier on checks to sunder, and to your CMD when an opponent tries to sunder an object you are using. These bonuses stack with those from Improved Sunder. You can also make an attack of opportunity against any creature attempting to sunder an object you're using, provided that creature doesn't also have this feat.",
     shortDescription: '+half tier on sunder checks and CMD vs. sunder; AoO against sunder attempts',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_sunder' },
@@ -1439,6 +1517,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'You gain a bonus equal to half your mythic tier on checks to trip, and to your CMD when an opponent tries to trip you. These bonuses stack with those from Improved Trip. You can also make an attack of opportunity against any creature attempting to trip you, unless that creature also has this feat.',
     shortDescription: '+half tier on trip checks and CMD vs. trip; AoO against trip attempts',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_trip' },
@@ -1456,6 +1535,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+half tier to unarmed strike damage; spend mythic power to bypass object hardness (up to 15) for rounds equal to tier',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -1473,6 +1553,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+tier on Intimidate vs. non-mythic (half vs. mythic); with Persuasive (Mythic), spend mythic power for natural 20',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'intimidating_prowess' },
@@ -1489,6 +1570,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'Whenever you roll a Will saving throw against a spell, spell-like ability, or supernatural ability from a non-mythic source, roll twice and take the higher result.',
     shortDescription: 'Roll Will saves twice vs. non-mythic sources; take higher result',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'iron_will' },
@@ -1505,6 +1587,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'When dealing non-lethal damage with an unarmed strike combined with sneak attack, you roll d8s instead of d6s for each sneak attack die.',
     shortDescription: 'Non-lethal unarmed sneak attack dice are d8s instead of d6s',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'knockout_artist' },
@@ -1521,6 +1604,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'Any fixed numeric bonuses you gain from teamwork feats are increased by 1. This enhancement does not apply to variable bonuses or non-numeric effects such as additional attacks of opportunity, extra movement, or other supplementary actions.',
     shortDescription: 'Fixed numeric bonuses from teamwork feats increased by 1',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'teamwork'],
     prerequisites: [
       { type: 'special', description: 'Any two teamwork feats' },
@@ -1537,6 +1621,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'Whenever you roll a Reflex saving throw against a spell, spell-like ability, or supernatural ability from a non-mythic source, roll twice and take the higher result.',
     shortDescription: 'Roll Reflex saves twice vs. non-mythic sources; take higher result',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'lightning_reflexes' },
@@ -1554,6 +1639,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       "Lucky Halfling bonus increased by mythic tier; spend mythic power to upgrade ally's partial success to full success",
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'lucky_halfling' },
@@ -1571,6 +1657,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'Roll surge dice twice; take higher (or three times if already rolling twice)',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'potent_surge' },
@@ -1588,6 +1675,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       'No AC penalty from Lunge on a hit; spend mythic power to negate penalty on miss and gain +2 on AoO',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'lunge' },
@@ -1605,6 +1693,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 bonus increase on Spellcraft/Use Magic Device; spend mythic power to treat roll as natural 20',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic'],
     prerequisites: [
       { type: 'feat', featId: 'magical_aptitude' },
@@ -1638,6 +1727,7 @@ export const MYTHIC_FEATS: FeatDefinition[] = [
       'When performing a full-attack action with a bow while using Manyshot, you fire two arrows with both your first and second attacks, instead of just your first attack.',
     shortDescription: 'Manyshot fires two arrows with both the first and second attacks',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
     types: ['mythic', 'combat'],
     prerequisites: [
       { type: 'feat', featId: 'manyshot' },

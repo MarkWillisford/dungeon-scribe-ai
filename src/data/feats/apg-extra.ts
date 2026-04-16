@@ -10,6 +10,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "Magic runs in your blood, and you have some skill with the arts of magic. You can cast a 0-level spell from the sorcerer/wizard spell list as a spell-like ability at will. This spell-like ability is cast at your highest caster level (or 1st level if you have no caster level). The spell-like ability's save DC is Charisma-based.",
     shortDescription: 'Cast one 0-level sorcerer/wizard spell at will as spell-like ability',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 10 },
@@ -27,6 +28,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
     shortDescription:
       'Choose one bestial aspect: vision, claws, leap, or initiative/Survival bonus',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'wild shape' }],
     effects: [],
@@ -48,6 +50,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You have a sense of destiny about you and gain more hero points than most. Whenever you gain a level, you gain 2 hero points instead of 1.',
     shortDescription: 'Gain 2 hero points per level instead of 1',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'heros_fortune' }],
     effects: [],
@@ -61,6 +64,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Although still extant, your youth extinguished long ago. Through your extensive travels and countless experiences, you have a broad knowledge base. You get a +2 bonus on all Knowledge and Profession skill checks, and can make checks with those skills untrained.',
     shortDescription: '+2 on all Knowledge and Profession checks, can use untrained',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Dwarf, elf, or gnome; 100+ years old' }],
     effects: [
@@ -89,6 +93,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Your youthful appearance makes you look like a human child. You can take 10 on Bluff checks to convince others you are telling the truth, so long as your story makes you appear innocent. You gain a +2 bonus on Disguise checks to look like a human child, and ignore the check penalties for disguising yourself as a different race and age category while doing so.',
     shortDescription: 'Take 10 on innocent Bluff, +2 Disguise as human child',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -114,6 +119,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Your assistance makes item crafting far more efficient. You can assist another character in crafting mundane and magical items. You must both possess the relevant Craft skill or item creation feat, but either of you can fulfill any other prerequisites for crafting the item. You provide a +2 circumstance bonus on any Craft or Spellcraft checks related to making an item, and your assistance doubles the gp value of items that can be crafted each day.',
     shortDescription: '+2 circumstance bonus on crafting checks, double daily gp output',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'craft', ranks: 1 },
@@ -130,6 +136,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You have a talent for drinking, which grants additional benefits from your drunken ki. When you gain temporary ki from your drunken ki class feature, you gain 2 temporary ki instead of 1.',
     shortDescription: 'Gain 2 temporary ki from drunken ki instead of 1',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -146,6 +153,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
     description: 'You can throw more bombs per day. You can throw two additional bombs per day.',
     shortDescription: 'Throw 2 additional bombs per day',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'bomb' }],
     effects: [],
@@ -159,6 +167,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You have made a new alchemical discovery. You gain one additional discovery. You must meet all of the prerequisites for this discovery.',
     shortDescription: 'Gain one additional alchemist discovery',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'discovery' }],
     effects: [],
@@ -173,6 +182,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You have unlocked a new ability to use while raging. You gain one additional rage power. You must meet all of the prerequisites for this rage power.',
     shortDescription: 'Gain one additional rage power',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'rage power' }],
     effects: [],
@@ -186,6 +196,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You have discovered a new aspect of your mystery. You gain one additional revelation. You must meet all of the prerequisites for this revelation.',
     shortDescription: 'Gain one additional oracle revelation',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'revelation' }],
     effects: [],
@@ -199,6 +210,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Through constant practice, you have learned how to perform a special trick. You gain one additional rogue talent. You must meet all of the prerequisites for this rogue talent.',
     shortDescription: 'Gain one additional rogue talent',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'rogue talent' }],
     effects: [],
@@ -212,6 +224,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You benefit greatly from healing, both magical and natural. When you regain hit points by resting or through magical healing, you recover additional hit points equal to half your Constitution modifier (minimum +1).',
     shortDescription: 'Recover extra hp equal to half Con modifier when healed',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -229,6 +242,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Your training against a certain class of enemies grants you a defensive edge. You apply half your favored enemy bonus as a dodge bonus to your AC and to your CMD against attacks from your chosen favored enemy type.',
     shortDescription: 'Add half favored enemy bonus as dodge bonus to AC and CMD vs that enemy',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'favored enemy' }],
     effects: [],
@@ -249,6 +263,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You can keep fighting even when you should be dead. Once per day, when you are reduced to 0 or fewer hit points, you can gain a number of temporary hit points equal to your Constitution modifier as an immediate action. These temporary hit points last for 1 minute. If your hit points drop below 0 due to the loss of these temporary hit points, you fall unconscious and begin dying normally.',
     shortDescription: '1/day gain temporary hp equal to Con mod when reduced to 0 hp or below',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -265,6 +280,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Even at the start of your career, you are destined for glory. You gain a hero point. The maximum number of hero points you can have at any one time is increased to 5.',
     shortDescription: 'Gain a hero point, max hero points increased to 5',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -278,6 +294,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "You can share spells with your bonded creature. Any non-instantaneous spell (but not any spell-like ability) you cast on yourself can also affect a creature bonded to you, provided it is within 5 feet of you at the time of casting. The spell's duration is halved between you and the bonded creature. If the bonded creature moves further than 5 feet away from you, the spell effect ceases for it. You may share spells in this fashion even if the spells normally do not affect creatures of that type.",
     shortDescription: 'Share non-instantaneous self-spells with bonded creature within 5 ft.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'spellcraft', ranks: 10 },
@@ -296,6 +313,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
     description: 'Your senses are exceptionally sharp. You gain the scent special ability.',
     shortDescription: 'Gain the scent special ability',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -312,6 +330,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Your songs especially resonate in the forest, granting greater power in wooded areas. When you perform bardic music with an audible component in a forest environment, the range or area of your chosen performance is doubled. In addition, the DC for saving throws against your bardic performance is increased by +2 for creatures of the fey type, regardless of where the performance occurs.',
     shortDescription: 'Double bardic performance range in forests, +2 DC vs fey',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -329,6 +348,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'The effects of your bardic performance carry on, even after you have stopped performing. The bonuses and penalties from your bardic performance continue for 2 rounds after you cease performing. Any other requirement, such as being within range, still must be met for the effect to continue. If you begin a new bardic performance during this time, the effects of the previous performance immediately cease.',
     shortDescription: 'Bardic performance effects last 2 rounds after you stop',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'bardic performance' }],
     effects: [],
@@ -342,6 +362,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You bring luck to those around you. Once per day, when one of your allies within 30 feet makes a saving throw, you may roll the same saving throw as if you were the one subject to the effect requiring it. You may use this ability after your ally has rolled but before the GM has revealed whether or not the save was successful. Your ally may choose to use your saving throw result instead of his own.',
     shortDescription: '1/day let an ally within 30 ft. use your saving throw result',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Halfling' }],
     effects: [],
@@ -355,6 +376,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You are able to use a powerful spell as a spell-like ability. Choose one spell that you know of 5th level or lower. You may use that spell twice per day as a spell-like ability. The caster level for this spell-like ability is equal to your caster level. The save DC is Charisma-based. You cannot select a spell that has costly material component or focus requirements.',
     shortDescription: 'Use a known spell of 5th level or lower 2/day as spell-like ability',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'minor_spell_expertise' },
@@ -371,6 +393,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You are able to use a low-level spell as a spell-like ability. Choose one 1st-level spell that you know. You may use that spell twice per day as a spell-like ability. The caster level for this spell-like ability is equal to your caster level. The save DC is Charisma-based. You cannot select a spell that has costly material component or focus requirements. You may not apply metamagic feats to this spell-like ability.',
     shortDescription: 'Use a known 1st-level spell 2/day as spell-like ability',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Ability to cast 4th-level spells' }],
     effects: [],
@@ -384,6 +407,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You receive a +10 bonus on Disguise checks to appear human, and you do not receive the penalty for disguising yourself as another race. In areas largely populated or settled by humans, you can take 10 on your Disguise check, meaning most people tend to assume you are human unless given a reason to think otherwise.',
     shortDescription: '+10 Disguise to appear human, take 10 in human areas',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -411,6 +435,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You are well versed in teamwork tactics. You can use your tactician ability to grant a teamwork feat one additional time per day.',
     shortDescription: 'Use tactician ability one additional time per day',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'tactician' }],
     effects: [],
@@ -424,6 +449,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Your tusks are large and sharp, giving you a powerful bite attack. You can make a bite attack for 1d4 points of damage, plus your Strength modifier. You are considered proficient with this attack. If used as part of a full attack action, the bite attack is made at your full base attack bonus -5, and adds half your Strength modifier to damage.',
     shortDescription: 'Gain bite attack (1d4 + Str mod), secondary in full attack',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Half-Orc' }],
     effects: [],
@@ -437,6 +463,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You tread where only arachnids dare to go. As a move action, you can move up to half your slow fall distance across a wall, ceiling, or other relatively smooth surface. You must reach a solid, level surface by the end of your turn or you will fall.',
     shortDescription: 'Move across walls/ceilings up to half slow fall distance as move action',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'acrobatics', ranks: 6 },
@@ -454,6 +481,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Your tread is so light that you can walk on air. As a move action, you can air walk (as the spell) up to half your slow fall distance, maximum 50 feet. You must reach a solid, level surface by the end of your turn or you will fall.',
     shortDescription: 'Air walk up to half slow fall distance as move action',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'spider_step' },
@@ -470,6 +498,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "You are especially resistant to magic. You receive a +4 racial bonus on saving throws against spells and spell-like abilities. This replaces the normal bonus from the dwarf's hardy racial trait.",
     shortDescription: '+4 racial bonus on saves vs spells (replaces hardy)',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Dwarf' },
@@ -499,6 +528,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Your songs echo off stone and underground surfaces, gaining unusual power and resonance. When you perform bardic music with an audible component while underground, the range or area of your chosen performance is doubled. In addition, the DC for saving throws against your bardic performance is increased by +2 for creatures of the earth subtype, regardless of where the performance occurs. You may also affect deaf creatures with your bardic performances while underground if they have tremorsense.',
     shortDescription: 'Double bardic performance range underground, +2 DC vs earth creatures',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -517,6 +547,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Sacrificing accuracy, you can inflict bloody wounds that are slow to heal. You can choose to take a -5 penalty on all melee attack rolls and combat maneuver checks to inflict 1d4 bleed damage with your weapon melee attacks, in addition to the normal damage dealt by the weapon. A creature continues to take bleed damage every round at the start of its turn. Bleed damage can be stopped by a DC 15 Heal check or through any magical healing. Bleed damage from this feat does not stack with itself. You must choose to use this feat before making the attack roll, and its effects last until your next turn.',
     shortDescription: '-5 to attack for +1d4 bleed damage on melee hits',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -534,6 +565,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "You can take advantage of an enemy's debilitated state to attempt a coup de grace. You can deliver a coup de grace to cowering or stunned targets.",
     shortDescription: 'Deliver coup de grace to cowering or stunned targets',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Sneak attack +5d6' }],
     effects: [],
@@ -547,6 +579,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "Your critical hits can disarm your foes. Whenever you score a critical hit with a melee attack, you can disarm your opponent, in addition to the normal damage dealt by the attack. If your confirmation roll exceeds your opponent's CMD, you may disarm your opponent as if from the disarm combat maneuver. This does not provoke an attack of opportunity. You can only apply the effects of one of the following feats to a given critical hit: Bull Rush Strike, Disarming Strike, Repositioning Strike, Sundering Strike, or Tripping Strike. You may choose to use this feat after you confirm a critical hit.",
     shortDescription: 'Free disarm on critical hit if confirm roll exceeds CMD',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -565,6 +598,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You empower your strike with elemental energy. When you use Elemental Fist, you deal an extra 1d6 points of damage of the chosen energy type (acid, cold, electricity, or fire). You must declare that you are using this feat before you make your attack roll (thus a missed attack roll wastes the attempt). You may attempt an elemental fist attack once per day for every four character levels you possess (but see Special), to a maximum of one per round.',
     shortDescription: 'Add 1d6 elemental damage to unarmed strike (1/day per 4 levels)',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -591,6 +625,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "Your keen senses guide your hand when your eyes cannot. Your melee attacks ignore the miss chance for less than total concealment. You may reroll your miss chance percentile roll for total concealment one time to see if you actually hit. An invisible attacker gets no advantages related to hitting you in melee if you successfully pinpoint that attacker's square with a Perception check. That is, you don't lose your Dexterity bonus to AC, and the attacker doesn't get the usual +2 bonus for being invisible.",
     shortDescription: 'Ignore miss chance for less than total concealment in melee',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'perception', ranks: 10 },
@@ -607,6 +642,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "Your senses are so acute that you can pinpoint the source of any sound. Your melee attacks ignore the miss chance for less than total concealment, and you treat total concealment as if it were normal concealment (20% miss chance instead of 50%). You may still reroll your miss chance percentile roll for total concealment. An invisible attacker gets no advantages related to hitting you in melee if you successfully pinpoint that attacker's square with a Perception check.",
     shortDescription: 'Treat total concealment as normal concealment (20% miss chance)',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'perception', ranks: 15 },
@@ -623,6 +659,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You are skilled at pulling dirty tricks on your foes. You do not provoke an attack of opportunity when performing a dirty trick combat maneuver. In addition, you receive a +2 bonus on checks made to attempt a dirty trick. You also receive a +2 bonus to your Combat Maneuver Defense when an opponent tries a dirty trick on you.',
     shortDescription: '+2 dirty trick CMB/CMD, no AoO on dirty trick',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -654,6 +691,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "When you pull a dirty trick, your foe is truly hindered. You receive a +2 bonus on checks made to attempt a dirty trick. This bonus stacks with the bonus granted by Improved Dirty Trick. Whenever you successfully perform a dirty trick, the penalty lasts for 1d4 rounds, plus 1 round for every 5 by which your attack exceeds the target's CMD. In addition, removing the condition requires the target to spend a standard action.",
     shortDescription: '+2 more to dirty trick CMB, longer duration, standard action to remove',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -680,6 +718,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You have learned how to move your enemies where you want them. You do not provoke an attack of opportunity when performing a reposition combat maneuver. In addition, you receive a +2 bonus on checks made to reposition a foe. You also receive a +2 bonus to your Combat Maneuver Defense when an opponent tries to reposition you.',
     shortDescription: '+2 reposition CMB/CMD, no AoO on reposition',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -711,6 +750,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'When you reposition your enemy, your enemy is truly out of position. You receive a +2 bonus on checks made to reposition a foe. This bonus stacks with the bonus granted by Improved Reposition. Whenever you reposition a foe, his movement provokes attacks of opportunity from all of your allies (but not you).',
     shortDescription: '+2 more to reposition CMB, repositioned foe provokes AoOs from allies',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -737,6 +777,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You have a quick hand that is difficult to counter. You do not provoke an attack of opportunity when performing a steal combat maneuver. In addition, you receive a +2 bonus on checks made to steal an item from a foe. You also receive a +2 bonus to your Combat Maneuver Defense when an opponent tries to steal an item from you.',
     shortDescription: '+2 steal CMB/CMD, no AoO on steal',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -768,6 +809,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You have learned to take advantage of the distraction caused by combat to steal items from foes. You receive a +2 bonus on checks made to steal an item from a foe. This bonus stacks with the bonus granted by Improved Steal. A creature that does not notice the theft does not notice it until after combat is over or if it attempts to use the missing item.',
     shortDescription: '+2 more to steal CMB, stolen items go unnoticed until used',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -794,6 +836,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "You put yourself in danger to save your allies. While using the aid another action to improve an adjacent ally's AC, you can intercept a successful attack against that ally as an immediate action, taking full damage from that attack and any associated effects (bleed, poison, etc.). A creature cannot benefit from this feat more than once per attack.",
     shortDescription: 'Take damage from attack that would hit adjacent ally you aided',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'bodyguard' }],
     effects: [],
@@ -807,6 +850,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Your ki allows you to throw enemies. On a successful unarmed trip attack against a target your size or smaller, you may throw the target prone in any square you threaten rather than its own square. This movement does not provoke attacks of opportunity, and you cannot throw the target into a square that is occupied by another creature.',
     shortDescription: 'Throw tripped opponent into any threatened square',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_trip' },
@@ -823,6 +867,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Your ki throw can knock multiple foes off balance. When using the Ki Throw feat, you may throw your target into any square occupied by another creature. Make a bull rush combat maneuver check with a -4 penalty against the secondary target. If the check succeeds, the thrown creature lands prone in the target square and the secondary target is pushed back and knocked prone in an adjacent square. If the check fails, the thrown creature lands prone in the nearest unoccupied square adjacent to the secondary target.',
     shortDescription: 'Throw tripped foe into occupied square, potentially knocking both prone',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_bull_rush' },
@@ -839,6 +884,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "Your shield is a bastion of defense for you and your mount. You may add your base shield bonus (including the bonus from Shield Focus but not including enhancement bonuses) to your mount's AC. In addition, you may add this bonus when making Ride checks to negate a hit against your mount using the Mounted Combat feat.",
     shortDescription: "Add shield bonus to mount's AC and Mounted Combat Ride checks",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'mounted_combat' },
@@ -855,6 +901,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You are able to make a ranged attack when you withdraw from melee. Once per encounter, when using the withdraw action, you can make a single ranged attack at any point during your movement.',
     shortDescription: 'Make single ranged attack during withdraw action 1/encounter',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -875,6 +922,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Your kicks are so powerful that you can use them to push or knock down foes. You must declare that you are using this feat before you make your attack roll (thus a missed attack roll wastes the attempt). On a successful hit, the attack deals damage normally and you can choose to push your target 5 feet or attempt to knock your target prone. If you decide to knock your target prone, the target receives a Fortitude saving throw with a DC of 10 + 1/2 your character level + your Wisdom modifier to avoid the effect. You may attempt a punishing kick attack once per day for every four character levels you possess (but see Special), to a maximum of once per round.',
     shortDescription: 'Push target 5 ft. or knock prone on unarmed hit (1/day per 4 levels)',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -893,6 +941,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "Your critical hits can move your foes where you wish. Whenever you score a critical hit with a melee attack, you can move your opponent, in addition to the normal damage dealt by the attack. If your confirmation roll exceeds your opponent's CMD, you may move your opponent as if from the reposition combat maneuver. This does not provoke an attack of opportunity. You can only apply the effects of one of the following feats to a given critical hit: Bull Rush Strike, Disarming Strike, Repositioning Strike, Sundering Strike, or Tripping Strike. You may choose to use this feat after you confirm a critical hit.",
     shortDescription: 'Free reposition on critical hit if confirm roll exceeds CMD',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -911,6 +960,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You protect your allies with your shield. Whenever an adjacent ally is the target of an attack, you can, as an immediate action, grant that adjacent ally a +2 shield bonus to AC. You must be wielding a light shield, heavy shield, or tower shield to use this feat.',
     shortDescription: 'Grant adjacent ally +2 shield bonus to AC as immediate action',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'proficiency', proficiency: 'shields' }],
     effects: [],
@@ -925,6 +975,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You can take a second chance and still keep attacking. When you reroll a missed attack using the Second Chance feat, you can still make the rest of your attacks that turn, albeit at a -5 penalty to each attack.',
     shortDescription: 'Keep remaining attacks at -5 after Second Chance reroll',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -943,6 +994,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'You accurately strike even those you cannot clearly see. You can deal precision damage, such as sneak attack damage, against targets with concealment (but not total concealment).',
     shortDescription: 'Deal precision damage against targets with concealment',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -956,6 +1008,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "Your critical hits can sunder your foes' equipment. Whenever you score a critical hit with a melee attack, you can sunder your opponent's weapon, in addition to the normal damage dealt by the attack. If your confirmation roll exceeds your opponent's CMD, you may deal damage to your opponent's weapon as if from the sunder combat maneuver. This does not provoke an attack of opportunity. You can only apply the effects of one of the following feats to a given critical hit: Bull Rush Strike, Disarming Strike, Repositioning Strike, Sundering Strike, or Tripping Strike. You may choose to use this feat after you confirm a critical hit.",
     shortDescription: 'Free sunder on critical hit if confirm roll exceeds CMD',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -974,6 +1027,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'With a quick but effective action, you can aid an ally in combat. As a swift action, you can attempt the aid another action, granting your ally either a +1 bonus on his next attack roll or a +1 bonus to AC.',
     shortDescription: 'Aid another as swift action for +1 bonus',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -991,6 +1045,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'When you and your allies work together, you can help each other more efficiently. When you are adjacent to an ally who also threatens the same enemy, you can attempt the aid another action as a move action instead of a standard action.',
     shortDescription: 'Aid another as move action when you and 2+ allies threaten same foe',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -1009,6 +1064,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       'Your knowledge of teleportation magic allows you to exploit any weakness. Any creature that uses a teleportation effect to enter or leave a square you threaten provokes an attack of opportunity, even if casting defensively or using a supernatural ability.',
     shortDescription: 'Teleporting creatures provoke AoOs from you',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'combat_reflexes' },
@@ -1026,6 +1082,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "Your critical hits can trip your foes. Whenever you score a critical hit with a melee attack, you can trip your opponent, in addition to the normal damage dealt by the attack. If your confirmation roll exceeds your opponent's CMD, you may knock your opponent prone as if from the trip combat maneuver. This does not provoke an attack of opportunity. You can only apply the effects of one of the following feats to a given critical hit: Bull Rush Strike, Disarming Strike, Repositioning Strike, Sundering Strike, or Tripping Strike. You may choose to use this feat after you confirm a critical hit.",
     shortDescription: 'Free trip on critical hit if confirm roll exceeds CMD',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -1046,6 +1103,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
     shortDescription:
       'Affected targets must make concentration checks to cast for 1 round, uses +1 level',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -1060,6 +1118,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "You can sicken creatures with your spells. You can modify a spell to sicken a creature damaged by the spell. When a creature takes damage from this spell, they become sickened for a number of rounds equal to the original level of the spell. If the spell allows a saving throw, a successful save negates the sickened effect. If the spell does not allow a save, the target can make a Fortitude save to negate the sickened effect. Spells that do not inflict damage do not benefit from this feat. A sickening spell uses up a spell slot two levels higher than the spell's actual level.",
     shortDescription: 'Spell sickens damaged creatures, uses +2 spell level slot',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -1073,6 +1132,7 @@ export const APG_EXTRA_FEATS: FeatDefinition[] = [
       "You can deafen creatures with your spells. You can modify a spell to deafen a creature damaged by the spell. When a creature takes damage from this spell, it becomes deafened for a number of rounds equal to the original level of the spell. If the spell allows a saving throw, a successful save negates the deafened effect. If the spell does not allow a save, the target can make a Fortitude save to negate the deafened effect. If the spell already causes the deafened condition, the duration of the deafness stacks. Spells that do not inflict damage do not benefit from this feat. A thundering spell uses up a spell slot two levels higher than the spell's actual level.",
     shortDescription: 'Spell deafens damaged creatures, uses +2 spell level slot',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],

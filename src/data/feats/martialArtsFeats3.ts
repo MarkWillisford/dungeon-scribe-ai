@@ -7,6 +7,7 @@ export const MARTIAL_ARTS_FEATS_3: FeatDefinition[] = [
     name: 'Enduring Might',
     types: ['combat'],
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     description:
       'Your gathered power lingers beyond the moment it is used. When you use Gather Might, the ability score bonuses granted by that feat last until the beginning of your next turn rather than expiring immediately.',
     shortDescription: 'Gather Might bonuses persist until start of your next turn.',
@@ -24,6 +25,7 @@ export const MARTIAL_ARTS_FEATS_3: FeatDefinition[] = [
     name: 'Octopus Thrash',
     types: ['combat', 'style'],
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     description:
       'Your arms flail about in a confusing pattern of strikes that trips and batters your foes. While using Octopus Style and threatening two adjacent enemies, you can attempt a single trip combat maneuver check at a -5 penalty that applies to both adjacent targets simultaneously.',
     shortDescription: 'Trip two adjacent foes at once at -5 penalty while in Octopus Style.',
@@ -58,6 +60,7 @@ export const MARTIAL_ARTS_FEATS_3: FeatDefinition[] = [
     name: 'Tangled Limbs',
     types: ['combat'],
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     description:
       "You twist your long weapon among your target's legs, knocking your foe off-balance. Select one reach weapon. When you attempt a trip combat maneuver with that weapon, the target does not gain the normal +2 CMD bonus per additional leg beyond two legs. Fighters with weapon training can apply this feat to any melee weapon with the reach quality from their selected weapon groups.",
     shortDescription: 'Negate bonus CMD from extra legs when tripping with a reach weapon.',
@@ -76,6 +79,7 @@ export const MARTIAL_ARTS_FEATS_3: FeatDefinition[] = [
     name: 'Thousand Cuts',
     types: ['combat'],
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     description:
       'Your attacks are calculated to draw the most blood possible. With every swing, you open persistent, vicious wounds that drain the life from your enemies. When you deal damage with a melee slashing weapon to an opponent who has already taken damage this round, you inflict 1 additional point of bleed damage that persists for 2 rounds. Multiple bleed effects from this feat stack when applied in the same round.',
     shortDescription: 'Melee slashing attacks deal 1 bleed for 2 rounds to already-wounded foes.',
@@ -106,6 +110,7 @@ export const MARTIAL_ARTS_FEATS_3: FeatDefinition[] = [
     name: "Titan's Tangle",
     types: ['combat'],
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     description:
       'Even creatures much bigger than you can lose their balance when you apply the appropriate leverage. When using a reach weapon to attempt a trip combat maneuver, you can target creatures up to two size categories larger than normal. With Greater Weapon Focus for that weapon, this extends to three size categories larger. Fighters with weapon training can apply this feat to any melee weapon with the reach quality from their selected weapon groups.',
     shortDescription: 'Trip creatures up to two size categories larger using a reach weapon.',
@@ -125,6 +130,7 @@ export const MARTIAL_ARTS_FEATS_3: FeatDefinition[] = [
     name: 'Toppling Pileup',
     types: ['combat'],
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a standard action, you attempt a trip maneuver against an adjacent opponent using your full base attack bonus. If you succeed, the target falls prone and you may immediately attempt another trip check against a different foe adjacent to both you and the first target, also at your full base attack bonus. You can attempt only one additional combat maneuver per round with this feat.',
     shortDescription: 'Trip one foe and immediately attempt to trip an adjacent second foe.',
@@ -142,6 +148,7 @@ export const MARTIAL_ARTS_FEATS_3: FeatDefinition[] = [
     name: 'Tumbling Upset',
     types: ['combat'],
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     description:
       "When you succeed at an Acrobatics check to move through an enemy's space, you can spend a swift action to attempt a trip combat maneuver check against that opponent. Even if you fail this check by 10 or more, you do not fall prone.",
     shortDescription:
@@ -161,6 +168,7 @@ export const MARTIAL_ARTS_FEATS_3: FeatDefinition[] = [
     name: 'Unbalancing Blow',
     types: ['combat'],
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     description:
       'When using this feat, in addition to dealing damage normally, you force a foe damaged by your unarmed attack to attempt a Reflex saving throw (DC 10 + half your character level + your Wisdom modifier). On a failed save, the target is flat-footed, loses size bonuses to CMD against movement effects and maneuvers, and loses benefits of any active style feat stance until the beginning of your next turn. Creatures with immunity to trip are unaffected. You must declare use before rolling to attack; if the attack misses, the attempt is wasted. You can use this ability once per day per 4 character levels, but no more than once per round.',
     shortDescription:
@@ -180,6 +188,7 @@ export const MARTIAL_ARTS_FEATS_3: FeatDefinition[] = [
     name: 'Whirling Hold',
     types: ['combat'],
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     description:
       'You lift your grappled foe from the ground and violently spin and disorient him. When you successfully maintain a grapple, you can forgo dealing damage, moving, pinning, or binding to instead lift and rapidly spin your opponent. After spinning, you may place the target in any adjacent square, and the target is sickened for a number of rounds equal to your Strength or Dexterity modifier (whichever is higher).',
     shortDescription: 'Spin a grappled foe to reposition them and inflict the sickened condition.',
@@ -196,6 +205,7 @@ export const MARTIAL_ARTS_FEATS_3: FeatDefinition[] = [
     name: 'Wrist Grab',
     types: ['combat'],
     source: 'Martial Arts Handbook',
+    verificationStatus: 'needs_review' as const,
     description:
       "When an opponent's attack misses you by 5 or more, you can attempt a disarm combat maneuver check against that foe as an immediate action.",
     shortDescription: 'Attempt to disarm a foe as an immediate action when they miss you by 5+.',

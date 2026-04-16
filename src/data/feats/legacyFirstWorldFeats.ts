@@ -12,6 +12,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     shortDescription:
       'Store an item in your vines as a move action, temporarily losing your fly speed.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Gathlain race' },
@@ -30,6 +31,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     shortDescription:
       'Center an instantaneous area spell on yourself while excluding yourself from its effects.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [{ type: 'skill', skillId: 'spellcraft', ranks: 3 }],
     effects: [],
@@ -44,6 +46,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
       'Your soul yearns to travel the wilds, but legal obligations, honor-bound duties, or other responsibilities keep you rooted. When interacting with NPCs who live in your settlement, you gain a +1 bonus on Bluff, Diplomacy, and Sense Motive checks. Upon completing the tasks that satisfy your binding responsibility, you additionally gain a +1 bonus on Dexterity- and Intelligence-based ability checks and skill checks and on Will saving throws.',
     shortDescription: 'Gain social bonuses in your home settlement while bound by obligations.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -102,6 +105,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     shortDescription:
       'Cast spells through an adjacent ally, originating the spell from their position.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'spellcraft', ranks: 3 }],
     effects: [],
@@ -117,6 +121,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +4 on saves vs. emotion effects; fear and morale effects last half as long for you.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Bleachling racial trait' },
@@ -148,6 +153,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain bonuses on Intimidate checks and critical confirmation; shaken foes take bleed damage from your attacks.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -189,6 +195,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain +2 on Charisma-based checks (except Diplomacy) from your fey wonder at the mundane.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       { type: 'special', description: 'Fey ancestor in family line' },
@@ -223,6 +230,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
       'Once per day as a full-round action, you can lose your fly speed to gain a swim speed of 30 feet as you reconfigure your symbiotic vines to help you move underwater. This aquatic adaptation persists for one hour or until you choose to revert to your aerial form using another full-round action.',
     shortDescription: 'Once per day, trade your fly speed for a 30-foot swim speed for one hour.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Gathlain race' },
@@ -240,6 +248,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
       'You and an ally who both have this feat are considered to be flanking a foe if you are adjacent to an unoccupied square from which you would be able to flank the foe with your ally, even if you are not positioned opposite each other.',
     shortDescription: 'Flank enemies with an ally even without being on opposite sides.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'feat', featId: 'outflank' },
@@ -257,6 +266,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
       'Whenever you deal additional damage with Precise Strike, you also deal 1 point of bleed damage. The bleed damage does not stack with itself if applied multiple times.',
     shortDescription: 'Dealing Precise Strike damage also causes 1 point of bleed damage.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -276,6 +286,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     shortDescription:
       'When solo-performing, treat your class level as 4 higher for performance or raging song bonuses.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'perform', ranks: 3 },
@@ -294,6 +305,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     shortDescription:
       'Heal 50% more hit points when you are the only creature healed by your channeled energy.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Channel energy class feature' }],
     effects: [],
@@ -309,6 +321,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     shortDescription:
       'When a spell affects you and an ally with this feat, use an immediate action to increase its caster level by 3 for you.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'skill', skillId: 'spellcraft', ranks: 5 }],
     effects: [],
@@ -324,6 +337,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     shortDescription:
       'Creatures affected by your feather step spell-like ability gain DR 1/cold iron (scaling with Hit Dice).',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Gathlain race' },
@@ -342,6 +356,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once per day, extract a magical fruit from your vines that replicates a random 1st-level potion or oil.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'craft_alchemy', ranks: 5 },
@@ -361,6 +376,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
     shortDescription:
       'While raging alone, spend an extra rage round to make one additional attack on a full attack, with a -2 penalty to attacks and AC.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Rage class feature' },
@@ -378,6 +394,7 @@ export const LEGACY_FIRST_WORLD_FEATS: FeatDefinition[] = [
       'You can use your speak with animals spell-like ability at will. This feat allows gnomes undergoing the Bleaching to continually access their innate animal communication powers without the normal limitations of spell-like abilities.',
     shortDescription: 'Use your speak with animals spell-like ability at will.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Bleachling racial trait' },

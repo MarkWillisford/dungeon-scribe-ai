@@ -34,6 +34,7 @@ export const rovagug: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -70,6 +71,7 @@ export const apsu: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -89,6 +91,7 @@ export const easivra: DeityEntry = {
   sacredColors: ['blue', 'gold'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -124,6 +127,7 @@ export const gruhastha: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -142,6 +146,7 @@ export const cihuaCouatl: DeityEntry = {
   sacredAnimal: `hawk`,
   source: 'pf1e-ap',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -177,6 +182,7 @@ export const kazutal: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -214,6 +220,7 @@ export const kurgess: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -232,6 +239,7 @@ export const mazludeh: DeityEntry = {
   sacredAnimal: `Anaconda`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -250,6 +258,7 @@ export const omrataji: DeityEntry = {
   sacredAnimal: `Mole`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -287,6 +296,7 @@ export const milaniBatch: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

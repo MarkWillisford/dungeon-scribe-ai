@@ -1,6 +1,6 @@
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ABJURATION_SPELLS: Spell[] = [
+export const ABJURATION_SPELLS: SpellDefinition[] = [
   // ─── Pre-existing content ────────────────────────────────────────────────────
 // ============================================================
   // LEVEL 1 ABJURATION SPELLS
@@ -41,6 +41,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'Alarm creates a subtle ward on an area you select. Once the spell effect is in place, it thereafter sounds a mental or audible alarm each time a creature of Tiny or larger size enters the warded area or touches it. A creature that speaks the password (determined by you at the time of casting) does not set off the alarm. You decide at the time of casting whether the alarm will be mental or audible in nature.\n\nMental Alarm: A mental alarm alerts you (and only you) so long as you remain within 1 mile of the warded area. You note a single mental "ping" that awakens you from normal sleep but does not otherwise disturb concentration. A silence spell has no effect on a mental alarm.\n\nAudible Alarm: An audible alarm produces the sound of a hand bell, and anyone within 60 feet of the warded area can hear it clearly. Reduce the distance by 10 feet for each interposing closed door and by 20 feet for each substantial interposing wall.\n\nIn quiet conditions, the ringing can be heard faintly as far as 180 feet away. The sound lasts for 1 round. Creatures within a silence spell cannot hear the ringing.\n\nEthereal or astral creatures do not trigger the alarm.\n\nAlarm can be made permanent with a permanency spell.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Abjuring Step',
@@ -73,6 +74,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You create a field of force that grants you the ability to take two 5-foot steps each round and still cast spells and use spell-like abilities without provoking attacks of opportunity. This spell is automatically discharged the next time you make an attack, cast a harmful spell against another creature, or move more than 5 feet with a single move action. If such an action normally would provoke attacks of opportunity, it still does so after the spell is discharged.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Endure Elements',
@@ -110,6 +112,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "A creature protected by endure elements suffers no harm from being in a hot or cold environment. It can exist comfortably in conditions between -50 and 140 degrees Fahrenheit (-45 and 60 degrees Celsius) without having to make Fortitude saves. The creature's equipment is likewise protected.\n\nEndure elements doesn't provide any protection from fire or cold damage, nor does it protect against other environmental hazards such as smoke, lack of air, and so forth.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Chaos',
@@ -144,6 +147,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like protection from evil, except that the deflection and resistance bonuses apply to attacks made by chaotic creatures. The target receives a new saving throw against control by chaotic creatures and chaotic summoned creatures cannot touch the target.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Evil',
@@ -179,6 +183,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell wards a creature from attacks by evil creatures, from mental control, and from summoned creatures. It creates a magical barrier around the subject at a distance of 1 foot. The barrier moves with the subject and has three major effects.\n\nFirst, the subject gains a +2 deflection bonus to AC and a +2 resistance bonus on saves. Both these bonuses apply against attacks made or effects created by evil creatures.\n\nSecond, the subject immediately receives another saving throw (if one was allowed to begin with) against any spells or effects that possess or exercise mental control over the creature (including enchantment [charm] effects and enchantment [compulsion] effects, such as charm person, command, and dominate person). This saving throw is made with a +2 morale bonus, using the same DC as the original effect. If successful, such effects are suppressed for the duration of this spell. The effects resume when the duration of this spell expires. While under the effects of this spell, the target is immune to any new attempts to possess or exercise mental control over the target. This spell does not expel a controlling life force (such as a ghost or spellcaster using magic jar), but it does prevent them from controlling the target. This second effect only functions against spells and effects created by evil creatures or objects, subject to GM discretion.\n\nThird, the spell prevents bodily contact by evil summoned creatures. This causes the natural weapon attacks of such creatures to fail and the creatures to recoil if such attacks require touching the warded creature. Summoned creatures that are not evil are immune to this effect. The protection against contact by summoned creatures ends if the warded creature makes an attack against or tries to force the barrier against the blocked creature. Spell resistance can allow a creature to overcome this protection and touch the warded creature.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Good',
@@ -212,6 +217,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like protection from evil, except that the deflection and resistance bonuses apply to attacks made by good creatures. The target receives a new saving throw against control by good creatures and good summoned creatures cannot touch the target.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Law',
@@ -245,6 +251,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like protection from evil, except that the deflection and resistance bonuses apply to attacks made by lawful creatures. The target receives a new saving throw against control by lawful creatures and lawful summoned creatures cannot touch the target.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sanctuary',
@@ -271,6 +278,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "Any opponent attempting to directly attack the warded creature, even with a targeted spell, must attempt a Will save. If the save succeeds, the opponent can attack normally and is unaffected by that casting of sanctuary. If the save fails, the opponent can't follow through with the attack, that part of its action is lost, and it can't directly attack the warded creature for the duration of the spell. Those not attempting to attack the subject remain unaffected. This spell does not prevent the warded creature from being attacked or affected by area of effect spells. The subject cannot attack without breaking the spell but may use non-attack spells or otherwise act.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield',
@@ -303,6 +311,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'Shield creates an invisible shield of force that hovers in front of you. It negates magic missile attacks directed at you. The disk also provides a +4 shield bonus to AC. This bonus applies against incorporeal touch attacks, since it is a force effect. The shield has no armor check penalty or arcane spell failure chance.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Faith',
@@ -330,6 +339,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell creates a shimmering, magical field around the target that averts and deflects attacks. The spell grants the subject a +2 deflection bonus to AC. This bonus increases by +1 for every six caster levels you have (maximum +5 at 18th level).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   // ============================================================
   // LEVEL 2 ABJURATION SPELLS
@@ -359,6 +369,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'An arcane lock spell cast upon a door, chest, or portal magically locks it. You can freely pass your own arcane lock without affecting it. If the locked object has a lock, the DC to open that lock increases by 10 while it remains attached to the object. If the object does not have a lock, this spell creates one that can only be opened with a DC 20 Disable Device skill check. A door or object secured with this spell can be opened only by breaking in or with a successful dispel magic or knock spell. Add 10 to the normal DC to break open a door or portal affected by this spell. A knock spell does not remove an arcane lock; it only suppresses the effect for 10 minutes.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Arrows',
@@ -391,6 +402,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The warded creature gains damage reduction 10/magic against ranged weapons. This spell doesn't grant you the ability to damage creatures with similar damage reduction. Once the spell has prevented a total of 10 points of damage per caster level (maximum 100 points), it is discharged.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Chaos, Communal',
@@ -423,6 +435,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like protection from chaos, except you divide the duration in 1-minute intervals among the creatures touched.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Evil, Communal',
@@ -455,6 +468,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like protection from evil, except you divide the duration in 1-minute intervals among the creatures touched.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Good, Communal',
@@ -487,6 +501,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like protection from good, except you divide the duration in 1-minute intervals among the creatures touched.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Law, Communal',
@@ -519,6 +534,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like protection from law, except you divide the duration in 1-minute intervals among the creatures touched.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resist Energy',
@@ -559,6 +575,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This abjuration grants a creature limited protection from damage of whichever one of five energy types you select: acid, cold, electricity, fire, or sonic. The subject gains resist energy 10 against the energy type chosen, meaning that each time the creature is subjected to such damage (whether from a natural or magical source), that damage is reduced by 10 points before being applied to the creature's hit points. The amount of resistance increases to 20 points at 7th level and to 30 points at 11th level. The spell protects the recipient's equipment as well.\n\nResist energy absorbs only damage. The subject could still suffer unfortunate side effects.\n\nNote: Resist energy overlaps (and does not stack with) protection from energy. If a character is warded by protection from energy and resist energy, the protection spell absorbs damage until its power is exhausted.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield Other',
@@ -588,6 +605,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell wards the subject and creates a mystic connection between you and the subject so that some of its wounds are transferred to you. The subject gains a +1 deflection bonus to AC and a +1 resistance bonus on saves. Additionally, the subject takes only half damage from all wounds and attacks (including that dealt by special abilities) that deal hit point damage. The amount of damage not taken by the warded creature is taken by you. Forms of harm that do not involve hit points, such as charm effects, temporary ability damage, level draining, and death effects, are not affected. If the subject suffers a reduction of hit points from a lowered Constitution score, the reduction is not split with you because it is not hit point damage. When the spell ends, subsequent damage is no longer divided between the subject and you, but damage already split is not reassigned to the subject.\n\nIf you and the subject of this spell move out of range of each other, the spell ends.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Anti-Summoning Shield',
@@ -619,6 +637,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'Within the area of effect, this spell impedes the use of spells of the summoning subschool and other effects that summon creatures. Any summoning spells, spell-like abilities, or similar effects used within the area have a failure chance equal to 5% per caster level (maximum 75%). If the summoning effect already has a failure chance, these percentages stack. This spell does not prevent a summoner from calling an eidolon, though it does affect other summoning spells the summoner casts.',
     source: "Demon Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Suppress Charms and Compulsions',
@@ -654,6 +673,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "You bolster the subjects' willpower and self-worth. Choose one of the following effects: You grant each subject a +4 morale bonus on saving throws against charm and compulsion effects for 10 minutes. Or you suppress one existing charm or compulsion effect on each subject for as long as you concentrate (up to 1 round per level). While you concentrate, affected subjects are also immune to new charm and compulsion effects that target them.",
     source: "Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   // ============================================================
   // LEVEL 3 ABJURATION SPELLS
@@ -701,6 +721,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "You can use dispel magic to end one ongoing spell that has been cast on a creature or object, to temporarily suppress the magical abilities of a magic item, or to counter another spellcaster's spell. A dispelled spell ends as if its duration had expired. Some spells, as detailed in their descriptions, can't be defeated by dispel magic. Dispel magic can dispel (but not counter) spell-like effects just as it does spells. The effect of a spell with an instantaneous duration can't be dispelled, because the magical effect has already been discharged. You choose to use dispel magic in one of two ways: a targeted dispel or a counterspell.\n\nTargeted Dispel: One object, creature, or spell is the target of the dispel magic spell. You make one dispel check (1d20 + your caster level) and compare that to the spell with highest caster level (DC = 11 + the spell's caster level). If successful, that spell ends. If not, compare the same result to the spell with the next highest caster level. Repeat this process until you have dispelled one spell affecting the target, or you have failed to dispel every spell. For example, a 7th-level caster dispels a 6th-level spell with a roll of 17, dispels a 3rd-level spell with a roll of 14, but fails to dispel a 9th-level spell with the same roll.\n\nYou can also use a targeted dispel to specifically end one spell affecting the target or one spell affecting an area (such as a wall of fire). You must name the specific spell effect to be targeted in this way. If your dispel check against that specific spell is successful, that spell ends. If you fail, no spells are dispelled.\n\nFor each ongoing spell currently in effect on the object or creature, you make a dispel check against the DC of that spell. If you succeed, that spell ends. You may automatically succeed on your dispel check against any spell that you cast yourself.\n\nIf you target a magic item, you make a dispel check against the item's caster level (DC = 11 + the item's caster level). If you succeed, all the item's magical properties are suppressed for 1d4 rounds, after which the item recovers its magical properties.\n\nCounterspell: When dispel magic is used in this way, the spell targets a spellcaster and is cast as a counterspell. Unlike a true counterspell, dispel magic may not work; you must make a dispel check to counter the other spellcaster's spell.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Circle against Chaos',
@@ -736,6 +757,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like magic circle against evil, except that it is similar to protection from chaos instead of protection from evil, and it can imprison a non-lawful called creature.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Circle against Evil',
@@ -771,6 +793,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "All creatures within the area gain the effects of a protection from evil spell, and evil summoned creatures cannot enter the area either. You must overcome a creature's spell resistance in order to keep it at bay (as in the third function of protection from evil), but the deflection and resistance bonuses and the protection from mental control apply regardless of enemies' spell resistance.\n\nThis spell has an alternative version that you may choose when casting it. A magic circle against evil can be focused inward rather than outward. When focused inward, the spell binds a non-good called creature (such as those called by the lesser planar binding, planar binding, and greater planar binding spells) for a maximum of 24 hours per caster level, provided that you cast the spell that calls the creature within 1 round of casting the magic circle. The creature cannot cross the circle's boundaries. If a creature too large to fit into the spell's area is the subject of the spell, the spell acts as a normal protection from evil spell for that creature only.\n\nA magic circle leaves no hole in the barrier, and thus the trapped creature cannot be physically accessed by those outside the circle. You can add a special diagram (a power symbol that defines the trap) to make the magic circle more secure. Drawing the diagram by hand takes 10 minutes and requires a DC 20 Spellcraft check. You do not have to make this check if you are using a prepare magic circle diagram. If the check fails, the diagram is ineffective. You can take 10 when drawing the diagram if you are under no particular time pressure to complete the task. This check is not affected by circumstance bonuses or penalties that are normally applied to Spellcraft checks. If this spell is used to trap a creature, you can make this check in secret in order to bluff the creature you've trapped.\n\nIf successful, the diagram prevents the creature from using its spell resistance against the spell, prevents the creature from making non-magical physical attacks to cross the diagram, and increases the DC to break free by 5. The creature cannot use teleportation or planar travel to escape, but it can attempt to use dimensional travel to cross the barrier using a successful caster level check (DC 11 + your caster level). If the diagram is drawn incorrectly and the creature is not trapped, the creature can cross the diagram.\n\nIf you move outside the magic circle, the spell ends.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Circle against Good',
@@ -806,6 +829,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like magic circle against evil, except that it is similar to protection from good instead of protection from evil, and it can imprison a non-evil called creature.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magic Circle against Law',
@@ -841,6 +865,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like magic circle against evil, except that it is similar to protection from law instead of protection from evil, and it can imprison a non-chaotic called creature.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Nondetection',
@@ -878,6 +903,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The warded creature or object becomes difficult to detect by divination spells such as clairaudience/clairvoyance, locate object, and detect spells. Nondetection also prevents location by such magic items as crystal balls. If a divination is attempted against the warded creature or item, the caster of the divination must succeed on a caster level check (1d20 + caster level) against a DC of 11 + the caster level of the spellcaster who cast nondetection. If you cast nondetection on yourself or on an item currently in your possession, the DC is 15 + your caster level.\n\nIf cast on a creature, nondetection wards the creature's gear as well as the creature itself.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Energy',
@@ -917,6 +943,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The spell grants temporary immunity to the type of energy you specify when you cast it (acid, cold, electricity, fire, or sonic). When the spell absorbs 12 points per caster level of energy damage (to a maximum of 120 points at 10th level), it is discharged.\n\nNote: Protection from energy overlaps (and does not stack with) resist energy. If a character is warded by protection from energy and resist energy, the protection spell absorbs damage until its power is exhausted.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Curse',
@@ -951,6 +978,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "Remove curse instantaneously removes all curses on an object or a creature. Remove curse does not remove the curse from a cursed shield, weapon, or suit of armor, although a successful caster level check (1d20 + caster level against DC 11 + the item's caster level) allows the creature afflicted with any such cursed item to remove and get rid of it. Artifacts are never affected by remove curse. Remove curse counters and dispels bestow curse.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   // ============================================================
   // LEVEL 4 ABJURATION SPELLS
@@ -982,6 +1010,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You create a mobile, hemispherical energy field that incorporeal creatures cannot enter. This spell functions only defensively, not aggressively. Forcing the abjuration barrier against creatures that the spell keeps at bay collapses the barrier.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Antiplant Shell',
@@ -1008,6 +1037,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The antiplant shell spell creates an invisible, mobile barrier that keeps all creatures of the plant type (including plant-based creatures and animated plants) at bay. This spell functions only defensively, not aggressively. Forcing the abjuration barrier against creatures that the spell keeps at bay collapses the barrier.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dimensional Anchor',
@@ -1039,6 +1069,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'A green ray springs from your outstretched hand. You must make a ranged touch attack to hit the target. Any creature or object struck by the ray is covered with a shimmering emerald field that completely blocks extradimensional travel. Forms of movement barred by dimensional anchor include astral projection, blink, dimension door, ethereal jaunt, etherealness, gate, maze, plane shift, shadow walk, teleport, and similar spell-like or psionic abilities. The spell does not interfere with the movement of creatures already in ethereal or astral form when the spell is cast, nor does it block extradimensional perception or attack forms. Also, dimensional anchor does not prevent summoned creatures from disappearing at the end of a summoning spell.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Freedom of Movement',
@@ -1075,6 +1106,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell enables you or a creature you touch to move and attack normally for the duration of the spell, even under the influence of magic that usually impedes movement, such as paralysis, solid fog, slow, and web. All combat maneuver checks made to grapple the target automatically fail. The subject automatically succeeds on any combat maneuver checks and Escape Artist checks made to escape a grapple or a pin.\n\nThe spell also allows the subject to move and attack normally while underwater, even with slashing weapons such as axes and swords or with bludgeoning weapons such as flails, hammers, and maces, provided that the weapon is wielded in the hand rather than hurled. The freedom of movement spell does not, however, grant water breathing.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Globe of Invulnerability, Lesser',
@@ -1102,6 +1134,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'An immobile, faintly shimmering magical sphere surrounds you and excludes all spell effects of 3rd level or lower. The area or effect of any such spells does not include the area of the lesser globe of invulnerability. Such spells fail to affect any target located within the globe. Excluded effects include spell-like abilities and spells or spell-like effects from items. Any type of spell, however, can be cast through or out of the magical globe. Spells of 4th level and higher are not affected by the globe, nor are spells already in effect when the globe is cast. The globe can be brought down by a dispel magic spell. You can leave and return to the globe without penalty.\n\nNote that spell effects are not disrupted unless their effects enter the globe, and even then they are merely suppressed, not dispelled.\n\nIf a given spell has more than one level depending on which character class is casting it, use the level appropriate to the caster to determine whether lesser globe of invulnerability stops it.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resist Energy, Communal',
@@ -1140,6 +1173,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like resist energy, except you divide the duration in 10-minute intervals among the creatures touched.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Immunity',
@@ -1167,6 +1201,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The warded creature is immune to the effects of one specified spell for every four levels you have. The spells must be of 4th level or lower. The warded creature effectively has unbeatable spell resistance regarding the specified spell or spells. Naturally, that immunity does not protect a creature from spells for which spell resistance is ineffective. In addition, the immunity extends to any spell of the same school that operates in a similar way.\n\nSpell immunity protects against spells, spell-like effects of magic items, and innate spell-like abilities of creatures. It does not protect against supernatural or extraordinary abilities, such as breath weapons or gaze attacks.\n\nOnly a particular spell can be protected against, not a certain domain or school of spells or a group of spells that are similar in effect.\n\nA creature can have only one spell immunity spell in effect on it at a time.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stoneskin',
@@ -1201,6 +1236,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The warded creature gains damage reduction 10/adamantine. It takes 10 less points of damage each time it is dealt damage from a weapon, though adamantine weapons bypass this reduction. Once the spell has prevented a total of 10 points of damage per caster level (maximum 150 points), it is discharged.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   // ============================================================
   // LEVEL 5 ABJURATION SPELLS
@@ -1238,6 +1274,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This spell frees victims from enchantments, transmutations, and curses. Break enchantment can reverse even an instantaneous effect. For each such effect, you make a caster level check (1d20 + caster level, maximum +15) against a DC of 11 + caster level of the effect. Success means that the creature is free of the spell, curse, or effect. For a cursed magic item, the DC is equal to the DC of the curse.\n\nIf the spell is one that cannot be dispelled by dispel magic, break enchantment works only if that spell is 5th level or lower.\n\nIf the effect comes from a permanent magic item, break enchantment does not remove the curse from the item, but it does free the victim from the item's effects.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dismissal',
@@ -1270,6 +1307,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell forces an extraplanar creature back to its proper plane if it fails a Will save. If the spell is successful, the creature is instantly whisked away, but there is a 20% chance of actually sending the subject to a plane other than its own.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dispel Chaos',
@@ -1300,6 +1338,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like dispel evil, except that you are surrounded by constant, blue lawful energy, and the spell affects chaotic creatures and spells rather than evil ones.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dispel Evil',
@@ -1330,6 +1369,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "Shimmering, white holy energy surrounds you. This energy has three effects.\n\nFirst, you gain a +4 deflection bonus to AC against attacks by evil creatures.\n\nSecond, on making a successful melee touch attack against an evil creature from another plane, you can choose to drive that creature back to its home plane. The creature can negate the effect with a successful Will save (spell resistance applies). This use discharges and ends the spell.\n\nThird, with a touch you can automatically dispel any one enchantment spell cast by an evil creature or any one evil spell. Exception: Spells that can't be dispelled by dispel magic also can't be dispelled by dispel evil. Saving throws and spell resistance do not apply to this effect. This use discharges and ends the spell.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dispel Good',
@@ -1360,6 +1400,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like dispel evil, except that you are surrounded by dark, wavering unholy energy, and the spell affects good creatures and spells rather than evil ones.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dispel Law',
@@ -1390,6 +1431,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like dispel evil, except that you are surrounded by flickering, yellow chaotic energy, and the spell affects lawful creatures and spells rather than evil ones.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Resistance',
@@ -1416,6 +1458,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The target gains spell resistance equal to 12 + your caster level.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   // ============================================================
   // LEVEL 6 ABJURATION SPELLS
@@ -1447,6 +1490,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You bring into being a mobile, hemispherical energy field that prevents the entrance of most types of living creatures.\n\nThe effect hedges out animals, aberrations, dragons, fey, giants, humanoids, magical beasts, monstrous humanoids, oozes, plants, and vermin, but not constructs, elementals, outsiders, or undead creatures.\n\nThis spell functions only defensively, not aggressively. Forcing the abjuration barrier against creatures that the spell keeps at bay collapses the barrier.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Banishment',
@@ -1480,6 +1524,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "A banishment spell is a more powerful version of the dismissal spell. It enables you to force extraplanar creatures out of your home plane. As many as 2 Hit Dice of creatures per caster level can be banished.\n\nYou can improve the spell's chance of success by presenting at least one object or substance that the target hates, fears, or otherwise opposes. For each such object or substance, you gain a +1 bonus on your caster level check to overcome the target's Spell Resistance (if any), and the saving throw DC increases by 2.\n\nCertain rare items might work twice as well as a normal item for the purpose of the bonuses (each providing a +2 bonus on the caster level check against Spell Resistance and increasing the save DC by 4).",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Forbiddance',
@@ -1508,6 +1553,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "Forbiddance seals an area against all planar travel into or within it. This includes all teleportation spells (such as dimension door and teleport), plane shifting, astral travel, ethereal travel, and all summoning spells. Such effects simply fail automatically.\n\nIn addition, it damages creatures whose alignment is different from yours. If the warded area shares your alignment with both of its components (law/chaos and good/evil), entering creatures whose alignments differ from yours on either component take 6d6 points of damage. Creatures whose alignments differ from yours on both components take 12d6 points of damage. A successful Will save halves this damage. Spell resistance applies to this warding effect.\n\nProvided you cast forbiddance every time it expires, these effects are permanent. You can designate a password to allow entry.\n\nDispel magic does not dispel forbiddance unless the dispeller's level is equal to or greater than your caster level.\n\nIf you wish to create a more powerful ward, you can use rare incenses and oils worth 1,000 gp per 60-foot cube.\n\nForbiddance cannot be used offensively; you cannot cast it on a creature. The abjuration exists only to ward an area.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Globe of Invulnerability',
@@ -1535,6 +1581,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like lesser globe of invulnerability, except that it also excludes 4th-level spells and spell-like effects.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Repulsion',
@@ -1568,6 +1615,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "An invisible, mobile field surrounds you and prevents creatures from approaching you. You decide how big to make the field and whether the field is spherical or hemispherical when you cast the spell.\n\nAny creature within or entering the field must attempt a saving throw. If it fails, it becomes unable to move toward you for the duration of the spell. Repelled creatures' actions are not otherwise restricted. They can fight other creatures and can cast spells. If you move closer to an affected creature, nothing happens. The creature is not obligated to move away from you. The creature is simply not allowed to move closer to you than its current distance.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Immunity, Greater',
@@ -1594,6 +1642,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like spell immunity, except the immunity extends to spells of 8th level or lower.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   // ============================================================
   // LEVEL 7 ABJURATION SPELLS
@@ -1625,6 +1674,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'When cast, this spell not only prevents divination spells from working to detect or locate the creature or object under the sequester spell, but it also renders the affected creature or object invisible to any form of sight or seeing (as the invisibility spell). The spell does not prevent the subject from being discovered through tactile means or through the use of devices. Creatures affected by sequester become comatose and are effectively in a state of suspended animation until the spell ends.\n\nNote: The Will save applies to attended objects and magic items.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Turning',
@@ -1653,6 +1703,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'Spells and spell-like effects targeted on you are turned back upon the original caster. The abjuration turns only spells that have you as a target. Effect and area spells are not affected. Spell turning also fails to stop touch range spells.\n\nFrom seven to ten (1d4+6) spell levels are affected by the turning. The exact number is rolled secretly.\n\nWhen you have used up the spell turning power, the abjuration is spent and no longer functions. If a spell is only partially turned, see the description of spell turning in the Pathfinder Core Rulebook for partial turning rules.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   // ============================================================
   // LEVEL 8 ABJURATION SPELLS
@@ -1685,6 +1736,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "An invisible barrier surrounds you and moves with you. The space within this barrier is impervious to most magical effects, including spells, spell-like abilities, and supernatural abilities. Likewise, it prevents the functioning of any magic items or spells within its confines.\n\nAn antimagic field suppresses (but does not dispel) spells and effects within the field. Time spent within an antimagic field counts against the suppressed spell's duration.\n\nSummoned creatures of any type and incorporeal undead wink out if they enter an antimagic field. They reappear in the same spot once the field goes away. Time spent winked out is still counted against the duration of the conjuration that is maintaining the creature. If you cast antimagic field in an area occupied by a summoned creature that has spell resistance, you must make a caster level check (1d20 + caster level) against the creature's spell resistance to make it wink out. (The effects of instantaneous conjurations are not affected by an antimagic field because the conjuration itself is no longer in effect, only its result.)\n\nA normal creature can enter the area, as can normal missiles. Furthermore, while a magic sword does not function magically within the area, it is still a sword (and a masterwork sword at that). The spell has no effect on golems and other constructs that are imbued with magic during their creation process and are thereafter self-supporting (unless they have been summoned, in which case they are treated like any other summoned creatures). Elementals, undead, and outsiders are likewise unaffected unless summoned. These creatures' spell-like or supernatural abilities, however, may be temporarily nullified by the field.\n\nVerbatim: Dispel magic does not remove the field. Two or more antimagic fields sharing any of the same space have no effect on each other. Certain spells, such as wall of force, prismatic sphere, and prismatic wall remain unaffected by antimagic field (see the individual spell descriptions). Artifacts and deities are unaffected by mortal magic such as this.\n\nShould a creature be larger than the area enclosed by the barrier, any part of it that lies outside the barrier is unaffected by the field.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dimensional Lock',
@@ -1716,6 +1768,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You create a shimmering emerald barrier that completely blocks extradimensional travel. Forms of movement barred include astral projection, blink, dimension door, ethereal jaunt, etherealness, gate, maze, plane shift, shadow walk, teleport, and similar spell-like or psionic abilities. Once dimensional lock is in place, extradimensional travel into or out of the area is not possible.\n\nThe spell does not interfere with the movement of creatures already in ethereal or astral form when the spell is cast, nor does it block extradimensional perception or attacks. Also, the spell does not prevent summoned creatures from disappearing at the end of a summoning spell.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Blank',
@@ -1742,6 +1795,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The subject is protected from all devices and spells that gather information about the target through divination magic (such as detect evil, locate creature, scry, and see invisibility). This spell also grants a +8 resistance bonus on saving throws against all mind-affecting spells and effects. Mind blank even foils limited wish, miracle, and wish spells when they are used in such a way as to gain information about the target. In the case of scrying that scans an area the creature is in, such as arcane eye, the spell works but the creature simply isn't detected. Scrying attempts that are targeted specifically at the subject do not work at all.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prismatic Wall',
@@ -1768,6 +1822,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "Prismatic wall creates a vertical, opaque wall—a shimmering, multicolored plane of light that protects you from all forms of attack. The wall flashes with seven colors, each of which has a distinct power and purpose. The wall is immobile, and you can pass through and remain near the wall without harm. However, any other creature with fewer than 8 HD that is within 20 feet of the wall is blinded for 2d4 rounds by the colors if it looks at the wall.\n\nThe wall's maximum proportions are 4 feet wide per caster level and 2 feet high per caster level. A prismatic wall spell cast to materialize in a space occupied by a creature is disrupted, and the spell is wasted.\n\nEach color in the wall has a special effect. The accompanying table shows the seven colors of the wall, the order in which they appear, their effects on creatures trying to pass through the wall, and the magic needed to negate each color.\n\nThe wall can be destroyed, color by color, in consecutive order, by various magical effects; however, the first color must be brought down before the second can be affected, and so on. A rod of cancellation or a mage's disjunction destroys a prismatic wall, but an antimagic field fails to penetrate it.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   // ============================================================
   // LEVEL 9 ABJURATION SPELLS
@@ -1811,6 +1866,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions like dispel magic, except that it can end more than one spell on a target and it can be used to target multiple creatures.\n\nYou choose to use greater dispel magic in one of three ways: a targeted dispel, an area dispel, or a counterspell.\n\nTargeted Dispel: This functions as a targeted dispel magic, but it can dispel one spell for every 4 caster levels you have, attempting to dispel spells with the highest caster level first. Additionally, greater dispel magic has a chance to dispel any effect that remove curse can remove, even if dispel magic can't dispel that effect. The DC of this check is equal to the curse's DC.\n\nArea Dispel: When greater dispel magic is used in this way, the spell affects everything in a 20-foot-radius burst. Roll one dispel check and apply that check to each creature in the area, as if targeted by dispel magic. For each object within the area, roll a separate dispel check. Targeted spells are removed if the check is successful. Area spells, ongoing spells, and permanent spells are only suppressed for 1d4 rounds.\n\nCounterspell: This functions like dispel magic, but you receive a +4 bonus on your dispel check to counter the other spellcaster's spell.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prismatic Sphere',
@@ -1837,6 +1893,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions like prismatic wall, except you conjure up an immobile, opaque globe of shimmering, multicolored light that surrounds you and moves with you, warding you and all within its radius from all forms of attack. The sphere flashes in all colors of the visible spectrum.\n\nThe sphere can be destroyed, color by color, in consecutive order, by various magical effects; however, the first color must be brought down before the second can be affected, and so on. A rod of cancellation or a mage's disjunction destroys a prismatic sphere, but an antimagic field fails to penetrate it. Sight and sound pass through the sphere normally.\n\nNote: Creatures other than you that are inside the sphere when you cast it are unaffected by the sphere's warding properties.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Endure Elements, Communal',
@@ -1873,6 +1930,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like endure elements, except you divide the duration in 1-hour intervals among the creatures touched.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Arrows, Communal',
@@ -1903,6 +1961,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like protection from arrows, except you divide the duration in 1-hour intervals among the creatures touched. This spell also ends for a specific target when it has prevented a total of 10 points of damage per caster level (maximum 100 points) for that target.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Energy, Communal',
@@ -1940,6 +1999,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like protection from energy, except you divide the duration in 10-minute intervals among the creatures touched.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stoneskin, Communal',
@@ -1972,6 +2032,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like stoneskin, except you divide the duration in 10-minute intervals among the creatures touched.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Blank, Communal',
@@ -1997,6 +2058,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell functions like mind blank, except it affects multiple creatures.',
     source: 'Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_001 ─────────────────────────────────────────────────────────────
@@ -2021,6 +2083,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This protective ward provides the target with nine uses of emergency abilities. The recipient can activate any of the following as an immediate action, with a combined limit of nine total uses before the spell ends: Cat's Luck (reroll a failed save), Fortitude (negate critical hits or sneak attacks — roll damage normally instead), Rejuvenate (heal 3d6 HP when reduced to 0 or fewer hit points; stabilizes if still at negative HP), Shake Off (remove one condition: blinded, confused, cowering, dazed, dazzled, entangled, exhausted, fatigued, frightened, nauseated, panicked, shaken, sickened, or staggered), Shimmy Out (automatically escape a grapple or pin), or Stay Up (remain upright when tripped or knocked prone).",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Node of Blasting',
@@ -2043,6 +2106,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The caster imbues an object with psychic energy that triggers when touched by a creature with a mind. The activation deals 6d6 points of damage to the creature touching the object and causes the creature to be staggered for 1 minute. A successful Will save halves damage and negates the staggered condition. The spell functions as a magical trap with a Perception DC and Disable Device DC both equal to 25 plus the spell's level (28 total). Trapfinding class feature users and those with the read aura occult skill unlock can detect it.",
     source: 'Pathfinder Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Nondetection',
@@ -2078,6 +2142,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The protected creature or object becomes resistant to detection by divination magic such as clairaudience/clairvoyance and locate object spells, as well as divination magic items like crystal balls. When attempting divination against the warded target, the diviner must succeed on a caster level check (1d20 + caster level) against DC 11 + the nondetection caster's level. If cast on the caster or their possessed item, the DC becomes 15 + caster level. When cast on creatures, the spell protects both the creature and its equipment.",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Numerological Resistance',
@@ -2099,6 +2164,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective magic enables casters to roll 5d8, creating a customizable pool. The caster allocates dice to determine: the energy type being resisted (matched to one die result), the number of affected creatures (one die), duration in rounds (one die), and sums two remaining dice for resistance points granted. All affected creatures must remain within spell range.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Oath of Peace',
@@ -2120,6 +2186,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'Upon casting, you make a temporary oath of peace, granting you superior defenses but meaning you cannot attack for the duration of the oath. The spell provides a +5 sacred bonus to Armor Class and saving throws, plus damage reduction 10 against evil. If you make a direct or indirect attack or show any hostility toward any creature, the spell immediately ends.',
     source: "Pathfinder Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Obscure Object',
@@ -2152,6 +2219,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The spell hides an object from location by divination (scrying) effects, such as the scrying spell or a crystal ball. Divination attempts targeting the object automatically fail, or fail to perceive it if the divination is aimed at a nearby location, object, or person instead.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Obscure Poison',
@@ -2185,6 +2253,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This abjuration makes poison difficult to detect or identify. Detection magic requires a successful caster level check against a DC of 15 plus your caster level. Even when detected, identification checks face a +10 DC increase. When cast on venomous creatures, it obscures all their natural poisons similarly.',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Paladin's Sacrifice",
@@ -2206,6 +2275,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This divine spell allows you to redirect damage and harmful effects from another creature to yourself instead. When a target within range takes damage from an attack or fails a saving throw, you can cast this spell to absorb all resulting wounds and adverse effects. Your resistances and immunities apply normally, but you cannot otherwise reduce the damage. If the effect also targets you, you suffer consequences for both yourself and the spared target.',
     source: "Pathfinder Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Peace Bond',
@@ -2239,6 +2309,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The caster creates glowing runes of peace — one initially, plus an additional rune for every two levels above 1st (maximum five runes at 9th level). An identical symbol manifests on the caster's forehead and cannot be concealed. Each rune illuminates a 5-foot cube, preventing spells cast by the caster (up to 3rd level with defined areas) from affecting those cubes. Area spells like fireball cannot damage creatures or items within protected squares; however, effects such as stinking cloud enter normally. The spell provides no protection against spell-like or supernatural area effects.",
     source: 'Pathfinder Player Companion: Faiths of Balance',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Peacebond',
@@ -2260,6 +2331,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The spell locks a weapon in place on its owner's body, or within the weapon's sheath or holster. Drawing the weapon requires a standard action and a successful Strength check (DC equals the saving throw DC), with attacks of opportunity provoked regardless of success or failure. A greater version (levels 4-5 depending on class) affects multiple weapons and has additional effects for weapons that are not sheathed when cast.",
     source: 'Pathfinder Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Aegis',
@@ -2283,6 +2355,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The caster weaves planar essence into a protective shield. You select one elemental or energy trait and take half damage from attacks of that type. Enemies hitting you with melee, natural, or unarmed attacks suffer 3d6 points of damage plus 1 point per caster level (maximum +20) matching your chosen essence type. Effects allowing saves for half damage grant no damage on successful saves.',
     source: 'Pathfinder Planar Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pressure Adaptation',
@@ -2317,6 +2390,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The spell enables rapid pressure acclimation. A target adjusts to 100 feet of new pressure (or the entire shift, in the case of an instantaneous shift within its native range) after just one successful Fortitude saving throw instead of the usual five.',
     source: 'Pathfinder Bestiary 5',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prismatic Sphere',
@@ -2339,6 +2413,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective spell creates an immobile, opaque globe of shimmering, multicolored light surrounding the caster. The caster can move freely through it without harm, but it blocks projectiles and spells from passing outward. Attackers passing through experience effects from each color sequentially, similar to a prismatic wall. Creatures with fewer than 8 Hit Dice within the sphere risk blindness for 2d4 x 10 minutes. The sphere can be made permanent via the permanency spell.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prismatic Wall',
@@ -2361,6 +2436,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This abjuration creates a vertical, opaque wall — a shimmering, multicolored plane of light that protects you from all forms of attack. The barrier consists of seven distinct colored layers, each providing different protective effects and requiring specific counterspells to dispel in sequential order. Creatures with fewer than 8 Hit Dice within 20 feet risk blindness from viewing the wall. The caster can safely pass through and remain near it without harm. The spell can be made permanent via the permanency spell.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Arrows',
@@ -2391,6 +2467,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The spell grants the recipient damage reduction 10/magic against ranged weapons. The protection persists until the spell has prevented a total of 10 points of damage per caster level (maximum 100 points), at which point it ends. A communal version exists at level 3 that distributes duration among multiple touched creatures with identical mechanics.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Chaos',
@@ -2422,6 +2499,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective spell mirrors protection from evil but functions against chaotic entities instead. It provides a +2 deflection bonus and +2 resistance bonus to saves versus attacks from chaotic creatures. The recipient gains an additional saving throw against control effects from chaotic beings, and chaotic summoned creatures cannot physically contact the protected target. A communal variant at level 2 allows the caster to distribute the duration among multiple touched creatures.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Energy',
@@ -2457,6 +2535,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective magic grants temporary energy immunity against one chosen type (acid, cold, electricity, fire, or sonic). The spell absorbs up to 12 points per caster level of energy damage (to a maximum of 120 points at 10th level) before discharging. A communal variant is available at one spell level higher, distributing duration among multiple touched creatures.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Evil',
@@ -2487,6 +2566,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective ward creates a magical barrier around the subject at a distance of 1 foot. It provides three benefits: a +2 deflection bonus to AC and +2 resistance bonus on saves against evil creatures; a new saving throw against possession and mental control effects (charm and compulsion) with a +2 morale bonus; and prevention of bodily contact by evil summoned creatures. Protection from Evil, Communal functions identically but allows the caster to divide the duration in 1-minute intervals among the creatures touched, and is available as a 2nd-level spell.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Good',
@@ -2517,6 +2597,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective magic mirrors the protection from evil spell but reverses its alignment focus. Rather than shielding against evil entities, it guards against good-aligned attackers, granting deflection and resistance bonuses against their assaults. The target also gains a fresh saving throw against control attempts by good creatures, and benevolent summoned beings cannot physically contact the protected individual.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Law',
@@ -2547,6 +2628,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective charm functions identically to protection from evil, but instead guards against lawful creatures. The spell grants deflection and resistance bonuses against attacks from lawful beings. The recipient gains a new saving throw to break free from control by lawful creatures, and lawful summoned creatures cannot touch the target. A communal variant at level 2 allows the caster to distribute the duration among multiple touched creatures.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Natural Attacks',
@@ -2579,6 +2661,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The caster selects one type of natural attack (bite, claw, gore, hoof, pincers, slam, sting, swarm, tail slap, talon, tentacle, or wing). The target then gains DR 5/— against all attacks from natural weapons of the selected type for the spell's duration.",
     source: 'Pathfinder Bestiary 4',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Outsiders',
@@ -2601,6 +2684,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective magic shields a creature from attacks by outsiders of a chosen racial subtype, prevents mental domination by such creatures, and blocks summoned outsiders of that type. Only specific outsider racial subtypes — including angel, azata, demon, oni, psychopomp, and protean — can be selected; alignment or general subtypes cannot be chosen. The spell creates a magical barrier providing +4 deflection bonus to AC and +4 resistance bonus on saves against the chosen subtype, grants an additional saving throw against mental control effects with a +4 morale bonus, and prevents physical contact from summoned creatures of that subtype.',
     source: 'Pathfinder Bestiary 4',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Spells',
@@ -2624,6 +2708,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'Protected subjects receive an enhancement of +8 resistance bonus on saving throws against spells and spell-like abilities. This protection does not extend to supernatural or extraordinary abilities.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Spores',
@@ -2655,6 +2740,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This protective magic grants a touched creature immunity to harmful spore effects and fungal afflictions. The spell provides complete immunity to creatures affected by specific environmental hazards like brown mold, green slime, and similar threats of Challenge Rating 6 or lower. It also blocks poison, disease, and infestation attacks from fungal creatures of CR 6 or lower. Against more powerful fungal hazards or creatures, the target gains a bonus on saving throws equal to half the caster's level. However, the spell offers no protection against infestations caused by specific spells.",
     source: 'Pathfinder Bestiary 6',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Protection from Technology',
@@ -2677,6 +2763,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective enchantment creates a magical barrier one foot from the subject that moves with them. It provides a +2 deflection bonus to AC and a +2 resistance bonus on saving throws against technological objects and robot-type creatures. The target also receives an additional saving throw against existing technological mental control effects (including pharmaceuticals), gaining a +2 morale bonus on this save. Success suppresses such effects for the duration, and the creature becomes immune to new technological mental control attempts while protected.',
     source: 'Pathfinder Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Punishing Armor',
@@ -2707,6 +2794,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective incantation surrounds you with a shimmering ethereal layer. When any creature inflicts nonlethal damage upon you, that attacker immediately sustains half the nonlethal damage they dealt. The attacking creature may attempt a Fortitude save to negate this reflected damage entirely.',
     source: 'Pathfinder Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Radiation Ward',
@@ -2738,6 +2826,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective magic grants the recipient a +4 bonus on saving throws against radiation-based effects. Additionally, the warded creature immediately perceives when entering a radiation area and can identify the radiation intensity level (low, medium, high, or severe) present in that space.',
     source: 'Pathfinder Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rebuke Technology',
@@ -2760,6 +2849,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This abjuration spell shrouds the targeted technological object or creature (such as a robot or a nanotech swarm) with magical energy. If the target fails its save, it becomes inert and unable to function — or unconscious if it is a living creature — for the duration. Affected creatures can attempt another Fortitude save at the end of their turn after the first full round to potentially end the effect early.',
     source: 'Pathfinder Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Curse',
@@ -2790,6 +2880,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This spell eliminates curses affecting creatures or objects through a caster level check against each curse's DC. While it successfully removes curses from creatures and enables removal of cursed items like weapons or armor, it cannot directly dispel curses from such magical items themselves. The spell also counters and dispels bestow curse.",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Remove Fear',
@@ -2818,6 +2909,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The spell grants subjects a +4 morale bonus against fear effects for 10 minutes. If a subject is already under a fear effect, that effect becomes suppressed while the spell is active. The spell also counters and dispels cause fear.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Repel Vermin',
@@ -2847,6 +2939,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The spell creates an invisible barrier that holds back vermin. Weaker vermin (those with Hit Dice less than one-third the caster's level) cannot cross it. Stronger creatures may attempt a Will save to penetrate the barrier, but doing so inflicts 2d6 points of damage, and contact with the barrier causes pain that deters most vermin from crossing.",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Repulsion',
@@ -2876,6 +2969,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell creates an invisible protective field around the caster. Any creature entering or within this field must make a save or becomes unable to approach the caster for the duration. Affected creatures retain the ability to attack with ranged weapons, cast spells, and engage other enemies. The repulsion effect does not trigger if the caster moves toward the affected creature, nor are creatures forced back — they simply cannot advance closer while the spell remains active.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resist Energy',
@@ -2912,6 +3006,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This protective abjuration allows casters to grant resist energy 10 against the energy type chosen (acid, cold, electricity, fire, or sonic). The resistance increases to 20 at 7th level and 30 at 11th level. The spell protects the recipient's equipment as well, and overlaps with but does not stack with protection from energy. A communal version at 3rd level allows dividing the duration in 10-minute intervals among multiple touched creatures.",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Resistance',
@@ -2946,6 +3041,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This abjuration grants the target magical protection by bestowing a +1 resistance bonus on saves. The effect can be made permanent through the permanency spell.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rite of Bodily Purity',
@@ -2969,6 +3065,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This spell bolsters your body's natural defenses against harmful substances. You receive a +2 resistance bonus on saving throws to resist diseases, drugs, and poisons. Additionally, if you fail a save against these afflictions, you may spend the remaining duration as an immediate action to reroll once. The bonus applies to the reroll, after which the spell terminates.",
     source: 'Pathfinder Player Companion: Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rite of Centered Mind',
@@ -2992,6 +3089,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell enhances mental awareness to resist external influences. It grants a +1 bonus on saves against mind-affecting effects, increasing to +2 against emotion or fear effects. If a mind-affecting save fails during the duration, the caster may spend the remaining duration as an immediate action to reroll that save, accepting the second result regardless of outcome. The +2 bonus applies to the reroll, after which the spell ends.',
     source: 'Pathfinder Player Companion: Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rune of Warding',
@@ -3014,6 +3112,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The caster inscribes magical runes on a door or entryway border. These runes function similarly to a glyph of warding (blast glyph) but remain permanently visible. Unlike standard glyphs of warding, these runes interact with other magical protections in the same way glyphs do, allowing multiple defenses in one location.',
     source: 'Pathfinder Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sanctuary',
@@ -3035,6 +3134,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective enchantment shields a creature from direct assault. Any opponent attempting to directly attack the warded creature, even with a targeted spell, must attempt a Will save. Those who fail cannot proceed with their attack, losing that action. The spell permits the protected creature to cast non-damaging spells and take other non-offensive actions. The warded individual cannot initiate attacks without dispelling the magic. Area-of-effect spells bypass this protection entirely.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield',
@@ -3065,6 +3165,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This abjuration produces an invisible shield of force that hovers in front of you. The spell provides two primary benefits: it negates magic missile attacks directed at the caster, and it grants a +4 shield bonus to AC. This bonus applies against incorporeal touch attacks, since it is a force effect. The spell carries no armor check penalty or arcane spell failure chance, making it particularly valuable for spellcasters.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Faith',
@@ -3087,6 +3188,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective enchantment creates a shimmering, magical field around the target that averts and deflects attacks. The spell grants a +2 deflection bonus to Armor Class, increasing by an additional +1 for every six caster levels, with a maximum +5 deflection bonus achievable at 18th level.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Law',
@@ -3111,6 +3213,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "A blue luminous shield surrounds subjects with four protective effects: each protected creature gains a +4 deflection bonus to AC and a +4 resistance bonus on saves against all attacks; protected creatures gain spell resistance 25 against chaotic spells and spells cast by chaotic creatures; protection from possession and mental influence similar to protection from chaos; and when a chaotic creature successfully strikes a protected creature, the attacker becomes slowed (Will save negates using this spell's DC).",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield Other',
@@ -3133,6 +3236,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective spell creates a connection between caster and target. The warded creature gains a +1 deflection bonus to AC and a +1 resistance bonus on saves. More significantly, the subject takes only half damage from all wounds and attacks while the caster absorbs the remaining damage. This effect excludes ability damage, level drain, charm effects, and death effects. The spell terminates if caster and subject move beyond range.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Absorption',
@@ -3155,6 +3259,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'When you successfully counterspell a 3rd-level or lower spell using dispel magic or normal counterspelling methods, you absorb that spell. For wizards, this restores any single spell cast since last preparation. For sorcerers, it restores one spell slot. The recovered spell or slot must be equal to or lower than the spell you counterspelled. The greater version at 8th level allows absorption of counterspelled spells up to 6th level.',
     source: 'Pathfinder Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Immunity',
@@ -3176,6 +3281,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The spell grants immunity to one specified spell per four caster levels, limited to spells of 4th level or lower. The recipient gains unbeatable spell resistance against the named spells. Protection extends to spell-like effects from magic items and innate creature abilities, but not supernatural or extraordinary abilities like breath weapons. Only one spell immunity variant can affect a creature simultaneously. A communal variant at 5th level allows dividing the duration among multiple touched creatures. A greater version at 8th level covers spells of 8th level or lower.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Resistance',
@@ -3197,6 +3303,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The recipient gains spell resistance equal to 12 + your caster level. This protective enchantment grants the target a defensive barrier against magical effects.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Turning',
@@ -3219,6 +3326,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'Spells and spell-like effects targeted on you are turned back upon the original caster. The effect only applies to targeted spells, not area or touch-range effects. The spell protects seven to ten (1d4+6) spell levels worth of incoming magic. When a higher-level spell exceeds remaining turning capacity, damage is split proportionally between you and the caster, or non-damaging effects have an equal chance affecting either party. If both caster and target have active turning effects, a resonating field occurs determined by a percentile roll.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sphere of Warding',
@@ -3241,6 +3349,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This abjuration creates a glowing energy barrier that affects incorporeal creatures in two ways. First, incorporeal beings must make a Will save to enter the sphere's space; failure prevents passage as if blocked by a wall of force. Success allows movement through, but creatures taking turns within the sphere suffer force damage equal to 1d6 plus 1 per caster level (maximum +10). The spell's second function targets possession: creatures using magic jar or similar effects are immediately ejected upon entering, returning the host's spirit and ending the possession. The possessing creature takes damage without a save and exits the sphere's perimeter.",
     source: 'Pathfinder Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stoneskin',
@@ -3273,6 +3382,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The protected creature gains DR 10/adamantine, reducing weapon damage by 10 points per hit. Adamantine weapons bypass this protection. The spell ends once it prevents a total of 10 points of damage per caster level (maximum 150 points). A communal variant allows the caster to divide the duration among multiple touched creatures.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stunning Barrier',
@@ -3301,6 +3411,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective charm surrounds you with a magical aura providing a +1 deflection bonus to AC and a +1 resistance bonus on saves. Any melee attacker becomes stunned for one round unless they succeed on a Will save. The spell ends after stunning a single opponent. A greater version at level 3 offers +2 bonuses and persists until it has stunned multiple creatures equal to your caster level.',
     source: "Pathfinder Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Suppress Charms and Compulsions',
@@ -3331,6 +3442,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This abjuration allows casters to choose between two effects. The first grants affected creatures a +4 morale bonus on saving throws against charm and compulsion effects for 10 minutes. Alternatively, the caster may suppress existing charm and compulsion effects through concentration, automatically suppressing any new effects that target protected creatures. Upon ending concentration, suppressed effects resume their remaining durations.',
     source: 'Pathfinder Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_002 ─────────────────────────────────────────────────────────────
@@ -3356,6 +3468,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This spell prevents primal magic events from triggering within its area. Creatures within the area gain a +4 circumstance bonus on all saving throws against effects generated by primal magic outside of the spell's effect that expand into the area. When the spell expires or is dispelled, the suppressed magical energy triggers a primal magic event at the center of the emanation. The triggered event's CR equals the caster's level. The original caster may attempt a DC 20 Will save to negate this consequence. Most spellcasters instead relocate to an area not affected by primal magic if they can so that they can end the spell's effect safely.",
     source: 'Pathfinder Campaign Setting: The Mwangi Expanse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Sealing',
@@ -3380,6 +3493,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions as arcane lock, except you inscribe a rune on or above an opening (a door, window, gate, portcullis, or similar closure) of up to 20 square feet per caster level. Upon completion of the rune, an invisible barrier of force equivalent to a wall of force seals the entrance. The symbol triggers immediately upon completion. You can set a password that allows creatures to pass through the barrier without triggering it. You may also attune a number of additional creatures to the symbol; each additional attuned creature increases casting time by 5 minutes. Attuned creatures can pass through the symbol without triggering it, but they still cannot pass through the wall of force. A disintegrate spell or similar effect can destroy the wall (caster level check DC 11 + caster level). The symbol cannot be dispelled, but mage's disjunction destroys it automatically. A knock spell has no effect on it.",
     source: 'Pathfinder Campaign Setting: Rival Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Talisman of Reprieve',
@@ -3402,6 +3516,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "You imbue an item with divine protection. Allies within the aura ignore penalties to Intelligence-, Wisdom-, and Charisma-based checks resulting from a plane's mildly or strongly aligned traits, regardless of the allies' alignments. Additionally, the item grants a +4 circumstance bonus on checks with one Intelligence-, Wisdom-, or Charisma-based skill that you choose when you cast the spell.",
     source: "Pathfinder Player Companion: Plane-Hopper's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Teleport Trap',
@@ -3425,6 +3540,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "You designate a destination point on a solid surface within the warded area. Any teleportation attempt that begins or ends within the warded area is instead redirected to your designated destination. A creature that attempts to teleport out of the warded area must make a Will save; success means the teleport simply fails. A creature that would teleport into the warded area is redirected to the destination point without a saving throw. The destination must be on a solid surface that can support the creature. You may exclude creatures based on alignment, creature type, or those carrying certain items or who know a password. A Knowledge (arcana) check (DC 27) reveals the trap's presence but not its destination. The spell can be made permanent for 7,000 gp per casting via permanency.",
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Theft Ward',
@@ -3446,6 +3562,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You ward a single object in your possession against theft. You gain a +10 bonus on Perception checks to notice someone trying to take the object from you.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thaumaturgic Circle',
@@ -3480,6 +3597,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as magic circle against chaos, evil, good, or law, except that rather than targeting creatures based on alignment, the caster designates any one non-alignment subtype of outsider. Valid designations include elemental subtypes such as air, earth, fire, and water, as well as specific outsider races such as angels and devils. The circle wards against the designated outsider type in all the same ways a magic circle spell wards against alignment-based outsiders.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thought Shield I',
@@ -3501,6 +3619,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'Sensing an intrusion, you throw up a defense to protect your mind from attack or analysis. You gain a +4 circumstance bonus on Will saving throws against mind-affecting effects. Spells and effects that allow a creature to read your thoughts reveal no information while this spell lasts.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thought Shield II',
@@ -3522,6 +3641,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as thought shield I, except it grants a +6 circumstance bonus on Will saving throws against mind-affecting effects instead of +4. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thought Shield III',
@@ -3543,6 +3663,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as thought shield II, except it grants a +8 circumstance bonus on Will saving throws against mind-affecting effects. Additionally, any creature that tries to read your thoughts while this spell lasts must succeed at a Will save or be stunned for 1 round. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thought Shield IV',
@@ -3564,6 +3685,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as thought shield III, except creatures that try to read your thoughts and fail their Will save are stunned for 1d4 rounds instead of 1 round. Additionally, if you succeed at your save against a psychic crush spell, you take no damage. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Thought Shield V',
@@ -3585,6 +3707,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as thought shield IV, except it has a duration of 1 round per caster level. This spell immediately ends if you fail a Will saving throw against a mind-affecting effect. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Trap Ward',
@@ -3607,6 +3730,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "When you are subjected to the effects of a magical trap, this spell activates. You immediately attempt a caster level check as an immediate action with a DC equal to the trap's Disable Device DC. If successful, the spell counters the trap's magic before it manifests, preventing it from triggering for the next 1d4 rounds, and the trap ward is discharged.",
     source: 'Pathfinder Campaign Setting: Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undetectable Alignment',
@@ -3638,6 +3762,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'An undetectable alignment spell conceals the alignment of an object or a creature from all forms of divination.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undeath Ward',
@@ -3661,6 +3786,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "You create a pale silver barrier that repels undead. Mindless undead and intelligent undead with fewer Hit Dice than your caster level cannot penetrate the barrier. Undead with equal or greater Hit Dice can attempt a Will save to enter; those that succeed take 3d6 points of damage and may thereafter enter freely. Once an undead creature has succeeded at this save, it can enter the warded area without penalty for the remainder of the spell's duration. You cannot use the barrier offensively; attempting to force it against undead causes it to collapse.",
     source: "Pathfinder Player Companion: Undead Slayer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unholy Aura',
@@ -3684,6 +3810,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'A malevolent darkness surrounds the subjects, protecting them from attacks, granting them resistance to spells cast by good creatures, and weakening good creatures when they strike the subjects. This abjuration has four effects. First, each warded creature gains a +4 deflection bonus to AC and a +4 resistance bonus on saves. Unlike the effect of protection from good, this benefit applies against all attacks, not just against attacks by good creatures. Second, each warded creature gains spell resistance 25 against good spells and spells cast by good creatures. Third, the abjuration protects the subject from possession and mental influence, just as protection from good does. Finally, if a good creature succeeds on a melee attack against a warded creature, the attacker takes 1d6 points of Strength damage (Fortitude negates, DC equals spell save DC).',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unholy Ward',
@@ -3706,6 +3833,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You surround yourself with resistance to holy powers. You ignore 10 points of damage from holy sources per caster level, to a maximum of 10 points per caster level. This includes damage from holy weapons, paladin smite evil bonuses, channeled positive energy directed at undead, and any other damage from a good-aligned deity or its servants. When you have absorbed the maximum amount of holy damage (10 points per caster level), the spell ends.',
     source: 'Pathfinder Player Companion: Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Veil of Heaven',
@@ -3728,6 +3856,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You surround yourself with positive energy that protects against evil outsiders. You gain a +2 sacred bonus to AC and a +2 sacred bonus on saves, but only against attacks and effects from evil outsiders. As a swift action, you can dismiss this spell to deal 1d8 points of damage plus 1 point per paladin level to all evil outsiders within 5 feet. Affected creatures can attempt a Will save to halve the damage.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Veil of Positive Energy',
@@ -3750,6 +3879,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You surround yourself with protective positive energy that hinders undead attackers. You gain a +2 sacred bonus to AC and a +2 sacred bonus on saves, but only against attacks and effects from undead creatures. As a swift action, you can dismiss this spell to deal positive energy damage to all undead creatures within 5 feet equal to your character level.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Suppression',
@@ -3773,6 +3903,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You create a shimmering barrier that suppresses magical effects passing through it. The wall has no physical substance and does not impede movement, but blocks line of effect. Magic items and spells with caster levels equal to or lower than yours that pass through the wall become inert for 1 round per caster level; durations still expire normally during suppression. Higher-level magic, artifacts, and divine effects are unaffected. The wall permits line of sight. Suppressed effects resume functioning when the suppression period ends.',
     source: 'Pathfinder Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ward of the Season',
@@ -3794,6 +3925,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "You channel the power of the seasons to protect a creature. When you cast this spell, choose one of the following seasonal effects, which you can change as a standard action (reducing remaining duration by 1 hour). Spring: The target is immune to bleed effects and regenerates 1 hit point per round when below 0 hit points, though this still requires a successful stabilization check. Each hit point restored reduces the duration by 1 hour. Summer: The target's base speed increases by 10 feet. As a free action, the target can instead gain a 30-foot speed increase for 1 round (reducing remaining duration by 1 hour). Fall: The target gains a +2 morale bonus on Fortitude saves, and may roll twice when making saves against disease or poison, taking the better result (each such roll reduces duration by 1 hour). Winter: The target automatically succeeds at Acrobatics checks to move across slick or narrow surfaces; it may also move through difficult terrain at normal speed for 1 round (reducing duration by 1 hour).",
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ward Shield',
@@ -3815,6 +3947,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You touch a shield, enchanting it to provide magical protection against spells. The enchanted shield grants spell resistance 10 + your caster level against spells, so long as the shield can be interposed between the wielder and the spell effect. This spell resistance does not apply against area-effect spells such as fireball, but the shield does grant a +5 bonus on Reflex saving throws against such spells.',
     source: 'Pathfinder Player Companion: Knights of the Inner Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ward the Faithful',
@@ -3837,6 +3970,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The warded creature emanates a protective aura that benefits nearby allies who share your deity or faith. Creatures within the emanation who worship the same deity as you gain a +2 deflection bonus to AC and a +2 resistance bonus on all saving throws. At 12th caster level these bonuses increase to +3, and at 18th level they increase to +4. The bonuses apply even to adversaries who worship the same god. If you have no specific religion, only you benefit from the spell.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Warding Weapon',
@@ -3867,6 +4001,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The melee weapon used as the focus for this spell hovers above your head, ready to parry incoming attacks. The weapon does not strike back at any opponent nor does it damage them. While this spell is active, you do not provoke attacks of opportunity when casting spells. Creatures with the Disruptive feat can bypass this protection's defenses.",
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Woodland Rune',
@@ -3889,6 +4024,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as symbol of death, except that you inscribe the rune on any surface. The rune activates when any non-plant creature except you approaches within 30 feet. When triggered, roots and branches sprout from the ground, catching all creatures within a 30-foot burst. Creatures caught in the area move at half speed and must succeed at a DC 15 Strength check to move through the entangled area as if moving through heavy undergrowth, though they gain no concealment from it. Plant creatures and those with the woodland stride ability or freedom of movement are unaffected.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wreath of Blades',
@@ -3912,6 +4048,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'Four mithral daggers animate and spin around you in a defensive emanation. Any creature that begins its turn within the area takes 1d4 points of piercing damage per two caster levels (maximum 10d4). This damage bypasses DR/silver. The spinning blades prevent you from provoking attacks of opportunity when casting spells, as the warding weapon spell. If the focus daggers are enchanted, their magical properties apply to the damage dealt. Spell resistance does not apply to the damage, though a Reflex save halves it.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_A_1 ─────────────────────────────────────────────────────────────
@@ -3928,6 +4065,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell suppresses the effects of a single curse on a creature without restoring damage or drain caused by the curse. It works on curses that require remove curse plus additional measures (like lycanthropy), but cannot suppress curses that cannot be removed by remove curse. Each curse can only be suppressed once by abeyance, regardless of caster, and the spell does not allow divesting cursed objects, though it can suppress curses contracted from objects.',
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ablative Sphere',
@@ -3942,6 +4080,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'A crystalline, web-like globe materializes around the caster, initially providing improved cover. The barrier permits spells to pass through without obstruction. The sphere measures one inch thick per caster level, possesses hardness 5, and contains 3 hit points per inch of thickness. As damage accumulates, protection diminishes progressively: after losing one-third of its hit points, it grants standard cover; at two-thirds damage, only partial cover remains. Once reduced to zero hit points, the globe shatters and any excess damage transfers to the caster.',
     source: 'Pathfinder Player Companion: Dungeoneer\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Absolution',
@@ -3956,6 +4095,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell purges impure thoughts from the target\'s mind. It ends all charm or compulsion effects affecting the target, including harmless ones like heroism. If forced actions violated the target\'s alignment, monastic vows, paladin oath, or conduct code, those actions no longer cause loss of class abilities or divine spellcasting. Unlike atonement, this spell cannot reverse alignment changes, effect willing transgressions, induce alignment shifts, or restore abilities lost from past misdeeds. Success depends on alignment compatibility: automatic if caster and target share alignment or patron deity; 5% per caster level if alignments are one step apart; automatic failure otherwise.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Absorb Rune',
@@ -3970,6 +4110,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This abjuration allows the caster to lay their hand upon a magical glyph, symbol, or other magical spell effect and attempt to absorb its essence. The caster must succeed at a caster level check (DC = 10 + target spell\'s caster level). Success removes the rune and places it on the silk glove in inert form. Within the spell\'s duration, the caster can transfer it to another surface as a standard action, restoring its function or dissipating it harmlessly. This version affects runes equivalent to 3rd-level spells or lower.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Absorbing Barrier',
@@ -3985,6 +4126,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This abjuration protects creatures and objects in its area from ranged weapon attacks. Beneficiaries gain damage reduction 20/magic against ranged weapons. The spell\'s protective effect persists until it prevents a cumulative total of 20 points of damage per caster level (capped at 200 points), at which point the spell ends. The caster can customize the area\'s shape or exclude specific zones as needed.',
     source: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alleviate Corruption',
@@ -3999,6 +4141,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell offers two applications: (1) Combat Corruption reduces target\'s corruption stage by 1; (2) Remove Corruption eliminates 1 manifestation level and reduces related power scaling. Both require a caster level check (DC = 10 + double manifestation level + triple corruption stage). Failing by 5+ causes the caster to contract the target\'s corruption. A creature benefits only once weekly from this spell.',
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Allied Cloak',
@@ -4013,6 +4156,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'An animated cloak or similar garment provides a +2 shield bonus to AC. Each round during your turn, you can use a free action to direct the cloak to aid another action for skill checks, attack rolls, or AC. The cloak uses a bonus equal to your caster level plus your key spellcasting ability modifier.',
     source: 'Pathfinder Player Companion: Cohorts & Companions',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Animus Mine',
@@ -4028,6 +4172,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster implants a mental defensive mechanism triggering against thought manipulation attempts. When any creature uses a mind-affecting effect against the caster, it triggers psychic backlash dealing 1d6 points of damage per caster level (maximum 10d6) and staggers the target for 1d4 rounds. A successful Will save reduces damage by half and negates the staggered condition. The original effect still functions normally. The caster may suppress the trigger via swift action for one round. Only one mental mine may be active simultaneously.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_A_2 ─────────────────────────────────────────────────────────────
@@ -4045,6 +4190,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This abjuration creates a mobile hemispherical field suppressing technological effects and preventing tech-based signals and constructs from entering. Robots and technological constructs must make Fortitude saves each round—failure renders them helpless, success grants either one move or standard action. Partially technological creatures become staggered on failed saves; cybernetic equipment ceases functioning. Non-technological creatures and low-tech projectiles may enter freely. High-tech missiles halt and drop harmlessly.',
     source: 'Pathfinder Roleplaying Game: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Antitoxin Touch',
@@ -4059,6 +4205,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'When cast, this abjuration causes the target\'s skin to secrete venom-resistant oils throughout the spell\'s duration. The enchantment prevents the target from accidentally poisoning themselves while applying toxins. Additionally, the target avoids exposure risk to creature venoms when attempting to extract venom for use.',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arcana Theft',
@@ -4073,6 +4220,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell works similarly to a targeted dispel magic but only affects creatures and requires a melee touch attack. Upon successful touch attack and spell dispel, the removed spell transfers to the caster instead of remaining on the original target. The caster cannot make new saving throws or spell resistance checks and must accept the spell\'s effects regardless of benefit. The transferred spell\'s duration remains unchanged.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Atonement',
@@ -4087,6 +4235,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell removes consequences of misdeeds from a willing, repentant subject. Cost increases to 2,500 gp in offerings when atoning for deliberate acts. Four primary uses exist: reversing magical alignment changes at no extra cost; restoring class features lost through alignment violations; recovering spell-casting ability for clerics/druids who angered their deity; and offering alignment redemption or temptation to opposing-aligned creatures.',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura of Greater Courage',
@@ -4103,6 +4252,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell enhances a paladin\'s existing aura of courage ability. While active, all allies within the aura are immune to fear (magical or otherwise). The spell requires the caster to possess the aura of courage class feature to function—without it, the spell has no effect.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura of Inviolate Ownership',
@@ -4117,6 +4267,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell protects attended items of targeted creatures. It increases the DC for Sleight of Hand checks to remove warded items by 20 and grants affected creatures a +20 bonus to their CMD against disarm and steal combat maneuvers.',
     source: 'Pathfinder Player Companion: Merchant\'s Manifest',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_B_1 ─────────────────────────────────────────────────────────────
@@ -4135,6 +4286,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell removes corruption-related abilities from creatures within the emanation. Abilities associated with corruptions cease to function, as if they were magically dispelled. Corruption marks persist, but their benefits are suppressed. Creatures failing saves lose gifts for the spell's duration even if leaving the area, while successful saves grant immunity to repeated castings.",
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Banish Seeming',
@@ -4149,6 +4301,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Through a melee touch attack, the caster can dispel illusions or restore creatures to their natural form. The spell functions similarly to dispel magic but grants a +2 enhancement bonus on dispel checks and targets only magical illusions or form changes from supernatural effects. When multiple appearance-altering effects exist, the caster may dispel one effect per four caster levels, prioritizing higher-level spells first. Affected creatures cannot change form again for 1 round per caster level.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Banishing Blade',
@@ -4164,6 +4317,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (see text)',
     description: 'The spell enchants a weapon to create pushing force. The first time each round the weapon strikes a creature, the weapon attempts a free bull rush combat maneuver check using 1d20 plus caster level, without provoking attacks of opportunity. Extraplanar creatures whose Hit Dice do not exceed caster level must make Will saves if pushed 10+ feet; failed saves banish them to their home plane and end the spell.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bestow Auras',
@@ -4178,6 +4332,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell enables a caster to transfer one or more paladin or antipaladin auras to another creature. The caster maintains personal aura benefits while the target becomes the aura\'s center. For example, transferring aura of courage preserves the caster\'s fear immunity while granting the target a +4 morale bonus on fear saves. Certain auras cannot be transferred, such as those affecting only the caster.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bestow Grace',
@@ -4192,6 +4347,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "This spell allows a caster to bestow divine grace on another good creature for a short amount of time, infusing that creature with a portion of holy virtue. Upon touching the recipient, the caster grants a sacred bonus to saving throws equal to the target's Charisma bonus (if any) on all saving throws.",
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blade Snare',
@@ -4206,6 +4362,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "This protective spell creates an invisible magical field that allows weapons to approach but impedes their withdrawal. When struck in melee, the caster makes a caster level check against the attacker's CMD. Success traps the weapon or limb; failure allows normal retraction. Trapped weapons can be abandoned, but retained limbs give the attacker the grappled condition. Only one limb/weapon can be snared simultaneously.",
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blessing of Liberty',
@@ -4220,6 +4377,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The spell grants the caster a luck bonus to CMD and saving throws against movement-restricting effects equal to +1 per 6 caster levels (minimum +1, maximum +3). The caster can also terminate the spell early to gain a +20 foot enhancement bonus to base speed for 1 round per whole minute of duration remaining.',
     source: 'Pathfinder Player Companion: Heroes of the Street',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_B_2 ─────────────────────────────────────────────────────────────
@@ -4236,6 +4394,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This protective spell grants immunity to damaging area effects you personally cast. Additionally, you may dismiss the spell as an immediate action if caught in another caster\'s damaging area spell, gaining immunity to that specific casting.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloodstone Mirror',
@@ -4250,6 +4409,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This protective abjuration spell shields the caster from mind-affecting effects and spells granting others control of actions. When exposed to such effects, the caster can dispel the triggering spell as an immediate action and redirect it to another creature within 30 feet. The redirected spell uses the original DC, but the caster is treated as the caster.',
     source: 'Pathfinder Adventure Path #140: Eulogy for Roslar\'s Coffer',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Book Ward',
@@ -4264,6 +4424,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell functions similarly to protection from energy but offers protection exclusively against acid and fire damage. Beyond damage protection, the affected item becomes completely waterproof (this protection extends to other liquids as well, such as alcohol and oil).',
     source: 'Pathfinder Chronicles: Seekers of Secrets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bullet Shield',
@@ -4278,6 +4439,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants the warded creature a +4 deflection bonus to AC against firearm and ranged attacks, with an additional +1 to the bonus for every five caster levels (maximum +8 at 20th level).',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bullet Ward',
@@ -4292,6 +4454,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster tosses adamantine bullets into the air where they hover protectively nearby. The number of bullets equals half the caster level (maximum 4). When an opponent attacks with a firearm, the caster can use an immediate action to designate one hovering bullet to block the attack, increasing AC against that attack by 10. This destroys the bullet regardless of whether the attack hits.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_C_1 ─────────────────────────────────────────────────────────────
@@ -4310,6 +4473,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This abjuration disperses fog, dust, and airborne particles while reducing wind strength by one step per four caster levels (minimum light wind). Magical wind/cloud effects are suppressed; suppressing them requires a caster level check (DC 11 + effect\'s caster level).',
     source: 'Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cast Out',
@@ -4324,6 +4488,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster makes a melee touch attack dealing 2d8 points of damage + 1 point per caster level (maximum +15). The spell disrupts magical control effects by making dispel checks against magic jar, ghost malevolence, and enchantment (compulsion) spells, prioritizing highest-level effects. A successful Will save reduces damage by half.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Caustic Safeguard',
@@ -4339,6 +4504,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The spell imbues an object with an acidic ward dealing 1d6 acid damage per 2 caster levels (maximum 10d6) to any creature other than the caster who touches it. The caster can designate one creature per 4 caster levels to safely handle the warded object.',
     source: 'Agents of Evil',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Charon's Dispensation",
@@ -4353,6 +4519,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants affected targets immunity to the harmful effects of touching or drinking from the River Styx and a +4 profane bonus on saves against memory-altering effects like modify memory or mindwipe.',
     source: 'Book of the Damned',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Circle of Clarity',
@@ -4368,6 +4535,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Creates a magical emanation granting creatures +4 bonus on saves against figments and glamers. Negates non-total concealment and provides a perception bonus equal to half caster level (max +10).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Clay Skin',
@@ -4382,6 +4550,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The recipient\'s skin hardens to a clay-like consistency, providing DR 5/adamantine. The protective effect lasts until it has absorbed damage equal to 5 points times the caster\'s level (maximum total of 50 points).',
     source: 'Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloak of Chaos',
@@ -4397,6 +4566,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell creates a protective chaotic aura providing: +4 deflection bonus to AC and +4 resistance bonus on saves; spell resistance 25 against lawful spells; protection from possession and mental influence; and forces lawful melee attackers to make a Will save or become confused for 1 round.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloak of Shade',
@@ -4411,6 +4581,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This protective charm reduces environmental sun damage by one severity level and lessens sunlight-related penalties by 1 point. Does not protect against direct sunlight effects on light-sensitive creatures.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloak of Winds',
@@ -4426,6 +4597,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell envelops a target in whirling wind. Benefits include immunity to being checked or blown away by windstorm-level winds, a -4 penalty to ranged attacks against the subject, and the ability to knock tiny or smaller attackers prone.',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Conditional Favor',
@@ -4440,6 +4612,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Cast immediately before another spell on the same willing creature. Creates a conditional binding tied to the paired spell. If the spell\'s recipient violates the oath or prohibition while conditional favor remains in effect, the paired spell is undone as if never cast.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Conjuration Foil',
@@ -4455,6 +4628,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (object)',
     description: 'The spell grants affected creatures a +4 bonus on saving throws against teleportation effects. Creatures attempting to enter or exit the area via summoning or teleportation take damage equal to 1d6 points per spell level of the triggering effect and arrive at random locations. A successful Will save halves damage and prevents misdirection.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_C_2 ─────────────────────────────────────────────────────────────
@@ -4472,6 +4646,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This protective spell reduces damage from alignment-based magical effects by 5 points (increasing to 10 at 7th level, 15 at 11th level). The caster selects one alignment type to protect against.',
     source: 'Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Counterbalancing Aura',
@@ -4486,6 +4661,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell creates an oscillating bronze aura granting targets +4 deflection bonus to AC and +4 resistance bonus on saving throws. It provides spell resistance against neutral-aligned casters and protects from possession. Melee attackers of neutral alignment suffer sickening or nauseating effects.',
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Covetous Aura',
@@ -4501,6 +4677,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The spell creates an aura allowing the caster to immediately gain the benefit of any harmless spell of 3rd level or lower cast within range as if it had also targeted the caster. Once the caster gains a spell benefit, the aura ends.',
     source: 'Mythic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Crimson Confession',
@@ -4515,6 +4692,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster places a personal rune on an object. The mark can be visible or invisible. Creatures other than the caster that touch the warded object and fail a Fortitude save have their skin turn bright red for 1 hour per level. The ward cannot be dispelled but can be removed by the caster or erase.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Magic Negation',
@@ -4530,6 +4708,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The spell disrupts a target\'s capacity to utilize magical energies, imposing the negated spellblight condition. Dispel checks attempting to remove this spellblight suffer a -5 penalty.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_D_1 ─────────────────────────────────────────────────────────────
@@ -4547,6 +4726,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Protects an area\'s shadows from magical light penetration. Non-magical light cannot alter the affected region\'s illumination level. Magical effects attempting to change light conditions must succeed at a caster level check (DC = 10 + caster level). The spell darkens nothing; it only prevents brightening effects within the radius. Casters of 11th level or higher may render this spell permanent through permanency (7,500 gp).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Death from Below',
@@ -4561,6 +4741,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Grants a dodge bonus to AC equal to +1 for each size category by which an attacker exceeds the target, capped at +1 per 3 caster levels. Gnome recipients gain a maximum of +1 per 2 caster levels.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Defile Armor',
@@ -4576,6 +4757,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless, object)',
     description: 'Functions similarly to sanctify armor. When the caster uses their judgment or smite ability, they gain DR 5/good while wearing the enchanted armor.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deflection',
@@ -4591,6 +4773,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'Creates a whirling barrier of force that sends any attack that misses you hurling back toward its source. Affects melee and ranged attacks using attack rolls. When an attack misses, the attacker must make a second attack roll against their own AC using the original attack\'s modifiers; if successful, the attacker takes the attack\'s damage. Does not deflect attacks that miss for reasons other than failed attack rolls.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_D_2 ─────────────────────────────────────────────────────────────
@@ -4609,6 +4792,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes; see text',
     description: 'Creates an invisible circular barrier on a flat surface. Any outsider entering this circle must make a Will save or become trapped. Trapped creatures can attempt a Will save as a standard action to escape, and cannot teleport or use extradimensional travel (functioning like dimensional anchor). Contained outsiders retain the ability to attack adjacent creatures outside the circle. The caster can dismiss the circle as a standard action, expelling trapped outsiders to their home planes (as per dismissal).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Diminished Detection',
@@ -4623,6 +4807,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'Reduces the detection range of divination effects targeting the caster. When the caster would normally fall within a detection spell\'s area of effect (such as detect magic, detect evil, or detect undead), the area of effect is reduced by half for the purposes of detecting the caster or caster\'s possessions. The detecting caster remains unaware of this range reduction.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Discharge',
@@ -4637,6 +4822,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Disperses electrical charges from a single technical device (loses all remaining charges), temporarily disables electrically-powered non-charged equipment for 1d4 rounds, or impairs robots (staggered and cannot use energy-based attacks for 1d4 rounds, with saving throw attempts permitted each subsequent round).',
     source: 'Pathfinder Campaign Setting: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dispel Balance',
@@ -4651,6 +4837,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'See text',
     description: 'Produces three effects: (1) Grants a +3 deflection bonus against chaotic neutral, lawful neutral, neutral evil, and neutral good creatures (+5 against purely neutral); (2) On successful melee touch attack against neutral-aligned extraplanar creatures, may force them back to their home plane (Will save, -2 penalty if purely neutral); (3) Automatically dispels any enchantment cast by neutral-aligned creatures via touch.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Disrupt Link',
@@ -4665,6 +4852,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Temporarily severs a creature\'s magical link with a bonded companion. For familiars, the caster loses alertness, deliver touch spells, empathic link, scry on familiar, share spells, and speak with master abilities. For animal companions, lost benefits include link, share spells, and devotion abilities. Any other abilities that rely on the two having a connection are similarly disrupted.',
     source: 'Pathfinder Player Companion: Familiar Folio',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Disrupt Silence',
@@ -4680,6 +4868,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Temporarily negates magical silence within its area so that normal sounds can be heard within the overlapping areas of effect. Automatically counters or dispels any magical silence effect of equal or lower level targeting the same subject. When cast against a higher-level silence effect, it functions as dispel magic.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Draconic Suppression',
@@ -4694,6 +4883,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "When a dragon fails its save, it cannot use its breath weapon during the spell's duration and functions as though it were one age category younger for determining available special abilities. Does not affect the dragon's armor class, feats, frightful presence, hit points, physical attacks, saving throws, senses, size, skills, spellcasting, or statistics.",
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dragon Turtle Shell',
@@ -4708,6 +4898,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'Reduces incoming damage from natural attacks. When struck by an opponent\'s natural attacks, the damage is resolved as if the attack came from a creature one size smaller per 5 caster levels (maximum four size categories smaller at CL 20th). Cannot reduce natural attack base damage below 1d2.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Shield',
@@ -4722,6 +4913,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "Wards the target's mind against intrusion and influence while unconscious. When sleeping, the target gains spell resistance equal to 10 + caster's level against mind-affecting effects and an additional saving throw against possession or mental control. While awake, grants a +4 bonus on saves against sleep effects. Every 10 minutes spent awake consumes 1 hour of the spell's remaining duration.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dust Ward',
@@ -4736,6 +4928,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Protects a magic item by designating an allowed creature type, subtype, or individual. If an unauthorized creature carries or wears the item for 1+ continuous hours, or attempts to study it to learn properties or crafting methods, the dust ward disintegrates the item into worthless gray dust. Cannot affect items with caster levels exceeding half the caster\'s level.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dweomer Retaliation',
@@ -4750,6 +4943,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Can only be cast immediately after successfully counterspelling an opponent's spell. The caster gains temporary hit points equal to the level of the countered spell plus their Charisma or Intelligence modifier, while the opponent takes equivalent damage. For countered spells of 4th level or higher, both parties make opposed concentration checks; if the caster wins by 10+ points, the spell or spell slot is retained as if not cast.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_E_1 ─────────────────────────────────────────────────────────────
@@ -4766,6 +4960,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'You gain a +4 bonus on saving throws against enchantment spells. Upon successfully saving against an enchantment, you identify it as if passing a Spellcraft check. You may choose to act as though the save failed, gaining a +20 bonus on Bluff checks to convince others you are enchanted. Magic used to detect this deception requires a caster level check (DC 15 + your caster level).',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enshroud Thoughts',
@@ -4781,6 +4976,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This protective spell shields your mind from external mental intrusion, specifically blocking divination and enchantment spells targeting thoughts or memories. When another creature attempts a mind-affecting spell against you, that caster must succeed at a caster level check (DC 11 + your caster level) or the spell fails. Non-thought-based detection effects remain unaffected.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_E_2 ─────────────────────────────────────────────────────────────
@@ -4797,6 +4993,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'A magical field appears around you, glowing with a chaotic blast of multicolored hues. The field grants a 20% miss chance against ranged attacks that require attack rolls, functioning like concealment. Distance-based attacks unaffected by concealment mechanics are not impacted.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Erase Impressions',
@@ -4811,6 +5008,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'You remove psychic impressions from an object, erasing chosen time periods working backward from the present, up to 1 day per caster level. Erased impressions cannot be recovered through object reading, legend lore, or similar divination magic. On corpses, the spell also removes psychic impressions from when the creature was alive, preventing recovery through speak with dead.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Escape Alarm',
@@ -4826,6 +5024,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions similarly to alarm but alerts you when creatures exit rather than enter the warded area. You can attune up to one additional creature per caster level, allowing attuned creatures to pass without triggering the alarm. Mental alerts can be sent to all attuned creatures.',
     source: 'Pathfinder Roleplaying Game Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Escaping Ward',
@@ -4840,6 +5039,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This abjuration grants enhanced mobility against larger attackers. When a creature at least one size category larger than you misses with an attack, you can use an immediate action to move up to 5 feet away from that creature. This movement increases by 5 feet for every 5 caster levels. This movement does not provoke attacks of opportunity.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Expend',
@@ -4855,6 +5055,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell forces creatures in the affected area to expend uses from their limited supernatural or spell-like abilities without producing any actual effect. Each creature must make a Will save or lose one use of a limited-use ability. Abilities are exhausted in order of highest daily uses first; ties are randomly determined. Targets keep making saves, losing additional uses per failure, until they succeed — ending the spell\'s effects for that creature. At-will or constant abilities are unaffected.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Explosive Runes',
@@ -4870,6 +5071,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'You inscribe magical runes on written materials. When read by anyone other than you or an instructed individual, the runes explode dealing 6d6 force damage. Creatures adjacent to the runes take full damage with no save; those within 10 feet may attempt a Reflex save for half damage. The object bearing the runes takes full damage regardless. You can remove the runes at will. Others may use dispel magic or erase spells, though failed attempts trigger detonation.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_F_1 ─────────────────────────────────────────────────────────────
@@ -4886,6 +5088,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'While active, you may reroll one attack roll, combat maneuver check, or skill check before the results are revealed. The second result must be accepted regardless of outcome. The spell concludes once the reroll is used. Only one instance of this spell may affect the caster simultaneously.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fastidiousness',
@@ -4900,6 +5103,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'Your person and your equipment stay clean and dry. Dust and moisture slough off immediately; even when you are completely soiled, your appearance reverts to a pristine state over the course of 1 minute. You gain a +2 circumstance bonus on Fortitude saving throws against inhaled and ingested diseases.',
     source: 'Pathfinder Player Companion: Disciple\'s Doctrine',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fire Trap',
@@ -4915,6 +5119,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This abjuration spell creates a fiery detonation when someone unauthorized opens a protected object. When triggered, the explosion fills the area within a 5-foot radius around the spell\'s center and deals 1d4 points of fire damage + 1 point per caster level (maximum +20). The protected item remains unharmed. Knock spells do not bypass it. Failed dispel magic attempts do not trigger it. The caster and attuned individuals can use the object safely.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Firebelly',
@@ -4929,6 +5134,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (see text)',
     description: 'This spell generates magical warmth in your stomach, providing fire resistance 5 and making your abdomen warm to the touch without causing harm. As a standard action, you can expel a 15-foot cone of flames dealing 1d4 fire damage (Reflex half, SR applies). Each activation reduces the spell\'s remaining time by one minute.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Firewalker's Meditation",
@@ -4944,6 +5150,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell enables you to mentally suppress pain\'s negative effects while remaining aware of sensations. You gain damage reduction 5/magic, fire resistance 10, and a +4 bonus on saving throws against pain effects. The spell is discharged after preventing 10 points of damage per caster level (max 100 points). As an immediate action when taking applicable damage, you can expend the remaining duration to gain DR 10/magic, fire resistance 30, and immunity to pain effects for 3 rounds, after which the spell ends.',
     source: 'Pathfinder Player Companion: Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_F_2 ─────────────────────────────────────────────────────────────
@@ -4960,6 +5167,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'Affected creatures experience no movement penalties or skill check reductions from undergrowth. Forested cover reduces miss chances by 10% below normal. When navigating trees, subjects gain a +5 circumstance bonus to Acrobatics and Climb checks. Rangers in their preferred terrain may additionally apply their terrain bonus to these checks.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Free Spirit',
@@ -4974,6 +5182,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This abjuration grants freedom of movement benefits alongside a +4 bonus against fear saving throws. However, it intoxicates you, imposing a -2 penalty on attack rolls, ability checks, skill checks, and concentration checks for the spell\'s duration. If you somehow remove or avoid these penalties, the spell\'s duration ends.',
     source: 'Pathfinder Campaign Setting: Inner Sea Temples',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Free Swim',
@@ -4988,6 +5197,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell grants underwater mobility similar to freedom of movement, allowing normal movement and attacks without typical underwater combat penalties. However, it provides no protection against grapples, paralysis, or movement-impeding magic like solid fog, slow, or web.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Freedom',
@@ -5002,6 +5212,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell liberates a subject from magical constraints and physical restrictions on movement. The spell removes effects such as binding, entanglement, grappling, imprisonment, maze, paralysis, petrification, pinning, sleep, slow, stunning, temporal stasis, and web. To free a creature from imprisonment or maze specifically, you must know the creature\'s name and background, and must cast the spell at the location where it was entombed or banished into the maze.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_G_1 ─────────────────────────────────────────────────────────────
@@ -5018,6 +5229,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The spell creates a magical protective field around summoned creatures. Targets gain a deflection bonus to AC equal to 1 + 1 for every 6 caster levels (maximum +4 at 18th level). Summoners can also target their eidolon with this spell.',
     source: 'Pathfinder Player Companion: Monster Summoner\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Globe of Tranquil Water',
@@ -5033,6 +5245,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'Creates a rippling bubble of calm water extending 20 feet from the caster that moves with them. The spell blocks natural and magical precipitation (rain, snow, hail, ice storm), pushes out fog and mist, does not affect temperature or block lightning, treats all water within the radius as calm for swimming checks, prevents water sprays and blasts from dealing damage or moving creatures, and affects water elementals similarly to how antiplant shell affects plant creatures.',
     source: 'Pathfinder Player Companion: Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Glyph of Warding',
@@ -5047,6 +5260,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no (object); yes (see text)',
     description: 'The spell creates a protective ward on an object or area. The caster sets trigger conditions including passwords, physical characteristics, creature type, or alignment. Two versions exist. Blast Glyph: deals 1d8 damage per 2 caster levels (maximum 5d8) in acid, cold, fire, electricity, or sonic damage to intruders and those within 5 feet (Reflex save for half). Spell Glyph: stores any harmful 3rd-level or lower spell known by the caster.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_G_2 ─────────────────────────────────────────────────────────────
@@ -5063,6 +5277,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no (object); yes (see text)',
     description: 'This spell functions as glyph of warding, except that a blast glyph deals damage up to 10d8 and a spell glyph can store a spell of 6th level or lower.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grace',
@@ -5077,6 +5292,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'none',
     description: 'Your movement does not provoke attacks of opportunity for the duration of this spell.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guardian Monument, Lesser',
@@ -5092,6 +5308,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'Creates a protective aura granting human defenders within the area damage reduction 2/magic. The protection persists if creatures leave and reenter the area. The spell suspends if the focus object moves but resumes when replaced.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guardian Monument',
@@ -5107,6 +5324,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as guardian monument, lesser, except it grants human defenders within the area damage reduction 4/magic instead of DR 2/magic.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guardian of Faith',
@@ -5122,6 +5340,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The recipient receives the benefits of shield of faith combined with the caster\'s choice of one protection spell: protection from chaos, evil, good, or law. As a move action, the target may transfer this spell to a touched ally, making them the new recipient. The spell\'s alignment descriptor matches the chosen protection spell.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guarding Knowledge',
@@ -5136,6 +5355,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'none',
     description: 'The caster selects a specific monster type and one of its special attacks previously identified through Knowledge checks or research. This grants a +4 insight bonus on saving throws against that specific attack. Using a trophy from an identical monster variety increases the bonus to +6. The bonus does not extend to saves against other monsters\' similar abilities, spell-like abilities, or class or equipment-derived attacks.',
     source: 'Pathfinder Player Companion: Monster Hunter\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guards and Wards',
@@ -5151,6 +5371,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'varies',
     description: 'This spell creates multiple protective effects throughout a warded area. Fog obscures vision beyond 5 feet (20% miss chance within 5 feet; 50% beyond). All doors in the area become arcane locked. Webs fill stairs and regrow within 10 minutes if destroyed. Intruders have a 50% chance of believing they are moving in the opposite direction. One door per caster level is disguised as a wall via silent image. Additionally, the caster may choose one optional effect: dancing lights in four corridors, magic mouth in two locations, stinking cloud in two locations, gust of wind in one area, or suggestion in a 5-foot square. The entire ward radiates strong abjuration magic.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_H_1 ─────────────────────────────────────────────────────────────
@@ -5167,6 +5388,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The spell causes an explosive burst of growth in a single plant, causing it to grow through a cycle of flower, fruit, or grain production. Non-food plants produce edible flowers instead. The spell generates enough food to sustain one Medium creature per caster level, though this food spoils within 24 hours if uneaten. The spell nourishes and fertilizes the plant without causing harm and has no effect on plant creatures.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Healing Warmth',
@@ -5181,6 +5403,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'none',
     description: 'The spell grants temporary immunity to fire damage comparable to the protection from energy spell. As a standard action, the caster may expend 12 points of remaining energy absorption from the spell to restore 1d8 hit points to a touched creature. This healing action triggers an attack of opportunity. The spell concludes once it has absorbed 12 points of fire damage per caster level, reaching a maximum of 120 points at 10th caster level.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hedging Weapons',
@@ -5196,6 +5419,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'none',
     description: "The caster summons weapons of divine force appearing as their deity's favored weapon. The spell grants additional weapons at higher caster levels: one at 6th, two at 10th, three at 14th, and five maximum at 18th level. Each weapon provides +1 deflection bonus to AC. As a standard action, the caster may throw a weapon at targets within 30 feet, dealing 2d6 points of force damage. Thrown weapons disappear and reduce the deflection bonus by 1 per weapon thrown, ending the spell once all weapons are deployed.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hex Glyph',
@@ -5210,6 +5434,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no (object) and yes (see text)',
     description: 'This abjuration functions similarly to the glyph of warding spell, but stores a hex (excluding major or grand hexes) instead of a spell. The triggered hex uses the spell\'s caster level and DC. If the hex has a target, it targets the intruder. If the hex has an area or amorphous effect, the area or effect is centered on the intruder. A greater version (Level 5 for shaman and witch) allows storage of major hexes and requires powdered diamond worth 400 gp as a material component.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hex Ward',
@@ -5224,6 +5449,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'The spell grants the target creature a +4 resistance bonus on saving throws against witch hexes.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hide from Animals',
@@ -5238,6 +5464,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'Animals cannot sense the warded creatures. Even extraordinary or supernatural sensory capabilities, such as blindsense, blindsight, scent, and tremorsense, cannot detect or locate warded creatures. Animals simply act as though the warded creatures are not there. The spell ends prematurely if a warded character touches an animal or attacks any creature, even with a spell.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hide from Undead',
@@ -5252,6 +5479,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell renders warded creatures undetectable to undead through normal and supernatural senses including blindsense, blindsight, scent, and tremorsense. Non-intelligent undead automatically fail to perceive targets. Intelligent undead receive a Will save; if failed, they cannot see the warded creatures. The spell terminates immediately for all recipients if any warded creature channels positive energy, turns/commands undead, touches an undead creature, or attacks anything.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hold Portal',
@@ -5266,6 +5494,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This abjuration magically secures a door, gate, window, or shutter made of wood, metal, or stone as though it were securely closed and normally locked. The spell can be countered by a knock spell or successful dispel magic. Additionally, any attempt to force the portal open gains a +5 difficulty increase to the normal DC.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Aura',
@@ -5281,6 +5510,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This divine protection grants warded creatures four distinct benefits: a +4 deflection bonus to AC and +4 resistance bonus on saves against all attacks; spell resistance 25 against evil spells; protection from possession and mental influence; and causes evil melee attackers to become blinded (with a Fortitude save to negate).',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Shield',
@@ -5295,6 +5525,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "This abjuration enables a caster to magically project the defense of your shield to protect another creature at a distance. Using a swift action, the caster designates a target within 30 feet to receive the shield's bonuses to Armor Class. The protection lasts until the caster's next turn, after which it can be redirected. The caster loses shield benefits while projecting protection and cannot use shield special abilities during projection.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_H_2 ─────────────────────────────────────────────────────────────
@@ -5311,6 +5542,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell operates identically to the dismissal spell but requires the creature\'s consent to cast. It sends a willing extraplanar being back to its home plane.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hymn of Peace',
@@ -5327,6 +5559,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'When subjects attempt to attack another creature or object, or perform aggressive or damaging actions toward a creature or object, they must make a Will save. Success allows normal attacks; failure prevents the attack and wastes that action. Creatures not taking violent actions are unaffected by this spell.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_IJK ─────────────────────────────────────────────────────────────
@@ -5359,6 +5592,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "You enchant the target to become nearly undetectable. The spell grants a Stealth bonus equal to half your caster level, allows hiding without concealment or cover, allows evasion from blindsight and blindsense abilities, prevents tracking unless the target permits it, and forces divination users to succeed at a caster level check (DC equals the target's Stealth bonus) to gain information about the target. Failure prevents further detection attempts for the duration.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Imprisonment',
@@ -5380,6 +5614,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "You entomb the target in a state of suspended animation in a tiny sphere far beneath the ground. A freedom spell cast at the location of the imprisonment can free the creature. Standard divination spells cannot locate the imprisoned creature, but discern location can. Wish and miracle reveal the creature's location but cannot free it. If you know the target's name and details about its life, the target takes a -4 penalty on its saving throw.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Incendiary Runes',
@@ -5403,6 +5638,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as explosive runes, except it creates a surge of flames rather than an explosion of force. When triggered, the runes automatically deal 1d6 points of fire damage to any creatures and objects in adjacent squares, and those creatures and objects catch fire unless they succeed at Reflex saves.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Influence Wild Magic',
@@ -5436,6 +5672,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You generate a stabilizing magical field in a 20-foot radius around yourself. Creatures within the area who fail concentration checks while casting spells in wild magic zones may roll twice for the wild magic effect and choose which result to apply.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Intellect Fortress I',
@@ -5458,6 +5695,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'Using the power of pure logic, you disrupt mental attacks. Intellect Fortress I suppresses all effects with the emotion and fear descriptors for its duration within the area. Intellect Fortress II (psychic 5) additionally reduces damage from mind-affecting effects by half. Intellect Fortress III (psychic 6) causes creatures succeeding on saves against fear or emotion effects to suffer no effects at all, even partial effects normally granted. Higher versions can be undercast.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Invisibility Alarm',
@@ -5488,6 +5726,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions as alarm but triggers only when invisible creatures enter or exit the warded area, providing a different mental alarm depending on direction of travel. The spell does not aid you in sensing or pinpointing the location of an invisible creature within the area. Can be made permanent by a 9th-level or higher caster using permanency (2,500 gp).',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_L_1 ─────────────────────────────────────────────────────────────
@@ -5507,6 +5746,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The caster envelops a target area in summery conditions where the ambient temperature never falls below 70 degrees Fahrenheit. Cold-subtyped creatures take fire damage (1d4 plus 1 per 2 caster levels, maximum 1d4+5) at the start of their turns with no saving throw. Evil dragons, fey, and giants must succeed at Will saves when taking damage or become shaken for 1 round. Creatures attempting to cast cold spells in the area must make Will saves or their spells fail; one successful save allows continued cold spell casting for the duration.",
     source: 'Pathfinder Player Companion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Bubble',
@@ -5533,6 +5773,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The spell creates a constant and moveable 1-inch shell of tolerable living conditions around affected creatures. This protection enables subjects to breathe in any environment (underwater, vacuum) and grants immunity to harmful gases, inhaled diseases, poisons, and spells like cloudkill. Additionally, it protects against temperature and pressure extremes similar to endure elements. The spell does not provide protection against negative or positive energy planes, improve visibility in poor conditions, or enable normal movement in restrictive environments like water.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_L_2 ─────────────────────────────────────────────────────────────
@@ -5551,6 +5792,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The caster creates a glowing crimson line around the area. Within this zone, the spellcaster gains bonus attacks of opportunity each round equal to their relevant ability modifier (Intelligence for magi and wizards, Charisma for bloodragers and sorcerers). However, this does not allow more than one attack against any single creature per action that provokes an opportunity attack.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Duty',
@@ -5567,6 +5809,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The caster recites a mantra or phrase that reminds them of their duty, gaining the ability to reroll a failed save against mind-controlling spells and a +2 bonus versus enchantment effects for one round. The spell can only reroll saves that failed within the previous round, and the target cannot be affected by other spells with 'litany' in their title while this effect is active.",
     source: "Pathfinder Player Companion: Disciple's Doctrine",
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_M_1 ─────────────────────────────────────────────────────────────
@@ -5584,6 +5827,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     target: 'see text',
     description: 'All creatures within the area gain protection from technology effects. Creatures already controlled by technology receive one save attempt to suppress such control; success maintains suppression while within the area. Robots can attempt saves and use spell resistance to avoid containment. This spell is not cumulative with protection from technology.',
     source: 'Pathfinder Campaign Setting: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Magnetic Field',
@@ -5599,6 +5843,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'You generate a powerful magnetic field that pulls unattended metal objects toward you and affects creatures wearing metal armor or wielding metal weapons. Creatures must succeed at Reflex saves or be dragged 5 feet closer to you. Creatures made primarily of metal suffer a -2 penalty on saves. Creatures failing by 5 or more are pulled an additional 5 feet per 5 points of failure.',
     source: 'Pathfinder Player Companion: People of the River',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Marks of Forbiddance',
@@ -5614,6 +5859,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell brands two chosen creatures, restricting their ability to attack each other. Both targets must make Will saves to attempt attacks against one another, including targeted spells. Failed saves prevent the attack and waste the action. Area-of-effect abilities bypass this restriction.',
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Medusa's Bane",
@@ -5628,6 +5874,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "Your eyes transform into reflective, mirror-like orbs. You gain complete protection from gaze attacks. As an immediate action, you may reflect an incoming gaze attack back at its source. The creature must save against its own gaze weapon or suffer its effects, even bypassing the creature's racial immunity to its own gaze attack, though other resistances remain intact. Once you use the reflection ability, the spell immediately ends.",
     source: 'Pathfinder Player Companion: Divine Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mental Barrier I',
@@ -5642,6 +5889,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You create a mental energy barrier granting a +4 shield bonus to AC and reducing damage from mind thrust I and II by half (quarter damage on a successful Will save).',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mental Barrier II',
@@ -5656,6 +5904,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You create a mental energy barrier granting a +6 shield bonus to AC and protecting against mind thrust I, II, and III (half damage, quarter on successful Will save). Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mental Barrier III',
@@ -5670,6 +5919,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You create a mental energy barrier providing a +8 shield bonus to AC. You are immune to mind thrust I and take half damage from mind thrust II-IV (quarter on successful Will save). Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mental Barrier IV',
@@ -5684,6 +5934,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'As mental barrier III with a 25% chance to negate critical hit and sneak attack additional damage (light fortification). You are immune to mind thrust I-II and take half damage from mind thrust III-V (quarter on successful Will save). Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mental Barrier V',
@@ -5698,6 +5949,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'As mental barrier III with a 50% chance to negate critical hit and sneak attack additional damage (moderate fortification). You are immune to mind thrust I-III and take half damage from mind thrust IV-VI (quarter on successful Will save). Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_M_2 ─────────────────────────────────────────────────────────────
@@ -5715,6 +5967,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions similarly to sanctuary. Creatures attempting to attack the target who fail their saves experience a strong sense of pity toward the target, as if it were weak and pathetic. Should the target break the spell by attacking, any creature that failed its save gains a +2 morale bonus on attack rolls against the target for 1 minute.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_N_2 ─────────────────────────────────────────────────────────────
@@ -5738,6 +5991,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'When unarmored, you gain a deflection bonus to your AC and CMD equal to your Charisma bonus (maximum +3). This maximum increases by 1 for every 6 character levels, reaching a maximum of +6 at 18th level.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_P_1 ─────────────────────────────────────────────────────────────
@@ -5755,6 +6009,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You augment an existing illusion to damage creatures that see through it. When a creature disbelieves the targeted illusion, it takes 1d6 points of nonlethal damage for every 2 caster levels (maximum 10d6) and becomes staggered for 1d4 rounds. A successful Will save reduces damage by half and negates the staggered condition. The spell ends after triggering.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_P_2 ─────────────────────────────────────────────────────────────
@@ -5772,6 +6027,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You release a powerful vocalization that removes enchantment and paralysis effects. It functions similarly to break enchantment but targets only you and only affects those two effect types. You can use this spell even while paralyzed or unable to speak due to enchantment, with specific limitations regarding silence, gags, or non-magical speech impediments.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_R_1 ─────────────────────────────────────────────────────────────
@@ -5788,6 +6044,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You emit a calming subsonic drone that allows the targets to temporarily refocus their mental state. Creatures experiencing dazzled, fatigued, shaken, or sickened conditions ignore those penalties while the spell persists. More severe conditions receive mitigation: blinded becomes dazzled, exhausted becomes fatigued, frightened becomes shaken, and nauseated becomes sickened. Once the spell ends, original condition penalties resume if underlying causes remain.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Repel Metal or Stone',
@@ -5804,6 +6061,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You generate waves of invisible energy that roll forth from you, propelling metal or stone objects away. Objects larger than 3 inches in diameter that are fixed in place, and loose items exceeding 500 pounds, remain unaffected. Other materials including armored creatures move backward at 40 feet per round. Items such as armor and weapons drag their bearers along. Even magical items with metal components are repelled unless blocked by an antimagic field. Creatures may release carried items or shields. The waves of energy continue to sweep down the set path for the spell\'s duration, persisting independently after casting.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_R_2 ─────────────────────────────────────────────────────────────
@@ -5821,6 +6079,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'The spell infuses a good-aligned target with holy energy. When an evil-subtype creature damages the target with a slashing or piercing melee weapon, it takes 1d6 points of damage from divine power each time it successfully hits the target. If the target possesses the good subtype or an aura of good ability (such as paladins or certain clerics), damage increases to 2d6 points instead. Creatures lacking the evil subtype or wielding reach weapons avoid this effect entirely.',
     source: "Pathfinder Player Companion: Demon Hunter's Handbook (2013)",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Righteous Condemnation',
@@ -5836,6 +6095,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'When creatures of chaotic, neutral, or evil alignment cast spells targeting you, they must make a Will save or suffer a -4 penalty on Intelligence, Wisdom, and Charisma-based checks during the spell\'s duration. Creatures with only neutral alignment components receive a +4 bonus on their save. Penalties stack, so chaotic evil spellcasters incur an -8 penalty total.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S1 ─────────────────────────────────────────────────────────────
@@ -5854,6 +6114,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The caster creates a bond with the target creature. For the spell's duration, whenever the target suffers damage or fails a saving throw, the caster can absorb that full damage and its effects. If the caster declines, they instead take damage equal to their Constitution score as backlash. The caster's resistances and immunities apply normally, but they cannot otherwise reduce or negate damage from either transfer or backlash. The spell ends if either participant moves out of line of sight.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sanctify Armor',
@@ -5870,6 +6131,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The spell imbues armor with a righteous aura, granting a +1 enhancement bonus per four caster levels (maximum +5 at 20th level). When the caster uses their judgment or smite ability, they gain DR 5/evil. Regular clothing counts as armor with no AC bonus for this spell's purposes.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scales of Deflection',
@@ -5903,6 +6165,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The caster becomes surrounded by brilliant draconic iconography matching their draconic heritage (or a kind of dragon whose alignment matches their own). This protective magic causes any touch attacks against the caster to resolve using the caster's normal armor class instead of touch AC. Once a touch attack has been resolved against the caster, the spell ends at the conclusion of their next turn.",
     source: 'Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sealed Life',
@@ -5919,6 +6182,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This abjuration prevents affected creatures from transferring vitality to others through effects like shield other, a spiritualist's life bond, or a summoner's life link. However, abilities that steal vitality (such as vampiric touch) still deal damage normally, just without providing benefits to the caster.",
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secret Workshop',
@@ -5951,6 +6215,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This spell functions as nondetection but the caster may exclude any creatures or objects within the spell's range during casting, so that those excluded targets are not protected by the effect.",
     source: 'Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Selective Alarm',
@@ -5986,6 +6251,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell operates similarly to alarm but with customizable triggering conditions. Rather than activating whenever any Tiny or larger creature enters the warded area, the caster can establish specific observable triggers, such as activating when creatures of particular races enter, when groups of four or more creatures arrive together, or when metal objects enter the area. Triggering conditions cannot depend on non-observable information, such as creature alignment, item value, or subjective classifications.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S2_1 ─────────────────────────────────────────────────────────────
@@ -6002,6 +6268,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Mirrors the effects of shield other but exclusively targets the caster's animal companion or familiar. Permits spellcasters who gain these companions through alternative class features, archetypes, or prestige classes to prepare and cast this spell as a 1st-level option.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield of Fortification',
@@ -6016,6 +6283,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Creates a magical barrier that protects a target's vital areas, providing a 25% chance to negate critical hits or sneak attacks and convert them to normal damage. The effect does not stack with similar fortification abilities.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield Speech',
@@ -6030,6 +6298,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Allows secure communication between the caster and one target within range, with divination unable to spy on the protected exchange. The spell protects only spoken communication; written words and sign language remain unshielded.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shield the Banner',
@@ -6044,6 +6313,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Safeguards a tribal standard or banner so that non-tribal members attempting to attack or touch it must succeed at a Will save or be prevented, functioning similarly to sanctuary for standards. Also increases the banner\'s hardness by 2 and adds 10 hit points for the duration.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shock Shield',
@@ -6059,6 +6329,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "An invisible protective disk grants a +2 shield bonus to AC, negates magic missile attacks, and works against incorporeal touch attacks. The caster may dismiss the shield as a free action, causing it to deal 1d6 electrical damage to all creatures within a 5-foot burst, including the caster.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Siphon Magic',
@@ -6073,6 +6344,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Strips one ongoing magical effect from a touched creature and claims it as the caster\'s own. The caster can specify a particular spell effect or target the highest-level spell first. If successful, any remaining duration transfers to the caster, who may attempt a new saving throw if applicable.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S2_2 ─────────────────────────────────────────────────────────────
@@ -6089,6 +6361,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "Soothes the elemental spirit of a targeted construct, reducing its chance of going berserk by 1d4% per four caster levels (maximum 5d4%). If the construct is already berserk and the caster is its master, grants an immediate roll to end the berserk state and reset the berserk chance to zero.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spell Scourge',
@@ -6103,6 +6376,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Manifests a whip of bluish-purple magical energy to strip protective enchantments from a target; if the target has harmless spells or effects, it must make a Will save or lose all such protections instantly. If the target lacks beneficial magical effects, it becomes confused for 1d4 rounds instead.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellbane',
@@ -6118,6 +6392,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a zone where the caster selects specific spells to suppress (one per five caster levels), functioning like antimagic field but only preventing the selected spells. The effect can negate antimagic field itself; artifacts and deity-cast effects remain unaffected.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellcrash, Lesser',
@@ -6132,6 +6407,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Generates disruptive magical energy that forces the target to lose prepared spells or spell slots each round, starting with 3rd-level and descending. Spontaneous casters lose 3rd-level slots with the same progression. The target may attempt a Will save each round to end the effect.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellscar',
@@ -6147,6 +6423,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a localized area where any spell, spell-like ability, or magic item activation automatically triggers a primal magic event unless the caster succeeds on a concentration check (DC 15 + twice the spell level). The caster gains a +4 insight bonus to concentration checks within their own spellscar.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellsteal',
@@ -6161,6 +6438,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Creates a disruptive magical blast forcing the target to lose a prepared spell or spell slot (starting with 3rd-level and descending). The caster can then cast the stolen spell on their next turn if it appears on their spell list. The spell has no effect on spell-like abilities.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spite',
@@ -6175,6 +6453,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Allows a witch to bind a prepared touch-range spell into a tattoo on her body. When an opponent hits the caster with a melee attack or successful combat maneuver, the stored spell automatically triggers against that attacker without requiring a touch attack roll. Only one spite effect can be maintained at a time.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S3 ─────────────────────────────────────────────────────────────
@@ -6213,6 +6492,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You instantly stabilize the pressure in and around the touched creature, adjusting it to match current environmental conditions. The spell provides no assistance adapting to subsequent pressure changes.',
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stave Off Corruption',
@@ -6236,6 +6516,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You grant the target a +2 circumstance bonus on saving throws against the advancement of its corruption. Multiple castings do not stack, nor do they stack with morale, profane, or sacred bonuses targeting the same corruption.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Strand of the Tangled Knot',
@@ -6259,6 +6540,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You impose a –10 penalty on the next single attack made against you. Additionally, if that attack would be a critical hit, it is instead treated as a normal hit.',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sunder Breaker',
@@ -6275,6 +6557,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "You place an invisible protective ward on the target. When a creature successfully performs a sunder combat maneuver against the target, the attacker's weapon sustains 1d6 points of damage per caster level (maximum 10d6). If a natural weapon was used, the attacker takes half damage. The attacker may attempt a Fortitude save to halve the damage. Spell resistance applies to this damage.",
     source: 'Pathfinder Player Companion: Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Surmount Affliction',
@@ -6291,6 +6574,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You temporarily suppress a single harmful condition affecting you. Choose one of the following: blinded, confused, dazed, dazzled, deafened, fatigued, frightened, paralyzed, shaken, or sickened. The spell does not end the effect causing the condition; it merely suspends the condition for its duration. When the spell ends, the condition resumes if its source persists.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Dispelling',
@@ -6315,6 +6599,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like symbol of death except it grants no saving throws and is not subject to spell resistance. When triggered, all creatures within 40 feet of the symbol experience the effects of a greater dispel magic area dispel. The dispel check result is determined at casting time.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Vulnerability',
@@ -6339,6 +6624,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions like symbol of death but weakens magical protections instead. Creatures within range suffer a –4 penalty to spell resistance and saving throws, with energy resistances and damage reduction each reduced by 10 (minimum 0). Effects persist within 60 feet of the symbol plus 1 round per caster level after leaving the area. Can be made permanent via permanency (18th-level caster, 25,000 gp).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sympathetic Wounds',
@@ -6362,6 +6648,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell works similarly to shield other but reverses the damage transfer direction. Some of the damage you take transfers to the targeted creature instead. You must have at least as many Hit Dice as the target creature or the spell fails. Only one instance of this spell can affect a target creature at any given time.',
     source: 'Pathfinder Chronicles: Gods and Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_T_1 ─────────────────────────────────────────────────────────────
@@ -6379,6 +6666,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'Affected creatures must form an unbroken adjacent chain (linear or irregular). Each target gains a +2 deflection bonus to AC while staying within 5 feet of at least one other affected creature. Breaking this proximity ends the spell for that creature only.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Telepathic Censure',
@@ -6393,6 +6681,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You generate an invisible psychic interference that inhibits telepathic communication. When targeting a telepathic creature, it blocks both sending and receiving thoughts. Against non-telepathic creatures, it only prevents receiving telepathic messages. Those affected by this spell or that attempt to telepathically communicate with creatures under its effects are not innately aware that their communication is being inhibited. The spell disrupts telepathic bond effects and helm of telepathy messages but does not affect psychic abilities unrelated to communication, such as detect thoughts or psychic crush attacks.',
     source: "Pathfinder Player Companion: Demon Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_T_2 ─────────────────────────────────────────────────────────────
@@ -6409,6 +6698,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You fortify your allies against attempts to control or mislead them. Affected creatures gain a +4 insight bonus on saving throws against the next enchantment or illusion spell cast upon them. Additionally, the DC for Bluff, Diplomacy, Disguise, or Intimidate checks targeting affected characters increases by 4 for the spell\'s duration.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tower of Iron Will I',
@@ -6424,6 +6714,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You project mental fortification granting spell resistance equal to 10 + double this spell\'s level against psychic magic and any mind-affecting effects. Creatures in the area gain protection except against your own spells. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tower of Iron Will II',
@@ -6439,6 +6730,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You project mental fortification granting spell resistance equal to 10 + double this spell\'s level against psychic magic and any mind-affecting effects. Creatures in the area gain protection except against your own spells. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tower of Iron Will III',
@@ -6454,6 +6746,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You project mental fortification granting spell resistance equal to 10 + double this spell\'s level against psychic magic and any mind-affecting effects. Creatures in the area gain protection except against your own spells. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tower of Iron Will IV',
@@ -6469,6 +6762,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You project mental fortification granting spell resistance equal to 10 + double this spell\'s level against psychic magic and any mind-affecting effects. Creatures in the area gain protection except against your own spells. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Tower of Iron Will V',
@@ -6484,6 +6778,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You project mental fortification granting spell resistance equal to 10 + double this spell\'s level against psychic magic and any mind-affecting effects. Creatures in the area gain protection except against your own spells. This spell can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'True Form',
@@ -6498,6 +6793,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell removes any polymorph effect from a target creature, returning it to its true form, even against its will. Against polymorph spell effects (such as baleful polymorph or giant form), you make a caster level check (1d20 + caster level, capped at +15) versus DC 11 + the original effect\'s caster level. For creatures with supernatural shape-changing abilities (like lycanthropes), the target makes a Will save or reverts to true form. A failed initial save allows a second save as a full-round action; failure locks the creature in true form for the spell\'s duration.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_U_1 ─────────────────────────────────────────────────────────────
@@ -6525,6 +6821,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'You strengthen a construct\'s natural defenses. If the target construct has damage reduction/adamantine, that DR increases by 5. If the construct has hardness instead, its hardness increases by 5. This spell has no effect on a construct that lacks both DR/adamantine and hardness.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_VWYZ ─────────────────────────────────────────────────────────────
@@ -6542,6 +6839,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This spell functions similarly to magic vestment but with a key restriction: it only affects armor or a shield worn or carried by the caster. If another creature wears or carries the affected item, the spell becomes inactive but resumes functioning when the original caster possesses it again.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vigilant Rest',
@@ -6576,6 +6874,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The spell allows a sleeping target to maintain partial perception, avoiding the normal +10 Perception check penalty during rest. The sleeper can detect threats or unusual sounds and wake immediately and stand up from the sleeping position as a free action. If the target wakes but returns to sleep within the duration, sleep resumes without counting as interrupted.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Silver',
@@ -6593,6 +6892,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'The caster creates a wall of translucent silver energy that hums and vibrates at the slightest touch. Non-evil creatures and objects pass through unaffected. Evil-descriptor spells and effects treat it as a wall of force, blocking line of effect. Evil creatures passing through suffer 3d6 damage plus 1 per caster level (max +20) and become blinded for one round. Creatures vulnerable to silver (devils, lycanthropes) instead take 1d6 per caster level (max 15d6), become staggered for one round, and are permanently blinded. A successful Will save reduces damage by half and negates blinding and staggering effects.',
     source: "Pathfinder Roleplaying Game Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Watchful Eye',
@@ -6616,6 +6916,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This spell mimics protective magic similar to shield other. The caster must maintain line of effect to the target throughout the spell's duration.",
     source: 'Pathfinder Player Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Waterproof',
@@ -6644,6 +6945,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This abjuration makes touched objects impervious to mundane liquids like alcohol or oil for one day, though magical liquids can still affect them. When cast on creatures, their carried equipment gains this protection until dropped. The spell notably does not prevent combustible materials from igniting if exposed to air.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wave Shield',
@@ -6660,6 +6962,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "The caster conjures a rushing torrent of water in the rough outline of a shield. This aqueous barrier protects against one physical or fire attack, granting damage reduction and fire resistance equal to half the caster's level (minimum 1) against that single attack. After reducing damage from one attack, the spell ends.",
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Winter Feathers',
@@ -6683,6 +6986,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This abjuration thickens and fluffs a feathered target's plumage to provide cold resistance. The creature endures temperatures as low as -50°F without requiring Fortitude saves and gains protection for its equipment. The spell provides no defense against cold damage itself or environmental hazards like ice slickness or snow blindness. Optionally, the caster may turn the feathers white, granting a +4 circumstance bonus on Stealth checks to hide in ice and snow for the spell's duration.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'With the Wind',
@@ -6708,6 +7012,7 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       'This protective abjuration creates air currents surrounding the target, preventing it from being displaced by wind. The target remains unaffected by winds of less than windstorm force unless it chooses to move with them.',
     source: 'Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Word of Resolve',
@@ -6723,5 +7028,6 @@ export const ABJURATION_SPELLS: Spell[] = [
     description:
       "This spell allows a caster to focus their aura on a single ally, enabling them to reroll a failed saving throw against charm or fear effects with a +4 sacred bonus. The spell's effectiveness depends on the caster possessing specific class abilities—it only affects fear effects if the caster has the aura of courage ability, and only affects charm effects if they have the aura of resolve ability.",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 ];

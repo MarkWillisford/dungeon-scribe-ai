@@ -10,6 +10,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Control splash damage placement when hitting Large or larger targets with splash weapons.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -29,6 +30,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Deliberately provoke attacks of opportunity after a 5-foot step, gaining +4 dodge AC against them.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'antagonize' }],
     effects: [
@@ -51,6 +53,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use an immediate action to grab or reposition a disarmed weapon when your ally disarms a foe.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -69,6 +72,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Story feat granting bonuses against a chosen giant type, with expanding benefits as you defeat more giants.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['story'],
     prerequisites: [
       {
@@ -104,6 +108,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Add half your favored enemy (giants) bonus to spell save DCs and CL checks vs. giants.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'caster_level', minimum: 4 },
@@ -129,6 +134,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Treat your reach weapon as having brace against Large or larger foes; hits impose a -2 attack penalty.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'power_attack' }],
     effects: [
@@ -151,6 +157,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 competence bonus to CMD against awesome blow, bull rush, drag, reposition, and trip from larger foes.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'ability_score', ability: 'CON', minimum: 13 }],
     effects: [
@@ -173,6 +180,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Charge attacks against larger foes deal damage as one size larger; +2 to Stunning Fist DC on such charges.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -205,6 +213,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       "Sacrifice sneak attack dice (2d6 per +1) to increase a delivered poison's save DC.",
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Sneak attack +2d6' }],
     effects: [
@@ -227,6 +236,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Crawl at half speed, take 5-ft steps while crawling, and avoid AoOs from larger foes while crawling.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -241,6 +251,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 dodge AC vs. hurled rocks and similar projectiles when an ally with this feat is nearby; Reflex save for half damage on a hit.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [
@@ -263,6 +274,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       "When you suppress a foe's regeneration, allies with this feat can attack to extend the suppression by 1 round each.",
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'teamwork'],
     prerequisites: [],
     effects: [],
@@ -277,6 +289,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use a move action to reposition a willing ally with this feat to any adjacent square.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'feat', featId: 'escape_route' }],
     effects: [],
@@ -291,6 +304,7 @@ export const GIANT_HUNTERS_HANDBOOK_FEATS: FeatDefinition[] = [
     shortDescription:
       'Metamagic: cast ray spells from your forehead (no somatic component) and gain regeneration 1 for rounds equal to spell level; uses a slot 3 levels higher.',
     source: "Pathfinder Player Companion: Giant Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 15 },

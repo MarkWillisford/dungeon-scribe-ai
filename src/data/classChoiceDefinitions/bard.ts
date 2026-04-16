@@ -64,6 +64,7 @@ export const bardDefinitions: ClassChoiceDefinition[] = [
     optionGroups: [VERSATILE_PERFORMANCE_OPTIONS],
     source: 'pf1e-core',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
     visibility: 'global',
     rev: 1,
   },

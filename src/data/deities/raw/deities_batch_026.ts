@@ -34,6 +34,7 @@ export const ashava: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -53,6 +54,7 @@ export const blackButterfly: DeityEntry = {
   sacredColors: ['black', 'silver'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -72,6 +74,7 @@ export const cernunnos: DeityEntry = {
   sacredColors: ['brown', 'green'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -91,6 +94,7 @@ export const chadali: DeityEntry = {
   sacredColors: ['orange', 'yellow'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -110,6 +114,7 @@ export const chucaro: DeityEntry = {
   sacredColors: ['white'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -129,6 +134,7 @@ export const hembad: DeityEntry = {
   sacredColors: ['gold', 'silver'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -148,6 +154,7 @@ export const immonhiel: DeityEntry = {
   sacredColors: ['brown', 'green'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -167,6 +174,7 @@ export const jalaijatali: DeityEntry = {
   sacredColors: ['blue', 'green'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -186,6 +194,7 @@ export const keltheald: DeityEntry = {
   sacredColors: ['orange', 'red'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -205,6 +214,7 @@ export const lalaci: DeityEntry = {
   sacredColors: ['all'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

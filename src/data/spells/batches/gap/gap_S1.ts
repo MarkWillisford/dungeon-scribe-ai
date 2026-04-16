@@ -1,8 +1,8 @@
 // Gap spells — letter S part 1 (Sa-Se)
 // Gap metadata: {"letters":"S1","totalChecked":96,"newSpells":48,"skipped":48}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_S1: Spell[] = [
+export const GAP_SPELLS_S1: SpellDefinition[] = [
   {
     name: 'Sacramental Seal',
     classLevels: { cleric: 8 },
@@ -25,6 +25,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This spell traps a target creature inside a holy symbol-decorated object. While confined the creature cannot act and gains immunity to spells and spell-like abilities. The binding persists as long as the caster maintains possession of the object. If the caster releases the object, the creature gradually gains abilities over time: telepathic communication (1 week), haunt creation up to 1/4 HD in CR (1 week), mental image projection (1 month), and possession ability (1 year). Only freedom, miracle, or wish can end the enchantment, as can destroying the object.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sacred Bond',
@@ -50,6 +51,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'The caster touches a recipient to create a sympathetic field of healing energies between them. Once cast, both participants may cast touch-range conjuration (healing) spells on each other while within close range (25 feet plus 5 feet per 2 caster levels). Removing either bracelet immediately ends the spell.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sacred Nimbus',
@@ -66,6 +68,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "The caster becomes surrounded by golden light shaped like their deity's holy symbol. Evil creatures striking the caster with unarmed strikes, natural weapons, or handheld weapons take 1d6 points of damage + 1 point per caster level (maximum +15). Creatures using reach weapons avoid this effect. The caster also takes half damage from evil-descriptor magical attacks, and negates that damage entirely on a successful Reflex save.",
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sacred Space',
@@ -90,6 +93,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "This spell sanctifies an area with heavenly power. The DC to resist spells with the good descriptor or channeled energy that harms evil outsiders increases by +2. Evil outsiders suffer a -1 penalty on attack rolls, damage rolls, and saving throws within the space, and cannot be called or summoned into it. These benefits double if a permanent religious fixture dedicated to the caster's deity or a good-aligned higher power exists in the area. The caster cannot cast this spell where another deity's permanent fixture stands.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sacrifice',
@@ -114,6 +118,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This spell enables casters to make offerings to conjured beings via planar ally, planar binding, or similar spells. The sacrifice can serve four purposes: Bargain (grants bonus on Charisma checks to compel the creature into service), Enticement (increases Will save DC for resisting conjuration when made the round prior), Payment (allows payment for creature services using non-monetary commodities), or Reinforcement (amplifies magic circle warding). Multiple sacrifices may affect a single conjuring, but bonuses do not stack.',
     source: 'Book of the Damned',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sacrificial Oath',
@@ -130,6 +135,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "The caster creates a bond with the target creature. For the spell's duration, whenever the target suffers damage or fails a saving throw, the caster can absorb that full damage and its effects. If the caster declines, they instead take damage equal to their Constitution score as backlash. The caster's resistances and immunities apply normally, but they cannot otherwise reduce or negate damage from either transfer or backlash. The spell ends if either participant moves out of line of sight.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sadomasochism',
@@ -154,6 +160,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'When you cast this spell, incoming damage forces your attacker to roll damage twice and apply the higher result. The attacker must also succeed at a Will saving throw or become demoralized for 1 round. Each time you deal damage to a creature demoralized by this spell, you roll damage twice and take the higher result.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sanctify Armor',
@@ -170,6 +177,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "The spell imbues armor with a righteous aura, granting a +1 enhancement bonus per four caster levels (maximum +5 at 20th level). When the caster uses their judgment or smite ability, they gain DR 5/evil. Regular clothing counts as armor with no AC bonus for this spell's purposes.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sanctify Corpse',
@@ -193,6 +201,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This spell infuses a dead body with positive energy, preventing necromantic transformation into undead creatures. Attempts to raise the corpse as an undead automatically fail. If the subject was slain by creatures that spawn undead (such as shadows, vampires, or wraiths), that effect is postponed until the spell ends. The protection can be renewed daily through repeated casting or made permanent via a permanency spell (requires 9th-level caster, costs 500 gp).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sanctify Weapons',
@@ -210,6 +219,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'When you cast this spell, choose a specific subtype of evil outsider, such as daemon, demon, devil, or div. All manufactured weapons in the area of effect bypass the DR of that type of outsider. The weapons do not become aligned or change composition.',
     source: 'Chronicle of the Righteous',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sand Whirlwind',
@@ -234,6 +244,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'The spell creates a swirling sand cloud that strikes a target, causing blindness and impairing speech. Affected creatures must make Concentration checks to speak, with increased DCs when casting spells. A successful save prevents blindness but not the speech impediment.',
     source: 'Taldor, Echoes of Glory',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sands of Time',
@@ -259,6 +270,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'The spell ages a target creature to the next age category, imposing penalties to Strength, Dexterity, and Constitution without granting bonuses to mental ability scores. When cast on objects, constructs, or undead creatures, it deals 3d6 points of damage + 1 point per caster level (maximum +15). Ageless or immortal creatures are immune to this spell.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Saving Finale',
@@ -275,6 +287,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'A bard with an active bardic performance can use this spell to immediately end that performance when a creature within range affected by the bardic performance fails a saving throw, allowing the subject to immediately reroll the failed saving throw.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scales of Deflection',
@@ -308,6 +321,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "The caster becomes surrounded by brilliant draconic iconography matching their draconic heritage (or a kind of dragon whose alignment matches their own). This protective magic causes any touch attacks against the caster to resolve using the caster's normal armor class instead of touch AC. Once a touch attack has been resolved against the caster, the spell ends at the conclusion of their next turn.",
     source: 'Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scarify',
@@ -334,6 +348,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "The caster's touch causes skin to produce fibrous tissue that rapidly closes wounds while leaving jagged scars. It converts 2d6 points of damage + 1 point per caster level (maximum +5) into nonlethal damage. The spell fails if the target is immune to nonlethal damage. Damage reduction against nonlethal damage applies. This effect counts as healing for stopping bleed damage.",
     source: 'Inner Sea Temples',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scintillating Wall',
@@ -359,6 +374,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'The caster generates a vibrant wall of hypnotic light and color that does not block movement or vision. Creatures passing through must make a Will save or become fascinated. Fascinated creatures can retry the save each round as a full-round action. Those succeeding on the save become dazzled if adjacent to or moving through the wall. If the wall manifests on creatures, they must succeed at a Fortitude save to avoid blindness.',
     source: 'Distant Realms',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scourge of the Horsemen',
@@ -376,6 +392,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'The spell inflicts a devastating combination of soul-draining energy and corrosive damage. Affected creatures gain 1d4 negative levels and sustain 1d6 points of acid damage per caster level (maximum 20d6).',
     source: 'Horsemen of the Apocalypse: Book of the Damned, Vol. 3',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scouring Winds',
@@ -393,6 +410,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This evocation summons a stinging sandstorm that obscures all vision within the area. The caster may reposition the storm up to 30 feet as a move action each turn. Creatures within the affected area sustain 3d6 piercing damage every round. The zone functions as a windstorm per the environmental rules.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Screaming Flames',
@@ -417,6 +435,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'A wall of flames rushes forward with skull-shaped tendrils. Creatures in its path must succeed on a Reflex save or take fire damage (1d8 per 2 caster levels, maximum 5d8). Those taking fire damage must also attempt a Will save or suffer 1d3 Wisdom damage. Deaf creatures gain a +4 circumstance bonus on Will saves. If using sanity rules, affected creatures take 1d6 sanity damage instead of Wisdom damage.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Screech',
@@ -434,6 +453,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'The caster produces a shrill, piercing shriek, startling those around them into dropping their guard. Affected enemies must succeed on a Fortitude save or immediately provoke attacks of opportunity from threatening foes. The caster and allies remain unaffected.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Scrivener's Chant",
@@ -457,6 +477,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "This spell animates a quill to transcribe written text from one page to another at one normal-sized page per minute. The caster must maintain concentration and provide blank pages. The Linguistics skill can enhance the copy's authenticity, but reproductions typically match the caster's handwriting unless a skill check is made.",
     source: 'Seekers of Secrets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sealed Life',
@@ -473,6 +494,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "This abjuration prevents affected creatures from transferring vitality to others through effects like shield other, a spiritualist's life bond, or a summoner's life link. However, abilities that steal vitality (such as vampiric touch) still deal damage normally, just without providing benefits to the caster.",
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sealed Sending',
@@ -491,6 +513,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This spell allows a caster to create a magical scroll containing a message of up to 50 words in any language they speak. The scroll materializes at any location the caster has previously viewed on their current plane. Upon spell duration expiration or once the recipient finishes reading, the scroll vanishes without trace. This spell cannot be detected, traced, or blocked by any spell of a lower level.',
     source: 'Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Seamantle',
@@ -515,6 +538,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'The caster surrounds themselves within a churning column of pure elemental water up to 30 feet high. Benefits include a swim speed matching land speed and improved cover (+8 AC bonus, +4 Reflex saves) against foes without freedom of movement effects. The water blocks fire spells but allows enemies to attempt them via caster level checks. The caster can form a 30-foot reach slam attack and extinguish normal fires or use dispel magic effects against magical flames. Fire weapons striking the caster are suppressed for 1d4 rounds if the wielder fails a Fortitude save.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Searching Shadows',
@@ -533,6 +557,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "This spell creates shadow strands that probe an area searching for a specified creature or object by physical characteristics. Each round, the shadows make Perception checks using the caster's level plus either Charisma or Intelligence modifier. The caster can reposition the shadows up to 30 feet per round or modify search criteria while concentrating. Upon locating the target, the shadows can attempt to seize it; if targeting a creature, the area becomes difficult terrain and the creature must succeed at a Reflex save or become entangled. For objects, the shadows make disarm or steal combat maneuvers and can lift non-magical unattended objects weighing up to 5 pounds.",
     source: 'Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Searing Light',
@@ -549,6 +574,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'The caster projects a blast of light from their palm via a ranged touch attack. Damage varies by target type: normal creatures take 1d8 per two caster levels (max 5d8); undead take 1d6 per caster level (max 10d6); undead vulnerable to bright light take 1d8 per caster level (max 10d8); constructs or inanimate objects take 1d6 per two caster levels (max 5d6).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sebaceous Twin',
@@ -565,6 +591,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "The caster touches a living target to manifest a half-formed, parasitic clone that bursts from its midsection. This parasitic twin imposes a -2 penalty on Acrobatics and Climb checks. Each round, the target must make a Fortitude save or take 1 Constitution damage and become sickened as the twin drains blood. The spell's duration extends by 1 round whenever the target receives any healing; damage to the target reduces duration by 1 round. When duration reaches zero, the twin is removed violently, dealing 1d6 bleed damage. This effect counts as a disease.",
     source: 'Pathfinder Adventure Path #119: Prisoner of the Blight',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secluded Grimoire',
@@ -582,6 +609,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This spell transports a spellbook to a random safe location on the Ethereal Plane where it persists indefinitely. The targeted spellbook dissolves into quickly fading lines of energy and runes. The caster can retrieve it by concentrating as a standard action. Only one spellbook may be stored this way at a time; the spell cannot affect another spellbook if one already exists on the Ethereal Plane. Any ongoing magical effects on the spellbook continue normally.',
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Second Wind',
@@ -599,6 +627,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "This healing spell requires the caster to have fewer than one-quarter of their total hit points remaining. Upon casting, the character summons invigorating air to fill their lungs, healing 2d8 points of damage + 1 point per caster level (maximum +10). The spell can be cast as a swift action during the caster's turn or as an immediate action when reduced below 0 hit points. The spell is ineffective for creatures that do not breathe.",
     source: "Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secret Coffer',
@@ -624,6 +653,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This spell allows a caster to hide a small coffer on the Ethereal Plane. The container measures approximately 1 foot square and can hold up to 1 cubic foot of material. The spell automatically fails if any living creature attempts to enter the coffer. The coffer remains safely hidden for 14 days before risking permanent loss on the Ethereal Plane; after this period, there is a cumulative 5% daily chance of permanent loss. The caster retrieves it by concentrating as a standard action while holding the replica.',
     source: 'Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secret Sign',
@@ -648,6 +678,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This spell creates an invisible mark or message (maximum 25 words) on a target. The mark cannot exceed 6 inches across. The caster establishes one specific criterion—such as appearance, scent, or tactile trigger—allowing designated creatures within 30 feet to perceive it. Normal darkness does not conceal a visual trigger, but magical darkness or invisibility does. The spell cannot distinguish alignment or class except through visible indicators.',
     source: 'Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secret Speech',
@@ -664,6 +695,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "The spell allows a target to send secret messages embedded within normal speech without requiring skill checks. Intended recipients understand both the overt message and hidden communication perfectly, while other listeners perceive nothing concealed. The speaker can direct one message to multiple listeners simultaneously, with the hidden message considered part of the same language being spoken. Transmission range extends as far as the caster's voice carries.",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secret Vault',
@@ -689,6 +721,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This spell functions as secret chest but applies to small structures, vaults, or large chests. Unlike the standard spell, living occupants within the vault do not invalidate the spell. While stored on the Ethereal Plane, residents do not require sustenance or air but cannot depart except through magical means like plane shift. After 360 days, there is a cumulative 1% daily chance of permanent loss.',
     source: 'Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Secret Workshop',
@@ -721,6 +754,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "This spell functions as nondetection but the caster may exclude any creatures or objects within the spell's range during casting, so that those excluded targets are not protected by the effect.",
     source: 'Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Seducer's Eyes",
@@ -738,6 +772,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'The caster gains a bonus on Charisma-based skill checks equal to 1 + 1 for every 4 caster levels (to a maximum of +5), but only when interacting with those who might conceivably find the caster sexually attractive. The bonus does not apply against targets the caster or their allies are attacking or threatening.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Seeds of Influence',
@@ -762,6 +797,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "The caster implants a magical trace in a creature's mind if it holds an attitude of at least indifferent. The target receives penalties on Will saves to resist the caster's spells based on how favorable its attitude is. It also suffers a -2 penalty on saves against the caster's divination spells and can be affected by the caster's lower-level mind-affecting spells as though they were enlarged. The effect ends if the target successfully saves against a divination or mind-affecting spell from the caster.",
     source: 'Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Seek Shelter',
@@ -789,6 +825,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'The caster projects an empathic impulse compelling creatures to seek safety as fast as possible and in an orderly fashion. Creatures may be directed toward a designated fortified location or seek shelter independently. Those with 5 or more Hit Dice are immune. Affected creatures defend themselves normally but only initiate attacks if provoked.',
     source: 'Inner Sea Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Selective Alarm',
@@ -824,6 +861,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This spell operates similarly to alarm but with customizable triggering conditions. Rather than activating whenever any Tiny or larger creature enters the warded area, the caster can establish specific observable triggers, such as activating when creatures of particular races enter, when groups of four or more creatures arrive together, or when metal objects enter the area. Triggering conditions cannot depend on non-observable information, such as creature alignment, item value, or subjective classifications.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Semblance of Flesh',
@@ -841,6 +879,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "This illusion magic makes a construct appear as a living flesh-and-bone creature. The caster can adjust apparent height (up to 1 foot in either direction), build, coloring, hair, and age. The spell maintains the construct's actual body configuration. It does not grant actual abilities, mannerisms, tactile properties, or sounds of the disguised form. When used for disguise purposes, the construct receives a +10 bonus on Disguise checks. Creatures physically interacting with the illusion may attempt a Will save to detect the deception.",
     source: 'Pathfinder Adventure Path #86: Lords of Rust',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sending',
@@ -872,6 +911,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This spell enables you to contact a specific familiar creature and transmit a message not exceeding 25 words. The recipient recognizes the sender if previously known. Even creatures with minimal Intelligence can receive the message, though their ability to respond depends on their cognitive capacity. The target is not required to act on the communication. When the recipient occupies a different plane, transmission success drops to 95%, with local conditions potentially reducing this further.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sensory Overload',
@@ -889,6 +929,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "This spell overloads the target creature's senses, making it difficult for the target to concentrate. The affected creature must make a Will save each time it attempts a standard or full-round action. Failed saves cause the creature to lose that action, though successful saves allow the action while the spell remains active.",
     source: 'Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sentry Skull',
@@ -912,6 +953,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This spell animates a severed head mounted on a stable object, granting it darkvision 60 feet and low-light vision with a +5 bonus to Perception. The caster can shift their senses into the head as a standard action within 30 feet, becoming blind and deaf in their body. The head can be imprinted with a triggering condition similar to magic mouth to alert the caster when activated. The spell grants no other abilities to the head.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sepia Snake Sigil',
@@ -936,6 +978,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This spell inscribes a hidden magical symbol in text of at least 25 words. When someone deliberately reads the enspelled text, a large sepia serpent materializes and attacks the reader. A successful Reflex save causes the serpent to dissipate. On a failed save, the target is engulfed in a shimmering amber field of force and immobilized in suspended animation, neither aging nor requiring sustenance. The sigil can be removed via dispel magic.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sequester Thoughts',
@@ -960,6 +1003,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "This spell permits the caster to remove either a creature's memory of an event lasting not more than 1 minute per caster level or all knowledge regarding a single topic. The erased memories are stored within the material component gemstone. If the gem shatters while within 30 feet of the target, memories return to the creature. The spell protects against divination magic like detect thoughts and zone of truth concerning the removed memories.",
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Serenity',
@@ -977,6 +1021,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       "The spell fills recipients' minds with tranquility. Those attempting violence suffer 3d6 points of nonlethal damage per round. However, affected individuals may defend themselves using Combat Expertise, fighting defensively, or total defense without triggering damage.",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sessile Spirit',
@@ -1001,6 +1046,7 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'The spell renders spirits within a target dormant. For mediums or spiritualists with inhabiting spirits or phantoms, a failed save renders that spirit or phantom powerless, suppressing any benefits normally provided to its host, including bonus feats and spells known. For possessing spirits using possession effects, the spell targets the possessing creature instead, leaving them dazed for the duration of the spell on a failed save rather than exorcising them.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Severed Fate',
@@ -1017,5 +1063,6 @@ export const GAP_SPELLS_S1: Spell[] = [
     description:
       'This curse prevents the target from using hero points. The affected creature becomes shaken and cannot use hero points for the duration of the spell. The condition can be lifted through dispel magic, remove curse, or comparable magical effects.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
 ];

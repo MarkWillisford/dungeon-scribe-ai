@@ -1,8 +1,8 @@
 // Gap spells — letter A part 2 (second half alphabetically)
 // Gap metadata: {"letters":"A_2","totalChecked":175,"newSpells":52,"skipped":3}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_A_2: Spell[] = [
+export const GAP_SPELLS_A_2: SpellDefinition[] = [
   {
     name: 'Anonymous Interaction',
     classLevels: { bard: 2, psychic: 2, witch: 2 },
@@ -18,6 +18,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This enchantment causes targets to forget all but the most general information about you. Subjects retain memory of your presence and overall form, plus the general nature of interactions, but lose specific details about what you said, your appearance, and identifying information. The spell affects memories from the minute preceding its casting and remains permanent thereafter.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Anticipate Thoughts',
@@ -33,6 +34,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster gains a +2 insight bonus to AC against the target\'s attacks by tapping into the creature\'s mind. If the target fails its Will save, the caster also perceives the target\'s reactions to the caster\'s attacks, applying the bonus to both attack and damage rolls. These bonuses function only while the target remains within spell range. Each time the target misses the caster with an attack, the bonus increases by 1 (maximum +5) until the spell ends.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Antitech Field',
@@ -48,6 +50,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This abjuration creates a mobile hemispherical field suppressing technological effects and preventing tech-based signals and constructs from entering. Robots and technological constructs must make Fortitude saves each round—failure renders them helpless, success grants either one move or standard action. Partially technological creatures become staggered on failed saves; cybernetic equipment ceases functioning. Non-technological creatures and low-tech projectiles may enter freely. High-tech missiles halt and drop harmlessly.',
     source: 'Pathfinder Roleplaying Game: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Antithetical Constraint',
@@ -64,6 +67,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This enchantment compels the target to automatically fail all attack rolls against creatures whose alignment isn\'t opposite to theirs. For instance, a lawful evil creature can only successfully attack chaotic good beings. Neutral-aligned targets cannot hit any chaotic evil, chaotic good, lawful evil, or lawful good creatures. The spell notably does not restrict effects that bypass attack rolls, such as magic missile.',
     source: 'Pathfinder Player Companion: Champions of Balance',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Antitoxin Touch',
@@ -78,6 +82,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'When cast, this abjuration causes the target\'s skin to secrete venom-resistant oils throughout the spell\'s duration. The enchantment prevents the target from accidentally poisoning themselves while applying toxins. Additionally, the target avoids exposure risk to creature venoms when attempting to extract venom for use.',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Anywhere But Here',
@@ -93,6 +98,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell transports affected creatures to a random plane, functioning similarly to plane shift but with unpredictable destinations. Subjects always appear in a location that is not inherently harmful, but the exact destination is otherwise random. Only creatures not currently on their home plane can be affected, though they may randomly end up returning home. Creatures transported by this spell cannot be affected by another casting for 24 hours.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Apathy',
@@ -109,6 +115,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster induces indifference in a target regarding a designated subject or activity. Affected creatures suffer a -5 penalty on all skill checks and ability checks to investigate, pursue, or otherwise advance its goals related to that focus. If the activity relates to survival needs (eating, sleeping, breath-holding), the target gains a +5 bonus to resist, with subsequent checks increasing the bonus by 1 each. Direct interaction with the caster immediately terminates the spell\'s effects.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ape Walk',
@@ -123,6 +130,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell grants the subject enhanced climbing abilities matching an ape or monkey, providing a climb speed of 30 feet and a +8 racial bonus on Climb skill checks. The creature must have free hands to climb this way. Additionally, with 10 feet of running space, the subject can long jump up to 10 feet without an Acrobatics check.',
     source: 'Pathfinder Player Companion: Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aphasia',
@@ -139,6 +147,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This enchantment renders the target unable to comprehend any form of language—spoken, written, sign, gestural, truespeech, or telepathy. The affected creature cannot communicate, use command words, cast spells requiring verbal components, or employ abilities dependent on language. At the conclusion of each turn, the subject may attempt another saving throw to terminate the effect. The spell tongues counters and dispels this effect.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Apparent Treachery',
@@ -155,6 +164,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster surrounds multiple targets in an aura of suspicion and fills them with extreme paranoia regarding their allies. Affected creatures view companions as untrustworthy and do not have allies and are not considered to be an ally to any other creature. Key effects include: inability to move through allies\' spaces, cooperate with teamwork feats, flank together, use aid another, or receive ally-only benefits.',
     source: 'Pathfinder Player Companion: Champions of Balance',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Appearance of Life',
@@ -171,6 +181,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'This illusion disguises Medium-sized or smaller undead as living humanoid creatures. The caster can affect multiple undead whose total Hit Dice don\'t exceed twice the caster\'s level. The illusion lacks smell, sound, texture, or temperature. Intelligent undead may attempt saving throws to resist; mindless undead cannot. Creatures interacting with the illusion gain disbelief saves. The spell interferes with detect undead, requiring a caster check to pierce it.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Apport Animal',
@@ -186,6 +197,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell functions similarly to apport object but targets animals instead. It can only teleport normal, non-magical creatures of the animal type. The spell can send the animal to a designated location or prepare it for retrieval as a swift action later.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Apport Object',
@@ -201,6 +213,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes (object)',
     description: 'This spell transports a small nonmagical object between locations using one of two methods. The "sending" mode functions similarly to teleport object, but limits the object size and range to 25 feet + 5 feet per 2 levels. The caster can place items in open spaces, containers, pockets, or hands without requiring line of sight. The "receiving" mode allows the caster to prepare an object beforehand with a mental trigger, summoning it as a swift action later.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aquatic Cavalry',
@@ -217,6 +230,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell summons hippocampi to function as combat-trained mounts. The summoned creatures avoid fighting but will defend themselves if attacked. Should any hippocampus engage in combat, the spell\'s duration converts from hours to rounds remaining.',
     source: 'Pathfinder Player Companion: Blood of the Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aquatic Trail',
@@ -233,6 +247,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'This divination spell enhances underwater trails, enabling tracking as if across soft ground for creatures that passed through within the previous week. The affected area moves with the caster, allowing pursuit over distances. Other creatures may follow the trail if moving with the caster.',
     source: 'Pathfinder Player Companion: Blood of the Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arbitrament',
@@ -249,6 +264,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This sonic evocation affects chaotic evil, chaotic good, lawful evil, and lawful good creatures based on their Hit Dice relative to caster level. Effects scale from sickened (at caster level) to killed (at caster level -10), with intermediate effects including staggered and nauseated conditions. Creatures receive a Will save to reduce or negate effects. When cast on the caster\'s home plane, all affected extraplanar creatures are banished for at least 24 hours.',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arboreal Hammer',
@@ -263,6 +279,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'The spell animates a tree branch to attack foes. Tree size depends on caster level: Huge (CL 10 or lower), Gargantuan (CL 11-15), or Colossal (CL 16+). The branch makes slam attacks using a Strength score of 10 plus caster level, with adjustments based on size. Damage ranges from 2d6 (Huge) to 4d6 (Colossal) plus 1.5x Strength modifier. The caster designates targets and can redirect the tree with a move action. The tree cannot flank or move from its location.',
     source: 'Pathfinder Roleplaying Game: Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arcana Theft',
@@ -277,6 +294,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell works similarly to a targeted dispel magic but only affects creatures and requires a melee touch attack. Upon successful touch attack and spell dispel, the removed spell transfers to the caster instead of remaining on the original target. The caster cannot make new saving throws or spell resistance checks and must accept the spell\'s effects regardless of benefit. The transferred spell\'s duration remains unchanged.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arcane Cannon',
@@ -292,6 +310,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster\'s focus transforms into a Medium arcane cannon appearing in an unoccupied square within range. Each round, the cannon can fire or load ammunition. The caster may use a move action to reposition it up to 20 feet. The cannon has a 50-foot range increment, targets touch attacks at first increment, and requires no supplied ammunition. Its attack bonus equals caster level plus Intelligence (wizards) or Charisma (sorcerers), plus an additional +1 per four caster levels (maximum +5). Successful hits deal 4d10 damage with x4 critical multiplier.',
     source: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arcane Concordance',
@@ -307,6 +326,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'A blue and gold radiance surrounds the caster, enhancing arcane spells within the effect area. Allied spellcasters gain a +1 bonus to saving throw DCs for their arcane spells. Additionally, their arcane spells can be cast with one metamagic feat applied—Enlarge Spell, Extend Spell, Silent Spell, or Still Spell—without increasing spell level or casting time.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arcane Disruption',
@@ -323,6 +343,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This enchantment hampers arcane spellcasting by forcing the subject to make concentration checks (DC = 10 + 1/2 caster level) to cast arcane spells, use spell-like abilities, employ spell completion/trigger items, or activate specific class abilities (arcane school powers, arcanist exploits, bardic performances, magus arcana, or witch hexes). The spell imposes additional penalties on any other concentration checks the subject must attempt.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arcane Pocket',
@@ -339,6 +360,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'This conjuration spell creates an extradimensional space within a pouch or pocket. It can contain only 10 pounds per caster level, and regardless of contents, always weighs 3 pounds. The pocket is immune to overloading or rupturing (excess items simply spill out), has no adverse interactions with other extradimensional spaces, and grants a +1 bonus on Sleight of Hand checks to conceal contents.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arcane Reinforcement',
@@ -353,6 +375,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'None',
     description: 'This spell enhances crafting abilities when cast during item creation. The caster adds their Spellcraft ranks to Craft checks made to create that item. Maintaining the spell requires continuous verbal component chanting with only brief pauses permitted. For projects exceeding one day, the spell must be recast daily to maintain its benefit.',
     source: 'Pathfinder Chronicles: Faction Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Archon's Aura",
@@ -369,6 +392,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster gains an aura comparable to an archon\'s aura of menace. Any hostile creature within the 20-foot radius must succeed at a Will save or suffer a -2 penalty to attack rolls, saving throws, and AC for the spell\'s duration. This penalty persists until the affected creature successfully hits the caster with an attack. Once a creature resists or breaks the effect, that same casting cannot affect it again.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Archon's Trumpet",
@@ -385,6 +409,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell produces a booming report, as if from a trumpet archon\'s mighty horn. All creatures within the burst area become paralyzed for 1d4 rounds.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Ardor's Onslaught",
@@ -400,6 +425,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell unleashes the power of zealous conviction to smite enemies with a burst of pulsing metallic energy. Purely neutral creatures take 1d8 per 2 caster levels (max 5d8); neutral outsiders take 1d6 per caster level (max 10d6) and become nauseated for 1d6 rounds with a Will save to halve damage and negate nausea. Creatures with partial neutral alignment take half damage with no nausea effect.',
     source: 'Pathfinder Player Companion: Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arid Refuge',
@@ -416,6 +442,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'This conjuration creates a small stone building on any relatively flat nonliving surface underwater. The caster designates individuals who can pass through a force membrane door without resistance; others must succeed at a DC 28 Strength check to enter. The shelter provides eight bunks and basic furnishings, maintains breathable air, and keeps internal temperature at 70°F. The spell functions exclusively underwater.',
     source: 'Pathfinder Player Companion: Blood of the Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Aristocrat's Nightmare",
@@ -431,6 +458,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This curse diminishes coin value through touch. When the cursed target touches any coin above copper denomination, that coin transforms into copper over the following minute. The transmutation is permanent, converting the coin\'s material composition. Restoration requires remove curse (affecting up to 50 coins per casting) or similar magic to restore original materials.',
     source: 'Pathfinder Player Companion: Merchant\'s Manifest',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Armor Lock',
@@ -445,6 +473,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster points at an armored opponent, causing all of the joints of the target\'s armor to stiffen as otherworldly chains wrap around the target. Heavy metal armor (failed save): target becomes staggered. Light/medium metal armor (failed save): target becomes entangled. Heavy metal armor (successful save): target becomes entangled. Light/medium metal armor (successful save): no effect. No armor or nonmetallic armor: unaffected.',
     source: 'Pathfinder Player Companion: Knights of the Inner Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Army Across Time',
@@ -461,6 +490,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell operates similarly to ally across time with two key modifications. First, you can summon one duplicate per caster level before the spell ends. Second, you can have up to one duplicate in existence at a time for every 3 caster levels you have.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Arrow Eruption',
@@ -477,6 +507,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster duplicates the arrow or crossbow bolt used to kill a creature in the previous round and launches copies at up to 15 enemies within a 30-foot radius of the corpse. A single attack roll applies to all arrows. The duplicated projectiles retain all the intrinsic magical properties of the arrow that killed the original creature as well as those passed on to it by your bow.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Artificer's Curse",
@@ -491,6 +522,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell temporarily weakens a magical item\'s potency by reducing its caster level by an amount equal to the caster\'s level (minimum 0). Various bonus types are each reduced by 1 for every 4 caster levels lost. If caster level reaches 0, all magical qualities cease functioning for the spell\'s duration. The spell has no effect on artifacts.',
     source: 'Pathfinder Roleplaying Game: Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ash Storm',
@@ -508,6 +540,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'Driving ash blocks all sight (even darkvision) within the spell\'s area of effect, and falling cinders cause the ground in the area to become difficult terrain.',
     source: 'Pathfinder Player Companion: Plane-Hopper\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ashen Path',
@@ -522,6 +555,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'The spell enables a touched creature to breathe comfortably in contaminated air containing ash, spores, smoke, or dust without suffering harm. The recipient gains a +4 bonus on saving throws against magical effects involving these contaminants. Additionally, the creature can see through magical concealing effects like dense ash or fog up to 60 feet away. The caster may affect multiple creatures by dividing duration equally (minimum 10 minutes per target).',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Assume Appearance',
@@ -537,6 +571,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'This transmutation allows you to assume the exact form of a deceased Small or Medium creature of the humanoid type. Your voice matches the assumed form. The creature must be dead less than 24 hours or preserved via gentle repose. You gain a +10 bonus on Disguise checks but cannot access the creature\'s abilities, memories, mannerisms, or speech patterns. If the imitated creature returns to life, the spell ends immediately.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Assumed Likeness',
@@ -553,6 +588,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster creates a visual disguise drawn from targets\' memories, with each observer perceiving the caster as a creature matching their selected emotion. The spell grants a +10 bonus to Disguise checks but imposes a -5 penalty initially. Failed disbelief results grant targets a -2 penalty to Sense Motive checks. Additional benefits vary by emotion: Fear (+4 Intimidate), Hate (+2 attack/-2 AC), Lust (+4 Sleight of Hand), Respect (+4 Diplomacy), or Trust (+4 Bluff).',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Astral Projection',
@@ -567,6 +603,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell allows the caster\'s spirit to project an astral body onto another plane altogether. The caster\'s physical body remains on the Material Plane in suspended animation while an astral form travels the Astral Plane and can visit other planes. Travelers remain connected via an incorporeal silver cord; if broken, the caster dies. If the astral form is destroyed on another plane, the spirit returns to the body, but the caster gains two permanent negative levels.',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Atonement',
@@ -581,6 +618,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell removes consequences of misdeeds from a willing, repentant subject. Cost increases to 2,500 gp in offerings when atoning for deliberate acts. Four primary uses exist: reversing magical alignment changes at no extra cost; restoring class features lost through alignment violations; recovering spell-casting ability for clerics/druids who angered their deity; and offering alignment redemption or temptation to opposing-aligned creatures.',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Augmenting Wall',
@@ -597,6 +635,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster creates a shimmering elemental energy wall. Upon casting, one energy type (acid, cold, electricity, or fire) is selected. The wall augments ranged weapons and ammunition passing through it, adding 1d6 points of energy damage of the specified type in addition to their normal damage. The spell does not affect melee weapons or non-thrown items. The caster may restrict the wall to affect only ranged weapons moving in a chosen direction, which reduces the spell\'s duration by half.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura Alteration',
@@ -611,6 +650,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This illusion spell masks and manipulates a target\'s aura to confound those attempting to discern information via aura reading or analysis. It allows adjustment of four distinct aura types: alignment (shifted up to one step per axis), emotion (displayed colors modified), health status (conditions masked), and magical aura (appearing non-magical, as a specific item type, or under a particular spell). The spell\'s effects persist for the duration.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura of Cannibalism',
@@ -627,6 +667,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster produces an aura that weakens creatures sharing their type and subtypes. Each round affected creatures must make Fortitude saves or take 1d4 damage. The caster gains temporary hit points equal to damage dealt, up to a maximum of 10 plus caster level. With at least 5 temporary hit points active, the caster receives a +1 competence bonus to attack rolls, saves, and skill checks (increasing to +2 at 15+ temporary hit points).',
     source: 'Pathfinder Player Companion: Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura of Distraction',
@@ -643,6 +684,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster produces an aura of subsonic noise and mental imagery that makes concentrating difficult. Creatures failing their save within the aura incur a -5 penalty on concentration checks. Upon entering the area, creatures must attempt the Will save; the penalty ceases upon leaving. Successful saves grant immunity to this particular casting even if the creature re-enters. The caster is unaffected by their own aura.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura of Doom',
@@ -659,6 +701,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster generates an almost palpable aura of horror. All non-allies within the spell\'s area of effect—or those entering it subsequently—must succeed on a Will save to avoid becoming shaken. A successful save suppresses the effect for that creature. If creatures leave and re-enter the area, they must save again.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura of Greater Courage',
@@ -675,6 +718,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell enhances a paladin\'s existing aura of courage ability. While active, all allies within the aura are immune to fear (magical or otherwise). The spell requires the caster to possess the aura of courage class feature to function—without it, the spell has no effect.',
     source: 'Pathfinder Player Companion: Champions of Purity',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura of Inviolate Ownership',
@@ -689,6 +733,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell protects attended items of targeted creatures. It increases the DC for Sleight of Hand checks to remove warded items by 20 and grants affected creatures a +20 bonus to their CMD against disarm and steal combat maneuvers.',
     source: 'Pathfinder Player Companion: Merchant\'s Manifest',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura of the Unremarkable',
@@ -706,6 +751,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'An invisible magical sphere surrounds the caster, altering how nearby creatures perceive actions. Creatures in the area don\'t think unusual activities are cause for alarm. Hostile actions break the effect for that creature. When the spell concludes, observers see things normally but retain altered memories. Additional Will saves become possible when questioned about events by authority figures.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura Sight',
@@ -720,6 +766,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'The spell causes your eyes to glow and enables alignment aura detection within 120 feet without requiring concentration. You perceive the location and power of chaotic, evil, good, and lawful auras based on the subject\'s Hit Dice or item\'s caster level. When auras are in line of sight, you may attempt a Knowledge (religion) check (DC 15 + spell level) to determine aura strength. This spell can become permanent via permanency (11th-level caster, 7,500 gp cost).',
     source: 'Pathfinder Roleplaying Game: Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Authenticating Gaze',
@@ -734,6 +781,7 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'No',
     description: 'The caster gains analytical understanding of written materials, receiving an insight bonus equal to caster level (maximum +10) on Appraise checks to determine the value of books and scrolls and on Linguistics checks to detect forgeries. The spell enables detecting forged documents at a glance. Additionally, the caster immediately detects magical auras on written works within 30 feet and line of sight.',
     source: 'Pathfinder Player Companion: Paths of the Righteous',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Awaken the Devoured',
@@ -749,5 +797,6 @@ export const GAP_SPELLS_A_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell awakens the broken, anguished memories of the countless souls that the target daemons have consumed. It deals 1d8 points of damage per caster level (maximum 15d8) and inflicts confusion for 1 round per level on all targeted daemons. A successful Will save reduces damage by half and negates the confusion effect. Conjurers typically use this spell to torment daemons and force compliance.',
     source: 'Pathfinder Roleplaying Game: Planar Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 ];

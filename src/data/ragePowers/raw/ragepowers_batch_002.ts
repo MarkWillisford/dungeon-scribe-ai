@@ -17,6 +17,7 @@ export const hurlingGreater: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -28,6 +29,7 @@ export const hurlingLesser: ClassOptionBase = {
     'Pick up and throw large objects as a standard action while raging.',
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -43,6 +45,7 @@ export const hurling: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -57,6 +60,7 @@ export const hurlingCharge: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -69,6 +73,7 @@ export const impellingDisarm: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 4 }],
   source: 'pf1e-ppc-cob',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -80,6 +85,7 @@ export const increasedDamageReduction: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 8 }],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -94,6 +100,7 @@ export const inspireFerocity: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -106,6 +113,7 @@ export const internalFortitude: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 8 }],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -117,6 +125,7 @@ export const intimidatingGlare: ClassOptionBase = {
     "The barbarian can make an Intimidate check against one adjacent foe as a move action. If the barbarian successfully demoralizes the opponent, the foe is shaken for 1d4 rounds + 1 round for every 5 points by which the barbarian's check exceeds the DC.",
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -128,6 +137,7 @@ export const knockback: ClassOptionBase = {
     'Once per round, make a bull rush combat maneuver check in place of a melee attack while raging. This bull rush does not provoke an attack of opportunity.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -139,6 +149,7 @@ export const knockdown: ClassOptionBase = {
     'Once per round, make a trip attack in place of a melee attack while raging. This trip does not provoke an attack of opportunity.',
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -155,6 +166,7 @@ export const lethalAccuracy: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -167,6 +179,7 @@ export const linnormDeathCurseCairn: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 8 }],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -179,6 +192,7 @@ export const linnormDeathCurseCrag: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 4 }],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -191,6 +205,7 @@ export const linnormDeathCurseFjord: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 4 }],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -203,6 +218,7 @@ export const linnormDeathCurseIce: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 4 }],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -215,6 +231,7 @@ export const linnormDeathCurseTaiga: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 4 }],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -227,6 +244,7 @@ export const linnormDeathCurseTarn: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 4 }],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -239,6 +257,7 @@ export const linnormDeathCurseTor: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 8 }],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -250,6 +269,7 @@ export const liquidCourage: ClassOptionBase = {
     'Alcoholic beverages grant an increased morale bonus on saving throws while raging.',
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -260,6 +280,7 @@ export const lowLightVision: ClassOptionBase = {
   description: 'Gain low-light vision while raging.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -271,6 +292,7 @@ export const mightySwing: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 12 }],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -282,6 +304,7 @@ export const momentOfClarity: ClassOptionBase = {
     'The barbarian does not gain or suffer any benefits or penalties from her rage for 1 round.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -297,6 +320,7 @@ export const moonTotemGreater: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-wo',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -308,6 +332,7 @@ export const moonTotemLesser: ClassOptionBase = {
     'While raging, the barbarian gains darkvision with a range of 30 feet. If the barbarian already has darkvision, the range of her darkvision increases by 30 feet while she is raging.',
   source: 'pf1e-ppc-wo',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -323,6 +348,7 @@ export const moonTotem: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-wo',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -339,6 +365,7 @@ export const nightVision: ClassOptionBase = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -350,6 +377,7 @@ export const noEscape: ClassOptionBase = {
     "Take a double move as an immediate action when an adjacent opponent uses the withdraw action. The barbarian must end this movement adjacent to the foe that used the withdraw action.",
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -361,6 +389,7 @@ export const overbearingAdvance: ClassOptionBase = {
     'Deal damage equal to your Strength modifier to any target you successfully overrun while raging.',
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -375,6 +404,7 @@ export const overbearingOnslaught: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -390,6 +420,7 @@ export const penetratingBite: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-coc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -404,6 +435,7 @@ export const perfectClarity: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -415,6 +447,7 @@ export const powerfulBlow: ClassOptionBase = {
     'Gain a +1 bonus on a single damage roll once per rage. This bonus increases by +1 for every 4 levels the barbarian has.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -429,6 +462,7 @@ export const primalScent: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -440,6 +474,7 @@ export const quickReflexes: ClassOptionBase = {
     'Make one additional attack of opportunity per round while raging.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -451,6 +486,7 @@ export const ragingClimber: ClassOptionBase = {
     "Gain a bonus on Climb checks while raging equal to the barbarian's level.",
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -466,6 +502,7 @@ export const ragingFlier: ClassOptionBase = {
   ],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -477,6 +514,7 @@ export const ragingGrappler: ClassOptionBase = {
     'While raging, whenever you succeed at a check to start a grapple, you can choose to deal damage as if you had also succeeded at a check to maintain the grapple.',
   source: 'pf1e-ppc-potr',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -488,6 +526,7 @@ export const ragingLeaper: ClassOptionBase = {
     "Gain a bonus on Acrobatics checks to jump while raging equal to the barbarian's level.",
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -500,6 +539,7 @@ export const ragingWhirlwind: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 12 }],
   source: 'pf1e-uw',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -511,6 +551,7 @@ export const ragingSwimmer: ClassOptionBase = {
     "Gain a bonus on Swim checks while raging equal to the barbarian's level.",
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -522,6 +563,7 @@ export const recklessAbandon: ClassOptionBase = {
     "While raging, the barbarian can take a penalty to AC in order to gain a bonus on attack rolls. The penalty and bonus are both equal to the barbarian's Constitution modifier (minimum 1). The bonus applies to all attacks in a round, but the penalty lasts until the start of the barbarian's next turn.",
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -537,6 +579,7 @@ export const reflexiveDodge: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -552,6 +595,7 @@ export const regenerativeVigor: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -566,6 +610,7 @@ export const renewedLife: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -578,6 +623,7 @@ export const renewedVigor: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 4 }],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -588,6 +634,7 @@ export const renewedVitality: ClassOptionBase = {
   description: 'Heal hit points as a standard action while raging.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -599,6 +646,7 @@ export const rousedAnger: ClassOptionBase = {
     'The barbarian may enter a rage even if fatigued. While raging after using this ability, the barbarian is immune to the fatigued condition. Once this rage ends, the barbarian is exhausted for 10 minutes per round spent raging.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -610,6 +658,7 @@ export const rollingDodge: ClassOptionBase = {
     'Gain a +1 dodge bonus to AC while raging. This bonus increases by +1 for every 6 levels the barbarian has.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -621,6 +670,7 @@ export const scent: ClassOptionBase = {
   description: 'Gain the scent ability while raging.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -633,6 +683,7 @@ export const smasher: ClassOptionBase = {
     'Ignore the hardness of objects and gain a bonus on attack rolls against objects while raging.',
   source: 'pf1e-ppc-potr',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -648,6 +699,7 @@ export const spellSunder: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -659,6 +711,7 @@ export const spireTotemLesser: ClassOptionBase = {
     'While raging, the barbarian gains a +1 morale bonus on attacks against any creature that has targeted one of her allies with an attack or a harmful spell within the last round.',
   source: 'pf1e-ppc-wo',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -674,6 +727,7 @@ export const spireTotem: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-wo',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -689,6 +743,7 @@ export const spireTotemGreater: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-wo',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -704,6 +759,7 @@ export const spiritTotem: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-wo',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -719,6 +775,7 @@ export const spiritTotemGreater: ClassOptionBase = {
   ],
   source: 'pf1e-ppc-wo',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -730,6 +787,7 @@ export const spiritTotemLesser: ClassOptionBase = {
     'While raging, the barbarian is surrounded by spirit wisps that harass her enemies. These spirits make one slam attack per round against each living enemy adjacent to the barbarian, using the barbarian\'s full base attack bonus plus her Charisma modifier. Each attack deals 1d4 points of negative energy damage plus the barbarian\'s Charisma modifier.',
   source: 'pf1e-ppc-wo',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -742,6 +800,7 @@ export const strengthSurge: ClassOptionBase = {
     "Add the barbarian's level on one Strength check or combat maneuver check, or to the barbarian's Combat Maneuver Defense when an opponent attempts a maneuver against her. This power is usable once per rage.",
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -755,6 +814,7 @@ export const superstition: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 4 }],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -766,6 +826,7 @@ export const surpriseAccuracy: ClassOptionBase = {
     'Gain a +1 morale bonus on one attack roll per rage. This bonus increases by +1 for every 4 barbarian levels beyond 4th.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -781,6 +842,7 @@ export const sweepingBlow: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -792,6 +854,7 @@ export const swiftFoot: ClassOptionBase = {
     'Gain a 5-foot enhancement bonus to speed while raging. This power can be selected multiple times.',
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -807,6 +870,7 @@ export const terrifyingHowl: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -822,6 +886,7 @@ export const titansBane: ClassOptionBase = {
   ],
   source: 'pf1e-uc',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -834,6 +899,7 @@ export const unexpectedStrike: ClassOptionBase = {
   prerequisites: [{ type: 'level', minimum: 8 }],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -848,6 +914,7 @@ export const witchHunter: ClassOptionBase = {
   ],
   source: 'pf1e-apg',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

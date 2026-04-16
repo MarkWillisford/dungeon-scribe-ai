@@ -10,6 +10,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You gain a +2 trait bonus on Disguise checks when wearing a wig, false beard, or comparable large prop, or when wearing a special costume or eye-catching bauble that reinforces the disguise.',
     shortDescription: '+2 Disguise when using a wig, false beard, or costume prop',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [],
     effects: [
@@ -35,6 +36,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'Once per week, when seeking items that exceed the local base value, you may make a DC 10 Diplomacy check (DC +10 for each community size category between your current location and the required community size; +10 additional for each subsequent attempt in the same community) to buy or sell that item as if the local community were of sufficient size.',
     shortDescription: 'Once/week: Diplomacy check to trade items above local base value',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [],
     effects: [
@@ -56,6 +58,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Bluff, Diplomacy, Intimidate (wearing 150 gp+ attire); one becomes class skill',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [],
     effects: [
@@ -115,6 +118,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Choose: proficiency, +1 AoO attack, or +2 one combat maneuver with your heirloom weapon',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [],
     effects: [
@@ -147,6 +151,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You have a talent for using everyday items in creative ways. Reduce any penalty for using a non-standard item by 2 when using equipment outside its intended purpose (such as using a crowbar as a grappling hook or cloth as bandaging). This benefit does not apply to improvised weapon penalties.',
     shortDescription: 'Reduce improvised equipment use penalties by 2',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [],
     effects: [
@@ -167,6 +172,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'Whether through fortunate genetics or a lifetime of heavy drinking, your liver is especially resilient. You gain a +2 trait bonus on Fortitude saves against poison and drugs, and a +4 trait bonus on Fortitude saves against the effects of alcohol.',
     shortDescription: '+2 Fort vs poison and drugs; +4 Fort vs alcohol',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [],
     effects: [
@@ -204,6 +210,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You can make a Bluff check to convince observers that an object you possess is something different. The base DC is 20 for items similar in size, shape, and color (such as a glaive and a quarterstaff), with +5 added for each dissimilar aspect. The effect lasts 1 minute; if the object remains visible, observers may attempt another Bluff check to maintain the ruse.',
     shortDescription: 'Bluff check (DC 20+) to disguise one held object as another for 1 minute',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [],
     effects: [
@@ -225,6 +232,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Your whip acts as a grappling hook rope (standard action to attach, full-round to detach)',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [],
     effects: [
@@ -246,6 +254,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'First attack with non-proficient weapon: penalty reduced to -2 instead of -4',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [],
     effects: [
@@ -266,6 +275,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You have learned to use the tools of your trade as weapons. When using a tool of your trade (such as a shovel, pick, or blacksmith hammer) as a weapon, you do not take the improvised weapon penalty and gain a +1 trait bonus on attack rolls. Fragile items like lutes and brooms are not suitable for combat use.',
     shortDescription: 'No improvised weapon penalty and +1 attack with trade tools used as weapons',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [
       {
@@ -297,6 +307,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 Perform when using an alchemical item (harmlessly) as part of a performance',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [],
     effects: [
@@ -323,6 +334,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Use Sleight of Hand instead of Escape Artist for restraints; +2 Bluff to feign being bound after escape',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [],
     effects: [
@@ -349,6 +361,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Use Disguise check to convert one outfit into another (DC 10 + gp difference)',
     source: "Adventurer's Armory",
+    verificationStatus: 'needs_review' as const,
     category: 'equipment',
     prerequisites: [],
     effects: [
@@ -371,6 +384,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You have trained in the art of setting and springing ambushes, gaining a +1 trait bonus on initiative checks and a +1 trait bonus on weapon damage rolls during surprise rounds in which you act.',
     shortDescription: '+1 initiative; +1 weapon damage in surprise rounds',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -403,6 +417,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'Your training in the Swords faction has given you an edge when it comes to breaking things and carrying heavy loads. You gain a +2 trait bonus on Strength checks to break doors and lift portcullises, and treat your Strength score as 2 points higher for the purpose of determining carrying capacity.',
     shortDescription: '+2 Strength checks to break doors/portcullises; carry as if Strength +2',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -437,6 +452,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'Your cunning and logic allow you to talk your way out of (or into) situations. Choose one Charisma-based skill. You may use your Intelligence modifier instead of your Charisma modifier when making checks with that skill.',
     shortDescription: 'Use Intelligence instead of Charisma for one chosen Charisma-based skill',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -474,6 +490,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'Your magical experimentation — both successful and failed — has made you resistant to magic stored in items. You gain a +1 trait bonus on saving throws against effects produced by spell completion and spell trigger items.',
     shortDescription: '+1 saving throws vs spell completion and spell trigger items',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -501,6 +518,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You have mastered the art of ensuring your allies accept your magical assistance. You gain a +2 trait bonus on caster level checks to overcome spell resistance when casting harmless spells, and increase the saving throw DC of harmless spells you cast by 2.',
     shortDescription: '+2 CL to overcome SR for harmless spells; +2 DC on harmless spells',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -539,6 +557,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'May choose a magnetic compass (upgradeable to wayfinder) as your arcane bond',
     source: 'Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [{ type: 'class', className: 'Wizard' }],
     effects: [
@@ -562,6 +581,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 Acrobatics to move through creature space and to avoid AoOs when leaving threatened squares',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -588,6 +608,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'Your childhood ended abruptly when you witnessed a disaster or atrocity. As a coping mechanism, you have learned to suppress your emotions. You gain a +2 trait bonus on Will saving throws against emotion and fear effects.',
     shortDescription: '+2 Will saves vs emotion and fear effects',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -613,6 +634,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You were raised by a gunsmith or alchemist and developed a talent for thrown splash weapons and alchemical explosives. You gain a +1 trait bonus on attack rolls made with thrown splash weapons and on attack rolls made with alchemist bombs.',
     shortDescription: '+1 attack rolls with thrown splash weapons and alchemist bombs',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -638,6 +660,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You were robbed by bullies when you were young and learned to protect your possessions. You gain a +1 trait bonus to your CMD against disarm and steal combat maneuvers.',
     shortDescription: '+1 CMD vs disarm and steal combat maneuvers',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -664,6 +687,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Once/day: grant one ally within 30 ft a +1 morale bonus on any d20 roll before your next turn',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -684,6 +708,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You grew up in a lawless region where taking what you needed was a matter of survival. You gain a +1 trait bonus on combat maneuver checks made to disarm and to steal.',
     shortDescription: '+1 CMB for disarm and steal combat maneuvers',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -709,6 +734,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You spent much of your childhood running and leaping in dangerous heights, developing exceptional acrobatic skill. You gain a +2 trait bonus on Acrobatics checks for balancing and jumping, and Acrobatics is always a class skill for you.',
     shortDescription: '+2 Acrobatics (balance and jump); Acrobatics is a class skill',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -735,6 +761,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 on attacks of opportunity vs one chosen enemy type (from ranger favored enemy list)',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -782,6 +809,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You were abused by those stronger than you during your youth, and you have focused your anger into a powerful desire to get back at those who wrong you. When you deal damage to a creature that has damaged you within the last 24 hours, you gain a +1 trait bonus on damage rolls against that creature.',
     shortDescription: '+1 damage rolls vs a creature that has damaged you in the last 24 hours',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -810,6 +838,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 Strength checks to break objects; ignore 2 hardness when damaging objects',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     category: 'combat',
     prerequisites: [],
     effects: [
@@ -845,6 +874,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Choose one Knowledge skill: may take 10 on that skill even when distracted or threatened',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -885,6 +915,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 on a skill check when competing with another creature attempting the same check within 30 ft',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -911,6 +942,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'Your rough-and-tumble youth instilled in you the belief that everyone deserves a chance to say her piece. You gain a +1 trait bonus on saving throws against language-dependent effects and effects with the sonic descriptor. The DC to Intimidate you is also increased by 2.',
     shortDescription: '+1 saves vs language-dependent and sonic effects; +2 DC to Intimidate you',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -943,6 +975,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You have cultivated relationships with influential people. In areas where you have previously used Diplomacy to gather information, you gain a +1 trait bonus on Diplomacy and Intimidate checks. This bonus increases to +2 when these checks involve government officials.',
     shortDescription: '+1 Diplomacy/Intimidate in familiar areas; +2 vs government officials',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -981,6 +1014,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Once/day: roll twice on a Diplomacy check to improve attitude, take the better result',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1002,6 +1036,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Standard action: you and allies within 30 ft gain +2 morale saves vs fear/pain for 1d4 rounds (1/day per creature)',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1023,6 +1058,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Diplomacy/Intimidate attitude changes last 1.5x longer; fear/mind effects you create last 1 extra round',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1044,6 +1080,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Bluff; +1 saves vs divinations, domination, and compelled truthful speech',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1077,6 +1114,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You came of age in a place with harsh winters amid a culture that rewarded you for testing your limits in the cold. You gain a +1 trait bonus on saving throws against cold effects and a +2 trait bonus on Fortitude saves against the effects of cold weather.',
     shortDescription: '+1 saves vs cold effects; +2 Fort saves vs cold weather',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1118,6 +1156,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Survival; speak with animals at will (with your specific animal type only)',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1154,6 +1193,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Gain one bonus language: Aklo, Aquan, Auran, Giant, Ignan, or Sylvan (or Druidic with GM permission)',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1183,6 +1223,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'No penalty for improvised tools on Craft checks; can attempt Craft without tools (at -2)',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     category: 'social',
     prerequisites: [],
     effects: [
@@ -1206,6 +1247,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 effective caster level for determining range of spells and spell-like abilities',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -1231,6 +1273,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'Your confidence is so strong that others feel naturally compelled to follow your commands. Choose one 1st-level enchantment spell you can cast. Increase the DC of that spell by 1.',
     shortDescription: '+1 DC to one chosen 1st-level enchantment spell',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -1265,6 +1308,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+1 Appraise; need only beat DC by 2 to identify basic magical properties of items',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -1292,6 +1336,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       "A helpful fey visited your parents' home at your birth, offering prophecy and magical gifts in exchange for hospitality and a drop of your blood. You gain a +1 trait bonus to AC against attacks of opportunity from fey creatures, and a +1 trait bonus on saving throws against effects produced by fey creatures.",
     shortDescription: '+1 AC vs fey AoOs; +1 saves vs fey effects',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -1330,6 +1375,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Once/day: roll twice for a spell or magic item with randomized effects and choose the better result',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -1350,6 +1396,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You have grown up with death all around you and have become desensitized to its darker aspects. You gain a +2 trait bonus on saving throws against death effects.',
     shortDescription: '+2 saving throws vs death effects',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -1376,6 +1423,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 Spellcraft DC to identify your spells from one chosen school; near-misses misidentify the spell',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -1414,6 +1462,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 Sense Motive (+4 to detect mind-affecting); -1 Bluff and Diplomacy vs humanoids who see it',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -1464,6 +1513,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Spells targeting you are treated as CL -1 for dispel checks and overcoming your spell resistance',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -1487,6 +1537,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Cast one chosen 0-level druid spell once per day as a spell-like ability (CL = character level)',
     source: 'Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
     category: 'magic',
     prerequisites: [],
     effects: [
@@ -1518,6 +1569,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       '+2 saves vs fear and compulsion when serving a recognized legitimate authority',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -1544,6 +1596,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'A deity or powerful spirit communicated with you during your youth, offering cryptic guidance about your future. Once per day when you roll a natural 1 on an attack roll, you may reroll the die and use the second result instead.',
     shortDescription: 'Once/day: reroll a natural 1 on an attack roll',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -1564,6 +1617,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       "You were raised alongside skilled healers and developed a commitment to others' wellbeing. Whenever you take 20 on a Heal check to treat deadly wounds, you restore an additional 1d4 hit points to those you aid.",
     shortDescription: 'When taking 20 on Heal (treat deadly wounds), restore an extra 1d4 HP',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -1584,6 +1638,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'A religious mentor taught you the importance of moral integrity, and you have a habit of speaking candidly that inspires others to trust you. You gain a +1 trait bonus on Diplomacy checks, and a +2 trait bonus on Diplomacy checks against creatures who are already friendly or helpful toward you.',
     shortDescription: '+1 Diplomacy; +2 Diplomacy against friendly or helpful creatures',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -1618,6 +1673,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
     shortDescription:
       'Use Charisma instead of Wisdom on Will saves vs charm and compulsion effects',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -1638,6 +1694,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'You were initiated into a mystery cult during your youth, gaining esoteric knowledge that fundamentally altered your worldview. Once per day, you may reroll any Knowledge skill check. You must decide to use this ability after rolling but before the results are revealed, and you must accept the second result.',
     shortDescription: 'Once/day: reroll any Knowledge skill check (must accept second result)',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -1658,6 +1715,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       "A community leader's patient influence helped you develop remarkable emotional control. Choose one Craft or Profession skill. When you take 10 with that chosen skill, treat the result as if you had rolled a 12 instead.",
     shortDescription: 'Choose one Craft or Profession: when taking 10, treat result as 12',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [
@@ -1686,6 +1744,7 @@ export const ADV_ARMORY_SOCIETY_TRAITS: TraitDefinition[] = [
       'A priest of a magic deity blessed you at birth with innate magical intuition. You gain a +1 trait bonus on Spellcraft checks, and Spellcraft is always a class skill for you.',
     shortDescription: '+1 Spellcraft; Spellcraft is a class skill',
     source: 'Quests and Campaigns',
+    verificationStatus: 'needs_review' as const,
     category: 'faith',
     prerequisites: [],
     effects: [

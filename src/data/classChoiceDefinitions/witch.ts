@@ -12,6 +12,7 @@ export const witchDefinitions: ClassChoiceDefinition[] = [
     collectionName: 'hexes',
     source: 'pf1e-apg',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
     visibility: 'global',
     rev: 1,
   },

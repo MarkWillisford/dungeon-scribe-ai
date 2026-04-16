@@ -1,8 +1,8 @@
 // Gap spells — letter H part 1 (first half alphabetically)
 // Gap metadata: {"letters":"H_1","totalChecked":110,"newSpells":33,"skipped":0}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_H_1: Spell[] = [
+export const GAP_SPELLS_H_1: SpellDefinition[] = [
   {
     name: "Hag's Seasoning",
     classLevels: { antipaladin: 2, bloodrager: 2, druid: 3, shaman: 3, witch: 3 },
@@ -17,6 +17,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: "This curse makes a target supernaturally appetizing to creatures with animalistic instincts, including monsters, insects, and vermin. When a creature successfully bites the target or consumes a portion of it (via drain blood or swallow whole abilities), the attacker gains temporary hit points equal to half the caster's level, lasting one hour. The same creature cannot benefit from this effect more than once daily, regardless of how many times it attacks the cursed target.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Halfling Vengeance',
@@ -31,6 +32,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'The caster grants a touched target the ability to identify enemy weaknesses. The recipient deals an additional 1d6 points of precision damage on successful attacks with daggers or slings when foes lack Dexterity bonuses to AC or are flanked. Damage scales by +1d6 per 4 caster levels beyond 3rd (maximum 5d6 at 19th level). Once per round, the target may sacrifice 2d6 precision damage to inflict one condition for one round: preventing attacks of opportunity against smaller creatures, denying Dexterity AC bonuses, imposing -2 attack penalties against smaller foes, or preventing 5-foot steps. Only one halfling vengeance spell affects a creature simultaneously.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hallow',
@@ -47,6 +49,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'see text',
     description: 'This consecration spell creates a holy site with four primary effects: it establishes a magic circle against evil ward; it increases the DC to resist positive energy channeling by +4 (sacred bonus) while reducing the DC to resist negative energy by 4; dead bodies within cannot be transformed into undead creatures; and a single spell effect can be anchored to the site for one year, applying to all creatures or those matching specified alignment/faith criteria. Allowable effects include spells like aid, bless, daylight, detect magic, and zone of truth. Only one hallow spell can affect an area at a time, and it counters (but does not dispel) unhallow.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hallucinatory Decor',
@@ -63,6 +66,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no',
     description: 'This illusion spell allows casters to transform the appearance of indoor and outdoor structures. Objects retain their actual configuration but can be made to look, sound, and smell like different materials and artistic styles. Natural terrain cannot be altered, though landscaped areas like gardens are fair game. The spell operates identically to hallucinatory terrain in all other respects.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hallucinogenic Smoke',
@@ -78,6 +82,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster exhales hallucinogenic smoke in a 30-foot cone, either immediately or in a later round. Creatures failing a Fortitude save become nauseated for 1 round per caster level while experiencing disorienting visions. Those succeeding on the save are instead sickened for 1d4 rounds. If the caster does not expel the smoke by spell\'s end, they suffer the effects themselves. The spell enhances augury casting, treating the caster\'s level as 5 higher for determining meaningful reply chances.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Harm',
@@ -92,6 +97,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell charges a subject with negative energy that deals 10 points of damage per caster level (to a maximum of 150 points at 15th level). A successful Will save reduces damage by half. The spell cannot reduce a target below 1 hit point. When cast on undead creatures, it functions as the heal spell instead.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Harvest Season',
@@ -106,6 +112,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no',
     description: 'The spell causes an explosive burst of growth in a single plant, causing it to grow through a cycle of flower, fruit, or grain production. Non-food plants produce edible flowers instead. The spell generates enough food to sustain one Medium creature per caster level, though this food spoils within 24 hours if uneaten. The spell nourishes and fertilizes the plant without causing harm and has no effect on plant creatures.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hasten Judgment',
@@ -121,6 +128,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: "This curse affects the target's soul. For living creatures killed while cursed, resurrection becomes restricted: breath of life cannot restore them, and revival windows shrink to 1 hour/level (raise dead), 1 day/level (resurrection), or 10 days/level (true resurrection). Reincarnate works normally. For undead targets, the curse prevents gaining temporary hit points and reduces existing channel resistance by half. The spell does not affect creatures whose souls separate from bodies (liches) or merge with them (non-native outsiders).",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Haunted Fey Aspect',
@@ -136,6 +144,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'none',
     description: 'The caster surrounds themselves with disturbing illusions, making you look and sound like a bizarre, insane fey creature. The spell grants damage reduction of 1 point per cold iron against a single opponent for the spell\'s duration, or until the caster takes damage.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Haunting Choir',
@@ -152,6 +161,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: "The caster creates an intangible spectral choir occupying a 10-foot cube that produces tortured, ghostly moans causing delusion about experiencing the dead's torments. Creatures within 30 feet suffer a -2 penalty to attack rolls, skill checks, and ability checks. Those exiting the effect area retain these penalties for an additional 2 rounds before the delusion fades. The choir cannot be attacked or physically interfere with creatures.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Haunting Mists',
@@ -169,6 +179,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no',
     description: 'The caster creates an illusory mist cloud filled with shadowy shapes. The cloud remains stationary and obscures all vision types (including darkvision) beyond 5 feet. Creatures within 5 feet gain concealment (20% miss chance), while those farther away have total concealment (50% miss chance, preventing sight-based targeting). All creatures inside the mist must succeed at a Will save or suffer two effects: 1d2 points of Wisdom damage and the shaken condition. The shaken condition persists as long as the creature remains within the mist\'s area.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heal',
@@ -184,6 +195,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell channels positive energy to eliminate numerous adverse conditions including ability damage, blinded, confused, dazed, dazzled, deafened, diseased, exhausted, fatigued, feebleminded, insanity, nauseated, poisoned, sickened, and stunned. The spell restores hit points equal to 10 per caster level (maximum 150 at 15th level). It does not remove negative levels or restore permanently drained ability scores. Against undead, it functions as the harm spell instead.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heal Mount',
@@ -199,6 +211,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "This spell mirrors the functionality of the heal spell but applies exclusively to a paladin's special mount, typically a horse. It restores the mount's health using the same mechanics as the standard heal spell.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Healing Flames',
@@ -216,6 +229,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster releases a blast of holy flames that washes over all creatures in the area. Damage and healing equal 1d8 points per 2 caster levels (maximum 5d8). Evil creatures take damage (half fire, half divine power immune to fire resistance). Neutral enemies take only fire damage. Neutral allies receive half healing compared to good creatures. All damage from evil creatures and neutral enemies can be reduced by a successful Reflex save.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Healing Leak',
@@ -230,6 +244,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell reduces healing effectiveness for the target creature. When affected by healing spells or effects using positive or negative energy, the target recovers only half the normal hit points. If the target itself casts a healing spell, it must succeed at a concentration check (DC equals this spell\'s save DC) or that healing also restores only half normal hit points. Non-magical healing methods, such as the Heal skill, remain unaffected.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Healing Thief',
@@ -244,6 +259,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster makes a melee touch attack. Upon success, for the spell\'s duration, whenever the target receives healing via spell or supernatural effect, they receive only half (rounded down), while the caster gains the other half. The caster must remain within 25 feet plus 5 feet per two caster levels to maintain the benefit. The spell discharges if the caster moves beyond range or after stealing 5 hit points per caster level (maximum 50 HP).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Healing Token',
@@ -259,6 +275,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes (object)',
     description: "The caster imbues touched holy symbols with divine power, converting them into healing tokens. While the caster carries their divine focus, token holders may request healing as a standard action. The caster becomes silently aware of the plea and can respond with an immediate action before their next turn ends. Healing comes from either a supernatural ability or a healing subschool spell/spell-like ability with casting time not exceeding one standard action. Multi-target healing spells affect the requesting creature plus other token holders within normal spell range.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Healing Warmth',
@@ -273,6 +290,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'none',
     description: 'The spell grants temporary immunity to fire damage comparable to the protection from energy spell. As a standard action, the caster may expend 12 points of remaining energy absorption from the spell to restore 1d8 hit points to a touched creature. This healing action triggers an attack of opportunity. The spell concludes once it has absorbed 12 points of fire damage per caster level, reaching a maximum of 120 points at 10th caster level.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heatstroke',
@@ -289,6 +307,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: "A shimmering red beam extends from the caster's finger. The caster must make a successful ranged touch attack to strike the intended target. The ray deals 1d4 points of nonlethal damage, causing the target to suffer from heatstroke as its body temperature dramatically increases. The spell functions similarly to ray of exhaustion. Characters wearing heavy clothing or armor of any sort take a -4 penalty on their saves.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hedging Weapons',
@@ -304,6 +323,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'none',
     description: "The caster summons weapons of divine force appearing as their deity's favored weapon. The spell grants additional weapons at higher caster levels: one at 6th, two at 10th, three at 14th, and five maximum at 18th level. Each weapon provides +1 deflection bonus to AC. As a standard action, the caster may throw a weapon at targets within 30 feet, dealing 2d6 points of force damage. Thrown weapons disappear and reduce the deflection bonus by 1 per weapon thrown, ending the spell once all weapons are deployed.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hellmouth Lash',
@@ -319,6 +339,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'none',
     description: "The caster's tongue becomes an energy whip that deals acid, electricity, or fire damage (type chosen when cast). The tongue functions as a whip weapon but requires touch attacks, bypassing armor and natural armor bonuses. The caster is proficient with this weapon. Each successful touch attack inflicts 1d8 points of energy damage per two caster levels (maximum of 5d8 at 10th level). While active, the caster cannot speak, cast spells requiring verbal components, or activate magic items via command words.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Helping Hand',
@@ -334,6 +355,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no',
     description: 'The caster creates a ghostly hand to locate and guide a creature within 5 miles. The hand searches for a subject matching a physical description provided at casting (race, gender, appearance). Search time varies by distance, ranging from 1 round for targets 100 feet away to 4 hours for those at the 5-mile maximum. Once located, the hand beckons the creature and points toward the caster if the subject agrees to follow, moving at up to 240 feet per round. The subject faces no compulsion to follow. The ghostly hand has no physical form, cannot engage in combat, and cannot pass through solid objects.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Hero's Defiance",
@@ -349,6 +371,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'none',
     description: 'This spell activates instantly before you would drop to 0 or fewer hit points. You expend a use of your lay on hands ability, healing yourself as if you had used that ability normally, plus an extra 1d6 hit points. If the healing restores you above 0 hit points, you remain conscious and may continue acting that round. The spell has no effect if you have exhausted your lay on hands uses.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Heroes' Feast",
@@ -365,6 +388,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no',
     description: 'The caster manifests an elaborate feast complete with table, chairs, service items, food and beverages. Consumption requires one hour, after which benefits activate. Participants gain healing from sickness, nausea, poison, and disease effects. Each creature receives temporary hit points (1d8 + caster level bonus, maximum +10), plus a +1 morale bonus to attacks and Will saves. Additionally, recipients gain +4 morale bonus on saving throws against poison and fear effects for 12 hours. Any interruption nullifies all spell effects.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heroic Fortune',
@@ -379,6 +403,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no',
     description: 'The spell grants the touched creature 1 hero point that must be expended before the duration ends or it is lost. This bonus point is spent before any existing hero points the target possesses.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hex Glyph',
@@ -393,6 +418,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no (object) and yes (see text)',
     description: 'This abjuration functions similarly to the glyph of warding spell, but stores a hex (excluding major or grand hexes) instead of a spell. The triggered hex uses the spell\'s caster level and DC. If the hex has a target, it targets the intruder. If the hex has an area or amorphous effect, the area or effect is centered on the intruder. A greater version (Level 5 for shaman and witch) allows storage of major hexes and requires powdered diamond worth 400 gp as a material component.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hex Vulnerability',
@@ -408,6 +434,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This enchantment allows casters to repeatedly apply harmful hexes to a target creature, bypassing normal restrictions. The targeted creature becomes susceptible to a repeat use of your harmful hexes, even if you could not otherwise target that creature with a particular hex for a certain time period. The spell removes typical cooldown limitations on hex reapplication. Ending this spell does not suppress any active hexes already affecting the target. Repeated castings impose escalating penalties: each subsequent casting within 24 hours grants the target a +4 bonus to its saving throw and inflicts a -4 penalty to the caster\'s level check for overcoming spell resistance.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hex Ward',
@@ -422,6 +449,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'The spell grants the target creature a +4 resistance bonus on saving throws against witch hexes.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hidden Blades',
@@ -437,6 +465,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes (harmless, object)',
     description: 'This illusion renders the targeted weapon or ammunition invisible. The wielder gains +20 bonus on Sleight of Hand checks made to conceal the weapon or ammunition and a +5 circumstance bonus on Bluff checks to feint with the weapon or ammunition.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hidden Diplomacy',
@@ -453,6 +482,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: "The caster may attempt a single Intimidate skill check to make the target act in a friendly manner. Success causes the target to assist normally, but the spell clouds memory of threats applied. The target remembers helping but cannot recall the reason, and its attitude doesn't worsen from intimidation. Whether the saving throw succeeds or fails, the creature becomes immune to further castings for 24 hours.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hidden Knowledge',
@@ -467,6 +497,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'none',
     description: 'This spell allows casters to store knowledge (maximum 50 words) as an intricate runic tattoo on their skin, removing it from memory. The caster determines the duration at casting time. The knowledge vanishes from the mind completely, with memory gaps filled by recollections from before casting. The magical tattoo can be detected through magic detection or successful checks, though contents remain hidden. Standard dispelling removes the spell entirely, permanently erasing the stored knowledge.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hidden Presence',
@@ -483,6 +514,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster becomes completely undetectable to targeted creatures through mental manipulation. Subjects cannot perceive the caster through any normal or supernatural senses, including blindsense, blindsight, scent, or tremorsense, nor can they locate the caster through divination magic. The concealment persists as long as the caster takes no hostile actions or makes obvious or directly threatening changes to the environment. Any attack ends the effect immediately.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hidden Speech',
@@ -498,6 +530,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This transmutation spell enhances subjects\' ability to communicate covertly. All affected creatures gain a +10 competence bonus on Bluff checks to send secret messages. Conversely, creatures attempting to intercept these messages via opposed Sense Motive checks suffer a -5 penalty. All spell subjects must share a common language to exchange hidden messages successfully.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hidden Spring',
@@ -514,6 +547,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no',
     description: 'The caster meditates for one hour while holding the Y-shaped rod, walking through natural areas to locate moisture. Upon completion, the rod is thrust into the ground, causing fresh, clean water to trickle forth at a rate of 1 gallon every 10 minutes. The spell cannot be cast indoors, in worked stone, or within 1 mile of an existing hidden spring, though underground casting is permitted.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hide Bruises',
@@ -529,6 +563,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: "This spell makes a target's wounds appear to vanish. When another creature attempts a Heal check to assess the target's injury severity, they suffer a -10 penalty. Those who physically contact the concealed areas may attempt a Will save to recognize the glamered areas as illusory.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hide Campsite',
@@ -545,6 +580,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no',
     description: 'This illusion spell disguises a campsite area to appear as unwelcoming natural terrain matching surroundings. External creatures cannot perceive activity within — no smell, sound, heat, or wind sensations escape. However, those inside maintain normal external visibility, and anyone entering the spell\'s area sees everything clearly.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hide from Animals',
@@ -559,6 +595,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'Animals cannot sense the warded creatures. Even extraordinary or supernatural sensory capabilities, such as blindsense, blindsight, scent, and tremorsense, cannot detect or locate warded creatures. Animals simply act as though the warded creatures are not there. The spell ends prematurely if a warded character touches an animal or attacks any creature, even with a spell.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hide from Undead',
@@ -573,6 +610,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell renders warded creatures undetectable to undead through normal and supernatural senses including blindsense, blindsight, scent, and tremorsense. Non-intelligent undead automatically fail to perceive targets. Intelligent undead receive a Will save; if failed, they cannot see the warded creatures. The spell terminates immediately for all recipients if any warded creature channels positive energy, turns/commands undead, touches an undead creature, or attacks anything.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hide Weapon',
@@ -587,6 +625,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'none',
     description: 'A light or one-handed melee weapon held by the caster melds into the arm, becoming completely hidden. The caster can extend or retract it as a move action. While extended, the weapon grants +5 bonus to your CMD against disarm combat maneuvers. When retracted, the hand remains usable. Hidden weapons require DC 25 Perception checks (light) or DC 20 (one-handed) to discover through frisking.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hobbling Bomb Admixture',
@@ -601,6 +640,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'none',
     description: 'Upon consuming an extract with this formula, the alchemist modifies their magical reserves to alter all bombs created during the effect\'s duration. Only one bomb admixture can be active at a time; drinking another admixture ends the previous one. When a bomb hits a target directly, up to three creatures are affected — the direct hit target and up to two additional splash damage recipients. Each targeted creature must succeed at a Fortitude save or experience a 20-foot speed reduction (minimum 0 feet).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hold Portal',
@@ -615,6 +655,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no',
     description: 'This abjuration magically secures a door, gate, window, or shutter made of wood, metal, or stone as though it were securely closed and normally locked. The spell can be countered by a knock spell or successful dispel magic. Additionally, any attempt to force the portal open gains a +5 difficulty increase to the normal DC.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Aura',
@@ -630,6 +671,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This divine protection grants warded creatures four distinct benefits: a +4 deflection bonus to AC and +4 resistance bonus on saves against all attacks; spell resistance 25 against evil spells; protection from possession and mental influence; and causes evil melee attackers to become blinded (with a Fortitude save to negate).',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Ice',
@@ -646,6 +688,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell creates frozen holy water with two possible manifestations. Holy Ice Wall functions similarly to wall of ice, dealing contact damage. Creatures taking holy water damage suffer 1 point per touch, 1d6 for extended contact, and 1d6+caster level damage when passing through (half cold, half holy water). Holy Ice Javelins creates javelins equal to caster level (max 15) that attack targets within 10 feet of each other, using base attack bonus + Wisdom modifier, dealing 1d6 damage plus 1 point each of cold and holy water damage per javelin.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Ice Weapon',
@@ -662,6 +705,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no',
     description: "The caster creates a masterwork weapon composed of ice with holy properties. The weapon must be either a simple weapon or the caster's deity's favored weapon. It inflicts standard damage for its type plus 1 point of cold damage per caster level (capped at 10). Any creature struck also takes holy water damage (1d4 points if susceptible). The weapon dissipates if released for more than one round. At 6th caster level or higher, thrown weapons gain the returning ability.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Javelin',
@@ -679,6 +723,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster creates a shimmering javelin of holy energy for ranged touch attacks. Against evil creatures, it deals 1d6 damage per hit plus 1d6 additional damage at the start of each round the javelin remains embedded. Impaled creatures suffer a -2 penalty on attack rolls and skill checks. The javelin can be removed as a move action with a successful DC 12 Strength check. The conjured javelin glows like a torch, revealing invisible creatures, though darkness spells suppress this light.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Shield',
@@ -693,6 +738,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no',
     description: "This abjuration enables a caster to magically project the defense of your shield to protect another creature at a distance. Using a swift action, the caster designates a target within 30 feet to receive the shield's bonuses to Armor Class. The protection lasts until the caster's next turn, after which it can be redirected. The caster loses shield benefits while projecting protection and cannot use shield special abilities during projection.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Sword',
@@ -708,6 +754,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'no',
     description: 'The caster channels holy power into a melee weapon, which functions as a +5 holy weapon with enhanced bonuses and damage. It emits a magic circle against evil effect that automatically renews if dispelled. The spell ends if the weapon leaves the caster\'s hand for 1 round. Only one such weapon may exist at a time per caster. When cast on existing magical weapons, this spell\'s effects supersede the weapon\'s normal properties.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Holy Whisper',
@@ -724,6 +771,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster whispers a word in the primordial language of good that harms evil creatures and empowers good ones. Evil creatures in the burst must succeed on a Fortitude save or become sickened for 1 round per caster level. Evil outsiders with the evil subtype, evil-aligned dragons, and undead also take 2d8 points of damage upon failed saves. Good-aligned creatures in the burst gain a +2 sacred bonus to attack and damage rolls for 1 round.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Horrific Doubles',
@@ -740,6 +788,7 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes (see text)',
     description: 'This spell creates illusory duplicates resembling mirror image but with unsettling appearances. Creatures viewing the doubles must succeed at a Will save or become shaken. Those failing the save experience additional trauma when destroying an image — the double shifts to display the attacker\'s face or a disturbing alternative, causing frightened condition for 1 round and 1d3 Wisdom damage.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Horrifying Visage',
@@ -756,5 +805,6 @@ export const GAP_SPELLS_H_1: Spell[] = [
     spellResistance: 'yes',
     description: "This spell instills terror within affected creatures, manifesting fears tied to a specifically-named trigger. All creatures in the affected area must succeed at a Will save or develop a phobia lasting the spell's duration. The caster designates one particular creature, object, or image that activates the phobia — generic categories are insufficient. The phobia can be treated through standard insanity remedies, and effects preventing possession or mind control temporarily suppress it.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 ];

@@ -1,6 +1,6 @@
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const NECROMANCY_SPELLS: Spell[] = [
+export const NECROMANCY_SPELLS: SpellDefinition[] = [
   // ─── Pre-existing content ────────────────────────────────────────────────────
 // ─── CANTRIPS (Level 0) ───────────────────────────────────────────────────
 
@@ -39,6 +39,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You cause a living creature that is below 0 hit points but stabilized to resume dying. Upon casting this spell, the target immediately takes 1 point of damage and continues to lose 1 hit point per round thereafter (unless it stabilizes again). Bleed can be stopped by a DC 15 Heal skill check or through the application of any spell that cures hit point damage.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Disrupt Undead',
@@ -66,6 +67,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You direct a ray of positive energy. You must make a ranged touch attack to hit, and if the ray hits an undead creature, it deals 1d6 points of damage to it.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Fatigue',
@@ -97,6 +99,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You channel negative energy through your touch, fatiguing the target. You must succeed on a touch attack to strike a target. The subject is immediately fatigued for the spell's duration. This spell has no effect on a creature that is already fatigued. Unlike normal fatigue, the effect ends as soon as the spell's duration expires.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── 1st LEVEL ────────────────────────────────────────────────────────────
@@ -142,6 +145,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'The affected creature becomes frightened. If the subject succeeds on a Will save, it is shaken for 1 round. Cause fear counters and dispels remove fear.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Chill Touch',
@@ -172,6 +176,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'A touch from your hand, which glows with blue energy, disrupts the life force of living creatures. Each touch channels negative energy that deals 1d6 points of damage. The touched creature also takes 1 point of Strength damage unless it makes a successful Fortitude saving throw. You can use this melee touch attack up to one time per level. An undead creature you touch takes no damage of either sort, but it must make a successful Will saving throw or flee as if panicked for 1d4 rounds + 1 round per caster level.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deathwatch',
@@ -200,6 +205,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "Using the foul sight granted by the powers of unlife, you can determine the condition of creatures near death within the spell's range. You instantly know whether each creature within the area is dead, fragile (alive and wounded, with 3 or fewer hit points left), fighting off death (alive with 4 or more hit points), healthy, undead, or neither alive nor dead (such as a construct). Deathwatch sees through any spell or ability that allows creatures to feign death.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Decompose Corpse',
@@ -236,6 +242,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell accelerates the decomposition of a corpse, leaving behind a perfectly cleaned skeleton. If cast on a non-skeletal corporeal undead creature, the target takes a –2 penalty on all rolls, to AC, and to CMD for 1 minute.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grasping Corpse',
@@ -271,6 +278,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You briefly animate a nearby corpse, causing it to reach out and grab a creature within 30 feet of the corpse. The corpse performs either a trip or grapple combat maneuver against the target as a free action (your choice when casting). For this maneuver, use your caster level as the base attack bonus and add the highest of your Intelligence, Wisdom, or Charisma modifiers as the ability modifier. The corpse doesn't provoke attacks of opportunity. If the grapple succeeds, the target gains the grappled condition until it escapes the grapple or the corpse is destroyed.",
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inflict Light Wounds',
@@ -302,6 +310,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'When laying your hand upon a creature, you channel negative energy that deals 1d8 points of damage + 1 point per caster level (maximum +5). Since undead are powered by negative energy, this spell cures such a creature of a like amount of damage, rather than harming it.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ray of Enfeeblement',
@@ -331,6 +340,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "A ray of enervating energy springs from your hand. You must succeed on a ranged touch attack to strike a target. The subject takes a penalty to Strength equal to 1d6+1 per two caster levels (maximum 1d6+5). The subject's Strength score cannot drop below 1. A successful Fortitude saving throw reduces this penalty by half. This penalty does not stack with itself.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ray of Sickening',
@@ -367,6 +377,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'With a flick of your wrist, you cast a black ray of nauseating negative energy that causes a living creature to become sickened. You must succeed on a ranged touch attack to strike a target. The target is sickened if it fails its save and unaffected if it makes its save.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Repair Undead',
@@ -392,6 +403,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'Channeling negative energy through your hand, you heal 1d8 points of damage + 1 point per caster level (maximum +5) to an undead creature you touch. This spell has no effect on living creatures.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Restore Corpse',
@@ -426,6 +438,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell causes a decomposed or skeletal corpse to instantly restore its flesh, leaving the corpse in the same state as if the creature had just died. The corpse looks as it did when the creature died. The new flesh is somewhat rotted and not fit for eating.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sculpt Corpse',
@@ -453,6 +466,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "With a touch you can make alterations to a corpse to make it look like a different creature or a specific individual of the same general body shape. You can change a corpse's apparent race, gender, age, and other physical features. Any spell or effect that targets the corpse (such as speak with dead or raise dead) treats it as if it still had its original appearance.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── 2nd LEVEL ────────────────────────────────────────────────────────────
@@ -489,6 +503,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions as animate dead, except that you can only animate a single Small or Medium skeleton or zombie. The undead created cannot be variant skeletons or zombies.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blindness/Deafness',
@@ -527,6 +542,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You call upon the powers of unlife to render the subject blinded or deafened, as you choose.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bone Fists',
@@ -562,6 +578,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "The bones of the targets' joints grow thick and sharp, protruding painfully through the skin at the knuckles, elbows, knees, and other joints. The targets gain a +1 natural armor bonus to AC, a +2 bonus on damage rolls with natural weapons, and can make attacks with their bony protrusions as if they were armor spikes.",
     source: 'Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Boneshaker',
@@ -595,6 +612,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You seize control of the target's skeleton with a necromantic grip, dealing 3d6 points of damage + 1d6 additional points of damage per 2 caster levels to the target, and moving it 5 feet in any horizontal direction. A successful Fortitude save negates the movement. Skeletal undead are moved and must make an immediate action to move or attack, but take no damage.",
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Command Undead',
@@ -621,6 +639,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "This spell allows you to command an undead creature for a short period of time. You make the undead creature utterly loyal to you. You can give the subject orders, but you must win an opposed Charisma check to convince it to take actions it normally wouldn't. Mindless undead are automatically controlled and require no Charisma check. This spell ends immediately if you or any of your allies threaten or attack the controlled undead.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Corpse Lanterns',
@@ -649,6 +668,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You conjure up to four pale green lights that function like dancing lights, but each corpse lantern instead sheds dim light in a 20-foot radius. Creatures within the area of the sickly green light take a –5 penalty on Stealth checks, and illusion (pattern) spells have a +2 bonus to their saving throw DCs in that area.',
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Death Knell',
@@ -679,6 +699,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You draw in the ebbing life force of a creature and use it to fuel your own power. Upon casting this spell, you touch a living creature that has –1 or fewer hit points. If the subject fails its saving throw, it dies, and you gain 1d8 temporary hit points and a +2 enhancement bonus to Strength. Additionally, your effective caster level goes up by 1, improving spell effects dependent on caster level. These effects last for 10 minutes per HD of the subject creature.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Defending Bone',
@@ -711,6 +732,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You animate a bone with necromantic energy. The bone hovers near your body and interposes itself against physical attacks, granting you damage reduction 5/bludgeoning. The bone can prevent a total of 5 points of damage per caster level (maximum 50 points). Once it has prevented that much damage, the spell ends. This spell is suppressed while you benefit from another source of damage reduction.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'False Life',
@@ -747,6 +769,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You harness the power of unlife to grant yourself a limited ability to avoid death. While this spell is in effect, you gain temporary hit points equal to 1d10 + 1 per caster level (maximum +10).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghoul Hunger',
@@ -778,6 +801,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You fill the target with an overwhelming desire to consume the flesh of the recently deceased. Each round the target must spend its entire turn consuming flesh from a helpless or dead humanoid creature adjacent to it. The target doesn't take risks to find a victim and can attempt a new saving throw each round to shake off the effect.",
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghoul Touch',
@@ -807,6 +831,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'Imbuing your hand with the chill of the grave, you paralyze a single living humanoid for the duration of the spell with a successful melee touch attack. A paralyzed subject exudes a carrion stench that causes all living creatures (except you) in a 10-foot radius to become sickened (Fortitude negates). A neutralize poison spell removes the sickened condition.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inflict Moderate Wounds',
@@ -838,6 +863,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'When laying your hand upon a creature, you channel negative energy that deals 2d8 points of damage + 1 point per caster level (maximum +10). Since undead are powered by negative energy, this spell cures such a creature of a like amount of damage, rather than harming it.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scare',
@@ -875,6 +901,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions like cause fear, except that it causes all targeted creatures of less than 6 HD to become frightened.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spectral Hand',
@@ -906,6 +933,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'A ghostly, glowing hand shaped from your life force materializes and moves as you desire, allowing you to deliver low-level, touch range spells at a distance. On casting the spell, you lose 1d4 hit points that return when the spell ends (whether or not the spell is discharged). The hand has the same base attack bonus as you and delivers your touch spells for you. The spell gives you a +2 bonus on melee touch attack rolls normally allowed to a touch spell.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── 3rd LEVEL ────────────────────────────────────────────────────────────
@@ -944,6 +972,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell turns the bones or bodies of dead creatures into undead skeletons or zombies that follow your spoken commands. The undead can follow you, or they can remain in an area and attack any creature (or just a specific kind of creature) entering the place. They remain animated until they are destroyed.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Halt Undead',
@@ -971,6 +1000,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell renders as many as three undead creatures immobile. A nonintelligent undead creature gets no saving throw; an intelligent undead creature does. If the spell is successful, it renders the undead creature immobile for the duration of the spell (similar to the effect of hold person on a living creature).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inflict Serious Wounds',
@@ -1002,6 +1032,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'When laying your hand upon a creature, you channel negative energy that deals 3d8 points of damage + 1 point per caster level (maximum +15). Since undead are powered by negative energy, this spell cures such a creature of a like amount of damage, rather than harming it.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ray of Exhaustion',
@@ -1033,6 +1064,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "A black ray projects from your pointing finger. You must succeed on a ranged touch attack with the ray to strike a target. On a successful attack, the subject is immediately exhausted for the spell's duration. A successful Fortitude save means the creature is only fatigued. A fatigued creature that is subject to this spell becomes exhausted instead.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Speak with Dead',
@@ -1065,6 +1097,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You grant the semblance of life to a corpse, allowing it to answer questions. You may ask one question per two caster levels. Unasked questions are wasted if the duration expires. The corpse's knowledge is limited to what it knew during life. Answers are often brief, cryptic, or repetitive. If the creature's alignment was different from yours, it receives a Will save to refuse to answer or mislead.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vampiric Touch',
@@ -1098,6 +1131,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You must succeed on a melee touch attack. Your touch deals 1d6 points of damage per two caster levels (maximum 10d6). You gain temporary hit points equal to the damage you deal. You can't gain more than the subject's current hit points + the subject's Constitution score (which is enough to kill the subject). The temporary hit points disappear 1 hour later.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── 4th LEVEL ────────────────────────────────────────────────────────────
@@ -1135,6 +1169,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "The subject contracts one of the following diseases: blinding sickness, bubonic plague, cackle fever, filth fever, leprosy, mindfire, red ache, shakes, or slimy doom. The disease is contracted immediately (the onset period does not apply). Use the disease's frequency to determine further saves and effects.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Death Knell Aura',
@@ -1167,6 +1202,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You surround yourself with a pale gray shimmer of death-stealing energy. Any creature within the area with –1 or fewer hit points must succeed on a Will save each round or die, triggering the effects of death knell for your benefit.',
     source: 'Book of the Damned — Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Death Ward',
@@ -1202,6 +1238,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'The subject gains a +4 morale bonus on saves against all death spells and magical death effects. The subject is granted a save to negate such effects even if one is not normally allowed. The subject is immune to energy drain and any negative energy effects, including channeled negative energy.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enervation',
@@ -1231,6 +1268,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You point your finger and fire a black ray of negative energy that suppresses the life force of any living creature it strikes. You must make a successful ranged touch attack to hit. The subject gains 1d4 temporary negative levels. Negative levels stack. An undead creature instead gains 1d4 × 5 temporary hit points for 1 hour.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fear',
@@ -1271,6 +1309,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'An invisible cone of terror causes each living creature in the area to become panicked unless it succeeds on a Will save. If cornered, a panicked creature begins cowering. If the Will save succeeds, the creature is shaken for 1 round.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'False Life, Greater',
@@ -1307,6 +1346,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions as false life, except you gain temporary hit points equal to 2d10 + 1 per caster level (maximum +20). You cannot have both false life and greater false life active at the same time.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inflict Critical Wounds',
@@ -1337,6 +1377,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'When laying your hand upon a creature, you channel negative energy that deals 4d8 points of damage + 1 point per caster level (maximum +20). Since undead are powered by negative energy, this spell cures such a creature of a like amount of damage, rather than harming it.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Vampiric Shadow Shield',
@@ -1364,6 +1405,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You surround yourself in shadowy, negative energy. Any creature that strikes you with a natural or manufactured weapon (but not reach weapons) takes 1d6 points of negative energy damage + 1 point per caster level (maximum +15). You heal 25% of the damage dealt by this shield.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── 5th LEVEL ────────────────────────────────────────────────────────────
@@ -1397,6 +1439,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "A circle of death snuffs out the life force of living creatures, killing them instantly. The spell slays 1d4 Hit Dice worth of living creatures per caster level (maximum 20d4). Creatures with the fewest HD are affected first; among creatures with equal numbers of HD, those who are closest to the burst's point of origin are affected first. No creature of 9 or more HD can be affected.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contagion, Greater',
@@ -1429,6 +1472,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions as contagion, except that the disease it inflicts cannot be cured by making saving throws; magical removal of the disease requires an additional saving throw with a +5 to the DC.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inflict Light Wounds, Mass',
@@ -1458,6 +1502,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'Negative energy spreads out in all directions from the point of origin, dealing 1d8 points of damage + 1 point per caster level (maximum +25) to nearby living enemies. Like other inflict spells, mass inflict light wounds cures undead in its area rather than damaging them.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Pain',
@@ -1492,6 +1537,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions like symbol of death, except that each creature within the radius instead suffers wracking pains that impose a –4 penalty on attack rolls, skill checks, and ability checks. These effects last for 1 hour after the creature moves farther than 60 feet from the symbol. Unlike symbol of death, symbol of pain has no hit point limit; once triggered, a symbol of pain simply lasts for 10 minutes per caster level.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Waves of Fatigue',
@@ -1522,6 +1568,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "Waves of negative energy render all living creatures in the spell's area fatigued. This spell has no effect on a creature that is already fatigued.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── 6th LEVEL ────────────────────────────────────────────────────────────
@@ -1558,6 +1605,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'A much more potent spell than animate dead, this evil spell allows you to create more powerful sorts of undead: ghouls, ghasts, mummies, and mohrgs. The type or types of undead you can create is based on your caster level. Created undead are not automatically under the control of their animator. If you are capable of commanding undead, you may attempt to command the undead creature as it forms.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Death Knell Aura, Greater',
@@ -1590,6 +1638,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions as death knell aura, except dying creatures within the aura cannot stabilize automatically and take 1 point of bleed damage per round. Incorporeal undead or incorporeal projecting spirits take 1d8 points of damage at the start of their turn while within the aura.',
     source: 'Book of the Damned — Volume 3: Horsemen of the Apocalypse',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Eyebite',
@@ -1623,6 +1672,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "Each round, you may target a single living creature, striking it with waves of evil power. Depending on the target's HD, this attack has as many as three effects: 10 HD or more—sickened; 5–9 HD—panicked and sickened; 4 HD or fewer—comatose, panicked, and sickened. The sickened effect lasts 10 minutes per caster level, the panicked effect lasts 1d4 rounds, and the comatose effect lasts until dispelled.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inflict Moderate Wounds, Mass',
@@ -1652,6 +1702,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions like mass inflict light wounds, except that it deals 2d8 points of damage + 1 point per caster level (maximum +30).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Fear',
@@ -1685,6 +1736,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions like symbol of death, except that all creatures within 60 feet of the symbol instead become panicked for 1 round per caster level.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undeath to Death',
@@ -1717,6 +1769,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions like circle of death, except that it destroys undead creatures rather than living ones.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── 7th LEVEL ────────────────────────────────────────────────────────────
@@ -1746,6 +1799,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell enables you to command undead creatures for a short period of time. You command them by voice and they understand you, no matter what language you speak. Even if vocal communication is impossible the controlled undead do not attack you. At the end of the spell, the subjects revert to their normal behavior. Intelligent undead remember that you controlled them.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Finger of Death',
@@ -1774,6 +1828,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You unleash a powerful beam of negative energy that snuffs out the life of a living creature. You point your finger at a creature and it must make a Fortitude saving throw or die instantly. If it makes its save, it instead takes 3d6 points of damage + 1 point per caster level.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inflict Serious Wounds, Mass',
@@ -1800,6 +1855,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions like mass inflict light wounds, except that it deals 3d8 points of damage + 1 point per caster level (maximum +35).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Weakness',
@@ -1831,6 +1887,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions like symbol of death, except that all creatures within 60 feet of the symbol instead suffer crippling weakness that deals 3d6 points of Strength damage.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Temporary Resurrection',
@@ -1860,6 +1917,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You temporarily restore life to a corpse that has been dead for no longer than 48 hours. The subject gains 1 permanent negative level for the duration of this spell. The subject is treated as a living creature for most purposes, but still counts as a corpse for the purpose of spells and effects. Once a creature has been the subject of a temporary resurrection spell, it cannot be the target of another temporary resurrection spell until it has been restored to life permanently.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Waves of Exhaustion',
@@ -1889,6 +1947,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "Waves of negative energy cause all living creatures in the spell's area to become exhausted. This spell has no effect on a creature that is already exhausted.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── 8th LEVEL ────────────────────────────────────────────────────────────
@@ -1923,6 +1982,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions like create undead, except that you can create more powerful and intelligent sorts of undead: shadows, wraiths, spectres, and devourers. The type of undead you can create is based on your caster level.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Horrid Wilting',
@@ -1951,6 +2011,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell evaporates moisture from the bodies of all living creatures in the area, dealing 1d6 points of damage per caster level (maximum 20d6). This spell is especially devastating to water elementals and plant creatures, which instead take 1d8 points of damage per caster level (maximum 20d8).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Inflict Critical Wounds, Mass',
@@ -1977,6 +2038,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions like mass inflict light wounds, except that it deals 4d8 points of damage + 1 point per caster level (maximum +40).',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Death',
@@ -2009,6 +2071,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "This spell allows you to scribe a potent rune of power upon a surface. When triggered, a symbol of death kills one or more living creatures whose combined total current hit points do not exceed 150. Creatures with the most hit points are affected first. Once the spell has affected 150 hit points' worth of creatures, it is expended.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── 9th LEVEL ────────────────────────────────────────────────────────────
@@ -2040,6 +2103,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "This spell functions like enervation, except that the creature struck gains 2d4 temporary negative levels. Twenty-four hours after gaining these levels, the subject must make a Fortitude saving throw (DC = energy drain spell's save DC) for each negative level. On a success, that negative level is removed. On a failure, the negative level becomes permanent. An undead creature struck by the ray gains 2d4 × 5 temporary hit points for 1 hour.",
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Soul Bind',
@@ -2071,6 +2135,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You draw the soul from a newly dead body and imprison it in a black sapphire gem. The subject must have been dead no longer than 1 round per caster level. The soul, once trapped in the gem, cannot be returned to life until the gem is destroyed or the effect is dispelled. The gem must be worth at least 1,000 gp per HD of the trapped creature.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wail of the Banshee',
@@ -2101,6 +2166,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You emit a terrible, soul-rending scream that kills creatures that fail their saves. The spell affects up to one creature per caster level, ignoring those closest to the center of the spread first. The spell deals 10 points of damage per caster level to those who fail their Fortitude saves.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_001 ─────────────────────────────────────────────────────────────
@@ -2125,6 +2191,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You create a translucent wall of energy that displays indistinct faces with sewn-shut eyes or ears. Upon creation, you choose whether the wall blinds or deafens. Any creature that passes through the wall must succeed at a Fortitude save or become permanently blinded or deafened (as blindness/deafness). The wall must be vertical, continuous, and unbroken when formed, and need not touch the ground. If the area contains a surface or other spell effect that would break the wall's continuity during casting, the spell fails.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Bone',
@@ -2156,6 +2223,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "This spell creates a vertical skeletal wall that functions like wall of stone, but is composed of humanoid bones. The wall has hardness 4 and 7 hit points per inch of thickness per 5-foot section. The wall's thickness is 1 inch per 4 caster levels. Breaking through requires a Strength check (DC 15 + 2 per inch of thickness). Skeletal hands along the wall attempt grapple checks against adjacent creatures, using your caster level as their combat maneuver bonus. A successful grapple deals 1d6 damage and imposes the grappled condition. Each subsequent successful grapple check deals an additional 1d6 damage. The wall's CMD for escape equals 10 + its CMB. The wall cannot pin foes or move.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Waves of Exhaustion',
@@ -2178,6 +2246,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "Waves of negative energy cause all living creatures in the spell's area to become exhausted. This spell has no effect on a creature that is already exhausted.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Waves of Fatigue',
@@ -2200,6 +2269,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "Waves of negative energy render all living creatures in the spell's area fatigued. This spell has no effect on a creature that is already fatigued or exhausted.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'What Grows Within',
@@ -2235,6 +2305,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You gain a +3 profane bonus on Will saving throws for the spell's duration. Upon first preparation or use of this spell, you become vulnerable to the infected dreams ability. While this spell is active, mind-affecting spells you cast carry a supernatural taint and can infect those who succumb to their effects. When a mind-affecting spell you cast successfully affects a target, that creature must also succeed at a Fortitude saving throw or immediately become afflicted by a lesser version of seeded infestation. Each creature afflicted reduces the spell's remaining duration by 1 round. Lesser seeded infestation causes 1d4 Constitution drain each day with no natural cure. If a creature's Constitution reaches 0, it dies and rises in 1d4 rounds as a seeded creature.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Withdraw Affliction',
@@ -2256,6 +2327,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You push your hand into the subject, then withdraw an affliction from the body of the sufferer as a tangible, slimy mass of flesh. This cures the target as if affected by remove disease, remove curse, or neutralize poison (your choice at time of casting). The extracted affliction can be delivered to another creature via a touch attack, functioning identically to the original affliction with the same saving throw DC.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wither Limb',
@@ -2285,6 +2357,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You cause one limb of the target to shrivel and weaken, dealing 2d6 points of permanent ability damage. This damage can only be restored by powerful magic (heal, limited wish, miracle, regenerate, or wish). The spell can only affect humanoids or monstrous humanoids; the GM may allow similar bipedal creatures at their discretion. Effects stack; multiple applications can wither multiple limbs. A withered arm causes the target to drop held items and lose two-weapon fighting capability. A withered leg halves all movement speeds except fly speeds; withering all legs reduces movement to a 5-foot crawl. A withered wing eliminates fly speeds granted by that wing.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wracking Ray',
@@ -2308,6 +2381,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "A sickly greenish-gray ray of negative energy shoots from your palm. You must succeed at a ranged touch attack to hit your target. Upon a successful hit, the creature's muscles and sinews wither and twist, causing painful spasms. The target takes 1d4 points of Strength damage and 1d4 points of Dexterity damage per 3 caster levels (maximum 5d4 each). Ability scores cannot be reduced below 1 by this spell. A successful Fortitude save reduces the damage by half.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_A_1 ─────────────────────────────────────────────────────────────
@@ -2324,6 +2398,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster becomes immune to diseases and poisons encountered while the spell is active. When exposed to such afflictions, the caster may choose to absorb them, which ends the general immunity but grants specific immunity to that particular affliction. The absorbed toxin can be transferred to another creature via melee touch attack. If the transfer succeeds, the target makes a save (using whichever DC is higher: the spell\'s or the affliction\'s) or suffers immediate effects. If the spell expires before transfer occurs, the caster is exposed to the absorbed affliction but gains a +2 bonus on relevant saves. Recasting the spell resets its duration rather than allowing absorption of multiple toxins simultaneously.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Accursed Glare',
@@ -2339,6 +2414,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster channels a curse through their gaze. A failed save causes the target to obsessively doubt its decisions and suffer misfortune. When the cursed creature makes an attack roll or saving throw, it must roll twice and take the lower result. Additionally, during casting, any ally within range may attempt an Intimidate check (DC equals the spell\'s save DC) as a move action. Success grants a +2 bonus to the caster\'s level check against spell resistance.',
     source: 'Pathfinder Player Companion: Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Advanced Scurvy',
@@ -2354,6 +2430,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell inflicts an advanced scurvy condition on the target. The victim becomes constantly fatigued and experiences debilitating effects: a -1 penalty to Strength and Dexterity-based checks due to bone pain, increased bleeding damage (+1 point per bleed effect), loose teeth, and halved natural healing rates. The disease can be cured through magical healing or proper nutrition.',
     source: 'Pathfinder Player Companion: Pirates of the Inner Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aggravate Affliction',
@@ -2368,6 +2445,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This necromantic spell forces all recurring afflictions (those with frequency, including curses, diseases, and poisons) on a target creature to trigger immediately. The creature must make an immediate saving throw per each affliction\'s normal rules to resist its effects. A successful saving throw does not count toward ending the affliction, and the extra save doesn\'t alter when the next regular save occurs. The spell only affects afflictions that have a frequency; those without recurring triggers remain unaffected.',
     source: 'Pathfinder Player Companion: Champions of Corruption',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Akashic Form',
@@ -2382,6 +2460,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates a backup record of the caster\'s physical form within the Akashic Record. The record preserves current hit points, physical ability scores, and conditions like ability damage, disease, negative levels, and poison. If the caster drops below 0 HP or dies from a non-mind-affecting death effect, they can discard their current body and restore themselves using the stored record on their next turn. The original corpse vanishes, and the caster may either reappear where their body fell or materialize within 500 feet without equipment. The caster retains their original mind and mental effects, but sheds physical conditions not present when the record was created.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_A_2 ─────────────────────────────────────────────────────────────
@@ -2398,6 +2477,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell allows the caster\'s spirit to project an astral body onto another plane altogether. The caster\'s physical body remains on the Material Plane in suspended animation while an astral form travels the Astral Plane and can visit other planes. Travelers remain connected via an incorporeal silver cord; if broken, the caster dies. If the astral form is destroyed on another plane, the spirit returns to the body, but the caster gains two permanent negative levels.',
     source: 'Pathfinder Roleplaying Game: Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura of Cannibalism',
@@ -2414,6 +2494,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster produces an aura that weakens creatures sharing their type and subtypes. Each round affected creatures must make Fortitude saves or take 1d4 damage. The caster gains temporary hit points equal to damage dealt, up to a maximum of 10 plus caster level. With at least 5 temporary hit points active, the caster receives a +1 competence bonus to attack rolls, saves, and skill checks (increasing to +2 at 15+ temporary hit points).',
     source: 'Pathfinder Player Companion: Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura of Doom',
@@ -2430,6 +2511,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster generates an almost palpable aura of horror. All non-allies within the spell\'s area of effect—or those entering it subsequently—must succeed on a Will save to avoid becoming shaken. A successful save suppresses the effect for that creature. If creatures leave and re-enter the area, they must save again.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_B_1 ─────────────────────────────────────────────────────────────
@@ -2448,6 +2530,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster produces a cone of spectral energy resembling screaming elven ghosts dealing 1d4 damage per caster level (maximum 15d4). Creatures making a successful Reflex save take half damage. Any creature failing the Reflex save must succeed at a Will save or become panicked for 1 round/level.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Barrow Haze',
@@ -2463,6 +2546,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "This necromantic spell generates dark vaporous clouds comparable to fog cloud but with a supernatural connection to the caster. The black mist does not obstruct the caster's vision. When any portion of the haze remains within 30 feet of the caster, creatures within the fog count as being in range for hex abilities with a 30-foot maximum range, effectively extending the caster's hex range through the cloud.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bed of Iron',
@@ -2477,6 +2561,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This enchantment allows wearers to rest comfortably while donning medium or heavy protective gear. The affected individuals avoid experiencing fatigue the following day despite sleeping in full armor, making this beneficial for armored warriors requiring proper rest during campaigns.',
     source: 'Pathfinder Player Companion: Knights of the Inner Sea',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bestow Curse',
@@ -2492,6 +2577,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster places a curse on the subject, choosing from three standard options: a -6 decrease to an ability score (minimum 1), a -4 penalty on attack rolls/saves/ability checks/skill checks, or a 50% chance each turn the target acts normally (otherwise takes no action). Casters may invent custom curses of equivalent power. The curse cannot be dispelled but may be removed via break enchantment, limited wish, miracle, remove curse, or wish.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Black Mark',
@@ -2507,6 +2593,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster inscribes a black mark on the target's skin no larger than the caster's hand. When activated, the target becomes shaken while in water beyond 5 feet from shore. While active, aquatic creatures, water-subtype creatures, and those with swim speeds become hostile to the marked target (excluding non-aquatic animals). Functions similarly to mark of justice for removal purposes.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Black Spot',
@@ -2521,6 +2608,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "This necromantic curse manifests as an intangible, illusory black mark above the target's head that cannot be concealed. It creates a 10-foot aura where allies gain +2 bonus on weapon attack and damage rolls against the target while the cursed creature suffers -4 penalty on saving throws against death effects. Daily Fortitude saves are required; failure results in 1 point of Constitution damage that resists healing. Death occurs if Constitution reaches 0.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Black Sword of War',
@@ -2535,6 +2623,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless, object)',
     description: "Restricted to followers of the Horseman of War. Upon casting, the targeted weapon becomes glossy black and gains the ability to inflict bleed damage when dealing hit point damage. The bleed damage equals half the caster's level, with a maximum of 5 bleed damage.",
     source: 'Pathfinder Module: The Moonscar',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blight',
@@ -2549,6 +2638,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This necromantic spell causes a single plant to wither. Plant creatures take 1d6 points of damage per level (maximum 15d6) and may make a Fortitude save for half damage. Non-creature plants receive no save and immediately die.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloatbomb',
@@ -2564,6 +2654,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Upon a failed Fortitude save, the spell kills the target if its Hit Dice do not exceed half the caster's level. The corpse then rapidly decays. If any creature touches the body within the duration, it explodes in a 10-foot-radius burst, inflicting 3d6 points of acid damage (Reflex half).",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_B_2 ─────────────────────────────────────────────────────────────
@@ -2580,6 +2671,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Over three rounds, this spell gradually raises a target's blood temperature. Each round the creature gets a new save attempt — success prevents that round's effect but doesn't end the spell. Round 1: target becomes fatigued. Round 2: capillaries burst, dealing 1d6 Constitution damage. Round 3: blood boils, dealing 1d6 damage per caster level (max 15d6); if alive, target becomes exhausted.",
     source: 'Pathfinder Player Companion: Magical Marketplace',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood in the Water',
@@ -2596,6 +2688,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The caster must self-inflict 1 point of piercing or slashing damage, causing 1 point of bleed damage. While active, all sharks, depth feeders, and creatures with blood frenzy ability within the area gain +2 to Strength and Constitution, suffer -2 AC penalty, and treat the effect as blood frenzy. The spell immediately ends if the caster stops bleeding.',
     source: 'Pathfinder Roleplaying Game: Skull & Shackles Adventure Path',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood of the Martyr',
@@ -2610,6 +2703,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell causes the target to bleed from all orifices with blood infused with positive energy. On a failed save, the subject takes 1d6 points of bleed damage per 4 caster levels (maximum 4d6). Other creatures can spend a full-round action supping the blood to heal twice the damage amount. The subject can self-heal at half the rate. Once the bleeding stops or duration ends, the blood loses its healing properties.",
     source: 'Pathfinder Campaign Setting: Chronicle of the Righteous',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Tentacles',
@@ -2624,6 +2718,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "The caster generates one writhing tentacle per caster level from their chest using their own blood. These appendages can attack a single target within 15 feet as a standard action or multiple targets (one per 5 caster levels) using a full-round action. Each tentacle uses the caster's BAB plus higher of Constitution or Charisma. Tentacles deal 2d6 damage and grant temporary hit points equal to damage dealt (max = max HP; last 1 hour).",
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blood Ties',
@@ -2639,6 +2734,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "This spell requires one target to be a bound, pinned, or helpless creature within reach (the hostage), while the second must be a family member. If both fail saves, the family member takes any damage conferred to the hostage up to a maximum of 10 points per caster level daily. The transferred damage bypasses damage reduction and resistances. Distant relations gain +2 to saves; parent-child or sibling pairs take -2 penalties.",
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloodbath',
@@ -2653,6 +2749,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster cuts themselves with a dagger, taking 1d6 bleed damage. While maintaining this self-inflicted bleeding, each target bleeds for 1d6 points of damage at the beginning of their turns. Target bleeding ends if they receive magical healing or if the caster's bleeding ceases. The spell fails if the caster is immune to bleed damage.",
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloodsworn Retribution',
@@ -2667,6 +2764,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The caster inflicts self-injury and swears a blood oath of vengeance. They choose damage up to 25 hit points, which cannot be healed while active. When performing actions directly advancing the oath\'s completion, the caster gains a morale bonus equal to damage taken divided by 5. Upon oath completion or voluntary abandonment, the spell terminates and damage becomes healable.',
     source: 'Pathfinder Player Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloody Arrows',
@@ -2681,6 +2779,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No (harmless)',
     description: "This necromantic enchantment causes a target's ranged weapon attacks dealing piercing or slashing damage to inflict bleeding wounds. Each successful strike applies 1 point of bleed damage to the victim. Unlike standard bleed effects, these wounds stack cumulatively, reaching a maximum equal to half the caster's level (maximum 5 points at 10th caster level).",
     source: 'Pathfinder Player Companion: Ranged Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloody Claws',
@@ -2695,6 +2794,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "The spell enables a touched living creature to inflict bleed damage when making natural attacks so long as the attack deals slashing or piercing damage. The bleeding effect equals half the caster's level, capped at the creature's maximum damage for that specific attack. Bleed damage does not stack; when two or more attacks deal bleed damage, take the worse effect.",
     source: "Pathfinder Roleplaying Game: Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Bloody Tears and Jagged Smile',
@@ -2709,6 +2809,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The caster's eyes turn black and weep blood while teeth become jagged fangs. The spell grants a bite attack dealing 1d3 damage (Small) or 1d4 damage (Medium). Caster gains a +4 profane bonus on Intimidate checks and on spell DCs for spells with the fear descriptor. The caster perceives creatures using deathwatch ability.",
     source: 'Pathfinder Adventure Path #71: Rasputin Must Die!',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Boneshatter',
@@ -2723,6 +2824,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "The spell causes a target's bones or exoskeleton to splinter, dealing 1d6 damage per caster level (max 15d6). Targets become exhausted for 1 minute per caster level. Those succeeding at Fortitude saves take half damage and become fatigued instead. Objects made of bone, chitin, or similar material take 50% additional damage. No effect on creatures lacking skeletons or hard carapaces.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Brow Gasher',
@@ -2737,6 +2839,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless, object)',
     description: "The spell enchants a slashing weapon to inflict a grievous forehead wound. Upon hitting a living creature, the caster can discharge the spell as a free action to create a gash on the target's forehead that deals bleed damage equal to half the caster level. Each turn the target takes bleed damage, it receives cumulative -1 attack penalties. At -3 penalty, all targets gain concealment. At -5 penalty, the target becomes blinded.",
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_C_1 ─────────────────────────────────────────────────────────────
@@ -2754,6 +2857,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The victim\'s attacks careen wildly, endangering itself and those around it. The target gains a 25% miss chance on all attack rolls. When an attack misses due to this effect, it targets an ally within range, or the caster if no allies are available.',
     source: 'Blood of the Coven',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Calm Spirit',
@@ -2768,6 +2872,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell temporarily pacifies agitated incorporeal undead and haunts. Affected entities cannot perform violent acts or activate haunt abilities, though they may defend themselves. Haunts don\'t receive saving throws but require a caster level check (DC 10 + haunt CR).',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Canopic Conversion',
@@ -2783,6 +2888,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This powerful spell deals 1d6 damage per caster level (maximum 20d6). If the damage kills the target, the spell pulls organs into canopic jars and the corpse revives as a dune mummy after 1d4 rounds. The mummy isn\'t automatically controlled, but jar holders gain protective benefits and communication abilities.',
     source: 'Osirion, Land of Pharaohs',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Catatonia',
@@ -2797,6 +2903,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell induces a death-like catatonic state where the target appears dead to observers (DC 20 Heal check to recognize life). The creature counts as dead for effects targeting living creatures but isn\'t undead. The subject remains helpless and can be killed normally.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Clone',
@@ -2812,6 +2919,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell creates an inert duplicate of a creature. When the original dies, its soul transfers to the clone. Requires a piece of flesh with a volume of at least 1 cubic inch from the living original. The duplicate requires 2d4 months to grow and gains two permanent negative levels.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Companion Life Link',
@@ -2826,6 +2934,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'The spell establishes a magical connection allowing the caster to sense when the target creature is wounded or killed, and vice versa. As a free action, the caster may summon the target back if able and willing.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Conditional Curse',
@@ -2841,6 +2950,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell operates similarly to bestow curse but requires specifying a condition that breaks the curse. The target understands this condition innately. The condition must be achievable within one year and be expressible in 25 words or fewer. Removing via break enchantment or remove curse is DC +5 harder.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_C_2 ─────────────────────────────────────────────────────────────
@@ -2858,6 +2968,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'see text',
     description: 'This spell functions similarly to languid venom but allows the caster to set specific triggering conditions based on visual/audible cues or physical contact with objects/substances/creatures. The poison\'s onset can occur immediately or be delayed up to 1 round per caster level after triggering.',
     source: 'Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Corpse Hammer',
@@ -2872,6 +2983,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster draws destroyed undead remains into a fused mass that attacks as a move action using caster level as base attack bonus. Damage is 1d6 per three caster levels (maximum 6d6). Skeletal components grant slashing damage, fleshy components grant bludgeoning.',
     source: 'Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Soul Gem',
@@ -2887,6 +2999,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster draws forth a dying or recently deceased creature\'s life force, capturing it in a soul gem. A living creature that fails its save dies. Gems crumble after the spell expires, freeing the soul. Resurrection attempts against a trapped soul require a caster check.',
     source: 'Book of the Damned',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Variant Mummy',
@@ -2902,6 +3015,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions identically to create undead but produces one of three variant mummy types: bog mummy, ice mummy, or Tomb Guardian mummy.',
     source: 'Pathfinder AP #81: Shifting Sands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Befouled Fortune',
@@ -2917,6 +3031,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This curse prevents the target from receiving luck bonuses or rolling multiple times to take better results. Most significantly, the first time each turn the target would succeed at an attack, saving throw, or skill check, it must roll twice and use the worse of the two results.',
     source: 'Blood of the Beast',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse of Unexpected Death',
@@ -2932,6 +3047,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Upon successful melee touch attack, a 1d100 roll occurs each round. Rolling 01-05 triggers the spell, dealing 8d6 + 1 per caster level damage (or 2d6 + 1 per caster level with successful save). A result of 06-100 means nothing occurs. The curse ends once triggered or when duration expires.',
     source: 'Pathfinder AP #89: Palace of Fallen Stars',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse Terrain, Lesser',
@@ -2948,6 +3064,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Curses land with three unnatural hazards using minor perilous demesne curse effects; manifestations are unpredictable.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse Terrain',
@@ -2964,6 +3081,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Curses land with four unnatural hazards using major perilous demesne curse effects.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse Terrain, Greater',
@@ -2980,6 +3098,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Curses land with six unnatural hazards using greater perilous demesne curse effects.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse Terrain, Supreme',
@@ -2996,6 +3115,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Curses land with seven unnatural hazards using grand perilous demesne curse effects.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse Water',
@@ -3011,6 +3131,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes (object)',
     description: 'This incantation converts a flask of water into unholy water. The resulting liquid damages good outsiders similarly to how holy water affects undead and evil outsiders.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Curse, Major',
@@ -3026,6 +3147,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell operates similarly to bestow curse, with the key difference being that the DC to remove the curse equals the save DC +5, making it significantly harder to dispel.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cursed Earth',
@@ -3042,6 +3164,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'This spell imposes a terrible curse upon land. The caster selects one of three effects: Famine (halving plant growth and food production), Living Death (causing Small+ creatures killed there to rise as uncontrolled zombies after 24 hours), or Plague (requiring daily Fortitude saves or contracting disease).',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cursed Treasure',
@@ -3057,6 +3180,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes (object), then yes',
     description: 'Caster enchants treasure or a treasure container with a curse matching any bestow curse option. The next creature taking the treasure triggers the curse unless succeeding at Will save. Caster is immune if they take the treasure first.',
     source: 'Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_D_1 ─────────────────────────────────────────────────────────────
@@ -3073,6 +3197,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell functions like death ward, except it only protects against death effects, energy drain, and negative energy effects from daemons.',
     source: 'Pathfinder Campaign Setting: Horsemen of the Apocalypse: Book of the Damned Vol. 3',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Daywalker',
@@ -3087,6 +3212,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Physically transforms a willing undead creature to appear as a living being of the same size, adding flesh, bone, hair, teeth, and blood to create false signs of life. Incorporeal undead become corporeal during the duration. Observers may attempt a Perception check (DC 30 or 21 + undead\'s Disguise modifier, whichever is higher) to suspect deception. Suppresses frightful presence, incorporeal form, light blindness/sensitivity, stench, sunlight powerlessness, and unnatural aura. Touch-damage abilities are also suppressed.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deadly Juggernaut',
@@ -3102,6 +3228,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'None',
     description: 'Each time the caster reduces a qualifying opponent to 0 or fewer hit points with a melee attack, they gain cumulative +1 luck bonuses on melee attack rolls, melee weapon damage rolls, Strength checks, and Strength-based skill checks, plus DR 2/—. Maximum bonuses are +5 and DR 10/—. A qualifying opponent must have Hit Dice equal to or greater than the caster\'s Hit Dice minus 4.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Death Candle',
@@ -3117,6 +3244,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions like death knell but instead of granting caster enhancements, uses the target\'s life force to summon a Small fire elemental resembling a burning, howling version of the slain creature. The summoned elemental acts on the caster\'s turn as if created via summon monster II, persisting for a number of rounds equal to the deceased target\'s Hit Dice.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Death Clutch',
@@ -3132,6 +3260,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Attempts to rip the target\'s heart from its chest. If target has ≤200 HP and fails save: reduced to negative HP equal to the lesser of caster level or Constitution score minus 1, becomes staggered and dies at start of caster\'s next turn. If target has ≥201 HP and fails save: becomes staggered for 1 minute and suffers 1d4 Constitution drain plus 1d4 Constitution bleed. Successful save: target becomes staggered until the caster\'s next turn.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deathwine',
@@ -3146,6 +3275,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No (object)',
     description: 'Converts healing potions (conjuration healing only) into necromantic conduits. The affected potion darkens to deep red. When consumed, the potion foregoes its healing benefit; instead the drinker\'s next necromancy spell cast within one minute gains a caster level bonus equal to the original potion\'s spell level. Undead and negative-energy-healed creatures gain 1d8 healing when drinking an affected potion.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Decollate',
@@ -3160,6 +3290,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Creates a thin red line around the target\'s neck, permitting the willing subject to voluntarily detach their head. When separated, the body loses vision but gains blindsense 15 feet. The detached head appears lifeless and cannot see or hear through its own senses. Grants DR 2/— and immunity to decapitation. An unprotected severed head has AC 7, hardness 5, and 10 hit points. If the head is destroyed, the target dies.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Defoliate',
@@ -3175,6 +3306,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Hurls a tiny ball of negative energy that destroys plant life in either a line 60 feet long or a 10-foot-radius spread, eliminating cover, concealment, and movement penalties from undergrowth. When targeting a single plant creature with a ranged touch attack, the creature takes 2d8 points of damage.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Depilate',
@@ -3189,6 +3321,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Causes a target's hair or fur to fall out in patches. Affected creatures suffer a -2 penalty on Diplomacy, Intimidate, and Perform checks for one week until hair regrows, or until concealed via a successful Disguise or Heal check (DC equals the spell's original save DC). Instantly reversed by break enchantment, remove curse, or similar magic.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Destruction',
@@ -3204,6 +3337,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Inflicts 10 points of damage per caster level. If the target dies from this effect, its remains are consumed utterly in holy (or unholy) fire (but not its equipment or possessions). A successful Fortitude save reduces damage to 10d6 points. Restoring a slain target requires true resurrection, wish followed by resurrection, or miracle.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_D_2 ─────────────────────────────────────────────────────────────
@@ -3220,6 +3354,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "Transfers life essence to a touched creature through a single touch, allowing transfer of up to hit points equal to the caster's Constitution score. The recipient is healed without exceeding its normal maximum. Additionally, the recipient gains damage reduction against evil effects equal to the caster's Charisma bonus (if positive) for the spell's duration.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Doom',
@@ -3235,6 +3370,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Fills a single subject with a feeling of horrible dread that causes it to become shaken.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Drain Construct',
@@ -3249,6 +3385,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Temporarily weakens a construct by sapping its animating force. The target loses any damage reduction and fast healing abilities, and its base speed is reduced by half. The construct suffers a -4 penalty to Strength, increasing by 2 for every 3 caster levels beyond 3rd (maximum -14). Constructs normally immune to magic receive a +4 bonus on their saving throw.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dress Corpse',
@@ -3263,6 +3400,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Alters flesh and bones of a corpse to conceal or fabricate wounds, bruising, poison traces, burn marks, and signs of death. Cannot hide extreme alterations (loss of a limb), restore flesh to skeletal remains, or change the corpse\'s apparent identity. Observers may attempt a Perception check (DC 10 + caster level) to notice unnatural wounds; Heal check (DC 15 + caster level) reveals the deception.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_E_1 ─────────────────────────────────────────────────────────────
@@ -3279,6 +3417,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'The target\'s ear detaches and becomes a Fine construct with a fly speed equal to the target\'s base speed and a bonus on Fly checks equal to half the caster\'s level. The target maintains hearing through the animated ear as if it were still attached, and may direct its movement.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Eldritch Fever',
@@ -3294,6 +3433,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The target gains the eldritch ague spellblight. This spellblight impairs the target\'s ability to cast spells, causing intermittent difficulties with spellcasting.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Empathy Conduit',
@@ -3308,6 +3448,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell establishes a conduit allowing you to redirect spells between a bonded creature and its master. Depending on which creatures successfully resist the spell, you gain flexibility in targeting. Only creature-targeting spells work through this effect, and affected creatures can attempt additional saves when targeted indirectly.',
     source: 'Pathfinder Player Companion: Familiar Folio',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Enemy's Heart",
@@ -3323,6 +3464,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'You perform a coup de grace with a slashing weapon against a helpless, adjacent living target. Upon the target\'s death, you consume its heart, gaining 1d8 temporary hit points +1 per Hit Die of the target and a profane bonus to Strength, similar to death knell. If the target survives the initial attack, the spell persists and can be attempted again while you concentrate.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Entrap Spirit',
@@ -3337,6 +3479,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'You trap a target incorporeal creature or haunt inside a silver mirror focus. While trapped, the target cannot be affected by any means. If the mirror breaks, the creature escapes and returns to its original location. If the mirror belonged to the target, it suffers a -2 penalty on its saving throw.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_E_2 ─────────────────────────────────────────────────────────────
@@ -3354,6 +3497,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'You infect the target with one disease chosen from: blinding sickness, bubonic plague, cackle fever, filth fever, leprosy, mindfire, red ache, shakes, or slimy doom. The infection becomes highly transmissible — anyone touching the infected creature, being touched by them, or spending more than an hour in confined spaces with them must save against the disease\'s standard DC or become infected. If the initial target overcomes the disease by making the required saving throws, it remains a carrier for a length of time equal to the disease\'s frequency.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Explosion of Rot',
@@ -3369,6 +3513,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'You unleash rotting energy affecting all creatures within the burst radius, dealing 1d6 damage per caster level (max 15d6) and causing the staggered condition for 1d4 rounds. Creatures making a successful Reflex save take half damage and avoid being staggered. Plant creatures suffer a -2 penalty to saves and take 1 additional damage per die.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_F_1 ─────────────────────────────────────────────────────────────
@@ -3385,6 +3530,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'Your soul projects into your familiar\'s body, taking control while leaving the familiar\'s consciousness intact. Your physical body appears dead to observers during this time. While inhabiting the familiar, you retain your Intelligence, Wisdom, Charisma, level, class, base attack bonus, base save bonuses, alignment, and mental abilities. The familiar\'s body keeps its own physical attributes, hit points, natural abilities, and automatic abilities. You can use the familiar\'s abilities, including spells and spell-like abilities, though somatic components require appropriate limbs and speech requires the familiar\'s language ability. As a standard action, you may return to your body if within range. If the familiar is slain while you inhabit it and your body remains in range, your soul safely returns to your original body. If the familiar is out of range when killed, you die.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Feast On Fear',
@@ -3400,6 +3546,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'Each round, you can target a single living creature and strike it with fear-inducing power. Targets who fail become panicked for 1d4 rounds, and you gain 5 temporary hit points (which disappear after 1 hour). After panic ends, the creature remains shaken for 10 minutes per caster level and automatically panics again if it sees you during this period. Temporary hit points from multiple creatures stack.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fester',
@@ -3414,6 +3561,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell channels necrotic energy to impede healing. The affected creature gains spell resistance equal to 12 + your caster level against effects that restore hit points or grant temporary hit points. Additionally, healing from effects bypassing spell resistance becomes halved. A successful Fortitude save reduces duration to a single round.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fester, Mass',
@@ -3428,6 +3576,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as fester, but targets one creature per level, no two of which can be more than 30 feet apart.',
     source: 'Pathfinder Roleplaying Game Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_F_2 ─────────────────────────────────────────────────────────────
@@ -3445,6 +3594,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This necromantic spell animates a corpse as a disguised zombie under your control. The zombie appears alive with normal movement and voice. Control occurs through an ephemeral magical string (100 feet + 10 feet per caster level) requiring a swift action per command. The zombie can speak up to 25 words per round but cannot attack, cast spells, or perform complex tasks. Detecting the disguise requires an opposed Perception check against your Disguise check (with caster level bonus). The string has hardness 0 and 1 hp.',
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Flesh Wall',
@@ -3461,6 +3611,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You animate corpses into a vertical wall of joined flesh and limbs. The wall occupies 2 feet of thickness and each 5-foot section has 12 hit points with DR 5/slashing. You can detach 5-foot sections as human zombies under your control, or cause sections to constrict and fill breaches. The wall makes slam attacks against adjacent enemies and creatures attempting to force through must succeed at a Strength check (DC 15 + caster level) or become trapped, taking 3d6 crushing damage.',
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Frigid Souls',
@@ -3477,6 +3628,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell creates a fear-based haunt centered on frozen environments. Creatures entering the affected zone must make a Will save or gain spell resistance (11 + caster level) against abjuration effects protecting against cold damage. The haunt cannot voluntarily lower this resistance and attempts dispel checks every 30 minutes against active cold-protection abjurations, starting with highest-level effects first.',
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fungal Infestation',
@@ -3492,6 +3644,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell causes necrotic fungus to make the target\'s flesh soft and fragile, with toadstools, ringworm, and other disgusting fungal growths sprouting from its skin. The afflicted creature takes 1d3 points of Charisma damage and any physical attack against it automatically adds 1d6 points of bleed damage.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_G_1 ─────────────────────────────────────────────────────────────
@@ -3509,6 +3662,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell plants a seed of supernatural fear deep in a subject\'s mind, causing self-doubt, stuttering, and evasiveness. The target experiences difficulty maintaining eye contact and appears untrustworthy. The affected creature suffers a -4 penalty on Bluff and Diplomacy checks made to convince others of its truthfulness, and on Diplomacy or Intimidate checks made to modify attitudes.',
     source: 'Pathfinder Player Companion: Spymaster\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gentle Repose',
@@ -3523,6 +3677,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'This spell preserves a deceased creature\'s remains from decay, extending the timeframe for resurrection magic. Days spent under the influence of this spell do not count against the time limit for raising the dead. The spell also functions on severed body parts, making transport of remains more practical.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghoul Army',
@@ -3539,6 +3694,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The caster scatters ghoul teeth to summon undead creatures that obey spoken commands. When ghouls are destroyed during the spell\'s duration, they burst into a spray of rotten flesh and necromantic energy that deals 1d6 points of negative energy damage to all adjacent targets. A destroyed ghast deals double this damage. Fortitude saves reduce this damage by half. Upon spell expiration, remaining creatures crumble apart into dust and blow away.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_G_2 ─────────────────────────────────────────────────────────────
@@ -3558,6 +3714,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster manifests restless spirits of those who died at sea. When creatures enter the affected water area, the haunt automatically grabs and drags victims underwater at initiative count 10, dealing 1d6 nonlethal damage per round while descending 10 feet (reduced to 5 feet with a successful DC 15 Swim check). Victims suffer reduced breath-holding capacity, limited actions unless they succeed at Will saves, and additional damage if dragged to the bottom. The haunt deteriorates as it affects creatures, losing 1d6 hit points per round per affected creature. Haunt statistics: Perception DC 30 to notice, hit points 5 per caster level, trigger proximity, no reset.',
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grave Words',
@@ -3573,6 +3730,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'none',
     description: 'This occult cantrip forces a corpse to babble randomly for one round. The caster has a 10% chance of extracting useful information such as dungeon warnings, magical item command words, or vague warnings about the future. The GM secretly determines whether information is useful and what the corpse reveals. The corpse must have a mouth to speak. Cannot be cast repeatedly on the same corpse. Does not affect undead creatures. Works on corpses of any age.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Grim Stalker',
@@ -3589,6 +3747,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'The caster binds spirits of ill fate to an object, focusing their wrath onto the next creature that touches the object. Once affected, victims experience haunting effects including nightmares, an imposed shaken condition when damaged, and a phantasmal killer effect when reduced below 10% health. Victims may conduct a ritual costing 450 gp in reagents to force manifestation of a modified Nessian warhound that deals negative energy damage.',
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_H_1 ─────────────────────────────────────────────────────────────
@@ -3605,6 +3764,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell charges a subject with negative energy that deals 10 points of damage per caster level (to a maximum of 150 points at 15th level). A successful Will save reduces damage by half. The spell cannot reduce a target below 1 hit point. When cast on undead creatures, it functions as the heal spell instead.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hasten Judgment',
@@ -3620,6 +3780,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "This curse affects the target's soul. For living creatures killed while cursed, resurrection becomes restricted: breath of life cannot restore them, and revival windows shrink to 1 hour/level (raise dead), 1 day/level (resurrection), or 10 days/level (true resurrection). Reincarnate works normally. For undead targets, the curse prevents gaining temporary hit points and reduces existing channel resistance by half. The spell does not affect creatures whose souls separate from bodies (liches) or merge with them (non-native outsiders).",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Haunting Choir',
@@ -3636,6 +3797,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "The caster creates an intangible spectral choir occupying a 10-foot cube that produces tortured, ghostly moans causing delusion about experiencing the dead's torments. Creatures within 30 feet suffer a -2 penalty to attack rolls, skill checks, and ability checks. Those exiting the effect area retain these penalties for an additional 2 rounds before the delusion fades. The choir cannot be attacked or physically interfere with creatures.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Healing Leak',
@@ -3650,6 +3812,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell reduces healing effectiveness for the target creature. When affected by healing spells or effects using positive or negative energy, the target recovers only half the normal hit points. If the target itself casts a healing spell, it must succeed at a concentration check (DC equals this spell\'s save DC) or that healing also restores only half normal hit points. Non-magical healing methods, such as the Heal skill, remain unaffected.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Healing Thief',
@@ -3664,6 +3827,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster makes a melee touch attack. Upon success, for the spell\'s duration, whenever the target receives healing via spell or supernatural effect, they receive only half (rounded down), while the caster gains the other half. The caster must remain within 25 feet plus 5 feet per two caster levels to maintain the benefit. The spell discharges if the caster moves beyond range or after stealing 5 hit points per caster level (maximum 50 HP).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hex Vulnerability',
@@ -3679,6 +3843,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This enchantment allows casters to repeatedly apply harmful hexes to a target creature, bypassing normal restrictions. The targeted creature becomes susceptible to a repeat use of your harmful hexes, even if you could not otherwise target that creature with a particular hex for a certain time period. The spell removes typical cooldown limitations on hex reapplication. Ending this spell does not suppress any active hexes already affecting the target. Repeated castings impose escalating penalties: each subsequent casting within 24 hours grants the target a +4 bonus to its saving throw and inflicts a -4 penalty to the caster\'s level check for overcoming spell resistance.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Horrifying Visage',
@@ -3695,6 +3860,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "This spell instills terror within affected creatures, manifesting fears tied to a specifically-named trigger. All creatures in the affected area must succeed at a Will save or develop a phobia lasting the spell's duration. The caster designates one particular creature, object, or image that activates the phobia — generic categories are insufficient. The phobia can be treated through standard insanity remedies, and effects preventing possession or mind control temporarily suppress it.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_H_2 ─────────────────────────────────────────────────────────────
@@ -3712,6 +3878,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "The caster inflicts wracking pains through the targets' bodies. Affected creatures experience a -2 penalty to AC, attacks, melee damage rolls, and Reflex saving throws. They must succeed at a concentration check (DC equals spell DC) to cast spells. However, targets can spend a move action vocally screaming to act without penalties for the remainder of that turn. Creatures incapable of vocalization suffer the spell's full effects.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hunger for Flesh',
@@ -3727,6 +3894,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell causes physical transformation including a distended belly and longer and sharper front teeth. The affected creature becomes staggered and gains a bite attack dealing 1d6 damage (Medium) or 1d4 (Small). Each turn has a 25% chance the creature must attack the nearest same-type creature. After successfully biting applicable creatures, the target loses the staggered condition temporarily, regaining it if bite attacks cease.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hydrophobia',
@@ -3743,6 +3911,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'Affected creatures must succeed at a Will save or develop an intense fear of drowning. Targets submerged in water must exhaust all efforts to escape, suffering 1d6 points of nonlethal damage per round from thrashing and water ingestion. Even when out of water, affected targets cannot consume potions or willingly interact with fluids during the spell\'s duration.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_IJK ─────────────────────────────────────────────────────────────
@@ -3766,6 +3935,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You inflict a curse that makes it difficult for the target to articulate words. Speaking becomes a move-equivalent action rather than a free action. When the target attempts to cast spells with verbal components, it has a 50% chance of miscasting and losing the spell. Spells with casting times shorter than 1 round require a full round to cast. Spells with casting times of 1 round or longer have their casting time doubled. This curse cannot be removed with dispel magic; it requires break enchantment, limited wish, miracle, remove curse, or wish.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Instant Suffocation',
@@ -3788,6 +3958,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions like slay living, killing the target through immediate suffocation. Creatures without respiratory systems are immune to this spell. A successful Fortitude save reduces the damage to 3d6 + 1/caster level instead of death. The target is also considered to have taken a dose of keif for the purpose of addiction and withdrawal effects.',
     source: 'Pathfinder Chronicles: Dark Markets, A Guide to Katapesh',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Interrogation',
@@ -3810,6 +3981,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You back your questions with magical pain, asking one question per 2 caster levels. The target either answers or takes 1d4 damage plus your Wisdom modifier. Answers are not magically compelled to be truthful, but lying imposes a -4 penalty on Bluff checks. A greater version (Interrogation, Greater) at 4th level allows one question per caster level and deals 1d8 + Wisdom bonus when unanswered.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Itching Curse',
@@ -3842,6 +4014,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You inflict a distracting, unbearable itch on the target. The affected creature must use a move action each round to scratch or suffer a -1 penalty on attack rolls, saving throws, skill checks, and ability checks.',
     source: 'Pathfinder Player Companion: Magic Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Judgment Undone',
@@ -3865,6 +4038,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You restore a willing petitioner to mortal life on the plane where they were sent. Upon completion, the petitioner returns in young adult form with all memories and class levels intact. Between 1d6+5 minutes after casting begins, a psychopomp olethros appears and demands cessation; casting can be paused for up to 1 minute without failure. Obtaining prior permission from a Purgatory agent avoids this encounter.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Keif Addiction',
@@ -3887,6 +4061,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions as geas/quest, except the only allowed command is "use keif or refined keif." A lesser version (Keif Addiction, Lesser) at lower level functions as lesser geas with the same restriction, requiring a Will save to negate, and only affects creatures with 7 HD or fewer.',
     source: 'Pathfinder Chronicles: Dark Markets, A Guide to Katapesh',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ki Leech',
@@ -3909,6 +4084,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You enter a receptive spiritual state. When you confirm a critical hit or reduce a living enemy to 0 or fewer hit points, you steal some of that creature's ki, restoring 1 ki point to your ki pool (provided you have at least 1 ki point available). This spell cannot exceed your maximum ki pool and does not stack with similar abilities. The spell has no effect unless you possess a ki pool.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_L_1 ─────────────────────────────────────────────────────────────
@@ -3933,6 +4109,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "This spell extends a poison's activation timeline, allowing the caster to delay onset by up to 1 hour per caster level. The target doesn't save upon initial exposure but rather at the end of the extended onset period. If neutralized before onset completes, the poison becomes harmless. Multiple doses produce cumulative effects normally. Detection is difficult—spells like Detect Poison require a caster level check against DC 11 + caster level. Craft (alchemy) or Wisdom checks to identify the poison receive a +10 DC increase. When cast on venomous creatures, it delays their natural poison delivery on their next attack.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lash of the Astradaemon',
@@ -3949,6 +4126,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "The caster causes one of their hands to elongate and sprout fearsome translucent claws that radiate a cold phosphorescence. This grants a primary natural attack dealing 1d6 slashing damage (1d4 for Small casters). Targets struck must succeed at a Fortitude save or gain 1 negative level. Successful saves grant immunity to further negative levels from this casting. Each negative level inflicted grants the caster 5 temporary hit points lasting 1 hour. The claw does not interfere with spellcasting or other hand-based actions. Usage is limited to 1 attack per 2 caster levels, reverting to normal after all attacks are delivered or after 24 hours.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Blast',
@@ -3971,6 +4149,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell requires vegetation to function. The caster draws life force from surrounding plant life and unleashes it in a line against undead enemies. It deals 1d6 positive energy damage per caster level (maximum 12d6 at 12th level) to undead creatures in the area. The spell blights vegetation in a 5-foot radius per caster level (maximum 60 feet), causing all vegetation in that area to immediately wither and die. Plant creatures remain unaffected.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Life Pact',
@@ -3999,6 +4178,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "The spell binds targets' life forces together. When any target drops below 0 hit points, that creature automatically drains 1 hit point from all willing targets within 30 feet who have at least 1 hit point remaining. The drained hit points provide magical healing to the triggering creature, potentially preventing death. This healing cannot raise the triggering creature above 1 hit point. The pact triggers once per round and only from hit point damage, not death effects.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_L_2 ─────────────────────────────────────────────────────────────
@@ -4022,6 +4202,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "The caster manifests a dark whip-shaped field of energy that wraps around an enemy's neck, leaving everything except the head paralyzed. Upon a successful ranged touch attack, the target sustains a 1d6 penalty to Strength, Dexterity, and Constitution each round. When any of these ability scores reaches 1, the target becomes paralyzed (except the head, which retains full sensory function and speech capability). The whip extends up to 20 feet, has 15 hit points, and hardness 5. Penalties cease immediately when the spell ends.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lipstitch',
@@ -4043,6 +4224,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "This silent spell magically stitches the target's lips tightly together if it fails a saving throw, preventing speech, bite attacks, spellcasting, and command word activation. The victim suffers 1d6 damage from the stitching process. The thread can be removed through: a DC 20 Strength check as a standard action; piercing or slashing weapon cuts as a full-round action; or a DC 20 Heal check performed over one minute. The first two removal methods cause 1d6 damage plus 1 bleed damage and create a 20% chance of failing spellcasts with verbal components until bleeding stops. The spell affects only one mouth per casting and has no effect on creatures without mouths.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Admonition',
@@ -4059,6 +4241,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "The caster points out the target's faults and failures, causing them to become staggered for 1 round. While affected, the target cannot be the target of another spell that has the word 'litany' in the title.",
     source: "Pathfinder Player Companion: Disciple's Doctrine",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of the Red Crusader',
@@ -4074,6 +4257,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "This necromantic spell causes each time the target creature takes piercing or slashing damage, it takes 1 point of bleed damage; this bleed damage stacks with itself. Additionally, affected targets cannot be targeted by other spells containing 'litany' in the title.",
     source: "Pathfinder Player Companion: Disciple's Doctrine",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Weakness',
@@ -4090,6 +4274,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "The caster's proclamation weakens the target creature. The affected creature becomes fatigued for 1 round. While subject to this spell, the target cannot be the target of another spell that has the word 'litany' in the title.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_M_1 ─────────────────────────────────────────────────────────────
@@ -4107,6 +4292,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'By casting magic jar, you transfer your soul to the focus gem or crystal, leaving your body lifeless. You can then attempt to possess nearby bodies. You retain your own mental attributes while gaining access to the host body\'s physical capabilities. You can return to the gem at any time. If your body is destroyed while you are away, you may remain in the gem indefinitely or attempt another possession.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Malediction',
@@ -4122,6 +4308,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "You corrupt a target's soul with fiendish blasphemy. If the target dies within one minute of being cursed, normal resurrection is impossible. Only worshippers of deities matching your alignment can easily restore the target to life. Other casters must succeed at a caster level check (DC = 10 + your caster level). Miracle or wish spells bypass this restriction. The curse can be removed by break enchantment, dispel magic, or remove curse before death. You can end your own malediction by recasting it on the same target.",
     source: 'Pathfinder Roleplaying Game Book of the Damned',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Marionette Possession',
@@ -4137,6 +4324,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "Your consciousness inhabits a willing target's body while the target's soul remains helpless but aware. You retain your mental ability scores (Intelligence, Wisdom, Charisma) and abilities while using the host's physical attributes. The spell is blocked by protection from evil. If the host body dies, both you and the host perish if the host is beyond spell range.",
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mark of Justice',
@@ -4152,6 +4340,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You mark a willing or restrained subject and designate a specific behavior that triggers the mark\'s curse. Once triggered, the mark curses the subject with effects identical to bestow curse. The mark cannot be dispelled and is removable only via break enchantment, limited wish, miracle, remove curse (at equal or higher caster level), or wish.',
     source: 'Pathfinder RPG Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mark of Spite',
@@ -4166,6 +4355,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You make a ranged touch attack to place a mark on a victim. During the spell\'s duration, you may injure yourself as a standard action, dealing 1d8 plus your Strength modifier in damage. The marked target automatically takes twice this amount, bypassing any damage reduction, immunities, or resistances.',
     source: 'Pathfinder Player Companion: Heroes from the Fringe',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Masochistic Shadow',
@@ -4181,6 +4371,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "You animate the target's shadow using energies from the Shadow Plane, instilling a maddening hunger for its owner's life energy. On a failed Will save, the target sustains 1d4 Strength damage as a quasi-real shadow manifests and attacks. Each subsequent round, the target must succeed at a Reflex save or take 1d4 additional Strength damage; success reduces damage to 1 point. If Strength reaches 0, the target perishes. Bright light grants +2 on Reflex saves; darkness imposes -2.",
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Massacre',
@@ -4197,6 +4388,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'A wave of death magic emanates from you in a line formation. It instantly eliminates living creatures with 17 or fewer Hit Dice, affecting up to 1d4 HD of creatures per caster level. Creatures with 18 or more HD cannot be affected. If the spell fails to kill any targets, unreleased energy detonates at the line\'s terminus, dealing 10d6 points of damage plus 1 point per caster level to occupants of that square.',
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mathematical Curse',
@@ -4212,6 +4404,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell utilizes the Path of Numbers. To cast, roll 3d8. Select one die result as the penalty value, one of the two remaining dice results to determine the affected d20 roll type, and the final die result as the duration in rounds. Only one mathematical curse can affect a creature at once; casting a new one replaces any existing curse on that target.',
     source: 'Pathfinder Campaign Setting: Occult Mysteries',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Over Matter',
@@ -4226,6 +4419,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell transfers ability damage or drain between corresponding physical and mental ability scores. Correspondences are: Strength-Intelligence, Dexterity-Wisdom, Constitution-Charisma. The transfer can move any number of points in a single casting, though only between one paired set. The spell prevents reducing any ability score to zero.',
     source: 'Pathfinder Player Companion: Occult Origins',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_M_2 ─────────────────────────────────────────────────────────────
@@ -4244,6 +4438,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "You direct spirits into the shadows of creatures that fail their saves, causing their shadows to display small horns, unusually long and slender arms, or other small discrepancies. At will (once per 10 minutes), mischievous shadows can impose a -8 penalty on attack rolls, combat maneuver checks, or Strength/Dexterity-based skill checks, or force spellcasters to make concentration checks (DC 15 + spell level).",
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Malediction (PZO9213)',
@@ -4259,6 +4454,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "You mark a target with corruption, damning its soul to Hell if death occurs within one minute. Affected creatures cannot be resurrected through normal means — only worshipers of Asmodeus or your deity can restore life via raise dead or resurrection. Miracle or wish work regardless. Pre-death countermeasures include break enchantment, dispel magic, or remove curse. You can dispel your own malediction by recasting on the same target.",
     source: "Pathfinder Chronicles: Princes of Darkness, Book of the Damned Vol. I",
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_N_1 ─────────────────────────────────────────────────────────────
@@ -4284,6 +4480,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'Creatures within the area need only 2 hours of uninterrupted sleep to recover from injuries and regain spells. Each additional 2-hour block of sleep beyond the first counts as a full day of rest for natural healing and disease/poison recovery. Affected sleepers gain vivid dreams tracking their recovery and may wake if their condition worsens. Benefits are lost if any affected creature is disturbed during the 8-hour period, and creatures can only benefit from this spell once per week.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Necromantic Burden',
@@ -4306,6 +4503,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "If the target undead fails its Will save, its effective Hit Dice for the purpose of determining whether it remains under another creature's control doubles (maximum twice the caster's level). If this increase causes the undead's effective HD to exceed a controller's maximum HD threshold, the undead is immediately freed. Other creatures may then attempt to take control within their own HD limits.",
     source: 'Pathfinder Player Companion: Undead Slayer\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_N_2 ─────────────────────────────────────────────────────────────
@@ -4336,6 +4534,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You deplete the necromantic vitality animating an undead creature, inducing lethargy. Dark wisps of energy emanate from the target and it becomes staggered for the duration. If the target already has the staggered condition (as zombies do), it is dazed for 1 round instead.',
     source: 'Pathfinder Roleplaying Game Bestiary 4',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Night Blindness',
@@ -4369,6 +4568,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "The target's vision is impaired as though the light level were one step lower: bright light appears as normal, normal as dim, and dim as darkness. Darkvision, low-light vision, and see in darkness provide no benefit. As a side effect the subject gains a +4 bonus on saving throws against blindness or dazzling from bright light. Remove blindness/deafness dispels this curse.",
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_O_1 ─────────────────────────────────────────────────────────────
@@ -4396,6 +4596,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell seals a binding oath between two willing participants. The targets must clasp hands and swear their oath in the name of Kols. Similar to mark of justice, the spell penalizes oath-breakers with a visible facial mark recognizable to dwarves, imposing a -4 penalty to attempts to influence dwarves. The mark can be removed following the same procedures as mark of justice, or the other party can forgive the oath-breaker, causing the mark to disappear.',
     source: 'Pathfinder Companion: Dwarves of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Object Possession, Lesser',
@@ -4425,6 +4626,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You project your soul into an unattended Tiny or Small object, animating it. While possessing the object you gain the statistics of an animated object of its size with 1 construction point of abilities. You cannot use spells or other abilities while possessing the object. A spiritual tether connects your body to the possessed object; if you move beyond close range (25 ft. + 5 ft./2 levels) from your body, the connection breaks and your consciousness returns to your body. Your body is helpless while you possess the object.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Object Possession',
@@ -4454,6 +4656,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions as object possession, lesser, except you can possess objects up to Large size with up to 3 construction points for Large objects. You can return your consciousness to your body as a standard action and attempt to possess a different object on a subsequent turn. Your body is helpless while you possess the object.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Object Possession, Greater',
@@ -4481,6 +4684,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions as object possession, except you can possess objects up to Gargantuan size with up to 5 construction points, or target constructs as an alternative to objects. The spiritual tether extends to medium range. When possessing a construct, you gain control of its body and abilities. Your body is helpless while you possess the object or construct.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Old Salt's Curse",
@@ -4507,6 +4711,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You afflict the target with a maritime curse that makes them perpetually sickened. Additionally, whenever the cursed creature is on or in water more than 1 mile from shore, it becomes staggered due to overwhelming seasickness. This curse cannot be removed with dispel magic. Remove curse or break enchantment can end the effect.",
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_O_2 ─────────────────────────────────────────────────────────────
@@ -4533,6 +4738,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You transfer the hindrances of your oracle's curse to another creature while retaining the benefits of your own curse. The target suffers all the hindrances of your oracle's curse but none of the benefits, while you continue to experience the full effects of your curse. This spell has no effect if you do not have the oracle's curse class feature.",
     source: "Pathfinder Roleplaying Game Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Orb of the Void',
@@ -4559,6 +4765,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You create a small weightless sphere of pure negative energy that floats in the air. As a move action, you can move the sphere up to 30 feet. Any living creature that occupies the same space as the sphere gains one negative level (Fortitude save negates). Creatures that pass through the sphere's space or end their turn in it also gain negative levels. After 24 hours, these negative levels may become permanent if the creature fails additional saving throws. Multiple orbs that occupy the same space fuse, using the higher DC and the longer remaining duration. Undead creatures instead gain 2d4 x 5 temporary hit points (duration 1 hour) when affected by the sphere.",
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Outbreak',
@@ -4590,6 +4797,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You cause any diseased creatures in the area to become extremely contagious. Each affected creature is overcome by a fit of wracking coughs, becoming fatigued and exposing any creatures within 10 feet to the diseases it carries. A creature that succeeds on its Fortitude save is only fatigued for 1 round and does not expose nearby creatures to disease.",
     source: 'Pathfinder Roleplaying Game Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Overwhelming Poison',
@@ -4620,6 +4828,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You amplify the potency of a poison. The affected poison becomes resistant to delay poison effects and its DC to neutralize with neutralize poison increases by 5. The poison uses its own saving throw DC or this spell's DC, whichever is higher. When cast on a poisoned creature, the spell affects one selected dose of poison currently affecting the target, or a random one if you do not specify. If cast on a venomous creature, the spell affects the first dose of poison delivered by that creature before the spell expires.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_P_1 ─────────────────────────────────────────────────────────────
@@ -4637,6 +4846,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions similarly to magic jar but transfers a trapped soul (from a soul gem, soul bind, or trap the soul) into an unwilling target\'s body. The target creature dies upon a failed save, and the transferred soul permanently inhabits the body. The trapped soul does not receive a saving throw to resist transfer. You must remain within range to dismiss the spell.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pernicious Poison',
@@ -4652,6 +4862,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell weakens a target\'s poison defenses: the target incurs a -4 penalty on saves against poison, toxic effects persist for another 2 frequency increments extending durations, and attempts to cure the poisoned target with skill or magic take a -4 penalty.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Persuasive Goad',
@@ -4667,6 +4878,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "Your eyes flash, dealing 1d6 nonlethal damage to the target. For one minute afterward, you gain a +4 circumstance bonus on Intimidate checks against the target.",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phantom Blood',
@@ -4681,6 +4893,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You bolster your life energy. When a temporary effect modifying Constitution (such as barbarian rage or bloodrager bloodrage) ends, if the resulting hit point loss would render you unconscious or dead, you instead gain temporary hit points equal to your caster level (maximum 10). Each casting provides this benefit only once.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Phantom Limb',
@@ -4695,6 +4908,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'The spell grants replacement of missing body parts using phantom appendages with full functionality, including natural attacks and extraordinary abilities (but not supernatural ones). Alternatively, the caster may choose: Extra Arms (two phantom claws), Extra Legs (speed boost and trip/overrun defense), Mermaid\'s Tail (swim speed), or Phantom Wings (flight).',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_P_2 ─────────────────────────────────────────────────────────────
@@ -4712,6 +4926,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You cause the target to carry virulent diseases without showing symptoms. Adjacent creatures must succeed at Fortitude saves or contract illness as if affected by contagion. The target itself remains unaffected and symptom-free. Contagion ceases when the spell ends, though infected creatures remain diseased.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plague Carrier',
@@ -4727,6 +4942,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "The target's natural attacks become vectors for filth fever, with a DC calculated as 10 + 1/2 of the creature's Hit Dice + creature's Constitution modifier.",
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plague Storm',
@@ -4743,6 +4959,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You create a hideous gray cloud, similar to fog cloud, that occasionally crackles with foul-smelling bolts of sickly green lightning. Affected creatures must save or contract one of eleven diseases chosen by you. The disease takes effect immediately with no onset delay, and the save DC increases by +2. The cloud moves away from you at 10 feet per round, sinking to lower terrain.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Plundered Power',
@@ -4759,6 +4976,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'The spell requires sacrificing a creature to create a bloodstone holding one of its racial spell-like abilities. The stone can be used once daily by any creature holding it, with the ability\'s effects remaining unchanged from when the original creature lived.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Poison',
@@ -4774,6 +4992,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You infect a target with venom through a melee touch attack, dealing 1d3 Constitution damage per round for 6 rounds. Affected creatures may attempt a Fortitude save each round to negate damage and end the poison.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Positive Pulse',
@@ -4789,6 +5008,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'Undead creatures must succeed at a Will save or take 1d6 damage plus 1 point per 2 caster levels (maximum +5). Living creatures gain a +2 bonus on saving throws against death effects, energy drain, negative energy, and haunt effects for 1 round.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Possess Object',
@@ -4803,6 +5023,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'You transfer your mind to a single object, animating it as if using animate objects, except your mind controls the object as if it were your own body. Functions similarly to magic jar. You cannot speak or cast spells while possessing the object. Temporarily suspends disease, poisons, and afflictions while your original body is effectively dead.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Possession',
@@ -4817,6 +5038,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You transfer your soul into a target creature\'s body within spell range. Your physical form appears dead. Upon successful possession, you retain mental attributes (Intelligence, Wisdom, Charisma, level, class abilities) while using the host\'s physical attributes and hit points. The host\'s consciousness remains aware but cannot act. You can return to your original body as a standard action or when the spell expires.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Possession Trap',
@@ -4831,6 +5053,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This protective ward ensnares possession attempts. If a creature tries to possess you via magic jar or similar effects, it must succeed at a Will save or be shunted into this spell\'s focus gem. The creature remains contained as though trapped in a magic jar. If the save succeeds, normal possession rules apply. You always become aware of possession attempts. The effect ends once triggered.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pox Pustules',
@@ -4846,6 +5069,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell inflicts a painful, itching rash on the target creature. The target becomes sickened and suffers a -4 penalty to Dexterity (minimum 0). By spending a move action to scratch, the target can remove the sickened condition temporarily until the start of its next turn, though the Dexterity penalty persists.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Preserve',
@@ -4860,6 +5084,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'Food, water, plants, and other perishable objects affected by the spell remain as fresh as they were when the spell was cast. The spell protects against similar spoilage effects and works on severed body parts per gentle repose rules. It can be made permanent via permanency.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Crush I',
@@ -4875,6 +5100,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You invade a creature\'s mind causing internal damage. Will save success inflicts the sickened condition for 1 round. Failed Will save requires a Fortitude save (+4 bonus if target above half HP); failed Fortitude reduces target to -1 HP (dying). Successful Fortitude save deals 3d6 points of damage + 1 point per caster level (cannot reduce below -1 HP) and inflicts sickened. No effect on creatures lacking Intelligence scores.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Crush II',
@@ -4890,6 +5116,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'As psychic crush I, but on Fortitude success, deals 5d6 points of damage + 1 point per caster level. The Fortitude bonus of +4 only applies at full HP; +2 bonus above half HP. This spell can be undercast.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Crush III',
@@ -4905,6 +5132,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'As psychic crush I, but Fortitude success deals 7d6 points of damage + 1 per caster level; Will success deals 1 point per caster level. The Fortitude bonus of +2 applies at full HP only. This spell can be undercast.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Crush IV',
@@ -4920,6 +5148,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'As psychic crush I, but both saves deal 9d6 points of damage + 1 per caster level. Creatures below half HP automatically fail the Fortitude save. This spell can be undercast.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Crush V',
@@ -4935,6 +5164,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'As psychic crush I, but both saves deal 11d6 points of damage + 1 per caster level. Creatures below half HP take a -2 penalty on the Will save. This spell can be undercast.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Purge Spirit',
@@ -4949,6 +5179,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This necromantic spell inflicts 1d6 damage per caster level (maximum 10d6) and staggers the target for one round. A successful save reduces damage by half and negates the staggered effect. The spell affects incorporeal and ethereal creatures, haunts, astrally projected beings, mediums channeling spirits, and phantoms.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_R_1 ─────────────────────────────────────────────────────────────
@@ -4966,6 +5197,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "The spell enchants a weapon to draw spiritual essence from defeated enemies. When the weapon reduces a living creature to 0 or fewer hit points, it gains a +1 profane bonus to damage rolls. This bonus increases by 1 for each additional creature defeated with that weapon, reaching a maximum bonus equal to half the caster's level.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Recorporeal Incarnation',
@@ -4980,6 +5212,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell allows you to magically overlay a corpse\'s appearance onto a living creature. The deceased body must be fresh (dead no more than 24 hours or preserved via gentle repose). The living target gains the corpse\'s physical appearance, size, immunities, weapon proficiencies, weaknesses, and spell resistance. The spell provides a +20 circumstance bonus on Disguise checks to impersonate the deceased individual. The spell is notably difficult to detect—it produces no magical aura on the target, resists true seeing, and triggers undead-detection spells despite not actually making the target undead. The effect persists for weeks equal to caster level or until the focus item moves beyond 30 feet from the target.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Red Hand of the Killer',
@@ -4994,6 +5227,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "The spell reaches out across space to brand the killer of the corpse you used as a focus for this spell. The killer's right hand becomes permanently stained red and cannot be removed through normal means, though magical or mundane concealment is possible. For non-humanoid creatures lacking a right hand, the stain manifests elsewhere on the body. The spell affects only the direct killer, not accomplices, and requires the killer to be on the same plane when cast.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Rest Eternal',
@@ -5009,6 +5243,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: "This curse prevents a dead creature's spirit from returning. Any spell attempting to communicate with the dead creature, restore it to life, or transform it into undead must succeed on a caster level check (DC = 11 + caster's level). The curse cannot be dispelled but can be negated with remove curse or break enchantment.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Restful Sleep',
@@ -5023,6 +5258,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'You must cast this spell before resting. While active, subjects enjoy restorative sleep. Those completing a full night\'s rest regain hit points equal to twice their character level, while those resting a full day regain triple their character level in hit points. Significant interruptions (such as waking) negate all healing benefits and terminate the spell\'s effects for that subject. The healing gained counts as natural recovery and cannot address conditions requiring magical healing specifically.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_R_2 ─────────────────────────────────────────────────────────────
@@ -5040,6 +5276,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "The spell targets creatures who have attacked you within the previous round using melee, ranged, natural weapons, or spells requiring attack rolls. The target suffers a -4 penalty on attack rolls, skills checks, and ability checks. A successful Fortitude save reduces the penalty duration to 1 round only. Targets sharing your deity receive a -2 penalty to their saving throw.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Retributive Reparations',
@@ -5055,6 +5292,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "When a creature takes the cursed item from you, it must make a Will save. Failure results in the creature becoming fatigued. Each round the item isn't returned, the creature must save again. A second failure causes exhaustion. As long as the victim of the curse is actively working to return the object, its exhaustion is reduced to fatigue. The induced fatigue and exhaustion cannot be removed by normal means, though immunities function normally. The curse ends via remove curse or returning the item. Only one object can have this spell active at a time.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Riding Possession',
@@ -5069,6 +5307,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "You project your soul into a host body as an undetected observer with limited influence. Unlike standard possession, the host remains fully in control and unaware of the intrusion. You cannot communicate directly with the host but may cast mind-affecting spells or additional riding possession effects, provided they function as purely mental actions. Only the host can be targeted, regardless of the spell's normal parameters. If the host succeeds on a saving throw against such spells, it becomes aware of the possession and gains another save. Protection from evil and similar effects don't expel you from the host, but they do prevent you from casting further spells until those effects expire.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S1 ─────────────────────────────────────────────────────────────
@@ -5094,6 +5333,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell traps a target creature inside a holy symbol-decorated object. While confined the creature cannot act and gains immunity to spells and spell-like abilities. The binding persists as long as the caster maintains possession of the object. If the caster releases the object, the creature gradually gains abilities over time: telepathic communication (1 week), haunt creation up to 1/4 HD in CR (1 week), mental image projection (1 month), and possession ability (1 year). Only freedom, miracle, or wish can end the enchantment, as can destroying the object.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sadomasochism',
@@ -5118,6 +5358,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'When you cast this spell, incoming damage forces your attacker to roll damage twice and apply the higher result. The attacker must also succeed at a Will saving throw or become demoralized for 1 round. Each time you deal damage to a creature demoralized by this spell, you roll damage twice and take the higher result.',
     source: 'Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sands of Time',
@@ -5143,6 +5384,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'The spell ages a target creature to the next age category, imposing penalties to Strength, Dexterity, and Constitution without granting bonuses to mental ability scores. When cast on objects, constructs, or undead creatures, it deals 3d6 points of damage + 1 point per caster level (maximum +15). Ageless or immortal creatures are immune to this spell.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scarify',
@@ -5169,6 +5411,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "The caster's touch causes skin to produce fibrous tissue that rapidly closes wounds while leaving jagged scars. It converts 2d6 points of damage + 1 point per caster level (maximum +5) into nonlethal damage. The spell fails if the target is immune to nonlethal damage. Damage reduction against nonlethal damage applies. This effect counts as healing for stopping bleed damage.",
     source: 'Inner Sea Temples',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Scourge of the Horsemen',
@@ -5186,6 +5429,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'The spell inflicts a devastating combination of soul-draining energy and corrosive damage. Affected creatures gain 1d4 negative levels and sustain 1d6 points of acid damage per caster level (maximum 20d6).',
     source: 'Horsemen of the Apocalypse: Book of the Damned, Vol. 3',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sentry Skull',
@@ -5209,6 +5453,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell animates a severed head mounted on a stable object, granting it darkvision 60 feet and low-light vision with a +5 bonus to Perception. The caster can shift their senses into the head as a standard action within 30 feet, becoming blind and deaf in their body. The head can be imprinted with a triggering condition similar to magic mouth to alert the caster when activated. The spell grants no other abilities to the head.',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sessile Spirit',
@@ -5233,6 +5478,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'The spell renders spirits within a target dormant. For mediums or spiritualists with inhabiting spirits or phantoms, a failed save renders that spirit or phantom powerless, suppressing any benefits normally provided to its host, including bonus feats and spells known. For possessing spirits using possession effects, the spell targets the possessing creature instead, leaving them dazed for the duration of the spell on a failed save rather than exorcising them.',
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S2_1 ─────────────────────────────────────────────────────────────
@@ -5250,6 +5496,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "Allows the caster to transfer their consciousness into their shadow, which becomes an independent undead creature. The physical body lies comatose during projection, while the shadow gains darkvision, flight, and melee attacks but retains the caster's hit points and Hit Dice. If the shadow is destroyed, the caster returns to their body at -1 HP.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Share Skin',
@@ -5264,6 +5511,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "Allows the caster to inhabit an animal's body similarly to magic jar. The body vanishes while the effect lasts and the caster does not require a receptacle. A greater version (Witch 8) targets any creature rather than just animals.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shared Sacrifice',
@@ -5279,6 +5527,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates a damage-sharing link between the caster and a target; the caster takes only half damage from hit point damage, with the remainder transferred to the target. Non-hit-point harm such as charm effects, ability damage, level drain, and death effects cannot be shared through the link. The spell ends if caster and target move out of range.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Shared Suffering',
@@ -5294,6 +5543,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster infuses a dagger with dark energy and stabs themselves, taking 1d6 damage plus 1d6 per 2 caster levels beyond 1st (maximum 5d6 at 9th). The target receives equivalent damage plus a bonus based on the caster\'s primary ability modifier. This bypasses protective magic like shield other.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sharesister',
@@ -5308,6 +5558,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Allows the caster to share magical benefits with an ally of the same gender by accepting negative levels to grant the target an insight bonus to caster level and spell save DCs. At higher caster levels (11th and 17th), additional negative levels can be taken to increase the bonus.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Siphon Might',
@@ -5322,6 +5573,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Weakens a target's physical strength while channeling that drained power to an adjacent ally. The subject suffers a Strength penalty of 1d6 + 1 per 2 caster levels (maximum 1d6 + 5), reducible by half with a Fortitude save. An adjacent creature gains an equal enhancement bonus to Strength.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Skeleton Crew',
@@ -5336,6 +5588,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Animates humanoid corpses into 1 HD skeletons that function as obedient crew members with maritime skills. The skeletons can perform ship duties but cannot speak, attack, or defend themselves. They don\'t count against the caster\'s undead control limit.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Skin Tag',
@@ -5351,6 +5604,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Infuses a malign spirit into consumable items; when consumed, the spell embeds itself in the target\'s skin creating wrinkled tags resembling a face. The caster can remotely cause the affected creature to become sickened or remotely cast hexes and specific spells through the embedded spirit once per day.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Skinsend',
@@ -5365,6 +5619,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "Causes the caster's own skin to peel off and animate as a magical creature under their control, while the consciousness transfers between body and animated skin at will. The skinless body drops to 0 hit points and cannot heal naturally; the skin duplicate has Strength 3, damage reduction against piercing/slashing, and compression ability.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slay Living',
@@ -5380,6 +5635,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Attempts to slay a living target through contact; on a successful melee touch attack, the target sustains 12d6 damage + 1 per caster level, reduced to 3d6 + 1 per caster level with a successful Fortitude save. Even with a successful save, the target may still die from accumulated damage.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Slow Suffocation',
@@ -5395,6 +5651,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Prevents the target from breathing, simulating suffocation mechanics. The enchantment can be dispelled by strong stimulants, effects increasing Constitution, or physical trauma of 10+ damage from a single attack. Creatures without respiratory systems are immune.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S2_2 ─────────────────────────────────────────────────────────────
@@ -5412,6 +5669,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'A dry, rasping whisper afflicts living creatures with 4 or fewer Hit Dice, forcing a Will save or inflicting the shaken condition for one round.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spawn Ward',
@@ -5426,6 +5684,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: 'Shields a recipient against undead abilities by providing resistance to energy drain and blood drain attacks from undead creatures. Prevents the target from becoming an undead spawn if killed while the effect is active.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Speak with Haunt',
@@ -5441,6 +5700,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Stirs a haunt to a limited sense of awareness, allowing it to answer questions at one per two caster levels, limited to what the original creature knew in life. Haunts with significantly different alignments may resist or attempt deception. Cannot be recast on the same haunt within one week.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Speak with Soul',
@@ -5455,6 +5715,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: 'Enables full conversation with a deceased creature\'s soul at the location of death or wherever the soul resides. Unlike similar divination magic, the soul is neither compelled to speak nor bound to truthfulness. The soul generally recalls only what it knew in life.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spectral Saluqi',
@@ -5470,6 +5731,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'No',
     description: "Conjures an undead canine with the caster's alignment that can communicate telepathically, perceive ethereal beings, and attack them. Functions as a yeth hound but hovers slightly above ground and the caster is immune to its frightening bark ability. The hound's bite counts as aligned to any alignment the caster possesses.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Spellcurse',
@@ -5485,6 +5747,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'Yes',
     description: "Disrupts spell energy affecting the target, causing it to crackle with destructive force dealing 1d6 damage for each spell with a duration of 1 round or greater currently affecting it. The spells affecting the target remain in effect and are not dispelled.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S3 ─────────────────────────────────────────────────────────────
@@ -5503,6 +5766,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You cause the target's throat to constrict, inflicting the croak spellblight condition. The target cannot cast spells with verbal components or speak coherently while under this effect.",
     source: 'Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Stricken Heart',
@@ -5528,6 +5792,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'Your hand becomes covered with a writhing black aura. You make a melee touch attack dealing 2d6 points of negative energy damage. The target becomes staggered for 1 round, or staggered for 1 minute if the attack is a critical hit. Creatures immune to precision damage cannot be staggered by this spell.',
     source: 'Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Suffocation',
@@ -5551,6 +5816,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "You remove the air from a target's lungs, causing rapid asphyxiation. A successful Fortitude save leaves the target merely staggered for 1 round. On a failed save, the target falls unconscious (0 hp) the next round, drops to –1 hp the following round, and dies the round after. Each round the target may delay that round's effects with a successful Fortitude save. Only affects living creatures that breathe.",
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Suffocation, Mass',
@@ -5574,6 +5840,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions as suffocation, except it affects multiple creatures within close range and lasts for 1 round per caster level.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Summoner Conduit',
@@ -5597,6 +5864,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You create a mystical link between a summoned creature and its summoner. When the targeted creature takes spell damage, the summoner is also considered a target of that spell and may use its normal defenses including saving throws and spell resistance. The effect does not apply if the summoner is on a different plane.',
     source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Sweat Poison',
@@ -5613,6 +5881,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       "Glands along your neck, back, or wrists swell and exude a viscous injury poison (Fortitude DC 14; frequency 1/round for 4 rounds; effect 1d2 Str damage; cure 1 save). You can apply the poison to weapons as a move action, with each application reducing the spell's duration by 1 minute. Note: you are not immune and risk self-poisoning without the poison use class feature.",
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Symbol of Exsanguination',
@@ -5645,6 +5914,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions like symbol of death except creatures failing saves experience uncontrolled bleeding from facial orifices, taking 1d6 bleed damage immediately and becoming sickened while bleeding. A DC 15 Heal check or magical healing ends bleeding temporarily, but it resumes each round while the creature remains within 60 feet of the symbol. This spell affects creatures regardless of current hit points.',
     source: 'Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_T_2 ─────────────────────────────────────────────────────────────
@@ -5663,6 +5933,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This necromantic spell functions similarly to shambler, but instead summons 1d4+2 mummies rather than shambling mounds. The caster creates a legion of undead mummies that persist for the specified duration and can be dismissed at the caster\'s discretion.',
     source: 'Pathfinder Companion: Osirion, Land of Pharaohs',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Torpid Reanimation',
@@ -5678,6 +5949,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'no',
     description: 'This spell functions similarly to animate dead, but rather than gaining immediate control, you establish a trigger condition for animation—such as touch, a spoken word, sound, or time-based occurrence (within caster level days). You can manually trigger animation via standard action anytime. Uncontrolled undead created by this spell fall under your control as a free action if within 60 feet with line of sight. Once control is lost, it cannot be regained for that specific creature. Standard animate dead Hit Dice limits still apply.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Blindness',
@@ -5693,6 +5965,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "Your hand becomes engulfed in darkness, allowing you to perform melee touch attacks that coat a target's eyes in supernatural darkness. Each successful touch blinds the target for 1 round unless it makes a Fortitude save. You may attempt up to one touch attack per caster level, with any unused attacks expiring after 1 round per caster level.",
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Touch of Bloodletting',
@@ -5707,6 +5980,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'This necromantic spell aggravates existing injuries, causing them to bleed profusely. When cast on a creature with current hit points below maximum, it inflicts 1 point of bleed damage each round and renders the target exhausted throughout the spell\'s duration. The effect ends if the caster or another character succeeds at a DC 15 Heal check or if any healing spell restores hit point damage.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Toxic Gift',
@@ -5722,6 +5996,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: 'You must be poisoned to cast this spell. The spell transfers the poison afflicting you to the target creature. The target experiences the same poison you have, except it uses this spell\'s DC instead of the poison\'s normal DC. If you have multiple poisons, you select which one to transfer.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Toxic Rupture',
@@ -5737,6 +6012,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     spellResistance: 'yes',
     description: "You compress your hand to trigger internal bleeding within a target creature's venom glands. The affected creature must save against its own poison using this spell's DC. Upon failure, the creature is poisoned and suffers the full effect of its poison. Subsequent saving throws against the poison revert to the standard poison DC rather than the spell's DC.",
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_U_1 ─────────────────────────────────────────────────────────────
@@ -5771,6 +6047,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You infuse the target mindless undead with the advanced creature template for the duration, granting it +2 on all rolls, +2 to special ability DCs, +4 to AC and CMD, and 2 additional hit points per Hit Die. However, your control over the creature becomes unreliable—each time you give it a command, there is a 50% chance it acts as if uncontrolled. An uncontrolled undead creature affected by this spell attacks living creatures it encounters.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Umbral Infusion, Mass',
@@ -5798,6 +6075,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell functions as umbral infusion, except it affects multiple mindless undead creatures. Each target gains the advanced creature template: +2 on all rolls, +2 to special ability DCs, +4 to AC and CMD, and 2 additional hit points per Hit Die. Control over each creature has a 50% failure chance per command.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Umbral Strike',
@@ -5834,6 +6112,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You generate a bolt of dark energy and make a ranged touch attack that ignores normal concealment (but not total concealment). On a hit, the target takes 1d6 points of damage per caster level (maximum 20d6), split evenly between cold damage and negative energy damage. A shroud of shadow envelops the target, blinding it for the duration of the spell. A successful Fortitude save halves the damage and prevents the blindness.',
     source: 'Pathfinder Player Companion: Blood of Shadows',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undead Beacon',
@@ -5861,6 +6140,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You shroud an area in unclean influence, making creatures within more vulnerable to detection and attack by undead. Creatures that fail their saving throws become easier for undead to notice: undead within 60 feet gain a +4 bonus on Perception checks to detect affected creatures, a +4 bonus on saving throws against abilities of affected creatures, and a +1 profane bonus on attack rolls against affected creatures. Undead can also ignore lesser concealment when attacking affected creatures. This spell also functions as a haunt (Notice DC 20 Perception; 2 hp per caster level; trigger: proximity; reset: none).',
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Undeath Inversion',
@@ -5889,6 +6169,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You invert the target undead creature\'s relationship with positive and negative energy for the duration. The target takes damage from negative energy and is healed by positive energy as if it were a living creature. Any negative energy abilities the target possesses convert to equivalent positive energy effects. The target cannot impose negative levels while under this spell\'s effect, but it remains undead for all other purposes. The target may attempt a new Will save each round as a full-round action to end the effect.',
     source: 'Pathfinder Player Companion: Undead Slayer\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Undine's Curse",
@@ -5915,6 +6196,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You curse the target, removing its ability to breathe automatically. While the target is conscious and capable of taking physical actions, it continues to breathe normally. However, if the target becomes unconscious or otherwise unable to take physical actions, it stops breathing and must hold its breath or begin suffocating. Creatures that do not need to breathe are immune to this spell.',
     source: 'Pathfinder Roleplaying Game: Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_U_2 ─────────────────────────────────────────────────────────────
@@ -5944,6 +6226,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You bolster undead creatures with necromantic energy that functions similarly to a barbarian\'s rage. Each affected undead gains a +2 profane bonus to Strength and Charisma, a +1 profane bonus on Will saving throws, and a –2 penalty to AC for the duration. This is not an emotion effect and is not suppressed by calm emotions or similar spells.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unlock Flesh',
@@ -5970,6 +6253,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You cause the target\'s flesh to loosen around its skeletal structure. A living creature that fails its saving throw becomes staggered for the duration; it may attempt a new Fortitude saving throw as a standard action each round to end the effect. Corporeal undead take 1d6 points of damage per caster level (maximum 5d6); a successful save halves this damage. Incorporeal creatures and creatures without flesh are immune.',
     source: 'Pathfinder Adventure Path: Curse of the Crimson Throne',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unsettling Presence',
@@ -6004,6 +6288,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You infuse an area with an unsettling, paranoid atmosphere. Creatures that fail their saving throws project an aura of unease that makes others suspicious of them: Handle Animal checks and all Charisma-based interaction skill checks targeting affected creatures take a penalty. Creatures interacting with an affected creature must succeed at Will saves or have their attitude worsened by one step. Sense Motive checks against affected creatures automatically assume dishonesty unless the affected creature succeeds at a Will save. This spell also functions as a haunt (Notice DC 20 Perception; 2 hp per caster level; trigger: proximity; reset: none).',
     source: 'Pathfinder Player Companion: Haunted Heroes Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unshakable Chill',
@@ -6032,6 +6317,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You afflict the target with an unshakable chill. If the target fails its initial saving throw, it suffers the effects of severe cold for the duration: it takes 1d6 points of nonlethal cold damage and must make a saving throw against severe cold\'s DC every 10 minutes or take additional nonlethal damage. The target cannot warm itself through mundane means while this spell lasts.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Unwilling Shield',
@@ -6060,6 +6346,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'You create a mystic link between yourself and the target that forces the target to share your wounds. You gain a +1 luck bonus to AC and on saving throws. Whenever you take damage, half the damage is negated and the target instead takes that damage. Unlike shield other, the target does not choose this arrangement. Charm effects, ability damage, level draining, and death effects are not shared. The damage transfer stops if you and the target move beyond close range of each other.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_VWYZ ─────────────────────────────────────────────────────────────
@@ -6079,6 +6366,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This enchantment grants the target vampire-like fangs and a compulsion to consume blood. While affected, the recipient gains the ability to drain blood during grapples. When maintaining a pin, they inflict 1d4 Constitution damage and heal 5 hit points or gain 5 temporary hit points per round (maximum temporary hit points equal to normal hit points). If the target fails to drain blood before the spell expires, they become exhausted.',
     source: 'Pathfinder Player Companion: Faiths of Corruption',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Venomous Bolt',
@@ -6095,6 +6383,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell infuses a single arrow or crossbow bolt with natural venom upon firing. The projectile deals its standard damage plus the effects of a poison spell to any struck target. The enchantment must be used immediately; if the arrow is not fired right away, the spell dissipates without taking effect.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Virulence',
@@ -6112,6 +6401,7 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This necromantic spell forces all creatures in its radius—including the caster—to make immediate disease saving throws at a disadvantage. Failed saves trigger any dormant afflictions, while successful ones provide no progress toward curing diseases.',
     source: 'Pathfinder Adventure Path #81: Shifting Sands',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Virulent Miasma',
@@ -6143,5 +6433,6 @@ export const NECROMANCY_SPELLS: Spell[] = [
     description:
       'This spell generates a disease-tainted fog similar to fog cloud. Creatures within the cloud suffer a -4 penalty on saving throws against disease effects while present and for 1d4+1 rounds afterward. A successful Fortitude save negates this penalty. Creatures with spell resistance that successfully resist the fog need not save again.',
     source: 'Pathfinder Roleplaying Game Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
 ];

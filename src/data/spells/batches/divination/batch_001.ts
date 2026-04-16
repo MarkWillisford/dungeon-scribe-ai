@@ -1,8 +1,8 @@
 // Divination spells — batch 001
 // Batch metadata: {"school":"divination","batchNum":"001","startSpell":"after: Foresight","lastSpell":"Psychic Reading","nextSpell":"Puzzle Box","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/p/puzzle-box/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const DIVINATION_BATCH_001: Spell[] = [
+export const DIVINATION_BATCH_001: SpellDefinition[] = [
   {
     name: 'Gallant Inspiration',
     classLevels: { bard: 2 },
@@ -23,6 +23,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell provides retroactive assistance when a creature fails an attack roll or skill check. The target receives a +2d4 competence bonus to the attack roll or skill check retroactively. If this bonus converts the failure into a success, the roll succeeds.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gilded Whispers',
@@ -46,6 +47,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination spell enables casters to use a coin as a conduit for eavesdropping magic. When casting scrying effects like clairvoyance/clairaudience or crystal ball divination, the spellcaster can target an enchanted coin instead of a creature or location. The spell resists detection by magical means unless the detecting caster succeeds on a specific check against the original caster's level.",
     source: 'Pathfinder Society Field Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Glimpse of the Akashic',
@@ -67,6 +69,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "The caster attempts to access the Akashic Record's perfect knowledge. When activated as a free action during the spell's duration, the caster gains a circumstance bonus equal to your caster level on all skill checks, ability checks, attack rolls, damage rolls, saving throws, and combat maneuver checks for 1 minute. After this minute expires, the caster becomes stunned for 2 rounds, then sickened for 1 minute.",
     source: 'Pathfinder Player Companion: Psychic Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Glimpse of Truth',
@@ -103,6 +106,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This spell functions like true seeing, except it lasts only 1 round and requires a tourmaline costing 50 gp as a material component.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Glimpse the Hidden',
@@ -132,6 +136,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell functions identically to see invisibility but cannot be made permanent. It allows the touched creature to perceive invisible creatures and objects.',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guidance',
@@ -160,6 +165,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell grants the recipient a +1 competence bonus on a single attack roll, saving throw, or skill check, which must be declared before the roll is made.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Guiding Star',
@@ -189,6 +195,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell creates a magical bond with a location. Once cast, you can determine your distance from and direction to that area as a standard action. The location counts as "very familiar" for teleportation spells. You can only attune to one location at a time.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Harrowing',
@@ -217,6 +224,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination spell uses a Harrow deck to provide fortune-telling. Nine cards are drawn, each granting bonuses or penalties on specific d20 checks based on alignment compatibility. Bonuses are one-use luck bonuses that stack with nothing else, while penalties persist throughout the spell's duration.",
     source: 'Pathfinder Campaign Setting',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Harvest Knowledge',
@@ -250,6 +258,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination effect allows a caster to temporarily absorb knowledge from a touched creature. Upon a failed save, the caster can retrieve one answer per minute from the target's memories or attempt Knowledge checks using the target's skill ranks. Each check allows another saving throw. The spell can also affect creatures trapped in magical containers or spells.",
     source: 'Pathfinder Campaign Setting: Inner Sea Temples',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Heightened Awareness',
@@ -282,6 +291,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'The spell grants a +2 competence bonus to Perception and trained Knowledge checks. If active during initiative, the caster may dismiss it instantly for a +4 initiative bonus.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Hunter's Eye",
@@ -303,6 +313,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell enhances perception against a single target creature. The caster gains the ability to perceive the target despite invisibility or ethereal states, receives a +20 competence bonus on Perception checks to locate it, and ignores concealment from fog, mist, blur, displacement, and invisibility effects—though not darkness-based concealment.',
     source: 'Pathfinder Roleplaying Game Bestiary 2',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Hunter's Lore",
@@ -325,6 +336,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell enables inquisitors and rangers to spend a full-round action to take 20 on Knowledge skill checks to identify enemy weaknesses within line of sight, provided they have at least one rank in that skill. The spell also permits untrained Knowledge checks to determine monster weaknesses, though the "take 20" benefit does not apply to untrained attempts.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hypercognition',
@@ -353,6 +365,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell allows you to rapidly organize information about a person, place, thing, or event. You can perform an Intelligence, Linguistics, or Knowledge check five times faster if it requires at least 3 rounds, or instantly if it takes less time. The spell grants an insight bonus on the check equal to your caster level (maximum bonus +10), though this cannot exceed a natural 20 result.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Identifier's Eye",
@@ -382,6 +395,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination spell grants the recipient magical awareness similar to detect magic and provides a +5 enhancement bonus on Spellcraft checks to identify magic item properties and command words. The caster may attempt these checks without training during the spell's effect, though it cannot identify artifacts.",
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Identify',
@@ -413,6 +427,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'Functions like detect magic but grants a +10 enhancement bonus on Spellcraft checks for identifying magic item properties and command words. Cannot identify artifacts.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Insect Scouts',
@@ -447,6 +462,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'The caster summons magical vermin scouts to investigate a specific location, which spend 1d6 hours gathering information about structural features, defenses, and alarms. The scouts return with details that grant the caster reroll opportunities on failed skill checks related to that specific location. The spell provides no information about creatures or guardians.',
     source: "Pathfinder Player Companion: Spymaster's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Insect Spies',
@@ -476,6 +492,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'The caster summons intelligent glossy black beetles functioning as reconnaissance agents. These Fine-sized insects obey mental commands, answer questions about observed details, and possess exceptional stealth capabilities. The caster maintains mystical awareness of their locations and can concentrate to learn their precise direction and distance.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Know Direction',
@@ -497,6 +514,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell grants immediate knowledge of magnetic north from your current location. It functions in most environments but may fail in extraplanar settings. The directional information is accurate only at the moment of casting; maintaining awareness requires external reference points.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Know Peerage',
@@ -531,6 +549,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination spell grants the target knowledge of nobility and heraldry comparable to the caster's expertise in Knowledge (nobility). The recipient can identify noble individuals, family names, and heraldic symbols. The target's skill ranks are treated as equal to the caster's (maximum 5 ranks), though higher existing ranks are retained. Checks with DC 10 or lower automatically succeed if the adjusted bonus reaches +0 or higher.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Know the Enemy',
@@ -558,6 +577,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'The caster communes with the divine to reflect on one creature type encountered within the past day, gaining a +10 insight bonus when making a Knowledge check about that creature.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Lay of the Land',
@@ -587,6 +607,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination spell grants you immediate familiarity with surrounding geography. It provides an insight bonus equal to your caster level (maximum +5) on Knowledge (geography) checks and Survival checks to avoid getting lost within the affected area. Additionally, you can make geography knowledge checks as a trained skill for the spell's duration.",
     source: 'Pathfinder Player Companion: Faiths & Philosophies',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Legend Lore',
@@ -617,6 +638,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell retrieves legendary information about important persons, places, or things. Information quality depends on proximity and knowledge level of the subject. If the subject is at hand, casting takes 1d4x10 minutes. If you know only detailed information, it takes 1d10 days. If you have only rumors to go on, it takes 2d6 weeks. The spell requires continuous focus during casting.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Litany of Sight',
@@ -638,6 +660,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell enables you to perceive invisible creatures and objects within a 30-foot radius. The spell prevents the affected target from becoming the subject of other spells with "litany" in their titles.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Locate Creature',
@@ -672,6 +695,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination works similarly to locate object but targets a known creature instead. The caster rotates and senses the creature's direction and movement. It locates either a specific creature you know or a creature type you have observed within 30 feet previously. Running water blocks detection. The spell fails against targets using mislead, nondetection, or polymorph effects.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Locate Gate',
@@ -703,6 +727,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell allows you to sense the nearest teleportation circle, gate spell, or similar magical effect connecting two locations within range. It detects only permanent or ongoing effects, not instantaneous spells. The spell can be blocked by nondetection (if tied to an object or creature) or dimensional wards like dimensional lock or forbiddance, but not by physical barriers.',
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Locate Object',
@@ -739,6 +764,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell allows you to sense the direction of a well-known or clearly visualized object within range. You can locate general item categories or specific items you have personally observed. The spell fails against lead barriers and cannot locate creatures or objects protected by nondetection.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Locate Portal',
@@ -772,6 +798,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'The spell creates a mental pull directing you toward the nearest active or operable interdimensional gateway within range. Once you approach within 10 feet, you sense its presence but lose directional guidance. The spell neither reveals concealed portals nor assists in activating them.',
     source: 'Pathfinder Campaign Setting: The First World, Realm of the Fey',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Locate Weakness',
@@ -804,6 +831,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'The caster gains the ability to identify opponent vulnerabilities, allowing doubled damage dice rolls on successful critical hits (excluding extra or precision damage).',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Locksight',
@@ -833,6 +861,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination allows the recipient to observe a lock within 60 feet for one full round to determine if it is open, closed, or jammed. Those trained in Disable Device can spend 3 rounds concentrating to assess lock quality (simple, average, good, or superior). Hidden locks remain undetected.',
     source: 'Pathfinder Player Companion: Heroes of the Street',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Mage's Perusal",
@@ -854,6 +883,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "The caster gains partial comprehension of a book's contents equivalent to skimming for one hour. This allows understanding of topics discussed without translating languages, deciphering codes, or memorizing text. Additionally, the caster receives any bonuses the book normally grants from one hour of reading.",
     source: 'Pathfinder Player Companion: Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mark of Obvious Ethics',
@@ -876,6 +906,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination spell places a glowing sigil on a target whose alignment opposes the caster's on at least one axis. Observers can make a Knowledge (religion) check (DC 15) to discern the target's alignment despite any covering. The caster maintains awareness of the target's direction and distance within 100 miles on the same plane.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Meticulous Match',
@@ -905,6 +936,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "The spell enables comparison of two similar items to determine if they are identical, categorical, or unmatched. It can also compare dissimilar items to assess potential relationships, such as a creature's tooth against a bite mark to establish causation.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mind Probe',
@@ -934,6 +966,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination spell grants the caster access to a target's memories and knowledge. The caster can pose one question per round, and the target makes a Bluff check opposed by the caster's Sense Motive modifier to resist providing truthful answers. Successful Bluff checks allow the target to provide false information, or on exceptional success (5+ margin), deliberately mislead the caster.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mindlink',
@@ -965,6 +998,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'The caster establishes a mental connection with a touched creature to rapidly convey substantial complex information in moments. The caster determines what knowledge the target acquires, restricted to information communicable within ten minutes. The information manifests through visual impressions and emotional experiences rather than language-dependent communication.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mirror Sight',
@@ -988,6 +1022,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell enables you to view reflections in distant mirrors or observe specific individuals reflected in any mirror. It functions similarly to scrying but restricts viewing to creatures on your current plane. You can choose from three reflection types: another mirror you know, a familiar person near a mirror, or a known location reflected in a mirror. The spell provides visual information only, though two-way transmission is possible. It works exclusively with intentionally crafted mirrors, not reflective surfaces like pools or shields, and is blocked by anti-scrying effects.',
     source: 'Pathfinder Chronicles: Cities of Golarion',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Moment of Prescience',
@@ -1009,6 +1044,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination effect grants an insight bonus equal to your caster level (maximum +25) to a single attack roll, check, save, or AC against one attack. The user activates it before rolling and can do so even on another's turn. Only one instance can be active simultaneously.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Named Bullet',
@@ -1037,6 +1073,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell imbues ammunition or thrown weapons with supernatural accuracy against a chosen creature type or specific named creature. It negates concealment penalties at close range (30 feet or less) and adds 1 extra damage point per caster level (maximum 20) on successful hits against the target. A greater version is available at higher levels with increased damage (2 points per caster level, maximum 40).',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Nature's Paths",
@@ -1067,6 +1104,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'The spell allows the target to instinctively navigate wilderness terrain as if traveling on improved roads or highways. Up to one additional creature per caster level can benefit. The effect only functions outdoors and does not work in magically altered terrain.',
     source: 'Pathfinder Roleplaying Game Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Object Reading',
@@ -1094,6 +1132,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell allows a caster to perceive psychic impressions left on objects through emotionally or psychically significant events. It provides one piece of information initially, with additional details requiring one round of concentration each. The caster gains a +10 bonus on an Appraise check to determine information gained.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Open Book',
@@ -1126,6 +1165,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination effect exposes both the mind and history of the target, imposing a -2 penalty on saving throws against divinations. Additionally, Diplomacy checks made to gather information about the target receive a bonus equal to half the caster's level, with a maximum bonus of +10.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Page-Bound Epiphany',
@@ -1148,6 +1188,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination spell fills a blank book's pages with information from world libraries. The caster studies these notes for up to 1 round per caster level, then immediately attempts a Knowledge check with a circumstance bonus of +1 for each round spent studying (maximum +10). The magical writing vanishes when the spell concludes.",
     source: 'Pathfinder Player Companion: Pathfinder Society Primer',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Perceive Betrayal',
@@ -1178,6 +1219,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'By wearing a silver circlet anointed with blood, the caster detects traitorous intent toward a single person to whom you defer. The spell alerts when such a creature is within 200 feet and, through concentration, reveals threat intensity as Ill Will, Plotting, or Imminent. Creatures immune to mind-affecting or thought-detecting effects cannot be detected.',
     source: 'Pathfinder Player Companion: Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pierce Disguise',
@@ -1208,6 +1250,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination spell enables you to perceive through magical disguises—including illusions and polymorph effects—that are equivalent to or lower in spell level than this spell. The true form appears as a ghostly overlay on the creature's disguised appearance.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Pierce Facade',
@@ -1239,6 +1282,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell grants recipients enhanced perception when identifying disguises. The caster bestows a +5 insight bonus on Perception checks for this purpose, which improves to +10 at 7th caster level.',
     source: 'Pathfinder Player Companion: Heroes of the High Court',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planar Orientation',
@@ -1272,6 +1316,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination magic helps those from the Material Plane navigate other planes by revealing the direction toward that plane's ruling deity's palace or stronghold, along with a basic vision of their appearance or holy symbol. The spell functions only within the specific plane where cast and fails if the location is magically hidden. It does not work on the Material Plane itself.",
     source: 'Pathfinder Campaign Setting: The First World, Realm of the Fey',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Probe History',
@@ -1302,6 +1347,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell allows the caster to glimpse an alternate reality. If the target fails their Will save, the caster can ask one question and make a Knowledge check with a +5 bonus. The spell provides information as if the caster were acquainted with the target in that alternate reality, though answers may differ slightly from the current world. Once a creature is successfully or unsuccessfully targeted, that same creature cannot be targeted again with this spell.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prognostication',
@@ -1334,6 +1380,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell functions similarly to the standard divination spell but extends its vision to see up to a year and a day into the future. Because of the increased unpredictability of the distant future, prognostication is significantly more cryptic than the already-cryptic divination spell.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prophetic Lore',
@@ -1357,6 +1404,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'This divination spell allows casters to access prophecies about a person, place, item, or event. Results depend on a percentile roll plus caster level (maximum +10), ranging from vague information to accurate single prophecies with clear meanings.',
     source: "Pathfinder Player Companion: Disciple's Doctrine",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prying Eyes',
@@ -1379,6 +1427,7 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       'The caster creates magical orbs equal to 1d4 + caster level that scout and report back. Each eye has 1 hit point, AC 18, flies at 30 feet, and possesses a Perception modifier equal to caster level (maximum +15). They can see 120 feet in all directions and must return to report findings, taking 1 round per hour of recorded images to replay. Eyes cease existing if they travel beyond 1 mile from the caster.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Reading',
@@ -1410,5 +1459,6 @@ export const DIVINATION_BATCH_001: Spell[] = [
     description:
       "This divination spell allows the caster to read a target's surface thoughts and infer information from their appearance, body language, and speech patterns. The caster makes a DC 20 Sense Motive check (modified by caster level) to discover pieces of information about the target, such as age, alignment, class, race, religion, or skills. There is a 70% chance the information is accurate; otherwise, some details may be false.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 ];

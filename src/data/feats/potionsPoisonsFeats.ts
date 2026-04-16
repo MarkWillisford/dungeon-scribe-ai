@@ -9,6 +9,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
       "When crafting a potion, you can designate that its effects activate after a delay of up to 10 rounds after a creature consumes it. Once set, the delay duration cannot be altered. The delayed rounds do not consume any of the potion's actual duration.",
     shortDescription: 'Craft potions whose effects trigger after a delay of up to 10 rounds',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       { type: 'feat', featId: 'brew_potion' },
@@ -26,6 +27,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Alter vishkanya venom to function as targeted dispel magic as a swift action',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['blood_hex'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_arcana', ranks: 7 },
@@ -51,6 +53,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Alter vishkanya venom to grant ghost touch and deal extra damage to incorporeal creatures',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_religion', ranks: 9 },
@@ -75,6 +78,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
       'When crafting a potion, you can infuse a healing spell into a potion that produces a different effect. The resulting potion produces both effects simultaneously upon consumption. The combined spell levels of the cure spell and the other spell used must be 3rd level or less. You must expend both spells as separate potion components and pay double the normal crafting cost.',
     shortDescription: 'Brew potions that combine a cure spell with another spell effect',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       { type: 'feat', featId: 'brew_potion' },
@@ -92,6 +96,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spit venom causes 2d6 bleed damage on a failed save; gain one extra daily use',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'spit_venom' },
@@ -118,6 +123,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
       "When crafting a potion from a spell with a duration of 1 round per caster level, you can extend that duration to 1 minute for the purposes of the resulting potion's effects. This duration extension only applies to potions, not normal spell casting, and cannot be combined with other duration-increasing effects such as Extend Spell metamagic. This requires using a spell slot one level higher than the spell's actual level during crafting.",
     shortDescription: "Extend a potion's round/level duration spells to 1 minute",
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [
       { type: 'feat', featId: 'brew_potion' },
@@ -134,6 +140,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
       'You reflexively excrete poison in response to trauma. When struck by an unarmed strike or natural weapon, you can expend one use of your toxic skin racial ability as an immediate action. This triggers your grippli poison effect against the creature that hit you, as though you had applied the poison to your own body.',
     shortDescription: 'Expend toxic skin as an immediate action when struck to poison the attacker',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'special', description: 'Grippli race with toxic skin alternate racial trait' },
@@ -158,6 +165,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spend a use of toxic skin to craft a simple light weapon coated in grippli poison',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Grippli race with toxic skin alternate racial trait' },
@@ -181,6 +189,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
       'You can produce unusually large amounts of toxic secretions. You gain two additional uses of your toxic skin alternate racial trait per day. This feat can be taken multiple times; each time you take it, you gain two additional daily uses of toxic skin.',
     shortDescription: 'Gain two additional daily uses of the toxic skin alternate racial trait',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Grippli race with toxic skin alternate racial trait' },
@@ -196,6 +205,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
       'You can produce enough venom to cast a web of poison over your hapless victims. When using your Spit Venom ability, you can instead envenom a 5-foot-radius area within 30 feet for 1 round. Any creature entering or starting its turn in this area is exposed to both the poison from Spit Venom and the entanglement effects from Viscous Venom. You also gain one additional daily use of the Spit Venom ability.',
     shortDescription: 'Spit Venom creates a 5-ft-radius poison cloud; gain one extra daily use',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'spit_venom' },
@@ -221,6 +231,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
       'Your toxic blood has the power to destroy both flesh and foul curses. As a swift action, you can modify your vishkanya venom to function as the break enchantment spell, using your character level as the caster level. This dispelling effect works on creatures even if they possess immunity to poison. Normally, vishkanya venom inflicts Dexterity damage instead.',
     shortDescription: 'Alter vishkanya venom to function as break enchantment as a swift action',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['blood_hex'],
     prerequisites: [
       { type: 'feat', featId: 'dispelling_blood' },
@@ -247,6 +258,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Brew potions that can be thrown as splash weapons, releasing an inhalable vapor',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [{ type: 'feat', featId: 'brew_potion' }],
     effects: [],
@@ -261,6 +273,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spit Venom deals acid damage even on saves or to poison-immune targets; gain one extra daily use',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'spit_venom' },
@@ -286,6 +299,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spit Venom entangles targets in addition to poisoning them; gain one extra daily use',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'spit_venom' },
@@ -311,6 +325,7 @@ export const POTIONS_POISONS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Expend two venom uses to coat an area with a forbiddance effect that also exposes intruders to vishkanya venom',
     source: 'Pathfinder Player Companion: Potions & Poisons',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'ghostbane_ichor' },

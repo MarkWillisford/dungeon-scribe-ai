@@ -13,6 +13,7 @@ export const bloodragerDefinitions: ClassChoiceDefinition[] = [
     collectionFilter: { classIds: 'bloodrager' },
     source: 'pf1e-acg',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
     visibility: 'global',
     rev: 1,
   },

@@ -33,6 +33,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 10,
@@ -85,6 +86,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 6,
@@ -137,6 +139,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'flawed',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 10,
@@ -204,6 +207,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
     casterLevel: 5,
@@ -256,6 +260,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
     casterLevel: 5,
@@ -316,6 +321,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 8,
@@ -368,6 +374,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 6,
@@ -420,6 +427,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'flawed',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 8,
@@ -487,6 +495,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ENCHANTMENT }],
     casterLevel: 5,
@@ -547,6 +556,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ENCHANTMENT }],
     casterLevel: 5,
@@ -608,6 +618,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Core Rulebook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.CONJURATION }],
     casterLevel: 5,
@@ -660,6 +671,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
     casterLevel: 3,
@@ -725,6 +737,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ENCHANTMENT }],
     casterLevel: 5,
@@ -777,6 +790,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ENCHANTMENT }],
     casterLevel: 5,
@@ -837,6 +851,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Core Rulebook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 12,
@@ -889,6 +904,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 6,
@@ -941,6 +957,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'flawed',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 12,
@@ -1008,6 +1025,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 5,
@@ -1062,6 +1080,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 5,
@@ -1117,6 +1136,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 8,
@@ -1169,6 +1189,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 6,
@@ -1221,6 +1242,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'flawed',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 8,
@@ -1288,6 +1310,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Core Rulebook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 12,
@@ -1340,6 +1363,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 6,
@@ -1392,6 +1416,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'flawed',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 12,
@@ -1459,6 +1484,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Core Rulebook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [],
     casterLevel: 0,
@@ -1505,6 +1531,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Core Rulebook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 5,
@@ -1557,6 +1584,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 3,
@@ -1609,6 +1637,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'flawed',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 5,
@@ -1676,6 +1705,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 5,
@@ -1728,6 +1758,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 5,
@@ -1788,6 +1819,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ILLUSION }],
     casterLevel: 5,
@@ -1840,6 +1872,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ILLUSION }],
     casterLevel: 5,
@@ -1900,6 +1933,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 5,
@@ -1952,6 +1986,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 5,
@@ -2012,6 +2047,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 5,
@@ -2064,6 +2100,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 5,
@@ -2127,6 +2164,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Core Rulebook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 12,
@@ -2179,6 +2217,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 5,
@@ -2231,6 +2270,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'flawed',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 12,
@@ -2302,6 +2342,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Core Rulebook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
     casterLevel: 5,
@@ -2354,6 +2395,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ABJURATION }],
     casterLevel: 5,
@@ -2421,6 +2463,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Core Rulebook',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.ABJURATION }],
     casterLevel: 12,
@@ -2476,6 +2519,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.ABJURATION }],
     casterLevel: 9,
@@ -2539,6 +2583,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.UNIVERSAL }],
     casterLevel: 17,
@@ -2591,6 +2636,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.UNIVERSAL }],
     casterLevel: 9,
@@ -2652,6 +2698,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 5,
@@ -2712,6 +2759,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.TRANSMUTATION }],
     casterLevel: 5,
@@ -2772,6 +2820,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.MODERATE, school: MagicSchool.UNIVERSAL }],
     casterLevel: 7,
@@ -2824,6 +2873,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.UNIVERSAL }],
     casterLevel: 7,
@@ -2884,6 +2934,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ENCHANTMENT }],
     casterLevel: 5,
@@ -2942,6 +2993,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.ENCHANTMENT }],
     casterLevel: 5,
@@ -3008,6 +3060,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'standard',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 5,
@@ -3060,6 +3113,7 @@ export const iounStonesBatch1: IounStoneDefinition[] = [
     iounVariant: 'cracked',
     source: 'Ultimate Equipment',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
 
     aura: [{ strength: AuraStrength.FAINT, school: MagicSchool.DIVINATION }],
     casterLevel: 5,

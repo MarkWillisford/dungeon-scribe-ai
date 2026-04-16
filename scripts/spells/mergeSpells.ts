@@ -42,7 +42,7 @@ const targetSchool = process.argv.slice(2).find(
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 /**
- * Extract the inner content of the Spell[] array from a TS file.
+ * Extract the inner content of the SpellDefinition[] array from a TS file.
  * Returns everything between the opening `[` of the export and the final `\n];`.
  * Returns null if the file has no array content.
  */
@@ -115,9 +115,9 @@ function buildFinalFile(school: string): string {
     })
     .join('\n\n');
 
-  return `import type { Spell } from '@/types/spells';
+  return `import type { SpellDefinition } from '@/types/spells';
 
-export const ${exportName}: Spell[] = [
+export const ${exportName}: SpellDefinition[] = [
 ${combined}
 ];
 `;

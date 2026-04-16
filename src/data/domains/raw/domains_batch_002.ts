@@ -34,6 +34,7 @@ export const chaosEntropySubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -70,6 +71,7 @@ export const chaosProteanSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -105,6 +107,7 @@ export const chaosRevelrySubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -142,6 +145,7 @@ export const chaosRiotSubdomain: DomainEntry = {
   grantedClassSkills: ['Knowledge (local)'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -178,6 +182,7 @@ export const chaosWhimsySubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -216,6 +221,7 @@ export const charmCaptivationSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -252,6 +258,7 @@ export const charmLoveSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -288,6 +295,7 @@ export const charmLustSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -326,6 +334,7 @@ export const communityCooperationSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -363,6 +372,7 @@ export const communityEducationSubdomain: DomainEntry = {
   grantedClassSkills: ['Knowledge (local)'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -399,6 +409,7 @@ export const communityFamilySubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -435,6 +446,7 @@ export const communityHomeSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -473,6 +485,7 @@ export const darknessLossSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -509,6 +522,7 @@ export const darknessMoonSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -545,6 +559,7 @@ export const darknessNightSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -583,6 +598,7 @@ export const deathMurderSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -620,6 +636,7 @@ export const deathPlagueSubdomain: DomainEntry = {
   grantedClassSkills: ['Knowledge (local)'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -656,6 +673,7 @@ export const deathPsychopompSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -692,6 +710,7 @@ export const deathUndeadSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -730,6 +749,7 @@ export const destructionCatastropheSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -766,6 +786,7 @@ export const destructionHatredSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -802,6 +823,7 @@ export const destructionRageSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -838,6 +860,7 @@ export const destructionTortureSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -877,6 +900,7 @@ export const earthCavesSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

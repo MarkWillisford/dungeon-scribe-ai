@@ -35,6 +35,7 @@ export const travelExplorationSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -71,6 +72,7 @@ export const travelPortalSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -107,6 +109,7 @@ export const travelTradeSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -146,6 +149,7 @@ export const trickeryDomain: DomainEntry = {
   grantedClassSkills: ['Bluff', 'Disguise', 'Stealth'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -187,6 +191,7 @@ export const verminDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -223,6 +228,7 @@ export const voidDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -259,6 +265,7 @@ export const warDomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -296,6 +303,7 @@ export const waterDomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -333,6 +341,7 @@ export const weatherDomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -372,6 +381,7 @@ export const trickeryAmbushSubdomain: DomainEntry = {
   grantedClassSkills: ['Bluff', 'Disguise', 'Stealth'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -409,6 +419,7 @@ export const trickeryDeceptionSubdomain: DomainEntry = {
   grantedClassSkills: ['Bluff', 'Disguise', 'Stealth'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -446,6 +457,7 @@ export const trickeryEspionageSubdomain: DomainEntry = {
   grantedClassSkills: ['Bluff', 'Disguise', 'Stealth'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -483,6 +495,7 @@ export const trickeryGreedSubdomain: DomainEntry = {
   grantedClassSkills: ['Bluff', 'Disguise', 'Stealth'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -520,6 +533,7 @@ export const trickeryInnuendoSubdomain: DomainEntry = {
   grantedClassSkills: ['Bluff', 'Disguise', 'Stealth'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -557,6 +571,7 @@ export const trickeryThieverySubdomain: DomainEntry = {
   grantedClassSkills: ['Bluff', 'Disguise', 'Stealth'],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -595,6 +610,7 @@ export const voidDarkTapestrySubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -631,6 +647,7 @@ export const voidIsolationSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -667,6 +684,7 @@ export const voidStarsSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -705,6 +723,7 @@ export const warBloodSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -741,6 +760,7 @@ export const warDuelsSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -777,6 +797,7 @@ export const warTacticsSubdomain: DomainEntry = {
   ],
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -816,6 +837,7 @@ export const waterFlotsamSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -853,6 +875,7 @@ export const waterFlowingSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -890,6 +913,7 @@ export const waterIceSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -927,6 +951,7 @@ export const waterOceansSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -964,6 +989,7 @@ export const waterRiversSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -1003,6 +1029,7 @@ export const weatherMonsoonSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -1040,6 +1067,7 @@ export const weatherSeasonsSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -1077,6 +1105,7 @@ export const weatherStormsSubdomain: DomainEntry = {
   druidAllowed: true,
   source: 'pf1e-core',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

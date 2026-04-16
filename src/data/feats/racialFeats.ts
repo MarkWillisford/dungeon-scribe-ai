@@ -10,6 +10,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your cleaving power works against creatures larger than you. If you are using Cleave or Great Cleave and you successfully hit a Large or larger foe, you can apply the bonus from those feats to another adjacent foe of any size.',
     shortDescription: 'Cleave works better against Large+ foes',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -27,6 +28,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You negotiate narrow surfaces with ease. You can move at full speed along narrow surfaces, and you do not lose your Dexterity bonus to AC while doing so. You also gain a +4 bonus on Acrobatics checks to balance on narrow surfaces.',
     shortDescription: 'Full speed on narrow surfaces, +4 Acrobatics to balance',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Dwarf' },
@@ -52,6 +54,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You are ferocious at hewing smaller opponents. When using Cleave or Great Cleave, if your initial attack hits, you may take your additional attack against a foe that is two or more size categories smaller than you.',
     shortDescription: 'Cleave against foes 2+ sizes smaller',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -69,6 +72,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You are adept at fighting orcs and other larger humanoid foes. When using Cleave or Great Cleave against a Medium or larger humanoid, you may take your additional attack against any foe adjacent to you.',
     shortDescription: 'Cleave against Medium+ humanoids, hit any adjacent foe',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -87,6 +91,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your cleaving strokes against Large or larger foes leave them reeling. Whenever you use Cleave or Great Cleave to successfully hit a Large or larger foe, that foe takes a -2 penalty on attack rolls against you until the start of your next turn.',
     shortDescription: 'Cleaved Large+ foes take -2 attack penalty vs you',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -106,6 +111,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You can strike foes that were previously out of your reach. When using Cleave or Great Cleave, you may take a 5-foot step between your attacks. You can only do this if you are using a weapon with which you have proficiency.',
     shortDescription: '5-foot step between Cleave attacks',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -127,6 +133,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You share a deep connection with the living world. You gain a +2 bonus on Knowledge (nature) and Survival checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill. In addition, if you rest in a natural setting, you recover hit points as if you had absolute bed rest.',
     shortDescription: '+2 Knowledge (nature) and Survival; better natural rest',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Elf' }],
     effects: [
@@ -155,6 +162,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your sharp eyesight makes you more effective with ranged attacks. If you miss due to concealment when making a ranged attack with a longbow or shortbow (including composite versions), you can reroll the miss chance roll one time to see if you actually hit.',
     shortDescription: 'Reroll miss chance from concealment with bows',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'race', raceName: 'Elf' }],
     effects: [],
@@ -168,6 +176,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You have been specially trained to wield a variety of traditional elven weapons. You have received special training with traditional elven weapons (longswords, rapiers, longbows, composite longbows, shortbows, and composite shortbows). You receive a +2 bonus on combat maneuver checks made to disarm an opponent of one of these weapons, and a +2 bonus to CMD against disarm attempts when wielding one of these weapons.',
     shortDescription: '+2 disarm and CMD vs disarm with elven weapons',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 1 },
@@ -184,6 +193,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your mystic connection with the wilderness enhances your ability to react to threats. While you are in a terrain type you have selected as a favored terrain, you gain a +2 dodge bonus to AC.',
     shortDescription: '+2 dodge bonus to AC in favored terrain',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Elf' },
@@ -209,6 +219,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your mystic connection to the wilderness enhances your spellcasting. While in a terrain type you have selected as a favored terrain, you gain a +2 bonus on caster level checks to overcome spell resistance and a +2 bonus on concentration checks.',
     shortDescription: '+2 caster level and concentration checks in favored terrain',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Elf' },
@@ -227,6 +238,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You can pose a philosophical question so confounding that it distracts your opponent. You can make a Bluff check as a standard action to ask a question so baffling that a living creature within 30 feet is dazed for 1 round (Will save DC = 10 + 1/2 your character level + your CHA modifier negates). This is a mind-affecting, language-dependent effect.',
     shortDescription: 'Bluff check to daze creature for 1 round',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Gnome' },
@@ -243,6 +255,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You can maintain a gnome spell-like ability and cast a spell at the same time. You can maintain concentration on one gnome spell-like ability (dancing lights, ghost sound, prestidigitation, or speak with animals) as a swift action. This allows you to cast another spell in the same round.',
     shortDescription: 'Maintain gnome spell-like ability as swift action',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Gnome' }],
     effects: [],
@@ -256,6 +269,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You have expanded your natural resistance to magic to encompass different types of magic. You gain a +2 racial bonus on saving throws against a school of magic of your choice. Once this choice is made, it cannot be changed.',
     shortDescription: '+2 racial bonus on saves vs chosen school of magic',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Gnome' },
@@ -302,6 +316,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your innate magic is particularly potent. You can use mage hand and prestidigitation as spell-like abilities once per day each. Your caster level for these effects is equal to your character level.',
     shortDescription: 'Gain mage hand and prestidigitation as SLAs 1/day each',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Gnome' },
@@ -321,6 +336,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your keen senses help you uncover the true nature of things. You receive a +2 bonus on Appraise checks to determine the most valuable item visible in a treasure hoard, and on Perception checks to identify a potion by taste.',
     shortDescription: '+2 Appraise for treasure and Perception for potions',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Elf' },
@@ -345,6 +361,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Although you are of mixed heritage, you are closer to your elven relatives and the magic of their race flows freely in your veins. You receive a +2 racial bonus on concentration checks to cast spells defensively. In addition, you receive a +2 bonus on caster level checks made to overcome spell resistance.',
     shortDescription: '+2 concentration (defensive casting) and +2 vs spell resistance',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Half-Elf' }],
     effects: [],
@@ -358,6 +375,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your drow blood is particularly strong. You count as a drow for the purpose of any effects related to race. You gain the ability to use drow poison once per day as a spell-like ability (caster level equals your character level). You also gain darkvision to a range of 60 feet and light blindness.',
     shortDescription: 'Gain drow abilities: drow poison SLA, darkvision 60 ft, light blindness',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Elf' },
@@ -374,6 +392,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You are adept at making use of your varied training. All of your classes are considered favored classes. You gain either +1 hit point or +1 skill point whenever you take a level in any class. Apply this retroactively if you already have levels in classes that were not your favored class.',
     shortDescription: 'All classes count as favored classes',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Elf' },
@@ -394,6 +413,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You deftly share your keen perception with others. As a move action, you can grant all friendly creatures within 30 feet who can see or hear you a +2 bonus on Perception checks for a number of rounds equal to your Wisdom modifier (minimum 1 round).',
     shortDescription: 'Grant allies +2 Perception as a move action',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Elf' },
@@ -412,6 +432,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       "You gain the service of a monstrous companion or mount. You can select from more exotic mounts, including dire wolves, giant eagles, dire boars, and other creatures (GM discretion). You gain the ability to call a mount as if using the paladin's divine bond ability.",
     shortDescription: 'Gain exotic mount options',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Orc' },
@@ -429,6 +450,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Seeing an ally fall in combat fills you with a raging, bloodthirsty fury. Whenever one of your allies is reduced to negative hit points or killed within 30 feet of you, you gain a +2 morale bonus on attack rolls and a +1 morale bonus on damage rolls for 1 round.',
     shortDescription: '+2 attack, +1 damage for 1 round when ally falls',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Orc' },
@@ -460,6 +482,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You were left to fend for yourself from an early age. Whenever you are reduced to 0 or fewer hit points, you gain a +2 morale bonus on attack rolls and a +2 morale bonus on damage rolls until you are healed above 0 hit points or you are killed.',
     shortDescription: '+2 morale attack and damage when at 0 or fewer HP',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Orc' },
@@ -493,6 +516,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       "Your deity blesses your efforts to destroy your enemies' tools of war. When you succeed at a sunder combat maneuver, you may make an Intimidate check to demoralize the creature whose item was sundered as a free action.",
     shortDescription: 'Free Intimidate check when you sunder an item',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Orc' },
@@ -509,6 +533,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your orc blood gives you great willpower when facing death. You gain +2 hit points below 0 at which you must make Constitution checks to stabilize. Additionally, whenever you are reduced to negative hit points, you gain a +2 bonus on Intimidate checks.',
     shortDescription: 'Harder to kill; +2 Intimidate when at negative HP',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Orc' },
@@ -526,6 +551,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You spit in the eye of death. Once per day when you are reduced to 0 or fewer hit points but are not killed, you can spend a use of rage to remain conscious and continue fighting. While raging, you need not make Constitution checks to stabilize while below 0 hit points.',
     shortDescription: 'Spend rage to keep fighting at 0 or fewer HP',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Orc' },
@@ -543,6 +569,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Horrible wounds inflicted on your enemies feed your rage. When you confirm a critical hit while raging, you regain 1 round of rage.',
     shortDescription: 'Regain 1 round of rage on confirmed critical hit',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Orc' },
@@ -559,6 +586,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You feel a surge of hatred when an enemy hurts you. Whenever a creature that you can see hits you with a melee attack, you gain a +1 morale bonus on attack rolls and a +1 morale bonus on damage rolls against that creature for 1 round.',
     shortDescription: '+1 morale attack and damage vs creature that hit you',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Orc' },
@@ -600,6 +628,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       "Seeing an ally rage fills you with fury. Whenever you are adjacent to an ally who is raging, you may enter a similar but lesser state of rage as a free action on your turn. This gives you a +2 morale bonus to Strength and Constitution and a -1 penalty to AC. This rage lasts as long as your ally's rage, plus 1 round.",
     shortDescription: '+2 Str/Con, -1 AC when adjacent to raging ally',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'race', raceName: 'Half-Orc' },
@@ -638,6 +667,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You absorb punishment others could not. Once per day, when a critical hit or sneak attack is confirmed against you, you can halve the total damage from the hit. The damage is rounded down. You must be aware of the attack and not flat-footed.',
     shortDescription: 'Halve damage from one critical/sneak attack per day',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Half-Orc' }],
     effects: [],
@@ -653,6 +683,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your luck takes on new forms every day. You gain an extra use per day of your adaptable luck racial trait. In addition, you may spend 2 uses of your adaptable luck to gain a +3 luck bonus instead of a +2 bonus.',
     shortDescription: 'Extra use of adaptable luck; spend 2 uses for +3 bonus',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Halfling' },
@@ -670,6 +701,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your halfling clumsiness is so endearing that others rush to your defense. Whenever you use your adaptable luck racial trait to gain an AC bonus, adjacent allies also gain a luck bonus to AC equal to half the bonus you gained (minimum +1).',
     shortDescription: 'Share AC luck bonus with adjacent allies',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Halfling' },
@@ -687,6 +719,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You care more about not getting hurt than about hitting your enemies. When you fight defensively or use Combat Expertise, you gain an additional +1 dodge bonus to AC.',
     shortDescription: '+1 additional dodge AC when fighting defensively',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'race', raceName: 'Halfling' }],
     effects: [
@@ -713,6 +746,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You put everything you have into your final strikes. When you are fighting defensively, if you make at least one attack and miss all your attacks, you may reroll one of your attack rolls with a +4 bonus.',
     shortDescription: 'Reroll a missed attack +4 when fighting defensively',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'race', raceName: 'Halfling' },
@@ -730,6 +764,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You have an extra bit of luck about you. You gain an extra use per day of your halfling luck racial trait (or adaptable luck, if you have that alternate racial trait instead).',
     shortDescription: 'Extra use per day of halfling luck',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Halfling' },
@@ -746,6 +781,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Others are amazed by your luck in the face of danger. Once per day, before you roll a saving throw, ability check, or skill check, you may add a +8 bonus on that roll. You must choose to use this ability before the roll is made.',
     shortDescription: '+8 bonus on one save, ability, or skill check 1/day',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Halfling' }],
     effects: [],
@@ -759,6 +795,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your small stature and quick reflexes help you keep your balance on tricky terrain. You gain a +2 racial bonus on Acrobatics checks to keep your balance and a +2 racial bonus on Climb checks.',
     shortDescription: '+2 racial Acrobatics (balance) and Climb',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Halfling' }],
     effects: [
@@ -788,6 +825,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your instinct for self-preservation gives you many advantages. When fighting defensively or using Combat Expertise, you can apply half of the dodge bonus gained from these actions as a bonus on Reflex saves and on your CMD.',
     shortDescription: 'Apply half defensive dodge bonus to Reflex saves and CMD',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'race', raceName: 'Halfling' },
@@ -805,6 +843,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Halflings are famous for their resourcefulness and luck. Once per day, you may make a Sleight of Hand check (DC 10 + item cost in gp, to a maximum DC of 20). If you succeed, you happen to have a common piece of adventuring gear on your person that you did not purchase. The item must be something you could conceivably have.',
     shortDescription: 'Sleight of Hand to produce a useful item 1/day',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Halfling' }],
     effects: [],
@@ -820,6 +859,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You spread your luck to your allies. You may use your Defiant Luck feat to grant the reroll to an adjacent ally instead of yourself. The ally must be able to see and hear you to benefit from this effect.',
     shortDescription: 'Grant Defiant Luck reroll to an adjacent ally',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Human' },
@@ -836,6 +876,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       "Your ability to overcome adversity becomes legendary. Once per day, when you would be reduced to 0 or fewer hit points by a melee attack, you may spend an immediate action to attempt a Will save (DC = attacker's hit roll). If successful, you take no damage from the attack.",
     shortDescription: 'Will save to negate a melee hit 1/day',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Human' },
@@ -854,6 +895,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You can sometimes defy the fates. Once per day, after you roll a natural 1 on a saving throw or a confirmation roll to confirm a critical hit against you, you may reroll that roll. You must take the result of the reroll.',
     shortDescription: 'Reroll a natural 1 on a save or critical confirmation 1/day',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Human' }],
     effects: [],
@@ -867,6 +909,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You progress quickly in your studies, picking up skills and knowledge with ease. When you gain a level in a favored class, you gain both +1 hit point and +1 skill point instead of choosing one or the other.',
     shortDescription: 'Gain both +1 HP and +1 skill point for favored class',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Human' },
@@ -883,6 +926,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your indomitable spirit allows you to resist enchantments. Once per day as an immediate action, you may attempt a new saving throw against a charm or compulsion effect that is currently affecting you. If you succeed, the effect is negated.',
     shortDescription: 'Extra save vs charm/compulsion 1/day',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Human' },
@@ -899,6 +943,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You can figure out how to do almost anything. You gain a +2 bonus on all skill checks for skills in which you have no ranks. This bonus does not apply to Craft, Perform, or Profession checks.',
     shortDescription: '+2 on untrained skill checks (except Craft/Perform/Profession)',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Human' },
@@ -915,6 +960,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your sheer self-assurance cows lesser beings. You may use your Charisma modifier instead of your Strength modifier when making Intimidate checks.',
     shortDescription: 'Use CHA instead of STR for Intimidate',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Human' },
@@ -931,6 +977,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your successes fuel your confidence. Whenever you score a critical hit or succeed on a saving throw against a spell or special ability of a creature with more Hit Dice than you, you gain a +2 morale bonus on a single attack roll, saving throw, skill check, or ability check of your choice within the next minute.',
     shortDescription: '+2 morale bonus on one roll after a critical hit or crucial save',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Human' }],
     effects: [],
@@ -946,6 +993,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Feathered wings sprout from your back. You gain a fly speed of 30 feet with average maneuverability if wearing light armor or no armor and carrying no more than a light load.',
     shortDescription: 'Gain fly speed 30 ft (average) in light/no armor',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Aasimar' },
@@ -963,6 +1011,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your animal companion, mount, or familiar is touched by the celestial realms. It gains the celestial template. This grants it darkvision 60 feet, DR 5/evil (if 5-10 HD) or DR 10/evil (if 11+ HD), resistance to cold, acid, and electricity 5 (10 if 11+ HD), and smite evil 1/day.',
     shortDescription: 'Animal companion/mount/familiar gains celestial template',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Aasimar' },
@@ -979,6 +1028,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'You distill your channeled energy into a powerful blast of force. When you channel energy, you can choose to affect a single target within 30 feet. The target is affected by a bull rush attempt using your channel energy damage as the CMB. A successful Will save negates this effect.',
     shortDescription: 'Channel energy to bull rush a single target',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'race', raceName: 'Aasimar' },
@@ -995,6 +1045,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your angel wings are made of gleaming metal, and can be used as weapons. You gain two wing attacks. These are secondary natural attacks that deal 1d4 points of slashing damage (for a Medium creature).',
     shortDescription: 'Metal wings grant two 1d4 wing attacks',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'race', raceName: 'Aasimar' },
@@ -1014,6 +1065,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'The fiendish blood running through your veins manifests as a thick protective layer beneath your skin, providing you protection. You gain a +2 natural armor bonus to AC.',
     shortDescription: '+2 natural armor bonus to AC',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Tiefling' }],
     effects: [
@@ -1035,6 +1087,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your eyes develop a fiendish gleam, allowing you to see in even magical darkness. You gain darkvision 60 feet. If you already have darkvision, its range increases by 30 feet. You can take this feat twice. The second time you take it, you can see perfectly in darkness of any kind, even that created by deeper darkness.',
     shortDescription: 'Gain or improve darkvision; see in magical darkness (2nd time)',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Tiefling' }],
     effects: [],
@@ -1048,6 +1101,7 @@ export const RACIAL_FEATS: FeatDefinition[] = [
       'Your tail becomes more useful. You can use your tail to retrieve small, stowed objects carried on your person as a swift action.',
     shortDescription: 'Retrieve small stowed objects with tail as swift action',
     source: 'Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'race', raceName: 'Tiefling' }],
     effects: [],

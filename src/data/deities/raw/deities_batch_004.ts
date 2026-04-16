@@ -34,6 +34,7 @@ export const alseta: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -53,6 +54,7 @@ export const erecura: DeityEntry = {
   sacredColors: ['green', 'tan'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -71,6 +73,7 @@ export const matravash: DeityEntry = {
   sacredAnimal: `Fish`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -108,6 +111,7 @@ export const brigh: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -127,6 +131,7 @@ export const feronia: DeityEntry = {
   sacredColors: ['blue', 'yellow'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -162,6 +167,7 @@ export const grandmotherSpider: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -199,6 +205,7 @@ export const naderi: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -236,6 +243,7 @@ export const niviRhombodazzle: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -273,6 +281,7 @@ export const sivanah: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -291,6 +300,7 @@ export const ashukharma: DeityEntry = {
   sacredAnimal: `Goat`,
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

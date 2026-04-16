@@ -10,6 +10,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
     shortDescription:
       'Spiked chain becomes one-handed martial; +2 disarm/trip CMB when two-handed.',
     source: 'Pathfinder Campaign Setting: Book of the Damned',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -34,6 +35,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
       'You can select either an evangelist boon or an exalted boon when gaining boons through Fiendish Obedience; this choice is permanent. You gain a +2 profane bonus on checks with two selected skills.',
     shortDescription: 'Choose evangelist/exalted boon path; +2 profane on two chosen skills.',
     source: 'Pathfinder Campaign Setting: Book of the Damned',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'fiendish_obedience' }],
     effects: [
@@ -56,6 +58,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
     shortDescription:
       "Choose sentinel/exalted boon path; +1 profane damage with deity's favored weapon.",
     source: 'Pathfinder Campaign Setting: Book of the Damned',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'fiendish_obedience' }],
     effects: [
@@ -77,6 +80,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
       "When wielding a spiked chain one-handed, you substitute your Dexterity modifier for Strength when calculating damage. The weapon's reach extends 5 feet beyond normal during your turn. These advantages disappear if you fight with multiple weapons or use a shield (bucklers are excepted).",
     shortDescription: 'DEX to damage with one-handed spiked chain; +5 ft reach on your turn.',
     source: 'Pathfinder Campaign Setting: Book of the Damned',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -104,6 +108,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
       'You gain a gore natural attack that deals 1d6 points of damage. You cannot use your gore attack simultaneously with other natural weapons during a full attack. When combined with manufactured weapon attacks, the gore functions as a secondary attack.',
     shortDescription: 'Gain a 1d6 gore natural attack.',
     source: 'Pathfinder Campaign Setting: Book of the Damned',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 1 },
@@ -128,6 +133,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
       'By performing daily obedience rituals (maximum 1 hour), you gain special abilities based on your fiend patron. At 12+ Hit Dice you gain the first boon, at 16+ HD the second boon, and at 20+ HD the third boon. Unless a specific duration or number of uses per day is listed, boon effects are constant. You can select evangelist, exalted, or sentinel boon categories. Failing to perform daily obedience causes loss of all benefits until the next performance.',
     shortDescription: 'Daily fiendish rituals grant scaling boons at 12, 16, and 20 HD.',
     source: 'Pathfinder Campaign Setting: Book of the Damned',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_religion', ranks: 3 },
@@ -152,6 +158,7 @@ export const BOOK_DAMNED_FEATS: FeatDefinition[] = [
       'When casting a spell that would require an expensive material component, you can substitute a captured soul in its place. The soul must equal the gp cost of the component being replaced. Using a soul damages but does not destroy it, and the soul is released afterward. Creatures whose souls were used this way cannot be restored via raise dead, though reincarnate, resurrection, true resurrection, miracle, and wish may succeed.',
     shortDescription: 'Substitute captured souls for expensive material components.',
     source: 'Pathfinder Campaign Setting: Book of the Damned',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Any evil alignment' },

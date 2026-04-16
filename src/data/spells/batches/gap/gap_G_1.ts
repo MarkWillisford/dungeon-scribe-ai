@@ -1,8 +1,8 @@
 // Gap spells — letter G part 1 (first half alphabetically)
 // Gap metadata: {"letters":"G_1","totalChecked":72,"newSpells":23,"skipped":29}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_G_1: Spell[] = [
+export const GAP_SPELLS_G_1: SpellDefinition[] = [
   {
     name: 'Garden of Peril',
     classLevels: { druid: 2, ranger: 2, 'sorcerer/wizard': 2, summoner: 2, witch: 2 },
@@ -19,6 +19,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell conjures vividly colored poisonous mushrooms that materialize on any solid surface. Starting the following round, the caster can use a move action each round to trigger spore release. Creatures adjacent to or occupying mushroom squares must attempt a Fortitude save or become sickened for 1d4 rounds. Multiple failed saves do not worsen the condition but extend duration by 1d4 rounds per additional failure. Mushrooms are Tiny constructs (AC 7, 30 hp, break DC 20) that do not provide cover. When destroyed, they release one final spore cloud.',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Garrulous Grin',
@@ -34,6 +35,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell plants a seed of supernatural fear deep in a subject\'s mind, causing self-doubt, stuttering, and evasiveness. The target experiences difficulty maintaining eye contact and appears untrustworthy. The affected creature suffers a -4 penalty on Bluff and Diplomacy checks made to convince others of its truthfulness, and on Diplomacy or Intimidate checks made to modify attitudes.',
     source: 'Pathfinder Player Companion: Spymaster\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Genesis',
@@ -50,6 +52,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell enables a caster to establish a personalized demiplane of limited size. The plane initially expands at 1 foot per day in radius until reaching 180 feet. The creator dictates environmental conditions including atmosphere, water presence, temperature, and terrain configuration. The spell prohibits creating living creatures or structures within it. By recasting while inside the demiplane\'s boundaries, the caster can expand it by an additional 60 feet per casting.',
     source: 'Pathfinder Chronicles Campaign Setting',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Genius Avaricious',
@@ -67,6 +70,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell creates one of three effects based on the value of the sacrifice. Corrupted Coin (1,500 gp): a lucky or unlucky coin lasting 1 month that grants a +1 bonus per 3 caster levels to Appraise, Bluff, Craft, and Profession checks, and functions as augury once daily with the caster\'s telepathic influence. Mammon\'s Mantle (3,000 gp): a swallowed coin that provides +1 Charisma per 3 caster levels, immunity to poison, disease, and aging, automatic stabilization below 0 hp, and healing via consuming gold (1 hp per 20 gp); lasts 1 day per caster level. Gold Guardian (6,000 gp): animates a pile of 100,000 coins as a controllable construct for 1 month, losing 100 gp daily thereafter. Swallowing the focus coin causes any offspring to be born as a tiefling.',
     source: 'Pathfinder Adventure Path #30: The Twice-Damned Prince',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gentle Breeze',
@@ -82,6 +86,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'yes (harmless)',
     description: 'This spell creates a light wind directed at the target from a chosen direction. It provides a +2 circumstance bonus on saves against very hot conditions, severe heat, and saves against clouds, vapors, and gases (such as cloudkill, stinking cloud, and inhaled poisons). The spell requires air to be present for casting.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gentle Repose',
@@ -96,6 +101,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'yes (object)',
     description: 'This spell preserves a deceased creature\'s remains from decay, extending the timeframe for resurrection magic. Days spent under the influence of this spell do not count against the time limit for raising the dead. The spell also functions on severed body parts, making transport of remains more practical.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Geomessage',
@@ -111,6 +117,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'The caster produces an invisible magical message of up to 50 words, or alternatively an image, drawing, or diagram on a touched surface. A second casting of geomessage is required to make the message visible. The spell permits optional passphrase protection; if included, the message becomes visible only to those who cast geomessage and speak the correct phrase. Without a passphrase, the message remains invisible solely to other geomessage casters. Standard detection methods like detect magic reveal the message\'s presence but not its content.',
     source: 'Pathfinder Roleplaying Game Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Getaway',
@@ -126,6 +133,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell requires initial casting at a predetermined destination with all affected creatures present within 30 feet. Once active, the caster may trigger teleportation as a swift action, moving all designated creatures (or their remains and gear) within 30 feet to the original casting location. Creatures outside the 30-foot range at the time of triggering remain behind. Selected creatures may choose not to participate. Travel is confined to a single plane.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Geyser',
@@ -143,6 +151,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell creates a column of boiling water that knocks creatures upward and damages them. A failed Reflex save results in 3d6 fire damage plus falling damage; a successful save halves the damage and negates the falling damage. An additional hemispherical spray deals 1d6 fire damage per round to all creatures within a radius equal to half the geyser\'s height.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghost Brand',
@@ -158,6 +167,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'The spell transforms an object into shadowy, intangible matter and links it to the target\'s body via a brand. The object merges with the target\'s flesh and can be retrieved or reabsorbed as a full-round action. When wielded, the item becomes solid and functions normally but cannot be removed, disarmed, or stolen except through the full-round action. If dispelled while inside the body, the object bursts out dealing 3d6 piercing and slashing damage (bypassing damage reduction) plus 1d6 bleed damage.',
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghost Sound',
@@ -174,6 +184,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'This cantrip enables the caster to produce sound effects of varying volume based on caster level, creating as much noise as four normal humans per caster level (maximum 40 humans). The spell creates audio that can resemble various creatures and activities but produces unintelligible speech. Ghost sound can be used to enhance silent image spells and can be made permanent via a permanency spell.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghost Whip',
@@ -189,6 +200,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'yes',
     description: 'Creates an ethereal whip that functions as a ghost touch weapon. The wielder gains proficiency regardless of normal restrictions. Attacks ignore cover through objects, pass through creatures, and treat total cover as 50% concealment. Against incorporeal and undead creatures, the whip inflicts lethal damage and enables drag and reposition maneuvers beyond those available with a standard whip.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghost Wolf',
@@ -204,6 +216,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'The spell creates a Large, quasi-real, wolflike creature made of roiling black smoke that functions similarly to phantom steed. The wolf has a fear aura: creatures with fewer than 6 Hit Dice within 30 feet (except the rider) must make a Will save or become shaken for 1d4 rounds. The rider may direct one bite attack per round as a free action (bite +10, 1d8+6 damage); after attacking, the duration becomes 1 round per caster level. The wolf has AC 18 and 7 hp + 1 per caster level. Its speed scales with caster level (20 ft. per 2 levels, maximum 100 ft.). At caster levels 8, 10, 12, and 14, the mount gains enhanced movement and flight capabilities.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghostbane Dirge',
@@ -218,6 +231,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The target coalesces into a semi-physical form for a short period of time. While subject to the spell, the incorporeal creature takes half damage (50%) from nonmagical attack forms, and full damage from magic weapons, spells, spell-like effects, and supernatural effects.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghostbane Dirge, Mass',
@@ -232,6 +246,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'yes',
     description: 'This spell functions as ghostbane dirge, except it affects multiple incorporeal targets. Each affected incorporeal creature coalesces into a semi-physical form. While subject to the spell, the incorporeal creatures take half damage (50%) from nonmagical attack forms, and full damage from magic weapons, spells, spell-like effects, and supernatural effects.',
     source: 'Pathfinder Roleplaying Game: Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghostly Disguise',
@@ -247,6 +262,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'The caster gains a translucent, ghostly appearance affecting themselves and all equipment. The illusion can incorporate existing disguises, creating ghostly versions of them. The form may display pale green, blue, or violet coloration, or a muted version of normal appearance. An optional floating effect is purely illusory; actual ground contact remains. The spell grants no incorporeal abilities.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghoul Army',
@@ -263,6 +279,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'The caster scatters ghoul teeth to summon undead creatures that obey spoken commands. When ghouls are destroyed during the spell\'s duration, they burst into a spray of rotten flesh and necromantic energy that deals 1d6 points of negative energy damage to all adjacent targets. A destroyed ghast deals double this damage. Fortitude saves reduce this damage by half. Upon spell expiration, remaining creatures crumble apart into dust and blow away.',
     source: 'Pathfinder Campaign Setting: Inner Sea Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gird Ally',
@@ -277,6 +294,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'The spell creates a magical protective field around summoned creatures. Targets gain a deflection bonus to AC equal to 1 + 1 for every 6 caster levels (maximum +4 at 18th level). Summoners can also target their eidolon with this spell.',
     source: 'Pathfinder Player Companion: Monster Summoner\'s Handbook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Glibness',
@@ -291,6 +309,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'This spell grants the caster enhanced persuasive abilities. The character receives a +20 bonus on Bluff checks made to convince another of the truth of their words. This bonus applies only to convincing others of truthfulness, not to feinting in combat, creating diversions, or sending hidden messages. The spell also provides magical protection: if someone attempts to use magic to detect lies or force truthfulness, they must succeed on a caster level check (1d20 + caster level) against DC 15 + the caster\'s level; failure means the magical effect does not work.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Glitterdust',
@@ -307,6 +326,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'A cloud of golden particles covers all creatures and objects in the affected area, causing blindness and revealing invisible creatures. The dust cannot be removed and persists for the spell\'s duration. Blinded creatures may make new saving throws at the end of their turns to end the blindness effect. All affected creatures take a -40 penalty on Stealth checks.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Globe of Tranquil Water',
@@ -322,6 +342,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'Creates a rippling bubble of calm water extending 20 feet from the caster that moves with them. The spell blocks natural and magical precipitation (rain, snow, hail, ice storm), pushes out fog and mist, does not affect temperature or block lightning, treats all water within the radius as calm for swimming checks, prevents water sprays and blasts from dealing damage or moving creatures, and affects water elementals similarly to how antiplant shell affects plant creatures.',
     source: 'Pathfinder Player Companion: Heroes of the Wild',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Gloomblind Bolts',
@@ -339,6 +360,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'yes',
     description: 'The caster produces bolts of negative energy infused with shadow from the Shadow Plane. One bolt can be fired, plus an additional bolt for every four levels beyond 5th (maximum three bolts at 13th level). All bolts must target creatures within 30 feet of each other and require ranged touch attacks to connect. Each bolt inflicts 4d6 damage to living creatures or heals 4d6 to undead creatures. Targets struck must succeed on a Reflex save or become blinded for 1 round.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Glue Seal',
@@ -354,6 +376,7 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no',
     description: 'The spell creates a sticky glue coating on surfaces or items. Creatures in the affected area must make a Reflex save or become entangled. Escape requires a combat maneuver check or Escape Artist check as a standard action. The glued area is difficult terrain. When applied to items, the spell can immobilize objects or prevent separation from connected items. Creatures using sticky items must succeed on saves or become stuck. Sticky armor or clothing imposes a -10 circumstance penalty on Escape Artist and combat maneuver checks related to grappling.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Glyph of Warding',
@@ -368,5 +391,6 @@ export const GAP_SPELLS_G_1: Spell[] = [
     spellResistance: 'no (object); yes (see text)',
     description: 'The spell creates a protective ward on an object or area. The caster sets trigger conditions including passwords, physical characteristics, creature type, or alignment. Two versions exist. Blast Glyph: deals 1d8 damage per 2 caster levels (maximum 5d8) in acid, cold, fire, electricity, or sonic damage to intruders and those within 5 feet (Reflex save for half). Spell Glyph: stores any harmful 3rd-level or lower spell known by the caster.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
 ];

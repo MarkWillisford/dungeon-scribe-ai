@@ -1,8 +1,8 @@
 // Necromancy spells — batch 001
 // Batch metadata: {"school":"necromancy","batchNum":"001","startSpell":"after: Wail of the Banshee","lastSpell":"Wracking Ray","nextSpell":"DONE","nextUrl":null,"spellsInBatch":8}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const NECROMANCY_BATCH_001: Spell[] = [
+export const NECROMANCY_BATCH_001: SpellDefinition[] = [
   {
     name: 'Wall of Blindness/Deafness',
     classLevels: { bard: 4, cleric: 5, sorcerer: 4, wizard: 4, witch: 4 },
@@ -24,6 +24,7 @@ export const NECROMANCY_BATCH_001: Spell[] = [
     description:
       "You create a translucent wall of energy that displays indistinct faces with sewn-shut eyes or ears. Upon creation, you choose whether the wall blinds or deafens. Any creature that passes through the wall must succeed at a Fortitude save or become permanently blinded or deafened (as blindness/deafness). The wall must be vertical, continuous, and unbroken when formed, and need not touch the ground. If the area contains a surface or other spell effect that would break the wall's continuity during casting, the spell fails.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wall of Bone',
@@ -55,6 +56,7 @@ export const NECROMANCY_BATCH_001: Spell[] = [
     description:
       "This spell creates a vertical skeletal wall that functions like wall of stone, but is composed of humanoid bones. The wall has hardness 4 and 7 hit points per inch of thickness per 5-foot section. The wall's thickness is 1 inch per 4 caster levels. Breaking through requires a Strength check (DC 15 + 2 per inch of thickness). Skeletal hands along the wall attempt grapple checks against adjacent creatures, using your caster level as their combat maneuver bonus. A successful grapple deals 1d6 damage and imposes the grappled condition. Each subsequent successful grapple check deals an additional 1d6 damage. The wall's CMD for escape equals 10 + its CMB. The wall cannot pin foes or move.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Waves of Exhaustion',
@@ -77,6 +79,7 @@ export const NECROMANCY_BATCH_001: Spell[] = [
     description:
       "Waves of negative energy cause all living creatures in the spell's area to become exhausted. This spell has no effect on a creature that is already exhausted.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Waves of Fatigue',
@@ -99,6 +102,7 @@ export const NECROMANCY_BATCH_001: Spell[] = [
     description:
       "Waves of negative energy render all living creatures in the spell's area fatigued. This spell has no effect on a creature that is already fatigued or exhausted.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'What Grows Within',
@@ -134,6 +138,7 @@ export const NECROMANCY_BATCH_001: Spell[] = [
     description:
       "You gain a +3 profane bonus on Will saving throws for the spell's duration. Upon first preparation or use of this spell, you become vulnerable to the infected dreams ability. While this spell is active, mind-affecting spells you cast carry a supernatural taint and can infect those who succumb to their effects. When a mind-affecting spell you cast successfully affects a target, that creature must also succeed at a Fortitude saving throw or immediately become afflicted by a lesser version of seeded infestation. Each creature afflicted reduces the spell's remaining duration by 1 round. Lesser seeded infestation causes 1d4 Constitution drain each day with no natural cure. If a creature's Constitution reaches 0, it dies and rises in 1d4 rounds as a seeded creature.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Withdraw Affliction',
@@ -155,6 +160,7 @@ export const NECROMANCY_BATCH_001: Spell[] = [
     description:
       'You push your hand into the subject, then withdraw an affliction from the body of the sufferer as a tangible, slimy mass of flesh. This cures the target as if affected by remove disease, remove curse, or neutralize poison (your choice at time of casting). The extracted affliction can be delivered to another creature via a touch attack, functioning identically to the original affliction with the same saving throw DC.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wither Limb',
@@ -184,6 +190,7 @@ export const NECROMANCY_BATCH_001: Spell[] = [
     description:
       'You cause one limb of the target to shrivel and weaken, dealing 2d6 points of permanent ability damage. This damage can only be restored by powerful magic (heal, limited wish, miracle, regenerate, or wish). The spell can only affect humanoids or monstrous humanoids; the GM may allow similar bipedal creatures at their discretion. Effects stack; multiple applications can wither multiple limbs. A withered arm causes the target to drop held items and lose two-weapon fighting capability. A withered leg halves all movement speeds except fly speeds; withering all legs reduces movement to a 5-foot crawl. A withered wing eliminates fly speeds granted by that wing.',
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Wracking Ray',
@@ -207,5 +214,6 @@ export const NECROMANCY_BATCH_001: Spell[] = [
     description:
       "A sickly greenish-gray ray of negative energy shoots from your palm. You must succeed at a ranged touch attack to hit your target. Upon a successful hit, the creature's muscles and sinews wither and twist, causing painful spasms. The target takes 1d4 points of Strength damage and 1d4 points of Dexterity damage per 3 caster levels (maximum 5d4 each). Ability scores cannot be reduced below 1 by this spell. A successful Fortitude save reduces the damage by half.",
     source: 'd20pfsrd.com',
+    verificationStatus: 'needs_review' as const,
   },
 ];

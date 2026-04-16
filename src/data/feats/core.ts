@@ -10,6 +10,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at leaping, jumping, and flying. You get a +2 bonus on all Acrobatics and Fly skill checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.',
     shortDescription: '+2 bonus on Acrobatics and Fly checks (+4 at 10 ranks)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -38,6 +39,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You often notice things that others might miss. You get a +2 bonus on Perception and Sense Motive skill checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.',
     shortDescription: '+2 bonus on Perception and Sense Motive checks (+4 at 10 ranks)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -66,6 +68,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Choose chaos, evil, good, or law. You can channel your divine energy to affect outsiders that possess this subtype. You may use your channel energy ability to affect outsiders of the chosen alignment subtype. You must make this choice each time you channel energy.',
     shortDescription: 'Channel energy can affect outsiders of a chosen alignment subtype',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel energy' }],
     effects: [],
@@ -87,6 +90,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at working with animals and mounts. You get a +2 bonus on all Handle Animal and Ride skill checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.',
     shortDescription: '+2 bonus on Handle Animal and Ride checks (+4 at 10 ranks)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -115,6 +119,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You possess inherent physical prowess. You get a +2 bonus on Climb and Swim skill checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.',
     shortDescription: '+2 bonus on Climb and Swim checks (+4 at 10 ranks)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -143,6 +148,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your summoned creatures are more powerful and robust. Each creature you conjure with any summon spell gains a +4 enhancement bonus to Strength and Constitution for the duration of the spell that summoned it.',
     shortDescription: 'Summoned creatures gain +4 Str and +4 Con',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -162,6 +168,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are adept at spellcasting when threatened or distracted. You get a +4 bonus on concentration checks made to cast a spell or use a spell-like ability when casting on the defensive or while grappled.',
     shortDescription: '+4 bonus on concentration checks for defensive casting',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -175,6 +182,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Using foul powers of necromancy, you can command undead creatures, making them combatants in your service. As a standard action, you can use one of your uses of channel negative energy to enslave undead within 30 feet. Undead receive a Will save to negate the effect. The DC for this Will save is equal to 10 + 1/2 your cleric level + your Charisma modifier. Undead that fail their saves fall under your control, obeying your commands to the best of their ability, as if under the effects of control undead. Intelligent undead receive a new saving throw each day to resist your command.',
     shortDescription: 'Use channel negative energy to control undead',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel negative energy' }],
     effects: [],
@@ -188,6 +196,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at deceiving others, both with the spoken word and with physical disguises. You get a +2 bonus on all Bluff and Disguise skill checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.',
     shortDescription: '+2 bonus on Bluff and Disguise checks (+4 at 10 ranks)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -216,6 +225,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You have exceptional manual dexterity. You get a +2 bonus on Disable Device and Sleight of Hand skill checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.',
     shortDescription: '+2 bonus on Disable Device and Sleight of Hand checks (+4 at 10 ranks)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -245,6 +255,7 @@ export const CORE_FEATS: FeatDefinition[] = [
     shortDescription:
       '+4 bonus on checks to resist exhaustion, forced march, and environmental effects',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -258,6 +269,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can cast many spells without needing to utilize minor material components. You can cast any spell with a material component costing 1 gp or less without needing that component. The casting of the spell still provokes attacks of opportunity as normal. If the spell requires a material component that costs more than 1 gp, you must have the material component on hand to cast the spell, as normal.',
     shortDescription: 'Cast spells without material components costing 1 gp or less',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -271,6 +283,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can channel divine energy more often. You can channel energy two additional times per day.',
     shortDescription: 'Channel energy 2 additional times per day',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel energy' }],
     effects: [],
@@ -284,6 +297,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can use your ki pool more times per day than most. Your ki pool increases by 2.',
     shortDescription: 'Gain 2 extra ki points',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'ki pool' }],
     effects: [],
@@ -297,6 +311,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can use your lay on hands ability more often. You can use your lay on hands ability two additional times per day.',
     shortDescription: 'Use lay on hands 2 additional times per day',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'lay on hands' }],
     effects: [],
@@ -310,6 +325,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your lay on hands ability adds an extra mercy. Select one additional mercy for which you qualify. When you use lay on hands to heal damage to one target, it also receives the additional effects of this mercy.',
     shortDescription: 'Add one additional mercy to lay on hands',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'lay on hands' },
@@ -327,6 +343,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can use your rage ability more than normal. You can rage for 6 additional rounds per day.',
     shortDescription: 'Rage for 6 additional rounds per day',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'rage' }],
     effects: [],
@@ -340,6 +357,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are faster than most. While you are wearing light or no armor, your base speed increases by 5 feet. You lose the benefits of this feat if you carry a medium or heavy load.',
     shortDescription: '+5 ft. base speed in light or no armor',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -366,6 +384,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are resistant to poisons, diseases, and other maladies. You get a +2 bonus on all Fortitude saving throws.',
     shortDescription: '+2 bonus on Fortitude saves',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -387,6 +406,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can draw upon an inner reserve to resist diseases, poisons, and other grievous harm. Once per day, you may reroll a Fortitude save. You must decide to use this ability before the results are revealed. You must take the second roll, even if it is worse.',
     shortDescription: 'Reroll one Fortitude save per day',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'great_fortitude' }],
     effects: [],
@@ -400,6 +420,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at countering the spells of others using similar spells. When counterspelling, you may use a spell of the same school that is one or more spell levels higher than the target spell.',
     shortDescription: 'Counterspell using a higher-level spell of the same school',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -413,6 +434,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'This feat allows you to acquire a powerful familiar, but only when you could normally acquire a new familiar. You may choose a familiar with an alignment up to one step away on each alignment axis.',
     shortDescription: 'Gain access to more powerful familiar options',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -432,6 +454,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are more resistant to mental effects. You get a +2 bonus on all Will saving throws.',
     shortDescription: '+2 bonus on Will saves',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -453,6 +476,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your clarity of thought allows you to resist mental effects. Once per day, you may reroll a Will save. You must decide to use this ability before the results are revealed. You must take the second roll, even if it is worse.',
     shortDescription: 'Reroll one Will save per day',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'iron_will' }],
     effects: [],
@@ -466,6 +490,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You attract followers to your cause and a companion to join you on your adventures. This feat enables you to attract a loyal cohort and a number of devoted subordinates who assist you. A cohort is generally an NPC with class levels, while followers are typically lower level NPCs.',
     shortDescription: 'Attract a cohort and followers',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'level', minimum: 7 }],
     effects: [],
@@ -479,6 +504,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You have faster reflexes than normal. You get a +2 bonus on all Reflex saving throws.',
     shortDescription: '+2 bonus on Reflex saves',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -500,6 +526,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You have a knack for avoiding danger all around you. Once per day, you may reroll a Reflex save. You must decide to use this ability before the results are revealed. You must take the second roll, even if it is worse.',
     shortDescription: 'Reroll one Reflex save per day',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'lightning_reflexes' }],
     effects: [],
@@ -513,6 +540,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at spellcasting and identifying magic items. You get a +2 bonus on all Spellcraft and Use Magic Device skill checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.',
     shortDescription: '+2 bonus on Spellcraft and Use Magic Device checks (+4 at 10 ranks)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -541,6 +569,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You understand how to use a particular type of martial weapon in combat. You make attack rolls with the selected weapon normally (without the non-proficient penalty).',
     shortDescription: 'No penalty when using a selected martial weapon',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -555,6 +584,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can cast spells even while in a form that cannot normally cast spells. You can complete the verbal and somatic components of spells while using wild shape. You substitute various noises and gestures for the normal verbal and somatic components of a spell. You can also use any material components or focuses you possess, even if such items are melded within your current form.',
     shortDescription: 'Cast spells while in wild shape form',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'WIS', minimum: 13 },
@@ -571,6 +601,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can move across a single square of difficult terrain each round as if it were normal terrain. This ability allows you to take a 5-foot step into difficult terrain.',
     shortDescription: 'Move through 5 ft. of difficult terrain as normal',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'ability_score', ability: 'DEX', minimum: 13 }],
     effects: [],
@@ -584,6 +615,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can easily move over and through obstacles. Whenever you move, you may move through up to 15 feet of difficult terrain each round as if it were normal terrain. The effects of this feat stack with those provided by Nimble Moves (allowing you to move normally through a total of 20 feet of difficult terrain each round).',
     shortDescription: 'Move through 15 ft. of difficult terrain as normal',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -600,6 +632,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at swaying attitudes and intimidating others into your way of thinking. You get a +2 bonus on Diplomacy and Intimidate skill checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.',
     shortDescription: '+2 bonus on Diplomacy and Intimidate checks (+4 at 10 ranks)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -628,6 +661,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are swift of foot. When running, you move five times your normal speed (if wearing medium, light, or no armor and carrying no more than a medium load) or four times your speed (if wearing heavy armor or carrying a heavy load). If you make a jump after a running start, you gain a +4 bonus on your Acrobatics check. While running, you retain your Dexterity bonus to your Armor Class.',
     shortDescription: 'Run at 5x speed and retain Dex bonus to AC while running',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -641,6 +675,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You know how to get along in the wild and how to effectively treat wounds. You get a +2 bonus on all Heal and Survival skill checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.',
     shortDescription: '+2 bonus on Heal and Survival checks (+4 at 10 ranks)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -669,6 +704,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Choose a skill. You are particularly adept at that skill. You get a +3 bonus on all checks involving the chosen skill. If you have 10 or more ranks in that skill, this bonus increases to +6.',
     shortDescription: '+3 bonus on chosen skill (+6 at 10 ranks)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -698,6 +734,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Choose a school of magic. Any spells you cast of that school are more difficult to resist. Add +1 to the Difficulty Class for all saving throws against spells from the school of magic you select.',
     shortDescription: '+1 to the DC of spells from chosen school',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -728,6 +765,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Choose a school of magic to which you have already applied the Spell Focus feat. Any spells you cast of this school are very hard to resist. Add +1 to the Difficulty Class for all saving throws against spells from the school of magic you select. This bonus stacks with the bonus from Spell Focus.',
     shortDescription: 'Additional +1 DC for spells from chosen school (stacks with Spell Focus)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'spell_focus', matchChoiceKey: 'school' }],
     effects: [],
@@ -758,6 +796,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You have mastered a small handful of spells, and can prepare these spells without referencing your spellbooks at all. Each time you take this feat, choose a number of spells that you already know equal to your Intelligence modifier. From that point on, you can prepare these spells without referring to a spellbook.',
     shortDescription: 'Prepare selected spells without a spellbook',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'level', minimum: 1, class: 'Wizard' }],
     effects: [],
@@ -771,6 +810,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "Your spells break through spell resistance more easily than most. You get a +2 bonus on caster level checks (1d20 + caster level) made to overcome a creature's spell resistance.",
     shortDescription: '+2 bonus on caster level checks to overcome spell resistance',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [],
@@ -784,6 +824,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "Your spells break through spell resistance much more easily than most. You get a +2 bonus on caster level checks (1d20 + caster level) made to overcome a creature's spell resistance. This bonus stacks with the one from Spell Penetration.",
     shortDescription: 'Additional +2 to overcome spell resistance (stacks with Spell Penetration)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'spell_penetration' }],
     effects: [],
@@ -797,6 +838,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are good at avoiding unwanted attention and slipping out of bonds. You get a +2 bonus on all Escape Artist and Stealth skill checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.',
     shortDescription: '+2 bonus on Escape Artist and Stealth checks (+4 at 10 ranks)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -825,6 +867,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You have enhanced physical stamina. You gain +3 hit points. For every Hit Die you possess beyond 3, you gain an additional +1 hit point. If you have more than 3 Hit Dice, you gain +1 hit points whenever you gain a Hit Die (such as when you gain a level).',
     shortDescription: '+3 hit points, +1 per level beyond 3rd',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -846,6 +889,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Calling upon higher combatant, you cause undead to flee from the might of your divine energy. You can, as a standard action, use one of your uses of channel positive energy to cause all undead within 30 feet of you to flee, as if panicked. Undead receive a Will save to negate the effect. The DC for this Will save is equal to 10 + 1/2 your cleric level + your Charisma modifier. Undead that fail their saves flee for 1 minute. Intelligent undead receive a new saving throw each round to end the effect. If you use channel energy in this way, it has no other effect (it does not heal or harm nearby creatures).',
     shortDescription: 'Use channel positive energy to make undead flee',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel positive energy' }],
     effects: [],
@@ -859,6 +903,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your channeled energy is harder to resist. Add 2 to the DC of saving throws made to resist the effects of your channel energy ability.',
     shortDescription: '+2 to channel energy DC',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel energy' }],
     effects: [],
@@ -872,6 +917,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can choose whom to affect when you channel energy. When you channel energy, you can choose a number of targets in the area up to your Charisma modifier. These targets are not affected by your channeled energy.',
     shortDescription: 'Exclude targets from channel energy equal to Cha modifier',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -889,6 +935,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "You've learned to use your quickness in place of brute force when performing combat maneuvers. You add your Dexterity bonus to your base attack bonus and size bonus when determining your Combat Maneuver Bonus instead of your Strength bonus.",
     shortDescription: 'Use Dex instead of Str for CMB',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -902,6 +949,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You have learned how to cast spells while wearing armor. As a swift action, reduce the arcane spell failure chance due to the armor you are wearing by 10% for any spells you cast this round.',
     shortDescription: 'Reduce arcane spell failure by 10% as swift action',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'proficiency', proficiency: 'light armor' },
@@ -918,6 +966,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You have mastered the ability to cast spells while wearing armor. As a swift action, reduce the arcane spell failure chance due to the armor you are wearing by 20% for any spells you cast this round.',
     shortDescription: 'Reduce arcane spell failure by 20% as swift action',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'proficiency', proficiency: 'medium armor' },
@@ -935,6 +984,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'As a swift action, you can imbue your weapons with a fraction of your power. For 1 round, your weapons deal +1 damage and are treated as magic for the purpose of overcoming damage reduction. For every five caster levels you possess, this bonus increases by +1, to a maximum of +5 at 20th level.',
     shortDescription: '+1 damage per 5 caster levels, weapons count as magic',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Ability to cast arcane spells' }],
     effects: [
@@ -957,6 +1007,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at wearing light armor. When you wear a type of armor with which you are proficient, the armor check penalty for that armor applies only to Dexterity- and Strength-based skill checks.',
     shortDescription: 'No additional penalties when wearing light armor',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -970,6 +1021,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at wearing medium armor. When you wear a type of armor with which you are proficient, the armor check penalty for that armor applies only to Dexterity- and Strength-based skill checks.',
     shortDescription: 'No additional penalties when wearing medium armor',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'armor_proficiency_light' }],
     effects: [],
@@ -983,6 +1035,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at wearing heavy armor. When you wear a type of armor with which you are proficient, the armor check penalty for that armor applies only to Dexterity- and Strength-based skill checks.',
     shortDescription: 'No additional penalties when wearing heavy armor',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'armor_proficiency_light' },
@@ -999,6 +1052,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "You are skilled at attacking opponents that you cannot clearly perceive. In melee, every time you miss because of concealment (see Combat), you can reroll your miss chance percentile roll one time to see if you actually hit. An invisible attacker gets no advantages related to hitting you in melee. That is, you don't lose your Dexterity bonus to Armor Class, and the attacker doesn't get the usual +2 bonus for being invisible. The invisible attacker's bonuses do still apply for ranged attacks, however. You do not need to make Acrobatics skill checks to move at full speed while blinded.",
     shortDescription: 'Reroll miss chance from concealment, no melee penalties vs invisible',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -1012,6 +1066,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Foes are surprised by your ability to use objects as weapons. You do not suffer any penalties for using an improvised melee weapon. Unarmed opponents are flat-footed against any attacks you make with an improvised melee weapon.',
     shortDescription: 'No penalty with improvised melee weapons, foes flat-footed',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -1025,6 +1080,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can channel your divine energy through a melee weapon you wield. Before you make a melee attack roll, you can choose to spend one of your uses of channel energy as a swift action. If you channel positive energy and you hit an undead creature, that creature takes an amount of additional damage equal to the damage dealt by your channel positive energy ability. If you channel negative energy and you hit a living creature, that creature takes an amount of additional damage equal to the damage dealt by your channel negative energy ability. If your attack misses, the channel energy is still expended with no effect.',
     shortDescription: 'Channel energy through melee weapon for extra damage',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel energy' }],
     effects: [],
@@ -1038,6 +1094,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can strike two adjacent foes with a single swing. As a standard action, you can make a single attack at your full base attack bonus against a foe within reach. If you hit, you deal damage normally and can make an additional attack (using your full base attack bonus) against a foe that is adjacent to the first and also within reach. You can only make one additional attack per round with this feat. When you use this feat, you take a -2 penalty to your Armor Class until your next turn.',
     shortDescription: 'Make additional attack against adjacent foe after hitting',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -1064,6 +1121,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can strike many adjacent foes with a single blow. As a standard action, you can make a single attack at your full base attack bonus against a foe within reach. If you hit, you deal damage normally and can make an additional attack (using your full base attack bonus) against a foe that is adjacent to the previous foe and also within reach. If you hit, you can continue to make attacks against foes adjacent to the previous foe, so long as they are within your reach. You cannot attack an individual foe more than once during this attack action. When you use this feat, you take a -2 penalty to your Armor Class until your next turn.',
     shortDescription: 'Cleave without limit on additional attacks',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -1091,6 +1149,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can increase your defense at the expense of your accuracy. You can choose to take a -1 penalty on melee attack rolls and combat maneuver checks to gain a +1 dodge bonus to your Armor Class. When your base attack bonus reaches +4, and every +4 thereafter, the penalty increases by -1 and the dodge bonus increases by +1. You can only choose to use this feat when you declare that you are making an attack or a full-attack action with a melee weapon. The effects of this feat last until your next turn.',
     shortDescription: 'Trade attack bonus for AC (dodge bonus)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'ability_score', ability: 'INT', minimum: 13 }],
     effects: [
@@ -1121,6 +1180,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can make additional attacks of opportunity. You may make a number of additional attacks of opportunity per round equal to your Dexterity bonus. With this feat, you may also make attacks of opportunity while flat-footed.',
     shortDescription: 'Additional AoOs equal to Dex bonus, AoO while flat-footed',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -1134,6 +1194,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are trained in the art of causing pain. You receive a +4 circumstance bonus on attack rolls made to confirm critical hits.',
     shortDescription: '+4 bonus on rolls to confirm critical hits',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 9 }],
     effects: [],
@@ -1147,6 +1208,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your critical hits cause opponents to bleed profusely. Whenever you score a critical hit with a slashing or piercing weapon, your opponent takes 2d6 points of bleed damage each round on his turn, in addition to the damage dealt by the critical hit. Bleed damage can be stopped by a DC 15 Heal skill check or through any magical healing. The effects of this feat stack with themselves.',
     shortDescription: 'Critical hits cause 2d6 bleed damage',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'critical'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },
@@ -1163,6 +1225,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your critical hits blind your opponents. Whenever you score a critical hit, your opponent is permanently blinded. A successful Fortitude save reduces this to dazzled for 1d4 rounds. The DC of this Fortitude save is equal to 10 + your base attack bonus. This feat has no effect on creatures that do not rely on eyes for sight or creatures with more than two eyes.',
     shortDescription: 'Critical hits permanently blind opponents (Fort negates)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'critical'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },
@@ -1179,6 +1242,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your critical hits cause opponents to slow down. Whenever you score a critical hit, your opponent becomes staggered for 1d4+1 rounds. A successful Fortitude save reduces the duration to 1 round. The DC of this Fortitude save is equal to 10 + your base attack bonus. The effects of this feat do not stack. Additional hits instead reset the duration.',
     shortDescription: 'Critical hits stagger opponents for 1d4+1 rounds',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'critical'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },
@@ -1195,6 +1259,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your critical hits cause opponents to become stunned. Whenever you score a critical hit, your opponent becomes stunned for 1d4 rounds. A successful Fortitude save reduces this to being staggered for 1d4 rounds. The DC of this Fortitude save is equal to 10 + your base attack bonus. This feat has no effect on creatures that are immune to critical hits.',
     shortDescription: 'Critical hits stun opponents for 1d4 rounds',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'critical'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },
@@ -1212,6 +1277,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your critical hits cause opponents to become fatigued. Whenever you score a critical hit, your opponent becomes fatigued. This feat has no additional effect on a fatigued or exhausted creature.',
     shortDescription: 'Critical hits cause fatigue',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'critical'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },
@@ -1228,6 +1294,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your critical hits cause opponents to become exhausted. When you score a critical hit on a foe, your opponent becomes exhausted. This feat has no effect on an exhausted creature. This feat replaces the effect of Tiring Critical.',
     shortDescription: 'Critical hits cause exhaustion',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'critical'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },
@@ -1245,6 +1312,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your critical hits cause opponents to become sickened. Whenever you score a critical hit, your opponent becomes sickened for 1 minute. The effects of this feat do not stack. Additional hits instead reset the duration.',
     shortDescription: 'Critical hits sicken opponents for 1 minute',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat', 'critical'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },
@@ -1261,6 +1329,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "You can make exceptionally deadly ranged attacks by pinpointing a foe's weak spot, at the expense of making the attack less likely to succeed. You can choose to take a -1 penalty on all ranged attack rolls to gain a +2 bonus on all ranged damage rolls. When your base attack bonus reaches +4, and every +4 thereafter, the penalty increases by -1 and the bonus to damage increases by +2. You must choose to use this feat before making an attack roll and its effects last until your next turn. This bonus to damage does not apply to touch attacks or effects that do not deal hit point damage.",
     shortDescription: 'Trade ranged attack bonus for damage',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -1294,6 +1363,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "You can knock arrows and other projectiles off course, preventing them from hitting you. Once per round when you would normally be hit with an attack from a ranged weapon, you may deflect it so that you take no damage from it. You must be aware of the attack and not flat-footed. Attempting to deflect a ranged attack doesn't count as an action. Unusually massive ranged weapons (such as boulders or ballista bolts) and ranged attacks generated by natural attacks or spell effects can't be deflected.",
     shortDescription: 'Deflect one ranged attack per round',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -1310,6 +1380,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "Instead of knocking an arrow or other ranged attack aside, you can catch it in mid-flight. When using the Deflect Arrows feat, you may catch the weapon instead of just deflecting it. Thrown weapons can immediately be thrown back as an attack against the original attacker (even though it isn't your turn) or kept for later use.",
     shortDescription: 'Catch ranged attacks instead of deflecting them',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -1327,6 +1398,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "Your training and target allow you to react swiftly to avoid an opponent's attacks. You gain a +1 dodge bonus to your AC. A condition that makes you lose your Dex bonus to AC also makes you lose the benefits of this feat.",
     shortDescription: '+1 dodge bonus to AC',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'ability_score', ability: 'DEX', minimum: 13 }],
     effects: [
@@ -1342,6 +1414,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can easily move through a dangerous melee. You get a +4 dodge bonus to Armor Class against attacks of opportunity caused when you move out of or within a threatened area. A condition that makes you lose your Dexterity bonus to Armor Class (if any) also makes you lose dodge bonuses.',
     shortDescription: '+4 dodge bonus to AC vs attacks of opportunity from movement',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -1371,6 +1444,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can deftly move up to a foe, strike, and withdraw before he can react. As a full-round action, you can move up to your speed and make a single melee attack without provoking any attacks of opportunity from the target of your attack. You can move both before and after the attack, but you must move at least 10 feet before the attack and the total distance that you move cannot be greater than your speed. You cannot use this ability to attack a foe that is adjacent to you at the start of your turn.',
     shortDescription: 'Move, attack, and move again without provoking from target',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -1389,6 +1463,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can strike out at every foe within reach. When you use the full-attack action, you can give up your regular attacks and instead make one melee attack at your highest base attack bonus against each opponent within reach. You must make a separate attack roll against each opponent. When you use the Whirlwind Attack feat, you also forfeit any bonus or extra attacks granted by other feats, spells, or abilities.',
     shortDescription: 'Attack all foes within reach as a full-attack action',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -1410,6 +1485,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your off-hand weapon while dual-wielding strikes with greater power. Add your Strength bonus to damage rolls made with your off-hand weapon.',
     shortDescription: 'Add full Str bonus to off-hand weapon damage',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -1426,6 +1502,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Choose one type of exotic weapon, such as the spiked chain or whip. You understand how to use that type of exotic weapon in combat, and can use it without penalty.',
     shortDescription: 'No penalty when using a selected exotic weapon',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -1440,6 +1517,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are more accurate at longer ranges. You only suffer a -1 penalty per full range increment between you and your target when using a ranged weapon. Normal: You suffer a -2 penalty per full range increment between you and your target.',
     shortDescription: 'Reduce range increment penalty to -1',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'point_blank_shot' }],
     effects: [],
@@ -1453,6 +1531,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'With one well-placed blow, you leave your target reeling. As a standard action, make a single unarmed melee attack against a foe whose speed is reduced (such as from Scorpion Style). If the attack hits, the target is staggered until the end of your next turn unless it makes a Fortitude saving throw (DC 10 + 1/2 your character level + your Wis modifier). This feat has no effect on targets that are staggered.',
     shortDescription: 'Unarmed strike staggers slowed opponents',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -1470,6 +1549,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "You can take advantage of your opponent's confusion, making multiple attacks. Whenever you use a full-attack action and make at least one unarmed strike, you can make two additional unarmed strikes at your highest base attack bonus. These bonus attacks must be made against a dazed, flat-footed, paralyzed, staggered, stunned, or unconscious foe.",
     shortDescription: 'Two extra unarmed strikes against impaired foes on full attack',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_unarmed_strike' },
@@ -1488,6 +1568,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "Attacks made with your chosen weapon are quite deadly. When using the weapon you selected, your threat range is doubled. This effect doesn't stack with any other effect that expands the threat range of a weapon.",
     shortDescription: 'Double threat range with chosen weapon',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'proficiency', proficiency: 'selected weapon' },
@@ -1505,6 +1586,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "You are skilled at knocking weapons from a foe's grasp. You do not provoke an attack of opportunity when performing a disarm combat maneuver. In addition, you receive a +2 bonus on checks made to disarm a foe. You also receive a +2 bonus to your Combat Maneuver Defense when an opponent tries to disarm you.",
     shortDescription: '+2 to disarm CMB/CMD, no AoO when disarming',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -1542,6 +1624,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "You can knock weapons far from an enemy's grasp. You receive a +2 bonus on checks made to disarm a foe. This bonus stacks with the bonus granted by Improved Disarm. Whenever you successfully disarm an opponent, the weapon lands 15 feet away from its previous wielder, in a random direction.",
     shortDescription: 'Additional +2 to disarm, weapon lands 15 ft. away',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -1573,6 +1656,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at fooling your opponents in combat. You can make a Bluff check to feint in combat as a move action.',
     shortDescription: 'Feint as a move action instead of standard action',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -1589,6 +1673,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at making foes overreact to your attacks. Whenever you successfully feint, your opponent is denied his Dexterity bonus to AC until the beginning of your next turn.',
     shortDescription: 'Successful feint denies Dex to AC until your next turn',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -1607,6 +1692,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at grappling opponents. You do not provoke an attack of opportunity when performing a grapple combat maneuver. In addition, you receive a +2 bonus on checks made to grapple a foe. You also receive a +2 bonus to your Combat Maneuver Defense whenever an opponent tries to grapple you.',
     shortDescription: '+2 to grapple CMB/CMD, no AoO when grappling',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -1644,6 +1730,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Maintaining a grapple is second nature to you. You receive a +2 bonus on checks made to grapple a foe. This bonus stacks with the bonus granted by Improved Grapple. Once you have grappled a creature, maintaining the grapple is a move action. This feat allows you to make two grapple checks each round (to move, harm, or pin your opponent), but you are not required to make two checks.',
     shortDescription: 'Additional +2 grapple, maintain grapple as move action',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -1675,6 +1762,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at pushing your foes around. You do not provoke an attack of opportunity when performing a bull rush combat maneuver. In addition, you receive a +2 bonus on checks made to bull rush a foe. You also receive a +2 bonus to your Combat Maneuver Defense whenever an opponent tries to bull rush you.',
     shortDescription: '+2 to bull rush CMB/CMD, no AoO when bull rushing',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -1713,6 +1801,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your bull rush attacks throw enemies off balance. You receive a +2 bonus on checks made to bull rush a foe. This bonus stacks with the bonus granted by Improved Bull Rush. Whenever you bull rush an opponent, his movement provokes attacks of opportunity from all of your allies (but not you).',
     shortDescription: 'Additional +2 bull rush, pushed foe provokes AoOs',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -1744,6 +1833,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at running over your opponents. You do not provoke an attack of opportunity when performing an overrun combat maneuver. In addition, you receive a +2 bonus on checks made to overrun a foe. You also receive a +2 bonus to your Combat Maneuver Defense whenever an opponent tries to overrun you. Targets of your overrun attempt may not choose to avoid you.',
     shortDescription: '+2 to overrun CMB/CMD, no AoO, targets cannot avoid',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -1782,6 +1872,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your overrun attacks leave foes floundering. You receive a +2 bonus on checks made to overrun a foe. This bonus stacks with the bonus granted by Improved Overrun. Whenever you overrun opponents, they provoke attacks of opportunity if they are knocked prone.',
     shortDescription: 'Additional +2 overrun, prone foes provoke AoOs',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -1813,6 +1904,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at damaging your foes\x27 weapons and armor. You do not provoke an attack of opportunity when performing a sunder combat maneuver. In addition, you receive a +2 bonus on checks made to sunder an item. You also receive a +2 bonus to your Combat Maneuver Defense whenever an opponent tries to sunder your gear.',
     shortDescription: '+2 to sunder CMB/CMD, no AoO when sundering',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -1851,6 +1943,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your devastating strikes cleave through weapons and armor and into their wielders, damaging both item and wielder alike in a single terrific strike. You receive a +2 bonus on checks made to sunder an item. This bonus stacks with the bonus granted by Improved Sunder. Whenever you sunder to destroy a weapon, shield, or suit of armor, any excess damage is applied to the item\x27s wielder.',
     shortDescription: 'Additional +2 sunder, excess damage goes to wielder',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -1882,6 +1975,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at sending your opponents to the ground. You do not provoke an attack of opportunity when performing a trip combat maneuver. In addition, you receive a +2 bonus on checks made to trip a foe. You also receive a +2 bonus to your Combat Maneuver Defense whenever an opponent tries to trip you.',
     shortDescription: '+2 to trip CMB/CMD, no AoO when tripping',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -1919,6 +2013,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can make free attacks on foes that you knock down. You receive a +2 bonus on checks made to trip a foe. This bonus stacks with the bonus granted by Improved Trip. Whenever you successfully trip an opponent, that opponent provokes attacks of opportunity.',
     shortDescription: 'Additional +2 trip, tripped foe provokes AoOs',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -1950,6 +2045,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your quick reflexes allow you to react rapidly to danger. You get a +4 bonus on initiative checks.',
     shortDescription: '+4 bonus on initiative checks',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -1971,6 +2067,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at fighting while unarmed. You are considered to be armed even when unarmed - you do not provoke attacks of opportunity when you attack foes while unarmed. Your unarmed strikes can deal lethal or nonlethal damage, at your choice.',
     shortDescription: 'Considered armed when unarmed, no AoO for unarmed attacks',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -1984,6 +2081,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You know just where to strike to temporarily stun a foe. You must declare that you are using this feat before you make your attack roll (thus, a failed attack roll ruins the attempt). Stunning Fist forces a foe damaged by your unarmed attack to make a Fortitude saving throw (DC 10 + 1/2 your character level + your Wis modifier), in addition to dealing damage normally. A defender who fails this saving throw is stunned for 1 round (until just before your next turn). A stunned character drops everything held, can\x27t take actions, loses any Dexterity bonus to AC, and takes a -2 penalty to AC. You may attempt a stunning attack once per day for every four levels you have attained (but see Special), and no more than once per round. Constructs, oozes, plants, undead, incorporeal creatures, and creatures immune to critical hits cannot be stunned.',
     shortDescription: 'Unarmed strike can stun opponent (Fort negates)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -2002,6 +2100,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your ranged attacks ignore anything but total concealment and cover. Your ranged attacks ignore the AC bonus granted to targets by anything less than total cover, and the miss chance granted to targets by anything less than total concealment. Total cover and total concealment provide their normal benefits against your ranged attacks. In addition, when you shoot or throw ranged weapons at a grappling opponent, you automatically strike at the opponent you have chosen.',
     shortDescription: 'Ignore cover and concealment (except total) on ranged attacks',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 19 },
@@ -2020,6 +2119,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can protect yourself with your shield, even if you use it to attack. When you perform a shield bash, you may still apply the shield\x27s shield bonus to your AC.',
     shortDescription: 'Keep shield bonus to AC when shield bashing',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'shield_proficiency' }],
     effects: [],
@@ -2033,6 +2133,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'In the right hands, your shield is as much an offensive weapon as a defensive one. Any opponents hit by your shield bash are also hit with a free bull rush attack, substituting your attack roll for the combat maneuver check. This bull rush does not provoke an attack of opportunity. Opponents who cannot move back due to a wall or other surface are knocked prone after moving the maximum possible distance.',
     shortDescription: 'Free bull rush on shield bash hit',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_shield_bash' },
@@ -2051,6 +2152,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your mastery of the shield allows you to fight with it without hindrance. You do not suffer any penalties on attack rolls made with a shield while you are wielding another weapon. Add your shield\x27s enhancement bonus to your attack and damage rolls made with the shield as if it was a weapon enhancement bonus.',
     shortDescription: 'No TWF penalty for shield, add enhancement bonus to attacks',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_shield_bash' },
@@ -2070,6 +2172,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can turn nearly any object into a deadly weapon. You do not suffer any penalties for using an improvised weapon. Increase the amount of damage dealt by the improvised weapon by one step (for example, 1d4 becomes 1d6) to a maximum of 1d8 (2d6 if the improvised weapon is two-handed). The improvised weapon has a critical threat range of 19-20, with a critical multiplier of x2.',
     shortDescription: 'No penalty, increased damage die, 19-20 crit range with improvised weapons',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'catch_off_guard' },
@@ -2086,6 +2189,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can strike foes that would normally be out of reach. You can increase the reach of your melee attacks by 5 feet until the end of your turn by taking a -2 penalty to your AC until your next turn. You must decide to use this ability before any attacks are made.',
     shortDescription: '+5 ft. reach at -2 AC until next turn',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 6 }],
     effects: [
@@ -2108,6 +2212,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can fire multiple arrows at a single target. When making a full-attack action with a bow, your first attack fires two arrows. If the attack hits, both arrows hit. Apply precision-based damage (such as sneak attack) and critical hit damage only once for this attack. Damage bonuses from using a composite bow with a high Strength bonus apply to each arrow, as do other damage bonuses, such as a ranger\x27s favored enemy bonus. Damage reduction and resistances apply separately to each arrow.',
     shortDescription: 'First attack in full attack fires two arrows',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 17 },
@@ -2126,6 +2231,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are adept at guiding your mount in combat. Once per round when your mount is hit in combat, you may attempt a Ride check (as an immediate action) to negate the hit. The hit is negated if your Ride check result is greater than the opponent\x27s attack roll.',
     shortDescription: 'Ride check to negate hit on mount once per round',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'skill', skillId: 'ride', ranks: 1 }],
     effects: [],
@@ -2139,6 +2245,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at making ranged attacks while mounted. The penalty you take when using a ranged weapon while mounted is halved: -2 instead of -4 if your mount is taking a double move, and -4 instead of -8 if your mount is running.',
     shortDescription: 'Halve ranged attack penalties while mounted',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'ride', ranks: 1 },
@@ -2155,6 +2262,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'While mounted, you can move, strike at a foe, then continue moving. When you are mounted and use the charge action, you may move and attack as if with a standard charge and then move again (continuing the straight line of the charge). Your total movement for the round can\x27t exceed double your mounted speed. You and your mount do not provoke an attack of opportunity from the opponent that you attack.',
     shortDescription: 'Move before and after a mounted charge attack',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'ride', ranks: 1 },
@@ -2171,6 +2279,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your mounted charges deal a tremendous amount of damage. When mounted and using the charge action, you deal double damage with a melee weapon (or triple damage with a lance).',
     shortDescription: 'Double damage on mounted charge (triple with lance)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'ride', ranks: 1 },
@@ -2188,6 +2297,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'While mounted, you can ride down opponents and trample them under your mount. When you attempt to overrun an opponent while mounted, your target may not choose to avoid you. Your mount may make one hoof attack against any target you knock down, gaining the standard +4 bonus on attack rolls against prone targets.',
     shortDescription: 'Mounted overrun targets cannot avoid, mount gets hoof attack',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'ride', ranks: 1 },
@@ -2204,6 +2314,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at unseating your opponents while mounted. When charging an opponent while mounted and wielding a lance, resolve the attack as normal. If it hits, you may immediately make a free bull rush attempt in addition to the normal damage. If successful, the target is knocked off his horse and lands prone in a space adjacent to his mount that is directly away from you.',
     shortDescription: 'Free bull rush to unseat mounted opponent on lance charge',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'skill', skillId: 'ride', ranks: 1 },
@@ -2222,6 +2333,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your attacks are capable of penetrating the defenses of some combatants. Your attacks with weapons selected with Weapon Focus ignore up to 5 points of damage reduction. This feat does not apply to damage reduction without a type (such as DR 10/-).',
     shortDescription: 'Ignore up to 5 points of DR with focused weapon',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_focus' },
@@ -2239,6 +2351,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your attacks penetrate the defenses of nearly any foe. Your attacks with weapons selected with Weapon Focus ignore up to 10 points of damage reduction. This amount is reduced to 5 points for damage reduction without a type (such as DR 10/-).',
     shortDescription: 'Ignore up to 10 points of DR (5 for DR/- )',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'penetrating_strike' },
@@ -2257,6 +2370,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can target the weak points in your opponent\x27s armor. As a standard action, make a single ranged attack. The target does not gain any armor, natural armor, or shield bonuses to its Armor Class. You do not need to make a touch attack to ignore these bonuses.',
     shortDescription: 'Single ranged attack ignores armor, natural armor, and shield bonuses',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 19 },
@@ -2276,6 +2390,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are especially accurate when making ranged attacks against close targets. You get a +1 bonus on attack and damage rolls with ranged weapons at ranges of up to 30 feet.',
     shortDescription: '+1 attack and damage with ranged weapons within 30 ft.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -2314,6 +2429,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are adept at firing ranged attacks into melee. You can shoot or throw ranged weapons at an opponent engaged in melee without taking the standard -4 penalty on your attack roll.',
     shortDescription: 'No -4 penalty for shooting into melee',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'point_blank_shot' }],
     effects: [],
@@ -2327,6 +2443,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can make exceptionally deadly melee attacks by sacrificing accuracy for strength. You can choose to take a -1 penalty on all melee attack rolls and combat maneuver checks to gain a +2 bonus on all melee damage rolls. This bonus to damage is increased by half (+50%) if you are making an attack with a two-handed weapon, a one handed weapon using two hands, or a primary natural weapon that adds 1-1/2 times your Strength modifier on damage rolls. This bonus to damage is halved (-50%) if you are making an attack with an off-hand weapon or secondary natural weapon. When your base attack bonus reaches +4, and every 4 points thereafter, the penalty increases by -1 and the bonus to damage increases by +2.',
     shortDescription: 'Trade melee attack bonus for damage',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },
@@ -2360,6 +2477,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can draw weapons faster than most. You can draw a weapon as a free action instead of as a move action. You can draw a hidden weapon (see the Sleight of Hand skill) as a move action. A character who has selected this feat may throw weapons at his full normal rate of attacks (much like a character with a bow). Alchemical items, potions, scrolls, and wands cannot be drawn quickly using this feat.',
     shortDescription: 'Draw weapon as free action',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -2373,6 +2491,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Choose a type of crossbow (hand, light, heavy) or a single type of one-handed or two-handed firearm that you are proficient with. You can reload your chosen crossbow or firearm more quickly than normal. Reloading a hand crossbow or one-handed firearm is a free action that provokes attacks of opportunity. Reloading a light crossbow or two-handed firearm is a move action that provokes attacks of opportunity. Reloading a heavy crossbow is a standard action that provokes attacks of opportunity.',
     shortDescription: 'Reduce reload time for chosen crossbow or firearm',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'proficiency', proficiency: 'selected weapon' }],
     effects: [],
@@ -2387,6 +2506,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can make an exceptionally swift extra ranged attack. When making a full-attack action with a ranged weapon, you can fire one additional time this round at your highest bonus. All of your attack rolls take a -2 penalty when using Rapid Shot.',
     shortDescription: 'Extra ranged attack at -2 to all attacks during full attack',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -2412,6 +2532,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can perform an unarmed strike that greatly hampers your target\x27s movement. To use this feat, you must make a single unarmed attack as a standard action. If this unarmed attack hits, you deal damage normally and the target\x27s base land speed is reduced to 5 feet for a number of rounds equal to your Wisdom modifier unless it makes a Fortitude saving throw (DC 10 + 1/2 your character level + your Wis modifier).',
     shortDescription: 'Unarmed strike reduces target speed to 5 ft.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'improved_unarmed_strike' }],
     effects: [],
@@ -2425,6 +2546,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can move, fire a ranged weapon, and move again before your foes can react. As a full-round action, you can move up to your speed and make a single ranged attack at any point during your movement. You can move both before and after the attack, provided that your total distance moved is not greater than your speed.',
     shortDescription: 'Move before and after ranged attack as full-round action',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -2444,6 +2566,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are trained in how to properly use a shield. When you use a shield (except a tower shield), the shield\x27s armor check penalty only applies to Strength- and Dexterity-based skill checks.',
     shortDescription: 'Properly use shields without additional penalties',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -2457,6 +2580,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are trained in how to properly use a tower shield. When you use a tower shield, the shield\x27s armor check penalty only applies to Strength- and Dexterity-based skill checks.',
     shortDescription: 'Properly use tower shields without additional penalties',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'shield_proficiency' }],
     effects: [],
@@ -2470,6 +2594,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at deflecting blows with your shield. Increase the AC bonus granted by any shield you are using by 1.',
     shortDescription: '+1 to shield AC bonus',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'shield_proficiency' },
@@ -2494,6 +2619,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at deflecting blows with your shield. Increase the AC bonus granted by any shield you are using by 1. This bonus stacks with the bonus granted by Shield Focus.',
     shortDescription: 'Additional +1 to shield AC bonus (stacks with Shield Focus)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'shield_focus' },
@@ -2520,6 +2646,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can stop foes that try to move past you. When a foe provokes an attack of opportunity due to moving through your adjacent squares, you can make a combat maneuver check as your attack of opportunity. If successful, the enemy cannot move for the rest of his turn. An enemy can still take the rest of his action, but cannot move. This feat also applies to any creature that attempts to move from a square that is adjacent to you if such movement provokes an attack of opportunity.',
     shortDescription: 'CMB check as AoO to halt enemy movement',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'combat_reflexes' }],
     effects: [],
@@ -2533,6 +2660,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can close the distance when a foe tries to move away. Whenever an adjacent foe attempts to take a 5-foot step away from you, you may also make a 5-foot step as an immediate action so long as you end up adjacent to the foe that triggered this ability. If you take this step, you cannot take a 5-foot step during your next turn. If you take an action to move during your next turn, subtract 5 feet from your total movement.',
     shortDescription: 'Take 5-ft. step as immediate action when adjacent foe 5-ft. steps away',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
@@ -2546,6 +2674,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can strike at foes that attack you using their superior reach, by targeting their limbs or weapons as they come at you. You can ready an action to make a melee attack against any foe that attacks you in melee, even if the foe is outside of your reach.',
     shortDescription: 'Ready action to attack foes with reach that attack you',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 11 }],
     effects: [],
@@ -2559,6 +2688,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are used to throwing things you have on hand. You do not suffer any penalties for using an improvised ranged weapon. You receive a +1 circumstance bonus on attack rolls made with thrown splash weapons.',
     shortDescription: 'No penalty for improvised ranged weapons, +1 with splash weapons',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -2572,6 +2702,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can fight with a weapon wielded in each of your hands. You can make one extra attack each round with the secondary weapon. The penalty for your primary hand lessens by 2 and the one for your off hand lessens by 6.',
     shortDescription: 'Reduce two-weapon fighting penalties',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'ability_score', ability: 'DEX', minimum: 15 }],
     effects: [],
@@ -2585,6 +2716,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at fighting with two weapons. In addition to the standard single extra attack you get with an off-hand weapon, you get a second attack with it, albeit at a -5 penalty.',
     shortDescription: 'Gain second off-hand attack at -5 penalty',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 17 },
@@ -2602,6 +2734,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are incredibly skilled at fighting with two weapons at the same time. You get a third attack with your off-hand weapon, albeit at a -10 penalty.',
     shortDescription: 'Gain third off-hand attack at -10 penalty',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 19 },
@@ -2620,6 +2753,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are skilled at defending yourself while dual-wielding. When wielding a double weapon or two weapons (not including natural weapons or unarmed strikes), you gain a +1 shield bonus to your AC. When you are fighting defensively or using the total defense action, this shield bonus increases to +2.',
     shortDescription: '+1 shield bonus to AC when dual-wielding (+2 when fighting defensively)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -2649,6 +2783,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Striking with both of your weapons simultaneously, you can use them to deliver devastating wounds. If you hit an opponent with both your primary hand and your off-hand weapon, you deal an additional 1d10 points of damage plus 1-1/2 times your Strength modifier. You can only deal this additional damage once each round.',
     shortDescription: '1d10 + 1.5x Str extra damage when hitting with both weapons',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 17 },
@@ -2668,6 +2803,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You make a single attack that deals significantly more damage than normal. When you use the attack action, you can make one attack at your highest base attack bonus that deals additional damage. Roll the weapon\x27s damage dice for the attack twice and add the results together before adding bonuses from Strength, weapon abilities (such as flaming), precision-based damage, and other damage bonuses. These extra weapon damage dice are not multiplied on a critical hit, but are added to the total.',
     shortDescription: 'Roll weapon damage dice twice on a single attack action',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'bab', minimum: 6 }],
     effects: [],
@@ -2681,6 +2817,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can make a single attack that deals a large amount of damage. When you use the attack action, you can make one attack at your highest base attack bonus that deals additional damage. Roll the weapon\x27s damage dice for the attack three times and add the results together before adding bonuses from Strength, weapon abilities (such as flaming), precision-based damage, and other damage bonuses. These extra weapon damage dice are not multiplied on a critical hit, but are added to the total.',
     shortDescription: 'Roll weapon damage dice three times on a single attack action',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'vital_strike' },
@@ -2697,6 +2834,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can make a single attack that deals incredible damage. When you use the attack action, you can make one attack at your highest base attack bonus that deals additional damage. Roll the weapon\x27s damage dice for the attack four times and add the results together before adding bonuses from Strength, weapon abilities (such as flaming), precision-based damage, and other damage bonuses. These extra weapon damage dice are not multiplied on a critical hit, but are added to the total.',
     shortDescription: 'Roll weapon damage dice four times on a single attack action',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_vital_strike' },
@@ -2714,6 +2852,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are trained in using your agility in melee combat, as opposed to brute strength. With a light weapon, elven curve blade, rapier, whip, or spiked chain made for a creature of your size category, you may use your Dexterity modifier instead of your Strength modifier on attack rolls. If you carry a shield, its armor check penalty applies to your attack rolls.',
     shortDescription: 'Use Dex instead of Str on attack rolls with light weapons',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -2727,6 +2866,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Choose one type of weapon. You can also choose unarmed strike or grapple (or ray, if you are a spellcaster) as your weapon for the purposes of this feat. You are especially good at using this weapon. You gain a +1 bonus on all attack rolls you make using the selected weapon.',
     shortDescription: '+1 attack bonus with chosen weapon',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'proficiency', proficiency: 'selected weapon' },
@@ -2759,6 +2899,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Choose one type of weapon (including unarmed strike or grapple) for which you have already selected Weapon Focus. You are a master at using this weapon. You gain a +1 bonus on attack rolls you make using the selected weapon. This bonus stacks with other bonuses on attack rolls, including the one from Weapon Focus.',
     shortDescription: 'Additional +1 attack with chosen weapon (stacks with Weapon Focus)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_focus', matchChoiceKey: 'weapon' },
@@ -2792,6 +2933,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Choose one type of weapon (including unarmed strike or grapple) for which you have already selected the Weapon Focus feat. You deal extra damage when using this weapon. You gain a +2 bonus on all damage rolls you make using the selected weapon.',
     shortDescription: '+2 damage with chosen weapon',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'proficiency', proficiency: 'selected weapon' },
@@ -2825,6 +2967,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Choose one type of weapon (including unarmed strike or grapple) for which you possess the Weapon Specialization feat. Your attacks with the chosen weapon are more devastating than normal. You gain a +2 bonus on all damage rolls you make using the selected weapon. This bonus stacks with other bonuses on damage rolls, including the one from Weapon Specialization.',
     shortDescription: 'Additional +2 damage with chosen weapon (stacks with Weapon Specialization)',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'proficiency', proficiency: 'selected weapon' },
@@ -2860,6 +3003,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your erratic movements make it difficult for enemies to pinpoint your location. If you move more than 5 feet this turn, you gain 20% concealment for 1 round.',
     shortDescription: '20% concealment when moving more than 5 ft.',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 15 },
@@ -2877,6 +3021,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'The speed at which you move makes it nearly impossible for opponents to strike you. If you take two or more actions to move in a turn, you gain 50% concealment for 1 round.',
     shortDescription: '50% concealment when taking two or more move actions',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 17 },
@@ -2895,6 +3040,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You are trained in the use of basic weapons. You make attack rolls with simple weapons without penalty.',
     shortDescription: 'No penalty when using simple weapons',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [],
@@ -2909,6 +3055,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can increase the power of your spells, causing them to deal more damage. All variable, numeric effects of an empowered spell are increased by half including bonuses to those dice rolls. Saving throws and opposed rolls are not affected, nor are spells without random variables. An empowered spell uses up a spell slot two levels higher than the spell\x27s actual level.',
     shortDescription: 'Increase variable numeric effects by 50%, uses +2 spell level slot',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -2922,6 +3069,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can increase the range of your spells. You can alter a spell with a range of close, medium, or long to increase its range by 100%. An enlarged spell with a range of close now has a range of 50 ft. + 5 ft./level, while medium-range spells have a range of 200 ft. + 20 ft./level and long-range spells have a range of 800 ft. + 80 ft./level. An enlarged spell uses up a spell slot one level higher than the spell\x27s actual level. Spells whose ranges are not defined by distance, as well as spells whose ranges are not close, medium, or long, do not benefit from this feat.',
     shortDescription: 'Double spell range, uses +1 spell level slot',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -2935,6 +3083,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can make your spells last twice as long. An extended spell lasts twice as long as normal. A spell with a duration of concentration, instantaneous, or permanent is not affected by this feat. An extended spell uses up a spell slot one level higher than the spell\x27s actual level.',
     shortDescription: 'Double spell duration, uses +1 spell level slot',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -2948,6 +3097,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can cast a spell as if it were a higher level. A heightened spell has a higher spell level than normal (up to a maximum of 9th level). Unlike other metamagic feats, Heighten Spell actually increases the effective level of the spell that it modifies. All effects dependent on spell level (such as saving throw DCs and ability to penetrate a lesser globe of invulnerability) are calculated according to the heightened level. The heightened spell is as difficult to prepare and cast as a spell of its effective level.',
     shortDescription: 'Cast spell as higher level, increasing DC and other level-dependent effects',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -2961,6 +3111,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your spells have the maximum possible effect. All variable, numeric effects of a spell modified by this feat are maximized. Saving throws and opposed rolls are not affected, nor are spells without random variables. A maximized spell uses up a spell slot three levels higher than the spell\x27s actual level. An empowered, maximized spell gains the separate benefits of each feat: the maximum result plus half the normally rolled result.',
     shortDescription: 'All variable numeric effects maximized, uses +3 spell level slot',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -2974,6 +3125,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can cast spells in a fraction of the normal time. Casting a quickened spell is a swift action. You can perform another action, even casting another spell, in the same round as you cast a quickened spell. A spell whose casting time is more than 1 round or 1 full-round action cannot be quickened. A quickened spell uses up a spell slot four levels higher than the spell\x27s actual level. Casting a quickened spell doesn\x27t provoke an attack of opportunity.',
     shortDescription: 'Cast spell as swift action, uses +4 spell level slot',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -2987,6 +3139,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can cast your spells without making any sound. A silent spell can be cast with no verbal components. Spells without verbal components are not affected. A silent spell uses up a spell slot one level higher than the spell\x27s actual level.',
     shortDescription: 'Cast spell without verbal components, uses +1 spell level slot',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -3000,6 +3153,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can cast spells without moving. A stilled spell can be cast with no somatic components. Spells without somatic components are not affected. A stilled spell uses up a spell slot one level higher than the spell\x27s actual level.',
     shortDescription: 'Cast spell without somatic components, uses +1 spell level slot',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -3013,6 +3167,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can increase the area of your spells. You can alter a burst, emanation, or spread-shaped spell to increase its area. Any numeric measurements of the spell\x27s area increase by 100%. A widened spell uses up a spell slot three levels higher than the spell\x27s actual level. Spells that do not have an area of one of these four sorts are not affected by this feat.',
     shortDescription: 'Double spell area, uses +3 spell level slot',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -3027,6 +3182,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can create magic potions. You can create a potion of any 3rd-level or lower spell that you know and that targets one or more creatures or objects. Brewing a potion takes 2 hours if its base price is 250 gp or less, otherwise brewing a potion takes 1 day for each 1,000 gp in its base price. When you create a potion, you set the caster level, which must be sufficient to cast the spell in question and no higher than your own level. To brew a potion, you must use up raw materials costing one half this base price.',
     shortDescription: 'Create potions of 3rd-level or lower spells',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [{ type: 'caster_level', minimum: 3 }],
     effects: [],
@@ -3040,6 +3196,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can create magic armor, shields, and weapons. You can create magic weapons, armor, or shields. Enhancing a weapon, suit of armor, or shield takes 1 day for each 1,000 gp in the price of its magical features. To enhance a weapon, suit of armor, or shield, you must use up raw materials costing half of this total price.',
     shortDescription: 'Create magic weapons, armor, and shields',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [{ type: 'caster_level', minimum: 5 }],
     effects: [],
@@ -3053,6 +3210,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can create magic rods. You can create magic rods. Crafting a rod takes 1 day for each 1,000 gp in its base price. To craft a rod, you must use up raw materials costing half of its base price.',
     shortDescription: 'Create magic rods',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [{ type: 'caster_level', minimum: 9 }],
     effects: [],
@@ -3066,6 +3224,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can create magic staves. You can create any staff whose prerequisites you meet. Crafting a staff takes 1 day for each 1,000 gp in its base price. To craft a staff, you must use up raw materials costing half of its base price.',
     shortDescription: 'Create magic staves',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [{ type: 'caster_level', minimum: 11 }],
     effects: [],
@@ -3079,6 +3238,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can create magic wands. You can create a wand of any 4th-level or lower spell that you know. Crafting a wand takes 1 day for each 1,000 gp in its base price. To craft a wand, you must use up raw materials costing half of this base price.',
     shortDescription: 'Create wands of 4th-level or lower spells',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [{ type: 'caster_level', minimum: 5 }],
     effects: [],
@@ -3092,6 +3252,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can create wondrous items, a type of magic item. You can create a wide variety of magic wondrous items. Crafting a wondrous item takes 1 day for each 1,000 gp in its price. To create a wondrous item, you must use up raw materials costing half of its base price.',
     shortDescription: 'Create wondrous items',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [{ type: 'caster_level', minimum: 3 }],
     effects: [],
@@ -3105,6 +3266,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can create magic rings. You can create magic rings. Crafting a ring takes 1 day for each 1,000 gp in its base price. To craft a ring, you must use up raw materials costing half of its base price.',
     shortDescription: 'Create magic rings',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [{ type: 'caster_level', minimum: 7 }],
     effects: [],
@@ -3118,6 +3280,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can create magic scrolls. You can create a scroll of any spell that you know. Scribing a scroll takes 2 hours if its base price is 250 gp or less, otherwise scribing a scroll takes 1 day for each 1,000 gp in its base price. To scribe a scroll, you must use up raw materials costing half of this base price.',
     shortDescription: 'Create magic scrolls',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['item_creation'],
     prerequisites: [{ type: 'caster_level', minimum: 1 }],
     effects: [],
@@ -3132,6 +3295,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       "You are especially hard to kill. Not only do your wounds automatically stabilize when grievously injured, but you can remain conscious and continue to act even at death's door. When your hit point total is below 0, but you are not dead, you automatically stabilize. You do not need to make a Constitution check each round to avoid losing additional hit points. You may choose to act as if you are disabled, rather than dying. You must make this decision as soon as you are reduced to negative hit points (even if it isn't your turn). If you do not choose to act as if you are disabled, you immediately fall unconscious. When using this feat, you are staggered. You can take a move action without further injuring yourself, but if you perform any standard action (or any other action deemed as strenuous, including some swift actions, such as casting a quickened spell) you take 1 point of damage after completing the act. If your negative hit points equal or exceed your Constitution score, you immediately die.",
     shortDescription: 'Auto-stabilize below 0 HP, can act while disabled',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'feat', featId: 'endurance' }],
     effects: [],
@@ -3145,6 +3309,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can kill with a single strike. As a standard action, make a single attack with a melee weapon. If the attack hits, you deal double damage. In addition, the target takes 1 point of Constitution bleed damage. The additional damage and bleed is not multiplied on a critical hit.',
     shortDescription: 'Single attack for double damage + 1 Con bleed vs stunned/flat-footed',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'dazzling_display' },
@@ -3164,6 +3329,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your skill with your favored weapon can frighten enemies. While wielding the weapon in which you have Weapon Focus, you can perform a bewildering show of prowess as a full-round action. Make an Intimidate check to demoralize all foes within 30 feet who can see your display.',
     shortDescription: 'Intimidate all foes within 30 ft. with weapon display',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'feat', featId: 'weapon_focus' }],
     effects: [],
@@ -3177,6 +3343,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your skill with your chosen weapon leaves opponents unable to defend themselves if you strike them when their defenses are already compromised. Any shaken, frightened, or panicked opponent hit by you this round is flat-footed to your attacks until the end of your next turn. This includes any additional attacks you make this round.',
     shortDescription: 'Shaken/frightened foes you hit become flat-footed',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'dazzling_display' },
@@ -3194,6 +3361,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your training makes it difficult for enemy spellcasters to safely cast spells near you. The DC to cast spells defensively increases by +4 for all enemies that are within your threatened area.',
     shortDescription: '+4 to defensive casting DC for enemies in your threatened area',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'level', minimum: 6, class: 'Fighter' }],
     effects: [],
@@ -3207,6 +3375,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'You can strike at enemy spellcasters who fail to cast defensively when within your threatened area. Enemies in your threatened area that fail their checks to cast spells defensively provoke attacks of opportunity from you.',
     shortDescription: 'Failed defensive casting provokes AoO from you',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'disruptive' },
@@ -3223,6 +3392,7 @@ export const CORE_FEATS: FeatDefinition[] = [
       'Your critical hits cause two additional effects. When you score a critical hit, you can apply the effects of two critical feats in addition to the damage dealt.',
     shortDescription: 'Apply two critical feat effects on a critical hit',
     source: 'Core Rulebook',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'critical_focus' },

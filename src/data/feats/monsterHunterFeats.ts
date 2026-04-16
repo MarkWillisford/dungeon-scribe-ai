@@ -14,6 +14,7 @@ export const MONSTER_HUNTER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Reduce fortification or critical-immunity chance by 25% (immune creatures treated as 75% instead)',
     source: "Monster Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_focus' },
@@ -32,6 +33,7 @@ export const MONSTER_HUNTER_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 on Perception, Survival, and weapon damage vs a chosen creature type; counts as favored enemy',
     source: "Monster Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       {
@@ -89,6 +91,7 @@ export const MONSTER_HUNTER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Substitute a relevant Knowledge skill for Perception (vs Disguise/Stealth) and Survival (tracking) vs that creature type',
     source: "Monster Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'special', description: 'Skill Focus (Knowledge [any])' },
@@ -115,6 +118,7 @@ export const MONSTER_HUNTER_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use Disguise to impersonate monstrous humanoids at –5 penalty; takes 1d3 hours',
     source: "Monster Hunter's Handbook",
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'disguise', ranks: 5 },

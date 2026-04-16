@@ -1,8 +1,8 @@
 // Gap spells — letter D part 1 (first half alphabetically: Daemon Ward through Detect Poison)
 // Gap metadata: {"letters":"D_1","totalChecked":230,"newSpells":57,"skipped":173}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_D_1: Spell[] = [
+export const GAP_SPELLS_D_1: SpellDefinition[] = [
   {
     name: 'Daemon Ward',
     classLevels: { cleric: 4, druid: 5, paladin: 4, sorcerer: 4, wizard: 4, witch: 4 },
@@ -16,6 +16,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'This spell functions like death ward, except it only protects against death effects, energy drain, and negative energy effects from daemons.',
     source: 'Pathfinder Campaign Setting: Horsemen of the Apocalypse: Book of the Damned Vol. 3',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Damnation',
@@ -32,6 +33,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Each creature in the area takes 1d8 points of damage per spell level determined by the highest-level evil spell affecting that creature or in its magical repertoire. Applies to prepared spells, spontaneous spellcaster knowledge, spell-like abilities, and willing beneficiaries of evil spells. Creatures suffering harmful effects from evil spells involuntarily are unaffected.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Damnation of Memory',
@@ -48,6 +50,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster names one creature and removes all memory of that creature\'s involvement in events from affected targets\' minds, or erases all recollection of a single event (up to 10 minutes per caster level) or a specific topic. Common knowledge (Knowledge DC 10 or less) cannot be erased. Stolen memories are stored in the focus gem. The spell produces no magic aura on affected creatures. Destroying the gem or dispelling the spell returns all stolen memories.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Damnation Stride',
@@ -64,6 +67,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions like dimension door, except you leave behind a burst of fire. Choose one corner of your starting square. A 10-foot-radius burst of flame explodes from that corner the moment you leave, dealing 4d6 points of fire damage.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dancing Darkness',
@@ -80,6 +84,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster generates darkness manifestations that reduce illumination by one step within a 20-foot radius per sphere. These spheres must remain within 10 feet of each other but move independently at up to 100 feet per round without requiring concentration. The effect dissipates if the distance from the caster exceeds the spell\'s range. This spell may be made permanent through permanency.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dancing Lantern',
@@ -96,6 +101,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'The spell animates a lantern to follow the caster at shoulder height, maintaining a 5-foot distance regardless of movement speed. The lantern cannot carry additional weight but provides normal illumination even without oil. The lantern always acts as if in the caster\'s possession even when not directly on their person. The effect can be made permanent via permanency spell (CL 9th, 2,500 gp).',
     source: 'Advanced Player\'s Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dancing Lights',
@@ -112,6 +118,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster generates up to four light sources resembling lanterns, torches, or glowing spheres, or a faintly glowing humanoid shape. The lights remain within 10 feet of each other and move at the caster\'s direction without requiring concentration, up to 100 feet per round. Lights extinguish if they exceed spell range. Only one active casting permitted; casting anew dispels previous versions.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dark Whispers',
@@ -128,6 +135,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Enables communication through targets\' shadows. The caster\'s words emerge from shadows as clear whispers without physical manifestation. Targets may respond aloud, with their voices appearing from the caster\'s shadow. After casting, line of effect is unnecessary. Communication can be intercepted with a Perception check (DC 25) and can be silenced. Language-based abilities function normally but spellcasting through shadows is not permitted.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dark-Light',
@@ -144,6 +152,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster produces a powerful light that affects all sighted creatures that do not possess light sensitivity. Creatures making successful saves become dazzled for 1 round per caster level, while those failing saves are blinded for the same duration.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Darkvault',
@@ -159,6 +168,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Protects an area\'s shadows from magical light penetration. Non-magical light cannot alter the affected region\'s illumination level. Magical effects attempting to change light conditions must succeed at a caster level check (DC = 10 + caster level). The spell darkens nothing; it only prevents brightening effects within the radius. Casters of 11th level or higher may render this spell permanent through permanency (7,500 gp).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Darting Duplicate',
@@ -175,6 +185,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates an illusory copy of the spellcaster that appears in an adjacent square. Any creature that threatens that square must succeed at a Will save or make an attack of opportunity against the image. The duplicate\'s AC equals 10 plus half the caster\'s level. As a figment, attacks against it have no effect.',
     source: 'Pathfinder Player Companion: Melee Tactics Toolbox',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Daybreak Arrow',
@@ -190,6 +201,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes (harmless, object)',
     description: 'Enchants projectiles with radiant energy. Creatures sensitive to bright light suffer related penalties for one round after being struck. Undead and light-vulnerable creatures take an extra 1d6 damage from affected ammunition. Enchanted projectiles emit light equivalent to a sunrod for one round post-firing.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Daywalker',
@@ -204,6 +216,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Physically transforms a willing undead creature to appear as a living being of the same size, adding flesh, bone, hair, teeth, and blood to create false signs of life. Incorporeal undead become corporeal during the duration. Observers may attempt a Perception check (DC 30 or 21 + undead\'s Disguise modifier, whichever is higher) to suspect deception. Suppresses frightful presence, incorporeal form, light blindness/sensitivity, stench, sunlight powerlessness, and unnatural aura. Touch-damage abilities are also suppressed.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Dazzling Blade",
@@ -219,6 +232,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes (harmless, object)',
     description: 'Enchants a metal weapon to appear highly polished and silvery. The wielder gains a +1 competence bonus (increasing by +1 per 3 caster levels, max +5) on Bluff checks to feint in combat, CMB checks to disarm, and CMD against disarm attempts. As a free action, the wielder can discharge the spell as a blinding flash; an adjacent opponent must make a Will save or become blinded for 1 round (dazzled on success).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Deadeye's Arrow",
@@ -235,6 +249,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates an electricity-infused arrow with two uses: (1) Attack mode — thrown or fired as a ranged touch attack dealing 1d6 points of electricity damage + 1 point per level (max +5); (2) Beacon mode — fired upward, explodes in a peal of thunder and forms a forked bolt of electricity resembling a holy symbol, lingering for 1 round.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Deadeye's Lore",
@@ -249,6 +264,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'The caster assumes the mantle of the hunter. Grants a +4 sacred bonus on all Survival checks and removes the standard half-speed penalty for movement through wilderness terrain and while tracking.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deadly Finale',
@@ -264,6 +280,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Requires an active bardic performance. Immediately ends the performance, dealing 2d8 points of sonic damage to each target. Each affected creature also takes 3d6 points of bleed damage lasting 1d6 rounds. A successful Fortitude save negates the bleed damage but not the sonic damage.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deadly Juggernaut',
@@ -279,6 +296,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'None',
     description: 'Each time the caster reduces a qualifying opponent to 0 or fewer hit points with a melee attack, they gain cumulative +1 luck bonuses on melee attack rolls, melee weapon damage rolls, Strength checks, and Strength-based skill checks, plus DR 2/—. Maximum bonuses are +5 and DR 10/—. A qualifying opponent must have Hit Dice equal to or greater than the caster\'s Hit Dice minus 4.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Deadman's Contingency",
@@ -293,6 +311,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'None',
     description: 'Functions similarly to contingency but activates only after the caster\'s death, triggering 1d6 rounds following death. All spell parameters must be determined during casting. Permitted companion spells include: animate dead, disintegrate, fireball, gentle repose, magic mouth, major image, permanent image, sending, stinking cloud, and teleport object.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deafening Song Bolt',
@@ -308,6 +327,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Produces three tangible bolts of arcane energy through song. Each bolt requires a ranged touch attack and inflicts 3d10 points of sonic damage. Targets become deafened for 1d6 rounds upon being struck. All three bolts fire simultaneously.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Death Candle',
@@ -323,6 +343,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions like death knell but instead of granting caster enhancements, uses the target\'s life force to summon a Small fire elemental resembling a burning, howling version of the slain creature. The summoned elemental acts on the caster\'s turn as if created via summon monster II, persisting for a number of rounds equal to the deceased target\'s Hit Dice.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Death Clutch',
@@ -338,6 +359,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Attempts to rip the target\'s heart from its chest. If target has ≤200 HP and fails save: reduced to negative HP equal to the lesser of caster level or Constitution score minus 1, becomes staggered and dies at start of caster\'s next turn. If target has ≥201 HP and fails save: becomes staggered for 1 minute and suffers 1d4 Constitution drain plus 1d4 Constitution bleed. Successful save: target becomes staggered until the caster\'s next turn.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Death from Below',
@@ -352,6 +374,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Grants a dodge bonus to AC equal to +1 for each size category by which an attacker exceeds the target, capped at +1 per 3 caster levels. Gnome recipients gain a maximum of +1 per 2 caster levels.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Death Knell Aura, Greater',
@@ -368,6 +391,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions like death knell aura but with greater range and power. Creatures within the aura that drop to 0 or fewer hit points are affected as if by death knell. The caster gains temporary hit points and bonuses for each creature that dies within the aura.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Death Pact',
@@ -383,6 +407,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Takes control of a creature\'s mind and implants deadly subconscious commands, functioning similarly to dominate person. The caster can also trigger a burst of psychic energy as an immediate action, dealing 1d8 damage per caster level (Fortitude save for half). If damage reduces the target to 0 or fewer hit points, the target dies instantly. The subject may also voluntarily trigger the burst.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deathwine',
@@ -397,6 +422,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No (object)',
     description: 'Converts healing potions (conjuration healing only) into necromantic conduits. The affected potion darkens to deep red. When consumed, the potion foregoes its healing benefit; instead the drinker\'s next necromancy spell cast within one minute gains a caster level bonus equal to the original potion\'s spell level. Undead and negative-energy-healed creatures gain 1d8 healing when drinking an affected potion.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Debilitating Pain',
@@ -413,6 +439,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The target is overcome with intense pain, causing it to be stunned on a failed save or dazed for 1 round on a successful save.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Debilitating Portent',
@@ -429,6 +456,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'A glowing green aura of ill fate surrounds the target. When the affected creature makes an attack or casts a spell, it must succeed on a Will save or the attack or spell deals only half damage. The caster may dismiss the spell as an immediate action when the target confirms a critical hit, negating that critical hit (the attack still connects but deals only half damage).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Debilitating Speech',
@@ -444,6 +472,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster delivers an eloquent oration about opponents\' combat ineptitude, past failures, or other shortcomings. As a standard action: takes effect in 1d4 rounds. As a full-round action: takes effect 1 round later. Effects by Hit Dice: 4 or fewer HD — panicked; 5–8 HD — cowering; more than 8 HD — shaken.',
     source: "Pathfinder Player Companion: Disciple's Doctrine",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Decapitate',
@@ -458,6 +487,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Cast as an immediate response to a confirmed critical hit dealing slashing damage. If the target fails its save and has a head, the triggering attack gains an additional 4d6 damage and increases its critical multiplier by 1. If this reduces the target to 0 hp or below, the creature is instantly decapitated and dies unless it can survive decapitation. Even with a successful save, the critical hit deals an extra 4d6 damage.',
     source: 'Pathfinder Roleplaying Game Horror Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deceitful Veneer',
@@ -473,6 +503,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Alters the target\'s aura and subtle behavioral cues to make their statements appear false. Both magical detection (like discern lies) and mundane Sense Motive register the target\'s words as deceptive. A careful Sense Motive check (DC 15 + caster level) can reveal when the target actually speaks truthfully. The caster can suppress or resume the spell\'s effects as a standard action.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deceptive Redundancy',
@@ -488,6 +519,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a protective ward that misleads those attempting to dispel magic. When a dispel effect targets one of the caster\'s active spells, they can use an immediate action to dismiss this spell and make an opposed caster level check. Success means the dispel fails and the spell\'s aura becomes difficult to detect for 1 round per caster level (divinations must succeed at CL check DC 15 + caster level).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Decollate',
@@ -502,6 +534,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Creates a thin red line around the target\'s neck, permitting the willing subject to voluntarily detach their head. When separated, the body loses vision but gains blindsense 15 feet. The detached head appears lifeless and cannot see or hear through its own senses. Grants DR 2/— and immunity to decapitation. An unprotected severed head has AC 7, hardness 5, and 10 hit points. If the head is destroyed, the target dies.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Decrepit Disguise',
@@ -517,6 +550,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Makes objects appear worthless and decrepit. A masterwork sword might seem like a rusted, useless blade. When cast on attended objects, the wielder may attempt a Will save to disbelieve. The spell counters and dispels quintessence. Can be made permanent via permanency (9th-level caster, 500 gp).',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deeper Darkness',
@@ -532,6 +566,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Functions like the darkness spell but reduces light levels by two steps. Bright light becomes dim light, normal light becomes darkness, and existing dim or dark areas become supernaturally dark. Even creatures with darkvision cannot see within the spell\'s confines. Does not stack with itself; can counter or dispel any light spell of equal or lower level.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Defending Sword',
@@ -548,6 +583,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'None',
     description: 'Creates a force sword functioning similarly to mage\'s sword, but dealing 3d6 points of force damage. Initially hovers near the caster, granting a +4 shield bonus to AC while inactive. Upon a foe within close range dealing damage or forcing a failed save, the sword activates and attacks that target, ending the AC benefit. The sword cannot switch targets.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Defensive Grace',
@@ -562,6 +598,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'None',
     description: 'Each round, roll an inspiration die without using a daily use and gain that result as a dodge bonus to AC. Grants immunity to precision damage including sneak attack. If a critical hit is confirmed against the caster, they can use an immediate action to dismiss the spell, negating the critical and converting it to normal damage.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Defensive Shock',
@@ -577,6 +614,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster becomes surrounded by electrical energy that damages creatures making physical contact. Any creature striking with its body or a handheld weapon takes 1d6 points of electricity damage per two caster levels (maximum 6d6). Damage dice are halved (rounded down) after each discharge, until reaching zero dice and ending the spell.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Defile Armor',
@@ -592,6 +630,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes (harmless, object)',
     description: 'Functions similarly to sanctify armor. When the caster uses their judgment or smite ability, they gain DR 5/good while wearing the enchanted armor.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deflect Blame',
@@ -608,6 +647,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Allows a caster to redirect blame immediately after attacking, making the target believe a different creature was responsible for the attack. Alternatively, if a social skill check (Bluff, Diplomacy, or Intimidate) fails, the caster can designate another creature within range as the source of that failed interaction.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deflection',
@@ -623,6 +663,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'None',
     description: 'Creates a whirling barrier of force that sends any attack that misses you hurling back toward its source. Affects melee and ranged attacks using attack rolls. When an attack misses, the attacker must make a second attack roll against their own AC using the original attack\'s modifiers; if successful, the attacker takes the attack\'s damage. Does not deflect attacks that miss for reasons other than failed attack rolls.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Defoliate',
@@ -638,6 +679,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Hurls a tiny ball of negative energy that destroys plant life in either a line 60 feet long or a 10-foot-radius spread, eliminating cover, concealment, and movement penalties from undergrowth. When targeting a single plant creature with a ranged touch attack, the creature takes 2d8 points of damage.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deja Vu',
@@ -654,6 +696,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Manipulates the target\'s thought processes into a repeating loop. On the second turn, the creature must repeat whatever full-round, standard, or move actions it took on the first turn in the same sequence against the same targets. If circumstances prevent repetition, the creature becomes confused until the spell ends. Multiple deja vu spells cannot target the same creature simultaneously. Affected creatures cannot delay actions.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Delay Disease',
@@ -669,6 +712,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Grants temporary immunity to disease for one day. Any disease encountered during this period is prevented from affecting the target until the spell ends. If the target already has an active disease, the caster must succeed on a caster level check against the disease\'s DC to suspend its effects. Provides no healing for damage already sustained.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Delay Pain',
@@ -684,6 +728,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Overrides a target\'s ability to experience pain. Pain-based effects like pain strike and symbol of pain cannot affect the recipient. Prevents ongoing penalties from pain but does not eliminate physical damage, ability damage, or ability drain already inflicted by pain effects prior to the spell.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Delay Poison',
@@ -699,6 +744,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Any poison in the subject\'s system or any poison to which it is exposed during the spell\'s duration does not affect the subject until the spell\'s duration has expired. Cannot reverse damage already inflicted by poisoning.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Delusional Pride',
@@ -715,6 +761,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Inflicts the target with an inflated sense of self-worth. The affected creature suffers a -2 penalty to attack rolls and skill checks, but gains a +2 morale bonus to saves against charm and compulsion effects.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Demand Offering',
@@ -731,6 +778,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'When a target fails its save, it must use an immediate action to surrender whatever object it currently holds or wields to the caster. If no immediate action remains, the creature uses a move action at the start of its next turn. When multiple items are held, one is selected randomly.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Demanding Message',
@@ -747,6 +795,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Initially functions as message with no save or resistance. Once during the message effect, the caster can concentrate as a standard action to issue a suggestion to one target as part of message delivery. The suggestion allows spell resistance and a Will save, lasting 1 hour per level or until completed.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Denounce',
@@ -764,6 +813,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster verbally denounces a single visible creature. Creatures within the area who can see the target must succeed at a Will save or have their starting attitude toward the denounced creature worsened by two levels. Attempts to reverse the spell\'s effects via Diplomacy checks incur a -10 penalty.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Depilate',
@@ -778,6 +828,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: "Causes a target's hair or fur to fall out in patches. Affected creatures suffer a -2 penalty on Diplomacy, Intimidate, and Perform checks for one week until hair regrows, or until concealed via a successful Disguise or Heal check (DC equals the spell's original save DC). Instantly reversed by break enchantment, remove curse, or similar magic.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Desecrate',
@@ -794,6 +845,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Imbues an area with negative energy, granting undead creatures +1 profane bonuses to attack rolls, damage rolls, and saving throws. Undead created or summoned within gain +1 hp per HD. Doubles these bonuses if cast near an altar dedicated to the caster\'s deity, and allows animate dead to create double the normal undead. Counters and dispels consecrate.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Desperate Weapon',
@@ -810,6 +862,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Conjures a one-handed improvised weapon from nearby surroundings dealing 1d6 points of damage for a Medium creature (1d4 for Small). The caster chooses bludgeoning, piercing, or slashing damage. The object loses magical properties if dropped. The spell terminates if the weapon leaves the caster\'s possession.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Destroy Robot',
@@ -824,6 +877,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Causes the caster\'s hand to crackle with electricity to destroy a single robot within range via ranged touch attack. On a failed save: 12d6 points of damage plus 1 point per caster level. On a successful save: 3d6 points of damage plus 1 point per caster level. Cyborgs and androids take half damage and gain a +4 bonus on their saving throw.',
     source: 'Pathfinder Campaign Setting: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Destruction',
@@ -839,6 +893,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'Yes',
     description: 'Inflicts 10 points of damage per caster level. If the target dies from this effect, its remains are consumed utterly in holy (or unholy) fire (but not its equipment or possessions). A successful Fortitude save reduces damage to 10d6 points. Restoring a slain target requires true resurrection, wish followed by resurrection, or miracle.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Detect Anxieties',
@@ -855,6 +910,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Functions like detect thoughts but senses significant anxieties of creatures with an Intelligence score of 1 or higher. Round 1: detects presence of minds. Round 2: reveals each mind\'s Wisdom score and fear condition (shaken through paralyzed). If highest Wisdom is 26+ and 10+ points higher than caster\'s, caster is stunned 1 round and spell ends. Round 3: reveals the most pressing current anxiety (Will negates). Knowledge of anxiety grants +2 bonus on Intimidate checks.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Detect Demon',
@@ -870,6 +926,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Detects demonic presences and their influence. Round 1: identifies creatures with the demon subtype, possessed beings, those under demonic spell effects, or tainted creatures (tieflings, abyssal sorcerers, Demonic Obedience feats), and portals to the Abyss. Round 2: reveals the number of evil auras from demons and the strongest aura\'s potency. Round 3: displays each aura\'s power, location, and demon lord affiliations (Will save to conceal allegiance).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Detect Desires',
@@ -886,6 +943,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Functions like detect thoughts but senses significant desires of creatures with an Intelligence score of 1 or higher, regardless of whether they are conscious or not. Round 2 reveals each mind\'s Charisma score; creatures with Charisma 26+ (and 10+ points higher than caster\'s) stun the caster for 1 round, ending the spell. Round 3 reveals the most pressing current desire (Will negates). Granting creatures desire opportunities grants a +2 circumstance bonus on Diplomacy.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Detect Fiendish Presence',
@@ -901,6 +959,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Functions similarly to detect evil but specifically targets outsiders with the evil subtype, as well as lingering effects caused by their gifts, presence, and spells. Additionally detects clerics and paladins who serve fiendish deities including Asmodeus, archdevils, daemonic harbingers, and demon lords.',
     source: 'Pathfinder Player Companion: Agents of Evil',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Detect Metal',
@@ -916,6 +975,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Detects metal objects or creatures within a 60-foot cone. When casting, the caster specifies whether to detect all metal objects or particular types such as silver, cold iron, or skymetal. The spell only detects the specified metal type when restricted parameters are chosen.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Detect Radiation',
@@ -931,6 +991,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Enables detection of radioactive sources within the affected area. The caster perceives radioactive objects as a glowing green shimmer in the air; the brighter and more intense the green, the more powerful the radioactivity. Blocked by 3 feet of dirt/wood, 1 foot of stone, 1 inch of metal, or lead sheeting.',
     source: 'Pathfinder Campaign Setting: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Detect Relations',
@@ -945,6 +1006,7 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Identifies blood relationships between multiple creatures. Round 1: confirms whether subjects share blood relation. Round 2: identifies number of related subjects and general relation. Round 3: reveals precise relationship (Will save can negate). Ineffective for adoptive families. Physical barriers can block the effect.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Detect the Faithful',
@@ -960,5 +1022,6 @@ export const GAP_SPELLS_D_1: Spell[] = [
     spellResistance: 'No',
     description: 'Identifies other worshipers of the caster\'s deity, including mortal followers and outsider servants. Round 1: detects presence or absence. Round 2: identifies number of worshipers. Round 3: pinpoints exact locations (direction only if outside line of sight). Penetrates barriers except lead, 1 foot of stone, 1 inch of common metal, or 3 feet of wood or dirt. Also detects heretics and creatures genuinely believing they follow the same faith.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 ];

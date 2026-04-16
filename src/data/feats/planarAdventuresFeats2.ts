@@ -7,6 +7,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Improved Planar Infusion',
     types: ['conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       "Choose a plane you have gained an infusion from via Planar Infusion. You now gain that plane's improved infusion as well.",
     shortDescription: 'Gain the improved infusion of a plane you already have an infusion from.',
@@ -37,6 +38,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Improved Plane Shift',
     types: ['general'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'Add plane shift to your spell list and to your spellbook as a 5th-level wizard spell. The identification time for portal destinations drops to 1 round, and you automatically recognize any plane upon arrival.',
     shortDescription: 'Add plane shift as a 5th-level wizard spell and improve planar recognition.',
@@ -63,6 +65,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Lashing Tail',
     types: ['combat'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'Your tail becomes a weapon through its physical strength or natural adornments. You gain a tail slap natural attack dealing 1d6 damage (Medium) or 1d4 damage (Small). Upon taking this feat, select one damage type: bludgeoning, piercing, or slashing. The tail attack cannot be used simultaneously with other natural weapons during a full attack and is treated as a secondary attack when combined with manufactured weapon attacks.',
     shortDescription: 'Gain a tail slap natural attack (1d6 Medium, choose B/P/S damage type).',
@@ -93,6 +96,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Last Rites',
     types: ['conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a standard action, you make a melee touch attack against a haunt or an undead creature with resurrection vulnerability. The attack deals 3d6 positive energy damage (bypassing damage reduction and hardness), and the target is staggered for 1 round. You must first detect the haunt via skill check or identify the undead with a successful Knowledge (religion) check. Damage increases by 1d6 for every 5 ranks in Knowledge (planes). Uses per day: 1, plus 1 additional use for every 5 ranks in Knowledge (planes).',
     shortDescription:
@@ -124,6 +128,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Light Gravity Acclimation',
     types: ['general'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       "On planes with light gravity, your land speed increases by 10 feet and you negate the circumstance penalty to attack rolls from light gravity. You also gain a +2 bonus to Acrobatics checks (+4 if you have 10 or more ranks in Acrobatics). This does not stack with the Acrobatic feat's bonus.",
     shortDescription:
@@ -166,6 +171,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Malleable Form',
     types: ['conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a full-round action, you infuse yourself with protoplasm, converting your body and equipment to a semi-gelatinous state. While in this form, you gain the compression ability, allowing movement through tight spaces without penalty. You receive a bonus to CMD against grapple and trip maneuvers equal to half your Knowledge (planes) ranks. However, your attacks with manufactured weapons, natural weapons, and unarmed strikes deal half damage. You can maintain this form for a number of minutes per day equal to your Knowledge (planes) ranks, usable in 1-minute increments.',
     shortDescription:
@@ -194,6 +200,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Mischievous Tail',
     types: ['combat'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'Your tail functions as an additional free hand for non-weapon purposes. You gain a +2 bonus on disarm and steal combat maneuvers and Sleight of Hand checks performed using only your tail. Combat maneuvers executed with your tail do not provoke attacks of opportunity. You cannot effectively wield weapons or shields with your tail, though you may carry such items.',
     shortDescription:
@@ -237,6 +244,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Open Conduit',
     types: ['conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'Select a conduit feat you have. When determining the uses per day or the amount of time per day you can use this conduit feat, you are treated as though you had an additional 5 ranks in Knowledge (planes). This bonus does not apply to other Knowledge (planes) checks or benefits. You may take this feat multiple times; each selection applies to a different conduit feat you possess.',
     shortDescription:
@@ -270,6 +278,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Peace of Mind',
     types: ['conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'As an immediate action when you fail a saving throw against an emotion, fear, or pain effect, you can ignore the effect and instead become dazed for an amount of time equal to twice the duration of the original effect. Nonlethal damage from the original effect is reduced to the minimum value. This ability cannot be used if you are already dazed. Usable once per day, plus one additional use per 5 ranks in Knowledge (planes).',
     shortDescription:
@@ -298,6 +307,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Phase Strike',
     types: ['combat', 'conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a move action, you phase a manufactured weapon or piece of ammunition through the Ethereal Plane. The next melee attack or thrown ranged attack you make with that weapon before the end of your turn is resolved as a touch attack and ignores cover, but does not ignore armor bonuses from force effects. Usable once per day, plus one additional time per day for every 10 ranks in Knowledge (planes). Functions only on planes coterminous with the Ethereal Plane.',
     shortDescription:
@@ -326,6 +336,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: "Planewalker's Insight",
     types: ['general'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'You gain a +2 bonus on Knowledge (planes) checks and a +2 bonus on Sense Motive checks against outsiders. Knowledge (planes) becomes a class skill for you. These bonuses increase to +4 if you have 10 or more ranks in the relevant skill. These bonuses do not stack with the Alertness or Scholar feats.',
     shortDescription:
@@ -365,6 +376,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Primal Bloom',
     types: ['conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a standard action, you create a 50-foot-radius spread of primal fey influence centered on yourself. This stationary area persists for 1 minute and gains the wild magic planar trait with a DC increase of 5 for caster level checks. If the area already possessed this trait, the DC increases by 10 instead. Usable once per day; twice daily at Knowledge (planes) 15 ranks; three times daily at Knowledge (planes) 20 ranks.',
     shortDescription: 'Create a 50-ft radius wild magic zone (DC +5/+10) for 1 minute.',
@@ -392,6 +404,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: "Shadow's Shroud",
     types: ['conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a swift action, you shroud yourself in shifting, camouflaging shadow. While activated, you can make Stealth checks as though possessing concealment, regardless of lighting conditions. Creatures with supernatural darkvision can still perceive you normally. The effect lasts for a number of rounds per day equal to your Knowledge (planes) ranks; these rounds need not be consecutive.',
     shortDescription:
@@ -420,6 +433,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Stony Rampart',
     types: ['combat', 'conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a standard action, you summon a low stone wall within 30 feet. The wall measures 5 feet long, 3 feet high, and 2 inches thick, providing partial cover. Each section has hardness 8 and 30 hit points. The maximum number of walls active at one time equals one per 5 ranks in Knowledge (planes) (minimum one). Walls last for a number of rounds equal to your Knowledge (planes) ranks. If you have 10 or more ranks, you may create multiple walls in one action. Uses per day equal your Knowledge (planes) ranks.',
     shortDescription:
@@ -448,6 +462,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Stygian Spell',
     types: ['metamagic'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'This metamagic feat allows enhancement of spells with the water descriptor that target at least one creature. Successfully hit creatures or those failing saves must make a Will save (DC matches original spell) or suffer fugue lesser madness alongside normal spell effects. Confirmed critical hits or natural 1 saves force another Will save or inflict amnesia greater madness instead. The madness persists indefinitely but responds to standard madness treatments. Modified spells gain the evil descriptor. Requires a spell slot 2 levels higher than normal. Cannot be applied to spells with the good descriptor. This is a mind-affecting effect. Creatures native to the River Styx are immune.',
     shortDescription:
@@ -462,6 +477,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Subjective Mobility',
     types: ['general'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'You automatically succeed at Wisdom checks to set a new direction of gravity on planes with subjective directional gravity. When adjusting your gravity direction, you can either reduce falling speed by up to two-thirds (minimum 50 feet first round, 100 feet per subsequent round) or increase it to twice normal (maximum 300 feet first round, 600 feet per subsequent round). This feat only functions on planes with subjective directional gravity mechanics.',
     shortDescription:
@@ -490,6 +506,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Subjective Slam',
     types: ['combat'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       "You halve all damage you take from impacts such as falling damage. While falling on planes with subjective directional gravity, you may initiate a slam attack as a standard action against creatures or objects in your path. The attack requires a touch attack roll with a cumulative -1 penalty for every 50 feet of falling speed. Successful slams deal 1d6 bludgeoning damage per 50 feet of falling speed (maximum 6d6) and cause the target to begin falling at your current speed according to the plane's gravity direction.",
     shortDescription:
@@ -523,6 +540,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Tempting Bargain',
     types: ['general'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       "You may choose an eidolon of any alignment, even if it differs by more than one step from yours. Your eidolon will not refuse summoning based on alignment differences, though it retains the right to reject commands contrary to its nature. Each time you gain a summoner level, you must attempt a Will saving throw (DC = 10 + half your eidolon's Hit Dice + your eidolon's Charisma modifier). On failure, your alignment shifts one step toward your eidolon's alignment permanently. If your alignment becomes identical to your eidolon's, you may replace this feat with any other 1st-level feat you qualify for.",
     shortDescription:
@@ -555,6 +573,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Tidal Swiftness',
     types: ['conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a standard action, you conjure a tide of water from the Plane of Water around your feet that enhances your speed, functioning like the slipstream spell. You can use this ability for a number of minutes daily equal to your Knowledge (planes) skill ranks, split across multiple uses in 1-minute increments.',
     shortDescription:
@@ -583,6 +602,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Tumultuous Spell',
     types: ['metamagic'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'This metamagic allows you to infuse a single-target spell with chaotic energy from the Maelstrom. When a creature is hit by or fails a save against a tumultuous spell, it immediately moves 1d4x5 feet in a random direction. The movement does not trigger attacks of opportunity and stops harmlessly if it would hit an obstacle. Increases spell slot requirement by 1 level. Cannot be applied to spells with the lawful descriptor.',
     shortDescription:
@@ -597,6 +617,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: "Tyrant's Rebuke",
     types: ['conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a standard action, you make a melee touch attack. On a successful hit, the target must succeed at a Will save (DC = 10 + half your level + your Charisma modifier) or become staggered until the end of your next turn. If the creature is already staggered by this effect and fails the save again, it additionally takes 1d4 points of Charisma damage in addition to being staggered. You can use this feat once per day for every 5 ranks in Knowledge (planes).',
     shortDescription:
@@ -625,6 +646,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: "Wanderer's Fortune",
     types: ['conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a swift action, you gain the benefits of freedom of movement until the end of your turn or until you benefit from the effects to escape a grapple or magical restraint, whichever comes first. You may activate this ability once daily, plus one additional use for every 5 ranks in Knowledge (planes).',
     shortDescription:
@@ -653,6 +675,7 @@ export const PLANAR_ADVENTURES_FEATS_2: FeatDefinition[] = [
     name: 'Wind Leaper',
     types: ['conduit'],
     source: 'Planar Adventures',
+    verificationStatus: 'needs_review' as const,
     description:
       'As a swift action, you activate airy energies that reduce your effective weight by 50%. While active, you gain a circumstance bonus on Acrobatics checks equal to half your Knowledge (planes) ranks, all Acrobatics jump attempts are treated as having a running start, and high jump checks are treated as long jumps for DC determination. You can maintain this ability for a number of rounds per day equal to your Knowledge (planes) ranks; these rounds need not be consecutive.',
     shortDescription:

@@ -12,6 +12,7 @@ export const cavalierDefinitions: ClassChoiceDefinition[] = [
     collectionName: 'cavalierorders',
     source: 'pf1e-core',
     isOfficial: true,
+    verificationStatus: 'needs_review' as const,
     visibility: 'global',
     rev: 1,
   },

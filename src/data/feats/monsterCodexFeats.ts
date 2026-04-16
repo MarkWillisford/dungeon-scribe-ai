@@ -7,6 +7,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Ancestral Enmity',
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description: 'You gain a +2 bonus on melee attack rolls against dwarves and gnomes.',
     shortDescription: '+2 on melee attacks against dwarves and gnomes.',
@@ -31,6 +32,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Angelbane Strike',
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'When using Channel Smite against living good-aligned creatures, treat all 1s on the channel smite damage dice as 2s. Against good outsiders or divine casters serving good deities, you are considered 2 levels higher when determining how many channel energy damage dice you roll.',
@@ -49,6 +51,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Awesome Charge',
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'When you hit your opponent with a charge attack, you can attempt an awesome blow combat maneuver against that opponent as a free action.',
@@ -66,6 +69,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Bag of Bones',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'passive',
     description:
       'You are treated as one size category smaller when calculating squeeze penalties and receive a +5 competence bonus on Escape Artist checks. If you have 10 or more Hit Dice, the bonus increases to +9.',
@@ -92,6 +96,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Blood Tide',
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'When you are in blood frenzy, instead of making your regular attacks, you can make one melee attack at your highest base attack bonus against each bleeding or wounded opponent within reach. You must use natural weapons, and you must make a separate attack roll for each opponent. You can use different natural weapons against different targets. When using Blood Tide, you forfeit any extra attacks granted by other feats, spells, or abilities.',
@@ -111,6 +116,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Born of Frost',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'passive',
     description:
       'Your natural weapons and unarmed strikes deal an additional 1d6 points of cold damage. Creatures that strike you with natural weapons or unarmed strikes take 1 point of cold damage.',
@@ -124,6 +130,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Chilled Rock',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'passive',
     description:
       'You transfer the cold of your body to the rocks you throw. When you throw rocks using the rock throwing ability, they deal an additional 1d6 points of cold damage.',
@@ -139,6 +146,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Cleaving Sweep',
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'When you use a full-attack action with a two-handed weapon, you can attempt a trip combat maneuver at your highest base attack bonus against each opponent within reach instead of making your regular attacks. You must make a separate maneuver check for each target.',
@@ -158,6 +166,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Coordinated Reposition',
     types: ['teamwork'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'You are skilled in coordinating combat positioning with your allies. When an ally who also has this feat and threatens the same creature as you takes a 5-foot step, you may use an immediate action to move 5 feet without provoking attacks of opportunity.',
@@ -171,6 +180,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Corpse Companion',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'passive',
     description:
       'Your animal companion becomes an undead creature. It retains its Hit Dice, base attack bonus, saving throws, skills, and tricks, but loses its Constitution score and gains a Charisma of 12. If the undead companion is destroyed, any replacement animal companion also becomes undead with the same modifications.',
@@ -187,6 +197,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Corrupted Flesh',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'passive',
     description:
       'You have sickened, rotting flesh from some deformity or vestigial limb that has turned fetid and necrotic, yet refuses to heal or fall off. You gain the stench special ability with a DC of 10 + 1/2 your HD + your Constitution modifier.',
@@ -203,6 +214,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Extra Croaking',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'passive',
     description:
       'You gain one extra use of terrifying croak per hour. If your recharge time is less than 1 hour, you instead gain an extra use each time the ability recharges.',
@@ -218,6 +230,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Fetid Breath',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'You can exhale a 30-foot cone of vile-smelling, moist air mixed with phlegm and remnants of old meals. Creatures in the area must succeed at a Fortitude save (DC = 10 + 1/2 HD + Constitution modifier) or become nauseated for 1d6 minutes. Affected creatures can spend a full-round action to attempt another save to end the effect. You can use this breath weapon twice per day, plus one additional use per day for every 6 Hit Dice beyond the initial 6.',
@@ -236,6 +249,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Gluttonous Gobbler',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'When you begin your turn grappling a creature at least two size categories smaller than you, you may use a move action to place the grappled creature into your mouth and attempt another grapple combat maneuver check to pin it. On a success, you may swallow the opponent using your swallow whole special ability.',
@@ -253,6 +267,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Gnawer',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'passive',
     description:
       'Your bite attack ignores hardness equal to 3 plus half your character level. As a full-round action, you can deal double your bite damage to unattended inanimate objects. If you also have the Burrowing Teeth feat, you can burrow through solid stone at a speed of 5 feet per 10 minutes.',
@@ -269,6 +284,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Gray Dwarf Magic',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'passive',
     description:
       'Choose one spell-like ability that is usable once per day and is granted by a duergar racial trait you do not have. You can use this ability once per day with a caster level equal to your character level.',
@@ -282,6 +298,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Great Rend',
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'If you are able to use your rend ability on the same turn that you also succeed at a bite attack, your rend deals an amount of additional damage equal to half your Strength modifier.',
@@ -299,6 +316,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Horn Rider',
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'You gain a +1 shield bonus to AC when lashed into a horn harness. You may select Mounted Archery without needing 1 rank in Ride or the Mounted Combat feat.',
@@ -325,6 +343,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: "Horn Rider's Charge",
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'Whenever you are lashed into a horn harness and you ready an action to make a melee attack against the target of a charge made by the creature you are lashed to, you gain the attack bonus for charging and your attack deals double damage (or triple damage with a lance). This benefit does not stack with Spirited Charge.',
@@ -342,6 +361,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Icy Stare',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'As a standard action, you can direct your icy stare against a single creature or object within 10 feet. The target must make a Fortitude save (DC = 10 + 1/2 HD + Charisma modifier) or take 1d6 cold damage. Objects cannot save. A creature that takes damage must also succeed at a Fortitude save or suffer 1 point of Strength damage. This feat does not grant an actual gaze attack — foes and allies are not in danger simply by meeting your gaze.',
@@ -358,6 +378,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Innate Arcana',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'You can expend two arcane spell slots or prepared spells to cast one of your racial spell-like abilities. Each expended spell must be of equal or higher level than the sorcerer/wizard spell equivalent of the targeted racial ability.',
@@ -375,6 +396,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Innate Flexibility',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'passive',
     description:
       'You gain a number of additional uses of your once-per-day racial spell-like abilities equal to the number of such abilities you have. These extra uses can be distributed among any combination of qualifying abilities. This feat counts both standard duergar spell-like abilities and those granted by duergar racial traits. You can take this feat multiple times. Its effects stack.',
@@ -391,6 +413,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Mighty Bite',
     types: ['combat'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'conditional',
     description:
       'When you successfully damage an opponent with your rend ability, the critical threat range of your bite attack becomes 18-20 until the start of your next turn. This benefit does not stack with other effects that increase the critical threat range of your bite, such as the keen weapon ability or the Improved Critical feat.',
@@ -409,6 +432,7 @@ export const MONSTER_CODEX_FEATS: FeatDefinition[] = [
     name: 'Motivated March',
     types: ['general'],
     source: 'Monster Codex',
+    verificationStatus: 'needs_review' as const,
     activationMode: 'passive',
     description:
       'You and a number of allies up to 10 times your character level reduce the amount of nonlethal damage taken as a result of a forced march by half. Additionally, affected creatures may delay the fatigued effect of a forced march for a number of hours equal to your Charisma modifier (minimum 1). Those who delay the effect become exhausted instead of fatigued when it takes effect.',

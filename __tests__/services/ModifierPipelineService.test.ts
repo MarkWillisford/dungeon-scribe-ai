@@ -51,6 +51,7 @@ const testFeats: FeatDefinition[] = [
     name: 'Lightning Reflexes',
     description: '+2 Reflex',
     source: 'CRB',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -69,6 +70,7 @@ const testFeats: FeatDefinition[] = [
     name: 'Improved Initiative',
     description: '+4 init',
     source: 'CRB',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [],
     effects: [
@@ -87,6 +89,7 @@ const testFeats: FeatDefinition[] = [
     name: 'Dodge',
     description: '+1 dodge AC',
     source: 'CRB',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'ability_score', ability: 'DEX', minimum: 13 }],
     effects: [
@@ -99,6 +102,7 @@ const testFeats: FeatDefinition[] = [
     name: 'Toughness',
     description: '+HP',
     source: 'CRB',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -117,6 +121,7 @@ const testFeats: FeatDefinition[] = [
     name: 'Power Attack',
     description: 'Trade attack for damage',
     source: 'CRB',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 13 },

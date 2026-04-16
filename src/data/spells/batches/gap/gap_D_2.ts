@@ -1,8 +1,8 @@
 // Gap spells — letter D part 2 (second half alphabetically: Determine Depth through Dweomer Retaliation)
 // Gap metadata: {"letters":"D_2","totalChecked":230,"newSpells":56,"skipped":174}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_D_2: Spell[] = [
+export const GAP_SPELLS_D_2: SpellDefinition[] = [
   {
     name: 'Determine Depth',
     classLevels: { bard: 2, druid: 2, sorcerer: 2, wizard: 2 },
@@ -16,6 +16,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Allows a caster to determine the exact thickness of barriers like walls, ceilings, or other solid structures through touch. Can measure depths up to 10 feet per caster level (maximum 200 feet at 20th level). Functions on earthen, plaster, stone, or wooden surfaces but cannot penetrate metal or harder materials.',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Devil Snare',
@@ -32,6 +33,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes; see text',
     description: 'Creates an invisible circular barrier on a flat surface. Any outsider entering this circle must make a Will save or become trapped. Trapped creatures can attempt a Will save as a standard action to escape, and cannot teleport or use extradimensional travel (functioning like dimensional anchor). Contained outsiders retain the ability to attack adjacent creatures outside the circle. The caster can dismiss the circle as a standard action, expelling trapped outsiders to their home planes (as per dismissal).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Diamond Spray',
@@ -48,6 +50,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'A cone of sparkling, diamond-hard slivers deals 1d6 points of slashing damage per caster level (maximum 10d6). The magical slivers count as both adamantine and cold iron for overcoming damage reduction. Reduces object hardness by 1 point per 2 caster levels (capped at 10 points).',
     source: 'Pathfinder 24: The Final Wish',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dictum',
@@ -64,6 +67,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Targets non-lawful creatures within radius. Effects scale by target HD compared to caster level: equal to CL — deafened 1d4 rounds; up to CL-1 — staggered 2d4 rounds and deafened; up to CL-5 — paralyzed 1d10 minutes, staggered, and deafened; up to CL-10 — killed, then paralyzed, staggered, and deafened. On caster\'s home plane, non-lawful extraplanar creatures are instantly banished for at least 24 hours (Will save at -4 penalty negates).',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Die for Your Master',
@@ -79,6 +83,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: "Enables a creature's companion or familiar to intercept any attack that targets the caster, including those that do not require attack rolls such as chain lightning, hold monster, and magic missile. The companion cannot intercept effects incompatible with its creature type.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dimensional Blade',
@@ -93,6 +98,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'None',
     description: 'Flattens one melee weapon in hand into a two-dimensional form while remaining wieldy. The weapon\'s attacks become melee touch attacks that ignore all armor, though force effects like mage armor still provide protection. Bludgeoning weapons deal half damage and function as slashing weapons. The spell ends if the weapon is released.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dimensional Bounce',
@@ -108,6 +114,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No and yes (object)',
     description: "Establishes a dimensional link between two designated locations within range, requiring line of effect to both. As a swift action, the caster may teleport to either location as if using dimension door. The spell discharges once the caster has used it to teleport a number of times equal to one-fourth caster level (maximum 5 times).",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Diminish Resistance',
@@ -122,6 +129,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Weakens a target creature\'s resistance to one selected energy type: acid, cold, electricity, fire, or sonic. The creature\'s resistance decreases by 5 (minimum 0), with an additional 5-point reduction for every 5 caster levels beyond 3rd (maximum reduction of 20 at caster level 18).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Diminished Detection',
@@ -136,6 +144,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'None',
     description: 'Reduces the detection range of divination effects targeting the caster. When the caster would normally fall within a detection spell\'s area of effect (such as detect magic, detect evil, or detect undead), the area of effect is reduced by half for the purposes of detecting the caster or caster\'s possessions. The detecting caster remains unaware of this range reduction.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dirge of the Victorious Knights',
@@ -152,6 +161,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster performs an operatic piece to summon spectral illusions of mounted knights to trample foes. Shadowy knights deal 1d6 damage per caster level (maximum 20d6), divided equally between cold and arcane force damage; the arcane portion bypasses cold resistance and immunity. The knights cannot penetrate force barriers or obstacles blocking incorporeal creatures.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Discern Next of Kin',
@@ -167,6 +177,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: "Scans the thoughts of one individual to learn the names and locations of the target's living relatives, as well as the attitude of the target toward those relatives (and vice versa). The caster learns about one relative per round of concentration. Limited to information the target knows or believes.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Discern Value',
@@ -182,6 +193,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Analyzes monetary value of objects and identifies which are most valuable to an average trader. A minimum detection threshold is specified when casting. Round 1: detects presence/absence of objects meeting the threshold. Round 2: the most valuable object glows; direction provided if outside line of sight. Round 3: objects valued within 10% of the highest-value item glow faintly. Does not reveal magical properties, cannot detect artifacts, and ignores priceless items.',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Discharge',
@@ -196,6 +208,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Disperses electrical charges from a single technical device (loses all remaining charges), temporarily disables electrically-powered non-charged equipment for 1d4 rounds, or impairs robots (staggered and cannot use energy-based attacks for 1d4 rounds, with saving throw attempts permitted each subsequent round).',
     source: 'Pathfinder Campaign Setting: Technology Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Discordant Blast',
@@ -212,6 +225,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Generates a wave of thunder and force. All creatures in the affected area sustain 3d6 sonic damage and experience a bull rush effect (CMB = caster level + Charisma modifier) that does not trigger attacks of opportunity. Cannot penetrate silence effects or comparable magical silence.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Discovery Torch',
@@ -227,6 +241,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a 20-foot radius of bright light resembling flame (no heat or oxygen consumption). Allies within the illuminated area gain a +2 enhancement bonus to Perception, Sense Motive checks, and Knowledge checks to identify creatures within the same area. For inquisitors maintaining an active judgment, the light radius doubles to 40 feet.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dispel Balance',
@@ -241,6 +256,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'See text',
     description: 'Produces three effects: (1) Grants a +3 deflection bonus against chaotic neutral, lawful neutral, neutral evil, and neutral good creatures (+5 against purely neutral); (2) On successful melee touch attack against neutral-aligned extraplanar creatures, may force them back to their home plane (Will save, -2 penalty if purely neutral); (3) Automatically dispels any enchantment cast by neutral-aligned creatures via touch.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Display Aversion',
@@ -257,6 +273,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Creates an animated illusion similar to minor image depicting the caster presenting something a vampire finds aversive (garlic, a holy symbol, bells ringing). The vampire reacts to this illusion as real and can attempt to overcome it via disbelief save or standard Will save against the spell\'s DC.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Disrupt Link',
@@ -271,6 +288,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Temporarily severs a creature\'s magical link with a bonded companion. For familiars, the caster loses alertness, deliver touch spells, empathic link, scry on familiar, share spells, and speak with master abilities. For animal companions, lost benefits include link, share spells, and devotion abilities. Any other abilities that rely on the two having a connection are similarly disrupted.',
     source: 'Pathfinder Player Companion: Familiar Folio',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Disrupt Silence',
@@ -286,6 +304,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Temporarily negates magical silence within its area so that normal sounds can be heard within the overlapping areas of effect. Automatically counters or dispels any magical silence effect of equal or lower level targeting the same subject. When cast against a higher-level silence effect, it functions as dispel magic.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Disrupting Weapon',
@@ -300,6 +319,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes (harmless, object)',
     description: 'Renders a melee weapon particularly effective against undead. Any undead creature with HD equal to or less than the caster\'s level must succeed on a Will save or be destroyed utterly if struck in combat with this weapon. The destruction effect bypasses normal spell resistance.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Distracting Cacophony',
@@ -316,6 +336,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Fills an area with loud and discordant noise, making concentration difficult. Casting spells within the area requires a concentration check (DC 15 + spell level). All other concentration checks in the area have their DC increased by 5. Perception checks involving hearing receive a +5 DC increase.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Distressing Tone',
@@ -331,6 +352,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Produces a powerful tone that vibrates living flesh. Affected targets must make a saving throw or suffer the sickened condition. Creatures possessing immunity to critical hits are also immune to this spell\'s effects.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divide Mind',
@@ -346,6 +368,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Partitions the caster\'s mind. For the duration, the caster rolls twice on all Will saves, Intelligence checks, and Intelligence-based skill checks, using the higher result. As a swift action, the caster\'s secondary mind can perform any purely mental action normally requiring a standard or move action (casting psychic spells, using spell-like abilities, concentrating on spells). Spells and spell-like abilities cast by the secondary mind cannot exceed 5th level.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divine Arrow',
@@ -361,6 +384,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: "Imbues a projectile with holy energy, causing it to deal additional damage to undead creatures equal to the caster's lay on hands damage. The extra damage does not multiply on critical hits. Requires at least one available daily use of lay on hands but does not expend that use. The spell ends when the projectile hits a target or is destroyed.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divine Favor',
@@ -375,6 +399,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'None',
     description: "Invokes divine power to gain a luck bonus on attack and weapon damage rolls equal to +1 for every three caster levels (minimum +1, maximum +3). The bonus doesn't apply to spell damage.",
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divine Illumination',
@@ -390,6 +415,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Creates shafts of blue light that illuminate all undead in the area. Affected undead suffer a -20 penalty to Stealth checks. Increases ambient light by one step in a 5-foot radius around each affected creature. Invisible undead remain unseen but their locations are pinpointed. Undead must make a Will save or lose channel resistance and suffer a -2 penalty on saving throws against positive energy effects.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divine Power',
@@ -404,6 +430,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'None',
     description: 'Grants a +1 luck bonus per three caster levels (maximum +6) on attack rolls, weapon damage rolls, Strength checks, and Strength-based skill checks. Grants temporary hit points equal to caster level and an extra attack at full base attack bonus during full-attack actions (does not stack with haste or speed weapons).',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divine Pursuit',
@@ -418,6 +445,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'None',
     description: 'The caster selects one creature within 60 feet previously damaged. If that target possesses a burrow, climb, fly, or swim speed, the caster gains that movement type at the same speed and maneuverability. When gaining burrow or swim speed, the caster can breathe normally while using these forms of movement.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divine Transfer',
@@ -432,6 +460,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "Transfers life essence to a touched creature through a single touch, allowing transfer of up to hit points equal to the caster's Constitution score. The recipient is healed without exceeding its normal maximum. Additionally, the recipient gains damage reduction against evil effects equal to the caster's Charisma bonus (if positive) for the spell's duration.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Divine Trident',
@@ -448,6 +477,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: "Creates an immaterial electrical trident that functions as a melee touch weapon dealing 1d8 points of electricity damage + 1 point per 2 caster levels (maximum +10). Since the weapon lacks physical form, the caster's Strength modifier doesn't contribute to damage. The electricity can ignite flammable materials.",
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Domination Link',
@@ -464,6 +494,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Functions like detect thoughts but specifically targets mental control echoes. Each minute of concentration reveals one of five pieces of information about the creature mentally dominating the target: direction and distance to the controller, the controller\'s emotional state, a relevant iconic image, the controller\'s general location, or the name by which the target knows its controller.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Doom',
@@ -479,6 +510,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Fills a single subject with a feeling of horrible dread that causes it to become shaken.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dousing Rain',
@@ -495,6 +527,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Summons rainfall within the affected area. Nonmagical fires are automatically extinguished, and all creatures and objects in the area gain fire resistance 5. The water conducts electricity, causing creatures to take an extra electricity damage point when struck. At caster levels 6, 12, and 18, the fire resistance and additional electricity damage each increase.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Draconic Ally',
@@ -511,6 +544,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Conjures a semi-living intelligent draconic servant that loyally obeys and serves the caster. Functions as a pseudodragon with abilities from one of three dragon form spells. Possesses a breath weapon usable once daily and can travel beyond the spell\'s range to complete tasks. Only one such ally may exist at a time.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Draconic Malice',
@@ -527,6 +561,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: "Manifests a palpable aura of draconic fear and dread. Living beings within the aura that normally possess immunity to fear or mind-affecting effects temporarily lose those immunities against the caster's fear-inducing spells, spell-like abilities, supernatural abilities, and Intimidate checks. For antipaladins with aura of cowardice, changes the penalty imposed to -6 for the spell's duration.",
     source: 'Pathfinder Player Companion: Legacy of Dragons',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Draconic Reservoir',
@@ -542,6 +577,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: 'Functions similarly to protection from energy, absorbing 6 points per caster level of one energy type (maximum 60 points). Each round as a swift action, the subject can release 1d6 absorbed points into a melee attack as energy damage. Releasing energy doesn\'t create additional absorption capacity. Does not stack with protection from energy but overlaps with resist energy (draconic reservoir absorbs first).',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Draconic Suppression',
@@ -556,6 +592,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: "When a dragon fails its save, it cannot use its breath weapon during the spell's duration and functions as though it were one age category younger for determining available special abilities. Does not affect the dragon's armor class, feats, frightful presence, hit points, physical attacks, saving throws, senses, size, skills, spellcasting, or statistics.",
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dragon Turtle Shell',
@@ -570,6 +607,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'None',
     description: 'Reduces incoming damage from natural attacks. When struck by an opponent\'s natural attacks, the damage is resolved as if the attack came from a creature one size smaller per 5 caster levels (maximum four size categories smaller at CL 20th). Cannot reduce natural attack base damage below 1d2.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Dragon's Breath",
@@ -586,6 +624,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The caster breathes out a blast of energy dealing 1d6 points of energy damage per caster level (maximum 12d6). Energy type and area depends on dragon scale used: black/green/copper = acid; blue/bronze = electricity; gold/red/brass = fire; silver/white = cold. Black, blue, bronze, brass, and copper dragons create 60-foot lines; others create 30-foot cones.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Drain Construct',
@@ -600,6 +639,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Temporarily weakens a construct by sapping its animating force. The target loses any damage reduction and fast healing abilities, and its base speed is reduced by half. The construct suffers a -4 penalty to Strength, increasing by 2 for every 3 caster levels beyond 3rd (maximum -14). Constructs normally immune to magic receive a +4 bonus on their saving throw.',
     source: 'Pathfinder Player Companion: People of the Wastes',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dread Bolt',
@@ -616,6 +656,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Hurls a crackling missile of darkness at a single target (ranged touch attack). Good creatures take 1d8 points per two caster levels (maximum 5d8); good outsiders take 1d6 per caster level (maximum 10d6) and become sickened for 1 round. A successful Will save reduces damage by half and prevents the sickened condition. Neutral creatures take half damage. Evil creatures are unaffected.',
     source: 'Pathfinder Roleplaying Game Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dreadscape',
@@ -632,6 +673,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Warps how targets perceive their surroundings, making buildings appear ruined and allies seem hostile. Affected creatures gain the scared condition and react with hostility toward newly encountered beings (but not creatures present during casting). Should an affected target become frightened or panicked, they sustain 1d6 Wisdom damage (once per casting).',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Council',
@@ -648,6 +690,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Builds upon the dream spell, enabling two-way communication between the caster and sleeping targets. The caster can exchange messages equal to caster level (each limited to 25 words or a single vague image). Sleeping recipients possessing dream or dream council spells can expend a message to enter the caster\'s dreamscape while remaining asleep. Those with the Lucid Dreamer feat enter without casting.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Dalliance',
@@ -664,6 +707,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Projects a comforting phantasm that leeches onto the psyche of a target, filling its dreams with pleasant visions. After sleeping, the target must succeed on a Will save or remain asleep, continuing to require saves each night. Without intervention, the sleeping creature eventually starves. Persists until removed by break enchantment, greater restoration, or miracle. The target awakens if dealt damage equal to 1 point per Hit Die, but becomes fatigued.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Feast',
@@ -679,6 +723,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes (harmless)',
     description: "Causes the target to experience vivid dreams of a rich feast during their next sleep period (within 8 hours). Upon waking, the recipient feels fully nourished as though they had consumed a complete meal. Requires at least one hour of uninterrupted sleep. Spellcasters who have prepared this spell may expend it during their own sleep without using a spell slot.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Reality',
@@ -695,6 +740,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Causes affected creatures to perceive their surroundings as dreamlike. When the magical effect expires, the target forgets all identifying details of events that transpired while the spell lasted. If modify memory is cast before the spell concludes, the target may recover these suppressed details.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Scan',
@@ -710,6 +756,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: "Functions similarly to dream but allows reading a target's thoughts rather than sending messages. Waits for the target to sleep, then can concentrate to read its surface thoughts as if using detect thoughts for up to 1 minute per caster level. Alternatively, can scan dreams and subconscious by asking questions (one answer per minute of concentration, Will save each time). Targets may Bluff to implant false information on a successful check of 5+.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Shield',
@@ -724,6 +771,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: "Wards the target's mind against intrusion and influence while unconscious. When sleeping, the target gains spell resistance equal to 10 + caster's level against mind-affecting effects and an additional saving throw against possession or mental control. While awake, grants a +4 bonus on saves against sleep effects. Every 10 minutes spent awake consumes 1 hour of the spell's remaining duration.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Travel',
@@ -740,6 +788,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: "Transports the caster and allies into the Dimension of Dreams to travel through a target creature's dreamscape. Takes approximately one hour to reach the destination. Accuracy depends on familiarity with the target dreamer. Possible outcomes: On Target, Off Target, Similar Area, or Mishap (1d10 damage and reroll). Can target creatures on other planes (1d4+1 additional hours). If the target awakens, travelers may be brought to its plane or pushed to another dreamscape.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Voyage',
@@ -756,6 +805,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions like dream travel but transports via a fantastical vehicle of the caster\'s own devising that halves travel time. No chance of arriving off-target. Psychic vehicle buffers minds from harmful emotional effects and fear. The caster can make multiple trips within the duration. Can optionally increase to 10 creatures per caster level (reduces duration to 1 hour, requires extended casting).',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dress Corpse',
@@ -770,6 +820,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Alters flesh and bones of a corpse to conceal or fabricate wounds, bruising, poison traces, burn marks, and signs of death. Cannot hide extreme alterations (loss of a limb), restore flesh to skeletal remains, or change the corpse\'s apparent identity. Observers may attempt a Perception check (DC 10 + caster level) to notice unnatural wounds; Heal check (DC 15 + caster level) reveals the deception.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Drunkard's Breath",
@@ -786,6 +837,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'Functions like stinking cloud, except the effect is barely visible and does not obscure vision. The nausea effect resembles that of an extreme hangover. This is a poison effect.',
     source: 'Pathfinder 14: Children of the Void',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Duelist's Feint",
@@ -802,6 +854,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: "Distracts a target with lustful thoughts. The affected creature suffers penalties equal to half the caster's level on concentration checks and CMD against dirty trick, grapple, and steal attempts by the caster. The target also loses its Dexterity bonus to AC against the caster's first melee attack each round. Creatures not naturally attracted to the caster receive a +4 bonus on their saving throw. The spell ends if the caster moves beyond 20 feet or breaks line of sight.",
     source: "Pathfinder Roleplaying Game Adventurer's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Duelist's Parry",
@@ -816,6 +869,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: "Allows the caster to deflect an incoming melee attack. Cast when an opponent makes a melee attack against the caster, before the attack roll. The caster makes a parry attempt with a light or one-handed weapon, mimicking the swashbuckler's opportune parry and riposte deed (except it does not require panache). Cannot riposte as part of this spell.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dungeonsight',
@@ -831,6 +885,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'None',
     description: 'Grants a clear and memorable view of the layout of chambers, barriers, and connecting passages within the spell\'s area. Reveals only architectural layout — not inhabitants or contents. Specifically identifies secret doors and hidden passages but provides no information about opening mechanisms.',
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Duplicate Familiar',
@@ -847,6 +902,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: "Creates a duplicate of the caster's familiar. The familiar's master can utilize the duplicate as though it were the actual familiar in every way, with one limitation: the bonus special ability from more than one familiar at a time is not gained. Upon duration expiration, the duplicate deteriorates to nothing.",
     source: 'Pathfinder Player Companion: Familiar Folio',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dust of Twilight',
@@ -863,6 +919,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Creates a shower of iridescent black particles that extinguishes mundane light sources like torches and lanterns, and dispels light-descriptor spells of 2nd level or lower. Affected creatures must succeed at a Fortitude save or become fatigued.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dust Ward',
@@ -877,6 +934,7 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'No',
     description: 'Protects a magic item by designating an allowed creature type, subtype, or individual. If an unauthorized creature carries or wears the item for 1+ continuous hours, or attempts to study it to learn properties or crafting methods, the dust ward disintegrates the item into worthless gray dust. Cannot affect items with caster levels exceeding half the caster\'s level.',
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dweomer Retaliation',
@@ -891,5 +949,6 @@ export const GAP_SPELLS_D_2: Spell[] = [
     spellResistance: 'Yes',
     description: "Can only be cast immediately after successfully counterspelling an opponent's spell. The caster gains temporary hit points equal to the level of the countered spell plus their Charisma or Intelligence modifier, while the opponent takes equivalent damage. For countered spells of 4th level or higher, both parties make opposed concentration checks; if the caster wins by 10+ points, the spell or spell slot is retained as if not cast.",
     source: 'Pathfinder Roleplaying Game',
+    verificationStatus: 'needs_review' as const,
   },
 ];

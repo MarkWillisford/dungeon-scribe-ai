@@ -9,6 +9,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
       'You can dedicate one hour of focused effort to cultivate a collection of magical fruits numbering one-third your character level. Each fruit grants the effects of a lesser restoration spell when consumed. The fruits retain magical properties for 24 hours before becoming mundane. You can use this ability once per week, plus a number of additional times equal to your Constitution modifier (minimum zero additional uses).',
     shortDescription: 'Cultivate magical fruits that grant lesser restoration once per week',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'level', minimum: 5 },
@@ -29,6 +30,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       "Familiar's change shape functions as alter self; gains one permanent humanoid form",
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'familiar' },
@@ -50,6 +52,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Metamagic: damaging spells also deal 2 points of ability score damage; +3 spell level',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['metamagic'],
     prerequisites: [],
     effects: [],
@@ -64,6 +67,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'When using wild shape, also gain minor form abilities from a second chimeric aspect',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'chimeric aspect' },
@@ -81,6 +85,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain a second aspect major form during wild shape, forgoing Chimeric Adept minor form',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'feat', featId: 'chimeric_adept' },
@@ -97,6 +102,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     description: 'You can select a plant companion or vermin companion as your animal companion.',
     shortDescription: 'Choose a plant or vermin as your animal companion',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'animal companion' }],
     effects: [],
@@ -110,6 +116,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
       "You can cast wood shape as a spell-like ability at will, though this ability is limited to wood pieces weighing no more than 1 pound. You gain a +4 bonus on all Craft checks related to woodworking, and are treated as having masterwork artisan's woodworking tools for such checks even if you do not possess them.",
     shortDescription: 'Cast wood shape at will (1 lb. max); +4 Craft (woodworking)',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -135,6 +142,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Meld into wood 1/day (CL = character level, up to 24 hours); become a dryad bonded tree',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 15 },
@@ -154,6 +162,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Channel acid/cold/electricity/fire through natural weapons for +1d6 damage; limited uses',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -172,6 +181,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
       'Choose one animal focus. When you apply your chosen animal focus to your animal companion, the benefits increase by one step. At 15th level or higher, applying the chosen focus grants additional specialized abilities: Bat gains +20 ft blindsense, Bear gets +8 CON, Bull gets +8 STR, Falcon gets +12 Perception, Frog gets +12 Swim/Acrobatics, Monkey gets +12 Climb, Mouse gains Improved Uncanny Dodge, Owl gets +12 Stealth, Snake gets +8 attack/dodge, Stag gets +30 ft speed, Tiger gets +8 DEX, Wolf gains 60 ft scent. You can gain this feat multiple times; each time you must select a new animal focus.',
     shortDescription: 'Chosen animal focus benefits increase by one step when applied to companion',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'animal companion' },
@@ -189,6 +199,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Attitude of similar animals improved by two steps toward you, one step toward master',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'special', description: 'Animal companion class feature' }],
     effects: [],
@@ -202,6 +213,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
       'Once per week, instead of casting dispel magic as a spell-like ability from your spelleater racial trait, you can cast greater dispel magic. Using this upgraded version consumes your daily use of dispel magic from the spelleater racial trait. The ability otherwise functions identically to the base racial trait.',
     shortDescription: 'Cast greater dispel magic 1/week using spelleater racial trait slot',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -220,6 +232,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
       "In animal form, your natural attacks are as deadly as the weapons you were holding. When applying a melee weapon's damage type and properties to your natural attacks using the Weapon Shift feat, your natural attacks also gain an enhancement bonus on attack and damage rolls equal to the weapon's enhancement bonus (if any).",
     shortDescription: "Natural attacks gain weapon's enhancement bonus when using Weapon Shift",
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'improved_weapon_shift' },
@@ -239,6 +252,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Count as one size larger for CMB, CMD, carrying capacity, and size-based special attacks',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['monster'],
     prerequisites: [
       {
@@ -258,6 +272,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       "Natural attacks gain weapon's special abilities (not enhancement bonus) when using Weapon Shift",
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'feat', featId: 'weapon_shift' },
@@ -275,6 +290,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
       'When you blind a creature using your Kudzu Grappler feat, you can also deal your unarmed strike damage to it.',
     shortDescription: 'Deal unarmed strike damage when blinding a creature with Kudzu Grappler',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -297,6 +313,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Creatures blinded by Kudzu Grappler impose 20% increased miss chance on opponents',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -320,6 +337,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Gain two secondary wing attacks dealing 1d3 (Small) or 1d4 (Medium) slashing damage',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'STR', minimum: 15 },
@@ -346,6 +364,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Primary natural weapon hits cause 1d6 bleed damage per round (DC 15 Heal to stop)',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 8 },
@@ -377,6 +396,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       "Cast heroes' feast 1/week as spell-like ability; lose natural magic spells for 48 hours",
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 15 },
@@ -396,6 +416,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Familiar gains change shape (beast shape II) in one permanent alternate form; repeatable',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'class_feature', featureName: 'familiar' },
@@ -413,6 +434,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       '+2 grapple CMB; wings act as free hand for grappling while retaining other attacks',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'DEX', minimum: 13 },
@@ -441,6 +463,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Familiar can speak one language you know; at 5th level may swap for Improved Familiar',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'familiar' }],
     effects: [],
@@ -455,6 +478,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Use spelleater dispel magic as immediate action counterspell that reflects spell back to caster',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 13 },
@@ -474,6 +498,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       'Once/day 1 min: DR 5 (or 10) /slashing; +2 saves vs paralysis, polymorph, sleep, stunning',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -515,6 +540,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
       'You have learned some words of the mystic language treants use to call trees to their defense. Once per day, you can cast liveoak as a spell-like ability, though the duration is reduced to only 10 minutes.',
     shortDescription: 'Cast liveoak 1/day as spell-like ability (duration 10 minutes)',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CHA', minimum: 17 },
@@ -533,6 +559,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
       'Once per day as a standard action, you can use an ability that functions as tree stride with the following modifications: duration of 1 round, transport range of 200 feet per character level, and you step into an adjacent plant sharing your affinity and exit from another of the same kind within range. Ghorans may traverse any living tree, while vine leshys can pass through any living vine. The ability also permits entry into magically created or enhanced plants (such as those from wall of thorns or entangle), with exit options including similar magical plants or affinity plants. The GM determines plant affinity for non-ghoran and non-vine leshy plant creatures.',
     shortDescription: 'Once/day tree stride through affinity plants: 1 round, 200 ft/level range',
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'ability_score', ability: 'CON', minimum: 13 },
@@ -551,6 +578,7 @@ export const WILDERNESS_ORIGINS_FEATS: FeatDefinition[] = [
     shortDescription:
       "Natural attacks gain wielded weapon's damage type and properties during wild shape",
     source: 'Wilderness Origins',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'class_feature', featureName: 'wild shape' }],
     effects: [],

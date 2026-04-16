@@ -16,6 +16,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
     shortDescription:
       '+1 social skills with criminals; +2 Perception vs. surprise with a fellow vagabond.',
     source: 'Pathfinder Companion: Taldor, Echoes of Glory',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'bluff', ranks: 2 },
@@ -48,6 +49,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'You gain a +2 circumstance bonus on Profession (sailor) and Use Rope checks while aboard a ship with oars. You gain +2 damage on your first successful attack each battle when fighting on a ship.',
     shortDescription: '+2 sailor/rope checks on oared ships; +2 first-attack damage on ships.',
     source: 'Pathfinder Companion: Taldor, Echoes of Glory',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'profession_sailor', ranks: 2 },
@@ -72,6 +74,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'You gain +2 on Appraise checks, +2 on one Profession skill, and +4 on Sense Motive checks for hunches when dealing with your profession. You can invest 100+ gp in marketplaces and check monthly profits (50% chance of 25% return). Gain +1 Diplomacy and Intimidate with those in your invested marketplace.',
     shortDescription: '+2 Appraise/Profession; invest in markets for passive income.',
     source: 'Pathfinder Companion: Taldor, Echoes of Glory',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'appraise', ranks: 6 },
@@ -96,6 +99,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'You gain a +2 bonus on Stealth checks when others are actively searching for you (+4 in crowds). You gain a +2 circumstance bonus on Diplomacy and Knowledge (local) checks to find a hiding place.',
     shortDescription: '+2/+4 Stealth when hunted; +2 to find hiding places.',
     source: 'Pathfinder Companion: Taldor, Echoes of Glory',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [],
     effects: [
@@ -117,6 +121,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'When using farm implements as weapons (hand axe, pick, pitchfork, or scythe), gain +1 damage. When fighting alongside other conscripts, gain +1 initiative.',
     shortDescription: '+1 damage with farm weapons; +1 initiative with fellow conscripts.',
     source: 'Pathfinder Companion: Taldor, Echoes of Glory',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Taldan serf in service to a lord' }],
     effects: [
@@ -138,6 +143,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'You gain a cohort as per the Leadership feat — a human or halfling commoner, expert, or warrior with Taldan Squire. When within 10 feet of your squire, gain +2 initiative and +1 dodge AC.',
     shortDescription: 'Gain a squire cohort; +2 initiative and +1 dodge AC near them.',
     source: 'Pathfinder Companion: Taldor, Echoes of Glory',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'bab', minimum: 6 },
@@ -170,6 +176,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'Gain +2 initiative when within 50 feet of a mounted ally with Mounted Combat. Gain +1 dodge AC within 10 feet of an injured mounted ally.',
     shortDescription: '+2 initiative near mounted allies; +1 dodge AC near injured mounted allies.',
     source: 'Pathfinder Companion: Taldor, Echoes of Glory',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'bab', minimum: 1 },
@@ -194,6 +201,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'You can apply Survival checks in urban environments to sustain yourself and others (DC 10), resist starvation/thirst (DC 15), and gain tracking bonuses on firm ground (DC 15).',
     shortDescription: 'Use Survival skill in urban environments for food, water, and tracking.',
     source: 'Pathfinder Companion: Taldor, Echoes of Glory',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_local', ranks: 4 },
@@ -221,6 +229,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'When making a successful charge attack with a two-handed weapon wielded in both hands, add double your Strength bonus to damage instead of 1.5x. Monks can use this with both hands empty for unarmed strikes.',
     shortDescription: '2x STR to damage on charge with two-handed weapon (instead of 1.5x).',
     source: 'Pathfinder Player Companion: People of the Sands',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [{ type: 'special', description: 'Base attack bonus +6 or monk level 6th' }],
     effects: [
@@ -242,6 +251,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'Pick one Intelligence-based skill. You gain a +3 bonus on that skill in relation to Osirion or its people. You also gain +1 on all other Intelligence-based skills in relation to Osirion.',
     shortDescription: '+3 on one INT skill and +1 on others regarding Osirion.',
     source: 'Pathfinder Player Companion: People of the Sands',
+    verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
       { type: 'skill', skillId: 'knowledge_history', ranks: 1 },
@@ -267,6 +277,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'You can exclude one creature from splash weapon damage. Allies with this feat automatically avoid your splash damage on hits. If you miss near an ally with this feat, they can attempt a DC 20 Reflex save to catch it. With Snatch Arrows, they can toss it back as an immediate action.',
     shortDescription: 'Exclude allies from splash damage; allies can catch missed splash weapons.',
     source: 'Pathfinder Player Companion: People of the Sands',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [{ type: 'special', description: 'Precise Shot or Throw Anything' }],
     effects: [
@@ -288,6 +299,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'When you use a combat maneuver to move a creature into or through a square adjacent to an ally with this feat, the foe treats all adjacent squares as difficult terrain next turn. Acrobatics DC increases by 2 for each ally with this feat adjacent to the foe.',
     shortDescription: 'Repositioned foes treat ally-adjacent squares as difficult terrain.',
     source: 'Pathfinder Player Companion: People of the Sands',
+    verificationStatus: 'needs_review' as const,
     types: ['teamwork'],
     prerequisites: [],
     effects: [
@@ -309,6 +321,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'You gain +2 AC against charge attacks. If a charging creature misses, use an immediate action to reposition it. When using a readied action to attack a charger, you can attack and reposition as a free action before the charge resolves.',
     shortDescription: '+2 AC vs. charges; reposition failed chargers.',
     source: 'Pathfinder Player Companion: People of the Sands',
+    verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
       { type: 'ability_score', ability: 'INT', minimum: 13 },
@@ -337,6 +350,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'Once per round, when attacking an opponent known to own or trade in slaves, add +1 damage per 4 HD to a melee attack, ranged attack, or targeted spell.',
     shortDescription: 'Bonus damage vs. slavers equal to HD/4.',
     source: 'Pathfinder Companion: Andoran, Spirit of Liberty',
+    verificationStatus: 'needs_review' as const,
     types: ['achievement'],
     prerequisites: [
       {
@@ -363,6 +377,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       "Your attacks are treated as good-aligned for the purpose of bypassing devils' damage reduction.",
     shortDescription: 'Attacks count as good-aligned vs. devil DR.',
     source: 'Pathfinder Companion: Andoran, Spirit of Liberty',
+    verificationStatus: 'needs_review' as const,
     types: ['achievement'],
     prerequisites: [
       {
@@ -390,6 +405,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
       'Choose one Eagle Knights branch: Golden Legion (move action to grant allies within 30 ft +1 attack, AC, saves for 1 round), Steel Falcons (+1/+2 damage vs. concealed foes), or Twilight Talons (double crit range in surprise round vs. unaware targets).',
     shortDescription: 'Choose an Eagle Knight branch for a unique combat benefit.',
     source: 'Pathfinder Companion: Andoran, Spirit of Liberty',
+    verificationStatus: 'needs_review' as const,
     types: ['achievement'],
     prerequisites: [
       { type: 'level', minimum: 5 },
@@ -419,6 +435,7 @@ export const TIER3_BATCH4_FEATS: FeatDefinition[] = [
     shortDescription:
       'Precast healing spells on healthy allies; auto-triggers when they take damage.',
     source: 'Pathfinder Companion: Andoran, Spirit of Liberty',
+    verificationStatus: 'needs_review' as const,
     types: ['achievement'],
     prerequisites: [
       { type: 'special', description: 'Take 10d6+ falling damage on three occasions and survive' },

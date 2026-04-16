@@ -16,6 +16,7 @@ export const alazhra: DeityEntry = {
   sacredColors: ['black', 'blue'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -53,6 +54,7 @@ export const arazni: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -90,6 +92,7 @@ export const zyphus: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -109,6 +112,7 @@ export const camazotz: DeityEntry = {
   sacredColors: ['black', 'red'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -145,6 +149,7 @@ export const dahak: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -182,6 +187,7 @@ export const ghlaunder: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -219,6 +225,7 @@ export const gyronna: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -238,6 +245,7 @@ export const kitumu: DeityEntry = {
   sacredColors: ['black', 'yellow'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -257,6 +265,7 @@ export const ydersius: DeityEntry = {
   sacredColors: ['green', 'red'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -274,6 +283,7 @@ export const monad: DeityEntry = {
   symbol: `Spiral galaxy`,
   source: 'pf1e-concordance-rivals',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };

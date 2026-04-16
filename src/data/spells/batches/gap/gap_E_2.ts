@@ -1,8 +1,8 @@
 // Gap spells — letter E part 2 (second half alphabetically)
 // Gap metadata: {"letters":"E_2","totalChecked":95,"newSpells":19,"skipped":76}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_E_2: Spell[] = [
+export const GAP_SPELLS_E_2: SpellDefinition[] = [
   {
     name: 'Entropic Shield',
     classLevels: { cleric: 1, oracle: 1, psychic: 1 },
@@ -16,6 +16,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'No',
     description: 'A magical field appears around you, glowing with a chaotic blast of multicolored hues. The field grants a 20% miss chance against ranged attacks that require attack rolls, functioning like concealment. Distance-based attacks unaffected by concealment mechanics are not impacted.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Envious Urge',
@@ -32,6 +33,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'The spell inflames affected creatures with envy, compelling each to target the nearest creature (ally or enemy). They attempt to disarm it of a valuable weapon, steal held items, or grapple and strip away prized possessions — as determined by you. Targets may attempt a new Will save each round as a free action to break the effect.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Epidemic',
@@ -47,6 +49,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'You infect the target with one disease chosen from: blinding sickness, bubonic plague, cackle fever, filth fever, leprosy, mindfire, red ache, shakes, or slimy doom. The infection becomes highly transmissible — anyone touching the infected creature, being touched by them, or spending more than an hour in confined spaces with them must save against the disease\'s standard DC or become infected. If the initial target overcomes the disease by making the required saving throws, it remains a carrier for a length of time equal to the disease\'s frequency.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Erase Impressions',
@@ -61,6 +64,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'You remove psychic impressions from an object, erasing chosen time periods working backward from the present, up to 1 day per caster level. Erased impressions cannot be recovered through object reading, legend lore, or similar divination magic. On corpses, the spell also removes psychic impressions from when the creature was alive, preventing recovery through speak with dead.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Escape Alarm',
@@ -76,6 +80,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'No',
     description: 'This spell functions similarly to alarm but alerts you when creatures exit rather than enter the warded area. You can attune up to one additional creature per caster level, allowing attuned creatures to pass without triggering the alarm. Mental alerts can be sent to all attuned creatures.',
     source: 'Pathfinder Roleplaying Game Villain Codex',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Escaping Ward',
@@ -90,6 +95,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'No',
     description: 'This abjuration grants enhanced mobility against larger attackers. When a creature at least one size category larger than you misses with an attack, you can use an immediate action to move up to 5 feet away from that creature. This movement increases by 5 feet for every 5 caster levels. This movement does not provoke attacks of opportunity.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ethereal Envelope',
@@ -105,6 +111,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'No',
     description: 'You enter a cataleptic meditative state and move to the Ethereal Plane, cocooned in a protective envelope. The envelope provides total cover from Ethereal Plane creatures, has AC 10, hardness 5, and hit points equal to twice your caster level. It is immune to bludgeoning damage. When the spell ends, you remain asleep for 1 round before returning to the Material Plane and become staggered for 1 additional round.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ethereal Envelopment',
@@ -120,6 +127,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell forces an unwilling creature to the Ethereal Plane and traps it in a cocoon of ethereal fibers. The target initially enters a cataleptic state as if unconscious but may attempt Will saves each round to awaken. Once awake, the creature is pinned, with escape requiring successful grapple or Escape Artist checks against your caster level-based CMB/CMD. If the creature breaks free or the spell is dismissed, it returns to the Material Plane.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Etheric Shards',
@@ -136,6 +144,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'No',
     description: 'You solidify ethereal substance into invisible transdimensional blades. Movement through affected areas is at half speed, even for incorporeal beings. Entering a 5-foot cube containing these shards inflicts 1d8 points of piercing and slashing damage and requires a Reflex save or 1 point of bleed damage. Bleed damage stacks. Stationary creatures take no damage unless moving in combat. Forcibly moved creatures suffer a -4 penalty on saves; creatures able to perceive invisible or ethereal objects gain a +4 bonus. The effect functions as a magical trap with a Perception DC of 25 + spell level.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Euphoric Cloud',
@@ -153,6 +162,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'No',
     description: 'You create an intoxicating fog bank similar to fog cloud. Living creatures within the cloud become fascinated and remain fascinated while in the cloud plus 1d4+1 rounds afterward. Creatures that succeed at their saves but remain in the cloud must continue saving each round on your turn.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: "Evaluator's Lens",
@@ -168,6 +178,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'No',
     description: 'You create an insubstantial lens of force 4 inches in diameter that hovers in front of your face. You roll twice on saving throws against spells with the figment or pattern descriptor, taking the higher result. You gain a +10 enhancement bonus on Appraise checks and never wildly misjudge an item\'s value. Upon identifying magical properties, you immediately attempt a Spellcraft check as if detect magic had been cast for 3 rounds. The lens cannot determine artifact properties.',
     source: 'Pathfinder Player Companion: Black Markets',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Expeditious Construction',
@@ -185,6 +196,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'No',
     description: 'You create a low wall or simple structure of packed earth or loose stone measuring 3 feet thick, 3 feet tall, and 10 feet long per 3 caster levels. The structure must appear in unoccupied spaces on earthen or stone surfaces. It provides cover equivalent to a low wall and can be climbed with a DC 5 Climb check; Large and larger creatures bypass the check entirely. Alternatively, you may create a shorter, thicker berm with steep slopes that impose movement penalties and Acrobatics/Ride checks for traversal.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Expel Blood',
@@ -200,6 +212,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'You animate the target\'s blood, forcing it from the victim\'s body to form a corrupted water elemental. The target suffers 2d4 Constitution damage unless it succeeds at the Fortitude save. On a failed save, blood pools and becomes a fiendish water elemental matching the target\'s size (maximum Large). This elemental lacks the vortex ability but gains blood drain (1d3 Constitution damage during grapple) and Improved Grapple as a bonus feat. The caster cannot control it, but it never attacks the caster.',
     source: "Pathfinder Player Companion: Elemental Master's Handbook",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Expend',
@@ -215,6 +228,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This spell forces creatures in the affected area to expend uses from their limited supernatural or spell-like abilities without producing any actual effect. Each creature must make a Will save or lose one use of a limited-use ability. Abilities are exhausted in order of highest daily uses first; ties are randomly determined. Targets keep making saves, losing additional uses per failure, until they succeed — ending the spell\'s effects for that creature. At-will or constant abilities are unaffected.',
     source: "Advanced Player's Guide",
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Explode Head',
@@ -230,6 +244,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'This evocation causes mounting pressure within a target\'s cranium. Creatures with 20 hit points or fewer die instantly, with their head exploding and scattering debris; nearby creatures must succeed at a Reflex save or take 2d6 slashing damage. Targets exceeding 20 HP take 1d6 damage per caster level (max 20d6), with a Fortitude save for half. If the damage would render the target disabled or dying, they die with explosive results.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Explosion of Rot',
@@ -245,6 +260,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'You unleash rotting energy affecting all creatures within the burst radius, dealing 1d6 damage per caster level (max 15d6) and causing the staggered condition for 1d4 rounds. Creatures making a successful Reflex save take half damage and avoid being staggered. Plant creatures suffer a -2 penalty to saves and take 1 additional damage per die.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Explosive Runes',
@@ -260,6 +276,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'Yes',
     description: 'You inscribe magical runes on written materials. When read by anyone other than you or an instructed individual, the runes explode dealing 6d6 force damage. Creatures adjacent to the runes take full damage with no save; those within 10 feet may attempt a Reflex save for half damage. The object bearing the runes takes full damage regardless. You can remove the runes at will. Others may use dispel magic or erase spells, though failed attempts trigger detonation.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Exquisite Accompaniment',
@@ -277,6 +294,7 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'No',
     description: 'You create a glowing construct of magic in the form of a portable musical instrument that hovers nearby, moves with you, and accompanies your bardic performance. While the instrument plays, you avoid expending rounds of bardic performance from your daily allotment to maintain an active effect. However, activating or switching to a new bardic performance effect still costs rounds from your total daily allotment. The phantom instrument cannot be damaged but can be dispelled.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Extreme Buoyancy',
@@ -291,5 +309,6 @@ export const GAP_SPELLS_E_2: Spell[] = [
     spellResistance: 'Yes',
     description: "The target's buoyancy becomes and stays swiftly rising, regardless of how dense the target and its gear are. The target must succeed at a DC 20 Swim check to submerge itself or remain submerged.",
     source: 'Pathfinder Campaign Setting: Aquatic Adventures',
+    verificationStatus: 'needs_review' as const,
   },
 ];

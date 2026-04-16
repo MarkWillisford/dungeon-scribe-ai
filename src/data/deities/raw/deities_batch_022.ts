@@ -16,6 +16,7 @@ export const ymeri: DeityEntry = {
   sacredColors: ['orange', 'yellow'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -35,6 +36,7 @@ export const yuelral: DeityEntry = {
   sacredColors: ['blue', 'green', 'red'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -54,6 +56,7 @@ export const findeladlara: DeityEntry = {
   sacredColors: ['blue', 'gold'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -91,6 +94,7 @@ export const ketephys: DeityEntry = {
   },
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -110,6 +114,7 @@ export const andoletta: DeityEntry = {
   sacredColors: ['black', 'green'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -129,6 +134,7 @@ export const arqueros: DeityEntry = {
   sacredColors: ['gold', 'purple'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -148,6 +154,7 @@ export const damerrich: DeityEntry = {
   sacredColors: ['gray', 'white'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -167,6 +174,7 @@ export const eldas: DeityEntry = {
   sacredColors: ['brown', 'gray'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -186,6 +194,7 @@ export const falayna: DeityEntry = {
   sacredColors: ['silver', 'white'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
@@ -205,6 +214,7 @@ export const ghenshau: DeityEntry = {
   sacredColors: ['blue', 'green'],
   source: 'pf1e-inner-sea-gods',
   isOfficial: true,
+  verificationStatus: 'needs_review' as const,
   visibility: 'global',
   rev: 1,
 };
