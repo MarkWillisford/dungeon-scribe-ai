@@ -1,11 +1,12 @@
-import React from 'react';
-import { SafeAreaView, View, Text, ScrollView, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { useTheme } from '@/hooks/useTheme';
 import { toggleTheme } from '@/store/slices/themeSlice';
 import { logout } from '@/store/slices/authSlice';
 import { clearCharacters } from '@/store/slices/charactersSlice';
+import { AdminService } from '@/services/AdminService';
 import { OrnatePanel } from '@/components/ui/OrnatePanel';
 import { OrnateButton } from '@/components/ui/OrnateButton';
 import { FantasyDivider } from '@/components/ui/FantasyDivider';
@@ -14,6 +15,13 @@ export default function SettingsScreen() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { colors, fantasy, isDark } = useTheme();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    AdminService.isAdmin()
+      .then(setIsAdmin)
+      .catch(() => setIsAdmin(false));
+  }, []);
 
   const user = useAppSelector((state) => state.auth.user);
 
@@ -69,6 +77,23 @@ export default function SettingsScreen() {
             />
           </View>
         </OrnatePanel>
+
+        {isAdmin && (
+          <>
+            <View style={styles.sectionSpacer} />
+            <OrnatePanel title="Admin" testID="settings-admin-panel">
+              <TouchableOpacity
+                onPress={() => router.push('/admin')}
+                activeOpacity={0.7}
+                style={styles.adminRow}
+                testID="admin-panel-button"
+              >
+                <Text style={[styles.adminRowLabel, { color: fantasy.gold }]}>Admin Panel</Text>
+                <Text style={[styles.adminRowArrow, { color: colors.text.tertiary }]}>›</Text>
+              </TouchableOpacity>
+            </OrnatePanel>
+          </>
+        )}
 
         <FantasyDivider />
 
@@ -140,5 +165,19 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 8,
+  },
+  adminRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+  adminRowLabel: {
+    fontFamily: 'Cinzel',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  adminRowArrow: {
+    fontSize: 22,
   },
 });
