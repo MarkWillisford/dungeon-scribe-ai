@@ -1,8 +1,8 @@
 // Gap spells — letters I-J-K
 // Gap metadata: {"letters":"IJK","totalChecked":134,"newSpells":91,"skipped":43}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_IJK: Spell[] = [
+export const GAP_SPELLS_IJK: SpellDefinition[] = [
   // ── I ──────────────────────────────────────────────────────────────────────
   {
     name: 'Ice Armor',

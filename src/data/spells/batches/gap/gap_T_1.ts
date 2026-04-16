@@ -1,8 +1,8 @@
 // Gap spells — letter T part 1 (first half alphabetically)
 // Gap metadata: {"letters":"T_1","totalChecked":143,"newSpells":34,"skipped":109}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_T_1: Spell[] = [
+export const GAP_SPELLS_T_1: SpellDefinition[] = [
   {
     name: 'Tactical Adaptation',
     classLevels: { magus: 3 },

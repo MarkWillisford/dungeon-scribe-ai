@@ -1,8 +1,8 @@
 // Gap spells — letter U part 2 (second half alphabetically)
 // Gap metadata: {"letters":"U_2","totalChecked":52,"newSpells":14,"skipped":29}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_U_2: Spell[] = [
+export const GAP_SPELLS_U_2: SpellDefinition[] = [
   {
     name: 'Unflappable Mien',
     classLevels: {

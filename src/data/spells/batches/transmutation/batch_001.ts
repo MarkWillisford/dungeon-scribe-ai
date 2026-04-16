@@ -1,8 +1,8 @@
 // Transmutation spells — batch 001
 // Batch metadata: {"school":"transmutation","batchNum":"001","startSpell":"BEGINNING","lastSpell":"Bouncy Body","nextSpell":"Bowstaff","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/b/bowstaff/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_001: Spell[] = [
+export const TRANSMUTATION_BATCH_001: SpellDefinition[] = [
   {
     name: 'Absorbing Touch',
     classLevels: { alchemist: 3 },

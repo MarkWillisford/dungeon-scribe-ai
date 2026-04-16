@@ -1,8 +1,8 @@
 // Transmutation spells — batch 005
 // Batch metadata: {"school":"transmutation","batchNum":"005","startSpell":"Green Caress","lastSpell":"Lockjaw","nextSpell":"Lucky Number","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/l/lucky-number/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_005: Spell[] = [
+export const TRANSMUTATION_BATCH_005: SpellDefinition[] = [
   {
     name: 'Green Caress',
     classLevels: { druid: 6, ranger: 4, shaman: 6, witch: 6 },

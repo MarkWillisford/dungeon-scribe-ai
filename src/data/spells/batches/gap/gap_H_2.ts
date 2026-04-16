@@ -1,8 +1,8 @@
 // Gap spells — letter H part 2 (second half alphabetically)
 // Gap metadata: {"letters":"H_2","totalChecked":110,"newSpells":32,"skipped":0}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_H_2: Spell[] = [
+export const GAP_SPELLS_H_2: SpellDefinition[] = [
   {
     name: 'Homeward Bound',
     classLevels: { cleric: 3, 'sorcerer/wizard': 4 },

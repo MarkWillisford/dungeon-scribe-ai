@@ -1,8 +1,8 @@
 // Illusion spells — batch 002
 // Batch metadata: {"school":"illusion","batchNum":"002","startSpell":"after: Subjective Reality","lastSpell":"Zone of Silence","nextSpell":"DONE","nextUrl":null,"spellsInBatch":17}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ILLUSION_BATCH_002: Spell[] = [
+export const ILLUSION_BATCH_002: SpellDefinition[] = [
   {
     name: 'Symbol of Mirroring',
     classLevels: { arcanist: 2, mesmerist: 2, occultist: 2, sorcerer: 2, witch: 2, wizard: 2 },

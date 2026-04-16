@@ -1,8 +1,8 @@
 // Gap spells — letter C part 1 (first half alphabetically)
 // Gap metadata: {"letters":"C_1","totalChecked":213,"newSpells":152,"skipped":61}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_C_1: Spell[] = [
+export const GAP_SPELLS_C_1: SpellDefinition[] = [
   {
     name: 'Cackling Skull',
     classLevels: { witch: 3 },

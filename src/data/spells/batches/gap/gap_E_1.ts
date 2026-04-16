@@ -1,8 +1,8 @@
 // Gap spells — letter E part 1 (first half alphabetically)
 // Gap metadata: {"letters":"E_1","totalChecked":95,"newSpells":36,"skipped":59}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_E_1: Spell[] = [
+export const GAP_SPELLS_E_1: SpellDefinition[] = [
   {
     name: 'Eagle Aerie',
     classLevels: { druid: 6, summoner: 6, unchainedSummoner: 6 },

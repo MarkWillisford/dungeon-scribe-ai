@@ -1,8 +1,8 @@
 // Enchantment spells — batch 003
 // Batch metadata: {"school":"enchantment","batchNum":"003","startSpell":"Symbol of Persuasion","lastSpell":"Zone of Truth","nextSpell":"DONE","nextUrl":null,"spellsInBatch":35}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ENCHANTMENT_BATCH_003: Spell[] = [
+export const ENCHANTMENT_BATCH_003: SpellDefinition[] = [
   {
     name: 'Symbol of Persuasion',
     classLevels: { cleric: 6, oracle: 6, sorcerer: 6, wizard: 6, witch: 6 },

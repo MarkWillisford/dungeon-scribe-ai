@@ -1,8 +1,8 @@
 // Enchantment spells — batch 002
 // Batch metadata: {"school":"enchantment","batchNum":"002","startSpell":"Intensify Psyche","lastSpell":"Suggestion","nextSpell":"Symbol of Persuasion","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/s/symbol-of-persuasion/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ENCHANTMENT_BATCH_002: Spell[] = [
+export const ENCHANTMENT_BATCH_002: SpellDefinition[] = [
   {
     name: 'Intensify Psyche',
     classLevels: {

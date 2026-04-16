@@ -1,8 +1,8 @@
 // Gap spells — letters V-W-Y-Z
 // Gap metadata: {"letters":"VWYZ","totalChecked":101,"newSpells":62,"skipped":39}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_VWYZ: Spell[] = [
+export const GAP_SPELLS_VWYZ: SpellDefinition[] = [
   // ── V ──────────────────────────────────────────────────────────────────────
   {
     name: 'Vampiric Hunger',

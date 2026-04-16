@@ -1,7 +1,7 @@
 // Gap spells — letter L part 1 (first half alphabetically)
 // Gap metadata: {"letters":"L_1","totalChecked":84,"newSpells":26,"skipped":27}
-import type { Spell } from '@/types/spells';
-export const GAP_SPELLS_L_1: Spell[] = [
+import type { SpellDefinition } from '@/types/spells';
+export const GAP_SPELLS_L_1: SpellDefinition[] = [
   {
     name: "Lament of Summer's Last Breath",
     classLevels: { bard: 2, ranger: 2 },

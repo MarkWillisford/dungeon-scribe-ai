@@ -1,8 +1,8 @@
 // Transmutation spells — batch 002
 // Batch metadata: {"school":"transmutation","batchNum":"002","startSpell":"Bowstaff","lastSpell":"Dwarven Veil","nextSpell":"Eagle Eye","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/e/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_002: Spell[] = [
+export const TRANSMUTATION_BATCH_002: SpellDefinition[] = [
   {
     name: 'Bowstaff',
     classLevels: { inquisitor: 1, paladin: 1, ranger: 1 },

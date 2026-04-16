@@ -1,8 +1,8 @@
 // Conjuration spells — batch 001
 // Batch metadata: {"school":"conjuration","batchNum":"001","startSpell":"after: Summon Giant Ally III","lastSpell":"Walk through Space","nextSpell":"Wall of Clockwork","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/w/wall-of-clockwork","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const CONJURATION_BATCH_001: Spell[] = [
+export const CONJURATION_BATCH_001: SpellDefinition[] = [
   {
     name: 'Summon Infernal Host',
     classLevels: { bard: 5, cleric: 5, oracle: 5, sorcerer: 5, wizard: 5, summoner: 5, witch: 5 },

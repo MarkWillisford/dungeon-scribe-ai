@@ -1,8 +1,8 @@
 // Gap spells — letter P part 2 (second half alphabetically: Phasic Challenge → Pyrotechnic Eruption)
 // Gap metadata: {"letters":"P_2","totalChecked":163,"newSpells":53,"skipped":110}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_P_2: Spell[] = [
+export const GAP_SPELLS_P_2: SpellDefinition[] = [
   {
     name: 'Phasic Challenge',
     classLevels: { cleric: 8, psychic: 8, shaman: 8, 'sorcerer/wizard': 8, spiritualist: 6, witch: 7 },

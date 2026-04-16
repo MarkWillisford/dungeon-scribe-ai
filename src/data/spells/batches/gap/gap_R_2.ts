@@ -1,7 +1,7 @@
 // Gap spells — letter R part 2 (second half alphabetically)
 // Gap metadata: {"letters":"R_2","totalChecked":137,"newSpells":40,"skipped":0}
-import type { Spell } from '@/types/spells';
-export const GAP_SPELLS_R_2: Spell[] = [
+import type { SpellDefinition } from '@/types/spells';
+export const GAP_SPELLS_R_2: SpellDefinition[] = [
   {
     name: 'Restore Eidolon',
     classLevels: { summoner: 3, 'unchained summoner': 3 },

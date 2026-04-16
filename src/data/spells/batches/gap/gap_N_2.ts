@@ -1,8 +1,8 @@
 // Gap spells — letter N part 2 (second half alphabetically)
 // Gap metadata: {"letters":"N_2","totalChecked":26,"newSpells":16,"skipped":10}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_N_2: Spell[] = [
+export const GAP_SPELLS_N_2: SpellDefinition[] = [
   {
     name: 'Necrostasis',
     classLevels: {

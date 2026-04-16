@@ -1,8 +1,8 @@
 // Gap spells — letter S part 1 (Sa-Se)
 // Gap metadata: {"letters":"S1","totalChecked":96,"newSpells":48,"skipped":48}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_S1: Spell[] = [
+export const GAP_SPELLS_S1: SpellDefinition[] = [
   {
     name: 'Sacramental Seal',
     classLevels: { cleric: 8 },

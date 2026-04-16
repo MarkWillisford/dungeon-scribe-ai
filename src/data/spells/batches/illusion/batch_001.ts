@@ -1,8 +1,8 @@
 // Illusion spells — batch 001
 // Batch metadata: {"school":"illusion","batchNum":"001","startSpell":"after: Invisibility, Mass","lastSpell":"Subjective Reality","nextSpell":"Shadow Anchor (or next illusion after Subjective Reality in S)","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/s/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ILLUSION_BATCH_001: Spell[] = [
+export const ILLUSION_BATCH_001: SpellDefinition[] = [
   {
     name: 'Loathsome Veil',
     classLevels: { arcanist: 3, mesmerist: 3, psychic: 3, sorcerer: 3, wizard: 3, witch: 3 },

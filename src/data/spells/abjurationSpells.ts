@@ -1,6 +1,6 @@
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ABJURATION_SPELLS: Spell[] = [
+export const ABJURATION_SPELLS: SpellDefinition[] = [
   // ─── Pre-existing content ────────────────────────────────────────────────────
 // ============================================================
   // LEVEL 1 ABJURATION SPELLS

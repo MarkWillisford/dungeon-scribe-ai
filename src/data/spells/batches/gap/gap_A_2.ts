@@ -1,8 +1,8 @@
 // Gap spells — letter A part 2 (second half alphabetically)
 // Gap metadata: {"letters":"A_2","totalChecked":175,"newSpells":52,"skipped":3}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_A_2: Spell[] = [
+export const GAP_SPELLS_A_2: SpellDefinition[] = [
   {
     name: 'Anonymous Interaction',
     classLevels: { bard: 2, psychic: 2, witch: 2 },

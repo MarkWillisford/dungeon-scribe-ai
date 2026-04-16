@@ -1,8 +1,8 @@
 // Gap spells — letter C part 2 (second half alphabetically)
 // Gap metadata: {"letters":"C_2","totalChecked":213,"newSpells":152,"skipped":61}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_C_2: Spell[] = [
+export const GAP_SPELLS_C_2: SpellDefinition[] = [
   {
     name: 'Contest of Skill',
     classLevels: { bard: 2, cleric: 3, magus: 2, paladin: 2 },

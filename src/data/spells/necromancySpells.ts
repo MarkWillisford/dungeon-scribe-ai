@@ -1,6 +1,6 @@
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const NECROMANCY_SPELLS: Spell[] = [
+export const NECROMANCY_SPELLS: SpellDefinition[] = [
   // ─── Pre-existing content ────────────────────────────────────────────────────
 // ─── CANTRIPS (Level 0) ───────────────────────────────────────────────────
 

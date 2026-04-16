@@ -70,8 +70,15 @@ export interface CLBonus {
 }
 
 // ---- Spell Definition ----
+//
+// Two types, one shape:
+//   Spell           — character subdocument (used inside Spellcasting on a character)
+//   SpellDefinition — catalog entry (seeded into Firestore; carries admin quality fields)
+//
+// DataQualityFields live on SpellDefinition only so they never propagate into
+// character records via KnownSpell / PreparedSpell.
 
-export interface Spell extends DataQualityFields {
+export interface Spell {
   name: string;
   // Map of class name to spell level — e.g. { wizard: 3, sorcerer: 3, magus: 3 }
   // Queryable in Firestore: where('classLevels.wizard', '==', 3)
@@ -99,6 +106,8 @@ export interface Spell extends DataQualityFields {
   description: string;
   source: string | GameDataSource; // string during static data phase; GameDataSource after Firestore migration
 }
+
+export interface SpellDefinition extends Spell, DataQualityFields {}
 
 export interface KnownSpell extends Spell {
   classes: {

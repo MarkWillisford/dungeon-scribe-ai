@@ -1,8 +1,8 @@
 // Transmutation spells — batch 003
 // Batch metadata: {"school":"transmutation","batchNum":"003","startSpell":"Eagle's Splendor","lastSpell":"Feather Step, Mass","nextSpell":"Ferment","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/f/ferment/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_003: Spell[] = [
+export const TRANSMUTATION_BATCH_003: SpellDefinition[] = [
   {
     name: "Eagle's Splendor",
     classLevels: {

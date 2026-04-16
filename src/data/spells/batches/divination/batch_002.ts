@@ -1,8 +1,8 @@
 // Divination spells — batch 002
 // Batch metadata: {"school":"divination","batchNum":"002","startSpell":"Puzzle Box (skipped, Enchantment) → Read Magic","lastSpell":"Symbol of Scrying","nextSpell":"Tactical Insight","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/t/tactical-insight/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const DIVINATION_BATCH_002: Spell[] = [
+export const DIVINATION_BATCH_002: SpellDefinition[] = [
   {
     name: 'Read Magic',
     classLevels: {

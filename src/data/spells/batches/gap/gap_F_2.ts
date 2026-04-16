@@ -1,8 +1,8 @@
 // Gap spells — letter F part 2 (second half alphabetically: Flashfire through Furious Fire Barrage)
 // Gap metadata: {"letters":"F_2","totalChecked":160,"newSpells":41,"skipped":119}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_F_2: Spell[] = [
+export const GAP_SPELLS_F_2: SpellDefinition[] = [
   {
     name: 'Flashfire',
     classLevels: { druid: 3, shaman: 3 },

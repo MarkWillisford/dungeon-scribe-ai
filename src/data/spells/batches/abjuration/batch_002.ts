@@ -1,8 +1,8 @@
 // Abjuration spells — batch 002
 // Batch metadata: {"school":"abjuration","batchNum":"002","startSpell":"Suppress Primal Magic","lastSpell":"Wreath of Blades","nextSpell":"DONE","nextUrl":null,"spellsInBatch":25}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ABJURATION_BATCH_002: Spell[] = [
+export const ABJURATION_BATCH_002: SpellDefinition[] = [
   {
     name: 'Suppress Primal Magic',
     classLevels: { cleric: 4, sorcerer: 4, wizard: 4 },

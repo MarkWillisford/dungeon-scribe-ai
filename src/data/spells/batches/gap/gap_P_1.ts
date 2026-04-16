@@ -1,8 +1,8 @@
 // Gap spells — letter P part 1 (first half alphabetically: Pack Empathy → Phase Step)
 // Gap metadata: {"letters":"P_1","totalChecked":163,"newSpells":26,"skipped":137}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_P_1: Spell[] = [
+export const GAP_SPELLS_P_1: SpellDefinition[] = [
   {
     name: 'Pack Empathy',
     classLevels: { bloodrager: 3, druid: 3, inquisitor: 3, medium: 2, ranger: 2, 'sorcerer/wizard': 3, spiritualist: 3, summoner: 3, witch: 3 },

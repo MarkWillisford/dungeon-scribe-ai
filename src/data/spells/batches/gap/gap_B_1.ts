@@ -1,8 +1,8 @@
 // Gap spells — letter B part 1 (first half alphabetically: Babble through Blistering Invective)
 // Gap metadata: {"letters":"B_1","totalChecked":170,"newSpells":83,"skipped":41}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_B_1: Spell[] = [
+export const GAP_SPELLS_B_1: SpellDefinition[] = [
   {
     name: 'Babble',
     classLevels: { bard: 2, mesmerist: 2, psychic: 3, 'sorcerer/wizard': 3, witch: 3 },

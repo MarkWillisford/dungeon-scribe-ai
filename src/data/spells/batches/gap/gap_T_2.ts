@@ -1,8 +1,8 @@
 // Gap spells — letter T part 2 (second half alphabetically)
 // Gap metadata: {"letters":"T_2","totalChecked":143,"newSpells":34,"skipped":109}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_T_2: Spell[] = [
+export const GAP_SPELLS_T_2: SpellDefinition[] = [
   {
     name: 'Time Shudder',
     classLevels: { magus: 2, psychic: 2, 'sorcerer/wizard': 2, summoner: 2, 'unchained summoner': 2 },

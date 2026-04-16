@@ -1,8 +1,8 @@
 // Gap spells — letter G part 2 (second half alphabetically)
 // Gap metadata: {"letters":"G_2","totalChecked":72,"newSpells":23,"skipped":0}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_G_2: Spell[] = [
+export const GAP_SPELLS_G_2: SpellDefinition[] = [
   {
     name: 'Glyph of Warding, Greater',
     classLevels: { 'cleric/oracle': 6, inquisitor: 6, 'rune domain': 6 },

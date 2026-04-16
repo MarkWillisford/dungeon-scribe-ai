@@ -1,8 +1,8 @@
 // Evocation spells — batch 001
 // Batch metadata: {"school":"evocation","batchNum":"001","startSpell":"BEGINNING","lastSpell":"Wall of Sound","nextSpell":"Wind Wall","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/w/wind-wall/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const EVOCATION_BATCH_001: Spell[] = [
+export const EVOCATION_BATCH_001: SpellDefinition[] = [
   {
     name: 'Aggressive Thundercloud',
     classLevels: { druid: 2, magus: 2, sorcerer: 2, wizard: 2, witch: 2 },

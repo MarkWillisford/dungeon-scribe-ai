@@ -1,8 +1,8 @@
 // Evocation spells — batch 002
 // Batch metadata: {"school":"evocation","batchNum":"002","startSpell":"Wind Wall","lastSpell":"Wrathful Mantle","nextSpell":"DONE","nextUrl":null,"spellsInBatch":4}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const EVOCATION_BATCH_002: Spell[] = [
+export const EVOCATION_BATCH_002: SpellDefinition[] = [
   {
     name: 'Wind Wall',
     classLevels: {

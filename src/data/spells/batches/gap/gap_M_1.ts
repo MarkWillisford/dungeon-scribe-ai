@@ -1,8 +1,8 @@
 // Gap spells — letter M part 1 (first half alphabetically)
 // Gap metadata: {"letters":"M_1","totalChecked":157,"newSpells":76,"skipped":81}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_M_1: Spell[] = [
+export const GAP_SPELLS_M_1: SpellDefinition[] = [
   {
     name: 'Mad Monkeys',
     classLevels: { bard: 3, druid: 3, sorcerer: 3, wizard: 3, summoner: 3 },

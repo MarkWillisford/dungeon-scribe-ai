@@ -1,7 +1,7 @@
 // Gap spells — letter R part 1 (first half alphabetically)
 // Gap metadata: {"letters":"R_1","totalChecked":137,"newSpells":40,"skipped":0}
-import type { Spell } from '@/types/spells';
-export const GAP_SPELLS_R_1: Spell[] = [
+import type { SpellDefinition } from '@/types/spells';
+export const GAP_SPELLS_R_1: SpellDefinition[] = [
   {
     name: 'Raging Rubble',
     classLevels: { bard: 3, bloodrager: 3, cleric: 3, druid: 3, 'sorcerer/wizard': 3, witch: 3 },

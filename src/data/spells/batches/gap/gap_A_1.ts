@@ -1,8 +1,8 @@
 // Gap spells — letter A part 1 (first half alphabetically)
 // Gap metadata: {"letters":"A_1","totalChecked":175,"newSpells":55,"skipped":3}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_A_1: Spell[] = [
+export const GAP_SPELLS_A_1: SpellDefinition[] = [
   {
     name: 'Abeyance',
     classLevels: { cleric: 2, inquisitor: 2, paladin: 2 },

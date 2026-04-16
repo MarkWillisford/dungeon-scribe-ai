@@ -1,8 +1,8 @@
 // Transmutation spells — batch 004
 // Batch metadata: {"school":"transmutation","batchNum":"004","startSpell":"Ferment","lastSpell":"Gravity Bow","nextSpell":"Green Caress","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/g/green-caress/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_004: Spell[] = [
+export const TRANSMUTATION_BATCH_004: SpellDefinition[] = [
   {
     name: 'Ferment',
     classLevels: { alchemist: 1, bard: 1, cleric: 1, druid: 1, sorcerer: 1, wizard: 1, witch: 1 },

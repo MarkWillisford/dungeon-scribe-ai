@@ -1,8 +1,8 @@
 // Divination spells — batch 003
 // Batch metadata: {"school":"divination","batchNum":"003","startSpell":"Tactical Insight","lastSpell":"Witness","nextSpell":"DONE","nextUrl":null,"spellsInBatch":32}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const DIVINATION_BATCH_003: Spell[] = [
+export const DIVINATION_BATCH_003: SpellDefinition[] = [
   {
     name: 'Tactical Insight',
     classLevels: { bard: 6, inquisitor: 6 },

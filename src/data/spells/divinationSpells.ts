@@ -1,6 +1,6 @@
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const DIVINATION_SPELLS: Spell[] = [
+export const DIVINATION_SPELLS: SpellDefinition[] = [
   // ─── Pre-existing content ────────────────────────────────────────────────────
 // ─── CANTRIPS / ORISONS (Level 0) ────────────────────────────────────────────
 

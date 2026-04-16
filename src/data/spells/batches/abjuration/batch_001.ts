@@ -1,8 +1,8 @@
 // Abjuration spells — batch 001
 // Batch metadata: {"school":"abjuration","batchNum":"001","startSpell":"after: Mind Blank, Communal","lastSpell":"Suppress Charms and Compulsions","nextSpell":"Suppress Primal Magic","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/s/suppress-primal-magic/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ABJURATION_BATCH_001: Spell[] = [
+export const ABJURATION_BATCH_001: SpellDefinition[] = [
   {
     name: 'Nine Lives',
     classLevels: { cleric: 8, witch: 8 },

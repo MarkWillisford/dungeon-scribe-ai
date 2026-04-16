@@ -1,8 +1,8 @@
 // Divination spells — batch 001
 // Batch metadata: {"school":"divination","batchNum":"001","startSpell":"after: Foresight","lastSpell":"Psychic Reading","nextSpell":"Puzzle Box","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/p/puzzle-box/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const DIVINATION_BATCH_001: Spell[] = [
+export const DIVINATION_BATCH_001: SpellDefinition[] = [
   {
     name: 'Gallant Inspiration',
     classLevels: { bard: 2 },

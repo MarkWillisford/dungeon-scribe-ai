@@ -1,8 +1,8 @@
 // Gap spells — letter M part 2 (second half alphabetically)
 // Gap metadata: {"letters":"M_2","totalChecked":157,"newSpells":22,"skipped":135}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_M_2: Spell[] = [
+export const GAP_SPELLS_M_2: SpellDefinition[] = [
   {
     name: 'Mischievous Shadow',
     classLevels: { bard: 4, magus: 4, medium: 3, shaman: 4, sorcerer: 4, wizard: 4, spiritualist: 4, summoner: 4, witch: 4 },

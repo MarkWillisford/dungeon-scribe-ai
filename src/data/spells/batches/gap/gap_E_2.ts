@@ -1,8 +1,8 @@
 // Gap spells — letter E part 2 (second half alphabetically)
 // Gap metadata: {"letters":"E_2","totalChecked":95,"newSpells":19,"skipped":76}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_E_2: Spell[] = [
+export const GAP_SPELLS_E_2: SpellDefinition[] = [
   {
     name: 'Entropic Shield',
     classLevels: { cleric: 1, oracle: 1, psychic: 1 },

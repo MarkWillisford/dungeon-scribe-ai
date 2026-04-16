@@ -1,8 +1,8 @@
 // Enchantment spells — batch 001
 // Batch metadata: {"school":"enchantment","batchNum":"001","startSpell":"after: Euphoric Tranquility","lastSpell":"Instant Enemy","nextSpell":"Intensify Psyche","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/i/intensify-psyche/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ENCHANTMENT_BATCH_001: Spell[] = [
+export const ENCHANTMENT_BATCH_001: SpellDefinition[] = [
   {
     name: 'Fairness',
     classLevels: { cleric: 1, oracle: 1, inquisitor: 2, paladin: 2 },

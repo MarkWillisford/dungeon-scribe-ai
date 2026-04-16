@@ -1,8 +1,8 @@
 // Gap spells — letter U part 1 (first half alphabetically)
 // Gap metadata: {"letters":"U_1","totalChecked":52,"newSpells":14,"skipped":29}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_U_1: Spell[] = [
+export const GAP_SPELLS_U_1: SpellDefinition[] = [
   {
     name: 'Umbral Infusion',
     classLevels: {

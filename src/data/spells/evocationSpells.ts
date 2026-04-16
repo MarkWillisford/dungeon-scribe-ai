@@ -1,6 +1,6 @@
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const EVOCATION_SPELLS: Spell[] = [
+export const EVOCATION_SPELLS: SpellDefinition[] = [
   // ─── batch_001 ─────────────────────────────────────────────────────────────
 {
     name: 'Aggressive Thundercloud',

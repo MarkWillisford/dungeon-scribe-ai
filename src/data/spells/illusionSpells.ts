@@ -1,6 +1,6 @@
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ILLUSION_SPELLS: Spell[] = [
+export const ILLUSION_SPELLS: SpellDefinition[] = [
   // ─── Pre-existing content ────────────────────────────────────────────────────
 // ───────────────────────── LEVEL 1 ─────────────────────────
   {

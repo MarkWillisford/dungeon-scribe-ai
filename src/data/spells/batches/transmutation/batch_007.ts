@@ -1,8 +1,8 @@
 // Transmutation spells — batch 007
 // Batch metadata: {"school":"transmutation","batchNum":"007","startSpell":"Overstimulate","lastSpell":"Rusting Grasp","nextSpell":"Sabotage Construct","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/s/sabotage-construct/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_007: Spell[] = [
+export const TRANSMUTATION_BATCH_007: SpellDefinition[] = [
   {
     name: 'Overstimulate',
     classLevels: {

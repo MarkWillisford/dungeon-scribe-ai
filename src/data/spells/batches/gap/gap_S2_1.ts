@@ -1,8 +1,8 @@
 // Gap spells — letter S part 2a (Sf-Sm, first half)
 // Gap metadata: {"letters":"S2_1","totalChecked":97,"newSpells":73,"skipped":24}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_S2_1: Spell[] = [
+export const GAP_SPELLS_S2_1: SpellDefinition[] = [
   {
     name: 'Shackle',
     school: 'Conjuration',

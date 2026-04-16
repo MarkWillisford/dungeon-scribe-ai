@@ -1,8 +1,8 @@
 // Gap spells — letter S part 2b (Sn-Sq, second half)
 // Gap metadata: {"letters":"S2_2","totalChecked":79,"newSpells":42,"skipped":37}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_S2_2: Spell[] = [
+export const GAP_SPELLS_S2_2: SpellDefinition[] = [
   {
     name: 'Snapdragon Fireworks',
     school: 'Transmutation',

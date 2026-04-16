@@ -1,8 +1,8 @@
 // Gap spells — letter D part 2 (second half alphabetically: Determine Depth through Dweomer Retaliation)
 // Gap metadata: {"letters":"D_2","totalChecked":230,"newSpells":56,"skipped":174}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_D_2: Spell[] = [
+export const GAP_SPELLS_D_2: SpellDefinition[] = [
   {
     name: 'Determine Depth',
     classLevels: { bard: 2, druid: 2, sorcerer: 2, wizard: 2 },

@@ -1,8 +1,8 @@
 // Gap spells — letter H part 1 (first half alphabetically)
 // Gap metadata: {"letters":"H_1","totalChecked":110,"newSpells":33,"skipped":0}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_H_1: Spell[] = [
+export const GAP_SPELLS_H_1: SpellDefinition[] = [
   {
     name: "Hag's Seasoning",
     classLevels: { antipaladin: 2, bloodrager: 2, druid: 3, shaman: 3, witch: 3 },

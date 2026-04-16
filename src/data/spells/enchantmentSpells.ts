@@ -1,6 +1,6 @@
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const ENCHANTMENT_SPELLS: Spell[] = [
+export const ENCHANTMENT_SPELLS: SpellDefinition[] = [
   // ─── Pre-existing content ────────────────────────────────────────────────────
 // ── LEVEL 0 CANTRIPS ──────────────────────────────────────────────────────
   {

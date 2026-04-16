@@ -1,8 +1,8 @@
 // Transmutation spells — batch 008
 // Batch metadata: {"school":"transmutation","batchNum":"008","startSpell":"Sabotage Construct","lastSpell":"Steal Size","nextSpell":"Stone Fist","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/s/stone-fist/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_008: Spell[] = [
+export const TRANSMUTATION_BATCH_008: SpellDefinition[] = [
   {
     name: 'Sabotage Construct',
     classLevels: { bard: 5, inquisitor: 5, sorcerer: 6, wizard: 6, witch: 6 },

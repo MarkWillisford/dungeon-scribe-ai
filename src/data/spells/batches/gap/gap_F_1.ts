@@ -1,8 +1,8 @@
 // Gap spells — letter F part 1 (first half alphabetically: Fable Tapestry through Flash Forward)
 // Gap metadata: {"letters":"F_1","totalChecked":160,"newSpells":49,"skipped":111}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_F_1: Spell[] = [
+export const GAP_SPELLS_F_1: SpellDefinition[] = [
   {
     name: 'Fable Tapestry',
     classLevels: { bard: 5 },

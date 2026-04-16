@@ -1,8 +1,8 @@
 // Necromancy spells — batch 001
 // Batch metadata: {"school":"necromancy","batchNum":"001","startSpell":"after: Wail of the Banshee","lastSpell":"Wracking Ray","nextSpell":"DONE","nextUrl":null,"spellsInBatch":8}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const NECROMANCY_BATCH_001: Spell[] = [
+export const NECROMANCY_BATCH_001: SpellDefinition[] = [
   {
     name: 'Wall of Blindness/Deafness',
     classLevels: { bard: 4, cleric: 5, sorcerer: 4, wizard: 4, witch: 4 },

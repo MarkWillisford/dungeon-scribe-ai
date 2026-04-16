@@ -1,8 +1,8 @@
 // Transmutation spells — batch 009
 // Batch metadata: {"school":"transmutation","batchNum":"009","startSpell":"Stone Fist","lastSpell":"Winged Sword","nextSpell":"Winter's Grasp","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/w/winters-grasp/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_009: Spell[] = [
+export const TRANSMUTATION_BATCH_009: SpellDefinition[] = [
   {
     name: 'Stone Fist',
     classLevels: {

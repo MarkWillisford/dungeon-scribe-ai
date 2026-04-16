@@ -4,6 +4,6 @@
 // Site search for all candidate X spell names (xenomancy, x-ray-vision, xorn-movement, xiphoid-assault,
 // xenesthesia, xenostorm) returned zero results. No Pathfinder 1e spells starting with X are
 // indexed on d20pfsrd. Known_spells.txt also contains zero X-initial entries.
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_X: Spell[] = [];
+export const GAP_SPELLS_X: SpellDefinition[] = [];

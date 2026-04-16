@@ -203,7 +203,7 @@ function main() {
 
     for (const { letterTag, objects } of entries) {
       const outFile = path.join(dir, `batch_gap_${letterTag}.ts`);
-      const content = `import type { Spell } from '@/types/spells';\n\nexport const ${exportName}_GAP_${letterTag}: Spell[] = [\n  ${objects.join(',\n  ')},\n];\n`;
+      const content = `import type { SpellDefinition } from '@/types/spells';\n\nexport const ${exportName}_GAP_${letterTag}: SpellDefinition[] = [\n  ${objects.join(',\n  ')},\n];\n`;
       fs.writeFileSync(outFile, content, 'utf-8');
       console.log(`  Written: ${school}/batch_gap_${letterTag}.ts (${objects.length} spells)`);
     }

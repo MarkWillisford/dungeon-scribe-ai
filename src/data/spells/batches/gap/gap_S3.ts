@@ -1,8 +1,8 @@
 // Gap spells — letter S part 3 (Sr-Sz)
 // Gap metadata: {"letters":"S3","totalChecked":116,"newSpells":79,"skipped":37}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_S3: Spell[] = [
+export const GAP_SPELLS_S3: SpellDefinition[] = [
   {
     name: 'Stabilize',
     classLevels: { cleric: 0, oracle: 0, druid: 0, inquisitor: 0, psychic: 0, witch: 0 },

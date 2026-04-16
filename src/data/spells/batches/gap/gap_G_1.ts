@@ -1,8 +1,8 @@
 // Gap spells — letter G part 1 (first half alphabetically)
 // Gap metadata: {"letters":"G_1","totalChecked":72,"newSpells":23,"skipped":29}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_G_1: Spell[] = [
+export const GAP_SPELLS_G_1: SpellDefinition[] = [
   {
     name: 'Garden of Peril',
     classLevels: { druid: 2, ranger: 2, 'sorcerer/wizard': 2, summoner: 2, witch: 2 },

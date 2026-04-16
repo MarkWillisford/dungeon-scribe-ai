@@ -1,8 +1,8 @@
 // Transmutation spells — batch 010
 // Batch metadata: {"school":"transmutation","batchNum":"010","startSpell":"Winter's Grasp","lastSpell":"Zone of Foul Flames","nextSpell":"DONE","nextUrl":null,"spellsInBatch":8}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_010: Spell[] = [
+export const TRANSMUTATION_BATCH_010: SpellDefinition[] = [
   {
     name: 'Wizened Appearance',
     classLevels: {

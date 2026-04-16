@@ -1,8 +1,8 @@
 // Transmutation spells — batch 006
 // Batch metadata: {"school":"transmutation","batchNum":"006","startSpell":"Lucky Number","lastSpell":"Orchid's Drop","nextSpell":"Overstimulate","nextUrl":"https://www.d20pfsrd.com/magic/all-spells/o/overstimulate/","spellsInBatch":50}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const TRANSMUTATION_BATCH_006: Spell[] = [
+export const TRANSMUTATION_BATCH_006: SpellDefinition[] = [
   {
     name: 'Lucky Number',
     classLevels: {

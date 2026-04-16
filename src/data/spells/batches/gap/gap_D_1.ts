@@ -1,8 +1,8 @@
 // Gap spells — letter D part 1 (first half alphabetically: Daemon Ward through Detect Poison)
 // Gap metadata: {"letters":"D_1","totalChecked":230,"newSpells":57,"skipped":173}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_D_1: Spell[] = [
+export const GAP_SPELLS_D_1: SpellDefinition[] = [
   {
     name: 'Daemon Ward',
     classLevels: { cleric: 4, druid: 5, paladin: 4, sorcerer: 4, wizard: 4, witch: 4 },

@@ -1,6 +1,6 @@
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const UNIVERSAL_SPELLS: Spell[] = [
+export const UNIVERSAL_SPELLS: SpellDefinition[] = [
   // ─── Pre-existing content ────────────────────────────────────────────────────
 {
     name: 'Arcane Mark',

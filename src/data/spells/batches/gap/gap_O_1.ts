@@ -1,8 +1,8 @@
 // Gap spells — letter O part 1 (first half alphabetically)
 // Gap metadata: {"letters":"O_1","totalChecked":34,"newSpells":12,"skipped":22}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_O_1: Spell[] = [
+export const GAP_SPELLS_O_1: SpellDefinition[] = [
   {
     name: 'Oath of Anonymity',
     classLevels: {

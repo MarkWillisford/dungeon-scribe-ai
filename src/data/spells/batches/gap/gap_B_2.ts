@@ -1,8 +1,8 @@
 // Gap spells — letter B part 2 (second half alphabetically: Blood Blaze through Business Booms)
 // Gap metadata: {"letters":"B_2","totalChecked":170,"newSpells":84,"skipped":41}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_B_2: Spell[] = [
+export const GAP_SPELLS_B_2: SpellDefinition[] = [
   {
     name: 'Blood Blaze',
     classLevels: { alchemist: 2, antipaladin: 1, bloodrager: 2, cleric: 2, magus: 2, psychic: 2, 'sorcerer/wizard': 2, witch: 2 },

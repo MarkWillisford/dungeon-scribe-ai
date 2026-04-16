@@ -1,8 +1,8 @@
 // Conjuration spells — batch 002
 // Batch metadata: {"school":"conjuration","batchNum":"002","startSpell":"Wall of Clockwork","lastSpell":"Word of Recall","nextSpell":"DONE","nextUrl":null,"spellsInBatch":19}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const CONJURATION_BATCH_002: Spell[] = [
+export const CONJURATION_BATCH_002: SpellDefinition[] = [
   {
     name: 'Wall of Clockwork',
     classLevels: { cleric: 5, sorcerer: 5, wizard: 5 },

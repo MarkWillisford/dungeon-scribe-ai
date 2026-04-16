@@ -1,8 +1,8 @@
 // Gap spells — letter N part 1 (first half alphabetically)
 // Gap metadata: {"letters":"N_1","totalChecked":26,"newSpells":16,"skipped":10}
-import type { Spell } from '@/types/spells';
+import type { SpellDefinition } from '@/types/spells';
 
-export const GAP_SPELLS_N_1: Spell[] = [
+export const GAP_SPELLS_N_1: SpellDefinition[] = [
   {
     name: 'Nap Stack',
     classLevels: { 'cleric/oracle': 3 },
