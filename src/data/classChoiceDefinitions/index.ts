@@ -9,6 +9,7 @@ import { wizardDefinitions } from './wizard';
 import { rogueDefinitions } from './rogue';
 import { dweomerkeeperDefinitions } from './dweomerkeeper';
 import { radiantServantDefinitions } from './radiantServant';
+import { prestigePaladinDefinitions } from './prestigePaladin';
 import { sentinelDefinitions } from './sentinel';
 import { cavalierDefinitions } from './cavalier';
 import { inquisitorDefinitions } from './inquisitor';
@@ -48,6 +49,7 @@ export {
   rogueDefinitions,
   dweomerkeeperDefinitions,
   radiantServantDefinitions,
+  prestigePaladinDefinitions,
   sentinelDefinitions,
   cavalierDefinitions,
   inquisitorDefinitions,
@@ -88,6 +90,7 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...rogueDefinitions,
   ...dweomerkeeperDefinitions,
   ...radiantServantDefinitions,
+  ...prestigePaladinDefinitions,
   ...sentinelDefinitions,
   ...cavalierDefinitions,
   ...inquisitorDefinitions,
