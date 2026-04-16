@@ -14,6 +14,7 @@ function mmRod(
     id: `rod-metamagic-${idBase}${tierId}`,
     name: `Metamagic Rod, ${nameBase}${tierLabel}`,
     category: 'rod', source, isOfficial: true,
+    verificationStatus: 'needs_review' as const,
     aura: [{ strength: AuraStrength.STRONG, school: MagicSchool.UNIVERSAL }],
     casterLevel: 17, slot: 'none', price, weight: 5,
     description: `3/day ${desc} (${featName} feat). ${tier === 'lesser' ? 'Lesser' : tier === 'normal' ? 'Normal' : 'Greater'}: up to ${maxLevel}-level spells.`,
