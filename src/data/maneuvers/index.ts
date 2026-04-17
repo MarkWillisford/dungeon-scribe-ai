@@ -29,6 +29,11 @@ import { POWE_SHATTERED_MIRROR_MANEUVERS } from './raw/powe-shattered-mirror';
 import { POWE_SLEEPING_GODDESS_MANEUVERS } from './raw/powe-sleeping-goddess';
 import { POWE_TEMPEST_GALE_MANEUVERS } from './raw/powe-tempest-gale';
 
+// Overflow (levels 7-9 that exceeded the 25-item cap in part-1 files)
+import { POW_OVERFLOW_A_MANEUVERS } from './raw/pow-overflow-a';
+import { POW_POWE_OVERFLOW_B_MANEUVERS } from './raw/pow-powe-overflow-b';
+import { POWE_OVERFLOW_C_MANEUVERS } from './raw/powe-overflow-c';
+
 export const ALL_MANEUVERS: ManeuverDefinition[] = [
   // Path of War
   ...POW_BROKEN_BLADE_MANEUVERS,
@@ -52,6 +57,10 @@ export const ALL_MANEUVERS: ManeuverDefinition[] = [
   ...POWE_SHATTERED_MIRROR_MANEUVERS,
   ...POWE_SLEEPING_GODDESS_MANEUVERS,
   ...POWE_TEMPEST_GALE_MANEUVERS,
+  // Overflow (levels 7-9)
+  ...POW_OVERFLOW_A_MANEUVERS,
+  ...POW_POWE_OVERFLOW_B_MANEUVERS,
+  ...POWE_OVERFLOW_C_MANEUVERS,
 ];
 
 export function getManeuverById(id: string): ManeuverDefinition | undefined {
