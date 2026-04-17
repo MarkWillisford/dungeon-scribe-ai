@@ -12,12 +12,14 @@ import { POW_STANCES_2 } from './raw/pow-stances-2';
 // Path of War: Expanded
 import { POWE_STANCES_1 } from './raw/powe-stances-1';
 import { POWE_STANCES_2 } from './raw/powe-stances-2';
+import { STANCE_OVERFLOW } from './raw/stance-overflow';
 
 export const ALL_STANCES: StanceDefinition[] = [
   ...POW_STANCES_1,
   ...POW_STANCES_2,
   ...POWE_STANCES_1,
   ...POWE_STANCES_2,
+  ...STANCE_OVERFLOW,
 ];
 
 export function getStanceById(id: string): StanceDefinition | undefined {
