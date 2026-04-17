@@ -37,6 +37,29 @@ import { kineticistDefinitions } from './kineticist';
 import { occultistDefinitions } from './occultist';
 import { psychicDefinitions } from './psychic';
 import { spiritualistDefinitions } from './spiritualist';
+import { crusaderDefinitions, swordsageDefinitions, warbladeDefinitions } from './tob';
+import { stalkerDefinitions, warderDefinitions, warlordDefinitions } from './pow';
+import { harbingerDefinitions, mysticDefinitions, zealotDefinitions } from './powe';
+import {
+  animusAdeptDefinitions,
+  awakenedBladeDefinitions,
+  battleTemplarDefinitions,
+  bladecasterDefinitions,
+  dragonFuryDefinitions,
+  landsknechtDefinitions,
+  mageHunterDefinitions,
+  phoenixChampionDefinitions,
+  umbralBladeDefinitions,
+} from './initiatingPrestige';
+import {
+  primalDiscipleDefinitions,
+  rubatodDefinitions,
+  mymidonDefinitions,
+  monkSilverFistDefinitions,
+  knightDiscipleDefinitions,
+  ambushHunterDefinitions,
+  hiddenBladePowDefinitions,
+} from './initiatingArchetypes';
 
 export {
   fighterDefinitions,
@@ -77,6 +100,36 @@ export {
   occultistDefinitions,
   psychicDefinitions,
   spiritualistDefinitions,
+  // ToB
+  crusaderDefinitions,
+  swordsageDefinitions,
+  warbladeDefinitions,
+  // PoW
+  stalkerDefinitions,
+  warderDefinitions,
+  warlordDefinitions,
+  // PoWE
+  harbingerDefinitions,
+  mysticDefinitions,
+  zealotDefinitions,
+  // Initiating prestige classes
+  animusAdeptDefinitions,
+  awakenedBladeDefinitions,
+  battleTemplarDefinitions,
+  bladecasterDefinitions,
+  dragonFuryDefinitions,
+  landsknechtDefinitions,
+  mageHunterDefinitions,
+  phoenixChampionDefinitions,
+  umbralBladeDefinitions,
+  // Grant-initiating martial archetypes
+  primalDiscipleDefinitions,
+  rubatodDefinitions,
+  mymidonDefinitions,
+  monkSilverFistDefinitions,
+  knightDiscipleDefinitions,
+  ambushHunterDefinitions,
+  hiddenBladePowDefinitions,
 };
 
 export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
@@ -118,6 +171,36 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...occultistDefinitions,
   ...psychicDefinitions,
   ...spiritualistDefinitions,
+  // Initiating system — ToB
+  ...crusaderDefinitions,
+  ...swordsageDefinitions,
+  ...warbladeDefinitions,
+  // Initiating system — PoW
+  ...stalkerDefinitions,
+  ...warderDefinitions,
+  ...warlordDefinitions,
+  // Initiating system — PoWE
+  ...harbingerDefinitions,
+  ...mysticDefinitions,
+  ...zealotDefinitions,
+  // Initiating prestige classes
+  ...animusAdeptDefinitions,
+  ...awakenedBladeDefinitions,
+  ...battleTemplarDefinitions,
+  ...bladecasterDefinitions,
+  ...dragonFuryDefinitions,
+  ...landsknechtDefinitions,
+  ...mageHunterDefinitions,
+  ...phoenixChampionDefinitions,
+  ...umbralBladeDefinitions,
+  // Grant-initiating martial archetypes
+  ...primalDiscipleDefinitions,
+  ...rubatodDefinitions,
+  ...mymidonDefinitions,
+  ...monkSilverFistDefinitions,
+  ...knightDiscipleDefinitions,
+  ...ambushHunterDefinitions,
+  ...hiddenBladePowDefinitions,
 ];
 
 export const getDefinitionById = (id: string): ClassChoiceDefinition | undefined =>
