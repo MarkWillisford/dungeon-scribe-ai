@@ -603,6 +603,7 @@ export function EquipmentSection() {
   const weapons = useAppSelector((state) => state.characterEntry.draft.weapons);
   const armor = useAppSelector((state) => state.characterEntry.draft.armor);
   const magicItems = useAppSelector((state) => state.characterEntry.draft.magicItems);
+  const [pendingNewItem, setPendingNewItem] = useState<DraftMagicItem | null>(null);
 
   const blankWeapon = (): DraftWeapon => ({
     id: genId(),
@@ -648,7 +649,18 @@ export function EquipmentSection() {
       {magicItems.map((item) => (
         <MagicItemCard key={item.id} item={item} />
       ))}
-      <AddButton label="+ Add Magic Item" onPress={() => dispatch(addMagicItem(blankItem()))} />
+      <AddButton label="+ Add Magic Item" onPress={() => setPendingNewItem(blankItem())} />
+      {pendingNewItem && (
+        <ItemEditModal
+          visible
+          initial={pendingNewItem}
+          onSave={(item) => {
+            dispatch(addMagicItem(item));
+            setPendingNewItem(null);
+          }}
+          onClose={() => setPendingNewItem(null)}
+        />
+      )}
     </View>
   );
 }

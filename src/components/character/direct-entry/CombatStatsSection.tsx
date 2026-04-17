@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setCombatField } from '@/store/slices/characterEntrySlice';
@@ -10,6 +10,7 @@ import {
   computeBaseFort,
   computeBaseRef,
   computeBaseWill,
+  computeMaxHP,
   getAbilityModifier,
 } from '@/utils/characterComputations';
 import { type DraftCombatStats } from '@/types/characterDraft';
@@ -110,6 +111,7 @@ export function CombatStatsSection() {
   const wisMod = useMemo(() => getAbilityModifier(abilities, 'wis'), [abilities]);
   const conMod = useMemo(() => getAbilityModifier(abilities, 'con'), [abilities]);
 
+  const computedMaxHP = useMemo(() => computeMaxHP(classes, conMod), [classes, conMod]);
   const totalBAB = useMemo(() => computeTotalBAB(classes), [classes]);
   const babString = useMemo(() => formatBABString(totalBAB), [totalBAB]);
   const baseFort = useMemo(() => computeBaseFort(classes), [classes]);
@@ -131,11 +133,25 @@ export function CombatStatsSection() {
       <Panel title="Hit Points">
         <View style={styles.row}>
           <Text style={styles.fieldLabel}>Max HP</Text>
-          <NumInput
-            value={combat.maxHPOverride}
-            onCommit={(n) => set('maxHPOverride', n)}
-            width={64}
-          />
+          {combat.maxHPOverride !== undefined ? (
+            <>
+              <NumInput
+                value={combat.maxHPOverride}
+                onCommit={(n) => set('maxHPOverride', n)}
+                width={64}
+              />
+              <Pressable onPress={() => set('maxHPOverride', undefined)} hitSlop={8}>
+                <Text style={styles.linkText}>↺ auto</Text>
+              </Pressable>
+            </>
+          ) : (
+            <>
+              <AutoComputedValue value={String(computedMaxHP)} />
+              <Pressable onPress={() => set('maxHPOverride', computedMaxHP)} hitSlop={8}>
+                <Text style={styles.linkText}>override</Text>
+              </Pressable>
+            </>
+          )}
           <Text style={styles.fieldLabel}>Current</Text>
           <NumInput
             value={combat.currentHP}
@@ -403,5 +419,11 @@ const styles = StyleSheet.create({
     fontFamily: 'LibreBaskerville',
     fontSize: 11,
     color: '#888',
+  },
+  linkText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    color: '#888',
+    textDecorationLine: 'underline',
   },
 });

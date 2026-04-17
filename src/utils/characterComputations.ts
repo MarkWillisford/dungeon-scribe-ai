@@ -142,10 +142,14 @@ export function computeTotalBABFractional(classes: DraftClassEntry[]): number {
     const data = lookupClassData(c.className);
     if (!data) return sum + c.level * 0.75;
     switch (data.babProgression) {
-      case BABProgression.Full:   return sum + c.level;
-      case BABProgression.Medium: return sum + c.level * 0.75;
-      case BABProgression.Low:    return sum + c.level * 0.5;
-      default:                    return sum + c.level * 0.75;
+      case BABProgression.Full:
+        return sum + c.level;
+      case BABProgression.Medium:
+        return sum + c.level * 0.75;
+      case BABProgression.Low:
+        return sum + c.level * 0.5;
+      default:
+        return sum + c.level * 0.75;
     }
   }, 0);
   return Math.floor(raw);
@@ -177,6 +181,25 @@ export function computeBaseRefFractional(classes: DraftClassEntry[]): number {
 
 export function computeBaseWillFractional(classes: DraftClassEntry[]): number {
   return computeBaseSaveFractional(classes, 'will');
+}
+
+// ---- Max HP ----
+
+export function computeMaxHP(classes: DraftClassEntry[], conMod: number): number {
+  if (classes.length === 0) return 0;
+  let hp = 0;
+  let isFirstLevel = true;
+  for (const cls of classes) {
+    const data = lookupClassData(cls.className);
+    const hd = data?.hitDie ?? 8;
+    for (let i = 0; i < cls.level; i++) {
+      hp += isFirstLevel ? hd : Math.floor(hd / 2) + 1;
+      isFirstLevel = false;
+    }
+  }
+  const totalLevel = classes.reduce((sum, c) => sum + c.level, 0);
+  hp += conMod * totalLevel;
+  return Math.max(1, hp);
 }
 
 // ---- ECL ----

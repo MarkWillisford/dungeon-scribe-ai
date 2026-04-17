@@ -230,9 +230,9 @@ export function ClassesSection() {
         <View style={styles.summaryDivider} />
         <AutoComputedValue value={babString} label="BAB" />
         <View style={styles.summaryDivider} />
-        <AutoComputedValue value={formatSave(fort)} label="Fort" />
-        <AutoComputedValue value={formatSave(ref)} label="Ref" />
-        <AutoComputedValue value={formatSave(will)} label="Will" />
+        <AutoComputedValue value={formatSave(fort)} label="Base Fort" />
+        <AutoComputedValue value={formatSave(ref)} label="Base Ref" />
+        <AutoComputedValue value={formatSave(will)} label="Base Will" />
       </View>
 
       {/* Class cards */}
