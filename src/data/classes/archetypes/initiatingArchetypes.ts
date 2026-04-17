@@ -196,6 +196,8 @@ export const GRANT_INITIATING_ARCHETYPES: ArchetypeData[] = [
       type: 'Martial',
       initiatingAbility: 'WIS',
       ilProgression: 'full',
+      // Player chooses 4 at character creation from: broken-blade, golden-lion, iron-tortoise,
+      // mithral-current, piercing-thunder, primal-fury, scarlet-throne, tempest-gale, thrashing-dragon
       disciplines: [],
       progressionTableKey: 'myrmidon',
       recoveryMechanics: {
@@ -213,7 +215,7 @@ export const GRANT_INITIATING_ARCHETYPES: ArchetypeData[] = [
     name: 'Monk of the Silver Fist',
     className: 'Monk',
     description:
-      'The monk of the silver fist integrates formal martial disciplines into the monk\'s meditative training, replacing ki-based mystical abilities with the structured power of the Silver Crane, Iron Tortoise, and Mithral Current schools.',
+      'The monk of the silver fist integrates formal martial disciplines into the monk\'s meditative training, replacing ki-based mystical abilities with the structured power of the Eternal Guardian, Iron Tortoise, and Mithral Current schools.',
     replacedFeatures: [
       'Slow Fall',
       'High Jump',
@@ -477,9 +479,9 @@ export const DISCIPLINE_SWAP_ARCHETYPES: ArchetypeData[] = [
     newFeatures: [],
     disciplineSwaps: {
       gained: ['black-seraph', 'primal-fury'],
-      lost: ['thrashing-dragon'],
+      lost: ['thrashing-dragon', 'veiled-moon'],
     },
-    source: 'dsp-powe',
+    source: 'dsp-pow',
   },
 
   // ── WARDER ARCHETYPES ────────────────────────────────────────────────────
@@ -496,7 +498,7 @@ export const DISCIPLINE_SWAP_ARCHETYPES: ArchetypeData[] = [
       gained: ['black-seraph', 'cursed-razor', 'eternal-guardian'],
       lost: ['golden-lion', 'iron-tortoise'],
     },
-    source: 'dsp-powe',
+    source: 'dsp-pow',
   },
 
   {
@@ -518,7 +520,7 @@ export const DISCIPLINE_SWAP_ARCHETYPES: ArchetypeData[] = [
       gained: ['eternal-guardian'],
       lost: [],
     },
-    source: 'dsp-powe',
+    source: 'dsp-pow',
   },
 
   {
@@ -533,7 +535,7 @@ export const DISCIPLINE_SWAP_ARCHETYPES: ArchetypeData[] = [
       gained: ['mithral-current'],
       lost: [],
     },
-    source: 'dsp-powe',
+    source: 'dsp-pow',
   },
 
   {
@@ -555,7 +557,7 @@ export const DISCIPLINE_SWAP_ARCHETYPES: ArchetypeData[] = [
       gained: ['piercing-thunder'],
       lost: [],
     },
-    source: 'dsp-powe',
+    source: 'dsp-pow',
   },
 
   {
@@ -570,7 +572,7 @@ export const DISCIPLINE_SWAP_ARCHETYPES: ArchetypeData[] = [
       gained: [],
       lost: [],
     },
-    source: 'dsp-powe',
+    source: 'dsp-pow',
   },
 
   {
@@ -585,7 +587,7 @@ export const DISCIPLINE_SWAP_ARCHETYPES: ArchetypeData[] = [
       gained: [],
       lost: [],
     },
-    source: 'dsp-powe',
+    source: 'dsp-pow',
   },
 
   // ── WARLORD ARCHETYPES ───────────────────────────────────────────────────
@@ -602,7 +604,7 @@ export const DISCIPLINE_SWAP_ARCHETYPES: ArchetypeData[] = [
       gained: [],
       lost: [],
     },
-    source: 'dsp-powe',
+    source: 'dsp-pow',
   },
 
   {
@@ -617,7 +619,7 @@ export const DISCIPLINE_SWAP_ARCHETYPES: ArchetypeData[] = [
       gained: [],
       lost: [],
     },
-    source: 'dsp-powe',
+    source: 'dsp-pow',
   },
 
   {
@@ -647,7 +649,7 @@ export const DISCIPLINE_SWAP_ARCHETYPES: ArchetypeData[] = [
       gained: [],
       lost: [],
     },
-    source: 'dsp-powe',
+    source: 'dsp-pow',
   },
 
   // ── ZEALOT ARCHETYPES ────────────────────────────────────────────────────
@@ -671,7 +673,7 @@ export const DISCIPLINE_SWAP_ARCHETYPES: ArchetypeData[] = [
     name: 'Void Prophet',
     className: 'Zealot',
     description:
-      'The void prophet embraces the power of emptiness and annihilation, trading Silver Crane\'s healing focus for shadow disciplines. TODO: Exact discipline swaps need source book verification.',
+      'The void prophet embraces the power of emptiness and annihilation, trading Silver Crane\'s healing focus for an alternate discipline. TODO: Exact discipline swap needs source book verification.',
     replacedFeatures: ['Discipline Access (Silver Crane)'],
     modifiedFeatures: ['Discipline Access — TODO: verify exact replacement'],
     newFeatures: [],
