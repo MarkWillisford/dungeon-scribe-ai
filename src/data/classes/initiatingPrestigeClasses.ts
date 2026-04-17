@@ -84,7 +84,7 @@ export const INITIATING_PRESTIGE_CLASSES: ExpandedClassData[] = [
       initiatingAbility: 'WIS',
       ilProgression: 'full',
       disciplines: [],
-      progressionTableKey: 'warblade',
+      progressionTableKey: 'prestige-full',
       recoveryMechanics: {
         primary: { type: 'animus_fueled', resourceId: 'mystic_animus' },
       },
@@ -163,7 +163,7 @@ export const INITIATING_PRESTIGE_CLASSES: ExpandedClassData[] = [
       initiatingAbility: 'WIS',
       ilProgression: 'full',
       disciplines: [],
-      progressionTableKey: 'warblade',
+      progressionTableKey: 'prestige-full',
       recoveryMechanics: {
         primary: { type: 'full_round_one' },
       },
@@ -249,7 +249,7 @@ export const INITIATING_PRESTIGE_CLASSES: ExpandedClassData[] = [
       initiatingAbility: 'WIS',
       ilProgression: 'full',
       disciplines: ['golden-lion', 'iron-tortoise'],
-      progressionTableKey: 'warblade',
+      progressionTableKey: 'prestige-full',
       recoveryMechanics: {
         primary: { type: 'full_round_all' },
       },
@@ -334,7 +334,7 @@ export const INITIATING_PRESTIGE_CLASSES: ExpandedClassData[] = [
       initiatingAbility: 'INT',
       ilProgression: 'full',
       disciplines: [],
-      progressionTableKey: 'warblade',
+      progressionTableKey: 'prestige-full',
       recoveryMechanics: {
         primary: { type: 'full_round_one' },
       },
@@ -418,7 +418,7 @@ export const INITIATING_PRESTIGE_CLASSES: ExpandedClassData[] = [
       initiatingAbility: 'WIS',
       ilProgression: 'full',
       disciplines: ['mithral-current', 'primal-fury'],
-      progressionTableKey: 'warblade',
+      progressionTableKey: 'prestige-full',
       recoveryMechanics: {
         primary: { type: 'strike_recovers_all' },
       },
@@ -503,7 +503,7 @@ export const INITIATING_PRESTIGE_CLASSES: ExpandedClassData[] = [
       initiatingAbility: 'INT',
       ilProgression: 'full',
       disciplines: ['mithral-current', 'scarlet-throne'],
-      progressionTableKey: 'warblade',
+      progressionTableKey: 'prestige-full',
       recoveryMechanics: {
         primary: { type: 'full_round_one' },
       },
@@ -595,7 +595,7 @@ export const INITIATING_PRESTIGE_CLASSES: ExpandedClassData[] = [
       initiatingAbility: 'WIS',
       ilProgression: 'full',
       disciplines: [],
-      progressionTableKey: 'warblade',
+      progressionTableKey: 'prestige-full',
       recoveryMechanics: {
         primary: { type: 'full_round_one' },
       },
@@ -680,7 +680,7 @@ export const INITIATING_PRESTIGE_CLASSES: ExpandedClassData[] = [
       initiatingAbility: 'WIS',
       ilProgression: 'full',
       disciplines: ['solar-wind', 'tempest-gale'],
-      progressionTableKey: 'warblade',
+      progressionTableKey: 'prestige-full',
       recoveryMechanics: {
         primary: { type: 'full_round_one' },
       },
@@ -771,7 +771,7 @@ export const INITIATING_PRESTIGE_CLASSES: ExpandedClassData[] = [
       initiatingAbility: 'WIS',
       ilProgression: 'full',
       disciplines: ['veiled-moon'],
-      progressionTableKey: 'warblade',
+      progressionTableKey: 'prestige-full',
       recoveryMechanics: {
         primary: { type: 'full_round_one' },
       },

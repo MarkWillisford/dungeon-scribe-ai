@@ -234,6 +234,24 @@ export const AMBUSH_HUNTER_PROGRESSION: InitiatingProgressionTable =
 export const HIDDEN_BLADE_POW_PROGRESSION: InitiatingProgressionTable =
   MARTIAL_ARCHETYPE_PARTIAL_PROGRESSION;
 
+// ─── Prestige Class Progression ──────────────────────────────────────────────
+// Full-IL advancing prestige classes (10-level). Each prestige class uses this
+// shared table — individual prestige tables can be added once source books are
+// verified. All values are best-effort stubs until then.
+// TODO: verify per-class prestige tables against PoW / PoWE source books
+export const PRESTIGE_FULL_PROGRESSION: InitiatingProgressionTable = [
+  [3, 3, 1], // 1
+  [4, 3, 1], // 2
+  [5, 4, 1], // 3
+  [6, 4, 1], // 4
+  [7, 4, 2], // 5
+  [8, 5, 2], // 6
+  [9, 5, 2], // 7
+  [10, 5, 2], // 8
+  [11, 6, 3], // 9
+  [12, 6, 3], // 10
+];
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 export const INITIATING_TABLES: Record<string, InitiatingProgressionTable> = {
   crusader: CRUSADER_PROGRESSION,
@@ -245,6 +263,8 @@ export const INITIATING_TABLES: Record<string, InitiatingProgressionTable> = {
   harbinger: HARBINGER_PROGRESSION,
   mystic: MYSTIC_PROGRESSION,
   zealot: ZEALOT_PROGRESSION,
+  // Prestige classes (full-IL advancing, 10-level)
+  'prestige-full': PRESTIGE_FULL_PROGRESSION,
   // Martial archetypes (grant initiating to non-initiating classes)
   'primal-disciple': PRIMAL_DISCIPLE_PROGRESSION,
   'rubato': RUBATO_PROGRESSION,

@@ -119,24 +119,17 @@ export const INITIATING_BASE_CLASSES: ExpandedClassData[] = [
     skillRanksPerLevel: 6,
     classSkills: [
       'Acrobatics',
-      'Autohypnosis',
       'Climb',
       'Craft',
       'Heal',
-      'Hide',
       'Intimidate',
-      'Jump',
       'Knowledge (history)',
       'Knowledge (local)',
-      'Listen',
-      'Martial Lore',
-      'Move Silently',
       'Perception',
       'Profession',
       'Sense Motive',
       'Stealth',
       'Swim',
-      'Tumble',
     ],
     babProgression: BABProgression.Medium,
     saves: {
@@ -227,13 +220,12 @@ export const INITIATING_BASE_CLASSES: ExpandedClassData[] = [
     hitDie: 12,
     skillRanksPerLevel: 4,
     classSkills: [
+      'Acrobatics',
       'Climb',
       'Craft',
       'Intimidate',
-      'Jump',
       'Knowledge (history)',
       'Knowledge (local)',
-      'Martial Lore',
       'Perception',
       'Profession',
       'Ride',
@@ -427,7 +419,7 @@ export const INITIATING_BASE_CLASSES: ExpandedClassData[] = [
     initiating: {
       type: 'Martial',
       initiatingAbility: 'WIS',
-      ilProgression: 'full',
+      ilProgression: 'half',
       disciplines: ['broken-blade', 'solar-wind', 'steel-serpent', 'thrashing-dragon', 'veiled-moon'],
       progressionTableKey: 'stalker',
       recoveryMechanics: {
@@ -727,7 +719,7 @@ export const INITIATING_BASE_CLASSES: ExpandedClassData[] = [
     initiating: {
       type: 'Martial',
       initiatingAbility: 'INT',
-      ilProgression: 'full',
+      ilProgression: 'half',
       disciplines: ['cursed-razor', 'eternal-guardian', 'shattered-mirror', 'veiled-moon'],
       progressionTableKey: 'harbinger',
       recoveryMechanics: {
@@ -827,7 +819,7 @@ export const INITIATING_BASE_CLASSES: ExpandedClassData[] = [
     initiating: {
       type: 'Martial',
       initiatingAbility: 'WIS',
-      ilProgression: 'full',
+      ilProgression: 'half',
       disciplines: ['elemental-flux', 'mithral-current', 'riven-hourglass', 'shattered-mirror', 'sleeping-goddess', 'tempest-gale'],
       progressionTableKey: 'mystic',
       recoveryMechanics: {
@@ -862,7 +854,7 @@ export const INITIATING_BASE_CLASSES: ExpandedClassData[] = [
       'Ride',
       'Sense Motive',
     ],
-    babProgression: BABProgression.Full,
+    babProgression: BABProgression.Medium,
     saves: {
       fortitude: SaveProgression.Good,
       reflex: SaveProgression.Poor,
