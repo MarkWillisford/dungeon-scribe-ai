@@ -143,6 +143,32 @@ export class PrerequisiteService {
       case 'mythic_tier':
         return (character.mythic?.tier ?? 0) >= prereq.minimum;
 
+      case 'initiator_level': {
+        const pools = (character as unknown as { initiating?: { pools: Array<{ effectiveInitiatorLevel: number }> } })
+          .initiating?.pools ?? [];
+        const highestIL = pools.reduce((max, p) => Math.max(max, p.effectiveInitiatorLevel), 0);
+        return highestIL >= prereq.minimum;
+      }
+
+      case 'maneuver_known': {
+        const knownManeuvers = (character as unknown as { initiating?: { knownManeuvers: Array<{ maneuverId: string }> } })
+          .initiating?.knownManeuvers ?? [];
+        return knownManeuvers.some((m) => m.maneuverId === prereq.maneuverId);
+      }
+
+      case 'discipline_access': {
+        const initiatingPools = (character as unknown as { initiating?: { pools: Array<{ accessibleDisciplines: string[]; bonusDisciplines: Array<{ disciplineId: string }>; removedDisciplines: Array<{ disciplineId: string }> }> } })
+          .initiating?.pools ?? [];
+        return initiatingPools.some((pool) => {
+          const removed = new Set(pool.removedDisciplines.map((r) => r.disciplineId));
+          const effective = [
+            ...pool.accessibleDisciplines.filter((d) => !removed.has(d)),
+            ...pool.bonusDisciplines.map((b) => b.disciplineId),
+          ];
+          return effective.includes(prereq.disciplineId);
+        });
+      }
+
       case 'special':
         // Can't auto-check; assume met (DM can override)
         return true;
@@ -205,6 +231,12 @@ export class PrerequisiteService {
         return `Caster level ${prereq.minimum}`;
       case 'mythic_tier':
         return `Mythic Tier ${prereq.minimum}`;
+      case 'initiator_level':
+        return `Initiator level ${prereq.minimum}`;
+      case 'maneuver_known':
+        return `Maneuver known: ${prereq.maneuverId}`;
+      case 'discipline_access':
+        return `Discipline access: ${prereq.disciplineId}`;
       case 'evolution':
         return `Evolution: ${prereq.evolutionId}`;
       case 'special':

@@ -9,6 +9,7 @@
 //
 import type { CharacterDraft, DraftClassEntry, AbilityKey } from '@/types/characterDraft';
 import type { Ruleset } from '@/types/ruleset';
+import type { InitiatingContributor } from '@/types/initiating';
 import {
   computeTotalBAB,
   computeTotalBABFractional,
@@ -21,6 +22,7 @@ import {
   lookupClassData,
   type ClassDataMap,
 } from '@/utils/characterComputations';
+import { InitiatingService } from './InitiatingService';
 
 // ---- Internal decision types ----
 
@@ -63,6 +65,9 @@ export interface DraftCharacterSnapshot {
   info: { race: { name: string } };
   spellcasting: {
     pools: Array<{ baseCasterLevel: number; baseClass: string }>;
+  };
+  initiating: {
+    pools: Array<{ effectiveInitiatorLevel: number; baseClass: string }>;
   };
   mythic?: { tier: number };
 }
@@ -112,6 +117,7 @@ export class DraftStateResolver {
     skills: {},
     info: { race: { name: '' } },
     spellcasting: { pools: [] },
+    initiating: { pools: [] },
   };
 
   /**
@@ -308,6 +314,7 @@ export class DraftStateResolver {
       skills: this.buildSkillsSnapshot(draft, hd),
       info: { race: { name: draft.raceName } },
       spellcasting: this.buildSpellcastingSnapshot(partialClasses, classDataMap),
+      initiating: this.buildInitiatingSnapshot(partialClasses, classDataMap),
     };
     // mythic omitted — direct-entry draft doesn't track mythic tier
   }
@@ -421,6 +428,32 @@ export class DraftStateResolver {
         return classData && classData.spellcasting.type !== 'None';
       })
       .map((entry) => ({ baseCasterLevel: entry.level, baseClass: entry.className }));
+    return { pools };
+  }
+
+  private static buildInitiatingSnapshot(
+    partialClasses: DraftClassEntry[],
+    classDataMap: ClassDataMap,
+  ): DraftCharacterSnapshot['initiating'] {
+    const initiatingEntries = partialClasses.filter((entry) => {
+      const classData = lookupClassData(entry.className, classDataMap);
+      return classData?.initiating != null;
+    });
+
+    const pools = initiatingEntries.map((entry) => {
+      // Each pool treats its own class as full IL, all others as half
+      const contributors: InitiatingContributor[] = partialClasses.map((c) => ({
+        className: c.className,
+        classLevels: c.level,
+        ilProgression: c.className === entry.className ? 'full' : 'half',
+        advancesManeuverAccess: c.className === entry.className,
+        advancesInitiatorLevel: true,
+      }));
+
+      const il = InitiatingService.computeInitiatorLevel(contributors);
+      return { effectiveInitiatorLevel: il, baseClass: entry.className };
+    });
+
     return { pools };
   }
 }
