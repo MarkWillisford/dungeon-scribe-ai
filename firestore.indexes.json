@@ -29,6 +29,7 @@
       "collectionGroup": "maneuvers",
       "queryScope": "COLLECTION",
       "fields": [
+        { "fieldPath": "visibility", "order": "ASCENDING" },
         { "fieldPath": "disciplineId", "order": "ASCENDING" },
         { "fieldPath": "level", "order": "ASCENDING" }
       ]
@@ -45,6 +46,7 @@
       "collectionGroup": "stances",
       "queryScope": "COLLECTION",
       "fields": [
+        { "fieldPath": "visibility", "order": "ASCENDING" },
         { "fieldPath": "disciplineId", "order": "ASCENDING" },
         { "fieldPath": "level", "order": "ASCENDING" }
       ]
