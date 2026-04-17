@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { Alignment } from '@/types/base';
 import { ClassChoice } from '@/types/classes';
+import { computeFeatSlots } from '@/utils/characterComputations';
 import {
   type AbilityKey,
   type CharacterDraft,
@@ -107,6 +108,20 @@ export const BLANK_DRAFT: CharacterDraft = {
   characterNotes: '',
   campaignNotes: '',
 };
+
+// ---- Feat slot sync helper ----
+
+function syncFeatSlotsFromClasses(draft: CharacterDraft): void {
+  const generated = computeFeatSlots(draft.classes, draft.raceName);
+  for (const slot of generated) {
+    if (!draft.featSlots.find((s) => s.id === slot.id)) {
+      draft.featSlots.push(slot);
+    }
+  }
+  draft.featSlots.sort(
+    (a, b) => a.availableAtLevel - b.availableAtLevel || a.id.localeCompare(b.id),
+  );
+}
 
 // ---- Slice state ----
 
@@ -215,6 +230,7 @@ const characterEntrySlice = createSlice({
       keys.forEach((k) => {
         state.draft.abilities[k].racial = action.payload.racialBonuses[k] ?? 0;
       });
+      syncFeatSlotsFromClasses(state.draft);
       state.isDirty = true;
     },
 
@@ -230,9 +246,7 @@ const characterEntrySlice = createSlice({
       // the previous deity may not be valid for the new one.
       if (previousDeity !== action.payload) {
         for (const cls of state.draft.classes) {
-          cls.classChoices = cls.classChoices.filter(
-            (c) => c.featureName !== 'Domain',
-          );
+          cls.classChoices = cls.classChoices.filter((c) => c.featureName !== 'Domain');
         }
       }
       state.isDirty = true;
@@ -320,11 +334,13 @@ const characterEntrySlice = createSlice({
 
     addClass(state, action: PayloadAction<DraftClassEntry>) {
       state.draft.classes.push(action.payload);
+      syncFeatSlotsFromClasses(state.draft);
       state.isDirty = true;
     },
 
     removeClass(state, action: PayloadAction<string>) {
       state.draft.classes = state.draft.classes.filter((c) => c.id !== action.payload);
+      syncFeatSlotsFromClasses(state.draft);
       state.isDirty = true;
     },
 
@@ -332,6 +348,7 @@ const characterEntrySlice = createSlice({
       const cls = state.draft.classes.find((c) => c.id === action.payload.id);
       if (cls) {
         cls.level = action.payload.level;
+        syncFeatSlotsFromClasses(state.draft);
         state.isDirty = true;
       }
     },
@@ -474,6 +491,11 @@ const characterEntrySlice = createSlice({
 
     // ---- Feats ----
 
+    syncFeatSlots(state) {
+      syncFeatSlotsFromClasses(state.draft);
+      state.isDirty = true;
+    },
+
     addFeatSlot(state, action: PayloadAction<DraftFeatSlot>) {
       state.draft.featSlots.push(action.payload);
       // Keep sorted by availableAtLevel
@@ -568,10 +590,7 @@ const characterEntrySlice = createSlice({
       }
     },
 
-    assignEquipmentSlot(
-      state,
-      action: PayloadAction<{ id: string; slot: DraftEquippedSlot }>,
-    ) {
+    assignEquipmentSlot(state, action: PayloadAction<{ id: string; slot: DraftEquippedSlot }>) {
       const item = state.draft.equipment.find((e) => e.id === action.payload.id);
       if (item) {
         item.slot = action.payload.slot;
@@ -588,10 +607,7 @@ const characterEntrySlice = createSlice({
       }
     },
 
-    assignEquipmentContainer(
-      state,
-      action: PayloadAction<{ id: string; containerId: string }>,
-    ) {
+    assignEquipmentContainer(state, action: PayloadAction<{ id: string; containerId: string }>) {
       const item = state.draft.equipment.find((e) => e.id === action.payload.id);
       if (item) {
         item.containerId = action.payload.containerId;
@@ -656,6 +672,7 @@ export const {
   setSkillEntry,
   addTrait,
   removeTrait,
+  syncFeatSlots,
   addFeatSlot,
   removeFeatSlot,
   assignFeat,

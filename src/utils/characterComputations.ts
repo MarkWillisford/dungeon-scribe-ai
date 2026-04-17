@@ -142,10 +142,14 @@ export function computeTotalBABFractional(classes: DraftClassEntry[]): number {
     const data = lookupClassData(c.className);
     if (!data) return sum + c.level * 0.75;
     switch (data.babProgression) {
-      case BABProgression.Full:   return sum + c.level;
-      case BABProgression.Medium: return sum + c.level * 0.75;
-      case BABProgression.Low:    return sum + c.level * 0.5;
-      default:                    return sum + c.level * 0.75;
+      case BABProgression.Full:
+        return sum + c.level;
+      case BABProgression.Medium:
+        return sum + c.level * 0.75;
+      case BABProgression.Low:
+        return sum + c.level * 0.5;
+      default:
+        return sum + c.level * 0.75;
     }
   }, 0);
   return Math.floor(raw);
@@ -196,6 +200,38 @@ export function computeMaxHP(classes: DraftClassEntry[], conMod: number): number
   const totalLevel = classes.reduce((sum, c) => sum + c.level, 0);
   hp += conMod * totalLevel;
   return Math.max(1, hp);
+}
+
+// ---- Feat slots ----
+
+export function computeFeatSlots(
+  classes: DraftClassEntry[],
+  race: string,
+): import('@/types/characterDraft').DraftFeatSlot[] {
+  const totalHD = classes.reduce((sum, c) => sum + c.level, 0);
+  const slots: import('@/types/characterDraft').DraftFeatSlot[] = [];
+
+  for (let hd = 1; hd <= totalHD; hd += 2) {
+    slots.push({
+      id: `level-feat-hd${hd}`,
+      source: 'level',
+      availableAt: `Lvl ${hd}`,
+      availableAtLevel: hd,
+      prereqOverride: false,
+    });
+  }
+
+  if (race.toLowerCase() === 'human') {
+    slots.push({
+      id: 'racial-feat-human-1',
+      source: 'racial',
+      availableAt: 'Human Bonus',
+      availableAtLevel: 1,
+      prereqOverride: false,
+    });
+  }
+
+  return slots.sort((a, b) => a.availableAtLevel - b.availableAtLevel || a.id.localeCompare(b.id));
 }
 
 // ---- ECL ----
