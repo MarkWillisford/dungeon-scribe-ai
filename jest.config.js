@@ -17,6 +17,9 @@ const sharedConfig = {
 };
 
 module.exports = {
+  // Cap workers locally to avoid WSL2 VM crashes on Windows-mounted filesystems.
+  // CI runs on native Linux, so let it use half its cores.
+  maxWorkers: process.env.CI ? '50%' : 2,
   projects: [
     // Service & Store tests — fast, ts-jest, node environment
     {
