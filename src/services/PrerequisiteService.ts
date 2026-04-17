@@ -3,6 +3,7 @@ import type { CharacterFeat, FeatDefinition, FeatPrerequisite } from '@/types/fe
 import type { Skills, Skill } from '@/types/skills';
 import type { AbilityScores } from '@/types/abilities';
 import { GameDataService } from '@/services/GameDataService';
+import { InitiatingService } from '@/services/InitiatingService';
 
 export interface PrerequisiteResult {
   met: boolean;
@@ -157,15 +158,15 @@ export class PrerequisiteService {
       }
 
       case 'discipline_access': {
-        const initiatingPools = (character as unknown as { initiating?: { pools: Array<{ accessibleDisciplines: string[]; bonusDisciplines: Array<{ disciplineId: string }>; removedDisciplines: Array<{ disciplineId: string }> }> } })
+        const initiatingPools = (character as unknown as { initiating?: { pools: Array<Record<string, unknown>> } })
           .initiating?.pools ?? [];
         return initiatingPools.some((pool) => {
-          const removed = new Set(pool.removedDisciplines.map((r) => r.disciplineId));
-          const effective = [
-            ...pool.accessibleDisciplines.filter((d) => !removed.has(d)),
-            ...pool.bonusDisciplines.map((b) => b.disciplineId),
-          ];
-          return effective.includes(prereq.disciplineId);
+          // Snapshot pools only carry { effectiveInitiatorLevel, baseClass } — no discipline
+          // fields. Guard before calling getEffectiveDisciplines which requires a full pool.
+          if (!('accessibleDisciplines' in pool)) return false;
+          return InitiatingService.getEffectiveDisciplines(
+            pool as unknown as Parameters<typeof InitiatingService.getEffectiveDisciplines>[0],
+          ).includes(prereq.disciplineId);
         });
       }
 

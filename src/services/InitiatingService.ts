@@ -151,6 +151,8 @@ export class InitiatingService {
       removedDisciplines,
       recoveryMechanics: classData.recoveryMechanics,
       maneuverDC: {
+        // base = DC before maneuver level is added (10 + abilityMod).
+        // Full DC = base + maneuverLevel + miscBonus. Do not add abilityMod again.
         base: 10 + abilityMod,
         abilityMod,
         miscBonus: miscDCBonus,
@@ -178,15 +180,16 @@ export class InitiatingService {
     tradition: MartialTradition,
     removedDisciplineId: string,
   ): InitiatingPool {
+    const traditionPrefix = 'Martial Tradition:';
     return {
       ...pool,
       martialTraditionId: tradition.id,
       removedDisciplines: [
-        ...pool.removedDisciplines,
+        ...pool.removedDisciplines.filter((r) => !r.reason.startsWith(traditionPrefix)),
         { disciplineId: removedDisciplineId, reason: `Martial Tradition: ${tradition.name}` },
       ],
       bonusDisciplines: [
-        ...pool.bonusDisciplines,
+        ...pool.bonusDisciplines.filter((b) => !b.source.startsWith(traditionPrefix)),
         { disciplineId: tradition.favoredDisciplineId, source: `Martial Tradition: ${tradition.name}` },
       ],
     };

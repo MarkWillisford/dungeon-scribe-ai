@@ -68,6 +68,7 @@ export interface DraftCharacterSnapshot {
   };
   initiating: {
     pools: Array<{ effectiveInitiatorLevel: number; baseClass: string }>;
+    knownManeuvers: Array<{ maneuverId: string }>;
   };
   mythic?: { tier: number };
 }
@@ -117,7 +118,7 @@ export class DraftStateResolver {
     skills: {},
     info: { race: { name: '' } },
     spellcasting: { pools: [] },
-    initiating: { pools: [] },
+    initiating: { pools: [], knownManeuvers: [] },
   };
 
   /**
@@ -447,6 +448,10 @@ export class DraftStateResolver {
         classLevels: c.level,
         ilProgression: c.className === entry.className ? 'full' : 'half',
         advancesManeuverAccess: c.className === entry.className,
+        // PoW rule: all non-initiating class levels count at half toward IL.
+        // advancesInitiatorLevel: false is only needed for prestige classes that
+        // explicitly state they do not advance IL — no such flag exists in the
+        // current data model, so we conservatively default to true for all classes.
         advancesInitiatorLevel: true,
       }));
 
@@ -454,6 +459,8 @@ export class DraftStateResolver {
       return { effectiveInitiatorLevel: il, baseClass: entry.className };
     });
 
-    return { pools };
+    // knownManeuvers is empty at draft time — maneuver selection happens post-draft.
+    // maneuver_known prereqs will correctly fail during draft validation.
+    return { pools, knownManeuvers: [] };
   }
 }
