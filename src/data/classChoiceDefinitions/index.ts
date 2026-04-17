@@ -53,8 +53,8 @@ import {
 } from './initiatingPrestige';
 import {
   primalDiscipleDefinitions,
-  rubatodDefinitions,
-  mymidonDefinitions,
+  rubatoDefinitions,
+  myrmidonDefinitions,
   monkSilverFistDefinitions,
   knightDiscipleDefinitions,
   ambushHunterDefinitions,
@@ -124,8 +124,8 @@ export {
   umbralBladeDefinitions,
   // Grant-initiating martial archetypes
   primalDiscipleDefinitions,
-  rubatodDefinitions,
-  mymidonDefinitions,
+  rubatoDefinitions,
+  myrmidonDefinitions,
   monkSilverFistDefinitions,
   knightDiscipleDefinitions,
   ambushHunterDefinitions,
@@ -195,8 +195,8 @@ export const ALL_CLASS_CHOICE_DEFINITIONS: ClassChoiceDefinition[] = [
   ...umbralBladeDefinitions,
   // Grant-initiating martial archetypes
   ...primalDiscipleDefinitions,
-  ...rubatodDefinitions,
-  ...mymidonDefinitions,
+  ...rubatoDefinitions,
+  ...myrmidonDefinitions,
   ...monkSilverFistDefinitions,
   ...knightDiscipleDefinitions,
   ...ambushHunterDefinitions,

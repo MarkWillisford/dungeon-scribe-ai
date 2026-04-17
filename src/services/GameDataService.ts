@@ -158,6 +158,10 @@ export class GameDataService {
       'wildtalents',
       'occultistfocuspowers',
       'phrenicamplifications',
+      // Initiating system — wired in Phase 8 (getDisciplines/getManeuvers/getStances)
+      'disciplines',
+      'maneuvers',
+      'stances',
     ];
 
     if (!validCollections.includes(collectionName)) return [];
@@ -371,6 +375,12 @@ export class GameDataService {
           subLabel: a.description?.slice(0, 80),
           category: a.amplificationTier === 'major' ? 'Major Amplifications' : 'Amplifications',
         }));
+
+      // TODO Phase 8: wire getDisciplines/getManeuvers/getStances through connector
+      case 'disciplines':
+      case 'maneuvers':
+      case 'stances':
+        return [];
 
       default:
         return [];

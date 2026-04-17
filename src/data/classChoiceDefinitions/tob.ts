@@ -80,7 +80,12 @@ export const swordsageDefinitions: ClassChoiceDefinition[] = [
     selectionMode: { type: 'special' },
     optionSource: 'collection',
     collectionName: 'maneuvers',
-    collectionFilter: { disciplineSource: 'tob' },
+    collectionFilter: {
+      disciplineIds: [
+        'desert-wind', 'diamond-mind', 'setting-sun', 'shadow-hand', 'stone-dragon', 'tiger-claw',
+        '{chosen:swordsage-bonus-discipline}',
+      ],
+    },
     source: TOB_SOURCE,
     isOfficial: false,
     verificationStatus: 'needs_review' as const,
@@ -96,7 +101,12 @@ export const swordsageDefinitions: ClassChoiceDefinition[] = [
     selectionMode: { type: 'special' },
     optionSource: 'collection',
     collectionName: 'stances',
-    collectionFilter: { disciplineSource: 'tob' },
+    collectionFilter: {
+      disciplineIds: [
+        'desert-wind', 'diamond-mind', 'setting-sun', 'shadow-hand', 'stone-dragon', 'tiger-claw',
+        '{chosen:swordsage-bonus-discipline}',
+      ],
+    },
     source: TOB_SOURCE,
     isOfficial: false,
     verificationStatus: 'needs_review' as const,

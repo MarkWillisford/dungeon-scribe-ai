@@ -36,7 +36,7 @@ export const harbingerDefinitions: ClassChoiceDefinition[] = [
     optionSource: 'collection',
     collectionName: 'maneuvers',
     collectionFilter: {
-      disciplineIds: ['cursed-razor', 'eternal-guardian', 'shattered-mirror', 'veiled-moon'],
+      disciplineIds: ['cursed-razor', 'eternal-guardian', 'shattered-mirror', 'veiled-moon', '{chosen:harbinger-bonus-discipline}'],
     },
     source: POWE_SOURCE,
     isOfficial: false,
@@ -54,7 +54,7 @@ export const harbingerDefinitions: ClassChoiceDefinition[] = [
     optionSource: 'collection',
     collectionName: 'stances',
     collectionFilter: {
-      disciplineIds: ['cursed-razor', 'eternal-guardian', 'shattered-mirror', 'veiled-moon'],
+      disciplineIds: ['cursed-razor', 'eternal-guardian', 'shattered-mirror', 'veiled-moon', '{chosen:harbinger-bonus-discipline}'],
     },
     source: POWE_SOURCE,
     isOfficial: false,

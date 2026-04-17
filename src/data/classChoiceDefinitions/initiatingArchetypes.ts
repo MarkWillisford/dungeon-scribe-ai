@@ -56,7 +56,7 @@ export const primalDiscipleDefinitions: ClassChoiceDefinition[] = [
 // Disciplines: Elemental Flux, Golden Lion, Mithral Current.
 // Key ability: CHA. Full IL. Trades some spell progression for initiating.
 
-export const rubatodDefinitions: ClassChoiceDefinition[] = [
+export const rubatoDefinitions: ClassChoiceDefinition[] = [
   {
     id: 'rubato-maneuvers-known',
     className: 'rubato',
@@ -99,7 +99,7 @@ export const rubatodDefinitions: ClassChoiceDefinition[] = [
 // Disciplines: 4 chosen at creation from a list of 9.
 // Key ability: WIS. Full IL. Trades bonus feats at 2/6/10/14/18 for initiating.
 
-export const mymidonDefinitions: ClassChoiceDefinition[] = [
+export const myrmidonDefinitions: ClassChoiceDefinition[] = [
   {
     id: 'myrmidon-starting-disciplines',
     className: 'myrmidon',
@@ -280,7 +280,7 @@ export const ambushHunterDefinitions: ClassChoiceDefinition[] = [
     optionSource: 'collection',
     collectionName: 'maneuvers',
     collectionFilter: {
-      disciplineIds: ['golden-lion', 'primal-fury'],
+      disciplineIds: ['golden-lion', 'primal-fury', '{chosen:ambush-hunter-bonus-discipline}'],
     },
     source: 'dsp-pow',
     isOfficial: false,
@@ -298,7 +298,7 @@ export const ambushHunterDefinitions: ClassChoiceDefinition[] = [
     optionSource: 'collection',
     collectionName: 'stances',
     collectionFilter: {
-      disciplineIds: ['golden-lion', 'primal-fury'],
+      disciplineIds: ['golden-lion', 'primal-fury', '{chosen:ambush-hunter-bonus-discipline}'],
     },
     source: 'dsp-pow',
     isOfficial: false,
@@ -340,7 +340,7 @@ export const hiddenBladePowDefinitions: ClassChoiceDefinition[] = [
     optionSource: 'collection',
     collectionName: 'maneuvers',
     collectionFilter: {
-      disciplineIds: ['mithral-current', 'thrashing-dragon', 'veiled-moon'],
+      disciplineIds: ['mithral-current', 'thrashing-dragon', 'veiled-moon', '{chosen:hidden-blade-pow-bonus-discipline}'],
     },
     source: 'dsp-pow',
     isOfficial: false,
@@ -358,7 +358,7 @@ export const hiddenBladePowDefinitions: ClassChoiceDefinition[] = [
     optionSource: 'collection',
     collectionName: 'stances',
     collectionFilter: {
-      disciplineIds: ['mithral-current', 'thrashing-dragon', 'veiled-moon'],
+      disciplineIds: ['mithral-current', 'thrashing-dragon', 'veiled-moon', '{chosen:hidden-blade-pow-bonus-discipline}'],
     },
     source: 'dsp-pow',
     isOfficial: false,
