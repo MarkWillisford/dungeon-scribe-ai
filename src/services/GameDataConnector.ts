@@ -22,6 +22,8 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
+import type { MagicItemDefinition } from '@/types/magicItems';
+import type { ItemSlot } from '@/types/magicItems';
 import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
 
 // ---- Class choice collections -------------------------------------------------------
@@ -115,4 +117,5 @@ export interface GameDataConnector {
   getArmor(context?: QueryContext): Promise<ArmorDefinition[]>;
   getShields(context?: QueryContext): Promise<ShieldDefinition[]>;
   getGear(context?: QueryContext): Promise<GearDefinition[]>;
+  getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]>;
 }

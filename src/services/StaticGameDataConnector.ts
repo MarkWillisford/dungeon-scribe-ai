@@ -38,6 +38,16 @@ import { ALL_EXPANDED_CLASSES, SPELL_TABLES } from '@/data/classes/index';
 import { getDefinitionsForClass } from '@/data/classChoiceDefinitions/index';
 import { ALL_WEAPONS, ALL_ARMOR, ALL_SHIELDS, ALL_GEAR } from '@/data/equipment';
 import {
+  ALL_WONDROUS_ITEMS,
+  ALL_RINGS,
+  ALL_STAVES,
+  ALL_RODS,
+  ALL_MAGIC_WEAPONS,
+  ALL_MAGIC_ARMOR,
+  ALL_IOUN_STONES,
+} from '@/data/magicItems/index';
+import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import {
   CORE_RACES,
   FEATURED_RACES,
   UNCOMMON_RACES,
@@ -251,5 +261,18 @@ export class StaticGameDataConnector implements GameDataConnector {
 
   async getGear() {
     return ALL_GEAR;
+  }
+
+  async getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]> {
+    const all: MagicItemDefinition[] = [
+      ...(ALL_WONDROUS_ITEMS as MagicItemDefinition[]),
+      ...(ALL_RINGS as MagicItemDefinition[]),
+      ...(ALL_STAVES as MagicItemDefinition[]),
+      ...(ALL_RODS as MagicItemDefinition[]),
+      ...(ALL_MAGIC_WEAPONS as MagicItemDefinition[]),
+      ...(ALL_MAGIC_ARMOR as MagicItemDefinition[]),
+      ...(ALL_IOUN_STONES as MagicItemDefinition[]),
+    ];
+    return Promise.resolve(all.filter((item) => item.slot === slot));
   }
 }

@@ -28,6 +28,7 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
+import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
 import type {
   ShamanSpiritEntry,
   EidolonEvolutionEntry,
@@ -470,5 +471,9 @@ export class GameDataService {
 
   static async getGear(): Promise<GearDefinition[]> {
     return GameDataService.connector.getGear();
+  }
+
+  static async getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]> {
+    return GameDataService.connector.getMagicItemsBySlot(slot);
   }
 }

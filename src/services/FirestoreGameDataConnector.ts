@@ -36,6 +36,7 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
+import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
 import type { DeityEntry } from '@/types/deities';
 
 import { GameDataCache, TTL } from './GameDataCache';
@@ -488,5 +489,28 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     const results = await fetchAll<GearDefinition>('gear');
     GameDataCache.set(cacheKey, results);
     return results;
+  }
+
+  async getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]> {
+    const cacheKey = `magicItems/slot/${slot}`;
+    const cached = GameDataCache.get<MagicItemDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    return FirestoreGameDataConnector.dedup(cacheKey, async () => {
+      try {
+        const q = query(
+          collection(db, 'magicItems'),
+          where('visibility', '==', 'global'),
+          where('slot', '==', slot),
+        );
+        const snap = await getDocs(q);
+        const results = snap.docs.map((d) => d.data() as MagicItemDefinition);
+        GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+        return results;
+      } catch (e) {
+        console.error(`FirestoreGameDataConnector: getMagicItemsBySlot(${slot}) failed:`, e);
+        return [];
+      }
+    });
   }
 }

@@ -83,7 +83,7 @@ function useTabStatus(): Record<EntryTabKey, TabStatus> {
         : 'empty',
     equipment: hasWarning('equipment')
       ? 'warnings'
-      : draft.weapons.length > 0 || draft.armor.length > 0
+      : draft.equipment.length > 0
         ? 'complete'
         : 'empty',
     notes: hasWarning('notes') ? 'warnings' : draft.characterNotes ? 'complete' : 'empty',

@@ -155,9 +155,7 @@ function blankDraft(): CharacterDraft {
     traits: [],
     featSlots: [],
     spellcastingPools: [],
-    weapons: [],
-    armor: [],
-    magicItems: [],
+    equipment: [],
     characterNotes: '',
     campaignNotes: '',
   };
