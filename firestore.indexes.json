@@ -24,6 +24,30 @@
         { "fieldPath": "slot", "order": "ASCENDING" },
         { "fieldPath": "name", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "maneuvers",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "disciplineId", "order": "ASCENDING" },
+        { "fieldPath": "level", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "maneuvers",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "source.bookId", "order": "ASCENDING" },
+        { "fieldPath": "level", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "stances",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "disciplineId", "order": "ASCENDING" },
+        { "fieldPath": "level", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []
