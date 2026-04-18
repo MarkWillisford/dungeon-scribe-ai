@@ -120,7 +120,6 @@ export const RISSI_FIXTURE: CharacterDraft = {
 
   // ---- Skills (ranks > 0 only) ----
   skills: {
-    concentration: { ranks: 22, misc: 0 },
     diplomacy: { ranks: 5, misc: 2 },
     knowledgeArcana: { ranks: 10, misc: 0 },
     knowledgeReligion: { ranks: 10, misc: 0 },

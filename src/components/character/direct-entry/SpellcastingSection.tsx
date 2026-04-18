@@ -307,11 +307,12 @@ function PoolCard({ pool, abilityMod, expandedClasses, spellTables }: PoolCardPr
         </Pressable>
       </View>
 
-      {/* ESL / CL / DC summary */}
+      {/* ESL / CL / DC / Concentration summary */}
       <View style={poolStyles.summaryRow}>
-        <AutoComputedValue value={`ESL ${esl}`} label="ESL" />
-        <AutoComputedValue value={`CL ${esl}`} label="CL" />
-        <AutoComputedValue value={`DC ${dcBase} + lvl`} label="Spell DC" />
+        <AutoComputedValue value={`${esl}`} label="ESL" />
+        <AutoComputedValue value={`${esl}`} label="CL" />
+        <AutoComputedValue value={`${dcBase} + lvl`} label="Spell DC" />
+        <AutoComputedValue value={fmtSign(esl + abilityMod)} label="Concentration" />
         <Text style={[poolStyles.abilityMod, { color: colors.text.secondary }]}>
           {pool.castingAbility.toUpperCase()} {fmtSign(abilityMod)}
         </Text>
