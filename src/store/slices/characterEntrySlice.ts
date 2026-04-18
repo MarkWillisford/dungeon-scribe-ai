@@ -114,12 +114,23 @@ export const BLANK_DRAFT: CharacterDraft = {
 function syncFeatSlotsFromClasses(draft: CharacterDraft): void {
   const generated = computeFeatSlots(draft.classes, draft.raceName);
   for (const slot of generated) {
-    if (!draft.featSlots.find((s) => s.id === slot.id)) {
+    if (draft.featSlots.find((s) => s.id === slot.id)) continue;
+    // Migrate a legacy slot at the same level+source to the stable ID (preserves feat assignment)
+    const legacy = draft.featSlots.find(
+      (s) => s.availableAtLevel === slot.availableAtLevel && s.source === slot.source,
+    );
+    if (legacy) {
+      legacy.id = slot.id;
+    } else {
       draft.featSlots.push(slot);
     }
   }
+  const SOURCE_ORDER: Record<string, number> = { racial: 0, level: 1, bonus: 2, mythic: 3 };
   draft.featSlots.sort(
-    (a, b) => a.availableAtLevel - b.availableAtLevel || a.id.localeCompare(b.id),
+    (a, b) =>
+      a.availableAtLevel - b.availableAtLevel ||
+      (SOURCE_ORDER[a.source] ?? 9) - (SOURCE_ORDER[b.source] ?? 9) ||
+      a.id.localeCompare(b.id),
   );
 }
 

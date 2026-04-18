@@ -229,15 +229,6 @@ export const RISSI_FIXTURE: CharacterDraft = {
       availableAtLevel: 15,
       prereqOverride: false,
     },
-    {
-      id: 'feat-slot-mythic-1',
-      source: 'mythic',
-      availableAt: 'Tier 1',
-      availableAtLevel: 1,
-      featId: 'mythic-spell-focus',
-      featName: 'Mythic Spell Focus',
-      prereqOverride: false,
-    },
   ],
 
   // ---- Spellcasting ----
