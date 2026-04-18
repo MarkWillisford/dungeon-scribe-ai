@@ -86,15 +86,16 @@ export const WARDER_WARLORD_POW_ARCHETYPES: ArchetypeData[] = [
     name: 'Bushi',
     className: 'Warlord',
     description:
-      'Honorable and noble warriors who specialize in Iaijutsu, the art of the draw cut. Bushi follow the code of bushido and exemplify the virtues of righteousness, courage, benevolence, respect, honesty, honor, and loyalty. The bushi is a martial class template that can be applied to the Warlord (as well as the Stalker and Warder).',
+      'Honorable and noble warriors who specialize in Iaijutsu, the art of the draw cut. Bushi follow the code of bushido and exemplify the virtues of righteousness, courage, benevolence, respect, honesty, honor, and loyalty. The bushi is a martial class template suitable for use with the Stalker, Warlord, and Warder classes. When applied to a Stalker, it trades standard action recovery, blending/improved blending, and the 1st-level stalker art. When applied to a Warder, it trades standard action recovery, bonus feats (3rd/8th), heavy armor proficiency, and clad in steel/steel defense/born of steel. When applied to a Warlord (shown here), it trades standard action recovery, bonus feats (1st/6th), and tactical presence/dual presence/warlord\'s presence.',
     replacedFeatures: [
+      'Standard Action Recovery',
       'Bonus Feat (1st)',
       'Bonus Feat (6th)',
       'Tactical Presence',
       'Dual Tactical Presence',
       "Warlord's Presence",
     ],
-    modifiedFeatures: ['Maneuver Recovery'],
+    modifiedFeatures: ['Maneuver Recovery', 'Maneuvers'],
     newFeatures: [
       {
         name: 'Iaido Training',
@@ -127,11 +128,11 @@ export const WARDER_WARLORD_POW_ARCHETYPES: ArchetypeData[] = [
           'The bushi gains access to seven supernatural bushido abilities selectable at specific level intervals: Benevolence (swift action grants allies within 30 feet temporary hit points equal to initiator level for 1 minute), Courage (immunity to non-magical fear, +4 bonus on fear saves, can grant bonus to allies within 60 feet), Honesty (discern lies spell-like ability, usable rounds per day equal to initiation modifier), Honor (after hitting a creature, gain +1 bonus on attack and damage rolls against that creature, increasing by +1 per four initiator levels), Loyalty (standard action to mark an ally with deathwatch and status awareness), Respect (aid another grants bonus equal to initiation modifier instead of normal bonus), and Righteousness (at-will detect chaos, detect evil, detect good, and detect law).',
       },
     ],
+    // Bushi trades one of the base class's available disciplines (player choice) for Mithral Current.
+    // Also gains Perform as a class skill.
     disciplineSwaps: {
-      // Bushi trades one base class discipline for Mithral Current.
-      // The specific discipline lost is not specified on d20pfsrd.
       gained: ['mithral-current'],
-      lost: ['unknown'], // TBD: specific lost discipline not identified on source page
+      lost: [], // player chooses which base discipline to trade — no fixed loss
     },
     source: 'Path of War',
   },
