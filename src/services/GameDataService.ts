@@ -434,6 +434,10 @@ export class GameDataService {
     return GameDataService.connector.getClasses(ctx);
   }
 
+  static async getAllClasses(): Promise<ExpandedClassData[]> {
+    return GameDataService.connector.getClassesAll();
+  }
+
   // ---- Races -----------------------------------------------------------------
 
   /**

@@ -9,7 +9,6 @@ import { ClassEntryCard } from './ClassEntryCard';
 import { TemplateEntryCard } from './TemplateEntryCard';
 import { GrantedBonusCard } from './GrantedBonusCard';
 import {
-  ALL_CLASSES_LIST,
   computeTotalBAB,
   formatBABString,
   computeBaseFort,
@@ -17,19 +16,11 @@ import {
   computeBaseWill,
   computeECL,
 } from '@/utils/characterComputations';
+import { selectClasses, selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { type DraftTemplateEntry } from '@/types/characterDraft';
 function genId(): string {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
 }
-
-// ---- Class search items ----
-
-const CLASS_SEARCH_ITEMS: SearchItem[] = ALL_CLASSES_LIST.map((cls) => ({
-  key: cls.name,
-  label: cls.name,
-  subLabel: cls.category,
-  category: cls.category,
-}));
 
 // ---- Add Free Grant modal ----
 
@@ -171,6 +162,8 @@ export function ClassesSection() {
   const dispatch = useAppDispatch();
   const classes = useAppSelector((state) => state.characterEntry.draft.classes);
   const templates = useAppSelector((state) => state.characterEntry.draft.templates);
+  const allClasses = useAppSelector(selectClasses);
+  const classDataMap = useAppSelector(selectClassDataMap);
 
   const [classPickerOpen, setClassPickerOpen] = useState(false);
   const [grantModalOpen, setGrantModalOpen] = useState(false);
@@ -178,13 +171,25 @@ export function ClassesSection() {
   const regularTemplates = templates.filter((t) => !t.isFreeGrant);
   const freeGrants = templates.filter((t) => t.isFreeGrant);
 
+  const classSearchItems = useMemo<SearchItem[]>(
+    () =>
+      allClasses.map((cls) => ({
+        key: cls.name,
+        label: cls.name,
+        subLabel: cls.category,
+        category: cls.category,
+      })),
+    [allClasses],
+  );
+
   // Computed summary values
-  const totalBAB = useMemo(() => computeTotalBAB(classes), [classes]);
+  const totalBAB = useMemo(() => computeTotalBAB(classes, classDataMap), [classes, classDataMap]);
   const babString = useMemo(() => formatBABString(totalBAB), [totalBAB]);
-  const fort = useMemo(() => computeBaseFort(classes), [classes]);
-  const ref = useMemo(() => computeBaseRef(classes), [classes]);
-  const will = useMemo(() => computeBaseWill(classes), [classes]);
+  const fort = useMemo(() => computeBaseFort(classes, classDataMap), [classes, classDataMap]);
+  const ref = useMemo(() => computeBaseRef(classes, classDataMap), [classes, classDataMap]);
+  const will = useMemo(() => computeBaseWill(classes, classDataMap), [classes, classDataMap]);
   const ecl = useMemo(() => computeECL(classes, regularTemplates), [classes, regularTemplates]);
+  const totalHD = useMemo(() => classes.reduce((sum, c) => sum + c.level, 0), [classes]);
 
   const formatSave = (n: number) => (n >= 0 ? `+${n}` : `${n}`);
 
@@ -226,13 +231,19 @@ export function ClassesSection() {
           },
         ]}
       >
-        <AutoComputedValue value={`ECL ${ecl}`} label="ECL" />
+        {ecl !== totalHD && (
+          <>
+            <AutoComputedValue value={`${ecl}`} label="ECL" />
+            <View style={styles.summaryDivider} />
+          </>
+        )}
+        <AutoComputedValue value={`${totalHD}`} label="HD" />
         <View style={styles.summaryDivider} />
         <AutoComputedValue value={babString} label="BAB" />
         <View style={styles.summaryDivider} />
-        <AutoComputedValue value={formatSave(fort)} label="Base Fort" />
-        <AutoComputedValue value={formatSave(ref)} label="Base Ref" />
-        <AutoComputedValue value={formatSave(will)} label="Base Will" />
+        <AutoComputedValue value={formatSave(fort)} label="Fort" />
+        <AutoComputedValue value={formatSave(ref)} label="Ref" />
+        <AutoComputedValue value={formatSave(will)} label="Will" />
       </View>
 
       {/* Class cards */}
@@ -307,7 +318,7 @@ export function ClassesSection() {
       <SearchPickerSheet
         visible={classPickerOpen}
         title="Add Class"
-        items={CLASS_SEARCH_ITEMS}
+        items={classSearchItems}
         onSelect={handleAddClass}
         onClose={() => setClassPickerOpen(false)}
         placeholder="Search classes..."

@@ -13,6 +13,7 @@ import {
   computeMaxHP,
   getAbilityModifier,
 } from '@/utils/characterComputations';
+import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { type DraftCombatStats } from '@/types/characterDraft';
 
 // ---- Helpers ----
@@ -101,6 +102,7 @@ export function CombatStatsSection() {
   const combat = useAppSelector((state) => state.characterEntry.draft.combat);
   const classes = useAppSelector((state) => state.characterEntry.draft.classes);
   const abilities = useAppSelector((state) => state.characterEntry.draft.abilities);
+  const classDataMap = useAppSelector(selectClassDataMap);
 
   const set = (field: keyof DraftCombatStats, value: number | undefined) =>
     dispatch(setCombatField({ field, value }));
@@ -111,12 +113,15 @@ export function CombatStatsSection() {
   const wisMod = useMemo(() => getAbilityModifier(abilities, 'wis'), [abilities]);
   const conMod = useMemo(() => getAbilityModifier(abilities, 'con'), [abilities]);
 
-  const computedMaxHP = useMemo(() => computeMaxHP(classes, conMod), [classes, conMod]);
-  const totalBAB = useMemo(() => computeTotalBAB(classes), [classes]);
+  const computedMaxHP = useMemo(
+    () => computeMaxHP(classes, conMod, classDataMap),
+    [classes, conMod, classDataMap],
+  );
+  const totalBAB = useMemo(() => computeTotalBAB(classes, classDataMap), [classes, classDataMap]);
   const babString = useMemo(() => formatBABString(totalBAB), [totalBAB]);
-  const baseFort = useMemo(() => computeBaseFort(classes), [classes]);
-  const baseRef = useMemo(() => computeBaseRef(classes), [classes]);
-  const baseWill = useMemo(() => computeBaseWill(classes), [classes]);
+  const baseFort = useMemo(() => computeBaseFort(classes, classDataMap), [classes, classDataMap]);
+  const baseRef = useMemo(() => computeBaseRef(classes, classDataMap), [classes, classDataMap]);
+  const baseWill = useMemo(() => computeBaseWill(classes, classDataMap), [classes, classDataMap]);
 
   const totalFort = baseFort + conMod + (combat.saveFortMisc ?? 0);
   const totalRef = baseRef + dexMod + (combat.saveRefMisc ?? 0);

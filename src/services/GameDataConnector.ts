@@ -104,6 +104,9 @@ export interface GameDataConnector {
 
   // ---- Classes ----
   getClasses(context?: QueryContext): Promise<ExpandedClassData[]>;
+  // All classes regardless of visibility (global + campaign). Used for runtime
+  // stat lookups where campaign homebrew must contribute to BAB/save/HP.
+  getClassesAll(): Promise<ExpandedClassData[]>;
   getCoreClasses(context?: QueryContext): Promise<ClassData[]>;
   getClassByName(name: string, context?: QueryContext): Promise<ExpandedClassData | null>;
   getClassChoiceDefinitions(classId: string): Promise<ClassChoiceDefinition[]>;

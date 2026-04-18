@@ -222,6 +222,10 @@ export class StaticGameDataConnector implements GameDataConnector {
     return ALL_EXPANDED_CLASSES;
   }
 
+  async getClassesAll() {
+    return ALL_EXPANDED_CLASSES;
+  }
+
   async getCoreClasses() {
     return CORE_CLASSES;
   }

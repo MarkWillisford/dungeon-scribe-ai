@@ -47,7 +47,6 @@ export const RISSI_FIXTURE: CharacterDraft = {
     { atHD: 12, ability: 'wis' },
     { atHD: 16, ability: 'wis' },
     { atHD: 20, ability: 'str' },
-    { atHD: 24, ability: 'str' },
   ],
 
   // ---- Classes ----
@@ -83,7 +82,7 @@ export const RISSI_FIXTURE: CharacterDraft = {
     },
     {
       id: 'class-radiant-servant',
-      className: 'Radiant Servant',
+      className: 'Radiant Servant of Milani',
       level: 1,
       sourceSystem: 'pf1e',
       spellcastingAdvancement: { type: 'divine' },

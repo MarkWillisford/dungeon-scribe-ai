@@ -1,6 +1,10 @@
 import { DraftStateResolver } from '@services/DraftStateResolver';
 import type { CharacterDraft } from '@/types/characterDraft';
 import { Alignment } from '@/types/base';
+import type { ClassDataMap } from '@/utils/characterComputations';
+
+// Mocked computation fns ignore the map arg, so an empty Map is sufficient.
+const EMPTY_MAP: ClassDataMap = new Map();
 
 // Mock class data so tests don't depend on the full class catalog
 jest.mock('@/utils/characterComputations', () => ({
@@ -26,7 +30,8 @@ jest.mock('@/utils/characterComputations', () => ({
   computeBaseFort: jest.fn((classes: { className: string; level: number }[]) => {
     const hasGood = classes.some((c) => c.className === 'Fighter' || c.className === 'Cleric');
     const prog = classes.reduce((sum, c) => {
-      if (c.className === 'Fighter' || c.className === 'Cleric') return sum + Math.floor(c.level / 2);
+      if (c.className === 'Fighter' || c.className === 'Cleric')
+        return sum + Math.floor(c.level / 2);
       return sum + Math.floor(c.level / 3);
     }, 0);
     return (hasGood ? 2 : 0) + prog;
@@ -35,7 +40,8 @@ jest.mock('@/utils/characterComputations', () => ({
   computeBaseWill: jest.fn((classes: { className: string; level: number }[]) => {
     const hasGood = classes.some((c) => c.className === 'Cleric' || c.className === 'Wizard');
     const prog = classes.reduce((sum, c) => {
-      if (c.className === 'Cleric' || c.className === 'Wizard') return sum + Math.floor(c.level / 2);
+      if (c.className === 'Cleric' || c.className === 'Wizard')
+        return sum + Math.floor(c.level / 2);
       return sum + Math.floor(c.level / 3);
     }, 0);
     return (hasGood ? 2 : 0) + prog;
@@ -58,7 +64,13 @@ jest.mock('@/utils/characterComputations', () => ({
     return (hasGood ? 2 : 0) + Math.floor(raw);
   }),
   lookupClassData: jest.fn((className: string) => {
-    const data: Record<string, { classFeatures: { name: string; level: number; description: string }[]; spellcasting: { type: string } }> = {
+    const data: Record<
+      string,
+      {
+        classFeatures: { name: string; level: number; description: string }[];
+        spellcasting: { type: string };
+      }
+    > = {
       Fighter: {
         classFeatures: [
           { name: 'Bonus Feat', level: 1, description: '' },
@@ -147,9 +159,18 @@ describe('DraftStateResolver', () => {
   describe('buildTimeline', () => {
     it('single class: correct number of checkpoints', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 5, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 5,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       expect(timeline.checkpoints).toHaveLength(5);
       expect(timeline.finalECL).toBe(5);
@@ -159,18 +180,36 @@ describe('DraftStateResolver', () => {
 
     it('single class: all decisions are class type', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 3, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 3,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       expect(timeline.checkpoints.every((c) => c.decision.type === 'class')).toBe(true);
     });
 
     it('single class: class levels increment correctly', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 3, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 3,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       expect((timeline.checkpoints[0].decision as { classLevel: number }).classLevel).toBe(1);
       expect((timeline.checkpoints[1].decision as { classLevel: number }).classLevel).toBe(2);
@@ -180,11 +219,25 @@ describe('DraftStateResolver', () => {
     it('multiclass: decisions expand in class order', () => {
       const draft = blankDraft();
       draft.classes = [
-        { id: '1', className: 'Fighter', level: 3, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
-        { id: '2', className: 'Wizard', level: 2, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 3,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+        {
+          id: '2',
+          className: 'Wizard',
+          level: 2,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
       ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       expect(timeline.checkpoints).toHaveLength(5);
       expect(timeline.totalHD).toBe(5);
@@ -195,11 +248,25 @@ describe('DraftStateResolver', () => {
     it('multiclass: BAB accumulates correctly across classes', () => {
       const draft = blankDraft();
       draft.classes = [
-        { id: '1', className: 'Fighter', level: 5, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
-        { id: '2', className: 'Wizard', level: 3, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 5,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+        {
+          id: '2',
+          className: 'Wizard',
+          level: 3,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
       ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       // After Fighter 5 (ECL 5): BAB = 5 (full)
       const afterFighter5 = timeline.checkpoints[4].snapshot;
@@ -212,18 +279,29 @@ describe('DraftStateResolver', () => {
 
     it('inherited LA template: first checkpoints are la_payment, HD stays 0', () => {
       const draft = blankDraft();
-      draft.templates = [{
-        id: 'tpl-1',
-        templateId: 'half-dragon',
-        templateName: 'Half-Dragon',
-        appliedAs: 'LA',
-        laValue: 3,
-        acquired: 'inherited',
-        isFreeGrant: false,
-      }];
-      draft.classes = [{ id: '1', className: 'Fighter', level: 2, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.templates = [
+        {
+          id: 'tpl-1',
+          templateId: 'half-dragon',
+          templateName: 'Half-Dragon',
+          appliedAs: 'LA',
+          laValue: 3,
+          acquired: 'inherited',
+          isFreeGrant: false,
+        },
+      ];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 2,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       expect(timeline.checkpoints).toHaveLength(5);
       expect(timeline.totalLA).toBe(3);
@@ -242,18 +320,29 @@ describe('DraftStateResolver', () => {
 
     it('free grant templates are ignored in LA computation', () => {
       const draft = blankDraft();
-      draft.templates = [{
-        id: 'tpl-1',
-        templateId: 'celestial',
-        templateName: 'Celestial Creature',
-        appliedAs: 'CR',
-        crValue: 1,
-        isFreeGrant: true,
-        freeGrantNote: 'DM granted',
-      }];
-      draft.classes = [{ id: '1', className: 'Fighter', level: 2, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.templates = [
+        {
+          id: 'tpl-1',
+          templateId: 'celestial',
+          templateName: 'Celestial Creature',
+          appliedAs: 'CR',
+          crValue: 1,
+          isFreeGrant: true,
+          freeGrantNote: 'DM granted',
+        },
+      ];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 2,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       expect(timeline.totalLA).toBe(0);
       expect(timeline.checkpoints).toHaveLength(2);
@@ -263,9 +352,18 @@ describe('DraftStateResolver', () => {
   describe('snapshot content', () => {
     it('ability scores reflect base values', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 1,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
       const snapshot = timeline.checkpoints[0].snapshot;
 
       expect(snapshot.abilityScores.str.total).toBe(16);
@@ -275,13 +373,22 @@ describe('DraftStateResolver', () => {
 
     it('ability scores apply level increments only up to current HD', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 8, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 8,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
       draft.levelIncrementSlots = [
         { atHD: 4, ability: 'str' },
         { atHD: 8, ability: 'str' },
       ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       // At HD 3 — no increments applied yet
       const at3 = timeline.checkpoints[2].snapshot;
@@ -298,9 +405,18 @@ describe('DraftStateResolver', () => {
 
     it('class features filtered to current class level', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 3, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 3,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       // At Fighter 1: only level-1 features
       const at1 = timeline.checkpoints[0].snapshot.classes.classes[0];
@@ -313,14 +429,47 @@ describe('DraftStateResolver', () => {
 
     it('feats filtered by availableAtLevel <= ecl', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 5, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 5,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
       draft.featSlots = [
-        { id: 'f1', source: 'level', availableAt: 'Lvl 1', availableAtLevel: 1, featId: 'power-attack', featName: 'Power Attack', prereqOverride: false },
-        { id: 'f2', source: 'level', availableAt: 'Lvl 3', availableAtLevel: 3, featId: 'cleave', featName: 'Cleave', prereqOverride: false },
-        { id: 'f3', source: 'level', availableAt: 'Lvl 5', availableAtLevel: 5, featId: undefined, featName: undefined, prereqOverride: false },
+        {
+          id: 'f1',
+          source: 'level',
+          availableAt: 'Lvl 1',
+          availableAtLevel: 1,
+          featId: 'power-attack',
+          featName: 'Power Attack',
+          prereqOverride: false,
+        },
+        {
+          id: 'f2',
+          source: 'level',
+          availableAt: 'Lvl 3',
+          availableAtLevel: 3,
+          featId: 'cleave',
+          featName: 'Cleave',
+          prereqOverride: false,
+        },
+        {
+          id: 'f3',
+          source: 'level',
+          availableAt: 'Lvl 5',
+          availableAtLevel: 5,
+          featId: undefined,
+          featName: undefined,
+          prereqOverride: false,
+        },
       ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       // At ECL 1: only feat from slot 1
       const at1 = timeline.checkpoints[0].snapshot.feats.feats;
@@ -339,9 +488,18 @@ describe('DraftStateResolver', () => {
     it('skills capped at currentHD — best-case assumption', () => {
       const draft = blankDraft();
       // draft has perception: 5, spellcraft: 3
-      draft.classes = [{ id: '1', className: 'Fighter', level: 5, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 5,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       // At HD 1: max possible ranks in any skill is 1
       expect(timeline.checkpoints[0].snapshot.skills['perception']?.ranks).toBe(1);
@@ -359,20 +517,44 @@ describe('DraftStateResolver', () => {
     it('race name passed from draft', () => {
       const draft = blankDraft();
       draft.raceName = 'Elf';
-      draft.classes = [{ id: '1', className: 'Fighter', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 1,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const snapshot = DraftStateResolver.buildTimeline(draft).checkpoints[0].snapshot;
+      const snapshot = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP).checkpoints[0]
+        .snapshot;
       expect(snapshot.info.race.name).toBe('Elf');
     });
 
     it('spellcasting pool created for casting classes', () => {
       const draft = blankDraft();
       draft.classes = [
-        { id: '1', className: 'Fighter', level: 3, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
-        { id: '2', className: 'Wizard', level: 2, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 3,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+        {
+          id: '2',
+          className: 'Wizard',
+          level: 2,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
       ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       // After Fighter 3 (ECL 3): no spellcasting pools
       const at3 = timeline.checkpoints[2].snapshot.spellcasting.pools;
@@ -391,18 +573,29 @@ describe('DraftStateResolver', () => {
 
     it('totalLevel reflects HD only, not ECL', () => {
       const draft = blankDraft();
-      draft.templates = [{
-        id: 'tpl-1',
-        templateId: 'lycanthrope',
-        templateName: 'Lycanthrope',
-        appliedAs: 'LA',
-        laValue: 2,
-        acquired: 'inherited',
-        isFreeGrant: false,
-      }];
-      draft.classes = [{ id: '1', className: 'Fighter', level: 3, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.templates = [
+        {
+          id: 'tpl-1',
+          templateId: 'lycanthrope',
+          templateName: 'Lycanthrope',
+          appliedAs: 'LA',
+          laValue: 2,
+          acquired: 'inherited',
+          isFreeGrant: false,
+        },
+      ];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 3,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       // ECL 2 (LA payment 2): HD still 0
       expect(timeline.checkpoints[1].hd).toBe(0);
@@ -417,79 +610,156 @@ describe('DraftStateResolver', () => {
   describe('snapshotAtECL', () => {
     it('returns correct snapshot at a given ECL', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 5, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 5,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const snapshot = DraftStateResolver.snapshotAtECL(draft, 3);
+      const snapshot = DraftStateResolver.snapshotAtECL(draft, 3, undefined, EMPTY_MAP);
       expect(snapshot).not.toBeNull();
       expect(snapshot?.classes.totalLevel).toBe(3);
     });
 
     it('returns null for out-of-range ECL', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 3, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 3,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      expect(DraftStateResolver.snapshotAtECL(draft, 99)).toBeNull();
+      expect(DraftStateResolver.snapshotAtECL(draft, 99, undefined, EMPTY_MAP)).toBeNull();
     });
   });
 
   describe('snapshotBeforeECL', () => {
     it('returns state at ECL-1', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 5, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 5,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const snapshot = DraftStateResolver.snapshotBeforeECL(draft, 4);
+      const snapshot = DraftStateResolver.snapshotBeforeECL(draft, 4, undefined, EMPTY_MAP);
       // ECL-1 = 3, so Fighter 3 → totalLevel 3
       expect(snapshot?.classes.totalLevel).toBe(3);
     });
 
     it('returns null when ECL <= 1', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 3, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 3,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      expect(DraftStateResolver.snapshotBeforeECL(draft, 1)).toBeNull();
+      expect(DraftStateResolver.snapshotBeforeECL(draft, 1, undefined, EMPTY_MAP)).toBeNull();
     });
   });
 
   describe('acquiredAtECL ordering', () => {
     it('acquired LA with acquiredAtECL is inserted at the specified position', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 4, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
-      draft.templates = [{
-        id: 'tpl-1',
-        templateId: 'werewolf',
-        templateName: 'Werewolf',
-        appliedAs: 'LA',
-        laValue: 1,
-        acquired: 'acquired',
-        acquiredAtECL: 3,
-        isFreeGrant: false,
-      }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 4,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
+      draft.templates = [
+        {
+          id: 'tpl-1',
+          templateId: 'werewolf',
+          templateName: 'Werewolf',
+          appliedAs: 'LA',
+          laValue: 1,
+          acquired: 'acquired',
+          acquiredAtECL: 3,
+          isFreeGrant: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       // Sequence: Fighter1, Fighter2, AcqLA(ECL3), Fighter3, Fighter4
       expect(timeline.checkpoints).toHaveLength(5);
-      expect(timeline.checkpoints[0].decision).toMatchObject({ type: 'class', className: 'Fighter', classLevel: 1 });
-      expect(timeline.checkpoints[1].decision).toMatchObject({ type: 'class', className: 'Fighter', classLevel: 2 });
-      expect(timeline.checkpoints[2].decision).toMatchObject({ type: 'la_payment', templateName: 'Werewolf' });
-      expect(timeline.checkpoints[3].decision).toMatchObject({ type: 'class', className: 'Fighter', classLevel: 3 });
-      expect(timeline.checkpoints[4].decision).toMatchObject({ type: 'class', className: 'Fighter', classLevel: 4 });
+      expect(timeline.checkpoints[0].decision).toMatchObject({
+        type: 'class',
+        className: 'Fighter',
+        classLevel: 1,
+      });
+      expect(timeline.checkpoints[1].decision).toMatchObject({
+        type: 'class',
+        className: 'Fighter',
+        classLevel: 2,
+      });
+      expect(timeline.checkpoints[2].decision).toMatchObject({
+        type: 'la_payment',
+        templateName: 'Werewolf',
+      });
+      expect(timeline.checkpoints[3].decision).toMatchObject({
+        type: 'class',
+        className: 'Fighter',
+        classLevel: 3,
+      });
+      expect(timeline.checkpoints[4].decision).toMatchObject({
+        type: 'class',
+        className: 'Fighter',
+        classLevel: 4,
+      });
     });
 
     it('acquired LA without acquiredAtECL appended at end', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 3, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
-      draft.templates = [{
-        id: 'tpl-1',
-        templateId: 'werewolf',
-        templateName: 'Werewolf',
-        appliedAs: 'LA',
-        laValue: 1,
-        acquired: 'acquired',
-        isFreeGrant: false,
-      }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 3,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
+      draft.templates = [
+        {
+          id: 'tpl-1',
+          templateId: 'werewolf',
+          templateName: 'Werewolf',
+          appliedAs: 'LA',
+          laValue: 1,
+          acquired: 'acquired',
+          isFreeGrant: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       // Sequence: Fighter1, Fighter2, Fighter3, AcqLA
       expect(timeline.checkpoints).toHaveLength(4);
@@ -498,19 +768,30 @@ describe('DraftStateResolver', () => {
 
     it('multi-LA acquired template with acquiredAtECL places payments consecutively', () => {
       const draft = blankDraft();
-      draft.classes = [{ id: '1', className: 'Fighter', level: 5, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
-      draft.templates = [{
-        id: 'tpl-1',
-        templateId: 'half-dragon',
-        templateName: 'Half-Dragon',
-        appliedAs: 'LA',
-        laValue: 2,
-        acquired: 'acquired',
-        acquiredAtECL: 3,
-        isFreeGrant: false,
-      }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 5,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
+      draft.templates = [
+        {
+          id: 'tpl-1',
+          templateId: 'half-dragon',
+          templateName: 'Half-Dragon',
+          appliedAs: 'LA',
+          laValue: 2,
+          acquired: 'acquired',
+          acquiredAtECL: 3,
+          isFreeGrant: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
 
       // Sequence: F1, F2, LA(ECL3), LA(ECL4), F3, F4, F5
       expect(timeline.checkpoints).toHaveLength(7);
@@ -524,9 +805,18 @@ describe('DraftStateResolver', () => {
     it('standard BAB: each class contribution floored individually', () => {
       const draft = blankDraft();
       // Wizard 1 standard: floor(1 * 0.5) = 0
-      draft.classes = [{ id: '1', className: 'Wizard', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false }];
+      draft.classes = [
+        {
+          id: '1',
+          className: 'Wizard',
+          level: 1,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
       expect(timeline.checkpoints[0].snapshot.classes.baseAttackBonus[0]).toBe(0);
     });
 
@@ -540,14 +830,30 @@ describe('DraftStateResolver', () => {
       // Rogue3/Wizard3 = floor(3*0.75)+floor(3*0.5) = 2+1=3 standard vs floor(3*0.75+3*0.5)=floor(2.25+1.5)=floor(3.75)=3
       // Rogue1/Wizard1 = floor(0.75)+floor(0.5)=0+0=0 standard vs floor(0.75+0.5)=floor(1.25)=1 fractional
       draft.classes = [
-        { id: '1', className: 'Rogue', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
-        { id: '2', className: 'Wizard', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
+        {
+          id: '1',
+          className: 'Rogue',
+          level: 1,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+        {
+          id: '2',
+          className: 'Wizard',
+          level: 1,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
       ];
 
-      const mockRuleset = { optionalRules: { fractionalBABSaves: true } } as Parameters<typeof DraftStateResolver.buildTimeline>[1];
+      const mockRuleset = { optionalRules: { fractionalBABSaves: true } } as Parameters<
+        typeof DraftStateResolver.buildTimeline
+      >[1];
 
-      const standardTimeline = DraftStateResolver.buildTimeline(draft);
-      const fractionalTimeline = DraftStateResolver.buildTimeline(draft, mockRuleset);
+      const standardTimeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
+      const fractionalTimeline = DraftStateResolver.buildTimeline(draft, mockRuleset, EMPTY_MAP);
 
       const finalStandard = standardTimeline.checkpoints[1].snapshot.classes.baseAttackBonus[0];
       const finalFractional = fractionalTimeline.checkpoints[1].snapshot.classes.baseAttackBonus[0];
@@ -563,10 +869,17 @@ describe('DraftStateResolver', () => {
     it('snapshot includes baseFortitude, baseReflex, baseWill', () => {
       const draft = blankDraft();
       draft.classes = [
-        { id: '1', className: 'Fighter', level: 2, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
+        {
+          id: '1',
+          className: 'Fighter',
+          level: 2,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
       ];
 
-      const timeline = DraftStateResolver.buildTimeline(draft);
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
       const snapshot = timeline.checkpoints[1].snapshot; // after Fighter 2
 
       // Fighter has Good Fort: 2 + floor(2/2) = 3; Poor Ref: floor(2/3) = 0; Poor Will: floor(2/3) = 0
@@ -586,14 +899,30 @@ describe('DraftStateResolver', () => {
       // Use Cleric1/Fighter1: Fort standard = 2+floor(1/2)+floor(1/2) = 2+0+0 = 2
       // Fractional: 2 + floor(0.5+0.5) = 2+1 = 3 — diverges!
       draft.classes = [
-        { id: '1', className: 'Cleric', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
-        { id: '2', className: 'Fighter', level: 1, sourceSystem: 'pf1e', classChoices: [], prereqOverride: false },
+        {
+          id: '1',
+          className: 'Cleric',
+          level: 1,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+        {
+          id: '2',
+          className: 'Fighter',
+          level: 1,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
       ];
 
-      const mockRuleset = { optionalRules: { fractionalBABSaves: true } } as Parameters<typeof DraftStateResolver.buildTimeline>[1];
+      const mockRuleset = { optionalRules: { fractionalBABSaves: true } } as Parameters<
+        typeof DraftStateResolver.buildTimeline
+      >[1];
 
-      const standardTimeline = DraftStateResolver.buildTimeline(draft);
-      const fractionalTimeline = DraftStateResolver.buildTimeline(draft, mockRuleset);
+      const standardTimeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
+      const fractionalTimeline = DraftStateResolver.buildTimeline(draft, mockRuleset, EMPTY_MAP);
 
       const idx = standardTimeline.checkpoints.length - 1;
       // Standard Fort: Cleric(Good)=2+floor(1/2), Fighter(Good)=floor(1/2) = 2+0+0=2

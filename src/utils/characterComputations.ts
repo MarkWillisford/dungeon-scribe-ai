@@ -1,5 +1,9 @@
 // Pure computation helpers for CharacterDraft values.
 // No Redux, no side effects — just math.
+//
+// Class stat data (BAB progression, save progression, hit die) is supplied
+// by the caller via a ClassDataMap. In the app that map is built from the
+// Firestore-backed gameData slice; in tests it's built from local fixtures.
 
 import { BABProgression, SaveProgression } from '@/types/base';
 import {
@@ -7,21 +11,18 @@ import {
   type DraftAbilityScore,
   type AbilityKey,
 } from '@/types/characterDraft';
-import { ALL_EXPANDED_CLASSES, type ExpandedClassData } from '@/data/classes/index';
+import type { ExpandedClassData } from '@/data/classes/types';
 
 // ---- Class data lookup ----
 
-const ALL_CLASSES: ExpandedClassData[] = ALL_EXPANDED_CLASSES;
+export type ClassDataMap = Map<string, ExpandedClassData>;
 
-const CLASS_DATA_MAP = new Map<string, ExpandedClassData>(
-  ALL_CLASSES.map((c) => [c.name.toLowerCase(), c]),
-);
-
-export function lookupClassData(className: string): ExpandedClassData | null {
-  return CLASS_DATA_MAP.get(className.toLowerCase()) ?? null;
+export function lookupClassData(
+  className: string,
+  classDataMap: ClassDataMap,
+): ExpandedClassData | null {
+  return classDataMap.get(className.toLowerCase()) ?? null;
 }
-
-export const ALL_CLASSES_LIST = ALL_CLASSES;
 
 // ---- Ability scores ----
 
@@ -67,8 +68,11 @@ function babContrib(data: ExpandedClassData | null, level: number): number {
   }
 }
 
-export function computeTotalBAB(classes: DraftClassEntry[]): number {
-  return classes.reduce((sum, c) => sum + babContrib(lookupClassData(c.className), c.level), 0);
+export function computeTotalBAB(classes: DraftClassEntry[], classDataMap: ClassDataMap): number {
+  return classes.reduce(
+    (sum, c) => sum + babContrib(lookupClassData(c.className, classDataMap), c.level),
+    0,
+  );
 }
 
 export function formatBABString(totalBAB: number): string {
@@ -99,9 +103,10 @@ function saveProgContrib(
 function hasGoodSave(
   classes: DraftClassEntry[],
   saveType: 'fortitude' | 'reflex' | 'will',
+  classDataMap: ClassDataMap,
 ): boolean {
   return classes.some((c) => {
-    const data = lookupClassData(c.className);
+    const data = lookupClassData(c.className, classDataMap);
     return data !== null && data.saves[saveType] === SaveProgression.Good;
   });
 }
@@ -109,27 +114,29 @@ function hasGoodSave(
 function computeBaseSave(
   classes: DraftClassEntry[],
   saveType: 'fortitude' | 'reflex' | 'will',
+  classDataMap: ClassDataMap,
 ): number {
-  const base = hasGoodSave(classes, saveType) ? 2 : 0;
+  const base = hasGoodSave(classes, saveType, classDataMap) ? 2 : 0;
   return (
     base +
     classes.reduce(
-      (sum, c) => sum + saveProgContrib(lookupClassData(c.className), saveType, c.level),
+      (sum, c) =>
+        sum + saveProgContrib(lookupClassData(c.className, classDataMap), saveType, c.level),
       0,
     )
   );
 }
 
-export function computeBaseFort(classes: DraftClassEntry[]): number {
-  return computeBaseSave(classes, 'fortitude');
+export function computeBaseFort(classes: DraftClassEntry[], classDataMap: ClassDataMap): number {
+  return computeBaseSave(classes, 'fortitude', classDataMap);
 }
 
-export function computeBaseRef(classes: DraftClassEntry[]): number {
-  return computeBaseSave(classes, 'reflex');
+export function computeBaseRef(classes: DraftClassEntry[], classDataMap: ClassDataMap): number {
+  return computeBaseSave(classes, 'reflex', classDataMap);
 }
 
-export function computeBaseWill(classes: DraftClassEntry[]): number {
-  return computeBaseSave(classes, 'will');
+export function computeBaseWill(classes: DraftClassEntry[], classDataMap: ClassDataMap): number {
+  return computeBaseSave(classes, 'will', classDataMap);
 }
 
 // ---- Fractional BAB / saves (optional rule) ----
@@ -137,9 +144,12 @@ export function computeBaseWill(classes: DraftClassEntry[]): number {
 // Fractional: sum raw fractions across all classes, floor once at the end.
 // The +2 base bonus for good saves applies in both modes (once per character).
 
-export function computeTotalBABFractional(classes: DraftClassEntry[]): number {
+export function computeTotalBABFractional(
+  classes: DraftClassEntry[],
+  classDataMap: ClassDataMap,
+): number {
   const raw = classes.reduce((sum, c) => {
-    const data = lookupClassData(c.className);
+    const data = lookupClassData(c.className, classDataMap);
     if (!data) return sum + c.level * 0.75;
     switch (data.babProgression) {
       case BABProgression.Full:
@@ -158,39 +168,53 @@ export function computeTotalBABFractional(classes: DraftClassEntry[]): number {
 function computeBaseSaveFractional(
   classes: DraftClassEntry[],
   saveType: 'fortitude' | 'reflex' | 'will',
+  classDataMap: ClassDataMap,
 ): number {
   const hasGood = classes.some((c) => {
-    const data = lookupClassData(c.className);
+    const data = lookupClassData(c.className, classDataMap);
     return data !== null && data.saves[saveType] === SaveProgression.Good;
   });
   const raw = classes.reduce((sum, c) => {
-    const data = lookupClassData(c.className);
+    const data = lookupClassData(c.className, classDataMap);
     if (!data) return sum + c.level / 3;
     return sum + (data.saves[saveType] === SaveProgression.Good ? c.level / 2 : c.level / 3);
   }, 0);
   return (hasGood ? 2 : 0) + Math.floor(raw);
 }
 
-export function computeBaseFortFractional(classes: DraftClassEntry[]): number {
-  return computeBaseSaveFractional(classes, 'fortitude');
+export function computeBaseFortFractional(
+  classes: DraftClassEntry[],
+  classDataMap: ClassDataMap,
+): number {
+  return computeBaseSaveFractional(classes, 'fortitude', classDataMap);
 }
 
-export function computeBaseRefFractional(classes: DraftClassEntry[]): number {
-  return computeBaseSaveFractional(classes, 'reflex');
+export function computeBaseRefFractional(
+  classes: DraftClassEntry[],
+  classDataMap: ClassDataMap,
+): number {
+  return computeBaseSaveFractional(classes, 'reflex', classDataMap);
 }
 
-export function computeBaseWillFractional(classes: DraftClassEntry[]): number {
-  return computeBaseSaveFractional(classes, 'will');
+export function computeBaseWillFractional(
+  classes: DraftClassEntry[],
+  classDataMap: ClassDataMap,
+): number {
+  return computeBaseSaveFractional(classes, 'will', classDataMap);
 }
 
 // ---- Max HP ----
 
-export function computeMaxHP(classes: DraftClassEntry[], conMod: number): number {
+export function computeMaxHP(
+  classes: DraftClassEntry[],
+  conMod: number,
+  classDataMap: ClassDataMap,
+): number {
   if (classes.length === 0) return 0;
   let hp = 0;
   let isFirstLevel = true;
   for (const cls of classes) {
-    const data = lookupClassData(cls.className);
+    const data = lookupClassData(cls.className, classDataMap);
     const hd = data?.hitDie ?? 8;
     for (let i = 0; i < cls.level; i++) {
       hp += isFirstLevel ? hd : Math.floor(hd / 2) + 1;

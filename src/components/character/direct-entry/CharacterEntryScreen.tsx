@@ -4,8 +4,14 @@ import { useTheme } from '@/hooks/useTheme';
 import { OrnateTab } from '@/components/ui/OrnateTab';
 import { CharacterEntryHeader } from './CharacterEntryHeader';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setActiveTab, setValidationWarnings, type EntryTabKey, type TabStatus } from '@/store/slices/characterEntrySlice';
+import {
+  setActiveTab,
+  setValidationWarnings,
+  type EntryTabKey,
+  type TabStatus,
+} from '@/store/slices/characterEntrySlice';
 import { DraftValidationService } from '@/services/DraftValidationService';
+import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
 import { ValidationReportSheet } from './ValidationReportSheet';
 import { IdentitySection } from './IdentitySection';
@@ -100,6 +106,7 @@ export function CharacterEntryScreen() {
   const warnings = useAppSelector((state) => state.characterEntry.validationWarnings);
   const lastValidatedAt = useAppSelector((state) => state.characterEntry.lastValidatedAt);
   const ruleset = useAppSelector((state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD);
+  const classDataMap = useAppSelector(selectClassDataMap);
   const tabStatus = useTabStatus();
 
   const [showValidationSheet, setShowValidationSheet] = useState(false);
@@ -113,10 +120,10 @@ export function CharacterEntryScreen() {
   );
 
   const handleValidate = useCallback(async () => {
-    const newWarnings = await DraftValidationService.validate(draft, ruleset);
+    const newWarnings = await DraftValidationService.validate(draft, ruleset, classDataMap);
     dispatch(setValidationWarnings(newWarnings));
     setShowValidationSheet(true);
-  }, [draft, ruleset, dispatch]);
+  }, [draft, ruleset, classDataMap, dispatch]);
 
   const handleSave = useCallback(() => {
     // Save logic will be wired when the characters service is connected

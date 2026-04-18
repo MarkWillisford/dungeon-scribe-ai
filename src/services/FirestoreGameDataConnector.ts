@@ -71,6 +71,18 @@ async function fetchAll<T>(collectionName: string): Promise<T[]> {
   }
 }
 
+// Fetches every document in the collection regardless of visibility.
+// Used for runtime stat lookups (classes) where campaign homebrew must be included.
+async function fetchAllUnfiltered<T>(collectionName: string): Promise<T[]> {
+  try {
+    const snap = await getDocs(collection(db, collectionName));
+    return snap.docs.map((d) => d.data() as T);
+  } catch (e) {
+    console.error(`FirestoreGameDataConnector: failed to fetch ${collectionName}:`, e);
+    return [];
+  }
+}
+
 // ---------------------------------------------------------------------------
 // FirestoreGameDataConnector
 // ---------------------------------------------------------------------------
@@ -124,165 +136,165 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     let results: ClassOptionBase[];
 
     try {
-    switch (collectionName) {
-      case 'revelations': {
-        const q = filters.mysteryId
-          ? query(
-              collection(db, collectionName),
-              where('visibility', '==', 'global'),
-              where('mysteryId', '==', filters.mysteryId),
-            )
-          : query(collection(db, collectionName), where('visibility', '==', 'global'));
-        const snap = await getDocs(q);
-        results = snap.docs.map((d) => d.data() as ClassOptionBase);
-        break;
-      }
+      switch (collectionName) {
+        case 'revelations': {
+          const q = filters.mysteryId
+            ? query(
+                collection(db, collectionName),
+                where('visibility', '==', 'global'),
+                where('mysteryId', '==', filters.mysteryId),
+              )
+            : query(collection(db, collectionName), where('visibility', '==', 'global'));
+          const snap = await getDocs(q);
+          results = snap.docs.map((d) => d.data() as ClassOptionBase);
+          break;
+        }
 
-      case 'bloodlines': {
-        const q = filters.classId
-          ? query(
-              collection(db, collectionName),
-              where('visibility', '==', 'global'),
-              where('classIds', 'array-contains', filters.classId),
-            )
-          : query(collection(db, collectionName), where('visibility', '==', 'global'));
-        const snap = await getDocs(q);
-        results = snap.docs.map((d) => d.data() as ClassOptionBase);
-        break;
-      }
+        case 'bloodlines': {
+          const q = filters.classId
+            ? query(
+                collection(db, collectionName),
+                where('visibility', '==', 'global'),
+                where('classIds', 'array-contains', filters.classId),
+              )
+            : query(collection(db, collectionName), where('visibility', '==', 'global'));
+          const snap = await getDocs(q);
+          results = snap.docs.map((d) => d.data() as ClassOptionBase);
+          break;
+        }
 
-      case 'shamanspirits': {
-        const q = filters.wanderingOnly
-          ? query(
-              collection(db, collectionName),
-              where('visibility', '==', 'global'),
-              where('wanderingSpirit', '==', true),
-            )
-          : query(collection(db, collectionName), where('visibility', '==', 'global'));
-        const snap = await getDocs(q);
-        results = snap.docs.map((d) => d.data() as ClassOptionBase);
-        break;
-      }
+        case 'shamanspirits': {
+          const q = filters.wanderingOnly
+            ? query(
+                collection(db, collectionName),
+                where('visibility', '==', 'global'),
+                where('wanderingSpirit', '==', true),
+              )
+            : query(collection(db, collectionName), where('visibility', '==', 'global'));
+          const snap = await getDocs(q);
+          results = snap.docs.map((d) => d.data() as ClassOptionBase);
+          break;
+        }
 
-      case 'wildtalents': {
-        const q = filters.talentType
-          ? query(
-              collection(db, collectionName),
-              where('visibility', '==', 'global'),
-              where('talentType', '==', filters.talentType),
-            )
-          : query(collection(db, collectionName), where('visibility', '==', 'global'));
-        const snap = await getDocs(q);
-        results = snap.docs.map((d) => d.data() as ClassOptionBase);
-        break;
-      }
+        case 'wildtalents': {
+          const q = filters.talentType
+            ? query(
+                collection(db, collectionName),
+                where('visibility', '==', 'global'),
+                where('talentType', '==', filters.talentType),
+              )
+            : query(collection(db, collectionName), where('visibility', '==', 'global'));
+          const snap = await getDocs(q);
+          results = snap.docs.map((d) => d.data() as ClassOptionBase);
+          break;
+        }
 
-      case 'ninjatricks': {
-        const q = filters.trickTier
-          ? query(
-              collection(db, collectionName),
-              where('visibility', '==', 'global'),
-              where('trickTier', '==', filters.trickTier),
-            )
-          : query(collection(db, collectionName), where('visibility', '==', 'global'));
-        const snap = await getDocs(q);
-        results = snap.docs.map((d) => d.data() as ClassOptionBase);
-        break;
-      }
+        case 'ninjatricks': {
+          const q = filters.trickTier
+            ? query(
+                collection(db, collectionName),
+                where('visibility', '==', 'global'),
+                where('trickTier', '==', filters.trickTier),
+              )
+            : query(collection(db, collectionName), where('visibility', '==', 'global'));
+          const snap = await getDocs(q);
+          results = snap.docs.map((d) => d.data() as ClassOptionBase);
+          break;
+        }
 
-      case 'roguetalents':
-      case 'slayertalents': {
-        const q = filters.talentTier
-          ? query(
-              collection(db, collectionName),
-              where('visibility', '==', 'global'),
-              where('talentTier', '==', filters.talentTier),
-            )
-          : query(collection(db, collectionName), where('visibility', '==', 'global'));
-        const snap = await getDocs(q);
-        results = snap.docs.map((d) => d.data() as ClassOptionBase);
-        break;
-      }
+        case 'roguetalents':
+        case 'slayertalents': {
+          const q = filters.talentTier
+            ? query(
+                collection(db, collectionName),
+                where('visibility', '==', 'global'),
+                where('talentTier', '==', filters.talentTier),
+              )
+            : query(collection(db, collectionName), where('visibility', '==', 'global'));
+          const snap = await getDocs(q);
+          results = snap.docs.map((d) => d.data() as ClassOptionBase);
+          break;
+        }
 
-      case 'alchemistdiscoveries': {
-        const q = filters.discoveryTier
-          ? query(
-              collection(db, collectionName),
-              where('visibility', '==', 'global'),
-              where('discoveryTier', '==', filters.discoveryTier),
-            )
-          : query(collection(db, collectionName), where('visibility', '==', 'global'));
-        const snap = await getDocs(q);
-        results = snap.docs.map((d) => d.data() as ClassOptionBase);
-        break;
-      }
+        case 'alchemistdiscoveries': {
+          const q = filters.discoveryTier
+            ? query(
+                collection(db, collectionName),
+                where('visibility', '==', 'global'),
+                where('discoveryTier', '==', filters.discoveryTier),
+              )
+            : query(collection(db, collectionName), where('visibility', '==', 'global'));
+          const snap = await getDocs(q);
+          results = snap.docs.map((d) => d.data() as ClassOptionBase);
+          break;
+        }
 
-      case 'domains': {
-        const all = await fetchAll<ClassOptionBase>('domains');
-        if (filters.deityName) {
-          const deity = await this.getDeityByName(filters.deityName);
-          if (deity) {
-            const allowed = new Set([...deity.domains, ...deity.subdomains]);
-            results = all.filter((d) => allowed.has(d.id));
+        case 'domains': {
+          const all = await fetchAll<ClassOptionBase>('domains');
+          if (filters.deityName) {
+            const deity = await this.getDeityByName(filters.deityName);
+            if (deity) {
+              const allowed = new Set([...deity.domains, ...deity.subdomains]);
+              results = all.filter((d) => allowed.has(d.id));
+            } else {
+              results = all;
+            }
           } else {
             results = all;
           }
-        } else {
-          results = all;
+          break;
         }
-        break;
-      }
 
-      case 'warpriestblessings': {
-        const all = await fetchAll<ClassOptionBase>('warpriestblessings');
-        if (filters.deityName) {
-          const deity = await this.getDeityByName(filters.deityName);
-          if (deity) {
-            const allowed = new Set([...deity.domains, ...deity.subdomains]);
-            results = all.filter((b) => allowed.has(b.id.replace('warpriest-blessing-', '')));
+        case 'warpriestblessings': {
+          const all = await fetchAll<ClassOptionBase>('warpriestblessings');
+          if (filters.deityName) {
+            const deity = await this.getDeityByName(filters.deityName);
+            if (deity) {
+              const allowed = new Set([...deity.domains, ...deity.subdomains]);
+              results = all.filter((b) => allowed.has(b.id.replace('warpriest-blessing-', '')));
+            } else {
+              results = all;
+            }
           } else {
             results = all;
           }
-        } else {
-          results = all;
+          break;
         }
-        break;
+
+        case 'eidolonevolutions': {
+          // Firestore `in` doesn't reliably handle null — fetch all and filter client-side.
+          const all = await fetchAll<EidolonEvolutionEntry>(collectionName);
+          results = (
+            filters.summonerType
+              ? all.filter((e) => !e.summoner || e.summoner === filters.summonerType)
+              : all
+          ) as ClassOptionBase[];
+          break;
+        }
+
+        case 'occultistfocuspowers': {
+          // Exclude base powers (isBasePower === true) at query time.
+          const q = query(
+            collection(db, collectionName),
+            where('visibility', '==', 'global'),
+            where('isBasePower', '==', false),
+          );
+          const snap = await getDocs(q);
+          results = snap.docs.map((d) => d.data() as ClassOptionBase);
+          break;
+        }
+
+        default: {
+          // Simple collections with no filter support
+          const q = query(collection(db, collectionName), where('visibility', '==', 'global'));
+          const snap = await getDocs(q);
+          results = snap.docs.map((d) => d.data() as ClassOptionBase);
+          break;
+        }
       }
 
-      case 'eidolonevolutions': {
-        // Firestore `in` doesn't reliably handle null — fetch all and filter client-side.
-        const all = await fetchAll<EidolonEvolutionEntry>(collectionName);
-        results = (
-          filters.summonerType
-            ? all.filter((e) => !e.summoner || e.summoner === filters.summonerType)
-            : all
-        ) as ClassOptionBase[];
-        break;
-      }
-
-      case 'occultistfocuspowers': {
-        // Exclude base powers (isBasePower === true) at query time.
-        const q = query(
-          collection(db, collectionName),
-          where('visibility', '==', 'global'),
-          where('isBasePower', '==', false),
-        );
-        const snap = await getDocs(q);
-        results = snap.docs.map((d) => d.data() as ClassOptionBase);
-        break;
-      }
-
-      default: {
-        // Simple collections with no filter support
-        const q = query(collection(db, collectionName), where('visibility', '==', 'global'));
-        const snap = await getDocs(q);
-        results = snap.docs.map((d) => d.data() as ClassOptionBase);
-        break;
-      }
-    }
-
-    GameDataCache.set(cacheKey, results);
-    return results;
+      GameDataCache.set(cacheKey, results);
+      return results;
     } catch (e) {
       console.error(`FirestoreGameDataConnector: failed to fetch ${collectionName}:`, e);
       return [];
@@ -370,6 +382,16 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     return results;
   }
 
+  async getClassesAll(): Promise<ExpandedClassData[]> {
+    const cacheKey = 'classes/all-visibility';
+    const cached = GameDataCache.get<ExpandedClassData[]>(cacheKey);
+    if (cached) return cached;
+
+    const results = await fetchAllUnfiltered<ExpandedClassData>('classes');
+    GameDataCache.set(cacheKey, results);
+    return results;
+  }
+
   async getCoreClasses(): Promise<ClassData[]> {
     // Firestore 'classes' collection holds ExpandedClassData which is a superset
     // of ClassData. Fetch all and return as ClassData[].
@@ -412,7 +434,10 @@ export class FirestoreGameDataConnector implements GameDataConnector {
       GameDataCache.set(cacheKey, results);
       return results;
     } catch (e) {
-      console.error(`FirestoreGameDataConnector: failed to fetch class choice definitions for "${classId}":`, e);
+      console.error(
+        `FirestoreGameDataConnector: failed to fetch class choice definitions for "${classId}":`,
+        e,
+      );
       return [];
     }
   }
@@ -432,10 +457,34 @@ export class FirestoreGameDataConnector implements GameDataConnector {
 
     try {
       const [core, featured, uncommon, flex] = await Promise.all([
-        getDocs(query(collection(db, 'races'), where('visibility', '==', 'global'), where('category', '==', 'Core'))),
-        getDocs(query(collection(db, 'races'), where('visibility', '==', 'global'), where('category', '==', 'Featured'))),
-        getDocs(query(collection(db, 'races'), where('visibility', '==', 'global'), where('category', '==', 'Uncommon'))),
-        getDocs(query(collection(db, 'races'), where('visibility', '==', 'global'), where('flexibleAbilityBonus', '==', true))),
+        getDocs(
+          query(
+            collection(db, 'races'),
+            where('visibility', '==', 'global'),
+            where('category', '==', 'Core'),
+          ),
+        ),
+        getDocs(
+          query(
+            collection(db, 'races'),
+            where('visibility', '==', 'global'),
+            where('category', '==', 'Featured'),
+          ),
+        ),
+        getDocs(
+          query(
+            collection(db, 'races'),
+            where('visibility', '==', 'global'),
+            where('category', '==', 'Uncommon'),
+          ),
+        ),
+        getDocs(
+          query(
+            collection(db, 'races'),
+            where('visibility', '==', 'global'),
+            where('flexibleAbilityBonus', '==', true),
+          ),
+        ),
       ]);
 
       const result: RaceGroups = {
