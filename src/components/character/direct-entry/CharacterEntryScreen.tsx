@@ -1,5 +1,14 @@
 import React, { useCallback, useState } from 'react';
-import { View, Text, ScrollView, Pressable, StyleSheet, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Pressable,
+  StyleSheet,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { OrnateTab } from '@/components/ui/OrnateTab';
 import { CharacterEntryHeader } from './CharacterEntryHeader';
@@ -150,38 +159,43 @@ export function CharacterEntryScreen() {
         tabStatus={tabStatus}
       />
 
-      {/* Scrollable section content */}
-      <ScrollView
+      {/* Scrollable section content — wrapped so inputs scroll above the keyboard */}
+      <KeyboardAvoidingView
         style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        {activeTab === 'identity' && <IdentitySection />}
-        {activeTab === 'abilities' && (
-          <>
-            <AbilityScoreEntryPanel />
-            <LevelIncrementSlots />
-          </>
-        )}
-        {activeTab === 'classes' && <ClassesSection />}
-        {activeTab === 'combat' && <CombatStatsSection />}
-        {activeTab === 'skills' && <SkillsSection />}
-        {activeTab === 'equipment' && <EquipmentSection />}
-        {activeTab === 'traits' && <TraitsSection />}
-        {activeTab === 'feats' && <FeatSlotList />}
-        {activeTab === 'spells' && <SpellcastingSection />}
-        {activeTab === 'notes' && <NotesSection />}
-        {activeTab !== 'identity' &&
-          activeTab !== 'abilities' &&
-          activeTab !== 'classes' &&
-          activeTab !== 'combat' &&
-          activeTab !== 'skills' &&
-          activeTab !== 'equipment' &&
-          activeTab !== 'traits' &&
-          activeTab !== 'feats' &&
-          activeTab !== 'spells' &&
-          activeTab !== 'notes' && <PlaceholderSection tab={activeTab} />}
-      </ScrollView>
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+        >
+          {activeTab === 'identity' && <IdentitySection />}
+          {activeTab === 'abilities' && (
+            <>
+              <AbilityScoreEntryPanel />
+              <LevelIncrementSlots />
+            </>
+          )}
+          {activeTab === 'classes' && <ClassesSection />}
+          {activeTab === 'combat' && <CombatStatsSection />}
+          {activeTab === 'skills' && <SkillsSection />}
+          {activeTab === 'equipment' && <EquipmentSection />}
+          {activeTab === 'traits' && <TraitsSection />}
+          {activeTab === 'feats' && <FeatSlotList />}
+          {activeTab === 'spells' && <SpellcastingSection />}
+          {activeTab === 'notes' && <NotesSection />}
+          {activeTab !== 'identity' &&
+            activeTab !== 'abilities' &&
+            activeTab !== 'classes' &&
+            activeTab !== 'combat' &&
+            activeTab !== 'skills' &&
+            activeTab !== 'equipment' &&
+            activeTab !== 'traits' &&
+            activeTab !== 'feats' &&
+            activeTab !== 'spells' &&
+            activeTab !== 'notes' && <PlaceholderSection tab={activeTab} />}
+        </ScrollView>
+      </KeyboardAvoidingView>
 
       {/* Floating validation FAB */}
       {showValidationFAB && (
