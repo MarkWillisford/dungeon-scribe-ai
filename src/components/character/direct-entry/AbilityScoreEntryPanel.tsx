@@ -214,7 +214,11 @@ function BreakdownPanel({ abilityKey, score, onCollapse }: BreakdownPanelProps) 
           value={score.levelIncrements}
           readOnlyNote="from increment slots"
         />
-        <BreakdownRow label="Enhancement" value={score.enhancement} readOnlyNote="auto from gear" />
+        <BreakdownRow
+          label="Enhancement"
+          value={score.enhancement}
+          readOnlyNote="from equipped gear"
+        />
         <BreakdownRow
           label="Other"
           value={score.other}

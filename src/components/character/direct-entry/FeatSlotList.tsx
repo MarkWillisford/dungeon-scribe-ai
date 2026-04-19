@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -8,6 +8,7 @@ import {
   removeFeatSlot,
   addFeatSlot,
   toggleFeatPrereqOverride,
+  syncFeatSlots,
 } from '@/store/slices/characterEntrySlice';
 import { FeatPickerSheet } from './FeatPickerSheet';
 import { type DraftFeatSlot, type FeatSlotSource } from '@/types/characterDraft';
@@ -226,6 +227,10 @@ export function FeatSlotList() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const featSlots = useAppSelector((state) => state.characterEntry.draft.featSlots);
+
+  useEffect(() => {
+    dispatch(syncFeatSlots());
+  }, [dispatch]);
 
   const total = featSlots.length;
   const assigned = featSlots.filter((s) => !!s.featName).length;

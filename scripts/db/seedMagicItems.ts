@@ -21,14 +21,24 @@
 import * as admin from 'firebase-admin';
 import type { MagicItemDefinition } from '../../src/types/magicItems';
 import { normalizeSource } from '../../src/utils/normalizeSource';
+import { ALL_WONDROUS_ITEMS } from '../../src/data/magicItems/wondrousItems/index';
 import { ALL_RINGS } from '../../src/data/magicItems/rings/index';
 import { ALL_STAVES } from '../../src/data/magicItems/staves/index';
 import { ALL_RODS } from '../../src/data/magicItems/rods/index';
+import { ALL_MAGIC_WEAPONS } from '../../src/data/magicItems/magicWeapons/index';
+import { ALL_MAGIC_ARMOR } from '../../src/data/magicItems/magicArmor/index';
+import { ALL_IOUN_STONES } from '../../src/data/magicItems/iounStones/index';
 import { sleep } from './seedUtils';
 
-// Wondrous items (M-Z) will be added here once PRs #51 merges and the
-// wondrous index is updated to include Doug's batches.
-const ALL_MAGIC_ITEMS: MagicItemDefinition[] = [...ALL_RINGS, ...ALL_STAVES, ...ALL_RODS];
+const ALL_MAGIC_ITEMS: MagicItemDefinition[] = [
+  ...ALL_WONDROUS_ITEMS,
+  ...ALL_RINGS,
+  ...ALL_STAVES,
+  ...ALL_RODS,
+  ...ALL_MAGIC_WEAPONS,
+  ...ALL_MAGIC_ARMOR,
+  ...ALL_IOUN_STONES,
+];
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
