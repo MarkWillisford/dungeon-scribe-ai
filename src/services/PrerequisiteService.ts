@@ -3,6 +3,7 @@ import type { CharacterFeat, FeatDefinition, FeatPrerequisite } from '@/types/fe
 import type { Skills, Skill } from '@/types/skills';
 import type { AbilityScores } from '@/types/abilities';
 import { GameDataService } from '@/services/GameDataService';
+import { InitiatingService } from '@/services/InitiatingService';
 
 export interface PrerequisiteResult {
   met: boolean;
@@ -143,6 +144,32 @@ export class PrerequisiteService {
       case 'mythic_tier':
         return (character.mythic?.tier ?? 0) >= prereq.minimum;
 
+      case 'initiator_level': {
+        const pools = (character as unknown as { initiating?: { pools: Array<{ effectiveInitiatorLevel: number }> } })
+          .initiating?.pools ?? [];
+        const highestIL = pools.reduce((max, p) => Math.max(max, p.effectiveInitiatorLevel), 0);
+        return highestIL >= prereq.minimum;
+      }
+
+      case 'maneuver_known': {
+        const knownManeuvers = (character as unknown as { initiating?: { knownManeuvers: Array<{ maneuverId: string }> } })
+          .initiating?.knownManeuvers ?? [];
+        return knownManeuvers.some((m) => m.maneuverId === prereq.maneuverId);
+      }
+
+      case 'discipline_access': {
+        const initiatingPools = (character as unknown as { initiating?: { pools: Array<Record<string, unknown>> } })
+          .initiating?.pools ?? [];
+        return initiatingPools.some((pool) => {
+          // Snapshot pools only carry { effectiveInitiatorLevel, baseClass } — no discipline
+          // fields. Guard before calling getEffectiveDisciplines which requires a full pool.
+          if (!('accessibleDisciplines' in pool)) return false;
+          return InitiatingService.getEffectiveDisciplines(
+            pool as unknown as Parameters<typeof InitiatingService.getEffectiveDisciplines>[0],
+          ).includes(prereq.disciplineId);
+        });
+      }
+
       case 'special':
         // Can't auto-check; assume met (DM can override)
         return true;
@@ -205,6 +232,12 @@ export class PrerequisiteService {
         return `Caster level ${prereq.minimum}`;
       case 'mythic_tier':
         return `Mythic Tier ${prereq.minimum}`;
+      case 'initiator_level':
+        return `Initiator level ${prereq.minimum}`;
+      case 'maneuver_known':
+        return `Maneuver known: ${prereq.maneuverId}`;
+      case 'discipline_access':
+        return `Discipline access: ${prereq.disciplineId}`;
       case 'evolution':
         return `Evolution: ${prereq.evolutionId}`;
       case 'special':

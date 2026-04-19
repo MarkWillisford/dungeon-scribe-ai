@@ -9,6 +9,7 @@
 //
 import type { CharacterDraft, DraftClassEntry, AbilityKey } from '@/types/characterDraft';
 import type { Ruleset } from '@/types/ruleset';
+import type { InitiatingContributor } from '@/types/initiating';
 import {
   computeTotalBAB,
   computeTotalBABFractional,
@@ -19,7 +20,9 @@ import {
   computeBaseWill,
   computeBaseWillFractional,
   lookupClassData,
+  type ClassDataMap,
 } from '@/utils/characterComputations';
+import { InitiatingService } from './InitiatingService';
 
 // ---- Internal decision types ----
 
@@ -63,6 +66,10 @@ export interface DraftCharacterSnapshot {
   spellcasting: {
     pools: Array<{ baseCasterLevel: number; baseClass: string }>;
   };
+  initiating: {
+    pools: Array<{ effectiveInitiatorLevel: number; baseClass: string }>;
+    knownManeuvers: Array<{ maneuverId: string }>;
+  };
   mythic?: { tier: number };
 }
 
@@ -92,8 +99,12 @@ export class DraftStateResolver {
    */
   static readonly EMPTY_SNAPSHOT: DraftCharacterSnapshot = {
     abilityScores: {
-      str: { total: 10 }, dex: { total: 10 }, con: { total: 10 },
-      int: { total: 10 }, wis: { total: 10 }, cha: { total: 10 },
+      str: { total: 10 },
+      dex: { total: 10 },
+      con: { total: 10 },
+      int: { total: 10 },
+      wis: { total: 10 },
+      cha: { total: 10 },
     },
     classes: {
       baseAttackBonus: [0],
@@ -107,6 +118,7 @@ export class DraftStateResolver {
     skills: {},
     info: { race: { name: '' } },
     spellcasting: { pools: [] },
+    initiating: { pools: [], knownManeuvers: [] },
   };
 
   /**
@@ -115,7 +127,11 @@ export class DraftStateResolver {
    *
    * Pass `ruleset` to apply optional rules (e.g. fractionalBABSaves).
    */
-  static buildTimeline(draft: CharacterDraft, ruleset?: Ruleset): ECLTimeline {
+  static buildTimeline(
+    draft: CharacterDraft,
+    ruleset: Ruleset | undefined,
+    classDataMap: ClassDataMap,
+  ): ECLTimeline {
     const decisions = this.buildDecisionSequence(draft);
 
     const checkpoints: ECLCheckpoint[] = [];
@@ -136,7 +152,7 @@ export class DraftStateResolver {
       }
 
       const partialClasses = this.buildPartialClassEntries(runningClassLevels);
-      const snapshot = this.buildSnapshot(draft, partialClasses, ecl, hd, ruleset);
+      const snapshot = this.buildSnapshot(draft, partialClasses, ecl, hd, ruleset, classDataMap);
 
       checkpoints.push({ ecl, hd, decision, snapshot });
     }
@@ -158,9 +174,10 @@ export class DraftStateResolver {
   static snapshotAtECL(
     draft: CharacterDraft,
     ecl: number,
-    ruleset?: Ruleset,
+    ruleset: Ruleset | undefined,
+    classDataMap: ClassDataMap,
   ): DraftCharacterSnapshot | null {
-    const timeline = this.buildTimeline(draft, ruleset);
+    const timeline = this.buildTimeline(draft, ruleset, classDataMap);
     return timeline.checkpoints.find((c) => c.ecl === ecl)?.snapshot ?? null;
   }
 
@@ -172,10 +189,11 @@ export class DraftStateResolver {
   static snapshotBeforeECL(
     draft: CharacterDraft,
     ecl: number,
-    ruleset?: Ruleset,
+    ruleset: Ruleset | undefined,
+    classDataMap: ClassDataMap,
   ): DraftCharacterSnapshot | null {
     if (ecl <= 1) return null;
-    return this.snapshotAtECL(draft, ecl - 1, ruleset);
+    return this.snapshotAtECL(draft, ecl - 1, ruleset, classDataMap);
   }
 
   // ---- Private: decision sequence ----
@@ -269,9 +287,7 @@ export class DraftStateResolver {
 
   // ---- Private: partial state ----
 
-  private static buildPartialClassEntries(
-    runningLevels: Map<string, number>,
-  ): DraftClassEntry[] {
+  private static buildPartialClassEntries(runningLevels: Map<string, number>): DraftClassEntry[] {
     return Array.from(runningLevels.entries()).map(([className, level]) => ({
       id: className,
       className,
@@ -289,15 +305,17 @@ export class DraftStateResolver {
     partialClasses: DraftClassEntry[],
     ecl: number,
     hd: number,
-    ruleset?: Ruleset,
+    ruleset: Ruleset | undefined,
+    classDataMap: ClassDataMap,
   ): DraftCharacterSnapshot {
     return {
       abilityScores: this.buildAbilityScores(draft, hd),
-      classes: this.buildClassesSnapshot(partialClasses, hd, ruleset),
+      classes: this.buildClassesSnapshot(partialClasses, hd, ruleset, classDataMap),
       feats: this.buildFeatsSnapshot(draft, ecl),
       skills: this.buildSkillsSnapshot(draft, hd),
       info: { race: { name: draft.raceName } },
-      spellcasting: this.buildSpellcastingSnapshot(partialClasses),
+      spellcasting: this.buildSpellcastingSnapshot(partialClasses, classDataMap),
+      initiating: this.buildInitiatingSnapshot(partialClasses, classDataMap),
     };
     // mythic omitted — direct-entry draft doesn't track mythic tier
   }
@@ -317,7 +335,13 @@ export class DraftStateResolver {
       ).length;
 
       result[key] = {
-        total: score.base + score.racial + score.inherent + score.enhancement + score.other + appliedIncrements,
+        total:
+          score.base +
+          score.racial +
+          score.inherent +
+          score.enhancement +
+          score.other +
+          appliedIncrements,
       };
     }
 
@@ -327,21 +351,22 @@ export class DraftStateResolver {
   private static buildClassesSnapshot(
     partialClasses: DraftClassEntry[],
     hd: number,
-    ruleset?: Ruleset,
+    ruleset: Ruleset | undefined,
+    classDataMap: ClassDataMap,
   ): DraftCharacterSnapshot['classes'] {
     const useFractional = ruleset?.optionalRules.fractionalBABSaves ?? false;
     const totalBAB = useFractional
-      ? computeTotalBABFractional(partialClasses)
-      : computeTotalBAB(partialClasses);
+      ? computeTotalBABFractional(partialClasses, classDataMap)
+      : computeTotalBAB(partialClasses, classDataMap);
     const baseFortitude = useFractional
-      ? computeBaseFortFractional(partialClasses)
-      : computeBaseFort(partialClasses);
+      ? computeBaseFortFractional(partialClasses, classDataMap)
+      : computeBaseFort(partialClasses, classDataMap);
     const baseReflex = useFractional
-      ? computeBaseRefFractional(partialClasses)
-      : computeBaseRef(partialClasses);
+      ? computeBaseRefFractional(partialClasses, classDataMap)
+      : computeBaseRef(partialClasses, classDataMap);
     const baseWill = useFractional
-      ? computeBaseWillFractional(partialClasses)
-      : computeBaseWill(partialClasses);
+      ? computeBaseWillFractional(partialClasses, classDataMap)
+      : computeBaseWill(partialClasses, classDataMap);
 
     // Build iterative attack array: [bab, bab-5, bab-10, ...]
     const babArray: number[] = [];
@@ -353,12 +378,19 @@ export class DraftStateResolver {
     if (babArray.length === 0) babArray.push(0);
 
     const classes = partialClasses.map((entry) => {
-      const classData = lookupClassData(entry.className);
+      const classData = lookupClassData(entry.className, classDataMap);
       const features = (classData?.classFeatures ?? []).filter((f) => f.level <= entry.level);
       return { name: entry.className, level: entry.level, classFeatures: features };
     });
 
-    return { baseAttackBonus: babArray, baseFortitude, baseReflex, baseWill, totalLevel: hd, classes };
+    return {
+      baseAttackBonus: babArray,
+      baseFortitude,
+      baseReflex,
+      baseWill,
+      totalLevel: hd,
+      classes,
+    };
   }
 
   private static buildFeatsSnapshot(
@@ -389,13 +421,46 @@ export class DraftStateResolver {
 
   private static buildSpellcastingSnapshot(
     partialClasses: DraftClassEntry[],
+    classDataMap: ClassDataMap,
   ): DraftCharacterSnapshot['spellcasting'] {
     const pools = partialClasses
       .filter((entry) => {
-        const classData = lookupClassData(entry.className);
+        const classData = lookupClassData(entry.className, classDataMap);
         return classData && classData.spellcasting.type !== 'None';
       })
       .map((entry) => ({ baseCasterLevel: entry.level, baseClass: entry.className }));
     return { pools };
+  }
+
+  private static buildInitiatingSnapshot(
+    partialClasses: DraftClassEntry[],
+    classDataMap: ClassDataMap,
+  ): DraftCharacterSnapshot['initiating'] {
+    const initiatingEntries = partialClasses.filter((entry) => {
+      const classData = lookupClassData(entry.className, classDataMap);
+      return classData?.initiating != null;
+    });
+
+    const pools = initiatingEntries.map((entry) => {
+      // Each pool treats its own class as full IL, all others as half
+      const contributors: InitiatingContributor[] = partialClasses.map((c) => ({
+        className: c.className,
+        classLevels: c.level,
+        ilProgression: c.className === entry.className ? 'full' : 'half',
+        advancesManeuverAccess: c.className === entry.className,
+        // PoW rule: all non-initiating class levels count at half toward IL.
+        // advancesInitiatorLevel: false is only needed for prestige classes that
+        // explicitly state they do not advance IL — no such flag exists in the
+        // current data model, so we conservatively default to true for all classes.
+        advancesInitiatorLevel: true,
+      }));
+
+      const il = InitiatingService.computeInitiatorLevel(contributors);
+      return { effectiveInitiatorLevel: il, baseClass: entry.className };
+    });
+
+    // knownManeuvers is empty at draft time — maneuver selection happens post-draft.
+    // maneuver_known prereqs will correctly fail during draft validation.
+    return { pools, knownManeuvers: [] };
   }
 }

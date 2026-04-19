@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { Alignment } from '@/types/base';
 import { ClassChoice } from '@/types/classes';
+import { computeFeatSlots } from '@/utils/characterComputations';
 import {
   type AbilityKey,
   type CharacterDraft,
@@ -11,9 +12,8 @@ import {
   type DraftSkillEntry,
   type DraftTrait,
   type DraftSpellcastingPool,
-  type DraftWeapon,
-  type DraftArmor,
-  type DraftMagicItem,
+  type DraftEquipmentItem,
+  type DraftEquippedSlot,
   type LevelIncrementSlot,
   type DraftCombatStats,
 } from '@/types/characterDraft';
@@ -104,12 +104,35 @@ export const BLANK_DRAFT: CharacterDraft = {
   traits: [],
   featSlots: [],
   spellcastingPools: [],
-  weapons: [],
-  armor: [],
-  magicItems: [],
+  equipment: [],
   characterNotes: '',
   campaignNotes: '',
 };
+
+// ---- Feat slot sync helper ----
+
+function syncFeatSlotsFromClasses(draft: CharacterDraft): void {
+  const generated = computeFeatSlots(draft.classes, draft.raceName);
+  for (const slot of generated) {
+    if (draft.featSlots.find((s) => s.id === slot.id)) continue;
+    // Migrate a legacy slot at the same level+source to the stable ID (preserves feat assignment)
+    const legacy = draft.featSlots.find(
+      (s) => s.availableAtLevel === slot.availableAtLevel && s.source === slot.source,
+    );
+    if (legacy) {
+      legacy.id = slot.id;
+    } else {
+      draft.featSlots.push(slot);
+    }
+  }
+  const SOURCE_ORDER: Record<string, number> = { racial: 0, level: 1, bonus: 2, mythic: 3 };
+  draft.featSlots.sort(
+    (a, b) =>
+      a.availableAtLevel - b.availableAtLevel ||
+      (SOURCE_ORDER[a.source] ?? 9) - (SOURCE_ORDER[b.source] ?? 9) ||
+      a.id.localeCompare(b.id),
+  );
+}
 
 // ---- Slice state ----
 
@@ -218,6 +241,7 @@ const characterEntrySlice = createSlice({
       keys.forEach((k) => {
         state.draft.abilities[k].racial = action.payload.racialBonuses[k] ?? 0;
       });
+      syncFeatSlotsFromClasses(state.draft);
       state.isDirty = true;
     },
 
@@ -233,9 +257,7 @@ const characterEntrySlice = createSlice({
       // the previous deity may not be valid for the new one.
       if (previousDeity !== action.payload) {
         for (const cls of state.draft.classes) {
-          cls.classChoices = cls.classChoices.filter(
-            (c) => c.featureName !== 'Domain',
-          );
+          cls.classChoices = cls.classChoices.filter((c) => c.featureName !== 'Domain');
         }
       }
       state.isDirty = true;
@@ -323,11 +345,13 @@ const characterEntrySlice = createSlice({
 
     addClass(state, action: PayloadAction<DraftClassEntry>) {
       state.draft.classes.push(action.payload);
+      syncFeatSlotsFromClasses(state.draft);
       state.isDirty = true;
     },
 
     removeClass(state, action: PayloadAction<string>) {
       state.draft.classes = state.draft.classes.filter((c) => c.id !== action.payload);
+      syncFeatSlotsFromClasses(state.draft);
       state.isDirty = true;
     },
 
@@ -335,6 +359,7 @@ const characterEntrySlice = createSlice({
       const cls = state.draft.classes.find((c) => c.id === action.payload.id);
       if (cls) {
         cls.level = action.payload.level;
+        syncFeatSlotsFromClasses(state.draft);
         state.isDirty = true;
       }
     },
@@ -477,6 +502,11 @@ const characterEntrySlice = createSlice({
 
     // ---- Feats ----
 
+    syncFeatSlots(state) {
+      syncFeatSlotsFromClasses(state.draft);
+      state.isDirty = true;
+    },
+
     addFeatSlot(state, action: PayloadAction<DraftFeatSlot>) {
       state.draft.featSlots.push(action.payload);
       // Keep sorted by availableAtLevel
@@ -553,56 +583,46 @@ const characterEntrySlice = createSlice({
 
     // ---- Equipment ----
 
-    addWeapon(state, action: PayloadAction<DraftWeapon>) {
-      state.draft.weapons.push(action.payload);
+    addEquipment(state, action: PayloadAction<DraftEquipmentItem>) {
+      state.draft.equipment.push(action.payload);
       state.isDirty = true;
     },
 
-    removeWeapon(state, action: PayloadAction<string>) {
-      state.draft.weapons = state.draft.weapons.filter((w) => w.id !== action.payload);
+    removeEquipment(state, action: PayloadAction<string>) {
+      state.draft.equipment = state.draft.equipment.filter((e) => e.id !== action.payload);
       state.isDirty = true;
     },
 
-    updateWeapon(state, action: PayloadAction<DraftWeapon>) {
-      const idx = state.draft.weapons.findIndex((w) => w.id === action.payload.id);
+    updateEquipment(state, action: PayloadAction<DraftEquipmentItem>) {
+      const idx = state.draft.equipment.findIndex((e) => e.id === action.payload.id);
       if (idx >= 0) {
-        state.draft.weapons[idx] = action.payload;
+        state.draft.equipment[idx] = action.payload;
         state.isDirty = true;
       }
     },
 
-    addArmor(state, action: PayloadAction<DraftArmor>) {
-      state.draft.armor.push(action.payload);
-      state.isDirty = true;
-    },
-
-    removeArmor(state, action: PayloadAction<string>) {
-      state.draft.armor = state.draft.armor.filter((a) => a.id !== action.payload);
-      state.isDirty = true;
-    },
-
-    updateArmor(state, action: PayloadAction<DraftArmor>) {
-      const idx = state.draft.armor.findIndex((a) => a.id === action.payload.id);
-      if (idx >= 0) {
-        state.draft.armor[idx] = action.payload;
+    assignEquipmentSlot(state, action: PayloadAction<{ id: string; slot: DraftEquippedSlot }>) {
+      const item = state.draft.equipment.find((e) => e.id === action.payload.id);
+      if (item) {
+        item.slot = action.payload.slot;
+        item.containerId = undefined;
         state.isDirty = true;
       }
     },
 
-    addMagicItem(state, action: PayloadAction<DraftMagicItem>) {
-      state.draft.magicItems.push(action.payload);
-      state.isDirty = true;
+    unassignEquipmentSlot(state, action: PayloadAction<string>) {
+      const item = state.draft.equipment.find((e) => e.id === action.payload);
+      if (item) {
+        item.slot = undefined;
+        state.isDirty = true;
+      }
     },
 
-    removeMagicItem(state, action: PayloadAction<string>) {
-      state.draft.magicItems = state.draft.magicItems.filter((m) => m.id !== action.payload);
-      state.isDirty = true;
-    },
-
-    updateMagicItem(state, action: PayloadAction<DraftMagicItem>) {
-      const idx = state.draft.magicItems.findIndex((m) => m.id === action.payload.id);
-      if (idx >= 0) {
-        state.draft.magicItems[idx] = action.payload;
+    assignEquipmentContainer(state, action: PayloadAction<{ id: string; containerId: string }>) {
+      const item = state.draft.equipment.find((e) => e.id === action.payload.id);
+      if (item) {
+        item.containerId = action.payload.containerId;
+        item.slot = undefined;
         state.isDirty = true;
       }
     },
@@ -663,6 +683,7 @@ export const {
   setSkillEntry,
   addTrait,
   removeTrait,
+  syncFeatSlots,
   addFeatSlot,
   removeFeatSlot,
   assignFeat,
@@ -672,15 +693,12 @@ export const {
   removeSpellcastingPool,
   updatePoolCastingAbility,
   setSpellsPerDayMisc,
-  addWeapon,
-  removeWeapon,
-  updateWeapon,
-  addArmor,
-  removeArmor,
-  updateArmor,
-  addMagicItem,
-  removeMagicItem,
-  updateMagicItem,
+  addEquipment,
+  removeEquipment,
+  updateEquipment,
+  assignEquipmentSlot,
+  unassignEquipmentSlot,
+  assignEquipmentContainer,
   setCharacterNotes,
   setCampaignNotes,
 } = characterEntrySlice.actions;

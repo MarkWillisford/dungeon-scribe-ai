@@ -50,15 +50,12 @@ import reducer, {
   removeSpellcastingPool,
   updatePoolCastingAbility,
   setSpellsPerDayMisc,
-  addWeapon,
-  removeWeapon,
-  updateWeapon,
-  addArmor,
-  removeArmor,
-  updateArmor,
-  addMagicItem,
-  removeMagicItem,
-  updateMagicItem,
+  addEquipment,
+  removeEquipment,
+  updateEquipment,
+  assignEquipmentSlot,
+  unassignEquipmentSlot,
+  assignEquipmentContainer,
   setCharacterNotes,
   setCampaignNotes,
   type EntryValidationWarning,
@@ -71,9 +68,7 @@ import type {
   DraftFeatSlot,
   DraftTrait,
   DraftSpellcastingPool,
-  DraftWeapon,
-  DraftArmor,
-  DraftMagicItem,
+  DraftEquipmentItem,
   LevelIncrementSlot,
 } from '@/types/characterDraft';
 
@@ -138,24 +133,13 @@ function makePool(id: string): DraftSpellcastingPool {
   };
 }
 
-function makeWeapon(id: string): DraftWeapon {
+function makeEquipmentItem(id: string, overrides: Partial<DraftEquipmentItem> = {}): DraftEquipmentItem {
   return {
     id,
-    name: 'Longsword',
-    attackBonus: 5,
-    damage: '1d8+3',
-    damageType: 'S',
-    critRange: '19-20',
-    critMultiplier: 2,
+    collection: 'magicItems',
+    name: 'Cloak of Resistance +1',
+    ...overrides,
   };
-}
-
-function makeArmor(id: string): DraftArmor {
-  return { id, name: 'Chain Shirt', acBonus: 4, acp: -2 };
-}
-
-function makeMagicItem(id: string): DraftMagicItem {
-  return { id, name: 'Cloak of Resistance +1', description: '+1 resistance bonus on all saving throws.' };
 }
 
 // ---------------------------------------------------------------------------
@@ -995,122 +979,90 @@ describe('characterEntrySlice — spellcasting', () => {
 // ---------------------------------------------------------------------------
 
 describe('characterEntrySlice — equipment', () => {
-  describe('weapons', () => {
-    it('addWeapon pushes a weapon and sets isDirty', () => {
-      const w = makeWeapon('w-1');
-      const state = reducer(makeInitialState(), addWeapon(w));
-      expect(state.draft.weapons).toHaveLength(1);
-      expect(state.draft.weapons[0]).toEqual(w);
+  describe('addEquipment', () => {
+    it('pushes an item and sets isDirty', () => {
+      const item = makeEquipmentItem('eq-1');
+      const state = reducer(makeInitialState(), addEquipment(item));
+      expect(state.draft.equipment).toHaveLength(1);
+      expect(state.draft.equipment[0]).toEqual(item);
       expect(state.isDirty).toBe(true);
-    });
-
-    it('removeWeapon removes by id', () => {
-      let state = reducer(makeInitialState(), addWeapon(makeWeapon('w-1')));
-      state = reducer(state, addWeapon(makeWeapon('w-2')));
-      state = reducer(state, removeWeapon('w-1'));
-      expect(state.draft.weapons).toHaveLength(1);
-      expect(state.draft.weapons[0].id).toBe('w-2');
-      expect(state.isDirty).toBe(true);
-    });
-
-    it('removeWeapon is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addWeapon(makeWeapon('w-1')));
-      state = reducer(state, removeWeapon('does-not-exist'));
-      expect(state.draft.weapons).toHaveLength(1);
-    });
-
-    it('updateWeapon replaces the matching weapon', () => {
-      let state = reducer(makeInitialState(), addWeapon(makeWeapon('w-1')));
-      const updated: DraftWeapon = { ...makeWeapon('w-1'), name: 'Greatsword', damage: '2d6+5' };
-      state = reducer(state, updateWeapon(updated));
-      expect(state.draft.weapons[0].name).toBe('Greatsword');
-      expect(state.draft.weapons[0].damage).toBe('2d6+5');
-      expect(state.isDirty).toBe(true);
-    });
-
-    it('updateWeapon is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addWeapon(makeWeapon('w-1')));
-      state = reducer(state, updateWeapon({ ...makeWeapon('does-not-exist'), name: 'Ghost Sword' }));
-      expect(state.draft.weapons[0].name).toBe('Longsword');
     });
   });
 
-  describe('armor', () => {
-    it('addArmor pushes an armor entry and sets isDirty', () => {
-      const a = makeArmor('a-1');
-      const state = reducer(makeInitialState(), addArmor(a));
-      expect(state.draft.armor).toHaveLength(1);
-      expect(state.draft.armor[0]).toEqual(a);
+  describe('removeEquipment', () => {
+    it('removes by id', () => {
+      let state = reducer(makeInitialState(), addEquipment(makeEquipmentItem('eq-1')));
+      state = reducer(state, addEquipment(makeEquipmentItem('eq-2')));
+      state = reducer(state, removeEquipment('eq-1'));
+      expect(state.draft.equipment).toHaveLength(1);
+      expect(state.draft.equipment[0].id).toBe('eq-2');
       expect(state.isDirty).toBe(true);
     });
 
-    it('removeArmor removes by id', () => {
-      let state = reducer(makeInitialState(), addArmor(makeArmor('a-1')));
-      state = reducer(state, addArmor(makeArmor('a-2')));
-      state = reducer(state, removeArmor('a-1'));
-      expect(state.draft.armor).toHaveLength(1);
-      expect(state.draft.armor[0].id).toBe('a-2');
-      expect(state.isDirty).toBe(true);
-    });
-
-    it('removeArmor is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addArmor(makeArmor('a-1')));
-      state = reducer(state, removeArmor('does-not-exist'));
-      expect(state.draft.armor).toHaveLength(1);
-    });
-
-    it('updateArmor replaces the matching armor', () => {
-      let state = reducer(makeInitialState(), addArmor(makeArmor('a-1')));
-      const updated: DraftArmor = { ...makeArmor('a-1'), name: 'Full Plate', acBonus: 9 };
-      state = reducer(state, updateArmor(updated));
-      expect(state.draft.armor[0].name).toBe('Full Plate');
-      expect(state.draft.armor[0].acBonus).toBe(9);
-      expect(state.isDirty).toBe(true);
-    });
-
-    it('updateArmor is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addArmor(makeArmor('a-1')));
-      state = reducer(state, updateArmor({ ...makeArmor('does-not-exist'), name: 'Mithral Plate' }));
-      expect(state.draft.armor[0].name).toBe('Chain Shirt');
+    it('is a no-op when id is not found', () => {
+      let state = reducer(makeInitialState(), addEquipment(makeEquipmentItem('eq-1')));
+      state = reducer(state, removeEquipment('does-not-exist'));
+      expect(state.draft.equipment).toHaveLength(1);
     });
   });
 
-  describe('magic items', () => {
-    it('addMagicItem pushes a magic item and sets isDirty', () => {
-      const item = makeMagicItem('mi-1');
-      const state = reducer(makeInitialState(), addMagicItem(item));
-      expect(state.draft.magicItems).toHaveLength(1);
-      expect(state.draft.magicItems[0]).toEqual(item);
+  describe('updateEquipment', () => {
+    it('replaces the matching item', () => {
+      let state = reducer(makeInitialState(), addEquipment(makeEquipmentItem('eq-1')));
+      const updated: DraftEquipmentItem = { ...makeEquipmentItem('eq-1'), name: 'Cloak of Resistance +3' };
+      state = reducer(state, updateEquipment(updated));
+      expect(state.draft.equipment[0].name).toBe('Cloak of Resistance +3');
       expect(state.isDirty).toBe(true);
     });
 
-    it('removeMagicItem removes by id', () => {
-      let state = reducer(makeInitialState(), addMagicItem(makeMagicItem('mi-1')));
-      state = reducer(state, addMagicItem(makeMagicItem('mi-2')));
-      state = reducer(state, removeMagicItem('mi-1'));
-      expect(state.draft.magicItems).toHaveLength(1);
-      expect(state.draft.magicItems[0].id).toBe('mi-2');
+    it('is a no-op when id is not found', () => {
+      let state = reducer(makeInitialState(), addEquipment(makeEquipmentItem('eq-1')));
+      state = reducer(state, updateEquipment({ ...makeEquipmentItem('does-not-exist'), name: 'Ring of Wishes' }));
+      expect(state.draft.equipment[0].name).toBe('Cloak of Resistance +1');
+    });
+  });
+
+  describe('assignEquipmentSlot', () => {
+    it('assigns slot and clears containerId', () => {
+      let state = reducer(
+        makeInitialState(),
+        addEquipment(makeEquipmentItem('eq-1', { containerId: 'bag-1' })),
+      );
+      state = reducer(state, assignEquipmentSlot({ id: 'eq-1', slot: 'belt' }));
+      expect(state.draft.equipment[0].slot).toBe('belt');
+      expect(state.draft.equipment[0].containerId).toBeUndefined();
       expect(state.isDirty).toBe(true);
     });
 
-    it('removeMagicItem is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addMagicItem(makeMagicItem('mi-1')));
-      state = reducer(state, removeMagicItem('does-not-exist'));
-      expect(state.draft.magicItems).toHaveLength(1);
+    it('is a no-op when id is not found', () => {
+      let state = reducer(makeInitialState(), addEquipment(makeEquipmentItem('eq-1')));
+      state = reducer(state, assignEquipmentSlot({ id: 'does-not-exist', slot: 'belt' }));
+      expect(state.draft.equipment[0].slot).toBeUndefined();
     });
+  });
 
-    it('updateMagicItem replaces the matching item', () => {
-      let state = reducer(makeInitialState(), addMagicItem(makeMagicItem('mi-1')));
-      const updated: DraftMagicItem = { ...makeMagicItem('mi-1'), name: 'Cloak of Resistance +3' };
-      state = reducer(state, updateMagicItem(updated));
-      expect(state.draft.magicItems[0].name).toBe('Cloak of Resistance +3');
+  describe('unassignEquipmentSlot', () => {
+    it('clears slot', () => {
+      let state = reducer(
+        makeInitialState(),
+        addEquipment(makeEquipmentItem('eq-1', { slot: 'belt' })),
+      );
+      state = reducer(state, unassignEquipmentSlot('eq-1'));
+      expect(state.draft.equipment[0].slot).toBeUndefined();
       expect(state.isDirty).toBe(true);
     });
+  });
 
-    it('updateMagicItem is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addMagicItem(makeMagicItem('mi-1')));
-      state = reducer(state, updateMagicItem({ ...makeMagicItem('does-not-exist'), name: 'Ring of Wishes' }));
-      expect(state.draft.magicItems[0].name).toBe('Cloak of Resistance +1');
+  describe('assignEquipmentContainer', () => {
+    it('assigns containerId and clears slot', () => {
+      let state = reducer(
+        makeInitialState(),
+        addEquipment(makeEquipmentItem('eq-1', { slot: 'belt' })),
+      );
+      state = reducer(state, assignEquipmentContainer({ id: 'eq-1', containerId: 'bag-1' }));
+      expect(state.draft.equipment[0].containerId).toBe('bag-1');
+      expect(state.draft.equipment[0].slot).toBeUndefined();
+      expect(state.isDirty).toBe(true);
     });
   });
 });
