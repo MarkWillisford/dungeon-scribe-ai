@@ -174,9 +174,7 @@ async function loadItemsForSlot(slot: PickerSlot): Promise<PickerItem[]> {
 
     case 'none': {
       const items = await GameDataService.getMagicItemsBySlot('none');
-      return items
-        .filter((m) => m.category === 'wondrous')
-        .map((m) => mapMagicItem(m, true));
+      return items.filter((m) => m.category === 'wondrous').map((m) => mapMagicItem(m, true));
     }
 
     default: {
@@ -206,16 +204,29 @@ export function EquipmentPickerSheet({
   const { colors, fantasy, isDark } = useTheme();
   const [query, setQuery] = useState('');
   const [allItems, setAllItems] = useState<PickerItem[]>([]);
-  const [loading, setLoading] = useState(false);
+  // Track which slot the current allItems were loaded for. Loading state is
+  // derived (`visible && loadedSlot !== slot`) rather than stored, so the
+  // effect doesn't need to setState synchronously on open.
+  const [loadedSlot, setLoadedSlot] = useState<PickerSlot | null>(null);
 
   useEffect(() => {
     if (!visible) return;
-    setLoading(true);
+    let cancelled = false;
     loadItemsForSlot(slot)
-      .then(setAllItems)
-      .catch((e) => console.error('EquipmentPickerSheet: load failed', e))
-      .finally(() => setLoading(false));
+      .then((items) => {
+        if (cancelled) return;
+        setAllItems(items);
+        setLoadedSlot(slot);
+      })
+      .catch((e) => {
+        if (!cancelled) console.error('EquipmentPickerSheet: load failed', e);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, [visible, slot]);
+
+  const loading = visible && loadedSlot !== slot;
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
@@ -318,10 +329,7 @@ export function EquipmentPickerSheet({
                 ]}
               >
                 <View style={styles.itemRow}>
-                  <Text
-                    style={[styles.itemName, { color: colors.text.primary }]}
-                    numberOfLines={1}
-                  >
+                  <Text style={[styles.itemName, { color: colors.text.primary }]} numberOfLines={1}>
                     {item.name}
                   </Text>
                   {item.price !== undefined && (
@@ -339,16 +347,19 @@ export function EquipmentPickerSheet({
                   </Text>
                 ) : null}
                 {item.source ? (
-                  <View style={[styles.sourceBadge, { backgroundColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)' }]}>
+                  <View
+                    style={[
+                      styles.sourceBadge,
+                      { backgroundColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)' },
+                    ]}
+                  >
                     <Text style={[styles.sourceBadgeText, { color: colors.text.tertiary }]}>
                       {item.source}
                     </Text>
                   </View>
                 ) : null}
                 {item.allowsHandUse && (
-                  <Text style={[styles.bucklerNote, { color: fantasy.gold }]}>
-                    off-hand free
-                  </Text>
+                  <Text style={[styles.bucklerNote, { color: fantasy.gold }]}>off-hand free</Text>
                 )}
               </Pressable>
             )}
