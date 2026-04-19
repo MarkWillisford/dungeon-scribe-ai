@@ -248,6 +248,7 @@ const HATHRAN: CampaignClass = {
     casting: 'Prepared',
     spellList: 'Advances existing arcane or divine spellcasting class (+1 level per Hathran level)',
   },
+  advancesSpellcasting: { mode: 'single', tradition: 'chosen' },
   prerequisites: {
     skills: [{ name: 'Knowledge (local)', ranks: 4 }],
     feats: ['Leadership'],
@@ -356,6 +357,7 @@ const DWEOMERKEEPER: CampaignClass = {
     spellList:
       'Advances any spellcasting class (+1 level per Dweomerkeeper level); requires both arcane and divine spellcasting',
   },
+  advancesSpellcasting: { mode: 'single', tradition: 'chosen' },
   prerequisites: {
     skills: [
       { name: 'Knowledge (arcana)', ranks: 8 },
@@ -470,6 +472,7 @@ const RADIANT_SERVANT_OF_MILANI: CampaignClass = {
     casting: 'Prepared',
     spellList: 'Advances existing divine spellcasting class (+1 level per Radiant Servant level)',
   },
+  advancesSpellcasting: { mode: 'single', tradition: 'divine' },
   prerequisites: {
     skills: [
       { name: 'Heal', ranks: 5 },
@@ -661,6 +664,7 @@ const PRESTIGE_PALADIN: CampaignClass = {
     spellList:
       'Advances existing divine spellcasting class (gained at levels 2–5, 7–10, 12–15; not at 1st, 6th, or 11th)',
   },
+  advancesSpellcasting: { mode: 'single', tradition: 'divine' },
   prerequisites: {
     bab: 3,
     skills: [
