@@ -3,6 +3,7 @@
 // Mechanical effects will be handled by a separate system.
 
 import { BABProgression, SaveProgression } from '@/types/base';
+import type { RecoveryMechanics } from '@/types/initiating';
 
 export type ClassCategory =
   | 'Core'
@@ -42,6 +43,15 @@ export interface SpellcastingData {
   domainSlots?: boolean; // true for Cleric/Druid (+1 domain/nature slot per spell level)
 }
 
+export interface InitiatingData {
+  type: 'Martial';
+  initiatingAbility: 'INT' | 'WIS' | 'CHA';
+  ilProgression: 'full' | 'half';
+  disciplines: string[];
+  progressionTableKey: string;
+  recoveryMechanics: RecoveryMechanics;
+}
+
 export interface ArchetypeData {
   name: string;
   className: string; // parent class
@@ -49,6 +59,11 @@ export interface ArchetypeData {
   replacedFeatures: string[]; // class features removed
   modifiedFeatures: string[]; // class features altered
   newFeatures: ClassFeatureData[]; // archetype's own features
+  initiating?: InitiatingData; // Archetypes that GRANT initiating to non-initiating classes
+  disciplineSwaps?: {
+    gained: string[];
+    lost: string[];
+  };
   source: string;
 }
 
@@ -70,6 +85,7 @@ export interface ExpandedClassData {
   startingWealth?: string;
   classFeatures: ClassFeatureData[];
   spellcasting: SpellcastingData;
+  initiating?: InitiatingData;
   prerequisites?: PrestigePrerequisites;
   alignment?: string; // e.g., "Any non-lawful", "Lawful Good"
   source: string;
