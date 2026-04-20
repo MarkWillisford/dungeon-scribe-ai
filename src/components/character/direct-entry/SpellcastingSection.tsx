@@ -512,7 +512,7 @@ const poolStyles = StyleSheet.create({
 // ---- Main section ----
 
 export function SpellcastingSection() {
-  const { colors, fantasy, isDark } = useTheme();
+  const { colors, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const pools = useAppSelector((state) => state.characterEntry.draft.spellcastingPools);
   const abilities = useAppSelector((state) => state.characterEntry.draft.abilities);
