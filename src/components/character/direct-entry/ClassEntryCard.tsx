@@ -10,6 +10,8 @@ import {
   updateClassArchetype,
   updateClassSpellcastingAdvancement,
   toggleClassPrereqOverride,
+  toggleFavoredClass,
+  setFavoredClassBonuses,
 } from '@/store/slices/characterEntrySlice';
 import { type DraftClassEntry, type SpellcastingAdvancement } from '@/types/characterDraft';
 import { GameDataService } from '@/services/GameDataService';
@@ -570,6 +572,90 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           this class is a prestige advancer. No user toggle. */}
       {advancesSpec && <AdvancementControls entry={entry} />}
 
+      {/* Favored class */}
+      <Pressable
+        onPress={() => dispatch(toggleFavoredClass(entry.id))}
+        style={[styles.row, { borderTopColor: colors.border.DEFAULT, borderTopWidth: StyleSheet.hairlineWidth }]}
+        accessibilityRole="checkbox"
+        accessibilityState={{ checked: !!entry.isFavoredClass }}
+        accessibilityLabel="Favored class"
+      >
+        <View
+          style={[
+            styles.checkbox,
+            {
+              borderColor: entry.isFavoredClass ? fantasy.gold : colors.border.DEFAULT,
+              backgroundColor: entry.isFavoredClass
+                ? isDark
+                  ? 'rgba(212,175,55,0.2)'
+                  : 'rgba(140,90,40,0.1)'
+                : 'transparent',
+            },
+          ]}
+        >
+          {entry.isFavoredClass && (
+            <Text style={[styles.checkmark, { color: fantasy.gold }]}>✓</Text>
+          )}
+        </View>
+        <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Favored class</Text>
+      </Pressable>
+
+      {entry.isFavoredClass && (
+        <View style={[styles.favoredBonusRow, { borderTopColor: colors.border.DEFAULT }]}>
+          <Text style={[styles.favoredBonusLabel, { color: colors.text.secondary }]}>
+            Bonuses taken:
+          </Text>
+          <Text style={[styles.fieldLabel, { color: colors.text.tertiary }]}>HP</Text>
+          <TextInput
+            value={String(entry.favoredClassBonuses?.hp ?? 0)}
+            onChangeText={(t) => {
+              const n = parseInt(t, 10);
+              dispatch(setFavoredClassBonuses({
+                id: entry.id,
+                hp: isNaN(n) ? 0 : Math.max(0, n),
+                skillRank: entry.favoredClassBonuses?.skillRank ?? 0,
+              }));
+            }}
+            keyboardType="number-pad"
+            selectTextOnFocus
+            style={[
+              styles.bonusInput,
+              {
+                color: colors.text.primary,
+                borderColor: colors.border.DEFAULT,
+                backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+              },
+            ]}
+            accessibilityLabel="Favored class HP bonuses"
+          />
+          <Text style={[styles.fieldLabel, { color: colors.text.tertiary, marginLeft: 8 }]}>
+            Skill
+          </Text>
+          <TextInput
+            value={String(entry.favoredClassBonuses?.skillRank ?? 0)}
+            onChangeText={(t) => {
+              const n = parseInt(t, 10);
+              dispatch(setFavoredClassBonuses({
+                id: entry.id,
+                hp: entry.favoredClassBonuses?.hp ?? 0,
+                skillRank: isNaN(n) ? 0 : Math.max(0, n),
+              }));
+            }}
+            keyboardType="number-pad"
+            selectTextOnFocus
+            style={[
+              styles.bonusInput,
+              {
+                color: colors.text.primary,
+                borderColor: colors.border.DEFAULT,
+                backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+              },
+            ]}
+            accessibilityLabel="Favored class skill rank bonuses"
+          />
+        </View>
+      )}
+
       {/* Class choices */}
       {hasChoices && (
         <View>
@@ -795,6 +881,31 @@ const styles = StyleSheet.create({
   choicesList: {
     paddingHorizontal: 12,
     paddingBottom: 4,
+  },
+  favoredBonusRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    gap: 6,
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
+  favoredBonusLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    marginRight: 4,
+  },
+  bonusInput: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 15,
+    fontWeight: '600',
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    width: 48,
+    textAlign: 'center',
+    minHeight: 36,
   },
   prereqRow: {
     paddingHorizontal: 12,
