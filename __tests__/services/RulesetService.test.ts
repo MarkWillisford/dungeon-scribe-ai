@@ -151,6 +151,7 @@ describe('RulesetService', () => {
       mockFirestore.collection.mockReturnValue({});
       mockFirestore.addDoc.mockResolvedValue({ id: 'new-ruleset-id' });
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { id: _id, version: _v, createdAt: _c, updatedAt: _u, ...input } = baseRuleset;
 
       const result = await RulesetService.createRuleset('user-123', input);

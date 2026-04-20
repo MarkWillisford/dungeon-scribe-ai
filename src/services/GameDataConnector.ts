@@ -9,12 +9,11 @@
  * connector — GameDataService and all callers remain unchanged.
  */
 
-import type { FeatDefinition, FeatType } from '@/types/feats';
+import type { FeatDefinition } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
 import type { ExpandedClassData, SpellProgressionTable } from '@/data/classes/types';
 import type { ClassData } from '@/data/classes';
-import type { ExpandedRaceData } from '@/data/races';
 import type { ClassOptionBase, BloodlineClassId } from '@/types/classOptions';
 import type {
   WeaponDefinition,
