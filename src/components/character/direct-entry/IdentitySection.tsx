@@ -21,7 +21,6 @@ import {
   setBackground,
 } from '@/store/slices/characterEntrySlice';
 import { Alignment } from '@/types/base';
-import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
 import { RulesetSettingsSheet } from './RulesetSettingsSheet';
 
 const ALIGNMENT_OPTIONS = Object.values(Alignment).map((a) => ({ label: a, value: a }));
@@ -30,9 +29,7 @@ export function IdentitySection() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const draft = useAppSelector((state) => state.characterEntry.draft);
-  const activeRuleset = useAppSelector(
-    (state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD,
-  );
+  const activeRuleset = useAppSelector((state) => state.ruleset.activeRuleset);
   const [rulesetOpen, setRulesetOpen] = useState(false);
 
   return (

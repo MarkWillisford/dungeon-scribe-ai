@@ -13,7 +13,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setActiveRuleset, patchActiveRuleset } from '@/store/slices/rulesetSlice';
-import { SYSTEM_PRESETS, PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import { SYSTEM_PRESETS } from '@/data/rulesets/presets';
 import type { Ruleset, SourceCollection, OptionalRules, EitrMode } from '@/types/ruleset';
 
 // ---- Display labels ----
@@ -74,7 +74,7 @@ const OPTIONAL_RULE_ORDER: BoolOptionalRuleKey[] = [
 
 const EITR_OPTIONS = [
   { label: 'Off', value: 'off' },
-  { label: "Syren's Subset", value: 'syrens_subset' },
+  { label: "Syren's Subset (not yet implemented)", value: 'syrens_subset' },
   { label: 'Full', value: 'full' },
 ];
 
@@ -87,9 +87,20 @@ const ABILITY_SCORE_OPTIONS = [
 
 // ---- Sub-components ----
 
-function SectionHeader({ title, colors }: { title: string; colors: ReturnType<typeof useTheme>['colors'] }) {
+function SectionHeader({
+  title,
+  colors,
+}: {
+  title: string;
+  colors: ReturnType<typeof useTheme>['colors'];
+}) {
   return (
-    <Text style={[styles.sectionHeader, { color: colors.text.secondary, borderBottomColor: colors.border.DEFAULT }]}>
+    <Text
+      style={[
+        styles.sectionHeader,
+        { color: colors.text.secondary, borderBottomColor: colors.border.DEFAULT },
+      ]}
+    >
       {title}
     </Text>
   );
@@ -149,9 +160,8 @@ interface RulesetSettingsSheetProps {
 export function RulesetSettingsSheet({ visible, onClose }: RulesetSettingsSheetProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const activeRuleset = useAppSelector(
-    (state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD,
-  );
+  const activeRuleset = useAppSelector((state) => state.ruleset.activeRuleset);
+  const isModifiedFromPreset = useAppSelector((state) => state.ruleset.isModifiedFromPreset);
 
   const patch = (changes: Partial<Ruleset>) => dispatch(patchActiveRuleset(changes));
 
@@ -186,7 +196,10 @@ export function RulesetSettingsSheet({ visible, onClose }: RulesetSettingsSheetP
         <View
           style={[
             styles.header,
-            { backgroundColor: headerBg, borderBottomColor: isDark ? fantasy.gold : fantasy.bronze },
+            {
+              backgroundColor: headerBg,
+              borderBottomColor: isDark ? fantasy.gold : fantasy.bronze,
+            },
           ]}
         >
           <Text style={[styles.headerTitle, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
@@ -214,15 +227,18 @@ export function RulesetSettingsSheet({ visible, onClose }: RulesetSettingsSheetP
           </Text>
           <View style={styles.presetRow}>
             {SYSTEM_PRESETS.map((preset) => {
-              const isActive = activeRuleset.id === preset.id;
+              const isActive = !isModifiedFromPreset && activeRuleset.id === preset.id;
               return (
                 <Pressable
                   key={preset.id}
-                  onPress={() => dispatch(setActiveRuleset(preset))}
+                  onPress={() => {
+                    if (isActive) return;
+                    dispatch(setActiveRuleset(preset));
+                  }}
                   style={[
                     styles.presetCard,
                     {
-                      backgroundColor: isDark ? colors.bg.secondary : colors.bg.secondary,
+                      backgroundColor: isDark ? colors.bg.secondary : colors.bg.primary,
                       borderColor: isActive ? fantasy.gold : colors.border.DEFAULT,
                       borderWidth: isActive ? 2 : 1,
                     },
@@ -231,13 +247,17 @@ export function RulesetSettingsSheet({ visible, onClose }: RulesetSettingsSheetP
                   accessibilityLabel={`Use ${preset.name} preset`}
                   accessibilityState={{ selected: isActive }}
                 >
-                  {isActive && (
-                    <Text style={[styles.presetCheck, { color: fantasy.gold }]}>✓</Text>
-                  )}
+                  {isActive && <Text style={[styles.presetCheck, { color: fantasy.gold }]}>✓</Text>}
                   <Text
                     style={[
                       styles.presetName,
-                      { color: isActive ? (isDark ? fantasy.gold : fantasy.darkWood) : colors.text.primary },
+                      {
+                        color: isActive
+                          ? isDark
+                            ? fantasy.gold
+                            : fantasy.darkWood
+                          : colors.text.primary,
+                      },
                     ]}
                   >
                     {preset.name}
@@ -500,6 +520,7 @@ const styles = StyleSheet.create({
     height: 20,
     borderRadius: 10,
     position: 'absolute',
+    top: 2,
   },
   numberRow: {
     flexDirection: 'row',
