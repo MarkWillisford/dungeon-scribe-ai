@@ -68,6 +68,7 @@ const SCRIPTS: string[] = [
   // Foundation — no dependencies
   'seedRaces.ts',
   'seedClasses.ts',
+  'seedArchetypes.ts',
   'seedFeats.ts',
   'seedTraits.ts',
   'seedEquipment.ts', // seeds weapons, armor, shields, gear collections
