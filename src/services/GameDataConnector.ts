@@ -150,5 +150,5 @@ export interface GameDataConnector {
   getMartialTraditionById(id: string): Promise<MartialTradition | null>;
 
   // ---- Archetypes ----
-  getArchetypesByClass(className: string): Promise<ArchetypeData[]>;
+  getArchetypesByClass(className: string, context?: QueryContext): Promise<ArchetypeData[]>;
 }

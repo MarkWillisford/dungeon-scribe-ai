@@ -26,10 +26,6 @@
       "Bash(git log*)",
       "Bash(git show*)",
       "Bash(for pr in*)"
-    ],
-    "defaultMode": "bypassPermissions"
-  },
-  "enabledPlugins": {
-    "codex@openai-codex": true
+    ]
   }
 }

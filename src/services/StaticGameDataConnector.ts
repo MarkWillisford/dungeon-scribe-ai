@@ -277,7 +277,7 @@ export class StaticGameDataConnector implements GameDataConnector {
     return ALL_GEAR;
   }
 
-  async getArchetypesByClass(className: string): Promise<ArchetypeData[]> {
+  async getArchetypesByClass(className: string, _context?: QueryContext): Promise<ArchetypeData[]> {
     return ALL_ARCHETYPES.filter((a) => a.className === className);
   }
 

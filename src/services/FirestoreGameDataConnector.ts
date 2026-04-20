@@ -762,7 +762,7 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     }
   }
 
-  async getArchetypesByClass(className: string): Promise<ArchetypeData[]> {
+  async getArchetypesByClass(className: string, _context?: QueryContext): Promise<ArchetypeData[]> {
     const cacheKey = `archetypes/${className}`;
     const cached = GameDataCache.get<ArchetypeData[]>(cacheKey);
     if (cached) return cached;

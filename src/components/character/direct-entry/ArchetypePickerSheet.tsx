@@ -72,21 +72,24 @@ export function ArchetypePickerSheet({
   const { colors, fantasy, isDark } = useTheme();
   const [query, setQuery] = useState('');
   const [allItems, setAllItems] = useState<ArchetypeItem[]>([NONE_ITEM]);
-  const [loadedClassName, setLoadedClassName] = useState<string | null>(null);
-  const loading = visible && !!className && loadedClassName !== className;
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!visible || !className) return;
     let cancelled = false;
+    setIsLoading(true);
     GameDataService.getArchetypesByClass(className)
       .then((archetypes) => {
         if (!cancelled) {
           setAllItems(buildItems(archetypes, className));
-          setLoadedClassName(className);
+          setIsLoading(false);
         }
       })
       .catch((e) => {
-        if (!cancelled) console.error('Failed to load archetypes:', e);
+        if (!cancelled) {
+          console.error('Failed to load archetypes:', e);
+          setIsLoading(false);
+        }
       });
     return () => { cancelled = true; };
   }, [visible, className]);
@@ -169,7 +172,7 @@ export function ArchetypePickerSheet({
         </View>
 
         {/* Loading indicator */}
-        {loading && (
+        {isLoading && (
           <View style={styles.loadingRow}>
             <ActivityIndicator size="small" color={fantasy.gold} />
             <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>
@@ -222,14 +225,16 @@ export function ArchetypePickerSheet({
             </Pressable>
           )}
           contentContainerStyle={styles.listContent}
-          ListEmptyComponent={
-            <View style={styles.empty}>
-              <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                {query
-                  ? `No archetypes matching "${query}"`
-                  : `No archetypes found for ${className}`}
-              </Text>
-            </View>
+          ListFooterComponent={
+            !isLoading && filtered.length === 1 ? (
+              <View style={styles.empty}>
+                <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
+                  {query
+                    ? `No archetypes matching "${query}"`
+                    : `No archetypes found for ${className}`}
+                </Text>
+              </View>
+            ) : null
           }
         />
       </View>

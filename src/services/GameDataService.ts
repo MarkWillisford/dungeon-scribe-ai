@@ -531,7 +531,8 @@ export class GameDataService {
     return GameDataService.connector.getMartialTraditionById(id);
   }
 
-  static async getArchetypesByClass(className: string): Promise<ArchetypeData[]> {
-    return GameDataService.connector.getArchetypesByClass(className);
+  static async getArchetypesByClass(className: string, context?: QueryContext): Promise<ArchetypeData[]> {
+    const ctx = context ?? GameDataService.getContextFromStore();
+    return GameDataService.connector.getArchetypesByClass(className, ctx);
   }
 }
