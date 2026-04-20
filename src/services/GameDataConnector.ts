@@ -22,8 +22,14 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
-import type { MagicItemDefinition } from '@/types/magicItems';
-import type { ItemSlot } from '@/types/magicItems';
+import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import type {
+  DisciplineDefinition,
+  ManeuverDefinition,
+  StanceDefinition,
+  MartialTradition,
+  DisciplineSourceSystem,
+} from '@/types/initiating';
 import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
 
 // ---- Class choice collections -------------------------------------------------------
@@ -81,6 +87,17 @@ export interface ClassChoiceFilters {
   discoveryTier?: string;
 }
 
+// ---- Initiating filter types --------------------------------------------------------
+
+export interface ManeuverFilter {
+  disciplineId?: string;
+  maxLevel?: number;
+}
+
+export interface DisciplineFilter {
+  sourceSystem?: DisciplineSourceSystem | DisciplineSourceSystem[];
+}
+
 // ---- Spell table type ---------------------------------------------------------------
 
 export type SpellTables = Record<string, SpellProgressionTable>;
@@ -121,4 +138,14 @@ export interface GameDataConnector {
   getShields(context?: QueryContext): Promise<ShieldDefinition[]>;
   getGear(context?: QueryContext): Promise<GearDefinition[]>;
   getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]>;
+
+  // ---- Initiating system ----
+  getDisciplines(filter?: DisciplineFilter): Promise<DisciplineDefinition[]>;
+  getDisciplineById(id: string): Promise<DisciplineDefinition | null>;
+  getManeuvers(filter?: ManeuverFilter): Promise<ManeuverDefinition[]>;
+  getManeuverById(id: string): Promise<ManeuverDefinition | null>;
+  getStances(filter?: ManeuverFilter): Promise<StanceDefinition[]>;
+  getStanceById(id: string): Promise<StanceDefinition | null>;
+  getMartialTraditions(): Promise<MartialTradition[]>;
+  getMartialTraditionById(id: string): Promise<MartialTradition | null>;
 }

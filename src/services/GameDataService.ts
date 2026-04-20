@@ -52,7 +52,13 @@ import {
 } from '@/data/races';
 
 import { FirestoreGameDataConnector } from './FirestoreGameDataConnector';
-import type { GameDataConnector, ClassChoiceFilters } from './GameDataConnector';
+import type { GameDataConnector, ClassChoiceFilters, ManeuverFilter, DisciplineFilter } from './GameDataConnector';
+import type {
+  DisciplineDefinition,
+  ManeuverDefinition,
+  StanceDefinition,
+  MartialTradition,
+} from '@/types/initiating';
 
 // ---- QueryContext ----------------------------------------------------------------
 
@@ -489,5 +495,39 @@ export class GameDataService {
 
   static async getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]> {
     return GameDataService.connector.getMagicItemsBySlot(slot);
+  }
+
+  // ---- Initiating system -----------------------------------------------------
+
+  static async getDisciplines(filter?: DisciplineFilter): Promise<DisciplineDefinition[]> {
+    return GameDataService.connector.getDisciplines(filter);
+  }
+
+  static async getDisciplineById(id: string): Promise<DisciplineDefinition | null> {
+    return GameDataService.connector.getDisciplineById(id);
+  }
+
+  static async getManeuvers(filter?: ManeuverFilter): Promise<ManeuverDefinition[]> {
+    return GameDataService.connector.getManeuvers(filter);
+  }
+
+  static async getManeuverById(id: string): Promise<ManeuverDefinition | null> {
+    return GameDataService.connector.getManeuverById(id);
+  }
+
+  static async getStances(filter?: ManeuverFilter): Promise<StanceDefinition[]> {
+    return GameDataService.connector.getStances(filter);
+  }
+
+  static async getStanceById(id: string): Promise<StanceDefinition | null> {
+    return GameDataService.connector.getStanceById(id);
+  }
+
+  static async getMartialTraditions(): Promise<MartialTradition[]> {
+    return GameDataService.connector.getMartialTraditions();
+  }
+
+  static async getMartialTraditionById(id: string): Promise<MartialTradition | null> {
+    return GameDataService.connector.getMartialTraditionById(id);
   }
 }

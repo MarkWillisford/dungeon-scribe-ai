@@ -37,6 +37,12 @@ import type {
   GearDefinition,
 } from '@/types/equipment';
 import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import type {
+  DisciplineDefinition,
+  ManeuverDefinition,
+  StanceDefinition,
+  MartialTradition,
+} from '@/types/initiating';
 import type { DeityEntry } from '@/types/deities';
 
 import { GameDataCache, TTL } from './GameDataCache';
@@ -44,6 +50,8 @@ import type {
   GameDataConnector,
   ClassChoiceCollection,
   ClassChoiceFilters,
+  ManeuverFilter,
+  DisciplineFilter,
 } from './GameDataConnector';
 import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
 
@@ -561,5 +569,197 @@ export class FirestoreGameDataConnector implements GameDataConnector {
         return [];
       }
     });
+  }
+
+  // ---- Initiating system -----------------------------------------------------
+
+  async getDisciplines(filter?: DisciplineFilter): Promise<DisciplineDefinition[]> {
+    const cacheKey = `disciplines/${JSON.stringify(filter ?? {})}`;
+    const cached = GameDataCache.get<DisciplineDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const all = await FirestoreGameDataConnector.dedup('disciplines/__all', async () => {
+        const results = await fetchAll<DisciplineDefinition>('disciplines');
+        GameDataCache.set('disciplines/__all', results, TTL.OFFICIAL);
+        return results;
+      });
+
+      let results = all;
+      if (filter?.sourceSystem) {
+        const systems = Array.isArray(filter.sourceSystem)
+          ? filter.sourceSystem
+          : [filter.sourceSystem];
+        results = all.filter((d) => systems.includes(d.sourceSystem));
+      }
+
+      GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+      return results;
+    } catch (e) {
+      console.error('FirestoreGameDataConnector: failed to fetch disciplines:', e);
+      return [];
+    }
+  }
+
+  async getDisciplineById(id: string): Promise<DisciplineDefinition | null> {
+    const cacheKey = `disciplines/${id}`;
+    const cached = GameDataCache.get<DisciplineDefinition>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const snap = await getDoc(doc(db, 'disciplines', id));
+      if (!snap.exists()) return null;
+      const result = snap.data() as DisciplineDefinition;
+      GameDataCache.set(cacheKey, result, TTL.OFFICIAL);
+      return result;
+    } catch (e) {
+      console.error(`FirestoreGameDataConnector: failed to fetch discipline "${id}":`, e);
+      return null;
+    }
+  }
+
+  async getManeuvers(filter?: ManeuverFilter): Promise<ManeuverDefinition[]> {
+    const cacheKey = `maneuvers/${JSON.stringify(filter ?? {})}`;
+    const cached = GameDataCache.get<ManeuverDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      let results: ManeuverDefinition[];
+
+      if (filter?.disciplineId) {
+        const q = filter.maxLevel !== undefined
+          ? query(
+              collection(db, 'maneuvers'),
+              where('visibility', '==', 'global'),
+              where('disciplineId', '==', filter.disciplineId),
+              where('level', '<=', filter.maxLevel),
+            )
+          : query(
+              collection(db, 'maneuvers'),
+              where('visibility', '==', 'global'),
+              where('disciplineId', '==', filter.disciplineId),
+            );
+        const snap = await getDocs(q);
+        results = snap.docs.map((d) => d.data() as ManeuverDefinition);
+      } else {
+        const all = await FirestoreGameDataConnector.dedup('maneuvers/__all', async () => {
+          const fetched = await fetchAll<ManeuverDefinition>('maneuvers');
+          GameDataCache.set('maneuvers/__all', fetched, TTL.OFFICIAL);
+          return fetched;
+        });
+        results = filter?.maxLevel !== undefined
+          ? all.filter((m) => m.level <= filter.maxLevel!)
+          : all;
+      }
+
+      GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+      return results;
+    } catch (e) {
+      console.error('FirestoreGameDataConnector: failed to fetch maneuvers:', e);
+      return [];
+    }
+  }
+
+  async getManeuverById(id: string): Promise<ManeuverDefinition | null> {
+    const cacheKey = `maneuvers/${id}`;
+    const cached = GameDataCache.get<ManeuverDefinition>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const snap = await getDoc(doc(db, 'maneuvers', id));
+      if (!snap.exists()) return null;
+      const result = snap.data() as ManeuverDefinition;
+      GameDataCache.set(cacheKey, result, TTL.OFFICIAL);
+      return result;
+    } catch (e) {
+      console.error(`FirestoreGameDataConnector: failed to fetch maneuver "${id}":`, e);
+      return null;
+    }
+  }
+
+  async getStances(filter?: ManeuverFilter): Promise<StanceDefinition[]> {
+    const cacheKey = `stances/${JSON.stringify(filter ?? {})}`;
+    const cached = GameDataCache.get<StanceDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      let results: StanceDefinition[];
+
+      if (filter?.disciplineId) {
+        const q = filter.maxLevel !== undefined
+          ? query(
+              collection(db, 'stances'),
+              where('visibility', '==', 'global'),
+              where('disciplineId', '==', filter.disciplineId),
+              where('level', '<=', filter.maxLevel),
+            )
+          : query(
+              collection(db, 'stances'),
+              where('visibility', '==', 'global'),
+              where('disciplineId', '==', filter.disciplineId),
+            );
+        const snap = await getDocs(q);
+        results = snap.docs.map((d) => d.data() as StanceDefinition);
+      } else {
+        const all = await FirestoreGameDataConnector.dedup('stances/__all', async () => {
+          const fetched = await fetchAll<StanceDefinition>('stances');
+          GameDataCache.set('stances/__all', fetched, TTL.OFFICIAL);
+          return fetched;
+        });
+        results = filter?.maxLevel !== undefined
+          ? all.filter((s) => s.level <= filter.maxLevel!)
+          : all;
+      }
+
+      GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+      return results;
+    } catch (e) {
+      console.error('FirestoreGameDataConnector: failed to fetch stances:', e);
+      return [];
+    }
+  }
+
+  async getStanceById(id: string): Promise<StanceDefinition | null> {
+    const cacheKey = `stances/${id}`;
+    const cached = GameDataCache.get<StanceDefinition>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const snap = await getDoc(doc(db, 'stances', id));
+      if (!snap.exists()) return null;
+      const result = snap.data() as StanceDefinition;
+      GameDataCache.set(cacheKey, result, TTL.OFFICIAL);
+      return result;
+    } catch (e) {
+      console.error(`FirestoreGameDataConnector: failed to fetch stance "${id}":`, e);
+      return null;
+    }
+  }
+
+  async getMartialTraditions(): Promise<MartialTradition[]> {
+    const cacheKey = 'martialTraditions/all';
+    const cached = GameDataCache.get<MartialTradition[]>(cacheKey);
+    if (cached) return cached;
+
+    const results = await fetchAll<MartialTradition>('martialTraditions');
+    GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+    return results;
+  }
+
+  async getMartialTraditionById(id: string): Promise<MartialTradition | null> {
+    const cacheKey = `martialTraditions/${id}`;
+    const cached = GameDataCache.get<MartialTradition>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const snap = await getDoc(doc(db, 'martialTraditions', id));
+      if (!snap.exists()) return null;
+      const result = snap.data() as MartialTradition;
+      GameDataCache.set(cacheKey, result, TTL.OFFICIAL);
+      return result;
+    } catch (e) {
+      console.error(`FirestoreGameDataConnector: failed to fetch martial tradition "${id}":`, e);
+      return null;
+    }
   }
 }
