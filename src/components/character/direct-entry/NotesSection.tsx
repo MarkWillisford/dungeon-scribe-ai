@@ -7,7 +7,7 @@ import { setCharacterNotes, setCampaignNotes } from '@/store/slices/characterEnt
 // ---- Section label ----
 
 function SectionLabel({ label }: { label: string }) {
-  const { colors, fantasy, isDark } = useTheme();
+  const { fantasy, isDark } = useTheme();
   return (
     <Text style={[styles.sectionLabel, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
       {label}

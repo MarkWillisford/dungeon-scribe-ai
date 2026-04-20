@@ -27,7 +27,6 @@ import type { ExpandedClassData } from '@/data/classes/types';
 import type { ClassData } from '@/data/classes';
 import type {
   ClassOptionBase,
-  ShamanSpiritEntry,
   EidolonEvolutionEntry,
 } from '@/types/classOptions';
 import type {
@@ -53,7 +52,7 @@ import type {
   ManeuverFilter,
   DisciplineFilter,
 } from './GameDataConnector';
-import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
+import type { RaceGroups, FeatFilter } from './GameDataService';
 
 // ---------------------------------------------------------------------------
 // Helpers

@@ -1,5 +1,4 @@
 import type { ItemSpecialAbility } from '@/types/magicItems';
-import { Alignment } from '@/types/base';
 
 // Ultimate Equipment + other sources weapon special abilities.
 export const weaponAbilitiesBatch2: ItemSpecialAbility[] = [

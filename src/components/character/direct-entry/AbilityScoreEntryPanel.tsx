@@ -101,7 +101,7 @@ function BreakdownRow({
   readOnlyNote,
   onChangeValue,
 }: BreakdownRowProps) {
-  const { colors, fantasy } = useTheme();
+  const { colors } = useTheme();
   const displayValue = value >= 0 ? `+${value}` : `${value}`;
 
   return (
