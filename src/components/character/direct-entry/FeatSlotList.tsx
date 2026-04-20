@@ -56,7 +56,7 @@ interface FeatSlotRowProps {
 }
 
 function FeatSlotRow({ slot }: FeatSlotRowProps) {
-  const { colors, fantasy, isDark } = useTheme();
+  const { colors } = useTheme();
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
 
