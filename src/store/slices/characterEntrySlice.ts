@@ -96,6 +96,8 @@ export const BLANK_DRAFT: CharacterDraft = {
   skin: '',
   background: '',
   abilities: blankAbilities(),
+  racialFlexBonus: false,
+  racialFlexAbility: undefined,
   levelIncrementSlots: [],
   classes: [],
   templates: [],
@@ -232,16 +234,32 @@ const characterEntrySlice = createSlice({
         raceId: string;
         raceName: string;
         racialBonuses: Partial<Record<AbilityKey, number>>;
+        hasFlexBonus?: boolean;
       }>,
     ) {
       state.draft.raceId = action.payload.raceId;
       state.draft.raceName = action.payload.raceName;
+      state.draft.racialFlexBonus = action.payload.hasFlexBonus ?? false;
+      if (!action.payload.hasFlexBonus) {
+        state.draft.racialFlexAbility = undefined;
+      }
       // Apply racial bonuses to ability scores (clear old ones first)
       const keys: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
       keys.forEach((k) => {
         state.draft.abilities[k].racial = action.payload.racialBonuses[k] ?? 0;
       });
       syncFeatSlotsFromClasses(state.draft);
+      state.isDirty = true;
+    },
+
+    setRacialFlexAbility(state, action: PayloadAction<AbilityKey>) {
+      const prev = state.draft.racialFlexAbility;
+      const next = action.payload;
+      if (prev && prev !== next) {
+        state.draft.abilities[prev].racial = 0;
+      }
+      state.draft.abilities[next].racial = 2;
+      state.draft.racialFlexAbility = next;
       state.isDirty = true;
     },
 
@@ -652,6 +670,7 @@ export const {
   setName,
   setPlayer,
   setRace,
+  setRacialFlexAbility,
   setAlignment,
   setDeity,
   setGender,

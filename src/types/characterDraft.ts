@@ -193,6 +193,8 @@ export interface CharacterDraft {
 
   // Abilities
   abilities: DraftAbilityScores;
+  racialFlexBonus: boolean;
+  racialFlexAbility?: AbilityKey;
   levelIncrementSlots: LevelIncrementSlot[];
 
   // Classes & Templates

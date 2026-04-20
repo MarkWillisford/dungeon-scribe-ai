@@ -4,7 +4,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { OrnatePanel } from '@/components/ui/OrnatePanel';
 import { AutoComputedValue } from '@/components/ui/AutoComputedValue';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setAbilityField } from '@/store/slices/characterEntrySlice';
+import { setAbilityField, setRacialFlexAbility } from '@/store/slices/characterEntrySlice';
 import { type AbilityKey, type DraftAbilityScore } from '@/types/characterDraft';
 
 // ---- Helpers ----
@@ -240,6 +240,53 @@ function BreakdownPanel({ abilityKey, score, onCollapse }: BreakdownPanelProps) 
   );
 }
 
+// ---- Racial Flex Picker ----
+
+function RacialFlexPicker() {
+  const { colors, fantasy, isDark } = useTheme();
+  const dispatch = useAppDispatch();
+  const draft = useAppSelector((state) => state.characterEntry.draft);
+  const current = draft.racialFlexAbility;
+
+  return (
+    <View
+      style={[
+        styles.flexRow,
+        { borderColor: colors.border.DEFAULT, backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary },
+      ]}
+    >
+      <Text style={[styles.flexLabel, { color: colors.text.secondary }]}>Racial +2 ability:</Text>
+      <View style={styles.flexButtons}>
+        {ABILITY_ORDER.map((key) => {
+          const isSelected = current === key;
+          return (
+            <Pressable
+              key={key}
+              onPress={() => dispatch(setRacialFlexAbility(key))}
+              style={[
+                styles.flexBtn,
+                {
+                  borderColor: isSelected ? fantasy.gold : colors.border.DEFAULT,
+                  backgroundColor: isSelected
+                    ? isDark ? 'rgba(212,175,55,0.2)' : 'rgba(140,90,40,0.1)'
+                    : 'transparent',
+                },
+              ]}
+              accessibilityRole="radio"
+              accessibilityState={{ checked: isSelected }}
+              accessibilityLabel={`Apply racial +2 to ${ABILITY_LABELS[key]}`}
+            >
+              <Text style={[styles.flexBtnText, { color: isSelected ? fantasy.gold : colors.text.secondary }]}>
+                {ABILITY_LABELS[key]}
+              </Text>
+            </Pressable>
+          );
+        })}
+      </View>
+    </View>
+  );
+}
+
 // ---- Main Panel ----
 
 export function AbilityScoreEntryPanel() {
@@ -252,6 +299,9 @@ export function AbilityScoreEntryPanel() {
 
   return (
     <OrnatePanel title="Ability Scores">
+      {/* Racial flex ability picker — shown for races with a flexible +2 */}
+      {draft.racialFlexBonus && <RacialFlexPicker />}
+
       {/* 3×2 grid */}
       <View style={styles.grid}>
         {ABILITY_ORDER.map((key) => (
@@ -282,6 +332,38 @@ export function AbilityScoreEntryPanel() {
 }
 
 const styles = StyleSheet.create({
+  flexRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 8,
+    borderWidth: 1,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    marginBottom: 10,
+    gap: 8,
+  },
+  flexLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    flexShrink: 0,
+  },
+  flexButtons: {
+    flexDirection: 'row',
+    flex: 1,
+    gap: 4,
+  },
+  flexBtn: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 6,
+    borderRadius: 6,
+    borderWidth: 1,
+  },
+  flexBtnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 10,
+    fontWeight: '700',
+  },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',

@@ -106,6 +106,7 @@ function blankDraft(): CharacterDraft {
     player: 'Test Player',
     raceId: 'human',
     raceName: 'Human',
+    racialFlexBonus: false,
     alignment: Alignment.TrueNeutral,
     deity: '',
     gender: '',

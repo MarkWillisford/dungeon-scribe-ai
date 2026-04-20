@@ -144,6 +144,7 @@ function blankDraft(): CharacterDraft {
     player: 'Mark',
     raceId: 'human',
     raceName: 'Human',
+    racialFlexBonus: false,
     alignment: Alignment.TrueNeutral,
     deity: '',
     gender: '',
