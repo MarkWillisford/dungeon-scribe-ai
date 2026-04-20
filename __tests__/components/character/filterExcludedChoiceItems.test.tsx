@@ -1,6 +1,19 @@
-import { filterExcludedChoiceItems } from '@/components/character/direct-entry/ClassChoiceRow';
+import React from 'react';
+import { render } from '../../helpers/testUtils';
+import {
+  filterExcludedChoiceItems,
+  ClassChoiceRow,
+} from '@/components/character/direct-entry/ClassChoiceRow';
 import type { SearchItem } from '@/components/ui/SearchPickerSheet';
 import type { ClassChoice } from '@/types/classes';
+import type { ClassChoiceDefinition } from '@/types/classChoices';
+
+jest.mock('@/services/GameDataService', () => ({
+  GameDataService: { getClassChoiceItems: jest.fn().mockResolvedValue([]) },
+}));
+jest.mock('@/components/ui/SearchPickerSheet', () => ({
+  SearchPickerSheet: () => null,
+}));
 
 const item = (key: string): SearchItem => ({ key, label: key });
 
@@ -92,5 +105,53 @@ describe('filterExcludedChoiceItems', () => {
     expect(keys).toContain('law');
     expect(keys).toContain('fire');
     expect(keys).toContain('destruction');
+  });
+});
+
+const domainDefinition: ClassChoiceDefinition = {
+  id: 'cleric-domain',
+  className: 'cleric',
+  featureName: 'Domain',
+  description: 'Choose a domain',
+  selectionMode: { type: 'multi_at_creation', count: 2 },
+  optionSource: 'collection',
+  collectionName: 'domains',
+  source: 'pf1e',
+  isOfficial: true,
+  verificationStatus: 'verified',
+  visibility: 'global',
+  rev: 1,
+};
+
+describe('ClassChoiceRow', () => {
+  it('renders featureLabel and empty-state placeholder when no selection is made', () => {
+    const texts = render(
+      <ClassChoiceRow
+        classId="cleric-001"
+        definition={domainDefinition}
+        choiceIndex={0}
+        takenAtLevel={1}
+        featureLabel="Domain 1"
+        siblingChoices={[]}
+      />,
+    ).getAllText();
+    expect(texts).toContain('Domain 1');
+    expect(texts).toContain('— choose —');
+  });
+
+  it('shows disabled copy and hides choose placeholder when disabled=true', () => {
+    const texts = render(
+      <ClassChoiceRow
+        classId="cleric-001"
+        definition={domainDefinition}
+        choiceIndex={0}
+        takenAtLevel={1}
+        featureLabel="Domain 1"
+        siblingChoices={[]}
+        disabled
+      />,
+    ).getAllText();
+    expect(texts).toContain('— n/a (other choice made) —');
+    expect(texts).not.toContain('— choose —');
   });
 });
