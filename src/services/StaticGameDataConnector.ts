@@ -66,8 +66,16 @@ import type {
   GameDataConnector,
   ClassChoiceCollection,
   ClassChoiceFilters,
+  ManeuverFilter,
+  DisciplineFilter,
 } from './GameDataConnector';
 import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
+import type {
+  DisciplineDefinition,
+  ManeuverDefinition,
+  StanceDefinition,
+  MartialTradition,
+} from '@/types/initiating';
 
 export class StaticGameDataConnector implements GameDataConnector {
   async getClassChoiceOptions(
@@ -278,5 +286,39 @@ export class StaticGameDataConnector implements GameDataConnector {
       ...(ALL_IOUN_STONES as MagicItemDefinition[]),
     ];
     return Promise.resolve(all.filter((item) => item.slot === slot));
+  }
+
+  // ---- Initiating system (no static data yet — Phase 9 seeds Firestore) ------
+
+  async getDisciplines(_filter?: DisciplineFilter): Promise<DisciplineDefinition[]> {
+    return [];
+  }
+
+  async getDisciplineById(_id: string): Promise<DisciplineDefinition | null> {
+    return null;
+  }
+
+  async getManeuvers(_filter?: ManeuverFilter): Promise<ManeuverDefinition[]> {
+    return [];
+  }
+
+  async getManeuverById(_id: string): Promise<ManeuverDefinition | null> {
+    return null;
+  }
+
+  async getStances(_filter?: ManeuverFilter): Promise<StanceDefinition[]> {
+    return [];
+  }
+
+  async getStanceById(_id: string): Promise<StanceDefinition | null> {
+    return null;
+  }
+
+  async getMartialTraditions(): Promise<MartialTradition[]> {
+    return [];
+  }
+
+  async getMartialTraditionById(_id: string): Promise<MartialTradition | null> {
+    return null;
   }
 }

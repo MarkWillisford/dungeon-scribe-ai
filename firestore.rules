@@ -62,7 +62,8 @@ service cloud.firestore {
     //   investigatorTalents, kineticistWildTalents, magusArcana, mesmeristTricks,
     //   ninjaTricks, occultistFocusPowers, phrenicAmplifications, shamanSpirits,
     //   slayerTalents, warpriestBlessings, alchemistDiscoveries, eidolonEvolutions,
-    //   classChoiceDefinitions, rulesets, magicItems, weapons, armor, shields, gear
+    //   classChoiceDefinitions, rulesets, magicItems, weapons, armor, shields, gear,
+    //   disciplines, maneuvers, stances, martialTraditions
     match /races/{docId}                    { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /classes/{docId}                  { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /feats/{docId}                    { allow read: if isAuthenticated(); allow write: if isAdmin(); }
@@ -100,6 +101,10 @@ service cloud.firestore {
     match /armor/{docId}                   { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /shields/{docId}                 { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /gear/{docId}                    { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /disciplines/{docId}             { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /maneuvers/{docId}               { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /stances/{docId}                 { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /martialTraditions/{docId}       { allow read: if isAuthenticated(); allow write: if isAdmin(); }
 
     // Campaigns collection
     match /campaigns/{campaignId} {
