@@ -19,8 +19,19 @@ const rulesetSlice = createSlice({
     clearRuleset(state) {
       state.activeRuleset = null;
     },
+    // Shallow-merge a partial update into the active ruleset.
+    // Callers must spread nested objects themselves:
+    //   patchActiveRuleset({ optionalRules: { ...current.optionalRules, heroPoints: true } })
+    patchActiveRuleset(state, action: PayloadAction<Partial<Ruleset>>) {
+      if (!state.activeRuleset) return;
+      state.activeRuleset = {
+        ...state.activeRuleset,
+        ...action.payload,
+        updatedAt: new Date().toISOString(),
+      };
+    },
   },
 });
 
-export const { setActiveRuleset, clearRuleset } = rulesetSlice.actions;
+export const { setActiveRuleset, clearRuleset, patchActiveRuleset } = rulesetSlice.actions;
 export default rulesetSlice.reducer;

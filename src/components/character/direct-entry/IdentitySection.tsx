@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { OrnatePanel } from '@/components/ui/OrnatePanel';
 import { FantasyTextInput } from '@/components/ui/FantasyTextInput';
@@ -21,13 +21,19 @@ import {
   setBackground,
 } from '@/store/slices/characterEntrySlice';
 import { Alignment } from '@/types/base';
+import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+import { RulesetSettingsSheet } from './RulesetSettingsSheet';
 
 const ALIGNMENT_OPTIONS = Object.values(Alignment).map((a) => ({ label: a, value: a }));
 
 export function IdentitySection() {
-  const { colors } = useTheme();
+  const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const draft = useAppSelector((state) => state.characterEntry.draft);
+  const activeRuleset = useAppSelector(
+    (state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD,
+  );
+  const [rulesetOpen, setRulesetOpen] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -70,6 +76,25 @@ export function IdentitySection() {
           onValueChange={(v) => dispatch(setAlignment(v as Alignment))}
           testID="identity-alignment"
         />
+
+        <Pressable
+          onPress={() => setRulesetOpen(true)}
+          style={styles.rulesetRow}
+          accessibilityRole="button"
+          accessibilityLabel={`Ruleset: ${activeRuleset.name}. Tap to change.`}
+          testID="identity-ruleset"
+        >
+          <Text style={[styles.rulesetLabel, { color: colors.text.secondary }]}>Ruleset</Text>
+          <Text
+            style={[styles.rulesetValue, { color: isDark ? fantasy.gold : fantasy.darkWood }]}
+            numberOfLines={1}
+          >
+            {activeRuleset.name}
+          </Text>
+          <Text style={[styles.rulesetChevron, { color: colors.text.tertiary }]}>›</Text>
+        </Pressable>
+
+        <RulesetSettingsSheet visible={rulesetOpen} onClose={() => setRulesetOpen(false)} />
 
         <FantasyTextInput
           label="Deity"
@@ -206,5 +231,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     minHeight: 120,
+  },
+  rulesetRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    gap: 8,
+  },
+  rulesetLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    width: 90,
+    flexShrink: 0,
+  },
+  rulesetValue: {
+    flex: 1,
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  rulesetChevron: {
+    fontSize: 18,
+    fontWeight: '600',
   },
 });

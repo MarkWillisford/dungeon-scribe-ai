@@ -1,4 +1,4 @@
-import rulesetReducer, { setActiveRuleset, clearRuleset } from '@store/slices/rulesetSlice';
+import rulesetReducer, { setActiveRuleset, clearRuleset, patchActiveRuleset } from '@store/slices/rulesetSlice';
 import type { Ruleset } from '@/types/ruleset';
 
 const mockRuleset: Ruleset = {
@@ -65,6 +65,49 @@ describe('rulesetSlice', () => {
 
     it('is a no-op when already null', () => {
       const state = rulesetReducer(initialState, clearRuleset());
+      expect(state.activeRuleset).toBeNull();
+    });
+  });
+
+  describe('patchActiveRuleset', () => {
+    it('patches a top-level field without clobbering others', () => {
+      const stateWithRuleset = { activeRuleset: mockRuleset };
+      const state = rulesetReducer(stateWithRuleset, patchActiveRuleset({ name: 'Custom' }));
+      expect(state.activeRuleset?.name).toBe('Custom');
+      expect(state.activeRuleset?.allowedSources).toEqual(['pf1e-official']);
+      expect(state.activeRuleset?.optionalRules.heroPoints).toBe(false);
+    });
+
+    it('patches nested optionalRules via caller spread', () => {
+      const stateWithRuleset = { activeRuleset: mockRuleset };
+      const state = rulesetReducer(
+        stateWithRuleset,
+        patchActiveRuleset({
+          optionalRules: { ...mockRuleset.optionalRules, heroPoints: true },
+        }),
+      );
+      expect(state.activeRuleset?.optionalRules.heroPoints).toBe(true);
+      expect(state.activeRuleset?.optionalRules.gestalt).toBe(false);
+    });
+
+    it('patches allowedSources', () => {
+      const stateWithRuleset = { activeRuleset: mockRuleset };
+      const state = rulesetReducer(
+        stateWithRuleset,
+        patchActiveRuleset({ allowedSources: ['pf1e-official', 'dreamscarred'] }),
+      );
+      expect(state.activeRuleset?.allowedSources).toEqual(['pf1e-official', 'dreamscarred']);
+    });
+
+    it('updates updatedAt timestamp', () => {
+      const stateWithRuleset = { activeRuleset: mockRuleset };
+      const before = mockRuleset.updatedAt;
+      const state = rulesetReducer(stateWithRuleset, patchActiveRuleset({ name: 'New Name' }));
+      expect(state.activeRuleset?.updatedAt).not.toBe(before);
+    });
+
+    it('is a no-op when activeRuleset is null', () => {
+      const state = rulesetReducer(initialState, patchActiveRuleset({ name: 'New Name' }));
       expect(state.activeRuleset).toBeNull();
     });
   });
