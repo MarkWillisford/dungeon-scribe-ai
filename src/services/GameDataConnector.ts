@@ -29,6 +29,7 @@ import type {
   MartialTradition,
   DisciplineSourceSystem,
 } from '@/types/initiating';
+import type { ArchetypeData } from '@/data/classes/types';
 import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
 
 // ---- Class choice collections -------------------------------------------------------
@@ -147,4 +148,7 @@ export interface GameDataConnector {
   getStanceById(id: string): Promise<StanceDefinition | null>;
   getMartialTraditions(): Promise<MartialTradition[]>;
   getMartialTraditionById(id: string): Promise<MartialTradition | null>;
+
+  // ---- Archetypes ----
+  getArchetypesByClass(className: string): Promise<ArchetypeData[]>;
 }

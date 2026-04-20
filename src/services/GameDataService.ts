@@ -19,7 +19,7 @@ import type { SearchItem } from '@/components/ui/SearchPickerSheet';
 import type { FeatDefinition, FeatType } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
-import type { ExpandedClassData, SpellProgressionTable } from '@/data/classes/types';
+import type { ExpandedClassData, SpellProgressionTable, ArchetypeData } from '@/data/classes/types';
 import type { ClassData } from '@/data/classes';
 import type { ExpandedRaceData } from '@/data/races';
 import type {
@@ -529,5 +529,9 @@ export class GameDataService {
 
   static async getMartialTraditionById(id: string): Promise<MartialTradition | null> {
     return GameDataService.connector.getMartialTraditionById(id);
+  }
+
+  static async getArchetypesByClass(className: string): Promise<ArchetypeData[]> {
+    return GameDataService.connector.getArchetypesByClass(className);
   }
 }

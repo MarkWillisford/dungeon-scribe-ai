@@ -23,7 +23,7 @@ import { SPELL_TABLES } from '@/data/classes/index';
 import type { FeatDefinition } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
-import type { ExpandedClassData } from '@/data/classes/types';
+import type { ExpandedClassData, ArchetypeData } from '@/data/classes/types';
 import type { ClassData } from '@/data/classes';
 import type {
   ClassOptionBase,
@@ -759,6 +759,26 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     } catch (e) {
       console.error(`FirestoreGameDataConnector: failed to fetch martial tradition "${id}":`, e);
       return null;
+    }
+  }
+
+  async getArchetypesByClass(className: string): Promise<ArchetypeData[]> {
+    const cacheKey = `archetypes/${className}`;
+    const cached = GameDataCache.get<ArchetypeData[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const q = query(
+        collection(db, 'archetypes'),
+        where('className', '==', className),
+      );
+      const snap = await getDocs(q);
+      const results = snap.docs.map((d) => d.data() as ArchetypeData);
+      GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+      return results;
+    } catch (e) {
+      console.error(`FirestoreGameDataConnector: getArchetypesByClass(${className}) failed:`, e);
+      return [];
     }
   }
 }

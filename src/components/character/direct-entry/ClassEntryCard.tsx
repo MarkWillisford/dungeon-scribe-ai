@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   removeClass,
   updateClassLevel,
+  updateClassArchetype,
   updateClassSpellcastingAdvancement,
   toggleClassPrereqOverride,
 } from '@/store/slices/characterEntrySlice';
@@ -15,6 +16,7 @@ import { GameDataService } from '@/services/GameDataService';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { type ClassChoice } from '@/types/classes';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
+import { ArchetypePickerSheet } from './ArchetypePickerSheet';
 
 // Pairs of featureNames that are mutually exclusive — filling one disables the other.
 const MUTUALLY_EXCLUSIVE_PAIRS: [string, string][] = [['Domain', 'Inquisition']];
@@ -431,6 +433,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [choicesExpanded, setChoicesExpanded] = useState(false);
+  const [archetypePickerOpen, setArchetypePickerOpen] = useState(false);
   const [definitions, setDefinitions] = useState<ClassChoiceDefinition[]>([]);
   const characterDeity = useAppSelector((state) => state.characterEntry.draft.deity);
   const classDataMap = useAppSelector(selectClassDataMap);
@@ -511,13 +514,29 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           ]}
           accessibilityLabel="Class level"
         />
-        <Text style={[styles.fieldLabel, { color: colors.text.secondary, marginLeft: 12 }]}>
-          Archetype
-        </Text>
-        <Text style={[styles.archetypePlaceholder, { color: colors.text.tertiary }]}>
-          {entry.archetypeName ?? 'none 🔍'}
-        </Text>
+        <Pressable
+          onPress={() => setArchetypePickerOpen(true)}
+          style={styles.archetypeButton}
+          accessibilityRole="button"
+          accessibilityLabel="Choose archetype"
+        >
+          <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Archetype</Text>
+          <Text style={[styles.archetypePlaceholder, { color: entry.archetypeName ? colors.text.primary : colors.text.tertiary }]}>
+            {entry.archetypeName ?? 'none 🔍'}
+          </Text>
+        </Pressable>
       </View>
+
+      <ArchetypePickerSheet
+        visible={archetypePickerOpen}
+        title={`${entry.className} — Choose Archetype`}
+        className={entry.className}
+        onSelect={({ archetypeId, archetypeName }) => {
+          dispatch(updateClassArchetype({ id: entry.id, archetypeId, archetypeName }));
+          setArchetypePickerOpen(false);
+        }}
+        onClose={() => setArchetypePickerOpen(false)}
+      />
 
       {/* Spellcasting advancement — rendered only when class data signals
           this class is a prestige advancer. No user toggle. */}
@@ -664,6 +683,12 @@ const styles = StyleSheet.create({
     width: 52,
     textAlign: 'center',
     minHeight: 38,
+  },
+  archetypeButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+    gap: 8,
   },
   archetypePlaceholder: {
     fontFamily: 'LibreBaskerville',
