@@ -137,6 +137,23 @@ function syncFeatSlotsFromClasses(draft: CharacterDraft): void {
   );
 }
 
+const ABILITY_KEYS: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+
+function syncEnhancementBonuses(state: { draft: CharacterDraft }): void {
+  for (const key of ABILITY_KEYS) state.draft.abilities[key].enhancement = 0;
+  const accumulated: Partial<Record<AbilityKey, number[]>> = {};
+  for (const item of state.draft.equipment) {
+    if (item.slot && item.abilityScoreBonuses) {
+      for (const [ab, val] of Object.entries(item.abilityScoreBonuses)) {
+        (accumulated[ab as AbilityKey] ??= []).push(val as number);
+      }
+    }
+  }
+  for (const [ab, vals] of Object.entries(accumulated)) {
+    state.draft.abilities[ab as AbilityKey].enhancement = Math.max(...(vals as number[]));
+  }
+}
+
 // ---- Slice state ----
 
 interface CharacterEntryState {
@@ -631,11 +648,13 @@ const characterEntrySlice = createSlice({
 
     addEquipment(state, action: PayloadAction<DraftEquipmentItem>) {
       state.draft.equipment.push(action.payload);
+      syncEnhancementBonuses(state);
       state.isDirty = true;
     },
 
     removeEquipment(state, action: PayloadAction<string>) {
       state.draft.equipment = state.draft.equipment.filter((e) => e.id !== action.payload);
+      syncEnhancementBonuses(state);
       state.isDirty = true;
     },
 
@@ -643,6 +662,7 @@ const characterEntrySlice = createSlice({
       const idx = state.draft.equipment.findIndex((e) => e.id === action.payload.id);
       if (idx >= 0) {
         state.draft.equipment[idx] = action.payload;
+        syncEnhancementBonuses(state);
         state.isDirty = true;
       }
     },
@@ -652,6 +672,7 @@ const characterEntrySlice = createSlice({
       if (item) {
         item.slot = action.payload.slot;
         item.containerId = undefined;
+        syncEnhancementBonuses(state);
         state.isDirty = true;
       }
     },
@@ -660,6 +681,7 @@ const characterEntrySlice = createSlice({
       const item = state.draft.equipment.find((e) => e.id === action.payload);
       if (item) {
         item.slot = undefined;
+        syncEnhancementBonuses(state);
         state.isDirty = true;
       }
     },

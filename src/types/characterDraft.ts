@@ -169,6 +169,7 @@ export interface DraftEquipmentItem {
   isContainer?: boolean; // true for Bags of Holding, Handy Haversacks, etc.
   isOrbiting?: boolean; // true for ioun stones added via the orbiting picker
   allowsHandUse?: boolean; // true for bucklers — off-hand stays free
+  abilityScoreBonuses?: Partial<Record<AbilityKey, number>>; // denormalized from item definition at add time
   notes?: string;
 }
 

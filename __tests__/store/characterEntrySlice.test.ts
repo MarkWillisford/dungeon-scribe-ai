@@ -1158,3 +1158,53 @@ describe('characterEntrySlice — other bonuses', () => {
   });
 });
 
+// ---------------------------------------------------------------------------
+// Enhancement sync
+// ---------------------------------------------------------------------------
+
+describe('characterEntrySlice — enhancement sync', () => {
+  it('addEquipment with a slotted item syncs enhancement', () => {
+    const item = makeEquipmentItem('head-1', {
+      slot: 'head',
+      abilityScoreBonuses: { wis: 4 },
+    });
+    const state = reducer(makeInitialState(), addEquipment(item));
+    expect(state.draft.abilities.wis.enhancement).toBe(4);
+  });
+
+  it('addEquipment with no slot does not apply enhancement', () => {
+    const item = makeEquipmentItem('head-1', { abilityScoreBonuses: { wis: 4 } });
+    const state = reducer(makeInitialState(), addEquipment(item));
+    expect(state.draft.abilities.wis.enhancement).toBe(0);
+  });
+
+  it('removeEquipment clears the enhancement', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', abilityScoreBonuses: { wis: 4 } });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    state = reducer(state, removeEquipment('head-1'));
+    expect(state.draft.abilities.wis.enhancement).toBe(0);
+  });
+
+  it('two overlapping items — takes the highest per ability', () => {
+    const item1 = makeEquipmentItem('belt-1', { slot: 'belt', abilityScoreBonuses: { str: 2, con: 2 } });
+    const item2 = makeEquipmentItem('belt-2', { slot: 'belt', abilityScoreBonuses: { str: 4 } });
+    let state = reducer(makeInitialState(), addEquipment(item1));
+    state = reducer(state, addEquipment(item2));
+    expect(state.draft.abilities.str.enhancement).toBe(4);
+    expect(state.draft.abilities.con.enhancement).toBe(2);
+  });
+
+  it('assignEquipmentSlot applies enhancement when item is slotted', () => {
+    const item = makeEquipmentItem('head-1', { abilityScoreBonuses: { wis: 4 } });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    state = reducer(state, assignEquipmentSlot({ id: 'head-1', slot: 'head' }));
+    expect(state.draft.abilities.wis.enhancement).toBe(4);
+  });
+
+  it('unassignEquipmentSlot removes enhancement', () => {
+    const item = makeEquipmentItem('head-1', { slot: 'head', abilityScoreBonuses: { wis: 4 } });
+    let state = reducer(makeInitialState(), addEquipment(item));
+    state = reducer(state, unassignEquipmentSlot('head-1'));
+    expect(state.draft.abilities.wis.enhancement).toBe(0);
+  });
+});
