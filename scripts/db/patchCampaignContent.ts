@@ -65,14 +65,14 @@ async function fixRadiantServantClassName(): Promise<void> {
   }
 
   const current = snap.data()?.className;
-  if (current === 'radiant servant') {
+  if (current === 'radiant servant of milani') {
     console.log('  ✓ classChoiceDefinitions/radiant-servant-extra-domain already correct — skip.');
     return;
   }
 
-  console.log(`  Patching className: '${current}' → 'radiant servant'`);
+  console.log(`  Patching className: '${current}' → 'radiant servant of milani'`);
   if (!DRY_RUN) {
-    await ref.update({ className: 'radiant servant' });
+    await ref.update({ className: 'radiant servant of milani' });
     console.log('  ✓ Done.');
   } else {
     console.log('  [DRY RUN] would update.');

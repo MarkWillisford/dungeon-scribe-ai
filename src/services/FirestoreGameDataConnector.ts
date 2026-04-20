@@ -433,7 +433,7 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     try {
       const q = query(
         collection(db, 'classChoiceDefinitions'),
-        where('classIds', 'array-contains', classId),
+        where('className', '==', classId.toLowerCase()),
       );
       const snap = await getDocs(q);
       const results = snap.docs.map((d) => d.data() as ClassChoiceDefinition);
