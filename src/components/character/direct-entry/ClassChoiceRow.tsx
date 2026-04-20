@@ -68,11 +68,15 @@ function buildInlineItems(definition: ClassChoiceDefinition): SearchItem[] {
 // Filters picker items to exclude IDs already selected in sibling slots for the
 // same feature, plus domain parent/child conflicts (subdomain IDs follow the
 // `{parentId}-{suffix}` convention — selecting 'fire' excludes 'fire-ash', etc.).
+// The subdomain exclusion logic is domain-specific: other collections (rage powers,
+// hexes, etc.) use hyphenated IDs without a parent/child relationship, so prefix
+// exclusion would incorrectly block valid independent selections.
 export function filterExcludedChoiceItems(
   items: SearchItem[],
   siblingChoices: ClassChoice[],
   featureName: string,
   choiceIndex: number,
+  collectionName?: string,
 ): SearchItem[] {
   const excluded = new Set<string>();
   siblingChoices
@@ -86,22 +90,29 @@ export function filterExcludedChoiceItems(
 
   if (excluded.size === 0) return items;
 
+  const isDomains = collectionName === 'domains';
+
   // When a subdomain is selected (e.g. 'fire-ash'), build a prefix to exclude siblings.
   // 'fire-ash' → prefix 'fire-' excludes 'fire-arson', 'fire-smoke', etc.
+  // Only applies to the domains collection — other hyphenated IDs are not hierarchical.
   const excludedPrefixes = new Set<string>();
-  for (const selectedId of excluded) {
-    const lastDash = selectedId.lastIndexOf('-');
-    if (lastDash !== -1) excludedPrefixes.add(selectedId.slice(0, lastDash + 1));
+  if (isDomains) {
+    for (const selectedId of excluded) {
+      const lastDash = selectedId.lastIndexOf('-');
+      if (lastDash !== -1) excludedPrefixes.add(selectedId.slice(0, lastDash + 1));
+    }
   }
 
   return items.filter((item) => {
     if (excluded.has(item.key)) return false;
-    for (const selectedId of excluded) {
-      if (item.key.startsWith(selectedId + '-')) return false;
-      if (selectedId.startsWith(item.key + '-')) return false;
-    }
-    for (const prefix of excludedPrefixes) {
-      if (item.key.startsWith(prefix)) return false;
+    if (isDomains) {
+      for (const selectedId of excluded) {
+        if (item.key.startsWith(selectedId + '-')) return false;
+        if (selectedId.startsWith(item.key + '-')) return false;
+      }
+      for (const prefix of excludedPrefixes) {
+        if (item.key.startsWith(prefix)) return false;
+      }
     }
     return true;
   });
@@ -144,7 +155,7 @@ export function ClassChoiceRow({
     return () => {
       stale = true;
     };
-  }, [definition, characterDeity]);
+  }, [definition, siblingChoices, characterDeity]);
 
   const pickerItems = useMemo(
     () =>
@@ -153,8 +164,9 @@ export function ClassChoiceRow({
         siblingChoices ?? [],
         definition.featureName,
         choiceIndex,
+        definition.collectionName,
       ),
-    [rawPickerItems, siblingChoices, definition.featureName, choiceIndex],
+    [rawPickerItems, siblingChoices, definition.featureName, choiceIndex, definition.collectionName],
   );
 
   // Resolve stored ID(s) back to human-readable labels for display.
