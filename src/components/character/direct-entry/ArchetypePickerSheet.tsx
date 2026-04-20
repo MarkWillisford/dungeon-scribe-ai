@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { View, Text, TextInput, Pressable, Modal, FlatList, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, Modal, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
 import type { ArchetypeData } from '@/data/classes/types';
@@ -160,6 +160,16 @@ export function ArchetypePickerSheet({
           />
         </View>
 
+        {/* Loading indicator */}
+        {loading && (
+          <View style={styles.loadingRow}>
+            <ActivityIndicator size="small" color={fantasy.gold} />
+            <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>
+              Loading archetypes...
+            </Text>
+          </View>
+        )}
+
         {/* Results */}
         <FlatList
           data={filtered}
@@ -207,11 +217,9 @@ export function ArchetypePickerSheet({
           ListEmptyComponent={
             <View style={styles.empty}>
               <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                {loading
-                  ? 'Loading archetypes...'
-                  : query
-                    ? `No archetypes matching "${query}"`
-                    : `No archetypes found for ${className}`}
+                {query
+                  ? `No archetypes matching "${query}"`
+                  : `No archetypes found for ${className}`}
               </Text>
             </View>
           }
@@ -262,6 +270,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     minHeight: 44,
+  },
+  loadingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    gap: 8,
+  },
+  loadingText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    fontStyle: 'italic',
   },
   listContent: {
     flexGrow: 1,

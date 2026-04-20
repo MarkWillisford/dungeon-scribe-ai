@@ -767,18 +767,21 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     const cached = GameDataCache.get<ArchetypeData[]>(cacheKey);
     if (cached) return cached;
 
-    try {
-      const q = query(
-        collection(db, 'archetypes'),
-        where('className', '==', className),
-      );
-      const snap = await getDocs(q);
-      const results = snap.docs.map((d) => d.data() as ArchetypeData);
-      GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
-      return results;
-    } catch (e) {
-      console.error(`FirestoreGameDataConnector: getArchetypesByClass(${className}) failed:`, e);
-      return [];
-    }
+    return FirestoreGameDataConnector.dedup(cacheKey, async () => {
+      try {
+        const q = query(
+          collection(db, 'archetypes'),
+          where('visibility', '==', 'global'),
+          where('className', '==', className),
+        );
+        const snap = await getDocs(q);
+        const results = snap.docs.map((d) => d.data() as ArchetypeData);
+        GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+        return results;
+      } catch (e) {
+        console.error(`FirestoreGameDataConnector: getArchetypesByClass(${className}) failed:`, e);
+        return [];
+      }
+    });
   }
 }
