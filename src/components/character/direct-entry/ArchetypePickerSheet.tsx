@@ -72,15 +72,23 @@ export function ArchetypePickerSheet({
   const { colors, fantasy, isDark } = useTheme();
   const [query, setQuery] = useState('');
   const [allItems, setAllItems] = useState<ArchetypeItem[]>([NONE_ITEM]);
-  const [loading, setLoading] = useState(false);
+  const [loadedClassName, setLoadedClassName] = useState<string | null>(null);
+  const loading = visible && !!className && loadedClassName !== className;
 
   useEffect(() => {
     if (!visible || !className) return;
-    setLoading(true);
+    let cancelled = false;
     GameDataService.getArchetypesByClass(className)
-      .then((archetypes) => setAllItems(buildItems(archetypes, className)))
-      .catch((e) => console.error('Failed to load archetypes:', e))
-      .finally(() => setLoading(false));
+      .then((archetypes) => {
+        if (!cancelled) {
+          setAllItems(buildItems(archetypes, className));
+          setLoadedClassName(className);
+        }
+      })
+      .catch((e) => {
+        if (!cancelled) console.error('Failed to load archetypes:', e);
+      });
+    return () => { cancelled = true; };
   }, [visible, className]);
 
   const filtered = useMemo(() => {
