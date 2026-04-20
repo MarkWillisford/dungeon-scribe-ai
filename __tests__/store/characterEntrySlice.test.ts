@@ -22,6 +22,9 @@ import reducer, {
   setBackground,
   setPortrait,
   setAbilityField,
+  addOtherBonus,
+  removeOtherBonus,
+  updateOtherBonus,
   setLevelIncrementAbility,
   setLevelIncrementSlots,
   addClass,
@@ -60,7 +63,7 @@ import reducer, {
   setCampaignNotes,
   type EntryValidationWarning,
 } from '@store/slices/characterEntrySlice';
-import { Alignment } from '@/types/base';
+import { Alignment, BonusType } from '@/types/base';
 import type {
   CharacterDraft,
   DraftClassEntry,
@@ -1084,3 +1087,74 @@ describe('characterEntrySlice — notes', () => {
     expect(state.isDirty).toBe(true);
   });
 });
+
+// ---------------------------------------------------------------------------
+// Other bonus array actions
+// ---------------------------------------------------------------------------
+
+describe('characterEntrySlice — other bonuses', () => {
+  describe('addOtherBonus', () => {
+    it('appends a bonus to the array and sets isDirty', () => {
+      const state = reducer(
+        makeInitialState(),
+        addOtherBonus({ ability: 'str', bonus: { value: 2, bonusType: BonusType.MORALE } }),
+      );
+      expect(state.draft.abilities.str.other).toHaveLength(1);
+      expect(state.draft.abilities.str.other[0]).toEqual({ value: 2, bonusType: BonusType.MORALE });
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('appends multiple bonuses independently', () => {
+      let state = reducer(
+        makeInitialState(),
+        addOtherBonus({ ability: 'wis', bonus: { value: 2, bonusType: BonusType.SACRED } }),
+      );
+      state = reducer(
+        state,
+        addOtherBonus({ ability: 'wis', bonus: { value: 1, bonusType: BonusType.UNTYPED } }),
+      );
+      expect(state.draft.abilities.wis.other).toHaveLength(2);
+    });
+  });
+
+  describe('removeOtherBonus', () => {
+    it('removes by index and sets isDirty', () => {
+      let state = reducer(
+        makeInitialState(),
+        addOtherBonus({ ability: 'str', bonus: { value: 2, bonusType: BonusType.MORALE } }),
+      );
+      state = reducer(
+        state,
+        addOtherBonus({ ability: 'str', bonus: { value: 4, bonusType: BonusType.SACRED } }),
+      );
+      state = reducer(state, removeOtherBonus({ ability: 'str', index: 0 }));
+      expect(state.draft.abilities.str.other).toHaveLength(1);
+      expect(state.draft.abilities.str.other[0].bonusType).toBe(BonusType.SACRED);
+      expect(state.isDirty).toBe(true);
+    });
+  });
+
+  describe('updateOtherBonus', () => {
+    it('replaces the bonus at the given index and sets isDirty', () => {
+      let state = reducer(
+        makeInitialState(),
+        addOtherBonus({ ability: 'int', bonus: { value: 2, bonusType: BonusType.INSIGHT } }),
+      );
+      state = reducer(
+        state,
+        updateOtherBonus({
+          ability: 'int',
+          index: 0,
+          bonus: { value: 4, bonusType: BonusType.INSIGHT, source: 'Headband' },
+        }),
+      );
+      expect(state.draft.abilities.int.other[0]).toEqual({
+        value: 4,
+        bonusType: BonusType.INSIGHT,
+        source: 'Headband',
+      });
+      expect(state.isDirty).toBe(true);
+    });
+  });
+});
+

@@ -36,12 +36,12 @@ export const RISSI_FIXTURE: CharacterDraft = {
   racialFlexBonus: true,
   racialFlexAbility: 'wis',
   abilities: {
-    str: { base: 16, racial: 0, inherent: 0, enhancement: 4, other: 0, levelIncrements: 2 },
-    dex: { base: 14, racial: 0, inherent: 0, enhancement: 0, other: 0, levelIncrements: 0 },
-    con: { base: 14, racial: 0, inherent: 0, enhancement: 4, other: 0, levelIncrements: 0 },
-    int: { base: 12, racial: 0, inherent: 0, enhancement: 2, other: 0, levelIncrements: 0 },
-    wis: { base: 18, racial: 2, inherent: 0, enhancement: 4, other: 0, levelIncrements: 4 },
-    cha: { base: 14, racial: 0, inherent: 0, enhancement: 0, other: 0, levelIncrements: 0 },
+    str: { base: 16, racial: 0, inherent: 0, enhancement: 4, other: [], levelIncrements: 2 },
+    dex: { base: 14, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
+    con: { base: 14, racial: 0, inherent: 0, enhancement: 4, other: [], levelIncrements: 0 },
+    int: { base: 12, racial: 0, inherent: 0, enhancement: 2, other: [], levelIncrements: 0 },
+    wis: { base: 18, racial: 2, inherent: 0, enhancement: 4, other: [], levelIncrements: 4 },
+    cha: { base: 14, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
   },
   levelIncrementSlots: [
     { atHD: 4, ability: 'wis' },

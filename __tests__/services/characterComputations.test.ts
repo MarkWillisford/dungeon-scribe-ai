@@ -11,6 +11,7 @@ import {
   type ClassDataMap,
 } from '@/utils/characterComputations';
 import { type DraftClassEntry, type DraftTemplateEntry } from '@/types/characterDraft';
+import { BonusType } from '@/types/base';
 import { ALL_EXPANDED_CLASSES } from '@/data/classes/index';
 
 // Reuse the full static set as the test map. These are the same classes the
@@ -67,7 +68,7 @@ describe('abilityTotal', () => {
         racial: 2,
         inherent: 0,
         enhancement: 4,
-        other: 0,
+        other: [],
         levelIncrements: 2,
       }),
     ).toBe(24);
@@ -80,10 +81,30 @@ describe('abilityTotal', () => {
         racial: 0,
         inherent: 0,
         enhancement: 0,
-        other: 0,
+        other: [],
         levelIncrements: 0,
       }),
     ).toBe(10);
+  });
+
+  it('applies stacking rules to other bonuses', () => {
+    // Two morale bonuses — only highest applies (+4)
+    // One untyped bonus — stacks (+3)
+    // Total: 10 + 4 + 3 = 17
+    expect(
+      abilityTotal({
+        base: 10,
+        racial: 0,
+        inherent: 0,
+        enhancement: 0,
+        other: [
+          { value: 2, bonusType: BonusType.MORALE },
+          { value: 4, bonusType: BonusType.MORALE },
+          { value: 3, bonusType: BonusType.UNTYPED },
+        ],
+        levelIncrements: 0,
+      }),
+    ).toBe(17);
   });
 });
 

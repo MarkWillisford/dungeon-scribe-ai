@@ -6,6 +6,7 @@ import {
   type AbilityKey,
   type CharacterDraft,
   type DraftAbilityScore,
+  type DraftTypedBonus,
   type DraftClassEntry,
   type DraftTemplateEntry,
   type DraftFeatSlot,
@@ -51,7 +52,7 @@ const blankAbilityScore: DraftAbilityScore = {
   racial: 0,
   inherent: 0,
   enhancement: 0,
-  other: 0,
+  other: [],
   levelIncrements: 0,
 };
 
@@ -330,9 +331,36 @@ const characterEntrySlice = createSlice({
 
     setAbilityField(
       state,
-      action: PayloadAction<{ ability: AbilityKey; field: keyof DraftAbilityScore; value: number }>,
+      action: PayloadAction<{
+        ability: AbilityKey;
+        field: Exclude<keyof DraftAbilityScore, 'other'>;
+        value: number;
+      }>,
     ) {
-      state.draft.abilities[action.payload.ability][action.payload.field] = action.payload.value;
+      (state.draft.abilities[action.payload.ability][action.payload.field] as number) =
+        action.payload.value;
+      state.isDirty = true;
+    },
+
+    addOtherBonus(
+      state,
+      action: PayloadAction<{ ability: AbilityKey; bonus: DraftTypedBonus }>,
+    ) {
+      state.draft.abilities[action.payload.ability].other.push(action.payload.bonus);
+      state.isDirty = true;
+    },
+
+    removeOtherBonus(state, action: PayloadAction<{ ability: AbilityKey; index: number }>) {
+      state.draft.abilities[action.payload.ability].other.splice(action.payload.index, 1);
+      state.isDirty = true;
+    },
+
+    updateOtherBonus(
+      state,
+      action: PayloadAction<{ ability: AbilityKey; index: number; bonus: DraftTypedBonus }>,
+    ) {
+      state.draft.abilities[action.payload.ability].other[action.payload.index] =
+        action.payload.bonus;
       state.isDirty = true;
     },
 
@@ -683,6 +711,9 @@ export const {
   setBackground,
   setPortrait,
   setAbilityField,
+  addOtherBonus,
+  removeOtherBonus,
+  updateOtherBonus,
   setLevelIncrementAbility,
   setLevelIncrementSlots,
   addClass,

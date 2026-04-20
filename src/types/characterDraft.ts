@@ -4,7 +4,7 @@
 // are derived from these via selectors, never stored here.
 // All fields are serializable (no Date objects, no class instances).
 
-import { Alignment } from './base';
+import { Alignment, BonusType } from './base';
 import { ClassChoice } from './classes';
 import type { ItemSlot } from './magicItems';
 
@@ -12,12 +12,37 @@ import type { ItemSlot } from './magicItems';
 
 export type AbilityKey = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha';
 
+export interface DraftTypedBonus {
+  value: number;
+  bonusType: BonusType;
+  source?: string; // display label, e.g. "Succubus kiss", "Campaign reward"
+}
+
+// Stacking rules: untyped and dodge stack; all other types take highest only.
+export function computeOtherBonusTotal(bonuses: DraftTypedBonus[]): number {
+  if (bonuses.length === 0) return 0;
+  const byType = new Map<BonusType, number[]>();
+  for (const b of bonuses) {
+    const list = byType.get(b.bonusType) ?? [];
+    list.push(b.value);
+    byType.set(b.bonusType, list);
+  }
+  let total = 0;
+  for (const [type, values] of byType) {
+    total +=
+      type === BonusType.UNTYPED || type === BonusType.DODGE
+        ? values.reduce((a, v) => a + v, 0)
+        : Math.max(...values);
+  }
+  return total;
+}
+
 export interface DraftAbilityScore {
   base: number;
   racial: number; // auto-populated from race selection, shown read-only
   inherent: number; // tomes / wishes (manual)
   enhancement: number; // auto-populated from equipped gear, shown read-only
-  other: number; // morale / sacred / misc (manual)
+  other: DraftTypedBonus[]; // typed bonuses (morale, sacred, insight, etc.)
   levelIncrements: number; // count of +1 increases allocated here
 }
 

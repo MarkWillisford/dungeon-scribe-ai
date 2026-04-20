@@ -10,6 +10,7 @@ import {
   type DraftClassEntry,
   type DraftAbilityScore,
   type AbilityKey,
+  computeOtherBonusTotal,
 } from '@/types/characterDraft';
 import type { ExpandedClassData } from '@/data/classes/types';
 
@@ -32,7 +33,7 @@ export function abilityTotal(score: DraftAbilityScore): number {
     score.racial +
     score.inherent +
     score.enhancement +
-    score.other +
+    computeOtherBonusTotal(score.other) +
     score.levelIncrements
   );
 }
