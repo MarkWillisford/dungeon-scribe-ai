@@ -68,7 +68,6 @@ const SCRIPTS: string[] = [
   // Foundation — no dependencies
   'seedRaces.ts',
   'seedClasses.ts',
-  'seedArchetypes.ts',
   'seedFeats.ts',
   'seedTraits.ts',
   'seedEquipment.ts', // seeds weapons, armor, shields, gear collections
@@ -79,6 +78,7 @@ const SCRIPTS: string[] = [
   'seedAnimalCompanions.ts',
 
   // Class option collections — no cross-dependencies, but logically after foundation
+  'seedArchetypes.ts',
   'seedBloodlines.ts',
   'seedCavalierOrders.ts',
   'seedInquisitions.ts',

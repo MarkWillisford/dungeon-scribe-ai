@@ -80,9 +80,10 @@ async function seedArchetypes(archetypes: ArchetypeData[]): Promise<void> {
       const ref = db.collection('archetypes').doc(docId);
       batch.set(ref, {
         ...archetype,
+        id: docId,
         source: normalizeSource(archetype.source),
         visibility: 'global' as const,
-      });
+      }, { merge: true });
     });
     await batch.commit();
     await sleep(500);
