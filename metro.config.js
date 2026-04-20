@@ -7,9 +7,8 @@ const mainRoot = '/mnt/c/Users/Markw/Documents/Development Projects/Dungeon Scri
 
 const config = getDefaultConfig(projectRoot);
 
-// Worktree setup: node_modules live in the main project root, not here.
-// Tell Metro to watch that folder and resolve modules from it.
-config.watchFolders = [mainRoot];
+// Worktree setup: resolve modules from main project's node_modules directly.
+// watchFolders intentionally omitted — Metro can't watch /mnt/c/ via inotify.
 config.resolver.nodeModulesPaths = [path.join(mainRoot, 'node_modules')];
 
 module.exports = withNativeWind(config, { input: './global.css' });
