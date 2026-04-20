@@ -664,7 +664,11 @@ const PRESTIGE_PALADIN: CampaignClass = {
     spellList:
       'Advances existing divine spellcasting class (gained at levels 2–5, 7–10, 12–15; not at 1st, 6th, or 11th)',
   },
-  advancesSpellcasting: { mode: 'single', tradition: 'divine' },
+  advancesSpellcasting: {
+    mode: 'single',
+    tradition: 'divine',
+    atLevels: [2, 3, 4, 5, 7, 8, 9, 10, 12, 13, 14, 15],
+  },
   prerequisites: {
     bab: 3,
     skills: [
