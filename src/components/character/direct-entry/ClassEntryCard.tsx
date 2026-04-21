@@ -435,6 +435,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const [choicesExpanded, setChoicesExpanded] = useState(false);
   const [archetypePickerOpen, setArchetypePickerOpen] = useState(false);
   const [definitions, setDefinitions] = useState<ClassChoiceDefinition[]>([]);
+  const [hasArchetypes, setHasArchetypes] = useState<boolean | null>(null);
   const characterDeity = useAppSelector((state) => state.characterEntry.draft.deity);
   const classDataMap = useAppSelector(selectClassDataMap);
 
@@ -442,6 +443,9 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
     GameDataService.getClassChoiceDefinitions(entry.className)
       .then(setDefinitions)
       .catch((e) => console.error('Failed to load class choice definitions:', e));
+    GameDataService.getArchetypesByClass(entry.className)
+      .then((archetypes) => setHasArchetypes(archetypes.length > 0))
+      .catch(() => setHasArchetypes(false));
   }, [entry.className]);
 
   const allSlots = definitions.flatMap((def) => deriveChoiceSlots(def, entry.level));
@@ -514,17 +518,24 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           ]}
           accessibilityLabel="Class level"
         />
-        <Pressable
-          onPress={() => setArchetypePickerOpen(true)}
-          style={styles.archetypeButton}
-          accessibilityRole="button"
-          accessibilityLabel="Choose archetype"
-        >
-          <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Archetype</Text>
-          <Text style={[styles.archetypePlaceholder, { color: entry.archetypeName ? colors.text.primary : colors.text.tertiary }]}>
-            {entry.archetypeName ?? 'none 🔍'}
-          </Text>
-        </Pressable>
+        {hasArchetypes !== false && (
+          <Pressable
+            onPress={() => setArchetypePickerOpen(true)}
+            style={styles.archetypeButton}
+            accessibilityRole="button"
+            accessibilityLabel="Choose archetype"
+          >
+            <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Archetype</Text>
+            <Text
+              style={[
+                styles.archetypePlaceholder,
+                { color: entry.archetypeName ? colors.text.primary : colors.text.tertiary },
+              ]}
+            >
+              {hasArchetypes === null ? '…' : (entry.archetypeName ?? 'none 🔍')}
+            </Text>
+          </Pressable>
+        )}
       </View>
 
       <ArchetypePickerSheet
