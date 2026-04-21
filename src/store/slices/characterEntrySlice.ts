@@ -547,6 +547,11 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
+    removeSkillEntry(state, action: PayloadAction<string>) {
+      delete state.draft.skills[action.payload];
+      state.isDirty = true;
+    },
+
     // ---- Traits ----
 
     addTrait(state, action: PayloadAction<DraftTrait>) {
@@ -740,6 +745,7 @@ export const {
   setTemplateAcquiredAtECL,
   setCombatField,
   setSkillEntry,
+  removeSkillEntry,
   addTrait,
   removeTrait,
   syncFeatSlots,

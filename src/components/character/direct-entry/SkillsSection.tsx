@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setSkillEntry } from '@/store/slices/characterEntrySlice';
+import { setSkillEntry, removeSkillEntry } from '@/store/slices/characterEntrySlice';
 import { getAbilityModifier } from '@/utils/characterComputations';
 import { type AbilityKey } from '@/types/characterDraft';
 import { type DraftSkillEntry } from '@/types/characterDraft';
@@ -14,6 +14,7 @@ interface SkillDef {
   label: string;
   ability: AbilityKey;
   trainedOnly?: boolean;
+  allowsSpecialties?: boolean;
 }
 
 const SKILL_DEFS: SkillDef[] = [
@@ -21,7 +22,7 @@ const SKILL_DEFS: SkillDef[] = [
   { key: 'appraise', label: 'Appraise', ability: 'int' },
   { key: 'bluff', label: 'Bluff', ability: 'cha' },
   { key: 'climb', label: 'Climb', ability: 'str' },
-  { key: 'craft', label: 'Craft', ability: 'int' },
+  { key: 'craft', label: 'Craft', ability: 'int', allowsSpecialties: true },
   { key: 'diplomacy', label: 'Diplomacy', ability: 'cha' },
   { key: 'disableDevice', label: 'Disable Device', ability: 'dex', trainedOnly: true },
   { key: 'disguise', label: 'Disguise', ability: 'cha' },
@@ -53,7 +54,13 @@ const SKILL_DEFS: SkillDef[] = [
   { key: 'linguistics', label: 'Linguistics', ability: 'int', trainedOnly: true },
   { key: 'perception', label: 'Perception', ability: 'wis' },
   { key: 'perform', label: 'Perform', ability: 'cha' },
-  { key: 'profession', label: 'Profession', ability: 'wis', trainedOnly: true },
+  {
+    key: 'profession',
+    label: 'Profession',
+    ability: 'wis',
+    trainedOnly: true,
+    allowsSpecialties: true,
+  },
   { key: 'ride', label: 'Ride', ability: 'dex' },
   { key: 'senseMotive', label: 'Sense Motive', ability: 'wis' },
   { key: 'sleightOfHand', label: 'Sleight of Hand', ability: 'dex', trainedOnly: true },
@@ -64,23 +71,38 @@ const SKILL_DEFS: SkillDef[] = [
   { key: 'useMagicDevice', label: 'Use Magic Device', ability: 'cha', trainedOnly: true },
 ];
 
+// ---- Helpers ----
+
+function getSpecialtyKeys(skills: Record<string, DraftSkillEntry>, baseKey: string): string[] {
+  const prefix = `${baseKey} (`;
+  return Object.keys(skills)
+    .filter((k) => k.startsWith(prefix) && k.endsWith(')'))
+    .sort();
+}
+
+function capitalizeWords(s: string): string {
+  return s.replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
 // ---- Skill row ----
 
 interface SkillRowProps {
   def: SkillDef;
+  label?: string;
   entry: DraftSkillEntry;
   abilityMod: number;
   onChange: (entry: DraftSkillEntry) => void;
+  onRemove?: () => void;
 }
 
-function SkillRow({ def, entry, abilityMod, onChange }: SkillRowProps) {
+function SkillRow({ def, label, entry, abilityMod, onChange, onRemove }: SkillRowProps) {
   const { colors, fantasy, isDark } = useTheme();
   const total = entry.ranks + entry.misc + abilityMod;
 
   return (
     <View style={[styles.skillRow, { borderBottomColor: colors.border.DEFAULT }]}>
       <Text style={[styles.skillName, { color: colors.text.primary }]} numberOfLines={1}>
-        {def.label}
+        {label ?? def.label}
       </Text>
       <Text style={[styles.abilityBadge, { color: colors.text.tertiary }]}>
         {def.ability.toUpperCase()}
@@ -148,6 +170,169 @@ function SkillRow({ def, entry, abilityMod, onChange }: SkillRowProps) {
       >
         {total >= 0 ? `+${total}` : `${total}`}
       </Text>
+
+      {onRemove ? (
+        <Pressable
+          onPress={onRemove}
+          style={styles.removeButton}
+          accessibilityLabel="Remove specialty"
+          accessibilityRole="button"
+        >
+          <Text style={[styles.removeButtonText, { color: colors.text.tertiary }]}>×</Text>
+        </Pressable>
+      ) : (
+        <View style={styles.removeButtonPlaceholder} />
+      )}
+    </View>
+  );
+}
+
+// ---- Specialty group ----
+
+interface SpecialtyGroupProps {
+  def: SkillDef;
+  skills: Record<string, DraftSkillEntry>;
+  filterQuery: string;
+  abilityMod: number;
+  onChangeSkill: (skillKey: string, entry: DraftSkillEntry) => void;
+  onRemoveSkill: (skillKey: string) => void;
+  onAddSkill: (skillKey: string) => void;
+}
+
+function SpecialtyGroup({
+  def,
+  skills,
+  filterQuery,
+  abilityMod,
+  onChangeSkill,
+  onRemoveSkill,
+  onAddSkill,
+}: SpecialtyGroupProps) {
+  const { colors, fantasy, isDark } = useTheme();
+  const [adding, setAdding] = useState(false);
+  const [input, setInput] = useState('');
+
+  const emptyEntry: DraftSkillEntry = { ranks: 0, misc: 0 };
+  const allKeys = getSpecialtyKeys(skills, def.key);
+
+  const visibleKeys = useMemo(() => {
+    if (!filterQuery) return allKeys;
+    const q = filterQuery.toLowerCase();
+    // If the base label matches, show all specialties
+    if (def.label.toLowerCase().includes(q)) return allKeys;
+    // Otherwise show only specialties whose key contains the query
+    return allKeys.filter((k) => k.toLowerCase().includes(q));
+  }, [allKeys, filterQuery, def.label]);
+
+  function confirmAdd() {
+    const name = input.trim().toLowerCase();
+    if (!name) return;
+    const key = `${def.key} (${name})`;
+    onAddSkill(key);
+    setInput('');
+    setAdding(false);
+  }
+
+  return (
+    <View>
+      {/* Category header */}
+      <View style={[styles.specialtyHeader, { borderBottomColor: colors.border.DEFAULT }]}>
+        <Text style={[styles.specialtyHeaderLabel, { color: colors.text.secondary }]}>
+          {def.label}
+          {def.trainedOnly ? <Text style={{ color: colors.text.tertiary }}> *</Text> : null}
+        </Text>
+        <Text style={[styles.abilityBadge, { color: colors.text.tertiary }]}>
+          {def.ability.toUpperCase()}
+        </Text>
+        <View style={styles.specialtyHeaderSpacer} />
+        <Pressable
+          onPress={() => {
+            setAdding((v) => !v);
+            setInput('');
+          }}
+          accessibilityRole="button"
+          style={styles.addSpecialtyButton}
+        >
+          <Text
+            style={[
+              styles.addSpecialtyButtonText,
+              { color: isDark ? fantasy.gold : fantasy.bronze },
+            ]}
+          >
+            {adding ? 'Cancel' : '+ Add'}
+          </Text>
+        </Pressable>
+      </View>
+
+      {/* Inline add form */}
+      {adding && (
+        <View
+          style={[
+            styles.addSpecialtyRow,
+            {
+              backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+              borderBottomColor: colors.border.DEFAULT,
+            },
+          ]}
+        >
+          <TextInput
+            value={input}
+            onChangeText={setInput}
+            placeholder={`${def.label} specialty...`}
+            placeholderTextColor={colors.text.tertiary}
+            autoFocus
+            autoCapitalize="words"
+            returnKeyType="done"
+            onSubmitEditing={confirmAdd}
+            style={[
+              styles.addSpecialtyInput,
+              {
+                color: colors.text.primary,
+                borderColor: isDark ? fantasy.gold : fantasy.bronze,
+                backgroundColor: isDark ? colors.bg.secondary : colors.bg.primary,
+              },
+            ]}
+          />
+          <Pressable
+            onPress={confirmAdd}
+            disabled={!input.trim()}
+            accessibilityRole="button"
+            style={[
+              styles.addSpecialtyConfirm,
+              {
+                backgroundColor: isDark ? fantasy.gold : fantasy.bronze,
+                opacity: input.trim() ? 1 : 0.35,
+              },
+            ]}
+          >
+            <Text style={styles.addSpecialtyConfirmText}>Add</Text>
+          </Pressable>
+        </View>
+      )}
+
+      {/* Specialty rows */}
+      {visibleKeys.map((k) => {
+        const m = k.match(/\(([^)]+)\)/);
+        const rawName = m ? m[1] : k;
+        return (
+          <SkillRow
+            key={k}
+            def={def}
+            label={`${def.label} (${capitalizeWords(rawName)})`}
+            entry={skills[k] ?? emptyEntry}
+            abilityMod={abilityMod}
+            onChange={(entry) => onChangeSkill(k, entry)}
+            onRemove={() => onRemoveSkill(k)}
+          />
+        );
+      })}
+
+      {/* Empty state hint */}
+      {visibleKeys.length === 0 && !adding && (
+        <Text style={[styles.specialtyEmptyText, { color: colors.text.tertiary }]}>
+          No {def.label} specialties added
+        </Text>
+      )}
     </View>
   );
 }
@@ -183,12 +368,24 @@ export function SkillsSection() {
   const filteredDefs = useMemo(() => {
     const q = query.toLowerCase().trim();
     return SKILL_DEFS.filter((def) => {
-      if (q && !def.label.toLowerCase().includes(q)) return false;
-      if (!showAll && !q) {
-        const entry = skills[def.key];
-        return entry ? entry.ranks > 0 : false;
+      if (!def.allowsSpecialties) {
+        if (q && !def.label.toLowerCase().includes(q)) return false;
+        if (!showAll && !q) {
+          const entry = skills[def.key];
+          return entry ? entry.ranks > 0 : false;
+        }
+        return true;
+      } else {
+        // Specialty skill: show based on query or rank presence
+        if (q) {
+          if (def.label.toLowerCase().includes(q)) return true;
+          return getSpecialtyKeys(skills, def.key).some((k) => k.toLowerCase().includes(q));
+        }
+        if (!showAll) {
+          return getSpecialtyKeys(skills, def.key).some((k) => (skills[k]?.ranks ?? 0) > 0);
+        }
+        return true;
       }
-      return true;
     });
   }, [skills, showAll, query]);
 
@@ -259,15 +456,28 @@ export function SkillsSection() {
           </Text>
         )}
 
-        {filteredDefs.map((def) => (
-          <SkillRow
-            key={def.key}
-            def={def}
-            entry={skills[def.key] ?? emptyEntry}
-            abilityMod={abilityMods[def.ability]}
-            onChange={(entry) => dispatch(setSkillEntry({ skillKey: def.key, entry }))}
-          />
-        ))}
+        {filteredDefs.map((def) =>
+          def.allowsSpecialties ? (
+            <SpecialtyGroup
+              key={def.key}
+              def={def}
+              skills={skills}
+              filterQuery={query}
+              abilityMod={abilityMods[def.ability]}
+              onChangeSkill={(skillKey, entry) => dispatch(setSkillEntry({ skillKey, entry }))}
+              onRemoveSkill={(skillKey) => dispatch(removeSkillEntry(skillKey))}
+              onAddSkill={(skillKey) => dispatch(setSkillEntry({ skillKey, entry: emptyEntry }))}
+            />
+          ) : (
+            <SkillRow
+              key={def.key}
+              def={def}
+              entry={skills[def.key] ?? emptyEntry}
+              abilityMod={abilityMods[def.ability]}
+              onChange={(entry) => dispatch(setSkillEntry({ skillKey: def.key, entry }))}
+            />
+          ),
+        )}
       </View>
 
       {/* Show all toggle */}
@@ -405,6 +615,19 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
   },
+  removeButton: {
+    width: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  removeButtonText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 18,
+    lineHeight: 22,
+  },
+  removeButtonPlaceholder: {
+    width: 24,
+  },
   emptyText: {
     fontFamily: 'LibreBaskerville',
     fontSize: 13,
@@ -423,5 +646,75 @@ const styles = StyleSheet.create({
   showAllText: {
     fontFamily: 'LibreBaskerville',
     fontSize: 13,
+  },
+  // Specialty group
+  specialtyHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    gap: 4,
+  },
+  specialtyHeaderLabel: {
+    flex: 1,
+    fontFamily: 'Cinzel',
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 0.3,
+  },
+  specialtyHeaderSpacer: {
+    flex: 0,
+    width: 132, // aligns with rnk + misc + total columns (44 + 44 + 44)
+  },
+  addSpecialtyButton: {
+    paddingHorizontal: 4,
+    paddingVertical: 2,
+    width: 56,
+    alignItems: 'flex-end',
+  },
+  addSpecialtyButtonText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  addSpecialtyRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    gap: 8,
+  },
+  addSpecialtyInput: {
+    flex: 1,
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    minHeight: 36,
+  },
+  addSpecialtyConfirm: {
+    borderRadius: 6,
+    paddingHorizontal: 14,
+    paddingVertical: 7,
+    minHeight: 36,
+    justifyContent: 'center',
+  },
+  addSpecialtyConfirmText: {
+    fontFamily: 'Cinzel',
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#1a1a1a',
+  },
+  specialtyEmptyText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    fontStyle: 'italic',
+    textAlign: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
   },
 });
