@@ -62,7 +62,7 @@ const SKILL_DEFS: SkillDef[] = [
   { key: 'knowledgeReligion', label: 'Knowledge (Religion)', ability: 'int', trainedOnly: true },
   { key: 'linguistics', label: 'Linguistics', ability: 'int', trainedOnly: true },
   { key: 'perception', label: 'Perception', ability: 'wis' },
-  { key: 'perform', label: 'Perform', ability: 'cha' },
+  { key: 'perform', label: 'Perform', ability: 'cha', allowsSpecialties: true },
   {
     key: 'profession',
     label: 'Profession',
@@ -237,6 +237,7 @@ function SpecialtyGroup({
     const name = input.trim().toLowerCase();
     if (!name) return;
     const key = `${def.key} (${name})`;
+    if (key in skills) return; // already exists — don't overwrite ranks
     onAddSkill(key);
     setInput('');
     setAdding(false);
@@ -356,6 +357,9 @@ export function SkillsSection() {
   const ruleset = useAppSelector((state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD);
   const showInitiating =
     ruleset.optionalRules.pathOfWarMechanics || ruleset.optionalRules.tomeOfBattleMechanics;
+  const visibleSkillCount = SKILL_DEFS.filter(
+    (d) => d.conditionalOn !== 'initiating' || showInitiating,
+  ).length;
 
   const [showAll, setShowAll] = useState(false);
   const [query, setQuery] = useState('');
@@ -502,7 +506,7 @@ export function SkillsSection() {
           accessibilityRole="button"
         >
           <Text style={[styles.showAllText, { color: colors.text.secondary }]}>
-            {showAll ? 'Show ranked skills only' : `Show all ${SKILL_DEFS.length} skills`}
+            {showAll ? 'Show ranked skills only' : `Show all ${visibleSkillCount} skills`}
           </Text>
         </Pressable>
       )}
