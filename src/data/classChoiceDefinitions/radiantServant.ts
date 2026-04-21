@@ -7,7 +7,7 @@ import { ClassChoiceDefinition } from '@/types/classChoices';
 export const radiantServantDefinitions: ClassChoiceDefinition[] = [
   {
     id: 'radiant-servant-extra-domain',
-    className: 'radiant servant',
+    className: 'radiant servant of milani',
     featureName: 'Extra Domain',
     description:
       "At 4th level, a Radiant Servant of Milani gains an extra domain from her deity's domain list. Filtered to the character's chosen deity (Milani).",
