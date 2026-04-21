@@ -1235,6 +1235,13 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
     bookName: 'D&D 3.5 Edition (Imported)',
     publisher: 'Wizards of the Coast',
   },
+
+  // Tome of Battle / Path of War
+  '3.5e-tob': {
+    bookId: 'tob',
+    bookName: 'Tome of Battle: The Book of Nine Swords',
+    publisher: 'Wizards of the Coast',
+  },
   'pf1e-pp': {
     bookId: 'pp',
     bookName: 'Pathfinder Player Companion',

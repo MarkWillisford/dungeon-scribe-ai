@@ -9,12 +9,11 @@
  * connector — GameDataService and all callers remain unchanged.
  */
 
-import type { FeatDefinition, FeatType } from '@/types/feats';
+import type { FeatDefinition } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
 import type { ExpandedClassData, SpellProgressionTable } from '@/data/classes/types';
 import type { ClassData } from '@/data/classes';
-import type { ExpandedRaceData } from '@/data/races';
 import type { ClassOptionBase, BloodlineClassId } from '@/types/classOptions';
 import type {
   WeaponDefinition,
@@ -22,6 +21,14 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
+import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import type {
+  DisciplineDefinition,
+  ManeuverDefinition,
+  StanceDefinition,
+  MartialTradition,
+  DisciplineSourceSystem,
+} from '@/types/initiating';
 import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
 
 // ---- Class choice collections -------------------------------------------------------
@@ -79,6 +86,17 @@ export interface ClassChoiceFilters {
   discoveryTier?: string;
 }
 
+// ---- Initiating filter types --------------------------------------------------------
+
+export interface ManeuverFilter {
+  disciplineId?: string;
+  maxLevel?: number;
+}
+
+export interface DisciplineFilter {
+  sourceSystem?: DisciplineSourceSystem | DisciplineSourceSystem[];
+}
+
 // ---- Spell table type ---------------------------------------------------------------
 
 export type SpellTables = Record<string, SpellProgressionTable>;
@@ -102,6 +120,9 @@ export interface GameDataConnector {
 
   // ---- Classes ----
   getClasses(context?: QueryContext): Promise<ExpandedClassData[]>;
+  // All classes regardless of visibility (global + campaign). Used for runtime
+  // stat lookups where campaign homebrew must contribute to BAB/save/HP.
+  getClassesAll(): Promise<ExpandedClassData[]>;
   getCoreClasses(context?: QueryContext): Promise<ClassData[]>;
   getClassByName(name: string, context?: QueryContext): Promise<ExpandedClassData | null>;
   getClassChoiceDefinitions(classId: string): Promise<ClassChoiceDefinition[]>;
@@ -115,4 +136,15 @@ export interface GameDataConnector {
   getArmor(context?: QueryContext): Promise<ArmorDefinition[]>;
   getShields(context?: QueryContext): Promise<ShieldDefinition[]>;
   getGear(context?: QueryContext): Promise<GearDefinition[]>;
+  getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]>;
+
+  // ---- Initiating system ----
+  getDisciplines(filter?: DisciplineFilter): Promise<DisciplineDefinition[]>;
+  getDisciplineById(id: string): Promise<DisciplineDefinition | null>;
+  getManeuvers(filter?: ManeuverFilter): Promise<ManeuverDefinition[]>;
+  getManeuverById(id: string): Promise<ManeuverDefinition | null>;
+  getStances(filter?: ManeuverFilter): Promise<StanceDefinition[]>;
+  getStanceById(id: string): Promise<StanceDefinition | null>;
+  getMartialTraditions(): Promise<MartialTradition[]>;
+  getMartialTraditionById(id: string): Promise<MartialTradition | null>;
 }

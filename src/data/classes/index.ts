@@ -19,6 +19,9 @@ export { ALTERNATE_CLASSES_EXPANDED } from './alternateClasses';
 export { PRESTIGE_CLASSES_CRB } from './prestigeClassesCRB';
 export { PRESTIGE_CLASSES_APG } from './prestigeClassesAPG';
 export { PRESTIGE_CLASSES_POPULAR } from './prestigeClassesPopular';
+export { INITIATING_BASE_CLASSES } from './initiatingClasses';
+export { INITIATING_PRESTIGE_CLASSES } from './initiatingPrestigeClasses';
+export { INITIATING_TABLES, PRESTIGE_FULL_PROGRESSION } from './initiatingProgressionTables';
 
 export {
   SPELL_TABLES,
@@ -46,6 +49,8 @@ import { ALTERNATE_CLASSES_EXPANDED } from './alternateClasses';
 import { PRESTIGE_CLASSES_CRB } from './prestigeClassesCRB';
 import { PRESTIGE_CLASSES_APG } from './prestigeClassesAPG';
 import { PRESTIGE_CLASSES_POPULAR } from './prestigeClassesPopular';
+import { INITIATING_BASE_CLASSES } from './initiatingClasses';
+import { INITIATING_PRESTIGE_CLASSES } from './initiatingPrestigeClasses';
 
 export const ALL_EXPANDED_CLASSES: ExpandedClassData[] = [
   ...CORE_CLASSES_EXPANDED,
@@ -57,6 +62,8 @@ export const ALL_EXPANDED_CLASSES: ExpandedClassData[] = [
   ...PRESTIGE_CLASSES_CRB,
   ...PRESTIGE_CLASSES_APG,
   ...PRESTIGE_CLASSES_POPULAR,
+  ...INITIATING_BASE_CLASSES,
+  ...INITIATING_PRESTIGE_CLASSES,
 ];
 
 export function getClassByName(name: string): ExpandedClassData | undefined {

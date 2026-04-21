@@ -21,7 +21,6 @@ const SKILL_DEFS: SkillDef[] = [
   { key: 'appraise', label: 'Appraise', ability: 'int' },
   { key: 'bluff', label: 'Bluff', ability: 'cha' },
   { key: 'climb', label: 'Climb', ability: 'str' },
-  { key: 'concentration', label: 'Concentration', ability: 'wis' },
   { key: 'craft', label: 'Craft', ability: 'int' },
   { key: 'diplomacy', label: 'Diplomacy', ability: 'cha' },
   { key: 'disableDevice', label: 'Disable Device', ability: 'dex', trainedOnly: true },
