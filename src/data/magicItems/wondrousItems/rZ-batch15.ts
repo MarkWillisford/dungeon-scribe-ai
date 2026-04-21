@@ -1,5 +1,4 @@
 import type { WondrousItemDefinition } from '@/types/magicItems';
-import { AuraStrength, MagicSchool } from '@/types/equipment';
 
 export const wondrousItemsRZ15: WondrousItemDefinition[] = [
   // Deferred items (AoN pages did not render):

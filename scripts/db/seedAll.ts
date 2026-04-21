@@ -78,6 +78,7 @@ const SCRIPTS: string[] = [
   'seedAnimalCompanions.ts',
 
   // Class option collections — no cross-dependencies, but logically after foundation
+  'seedArchetypes.ts',
   'seedBloodlines.ts',
   'seedCavalierOrders.ts',
   'seedInquisitions.ts',

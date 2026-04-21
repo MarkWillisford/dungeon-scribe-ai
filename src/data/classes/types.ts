@@ -3,6 +3,7 @@
 // Mechanical effects will be handled by a separate system.
 
 import { BABProgression, SaveProgression } from '@/types/base';
+import type { RecoveryMechanics } from '@/types/initiating';
 
 export type ClassCategory =
   | 'Core'
@@ -42,6 +43,33 @@ export interface SpellcastingData {
   domainSlots?: boolean; // true for Cleric/Druid (+1 domain/nature slot per spell level)
 }
 
+export interface SpellcastingAdvancementSpec {
+  // 'single' — one base caster advanced per qualifying level.
+  // 'both'   — one arcane AND one divine advanced per qualifying level (Mystic Theurge).
+  mode: 'single' | 'both';
+
+  // Eligible target tradition for 'single' mode.
+  //   'arcane' — only arcane base casters may be picked (Eldritch Knight, Arcane Archer)
+  //   'divine' — only divine base casters may be picked (Holy Vindicator, Rage Prophet)
+  //   'chosen' — either tradition is valid (Loremaster, Hathran)
+  // Ignored when mode === 'both' (arcane and divine pickers are each tradition-locked).
+  tradition?: 'arcane' | 'divine' | 'chosen';
+
+  // 1-based prestige class levels at which advancement actually occurs.
+  // Omit to mean "every level 1..maxLevel." Arcane Archer: [1,2,4,5,7,8,10].
+  // Holy Vindicator: [2,3,4,5,6,7,8,9,10] (skips 1st).
+  atLevels?: number[];
+}
+
+export interface InitiatingData {
+  type: 'Martial';
+  initiatingAbility: 'INT' | 'WIS' | 'CHA';
+  ilProgression: 'full' | 'half';
+  disciplines: string[];
+  progressionTableKey: string;
+  recoveryMechanics: RecoveryMechanics;
+}
+
 export interface ArchetypeData {
   name: string;
   className: string; // parent class
@@ -49,6 +77,11 @@ export interface ArchetypeData {
   replacedFeatures: string[]; // class features removed
   modifiedFeatures: string[]; // class features altered
   newFeatures: ClassFeatureData[]; // archetype's own features
+  initiating?: InitiatingData; // Archetypes that GRANT initiating to non-initiating classes
+  disciplineSwaps?: {
+    gained: string[];
+    lost: string[];
+  };
   source: string;
 }
 
@@ -70,6 +103,11 @@ export interface ExpandedClassData {
   startingWealth?: string;
   classFeatures: ClassFeatureData[];
   spellcasting: SpellcastingData;
+  // When set, this class is a prestige advancer — it does not grant its own
+  // spellcasting pool; instead each of its levels listed in atLevels
+  // advances another caster's pool chosen on the Classes tab.
+  advancesSpellcasting?: SpellcastingAdvancementSpec;
+  initiating?: InitiatingData;
   prerequisites?: PrestigePrerequisites;
   alignment?: string; // e.g., "Any non-lawful", "Lawful Good"
   source: string;

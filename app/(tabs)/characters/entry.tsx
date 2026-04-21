@@ -3,6 +3,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { CharacterEntryScreen } from '@/components/character/direct-entry/CharacterEntryScreen';
 import { useAppDispatch } from '@/store/hooks';
 import { loadCharacter, type EntryMode } from '@/store/slices/characterEntrySlice';
+import { loadClasses } from '@/store/slices/gameDataSlice';
 import { RISSI_FIXTURE } from '@/data/fixtures/rissi';
 
 /**
@@ -40,6 +41,13 @@ export default function EntryRoute() {
       }),
     );
   }, [dispatch, resolvedMode, characterId]);
+
+  useEffect(() => {
+    // Fetch class stat data (global + campaign) so BAB/save/HP math can find
+    // custom prestige classes. Safe to fire on every mount — the thunk handles
+    // its own in-flight state and GameDataCache dedupes.
+    dispatch(loadClasses());
+  }, [dispatch]);
 
   return <CharacterEntryScreen />;
 }

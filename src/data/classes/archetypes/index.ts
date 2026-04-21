@@ -37,6 +37,7 @@ import { SWASHBUCKLER_ARCHETYPES } from './swashbucklerArchetypes';
 import { WARPRIEST_ARCHETYPES } from './warpriestArchetypes';
 import { WITCH_ARCHETYPES } from './witchArchetypes';
 import { WIZARD_ARCHETYPES } from './wizardArchetypes';
+import { INITIATING_ARCHETYPES } from './initiatingArchetypes';
 
 export { ALCHEMIST_ARCHETYPES } from './alchemistArchetypes';
 export { ANTIPALADIN_ARCHETYPES } from './antipaladinArchetypes';
@@ -74,6 +75,7 @@ export { SWASHBUCKLER_ARCHETYPES } from './swashbucklerArchetypes';
 export { WARPRIEST_ARCHETYPES } from './warpriestArchetypes';
 export { WITCH_ARCHETYPES } from './witchArchetypes';
 export { WIZARD_ARCHETYPES } from './wizardArchetypes';
+export { INITIATING_ARCHETYPES } from './initiatingArchetypes';
 
 export const ALL_ARCHETYPES: ArchetypeData[] = [
   ...ALCHEMIST_ARCHETYPES,
@@ -112,6 +114,7 @@ export const ALL_ARCHETYPES: ArchetypeData[] = [
   ...WARPRIEST_ARCHETYPES,
   ...WITCH_ARCHETYPES,
   ...WIZARD_ARCHETYPES,
+  ...INITIATING_ARCHETYPES,
 ];
 
 export function getArchetypesByClass(className: string): ArchetypeData[] {

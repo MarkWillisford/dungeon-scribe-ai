@@ -101,7 +101,7 @@ function BreakdownRow({
   readOnlyNote,
   onChangeValue,
 }: BreakdownRowProps) {
-  const { colors, fantasy } = useTheme();
+  const { colors } = useTheme();
   const displayValue = value >= 0 ? `+${value}` : `${value}`;
 
   return (
@@ -214,7 +214,11 @@ function BreakdownPanel({ abilityKey, score, onCollapse }: BreakdownPanelProps) 
           value={score.levelIncrements}
           readOnlyNote="from increment slots"
         />
-        <BreakdownRow label="Enhancement" value={score.enhancement} readOnlyNote="auto from gear" />
+        <BreakdownRow
+          label="Enhancement"
+          value={score.enhancement}
+          readOnlyNote="from equipped gear"
+        />
         <BreakdownRow
           label="Other"
           value={score.other}

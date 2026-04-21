@@ -640,22 +640,46 @@ Both must be true for a character to use the system. Class selector and maneuver
 
 ---
 
-## Implementation Order
+## Implementation Order and Work Breakdown
 
-| Phase | Work                                                                      | Depends On     |
-| ----- | ------------------------------------------------------------------------- | -------------- |
-| 1     | Types (`initiating.ts`, modify `classes.ts`, `feats.ts`, `ArchetypeData`) | Nothing        |
-| 2     | Progression tables + 9 base classes + 9 prestige classes + bookIds        | Phase 1        |
-| 3     | Discipline/maneuver/stance/tradition data files                           | Phase 1        |
-| 4     | Martial archetypes (7 non-initiating + discipline-swapping archetypes)    | Phases 1-2     |
-| 5     | Martial Traditions data                                                   | Phase 1        |
-| 6     | `InitiatingService` + service updates                                     | Phases 1-2     |
-| 7     | ClassChoiceDefinitions (~25 files)                                        | Phases 1-2     |
-| 8     | Firestore collections + indexes                                           | Phase 1        |
-| 9     | Seed scripts                                                              | Phases 3, 5, 8 |
-| 10    | Store + combat integration                                                | Phases 1, 6    |
+### Dependency Map
 
-Phases 2-5 can largely run in parallel. Phases 6-8 can run in parallel after their deps.
+| Phase | Work | Blocked By | Blocks | Owner |
+|---|---|---|---|---|
+| 1 | Types (`initiating.ts`, modify `classes.ts`, `feats.ts`, `ArchetypeData`) | Nothing | ALL | Mark |
+| 2 | Progression tables + 9 base classes + 9 prestige classes + bookIds | Phase 1 | 4, 6, 7 | Mark |
+| 3 | Discipline/maneuver/stance data (~29 + ~500 + ~100 files) | Phase 1 | 9 | Doug |
+| 4 | Martial archetypes (7 non-initiating + discipline-swapping) | Phases 1, 2 | 9 | Mark |
+| 5 | Martial Traditions data (~20 traditions) | Phase 1 | 9 | Doug |
+| 6 | `InitiatingService` + service updates | Phases 1, 2 | 10 | Mark |
+| 7 | ClassChoiceDefinitions (~25 files) | Phases 1, 2 | 9 | Mark |
+| 8 | Firestore collections + indexes | Phase 1 | 9 | Mark |
+| 9 | Seed scripts | Phases 3, 5, 7, 8 | 10 | Mark |
+| 10 | Store + combat integration | Phases 1, 6 | Nothing | Mark |
+
+### Critical path
+
+Phase 1 → Phase 2 → Phase 6 → Phase 10
+
+### Parallel tracks after Phase 1 merges
+
+**Mark track:** Phase 2 → Phases 4, 6, 7, 8 → Phase 9 → Phase 10
+**Doug track:** Phases 3, 5 (scraping — can start immediately after Phase 1)
+
+Doug's scraping work (Phases 3 and 5) runs fully in parallel with Mark's architecture work (Phases 2, 4, 6, 7, 8). They converge at Phase 9 (seed scripts), which needs both the data files and the Firestore collections/ClassChoiceDefinitions to be ready.
+
+### Status
+
+- [ ] Phase 1 — Types (PR #TBD)
+- [ ] Phase 2 — Classes + progression tables + bookIds
+- [ ] Phase 3 — Discipline/maneuver/stance data (Doug)
+- [ ] Phase 4 — Martial archetypes
+- [ ] Phase 5 — Martial Traditions data (Doug)
+- [ ] Phase 6 — InitiatingService
+- [ ] Phase 7 — ClassChoiceDefinitions
+- [ ] Phase 8 — Firestore collections + indexes
+- [ ] Phase 9 — Seed scripts
+- [ ] Phase 10 — Store + combat integration
 
 ---
 
@@ -688,3 +712,4 @@ Phases 2-5 can largely run in parallel. Phases 6-8 can run in parallel after the
 - **Archetype progression tables** — martial archetypes may have different maneuver/stance gain rates than base classes
 - **Per-book selection within SourceCollections** — not yet implemented; out of scope, future feature
 - **ToB and PoW disciplines with shared names** (e.g., Stone Dragon) stored as separate documents with different `sourceSystem`
+- **`DisciplineDefinition.associatedSkill` cannot express multiple valid choices.** Shattered Mirror (PoWE) accepts any of Craft (glassmaking), Craft (painting), Craft (sculpture), or Craft (sketching). The current `associatedSkill: string` type forces us to pick one; PR #70 stores `'Craft (glassmaking)'` with the other three recorded in `adminNotes`. Downstream eligibility checks (Phase 6 `InitiatingService`) will get this wrong unless the type is extended before that phase lands. Options: change to `associatedSkill: string | string[]`, add an `associatedSkillOptions?: string[]` field, or model Craft specialties as a single `'Craft'` match with a separate eligibility rule. Decide before Phase 6 starts.

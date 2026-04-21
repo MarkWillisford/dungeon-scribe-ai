@@ -6,6 +6,7 @@ import themeReducer from './slices/themeSlice';
 import uiReducer from './slices/uiSlice';
 import characterEntryReducer from './slices/characterEntrySlice';
 import rulesetReducer from './slices/rulesetSlice';
+import gameDataReducer from './slices/gameDataSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     ui: uiReducer,
     characterEntry: characterEntryReducer,
     ruleset: rulesetReducer,
+    gameData: gameDataReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
