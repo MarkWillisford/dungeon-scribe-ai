@@ -3,7 +3,8 @@ import { View, Text, Pressable, TextInput, Modal, StyleSheet } from 'react-nativ
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  withSpring,
+  withTiming,
+  Easing,
   runOnJS,
   type SharedValue,
 } from 'react-native-reanimated';
@@ -133,7 +134,7 @@ function DraggableRow({
 
     if (activeIdx === -1) {
       return {
-        transform: [{ translateY: withSpring(0, { damping: 40, stiffness: 180 }) }],
+        transform: [{ translateY: withTiming(0, { duration: 200, easing: Easing.out(Easing.quad) }) }],
         zIndex: 0,
         opacity: 1,
         elevation: 0,
@@ -151,7 +152,7 @@ function DraggableRow({
     }
 
     return {
-      transform: [{ translateY: withSpring(shift, { damping: 40, stiffness: 180 }) }],
+      transform: [{ translateY: withTiming(shift, { duration: 200, easing: Easing.out(Easing.quad) }) }],
       zIndex: 0,
       opacity: 1,
       elevation: 0,
