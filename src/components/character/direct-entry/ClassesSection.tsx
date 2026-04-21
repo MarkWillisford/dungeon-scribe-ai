@@ -32,7 +32,7 @@ import {
 } from '@/utils/characterComputations';
 import { selectClasses, selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { type DraftClassEntry, type DraftTemplateEntry } from '@/types/characterDraft';
-import { ALL_TEMPLATES, type TemplateDefinition } from '@/data/templates';
+import { ALL_TEMPLATES } from '@/data/templates';
 
 function genId(): string {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
@@ -500,7 +500,8 @@ export function ClassesSection() {
   );
 
   const handleAddTemplate = (item: SearchItem) => {
-    const tpl = ALL_TEMPLATES.find((t) => t.id === item.key) as TemplateDefinition;
+    const tpl = ALL_TEMPLATES.find((t) => t.id === item.key);
+    if (!tpl) return;
     const entry: DraftTemplateEntry = {
       id: genId(),
       templateId: tpl.id,
