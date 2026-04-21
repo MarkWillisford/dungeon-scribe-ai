@@ -607,56 +607,83 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
       {isBaseClass && entry.isFavoredClass && (
         <View style={[styles.favoredBonusRow, { borderTopColor: colors.border.DEFAULT }]}>
           <Text style={[styles.favoredBonusLabel, { color: colors.text.secondary }]}>
-            Bonuses taken:
+            Bonuses:
           </Text>
-          <Text style={[styles.fieldLabel, { color: colors.text.tertiary }]}>HP</Text>
-          <TextInput
-            value={String(entry.favoredClassBonuses?.hp ?? 0)}
-            onChangeText={(t) => {
-              const n = parseInt(t, 10);
-              dispatch(setFavoredClassBonuses({
-                id: entry.id,
-                hp: isNaN(n) ? 0 : Math.max(0, n),
-                skillRank: entry.favoredClassBonuses?.skillRank ?? 0,
-              }));
-            }}
-            keyboardType="number-pad"
-            selectTextOnFocus
-            style={[
-              styles.bonusInput,
-              {
-                color: colors.text.primary,
-                borderColor: colors.border.DEFAULT,
-                backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
-              },
-            ]}
-            accessibilityLabel="Favored class HP bonuses"
-          />
-          <Text style={[styles.fieldLabel, { color: colors.text.tertiary, marginLeft: 8 }]}>
-            Skill
+          {(['hp', 'skillRank'] as const).map((field) => {
+            const hp = entry.favoredClassBonuses?.hp ?? 0;
+            const skillRank = entry.favoredClassBonuses?.skillRank ?? 0;
+            const value = field === 'hp' ? hp : skillRank;
+            const allocated = hp + skillRank;
+            const canInc = allocated < entry.level;
+            const canDec = value > 0;
+            const label = field === 'hp' ? 'HP' : 'Skill';
+            return (
+              <View key={field} style={styles.bonusStepper}>
+                <Text style={[styles.bonusStepperLabel, { color: colors.text.tertiary }]}>
+                  {label}
+                </Text>
+                <View style={styles.bonusStepperRow}>
+                  <Pressable
+                    onPress={() =>
+                      dispatch(setFavoredClassBonuses({
+                        id: entry.id,
+                        hp: field === 'hp' ? hp - 1 : hp,
+                        skillRank: field === 'skillRank' ? skillRank - 1 : skillRank,
+                      }))
+                    }
+                    disabled={!canDec}
+                    style={[
+                      styles.stepperBtn,
+                      {
+                        borderColor: colors.border.DEFAULT,
+                        backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+                        opacity: canDec ? 1 : 0.3,
+                      },
+                    ]}
+                    accessibilityLabel={`Decrease ${label} favored class bonus`}
+                  >
+                    <Text style={[styles.stepperBtnText, { color: colors.text.primary }]}>−</Text>
+                  </Pressable>
+                  <Text style={[styles.stepperValue, { color: colors.text.primary }]}>
+                    {value}
+                  </Text>
+                  <Pressable
+                    onPress={() =>
+                      dispatch(setFavoredClassBonuses({
+                        id: entry.id,
+                        hp: field === 'hp' ? hp + 1 : hp,
+                        skillRank: field === 'skillRank' ? skillRank + 1 : skillRank,
+                      }))
+                    }
+                    disabled={!canInc}
+                    style={[
+                      styles.stepperBtn,
+                      {
+                        borderColor: canInc
+                          ? isDark ? fantasy.gold : fantasy.bronze
+                          : colors.border.DEFAULT,
+                        backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+                        opacity: canInc ? 1 : 0.3,
+                      },
+                    ]}
+                    accessibilityLabel={`Increase ${label} favored class bonus`}
+                  >
+                    <Text
+                      style={[
+                        styles.stepperBtnText,
+                        { color: canInc ? (isDark ? fantasy.gold : fantasy.darkWood) : colors.text.tertiary },
+                      ]}
+                    >
+                      +
+                    </Text>
+                  </Pressable>
+                </View>
+              </View>
+            );
+          })}
+          <Text style={[styles.bonusRemaining, { color: colors.text.tertiary }]}>
+            {entry.level - (entry.favoredClassBonuses?.hp ?? 0) - (entry.favoredClassBonuses?.skillRank ?? 0)} left
           </Text>
-          <TextInput
-            value={String(entry.favoredClassBonuses?.skillRank ?? 0)}
-            onChangeText={(t) => {
-              const n = parseInt(t, 10);
-              dispatch(setFavoredClassBonuses({
-                id: entry.id,
-                hp: entry.favoredClassBonuses?.hp ?? 0,
-                skillRank: isNaN(n) ? 0 : Math.max(0, n),
-              }));
-            }}
-            keyboardType="number-pad"
-            selectTextOnFocus
-            style={[
-              styles.bonusInput,
-              {
-                color: colors.text.primary,
-                borderColor: colors.border.DEFAULT,
-                backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
-              },
-            ]}
-            accessibilityLabel="Favored class skill rank bonuses"
-          />
         </View>
       )}
 
@@ -899,17 +926,47 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginRight: 4,
   },
-  bonusInput: {
+  bonusStepper: {
+    alignItems: 'center',
+    gap: 2,
+  },
+  bonusStepperLabel: {
     fontFamily: 'LibreBaskerville',
-    fontSize: 15,
+    fontSize: 11,
     fontWeight: '600',
+  },
+  bonusStepperRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  stepperBtn: {
+    width: 28,
+    height: 28,
     borderWidth: 1,
     borderRadius: 6,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    width: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  stepperBtnText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 16,
+    fontWeight: '700',
+    lineHeight: 20,
+  },
+  stepperValue: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 15,
+    fontWeight: '700',
+    minWidth: 24,
     textAlign: 'center',
-    minHeight: 36,
+  },
+  bonusRemaining: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    marginLeft: 4,
+    alignSelf: 'flex-end',
+    paddingBottom: 2,
   },
   prereqRow: {
     paddingHorizontal: 12,
