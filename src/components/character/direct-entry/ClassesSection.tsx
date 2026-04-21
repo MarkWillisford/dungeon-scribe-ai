@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { View, Text, Pressable, TextInput, Modal, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { addClass, addTemplate } from '@/store/slices/characterEntrySlice';
+import { addClass, addSpellcastingPool, addTemplate } from '@/store/slices/characterEntrySlice';
 import { AutoComputedValue } from '@/components/ui/AutoComputedValue';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
 import { ClassEntryCard } from './ClassEntryCard';
@@ -194,16 +194,47 @@ export function ClassesSection() {
   const formatSave = (n: number) => (n >= 0 ? `+${n}` : `${n}`);
 
   const handleAddClass = (item: SearchItem) => {
+    const entryId = genId();
+    const classData = classDataMap.get(item.label.toLowerCase());
+    const spellType = classData?.spellcasting.type;
+    const advancesSpec = classData?.advancesSpellcasting;
+
+    // Pre-populate advancement for prestige advancers so the UI picker
+    // shows up immediately with the right shape and length.
+    const initialAdvancement = advancesSpec
+      ? advancesSpec.mode === 'single'
+        ? { mode: 'single' as const, perLevel: [{ baseClassEntryId: '' }] }
+        : {
+            mode: 'both' as const,
+            perLevel: [{ arcaneBaseClassEntryId: '', divineBaseClassEntryId: '' }],
+          }
+      : undefined;
+
     dispatch(
       addClass({
-        id: genId(),
+        id: entryId,
         className: item.label,
         level: 1,
         sourceSystem: 'pf1e',
+        spellcastingAdvancement: initialAdvancement,
         classChoices: [],
         prereqOverride: false,
       }),
     );
+
+    // Only base casters get their own pool. Advancers feed into someone
+    // else's pool via spellcastingAdvancement.
+    if (!advancesSpec && (spellType === 'Divine' || spellType === 'Arcane')) {
+      dispatch(
+        addSpellcastingPool({
+          id: `pool-${entryId}`,
+          poolType: spellType === 'Divine' ? 'divine' : 'arcane',
+          baseClassEntryId: entryId,
+          castingAbility: spellType === 'Divine' ? 'wis' : 'int',
+          spellsPerDayMisc: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        }),
+      );
+    }
     setClassPickerOpen(false);
   };
 

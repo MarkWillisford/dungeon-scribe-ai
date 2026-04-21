@@ -235,7 +235,7 @@ interface IounStoneSectionProps {
 }
 
 function IounStoneSection({ stones, onPickerOpen, onRemove }: IounStoneSectionProps) {
-  const { colors, fantasy } = useTheme();
+  const { colors } = useTheme();
 
   return (
     <View style={styles.subSection}>

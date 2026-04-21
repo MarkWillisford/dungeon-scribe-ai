@@ -3,7 +3,7 @@
 // Returns an array of EntryValidationWarning. Warnings are non-blocking —
 // the user can acknowledge them or override individual checks.
 //
-import type { CharacterDraft } from '@/types/characterDraft';
+import type { CharacterDraft, DraftClassEntry } from '@/types/characterDraft';
 import type { EntryValidationWarning } from '@/store/slices/characterEntrySlice';
 import type { Character } from '@/types';
 import type { Ruleset } from '@/types/ruleset';
@@ -448,23 +448,77 @@ export class DraftValidationService {
           warn(
             warnId(`spell-advancement-${entry.className}`),
             'spells',
-            `${entry.className} advances spellcasting but no advancement type is configured.`,
-            'Set spellcasting advancement in the Classes tab to ensure correct caster level computation.',
+            `${entry.className} advances spellcasting but no advancement is configured.`,
+            'Set spellcasting advancement on the Classes tab.',
           ),
         );
         continue;
       }
 
-      // Chosen type without the choice made
-      if (
-        entry.spellcastingAdvancement.type === 'chosen' &&
-        !entry.spellcastingAdvancement.chosenType
-      ) {
+      // Check pointers at advancing levels only. Skip levels are allowed
+      // to have empty pointers (they never contribute).
+      const classById = new Map(draft.classes.map((c) => [c.id, c]));
+      const adv = entry.spellcastingAdvancement;
+      const spec = classData.advancesSpellcasting;
+      if (!spec) continue;
+      const isAdvancingLevel = (lvl: number): boolean =>
+        spec.atLevels ? spec.atLevels.includes(lvl) : lvl >= 1 && lvl <= entry.level;
+
+      // Get target's tradition from class data map.
+      const getTradition = (target: DraftClassEntry | undefined): 'divine' | 'arcane' | null => {
+        if (!target) return null;
+        const t = classDataMap.get(target.className.toLowerCase())?.spellcasting.type;
+        return t === 'Divine' ? 'divine' : t === 'Arcane' ? 'arcane' : null;
+      };
+
+      const missing: number[] = [];
+      const wrongTradition: number[] = [];
+
+      if (adv.mode === 'single') {
+        adv.perLevel.forEach((p, i) => {
+          if (!isAdvancingLevel(i + 1)) return;
+          const target = classById.get(p.baseClassEntryId);
+          if (!p.baseClassEntryId || !target) {
+            missing.push(i + 1);
+            return;
+          }
+          if (spec.tradition && spec.tradition !== 'chosen') {
+            const t = getTradition(target);
+            if (t !== spec.tradition) wrongTradition.push(i + 1);
+          }
+        });
+      } else {
+        adv.perLevel.forEach((p, i) => {
+          if (!isAdvancingLevel(i + 1)) return;
+          const arc = classById.get(p.arcaneBaseClassEntryId);
+          const div = classById.get(p.divineBaseClassEntryId);
+          if (!p.arcaneBaseClassEntryId || !arc || !p.divineBaseClassEntryId || !div) {
+            missing.push(i + 1);
+            return;
+          }
+          if (getTradition(arc) !== 'arcane' || getTradition(div) !== 'divine') {
+            wrongTradition.push(i + 1);
+          }
+        });
+      }
+
+      if (missing.length > 0) {
         w.push(
           warn(
-            warnId(`spell-advancement-chosen-${entry.className}`),
+            warnId(`spell-advancement-missing-${entry.className}`),
             'spells',
-            `${entry.className}: spellcasting advancement type is "chosen" but no type was selected.`,
+            `${entry.className}: advancement target missing at level ${missing.join(', ')}.`,
+            'Pick a base caster class for each prestige level on the Classes tab.',
+          ),
+        );
+      }
+      if (wrongTradition.length > 0) {
+        w.push(
+          warn(
+            warnId(`spell-advancement-tradition-${entry.className}`),
+            'spells',
+            `${entry.className}: advancement target at level ${wrongTradition.join(', ')} has the wrong spellcasting tradition.`,
+            'This class restricts which tradition of caster it can advance.',
           ),
         );
       }

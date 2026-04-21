@@ -63,13 +63,31 @@ export interface DraftClassEntry {
   archetypeId?: string;
   archetypeName?: string;
   sourceSystem: 'pf1e' | '3.5e' | 'homebrew' | 'campaign';
-  spellcastingAdvancement?: {
-    type: 'divine' | 'arcane' | 'both' | 'highest' | 'chosen';
-    chosenType?: 'divine' | 'arcane'; // required when type === 'chosen'
-  };
+  // Prestige-class spellcasting advancement. At each level of this class the
+  // player picks which existing caster class (by DraftClassEntry.id) gets
+  // advanced. Tradition (divine/arcane) is derived from the referenced
+  // class's spellcasting.type — never stored here to avoid drift.
+  //
+  // 'single' — one base class advances per level (Hathran, Dweomerkeeper, ...).
+  // 'both'   — both an arcane and a divine pool advance per level (Mystic Theurge).
+  //
+  // perLevel[i] corresponds to prestige class level (i + 1). Length must
+  // equal this entry's `level`. Pointers may be '' when the user hasn't
+  // chosen yet — validation surfaces that as a warning.
+  spellcastingAdvancement?: SpellcastingAdvancement;
   classChoices: ClassChoice[];
   prereqOverride: boolean; // DM override — suppress prereq warnings for this class
 }
+
+export type SpellcastingAdvancement =
+  | {
+      mode: 'single';
+      perLevel: Array<{ baseClassEntryId: string }>;
+    }
+  | {
+      mode: 'both';
+      perLevel: Array<{ arcaneBaseClassEntryId: string; divineBaseClassEntryId: string }>;
+    };
 
 // ---- Templates ----
 
@@ -148,6 +166,10 @@ export type SpellPoolType = 'divine' | 'arcane';
 export interface DraftSpellcastingPool {
   id: string;
   poolType: SpellPoolType;
+  // The DraftClassEntry.id of the base caster this pool represents. Every
+  // pool is anchored to exactly one base caster; prestige classes don't get
+  // their own pool, they advance somebody else's via spellcastingAdvancement.
+  baseClassEntryId: string;
   castingAbility: AbilityKey;
   spellsPerDayMisc: number[]; // index = spell level 0–9; misc adjustments
 }

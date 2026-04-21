@@ -57,6 +57,7 @@ jest.mock('@/utils/characterComputations', () => ({
         category: string;
         skillRanksPerLevel: number;
         spellcasting: { type: string };
+        advancesSpellcasting?: { mode: string; tradition?: string; atLevels?: number[] };
         prerequisites?: object;
         classFeatures: object[];
       }
@@ -77,6 +78,7 @@ jest.mock('@/utils/characterComputations', () => ({
         category: 'Prestige',
         skillRanksPerLevel: 2,
         spellcasting: { type: 'Arcane' },
+        advancesSpellcasting: { mode: 'single', tradition: 'chosen' },
         prerequisites: {
           bab: 0,
           skills: [{ name: 'Spellcraft', ranks: 8 }],
@@ -721,7 +723,10 @@ describe('DraftValidationService', () => {
           sourceSystem: 'pf1e',
           classChoices: [],
           prereqOverride: false,
-          spellcastingAdvancement: { type: 'arcane' },
+          spellcastingAdvancement: {
+            mode: 'single',
+            perLevel: [{ baseClassEntryId: '1' }],
+          },
         },
       ];
       draft.skills = { spellcraft: { ranks: 9, misc: 0 } };
@@ -737,7 +742,7 @@ describe('DraftValidationService', () => {
       expect(warnings.filter((w) => w.section === 'spells')).toHaveLength(0);
     });
 
-    it('warns when advancement type is chosen but chosenType is missing', async () => {
+    it('warns when a per-level advancement target is missing', async () => {
       const draft = blankDraft();
       draft.classes = [
         {
@@ -755,7 +760,10 @@ describe('DraftValidationService', () => {
           sourceSystem: 'pf1e',
           classChoices: [],
           prereqOverride: false,
-          spellcastingAdvancement: { type: 'chosen' },
+          spellcastingAdvancement: {
+            mode: 'single',
+            perLevel: [{ baseClassEntryId: '' }],
+          },
         },
       ];
       draft.skills = { spellcraft: { ranks: 9, misc: 0 } };
@@ -768,7 +776,7 @@ describe('DraftValidationService', () => {
         DEFAULT_RULESET,
         TEST_CLASS_MAP,
       );
-      expect(warnings.some((w) => w.section === 'spells' && w.message.includes('"chosen"'))).toBe(
+      expect(warnings.some((w) => w.section === 'spells' && w.message.includes('missing'))).toBe(
         true,
       );
     });
