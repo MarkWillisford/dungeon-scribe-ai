@@ -207,6 +207,11 @@ export const PRESTIGE_CLASSES_APG: ExpandedClassData[] = [
       type: 'None',
       casting: 'None',
     },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'divine',
+      atLevels: [2, 3, 4, 6, 7, 8, 10],
+    },
     source: "Advanced Player's Guide",
   },
 
@@ -603,6 +608,11 @@ export const PRESTIGE_CLASSES_APG: ExpandedClassData[] = [
       type: 'None',
       casting: 'None',
     },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'divine',
+      atLevels: [2, 3, 4, 6, 7, 8, 10],
+    },
     source: "Advanced Player's Guide",
   },
 
@@ -707,6 +717,11 @@ export const PRESTIGE_CLASSES_APG: ExpandedClassData[] = [
     spellcasting: {
       type: 'None',
       casting: 'None',
+    },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'divine',
+      atLevels: [2, 3, 4, 6, 7, 9, 10],
     },
     source: "Advanced Player's Guide",
   },

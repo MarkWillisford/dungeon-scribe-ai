@@ -423,12 +423,42 @@ export class DraftStateResolver {
     partialClasses: DraftClassEntry[],
     classDataMap: ClassDataMap,
   ): DraftCharacterSnapshot['spellcasting'] {
-    const pools = partialClasses
-      .filter((entry) => {
-        const classData = lookupClassData(entry.className, classDataMap);
-        return classData && classData.spellcasting.type !== 'None';
-      })
-      .map((entry) => ({ baseCasterLevel: entry.level, baseClass: entry.className }));
+    // A base caster is a class whose own spellcasting.type !== 'None' AND
+    // which is not itself advancing someone else's pool. Prestige classes
+    // like Hathran contribute into a base caster's pool; they don't get
+    // their own snapshot entry.
+    const baseCasters = partialClasses.filter((entry) => {
+      const classData = lookupClassData(entry.className, classDataMap);
+      if (!classData || classData.spellcasting.type === 'None') return false;
+      if (entry.spellcastingAdvancement) return false;
+      return true;
+    });
+
+    const pools = baseCasters.map((base) => {
+      let advanced = 0;
+      for (const entry of partialClasses) {
+        const adv = entry.spellcastingAdvancement;
+        if (!adv) continue;
+        const spec = lookupClassData(entry.className, classDataMap)?.advancesSpellcasting;
+        if (!spec) continue;
+        const isAdvancingLevel = (lvl: number): boolean =>
+          spec.atLevels ? spec.atLevels.includes(lvl) : lvl >= 1 && lvl <= entry.level;
+
+        if (adv.mode === 'single') {
+          advanced += adv.perLevel.filter(
+            (p, i) => isAdvancingLevel(i + 1) && p.baseClassEntryId === base.id,
+          ).length;
+        } else {
+          advanced += adv.perLevel.filter(
+            (p, i) =>
+              isAdvancingLevel(i + 1) &&
+              (p.arcaneBaseClassEntryId === base.id || p.divineBaseClassEntryId === base.id),
+          ).length;
+        }
+      }
+      return { baseCasterLevel: base.level + advanced, baseClass: base.className };
+    });
+
     return { pools };
   }
 

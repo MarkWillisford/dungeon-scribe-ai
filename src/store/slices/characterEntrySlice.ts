@@ -350,18 +350,77 @@ const characterEntrySlice = createSlice({
     },
 
     removeClass(state, action: PayloadAction<string>) {
-      state.draft.classes = state.draft.classes.filter((c) => c.id !== action.payload);
+      const removedId = action.payload;
+      state.draft.classes = state.draft.classes.filter((c) => c.id !== removedId);
+
+      // Cascade: clear advancement pointers that targeted the removed class,
+      // so the validator can surface them as "missing target" warnings instead
+      // of the pool silently ignoring them.
+      for (const entry of state.draft.classes) {
+        const adv = entry.spellcastingAdvancement;
+        if (!adv) continue;
+        if (adv.mode === 'single') {
+          adv.perLevel = adv.perLevel.map((p) =>
+            p.baseClassEntryId === removedId ? { baseClassEntryId: '' } : p,
+          );
+        } else {
+          adv.perLevel = adv.perLevel.map((p) => ({
+            arcaneBaseClassEntryId:
+              p.arcaneBaseClassEntryId === removedId ? '' : p.arcaneBaseClassEntryId,
+            divineBaseClassEntryId:
+              p.divineBaseClassEntryId === removedId ? '' : p.divineBaseClassEntryId,
+          }));
+        }
+      }
+
+      // Remove the pool anchored to this class (if any).
+      state.draft.spellcastingPools = state.draft.spellcastingPools.filter(
+        (p) => p.baseClassEntryId !== removedId,
+      );
+
       syncFeatSlotsFromClasses(state.draft);
       state.isDirty = true;
     },
 
     updateClassLevel(state, action: PayloadAction<{ id: string; level: number }>) {
       const cls = state.draft.classes.find((c) => c.id === action.payload.id);
-      if (cls) {
-        cls.level = action.payload.level;
-        syncFeatSlotsFromClasses(state.draft);
-        state.isDirty = true;
+      if (!cls) return;
+
+      const oldLevel = cls.level;
+      const newLevel = action.payload.level;
+      cls.level = newLevel;
+
+      // Resize advancement perLevel to match the new class level.
+      // New rows default to the previous row's targets so the common
+      // "all levels advance the same base class" case stays cheap.
+      const adv = cls.spellcastingAdvancement;
+      if (adv) {
+        if (adv.mode === 'single') {
+          if (newLevel > oldLevel) {
+            const template = adv.perLevel[adv.perLevel.length - 1] ?? { baseClassEntryId: '' };
+            for (let i = 0; i < newLevel - oldLevel; i++) {
+              adv.perLevel.push({ ...template });
+            }
+          } else if (newLevel < oldLevel) {
+            adv.perLevel.length = newLevel;
+          }
+        } else {
+          if (newLevel > oldLevel) {
+            const template = adv.perLevel[adv.perLevel.length - 1] ?? {
+              arcaneBaseClassEntryId: '',
+              divineBaseClassEntryId: '',
+            };
+            for (let i = 0; i < newLevel - oldLevel; i++) {
+              adv.perLevel.push({ ...template });
+            }
+          } else if (newLevel < oldLevel) {
+            adv.perLevel.length = newLevel;
+          }
+        }
       }
+
+      syncFeatSlotsFromClasses(state.draft);
+      state.isDirty = true;
     },
 
     updateClassArchetype(
