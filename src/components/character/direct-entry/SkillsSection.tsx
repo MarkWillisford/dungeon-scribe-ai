@@ -322,8 +322,8 @@ function SpecialtyGroup({
 
       {/* Specialty rows */}
       {visibleKeys.map((k) => {
-        const m = k.match(/\(([^)]+)\)/);
-        const rawName = m ? m[1] : k;
+        const prefix = `${def.key} (`;
+        const rawName = k.startsWith(prefix) ? k.slice(prefix.length, -1) : k;
         return (
           <SkillRow
             key={k}
