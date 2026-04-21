@@ -43,11 +43,19 @@ const NONE_ITEM: ArchetypeItem = {
   isNone: true,
 };
 
+function sourceLabel(source: unknown): string {
+  if (!source) return '';
+  if (typeof source === 'string') return source;
+  if (typeof source === 'object' && 'bookName' in (source as object))
+    return (source as { bookName: string }).bookName;
+  return '';
+}
+
 function buildItems(archetypes: ArchetypeData[], className: string): ArchetypeItem[] {
   const items = archetypes.map((a) => ({
     key: archetypeDocId(className, a.name),
     label: a.name,
-    source: a.source,
+    source: sourceLabel(a.source),
     description: a.description?.slice(0, 120),
   }));
   items.sort((a, b) => a.label.localeCompare(b.label));
