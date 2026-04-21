@@ -58,7 +58,7 @@ export const STALKER_CLASS: ExpandedClassData = {
   babProgression: BABProgression.Medium,
   saves: {
     fortitude: SaveProgression.Poor,
-    reflex: SaveProgression.Poor,
+    reflex: SaveProgression.Good,
     will: SaveProgression.Good,
   },
   weaponProficiencies: ['Simple weapons', 'Martial weapons'],
@@ -399,8 +399,10 @@ export const STALKER_CLASS: ExpandedClassData = {
       'steel-serpent',
       'thrashing-dragon',
       'veiled-moon',
+      'riven-hourglass',
+      'tempest-gale',
     ],
-    progressionTableKey: 'STALKER_PROGRESSION',
+    progressionTableKey: 'stalker',
     recoveryMechanics: {
       primary: {
         type: 'custom',

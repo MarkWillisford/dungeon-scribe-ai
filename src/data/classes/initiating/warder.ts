@@ -187,7 +187,7 @@ export const WARDER_CLASS: ExpandedClassData = {
       'eternal-guardian', // choice: Eternal Guardian OR Piercing Thunder
       'piercing-thunder', // choice: Eternal Guardian OR Piercing Thunder
     ],
-    progressionTableKey: 'WARDER_PROGRESSION',
+    progressionTableKey: 'warder',
     // Recovery: full-round recovers initiation modifier (min 2) maneuvers,
     // standard action recovers 1 maneuver. Not a "recover all" mechanic.
     recoveryMechanics: {

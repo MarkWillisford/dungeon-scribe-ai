@@ -251,7 +251,7 @@ export const HARBINGER_CLASS: ExpandedClassData = {
       'shattered-mirror',
       'veiled-moon',
     ],
-    progressionTableKey: 'HARBINGER_PROGRESSION',
+    progressionTableKey: 'harbinger',
     recoveryMechanics: {
       primary: {
         type: 'custom',
