@@ -32,6 +32,7 @@ import {
 } from '@/utils/characterComputations';
 import { selectClasses, selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { type DraftClassEntry, type DraftTemplateEntry } from '@/types/characterDraft';
+import { ALL_TEMPLATES, type TemplateDefinition } from '@/data/templates';
 
 function genId(): string {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
@@ -398,6 +399,7 @@ export function ClassesSection() {
   const classDataMap = useAppSelector(selectClassDataMap);
 
   const [classPickerOpen, setClassPickerOpen] = useState(false);
+  const [templatePickerOpen, setTemplatePickerOpen] = useState(false);
   const [grantModalOpen, setGrantModalOpen] = useState(false);
 
   const regularTemplates = templates.filter((t) => !t.isFreeGrant);
@@ -470,6 +472,45 @@ export function ClassesSection() {
     setClassPickerOpen(false);
   };
 
+  const templateSearchItems = useMemo<SearchItem[]>(
+    () =>
+      ALL_TEMPLATES.map((t) => {
+        let cost = '';
+        if (t.laAdjustment != null) cost = `LA +${t.laAdjustment}`;
+        else if (t.crAdjustment != null) cost = `CR +${t.crAdjustment}`;
+        else if (t.crTiers?.length) cost = 'CR (tiered)';
+        const acq =
+          t.acquisitionType === 'inherited'
+            ? 'Inherited'
+            : t.acquisitionType === 'acquired'
+              ? 'Acquired'
+              : 'Either';
+        return {
+          key: t.id,
+          label: t.name,
+          subLabel: [cost, acq].filter(Boolean).join(' · '),
+          category: acq,
+        };
+      }),
+    [],
+  );
+
+  const handleAddTemplate = (item: SearchItem) => {
+    const tpl = ALL_TEMPLATES.find((t) => t.id === item.key) as TemplateDefinition;
+    const entry: DraftTemplateEntry = {
+      id: genId(),
+      templateId: tpl.id,
+      templateName: tpl.name,
+      isFreeGrant: false,
+      acquired: tpl.acquisitionType,
+      ...(tpl.laAdjustment != null
+        ? { appliedAs: 'LA', laValue: tpl.laAdjustment }
+        : { appliedAs: 'CR', crValue: tpl.crAdjustment ?? 0 }),
+    };
+    dispatch(addTemplate(entry));
+    setTemplatePickerOpen(false);
+  };
+
   const handleAddGrant = (name: string, note: string, grantedBy: string) => {
     const entry: DraftTemplateEntry = {
       id: genId(),
@@ -535,18 +576,7 @@ export function ClassesSection() {
       )}
 
       <Pressable
-        onPress={() => {
-          // Template picker — placeholder until template search is wired
-          const entry: DraftTemplateEntry = {
-            id: genId(),
-            templateName: 'New Template',
-            isFreeGrant: false,
-            appliedAs: 'CR',
-            crValue: 1,
-            acquired: 'either',
-          };
-          dispatch(addTemplate(entry));
-        }}
+        onPress={() => setTemplatePickerOpen(true)}
         style={[styles.addButton, { borderColor: colors.border.DEFAULT }]}
         accessibilityRole="button"
         accessibilityLabel="Add template"
@@ -597,6 +627,16 @@ export function ClassesSection() {
           );
           setClassPickerOpen(false);
         }}
+      />
+
+      {/* Template picker sheet */}
+      <SearchPickerSheet
+        visible={templatePickerOpen}
+        title="Add Template"
+        items={templateSearchItems}
+        onSelect={handleAddTemplate}
+        onClose={() => setTemplatePickerOpen(false)}
+        placeholder="Search templates..."
       />
 
       {/* Add grant modal */}
