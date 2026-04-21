@@ -22,7 +22,7 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'combat-reflexes' },
+      { type: 'feat', featId: 'combat_reflexes' },
       { type: 'bab', minimum: 1 },
     ],
     effects: [],
@@ -59,7 +59,7 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
-      { type: 'feat', featId: 'improved-quick-draw' },
+      { type: 'feat', featId: 'pow-improved-quick-draw' },
       { type: 'special', description: 'Two Mithral Current maneuvers known' },
       { type: 'special', description: 'Two Steel Serpent maneuvers known' },
     ],
@@ -178,7 +178,7 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
-      { type: 'feat', featId: 'speed-of-thought' },
+      { type: 'special', description: 'Speed of Thought feat (psionic feat, not yet seeded)' },
       { type: 'proficiency', proficiency: 'medium armor' },
     ],
     effects: [],

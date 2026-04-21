@@ -387,7 +387,7 @@ export const POW_FEATS_PART3: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
-      { type: 'skill', skillId: 'perform_dance', ranks: 1 },
+      { type: 'skill', skillId: 'perform', ranks: 1 },
       { type: 'bab', minimum: 1 },
     ],
     effects: [],

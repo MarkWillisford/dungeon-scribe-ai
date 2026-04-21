@@ -133,7 +133,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
-      { type: 'skill', skillId: 'sense-motive', ranks: 3 },
+      { type: 'skill', skillId: 'sense_motive', ranks: 3 },
       { type: 'discipline_access', disciplineId: 'scarlet-throne' },
     ],
     effects: [],
@@ -153,7 +153,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'pow-scarlet-throne-style' },
-      { type: 'skill', skillId: 'sense-motive', ranks: 7 },
+      { type: 'skill', skillId: 'sense_motive', ranks: 7 },
     ],
     effects: [],
     activationMode: 'conditional',
@@ -173,7 +173,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     prerequisites: [
       { type: 'feat', featId: 'pow-scarlet-throne-style' },
       { type: 'feat', featId: 'pow-scarlet-throne-dignity' },
-      { type: 'skill', skillId: 'sense-motive', ranks: 11 },
+      { type: 'skill', skillId: 'sense_motive', ranks: 11 },
     ],
     effects: [],
     activationMode: 'passive',
@@ -313,7 +313,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
-      { type: 'skill', skillId: 'autohypnosis', ranks: 3 },
+      { type: 'special', description: 'Autohypnosis 3 ranks' },
       { type: 'discipline_access', disciplineId: 'sleeping-goddess' },
     ],
     effects: [],
@@ -333,7 +333,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'pow-sleeping-goddess-style' },
-      { type: 'skill', skillId: 'autohypnosis', ranks: 7 },
+      { type: 'special', description: 'Autohypnosis 7 ranks' },
     ],
     effects: [],
     activationMode: 'conditional',
@@ -353,7 +353,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     prerequisites: [
       { type: 'feat', featId: 'pow-sleeping-goddess-style' },
       { type: 'feat', featId: 'pow-sleeping-goddess-slumber' },
-      { type: 'skill', skillId: 'autohypnosis', ranks: 11 },
+      { type: 'special', description: 'Autohypnosis 11 ranks' },
     ],
     effects: [],
     activationMode: 'passive',
@@ -433,7 +433,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
-      { type: 'skill', skillId: 'sleight-of-hand', ranks: 3 },
+      { type: 'skill', skillId: 'sleight_of_hand', ranks: 3 },
       { type: 'discipline_access', disciplineId: 'tempest-gale' },
     ],
     effects: [],
@@ -453,7 +453,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     types: ['combat', 'style'],
     prerequisites: [
       { type: 'feat', featId: 'pow-tempest-gale-style' },
-      { type: 'skill', skillId: 'sleight-of-hand', ranks: 7 },
+      { type: 'skill', skillId: 'sleight_of_hand', ranks: 7 },
     ],
     effects: [],
     activationMode: 'passive',
@@ -473,7 +473,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     prerequisites: [
       { type: 'feat', featId: 'pow-tempest-gale-style' },
       { type: 'feat', featId: 'pow-tempest-gale-haze' },
-      { type: 'skill', skillId: 'sleight-of-hand', ranks: 11 },
+      { type: 'skill', skillId: 'sleight_of_hand', ranks: 11 },
     ],
     effects: [],
     activationMode: 'passive',

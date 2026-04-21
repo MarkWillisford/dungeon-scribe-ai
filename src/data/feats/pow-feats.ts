@@ -336,7 +336,7 @@ export const POW_FEATS: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
-      { type: 'skill', skillId: 'discipline_skill', ranks: 8 },
+      { type: 'special', description: '8 ranks in the associated skill of one of your disciplines' },
     ],
     effects: [],
     activationMode: 'passive',

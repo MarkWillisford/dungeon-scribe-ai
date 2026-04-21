@@ -94,7 +94,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
     prerequisites: [
-      { type: 'feat', featId: 'improved-unarmed-strike' },
+      { type: 'feat', featId: 'improved_unarmed_strike' },
       { type: 'skill', skillId: 'acrobatics', ranks: 3 },
       { type: 'discipline_access', disciplineId: 'broken-blade' },
     ],
