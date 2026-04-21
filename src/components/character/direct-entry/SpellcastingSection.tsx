@@ -21,10 +21,6 @@ import {
 
 // ---- Helpers ----
 
-function genId(): string {
-  return Math.random().toString(36).slice(2) + Date.now().toString(36);
-}
-
 function fmtSign(n: number): string {
   return n >= 0 ? `+${n}` : `${n}`;
 }
@@ -552,8 +548,7 @@ const poolStyles = StyleSheet.create({
 // ---- Main section ----
 
 export function SpellcastingSection() {
-  const { colors, isDark } = useTheme();
-  const dispatch = useAppDispatch();
+  const { colors } = useTheme();
   const pools = useAppSelector((state) => state.characterEntry.draft.spellcastingPools);
   const abilities = useAppSelector((state) => state.characterEntry.draft.abilities);
   const [expandedClasses, setExpandedClasses] = useState<ExpandedClassData[]>([]);

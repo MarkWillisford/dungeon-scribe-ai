@@ -1,5 +1,14 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { View, Text, TextInput, Pressable, Modal, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Modal,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+} from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
 import type { ArchetypeData } from '@/data/classes/types';
@@ -71,27 +80,30 @@ export function ArchetypePickerSheet({
 }: ArchetypePickerSheetProps) {
   const { colors, fantasy, isDark } = useTheme();
   const [query, setQuery] = useState('');
+  const [loadedClass, setLoadedClass] = useState<string | null>(null);
   const [allItems, setAllItems] = useState<ArchetypeItem[]>([NONE_ITEM]);
-  const [isLoading, setIsLoading] = useState(false);
+
+  const isLoading = visible && !!className && loadedClass !== className;
 
   useEffect(() => {
     if (!visible || !className) return;
     let cancelled = false;
-    setIsLoading(true);
     GameDataService.getArchetypesByClass(className)
       .then((archetypes) => {
         if (!cancelled) {
           setAllItems(buildItems(archetypes, className));
-          setIsLoading(false);
+          setLoadedClass(className);
         }
       })
       .catch((e) => {
         if (!cancelled) {
           console.error('Failed to load archetypes:', e);
-          setIsLoading(false);
+          setLoadedClass(className);
         }
       });
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [visible, className]);
 
   const filtered = useMemo(() => {
