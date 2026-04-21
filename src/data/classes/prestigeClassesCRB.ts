@@ -92,6 +92,11 @@ export const PRESTIGE_CLASSES_CRB: ExpandedClassData[] = [
       },
     ],
     spellcasting: { type: 'None', casting: 'None' },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'arcane',
+      atLevels: [2, 3, 4, 6, 7, 8, 10],
+    },
     prerequisites: {
       bab: 6,
       feats: ['Point Blank Shot', 'Precise Shot', 'Weapon Focus (longbow or shortbow)'],
@@ -198,6 +203,11 @@ export const PRESTIGE_CLASSES_CRB: ExpandedClassData[] = [
       },
     ],
     spellcasting: { type: 'None', casting: 'None' },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'arcane',
+      atLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    },
     prerequisites: {
       skills: [
         { name: 'Disable Device', ranks: 4 },
@@ -518,6 +528,11 @@ export const PRESTIGE_CLASSES_CRB: ExpandedClassData[] = [
       },
     ],
     spellcasting: { type: 'None', casting: 'None' },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'arcane',
+      atLevels: [2, 3, 4, 6, 7, 8, 10],
+    },
     prerequisites: {
       skills: [{ name: 'Knowledge (arcana)', ranks: 5 }],
       spellcasting: 'Ability to cast arcane spells without preparation',
@@ -709,6 +724,11 @@ export const PRESTIGE_CLASSES_CRB: ExpandedClassData[] = [
       },
     ],
     spellcasting: { type: 'None', casting: 'None' },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'arcane',
+      atLevels: [2, 3, 4, 5, 6, 7, 8, 9, 10],
+    },
     prerequisites: {
       feats: ['Proficiency with all martial weapons'],
       spellcasting: 'Ability to cast 3rd-level arcane spells',
@@ -781,6 +801,11 @@ export const PRESTIGE_CLASSES_CRB: ExpandedClassData[] = [
       },
     ],
     spellcasting: { type: 'None', casting: 'None' },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'chosen',
+      atLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    },
     prerequisites: {
       skills: [{ name: 'Knowledge (any two)', ranks: 7 }],
       feats: ['Any three metamagic or item creation feats'],
@@ -855,6 +880,10 @@ export const PRESTIGE_CLASSES_CRB: ExpandedClassData[] = [
       },
     ],
     spellcasting: { type: 'None', casting: 'None' },
+    advancesSpellcasting: {
+      mode: 'both',
+      atLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    },
     prerequisites: {
       skills: [
         { name: 'Knowledge (arcana)', ranks: 3 },
