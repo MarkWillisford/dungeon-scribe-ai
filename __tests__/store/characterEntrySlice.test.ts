@@ -938,6 +938,7 @@ describe('characterEntrySlice — skills', () => {
       const initial = makeInitialState();
       const state = reducer(initial, removeSkillEntry('craft (nonexistent)'));
       expect(state.draft.skills).toEqual(initial.draft.skills);
+      expect(state.isDirty).toBe(false);
     });
   });
 });

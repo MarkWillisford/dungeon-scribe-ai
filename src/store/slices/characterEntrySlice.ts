@@ -548,8 +548,10 @@ const characterEntrySlice = createSlice({
     },
 
     removeSkillEntry(state, action: PayloadAction<string>) {
-      delete state.draft.skills[action.payload];
-      state.isDirty = true;
+      if (action.payload in state.draft.skills) {
+        delete state.draft.skills[action.payload];
+        state.isDirty = true;
+      }
     },
 
     // ---- Traits ----
