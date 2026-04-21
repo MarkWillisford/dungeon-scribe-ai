@@ -135,7 +135,9 @@ function DraggableRow({
 
     if (activeIdx === -1) {
       return {
-        transform: [{ translateY: withTiming(0, { duration: 200, easing: Easing.out(Easing.quad) }) }],
+        transform: [
+          { translateY: withTiming(0, { duration: 200, easing: Easing.out(Easing.quad) }) },
+        ],
         zIndex: 0,
         opacity: 1,
         elevation: 0,
@@ -153,7 +155,9 @@ function DraggableRow({
     }
 
     return {
-      transform: [{ translateY: withTiming(shift, { duration: 200, easing: Easing.out(Easing.quad) }) }],
+      transform: [
+        { translateY: withTiming(shift, { duration: 200, easing: Easing.out(Easing.quad) }) },
+      ],
       zIndex: 0,
       opacity: 1,
       elevation: 0,
@@ -505,7 +509,9 @@ export function ClassesSection() {
       acquired: tpl.acquisitionType,
       ...(tpl.laAdjustment != null
         ? { appliedAs: 'LA', laValue: tpl.laAdjustment }
-        : { appliedAs: 'CR', crValue: tpl.crAdjustment ?? 0 }),
+        : tpl.crTiers?.length
+          ? { appliedAs: 'CR' }
+          : { appliedAs: 'CR', crValue: tpl.crAdjustment ?? 0 }),
     };
     dispatch(addTemplate(entry));
     setTemplatePickerOpen(false);

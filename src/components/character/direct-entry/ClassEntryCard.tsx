@@ -19,7 +19,6 @@ import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { lookupClassData } from '@/utils/characterComputations';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { type ClassChoice } from '@/types/classes';
-import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { ArchetypePickerSheet } from './ArchetypePickerSheet';
 
 // Pairs of featureNames that are mutually exclusive — filling one disables the other.
