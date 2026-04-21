@@ -435,7 +435,9 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const [choicesExpanded, setChoicesExpanded] = useState(false);
   const [archetypePickerOpen, setArchetypePickerOpen] = useState(false);
   const [definitions, setDefinitions] = useState<ClassChoiceDefinition[]>([]);
-  const [hasArchetypes, setHasArchetypes] = useState<boolean | null>(null);
+  const [archetypeLoadedClass, setArchetypeLoadedClass] = useState<string | null>(null);
+  const [archetypeExists, setArchetypeExists] = useState(false);
+  const hasArchetypes = archetypeLoadedClass === entry.className ? archetypeExists : null;
   const characterDeity = useAppSelector((state) => state.characterEntry.draft.deity);
   const classDataMap = useAppSelector(selectClassDataMap);
 
@@ -443,9 +445,23 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
     GameDataService.getClassChoiceDefinitions(entry.className)
       .then(setDefinitions)
       .catch((e) => console.error('Failed to load class choice definitions:', e));
+    let cancelled = false;
     GameDataService.getArchetypesByClass(entry.className)
-      .then((archetypes) => setHasArchetypes(archetypes.length > 0))
-      .catch(() => setHasArchetypes(false));
+      .then((archetypes) => {
+        if (!cancelled) {
+          setArchetypeExists(archetypes.length > 0);
+          setArchetypeLoadedClass(entry.className);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setArchetypeExists(false);
+          setArchetypeLoadedClass(entry.className);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
   }, [entry.className]);
 
   const allSlots = definitions.flatMap((def) => deriveChoiceSlots(def, entry.level));
@@ -521,6 +537,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
         {hasArchetypes !== false && (
           <Pressable
             onPress={() => setArchetypePickerOpen(true)}
+            disabled={hasArchetypes === null}
             style={styles.archetypeButton}
             accessibilityRole="button"
             accessibilityLabel="Choose archetype"
