@@ -6,6 +6,7 @@ import { setSkillEntry, removeSkillEntry } from '@/store/slices/characterEntrySl
 import { getAbilityModifier } from '@/utils/characterComputations';
 import { type AbilityKey } from '@/types/characterDraft';
 import { type DraftSkillEntry } from '@/types/characterDraft';
+import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
 
 // ---- Static skill definitions ----
 
@@ -15,6 +16,7 @@ interface SkillDef {
   ability: AbilityKey;
   trainedOnly?: boolean;
   allowsSpecialties?: boolean;
+  conditionalOn?: 'initiating'; // only shown when PoW or ToB mechanics are enabled
 }
 
 const SKILL_DEFS: SkillDef[] = [
@@ -47,6 +49,13 @@ const SKILL_DEFS: SkillDef[] = [
   { key: 'knowledgeGeography', label: 'Knowledge (Geography)', ability: 'int', trainedOnly: true },
   { key: 'knowledgeHistory', label: 'Knowledge (History)', ability: 'int', trainedOnly: true },
   { key: 'knowledgeLocal', label: 'Knowledge (Local)', ability: 'int', trainedOnly: true },
+  {
+    key: 'knowledgeMartial',
+    label: 'Knowledge (Martial)',
+    ability: 'int',
+    trainedOnly: true,
+    conditionalOn: 'initiating',
+  },
   { key: 'knowledgeNature', label: 'Knowledge (Nature)', ability: 'int', trainedOnly: true },
   { key: 'knowledgeNobility', label: 'Knowledge (Nobility)', ability: 'int', trainedOnly: true },
   { key: 'knowledgePlanes', label: 'Knowledge (Planes)', ability: 'int', trainedOnly: true },
@@ -344,6 +353,9 @@ export function SkillsSection() {
   const dispatch = useAppDispatch();
   const skills = useAppSelector((state) => state.characterEntry.draft.skills);
   const abilities = useAppSelector((state) => state.characterEntry.draft.abilities);
+  const ruleset = useAppSelector((state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD);
+  const showInitiating =
+    ruleset.optionalRules.pathOfWarMechanics || ruleset.optionalRules.tomeOfBattleMechanics;
 
   const [showAll, setShowAll] = useState(false);
   const [query, setQuery] = useState('');
@@ -368,6 +380,7 @@ export function SkillsSection() {
   const filteredDefs = useMemo(() => {
     const q = query.toLowerCase().trim();
     return SKILL_DEFS.filter((def) => {
+      if (def.conditionalOn === 'initiating' && !showInitiating) return false;
       if (!def.allowsSpecialties) {
         if (q && !def.label.toLowerCase().includes(q)) return false;
         if (!showAll && !q) {
@@ -387,7 +400,7 @@ export function SkillsSection() {
         return true;
       }
     });
-  }, [skills, showAll, query]);
+  }, [skills, showAll, query, showInitiating]);
 
   const emptyEntry: DraftSkillEntry = { ranks: 0, misc: 0 };
 
