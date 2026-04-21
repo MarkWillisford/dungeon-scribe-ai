@@ -81,8 +81,6 @@ function DraggableRow({
   onHeightChange,
   onDragEnd,
 }: DraggableRowProps) {
-  const { fantasy, isDark } = useTheme();
-
   // Keep index accessible in UI-thread worklets
   const indexRef = useSharedValue(index);
   useEffect(() => {
@@ -135,7 +133,7 @@ function DraggableRow({
 
     if (activeIdx === -1) {
       return {
-        transform: [{ translateY: withSpring(0, { damping: 20, stiffness: 200 }) }],
+        transform: [{ translateY: withSpring(0, { damping: 40, stiffness: 180 }) }],
         zIndex: 0,
         opacity: 1,
         elevation: 0,
@@ -153,38 +151,27 @@ function DraggableRow({
     }
 
     return {
-      transform: [{ translateY: withSpring(shift, { damping: 20, stiffness: 200 }) }],
+      transform: [{ translateY: withSpring(shift, { damping: 40, stiffness: 180 }) }],
       zIndex: 0,
       opacity: 1,
       elevation: 0,
     };
   });
 
+  const card = <ClassEntryCard entry={entry} />;
+
   return (
     <Animated.View
       onLayout={(e) => onHeightChange(index, e.nativeEvent.layout.height)}
-      style={rowStyle}
+      style={[rowStyle, styles.draggableRow]}
     >
-      <View style={styles.draggableRow}>
-        {count > 1 && (
-          <GestureDetector gesture={gesture}>
-            <View
-              style={styles.dragHandle}
-              accessibilityLabel="Drag to reorder class"
-              accessibilityRole="button"
-            >
-              <Text
-                style={[styles.dragHandleIcon, { color: isDark ? fantasy.gold : fantasy.bronze }]}
-              >
-                ☰
-              </Text>
-            </View>
-          </GestureDetector>
-        )}
-        <View style={styles.classCardWrapper}>
-          <ClassEntryCard entry={entry} />
-        </View>
-      </View>
+      {count > 1 ? (
+        <GestureDetector gesture={gesture}>
+          <View style={styles.classCardWrapper}>{card}</View>
+        </GestureDetector>
+      ) : (
+        card
+      )}
     </Animated.View>
   );
 }
@@ -641,19 +628,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(128,128,128,0.3)',
     marginHorizontal: 4,
   },
-  // Draggable row layout
   draggableRow: {
-    flexDirection: 'row',
-    alignItems: 'stretch',
     paddingBottom: 8,
-  },
-  dragHandle: {
-    width: 36,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  dragHandleIcon: {
-    fontSize: 16,
   },
   classCardWrapper: {
     flex: 1,
