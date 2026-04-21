@@ -15,6 +15,8 @@ import {
 } from '@/store/slices/characterEntrySlice';
 import { type DraftClassEntry, type SpellcastingAdvancement } from '@/types/characterDraft';
 import { GameDataService } from '@/services/GameDataService';
+import { selectClassDataMap } from '@/store/slices/gameDataSlice';
+import { lookupClassData } from '@/utils/characterComputations';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { type ClassChoice } from '@/types/classes';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
@@ -442,6 +444,8 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const hasArchetypes = archetypeLoadedClass === entry.className ? archetypeExists : null;
   const characterDeity = useAppSelector((state) => state.characterEntry.draft.deity);
   const classDataMap = useAppSelector(selectClassDataMap);
+  const classData = lookupClassData(entry.className, classDataMap);
+  const isBaseClass = (classData?.maxLevel ?? 20) === 20;
 
   useEffect(() => {
     GameDataService.getClassChoiceDefinitions(entry.className)
@@ -572,8 +576,8 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           this class is a prestige advancer. No user toggle. */}
       {advancesSpec && <AdvancementControls entry={entry} />}
 
-      {/* Favored class */}
-      <Pressable
+      {/* Favored class — only base classes (maxLevel 20) can be favored */}
+      {isBaseClass && <Pressable
         onPress={() => dispatch(toggleFavoredClass(entry.id))}
         style={[styles.row, { borderTopColor: colors.border.DEFAULT, borderTopWidth: StyleSheet.hairlineWidth }]}
         accessibilityRole="checkbox"
@@ -598,9 +602,9 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           )}
         </View>
         <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Favored class</Text>
-      </Pressable>
+      </Pressable>}
 
-      {entry.isFavoredClass && (
+      {isBaseClass && entry.isFavoredClass && (
         <View style={[styles.favoredBonusRow, { borderTopColor: colors.border.DEFAULT }]}>
           <Text style={[styles.favoredBonusLabel, { color: colors.text.secondary }]}>
             Bonuses taken:
