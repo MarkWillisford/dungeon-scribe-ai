@@ -36,11 +36,11 @@ export const BLADECASTER_CLASS: ExpandedClassData = {
     'Spellcraft',
     'Stealth',
   ],
-  babProgression: BABProgression.Full,
+  babProgression: BABProgression.Medium,
   saves: {
-    fortitude: SaveProgression.Good,
+    fortitude: SaveProgression.Poor,
     reflex: SaveProgression.Poor,
-    will: SaveProgression.Poor,
+    will: SaveProgression.Good,
   },
   weaponProficiencies: [],
   armorProficiencies: [],
@@ -144,7 +144,7 @@ export const BLADECASTER_CLASS: ExpandedClassData = {
     initiatingAbility: 'INT',
     ilProgression: 'full',
     disciplines: ['elemental-flux', 'shattered-mirror'],
-    progressionTableKey: 'BLADECASTER_PROGRESSION',
+    progressionTableKey: 'bladecaster',
     recoveryMechanics: {
       primary: {
         type: 'custom',

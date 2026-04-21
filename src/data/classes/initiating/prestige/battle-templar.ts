@@ -155,7 +155,7 @@ export const BATTLE_TEMPLAR_CLASS: ExpandedClassData = {
       'silver-crane',
       'black-seraph',
     ],
-    progressionTableKey: 'BATTLE_TEMPLAR_PROGRESSION',
+    progressionTableKey: 'battle-templar',
     recoveryMechanics: {
       primary: {
         type: 'custom',

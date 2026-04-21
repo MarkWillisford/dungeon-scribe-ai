@@ -161,7 +161,7 @@ export const UMBRAL_BLADE_CLASS: ExpandedClassData = {
       'steel-serpent',
       'veiled-moon',
     ],
-    progressionTableKey: 'UMBRAL_BLADE_PROGRESSION',
+    progressionTableKey: 'umbral-blade',
     recoveryMechanics: {
       primary: {
         type: 'custom',

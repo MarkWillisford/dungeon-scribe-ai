@@ -163,7 +163,7 @@ export const LANDSKNECHT_CLASS: ExpandedClassData = {
     initiatingAbility: 'WIS',
     ilProgression: 'full',
     disciplines: ['mithral-current', 'scarlet-throne'],
-    progressionTableKey: 'LANDSKNECHT_PROGRESSION',
+    progressionTableKey: 'landsknecht',
     recoveryMechanics: {
       primary: {
         type: 'custom',
