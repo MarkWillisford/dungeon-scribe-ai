@@ -53,7 +53,7 @@ Mechanical code drop from Mark's plan into the repo. No scraping, no creative de
 | --- | --- |
 | Types (copy verbatim from initiating-system.md Phase 1) | `src/types/initiating.ts` — `ManeuverDefinition`, `StanceDefinition`, `DisciplineDefinition`, `MartialTradition`, `InitiatingPool`, `RecoveryMechanic`, etc. |
 | Extend `DataQualityFields` onto every new type | same file — every catalog type must `extends DataQualityFields` |
-| bookIds for 3pp sources | `src/utils/normalizeSource.ts` — `dsp-pow` → Path of War / Dreamscarred Press; `dsp-powe` → Path of War: Expanded / Dreamscarred Press |
+| normalizeSource short-codes for 3pp sources | `src/utils/normalizeSource.ts` — key `dsp-pow` → `{ bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' }`; key `dsp-powe` → `{ bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' }`. Note: the final `bookId` in data objects is `'pow'` / `'powe'` (NOT the normalizeSource key `'dsp-pow'`/`'dsp-powe'`). |
 | Empty data directories with index barrels | `src/data/disciplines/index.ts`, `src/data/maneuvers/index.ts`, `src/data/stances/index.ts`, `src/data/martialTraditions/index.ts` — each exports an empty `ALL_*` array for now |
 | Progression table skeleton | `src/data/classes/initiatingProgressionTables.ts` — types + empty registry |
 | Class data skeletons | `src/data/classes/initiatingClasses.ts`, `src/data/classes/initiatingPrestigeClasses.ts` — empty arrays |
@@ -62,7 +62,7 @@ Mechanical code drop from Mark's plan into the repo. No scraping, no creative de
 **Review checklist before Phase 0 ships:**
 - Every new catalog type `extends DataQualityFields` (don't repeat the PR #57 review miss)
 - `AppliedTemplate`-style character subdocs stay clean (no `DataQualityFields` on character state)
-- bookIds match Mark's plan exactly (`dsp-pow` / `dsp-powe`, not `pow` / `powe`)
+- normalizeSource keys are `dsp-pow` / `dsp-powe`; the resulting `bookId` values in data objects are `'pow'` / `'powe'` — don't confuse the two
 
 ---
 
@@ -289,7 +289,7 @@ Required fields per entry:
 - actionType: 'standard' | 'full-round' | 'swift' | 'immediate' | 'move' | 'free'
 - range, target?, area?, duration, savingThrow?, description
 - prerequisites: ManeuverPrerequisite (usually { disciplineManeuversKnown: N })
-- source: use normalizeSource helper; bookId = 'pow' or 'powe'; publisher: 'Dreamscarred Press'
+- source: inline GameDataSource object `{ bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' }` or `{ bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' }`. The `bookId` in data is `'pow'`/`'powe'` — NOT the normalizeSource short-code `'dsp-pow'`/`'dsp-powe'`.
 - isOfficial: false  (third-party)
 - visibility: 'global', rev: 1
 - verificationStatus: 'needs_review' as const  (REQUIRED — DataQualityFields)
