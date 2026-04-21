@@ -25,10 +25,7 @@ import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
 import type { ExpandedClassData, ArchetypeData } from '@/data/classes/types';
 import type { ClassData } from '@/data/classes';
-import type {
-  ClassOptionBase,
-  EidolonEvolutionEntry,
-} from '@/types/classOptions';
+import type { ClassOptionBase, EidolonEvolutionEntry } from '@/types/classOptions';
 import type {
   WeaponDefinition,
   ArmorDefinition,
@@ -52,7 +49,7 @@ import type {
   ManeuverFilter,
   DisciplineFilter,
 } from './GameDataConnector';
-import type { RaceGroups, FeatFilter } from './GameDataService';
+import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -626,18 +623,19 @@ export class FirestoreGameDataConnector implements GameDataConnector {
       let results: ManeuverDefinition[];
 
       if (filter?.disciplineId) {
-        const q = filter.maxLevel !== undefined
-          ? query(
-              collection(db, 'maneuvers'),
-              where('visibility', '==', 'global'),
-              where('disciplineId', '==', filter.disciplineId),
-              where('level', '<=', filter.maxLevel),
-            )
-          : query(
-              collection(db, 'maneuvers'),
-              where('visibility', '==', 'global'),
-              where('disciplineId', '==', filter.disciplineId),
-            );
+        const q =
+          filter.maxLevel !== undefined
+            ? query(
+                collection(db, 'maneuvers'),
+                where('visibility', '==', 'global'),
+                where('disciplineId', '==', filter.disciplineId),
+                where('level', '<=', filter.maxLevel),
+              )
+            : query(
+                collection(db, 'maneuvers'),
+                where('visibility', '==', 'global'),
+                where('disciplineId', '==', filter.disciplineId),
+              );
         const snap = await getDocs(q);
         results = snap.docs.map((d) => d.data() as ManeuverDefinition);
       } else {
@@ -646,9 +644,8 @@ export class FirestoreGameDataConnector implements GameDataConnector {
           GameDataCache.set('maneuvers/__all', fetched, TTL.OFFICIAL);
           return fetched;
         });
-        results = filter?.maxLevel !== undefined
-          ? all.filter((m) => m.level <= filter.maxLevel!)
-          : all;
+        results =
+          filter?.maxLevel !== undefined ? all.filter((m) => m.level <= filter.maxLevel!) : all;
       }
 
       GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
@@ -685,18 +682,19 @@ export class FirestoreGameDataConnector implements GameDataConnector {
       let results: StanceDefinition[];
 
       if (filter?.disciplineId) {
-        const q = filter.maxLevel !== undefined
-          ? query(
-              collection(db, 'stances'),
-              where('visibility', '==', 'global'),
-              where('disciplineId', '==', filter.disciplineId),
-              where('level', '<=', filter.maxLevel),
-            )
-          : query(
-              collection(db, 'stances'),
-              where('visibility', '==', 'global'),
-              where('disciplineId', '==', filter.disciplineId),
-            );
+        const q =
+          filter.maxLevel !== undefined
+            ? query(
+                collection(db, 'stances'),
+                where('visibility', '==', 'global'),
+                where('disciplineId', '==', filter.disciplineId),
+                where('level', '<=', filter.maxLevel),
+              )
+            : query(
+                collection(db, 'stances'),
+                where('visibility', '==', 'global'),
+                where('disciplineId', '==', filter.disciplineId),
+              );
         const snap = await getDocs(q);
         results = snap.docs.map((d) => d.data() as StanceDefinition);
       } else {
@@ -705,9 +703,8 @@ export class FirestoreGameDataConnector implements GameDataConnector {
           GameDataCache.set('stances/__all', fetched, TTL.OFFICIAL);
           return fetched;
         });
-        results = filter?.maxLevel !== undefined
-          ? all.filter((s) => s.level <= filter.maxLevel!)
-          : all;
+        results =
+          filter?.maxLevel !== undefined ? all.filter((s) => s.level <= filter.maxLevel!) : all;
       }
 
       GameDataCache.set(cacheKey, results, TTL.OFFICIAL);

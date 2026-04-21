@@ -71,7 +71,7 @@ import type {
   ManeuverFilter,
   DisciplineFilter,
 } from './GameDataConnector';
-import type { RaceGroups, FeatFilter } from './GameDataService';
+import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
 import type {
   DisciplineDefinition,
   ManeuverDefinition,
