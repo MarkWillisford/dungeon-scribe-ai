@@ -461,6 +461,7 @@ export function SkillsSection() {
           <Text style={[styles.headerNum, { color: colors.text.tertiary }]}>Rnk</Text>
           <Text style={[styles.headerNum, { color: colors.text.tertiary }]}>Misc</Text>
           <Text style={[styles.headerTotal, { color: colors.text.tertiary }]}>Total</Text>
+          <View style={styles.removeButtonPlaceholder} />
         </View>
 
         {filteredDefs.length === 0 && (
