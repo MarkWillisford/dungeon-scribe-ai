@@ -222,7 +222,7 @@ function SpecialtyGroup({
   const [input, setInput] = useState('');
 
   const emptyEntry: DraftSkillEntry = { ranks: 0, misc: 0 };
-  const allKeys = getSpecialtyKeys(skills, def.key);
+  const allKeys = useMemo(() => getSpecialtyKeys(skills, def.key), [skills, def.key]);
 
   const visibleKeys = useMemo(() => {
     if (!filterQuery) return allKeys;
