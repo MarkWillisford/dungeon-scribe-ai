@@ -28,12 +28,6 @@ export interface ClassEntry {
   // Level-by-level selections (domains, talents, favored enemies, rage powers, etc.)
   classChoices?: ClassChoice[];
 
-  // For prestige/advancement classes: advances an existing casting pool rather than granting its own
-  spellcastingAdvancement?: {
-    type: 'divine' | 'arcane' | 'both' | 'highest' | 'chosen';
-    chosenType?: 'divine' | 'arcane'; // Required when type === 'chosen'
-  };
-
   // For prestige/advancement classes: advances an existing initiating pool
   initiatingAdvancement?: {
     type: 'full' | 'half' | 'chosen';

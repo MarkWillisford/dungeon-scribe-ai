@@ -1,742 +1,529 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, Modal, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
-  addWeapon,
-  removeWeapon,
-  updateWeapon,
-  addArmor,
-  removeArmor,
-  updateArmor,
-  addMagicItem,
-  removeMagicItem,
-  updateMagicItem,
+  addEquipment,
+  removeEquipment,
+  assignEquipmentSlot,
+  unassignEquipmentSlot,
 } from '@/store/slices/characterEntrySlice';
-import { type DraftWeapon, type DraftArmor, type DraftMagicItem } from '@/types/characterDraft';
+import {
+  EquipmentPickerSheet,
+  type PickerSlot,
+  type EquipmentPickerResult,
+} from './EquipmentPickerSheet';
+import type { DraftEquipmentItem, DraftEquippedSlot } from '@/types/characterDraft';
+
+// ---- Helpers ----
 
 function genId(): string {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
 }
 
-// ---- Shared helpers ----
+// ---- Slot grid layout ----
 
-interface LabeledInputProps {
+interface SlotCell {
   label: string;
-  value: string;
-  onChangeText: (t: string) => void;
-  placeholder?: string;
-  keyboardType?: 'default' | 'number-pad' | 'numbers-and-punctuation';
-  multiline?: boolean;
+  slot: DraftEquippedSlot | null;
 }
 
-function LabeledInput({
-  label,
-  value,
-  onChangeText,
-  placeholder,
-  keyboardType = 'default',
-  multiline = false,
-}: LabeledInputProps) {
+const SLOT_ROWS: SlotCell[][] = [
+  [
+    { label: 'Head', slot: 'head' },
+    { label: 'Headband', slot: 'headband' },
+    { label: 'Eyes', slot: 'eyes' },
+  ],
+  [
+    { label: 'Neck', slot: 'neck' },
+    { label: 'Shoulders', slot: 'shoulders' },
+    { label: 'Chest', slot: 'chest' },
+  ],
+  [
+    { label: 'Body', slot: 'body' },
+    { label: 'Belt', slot: 'belt' },
+    { label: 'Wrists', slot: 'wrists' },
+  ],
+  [
+    { label: 'Hands', slot: 'hands' },
+    { label: 'Ring L', slot: 'ring_left' },
+    { label: 'Ring R', slot: 'ring_right' },
+  ],
+  [
+    { label: 'Feet', slot: 'feet' },
+    { label: 'Armor', slot: 'armor' },
+    { label: 'Shield', slot: 'shield' },
+  ],
+  [
+    { label: 'Main Hand', slot: 'main_hand' },
+    { label: 'Off Hand', slot: 'off_hand' },
+    { label: '', slot: null },
+  ],
+];
+
+// ---- SlotCellView ----
+
+interface SlotCellProps {
+  cell: SlotCell;
+  equippedItem?: DraftEquipmentItem;
+  onPickerOpen: (slot: DraftEquippedSlot) => void;
+  onUnassign: (id: string) => void;
+}
+
+function SlotCellView({ cell, equippedItem, onPickerOpen, onUnassign }: SlotCellProps) {
   const { colors, fantasy, isDark } = useTheme();
+
+  if (!cell.slot) {
+    return <View style={styles.slotEmpty} />;
+  }
+
+  const isEmpty = !equippedItem;
+
   return (
-    <View style={inputStyles.wrapper}>
-      <Text style={[inputStyles.label, { color: colors.text.secondary }]}>{label}</Text>
-      <TextInput
-        value={value}
-        onChangeText={onChangeText}
-        placeholder={placeholder}
-        placeholderTextColor={colors.text.tertiary}
-        keyboardType={keyboardType}
-        selectTextOnFocus
-        multiline={multiline}
-        numberOfLines={multiline ? 3 : 1}
-        style={[
-          inputStyles.input,
-          multiline && inputStyles.multiline,
-          {
-            color: colors.text.primary,
-            borderColor: value ? (isDark ? fantasy.gold : fantasy.bronze) : colors.border.DEFAULT,
-            backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
-          },
-        ]}
-      />
+    <View style={styles.slotCell}>
+      <Text style={[styles.slotLabel, { color: colors.text.tertiary }]}>{cell.label}</Text>
+      {isEmpty ? (
+        <Pressable
+          onPress={() => onPickerOpen(cell.slot!)}
+          style={[
+            styles.slotButton,
+            {
+              borderColor: isDark ? 'rgba(212,175,55,0.3)' : 'rgba(140,90,40,0.2)',
+              backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+            },
+          ]}
+          accessibilityRole="button"
+          accessibilityLabel={`Equip ${cell.label}`}
+        >
+          <Text style={[styles.slotPlus, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
+            +
+          </Text>
+        </Pressable>
+      ) : (
+        <View
+          style={[
+            styles.slotFilledButton,
+            {
+              borderColor: isDark ? fantasy.gold : fantasy.darkWood,
+              backgroundColor: isDark
+                ? 'rgba(212,175,55,0.12)'
+                : 'rgba(140,90,40,0.08)',
+            },
+          ]}
+        >
+          <Text
+            style={[styles.slotItemName, { color: colors.text.primary }]}
+            numberOfLines={2}
+          >
+            {equippedItem.name}
+          </Text>
+          {equippedItem.allowsHandUse && (
+            <Text style={[styles.bucklerNote, { color: fantasy.gold }]}>off-hand free</Text>
+          )}
+          <Pressable
+            onPress={() => onUnassign(equippedItem.id)}
+            hitSlop={8}
+            style={styles.removeBtn}
+          >
+            <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
+          </Pressable>
+        </View>
+      )}
     </View>
   );
 }
 
-const inputStyles = StyleSheet.create({
-  wrapper: {
-    gap: 4,
-    marginBottom: 8,
-  },
-  label: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  input: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 14,
-    borderWidth: 1,
-    borderRadius: 6,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    minHeight: 40,
-  },
-  multiline: {
-    minHeight: 72,
-    textAlignVertical: 'top',
-  },
-});
+// ---- ContainerList ----
 
-// ---- Section subheader ----
+interface ContainerListProps {
+  containers: DraftEquipmentItem[];
+  equipment: DraftEquipmentItem[];
+  onPickerOpen: (slot: PickerSlot) => void;
+  onRemove: (id: string) => void;
+}
 
-function SubHeader({ title }: { title: string }) {
-  const { colors, fantasy, isDark } = useTheme();
+function ContainerList({ containers, equipment, onPickerOpen, onRemove }: ContainerListProps) {
+  const { colors, isDark } = useTheme();
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
+
+  const toggle = (id: string) =>
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+
   return (
-    <Text style={[subStyles.title, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
-      {title}
-    </Text>
+    <View style={styles.subSection}>
+      {containers.length > 0 && (
+        <>
+          <Text style={[styles.subSectionLabel, { color: colors.text.tertiary }]}>Containers</Text>
+          {containers.map((bag) => {
+            const contents = equipment.filter((e) => e.containerId === bag.id);
+            const isOpen = expanded.has(bag.id);
+            return (
+              <View
+                key={bag.id}
+                style={[
+                  styles.containerCard,
+                  {
+                    borderColor: colors.border.DEFAULT,
+                    backgroundColor: isDark ? colors.bg.secondary : colors.bg.primary,
+                  },
+                ]}
+              >
+                <Pressable onPress={() => toggle(bag.id)} style={styles.containerHeader}>
+                  <Text style={[styles.containerName, { color: colors.text.primary }]}>
+                    {bag.name}
+                  </Text>
+                  <Text style={[styles.containerCount, { color: colors.text.tertiary }]}>
+                    {contents.length} item{contents.length !== 1 ? 's' : ''} {isOpen ? '▲' : '▼'}
+                  </Text>
+                  <Pressable onPress={() => onRemove(bag.id)} hitSlop={8}>
+                    <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
+                  </Pressable>
+                </Pressable>
+                {isOpen && (
+                  <View
+                    style={[styles.containerContents, { borderTopColor: colors.border.DEFAULT }]}
+                  >
+                    {contents.length === 0 ? (
+                      <Text style={[styles.emptyContainerText, { color: colors.text.tertiary }]}>
+                        Empty
+                      </Text>
+                    ) : (
+                      contents.map((item) => (
+                        <View key={item.id} style={styles.containerItem}>
+                          <Text
+                            style={[styles.containerItemName, { color: colors.text.primary }]}
+                          >
+                            {item.name}
+                          </Text>
+                          <Pressable onPress={() => onRemove(item.id)} hitSlop={8}>
+                            <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>
+                              ✕
+                            </Text>
+                          </Pressable>
+                        </View>
+                      ))
+                    )}
+                  </View>
+                )}
+              </View>
+            );
+          })}
+        </>
+      )}
+      <Pressable
+        onPress={() => onPickerOpen('none')}
+        style={[styles.addButton, { borderColor: colors.border.DEFAULT }]}
+        accessibilityRole="button"
+      >
+        <Text style={[styles.addButtonText, { color: colors.text.tertiary }]}>+ Add Container</Text>
+      </Pressable>
+    </View>
   );
 }
 
-const subStyles = StyleSheet.create({
-  title: {
+// ---- IounStoneSection ----
+
+interface IounStoneSectionProps {
+  stones: DraftEquipmentItem[];
+  onPickerOpen: (slot: PickerSlot) => void;
+  onRemove: (id: string) => void;
+}
+
+function IounStoneSection({ stones, onPickerOpen, onRemove }: IounStoneSectionProps) {
+  const { colors } = useTheme();
+
+  return (
+    <View style={styles.subSection}>
+      {stones.length > 0 && (
+        <>
+          <Text style={[styles.subSectionLabel, { color: colors.text.tertiary }]}>
+            Orbiting Ioun Stones
+          </Text>
+          {stones.map((stone) => (
+            <View
+              key={stone.id}
+              style={[
+                styles.iounRow,
+                { borderColor: colors.border.DEFAULT, backgroundColor: colors.bg.secondary },
+              ]}
+            >
+              <Text style={[styles.iounName, { color: colors.text.primary }]}>{stone.name}</Text>
+              <Pressable onPress={() => onRemove(stone.id)} hitSlop={8}>
+                <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
+              </Pressable>
+            </View>
+          ))}
+        </>
+      )}
+      <Pressable
+        onPress={() => onPickerOpen('orbiting')}
+        style={[styles.addButton, { borderColor: colors.border.DEFAULT }]}
+        accessibilityRole="button"
+      >
+        <Text style={[styles.addButtonText, { color: colors.text.tertiary }]}>
+          + Add Orbiting Ioun Stone
+        </Text>
+      </Pressable>
+    </View>
+  );
+}
+
+// ---- CarriedList ----
+
+function CarriedList({
+  carried,
+  onRemove,
+}: {
+  carried: DraftEquipmentItem[];
+  onRemove: (id: string) => void;
+}) {
+  const { colors } = useTheme();
+
+  if (carried.length === 0) return null;
+
+  return (
+    <View style={styles.subSection}>
+      <Text style={[styles.subSectionLabel, { color: colors.text.tertiary }]}>Carried</Text>
+      {carried.map((item) => (
+        <View
+          key={item.id}
+          style={[
+            styles.carriedRow,
+            { borderColor: colors.border.DEFAULT, backgroundColor: colors.bg.secondary },
+          ]}
+        >
+          <Text style={[styles.carriedName, { color: colors.text.primary }]}>{item.name}</Text>
+          <Pressable onPress={() => onRemove(item.id)} hitSlop={8}>
+            <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
+          </Pressable>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+// ---- Main Section ----
+
+export function EquipmentSection() {
+  const dispatch = useAppDispatch();
+  const equipment = useAppSelector((state) => state.characterEntry.draft.equipment);
+  const [pickerSlot, setPickerSlot] = useState<PickerSlot | null>(null);
+
+  const slottedItems = equipment.filter((e) => e.slot !== undefined);
+  const containers = equipment.filter((e) => e.isContainer && !e.slot);
+  const iounStones = equipment.filter((e) => e.isOrbiting && !e.slot && !e.containerId);
+  const carried = equipment.filter((e) => !e.slot && !e.containerId && !e.isContainer && !e.isOrbiting);
+
+  const getItemForSlot = (slot: DraftEquippedSlot) =>
+    slottedItems.find((e) => e.slot === slot);
+
+  const handlePickerSelect = (result: EquipmentPickerResult) => {
+    if (!pickerSlot) return;
+    const newItem: DraftEquipmentItem = {
+      id: genId(),
+      definitionId: result.definitionId,
+      collection: result.collection,
+      name: result.name,
+      allowsHandUse: result.allowsHandUse,
+      isContainer: result.isContainer,
+      isOrbiting: pickerSlot === 'orbiting' || undefined,
+    };
+    dispatch(addEquipment(newItem));
+    if (pickerSlot !== 'orbiting' && pickerSlot !== 'none') {
+      dispatch(assignEquipmentSlot({ id: newItem.id, slot: pickerSlot as DraftEquippedSlot }));
+    }
+    setPickerSlot(null);
+  };
+
+  const handleAddCustom = (name: string) => {
+    if (!pickerSlot) return;
+    const newItem: DraftEquipmentItem = {
+      id: genId(),
+      collection: 'magicItems',
+      name,
+      isContainer: pickerSlot === 'none' || undefined,
+      isOrbiting: pickerSlot === 'orbiting' || undefined,
+    };
+    dispatch(addEquipment(newItem));
+    if (pickerSlot !== 'orbiting' && pickerSlot !== 'none') {
+      dispatch(assignEquipmentSlot({ id: newItem.id, slot: pickerSlot as DraftEquippedSlot }));
+    }
+    setPickerSlot(null);
+  };
+
+  return (
+    <View style={styles.container}>
+      {/* Slot Grid */}
+      <View style={styles.slotGrid}>
+        {SLOT_ROWS.map((row, rowIdx) => (
+          <View key={rowIdx} style={styles.slotRow}>
+            {row.map((cell, colIdx) => (
+              <SlotCellView
+                key={cell.slot ?? `empty-${colIdx}`}
+                cell={cell}
+                equippedItem={cell.slot ? getItemForSlot(cell.slot) : undefined}
+                onPickerOpen={(slot) => setPickerSlot(slot)}
+                onUnassign={(id) => dispatch(unassignEquipmentSlot(id))}
+              />
+            ))}
+          </View>
+        ))}
+      </View>
+
+      {/* Containers */}
+      <ContainerList
+        containers={containers}
+        equipment={equipment}
+        onPickerOpen={(slot) => setPickerSlot(slot)}
+        onRemove={(id) => dispatch(removeEquipment(id))}
+      />
+
+      {/* Ioun Stones */}
+      <IounStoneSection
+        stones={iounStones}
+        onPickerOpen={(slot) => setPickerSlot(slot)}
+        onRemove={(id) => dispatch(removeEquipment(id))}
+      />
+
+      {/* Carried */}
+      <CarriedList
+        carried={carried}
+        onRemove={(id) => dispatch(removeEquipment(id))}
+      />
+
+      {/* Picker Modal */}
+      {pickerSlot !== null && (
+        <EquipmentPickerSheet
+          visible
+          slot={pickerSlot}
+          onSelect={handlePickerSelect}
+          onAddCustom={handleAddCustom}
+          onClose={() => setPickerSlot(null)}
+        />
+      )}
+    </View>
+  );
+}
+
+// ---- Styles ----
+
+const styles = StyleSheet.create({
+  container: { gap: 16 },
+  slotGrid: { gap: 6 },
+  slotRow: { flexDirection: 'row', gap: 6 },
+  slotCell: { flex: 1, gap: 3 },
+  slotEmpty: { flex: 1 },
+  slotLabel: {
     fontFamily: 'Cinzel',
-    fontSize: 13,
+    fontSize: 8,
     fontWeight: '700',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
-    marginTop: 4,
-    marginBottom: 6,
+    textAlign: 'center',
   },
-});
-
-// ---- Add button ----
-
-function AddButton({ label, onPress }: { label: string; onPress: () => void }) {
-  const { colors, fantasy, isDark } = useTheme();
-  return (
-    <Pressable
-      onPress={onPress}
-      style={[addBtnStyles.button, { borderColor: isDark ? fantasy.gold : colors.border.DEFAULT }]}
-      accessibilityRole="button"
-    >
-      <Text style={[addBtnStyles.text, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
-        {label}
-      </Text>
-    </Pressable>
-  );
-}
-
-const addBtnStyles = StyleSheet.create({
-  button: {
+  slotButton: {
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderRadius: 8,
+    height: 52,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  slotPlus: { fontSize: 20, fontWeight: '300', lineHeight: 24 },
+  slotFilledButton: {
+    borderWidth: 1,
+    borderRadius: 8,
+    minHeight: 52,
+    paddingHorizontal: 6,
+    paddingVertical: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 2,
+  },
+  slotItemName: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 10,
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  bucklerNote: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 8,
+    fontStyle: 'italic',
+  },
+  removeBtn: { position: 'absolute', top: 2, right: 4 },
+  removeBtnText: { fontSize: 12, fontWeight: '700' },
+  subSection: { gap: 6 },
+  subSectionLabel: {
+    fontFamily: 'Cinzel',
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+  },
+  containerCard: { borderWidth: 1, borderRadius: 8, overflow: 'hidden' },
+  containerHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    gap: 8,
+  },
+  containerName: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+    fontWeight: '700',
+    flex: 1,
+  },
+  containerCount: { fontFamily: 'LibreBaskerville', fontSize: 12 },
+  containerContents: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    gap: 6,
+  },
+  emptyContainerText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    fontStyle: 'italic',
+  },
+  containerItem: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  containerItemName: { fontFamily: 'LibreBaskerville', fontSize: 13, flex: 1 },
+  iounRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    gap: 8,
+  },
+  iounName: { fontFamily: 'LibreBaskerville', fontSize: 13, flex: 1 },
+  carriedRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    gap: 8,
+  },
+  carriedName: { fontFamily: 'LibreBaskerville', fontSize: 13, flex: 1 },
+  addButton: {
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: 'dashed',
     paddingVertical: 10,
     alignItems: 'center',
-    marginBottom: 8,
   },
-  text: {
+  addButtonText: {
     fontFamily: 'LibreBaskerville',
     fontSize: 13,
     fontWeight: '600',
-  },
-});
-
-// ================================================================
-// WEAPON
-// ================================================================
-
-interface WeaponEditModalProps {
-  visible: boolean;
-  initial: DraftWeapon;
-  onSave: (w: DraftWeapon) => void;
-  onClose: () => void;
-}
-
-function WeaponEditModal({ visible, initial, onSave, onClose }: WeaponEditModalProps) {
-  const { colors, fantasy, isDark } = useTheme();
-  const [draft, setDraft] = useState<DraftWeapon>(initial);
-
-  const patch = (p: Partial<DraftWeapon>) => setDraft((d) => ({ ...d, ...p }));
-
-  const handleSave = () => {
-    onSave(draft);
-    onClose();
-  };
-
-  // Reset when modal opens
-  React.useEffect(() => {
-    if (visible) setDraft(initial);
-  }, [visible, initial]);
-
-  return (
-    <Modal
-      visible={visible}
-      animationType="slide"
-      presentationStyle="pageSheet"
-      onRequestClose={onClose}
-    >
-      <View
-        style={[
-          modalStyles.container,
-          { backgroundColor: isDark ? colors.bg.primary : colors.bg.secondary },
-        ]}
-      >
-        <View style={[modalStyles.header, { borderBottomColor: colors.border.DEFAULT }]}>
-          <Text style={[modalStyles.title, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
-            Weapon
-          </Text>
-          <Pressable onPress={onClose} hitSlop={12}>
-            <Text style={[modalStyles.closeText, { color: colors.text.tertiary }]}>✕</Text>
-          </Pressable>
-        </View>
-        <ScrollView style={modalStyles.body} keyboardShouldPersistTaps="handled">
-          <LabeledInput
-            label="Name"
-            value={draft.name}
-            onChangeText={(t) => patch({ name: t })}
-            placeholder="e.g. Mace +4"
-          />
-          <LabeledInput
-            label="Attack bonus"
-            value={String(draft.attackBonus)}
-            onChangeText={(t) => patch({ attackBonus: parseInt(t, 10) || 0 })}
-            keyboardType="numbers-and-punctuation"
-            placeholder="+0"
-          />
-          <LabeledInput
-            label="Damage"
-            value={draft.damage}
-            onChangeText={(t) => patch({ damage: t })}
-            placeholder="1d8+8"
-          />
-          <LabeledInput
-            label="Damage type"
-            value={draft.damageType}
-            onChangeText={(t) => patch({ damageType: t })}
-            placeholder="B / P / S"
-          />
-          <LabeledInput
-            label="Crit range"
-            value={draft.critRange}
-            onChangeText={(t) => patch({ critRange: t })}
-            placeholder="20"
-          />
-          <LabeledInput
-            label="Crit multiplier"
-            value={String(draft.critMultiplier)}
-            onChangeText={(t) => patch({ critMultiplier: parseInt(t, 10) || 2 })}
-            keyboardType="number-pad"
-            placeholder="2"
-          />
-        </ScrollView>
-        <Pressable
-          onPress={handleSave}
-          style={[
-            modalStyles.saveButton,
-            { backgroundColor: isDark ? fantasy.gold : fantasy.darkWood },
-          ]}
-        >
-          <Text style={[modalStyles.saveText, { color: isDark ? '#1a1208' : '#FFFFFF' }]}>
-            Save Weapon
-          </Text>
-        </Pressable>
-      </View>
-    </Modal>
-  );
-}
-
-function WeaponCard({ weapon }: { weapon: DraftWeapon }) {
-  const { colors, fantasy, isDark } = useTheme();
-  const dispatch = useAppDispatch();
-  const [editing, setEditing] = useState(false);
-
-  const fmtBonus = (n: number) => (n >= 0 ? `+${n}` : `${n}`);
-
-  return (
-    <>
-      <View
-        style={[
-          cardStyles.card,
-          {
-            backgroundColor: isDark ? colors.bg.secondary : colors.bg.primary,
-            borderColor: colors.border.DEFAULT,
-          },
-        ]}
-      >
-        <View style={cardStyles.row}>
-          <Text style={[cardStyles.name, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
-            {weapon.name || 'Unnamed Weapon'}
-          </Text>
-          <Pressable
-            onPress={() => setEditing(true)}
-            style={cardStyles.iconBtn}
-            hitSlop={8}
-            accessibilityRole="button"
-            accessibilityLabel="Edit weapon"
-          >
-            <Text style={[cardStyles.iconText, { color: colors.text.secondary }]}>✎</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => dispatch(removeWeapon(weapon.id))}
-            style={cardStyles.iconBtn}
-            hitSlop={8}
-            accessibilityRole="button"
-            accessibilityLabel={`Remove ${weapon.name}`}
-          >
-            <Text style={[cardStyles.iconText, { color: colors.text.tertiary }]}>✕</Text>
-          </Pressable>
-        </View>
-        <Text style={[cardStyles.detail, { color: colors.text.secondary }]}>
-          {fmtBonus(weapon.attackBonus)} melee · {weapon.damage} · {weapon.damageType} ·{' '}
-          {weapon.critRange}/×{weapon.critMultiplier}
-        </Text>
-      </View>
-
-      <WeaponEditModal
-        visible={editing}
-        initial={weapon}
-        onSave={(w) => dispatch(updateWeapon(w))}
-        onClose={() => setEditing(false)}
-      />
-    </>
-  );
-}
-
-// ================================================================
-// ARMOR
-// ================================================================
-
-interface ArmorEditModalProps {
-  visible: boolean;
-  initial: DraftArmor;
-  onSave: (a: DraftArmor) => void;
-  onClose: () => void;
-}
-
-function ArmorEditModal({ visible, initial, onSave, onClose }: ArmorEditModalProps) {
-  const { colors, fantasy, isDark } = useTheme();
-  const [draft, setDraft] = useState<DraftArmor>(initial);
-  const patch = (p: Partial<DraftArmor>) => setDraft((d) => ({ ...d, ...p }));
-
-  React.useEffect(() => {
-    if (visible) setDraft(initial);
-  }, [visible, initial]);
-
-  return (
-    <Modal
-      visible={visible}
-      animationType="slide"
-      presentationStyle="pageSheet"
-      onRequestClose={onClose}
-    >
-      <View
-        style={[
-          modalStyles.container,
-          { backgroundColor: isDark ? colors.bg.primary : colors.bg.secondary },
-        ]}
-      >
-        <View style={[modalStyles.header, { borderBottomColor: colors.border.DEFAULT }]}>
-          <Text style={[modalStyles.title, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
-            Armor
-          </Text>
-          <Pressable onPress={onClose} hitSlop={12}>
-            <Text style={[modalStyles.closeText, { color: colors.text.tertiary }]}>✕</Text>
-          </Pressable>
-        </View>
-        <ScrollView style={modalStyles.body} keyboardShouldPersistTaps="handled">
-          <LabeledInput
-            label="Name"
-            value={draft.name}
-            onChangeText={(t) => patch({ name: t })}
-            placeholder="e.g. Mithral Full Plate +3"
-          />
-          <LabeledInput
-            label="AC bonus"
-            value={String(draft.acBonus)}
-            onChangeText={(t) => patch({ acBonus: parseInt(t, 10) || 0 })}
-            keyboardType="number-pad"
-            placeholder="0"
-          />
-          <LabeledInput
-            label="Max Dex"
-            value={draft.maxDex !== undefined ? String(draft.maxDex) : ''}
-            onChangeText={(t) => patch({ maxDex: t ? parseInt(t, 10) || 0 : undefined })}
-            keyboardType="number-pad"
-            placeholder="—"
-          />
-          <LabeledInput
-            label="ACP"
-            value={String(draft.acp)}
-            onChangeText={(t) => patch({ acp: parseInt(t, 10) || 0 })}
-            keyboardType="numbers-and-punctuation"
-            placeholder="0"
-          />
-        </ScrollView>
-        <Pressable
-          onPress={() => {
-            onSave(draft);
-            onClose();
-          }}
-          style={[
-            modalStyles.saveButton,
-            { backgroundColor: isDark ? fantasy.gold : fantasy.darkWood },
-          ]}
-        >
-          <Text style={[modalStyles.saveText, { color: isDark ? '#1a1208' : '#FFFFFF' }]}>
-            Save Armor
-          </Text>
-        </Pressable>
-      </View>
-    </Modal>
-  );
-}
-
-function ArmorCard({ armor }: { armor: DraftArmor }) {
-  const { colors, fantasy, isDark } = useTheme();
-  const dispatch = useAppDispatch();
-  const [editing, setEditing] = useState(false);
-
-  return (
-    <>
-      <View
-        style={[
-          cardStyles.card,
-          {
-            backgroundColor: isDark ? colors.bg.secondary : colors.bg.primary,
-            borderColor: colors.border.DEFAULT,
-          },
-        ]}
-      >
-        <View style={cardStyles.row}>
-          <Text style={[cardStyles.name, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
-            {armor.name || 'Unnamed Armor'}
-          </Text>
-          <Pressable
-            onPress={() => setEditing(true)}
-            style={cardStyles.iconBtn}
-            hitSlop={8}
-            accessibilityRole="button"
-            accessibilityLabel="Edit armor"
-          >
-            <Text style={[cardStyles.iconText, { color: colors.text.secondary }]}>✎</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => dispatch(removeArmor(armor.id))}
-            style={cardStyles.iconBtn}
-            hitSlop={8}
-            accessibilityRole="button"
-            accessibilityLabel={`Remove ${armor.name}`}
-          >
-            <Text style={[cardStyles.iconText, { color: colors.text.tertiary }]}>✕</Text>
-          </Pressable>
-        </View>
-        <Text style={[cardStyles.detail, { color: colors.text.secondary }]}>
-          AC +{armor.acBonus}
-          {armor.maxDex !== undefined ? ` · Max Dex +${armor.maxDex}` : ''}
-          {armor.acp !== 0 ? ` · ACP ${armor.acp}` : ''}
-        </Text>
-      </View>
-
-      <ArmorEditModal
-        visible={editing}
-        initial={armor}
-        onSave={(a) => dispatch(updateArmor(a))}
-        onClose={() => setEditing(false)}
-      />
-    </>
-  );
-}
-
-// ================================================================
-// MAGIC ITEM
-// ================================================================
-
-interface ItemEditModalProps {
-  visible: boolean;
-  initial: DraftMagicItem;
-  onSave: (item: DraftMagicItem) => void;
-  onClose: () => void;
-}
-
-function ItemEditModal({ visible, initial, onSave, onClose }: ItemEditModalProps) {
-  const { colors, fantasy, isDark } = useTheme();
-  const [draft, setDraft] = useState<DraftMagicItem>(initial);
-  const patch = (p: Partial<DraftMagicItem>) => setDraft((d) => ({ ...d, ...p }));
-
-  React.useEffect(() => {
-    if (visible) setDraft(initial);
-  }, [visible, initial]);
-
-  return (
-    <Modal
-      visible={visible}
-      animationType="slide"
-      presentationStyle="pageSheet"
-      onRequestClose={onClose}
-    >
-      <View
-        style={[
-          modalStyles.container,
-          { backgroundColor: isDark ? colors.bg.primary : colors.bg.secondary },
-        ]}
-      >
-        <View style={[modalStyles.header, { borderBottomColor: colors.border.DEFAULT }]}>
-          <Text style={[modalStyles.title, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
-            Magic Item
-          </Text>
-          <Pressable onPress={onClose} hitSlop={12}>
-            <Text style={[modalStyles.closeText, { color: colors.text.tertiary }]}>✕</Text>
-          </Pressable>
-        </View>
-        <ScrollView style={modalStyles.body} keyboardShouldPersistTaps="handled">
-          <LabeledInput
-            label="Name"
-            value={draft.name}
-            onChangeText={(t) => patch({ name: t })}
-            placeholder="e.g. Orange Ioun Stone"
-          />
-          <LabeledInput
-            label="Description / Effect"
-            value={draft.description}
-            onChangeText={(t) => patch({ description: t })}
-            placeholder="e.g. +1 CL all spells"
-            multiline
-          />
-          <LabeledInput
-            label="Auto-apply note"
-            value={draft.autoApplyNote ?? ''}
-            onChangeText={(t) => patch({ autoApplyNote: t || undefined })}
-            placeholder="e.g. +1 CL → Divine pool (optional)"
-          />
-        </ScrollView>
-        <Pressable
-          onPress={() => {
-            onSave(draft);
-            onClose();
-          }}
-          style={[
-            modalStyles.saveButton,
-            { backgroundColor: isDark ? fantasy.gold : fantasy.darkWood },
-          ]}
-        >
-          <Text style={[modalStyles.saveText, { color: isDark ? '#1a1208' : '#FFFFFF' }]}>
-            Save Item
-          </Text>
-        </Pressable>
-      </View>
-    </Modal>
-  );
-}
-
-function MagicItemCard({ item }: { item: DraftMagicItem }) {
-  const { colors, fantasy, isDark } = useTheme();
-  const dispatch = useAppDispatch();
-  const [editing, setEditing] = useState(false);
-
-  return (
-    <>
-      <View
-        style={[
-          cardStyles.card,
-          {
-            backgroundColor: isDark ? colors.bg.secondary : colors.bg.primary,
-            borderColor: colors.border.DEFAULT,
-          },
-        ]}
-      >
-        <View style={cardStyles.row}>
-          <Text style={[cardStyles.name, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
-            {item.name || 'Unnamed Item'}
-          </Text>
-          <Pressable
-            onPress={() => setEditing(true)}
-            style={cardStyles.iconBtn}
-            hitSlop={8}
-            accessibilityRole="button"
-            accessibilityLabel="Edit item"
-          >
-            <Text style={[cardStyles.iconText, { color: colors.text.secondary }]}>✎</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => dispatch(removeMagicItem(item.id))}
-            style={cardStyles.iconBtn}
-            hitSlop={8}
-            accessibilityRole="button"
-            accessibilityLabel={`Remove ${item.name}`}
-          >
-            <Text style={[cardStyles.iconText, { color: colors.text.tertiary }]}>✕</Text>
-          </Pressable>
-        </View>
-        {item.description ? (
-          <Text style={[cardStyles.detail, { color: colors.text.secondary }]} numberOfLines={2}>
-            {item.description}
-          </Text>
-        ) : null}
-        {item.autoApplyNote ? (
-          <Text style={[cardStyles.autoApply, { color: isDark ? fantasy.gold : fantasy.bronze }]}>
-            ⟳ {item.autoApplyNote}
-          </Text>
-        ) : null}
-      </View>
-
-      <ItemEditModal
-        visible={editing}
-        initial={item}
-        onSave={(i) => dispatch(updateMagicItem(i))}
-        onClose={() => setEditing(false)}
-      />
-    </>
-  );
-}
-
-// ================================================================
-// MAIN SECTION
-// ================================================================
-
-export function EquipmentSection() {
-  const dispatch = useAppDispatch();
-  const weapons = useAppSelector((state) => state.characterEntry.draft.weapons);
-  const armor = useAppSelector((state) => state.characterEntry.draft.armor);
-  const magicItems = useAppSelector((state) => state.characterEntry.draft.magicItems);
-
-  const blankWeapon = (): DraftWeapon => ({
-    id: genId(),
-    name: '',
-    attackBonus: 0,
-    damage: '1d6',
-    damageType: 'B',
-    critRange: '20',
-    critMultiplier: 2,
-  });
-
-  const blankArmor = (): DraftArmor => ({
-    id: genId(),
-    name: '',
-    acBonus: 0,
-    acp: 0,
-  });
-
-  const blankItem = (): DraftMagicItem => ({
-    id: genId(),
-    name: '',
-    description: '',
-  });
-
-  return (
-    <View style={styles.container}>
-      {/* Weapons */}
-      <SubHeader title="Weapons" />
-      {weapons.map((w) => (
-        <WeaponCard key={w.id} weapon={w} />
-      ))}
-      <AddButton label="+ Add Weapon" onPress={() => dispatch(addWeapon(blankWeapon()))} />
-
-      {/* Armor */}
-      <SubHeader title="Armor" />
-      {armor.map((a) => (
-        <ArmorCard key={a.id} armor={a} />
-      ))}
-      <AddButton label="+ Add Armor" onPress={() => dispatch(addArmor(blankArmor()))} />
-
-      {/* Magic Items */}
-      <SubHeader title="Magic Items" />
-      {magicItems.map((item) => (
-        <MagicItemCard key={item.id} item={item} />
-      ))}
-      <AddButton label="+ Add Magic Item" onPress={() => dispatch(addMagicItem(blankItem()))} />
-    </View>
-  );
-}
-
-// ---- Shared card styles ----
-
-const cardStyles = StyleSheet.create({
-  card: {
-    borderRadius: 8,
-    borderWidth: 1,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    marginBottom: 8,
-    gap: 4,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-  },
-  name: {
-    flex: 1,
-    fontFamily: 'LibreBaskerville',
-    fontSize: 14,
-    fontWeight: '700',
-  },
-  iconBtn: {
-    padding: 4,
-  },
-  iconText: {
-    fontSize: 16,
-  },
-  detail: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 12,
-  },
-  autoApply: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 11,
-    fontStyle: 'italic',
-  },
-});
-
-// ---- Modal styles ----
-
-const modalStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    borderBottomWidth: 1,
-  },
-  title: {
-    flex: 1,
-    fontFamily: 'Cinzel',
-    fontSize: 16,
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-  },
-  closeText: {
-    fontSize: 18,
-    fontWeight: '700',
-    padding: 4,
-  },
-  body: {
-    flex: 1,
-    padding: 16,
-  },
-  saveButton: {
-    margin: 16,
-    borderRadius: 8,
-    paddingVertical: 14,
-    alignItems: 'center',
-  },
-  saveText: {
-    fontFamily: 'Cinzel',
-    fontSize: 14,
-    fontWeight: '700',
-  },
-});
-
-const styles = StyleSheet.create({
-  container: {
-    gap: 0,
   },
 });

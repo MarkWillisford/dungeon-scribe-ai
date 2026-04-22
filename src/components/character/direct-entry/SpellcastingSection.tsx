@@ -3,7 +3,6 @@ import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
-  addSpellcastingPool,
   removeSpellcastingPool,
   updatePoolCastingAbility,
   setSpellsPerDayMisc,
@@ -12,6 +11,7 @@ import { InlinePicker } from '@/components/ui/InlinePicker';
 import { AutoComputedValue } from '@/components/ui/AutoComputedValue';
 import { GameDataService } from '@/services/GameDataService';
 import { getAbilityModifier } from '@/utils/characterComputations';
+import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import type { ExpandedClassData, SpellProgressionTable } from '@/data/classes/types';
 import {
   type DraftSpellcastingPool,
@@ -20,10 +20,6 @@ import {
 } from '@/types/characterDraft';
 
 // ---- Helpers ----
-
-function genId(): string {
-  return Math.random().toString(36).slice(2) + Date.now().toString(36);
-}
 
 function fmtSign(n: number): string {
   return n >= 0 ? `+${n}` : `${n}`;
@@ -50,48 +46,84 @@ function abilityBonusSpells(abilityMod: number, spellLevel: number): number {
 }
 
 /**
- * Returns the classes that contribute to a given pool's type.
- * Looks at spellcastingAdvancement.type — 'divine', 'arcane', or 'both'.
+ * How many of an entry's levels contribute to a specific pool.
+ * Base class: full level count. Prestige class: count of perLevel[i]
+ * pointers targeting this pool's baseClassEntryId.
  */
+interface PoolContributor {
+  entry: DraftClassEntry;
+  advancedLevels: number;
+}
+
 function getContributors(
   classes: DraftClassEntry[],
-  poolType: 'divine' | 'arcane',
-): DraftClassEntry[] {
-  return classes.filter((c) => {
-    const adv = c.spellcastingAdvancement;
-    if (!adv) return false;
-    return adv.type === poolType || adv.type === 'both' || adv.type === 'highest';
-  });
+  pool: DraftSpellcastingPool,
+  classDataMap: Map<string, ExpandedClassData>,
+): PoolContributor[] {
+  const result: PoolContributor[] = [];
+  for (const entry of classes) {
+    // The pool's base class contributes its full level.
+    if (entry.id === pool.baseClassEntryId) {
+      if (entry.level > 0) result.push({ entry, advancedLevels: entry.level });
+      continue;
+    }
+
+    // Prestige classes advance via per-level pointers, but only at the
+    // levels listed in the class's advancement spec.
+    const adv = entry.spellcastingAdvancement;
+    if (!adv) continue;
+    const spec = classDataMap.get(entry.className.toLowerCase())?.advancesSpellcasting;
+    if (!spec) continue;
+    const isAdvancingLevel = (lvl: number): boolean =>
+      spec.atLevels ? spec.atLevels.includes(lvl) : lvl >= 1 && lvl <= entry.level;
+
+    let count = 0;
+    if (adv.mode === 'single') {
+      count = adv.perLevel.filter(
+        (p, i) => isAdvancingLevel(i + 1) && p.baseClassEntryId === pool.baseClassEntryId,
+      ).length;
+    } else {
+      count = adv.perLevel.filter(
+        (p, i) =>
+          isAdvancingLevel(i + 1) &&
+          (p.arcaneBaseClassEntryId === pool.baseClassEntryId ||
+            p.divineBaseClassEntryId === pool.baseClassEntryId),
+      ).length;
+    }
+    if (count > 0) result.push({ entry, advancedLevels: count });
+  }
+  return result;
 }
 
 /**
- * Find the primary spell table key for the pool, by looking up contributing classes
- * in the static class data.
+ * Spell table for a pool is determined by its base class only — the base
+ * class's table governs what slots the caster has at each ESL.
  */
 function resolveSpellTableKey(
-  contributors: DraftClassEntry[],
-  poolType: 'divine' | 'arcane',
+  pool: DraftSpellcastingPool,
+  classes: DraftClassEntry[],
   expandedClasses: ExpandedClassData[],
 ): string {
-  for (const cls of contributors) {
-    const data = expandedClasses.find((c) => c.name.toLowerCase() === cls.className.toLowerCase());
+  const base = classes.find((c) => c.id === pool.baseClassEntryId);
+  if (base) {
+    const data = expandedClasses.find((c) => c.name.toLowerCase() === base.className.toLowerCase());
     if (data?.spellcasting.spellTableKey) return data.spellcasting.spellTableKey;
   }
-  // Default to full 9-level prepared
-  return poolType === 'divine' ? 'FULL_9_PREPARED_PER_DAY' : 'FULL_9_PREPARED_PER_DAY';
+  return 'FULL_9_PREPARED_PER_DAY';
 }
 
 /**
- * Check if any contributing class grants domain/school bonus slots.
+ * Domain/school bonus slots come from the pool's base class (e.g. Cleric).
  */
 function hasDomainSlots(
-  contributors: DraftClassEntry[],
+  pool: DraftSpellcastingPool,
+  classes: DraftClassEntry[],
   expandedClasses: ExpandedClassData[],
 ): boolean {
-  return contributors.some((cls) => {
-    const data = expandedClasses.find((c) => c.name.toLowerCase() === cls.className.toLowerCase());
-    return data?.spellcasting.domainSlots === true;
-  });
+  const base = classes.find((c) => c.id === pool.baseClassEntryId);
+  if (!base) return false;
+  const data = expandedClasses.find((c) => c.name.toLowerCase() === base.className.toLowerCase());
+  return data?.spellcasting.domainSlots === true;
 }
 
 // ---- Spells per day row ----
@@ -234,21 +266,25 @@ function PoolCard({ pool, abilityMod, expandedClasses, spellTables }: PoolCardPr
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const classes = useAppSelector((state) => state.characterEntry.draft.classes);
+  const classDataMap = useAppSelector(selectClassDataMap);
   const [spellsExpanded, setSpellsExpanded] = useState(true);
   const [contributorsExpanded, setContributorsExpanded] = useState(false);
 
   const contributors = useMemo(
-    () => getContributors(classes, pool.poolType),
-    [classes, pool.poolType],
+    () => getContributors(classes, pool, classDataMap),
+    [classes, pool, classDataMap],
   );
-  const esl = useMemo(() => contributors.reduce((sum, c) => sum + c.level, 0), [contributors]);
+  const esl = useMemo(
+    () => contributors.reduce((sum, c) => sum + c.advancedLevels, 0),
+    [contributors],
+  );
   const tableKey = useMemo(
-    () => resolveSpellTableKey(contributors, pool.poolType, expandedClasses),
-    [contributors, pool.poolType, expandedClasses],
+    () => resolveSpellTableKey(pool, classes, expandedClasses),
+    [pool, classes, expandedClasses],
   );
   const domainSlots = useMemo(
-    () => hasDomainSlots(contributors, expandedClasses),
-    [contributors, expandedClasses],
+    () => hasDomainSlots(pool, classes, expandedClasses),
+    [pool, classes, expandedClasses],
   );
 
   const spellTable = spellTables[tableKey];
@@ -307,11 +343,12 @@ function PoolCard({ pool, abilityMod, expandedClasses, spellTables }: PoolCardPr
         </Pressable>
       </View>
 
-      {/* ESL / CL / DC summary */}
+      {/* ESL / CL / DC / Concentration summary */}
       <View style={poolStyles.summaryRow}>
-        <AutoComputedValue value={`ESL ${esl}`} label="ESL" />
-        <AutoComputedValue value={`CL ${esl}`} label="CL" />
-        <AutoComputedValue value={`DC ${dcBase} + lvl`} label="Spell DC" />
+        <AutoComputedValue value={`${esl}`} label="ESL" />
+        <AutoComputedValue value={`${esl}`} label="CL" />
+        <AutoComputedValue value={`${dcBase} + lvl`} label="Spell DC" />
+        <AutoComputedValue value={fmtSign(esl + abilityMod)} label="Concentration" />
         <Text style={[poolStyles.abilityMod, { color: colors.text.secondary }]}>
           {pool.castingAbility.toUpperCase()} {fmtSign(abilityMod)}
         </Text>
@@ -335,10 +372,10 @@ function PoolCard({ pool, abilityMod, expandedClasses, spellTables }: PoolCardPr
               No classes marked as contributing — set spellcasting advancement in Classes tab.
             </Text>
           ) : (
-            contributors.map((cls) => (
-              <View key={cls.id} style={poolStyles.contributorRow}>
+            contributors.map((c) => (
+              <View key={c.entry.id} style={poolStyles.contributorRow}>
                 <Text style={[poolStyles.contributorName, { color: colors.text.primary }]}>
-                  {cls.className}
+                  {c.entry.className}
                 </Text>
                 <Text
                   style={[
@@ -346,7 +383,7 @@ function PoolCard({ pool, abilityMod, expandedClasses, spellTables }: PoolCardPr
                     { color: isDark ? fantasy.gold : fantasy.bronze },
                   ]}
                 >
-                  {cls.level}
+                  {c.advancedLevels}
                 </Text>
               </View>
             ))
@@ -511,8 +548,7 @@ const poolStyles = StyleSheet.create({
 // ---- Main section ----
 
 export function SpellcastingSection() {
-  const { colors, fantasy, isDark } = useTheme();
-  const dispatch = useAppDispatch();
+  const { colors } = useTheme();
   const pools = useAppSelector((state) => state.characterEntry.draft.spellcastingPools);
   const abilities = useAppSelector((state) => state.characterEntry.draft.abilities);
   const [expandedClasses, setExpandedClasses] = useState<ExpandedClassData[]>([]);
@@ -539,23 +575,13 @@ export function SpellcastingSection() {
     [abilities],
   );
 
-  const addPool = (poolType: 'divine' | 'arcane') => {
-    dispatch(
-      addSpellcastingPool({
-        id: genId(),
-        poolType,
-        castingAbility: poolType === 'divine' ? 'wis' : 'int',
-        spellsPerDayMisc: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      }),
-    );
-  };
-
   return (
     <View style={styles.container}>
       {pools.length === 0 && (
         <View style={styles.emptyState}>
           <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-            No spellcasting pools yet. Add a Divine or Arcane pool below.
+            No spellcasting pools yet. Add a caster class on the Classes tab to create its pool
+            automatically.
           </Text>
         </View>
       )}
@@ -569,29 +595,6 @@ export function SpellcastingSection() {
           spellTables={spellTables}
         />
       ))}
-
-      <View style={styles.addRow}>
-        <Pressable
-          onPress={() => addPool('divine')}
-          style={[styles.addButton, { borderColor: isDark ? '#8B5CF6' : '#7C3AED' }]}
-          accessibilityRole="button"
-          accessibilityLabel="Add divine pool"
-        >
-          <Text style={[styles.addButtonText, { color: isDark ? '#A78BFA' : '#7C3AED' }]}>
-            + Divine Pool
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={() => addPool('arcane')}
-          style={[styles.addButton, { borderColor: isDark ? '#3B82F6' : '#2563EB' }]}
-          accessibilityRole="button"
-          accessibilityLabel="Add arcane pool"
-        >
-          <Text style={[styles.addButtonText, { color: isDark ? '#60A5FA' : '#2563EB' }]}>
-            + Arcane Pool
-          </Text>
-        </Pressable>
-      </View>
     </View>
   );
 }

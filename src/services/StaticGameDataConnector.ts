@@ -37,6 +37,17 @@ import { CORE_CLASSES } from '@/data/classes';
 import { ALL_EXPANDED_CLASSES, SPELL_TABLES } from '@/data/classes/index';
 import { getDefinitionsForClass } from '@/data/classChoiceDefinitions/index';
 import { ALL_WEAPONS, ALL_ARMOR, ALL_SHIELDS, ALL_GEAR } from '@/data/equipment';
+import { ALL_ARCHETYPES } from '@/data/classes/archetypes/index';
+import {
+  ALL_WONDROUS_ITEMS,
+  ALL_RINGS,
+  ALL_STAVES,
+  ALL_RODS,
+  ALL_MAGIC_WEAPONS,
+  ALL_MAGIC_ARMOR,
+  ALL_IOUN_STONES,
+} from '@/data/magicItems/index';
+import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
 import {
   CORE_RACES,
   FEATURED_RACES,
@@ -45,6 +56,7 @@ import {
   ALL_EXPANDED_RACES,
 } from '@/data/races';
 
+import type { ArchetypeData } from '@/data/classes/types';
 import type { FeatDefinition } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type {
@@ -56,8 +68,16 @@ import type {
   GameDataConnector,
   ClassChoiceCollection,
   ClassChoiceFilters,
+  ManeuverFilter,
+  DisciplineFilter,
 } from './GameDataConnector';
 import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
+import type {
+  DisciplineDefinition,
+  ManeuverDefinition,
+  StanceDefinition,
+  MartialTradition,
+} from '@/types/initiating';
 
 export class StaticGameDataConnector implements GameDataConnector {
   async getClassChoiceOptions(
@@ -212,6 +232,10 @@ export class StaticGameDataConnector implements GameDataConnector {
     return ALL_EXPANDED_CLASSES;
   }
 
+  async getClassesAll() {
+    return ALL_EXPANDED_CLASSES;
+  }
+
   async getCoreClasses() {
     return CORE_CLASSES;
   }
@@ -251,5 +275,56 @@ export class StaticGameDataConnector implements GameDataConnector {
 
   async getGear() {
     return ALL_GEAR;
+  }
+
+  async getArchetypesByClass(className: string, _context?: QueryContext): Promise<ArchetypeData[]> {
+    return ALL_ARCHETYPES.filter((a) => a.className === className);
+  }
+
+  async getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]> {
+    const all: MagicItemDefinition[] = [
+      ...(ALL_WONDROUS_ITEMS as MagicItemDefinition[]),
+      ...(ALL_RINGS as MagicItemDefinition[]),
+      ...(ALL_STAVES as MagicItemDefinition[]),
+      ...(ALL_RODS as MagicItemDefinition[]),
+      ...(ALL_MAGIC_WEAPONS as MagicItemDefinition[]),
+      ...(ALL_MAGIC_ARMOR as MagicItemDefinition[]),
+      ...(ALL_IOUN_STONES as MagicItemDefinition[]),
+    ];
+    return Promise.resolve(all.filter((item) => item.slot === slot));
+  }
+
+  // ---- Initiating system (no static data yet — Phase 9 seeds Firestore) ------
+
+  async getDisciplines(_filter?: DisciplineFilter): Promise<DisciplineDefinition[]> {
+    return [];
+  }
+
+  async getDisciplineById(_id: string): Promise<DisciplineDefinition | null> {
+    return null;
+  }
+
+  async getManeuvers(_filter?: ManeuverFilter): Promise<ManeuverDefinition[]> {
+    return [];
+  }
+
+  async getManeuverById(_id: string): Promise<ManeuverDefinition | null> {
+    return null;
+  }
+
+  async getStances(_filter?: ManeuverFilter): Promise<StanceDefinition[]> {
+    return [];
+  }
+
+  async getStanceById(_id: string): Promise<StanceDefinition | null> {
+    return null;
+  }
+
+  async getMartialTraditions(): Promise<MartialTradition[]> {
+    return [];
+  }
+
+  async getMartialTraditionById(_id: string): Promise<MartialTradition | null> {
+    return null;
   }
 }

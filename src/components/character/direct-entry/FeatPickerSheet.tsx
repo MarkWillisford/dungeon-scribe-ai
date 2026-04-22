@@ -49,6 +49,7 @@ interface FeatItem {
   label: string;
   types: FeatDefinition['types'];
   prereqSummary?: string;
+  description?: string;
 }
 
 function buildPrereqSummary(feat: FeatDefinition): string | undefined {
@@ -91,6 +92,7 @@ async function getFeatItems(): Promise<FeatItem[]> {
     label: f.name,
     types: f.types,
     prereqSummary: buildPrereqSummary(f),
+    description: f.description?.slice(0, 120),
   }));
   FEAT_ITEMS_CACHE_AT = Date.now();
   return FEAT_ITEMS_CACHE;
@@ -128,7 +130,10 @@ export function FeatPickerSheet({ visible, title, onSelect, onClose }: FeatPicke
     if (!q) return allItems.slice(0, 80); // cap initial list for performance
     return allItems.filter(
       (item) =>
-        item.label.toLowerCase().includes(q) || item.prereqSummary?.toLowerCase().includes(q),
+        item.label.toLowerCase().includes(q) ||
+        item.prereqSummary?.toLowerCase().includes(q) ||
+        item.description?.toLowerCase().includes(q) ||
+        item.types.some((t) => t.toLowerCase().includes(q)),
     );
   }, [allItems, query]);
 

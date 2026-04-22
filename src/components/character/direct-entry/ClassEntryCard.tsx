@@ -7,13 +7,16 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   removeClass,
   updateClassLevel,
+  updateClassArchetype,
   updateClassSpellcastingAdvancement,
   toggleClassPrereqOverride,
 } from '@/store/slices/characterEntrySlice';
-import { type DraftClassEntry } from '@/types/characterDraft';
+import { type DraftClassEntry, type SpellcastingAdvancement } from '@/types/characterDraft';
 import { GameDataService } from '@/services/GameDataService';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { type ClassChoice } from '@/types/classes';
+import { selectClassDataMap } from '@/store/slices/gameDataSlice';
+import { ArchetypePickerSheet } from './ArchetypePickerSheet';
 
 // Pairs of featureNames that are mutually exclusive — filling one disables the other.
 const MUTUALLY_EXCLUSIVE_PAIRS: [string, string][] = [['Domain', 'Inquisition']];
@@ -115,15 +118,312 @@ function deriveChoiceSlots(definition: ClassChoiceDefinition, classLevel: number
   return slots;
 }
 
-// ---- Main card ----
+// ---- Spellcasting advancement controls ----
 
-const SPELLCASTING_ADVANCEMENT_OPTIONS = [
-  { label: 'Divine', value: 'divine' },
-  { label: 'Arcane', value: 'arcane' },
-  { label: 'Both', value: 'both' },
-  { label: 'Highest', value: 'highest' },
-  { label: 'Chosen', value: 'chosen' },
-];
+export function makeEmptyAdvancement(
+  mode: 'single' | 'both',
+  level: number,
+): SpellcastingAdvancement {
+  if (mode === 'single') {
+    return { mode, perLevel: Array.from({ length: level }, () => ({ baseClassEntryId: '' })) };
+  }
+  return {
+    mode,
+    perLevel: Array.from({ length: level }, () => ({
+      arcaneBaseClassEntryId: '',
+      divineBaseClassEntryId: '',
+    })),
+  };
+}
+
+function AdvancementControls({ entry }: { entry: DraftClassEntry }) {
+  const { colors, fantasy, isDark } = useTheme();
+  const dispatch = useAppDispatch();
+  const classes = useAppSelector((state) => state.characterEntry.draft.classes);
+  const classDataMap = useAppSelector(selectClassDataMap);
+  const [showPerLevel, setShowPerLevel] = useState(false);
+
+  const adv = entry.spellcastingAdvancement;
+  if (!adv) return null;
+
+  const spec = classDataMap.get(entry.className.toLowerCase())?.advancesSpellcasting;
+  if (!spec) return null;
+
+  const getTradition = (className: string): 'divine' | 'arcane' | null => {
+    const data = classDataMap.get(className.toLowerCase());
+    const t = data?.spellcasting.type;
+    return t === 'Divine' ? 'divine' : t === 'Arcane' ? 'arcane' : null;
+  };
+
+  const isAdvancingLevel = (lvl: number): boolean =>
+    spec.atLevels ? spec.atLevels.includes(lvl) : lvl >= 1 && lvl <= entry.level;
+
+  // Eligible = base caster (has spellcasting AND not itself an advancer)
+  // AND appears BEFORE this entry in the draft.classes array (must already
+  // exist in the character's timeline at the point this prestige level is
+  // taken).
+  const entryIndex = classes.findIndex((c) => c.id === entry.id);
+  const isBaseCaster = (className: string): boolean => {
+    const data = classDataMap.get(className.toLowerCase());
+    if (!data) return false;
+    if (data.spellcasting.type === 'None') return false;
+    if (data.advancesSpellcasting) return false;
+    return true;
+  };
+
+  // Apply tradition filter for 'single' mode (ignored in 'both' — the two
+  // pickers each get their own tradition-locked list below).
+  const traditionOk = (className: string): boolean => {
+    if (adv.mode === 'both') return true;
+    const t = getTradition(className);
+    if (!t) return false;
+    if (!spec.tradition || spec.tradition === 'chosen') return true;
+    return t === spec.tradition;
+  };
+
+  const eligibleAny = classes.filter((c, idx) => {
+    if (c.id === entry.id) return false;
+    if (idx >= entryIndex) return false;
+    if (!isBaseCaster(c.className)) return false;
+    return traditionOk(c.className);
+  });
+  const eligibleArcane = classes.filter(
+    (c, idx) =>
+      c.id !== entry.id &&
+      idx < entryIndex &&
+      isBaseCaster(c.className) &&
+      getTradition(c.className) === 'arcane',
+  );
+  const eligibleDivine = classes.filter(
+    (c, idx) =>
+      c.id !== entry.id &&
+      idx < entryIndex &&
+      isBaseCaster(c.className) &&
+      getTradition(c.className) === 'divine',
+  );
+
+  const setAllSingle = (targetId: string) => {
+    dispatch(
+      updateClassSpellcastingAdvancement({
+        id: entry.id,
+        advancement: {
+          mode: 'single',
+          perLevel: Array.from({ length: entry.level }, () => ({ baseClassEntryId: targetId })),
+        },
+      }),
+    );
+  };
+
+  const setAllBoth = (
+    field: 'arcaneBaseClassEntryId' | 'divineBaseClassEntryId',
+    targetId: string,
+  ) => {
+    if (adv.mode !== 'both') return;
+    const next = adv.perLevel.map((p) => ({ ...p, [field]: targetId }));
+    dispatch(
+      updateClassSpellcastingAdvancement({
+        id: entry.id,
+        advancement: { mode: 'both', perLevel: next },
+      }),
+    );
+  };
+
+  const setLevelSingle = (levelIdx: number, targetId: string) => {
+    if (adv.mode !== 'single') return;
+    const next = adv.perLevel.map((p, i) => (i === levelIdx ? { baseClassEntryId: targetId } : p));
+    dispatch(
+      updateClassSpellcastingAdvancement({
+        id: entry.id,
+        advancement: { mode: 'single', perLevel: next },
+      }),
+    );
+  };
+
+  const setLevelBoth = (
+    levelIdx: number,
+    field: 'arcaneBaseClassEntryId' | 'divineBaseClassEntryId',
+    targetId: string,
+  ) => {
+    if (adv.mode !== 'both') return;
+    const next = adv.perLevel.map((p, i) => (i === levelIdx ? { ...p, [field]: targetId } : p));
+    dispatch(
+      updateClassSpellcastingAdvancement({
+        id: entry.id,
+        advancement: { mode: 'both', perLevel: next },
+      }),
+    );
+  };
+
+  // Detect whether every advancing level shares the same target (collapsed view works).
+  // Skip levels' stored pointers are irrelevant — they never render or contribute.
+  const advancingEntries = adv.perLevel
+    .map((p, i) => ({ p, levelNum: i + 1 }))
+    .filter(({ levelNum }) => isAdvancingLevel(levelNum));
+
+  const allSameSingle =
+    adv.mode === 'single' &&
+    advancingEntries.length > 0 &&
+    advancingEntries.every(
+      ({ p }) =>
+        (p as { baseClassEntryId: string }).baseClassEntryId ===
+        (advancingEntries[0].p as { baseClassEntryId: string }).baseClassEntryId,
+    );
+  const allSameBoth =
+    adv.mode === 'both' &&
+    advancingEntries.length > 0 &&
+    advancingEntries.every(
+      ({ p }) =>
+        (p as { arcaneBaseClassEntryId: string; divineBaseClassEntryId: string })
+          .arcaneBaseClassEntryId ===
+          (
+            advancingEntries[0].p as {
+              arcaneBaseClassEntryId: string;
+              divineBaseClassEntryId: string;
+            }
+          ).arcaneBaseClassEntryId &&
+        (p as { arcaneBaseClassEntryId: string; divineBaseClassEntryId: string })
+          .divineBaseClassEntryId ===
+          (
+            advancingEntries[0].p as {
+              arcaneBaseClassEntryId: string;
+              divineBaseClassEntryId: string;
+            }
+          ).divineBaseClassEntryId,
+    );
+
+  const toOptions = (arr: typeof classes) =>
+    arr.map((c) => ({ label: `${c.className} ${c.level}`, value: c.id }));
+
+  return (
+    <View style={styles.advancementPanel}>
+      <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>
+        {adv.mode === 'both'
+          ? 'Advances one arcane + one divine caster per level:'
+          : 'Advances a base caster per level:'}
+      </Text>
+
+      {/* Collapsed "all levels" pickers — only shown when every level is the same */}
+      {!showPerLevel && allSameSingle && (
+        <View style={styles.advancementRow}>
+          <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>All levels</Text>
+          {eligibleAny.length === 0 ? (
+            <Text style={[styles.advancementHint, { color: colors.text.tertiary }]}>
+              Add a caster class first.
+            </Text>
+          ) : (
+            <InlinePicker
+              value={(advancingEntries[0].p as { baseClassEntryId: string }).baseClassEntryId}
+              options={[{ label: '—— pick one ——', value: '' }, ...toOptions(eligibleAny)]}
+              onValueChange={setAllSingle}
+              style={styles.advancementPicker}
+            />
+          )}
+        </View>
+      )}
+
+      {!showPerLevel && allSameBoth && adv.mode === 'both' && (
+        <>
+          <View style={styles.advancementRow}>
+            <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>All arcane</Text>
+            <InlinePicker
+              value={
+                (
+                  advancingEntries[0].p as {
+                    arcaneBaseClassEntryId: string;
+                    divineBaseClassEntryId: string;
+                  }
+                ).arcaneBaseClassEntryId
+              }
+              options={[{ label: '—— pick one ——', value: '' }, ...toOptions(eligibleArcane)]}
+              onValueChange={(v) => setAllBoth('arcaneBaseClassEntryId', v)}
+              style={styles.advancementPicker}
+            />
+          </View>
+          <View style={styles.advancementRow}>
+            <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>All divine</Text>
+            <InlinePicker
+              value={
+                (
+                  advancingEntries[0].p as {
+                    arcaneBaseClassEntryId: string;
+                    divineBaseClassEntryId: string;
+                  }
+                ).divineBaseClassEntryId
+              }
+              options={[{ label: '—— pick one ——', value: '' }, ...toOptions(eligibleDivine)]}
+              onValueChange={(v) => setAllBoth('divineBaseClassEntryId', v)}
+              style={styles.advancementPicker}
+            />
+          </View>
+        </>
+      )}
+
+      {/* Per-level view — only levels that actually advance spellcasting
+          per the class's atLevels spec get a row. Skip levels render nothing. */}
+      {(showPerLevel || (!allSameSingle && !allSameBoth)) && (
+        <View style={styles.perLevelList}>
+          {adv.perLevel.map((p, i) => {
+            if (!isAdvancingLevel(i + 1)) return null;
+            return adv.mode === 'single' ? (
+              <View key={i} style={styles.advancementRow}>
+                <Text style={[styles.perLevelLabel, { color: colors.text.tertiary }]}>
+                  Lvl {i + 1}
+                </Text>
+                <InlinePicker
+                  value={(p as { baseClassEntryId: string }).baseClassEntryId}
+                  options={[{ label: '—— pick one ——', value: '' }, ...toOptions(eligibleAny)]}
+                  onValueChange={(v) => setLevelSingle(i, v)}
+                  style={styles.advancementPicker}
+                />
+              </View>
+            ) : (
+              <View key={i} style={styles.advancementRow}>
+                <Text style={[styles.perLevelLabel, { color: colors.text.tertiary }]}>
+                  Lvl {i + 1}
+                </Text>
+                <InlinePicker
+                  value={
+                    (p as { arcaneBaseClassEntryId: string; divineBaseClassEntryId: string })
+                      .arcaneBaseClassEntryId
+                  }
+                  options={[{ label: 'arcane ——', value: '' }, ...toOptions(eligibleArcane)]}
+                  onValueChange={(v) => setLevelBoth(i, 'arcaneBaseClassEntryId', v)}
+                  style={styles.advancementPicker}
+                />
+                <InlinePicker
+                  value={
+                    (p as { arcaneBaseClassEntryId: string; divineBaseClassEntryId: string })
+                      .divineBaseClassEntryId
+                  }
+                  options={[{ label: 'divine ——', value: '' }, ...toOptions(eligibleDivine)]}
+                  onValueChange={(v) => setLevelBoth(i, 'divineBaseClassEntryId', v)}
+                  style={styles.advancementPicker}
+                />
+              </View>
+            );
+          })}
+        </View>
+      )}
+
+      {/* Toggle per-level view (only meaningful if all-same is possible) */}
+      {(allSameSingle || allSameBoth) && (
+        <Pressable
+          onPress={() => setShowPerLevel((v) => !v)}
+          style={styles.perLevelToggle}
+          accessibilityRole="button"
+        >
+          <Text
+            style={[styles.perLevelToggleText, { color: isDark ? fantasy.gold : fantasy.bronze }]}
+          >
+            {showPerLevel ? '▾ Collapse to single picker' : '▸ Customize per level'}
+          </Text>
+        </Pressable>
+      )}
+    </View>
+  );
+}
+
+// ---- Main card ----
 
 interface ClassEntryCardProps {
   entry: DraftClassEntry;
@@ -133,32 +433,58 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [choicesExpanded, setChoicesExpanded] = useState(false);
+  const [archetypePickerOpen, setArchetypePickerOpen] = useState(false);
   const [definitions, setDefinitions] = useState<ClassChoiceDefinition[]>([]);
+  const [archetypeLoadedClass, setArchetypeLoadedClass] = useState<string | null>(null);
+  const [archetypeExists, setArchetypeExists] = useState(false);
+  const hasArchetypes = archetypeLoadedClass === entry.className ? archetypeExists : null;
   const characterDeity = useAppSelector((state) => state.characterEntry.draft.deity);
+  const classDataMap = useAppSelector(selectClassDataMap);
 
   useEffect(() => {
     GameDataService.getClassChoiceDefinitions(entry.className)
       .then(setDefinitions)
       .catch((e) => console.error('Failed to load class choice definitions:', e));
+    let cancelled = false;
+    GameDataService.getArchetypesByClass(entry.className)
+      .then((archetypes) => {
+        if (!cancelled) {
+          setArchetypeExists(archetypes.length > 0);
+          setArchetypeLoadedClass(entry.className);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setArchetypeExists(false);
+          setArchetypeLoadedClass(entry.className);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
   }, [entry.className]);
 
   const allSlots = definitions.flatMap((def) => deriveChoiceSlots(def, entry.level));
   const hasChoices = allSlots.length > 0;
 
-  const advancesSpellcasting = !!entry.spellcastingAdvancement;
-
-  const toggleSpellcasting = () => {
-    if (advancesSpellcasting) {
-      dispatch(updateClassSpellcastingAdvancement({ id: entry.id, advancement: undefined }));
-    } else {
-      dispatch(
-        updateClassSpellcastingAdvancement({
-          id: entry.id,
-          advancement: { type: 'divine' },
-        }),
-      );
+  // Whether and how this class advances spellcasting is a class-data fact,
+  // not a user choice. If the data says it advances, we auto-ensure a
+  // matching spellcastingAdvancement exists on the draft entry.
+  const advancesSpec = classDataMap.get(entry.className.toLowerCase())?.advancesSpellcasting;
+  useEffect(() => {
+    if (!advancesSpec) return;
+    const current = entry.spellcastingAdvancement;
+    if (current && current.mode === advancesSpec.mode && current.perLevel.length === entry.level) {
+      return;
     }
-  };
+    // Mode mismatch or length mismatch — reinitialize.
+    dispatch(
+      updateClassSpellcastingAdvancement({
+        id: entry.id,
+        advancement: makeEmptyAdvancement(advancesSpec.mode, entry.level),
+      }),
+    );
+  }, [advancesSpec, entry.id, entry.level, entry.spellcastingAdvancement, dispatch]);
 
   return (
     <View
@@ -208,64 +534,41 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           ]}
           accessibilityLabel="Class level"
         />
-        <Text style={[styles.fieldLabel, { color: colors.text.secondary, marginLeft: 12 }]}>
-          Archetype
-        </Text>
-        <Text style={[styles.archetypePlaceholder, { color: colors.text.tertiary }]}>
-          {entry.archetypeName ?? 'none 🔍'}
-        </Text>
+        {hasArchetypes !== false && (
+          <Pressable
+            onPress={() => setArchetypePickerOpen(true)}
+            disabled={hasArchetypes === null}
+            style={styles.archetypeButton}
+            accessibilityRole="button"
+            accessibilityLabel="Choose archetype"
+          >
+            <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Archetype</Text>
+            <Text
+              style={[
+                styles.archetypePlaceholder,
+                { color: entry.archetypeName ? colors.text.primary : colors.text.tertiary },
+              ]}
+            >
+              {hasArchetypes === null ? '…' : (entry.archetypeName ?? 'none 🔍')}
+            </Text>
+          </Pressable>
+        )}
       </View>
 
-      {/* Spellcasting advancement */}
-      <Pressable
-        onPress={toggleSpellcasting}
-        style={styles.row}
-        accessibilityRole="checkbox"
-        accessibilityState={{ checked: advancesSpellcasting }}
-        accessibilityLabel="Advances spellcasting"
-      >
-        <View
-          style={[
-            styles.checkbox,
-            {
-              borderColor: advancesSpellcasting ? fantasy.gold : colors.border.DEFAULT,
-              backgroundColor: advancesSpellcasting
-                ? isDark
-                  ? 'rgba(212,175,55,0.2)'
-                  : 'rgba(140,90,40,0.1)'
-                : 'transparent',
-            },
-          ]}
-        >
-          {advancesSpellcasting && (
-            <Text style={[styles.checkmark, { color: fantasy.gold }]}>✓</Text>
-          )}
-        </View>
-        <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>
-          Advances spellcasting
-        </Text>
-        {advancesSpellcasting && (
-          <InlinePicker
-            value={entry.spellcastingAdvancement!.type}
-            options={SPELLCASTING_ADVANCEMENT_OPTIONS}
-            onValueChange={(v) =>
-              dispatch(
-                updateClassSpellcastingAdvancement({
-                  id: entry.id,
-                  advancement: {
-                    type: v as DraftClassEntry['spellcastingAdvancement'] extends
-                      | { type: infer T }
-                      | undefined
-                      ? T
-                      : never,
-                  },
-                }),
-              )
-            }
-            style={styles.advancementPicker}
-          />
-        )}
-      </Pressable>
+      <ArchetypePickerSheet
+        visible={archetypePickerOpen}
+        title={`${entry.className} — Choose Archetype`}
+        className={entry.className}
+        onSelect={({ archetypeId, archetypeName }) => {
+          dispatch(updateClassArchetype({ id: entry.id, archetypeId, archetypeName }));
+          setArchetypePickerOpen(false);
+        }}
+        onClose={() => setArchetypePickerOpen(false)}
+      />
+
+      {/* Spellcasting advancement — rendered only when class data signals
+          this class is a prestige advancer. No user toggle. */}
+      {advancesSpec && <AdvancementControls entry={entry} />}
 
       {/* Class choices */}
       {hasChoices && (
@@ -409,6 +712,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     minHeight: 38,
   },
+  archetypeButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+    gap: 8,
+  },
   archetypePlaceholder: {
     fontFamily: 'LibreBaskerville',
     fontSize: 13,
@@ -431,6 +740,39 @@ const styles = StyleSheet.create({
   advancementPicker: {
     flex: 1,
     marginBottom: 0,
+  },
+  advancementPanel: {
+    paddingHorizontal: 12,
+    paddingBottom: 8,
+    gap: 4,
+  },
+  advancementRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  advancementHint: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    fontStyle: 'italic',
+    flex: 1,
+  },
+  perLevelLabel: {
+    fontFamily: 'Cinzel',
+    fontSize: 11,
+    fontWeight: '700',
+    width: 48,
+  },
+  perLevelList: {
+    gap: 4,
+  },
+  perLevelToggle: {
+    paddingVertical: 4,
+  },
+  perLevelToggleText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    fontStyle: 'italic',
   },
   choicesHeader: {
     flexDirection: 'row',

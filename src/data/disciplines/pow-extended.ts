@@ -18,7 +18,7 @@ export const POW_EXTENDED_DISCIPLINES: DisciplineDefinition[] = [
     description:
       'The secrets of the Black Seraph discipline are taught by possessing fiends and demonic tutors to their pawns, as a way of enticing fools who desire power into learning their secrets — or on occasion seized by those with wills strong enough to tear those secrets from their infernal prisoners. This dark martial path emphasizes devastating two-handed strikes, vicious counters, intimidation, and ruthless tactics.',
     associatedSkill: 'Intimidate',
-    associatedWeaponGroups: ['axes', 'flails', 'pole arms'],
+    associatedWeaponGroups: ['axes', 'flails', 'polearms'],
     sourceSystem: 'pow-extended',
     source: POWE_SOURCE,
     isOfficial: false,
@@ -60,7 +60,7 @@ export const POW_EXTENDED_DISCIPLINES: DisciplineDefinition[] = [
     description:
       'One legend claims Eternal Guardian was created by the god who first separated the planes, dividing the mortal from the immortal; another insists it was founded by a single warrior who swore to defend his city from an entire invading army. The discipline centers on unwavering devotion to protecting allies or cursing foes who would harm what its practitioners have sworn to defend.',
     associatedSkill: 'Intimidate',
-    associatedWeaponGroups: ['hammers', 'heavy blades', 'pole arms'],
+    associatedWeaponGroups: ['hammers', 'heavy blades', 'polearms'],
     sourceSystem: 'pow-extended',
     source: POWE_SOURCE,
     isOfficial: false,
@@ -74,7 +74,7 @@ export const POW_EXTENDED_DISCIPLINES: DisciplineDefinition[] = [
     description:
       'Like the flashing rapids, thundering waterfalls, and deep, silent depths of the ocean, disciples of Mithral Current embody the many forms and ever-changing nature of water. Its practitioners flow between offense and defense with fluid grace, drawing, striking, and sheathing their blades in a single continuous motion.',
     associatedSkill: 'Perform (dance)',
-    associatedWeaponGroups: ['light blades', 'heavy blades', 'pole arms'],
+    associatedWeaponGroups: ['light blades', 'heavy blades', 'polearms'],
     sourceSystem: 'pow-extended',
     source: POWE_SOURCE,
     isOfficial: false,
@@ -88,7 +88,7 @@ export const POW_EXTENDED_DISCIPLINES: DisciplineDefinition[] = [
     description:
       'The Piercing Thunder discipline finds its traditions rooted in one of the oldest weapons known to intelligent beings: the spear. This martial practice emphasizes overwhelming force through reach and mobility, demonstrating that mastery of the pole and spear speaks louder than rank or title.',
     associatedSkill: 'Acrobatics',
-    associatedWeaponGroups: ['pole arms', 'spears'],
+    associatedWeaponGroups: ['polearms', 'spears'],
     sourceSystem: 'pow-extended',
     source: POWE_SOURCE,
     isOfficial: false,

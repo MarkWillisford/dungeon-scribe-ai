@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setCombatField } from '@/store/slices/characterEntrySlice';
@@ -10,8 +10,10 @@ import {
   computeBaseFort,
   computeBaseRef,
   computeBaseWill,
+  computeMaxHP,
   getAbilityModifier,
 } from '@/utils/characterComputations';
+import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { type DraftCombatStats } from '@/types/characterDraft';
 
 // ---- Helpers ----
@@ -100,6 +102,7 @@ export function CombatStatsSection() {
   const combat = useAppSelector((state) => state.characterEntry.draft.combat);
   const classes = useAppSelector((state) => state.characterEntry.draft.classes);
   const abilities = useAppSelector((state) => state.characterEntry.draft.abilities);
+  const classDataMap = useAppSelector(selectClassDataMap);
 
   const set = (field: keyof DraftCombatStats, value: number | undefined) =>
     dispatch(setCombatField({ field, value }));
@@ -110,11 +113,15 @@ export function CombatStatsSection() {
   const wisMod = useMemo(() => getAbilityModifier(abilities, 'wis'), [abilities]);
   const conMod = useMemo(() => getAbilityModifier(abilities, 'con'), [abilities]);
 
-  const totalBAB = useMemo(() => computeTotalBAB(classes), [classes]);
+  const computedMaxHP = useMemo(
+    () => computeMaxHP(classes, conMod, classDataMap),
+    [classes, conMod, classDataMap],
+  );
+  const totalBAB = useMemo(() => computeTotalBAB(classes, classDataMap), [classes, classDataMap]);
   const babString = useMemo(() => formatBABString(totalBAB), [totalBAB]);
-  const baseFort = useMemo(() => computeBaseFort(classes), [classes]);
-  const baseRef = useMemo(() => computeBaseRef(classes), [classes]);
-  const baseWill = useMemo(() => computeBaseWill(classes), [classes]);
+  const baseFort = useMemo(() => computeBaseFort(classes, classDataMap), [classes, classDataMap]);
+  const baseRef = useMemo(() => computeBaseRef(classes, classDataMap), [classes, classDataMap]);
+  const baseWill = useMemo(() => computeBaseWill(classes, classDataMap), [classes, classDataMap]);
 
   const totalFort = baseFort + conMod + (combat.saveFortMisc ?? 0);
   const totalRef = baseRef + dexMod + (combat.saveRefMisc ?? 0);
@@ -131,11 +138,25 @@ export function CombatStatsSection() {
       <Panel title="Hit Points">
         <View style={styles.row}>
           <Text style={styles.fieldLabel}>Max HP</Text>
-          <NumInput
-            value={combat.maxHPOverride}
-            onCommit={(n) => set('maxHPOverride', n)}
-            width={64}
-          />
+          {combat.maxHPOverride !== undefined ? (
+            <>
+              <NumInput
+                value={combat.maxHPOverride}
+                onCommit={(n) => set('maxHPOverride', n)}
+                width={64}
+              />
+              <Pressable onPress={() => set('maxHPOverride', undefined)} hitSlop={8}>
+                <Text style={styles.linkText}>↺ auto</Text>
+              </Pressable>
+            </>
+          ) : (
+            <>
+              <AutoComputedValue value={String(computedMaxHP)} />
+              <Pressable onPress={() => set('maxHPOverride', computedMaxHP)} hitSlop={8}>
+                <Text style={styles.linkText}>override</Text>
+              </Pressable>
+            </>
+          )}
           <Text style={styles.fieldLabel}>Current</Text>
           <NumInput
             value={combat.currentHP}
@@ -403,5 +424,11 @@ const styles = StyleSheet.create({
     fontFamily: 'LibreBaskerville',
     fontSize: 11,
     color: '#888',
+  },
+  linkText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    color: '#888',
+    textDecorationLine: 'underline',
   },
 });

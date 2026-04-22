@@ -31,7 +31,7 @@ export const POW_DISCIPLINES: DisciplineDefinition[] = [
     description:
       'The discipline of Golden Lion is a practice passed between war leaders, chieftains, generals, and militia leaders over the generations, meant to bring a group of warriors together into one cohesive unit. It is a discipline that greatly benefits a warrior who believes strongly in teamwork and leadership on the battlefield.',
     associatedSkill: 'Diplomacy',
-    associatedWeaponGroups: ['heavy blades', 'hammers', 'pole arms'],
+    associatedWeaponGroups: ['heavy blades', 'hammers', 'polearms'],
     sourceSystem: 'pow',
     source: POW_SOURCE,
     isOfficial: false,

@@ -280,6 +280,11 @@ export const PRESTIGE_CLASSES_POPULAR: ExpandedClassData[] = [
       },
     ],
     spellcasting: { type: 'None', casting: 'None' },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'chosen',
+      atLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    },
     source: 'Path of the Hellknight',
   },
 
@@ -413,6 +418,11 @@ export const PRESTIGE_CLASSES_POPULAR: ExpandedClassData[] = [
       },
     ],
     spellcasting: { type: 'None', casting: 'None' },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'chosen',
+      atLevels: [2, 3, 4, 5, 6, 7, 8, 9, 10],
+    },
     source: 'Inner Sea Gods',
   },
 
@@ -628,6 +638,11 @@ export const PRESTIGE_CLASSES_POPULAR: ExpandedClassData[] = [
       },
     ],
     spellcasting: { type: 'None', casting: 'None' },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'arcane',
+      atLevels: [2, 3, 4, 5, 6, 7, 8, 9, 10],
+    },
     source: 'Inner Sea Magic / Paths of Prestige',
   },
 
@@ -1054,6 +1069,11 @@ export const PRESTIGE_CLASSES_POPULAR: ExpandedClassData[] = [
       },
     ],
     spellcasting: { type: 'None', casting: 'None' },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'chosen',
+      atLevels: [2, 3, 4, 5, 6, 7, 8, 9, 10],
+    },
     source: 'Paths of Prestige',
   },
 
@@ -1511,6 +1531,11 @@ export const PRESTIGE_CLASSES_POPULAR: ExpandedClassData[] = [
       },
     ],
     spellcasting: { type: 'None', casting: 'None' },
+    advancesSpellcasting: {
+      mode: 'single',
+      tradition: 'arcane',
+      atLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    },
     source: 'Inner Sea Magic',
   },
 ];

@@ -1235,6 +1235,13 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
     bookName: 'D&D 3.5 Edition (Imported)',
     publisher: 'Wizards of the Coast',
   },
+
+  // Tome of Battle / Path of War
+  '3.5e-tob': {
+    bookId: 'tob',
+    bookName: 'Tome of Battle: The Book of Nine Swords',
+    publisher: 'Wizards of the Coast',
+  },
   'pf1e-pp': {
     bookId: 'pp',
     bookName: 'Pathfinder Player Companion',
@@ -1432,7 +1439,6 @@ const FULL_NAME_MAP: Record<string, string> = {
   'path of war': 'dsp-pow',
   'path of war expanded': 'dsp-powe',
   'path of war: expanded': 'dsp-powe',
-  'dreamscarred press': 'dsp-pow',
   "monster hunter's handbook": 'pf1e-mhh',
   'wilderness origins': 'pf1e-wo',
   'legacy of the first world': 'pf1e-legacy-first-world',

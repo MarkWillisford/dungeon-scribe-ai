@@ -8,8 +8,17 @@ import {
   computeBaseRef,
   computeBaseWill,
   computeECL,
+  type ClassDataMap,
 } from '@/utils/characterComputations';
 import { type DraftClassEntry, type DraftTemplateEntry } from '@/types/characterDraft';
+import { ALL_EXPANDED_CLASSES } from '@/data/classes/index';
+
+// Reuse the full static set as the test map. These are the same classes the
+// runtime used before the Firestore migration, so existing test expectations
+// still hold.
+const TEST_CLASS_MAP: ClassDataMap = new Map(
+  ALL_EXPANDED_CLASSES.map((c) => [c.name.toLowerCase(), c]),
+);
 
 // ---- helpers ----
 
@@ -109,29 +118,29 @@ describe('formatModifier', () => {
 
 describe('computeTotalBAB', () => {
   it('returns 0 for empty class list', () => {
-    expect(computeTotalBAB([])).toBe(0);
+    expect(computeTotalBAB([], TEST_CLASS_MAP)).toBe(0);
   });
 
   it('computes Full BAB (Fighter)', () => {
     // Fighter: Full BAB — 1 per level
-    expect(computeTotalBAB([cls('Fighter', 5)])).toBe(5);
-    expect(computeTotalBAB([cls('Fighter', 10)])).toBe(10);
+    expect(computeTotalBAB([cls('Fighter', 5)], TEST_CLASS_MAP)).toBe(5);
+    expect(computeTotalBAB([cls('Fighter', 10)], TEST_CLASS_MAP)).toBe(10);
   });
 
   it('computes Medium BAB (Cleric)', () => {
     // Cleric: Medium BAB — floor(level * 0.75)
-    expect(computeTotalBAB([cls('Cleric', 4)])).toBe(3);
-    expect(computeTotalBAB([cls('Cleric', 5)])).toBe(3);
-    expect(computeTotalBAB([cls('Cleric', 8)])).toBe(6);
+    expect(computeTotalBAB([cls('Cleric', 4)], TEST_CLASS_MAP)).toBe(3);
+    expect(computeTotalBAB([cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(3);
+    expect(computeTotalBAB([cls('Cleric', 8)], TEST_CLASS_MAP)).toBe(6);
   });
 
   it('sums BAB across multiclass', () => {
     // Fighter 5 (BAB 5) + Cleric 5 (BAB 3) = 8
-    expect(computeTotalBAB([cls('Fighter', 5), cls('Cleric', 5)])).toBe(8);
+    expect(computeTotalBAB([cls('Fighter', 5), cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(8);
   });
 
   it('defaults unknown class to Medium BAB', () => {
-    expect(computeTotalBAB([cls('UnknownClass', 4)])).toBe(3);
+    expect(computeTotalBAB([cls('UnknownClass', 4)], TEST_CLASS_MAP)).toBe(3);
   });
 });
 
@@ -162,38 +171,38 @@ describe('formatBABString', () => {
 
 describe('computeBaseFort', () => {
   it('returns 0 for empty class list', () => {
-    expect(computeBaseFort([])).toBe(0);
+    expect(computeBaseFort([], TEST_CLASS_MAP)).toBe(0);
   });
 
   it('applies Good Fort progression: 2 + floor(level/2)', () => {
     // Cleric 5: 2 + floor(5/2) = 4
-    expect(computeBaseFort([cls('Cleric', 5)])).toBe(4);
+    expect(computeBaseFort([cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(4);
     // Fighter 4: 2 + floor(4/2) = 4
-    expect(computeBaseFort([cls('Fighter', 4)])).toBe(4);
+    expect(computeBaseFort([cls('Fighter', 4)], TEST_CLASS_MAP)).toBe(4);
   });
 
   it('applies Poor Fort progression: floor(level/3)', () => {
     // Wizard 5: floor(5/3) = 1
-    expect(computeBaseFort([cls('Wizard', 5)])).toBe(1);
+    expect(computeBaseFort([cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(1);
     // Rogue 3: floor(3/3) = 1
-    expect(computeBaseFort([cls('Rogue', 3)])).toBe(1);
+    expect(computeBaseFort([cls('Rogue', 3)], TEST_CLASS_MAP)).toBe(1);
   });
 
   it('adds the +2 base bonus exactly once for multiple Good Fort classes', () => {
     // Cleric 5 (Good) + Fighter 5 (Good):
     //   correct = 2 + floor(5/2) + floor(5/2) = 2 + 2 + 2 = 6
     //   buggy   = (2+2) + (2+2) = 8
-    expect(computeBaseFort([cls('Cleric', 5), cls('Fighter', 5)])).toBe(6);
+    expect(computeBaseFort([cls('Cleric', 5), cls('Fighter', 5)], TEST_CLASS_MAP)).toBe(6);
   });
 
   it('does not add +2 when no class has Good Fort', () => {
     // Wizard 5 + Rogue 5: floor(5/3) + floor(5/3) = 1 + 1 = 2
-    expect(computeBaseFort([cls('Wizard', 5), cls('Rogue', 5)])).toBe(2);
+    expect(computeBaseFort([cls('Wizard', 5), cls('Rogue', 5)], TEST_CLASS_MAP)).toBe(2);
   });
 
   it('mixes Good and Poor Fort correctly', () => {
     // Cleric 5 (Good) + Wizard 5 (Poor): 2 + floor(5/2) + floor(5/3) = 2 + 2 + 1 = 5
-    expect(computeBaseFort([cls('Cleric', 5), cls('Wizard', 5)])).toBe(5);
+    expect(computeBaseFort([cls('Cleric', 5), cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(5);
   });
 });
 
@@ -201,22 +210,22 @@ describe('computeBaseFort', () => {
 
 describe('computeBaseRef', () => {
   it('returns 0 for empty class list', () => {
-    expect(computeBaseRef([])).toBe(0);
+    expect(computeBaseRef([], TEST_CLASS_MAP)).toBe(0);
   });
 
   it('applies Good Ref progression (Rogue)', () => {
     // Rogue 4: 2 + floor(4/2) = 4
-    expect(computeBaseRef([cls('Rogue', 4)])).toBe(4);
+    expect(computeBaseRef([cls('Rogue', 4)], TEST_CLASS_MAP)).toBe(4);
   });
 
   it('applies Poor Ref progression (Cleric)', () => {
     // Cleric 5: floor(5/3) = 1
-    expect(computeBaseRef([cls('Cleric', 5)])).toBe(1);
+    expect(computeBaseRef([cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(1);
   });
 
   it('adds +2 only once for multiple Good Ref classes', () => {
     // Rogue 4 + Rogue 4: 2 + floor(4/2) + floor(4/2) = 2 + 2 + 2 = 6
-    expect(computeBaseRef([cls('Rogue', 4), cls('Rogue', 4)])).toBe(6);
+    expect(computeBaseRef([cls('Rogue', 4), cls('Rogue', 4)], TEST_CLASS_MAP)).toBe(6);
   });
 });
 
@@ -224,27 +233,27 @@ describe('computeBaseRef', () => {
 
 describe('computeBaseWill', () => {
   it('returns 0 for empty class list', () => {
-    expect(computeBaseWill([])).toBe(0);
+    expect(computeBaseWill([], TEST_CLASS_MAP)).toBe(0);
   });
 
   it('applies Good Will progression (Cleric)', () => {
     // Cleric 5: 2 + floor(5/2) = 4
-    expect(computeBaseWill([cls('Cleric', 5)])).toBe(4);
+    expect(computeBaseWill([cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(4);
   });
 
   it('applies Poor Will progression (Fighter)', () => {
     // Fighter 5: floor(5/3) = 1
-    expect(computeBaseWill([cls('Fighter', 5)])).toBe(1);
+    expect(computeBaseWill([cls('Fighter', 5)], TEST_CLASS_MAP)).toBe(1);
   });
 
   it('adds +2 only once when mixing Good and Poor Will', () => {
     // Cleric 5 (Good) + Fighter 5 (Poor): 2 + floor(5/2) + floor(5/3) = 2 + 2 + 1 = 5
-    expect(computeBaseWill([cls('Cleric', 5), cls('Fighter', 5)])).toBe(5);
+    expect(computeBaseWill([cls('Cleric', 5), cls('Fighter', 5)], TEST_CLASS_MAP)).toBe(5);
   });
 
   it('adds +2 only once for multiple Good Will classes', () => {
     // Cleric 5 + Wizard 5 (both Good Will): 2 + floor(5/2) + floor(5/2) = 6
-    expect(computeBaseWill([cls('Cleric', 5), cls('Wizard', 5)])).toBe(6);
+    expect(computeBaseWill([cls('Cleric', 5), cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(6);
   });
 });
 
