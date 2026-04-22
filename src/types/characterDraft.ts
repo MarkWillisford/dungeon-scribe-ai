@@ -18,7 +18,8 @@ export interface DraftTypedBonus {
   source?: string; // display label, e.g. "Succubus kiss", "Campaign reward"
 }
 
-// Stacking rules: untyped and dodge stack; all other types take highest only.
+// Stacking rules: untyped and dodge stack; all other bonus types take highest
+// only. Penalties (negative values) always stack regardless of type — PF1e RAW.
 export function computeOtherBonusTotal(bonuses: DraftTypedBonus[]): number {
   if (bonuses.length === 0) return 0;
   const byType = new Map<BonusType, number[]>();
@@ -29,10 +30,18 @@ export function computeOtherBonusTotal(bonuses: DraftTypedBonus[]): number {
   }
   let total = 0;
   for (const [type, values] of byType) {
-    total +=
-      type === BonusType.UNTYPED || type === BonusType.DODGE
-        ? values.reduce((a, v) => a + v, 0)
-        : Math.max(...values);
+    const positives = values.filter((v) => v > 0);
+    const negatives = values.filter((v) => v < 0);
+    if (positives.length > 0) {
+      total +=
+        type === BonusType.UNTYPED || type === BonusType.DODGE
+          ? positives.reduce((a, v) => a + v, 0)
+          : Math.max(...positives);
+    }
+    // Penalties always stack — sum all negative values.
+    if (negatives.length > 0) {
+      total += negatives.reduce((a, v) => a + v, 0);
+    }
   }
   return total;
 }

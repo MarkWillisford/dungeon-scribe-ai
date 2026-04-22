@@ -106,6 +106,26 @@ describe('abilityTotal', () => {
       }),
     ).toBe(17);
   });
+
+  it('penalties always stack regardless of type', () => {
+    // Two morale penalties — both stack (-2 + -4 = -6), not Math.max(-2,-4) = -2
+    // One sacred bonus — highest only (+4)
+    // Total: 10 + 4 + (-6) = 8
+    expect(
+      abilityTotal({
+        base: 10,
+        racial: 0,
+        inherent: 0,
+        enhancement: 0,
+        other: [
+          { value: -2, bonusType: BonusType.MORALE },
+          { value: -4, bonusType: BonusType.MORALE },
+          { value: 4, bonusType: BonusType.SACRED },
+        ],
+        levelIncrements: 0,
+      }),
+    ).toBe(8);
+  });
 });
 
 // ---- abilityModifier ----
