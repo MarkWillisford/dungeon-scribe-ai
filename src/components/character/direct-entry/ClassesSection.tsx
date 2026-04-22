@@ -196,16 +196,18 @@ function DraggableClassList() {
   useEffect(() => {
     if (heightsRef.current.length !== classes.length) {
       heightsRef.current = classes.map((_, i) => heightsRef.current[i] ?? 80);
-      rowHeights.value = [...heightsRef.current];
+      rowHeights.value = [...heightsRef.current]; // eslint-disable-line react-hooks/immutability
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [classes]);
 
   const handleHeightChange = useCallback(
     (index: number, h: number) => {
       if (heightsRef.current[index] === h) return;
       heightsRef.current[index] = h;
-      rowHeights.value = [...heightsRef.current];
+      rowHeights.value = [...heightsRef.current]; // eslint-disable-line react-hooks/immutability
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
