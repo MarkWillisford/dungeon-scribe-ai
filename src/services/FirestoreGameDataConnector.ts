@@ -23,12 +23,9 @@ import { SPELL_TABLES } from '@/data/classes/index';
 import type { FeatDefinition } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
-import type { ExpandedClassData } from '@/data/classes/types';
+import type { ExpandedClassData, ArchetypeData } from '@/data/classes/types';
 import type { ClassData } from '@/data/classes';
-import type {
-  ClassOptionBase,
-  EidolonEvolutionEntry,
-} from '@/types/classOptions';
+import type { ClassOptionBase, EidolonEvolutionEntry } from '@/types/classOptions';
 import type {
   WeaponDefinition,
   ArmorDefinition,
@@ -52,7 +49,7 @@ import type {
   ManeuverFilter,
   DisciplineFilter,
 } from './GameDataConnector';
-import type { RaceGroups, FeatFilter } from './GameDataService';
+import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -626,18 +623,19 @@ export class FirestoreGameDataConnector implements GameDataConnector {
       let results: ManeuverDefinition[];
 
       if (filter?.disciplineId) {
-        const q = filter.maxLevel !== undefined
-          ? query(
-              collection(db, 'maneuvers'),
-              where('visibility', '==', 'global'),
-              where('disciplineId', '==', filter.disciplineId),
-              where('level', '<=', filter.maxLevel),
-            )
-          : query(
-              collection(db, 'maneuvers'),
-              where('visibility', '==', 'global'),
-              where('disciplineId', '==', filter.disciplineId),
-            );
+        const q =
+          filter.maxLevel !== undefined
+            ? query(
+                collection(db, 'maneuvers'),
+                where('visibility', '==', 'global'),
+                where('disciplineId', '==', filter.disciplineId),
+                where('level', '<=', filter.maxLevel),
+              )
+            : query(
+                collection(db, 'maneuvers'),
+                where('visibility', '==', 'global'),
+                where('disciplineId', '==', filter.disciplineId),
+              );
         const snap = await getDocs(q);
         results = snap.docs.map((d) => d.data() as ManeuverDefinition);
       } else {
@@ -646,9 +644,8 @@ export class FirestoreGameDataConnector implements GameDataConnector {
           GameDataCache.set('maneuvers/__all', fetched, TTL.OFFICIAL);
           return fetched;
         });
-        results = filter?.maxLevel !== undefined
-          ? all.filter((m) => m.level <= filter.maxLevel!)
-          : all;
+        results =
+          filter?.maxLevel !== undefined ? all.filter((m) => m.level <= filter.maxLevel!) : all;
       }
 
       GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
@@ -685,18 +682,19 @@ export class FirestoreGameDataConnector implements GameDataConnector {
       let results: StanceDefinition[];
 
       if (filter?.disciplineId) {
-        const q = filter.maxLevel !== undefined
-          ? query(
-              collection(db, 'stances'),
-              where('visibility', '==', 'global'),
-              where('disciplineId', '==', filter.disciplineId),
-              where('level', '<=', filter.maxLevel),
-            )
-          : query(
-              collection(db, 'stances'),
-              where('visibility', '==', 'global'),
-              where('disciplineId', '==', filter.disciplineId),
-            );
+        const q =
+          filter.maxLevel !== undefined
+            ? query(
+                collection(db, 'stances'),
+                where('visibility', '==', 'global'),
+                where('disciplineId', '==', filter.disciplineId),
+                where('level', '<=', filter.maxLevel),
+              )
+            : query(
+                collection(db, 'stances'),
+                where('visibility', '==', 'global'),
+                where('disciplineId', '==', filter.disciplineId),
+              );
         const snap = await getDocs(q);
         results = snap.docs.map((d) => d.data() as StanceDefinition);
       } else {
@@ -705,9 +703,8 @@ export class FirestoreGameDataConnector implements GameDataConnector {
           GameDataCache.set('stances/__all', fetched, TTL.OFFICIAL);
           return fetched;
         });
-        results = filter?.maxLevel !== undefined
-          ? all.filter((s) => s.level <= filter.maxLevel!)
-          : all;
+        results =
+          filter?.maxLevel !== undefined ? all.filter((s) => s.level <= filter.maxLevel!) : all;
       }
 
       GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
@@ -760,5 +757,28 @@ export class FirestoreGameDataConnector implements GameDataConnector {
       console.error(`FirestoreGameDataConnector: failed to fetch martial tradition "${id}":`, e);
       return null;
     }
+  }
+
+  async getArchetypesByClass(className: string, _context?: QueryContext): Promise<ArchetypeData[]> {
+    const cacheKey = `archetypes/${className}`;
+    const cached = GameDataCache.get<ArchetypeData[]>(cacheKey);
+    if (cached) return cached;
+
+    return FirestoreGameDataConnector.dedup(cacheKey, async () => {
+      try {
+        const q = query(
+          collection(db, 'archetypes'),
+          where('visibility', '==', 'global'),
+          where('className', '==', className),
+        );
+        const snap = await getDocs(q);
+        const results = snap.docs.map((d) => d.data() as ArchetypeData);
+        GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+        return results;
+      } catch (e) {
+        console.error(`FirestoreGameDataConnector: getArchetypesByClass(${className}) failed:`, e);
+        return [];
+      }
+    });
   }
 }
