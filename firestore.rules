@@ -94,6 +94,7 @@ service cloud.firestore {
     match /warpriestBlessings/{docId}      { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /alchemistDiscoveries/{docId}    { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /eidolonEvolutions/{docId}       { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /archetypes/{docId}              { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /classChoiceDefinitions/{docId}  { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /rulesets/{docId}                { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /magicItems/{docId}              { allow read: if isAuthenticated(); allow write: if isAdmin(); }

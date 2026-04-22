@@ -65,6 +65,59 @@ function buildInlineItems(definition: ClassChoiceDefinition): SearchItem[] {
   );
 }
 
+// Filters picker items to exclude IDs already selected in sibling slots for the
+// same feature, plus domain parent/child conflicts (subdomain IDs follow the
+// `{parentId}-{suffix}` convention — selecting 'fire' excludes 'fire-ash', etc.).
+// The subdomain exclusion logic is domain-specific: other collections (rage powers,
+// hexes, etc.) use hyphenated IDs without a parent/child relationship, so prefix
+// exclusion would incorrectly block valid independent selections.
+export function filterExcludedChoiceItems(
+  items: SearchItem[],
+  siblingChoices: ClassChoice[],
+  featureName: string,
+  choiceIndex: number,
+  collectionName?: string,
+): SearchItem[] {
+  const excluded = new Set<string>();
+  siblingChoices
+    .filter((c) => c.featureName === featureName)
+    .forEach((c, i) => {
+      if (i === choiceIndex) return;
+      const sel = c.selection;
+      if (typeof sel === 'string' && sel) excluded.add(sel);
+      else if (Array.isArray(sel)) sel.forEach((s) => excluded.add(s));
+    });
+
+  if (excluded.size === 0) return items;
+
+  const isDomains = collectionName === 'domains';
+
+  // When a subdomain is selected (e.g. 'fire-ash'), build a prefix to exclude siblings.
+  // 'fire-ash' → prefix 'fire-' excludes 'fire-arson', 'fire-smoke', etc.
+  // Only applies to the domains collection — other hyphenated IDs are not hierarchical.
+  const excludedPrefixes = new Set<string>();
+  if (isDomains) {
+    for (const selectedId of excluded) {
+      const lastDash = selectedId.lastIndexOf('-');
+      if (lastDash !== -1) excludedPrefixes.add(selectedId.slice(0, lastDash + 1));
+    }
+  }
+
+  return items.filter((item) => {
+    if (excluded.has(item.key)) return false;
+    if (isDomains) {
+      for (const selectedId of excluded) {
+        if (item.key.startsWith(selectedId + '-')) return false;
+        if (selectedId.startsWith(item.key + '-')) return false;
+      }
+      for (const prefix of excludedPrefixes) {
+        if (item.key.startsWith(prefix)) return false;
+      }
+    }
+    return true;
+  });
+}
+
 export function ClassChoiceRow({
   classId,
   definition,
@@ -79,7 +132,7 @@ export function ClassChoiceRow({
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
-  const [pickerItems, setPickerItems] = useState<SearchItem[]>([]);
+  const [rawPickerItems, setRawPickerItems] = useState<SearchItem[]>([]);
 
   useEffect(() => {
     let stale = false;
@@ -90,13 +143,31 @@ export function ClassChoiceRow({
         characterDeity,
       );
       GameDataService.getClassChoiceItems(definition.collectionName, resolvedFilter)
-        .then((items) => { if (!stale) setPickerItems(items); })
+        .then((items) => {
+          if (!stale) setRawPickerItems(items);
+        })
         .catch((e) => console.error('Failed to load class choice items:', e));
     } else {
-      Promise.resolve(buildInlineItems(definition)).then((items) => { if (!stale) setPickerItems(items); });
+      Promise.resolve(buildInlineItems(definition)).then((items) => {
+        if (!stale) setRawPickerItems(items);
+      });
     }
-    return () => { stale = true; };
+    return () => {
+      stale = true;
+    };
   }, [definition, siblingChoices, characterDeity]);
+
+  const pickerItems = useMemo(
+    () =>
+      filterExcludedChoiceItems(
+        rawPickerItems,
+        siblingChoices ?? [],
+        definition.featureName,
+        choiceIndex,
+        definition.collectionName,
+      ),
+    [rawPickerItems, siblingChoices, definition.featureName, choiceIndex, definition.collectionName],
+  );
 
   // Resolve stored ID(s) back to human-readable labels for display.
   const currentSelection = useMemo(() => {
