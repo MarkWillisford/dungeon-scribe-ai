@@ -1,8 +1,22 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useCallback, useEffect, useRef } from 'react';
 import { View, Text, Pressable, TextInput, Modal, StyleSheet } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  Easing,
+  runOnJS,
+  type SharedValue,
+} from 'react-native-reanimated';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { addClass, addSpellcastingPool, addTemplate } from '@/store/slices/characterEntrySlice';
+import {
+  addClass,
+  addSpellcastingPool,
+  addTemplate,
+  reorderClasses,
+} from '@/store/slices/characterEntrySlice';
 import { AutoComputedValue } from '@/components/ui/AutoComputedValue';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
 import { ClassEntryCard } from './ClassEntryCard';
@@ -17,9 +31,234 @@ import {
   computeECL,
 } from '@/utils/characterComputations';
 import { selectClasses, selectClassDataMap } from '@/store/slices/gameDataSlice';
-import { type DraftTemplateEntry } from '@/types/characterDraft';
+import { type DraftClassEntry, type DraftTemplateEntry } from '@/types/characterDraft';
+import { ALL_TEMPLATES } from '@/data/templates';
+
 function genId(): string {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
+}
+
+// ---- Worklet: hover index from current drag state ----
+
+function computeHoverIndex(heights: number[], fromIndex: number, dy: number): number {
+  'worklet';
+  let acc = 0;
+  const offsets: number[] = [];
+  for (let i = 0; i < heights.length; i++) {
+    offsets.push(acc);
+    acc += heights[i] ?? 80;
+  }
+  const fromH = heights[fromIndex] ?? 80;
+  const landingCenter = (offsets[fromIndex] ?? 0) + dy + fromH / 2;
+  let hoverIdx = fromIndex;
+  for (let i = 0; i < heights.length; i++) {
+    const center = (offsets[i] ?? 0) + (heights[i] ?? 80) / 2;
+    if (landingCenter > center) {
+      hoverIdx = i;
+    }
+  }
+  return Math.max(0, Math.min(heights.length - 1, hoverIdx));
+}
+
+// ---- DraggableRow ----
+
+interface DraggableRowProps {
+  entry: DraftClassEntry;
+  index: number;
+  count: number;
+  activeIndex: SharedValue<number>;
+  dragY: SharedValue<number>;
+  rowHeights: SharedValue<number[]>;
+  onHeightChange: (index: number, height: number) => void;
+  onDragEnd: (fromIndex: number, dy: number) => void;
+}
+
+function DraggableRow({
+  entry,
+  index,
+  count,
+  activeIndex,
+  dragY,
+  rowHeights,
+  onHeightChange,
+  onDragEnd,
+}: DraggableRowProps) {
+  // Keep index accessible in UI-thread worklets
+  const indexRef = useSharedValue(index);
+  useEffect(() => {
+    indexRef.value = index;
+  }, [index, indexRef]);
+
+  const gesture = Gesture.Pan()
+    .activateAfterLongPress(300)
+    .onBegin(() => {
+      activeIndex.value = indexRef.value;
+      dragY.value = 0;
+    })
+    .onUpdate((e) => {
+      if (activeIndex.value === indexRef.value) {
+        dragY.value = e.translationY;
+      }
+    })
+    .onEnd(() => {
+      const from = activeIndex.value;
+      const dy = dragY.value;
+      activeIndex.value = -1;
+      dragY.value = 0;
+      runOnJS(onDragEnd)(from, dy);
+    })
+    .onFinalize(() => {
+      if (activeIndex.value === indexRef.value) {
+        activeIndex.value = -1;
+        dragY.value = 0;
+      }
+    });
+
+  const rowStyle = useAnimatedStyle(() => {
+    const myIndex = indexRef.value;
+    const heights = rowHeights.value;
+    const activeIdx = activeIndex.value;
+    const dy = dragY.value;
+
+    if (activeIdx === myIndex) {
+      return {
+        transform: [{ translateY: dy }],
+        zIndex: 999,
+        opacity: 0.92,
+        shadowColor: '#000',
+        shadowOpacity: 0.25,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 12,
+      };
+    }
+
+    if (activeIdx === -1) {
+      return {
+        transform: [
+          { translateY: withTiming(0, { duration: 200, easing: Easing.out(Easing.quad) }) },
+        ],
+        zIndex: 0,
+        opacity: 1,
+        elevation: 0,
+      };
+    }
+
+    // Compute shift to make room for the dragged row
+    const hoverIdx = computeHoverIndex(heights, activeIdx, dy);
+    const fromH = heights[activeIdx] ?? 80;
+    let shift = 0;
+    if (activeIdx < myIndex && myIndex <= hoverIdx) {
+      shift = -fromH;
+    } else if (hoverIdx <= myIndex && myIndex < activeIdx) {
+      shift = fromH;
+    }
+
+    return {
+      transform: [
+        { translateY: withTiming(shift, { duration: 200, easing: Easing.out(Easing.quad) }) },
+      ],
+      zIndex: 0,
+      opacity: 1,
+      elevation: 0,
+    };
+  });
+
+  const card = <ClassEntryCard entry={entry} />;
+
+  return (
+    <Animated.View
+      onLayout={(e) => onHeightChange(index, e.nativeEvent.layout.height)}
+      style={[rowStyle, styles.draggableRow]}
+    >
+      {count > 1 ? (
+        <GestureDetector gesture={gesture}>
+          <View style={styles.classCardWrapper}>{card}</View>
+        </GestureDetector>
+      ) : (
+        card
+      )}
+    </Animated.View>
+  );
+}
+
+// ---- DraggableClassList ----
+
+function DraggableClassList() {
+  const dispatch = useAppDispatch();
+  const classes = useAppSelector((state) => state.characterEntry.draft.classes);
+
+  const activeIndex = useSharedValue(-1);
+  const dragY = useSharedValue(0);
+  const rowHeights = useSharedValue<number[]>(classes.map(() => 80));
+  const heightsRef = useRef<number[]>(classes.map(() => 80));
+
+  useEffect(() => {
+    if (heightsRef.current.length !== classes.length) {
+      heightsRef.current = classes.map((_, i) => heightsRef.current[i] ?? 80);
+      rowHeights.value = [...heightsRef.current]; // eslint-disable-line react-hooks/immutability
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [classes]);
+
+  const handleHeightChange = useCallback(
+    (index: number, h: number) => {
+      if (heightsRef.current[index] === h) return;
+      heightsRef.current[index] = h;
+      rowHeights.value = [...heightsRef.current]; // eslint-disable-line react-hooks/immutability
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+
+  const handleDragEnd = useCallback(
+    (fromIndex: number, dy: number) => {
+      const heights = rowHeights.value;
+      let acc = 0;
+      const offsets: number[] = [];
+      for (const h of heights) {
+        offsets.push(acc);
+        acc += h ?? 80;
+      }
+      const fromH = heights[fromIndex] ?? 80;
+      const landingCenter = (offsets[fromIndex] ?? 0) + dy + fromH / 2;
+
+      let toIndex = fromIndex;
+      for (let i = 0; i < classes.length; i++) {
+        const center = (offsets[i] ?? 0) + (heights[i] ?? 80) / 2;
+        if (landingCenter > center) {
+          toIndex = i;
+        }
+      }
+      toIndex = Math.max(0, Math.min(classes.length - 1, toIndex));
+
+      if (toIndex !== fromIndex) {
+        const reordered = [...classes];
+        const [moved] = reordered.splice(fromIndex, 1);
+        reordered.splice(toIndex, 0, moved);
+        dispatch(reorderClasses(reordered.map((c) => c.id)));
+      }
+    },
+    [classes, dispatch, rowHeights],
+  );
+
+  return (
+    <>
+      {classes.map((entry, index) => (
+        <DraggableRow
+          key={entry.id}
+          entry={entry}
+          index={index}
+          count={classes.length}
+          activeIndex={activeIndex}
+          dragY={dragY}
+          rowHeights={rowHeights}
+          onHeightChange={handleHeightChange}
+          onDragEnd={handleDragEnd}
+        />
+      ))}
+    </>
+  );
 }
 
 // ---- Add Free Grant modal ----
@@ -166,6 +405,7 @@ export function ClassesSection() {
   const classDataMap = useAppSelector(selectClassDataMap);
 
   const [classPickerOpen, setClassPickerOpen] = useState(false);
+  const [templatePickerOpen, setTemplatePickerOpen] = useState(false);
   const [grantModalOpen, setGrantModalOpen] = useState(false);
 
   const regularTemplates = templates.filter((t) => !t.isFreeGrant);
@@ -238,6 +478,48 @@ export function ClassesSection() {
     setClassPickerOpen(false);
   };
 
+  const templateSearchItems = useMemo<SearchItem[]>(
+    () =>
+      ALL_TEMPLATES.map((t) => {
+        let cost = '';
+        if (t.laAdjustment != null) cost = `LA +${t.laAdjustment}`;
+        else if (t.crAdjustment != null) cost = `CR +${t.crAdjustment}`;
+        else if (t.crTiers?.length) cost = 'CR (tiered)';
+        const acq =
+          t.acquisitionType === 'inherited'
+            ? 'Inherited'
+            : t.acquisitionType === 'acquired'
+              ? 'Acquired'
+              : 'Either';
+        return {
+          key: t.id,
+          label: t.name,
+          subLabel: [cost, acq].filter(Boolean).join(' · '),
+          category: acq,
+        };
+      }),
+    [],
+  );
+
+  const handleAddTemplate = (item: SearchItem) => {
+    const tpl = ALL_TEMPLATES.find((t) => t.id === item.key);
+    if (!tpl) return;
+    const entry: DraftTemplateEntry = {
+      id: genId(),
+      templateId: tpl.id,
+      templateName: tpl.name,
+      isFreeGrant: false,
+      acquired: tpl.acquisitionType,
+      ...(tpl.laAdjustment != null
+        ? { appliedAs: 'LA', laValue: tpl.laAdjustment }
+        : tpl.crTiers?.length
+          ? { appliedAs: 'CR' }
+          : { appliedAs: 'CR', crValue: tpl.crAdjustment ?? 0 }),
+    };
+    dispatch(addTemplate(entry));
+    setTemplatePickerOpen(false);
+  };
+
   const handleAddGrant = (name: string, note: string, grantedBy: string) => {
     const entry: DraftTemplateEntry = {
       id: genId(),
@@ -277,10 +559,8 @@ export function ClassesSection() {
         <AutoComputedValue value={formatSave(will)} label="Will" />
       </View>
 
-      {/* Class cards */}
-      {classes.map((entry) => (
-        <ClassEntryCard key={entry.id} entry={entry} />
-      ))}
+      {/* Class cards — long-press ☰ handle to drag and reorder (multiclass only) */}
+      <DraggableClassList />
 
       {/* Add class button */}
       <Pressable
@@ -305,18 +585,7 @@ export function ClassesSection() {
       )}
 
       <Pressable
-        onPress={() => {
-          // Template picker — placeholder until template search is wired
-          const entry: DraftTemplateEntry = {
-            id: genId(),
-            templateName: 'New Template',
-            isFreeGrant: false,
-            appliedAs: 'CR',
-            crValue: 1,
-            acquired: 'either',
-          };
-          dispatch(addTemplate(entry));
-        }}
+        onPress={() => setTemplatePickerOpen(true)}
         style={[styles.addButton, { borderColor: colors.border.DEFAULT }]}
         accessibilityRole="button"
         accessibilityLabel="Add template"
@@ -369,6 +638,16 @@ export function ClassesSection() {
         }}
       />
 
+      {/* Template picker sheet */}
+      <SearchPickerSheet
+        visible={templatePickerOpen}
+        title="Add Template"
+        items={templateSearchItems}
+        onSelect={handleAddTemplate}
+        onClose={() => setTemplatePickerOpen(false)}
+        placeholder="Search templates..."
+      />
+
       {/* Add grant modal */}
       <AddGrantModal
         visible={grantModalOpen}
@@ -398,6 +677,12 @@ const styles = StyleSheet.create({
     height: 28,
     backgroundColor: 'rgba(128,128,128,0.3)',
     marginHorizontal: 4,
+  },
+  draggableRow: {
+    paddingBottom: 8,
+  },
+  classCardWrapper: {
+    flex: 1,
   },
   subSection: {
     marginTop: 8,
