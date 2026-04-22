@@ -50,6 +50,14 @@
         { "fieldPath": "disciplineId", "order": "ASCENDING" },
         { "fieldPath": "level", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "archetypes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "visibility", "order": "ASCENDING" },
+        { "fieldPath": "className", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []
