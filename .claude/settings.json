@@ -10,7 +10,8 @@
       "Write(/home/markw/worktrees/*/src/data/**)",
       "Edit(/home/markw/worktrees/*/src/data/**)",
       "Bash(cd \"/mnt/c/Users/Markw/Documents/Development Projects/Dungeon Scribe AI 1.1\"*)",
-      "Bash(cd /home/markw/worktrees/*)",
+      "Bash(cd /mnt/c/Users/Markw*)",
+      "Bash(cd /home/markw*)",
       "Bash(gh pr view*)",
       "Bash(gh pr list*)",
       "Bash(gh pr diff*)",
@@ -20,7 +21,11 @@
       "Bash(git -C*)",
       "Bash(ls*)",
       "Bash(grep*)",
-      "Bash(node_modules/.bin/tsc*)"
+      "Bash(node_modules/.bin/tsc*)",
+      "Bash(gh api*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(for pr in*)"
     ]
   }
 }

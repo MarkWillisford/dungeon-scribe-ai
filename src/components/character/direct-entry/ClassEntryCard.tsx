@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   removeClass,
   updateClassLevel,
+  updateClassArchetype,
   updateClassSpellcastingAdvancement,
   toggleClassPrereqOverride,
 } from '@/store/slices/characterEntrySlice';
@@ -15,6 +16,7 @@ import { GameDataService } from '@/services/GameDataService';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { type ClassChoice } from '@/types/classes';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
+import { ArchetypePickerSheet } from './ArchetypePickerSheet';
 
 // Pairs of featureNames that are mutually exclusive — filling one disables the other.
 const MUTUALLY_EXCLUSIVE_PAIRS: [string, string][] = [['Domain', 'Inquisition']];
@@ -431,7 +433,11 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [choicesExpanded, setChoicesExpanded] = useState(false);
+  const [archetypePickerOpen, setArchetypePickerOpen] = useState(false);
   const [definitions, setDefinitions] = useState<ClassChoiceDefinition[]>([]);
+  const [archetypeLoadedClass, setArchetypeLoadedClass] = useState<string | null>(null);
+  const [archetypeExists, setArchetypeExists] = useState(false);
+  const hasArchetypes = archetypeLoadedClass === entry.className ? archetypeExists : null;
   const characterDeity = useAppSelector((state) => state.characterEntry.draft.deity);
   const classDataMap = useAppSelector(selectClassDataMap);
 
@@ -439,6 +445,23 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
     GameDataService.getClassChoiceDefinitions(entry.className)
       .then(setDefinitions)
       .catch((e) => console.error('Failed to load class choice definitions:', e));
+    let cancelled = false;
+    GameDataService.getArchetypesByClass(entry.className)
+      .then((archetypes) => {
+        if (!cancelled) {
+          setArchetypeExists(archetypes.length > 0);
+          setArchetypeLoadedClass(entry.className);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setArchetypeExists(false);
+          setArchetypeLoadedClass(entry.className);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
   }, [entry.className]);
 
   const allSlots = definitions.flatMap((def) => deriveChoiceSlots(def, entry.level));
@@ -511,13 +534,37 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           ]}
           accessibilityLabel="Class level"
         />
-        <Text style={[styles.fieldLabel, { color: colors.text.secondary, marginLeft: 12 }]}>
-          Archetype
-        </Text>
-        <Text style={[styles.archetypePlaceholder, { color: colors.text.tertiary }]}>
-          {entry.archetypeName ?? 'none 🔍'}
-        </Text>
+        {hasArchetypes !== false && (
+          <Pressable
+            onPress={() => setArchetypePickerOpen(true)}
+            disabled={hasArchetypes === null}
+            style={styles.archetypeButton}
+            accessibilityRole="button"
+            accessibilityLabel="Choose archetype"
+          >
+            <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Archetype</Text>
+            <Text
+              style={[
+                styles.archetypePlaceholder,
+                { color: entry.archetypeName ? colors.text.primary : colors.text.tertiary },
+              ]}
+            >
+              {hasArchetypes === null ? '…' : (entry.archetypeName ?? 'none 🔍')}
+            </Text>
+          </Pressable>
+        )}
       </View>
+
+      <ArchetypePickerSheet
+        visible={archetypePickerOpen}
+        title={`${entry.className} — Choose Archetype`}
+        className={entry.className}
+        onSelect={({ archetypeId, archetypeName }) => {
+          dispatch(updateClassArchetype({ id: entry.id, archetypeId, archetypeName }));
+          setArchetypePickerOpen(false);
+        }}
+        onClose={() => setArchetypePickerOpen(false)}
+      />
 
       {/* Spellcasting advancement — rendered only when class data signals
           this class is a prestige advancer. No user toggle. */}
@@ -664,6 +711,12 @@ const styles = StyleSheet.create({
     width: 52,
     textAlign: 'center',
     minHeight: 38,
+  },
+  archetypeButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+    gap: 8,
   },
   archetypePlaceholder: {
     fontFamily: 'LibreBaskerville',
