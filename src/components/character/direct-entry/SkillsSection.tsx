@@ -399,7 +399,7 @@ export function SkillsSection() {
           return getSpecialtyKeys(skills, def.key).some((k) => k.toLowerCase().includes(q));
         }
         if (!showAll) {
-          return getSpecialtyKeys(skills, def.key).some((k) => (skills[k]?.ranks ?? 0) > 0);
+          return getSpecialtyKeys(skills, def.key).length > 0;
         }
         return true;
       }
