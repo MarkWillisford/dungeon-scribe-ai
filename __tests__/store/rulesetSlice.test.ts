@@ -1,4 +1,9 @@
-import rulesetReducer, { setActiveRuleset, clearRuleset } from '@store/slices/rulesetSlice';
+import rulesetReducer, {
+  setActiveRuleset,
+  clearRuleset,
+  patchActiveRuleset,
+} from '@store/slices/rulesetSlice';
+import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
 import type { Ruleset } from '@/types/ruleset';
 
 const mockRuleset: Ruleset = {
@@ -37,7 +42,7 @@ const mockRuleset: Ruleset = {
 };
 
 describe('rulesetSlice', () => {
-  const initialState = { activeRuleset: null };
+  const initialState = { activeRuleset: PRESET_PF1E_STANDARD, isModifiedFromPreset: false };
 
   it('should return the initial state', () => {
     expect(rulesetReducer(undefined, { type: 'unknown' })).toEqual(initialState);
@@ -50,22 +55,82 @@ describe('rulesetSlice', () => {
     });
 
     it('replaces an existing active ruleset', () => {
-      const existing = { activeRuleset: { ...mockRuleset, name: 'Old Ruleset' } };
+      const existing = {
+        activeRuleset: { ...mockRuleset, name: 'Old Ruleset' },
+        isModifiedFromPreset: true,
+      };
       const state = rulesetReducer(existing, setActiveRuleset(mockRuleset));
       expect(state.activeRuleset?.name).toBe('PF1e Standard');
+    });
+
+    it('resets isModifiedFromPreset to false', () => {
+      const existing = { activeRuleset: mockRuleset, isModifiedFromPreset: true };
+      const state = rulesetReducer(existing, setActiveRuleset(mockRuleset));
+      expect(state.isModifiedFromPreset).toBe(false);
     });
   });
 
   describe('clearRuleset', () => {
-    it('clears the active ruleset', () => {
-      const stateWithRuleset = { activeRuleset: mockRuleset };
+    it('resets the active ruleset to the default preset', () => {
+      const stateWithRuleset = { activeRuleset: mockRuleset, isModifiedFromPreset: true };
       const state = rulesetReducer(stateWithRuleset, clearRuleset());
-      expect(state.activeRuleset).toBeNull();
+      expect(state.activeRuleset).toEqual(PRESET_PF1E_STANDARD);
     });
 
-    it('is a no-op when already null', () => {
-      const state = rulesetReducer(initialState, clearRuleset());
-      expect(state.activeRuleset).toBeNull();
+    it('resets isModifiedFromPreset to false', () => {
+      const stateWithRuleset = { activeRuleset: mockRuleset, isModifiedFromPreset: true };
+      const state = rulesetReducer(stateWithRuleset, clearRuleset());
+      expect(state.isModifiedFromPreset).toBe(false);
+    });
+  });
+
+  describe('patchActiveRuleset', () => {
+    it('patches a top-level field without clobbering others', () => {
+      const stateWithRuleset = { activeRuleset: mockRuleset, isModifiedFromPreset: false };
+      const state = rulesetReducer(stateWithRuleset, patchActiveRuleset({ name: 'Custom' }));
+      expect(state.activeRuleset?.name).toBe('Custom');
+      expect(state.activeRuleset?.allowedSources).toEqual(['pf1e-official']);
+      expect(state.activeRuleset?.optionalRules.heroPoints).toBe(false);
+    });
+
+    it('patches nested optionalRules via caller spread', () => {
+      const stateWithRuleset = { activeRuleset: mockRuleset, isModifiedFromPreset: false };
+      const state = rulesetReducer(
+        stateWithRuleset,
+        patchActiveRuleset({
+          optionalRules: { ...mockRuleset.optionalRules, heroPoints: true },
+        }),
+      );
+      expect(state.activeRuleset?.optionalRules.heroPoints).toBe(true);
+      expect(state.activeRuleset?.optionalRules.gestalt).toBe(false);
+    });
+
+    it('patches allowedSources', () => {
+      const stateWithRuleset = { activeRuleset: mockRuleset, isModifiedFromPreset: false };
+      const state = rulesetReducer(
+        stateWithRuleset,
+        patchActiveRuleset({ allowedSources: ['pf1e-official', 'dreamscarred'] }),
+      );
+      expect(state.activeRuleset?.allowedSources).toEqual(['pf1e-official', 'dreamscarred']);
+    });
+
+    it('updates updatedAt timestamp', () => {
+      const stateWithRuleset = { activeRuleset: mockRuleset, isModifiedFromPreset: false };
+      const before = mockRuleset.updatedAt;
+      const state = rulesetReducer(stateWithRuleset, patchActiveRuleset({ name: 'New Name' }));
+      expect(state.activeRuleset?.updatedAt).not.toBe(before);
+    });
+
+    it('increments version', () => {
+      const stateWithRuleset = { activeRuleset: mockRuleset, isModifiedFromPreset: false };
+      const state = rulesetReducer(stateWithRuleset, patchActiveRuleset({ name: 'New Name' }));
+      expect(state.activeRuleset?.version).toBe(mockRuleset.version + 1);
+    });
+
+    it('sets isModifiedFromPreset to true', () => {
+      const stateWithRuleset = { activeRuleset: mockRuleset, isModifiedFromPreset: false };
+      const state = rulesetReducer(stateWithRuleset, patchActiveRuleset({ name: 'New Name' }));
+      expect(state.isModifiedFromPreset).toBe(true);
     });
   });
 });
