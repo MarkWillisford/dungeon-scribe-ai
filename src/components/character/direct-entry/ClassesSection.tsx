@@ -198,7 +198,7 @@ function DraggableClassList() {
       heightsRef.current = classes.map((_, i) => heightsRef.current[i] ?? 80);
       rowHeights.value = [...heightsRef.current];
     }
-  }, [classes.length, rowHeights]);
+  }, [classes]);
 
   const handleHeightChange = useCallback(
     (index: number, h: number) => {
@@ -206,7 +206,7 @@ function DraggableClassList() {
       heightsRef.current[index] = h;
       rowHeights.value = [...heightsRef.current];
     },
-    [rowHeights],
+    [],
   );
 
   const handleDragEnd = useCallback(
