@@ -95,10 +95,11 @@ export const WARDER_POW_ARCHETYPES: ArchetypeData[] = [
           'At 3rd level, an ordained defender receives supernatural empowerment from her deity in the form of a divine gift. She receives her choice of one inquisitor inquisition or warpriest blessing. She may use this gift a number of times per day equal to 3 + 1/2 her ordained defender level (rounded down). The save DC for any abilities granted by this gift is equal to 10 + 1/2 the ordained defender\'s class level + the ordained defender\'s initiation modifier. This ability replaces the bonus feats gained at 3rd and 13th levels.',
       },
     ],
-    // Ordained Defender gains a discipline by alignment but does not explicitly lose one
+    // Adds one discipline by alignment — does NOT lose one:
+    //   Good → Silver Crane, Neither good nor evil → Eternal Guardian, Evil → Black Seraph
     disciplineSwaps: {
-      gained: ['silver-crane'], // Good-aligned default; also black-seraph (evil) or eternal-guardian (neutral)
-      lost: ['unknown'], // TBD: needs source book — page does not state a lost discipline
+      gained: ['silver-crane', 'eternal-guardian', 'black-seraph'], // alignment-dependent, only one applies
+      lost: [], // no discipline is traded away
     },
     source: 'Path of War: Expanded',
   },

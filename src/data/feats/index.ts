@@ -211,6 +211,15 @@ export { ORC_GOLARION_FEATS } from './orcGolarionFeats';
 export { OSIRION_FEATS } from './osirionFeats';
 export { AP_VOLUME_FEATS } from './apVolumeFeats';
 
+// Path of War / Path of War: Expanded (Dreamscarred Press)
+import { POW_FEATS } from './pow-feats';
+import { POW_FEATS_PART2 } from './pow-feats-part2';
+import { POW_FEATS_PART3 } from './pow-feats-part3';
+import { POW_FEATS_PART4 } from './pow-feats-part4';
+import { POW_STYLE_FEATS } from './pow-style-feats';
+import { POW_STYLE_FEATS_PART2 } from './pow-style-feats-part2';
+import { POW_STYLE_FEATS_PART3 } from './pow-style-feats-part3';
+
 export const ALL_FEATS: FeatDefinition[] = [
   ...CORE_FEATS,
   ...CORE_EXTRA_FEATS,
@@ -316,6 +325,14 @@ export const ALL_FEATS: FeatDefinition[] = [
   ...ORC_GOLARION_FEATS,
   ...OSIRION_FEATS,
   ...AP_VOLUME_FEATS,
+  // Path of War / Path of War: Expanded
+  ...POW_FEATS,
+  ...POW_FEATS_PART2,
+  ...POW_FEATS_PART3,
+  ...POW_FEATS_PART4,
+  ...POW_STYLE_FEATS,
+  ...POW_STYLE_FEATS_PART2,
+  ...POW_STYLE_FEATS_PART3,
 ];
 
 export function initializeFeatRegistry(): void {

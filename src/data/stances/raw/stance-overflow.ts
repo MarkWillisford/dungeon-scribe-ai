@@ -96,7 +96,7 @@ export const STANCE_OVERFLOW: StanceDefinition[] = [
     disciplineId: 'black-seraph',
     level: 8,
     description:
-      'The disciple of the Black Seraph radiates an aura of consuming darkness that drains the life force of all nearby foes. While in this stance, the initiator projects a 20-foot radius aura that deals 2d6 points of profane damage to all enemies within it at the start of each of the initiator\'s turns. The initiator heals a like amount of hit points for each creature damaged by this aura.',
+      'By opening one\'s self to the eternal hunger of the darkness that resides with the disciple, he may use himself as a filter for the life energies that feed this dark urge. At the end of the disciple\'s turn, he inflicts 2d6 points of profane damage on all living creatures within his 20-ft aura, gaining a like amount of temporary hit points. These temporary hit points persist until the end of the encounter, the initiator leaves this stance, or until they are lost. If an initiator already has a pool of temporary hit points from this stance, when it subsequently grants him new temporary hit points he either replaces his current pool with the new number or retains his current pool, whichever is greater. The initiator may exclude a number of allies from this damage equal to initiation modifier.',
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
