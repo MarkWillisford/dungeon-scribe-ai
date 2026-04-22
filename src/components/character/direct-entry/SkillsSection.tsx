@@ -357,10 +357,6 @@ export function SkillsSection() {
   const ruleset = useAppSelector((state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD);
   const showInitiating =
     ruleset.optionalRules.pathOfWarMechanics || ruleset.optionalRules.tomeOfBattleMechanics;
-  const visibleSkillCount = SKILL_DEFS.filter(
-    (d) => d.conditionalOn !== 'initiating' || showInitiating,
-  ).length;
-
   const [showAll, setShowAll] = useState(false);
   const [query, setQuery] = useState('');
 
@@ -506,7 +502,7 @@ export function SkillsSection() {
           accessibilityRole="button"
         >
           <Text style={[styles.showAllText, { color: colors.text.secondary }]}>
-            {showAll ? 'Show ranked skills only' : `Show all ${visibleSkillCount} skills`}
+            {showAll ? 'Show ranked skills only' : 'Show all skills'}
           </Text>
         </Pressable>
       )}
