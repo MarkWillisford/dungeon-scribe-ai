@@ -41,6 +41,7 @@ import reducer, {
   setTemplateAcquiredAtECL,
   setCombatField,
   setSkillEntry,
+  removeSkillEntry,
   addTrait,
   removeTrait,
   addFeatSlot,
@@ -972,6 +973,25 @@ describe('characterEntrySlice — skills', () => {
         setSkillEntry({ skillKey: 'perception', entry: { ranks: 7, misc: 1 } }),
       );
       expect(state.draft.skills['perception']).toEqual({ ranks: 7, misc: 1 });
+    });
+  });
+
+  describe('removeSkillEntry', () => {
+    it('deletes the key and sets isDirty', () => {
+      let state = reducer(
+        makeInitialState(),
+        setSkillEntry({ skillKey: 'craft (alchemy)', entry: { ranks: 3, misc: 0 } }),
+      );
+      state = reducer(state, removeSkillEntry('craft (alchemy)'));
+      expect(state.draft.skills['craft (alchemy)']).toBeUndefined();
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('is a no-op when key does not exist', () => {
+      const initial = makeInitialState();
+      const state = reducer(initial, removeSkillEntry('craft (nonexistent)'));
+      expect(state.draft.skills).toEqual(initial.draft.skills);
+      expect(state.isDirty).toBe(false);
     });
   });
 });

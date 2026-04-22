@@ -267,6 +267,9 @@ export const fireEvent = {
   changeText(node: RenderedNode, text: string) {
     if (node.props.onChangeText) {
       node.props.onChangeText(text);
+    } else if (node.props.onChange) {
+      // RN TextInput mock strips onChangeText and replaces it with onChange(nativeEvent)
+      node.props.onChange({ nativeEvent: { text } });
     }
   },
 };
