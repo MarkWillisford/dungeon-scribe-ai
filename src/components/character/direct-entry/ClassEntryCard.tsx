@@ -7,14 +7,19 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   removeClass,
   updateClassLevel,
+  updateClassArchetype,
   updateClassSpellcastingAdvancement,
   toggleClassPrereqOverride,
+  toggleFavoredClass,
+  setFavoredClassBonuses,
 } from '@/store/slices/characterEntrySlice';
 import { type DraftClassEntry, type SpellcastingAdvancement } from '@/types/characterDraft';
 import { GameDataService } from '@/services/GameDataService';
+import { selectClassDataMap } from '@/store/slices/gameDataSlice';
+import { lookupClassData } from '@/utils/characterComputations';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { type ClassChoice } from '@/types/classes';
-import { selectClassDataMap } from '@/store/slices/gameDataSlice';
+import { ArchetypePickerSheet } from './ArchetypePickerSheet';
 
 // Pairs of featureNames that are mutually exclusive — filling one disables the other.
 const MUTUALLY_EXCLUSIVE_PAIRS: [string, string][] = [['Domain', 'Inquisition']];
@@ -431,14 +436,37 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [choicesExpanded, setChoicesExpanded] = useState(false);
+  const [archetypePickerOpen, setArchetypePickerOpen] = useState(false);
   const [definitions, setDefinitions] = useState<ClassChoiceDefinition[]>([]);
+  const [archetypeLoadedClass, setArchetypeLoadedClass] = useState<string | null>(null);
+  const [archetypeExists, setArchetypeExists] = useState(false);
+  const hasArchetypes = archetypeLoadedClass === entry.className ? archetypeExists : null;
   const characterDeity = useAppSelector((state) => state.characterEntry.draft.deity);
   const classDataMap = useAppSelector(selectClassDataMap);
+  const classData = lookupClassData(entry.className, classDataMap);
+  const isBaseClass = (classData?.maxLevel ?? 20) === 20;
 
   useEffect(() => {
     GameDataService.getClassChoiceDefinitions(entry.className)
       .then(setDefinitions)
       .catch((e) => console.error('Failed to load class choice definitions:', e));
+    let cancelled = false;
+    GameDataService.getArchetypesByClass(entry.className)
+      .then((archetypes) => {
+        if (!cancelled) {
+          setArchetypeExists(archetypes.length > 0);
+          setArchetypeLoadedClass(entry.className);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setArchetypeExists(false);
+          setArchetypeLoadedClass(entry.className);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
   }, [entry.className]);
 
   const allSlots = definitions.flatMap((def) => deriveChoiceSlots(def, entry.level));
@@ -511,17 +539,152 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           ]}
           accessibilityLabel="Class level"
         />
-        <Text style={[styles.fieldLabel, { color: colors.text.secondary, marginLeft: 12 }]}>
-          Archetype
-        </Text>
-        <Text style={[styles.archetypePlaceholder, { color: colors.text.tertiary }]}>
-          {entry.archetypeName ?? 'none 🔍'}
-        </Text>
+        {hasArchetypes !== false && (
+          <Pressable
+            onPress={() => setArchetypePickerOpen(true)}
+            disabled={hasArchetypes === null}
+            style={styles.archetypeButton}
+            accessibilityRole="button"
+            accessibilityLabel="Choose archetype"
+          >
+            <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Archetype</Text>
+            <Text
+              style={[
+                styles.archetypePlaceholder,
+                { color: entry.archetypeName ? colors.text.primary : colors.text.tertiary },
+              ]}
+            >
+              {hasArchetypes === null ? '…' : (entry.archetypeName ?? 'none 🔍')}
+            </Text>
+          </Pressable>
+        )}
       </View>
+
+      <ArchetypePickerSheet
+        visible={archetypePickerOpen}
+        title={`${entry.className} — Choose Archetype`}
+        className={entry.className}
+        onSelect={({ archetypeId, archetypeName }) => {
+          dispatch(updateClassArchetype({ id: entry.id, archetypeId, archetypeName }));
+          setArchetypePickerOpen(false);
+        }}
+        onClose={() => setArchetypePickerOpen(false)}
+      />
 
       {/* Spellcasting advancement — rendered only when class data signals
           this class is a prestige advancer. No user toggle. */}
       {advancesSpec && <AdvancementControls entry={entry} />}
+
+      {/* Favored class — only base classes (maxLevel 20) can be favored */}
+      {isBaseClass && <Pressable
+        onPress={() => dispatch(toggleFavoredClass(entry.id))}
+        style={[styles.row, { borderTopColor: colors.border.DEFAULT, borderTopWidth: StyleSheet.hairlineWidth }]}
+        accessibilityRole="checkbox"
+        accessibilityState={{ checked: !!entry.isFavoredClass }}
+        accessibilityLabel="Favored class"
+      >
+        <View
+          style={[
+            styles.checkbox,
+            {
+              borderColor: entry.isFavoredClass ? fantasy.gold : colors.border.DEFAULT,
+              backgroundColor: entry.isFavoredClass
+                ? isDark
+                  ? 'rgba(212,175,55,0.2)'
+                  : 'rgba(140,90,40,0.1)'
+                : 'transparent',
+            },
+          ]}
+        >
+          {entry.isFavoredClass && (
+            <Text style={[styles.checkmark, { color: fantasy.gold }]}>✓</Text>
+          )}
+        </View>
+        <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Favored class</Text>
+      </Pressable>}
+
+      {isBaseClass && entry.isFavoredClass && (
+        <View style={[styles.favoredBonusRow, { borderTopColor: colors.border.DEFAULT }]}>
+          <Text style={[styles.favoredBonusLabel, { color: colors.text.secondary }]}>
+            Bonuses:
+          </Text>
+          {(['hp', 'skillRank'] as const).map((field) => {
+            const hp = entry.favoredClassBonuses?.hp ?? 0;
+            const skillRank = entry.favoredClassBonuses?.skillRank ?? 0;
+            const value = field === 'hp' ? hp : skillRank;
+            const allocated = hp + skillRank;
+            const canInc = allocated < entry.level;
+            const canDec = value > 0;
+            const label = field === 'hp' ? 'HP' : 'Skill';
+            return (
+              <View key={field} style={styles.bonusStepper}>
+                <Text style={[styles.bonusStepperLabel, { color: colors.text.tertiary }]}>
+                  {label}
+                </Text>
+                <View style={styles.bonusStepperRow}>
+                  <Pressable
+                    onPress={() =>
+                      dispatch(setFavoredClassBonuses({
+                        id: entry.id,
+                        hp: field === 'hp' ? hp - 1 : hp,
+                        skillRank: field === 'skillRank' ? skillRank - 1 : skillRank,
+                      }))
+                    }
+                    disabled={!canDec}
+                    style={[
+                      styles.stepperBtn,
+                      {
+                        borderColor: colors.border.DEFAULT,
+                        backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+                        opacity: canDec ? 1 : 0.3,
+                      },
+                    ]}
+                    accessibilityLabel={`Decrease ${label} favored class bonus`}
+                  >
+                    <Text style={[styles.stepperBtnText, { color: colors.text.primary }]}>−</Text>
+                  </Pressable>
+                  <Text style={[styles.stepperValue, { color: colors.text.primary }]}>
+                    {value}
+                  </Text>
+                  <Pressable
+                    onPress={() =>
+                      dispatch(setFavoredClassBonuses({
+                        id: entry.id,
+                        hp: field === 'hp' ? hp + 1 : hp,
+                        skillRank: field === 'skillRank' ? skillRank + 1 : skillRank,
+                      }))
+                    }
+                    disabled={!canInc}
+                    style={[
+                      styles.stepperBtn,
+                      {
+                        borderColor: canInc
+                          ? isDark ? fantasy.gold : fantasy.bronze
+                          : colors.border.DEFAULT,
+                        backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+                        opacity: canInc ? 1 : 0.3,
+                      },
+                    ]}
+                    accessibilityLabel={`Increase ${label} favored class bonus`}
+                  >
+                    <Text
+                      style={[
+                        styles.stepperBtnText,
+                        { color: canInc ? (isDark ? fantasy.gold : fantasy.darkWood) : colors.text.tertiary },
+                      ]}
+                    >
+                      +
+                    </Text>
+                  </Pressable>
+                </View>
+              </View>
+            );
+          })}
+          <Text style={[styles.bonusRemaining, { color: colors.text.tertiary }]}>
+            {entry.level - (entry.favoredClassBonuses?.hp ?? 0) - (entry.favoredClassBonuses?.skillRank ?? 0)} left
+          </Text>
+        </View>
+      )}
 
       {/* Class choices */}
       {hasChoices && (
@@ -665,6 +828,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     minHeight: 38,
   },
+  archetypeButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+    gap: 8,
+  },
   archetypePlaceholder: {
     fontFamily: 'LibreBaskerville',
     fontSize: 13,
@@ -742,6 +911,61 @@ const styles = StyleSheet.create({
   choicesList: {
     paddingHorizontal: 12,
     paddingBottom: 4,
+  },
+  favoredBonusRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    gap: 6,
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
+  favoredBonusLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    marginRight: 4,
+  },
+  bonusStepper: {
+    alignItems: 'center',
+    gap: 2,
+  },
+  bonusStepperLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    fontWeight: '600',
+  },
+  bonusStepperRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  stepperBtn: {
+    width: 28,
+    height: 28,
+    borderWidth: 1,
+    borderRadius: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  stepperBtnText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 16,
+    fontWeight: '700',
+    lineHeight: 20,
+  },
+  stepperValue: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 15,
+    fontWeight: '700',
+    minWidth: 24,
+    textAlign: 'center',
+  },
+  bonusRemaining: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    marginLeft: 4,
+    alignSelf: 'flex-end',
+    paddingBottom: 2,
   },
   prereqRow: {
     paddingHorizontal: 12,

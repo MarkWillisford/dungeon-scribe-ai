@@ -86,6 +86,11 @@ export interface DraftClassEntry {
   spellcastingAdvancement?: SpellcastingAdvancement;
   classChoices: ClassChoice[];
   prereqOverride: boolean; // DM override — suppress prereq warnings for this class
+  isFavoredClass?: boolean; // true if this is the character's favored class
+  favoredClassBonuses?: {
+    hp: number; // count of levels where the +1 HP bonus was taken
+    skillRank: number; // count of levels where the +1 skill rank bonus was taken
+  };
 }
 
 export type SpellcastingAdvancement =

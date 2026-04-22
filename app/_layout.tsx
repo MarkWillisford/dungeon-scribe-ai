@@ -3,6 +3,7 @@ import { Stack, usePathname } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { Provider } from 'react-redux';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { store } from '@/store/store';
 import { setUser, setIsAdmin, setAuthInitialized } from '@/store/slices/authSlice';
 import { FirebaseAuthService } from '@/services/FirebaseAuthService';
@@ -70,10 +71,12 @@ function RootNavigation() {
 
 export default function RootLayout() {
   return (
-    <ErrorBoundary>
-      <Provider store={store}>
-        <RootNavigation />
-      </Provider>
-    </ErrorBoundary>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <RootNavigation />
+        </Provider>
+      </ErrorBoundary>
+    </GestureHandlerRootView>
   );
 }

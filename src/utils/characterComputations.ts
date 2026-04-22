@@ -221,6 +221,7 @@ export function computeMaxHP(
       hp += isFirstLevel ? hd : Math.floor(hd / 2) + 1;
       isFirstLevel = false;
     }
+    hp += cls.favoredClassBonuses?.hp ?? 0;
   }
   const totalLevel = classes.reduce((sum, c) => sum + c.level, 0);
   hp += conMod * totalLevel;
