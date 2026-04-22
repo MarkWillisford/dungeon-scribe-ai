@@ -31,6 +31,8 @@ import reducer, {
   updateClassSpellcastingAdvancement,
   upsertClassChoice,
   toggleClassPrereqOverride,
+  toggleFavoredClass,
+  setFavoredClassBonuses,
   reorderClasses,
   addTemplate,
   removeTemplate,
@@ -39,6 +41,7 @@ import reducer, {
   setTemplateAcquiredAtECL,
   setCombatField,
   setSkillEntry,
+  removeSkillEntry,
   addTrait,
   removeTrait,
   addFeatSlot,
@@ -753,6 +756,57 @@ describe('characterEntrySlice — classes', () => {
     });
   });
 
+  describe('toggleFavoredClass', () => {
+    it('marks a class as favored and initializes bonus counters', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      expect(state.draft.classes[0].isFavoredClass).toBe(true);
+      expect(state.draft.classes[0].favoredClassBonuses).toEqual({ hp: 0, skillRank: 0 });
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('clears favored status on previously favored class when a different class is toggled', () => {
+      let state = makeInitialState();
+      state = reducer(state, addClass(makeClass('cls-1')));
+      state = reducer(state, addClass(makeClass('cls-2')));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      state = reducer(state, toggleFavoredClass('cls-2'));
+      expect(state.draft.classes[0].isFavoredClass).toBe(false);
+      expect(state.draft.classes[1].isFavoredClass).toBe(true);
+    });
+
+    it('toggles off when the already-favored class is pressed again', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      expect(state.draft.classes[0].isFavoredClass).toBe(true);
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      expect(state.draft.classes[0].isFavoredClass).toBe(false);
+    });
+
+    it('is a no-op when id is not found', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
+      const before = state.draft.classes[0].isFavoredClass;
+      state = reducer(state, toggleFavoredClass('does-not-exist'));
+      expect(state.draft.classes[0].isFavoredClass).toBe(before);
+    });
+  });
+
+  describe('setFavoredClassBonuses', () => {
+    it('sets hp and skillRank bonus counts on the matching class', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', hp: 5, skillRank: 3 }));
+      expect(state.draft.classes[0].favoredClassBonuses).toEqual({ hp: 5, skillRank: 3 });
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('is a no-op when id is not found', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
+      state = reducer(state, setFavoredClassBonuses({ id: 'does-not-exist', hp: 5, skillRank: 3 }));
+      expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
+    });
+  });
+
   describe('reorderClasses', () => {
     it('reorders classes by the provided id array', () => {
       let state = makeInitialState();
@@ -919,6 +973,25 @@ describe('characterEntrySlice — skills', () => {
         setSkillEntry({ skillKey: 'perception', entry: { ranks: 7, misc: 1 } }),
       );
       expect(state.draft.skills['perception']).toEqual({ ranks: 7, misc: 1 });
+    });
+  });
+
+  describe('removeSkillEntry', () => {
+    it('deletes the key and sets isDirty', () => {
+      let state = reducer(
+        makeInitialState(),
+        setSkillEntry({ skillKey: 'craft (alchemy)', entry: { ranks: 3, misc: 0 } }),
+      );
+      state = reducer(state, removeSkillEntry('craft (alchemy)'));
+      expect(state.draft.skills['craft (alchemy)']).toBeUndefined();
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('is a no-op when key does not exist', () => {
+      const initial = makeInitialState();
+      const state = reducer(initial, removeSkillEntry('craft (nonexistent)'));
+      expect(state.draft.skills).toEqual(initial.draft.skills);
+      expect(state.isDirty).toBe(false);
     });
   });
 });
