@@ -47,7 +47,6 @@ export const RISSI_FIXTURE: CharacterDraft = {
     { atHD: 12, ability: 'wis' },
     { atHD: 16, ability: 'wis' },
     { atHD: 20, ability: 'str' },
-    { atHD: 24, ability: 'str' },
   ],
 
   // ---- Classes ----
@@ -68,7 +67,10 @@ export const RISSI_FIXTURE: CharacterDraft = {
       className: 'Hathran',
       level: 5,
       sourceSystem: '3.5e',
-      spellcastingAdvancement: { type: 'divine' },
+      spellcastingAdvancement: {
+        mode: 'single',
+        perLevel: Array(5).fill({ baseClassEntryId: 'class-cleric' }),
+      },
       classChoices: [],
       prereqOverride: false,
     },
@@ -77,16 +79,22 @@ export const RISSI_FIXTURE: CharacterDraft = {
       className: 'Dweomerkeeper',
       level: 10,
       sourceSystem: '3.5e',
-      spellcastingAdvancement: { type: 'divine' },
+      spellcastingAdvancement: {
+        mode: 'single',
+        perLevel: Array(10).fill({ baseClassEntryId: 'class-cleric' }),
+      },
       classChoices: [],
       prereqOverride: false,
     },
     {
       id: 'class-radiant-servant',
-      className: 'Radiant Servant',
+      className: 'Radiant Servant of Milani',
       level: 1,
       sourceSystem: 'pf1e',
-      spellcastingAdvancement: { type: 'divine' },
+      spellcastingAdvancement: {
+        mode: 'single',
+        perLevel: Array(1).fill({ baseClassEntryId: 'class-cleric' }),
+      },
       classChoices: [],
       prereqOverride: false,
     },
@@ -95,7 +103,10 @@ export const RISSI_FIXTURE: CharacterDraft = {
       className: 'Prestige Paladin',
       level: 2,
       sourceSystem: '3.5e',
-      spellcastingAdvancement: { type: 'divine' },
+      spellcastingAdvancement: {
+        mode: 'single',
+        perLevel: Array(2).fill({ baseClassEntryId: 'class-cleric' }),
+      },
       classChoices: [],
       prereqOverride: false,
     },
@@ -121,7 +132,6 @@ export const RISSI_FIXTURE: CharacterDraft = {
 
   // ---- Skills (ranks > 0 only) ----
   skills: {
-    concentration: { ranks: 22, misc: 0 },
     diplomacy: { ranks: 5, misc: 2 },
     knowledgeArcana: { ranks: 10, misc: 0 },
     knowledgeReligion: { ranks: 10, misc: 0 },
@@ -229,15 +239,6 @@ export const RISSI_FIXTURE: CharacterDraft = {
       availableAtLevel: 15,
       prereqOverride: false,
     },
-    {
-      id: 'feat-slot-mythic-1',
-      source: 'mythic',
-      availableAt: 'Tier 1',
-      availableAtLevel: 1,
-      featId: 'mythic-spell-focus',
-      featName: 'Mythic Spell Focus',
-      prereqOverride: false,
-    },
   ],
 
   // ---- Spellcasting ----
@@ -245,56 +246,48 @@ export const RISSI_FIXTURE: CharacterDraft = {
     {
       id: 'pool-divine',
       poolType: 'divine',
+      baseClassEntryId: 'class-cleric',
       castingAbility: 'wis',
       spellsPerDayMisc: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
   ],
 
   // ---- Equipment ----
-  weapons: [
+  equipment: [
     {
       id: 'weapon-mace',
+      collection: 'weapons' as const,
       name: 'Heavy Mace +4',
-      attackBonus: 12,
-      damage: '1d8+8',
-      damageType: 'B',
-      critRange: '20',
-      critMultiplier: 2,
+      slot: 'main_hand' as const,
     },
-  ],
-  armor: [
     {
       id: 'armor-fullplate',
+      collection: 'armor' as const,
       name: 'Mithral Full Plate +3',
-      acBonus: 11,
-      maxDex: 3,
-      acp: 0,
+      slot: 'armor' as const,
     },
-  ],
-  magicItems: [
     {
       id: 'item-orange-ioun',
+      collection: 'magicItems' as const,
       name: 'Orange Ioun Stone',
-      description: '+1 caster level to all spells',
-      autoApplyNote: '+1 CL all spells → applied to Divine pool',
     },
     {
       id: 'item-headband',
+      collection: 'magicItems' as const,
       name: 'Headband of Mental Superiority +4',
-      description: '+4 enhancement to INT, WIS, CHA',
-      autoApplyNote: '+4 enhancement → WIS, INT, CHA auto-applied',
+      slot: 'headband' as const,
     },
     {
       id: 'item-belt',
+      collection: 'magicItems' as const,
       name: 'Belt of Physical Might +4 (STR/CON)',
-      description: '+4 enhancement to STR and CON',
-      autoApplyNote: '+4 enhancement → STR, CON auto-applied',
+      slot: 'belt' as const,
     },
     {
       id: 'item-ring-protection',
+      collection: 'magicItems' as const,
       name: 'Ring of Protection +4',
-      description: '+4 deflection bonus to AC',
-      autoApplyNote: '+4 deflection → AC auto-applied',
+      slot: 'ring_left' as const,
     },
   ],
 

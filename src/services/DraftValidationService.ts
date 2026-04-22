@@ -3,14 +3,19 @@
 // Returns an array of EntryValidationWarning. Warnings are non-blocking —
 // the user can acknowledge them or override individual checks.
 //
-import type { CharacterDraft } from '@/types/characterDraft';
+import type { CharacterDraft, DraftClassEntry } from '@/types/characterDraft';
 import type { EntryValidationWarning } from '@/store/slices/characterEntrySlice';
 import type { Character } from '@/types';
 import type { Ruleset } from '@/types/ruleset';
 import { DraftStateResolver, type ECLTimeline } from './DraftStateResolver';
 import { PrerequisiteService } from './PrerequisiteService';
 import { GameDataService } from '@/services/GameDataService';
-import { lookupClassData, abilityTotal, abilityModifier } from '@/utils/characterComputations';
+import {
+  lookupClassData,
+  abilityTotal,
+  abilityModifier,
+  type ClassDataMap,
+} from '@/utils/characterComputations';
 
 // ---- Helpers ----
 
@@ -41,18 +46,19 @@ export class DraftValidationService {
   static async validate(
     draft: CharacterDraft,
     ruleset: Ruleset,
+    classDataMap: ClassDataMap,
   ): Promise<EntryValidationWarning[]> {
     const warnId = makeWarnId(); // scoped counter — safe under parallel calls and test isolation
 
-    const timeline = DraftStateResolver.buildTimeline(draft, ruleset);
+    const timeline = DraftStateResolver.buildTimeline(draft, ruleset, classDataMap);
     const { totalHD } = timeline;
 
     const intTotal = abilityTotal(draft.abilities.int);
     const intMod = abilityModifier(intTotal);
 
     const [classPrereqWarnings, featPrereqWarnings] = await Promise.all([
-      this.checkClassPrerequisites(draft, ruleset, timeline, warnId),
-      this.checkFeatPrerequisites(draft, ruleset, timeline, warnId),
+      this.checkClassPrerequisites(draft, ruleset, timeline, warnId, classDataMap),
+      this.checkFeatPrerequisites(draft, ruleset, timeline, warnId, classDataMap),
     ]);
 
     return [
@@ -62,8 +68,8 @@ export class DraftValidationService {
       ...classPrereqWarnings,
       ...featPrereqWarnings,
       ...this.checkTraitCount(draft, ruleset, warnId),
-      ...this.checkSkillRanks(draft, totalHD, intMod, warnId),
-      ...this.checkSpellcastingAdvancement(draft, warnId),
+      ...this.checkSkillRanks(draft, totalHD, intMod, warnId, classDataMap),
+      ...this.checkSpellcastingAdvancement(draft, warnId, classDataMap),
     ];
   }
 
@@ -168,13 +174,14 @@ export class DraftValidationService {
     ruleset: Ruleset,
     timeline: ECLTimeline,
     warnId: WarnId,
+    classDataMap: ClassDataMap,
   ): Promise<EntryValidationWarning[]> {
     const w: EntryValidationWarning[] = [];
 
     for (const entry of draft.classes) {
       if (entry.prereqOverride) continue;
 
-      const classData = lookupClassData(entry.className);
+      const classData = lookupClassData(entry.className, classDataMap);
       if (!classData?.prerequisites) continue; // not a prestige class (or no prereqs defined)
 
       // Find the ECL at which this class was first taken
@@ -186,7 +193,7 @@ export class DraftValidationService {
       // Get the snapshot BEFORE that ECL (the character state when the decision was made).
       // snapshotBeforeECL returns null at ECL 1 — no prior state means all prereqs are unmet.
       const snapshot =
-        DraftStateResolver.snapshotBeforeECL(draft, firstCheckpoint.ecl, ruleset) ??
+        DraftStateResolver.snapshotBeforeECL(draft, firstCheckpoint.ecl, ruleset, classDataMap) ??
         DraftStateResolver.EMPTY_SNAPSHOT;
 
       const prereqs = classData.prerequisites;
@@ -229,7 +236,7 @@ export class DraftValidationService {
 
       // Spellcasting (heuristic parse)
       if (prereqs.spellcasting) {
-        const result = this.checkSpellcastingPrereq(prereqs.spellcasting, snapshot);
+        const result = this.checkSpellcastingPrereq(prereqs.spellcasting, snapshot, classDataMap);
         if (result === false) {
           unmet.push(prereqs.spellcasting);
         } else if (result === 'unknown') {
@@ -281,6 +288,7 @@ export class DraftValidationService {
   private static checkSpellcastingPrereq(
     requirement: string,
     snapshot: ReturnType<typeof DraftStateResolver.snapshotAtECL>,
+    classDataMap: ClassDataMap,
   ): boolean | 'unknown' {
     if (!snapshot) return 'unknown';
 
@@ -297,7 +305,7 @@ export class DraftValidationService {
 
     return snapshot.spellcasting.pools.some((pool) => {
       if (pool.baseCasterLevel < minCL) return false;
-      const classData = lookupClassData(pool.baseClass);
+      const classData = lookupClassData(pool.baseClass, classDataMap);
       if (!classData) return false;
       const type = classData.spellcasting.type.toLowerCase();
       return type === castingType;
@@ -311,6 +319,7 @@ export class DraftValidationService {
     ruleset: Ruleset,
     timeline: ECLTimeline,
     warnId: WarnId,
+    classDataMap: ClassDataMap,
   ): Promise<EntryValidationWarning[]> {
     const w: EntryValidationWarning[] = [];
 
@@ -324,7 +333,7 @@ export class DraftValidationService {
       // Returns null at ECL 1 (no prior state) — use EMPTY_SNAPSHOT so prereqs are
       // correctly evaluated as unmet rather than silently skipped.
       const snapshot =
-        DraftStateResolver.snapshotBeforeECL(draft, slot.availableAtLevel, ruleset) ??
+        DraftStateResolver.snapshotBeforeECL(draft, slot.availableAtLevel, ruleset, classDataMap) ??
         DraftStateResolver.EMPTY_SNAPSHOT;
 
       // Cast snapshot as Character — structurally compatible for the fields PrerequisiteService reads
@@ -375,13 +384,14 @@ export class DraftValidationService {
     totalHD: number,
     intMod: number,
     warnId: WarnId,
+    classDataMap: ClassDataMap,
   ): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
 
     // Total available ranks across all classes
     let totalAvailable = 0;
     for (const entry of draft.classes) {
-      const classData = lookupClassData(entry.className);
+      const classData = lookupClassData(entry.className, classDataMap);
       const basePerLevel = classData?.skillRanksPerLevel ?? 2; // default 2 if unknown
       totalAvailable += Math.max(basePerLevel + intMod, 1) * entry.level;
     }
@@ -422,11 +432,12 @@ export class DraftValidationService {
   private static checkSpellcastingAdvancement(
     draft: CharacterDraft,
     warnId: WarnId,
+    classDataMap: ClassDataMap,
   ): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
 
     for (const entry of draft.classes) {
-      const classData = lookupClassData(entry.className);
+      const classData = lookupClassData(entry.className, classDataMap);
       if (!classData) continue;
       if (classData.spellcasting.type === 'None') continue;
       if (classData.category !== 'Prestige') continue;
@@ -437,23 +448,77 @@ export class DraftValidationService {
           warn(
             warnId(`spell-advancement-${entry.className}`),
             'spells',
-            `${entry.className} advances spellcasting but no advancement type is configured.`,
-            'Set spellcasting advancement in the Classes tab to ensure correct caster level computation.',
+            `${entry.className} advances spellcasting but no advancement is configured.`,
+            'Set spellcasting advancement on the Classes tab.',
           ),
         );
         continue;
       }
 
-      // Chosen type without the choice made
-      if (
-        entry.spellcastingAdvancement.type === 'chosen' &&
-        !entry.spellcastingAdvancement.chosenType
-      ) {
+      // Check pointers at advancing levels only. Skip levels are allowed
+      // to have empty pointers (they never contribute).
+      const classById = new Map(draft.classes.map((c) => [c.id, c]));
+      const adv = entry.spellcastingAdvancement;
+      const spec = classData.advancesSpellcasting;
+      if (!spec) continue;
+      const isAdvancingLevel = (lvl: number): boolean =>
+        spec.atLevels ? spec.atLevels.includes(lvl) : lvl >= 1 && lvl <= entry.level;
+
+      // Get target's tradition from class data map.
+      const getTradition = (target: DraftClassEntry | undefined): 'divine' | 'arcane' | null => {
+        if (!target) return null;
+        const t = classDataMap.get(target.className.toLowerCase())?.spellcasting.type;
+        return t === 'Divine' ? 'divine' : t === 'Arcane' ? 'arcane' : null;
+      };
+
+      const missing: number[] = [];
+      const wrongTradition: number[] = [];
+
+      if (adv.mode === 'single') {
+        adv.perLevel.forEach((p, i) => {
+          if (!isAdvancingLevel(i + 1)) return;
+          const target = classById.get(p.baseClassEntryId);
+          if (!p.baseClassEntryId || !target) {
+            missing.push(i + 1);
+            return;
+          }
+          if (spec.tradition && spec.tradition !== 'chosen') {
+            const t = getTradition(target);
+            if (t !== spec.tradition) wrongTradition.push(i + 1);
+          }
+        });
+      } else {
+        adv.perLevel.forEach((p, i) => {
+          if (!isAdvancingLevel(i + 1)) return;
+          const arc = classById.get(p.arcaneBaseClassEntryId);
+          const div = classById.get(p.divineBaseClassEntryId);
+          if (!p.arcaneBaseClassEntryId || !arc || !p.divineBaseClassEntryId || !div) {
+            missing.push(i + 1);
+            return;
+          }
+          if (getTradition(arc) !== 'arcane' || getTradition(div) !== 'divine') {
+            wrongTradition.push(i + 1);
+          }
+        });
+      }
+
+      if (missing.length > 0) {
         w.push(
           warn(
-            warnId(`spell-advancement-chosen-${entry.className}`),
+            warnId(`spell-advancement-missing-${entry.className}`),
             'spells',
-            `${entry.className}: spellcasting advancement type is "chosen" but no type was selected.`,
+            `${entry.className}: advancement target missing at level ${missing.join(', ')}.`,
+            'Pick a base caster class for each prestige level on the Classes tab.',
+          ),
+        );
+      }
+      if (wrongTradition.length > 0) {
+        w.push(
+          warn(
+            warnId(`spell-advancement-tradition-${entry.className}`),
+            'spells',
+            `${entry.className}: advancement target at level ${wrongTradition.join(', ')} has the wrong spellcasting tradition.`,
+            'This class restricts which tradition of caster it can advance.',
           ),
         );
       }

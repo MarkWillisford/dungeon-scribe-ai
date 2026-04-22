@@ -15,6 +15,49 @@
         { "fieldPath": "userId", "order": "ASCENDING" },
         { "fieldPath": "info.lastModified", "order": "DESCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "magicItems",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "visibility", "order": "ASCENDING" },
+        { "fieldPath": "slot", "order": "ASCENDING" },
+        { "fieldPath": "name", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "maneuvers",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "visibility", "order": "ASCENDING" },
+        { "fieldPath": "disciplineId", "order": "ASCENDING" },
+        { "fieldPath": "level", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "maneuvers",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "source.bookId", "order": "ASCENDING" },
+        { "fieldPath": "level", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "stances",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "visibility", "order": "ASCENDING" },
+        { "fieldPath": "disciplineId", "order": "ASCENDING" },
+        { "fieldPath": "level", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "archetypes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "visibility", "order": "ASCENDING" },
+        { "fieldPath": "className", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

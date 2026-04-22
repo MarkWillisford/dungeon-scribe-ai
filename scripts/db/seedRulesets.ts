@@ -17,7 +17,6 @@
 
 import * as admin from 'firebase-admin';
 import { SYSTEM_PRESETS } from '../../src/data/rulesets/presets';
-import type { Ruleset } from '../../src/types/ruleset';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';

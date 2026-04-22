@@ -184,6 +184,15 @@ export interface FeatGrantedManeuver {
   isExpended: boolean;
 }
 
+// ---- Progression Table ----
+// Format: [maneuversKnown, maneuversReadied, stancesKnown] per class level (index 0 = level 1).
+// Defined here so the type is available to InitiatingService without importing from data files.
+export type InitiatingProgressionTable = [
+  maneuversKnown: number,
+  maneuversReadied: number,
+  stancesKnown: number,
+][];
+
 // ---- Top-level container (parallels Spellcasting) ----
 
 export interface Initiating {

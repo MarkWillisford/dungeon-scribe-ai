@@ -6,6 +6,7 @@
 
 import { Alignment } from './base';
 import { ClassChoice } from './classes';
+import type { ItemSlot } from './magicItems';
 
 // ---- Ability scores ----
 
@@ -37,13 +38,31 @@ export interface DraftClassEntry {
   archetypeId?: string;
   archetypeName?: string;
   sourceSystem: 'pf1e' | '3.5e' | 'homebrew' | 'campaign';
-  spellcastingAdvancement?: {
-    type: 'divine' | 'arcane' | 'both' | 'highest' | 'chosen';
-    chosenType?: 'divine' | 'arcane'; // required when type === 'chosen'
-  };
+  // Prestige-class spellcasting advancement. At each level of this class the
+  // player picks which existing caster class (by DraftClassEntry.id) gets
+  // advanced. Tradition (divine/arcane) is derived from the referenced
+  // class's spellcasting.type — never stored here to avoid drift.
+  //
+  // 'single' — one base class advances per level (Hathran, Dweomerkeeper, ...).
+  // 'both'   — both an arcane and a divine pool advance per level (Mystic Theurge).
+  //
+  // perLevel[i] corresponds to prestige class level (i + 1). Length must
+  // equal this entry's `level`. Pointers may be '' when the user hasn't
+  // chosen yet — validation surfaces that as a warning.
+  spellcastingAdvancement?: SpellcastingAdvancement;
   classChoices: ClassChoice[];
   prereqOverride: boolean; // DM override — suppress prereq warnings for this class
 }
+
+export type SpellcastingAdvancement =
+  | {
+      mode: 'single';
+      perLevel: Array<{ baseClassEntryId: string }>;
+    }
+  | {
+      mode: 'both';
+      perLevel: Array<{ arcaneBaseClassEntryId: string; divineBaseClassEntryId: string }>;
+    };
 
 // ---- Templates ----
 
@@ -122,22 +141,47 @@ export type SpellPoolType = 'divine' | 'arcane';
 export interface DraftSpellcastingPool {
   id: string;
   poolType: SpellPoolType;
+  // The DraftClassEntry.id of the base caster this pool represents. Every
+  // pool is anchored to exactly one base caster; prestige classes don't get
+  // their own pool, they advance somebody else's via spellcastingAdvancement.
+  baseClassEntryId: string;
   castingAbility: AbilityKey;
   spellsPerDayMisc: number[]; // index = spell level 0–9; misc adjustments
 }
 
 // ---- Equipment ----
 
+// Character-layer equipped slot — ring splits into ring_left / ring_right here
+// (item definitions use ItemSlot which has 'ring' singular)
+export type DraftEquippedSlot = Exclude<ItemSlot, 'ring'> | 'ring_left' | 'ring_right';
+
+// Unified equipped item — covers weapons, armor, shields, and magic items
+export interface DraftEquipmentItem {
+  id: string;
+  definitionId?: string; // Firestore doc id in the source collection
+  collection: 'weapons' | 'armor' | 'shields' | 'magicItems';
+  name: string;
+  slot?: DraftEquippedSlot; // undefined = in a container or carried
+  containerId?: string; // id of a DraftEquipmentItem with isContainer === true
+  isContainer?: boolean; // true for Bags of Holding, Handy Haversacks, etc.
+  isOrbiting?: boolean; // true for ioun stones added via the orbiting picker
+  allowsHandUse?: boolean; // true for bucklers — off-hand stays free
+  notes?: string;
+}
+
+// Legacy shape — kept so existing code compiles; use DraftEquipmentItem going forward
+/** @deprecated Use DraftEquipmentItem */
 export interface DraftWeapon {
   id: string;
   name: string;
   attackBonus: number;
-  damage: string; // e.g. "1d8+8"
-  damageType: string; // B / P / S
-  critRange: string; // e.g. "19-20"
+  damage: string;
+  damageType: string;
+  critRange: string;
   critMultiplier: number;
 }
 
+/** @deprecated Use DraftEquipmentItem */
 export interface DraftArmor {
   id: string;
   name: string;
@@ -146,12 +190,8 @@ export interface DraftArmor {
   acp: number;
 }
 
-export interface DraftMagicItem {
-  id: string;
-  name: string;
-  description: string;
-  autoApplyNote?: string; // e.g. "+1 CL all spells → applied to Divine pool"
-}
+/** @deprecated Use DraftEquipmentItem */
+export type DraftMagicItem = DraftEquipmentItem;
 
 // ---- Root draft ----
 
@@ -196,10 +236,8 @@ export interface CharacterDraft {
   // Spellcasting
   spellcastingPools: DraftSpellcastingPool[];
 
-  // Equipment
-  weapons: DraftWeapon[];
-  armor: DraftArmor[];
-  magicItems: DraftMagicItem[];
+  // Equipment — unified slot system
+  equipment: DraftEquipmentItem[];
 
   // Notes
   characterNotes: string;
