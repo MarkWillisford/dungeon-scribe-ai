@@ -143,6 +143,8 @@ jest.mock('@/data/equipment', () => ({
   ALL_GEAR: [],
 }));
 
+jest.mock('@/data/classes/archetypes/index', () => ({ ALL_ARCHETYPES: [] }));
+
 // Class choice collection mocks
 jest.mock('@/data/domains/index', () => ({
   ALL_DOMAINS: [
@@ -819,6 +821,48 @@ describe('GameDataService', () => {
     test('unknown collection returns empty array', async () => {
       const items = await GameDataService.getClassChoiceItems('nonexistent-collection');
       expect(items).toHaveLength(0);
+    });
+  });
+
+  describe('getArchetypesByClass', () => {
+    const MOCK_ARCHETYPE_FIGHTER = {
+      name: 'Two-Handed Fighter',
+      className: 'Fighter',
+      description: 'Focuses on two-handed weapon mastery.',
+      replacedFeatures: ['Weapon Training 1'],
+      modifiedFeatures: [],
+      newFeatures: [],
+      source: 'APG',
+    };
+    const MOCK_ARCHETYPE_ROGUE = {
+      name: 'Burglar',
+      className: 'Rogue',
+      description: 'Skilled at stealth and breaking in.',
+      replacedFeatures: ['Trapfinding'],
+      modifiedFeatures: [],
+      newFeatures: [],
+      source: 'APG',
+    };
+
+    beforeEach(() => {
+      const archetypesModule = jest.requireMock('@/data/classes/archetypes/index');
+      archetypesModule.ALL_ARCHETYPES = [MOCK_ARCHETYPE_FIGHTER, MOCK_ARCHETYPE_ROGUE];
+    });
+
+    test('returns archetypes for the given class', async () => {
+      const archetypes = await GameDataService.getArchetypesByClass('Fighter');
+      expect(archetypes).toHaveLength(1);
+      expect(archetypes[0].name).toBe('Two-Handed Fighter');
+    });
+
+    test('returns empty array when no archetypes match', async () => {
+      const archetypes = await GameDataService.getArchetypesByClass('Wizard');
+      expect(archetypes).toHaveLength(0);
+    });
+
+    test('does not include archetypes from other classes', async () => {
+      const archetypes = await GameDataService.getArchetypesByClass('Rogue');
+      expect(archetypes.every((a) => a.className === 'Rogue')).toBe(true);
     });
   });
 });
