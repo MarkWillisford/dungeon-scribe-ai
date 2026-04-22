@@ -21,6 +21,7 @@ config({ path: resolve(__dirname, '../../.env.local') });
 import * as admin from 'firebase-admin';
 import { ALL_EXPANDED_RACES } from '../../src/data/races/index';
 import { ALL_EXPANDED_CLASSES } from '../../src/data/classes/index';
+import { ALL_ARCHETYPES } from '../../src/data/classes/archetypes/index';
 import { ALL_FEATS } from '../../src/data/feats/index';
 import { ALL_TRAITS } from '../../src/data/traits/index';
 import { ALL_WEAPONS, ALL_ARMOR, ALL_SHIELDS, ALL_GEAR } from '../../src/data/equipment/index';
@@ -88,6 +89,7 @@ interface CollectionSpec {
 const COLLECTIONS: CollectionSpec[] = [
   { label: 'Races', collection: 'races', expected: ALL_EXPANDED_RACES.length },
   { label: 'Classes', collection: 'classes', expected: ALL_EXPANDED_CLASSES.length },
+  { label: 'Archetypes', collection: 'archetypes', expected: ALL_ARCHETYPES.length },
   { label: 'Feats', collection: 'feats', expected: ALL_FEATS.length },
   { label: 'Traits', collection: 'traits', expected: ALL_TRAITS.length },
   { label: 'Weapons', collection: 'weapons', expected: ALL_WEAPONS.length },

@@ -56,7 +56,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
   saves: {
     fortitude: SaveProgression.Good,
     reflex: SaveProgression.Poor,
-    will: SaveProgression.Poor,
+    will: SaveProgression.Good,
   },
   weaponProficiencies: ['Simple weapons', 'Martial weapons'],
   armorProficiencies: ['Light armor', 'Medium armor', 'Shields'],
@@ -275,11 +275,17 @@ export const WARLORD_CLASS: ExpandedClassData = {
       'scarlet-throne',
       'solar-wind',
       'thrashing-dragon',
-      'piercing-thunder-or-tempest-gale',
+      'piercing-thunder',
+      'tempest-gale',
     ],
-    progressionTableKey: 'WARLORD_PROGRESSION',
+    progressionTableKey: 'warlord',
     recoveryMechanics: {
       primary: { type: 'gambit' },
+      secondary: {
+        type: 'custom',
+        description:
+          'The warlord may spend a standard action to recover a single readied maneuver of his choosing.',
+      },
     },
   },
   source: 'Path of War',

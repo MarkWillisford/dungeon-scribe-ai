@@ -141,7 +141,7 @@ export const PHOENIX_CHAMPION_CLASS: ExpandedClassData = {
       'solar-wind',
       'tempest-gale',
     ],
-    progressionTableKey: 'PHOENIX_CHAMPION_PROGRESSION',
+    progressionTableKey: 'phoenix-champion',
     recoveryMechanics: {
       primary: {
         type: 'custom',

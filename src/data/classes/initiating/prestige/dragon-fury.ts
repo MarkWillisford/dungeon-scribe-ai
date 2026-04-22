@@ -161,7 +161,7 @@ export const DRAGON_FURY_CLASS: ExpandedClassData = {
       'primal-fury',
       'thrashing-dragon',
     ],
-    progressionTableKey: 'DRAGON_FURY_PROGRESSION',
+    progressionTableKey: 'dragon-fury',
     recoveryMechanics: {
       primary: {
         type: 'custom',

@@ -113,7 +113,7 @@ export const ANIMUS_ADEPT_CLASS: ExpandedClassData = {
     initiatingAbility: 'WIS',
     ilProgression: 'full',
     disciplines: ['elemental-flux'],
-    progressionTableKey: 'ANIMUS_ADEPT_PROGRESSION',
+    progressionTableKey: 'animus-adept',
     recoveryMechanics: {
       primary: {
         type: 'animus_fueled',

@@ -19,7 +19,7 @@ import type { SearchItem } from '@/components/ui/SearchPickerSheet';
 import type { FeatDefinition, FeatType } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
-import type { ExpandedClassData, SpellProgressionTable } from '@/data/classes/types';
+import type { ExpandedClassData, SpellProgressionTable, ArchetypeData } from '@/data/classes/types';
 import type { ClassData } from '@/data/classes';
 import type { ExpandedRaceData } from '@/data/races';
 import type {
@@ -28,6 +28,7 @@ import type {
   ShieldDefinition,
   GearDefinition,
 } from '@/types/equipment';
+import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
 import type {
   ShamanSpiritEntry,
   EidolonEvolutionEntry,
@@ -51,7 +52,13 @@ import {
 } from '@/data/races';
 
 import { FirestoreGameDataConnector } from './FirestoreGameDataConnector';
-import type { GameDataConnector, ClassChoiceFilters } from './GameDataConnector';
+import type { GameDataConnector, ClassChoiceFilters, ManeuverFilter, DisciplineFilter } from './GameDataConnector';
+import type {
+  DisciplineDefinition,
+  ManeuverDefinition,
+  StanceDefinition,
+  MartialTradition,
+} from '@/types/initiating';
 
 // ---- QueryContext ----------------------------------------------------------------
 
@@ -158,6 +165,10 @@ export class GameDataService {
       'wildtalents',
       'occultistfocuspowers',
       'phrenicamplifications',
+      // Initiating system — wired in Phase 8 (getDisciplines/getManeuvers/getStances)
+      'disciplines',
+      'maneuvers',
+      'stances',
     ];
 
     if (!validCollections.includes(collectionName)) return [];
@@ -372,6 +383,12 @@ export class GameDataService {
           category: a.amplificationTier === 'major' ? 'Major Amplifications' : 'Amplifications',
         }));
 
+      // TODO Phase 8: wire getDisciplines/getManeuvers/getStances through connector
+      case 'disciplines':
+      case 'maneuvers':
+      case 'stances':
+        return [];
+
       default:
         return [];
     }
@@ -433,6 +450,10 @@ export class GameDataService {
     return GameDataService.connector.getClasses(ctx);
   }
 
+  static async getAllClasses(): Promise<ExpandedClassData[]> {
+    return GameDataService.connector.getClassesAll();
+  }
+
   // ---- Races -----------------------------------------------------------------
 
   /**
@@ -470,5 +491,48 @@ export class GameDataService {
 
   static async getGear(): Promise<GearDefinition[]> {
     return GameDataService.connector.getGear();
+  }
+
+  static async getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]> {
+    return GameDataService.connector.getMagicItemsBySlot(slot);
+  }
+
+  // ---- Initiating system -----------------------------------------------------
+
+  static async getDisciplines(filter?: DisciplineFilter): Promise<DisciplineDefinition[]> {
+    return GameDataService.connector.getDisciplines(filter);
+  }
+
+  static async getDisciplineById(id: string): Promise<DisciplineDefinition | null> {
+    return GameDataService.connector.getDisciplineById(id);
+  }
+
+  static async getManeuvers(filter?: ManeuverFilter): Promise<ManeuverDefinition[]> {
+    return GameDataService.connector.getManeuvers(filter);
+  }
+
+  static async getManeuverById(id: string): Promise<ManeuverDefinition | null> {
+    return GameDataService.connector.getManeuverById(id);
+  }
+
+  static async getStances(filter?: ManeuverFilter): Promise<StanceDefinition[]> {
+    return GameDataService.connector.getStances(filter);
+  }
+
+  static async getStanceById(id: string): Promise<StanceDefinition | null> {
+    return GameDataService.connector.getStanceById(id);
+  }
+
+  static async getMartialTraditions(): Promise<MartialTradition[]> {
+    return GameDataService.connector.getMartialTraditions();
+  }
+
+  static async getMartialTraditionById(id: string): Promise<MartialTradition | null> {
+    return GameDataService.connector.getMartialTraditionById(id);
+  }
+
+  static async getArchetypesByClass(className: string, context?: QueryContext): Promise<ArchetypeData[]> {
+    const ctx = context ?? GameDataService.getContextFromStore();
+    return GameDataService.connector.getArchetypesByClass(className, ctx);
   }
 }

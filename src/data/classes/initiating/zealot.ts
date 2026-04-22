@@ -389,16 +389,17 @@ export const ZEALOT_CLASS: ExpandedClassData = {
       'sleeping-goddess',
       'solar-wind',
     ],
-    progressionTableKey: 'ZEALOT_PROGRESSION',
+    progressionTableKey: 'zealot',
     recoveryMechanics: {
       primary: {
-        type: 'conviction_fueled',
-        resourceId: 'zealot_conviction',
+        type: 'custom',
+        description:
+          'The zealot recovers maneuvers by using the Aid Another action as a move action, recovering a number of expended maneuvers equal to his zealot initiation modifier (minimum 2). This activates his zeal class feature.',
       },
       secondary: {
         type: 'custom',
         description:
-          'The zealot recovers maneuvers by using the Aid Another action as a move action, recovering a number of expended maneuvers equal to his zealot initiation modifier (minimum 2). This activates his zeal class feature. Alternately, the zealot may recover a single maneuver as a standard action.',
+          'The zealot may recover a single maneuver as a standard action.',
       },
     },
   },

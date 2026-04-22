@@ -289,7 +289,7 @@ export const MYSTIC_CLASS: ExpandedClassData = {
       'solar-wind',
       'veiled-moon',
     ],
-    progressionTableKey: 'MYSTIC_PROGRESSION',
+    progressionTableKey: 'mystic',
     recoveryMechanics: {
       primary: {
         type: 'custom',

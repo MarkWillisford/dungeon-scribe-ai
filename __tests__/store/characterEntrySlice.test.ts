@@ -50,15 +50,12 @@ import reducer, {
   removeSpellcastingPool,
   updatePoolCastingAbility,
   setSpellsPerDayMisc,
-  addWeapon,
-  removeWeapon,
-  updateWeapon,
-  addArmor,
-  removeArmor,
-  updateArmor,
-  addMagicItem,
-  removeMagicItem,
-  updateMagicItem,
+  addEquipment,
+  removeEquipment,
+  updateEquipment,
+  assignEquipmentSlot,
+  unassignEquipmentSlot,
+  assignEquipmentContainer,
   setCharacterNotes,
   setCampaignNotes,
   type EntryValidationWarning,
@@ -71,9 +68,7 @@ import type {
   DraftFeatSlot,
   DraftTrait,
   DraftSpellcastingPool,
-  DraftWeapon,
-  DraftArmor,
-  DraftMagicItem,
+  DraftEquipmentItem,
   LevelIncrementSlot,
 } from '@/types/characterDraft';
 
@@ -85,7 +80,10 @@ function makeInitialState() {
   return reducer(undefined, { type: '@@INIT' });
 }
 
-function makeWarning(id: string, section: EntryValidationWarning['section'] = 'identity'): EntryValidationWarning {
+function makeWarning(
+  id: string,
+  section: EntryValidationWarning['section'] = 'identity',
+): EntryValidationWarning {
   return { id, section, message: `Warning ${id}`, isAcknowledged: false };
 }
 
@@ -129,33 +127,26 @@ function makeTrait(id: string): DraftTrait {
   };
 }
 
-function makePool(id: string): DraftSpellcastingPool {
+function makePool(id: string, baseClassEntryId: string = 'class-test'): DraftSpellcastingPool {
   return {
     id,
     poolType: 'arcane',
+    baseClassEntryId,
     castingAbility: 'int',
     spellsPerDayMisc: new Array(10).fill(0),
   };
 }
 
-function makeWeapon(id: string): DraftWeapon {
+function makeEquipmentItem(
+  id: string,
+  overrides: Partial<DraftEquipmentItem> = {},
+): DraftEquipmentItem {
   return {
     id,
-    name: 'Longsword',
-    attackBonus: 5,
-    damage: '1d8+3',
-    damageType: 'S',
-    critRange: '19-20',
-    critMultiplier: 2,
+    collection: 'magicItems',
+    name: 'Cloak of Resistance +1',
+    ...overrides,
   };
-}
-
-function makeArmor(id: string): DraftArmor {
-  return { id, name: 'Chain Shirt', acBonus: 4, acp: -2 };
-}
-
-function makeMagicItem(id: string): DraftMagicItem {
-  return { id, name: 'Cloak of Resistance +1', description: '+1 resistance bonus on all saving throws.' };
 }
 
 // ---------------------------------------------------------------------------
@@ -177,7 +168,10 @@ describe('characterEntrySlice — session management', () => {
   describe('loadCharacter', () => {
     it('loads a draft and sets mode', () => {
       const draft: CharacterDraft = { ...BLANK_DRAFT, name: 'Valeria' };
-      const state = reducer(makeInitialState(), loadCharacter({ draft, mode: 'edit', characterId: 'abc-123' }));
+      const state = reducer(
+        makeInitialState(),
+        loadCharacter({ draft, mode: 'edit', characterId: 'abc-123' }),
+      );
       expect(state.draft.name).toBe('Valeria');
       expect(state.mode).toBe('edit');
       expect(state.originalCharacterId).toBe('abc-123');
@@ -249,7 +243,10 @@ describe('characterEntrySlice — validation', () => {
   describe('setValidationWarnings', () => {
     it('replaces warnings and stamps lastValidatedAt', () => {
       const before = Date.now();
-      const state = reducer(makeInitialState(), setValidationWarnings([makeWarning('w1'), makeWarning('w2')]));
+      const state = reducer(
+        makeInitialState(),
+        setValidationWarnings([makeWarning('w1'), makeWarning('w2')]),
+      );
       const after = Date.now();
       expect(state.validationWarnings).toHaveLength(2);
       expect(state.validationWarnings[0].id).toBe('w1');
@@ -266,7 +263,10 @@ describe('characterEntrySlice — validation', () => {
 
   describe('acknowledgeWarning', () => {
     it('marks the matching warning as acknowledged', () => {
-      let state = reducer(makeInitialState(), setValidationWarnings([makeWarning('w1'), makeWarning('w2')]));
+      let state = reducer(
+        makeInitialState(),
+        setValidationWarnings([makeWarning('w1'), makeWarning('w2')]),
+      );
       state = reducer(state, acknowledgeWarning('w1'));
       expect(state.validationWarnings[0].isAcknowledged).toBe(true);
       expect(state.validationWarnings[1].isAcknowledged).toBe(false);
@@ -369,8 +369,8 @@ describe('characterEntrySlice — identity', () => {
   });
 
   it('setHeight updates height and sets isDirty', () => {
-    const state = reducer(makeInitialState(), setHeight("5'8\""));
-    expect(state.draft.height).toBe("5'8\"");
+    const state = reducer(makeInitialState(), setHeight('5\'8"'));
+    expect(state.draft.height).toBe('5\'8"');
     expect(state.isDirty).toBe(true);
   });
 
@@ -429,7 +429,10 @@ describe('characterEntrySlice — identity', () => {
         makeInitialState(),
         setRace({ raceId: 'dwarf', raceName: 'Dwarf', racialBonuses: { con: 2, wis: 2, cha: -2 } }),
       );
-      state = reducer(state, setRace({ raceId: 'elf', raceName: 'Elf', racialBonuses: { dex: 2, int: 2 } }));
+      state = reducer(
+        state,
+        setRace({ raceId: 'elf', raceName: 'Elf', racialBonuses: { dex: 2, int: 2 } }),
+      );
       // Old dwarf bonuses should be cleared
       expect(state.draft.abilities.con.racial).toBe(0);
       expect(state.draft.abilities.wis.racial).toBe(0);
@@ -444,7 +447,14 @@ describe('characterEntrySlice — identity', () => {
         makeInitialState(),
         setRace({ raceId: 'human', raceName: 'Human', racialBonuses: {} }),
       );
-      const keys: (keyof typeof state.draft.abilities)[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+      const keys: (keyof typeof state.draft.abilities)[] = [
+        'str',
+        'dex',
+        'con',
+        'int',
+        'wis',
+        'cha',
+      ];
       keys.forEach((k) => expect(state.draft.abilities[k].racial).toBe(0));
     });
   });
@@ -457,13 +467,19 @@ describe('characterEntrySlice — identity', () => {
 describe('characterEntrySlice — abilities', () => {
   describe('setAbilityField', () => {
     it('sets a specific field on an ability score', () => {
-      const state = reducer(makeInitialState(), setAbilityField({ ability: 'str', field: 'base', value: 16 }));
+      const state = reducer(
+        makeInitialState(),
+        setAbilityField({ ability: 'str', field: 'base', value: 16 }),
+      );
       expect(state.draft.abilities.str.base).toBe(16);
       expect(state.isDirty).toBe(true);
     });
 
     it('can set the inherent field', () => {
-      const state = reducer(makeInitialState(), setAbilityField({ ability: 'cha', field: 'inherent', value: 5 }));
+      const state = reducer(
+        makeInitialState(),
+        setAbilityField({ ability: 'cha', field: 'inherent', value: 5 }),
+      );
       expect(state.draft.abilities.cha.inherent).toBe(5);
     });
   });
@@ -541,6 +557,29 @@ describe('characterEntrySlice — classes', () => {
       state = reducer(state, removeClass('does-not-exist'));
       expect(state.draft.classes).toHaveLength(1);
     });
+
+    it('cascades: clears advancement pointers targeting the removed class', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('base')));
+      state = reducer(state, addClass(makeClass('prestige')));
+      state = reducer(
+        state,
+        updateClassSpellcastingAdvancement({
+          id: 'prestige',
+          advancement: { mode: 'single', perLevel: [{ baseClassEntryId: 'base' }] },
+        }),
+      );
+      state = reducer(state, removeClass('base'));
+      const adv = state.draft.classes[0].spellcastingAdvancement;
+      if (adv?.mode !== 'single') throw new Error('expected mode single');
+      expect(adv.perLevel[0].baseClassEntryId).toBe('');
+    });
+
+    it('cascades: removes pools anchored to the removed class', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('base')));
+      state = reducer(state, addSpellcastingPool(makePool('pool-x', 'base')));
+      state = reducer(state, removeClass('base'));
+      expect(state.draft.spellcastingPools).toHaveLength(0);
+    });
   });
 
   describe('updateClassLevel', () => {
@@ -558,12 +597,52 @@ describe('characterEntrySlice — classes', () => {
       // Only the data guard matters — level must not change
       expect(state.draft.classes[0].level).toBe(before);
     });
+
+    it('grows advancement perLevel when level increases, copying last target', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('prestige', { level: 2 })));
+      state = reducer(
+        state,
+        updateClassSpellcastingAdvancement({
+          id: 'prestige',
+          advancement: {
+            mode: 'single',
+            perLevel: [{ baseClassEntryId: 'base' }, { baseClassEntryId: 'base' }],
+          },
+        }),
+      );
+      state = reducer(state, updateClassLevel({ id: 'prestige', level: 4 }));
+      const adv = state.draft.classes[0].spellcastingAdvancement;
+      if (adv?.mode !== 'single') throw new Error('expected mode single');
+      expect(adv.perLevel).toHaveLength(4);
+      expect(adv.perLevel.every((p) => p.baseClassEntryId === 'base')).toBe(true);
+    });
+
+    it('trims advancement perLevel when level decreases', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('prestige', { level: 5 })));
+      state = reducer(
+        state,
+        updateClassSpellcastingAdvancement({
+          id: 'prestige',
+          advancement: {
+            mode: 'single',
+            perLevel: Array.from({ length: 5 }, () => ({ baseClassEntryId: 'base' })),
+          },
+        }),
+      );
+      state = reducer(state, updateClassLevel({ id: 'prestige', level: 2 }));
+      const adv = state.draft.classes[0].spellcastingAdvancement;
+      if (adv?.mode !== 'single') throw new Error('expected mode single');
+      expect(adv.perLevel).toHaveLength(2);
+    });
   });
 
   describe('updateClassArchetype', () => {
     it('sets archetype on the matching class', () => {
       let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
-      state = reducer(state, updateClassArchetype({ id: 'cls-1', archetypeId: 'arch-1', archetypeName: 'Lore Warden' }));
+      state = reducer(
+        state,
+        updateClassArchetype({ id: 'cls-1', archetypeId: 'arch-1', archetypeName: 'Lore Warden' }),
+      );
       expect(state.draft.classes[0].archetypeId).toBe('arch-1');
       expect(state.draft.classes[0].archetypeName).toBe('Lore Warden');
       expect(state.isDirty).toBe(true);
@@ -579,11 +658,12 @@ describe('characterEntrySlice — classes', () => {
   describe('updateClassSpellcastingAdvancement', () => {
     it('sets spellcastingAdvancement on the matching class', () => {
       let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
-      state = reducer(
-        state,
-        updateClassSpellcastingAdvancement({ id: 'cls-1', advancement: { type: 'divine' } }),
-      );
-      expect(state.draft.classes[0].spellcastingAdvancement).toEqual({ type: 'divine' });
+      const adv = {
+        mode: 'single' as const,
+        perLevel: [{ baseClassEntryId: 'cls-target' }],
+      };
+      state = reducer(state, updateClassSpellcastingAdvancement({ id: 'cls-1', advancement: adv }));
+      expect(state.draft.classes[0].spellcastingAdvancement).toEqual(adv);
       expect(state.isDirty).toBe(true);
     });
 
@@ -591,7 +671,10 @@ describe('characterEntrySlice — classes', () => {
       let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
       state = reducer(
         state,
-        updateClassSpellcastingAdvancement({ id: 'does-not-exist', advancement: { type: 'arcane' } }),
+        updateClassSpellcastingAdvancement({
+          id: 'does-not-exist',
+          advancement: { mode: 'single', perLevel: [{ baseClassEntryId: 'x' }] },
+        }),
       );
       expect(state.draft.classes[0].spellcastingAdvancement).toBeUndefined();
     });
@@ -608,18 +691,28 @@ describe('characterEntrySlice — classes', () => {
     });
 
     it('updates an existing choice at the given index', () => {
-      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', {
-        classChoices: [{ featureName: 'Domain', takenAtLevel: 1, selection: 'Fire' }],
-      })));
+      let state = reducer(
+        makeInitialState(),
+        addClass(
+          makeClass('cls-1', {
+            classChoices: [{ featureName: 'Domain', takenAtLevel: 1, selection: 'Fire' }],
+          }),
+        ),
+      );
       const choice = { featureName: 'Domain', takenAtLevel: 1, selection: 'Water' };
       state = reducer(state, upsertClassChoice({ classId: 'cls-1', choiceIndex: 0, choice }));
       expect(state.draft.classes[0].classChoices[0].selection).toBe('Water');
     });
 
     it('appends a second choice for the same featureName at choiceIndex 1', () => {
-      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', {
-        classChoices: [{ featureName: 'Domain', takenAtLevel: 1, selection: 'Fire' }],
-      })));
+      let state = reducer(
+        makeInitialState(),
+        addClass(
+          makeClass('cls-1', {
+            classChoices: [{ featureName: 'Domain', takenAtLevel: 1, selection: 'Fire' }],
+          }),
+        ),
+      );
       const choice = { featureName: 'Domain', takenAtLevel: 1, selection: 'Water' };
       state = reducer(state, upsertClassChoice({ classId: 'cls-1', choiceIndex: 1, choice }));
       expect(state.draft.classes[0].classChoices).toHaveLength(2);
@@ -629,14 +722,20 @@ describe('characterEntrySlice — classes', () => {
     it('is a no-op when classId is not found', () => {
       let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
       const choice = { featureName: 'Domain', takenAtLevel: 1, selection: 'Fire' };
-      state = reducer(state, upsertClassChoice({ classId: 'does-not-exist', choiceIndex: 0, choice }));
+      state = reducer(
+        state,
+        upsertClassChoice({ classId: 'does-not-exist', choiceIndex: 0, choice }),
+      );
       expect(state.draft.classes[0].classChoices).toHaveLength(0);
     });
   });
 
   describe('toggleClassPrereqOverride', () => {
     it('toggles prereqOverride on the matching class', () => {
-      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { prereqOverride: false })));
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { prereqOverride: false })),
+      );
       state = reducer(state, toggleClassPrereqOverride('cls-1'));
       expect(state.draft.classes[0].prereqOverride).toBe(true);
       state = reducer(state, toggleClassPrereqOverride('cls-1'));
@@ -645,7 +744,10 @@ describe('characterEntrySlice — classes', () => {
     });
 
     it('is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { prereqOverride: false })));
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { prereqOverride: false })),
+      );
       state = reducer(state, toggleClassPrereqOverride('does-not-exist'));
       expect(state.draft.classes[0].prereqOverride).toBe(false);
     });
@@ -706,7 +808,10 @@ describe('characterEntrySlice — templates', () => {
 
   describe('updateTemplate', () => {
     it('replaces the matching template entry', () => {
-      let state = reducer(makeInitialState(), addTemplate(makeTemplate('tpl-1', { templateName: 'Old Name' })));
+      let state = reducer(
+        makeInitialState(),
+        addTemplate(makeTemplate('tpl-1', { templateName: 'Old Name' })),
+      );
       const updated = makeTemplate('tpl-1', { templateName: 'New Name' });
       state = reducer(state, updateTemplate(updated));
       expect(state.draft.templates[0].templateName).toBe('New Name');
@@ -714,8 +819,14 @@ describe('characterEntrySlice — templates', () => {
     });
 
     it('is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addTemplate(makeTemplate('tpl-1', { templateName: 'Original' })));
-      state = reducer(state, updateTemplate(makeTemplate('does-not-exist', { templateName: 'Changed' })));
+      let state = reducer(
+        makeInitialState(),
+        addTemplate(makeTemplate('tpl-1', { templateName: 'Original' })),
+      );
+      state = reducer(
+        state,
+        updateTemplate(makeTemplate('does-not-exist', { templateName: 'Changed' })),
+      );
       expect(state.draft.templates[0].templateName).toBe('Original');
     });
   });
@@ -741,7 +852,10 @@ describe('characterEntrySlice — templates', () => {
     });
 
     it('can clear acquiredAtECL by setting undefined', () => {
-      let state = reducer(makeInitialState(), addTemplate(makeTemplate('tpl-1', { acquiredAtECL: 7 })));
+      let state = reducer(
+        makeInitialState(),
+        addTemplate(makeTemplate('tpl-1', { acquiredAtECL: 7 })),
+      );
       state = reducer(state, setTemplateAcquiredAtECL({ id: 'tpl-1', acquiredAtECL: undefined }));
       expect(state.draft.templates[0].acquiredAtECL).toBeUndefined();
     });
@@ -772,7 +886,10 @@ describe('characterEntrySlice — combat', () => {
     });
 
     it('can set a field to undefined', () => {
-      let state = reducer(makeInitialState(), setCombatField({ field: 'maxHPOverride', value: 100 }));
+      let state = reducer(
+        makeInitialState(),
+        setCombatField({ field: 'maxHPOverride', value: 100 }),
+      );
       state = reducer(state, setCombatField({ field: 'maxHPOverride', value: undefined }));
       expect(state.draft.combat.maxHPOverride).toBeUndefined();
     });
@@ -793,8 +910,14 @@ describe('characterEntrySlice — skills', () => {
     });
 
     it('overwrites an existing skill entry', () => {
-      let state = reducer(makeInitialState(), setSkillEntry({ skillKey: 'perception', entry: { ranks: 3, misc: 0 } }));
-      state = reducer(state, setSkillEntry({ skillKey: 'perception', entry: { ranks: 7, misc: 1 } }));
+      let state = reducer(
+        makeInitialState(),
+        setSkillEntry({ skillKey: 'perception', entry: { ranks: 3, misc: 0 } }),
+      );
+      state = reducer(
+        state,
+        setSkillEntry({ skillKey: 'perception', entry: { ranks: 7, misc: 1 } }),
+      );
       expect(state.draft.skills['perception']).toEqual({ ranks: 7, misc: 1 });
     });
   });
@@ -875,7 +998,10 @@ describe('characterEntrySlice — feats', () => {
   describe('assignFeat', () => {
     it('assigns a feat to the matching slot', () => {
       let state = reducer(makeInitialState(), addFeatSlot(makeFeatSlot('slot-1')));
-      state = reducer(state, assignFeat({ slotId: 'slot-1', featId: 'feat-power-attack', featName: 'Power Attack' }));
+      state = reducer(
+        state,
+        assignFeat({ slotId: 'slot-1', featId: 'feat-power-attack', featName: 'Power Attack' }),
+      );
       const slot = state.draft.featSlots[0];
       expect(slot.featId).toBe('feat-power-attack');
       expect(slot.featName).toBe('Power Attack');
@@ -884,7 +1010,10 @@ describe('characterEntrySlice — feats', () => {
 
     it('is a no-op when slotId is not found', () => {
       let state = reducer(makeInitialState(), addFeatSlot(makeFeatSlot('slot-1')));
-      state = reducer(state, assignFeat({ slotId: 'does-not-exist', featId: 'feat-x', featName: 'X' }));
+      state = reducer(
+        state,
+        assignFeat({ slotId: 'does-not-exist', featId: 'feat-x', featName: 'X' }),
+      );
       expect(state.draft.featSlots[0].featId).toBeUndefined();
     });
   });
@@ -969,7 +1098,10 @@ describe('characterEntrySlice — spellcasting', () => {
 
     it('is a no-op when poolId is not found', () => {
       let state = reducer(makeInitialState(), addSpellcastingPool(makePool('pool-1')));
-      state = reducer(state, updatePoolCastingAbility({ poolId: 'does-not-exist', ability: 'wis' }));
+      state = reducer(
+        state,
+        updatePoolCastingAbility({ poolId: 'does-not-exist', ability: 'wis' }),
+      );
       expect(state.draft.spellcastingPools[0].castingAbility).toBe('int');
     });
   });
@@ -984,7 +1116,10 @@ describe('characterEntrySlice — spellcasting', () => {
 
     it('is a no-op when poolId is not found', () => {
       let state = reducer(makeInitialState(), addSpellcastingPool(makePool('pool-1')));
-      state = reducer(state, setSpellsPerDayMisc({ poolId: 'does-not-exist', spellLevel: 3, value: 2 }));
+      state = reducer(
+        state,
+        setSpellsPerDayMisc({ poolId: 'does-not-exist', spellLevel: 3, value: 2 }),
+      );
       expect(state.draft.spellcastingPools[0].spellsPerDayMisc[3]).toBe(0);
     });
   });
@@ -995,122 +1130,96 @@ describe('characterEntrySlice — spellcasting', () => {
 // ---------------------------------------------------------------------------
 
 describe('characterEntrySlice — equipment', () => {
-  describe('weapons', () => {
-    it('addWeapon pushes a weapon and sets isDirty', () => {
-      const w = makeWeapon('w-1');
-      const state = reducer(makeInitialState(), addWeapon(w));
-      expect(state.draft.weapons).toHaveLength(1);
-      expect(state.draft.weapons[0]).toEqual(w);
+  describe('addEquipment', () => {
+    it('pushes an item and sets isDirty', () => {
+      const item = makeEquipmentItem('eq-1');
+      const state = reducer(makeInitialState(), addEquipment(item));
+      expect(state.draft.equipment).toHaveLength(1);
+      expect(state.draft.equipment[0]).toEqual(item);
       expect(state.isDirty).toBe(true);
-    });
-
-    it('removeWeapon removes by id', () => {
-      let state = reducer(makeInitialState(), addWeapon(makeWeapon('w-1')));
-      state = reducer(state, addWeapon(makeWeapon('w-2')));
-      state = reducer(state, removeWeapon('w-1'));
-      expect(state.draft.weapons).toHaveLength(1);
-      expect(state.draft.weapons[0].id).toBe('w-2');
-      expect(state.isDirty).toBe(true);
-    });
-
-    it('removeWeapon is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addWeapon(makeWeapon('w-1')));
-      state = reducer(state, removeWeapon('does-not-exist'));
-      expect(state.draft.weapons).toHaveLength(1);
-    });
-
-    it('updateWeapon replaces the matching weapon', () => {
-      let state = reducer(makeInitialState(), addWeapon(makeWeapon('w-1')));
-      const updated: DraftWeapon = { ...makeWeapon('w-1'), name: 'Greatsword', damage: '2d6+5' };
-      state = reducer(state, updateWeapon(updated));
-      expect(state.draft.weapons[0].name).toBe('Greatsword');
-      expect(state.draft.weapons[0].damage).toBe('2d6+5');
-      expect(state.isDirty).toBe(true);
-    });
-
-    it('updateWeapon is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addWeapon(makeWeapon('w-1')));
-      state = reducer(state, updateWeapon({ ...makeWeapon('does-not-exist'), name: 'Ghost Sword' }));
-      expect(state.draft.weapons[0].name).toBe('Longsword');
     });
   });
 
-  describe('armor', () => {
-    it('addArmor pushes an armor entry and sets isDirty', () => {
-      const a = makeArmor('a-1');
-      const state = reducer(makeInitialState(), addArmor(a));
-      expect(state.draft.armor).toHaveLength(1);
-      expect(state.draft.armor[0]).toEqual(a);
+  describe('removeEquipment', () => {
+    it('removes by id', () => {
+      let state = reducer(makeInitialState(), addEquipment(makeEquipmentItem('eq-1')));
+      state = reducer(state, addEquipment(makeEquipmentItem('eq-2')));
+      state = reducer(state, removeEquipment('eq-1'));
+      expect(state.draft.equipment).toHaveLength(1);
+      expect(state.draft.equipment[0].id).toBe('eq-2');
       expect(state.isDirty).toBe(true);
     });
 
-    it('removeArmor removes by id', () => {
-      let state = reducer(makeInitialState(), addArmor(makeArmor('a-1')));
-      state = reducer(state, addArmor(makeArmor('a-2')));
-      state = reducer(state, removeArmor('a-1'));
-      expect(state.draft.armor).toHaveLength(1);
-      expect(state.draft.armor[0].id).toBe('a-2');
-      expect(state.isDirty).toBe(true);
-    });
-
-    it('removeArmor is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addArmor(makeArmor('a-1')));
-      state = reducer(state, removeArmor('does-not-exist'));
-      expect(state.draft.armor).toHaveLength(1);
-    });
-
-    it('updateArmor replaces the matching armor', () => {
-      let state = reducer(makeInitialState(), addArmor(makeArmor('a-1')));
-      const updated: DraftArmor = { ...makeArmor('a-1'), name: 'Full Plate', acBonus: 9 };
-      state = reducer(state, updateArmor(updated));
-      expect(state.draft.armor[0].name).toBe('Full Plate');
-      expect(state.draft.armor[0].acBonus).toBe(9);
-      expect(state.isDirty).toBe(true);
-    });
-
-    it('updateArmor is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addArmor(makeArmor('a-1')));
-      state = reducer(state, updateArmor({ ...makeArmor('does-not-exist'), name: 'Mithral Plate' }));
-      expect(state.draft.armor[0].name).toBe('Chain Shirt');
+    it('is a no-op when id is not found', () => {
+      let state = reducer(makeInitialState(), addEquipment(makeEquipmentItem('eq-1')));
+      state = reducer(state, removeEquipment('does-not-exist'));
+      expect(state.draft.equipment).toHaveLength(1);
     });
   });
 
-  describe('magic items', () => {
-    it('addMagicItem pushes a magic item and sets isDirty', () => {
-      const item = makeMagicItem('mi-1');
-      const state = reducer(makeInitialState(), addMagicItem(item));
-      expect(state.draft.magicItems).toHaveLength(1);
-      expect(state.draft.magicItems[0]).toEqual(item);
+  describe('updateEquipment', () => {
+    it('replaces the matching item', () => {
+      let state = reducer(makeInitialState(), addEquipment(makeEquipmentItem('eq-1')));
+      const updated: DraftEquipmentItem = {
+        ...makeEquipmentItem('eq-1'),
+        name: 'Cloak of Resistance +3',
+      };
+      state = reducer(state, updateEquipment(updated));
+      expect(state.draft.equipment[0].name).toBe('Cloak of Resistance +3');
       expect(state.isDirty).toBe(true);
     });
 
-    it('removeMagicItem removes by id', () => {
-      let state = reducer(makeInitialState(), addMagicItem(makeMagicItem('mi-1')));
-      state = reducer(state, addMagicItem(makeMagicItem('mi-2')));
-      state = reducer(state, removeMagicItem('mi-1'));
-      expect(state.draft.magicItems).toHaveLength(1);
-      expect(state.draft.magicItems[0].id).toBe('mi-2');
+    it('is a no-op when id is not found', () => {
+      let state = reducer(makeInitialState(), addEquipment(makeEquipmentItem('eq-1')));
+      state = reducer(
+        state,
+        updateEquipment({ ...makeEquipmentItem('does-not-exist'), name: 'Ring of Wishes' }),
+      );
+      expect(state.draft.equipment[0].name).toBe('Cloak of Resistance +1');
+    });
+  });
+
+  describe('assignEquipmentSlot', () => {
+    it('assigns slot and clears containerId', () => {
+      let state = reducer(
+        makeInitialState(),
+        addEquipment(makeEquipmentItem('eq-1', { containerId: 'bag-1' })),
+      );
+      state = reducer(state, assignEquipmentSlot({ id: 'eq-1', slot: 'belt' }));
+      expect(state.draft.equipment[0].slot).toBe('belt');
+      expect(state.draft.equipment[0].containerId).toBeUndefined();
       expect(state.isDirty).toBe(true);
     });
 
-    it('removeMagicItem is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addMagicItem(makeMagicItem('mi-1')));
-      state = reducer(state, removeMagicItem('does-not-exist'));
-      expect(state.draft.magicItems).toHaveLength(1);
+    it('is a no-op when id is not found', () => {
+      let state = reducer(makeInitialState(), addEquipment(makeEquipmentItem('eq-1')));
+      state = reducer(state, assignEquipmentSlot({ id: 'does-not-exist', slot: 'belt' }));
+      expect(state.draft.equipment[0].slot).toBeUndefined();
     });
+  });
 
-    it('updateMagicItem replaces the matching item', () => {
-      let state = reducer(makeInitialState(), addMagicItem(makeMagicItem('mi-1')));
-      const updated: DraftMagicItem = { ...makeMagicItem('mi-1'), name: 'Cloak of Resistance +3' };
-      state = reducer(state, updateMagicItem(updated));
-      expect(state.draft.magicItems[0].name).toBe('Cloak of Resistance +3');
+  describe('unassignEquipmentSlot', () => {
+    it('clears slot', () => {
+      let state = reducer(
+        makeInitialState(),
+        addEquipment(makeEquipmentItem('eq-1', { slot: 'belt' })),
+      );
+      state = reducer(state, unassignEquipmentSlot('eq-1'));
+      expect(state.draft.equipment[0].slot).toBeUndefined();
       expect(state.isDirty).toBe(true);
     });
+  });
 
-    it('updateMagicItem is a no-op when id is not found', () => {
-      let state = reducer(makeInitialState(), addMagicItem(makeMagicItem('mi-1')));
-      state = reducer(state, updateMagicItem({ ...makeMagicItem('does-not-exist'), name: 'Ring of Wishes' }));
-      expect(state.draft.magicItems[0].name).toBe('Cloak of Resistance +1');
+  describe('assignEquipmentContainer', () => {
+    it('assigns containerId and clears slot', () => {
+      let state = reducer(
+        makeInitialState(),
+        addEquipment(makeEquipmentItem('eq-1', { slot: 'belt' })),
+      );
+      state = reducer(state, assignEquipmentContainer({ id: 'eq-1', containerId: 'bag-1' }));
+      expect(state.draft.equipment[0].containerId).toBe('bag-1');
+      expect(state.draft.equipment[0].slot).toBeUndefined();
+      expect(state.isDirty).toBe(true);
     });
   });
 });

@@ -15,7 +15,6 @@ import type {
   GearDefinition,
 } from '@/types/equipment';
 import { Size } from '@/types/base';
-import type { Effect } from '@/types/base';
 import { GameDataService } from '@/services/GameDataService';
 
 export class EquipmentDatabaseService {

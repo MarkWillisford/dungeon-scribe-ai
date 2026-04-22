@@ -160,7 +160,7 @@ export const AWAKENED_BLADE_CLASS: ExpandedClassData = {
     initiatingAbility: 'WIS',
     ilProgression: 'full',
     disciplines: ['riven-hourglass', 'sleeping-goddess'],
-    progressionTableKey: 'AWAKENED_BLADE_PROGRESSION',
+    progressionTableKey: 'awakened-blade',
     recoveryMechanics: {
       primary: {
         type: 'custom',

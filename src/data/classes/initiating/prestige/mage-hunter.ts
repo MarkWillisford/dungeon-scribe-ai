@@ -166,7 +166,7 @@ export const MAGE_HUNTER_CLASS: ExpandedClassData = {
       'solar-wind',
       'veiled-moon',
     ],
-    progressionTableKey: 'MAGE_HUNTER_PROGRESSION',
+    progressionTableKey: 'mage-hunter',
     recoveryMechanics: {
       primary: {
         type: 'custom',
