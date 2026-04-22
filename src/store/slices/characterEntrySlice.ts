@@ -480,6 +480,35 @@ const characterEntrySlice = createSlice({
       }
     },
 
+    toggleFavoredClass(state, action: PayloadAction<string>) {
+      const target = state.draft.classes.find((c) => c.id === action.payload);
+      if (!target) return;
+      const wasAlreadyFavored = target.isFavoredClass;
+      // Clear favored on all classes first
+      for (const cls of state.draft.classes) {
+        cls.isFavoredClass = false;
+      }
+      // Toggle: if it wasn't favored, mark it favored; if it was, leave all unfavored
+      if (!wasAlreadyFavored) {
+        target.isFavoredClass = true;
+        if (!target.favoredClassBonuses) {
+          target.favoredClassBonuses = { hp: 0, skillRank: 0 };
+        }
+      }
+      state.isDirty = true;
+    },
+
+    setFavoredClassBonuses(
+      state,
+      action: PayloadAction<{ id: string; hp: number; skillRank: number }>,
+    ) {
+      const cls = state.draft.classes.find((c) => c.id === action.payload.id);
+      if (cls) {
+        cls.favoredClassBonuses = { hp: action.payload.hp, skillRank: action.payload.skillRank };
+        state.isDirty = true;
+      }
+    },
+
     reorderClasses(state, action: PayloadAction<string[]>) {
       // action.payload is ordered array of class ids
       const map = new Map(state.draft.classes.map((c) => [c.id, c]));
@@ -739,6 +768,8 @@ export const {
   updateClassSpellcastingAdvancement,
   upsertClassChoice,
   toggleClassPrereqOverride,
+  toggleFavoredClass,
+  setFavoredClassBonuses,
   reorderClasses,
   addTemplate,
   removeTemplate,

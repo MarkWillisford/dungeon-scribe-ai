@@ -69,6 +69,10 @@ The **character-level ruleset selector** is complete (PR #97): the Identity tab 
 
 `Effect.type` and `Effect.target` were locked down in PR #29 (merged). Valid values: `'bonus' | 'special' | 'damage' | 'resistance' | 'penalty' | 'custom'`.
 
+#### Note: Race/class-specific favored class bonuses (APG) — data absent (2026-04-20)
+
+The APG introduced per-race, per-class favored class bonus options (e.g., "Dwarf Fighter: +1/4 DR/–"). The data model currently supports only the universal HP/skill-rank choice. No race+class FCB option data exists anywhere in the codebase — not in static files, not seeded, not typed. The direct-entry UI ships HP/skill-rank only for now. Before the "Enter Rissi" milestone or any character that uses an APG FCB, this gap must be addressed: scrape/add FCB option data per race+class combination, extend `DraftClassEntry.favoredClassBonuses` to support alternate bonus types, and update the ClassEntryCard picker accordingly.
+
 #### Note: Test suite needs memory / mock audit (2026-04-16)
 
 Running `npm test` unbounded kills the WSL2 VM; even at `--maxWorkers=2` we see six suites SIGTERMed mid-run (`authSlice`, `rulesetSlice`, `normalizeSource`, `FeatRegistryService`, `HPTracker`, `OrnateStatInput`). `jest.config.js` now caps workers at 2 locally (CI unaffected) as a stopgap — but the underlying problem is likely memory bleed between tests or bloated mocks holding too much in scope. Needs a dedicated pass: audit global mocks (`jest.setup.ts`, `jest.setup.components.ts`), check for tests that import full data files (`src/data/feats/*` is large), and add `workerIdleMemoryLimit` if leaks are confirmed. Tracked as a GitHub issue. This will only get worse as the suite grows.

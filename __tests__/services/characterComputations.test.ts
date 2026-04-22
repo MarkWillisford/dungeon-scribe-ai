@@ -8,6 +8,7 @@ import {
   computeBaseRef,
   computeBaseWill,
   computeECL,
+  computeMaxHP,
   type ClassDataMap,
 } from '@/utils/characterComputations';
 import { type DraftClassEntry, type DraftTemplateEntry } from '@/types/characterDraft';
@@ -278,5 +279,48 @@ describe('computeECL', () => {
 
   it('sums multiple LA templates', () => {
     expect(computeECL([cls('Cleric', 5)], [laTemplate(2), laTemplate(1)])).toBe(8);
+  });
+});
+
+// ---- computeMaxHP ----
+
+describe('computeMaxHP', () => {
+  it('returns 0 for empty class list', () => {
+    expect(computeMaxHP([], 0, TEST_CLASS_MAP)).toBe(0);
+  });
+
+  it('first level gets max hit die, subsequent levels get avg+1', () => {
+    // Fighter d10: level 1 = 10, level 2 = 6 (floor(10/2)+1), con 0
+    const result = computeMaxHP([cls('Fighter', 2)], 0, TEST_CLASS_MAP);
+    expect(result).toBe(10 + 6);
+  });
+
+  it('adds con modifier per level', () => {
+    // Fighter 3 levels, con +2: (10 + 6 + 6) + 2*3
+    const result = computeMaxHP([cls('Fighter', 3)], 2, TEST_CLASS_MAP);
+    expect(result).toBe(10 + 6 + 6 + 6);
+  });
+
+  it('includes favored class HP bonuses', () => {
+    const fighter = {
+      ...cls('Fighter', 3),
+      isFavoredClass: true,
+      favoredClassBonuses: { hp: 2, skillRank: 1 },
+    };
+    // Base: 10 + 6 + 6 = 22, con 0, favored HP +2 = 24
+    expect(computeMaxHP([fighter], 0, TEST_CLASS_MAP)).toBe(24);
+  });
+
+  it('ignores favored class skill rank bonuses for HP', () => {
+    const fighter = {
+      ...cls('Fighter', 3),
+      isFavoredClass: true,
+      favoredClassBonuses: { hp: 0, skillRank: 3 },
+    };
+    expect(computeMaxHP([fighter], 0, TEST_CLASS_MAP)).toBe(10 + 6 + 6);
+  });
+
+  it('does not add favored class HP when not set', () => {
+    expect(computeMaxHP([cls('Fighter', 2)], 0, TEST_CLASS_MAP)).toBe(10 + 6);
   });
 });

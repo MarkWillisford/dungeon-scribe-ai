@@ -6,16 +6,18 @@ import { useAppDispatch } from '@/store/hooks';
 import { removeTemplate, updateTemplate } from '@/store/slices/characterEntrySlice';
 import { type DraftTemplateEntry } from '@/types/characterDraft';
 
-const APPLIED_AS_OPTIONS = [
-  { label: 'CR', value: 'CR' },
-  { label: 'LA', value: 'LA' },
-];
-
 const ACQUIRED_OPTIONS = [
   { label: 'Inherited', value: 'inherited' },
   { label: 'Acquired', value: 'acquired' },
   { label: 'Either', value: 'either' },
 ];
+
+function eclLabel(entry: DraftTemplateEntry): string {
+  if (entry.appliedAs === 'LA' && entry.laValue != null) return `LA +${entry.laValue}`;
+  if (entry.appliedAs === 'CR' && entry.crValue != null) return `CR +${entry.crValue}`;
+  if (entry.appliedAs === 'CR') return 'CR (tiered)';
+  return 'No ECL cost';
+}
 
 interface TemplateEntryCardProps {
   entry: DraftTemplateEntry;
@@ -55,32 +57,10 @@ export function TemplateEntryCard({ entry }: TemplateEntryCardProps) {
         </Pressable>
       </View>
 
-      {/* Applied as + value */}
+      {/* ECL cost — read-only, fixed by the template definition */}
       <View style={styles.row}>
-        <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Applied as</Text>
-        <InlinePicker
-          value={entry.appliedAs ?? 'CR'}
-          options={APPLIED_AS_OPTIONS}
-          onValueChange={(v) =>
-            update({ appliedAs: v as 'CR' | 'LA', crValue: undefined, laValue: undefined })
-          }
-          style={styles.smallPicker}
-        />
-        <Text style={[styles.fieldLabel, { color: colors.text.secondary, marginLeft: 8 }]}>
-          {entry.appliedAs === 'LA' ? 'LA' : 'CR'}
-        </Text>
-        <InlinePicker
-          value={String(entry.appliedAs === 'LA' ? (entry.laValue ?? 1) : (entry.crValue ?? 1))}
-          options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => ({
-            label: String(n),
-            value: String(n),
-          }))}
-          onValueChange={(v) => {
-            const n = parseInt(v, 10);
-            update(entry.appliedAs === 'LA' ? { laValue: n } : { crValue: n });
-          }}
-          style={styles.smallPicker}
-        />
+        <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>ECL cost</Text>
+        <Text style={[styles.eclValue, { color: colors.text.primary }]}>{eclLabel(entry)}</Text>
       </View>
 
       {/* Acquired */}
@@ -135,9 +115,10 @@ const styles = StyleSheet.create({
     fontFamily: 'LibreBaskerville',
     fontSize: 13,
   },
-  smallPicker: {
-    width: 70,
-    marginBottom: 0,
+  eclValue: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    fontWeight: '700',
   },
   medPicker: {
     flex: 1,
