@@ -12,7 +12,7 @@ const baseAbilityScore: DraftAbilityScore = {
   racial: 0,
   inherent: 0,
   enhancement: 0,
-  other: 0,
+  other: [],
   levelIncrements: 0,
 };
 
