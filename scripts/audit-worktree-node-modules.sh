@@ -2,7 +2,7 @@
 # Audit every git worktree for node_modules state:
 # SYMLINK (broken setup), REAL (good), or MISSING (also broken).
 
-for wt in /home/markw/worktrees/*/; do
+for wt in /home/$(whoami)/worktrees/*/; do
   name=$(basename "$wt")
   nm="$wt/node_modules"
   if [ -L "$nm" ]; then

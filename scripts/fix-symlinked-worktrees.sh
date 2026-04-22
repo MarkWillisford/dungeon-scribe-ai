@@ -4,7 +4,7 @@
 
 set -e
 
-for wt in /home/markw/worktrees/*/; do
+for wt in /home/$(whoami)/worktrees/*/; do
   name=$(basename "$wt")
   nm="$wt/node_modules"
   if [ -L "$nm" ]; then
@@ -27,7 +27,7 @@ for wt in /home/markw/worktrees/*/; do
 done
 
 echo "=== final audit ==="
-for wt in /home/markw/worktrees/*/; do
+for wt in /home/$(whoami)/worktrees/*/; do
   name=$(basename "$wt")
   nm="$wt/node_modules"
   if [ -L "$nm" ]; then
