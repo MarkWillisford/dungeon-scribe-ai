@@ -3,6 +3,21 @@
 import type { GameDataSource } from './gameData';
 import type { DataQualityFields } from './base';
 
+// ---- BodyShape ---------------------------------------------------------------
+// Where on the creature magic item slots are available. Used by the picker
+// filter and the BODY_SHAPE_SLOTS map (added in a follow-up phase). Distinct
+// from `companionType` (which is a creature type for Wild Empathy / spell
+// targeting purposes).
+
+export type BodyShape =
+  | 'biped' // gorilla, dire ape — humanoid item slots
+  | 'quadruped' // wolf, big cat, bear, dog
+  | 'serpentine' // snake, eel
+  | 'avian' // roc, giant eagle, dire bat
+  | 'aquatic' // shark, dolphin, octopus
+  | 'multilegged' // giant spider, giant mantis, scorpion
+  | 'amorphous'; // ooze (rare AC)
+
 export interface AnimalCompanionProgressionTier {
   atDruidLevel: 4 | 7; // druid/ranger level when this tier activates
   sizeChange?: string; // e.g. 'Medium to Large' — omit if no size change

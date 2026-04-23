@@ -2,7 +2,11 @@
 
 ## 2026-04-23
 
-## Status: DESIGN (NOT STARTED)
+## Status: IN PROGRESS
+
+### Progress
+
+- **Phase 1.1 — Types: COMPLETE.** New `src/types/companions.ts` with `CompanionInstance`, `CompanionGrant`, `CompanionFeat`, `CompanionEquipment`, `TrickName`. `BodyShape` added to `src/types/animalCompanions.ts` (extension to `AnimalCompanionEntry` deferred to 1.2). `Character.companions: CompanionInstance[]` wired into the master interface. `CharacterService.createDefaultCharacter` and the charactersSlice test fixture both updated to seed `companions: []`. Typecheck clean; 72/72 affected tests passing.
 
 ---
 
@@ -327,17 +331,17 @@ Plus one new service:
 
 ## Implementation Phases
 
-| Phase | Work                                                                                                                    | PR     |
-| ----- | ----------------------------------------------------------------------------------------------------------------------- | ------ |
-| 1.1   | Types: `CompanionInstance`, `CompanionGrant`, `BodyShape`, `Character.companions`                                       | one PR |
-| 1.2   | `AnimalCompanionEntry` extension + `BODY_SHAPE_SLOTS` map + one-shot data pass to assign `bodyShape` to all 220 entries | one PR |
-| 1.3   | `CompanionService` (effective level, base stats, slot computation) + tests                                              | one PR |
-| 1.4   | Classes & Templates tab: companion card + picker integration when `animal_companion` choice selected                    | one PR |
-| 1.5   | AC Builder screen — Identity / Abilities / Combat tabs                                                                  | one PR |
-| 1.6   | AC Builder screen — Skills / Feats / Tricks tabs                                                                        | one PR |
-| 1.7   | AC Builder screen — Equipment / Templates / Notes tabs                                                                  | one PR |
-| 1.8   | `TemplateDefinition.grantsCompanion` + Druid Simple wiring                                                              | one PR |
-| 1.9   | Tests: integration test covering druid + AC + template grant + multi-companion                                          | one PR |
+| Phase | Work                                                                                                                    | Status      |
+| ----- | ----------------------------------------------------------------------------------------------------------------------- | ----------- |
+| 1.1   | Types: `CompanionInstance`, `CompanionGrant`, `BodyShape`, `Character.companions`                                       | COMPLETE    |
+| 1.2   | `AnimalCompanionEntry` extension + `BODY_SHAPE_SLOTS` map + one-shot data pass to assign `bodyShape` to all 220 entries | NOT STARTED |
+| 1.3   | `CompanionService` (effective level, base stats, slot computation) + tests                                              | NOT STARTED |
+| 1.4   | Classes & Templates tab: companion card + picker integration when `animal_companion` choice selected                    | NOT STARTED |
+| 1.5   | AC Builder screen — Identity / Abilities / Combat tabs                                                                  | NOT STARTED |
+| 1.6   | AC Builder screen — Skills / Feats / Tricks tabs                                                                        | NOT STARTED |
+| 1.7   | AC Builder screen — Equipment / Templates / Notes tabs                                                                  | NOT STARTED |
+| 1.8   | `TemplateDefinition.grantsCompanion` + Druid Simple wiring                                                              | NOT STARTED |
+| 1.9   | Tests: integration test covering druid + AC + template grant + multi-companion                                          | NOT STARTED |
 
 ---
 
