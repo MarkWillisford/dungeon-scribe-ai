@@ -6,7 +6,8 @@
 
 ### Progress
 
-- **Phase 1.1 — Types: COMPLETE.** New `src/types/companions.ts` with `CompanionInstance`, `CompanionGrant`, `CompanionFeat`, `CompanionEquipment`, `TrickName`. `BodyShape` added to `src/types/animalCompanions.ts` (extension to `AnimalCompanionEntry` deferred to 1.2). `Character.companions: CompanionInstance[]` wired into the master interface. `CharacterService.createDefaultCharacter` and the charactersSlice test fixture both updated to seed `companions: []`. Typecheck clean; 72/72 affected tests passing.
+- **Phase 1.1 — Types: COMPLETE.** New `src/types/companions.ts` with `CompanionInstance`, `CompanionGrant`, `CompanionFeat`, `CompanionEquipment`, `TrickName`. Initial 7-category `BodyShape` draft landed in `src/types/animalCompanions.ts` but is **superseded by Phase 1.2** — the community/Paizo-canonical taxonomy has 10 categories, not 7 (see "Data Model Changes" below). `Character.companions: CompanionInstance[]` wired into the master interface. `CharacterService.createDefaultCharacter` and the charactersSlice test fixture both updated to seed `companions: []`. Typecheck clean; 72/72 affected tests passing.
+- **Research — Body shape taxonomy (2026-04-23).** Ultimate Wilderness (2017) p. 176 — originally Animal Archive (2013) — publishes the canonical "Magic Item Slots for Companions and Familiars" table. [Archives of Nethys mirrors it.](https://aonprd.com/Rules.aspx?Name=Magic+Item+Slots&Category=Companions+and+Familiars) Ten categories, slot-subtype restrictions (`belt (saddle)`, `chest (saddle)`, `feet (horseshoes)`), and a "can grasp" flag. Hero Lab and Pathbuilder both implement the table verbatim; divergence would create mismatches for users cross-referencing tools. Plan updated to match.
 
 ---
 
@@ -115,22 +116,33 @@ interface Character {
 ```typescript
 // src/types/animalCompanions.ts
 
+// Paizo-canonical taxonomy. Ten categories (Ultimate Wilderness p. 176 /
+// Animal Archive). Subdivided beyond visual shape by how the slot table
+// treats them — e.g. quadrupeds split by foot type because hooves get a
+// `horseshoes` subtype restriction and claws don't.
 export type BodyShape =
-  | 'biped' // gorilla, dire ape — humanoid item slots
-  | 'quadruped' // wolf, big cat, bear, dog
-  | 'serpentine' // snake, eel
-  | 'avian' // roc, giant eagle, dire bat
-  | 'aquatic' // shark, dolphin, octopus
-  | 'multilegged' // giant spider, giant mantis, scorpion
-  | 'amorphous'; // ooze (rare AC)
+  | 'bipedHands' // ape, chimp, baboon — can grasp objects, full humanoid slots
+  | 'bipedClaws' // t-rex, deinonychus, allosaurus
+  | 'quadrupedClaws' // wolf, big cat, bear, dog
+  | 'quadrupedHooves' // horse, pony, elk, boar
+  | 'quadrupedOther' // elephant, rhino, brachiosaurus
+  | 'quadrupedShortLegs' // crocodile, tortoise, giant weasel
+  | 'avian' // roc, giant eagle, dire bat, axe beak
+  | 'serpentine' // snake, eel, giant slug
+  | 'piscine' // shark, dolphin, orca
+  | 'unusual'; // plants + vermin — giant spider, mantis, fungal crawler
 
 export interface AnimalCompanionEntry extends DataQualityFields {
   // ... existing fields
 
   bodyShape: BodyShape;
+
+  // Per-entry deviation from the shape's default slot set. Rare. Use for
+  // creatures that diverge from their shape — e.g. a dire ape that GMs rule
+  // "no ring fingers" removes `'ring'`.
   slotOverrides?: {
-    added?: SlotName[]; // gorilla quadruped + adds 'hands', 'arms'
-    removed?: SlotName[]; // serpentine but somehow has none of the default
+    added?: ItemSlot[];
+    removed?: ItemSlot[];
   };
 }
 ```
@@ -140,33 +152,166 @@ export interface AnimalCompanionEntry extends DataQualityFields {
 ```typescript
 // src/data/companions/bodyShapeSlots.ts (new)
 
-export const BODY_SHAPE_SLOTS: Record<BodyShape, SlotName[]> = {
-  biped: [
-    'armor',
-    'belt',
-    'body',
-    'chest',
-    'eyes',
-    'feet',
-    'hands',
-    'head',
-    'headband',
-    'neck',
-    'ring1',
-    'ring2',
-    'shoulders',
-    'wrists',
-  ],
-  quadruped: ['armor', 'belt', 'chest', 'eyes', 'neck', 'ring1', 'ring2', 'shoulders'],
-  serpentine: ['armor', 'belt', 'eyes', 'headband'],
-  avian: ['armor', 'belt', 'chest', 'eyes', 'neck', 'ring1', 'ring2'],
-  aquatic: ['armor', 'eyes', 'neck', 'ring1', 'ring2'],
-  multilegged: ['armor', 'belt', 'eyes', 'neck'],
-  amorphous: ['armor', 'eyes', 'neck'],
+export type SlotSubtypeRestriction = 'saddle' | 'horseshoes';
+
+export interface CompanionSlotAccess {
+  slot: ItemSlot;
+  // false = slot EXISTS for the shape but requires the Extra Item Slot feat
+  // (Animal Archive) to unlock. Default companions get only `armor` + `neck`
+  // automatic; everything else on the shape is feat-gated. Plants/vermin
+  // (`unusual`) get no automatic slots.
+  automatic: boolean;
+  // When present, only items of the given subtype fit this slot. Example:
+  // a horse's `belt` slot accepts only saddles. Belt-of-giant-strength won't
+  // fit.
+  restriction?: SlotSubtypeRestriction;
+}
+
+export interface BodyShapeProfile {
+  slots: CompanionSlotAccess[];
+  // True if the shape has an anatomy that can grasp objects — affects rods,
+  // staves, wands, weapons. Orthogonal to slot assignments.
+  canGrasp: boolean;
+}
+
+export const BODY_SHAPE_SLOTS: Record<BodyShape, BodyShapeProfile> = {
+  // Sourced directly from AoN "Magic Item Slots — Companions and Familiars"
+  // (https://aonprd.com/Rules.aspx?Name=Magic+Item+Slots&Category=Companions+and+Familiars).
+  // See also Ultimate Wilderness p. 176.
+  bipedHands: {
+    canGrasp: true,
+    slots: [
+      { slot: 'armor', automatic: true },
+      { slot: 'belt', automatic: false },
+      { slot: 'body', automatic: false },
+      { slot: 'chest', automatic: false },
+      { slot: 'eyes', automatic: false },
+      { slot: 'feet', automatic: false },
+      { slot: 'hands', automatic: false },
+      { slot: 'head', automatic: false },
+      { slot: 'headband', automatic: false },
+      { slot: 'neck', automatic: true },
+      { slot: 'ring', automatic: false },
+      { slot: 'shoulders', automatic: false },
+      { slot: 'wrists', automatic: false },
+    ],
+  },
+  bipedClaws: {
+    canGrasp: true,
+    slots: [
+      { slot: 'armor', automatic: true },
+      { slot: 'belt', automatic: false },
+      { slot: 'chest', automatic: false },
+      { slot: 'eyes', automatic: false },
+      { slot: 'head', automatic: false },
+      { slot: 'headband', automatic: false },
+      { slot: 'neck', automatic: true },
+      { slot: 'ring', automatic: false },
+      { slot: 'shoulders', automatic: false },
+      { slot: 'wrists', automatic: false },
+    ],
+  },
+  quadrupedClaws: {
+    canGrasp: false,
+    slots: [
+      { slot: 'armor', automatic: true },
+      { slot: 'belt', automatic: false, restriction: 'saddle' },
+      { slot: 'chest', automatic: false },
+      { slot: 'eyes', automatic: false },
+      { slot: 'head', automatic: false },
+      { slot: 'headband', automatic: false },
+      { slot: 'neck', automatic: true },
+      { slot: 'shoulders', automatic: false },
+      { slot: 'wrists', automatic: false },
+    ],
+  },
+  quadrupedHooves: {
+    canGrasp: false,
+    slots: [
+      { slot: 'armor', automatic: true },
+      { slot: 'belt', automatic: false, restriction: 'saddle' },
+      { slot: 'chest', automatic: false },
+      { slot: 'eyes', automatic: false },
+      { slot: 'feet', automatic: false, restriction: 'horseshoes' },
+      { slot: 'head', automatic: false },
+      { slot: 'headband', automatic: false },
+      { slot: 'neck', automatic: true },
+      { slot: 'shoulders', automatic: false },
+    ],
+  },
+  quadrupedOther: {
+    canGrasp: false,
+    slots: [
+      { slot: 'armor', automatic: true },
+      { slot: 'belt', automatic: false, restriction: 'saddle' },
+      { slot: 'chest', automatic: false },
+      { slot: 'eyes', automatic: false },
+      { slot: 'head', automatic: false },
+      { slot: 'headband', automatic: false },
+      { slot: 'neck', automatic: true },
+      { slot: 'shoulders', automatic: false },
+    ],
+  },
+  quadrupedShortLegs: {
+    canGrasp: false,
+    slots: [
+      { slot: 'armor', automatic: true },
+      { slot: 'eyes', automatic: false },
+      { slot: 'head', automatic: false },
+      { slot: 'headband', automatic: false },
+      { slot: 'neck', automatic: true },
+      { slot: 'shoulders', automatic: false },
+    ],
+  },
+  avian: {
+    canGrasp: true,
+    slots: [
+      { slot: 'armor', automatic: true },
+      { slot: 'belt', automatic: false },
+      { slot: 'chest', automatic: false, restriction: 'saddle' },
+      { slot: 'eyes', automatic: false },
+      { slot: 'head', automatic: false },
+      { slot: 'headband', automatic: false },
+      { slot: 'neck', automatic: true },
+      { slot: 'ring', automatic: false },
+      { slot: 'wrists', automatic: false },
+    ],
+  },
+  serpentine: {
+    canGrasp: false,
+    slots: [
+      { slot: 'belt', automatic: false },
+      { slot: 'eyes', automatic: false },
+      { slot: 'headband', automatic: false },
+    ],
+  },
+  piscine: {
+    canGrasp: false,
+    slots: [
+      { slot: 'belt', automatic: false },
+      { slot: 'chest', automatic: false, restriction: 'saddle' },
+      { slot: 'eyes', automatic: false },
+    ],
+  },
+  unusual: {
+    canGrasp: false,
+    slots: [
+      { slot: 'belt', automatic: false },
+      { slot: 'eyes', automatic: false },
+    ],
+  },
 };
 ```
 
-Source: PF1e community-standard "Magic Item Slots for Animals" tables (Paizo blog + d20pfsrd FAQ). One-shot data pass needed to assign `bodyShape` to all ~220 existing entries.
+**Notes on the model.**
+
+- `automatic: true` = slot is usable from HD 1 with no prerequisite. `automatic: false` = slot is on the shape's table but requires the **Extra Item Slot** feat (Animal Archive) per slot. Phase 1.7 Equipment tab will gate display accordingly.
+- `restriction` encodes subtype-locked slots (`belt (saddle)`, `chest (saddle)`, `feet (horseshoes)`) rather than inventing extra `ItemSlot` values. A horse's `belt` slot accepts only saddles; a belt of giant strength won't fit there.
+- `canGrasp` is orthogonal to the slot table — it governs whether the creature can wield weapons, rods, staves, and wands. Bipeds (both variants) and avians can grasp; everything else cannot.
+- **Unusual (plants + vermin)** get a minimal two-slot set and zero automatic slots, per the Paizo table. Oozes are not legal companions in any printed rules, so there is no `amorphous` category.
+- **`slotOverrides`** stays as a simple added/removed delta on `ItemSlot[]` — added slots are treated as automatic. Rare enough in practice (GM-fiat creatures) that we don't need a richer override model yet.
+
+Source: [AoN — Magic Item Slots (Companions and Familiars)](https://aonprd.com/Rules.aspx?Name=Magic+Item+Slots&Category=Companions+and+Familiars). One-shot data pass needed to assign `bodyShape` to all ~220 existing entries.
 
 ---
 
@@ -275,7 +420,7 @@ Standard tricks list with checkboxes. Counter at top: `X of Y tricks known`. Y =
 
 #### 7. Equipment
 
-Filtered by `bodyShape`. Same `EquipmentSection` component as the character screen, reading from `BODY_SHAPE_SLOTS[entry.bodyShape] + entry.slotOverrides.added − entry.slotOverrides.removed`. Items requiring an unavailable slot are greyed out with a tooltip.
+Filtered by `bodyShape`. Same `EquipmentSection` component as the character screen, reading from `BODY_SHAPE_SLOTS[entry.bodyShape].slots`, then applying `entry.slotOverrides.added` / `removed`, then filtering by `automatic || companion has Extra Item Slot feat for that slot`. Slot-subtype restrictions (`saddle`, `horseshoes`) further constrain which items in a category are valid. Items that don't fit the resulting slot set are greyed out with a tooltip. `canGrasp` gates wield-dependent items (rods, staves, wands, weapons).
 
 #### 8. Templates
 
@@ -331,24 +476,25 @@ Plus one new service:
 
 ## Implementation Phases
 
-| Phase | Work                                                                                                                    | Status      |
-| ----- | ----------------------------------------------------------------------------------------------------------------------- | ----------- |
-| 1.1   | Types: `CompanionInstance`, `CompanionGrant`, `BodyShape`, `Character.companions`                                       | COMPLETE    |
-| 1.2   | `AnimalCompanionEntry` extension + `BODY_SHAPE_SLOTS` map + one-shot data pass to assign `bodyShape` to all 220 entries | NOT STARTED |
-| 1.3   | `CompanionService` (effective level, base stats, slot computation) + tests                                              | NOT STARTED |
-| 1.4   | Classes & Templates tab: companion card + picker integration when `animal_companion` choice selected                    | NOT STARTED |
-| 1.5   | AC Builder screen — Identity / Abilities / Combat tabs                                                                  | NOT STARTED |
-| 1.6   | AC Builder screen — Skills / Feats / Tricks tabs                                                                        | NOT STARTED |
-| 1.7   | AC Builder screen — Equipment / Templates / Notes tabs                                                                  | NOT STARTED |
-| 1.8   | `TemplateDefinition.grantsCompanion` + Druid Simple wiring                                                              | NOT STARTED |
-| 1.9   | Tests: integration test covering druid + AC + template grant + multi-companion                                          | NOT STARTED |
+| Phase | Work                                                                                                                                                                             | Status      |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| 1.1   | Types: `CompanionInstance`, `CompanionGrant`, `BodyShape`, `Character.companions`                                                                                                | COMPLETE    |
+| 1.2   | 10-category `BodyShape` (Paizo-canonical) + `AnimalCompanionEntry` extension + `BODY_SHAPE_SLOTS` map with subtype restrictions and `canGrasp` + data pass over all ~220 entries | IN PROGRESS |
+| 1.3   | `CompanionService` (effective level, base stats, slot computation) + tests                                                                                                       | NOT STARTED |
+| 1.4   | Classes & Templates tab: companion card + picker integration when `animal_companion` choice selected                                                                             | NOT STARTED |
+| 1.5   | AC Builder screen — Identity / Abilities / Combat tabs                                                                                                                           | NOT STARTED |
+| 1.6   | AC Builder screen — Skills / Feats / Tricks tabs                                                                                                                                 | NOT STARTED |
+| 1.7   | AC Builder screen — Equipment / Templates / Notes tabs                                                                                                                           | NOT STARTED |
+| 1.8   | `TemplateDefinition.grantsCompanion` + Druid Simple wiring                                                                                                                       | NOT STARTED |
+| 1.9   | Tests: integration test covering druid + AC + template grant + multi-companion                                                                                                   | NOT STARTED |
 
 ---
 
 ## Open Items / Follow-ups
 
 - **Fleshraker (3.5e):** Add as `visibility: 'campaign'` companion entry in a separate seed task. Not a blocker for this builder.
-- **Body-shape data pass:** Assigning `bodyShape` to all 220 existing AC entries can be a scout + agent pass against AoN/d20pfsrd creature stat blocks.
+- **Body-shape data pass:** Assigning `bodyShape` to all ~220 existing AC entries. Authoritative source is the Paizo body-shape categorization — inferred per entry from creature anatomy (existing stat block: attacks, size, speed lines like `swim 60 ft.` or `fly`). Edge cases will need manual review.
+- **PFS mode:** Pathfinder Society treats Biped (Hands) companions as eligible for Extra Item Slot too, which differs from standard rules. If we ever ship a PFS mode, the `automatic` vs feat-gated split needs a ruleset-aware override.
+- **Per-item eligibility:** A few specific magic items have explicit "humanoid only" clauses that override the slot table. Handled via a later per-item `creatureRestriction` flag, not at the shape level.
 - **Cohorts (Leadership feat):** Out of scope for this project but `CompanionGrant.type === 'cohort'` is reserved in the union so the data model accommodates them when cohort support ships.
 - **Effective-level formulas:** Some sources have non-trivial formulas (Paladin Divine Bond's "for X minutes per day" semantics). For Phase 1, treat all granting sources as always-on; partial-availability mounts are a Phase 2 concern.
-- **Item-by-item slot eligibility:** Beyond the slot map, some specific items have explicit "humanoid only" restrictions (e.g. cloaks of resistance work on quadrupeds, but specific named items may not). Add a per-item `creatureRestriction` flag later if it becomes a problem.

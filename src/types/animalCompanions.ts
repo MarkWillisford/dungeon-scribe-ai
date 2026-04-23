@@ -2,21 +2,29 @@
 
 import type { GameDataSource } from './gameData';
 import type { DataQualityFields } from './base';
+import type { ItemSlot } from './magicItems';
 
 // ---- BodyShape ---------------------------------------------------------------
-// Where on the creature magic item slots are available. Used by the picker
-// filter and the BODY_SHAPE_SLOTS map (added in a follow-up phase). Distinct
-// from `companionType` (which is a creature type for Wild Empathy / spell
-// targeting purposes).
+// Paizo-canonical taxonomy from Ultimate Wilderness (2017) p. 176 / Animal
+// Archive (2013), mirrored on Archives of Nethys:
+// https://aonprd.com/Rules.aspx?Name=Magic+Item+Slots&Category=Companions+and+Familiars
+//
+// Ten categories, subdivided beyond visual shape by how the slot table treats
+// them — e.g. quadrupeds are split by foot type because hooves get a
+// `horseshoes` subtype restriction on `feet` and claws don't. Distinct from
+// `companionType` (the creature type for Wild Empathy / spell targeting).
 
 export type BodyShape =
-  | 'biped' // gorilla, dire ape — humanoid item slots
-  | 'quadruped' // wolf, big cat, bear, dog
-  | 'serpentine' // snake, eel
-  | 'avian' // roc, giant eagle, dire bat
-  | 'aquatic' // shark, dolphin, octopus
-  | 'multilegged' // giant spider, giant mantis, scorpion
-  | 'amorphous'; // ooze (rare AC)
+  | 'bipedHands' // ape, chimp, baboon — can grasp, full humanoid slots
+  | 'bipedClaws' // t-rex, deinonychus, allosaurus
+  | 'quadrupedClaws' // wolf, big cat, bear, dog
+  | 'quadrupedHooves' // horse, pony, elk, boar
+  | 'quadrupedOther' // elephant, rhino, brachiosaurus
+  | 'quadrupedShortLegs' // crocodile, tortoise, giant weasel
+  | 'avian' // roc, giant eagle, dire bat, axe beak
+  | 'serpentine' // snake, eel, giant slug
+  | 'piscine' // shark, dolphin, orca
+  | 'unusual'; // plants + vermin — giant spider, mantis
 
 export interface AnimalCompanionProgressionTier {
   atDruidLevel: 4 | 7; // druid/ranger level when this tier activates
@@ -34,6 +42,18 @@ export interface AnimalCompanionEntry extends DataQualityFields {
   id: string; // kebab-case: 'wolf', 'leopard', 'giant-eagle', 'giant-mantis'
   name: string;
   companionType: 'animal' | 'magical beast' | 'plant' | 'vermin' | 'aberration' | 'accursed';
+
+  // Paizo body-shape category. Drives magic item slot availability via
+  // BODY_SHAPE_SLOTS (src/data/companions/bodyShapeSlots.ts).
+  bodyShape: BodyShape;
+
+  // Per-entry deviation from the shape's default slot set. Rare — used for
+  // creatures that diverge from their shape's typical anatomy. Added slots
+  // are treated as automatic (no Extra Item Slot feat required).
+  slotOverrides?: {
+    added?: ItemSlot[];
+    removed?: ItemSlot[];
+  };
 
   // Starting statistics (before any druid-level progression)
   size: string; // 'Tiny' | 'Small' | 'Medium' | 'Large' | 'Huge'
