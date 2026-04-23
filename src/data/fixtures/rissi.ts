@@ -293,6 +293,9 @@ export const RISSI_FIXTURE: CharacterDraft = {
     },
   ],
 
+  // ---- Eidolons (Rissi is not a summoner) ----
+  eidolons: [],
+
   // ---- Notes ----
   characterNotes: '',
   campaignNotes: '',

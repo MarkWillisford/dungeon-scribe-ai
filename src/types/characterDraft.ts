@@ -8,6 +8,7 @@ import { Alignment, BonusType } from './base';
 import { ClassChoice } from './classes';
 import type { ItemSlot } from './magicItems';
 import type { CompanionInstance } from './companions';
+import type { DraftEidolon, BroodmasterState } from './eidolon';
 
 // ---- Ability scores ----
 
@@ -91,6 +92,9 @@ export interface DraftClassEntry {
   // One selection per class level. Length should equal `level` when isFavoredClass is true.
   // Absent until the favored class toggle is first enabled.
   favoredClassBonuses?: FavoredClassBonusSelection[];
+  // Broodmaster-specific pre-split shared evolutions. Only meaningful when the
+  // class is a summoner and the archetype is 'broodmaster'. Absent otherwise.
+  summonerBroodmaster?: BroodmasterState;
 }
 
 // Per-level favored class bonus selection.
@@ -293,6 +297,10 @@ export interface CharacterDraft {
   // between draft + persisted Character since companions carry no edit-time
   // metadata distinct from their saved form.
   companions: CompanionInstance[];
+
+  // Eidolons — always a list; length 1 for a normal summoner, 2–4 for Broodmaster,
+  // 0 for non-summoners. Each entry points back at its owning summonerClassEntryId.
+  eidolons: DraftEidolon[];
 
   // Notes
   characterNotes: string;

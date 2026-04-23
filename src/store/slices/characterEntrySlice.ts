@@ -124,6 +124,7 @@ export const BLANK_DRAFT: CharacterDraft = {
   spellcastingPools: [],
   equipment: [],
   companions: [],
+  eidolons: [],
   characterNotes: '',
   campaignNotes: '',
 };

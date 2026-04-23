@@ -100,6 +100,10 @@ const SCRIPTS: string[] = [
   'seedSlayerTalents.ts',
   'seedWarpriestBlessings.ts',
   'seedAlchemistDiscoveries.ts',
+  // Eidolon data: base forms and subtypes must seed before evolutions so runtime
+  // lookups by freeEvolutions id can resolve (though the seed itself doesn't enforce it).
+  'seedEidolonBaseForms.ts',
+  'seedEidolonSubtypes.ts',
   'seedEidolonEvolutions.ts',
   'seedDisciplines.ts',
   'seedManeuvers.ts',

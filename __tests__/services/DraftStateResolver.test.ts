@@ -150,6 +150,7 @@ function blankDraft(): CharacterDraft {
     spellcastingPools: [],
     equipment: [],
     companions: [],
+    eidolons: [],
     characterNotes: '',
     campaignNotes: '',
   };

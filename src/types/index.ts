@@ -16,6 +16,7 @@ import { ResourcePool } from './resources';
 import { AppliedTemplate, GrantedBonus, LevelUpDecision, CharacterCRTracking } from './templates';
 import { Ruleset, CampaignRulesetLink } from './ruleset';
 import { CompanionInstance } from './companions';
+import { Eidolon } from './eidolon';
 
 export interface Character {
   info: CharacterInfo;
@@ -32,6 +33,11 @@ export interface Character {
   conditions: Conditions;
   experience: Experience;
   currency: Currency;
+
+  // Eidolons — always a list; empty for non-summoners, length 1 for standard
+  // summoners, 2–4 for Broodmaster. Runtime shape mirrors draft in v1; the
+  // combat sheet extends this in a later phase.
+  eidolons: Eidolon[];
 
   // Level history — source of truth for ECL, class levels, CR/LA tracking
   levelHistory: LevelUpDecision[];
@@ -102,3 +108,4 @@ export * from './initiating';
 export * from './gameData';
 export * from './companions';
 export * from './favoredClassBonuses';
+export * from './eidolon';
