@@ -145,21 +145,30 @@ export class PrerequisiteService {
         return (character.mythic?.tier ?? 0) >= prereq.minimum;
 
       case 'initiator_level': {
-        const pools = (character as unknown as { initiating?: { pools: Array<{ effectiveInitiatorLevel: number }> } })
-          .initiating?.pools ?? [];
+        const pools =
+          (
+            character as unknown as {
+              initiating?: { pools: Array<{ effectiveInitiatorLevel: number }> };
+            }
+          ).initiating?.pools ?? [];
         const highestIL = pools.reduce((max, p) => Math.max(max, p.effectiveInitiatorLevel), 0);
         return highestIL >= prereq.minimum;
       }
 
       case 'maneuver_known': {
-        const knownManeuvers = (character as unknown as { initiating?: { knownManeuvers: Array<{ maneuverId: string }> } })
-          .initiating?.knownManeuvers ?? [];
+        const knownManeuvers =
+          (
+            character as unknown as {
+              initiating?: { knownManeuvers: Array<{ maneuverId: string }> };
+            }
+          ).initiating?.knownManeuvers ?? [];
         return knownManeuvers.some((m) => m.maneuverId === prereq.maneuverId);
       }
 
       case 'discipline_access': {
-        const initiatingPools = (character as unknown as { initiating?: { pools: Array<Record<string, unknown>> } })
-          .initiating?.pools ?? [];
+        const initiatingPools =
+          (character as unknown as { initiating?: { pools: Array<Record<string, unknown>> } })
+            .initiating?.pools ?? [];
         return initiatingPools.some((pool) => {
           // Snapshot pools only carry { effectiveInitiatorLevel, baseClass } — no discipline
           // fields. Guard before calling getEffectiveDisciplines which requires a full pool.
@@ -168,6 +177,21 @@ export class PrerequisiteService {
             pool as unknown as Parameters<typeof InitiatingService.getEffectiveDisciplines>[0],
           ).includes(prereq.disciplineId);
         });
+      }
+
+      case 'evolution': {
+        // A character qualifies for an evolution prereq if ANY of their eidolons
+        // has the required evolution selected. Prior to Phase 1 this case
+        // silently returned false; see plans/character-system-redesign.md.
+        const eidolons =
+          (
+            character as unknown as {
+              eidolons?: Array<{ selectedEvolutions: Array<{ evolutionId: string }> }>;
+            }
+          ).eidolons ?? [];
+        return eidolons.some((eid) =>
+          eid.selectedEvolutions.some((e) => e.evolutionId === prereq.evolutionId),
+        );
       }
 
       case 'special':

@@ -1018,4 +1018,185 @@ describe('DraftValidationService', () => {
       expect(warnings).toHaveLength(0);
     });
   });
+
+  describe('eidolon checks', () => {
+    function summonerDraft(): CharacterDraft {
+      const draft = blankDraft();
+      draft.classes = [
+        {
+          id: 'summoner-1',
+          className: 'Summoner (Unchained)',
+          level: 5,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
+      draft.levelIncrementSlots = [{ atHD: 4, ability: 'str' }];
+      return draft;
+    }
+
+    it('warns when an Unchained eidolon has no subtype', async () => {
+      const draft = summonerDraft();
+      draft.eidolons = [
+        {
+          id: 'eid-1',
+          name: 'Aziel',
+          summonerClassEntryId: 'summoner-1',
+          edition: 'unchained',
+          baseForm: 'biped',
+          selectedEvolutions: [],
+        },
+      ];
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
+      expect(
+        warnings.some(
+          (w) =>
+            w.section === 'classes' && /subtype/i.test(w.message) && /require/i.test(w.message),
+        ),
+      ).toBe(true);
+    });
+
+    it('warns when the subtype requires a different base form', async () => {
+      const draft = summonerDraft();
+      draft.eidolons = [
+        {
+          id: 'eid-1',
+          name: 'Aziel',
+          summonerClassEntryId: 'summoner-1',
+          edition: 'unchained',
+          baseForm: 'quadruped',
+          subtype: 'angel', // angel requires biped
+          selectedEvolutions: [],
+        },
+      ];
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
+      expect(warnings.some((w) => w.section === 'classes' && /biped/i.test(w.message))).toBe(true);
+    });
+
+    it('warns when evolutions exceed the pool', async () => {
+      const draft = summonerDraft();
+      draft.classes[0].level = 1; // UC L1 = 1 ep
+      draft.eidolons = [
+        {
+          id: 'eid-1',
+          name: 'Aziel',
+          summonerClassEntryId: 'summoner-1',
+          edition: 'unchained',
+          baseForm: 'biped',
+          subtype: 'angel',
+          selectedEvolutions: [
+            { instanceId: 'a', evolutionId: 'evolution-bite' },
+            { instanceId: 'b', evolutionId: 'evolution-claws' },
+          ],
+        },
+      ];
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
+      expect(warnings.some((w) => w.section === 'classes' && /overspent/i.test(w.message))).toBe(
+        true,
+      );
+    });
+
+    it('warns when Aspect diverts more than 2 points at summoner level 12', async () => {
+      const draft = summonerDraft();
+      draft.classes[0].level = 12;
+      draft.levelIncrementSlots = [
+        { atHD: 4, ability: 'str' },
+        { atHD: 8, ability: 'str' },
+        { atHD: 12, ability: 'str' },
+      ];
+      draft.eidolons = [
+        {
+          id: 'eid-1',
+          name: 'Aziel',
+          summonerClassEntryId: 'summoner-1',
+          edition: 'unchained',
+          baseForm: 'biped',
+          subtype: 'angel',
+          selectedEvolutions: [],
+          aspectTransfer: { divertedPoints: 4, summonerEvolutions: [] },
+        },
+      ];
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
+      expect(
+        warnings.some(
+          (w) =>
+            w.section === 'classes' && /aspect/i.test(w.message) && /2-point cap/i.test(w.message),
+        ),
+      ).toBe(true);
+    });
+
+    it('warns when Extra Evolution feat is taken without a summoner class', async () => {
+      const draft = blankDraft(); // Fighter only
+      draft.featSlots = [
+        {
+          id: 'slot-1',
+          source: 'level',
+          availableAt: 'Lvl 1',
+          availableAtLevel: 1,
+          featId: 'extra-evolution',
+          prereqOverride: false,
+        },
+      ];
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
+      expect(
+        warnings.some(
+          (w) =>
+            w.section === 'feats' &&
+            /Extra Evolution/.test(w.message) &&
+            /Summoner/.test(w.message),
+        ),
+      ).toBe(true);
+    });
+
+    it('no eidolon warnings for a well-formed summoner fixture', async () => {
+      const draft = summonerDraft();
+      draft.eidolons = [
+        {
+          id: 'eid-1',
+          name: 'Aziel',
+          summonerClassEntryId: 'summoner-1',
+          edition: 'unchained',
+          baseForm: 'biped',
+          subtype: 'angel',
+          selectedEvolutions: [
+            {
+              instanceId: 'a',
+              evolutionId: 'evolution-ability-increase',
+              metadata: { ability: 'str' },
+            },
+          ],
+        },
+      ];
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
+      const eidolonWarnings = warnings.filter(
+        (w) => /eidolon/i.test(w.id) || /eidolon/i.test(w.message),
+      );
+      expect(eidolonWarnings).toHaveLength(0);
+    });
+  });
 });

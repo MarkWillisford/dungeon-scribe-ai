@@ -72,6 +72,10 @@ export interface DraftCharacterSnapshot {
     pools: Array<{ effectiveInitiatorLevel: number; baseClass: string }>;
     knownManeuvers: Array<{ maneuverId: string }>;
   };
+  eidolons: Array<{
+    id: string;
+    selectedEvolutions: Array<{ evolutionId: string }>;
+  }>;
   mythic?: { tier: number };
   companions: CompanionInstance[];
 }
@@ -123,6 +127,7 @@ export class DraftStateResolver {
     spellcasting: { pools: [] },
     initiating: { pools: [], knownManeuvers: [] },
     companions: [],
+    eidolons: [],
   };
 
   /**
@@ -321,6 +326,10 @@ export class DraftStateResolver {
       spellcasting: this.buildSpellcastingSnapshot(partialClasses, classDataMap),
       initiating: this.buildInitiatingSnapshot(partialClasses, classDataMap),
       companions: draft.companions,
+      eidolons: draft.eidolons.map((eid) => ({
+        id: eid.id,
+        selectedEvolutions: eid.selectedEvolutions.map((s) => ({ evolutionId: s.evolutionId })),
+      })),
     };
     // mythic omitted — direct-entry draft doesn't track mythic tier
   }

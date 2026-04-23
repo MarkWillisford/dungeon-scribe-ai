@@ -14,7 +14,9 @@ export const eidolonEvolutionsApg2pt: EidolonEvolutionEntry[] = [
     description:
       "The eidolon grows larger muscles, gains faster reflexes, achieves greater intelligence, or acquires another boost to one of its ability scores. Increase one of the eidolon's ability scores by 2. This evolution can be selected more than once. Each time an eidolon selects this evolution, increase one ability score by 2. The eidolon can select the same ability score more than once. The eidolon gains one additional use of this evolution at 6th level, and one additional use for every 6 levels thereafter.",
     evolutionPointCost: 2,
-    stacking: { canRepeat: true, requiresDifferentMetadata: 'ability' },
+    // Ability increase may repeat with the same metadata. Per-ability cap is
+    // 1 + floor(summoner level / 6), enforced in EidolonPoolService.
+    stacking: { canRepeat: true },
     effects: [
       {
         type: 'bonus',
