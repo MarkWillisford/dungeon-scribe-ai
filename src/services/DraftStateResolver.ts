@@ -8,6 +8,7 @@
 // be cast via `snapshot as unknown as Character` for those calls.
 //
 import type { CharacterDraft, DraftClassEntry, AbilityKey } from '@/types/characterDraft';
+import { computeOtherBonusTotal } from '@/types/characterDraft';
 import type { Ruleset } from '@/types/ruleset';
 import type { InitiatingContributor } from '@/types/initiating';
 import {
@@ -340,7 +341,7 @@ export class DraftStateResolver {
           score.racial +
           score.inherent +
           score.enhancement +
-          score.other +
+          computeOtherBonusTotal(score.other) +
           appliedIncrements,
       };
     }
