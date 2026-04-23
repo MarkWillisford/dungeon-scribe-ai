@@ -6,6 +6,7 @@ import {
   type AbilityKey,
   type CharacterDraft,
   type DraftAbilityScore,
+  type DraftTypedBonus,
   type DraftClassEntry,
   type DraftTemplateEntry,
   type DraftFeatSlot,
@@ -51,7 +52,7 @@ const blankAbilityScore: DraftAbilityScore = {
   racial: 0,
   inherent: 0,
   enhancement: 0,
-  other: 0,
+  other: [],
   levelIncrements: 0,
 };
 
@@ -96,6 +97,8 @@ export const BLANK_DRAFT: CharacterDraft = {
   skin: '',
   background: '',
   abilities: blankAbilities(),
+  racialFlexBonus: false,
+  racialFlexAbility: undefined,
   levelIncrementSlots: [],
   classes: [],
   templates: [],
@@ -132,6 +135,23 @@ function syncFeatSlotsFromClasses(draft: CharacterDraft): void {
       (SOURCE_ORDER[a.source] ?? 9) - (SOURCE_ORDER[b.source] ?? 9) ||
       a.id.localeCompare(b.id),
   );
+}
+
+const ABILITY_KEYS: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+
+function syncEnhancementBonuses(state: { draft: CharacterDraft }): void {
+  for (const key of ABILITY_KEYS) state.draft.abilities[key].enhancement = 0;
+  const accumulated: Partial<Record<AbilityKey, number[]>> = {};
+  for (const item of state.draft.equipment) {
+    if (item.slot && item.abilityScoreBonuses) {
+      for (const [ab, val] of Object.entries(item.abilityScoreBonuses)) {
+        (accumulated[ab as AbilityKey] ??= []).push(val as number);
+      }
+    }
+  }
+  for (const [ab, vals] of Object.entries(accumulated)) {
+    state.draft.abilities[ab as AbilityKey].enhancement = Math.max(...(vals as number[]));
+  }
 }
 
 // ---- Slice state ----
@@ -232,16 +252,32 @@ const characterEntrySlice = createSlice({
         raceId: string;
         raceName: string;
         racialBonuses: Partial<Record<AbilityKey, number>>;
+        hasFlexBonus?: boolean;
       }>,
     ) {
       state.draft.raceId = action.payload.raceId;
       state.draft.raceName = action.payload.raceName;
+      state.draft.racialFlexBonus = action.payload.hasFlexBonus ?? false;
+      if (!action.payload.hasFlexBonus) {
+        state.draft.racialFlexAbility = undefined;
+      }
       // Apply racial bonuses to ability scores (clear old ones first)
       const keys: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
       keys.forEach((k) => {
         state.draft.abilities[k].racial = action.payload.racialBonuses[k] ?? 0;
       });
       syncFeatSlotsFromClasses(state.draft);
+      state.isDirty = true;
+    },
+
+    setRacialFlexAbility(state, action: PayloadAction<AbilityKey>) {
+      const prev = state.draft.racialFlexAbility;
+      const next = action.payload;
+      if (prev && prev !== next) {
+        state.draft.abilities[prev].racial = 0;
+      }
+      state.draft.abilities[next].racial = 2;
+      state.draft.racialFlexAbility = next;
       state.isDirty = true;
     },
 
@@ -312,9 +348,36 @@ const characterEntrySlice = createSlice({
 
     setAbilityField(
       state,
-      action: PayloadAction<{ ability: AbilityKey; field: keyof DraftAbilityScore; value: number }>,
+      action: PayloadAction<{
+        ability: AbilityKey;
+        field: Exclude<keyof DraftAbilityScore, 'other'>;
+        value: number;
+      }>,
     ) {
-      state.draft.abilities[action.payload.ability][action.payload.field] = action.payload.value;
+      (state.draft.abilities[action.payload.ability][action.payload.field] as number) =
+        action.payload.value;
+      state.isDirty = true;
+    },
+
+    addOtherBonus(
+      state,
+      action: PayloadAction<{ ability: AbilityKey; bonus: DraftTypedBonus }>,
+    ) {
+      state.draft.abilities[action.payload.ability].other.push(action.payload.bonus);
+      state.isDirty = true;
+    },
+
+    removeOtherBonus(state, action: PayloadAction<{ ability: AbilityKey; index: number }>) {
+      state.draft.abilities[action.payload.ability].other.splice(action.payload.index, 1);
+      state.isDirty = true;
+    },
+
+    updateOtherBonus(
+      state,
+      action: PayloadAction<{ ability: AbilityKey; index: number; bonus: DraftTypedBonus }>,
+    ) {
+      state.draft.abilities[action.payload.ability].other[action.payload.index] =
+        action.payload.bonus;
       state.isDirty = true;
     },
 
@@ -680,11 +743,13 @@ const characterEntrySlice = createSlice({
 
     addEquipment(state, action: PayloadAction<DraftEquipmentItem>) {
       state.draft.equipment.push(action.payload);
+      syncEnhancementBonuses(state);
       state.isDirty = true;
     },
 
     removeEquipment(state, action: PayloadAction<string>) {
       state.draft.equipment = state.draft.equipment.filter((e) => e.id !== action.payload);
+      syncEnhancementBonuses(state);
       state.isDirty = true;
     },
 
@@ -692,6 +757,7 @@ const characterEntrySlice = createSlice({
       const idx = state.draft.equipment.findIndex((e) => e.id === action.payload.id);
       if (idx >= 0) {
         state.draft.equipment[idx] = action.payload;
+        syncEnhancementBonuses(state);
         state.isDirty = true;
       }
     },
@@ -701,6 +767,7 @@ const characterEntrySlice = createSlice({
       if (item) {
         item.slot = action.payload.slot;
         item.containerId = undefined;
+        syncEnhancementBonuses(state);
         state.isDirty = true;
       }
     },
@@ -709,6 +776,7 @@ const characterEntrySlice = createSlice({
       const item = state.draft.equipment.find((e) => e.id === action.payload);
       if (item) {
         item.slot = undefined;
+        syncEnhancementBonuses(state);
         state.isDirty = true;
       }
     },
@@ -747,6 +815,7 @@ export const {
   setName,
   setPlayer,
   setRace,
+  setRacialFlexAbility,
   setAlignment,
   setDeity,
   setGender,
@@ -759,6 +828,9 @@ export const {
   setBackground,
   setPortrait,
   setAbilityField,
+  addOtherBonus,
+  removeOtherBonus,
+  updateOtherBonus,
   setLevelIncrementAbility,
   setLevelIncrementSlots,
   addClass,
