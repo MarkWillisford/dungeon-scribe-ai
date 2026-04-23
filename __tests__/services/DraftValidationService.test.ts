@@ -1,6 +1,7 @@
 import { DraftValidationService } from '@services/DraftValidationService';
-import type { CharacterDraft, DraftClassEntry } from '@/types/characterDraft';
-import { Alignment } from '@/types/base';
+import type { CharacterDraft, DraftClassEntry, DraftTypedBonus } from '@/types/characterDraft';
+import { computeOtherBonusTotal } from '@/types/characterDraft';
+import { Alignment, BonusType } from '@/types/base';
 import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
 import type { ClassDataMap } from '@/utils/characterComputations';
 
@@ -16,14 +17,14 @@ jest.mock('@/utils/characterComputations', () => ({
       racial: number;
       inherent: number;
       enhancement: number;
-      other: number;
+      other: DraftTypedBonus[];
       levelIncrements: number;
     }) =>
       score.base +
       score.racial +
       score.inherent +
       score.enhancement +
-      score.other +
+      computeOtherBonusTotal(score.other) +
       score.levelIncrements,
   ),
   abilityModifier: jest.fn((total: number) => Math.floor((total - 10) / 2)),
@@ -146,6 +147,7 @@ function blankDraft(): CharacterDraft {
     player: 'Mark',
     raceId: 'human',
     raceName: 'Human',
+    racialFlexBonus: false,
     alignment: Alignment.TrueNeutral,
     deity: '',
     gender: '',
@@ -157,12 +159,12 @@ function blankDraft(): CharacterDraft {
     skin: '',
     background: '',
     abilities: {
-      str: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: 0, levelIncrements: 0 },
-      dex: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: 0, levelIncrements: 0 },
-      con: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: 0, levelIncrements: 0 },
-      int: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: 0, levelIncrements: 0 },
-      wis: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: 0, levelIncrements: 0 },
-      cha: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: 0, levelIncrements: 0 },
+      str: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
+      dex: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
+      con: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
+      int: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
+      wis: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
+      cha: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
     },
     levelIncrementSlots: [],
     classes: [
@@ -279,7 +281,7 @@ describe('DraftValidationService', () => {
     it('warns when total is non-positive', async () => {
       const draft = blankDraft();
       draft.abilities.dex.base = 1;
-      draft.abilities.dex.other = -5; // total = -4
+      draft.abilities.dex.other = [{ value: -5, bonusType: BonusType.UNTYPED }]; // total = -4
       const warnings = await DraftValidationService.validate(
         draft,
         DEFAULT_RULESET,

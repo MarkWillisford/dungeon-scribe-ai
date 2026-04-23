@@ -45,7 +45,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="settings/index"
         options={{
           title: 'Settings',
           tabBarIcon: ({ color }) => <Text style={[styles.icon, { color }]}>&#x2699;</Text>,
