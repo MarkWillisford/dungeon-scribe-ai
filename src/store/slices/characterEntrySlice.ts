@@ -33,6 +33,13 @@ import {
   type DraftCombatStats,
   type FavoredClassBonusSelection,
 } from '@/types/characterDraft';
+import type {
+  DraftEidolon,
+  EidolonEdition,
+  EidolonForm,
+  EidolonSubtype,
+  SelectedEvolutionMetadata,
+} from '@/types/eidolon';
 
 // ---- Supporting types ----
 
@@ -1180,6 +1187,133 @@ const characterEntrySlice = createSlice({
       }
     },
 
+    // ---- Eidolons ----
+
+    addEidolon(
+      state,
+      action: PayloadAction<{
+        classEntryId: string;
+        edition: EidolonEdition;
+        baseForm: EidolonForm;
+        subtype?: EidolonSubtype;
+        name?: string;
+      }>,
+    ) {
+      // Make sure the owner class entry exists.
+      const owner = state.draft.classes.find((c) => c.id === action.payload.classEntryId);
+      if (!owner) return;
+      const id = `eidolon-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+      const newEidolon: DraftEidolon = {
+        id,
+        name: action.payload.name?.trim() || 'Eidolon',
+        summonerClassEntryId: action.payload.classEntryId,
+        edition: action.payload.edition,
+        baseForm: action.payload.baseForm,
+        subtype: action.payload.subtype,
+        selectedEvolutions: [],
+      };
+      state.draft.eidolons.push(newEidolon);
+      state.isDirty = true;
+    },
+
+    removeEidolon(state, action: PayloadAction<string>) {
+      const before = state.draft.eidolons.length;
+      state.draft.eidolons = state.draft.eidolons.filter((e) => e.id !== action.payload);
+      if (state.draft.eidolons.length !== before) state.isDirty = true;
+    },
+
+    renameEidolon(state, action: PayloadAction<{ eidolonId: string; name: string }>) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (eid) {
+        eid.name = action.payload.name;
+        state.isDirty = true;
+      }
+    },
+
+    setEidolonBaseForm(state, action: PayloadAction<{ eidolonId: string; baseForm: EidolonForm }>) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (eid) {
+        eid.baseForm = action.payload.baseForm;
+        state.isDirty = true;
+      }
+    },
+
+    setEidolonSubtype(
+      state,
+      action: PayloadAction<{ eidolonId: string; subtype: EidolonSubtype | undefined }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (eid) {
+        eid.subtype = action.payload.subtype;
+        state.isDirty = true;
+      }
+    },
+
+    addSelectedEvolution(
+      state,
+      action: PayloadAction<{
+        eidolonId: string;
+        evolutionId: string;
+        metadata?: SelectedEvolutionMetadata;
+      }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      const instanceId = `evo-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+      eid.selectedEvolutions.push({
+        instanceId,
+        evolutionId: action.payload.evolutionId,
+        metadata: action.payload.metadata,
+      });
+      state.isDirty = true;
+    },
+
+    removeSelectedEvolution(
+      state,
+      action: PayloadAction<{ eidolonId: string; instanceId: string }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      const before = eid.selectedEvolutions.length;
+      eid.selectedEvolutions = eid.selectedEvolutions.filter(
+        (s) => s.instanceId !== action.payload.instanceId,
+      );
+      if (eid.selectedEvolutions.length !== before) state.isDirty = true;
+    },
+
+    updateEvolutionMetadata(
+      state,
+      action: PayloadAction<{
+        eidolonId: string;
+        instanceId: string;
+        metadata?: SelectedEvolutionMetadata;
+      }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      const sel = eid.selectedEvolutions.find((s) => s.instanceId === action.payload.instanceId);
+      if (sel) {
+        sel.metadata = action.payload.metadata;
+        state.isDirty = true;
+      }
+    },
+
+    setEidolonPoolOverride(
+      state,
+      action: PayloadAction<
+        { eidolonId: string; clear: true } | { eidolonId: string; value: number; note: string }
+      >,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      if ('clear' in action.payload) {
+        eid.poolOverride = undefined;
+      } else {
+        eid.poolOverride = { value: action.payload.value, note: action.payload.note };
+      }
+      state.isDirty = true;
+    },
+
     // ---- Notes ----
 
     setCharacterNotes(state, action: PayloadAction<string>) {
@@ -1279,6 +1413,15 @@ export const {
   assignEquipmentSlot,
   unassignEquipmentSlot,
   assignEquipmentContainer,
+  addEidolon,
+  removeEidolon,
+  renameEidolon,
+  setEidolonBaseForm,
+  setEidolonSubtype,
+  addSelectedEvolution,
+  removeSelectedEvolution,
+  updateEvolutionMetadata,
+  setEidolonPoolOverride,
   setCharacterNotes,
   setCampaignNotes,
 } = characterEntrySlice.actions;

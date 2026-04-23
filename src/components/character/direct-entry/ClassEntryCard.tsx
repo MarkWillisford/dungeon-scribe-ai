@@ -36,6 +36,10 @@ import { type ClassChoice } from '@/types/classes';
 import { ArchetypePickerSheet } from './ArchetypePickerSheet';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import { makeCompanionInstanceId } from '@/utils/companionUtils';
+import { EidolonSection } from './EidolonSection';
+
+// Matches "Summoner", "Summoner (Unchained)", "Summoner (APG)", etc.
+const SUMMONER_CLASS_RE = /^summoner(?:\s|$|\()/i;
 
 // Pairs of featureNames that are mutually exclusive — filling one disables the other.
 const MUTUALLY_EXCLUSIVE_PAIRS: [string, string][] = [['Domain', 'Inquisition']];
@@ -1100,6 +1104,9 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
       )}
 
       {isBaseClass && entry.isFavoredClass && <FavoredClassBonusSection entry={entry} />}
+
+      {/* Eidolon sub-sheet — rendered above class choices for Summoner entries */}
+      {SUMMONER_CLASS_RE.test(entry.className) && <EidolonSection classEntry={entry} />}
 
       {/* Class choices */}
       {hasChoices && (
