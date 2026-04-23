@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { Alignment } from '@/types/base';
 import { ClassChoice } from '@/types/classes';
+import type { CompanionInstance, CompanionGrant } from '@/types/companions';
 import { computeFeatSlots } from '@/utils/characterComputations';
 import {
   type AbilityKey,
@@ -108,6 +109,7 @@ export const BLANK_DRAFT: CharacterDraft = {
   featSlots: [],
   spellcastingPools: [],
   equipment: [],
+  companions: [],
   characterNotes: '',
   campaignNotes: '',
 };
@@ -359,10 +361,7 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
-    addOtherBonus(
-      state,
-      action: PayloadAction<{ ability: AbilityKey; bonus: DraftTypedBonus }>,
-    ) {
+    addOtherBonus(state, action: PayloadAction<{ ability: AbilityKey; bonus: DraftTypedBonus }>) {
       state.draft.abilities[action.payload.ability].other.push(action.payload.bonus);
       state.isDirty = true;
     },
@@ -439,6 +438,11 @@ const characterEntrySlice = createSlice({
       // Remove the pool anchored to this class (if any).
       state.draft.spellcastingPools = state.draft.spellcastingPools.filter(
         (p) => p.baseClassEntryId !== removedId,
+      );
+
+      // Sweep companions granted by this class.
+      state.draft.companions = state.draft.companions.filter(
+        (c) => !(c.grantedBy.type === 'class' && c.grantedBy.classEntryId === removedId),
       );
 
       syncFeatSlotsFromClasses(state.draft);
@@ -541,6 +545,86 @@ const characterEntrySlice = createSlice({
         cls.prereqOverride = !cls.prereqOverride;
         state.isDirty = true;
       }
+    },
+
+    // ---- Companions ----------------------------------------------------
+    //
+    // Animal companions and special mounts. The slice owns the raw list;
+    // CompanionService derives effective level + stat blocks at render time.
+    // `grantedBy` is the durable link back to the granting class/template.
+
+    addCompanion(
+      state,
+      action: PayloadAction<{
+        instanceId: string;
+        sourceEntryId: string;
+        name: string;
+        grantedBy: CompanionGrant;
+        effectiveProgressionLevel: number;
+      }>,
+    ) {
+      const { instanceId, sourceEntryId, name, grantedBy, effectiveProgressionLevel } =
+        action.payload;
+      const companion: CompanionInstance = {
+        instanceId,
+        sourceEntryId,
+        name,
+        grantedBy,
+        effectiveProgressionLevel,
+        abilityScoreOverrides: {},
+        hp: { max: 0, current: 0, temp: 0, nonlethal: 0 },
+        appliedTemplates: [],
+        feats: [],
+        tricks: [],
+        skillRanks: {},
+        equipment: {
+          armor: [],
+          weapons: [],
+          magicItems: [],
+          gear: [],
+          equippedSlots: new Map(),
+        },
+        notes: '',
+      };
+      state.draft.companions.push(companion);
+      state.isDirty = true;
+    },
+
+    removeCompanion(state, action: PayloadAction<string>) {
+      const instanceId = action.payload;
+      state.draft.companions = state.draft.companions.filter((c) => c.instanceId !== instanceId);
+      state.isDirty = true;
+    },
+
+    renameCompanion(state, action: PayloadAction<{ instanceId: string; name: string }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (comp) {
+        comp.name = action.payload.name;
+        state.isDirty = true;
+      }
+    },
+
+    updateCompanionEffectiveLevel(
+      state,
+      action: PayloadAction<{ instanceId: string; effectiveProgressionLevel: number }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (comp) {
+        comp.effectiveProgressionLevel = action.payload.effectiveProgressionLevel;
+        state.isDirty = true;
+      }
+    },
+
+    // When a granting class changes ID (drag-reorder or class-replace), sweep
+    // any companions whose grantedBy.classEntryId references the old ID. Kept
+    // internal-ish — only the migration helpers + integration tests call it.
+    removeCompanionsGrantedByClass(state, action: PayloadAction<string>) {
+      const classId = action.payload;
+      const before = state.draft.companions.length;
+      state.draft.companions = state.draft.companions.filter(
+        (c) => !(c.grantedBy.type === 'class' && c.grantedBy.classEntryId === classId),
+      );
+      if (state.draft.companions.length !== before) state.isDirty = true;
     },
 
     toggleFavoredClass(state, action: PayloadAction<string>) {
@@ -840,6 +924,11 @@ export const {
   updateClassSpellcastingAdvancement,
   upsertClassChoice,
   toggleClassPrereqOverride,
+  addCompanion,
+  removeCompanion,
+  renameCompanion,
+  updateCompanionEffectiveLevel,
+  removeCompanionsGrantedByClass,
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,

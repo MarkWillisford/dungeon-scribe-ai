@@ -7,6 +7,7 @@
 import { Alignment, BonusType } from './base';
 import { ClassChoice } from './classes';
 import type { ItemSlot } from './magicItems';
+import type { CompanionInstance } from './companions';
 
 // ---- Ability scores ----
 
@@ -280,6 +281,11 @@ export interface CharacterDraft {
 
   // Equipment — unified slot system
   equipment: DraftEquipmentItem[];
+
+  // Animal companions / special mounts. CompanionInstance shape is shared
+  // between draft + persisted Character since companions carry no edit-time
+  // metadata distinct from their saved form.
+  companions: CompanionInstance[];
 
   // Notes
   characterNotes: string;
