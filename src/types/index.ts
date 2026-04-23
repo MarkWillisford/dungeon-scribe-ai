@@ -101,3 +101,4 @@ export * from './ruleset';
 export * from './initiating';
 export * from './gameData';
 export * from './companions';
+export * from './favoredClassBonuses';
