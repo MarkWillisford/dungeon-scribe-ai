@@ -6,6 +6,7 @@ import { CombatSection } from '@/components/character/companion-entry/CombatSect
 import { SkillsSection } from '@/components/character/companion-entry/SkillsSection';
 import { FeatsSection } from '@/components/character/companion-entry/FeatsSection';
 import { TricksSection } from '@/components/character/companion-entry/TricksSection';
+import { NotesSection } from '@/components/character/companion-entry/NotesSection';
 import type { CompanionInstance } from '@/types/companions';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 
@@ -438,5 +439,36 @@ describe('TricksSection', () => {
       .getAllByRole('checkbox')
       .find((n) => n.props.accessibilityLabel === 'Trick: Fetch');
     expect(fetchRow?.props.accessibilityState).toEqual({ checked: false });
+  });
+});
+
+// ---- NotesSection ----
+
+describe('NotesSection', () => {
+  it('renders the current background value', () => {
+    const comp = makeCompanion({ background: 'Raised in the Whisperwood.' });
+    const r = render(<NotesSection companion={comp} entry={wolf} />);
+    const input = findByType(r.tree, 'TextInput')[0];
+    expect(input.props.value).toBe('Raised in the Whisperwood.');
+  });
+
+  it('typing into the background input dispatches setCompanionBackground', () => {
+    const comp = makeCompanion({ background: '' });
+    const r = render(<NotesSection companion={comp} entry={wolf} />);
+    const input = findByType(r.tree, 'TextInput')[0];
+    fireEvent.changeText(input, 'A stray adopted by the village.');
+    expect(mockDispatch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'characterEntry/setCompanionBackground',
+        payload: { instanceId: 'comp-1', background: 'A stray adopted by the village.' },
+      }),
+    );
+  });
+
+  it('shows the hint explaining the split with Identity notes', () => {
+    const comp = makeCompanion();
+    const r = render(<NotesSection companion={comp} entry={wolf} />);
+    const text = r.getAllText().join(' ');
+    expect(text).toMatch(/Identity tab.*shorter notes/i);
   });
 });
