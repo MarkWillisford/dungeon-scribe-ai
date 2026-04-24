@@ -927,6 +927,10 @@ const characterEntrySlice = createSlice({
 
     removeTemplate(state, action: PayloadAction<string>) {
       state.draft.templates = state.draft.templates.filter((t) => t.id !== action.payload);
+      // Sweep companions granted by this template.
+      state.draft.companions = state.draft.companions.filter(
+        (c) => !(c.grantedBy.type === 'template' && c.grantedBy.templateId === action.payload)
+      );
       state.isDirty = true;
     },
 
