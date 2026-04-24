@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch } from '@/store/hooks';
@@ -7,6 +7,7 @@ import {
   setCompanionNotes,
   swapCompanionForm,
 } from '@/store/slices/characterEntrySlice';
+import { CompanionService } from '@/services/CompanionService';
 import { CompanionPickerSheet } from '@/components/character/direct-entry/CompanionPickerSheet';
 import type { CompanionInstance } from '@/types/companions';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
@@ -20,6 +21,13 @@ export function IdentitySection({ companion, entry }: IdentitySectionProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [swapOpen, setSwapOpen] = useState(false);
+
+  // Use the computed stat block for size and special qualities so that
+  // progression tiers (e.g. Medium → Large at effective level 7) are reflected.
+  const baseStats = useMemo(() => {
+    if (!entry) return undefined;
+    return CompanionService.computeBaseStatBlock(entry, companion.effectiveProgressionLevel);
+  }, [entry, companion.effectiveProgressionLevel]);
 
   const handleNameChange = (text: string) => {
     dispatch(renameCompanion({ instanceId: companion.instanceId, name: text }));
@@ -83,7 +91,7 @@ export function IdentitySection({ companion, entry }: IdentitySectionProps) {
 
       <Field label="Size">
         <Text style={[styles.readonly, { color: colors.text.secondary }]}>
-          {entry?.size ?? '—'}
+          {baseStats?.size ?? entry?.size ?? '—'}
         </Text>
       </Field>
 
@@ -94,9 +102,9 @@ export function IdentitySection({ companion, entry }: IdentitySectionProps) {
       </Field>
 
       <Field label="Special Qualities">
-        {entry?.specialQualities.length ? (
+        {(baseStats?.specialQualities ?? entry?.specialQualities ?? []).length ? (
           <View style={styles.qualitiesList}>
-            {entry.specialQualities.map((q) => (
+            {(baseStats?.specialQualities ?? entry?.specialQualities ?? []).map((q) => (
               <Text key={q} style={[styles.qualityItem, { color: colors.text.secondary }]}>
                 • {q}
               </Text>

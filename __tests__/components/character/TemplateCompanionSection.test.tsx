@@ -140,6 +140,7 @@ function makeCompanion(overrides: Partial<CompanionInstance> = {}): CompanionIns
     grantedBy: { type: 'template', templateId: 'druid-creature' },
     effectiveProgressionLevel: 7,
     abilityScoreOverrides: {},
+    hdAbilityIncreases: [],
     hp: { max: 0, current: 0, temp: 0, nonlethal: 0 },
     appliedTemplates: [],
     feats: [],

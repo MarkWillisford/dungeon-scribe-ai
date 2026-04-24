@@ -12,6 +12,7 @@ import type {
   CompanionInstance,
   CompanionGrant,
   CompanionFeat,
+  CompanionAbilityIncrease,
   TrickName,
 } from '@/types/companions';
 import type { AppliedTemplate } from '@/types/templates';
@@ -586,6 +587,7 @@ const characterEntrySlice = createSlice({
         grantedBy,
         effectiveProgressionLevel,
         abilityScoreOverrides: {},
+        hdAbilityIncreases: [],
         hp: { max: 0, current: 0, temp: 0, nonlethal: 0 },
         appliedTemplates: [],
         feats: [],
@@ -755,6 +757,28 @@ const characterEntrySlice = createSlice({
       const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       comp.background = action.payload.background;
+      state.isDirty = true;
+    },
+
+    setCompanionHDAbilityIncrease(
+      state,
+      action: PayloadAction<{
+        instanceId: string;
+        atLevel: number;
+        ability: CompanionAbilityIncrease['ability'];
+      }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const existing = comp.hdAbilityIncreases.find((i) => i.atLevel === action.payload.atLevel);
+      if (existing) {
+        existing.ability = action.payload.ability;
+      } else {
+        comp.hdAbilityIncreases.push({
+          atLevel: action.payload.atLevel,
+          ability: action.payload.ability,
+        });
+      }
       state.isDirty = true;
     },
 
@@ -1167,6 +1191,7 @@ export const {
   toggleCompanionTrick,
   setCompanionSkillRank,
   setCompanionBackground,
+  setCompanionHDAbilityIncrease,
   addCompanionTemplate,
   removeCompanionTemplateAt,
   updateCompanionTemplateAt,

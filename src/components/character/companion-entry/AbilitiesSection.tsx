@@ -2,8 +2,12 @@ import React, { useMemo } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch } from '@/store/hooks';
-import { setCompanionAbilityOverride } from '@/store/slices/characterEntrySlice';
-import { CompanionService } from '@/services/CompanionService';
+import {
+  setCompanionAbilityOverride,
+  setCompanionHDAbilityIncrease,
+} from '@/store/slices/characterEntrySlice';
+import { CompanionService, AC_PROGRESSION } from '@/services/CompanionService';
+import { InlinePicker } from '@/components/ui/InlinePicker';
 import type { CompanionInstance } from '@/types/companions';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 
@@ -15,6 +19,16 @@ export interface AbilitiesSectionProps {
 type Ability = 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
 
 const ABILITIES: Ability[] = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+
+const ABILITY_OPTIONS = [
+  { label: '—', value: '' },
+  { label: 'STR', value: 'STR' },
+  { label: 'DEX', value: 'DEX' },
+  { label: 'CON', value: 'CON' },
+  { label: 'INT', value: 'INT' },
+  { label: 'WIS', value: 'WIS' },
+  { label: 'CHA', value: 'CHA' },
+];
 
 function abilityMod(score: number): number {
   return Math.floor((score - 10) / 2);
@@ -28,13 +42,30 @@ export function AbilitiesSection({ companion, entry }: AbilitiesSectionProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
 
-  // Computed stat block — walks progression tiers and applies the universal
-  // AC table. We use the result as the "pre-override" baseline to show the
-  // player what they'd get without manual intervention.
   const baseStats = useMemo(() => {
     if (!entry) return undefined;
     return CompanionService.computeBaseStatBlock(entry, companion.effectiveProgressionLevel);
   }, [entry, companion.effectiveProgressionLevel]);
+
+  // Levels up to current effectiveProgressionLevel that grant an ability score
+  // increase (from the AC progression table's special column).
+  const increaseSlots = useMemo(() => {
+    const slots: number[] = [];
+    const cap = Math.min(companion.effectiveProgressionLevel, 30);
+    for (let lvl = 1; lvl <= cap; lvl++) {
+      if (AC_PROGRESSION[lvl]?.special.includes('Ability Score Increase')) slots.push(lvl);
+    }
+    return slots;
+  }, [companion.effectiveProgressionLevel]);
+
+  // Sum of chosen HD increases per ability.
+  const hdBonusByAbility = useMemo(() => {
+    const totals: Partial<Record<Ability, number>> = {};
+    for (const inc of companion.hdAbilityIncreases) {
+      if (inc.ability) totals[inc.ability] = (totals[inc.ability] ?? 0) + 1;
+    }
+    return totals;
+  }, [companion.hdAbilityIncreases]);
 
   const handleOverrideChange = (ability: Ability, text: string) => {
     const trimmed = text.trim();
@@ -46,11 +77,15 @@ export function AbilitiesSection({ companion, entry }: AbilitiesSectionProps) {
     }
     const n = Number.parseInt(trimmed, 10);
     if (Number.isNaN(n)) return;
+    dispatch(setCompanionAbilityOverride({ instanceId: companion.instanceId, ability, value: n }));
+  };
+
+  const handleIncreaseAbility = (atLevel: number, value: string) => {
     dispatch(
-      setCompanionAbilityOverride({
+      setCompanionHDAbilityIncrease({
         instanceId: companion.instanceId,
-        ability,
-        value: n,
+        atLevel,
+        ability: (value as Ability) || null,
       }),
     );
   };
@@ -76,17 +111,13 @@ export function AbilitiesSection({ companion, entry }: AbilitiesSectionProps) {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-        Base scores come from the creature entry, applied progression tiers, and the AC table&apos;s
-        Str/Dex bonus. Use the override column to set a different value (e.g. ability score
-        increases at levels 4/9/14/20).
-      </Text>
-
+      {/* Stat table */}
       <View style={[styles.headerRow, { borderBottomColor: colors.border.DEFAULT }]}>
         <Text style={[styles.hdr, styles.abilityCol, { color: colors.text.tertiary }]}>
           Ability
         </Text>
         <Text style={[styles.hdr, styles.numCol, { color: colors.text.tertiary }]}>Base</Text>
+        <Text style={[styles.hdr, styles.numCol, { color: colors.text.tertiary }]}>+HD</Text>
         <Text style={[styles.hdr, styles.numCol, { color: colors.text.tertiary }]}>Override</Text>
         <Text style={[styles.hdr, styles.numCol, { color: colors.text.tertiary }]}>Total</Text>
         <Text style={[styles.hdr, styles.numCol, { color: colors.text.tertiary }]}>Mod</Text>
@@ -94,8 +125,9 @@ export function AbilitiesSection({ companion, entry }: AbilitiesSectionProps) {
 
       {ABILITIES.map((ab) => {
         const base = baseByAbility[ab];
+        const hdBonus = hdBonusByAbility[ab] ?? 0;
         const override = companion.abilityScoreOverrides[ab];
-        const total = override ?? base;
+        const total = override ?? base + hdBonus;
         const mod = abilityMod(total);
         const hasOverride = override !== undefined;
         return (
@@ -105,6 +137,15 @@ export function AbilitiesSection({ companion, entry }: AbilitiesSectionProps) {
             </Text>
             <Text style={[styles.value, styles.numCol, { color: colors.text.secondary }]}>
               {base}
+            </Text>
+            <Text
+              style={[
+                styles.value,
+                styles.numCol,
+                { color: hdBonus > 0 ? fantasy.gold : colors.text.tertiary },
+              ]}
+            >
+              {hdBonus > 0 ? `+${hdBonus}` : '—'}
             </Text>
             <View style={styles.numCol}>
               <TextInput
@@ -127,10 +168,7 @@ export function AbilitiesSection({ companion, entry }: AbilitiesSectionProps) {
               style={[
                 styles.value,
                 styles.numCol,
-                {
-                  color: colors.text.primary,
-                  fontWeight: hasOverride ? '700' : '400',
-                },
+                { color: colors.text.primary, fontWeight: hasOverride ? '700' : '400' },
               ]}
             >
               {total}
@@ -144,9 +182,35 @@ export function AbilitiesSection({ companion, entry }: AbilitiesSectionProps) {
 
       {baseStats.appliedTiers.length > 0 && (
         <Text style={[styles.caption, { color: colors.text.tertiary }]}>
-          Applied progression tiers: {baseStats.appliedTiers.map((t) => `lvl ${t}`).join(', ')}. AC
+          Progression tiers applied: {baseStats.appliedTiers.map((t) => `lvl ${t}`).join(', ')}. AC
           table Str/Dex bonus: +{baseStats.progression.strDexBonus}.
         </Text>
+      )}
+
+      {/* HD ability increase slots */}
+      {increaseSlots.length > 0 && (
+        <View style={styles.increaseSection}>
+          <Text style={[styles.increaseSectionLabel, { color: colors.text.tertiary }]}>
+            Ability Score Increases
+          </Text>
+          {increaseSlots.map((lvl) => {
+            const chosen =
+              companion.hdAbilityIncreases.find((i) => i.atLevel === lvl)?.ability ?? null;
+            return (
+              <View key={lvl} style={styles.increaseRow}>
+                <Text style={[styles.increaseLevel, { color: colors.text.secondary }]}>
+                  Level {lvl}
+                </Text>
+                <InlinePicker
+                  value={chosen ?? ''}
+                  options={ABILITY_OPTIONS}
+                  onValueChange={(v) => handleIncreaseAbility(lvl, v)}
+                  style={styles.increasePicker}
+                />
+              </View>
+            );
+          })}
+        </View>
       )}
 
       <Pressable
@@ -237,6 +301,32 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '700',
     letterSpacing: 0.5,
+  },
+  increaseSection: {
+    marginTop: 8,
+    gap: 8,
+  },
+  increaseSectionLabel: {
+    fontFamily: 'Cinzel',
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 0.5,
+    textTransform: 'uppercase',
+    paddingTop: 4,
+  },
+  increaseRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  increaseLevel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    width: 60,
+  },
+  increasePicker: {
+    flex: 1,
+    marginBottom: 0,
   },
   emptyContainer: { padding: 32, alignItems: 'center' },
   emptyText: { fontFamily: 'LibreBaskerville', fontSize: 14, fontStyle: 'italic' },

@@ -23,7 +23,7 @@ export const ram: AnimalCompanionEntry = {
   str: 10,
   dex: 17,
   con: 11,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 14,
   cha: 7,
   specialQualities: ['low-light vision', 'scent'],
@@ -59,7 +59,7 @@ export const rhinoceros: AnimalCompanionEntry = {
   str: 14,
   dex: 14,
   con: 15,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 5,
   specialQualities: ['scent'],
@@ -96,7 +96,7 @@ export const roc: AnimalCompanionEntry = {
   str: 12,
   dex: 19,
   con: 9,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 11,
   specialQualities: ['low-light vision'],
@@ -132,7 +132,7 @@ export const saberToothedCat: AnimalCompanionEntry = {
   str: 15,
   dex: 15,
   con: 13,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 8,
   specialQualities: ['low-light vision', 'scent'],
@@ -169,7 +169,7 @@ export const caveSalamander: AnimalCompanionEntry = {
   str: 13,
   dex: 12,
   con: 13,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 4,
   specialQualities: ['darkvision 60 ft.'],
@@ -242,7 +242,7 @@ export const seaHorse: AnimalCompanionEntry = {
   str: 8,
   dex: 14,
   con: 13,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 2,
   specialQualities: ['low-light vision'],
@@ -268,7 +268,7 @@ export const seal: AnimalCompanionEntry = {
   str: 11,
   dex: 14,
   con: 12,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 14,
   cha: 6,
   specialQualities: ['hold breath', 'low-light vision'],
@@ -307,7 +307,7 @@ export const shark: AnimalCompanionEntry = {
   str: 13,
   dex: 15,
   con: 15,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 2,
   specialQualities: ['low-light vision', 'scent'],
@@ -345,7 +345,7 @@ export const sheep: AnimalCompanionEntry = {
   str: 10,
   dex: 17,
   con: 14,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 5,
   specialQualities: ['low-light vision'],
@@ -379,7 +379,7 @@ export const giantSkunk: AnimalCompanionEntry = {
   str: 9,
   dex: 14,
   con: 13,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 9,
   specialQualities: [
@@ -420,7 +420,7 @@ export const snakeConstrictor: AnimalCompanionEntry = {
   str: 15,
   dex: 17,
   con: 13,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 2,
   specialQualities: ['low-light vision', 'scent'],
@@ -459,7 +459,7 @@ export const squid: AnimalCompanionEntry = {
   str: 14,
   dex: 15,
   con: 11,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 2,
   specialQualities: ['low-light vision', 'ink cloud'],
@@ -492,7 +492,7 @@ export const squirrel: AnimalCompanionEntry = {
   str: 2,
   dex: 19,
   con: 9,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 9,
   specialQualities: ['low-light vision'],
@@ -541,7 +541,7 @@ export const stegosaurus: AnimalCompanionEntry = {
   str: 10,
   dex: 18,
   con: 10,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 10,
   specialQualities: ['low-light vision', 'scent'],
@@ -578,7 +578,7 @@ export const styracosaurus: AnimalCompanionEntry = {
   str: 10,
   dex: 13,
   con: 11,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 7,
   specialQualities: ['low-light vision', 'scent'],
@@ -615,7 +615,7 @@ export const trumpeterSwan: AnimalCompanionEntry = {
   str: 8,
   dex: 16,
   con: 12,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 8,
   specialQualities: ['low-light vision'],
@@ -647,7 +647,7 @@ export const giantToad: AnimalCompanionEntry = {
   str: 15,
   dex: 13,
   con: 16,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 9,
   cha: 6,
   specialQualities: ['low-light vision', 'scent'],
@@ -681,7 +681,7 @@ export const thylacine: AnimalCompanionEntry = {
   str: 12,
   dex: 15,
   con: 16,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 7,
   specialQualities: ['low-light vision', 'powerful jaws'],
@@ -717,7 +717,7 @@ export const tortoise: AnimalCompanionEntry = {
   str: 8,
   dex: 6,
   con: 13,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 11,
   cha: 2,
   specialQualities: ['low-light vision', 'scent'],

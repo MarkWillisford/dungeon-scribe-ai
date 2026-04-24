@@ -761,7 +761,7 @@ export const gulperPlant: AnimalCompanionEntry = {
   str: 12,
   dex: 11,
   con: 13,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 10,
   cha: 3,
   specialQualities: ['freeze', 'low-light vision', 'swallow whole (1d6 acid)', 'cannot be tripped'],

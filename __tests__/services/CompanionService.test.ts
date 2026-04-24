@@ -92,6 +92,7 @@ const makeInstance = (overrides: Partial<CompanionInstance> = {}): CompanionInst
   grantedBy: classGrant('Druid'),
   effectiveProgressionLevel: 1,
   abilityScoreOverrides: {},
+  hdAbilityIncreases: [],
   hp: { max: 0, current: 0, temp: 0, nonlethal: 0 },
   appliedTemplates: [],
   feats: [],
@@ -264,8 +265,12 @@ describe('CompanionService.getProgression', () => {
     expect(CompanionService.getProgression(0)).toEqual(AC_PROGRESSION[1]);
   });
 
-  it('clamps level > 20 to level 20', () => {
-    expect(CompanionService.getProgression(25)).toEqual(AC_PROGRESSION[20]);
+  it('returns level 25 entry directly (table now extends to 30)', () => {
+    expect(CompanionService.getProgression(25)).toEqual(AC_PROGRESSION[25]);
+  });
+
+  it('clamps level > 30 to level 30', () => {
+    expect(CompanionService.getProgression(35)).toEqual(AC_PROGRESSION[30]);
   });
 
   it('floors fractional levels', () => {

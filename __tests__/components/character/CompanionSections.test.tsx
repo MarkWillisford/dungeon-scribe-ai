@@ -224,6 +224,7 @@ function makeCompanion(overrides: Partial<CompanionInstance> = {}): CompanionIns
     grantedBy: { type: 'class', classEntryId: 'class-druid', classChoiceId: 'nature-bond' },
     effectiveProgressionLevel: 4,
     abilityScoreOverrides: {},
+    hdAbilityIncreases: [],
     hp: { max: 0, current: 0, temp: 0, nonlethal: 0 },
     appliedTemplates: [],
     feats: [],
