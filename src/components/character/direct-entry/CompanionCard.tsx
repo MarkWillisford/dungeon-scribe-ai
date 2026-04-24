@@ -8,7 +8,7 @@ export interface CompanionCardProps {
   companion: CompanionInstance;
   entry: AnimalCompanionEntry | undefined;
   grantedByLabel: string; // e.g. 'Druid (Shadow)' — source class
-  onEdit?: () => void; // disabled until Phase 1.5 builder lands
+  onEdit?: () => void; // passed in by callers once the builder route exists
   onRemove: () => void;
 }
 
@@ -87,7 +87,7 @@ export function CompanionCard({
               },
             ]}
           >
-            {editDisabled ? 'Edit ›  (coming soon)' : 'Edit ›'}
+            {editDisabled ? 'Edit ›  (unavailable)' : 'Edit ›'}
           </Text>
         </Pressable>
       </View>

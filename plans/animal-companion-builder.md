@@ -482,7 +482,7 @@ Plus one new service:
 | 1.2   | 10-category `BodyShape` (Paizo-canonical) + `AnimalCompanionEntry` extension + `BODY_SHAPE_SLOTS` map with subtype restrictions and `canGrasp` + data pass over 192 entries | COMPLETE    |
 | 1.3   | `CompanionService` (effective level, base stats, slot computation) + tests                                                                                                  | COMPLETE    |
 | 1.4   | Classes & Templates tab: companion card + picker integration when `animal_companion` choice selected                                                                        | COMPLETE    |
-| 1.5   | AC Builder screen — Identity / Abilities / Combat tabs                                                                                                                      | NOT STARTED |
+| 1.5   | AC Builder screen — Identity / Abilities / Combat tabs                                                                                                                      | COMPLETE    |
 | 1.6   | AC Builder screen — Skills / Feats / Tricks tabs                                                                                                                            | NOT STARTED |
 | 1.7   | AC Builder screen — Equipment / Templates / Notes tabs                                                                                                                      | NOT STARTED |
 | 1.8   | `TemplateDefinition.grantsCompanion` + Druid Simple wiring                                                                                                                  | NOT STARTED |

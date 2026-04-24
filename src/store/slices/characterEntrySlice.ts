@@ -627,6 +627,59 @@ const characterEntrySlice = createSlice({
       if (state.draft.companions.length !== before) state.isDirty = true;
     },
 
+    // Set or clear a single ability score override on a companion. Pass
+    // `value: undefined` (via omitting or JSON null) to clear; any number sets.
+    setCompanionAbilityOverride(
+      state,
+      action: PayloadAction<{
+        instanceId: string;
+        ability: 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
+        value: number | null;
+      }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { ability, value } = action.payload;
+      if (value === null) {
+        delete comp.abilityScoreOverrides[ability];
+      } else {
+        comp.abilityScoreOverrides[ability] = value;
+      }
+      state.isDirty = true;
+    },
+
+    setCompanionHP(
+      state,
+      action: PayloadAction<{
+        instanceId: string;
+        field: 'max' | 'current' | 'temp' | 'nonlethal';
+        value: number;
+      }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      comp.hp[action.payload.field] = action.payload.value;
+      state.isDirty = true;
+    },
+
+    // Swap the companion form (e.g. Druid Nature Bond changes from Wolf to
+    // Leopard). Preserves overrides, feats, templates, tricks, and name.
+    // Player can manually reset overrides if the new form's base stats make
+    // them stale.
+    swapCompanionForm(state, action: PayloadAction<{ instanceId: string; sourceEntryId: string }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      comp.sourceEntryId = action.payload.sourceEntryId;
+      state.isDirty = true;
+    },
+
+    setCompanionNotes(state, action: PayloadAction<{ instanceId: string; notes: string }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      comp.notes = action.payload.notes;
+      state.isDirty = true;
+    },
+
     toggleFavoredClass(state, action: PayloadAction<string>) {
       const target = state.draft.classes.find((c) => c.id === action.payload);
       if (!target) return;
@@ -929,6 +982,10 @@ export const {
   renameCompanion,
   updateCompanionEffectiveLevel,
   removeCompanionsGrantedByClass,
+  setCompanionAbilityOverride,
+  setCompanionHP,
+  swapCompanionForm,
+  setCompanionNotes,
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,

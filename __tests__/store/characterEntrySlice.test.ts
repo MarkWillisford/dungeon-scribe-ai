@@ -39,6 +39,10 @@ import reducer, {
   renameCompanion,
   updateCompanionEffectiveLevel,
   removeCompanionsGrantedByClass,
+  setCompanionAbilityOverride,
+  setCompanionHP,
+  swapCompanionForm,
+  setCompanionNotes,
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,
@@ -1604,5 +1608,97 @@ describe('characterEntrySlice — companions', () => {
     );
     state = reducer(state, removeClass('class-druid'));
     expect(state.draft.companions).toHaveLength(1);
+  });
+
+  // ---- Phase 1.5: companion edit actions -----------------------------------
+
+  describe('companion edit actions', () => {
+    function seedCompanion() {
+      return reducer(
+        makeInitialState(),
+        addCompanion({
+          instanceId: 'comp-1',
+          sourceEntryId: 'wolf',
+          name: 'Shadow',
+          grantedBy: druidGrant(),
+          effectiveProgressionLevel: 10,
+        }),
+      );
+    }
+
+    it('setCompanionAbilityOverride: sets a STR override', () => {
+      let state = seedCompanion();
+      state = reducer(
+        state,
+        setCompanionAbilityOverride({ instanceId: 'comp-1', ability: 'STR', value: 20 }),
+      );
+      expect(state.draft.companions[0].abilityScoreOverrides.STR).toBe(20);
+    });
+
+    it('setCompanionAbilityOverride: clears an override with value null', () => {
+      let state = seedCompanion();
+      state = reducer(
+        state,
+        setCompanionAbilityOverride({ instanceId: 'comp-1', ability: 'STR', value: 20 }),
+      );
+      state = reducer(
+        state,
+        setCompanionAbilityOverride({ instanceId: 'comp-1', ability: 'STR', value: null }),
+      );
+      expect(state.draft.companions[0].abilityScoreOverrides.STR).toBeUndefined();
+    });
+
+    it('setCompanionAbilityOverride: no-op on unknown instanceId', () => {
+      const state = reducer(
+        seedCompanion(),
+        setCompanionAbilityOverride({ instanceId: 'missing', ability: 'DEX', value: 22 }),
+      );
+      expect(state.draft.companions[0].abilityScoreOverrides.DEX).toBeUndefined();
+    });
+
+    it('setCompanionHP: updates max field', () => {
+      const state = reducer(
+        seedCompanion(),
+        setCompanionHP({ instanceId: 'comp-1', field: 'max', value: 48 }),
+      );
+      expect(state.draft.companions[0].hp.max).toBe(48);
+    });
+
+    it('setCompanionHP: independently updates all four fields', () => {
+      let state = seedCompanion();
+      state = reducer(state, setCompanionHP({ instanceId: 'comp-1', field: 'max', value: 48 }));
+      state = reducer(state, setCompanionHP({ instanceId: 'comp-1', field: 'current', value: 32 }));
+      state = reducer(state, setCompanionHP({ instanceId: 'comp-1', field: 'temp', value: 5 }));
+      state = reducer(
+        state,
+        setCompanionHP({ instanceId: 'comp-1', field: 'nonlethal', value: 10 }),
+      );
+      expect(state.draft.companions[0].hp).toEqual({
+        max: 48,
+        current: 32,
+        temp: 5,
+        nonlethal: 10,
+      });
+    });
+
+    it('swapCompanionForm: changes sourceEntryId, preserves other fields', () => {
+      let state = seedCompanion();
+      state = reducer(
+        state,
+        setCompanionAbilityOverride({ instanceId: 'comp-1', ability: 'STR', value: 22 }),
+      );
+      state = reducer(state, swapCompanionForm({ instanceId: 'comp-1', sourceEntryId: 'leopard' }));
+      expect(state.draft.companions[0].sourceEntryId).toBe('leopard');
+      expect(state.draft.companions[0].name).toBe('Shadow');
+      expect(state.draft.companions[0].abilityScoreOverrides.STR).toBe(22);
+    });
+
+    it('setCompanionNotes: updates notes text', () => {
+      const state = reducer(
+        seedCompanion(),
+        setCompanionNotes({ instanceId: 'comp-1', notes: 'Prefers to flank.' }),
+      );
+      expect(state.draft.companions[0].notes).toBe('Prefers to flank.');
+    });
   });
 });
