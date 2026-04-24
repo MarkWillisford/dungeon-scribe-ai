@@ -196,6 +196,7 @@ export interface FCBEffectCasterLevel {
   requiresPickOne?: boolean; // e.g., choose a terrain at FCB selection time
   pickOnePrompt?: string;
   targetClass?: string; // when a specific class's CL is targeted (for prestige-advanced pools)
+  conditionDescription?: string; // free-text scope not captured by school/descriptor/terrain (e.g., "spells granted by patron")
 }
 
 // Crafting speedup (wizard item creation pattern).
