@@ -791,9 +791,10 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
             </View>
           )}
 
-          <CompanionSection entry={entry} />
         </View>
       )}
+
+      <CompanionSection entry={entry} />
 
       {/* Prereq status */}
       <View style={[styles.prereqRow, { borderTopColor: colors.border.DEFAULT }]}>
