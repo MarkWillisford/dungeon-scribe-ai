@@ -127,15 +127,6 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingBottom: 48,
   },
-  placeholder: {
-    padding: 32,
-    alignItems: 'center',
-  },
-  placeholderText: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 14,
-    fontStyle: 'italic',
-  },
   notFound: {
     flex: 1,
     alignItems: 'center',
