@@ -11,10 +11,14 @@ import { CompanionEntryHeader } from './CompanionEntryHeader';
 import { IdentitySection } from './IdentitySection';
 import { AbilitiesSection } from './AbilitiesSection';
 import { CombatSection } from './CombatSection';
+import { SkillsSection } from './SkillsSection';
+import { FeatsSection } from './FeatsSection';
+import { TricksSection } from './TricksSection';
 
-// Phase 1.5 ships Identity / Abilities / Combat. Phases 1.6 and 1.7 add the
-// remaining six tabs. The tab list is complete up front so players see the
-// full shape of the builder even if later tabs show placeholder content.
+// Phase 1.5 shipped Identity / Abilities / Combat. Phase 1.6 adds Skills /
+// Feats / Tricks. Phase 1.7 fills Equipment / Templates / Notes. The tab list
+// is complete up front so players see the full shape of the builder even if
+// later tabs show placeholder content.
 type CompanionTabKey =
   | 'identity'
   | 'abilities'
@@ -102,7 +106,10 @@ export function CompanionEntryScreen({ instanceId }: CompanionEntryScreenProps) 
           {activeTab === 'identity' && <IdentitySection companion={companion} entry={entry} />}
           {activeTab === 'abilities' && <AbilitiesSection companion={companion} entry={entry} />}
           {activeTab === 'combat' && <CombatSection companion={companion} entry={entry} />}
-          {activeTab !== 'identity' && activeTab !== 'abilities' && activeTab !== 'combat' && (
+          {activeTab === 'skills' && <SkillsSection companion={companion} entry={entry} />}
+          {activeTab === 'feats' && <FeatsSection companion={companion} entry={entry} />}
+          {activeTab === 'tricks' && <TricksSection companion={companion} entry={entry} />}
+          {(activeTab === 'equipment' || activeTab === 'templates' || activeTab === 'notes') && (
             <View style={styles.placeholder}>
               <Text style={[styles.placeholderText, { color: colors.text.tertiary }]}>
                 {TABS.find((t) => t.key === activeTab)?.label} — coming in a later phase.

@@ -1,7 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { Alignment } from '@/types/base';
 import { ClassChoice } from '@/types/classes';
-import type { CompanionInstance, CompanionGrant } from '@/types/companions';
+import type {
+  CompanionInstance,
+  CompanionGrant,
+  CompanionFeat,
+  TrickName,
+} from '@/types/companions';
 import { computeFeatSlots } from '@/utils/characterComputations';
 import {
   type AbilityKey,
@@ -680,6 +685,56 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
+    // Phase 1.6: companion feats. Slots are derived from effective level via
+    // CompanionService.computeFeatSlots; the slice just owns the assigned list.
+    // Duplicate featIds are allowed (e.g. Toughness) so the UI can stack them.
+    addCompanionFeat(state, action: PayloadAction<{ instanceId: string; feat: CompanionFeat }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      comp.feats.push(action.payload.feat);
+      state.isDirty = true;
+    },
+
+    // Removes the feat at a specific index so duplicates (e.g. two Toughness
+    // picks) can be removed independently.
+    removeCompanionFeatAt(state, action: PayloadAction<{ instanceId: string; index: number }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { index } = action.payload;
+      if (index < 0 || index >= comp.feats.length) return;
+      comp.feats.splice(index, 1);
+      state.isDirty = true;
+    },
+
+    // Toggle a trick on/off. Tricks are a set; no duplicates. The UI enforces
+    // the known-tricks cap, not the slice.
+    toggleCompanionTrick(state, action: PayloadAction<{ instanceId: string; trick: TrickName }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { trick } = action.payload;
+      const idx = comp.tricks.indexOf(trick);
+      if (idx === -1) comp.tricks.push(trick);
+      else comp.tricks.splice(idx, 1);
+      state.isDirty = true;
+    },
+
+    // Set skill ranks for a given skill. Passing 0 clears the key so the
+    // companion's skillRanks map doesn't accumulate noise.
+    setCompanionSkillRank(
+      state,
+      action: PayloadAction<{ instanceId: string; skill: string; ranks: number }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { skill, ranks } = action.payload;
+      if (ranks <= 0) {
+        delete comp.skillRanks[skill];
+      } else {
+        comp.skillRanks[skill] = ranks;
+      }
+      state.isDirty = true;
+    },
+
     toggleFavoredClass(state, action: PayloadAction<string>) {
       const target = state.draft.classes.find((c) => c.id === action.payload);
       if (!target) return;
@@ -986,6 +1041,10 @@ export const {
   setCompanionHP,
   swapCompanionForm,
   setCompanionNotes,
+  addCompanionFeat,
+  removeCompanionFeatAt,
+  toggleCompanionTrick,
+  setCompanionSkillRank,
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,

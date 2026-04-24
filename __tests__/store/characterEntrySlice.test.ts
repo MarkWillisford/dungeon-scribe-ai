@@ -43,6 +43,10 @@ import reducer, {
   setCompanionHP,
   swapCompanionForm,
   setCompanionNotes,
+  addCompanionFeat,
+  removeCompanionFeatAt,
+  toggleCompanionTrick,
+  setCompanionSkillRank,
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,
@@ -1699,6 +1703,152 @@ describe('characterEntrySlice — companions', () => {
         setCompanionNotes({ instanceId: 'comp-1', notes: 'Prefers to flank.' }),
       );
       expect(state.draft.companions[0].notes).toBe('Prefers to flank.');
+    });
+
+    // ---- Phase 1.6: feats / tricks / skill ranks -------------------------
+
+    it('addCompanionFeat: appends a feat to the list', () => {
+      const state = reducer(
+        seedCompanion(),
+        addCompanionFeat({
+          instanceId: 'comp-1',
+          feat: {
+            featId: 'toughness',
+            name: 'Toughness',
+            hdWhenTaken: 3,
+            active: true,
+            choices: {},
+          },
+        }),
+      );
+      expect(state.draft.companions[0].feats).toHaveLength(1);
+      expect(state.draft.companions[0].feats[0].featId).toBe('toughness');
+    });
+
+    it('addCompanionFeat: allows duplicates (same featId twice)', () => {
+      let state = seedCompanion();
+      state = reducer(
+        state,
+        addCompanionFeat({
+          instanceId: 'comp-1',
+          feat: {
+            featId: 'toughness',
+            name: 'Toughness',
+            hdWhenTaken: 3,
+            active: true,
+            choices: {},
+          },
+        }),
+      );
+      state = reducer(
+        state,
+        addCompanionFeat({
+          instanceId: 'comp-1',
+          feat: {
+            featId: 'toughness',
+            name: 'Toughness',
+            hdWhenTaken: 6,
+            active: true,
+            choices: {},
+          },
+        }),
+      );
+      expect(state.draft.companions[0].feats).toHaveLength(2);
+    });
+
+    it('removeCompanionFeatAt: removes the feat at the given index', () => {
+      let state = seedCompanion();
+      state = reducer(
+        state,
+        addCompanionFeat({
+          instanceId: 'comp-1',
+          feat: {
+            featId: 'toughness',
+            name: 'Toughness',
+            hdWhenTaken: 3,
+            active: true,
+            choices: {},
+          },
+        }),
+      );
+      state = reducer(
+        state,
+        addCompanionFeat({
+          instanceId: 'comp-1',
+          feat: {
+            featId: 'weapon-focus',
+            name: 'Weapon Focus',
+            hdWhenTaken: 6,
+            active: true,
+            choices: {},
+          },
+        }),
+      );
+      state = reducer(state, removeCompanionFeatAt({ instanceId: 'comp-1', index: 0 }));
+      expect(state.draft.companions[0].feats.map((f) => f.featId)).toEqual(['weapon-focus']);
+    });
+
+    it('removeCompanionFeatAt: no-op on out-of-range index', () => {
+      const state = reducer(
+        seedCompanion(),
+        removeCompanionFeatAt({ instanceId: 'comp-1', index: 5 }),
+      );
+      expect(state.draft.companions[0].feats).toHaveLength(0);
+    });
+
+    it('toggleCompanionTrick: adds a trick the first time, removes it the second', () => {
+      let state = seedCompanion();
+      state = reducer(state, toggleCompanionTrick({ instanceId: 'comp-1', trick: 'attack' }));
+      expect(state.draft.companions[0].tricks).toEqual(['attack']);
+      state = reducer(state, toggleCompanionTrick({ instanceId: 'comp-1', trick: 'attack' }));
+      expect(state.draft.companions[0].tricks).toEqual([]);
+    });
+
+    it('toggleCompanionTrick: preserves other tricks on toggle', () => {
+      let state = seedCompanion();
+      state = reducer(state, toggleCompanionTrick({ instanceId: 'comp-1', trick: 'attack' }));
+      state = reducer(state, toggleCompanionTrick({ instanceId: 'comp-1', trick: 'stay' }));
+      state = reducer(state, toggleCompanionTrick({ instanceId: 'comp-1', trick: 'attack' }));
+      expect(state.draft.companions[0].tricks).toEqual(['stay']);
+    });
+
+    it('setCompanionSkillRank: sets ranks for a skill', () => {
+      const state = reducer(
+        seedCompanion(),
+        setCompanionSkillRank({ instanceId: 'comp-1', skill: 'Stealth', ranks: 3 }),
+      );
+      expect(state.draft.companions[0].skillRanks.Stealth).toBe(3);
+    });
+
+    it('setCompanionSkillRank: clears the key when ranks drops to 0', () => {
+      let state = reducer(
+        seedCompanion(),
+        setCompanionSkillRank({ instanceId: 'comp-1', skill: 'Stealth', ranks: 3 }),
+      );
+      state = reducer(
+        state,
+        setCompanionSkillRank({ instanceId: 'comp-1', skill: 'Stealth', ranks: 0 }),
+      );
+      expect(state.draft.companions[0].skillRanks.Stealth).toBeUndefined();
+    });
+
+    it('companion reducers: no-op on unknown instanceId', () => {
+      const base = seedCompanion();
+      const a = reducer(
+        base,
+        addCompanionFeat({
+          instanceId: 'missing',
+          feat: { featId: 'x', name: 'X', hdWhenTaken: 1, active: true, choices: {} },
+        }),
+      );
+      const b = reducer(a, toggleCompanionTrick({ instanceId: 'missing', trick: 'attack' }));
+      const c = reducer(
+        b,
+        setCompanionSkillRank({ instanceId: 'missing', skill: 'Stealth', ranks: 3 }),
+      );
+      expect(c.draft.companions[0].feats).toHaveLength(0);
+      expect(c.draft.companions[0].tricks).toHaveLength(0);
+      expect(c.draft.companions[0].skillRanks).toEqual({});
     });
   });
 });
