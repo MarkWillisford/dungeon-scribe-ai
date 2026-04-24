@@ -129,6 +129,7 @@ function makeCompanion(overrides: Partial<CompanionInstance> = {}): CompanionIns
       equippedSlots: new Map(),
     },
     notes: '',
+    background: '',
     ...overrides,
   };
 }

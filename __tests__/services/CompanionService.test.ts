@@ -105,6 +105,7 @@ const makeInstance = (overrides: Partial<CompanionInstance> = {}): CompanionInst
     equippedSlots: new Map(),
   },
   notes: '',
+  background: '',
   ...overrides,
 });
 

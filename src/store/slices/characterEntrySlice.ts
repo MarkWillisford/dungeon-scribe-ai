@@ -7,6 +7,7 @@ import type {
   CompanionFeat,
   TrickName,
 } from '@/types/companions';
+import type { AppliedTemplate } from '@/types/templates';
 import { computeFeatSlots } from '@/utils/characterComputations';
 import {
   type AbilityKey,
@@ -590,6 +591,7 @@ const characterEntrySlice = createSlice({
           equippedSlots: new Map(),
         },
         notes: '',
+        background: '',
       };
       state.draft.companions.push(companion);
       state.isDirty = true;
@@ -732,6 +734,60 @@ const characterEntrySlice = createSlice({
       } else {
         comp.skillRanks[skill] = ranks;
       }
+      state.isDirty = true;
+    },
+
+    // Phase 1.7: long-form narrative. Kept separate from `notes` (short
+    // handler's memo on the Identity tab) so the two surfaces don't overwrite
+    // each other and the Notes tab has room to breathe.
+    setCompanionBackground(
+      state,
+      action: PayloadAction<{ instanceId: string; background: string }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      comp.background = action.payload.background;
+      state.isDirty = true;
+    },
+
+    // Phase 1.7: applied templates. Companion-side mirror of the character's
+    // template flow, but uses the canonical `AppliedTemplate` shape (plan
+    // character-system-redesign.md § Template System Design). Removal and
+    // update target by index to stay stable when a duplicate template is
+    // applied (e.g. Half-Celestial + Half-Fiend on the same companion, or
+    // two instances of the same HD-tiered template).
+    addCompanionTemplate(
+      state,
+      action: PayloadAction<{ instanceId: string; template: AppliedTemplate }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      comp.appliedTemplates.push(action.payload.template);
+      state.isDirty = true;
+    },
+
+    removeCompanionTemplateAt(state, action: PayloadAction<{ instanceId: string; index: number }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { index } = action.payload;
+      if (index < 0 || index >= comp.appliedTemplates.length) return;
+      comp.appliedTemplates.splice(index, 1);
+      state.isDirty = true;
+    },
+
+    updateCompanionTemplateAt(
+      state,
+      action: PayloadAction<{
+        instanceId: string;
+        index: number;
+        patch: Partial<AppliedTemplate>;
+      }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { index, patch } = action.payload;
+      if (index < 0 || index >= comp.appliedTemplates.length) return;
+      comp.appliedTemplates[index] = { ...comp.appliedTemplates[index], ...patch };
       state.isDirty = true;
     },
 
@@ -1045,6 +1101,10 @@ export const {
   removeCompanionFeatAt,
   toggleCompanionTrick,
   setCompanionSkillRank,
+  setCompanionBackground,
+  addCompanionTemplate,
+  removeCompanionTemplateAt,
+  updateCompanionTemplateAt,
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,

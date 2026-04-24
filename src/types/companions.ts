@@ -94,5 +94,11 @@ export interface CompanionInstance {
   skillRanks: Record<string, number>;
   equipment: CompanionEquipment;
 
+  // Two notes fields by design. `notes` on the Identity tab holds short
+  // handler's memos (trained behaviors, quirks). `background` on the Notes
+  // tab holds long-form narrative — origin, personality, adventure history.
+  // Splitting them keeps the Identity tab compact while still giving
+  // companions the same room for story that characters have.
   notes: string;
+  background: string;
 }

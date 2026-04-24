@@ -47,6 +47,10 @@ import reducer, {
   removeCompanionFeatAt,
   toggleCompanionTrick,
   setCompanionSkillRank,
+  setCompanionBackground,
+  addCompanionTemplate,
+  removeCompanionTemplateAt,
+  updateCompanionTemplateAt,
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,
@@ -1849,6 +1853,219 @@ describe('characterEntrySlice — companions', () => {
       expect(c.draft.companions[0].feats).toHaveLength(0);
       expect(c.draft.companions[0].tricks).toHaveLength(0);
       expect(c.draft.companions[0].skillRanks).toEqual({});
+    });
+
+    // ---- Phase 1.7: background / templates ---------------------------------
+
+    it('addCompanion: seeds background as an empty string', () => {
+      const state = seedCompanion();
+      expect(state.draft.companions[0].background).toBe('');
+    });
+
+    it('setCompanionBackground: stores the full narrative string', () => {
+      const state = reducer(
+        seedCompanion(),
+        setCompanionBackground({
+          instanceId: 'comp-1',
+          background: 'Raised in the Whisperwood. Bonded to Rissi at the Verdant Trial.',
+        }),
+      );
+      expect(state.draft.companions[0].background).toBe(
+        'Raised in the Whisperwood. Bonded to Rissi at the Verdant Trial.',
+      );
+    });
+
+    it('setCompanionBackground: overwrites, does not append', () => {
+      let state = reducer(
+        seedCompanion(),
+        setCompanionBackground({ instanceId: 'comp-1', background: 'first draft' }),
+      );
+      state = reducer(
+        state,
+        setCompanionBackground({ instanceId: 'comp-1', background: 'second draft' }),
+      );
+      expect(state.draft.companions[0].background).toBe('second draft');
+    });
+
+    it('addCompanionTemplate: appends an AppliedTemplate to the list', () => {
+      const state = reducer(
+        seedCompanion(),
+        addCompanionTemplate({
+          instanceId: 'comp-1',
+          template: {
+            templateId: 'celestial',
+            name: 'Celestial',
+            appliedAs: 'cr',
+            cr: 1,
+            acquisitionType: 'inherited',
+            paidTiers: [],
+            sourceId: 'celestial',
+            sourceRev: 1,
+          },
+        }),
+      );
+      expect(state.draft.companions[0].appliedTemplates).toHaveLength(1);
+      expect(state.draft.companions[0].appliedTemplates[0].templateId).toBe('celestial');
+    });
+
+    it('addCompanionTemplate: allows two instances of the same template', () => {
+      let state = seedCompanion();
+      const make = (): Parameters<typeof addCompanionTemplate>[0] => ({
+        instanceId: 'comp-1',
+        template: {
+          templateId: 'advanced',
+          name: 'Advanced',
+          appliedAs: 'cr',
+          cr: 1,
+          acquisitionType: 'either',
+          paidTiers: [],
+          sourceId: 'advanced',
+          sourceRev: 1,
+        },
+      });
+      state = reducer(state, addCompanionTemplate(make()));
+      state = reducer(state, addCompanionTemplate(make()));
+      expect(state.draft.companions[0].appliedTemplates).toHaveLength(2);
+    });
+
+    it('removeCompanionTemplateAt: removes the template at the given index', () => {
+      let state = seedCompanion();
+      for (const id of ['half-celestial', 'advanced', 'young']) {
+        state = reducer(
+          state,
+          addCompanionTemplate({
+            instanceId: 'comp-1',
+            template: {
+              templateId: id,
+              name: id,
+              appliedAs: 'cr',
+              cr: 1,
+              acquisitionType: 'inherited',
+              paidTiers: [],
+              sourceId: id,
+              sourceRev: 1,
+            },
+          }),
+        );
+      }
+      state = reducer(state, removeCompanionTemplateAt({ instanceId: 'comp-1', index: 1 }));
+      expect(state.draft.companions[0].appliedTemplates.map((t) => t.templateId)).toEqual([
+        'half-celestial',
+        'young',
+      ]);
+    });
+
+    it('removeCompanionTemplateAt: no-op on out-of-range index', () => {
+      const state = reducer(
+        seedCompanion(),
+        removeCompanionTemplateAt({ instanceId: 'comp-1', index: 4 }),
+      );
+      expect(state.draft.companions[0].appliedTemplates).toHaveLength(0);
+    });
+
+    it('updateCompanionTemplateAt: patches a single field', () => {
+      let state = reducer(
+        seedCompanion(),
+        addCompanionTemplate({
+          instanceId: 'comp-1',
+          template: {
+            templateId: 'fiendish',
+            name: 'Fiendish',
+            appliedAs: 'cr',
+            cr: 1,
+            acquisitionType: 'inherited',
+            paidTiers: [],
+            sourceId: 'fiendish',
+            sourceRev: 1,
+          },
+        }),
+      );
+      state = reducer(
+        state,
+        updateCompanionTemplateAt({
+          instanceId: 'comp-1',
+          index: 0,
+          patch: { acquisitionType: 'acquired', acquiredAtCharacterLevel: 8 },
+        }),
+      );
+      expect(state.draft.companions[0].appliedTemplates[0].acquisitionType).toBe('acquired');
+      expect(state.draft.companions[0].appliedTemplates[0].acquiredAtCharacterLevel).toBe(8);
+      // Other fields untouched.
+      expect(state.draft.companions[0].appliedTemplates[0].templateId).toBe('fiendish');
+    });
+
+    it('updateCompanionTemplateAt: can change applied-as from LA to CR', () => {
+      let state = reducer(
+        seedCompanion(),
+        addCompanionTemplate({
+          instanceId: 'comp-1',
+          template: {
+            templateId: 'aasimar',
+            name: 'Aasimar',
+            appliedAs: 'la',
+            la: 1,
+            acquisitionType: 'inherited',
+            paidTiers: [],
+            sourceId: 'aasimar',
+            sourceRev: 1,
+          },
+        }),
+      );
+      state = reducer(
+        state,
+        updateCompanionTemplateAt({
+          instanceId: 'comp-1',
+          index: 0,
+          patch: { appliedAs: 'cr', cr: 1, la: undefined },
+        }),
+      );
+      expect(state.draft.companions[0].appliedTemplates[0].appliedAs).toBe('cr');
+      expect(state.draft.companions[0].appliedTemplates[0].cr).toBe(1);
+      expect(state.draft.companions[0].appliedTemplates[0].la).toBeUndefined();
+    });
+
+    it('updateCompanionTemplateAt: no-op on out-of-range index', () => {
+      const state = reducer(
+        seedCompanion(),
+        updateCompanionTemplateAt({
+          instanceId: 'comp-1',
+          index: 7,
+          patch: { acquisitionType: 'acquired' },
+        }),
+      );
+      expect(state.draft.companions[0].appliedTemplates).toHaveLength(0);
+    });
+
+    it('1.7 reducers: no-op on unknown instanceId', () => {
+      const base = seedCompanion();
+      const a = reducer(base, setCompanionBackground({ instanceId: 'missing', background: 'x' }));
+      const b = reducer(
+        a,
+        addCompanionTemplate({
+          instanceId: 'missing',
+          template: {
+            templateId: 'x',
+            name: 'X',
+            appliedAs: 'cr',
+            cr: 1,
+            acquisitionType: 'either',
+            paidTiers: [],
+            sourceId: 'x',
+            sourceRev: 1,
+          },
+        }),
+      );
+      const c = reducer(b, removeCompanionTemplateAt({ instanceId: 'missing', index: 0 }));
+      const d = reducer(
+        c,
+        updateCompanionTemplateAt({
+          instanceId: 'missing',
+          index: 0,
+          patch: { acquisitionType: 'acquired' },
+        }),
+      );
+      expect(d.draft.companions[0].background).toBe('');
+      expect(d.draft.companions[0].appliedTemplates).toHaveLength(0);
     });
   });
 });
