@@ -1,5 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { enableMapSet } from 'immer';
 import { Alignment } from '@/types/base';
+
+// CompanionEquipment.equippedSlots is a Map<ItemSlot, string> — opt Immer
+// into Map/Set mutation support once, at module load. Idempotent; safe to
+// call from the slice module so both the production store and the test
+// suites pick it up without having to thread it through bootstrap code.
+enableMapSet();
 import { ClassChoice } from '@/types/classes';
 import type {
   CompanionInstance,
@@ -8,6 +15,7 @@ import type {
   TrickName,
 } from '@/types/companions';
 import type { AppliedTemplate } from '@/types/templates';
+import type { CharacterMagicItem, ItemSlot } from '@/types/magicItems';
 import { computeFeatSlots } from '@/utils/characterComputations';
 import {
   type AbilityKey,
@@ -791,6 +799,63 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
+    // Phase 1.7: companion equipment. Scoped to wondrous/magic-item-style
+    // slots — weapons, rods, staves, and wands require the canGrasp pathway
+    // and are deferred to a follow-up. Equipping an item populates two
+    // places at once: the magicItems array (authoritative list) and the
+    // equippedSlots map (slot → instanceId lookup). Swapping in a new item
+    // automatically unequips whatever was in the slot previously, which
+    // keeps the map tidy and matches how the body-shape table works (one
+    // item per slot; ring is a single slot in the companion table even
+    // though characters track left/right separately).
+    equipCompanionMagicItem(
+      state,
+      action: PayloadAction<{
+        instanceId: string;
+        slot: ItemSlot;
+        item: CharacterMagicItem;
+      }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { slot, item } = action.payload;
+
+      // Displace any existing item in this slot.
+      const existingInstanceId = comp.equipment.equippedSlots.get(slot);
+      if (existingInstanceId) {
+        comp.equipment.magicItems = comp.equipment.magicItems.filter(
+          (m) => m.instanceId !== existingInstanceId,
+        );
+      }
+
+      // Ensure the new item carries the slot and equipped flag so downstream
+      // readers don't have to cross-reference the map.
+      const placed: CharacterMagicItem = {
+        ...item,
+        equipped: true,
+        equippedSlot: slot === 'ring' ? 'ring_left' : (slot as Exclude<ItemSlot, 'ring'>),
+      };
+      comp.equipment.magicItems.push(placed);
+      comp.equipment.equippedSlots.set(slot, placed.instanceId);
+      state.isDirty = true;
+    },
+
+    unequipCompanionMagicItem(
+      state,
+      action: PayloadAction<{ instanceId: string; slot: ItemSlot }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { slot } = action.payload;
+      const instanceIdInSlot = comp.equipment.equippedSlots.get(slot);
+      if (!instanceIdInSlot) return;
+      comp.equipment.magicItems = comp.equipment.magicItems.filter(
+        (m) => m.instanceId !== instanceIdInSlot,
+      );
+      comp.equipment.equippedSlots.delete(slot);
+      state.isDirty = true;
+    },
+
     toggleFavoredClass(state, action: PayloadAction<string>) {
       const target = state.draft.classes.find((c) => c.id === action.payload);
       if (!target) return;
@@ -1105,6 +1170,8 @@ export const {
   addCompanionTemplate,
   removeCompanionTemplateAt,
   updateCompanionTemplateAt,
+  equipCompanionMagicItem,
+  unequipCompanionMagicItem,
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,

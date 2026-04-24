@@ -51,6 +51,8 @@ import reducer, {
   addCompanionTemplate,
   removeCompanionTemplateAt,
   updateCompanionTemplateAt,
+  equipCompanionMagicItem,
+  unequipCompanionMagicItem,
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,
@@ -2066,6 +2068,132 @@ describe('characterEntrySlice — companions', () => {
       );
       expect(d.draft.companions[0].background).toBe('');
       expect(d.draft.companions[0].appliedTemplates).toHaveLength(0);
+    });
+
+    // ---- Phase 1.7: equipment ---------------------------------------------
+
+    const makeItem = (
+      overrides: Partial<Parameters<typeof equipCompanionMagicItem>[0]['item']> = {},
+    ): Parameters<typeof equipCompanionMagicItem>[0]['item'] => ({
+      instanceId: 'item-1',
+      definitionId: 'amulet-of-natural-armor',
+      name: 'Amulet of Natural Armor +1',
+      equipped: false,
+      identified: true,
+      ...overrides,
+    });
+
+    it('equipCompanionMagicItem: adds item to magicItems and maps slot→instance', () => {
+      const state = reducer(
+        seedCompanion(),
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'neck',
+          item: makeItem(),
+        }),
+      );
+      const comp = state.draft.companions[0];
+      expect(comp.equipment.magicItems).toHaveLength(1);
+      expect(comp.equipment.magicItems[0].instanceId).toBe('item-1');
+      expect(comp.equipment.magicItems[0].equipped).toBe(true);
+      expect(comp.equipment.magicItems[0].equippedSlot).toBe('neck');
+      expect(comp.equipment.equippedSlots.get('neck')).toBe('item-1');
+    });
+
+    it('equipCompanionMagicItem: ring slot tags instance as ring_left', () => {
+      const state = reducer(
+        seedCompanion(),
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'ring',
+          item: makeItem({ instanceId: 'ring-1', name: 'Ring of Protection +1' }),
+        }),
+      );
+      const comp = state.draft.companions[0];
+      expect(comp.equipment.magicItems[0].equippedSlot).toBe('ring_left');
+      expect(comp.equipment.equippedSlots.get('ring')).toBe('ring-1');
+    });
+
+    it('equipCompanionMagicItem: replacing in a slot displaces the prior item', () => {
+      let state = reducer(
+        seedCompanion(),
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'neck',
+          item: makeItem({ instanceId: 'item-1', name: 'Amulet A' }),
+        }),
+      );
+      state = reducer(
+        state,
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'neck',
+          item: makeItem({ instanceId: 'item-2', name: 'Amulet B' }),
+        }),
+      );
+      const comp = state.draft.companions[0];
+      expect(comp.equipment.magicItems).toHaveLength(1);
+      expect(comp.equipment.magicItems[0].instanceId).toBe('item-2');
+      expect(comp.equipment.equippedSlots.get('neck')).toBe('item-2');
+    });
+
+    it('equipCompanionMagicItem: different slots coexist', () => {
+      let state = reducer(
+        seedCompanion(),
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'neck',
+          item: makeItem({ instanceId: 'item-1' }),
+        }),
+      );
+      state = reducer(
+        state,
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'armor',
+          item: makeItem({ instanceId: 'item-2', name: 'Barding +1' }),
+        }),
+      );
+      const comp = state.draft.companions[0];
+      expect(comp.equipment.magicItems).toHaveLength(2);
+      expect(comp.equipment.equippedSlots.size).toBe(2);
+    });
+
+    it('unequipCompanionMagicItem: removes the item and clears the slot entry', () => {
+      let state = reducer(
+        seedCompanion(),
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'neck',
+          item: makeItem(),
+        }),
+      );
+      state = reducer(state, unequipCompanionMagicItem({ instanceId: 'comp-1', slot: 'neck' }));
+      const comp = state.draft.companions[0];
+      expect(comp.equipment.magicItems).toHaveLength(0);
+      expect(comp.equipment.equippedSlots.get('neck')).toBeUndefined();
+    });
+
+    it('unequipCompanionMagicItem: no-op when slot is empty', () => {
+      const state = reducer(
+        seedCompanion(),
+        unequipCompanionMagicItem({ instanceId: 'comp-1', slot: 'neck' }),
+      );
+      expect(state.draft.companions[0].equipment.magicItems).toHaveLength(0);
+    });
+
+    it('equipment reducers: no-op on unknown instanceId', () => {
+      const base = seedCompanion();
+      const a = reducer(
+        base,
+        equipCompanionMagicItem({
+          instanceId: 'missing',
+          slot: 'neck',
+          item: makeItem(),
+        }),
+      );
+      const b = reducer(a, unequipCompanionMagicItem({ instanceId: 'missing', slot: 'neck' }));
+      expect(b.draft.companions[0].equipment.magicItems).toHaveLength(0);
     });
   });
 });

@@ -9,7 +9,9 @@ import { TricksSection } from '@/components/character/companion-entry/TricksSect
 import { NotesSection } from '@/components/character/companion-entry/NotesSection';
 import { TemplatesSection } from '@/components/character/companion-entry/TemplatesSection';
 import { CompanionTemplateCard } from '@/components/character/companion-entry/CompanionTemplateCard';
+import { EquipmentSection } from '@/components/character/companion-entry/EquipmentSection';
 import type { AppliedTemplate } from '@/types/templates';
+import type { MagicItemDefinition } from '@/types/magicItems';
 import type { CompanionInstance } from '@/types/companions';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 
@@ -777,5 +779,143 @@ describe('CompanionTemplateCard', () => {
     const text = r.getAllText().join(' ');
     expect(text).toContain('Tiers paid');
     expect(text).toMatch(/0,\s*1/);
+  });
+});
+
+// ---- EquipmentSection ----
+//
+// GameDataService is mocked out since the real connector loads Firebase.
+// The async getMagicItemsBySlot is a no-op in this suite — useEffect is
+// suppressed by the custom test renderer — so the item-selection dispatch
+// path is covered by the slice tests (equipCompanionMagicItem). These tests
+// verify the slot grid renders correctly and that unequip dispatches.
+jest.mock('@/services/GameDataService', () => ({
+  GameDataService: {
+    getMagicItemsBySlot: jest.fn().mockResolvedValue([] as never[]),
+  },
+}));
+
+describe('EquipmentSection', () => {
+  it('renders empty state when entry is missing', () => {
+    const comp = makeCompanion();
+    const r = render(<EquipmentSection companion={comp} entry={undefined} />);
+    const text = r.getAllText().join(' ');
+    expect(text).toContain("can't render equipment slots");
+  });
+
+  it('renders the automatic-slot grid for a quadruped-claws companion (wolf)', () => {
+    // wolf = quadrupedClaws; only `armor` and `neck` are automatic per the
+    // Ultimate Wilderness table — the other seven slots require Extra Item Slot.
+    const comp = makeCompanion({ feats: [] });
+    const r = render(<EquipmentSection companion={comp} entry={wolf} />);
+    const text = r.getAllText().join(' ');
+    expect(text).toMatch(/2\s+unlocked/);
+    expect(text).toContain('Armor / Barding');
+    expect(text).toContain('Neck');
+  });
+
+  it('surfaces additional slots when Extra Item Slot feat is taken', () => {
+    // Extra Item Slot with choices.slot === 'belt' unlocks the belt slot on
+    // top of the automatic armor + neck.
+    const comp = makeCompanion({
+      feats: [
+        {
+          featId: 'extra-item-slot',
+          name: 'Extra Item Slot',
+          hdWhenTaken: 4,
+          active: true,
+          choices: { slot: 'belt' },
+        },
+      ],
+    });
+    const r = render(<EquipmentSection companion={comp} entry={wolf} />);
+    const text = r.getAllText().join(' ');
+    expect(text).toMatch(/3\s+unlocked/);
+    expect(text).toContain('Belt');
+  });
+
+  it('shows the saddle subtype restriction for quadruped-hooves belt slot', () => {
+    // Horse-shaped fixture to trigger the saddle subtype.
+    const horse: AnimalCompanionEntry = {
+      ...wolf,
+      id: 'horse',
+      name: 'Horse',
+      bodyShape: 'quadrupedHooves',
+    };
+    const comp = makeCompanion({
+      sourceEntryId: 'horse',
+      feats: [
+        {
+          featId: 'extra-item-slot',
+          name: 'Extra Item Slot',
+          hdWhenTaken: 4,
+          active: true,
+          choices: { slot: 'belt' },
+        },
+      ],
+    });
+    const r = render(<EquipmentSection companion={comp} entry={horse} />);
+    const text = r.getAllText().join(' ');
+    expect(text).toContain('saddles only');
+  });
+
+  it('renders an equipped item and dispatches unequipCompanionMagicItem on ✕', () => {
+    const comp = makeCompanion({
+      equipment: {
+        armor: [],
+        weapons: [],
+        gear: [],
+        magicItems: [
+          {
+            instanceId: 'item-1',
+            definitionId: 'amulet-of-natural-armor',
+            name: 'Amulet of Natural Armor +1',
+            equipped: true,
+            equippedSlot: 'neck',
+            identified: true,
+          },
+        ],
+        equippedSlots: new Map([['neck', 'item-1']]),
+      },
+    });
+    const r = render(<EquipmentSection companion={comp} entry={wolf} />);
+    const text = r.getAllText().join(' ');
+    expect(text).toContain('Amulet of Natural Armor +1');
+    const unequipBtn = r
+      .getAllByRole('button')
+      .find((n) => n.props.accessibilityLabel === 'Unequip Amulet of Natural Armor +1');
+    expect(unequipBtn).toBeDefined();
+    fireEvent.press(unequipBtn!);
+    expect(mockDispatch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'characterEntry/unequipCompanionMagicItem',
+        payload: { instanceId: 'comp-1', slot: 'neck' },
+      }),
+    );
+  });
+
+  it('empty slot button carries accessibilityLabel naming the slot', () => {
+    const comp = makeCompanion();
+    const r = render(<EquipmentSection companion={comp} entry={wolf} />);
+    const armorBtn = r
+      .getAllByRole('button')
+      .find((n) => n.props.accessibilityLabel === 'Equip Armor / Barding');
+    expect(armorBtn).toBeDefined();
+  });
+
+  it('renders an informative empty panel when a body shape has no auto slots', () => {
+    // `unusual` = plants + vermin → zero automatic slots per the table.
+    const insect: AnimalCompanionEntry = { ...wolf, id: 'insect', bodyShape: 'unusual' };
+    const comp = makeCompanion({ sourceEntryId: 'insect' });
+    const r = render(<EquipmentSection companion={comp} entry={insect} />);
+    const text = r.getAllText().join(' ');
+    expect(text).toMatch(/no automatic magic-item slots/i);
+  });
+
+  // Silences MagicItemDefinition import-only warning if a future refactor
+  // drops the type from the module. Guards against accidental unused exports.
+  it('MagicItemDefinition type re-import sanity', () => {
+    const items: MagicItemDefinition[] = [];
+    expect(items).toEqual([]);
   });
 });

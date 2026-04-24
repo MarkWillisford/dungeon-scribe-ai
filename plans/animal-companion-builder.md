@@ -484,7 +484,7 @@ Plus one new service:
 | 1.4   | Classes & Templates tab: companion card + picker integration when `animal_companion` choice selected                                                                        | COMPLETE    |
 | 1.5   | AC Builder screen — Identity / Abilities / Combat tabs                                                                                                                      | COMPLETE    |
 | 1.6   | AC Builder screen — Skills / Feats / Tricks tabs                                                                                                                            | COMPLETE    |
-| 1.7   | AC Builder screen — Equipment / Templates / Notes tabs                                                                                                                      | NOT STARTED |
+| 1.7   | AC Builder screen — Equipment / Templates / Notes tabs                                                                                                                      | COMPLETE    |
 | 1.8   | `TemplateDefinition.grantsCompanion` + Druid Simple wiring                                                                                                                  | NOT STARTED |
 | 1.9   | Tests: integration test covering druid + AC + template grant + multi-companion                                                                                              | NOT STARTED |
 
