@@ -82,7 +82,7 @@ export function CombatSection({ companion, entry }: CombatSectionProps) {
   const ref = baseStats.ref + dexMod;
   const will = baseStats.will + wisMod;
 
-  const attackMod = baseStats.bab + strMod + sizeAC;
+  const attackMod = baseStats.bab + strMod + sizeCMB;
   const cmb = baseStats.bab + strMod + sizeCMB;
   const cmd = 10 + baseStats.bab + strMod + dexMod + sizeCMB;
 
@@ -176,7 +176,7 @@ export function CombatSection({ companion, entry }: CombatSectionProps) {
           label="Attack Mod"
           value={signed(attackMod)}
           colors={colors}
-          caption={`bab ${signed(baseStats.bab)} + Str ${signed(strMod)} + size ${signed(sizeAC)}`}
+          caption={`bab ${signed(baseStats.bab)} + Str ${signed(strMod)} + size ${signed(sizeCMB)}`}
         />
         <Row label="Natural Attacks" value={baseStats.attacks} colors={colors} monospace />
       </Panel>
