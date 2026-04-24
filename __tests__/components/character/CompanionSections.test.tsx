@@ -7,6 +7,9 @@ import { SkillsSection } from '@/components/character/companion-entry/SkillsSect
 import { FeatsSection } from '@/components/character/companion-entry/FeatsSection';
 import { TricksSection } from '@/components/character/companion-entry/TricksSection';
 import { NotesSection } from '@/components/character/companion-entry/NotesSection';
+import { TemplatesSection } from '@/components/character/companion-entry/TemplatesSection';
+import { CompanionTemplateCard } from '@/components/character/companion-entry/CompanionTemplateCard';
+import type { AppliedTemplate } from '@/types/templates';
 import type { CompanionInstance } from '@/types/companions';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 
@@ -15,6 +18,108 @@ import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 // is testable without touching the picker internals. The mock ignores the
 // `visible` prop so the test renderer (which doesn't re-render on setState)
 // can find the select trigger without having to press "Add Feat" first.
+// Mock SearchPickerSheet so TemplatesSection's add-template flow is testable
+// without driving a full-screen modal. The mock always renders a pressable
+// that fires onSelect with a canned template id when pressed; the custom
+// test renderer can't flip `visible` via setState so we ignore it.
+jest.mock('@/components/ui/SearchPickerSheet', () => {
+  const React = require('react');
+  const { Pressable, Text } = require('react-native');
+  return {
+    SearchPickerSheet: ({
+      onSelect,
+    }: {
+      visible: boolean;
+      title: string;
+      items: { key: string; label: string }[];
+      onSelect: (item: { key: string; label: string }) => void;
+      onClose: () => void;
+      placeholder?: string;
+    }) =>
+      React.createElement(
+        Pressable,
+        {
+          testID: 'mock-template-picker-select',
+          accessibilityRole: 'button',
+          accessibilityLabel: 'mock-template-select',
+          // Fixture id chosen to match a real ALL_TEMPLATES entry so the
+          // lookup in handlePick resolves (half-celestial is CR+1 official).
+          onPress: () =>
+            onSelect({ key: 'half-celestial', label: 'Half-Celestial' } as {
+              key: string;
+              label: string;
+            }),
+        },
+        React.createElement(Text, null, 'mock-template-select'),
+      ),
+  };
+});
+
+// InlinePicker opens its own modal; replace with a Pressable that calls
+// onValueChange('acquired') when pressed so card update dispatches are
+// testable without driving the modal.
+jest.mock('@/components/ui/InlinePicker', () => {
+  const React = require('react');
+  const { Pressable, Text } = require('react-native');
+  return {
+    InlinePicker: ({
+      value,
+      options,
+      onValueChange,
+    }: {
+      value: string;
+      options: { label: string; value: string }[];
+      onValueChange: (v: string) => void;
+    }) => {
+      // Pick the option that is NOT currently selected so pressing flips state.
+      const next = options.find((o) => o.value !== value) ?? options[0];
+      return React.createElement(
+        Pressable,
+        {
+          accessibilityRole: 'button',
+          accessibilityLabel: `mock-picker-${value}`,
+          onPress: () => onValueChange(next.value),
+        },
+        React.createElement(Text, null, value),
+      );
+    },
+  };
+});
+
+// Replace the 492-template dataset with a pair of fixtures so tests don't
+// depend on scraper output or pay the cost of loading the full batch tree.
+jest.mock('@/data/templates', () => ({
+  ALL_TEMPLATES: [
+    {
+      id: 'half-celestial',
+      name: 'Half-Celestial',
+      description: 'A celestial inheritance.',
+      crAdjustment: 2,
+      acquisitionType: 'inherited',
+      isSimpleTemplate: false,
+      features: [],
+      sourceInfo: { book: 'Bestiary', page: 170 },
+      visibility: 'global',
+      rev: 1,
+      verificationStatus: 'verified',
+    },
+    {
+      id: 'half-fiend',
+      name: 'Half-Fiend',
+      description: 'A fiendish inheritance.',
+      crAdjustment: 2,
+      laAdjustment: 4,
+      acquisitionType: 'inherited',
+      isSimpleTemplate: false,
+      features: [],
+      sourceInfo: { book: 'Bestiary', page: 171 },
+      visibility: 'global',
+      rev: 1,
+      verificationStatus: 'verified',
+    },
+  ],
+}));
+
 jest.mock('@/components/character/direct-entry/FeatPickerSheet', () => {
   const React = require('react');
   const { Pressable, Text } = require('react-native');
@@ -470,5 +575,207 @@ describe('NotesSection', () => {
     const r = render(<NotesSection companion={comp} entry={wolf} />);
     const text = r.getAllText().join(' ');
     expect(text).toMatch(/Identity tab.*shorter notes/i);
+  });
+});
+
+// ---- Helpers shared by template tests ----
+
+function makeAppliedTemplate(overrides: Partial<AppliedTemplate> = {}): AppliedTemplate {
+  return {
+    templateId: 'half-celestial',
+    name: 'Half-Celestial',
+    appliedAs: 'cr',
+    cr: 2,
+    acquisitionType: 'inherited',
+    paidTiers: [],
+    sourceId: 'half-celestial',
+    sourceRev: 1,
+    ...overrides,
+  };
+}
+
+// ---- TemplatesSection ----
+
+describe('TemplatesSection', () => {
+  it('renders an empty-state panel when no templates are applied', () => {
+    const comp = makeCompanion({ appliedTemplates: [] });
+    const r = render(<TemplatesSection companion={comp} entry={wolf} />);
+    const text = r.getAllText().join(' ');
+    expect(text).toContain('No templates applied yet.');
+  });
+
+  it('renders a card per applied template', () => {
+    const comp = makeCompanion({
+      appliedTemplates: [
+        makeAppliedTemplate({ templateId: 'half-celestial', name: 'Half-Celestial' }),
+        makeAppliedTemplate({ templateId: 'half-fiend', name: 'Half-Fiend', cr: 2 }),
+      ],
+    });
+    const r = render(<TemplatesSection companion={comp} entry={wolf} />);
+    const text = r.getAllText().join(' ');
+    expect(text).toContain('Half-Celestial');
+    expect(text).toContain('Half-Fiend');
+  });
+
+  it('selecting a template from the picker dispatches addCompanionTemplate', () => {
+    const comp = makeCompanion();
+    const r = render(<TemplatesSection companion={comp} entry={wolf} />);
+    const pickerTrigger = r.getByTestId('mock-template-picker-select');
+    fireEvent.press(pickerTrigger);
+    expect(mockDispatch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'characterEntry/addCompanionTemplate',
+        payload: expect.objectContaining({
+          instanceId: 'comp-1',
+          template: expect.objectContaining({
+            templateId: 'half-celestial',
+            name: 'Half-Celestial',
+            appliedAs: 'cr',
+            cr: 2,
+            acquisitionType: 'inherited',
+            paidTiers: [],
+          }),
+        }),
+      }),
+    );
+  });
+});
+
+// ---- CompanionTemplateCard ----
+
+describe('CompanionTemplateCard', () => {
+  it('renders the template name and ECL cost label for a CR template', () => {
+    const r = render(
+      <CompanionTemplateCard
+        instanceId="comp-1"
+        index={0}
+        template={makeAppliedTemplate({ cr: 2 })}
+        canSwitchAppliedAs={false}
+      />,
+    );
+    const text = r.getAllText().join(' ');
+    expect(text).toContain('Half-Celestial');
+    expect(text).toContain('CR +2');
+  });
+
+  it('renders LA label for an LA template', () => {
+    const r = render(
+      <CompanionTemplateCard
+        instanceId="comp-1"
+        index={0}
+        template={makeAppliedTemplate({ appliedAs: 'la', la: 4, cr: undefined })}
+        canSwitchAppliedAs={false}
+      />,
+    );
+    const text = r.getAllText().join(' ');
+    expect(text).toContain('LA +4');
+  });
+
+  it('remove button dispatches removeCompanionTemplateAt with the index', () => {
+    const r = render(
+      <CompanionTemplateCard
+        instanceId="comp-1"
+        index={2}
+        template={makeAppliedTemplate()}
+        canSwitchAppliedAs={false}
+      />,
+    );
+    const removeBtn = r
+      .getAllByRole('button')
+      .find((n) => n.props.accessibilityLabel === 'Remove Half-Celestial');
+    expect(removeBtn).toBeDefined();
+    fireEvent.press(removeBtn!);
+    expect(mockDispatch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'characterEntry/removeCompanionTemplateAt',
+        payload: { instanceId: 'comp-1', index: 2 },
+      }),
+    );
+  });
+
+  it('hides the applied-as picker when canSwitchAppliedAs is false', () => {
+    const r = render(
+      <CompanionTemplateCard
+        instanceId="comp-1"
+        index={0}
+        template={makeAppliedTemplate()}
+        canSwitchAppliedAs={false}
+      />,
+    );
+    const text = r.getAllText().join(' ');
+    expect(text).not.toContain('Applied as');
+  });
+
+  it('shows the applied-as picker when canSwitchAppliedAs is true, and pressing it flips appliedAs', () => {
+    const r = render(
+      <CompanionTemplateCard
+        instanceId="comp-1"
+        index={1}
+        template={makeAppliedTemplate()}
+        canSwitchAppliedAs
+      />,
+    );
+    const text = r.getAllText().join(' ');
+    expect(text).toContain('Applied as');
+    // Mocked InlinePicker carries accessibilityLabel=`mock-picker-${value}`.
+    // Current value is 'cr'; pressing it flips to 'la'.
+    const switchBtn = r
+      .getAllByRole('button')
+      .find((n) => n.props.accessibilityLabel === 'mock-picker-cr');
+    expect(switchBtn).toBeDefined();
+    fireEvent.press(switchBtn!);
+    expect(mockDispatch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'characterEntry/updateCompanionTemplateAt',
+        payload: {
+          instanceId: 'comp-1',
+          index: 1,
+          patch: { appliedAs: 'la', cr: undefined },
+        },
+      }),
+    );
+  });
+
+  it('acquisition picker dispatches updateCompanionTemplateAt with new acquisitionType', () => {
+    const r = render(
+      <CompanionTemplateCard
+        instanceId="comp-1"
+        index={0}
+        template={makeAppliedTemplate({ acquisitionType: 'inherited' })}
+        canSwitchAppliedAs={false}
+      />,
+    );
+    // Two mock pickers on the card when canSwitchAppliedAs is false: just the
+    // acquired one. Current value is 'inherited'; mock flips to first other
+    // option which per ACQUISITION_OPTIONS order is 'acquired'.
+    const acquiredBtn = r
+      .getAllByRole('button')
+      .find((n) => n.props.accessibilityLabel === 'mock-picker-inherited');
+    expect(acquiredBtn).toBeDefined();
+    fireEvent.press(acquiredBtn!);
+    expect(mockDispatch).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'characterEntry/updateCompanionTemplateAt',
+        payload: {
+          instanceId: 'comp-1',
+          index: 0,
+          patch: { acquisitionType: 'acquired' },
+        },
+      }),
+    );
+  });
+
+  it('renders paid-tier summary when tiers are present', () => {
+    const r = render(
+      <CompanionTemplateCard
+        instanceId="comp-1"
+        index={0}
+        template={makeAppliedTemplate({ paidTiers: [0, 1] })}
+        canSwitchAppliedAs={false}
+      />,
+    );
+    const text = r.getAllText().join(' ');
+    expect(text).toContain('Tiers paid');
+    expect(text).toMatch(/0,\s*1/);
   });
 });

@@ -15,6 +15,7 @@ import { SkillsSection } from './SkillsSection';
 import { FeatsSection } from './FeatsSection';
 import { TricksSection } from './TricksSection';
 import { NotesSection } from './NotesSection';
+import { TemplatesSection } from './TemplatesSection';
 
 // Phase 1.5 shipped Identity / Abilities / Combat. Phase 1.6 adds Skills /
 // Feats / Tricks. Phase 1.7 fills Equipment / Templates / Notes. The tab list
@@ -111,7 +112,8 @@ export function CompanionEntryScreen({ instanceId }: CompanionEntryScreenProps) 
           {activeTab === 'feats' && <FeatsSection companion={companion} entry={entry} />}
           {activeTab === 'tricks' && <TricksSection companion={companion} entry={entry} />}
           {activeTab === 'notes' && <NotesSection companion={companion} entry={entry} />}
-          {(activeTab === 'equipment' || activeTab === 'templates') && (
+          {activeTab === 'templates' && <TemplatesSection companion={companion} entry={entry} />}
+          {activeTab === 'equipment' && (
             <View style={styles.placeholder}>
               <Text style={[styles.placeholderText, { color: colors.text.tertiary }]}>
                 {TABS.find((t) => t.key === activeTab)?.label} — coming in a later phase.
