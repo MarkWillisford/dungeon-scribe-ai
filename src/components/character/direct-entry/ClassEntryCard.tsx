@@ -882,6 +882,7 @@ function CompanionSection({ entry }: CompanionSectionProps) {
         grantedBy: {
           type: 'class',
           classEntryId: entry.id,
+          className: entry.className,
           classChoiceId: 'animal_companion',
         },
         effectiveProgressionLevel: effectiveLevelFromDraftClass(entry),

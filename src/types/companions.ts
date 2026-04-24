@@ -20,7 +20,7 @@ export type { BodyShape };
 // 'cohort' is reserved for when the Leadership feat ships — not implemented now.
 
 export type CompanionGrant =
-  | { type: 'class'; classEntryId: string; classChoiceId: string }
+  | { type: 'class'; classEntryId: string; className: string; classChoiceId: string }
   | { type: 'template'; templateId: string }
   | { type: 'feat'; featId: string }
   | { type: 'cohort'; cohortId: string };

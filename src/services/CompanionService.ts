@@ -489,7 +489,7 @@ export class CompanionService {
   static computeEffectiveLevel(character: Character, grant: CompanionGrant): number {
     switch (grant.type) {
       case 'class': {
-        const classEntry = character.classes.classes.find((c) => c.name === grant.classEntryId);
+        const classEntry = character.classes.classes.find((c) => c.name === grant.className);
         if (!classEntry) return 0;
         return effectiveLevelFromClass(classEntry);
       }

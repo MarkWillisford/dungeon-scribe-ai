@@ -289,6 +289,7 @@ export function ClassChoiceRow({
         grantedBy: {
           type: 'class',
           classEntryId: classId,
+          className: draftClass?.className ?? '',
           classChoiceId: definition.id,
         },
         effectiveProgressionLevel: effectiveLevelFromDraftClass(draftClass),

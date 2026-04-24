@@ -221,7 +221,7 @@ function makeCompanion(overrides: Partial<CompanionInstance> = {}): CompanionIns
     instanceId: 'comp-1',
     sourceEntryId: 'wolf',
     name: 'Shadow',
-    grantedBy: { type: 'class', classEntryId: 'class-druid', classChoiceId: 'nature-bond' },
+    grantedBy: { type: 'class', classEntryId: 'class-druid', className: 'Druid', classChoiceId: 'nature-bond' },
     effectiveProgressionLevel: 4,
     abilityScoreOverrides: {},
     hdAbilityIncreases: [],

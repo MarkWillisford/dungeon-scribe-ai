@@ -42,9 +42,10 @@ function makeCharacter(classes: ClassEntry[]): Character {
   } as unknown as Character;
 }
 
-const classGrant = (classEntryId: string): CompanionGrant => ({
+const classGrant = (className: string): CompanionGrant => ({
   type: 'class',
-  classEntryId,
+  classEntryId: className,
+  className,
   classChoiceId: 'animal-companion',
 });
 

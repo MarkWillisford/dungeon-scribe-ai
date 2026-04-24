@@ -101,9 +101,10 @@ const wolfEntry: AnimalCompanionEntry = {
   rev: 1,
 };
 
-const classGrant = (classEntryId: string): CompanionGrant => ({
+const classGrant = (className: string): CompanionGrant => ({
   type: 'class',
-  classEntryId,
+  classEntryId: className,
+  className,
   classChoiceId: 'animal-companion',
 });
 
@@ -495,7 +496,7 @@ describe('multi-companion: Beastmaster with two class-granted companions', () =>
         instanceId: 'bm-1',
         sourceEntryId: 'wolf',
         name: 'Fang',
-        grantedBy: { type: 'class', classEntryId: 'Ranger', classChoiceId: 'beastmaster-1' },
+        grantedBy: { type: 'class', classEntryId: 'Ranger', className: 'Ranger', classChoiceId: 'beastmaster-1' },
         effectiveProgressionLevel: 7,
       }),
     );
@@ -506,7 +507,7 @@ describe('multi-companion: Beastmaster with two class-granted companions', () =>
         instanceId: 'bm-2',
         sourceEntryId: 'eagle',
         name: 'Talon',
-        grantedBy: { type: 'class', classEntryId: 'Ranger', classChoiceId: 'beastmaster-2' },
+        grantedBy: { type: 'class', classEntryId: 'Ranger', className: 'Ranger', classChoiceId: 'beastmaster-2' },
         effectiveProgressionLevel: 7,
       }),
     );
@@ -523,7 +524,7 @@ describe('multi-companion: Beastmaster with two class-granted companions', () =>
         instanceId: 'bm-1',
         sourceEntryId: 'wolf',
         name: 'Fang',
-        grantedBy: { type: 'class', classEntryId: 'Ranger', classChoiceId: 'beastmaster-1' },
+        grantedBy: { type: 'class', classEntryId: 'Ranger', className: 'Ranger', classChoiceId: 'beastmaster-1' },
         effectiveProgressionLevel: 7,
       }),
     );
@@ -534,7 +535,7 @@ describe('multi-companion: Beastmaster with two class-granted companions', () =>
         instanceId: 'bm-2',
         sourceEntryId: 'eagle',
         name: 'Talon',
-        grantedBy: { type: 'class', classEntryId: 'Ranger', classChoiceId: 'beastmaster-2' },
+        grantedBy: { type: 'class', classEntryId: 'Ranger', className: 'Ranger', classChoiceId: 'beastmaster-2' },
         effectiveProgressionLevel: 7,
       }),
     );
@@ -552,7 +553,7 @@ const wolfInstance: CompanionInstance = {
   instanceId: 'slot-test',
   sourceEntryId: 'wolf',
   name: 'Shadow',
-  grantedBy: { type: 'class', classEntryId: 'Druid', classChoiceId: 'animal-companion' },
+  grantedBy: { type: 'class', classEntryId: 'Druid', className: 'Druid', classChoiceId: 'animal-companion' },
   effectiveProgressionLevel: 10,
   abilityScoreOverrides: {},
   hdAbilityIncreases: [],

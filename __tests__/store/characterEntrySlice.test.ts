@@ -1471,6 +1471,7 @@ describe('characterEntrySlice — companions', () => {
   ): Parameters<typeof addCompanion>[0]['grantedBy'] => ({
     type: 'class',
     classEntryId,
+    className: 'Druid',
     classChoiceId: 'druid-nature-bond',
   });
 
