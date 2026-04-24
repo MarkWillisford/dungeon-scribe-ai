@@ -11,7 +11,6 @@ import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import type { GrantsCompanionSpec } from '@/data/templates/types';
 
 export interface TemplateCompanionSectionProps {
-  templateEntryId: string; // DraftTemplateEntry.id
   templateId: string; // TemplateDefinition.id
   templateName: string;
   spec: GrantsCompanionSpec;
@@ -43,7 +42,6 @@ function makeInstanceId(): string {
 // hangs off a template instead of a class and uses the formula from the
 // template spec for effective level.
 export function TemplateCompanionSection({
-  templateEntryId,
   templateId,
   templateName,
   spec,
@@ -87,12 +85,6 @@ export function TemplateCompanionSection({
     );
     setPickerOpen(false);
   };
-
-  // The `templateEntryId` prop is accepted for parity with the class-side
-  // section (which takes the DraftClassEntry.id) and to give downstream
-  // hooks a stable handle when we later wire up validation — currently we
-  // resolve companions by templateId, so the prop is informational.
-  void templateEntryId;
 
   return (
     <View style={styles.container}>

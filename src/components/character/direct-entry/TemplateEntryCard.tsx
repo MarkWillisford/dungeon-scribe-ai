@@ -91,7 +91,6 @@ export function TemplateEntryCard({ entry }: TemplateEntryCardProps) {
           grantsCompanion and this is a catalog-backed template entry. */}
       {companionGrant && entry.templateId && (
         <TemplateCompanionSection
-          templateEntryId={entry.id}
           templateId={entry.templateId}
           templateName={entry.templateName}
           spec={companionGrant}
