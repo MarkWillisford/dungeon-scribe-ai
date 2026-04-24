@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { useAppDispatch } from '@/store/hooks';
 import { removeTemplate, updateTemplate } from '@/store/slices/characterEntrySlice';
 import { type DraftTemplateEntry } from '@/types/characterDraft';
+import { ALL_TEMPLATES } from '@/data/templates';
+import { TemplateCompanionSection } from './TemplateCompanionSection';
 
 const ACQUIRED_OPTIONS = [
   { label: 'Inherited', value: 'inherited' },
@@ -30,6 +32,17 @@ export function TemplateEntryCard({ entry }: TemplateEntryCardProps) {
   const update = (patch: Partial<DraftTemplateEntry>) => {
     dispatch(updateTemplate({ ...entry, ...patch }));
   };
+
+  // Template-side companion grant (plan: animal-companion-builder.md §
+  // Templates That Grant ACs). Only fires when the applied template is a
+  // catalog reference (`templateId`) whose definition carries
+  // `grantsCompanion`. Free grants are not eligible by design — they don't
+  // have a catalog identity to resolve against.
+  const companionGrant = useMemo(() => {
+    if (entry.isFreeGrant || !entry.templateId) return null;
+    const def = ALL_TEMPLATES.find((t) => t.id === entry.templateId);
+    return def?.grantsCompanion ?? null;
+  }, [entry.isFreeGrant, entry.templateId]);
 
   return (
     <View
@@ -73,6 +86,17 @@ export function TemplateEntryCard({ entry }: TemplateEntryCardProps) {
           style={styles.medPicker}
         />
       </View>
+
+      {/* Companion grant — only renders when the template definition sets
+          grantsCompanion and this is a catalog-backed template entry. */}
+      {companionGrant && entry.templateId && (
+        <TemplateCompanionSection
+          templateEntryId={entry.id}
+          templateId={entry.templateId}
+          templateName={entry.templateName}
+          spec={companionGrant}
+        />
+      )}
     </View>
   );
 }

@@ -19,6 +19,8 @@ import type { ClassEntry } from '@/types/classes';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import type { CompanionInstance, CompanionGrant } from '@/types/companions';
 import { BODY_SHAPE_SLOTS, type CompanionSlotAccess } from '@/data/companions/bodyShapeSlots';
+import { ALL_TEMPLATES } from '@/data/templates';
+import type { GrantsCompanionSpec } from '@/data/templates/types';
 
 // ---------------------------------------------------------------------------
 // AC progression table — totals at each effective class level (1–20).
@@ -321,6 +323,21 @@ export interface CompanionBaseStats {
 // Granting-source formulas — plan § Granting Sources
 // ---------------------------------------------------------------------------
 
+// Apply a template's grantsCompanion formula against the character's total
+// class level. Negative offsets clamp to a minimum of 1 so the AC progression
+// table never underflows. Mirrors the Paladin/Druid-style −N pattern used by
+// `effectiveLevelFromClass` for mount/companion math.
+function applyGrantsCompanionFormula(spec: GrantsCompanionSpec, characterLevel: number): number {
+  switch (spec.effectiveLevelFormula) {
+    case 'characterLevel':
+      return Math.max(1, characterLevel);
+    case 'characterLevel-3':
+      return Math.max(1, characterLevel - 3);
+    case 'characterLevel-4':
+      return Math.max(1, characterLevel - 4);
+  }
+}
+
 function effectiveLevelFromClass(classEntry: ClassEntry): number {
   const archetypes = classEntry.archetype ?? [];
   switch (classEntry.name) {
@@ -356,12 +373,16 @@ export class CompanionService {
         if (!classEntry) return 0;
         return effectiveLevelFromClass(classEntry);
       }
-      case 'template':
-        // Template-granted companions use the character's total level as their
-        // effective level. Templates with different formulas override via the
-        // TemplateDefinition.grantsCompanion.effectiveLevelFormula field
-        // (Phase 1.8) — until then, defer to character level.
-        return character.classes.totalLevel;
+      case 'template': {
+        // Template-granted companions resolve their effective level from the
+        // definition's `grantsCompanion.effectiveLevelFormula`. Fallback to
+        // the character's total class level for templates without the field
+        // (covers hand-rolled campaign content that forgot to set it).
+        const def = ALL_TEMPLATES.find((t) => t.id === grant.templateId);
+        const spec = def?.grantsCompanion;
+        if (!spec) return character.classes.totalLevel;
+        return applyGrantsCompanionFormula(spec, character.classes.totalLevel);
+      }
       case 'feat':
       case 'cohort':
         // Reserved — not implemented. Phase 1 scope excludes cohorts, and no

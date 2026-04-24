@@ -200,12 +200,34 @@ describe('CompanionService.computeEffectiveLevel', () => {
   });
 
   describe('template grants', () => {
-    it('uses character total level until Phase 1.8 overrides land', () => {
+    it('unknown templateId: falls back to character total level', () => {
       const char = makeCharacter([
         makeClassEntry({ name: 'Fighter', level: 3 }),
         makeClassEntry({ name: 'Rogue', level: 4 }),
       ]);
-      const grant: CompanionGrant = { type: 'template', templateId: 'druid-simple' };
+      const grant: CompanionGrant = { type: 'template', templateId: 'does-not-exist' };
+      expect(CompanionService.computeEffectiveLevel(char, grant)).toBe(7);
+    });
+
+    it('druid-creature (characterLevel-3): level 10 → 7', () => {
+      const char = makeCharacter([makeClassEntry({ name: 'Fighter', level: 10 })]);
+      const grant: CompanionGrant = { type: 'template', templateId: 'druid-creature' };
+      expect(CompanionService.computeEffectiveLevel(char, grant)).toBe(7);
+    });
+
+    it('druid-creature: level 2 → 1 (clamped)', () => {
+      const char = makeCharacter([makeClassEntry({ name: 'Fighter', level: 2 })]);
+      const grant: CompanionGrant = { type: 'template', templateId: 'druid-creature' };
+      expect(CompanionService.computeEffectiveLevel(char, grant)).toBe(1);
+    });
+
+    it('applies formula across multiclass HD', () => {
+      const char = makeCharacter([
+        makeClassEntry({ name: 'Fighter', level: 5 }),
+        makeClassEntry({ name: 'Rogue', level: 5 }),
+      ]);
+      const grant: CompanionGrant = { type: 'template', templateId: 'druid-creature' };
+      // totalLevel 10 − 3 = 7
       expect(CompanionService.computeEffectiveLevel(char, grant)).toBe(7);
     });
   });
