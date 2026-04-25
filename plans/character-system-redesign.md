@@ -582,7 +582,7 @@ First target for character entry. Using these as the design validation — if th
 - Prestige Paladin 2 (custom 3.5e port, balanced for campaign)
 - Simple Druid Template (FREE campaign grant — not paid, no refund)
 - **Total: Level 24**
-- Race: Player believes Human. Actual race: unknown (unrevealed narrative element — not modeled in the app per user decision; DM tracks this at the table)
+- Race: Human (tracked field — her actual race is a narrative element that may be revealed and changed later)
 - Spellcasting: CL 22 divine (5 base + 5 Hathran + 10 Dweomerkeeper + 2 Radiant Servant)
 - All CR/refunds already resolved at the table
 
@@ -736,7 +736,7 @@ interface ClassChoice {
 
 4. **Kah-Mei's full character details** — Need a dedicated session to capture his classes, templates (with CR/LA values and refunds), and any other unique features.
 
-5. **Rissi's actual race** — Unrevealed narratively. Decision: NOT modeled in the app. DM tracks at the table.
+5. ~~**Rissi's actual race**~~ — **RESOLVED (2026-04-24).** Tracked as Human. The narrative reveal is plot-relevant but the app models the field; DM updates the race field if/when the reveal happens.
 
 ### Medium Priority (needed before leveling works)
 

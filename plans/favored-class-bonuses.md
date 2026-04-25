@@ -2,7 +2,7 @@
 
 ## 2026-04-23
 
-## Status: PLANNING — all three phases shipping in this branch (`MW/apg-favored-class-bonuses`)
+## Status: Phase 1 COMPLETE (2026-04-24) — Phases 2 and 3 not yet started
 
 Single-PR rollout confirmed 2026-04-23. No phase split across PRs. Phases below are internal staging only — each phase is tested before the next begins, but all land together.
 
@@ -305,23 +305,23 @@ type FavoredClassMechanicalEffect =
 
 ## Implementation Order
 
-1. ~~Write this plan~~ — IN PROGRESS
-2. Write scraping plan `plans/data-scraping/favored-class-bonuses-database.md`
-3. Mark reviews both plans; approves before any code ships
-4. Add `FavoredClassBonusOption` type + barrel export
-5. Scrape core 7 races by hand (quickest path to a working sample; core races have the richest data and catch edge cases)
-6. Dispatch scraper agents for the remaining ~30 races in parallel
-7. Write `src/data/favoredClassBonuses/index.ts` barrel
-8. Add `bookId` entries to `normalizeSource.ts` for any missing product codes
-9. Extend `GameDataConnector` interface, `FirestoreGameDataConnector`, `StaticGameDataConnector`
-10. Extend `GameDataService` with `getFavoredClassBonuses`
-11. Write `seedFavoredClassBonuses.ts`; wire into `seedAll.ts`
-12. Add composite index to `firestore.indexes.json`
-13. Write tests (static structure validation + service integration)
-14. Run typecheck + tests (`--maxWorkers=2` per WSL feedback)
-15. Update `plans/implementation-plan.md` status row
-16. Update `plans/character-system-redesign.md` to reverse the Rissi race decision
-17. Commit, push, open PR
+1. ~~Write this plan~~ — COMPLETE
+2. ~~Write scraping plan `plans/data-scraping/favored-class-bonuses-database.md`~~ — COMPLETE
+3. ~~Mark reviews both plans; approves before any code ships~~ — COMPLETE
+4. ~~Add `FavoredClassBonusOption` type + barrel export~~ — COMPLETE (commit `29bdde7`)
+5. ~~Scrape core 7 races by hand~~ — COMPLETE (included in scraped set)
+6. ~~Dispatch scraper agents for the remaining ~30 races in parallel~~ — COMPLETE (36 races total)
+7. ~~Write `src/data/favoredClassBonuses/index.ts` barrel~~ — COMPLETE
+8. ~~Add `bookId` entries to `normalizeSource.ts` for any missing product codes~~ — COMPLETE (blood-of-shadows, bots, people-of-the-darklands)
+9. ~~Extend `GameDataConnector` interface, `FirestoreGameDataConnector`, `StaticGameDataConnector`~~ — COMPLETE
+10. ~~Extend `GameDataService` with `getFavoredClassBonuses`~~ — COMPLETE
+11. ~~Write `seedFavoredClassBonuses.ts`; wire into `seedAll.ts`~~ — COMPLETE
+12. ~~Add composite index to `firestore.indexes.json`~~ — COMPLETE
+13. ~~Write tests (static structure validation + service integration)~~ — COMPLETE (77 tests passing)
+14. ~~Run typecheck + tests (`--maxWorkers=2` per WSL feedback)~~ — COMPLETE (typecheck clean, 77 passing)
+15. ~~Update `plans/implementation-plan.md` status row~~ — COMPLETE
+16. ~~Update `plans/character-system-redesign.md` to reverse the Rissi race decision~~ — COMPLETE
+17. Commit, push, open PR — IN PROGRESS
 
 ---
 

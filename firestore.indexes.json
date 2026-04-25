@@ -58,6 +58,14 @@
         { "fieldPath": "visibility", "order": "ASCENDING" },
         { "fieldPath": "className", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "favoredClassBonuses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "raceName", "order": "ASCENDING" },
+        { "fieldPath": "className", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []
