@@ -103,7 +103,7 @@ const makeInstance = (overrides: Partial<CompanionInstance> = {}): CompanionInst
     weapons: [],
     magicItems: [],
     gear: [],
-    equippedSlots: new Map(),
+    equippedSlots: {},
   },
   notes: '',
   ...overrides,

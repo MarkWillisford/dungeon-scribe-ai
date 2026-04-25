@@ -582,7 +582,7 @@ const characterEntrySlice = createSlice({
           weapons: [],
           magicItems: [],
           gear: [],
-          equippedSlots: new Map(),
+          equippedSlots: {},
         },
         notes: '',
       };
