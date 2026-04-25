@@ -97,4 +97,15 @@ describe('ALL_FAVORED_CLASS_BONUSES — structural integrity', () => {
     );
     expect(bad.map((e) => e.id)).toEqual([]);
   });
+
+  test('every unmapped mechanicalEffect has a non-empty reason', () => {
+    const unmapped = ALL_FAVORED_CLASS_BONUSES.filter(
+      (e) => e.mechanicalEffect?.type === 'unmapped',
+    );
+    const missing = unmapped.filter((entry) => {
+      const reason = (entry.mechanicalEffect as any).reason;
+      return typeof reason !== 'string' || reason.trim() === '';
+    });
+    expect(missing.map((e) => `${e.id}: missing or empty reason`)).toEqual([]);
+  });
 });
