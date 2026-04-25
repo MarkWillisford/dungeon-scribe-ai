@@ -12,7 +12,7 @@
 //   - (PZO1134) → Ultimate Intrigue
 //   - (PZO1135) → Adventurer's Guide
 
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { GameDataSource } from '@/types/gameData';
 
 const CRB: GameDataSource = {
@@ -70,7 +70,7 @@ const META = {
   verificationStatus: 'needs_review' as const,
 };
 
-export const HALFLING_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
+export const HALFLING_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
   {
     id: 'halfling-alchemist',
     raceName: 'Halfling',

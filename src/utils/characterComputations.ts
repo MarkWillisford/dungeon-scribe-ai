@@ -13,7 +13,7 @@ import {
   computeOtherBonusTotal,
 } from '@/types/characterDraft';
 import type { ExpandedClassData } from '@/data/classes/types';
-import type { FavoredClassBonusOption, FCBMechanicalEffect } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry, FCBMechanicalEffect } from '@/types/favoredClassBonuses';
 
 // ---- Class data lookup ----
 
@@ -296,10 +296,9 @@ function fcbEffectDisplay(effect: FCBMechanicalEffect, count: number): string {
   switch (effect.type) {
     case 'bonus': {
       const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
-      const eff =
-        effect.applyInIncrementsOf
-          ? Math.floor(val / effect.applyInIncrementsOf) * effect.applyInIncrementsOf
-          : val;
+      const eff = effect.applyInIncrementsOf
+        ? Math.floor(val / effect.applyInIncrementsOf) * effect.applyInIncrementsOf
+        : val;
       let s = `+${eff} ${effect.target}`;
       if (effect.vsCombatManeuver?.length) s += ` vs ${effect.vsCombatManeuver.join('/')}`;
       if (effect.vsCreatureType?.length) s += ` vs ${effect.vsCreatureType.join(', ')}`;
@@ -324,13 +323,17 @@ function fcbEffectDisplay(effect: FCBMechanicalEffect, count: number): string {
     }
     case 'class_level_bump': {
       const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
-      const pick = effect.requiresPickOne ? ` (chosen ${effect.pickOnePrompt ?? effect.featureName})` : '';
+      const pick = effect.requiresPickOne
+        ? ` (chosen ${effect.pickOnePrompt ?? effect.featureName})`
+        : '';
       const scope = effect.scopeDescription ? ` — ${effect.scopeDescription}` : '';
       return `+${val} effective level for ${effect.featureName}${pick}${scope}`;
     }
     case 'feature_uses_per_day': {
       const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
-      const pick = effect.requiresPickOne ? ` (chosen ${effect.pickOnePrompt ?? effect.featureName})` : '';
+      const pick = effect.requiresPickOne
+        ? ` (chosen ${effect.pickOnePrompt ?? effect.featureName})`
+        : '';
       return `+${val} uses/day for ${effect.featureName}${pick}`;
     }
     case 'arcane_spell_failure_reduction': {
@@ -348,8 +351,7 @@ function fcbEffectDisplay(effect: FCBMechanicalEffect, count: number): string {
     case 'caster_level': {
       const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
       const filter = effect.schoolFilter ? ` ${effect.schoolFilter}` : '';
-      const scope =
-        effect.scopeType === 'full' ? '' : ` (${effect.scopeType.replace(/_/g, ' ')})`;
+      const scope = effect.scopeType === 'full' ? '' : ` (${effect.scopeType.replace(/_/g, ' ')})`;
       const pick = effect.requiresPickOne ? ` (chosen ${effect.pickOnePrompt ?? 'option'})` : '';
       return `+${val} CL${filter}${scope}${pick}`;
     }
@@ -381,7 +383,7 @@ function fcbEffectDisplay(effect: FCBMechanicalEffect, count: number): string {
 
 export function computeFCBAlternateAccumulation(
   classes: DraftClassEntry[],
-  options: FavoredClassBonusOption[],
+  options: FavoredClassBonusEntry[],
 ): AccumulatedFCBEffect[] {
   const optionMap = new Map(options.map((o) => [o.id, o]));
   const counts = new Map<string, number>();

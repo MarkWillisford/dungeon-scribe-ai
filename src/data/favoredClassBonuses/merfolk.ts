@@ -7,7 +7,7 @@
 //     code and default to the Advanced Race Guide (ARG).
 //   - Entries tagged "(PPC:BotS)" are from Pathfinder Player Companion: Blood of the Sea.
 
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { GameDataSource } from '@/types/gameData';
 
 const ARG: GameDataSource = {
@@ -29,7 +29,7 @@ const META = {
   verificationStatus: 'needs_review' as const,
 };
 
-export const MERFOLK_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
+export const MERFOLK_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
   {
     id: 'merfolk-bard',
     raceName: 'Merfolk',

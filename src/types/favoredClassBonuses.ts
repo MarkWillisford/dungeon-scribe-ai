@@ -5,7 +5,7 @@
 // a mechanical alternate (e.g., Dwarf Fighter gets +1 CMD vs bull rush/trip, Aasimar Summoner gets
 // DR/evil on their eidolon).
 //
-// FavoredClassBonusOption documents cover ONLY the alternate choices. The HP / skill-rank options
+// FavoredClassBonusEntry documents cover ONLY the alternate choices. The HP / skill-rank options
 // are universal and implicit — never stored as documents.
 //
 // Some race × class combos have multiple entries (e.g., Dwarf Paladin has 2, Dwarf Wizard has 2).
@@ -317,7 +317,7 @@ export type FCBMechanicalEffect =
 
 // ---- The collection document ----
 
-export interface FavoredClassBonusOption extends DataQualityFields {
+export interface FavoredClassBonusEntry extends DataQualityFields {
   // Unique document ID.
   // Base pattern: '{race-slug}-{class-slug}'.
   // Multi-variant pattern: '{race-slug}-{class-slug}-{semantic-suffix}'.

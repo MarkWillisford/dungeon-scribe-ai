@@ -60,7 +60,7 @@ import {
 } from '@/data/races';
 
 import type { ArchetypeData } from '@/data/classes/types';
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { FeatDefinition } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type {
@@ -355,7 +355,7 @@ export class StaticGameDataConnector implements GameDataConnector {
     raceName: string,
     className: string,
     _context?: QueryContext,
-  ): Promise<FavoredClassBonusOption[]> {
+  ): Promise<FavoredClassBonusEntry[]> {
     return ALL_FAVORED_CLASS_BONUSES.filter(
       (fcb) => fcb.raceName === raceName && fcb.className === className,
     );

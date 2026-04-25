@@ -23,7 +23,7 @@ import {
   type SpellcastingAdvancement,
   type FavoredClassBonusSelection,
 } from '@/types/characterDraft';
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import { GameDataService } from '@/services/GameDataService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { lookupClassData, computeFCBAlternateAccumulation } from '@/utils/characterComputations';
@@ -168,7 +168,7 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const raceName = useAppSelector((state) => state.characterEntry.draft.raceName);
-  const [alternates, setAlternates] = useState<FavoredClassBonusOption[]>([]);
+  const [alternates, setAlternates] = useState<FavoredClassBonusEntry[]>([]);
   const [altPickerLevel, setAltPickerLevel] = useState<number | null>(null);
 
   useEffect(() => {
@@ -178,7 +178,7 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
         ? Promise.resolve([])
         : GameDataService.getFavoredClassBonuses(raceName, entry.className);
     promise.then((results) => {
-      if (!cancelled) setAlternates(results as FavoredClassBonusOption[]);
+      if (!cancelled) setAlternates(results as FavoredClassBonusEntry[]);
     });
     return () => {
       cancelled = true;

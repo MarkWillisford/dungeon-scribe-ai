@@ -25,7 +25,7 @@ import {
   type AbilityKey,
 } from '@/types/characterDraft';
 import { BonusType } from '@/types/base';
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import { ALL_EXPANDED_CLASSES } from '@/data/classes/index';
 
 // Reuse the full static set as the test map. These are the same classes the
@@ -578,8 +578,8 @@ describe('computeBaseWillFractional', () => {
 function fcbOption(
   id: string,
   className: string,
-  effect: FavoredClassBonusOption['mechanicalEffect'],
-): FavoredClassBonusOption {
+  effect: FavoredClassBonusEntry['mechanicalEffect'],
+): FavoredClassBonusEntry {
   return {
     id,
     raceName: 'Dwarf',

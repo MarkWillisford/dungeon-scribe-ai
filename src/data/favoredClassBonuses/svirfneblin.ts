@@ -9,7 +9,7 @@
 //   - (PZO1134) → Ultimate Intrigue
 //   - (PZO1135) → Adventurer's Guide
 
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { GameDataSource } from '@/types/gameData';
 
 const ARG: GameDataSource = {
@@ -25,7 +25,7 @@ const META = {
   verificationStatus: 'needs_review' as const,
 };
 
-export const SVIRFNEBLIN_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
+export const SVIRFNEBLIN_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
   {
     id: 'svirfneblin-alchemist',
     raceName: 'Svirfneblin',

@@ -95,7 +95,7 @@ export interface DraftClassEntry {
 
 // Per-level favored class bonus selection.
 // 'hp' and 'skill' are the universal PF1e options (always available).
-// 'alternate' references a FavoredClassBonusOption document by id.
+// 'alternate' references a FavoredClassBonusEntry document by id.
 export type FavoredClassBonusSelection =
   | { level: number; type: 'hp' }
   | { level: number; type: 'skill' }

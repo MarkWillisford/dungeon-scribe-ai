@@ -17,7 +17,8 @@
 
 import * as admin from 'firebase-admin';
 import { ALL_FAVORED_CLASS_BONUSES } from '../../src/data/favoredClassBonuses/index';
-import type { FavoredClassBonusOption } from '../../src/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '../../src/types/favoredClassBonuses';
+import { normalizeSource } from '../../src/utils/normalizeSource';
 import { sleep, chunkArray } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
@@ -47,7 +48,7 @@ if (!DRY_RUN) {
   db.settings({ ignoreUndefinedProperties: true });
 }
 
-async function seedFavoredClassBonuses(entries: FavoredClassBonusOption[]): Promise<void> {
+async function seedFavoredClassBonuses(entries: FavoredClassBonusEntry[]): Promise<void> {
   console.log(`\nSeeding ${entries.length} favored class bonuses to project: ${PROJECT_ID}`);
 
   if (DRY_RUN) {

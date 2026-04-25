@@ -16,7 +16,7 @@
 // class can select it. Classes that also have a class-specific alternate therefore have two
 // entries (multi-entry pattern, analogous to `dwarf-paladin-concentration`/`-creature-knowledge`).
 
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { GameDataSource } from '@/types/gameData';
 
 const ARG: GameDataSource = {
@@ -84,7 +84,7 @@ const MAGICAL_TAIL_CLASSES = [
   'Kineticist',
 ] as const;
 
-const magicalTailEntries: FavoredClassBonusOption[] = MAGICAL_TAIL_CLASSES.map((className) => ({
+const magicalTailEntries: FavoredClassBonusEntry[] = MAGICAL_TAIL_CLASSES.map((className) => ({
   id: `kitsune-${className.toLowerCase()}-magical-tail`,
   raceName: 'Kitsune',
   className,
@@ -100,7 +100,7 @@ const magicalTailEntries: FavoredClassBonusOption[] = MAGICAL_TAIL_CLASSES.map((
   ...META,
 }));
 
-export const KITSUNE_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
+export const KITSUNE_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
   ...magicalTailEntries,
   {
     id: 'kitsune-arcanist',
