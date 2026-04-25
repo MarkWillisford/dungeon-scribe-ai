@@ -18,7 +18,6 @@
 import * as admin from 'firebase-admin';
 import { ALL_FAVORED_CLASS_BONUSES } from '../../src/data/favoredClassBonuses/index';
 import type { FavoredClassBonusOption } from '../../src/types/favoredClassBonuses';
-import { normalizeSource } from '../../src/utils/normalizeSource';
 import { sleep, chunkArray } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
@@ -60,7 +59,7 @@ async function seedFavoredClassBonuses(entries: FavoredClassBonusOption[]): Prom
       const ref = db.collection('favoredClassBonuses').doc(entry.id);
       batch.set(ref, {
         ...entry,
-        source: normalizeSource(entry.source),
+        source: entry.source,
         visibility: 'global' as const,
       });
     });
