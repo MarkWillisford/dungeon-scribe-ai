@@ -216,7 +216,7 @@ function migrateDraft(draft: CharacterDraft): CharacterDraft {
         favoredClassBonuses:
           cls.favoredClassBonuses !== undefined
             ? promoteLegacyFCB(cls.favoredClassBonuses, cls.level)
-            : undefined,
+            : [],
       };
     }
     // Not the favored class — clear any stale FCB data that may have been left behind
