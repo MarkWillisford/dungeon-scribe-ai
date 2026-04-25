@@ -93,8 +93,8 @@ export const AMBUSH_HUNTER_ARCHETYPE: ArchetypeData = {
     type: 'Martial',
     initiatingAbility: 'WIS',
     ilProgression: 'half',
-    disciplines: ['Golden Lion', 'Primal Fury'],
-    progressionTableKey: 'AMBUSH_HUNTER_PROGRESSION',
+    disciplines: ['golden-lion', 'primal-fury'],
+    progressionTableKey: 'ambush-hunter',
     recoveryMechanics: {
       primary: {
         type: 'custom',

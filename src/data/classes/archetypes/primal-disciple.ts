@@ -87,8 +87,8 @@ export const PRIMAL_DISCIPLE_ARCHETYPE: ArchetypeData = {
     type: 'Martial',
     initiatingAbility: 'WIS',
     ilProgression: 'full',
-    disciplines: ['Golden Lion', 'Piercing Thunder', 'Primal Fury', 'Thrashing Dragon'],
-    progressionTableKey: 'PRIMAL_DISCIPLE_PROGRESSION',
+    disciplines: ['golden-lion', 'piercing-thunder', 'primal-fury', 'thrashing-dragon'],
+    progressionTableKey: 'primal-disciple',
     recoveryMechanics: {
       primary: {
         type: 'custom',

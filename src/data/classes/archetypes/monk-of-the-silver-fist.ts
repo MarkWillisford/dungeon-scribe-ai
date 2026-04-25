@@ -132,8 +132,8 @@ export const MONK_OF_THE_SILVER_FIST_ARCHETYPE: ArchetypeData = {
     type: 'Martial',
     initiatingAbility: 'WIS',
     ilProgression: 'full',
-    disciplines: ['Eternal Guardian', 'Iron Tortoise', 'Mithral Current'],
-    progressionTableKey: 'MONK_OF_THE_SILVER_FIST_PROGRESSION',
+    disciplines: ['eternal-guardian', 'iron-tortoise', 'mithral-current'],
+    progressionTableKey: 'monk-of-the-silver-fist',
     recoveryMechanics: {
       primary: {
         type: 'custom',

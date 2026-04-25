@@ -150,8 +150,8 @@ export const RUBATO_ARCHETYPE: ArchetypeData = {
     type: 'Martial',
     initiatingAbility: 'CHA',
     ilProgression: 'full',
-    disciplines: ['Elemental Flux', 'Golden Lion', 'Mithral Current'],
-    progressionTableKey: 'RUBATO_PROGRESSION',
+    disciplines: ['elemental-flux', 'golden-lion', 'mithral-current'],
+    progressionTableKey: 'rubato',
     recoveryMechanics: {
       primary: {
         type: 'custom',

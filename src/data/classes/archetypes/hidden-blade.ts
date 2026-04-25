@@ -111,8 +111,8 @@ export const HIDDEN_BLADE_ARCHETYPE: ArchetypeData = {
     type: 'Martial',
     initiatingAbility: 'INT',
     ilProgression: 'full',
-    disciplines: ['Mithral Current', 'Thrashing Dragon', 'Veiled Moon'],
-    progressionTableKey: 'HIDDEN_BLADE_PROGRESSION',
+    disciplines: ['mithral-current', 'thrashing-dragon', 'veiled-moon'],
+    progressionTableKey: 'hidden-blade',
     recoveryMechanics: {
       primary: {
         type: 'gambit',

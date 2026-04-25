@@ -197,8 +197,8 @@ export const KNIGHT_DISCIPLE_ARCHETYPE: ArchetypeData = {
     type: 'Martial',
     initiatingAbility: 'CHA',
     ilProgression: 'full',
-    disciplines: ['Golden Lion', 'Iron Tortoise', 'Silver Crane'],
-    progressionTableKey: 'KNIGHT_DISCIPLE_PROGRESSION',
+    disciplines: ['golden-lion', 'iron-tortoise', 'silver-crane'],
+    progressionTableKey: 'knight-disciple',
     recoveryMechanics: {
       primary: {
         type: 'custom',
