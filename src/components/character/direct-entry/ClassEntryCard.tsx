@@ -307,81 +307,88 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
               </Text>
             </Pressable>
 
-            {/* Alternate chips / picker */}
-            {alternates.length === 1 && (
-              <Pressable
-                onPress={() =>
-                  isAlt && selectedAlt?.id === alternates[0].id
-                    ? clearLevelSelection(level)
-                    : setLevelSelection(level, {
-                        level,
-                        type: 'alternate',
-                        optionId: alternates[0].id,
-                      })
-                }
-                style={[
-                  fcbStyles.chip,
-                  fcbStyles.chipAlt,
-                  {
-                    borderColor: isAlt ? fantasy.gold : colors.border.DEFAULT,
-                    backgroundColor: isAlt
-                      ? isDark
-                        ? 'rgba(212,175,55,0.2)'
-                        : 'rgba(212,175,55,0.12)'
-                      : isDark
-                        ? colors.bg.tertiary
-                        : colors.bg.secondary,
-                  },
-                ]}
-                accessibilityLabel={`Level ${level}: take alternate favored class bonus: ${alternates[0].shortName}`}
-                accessibilityState={{ selected: isAlt }}
-              >
-                <Text
-                  style={[
-                    fcbStyles.chipText,
-                    { color: isAlt ? fantasy.gold : colors.text.secondary },
-                  ]}
-                  numberOfLines={1}
-                >
-                  {alternates[0].shortName}
-                </Text>
-              </Pressable>
-            )}
-
-            {alternates.length > 1 && (
-              <>
-                <Pressable
-                  onPress={() => setAltPickerLevel(level)}
-                  style={[
-                    fcbStyles.chip,
-                    fcbStyles.chipAlt,
-                    {
-                      borderColor: isAlt ? fantasy.gold : colors.border.DEFAULT,
-                      backgroundColor: isAlt
-                        ? isDark
-                          ? 'rgba(212,175,55,0.2)'
-                          : 'rgba(212,175,55,0.12)'
-                        : isDark
-                          ? colors.bg.tertiary
-                          : colors.bg.secondary,
-                    },
-                  ]}
-                  accessibilityLabel={`Level ${level}: choose alternate favored class bonus`}
-                >
-                  <Text
+            {/* Alternate chips / picker — only show alternates valid at this level */}
+            {(() => {
+              const validAlternates = alternates.filter(
+                (a) => !a.minimumClassLevel || a.minimumClassLevel <= level,
+              );
+              if (validAlternates.length === 0) return null;
+              if (validAlternates.length === 1) {
+                return (
+                  <Pressable
+                    onPress={() =>
+                      isAlt && selectedAlt?.id === validAlternates[0].id
+                        ? clearLevelSelection(level)
+                        : setLevelSelection(level, {
+                            level,
+                            type: 'alternate',
+                            optionId: validAlternates[0].id,
+                          })
+                    }
                     style={[
-                      fcbStyles.chipText,
-                      { color: isAlt ? fantasy.gold : colors.text.secondary },
+                      fcbStyles.chip,
+                      fcbStyles.chipAlt,
+                      {
+                        borderColor: isAlt ? fantasy.gold : colors.border.DEFAULT,
+                        backgroundColor: isAlt
+                          ? isDark
+                            ? 'rgba(212,175,55,0.2)'
+                            : 'rgba(212,175,55,0.12)'
+                          : isDark
+                            ? colors.bg.tertiary
+                            : colors.bg.secondary,
+                      },
                     ]}
-                    numberOfLines={1}
+                    accessibilityLabel={`Level ${level}: take alternate favored class bonus: ${validAlternates[0].shortName}`}
+                    accessibilityState={{ selected: isAlt }}
                   >
-                    {isAlt && selectedAlt ? selectedAlt.shortName : 'Alt ▾'}
-                  </Text>
-                </Pressable>
+                    <Text
+                      style={[
+                        fcbStyles.chipText,
+                        { color: isAlt ? fantasy.gold : colors.text.secondary },
+                      ]}
+                      numberOfLines={1}
+                    >
+                      {validAlternates[0].shortName}
+                    </Text>
+                  </Pressable>
+                );
+              }
+              return (
+                <>
+                  <Pressable
+                    onPress={() => setAltPickerLevel(level)}
+                    style={[
+                      fcbStyles.chip,
+                      fcbStyles.chipAlt,
+                      {
+                        borderColor: isAlt ? fantasy.gold : colors.border.DEFAULT,
+                        backgroundColor: isAlt
+                          ? isDark
+                            ? 'rgba(212,175,55,0.2)'
+                            : 'rgba(212,175,55,0.12)'
+                          : isDark
+                            ? colors.bg.tertiary
+                            : colors.bg.secondary,
+                      },
+                    ]}
+                    accessibilityLabel={`Level ${level}: choose alternate favored class bonus`}
+                  >
+                    <Text
+                      style={[
+                        fcbStyles.chipText,
+                        { color: isAlt ? fantasy.gold : colors.text.secondary },
+                      ]}
+                      numberOfLines={1}
+                    >
+                      {isAlt && selectedAlt ? selectedAlt.shortName : 'Alt ▾'}
+                    </Text>
+                  </Pressable>
 
-                {/* Nothing extra needed here — the modal below is driven by altPickerLevel */}
-              </>
-            )}
+                  {/* Nothing extra needed here — the modal below is driven by altPickerLevel */}
+                </>
+              );
+            })()}
           </View>
         );
       })}
@@ -409,7 +416,12 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
               Alternate Favored Class Bonus
             </Text>
             <FlatList
-              data={alternates}
+              data={alternates.filter(
+                (a) =>
+                  altPickerLevel === null ||
+                  !a.minimumClassLevel ||
+                  a.minimumClassLevel <= altPickerLevel,
+              )}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => {
                 const currentSel =
