@@ -14,6 +14,25 @@ jest.mock('@/services/GameDataService', () => ({
 jest.mock('@/components/ui/SearchPickerSheet', () => ({
   SearchPickerSheet: () => null,
 }));
+jest.mock('@/components/character/direct-entry/CompanionPickerSheet', () => ({
+  CompanionPickerSheet: () => null,
+}));
+jest.mock('@/store/hooks', () => ({
+  useAppDispatch: () => jest.fn(),
+  useAppSelector: (selector: (s: unknown) => unknown) =>
+    selector({ characterEntry: { draft: { classes: [], companions: [] } } }),
+}));
+jest.mock('@/hooks/useTheme', () => ({
+  useTheme: () => ({
+    colors: {
+      bg: { primary: '#fff', secondary: '#f5f5f5', tertiary: '#eee' },
+      border: { DEFAULT: '#ccc' },
+      text: { primary: '#000', secondary: '#333', tertiary: '#999' },
+    },
+    fantasy: { gold: '#FFD700', bronze: '#CD7F32', darkWood: '#4A2C2A' },
+    isDark: false,
+  }),
+}));
 
 const item = (key: string): SearchItem => ({ key, label: key });
 
