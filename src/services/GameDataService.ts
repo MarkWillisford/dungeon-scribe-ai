@@ -38,6 +38,7 @@ import type {
   AlchemistDiscoveryEntry,
   BloodlineClassId,
 } from '@/types/classOptions';
+import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 
 // Phase B concession: sync accessors still need static data for the initial
 // render of ClassSelector and race pickers. Removed once those components
@@ -534,5 +535,13 @@ export class GameDataService {
   static async getArchetypesByClass(className: string, context?: QueryContext): Promise<ArchetypeData[]> {
     const ctx = context ?? GameDataService.getContextFromStore();
     return GameDataService.connector.getArchetypesByClass(className, ctx);
+  }
+
+  // ---- Animal companions -----------------------------------------------------
+
+  static async getAnimalCompanions(
+    filter?: { mountsOnly?: boolean },
+  ): Promise<AnimalCompanionEntry[]> {
+    return GameDataService.connector.getAnimalCompanions(filter);
   }
 }

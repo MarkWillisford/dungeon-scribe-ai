@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
@@ -28,7 +28,6 @@ import {
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { type ClassChoice } from '@/types/classes';
 import { ArchetypePickerSheet } from './ArchetypePickerSheet';
-import { ALL_ANIMAL_COMPANIONS } from '@/data/animalCompanions';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 
 // Pairs of featureNames that are mutually exclusive — filling one disables the other.
@@ -822,6 +821,9 @@ function CompanionSection({ entry }: CompanionSectionProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [addPickerOpen, setAddPickerOpen] = useState(false);
+  const [companionEntryById, setCompanionEntryById] = useState<Map<string, AnimalCompanionEntry>>(
+    new Map(),
+  );
 
   const grantedCompanions = useAppSelector((state) =>
     state.characterEntry.draft.companions.filter(
@@ -829,10 +831,20 @@ function CompanionSection({ entry }: CompanionSectionProps) {
     ),
   );
 
-  const companionEntryById = useMemo(() => {
-    const map = new Map<string, AnimalCompanionEntry>();
-    for (const ac of ALL_ANIMAL_COMPANIONS) map.set(ac.id, ac);
-    return map;
+  useEffect(() => {
+    let cancelled = false;
+    GameDataService.getAnimalCompanions()
+      .then((companions) => {
+        if (!cancelled) {
+          const map = new Map<string, AnimalCompanionEntry>();
+          for (const ac of companions) map.set(ac.id, ac);
+          setCompanionEntryById(map);
+        }
+      })
+      .catch((e) => console.error('Failed to load animal companions:', e));
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const supportsMultiple = classSupportsMultipleCompanions(entry);
