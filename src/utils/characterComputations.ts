@@ -319,7 +319,7 @@ function fcbEffectDisplay(effect: FCBMechanicalEffect, count: number): string {
             frac(count - 1, effect.perLevelValue.numerator, effect.perLevelValue.denominator)
           : frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
       const cap = effect.maxTotal != null ? ` (max ${effect.maxTotal})` : '';
-      return `DR +${val}/${effect.damageType}${cap} (${effect.target})`;
+      return `DR ${val}/${effect.damageType}${cap} (${effect.target})`;
     }
     case 'resource_pool': {
       const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
