@@ -354,6 +354,7 @@ export class StaticGameDataConnector implements GameDataConnector {
   async getFavoredClassBonuses(
     raceName: string,
     className: string,
+    _context?: QueryContext,
   ): Promise<FavoredClassBonusOption[]> {
     return ALL_FAVORED_CLASS_BONUSES.filter(
       (fcb) => fcb.raceName === raceName && fcb.className === className,
