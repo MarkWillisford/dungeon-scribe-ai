@@ -52,7 +52,8 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 | **Issue #72 skills-tab fixes** — `SpecialtyGroup` component for Craft/Profession free-text specialties, initiating gating, skill tests                         | —                                         | **COMPLETE** — PR #100 (merged 2026-04-22)                                                                                                           |
 | **Issue #72 classes + template fixes** — favored class selection/steppers, drag-to-reorder multiclass, template picker improvements                            | —                                         | **COMPLETE** — PR #101 (merged 2026-04-22)                                                                                                           |
 | **Typed ability score bonuses + equipment enhancement sync** — `DraftTypedBonus[]`, stacking rules, enhancement auto-sync                                      | —                                         | **COMPLETE** — PR #98 (merged 2026-04-28)                                                                                                            |
-| **FCB Phase 1** — `FavoredClassBonusOption` type, 36-race data, `GameDataService.getFavoredClassBonuses`, both connectors, seed script, Firestore index, tests | `favored-class-bonuses.md`                | **IN REVIEW** — PR #106                                                                                                                              |
+| **FCB Phase 1** — `FavoredClassBonusEntry` type, 36-race data, `GameDataService.getFavoredClassBonuses`, both connectors, seed script, Firestore index, tests | `favored-class-bonuses.md`                | **COMPLETE** — PR #106 (merged 2026-04-29)                                                                                                           |
+| **FCB Phase 2** — `FavoredClassBonusSelection[]` per-level model, `ClassEntryCard` picker, migration, slice updates, validation                               | `favored-class-bonuses.md`                | **IN REVIEW** — PR #107                                                                                                                              |
 | **Animal companion builder** — `CompanionService`, `CompanionPickerSheet`, `CompanionCard`, `TemplateCompanionSection`, Redux slice, tests                     | —                                         | **COMPLETE** — PR #104 (merged 2026-04-29)                                                                                                           |
 | **Companion builder screen** — full-page companion detail screen, `CompanionBuilderScreen`, navigation wiring                                                  | —                                         | **COMPLETE** — PR #105 (merged 2026-04-29)                                                                                                           |
 | Enter Rissi — validate model end-to-end                                                                                                                        | —                                         | NOT STARTED                                                                                                                                          |
@@ -75,11 +76,13 @@ The **character-level ruleset selector** is complete (PR #97): the Identity tab 
 
 `Effect.type` and `Effect.target` were locked down in PR #29 (merged). Valid values: `'bonus' | 'special' | 'damage' | 'resistance' | 'penalty' | 'custom'`.
 
-#### Note: Race/class-specific favored class bonuses (APG) — Phase 1 COMPLETE (2026-04-24)
+#### Note: Race/class-specific favored class bonuses (APG) — Phase 1 COMPLETE (2026-04-24) — Phase 2 COMPLETE (2026-04-25)
 
-FCB Phase 1 data layer is complete (PR `MW/apg-favored-class-bonuses`): `FavoredClassBonusOption` type, 36 races × ~30 classes scraped into `src/data/favoredClassBonuses/`, `GameDataService.getFavoredClassBonuses`, both connectors wired, seed script, Firestore composite index, and tests. All entries seeded with `verificationStatus: 'needs_review'`.
+FCB Phase 1 data layer is complete (PR `MW/apg-favored-class-bonuses`): `FavoredClassBonusEntry` type, 36 races × ~30 classes scraped into `src/data/favoredClassBonuses/`, `GameDataService.getFavoredClassBonuses`, both connectors wired, seed script, Firestore composite index, and tests. All entries seeded with `verificationStatus: 'needs_review'`.
 
-Phase 2 (per-level UI picker in `ClassEntryCard`) and Phase 3 (`ModifierPipelineService` wiring) remain. See `plans/favored-class-bonuses.md`.
+FCB Phase 2 UI + per-level selection model is complete (PR `MW/apg-fcb-phase2-ui`): `DraftClassEntry.favoredClassBonuses` replaced with `FavoredClassBonusSelection[]` indexed by class level, `ClassEntryCard` per-level picker (HP / skill rank / alternate), migration from legacy counter model, `setFavoredClassBonuses` and `toggleFavoredClass` slice actions updated, validation and pruning logic.
+
+Phase 3 (`ModifierPipelineService` wiring) remains. See `plans/favored-class-bonuses.md`.
 
 #### Note: Test suite needs memory / mock audit (2026-04-16)
 

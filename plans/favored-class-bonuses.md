@@ -2,7 +2,7 @@
 
 ## 2026-04-23
 
-## Status: Phase 1 COMPLETE (2026-04-24) — Phases 2 and 3 not yet started
+## Status: Phase 1 COMPLETE (2026-04-24) — Phase 2 COMPLETE (2026-04-25) — Phase 3 not yet started
 
 Single-PR rollout confirmed 2026-04-23. No phase split across PRs. Phases below are internal staging only — each phase is tested before the next begins, but all land together.
 
@@ -67,7 +67,7 @@ All three phases ship together in this branch. They execute sequentially so each
 
 ### Phase 1 — Data
 
-- Define `FavoredClassBonusOption` type
+- Define `FavoredClassBonusEntry` type
 - Scrape all 36 races × ~30 classes → static TS files under `src/data/favoredClassBonuses/`
 - `GameDataService.getFavoredClassBonuses(raceName, className)` API
 - `FirestoreGameDataConnector` + `StaticGameDataConnector` wire-through
@@ -89,7 +89,7 @@ All three phases ship together in this branch. They execute sequentially so each
 ### Phase 3 — Runtime mechanical effect wiring
 
 - `ModifierPipelineService` consumes selected alternates and applies effects
-- Structured `mechanicalEffect` field added to `FavoredClassBonusOption` (optional — many alternates remain flavor-only)
+- Structured `mechanicalEffect` field added to `FavoredClassBonusEntry` (optional — many alternates remain flavor-only)
 - Tested per class effect: DR, bonus rage rounds, natural armor, spell-slot gains, etc.
 - Player-visible effect on character sheet where applicable
 
@@ -102,7 +102,7 @@ All three phases ship together in this branch. They execute sequentially so each
 `src/types/favoredClassBonuses.ts` — new file, single interface:
 
 ```typescript
-export interface FavoredClassBonusOption extends DataQualityFields {
+export interface FavoredClassBonusEntry extends DataQualityFields {
   id: string; // 'dwarf-fighter', 'dwarf-paladin-concentration', etc.
   raceName: string; // matches ExpandedRaceData.name exactly
   className: string; // matches ExpandedClassData.name exactly
@@ -136,7 +136,7 @@ src/data/favoredClassBonuses/
   ...                   # one file per race, ~37 files total
 ```
 
-Each race file exports a single named constant — e.g., `DWARF_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[]`. `index.ts` concatenates into `ALL_FAVORED_CLASS_BONUSES`.
+Each race file exports a single named constant — e.g., `DWARF_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[]`. `index.ts` concatenates into `ALL_FAVORED_CLASS_BONUSES`.
 
 ### Doc ID strategy
 
@@ -178,7 +178,7 @@ static async getFavoredClassBonuses(
   raceName: string,
   className: string,
   context?: QueryContext,
-): Promise<FavoredClassBonusOption[]>;
+): Promise<FavoredClassBonusEntry[]>;
 ```
 
 Connector interface additions:
@@ -189,7 +189,7 @@ getFavoredClassBonuses(
   raceName: string,
   className: string,
   context: QueryContext,
-): Promise<FavoredClassBonusOption[]>;
+): Promise<FavoredClassBonusEntry[]>;
 ```
 
 Both `FirestoreGameDataConnector` and `StaticGameDataConnector` implement. Firestore query: `where('raceName', '==', raceName).where('className', '==', className)`.
@@ -225,7 +225,7 @@ Wired into `scripts/db/seedAll.ts` execution order — between `seedRaces` and `
 2. Each scraper agent receives:
    - One race name and its d20pfsrd URL
    - The target TS file path (e.g., `src/data/favoredClassBonuses/dwarf.ts`)
-   - The TypeScript shape (copy of `FavoredClassBonusOption`)
+   - The TypeScript shape (copy of `FavoredClassBonusEntry`)
    - Source code parse rules
    - The short-name synthesis guide
 3. Scraper fetches the page, extracts the "Favored Class Options" section, produces one TS file with one array.
@@ -287,10 +287,10 @@ UI: `ClassEntryCard` renders a list of rows (one per class level) with a picker 
 
 ## Phase 3 Preview
 
-Structured mechanical effect model. Add to `FavoredClassBonusOption`:
+Structured mechanical effect model. `mechanicalEffect` already ships as a **required** field on `FavoredClassBonusEntry` (typed as `FavoredClassMechanicalEffect | null`). Phase 3 wires `ModifierPipelineService` to consume it. Add to `FavoredClassBonusEntry`:
 
 ```typescript
-mechanicalEffect?: FavoredClassMechanicalEffect;
+mechanicalEffect: FavoredClassMechanicalEffect | null;
 
 type FavoredClassMechanicalEffect =
   | { type: 'dr'; amount: string; damageType: string; per: number }    // +DR/evil per N levels
@@ -310,7 +310,7 @@ type FavoredClassMechanicalEffect =
 1. ~~Write this plan~~ — COMPLETE
 2. ~~Write scraping plan `plans/data-scraping/favored-class-bonuses-database.md`~~ — COMPLETE
 3. ~~Mark reviews both plans; approves before any code ships~~ — COMPLETE
-4. ~~Add `FavoredClassBonusOption` type + barrel export~~ — COMPLETE (commit `29bdde7`)
+4. ~~Add `FavoredClassBonusEntry` type + barrel export~~ — COMPLETE (commit `29bdde7`)
 5. ~~Scrape core 7 races by hand~~ — COMPLETE (included in scraped set)
 6. ~~Dispatch scraper agents for the remaining ~30 races in parallel~~ — COMPLETE (36 races total)
 7. ~~Write `src/data/favoredClassBonuses/index.ts` barrel~~ — COMPLETE
@@ -323,7 +323,7 @@ type FavoredClassMechanicalEffect =
 14. ~~Run typecheck + tests (`--maxWorkers=2` per WSL feedback)~~ — COMPLETE (typecheck clean, 77 passing)
 15. ~~Update `plans/implementation-plan.md` status row~~ — COMPLETE
 16. ~~Update `plans/character-system-redesign.md` to reverse the Rissi race decision~~ — COMPLETE
-17. Commit, push, open PR — IN PROGRESS
+17. ~~Commit, push, open PR~~ — COMPLETE (PR `MW/apg-fcb-phase2-ui`)
 
 ---
 
