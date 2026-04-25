@@ -841,6 +841,7 @@ export class FirestoreGameDataConnector implements GameDataConnector {
       try {
         const q = query(
           collection(db, 'favoredClassBonuses'),
+          where('visibility', '==', 'global'),
           where('raceName', '==', raceName),
           where('className', '==', className),
         );
