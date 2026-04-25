@@ -866,6 +866,40 @@ describe('characterEntrySlice — templates', () => {
       state = reducer(state, removeTemplate('does-not-exist'));
       expect(state.draft.templates).toHaveLength(1);
     });
+
+    it('sweeps companions granted by the removed template', () => {
+      let state = reducer(makeInitialState(), addTemplate(makeTemplate('tpl-1')));
+      state = reducer(
+        state,
+        addCompanion({
+          instanceId: 'comp-1',
+          sourceEntryId: 'wolf',
+          name: 'Shadow',
+          grantedBy: { type: 'template', templateId: 'tpl-1' },
+          effectiveProgressionLevel: 5,
+        }),
+      );
+      state = reducer(state, removeTemplate('tpl-1'));
+      expect(state.draft.templates).toHaveLength(0);
+      expect(state.draft.companions).toHaveLength(0);
+    });
+
+    it('does not sweep companions granted by a different template', () => {
+      let state = reducer(makeInitialState(), addTemplate(makeTemplate('tpl-1')));
+      state = reducer(state, addTemplate(makeTemplate('tpl-2')));
+      state = reducer(
+        state,
+        addCompanion({
+          instanceId: 'comp-1',
+          sourceEntryId: 'wolf',
+          name: 'Shadow',
+          grantedBy: { type: 'template', templateId: 'tpl-2' },
+          effectiveProgressionLevel: 5,
+        }),
+      );
+      state = reducer(state, removeTemplate('tpl-1'));
+      expect(state.draft.companions).toHaveLength(1);
+    });
   });
 
   describe('updateTemplate', () => {
