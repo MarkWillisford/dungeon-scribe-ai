@@ -1,17 +1,27 @@
 import {
   abilityTotal,
   abilityModifier,
+  getAbilityModifier,
   formatModifier,
   formatBABString,
   computeTotalBAB,
+  computeTotalBABFractional,
   computeBaseFort,
   computeBaseRef,
   computeBaseWill,
+  computeBaseFortFractional,
+  computeBaseRefFractional,
+  computeBaseWillFractional,
   computeECL,
   computeMaxHP,
+  computeFeatSlots,
   type ClassDataMap,
 } from '@/utils/characterComputations';
-import { type DraftClassEntry, type DraftTemplateEntry } from '@/types/characterDraft';
+import {
+  type DraftClassEntry,
+  type DraftTemplateEntry,
+  type DraftAbilityScore,
+} from '@/types/characterDraft';
 import { BonusType } from '@/types/base';
 import { ALL_EXPANDED_CLASSES } from '@/data/classes/index';
 
@@ -363,5 +373,247 @@ describe('computeMaxHP', () => {
 
   it('does not add favored class HP when not set', () => {
     expect(computeMaxHP([cls('Fighter', 2)], 0, TEST_CLASS_MAP)).toBe(10 + 6);
+  });
+});
+
+// ---- getAbilityModifier ----
+
+function score(base: number): DraftAbilityScore {
+  return { base, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 };
+}
+
+describe('getAbilityModifier', () => {
+  it('returns correct modifier from a DraftAbilityScore record', () => {
+    const abilities: Record<'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha', DraftAbilityScore> = {
+      str: score(16),
+      dex: score(12),
+      con: score(14),
+      int: score(10),
+      wis: score(8),
+      cha: score(7),
+    };
+    expect(getAbilityModifier(abilities, 'str')).toBe(3);
+    expect(getAbilityModifier(abilities, 'dex')).toBe(1);
+    expect(getAbilityModifier(abilities, 'wis')).toBe(-1);
+    expect(getAbilityModifier(abilities, 'cha')).toBe(-2);
+  });
+
+  it('includes racial bonus in the total', () => {
+    const abilities: Record<'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha', DraftAbilityScore> = {
+      str: { base: 14, racial: 2, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
+      dex: score(10),
+      con: score(10),
+      int: score(10),
+      wis: score(10),
+      cha: score(10),
+    };
+    expect(getAbilityModifier(abilities, 'str')).toBe(3); // total 16 → +3
+  });
+});
+
+// ---- computeTotalBAB — all BAB progressions ----
+
+describe('computeTotalBAB — Low BAB', () => {
+  it('computes Low BAB (Wizard): floor(level * 0.5)', () => {
+    expect(computeTotalBAB([cls('Wizard', 4)], TEST_CLASS_MAP)).toBe(2);
+    expect(computeTotalBAB([cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(2);
+    expect(computeTotalBAB([cls('Wizard', 10)], TEST_CLASS_MAP)).toBe(5);
+  });
+
+  it('mixes Full and Low BAB correctly', () => {
+    // Fighter 5 (BAB 5) + Wizard 4 (BAB 2) = 7
+    expect(computeTotalBAB([cls('Fighter', 5), cls('Wizard', 4)], TEST_CLASS_MAP)).toBe(7);
+  });
+
+  it('falls back to Medium (0.75) for unrecognised BABProgression value', () => {
+    const badMap: ClassDataMap = new Map([
+      [
+        'oddclass',
+        {
+          name: 'OddClass',
+          babProgression: 'SomeBadValue' as never,
+          saves: { fortitude: 'Poor', reflex: 'Poor', will: 'Poor' },
+          hitDie: 8,
+          skillRanksPerLevel: 2,
+          classSkills: [],
+          spellcasting: { type: 'None' },
+        } as never,
+      ],
+    ]);
+    expect(computeTotalBAB([cls('OddClass', 4)], badMap)).toBe(3);
+  });
+});
+
+// ---- computeTotalBABFractional ----
+
+describe('computeTotalBABFractional', () => {
+  it('returns 0 for empty class list', () => {
+    expect(computeTotalBABFractional([], TEST_CLASS_MAP)).toBe(0);
+  });
+
+  it('Full BAB matches standard (Fighter)', () => {
+    expect(computeTotalBABFractional([cls('Fighter', 5)], TEST_CLASS_MAP)).toBe(5);
+  });
+
+  it('Medium BAB floors once at end (Cleric)', () => {
+    // Cleric 5: raw = 5 * 0.75 = 3.75 → floor = 3 (same as standard here)
+    expect(computeTotalBABFractional([cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(3);
+  });
+
+  it('Low BAB floors once at end (Wizard)', () => {
+    // Wizard 5: raw = 5 * 0.5 = 2.5 → floor = 2
+    expect(computeTotalBABFractional([cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(2);
+  });
+
+  it('multiclass: sums fractions then floors once', () => {
+    // Cleric 1 + Wizard 1: 0.75 + 0.5 = 1.25 → floor = 1
+    // standard would give floor(0.75) + floor(0.5) = 0 + 0 = 0
+    expect(computeTotalBABFractional([cls('Cleric', 1), cls('Wizard', 1)], TEST_CLASS_MAP)).toBe(1);
+  });
+
+  it('defaults unknown class to Medium (0.75) fractional rate', () => {
+    // Unknown 4: raw = 4 * 0.75 = 3.0 → floor = 3
+    expect(computeTotalBABFractional([cls('UnknownClass', 4)], TEST_CLASS_MAP)).toBe(3);
+  });
+
+  it('falls back to 0.75 for unrecognised BABProgression value in fractional mode', () => {
+    const badMap: ClassDataMap = new Map([
+      [
+        'oddclass',
+        {
+          name: 'OddClass',
+          babProgression: 'SomeBadValue' as never,
+          saves: { fortitude: 'Poor', reflex: 'Poor', will: 'Poor' },
+          hitDie: 8,
+          skillRanksPerLevel: 2,
+          classSkills: [],
+          spellcasting: { type: 'None' },
+        } as never,
+      ],
+    ]);
+    // 4 * 0.75 = 3.0 → floor = 3
+    expect(computeTotalBABFractional([cls('OddClass', 4)], badMap)).toBe(3);
+  });
+});
+
+// ---- fractional saves ----
+
+describe('computeBaseFortFractional', () => {
+  it('returns 0 for empty class list', () => {
+    expect(computeBaseFortFractional([], TEST_CLASS_MAP)).toBe(0);
+  });
+
+  it('Good Fort: 2 + floor(level/2) (Cleric)', () => {
+    expect(computeBaseFortFractional([cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(4);
+  });
+
+  it('Poor Fort: floor(level/3) (Wizard)', () => {
+    expect(computeBaseFortFractional([cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(1);
+  });
+
+  it('multiclass: adds +2 once, sums fractions then floors', () => {
+    // Cleric 1 (Good) + Wizard 1 (Poor): raw = 1/2 + 1/3 = 0.833 → floor = 0; +2 → 2
+    expect(computeBaseFortFractional([cls('Cleric', 1), cls('Wizard', 1)], TEST_CLASS_MAP)).toBe(2);
+  });
+});
+
+describe('computeBaseRefFractional', () => {
+  it('returns 0 for empty class list', () => {
+    expect(computeBaseRefFractional([], TEST_CLASS_MAP)).toBe(0);
+  });
+
+  it('Good Ref: 2 + floor(level/2) (Rogue)', () => {
+    expect(computeBaseRefFractional([cls('Rogue', 4)], TEST_CLASS_MAP)).toBe(4);
+  });
+
+  it('Poor Ref: floor(level/3) (Cleric)', () => {
+    expect(computeBaseRefFractional([cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(1);
+  });
+});
+
+describe('computeBaseWillFractional', () => {
+  it('returns 0 for empty class list', () => {
+    expect(computeBaseWillFractional([], TEST_CLASS_MAP)).toBe(0);
+  });
+
+  it('Good Will: 2 + floor(level/2) (Cleric)', () => {
+    expect(computeBaseWillFractional([cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(4);
+  });
+
+  it('Poor Will: floor(level/3) (Fighter)', () => {
+    expect(computeBaseWillFractional([cls('Fighter', 5)], TEST_CLASS_MAP)).toBe(1);
+  });
+});
+
+// ---- unknown class fallbacks in saves ----
+
+describe('save computations — unknown class fallback', () => {
+  it('computeBaseFort defaults unknown class to Poor (floor(level/3))', () => {
+    expect(computeBaseFort([cls('UnknownClass', 3)], TEST_CLASS_MAP)).toBe(1);
+  });
+
+  it('computeBaseRef defaults unknown class to Poor (floor(level/3))', () => {
+    expect(computeBaseRef([cls('UnknownClass', 3)], TEST_CLASS_MAP)).toBe(1);
+  });
+
+  it('computeBaseWill defaults unknown class to Poor (floor(level/3))', () => {
+    expect(computeBaseWill([cls('UnknownClass', 3)], TEST_CLASS_MAP)).toBe(1);
+  });
+
+  it('computeBaseFortFractional defaults unknown class to Poor (level/3)', () => {
+    // Unknown 3: raw = 3/3 = 1.0 → floor = 1; no Good save → 0 + 1 = 1
+    expect(computeBaseFortFractional([cls('UnknownClass', 3)], TEST_CLASS_MAP)).toBe(1);
+  });
+
+  it('computeBaseRefFractional defaults unknown class to Poor (level/3)', () => {
+    expect(computeBaseRefFractional([cls('UnknownClass', 3)], TEST_CLASS_MAP)).toBe(1);
+  });
+
+  it('computeBaseWillFractional defaults unknown class to Poor (level/3)', () => {
+    expect(computeBaseWillFractional([cls('UnknownClass', 3)], TEST_CLASS_MAP)).toBe(1);
+  });
+});
+
+// ---- computeMaxHP — unknown class fallback ----
+
+describe('computeMaxHP — unknown class fallback', () => {
+  it('defaults hit die to 8 for unknown class', () => {
+    // UnknownClass level 2: first level = 8, second level = floor(8/2)+1 = 5, con 0 → 13
+    expect(computeMaxHP([cls('UnknownClass', 2)], 0, TEST_CLASS_MAP)).toBe(13);
+  });
+});
+
+// ---- computeFeatSlots ----
+
+describe('computeFeatSlots', () => {
+  it('returns one slot per every 2 HD', () => {
+    // 4 HD → slots at HD 1, 3
+    const slots = computeFeatSlots([cls('Fighter', 4)], 'Human');
+    expect(slots.filter((s) => s.source === 'level')).toHaveLength(2);
+  });
+
+  it('adds a racial bonus feat for Human', () => {
+    const slots = computeFeatSlots([cls('Fighter', 2)], 'Human');
+    expect(slots.some((s) => s.source === 'racial')).toBe(true);
+  });
+
+  it('does not add a racial bonus feat for non-Human races', () => {
+    const slots = computeFeatSlots([cls('Fighter', 2)], 'Elf');
+    expect(slots.every((s) => s.source === 'level')).toBe(true);
+  });
+
+  it('sorts same-level slots by id when levels tie', () => {
+    // Human at level 1 gets both a level feat (hd1) and a racial feat (availableAtLevel: 1)
+    // Both are at level 1 — the sort's || branch fires
+    const slots = computeFeatSlots([cls('Fighter', 1)], 'Human');
+    const level1Slots = slots.filter((s) => s.availableAtLevel === 1);
+    expect(level1Slots.length).toBeGreaterThanOrEqual(2);
+    for (let i = 1; i < level1Slots.length; i++) {
+      expect(level1Slots[i].id.localeCompare(level1Slots[i - 1].id)).toBeGreaterThanOrEqual(0);
+    }
+  });
+
+  it('returns empty array for zero-level character', () => {
+    expect(computeFeatSlots([], 'Human')).toHaveLength(1); // just the racial bonus
   });
 });
