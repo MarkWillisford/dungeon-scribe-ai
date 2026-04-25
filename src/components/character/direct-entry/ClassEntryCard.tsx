@@ -177,9 +177,13 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
       !raceName || !entry.className
         ? Promise.resolve([])
         : GameDataService.getFavoredClassBonuses(raceName, entry.className);
-    promise.then((results) => {
-      if (!cancelled) setAlternates(results as FavoredClassBonusEntry[]);
-    });
+    promise
+      .then((results) => {
+        if (!cancelled) setAlternates(results as FavoredClassBonusEntry[]);
+      })
+      .catch((e) => {
+        if (!cancelled) console.error('Failed to load favored class bonuses:', e);
+      });
     return () => {
       cancelled = true;
     };
