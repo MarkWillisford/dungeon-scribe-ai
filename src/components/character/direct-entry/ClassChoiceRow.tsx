@@ -15,40 +15,12 @@ import {
 import { type ClassChoice } from '@/types/classes';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { GameDataService } from '@/services/GameDataService';
+import {
+  effectiveLevelFromDraftClass,
+  pickerFilterFromDraftClass,
+} from '@/services/CompanionService';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import type { DraftClassEntry } from '@/types/characterDraft';
-
-// ---- Companion intercept helpers -------------------------------------------
-//
-// When the selected option for a class choice is 'animal_companion', we open
-// a follow-up picker so the player chooses a creature form. Effective level
-// and picker filter are derived from the granting class.
-
-function effectiveLevelFromDraftClass(cls: DraftClassEntry | undefined): number {
-  if (!cls) return 0;
-  const archetypes = cls.archetypeName ? [cls.archetypeName] : [];
-  switch (cls.className) {
-    case 'Druid':
-    case 'Hunter':
-    case 'Cavalier':
-      return cls.level;
-    case 'Ranger':
-      return Math.max(1, cls.level - 3);
-    case 'Paladin':
-      return Math.max(1, cls.level - 4);
-    case 'Inquisitor':
-      return archetypes.includes('Sacred Huntsmaster') ? cls.level : 0;
-    case 'Barbarian':
-      return archetypes.includes('Mad Dog') ? Math.max(1, cls.level - 2) : 0;
-    default:
-      return 0;
-  }
-}
-
-function pickerFilterFromDraftClass(cls: DraftClassEntry | undefined): CompanionPickerFilter {
-  if (!cls) return 'full';
-  return cls.className === 'Cavalier' || cls.className === 'Paladin' ? 'mountsOnly' : 'full';
-}
 
 function makeInstanceId(): string {
   // React Native doesn't ship crypto.randomUUID; this is good enough for

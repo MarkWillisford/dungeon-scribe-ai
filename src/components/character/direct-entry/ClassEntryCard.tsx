@@ -4,7 +4,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { ClassChoiceRow } from './ClassChoiceRow';
 import { CompanionCard } from './CompanionCard';
-import { CompanionPickerSheet, type CompanionPickerFilter } from './CompanionPickerSheet';
+import { CompanionPickerSheet } from './CompanionPickerSheet';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   removeClass,
@@ -21,6 +21,10 @@ import { type DraftClassEntry, type SpellcastingAdvancement } from '@/types/char
 import { GameDataService } from '@/services/GameDataService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { lookupClassData } from '@/utils/characterComputations';
+import {
+  effectiveLevelFromDraftClass,
+  pickerFilterFromDraftClass,
+} from '@/services/CompanionService';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { type ClassChoice } from '@/types/classes';
 import { ArchetypePickerSheet } from './ArchetypePickerSheet';
@@ -38,32 +42,6 @@ function isMutuallyExcludedFilled(featureName: string, classChoices: ClassChoice
     }
   }
   return false;
-}
-
-// ---- Companion helpers (mirror ClassChoiceRow for consistency) -------------
-
-function effectiveLevelFromDraftClass(entry: DraftClassEntry): number {
-  const archetypes = entry.archetypeName ? [entry.archetypeName] : [];
-  switch (entry.className) {
-    case 'Druid':
-    case 'Hunter':
-    case 'Cavalier':
-      return entry.level;
-    case 'Ranger':
-      return Math.max(1, entry.level - 3);
-    case 'Paladin':
-      return Math.max(1, entry.level - 4);
-    case 'Inquisitor':
-      return archetypes.includes('Sacred Huntsmaster') ? entry.level : 0;
-    case 'Barbarian':
-      return archetypes.includes('Mad Dog') ? Math.max(1, entry.level - 2) : 0;
-    default:
-      return 0;
-  }
-}
-
-function pickerFilterForClass(entry: DraftClassEntry): CompanionPickerFilter {
-  return entry.className === 'Cavalier' || entry.className === 'Paladin' ? 'mountsOnly' : 'full';
 }
 
 // Class + archetype combos that may grant multiple companions from a single
@@ -916,7 +894,7 @@ function CompanionSection({ entry }: CompanionSectionProps) {
       <CompanionPickerSheet
         visible={addPickerOpen}
         title="Choose Companion"
-        pickerFilter={pickerFilterForClass(entry)}
+        pickerFilter={pickerFilterFromDraftClass(entry)}
         onSelect={handleAddCompanion}
         onClose={() => setAddPickerOpen(false)}
       />
