@@ -228,6 +228,11 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
         {remaining === 0 && (
           <Text style={[fcbStyles.remaining, { color: colors.text.tertiary }]}>All allocated</Text>
         )}
+        {remaining < 0 && (
+          <Text style={[fcbStyles.remaining, { color: colors.error.DEFAULT }]}>
+            {Math.abs(remaining)} over-allocated
+          </Text>
+        )}
       </View>
 
       {Array.from({ length: entry.level }, (_, i) => {
