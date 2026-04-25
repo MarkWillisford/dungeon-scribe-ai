@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, Modal, FlatList, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
-import { InlinePicker, type PickerOption } from '@/components/ui/InlinePicker';
+import { InlinePicker } from '@/components/ui/InlinePicker';
 import { ClassChoiceRow } from './ClassChoiceRow';
 import { CompanionCard } from './CompanionCard';
 import { CompanionPickerSheet } from './CompanionPickerSheet';
@@ -172,11 +172,17 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
   const [altPickerLevel, setAltPickerLevel] = useState<number | null>(null);
 
   useEffect(() => {
-    if (!raceName || !entry.className) {
-      setAlternates([]);
-      return;
-    }
-    GameDataService.getFavoredClassBonuses(raceName, entry.className).then(setAlternates);
+    let cancelled = false;
+    const promise =
+      !raceName || !entry.className
+        ? Promise.resolve([])
+        : GameDataService.getFavoredClassBonuses(raceName, entry.className);
+    promise.then((results) => {
+      if (!cancelled) setAlternates(results as FavoredClassBonusOption[]);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [raceName, entry.className]);
 
   const selections = entry.favoredClassBonuses ?? [];
@@ -205,11 +211,8 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
     [dispatch, entry.id, selections],
   );
 
-  // Alt picker options for a given level row
-  const altPickerOptions: PickerOption[] = alternates.map((a) => ({
-    value: a.id,
-    label: a.shortName,
-  }));
+  // The level currently open in the alt picker modal (null = closed)
+  // altPickerLevel is already declared above as useState<number | null>(null)
 
   return (
     <View style={[fcbStyles.section, { borderTopColor: colors.border.DEFAULT }]}>
@@ -234,35 +237,39 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
         const isSkill = sel?.type === 'skill';
         const isAlt = sel?.type === 'alternate';
         const selectedAlt = isAlt
-          ? alternates.find((a) => a.id === (sel as { type: 'alternate'; optionId: string }).optionId)
+          ? alternates.find(
+              (a) => a.id === (sel as { type: 'alternate'; optionId: string }).optionId,
+            )
           : null;
 
         return (
           <View key={level} style={fcbStyles.levelRow}>
-            <Text style={[fcbStyles.levelLabel, { color: colors.text.tertiary }]}>
-              {level}
-            </Text>
+            <Text style={[fcbStyles.levelLabel, { color: colors.text.tertiary }]}>{level}</Text>
 
             {/* HP chip */}
             <Pressable
               onPress={() =>
-                isHp
-                  ? clearLevelSelection(level)
-                  : setLevelSelection(level, { level, type: 'hp' })
+                isHp ? clearLevelSelection(level) : setLevelSelection(level, { level, type: 'hp' })
               }
               style={[
                 fcbStyles.chip,
                 {
                   borderColor: isHp ? fantasy.gold : colors.border.DEFAULT,
                   backgroundColor: isHp
-                    ? isDark ? 'rgba(212,175,55,0.2)' : 'rgba(212,175,55,0.12)'
-                    : isDark ? colors.bg.tertiary : colors.bg.secondary,
+                    ? isDark
+                      ? 'rgba(212,175,55,0.2)'
+                      : 'rgba(212,175,55,0.12)'
+                    : isDark
+                      ? colors.bg.tertiary
+                      : colors.bg.secondary,
                 },
               ]}
               accessibilityLabel={`Level ${level}: take HP favored class bonus`}
               accessibilityState={{ selected: isHp }}
             >
-              <Text style={[fcbStyles.chipText, { color: isHp ? fantasy.gold : colors.text.secondary }]}>
+              <Text
+                style={[fcbStyles.chipText, { color: isHp ? fantasy.gold : colors.text.secondary }]}
+              >
                 HP
               </Text>
             </Pressable>
@@ -279,14 +286,23 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
                 {
                   borderColor: isSkill ? fantasy.gold : colors.border.DEFAULT,
                   backgroundColor: isSkill
-                    ? isDark ? 'rgba(212,175,55,0.2)' : 'rgba(212,175,55,0.12)'
-                    : isDark ? colors.bg.tertiary : colors.bg.secondary,
+                    ? isDark
+                      ? 'rgba(212,175,55,0.2)'
+                      : 'rgba(212,175,55,0.12)'
+                    : isDark
+                      ? colors.bg.tertiary
+                      : colors.bg.secondary,
                 },
               ]}
               accessibilityLabel={`Level ${level}: take Skill favored class bonus`}
               accessibilityState={{ selected: isSkill }}
             >
-              <Text style={[fcbStyles.chipText, { color: isSkill ? fantasy.gold : colors.text.secondary }]}>
+              <Text
+                style={[
+                  fcbStyles.chipText,
+                  { color: isSkill ? fantasy.gold : colors.text.secondary },
+                ]}
+              >
                 Skill
               </Text>
             </Pressable>
@@ -297,7 +313,11 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
                 onPress={() =>
                   isAlt && selectedAlt?.id === alternates[0].id
                     ? clearLevelSelection(level)
-                    : setLevelSelection(level, { level, type: 'alternate', optionId: alternates[0].id })
+                    : setLevelSelection(level, {
+                        level,
+                        type: 'alternate',
+                        optionId: alternates[0].id,
+                      })
                 }
                 style={[
                   fcbStyles.chip,
@@ -305,15 +325,22 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
                   {
                     borderColor: isAlt ? fantasy.gold : colors.border.DEFAULT,
                     backgroundColor: isAlt
-                      ? isDark ? 'rgba(212,175,55,0.2)' : 'rgba(212,175,55,0.12)'
-                      : isDark ? colors.bg.tertiary : colors.bg.secondary,
+                      ? isDark
+                        ? 'rgba(212,175,55,0.2)'
+                        : 'rgba(212,175,55,0.12)'
+                      : isDark
+                        ? colors.bg.tertiary
+                        : colors.bg.secondary,
                   },
                 ]}
                 accessibilityLabel={`Level ${level}: take alternate favored class bonus: ${alternates[0].shortName}`}
                 accessibilityState={{ selected: isAlt }}
               >
                 <Text
-                  style={[fcbStyles.chipText, { color: isAlt ? fantasy.gold : colors.text.secondary }]}
+                  style={[
+                    fcbStyles.chipText,
+                    { color: isAlt ? fantasy.gold : colors.text.secondary },
+                  ]}
                   numberOfLines={1}
                 >
                   {alternates[0].shortName}
@@ -331,38 +358,123 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
                     {
                       borderColor: isAlt ? fantasy.gold : colors.border.DEFAULT,
                       backgroundColor: isAlt
-                        ? isDark ? 'rgba(212,175,55,0.2)' : 'rgba(212,175,55,0.12)'
-                        : isDark ? colors.bg.tertiary : colors.bg.secondary,
+                        ? isDark
+                          ? 'rgba(212,175,55,0.2)'
+                          : 'rgba(212,175,55,0.12)'
+                        : isDark
+                          ? colors.bg.tertiary
+                          : colors.bg.secondary,
                     },
                   ]}
                   accessibilityLabel={`Level ${level}: choose alternate favored class bonus`}
                 >
                   <Text
-                    style={[fcbStyles.chipText, { color: isAlt ? fantasy.gold : colors.text.secondary }]}
+                    style={[
+                      fcbStyles.chipText,
+                      { color: isAlt ? fantasy.gold : colors.text.secondary },
+                    ]}
                     numberOfLines={1}
                   >
                     {isAlt && selectedAlt ? selectedAlt.shortName : 'Alt ▾'}
                   </Text>
                 </Pressable>
 
-                {/* Picker modal fires when altPickerLevel === level */}
-                {altPickerLevel === level && (
-                  <InlinePicker
-                    value={isAlt ? (sel as { type: 'alternate'; optionId: string }).optionId : ''}
-                    options={altPickerOptions}
-                    onValueChange={(id) => {
-                      setLevelSelection(level, { level, type: 'alternate', optionId: id });
-                      setAltPickerLevel(null);
-                    }}
-                    placeholder="Choose alternate..."
-                    style={{ display: 'none' }}
-                  />
-                )}
+                {/* Nothing extra needed here — the modal below is driven by altPickerLevel */}
               </>
             )}
           </View>
         );
       })}
+
+      {/* Alternate FCB picker modal — opened imperatively by the "Alt ▾" chip */}
+      <Modal
+        visible={altPickerLevel !== null}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setAltPickerLevel(null)}
+      >
+        <Pressable style={fcbStyles.modalBackdrop} onPress={() => setAltPickerLevel(null)}>
+          <View
+            style={[
+              fcbStyles.modalSheet,
+              {
+                backgroundColor: isDark ? colors.bg.secondary : colors.bg.primary,
+                borderColor: fantasy.bronze,
+              },
+            ]}
+          >
+            <Text
+              style={[fcbStyles.modalTitle, { color: isDark ? fantasy.gold : fantasy.darkWood }]}
+            >
+              Alternate Favored Class Bonus
+            </Text>
+            <FlatList
+              data={alternates}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => {
+                const currentSel =
+                  altPickerLevel !== null ? getSelectionForLevel(altPickerLevel) : null;
+                const isSelected =
+                  currentSel?.type === 'alternate' &&
+                  (currentSel as { type: 'alternate'; optionId: string }).optionId === item.id;
+                return (
+                  <Pressable
+                    onPress={() => {
+                      if (altPickerLevel !== null) {
+                        setLevelSelection(altPickerLevel, {
+                          level: altPickerLevel,
+                          type: 'alternate',
+                          optionId: item.id,
+                        });
+                      }
+                      setAltPickerLevel(null);
+                    }}
+                    style={[
+                      fcbStyles.modalOption,
+                      {
+                        borderBottomColor: colors.border.DEFAULT,
+                        backgroundColor: isSelected
+                          ? isDark
+                            ? 'rgba(212,175,55,0.15)'
+                            : 'rgba(140,90,40,0.08)'
+                          : 'transparent',
+                      },
+                    ]}
+                    accessibilityRole="menuitem"
+                    accessibilityState={{ selected: isSelected }}
+                  >
+                    <Text
+                      style={[
+                        fcbStyles.modalOptionText,
+                        {
+                          color: isSelected
+                            ? isDark
+                              ? fantasy.gold
+                              : fantasy.darkWood
+                            : colors.text.primary,
+                          fontWeight: isSelected ? '700' : '400',
+                        },
+                      ]}
+                    >
+                      {item.shortName}
+                    </Text>
+                    {isSelected && (
+                      <Text
+                        style={[
+                          fcbStyles.modalCheckmark,
+                          { color: isDark ? fantasy.gold : fantasy.darkWood },
+                        ]}
+                      >
+                        ✓
+                      </Text>
+                    )}
+                  </Pressable>
+                );
+              }}
+            />
+          </View>
+        </Pressable>
+      </Modal>
 
       {/* Accumulated alternate effects summary */}
       {selections.some((s) => s.type === 'alternate') &&
@@ -371,9 +483,7 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
             <Text style={[fcbStyles.summaryName, { color: colors.text.secondary }]}>
               {eff.shortName}:
             </Text>
-            <Text style={[fcbStyles.summaryValue, { color: fantasy.bronze }]}>
-              {eff.display}
-            </Text>
+            <Text style={[fcbStyles.summaryValue, { color: fantasy.bronze }]}>{eff.display}</Text>
           </View>
         ))}
     </View>
@@ -447,6 +557,45 @@ const fcbStyles = StyleSheet.create({
     fontSize: 11,
     fontStyle: 'italic',
     flex: 1,
+  },
+  modalBackdrop: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+  },
+  modalSheet: {
+    width: '100%',
+    maxHeight: 400,
+    borderRadius: 10,
+    borderWidth: 1,
+    overflow: 'hidden',
+  },
+  modalTitle: {
+    fontFamily: 'Cinzel',
+    fontSize: 14,
+    fontWeight: '700',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  modalOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  modalOptionText: {
+    flex: 1,
+    fontFamily: 'LibreBaskerville',
+    fontSize: 16,
+  },
+  modalCheckmark: {
+    fontSize: 16,
+    fontWeight: '700',
   },
 });
 
@@ -919,9 +1068,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
         </Pressable>
       )}
 
-      {isBaseClass && entry.isFavoredClass && (
-        <FavoredClassBonusSection entry={entry} />
-      )}
+      {isBaseClass && entry.isFavoredClass && <FavoredClassBonusSection entry={entry} />}
 
       {/* Class choices */}
       {hasChoices && (
