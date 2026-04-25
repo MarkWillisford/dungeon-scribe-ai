@@ -70,6 +70,7 @@ export class DraftValidationService {
       ...this.checkTraitCount(draft, ruleset, warnId),
       ...this.checkSkillRanks(draft, totalHD, intMod, warnId, classDataMap),
       ...this.checkSpellcastingAdvancement(draft, warnId, classDataMap),
+      ...this.checkFavoredClassBonuses(draft, warnId),
     ];
   }
 
@@ -524,6 +525,30 @@ export class DraftValidationService {
       }
     }
 
+    return w;
+  }
+
+  // ---- Favored class bonuses ----
+
+  private static checkFavoredClassBonuses(
+    draft: CharacterDraft,
+    warnId: WarnId,
+  ): EntryValidationWarning[] {
+    const w: EntryValidationWarning[] = [];
+    for (const cls of draft.classes) {
+      if (!cls.isFavoredClass) continue;
+      const allocated = cls.favoredClassBonuses?.length ?? 0;
+      if (allocated < cls.level) {
+        w.push(
+          warn(
+            warnId(`fcb-unallocated-${cls.id}`),
+            'classes',
+            `${cls.className}: ${cls.level - allocated} favored class bonus${cls.level - allocated === 1 ? '' : 'es'} unallocated.`,
+            'Assign each favored class level to HP, Skill, or an alternate on the Classes tab.',
+          ),
+        );
+      }
+    }
     return w;
   }
 }

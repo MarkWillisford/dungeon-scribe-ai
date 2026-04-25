@@ -783,6 +783,55 @@ describe('DraftValidationService', () => {
     });
   });
 
+  describe('checkFavoredClassBonuses', () => {
+    it('warns when favored class has fewer selections than class level', async () => {
+      const draft = blankDraft();
+      draft.classes[0].isFavoredClass = true;
+      draft.classes[0].level = 4;
+      draft.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'skill' as const },
+      ];
+      const warnings = await DraftValidationService.validate(draft, DEFAULT_RULESET, TEST_CLASS_MAP);
+      const fcbWarning = warnings.find((w) => w.id.includes('fcb-unallocated'));
+      expect(fcbWarning).toBeDefined();
+      expect(fcbWarning?.message).toContain('2 favored class bonuses unallocated');
+    });
+
+    it('does not warn when all levels are allocated', async () => {
+      const draft = blankDraft();
+      draft.classes[0].isFavoredClass = true;
+      draft.classes[0].level = 2;
+      draft.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'skill' as const },
+      ];
+      draft.levelIncrementSlots = [{ atHD: 4, ability: 'str' }];
+      draft.skills = { perception: { ranks: 2, misc: 0 } };
+      draft.traits = [
+        { id: '1', traitName: 'Reactionary', category: 'Combat', description: '' },
+        { id: '2', traitName: 'Magical Knack', category: 'Magic', description: '' },
+      ];
+      const warnings = await DraftValidationService.validate(draft, DEFAULT_RULESET, TEST_CLASS_MAP);
+      expect(warnings.filter((w) => w.id.includes('fcb-unallocated'))).toHaveLength(0);
+    });
+
+    it('does not warn when class is not favored', async () => {
+      const draft = blankDraft();
+      draft.classes[0].isFavoredClass = false;
+      draft.classes[0].level = 4;
+      const warnings = await DraftValidationService.validate(draft, DEFAULT_RULESET, TEST_CLASS_MAP);
+      expect(warnings.filter((w) => w.id.includes('fcb-unallocated'))).toHaveLength(0);
+    });
+
+    it('does not warn when favoredClassBonuses is absent and class is not favored', async () => {
+      const draft = blankDraft();
+      // default blankDraft has no isFavoredClass set
+      const warnings = await DraftValidationService.validate(draft, DEFAULT_RULESET, TEST_CLASS_MAP);
+      expect(warnings.filter((w) => w.id.includes('fcb-unallocated'))).toHaveLength(0);
+    });
+  });
+
   describe('complete valid character', () => {
     it('returns empty warnings for a well-formed character', async () => {
       (PrerequisiteService.checkPrerequisites as jest.Mock).mockResolvedValue({

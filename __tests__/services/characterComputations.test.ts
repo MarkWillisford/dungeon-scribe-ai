@@ -357,7 +357,11 @@ describe('computeMaxHP', () => {
     const fighter = {
       ...cls('Fighter', 3),
       isFavoredClass: true,
-      favoredClassBonuses: { hp: 2, skillRank: 1 },
+      favoredClassBonuses: [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'hp' as const },
+        { level: 3, type: 'skill' as const },
+      ],
     };
     // Base: 10 + 6 + 6 = 22, con 0, favored HP +2 = 24
     expect(computeMaxHP([fighter], 0, TEST_CLASS_MAP)).toBe(24);
@@ -367,7 +371,11 @@ describe('computeMaxHP', () => {
     const fighter = {
       ...cls('Fighter', 3),
       isFavoredClass: true,
-      favoredClassBonuses: { hp: 0, skillRank: 3 },
+      favoredClassBonuses: [
+        { level: 1, type: 'skill' as const },
+        { level: 2, type: 'skill' as const },
+        { level: 3, type: 'skill' as const },
+      ],
     };
     expect(computeMaxHP([fighter], 0, TEST_CLASS_MAP)).toBe(10 + 6 + 6);
   });

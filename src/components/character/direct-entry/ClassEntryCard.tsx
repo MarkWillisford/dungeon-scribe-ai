@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
-import { InlinePicker } from '@/components/ui/InlinePicker';
+import { InlinePicker, type PickerOption } from '@/components/ui/InlinePicker';
 import { ClassChoiceRow } from './ClassChoiceRow';
 import { CompanionCard } from './CompanionCard';
 import { CompanionPickerSheet } from './CompanionPickerSheet';
@@ -18,7 +18,12 @@ import {
   addCompanion,
   removeCompanion,
 } from '@/store/slices/characterEntrySlice';
-import { type DraftClassEntry, type SpellcastingAdvancement } from '@/types/characterDraft';
+import {
+  type DraftClassEntry,
+  type SpellcastingAdvancement,
+  type FavoredClassBonusSelection,
+} from '@/types/characterDraft';
+import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
 import { GameDataService } from '@/services/GameDataService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { lookupClassData } from '@/utils/characterComputations';
@@ -156,6 +161,262 @@ export function makeEmptyAdvancement(
     })),
   };
 }
+
+// ---- Favored Class Bonus Section ----
+
+function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
+  const { colors, fantasy, isDark } = useTheme();
+  const dispatch = useAppDispatch();
+  const raceName = useAppSelector((state) => state.characterEntry.draft.raceName);
+  const [alternates, setAlternates] = useState<FavoredClassBonusOption[]>([]);
+  const [altPickerLevel, setAltPickerLevel] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!raceName || !entry.className) {
+      setAlternates([]);
+      return;
+    }
+    GameDataService.getFavoredClassBonuses(raceName, entry.className).then(setAlternates);
+  }, [raceName, entry.className]);
+
+  const selections = entry.favoredClassBonuses ?? [];
+  const allocated = selections.length;
+  const remaining = entry.level - allocated;
+
+  const getSelectionForLevel = useCallback(
+    (level: number) => selections.find((s) => s.level === level) ?? null,
+    [selections],
+  );
+
+  const setLevelSelection = useCallback(
+    (level: number, sel: FavoredClassBonusSelection) => {
+      const next = selections.filter((s) => s.level !== level).concat(sel);
+      next.sort((a, b) => a.level - b.level);
+      dispatch(setFavoredClassBonuses({ id: entry.id, selections: next }));
+    },
+    [dispatch, entry.id, selections],
+  );
+
+  const clearLevelSelection = useCallback(
+    (level: number) => {
+      const next = selections.filter((s) => s.level !== level);
+      dispatch(setFavoredClassBonuses({ id: entry.id, selections: next }));
+    },
+    [dispatch, entry.id, selections],
+  );
+
+  // Alt picker options for a given level row
+  const altPickerOptions: PickerOption[] = alternates.map((a) => ({
+    value: a.id,
+    label: a.shortName,
+  }));
+
+  return (
+    <View style={[fcbStyles.section, { borderTopColor: colors.border.DEFAULT }]}>
+      <View style={fcbStyles.header}>
+        <Text style={[fcbStyles.label, { color: colors.text.secondary }]}>
+          Favored class bonuses
+        </Text>
+        {remaining > 0 && (
+          <Text style={[fcbStyles.remaining, { color: fantasy.bronze }]}>
+            {remaining} unallocated
+          </Text>
+        )}
+        {remaining === 0 && (
+          <Text style={[fcbStyles.remaining, { color: colors.text.tertiary }]}>All allocated</Text>
+        )}
+      </View>
+
+      {Array.from({ length: entry.level }, (_, i) => {
+        const level = i + 1;
+        const sel = getSelectionForLevel(level);
+        const isHp = sel?.type === 'hp';
+        const isSkill = sel?.type === 'skill';
+        const isAlt = sel?.type === 'alternate';
+        const selectedAlt = isAlt
+          ? alternates.find((a) => a.id === (sel as { type: 'alternate'; optionId: string }).optionId)
+          : null;
+
+        return (
+          <View key={level} style={fcbStyles.levelRow}>
+            <Text style={[fcbStyles.levelLabel, { color: colors.text.tertiary }]}>
+              {level}
+            </Text>
+
+            {/* HP chip */}
+            <Pressable
+              onPress={() =>
+                isHp
+                  ? clearLevelSelection(level)
+                  : setLevelSelection(level, { level, type: 'hp' })
+              }
+              style={[
+                fcbStyles.chip,
+                {
+                  borderColor: isHp ? fantasy.gold : colors.border.DEFAULT,
+                  backgroundColor: isHp
+                    ? isDark ? 'rgba(212,175,55,0.2)' : 'rgba(212,175,55,0.12)'
+                    : isDark ? colors.bg.tertiary : colors.bg.secondary,
+                },
+              ]}
+              accessibilityLabel={`Level ${level}: take HP favored class bonus`}
+              accessibilityState={{ selected: isHp }}
+            >
+              <Text style={[fcbStyles.chipText, { color: isHp ? fantasy.gold : colors.text.secondary }]}>
+                HP
+              </Text>
+            </Pressable>
+
+            {/* Skill chip */}
+            <Pressable
+              onPress={() =>
+                isSkill
+                  ? clearLevelSelection(level)
+                  : setLevelSelection(level, { level, type: 'skill' })
+              }
+              style={[
+                fcbStyles.chip,
+                {
+                  borderColor: isSkill ? fantasy.gold : colors.border.DEFAULT,
+                  backgroundColor: isSkill
+                    ? isDark ? 'rgba(212,175,55,0.2)' : 'rgba(212,175,55,0.12)'
+                    : isDark ? colors.bg.tertiary : colors.bg.secondary,
+                },
+              ]}
+              accessibilityLabel={`Level ${level}: take Skill favored class bonus`}
+              accessibilityState={{ selected: isSkill }}
+            >
+              <Text style={[fcbStyles.chipText, { color: isSkill ? fantasy.gold : colors.text.secondary }]}>
+                Skill
+              </Text>
+            </Pressable>
+
+            {/* Alternate chips / picker */}
+            {alternates.length === 1 && (
+              <Pressable
+                onPress={() =>
+                  isAlt && selectedAlt?.id === alternates[0].id
+                    ? clearLevelSelection(level)
+                    : setLevelSelection(level, { level, type: 'alternate', optionId: alternates[0].id })
+                }
+                style={[
+                  fcbStyles.chip,
+                  fcbStyles.chipAlt,
+                  {
+                    borderColor: isAlt ? fantasy.gold : colors.border.DEFAULT,
+                    backgroundColor: isAlt
+                      ? isDark ? 'rgba(212,175,55,0.2)' : 'rgba(212,175,55,0.12)'
+                      : isDark ? colors.bg.tertiary : colors.bg.secondary,
+                  },
+                ]}
+                accessibilityLabel={`Level ${level}: take alternate favored class bonus: ${alternates[0].shortName}`}
+                accessibilityState={{ selected: isAlt }}
+              >
+                <Text
+                  style={[fcbStyles.chipText, { color: isAlt ? fantasy.gold : colors.text.secondary }]}
+                  numberOfLines={1}
+                >
+                  {alternates[0].shortName}
+                </Text>
+              </Pressable>
+            )}
+
+            {alternates.length > 1 && (
+              <>
+                <Pressable
+                  onPress={() => setAltPickerLevel(level)}
+                  style={[
+                    fcbStyles.chip,
+                    fcbStyles.chipAlt,
+                    {
+                      borderColor: isAlt ? fantasy.gold : colors.border.DEFAULT,
+                      backgroundColor: isAlt
+                        ? isDark ? 'rgba(212,175,55,0.2)' : 'rgba(212,175,55,0.12)'
+                        : isDark ? colors.bg.tertiary : colors.bg.secondary,
+                    },
+                  ]}
+                  accessibilityLabel={`Level ${level}: choose alternate favored class bonus`}
+                >
+                  <Text
+                    style={[fcbStyles.chipText, { color: isAlt ? fantasy.gold : colors.text.secondary }]}
+                    numberOfLines={1}
+                  >
+                    {isAlt && selectedAlt ? selectedAlt.shortName : 'Alt ▾'}
+                  </Text>
+                </Pressable>
+
+                {/* Picker modal fires when altPickerLevel === level */}
+                {altPickerLevel === level && (
+                  <InlinePicker
+                    value={isAlt ? (sel as { type: 'alternate'; optionId: string }).optionId : ''}
+                    options={altPickerOptions}
+                    onValueChange={(id) => {
+                      setLevelSelection(level, { level, type: 'alternate', optionId: id });
+                      setAltPickerLevel(null);
+                    }}
+                    placeholder="Choose alternate..."
+                    style={{ display: 'none' }}
+                  />
+                )}
+              </>
+            )}
+          </View>
+        );
+      })}
+    </View>
+  );
+}
+
+const fcbStyles = StyleSheet.create({
+  section: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+    paddingHorizontal: 12,
+    paddingTop: 8,
+    paddingBottom: 4,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 6,
+  },
+  label: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  remaining: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+  },
+  levelRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginBottom: 5,
+  },
+  levelLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    minWidth: 22,
+    textAlign: 'right',
+  },
+  chip: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+    borderWidth: 1,
+  },
+  chipAlt: {
+    flex: 1,
+    maxWidth: 140,
+  },
+  chipText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    fontWeight: '600',
+  },
+});
 
 function AdvancementControls({ entry }: { entry: DraftClassEntry }) {
   const { colors, fantasy, isDark } = useTheme();
@@ -627,97 +888,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
       )}
 
       {isBaseClass && entry.isFavoredClass && (
-        <View style={[styles.favoredBonusRow, { borderTopColor: colors.border.DEFAULT }]}>
-          <Text style={[styles.favoredBonusLabel, { color: colors.text.secondary }]}>Bonuses:</Text>
-          {(['hp', 'skillRank'] as const).map((field) => {
-            const hp = entry.favoredClassBonuses?.hp ?? 0;
-            const skillRank = entry.favoredClassBonuses?.skillRank ?? 0;
-            const value = field === 'hp' ? hp : skillRank;
-            const allocated = hp + skillRank;
-            const canInc = allocated < entry.level;
-            const canDec = value > 0;
-            const label = field === 'hp' ? 'HP' : 'Skill';
-            return (
-              <View key={field} style={styles.bonusStepper}>
-                <Text style={[styles.bonusStepperLabel, { color: colors.text.tertiary }]}>
-                  {label}
-                </Text>
-                <View style={styles.bonusStepperRow}>
-                  <Pressable
-                    onPress={() =>
-                      dispatch(
-                        setFavoredClassBonuses({
-                          id: entry.id,
-                          hp: field === 'hp' ? hp - 1 : hp,
-                          skillRank: field === 'skillRank' ? skillRank - 1 : skillRank,
-                        }),
-                      )
-                    }
-                    disabled={!canDec}
-                    style={[
-                      styles.stepperBtn,
-                      {
-                        borderColor: colors.border.DEFAULT,
-                        backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
-                        opacity: canDec ? 1 : 0.3,
-                      },
-                    ]}
-                    accessibilityLabel={`Decrease ${label} favored class bonus`}
-                  >
-                    <Text style={[styles.stepperBtnText, { color: colors.text.primary }]}>−</Text>
-                  </Pressable>
-                  <Text style={[styles.stepperValue, { color: colors.text.primary }]}>{value}</Text>
-                  <Pressable
-                    onPress={() =>
-                      dispatch(
-                        setFavoredClassBonuses({
-                          id: entry.id,
-                          hp: field === 'hp' ? hp + 1 : hp,
-                          skillRank: field === 'skillRank' ? skillRank + 1 : skillRank,
-                        }),
-                      )
-                    }
-                    disabled={!canInc}
-                    style={[
-                      styles.stepperBtn,
-                      {
-                        borderColor: canInc
-                          ? isDark
-                            ? fantasy.gold
-                            : fantasy.bronze
-                          : colors.border.DEFAULT,
-                        backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
-                        opacity: canInc ? 1 : 0.3,
-                      },
-                    ]}
-                    accessibilityLabel={`Increase ${label} favored class bonus`}
-                  >
-                    <Text
-                      style={[
-                        styles.stepperBtnText,
-                        {
-                          color: canInc
-                            ? isDark
-                              ? fantasy.gold
-                              : fantasy.darkWood
-                            : colors.text.tertiary,
-                        },
-                      ]}
-                    >
-                      +
-                    </Text>
-                  </Pressable>
-                </View>
-              </View>
-            );
-          })}
-          <Text style={[styles.bonusRemaining, { color: colors.text.tertiary }]}>
-            {entry.level -
-              (entry.favoredClassBonuses?.hp ?? 0) -
-              (entry.favoredClassBonuses?.skillRank ?? 0)}{' '}
-            left
-          </Text>
-        </View>
+        <FavoredClassBonusSection entry={entry} />
       )}
 
       {/* Class choices */}
@@ -1065,61 +1236,6 @@ const styles = StyleSheet.create({
   choicesList: {
     paddingHorizontal: 12,
     paddingBottom: 4,
-  },
-  favoredBonusRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    gap: 6,
-    borderTopWidth: StyleSheet.hairlineWidth,
-  },
-  favoredBonusLabel: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 13,
-    marginRight: 4,
-  },
-  bonusStepper: {
-    alignItems: 'center',
-    gap: 2,
-  },
-  bonusStepperLabel: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 11,
-    fontWeight: '600',
-  },
-  bonusStepperRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-  },
-  stepperBtn: {
-    width: 28,
-    height: 28,
-    borderWidth: 1,
-    borderRadius: 6,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  stepperBtnText: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 16,
-    fontWeight: '700',
-    lineHeight: 20,
-  },
-  stepperValue: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 15,
-    fontWeight: '700',
-    minWidth: 24,
-    textAlign: 'center',
-  },
-  bonusRemaining: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 11,
-    marginLeft: 4,
-    alignSelf: 'flex-end',
-    paddingBottom: 2,
   },
   prereqRow: {
     paddingHorizontal: 12,

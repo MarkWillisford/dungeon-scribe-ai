@@ -779,11 +779,11 @@ describe('characterEntrySlice — classes', () => {
   });
 
   describe('toggleFavoredClass', () => {
-    it('marks a class as favored and initializes bonus counters', () => {
+    it('marks a class as favored and initializes bonus selections as empty array', () => {
       let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
       state = reducer(state, toggleFavoredClass('cls-1'));
       expect(state.draft.classes[0].isFavoredClass).toBe(true);
-      expect(state.draft.classes[0].favoredClassBonuses).toEqual({ hp: 0, skillRank: 0 });
+      expect(state.draft.classes[0].favoredClassBonuses).toEqual([]);
       expect(state.isDirty).toBe(true);
     });
 
@@ -814,17 +814,24 @@ describe('characterEntrySlice — classes', () => {
   });
 
   describe('setFavoredClassBonuses', () => {
-    it('sets hp and skillRank bonus counts on the matching class', () => {
+    it('stores per-level selections on the matching class', () => {
       let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
       state = reducer(state, toggleFavoredClass('cls-1'));
-      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', hp: 5, skillRank: 3 }));
-      expect(state.draft.classes[0].favoredClassBonuses).toEqual({ hp: 5, skillRank: 3 });
+      const selections = [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'skill' as const },
+      ];
+      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', selections }));
+      expect(state.draft.classes[0].favoredClassBonuses).toEqual(selections);
       expect(state.isDirty).toBe(true);
     });
 
     it('is a no-op when id is not found', () => {
       let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
-      state = reducer(state, setFavoredClassBonuses({ id: 'does-not-exist', hp: 5, skillRank: 3 }));
+      state = reducer(
+        state,
+        setFavoredClassBonuses({ id: 'does-not-exist', selections: [{ level: 1, type: 'hp' as const }] }),
+      );
       expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
     });
   });

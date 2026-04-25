@@ -31,6 +31,7 @@ import {
   type DraftEquippedSlot,
   type LevelIncrementSlot,
   type DraftCombatStats,
+  type FavoredClassBonusSelection,
 } from '@/types/characterDraft';
 
 // ---- Supporting types ----
@@ -191,6 +192,35 @@ const initialState: CharacterEntryState = {
   validationWarnings: [],
 };
 
+// ---- Migration helpers ----
+
+// Converts a DraftClassEntry from the legacy { hp, skillRank } counter format
+// to the FavoredClassBonusSelection[] per-level format. Runs at loadCharacter time
+// so old Firestore documents are transparently upgraded.
+function promoteLegacyFCB(
+  legacy: unknown,
+  classLevel: number,
+): FavoredClassBonusSelection[] {
+  if (Array.isArray(legacy)) return legacy as FavoredClassBonusSelection[];
+  if (!legacy || typeof legacy !== 'object') return [];
+  const { hp = 0, skillRank = 0 } = legacy as { hp?: number; skillRank?: number };
+  const out: FavoredClassBonusSelection[] = [];
+  for (let i = 0; i < hp; i++) out.push({ level: out.length + 1, type: 'hp' });
+  for (let i = 0; i < skillRank; i++) out.push({ level: out.length + 1, type: 'skill' });
+  // Cap at classLevel in case of stale over-allocated data
+  return out.slice(0, classLevel);
+}
+
+function migrateDraft(draft: CharacterDraft): CharacterDraft {
+  const classes = draft.classes.map((cls) => ({
+    ...cls,
+    favoredClassBonuses: cls.favoredClassBonuses !== undefined
+      ? promoteLegacyFCB(cls.favoredClassBonuses, cls.level)
+      : undefined,
+  }));
+  return { ...draft, classes };
+}
+
 // ---- Slice ----
 
 const characterEntrySlice = createSlice({
@@ -203,7 +233,7 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ draft: CharacterDraft; mode: EntryMode; characterId?: string }>,
     ) {
-      state.draft = action.payload.draft;
+      state.draft = migrateDraft(action.payload.draft);
       state.mode = action.payload.mode;
       state.originalCharacterId = action.payload.characterId ?? null;
       state.activeTab = 'identity';
@@ -890,7 +920,7 @@ const characterEntrySlice = createSlice({
       if (!wasAlreadyFavored) {
         target.isFavoredClass = true;
         if (!target.favoredClassBonuses) {
-          target.favoredClassBonuses = { hp: 0, skillRank: 0 };
+          target.favoredClassBonuses = [];
         }
       }
       state.isDirty = true;
@@ -898,11 +928,11 @@ const characterEntrySlice = createSlice({
 
     setFavoredClassBonuses(
       state,
-      action: PayloadAction<{ id: string; hp: number; skillRank: number }>,
+      action: PayloadAction<{ id: string; selections: FavoredClassBonusSelection[] }>,
     ) {
       const cls = state.draft.classes.find((c) => c.id === action.payload.id);
       if (cls) {
-        cls.favoredClassBonuses = { hp: action.payload.hp, skillRank: action.payload.skillRank };
+        cls.favoredClassBonuses = action.payload.selections;
         state.isDirty = true;
       }
     },

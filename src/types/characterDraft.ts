@@ -88,11 +88,18 @@ export interface DraftClassEntry {
   classChoices: ClassChoice[];
   prereqOverride: boolean; // DM override — suppress prereq warnings for this class
   isFavoredClass?: boolean; // true if this is the character's favored class
-  favoredClassBonuses?: {
-    hp: number; // count of levels where the +1 HP bonus was taken
-    skillRank: number; // count of levels where the +1 skill rank bonus was taken
-  };
+  // One selection per class level. Length should equal `level` when isFavoredClass is true.
+  // Absent until the favored class toggle is first enabled.
+  favoredClassBonuses?: FavoredClassBonusSelection[];
 }
+
+// Per-level favored class bonus selection.
+// 'hp' and 'skill' are the universal PF1e options (always available).
+// 'alternate' references a FavoredClassBonusOption document by id.
+export type FavoredClassBonusSelection =
+  | { level: number; type: 'hp' }
+  | { level: number; type: 'skill' }
+  | { level: number; type: 'alternate'; optionId: string };
 
 export type SpellcastingAdvancement =
   | {
