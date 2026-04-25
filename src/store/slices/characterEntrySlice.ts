@@ -949,7 +949,7 @@ const characterEntrySlice = createSlice({
     ) {
       const cls = state.draft.classes.find((c) => c.id === action.payload.id);
       if (cls) {
-        cls.favoredClassBonuses = action.payload.selections;
+        cls.favoredClassBonuses = action.payload.selections.filter((s) => s.level <= cls.level);
         state.isDirty = true;
       }
     },

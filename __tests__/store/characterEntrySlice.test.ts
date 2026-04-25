@@ -937,7 +937,7 @@ describe('characterEntrySlice — classes', () => {
 
   describe('setFavoredClassBonuses', () => {
     it('stores per-level selections on the matching class', () => {
-      let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 2 })));
       state = reducer(state, toggleFavoredClass('cls-1'));
       const selections = [
         { level: 1, type: 'hp' as const },
@@ -946,6 +946,21 @@ describe('characterEntrySlice — classes', () => {
       state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', selections }));
       expect(state.draft.classes[0].favoredClassBonuses).toEqual(selections);
       expect(state.isDirty).toBe(true);
+    });
+
+    it('clamps selections to cls.level, dropping entries beyond the class level', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 2 })));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      const selections = [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'skill' as const },
+        { level: 3, type: 'hp' as const }, // over-length — should be dropped
+      ];
+      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', selections }));
+      expect(state.draft.classes[0].favoredClassBonuses).toEqual([
+        { level: 1, type: 'hp' },
+        { level: 2, type: 'skill' },
+      ]);
     });
 
     it('is a no-op when id is not found', () => {
