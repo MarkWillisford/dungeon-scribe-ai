@@ -209,13 +209,20 @@ function promoteLegacyFCB(legacy: unknown, classLevel: number): FavoredClassBonu
 }
 
 function migrateDraft(draft: CharacterDraft): CharacterDraft {
-  const classes = draft.classes.map((cls) => ({
-    ...cls,
-    favoredClassBonuses:
-      cls.favoredClassBonuses !== undefined
-        ? promoteLegacyFCB(cls.favoredClassBonuses, cls.level)
-        : undefined,
-  }));
+  const classes = draft.classes.map((cls) => {
+    if (cls.isFavoredClass) {
+      return {
+        ...cls,
+        favoredClassBonuses:
+          cls.favoredClassBonuses !== undefined
+            ? promoteLegacyFCB(cls.favoredClassBonuses, cls.level)
+            : undefined,
+      };
+    }
+    // Not the favored class — clear any stale FCB data that may have been left behind
+    // by a toggle-off that predates this fix.
+    return { ...cls, favoredClassBonuses: undefined };
+  });
   return { ...draft, classes };
 }
 
@@ -915,9 +922,12 @@ const characterEntrySlice = createSlice({
       const target = state.draft.classes.find((c) => c.id === action.payload);
       if (!target) return;
       const wasAlreadyFavored = target.isFavoredClass;
-      // Clear favored on all classes first
+      // Clear favored (and stale FCB data) on all classes first
       for (const cls of state.draft.classes) {
-        cls.isFavoredClass = false;
+        if (cls.isFavoredClass) {
+          cls.isFavoredClass = false;
+          cls.favoredClassBonuses = undefined;
+        }
       }
       // Toggle: if it wasn't favored, mark it favored; if it was, leave all unfavored
       if (!wasAlreadyFavored) {
@@ -925,6 +935,10 @@ const characterEntrySlice = createSlice({
         if (!target.favoredClassBonuses) {
           target.favoredClassBonuses = [];
         }
+      } else {
+        // Toggling OFF — clear stale bonus data so migrateDraft never sees
+        // FCB data on a non-favored class.
+        target.favoredClassBonuses = undefined;
       }
       state.isDirty = true;
     },

@@ -220,6 +220,57 @@ describe('characterEntrySlice — session management', () => {
       const state = reducer(makeInitialState(), loadCharacter({ draft: BLANK_DRAFT, mode: 'new' }));
       expect(state.originalCharacterId).toBeNull();
     });
+
+    describe('migrateDraft — FCB migration', () => {
+      it('promotes legacy { hp, skillRank } format to array for favored classes', () => {
+        const draft: CharacterDraft = {
+          ...BLANK_DRAFT,
+          classes: [
+            makeClass('cls-1', {
+              isFavoredClass: true,
+              // Cast as any to simulate a legacy Firestore document shape
+              favoredClassBonuses: { hp: 2, skillRank: 1 } as unknown as [],
+              level: 5,
+            }),
+          ],
+        };
+        const state = reducer(makeInitialState(), loadCharacter({ draft, mode: 'edit' }));
+        const bonuses = state.draft.classes[0].favoredClassBonuses as
+          | { level: number; type: string }[]
+          | undefined;
+        expect(Array.isArray(bonuses)).toBe(true);
+        expect(bonuses).toHaveLength(3);
+        expect(bonuses![0]).toEqual({ level: 1, type: 'hp' });
+        expect(bonuses![1]).toEqual({ level: 2, type: 'hp' });
+        expect(bonuses![2]).toEqual({ level: 3, type: 'skill' });
+      });
+
+      it('clears stale favoredClassBonuses on non-favored classes instead of migrating', () => {
+        const draft: CharacterDraft = {
+          ...BLANK_DRAFT,
+          classes: [
+            makeClass('cls-1', {
+              isFavoredClass: false,
+              // Stale data left from a toggle-off before the fix
+              favoredClassBonuses: { hp: 1, skillRank: 0 } as unknown as [],
+              level: 3,
+            }),
+          ],
+        };
+        const state = reducer(makeInitialState(), loadCharacter({ draft, mode: 'edit' }));
+        expect(state.draft.classes[0].isFavoredClass).toBe(false);
+        expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
+      });
+
+      it('leaves favoredClassBonuses undefined on non-favored classes that have no stale data', () => {
+        const draft: CharacterDraft = {
+          ...BLANK_DRAFT,
+          classes: [makeClass('cls-1', { isFavoredClass: false, level: 4 })],
+        };
+        const state = reducer(makeInitialState(), loadCharacter({ draft, mode: 'edit' }));
+        expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
+      });
+    });
   });
 
   describe('resetDraft', () => {
@@ -838,6 +889,42 @@ describe('characterEntrySlice — classes', () => {
       expect(state.draft.classes[0].isFavoredClass).toBe(true);
       state = reducer(state, toggleFavoredClass('cls-1'));
       expect(state.draft.classes[0].isFavoredClass).toBe(false);
+    });
+
+    it('clears favoredClassBonuses when toggling off the favored class', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      state = reducer(
+        state,
+        setFavoredClassBonuses({
+          id: 'cls-1',
+          selections: [{ level: 1, type: 'hp' as const }],
+        }),
+      );
+      expect(state.draft.classes[0].favoredClassBonuses).toHaveLength(1);
+      // Toggle off
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      expect(state.draft.classes[0].isFavoredClass).toBe(false);
+      expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
+    });
+
+    it('clears favoredClassBonuses on the previously-favored class when a different class is toggled on', () => {
+      let state = makeInitialState();
+      state = reducer(state, addClass(makeClass('cls-1')));
+      state = reducer(state, addClass(makeClass('cls-2')));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      state = reducer(
+        state,
+        setFavoredClassBonuses({
+          id: 'cls-1',
+          selections: [{ level: 1, type: 'skill' as const }],
+        }),
+      );
+      // Switch favored to cls-2
+      state = reducer(state, toggleFavoredClass('cls-2'));
+      expect(state.draft.classes[0].isFavoredClass).toBe(false);
+      expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
+      expect(state.draft.classes[1].isFavoredClass).toBe(true);
     });
 
     it('is a no-op when id is not found', () => {
