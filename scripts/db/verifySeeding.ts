@@ -56,6 +56,7 @@ import { SYSTEM_PRESETS } from '../../src/data/rulesets/presets';
 import { ALL_RINGS } from '../../src/data/magicItems/rings/index';
 import { ALL_STAVES } from '../../src/data/magicItems/staves/index';
 import { ALL_RODS } from '../../src/data/magicItems/rods/index';
+import { ALL_FAVORED_CLASS_BONUSES } from '../../src/data/favoredClassBonuses/index';
 
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
 
@@ -90,6 +91,11 @@ const COLLECTIONS: CollectionSpec[] = [
   { label: 'Races', collection: 'races', expected: ALL_EXPANDED_RACES.length },
   { label: 'Classes', collection: 'classes', expected: ALL_EXPANDED_CLASSES.length },
   { label: 'Archetypes', collection: 'archetypes', expected: ALL_ARCHETYPES.length },
+  {
+    label: 'Favored Class Bonuses',
+    collection: 'favoredClassBonuses',
+    expected: ALL_FAVORED_CLASS_BONUSES.length,
+  },
   { label: 'Feats', collection: 'feats', expected: ALL_FEATS.length },
   { label: 'Traits', collection: 'traits', expected: ALL_TRAITS.length },
   { label: 'Weapons', collection: 'weapons', expected: ALL_WEAPONS.length },
