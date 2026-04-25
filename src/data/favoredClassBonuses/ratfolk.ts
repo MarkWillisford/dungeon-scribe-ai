@@ -37,9 +37,10 @@ export const RATFOLK_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
     shortName: 'Fractional New Discovery',
     description: 'The alchemist gains +1/6 of a new discovery.',
     mechanicalEffect: {
-      type: 'unmapped',
-      reason:
-        "FCBEffectLearnOption.optionType has no 'alchemist_discovery' variant. Phase 3 should extend the enum; until then, scraper flags this as structurally unmapped while preserving the 1/6-per-level cadence in the description.",
+      type: 'learn_option',
+      optionType: 'alchemist_discovery',
+      perLevelValue: { numerator: 1, denominator: 6 },
+      scopeDescription: 'new discovery',
     },
     source: ARG,
     ...META,
@@ -270,9 +271,10 @@ export const RATFOLK_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
     shortName: 'Fractional Phrenic Amplification',
     description: 'Gain 1/6 of a new phrenic amplification.',
     mechanicalEffect: {
-      type: 'unmapped',
-      reason:
-        "FCBEffectLearnOption.optionType has no 'phrenic_amplification' variant. Phase 3 should extend the enum; until then, scraper flags this as structurally unmapped while preserving the 1/6-per-level cadence in the description.",
+      type: 'learn_option',
+      optionType: 'phrenic_amplification',
+      perLevelValue: { numerator: 1, denominator: 6 },
+      scopeDescription: 'new phrenic amplification',
     },
     source: ARG,
     ...META,

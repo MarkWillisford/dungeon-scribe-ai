@@ -269,7 +269,9 @@ export interface FCBEffectLearnOption {
     | 'arcanist_exploit'
     | 'investigator_talent'
     | 'rage_power'
-    | 'bonus_weapon_property';
+    | 'bonus_weapon_property'
+    | 'alchemist_discovery'
+    | 'phrenic_amplification';
   perLevelValue: FCBFraction;
   spellLevelConstraint?: string; // e.g., 'at least 1 level below highest castable'
   listConstraint?: string; // e.g., 'cleric spell list not on shaman list', 'illusion school only'

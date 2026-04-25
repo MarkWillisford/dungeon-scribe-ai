@@ -33,9 +33,10 @@ export const CATFOLK_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
     shortName: 'Bonus Discovery',
     description: 'Gain 1/6 of a bonus discovery.',
     mechanicalEffect: {
-      type: 'unmapped',
-      reason:
-        'Alchemist discovery unlock — no structured alchemist_discovery variant exists in FCBEffectLearnOption yet',
+      type: 'learn_option',
+      optionType: 'alchemist_discovery',
+      perLevelValue: { numerator: 1, denominator: 6 },
+      scopeDescription: 'bonus discovery',
     },
     source: ARG,
     ...META,
