@@ -55,6 +55,8 @@ import reducer, {
   unequipCompanionMagicItem,
   toggleFavoredClass,
   setFavoredClassBonuses,
+  setRacialFlexAbility,
+  syncFeatSlots,
   reorderClasses,
   addTemplate,
   removeTemplate,
@@ -534,6 +536,30 @@ describe('characterEntrySlice — identity', () => {
       keys.forEach((k) => expect(state.draft.abilities[k].racial).toBe(0));
     });
   });
+
+  describe('setRacialFlexAbility', () => {
+    it('sets a new flex ability when none was previously set', () => {
+      const state = reducer(makeInitialState(), setRacialFlexAbility('str'));
+      expect(state.draft.racialFlexAbility).toBe('str');
+      expect(state.draft.abilities.str.racial).toBe(2);
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('clears the old flex racial bonus and applies it to the new ability', () => {
+      let state = reducer(makeInitialState(), setRacialFlexAbility('str'));
+      expect(state.draft.abilities.str.racial).toBe(2);
+      state = reducer(state, setRacialFlexAbility('dex'));
+      expect(state.draft.abilities.str.racial).toBe(0);
+      expect(state.draft.abilities.dex.racial).toBe(2);
+      expect(state.draft.racialFlexAbility).toBe('dex');
+    });
+
+    it('is a no-op on racial bonus when the same ability is selected again', () => {
+      let state = reducer(makeInitialState(), setRacialFlexAbility('con'));
+      state = reducer(state, setRacialFlexAbility('con'));
+      expect(state.draft.abilities.con.racial).toBe(2);
+    });
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -656,6 +682,26 @@ describe('characterEntrySlice — classes', () => {
       state = reducer(state, removeClass('base'));
       expect(state.draft.spellcastingPools).toHaveLength(0);
     });
+
+    it('cascades: clears dual-mode advancement pointers targeting the removed class', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('base')));
+      state = reducer(state, addClass(makeClass('prestige')));
+      state = reducer(
+        state,
+        updateClassSpellcastingAdvancement({
+          id: 'prestige',
+          advancement: {
+            mode: 'both',
+            perLevel: [{ arcaneBaseClassEntryId: 'base', divineBaseClassEntryId: 'other' }],
+          },
+        }),
+      );
+      state = reducer(state, removeClass('base'));
+      const adv = state.draft.classes[0].spellcastingAdvancement;
+      if (adv?.mode !== 'both') throw new Error('expected mode both');
+      expect(adv.perLevel[0].arcaneBaseClassEntryId).toBe('');
+      expect(adv.perLevel[0].divineBaseClassEntryId).toBe('other');
+    });
   });
 
   describe('updateClassLevel', () => {
@@ -744,6 +790,58 @@ describe('characterEntrySlice — classes', () => {
       // isFavoredClass is false by default — no favoredClassBonuses
       state = reducer(state, updateClassLevel({ id: 'cls-1', level: 2 }));
       expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
+    });
+
+    it('grows dual-mode advancement perLevel when level increases', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('prestige', { level: 2 })));
+      state = reducer(
+        state,
+        updateClassSpellcastingAdvancement({
+          id: 'prestige',
+          advancement: {
+            mode: 'both',
+            perLevel: [
+              { arcaneBaseClassEntryId: 'arc', divineBaseClassEntryId: 'div' },
+              { arcaneBaseClassEntryId: 'arc', divineBaseClassEntryId: 'div' },
+            ],
+          },
+        }),
+      );
+      state = reducer(state, updateClassLevel({ id: 'prestige', level: 4 }));
+      const adv = state.draft.classes[0].spellcastingAdvancement;
+      if (adv?.mode !== 'both') throw new Error('expected mode both');
+      expect(adv.perLevel).toHaveLength(4);
+      expect(adv.perLevel.every((p) => p.arcaneBaseClassEntryId === 'arc')).toBe(true);
+    });
+
+    it('trims dual-mode advancement perLevel when level decreases', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('prestige', { level: 4 })));
+      state = reducer(
+        state,
+        updateClassSpellcastingAdvancement({
+          id: 'prestige',
+          advancement: {
+            mode: 'both',
+            perLevel: Array.from({ length: 4 }, () => ({
+              arcaneBaseClassEntryId: 'arc',
+              divineBaseClassEntryId: 'div',
+            })),
+          },
+        }),
+      );
+      state = reducer(state, updateClassLevel({ id: 'prestige', level: 2 }));
+      const adv = state.draft.classes[0].spellcastingAdvancement;
+      if (adv?.mode !== 'both') throw new Error('expected mode both');
+      expect(adv.perLevel).toHaveLength(2);
+    });
+  });
+
+  describe('syncFeatSlots', () => {
+    it('recalculates feat slots from classes and marks dirty', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 1 })));
+      // Add an extra manual slot not yet synced
+      state = reducer(state, syncFeatSlots());
+      expect(state.isDirty).toBe(true);
     });
   });
 

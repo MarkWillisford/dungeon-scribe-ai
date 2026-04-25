@@ -125,6 +125,7 @@ jest.mock('@/services/GameDataService', () => ({
       };
       return feats[id] ?? null;
     }),
+    getFavoredClassBonuses: jest.fn(async () => []),
   },
 }));
 
@@ -136,6 +137,7 @@ jest.mock('@services/PrerequisiteService', () => ({
 }));
 
 import { PrerequisiteService } from '@services/PrerequisiteService';
+import { GameDataService } from '@/services/GameDataService';
 
 // ---- Helpers ----
 
@@ -866,6 +868,125 @@ describe('DraftValidationService', () => {
       const fcbWarning = warnings.find((w) => w.id.includes('fcb-overallocated'));
       expect(fcbWarning).toBeDefined();
       expect(fcbWarning?.message).toContain('2 favored class bonuses over-allocated');
+    });
+
+    it('warns when alternate selection is below minimumClassLevel', async () => {
+      (GameDataService.getFavoredClassBonuses as jest.Mock).mockResolvedValueOnce([
+        {
+          id: 'gnome-monk-ki',
+          raceName: 'Gnome',
+          className: 'Monk',
+          shortName: 'Ki Acrobatics Bonus',
+          description: 'Requires level 5.',
+          minimumClassLevel: 5,
+          mechanicalEffect: { type: 'unmapped', reason: 'flavor' },
+          source: { bookId: 'arg', bookName: 'Advanced Race Guide', publisher: 'Paizo', page: 1 },
+          isOfficial: true,
+          visibility: 'global' as const,
+          rev: 1,
+          verificationStatus: 'needs_review' as const,
+        },
+      ]);
+      const draft = blankDraft();
+      draft.raceName = 'Gnome';
+      draft.classes[0].className = 'Monk';
+      draft.classes[0].isFavoredClass = true;
+      draft.classes[0].level = 3;
+      draft.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'alternate' as const, optionId: 'gnome-monk-ki' },
+        { level: 2, type: 'alternate' as const, optionId: 'gnome-monk-ki' },
+        { level: 3, type: 'hp' as const },
+      ];
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
+      const minLevelWarnings = warnings.filter((w) => w.id.includes('fcb-minlevel'));
+      expect(minLevelWarnings).toHaveLength(2);
+      expect(minLevelWarnings[0].message).toContain('requires class level 5');
+    });
+
+    it('does not warn when alternate selection meets minimumClassLevel', async () => {
+      (GameDataService.getFavoredClassBonuses as jest.Mock).mockResolvedValueOnce([
+        {
+          id: 'gnome-monk-ki',
+          raceName: 'Gnome',
+          className: 'Monk',
+          shortName: 'Ki Acrobatics Bonus',
+          description: 'Requires level 5.',
+          minimumClassLevel: 5,
+          mechanicalEffect: { type: 'unmapped', reason: 'flavor' },
+          source: { bookId: 'arg', bookName: 'Advanced Race Guide', publisher: 'Paizo', page: 1 },
+          isOfficial: true,
+          visibility: 'global' as const,
+          rev: 1,
+          verificationStatus: 'needs_review' as const,
+        },
+      ]);
+      const draft = blankDraft();
+      draft.raceName = 'Gnome';
+      draft.classes[0].className = 'Monk';
+      draft.classes[0].isFavoredClass = true;
+      draft.classes[0].level = 6;
+      draft.classes[0].favoredClassBonuses = [
+        { level: 5, type: 'alternate' as const, optionId: 'gnome-monk-ki' },
+        { level: 6, type: 'alternate' as const, optionId: 'gnome-monk-ki' },
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'hp' as const },
+        { level: 3, type: 'hp' as const },
+        { level: 4, type: 'hp' as const },
+      ];
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
+      expect(warnings.filter((w) => w.id.includes('fcb-minlevel'))).toHaveLength(0);
+    });
+
+    it('skips minimumClassLevel check when there are no alternate selections', async () => {
+      const draft = blankDraft();
+      draft.classes[0].isFavoredClass = true;
+      draft.classes[0].level = 3;
+      draft.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'skill' as const },
+        { level: 3, type: 'hp' as const },
+      ];
+      await DraftValidationService.validate(draft, DEFAULT_RULESET, TEST_CLASS_MAP);
+      expect(GameDataService.getFavoredClassBonuses).not.toHaveBeenCalled();
+    });
+
+    it('skips minimumClassLevel check when raceName is absent', async () => {
+      const draft = blankDraft();
+      draft.raceName = '';
+      draft.classes[0].isFavoredClass = true;
+      draft.classes[0].level = 2;
+      draft.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'alternate' as const, optionId: 'some-opt' },
+        { level: 2, type: 'alternate' as const, optionId: 'some-opt' },
+      ];
+      await DraftValidationService.validate(draft, DEFAULT_RULESET, TEST_CLASS_MAP);
+      expect(GameDataService.getFavoredClassBonuses).not.toHaveBeenCalled();
+    });
+
+    it('does not warn when optionId is not found in returned entries', async () => {
+      (GameDataService.getFavoredClassBonuses as jest.Mock).mockResolvedValueOnce([]);
+      const draft = blankDraft();
+      draft.raceName = 'Human';
+      draft.classes[0].isFavoredClass = true;
+      draft.classes[0].level = 2;
+      draft.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'alternate' as const, optionId: 'nonexistent-id' },
+        { level: 2, type: 'hp' as const },
+      ];
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
+      expect(warnings.filter((w) => w.id.includes('fcb-minlevel'))).toHaveLength(0);
     });
   });
 
