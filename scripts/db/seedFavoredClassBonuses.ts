@@ -24,23 +24,28 @@ const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
 const BATCH_SIZE = 500;
 
-if (!admin.apps.length) {
-  const credential = process.env.GOOGLE_APPLICATION_CREDENTIALS
-    ? admin.credential.applicationDefault()
-    : (() => {
-        console.error(
-          'ERROR: GOOGLE_APPLICATION_CREDENTIALS env var not set.\n' +
-            'Download a service account key from Firebase Console and set:\n' +
-            '  export GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json',
-        );
-        process.exit(1);
-      })();
+let db: admin.firestore.Firestore | undefined;
 
-  admin.initializeApp({ credential, projectId: PROJECT_ID });
+if (!DRY_RUN) {
+  if (!admin.apps.length) {
+    if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+      console.error(
+        'ERROR: GOOGLE_APPLICATION_CREDENTIALS env var not set.\n' +
+          'Download a service account key from Firebase Console and set:\n' +
+          '  export GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json',
+      );
+      process.exit(1);
+    }
+
+    admin.initializeApp({
+      credential: admin.credential.applicationDefault(),
+      projectId: PROJECT_ID,
+    });
+  }
+
+  db = admin.firestore();
+  db.settings({ ignoreUndefinedProperties: true });
 }
-
-const db = admin.firestore();
-db.settings({ ignoreUndefinedProperties: true });
 
 async function seedFavoredClassBonuses(entries: FavoredClassBonusOption[]): Promise<void> {
   console.log(`\nSeeding ${entries.length} favored class bonuses to project: ${PROJECT_ID}`);
@@ -54,9 +59,9 @@ async function seedFavoredClassBonuses(entries: FavoredClassBonusOption[]): Prom
   let totalWritten = 0;
 
   for (const chunk of chunks) {
-    const batch = db.batch();
+    const batch = db!.batch();
     chunk.forEach((entry) => {
-      const ref = db.collection('favoredClassBonuses').doc(entry.id);
+      const ref = db!.collection('favoredClassBonuses').doc(entry.id);
       batch.set(ref, {
         ...entry,
         source: entry.source,
