@@ -818,7 +818,7 @@ interface CompanionSectionProps {
 }
 
 function CompanionSection({ entry }: CompanionSectionProps) {
-  const { colors, fantasy, isDark } = useTheme();
+  const { fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [addPickerOpen, setAddPickerOpen] = useState(false);
   const [companionEntryById, setCompanionEntryById] = useState<Map<string, AnimalCompanionEntry>>(

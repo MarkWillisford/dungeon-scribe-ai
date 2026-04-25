@@ -35,12 +35,11 @@ export function CompanionPickerSheet({
   const { colors, fantasy, isDark } = useTheme();
   const [query, setQuery] = useState('');
   const [allItems, setAllItems] = useState<AnimalCompanionEntry[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!visible) return;
     let cancelled = false;
-    setIsLoading(true);
     GameDataService.getAnimalCompanions(
       pickerFilter === 'mountsOnly' ? { mountsOnly: true } : undefined,
     )
@@ -57,6 +56,8 @@ export function CompanionPickerSheet({
       });
     return () => {
       cancelled = true;
+      setIsLoading(true);
+      setAllItems([]);
     };
   }, [visible, pickerFilter]);
 

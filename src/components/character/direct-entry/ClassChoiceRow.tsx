@@ -2,10 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
-import {
-  CompanionPickerSheet,
-  type CompanionPickerFilter,
-} from '@/components/character/direct-entry/CompanionPickerSheet';
+import { CompanionPickerSheet } from '@/components/character/direct-entry/CompanionPickerSheet';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   upsertClassChoice,
@@ -20,7 +17,6 @@ import {
   pickerFilterFromDraftClass,
 } from '@/services/CompanionService';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
-import type { DraftClassEntry } from '@/types/characterDraft';
 
 function makeInstanceId(): string {
   // React Native doesn't ship crypto.randomUUID; this is good enough for
