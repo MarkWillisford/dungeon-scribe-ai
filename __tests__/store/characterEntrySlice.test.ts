@@ -1454,9 +1454,11 @@ describe('characterEntrySlice — enhancement sync', () => {
 describe('characterEntrySlice — companions', () => {
   const druidGrant = (
     classEntryId = 'class-druid',
+    className = 'Druid',
   ): Parameters<typeof addCompanion>[0]['grantedBy'] => ({
     type: 'class',
     classEntryId,
+    className,
     classChoiceId: 'druid-nature-bond',
   });
 
