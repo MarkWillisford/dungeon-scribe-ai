@@ -221,7 +221,12 @@ function makeCompanion(overrides: Partial<CompanionInstance> = {}): CompanionIns
     instanceId: 'comp-1',
     sourceEntryId: 'wolf',
     name: 'Shadow',
-    grantedBy: { type: 'class', classEntryId: 'class-druid', className: 'Druid', classChoiceId: 'nature-bond' },
+    grantedBy: {
+      type: 'class',
+      classEntryId: 'class-druid',
+      className: 'Druid',
+      classChoiceId: 'nature-bond',
+    },
     effectiveProgressionLevel: 4,
     abilityScoreOverrides: {},
     hdAbilityIncreases: [],
@@ -251,7 +256,13 @@ beforeEach(() => {
 
 describe('IdentitySection', () => {
   it('renders companion form, size, type, and special qualities', () => {
-    const comp = makeCompanion({ name: 'Shadow', notes: 'prefers flanking' });
+    // effectiveProgressionLevel: 3 keeps the wolf below the tier-4 threshold so
+    // it stays Medium (the tier at atDruidLevel: 4 fires at level >= 4).
+    const comp = makeCompanion({
+      name: 'Shadow',
+      notes: 'prefers flanking',
+      effectiveProgressionLevel: 3,
+    });
     const r = render(<IdentitySection companion={comp} entry={wolf} />);
     const text = r.getAllText().join(' ');
     expect(text).toContain('Wolf');
