@@ -792,7 +792,11 @@ describe('DraftValidationService', () => {
         { level: 1, type: 'hp' as const },
         { level: 2, type: 'skill' as const },
       ];
-      const warnings = await DraftValidationService.validate(draft, DEFAULT_RULESET, TEST_CLASS_MAP);
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
       const fcbWarning = warnings.find((w) => w.id.includes('fcb-unallocated'));
       expect(fcbWarning).toBeDefined();
       expect(fcbWarning?.message).toContain('2 favored class bonuses unallocated');
@@ -812,7 +816,11 @@ describe('DraftValidationService', () => {
         { id: '1', traitName: 'Reactionary', category: 'Combat', description: '' },
         { id: '2', traitName: 'Magical Knack', category: 'Magic', description: '' },
       ];
-      const warnings = await DraftValidationService.validate(draft, DEFAULT_RULESET, TEST_CLASS_MAP);
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
       expect(warnings.filter((w) => w.id.includes('fcb-unallocated'))).toHaveLength(0);
     });
 
@@ -820,15 +828,44 @@ describe('DraftValidationService', () => {
       const draft = blankDraft();
       draft.classes[0].isFavoredClass = false;
       draft.classes[0].level = 4;
-      const warnings = await DraftValidationService.validate(draft, DEFAULT_RULESET, TEST_CLASS_MAP);
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
       expect(warnings.filter((w) => w.id.includes('fcb-unallocated'))).toHaveLength(0);
     });
 
     it('does not warn when favoredClassBonuses is absent and class is not favored', async () => {
       const draft = blankDraft();
       // default blankDraft has no isFavoredClass set
-      const warnings = await DraftValidationService.validate(draft, DEFAULT_RULESET, TEST_CLASS_MAP);
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
       expect(warnings.filter((w) => w.id.includes('fcb-unallocated'))).toHaveLength(0);
+    });
+
+    it('warns when favored class has more selections than class level (over-allocation)', async () => {
+      const draft = blankDraft();
+      draft.classes[0].isFavoredClass = true;
+      draft.classes[0].level = 3;
+      draft.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'skill' as const },
+        { level: 3, type: 'hp' as const },
+        { level: 4, type: 'hp' as const },
+        { level: 5, type: 'skill' as const },
+      ];
+      const warnings = await DraftValidationService.validate(
+        draft,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
+      const fcbWarning = warnings.find((w) => w.id.includes('fcb-overallocated'));
+      expect(fcbWarning).toBeDefined();
+      expect(fcbWarning?.message).toContain('2 favored class bonuses over-allocated');
     });
   });
 

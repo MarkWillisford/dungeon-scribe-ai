@@ -659,6 +659,41 @@ describe('characterEntrySlice — classes', () => {
       if (adv?.mode !== 'single') throw new Error('expected mode single');
       expect(adv.perLevel).toHaveLength(2);
     });
+
+    it('prunes favoredClassBonuses selections beyond the new level when level decreases', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 5 })));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      const selections = [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'skill' as const },
+        { level: 3, type: 'hp' as const },
+        { level: 4, type: 'hp' as const },
+        { level: 5, type: 'skill' as const },
+      ];
+      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', selections }));
+      state = reducer(state, updateClassLevel({ id: 'cls-1', level: 3 }));
+      expect(state.draft.classes[0].favoredClassBonuses).toEqual(selections.slice(0, 3));
+    });
+
+    it('does not prune favoredClassBonuses when level increases', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 3 })));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      const selections = [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'skill' as const },
+        { level: 3, type: 'hp' as const },
+      ];
+      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', selections }));
+      state = reducer(state, updateClassLevel({ id: 'cls-1', level: 5 }));
+      expect(state.draft.classes[0].favoredClassBonuses).toEqual(selections);
+    });
+
+    it('leaves favoredClassBonuses undefined when level decreases and field is absent', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 5 })));
+      // isFavoredClass is false by default — no favoredClassBonuses
+      state = reducer(state, updateClassLevel({ id: 'cls-1', level: 2 }));
+      expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
+    });
   });
 
   describe('updateClassArchetype', () => {
@@ -830,7 +865,10 @@ describe('characterEntrySlice — classes', () => {
       let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
       state = reducer(
         state,
-        setFavoredClassBonuses({ id: 'does-not-exist', selections: [{ level: 1, type: 'hp' as const }] }),
+        setFavoredClassBonuses({
+          id: 'does-not-exist',
+          selections: [{ level: 1, type: 'hp' as const }],
+        }),
       );
       expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
     });

@@ -197,10 +197,7 @@ const initialState: CharacterEntryState = {
 // Converts a DraftClassEntry from the legacy { hp, skillRank } counter format
 // to the FavoredClassBonusSelection[] per-level format. Runs at loadCharacter time
 // so old Firestore documents are transparently upgraded.
-function promoteLegacyFCB(
-  legacy: unknown,
-  classLevel: number,
-): FavoredClassBonusSelection[] {
+function promoteLegacyFCB(legacy: unknown, classLevel: number): FavoredClassBonusSelection[] {
   if (Array.isArray(legacy)) return legacy as FavoredClassBonusSelection[];
   if (!legacy || typeof legacy !== 'object') return [];
   const { hp = 0, skillRank = 0 } = legacy as { hp?: number; skillRank?: number };
@@ -214,9 +211,10 @@ function promoteLegacyFCB(
 function migrateDraft(draft: CharacterDraft): CharacterDraft {
   const classes = draft.classes.map((cls) => ({
     ...cls,
-    favoredClassBonuses: cls.favoredClassBonuses !== undefined
-      ? promoteLegacyFCB(cls.favoredClassBonuses, cls.level)
-      : undefined,
+    favoredClassBonuses:
+      cls.favoredClassBonuses !== undefined
+        ? promoteLegacyFCB(cls.favoredClassBonuses, cls.level)
+        : undefined,
   }));
   return { ...draft, classes };
 }
@@ -499,6 +497,11 @@ const characterEntrySlice = createSlice({
       const oldLevel = cls.level;
       const newLevel = action.payload.level;
       cls.level = newLevel;
+
+      // Prune favored class bonus selections that are now beyond the new level.
+      if (cls.favoredClassBonuses && newLevel < oldLevel) {
+        cls.favoredClassBonuses = cls.favoredClassBonuses.filter((s) => s.level <= newLevel);
+      }
 
       // Resize advancement perLevel to match the new class level.
       // New rows default to the previous row's targets so the common

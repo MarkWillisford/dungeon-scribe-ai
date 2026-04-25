@@ -547,6 +547,15 @@ export class DraftValidationService {
             'Assign each favored class level to HP, Skill, or an alternate on the Classes tab.',
           ),
         );
+      } else if (allocated > cls.level) {
+        w.push(
+          warn(
+            warnId(`fcb-overallocated-${cls.id}`),
+            'classes',
+            `${cls.className}: ${allocated - cls.level} favored class bonus${allocated - cls.level === 1 ? '' : 'es'} over-allocated (${allocated} selections for level ${cls.level}).`,
+            'Reduce favored class bonus selections to match the class level on the Classes tab.',
+          ),
+        );
       }
     }
     return w;
