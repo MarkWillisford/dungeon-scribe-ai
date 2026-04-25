@@ -110,11 +110,16 @@ export interface FCBEffectNaturalArmor {
 
 // Damage reduction bump, typically on eidolon/companion.
 // Examples: Aasimar Summoner "DR 1/evil to eidolon, each additional selection +1/2 evil, max DR 10".
+//
+// `baseValue` handles the "first pick is a full point, subsequent picks are fractional" pattern.
+// When present, accumulation = baseValue + floor((count - 1) * numerator / denominator).
+// Without it, accumulation = floor(count * numerator / denominator) (standard model).
 export interface FCBEffectDamageReduction {
   type: 'damage_reduction';
   target: FCBRecipient;
   damageType: string; // 'evil', 'cold iron', 'silver', 'adamantine'
   perLevelValue: FCBFraction;
+  baseValue?: number; // flat bonus granted by the first pick (subsequent picks use perLevelValue)
   maxTotal?: number; // per-rule cap on cumulative DR (e.g., 10)
 }
 

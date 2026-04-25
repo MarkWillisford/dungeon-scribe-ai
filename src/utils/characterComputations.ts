@@ -313,7 +313,11 @@ function fcbEffectDisplay(effect: FCBMechanicalEffect, count: number): string {
       return `+${val} natural armor${tgt}`;
     }
     case 'damage_reduction': {
-      const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      const val =
+        effect.baseValue != null
+          ? effect.baseValue +
+            frac(count - 1, effect.perLevelValue.numerator, effect.perLevelValue.denominator)
+          : frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
       const cap = effect.maxTotal != null ? ` (max ${effect.maxTotal})` : '';
       return `DR +${val}/${effect.damageType}${cap} (${effect.target})`;
     }

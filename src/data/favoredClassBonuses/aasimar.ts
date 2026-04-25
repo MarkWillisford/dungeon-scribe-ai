@@ -184,6 +184,7 @@ export const AASIMAR_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
       type: 'damage_reduction',
       target: 'eidolon',
       damageType: 'evil',
+      baseValue: 1,
       perLevelValue: { numerator: 1, denominator: 2 },
       maxTotal: 10,
     },
