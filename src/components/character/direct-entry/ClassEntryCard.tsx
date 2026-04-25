@@ -26,7 +26,7 @@ import {
 import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
 import { GameDataService } from '@/services/GameDataService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
-import { lookupClassData } from '@/utils/characterComputations';
+import { lookupClassData, computeFCBAlternateAccumulation } from '@/utils/characterComputations';
 import {
   effectiveLevelFromDraftClass,
   pickerFilterFromDraftClass,
@@ -363,6 +363,19 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
           </View>
         );
       })}
+
+      {/* Accumulated alternate effects summary */}
+      {selections.some((s) => s.type === 'alternate') &&
+        computeFCBAlternateAccumulation([entry], alternates).map((eff) => (
+          <View key={eff.optionId} style={fcbStyles.summaryRow}>
+            <Text style={[fcbStyles.summaryName, { color: colors.text.secondary }]}>
+              {eff.shortName}:
+            </Text>
+            <Text style={[fcbStyles.summaryValue, { color: fantasy.bronze }]}>
+              {eff.display}
+            </Text>
+          </View>
+        ))}
     </View>
   );
 }
@@ -415,6 +428,25 @@ const fcbStyles = StyleSheet.create({
     fontFamily: 'LibreBaskerville',
     fontSize: 12,
     fontWeight: '600',
+  },
+  summaryRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'baseline',
+    gap: 4,
+    marginTop: 4,
+    paddingHorizontal: 4,
+  },
+  summaryName: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    fontWeight: '600',
+  },
+  summaryValue: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    fontStyle: 'italic',
+    flex: 1,
   },
 });
 

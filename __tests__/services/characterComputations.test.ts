@@ -15,6 +15,7 @@ import {
   computeECL,
   computeMaxHP,
   computeFeatSlots,
+  computeFCBAlternateAccumulation,
   type ClassDataMap,
 } from '@/utils/characterComputations';
 import {
@@ -24,6 +25,7 @@ import {
   type AbilityKey,
 } from '@/types/characterDraft';
 import { BonusType } from '@/types/base';
+import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
 import { ALL_EXPANDED_CLASSES } from '@/data/classes/index';
 
 // Reuse the full static set as the test map. These are the same classes the
@@ -568,5 +570,160 @@ describe('computeBaseWillFractional', () => {
   it('multiple Good Will classes: +2 once', () => {
     // Cleric 5 + Wizard 5: 2 + floor((5/2 + 5/2)) = 2 + floor(5) = 7
     expect(computeBaseWillFractional([cls('Cleric', 5), cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(7);
+  });
+});
+
+// ---- computeFCBAlternateAccumulation ----
+
+function fcbOption(
+  id: string,
+  className: string,
+  effect: FavoredClassBonusOption['mechanicalEffect'],
+): FavoredClassBonusOption {
+  return {
+    id,
+    raceName: 'Dwarf',
+    className,
+    shortName: id,
+    description: '',
+    mechanicalEffect: effect,
+    source: { bookId: 'crb', bookName: 'Core Rulebook', publisher: 'Paizo', page: 1 },
+    isOfficial: true,
+    visibility: 'global',
+    rev: 1,
+    verificationStatus: 'needs_review',
+  };
+}
+
+function clsWithFCB(
+  className: string,
+  level: number,
+  bonuses: DraftClassEntry['favoredClassBonuses'],
+): DraftClassEntry {
+  return { ...cls(className, level), isFavoredClass: true, favoredClassBonuses: bonuses };
+}
+
+describe('computeFCBAlternateAccumulation', () => {
+  it('returns empty for no classes', () => {
+    expect(computeFCBAlternateAccumulation([], [])).toEqual([]);
+  });
+
+  it('returns empty when no alternate selections exist', () => {
+    const entry = clsWithFCB('Fighter', 3, [
+      { level: 1, type: 'hp' as const },
+      { level: 2, type: 'skill' as const },
+      { level: 3, type: 'hp' as const },
+    ]);
+    expect(computeFCBAlternateAccumulation([entry], [])).toEqual([]);
+  });
+
+  it('tallies a single alternate and formats a bonus display', () => {
+    const opt = fcbOption('dwarf-fighter', 'Fighter', {
+      type: 'bonus',
+      bonusType: 'untyped',
+      target: 'cmd',
+      perLevelValue: { numerator: 1, denominator: 1 },
+      vsCombatManeuver: ['bull_rush', 'trip'],
+    });
+    const entry = clsWithFCB('Fighter', 4, [
+      { level: 1, type: 'alternate' as const, optionId: 'dwarf-fighter' },
+      { level: 2, type: 'alternate' as const, optionId: 'dwarf-fighter' },
+      { level: 3, type: 'alternate' as const, optionId: 'dwarf-fighter' },
+      { level: 4, type: 'hp' as const },
+    ]);
+    const result = computeFCBAlternateAccumulation([entry], [opt]);
+    expect(result).toHaveLength(1);
+    expect(result[0].count).toBe(3);
+    expect(result[0].display).toBe('+3 cmd vs bull_rush/trip');
+  });
+
+  it('floors fractional accumulation correctly', () => {
+    // 3 levels in a 1/2 bonus → floor(3/2) = 1
+    const opt = fcbOption('dwarf-ranger', 'Ranger', {
+      type: 'bonus',
+      bonusType: 'untyped',
+      target: 'wild_empathy',
+      perLevelValue: { numerator: 1, denominator: 2 },
+    });
+    const entry = clsWithFCB('Ranger', 3, [
+      { level: 1, type: 'alternate' as const, optionId: 'dwarf-ranger' },
+      { level: 2, type: 'alternate' as const, optionId: 'dwarf-ranger' },
+      { level: 3, type: 'alternate' as const, optionId: 'dwarf-ranger' },
+    ]);
+    const result = computeFCBAlternateAccumulation([entry], [opt]);
+    expect(result[0].display).toBe('+1 wild_empathy');
+  });
+
+  it('accumulates resource_pool correctly', () => {
+    const opt = fcbOption('dwarf-barbarian', 'Barbarian', {
+      type: 'resource_pool',
+      resourceId: 'rage_rounds',
+      perLevelValue: { numerator: 1, denominator: 1 },
+    });
+    const entry = clsWithFCB('Barbarian', 5, [
+      ...Array.from({ length: 5 }, (_, i) => ({
+        level: i + 1,
+        type: 'alternate' as const,
+        optionId: 'dwarf-barbarian',
+      })),
+    ]);
+    const result = computeFCBAlternateAccumulation([entry], [opt]);
+    expect(result[0].count).toBe(5);
+    expect(result[0].display).toBe('+5 rage rounds');
+  });
+
+  it('handles two distinct alternates independently', () => {
+    const opt1 = fcbOption('dwarf-paladin-a', 'Paladin', {
+      type: 'bonus',
+      bonusType: 'untyped',
+      target: 'concentration',
+      perLevelValue: { numerator: 1, denominator: 2 },
+    });
+    const opt2 = fcbOption('dwarf-paladin-b', 'Paladin', {
+      type: 'feature_uses_per_day',
+      featureName: 'domain_power',
+      perLevelValue: { numerator: 1, denominator: 2 },
+      requiresPickOne: true,
+    });
+    const entry = clsWithFCB('Paladin', 4, [
+      { level: 1, type: 'alternate' as const, optionId: 'dwarf-paladin-a' },
+      { level: 2, type: 'alternate' as const, optionId: 'dwarf-paladin-b' },
+      { level: 3, type: 'alternate' as const, optionId: 'dwarf-paladin-a' },
+      { level: 4, type: 'alternate' as const, optionId: 'dwarf-paladin-b' },
+    ]);
+    const result = computeFCBAlternateAccumulation([entry], [opt1, opt2]);
+    expect(result).toHaveLength(2);
+    const a = result.find((r) => r.optionId === 'dwarf-paladin-a')!;
+    const b = result.find((r) => r.optionId === 'dwarf-paladin-b')!;
+    expect(a.count).toBe(2);
+    expect(a.display).toBe('+1 concentration');
+    expect(b.count).toBe(2);
+    expect(b.display).toContain('domain_power');
+  });
+
+  it('ignores unknown optionIds (option not in provided list)', () => {
+    const entry = clsWithFCB('Fighter', 2, [
+      { level: 1, type: 'alternate' as const, optionId: 'unknown-option' },
+    ]);
+    expect(computeFCBAlternateAccumulation([entry], [])).toEqual([]);
+  });
+
+  it('spans multiple class entries', () => {
+    const opt = fcbOption('human-fighter', 'Fighter', {
+      type: 'bonus',
+      bonusType: 'untyped',
+      target: 'cmb',
+      perLevelValue: { numerator: 1, denominator: 1 },
+    });
+    const cls1 = clsWithFCB('Fighter', 2, [
+      { level: 1, type: 'alternate' as const, optionId: 'human-fighter' },
+    ]);
+    const cls2 = clsWithFCB('Fighter', 3, [
+      { level: 1, type: 'alternate' as const, optionId: 'human-fighter' },
+      { level: 2, type: 'alternate' as const, optionId: 'human-fighter' },
+    ]);
+    const result = computeFCBAlternateAccumulation([cls1, cls2], [opt]);
+    expect(result[0].count).toBe(3);
+    expect(result[0].display).toBe('+3 cmb');
   });
 });
