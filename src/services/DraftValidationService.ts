@@ -741,15 +741,23 @@ export class DraftValidationService {
       // ── Broodmaster shared-evolution level gates ──
       if (classEntry.summonerBroodmaster?.sharedEvolutions) {
         for (const shared of classEntry.summonerBroodmaster.sharedEvolutions) {
-          const def = dataIndex.evolutions.get(shared.evolutionId);
-          if (!def) continue;
-          // Broodmaster pre-spend rules: Large at L8+, Huge at L13+.
-          if (def.id === 'evolution-large' && summonerLevel < 8) {
+          // Check by evolutionId directly — evolution-huge has no separate data entry
+          // (Huge is a cost variant of Large in the APG rules), so def lookup is unreliable.
+          if (shared.evolutionId === 'evolution-large' && summonerLevel < 8) {
             w.push(
               warn(
                 warnId(`eidolon-brood-large-${eidolon.id}`),
                 'classes',
                 `Broodmaster shared Large evolution requires summoner level 8 (current: ${summonerLevel}).`,
+              ),
+            );
+          }
+          if (shared.evolutionId === 'evolution-huge' && summonerLevel < 13) {
+            w.push(
+              warn(
+                warnId(`eidolon-brood-huge-${eidolon.id}`),
+                'classes',
+                `Broodmaster shared Huge evolution requires summoner level 13 (current: ${summonerLevel}).`,
               ),
             );
           }
