@@ -1230,23 +1230,46 @@ const characterEntrySlice = createSlice({
       }
     },
 
-    setEidolonBaseForm(state, action: PayloadAction<{ eidolonId: string; baseForm: EidolonForm }>) {
+    setEidolonBaseForm(
+      state,
+      action: PayloadAction<{
+        eidolonId: string;
+        baseForm: EidolonForm;
+        removeEvolutionInstanceIds?: string[];
+      }>,
+    ) {
       const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
-      if (eid) {
-        eid.baseForm = action.payload.baseForm;
-        state.isDirty = true;
+      if (!eid) return;
+      eid.baseForm = action.payload.baseForm;
+      if (
+        action.payload.removeEvolutionInstanceIds &&
+        action.payload.removeEvolutionInstanceIds.length > 0
+      ) {
+        const toRemove = new Set(action.payload.removeEvolutionInstanceIds);
+        eid.selectedEvolutions = eid.selectedEvolutions.filter((s) => !toRemove.has(s.instanceId));
       }
+      state.isDirty = true;
     },
 
     setEidolonSubtype(
       state,
-      action: PayloadAction<{ eidolonId: string; subtype: EidolonSubtype | undefined }>,
+      action: PayloadAction<{
+        eidolonId: string;
+        subtype: EidolonSubtype | undefined;
+        removeEvolutionInstanceIds?: string[];
+      }>,
     ) {
       const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
-      if (eid) {
-        eid.subtype = action.payload.subtype;
-        state.isDirty = true;
+      if (!eid) return;
+      eid.subtype = action.payload.subtype;
+      if (
+        action.payload.removeEvolutionInstanceIds &&
+        action.payload.removeEvolutionInstanceIds.length > 0
+      ) {
+        const toRemove = new Set(action.payload.removeEvolutionInstanceIds);
+        eid.selectedEvolutions = eid.selectedEvolutions.filter((s) => !toRemove.has(s.instanceId));
       }
+      state.isDirty = true;
     },
 
     addSelectedEvolution(

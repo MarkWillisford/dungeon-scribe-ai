@@ -14,7 +14,6 @@
 import React, { useMemo, useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet, Alert } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
-import { InlinePicker, type PickerOption } from '@/components/ui/InlinePicker';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   addEidolon,
@@ -36,6 +35,8 @@ import { EidolonPoolService, type EidolonDataIndex } from '@/services/EidolonPoo
 import { ALL_EIDOLON_BASE_FORMS } from '@/data/eidolonBaseForms/index';
 import { ALL_EIDOLON_SUBTYPES } from '@/data/eidolonSubtypes/index';
 import { EvolutionPickerSheet } from './EvolutionPickerSheet';
+import { EidolonBaseFormPicker } from './EidolonBaseFormPicker';
+import { EidolonSubtypePicker } from './EidolonSubtypePicker';
 
 // ---- Helpers ----
 
@@ -47,23 +48,16 @@ function summonerEditionFromClassName(className: string): EidolonEdition {
   return /unchained/i.test(className) ? 'unchained' : 'apg';
 }
 
-function baseFormOptions(edition: EidolonEdition): PickerOption[] {
-  return ALL_EIDOLON_BASE_FORMS.filter((f) => f.edition === 'both' || f.edition === edition).map(
-    (f) => ({
-      label: f.legacyBaseForm ? `${f.name} (supplemental)` : f.name,
-      value: f.id,
-    }),
-  );
+function baseFormLabel(id: EidolonForm): string {
+  const form = ALL_EIDOLON_BASE_FORMS.find((f) => f.id === id);
+  if (!form) return id;
+  return form.legacyBaseForm ? `${form.name} (supplemental)` : form.name;
 }
 
-function subtypeOptions(currentBaseForm: EidolonForm): PickerOption[] {
-  const opts: PickerOption[] = [{ label: '—— pick one ——', value: '' }];
-  for (const st of ALL_EIDOLON_SUBTYPES) {
-    if (st.requiredBaseForms.length > 0 && !st.requiredBaseForms.includes(currentBaseForm))
-      continue;
-    opts.push({ label: st.name, value: st.id });
-  }
-  return opts;
+function subtypeLabel(id: EidolonSubtype | undefined): string {
+  if (!id) return '—— pick one ——';
+  const st = ALL_EIDOLON_SUBTYPES.find((s) => s.id === id);
+  return st?.name ?? id;
 }
 
 // ---- Component ----
@@ -160,11 +154,94 @@ function EidolonCard({ eidolon, edition, summonerLevel, draft, dataIndex }: Eido
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [baseFormPickerOpen, setBaseFormPickerOpen] = useState(false);
+  const [subtypePickerOpen, setSubtypePickerOpen] = useState(false);
 
   const breakdown = useMemo(
     () => EidolonPoolService.computePool(draft, eidolon.id, dataIndex),
     [draft, eidolon.id, dataIndex],
   );
+
+  const applyBaseFormChange = (newForm: EidolonForm) => {
+    setBaseFormPickerOpen(false);
+    if (newForm === eidolon.baseForm) return;
+
+    const invalidated = EidolonPoolService.computeInvalidatedEvolutions(
+      eidolon,
+      newForm,
+      null,
+      dataIndex,
+    );
+
+    if (invalidated.length === 0) {
+      dispatch(setEidolonBaseForm({ eidolonId: eidolon.id, baseForm: newForm }));
+      return;
+    }
+
+    const list = invalidated.map((i) => `• ${i.evolutionName} — ${i.reason}`).join('\n');
+    Alert.alert(
+      'Change base form?',
+      `Changing to ${baseFormLabel(newForm)} will remove ${invalidated.length} evolution${
+        invalidated.length === 1 ? '' : 's'
+      }:\n\n${list}`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Change & remove',
+          style: 'destructive',
+          onPress: () =>
+            dispatch(
+              setEidolonBaseForm({
+                eidolonId: eidolon.id,
+                baseForm: newForm,
+                removeEvolutionInstanceIds: invalidated.map((i) => i.instanceId),
+              }),
+            ),
+        },
+      ],
+    );
+  };
+
+  const applySubtypeChange = (newSubtype: EidolonSubtype | undefined) => {
+    setSubtypePickerOpen(false);
+    if (newSubtype === eidolon.subtype) return;
+
+    const invalidated = EidolonPoolService.computeInvalidatedEvolutions(
+      eidolon,
+      null,
+      newSubtype === undefined ? undefined : newSubtype,
+      dataIndex,
+    );
+
+    if (invalidated.length === 0) {
+      dispatch(setEidolonSubtype({ eidolonId: eidolon.id, subtype: newSubtype }));
+      return;
+    }
+
+    const list = invalidated.map((i) => `• ${i.evolutionName} — ${i.reason}`).join('\n');
+    const newLabel = newSubtype ? subtypeLabel(newSubtype) : 'no subtype';
+    Alert.alert(
+      'Change subtype?',
+      `Changing to ${newLabel} will remove ${invalidated.length} evolution${
+        invalidated.length === 1 ? '' : 's'
+      }:\n\n${list}`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Change & remove',
+          style: 'destructive',
+          onPress: () =>
+            dispatch(
+              setEidolonSubtype({
+                eidolonId: eidolon.id,
+                subtype: newSubtype,
+                removeEvolutionInstanceIds: invalidated.map((i) => i.instanceId),
+              }),
+            ),
+        },
+      ],
+    );
+  };
 
   const handleRemoveEidolon = () => {
     Alert.alert(
@@ -219,36 +296,64 @@ function EidolonCard({ eidolon, edition, summonerLevel, draft, dataIndex }: Eido
       {/* Base form */}
       <View style={styles.row}>
         <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Base form</Text>
-        <InlinePicker
-          value={eidolon.baseForm}
-          options={baseFormOptions(edition)}
-          onValueChange={(v) =>
-            dispatch(setEidolonBaseForm({ eidolonId: eidolon.id, baseForm: v as EidolonForm }))
-          }
-          style={styles.picker}
+        <Pressable
+          onPress={() => setBaseFormPickerOpen(true)}
+          style={[styles.pickerButton, { borderColor: colors.border.DEFAULT }]}
+          accessibilityRole="button"
+          accessibilityLabel={`Base form: ${baseFormLabel(eidolon.baseForm)}. Tap to change.`}
           testID={`eidolon-base-form-${eidolon.id}`}
-        />
+        >
+          <Text style={[styles.pickerButtonText, { color: colors.text.primary }]}>
+            {baseFormLabel(eidolon.baseForm)}
+          </Text>
+          <Text style={[styles.pickerChevron, { color: colors.text.tertiary }]}>▾</Text>
+        </Pressable>
       </View>
 
       {/* Subtype (UC only) */}
       {edition === 'unchained' && (
         <View style={styles.row}>
           <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Subtype</Text>
-          <InlinePicker
-            value={eidolon.subtype ?? ''}
-            options={subtypeOptions(eidolon.baseForm)}
-            onValueChange={(v) =>
-              dispatch(
-                setEidolonSubtype({
-                  eidolonId: eidolon.id,
-                  subtype: (v || undefined) as EidolonSubtype | undefined,
-                }),
-              )
-            }
-            style={styles.picker}
+          <Pressable
+            onPress={() => setSubtypePickerOpen(true)}
+            style={[styles.pickerButton, { borderColor: colors.border.DEFAULT }]}
+            accessibilityRole="button"
+            accessibilityLabel={`Subtype: ${subtypeLabel(eidolon.subtype)}. Tap to change.`}
             testID={`eidolon-subtype-${eidolon.id}`}
-          />
+          >
+            <Text
+              style={[
+                styles.pickerButtonText,
+                {
+                  color: eidolon.subtype ? colors.text.primary : colors.text.tertiary,
+                  fontStyle: eidolon.subtype ? 'normal' : 'italic',
+                },
+              ]}
+            >
+              {subtypeLabel(eidolon.subtype)}
+            </Text>
+            <Text style={[styles.pickerChevron, { color: colors.text.tertiary }]}>▾</Text>
+          </Pressable>
         </View>
+      )}
+
+      <EidolonBaseFormPicker
+        visible={baseFormPickerOpen}
+        edition={edition}
+        currentBaseForm={eidolon.baseForm}
+        onSelect={applyBaseFormChange}
+        onClose={() => setBaseFormPickerOpen(false)}
+      />
+
+      {edition === 'unchained' && (
+        <EidolonSubtypePicker
+          visible={subtypePickerOpen}
+          currentBaseForm={eidolon.baseForm}
+          currentSubtype={eidolon.subtype}
+          summonerLevel={summonerLevel}
+          onSelect={applySubtypeChange}
+          onClose={() => setSubtypePickerOpen(false)}
+        />
       )}
 
       {/* Pool breakdown */}
@@ -566,8 +671,23 @@ const styles = StyleSheet.create({
     fontSize: 12,
     width: 90,
   },
-  picker: {
+  pickerButton: {
     flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderRadius: 6,
+    borderWidth: StyleSheet.hairlineWidth,
+    minHeight: 36,
+  },
+  pickerButtonText: {
+    flex: 1,
+    fontSize: 13,
+  },
+  pickerChevron: {
+    fontSize: 12,
+    marginLeft: 6,
   },
   poolSummary: {
     marginTop: 10,

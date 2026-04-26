@@ -32,28 +32,16 @@ jest.mock('@/hooks/useTheme', () => ({
   }),
 }));
 
-// EvolutionPickerSheet uses Modal — stub it for simpler rendering.
+// Picker sheets all render inside Modal — stub to keep this suite focused on EidolonSection.
 jest.mock('@/components/character/direct-entry/EvolutionPickerSheet', () => ({
   EvolutionPickerSheet: () => null,
 }));
-
-// InlinePicker uses Modal under the hood; render the label inline so assertions work.
-jest.mock('@/components/ui/InlinePicker', () => {
-  const React = require('react');
-  const { View, Text } = require('react-native');
-  return {
-    InlinePicker: ({
-      value,
-      options,
-    }: {
-      value: string;
-      options: Array<{ label: string; value: string }>;
-    }) => {
-      const selected = options.find((o) => o.value === value);
-      return React.createElement(View, {}, React.createElement(Text, {}, selected?.label ?? '…'));
-    },
-  };
-});
+jest.mock('@/components/character/direct-entry/EidolonBaseFormPicker', () => ({
+  EidolonBaseFormPicker: () => null,
+}));
+jest.mock('@/components/character/direct-entry/EidolonSubtypePicker', () => ({
+  EidolonSubtypePicker: () => null,
+}));
 
 // ---- Helpers ----
 

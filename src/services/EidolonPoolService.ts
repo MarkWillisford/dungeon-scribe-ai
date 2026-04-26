@@ -344,6 +344,66 @@ export class EidolonPoolService {
     return { allowed: true };
   }
 
+  /**
+   * Compute which currently-selected evolutions would be invalidated by
+   * changing the eidolon's base form or subtype to the proposed values.
+   *
+   * Only checks `formRestrictions` and `subtypeRestrictions` on each evolution
+   * definition — other prereqs (evolution chains, level gates, ability_score)
+   * don't depend on form/subtype, so they remain valid by definition.
+   *
+   * Pass `proposedBaseForm: null` to skip a form change; pass
+   * `proposedSubtype: null` to skip a subtype change. Passing `undefined` for
+   * `proposedSubtype` means "no subtype at all" (UC Summoners can't be here,
+   * but APG -> UC flips won't show up since APG has no subtype).
+   */
+  static computeInvalidatedEvolutions(
+    eidolon: DraftEidolon,
+    proposedBaseForm: DraftEidolon['baseForm'] | null,
+    proposedSubtype: DraftEidolon['subtype'] | null,
+    dataIndex: EidolonDataIndex,
+  ): Array<{ instanceId: string; evolutionId: string; evolutionName: string; reason: string }> {
+    const effectiveBaseForm = proposedBaseForm ?? eidolon.baseForm;
+    const effectiveSubtype = proposedSubtype === null ? eidolon.subtype : proposedSubtype;
+
+    const invalidated: Array<{
+      instanceId: string;
+      evolutionId: string;
+      evolutionName: string;
+      reason: string;
+    }> = [];
+
+    for (const sel of eidolon.selectedEvolutions) {
+      const def = dataIndex.evolutions.get(sel.evolutionId);
+      if (!def) continue; // unknown evolution — let validation handle it separately
+
+      if (def.formRestrictions && def.formRestrictions.length > 0) {
+        if (!def.formRestrictions.includes(effectiveBaseForm)) {
+          invalidated.push({
+            instanceId: sel.instanceId,
+            evolutionId: sel.evolutionId,
+            evolutionName: def.name,
+            reason: `requires base form: ${def.formRestrictions.join(', ')}`,
+          });
+          continue;
+        }
+      }
+
+      if (def.subtypeRestrictions && def.subtypeRestrictions.length > 0) {
+        if (!effectiveSubtype || !def.subtypeRestrictions.includes(effectiveSubtype)) {
+          invalidated.push({
+            instanceId: sel.instanceId,
+            evolutionId: sel.evolutionId,
+            evolutionName: def.name,
+            reason: `requires subtype: ${def.subtypeRestrictions.join(', ')}`,
+          });
+        }
+      }
+    }
+
+    return invalidated;
+  }
+
   // ---- Aspect / Greater Aspect ----
 
   /**

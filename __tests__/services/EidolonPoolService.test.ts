@@ -661,3 +661,113 @@ describe('EidolonPoolService — canSelectEvolution', () => {
     expect(result.allowed).toBe(true);
   });
 });
+
+// ---- computeInvalidatedEvolutions ----
+
+describe('EidolonPoolService — computeInvalidatedEvolutions', () => {
+  test('returns empty when nothing is selected', () => {
+    const eidolon = makeEidolon({ selectedEvolutions: [] });
+    expect(
+      EidolonPoolService.computeInvalidatedEvolutions(eidolon, 'quadruped', null, DATA_INDEX),
+    ).toEqual([]);
+  });
+
+  test('returns empty when selections have no form/subtype restrictions', () => {
+    const eidolon = makeEidolon({
+      baseForm: 'biped',
+      subtype: 'demon',
+      selectedEvolutions: [selectEvolution('evolution-bite')],
+    });
+    const result = EidolonPoolService.computeInvalidatedEvolutions(
+      eidolon,
+      'quadruped',
+      null,
+      DATA_INDEX,
+    );
+    expect(result).toEqual([]);
+  });
+
+  test('flags evolutions whose subtype restriction the new subtype breaks', () => {
+    // evolution-mount-uc requires daemon/demon/devil/elemental/protean AND quadruped/serpentine
+    const eidolon = makeEidolon({
+      edition: 'unchained',
+      baseForm: 'quadruped',
+      subtype: 'demon',
+      selectedEvolutions: [selectEvolution('evolution-mount-uc')],
+    });
+    const result = EidolonPoolService.computeInvalidatedEvolutions(
+      eidolon,
+      null,
+      'angel',
+      DATA_INDEX,
+    );
+    expect(result).toHaveLength(1);
+    expect(result[0].evolutionId).toBe('evolution-mount-uc');
+    expect(result[0].reason).toMatch(/subtype/);
+  });
+
+  test('flags evolutions whose form restriction the new base form breaks', () => {
+    // evolution-mount-uc requires quadruped or serpentine base form
+    const eidolon = makeEidolon({
+      edition: 'unchained',
+      baseForm: 'quadruped',
+      subtype: 'demon',
+      selectedEvolutions: [selectEvolution('evolution-mount-uc')],
+    });
+    const result = EidolonPoolService.computeInvalidatedEvolutions(
+      eidolon,
+      'biped',
+      null,
+      DATA_INDEX,
+    );
+    expect(result).toHaveLength(1);
+    expect(result[0].evolutionId).toBe('evolution-mount-uc');
+    expect(result[0].reason).toMatch(/base form/);
+  });
+
+  test('flags subtype-restricted evolutions when subtype is cleared', () => {
+    const eidolon = makeEidolon({
+      edition: 'unchained',
+      baseForm: 'quadruped',
+      subtype: 'demon',
+      selectedEvolutions: [selectEvolution('evolution-mount-uc')],
+    });
+    const result = EidolonPoolService.computeInvalidatedEvolutions(
+      eidolon,
+      null,
+      undefined,
+      DATA_INDEX,
+    );
+    expect(result).toHaveLength(1);
+    expect(result[0].evolutionId).toBe('evolution-mount-uc');
+  });
+
+  test('returns the instanceId from the SelectedEvolution', () => {
+    const selection = selectEvolution('evolution-mount-uc');
+    const eidolon = makeEidolon({
+      baseForm: 'quadruped',
+      subtype: 'demon',
+      selectedEvolutions: [selection],
+    });
+    const result = EidolonPoolService.computeInvalidatedEvolutions(
+      eidolon,
+      'biped',
+      null,
+      DATA_INDEX,
+    );
+    expect(result[0].instanceId).toBe(selection.instanceId);
+  });
+
+  test('ignores unknown evolution ids (leaves validation to surface them)', () => {
+    const eidolon = makeEidolon({
+      selectedEvolutions: [selectEvolution('evolution-does-not-exist')],
+    });
+    const result = EidolonPoolService.computeInvalidatedEvolutions(
+      eidolon,
+      'biped',
+      null,
+      DATA_INDEX,
+    );
+    expect(result).toEqual([]);
+  });
+});
