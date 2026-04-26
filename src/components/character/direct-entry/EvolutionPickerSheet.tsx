@@ -50,6 +50,10 @@ interface EvolutionPickerSheetProps {
   remainingPool: number;
   dataIndex: EidolonDataIndex;
   onClose: () => void;
+  /** When set, only evolutions with these IDs appear in the list (e.g. Large/Huge for Broodmaster). */
+  allowedEvolutionIds?: string[];
+  /** When provided, called instead of dispatching addSelectedEvolution. Caller controls the action. */
+  onEvolutionSelected?: (evolutionId: string, metadata?: SelectedEvolutionMetadata) => void;
 }
 
 // ---- Component ----
@@ -61,6 +65,8 @@ export function EvolutionPickerSheet({
   remainingPool,
   dataIndex,
   onClose,
+  allowedEvolutionIds,
+  onEvolutionSelected,
 }: EvolutionPickerSheetProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
@@ -79,6 +85,21 @@ export function EvolutionPickerSheet({
     onClose();
   };
 
+  const handleSelected = (evolutionId: string, metadata?: SelectedEvolutionMetadata) => {
+    if (onEvolutionSelected) {
+      onEvolutionSelected(evolutionId, metadata);
+    } else {
+      dispatch(
+        addSelectedEvolution({
+          eidolonId: eidolon.id,
+          evolutionId,
+          metadata,
+        }),
+      );
+    }
+    handleClose();
+  };
+
   // Filter + score all evolutions against the current eidolon. Evolutions whose
   // edition / base form / subtype doesn't match are hidden; anything else is
   // rendered with its canSelectEvolution verdict as a subtitle.
@@ -87,6 +108,7 @@ export function EvolutionPickerSheet({
     const q = query.trim().toLowerCase();
 
     const visible = all.filter((evo) => {
+      if (allowedEvolutionIds && !allowedEvolutionIds.includes(evo.id)) return false;
       // Hard filters: edition, base form, subtype — these block the evolution
       // from even appearing in the list.
       if (evo.summoner && evo.summoner !== eidolon.edition) return false;
@@ -113,18 +135,11 @@ export function EvolutionPickerSheet({
     const byCost: Record<1 | 2 | 3 | 4, EidolonEvolutionEntry[]> = { 1: [], 2: [], 3: [], 4: [] };
     for (const e of visible) byCost[e.evolutionPointCost].push(e);
     return byCost;
-  }, [dataIndex, eidolon.edition, eidolon.baseForm, eidolon.subtype, query]);
+  }, [dataIndex, eidolon.edition, eidolon.baseForm, eidolon.subtype, query, allowedEvolutionIds]);
 
   const commit = (metadata?: SelectedEvolutionMetadata) => {
     if (!stepEvolution) return;
-    dispatch(
-      addSelectedEvolution({
-        eidolonId: eidolon.id,
-        evolutionId: stepEvolution.id,
-        metadata,
-      }),
-    );
-    handleClose();
+    handleSelected(stepEvolution.id, metadata);
   };
 
   return (
@@ -209,18 +224,10 @@ export function EvolutionPickerSheet({
                         remainingPool={remainingPool}
                         dataIndex={dataIndex}
                         onSelect={() => {
-                          // If the evolution needs metadata, route through the
-                          // metadata step. Otherwise dispatch immediately.
                           if (needsMetadata(evo)) {
                             setStepEvolution(evo);
                           } else {
-                            dispatch(
-                              addSelectedEvolution({
-                                eidolonId: eidolon.id,
-                                evolutionId: evo.id,
-                              }),
-                            );
-                            handleClose();
+                            handleSelected(evo.id);
                           }
                         }}
                       />

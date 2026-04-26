@@ -37,6 +37,8 @@ import { ALL_EIDOLON_SUBTYPES } from '@/data/eidolonSubtypes/index';
 import { EvolutionPickerSheet } from './EvolutionPickerSheet';
 import { EidolonBaseFormPicker } from './EidolonBaseFormPicker';
 import { EidolonSubtypePicker } from './EidolonSubtypePicker';
+import { EidolonAspectCard } from './EidolonAspectCard';
+import { BroodmasterPoolCard } from './BroodmasterPoolCard';
 
 // ---- Helpers ----
 
@@ -81,6 +83,9 @@ export function EidolonSection({ classEntry }: EidolonSectionProps) {
   );
 
   const edition = summonerEditionFromClassName(classEntry.className);
+  const archetypeKey = classEntry.archetypeId?.toLowerCase().trim() ?? '';
+  const isBroodmaster = archetypeKey.includes('broodmaster');
+  const isSynthesist = archetypeKey.includes('synthesist');
 
   // ── No eidolons yet — show "Create Eidolon" ──
   if (eidolons.length === 0) {
@@ -126,6 +131,14 @@ export function EidolonSection({ classEntry }: EidolonSectionProps) {
       <Text style={[styles.sectionTitle, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
         Eidolon
       </Text>
+      {isSynthesist && (
+        <Text style={[styles.archetypeNote, { color: colors.text.tertiary }]}>
+          Synthesist — evolutions apply to the fused composite form.
+        </Text>
+      )}
+      {isBroodmaster && (
+        <BroodmasterPoolCard classEntry={classEntry} edition={edition} dataIndex={dataIndex} />
+      )}
       {eidolons.map((eidolon) => (
         <EidolonCard
           key={eidolon.id}
@@ -134,6 +147,7 @@ export function EidolonSection({ classEntry }: EidolonSectionProps) {
           summonerLevel={classEntry.level}
           draft={draft}
           dataIndex={dataIndex}
+          showAspectCard={!isSynthesist}
         />
       ))}
     </View>
@@ -148,9 +162,17 @@ interface EidolonCardProps {
   summonerLevel: number;
   draft: CharacterDraft;
   dataIndex: EidolonDataIndex;
+  showAspectCard: boolean;
 }
 
-function EidolonCard({ eidolon, edition, summonerLevel, draft, dataIndex }: EidolonCardProps) {
+function EidolonCard({
+  eidolon,
+  edition,
+  summonerLevel,
+  draft,
+  dataIndex,
+  showAspectCard,
+}: EidolonCardProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
@@ -415,6 +437,10 @@ function EidolonCard({ eidolon, edition, summonerLevel, draft, dataIndex }: Eido
         dataIndex={dataIndex}
         onClose={() => setPickerOpen(false)}
       />
+
+      {showAspectCard && (
+        <EidolonAspectCard eidolon={eidolon} summonerLevel={summonerLevel} dataIndex={dataIndex} />
+      )}
     </View>
   );
 }
@@ -624,6 +650,12 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 14,
     fontWeight: '700',
+    marginBottom: 8,
+  },
+  archetypeNote: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    fontStyle: 'italic',
     marginBottom: 8,
   },
   addEidolonButton: {

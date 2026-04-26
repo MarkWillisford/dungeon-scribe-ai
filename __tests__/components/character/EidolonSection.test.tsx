@@ -42,6 +42,12 @@ jest.mock('@/components/character/direct-entry/EidolonBaseFormPicker', () => ({
 jest.mock('@/components/character/direct-entry/EidolonSubtypePicker', () => ({
   EidolonSubtypePicker: () => null,
 }));
+jest.mock('@/components/character/direct-entry/EidolonAspectCard', () => ({
+  EidolonAspectCard: () => null,
+}));
+jest.mock('@/components/character/direct-entry/BroodmasterPoolCard', () => ({
+  BroodmasterPoolCard: () => null,
+}));
 
 // ---- Helpers ----
 
@@ -120,5 +126,27 @@ describe('EidolonSection', () => {
     const texts = getAllText().join(' ');
     expect(texts).toContain('Base form');
     expect(texts).not.toContain('Subtype');
+  });
+
+  it('shows synthesist note when archetypeId includes synthesist', () => {
+    mockEidolons = [
+      {
+        id: 'eid-1',
+        name: 'Aziel',
+        summonerClassEntryId: 'summoner-1',
+        edition: 'apg',
+        baseForm: 'biped',
+        selectedEvolutions: [],
+      },
+    ];
+    mockDraft = {
+      eidolons: mockEidolons,
+      classes: [makeClassEntry({ archetypeId: 'summoner-synthesist' })],
+      featSlots: [],
+    };
+    const { getAllText } = render(
+      <EidolonSection classEntry={makeClassEntry({ archetypeId: 'summoner-synthesist' })} />,
+    );
+    expect(getAllText().join(' ')).toContain('Synthesist');
   });
 });

@@ -1337,6 +1337,90 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
+    // ---- Broodmaster shared evolutions (live on the DraftClassEntry) ----
+
+    setBroodmasterShared(
+      state,
+      action: PayloadAction<{
+        classEntryId: string;
+        evolutionId: string;
+        metadata?: SelectedEvolutionMetadata;
+      }>,
+    ) {
+      const cls = state.draft.classes.find((c) => c.id === action.payload.classEntryId);
+      if (!cls) return;
+      if (!cls.summonerBroodmaster) {
+        cls.summonerBroodmaster = { sharedEvolutions: [] };
+      }
+      const instanceId = `brood-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+      cls.summonerBroodmaster.sharedEvolutions.push({
+        instanceId,
+        evolutionId: action.payload.evolutionId,
+        metadata: action.payload.metadata,
+      });
+      state.isDirty = true;
+    },
+
+    removeBroodmasterShared(
+      state,
+      action: PayloadAction<{ classEntryId: string; instanceId: string }>,
+    ) {
+      const cls = state.draft.classes.find((c) => c.id === action.payload.classEntryId);
+      if (!cls?.summonerBroodmaster) return;
+      const before = cls.summonerBroodmaster.sharedEvolutions.length;
+      cls.summonerBroodmaster.sharedEvolutions = cls.summonerBroodmaster.sharedEvolutions.filter(
+        (s) => s.instanceId !== action.payload.instanceId,
+      );
+      if (cls.summonerBroodmaster.sharedEvolutions.length !== before) state.isDirty = true;
+    },
+
+    // ---- Aspect / Greater Aspect (live on the DraftEidolon) ----
+
+    setAspectDivert(state, action: PayloadAction<{ eidolonId: string; divertedPoints: number }>) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      if (!eid.aspectTransfer) {
+        eid.aspectTransfer = { divertedPoints: 0, summonerEvolutions: [] };
+      }
+      eid.aspectTransfer.divertedPoints = Math.max(0, action.payload.divertedPoints);
+      state.isDirty = true;
+    },
+
+    addSummonerAspectEvolution(
+      state,
+      action: PayloadAction<{
+        eidolonId: string;
+        evolutionId: string;
+        metadata?: SelectedEvolutionMetadata;
+      }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      if (!eid.aspectTransfer) {
+        eid.aspectTransfer = { divertedPoints: 0, summonerEvolutions: [] };
+      }
+      const instanceId = `asp-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+      eid.aspectTransfer.summonerEvolutions.push({
+        instanceId,
+        evolutionId: action.payload.evolutionId,
+        metadata: action.payload.metadata,
+      });
+      state.isDirty = true;
+    },
+
+    removeSummonerAspectEvolution(
+      state,
+      action: PayloadAction<{ eidolonId: string; instanceId: string }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid?.aspectTransfer) return;
+      const before = eid.aspectTransfer.summonerEvolutions.length;
+      eid.aspectTransfer.summonerEvolutions = eid.aspectTransfer.summonerEvolutions.filter(
+        (s) => s.instanceId !== action.payload.instanceId,
+      );
+      if (eid.aspectTransfer.summonerEvolutions.length !== before) state.isDirty = true;
+    },
+
     // ---- Notes ----
 
     setCharacterNotes(state, action: PayloadAction<string>) {
@@ -1445,6 +1529,11 @@ export const {
   removeSelectedEvolution,
   updateEvolutionMetadata,
   setEidolonPoolOverride,
+  setBroodmasterShared,
+  removeBroodmasterShared,
+  setAspectDivert,
+  addSummonerAspectEvolution,
+  removeSummonerAspectEvolution,
   setCharacterNotes,
   setCampaignNotes,
 } = characterEntrySlice.actions;
