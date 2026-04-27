@@ -141,10 +141,11 @@ export const BATTLE_TEMPLAR_CLASS: ExpandedClassData = {
       'Ability to use maneuvers from Golden Lion or Iron Tortoise discipline, including at least one strike and one stance',
     ],
   },
-  spellcasting: {
-    type: 'Divine',
-    casting: 'Prepared',
-    spellList: 'Advances existing divine spellcasting class (levels 2-9)',
+  spellcasting: { type: 'None', casting: 'None' },
+  advancesSpellcasting: {
+    mode: 'single',
+    tradition: 'divine',
+    atLevels: [2, 3, 4, 5, 6, 7, 8, 9],
   },
   initiating: {
     type: 'Martial',

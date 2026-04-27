@@ -134,10 +134,11 @@ export const BLADECASTER_CLASS: ExpandedClassData = {
         'The bladecaster may activate this ability as a free action when he casts a spell that requires an attack roll. He may initiate a strike as a free part of casting that spell, using the spell in place of his normal ranged or melee attack. The spell\'s range is reduced to 30 feet or the spell\'s range, whichever is smaller. If the target has spell resistance, the bladecaster must overcome it or the maneuver portion of the attack also fails. If the spell allows a saving throw that negates its effects, a successful save also negates the maneuver. This ability may be used a number of times per day equal to 1 + the bladecaster\'s initiator modifier.',
     },
   ],
-  spellcasting: {
-    type: 'Arcane',
-    casting: 'Prepared',
-    spellList: 'Advances existing arcane spellcasting class (levels 2-9)',
+  spellcasting: { type: 'None', casting: 'None' },
+  advancesSpellcasting: {
+    mode: 'single',
+    tradition: 'arcane',
+    atLevels: [2, 3, 4, 5, 6, 7, 8, 9],
   },
   initiating: {
     type: 'Martial',

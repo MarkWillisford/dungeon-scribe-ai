@@ -149,12 +149,7 @@ export const AWAKENED_BLADE_CLASS: ExpandedClassData = {
         'At 10th level, while psionically focused, the awakened blade is considered to have the benefits of the Stance of the Inner Eye without needing to initiate the stance. He may continue to gain these benefits while he adopts any other martial stance that he knows, effectively gaining the benefits of both stances simultaneously. This is a supernatural ability.',
     },
   ],
-  spellcasting: {
-    type: 'Psychic',
-    casting: 'Spontaneous',
-    spellList: 'Psychic Warrior',
-    spellTableKey: 'AWAKENED_BLADE_MANIFESTING',
-  },
+  spellcasting: { type: 'None', casting: 'None' },
   initiating: {
     type: 'Martial',
     initiatingAbility: 'WIS',

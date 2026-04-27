@@ -275,8 +275,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
       'scarlet-throne',
       'solar-wind',
       'thrashing-dragon',
-      'piercing-thunder',
-      'tempest-gale',
+      'piercing-thunder', // choice: Piercing Thunder OR Tempest Gale
     ],
     progressionTableKey: 'warlord',
     recoveryMechanics: {

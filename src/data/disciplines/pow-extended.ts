@@ -6,7 +6,7 @@
 import type { DisciplineDefinition } from '@/types/initiating';
 
 const POWE_SOURCE = {
-  bookId: 'powe',
+  bookId: 'pow-extended',
   bookName: 'Path of War: Expanded',
   publisher: 'Dreamscarred Press',
 } as const;
