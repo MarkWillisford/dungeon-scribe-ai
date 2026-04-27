@@ -251,6 +251,18 @@ export function render(element: React.ReactElement) {
       return nodes.length > 0 ? nodes[0] : null;
     },
 
+    getByLabelText(label: string) {
+      const nodes = findAllNodes(tree, (n) => n.props.accessibilityLabel === label);
+      if (nodes.length === 0)
+        throw new Error(`Could not find element with accessibilityLabel: ${label}`);
+      return nodes[0];
+    },
+
+    queryByLabelText(label: string) {
+      const nodes = findAllNodes(tree, (n) => n.props.accessibilityLabel === label);
+      return nodes.length > 0 ? nodes[0] : null;
+    },
+
     getAllText() {
       return getAllText(tree);
     },
