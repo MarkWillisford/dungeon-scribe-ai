@@ -246,7 +246,7 @@ export function EvolutionPickerSheet({
 
 // ---- Individual row ----
 
-function EvolutionRow({
+export function EvolutionRow({
   evolution,
   eidolon,
   summonerLevel,
@@ -309,7 +309,7 @@ function EvolutionRow({
 
 // ---- Metadata step ----
 
-function MetadataStep({
+export function MetadataStep({
   evolution,
   metadata,
   onChange,
@@ -330,13 +330,8 @@ function MetadataStep({
     (isAbilityIncrease && metadata.ability) ||
     (kind === 'ability' && metadata.ability) ||
     (kind === 'energy' && metadata.energyType) ||
-    (kind === 'attack' && metadata.attackId) ||
-    (kind === 'skill' && metadata.skillKey) ||
-    (kind === 'spell' && metadata.spellId) ||
-    (kind === 'feat' && metadata.featId) ||
-    (kind === 'slot' && metadata.slotId) ||
-    (kind === 'limbPair' && metadata.notes) ||
-    (kind === 'tail' && metadata.notes),
+    (['attack', 'skill', 'spell', 'feat', 'slot', 'limbPair', 'tail'].includes(kind ?? '') &&
+      metadata.notes),
   );
 
   return (
@@ -422,6 +417,7 @@ function MetadataStep({
             },
           ]}
           accessibilityRole="button"
+          accessibilityLabel="Back"
         >
           <Text style={[styles.metadataButtonText, { color: colors.text.secondary }]}>Back</Text>
         </Pressable>
@@ -438,6 +434,7 @@ function MetadataStep({
           ]}
           accessibilityRole="button"
           accessibilityState={{ disabled: !canConfirm }}
+          accessibilityLabel="Add evolution"
         >
           <Text style={[styles.metadataButtonText, { color: '#1A1F26' }]}>Add</Text>
         </Pressable>
@@ -448,12 +445,12 @@ function MetadataStep({
 
 // ---- Helpers ----
 
-function needsMetadata(evolution: EidolonEvolutionEntry): boolean {
+export function needsMetadata(evolution: EidolonEvolutionEntry): boolean {
   if (evolution.id === 'evolution-ability-increase') return true;
   return Boolean(evolution.stacking.requiresDifferentMetadata);
 }
 
-function labelForKind(kind: string): string {
+export function labelForKind(kind: string): string {
   switch (kind) {
     case 'attack':
       return 'Attack';
@@ -474,7 +471,7 @@ function labelForKind(kind: string): string {
   }
 }
 
-function placeholderForKind(kind: string): string {
+export function placeholderForKind(kind: string): string {
   switch (kind) {
     case 'attack':
       return 'e.g. bite, claws, slam';

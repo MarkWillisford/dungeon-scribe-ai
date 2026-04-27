@@ -1,8 +1,16 @@
 import React from 'react';
 import { render, fireEvent } from '../../helpers/testUtils';
-import { EvolutionPickerSheet } from '@/components/character/direct-entry/EvolutionPickerSheet';
+import {
+  EvolutionPickerSheet,
+  EvolutionRow,
+  MetadataStep,
+  needsMetadata,
+  labelForKind,
+  placeholderForKind,
+} from '@/components/character/direct-entry/EvolutionPickerSheet';
 import { EidolonPoolService } from '@/services/EidolonPoolService';
-import type { DraftEidolon } from '@/types/eidolon';
+import type { DraftEidolon, SelectedEvolutionMetadata } from '@/types/eidolon';
+import type { EidolonEvolutionEntry } from '@/types/classOptions';
 
 // ---- Redux mock ----
 
@@ -218,5 +226,417 @@ describe('EvolutionPickerSheet', () => {
       );
       expect(getAllText().join(' ')).toContain('Add Evolution');
     });
+  });
+});
+
+// ---- Helper function tests ----
+
+describe('needsMetadata', () => {
+  function makeEvolution(overrides: Partial<EidolonEvolutionEntry> = {}): EidolonEvolutionEntry {
+    return {
+      id: 'evolution-bite',
+      name: 'Bite',
+      evolutionPointCost: 1,
+      stacking: { canRepeat: false },
+      effects: [],
+      source: 'pf1e-apg',
+      isOfficial: true,
+      verificationStatus: 'needs_review',
+      visibility: 'global',
+      rev: 1,
+      ...overrides,
+    } as EidolonEvolutionEntry;
+  }
+
+  it('returns true for evolution-ability-increase', () => {
+    expect(needsMetadata(makeEvolution({ id: 'evolution-ability-increase' }))).toBe(true);
+  });
+
+  it('returns true when stacking.requiresDifferentMetadata is set', () => {
+    expect(
+      needsMetadata(
+        makeEvolution({ stacking: { canRepeat: true, requiresDifferentMetadata: 'energy' } }),
+      ),
+    ).toBe(true);
+  });
+
+  it('returns false when canRepeat is false and id is not ability-increase', () => {
+    expect(
+      needsMetadata(makeEvolution({ id: 'evolution-bite', stacking: { canRepeat: false } })),
+    ).toBe(false);
+  });
+
+  it('returns false when canRepeat is true but no requiresDifferentMetadata', () => {
+    expect(needsMetadata(makeEvolution({ stacking: { canRepeat: true } }))).toBe(false);
+  });
+});
+
+describe('labelForKind', () => {
+  it('returns correct labels for all known kinds', () => {
+    expect(labelForKind('attack')).toBe('Attack');
+    expect(labelForKind('skill')).toBe('Skill');
+    expect(labelForKind('spell')).toBe('Spell');
+    expect(labelForKind('feat')).toBe('Feat');
+    expect(labelForKind('slot')).toBe('Item slot');
+    expect(labelForKind('limbPair')).toBe('Limb pair');
+    expect(labelForKind('tail')).toBe('Tail');
+  });
+
+  it('returns Option for unknown kinds', () => {
+    expect(labelForKind('unknown')).toBe('Option');
+  });
+});
+
+describe('placeholderForKind', () => {
+  it('returns correct placeholders for all known kinds', () => {
+    expect(placeholderForKind('attack')).toBe('e.g. bite, claws, slam');
+    expect(placeholderForKind('skill')).toBe('e.g. stealth');
+    expect(placeholderForKind('spell')).toBe('e.g. magic-missile');
+    expect(placeholderForKind('feat')).toBe('e.g. improved-grapple');
+    expect(placeholderForKind('slot')).toBe('e.g. neck, belt');
+    expect(placeholderForKind('limbPair')).toBe('arms or legs');
+    expect(placeholderForKind('tail')).toBe('which tail (if more than one)');
+  });
+
+  it('returns empty string for unknown kinds', () => {
+    expect(placeholderForKind('unknown')).toBe('');
+  });
+});
+
+// ---- EvolutionRow tests ----
+
+describe('EvolutionRow', () => {
+  const DATA_INDEX_ROW = EidolonPoolService.buildIndexFromStaticData();
+
+  function makeEvolutionFromIndex(id: string): EidolonEvolutionEntry {
+    const evo = DATA_INDEX_ROW.evolutions.get(id);
+    if (!evo) throw new Error(`Evolution not found: ${id}`);
+    return evo;
+  }
+
+  function makeEidolonForRow(overrides: Partial<DraftEidolon> = {}): DraftEidolon {
+    return {
+      id: 'eid-1',
+      name: 'Aziel',
+      summonerClassEntryId: 'summoner-1',
+      edition: 'apg',
+      baseForm: 'biped',
+      selectedEvolutions: [],
+      ...overrides,
+    };
+  }
+
+  const onSelect = jest.fn();
+
+  beforeEach(() => onSelect.mockClear());
+
+  it('renders the evolution name and cost', () => {
+    const evo = makeEvolutionFromIndex('evolution-bite');
+    const { getAllText } = render(
+      <EvolutionRow
+        evolution={evo}
+        eidolon={makeEidolonForRow()}
+        summonerLevel={5}
+        remainingPool={6}
+        dataIndex={DATA_INDEX_ROW}
+        onSelect={onSelect}
+      />,
+    );
+    const text = getAllText().join('');
+    expect(text).toContain('Bite');
+    expect(text).toContain('1');
+  });
+
+  it('renders the description when present', () => {
+    const evo = makeEvolutionFromIndex('evolution-bite');
+    const { getAllText } = render(
+      <EvolutionRow
+        evolution={evo}
+        eidolon={makeEidolonForRow()}
+        summonerLevel={5}
+        remainingPool={6}
+        dataIndex={DATA_INDEX_ROW}
+        onSelect={onSelect}
+      />,
+    );
+    // description is present on bite evolution
+    expect(getAllText().join('').length).toBeGreaterThan(10);
+  });
+
+  it('calls onSelect when pressed (allowed evolution)', () => {
+    const evo = makeEvolutionFromIndex('evolution-bite');
+    const { getByRole } = render(
+      <EvolutionRow
+        evolution={evo}
+        eidolon={makeEidolonForRow()}
+        summonerLevel={5}
+        remainingPool={6}
+        dataIndex={DATA_INDEX_ROW}
+        onSelect={onSelect}
+      />,
+    );
+    fireEvent.press(getByRole('button'));
+    expect(onSelect).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not call onSelect when evolution is disabled (0 ep remaining, no metadata)', () => {
+    const evo = makeEvolutionFromIndex('evolution-bite');
+    const { getByRole } = render(
+      <EvolutionRow
+        evolution={evo}
+        eidolon={makeEidolonForRow()}
+        summonerLevel={5}
+        remainingPool={0}
+        dataIndex={DATA_INDEX_ROW}
+        onSelect={onSelect}
+      />,
+    );
+    fireEvent.press(getByRole('button'));
+    expect(onSelect).not.toHaveBeenCalled();
+  });
+
+  it('shows a warning message when evolution is not allowed', () => {
+    // Use an evolution that requires a higher level gate to trigger warning
+    const evo = makeEvolutionFromIndex('evolution-bite');
+    const { getAllText } = render(
+      <EvolutionRow
+        evolution={evo}
+        eidolon={makeEidolonForRow()}
+        summonerLevel={5}
+        remainingPool={0}
+        dataIndex={DATA_INDEX_ROW}
+        onSelect={onSelect}
+      />,
+    );
+    const text = getAllText().join('');
+    // When not allowed, a warning is rendered
+    expect(text).toContain('⚠');
+  });
+
+  it('still calls onSelect when needs metadata even if canSelect returns false', () => {
+    // Ability increase needs metadata — disabled flag is overridden by needsMetadata
+    const evo = makeEvolutionFromIndex('evolution-ability-increase');
+    const { getByRole } = render(
+      <EvolutionRow
+        evolution={evo}
+        eidolon={makeEidolonForRow()}
+        summonerLevel={5}
+        remainingPool={0}
+        dataIndex={DATA_INDEX_ROW}
+        onSelect={onSelect}
+      />,
+    );
+    fireEvent.press(getByRole('button'));
+    expect(onSelect).toHaveBeenCalledTimes(1);
+  });
+});
+
+// ---- MetadataStep tests ----
+
+describe('MetadataStep', () => {
+  function makeEvoWithKind(
+    id: string,
+    kind?: EidolonEvolutionEntry['stacking']['requiresDifferentMetadata'],
+  ): EidolonEvolutionEntry {
+    return {
+      id,
+      name: id,
+      description: 'Test evolution',
+      evolutionPointCost: 2,
+      stacking: { canRepeat: true, requiresDifferentMetadata: kind },
+      effects: [],
+      source: 'pf1e-apg',
+      isOfficial: true,
+      verificationStatus: 'needs_review',
+      visibility: 'global',
+      rev: 1,
+    } as EidolonEvolutionEntry;
+  }
+
+  const onConfirm = jest.fn();
+  const onBack = jest.fn();
+  const onChange = jest.fn();
+
+  beforeEach(() => {
+    onConfirm.mockClear();
+    onBack.mockClear();
+    onChange.mockClear();
+  });
+
+  it('renders description', () => {
+    const evo = makeEvoWithKind('evolution-ability-increase');
+    const { getAllText } = render(
+      <MetadataStep
+        evolution={evo}
+        metadata={{}}
+        onChange={onChange}
+        onConfirm={onConfirm}
+        onBack={onBack}
+      />,
+    );
+    expect(getAllText().join('')).toContain('Test evolution');
+  });
+
+  it('calls onBack when Back is pressed', () => {
+    const evo = makeEvoWithKind('evolution-ability-increase');
+    const { getByLabelText } = render(
+      <MetadataStep
+        evolution={evo}
+        metadata={{}}
+        onChange={onChange}
+        onConfirm={onConfirm}
+        onBack={onBack}
+      />,
+    );
+    fireEvent.press(getByLabelText('Back'));
+    expect(onBack).toHaveBeenCalledTimes(1);
+  });
+
+  it('Add button is disabled when no ability selected for ability-increase', () => {
+    const evo = makeEvoWithKind('evolution-ability-increase');
+    const { getByLabelText } = render(
+      <MetadataStep
+        evolution={evo}
+        metadata={{}}
+        onChange={onChange}
+        onConfirm={onConfirm}
+        onBack={onBack}
+      />,
+    );
+    // Pressing Add with empty metadata should not fire onConfirm (button is disabled)
+    fireEvent.press(getByLabelText('Add evolution'));
+    expect(onConfirm).not.toHaveBeenCalled();
+  });
+
+  it('Add button fires onConfirm when ability is selected', () => {
+    const evo = makeEvoWithKind('evolution-ability-increase');
+    const metadata: SelectedEvolutionMetadata = { ability: 'str' };
+    const { getByLabelText } = render(
+      <MetadataStep
+        evolution={evo}
+        metadata={metadata}
+        onChange={onChange}
+        onConfirm={onConfirm}
+        onBack={onBack}
+      />,
+    );
+    fireEvent.press(getByLabelText('Add evolution'));
+    expect(onConfirm).toHaveBeenCalledTimes(1);
+  });
+
+  it('renders energy picker for energy kind', () => {
+    const evo = makeEvoWithKind('evolution-resistance', 'energy');
+    const { getAllText } = render(
+      <MetadataStep
+        evolution={evo}
+        metadata={{}}
+        onChange={onChange}
+        onConfirm={onConfirm}
+        onBack={onBack}
+      />,
+    );
+    expect(getAllText().join('')).toContain('Energy type');
+  });
+
+  it('Add fires onConfirm when energyType is selected', () => {
+    const evo = makeEvoWithKind('evolution-resistance', 'energy');
+    const metadata: SelectedEvolutionMetadata = { energyType: 'fire' };
+    const { getByLabelText } = render(
+      <MetadataStep
+        evolution={evo}
+        metadata={metadata}
+        onChange={onChange}
+        onConfirm={onConfirm}
+        onBack={onBack}
+      />,
+    );
+    fireEvent.press(getByLabelText('Add evolution'));
+    expect(onConfirm).toHaveBeenCalledTimes(1);
+  });
+
+  it('renders text input for attack kind', () => {
+    const evo = makeEvoWithKind('evolution-bleed', 'attack');
+    const { getAllText } = render(
+      <MetadataStep
+        evolution={evo}
+        metadata={{}}
+        onChange={onChange}
+        onConfirm={onConfirm}
+        onBack={onBack}
+      />,
+    );
+    expect(getAllText().join('')).toContain('Attack');
+  });
+
+  it('renders text input for skill kind', () => {
+    const evo = makeEvoWithKind('evolution-skilled', 'skill');
+    const { getAllText } = render(
+      <MetadataStep
+        evolution={evo}
+        metadata={{}}
+        onChange={onChange}
+        onConfirm={onConfirm}
+        onBack={onBack}
+      />,
+    );
+    expect(getAllText().join('')).toContain('Skill');
+  });
+
+  it('renders text input for spell kind', () => {
+    const evo = makeEvoWithKind('evolution-basic-magic', 'spell');
+    const { getAllText } = render(
+      <MetadataStep
+        evolution={evo}
+        metadata={{}}
+        onChange={onChange}
+        onConfirm={onConfirm}
+        onBack={onBack}
+      />,
+    );
+    expect(getAllText().join('')).toContain('Spell');
+  });
+
+  it('renders text input for limbPair kind', () => {
+    const evo = makeEvoWithKind('evolution-limbs', 'limbPair');
+    const { getAllText } = render(
+      <MetadataStep
+        evolution={evo}
+        metadata={{}}
+        onChange={onChange}
+        onConfirm={onConfirm}
+        onBack={onBack}
+      />,
+    );
+    expect(getAllText().join('')).toContain('Limb pair');
+  });
+
+  it('renders text input for tail kind', () => {
+    const evo = makeEvoWithKind('evolution-tail-slap', 'tail');
+    const { getAllText } = render(
+      <MetadataStep
+        evolution={evo}
+        metadata={{}}
+        onChange={onChange}
+        onConfirm={onConfirm}
+        onBack={onBack}
+      />,
+    );
+    expect(getAllText().join('')).toContain('Tail');
+  });
+
+  it('Add fires onConfirm when notes filled for attack kind', () => {
+    const evo = makeEvoWithKind('evolution-bleed', 'attack');
+    const metadata: SelectedEvolutionMetadata = { notes: 'bite' };
+    const { getByLabelText } = render(
+      <MetadataStep
+        evolution={evo}
+        metadata={metadata}
+        onChange={onChange}
+        onConfirm={onConfirm}
+        onBack={onBack}
+      />,
+    );
+    fireEvent.press(getByLabelText('Add evolution'));
+    expect(onConfirm).toHaveBeenCalledTimes(1);
   });
 });

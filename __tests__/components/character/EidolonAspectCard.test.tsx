@@ -165,6 +165,55 @@ describe('EidolonAspectCard', () => {
     expect(getAllText().join(' ')).toContain('2:1');
   });
 
+  it('dispatches setAspectDivert decrement when – pressed and divertedPoints > 0', () => {
+    const eidolon = makeEidolon({
+      aspectTransfer: { divertedPoints: 2, summonerEvolutions: [] },
+    });
+    const { getByTestId } = render(
+      <EidolonAspectCard eidolon={eidolon} summonerLevel={10} dataIndex={DATA_INDEX} />,
+    );
+    fireEvent.press(getByTestId('aspect-decrement'));
+    expect(mockDispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ payload: { eidolonId: 'eid-1', divertedPoints: 1 } }),
+    );
+  });
+
+  it('shows overBudget warning when summoner evolutions exceed diverted points', () => {
+    const eidolon = makeEidolon({
+      aspectTransfer: {
+        divertedPoints: 1,
+        summonerEvolutions: [
+          { instanceId: 'asp-1', evolutionId: 'evolution-bite', metadata: undefined },
+          { instanceId: 'asp-2', evolutionId: 'evolution-claws', metadata: undefined },
+        ],
+      },
+    });
+    const { getAllText } = render(
+      <EidolonAspectCard eidolon={eidolon} summonerLevel={10} dataIndex={DATA_INDEX} />,
+    );
+    expect(getAllText().join('')).toContain('exceed diverted points');
+  });
+
+  it('shows Greater Aspect eidolon cost note when L18 and divertedPoints > 0', () => {
+    const eidolon = makeEidolon({
+      aspectTransfer: { divertedPoints: 4, summonerEvolutions: [] },
+    });
+    const { getAllText } = render(
+      <EidolonAspectCard eidolon={eidolon} summonerLevel={18} dataIndex={DATA_INDEX} />,
+    );
+    expect(getAllText().join('')).toContain('Greater Aspect: eidolon loses');
+  });
+
+  it('pressing Add Evolution button does not throw', () => {
+    const eidolon = makeEidolon({
+      aspectTransfer: { divertedPoints: 1, summonerEvolutions: [] },
+    });
+    const { getByTestId } = render(
+      <EidolonAspectCard eidolon={eidolon} summonerLevel={10} dataIndex={DATA_INDEX} />,
+    );
+    expect(() => fireEvent.press(getByTestId('aspect-add-evo-button'))).not.toThrow();
+  });
+
   it('dispatches removeSummonerAspectEvolution when an evo remove button is pressed', () => {
     const eidolon = makeEidolon({
       aspectTransfer: {

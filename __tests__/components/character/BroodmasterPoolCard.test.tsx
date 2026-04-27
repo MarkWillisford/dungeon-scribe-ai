@@ -35,8 +35,7 @@ jest.mock('@/components/character/direct-entry/EvolutionPickerSheet', () => ({
   EvolutionPickerSheet: () => null,
 }));
 
-// Alert.alert is not available in the test environment — stub it.
-jest.mock('react-native/Libraries/Alert/Alert', () => ({ alert: jest.fn() }));
+// Alert is already mocked at the react-native level by jest.setup.components.ts.
 
 // ---- Fixtures ----
 
@@ -134,5 +133,25 @@ describe('BroodmasterPoolCard', () => {
       <BroodmasterPoolCard classEntry={classEntry} edition="apg" dataIndex={DATA_INDEX} />,
     );
     expect(queryByTestId('remove-brood-shared-shared-abc')).not.toBeNull();
+  });
+
+  it('pressing remove shared evolution button invokes Alert', () => {
+    const { Alert } = require('react-native');
+    const classEntry = makeClassEntry({
+      summonerBroodmaster: {
+        sharedEvolutions: [
+          { instanceId: 'shared-abc', evolutionId: 'evolution-large', metadata: undefined },
+        ],
+      },
+    });
+    const { getByTestId } = render(
+      <BroodmasterPoolCard classEntry={classEntry} edition="apg" dataIndex={DATA_INDEX} />,
+    );
+    fireEvent.press(getByTestId('remove-brood-shared-shared-abc'));
+    expect(Alert.alert).toHaveBeenCalledWith(
+      'Remove shared evolution?',
+      expect.stringContaining('Large'),
+      expect.any(Array),
+    );
   });
 });
