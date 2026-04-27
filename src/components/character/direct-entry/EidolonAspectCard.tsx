@@ -55,7 +55,10 @@ export function EidolonAspectCard({ eidolon, summonerLevel, dataIndex }: Eidolon
 
   const aspectTransfer = eidolon.aspectTransfer;
   const divertedPoints = aspectTransfer?.divertedPoints ?? 0;
-  const summonerEvolutions: SelectedEvolution[] = aspectTransfer?.summonerEvolutions ?? [];
+  const summonerEvolutions: SelectedEvolution[] = useMemo(
+    () => aspectTransfer?.summonerEvolutions ?? [],
+    [aspectTransfer?.summonerEvolutions],
+  );
 
   const eidolonCost = EidolonPoolService.aspectCostToEidolon(divertedPoints, summonerLevel);
 

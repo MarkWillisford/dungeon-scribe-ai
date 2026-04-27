@@ -44,8 +44,10 @@ export function BroodmasterPoolCard({ classEntry, edition, dataIndex }: Broodmas
   const broodEidolons = draft.eidolons.filter((e) => e.summonerClassEntryId === classEntry.id);
   const broodSize = broodEidolons.length;
 
-  const sharedEvolutions: SelectedEvolution[] =
-    classEntry.summonerBroodmaster?.sharedEvolutions ?? [];
+  const sharedEvolutions: SelectedEvolution[] = useMemo(
+    () => classEntry.summonerBroodmaster?.sharedEvolutions ?? [],
+    [classEntry.summonerBroodmaster?.sharedEvolutions],
+  );
 
   const sharedCost = useMemo(
     () => EidolonPoolService.totalEvolutionCost(sharedEvolutions, dataIndex),
