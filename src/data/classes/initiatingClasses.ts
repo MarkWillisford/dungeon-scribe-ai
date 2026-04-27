@@ -4,6 +4,7 @@
 
 import type { ExpandedClassData } from './types';
 
+import { CRUSADER_CLASS, SWORDSAGE_CLASS, WARBLADE_CLASS } from './initiating/tob';
 import { STALKER_CLASS } from './initiating/stalker';
 import { WARDER_CLASS } from './initiating/warder';
 import { WARLORD_CLASS } from './initiating/warlord';
@@ -12,6 +13,11 @@ import { MYSTIC_CLASS } from './initiating/mystic';
 import { ZEALOT_CLASS } from './initiating/zealot';
 
 export const INITIATING_CLASSES: ExpandedClassData[] = [
+  // Tome of Battle (3.5e)
+  CRUSADER_CLASS,
+  SWORDSAGE_CLASS,
+  WARBLADE_CLASS,
+  // Path of War / Path of War: Expanded (PF1e)
   STALKER_CLASS,
   WARDER_CLASS,
   WARLORD_CLASS,

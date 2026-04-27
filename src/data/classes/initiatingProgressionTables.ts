@@ -6,6 +6,7 @@
 //
 // See plans/initiating-system.md Phase 2 and plans/data-scraping/path-of-war-scraping.md.
 
+import { CRUSADER_PROGRESSION, SWORDSAGE_PROGRESSION, WARBLADE_PROGRESSION } from './initiating/tob';
 import { STALKER_PROGRESSION } from './initiating/stalker';
 import { WARDER_PROGRESSION } from './initiating/warder';
 import { WARLORD_PROGRESSION } from './initiating/warlord';
@@ -36,7 +37,12 @@ import { MONK_OF_THE_SILVER_FIST_PROGRESSION } from './archetypes/monk-of-the-si
 export type InitiatingProgressionTable = [number, number, number][];
 
 export const INITIATING_TABLES: Record<string, InitiatingProgressionTable> = {
-  // Base classes
+  // ToB base classes
+  crusader: CRUSADER_PROGRESSION,
+  swordsage: SWORDSAGE_PROGRESSION,
+  warblade: WARBLADE_PROGRESSION,
+
+  // PoW / PoWE base classes
   stalker: STALKER_PROGRESSION,
   warder: WARDER_PROGRESSION,
   warlord: WARLORD_PROGRESSION,
