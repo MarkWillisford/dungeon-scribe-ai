@@ -108,14 +108,18 @@ export class EidolonPoolService {
 
     // ── Base pool ──
     // Master Summoner: eidolon uses half summoner class level (min 1).
+    // base is always computed at the FULL summonerLevel so that the halving is
+    // expressed entirely via archetypeModifierFromMaster (a negative delta).
+    // Computing base at effectiveLevel and then also subtracting the delta would
+    // double-penalize the pool.
     const effectiveLevel =
       archetype === ARCHETYPE_MASTER_SUMMONER
         ? Math.max(1, Math.floor(summonerLevel / 2))
         : summonerLevel;
-    const base = summonerBaseEP(eidolon.edition, effectiveLevel);
+    const base = summonerBaseEP(eidolon.edition, summonerLevel);
     const archetypeModifierFromMaster =
       archetype === ARCHETYPE_MASTER_SUMMONER
-        ? summonerBaseEP(eidolon.edition, summonerLevel) - base
+        ? summonerBaseEP(eidolon.edition, effectiveLevel) - base
         : 0;
 
     // ── Archetype flat penalty ──
@@ -127,7 +131,9 @@ export class EidolonPoolService {
 
     // Combined archetype modifier (negative when Master halves, flat penalties,
     // positive when Wild Caller adds).
-    const archetypeModifier = -archetypeModifierFromMaster + archetypeFlat + wildCallerBonus;
+    // archetypeModifierFromMaster is already the signed delta (negative for Master
+    // Summoner), so use it directly rather than negating.
+    const archetypeModifier = archetypeModifierFromMaster + archetypeFlat + wildCallerBonus;
 
     // ── Extra Evolution feat count (max 5) ──
     const extraFeatCount = Math.min(

@@ -198,9 +198,11 @@ describe('EidolonPoolService — archetypes', () => {
       eidolons: [makeEidolon({ edition: 'apg', subtype: undefined })],
     });
     const breakdown = EidolonPoolService.computePool(draft, 'eid-1', DATA_INDEX);
-    expect(breakdown.sources.base).toBe(8); // level 5 APG pool
-    // Archetype modifier captures the delta from full-level pool to halved-level
-    expect(breakdown.sources.archetypeModifier).toBe(-6); // 14 - 8 = 6 lost
+    // base is always at full summoner level; the halving is captured by archetypeModifier
+    expect(breakdown.sources.base).toBe(14); // level 10 APG pool (full level)
+    // Archetype modifier captures the delta from halved-level pool to full-level pool
+    expect(breakdown.sources.archetypeModifier).toBe(-6); // 8 - 14 = -6 (halved pool − full pool)
+    expect(breakdown.total).toBe(8); // 14 - 6 = 8 (correct Master Summoner result)
   });
 
   test('Wild Caller (ARG) adds floor(level / 4) ep', () => {
