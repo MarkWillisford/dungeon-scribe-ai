@@ -1282,6 +1282,10 @@ const characterEntrySlice = createSlice({
     ) {
       const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
       if (!eid) return;
+      // Defense-in-depth: 30 is far beyond any real EP budget (largest pool ~30 at
+      // level 20 with all extras, but every evolution costs at least 1 pt, so
+      // ≥ 30 selections is impossible in a valid character).
+      if (eid.selectedEvolutions.length >= 30) return;
       const instanceId = `evo-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
       eid.selectedEvolutions.push({
         instanceId,
@@ -1382,7 +1386,11 @@ const characterEntrySlice = createSlice({
       if (!eid.aspectTransfer) {
         eid.aspectTransfer = { divertedPoints: 0, summonerEvolutions: [] };
       }
-      eid.aspectTransfer.divertedPoints = Math.max(0, action.payload.divertedPoints);
+      // Clamp to [0, 6]. The absolute maximum is 6 (Greater Aspect at L18).
+      // Aspect (L10) caps at 2, but the UI enforces that; the reducer uses the
+      // game-wide ceiling so it remains valid for both abilities without knowing
+      // which one the summoner has.
+      eid.aspectTransfer.divertedPoints = Math.min(6, Math.max(0, action.payload.divertedPoints));
       state.isDirty = true;
     },
 

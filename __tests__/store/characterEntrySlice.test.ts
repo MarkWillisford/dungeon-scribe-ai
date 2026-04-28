@@ -2671,6 +2671,24 @@ describe('characterEntrySlice — eidolons', () => {
       );
       expect(state.draft.eidolons[0].selectedEvolutions[0].metadata?.ability).toBe('dex');
     });
+
+    it('rejects additions when already at the hard cap of 30 evolutions', () => {
+      let { state, id } = freshEidolon();
+      // Add 30 evolutions to reach the cap.
+      for (let i = 0; i < 30; i++) {
+        state = reducer(
+          state,
+          addSelectedEvolution({ eidolonId: id, evolutionId: 'evolution-bite' }),
+        );
+      }
+      expect(state.draft.eidolons[0].selectedEvolutions).toHaveLength(30);
+      // A 31st addition must be silently rejected.
+      state = reducer(
+        state,
+        addSelectedEvolution({ eidolonId: id, evolutionId: 'evolution-claws' }),
+      );
+      expect(state.draft.eidolons[0].selectedEvolutions).toHaveLength(30);
+    });
   });
 
   describe('setEidolonPoolOverride', () => {
@@ -2788,6 +2806,16 @@ describe('characterEntrySlice — eidolons', () => {
         setAspectDivert({ eidolonId: 'missing', divertedPoints: 2 }),
       );
       expect(state.draft.eidolons).toHaveLength(0);
+    });
+
+    it('clamps to 6 (Greater Aspect max) when value exceeds the ceiling', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'unchained', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(state, setAspectDivert({ eidolonId: id, divertedPoints: 100 }));
+      expect(state.draft.eidolons[0].aspectTransfer?.divertedPoints).toBe(6);
     });
   });
 
