@@ -4,6 +4,18 @@ import { EidolonSection } from '@/components/character/direct-entry/EidolonSecti
 import type { CharacterDraft, DraftClassEntry } from '@/types/characterDraft';
 import type { DraftEidolon } from '@/types/eidolon';
 
+// ---- GameDataService mock ----
+
+jest.mock('@/services/GameDataService', () => ({
+  GameDataService: {
+    getEidolonDataIndex: jest.fn().mockResolvedValue({
+      evolutions: new Map(),
+      baseForms: new Map(),
+      subtypes: new Map(),
+    }),
+  },
+}));
+
 // ---- Redux mock ----
 
 const mockDispatch = jest.fn();

@@ -66,6 +66,8 @@ import type {
   StanceDefinition,
   MartialTradition,
 } from '@/types/initiating';
+import type { EidolonBaseFormDefinition, EidolonSubtypeDefinition } from '@/types/eidolon';
+import type { EidolonDataIndex } from './EidolonPoolService';
 
 // ---- QueryContext ----------------------------------------------------------------
 
@@ -561,5 +563,35 @@ export class GameDataService {
   ): Promise<FavoredClassBonusEntry[]> {
     const ctx = context ?? GameDataService.getContextFromStore();
     return GameDataService.connector.getFavoredClassBonuses(raceName, className, ctx);
+  }
+
+  // ---- Eidolon data index ---------------------------------------------------------
+
+  static async getEidolonBaseForms(): Promise<EidolonBaseFormDefinition[]> {
+    return GameDataService.connector.getEidolonBaseForms();
+  }
+
+  static async getEidolonSubtypes(): Promise<EidolonSubtypeDefinition[]> {
+    return GameDataService.connector.getEidolonSubtypes();
+  }
+
+  /**
+   * Fetch all three eidolon catalog collections and assemble an EidolonDataIndex.
+   * The index is consumed by EidolonPoolService and EidolonSection.
+   */
+  static async getEidolonDataIndex(): Promise<EidolonDataIndex> {
+    const ctx = GameDataService.getContextFromStore();
+    const [rawEvolutions, baseForms, subtypes] = await Promise.all([
+      GameDataService.connector.getClassChoiceOptions('eidolonevolutions', {}, ctx),
+      GameDataService.connector.getEidolonBaseForms(),
+      GameDataService.connector.getEidolonSubtypes(),
+    ]);
+
+    const evolutions = rawEvolutions as EidolonEvolutionEntry[];
+    return {
+      evolutions: new Map(evolutions.map((e) => [e.id, e])),
+      baseForms: new Map(baseForms.map((f) => [f.id, f])),
+      subtypes: new Map(subtypes.map((s) => [s.id, s])),
+    };
   }
 }

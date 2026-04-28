@@ -11,7 +11,7 @@
 //   6. Free evolutions list (read-only)
 //   7. Add Evolution button → EvolutionPickerSheet
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet, Alert } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -32,8 +32,7 @@ import type {
   SelectedEvolution,
 } from '@/types/eidolon';
 import { EidolonPoolService, type EidolonDataIndex } from '@/services/EidolonPoolService';
-import { ALL_EIDOLON_BASE_FORMS } from '@/data/eidolonBaseForms/index';
-import { ALL_EIDOLON_SUBTYPES } from '@/data/eidolonSubtypes/index';
+import { GameDataService } from '@/services/GameDataService';
 import { EvolutionPickerSheet } from './EvolutionPickerSheet';
 import { EidolonBaseFormPicker } from './EidolonBaseFormPicker';
 import { EidolonSubtypePicker } from './EidolonSubtypePicker';
@@ -50,17 +49,24 @@ function summonerEditionFromClassName(className: string): EidolonEdition {
   return /unchained/i.test(className) ? 'unchained' : 'apg';
 }
 
-function baseFormLabel(id: EidolonForm): string {
-  const form = ALL_EIDOLON_BASE_FORMS.find((f) => f.id === id);
+function baseFormLabel(id: EidolonForm, dataIndex: EidolonDataIndex): string {
+  const form = dataIndex.baseForms.get(id);
   if (!form) return id;
   return form.legacyBaseForm ? `${form.name} (supplemental)` : form.name;
 }
 
-function subtypeLabel(id: EidolonSubtype | undefined): string {
+function subtypeLabel(id: EidolonSubtype | undefined, dataIndex: EidolonDataIndex): string {
   if (!id) return '—— pick one ——';
-  const st = ALL_EIDOLON_SUBTYPES.find((s) => s.id === id);
+  const st = dataIndex.subtypes.get(id);
   return st?.name ?? id;
 }
+
+/** Empty index used before data loads. */
+const EMPTY_INDEX: EidolonDataIndex = {
+  evolutions: new Map(),
+  baseForms: new Map(),
+  subtypes: new Map(),
+};
 
 // ---- Component ----
 
@@ -76,11 +82,16 @@ export function EidolonSection({ classEntry }: EidolonSectionProps) {
   );
   const draft = useAppSelector((state) => state.characterEntry.draft);
 
-  // EidolonDataIndex is built once and reused across renders within this section.
-  const dataIndex: EidolonDataIndex = useMemo(
-    () => EidolonPoolService.buildIndexFromStaticData(),
-    [],
-  );
+  // Load EidolonDataIndex from GameDataService (Firestore-backed in production).
+  const [dataIndex, setDataIndex] = useState<EidolonDataIndex>(EMPTY_INDEX);
+  const loadedRef = useRef(false);
+  useEffect(() => {
+    if (loadedRef.current) return;
+    loadedRef.current = true;
+    GameDataService.getEidolonDataIndex()
+      .then(setDataIndex)
+      .catch((e) => console.error('EidolonSection: failed to load eidolon data index:', e));
+  }, []);
 
   const edition = summonerEditionFromClassName(classEntry.className);
   const archetypeKey = classEntry.archetypeId?.toLowerCase().trim() ?? '';
@@ -203,7 +214,7 @@ function EidolonCard({
     const list = invalidated.map((i) => `• ${i.evolutionName} — ${i.reason}`).join('\n');
     Alert.alert(
       'Change base form?',
-      `Changing to ${baseFormLabel(newForm)} will remove ${invalidated.length} evolution${
+      `Changing to ${baseFormLabel(newForm, dataIndex)} will remove ${invalidated.length} evolution${
         invalidated.length === 1 ? '' : 's'
       }:\n\n${list}`,
       [
@@ -241,7 +252,7 @@ function EidolonCard({
     }
 
     const list = invalidated.map((i) => `• ${i.evolutionName} — ${i.reason}`).join('\n');
-    const newLabel = newSubtype ? subtypeLabel(newSubtype) : 'no subtype';
+    const newLabel = newSubtype ? subtypeLabel(newSubtype, dataIndex) : 'no subtype';
     Alert.alert(
       'Change subtype?',
       `Changing to ${newLabel} will remove ${invalidated.length} evolution${
@@ -322,11 +333,11 @@ function EidolonCard({
           onPress={() => setBaseFormPickerOpen(true)}
           style={[styles.pickerButton, { borderColor: colors.border.DEFAULT }]}
           accessibilityRole="button"
-          accessibilityLabel={`Base form: ${baseFormLabel(eidolon.baseForm)}. Tap to change.`}
+          accessibilityLabel={`Base form: ${baseFormLabel(eidolon.baseForm, dataIndex)}. Tap to change.`}
           testID={`eidolon-base-form-${eidolon.id}`}
         >
           <Text style={[styles.pickerButtonText, { color: colors.text.primary }]}>
-            {baseFormLabel(eidolon.baseForm)}
+            {baseFormLabel(eidolon.baseForm, dataIndex)}
           </Text>
           <Text style={[styles.pickerChevron, { color: colors.text.tertiary }]}>▾</Text>
         </Pressable>
@@ -340,7 +351,7 @@ function EidolonCard({
             onPress={() => setSubtypePickerOpen(true)}
             style={[styles.pickerButton, { borderColor: colors.border.DEFAULT }]}
             accessibilityRole="button"
-            accessibilityLabel={`Subtype: ${subtypeLabel(eidolon.subtype)}. Tap to change.`}
+            accessibilityLabel={`Subtype: ${subtypeLabel(eidolon.subtype, dataIndex)}. Tap to change.`}
             testID={`eidolon-subtype-${eidolon.id}`}
           >
             <Text
@@ -352,7 +363,7 @@ function EidolonCard({
                 },
               ]}
             >
-              {subtypeLabel(eidolon.subtype)}
+              {subtypeLabel(eidolon.subtype, dataIndex)}
             </Text>
             <Text style={[styles.pickerChevron, { color: colors.text.tertiary }]}>▾</Text>
           </Pressable>
