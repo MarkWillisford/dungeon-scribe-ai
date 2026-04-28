@@ -264,7 +264,9 @@ export function EvolutionRow({
   const { colors, isDark } = useTheme();
 
   // Check without metadata first — if metadata is required, we defer the
-  // detailed check to the MetadataStep.
+  // detailed check to the MetadataStep. However, budget exhaustion is
+  // independent of metadata: if the pool can't cover the cost, the row is
+  // always disabled regardless of whether metadata is needed.
   const result = EidolonPoolService.canSelectEvolution(
     evolution.id,
     eidolon,
@@ -272,7 +274,8 @@ export function EvolutionRow({
     remainingPool,
     dataIndex,
   );
-  const disabled = !result.allowed && !needsMetadata(evolution);
+  const budgetInsufficient = evolution.evolutionPointCost > remainingPool;
+  const disabled = !result.allowed && (!needsMetadata(evolution) || budgetInsufficient);
 
   return (
     <Pressable

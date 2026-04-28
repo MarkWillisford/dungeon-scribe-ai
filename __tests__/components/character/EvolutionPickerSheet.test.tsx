@@ -413,8 +413,9 @@ describe('EvolutionRow', () => {
     expect(text).toContain('⚠');
   });
 
-  it('still calls onSelect when needs metadata even if canSelect returns false', () => {
-    // Ability increase needs metadata — disabled flag is overridden by needsMetadata
+  it('does not call onSelect when needs metadata but pool is exhausted (budget always wins)', () => {
+    // Ability increase needs metadata, but if the pool is exhausted the row
+    // must still be disabled — budget checks are independent of metadata.
     const evo = makeEvolutionFromIndex('evolution-ability-increase');
     const { getByRole } = render(
       <EvolutionRow
@@ -422,6 +423,24 @@ describe('EvolutionRow', () => {
         eidolon={makeEidolonForRow()}
         summonerLevel={5}
         remainingPool={0}
+        dataIndex={DATA_INDEX_ROW}
+        onSelect={onSelect}
+      />,
+    );
+    fireEvent.press(getByRole('button'));
+    expect(onSelect).not.toHaveBeenCalled();
+  });
+
+  it('calls onSelect when needs metadata and pool has enough points', () => {
+    // Ability increase needs metadata — when there are enough ep remaining the
+    // row is clickable so the user can proceed to the metadata step.
+    const evo = makeEvolutionFromIndex('evolution-ability-increase');
+    const { getByRole } = render(
+      <EvolutionRow
+        evolution={evo}
+        eidolon={makeEidolonForRow()}
+        summonerLevel={5}
+        remainingPool={6}
         dataIndex={DATA_INDEX_ROW}
         onSelect={onSelect}
       />,
