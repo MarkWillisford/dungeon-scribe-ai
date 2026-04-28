@@ -145,6 +145,19 @@ jest.mock('@/data/equipment', () => ({
 
 jest.mock('@/data/classes/archetypes/index', () => ({ ALL_ARCHETYPES: [] }));
 
+jest.mock('@/data/eidolonBaseForms/index', () => ({
+  ALL_EIDOLON_BASE_FORMS: [
+    { id: 'biped', name: 'Biped', description: 'Two-legged form' },
+    { id: 'quadruped', name: 'Quadruped', description: 'Four-legged form' },
+  ],
+}));
+jest.mock('@/data/eidolonSubtypes/index', () => ({
+  ALL_EIDOLON_SUBTYPES: [
+    { id: 'agathion', name: 'Agathion', description: 'Agathion subtype' },
+    { id: 'demon', name: 'Demon', description: 'Demon subtype' },
+  ],
+}));
+
 // Class choice collection mocks
 jest.mock('@/data/domains/index', () => ({
   ALL_DOMAINS: [
@@ -824,6 +837,99 @@ describe('GameDataService', () => {
     test('unknown collection returns empty array', async () => {
       const items = await GameDataService.getClassChoiceItems('nonexistent-collection');
       expect(items).toHaveLength(0);
+    });
+  });
+
+  describe('getEidolonBaseForms', () => {
+    test('returns base forms from the connector', async () => {
+      const forms = await GameDataService.getEidolonBaseForms();
+      expect(forms).toHaveLength(2);
+      expect(forms[0].id).toBe('biped');
+      expect(forms[1].id).toBe('quadruped');
+    });
+
+    test('each base form has id and name', async () => {
+      const forms = await GameDataService.getEidolonBaseForms();
+      for (const form of forms) {
+        expect(form).toHaveProperty('id');
+        expect(form).toHaveProperty('name');
+      }
+    });
+  });
+
+  describe('getEidolonSubtypes', () => {
+    test('returns subtypes from the connector', async () => {
+      const subtypes = await GameDataService.getEidolonSubtypes();
+      expect(subtypes).toHaveLength(2);
+      expect(subtypes[0].id).toBe('agathion');
+      expect(subtypes[1].id).toBe('demon');
+    });
+
+    test('each subtype has id and name', async () => {
+      const subtypes = await GameDataService.getEidolonSubtypes();
+      for (const subtype of subtypes) {
+        expect(subtype).toHaveProperty('id');
+        expect(subtype).toHaveProperty('name');
+      }
+    });
+  });
+
+  describe('getEidolonDataIndex', () => {
+    test('returns an EidolonDataIndex with evolutions, baseForms, and subtypes Maps', async () => {
+      const evosModule = jest.requireMock('@/data/eidolonEvolutions/index');
+      evosModule.ALL_EIDOLON_EVOLUTIONS = [
+        { id: 'bite', name: 'Bite', evolutionPointCost: 1, summoner: null },
+      ];
+
+      const index = await GameDataService.getEidolonDataIndex();
+
+      expect(index.evolutions).toBeInstanceOf(Map);
+      expect(index.baseForms).toBeInstanceOf(Map);
+      expect(index.subtypes).toBeInstanceOf(Map);
+    });
+
+    test('evolutions map is keyed by evolution id', async () => {
+      const evosModule = jest.requireMock('@/data/eidolonEvolutions/index');
+      evosModule.ALL_EIDOLON_EVOLUTIONS = [
+        { id: 'bite', name: 'Bite', evolutionPointCost: 1, summoner: null },
+        { id: 'claws', name: 'Claws', evolutionPointCost: 1, summoner: null },
+      ];
+
+      const index = await GameDataService.getEidolonDataIndex();
+
+      expect(index.evolutions.has('bite')).toBe(true);
+      expect(index.evolutions.has('claws')).toBe(true);
+      expect(index.evolutions.get('bite')?.name).toBe('Bite');
+    });
+
+    test('baseForms map is keyed by form id', async () => {
+      const index = await GameDataService.getEidolonDataIndex();
+
+      expect(index.baseForms.has('biped')).toBe(true);
+      expect(index.baseForms.has('quadruped')).toBe(true);
+      expect(index.baseForms.get('biped')?.name).toBe('Biped');
+    });
+
+    test('subtypes map is keyed by subtype id', async () => {
+      const index = await GameDataService.getEidolonDataIndex();
+
+      expect(index.subtypes.has('agathion')).toBe(true);
+      expect(index.subtypes.has('demon')).toBe(true);
+      expect(index.subtypes.get('demon')?.name).toBe('Demon');
+    });
+
+    test('map sizes match the number of entries in each catalog', async () => {
+      const evosModule = jest.requireMock('@/data/eidolonEvolutions/index');
+      evosModule.ALL_EIDOLON_EVOLUTIONS = [
+        { id: 'bite', name: 'Bite', evolutionPointCost: 1, summoner: null },
+        { id: 'claws', name: 'Claws', evolutionPointCost: 1, summoner: null },
+      ];
+
+      const index = await GameDataService.getEidolonDataIndex();
+
+      expect(index.evolutions.size).toBe(2);
+      expect(index.baseForms.size).toBe(2);
+      expect(index.subtypes.size).toBe(2);
     });
   });
 
