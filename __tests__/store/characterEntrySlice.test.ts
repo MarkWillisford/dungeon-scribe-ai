@@ -2616,6 +2616,52 @@ describe('characterEntrySlice — eidolons', () => {
       state = reducer(state, setEidolonSubtype({ eidolonId: id, subtype: undefined }));
       expect(state.draft.eidolons[0].subtype).toBeUndefined();
     });
+
+    it('setEidolonBaseForm removes invalidated evolution instances', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'apg', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(
+        state,
+        addSelectedEvolution({ eidolonId: id, evolutionId: 'evo-limbs-arms', metadata: undefined }),
+      );
+      const instanceId = state.draft.eidolons[0].selectedEvolutions[0].instanceId;
+      state = reducer(
+        state,
+        setEidolonBaseForm({
+          eidolonId: id,
+          baseForm: 'serpentine',
+          removeEvolutionInstanceIds: [instanceId],
+        }),
+      );
+      expect(state.draft.eidolons[0].baseForm).toBe('serpentine');
+      expect(state.draft.eidolons[0].selectedEvolutions).toHaveLength(0);
+    });
+
+    it('setEidolonSubtype removes invalidated evolution instances', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'apg', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(
+        state,
+        addSelectedEvolution({ eidolonId: id, evolutionId: 'evo-claws', metadata: undefined }),
+      );
+      const instanceId = state.draft.eidolons[0].selectedEvolutions[0].instanceId;
+      state = reducer(
+        state,
+        setEidolonSubtype({
+          eidolonId: id,
+          subtype: 'daemon',
+          removeEvolutionInstanceIds: [instanceId],
+        }),
+      );
+      expect(state.draft.eidolons[0].subtype).toBe('daemon');
+      expect(state.draft.eidolons[0].selectedEvolutions).toHaveLength(0);
+    });
   });
 
   describe('addSelectedEvolution / removeSelectedEvolution / updateEvolutionMetadata', () => {
