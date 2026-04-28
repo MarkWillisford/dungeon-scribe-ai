@@ -1279,41 +1279,6 @@ describe('DraftValidationService', () => {
       ).toBe(true);
     });
 
-    it('warns on Broodmaster shared Huge evolution below level 13', async () => {
-      const draft = summonerDraft();
-      draft.classes[0].level = 10;
-      draft.classes[0].archetypeId = 'broodmaster';
-      draft.classes[0].summonerBroodmaster = {
-        sharedEvolutions: [
-          { instanceId: 'sh-1', evolutionId: 'evolution-huge', metadata: undefined },
-        ],
-      };
-      draft.levelIncrementSlots = [
-        { atHD: 4, ability: 'str' },
-        { atHD: 8, ability: 'str' },
-      ];
-      draft.eidolons = [
-        {
-          id: 'eid-1',
-          name: 'Aziel',
-          summonerClassEntryId: 'summoner-1',
-          edition: 'apg',
-          baseForm: 'biped',
-          selectedEvolutions: [],
-        },
-      ];
-      const warnings = await DraftValidationService.validate(
-        draft,
-        DEFAULT_RULESET,
-        TEST_CLASS_MAP,
-      );
-      expect(
-        warnings.some(
-          (w) => w.section === 'classes' && /huge/i.test(w.message) && /level 13/i.test(w.message),
-        ),
-      ).toBe(true);
-    });
-
     it('warns when a selected evolution violates a prereq after the prereq was removed', async () => {
       // Wings requires Limbs (arms) as a prereq.
       // If we add Wings without Limbs, canSelectEvolution should catch it.

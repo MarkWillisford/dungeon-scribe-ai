@@ -747,23 +747,14 @@ export class DraftValidationService {
       if (!classEntry.summonerBroodmaster?.sharedEvolutions) continue;
       const summonerLevel = classEntry.level;
       for (const shared of classEntry.summonerBroodmaster.sharedEvolutions) {
-        // Check by evolutionId directly — evolution-huge has no separate data entry
-        // (Huge is a cost variant of Large in the APG rules), so def lookup is unreliable.
+        // Only 'evolution-large' exists as a data entry; Huge is a cost variant
+        // of Large (6 ep at L13+), not a separate ID, so no separate check is needed.
         if (shared.evolutionId === 'evolution-large' && summonerLevel < 8) {
           w.push(
             warn(
               warnId(`eidolon-brood-large-${classEntry.id}`),
               'classes',
               `Broodmaster shared Large evolution requires summoner level 8 (current: ${summonerLevel}).`,
-            ),
-          );
-        }
-        if (shared.evolutionId === 'evolution-huge' && summonerLevel < 13) {
-          w.push(
-            warn(
-              warnId(`eidolon-brood-huge-${classEntry.id}`),
-              'classes',
-              `Broodmaster shared Huge evolution requires summoner level 13 (current: ${summonerLevel}).`,
             ),
           );
         }

@@ -244,9 +244,10 @@ export type Eidolon = DraftEidolon;
 
 // ---- Summoner archetype state (lives on DraftClassEntry) ----
 
-// Broodmaster: pool is pre-split. Summoner may spend 4 ep (L8+) on a Large
-// evolution or 6 ep (L13+) on a Huge evolution shared across the brood before
-// the remaining pool is divided among brood members.
+// Broodmaster: pool is pre-split. Summoner may spend 4 ep (L8+) on the shared
+// Large evolution, or 6 ep (L13+) for the Huge size variant of that same
+// evolution. Huge is a cost variant of Large — there is no separate
+// 'evolution-huge' data entry. The remaining pool is then divided among brood members.
 export interface BroodmasterState {
   sharedEvolutions: SelectedEvolution[];
 }

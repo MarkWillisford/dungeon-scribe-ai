@@ -4,7 +4,9 @@
 // Broodmaster rules (AoN-verified):
 //   - At L8+, the summoner may pre-spend 4 ep on a Large evolution for all
 //     brood members before the pool is split.
-//   - At L13+, may instead pre-spend 6 ep on a Huge evolution.
+//   - At L13+, may instead spend 6 ep on the Huge size variant of that same
+//     Large evolution. Huge is a cost variant — there is no separate data entry
+//     for 'evolution-huge'; only 'evolution-large' exists in the catalog.
 //   - The remaining pool is then divided equally (floor) among brood members;
 //     the first member receives any leftover point.
 //
@@ -26,8 +28,10 @@ import type { EidolonDataIndex } from '@/services/EidolonPoolService';
 import { EidolonPoolService } from '@/services/EidolonPoolService';
 import { EvolutionPickerSheet } from './EvolutionPickerSheet';
 
-// The two evolutions a Broodmaster can share before the split.
-const SHARED_EVOLUTION_IDS = ['evolution-large', 'evolution-huge'];
+// The evolution a Broodmaster can share before the split.
+// Note: Huge size is a cost variant of Large (6 ep at L13+), not a separate
+// evolution ID in the data. Only 'evolution-large' exists as a data entry.
+const SHARED_EVOLUTION_IDS = ['evolution-large'];
 
 interface BroodmasterPoolCardProps {
   classEntry: DraftClassEntry;
@@ -84,9 +88,9 @@ export function BroodmasterPoolCard({ classEntry, edition, dataIndex }: Broodmas
   // Remaining budget for shared evolutions.
   const sharedRemaining = preSplitTotal - sharedCost;
 
-  const canAddShared =
-    sharedEvolutions.length === 0 &&
-    ((summonerLevel >= 8 && preSplitTotal >= 4) || (summonerLevel >= 13 && preSplitTotal >= 6));
+  // Huge is a cost variant of Large (6 ep), not a separate evolution ID.
+  // The only gate is L8+ with at least 4 ep available.
+  const canAddShared = sharedEvolutions.length === 0 && summonerLevel >= 8 && preSplitTotal >= 4;
 
   function handleAddBroodMember() {
     dispatch(
