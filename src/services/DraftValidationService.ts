@@ -737,30 +737,35 @@ export class DraftValidationService {
       for (const [message, subId] of evolutionWarnings) {
         w.push(warn(warnId(`eidolon-evo-${eidolon.id}-${subId}`), 'classes', message));
       }
+    }
 
-      // ── Broodmaster shared-evolution level gates ──
-      if (classEntry.summonerBroodmaster?.sharedEvolutions) {
-        for (const shared of classEntry.summonerBroodmaster.sharedEvolutions) {
-          // Check by evolutionId directly — evolution-huge has no separate data entry
-          // (Huge is a cost variant of Large in the APG rules), so def lookup is unreliable.
-          if (shared.evolutionId === 'evolution-large' && summonerLevel < 8) {
-            w.push(
-              warn(
-                warnId(`eidolon-brood-large-${eidolon.id}`),
-                'classes',
-                `Broodmaster shared Large evolution requires summoner level 8 (current: ${summonerLevel}).`,
-              ),
-            );
-          }
-          if (shared.evolutionId === 'evolution-huge' && summonerLevel < 13) {
-            w.push(
-              warn(
-                warnId(`eidolon-brood-huge-${eidolon.id}`),
-                'classes',
-                `Broodmaster shared Huge evolution requires summoner level 13 (current: ${summonerLevel}).`,
-              ),
-            );
-          }
+    // ── Broodmaster shared-evolution level gates (once per class entry) ──
+    // These checks apply to the class entry's sharedEvolutions, which is the
+    // same list for every eidolon in the brood. Running them inside the eidolon
+    // loop would emit one warning per eidolon instead of one per class entry.
+    for (const classEntry of draft.classes) {
+      if (!classEntry.summonerBroodmaster?.sharedEvolutions) continue;
+      const summonerLevel = classEntry.level;
+      for (const shared of classEntry.summonerBroodmaster.sharedEvolutions) {
+        // Check by evolutionId directly — evolution-huge has no separate data entry
+        // (Huge is a cost variant of Large in the APG rules), so def lookup is unreliable.
+        if (shared.evolutionId === 'evolution-large' && summonerLevel < 8) {
+          w.push(
+            warn(
+              warnId(`eidolon-brood-large-${classEntry.id}`),
+              'classes',
+              `Broodmaster shared Large evolution requires summoner level 8 (current: ${summonerLevel}).`,
+            ),
+          );
+        }
+        if (shared.evolutionId === 'evolution-huge' && summonerLevel < 13) {
+          w.push(
+            warn(
+              warnId(`eidolon-brood-huge-${classEntry.id}`),
+              'classes',
+              `Broodmaster shared Huge evolution requires summoner level 13 (current: ${summonerLevel}).`,
+            ),
+          );
         }
       }
     }
