@@ -1547,12 +1547,6 @@ const characterEntrySlice = createSlice({
       state.character.info.notes = action.payload;
       state.isDirty = true;
     },
-
-    setCampaignNotes(state, action: PayloadAction<string>) {
-      // Campaign notes fold into the single notes field
-      state.character.info.notes = action.payload;
-      state.isDirty = true;
-    },
   },
 });
 
@@ -1659,7 +1653,6 @@ export const {
   removeSummonerAspectEvolution,
   setNotes,
   setCharacterNotes,
-  setCampaignNotes,
 } = characterEntrySlice.actions;
 
 export default characterEntrySlice.reducer;

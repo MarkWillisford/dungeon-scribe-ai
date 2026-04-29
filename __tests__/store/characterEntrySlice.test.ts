@@ -81,7 +81,6 @@ import reducer, {
   unassignEquipmentSlot,
   assignEquipmentContainer,
   setCharacterNotes,
-  setCampaignNotes,
   addEidolon,
   removeEidolon,
   renameEidolon,
@@ -1583,12 +1582,6 @@ describe('characterEntrySlice — notes', () => {
   it('setCharacterNotes updates notes and sets isDirty', () => {
     const state = reducer(makeInitialState(), setCharacterNotes('Grew up in Absalom.'));
     expect(state.character.info.notes).toBe('Grew up in Absalom.');
-    expect(state.isDirty).toBe(true);
-  });
-
-  it('setCampaignNotes updates notes and sets isDirty', () => {
-    const state = reducer(makeInitialState(), setCampaignNotes('Session 12: Found the artifact.'));
-    expect(state.character.info.notes).toBe('Session 12: Found the artifact.');
     expect(state.isDirty).toBe(true);
   });
 });
