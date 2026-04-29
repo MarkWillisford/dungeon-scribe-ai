@@ -1,23 +1,22 @@
-// DraftValidationService — runs all validation checks on a CharacterDraft.
+// CharacterValidationService — runs all validation checks on a Character.
 //
 // Returns an array of EntryValidationWarning. Warnings are non-blocking —
 // the user can acknowledge them or override individual checks.
 //
-import type { CharacterDraft, DraftClassEntry } from '@/types/characterDraft';
-import type { EntryValidationWarning } from '@/store/slices/characterEntrySlice';
 import type { Character } from '@/types';
+import type { ClassEntry } from '@/types/classes';
+import type { EntryValidationWarning } from '@/store/slices/characterEntrySlice';
 import type { Ruleset } from '@/types/ruleset';
 import type { DraftEidolon } from '@/types/eidolon';
-import { DraftStateResolver, type ECLTimeline } from './DraftStateResolver';
+import {
+  CharacterTimelineService,
+  type ECLTimeline,
+  type DraftCharacterSnapshot,
+} from './CharacterTimelineService';
 import { PrerequisiteService } from './PrerequisiteService';
 import { GameDataService } from '@/services/GameDataService';
 import { EidolonPoolService, type EidolonDataIndex } from './EidolonPoolService';
-import {
-  lookupClassData,
-  abilityTotal,
-  abilityModifier,
-  type ClassDataMap,
-} from '@/utils/characterComputations';
+import { lookupClassData, type ClassDataMap } from '@/utils/characterComputations';
 
 // ---- Helpers ----
 
@@ -38,61 +37,60 @@ function makeWarnId(): WarnId {
   return (prefix: string) => `${prefix}-${++seq}`;
 }
 
-// ---- DraftValidationService ----
+// ---- CharacterValidationService ----
 
-export class DraftValidationService {
+export class CharacterValidationService {
   /**
-   * Run all validation checks against a CharacterDraft.
+   * Run all validation checks against a Character.
    * Returns an array of warnings (empty = clean).
    */
   static async validate(
-    draft: CharacterDraft,
+    character: Character,
     ruleset: Ruleset,
     classDataMap: ClassDataMap,
     eidolonDataIndex?: EidolonDataIndex,
   ): Promise<EntryValidationWarning[]> {
     const warnId = makeWarnId(); // scoped counter — safe under parallel calls and test isolation
 
-    const timeline = DraftStateResolver.buildTimeline(draft, ruleset, classDataMap);
+    const timeline = CharacterTimelineService.buildTimeline(character, ruleset, classDataMap);
     const { totalHD } = timeline;
 
-    const intTotal = abilityTotal(draft.abilities.int);
-    const intMod = abilityModifier(intTotal);
+    const intMod = character.abilityScores.int.modifier;
 
     const [classPrereqWarnings, featPrereqWarnings, fcbWarnings] = await Promise.all([
-      this.checkClassPrerequisites(draft, ruleset, timeline, warnId, classDataMap),
-      this.checkFeatPrerequisites(draft, ruleset, timeline, warnId, classDataMap),
-      this.checkFavoredClassBonuses(draft, warnId),
+      this.checkClassPrerequisites(character, ruleset, timeline, warnId, classDataMap),
+      this.checkFeatPrerequisites(character, ruleset, timeline, warnId, classDataMap),
+      this.checkFavoredClassBonuses(character, warnId),
     ]);
 
     const effectiveEidolonIndex = eidolonDataIndex ?? EidolonPoolService.buildIndexFromStaticData();
 
     return [
-      ...this.checkIdentity(draft, warnId),
-      ...this.checkAbilities(draft, totalHD, warnId),
-      ...this.checkLevelIncrements(draft, totalHD, warnId),
+      ...this.checkIdentity(character, warnId),
+      ...this.checkAbilities(character, totalHD, warnId),
+      ...this.checkLevelIncrements(character, totalHD, warnId),
       ...classPrereqWarnings,
       ...featPrereqWarnings,
-      ...this.checkTraitCount(draft, ruleset, warnId),
-      ...this.checkSkillRanks(draft, totalHD, intMod, warnId, classDataMap),
-      ...this.checkSpellcastingAdvancement(draft, warnId, classDataMap),
+      ...this.checkTraitCount(character, ruleset, warnId),
+      ...this.checkSkillRanks(character, totalHD, intMod, warnId, classDataMap),
+      ...this.checkSpellcastingAdvancement(character, warnId, classDataMap),
       ...fcbWarnings,
-      ...this.checkEidolons(draft, effectiveEidolonIndex, warnId),
+      ...this.checkEidolons(character, effectiveEidolonIndex, warnId),
     ];
   }
 
   // ---- Identity ----
 
-  private static checkIdentity(draft: CharacterDraft, warnId: WarnId): EntryValidationWarning[] {
+  private static checkIdentity(character: Character, warnId: WarnId): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
 
-    if (!draft.name.trim()) {
+    if (!character.info.name.trim()) {
       w.push(warn(warnId('identity-name'), 'identity', 'Character name is required.'));
     }
-    if (!draft.raceName.trim()) {
+    if (!character.info.race.name.trim()) {
       w.push(warn(warnId('identity-race'), 'identity', 'Race is required.'));
     }
-    if (draft.classes.length === 0) {
+    if (character.classes.classes.length === 0) {
       w.push(warn(warnId('identity-class'), 'identity', 'At least one class is required.'));
     }
 
@@ -102,17 +100,17 @@ export class DraftValidationService {
   // ---- Abilities ----
 
   private static checkAbilities(
-    draft: CharacterDraft,
+    character: Character,
     totalHD: number,
     warnId: WarnId,
   ): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
-    const keys: (keyof typeof draft.abilities)[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+    const keys = ['str', 'dex', 'con', 'int', 'wis', 'cha'] as const;
 
     for (const key of keys) {
-      const score = draft.abilities[key];
+      const score = character.abilityScores[key];
       const base = score.base;
-      const total = abilityTotal(score);
+      const total = score.total;
 
       if (base < 1 || base > 30) {
         w.push(
@@ -141,13 +139,13 @@ export class DraftValidationService {
   // ---- Level increment slots ----
 
   private static checkLevelIncrements(
-    draft: CharacterDraft,
+    character: Character,
     totalHD: number,
     warnId: WarnId,
   ): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
     const expected = Math.floor(totalHD / 4);
-    const slots = draft.levelIncrementSlots;
+    const slots = character.levelIncrementSlots;
     const actual = slots.length;
 
     if (actual !== expected) {
@@ -178,7 +176,7 @@ export class DraftValidationService {
   // ---- Class prerequisites ----
 
   private static async checkClassPrerequisites(
-    draft: CharacterDraft,
+    character: Character,
     ruleset: Ruleset,
     timeline: ECLTimeline,
     warnId: WarnId,
@@ -186,23 +184,27 @@ export class DraftValidationService {
   ): Promise<EntryValidationWarning[]> {
     const w: EntryValidationWarning[] = [];
 
-    for (const entry of draft.classes) {
+    for (const entry of character.classes.classes) {
       if (entry.prereqOverride) continue;
 
-      const classData = lookupClassData(entry.className, classDataMap);
+      const classData = lookupClassData(entry.name, classDataMap);
       if (!classData?.prerequisites) continue; // not a prestige class (or no prereqs defined)
 
       // Find the ECL at which this class was first taken
       const firstCheckpoint = timeline.checkpoints.find(
-        (c) => c.decision.type === 'class' && c.decision.className === entry.className,
+        (c) => c.decision.type === 'class' && c.decision.className === entry.name,
       );
       if (!firstCheckpoint) continue;
 
       // Get the snapshot BEFORE that ECL (the character state when the decision was made).
       // snapshotBeforeECL returns null at ECL 1 — no prior state means all prereqs are unmet.
       const snapshot =
-        DraftStateResolver.snapshotBeforeECL(draft, firstCheckpoint.ecl, ruleset, classDataMap) ??
-        DraftStateResolver.EMPTY_SNAPSHOT;
+        CharacterTimelineService.snapshotBeforeECL(
+          character,
+          firstCheckpoint.ecl,
+          ruleset,
+          classDataMap,
+        ) ?? CharacterTimelineService.EMPTY_SNAPSHOT;
 
       const prereqs = classData.prerequisites;
       const unmet: string[] = [];
@@ -250,9 +252,9 @@ export class DraftValidationService {
         } else if (result === 'unknown') {
           w.push(
             warn(
-              warnId(`class-spell-unknown-${entry.className}`),
+              warnId(`class-spell-unknown-${entry.name}`),
               'classes',
-              `${entry.className}: spellcasting requirement could not be auto-checked.`,
+              `${entry.name}: spellcasting requirement could not be auto-checked.`,
               `Requirement: "${prereqs.spellcasting}" — verify manually.`,
             ),
           );
@@ -265,9 +267,9 @@ export class DraftValidationService {
         for (const req of prereqs.special) {
           w.push(
             warn(
-              warnId(`class-special-${entry.className}`),
+              warnId(`class-special-${entry.name}`),
               'classes',
-              `${entry.className}: special requirement cannot be auto-checked.`,
+              `${entry.name}: special requirement cannot be auto-checked.`,
               `Requirement: "${req}" — verify manually.`,
             ),
           );
@@ -277,9 +279,9 @@ export class DraftValidationService {
       if (unmet.length > 0) {
         w.push(
           warn(
-            warnId(`class-prereq-${entry.className}`),
+            warnId(`class-prereq-${entry.name}`),
             'classes',
-            `${entry.className}: prerequisite${unmet.length > 1 ? 's' : ''} not met at entry.`,
+            `${entry.name}: prerequisite${unmet.length > 1 ? 's' : ''} not met at entry.`,
             unmet.join('; '),
           ),
         );
@@ -295,7 +297,7 @@ export class DraftValidationService {
    */
   private static checkSpellcastingPrereq(
     requirement: string,
-    snapshot: ReturnType<typeof DraftStateResolver.snapshotAtECL>,
+    snapshot: DraftCharacterSnapshot | null,
     classDataMap: ClassDataMap,
   ): boolean | 'unknown' {
     if (!snapshot) return 'unknown';
@@ -323,7 +325,7 @@ export class DraftValidationService {
   // ---- Feat prerequisites ----
 
   private static async checkFeatPrerequisites(
-    draft: CharacterDraft,
+    character: Character,
     ruleset: Ruleset,
     timeline: ECLTimeline,
     warnId: WarnId,
@@ -331,18 +333,22 @@ export class DraftValidationService {
   ): Promise<EntryValidationWarning[]> {
     const w: EntryValidationWarning[] = [];
 
-    for (const slot of draft.featSlots) {
-      if (!slot.featId || slot.prereqOverride) continue;
+    for (const feat of character.feats.feats) {
+      if (!feat.featId || feat.prereqOverride) continue;
 
-      const featDef = await GameDataService.getFeatById(slot.featId);
+      const featDef = await GameDataService.getFeatById(feat.featId);
       if (!featDef || featDef.prerequisites.length === 0) continue;
 
       // snapshotBeforeECL: prerequisites must be met *before* the feat is taken.
       // Returns null at ECL 1 (no prior state) — use EMPTY_SNAPSHOT so prereqs are
       // correctly evaluated as unmet rather than silently skipped.
       const snapshot =
-        DraftStateResolver.snapshotBeforeECL(draft, slot.availableAtLevel, ruleset, classDataMap) ??
-        DraftStateResolver.EMPTY_SNAPSHOT;
+        CharacterTimelineService.snapshotBeforeECL(
+          character,
+          feat.grantedAtLevel,
+          ruleset,
+          classDataMap,
+        ) ?? CharacterTimelineService.EMPTY_SNAPSHOT;
 
       // Cast snapshot as Character — structurally compatible for the fields PrerequisiteService reads
       const result = await PrerequisiteService.checkPrerequisites(
@@ -353,7 +359,7 @@ export class DraftValidationService {
       if (!result.met) {
         w.push(
           warn(
-            warnId(`feat-prereq-${slot.id}`),
+            warnId(`feat-prereq-${feat.featId}`),
             'feats',
             `${featDef.name}: prerequisite${result.reasons.length > 1 ? 's' : ''} not met.`,
             result.reasons.join('; '),
@@ -368,18 +374,18 @@ export class DraftValidationService {
   // ---- Trait count ----
 
   private static checkTraitCount(
-    draft: CharacterDraft,
+    character: Character,
     ruleset: Ruleset,
     warnId: WarnId,
   ): EntryValidationWarning[] {
     const maxTraits = ruleset.validationSettings.maxTraits;
-    if (draft.traits.length <= maxTraits) return [];
+    if (character.traits.traits.length <= maxTraits) return [];
 
     return [
       warn(
         warnId('trait-count'),
         'traits',
-        `${draft.traits.length} traits assigned; maximum is ${maxTraits}.`,
+        `${character.traits.traits.length} traits assigned; maximum is ${maxTraits}.`,
         'Remove excess traits or confirm with your GM.',
       ),
     ];
@@ -388,7 +394,7 @@ export class DraftValidationService {
   // ---- Skill ranks ----
 
   private static checkSkillRanks(
-    draft: CharacterDraft,
+    character: Character,
     totalHD: number,
     intMod: number,
     warnId: WarnId,
@@ -398,14 +404,18 @@ export class DraftValidationService {
 
     // Total available ranks across all classes
     let totalAvailable = 0;
-    for (const entry of draft.classes) {
-      const classData = lookupClassData(entry.className, classDataMap);
+    for (const entry of character.classes.classes) {
+      const classData = lookupClassData(entry.name, classDataMap);
       const basePerLevel = classData?.skillRanksPerLevel ?? 2; // default 2 if unknown
       totalAvailable += Math.max(basePerLevel + intMod, 1) * entry.level;
     }
 
-    // Total assigned ranks
-    const totalAssigned = Object.values(draft.skills).reduce((sum, e) => sum + e.ranks, 0);
+    // Sum assigned ranks — only from scalar Skill entries (not arrays or the totalRanks counter)
+    const skillEntries = Object.entries(character.skills).filter(
+      ([, v]) => typeof v === 'object' && v !== null && !Array.isArray(v) && 'ranks' in v,
+    ) as [string, { ranks: number }][];
+
+    const totalAssigned = skillEntries.reduce((sum, [, e]) => sum + e.ranks, 0);
 
     if (totalAssigned > totalAvailable) {
       w.push(
@@ -419,7 +429,7 @@ export class DraftValidationService {
 
     // Per-skill max = totalHD
     if (totalHD > 0) {
-      for (const [skillKey, entry] of Object.entries(draft.skills)) {
+      for (const [skillKey, entry] of skillEntries) {
         if (entry.ranks > totalHD) {
           w.push(
             warn(
@@ -438,14 +448,14 @@ export class DraftValidationService {
   // ---- Spellcasting advancement ----
 
   private static checkSpellcastingAdvancement(
-    draft: CharacterDraft,
+    character: Character,
     warnId: WarnId,
     classDataMap: ClassDataMap,
   ): EntryValidationWarning[] {
     const w: EntryValidationWarning[] = [];
 
-    for (const entry of draft.classes) {
-      const classData = lookupClassData(entry.className, classDataMap);
+    for (const entry of character.classes.classes) {
+      const classData = lookupClassData(entry.name, classDataMap);
       if (!classData) continue;
       if (classData.spellcasting.type === 'None') continue;
       if (classData.category !== 'Prestige') continue;
@@ -454,9 +464,9 @@ export class DraftValidationService {
       if (!entry.spellcastingAdvancement) {
         w.push(
           warn(
-            warnId(`spell-advancement-${entry.className}`),
+            warnId(`spell-advancement-${entry.name}`),
             'spells',
-            `${entry.className} advances spellcasting but no advancement is configured.`,
+            `${entry.name} advances spellcasting but no advancement is configured.`,
             'Set spellcasting advancement on the Classes tab.',
           ),
         );
@@ -465,7 +475,7 @@ export class DraftValidationService {
 
       // Check pointers at advancing levels only. Skip levels are allowed
       // to have empty pointers (they never contribute).
-      const classById = new Map(draft.classes.map((c) => [c.id, c]));
+      const classById = new Map(character.classes.classes.map((c) => [c.id ?? c.name, c]));
       const adv = entry.spellcastingAdvancement;
       const spec = classData.advancesSpellcasting;
       if (!spec) continue;
@@ -473,9 +483,9 @@ export class DraftValidationService {
         spec.atLevels ? spec.atLevels.includes(lvl) : lvl >= 1 && lvl <= entry.level;
 
       // Get target's tradition from class data map.
-      const getTradition = (target: DraftClassEntry | undefined): 'divine' | 'arcane' | null => {
+      const getTradition = (target: ClassEntry | undefined): 'divine' | 'arcane' | null => {
         if (!target) return null;
-        const t = classDataMap.get(target.className.toLowerCase())?.spellcasting.type;
+        const t = classDataMap.get(target.name.toLowerCase())?.spellcasting.type;
         return t === 'Divine' ? 'divine' : t === 'Arcane' ? 'arcane' : null;
       };
 
@@ -513,9 +523,9 @@ export class DraftValidationService {
       if (missing.length > 0) {
         w.push(
           warn(
-            warnId(`spell-advancement-missing-${entry.className}`),
+            warnId(`spell-advancement-missing-${entry.name}`),
             'spells',
-            `${entry.className}: advancement target missing at level ${missing.join(', ')}.`,
+            `${entry.name}: advancement target missing at level ${missing.join(', ')}.`,
             'Pick a base caster class for each prestige level on the Classes tab.',
           ),
         );
@@ -523,9 +533,9 @@ export class DraftValidationService {
       if (wrongTradition.length > 0) {
         w.push(
           warn(
-            warnId(`spell-advancement-tradition-${entry.className}`),
+            warnId(`spell-advancement-tradition-${entry.name}`),
             'spells',
-            `${entry.className}: advancement target at level ${wrongTradition.join(', ')} has the wrong spellcasting tradition.`,
+            `${entry.name}: advancement target at level ${wrongTradition.join(', ')} has the wrong spellcasting tradition.`,
             'This class restricts which tradition of caster it can advance.',
           ),
         );
@@ -538,11 +548,12 @@ export class DraftValidationService {
   // ---- Favored class bonuses ----
 
   private static async checkFavoredClassBonuses(
-    draft: CharacterDraft,
+    character: Character,
     warnId: WarnId,
   ): Promise<EntryValidationWarning[]> {
     const w: EntryValidationWarning[] = [];
-    for (const cls of draft.classes) {
+    const raceName = character.info.race?.name ?? '';
+    for (const cls of character.classes.classes) {
       if (!cls.isFavoredClass) continue;
       const allocated = cls.favoredClassBonuses?.length ?? 0;
       if (allocated < cls.level) {
@@ -550,7 +561,7 @@ export class DraftValidationService {
           warn(
             warnId(`fcb-unallocated-${cls.id}`),
             'classes',
-            `${cls.className}: ${cls.level - allocated} favored class bonus${cls.level - allocated === 1 ? '' : 'es'} unallocated.`,
+            `${cls.name}: ${cls.level - allocated} favored class bonus${cls.level - allocated === 1 ? '' : 'es'} unallocated.`,
             'Assign each favored class level to HP, Skill, or an alternate on the Classes tab.',
           ),
         );
@@ -559,7 +570,7 @@ export class DraftValidationService {
           warn(
             warnId(`fcb-overallocated-${cls.id}`),
             'classes',
-            `${cls.className}: ${allocated - cls.level} favored class bonus${allocated - cls.level === 1 ? '' : 'es'} over-allocated (${allocated} selections for level ${cls.level}).`,
+            `${cls.name}: ${allocated - cls.level} favored class bonus${allocated - cls.level === 1 ? '' : 'es'} over-allocated (${allocated} selections for level ${cls.level}).`,
             'Reduce favored class bonus selections to match the class level on the Classes tab.',
           ),
         );
@@ -569,8 +580,8 @@ export class DraftValidationService {
       const alternateSels = (cls.favoredClassBonuses ?? []).filter(
         (s) => s.type === 'alternate',
       ) as { type: 'alternate'; level: number; optionId: string }[];
-      if (alternateSels.length > 0 && draft.raceName) {
-        const entries = await GameDataService.getFavoredClassBonuses(draft.raceName, cls.className);
+      if (alternateSels.length > 0 && raceName) {
+        const entries = await GameDataService.getFavoredClassBonuses(raceName, cls.name);
         const entryMap = new Map(entries.map((e) => [e.id, e]));
         for (const sel of alternateSels) {
           const entry = entryMap.get(sel.optionId);
@@ -579,7 +590,7 @@ export class DraftValidationService {
               warn(
                 warnId(`fcb-minlevel-${cls.id}-${sel.level}`),
                 'classes',
-                `${cls.className}: alternate "${entry.shortName}" requires class level ${entry.minimumClassLevel} but was selected at level ${sel.level}.`,
+                `${cls.name}: alternate "${entry.shortName}" requires class level ${entry.minimumClassLevel} but was selected at level ${sel.level}.`,
                 'Remove or reassign this favored class bonus selection on the Classes tab.',
               ),
             );
@@ -593,7 +604,7 @@ export class DraftValidationService {
   // ---- Eidolons ----
 
   private static checkEidolons(
-    draft: CharacterDraft,
+    character: Character,
     dataIndex: EidolonDataIndex,
     warnId: WarnId,
   ): EntryValidationWarning[] {
@@ -601,10 +612,10 @@ export class DraftValidationService {
 
     // Feat-without-summoner check: Extra Evolution feat is meaningless without
     // a Summoner class entry.
-    const hasSummonerClass = draft.classes.some((c) =>
-      /^summoner(?:\s|$|\()/i.test(c.className.trim()),
+    const hasSummonerClass = character.classes.classes.some((c) =>
+      /^summoner(?:\s|$|\()/i.test(c.name.trim()),
     );
-    const extraEvolutionCount = draft.featSlots.filter(
+    const extraEvolutionCount = character.feats.feats.filter(
       (s) => s.featId === 'extra-evolution',
     ).length;
     if (extraEvolutionCount > 0 && !hasSummonerClass) {
@@ -617,8 +628,8 @@ export class DraftValidationService {
       );
     }
 
-    for (const eidolon of draft.eidolons) {
-      const classEntry = draft.classes.find((c) => c.id === eidolon.summonerClassEntryId);
+    for (const eidolon of character.eidolons) {
+      const classEntry = character.classes.classes.find((c) => c.id === eidolon.summonerClassEntryId);
       if (!classEntry) {
         w.push(
           warn(
@@ -743,7 +754,7 @@ export class DraftValidationService {
     // These checks apply to the class entry's sharedEvolutions, which is the
     // same list for every eidolon in the brood. Running them inside the eidolon
     // loop would emit one warning per eidolon instead of one per class entry.
-    for (const classEntry of draft.classes) {
+    for (const classEntry of character.classes.classes) {
       if (!classEntry.summonerBroodmaster?.sharedEvolutions) continue;
       const summonerLevel = classEntry.level;
       for (const shared of classEntry.summonerBroodmaster.sharedEvolutions) {

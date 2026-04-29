@@ -19,7 +19,7 @@ import {
   type EntryTabKey,
   type TabStatus,
 } from '@/store/slices/characterEntrySlice';
-import { DraftValidationService } from '@/services/DraftValidationService';
+import { CharacterValidationService } from '@/services/CharacterValidationService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
 import { ValidationReportSheet } from './ValidationReportSheet';
@@ -145,12 +145,7 @@ export function CharacterEntryScreen() {
   );
 
   const handleValidate = useCallback(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const newWarnings = await DraftValidationService.validate(
-      character as any,
-      ruleset,
-      classDataMap,
-    );
+    const newWarnings = await CharacterValidationService.validate(character, ruleset, classDataMap);
     dispatch(setValidationWarnings(newWarnings));
     setShowValidationSheet(true);
   }, [character, ruleset, classDataMap, dispatch]);

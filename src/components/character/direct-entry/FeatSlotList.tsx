@@ -234,18 +234,7 @@ export function FeatSlotList() {
 
   // Build the display slot list by merging computed slots with assigned feats
   const featSlots = useMemo<FeatSlotDisplay[]>(() => {
-    const classes = character.classes.classes.map((c) => ({
-      id: c.id ?? c.name,
-      className: c.name,
-      level: c.level,
-      sourceSystem: (c.sourceSystem ?? 'pf1e') as 'pf1e' | '3.5e' | 'homebrew' | 'campaign',
-      classChoices: c.classChoices ?? [],
-      prereqOverride: c.prereqOverride ?? false,
-    }));
-    const computed = computeFeatSlots(
-      classes as Parameters<typeof computeFeatSlots>[0],
-      character.info.race.name,
-    );
+    const computed = computeFeatSlots(character.classes.classes, character.info.race.name);
 
     // Build a map of slotId → assigned feat
     const assignedMap = new Map<

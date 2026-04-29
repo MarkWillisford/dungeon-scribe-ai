@@ -64,20 +64,7 @@ function makeFeatSource(source: 'racial' | 'level' | 'bonus' | 'mythic', level: 
 
 function syncFeatSlotsFromClasses(character: Character): void {
   const raceName = character.info.race?.name ?? '';
-  // Build class-entry-like objects for computeFeatSlots (it accepts DraftClassEntry-like shapes)
-  const classInputs = character.classes.classes.map((c) => ({
-    id: c.id ?? c.name,
-    className: c.name,
-    level: c.level,
-    sourceSystem: (c.sourceSystem ?? 'pf1e') as 'pf1e' | '3.5e' | 'homebrew' | 'campaign',
-    classChoices: c.classChoices ?? [],
-    prereqOverride: c.prereqOverride ?? false,
-  }));
-
-  const generated = computeFeatSlots(
-    classInputs as Parameters<typeof computeFeatSlots>[0],
-    raceName,
-  );
+  const generated = computeFeatSlots(character.classes.classes, raceName);
 
   // Build set of (source, level) pairs already in character feats
   const existingKeys = new Set(character.feats.feats.map((f) => `${f.source}_${f.grantedAtLevel}`));
