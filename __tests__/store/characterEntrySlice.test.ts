@@ -1046,6 +1046,35 @@ describe('characterEntrySlice — classes', () => {
       );
       expect(state.character.classes.classes[0].favoredClassBonuses).toBeUndefined();
     });
+
+    it('rejects payload when hp + skillRank exceeds class level', () => {
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Fighter', level: 4 })),
+      );
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      // Total 5 + 3 = 8 > level 4 — bonuses should remain empty
+      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', hp: 5, skillRank: 3 }));
+      expect(state.character.classes.favoredClassBonuses).toHaveLength(0);
+    });
+
+    it('accepts payload when hp + skillRank exactly equals class level', () => {
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Fighter', level: 8 })),
+      );
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      // Total 5 + 3 = 8 = level 8 — should be accepted
+      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', hp: 5, skillRank: 3 }));
+      const hpBonus = state.character.classes.favoredClassBonuses.find(
+        (b) => b.className === 'Fighter' && b.bonusType === 'hp',
+      );
+      const skBonus = state.character.classes.favoredClassBonuses.find(
+        (b) => b.className === 'Fighter' && b.bonusType === 'skillRank',
+      );
+      expect(hpBonus?.value).toBe(5);
+      expect(skBonus?.value).toBe(3);
+    });
   });
 
   describe('reorderClasses', () => {
