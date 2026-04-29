@@ -8,7 +8,7 @@ export const POW_STANCES_1: StanceDefinition[] = [
     disciplineId: 'broken-blade',
     level: 1,
     description:
-      'By keeping his hands stiff and his arms loose and ready, the disciple uses his bare palms as shields to protect himself from the weapons of his foes. While in this stance, the initiator gains a +2 shield bonus to his AC while he has at least one free hand. At the initiator\'s 6th initiator level, this bonus increases by +1, again at 12th level, and a final time at 18th level.',
+      "By keeping his hands stiff and his arms loose and ready, the disciple uses his bare palms as shields to protect himself from the weapons of his foes. While in this stance, the initiator gains a +2 shield bonus to his AC while he has at least one free hand. At the initiator's 6th initiator level, this bonus increases by +1, again at 12th level, and a final time at 18th level.",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -150,7 +150,7 @@ export const POW_STANCES_1: StanceDefinition[] = [
     disciplineId: 'golden-lion',
     level: 8,
     description:
-      "The initiator and allies within 10 feet gain +1d6 bonus damage per attack for each foe the initiator has defeated (maximum +5d6 bonus).",
+      'The initiator and allies within 10 feet gain +1d6 bonus damage per attack for each foe the initiator has defeated (maximum +5d6 bonus).',
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,

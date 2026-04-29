@@ -20,6 +20,8 @@ import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import type { CompanionInstance, CompanionGrant } from '@/types/companions';
 import type { DraftClassEntry } from '@/types/characterDraft';
 import { BODY_SHAPE_SLOTS, type CompanionSlotAccess } from '@/data/companions/bodyShapeSlots';
+import { ALL_TEMPLATES } from '@/data/templates';
+import type { GrantsCompanionSpec } from '@/data/templates/types';
 
 // ---------------------------------------------------------------------------
 // AC progression table — totals at each effective class level (1–20).
@@ -280,6 +282,126 @@ export const AC_PROGRESSION: Record<number, CompanionACProgression> = {
     bonusTricks: 7,
     special: ['Ability Score Increase'],
   },
+  21: {
+    hd: 17,
+    bab: 12,
+    fort: 10,
+    ref: 10,
+    will: 5,
+    feats: 9,
+    naturalArmorBonus: 14,
+    strDexBonus: 7,
+    bonusTricks: 8,
+    special: [],
+  },
+  22: {
+    hd: 18,
+    bab: 13,
+    fort: 11,
+    ref: 11,
+    will: 6,
+    feats: 9,
+    naturalArmorBonus: 14,
+    strDexBonus: 7,
+    bonusTricks: 8,
+    special: [],
+  },
+  23: {
+    hd: 18,
+    bab: 13,
+    fort: 11,
+    ref: 11,
+    will: 6,
+    feats: 9,
+    naturalArmorBonus: 14,
+    strDexBonus: 7,
+    bonusTricks: 8,
+    special: [],
+  },
+  24: {
+    hd: 19,
+    bab: 14,
+    fort: 11,
+    ref: 11,
+    will: 6,
+    feats: 10,
+    naturalArmorBonus: 16,
+    strDexBonus: 8,
+    bonusTricks: 9,
+    special: [],
+  },
+  25: {
+    hd: 20,
+    bab: 15,
+    fort: 12,
+    ref: 12,
+    will: 6,
+    feats: 10,
+    naturalArmorBonus: 16,
+    strDexBonus: 8,
+    bonusTricks: 9,
+    special: ['Ability Score Increase'],
+  },
+  26: {
+    hd: 21,
+    bab: 15,
+    fort: 12,
+    ref: 12,
+    will: 7,
+    feats: 11,
+    naturalArmorBonus: 16,
+    strDexBonus: 8,
+    bonusTricks: 9,
+    special: [],
+  },
+  27: {
+    hd: 21,
+    bab: 15,
+    fort: 12,
+    ref: 12,
+    will: 7,
+    feats: 11,
+    naturalArmorBonus: 18,
+    strDexBonus: 9,
+    bonusTricks: 10,
+    special: [],
+  },
+  28: {
+    hd: 22,
+    bab: 16,
+    fort: 13,
+    ref: 13,
+    will: 7,
+    feats: 11,
+    naturalArmorBonus: 18,
+    strDexBonus: 9,
+    bonusTricks: 10,
+    special: [],
+  },
+  29: {
+    hd: 23,
+    bab: 17,
+    fort: 13,
+    ref: 13,
+    will: 7,
+    feats: 12,
+    naturalArmorBonus: 18,
+    strDexBonus: 9,
+    bonusTricks: 10,
+    special: [],
+  },
+  30: {
+    hd: 24,
+    bab: 18,
+    fort: 14,
+    ref: 14,
+    will: 8,
+    feats: 12,
+    naturalArmorBonus: 20,
+    strDexBonus: 10,
+    bonusTricks: 11,
+    special: ['Ability Score Increase'],
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -321,6 +443,21 @@ export interface CompanionBaseStats {
 // ---------------------------------------------------------------------------
 // Granting-source formulas — plan § Granting Sources
 // ---------------------------------------------------------------------------
+
+// Apply a template's grantsCompanion formula against the character's total
+// class level. Negative offsets clamp to a minimum of 1 so the AC progression
+// table never underflows. Mirrors the Paladin/Druid-style −N pattern used by
+// `effectiveLevelFromClass` for mount/companion math.
+function applyGrantsCompanionFormula(spec: GrantsCompanionSpec, characterLevel: number): number {
+  switch (spec.effectiveLevelFormula) {
+    case 'characterLevel':
+      return Math.max(1, characterLevel);
+    case 'characterLevel-3':
+      return Math.max(1, characterLevel - 3);
+    case 'characterLevel-4':
+      return Math.max(1, characterLevel - 4);
+  }
+}
 
 function effectiveLevelFromClass(classEntry: ClassEntry): number {
   const archetypes = classEntry.archetype ?? [];
@@ -400,12 +537,16 @@ export class CompanionService {
         if (!classEntry) return 0;
         return effectiveLevelFromClass(classEntry);
       }
-      case 'template':
-        // Template-granted companions use the character's total level as their
-        // effective level. Templates with different formulas override via the
-        // TemplateDefinition.grantsCompanion.effectiveLevelFormula field
-        // (Phase 1.8) — until then, defer to character level.
-        return character.classes.totalLevel;
+      case 'template': {
+        // Template-granted companions resolve their effective level from the
+        // definition's `grantsCompanion.effectiveLevelFormula`. Fallback to
+        // the character's total class level for templates without the field
+        // (covers hand-rolled campaign content that forgot to set it).
+        const def = ALL_TEMPLATES.find((t) => t.id === grant.templateId);
+        const spec = def?.grantsCompanion;
+        if (!spec) return character.classes.totalLevel;
+        return applyGrantsCompanionFormula(spec, character.classes.totalLevel);
+      }
       case 'feat':
       case 'cohort':
         // Reserved — not implemented. Phase 1 scope excludes cohorts, and no
@@ -416,7 +557,7 @@ export class CompanionService {
   }
 
   static getProgression(effectiveLevel: number): CompanionACProgression {
-    const clamped = Math.max(1, Math.min(20, Math.floor(effectiveLevel)));
+    const clamped = Math.max(1, Math.min(30, Math.floor(effectiveLevel)));
     return AC_PROGRESSION[clamped];
   }
 
@@ -457,10 +598,11 @@ export class CompanionService {
           case 'CON':
             con += change.change;
             break;
-          // INT/WIS/CHA deltas possible but rare; we ignore them here since
-          // the entry declares them directly and tiers that modify those are
-          // not represented in current data. Add cases if that assumption
-          // breaks.
+          default:
+            console.warn(
+              `[CompanionService] Unhandled ability score change "${change.ability}" in tier at level ${tier.atDruidLevel} — ignored`,
+            );
+            break;
         }
       }
 

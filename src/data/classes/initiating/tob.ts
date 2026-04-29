@@ -62,13 +62,13 @@ export const CRUSADER_CLASS: ExpandedClassData = {
       name: 'Steely Resolve',
       level: 1,
       description:
-        'The crusader maintains a pool of delayed damage. When the crusader takes damage, half of it (rounded down) is set aside and not immediately applied. At the start of each of the crusader\'s turns, half of the accumulated delayed damage (rounded down) is applied. This pool resets at the end of each encounter.',
+        "The crusader maintains a pool of delayed damage. When the crusader takes damage, half of it (rounded down) is set aside and not immediately applied. At the start of each of the crusader's turns, half of the accumulated delayed damage (rounded down) is applied. This pool resets at the end of each encounter.",
     },
     {
       name: 'Furious Counterstrike',
       level: 1,
       description:
-        'When the crusader\'s steely resolve delayed damage pool is greater than 0, the crusader gains a bonus on melee attack rolls and melee damage rolls equal to the number of points in the pool divided by 4 (rounded down, minimum +1).',
+        "When the crusader's steely resolve delayed damage pool is greater than 0, the crusader gains a bonus on melee attack rolls and melee damage rolls equal to the number of points in the pool divided by 4 (rounded down, minimum +1).",
     },
     {
       name: 'Indomitable Soul',
@@ -98,7 +98,7 @@ export const CRUSADER_CLASS: ExpandedClassData = {
       name: 'Thicket of Blades',
       level: 9,
       description:
-        'The crusader\'s threatened area becomes unusually difficult to navigate. Foes provoke attacks of opportunity when they move through the crusader\'s threatened area as normal, and 5-foot steps within that area are treated as normal movement for the purpose of provoking attacks of opportunity.',
+        "The crusader's threatened area becomes unusually difficult to navigate. Foes provoke attacks of opportunity when they move through the crusader's threatened area as normal, and 5-foot steps within that area are treated as normal movement for the purpose of provoking attacks of opportunity.",
     },
     {
       name: 'Mettle',
@@ -192,7 +192,7 @@ export const SWORDSAGE_CLASS: ExpandedClassData = {
       name: 'Discipline Focus (Weapon Focus)',
       level: 1,
       description:
-        'The swordsage gains Weapon Focus as a bonus feat for one weapon associated with one of her disciplines. She must choose a discipline and a weapon from that discipline\'s associated weapons.',
+        "The swordsage gains Weapon Focus as a bonus feat for one weapon associated with one of her disciplines. She must choose a discipline and a weapon from that discipline's associated weapons.",
     },
     {
       name: 'Quick to Act',
@@ -204,7 +204,7 @@ export const SWORDSAGE_CLASS: ExpandedClassData = {
       name: 'Discipline Focus (Insightful Strike)',
       level: 2,
       description:
-        'For one of the swordsage\'s disciplines, she can add her Wisdom modifier (instead of Strength) to damage rolls whenever she uses a strike from that discipline.',
+        "For one of the swordsage's disciplines, she can add her Wisdom modifier (instead of Strength) to damage rolls whenever she uses a strike from that discipline.",
     },
     {
       name: 'Sense Magic',
@@ -216,7 +216,7 @@ export const SWORDSAGE_CLASS: ExpandedClassData = {
       name: 'Discipline Focus (Defensive Stance)',
       level: 6,
       description:
-        'For one of the swordsage\'s disciplines, she gains a +2 bonus to Armor Class when in a stance from that discipline.',
+        "For one of the swordsage's disciplines, she gains a +2 bonus to Armor Class when in a stance from that discipline.",
     },
     {
       name: 'Evasion',
@@ -242,7 +242,14 @@ export const SWORDSAGE_CLASS: ExpandedClassData = {
     type: 'Martial',
     initiatingAbility: 'WIS',
     ilProgression: 'full',
-    disciplines: ['desert-wind', 'diamond-mind', 'setting-sun', 'shadow-hand', 'stone-dragon', 'tiger-claw'],
+    disciplines: [
+      'desert-wind',
+      'diamond-mind',
+      'setting-sun',
+      'shadow-hand',
+      'stone-dragon',
+      'tiger-claw',
+    ],
     progressionTableKey: 'swordsage',
     recoveryMechanics: {
       primary: { type: 'full_round_one' },
@@ -314,7 +321,7 @@ export const WARBLADE_CLASS: ExpandedClassData = {
       name: 'Weapon Aptitude',
       level: 1,
       description:
-        'The warblade\'s training allows her to realign her weapon skills. Each morning, she may spend 1 hour practicing to reassign one of her weapon-specific fighter bonus feats (such as Weapon Focus) to a different qualifying weapon.',
+        "The warblade's training allows her to realign her weapon skills. Each morning, she may spend 1 hour practicing to reassign one of her weapon-specific fighter bonus feats (such as Weapon Focus) to a different qualifying weapon.",
     },
     {
       name: 'Uncanny Dodge',
@@ -356,7 +363,7 @@ export const WARBLADE_CLASS: ExpandedClassData = {
       name: 'Stance Mastery',
       level: 20,
       description:
-        'The warblade can maintain two stances simultaneously. Both stances\' effects apply at the same time.',
+        "The warblade can maintain two stances simultaneously. Both stances' effects apply at the same time.",
     },
   ],
   spellcasting: { type: 'None', casting: 'None' },

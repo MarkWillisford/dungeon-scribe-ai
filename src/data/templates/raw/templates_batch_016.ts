@@ -178,7 +178,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Speed Increase',
-        description: 'All of the shadow animal\'s movement speeds increase by 10 feet.',
+        description: "All of the shadow animal's movement speeds increase by 10 feet.",
       },
       {
         scalingType: 'flat',
@@ -190,7 +190,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Shadow Powers (Su)',
         description:
-          'The shadow animal gains one special ability per 3 HD (rounded up) chosen from the following list. Each ability may be selected multiple times if noted. Blinding Savagery (Ex): Apply to rake, rend, or trample; damaged targets must succeed at a Fortitude save (DC 10 + 1/2 HD + Wisdom modifier) or be blinded for 1 round; selectable up to three times for different abilities. Energy Resistance (Ex): Grants cold resistance 10 or upgrades existing cold resistance to immunity; selectable twice. Evasion (Ex): As the rogue ability. Fear Aura (Su): 60-foot radius; creatures that can see or hear the shadow animal must succeed at a Will save (DC 10 + 1/2 HD + Charisma modifier) or be shaken for as long as they remain in the aura; creatures cannot be affected again for 24 hours; mind-affecting fear effect. Frightful Presence (Su): Activates as a free action when charging, attacking in a surprise round, or succeeding at a DC 15 Intimidate check; 30-foot range; 5d6 round duration. Hide in Plain Sight (Su): May use Stealth to hide while observed, provided within 10 feet of a shadow other than its own. See in Darkness (Su): Sees perfectly in all darkness including magical darkness. Shadow Bite (Su): One natural attack can extend 5 feet through the creature\'s own shadow; damaged targets must succeed at a Fortitude save (DC 10 + 1/2 HD + Charisma modifier) or take 1 Strength damage in addition to normal damage. Shadow Form (Su): Once per day as a standard action, transform into an animate pool of darkness for up to 10 minutes (functions as gaseous form); duration usable in 1-minute increments. Shadow Spirit (Su): +4 racial bonus on saves against energy drain and death effects; selecting this ability a second time grants immunity to those effects instead. Shadow Step (Su): Teleport up to 10 feet per Hit Die as a move action, usable once per 1d4 rounds, provided both the starting and ending positions are in dim light or darkness. Spectral Attacks (Su): Natural attacks affect incorporeal creatures as if possessing the ghost touch quality. Spell Resistance (Ex): Gain SR equal to 11 + CR (does not stack with base creature SR). Umbral Fast Healing (Ex): Gain fast healing 1 in dim light or darkness (requires 10+ HD). Vanish (Su): As a swift action, become invisible for 1 round; usable a number of rounds per day equal to Hit Dice, in 1-round increments.',
+          "The shadow animal gains one special ability per 3 HD (rounded up) chosen from the following list. Each ability may be selected multiple times if noted. Blinding Savagery (Ex): Apply to rake, rend, or trample; damaged targets must succeed at a Fortitude save (DC 10 + 1/2 HD + Wisdom modifier) or be blinded for 1 round; selectable up to three times for different abilities. Energy Resistance (Ex): Grants cold resistance 10 or upgrades existing cold resistance to immunity; selectable twice. Evasion (Ex): As the rogue ability. Fear Aura (Su): 60-foot radius; creatures that can see or hear the shadow animal must succeed at a Will save (DC 10 + 1/2 HD + Charisma modifier) or be shaken for as long as they remain in the aura; creatures cannot be affected again for 24 hours; mind-affecting fear effect. Frightful Presence (Su): Activates as a free action when charging, attacking in a surprise round, or succeeding at a DC 15 Intimidate check; 30-foot range; 5d6 round duration. Hide in Plain Sight (Su): May use Stealth to hide while observed, provided within 10 feet of a shadow other than its own. See in Darkness (Su): Sees perfectly in all darkness including magical darkness. Shadow Bite (Su): One natural attack can extend 5 feet through the creature's own shadow; damaged targets must succeed at a Fortitude save (DC 10 + 1/2 HD + Charisma modifier) or take 1 Strength damage in addition to normal damage. Shadow Form (Su): Once per day as a standard action, transform into an animate pool of darkness for up to 10 minutes (functions as gaseous form); duration usable in 1-minute increments. Shadow Spirit (Su): +4 racial bonus on saves against energy drain and death effects; selecting this ability a second time grants immunity to those effects instead. Shadow Step (Su): Teleport up to 10 feet per Hit Die as a move action, usable once per 1d4 rounds, provided both the starting and ending positions are in dim light or darkness. Spectral Attacks (Su): Natural attacks affect incorporeal creatures as if possessing the ghost touch quality. Spell Resistance (Ex): Gain SR equal to 11 + CR (does not stack with base creature SR). Umbral Fast Healing (Ex): Gain fast healing 1 in dim light or darkness (requires 10+ HD). Vanish (Su): As a swift action, become invisible for 1 round; usable a number of rounds per day equal to Hit Dice, in 1-round increments.",
       },
       {
         scalingType: 'flat',
@@ -380,7 +380,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
     id: 'shadow-traced-creature',
     name: 'Shadow-Traced Creature',
     description:
-      'An acquired template from Green Ronin\'s Advanced Bestiary, applicable to intelligent corporeal creatures. The creature\'s shadow becomes semi-sentient and can manifest as independent shadow traces — semi-real copies that can act, fight, and cast spells, making the host nearly impossible to pin down. The template sacrifices some mental coherence for this distributed existence.',
+      "An acquired template from Green Ronin's Advanced Bestiary, applicable to intelligent corporeal creatures. The creature's shadow becomes semi-sentient and can manifest as independent shadow traces — semi-real copies that can act, fight, and cast spells, making the host nearly impossible to pin down. The template sacrifices some mental coherence for this distributed existence.",
     crAdjustment: 2,
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
@@ -461,7 +461,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
     id: 'shell-creature',
     name: 'Shell Creature',
     description:
-      'An acquired template from Legendary Games\' Arcforge Universe Cyclopedia, applicable to any corporeal creature with both a Constitution and an Intelligence score. The shell creature serves as a biological host body for artificial intelligence, functioning as a codelord\'s vehicle. Its will is fully suppressed by an implanted shackle device, and it can be possessed by an AI at any time.',
+      "An acquired template from Legendary Games' Arcforge Universe Cyclopedia, applicable to any corporeal creature with both a Constitution and an Intelligence score. The shell creature serves as a biological host body for artificial intelligence, functioning as a codelord's vehicle. Its will is fully suppressed by an implanted shackle device, and it can be possessed by an AI at any time.",
     crAdjustment: 0,
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
@@ -477,7 +477,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'AI Host (Ex)',
         description:
-          'The shell creature functions as a host body for an artificial intelligence, gaining the aggregate template when inhabited by an AI. Unlike normal possession, the shell creature is never allowed a Will save to deny the AI possession of its body; the codelord\'s shackle implant ensures total compliance.',
+          "The shell creature functions as a host body for an artificial intelligence, gaining the aggregate template when inhabited by an AI. Unlike normal possession, the shell creature is never allowed a Will save to deny the AI possession of its body; the codelord's shackle implant ensures total compliance.",
       },
       {
         scalingType: 'flat',
@@ -537,7 +537,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Guard (Ex)',
         description:
-          "When adjacent to its master, the shield guardian causes all attacks directed at the amulet wearer to suffer a –2 penalty on attack rolls.",
+          'When adjacent to its master, the shield guardian causes all attacks directed at the amulet wearer to suffer a –2 penalty on attack rolls.',
       },
       {
         scalingType: 'flat',
@@ -549,7 +549,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Spell Storing (Sp)',
         description:
-          "The shield guardian can store one spell of 4th level or lower cast into it by its master. The guardian casts the stored spell on command or when a triggering condition set by the master occurs. A spell stored in this way is immediately lost if the guardian stores another spell.",
+          'The shield guardian can store one spell of 4th level or lower cast into it by its master. The guardian casts the stored spell on command or when a triggering condition set by the master occurs. A spell stored in this way is immediately lost if the guardian stores another spell.',
       },
     ],
     sourceInfo: {
@@ -579,13 +579,13 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'flat',
             name: 'Shifter Aspect (Su)',
             description:
-              "The creature can use a shifter aspect for a number of minutes per day equal to 3 + 1/2 its HD. It chooses a single aspect whose bonuses are determined using its HD as its effective shifter level. The creature can use this ability in multiple 1-minute increments.",
+              'The creature can use a shifter aspect for a number of minutes per day equal to 3 + 1/2 its HD. It chooses a single aspect whose bonuses are determined using its HD as its effective shifter level. The creature can use this ability in multiple 1-minute increments.',
           },
           {
             scalingType: 'flat',
             name: 'Defensive Instinct (Ex)',
             description:
-              "The creature gains a +1 bonus per effective shifter level (equal to its HD) on saving throws, Perception checks, and initiative checks.",
+              'The creature gains a +1 bonus per effective shifter level (equal to its HD) on saving throws, Perception checks, and initiative checks.',
           },
         ],
       },
@@ -599,19 +599,19 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'flat',
             name: 'Shifter Aspect (Su)',
             description:
-              "The creature can use a shifter aspect for a number of minutes per day equal to 3 + 1/2 its HD, choosing a single aspect and determining bonuses using its HD as its effective shifter level.",
+              'The creature can use a shifter aspect for a number of minutes per day equal to 3 + 1/2 its HD, choosing a single aspect and determining bonuses using its HD as its effective shifter level.',
           },
           {
             scalingType: 'flat',
             name: 'Wild Shape (Su)',
             description:
-              "The creature can use wild shape a number of times per day equal to 1 + 1/4 its HD. Its effective druid level for wild shape equals its HD – 3. Duration and available forms are determined by this effective level.",
+              'The creature can use wild shape a number of times per day equal to 1 + 1/4 its HD. Its effective druid level for wild shape equals its HD – 3. Duration and available forms are determined by this effective level.',
           },
           {
             scalingType: 'flat',
             name: 'Defensive Instinct (Ex)',
             description:
-              "The creature gains a +1 bonus per effective shifter level (equal to its HD) on saving throws, Perception checks, and initiative checks.",
+              'The creature gains a +1 bonus per effective shifter level (equal to its HD) on saving throws, Perception checks, and initiative checks.',
           },
           {
             scalingType: 'flat',
@@ -678,7 +678,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Empowered Channel (Su)',
         description:
-          'While within the consecrated area, the save DC to resist the shrine-blessed creature\'s channeled negative energy increases by +6.',
+          "While within the consecrated area, the save DC to resist the shrine-blessed creature's channeled negative energy increases by +6.",
       },
     ],
     sourceInfo: {
@@ -701,7 +701,10 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
     isSimpleTemplate: false,
     prerequisites: [
       { type: 'alignment', allowed: ['neutral evil'] },
-      { type: 'special', description: 'Must be a druid who undergoes the Welcome The Blighted Soul ritual.' },
+      {
+        type: 'special',
+        description: 'Must be a druid who undergoes the Welcome The Blighted Soul ritual.',
+      },
     ],
     typeChange: 'undead',
     subtypeGains: ['earth'],
@@ -727,8 +730,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
       {
         scalingType: 'flat',
         name: 'Senses',
-        description:
-          'Gains darkvision 60 feet and tremorsense 60 feet.',
+        description: 'Gains darkvision 60 feet and tremorsense 60 feet.',
       },
       {
         scalingType: 'flat',
@@ -746,7 +748,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Blighted Rebirth (Su)',
         description:
-          'When the siabrae is destroyed, it attempts a DC 20 Fortitude save. On blighted terrain, this save is automatically successful. On a success, the siabrae\'s essence reforms within new stone 1d10 miles away after 1d10 days. It emerges without any of its equipment.',
+          "When the siabrae is destroyed, it attempts a DC 20 Fortitude save. On blighted terrain, this save is automatically successful. On a success, the siabrae's essence reforms within new stone 1d10 miles away after 1d10 days. It emerges without any of its equipment.",
       },
       {
         scalingType: 'flat',
@@ -846,7 +848,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Blighted Rebirth (Su)',
         description:
-          "Upon destruction, the siabrae makes a DC 20 Fortitude save (automatic success on blighted terrain). On success, it reforms within 1d10 miles in stone after 1d10 days, without gear.",
+          'Upon destruction, the siabrae makes a DC 20 Fortitude save (automatic success on blighted terrain). On success, it reforms within 1d10 miles in stone after 1d10 days, without gear.',
       },
       {
         scalingType: 'flat',
@@ -892,7 +894,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
     id: 'silenced',
     name: 'Silenced',
     description:
-      'An acquired template from Legendary Games\' Arcforge Universe Cyclopedia, applicable to any undead creature. The Silenced are powerful undead creations of The Mechanism, entities that have achieved a form of permanent, energy-neutral undeath while retaining their intellect and gaining massive physical and mental enhancements. They radiate an aura that suppresses all light, sound, and sensory input, becoming centers of absolute stillness.',
+      "An acquired template from Legendary Games' Arcforge Universe Cyclopedia, applicable to any undead creature. The Silenced are powerful undead creations of The Mechanism, entities that have achieved a form of permanent, energy-neutral undeath while retaining their intellect and gaining massive physical and mental enhancements. They radiate an aura that suppresses all light, sound, and sensory input, becoming centers of absolute stillness.",
     crAdjustment: 3,
     acquisitionType: 'acquired',
     isSimpleTemplate: false,
@@ -995,7 +997,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
         scalingType: 'flat',
         name: 'Lunar Sympathy (Su)',
         description:
-          'The silverblood lycanthrope\'s power is tied to the moon. When the moon is at least half-full at night, the creature gains the effect of a bless spell while outdoors. On full moon nights, this becomes a heroism effect that functions even indoors. When the moon is less than half-full, the creature becomes fatigued at night. During new moon phases, the creature becomes fatigued during the day, exhausted at night, and takes 1d4 Constitution damage each night (DC 20 Fortitude save to halve the damage).',
+          "The silverblood lycanthrope's power is tied to the moon. When the moon is at least half-full at night, the creature gains the effect of a bless spell while outdoors. On full moon nights, this becomes a heroism effect that functions even indoors. When the moon is less than half-full, the creature becomes fatigued at night. During new moon phases, the creature becomes fatigued during the day, exhausted at night, and takes 1d4 Constitution damage each night (DC 20 Fortitude save to halve the damage).",
       },
       {
         scalingType: 'flat',
@@ -1033,13 +1035,13 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'flat',
             name: 'Rage (Ex)',
             description:
-              "The creature can rage for a number of rounds per day equal to 4 + its HD + its Constitution modifier. While raging it gains the standard benefits of the barbarian rage ability, using its HD as its barbarian level to determine effects and bonuses. It cannot cast spells or use skills that require patience while raging.",
+              'The creature can rage for a number of rounds per day equal to 4 + its HD + its Constitution modifier. While raging it gains the standard benefits of the barbarian rage ability, using its HD as its barbarian level to determine effects and bonuses. It cannot cast spells or use skills that require patience while raging.',
           },
           {
             scalingType: 'flat',
             name: 'Uncanny Dodge (Ex)',
             description:
-              "The creature retains its Dexterity bonus to AC even when flat-footed or when struck by an invisible attacker.",
+              'The creature retains its Dexterity bonus to AC even when flat-footed or when struck by an invisible attacker.',
           },
           {
             scalingType: 'flat',
@@ -1058,13 +1060,13 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'flat',
             name: 'Greater Rage (Ex)',
             description:
-              "The creature can rage for a number of rounds per day equal to 4 + its HD + its Constitution modifier, using greater rage (as the barbarian class feature at 11th level). While raging it gains enhanced bonuses over standard rage.",
+              'The creature can rage for a number of rounds per day equal to 4 + its HD + its Constitution modifier, using greater rage (as the barbarian class feature at 11th level). While raging it gains enhanced bonuses over standard rage.',
           },
           {
             scalingType: 'flat',
             name: 'Improved Uncanny Dodge (Ex)',
             description:
-              "The creature retains its Dexterity bonus to AC even when flat-footed or struck by an invisible attacker, and cannot be flanked except by a rogue of 4 or more levels higher.",
+              'The creature retains its Dexterity bonus to AC even when flat-footed or struck by an invisible attacker, and cannot be flanked except by a rogue of 4 or more levels higher.',
           },
           {
             scalingType: 'flat',
@@ -1108,7 +1110,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'flat',
             name: 'Bardic Performance (Su)',
             description:
-              "The creature can use bardic performance for a number of rounds per day equal to 4 + its HD + its Charisma modifier, treating its HD as its bard level to determine performance types available and their effects.",
+              'The creature can use bardic performance for a number of rounds per day equal to 4 + its HD + its Charisma modifier, treating its HD as its bard level to determine performance types available and their effects.',
           },
           {
             scalingType: 'hd_table',
@@ -1134,7 +1136,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'flat',
             name: 'Bardic Performance (Su)',
             description:
-              "The creature can use bardic performance for a number of rounds per day equal to 4 + its HD + its Charisma modifier, treating its HD as its bard level. At 10+ HD, additional performance types and improved versions are available.",
+              'The creature can use bardic performance for a number of rounds per day equal to 4 + its HD + its Charisma modifier, treating its HD as its bard level. At 10+ HD, additional performance types and improved versions are available.',
           },
           {
             scalingType: 'hd_table',
@@ -1167,7 +1169,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
     id: 'cleric-creature',
     name: 'Cleric Creature',
     description:
-      'A simple class template from the Pathfinder Monster Codex, applicable to any creature whose alignment is within one step of a chosen deity\'s alignment. Grants cleric spellcasting (limited to the three highest available spell levels) and channel energy. Creatures with fewer than 7 HD gain CR +1, those with 7–12 HD gain CR +2, and those with 13+ HD gain CR +3.',
+      "A simple class template from the Pathfinder Monster Codex, applicable to any creature whose alignment is within one step of a chosen deity's alignment. Grants cleric spellcasting (limited to the three highest available spell levels) and channel energy. Creatures with fewer than 7 HD gain CR +1, those with 7–12 HD gain CR +2, and those with 13+ HD gain CR +3.",
     crTiers: [
       {
         tierIndex: 0,
@@ -1201,7 +1203,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'flat',
             name: 'Channel Energy (Su)',
             description:
-              "Channel energy as above, with effective cleric level equal to HD – 2 (minimum 1). More powerful channeling at this HD range.",
+              'Channel energy as above, with effective cleric level equal to HD – 2 (minimum 1). More powerful channeling at this HD range.',
           },
           {
             scalingType: 'flat',
@@ -1276,8 +1278,16 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'hd_table',
             name: 'Druid Spellcasting (1–6 HD)',
             tiers: [
-              { minHD: 1, maxHD: 3, spellsPerDay: [2, 1, null, null, null, null, null, null, null, null] },
-              { minHD: 4, maxHD: 6, spellsPerDay: [2, 2, 1, null, null, null, null, null, null, null] },
+              {
+                minHD: 1,
+                maxHD: 3,
+                spellsPerDay: [2, 1, null, null, null, null, null, null, null, null],
+              },
+              {
+                minHD: 4,
+                maxHD: 6,
+                spellsPerDay: [2, 2, 1, null, null, null, null, null, null, null],
+              },
             ],
           },
         ],
@@ -1305,8 +1315,16 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'hd_table',
             name: 'Druid Spellcasting (7–12 HD)',
             tiers: [
-              { minHD: 7, maxHD: 9, spellsPerDay: ['overflow', 2, 2, 1, null, null, null, null, null, null] },
-              { minHD: 10, maxHD: 12, spellsPerDay: ['overflow', 'overflow', 2, 2, 1, null, null, null, null, null] },
+              {
+                minHD: 7,
+                maxHD: 9,
+                spellsPerDay: ['overflow', 2, 2, 1, null, null, null, null, null, null],
+              },
+              {
+                minHD: 10,
+                maxHD: 12,
+                spellsPerDay: ['overflow', 'overflow', 2, 2, 1, null, null, null, null, null],
+              },
             ],
           },
         ],
@@ -1333,11 +1351,74 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'hd_table',
             name: 'Druid Spellcasting (13+ HD)',
             tiers: [
-              { minHD: 13, maxHD: 15, spellsPerDay: ['overflow', 'overflow', 'overflow', 2, 2, 1, null, null, null, null] },
-              { minHD: 16, maxHD: 18, spellsPerDay: ['overflow', 'overflow', 'overflow', 'overflow', 2, 2, 1, null, null, null] },
-              { minHD: 19, maxHD: 21, spellsPerDay: ['overflow', 'overflow', 'overflow', 'overflow', 'overflow', 2, 2, 1, null, null] },
-              { minHD: 22, maxHD: 24, spellsPerDay: ['overflow', 'overflow', 'overflow', 'overflow', 'overflow', 'overflow', 2, 2, 1, null] },
-              { minHD: 25, spellsPerDay: ['overflow', 'overflow', 'overflow', 'overflow', 'overflow', 'overflow', 'overflow', 2, 2, 1] },
+              {
+                minHD: 13,
+                maxHD: 15,
+                spellsPerDay: ['overflow', 'overflow', 'overflow', 2, 2, 1, null, null, null, null],
+              },
+              {
+                minHD: 16,
+                maxHD: 18,
+                spellsPerDay: [
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  2,
+                  2,
+                  1,
+                  null,
+                  null,
+                  null,
+                ],
+              },
+              {
+                minHD: 19,
+                maxHD: 21,
+                spellsPerDay: [
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  2,
+                  2,
+                  1,
+                  null,
+                  null,
+                ],
+              },
+              {
+                minHD: 22,
+                maxHD: 24,
+                spellsPerDay: [
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  2,
+                  2,
+                  1,
+                  null,
+                ],
+              },
+              {
+                minHD: 25,
+                spellsPerDay: [
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  'overflow',
+                  2,
+                  2,
+                  1,
+                ],
+              },
             ],
           },
         ],
@@ -1347,6 +1428,13 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
     acquisitionType: 'acquired',
     isSimpleTemplate: true,
     abilityScoreChanges: [{ ability: 'WIS', change: 4 }],
+    // Druid-class-like template: grants an animal companion whose effective
+    // druid level tracks HD − 3, matching the same formula the template uses
+    // for wild shape. plan: animal-companion-builder.md § Templates That Grant ACs.
+    grantsCompanion: {
+      effectiveLevelFormula: 'characterLevel-3',
+      pickerFilter: 'full',
+    },
     sourceInfo: {
       type: 'official',
       publication: 'Pathfinder Roleplaying Game Monster Codex',
@@ -1536,7 +1624,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'flat',
             name: 'Smite Evil (Su)',
             description:
-              'Once per day, the creature can smite evil. It adds its Charisma modifier to attack rolls and its HD to damage rolls against an evil target for the rest of the encounter. The target also loses any deflection bonus to AC against the creature\'s attacks for the duration.',
+              "Once per day, the creature can smite evil. It adds its Charisma modifier to attack rolls and its HD to damage rolls against an evil target for the rest of the encounter. The target also loses any deflection bonus to AC against the creature's attacks for the duration.",
           },
           {
             scalingType: 'flat',
@@ -1547,8 +1635,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Divine Grace (Su)',
-            description:
-              'The creature adds its Charisma modifier as a bonus on all saving throws.',
+            description: 'The creature adds its Charisma modifier as a bonus on all saving throws.',
           },
         ],
       },
@@ -1591,9 +1678,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
     features: [],
     acquisitionType: 'acquired',
     isSimpleTemplate: true,
-    prerequisites: [
-      { type: 'alignment', allowed: ['lawful good'] },
-    ],
+    prerequisites: [{ type: 'alignment', allowed: ['lawful good'] }],
     abilityScoreChanges: [
       { ability: 'STR', change: 4 },
       { ability: 'CHA', change: 4 },
@@ -1650,8 +1735,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
           {
             scalingType: 'flat',
             name: 'Favored Enemy (Ex)',
-            description:
-              'Favored enemy as above, scaling up to +10 at 20 HD.',
+            description: 'Favored enemy as above, scaling up to +10 at 20 HD.',
           },
           {
             scalingType: 'flat',
@@ -1706,7 +1790,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'hd_formula',
             name: 'Sneak Attack (Ex)',
             description:
-              'The creature deals extra sneak attack damage whenever its target is denied a Dexterity bonus to AC or is flanked. The number of sneak attack dice equals half the creature\'s HD (maximum 10d6 at 20 HD).',
+              "The creature deals extra sneak attack damage whenever its target is denied a Dexterity bonus to AC or is flanked. The number of sneak attack dice equals half the creature's HD (maximum 10d6 at 20 HD).",
             formula: 'floor(HD / 2)d6, maximum 10d6',
           },
           {
@@ -1732,8 +1816,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
           {
             scalingType: 'hd_formula',
             name: 'Sneak Attack (Ex)',
-            description:
-              'Sneak attack as above, with dice equal to half HD (maximum 10d6).',
+            description: 'Sneak attack as above, with dice equal to half HD (maximum 10d6).',
             formula: 'floor(HD / 2)d6, maximum 10d6',
           },
           {
@@ -1788,14 +1871,22 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'flat',
             name: 'Bloodline Arcana and Powers',
             description:
-              "The creature selects a sorcerer bloodline and gains its arcana and bloodline powers. Its effective sorcerer level for determining bloodline power effects equals its HD – 2 (minimum 1).",
+              'The creature selects a sorcerer bloodline and gains its arcana and bloodline powers. Its effective sorcerer level for determining bloodline power effects equals its HD – 2 (minimum 1).',
           },
           {
             scalingType: 'hd_table',
             name: 'Sorcerer Spellcasting (1–7 HD)',
             tiers: [
-              { minHD: 1, maxHD: 4, spellsPerDay: [2, 1, null, null, null, null, null, null, null, null] },
-              { minHD: 5, maxHD: 7, spellsPerDay: [2, 2, 1, null, null, null, null, null, null, null] },
+              {
+                minHD: 1,
+                maxHD: 4,
+                spellsPerDay: [2, 1, null, null, null, null, null, null, null, null],
+              },
+              {
+                minHD: 5,
+                maxHD: 7,
+                spellsPerDay: [2, 2, 1, null, null, null, null, null, null, null],
+              },
             ],
           },
         ],
@@ -1811,13 +1902,17 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'flat',
             name: 'Bloodline Arcana and Powers',
             description:
-              "Bloodline arcana and powers as above, with effective sorcerer level equal to HD – 2. More powerful bloodline abilities become available at this HD range.",
+              'Bloodline arcana and powers as above, with effective sorcerer level equal to HD – 2. More powerful bloodline abilities become available at this HD range.',
           },
           {
             scalingType: 'hd_table',
             name: 'Sorcerer Spellcasting (8–13 HD)',
             tiers: [
-              { minHD: 8, maxHD: 10, spellsPerDay: [2, 2, 2, 1, null, null, null, null, null, null] },
+              {
+                minHD: 8,
+                maxHD: 10,
+                spellsPerDay: [2, 2, 2, 1, null, null, null, null, null, null],
+              },
               { minHD: 11, maxHD: 13, spellsPerDay: [2, 2, 2, 2, 1, null, null, null, null, null] },
             ],
           },
@@ -1833,7 +1928,7 @@ export const TEMPLATES_BATCH_016: TemplateDefinition[] = [
             scalingType: 'flat',
             name: 'Bloodline Arcana and Powers',
             description:
-              "Bloodline arcana and all bloodline powers available at effective sorcerer level HD – 2. The most powerful bloodline abilities are accessible at this HD range.",
+              'Bloodline arcana and all bloodline powers available at effective sorcerer level HD – 2. The most powerful bloodline abilities are accessible at this HD range.',
           },
           {
             scalingType: 'hd_table',

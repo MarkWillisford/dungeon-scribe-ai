@@ -66,7 +66,7 @@ export const WARDER_CLASS: ExpandedClassData = {
       name: 'Maneuvers',
       level: 1,
       description:
-        'A warder begins her career with knowledge of five martial maneuvers. The disciplines available to her are Broken Blade, Golden Lion, Iron Tortoise, Primal Fury, and either Eternal Guardian or Piercing Thunder. If she does not have the associated skill for a chosen discipline as a class skill, she gains it as a class skill. She readies her maneuvers by going over battle tactics, through weapon drills, or spending time meditating in prayer for 10 minutes. She need not sleep or be well-rested beforehand. At 4th level and every even level thereafter, the warder may exchange one known maneuver for another of any level she qualifies for. Maneuvers are extraordinary abilities, unaffected by spell resistance, and do not provoke attacks of opportunity when initiated. A warder\'s initiation modifier is Intelligence.',
+        "A warder begins her career with knowledge of five martial maneuvers. The disciplines available to her are Broken Blade, Golden Lion, Iron Tortoise, Primal Fury, and either Eternal Guardian or Piercing Thunder. If she does not have the associated skill for a chosen discipline as a class skill, she gains it as a class skill. She readies her maneuvers by going over battle tactics, through weapon drills, or spending time meditating in prayer for 10 minutes. She need not sleep or be well-rested beforehand. At 4th level and every even level thereafter, the warder may exchange one known maneuver for another of any level she qualifies for. Maneuvers are extraordinary abilities, unaffected by spell resistance, and do not provoke attacks of opportunity when initiated. A warder's initiation modifier is Intelligence.",
     },
     {
       name: 'Maneuver Recovery',
@@ -78,7 +78,7 @@ export const WARDER_CLASS: ExpandedClassData = {
       name: 'Defensive Focus',
       level: 1,
       description:
-        "At 1st level, the defensive prowess of the warder is second to none, allowing her to focus her actions purely on defending himself and her allies in ways that cannot be replicated. The warder gains the Combat Reflexes feat as a bonus feat, using her warder initiation modifier in place of her Dexterity modifier to determine the number of additional attacks of opportunity she may make each round. When recovering warder maneuvers as a full round action, the warder sets up a defensive perimeter around herself to defend her allies, increasing her threatened area by 5 feet + 5 feet for every five initiator levels she possesses. Until the beginning of her next turn, she may make attacks of opportunity against any opponent in this threatened area that provokes attacks of opportunity. She may move as part of these attacks of opportunity, provided her total movement before her next turn does not exceed her speed (his movement provokes attacks of opportunity as normal). Additionally, while using defensive focus, the warder adds her warder initiation modifier plus her class level to her CMD for the purposes of defending against enemies trying to use the Acrobatics skill to prevent her from getting attacks of opportunity against them.",
+        'At 1st level, the defensive prowess of the warder is second to none, allowing her to focus her actions purely on defending himself and her allies in ways that cannot be replicated. The warder gains the Combat Reflexes feat as a bonus feat, using her warder initiation modifier in place of her Dexterity modifier to determine the number of additional attacks of opportunity she may make each round. When recovering warder maneuvers as a full round action, the warder sets up a defensive perimeter around herself to defend her allies, increasing her threatened area by 5 feet + 5 feet for every five initiator levels she possesses. Until the beginning of her next turn, she may make attacks of opportunity against any opponent in this threatened area that provokes attacks of opportunity. She may move as part of these attacks of opportunity, provided her total movement before her next turn does not exceed her speed (his movement provokes attacks of opportunity as normal). Additionally, while using defensive focus, the warder adds her warder initiation modifier plus her class level to her CMD for the purposes of defending against enemies trying to use the Acrobatics skill to prevent her from getting attacks of opportunity against them.',
     },
     {
       name: 'Aegis',
@@ -114,7 +114,7 @@ export const WARDER_CLASS: ExpandedClassData = {
       name: 'Clad in Steel',
       level: 6,
       description:
-        "Having improved her skill with her armor, the warder is a more capable combatant in it when protecting her allies or cause. The warder may subtract her aegis bonus from her total armor check penalty and increase the maximum Dexterity bonus on her armor by 1 at 6th level, and by 2 at 12th level.",
+        'Having improved her skill with her armor, the warder is a more capable combatant in it when protecting her allies or cause. The warder may subtract her aegis bonus from her total armor check penalty and increase the maximum Dexterity bonus on her armor by 1 at 6th level, and by 2 at 12th level.',
     },
     {
       name: 'Adaptive Tactics',
@@ -131,7 +131,7 @@ export const WARDER_CLASS: ExpandedClassData = {
       name: 'Improved Defensive Focus',
       level: 10,
       description:
-        "At 10th level, her defensive focus improves further. While her reach is increased by this ability, opponents treat her threatened area as difficult terrain. If a foe tries to move through a space within her reach, the movement through those squares costs double (x2). Additionally, while using her defensive focus to make an attack of opportunity, her movement does not provoke attacks of opportunity.",
+        'At 10th level, her defensive focus improves further. While her reach is increased by this ability, opponents treat her threatened area as difficult terrain. If a foe tries to move through a space within her reach, the movement through those squares costs double (x2). Additionally, while using her defensive focus to make an attack of opportunity, her movement does not provoke attacks of opportunity.',
     },
     {
       name: 'Stalwart',

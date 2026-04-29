@@ -12,8 +12,7 @@ export const POWE_PIERCING_THUNDER_MANEUVERS: ManeuverDefinition[] = [
     range: 'Personal',
     target: 'You',
     duration: '1 round',
-    description:
-      'Your next charge attack deals +1d6 damage.',
+    description: 'Your next charge attack deals +1d6 damage.',
     prerequisites: {},
     source: {
       bookId: 'powe',
@@ -444,7 +443,7 @@ export const POWE_PIERCING_THUNDER_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      'Make an attack roll with a weapon you are wielding. Use the higher of your AC and your attack roll as your effective AC against the incoming attack. If the attack against you misses, you deflect the attack at another creature you can see within reach or range of the attacker. Treat the attack as if it had been made against that creature, using the attacker\'s original attack roll to resolve the attack as normal.',
+      "Make an attack roll with a weapon you are wielding. Use the higher of your AC and your attack roll as your effective AC against the incoming attack. If the attack against you misses, you deflect the attack at another creature you can see within reach or range of the attacker. Treat the attack as if it had been made against that creature, using the attacker's original attack roll to resolve the attack as normal.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'powe',
@@ -566,7 +565,7 @@ export const POWE_PIERCING_THUNDER_MANEUVERS: ManeuverDefinition[] = [
     duration: 'Instant',
     savingThrow: 'Reflex (DC 17 + initiation modifier)',
     description:
-      'You can initiate this counter whenever a charging opponent passes within 10 feet of you. Make a melee attack against that creature with a weapon you are wielding, even if its reach would not otherwise allow you to strike the foe. If it hits, it deals weapon damage as normal plus an additional 5d6 points of damage, and the target must succeed at a Reflex save or be knocked prone. Regardless of whether or not they succeed at the save, the target\'s movement ends.',
+      "You can initiate this counter whenever a charging opponent passes within 10 feet of you. Make a melee attack against that creature with a weapon you are wielding, even if its reach would not otherwise allow you to strike the foe. If it hits, it deals weapon damage as normal plus an additional 5d6 points of damage, and the target must succeed at a Reflex save or be knocked prone. Regardless of whether or not they succeed at the save, the target's movement ends.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'powe',

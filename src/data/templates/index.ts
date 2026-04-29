@@ -4,7 +4,17 @@
 // deduplication below keeps the last occurrence per id (batch 018 wins) to match
 // the seed script's last-write-wins upsert behavior.
 
-export type { TemplateDefinition, TemplateSourceInfo, TemplatePrerequisite, AbilityScoreChange, TemplateDR, TemplateResistance, TemplateSLA, CRTierDefinition } from './types';
+export type {
+  TemplateDefinition,
+  TemplateSourceInfo,
+  TemplatePrerequisite,
+  AbilityScoreChange,
+  TemplateDR,
+  TemplateResistance,
+  TemplateSLA,
+  CRTierDefinition,
+  GrantsCompanionSpec,
+} from './types';
 
 import { TemplateDefinition } from './types';
 import { TEMPLATES_BATCH_001 } from './raw/templates_batch_001';

@@ -48,7 +48,7 @@ export const LANDSKNECHT_CLASS: ExpandedClassData = {
       name: 'Maneuvers',
       level: 1,
       description:
-        'At every even level, a landsknecht gains a new maneuver known from his available disciplines. His available disciplines for these maneuvers are Mithral Current, Scarlet Throne, and two of his previously available disciplines, chosen when he takes his first landsknecht level. He must meet a maneuver\'s prerequisites to learn it. He adds his full landsknecht levels to his initiator level to determine his total initiator level and his highest-level maneuvers known. At 3rd level and again at 6th level and 9th level, a landsknecht gains an additional maneuver readied per day.',
+        "At every even level, a landsknecht gains a new maneuver known from his available disciplines. His available disciplines for these maneuvers are Mithral Current, Scarlet Throne, and two of his previously available disciplines, chosen when he takes his first landsknecht level. He must meet a maneuver's prerequisites to learn it. He adds his full landsknecht levels to his initiator level to determine his total initiator level and his highest-level maneuvers known. At 3rd level and again at 6th level and 9th level, a landsknecht gains an additional maneuver readied per day.",
     },
     {
       name: 'Stances Known',
@@ -96,13 +96,13 @@ export const LANDSKNECHT_CLASS: ExpandedClassData = {
       name: 'Improved Uncanny Dodge',
       level: 5,
       description:
-        'At 5th level, the landsknecht can no longer be flanked. This defense denies a rogue the ability to sneak attack the landsknecht by flanking him, unless the attacker has at least four more rogue levels than the landsknecht\'s class level.',
+        "At 5th level, the landsknecht can no longer be flanked. This defense denies a rogue the ability to sneak attack the landsknecht by flanking him, unless the attacker has at least four more rogue levels than the landsknecht's class level.",
     },
     {
       name: 'Never Outnumbered +2',
       level: 5,
       description:
-        'The landsknecht\'s bonus on attack and damage rolls when threatening two or more opponents increases to +2.',
+        "The landsknecht's bonus on attack and damage rolls when threatening two or more opponents increases to +2.",
     },
     {
       name: 'Mobile Attacker',
@@ -113,8 +113,7 @@ export const LANDSKNECHT_CLASS: ExpandedClassData = {
     {
       name: 'Surprising Strike (2/day)',
       level: 6,
-      description:
-        'The landsknecht can use Surprising Strike twice per day.',
+      description: 'The landsknecht can use Surprising Strike twice per day.',
     },
     {
       name: 'Silver Crown Strike',
@@ -132,27 +131,24 @@ export const LANDSKNECHT_CLASS: ExpandedClassData = {
       name: 'Never Outnumbered +3',
       level: 8,
       description:
-        'The landsknecht\'s bonus on attack and damage rolls when threatening two or more opponents increases to +3.',
+        "The landsknecht's bonus on attack and damage rolls when threatening two or more opponents increases to +3.",
     },
     {
       name: 'Surprising Strike (3/day)',
       level: 9,
-      description:
-        'The landsknecht can use Surprising Strike three times per day.',
+      description: 'The landsknecht can use Surprising Strike three times per day.',
     },
     {
       name: 'Stance of Assured Victory',
       level: 10,
       description:
-        'At 10th level, as a swift action, the landsknecht can abandon his current stance to assume the Stance of Assured Victory. This ability is considered to be an 8th-level stance. While in this stance, the landsknecht and his allies within 30 feet gain a circumstance bonus on attack rolls equal to his highest initiation modifier. Additionally, whenever an opponent within 30 feet of the landsknecht attacks an ally, they provoke an attack of opportunity from any ally other than the target who is also within 30 feet. Such attacks of opportunity can be made even if the opponent is not within that ally\'s melee reach.',
+        "At 10th level, as a swift action, the landsknecht can abandon his current stance to assume the Stance of Assured Victory. This ability is considered to be an 8th-level stance. While in this stance, the landsknecht and his allies within 30 feet gain a circumstance bonus on attack rolls equal to his highest initiation modifier. Additionally, whenever an opponent within 30 feet of the landsknecht attacks an ally, they provoke an attack of opportunity from any ally other than the target who is also within 30 feet. Such attacks of opportunity can be made even if the opponent is not within that ally's melee reach.",
     },
   ],
   prerequisites: {
     bab: 5,
     feats: ['Quick Draw', 'Combat Reflexes'],
-    special: [
-      'One Mithral Current or Scarlet Throne maneuver known, initiator level 5th',
-    ],
+    special: ['One Mithral Current or Scarlet Throne maneuver known, initiator level 5th'],
   },
   spellcasting: {
     type: 'None',

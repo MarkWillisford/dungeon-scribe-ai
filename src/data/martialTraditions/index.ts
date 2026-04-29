@@ -7,9 +7,7 @@ import type { MartialTradition } from '@/types/initiating';
 
 import { MARTIAL_TRADITIONS } from './traditions';
 
-export const ALL_MARTIAL_TRADITIONS: MartialTradition[] = [
-  ...MARTIAL_TRADITIONS,
-];
+export const ALL_MARTIAL_TRADITIONS: MartialTradition[] = [...MARTIAL_TRADITIONS];
 
 export function getMartialTraditionById(id: string): MartialTradition | undefined {
   return ALL_MARTIAL_TRADITIONS.find((t) => t.id === id);

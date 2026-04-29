@@ -114,7 +114,7 @@ export const MAGE_HUNTER_CLASS: ExpandedClassData = {
       name: 'Tethering Point',
       level: 7,
       description:
-        'As part of a successful martial strike, the mage hunter expends a 1st or higher-level spell slot as a free action and may attempt to target the foe with a magical leash-like effect as a supernatural ability. Tethering point lasts for a number of minutes equal to the level of the expended spell slot. If the target of this ability were to utilize an effect, power, or spell with the (Teleportation) type, the mage hunter may either attempt to make a Will save against the effect to cause the target\'s attempt to flee to fail, or he may voluntarily go along for the ride and teleport with his quarry.',
+        "As part of a successful martial strike, the mage hunter expends a 1st or higher-level spell slot as a free action and may attempt to target the foe with a magical leash-like effect as a supernatural ability. Tethering point lasts for a number of minutes equal to the level of the expended spell slot. If the target of this ability were to utilize an effect, power, or spell with the (Teleportation) type, the mage hunter may either attempt to make a Will save against the effect to cause the target's attempt to flee to fail, or he may voluntarily go along for the ride and teleport with his quarry.",
     },
     {
       name: 'Martial Arcanist (Spellbreaker)',
@@ -126,13 +126,13 @@ export const MAGE_HUNTER_CLASS: ExpandedClassData = {
       name: 'Strike of Magic Rending',
       level: 9,
       description:
-        "The mage hunter initiating this strike may expend a readied strike to use this strike in its place, and he makes an attack against a target. If the attack hits, the mage hunter may immediately make a dispel check with a caster level equal to his initiator level as if he cast a targeted greater dispel magic in addition to doing normal damage. Additionally, if the mage hunter chooses to, anyone within 10 ft. of the mage hunter (excluding the mage hunter) is also affected as if they were hit by an area dispel magic. Each effect that is dispelled using this strike inflicts an additional 2d6 points of damage to the target or targets of this ability.",
+        'The mage hunter initiating this strike may expend a readied strike to use this strike in its place, and he makes an attack against a target. If the attack hits, the mage hunter may immediately make a dispel check with a caster level equal to his initiator level as if he cast a targeted greater dispel magic in addition to doing normal damage. Additionally, if the mage hunter chooses to, anyone within 10 ft. of the mage hunter (excluding the mage hunter) is also affected as if they were hit by an area dispel magic. Each effect that is dispelled using this strike inflicts an additional 2d6 points of damage to the target or targets of this ability.',
     },
     {
       name: 'Mage Harrier Stance',
       level: 10,
       description:
-        "To enter this stance, as a swift action the mage hunter abandons a martial stance he is currently using. Once within this stance, the mage hunter prevents magic-users from being able to cast defensively under any condition if they are within his melee reach. Additionally, while in this stance he gains spell resistance equal to 15 + his initiator level, and spells that fail against his spell resistance or that he successfully saves against grant a number of temporary hit points equal to twice the spell level cast against him to the mage hunter.",
+        'To enter this stance, as a swift action the mage hunter abandons a martial stance he is currently using. Once within this stance, the mage hunter prevents magic-users from being able to cast defensively under any condition if they are within his melee reach. Additionally, while in this stance he gains spell resistance equal to 15 + his initiator level, and spells that fail against his spell resistance or that he successfully saves against grant a number of temporary hit points equal to twice the spell level cast against him to the mage hunter.',
     },
   ],
   prerequisites: {

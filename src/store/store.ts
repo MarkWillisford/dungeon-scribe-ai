@@ -36,6 +36,10 @@ export const store = configureStore({
           'auth.user.lastLogin',
           'characters.characters',
           'characters.activeCharacter',
+          // Companion equipment slot lookup is a Map<ItemSlot, string>.
+          // Serializable state only applies at the boundary of persistence;
+          // we handle Map↔Record conversion when saving to Firestore.
+          'characterEntry.draft.companions',
         ],
       },
     }),

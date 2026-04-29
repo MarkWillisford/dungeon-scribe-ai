@@ -202,7 +202,7 @@ export const POWE_SLEEPING_GODDESS_MANEUVERS: ManeuverDefinition[] = [
     target: 'Self',
     duration: '1 round',
     description:
-      'As a swift action, you mark your current location. At any point during the next round (even during another creature\'s turn), you may teleport back to the marked space as a free action. If the marked space is occupied, you teleport to the nearest unoccupied space. This negates an attack if you move out of reach. Using the teleport ends the boost. Augment: spending 2 power points per additional round extends the duration; spending 2 power points per additional use allows multiple teleportations.',
+      "As a swift action, you mark your current location. At any point during the next round (even during another creature's turn), you may teleport back to the marked space as a free action. If the marked space is occupied, you teleport to the nearest unoccupied space. This negates an attack if you move out of reach. Using the teleport ends the boost. Augment: spending 2 power points per additional round extends the duration; spending 2 power points per additional use allows multiple teleportations.",
     prerequisites: {},
     source: {
       bookId: 'powe',
@@ -444,7 +444,7 @@ export const POWE_SLEEPING_GODDESS_MANEUVERS: ManeuverDefinition[] = [
     duration: 'Instant',
     savingThrow: 'Will negates (DC 15 + initiation modifier)',
     description:
-      'When you reduce an opponent to 0 or fewer hit points, you can activate this boost as a swift action. Each of the fallen opponent\'s allies within 30 feet must succeed on a Will save or become shaken and sickened for a number of rounds equal to your initiation modifier.',
+      "When you reduce an opponent to 0 or fewer hit points, you can activate this boost as a swift action. Each of the fallen opponent's allies within 30 feet must succeed on a Will save or become shaken and sickened for a number of rounds equal to your initiation modifier.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'powe',
@@ -468,7 +468,7 @@ export const POWE_SLEEPING_GODDESS_MANEUVERS: ManeuverDefinition[] = [
     duration: 'Instant',
     savingThrow: 'Will negates (DC 15 + initiation modifier)',
     description:
-      'As part of this strike, make a melee attack against a creature. The attack deals an additional 5d6 points of damage. If the attack hits, the target must succeed on a Will save or become entangled for a number of rounds equal to your initiation modifier. Additionally, one of the target\'s allies within 60 feet (your choice) also becomes entangled for the same duration (no save for the ally). Augment: spending 1 power point per +1d6 increases the bonus damage; spending 3 power points per additional ally entangled; expending psionic focus also nauseates affected targets for one round.',
+      "As part of this strike, make a melee attack against a creature. The attack deals an additional 5d6 points of damage. If the attack hits, the target must succeed on a Will save or become entangled for a number of rounds equal to your initiation modifier. Additionally, one of the target's allies within 60 feet (your choice) also becomes entangled for the same duration (no save for the ally). Augment: spending 1 power point per +1d6 increases the bonus damage; spending 3 power points per additional ally entangled; expending psionic focus also nauseates affected targets for one round.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'powe',

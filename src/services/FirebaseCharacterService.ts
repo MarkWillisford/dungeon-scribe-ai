@@ -14,6 +14,7 @@ import { db } from '@config/firebase';
 import type { Character } from '@/types';
 import type { CharacterSummary } from '@/types/character';
 import type { EquipmentSlot } from '@/types/equipment';
+import type { ItemSlot } from '@/types/magicItems';
 import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
 
 export class FirebaseCharacterService {
@@ -134,6 +135,19 @@ export class FirebaseCharacterService {
       serialized.equipment.equippedSlots = slotsRecord;
     }
 
+    // Convert each companion's equippedSlots Map to a plain object for Firestore
+    if (Array.isArray(character.companions) && Array.isArray(serialized.companions)) {
+      character.companions.forEach((companion, index) => {
+        if (companion.equipment?.equippedSlots instanceof Map) {
+          const slotsRecord: Record<string, string> = {};
+          for (const [slot, itemId] of companion.equipment.equippedSlots.entries()) {
+            slotsRecord[slot] = itemId;
+          }
+          serialized.companions[index].equipment.equippedSlots = slotsRecord;
+        }
+      });
+    }
+
     // Convert Date objects to ISO strings (Firestore will use serverTimestamp for created/updated)
     if (serialized.lastUpdated instanceof Date) {
       serialized.lastUpdated = serialized.lastUpdated.toISOString();
@@ -154,6 +168,21 @@ export class FirebaseCharacterService {
       character.equipment.equippedSlots = new Map(
         Object.entries(slotsRecord || {}) as [EquipmentSlot, string][],
       );
+    }
+
+    // Convert each companion's equippedSlots Record back to Map
+    if (Array.isArray(character.companions)) {
+      character.companions.forEach((companion) => {
+        if (companion.equipment && !(companion.equipment.equippedSlots instanceof Map)) {
+          const slotsRecord = companion.equipment.equippedSlots as unknown as Record<
+            string,
+            string
+          >;
+          companion.equipment.equippedSlots = { ...(slotsRecord || {}) } as Partial<
+            Record<ItemSlot, string>
+          >;
+        }
+      });
     }
 
     // Convert timestamp fields back to Date — handles string (from JSON), Firestore Timestamp, and Date

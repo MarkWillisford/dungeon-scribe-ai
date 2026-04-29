@@ -32,7 +32,7 @@ export const POW_IRON_TORTOISE_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      'A shield is used for defense primarily, a basic martial truth. It turns aside harm, and the shield of a disciple of the Iron Tortoise can do the same thing in ways that others cannot. The initiator makes an opposed attack roll as if making a shield bash attempt at his full base attack bonus plus his shield bonus to AC against his enemy\'s attack roll to deflect a single enemy\'s melee or missile attack (that is not a spell or power).',
+      "A shield is used for defense primarily, a basic martial truth. It turns aside harm, and the shield of a disciple of the Iron Tortoise can do the same thing in ways that others cannot. The initiator makes an opposed attack roll as if making a shield bash attempt at his full base attack bonus plus his shield bonus to AC against his enemy's attack roll to deflect a single enemy's melee or missile attack (that is not a spell or power).",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -51,7 +51,7 @@ export const POW_IRON_TORTOISE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'Disciples of the Iron Tortoise school learn basics of the style, and that is to keep one\'s shield high and one\'s weapon low. By making a quick and vicious strike, the disciple may drive home a potent blow. The initiator makes a melee attack, and if successful, this attack inflicts an additional 1d6 points of damage.',
+      "Disciples of the Iron Tortoise school learn basics of the style, and that is to keep one's shield high and one's weapon low. By making a quick and vicious strike, the disciple may drive home a potent blow. The initiator makes a melee attack, and if successful, this attack inflicts an additional 1d6 points of damage.",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -91,7 +91,7 @@ export const POW_IRON_TORTOISE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One adjacent ally',
     duration: 'Instant',
     description:
-      'The Iron Tortoise disciple has quick reflexes and a strong shield with which to defend his allies. The initiator makes a shield bash attempt against an enemy\'s attack roll that targets an adjacent ally. If the initiator succeeds, he negates the attack against his ally.',
+      "The Iron Tortoise disciple has quick reflexes and a strong shield with which to defend his allies. The initiator makes a shield bash attempt against an enemy's attack roll that targets an adjacent ally. If the initiator succeeds, he negates the attack against his ally.",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -149,7 +149,7 @@ export const POW_IRON_TORTOISE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'The turtle, when it is on its back, is helpless to defend itself and is immobilized unless it can right itself. The disciple of this discipline learns to use this inspirational creature\'s weakness as a potent weapon by making a low and powerful strike that may knock his opponent prone. As part of this maneuver, the initiator makes a single melee attack. If this attack is successful, he may initiate a free trip attempt with a +2 competence bonus against his opponent that does not provoke an attack of opportunity.',
+      "The turtle, when it is on its back, is helpless to defend itself and is immobilized unless it can right itself. The disciple of this discipline learns to use this inspirational creature's weakness as a potent weapon by making a low and powerful strike that may knock his opponent prone. As part of this maneuver, the initiator makes a single melee attack. If this attack is successful, he may initiate a free trip attempt with a +2 competence bonus against his opponent that does not provoke an attack of opportunity.",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -190,7 +190,7 @@ export const POW_IRON_TORTOISE_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      'By angling one\'s shield correctly and stepping into an enemy spell\'s effect, he may deflect the power of the spell that targets him. Spells or powers countered by this ability must be targeted spells (one cannot use Burnished Shell against fireball for example, as it does not specify a target) with the martial disciple as the target. The initiator makes an attack roll using his base attack bonus plus his shield bonus to AC opposing the enemy\'s caster level check. If successful, the spell or effect is negated.',
+      "By angling one's shield correctly and stepping into an enemy spell's effect, he may deflect the power of the spell that targets him. Spells or powers countered by this ability must be targeted spells (one cannot use Burnished Shell against fireball for example, as it does not specify a target) with the martial disciple as the target. The initiator makes an attack roll using his base attack bonus plus his shield bonus to AC opposing the enemy's caster level check. If successful, the spell or effect is negated.",
     prerequisites: { disciplineManeuversKnown: 1 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -209,7 +209,7 @@ export const POW_IRON_TORTOISE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'A decisive strike is often times what ends a battle or duel, and the disciple of the Iron Tortoise knows to keep his wits about him and wait for the moment to strike hard and strike true. Make a melee attack, and if successful, this strike inflicts an additional 3d6 points of damage and ignores the creature\'s damage reduction (if any).',
+      "A decisive strike is often times what ends a battle or duel, and the disciple of the Iron Tortoise knows to keep his wits about him and wait for the moment to strike hard and strike true. Make a melee attack, and if successful, this strike inflicts an additional 3d6 points of damage and ignores the creature's damage reduction (if any).",
     prerequisites: { disciplineManeuversKnown: 1 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -249,7 +249,7 @@ export const POW_IRON_TORTOISE_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: '1 round',
     description:
-      'By making aggravating wounds and aggressive, intimidating postures, the disciple\'s attacks possess an unusual amount of threatening power. Each successful melee attack the initiator makes causes those hit by those attacks to suffer a -4 cumulative penalty on attack rolls against any target except the initiator himself.',
+      "By making aggravating wounds and aggressive, intimidating postures, the disciple's attacks possess an unusual amount of threatening power. Each successful melee attack the initiator makes causes those hit by those attacks to suffer a -4 cumulative penalty on attack rolls against any target except the initiator himself.",
     prerequisites: { disciplineManeuversKnown: 1 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -307,7 +307,7 @@ export const POW_IRON_TORTOISE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'By searching for openings in an opponent\'s defenses when they reach to attack, the Iron Tortoise disciple learns to strike through this opening to score a vicious wound. The disciple makes a shield bash attempt against his foe\'s attack roll. If successful, he may make an immediate counter attack against them with a +2 competence bonus to hit at his full attack bonus with his main hand weapon.',
+      "By searching for openings in an opponent's defenses when they reach to attack, the Iron Tortoise disciple learns to strike through this opening to score a vicious wound. The disciple makes a shield bash attempt against his foe's attack roll. If successful, he may make an immediate counter attack against them with a +2 competence bonus to hit at his full attack bonus with his main hand weapon.",
     prerequisites: { disciplineManeuversKnown: 1 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -328,7 +328,7 @@ export const POW_IRON_TORTOISE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'Inevitably, a warrior will receive a wound in battle, and when that happens, those skilled in the ways of the Iron Tortoise make the best of it. By briefly trapping an enemy\'s weapon within his defenses, the martial disciple may deliver a powerful counter attack. If struck in melee combat, the initiator may make an immediate counter attack which inflicts double damage if successful.',
+      "Inevitably, a warrior will receive a wound in battle, and when that happens, those skilled in the ways of the Iron Tortoise make the best of it. By briefly trapping an enemy's weapon within his defenses, the martial disciple may deliver a powerful counter attack. If struck in melee combat, the initiator may make an immediate counter attack which inflicts double damage if successful.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -367,7 +367,7 @@ export const POW_IRON_TORTOISE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'A skilled disciple of the Iron Tortoise knows the secrets to slowing his opponents down to match his heavily armored speed. By landing a powerful, mobility-reducing blow, the martial disciple keeps his enemy close. Make a melee attack, and if successful, the strike inflicts an additional 5d6 points of damage and halves the opponent\'s movement speed for their turn.',
+      "A skilled disciple of the Iron Tortoise knows the secrets to slowing his opponents down to match his heavily armored speed. By landing a powerful, mobility-reducing blow, the martial disciple keeps his enemy close. Make a melee attack, and if successful, the strike inflicts an additional 5d6 points of damage and halves the opponent's movement speed for their turn.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -408,7 +408,7 @@ export const POW_IRON_TORTOISE_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      'By steeling himself against an attack behind the wall of his mighty shield, an Iron Tortoise disciple may attempt to negate or reduce an incoming attack. The initiator makes an opposed attack roll using his base attack bonus plus shield bonus to AC against the opponent\'s attack roll. If successful, the attack is negated. If the opposed check is failed by the martial disciple, he instead gains DR 20/- to resist the attack.',
+      "By steeling himself against an attack behind the wall of his mighty shield, an Iron Tortoise disciple may attempt to negate or reduce an incoming attack. The initiator makes an opposed attack roll using his base attack bonus plus shield bonus to AC against the opponent's attack roll. If successful, the attack is negated. If the opposed check is failed by the martial disciple, he instead gains DR 20/- to resist the attack.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,

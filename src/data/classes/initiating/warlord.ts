@@ -66,7 +66,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
       name: 'Maneuvers',
       level: 1,
       description:
-        'A warlord begins his career with knowledge of six martial maneuvers. The disciplines available to him are Golden Lion, Primal Fury, Scarlet Throne, Solar Wind, Thrashing Dragon, and either Piercing Thunder or Tempest Gale. Once he knows a maneuver, he must ready it before he can use it. A maneuver usable by warlords is considered an extraordinary ability unless otherwise noted in its description. The warlord\'s maneuvers are not affected by spell resistance, and he does not provoke attacks of opportunity when he initiates one. He learns additional maneuvers at higher levels, as shown on the table above. The warlord must meet a maneuver\'s prerequisite to learn it. Upon reaching 4th level, and at every even numbered warlord level after that, he can choose to learn a new maneuver in place of one he already knows. In effect, the warlord loses the old maneuver in exchange for the new one. The warlord need not replace the old maneuver with a maneuver of the same level. He can choose a new maneuver of any level he likes, as long as he observes his restriction on the highest-level maneuvers he knows. The warlord can swap only a single maneuver at any given level. A warlord\'s initiation modifier is Charisma.',
+        "A warlord begins his career with knowledge of six martial maneuvers. The disciplines available to him are Golden Lion, Primal Fury, Scarlet Throne, Solar Wind, Thrashing Dragon, and either Piercing Thunder or Tempest Gale. Once he knows a maneuver, he must ready it before he can use it. A maneuver usable by warlords is considered an extraordinary ability unless otherwise noted in its description. The warlord's maneuvers are not affected by spell resistance, and he does not provoke attacks of opportunity when he initiates one. He learns additional maneuvers at higher levels, as shown on the table above. The warlord must meet a maneuver's prerequisite to learn it. Upon reaching 4th level, and at every even numbered warlord level after that, he can choose to learn a new maneuver in place of one he already knows. In effect, the warlord loses the old maneuver in exchange for the new one. The warlord need not replace the old maneuver with a maneuver of the same level. He can choose a new maneuver of any level he likes, as long as he observes his restriction on the highest-level maneuvers he knows. The warlord can swap only a single maneuver at any given level. A warlord's initiation modifier is Charisma.",
     },
     {
       name: 'Maneuvers Readied',
@@ -126,7 +126,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
       name: 'Tactical Presence (Rallying)',
       level: 5,
       description:
-        "Rallying Presence: The sight of a warlord on the battlefield is enough to strengthen the hearts and wills of those who fight beside him in battle. At 5th level, the warlord may add his warlord initiation modifier as a morale bonus to Will saves versus fear, death effect, or compulsion effects to all allies within 30 ft. of his position. If the warlord maintaining this presence becomes cowed, frightened, panicked or falls prey to a hostile mind-affecting ability (such as one that would stun or daze him), compulsion or death effect, this presence immediately ends.",
+        'Rallying Presence: The sight of a warlord on the battlefield is enough to strengthen the hearts and wills of those who fight beside him in battle. At 5th level, the warlord may add his warlord initiation modifier as a morale bonus to Will saves versus fear, death effect, or compulsion effects to all allies within 30 ft. of his position. If the warlord maintaining this presence becomes cowed, frightened, panicked or falls prey to a hostile mind-affecting ability (such as one that would stun or daze him), compulsion or death effect, this presence immediately ends.',
     },
     {
       name: 'Battle Prowess +1',
@@ -161,8 +161,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: "Warlord's Gambit (Additional Gambit)",
       level: 8,
-      description:
-        'At 8th level, the warlord selects an additional gambit to learn.',
+      description: 'At 8th level, the warlord selects an additional gambit to learn.',
     },
     {
       name: 'Tactical Presence (Victorious)',
@@ -191,14 +190,12 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: 'Dual Boost (2/day)',
       level: 12,
-      description:
-        'The warlord may now use Dual Boost two times per day.',
+      description: 'The warlord may now use Dual Boost two times per day.',
     },
     {
       name: "Warlord's Gambit (Additional Gambit)",
       level: 12,
-      description:
-        'At 12th level, the warlord selects an additional gambit to learn.',
+      description: 'At 12th level, the warlord selects an additional gambit to learn.',
     },
     {
       name: 'Improved Warleader',
@@ -221,8 +218,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: "Warlord's Gambit (Additional Gambit)",
       level: 16,
-      description:
-        'At 16th level, the warlord selects an additional gambit to learn.',
+      description: 'At 16th level, the warlord selects an additional gambit to learn.',
     },
     {
       name: 'Master Warleader',
@@ -239,8 +235,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: 'Dual Boost (3/day)',
       level: 18,
-      description:
-        'The warlord may now use Dual Boost three times per day.',
+      description: 'The warlord may now use Dual Boost three times per day.',
     },
     {
       name: 'Battle Prowess +3',
@@ -251,8 +246,7 @@ export const WARLORD_CLASS: ExpandedClassData = {
     {
       name: "Warlord's Gambit (Additional Gambit)",
       level: 20,
-      description:
-        'At 20th level, the warlord selects an additional gambit to learn.',
+      description: 'At 20th level, the warlord selects an additional gambit to learn.',
     },
     {
       name: 'Dual Stance',

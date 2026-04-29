@@ -111,7 +111,7 @@ export const POW_VEILED_MOON_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      "As a standard action, the initiator may either teleport to a location no farther away than his maximum movement speed, and make an attack action against an opponent as part of the same standard action, or attack an adjacent target and then teleport to a location no farther away than his maximum movement speed. The teleportation destination must be clearly seen by the disciple to teleport to that location, and it must be unoccupied.",
+      'As a standard action, the initiator may either teleport to a location no farther away than his maximum movement speed, and make an attack action against an opponent as part of the same standard action, or attack an adjacent target and then teleport to a location no farther away than his maximum movement speed. The teleportation destination must be clearly seen by the disciple to teleport to that location, and it must be unoccupied.',
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -287,7 +287,7 @@ export const POW_VEILED_MOON_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      "In a flickering blur of teleportation and movement, the Veiled Moon disciple may disappear, blink into existence to strike a foe, and then disappear again to appear a safe distance away. The initiator may teleport up to his movement speed to a target enemy, make an attack or a combat maneuver (such as disarm or trip) against the foe using its flat-footed armor class or CMD (denying the target his Dexterity bonus due to the surprising nature of the attack), then teleport away up to his movement speed, all without drawing attacks of opportunity for the movement or attack.",
+      'In a flickering blur of teleportation and movement, the Veiled Moon disciple may disappear, blink into existence to strike a foe, and then disappear again to appear a safe distance away. The initiator may teleport up to his movement speed to a target enemy, make an attack or a combat maneuver (such as disarm or trip) against the foe using its flat-footed armor class or CMD (denying the target his Dexterity bonus due to the surprising nature of the attack), then teleport away up to his movement speed, all without drawing attacks of opportunity for the movement or attack.',
     prerequisites: { disciplineManeuversKnown: 1 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -489,7 +489,7 @@ export const POW_VEILED_MOON_MANEUVERS: ManeuverDefinition[] = [
     target: 'One or more creatures',
     duration: 'Instant',
     description:
-      'Folding space around his form effortlessly, the disciple is capable of leaps through the ether and attacking through the barrier between the worlds in a series of staccato bursts of silvery-blue light, his image blinking as he strikes. As a full attack action, the initiator may make an attack against a target and then teleport a distance up to his movement speed to a new target to strike again, and each attack is made against the target\'s flat-footed armor class. He may do this a number of times equal to the number of attacks he possesses on a full attack action (including off hand attacks or secondary attacks), and he may select the same target for each attack but each teleportation must land him in position to make an attack against a target creature (he must attack a target creature at the end of each teleportation). Each attack gains a +2 competence bonus and inflicts an additional 4d4 points of force damage. Secondary attacks such as off-hand attacks and secondary natural attacks only add 2d4 of force damage. The initiator may forgo the first attack of this maneuver to teleport himself into position to use the rest of the attacks of this maneuver.',
+      "Folding space around his form effortlessly, the disciple is capable of leaps through the ether and attacking through the barrier between the worlds in a series of staccato bursts of silvery-blue light, his image blinking as he strikes. As a full attack action, the initiator may make an attack against a target and then teleport a distance up to his movement speed to a new target to strike again, and each attack is made against the target's flat-footed armor class. He may do this a number of times equal to the number of attacks he possesses on a full attack action (including off hand attacks or secondary attacks), and he may select the same target for each attack but each teleportation must land him in position to make an attack against a target creature (he must attack a target creature at the end of each teleportation). Each attack gains a +2 competence bonus and inflicts an additional 4d4 points of force damage. Secondary attacks such as off-hand attacks and secondary natural attacks only add 2d4 of force damage. The initiator may forgo the first attack of this maneuver to teleport himself into position to use the rest of the attacks of this maneuver.",
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,

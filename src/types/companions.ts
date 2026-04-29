@@ -78,6 +78,14 @@ export interface CompanionEquipment {
 // render time from sourceEntryId + effectiveProgressionLevel + appliedTemplates
 // + equipment + feats + tricks.
 
+// One ability score increase granted at the given AC effective level (every
+// 4th level milestone: 4, 9, 14, 20, 25, 30). Mirrors LevelIncrementSlot on
+// the character draft but keyed to AC progression level instead of HD.
+export interface CompanionAbilityIncrease {
+  atLevel: number;
+  ability: 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA' | null;
+}
+
 export interface CompanionInstance {
   instanceId: string;
   sourceEntryId: string; // 'wolf', 'leopard', 'fleshraker'
@@ -86,6 +94,7 @@ export interface CompanionInstance {
   effectiveProgressionLevel: number;
 
   abilityScoreOverrides: Partial<Record<'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA', number>>;
+  hdAbilityIncreases: CompanionAbilityIncrease[];
   hp: { max: number; current: number; temp: number; nonlethal: number };
 
   appliedTemplates: AppliedTemplate[];
@@ -94,5 +103,11 @@ export interface CompanionInstance {
   skillRanks: Record<string, number>;
   equipment: CompanionEquipment;
 
+  // Two notes fields by design. `notes` on the Identity tab holds short
+  // handler's memos (trained behaviors, quirks). `background` on the Notes
+  // tab holds long-form narrative — origin, personality, adventure history.
+  // Splitting them keeps the Identity tab compact while still giving
+  // companions the same room for story that characters have.
   notes: string;
+  background: string;
 }

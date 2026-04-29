@@ -232,7 +232,7 @@ export const POW_POWE_OVERFLOW_B_MANEUVERS: ManeuverDefinition[] = [
     duration: 'Instant (ongoing effect, see text)',
     savingThrow: 'Will save (DC 18 + initiation modifier)',
     description:
-      'This cruel strike traps victims in a waking nightmare. The attack deals weapon damage plus 4 points of Intelligence, Wisdom, and Charisma damage. At the start of each subsequent turn, the target must succeed on a Will save or take another 4 points of damage to all three mental ability scores. The effect ends upon a successful save or the creature\'s death.',
+      "This cruel strike traps victims in a waking nightmare. The attack deals weapon damage plus 4 points of Intelligence, Wisdom, and Charisma damage. At the start of each subsequent turn, the target must succeed on a Will save or take another 4 points of damage to all three mental ability scores. The effect ends upon a successful save or the creature's death.",
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -271,7 +271,7 @@ export const POW_POWE_OVERFLOW_B_MANEUVERS: ManeuverDefinition[] = [
     duration: 'Instant',
     savingThrow: 'Reflex save (DC 19 + initiation modifier)',
     description:
-      'Enemies within range must save or become immobilized by shadows with zero movement speed for rounds equal to the initiator\'s initiation modifier. Flying creatures drop and take falling damage. All creatures in range are attacked; those hit take weapon damage plus 10d6 additional damage (12d8 if the target is cursed).',
+      "Enemies within range must save or become immobilized by shadows with zero movement speed for rounds equal to the initiator's initiation modifier. Flying creatures drop and take falling damage. All creatures in range are attacked; those hit take weapon damage plus 10d6 additional damage (12d8 if the target is cursed).",
     prerequisites: { disciplineManeuversKnown: 4 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -308,7 +308,8 @@ export const POW_POWE_OVERFLOW_B_MANEUVERS: ManeuverDefinition[] = [
     type: 'strike',
     actionType: 'full-round',
     range: '120 ft.',
-    target: 'One primary creature plus secondary targets equal to initiation modifier (within 30 ft. of primary)',
+    target:
+      'One primary creature plus secondary targets equal to initiation modifier (within 30 ft. of primary)',
     duration: 'Instant',
     savingThrow: 'Reflex save (DC 18 + initiation modifier) for half damage',
     description:
@@ -432,7 +433,7 @@ export const POW_POWE_OVERFLOW_B_MANEUVERS: ManeuverDefinition[] = [
     target: 'All adjacent enemies',
     duration: 'Instant',
     description:
-      'The warrior performs a spinning slash hitting all adjacent foes. One melee attack roll is made against each adjacent opponent\'s AC, dealing weapon damage plus 5d6 additional damage on a hit. If the weapon was drawn as part of this strike, the initiator may make a second identical attack roll, dealing weapon damage plus 3d6 additional damage.',
+      "The warrior performs a spinning slash hitting all adjacent foes. One melee attack roll is made against each adjacent opponent's AC, dealing weapon damage plus 5d6 additional damage on a hit. If the weapon was drawn as part of this strike, the initiator may make a second identical attack roll, dealing weapon damage plus 3d6 additional damage.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -490,7 +491,7 @@ export const POW_POWE_OVERFLOW_B_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: '1 round',
     description:
-      "The master practitioner uses a Perform (dance) check instead of AC or CMD against incoming attacks. After each missed attack, the initiator moves up to 10 feet as a free action without provoking attacks of opportunity. At the start of the next turn, the initiator attacks each creature that missed them, dealing weapon damage plus 1d6 per miss (maximum 6d6). If the weapon was drawn as part of this counter, strikes are treated as silver.",
+      'The master practitioner uses a Perform (dance) check instead of AC or CMD against incoming attacks. After each missed attack, the initiator moves up to 10 feet as a free action without provoking attacks of opportunity. At the start of the next turn, the initiator attacks each creature that missed them, dealing weapon damage plus 1d6 per miss (maximum 6d6). If the weapon was drawn as part of this counter, strikes are treated as silver.',
     prerequisites: { disciplineManeuversKnown: 4 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,

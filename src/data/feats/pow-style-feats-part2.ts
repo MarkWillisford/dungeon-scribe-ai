@@ -66,7 +66,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     id: 'pow-primal-fury-style',
     name: 'Primal Fury Style',
     description:
-      'While using this style, you can make Survival checks in place of Acrobatics checks to move through threatened squares. In addition, you can charge through difficult terrain and spaces containing opponents. You do not provoke attacks of opportunity for entering an opponent\'s space when charging, although you provoke attacks of opportunity as normal for moving through an opponent\'s threatened area.',
+      "While using this style, you can make Survival checks in place of Acrobatics checks to move through threatened squares. In addition, you can charge through difficult terrain and spaces containing opponents. You do not provoke attacks of opportunity for entering an opponent's space when charging, although you provoke attacks of opportunity as normal for moving through an opponent's threatened area.",
     shortDescription:
       'Use Survival for Acrobatics in threatened squares; charge through difficult terrain and opponents.',
     source: 'Path of War: Expanded',
@@ -86,8 +86,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     name: 'Primal Fury Slash',
     description:
       'When you charge a creature, you can make a single melee attack against another creature that is adjacent to you at any point during your movement.',
-    shortDescription:
-      'Make a melee attack against an adjacent creature while charging past.',
+    shortDescription: 'Make a melee attack against an adjacent creature while charging past.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -145,7 +144,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     id: 'pow-scarlet-throne-dignity',
     name: 'Scarlet Throne Dignity',
     description:
-      'You can expend a readied maneuver as an immediate action in response to an attack being made against you. If you do, make an attack roll with a weapon you are wielding. If your attack roll is higher than your opponent\'s, their attack is negated, and you can take a 5-foot step, even if you have already moved or taken a 5-foot step this round.',
+      "You can expend a readied maneuver as an immediate action in response to an attack being made against you. If you do, make an attack roll with a weapon you are wielding. If your attack roll is higher than your opponent's, their attack is negated, and you can take a 5-foot step, even if you have already moved or taken a 5-foot step this round.",
     shortDescription:
       'Expend a maneuver to negate an attack with a competing attack roll and take a 5-foot step.',
     source: 'Path of War: Expanded',
@@ -165,8 +164,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     name: 'Scarlet Throne Riposte',
     description:
       'Whenever you use an ability to negate an attack from an opponent (such as with a counter or with the Scarlet Throne Dignity feat), that opponent provokes an attack of opportunity from you. A given creature can only provoke an attack of opportunity from you in this way once per round.',
-    shortDescription:
-      'Opponents provoke an attack of opportunity when you negate their attacks.',
+    shortDescription: 'Opponents provoke an attack of opportunity when you negate their attacks.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -206,8 +204,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     name: 'Shattered Mirror Waltz',
     description:
       'While using Shattered Mirror Style, you ignore movement penalties from difficult terrain. Other effects of the terrain affect you as normal.',
-    shortDescription:
-      'Ignore movement penalties from difficult terrain.',
+    shortDescription: 'Ignore movement penalties from difficult terrain.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -266,8 +263,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     name: 'Silver Crane Feathers',
     description:
       'While using Silver Crane Style, whenever an ally within 30 feet would take ability damage or hit point damage, you can expend a readied counter as an immediate action to take the damage in place of that ally. This is a supernatural ability.',
-    shortDescription:
-      'Expend a counter to take damage in place of a nearby ally.',
+    shortDescription: 'Expend a counter to take damage in place of a nearby ally.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -285,8 +281,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     name: 'Silver Crane Wing',
     description:
       'When you use your Silver Crane Feathers feat, you can make a Will save (DC equal to the ability damage dealt + the hit point damage dealt). If you succeed, the damage is negated rather than being redirected to you.',
-    shortDescription:
-      'Will save to negate damage entirely when using Silver Crane Feathers.',
+    shortDescription: 'Will save to negate damage entirely when using Silver Crane Feathers.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -326,8 +321,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     name: 'Sleeping Goddess Slumber',
     description:
       'While using Sleeping Goddess Style, whenever you hit a creature with an attack, you can expend your psionic focus as a free action. If you do, that creature must succeed at a Will save (DC = 10 + 1/2 your character level + your highest initiation modifier) or become confused for one round. A creature that successfully saves cannot be affected by this feat for 24 hours. This is a supernatural ability.',
-    shortDescription:
-      'Expend psionic focus to confuse a creature you hit (Will negates).',
+    shortDescription: 'Expend psionic focus to confuse a creature you hit (Will negates).',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -345,8 +339,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     name: 'Sleeping Goddess Strike',
     description:
       'While using Sleeping Goddess Style, whenever you hit an opponent with an attack, they take a -2 penalty on saving throws against your maneuvers until the end of their next turn.',
-    shortDescription:
-      'Creatures you hit take a -2 penalty on saves against your maneuvers.',
+    shortDescription: 'Creatures you hit take a -2 penalty on saves against your maneuvers.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -404,7 +397,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     id: 'pow-solar-wind-inferno',
     name: 'Solar Wind Inferno',
     description:
-      'While using Solar Wind Style, your ranged attacks ignore up to your character level in fire resistance. In addition, you can deal fire damage to creatures that are immune to fire, treating their immunity as fire resistance 30 for the purposes of this feat and dealing damage to them. If you possess the Variable Wind feat, this ability applies to your active element\'s energy type instead of fire specifically, treating immunity to that energy as resistance 30.',
+      "While using Solar Wind Style, your ranged attacks ignore up to your character level in fire resistance. In addition, you can deal fire damage to creatures that are immune to fire, treating their immunity as fire resistance 30 for the purposes of this feat and dealing damage to them. If you possess the Variable Wind feat, this ability applies to your active element's energy type instead of fire specifically, treating immunity to that energy as resistance 30.",
     shortDescription:
       'Ranged attacks ignore fire resistance up to your level and treat fire immunity as resistance 30.',
     source: 'Path of War: Expanded',
@@ -446,8 +439,7 @@ export const POW_STYLE_FEATS_PART2: FeatDefinition[] = [
     name: 'Tempest Gale Haze',
     description:
       'While using Tempest Gale Style, ranged attacks against you suffer a 20% miss chance.',
-    shortDescription:
-      'Ranged attacks against you have a 20% miss chance.',
+    shortDescription: 'Ranged attacks against you have a 20% miss chance.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],

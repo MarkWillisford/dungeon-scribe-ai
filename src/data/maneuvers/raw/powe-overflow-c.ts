@@ -511,7 +511,7 @@ export const POWE_OVERFLOW_C_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      "You make a ranged attack that deals weapon damage plus an additional 10d6 points of damage and allows trip and disarm attempts against each item the target holds. These combat maneuver attempts use a Sleight of Hand check in place of your combat maneuver check and do not provoke attacks of opportunity.",
+      'You make a ranged attack that deals weapon damage plus an additional 10d6 points of damage and allows trip and disarm attempts against each item the target holds. These combat maneuver attempts use a Sleight of Hand check in place of your combat maneuver check and do not provoke attacks of opportunity.',
     prerequisites: { disciplineManeuversKnown: 3 },
     source: {
       bookId: 'powe',

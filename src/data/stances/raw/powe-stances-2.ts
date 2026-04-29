@@ -36,7 +36,7 @@ export const POWE_STANCES_2: StanceDefinition[] = [
     disciplineId: 'piercing-thunder',
     level: 3,
     description:
-      'You have learned how to use normally two-handed weapons in one hand, using the weapons\' size and momentum to strike your foes with powerful blows. While you maintain this stance, you can wield normally two-handed weapons as one-handed weapons, and you gain the benefits of the Two-Weapon Fighting feat while using two discipline weapons in either hand (even if you do not meet its prerequisites). If you already possess the Two-Weapon Fighting feat, you may instead wield one or both of weapons as light weapons (reducing the penalties further and making them eligible for use with feats such as Weapon Finesse or Deadly Agility), and you gain the benefits of the Improved Two-Weapon Fighting feat, or the Greater Two-Weapon Fighting if you already possessed Improved Two-Weapon Fighting, even if you do not meet these feats\' prerequisites. You do not need to be wielding multiple weapons to gain the benefits of this stance.',
+      "You have learned how to use normally two-handed weapons in one hand, using the weapons' size and momentum to strike your foes with powerful blows. While you maintain this stance, you can wield normally two-handed weapons as one-handed weapons, and you gain the benefits of the Two-Weapon Fighting feat while using two discipline weapons in either hand (even if you do not meet its prerequisites). If you already possess the Two-Weapon Fighting feat, you may instead wield one or both of weapons as light weapons (reducing the penalties further and making them eligible for use with feats such as Weapon Finesse or Deadly Agility), and you gain the benefits of the Improved Two-Weapon Fighting feat, or the Greater Two-Weapon Fighting if you already possessed Improved Two-Weapon Fighting, even if you do not meet these feats' prerequisites. You do not need to be wielding multiple weapons to gain the benefits of this stance.",
     prerequisites: { disciplineManeuversKnown: 1 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -50,7 +50,7 @@ export const POWE_STANCES_2: StanceDefinition[] = [
     disciplineId: 'piercing-thunder',
     level: 5,
     description:
-      'You tightly concentrate your focus on the battlefield, maximizing the effectiveness of your reach and keeping enemy attacks at bay. While you maintain this stance, you gain a +4 dodge bonus to your AC and your weapon\'s reach increases by 5 feet. In addition, any creature you threaten that leaves their square provokes an attack of opportunity from you, even if their movement was a 5-foot step or movement that would not otherwise provoke attacks of opportunity (such as with the Spring Attack feat or a teleportation effect). Your opponents cannot use the Withdraw action to treat the squares they start in as no longer threatened by you.',
+      "You tightly concentrate your focus on the battlefield, maximizing the effectiveness of your reach and keeping enemy attacks at bay. While you maintain this stance, you gain a +4 dodge bonus to your AC and your weapon's reach increases by 5 feet. In addition, any creature you threaten that leaves their square provokes an attack of opportunity from you, even if their movement was a 5-foot step or movement that would not otherwise provoke attacks of opportunity (such as with the Spring Attack feat or a teleportation effect). Your opponents cannot use the Withdraw action to treat the squares they start in as no longer threatened by you.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -122,7 +122,7 @@ export const POWE_STANCES_2: StanceDefinition[] = [
     disciplineId: 'riven-hourglass',
     level: 5,
     description:
-      'You enter a meditative trance, manipulating your personal time to react faster than you otherwise would be able to. While you maintain this stance, you may initiate a single counter each round without using an immediate action. This expends the counter as normal. You can use this stance\'s effect to initiate a counter even if you have already used an immediate action this round.',
+      "You enter a meditative trance, manipulating your personal time to react faster than you otherwise would be able to. While you maintain this stance, you may initiate a single counter each round without using an immediate action. This expends the counter as normal. You can use this stance's effect to initiate a counter even if you have already used an immediate action this round.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -152,7 +152,7 @@ export const POWE_STANCES_2: StanceDefinition[] = [
     disciplineId: 'shattered-mirror',
     level: 1,
     description:
-      'With supernatural alacrity, you mimic your foes\' movements, preventing them from escaping you. While you maintain this stance, whenever an adjacent opponent takes a 5-foot step to leave one of your threatened squares, you may immediately take a 5-foot step towards that opponent, even if you have already moved or taken a 5-foot step this round. Whenever you use this ability, your movement speeds during your next turn are reduced by 5 feet.',
+      "With supernatural alacrity, you mimic your foes' movements, preventing them from escaping you. While you maintain this stance, whenever an adjacent opponent takes a 5-foot step to leave one of your threatened squares, you may immediately take a 5-foot step towards that opponent, even if you have already moved or taken a 5-foot step this round. Whenever you use this ability, your movement speeds during your next turn are reduced by 5 feet.",
     prerequisites: {},
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -208,7 +208,7 @@ export const POWE_STANCES_2: StanceDefinition[] = [
     disciplineId: 'shattered-mirror',
     level: 6,
     description:
-      'You mimic your opponents\' movements, visiting retribution upon them. While you maintain this stance, you can make a number of additional attacks of opportunity each round equal to your initiation modifier. This stacks with the Combat Reflexes feat and other effects that increase the number of attacks of opportunity you can make in a round. In addition, any creature that hits you with a melee attack or melee touch attack provokes an attack of opportunity from you.',
+      "You mimic your opponents' movements, visiting retribution upon them. While you maintain this stance, you can make a number of additional attacks of opportunity each round equal to your initiation modifier. This stacks with the Combat Reflexes feat and other effects that increase the number of attacks of opportunity you can make in a round. In addition, any creature that hits you with a melee attack or melee touch attack provokes an attack of opportunity from you.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -238,7 +238,7 @@ export const POWE_STANCES_2: StanceDefinition[] = [
     disciplineId: 'sleeping-goddess',
     level: 1,
     description:
-      'With careful steps and focused psionic power, you can slightly shift how you interact with the world, moving over liquids as if they were solid, sprinting along walls, and even walking through the air. While you maintain this stance, you can walk and stand on liquids and other unfirm surfaces as if they were solid ground. You can move at your normal speed, but you cannot run on such a surface. This stance does not protect you from any negative effects that the surface might carry, such as the heat of lava or the stickiness of a spider\'s web. At initiator level 5th, you gain the ability to move along walls and ceilings as if under the effect of a spider climb spell while you maintain this stance, except that you do not need to use your hands to climb and can fight normally. At initiator level 10th, you can walk through the air as if it were solid ground, gaining a fly speed equal to your land speed with good maneuverability while you maintain this stance. However, while flying in such a way, you cannot hover. At initiator level 15th, your maneuverability when flying in this way increases to perfect, and you can even stand still in midair, hovering as normal.',
+      "With careful steps and focused psionic power, you can slightly shift how you interact with the world, moving over liquids as if they were solid, sprinting along walls, and even walking through the air. While you maintain this stance, you can walk and stand on liquids and other unfirm surfaces as if they were solid ground. You can move at your normal speed, but you cannot run on such a surface. This stance does not protect you from any negative effects that the surface might carry, such as the heat of lava or the stickiness of a spider's web. At initiator level 5th, you gain the ability to move along walls and ceilings as if under the effect of a spider climb spell while you maintain this stance, except that you do not need to use your hands to climb and can fight normally. At initiator level 10th, you can walk through the air as if it were solid ground, gaining a fly speed equal to your land speed with good maneuverability while you maintain this stance. However, while flying in such a way, you cannot hover. At initiator level 15th, your maneuverability when flying in this way increases to perfect, and you can even stand still in midair, hovering as normal.",
     prerequisites: {},
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -280,7 +280,7 @@ export const POWE_STANCES_2: StanceDefinition[] = [
     disciplineId: 'sleeping-goddess',
     level: 6,
     description:
-      'You open your senses, gaining perfect awareness of the world around you with your enhanced perception. While you maintain this stance, you gain a bonus on initiative checks equal to your initiation modifier. You do not need to make Perception checks to notice creatures; you can detect and pinpoint all creatures within 60 feet. You also ignore miss chances granted by concealment, darkness, and invisibility, although you still must have line of effect to a creature or an object to discern it. In addition, you can expend your psionic focus as a move action to pierce creatures\' minds as easily as your senses pierce darkness. For a number of rounds equal to your initiation modifier after activating this ability, you can read the surface thoughts of all creatures within 60 feet as if you had manifested the read thoughts power. A creature can make a Will save (DC 16 + your initiation modifier) to keep you from reading their thoughts. A creature that successfully saves against this effect is immune to having its surface thoughts read by this stance for 24 hours. You do not need to concentrate on this ability to maintain it. This use of this stance is considered a mind-affecting effect.',
+      "You open your senses, gaining perfect awareness of the world around you with your enhanced perception. While you maintain this stance, you gain a bonus on initiative checks equal to your initiation modifier. You do not need to make Perception checks to notice creatures; you can detect and pinpoint all creatures within 60 feet. You also ignore miss chances granted by concealment, darkness, and invisibility, although you still must have line of effect to a creature or an object to discern it. In addition, you can expend your psionic focus as a move action to pierce creatures' minds as easily as your senses pierce darkness. For a number of rounds equal to your initiation modifier after activating this ability, you can read the surface thoughts of all creatures within 60 feet as if you had manifested the read thoughts power. A creature can make a Will save (DC 16 + your initiation modifier) to keep you from reading their thoughts. A creature that successfully saves against this effect is immune to having its surface thoughts read by this stance for 24 hours. You do not need to concentrate on this ability to maintain it. This use of this stance is considered a mind-affecting effect.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -310,7 +310,7 @@ export const POWE_STANCES_2: StanceDefinition[] = [
     disciplineId: 'tempest-gale',
     level: 1,
     description:
-      'As a tempest gale disciple, distance is no obstacle to you. While you maintain this stance, you reduce the total penalty from attacking creatures beyond your weapon\'s first range increment by 2, and you gain a +2 bonus on combat maneuver checks made with ranged attacks. For every four initiator levels you possess, the penalty to ranged attacks lessens by another 2, and the bonus to ranged combat maneuver checks increases by +2.',
+      "As a tempest gale disciple, distance is no obstacle to you. While you maintain this stance, you reduce the total penalty from attacking creatures beyond your weapon's first range increment by 2, and you gain a +2 bonus on combat maneuver checks made with ranged attacks. For every four initiator levels you possess, the penalty to ranged attacks lessens by another 2, and the bonus to ranged combat maneuver checks increases by +2.",
     prerequisites: {},
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,

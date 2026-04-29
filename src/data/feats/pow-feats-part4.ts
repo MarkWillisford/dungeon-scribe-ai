@@ -15,7 +15,7 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     id: 'pow-seize-the-opportunity',
     name: 'Seize the Opportunity',
     description:
-      'When you make an attack of opportunity, you can take an attack action (such as when using the Vital Strike feat) or attempt a combat maneuver (such as a bull rush, disarm, or dirty trick) in place of your attack of opportunity. This feat does not allow you to move when it isn\'t your turn.',
+      "When you make an attack of opportunity, you can take an attack action (such as when using the Vital Strike feat) or attempt a combat maneuver (such as a bull rush, disarm, or dirty trick) in place of your attack of opportunity. This feat does not allow you to move when it isn't your turn.",
     shortDescription:
       'Use an attack action or combat maneuver in place of an attack of opportunity.',
     source: 'Path of War: Expanded',
@@ -34,15 +34,12 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     id: 'pow-sin-eater',
     name: 'Sin Eater',
     description:
-      'Whenever a creature Claimed by you is reduced to 0 or fewer hit points, you gain temporary hit points equal to twice that creature\'s Hit Dice. These temporary hit points last for one minute.',
-    shortDescription:
-      'Gain temporary hit points when a Claimed creature is reduced to 0 hp.',
+      "Whenever a creature Claimed by you is reduced to 0 or fewer hit points, you gain temporary hit points equal to twice that creature's Hit Dice. These temporary hit points last for one minute.",
+    shortDescription: 'Gain temporary hit points when a Claimed creature is reduced to 0 hp.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'class_feature', featureName: 'Dark Claim' },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: 'Dark Claim' }],
     effects: [],
     activationMode: 'conditional',
     tags: ['path_of_war', 'harbinger', 'claim'],
@@ -73,8 +70,7 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     name: 'Solar Flare',
     description:
       'Upon successfully finishing a gather power action, you may emit a 20-foot burst of light that forces each creature within its area that can see you to make a Reflex save (DC 10 + 1/2 your kineticist level + your Constitution modifier) or become dazzled for 1 minute. When using a full-round gather power action, creatures that fail their saves are instead blinded for 1 round. This ability functions as a supernatural ability.',
-    shortDescription:
-      'Dazzle or blind nearby enemies when gathering power.',
+    shortDescription: 'Dazzle or blind nearby enemies when gathering power.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
@@ -92,8 +88,7 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     name: 'Syphon Vitality',
     description:
       'When gathering power, you can drain the animating essence from nearby opponents. Each creature within the area must make a Will save (DC 10 + 1/2 your kineticist level + your Constitution modifier) or become sickened for 1 round. If the gather power action takes a full round, the sickened condition lasts 1 minute instead. This ability functions on creatures normally immune to being sickened since it works by sapping animating energy rather than conventional sickness. This feat operates as a supernatural ability.',
-    shortDescription:
-      'Sicken nearby enemies when gathering power.',
+    shortDescription: 'Sicken nearby enemies when gathering power.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
@@ -111,8 +106,7 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     name: 'Tactical Rush',
     description:
       'Once per encounter you may move up to your speed as a swift action. This feat may be taken up to three times, each time granting another use of this feat per encounter.',
-    shortDescription:
-      'Move up to your speed as a swift action once per encounter.',
+    shortDescription: 'Move up to your speed as a swift action once per encounter.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
@@ -132,15 +126,12 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     id: 'pow-take-the-blow',
     name: 'Take the Blow',
     description:
-      'When an opponent within your reach who bears your armiger\'s mark targets an ally with a melee or ranged attack, you can expend a use of armiger\'s mark as an immediate action to redirect that attack to yourself instead. You are considered the target for all effects of the attack (the creature must make a successful attack roll, you are allowed a save, if any, etc.).',
-    shortDescription:
-      'Redirect a marked opponent\'s attack against an ally to yourself.',
+      "When an opponent within your reach who bears your armiger's mark targets an ally with a melee or ranged attack, you can expend a use of armiger's mark as an immediate action to redirect that attack to yourself instead. You are considered the target for all effects of the attack (the creature must make a successful attack roll, you are allowed a save, if any, etc.).",
+    shortDescription: "Redirect a marked opponent's attack against an ally to yourself.",
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'class_feature', featureName: "Armiger's mark" },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: "Armiger's mark" }],
     effects: [],
     activationMode: 'conditional',
     tags: ['path_of_war', 'warder', 'armigers_mark'],
@@ -151,8 +142,7 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     name: 'Tap Animus',
     description:
       'Upon entering combat, you obtain an animus pool starting with one point at the beginning of your first turn, gaining an additional point each subsequent turn. This pool remains active for one minute after all enemies are defeated or combat ends. Whenever you initiate a maneuver (strike, boost, or counter) during a round, you add one extra point to your pool. You may spend animus to enhance maneuvers or activate animus-dependent feats. If you ever gain the animus class feature, this feat is immediately exchanged for the Extra Animus feat.',
-    shortDescription:
-      'Gain an animus pool even without the animus class feature.',
+    shortDescription: 'Gain an animus pool even without the animus class feature.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
@@ -190,7 +180,7 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     id: 'pow-variable-wind',
     name: 'Variable Wind',
     description:
-      'You gain the ability to change your active element if you cannot already. Any Solar Wind maneuver you initiate that deals fire damage instead deals damage of your active element\'s associated energy type. This allows you to adapt the Solar Wind discipline to different elemental variants: Glacial Frost (cold), Virulent Spray (acid), and Oncoming Storm (electricity), providing flexibility in elemental damage output beyond the traditional fire-based approach.',
+      "You gain the ability to change your active element if you cannot already. Any Solar Wind maneuver you initiate that deals fire damage instead deals damage of your active element's associated energy type. This allows you to adapt the Solar Wind discipline to different elemental variants: Glacial Frost (cold), Virulent Spray (acid), and Oncoming Storm (electricity), providing flexibility in elemental damage output beyond the traditional fire-based approach.",
     shortDescription:
       'Change the damage type of your Solar Wind maneuvers by switching active element.',
     source: 'Path of War: Expanded',
@@ -210,14 +200,11 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     name: 'Victorious Recovery',
     description:
       'Once per encounter, when you reduce an opponent to 0 or fewer hit points, you recover a number of expended maneuvers equal to your initiator modifier (minimum 1).',
-    shortDescription:
-      'Recover maneuvers once per encounter when you defeat an opponent.',
+    shortDescription: 'Recover maneuvers once per encounter when you defeat an opponent.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'special', description: 'Able to initiate maneuvers' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Able to initiate maneuvers' }],
     effects: [],
     activationMode: 'conditional',
     tags: ['path_of_war', 'maneuver_recovery'],
@@ -250,8 +237,7 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     name: 'Weapon Group Adaptation',
     description:
       'Choose a weapon group (excluding siege weapons and siege firearms). That weapon group is considered associated with disciplines you have access to. This feat may be selected multiple times, with each selection applying to a different weapon group. Additionally, once you achieve a base attack bonus of +5, this feat satisfies requirements for Weapon Mastery feat prerequisites and determines eligible weapons for weapon mastery feats, functioning as the fighter class feature weapon training.',
-    shortDescription:
-      'Add a weapon group to your discipline weapon groups.',
+    shortDescription: 'Add a weapon group to your discipline weapon groups.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
@@ -266,14 +252,11 @@ export const POW_FEATS_PART4: FeatDefinition[] = [
     name: 'Winds of War',
     description:
       'You receive a +5-foot bonus to all movement speeds, with an additional +5-foot increase for each creature you currently have Claimed. This bonus stacks, allowing you to grow progressively faster as you accumulate more Claimed targets.',
-    shortDescription:
-      'Gain +5 ft. movement speed, plus +5 ft. per Claimed creature.',
+    shortDescription: 'Gain +5 ft. movement speed, plus +5 ft. per Claimed creature.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'class_feature', featureName: 'Dark Claim' },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: 'Dark Claim' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'harbinger', 'claim', 'movement'],

@@ -41,11 +41,7 @@ export const WARDER_WARLORD_POW_ARCHETYPES: ArchetypeData[] = [
     className: 'Warlord',
     description:
       'The bannerman is a warlord archetype that combines martial prowess with inspirational leadership. Wielding a banner alongside weapons to inspire allies while engaging enemies in combat, the bannerman embodies a commander who balances direct combat participation with tactical influence.',
-    replacedFeatures: [
-      'Bonus Feat (1st)',
-      'Battle Prowess',
-      'Dual Boost',
-    ],
+    replacedFeatures: ['Bonus Feat (1st)', 'Battle Prowess', 'Dual Boost'],
     modifiedFeatures: ['Tactical Presence'],
     newFeatures: [
       {
@@ -64,7 +60,7 @@ export const WARDER_WARLORD_POW_ARCHETYPES: ArchetypeData[] = [
         name: 'Inspiring Banner',
         level: 5,
         description:
-          'At 5th level, when the bannerman\'s banner is visible and he is using a Golden Lion stance, all allies within 60 feet receive a +2 morale bonus on saving throws against fear and fatigue and a +2 morale bonus on attack and damage rolls. These bonuses increase by +1 at 12th and 19th levels. This ability replaces battle prowess.',
+          "At 5th level, when the bannerman's banner is visible and he is using a Golden Lion stance, all allies within 60 feet receive a +2 morale bonus on saving throws against fear and fatigue and a +2 morale bonus on attack and damage rolls. These bonuses increase by +1 at 12th and 19th levels. This ability replaces battle prowess.",
       },
       {
         name: 'Share Boost',
@@ -86,7 +82,7 @@ export const WARDER_WARLORD_POW_ARCHETYPES: ArchetypeData[] = [
     name: 'Bushi',
     className: 'Warlord',
     description:
-      'Honorable and noble warriors who specialize in Iaijutsu, the art of the draw cut. Bushi follow the code of bushido and exemplify the virtues of righteousness, courage, benevolence, respect, honesty, honor, and loyalty. The bushi is a martial class template suitable for use with the Stalker, Warlord, and Warder classes. When applied to a Stalker, it trades standard action recovery, blending/improved blending, and the 1st-level stalker art. When applied to a Warder, it trades standard action recovery, bonus feats (3rd/8th), heavy armor proficiency, and clad in steel/steel defense/born of steel. When applied to a Warlord (shown here), it trades standard action recovery, bonus feats (1st/6th), and tactical presence/dual presence/warlord\'s presence.',
+      "Honorable and noble warriors who specialize in Iaijutsu, the art of the draw cut. Bushi follow the code of bushido and exemplify the virtues of righteousness, courage, benevolence, respect, honesty, honor, and loyalty. The bushi is a martial class template suitable for use with the Stalker, Warlord, and Warder classes. When applied to a Stalker, it trades standard action recovery, blending/improved blending, and the 1st-level stalker art. When applied to a Warder, it trades standard action recovery, bonus feats (3rd/8th), heavy armor proficiency, and clad in steel/steel defense/born of steel. When applied to a Warlord (shown here), it trades standard action recovery, bonus feats (1st/6th), and tactical presence/dual presence/warlord's presence.",
     replacedFeatures: [
       'Standard Action Recovery',
       'Bonus Feat (1st)',
@@ -221,13 +217,13 @@ export const WARDER_WARLORD_POW_ARCHETYPES: ArchetypeData[] = [
         name: "Guardian's Gambit",
         level: 1,
         description:
-          "The vanguard commander adds a new gambit option: Risk — a successful charging shield bash attack. Reward — the warlord and all allies within 30 feet may make a free 5-foot step, even if they have already made one this turn.",
+          'The vanguard commander adds a new gambit option: Risk — a successful charging shield bash attack. Reward — the warlord and all allies within 30 feet may make a free 5-foot step, even if they have already made one this turn.',
       },
       {
         name: 'Daring Defense',
         level: 1,
         description:
-          "The vanguard commander adds his warlord initiation modifier to his Reflex save bonus. This ability replaces force of personality.",
+          'The vanguard commander adds his warlord initiation modifier to his Reflex save bonus. This ability replaces force of personality.',
       },
       {
         name: 'Defensive Prowess',

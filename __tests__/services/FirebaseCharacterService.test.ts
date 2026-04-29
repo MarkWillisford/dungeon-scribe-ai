@@ -153,4 +153,186 @@ describe('FirebaseCharacterService', () => {
       expect(mockFirestore.deleteDoc).toHaveBeenCalled();
     });
   });
+
+  describe('update', () => {
+    test('calls updateDoc and returns the refreshed character', async () => {
+      const character = createTestCharacter();
+      const serialized = JSON.parse(JSON.stringify(character));
+      serialized.equipment.equippedSlots = {};
+
+      mockFirestore.updateDoc.mockResolvedValue(undefined);
+      mockFirestore.getDoc.mockResolvedValue({
+        exists: () => true,
+        id: 'char-update-1',
+        data: () => serialized,
+      });
+
+      const result = await FirebaseCharacterService.update('char-update-1', character);
+
+      expect(mockFirestore.updateDoc).toHaveBeenCalled();
+      expect(result.info.firebaseId).toBe('char-update-1');
+    });
+  });
+
+  describe('serializeForFirestore — companion equippedSlots', () => {
+    test('passes companion equippedSlots Record through to Firestore', async () => {
+      const character = createTestCharacter();
+      // Add a companion with a Record for equippedSlots (type changed from Map)
+      (character as unknown as Record<string, unknown>).companions = [
+        {
+          instanceId: 'comp-1',
+          sourceEntryId: 'wolf',
+          name: 'Wolf',
+          grantedBy: {
+            type: 'class',
+            classEntryId: 'c1',
+            className: 'Druid',
+            classChoiceId: 'def-1',
+          },
+          effectiveProgressionLevel: 4,
+          abilityScoreOverrides: {},
+          hdAbilityIncreases: [],
+          hp: { max: 20, current: 20, temp: 0, nonlethal: 0 },
+          appliedTemplates: [],
+          feats: [],
+          tricks: [],
+          skillRanks: {},
+          equipment: {
+            armor: [],
+            weapons: [],
+            magicItems: [],
+            gear: [],
+            equippedSlots: { neck: 'amulet-1' },
+          },
+        },
+      ];
+
+      mockFirestore.addDoc.mockResolvedValue({ id: 'new-char-id' });
+      await FirebaseCharacterService.create('user-1', character as never);
+
+      const docData = mockFirestore.addDoc.mock.calls[0][1];
+      expect(docData.companions[0].equipment.equippedSlots).toEqual({ neck: 'amulet-1' });
+      expect(docData.companions[0].equipment.equippedSlots).not.toBeInstanceOf(Map);
+    });
+
+    test('serializes character-level lastUpdated Date to ISO string', async () => {
+      const character = createTestCharacter();
+      (character as unknown as Record<string, unknown>).lastUpdated = new Date(
+        '2024-06-01T00:00:00.000Z',
+      );
+
+      mockFirestore.addDoc.mockResolvedValue({ id: 'char-date-id' });
+      await FirebaseCharacterService.create('user-1', character as never);
+
+      const docData = mockFirestore.addDoc.mock.calls[0][1];
+      expect(docData.lastUpdated).toBe('2024-06-01T00:00:00.000Z');
+    });
+  });
+
+  describe('deserializeFromFirestore — companion equippedSlots and timestamps', () => {
+    function mockGetDoc(data: Record<string, unknown>, id = 'char-deser-1') {
+      mockFirestore.getDoc.mockResolvedValue({
+        exists: () => true,
+        id,
+        data: () => data,
+      });
+    }
+
+    test('deserializes companion equippedSlots plain object as Record', async () => {
+      const character = createTestCharacter();
+      const base = JSON.parse(JSON.stringify(character));
+      base.equipment.equippedSlots = {};
+      base.companions = [
+        {
+          instanceId: 'comp-2',
+          sourceEntryId: 'wolf',
+          name: 'Wolf',
+          grantedBy: {
+            type: 'class',
+            classEntryId: 'c1',
+            className: 'Druid',
+            classChoiceId: 'def-1',
+          },
+          effectiveProgressionLevel: 4,
+          abilityScoreOverrides: {},
+          hdAbilityIncreases: [],
+          hp: { max: 20, current: 20, temp: 0, nonlethal: 0 },
+          appliedTemplates: [],
+          feats: [],
+          tricks: [],
+          skillRanks: {},
+          equipment: {
+            armor: [],
+            weapons: [],
+            magicItems: [],
+            gear: [],
+            equippedSlots: { neck: 'amulet-2' },
+          },
+        },
+      ];
+      mockGetDoc(base);
+
+      const result = await FirebaseCharacterService.getCharacter('char-deser-1');
+      expect(result.companions[0].equipment.equippedSlots).not.toBeInstanceOf(Map);
+      expect(result.companions[0].equipment.equippedSlots['neck']).toBe('amulet-2');
+    });
+
+    test('converts lastUpdated Firestore Timestamp to Date', async () => {
+      const character = createTestCharacter();
+      const base = JSON.parse(JSON.stringify(character));
+      base.equipment.equippedSlots = {};
+      base.lastUpdated = { toDate: () => new Date('2024-03-15') };
+      mockGetDoc(base);
+
+      const result = await FirebaseCharacterService.getCharacter('char-deser-1');
+      expect(result.lastUpdated).toBeInstanceOf(Date);
+      expect((result.lastUpdated as Date).getFullYear()).toBe(2024);
+    });
+
+    test('converts lastUpdated ISO string to Date', async () => {
+      const character = createTestCharacter();
+      const base = JSON.parse(JSON.stringify(character));
+      base.equipment.equippedSlots = {};
+      base.lastUpdated = '2024-05-20T12:00:00.000Z';
+      mockGetDoc(base);
+
+      const result = await FirebaseCharacterService.getCharacter('char-deser-1');
+      expect(result.lastUpdated).toBeInstanceOf(Date);
+    });
+
+    test('converts createdAt ISO string to Date', async () => {
+      const character = createTestCharacter();
+      const base = JSON.parse(JSON.stringify(character));
+      base.equipment.equippedSlots = {};
+      base.createdAt = '2024-01-10T08:00:00.000Z';
+      mockGetDoc(base);
+
+      const result = await FirebaseCharacterService.getCharacter('char-deser-1');
+      expect(result.createdAt).toBeInstanceOf(Date);
+    });
+
+    test('converts createdAt Firestore Timestamp to Date', async () => {
+      const character = createTestCharacter();
+      const base = JSON.parse(JSON.stringify(character));
+      base.equipment.equippedSlots = {};
+      base.createdAt = { toDate: () => new Date(1706745600000) }; // 2024-02-01 UTC
+      mockGetDoc(base);
+
+      const result = await FirebaseCharacterService.getCharacter('char-deser-1');
+      expect(result.createdAt).toBeInstanceOf(Date);
+      expect((result.createdAt as Date).getUTCFullYear()).toBe(2024);
+    });
+
+    test('backfills missing ruleset with PF1e standard preset', async () => {
+      const character = createTestCharacter();
+      const base = JSON.parse(JSON.stringify(character));
+      base.equipment.equippedSlots = {};
+      delete base.ruleset;
+      mockGetDoc(base);
+
+      const result = await FirebaseCharacterService.getCharacter('char-deser-1');
+      expect(result.ruleset).toBeDefined();
+      expect(result.ruleset.id).toBeDefined();
+    });
+  });
 });

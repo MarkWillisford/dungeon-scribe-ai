@@ -21,37 +21,37 @@ export const WARDER_POW_ARCHETYPES: ArchetypeData[] = [
       'Tactical Acumen',
       'Extended Defense (5th, 8th, 11th, 14th, 17th)',
     ],
-    modifiedFeatures: ['Armiger\'s Mark'],
+    modifiedFeatures: ["Armiger's Mark"],
     newFeatures: [
       {
-        name: 'Fiend\'s Grip',
+        name: "Fiend's Grip",
         level: 1,
         description:
-          'The fiendbound marauder can manifest a spectral claw as a move action using a gauntlet as a focus. This is a light weapon that deals 1d8 points of bludgeoning or slashing damage (for a Medium wielder), possesses the grapple and reach weapon properties, threatens a critical hit on a natural 20, and grants the grab ability on attacks made with it. The fiendbound marauder applies her full Strength bonus to damage even when used off-hand. The fiend\'s grip is treated as both a manufactured weapon and a natural weapon, and as a spiked gauntlet for the purpose of feats and abilities. It inherits magical properties and enhancement bonuses from the focus gauntlet used to manifest it. It can be dismissed as a free action. This ability replaces aegis and clad in steel.',
+          "The fiendbound marauder can manifest a spectral claw as a move action using a gauntlet as a focus. This is a light weapon that deals 1d8 points of bludgeoning or slashing damage (for a Medium wielder), possesses the grapple and reach weapon properties, threatens a critical hit on a natural 20, and grants the grab ability on attacks made with it. The fiendbound marauder applies her full Strength bonus to damage even when used off-hand. The fiend's grip is treated as both a manufactured weapon and a natural weapon, and as a spiked gauntlet for the purpose of feats and abilities. It inherits magical properties and enhancement bonuses from the focus gauntlet used to manifest it. It can be dismissed as a free action. This ability replaces aegis and clad in steel.",
       },
       {
         name: 'The Dark Mark',
         level: 2,
         description:
-          'The fiendbound marauder\'s armiger\'s mark becomes a supernatural ability. Marked creatures also become cursed for the duration of the mark. This ability modifies armiger\'s mark.',
+          "The fiendbound marauder's armiger's mark becomes a supernatural ability. Marked creatures also become cursed for the duration of the mark. This ability modifies armiger's mark.",
       },
       {
         name: 'Canny Pugilist',
         level: 4,
         description:
-          'At 4th level, the fiendbound marauder adds her initiation modifier as a competence bonus on combat maneuver checks made with her fiend\'s grip. This ability replaces tactical acumen.',
+          "At 4th level, the fiendbound marauder adds her initiation modifier as a competence bonus on combat maneuver checks made with her fiend's grip. This ability replaces tactical acumen.",
       },
       {
-        name: 'Improved Fiend\'s Grip',
+        name: "Improved Fiend's Grip",
         level: 5,
         description:
-          'At 5th level, the fiendbound marauder\'s fiend\'s grip gains the ghost touch weapon special ability, and manifesting it becomes a free action instead of a move action. At 11th level, the fiend\'s grip\'s critical multiplier increases to x3. This ability replaces extended defense at 5th and 11th levels.',
+          "At 5th level, the fiendbound marauder's fiend's grip gains the ghost touch weapon special ability, and manifesting it becomes a free action instead of a move action. At 11th level, the fiend's grip's critical multiplier increases to x3. This ability replaces extended defense at 5th and 11th levels.",
       },
       {
         name: 'Fiendish Empowerment',
         level: 8,
         description:
-          'At 8th level, while the fiendbound marauder\'s fiend\'s grip is manifested, her armor gains +1 ghost touch armor spikes and resistance 10 to two energy types of her choice. At 14th level, the enhancement bonus increases to +2, she gains resistance to three energy types, and the spikes deal additional damage. At 17th level, the enhancement bonus increases to +3 and her energy resistances increase to 20. This ability replaces extended defense at 8th, 14th, and 17th levels.',
+          "At 8th level, while the fiendbound marauder's fiend's grip is manifested, her armor gains +1 ghost touch armor spikes and resistance 10 to two energy types of her choice. At 14th level, the enhancement bonus increases to +2, she gains resistance to three energy types, and the spikes deal additional damage. At 17th level, the enhancement bonus increases to +3 and her energy resistances increase to 20. This ability replaces extended defense at 8th, 14th, and 17th levels.",
       },
     ],
     disciplineSwaps: {
@@ -67,32 +67,26 @@ export const WARDER_POW_ARCHETYPES: ArchetypeData[] = [
     className: 'Warder',
     description:
       'Ordained defenders are warders trained by religious institutions to serve as martial protectors of the faith. Whether shining champions of good or wicked blackguards of dark gods, these warriors combine their defensive prowess with divine empowerment granted by their patron deities.',
-    replacedFeatures: [
-      'Bonus Feat (3rd)',
-      'Bonus Feat (13th)',
-    ],
-    modifiedFeatures: [
-      'Class Skills',
-      'Maneuvers (initiation modifier changed to Wisdom)',
-    ],
+    replacedFeatures: ['Bonus Feat (3rd)', 'Bonus Feat (13th)'],
+    modifiedFeatures: ['Class Skills', 'Maneuvers (initiation modifier changed to Wisdom)'],
     newFeatures: [
       {
         name: 'Aura',
         level: 1,
         description:
-          'An ordained defender who worships a chaotic, evil, good, or lawful deity has a particularly powerful aura (as a cleric) corresponding to the deity\'s alignment.',
+          "An ordained defender who worships a chaotic, evil, good, or lawful deity has a particularly powerful aura (as a cleric) corresponding to the deity's alignment.",
       },
       {
         name: 'Maneuvers',
         level: 1,
         description:
-          'A good-aligned ordained defender adds Silver Crane to her list of available disciplines, an ordained defender who is neither good nor evil adds Eternal Guardian to her list of available disciplines, and an evil-aligned ordained defender adds Black Seraph to her list of available disciplines. If the ordained defender does not have this discipline\'s associated skill as a class skill, she gains it as a class skill. Her initiation modifier is Wisdom, and any warder class features that previously used her Intelligence modifier now use her Wisdom modifier. This ability modifies the warder\'s maneuvers.',
+          "A good-aligned ordained defender adds Silver Crane to her list of available disciplines, an ordained defender who is neither good nor evil adds Eternal Guardian to her list of available disciplines, and an evil-aligned ordained defender adds Black Seraph to her list of available disciplines. If the ordained defender does not have this discipline's associated skill as a class skill, she gains it as a class skill. Her initiation modifier is Wisdom, and any warder class features that previously used her Intelligence modifier now use her Wisdom modifier. This ability modifies the warder's maneuvers.",
       },
       {
         name: 'Divine Gift',
         level: 3,
         description:
-          'At 3rd level, an ordained defender receives supernatural empowerment from her deity in the form of a divine gift. She receives her choice of one inquisitor inquisition or warpriest blessing. She may use this gift a number of times per day equal to 3 + 1/2 her ordained defender level (rounded down). The save DC for any abilities granted by this gift is equal to 10 + 1/2 the ordained defender\'s class level + the ordained defender\'s initiation modifier. This ability replaces the bonus feats gained at 3rd and 13th levels.',
+          "At 3rd level, an ordained defender receives supernatural empowerment from her deity in the form of a divine gift. She receives her choice of one inquisitor inquisition or warpriest blessing. She may use this gift a number of times per day equal to 3 + 1/2 her ordained defender level (rounded down). The save DC for any abilities granted by this gift is equal to 10 + 1/2 the ordained defender's class level + the ordained defender's initiation modifier. This ability replaces the bonus feats gained at 3rd and 13th levels.",
       },
     ],
     // Adds one discipline by alignment — does NOT lose one:
@@ -132,7 +126,7 @@ export const WARDER_POW_ARCHETYPES: ArchetypeData[] = [
         name: 'Dervish Defense',
         level: 4,
         description:
-          'At 4th level, whenever a dervish defender uses a counter to successfully negate an opponent\'s attack and the opponent is threatened by her, she can make an attack of opportunity against that opponent. This ability replaces tactical acumen.',
+          "At 4th level, whenever a dervish defender uses a counter to successfully negate an opponent's attack and the opponent is threatened by her, she can make an attack of opportunity against that opponent. This ability replaces tactical acumen.",
       },
       {
         name: 'Shield of Blades',
@@ -144,7 +138,7 @@ export const WARDER_POW_ARCHETYPES: ArchetypeData[] = [
         name: 'Grace of Blades',
         level: 15,
         description:
-          'At 15th level, when the dervish defender makes a single attack while holding a weapon in each hand, she adds her off-hand weapon\'s damage as bonus damage as if she had hit with one of her off-hand weapons. When making multiple attacks while wielding multiple weapons, she increases her weapon damage by one die step. This ability replaces steel defense.',
+          "At 15th level, when the dervish defender makes a single attack while holding a weapon in each hand, she adds her off-hand weapon's damage as bonus damage as if she had hit with one of her off-hand weapons. When making multiple attacks while wielding multiple weapons, she increases her weapon damage by one die step. This ability replaces steel defense.",
       },
       {
         name: 'Critical Evasion',
@@ -171,9 +165,7 @@ export const WARDER_POW_ARCHETYPES: ArchetypeData[] = [
       'Aegis (6th level range increase)',
       'Aegis (12th level range increase)',
     ],
-    modifiedFeatures: [
-      'Maneuvers (discipline list altered)',
-    ],
+    modifiedFeatures: ['Maneuvers (discipline list altered)'],
     newFeatures: [
       {
         name: 'Zweihander Training',
@@ -219,9 +211,7 @@ export const WARDER_POW_ARCHETYPES: ArchetypeData[] = [
       'Extended Defense',
       'Adaptive Tactics',
     ],
-    modifiedFeatures: [
-      'Maneuvers (discipline list altered)',
-    ],
+    modifiedFeatures: ['Maneuvers (discipline list altered)'],
     newFeatures: [
       {
         name: 'Archer Training',
@@ -233,7 +223,7 @@ export const WARDER_POW_ARCHETYPES: ArchetypeData[] = [
         name: 'Ranged Defensive Focus',
         level: 1,
         description:
-          'The hawkguard\'s defensive focus functions differently from the standard warder. When recovering maneuvers as a full-round action, she threatens a 15-foot radius (not adjacent squares) and makes ranged attacks of opportunity against creatures that provoke within this area. The range of this threatened area increases by 5 feet for every five initiator levels she possesses. This ability replaces defensive focus.',
+          "The hawkguard's defensive focus functions differently from the standard warder. When recovering maneuvers as a full-round action, she threatens a 15-foot radius (not adjacent squares) and makes ranged attacks of opportunity against creatures that provoke within this area. The range of this threatened area increases by 5 feet for every five initiator levels she possesses. This ability replaces defensive focus.",
       },
       {
         name: 'Close Combat Archery',

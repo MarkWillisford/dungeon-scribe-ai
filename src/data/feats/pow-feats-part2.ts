@@ -19,9 +19,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'class_feature', featureName: 'armiger\u2019s mark' },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: 'armiger\u2019s mark' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'warder', 'armiger_mark'],
@@ -36,9 +34,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'special', description: 'Must possess an animus pool' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Must possess an animus pool' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'animus'],
@@ -53,9 +49,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['general'],
-    prerequisites: [
-      { type: 'class_feature', featureName: 'conviction' },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: 'conviction' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'zealot', 'conviction'],
@@ -107,9 +101,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['general'],
-    prerequisites: [
-      { type: 'class_feature', featureName: 'ki pool' },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: 'ki pool' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'ki'],
@@ -124,9 +116,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'class_feature', featureName: 'armiger\u2019s mark' },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: 'armiger\u2019s mark' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'warder', 'armiger_mark'],
@@ -141,9 +131,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'class_feature', featureName: 'tactical presence' },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: 'tactical presence' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'warlord', 'tactical_presence'],
@@ -158,9 +146,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'special', description: 'Ability to initiate a martial maneuver' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Ability to initiate a martial maneuver' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'maneuver', 'readied'],
@@ -189,7 +175,8 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     name: 'Feral Goddess',
     description:
       'Your psionic abilities and martial training combine to create devastating natural weapons. You reduce the power point cost for manifesting psionic powers that grant natural weapons (such as claws of the beast or metamorphosis) by 1 point, to a minimum of 0. In addition, you treat natural weapons created by psionic powers as Sleeping Goddess discipline weapons and as magic weapons for the purposes of overcoming damage reduction.',
-    shortDescription: 'Reduce cost of natural weapon powers by 1; treat them as discipline weapons.',
+    shortDescription:
+      'Reduce cost of natural weapon powers by 1; treat them as discipline weapons.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['general'],
@@ -266,8 +253,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     name: 'Giant Slayer',
     description:
       'You specialize in fighting foes larger than yourself, using their size against them. When you make a charge attack, you do not provoke attacks of opportunity from the target of your charge. In addition, you gain a +1 bonus on attack rolls made during charges for each size category larger than you the target of the attack is.',
-    shortDescription:
-      'No AoO from charge target; +1 to hit per size category larger.',
+    shortDescription: 'No AoO from charge target; +1 to hit per size category larger.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
@@ -286,9 +272,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'class_feature', featureName: 'dark claim' },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: 'dark claim' }],
     effects: [],
     activationMode: 'conditional',
     tags: ['path_of_war', 'harbinger', 'claim', 'recovery'],
@@ -299,7 +283,8 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     name: 'Greater Unarmed Strike',
     description:
       'Your unarmed strikes are devastatingly powerful. Your unarmed strikes have their base damage increased to 1d8 (for a Medium size creature). At character level 10th, this increases to 1d10 base damage. If you are a monk, brawler, or other class that gains increased unarmed damage based on your level, you instead add 4 to your effective class level to determine your unarmed strike damage dice.',
-    shortDescription: 'Unarmed strikes deal 1d8 damage (1d10 at 10th level); monks add 4 to effective level.',
+    shortDescription:
+      'Unarmed strikes deal 1d8 damage (1d10 at 10th level); monks add 4 to effective level.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
@@ -316,7 +301,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     id: 'pow-guards-glare',
     name: "Guard's Glare",
     description:
-      "Your intimidating presence prevents marked foes from retreating. A creature that is demoralized, frightened, shaken, or panicked while marked by your armiger\u2019s mark must succeed at a Will save (DC 10 + 1/2 your warder level + your warder initiation modifier) to move away from you. The creature only needs to make this save once per round. This is a mind-affecting fear effect.",
+      'Your intimidating presence prevents marked foes from retreating. A creature that is demoralized, frightened, shaken, or panicked while marked by your armiger\u2019s mark must succeed at a Will save (DC 10 + 1/2 your warder level + your warder initiation modifier) to move away from you. The creature only needs to make this save once per round. This is a mind-affecting fear effect.',
     shortDescription: 'Marked and scared creatures must save to move away from you.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
@@ -362,9 +347,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'skill', skillId: 'knowledge_martial', ranks: 3 },
-    ],
+    prerequisites: [{ type: 'skill', skillId: 'knowledge_martial', ranks: 3 }],
     effects: [
       {
         type: 'bonus',
@@ -420,9 +403,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['general'],
-    prerequisites: [
-      { type: 'class_feature', featureName: 'gather power' },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: 'gather power' }],
     effects: [],
     activationMode: 'conditional',
     tags: ['path_of_war', 'kineticist', 'psionic', 'gather_power'],
@@ -455,9 +436,7 @@ export const POW_FEATS_PART2: FeatDefinition[] = [
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'special', description: 'Ability to initiate martial maneuvers' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Ability to initiate martial maneuvers' }],
     effects: [],
     activationMode: 'conditional',
     tags: ['path_of_war', 'recovery', 'maneuver'],

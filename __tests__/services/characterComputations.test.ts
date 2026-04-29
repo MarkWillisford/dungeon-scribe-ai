@@ -1,8 +1,8 @@
 import {
   abilityTotal,
   abilityModifier,
-  formatModifier,
   getAbilityModifier,
+  formatModifier,
   formatBABString,
   computeTotalBAB,
   computeTotalBABFractional,

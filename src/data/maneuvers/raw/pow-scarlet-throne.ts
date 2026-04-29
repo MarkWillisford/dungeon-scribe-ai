@@ -365,7 +365,7 @@ export const POW_SCARLET_THRONE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One attack',
     duration: 'Instant',
     description:
-      'The disciple makes a Sense Motive check with a +4 competence bonus opposing his enemy\'s melee attack roll. If successful, the attack is blocked and he may make an immediate counter attack against that opponent at his full attack bonus and inflict an additional 3d6 points of damage.',
+      "The disciple makes a Sense Motive check with a +4 competence bonus opposing his enemy's melee attack roll. If successful, the attack is blocked and he may make an immediate counter attack against that opponent at his full attack bonus and inflict an additional 3d6 points of damage.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,

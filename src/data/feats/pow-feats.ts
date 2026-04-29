@@ -21,7 +21,10 @@ export const POW_FEATS: FeatDefinition[] = [
     types: ['combat'],
     prerequisites: [
       { type: 'level', minimum: 4 },
-      { type: 'special', description: 'Martial disciple class with maneuvers readied class feature' },
+      {
+        type: 'special',
+        description: 'Martial disciple class with maneuvers readied class feature',
+      },
     ],
     effects: [],
     activationMode: 'passive',
@@ -54,9 +57,7 @@ export const POW_FEATS: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['general'],
-    prerequisites: [
-      { type: 'special', description: 'Animus pool or equivalent ability' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Animus pool or equivalent ability' }],
     effects: [],
     activationMode: 'conditional',
     tags: ['path_of_war', 'animus', 'healing'],
@@ -71,9 +72,7 @@ export const POW_FEATS: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['general'],
-    prerequisites: [
-      { type: 'level', minimum: 1, class: 'kineticist' },
-    ],
+    prerequisites: [{ type: 'level', minimum: 1, class: 'kineticist' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'kineticist', 'psionic'],
@@ -88,9 +87,7 @@ export const POW_FEATS: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['general'],
-    prerequisites: [
-      { type: 'special', description: 'Animus pool or equivalent ability' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Animus pool or equivalent ability' }],
     effects: [],
     activationMode: 'conditional',
     tags: ['path_of_war', 'animus', 'psionic'],
@@ -101,12 +98,13 @@ export const POW_FEATS: FeatDefinition[] = [
     name: 'Battle Fervor',
     description:
       'Your healing abilities inspire martial fury. When you use fervor, guardian\u2019s shield, or lay on hands to heal or protect an ally, your next martial strike initiated before the end of your next turn deals additional damage equal to the number of hit points healed or damage absorbed.',
-    shortDescription: 'Deal additional damage on martial strikes after healing or shielding an ally.',
+    shortDescription:
+      'Deal additional damage on martial strikes after healing or shielding an ally.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
-      { type: 'class_feature', featureName: 'fervor, guardian\'s shield, or lay on hands' },
+      { type: 'class_feature', featureName: "fervor, guardian's shield, or lay on hands" },
       { type: 'special', description: 'Ability to initiate maneuvers' },
     ],
     effects: [],
@@ -141,9 +139,7 @@ export const POW_FEATS: FeatDefinition[] = [
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['general'],
-    prerequisites: [
-      { type: 'class_feature', featureName: 'channel energy' },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: 'channel energy' }],
     effects: [],
     activationMode: 'conditional',
     tags: ['path_of_war', 'channel_energy', 'recovery'],
@@ -158,9 +154,7 @@ export const POW_FEATS: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['general'],
-    prerequisites: [
-      { type: 'special', description: 'Ability to Claim creatures' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Ability to Claim creatures' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'claim', 'harbinger'],
@@ -175,9 +169,7 @@ export const POW_FEATS: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['general'],
-    prerequisites: [
-      { type: 'special', description: 'Ability to Claim creatures' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Ability to Claim creatures' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'claim', 'harbinger'],
@@ -192,9 +184,7 @@ export const POW_FEATS: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'special', description: 'Ability to Claim creatures' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Ability to Claim creatures' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'claim', 'harbinger'],
@@ -205,13 +195,12 @@ export const POW_FEATS: FeatDefinition[] = [
     name: 'Daisho Expertise',
     description:
       'You have trained extensively in the art of the daisho. You may use your Dexterity modifier instead of your Strength modifier on attack rolls made with katanas and wakizashi. Additionally, you increase the damage die of katanas and wakizashi you wield by one step.',
-    shortDescription: 'Use Dex for attack rolls with katanas/wakizashi and increase their damage dice.',
+    shortDescription:
+      'Use Dex for attack rolls with katanas/wakizashi and increase their damage dice.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'proficiency', proficiency: 'katana or wakizashi' },
-    ],
+    prerequisites: [{ type: 'proficiency', proficiency: 'katana or wakizashi' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'mithral_current', 'weapon'],
@@ -226,9 +215,7 @@ export const POW_FEATS: FeatDefinition[] = [
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'feat', featId: 'weapon_finesse' },
-    ],
+    prerequisites: [{ type: 'feat', featId: 'weapon_finesse' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'dexterity', 'damage'],
@@ -336,7 +323,10 @@ export const POW_FEATS: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [
-      { type: 'special', description: '8 ranks in the associated skill of one of your disciplines' },
+      {
+        type: 'special',
+        description: '8 ranks in the associated skill of one of your disciplines',
+      },
     ],
     effects: [],
     activationMode: 'passive',
@@ -348,7 +338,8 @@ export const POW_FEATS: FeatDefinition[] = [
     name: 'Double Weapon Finesse',
     description:
       'You are skilled at fighting with double weapons in a fluid, agile manner. When wielding a double weapon, you may treat both ends as light weapons for the purposes of the Weapon Finesse feat and Two-Weapon Fighting penalties. You also gain a +2 bonus on combat maneuver checks made with a double weapon.',
-    shortDescription: 'Treat both heads of a double weapon as light; +2 to CMB with double weapons.',
+    shortDescription:
+      'Treat both heads of a double weapon as light; +2 to CMB with double weapons.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
@@ -380,7 +371,8 @@ export const POW_FEATS: FeatDefinition[] = [
     name: 'Electrum Manticore',
     description:
       'Your knowledge of the Golden Lion and Silver Crane disciplines allows you to blend their techniques. When you enter a Silver Crane stance, you may initiate a Golden Lion boost as a free action as part of the same action. When you enter a Golden Lion stance, you may initiate a Silver Crane boost as a free action as part of the same action.',
-    shortDescription: 'Initiate Golden Lion boosts when entering Silver Crane stances, and vice versa.',
+    shortDescription:
+      'Initiate Golden Lion boosts when entering Silver Crane stances, and vice versa.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
@@ -398,7 +390,8 @@ export const POW_FEATS: FeatDefinition[] = [
     name: 'Elemental Current',
     description:
       'You blend the techniques of Elemental Flux and Mithral Current to devastating effect. When you hit a creature with a Mithral Current maneuver while in an Elemental Flux stance, the target becomes vulnerable to the energy type of your active element instead of being treated as vulnerable to silver. This effect lasts until the end of your next turn.',
-    shortDescription: 'Make opponents vulnerable to elemental damage instead of silver via Mithral Current.',
+    shortDescription:
+      'Make opponents vulnerable to elemental damage instead of silver via Mithral Current.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
@@ -422,7 +415,10 @@ export const POW_FEATS: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
     prerequisites: [
-      { type: 'special', description: 'Elemental attunement class feature or one Elemental Flux maneuver known' },
+      {
+        type: 'special',
+        description: 'Elemental attunement class feature or one Elemental Flux maneuver known',
+      },
     ],
     effects: [],
     activationMode: 'passive',
@@ -442,7 +438,8 @@ export const POW_FEATS: FeatDefinition[] = [
     name: 'Elemental Sun',
     description:
       'Your mastery of Elemental Flux and Solar Wind allows you to weaken enemy defenses with ranged attacks. When you initiate a Solar Wind maneuver while in an Elemental Flux stance, the target\u2019s energy resistance to your active element is reduced by an amount equal to your initiator level on a successful hit. This reduction lasts until the end of your next turn.',
-    shortDescription: 'Solar Wind maneuvers while in Elemental Flux stance reduce energy resistance.',
+    shortDescription:
+      'Solar Wind maneuvers while in Elemental Flux stance reduce energy resistance.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
@@ -478,7 +475,8 @@ export const POW_FEATS: FeatDefinition[] = [
     name: 'Eternal Hourglass',
     description:
       'Your mastery of Eternal Guardian and Riven Hourglass techniques allows you to bend time to create openings for counterattacks. While in a Riven Hourglass stance, once per encounter you may initiate an Eternal Guardian counter as a free action, even if it is not your turn, without expending the counter.',
-    shortDescription: 'Initiate an Eternal Guardian counter for free once per encounter while in a Riven Hourglass stance.',
+    shortDescription:
+      'Initiate an Eternal Guardian counter for free once per encounter while in a Riven Hourglass stance.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],

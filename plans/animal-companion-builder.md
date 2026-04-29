@@ -476,17 +476,17 @@ Plus one new service:
 
 ## Implementation Phases
 
-| Phase | Work                                                                                                                                                                        | Status      |
-| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| 1.1   | Types: `CompanionInstance`, `CompanionGrant`, `BodyShape`, `Character.companions`                                                                                           | COMPLETE    |
-| 1.2   | 10-category `BodyShape` (Paizo-canonical) + `AnimalCompanionEntry` extension + `BODY_SHAPE_SLOTS` map with subtype restrictions and `canGrasp` + data pass over 192 entries | COMPLETE    |
-| 1.3   | `CompanionService` (effective level, base stats, slot computation) + tests                                                                                                  | COMPLETE    |
-| 1.4   | Classes & Templates tab: companion card + picker integration when `animal_companion` choice selected                                                                        | COMPLETE    |
-| 1.5   | AC Builder screen — Identity / Abilities / Combat tabs                                                                                                                      | NOT STARTED |
-| 1.6   | AC Builder screen — Skills / Feats / Tricks tabs                                                                                                                            | NOT STARTED |
-| 1.7   | AC Builder screen — Equipment / Templates / Notes tabs                                                                                                                      | NOT STARTED |
-| 1.8   | `TemplateDefinition.grantsCompanion` + Druid Simple wiring                                                                                                                  | NOT STARTED |
-| 1.9   | Tests: integration test covering druid + AC + template grant + multi-companion                                                                                              | NOT STARTED |
+| Phase | Work                                                                                                                                                                        | Status   |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| 1.1   | Types: `CompanionInstance`, `CompanionGrant`, `BodyShape`, `Character.companions`                                                                                           | COMPLETE |
+| 1.2   | 10-category `BodyShape` (Paizo-canonical) + `AnimalCompanionEntry` extension + `BODY_SHAPE_SLOTS` map with subtype restrictions and `canGrasp` + data pass over 192 entries | COMPLETE |
+| 1.3   | `CompanionService` (effective level, base stats, slot computation) + tests                                                                                                  | COMPLETE |
+| 1.4   | Classes & Templates tab: companion card + picker integration when `animal_companion` choice selected                                                                        | COMPLETE |
+| 1.5   | AC Builder screen — Identity / Abilities / Combat tabs                                                                                                                      | COMPLETE |
+| 1.6   | AC Builder screen — Skills / Feats / Tricks tabs                                                                                                                            | COMPLETE |
+| 1.7   | AC Builder screen — Equipment / Templates / Notes tabs                                                                                                                      | COMPLETE |
+| 1.8   | `TemplateDefinition.grantsCompanion` + Druid Simple wiring                                                                                                                  | COMPLETE |
+| 1.9   | Tests: integration test covering druid + AC + template grant + multi-companion                                                                                              | COMPLETE |
 
 ---
 

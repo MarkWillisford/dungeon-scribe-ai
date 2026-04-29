@@ -16,7 +16,7 @@ export const megatherium: AnimalCompanionEntry = {
   str: 9,
   dex: 14,
   con: 11,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 6,
   specialQualities: ['low-light vision', 'scent'],
@@ -53,7 +53,7 @@ export const megaprimatus: AnimalCompanionEntry = {
   str: 13,
   dex: 17,
   con: 10,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 7,
   specialQualities: ['low-light vision', 'scent'],
@@ -89,7 +89,7 @@ export const mindspinRam: AnimalCompanionEntry = {
   str: 10,
   dex: 17,
   con: 11,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 14,
   cha: 7,
   specialQualities: ['low-light vision', 'scent'],
@@ -125,7 +125,7 @@ export const moa: AnimalCompanionEntry = {
   str: 13,
   dex: 16,
   con: 12,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 11,
   cha: 9,
   specialQualities: ['low-light vision'],
@@ -160,7 +160,7 @@ export const mokeleMbembe: AnimalCompanionEntry = {
   str: 16,
   dex: 17,
   con: 10,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 15,
   cha: 11,
   specialQualities: ['low-light vision', 'scent'],
@@ -184,7 +184,7 @@ export const moleGiant: AnimalCompanionEntry = {
   str: 12,
   dex: 15,
   con: 13,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 10,
   cha: 5,
   specialQualities: ['low-light vision', 'tremorsense 30 ft.'],
@@ -221,7 +221,7 @@ export const momeRath: AnimalCompanionEntry = {
   str: 12,
   dex: 14,
   con: 15,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 14,
   cha: 17,
   specialQualities: ['low-light vision', 'scent'],
@@ -252,7 +252,7 @@ export const moose: AnimalCompanionEntry = {
   str: 12,
   dex: 15,
   con: 14,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 7,
   specialQualities: ['low-light vision'],
@@ -289,7 +289,7 @@ export const morayEel: AnimalCompanionEntry = {
   str: 14,
   dex: 16,
   con: 12,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 8,
   specialQualities: ['low-light vision', 'grab'],
@@ -365,7 +365,7 @@ export const narwhal: AnimalCompanionEntry = {
   str: 11,
   dex: 19,
   con: 10,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 14,
   cha: 6,
   specialQualities: ['low-light vision', 'hold breath'],
@@ -402,7 +402,7 @@ export const octopus: AnimalCompanionEntry = {
   str: 12,
   dex: 17,
   con: 14,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 3,
   specialQualities: ['low-light vision', 'ink cloud'],
@@ -435,7 +435,7 @@ export const orca: AnimalCompanionEntry = {
   str: 11,
   dex: 19,
   con: 10,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 14,
   cha: 6,
   specialQualities: ['low-light vision', 'hold breath'],
@@ -472,7 +472,7 @@ export const ornithomimosaur: AnimalCompanionEntry = {
   str: 11,
   dex: 15,
   con: 12,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 8,
   specialQualities: ['low-light vision', 'scent'],
@@ -508,7 +508,7 @@ export const ostrich: AnimalCompanionEntry = {
   str: 13,
   dex: 16,
   con: 12,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 11,
   specialQualities: ['low-light vision'],
@@ -544,7 +544,7 @@ export const owlGiant: AnimalCompanionEntry = {
   str: 10,
   dex: 17,
   con: 13,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 6,
   specialQualities: ['low-light vision'],
@@ -581,7 +581,7 @@ export const panda: AnimalCompanionEntry = {
   str: 13,
   dex: 12,
   con: 14,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 9,
   specialQualities: ['low-light vision'],
@@ -618,7 +618,7 @@ export const pilo: AnimalCompanionEntry = {
   str: 13,
   dex: 13,
   con: 14,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 14,
   cha: 7,
   specialQualities: ['low-light vision', 'scent', 'roll up'],
@@ -653,7 +653,7 @@ export const plesiosaurus: AnimalCompanionEntry = {
   str: 12,
   dex: 15,
   con: 12,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 15,
   cha: 9,
   specialQualities: ['keen scent', 'low-light vision', 'scent'],
@@ -690,7 +690,7 @@ export const polarBear: AnimalCompanionEntry = {
   str: 15,
   dex: 15,
   con: 13,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 12,
   cha: 6,
   specialQualities: ['low-light vision', 'scent'],
@@ -727,7 +727,7 @@ export const porcupine: AnimalCompanionEntry = {
   str: 14,
   dex: 12,
   con: 15,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 5,
   specialQualities: ['low-light vision', 'scent', 'quills'],
@@ -801,7 +801,7 @@ export const pteranodon: AnimalCompanionEntry = {
   str: 10,
   dex: 17,
   con: 12,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 13,
   cha: 6,
   specialQualities: ['low-light vision'],
@@ -840,7 +840,7 @@ export const puma: AnimalCompanionEntry = {
   str: 12,
   dex: 18,
   con: 10,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 15,
   cha: 11,
   specialQualities: ['low-light vision', 'scent'],
@@ -877,7 +877,7 @@ export const quetzalcoatlus: AnimalCompanionEntry = {
   str: 9,
   dex: 21,
   con: 10,
-  int: 0, // INT: — (non-intelligent)
+  int: 2,
   wis: 14,
   cha: 12,
   specialQualities: ['low-light vision', 'scent'],

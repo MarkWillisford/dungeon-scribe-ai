@@ -73,7 +73,7 @@ export const POW_STEEL_SERPENT_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      'As an immediate action, the disciple makes a Heal skill check against the attacker\'s roll to bend or otherwise contort himself to evade an attack. If successful he negates the attack and may make a free dirty trick attempt without provoking attacks of opportunity.',
+      "As an immediate action, the disciple makes a Heal skill check against the attacker's roll to bend or otherwise contort himself to evade an attack. If successful he negates the attack and may make a free dirty trick attempt without provoking attacks of opportunity.",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -434,7 +434,7 @@ export const POW_STEEL_SERPENT_MANEUVERS: ManeuverDefinition[] = [
     target: 'One attacker',
     duration: '1d4 rounds',
     description:
-      'The initiator makes an opposed attack roll against his foe\'s attack roll, and if successful the attacker misses the initiator who then gains total concealment from his foe for 1d4 rounds.',
+      "The initiator makes an opposed attack roll against his foe's attack roll, and if successful the attacker misses the initiator who then gains total concealment from his foe for 1d4 rounds.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,

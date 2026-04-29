@@ -82,7 +82,7 @@ export const POWE_TEMPEST_GALE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'Make a ranged attack, ignoring any cover bonuses to the target\'s AC. If it hits, it deals weapon damage as normal.',
+      "Make a ranged attack, ignoring any cover bonuses to the target's AC. If it hits, it deals weapon damage as normal.",
     prerequisites: {},
     source: {
       bookId: 'powe',
@@ -365,7 +365,7 @@ export const POWE_TEMPEST_GALE_MANEUVERS: ManeuverDefinition[] = [
     target: 'Self',
     duration: '1 round',
     description:
-      'Your ranged attacks for one round ignore any cover bonuses to the target\'s AC, and you do not take penalties on attack rolls from attacking creatures beyond your weapon\'s first range increment.',
+      "Your ranged attacks for one round ignore any cover bonuses to the target's AC, and you do not take penalties on attack rolls from attacking creatures beyond your weapon's first range increment.",
     prerequisites: { disciplineManeuversKnown: 1 },
     source: {
       bookId: 'powe',
@@ -413,7 +413,7 @@ export const POWE_TEMPEST_GALE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'You can initiate this counter in response to an attack being made against you or an ally by a creature you can see. Make a ranged attack against that creature. If it hits, it deals weapon damage as normal, and the ally can move up to their speed as a free action, even if it isn\'t their turn.',
+      "You can initiate this counter in response to an attack being made against you or an ally by a creature you can see. Make a ranged attack against that creature. If it hits, it deals weapon damage as normal, and the ally can move up to their speed as a free action, even if it isn't their turn.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'powe',
@@ -553,8 +553,7 @@ export const POWE_TEMPEST_GALE_MANEUVERS: ManeuverDefinition[] = [
     range: '50-foot line',
     area: '50-foot line',
     duration: 'Instant',
-    savingThrow:
-      'Reflex half (DC 17 + initiation modifier); Fortitude (same DC)',
+    savingThrow: 'Reflex half (DC 17 + initiation modifier); Fortitude (same DC)',
     description:
       'You create a 50-foot line that deals 15d6 points of damage. Creatures caught in the line can make a Reflex save to take half damage. Any creature that fails its Reflex save must also succeed at a Fortitude save or become dazed for one round.',
     prerequisites: { disciplineManeuversKnown: 2 },

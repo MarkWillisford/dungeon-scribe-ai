@@ -84,7 +84,7 @@ export const POWE_RIVEN_HOURGLASS_MANEUVERS: ManeuverDefinition[] = [
     duration: 'Instant',
     savingThrow: 'Will negates (DC 11 + initiation modifier)',
     description:
-      'Make a melee or ranged attack. If it hits, it deals weapon damage as normal, and the target must succeed at a Will save or be restricted to taking only a single move action or a single standard action (target\'s choice) on its next turn.',
+      "Make a melee or ranged attack. If it hits, it deals weapon damage as normal, and the target must succeed at a Will save or be restricted to taking only a single move action or a single standard action (target's choice) on its next turn.",
     prerequisites: {},
     source: {
       bookId: 'powe',
@@ -488,7 +488,7 @@ export const POWE_RIVEN_HOURGLASS_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      'You can initiate this counter at any time during another creature\'s turn. You immediately take a move action. You cannot initiate this counter more than once per round.',
+      "You can initiate this counter at any time during another creature's turn. You immediately take a move action. You cannot initiate this counter more than once per round.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'powe',
@@ -586,7 +586,7 @@ export const POWE_RIVEN_HOURGLASS_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      'You can initiate this counter at any time during another creature\'s turn. You immediately take a standard action as if you had readied it. You cannot initiate this counter more than once per round.',
+      "You can initiate this counter at any time during another creature's turn. You immediately take a standard action as if you had readied it. You cannot initiate this counter more than once per round.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'powe',

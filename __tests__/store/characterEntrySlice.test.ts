@@ -39,6 +39,20 @@ import reducer, {
   renameCompanion,
   updateCompanionEffectiveLevel,
   removeCompanionsGrantedByClass,
+  setCompanionAbilityOverride,
+  setCompanionHP,
+  swapCompanionForm,
+  setCompanionNotes,
+  addCompanionFeat,
+  removeCompanionFeatAt,
+  toggleCompanionTrick,
+  setCompanionSkillRank,
+  setCompanionBackground,
+  addCompanionTemplate,
+  removeCompanionTemplateAt,
+  updateCompanionTemplateAt,
+  equipCompanionMagicItem,
+  unequipCompanionMagicItem,
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,
@@ -1640,5 +1654,582 @@ describe('characterEntrySlice — companions', () => {
     );
     state = reducer(state, removeClass('class-druid'));
     expect(state.draft.companions).toHaveLength(1);
+  });
+
+  // ---- Phase 1.5: companion edit actions -----------------------------------
+
+  describe('companion edit actions', () => {
+    function seedCompanion() {
+      return reducer(
+        makeInitialState(),
+        addCompanion({
+          instanceId: 'comp-1',
+          sourceEntryId: 'wolf',
+          name: 'Shadow',
+          grantedBy: druidGrant(),
+          effectiveProgressionLevel: 10,
+        }),
+      );
+    }
+
+    it('setCompanionAbilityOverride: sets a STR override', () => {
+      let state = seedCompanion();
+      state = reducer(
+        state,
+        setCompanionAbilityOverride({ instanceId: 'comp-1', ability: 'STR', value: 20 }),
+      );
+      expect(state.draft.companions[0].abilityScoreOverrides.STR).toBe(20);
+    });
+
+    it('setCompanionAbilityOverride: clears an override with value null', () => {
+      let state = seedCompanion();
+      state = reducer(
+        state,
+        setCompanionAbilityOverride({ instanceId: 'comp-1', ability: 'STR', value: 20 }),
+      );
+      state = reducer(
+        state,
+        setCompanionAbilityOverride({ instanceId: 'comp-1', ability: 'STR', value: null }),
+      );
+      expect(state.draft.companions[0].abilityScoreOverrides.STR).toBeUndefined();
+    });
+
+    it('setCompanionAbilityOverride: no-op on unknown instanceId', () => {
+      const state = reducer(
+        seedCompanion(),
+        setCompanionAbilityOverride({ instanceId: 'missing', ability: 'DEX', value: 22 }),
+      );
+      expect(state.draft.companions[0].abilityScoreOverrides.DEX).toBeUndefined();
+    });
+
+    it('setCompanionHP: updates max field', () => {
+      const state = reducer(
+        seedCompanion(),
+        setCompanionHP({ instanceId: 'comp-1', field: 'max', value: 48 }),
+      );
+      expect(state.draft.companions[0].hp.max).toBe(48);
+    });
+
+    it('setCompanionHP: independently updates all four fields', () => {
+      let state = seedCompanion();
+      state = reducer(state, setCompanionHP({ instanceId: 'comp-1', field: 'max', value: 48 }));
+      state = reducer(state, setCompanionHP({ instanceId: 'comp-1', field: 'current', value: 32 }));
+      state = reducer(state, setCompanionHP({ instanceId: 'comp-1', field: 'temp', value: 5 }));
+      state = reducer(
+        state,
+        setCompanionHP({ instanceId: 'comp-1', field: 'nonlethal', value: 10 }),
+      );
+      expect(state.draft.companions[0].hp).toEqual({
+        max: 48,
+        current: 32,
+        temp: 5,
+        nonlethal: 10,
+      });
+    });
+
+    it('swapCompanionForm: changes sourceEntryId, preserves other fields', () => {
+      let state = seedCompanion();
+      state = reducer(
+        state,
+        setCompanionAbilityOverride({ instanceId: 'comp-1', ability: 'STR', value: 22 }),
+      );
+      state = reducer(state, swapCompanionForm({ instanceId: 'comp-1', sourceEntryId: 'leopard' }));
+      expect(state.draft.companions[0].sourceEntryId).toBe('leopard');
+      expect(state.draft.companions[0].name).toBe('Shadow');
+      expect(state.draft.companions[0].abilityScoreOverrides.STR).toBe(22);
+    });
+
+    it('setCompanionNotes: updates notes text', () => {
+      const state = reducer(
+        seedCompanion(),
+        setCompanionNotes({ instanceId: 'comp-1', notes: 'Prefers to flank.' }),
+      );
+      expect(state.draft.companions[0].notes).toBe('Prefers to flank.');
+    });
+
+    // ---- Phase 1.6: feats / tricks / skill ranks -------------------------
+
+    it('addCompanionFeat: appends a feat to the list', () => {
+      const state = reducer(
+        seedCompanion(),
+        addCompanionFeat({
+          instanceId: 'comp-1',
+          feat: {
+            featId: 'toughness',
+            name: 'Toughness',
+            hdWhenTaken: 3,
+            active: true,
+            choices: {},
+          },
+        }),
+      );
+      expect(state.draft.companions[0].feats).toHaveLength(1);
+      expect(state.draft.companions[0].feats[0].featId).toBe('toughness');
+    });
+
+    it('addCompanionFeat: allows duplicates (same featId twice)', () => {
+      let state = seedCompanion();
+      state = reducer(
+        state,
+        addCompanionFeat({
+          instanceId: 'comp-1',
+          feat: {
+            featId: 'toughness',
+            name: 'Toughness',
+            hdWhenTaken: 3,
+            active: true,
+            choices: {},
+          },
+        }),
+      );
+      state = reducer(
+        state,
+        addCompanionFeat({
+          instanceId: 'comp-1',
+          feat: {
+            featId: 'toughness',
+            name: 'Toughness',
+            hdWhenTaken: 6,
+            active: true,
+            choices: {},
+          },
+        }),
+      );
+      expect(state.draft.companions[0].feats).toHaveLength(2);
+    });
+
+    it('removeCompanionFeatAt: removes the feat at the given index', () => {
+      let state = seedCompanion();
+      state = reducer(
+        state,
+        addCompanionFeat({
+          instanceId: 'comp-1',
+          feat: {
+            featId: 'toughness',
+            name: 'Toughness',
+            hdWhenTaken: 3,
+            active: true,
+            choices: {},
+          },
+        }),
+      );
+      state = reducer(
+        state,
+        addCompanionFeat({
+          instanceId: 'comp-1',
+          feat: {
+            featId: 'weapon-focus',
+            name: 'Weapon Focus',
+            hdWhenTaken: 6,
+            active: true,
+            choices: {},
+          },
+        }),
+      );
+      state = reducer(state, removeCompanionFeatAt({ instanceId: 'comp-1', index: 0 }));
+      expect(state.draft.companions[0].feats.map((f) => f.featId)).toEqual(['weapon-focus']);
+    });
+
+    it('removeCompanionFeatAt: no-op on out-of-range index', () => {
+      const state = reducer(
+        seedCompanion(),
+        removeCompanionFeatAt({ instanceId: 'comp-1', index: 5 }),
+      );
+      expect(state.draft.companions[0].feats).toHaveLength(0);
+    });
+
+    it('toggleCompanionTrick: adds a trick the first time, removes it the second', () => {
+      let state = seedCompanion();
+      state = reducer(state, toggleCompanionTrick({ instanceId: 'comp-1', trick: 'attack' }));
+      expect(state.draft.companions[0].tricks).toEqual(['attack']);
+      state = reducer(state, toggleCompanionTrick({ instanceId: 'comp-1', trick: 'attack' }));
+      expect(state.draft.companions[0].tricks).toEqual([]);
+    });
+
+    it('toggleCompanionTrick: preserves other tricks on toggle', () => {
+      let state = seedCompanion();
+      state = reducer(state, toggleCompanionTrick({ instanceId: 'comp-1', trick: 'attack' }));
+      state = reducer(state, toggleCompanionTrick({ instanceId: 'comp-1', trick: 'stay' }));
+      state = reducer(state, toggleCompanionTrick({ instanceId: 'comp-1', trick: 'attack' }));
+      expect(state.draft.companions[0].tricks).toEqual(['stay']);
+    });
+
+    it('setCompanionSkillRank: sets ranks for a skill', () => {
+      const state = reducer(
+        seedCompanion(),
+        setCompanionSkillRank({ instanceId: 'comp-1', skill: 'Stealth', ranks: 3 }),
+      );
+      expect(state.draft.companions[0].skillRanks.Stealth).toBe(3);
+    });
+
+    it('setCompanionSkillRank: clears the key when ranks drops to 0', () => {
+      let state = reducer(
+        seedCompanion(),
+        setCompanionSkillRank({ instanceId: 'comp-1', skill: 'Stealth', ranks: 3 }),
+      );
+      state = reducer(
+        state,
+        setCompanionSkillRank({ instanceId: 'comp-1', skill: 'Stealth', ranks: 0 }),
+      );
+      expect(state.draft.companions[0].skillRanks.Stealth).toBeUndefined();
+    });
+
+    it('companion reducers: no-op on unknown instanceId', () => {
+      const base = seedCompanion();
+      const a = reducer(
+        base,
+        addCompanionFeat({
+          instanceId: 'missing',
+          feat: { featId: 'x', name: 'X', hdWhenTaken: 1, active: true, choices: {} },
+        }),
+      );
+      const b = reducer(a, toggleCompanionTrick({ instanceId: 'missing', trick: 'attack' }));
+      const c = reducer(
+        b,
+        setCompanionSkillRank({ instanceId: 'missing', skill: 'Stealth', ranks: 3 }),
+      );
+      expect(c.draft.companions[0].feats).toHaveLength(0);
+      expect(c.draft.companions[0].tricks).toHaveLength(0);
+      expect(c.draft.companions[0].skillRanks).toEqual({});
+    });
+
+    // ---- Phase 1.7: background / templates ---------------------------------
+
+    it('addCompanion: seeds background as an empty string', () => {
+      const state = seedCompanion();
+      expect(state.draft.companions[0].background).toBe('');
+    });
+
+    it('setCompanionBackground: stores the full narrative string', () => {
+      const state = reducer(
+        seedCompanion(),
+        setCompanionBackground({
+          instanceId: 'comp-1',
+          background: 'Raised in the Whisperwood. Bonded to Rissi at the Verdant Trial.',
+        }),
+      );
+      expect(state.draft.companions[0].background).toBe(
+        'Raised in the Whisperwood. Bonded to Rissi at the Verdant Trial.',
+      );
+    });
+
+    it('setCompanionBackground: overwrites, does not append', () => {
+      let state = reducer(
+        seedCompanion(),
+        setCompanionBackground({ instanceId: 'comp-1', background: 'first draft' }),
+      );
+      state = reducer(
+        state,
+        setCompanionBackground({ instanceId: 'comp-1', background: 'second draft' }),
+      );
+      expect(state.draft.companions[0].background).toBe('second draft');
+    });
+
+    it('addCompanionTemplate: appends an AppliedTemplate to the list', () => {
+      const state = reducer(
+        seedCompanion(),
+        addCompanionTemplate({
+          instanceId: 'comp-1',
+          template: {
+            templateId: 'celestial',
+            name: 'Celestial',
+            appliedAs: 'cr',
+            cr: 1,
+            acquisitionType: 'inherited',
+            paidTiers: [],
+            sourceId: 'celestial',
+            sourceRev: 1,
+          },
+        }),
+      );
+      expect(state.draft.companions[0].appliedTemplates).toHaveLength(1);
+      expect(state.draft.companions[0].appliedTemplates[0].templateId).toBe('celestial');
+    });
+
+    it('addCompanionTemplate: allows two instances of the same template', () => {
+      let state = seedCompanion();
+      const make = (): Parameters<typeof addCompanionTemplate>[0] => ({
+        instanceId: 'comp-1',
+        template: {
+          templateId: 'advanced',
+          name: 'Advanced',
+          appliedAs: 'cr',
+          cr: 1,
+          acquisitionType: 'either',
+          paidTiers: [],
+          sourceId: 'advanced',
+          sourceRev: 1,
+        },
+      });
+      state = reducer(state, addCompanionTemplate(make()));
+      state = reducer(state, addCompanionTemplate(make()));
+      expect(state.draft.companions[0].appliedTemplates).toHaveLength(2);
+    });
+
+    it('removeCompanionTemplateAt: removes the template at the given index', () => {
+      let state = seedCompanion();
+      for (const id of ['half-celestial', 'advanced', 'young']) {
+        state = reducer(
+          state,
+          addCompanionTemplate({
+            instanceId: 'comp-1',
+            template: {
+              templateId: id,
+              name: id,
+              appliedAs: 'cr',
+              cr: 1,
+              acquisitionType: 'inherited',
+              paidTiers: [],
+              sourceId: id,
+              sourceRev: 1,
+            },
+          }),
+        );
+      }
+      state = reducer(state, removeCompanionTemplateAt({ instanceId: 'comp-1', index: 1 }));
+      expect(state.draft.companions[0].appliedTemplates.map((t) => t.templateId)).toEqual([
+        'half-celestial',
+        'young',
+      ]);
+    });
+
+    it('removeCompanionTemplateAt: no-op on out-of-range index', () => {
+      const state = reducer(
+        seedCompanion(),
+        removeCompanionTemplateAt({ instanceId: 'comp-1', index: 4 }),
+      );
+      expect(state.draft.companions[0].appliedTemplates).toHaveLength(0);
+    });
+
+    it('updateCompanionTemplateAt: patches a single field', () => {
+      let state = reducer(
+        seedCompanion(),
+        addCompanionTemplate({
+          instanceId: 'comp-1',
+          template: {
+            templateId: 'fiendish',
+            name: 'Fiendish',
+            appliedAs: 'cr',
+            cr: 1,
+            acquisitionType: 'inherited',
+            paidTiers: [],
+            sourceId: 'fiendish',
+            sourceRev: 1,
+          },
+        }),
+      );
+      state = reducer(
+        state,
+        updateCompanionTemplateAt({
+          instanceId: 'comp-1',
+          index: 0,
+          patch: { acquisitionType: 'acquired', acquiredAtCharacterLevel: 8 },
+        }),
+      );
+      expect(state.draft.companions[0].appliedTemplates[0].acquisitionType).toBe('acquired');
+      expect(state.draft.companions[0].appliedTemplates[0].acquiredAtCharacterLevel).toBe(8);
+      // Other fields untouched.
+      expect(state.draft.companions[0].appliedTemplates[0].templateId).toBe('fiendish');
+    });
+
+    it('updateCompanionTemplateAt: can change applied-as from LA to CR', () => {
+      let state = reducer(
+        seedCompanion(),
+        addCompanionTemplate({
+          instanceId: 'comp-1',
+          template: {
+            templateId: 'aasimar',
+            name: 'Aasimar',
+            appliedAs: 'la',
+            la: 1,
+            acquisitionType: 'inherited',
+            paidTiers: [],
+            sourceId: 'aasimar',
+            sourceRev: 1,
+          },
+        }),
+      );
+      state = reducer(
+        state,
+        updateCompanionTemplateAt({
+          instanceId: 'comp-1',
+          index: 0,
+          patch: { appliedAs: 'cr', cr: 1, la: undefined },
+        }),
+      );
+      expect(state.draft.companions[0].appliedTemplates[0].appliedAs).toBe('cr');
+      expect(state.draft.companions[0].appliedTemplates[0].cr).toBe(1);
+      expect(state.draft.companions[0].appliedTemplates[0].la).toBeUndefined();
+    });
+
+    it('updateCompanionTemplateAt: no-op on out-of-range index', () => {
+      const state = reducer(
+        seedCompanion(),
+        updateCompanionTemplateAt({
+          instanceId: 'comp-1',
+          index: 7,
+          patch: { acquisitionType: 'acquired' },
+        }),
+      );
+      expect(state.draft.companions[0].appliedTemplates).toHaveLength(0);
+    });
+
+    it('1.7 reducers: no-op on unknown instanceId', () => {
+      const base = seedCompanion();
+      const a = reducer(base, setCompanionBackground({ instanceId: 'missing', background: 'x' }));
+      const b = reducer(
+        a,
+        addCompanionTemplate({
+          instanceId: 'missing',
+          template: {
+            templateId: 'x',
+            name: 'X',
+            appliedAs: 'cr',
+            cr: 1,
+            acquisitionType: 'either',
+            paidTiers: [],
+            sourceId: 'x',
+            sourceRev: 1,
+          },
+        }),
+      );
+      const c = reducer(b, removeCompanionTemplateAt({ instanceId: 'missing', index: 0 }));
+      const d = reducer(
+        c,
+        updateCompanionTemplateAt({
+          instanceId: 'missing',
+          index: 0,
+          patch: { acquisitionType: 'acquired' },
+        }),
+      );
+      expect(d.draft.companions[0].background).toBe('');
+      expect(d.draft.companions[0].appliedTemplates).toHaveLength(0);
+    });
+
+    // ---- Phase 1.7: equipment ---------------------------------------------
+
+    const makeItem = (
+      overrides: Partial<Parameters<typeof equipCompanionMagicItem>[0]['item']> = {},
+    ): Parameters<typeof equipCompanionMagicItem>[0]['item'] => ({
+      instanceId: 'item-1',
+      definitionId: 'amulet-of-natural-armor',
+      name: 'Amulet of Natural Armor +1',
+      equipped: false,
+      identified: true,
+      ...overrides,
+    });
+
+    it('equipCompanionMagicItem: adds item to magicItems and maps slot→instance', () => {
+      const state = reducer(
+        seedCompanion(),
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'neck',
+          item: makeItem(),
+        }),
+      );
+      const comp = state.draft.companions[0];
+      expect(comp.equipment.magicItems).toHaveLength(1);
+      expect(comp.equipment.magicItems[0].instanceId).toBe('item-1');
+      expect(comp.equipment.magicItems[0].equipped).toBe(true);
+      expect(comp.equipment.magicItems[0].equippedSlot).toBe('neck');
+      expect(comp.equipment.equippedSlots['neck']).toBe('item-1');
+    });
+
+    it('equipCompanionMagicItem: ring slot tags instance as ring_left', () => {
+      const state = reducer(
+        seedCompanion(),
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'ring',
+          item: makeItem({ instanceId: 'ring-1', name: 'Ring of Protection +1' }),
+        }),
+      );
+      const comp = state.draft.companions[0];
+      expect(comp.equipment.magicItems[0].equippedSlot).toBe('ring_left');
+      expect(comp.equipment.equippedSlots['ring']).toBe('ring-1');
+    });
+
+    it('equipCompanionMagicItem: replacing in a slot displaces the prior item', () => {
+      let state = reducer(
+        seedCompanion(),
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'neck',
+          item: makeItem({ instanceId: 'item-1', name: 'Amulet A' }),
+        }),
+      );
+      state = reducer(
+        state,
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'neck',
+          item: makeItem({ instanceId: 'item-2', name: 'Amulet B' }),
+        }),
+      );
+      const comp = state.draft.companions[0];
+      expect(comp.equipment.magicItems).toHaveLength(1);
+      expect(comp.equipment.magicItems[0].instanceId).toBe('item-2');
+      expect(comp.equipment.equippedSlots['neck']).toBe('item-2');
+    });
+
+    it('equipCompanionMagicItem: different slots coexist', () => {
+      let state = reducer(
+        seedCompanion(),
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'neck',
+          item: makeItem({ instanceId: 'item-1' }),
+        }),
+      );
+      state = reducer(
+        state,
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'armor',
+          item: makeItem({ instanceId: 'item-2', name: 'Barding +1' }),
+        }),
+      );
+      const comp = state.draft.companions[0];
+      expect(comp.equipment.magicItems).toHaveLength(2);
+      expect(Object.keys(comp.equipment.equippedSlots)).toHaveLength(2);
+    });
+
+    it('unequipCompanionMagicItem: removes the item and clears the slot entry', () => {
+      let state = reducer(
+        seedCompanion(),
+        equipCompanionMagicItem({
+          instanceId: 'comp-1',
+          slot: 'neck',
+          item: makeItem(),
+        }),
+      );
+      state = reducer(state, unequipCompanionMagicItem({ instanceId: 'comp-1', slot: 'neck' }));
+      const comp = state.draft.companions[0];
+      expect(comp.equipment.magicItems).toHaveLength(0);
+      expect(comp.equipment.equippedSlots['neck']).toBeUndefined();
+    });
+
+    it('unequipCompanionMagicItem: no-op when slot is empty', () => {
+      const state = reducer(
+        seedCompanion(),
+        unequipCompanionMagicItem({ instanceId: 'comp-1', slot: 'neck' }),
+      );
+      expect(state.draft.companions[0].equipment.magicItems).toHaveLength(0);
+    });
+
+    it('equipment reducers: no-op on unknown instanceId', () => {
+      const base = seedCompanion();
+      const a = reducer(
+        base,
+        equipCompanionMagicItem({
+          instanceId: 'missing',
+          slot: 'neck',
+          item: makeItem(),
+        }),
+      );
+      const b = reducer(a, unequipCompanionMagicItem({ instanceId: 'missing', slot: 'neck' }));
+      expect(b.draft.companions[0].equipment.magicItems).toHaveLength(0);
+    });
   });
 });

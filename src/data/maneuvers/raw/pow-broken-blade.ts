@@ -70,7 +70,7 @@ export const POW_BROKEN_BLADE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'By mimicking the speed and piercing power of the legendary shattered blade of the founder of this discipline, the disciple makes a hard jabbing strike at his opponent\'s vulnerable spots for maximum pain. The initiator makes an attack against his target foe and if successful, the target is staggered for one round in addition to normal damage.',
+      "By mimicking the speed and piercing power of the legendary shattered blade of the founder of this discipline, the disciple makes a hard jabbing strike at his opponent's vulnerable spots for maximum pain. The initiator makes an attack against his target foe and if successful, the target is staggered for one round in addition to normal damage.",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -110,7 +110,7 @@ export const POW_BROKEN_BLADE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'With a quick handspring into a cartwheel or flip, the disciple of the Broken Blade levels a powerful axe kick at his foe. The initiator must make an Acrobatics check with a DC of 15; if successful the initiator may either move 10-ft. towards or away from a target creature without provoking attacks of opportunity. The initiator makes his unarmed attack roll (before he moves if he\'s moving away, or after he moves if he\'s approaching a target) and if successful, this kick inflicts an additional 2d6 points of damage.',
+      "With a quick handspring into a cartwheel or flip, the disciple of the Broken Blade levels a powerful axe kick at his foe. The initiator must make an Acrobatics check with a DC of 15; if successful the initiator may either move 10-ft. towards or away from a target creature without provoking attacks of opportunity. The initiator makes his unarmed attack roll (before he moves if he's moving away, or after he moves if he's approaching a target) and if successful, this kick inflicts an additional 2d6 points of damage.",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -148,7 +148,7 @@ export const POW_BROKEN_BLADE_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'By striking at the weapon-wielding arm of his opponent, the disciple of the Broken Blade can cleverly disarm his opponent and potentially even bring his foe\'s weapon to bear against him. The initiator makes an attack as normal upon his foe, if successful, the initiator may make a free disarm attempt against the opponent without provoking attacks of opportunity. If he is unarmed, he may take the weapon and use it if the disarm attempt is successful or he may drop it.',
+      "By striking at the weapon-wielding arm of his opponent, the disciple of the Broken Blade can cleverly disarm his opponent and potentially even bring his foe's weapon to bear against him. The initiator makes an attack as normal upon his foe, if successful, the initiator may make a free disarm attempt against the opponent without provoking attacks of opportunity. If he is unarmed, he may take the weapon and use it if the disarm attempt is successful or he may drop it.",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,

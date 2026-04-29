@@ -77,7 +77,7 @@ export const POW_STANCES_2: StanceDefinition[] = [
     disciplineId: 'silver-crane',
     level: 8,
     description:
-      'The user gains spell resistance equal to 15 + his initiator level and a +4 sacred bonus to saving throws. Effects that fail to pass the initiator\'s spell resistance restore twice the level of the effect in hit points to the disciple.',
+      "The user gains spell resistance equal to 15 + his initiator level and a +4 sacred bonus to saving throws. Effects that fail to pass the initiator's spell resistance restore twice the level of the effect in hit points to the disciple.",
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -93,7 +93,7 @@ export const POW_STANCES_2: StanceDefinition[] = [
     disciplineId: 'solar-wind',
     level: 1,
     description:
-      'Using the principles of shadow and light, the Solar Wind disciple is capable of making phantom copies of his ammunition for use in combat. While active, the disciple may create semi-real copies of arrows, bolts, bullets, or throwing weapons as a free action if he possesses at least one. Weapons requiring reload (crossbows, firearms) are fully reloaded as a move action (swift action with Rapid Reload feat). Magical properties don\'t copy -- only base mundane properties transfer. Once used, phantom ammunition disappears immediately. Magical properties of the weapon itself transfer to the ammunition. Thrown weapon copies manifest only magical enhancements, fading after use. This is a supernatural ability.',
+      "Using the principles of shadow and light, the Solar Wind disciple is capable of making phantom copies of his ammunition for use in combat. While active, the disciple may create semi-real copies of arrows, bolts, bullets, or throwing weapons as a free action if he possesses at least one. Weapons requiring reload (crossbows, firearms) are fully reloaded as a move action (swift action with Rapid Reload feat). Magical properties don't copy -- only base mundane properties transfer. Once used, phantom ammunition disappears immediately. Magical properties of the weapon itself transfer to the ammunition. Thrown weapon copies manifest only magical enhancements, fading after use. This is a supernatural ability.",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -107,7 +107,7 @@ export const POW_STANCES_2: StanceDefinition[] = [
     disciplineId: 'solar-wind',
     level: 1,
     description:
-      'A Solar Wind disciple learns to cause his ammunition to pierce like the burning rays of the sun itself. While maintaining this stance, the disciple\'s ranged attacks inflict an additional 1d6 points of fire damage, increasing by 1d6 every eight initiator levels. This is a supernatural ability.',
+      "A Solar Wind disciple learns to cause his ammunition to pierce like the burning rays of the sun itself. While maintaining this stance, the disciple's ranged attacks inflict an additional 1d6 points of fire damage, increasing by 1d6 every eight initiator levels. This is a supernatural ability.",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -135,7 +135,7 @@ export const POW_STANCES_2: StanceDefinition[] = [
     disciplineId: 'solar-wind',
     level: 6,
     description:
-      'The Solar Wind disciple has honed his incredible senses and while in this stance uses his inner vision to strike his foes with his most deadly attacks. The disciple ignores partial concealment and cover, and doubles the critical threat range on ranged weapons. Other critical threat range effects don\'t stack with this benefit.',
+      "The Solar Wind disciple has honed his incredible senses and while in this stance uses his inner vision to strike his foes with his most deadly attacks. The disciple ignores partial concealment and cover, and doubles the critical threat range on ranged weapons. Other critical threat range effects don't stack with this benefit.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -149,7 +149,7 @@ export const POW_STANCES_2: StanceDefinition[] = [
     disciplineId: 'solar-wind',
     level: 8,
     description:
-      'A master of the Solar Wind, the disciple may attack with the speed of the sun\'s rays. While in this stance during full attacks, the disciple makes two additional ranged weapon attacks using his full base attack bonus and adds his initiation modifier to damage on these attacks. This is a supernatural ability.',
+      "A master of the Solar Wind, the disciple may attack with the speed of the sun's rays. While in this stance during full attacks, the disciple makes two additional ranged weapon attacks using his full base attack bonus and adds his initiation modifier to damage on these attacks. This is a supernatural ability.",
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -307,7 +307,7 @@ export const POW_STANCES_2: StanceDefinition[] = [
     disciplineId: 'thrashing-dragon',
     level: 7,
     description:
-      'While in this stance and wielding two weapons, the initiator suffers a -2 penalty to AC and gains a damage bonus to all melee attacks and unarmed strikes equal to 2d6 + the initiator\'s initiation modifier.',
+      "While in this stance and wielding two weapons, the initiator suffers a -2 penalty to AC and gains a damage bonus to all melee attacks and unarmed strikes equal to 2d6 + the initiator's initiation modifier.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -321,7 +321,7 @@ export const POW_STANCES_2: StanceDefinition[] = [
     disciplineId: 'thrashing-dragon',
     level: 8,
     description:
-      'When wielding two weapons in this stance, all melee attacks and unarmed strikes made ignore a target\'s damage reduction and inflict bleeding wounds on foes, inflicting 2d4 points of bleed damage per round.',
+      "When wielding two weapons in this stance, all melee attacks and unarmed strikes made ignore a target's damage reduction and inflict bleeding wounds on foes, inflicting 2d4 points of bleed damage per round.",
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,

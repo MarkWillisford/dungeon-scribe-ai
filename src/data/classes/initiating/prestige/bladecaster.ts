@@ -71,19 +71,19 @@ export const BLADECASTER_CLASS: ExpandedClassData = {
       name: 'Maneuvers Readied',
       level: 1,
       description:
-        'A bladecaster gains additional maneuvers readied at 3rd, 6th, and 9th levels as shown on the class table. These additional readied maneuvers are added to the character\'s total from his base initiating class.',
+        "A bladecaster gains additional maneuvers readied at 3rd, 6th, and 9th levels as shown on the class table. These additional readied maneuvers are added to the character's total from his base initiating class.",
     },
     {
       name: 'Stances Known',
       level: 1,
       description:
-        'A bladecaster gains additional stances known at 4th, 6th, and 10th levels as shown on the class table. These additional stances are added to the character\'s total from his base initiating class.',
+        "A bladecaster gains additional stances known at 4th, 6th, and 10th levels as shown on the class table. These additional stances are added to the character's total from his base initiating class.",
     },
     {
       name: 'Stance of Arcane Steel',
       level: 1,
       description:
-        'The bladecaster gains a special stance equivalent to a 3rd-level stance that he may assume as a swift action. While in this stance, as a free action, the bladecaster may sacrifice uncast spells or spell slots to grant himself one of the following bonuses for one round (the duration increases to two rounds at 5th level and three rounds at 9th level): Arcane Edge: The bladecaster gains an insight bonus on attack rolls equal to the spell\'s level. Eldritch Smite: The bladecaster adds 1d6 points of extra damage per level of the spell sacrificed. If either the bladecaster\'s weapon or the spell sacrificed has an elemental property (acid, cold, electricity, fire, or sonic), the damage is of that type; otherwise, the damage is force damage. Defensive Field: The bladecaster gains a bonus to AC equal to the spell\'s level. Grace of the Arcane: The bladecaster gains an insight bonus on Fortitude and Reflex saving throws equal to the spell\'s level. Energy Shield: The bladecaster gains resistance to acid, cold, electricity, fire, or sonic (chosen when the spell is sacrificed) equal to 5 times the spell\'s level.',
+        "The bladecaster gains a special stance equivalent to a 3rd-level stance that he may assume as a swift action. While in this stance, as a free action, the bladecaster may sacrifice uncast spells or spell slots to grant himself one of the following bonuses for one round (the duration increases to two rounds at 5th level and three rounds at 9th level): Arcane Edge: The bladecaster gains an insight bonus on attack rolls equal to the spell's level. Eldritch Smite: The bladecaster adds 1d6 points of extra damage per level of the spell sacrificed. If either the bladecaster's weapon or the spell sacrificed has an elemental property (acid, cold, electricity, fire, or sonic), the damage is of that type; otherwise, the damage is force damage. Defensive Field: The bladecaster gains a bonus to AC equal to the spell's level. Grace of the Arcane: The bladecaster gains an insight bonus on Fortitude and Reflex saving throws equal to the spell's level. Energy Shield: The bladecaster gains resistance to acid, cold, electricity, fire, or sonic (chosen when the spell is sacrificed) equal to 5 times the spell's level.",
     },
     {
       name: 'Spellcasting Advancement',
@@ -95,7 +95,7 @@ export const BLADECASTER_CLASS: ExpandedClassData = {
       name: 'Arcane Steel',
       level: 2,
       description:
-        'Whenever a bladecaster casts an arcane spell, he gains a defense field of energy that protects him from harm. The bladecaster gains temporary hit points equal to twice the spell\'s level. These temporary hit points stack with themselves and last until the end of the encounter or until depleted.',
+        "Whenever a bladecaster casts an arcane spell, he gains a defense field of energy that protects him from harm. The bladecaster gains temporary hit points equal to twice the spell's level. These temporary hit points stack with themselves and last until the end of the encounter or until depleted.",
     },
     {
       name: 'Arcane Recovery',
@@ -104,34 +104,34 @@ export const BLADECASTER_CLASS: ExpandedClassData = {
         'As a free action, the character may expend a prepared spell or spell slot to recover an expended maneuver. The bladecaster sacrifices a prepared arcane spell or spell slot of a level equal to or greater than the maneuver level to be recovered, and the maneuver is instantly recovered. The bladecaster gains a +2 circumstance bonus to his caster level on the next arcane spell he casts (within one minute of using arcane recovery; multiple recoveries do not stack or accrue multiple uses).',
     },
     {
-      name: 'Battlecaster\'s Strike',
+      name: "Battlecaster's Strike",
       level: 4,
       description:
-        'When the bladecaster initiates a martial strike, as a swift action he may cast an arcane spell (with a range of touch and a level equal to or less than the level of the strike initiated) against the same target as the strike. The bladecaster must cast the spell defensively if he is threatened by any opponent. This ability may be used a number of times per day equal to 1 + the bladecaster\'s initiator modifier (minimum of 1).',
+        "When the bladecaster initiates a martial strike, as a swift action he may cast an arcane spell (with a range of touch and a level equal to or less than the level of the strike initiated) against the same target as the strike. The bladecaster must cast the spell defensively if he is threatened by any opponent. This ability may be used a number of times per day equal to 1 + the bladecaster's initiator modifier (minimum of 1).",
     },
     {
       name: 'Arcane Ruin',
       level: 5,
       description:
-        'A foe damaged by the bladecaster\'s martial strikes finds that it suffers increased difficulties resisting the bladecaster\'s magic, suffering a -2 penalty to its Armor Class and saving throws against the bladecaster\'s arcane spells on subsequent rounds for the remainder of the encounter, or until the bladecaster recovers his maneuvers.',
+        "A foe damaged by the bladecaster's martial strikes finds that it suffers increased difficulties resisting the bladecaster's magic, suffering a -2 penalty to its Armor Class and saving throws against the bladecaster's arcane spells on subsequent rounds for the remainder of the encounter, or until the bladecaster recovers his maneuvers.",
     },
     {
       name: 'Martial Counterspell',
       level: 7,
       description:
-        'If the bladecaster is targeted by or subjected to a spell or spell-like ability, he may as an immediate action expend a readied counter and make a Spellcraft check (DC 15 + the spell\'s level) to identify the spell. If successful, he then makes an initiator level check (1d20 + initiator level) against a DC of 11 + the caster level of the spell to counter it. If both checks succeed, the spell is countered as if by dispel magic.',
+        "If the bladecaster is targeted by or subjected to a spell or spell-like ability, he may as an immediate action expend a readied counter and make a Spellcraft check (DC 15 + the spell's level) to identify the spell. If successful, he then makes an initiator level check (1d20 + initiator level) against a DC of 11 + the caster level of the spell to counter it. If both checks succeed, the spell is countered as if by dispel magic.",
     },
     {
       name: 'Improved Battlecasting',
       level: 9,
       description:
-        'The bladecaster may utilize ranged touch spells against foes as if they were melee touch spells when utilizing his battlecaster\'s strike.',
+        "The bladecaster may utilize ranged touch spells against foes as if they were melee touch spells when utilizing his battlecaster's strike.",
     },
     {
       name: 'Arcane Assault',
       level: 10,
       description:
-        'The bladecaster may activate this ability as a free action when he casts a spell that requires an attack roll. He may initiate a strike as a free part of casting that spell, using the spell in place of his normal ranged or melee attack. The spell\'s range is reduced to 30 feet or the spell\'s range, whichever is smaller. If the target has spell resistance, the bladecaster must overcome it or the maneuver portion of the attack also fails. If the spell allows a saving throw that negates its effects, a successful save also negates the maneuver. This ability may be used a number of times per day equal to 1 + the bladecaster\'s initiator modifier.',
+        "The bladecaster may activate this ability as a free action when he casts a spell that requires an attack roll. He may initiate a strike as a free part of casting that spell, using the spell in place of his normal ranged or melee attack. The spell's range is reduced to 30 feet or the spell's range, whichever is smaller. If the target has spell resistance, the bladecaster must overcome it or the maneuver portion of the attack also fails. If the spell allows a saving throw that negates its effects, a successful save also negates the maneuver. This ability may be used a number of times per day equal to 1 + the bladecaster's initiator modifier.",
     },
   ],
   spellcasting: { type: 'None', casting: 'None' },

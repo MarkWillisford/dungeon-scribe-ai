@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { ClassChoiceRow } from './ClassChoiceRow';
@@ -763,10 +764,10 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
               })}
             </View>
           )}
-
-          <CompanionSection entry={entry} />
         </View>
       )}
+
+      <CompanionSection entry={entry} />
 
       {/* Prereq status */}
       <View style={[styles.prereqRow, { borderTopColor: colors.border.DEFAULT }]}>
@@ -817,10 +818,17 @@ interface CompanionSectionProps {
 function CompanionSection({ entry }: CompanionSectionProps) {
   const { fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const [addPickerOpen, setAddPickerOpen] = useState(false);
   const [companionEntryById, setCompanionEntryById] = useState<Map<string, AnimalCompanionEntry>>(
     new Map(),
   );
+
+  // The companion builder route includes the character ID segment; for an
+  // unsaved draft we use `draft` as a stable placeholder (the screen reads
+  // from draft state anyway).
+  const originalCharacterId = useAppSelector((state) => state.characterEntry.originalCharacterId);
+  const routeCharacterId = originalCharacterId ?? 'draft';
 
   const grantedCompanions = useAppSelector((state) =>
     state.characterEntry.draft.companions.filter(
@@ -882,7 +890,9 @@ function CompanionSection({ entry }: CompanionSectionProps) {
           entry={companionEntryById.get(comp.sourceEntryId)}
           grantedByLabel={grantedByLabel}
           onRemove={() => dispatch(removeCompanion(comp.instanceId))}
-          // Edit disabled until Phase 1.5 ships the builder screen.
+          onEdit={() =>
+            router.push(`/characters/${routeCharacterId}/companions/${comp.instanceId}`)
+          }
         />
       ))}
 

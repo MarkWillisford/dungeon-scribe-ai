@@ -33,7 +33,7 @@ export const POW_OVERFLOW_A_MANEUVERS: ManeuverDefinition[] = [
     target: 'All adjacent enemies',
     duration: 'Instant',
     description:
-      'The disciple leaps and delivers spinning kicks to all surrounding opponents. Each successful strike inflicts an additional 10d6 points of damage that ignores the target\'s damage reduction. Foes that are struck are also knocked prone from the force of this assault.',
+      "The disciple leaps and delivers spinning kicks to all surrounding opponents. Each successful strike inflicts an additional 10d6 points of damage that ignores the target's damage reduction. Foes that are struck are also knocked prone from the force of this assault.",
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -134,7 +134,7 @@ export const POW_OVERFLOW_A_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      "The warrior makes an opposed attack roll using base attack bonus plus shield bonus against an incoming attack. Success negates the strike entirely. If the opposed check fails, the disciple gains DR 40/- against that attack instead.",
+      'The warrior makes an opposed attack roll using base attack bonus plus shield bonus against an incoming attack. Success negates the strike entirely. If the opposed check fails, the disciple gains DR 40/- against that attack instead.',
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -251,7 +251,7 @@ export const POW_OVERFLOW_A_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'The master of Primal Fury performs a charge and makes a full attack at the charge\'s end. Each successful attack ignores damage reduction and adds an additional 4d6 damage.',
+      "The master of Primal Fury performs a charge and makes a full attack at the charge's end. Each successful attack ignores damage reduction and adds an additional 4d6 damage.",
     prerequisites: { disciplineManeuversKnown: 4 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -354,7 +354,7 @@ export const POW_OVERFLOW_A_MANEUVERS: ManeuverDefinition[] = [
     duration: 'Instant; 1d4 rounds (slow effect)',
     savingThrow: 'Will (DC 19 + initiation modifier)',
     description:
-      'This ultimate Silver Crane technique adds 80 sacred damage and dazes opponents for one round. Against undead or evil outsiders, damage increases to 120 and they must succeed on a Will save or be instantly slain. Successful saves result in the target becoming hindered by holy power, being under the effects of a slow spell for rounds equal to the initiator\'s modifier.',
+      "This ultimate Silver Crane technique adds 80 sacred damage and dazes opponents for one round. Against undead or evil outsiders, damage increases to 120 and they must succeed on a Will save or be instantly slain. Successful saves result in the target becoming hindered by holy power, being under the effects of a slow spell for rounds equal to the initiator's modifier.",
     prerequisites: { disciplineManeuversKnown: 4 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,

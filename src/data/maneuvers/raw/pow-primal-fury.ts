@@ -149,7 +149,7 @@ export const POW_PRIMAL_FURY_MANEUVERS: ManeuverDefinition[] = [
     target: 'One attack',
     duration: 'Instant',
     description:
-      'Upon a successful charge attack, the initiator\'s charge attack inflicts an additional 10 points of damage in addition to the normal +2 to hit.',
+      "Upon a successful charge attack, the initiator's charge attack inflicts an additional 10 points of damage in addition to the normal +2 to hit.",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -168,7 +168,7 @@ export const POW_PRIMAL_FURY_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'The initiator makes a charge attack and makes a full attack at the end of the charge against the target creature. He must focus all of these attacks against a single target, and if the target is brought to 0 or fewer hit points, then any remaining attacks are lost as the initiator savages the foe\'s body with the remaining attacks.',
+      "The initiator makes a charge attack and makes a full attack at the end of the charge against the target creature. He must focus all of these attacks against a single target, and if the target is brought to 0 or fewer hit points, then any remaining attacks are lost as the initiator savages the foe's body with the remaining attacks.",
     prerequisites: {},
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -189,7 +189,7 @@ export const POW_PRIMAL_FURY_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      'When being attacked, this counter is initiated after a successful hit but before damage is inflicted. The initiator then makes an immediate sunder attempt with a +2 circumstance bonus on his foe\'s weapon (which does not provoke attacks of opportunity), and if the weapon is reduced to half of its hit points, then it gains the broken condition and the disciple takes half damage from the attack. If this sunder attempt reduces the opponent\'s weapon to 0 hit points, then the weapon shatters and the disciple takes no damage. If the initiator possesses the Greater Sunder feat, excess damage is applied to the target as per normal.',
+      "When being attacked, this counter is initiated after a successful hit but before damage is inflicted. The initiator then makes an immediate sunder attempt with a +2 circumstance bonus on his foe's weapon (which does not provoke attacks of opportunity), and if the weapon is reduced to half of its hit points, then it gains the broken condition and the disciple takes half damage from the attack. If this sunder attempt reduces the opponent's weapon to 0 hit points, then the weapon shatters and the disciple takes no damage. If the initiator possesses the Greater Sunder feat, excess damage is applied to the target as per normal.",
     prerequisites: { disciplineManeuversKnown: 1 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -287,7 +287,7 @@ export const POW_PRIMAL_FURY_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      'The initiator makes a charge attack against a target foe and if successful, he may spend a swift action to add an additional 20 points of damage to that single attack and ignores the target\'s damage reduction.',
+      "The initiator makes a charge attack against a target foe and if successful, he may spend a swift action to add an additional 20 points of damage to that single attack and ignores the target's damage reduction.",
     prerequisites: { disciplineManeuversKnown: 1 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -306,7 +306,7 @@ export const POW_PRIMAL_FURY_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      'The initiator makes an opposed Survival check against the attacker\'s melee or ranged attack roll, including spells or supernatural effects. If the initiator\'s Survival check equals or exceeds the attack roll, then the attack is negated.',
+      "The initiator makes an opposed Survival check against the attacker's melee or ranged attack roll, including spells or supernatural effects. If the initiator's Survival check equals or exceeds the attack roll, then the attack is negated.",
     prerequisites: { disciplineManeuversKnown: 1 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -327,7 +327,7 @@ export const POW_PRIMAL_FURY_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'As a full attack action, the initiator makes an attack roll at full base attack bonus against each target within his reach with each weapon he is currently wielding (including natural attacks; armor and shield spikes always count as wielded weapons), and each successful attack inflicts an additional 4d6 points of damage. After initiating this maneuver, the initiator\'s focus on offense causes his AC to suffer a -2 penalty until his next turn.',
+      "As a full attack action, the initiator makes an attack roll at full base attack bonus against each target within his reach with each weapon he is currently wielding (including natural attacks; armor and shield spikes always count as wielded weapons), and each successful attack inflicts an additional 4d6 points of damage. After initiating this maneuver, the initiator's focus on offense causes his AC to suffer a -2 penalty until his next turn.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -486,7 +486,7 @@ export const POW_PRIMAL_FURY_MANEUVERS: ManeuverDefinition[] = [
     duration: 'Instant',
     savingThrow: 'Fortitude partial',
     description:
-      'Upon making a successful charge attack, the initiator may add an additional 40 points of damage to the attack as a swift action, and this attack ignores the target\'s damage reduction. Additionally, the target must make a successful Fortitude save (DC 17 + initiation modifier) to resist being stunned for 1 round (this effect does not stack with a maneuver that also has the potential to daze or stun an opponent; the initiator must choose which effect to use).',
+      "Upon making a successful charge attack, the initiator may add an additional 40 points of damage to the attack as a swift action, and this attack ignores the target's damage reduction. Additionally, the target must make a successful Fortitude save (DC 17 + initiation modifier) to resist being stunned for 1 round (this effect does not stack with a maneuver that also has the potential to daze or stun an opponent; the initiator must choose which effect to use).",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,

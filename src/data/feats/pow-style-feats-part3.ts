@@ -20,7 +20,7 @@ export const POW_STYLE_FEATS_PART3: FeatDefinition[] = [
     description:
       'Your mastery of the Steel Serpent discipline allows you to weaken foes with every strike. While using this style, whenever you hit a creature with a Steel Serpent maneuver, that creature takes a -1 penalty on attack rolls and to its AC for two rounds. This penalty increases by -1 at 5th character level and again at every five levels thereafter (to a maximum of -5 at 20th level). Multiple applications of this penalty do not stack; only the highest penalty applies.',
     shortDescription:
-      'Steel Serpent maneuvers impose a scaling penalty to the target\'s AC and attack rolls.',
+      "Steel Serpent maneuvers impose a scaling penalty to the target's AC and attack rolls.",
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -38,8 +38,7 @@ export const POW_STYLE_FEATS_PART3: FeatDefinition[] = [
     name: 'Steel Serpent Fangs',
     description:
       'Your venomous strikes exploit the weakness of injured foes. While using Steel Serpent Style, as a swift action you may expend a readied boost to treat all opponents currently suffering from ability damage as flat-footed until the start of your next turn.',
-    shortDescription:
-      'Expend a boost to treat ability-damaged opponents as flat-footed.',
+    shortDescription: 'Expend a boost to treat ability-damaged opponents as flat-footed.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -100,8 +99,7 @@ export const POW_STYLE_FEATS_PART3: FeatDefinition[] = [
     name: 'Veiled Moon Style',
     description:
       'Your mastery of the Veiled Moon discipline allows you to slip between the planes with each step. While using this style, you may treat up to 10 feet of your movement per round as teleportation at any point during your move, provided you do not exceed your total normal movement speed. You must have line of sight to your destination and cannot teleport into an occupied space. When charging, you can use this teleportation to bypass up to 5 feet of obstacles, treating bypassed squares as empty for the purpose of determining charge eligibility. This is a supernatural ability.',
-    shortDescription:
-      'Teleport up to 10 feet as part of your normal movement each round.',
+    shortDescription: 'Teleport up to 10 feet as part of your normal movement each round.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -119,8 +117,7 @@ export const POW_STYLE_FEATS_PART3: FeatDefinition[] = [
     name: 'Veiled Moon Shunt',
     description:
       'You tear open rifts in space to forcibly relocate your enemies. While using Veiled Moon Style, once per round when you hit with an attack, you can expend a readied maneuver as a free action to forcibly teleport your target. The target must succeed on a Will save (DC 10 + the expended maneuver\u2019s level + your highest initiation modifier) or be teleported to an unoccupied space within 30 feet that you can see. You may place the target in difficult terrain, in the air, or in other hazardous situations. This is a supernatural ability and counts as a Veiled Moon maneuver for the purpose of save DCs and abilities such as Discipline Focus.',
-    shortDescription:
-      'Expend a maneuver to forcibly teleport a creature you hit within 30 feet.',
+    shortDescription: 'Expend a maneuver to forcibly teleport a creature you hit within 30 feet.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],

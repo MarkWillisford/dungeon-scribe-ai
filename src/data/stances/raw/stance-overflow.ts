@@ -66,7 +66,7 @@ export const STANCE_OVERFLOW: StanceDefinition[] = [
     disciplineId: 'veiled-moon',
     level: 6,
     description:
-      'By channeling ethereal energies along his weapons and his body, the initiator becomes immersed in both worlds, being as solid on the Ethereal Plane as he is on the Material. While in this stance, the initiator\'s weapons, armor, and equipment are treated as if they had the ghost touch property.',
+      "By channeling ethereal energies along his weapons and his body, the initiator becomes immersed in both worlds, being as solid on the Ethereal Plane as he is on the Material. While in this stance, the initiator's weapons, armor, and equipment are treated as if they had the ghost touch property.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -96,7 +96,7 @@ export const STANCE_OVERFLOW: StanceDefinition[] = [
     disciplineId: 'black-seraph',
     level: 8,
     description:
-      'By opening one\'s self to the eternal hunger of the darkness that resides with the disciple, he may use himself as a filter for the life energies that feed this dark urge. At the end of the disciple\'s turn, he inflicts 2d6 points of profane damage on all living creatures within his 20-ft aura, gaining a like amount of temporary hit points. These temporary hit points persist until the end of the encounter, the initiator leaves this stance, or until they are lost. If an initiator already has a pool of temporary hit points from this stance, when it subsequently grants him new temporary hit points he either replaces his current pool with the new number or retains his current pool, whichever is greater. The initiator may exclude a number of allies from this damage equal to initiation modifier.',
+      "By opening one's self to the eternal hunger of the darkness that resides with the disciple, he may use himself as a filter for the life energies that feed this dark urge. At the end of the disciple's turn, he inflicts 2d6 points of profane damage on all living creatures within his 20-ft aura, gaining a like amount of temporary hit points. These temporary hit points persist until the end of the encounter, the initiator leaves this stance, or until they are lost. If an initiator already has a pool of temporary hit points from this stance, when it subsequently grants him new temporary hit points he either replaces his current pool with the new number or retains his current pool, whichever is greater. The initiator may exclude a number of allies from this damage equal to initiation modifier.",
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -112,7 +112,7 @@ export const STANCE_OVERFLOW: StanceDefinition[] = [
     disciplineId: 'cursed-razor',
     level: 8,
     description:
-      'This cursed aura steals beneficence from your enemies and gifts it to your allies. You supernaturally sense magic around you and can twist it to your advantage. While you maintain this stance, you automatically know which spells, powers, or magical effects are active upon any individual you see within 30 feet. In addition, at the beginning of each round, you may select a power, psi-like ability, spell, or spell-like ability affecting a hostile creature within 30 feet. Make a dispel check (1d20 + your initiator level) against the effect (DC 11 + the effect\'s caster or manifester level). If you succeed, the effect is suppressed for a number of rounds equal to your initiation modifier, and one of your allies within 30 feet gains the benefit of that effect for the same duration.',
+      "This cursed aura steals beneficence from your enemies and gifts it to your allies. You supernaturally sense magic around you and can twist it to your advantage. While you maintain this stance, you automatically know which spells, powers, or magical effects are active upon any individual you see within 30 feet. In addition, at the beginning of each round, you may select a power, psi-like ability, spell, or spell-like ability affecting a hostile creature within 30 feet. Make a dispel check (1d20 + your initiator level) against the effect (DC 11 + the effect's caster or manifester level). If you succeed, the effect is suppressed for a number of rounds equal to your initiation modifier, and one of your allies within 30 feet gains the benefit of that effect for the same duration.",
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -192,7 +192,7 @@ export const STANCE_OVERFLOW: StanceDefinition[] = [
     disciplineId: 'riven-hourglass',
     level: 8,
     description:
-      'Your control over your own time-stuff allows you to isolate your Hourglass from reality, causing you to move with unparalleled speed and grace and affording you protection from those who would manipulate your quintessence. While you maintain this stance, you gain immunity to slow effects and cannot become fatigued or exhausted. You can always act during surprise rounds, even if caught unaware. If an ally or opponent uses time stop within 50 feet, you may take one standard action during that spell\'s duration. Additionally, you gain an extra move or standard action each turn.',
+      "Your control over your own time-stuff allows you to isolate your Hourglass from reality, causing you to move with unparalleled speed and grace and affording you protection from those who would manipulate your quintessence. While you maintain this stance, you gain immunity to slow effects and cannot become fatigued or exhausted. You can always act during surprise rounds, even if caught unaware. If an ally or opponent uses time stop within 50 feet, you may take one standard action during that spell's duration. Additionally, you gain an extra move or standard action each turn.",
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,
@@ -240,7 +240,7 @@ export const STANCE_OVERFLOW: StanceDefinition[] = [
     disciplineId: 'tempest-gale',
     level: 8,
     description:
-      'Like the calm winds at the center of a hurricane, you are a bastion of serenity on the chaos of the battlefield. While you maintain this stance, you add your initiation modifier to damage rolls made with ranged weapons, you do not take penalties on attack rolls from attacking creatures beyond your weapon\'s first range increment, and ignore the effects of weather conditions and wind effects on your ranged attacks (including magical winds such as a wind wall spell). In addition, your ranged attacks ignore the AC bonus granted to targets by anything less than total cover, and the miss chance granted to targets by anything less than total concealment.',
+      "Like the calm winds at the center of a hurricane, you are a bastion of serenity on the chaos of the battlefield. While you maintain this stance, you add your initiation modifier to damage rolls made with ranged weapons, you do not take penalties on attack rolls from attacking creatures beyond your weapon's first range increment, and ignore the effects of weather conditions and wind effects on your ranged attacks (including magical winds such as a wind wall spell). In addition, your ranged attacks ignore the AC bonus granted to targets by anything less than total cover, and the miss chance granted to targets by anything less than total concealment.",
     prerequisites: { disciplineManeuversKnown: 3 },
     source: { bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' },
     isOfficial: false,

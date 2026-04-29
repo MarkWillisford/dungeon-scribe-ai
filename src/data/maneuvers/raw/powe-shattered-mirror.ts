@@ -37,7 +37,7 @@ export const POWE_SHATTERED_MIRROR_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'Make a melee attack. If it hits, it deals weapon damage as normal plus an additional 1d6 points of damage. You may use the target\'s next attack roll in place of one of your own attack rolls on your next turn. Using their attack roll in this way deals an extra 2d4 points of damage but does not threaten a critical hit.',
+      "Make a melee attack. If it hits, it deals weapon damage as normal plus an additional 1d6 points of damage. You may use the target's next attack roll in place of one of your own attack rolls on your next turn. Using their attack roll in this way deals an extra 2d4 points of damage but does not threaten a critical hit.",
     prerequisites: {},
     source: {
       bookId: 'powe',
@@ -83,7 +83,7 @@ export const POWE_SHATTERED_MIRROR_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'Make a Craft check using the target\'s AC as the DC, then make a melee attack. If the attack hits, it deals weapon damage as normal. If your Craft check succeeded, your target loses its shield bonus to AC and takes an additional 1d6 points of damage.',
+      "Make a Craft check using the target's AC as the DC, then make a melee attack. If the attack hits, it deals weapon damage as normal. If your Craft check succeeded, your target loses its shield bonus to AC and takes an additional 1d6 points of damage.",
     prerequisites: {},
     source: {
       bookId: 'powe',
@@ -201,7 +201,7 @@ export const POWE_SHATTERED_MIRROR_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      'You can initiate this counter in response to making a saving throw. Make a Craft check in place of your saving throw, using that result to determine the save\'s success or failure.',
+      "You can initiate this counter in response to making a saving throw. Make a Craft check in place of your saving throw, using that result to determine the save's success or failure.",
     prerequisites: {},
     source: {
       bookId: 'powe',
@@ -467,7 +467,7 @@ export const POWE_SHATTERED_MIRROR_MANEUVERS: ManeuverDefinition[] = [
     target: 'Armor, shield, or weapon',
     duration: 'See text',
     description:
-      'When you initiate this boost, choose another creature\'s armor, shield, or weapon within close range (25 feet + 5 feet per 2 initiator levels). A single piece of equipment wielded or worn by you of the same type as the targeted item gains the enhancement bonus and special properties of that item for a number of rounds equal to your initiation modifier, unless the properties are incompatible.',
+      "When you initiate this boost, choose another creature's armor, shield, or weapon within close range (25 feet + 5 feet per 2 initiator levels). A single piece of equipment wielded or worn by you of the same type as the targeted item gains the enhancement bonus and special properties of that item for a number of rounds equal to your initiation modifier, unless the properties are incompatible.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'powe',

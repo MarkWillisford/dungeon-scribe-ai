@@ -47,8 +47,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: "Black Seraph's Malevolence",
     description:
       'Your dark power punishes the fearful. While using Black Seraph Style, you treat creatures that are shaken, frightened, panicked, or cowering as if they were good-aligned for the purpose of dealing profane damage to them.',
-    shortDescription:
-      'Treat fear-afflicted creatures as good-aligned for profane damage.',
+    shortDescription: 'Treat fear-afflicted creatures as good-aligned for profane damage.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -66,8 +65,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Black Seraph Annihilation',
     description:
       'Your terrifying presence overwhelms even the most stalwart minds. While using Black Seraph Style, creatures within 30 feet of you can be affected by fear effects even if they are normally immune to fear. Creatures within 30 feet of you that are normally immune to mind-affecting effects can still be affected by fear effects, although they gain a +5 resistance bonus on saves against such effects.',
-    shortDescription:
-      'Nearby creatures lose immunity to fear effects.',
+    shortDescription: 'Nearby creatures lose immunity to fear effects.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -88,8 +86,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Broken Blade Style',
     description:
       'Your training in the Broken Blade discipline has made your unarmed strikes devastatingly effective against armor and objects. While using this style, your unarmed strikes ignore an amount of damage reduction and hardness equal to 1/2 your character level.',
-    shortDescription:
-      'Unarmed strikes ignore DR and hardness equal to half your level.',
+    shortDescription: 'Unarmed strikes ignore DR and hardness equal to half your level.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -149,8 +146,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Cursed Razor Style',
     description:
       'Your cursed blade draws blood that refuses to stop flowing. While using this style, when you deal melee damage to a cursed creature, it suffers 2 points of bleed damage plus an additional 2 points for every four character levels you possess. This bleed damage persists until magical healing is applied or the target succeeds on a DC 15 Heal check.',
-    shortDescription:
-      'Deal scaling bleed damage to cursed creatures you hit in melee.',
+    shortDescription: 'Deal scaling bleed damage to cursed creatures you hit in melee.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -187,8 +183,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Cursed Razor Massacre',
     description:
       'Your blade reaps through the cursed with terrible efficiency. While using Cursed Razor Style, once per round when you hit a cursed creature with a melee attack, you can make an additional melee attack against a different cursed creature within reach at your highest base attack bonus as a free action. You may use this ability even when it is not your turn.',
-    shortDescription:
-      'Make a free melee attack against another cursed creature when you hit one.',
+    shortDescription: 'Make a free melee attack against another cursed creature when you hit one.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -209,8 +204,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Elemental Flux Style',
     description:
       'Your mastery of the elements allows you to shift between them with fluid grace. While using this style, you may change your active element once per round as a free action, allowing you to adapt your elemental combat approach on the fly.',
-    shortDescription:
-      'Change your active element once per round as a free action.',
+    shortDescription: 'Change your active element once per round as a free action.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -228,8 +222,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Elemental Flux Shift',
     description:
       'Changing elements fuels your attacks with residual energy. While using Elemental Flux Style, when you switch your active element, your next attack before the end of your turn deals bonus energy damage equal to your initiation modifier of the energy type associated with your previous active element. This is a supernatural ability.',
-    shortDescription:
-      'Deal bonus energy damage on your next attack after switching elements.',
+    shortDescription: 'Deal bonus energy damage on your next attack after switching elements.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -269,8 +262,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Eternal Guardian Style',
     description:
       'Your combat maneuvers carry the weight of ancient curses. While using this style, whenever you succeed on a combat maneuver attempt against an opponent, that opponent becomes cursed for one round. This is a supernatural ability.',
-    shortDescription:
-      'Successful combat maneuvers curse the target for one round.',
+    shortDescription: 'Successful combat maneuvers curse the target for one round.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -288,8 +280,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Eternal Guardian Oath',
     description:
       'You bind cursed foes to face you alone. While using Eternal Guardian Style, you may expend a readied counter as an immediate action to cause all cursed creatures you threaten to suffer a \u20134 penalty on attack rolls against any target other than you until the start of your next turn.',
-    shortDescription:
-      'Expend a counter to penalize cursed creatures\u2019 attacks against others.',
+    shortDescription: 'Expend a counter to penalize cursed creatures\u2019 attacks against others.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -307,8 +298,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Eternal Guardian Endurance',
     description:
       'Destroying cursed foes replenishes your martial reserves. While using Eternal Guardian Style, once per round when you reduce a cursed opponent to 0 or fewer hit points, you can recover an expended maneuver as a free action.',
-    shortDescription:
-      'Recover a maneuver when you reduce a cursed creature to 0 hit points.',
+    shortDescription: 'Recover a maneuver when you reduce a cursed creature to 0 hit points.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -329,8 +319,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Golden Lion Style',
     description:
       'Your coordinated fighting style lets you capitalize on your allies\u2019 missed attacks. While using this style, once per round when an ally other than yourself misses a melee attack against an opponent you both flank, you may make an attack of opportunity against that opponent.',
-    shortDescription:
-      'Make an attack of opportunity when an ally misses a flanked opponent.',
+    shortDescription: 'Make an attack of opportunity when an ally misses a flanked opponent.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -348,8 +337,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Golden Lion Charge',
     description:
       'You rush to the defense of your allies with leonine fury. While using Golden Lion Style, when an opponent within 30 feet misses an ally with an attack, you may expend a readied counter as an immediate action to move up to your speed toward that opponent. If your movement ends with the opponent within melee reach, you may make an attack of opportunity against that opponent.',
-    shortDescription:
-      'Expend a counter to move toward and attack an enemy that missed an ally.',
+    shortDescription: 'Expend a counter to move toward and attack an enemy that missed an ally.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -389,8 +377,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Iron Tortoise Style',
     description:
       'Your shield strikes land with the force of a much larger combatant. While using this style, you deal damage with shield bash attacks as though you were one size category larger than you actually are. This stacks with other effects that increase your effective size or your weapon\u2019s effective size.',
-    shortDescription:
-      'Shield bashes deal damage as if you were one size larger.',
+    shortDescription: 'Shield bashes deal damage as if you were one size larger.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],
@@ -409,8 +396,7 @@ export const POW_STYLE_FEATS: FeatDefinition[] = [
     name: 'Iron Tortoise Shell',
     description:
       'Your defensive counters grant you exceptional reflexive agility. While using Iron Tortoise Style, whenever you initiate a counter, you gain evasion (as the rogue class feature) until the end of your next turn. If you already have evasion, you gain improved evasion instead for the same duration.',
-    shortDescription:
-      'Gain evasion until end of next turn when you initiate a counter.',
+    shortDescription: 'Gain evasion until end of next turn when you initiate a counter.',
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat', 'style'],

@@ -102,7 +102,7 @@ export const BATTLE_TEMPLAR_CLASS: ExpandedClassData = {
       name: 'Shepherd the Flock',
       level: 6,
       description:
-        'Those under his care must be protected; a credo of the battle templar. At 6th level, the battle templar\'s spells take on a defensive nature as he casts them to protect himself and his allies. Whenever he casts a spell through his Reach of the Divine class feature, the target also gains a +4 sacred or profane (alignment dependent) bonus to their AC for one minute (multiple uses of this ability do not increase the duration or the protection of this ability).',
+        "Those under his care must be protected; a credo of the battle templar. At 6th level, the battle templar's spells take on a defensive nature as he casts them to protect himself and his allies. Whenever he casts a spell through his Reach of the Divine class feature, the target also gains a +4 sacred or profane (alignment dependent) bonus to their AC for one minute (multiple uses of this ability do not increase the duration or the protection of this ability).",
     },
     {
       name: 'Wrath of the Faithful',
@@ -126,7 +126,7 @@ export const BATTLE_TEMPLAR_CLASS: ExpandedClassData = {
       name: 'Battlefield Invocation',
       level: 10,
       description:
-        "At 10th level, the battle templar has reached a pinnacle of divine power and martial prowess that few ever do, and as such, is capable of amazing feats of skill. The battle templar expends a 4th level or higher spell slot as a free action and initiates a martial strike as normal. Allies (excluding the battle templar) within 60 ft. of his position witnessing this are invigorated by his power, and regain 10 hit points per level of the spell sacrificed to power this ability and a +4 morale bonus to attack and damage rolls for one round. This ability does not combine with the Reach of the Divine or the Shepherd the Flock class features.",
+        'At 10th level, the battle templar has reached a pinnacle of divine power and martial prowess that few ever do, and as such, is capable of amazing feats of skill. The battle templar expends a 4th level or higher spell slot as a free action and initiates a martial strike as normal. Allies (excluding the battle templar) within 60 ft. of his position witnessing this are invigorated by his power, and regain 10 hit points per level of the spell sacrificed to power this ability and a +4 morale bonus to attack and damage rolls for one round. This ability does not combine with the Reach of the Divine or the Shepherd the Flock class features.',
     },
   ],
   prerequisites: {
@@ -151,11 +151,7 @@ export const BATTLE_TEMPLAR_CLASS: ExpandedClassData = {
     type: 'Martial',
     initiatingAbility: 'WIS',
     ilProgression: 'full',
-    disciplines: [
-      'golden-lion',
-      'silver-crane',
-      'black-seraph',
-    ],
+    disciplines: ['golden-lion', 'silver-crane', 'black-seraph'],
     progressionTableKey: 'battle-templar',
     recoveryMechanics: {
       primary: {

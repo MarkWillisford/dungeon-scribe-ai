@@ -47,8 +47,7 @@ export const UMBRAL_BLADE_CLASS: ExpandedClassData = {
     {
       name: 'Weapon and Armor Proficiency',
       level: 1,
-      description:
-        'The umbral blade gains no new weapon or armor proficiencies.',
+      description: 'The umbral blade gains no new weapon or armor proficiencies.',
     },
     {
       name: 'Maneuvers',
@@ -142,9 +141,7 @@ export const UMBRAL_BLADE_CLASS: ExpandedClassData = {
       { name: 'Stealth', ranks: 6 },
     ],
     feats: ['Discipline Focus (Veiled Moon)'],
-    special: [
-      'Must be capable of initiating 3rd-level maneuvers of the Veiled Moon discipline',
-    ],
+    special: ['Must be capable of initiating 3rd-level maneuvers of the Veiled Moon discipline'],
     alignment: 'Any non-good',
   },
   alignment: 'Any non-good',
@@ -156,11 +153,7 @@ export const UMBRAL_BLADE_CLASS: ExpandedClassData = {
     type: 'Martial',
     initiatingAbility: 'WIS',
     ilProgression: 'full',
-    disciplines: [
-      'cursed-razor',
-      'steel-serpent',
-      'veiled-moon',
-    ],
+    disciplines: ['cursed-razor', 'steel-serpent', 'veiled-moon'],
     progressionTableKey: 'umbral-blade',
     recoveryMechanics: {
       primary: {

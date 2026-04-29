@@ -155,7 +155,7 @@ export const POWE_BLACK_SERAPH_MANEUVERS: ManeuverDefinition[] = [
     target: 'You',
     duration: 'Instant',
     description:
-      'When an enemy attacks the initiator, they make an Intimidate check opposed by the attacker\'s attack roll. If the Intimidate check exceeds the attack roll, the attack misses.',
+      "When an enemy attacks the initiator, they make an Intimidate check opposed by the attacker's attack roll. If the Intimidate check exceeds the attack roll, the attack misses.",
     prerequisites: {},
     source: {
       bookId: 'powe',

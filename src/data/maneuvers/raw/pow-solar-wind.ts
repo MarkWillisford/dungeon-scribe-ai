@@ -307,8 +307,7 @@ export const POW_SOLAR_WIND_MANEUVERS: ManeuverDefinition[] = [
     range: 'Personal',
     target: 'You',
     duration: 'Instant',
-    description:
-      'The initiator automatically confirms a critical threat made on a ranged attack.',
+    description: 'The initiator automatically confirms a critical threat made on a ranged attack.',
     prerequisites: { disciplineManeuversKnown: 2 },
     source: { bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' },
     isOfficial: false,

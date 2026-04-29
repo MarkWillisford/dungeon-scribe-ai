@@ -71,7 +71,7 @@ export const HARBINGER_CLASS: ExpandedClassData = {
       name: 'Maneuvers',
       level: 1,
       description:
-        'A harbinger begins her career with knowledge of five martial maneuvers. The disciplines available to her are Cursed Razor, Riven Hourglass, Scarlet Throne, Shattered Mirror, and Veiled Moon. The harbinger gains the associated skill of each of her disciplines as a class skill if it is not already on her class skill list. Once she knows a maneuver, she must ready it before she can use it (see Maneuvers Readied). A maneuver usable by harbingers is considered an extraordinary ability unless otherwise noted in it or its discipline\'s description. A harbinger\'s maneuvers are not affected by spell resistance, and she does not provoke attacks of opportunity when she initiates one. She learns additional maneuvers at higher levels, as shown on the class table. The harbinger must meet a maneuver\'s prerequisite to learn it. A harbinger adds her Intelligence modifier to any d20 rolls made as part of a maneuver (the harbinger\'s initiation modifier is Intelligence). Upon reaching 4th level, and at every even numbered harbinger level after that, she can choose to learn a new maneuver in place of one she already knows. In effect, the harbinger loses the old maneuver in exchange for the new one. The harbinger need not replace the old maneuver with a maneuver of the same level. She can choose a new maneuver of any level she likes, as long as she observes her restriction on the highest-level maneuvers she knows.',
+        "A harbinger begins her career with knowledge of five martial maneuvers. The disciplines available to her are Cursed Razor, Riven Hourglass, Scarlet Throne, Shattered Mirror, and Veiled Moon. The harbinger gains the associated skill of each of her disciplines as a class skill if it is not already on her class skill list. Once she knows a maneuver, she must ready it before she can use it (see Maneuvers Readied). A maneuver usable by harbingers is considered an extraordinary ability unless otherwise noted in it or its discipline's description. A harbinger's maneuvers are not affected by spell resistance, and she does not provoke attacks of opportunity when she initiates one. She learns additional maneuvers at higher levels, as shown on the class table. The harbinger must meet a maneuver's prerequisite to learn it. A harbinger adds her Intelligence modifier to any d20 rolls made as part of a maneuver (the harbinger's initiation modifier is Intelligence). Upon reaching 4th level, and at every even numbered harbinger level after that, she can choose to learn a new maneuver in place of one she already knows. In effect, the harbinger loses the old maneuver in exchange for the new one. The harbinger need not replace the old maneuver with a maneuver of the same level. She can choose a new maneuver of any level she likes, as long as she observes her restriction on the highest-level maneuvers she knows.",
     },
     {
       name: 'Maneuvers Readied',
@@ -101,19 +101,19 @@ export const HARBINGER_CLASS: ExpandedClassData = {
       name: 'Ill Tidings',
       level: 1,
       description:
-        'Like unwanted news, the harbinger travels swiftly. At 1st level, a harbinger gains a +10-foot competence bonus to her movement speeds. At 10th level, this bonus increases to +20 feet. Apply this bonus before modifying the harbinger\'s movement speeds because of any load carried or armor worn.',
+        "Like unwanted news, the harbinger travels swiftly. At 1st level, a harbinger gains a +10-foot competence bonus to her movement speeds. At 10th level, this bonus increases to +20 feet. Apply this bonus before modifying the harbinger's movement speeds because of any load carried or armor worn.",
     },
     {
       name: 'Dark Focus',
       level: 2,
       description:
-        'Though all harbingers tap into violence and sorrow, they inevitably specialize in a method of combat that calls to them deep within themselves. At 2nd level, a harbinger selects one discipline she has access to from her harbinger levels to be her dark focus. She gains a +1 bonus on attack and damage rolls when initiating strikes and counters from her dark focus discipline. The bonus to attack and damage rolls increases by +1 at 5th level and every four levels thereafter. In addition, she gains a +1 bonus to the save DCs of maneuvers from her dark focus discipline. At 6th level, the harbinger gains either Advanced Study or Discipline Focus in her dark focus discipline as a bonus feat, even if she does not meet the prerequisites. In the case of Advanced Study, both maneuvers selected must be from her dark focus discipline. At 10th level, the harbinger selects a second discipline as her dark focus in addition to her original dark focus discipline. She does not gain an additional bonus feat, although the other bonuses from her dark focus class feature apply to the second discipline as well. At 14th level, the harbinger\'s dedication bears violent fruit. She may expend a readied maneuver to spontaneously initiate any maneuver she knows from her dark focus disciplines that is one or more levels lower than the expended maneuver, regardless of whether or not she has the dark focus maneuver readied. The initiation action of the spontaneously initiated maneuver is unchanged. At 20th level, the harbinger treats all maneuvers from her dark focus disciplines as being readied at the beginning of each encounter, in addition to her normal pool of readied maneuvers.',
+        "Though all harbingers tap into violence and sorrow, they inevitably specialize in a method of combat that calls to them deep within themselves. At 2nd level, a harbinger selects one discipline she has access to from her harbinger levels to be her dark focus. She gains a +1 bonus on attack and damage rolls when initiating strikes and counters from her dark focus discipline. The bonus to attack and damage rolls increases by +1 at 5th level and every four levels thereafter. In addition, she gains a +1 bonus to the save DCs of maneuvers from her dark focus discipline. At 6th level, the harbinger gains either Advanced Study or Discipline Focus in her dark focus discipline as a bonus feat, even if she does not meet the prerequisites. In the case of Advanced Study, both maneuvers selected must be from her dark focus discipline. At 10th level, the harbinger selects a second discipline as her dark focus in addition to her original dark focus discipline. She does not gain an additional bonus feat, although the other bonuses from her dark focus class feature apply to the second discipline as well. At 14th level, the harbinger's dedication bears violent fruit. She may expend a readied maneuver to spontaneously initiate any maneuver she knows from her dark focus disciplines that is one or more levels lower than the expended maneuver, regardless of whether or not she has the dark focus maneuver readied. The initiation action of the spontaneously initiated maneuver is unchanged. At 20th level, the harbinger treats all maneuvers from her dark focus disciplines as being readied at the beginning of each encounter, in addition to her normal pool of readied maneuvers.",
     },
     {
       name: 'Grim News',
       level: 3,
       description:
-        'Like a ghost or a rumor, the harbinger moves with supernatural acumen. Starting at 3rd level, a harbinger can move up to her speed as a swift action once per encounter. She can use this ability twice per encounter at 9th level, and three times per encounter at 15th level. At 9th level and again at 15th level, the harbinger selects one of the following abilities. Once made, her choice is permanent and cannot be changed. Dark Wings: The harbinger gains a fly speed equal to her base land speed, with good maneuverability. This flight is supernatural in nature. Omenwalk: The harbinger gains the ability to teleport up to her speed as a move action. The harbinger does not need line of effect or line of sight to her destination, although she still provokes attacks of opportunity for leaving a threatened square when using this ability. Spider\'s Boon: The harbinger gains a climb speed equal to her base land speed. In addition, she develops a sticky grip that aids her in battle, granting her a +4 racial bonus on grapple checks and to her CMD. Water Dweller: The harbinger gains a swim speed equal to her base land speed. In addition, the harbinger no longer needs to breathe and becomes immune to inhaled poisons.',
+        "Like a ghost or a rumor, the harbinger moves with supernatural acumen. Starting at 3rd level, a harbinger can move up to her speed as a swift action once per encounter. She can use this ability twice per encounter at 9th level, and three times per encounter at 15th level. At 9th level and again at 15th level, the harbinger selects one of the following abilities. Once made, her choice is permanent and cannot be changed. Dark Wings: The harbinger gains a fly speed equal to her base land speed, with good maneuverability. This flight is supernatural in nature. Omenwalk: The harbinger gains the ability to teleport up to her speed as a move action. The harbinger does not need line of effect or line of sight to her destination, although she still provokes attacks of opportunity for leaving a threatened square when using this ability. Spider's Boon: The harbinger gains a climb speed equal to her base land speed. In addition, she develops a sticky grip that aids her in battle, granting her a +4 racial bonus on grapple checks and to her CMD. Water Dweller: The harbinger gains a swim speed equal to her base land speed. In addition, the harbinger no longer needs to breathe and becomes immune to inhaled poisons.",
     },
     {
       name: 'Massacre',
@@ -125,7 +125,7 @@ export const HARBINGER_CLASS: ExpandedClassData = {
       name: 'Elusive Shadow',
       level: 5,
       description:
-        'The harbinger\'s unnatural alacrity protects her from harm as she shies away from whirling blades and streaking spells alike. Starting at 5th level, a harbinger gains a +2 dodge bonus to her AC and Reflex saves during any round in which she has moved at least 10 feet (including by teleportation effects such as omenwalk).',
+        "The harbinger's unnatural alacrity protects her from harm as she shies away from whirling blades and streaking spells alike. Starting at 5th level, a harbinger gains a +2 dodge bonus to her AC and Reflex saves during any round in which she has moved at least 10 feet (including by teleportation effects such as omenwalk).",
     },
     {
       name: 'Dark Focus Bonus Feat',
@@ -149,7 +149,7 @@ export const HARBINGER_CLASS: ExpandedClassData = {
       name: 'Grim News Improvement',
       level: 9,
       description:
-        'At 9th level, the harbinger can use Grim News twice per encounter. She also selects one of the following movement abilities: Dark Wings, Omenwalk, Spider\'s Boon, or Water Dweller. See the Grim News class feature for details.',
+        "At 9th level, the harbinger can use Grim News twice per encounter. She also selects one of the following movement abilities: Dark Wings, Omenwalk, Spider's Boon, or Water Dweller. See the Grim News class feature for details.",
     },
     {
       name: 'Accursed Will Improvement',
@@ -161,7 +161,7 @@ export const HARBINGER_CLASS: ExpandedClassData = {
       name: 'Ill Tidings Improvement',
       level: 10,
       description:
-        'At 10th level, the harbinger\'s competence bonus to movement speeds from Ill Tidings increases to +20 feet.',
+        "At 10th level, the harbinger's competence bonus to movement speeds from Ill Tidings increases to +20 feet.",
     },
     {
       name: 'Dark Focus: Second Discipline',
@@ -172,8 +172,7 @@ export const HARBINGER_CLASS: ExpandedClassData = {
     {
       name: 'Massacre Improvement',
       level: 10,
-      description:
-        'At 10th level, the harbinger can use Massacre twice per encounter.',
+      description: 'At 10th level, the harbinger can use Massacre twice per encounter.',
     },
     {
       name: 'Black Omen',
@@ -191,25 +190,24 @@ export const HARBINGER_CLASS: ExpandedClassData = {
       name: 'Dark Murmur',
       level: 13,
       description:
-        'Those claimed by the harbinger find her as hard to catch as rumor itself. Starting at 13th level, the harbinger\'s movement no longer provokes attacks of opportunity from creatures she has Claimed.',
+        "Those claimed by the harbinger find her as hard to catch as rumor itself. Starting at 13th level, the harbinger's movement no longer provokes attacks of opportunity from creatures she has Claimed.",
     },
     {
       name: 'Dark Focus: Spontaneous Initiation',
       level: 14,
       description:
-        'At 14th level, the harbinger\'s dedication bears violent fruit. She may expend a readied maneuver to spontaneously initiate any maneuver she knows from her dark focus disciplines that is one or more levels lower than the expended maneuver, regardless of whether or not she has the dark focus maneuver readied. The initiation action of the spontaneously initiated maneuver is unchanged.',
+        "At 14th level, the harbinger's dedication bears violent fruit. She may expend a readied maneuver to spontaneously initiate any maneuver she knows from her dark focus disciplines that is one or more levels lower than the expended maneuver, regardless of whether or not she has the dark focus maneuver readied. The initiation action of the spontaneously initiated maneuver is unchanged.",
     },
     {
       name: 'Grim News Improvement',
       level: 15,
       description:
-        'At 15th level, the harbinger can use Grim News three times per encounter. She also selects a second movement ability from the Grim News options: Dark Wings, Omenwalk, Spider\'s Boon, or Water Dweller.',
+        "At 15th level, the harbinger can use Grim News three times per encounter. She also selects a second movement ability from the Grim News options: Dark Wings, Omenwalk, Spider's Boon, or Water Dweller.",
     },
     {
       name: 'Massacre Improvement',
       level: 16,
-      description:
-        'At 16th level, the harbinger can use Massacre three times per encounter.',
+      description: 'At 16th level, the harbinger can use Massacre three times per encounter.',
     },
     {
       name: 'Rumors of War',
@@ -227,7 +225,7 @@ export const HARBINGER_CLASS: ExpandedClassData = {
       name: 'Whispers of Atrocity',
       level: 19,
       description:
-        'There is no resisting the harbinger\'s malice. Starting at 19th level, maneuvers initiated by a harbinger ignore all immunities possessed by their targets.',
+        "There is no resisting the harbinger's malice. Starting at 19th level, maneuvers initiated by a harbinger ignore all immunities possessed by their targets.",
     },
     {
       name: 'Dark Focus: Supremacy',

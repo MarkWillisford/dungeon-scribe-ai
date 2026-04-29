@@ -59,7 +59,7 @@ export const RUBATO_ARCHETYPE: ArchetypeData = {
       name: 'Maneuvers Readied',
       level: 1,
       description:
-        "A rubato can ready all three of his maneuvers known at 1st level, and as he advances in level and learns more maneuvers, he is able to ready more, but must still choose which maneuvers to ready. A rubato must always ready his maximum number of maneuvers readied. He readies his maneuvers by practicing weapon drills or communing with the primal rhythm for ten minutes. The maneuvers he chooses remain readied until he decides to practice again and change them. The rubato does not need to sleep or rest for any long period of time in order to ready his maneuvers; any time he spends ten minutes practicing, he can change his readied maneuvers. A rubato begins an encounter with all his readied maneuvers unexpended, regardless of how many times he might have already used them since he chose them. When he initiates a maneuver, he expends it for the current encounter, so each of his readied maneuvers can be used once per encounter (unless he recovers them, as described below). A rubato can recover a single expended maneuver as a swift action by spending 2 points of tempo, or as a free action by spending 3 points of tempo. A rubato cannot recover a maneuver in the same round in which it was initiated.",
+        'A rubato can ready all three of his maneuvers known at 1st level, and as he advances in level and learns more maneuvers, he is able to ready more, but must still choose which maneuvers to ready. A rubato must always ready his maximum number of maneuvers readied. He readies his maneuvers by practicing weapon drills or communing with the primal rhythm for ten minutes. The maneuvers he chooses remain readied until he decides to practice again and change them. The rubato does not need to sleep or rest for any long period of time in order to ready his maneuvers; any time he spends ten minutes practicing, he can change his readied maneuvers. A rubato begins an encounter with all his readied maneuvers unexpended, regardless of how many times he might have already used them since he chose them. When he initiates a maneuver, he expends it for the current encounter, so each of his readied maneuvers can be used once per encounter (unless he recovers them, as described below). A rubato can recover a single expended maneuver as a swift action by spending 2 points of tempo, or as a free action by spending 3 points of tempo. A rubato cannot recover a maneuver in the same round in which it was initiated.',
     },
     {
       name: 'Stances Known',
@@ -73,7 +73,7 @@ export const RUBATO_ARCHETYPE: ArchetypeData = {
       name: 'Tempo',
       level: 1,
       description:
-        "When a rubato enters combat, he gains a tempo pool equal to 1/2 his class level (minimum 1) + his rubato initiation modifier at the start of his first turn. At the start of each of his turns, the rubato gains one point of tempo. Outside combat, a rubato has no tempo to spend. His tempo pool persists for one minute after the last enemy combatant is defeated, after which it dissipates. A rubato can spend tempo as if it were animus when augmenting maneuvers or using feats such as Animus Healing. This ability replaces cantrips.",
+        'When a rubato enters combat, he gains a tempo pool equal to 1/2 his class level (minimum 1) + his rubato initiation modifier at the start of his first turn. At the start of each of his turns, the rubato gains one point of tempo. Outside combat, a rubato has no tempo to spend. His tempo pool persists for one minute after the last enemy combatant is defeated, after which it dissipates. A rubato can spend tempo as if it were animus when augmenting maneuvers or using feats such as Animus Healing. This ability replaces cantrips.',
     },
 
     // ── Bardic Performance Replacements ──
@@ -87,7 +87,7 @@ export const RUBATO_ARCHETYPE: ArchetypeData = {
       name: 'Metronome',
       level: 1,
       description:
-        "At 1st level, a rubato can use his performance to regulate his internal rhythm, fueling his tempo pool. While maintaining this performance, the rubato adds one point of tempo to his tempo pool at the beginning of each of his turns (in addition to the one point he gains normally). At 5th level and every five levels thereafter (10th, 15th, 20th), the additional tempo gained per round from metronome increases by 1. This ability replaces distraction.",
+        'At 1st level, a rubato can use his performance to regulate his internal rhythm, fueling his tempo pool. While maintaining this performance, the rubato adds one point of tempo to his tempo pool at the beginning of each of his turns (in addition to the one point he gains normally). At 5th level and every five levels thereafter (10th, 15th, 20th), the additional tempo gained per round from metronome increases by 1. This ability replaces distraction.',
     },
     {
       name: 'Dissonance',
@@ -105,7 +105,7 @@ export const RUBATO_ARCHETYPE: ArchetypeData = {
       name: 'Canon',
       level: 8,
       description:
-        "At 8th level, a rubato can use his performance to synchronize the martial efforts of his allies. While maintaining this performance, when an affected ally initiates a maneuver, that ally can recover an expended maneuver of a different type. Each ally can benefit from canon no more than once per round. This ability replaces dirge of doom.",
+        'At 8th level, a rubato can use his performance to synchronize the martial efforts of his allies. While maintaining this performance, when an affected ally initiates a maneuver, that ally can recover an expended maneuver of a different type. Each ally can benefit from canon no more than once per round. This ability replaces dirge of doom.',
     },
     {
       name: 'Accelerando',
@@ -129,7 +129,7 @@ export const RUBATO_ARCHETYPE: ArchetypeData = {
       name: 'Con Moto',
       level: 18,
       description:
-        'At 18th level, a rubato can use his performance to grant his allies bursts of movement in the heat of battle. By spending 2 tempo as a free action (usable on an ally\'s turn), an affected ally may move up to 15 feet as part of initiating a maneuver, or increase existing movement granted by a maneuver by 15 feet. In addition, the save DC of that maneuver increases by 2. This ability replaces mass suggestion.',
+        "At 18th level, a rubato can use his performance to grant his allies bursts of movement in the heat of battle. By spending 2 tempo as a free action (usable on an ally's turn), an affected ally may move up to 15 feet as part of initiating a maneuver, or increase existing movement granted by a maneuver by 15 feet. In addition, the save DC of that maneuver increases by 2. This ability replaces mass suggestion.",
     },
     {
       name: 'Fugue',

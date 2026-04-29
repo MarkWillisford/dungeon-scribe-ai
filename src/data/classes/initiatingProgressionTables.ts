@@ -6,7 +6,11 @@
 //
 // See plans/initiating-system.md Phase 2 and plans/data-scraping/path-of-war-scraping.md.
 
-import { CRUSADER_PROGRESSION, SWORDSAGE_PROGRESSION, WARBLADE_PROGRESSION } from './initiating/tob';
+import {
+  CRUSADER_PROGRESSION,
+  SWORDSAGE_PROGRESSION,
+  WARBLADE_PROGRESSION,
+} from './initiating/tob';
 import { STALKER_PROGRESSION } from './initiating/stalker';
 import { WARDER_PROGRESSION } from './initiating/warder';
 import { WARLORD_PROGRESSION } from './initiating/warlord';

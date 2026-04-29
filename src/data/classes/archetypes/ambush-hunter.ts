@@ -44,13 +44,13 @@ export const AMBUSH_HUNTER_ARCHETYPE: ArchetypeData = {
       name: 'Maneuvers Readied',
       level: 1,
       description:
-        "An ambush hunter can ready all three of his maneuvers known at 1st level, and as he advances in level and learns more maneuvers, he is able to ready more, but must still choose which maneuvers to ready. An ambush hunter must always ready his maximum number of maneuvers readied. He readies his maneuvers by practicing appearance and disappearance drills for ten minutes. The maneuvers he chooses remain readied until he decides to practice again and change them. The ambush hunter does not need to sleep or rest for any long period of time in order to ready his maneuvers; any time he spends ten minutes in practice, he can change his readied maneuvers. An ambush hunter begins an encounter with all his readied maneuvers unexpended, regardless of how many times he might have already used them since he chose them. When he initiates a maneuver, he expends it for the current encounter, so each of his readied maneuvers can be used once per encounter (unless he recovers them, as described below).",
+        'An ambush hunter can ready all three of his maneuvers known at 1st level, and as he advances in level and learns more maneuvers, he is able to ready more, but must still choose which maneuvers to ready. An ambush hunter must always ready his maximum number of maneuvers readied. He readies his maneuvers by practicing appearance and disappearance drills for ten minutes. The maneuvers he chooses remain readied until he decides to practice again and change them. The ambush hunter does not need to sleep or rest for any long period of time in order to ready his maneuvers; any time he spends ten minutes in practice, he can change his readied maneuvers. An ambush hunter begins an encounter with all his readied maneuvers unexpended, regardless of how many times he might have already used them since he chose them. When he initiates a maneuver, he expends it for the current encounter, so each of his readied maneuvers can be used once per encounter (unless he recovers them, as described below).',
     },
     {
       name: 'Maneuver Recovery',
       level: 1,
       description:
-        "As a full-round action, the ambush hunter and his animal companion gain the ability to use the Stealth skill while being observed for one round, then each can make a Stealth check to hide and move up to their speed. When he does so, he recovers a number of expended maneuvers equal to his ambush hunter initiation modifier (minimum 2). The ambush hunter and his animal companion do not take a penalty on their Stealth checks from moving while using this ability. Alternately, the ambush hunter may take a moment to reassess his prey, recovering a single maneuver as a standard action.",
+        'As a full-round action, the ambush hunter and his animal companion gain the ability to use the Stealth skill while being observed for one round, then each can make a Stealth check to hide and move up to their speed. When he does so, he recovers a number of expended maneuvers equal to his ambush hunter initiation modifier (minimum 2). The ambush hunter and his animal companion do not take a penalty on their Stealth checks from moving while using this ability. Alternately, the ambush hunter may take a moment to reassess his prey, recovering a single maneuver as a standard action.',
     },
     {
       name: 'Stances Known',
@@ -80,7 +80,7 @@ export const AMBUSH_HUNTER_ARCHETYPE: ArchetypeData = {
       name: 'Pack Savagery',
       level: 8,
       description:
-        "At 8th level, whenever the ambush hunter or his animal companion initiates a boost from the Primal Fury or Golden Lion disciplines, both the ambush hunter and his animal companion gain the benefits of the boost. The ambush hunter and the animal companion can only benefit from one such boost per round, even if they use this ability. This ability replaces quarry.",
+        'At 8th level, whenever the ambush hunter or his animal companion initiates a boost from the Primal Fury or Golden Lion disciplines, both the ambush hunter and his animal companion gain the benefits of the boost. The ambush hunter and the animal companion can only benefit from one such boost per round, even if they use this ability. This ability replaces quarry.',
     },
     {
       name: 'Unbreakable Bond',

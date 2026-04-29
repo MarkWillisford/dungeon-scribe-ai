@@ -107,4 +107,20 @@ export interface TemplateDefinition extends DataQualityFields {
   sourceInfo: TemplateSourceInfo;
   visibility: 'global' | 'campaign' | 'private';
   rev: number;
+
+  // Companion grant — present when applying this template to a character also
+  // grants them an animal companion. Plan: animal-companion-builder.md §
+  // Templates That Grant ACs. The effective-level formula drives AC
+  // progression the same way a class level would.
+  grantsCompanion?: GrantsCompanionSpec;
+}
+
+export interface GrantsCompanionSpec {
+  // 'characterLevel'    — effective level = total character class HD
+  // 'characterLevel-3'  — −3 (druid-creature style: HD-3 for wild shape etc.)
+  // 'characterLevel-4'  — −4 (paladin mount style)
+  effectiveLevelFormula: 'characterLevel' | 'characterLevel-3' | 'characterLevel-4';
+  // Picker scope when adding the companion. Values match
+  // CompanionPickerSheet.CompanionPickerFilter ('full' | 'mountsOnly').
+  pickerFilter: 'full' | 'mountsOnly';
 }

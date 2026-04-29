@@ -1,7 +1,20 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { enableMapSet } from 'immer';
 import { Alignment } from '@/types/base';
+
+// equippedSlots was changed from Map<ItemSlot,string> to Partial<Record<ItemSlot,string>>
+// on main. enableMapSet is kept for any other Map/Set state that may be added later.
+enableMapSet();
 import { ClassChoice } from '@/types/classes';
-import type { CompanionInstance, CompanionGrant } from '@/types/companions';
+import type {
+  CompanionInstance,
+  CompanionGrant,
+  CompanionFeat,
+  CompanionAbilityIncrease,
+  TrickName,
+} from '@/types/companions';
+import type { AppliedTemplate } from '@/types/templates';
+import type { CharacterMagicItem, ItemSlot } from '@/types/magicItems';
 import { computeFeatSlots } from '@/utils/characterComputations';
 import {
   type AbilityKey,
@@ -572,6 +585,7 @@ const characterEntrySlice = createSlice({
         grantedBy,
         effectiveProgressionLevel,
         abilityScoreOverrides: {},
+        hdAbilityIncreases: [],
         hp: { max: 0, current: 0, temp: 0, nonlethal: 0 },
         appliedTemplates: [],
         feats: [],
@@ -585,6 +599,7 @@ const characterEntrySlice = createSlice({
           equippedSlots: {},
         },
         notes: '',
+        background: '',
       };
       state.draft.companions.push(companion);
       state.isDirty = true;
@@ -625,6 +640,242 @@ const characterEntrySlice = createSlice({
         (c) => !(c.grantedBy.type === 'class' && c.grantedBy.classEntryId === classId),
       );
       if (state.draft.companions.length !== before) state.isDirty = true;
+    },
+
+    // Set or clear a single ability score override on a companion. Pass
+    // `value: undefined` (via omitting or JSON null) to clear; any number sets.
+    setCompanionAbilityOverride(
+      state,
+      action: PayloadAction<{
+        instanceId: string;
+        ability: 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
+        value: number | null;
+      }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { ability, value } = action.payload;
+      if (value === null) {
+        delete comp.abilityScoreOverrides[ability];
+      } else {
+        comp.abilityScoreOverrides[ability] = value;
+      }
+      state.isDirty = true;
+    },
+
+    setCompanionHP(
+      state,
+      action: PayloadAction<{
+        instanceId: string;
+        field: 'max' | 'current' | 'temp' | 'nonlethal';
+        value: number;
+      }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      comp.hp[action.payload.field] = action.payload.value;
+      state.isDirty = true;
+    },
+
+    // Swap the companion form (e.g. Druid Nature Bond changes from Wolf to
+    // Leopard). Preserves overrides, feats, templates, tricks, and name.
+    // Player can manually reset overrides if the new form's base stats make
+    // them stale.
+    swapCompanionForm(state, action: PayloadAction<{ instanceId: string; sourceEntryId: string }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      comp.sourceEntryId = action.payload.sourceEntryId;
+      state.isDirty = true;
+    },
+
+    setCompanionNotes(state, action: PayloadAction<{ instanceId: string; notes: string }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      comp.notes = action.payload.notes;
+      state.isDirty = true;
+    },
+
+    // Phase 1.6: companion feats. Slots are derived from effective level via
+    // CompanionService.computeFeatSlots; the slice just owns the assigned list.
+    // Duplicate featIds are allowed (e.g. Toughness) so the UI can stack them.
+    addCompanionFeat(state, action: PayloadAction<{ instanceId: string; feat: CompanionFeat }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      comp.feats.push(action.payload.feat);
+      state.isDirty = true;
+    },
+
+    // Removes the feat at a specific index so duplicates (e.g. two Toughness
+    // picks) can be removed independently.
+    removeCompanionFeatAt(state, action: PayloadAction<{ instanceId: string; index: number }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { index } = action.payload;
+      if (index < 0 || index >= comp.feats.length) return;
+      comp.feats.splice(index, 1);
+      state.isDirty = true;
+    },
+
+    // Toggle a trick on/off. Tricks are a set; no duplicates. The UI enforces
+    // the known-tricks cap, not the slice.
+    toggleCompanionTrick(state, action: PayloadAction<{ instanceId: string; trick: TrickName }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { trick } = action.payload;
+      const idx = comp.tricks.indexOf(trick);
+      if (idx === -1) comp.tricks.push(trick);
+      else comp.tricks.splice(idx, 1);
+      state.isDirty = true;
+    },
+
+    // Set skill ranks for a given skill. Passing 0 clears the key so the
+    // companion's skillRanks map doesn't accumulate noise.
+    setCompanionSkillRank(
+      state,
+      action: PayloadAction<{ instanceId: string; skill: string; ranks: number }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { skill, ranks } = action.payload;
+      if (ranks <= 0) {
+        delete comp.skillRanks[skill];
+      } else {
+        comp.skillRanks[skill] = ranks;
+      }
+      state.isDirty = true;
+    },
+
+    // Phase 1.7: long-form narrative. Kept separate from `notes` (short
+    // handler's memo on the Identity tab) so the two surfaces don't overwrite
+    // each other and the Notes tab has room to breathe.
+    setCompanionBackground(
+      state,
+      action: PayloadAction<{ instanceId: string; background: string }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      comp.background = action.payload.background;
+      state.isDirty = true;
+    },
+
+    setCompanionHDAbilityIncrease(
+      state,
+      action: PayloadAction<{
+        instanceId: string;
+        atLevel: number;
+        ability: CompanionAbilityIncrease['ability'];
+      }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const existing = comp.hdAbilityIncreases.find((i) => i.atLevel === action.payload.atLevel);
+      if (existing) {
+        existing.ability = action.payload.ability;
+      } else {
+        comp.hdAbilityIncreases.push({
+          atLevel: action.payload.atLevel,
+          ability: action.payload.ability,
+        });
+      }
+      state.isDirty = true;
+    },
+
+    // Phase 1.7: applied templates. Companion-side mirror of the character's
+    // template flow, but uses the canonical `AppliedTemplate` shape (plan
+    // character-system-redesign.md § Template System Design). Removal and
+    // update target by index to stay stable when a duplicate template is
+    // applied (e.g. Half-Celestial + Half-Fiend on the same companion, or
+    // two instances of the same HD-tiered template).
+    addCompanionTemplate(
+      state,
+      action: PayloadAction<{ instanceId: string; template: AppliedTemplate }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      comp.appliedTemplates.push(action.payload.template);
+      state.isDirty = true;
+    },
+
+    removeCompanionTemplateAt(state, action: PayloadAction<{ instanceId: string; index: number }>) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { index } = action.payload;
+      if (index < 0 || index >= comp.appliedTemplates.length) return;
+      comp.appliedTemplates.splice(index, 1);
+      state.isDirty = true;
+    },
+
+    updateCompanionTemplateAt(
+      state,
+      action: PayloadAction<{
+        instanceId: string;
+        index: number;
+        patch: Partial<AppliedTemplate>;
+      }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { index, patch } = action.payload;
+      if (index < 0 || index >= comp.appliedTemplates.length) return;
+      comp.appliedTemplates[index] = { ...comp.appliedTemplates[index], ...patch };
+      state.isDirty = true;
+    },
+
+    // Phase 1.7: companion equipment. Scoped to wondrous/magic-item-style
+    // slots — weapons, rods, staves, and wands require the canGrasp pathway
+    // and are deferred to a follow-up. Equipping an item populates two
+    // places at once: the magicItems array (authoritative list) and the
+    // equippedSlots map (slot → instanceId lookup). Swapping in a new item
+    // automatically unequips whatever was in the slot previously, which
+    // keeps the map tidy and matches how the body-shape table works (one
+    // item per slot; ring is a single slot in the companion table even
+    // though characters track left/right separately).
+    equipCompanionMagicItem(
+      state,
+      action: PayloadAction<{
+        instanceId: string;
+        slot: ItemSlot;
+        item: CharacterMagicItem;
+      }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { slot, item } = action.payload;
+
+      // Displace any existing item in this slot.
+      const existingInstanceId = comp.equipment.equippedSlots[slot];
+      if (existingInstanceId) {
+        comp.equipment.magicItems = comp.equipment.magicItems.filter(
+          (m) => m.instanceId !== existingInstanceId,
+        );
+      }
+
+      // Ensure the new item carries the slot and equipped flag so downstream
+      // readers don't have to cross-reference the record.
+      const placed: CharacterMagicItem = {
+        ...item,
+        equipped: true,
+        equippedSlot: slot === 'ring' ? 'ring_left' : (slot as Exclude<ItemSlot, 'ring'>),
+      };
+      comp.equipment.magicItems.push(placed);
+      comp.equipment.equippedSlots[slot] = placed.instanceId;
+      state.isDirty = true;
+    },
+
+    unequipCompanionMagicItem(
+      state,
+      action: PayloadAction<{ instanceId: string; slot: ItemSlot }>,
+    ) {
+      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      if (!comp) return;
+      const { slot } = action.payload;
+      const instanceIdInSlot = comp.equipment.equippedSlots[slot];
+      if (!instanceIdInSlot) return;
+      comp.equipment.magicItems = comp.equipment.magicItems.filter(
+        (m) => m.instanceId !== instanceIdInSlot,
+      );
+      delete comp.equipment.equippedSlots[slot];
+      state.isDirty = true;
     },
 
     toggleFavoredClass(state, action: PayloadAction<string>) {
@@ -936,6 +1187,21 @@ export const {
   renameCompanion,
   updateCompanionEffectiveLevel,
   removeCompanionsGrantedByClass,
+  setCompanionAbilityOverride,
+  setCompanionHP,
+  swapCompanionForm,
+  setCompanionNotes,
+  addCompanionFeat,
+  removeCompanionFeatAt,
+  toggleCompanionTrick,
+  setCompanionSkillRank,
+  setCompanionBackground,
+  setCompanionHDAbilityIncrease,
+  addCompanionTemplate,
+  removeCompanionTemplateAt,
+  updateCompanionTemplateAt,
+  equipCompanionMagicItem,
+  unequipCompanionMagicItem,
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,

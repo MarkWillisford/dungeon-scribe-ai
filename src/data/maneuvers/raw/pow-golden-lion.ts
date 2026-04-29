@@ -14,7 +14,7 @@ export const POW_GOLDEN_LION_MANEUVERS: ManeuverDefinition[] = [
     duration: 'One round',
     savingThrow: 'Will negates',
     description:
-      'With a shout of rage and defiance, the Golden Lion disciple wades into battle with fearless determination, shattering the resolve of his foes. As a swift action the initiator\'s attacks become filled with the dread of defeat, causing his target opponent to be shaken for one round (Will save DC 11 + initiation modifier negates).',
+      "With a shout of rage and defiance, the Golden Lion disciple wades into battle with fearless determination, shattering the resolve of his foes. As a swift action the initiator's attacks become filled with the dread of defeat, causing his target opponent to be shaken for one round (Will save DC 11 + initiation modifier negates).",
     prerequisites: {},
     source: {
       bookId: 'pow',
@@ -60,7 +60,7 @@ export const POW_GOLDEN_LION_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'One round',
     description:
-      'When two or more soldiers converge on a single target, the odds of victory increase and the disciple with the knowledge of this strike can assist his comrade\'s potential lethality. When this strike is initiated, a successful melee attack may grant one adjacent ally who is attacking the same target an attack of opportunity against that target.',
+      "When two or more soldiers converge on a single target, the odds of victory increase and the disciple with the knowledge of this strike can assist his comrade's potential lethality. When this strike is initiated, a successful melee attack may grant one adjacent ally who is attacking the same target an attack of opportunity against that target.",
     prerequisites: {},
     source: {
       bookId: 'pow',
@@ -83,7 +83,7 @@ export const POW_GOLDEN_LION_MANEUVERS: ManeuverDefinition[] = [
     target: 'One adjacent ally',
     duration: 'Instant',
     description:
-      'By having a watchful eye on the flow of combat, the disciple knows when to spur an ally into a better position. As a swift action, the initiator may grant a move action to an adjacent ally. This ally may then use this move action immediately to move up to his base speed, as if it were a free action taken on the initiator\'s turn.',
+      "By having a watchful eye on the flow of combat, the disciple knows when to spur an ally into a better position. As a swift action, the initiator may grant a move action to an adjacent ally. This ally may then use this move action immediately to move up to his base speed, as if it were a free action taken on the initiator's turn.",
     prerequisites: {},
     source: {
       bookId: 'pow',
@@ -200,7 +200,7 @@ export const POW_GOLDEN_LION_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'With a powerful strike, the Golden Lion disciple pushes his foe into the waiting arms of his allies and their hungry blades. The initiator makes a melee attack that inflicts an additional 1d6 points of damage and forces his foe to make a 5 ft. movement (of the initiator\'s choice) from the square he is currently occupying. If the target is incapable of movement, then the target simply takes the damage as normal. This movement provokes attacks of opportunity to all those capable of making them against the target except for the initiator of this maneuver.',
+      "With a powerful strike, the Golden Lion disciple pushes his foe into the waiting arms of his allies and their hungry blades. The initiator makes a melee attack that inflicts an additional 1d6 points of damage and forces his foe to make a 5 ft. movement (of the initiator's choice) from the square he is currently occupying. If the target is incapable of movement, then the target simply takes the damage as normal. This movement provokes attacks of opportunity to all those capable of making them against the target except for the initiator of this maneuver.",
     prerequisites: {},
     source: {
       bookId: 'pow',
@@ -223,7 +223,7 @@ export const POW_GOLDEN_LION_MANEUVERS: ManeuverDefinition[] = [
     target: 'One allied creature',
     duration: 'Instant',
     description:
-      'Witnessing a clear and present danger to an ally, the disciple shouts out a well-timed warning and aids his ally in defending against an attack. The initiator makes a Diplomacy check opposing an opponent\'s attack roll made on an ally. If successful then the attack is negated.',
+      "Witnessing a clear and present danger to an ally, the disciple shouts out a well-timed warning and aids his ally in defending against an attack. The initiator makes a Diplomacy check opposing an opponent's attack roll made on an ally. If successful then the attack is negated.",
     prerequisites: {},
     source: {
       bookId: 'pow',
@@ -248,7 +248,7 @@ export const POW_GOLDEN_LION_MANEUVERS: ManeuverDefinition[] = [
     target: 'Allies',
     duration: 'Instant',
     description:
-      'With practiced precision and a quick shout, the disciple and his allies move in unison for better strategic advantage. The initiator\'s shout grants himself and his allies a free 5 ft. step that must be taken when this boost is used.',
+      "With practiced precision and a quick shout, the disciple and his allies move in unison for better strategic advantage. The initiator's shout grants himself and his allies a free 5 ft. step that must be taken when this boost is used.",
     prerequisites: { disciplineManeuversKnown: 1 },
     source: {
       bookId: 'pow',
@@ -271,7 +271,7 @@ export const POW_GOLDEN_LION_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'One round',
     description:
-      'The Golden Lion disciple makes a ferocious assault on his foe, opening the enemy\'s defenses to the attacks of his allies. The initiator makes a melee attack against a foe and if successful, subsequent attacks made by the initiator\'s allies inflict an additional 2d6 points of damage per successful attack until the initiator\'s next turn.',
+      "The Golden Lion disciple makes a ferocious assault on his foe, opening the enemy's defenses to the attacks of his allies. The initiator makes a melee attack against a foe and if successful, subsequent attacks made by the initiator's allies inflict an additional 2d6 points of damage per successful attack until the initiator's next turn.",
     prerequisites: { disciplineManeuversKnown: 1 },
     source: {
       bookId: 'pow',
@@ -485,7 +485,7 @@ export const POW_GOLDEN_LION_MANEUVERS: ManeuverDefinition[] = [
     target: 'Allies (except the initiator)',
     duration: 'Instant',
     description:
-      'Through coordinated tactics, the comrades at a Golden Lion disciple\'s side may act as one. The initiator makes an attack against a foe, and all allies within 30 ft. may make an immediate attack against any one foe that they can reach with their attacks (melee or ranged within the first range increment) at their full attack bonus.',
+      "Through coordinated tactics, the comrades at a Golden Lion disciple's side may act as one. The initiator makes an attack against a foe, and all allies within 30 ft. may make an immediate attack against any one foe that they can reach with their attacks (melee or ranged within the first range increment) at their full attack bonus.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'pow',

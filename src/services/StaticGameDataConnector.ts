@@ -298,9 +298,7 @@ export class StaticGameDataConnector implements GameDataConnector {
       (entry) =>
         MOUNT_SHAPES.includes(entry.bodyShape) &&
         (MOUNTABLE_SIZE_RE.test(entry.size) ||
-          entry.progressionTiers.some(
-            (t) => t.sizeChange && MOUNTABLE_SIZE_RE.test(t.sizeChange),
-          )),
+          entry.progressionTiers.some((t) => t.sizeChange && MOUNTABLE_SIZE_RE.test(t.sizeChange))),
     );
   }
 

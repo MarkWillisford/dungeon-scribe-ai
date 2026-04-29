@@ -228,7 +228,7 @@ export const POWE_ETERNAL_GUARDIAN_MANEUVERS: ManeuverDefinition[] = [
     duration: '1 round',
     savingThrow: 'Will save (DC 13 + initiation modifier)',
     description:
-      'When initiating this boost, the initiator targets a creature with a melee attack. On a hit, the target becomes cursed and must make a Will save or be teleported to a space adjacent to the initiator at the start of the initiator\'s next turn. The save DC increases by +1 for every 10 feet the target moves away from the initiator (maximum +3).',
+      "When initiating this boost, the initiator targets a creature with a melee attack. On a hit, the target becomes cursed and must make a Will save or be teleported to a space adjacent to the initiator at the start of the initiator's next turn. The save DC increases by +1 for every 10 feet the target moves away from the initiator (maximum +3).",
     prerequisites: { disciplineManeuversKnown: 1 },
     source: {
       bookId: 'powe',
@@ -492,7 +492,7 @@ export const POWE_ETERNAL_GUARDIAN_MANEUVERS: ManeuverDefinition[] = [
     duration: '1 round',
     savingThrow: 'Will save (DC 16 + initiation modifier)',
     description:
-      'When initiating this boost, each creature hit with a melee attack before the start of the initiator\'s next turn becomes cursed for one round per four initiator levels. At the end of each of their turns, cursed creatures must make a Will save or be teleported to a space adjacent to the initiator (provoking attacks of opportunity). The save DC increases by +2 for every 10 feet the creature moved during its turn (maximum +6).',
+      "When initiating this boost, each creature hit with a melee attack before the start of the initiator's next turn becomes cursed for one round per four initiator levels. At the end of each of their turns, cursed creatures must make a Will save or be teleported to a space adjacent to the initiator (provoking attacks of opportunity). The save DC increases by +2 for every 10 feet the creature moved during its turn (maximum +6).",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'powe',
@@ -587,7 +587,7 @@ export const POWE_ETERNAL_GUARDIAN_MANEUVERS: ManeuverDefinition[] = [
     duration: '1 round',
     savingThrow: 'Will save (DC 17 + initiation modifier)',
     description:
-      "When initiating this boost, the next creature the initiator hits with an attack must make a Will save or cower in fear for one round. If the save fails, the initiator heals hit points equal to their initiator level. If the target is cursed, the initiator heals an additional 10 hit points.",
+      'When initiating this boost, the next creature the initiator hits with an attack must make a Will save or cower in fear for one round. If the save fails, the initiator heals hit points equal to their initiator level. If the target is cursed, the initiator heals an additional 10 hit points.',
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'powe',

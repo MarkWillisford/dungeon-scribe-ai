@@ -15,7 +15,7 @@ export const POW_DISCIPLINES: DisciplineDefinition[] = [
     id: 'broken-blade',
     name: 'Broken Blade',
     description:
-      "Legend has it the first practitioner of the Broken Blade style was a powerful swordsman who, in the middle of a life-or-death duel, found his sword broken and had to cast it aside — only to realize his years of training had made his body a weapon in its own right. Disciples of the Broken Blade teach these unarmed methods in monasteries, to cloistered warrior-monks who learn to operate without the traditional tools of combat.",
+      'Legend has it the first practitioner of the Broken Blade style was a powerful swordsman who, in the middle of a life-or-death duel, found his sword broken and had to cast it aside — only to realize his years of training had made his body a weapon in its own right. Disciples of the Broken Blade teach these unarmed methods in monasteries, to cloistered warrior-monks who learn to operate without the traditional tools of combat.',
     associatedSkill: 'Acrobatics',
     associatedWeaponGroups: ['close', 'monk', 'natural'],
     sourceSystem: 'pow',

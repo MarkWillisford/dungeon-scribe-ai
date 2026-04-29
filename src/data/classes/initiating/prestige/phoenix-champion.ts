@@ -26,13 +26,7 @@ export const PHOENIX_CHAMPION_CLASS: ExpandedClassData = {
   maxLevel: 10,
   hitDie: 10,
   skillRanksPerLevel: 4,
-  classSkills: [
-    'Diplomacy',
-    'Perception',
-    'Sleight of Hand',
-    'Stealth',
-    'Survival',
-  ],
+  classSkills: ['Diplomacy', 'Perception', 'Sleight of Hand', 'Stealth', 'Survival'],
   babProgression: BABProgression.Full,
   saves: {
     fortitude: SaveProgression.Good,
@@ -47,7 +41,7 @@ export const PHOENIX_CHAMPION_CLASS: ExpandedClassData = {
       name: 'Maneuvers',
       level: 1,
       description:
-        'At every even level, a phoenix champion gains a new maneuver known from the Silver Crane, Solar Wind, or Tempest Gale disciplines, or from two of his previously available disciplines chosen when he takes his first phoenix champion level. He must meet a maneuver\'s prerequisites to learn it. He adds his full phoenix champion levels to his initiator level to determine his total initiator level and his highest-level maneuvers known. At 3rd, 6th, and 9th levels, he gains an additional maneuver readied per day.',
+        "At every even level, a phoenix champion gains a new maneuver known from the Silver Crane, Solar Wind, or Tempest Gale disciplines, or from two of his previously available disciplines chosen when he takes his first phoenix champion level. He must meet a maneuver's prerequisites to learn it. He adds his full phoenix champion levels to his initiator level to determine his total initiator level and his highest-level maneuvers known. At 3rd, 6th, and 9th levels, he gains an additional maneuver readied per day.",
     },
     {
       name: 'Stances Known',
@@ -82,8 +76,7 @@ export const PHOENIX_CHAMPION_CLASS: ExpandedClassData = {
     {
       name: 'Eye of the Heavens (Blindsense)',
       level: 5,
-      description:
-        'At 5th level, the phoenix champion gains blindsense with a range of 30 feet.',
+      description: 'At 5th level, the phoenix champion gains blindsense with a range of 30 feet.',
     },
     {
       name: 'Greater Phoenix Wing Strike',
@@ -123,9 +116,7 @@ export const PHOENIX_CHAMPION_CLASS: ExpandedClassData = {
       'Precise Shot',
       'Discipline Focus (Solar Wind) or Discipline Focus (Tempest Gale)',
     ],
-    special: [
-      'Ability to initiate maneuvers, initiator level 5th',
-    ],
+    special: ['Ability to initiate maneuvers, initiator level 5th'],
     alignment: 'Any non-evil',
   },
   spellcasting: {
@@ -136,11 +127,7 @@ export const PHOENIX_CHAMPION_CLASS: ExpandedClassData = {
     type: 'Martial',
     initiatingAbility: 'WIS',
     ilProgression: 'full',
-    disciplines: [
-      'silver-crane',
-      'solar-wind',
-      'tempest-gale',
-    ],
+    disciplines: ['silver-crane', 'solar-wind', 'tempest-gale'],
     progressionTableKey: 'phoenix-champion',
     recoveryMechanics: {
       primary: {

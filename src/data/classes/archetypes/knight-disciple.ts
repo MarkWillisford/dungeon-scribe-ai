@@ -59,7 +59,7 @@ export const KNIGHT_DISCIPLE_ARCHETYPE: ArchetypeData = {
       name: 'Maneuvers',
       level: 1,
       description:
-        'A knight disciple begins her career with knowledge of three martial maneuvers. The disciplines available to her are Golden Lion, Iron Tortoise, and Silver Crane. She gains Bluff and Perception as class skills, and gains 2 additional skill ranks per level. Once the knight disciple knows a maneuver, she must ready it before she can use it by meditating or performing weapon drills for 10 minutes. The maneuvers she chooses remain readied until she decides to meditate again and change them. She may ready all three of her starting maneuvers, but as she advances in level and learns more maneuvers, she must choose which maneuvers to ready. A maneuver is considered expended after use and cannot be used again until recovered. The knight disciple may not ready maneuvers from more than one discipline at a time. Each knight disciple level counts as a full initiator level, and she uses Charisma as her initiation modifier. Maneuvers are extraordinary abilities unless otherwise noted, are not affected by spell resistance, and do not provoke attacks of opportunity when initiated. The knight disciple learns additional maneuvers at higher levels as shown on Table: Archetype Maneuver Progression. She must meet a maneuver\'s prerequisites to learn it. Upon reaching 4th level and at every even-numbered level thereafter (6th, 8th, 10th, and so on), the knight disciple may exchange a maneuver she knows for a new one of any level she can learn.',
+        "A knight disciple begins her career with knowledge of three martial maneuvers. The disciplines available to her are Golden Lion, Iron Tortoise, and Silver Crane. She gains Bluff and Perception as class skills, and gains 2 additional skill ranks per level. Once the knight disciple knows a maneuver, she must ready it before she can use it by meditating or performing weapon drills for 10 minutes. The maneuvers she chooses remain readied until she decides to meditate again and change them. She may ready all three of her starting maneuvers, but as she advances in level and learns more maneuvers, she must choose which maneuvers to ready. A maneuver is considered expended after use and cannot be used again until recovered. The knight disciple may not ready maneuvers from more than one discipline at a time. Each knight disciple level counts as a full initiator level, and she uses Charisma as her initiation modifier. Maneuvers are extraordinary abilities unless otherwise noted, are not affected by spell resistance, and do not provoke attacks of opportunity when initiated. The knight disciple learns additional maneuvers at higher levels as shown on Table: Archetype Maneuver Progression. She must meet a maneuver's prerequisites to learn it. Upon reaching 4th level and at every even-numbered level thereafter (6th, 8th, 10th, and so on), the knight disciple may exchange a maneuver she knows for a new one of any level she can learn.",
     },
     {
       name: 'Maneuvers Readied',
@@ -79,7 +79,7 @@ export const KNIGHT_DISCIPLE_ARCHETYPE: ArchetypeData = {
       name: "Crusader's Training",
       level: 1,
       description:
-        "At 1st level and every three levels thereafter (4th, 7th, 10th, 13th, 16th, 19th), a knight disciple selects one of the following abilities. Once selected, these abilities cannot be changed. This ability replaces divine bond.",
+        'At 1st level and every three levels thereafter (4th, 7th, 10th, 13th, 16th, 19th), a knight disciple selects one of the following abilities. Once selected, these abilities cannot be changed. This ability replaces divine bond.',
     },
     {
       name: "Crusader's Training — Detect Alignment",
@@ -97,7 +97,7 @@ export const KNIGHT_DISCIPLE_ARCHETYPE: ArchetypeData = {
       name: "Crusader's Training — Divine Interception",
       level: 1,
       description:
-        "Once per encounter, the knight disciple can move up to her speed as an immediate action to a square adjacent to an ally. This movement provokes attacks of opportunity as normal.",
+        'Once per encounter, the knight disciple can move up to her speed as an immediate action to a square adjacent to an ally. This movement provokes attacks of opportunity as normal.',
     },
     {
       name: "Crusader's Training — Fiendbane",
@@ -108,8 +108,7 @@ export const KNIGHT_DISCIPLE_ARCHETYPE: ArchetypeData = {
     {
       name: "Crusader's Training — Ghost Hunter",
       level: 1,
-      description:
-        "The knight disciple's weapons and armor gain the ghost touch special ability.",
+      description: "The knight disciple's weapons and armor gain the ghost touch special ability.",
     },
     {
       name: "Crusader's Training — Improved Guardian's Shield",
@@ -121,13 +120,13 @@ export const KNIGHT_DISCIPLE_ARCHETYPE: ArchetypeData = {
       name: "Crusader's Training — Know Thine Enemy",
       level: 1,
       description:
-        "The knight disciple can make Knowledge checks untrained to identify creatures, and there is no limit to the DC of Knowledge checks she can attempt. She gains a bonus on Knowledge checks made to identify chaotic or evil creatures equal to 1/2 her class level (minimum 1).",
+        'The knight disciple can make Knowledge checks untrained to identify creatures, and there is no limit to the DC of Knowledge checks she can attempt. She gains a bonus on Knowledge checks made to identify chaotic or evil creatures equal to 1/2 her class level (minimum 1).',
     },
     {
       name: "Crusader's Training — Righteous Sanctuary",
       level: 1,
       description:
-        "Once per encounter as an immediate action, the knight disciple can allow a willing ally to move up to its speed to a square adjacent to her. This movement does not provoke attacks of opportunity.",
+        'Once per encounter as an immediate action, the knight disciple can allow a willing ally to move up to its speed to a square adjacent to her. This movement does not provoke attacks of opportunity.',
     },
     {
       name: "Crusader's Training — Truthseeker",
@@ -173,7 +172,7 @@ export const KNIGHT_DISCIPLE_ARCHETYPE: ArchetypeData = {
       name: 'Empowered Healing',
       level: 4,
       description:
-        "At 4th level, whenever the knight disciple initiates a maneuver that heals hit point damage, the maneuver heals an additional 50% points of damage (rounded down). This ability replaces channel positive energy.",
+        'At 4th level, whenever the knight disciple initiates a maneuver that heals hit point damage, the maneuver heals an additional 50% points of damage (rounded down). This ability replaces channel positive energy.',
     },
 
     // ── Guardian's Aura (replaces Aura of Justice) ──

@@ -20,13 +20,13 @@ export const STALKER_ZEALOT_POW_ARCHETYPES: ArchetypeData[] = [
         name: 'Armor of Scars',
         level: 1,
         description:
-          'At 1st level, a brutal slayer gains a +1 bonus to his natural armor bonus to AC (this stacks with his existing natural armor bonus, if any). At 4th level and every four levels thereafter, this bonus increases by +1. In addition, the brutal slayer\'s instincts enable him to better dodge incoming blows; whenever he spends a full-round action to recover maneuvers, he gains a dodge bonus to AC equal to his brutal slayer initiation modifier. This ability replaces the stalker\'s dodge bonus.',
+          "At 1st level, a brutal slayer gains a +1 bonus to his natural armor bonus to AC (this stacks with his existing natural armor bonus, if any). At 4th level and every four levels thereafter, this bonus increases by +1. In addition, the brutal slayer's instincts enable him to better dodge incoming blows; whenever he spends a full-round action to recover maneuvers, he gains a dodge bonus to AC equal to his brutal slayer initiation modifier. This ability replaces the stalker's dodge bonus.",
       },
       {
         name: 'Muscle Memory',
         level: 2,
         description:
-          'Starting at 2nd level, a brutal slayer may add 1/2 his Strength modifier to his AC and to Reflex saves instead of his Dexterity modifier. At 6th level, the brutal slayer may add his full Strength modifier instead of his Dexterity modifier, rather than 1/2. The brutal slayer\'s Strength bonus to his AC is still limited by his armor\'s maximum Dexterity bonus.',
+          "Starting at 2nd level, a brutal slayer may add 1/2 his Strength modifier to his AC and to Reflex saves instead of his Dexterity modifier. At 6th level, the brutal slayer may add his full Strength modifier instead of his Dexterity modifier, rather than 1/2. The brutal slayer's Strength bonus to his AC is still limited by his armor's maximum Dexterity bonus.",
       },
       {
         name: 'Maneuver Recovery',
@@ -109,7 +109,7 @@ export const STALKER_ZEALOT_POW_ARCHETYPES: ArchetypeData[] = [
         name: 'Twinned Avatar',
         level: 16,
         description:
-          "At 16th level, the discordant crusader can enter two stances, one each from the Black Seraph and Silver Crane disciplines, with a single swift action. Doing so is taxing for the discordant crusader, and he can only maintain the stances together for a number of rounds equal to 3 + his discordant crusader initiation modifier. These rounds do not need to be consecutive, but after he reaches this maximum he must wait an equal number of rounds before he can use this ability again. At 20th level, the discordant crusader can maintain a Black Seraph and a Silver Crane stance together indefinitely. This ability replaces metaphysical transcendence.",
+          'At 16th level, the discordant crusader can enter two stances, one each from the Black Seraph and Silver Crane disciplines, with a single swift action. Doing so is taxing for the discordant crusader, and he can only maintain the stances together for a number of rounds equal to 3 + his discordant crusader initiation modifier. These rounds do not need to be consecutive, but after he reaches this maximum he must wait an equal number of rounds before he can use this ability again. At 20th level, the discordant crusader can maintain a Black Seraph and a Silver Crane stance together indefinitely. This ability replaces metaphysical transcendence.',
       },
     ],
     disciplineSwaps: {
@@ -156,7 +156,7 @@ export const STALKER_ZEALOT_POW_ARCHETYPES: ArchetypeData[] = [
         name: 'Hollow Faith',
         level: 1,
         description:
-          "Starting at 1st level, the void prophet can add unwilling members to her collective as a move action, or as a swift action by expending her psionic focus. A void prophet never loses power points as a result of an unwilling member of her collective dying. At 4th level, the void prophet may designate any number of creatures in her collective as a free action at the beginning of her turn. Those creatures suffer a -2 penalty to armor class, attack rolls, skill checks, caster level checks (such as those made to overcome spell resistance), and manifester level checks. At 8th level, the void prophet gains the ability to augment her maneuvers by spending power points. The maximum number of power points that may be spent is equal to one plus one additional power point for every four initiator levels the void prophet possesses, to a maximum of 6. This ability replaces mission.",
+          'Starting at 1st level, the void prophet can add unwilling members to her collective as a move action, or as a swift action by expending her psionic focus. A void prophet never loses power points as a result of an unwilling member of her collective dying. At 4th level, the void prophet may designate any number of creatures in her collective as a free action at the beginning of her turn. Those creatures suffer a -2 penalty to armor class, attack rolls, skill checks, caster level checks (such as those made to overcome spell resistance), and manifester level checks. At 8th level, the void prophet gains the ability to augment her maneuvers by spending power points. The maximum number of power points that may be spent is equal to one plus one additional power point for every four initiator levels the void prophet possesses, to a maximum of 6. This ability replaces mission.',
       },
       {
         name: 'Preach the Silence',
@@ -174,7 +174,7 @@ export const STALKER_ZEALOT_POW_ARCHETYPES: ArchetypeData[] = [
         name: 'The Consuming Void',
         level: 16,
         description:
-          "At 16th level, the void prophet may expend the soul of an unwilling creature that has died and merged with her collective through her metaphysical transcendence ability as a free action. If she does, that creature dies (and leaves the collective) and the void prophet regains her psionic focus. This ability alters and replaces metaphysical transcendence.",
+          'At 16th level, the void prophet may expend the soul of an unwilling creature that has died and merged with her collective through her metaphysical transcendence ability as a free action. If she does, that creature dies (and leaves the collective) and the void prophet regains her psionic focus. This ability alters and replaces metaphysical transcendence.',
       },
     ],
     disciplineSwaps: {

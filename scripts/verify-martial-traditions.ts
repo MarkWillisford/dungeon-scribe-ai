@@ -62,6 +62,12 @@ console.log('Validation errors:', errors);
 console.log('\nAll traditions:');
 ALL_MARTIAL_TRADITIONS.forEach((t) =>
   console.log(
-    '  ' + t.name + ' (favored=' + t.favoredDisciplineId + ', align=' + (t.alignmentRequirement || '—') + ')',
+    '  ' +
+      t.name +
+      ' (favored=' +
+      t.favoredDisciplineId +
+      ', align=' +
+      (t.alignmentRequirement || '—') +
+      ')',
   ),
 );

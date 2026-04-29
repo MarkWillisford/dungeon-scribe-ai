@@ -92,25 +92,25 @@ export const DRAGON_FURY_CLASS: ExpandedClassData = {
       name: 'Dual Fang Focus +2',
       level: 4,
       description:
-        'The dragon fury\'s competence bonus to attack and damage rolls while two-weapon fighting increases to +2.',
+        "The dragon fury's competence bonus to attack and damage rolls while two-weapon fighting increases to +2.",
     },
     {
       name: 'Vicious Fang',
       level: 5,
       description:
-        "At 5th level, the dragon fury uses Sharp Fang as if both of his wielded weapons were wielded as two-handed weapons (gaining a damage bonus equal to +3 per point of attack bonus subtracted).",
+        'At 5th level, the dragon fury uses Sharp Fang as if both of his wielded weapons were wielded as two-handed weapons (gaining a damage bonus equal to +3 per point of attack bonus subtracted).',
     },
     {
       name: 'Dragon Fury Defense +2',
       level: 6,
       description:
-        'The dragon fury\'s shield bonus to Armor Class while fighting with two weapons or a double weapon and in a Broken Blade, Primal Fury, or Thrashing Dragon stance increases to +2.',
+        "The dragon fury's shield bonus to Armor Class while fighting with two weapons or a double weapon and in a Broken Blade, Primal Fury, or Thrashing Dragon stance increases to +2.",
     },
     {
       name: 'Dual Fang Focus +3',
       level: 7,
       description:
-        'The dragon fury\'s competence bonus to attack and damage rolls while two-weapon fighting increases to +3.',
+        "The dragon fury's competence bonus to attack and damage rolls while two-weapon fighting increases to +3.",
     },
     {
       name: 'Deadly Fang Recovery',
@@ -122,7 +122,7 @@ export const DRAGON_FURY_CLASS: ExpandedClassData = {
       name: 'Dragon Fury Defense +3',
       level: 9,
       description:
-        'The dragon fury\'s shield bonus to Armor Class while fighting with two weapons or a double weapon and in a Broken Blade, Primal Fury, or Thrashing Dragon stance increases to +3.',
+        "The dragon fury's shield bonus to Armor Class while fighting with two weapons or a double weapon and in a Broken Blade, Primal Fury, or Thrashing Dragon stance increases to +3.",
     },
     {
       name: "Dragon War God's Dance",
@@ -134,7 +134,7 @@ export const DRAGON_FURY_CLASS: ExpandedClassData = {
       name: 'Dual Fang Focus +4',
       level: 10,
       description:
-        'The dragon fury\'s competence bonus to attack and damage rolls while two-weapon fighting increases to +4.',
+        "The dragon fury's competence bonus to attack and damage rolls while two-weapon fighting increases to +4.",
     },
   ],
   prerequisites: {
@@ -156,11 +156,7 @@ export const DRAGON_FURY_CLASS: ExpandedClassData = {
     type: 'Martial',
     initiatingAbility: 'WIS',
     ilProgression: 'full',
-    disciplines: [
-      'mithral-current',
-      'primal-fury',
-      'thrashing-dragon',
-    ],
+    disciplines: ['mithral-current', 'primal-fury', 'thrashing-dragon'],
     progressionTableKey: 'dragon-fury',
     recoveryMechanics: {
       primary: {

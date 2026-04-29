@@ -62,19 +62,19 @@ export const AWAKENED_BLADE_CLASS: ExpandedClassData = {
       name: 'Maneuvers',
       level: 1,
       description:
-        'An awakened blade adds either Riven Hourglass or Sleeping Goddess (chosen when the character enters the class) to his list of available disciplines. If the character does not have the associated skill of the chosen discipline as a class skill, he gains it as a class skill. At every even-numbered awakened blade level (2nd, 4th, 6th, 8th, and 10th), the awakened blade gains new maneuvers known from any discipline he has access to (including those from his prior martial training or gained through the Martial Training feat). The character must meet a maneuver\'s prerequisites to learn it. The character adds his full awakened blade levels to his initiator level to determine his total initiator level and his highest-level maneuvers known.',
+        "An awakened blade adds either Riven Hourglass or Sleeping Goddess (chosen when the character enters the class) to his list of available disciplines. If the character does not have the associated skill of the chosen discipline as a class skill, he gains it as a class skill. At every even-numbered awakened blade level (2nd, 4th, 6th, 8th, and 10th), the awakened blade gains new maneuvers known from any discipline he has access to (including those from his prior martial training or gained through the Martial Training feat). The character must meet a maneuver's prerequisites to learn it. The character adds his full awakened blade levels to his initiator level to determine his total initiator level and his highest-level maneuvers known.",
     },
     {
       name: 'Maneuvers Readied',
       level: 1,
       description:
-        'At 3rd, 6th, and 9th levels, the awakened blade gains an additional maneuver readied slot. These slots are added to the character\'s total readied maneuvers from his base initiating class. The awakened blade readies his maneuvers using the same method as his base initiating class (such as meditating for 10 minutes for a stalker, or exercising for 10 minutes for a warder).',
+        "At 3rd, 6th, and 9th levels, the awakened blade gains an additional maneuver readied slot. These slots are added to the character's total readied maneuvers from his base initiating class. The awakened blade readies his maneuvers using the same method as his base initiating class (such as meditating for 10 minutes for a stalker, or exercising for 10 minutes for a warder).",
     },
     {
       name: 'Stances Known',
       level: 1,
       description:
-        'At 4th, 6th, and 10th levels, the awakened blade learns a new martial stance from any discipline he has access to. The character must meet the stance\'s prerequisites to learn it.',
+        "At 4th, 6th, and 10th levels, the awakened blade learns a new martial stance from any discipline he has access to. The character must meet the stance's prerequisites to learn it.",
     },
     {
       name: 'Situational Awareness',
@@ -92,7 +92,7 @@ export const AWAKENED_BLADE_CLASS: ExpandedClassData = {
       name: 'Path of the Warrior',
       level: 1,
       description:
-        'The awakened blade continues to train in his psionic and martial techniques as he advances. If the character has levels in psychic warrior, he adds his awakened blade levels to his psychic warrior level for the purposes of determining trance and maneuver abilities. If the character has levels in soulknife, he counts all awakened blade levels as +1 to existing manifester level with regards to a soulknife\'s mind blade enhancement bonus.',
+        "The awakened blade continues to train in his psionic and martial techniques as he advances. If the character has levels in psychic warrior, he adds his awakened blade levels to his psychic warrior level for the purposes of determining trance and maneuver abilities. If the character has levels in soulknife, he counts all awakened blade levels as +1 to existing manifester level with regards to a soulknife's mind blade enhancement bonus.",
     },
     {
       name: 'Stance of the Inner Eye',
@@ -116,7 +116,7 @@ export const AWAKENED_BLADE_CLASS: ExpandedClassData = {
       name: 'Precognitive Defenses',
       level: 5,
       description:
-        'At 5th level, the awakened blade may expend his psionic focus as a free action to initiate a readied counter, even if he has already used his immediate or swift action this round. This specifically allows for the use of a free action on another creature\'s turn. This is a supernatural ability.',
+        "At 5th level, the awakened blade may expend his psionic focus as a free action to initiate a readied counter, even if he has already used his immediate or swift action this round. This specifically allows for the use of a free action on another creature's turn. This is a supernatural ability.",
     },
     {
       name: 'Hypercognitive Focus',

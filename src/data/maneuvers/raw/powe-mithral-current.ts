@@ -389,7 +389,7 @@ export const POWE_MITHRAL_CURRENT_MANEUVERS: ManeuverDefinition[] = [
     target: 'One creature',
     duration: 'Instant',
     description:
-      'You can initiate this counter in response to a melee or ranged attack being made against you or when caught in an effect that requires a Reflex saving throw. Make a Perform (dance) check, using your opponent\'s attack roll or the Reflex save DC as the DC. If you succeed, the attack is negated or you are otherwise unaffected by the effect, and you can move up to your speed without provoking attacks of opportunity towards the originator of the attack or effect. If your weapon is sheathed when you initiate this counter, you may draw it and make a melee attack for 3d6 additional points of damage.',
+      "You can initiate this counter in response to a melee or ranged attack being made against you or when caught in an effect that requires a Reflex saving throw. Make a Perform (dance) check, using your opponent's attack roll or the Reflex save DC as the DC. If you succeed, the attack is negated or you are otherwise unaffected by the effect, and you can move up to your speed without provoking attacks of opportunity towards the originator of the attack or effect. If your weapon is sheathed when you initiate this counter, you may draw it and make a melee attack for 3d6 additional points of damage.",
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'powe',

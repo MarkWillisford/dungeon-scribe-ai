@@ -54,9 +54,7 @@ export const POW_FEATS_PART3: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['general'],
-    prerequisites: [
-      { type: 'skill', skillId: 'stealth', ranks: 6 },
-    ],
+    prerequisites: [{ type: 'skill', skillId: 'stealth', ranks: 6 }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'stealth', 'senses'],
@@ -71,9 +69,7 @@ export const POW_FEATS_PART3: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'special', description: 'Ability to Claim creatures' },
-    ],
+    prerequisites: [{ type: 'special', description: 'Ability to Claim creatures' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'claim', 'harbinger', 'curse'],
@@ -256,9 +252,7 @@ export const POW_FEATS_PART3: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'class_feature', featureName: 'massacre' },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: 'massacre' }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'massacre', 'harbinger'],
@@ -277,8 +271,7 @@ export const POW_FEATS_PART3: FeatDefinition[] = [
       { type: 'level', minimum: 1, class: 'kineticist' },
       {
         type: 'special',
-        description:
-          'Uses an ability score other than Constitution to determine hit points',
+        description: 'Uses an ability score other than Constitution to determine hit points',
       },
     ],
     effects: [],
@@ -327,8 +320,9 @@ export const POW_FEATS_PART3: FeatDefinition[] = [
     id: 'pow-molten-silver-strike',
     name: 'Molten Silver Strike',
     description:
-      'Your mastery of Mithral Current and Solar Wind allows you to enhance your strikes with ranged power. When initiating a Mithral Current strike that enables ranged melee attacks, you may apply the effects of a Solar Wind boost to that strike. When doing so, the strike\'s range increases by 10 feet plus an additional 5 feet per four initiator levels you possess.',
-    shortDescription: 'Apply Solar Wind boosts to Mithral Current ranged strikes with extended range.',
+      "Your mastery of Mithral Current and Solar Wind allows you to enhance your strikes with ranged power. When initiating a Mithral Current strike that enables ranged melee attacks, you may apply the effects of a Solar Wind boost to that strike. When doing so, the strike's range increases by 10 feet plus an additional 5 feet per four initiator levels you possess.",
+    shortDescription:
+      'Apply Solar Wind boosts to Mithral Current ranged strikes with extended range.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
@@ -351,9 +345,7 @@ export const POW_FEATS_PART3: FeatDefinition[] = [
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'bab', minimum: 1 },
-    ],
+    prerequisites: [{ type: 'bab', minimum: 1 }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'polearm', 'shield', 'weapon'],
@@ -404,9 +396,7 @@ export const POW_FEATS_PART3: FeatDefinition[] = [
     source: 'Path of War',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'class_feature', featureName: "armiger's mark" },
-    ],
+    prerequisites: [{ type: 'class_feature', featureName: "armiger's mark" }],
     effects: [
       {
         type: 'bonus',
@@ -432,13 +422,12 @@ export const POW_FEATS_PART3: FeatDefinition[] = [
     name: 'Prodigious Two-Weapon Fighting',
     description:
       'Your great strength allows you to wield heavier weapons in your off hand. You may wield a one-handed weapon in your off hand as if it were a light weapon. Additionally, you may use your Strength modifier instead of your Dexterity modifier when qualifying for Two-Weapon Fighting and any feats with Two-Weapon Fighting as a prerequisite.',
-    shortDescription: 'Use Str for TWF prerequisites; wield one-handed weapons as light in off hand.',
+    shortDescription:
+      'Use Str for TWF prerequisites; wield one-handed weapons as light in off hand.',
     source: 'Path of War: Expanded',
     verificationStatus: 'needs_review' as const,
     types: ['combat'],
-    prerequisites: [
-      { type: 'ability_score', ability: 'STR', minimum: 13 },
-    ],
+    prerequisites: [{ type: 'ability_score', ability: 'STR', minimum: 13 }],
     effects: [],
     activationMode: 'passive',
     tags: ['path_of_war', 'two_weapon_fighting', 'strength'],

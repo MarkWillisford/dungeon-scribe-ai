@@ -118,7 +118,7 @@ export const POWE_STANCES_1: StanceDefinition[] = [
     disciplineId: 'cursed-razor',
     level: 1,
     description:
-      'While maintaining this stance, any creature the initiator hits with a melee weapon (including natural weapons) becomes cursed for a number of rounds equal to the initiator\'s initiation modifier.',
+      "While maintaining this stance, any creature the initiator hits with a melee weapon (including natural weapons) becomes cursed for a number of rounds equal to the initiator's initiation modifier.",
     prerequisites: {},
     source: {
       bookId: 'powe',
@@ -430,7 +430,7 @@ export const POWE_STANCES_1: StanceDefinition[] = [
     disciplineId: 'mithral-current',
     level: 5,
     description:
-      "While maintaining this stance, the initiator does not need to move in a straight line while charging, and may move through difficult terrain while charging (although movement is still reduced). In addition, any time a maneuver allows the initiator to move as part of initiating it (including maneuvers that allow a 5-foot step), the initiator may move an additional 5 feet. The initiator can sheathe his weapon once per round as a free action that does not provoke attacks of opportunity, even if it is not his turn.",
+      'While maintaining this stance, the initiator does not need to move in a straight line while charging, and may move through difficult terrain while charging (although movement is still reduced). In addition, any time a maneuver allows the initiator to move as part of initiating it (including maneuvers that allow a 5-foot step), the initiator may move an additional 5 feet. The initiator can sheathe his weapon once per round as a free action that does not provoke attacks of opportunity, even if it is not his turn.',
     prerequisites: { disciplineManeuversKnown: 2 },
     source: {
       bookId: 'powe',
