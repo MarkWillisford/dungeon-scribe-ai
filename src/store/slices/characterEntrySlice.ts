@@ -1181,10 +1181,9 @@ const characterEntrySlice = createSlice({
     },
 
     unassignFeat(state, action: PayloadAction<string>) {
-      // action.payload is slotId = "{source}_{level}"
-      const feat = state.character.feats.feats.find(
-        (f) => f.source + '_' + f.grantedAtLevel === action.payload || f.source === action.payload,
-      );
+      // action.payload is slotId = "{source}_{level}" e.g. "level_3"
+      // f.source already contains the full slotId string, so compare directly
+      const feat = state.character.feats.feats.find((f) => f.source === action.payload);
       if (feat) {
         feat.featId = '';
         feat.name = '';
