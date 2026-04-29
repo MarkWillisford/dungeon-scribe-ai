@@ -6,7 +6,7 @@ import { useAppDispatch } from '@/store/hooks';
 import { loadCharacter, type EntryMode } from '@/store/slices/characterEntrySlice';
 import { loadClasses } from '@/store/slices/gameDataSlice';
 import { CharacterService } from '@/services/CharacterService';
-import { FirebaseCharacterService } from '@/services/FirebaseCharacterService';
+import { loadCharacterById } from '@/store/thunks/loadCharacterById';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 
 /**
@@ -31,7 +31,7 @@ export default function EntryRoute() {
     async function initCharacter() {
       if (resolvedMode === 'edit' && characterId) {
         try {
-          const character = await FirebaseCharacterService.getCharacter(characterId);
+          const character = await dispatch(loadCharacterById(characterId)).unwrap();
           dispatch(loadCharacter({ character, mode: resolvedMode, characterId }));
         } catch {
           // Fall back to blank on load failure
