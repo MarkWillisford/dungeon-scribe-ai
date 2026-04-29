@@ -39,6 +39,7 @@ import { getDefinitionsForClass } from '@/data/classChoiceDefinitions/index';
 import { ALL_WEAPONS, ALL_ARMOR, ALL_SHIELDS, ALL_GEAR } from '@/data/equipment';
 import { ALL_ARCHETYPES } from '@/data/classes/archetypes/index';
 import { ALL_ANIMAL_COMPANIONS } from '@/data/animalCompanions';
+import { ALL_FAVORED_CLASS_BONUSES } from '@/data/favoredClassBonuses/index';
 import {
   ALL_WONDROUS_ITEMS,
   ALL_RINGS,
@@ -59,6 +60,7 @@ import {
 } from '@/data/races';
 
 import type { ArchetypeData } from '@/data/classes/types';
+import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
 import type { FeatDefinition } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type {
@@ -347,5 +349,15 @@ export class StaticGameDataConnector implements GameDataConnector {
 
   async getMartialTraditionById(_id: string): Promise<MartialTradition | null> {
     return null;
+  }
+
+  async getFavoredClassBonuses(
+    raceName: string,
+    className: string,
+    _context?: QueryContext,
+  ): Promise<FavoredClassBonusOption[]> {
+    return ALL_FAVORED_CLASS_BONUSES.filter(
+      (fcb) => fcb.raceName === raceName && fcb.className === className,
+    );
   }
 }

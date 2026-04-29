@@ -31,6 +31,7 @@ import type {
 } from '@/types/initiating';
 import type { ArchetypeData } from '@/data/classes/types';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
+import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
 import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
 
 // ---- Class choice collections -------------------------------------------------------
@@ -155,4 +156,11 @@ export interface GameDataConnector {
 
   // ---- Animal companions ----
   getAnimalCompanions(filter?: { mountsOnly?: boolean }): Promise<AnimalCompanionEntry[]>;
+
+  // ---- Favored class bonuses ----
+  getFavoredClassBonuses(
+    raceName: string,
+    className: string,
+    context?: QueryContext,
+  ): Promise<FavoredClassBonusOption[]>;
 }

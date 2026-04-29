@@ -20,6 +20,7 @@ import type { FeatDefinition, FeatType } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
 import type { ExpandedClassData, SpellProgressionTable, ArchetypeData } from '@/data/classes/types';
+import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
 import type { ClassData } from '@/data/classes';
 import type { ExpandedRaceData } from '@/data/races';
 import type {
@@ -551,5 +552,14 @@ export class GameDataService {
     mountsOnly?: boolean;
   }): Promise<AnimalCompanionEntry[]> {
     return GameDataService.connector.getAnimalCompanions(filter);
+  }
+
+  static async getFavoredClassBonuses(
+    raceName: string,
+    className: string,
+    context?: QueryContext,
+  ): Promise<FavoredClassBonusOption[]> {
+    const ctx = context ?? GameDataService.getContextFromStore();
+    return GameDataService.connector.getFavoredClassBonuses(raceName, className, ctx);
   }
 }

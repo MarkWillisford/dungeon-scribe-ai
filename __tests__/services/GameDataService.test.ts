@@ -388,6 +388,9 @@ jest.mock('@/data/phrenicAmplifications/index', () => ({
     },
   ],
 }));
+jest.mock('@/data/favoredClassBonuses/index', () => ({
+  ALL_FAVORED_CLASS_BONUSES: [],
+}));
 jest.mock('@/data/deities/index', () => ({
   getDeityByName: jest.fn((name: string) => {
     if (name === 'Cayden Cailean') {
@@ -863,6 +866,65 @@ describe('GameDataService', () => {
     test('does not include archetypes from other classes', async () => {
       const archetypes = await GameDataService.getArchetypesByClass('Rogue');
       expect(archetypes.every((a) => a.className === 'Rogue')).toBe(true);
+    });
+  });
+
+  describe('getFavoredClassBonuses', () => {
+    const MOCK_FCB_DWARF_FIGHTER = {
+      id: 'dwarf-fighter',
+      raceName: 'Dwarf',
+      className: 'Fighter',
+      shortName: 'Bull Rush/Trip Resist',
+      description: "Add +1 to the Fighter's CMD when resisting a bull rush or trip.",
+      mechanicalEffect: {
+        type: 'bonus',
+        bonusType: 'untyped',
+        target: 'cmd',
+        perLevelValue: { numerator: 1, denominator: 1 },
+      },
+      source: { bookId: 'apg', bookName: "Advanced Player's Guide", publisher: 'Paizo' },
+      isOfficial: true,
+      visibility: 'global' as const,
+      rev: 1,
+      verificationStatus: 'needs_review' as const,
+    };
+    const MOCK_FCB_DWARF_WIZARD = {
+      id: 'dwarf-wizard',
+      raceName: 'Dwarf',
+      className: 'Wizard',
+      shortName: 'Abjuration Duration',
+      description: 'Add +1/3 to the effective caster level of wizard abjuration spells.',
+      mechanicalEffect: {
+        type: 'caster_level',
+        scopeType: 'duration_only',
+        perLevelValue: { numerator: 1, denominator: 3 },
+      },
+      source: { bookId: 'apg', bookName: "Advanced Player's Guide", publisher: 'Paizo' },
+      isOfficial: true,
+      visibility: 'global' as const,
+      rev: 1,
+      verificationStatus: 'needs_review' as const,
+    };
+
+    beforeEach(() => {
+      const fcbModule = jest.requireMock('@/data/favoredClassBonuses/index');
+      fcbModule.ALL_FAVORED_CLASS_BONUSES = [MOCK_FCB_DWARF_FIGHTER, MOCK_FCB_DWARF_WIZARD];
+    });
+
+    test('returns entries matching raceName and className', async () => {
+      const results = await GameDataService.getFavoredClassBonuses('Dwarf', 'Fighter');
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('dwarf-fighter');
+    });
+
+    test('returns empty array when no match', async () => {
+      const results = await GameDataService.getFavoredClassBonuses('Elf', 'Fighter');
+      expect(results).toHaveLength(0);
+    });
+
+    test('does not return entries for other race + class combos', async () => {
+      const results = await GameDataService.getFavoredClassBonuses('Dwarf', 'Wizard');
+      expect(results.every((e) => e.raceName === 'Dwarf' && e.className === 'Wizard')).toBe(true);
     });
   });
 });

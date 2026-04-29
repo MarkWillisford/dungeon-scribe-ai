@@ -944,6 +944,23 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
     publisher: 'Paizo',
   },
 
+  // Favored class bonus source books (added with FCB data phase 1)
+  'pf1e-blood-of-shadows': {
+    bookId: 'blood-of-shadows',
+    bookName: 'Blood of Shadows',
+    publisher: 'Paizo',
+  },
+  'pf1e-bots': {
+    bookId: 'bots',
+    bookName: 'Pathfinder Player Companion: Blood of the Sea',
+    publisher: 'Paizo',
+  },
+  'pf1e-people-of-the-darklands': {
+    bookId: 'people-of-the-darklands',
+    bookName: 'Pathfinder Campaign Setting: People of the Darklands',
+    publisher: 'Paizo',
+  },
+
   // Generic / series-level codes
   'pf1e-prg': { bookId: 'prg', bookName: 'Pathfinder Roleplaying Game', publisher: 'Paizo' },
   'pf1e-adventurers-guide': {

@@ -41,6 +41,7 @@ import type {
 } from '@/types/initiating';
 import type { DeityEntry } from '@/types/deities';
 import type { AnimalCompanionEntry, BodyShape } from '@/types/animalCompanions';
+import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
 
 import { GameDataCache, TTL } from './GameDataCache';
 import type {
@@ -822,6 +823,37 @@ export class FirestoreGameDataConnector implements GameDataConnector {
         return results;
       } catch (e) {
         console.error(`FirestoreGameDataConnector: getArchetypesByClass(${className}) failed:`, e);
+        return [];
+      }
+    });
+  }
+
+  async getFavoredClassBonuses(
+    raceName: string,
+    className: string,
+    _context?: QueryContext,
+  ): Promise<FavoredClassBonusOption[]> {
+    const cacheKey = `fcb/${raceName}/${className}`;
+    const cached = GameDataCache.get<FavoredClassBonusOption[]>(cacheKey);
+    if (cached) return cached;
+
+    return FirestoreGameDataConnector.dedup(cacheKey, async () => {
+      try {
+        const q = query(
+          collection(db, 'favoredClassBonuses'),
+          where('visibility', '==', 'global'),
+          where('raceName', '==', raceName),
+          where('className', '==', className),
+        );
+        const snap = await getDocs(q);
+        const results = snap.docs.map((d) => d.data() as FavoredClassBonusOption);
+        GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+        return results;
+      } catch (e) {
+        console.error(
+          `FirestoreGameDataConnector: getFavoredClassBonuses(${raceName}, ${className}) failed:`,
+          e,
+        );
         return [];
       }
     });
