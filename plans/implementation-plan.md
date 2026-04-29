@@ -1,6 +1,6 @@
 # Dungeon Scribe AI 1.1 — Implementation Plan
 
-## Status (as of 2026-04-21)
+## Status (as of 2026-04-22)
 
 All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown significantly beyond the original plan through additional phases.
 
@@ -49,6 +49,10 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 | **Ruleset selector UI** — Identity tab Ruleset row, `RulesetSettingsSheet`, preset picker + inline customization, `patchActiveRuleset` | —                                         | **COMPLETE** — PR #97 (merged 2026-04-21)                                                                                                            |
 | **new-worktree skill + scripts** — `scripts/new-worktree.sh`, audit and fix scripts, Claude skill                                      | —                                         | **COMPLETE** — PR #99 (merged 2026-04-21)                                                                                                            |
 | **self-review skill** — multi-agent inline PR review, fixes at score ≥ 50, one commit per fix                                          | —                                         | **COMPLETE** — PR #102 (merged 2026-04-21)                                                                                                           |
+| **Issue #72 skills-tab fixes** — `SpecialtyGroup` component for Craft/Profession free-text specialties, initiating gating, skill tests | —                                         | **COMPLETE** — PR #100 (merged 2026-04-22)                                                                                                           |
+| **Issue #72 classes + template fixes** — favored class selection/steppers, drag-to-reorder multiclass, template picker improvements    | —                                         | **COMPLETE** — PR #101 (merged 2026-04-22)                                                                                                           |
+| **Typed ability score bonuses + equipment enhancement sync** — `DraftTypedBonus[]`, stacking rules, enhancement auto-sync              | —                                         | **IN REVIEW** — PR #98 open; CI green after merge from main (2026-04-22)                                                                             |
+| **Eidolon Evolution Pool** — dedicated pool manager UI for summoner eidolon evolutions                                                 | —                                         | **IN PROGRESS** — branch `MW/eidolon-evolution-pool`; slice reducers done                                                                            |
 | Enter Rissi — validate model end-to-end                                                                                                | —                                         | NOT STARTED                                                                                                                                          |
 
 #### Note: Campaign content seeding — campaignId deferred (2026-04-15)
@@ -793,7 +797,7 @@ Firestore collection: `classChoiceDefinitions/{id}`. Key types: `ClassChoiceDefi
 - [x] **Archetype picker** — `getArchetypesByClass`, `ArchetypePickerSheet`, wired into `ClassEntryCard` — COMPLETE (PR #93)
 - [x] **Ruleset selector UI** — `RulesetSettingsSheet` on Identity tab — COMPLETE (PR #97)
 - [ ] Build remaining direct-entry UI components (`src/components/character/direct-entry/`)
-  - **TODO (Eidolon Evolution Pool):** Summoner eidolon evolutions use `selectionMode: { type: 'at_class_levels', levels: [...] }` as a build-log tracking pattern (one entry per evolution point spent). Proper gameplay requires a dedicated pool manager UI: total points available by level, running balance, add/remove evolution picker. This is not a standard `ClassChoiceRow` — it needs its own component, likely `EidolonEvolutionPool.tsx`.
+  - **IN PROGRESS (Eidolon Evolution Pool):** Branch `MW/eidolon-evolution-pool`. Slice reducers `addEidolonEvolution` / `removeEidolonEvolution` done. Still needed: `GameDataService.getEidolonEvolutions()`, `EidolonEvolutionPickerSheet.tsx`, `EidolonEvolutionPool.tsx`, wire into `ClassEntryCard.tsx`, tests. Pool formula: `availablePoints = classEntry.level` (both APG and unchained summoner). Each selected evolution stored as `ClassChoice { featureName: 'Eidolon Evolution', takenAtLevel: 0, selection: evolutionId, metadata: { cost, name } }`.
   - **TODO (Wandering Spirit Daily Reset):** Shaman wandering spirit uses `selectionMode: { type: 'special' }`. The UI needs a daily-reset component (analogous to spell preparation) that triggers after 8 hours of rest. Reads available spirits from `shamanspirits` collection filtered by `wanderingOnly: true`. Likely lives in a dedicated `WanderingSpiritPicker.tsx` component that integrates with the rest/long-rest flow.
   - **TODO (Evolution Prerequisite Enforcement):** The `Prerequisite` union includes a `{ type: 'evolution'; evolutionId: string }` variant (added with eidolon evolution work) and `PrerequisiteService.formatPrerequisite` handles it for display. However, `PrerequisiteService.checkSingle` has no `case 'evolution':` — it falls through to `default: return false`, meaning any evolution that lists another evolution as a prerequisite will always fail validation silently. This is latent today (no evolution data currently uses prerequisites) but must be implemented before the eidolon evolution picker enforces selection rules. **Fix:** add a `case 'evolution':` to `checkSingle` that looks up the character's current eidolon evolutions and checks whether `evolutionId` is present.
 - [ ] Wire direct-entry screen into navigation (`app/(tabs)/characters/[id]/entry.tsx`)
@@ -826,7 +830,63 @@ Key facts:
 - [ ] Build companion builder components
 - [ ] Wire companion builder into direct-entry Classes & Templates tab
 
-### Phase 4: Campaigns & Social
+### Phase 4: Play Session — Combat Wiring
+
+The combat tracker (Phase 2) was built as a standalone system. This phase wires it to the character system so a saved character can actually be played at the table.
+
+#### 4a. Character → Combat Session Initialization
+
+When a player taps "Play" on a saved character, `combatSlice` must be hydrated from the character's computed stats. No manual re-entry of stats.
+
+- Load the character from Firestore (already available via `FirebaseCharacterService.getCharacter`)
+- Dispatch a `initCombatSession(character)` thunk that seeds `combatSlice` from:
+  - `character.combatStats.hitPoints.max` → HP tracker max
+  - `character.combatStats.armorClass` → DefensePanel base values
+  - `character.combatStats.savingThrows` → save totals
+  - `character.combatStats.attackBonuses` → AttackPanel base values
+  - `character.classes` → available combat ability toggles (Power Attack, Rage, etc.) gated by class/feat
+- Add a "Play" button to the character detail screen (`[id]/index.tsx`) that navigates to the combat tab with the character pre-loaded
+- The combat tab must show which character is active and provide a way to switch
+
+#### 4b. Play-State Persistence
+
+Combat state (current HP, active buffs, spell slots used) must survive app close and session breaks.
+
+- `combatSlice` state is currently ephemeral Redux (lost on app close)
+- Add a `PlaySessionService` / `FirebasePlaySessionService` that persists combat state to Firestore under `users/{uid}/sessions/{characterId}`
+- Auto-save on meaningful state changes (HP change, buff added/removed, slot used)
+- Load existing session on "Play" if one exists for that character; offer "Resume" or "New Session"
+
+#### 4c. Spell Slot Tracking
+
+Using spells at the table must decrement slots and persist that state.
+
+- Add slot-use controls to the playsheet spellcasting panel: tap a slot level → mark one use
+- Recovery via rest (see 4e)
+- Track per-pool, per-level remaining uses in `combatSlice` (not in the editor `Character`)
+- For spontaneous casters (Sorcerer, Bard): spells-per-day remaining
+- For prepared casters (Cleric, Wizard): prepared spells with cast/uncast toggle
+
+#### 4d. Resource Pool Tracking
+
+Class resources that recharge on rest or per-encounter.
+
+- Ki points, rage rounds, channel energy, bardic performance, lay on hands, etc.
+- UI: a row per active resource pool showing current / max with tap-to-decrement
+- Pools initialized from `character.resources` on session start
+- State persisted in play session (see 4b)
+- `rechargeOn: 'rest' | 'per_encounter' | 'special'` already typed — wire per-encounter pools to a "New Encounter" action
+
+#### 4e. Rest / Recovery
+
+- **Long rest**: reset HP to max, recover all spell slots, refill all `rechargeOn: 'rest'` pools, clear non-permanent conditions
+- **Short rest**: recover `rechargeOn: 'per_encounter'` pools, optionally spend HD for HP
+- Single button per rest type in the playsheet. Confirmation alert before applying.
+- Write the recovered state back to the play session in Firestore
+
+---
+
+### Phase 5: Campaigns & Social
 
 - Campaign CRUD with invite codes
 - DM/player roles with permission rules
@@ -834,7 +894,7 @@ Key facts:
 - Real-time Firestore sync (onSnapshot)
 - Bestiary with creature templates
 
-### Phase 5: Advanced
+### Phase 6: Advanced
 
 - Condition tracking UI with automated effects
 - Skill rank allocation per level
