@@ -598,10 +598,11 @@ export class CompanionService {
           case 'CON':
             con += change.change;
             break;
-          // INT/WIS/CHA deltas possible but rare; we ignore them here since
-          // the entry declares them directly and tiers that modify those are
-          // not represented in current data. Add cases if that assumption
-          // breaks.
+          default:
+            console.warn(
+              `[CompanionService] Unhandled ability score change "${change.ability}" in tier at level ${tier.atDruidLevel} — ignored`,
+            );
+            break;
         }
       }
 
