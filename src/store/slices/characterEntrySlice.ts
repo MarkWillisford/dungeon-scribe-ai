@@ -920,15 +920,20 @@ const characterEntrySlice = createSlice({
     // ---- Templates ----
 
     addTemplate(state, action: PayloadAction<AppliedTemplate>) {
-      if (action.payload.isFreeGrant) {
+      // Ensure every template entry has a stable id so removeTemplate and
+      // reorderTemplates can reliably target it by id.
+      const stableId =
+        action.payload.id ?? Math.random().toString(36).slice(2) + Date.now().toString(36);
+      const template = { ...action.payload, id: stableId };
+      if (template.isFreeGrant) {
         state.character.grantedBonuses.push({
-          id: action.payload.id ?? '',
-          name: action.payload.name,
-          description: action.payload.freeGrantNote ?? '',
-          grantedBy: action.payload.grantedBy ?? '',
+          id: stableId,
+          name: template.name,
+          description: template.freeGrantNote ?? '',
+          grantedBy: template.grantedBy ?? '',
         });
       } else {
-        state.character.appliedTemplates.push(action.payload);
+        state.character.appliedTemplates.push(template);
       }
       state.isDirty = true;
     },
