@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { View, Text, TextInput, Pressable, Modal, FlatList, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
@@ -189,7 +189,7 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
     };
   }, [raceName, entry.className]);
 
-  const selections = entry.favoredClassBonuses ?? [];
+  const selections = useMemo(() => entry.favoredClassBonuses ?? [], [entry.favoredClassBonuses]);
   const allocated = selections.length;
   const remaining = entry.level - allocated;
 
@@ -479,6 +479,12 @@ function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
                     >
                       {item.shortName}
                     </Text>
+                    <Text
+                      style={[fcbStyles.modalOptionDesc, { color: colors.text.tertiary }]}
+                      numberOfLines={2}
+                    >
+                      {item.description}
+                    </Text>
                     {isSelected && (
                       <Text
                         style={[
@@ -613,6 +619,10 @@ const fcbStyles = StyleSheet.create({
     flex: 1,
     fontFamily: 'LibreBaskerville',
     fontSize: 16,
+  },
+  modalOptionDesc: {
+    fontSize: 12,
+    marginTop: 2,
   },
   modalCheckmark: {
     fontSize: 16,

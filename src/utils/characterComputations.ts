@@ -293,6 +293,7 @@ function frac(count: number, numerator: number, denominator: number): number {
 }
 
 function fcbEffectDisplay(effect: FCBMechanicalEffect, count: number): string {
+  if (count <= 0) return '';
   switch (effect.type) {
     case 'bonus': {
       const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
