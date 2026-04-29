@@ -18,7 +18,7 @@ import type { Character } from '@/types';
 import type { ClassEntry } from '@/types/classes';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import type { CompanionInstance, CompanionGrant } from '@/types/companions';
-import type { DraftClassEntry } from '@/types/characterDraft';
+import type { ClassEntry } from '@/types/classes';
 import { BODY_SHAPE_SLOTS, type CompanionSlotAccess } from '@/data/companions/bodyShapeSlots';
 import { ALL_TEMPLATES } from '@/data/templates';
 import type { GrantsCompanionSpec } from '@/data/templates/types';
@@ -493,10 +493,10 @@ function effectiveLevelFromClass(classEntry: ClassEntry): number {
  * This is the formula the UI uses when assigning effectiveProgressionLevel on
  * a newly-created CompanionInstance before the character is persisted.
  */
-export function effectiveLevelFromDraftClass(cls: DraftClassEntry | undefined): number {
+export function effectiveLevelFromDraftClass(cls: ClassEntry | undefined): number {
   if (!cls) return 0;
   const archetypes = cls.archetypeName ? [cls.archetypeName] : [];
-  switch (cls.className) {
+  switch (cls.name) {
     case 'Druid':
     case 'Hunter':
     case 'Cavalier':
@@ -519,10 +519,10 @@ export function effectiveLevelFromDraftClass(cls: DraftClassEntry | undefined): 
  * Paladin), otherwise 'full' (all companions shown).
  */
 export function pickerFilterFromDraftClass(
-  cls: DraftClassEntry | undefined,
+  cls: ClassEntry | undefined,
 ): 'full' | 'mountsOnly' {
   if (!cls) return 'full';
-  return cls.className === 'Cavalier' || cls.className === 'Paladin' ? 'mountsOnly' : 'full';
+  return cls.name === 'Cavalier' || cls.name === 'Paladin' ? 'mountsOnly' : 'full';
 }
 
 // ---------------------------------------------------------------------------

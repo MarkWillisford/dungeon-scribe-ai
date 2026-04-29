@@ -18,9 +18,8 @@ import {
   addCompanion,
   removeCompanion,
 } from '@/store/slices/characterEntrySlice';
-import { type ClassEntry } from '@/types/classes';
+import { type ClassEntry, type FavoredClassBonusSelection } from '@/types/classes';
 import { type SpellcastingAdvancement } from '@/types/spells';
-import { type FavoredClassBonusSelection } from '@/types/characterDraft';
 import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import { GameDataService } from '@/services/GameDataService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
@@ -55,8 +54,8 @@ function isMutuallyExcludedFilled(featureName: string, classChoices: ClassChoice
 // Class + archetype combos that may grant multiple companions from a single
 // class choice (Beastmaster gets 1 + INT mod). Detected here so the
 // "+ Add Companion" button appears only for these.
-function classSupportsMultipleCompanions(entry: DraftClassEntry): boolean {
-  return entry.className === 'Ranger' && entry.archetypeName === 'Beastmaster';
+function classSupportsMultipleCompanions(entry: ClassEntry): boolean {
+  return entry.name === 'Ranger' && entry.archetypeName === 'Beastmaster';
 }
 
 // ---- Source badge ----
@@ -1208,7 +1207,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
 // class-choice intercept in ClassChoiceRow; this section just displays them.
 
 interface CompanionSectionProps {
-  entry: DraftClassEntry;
+  entry: ClassEntry;
 }
 
 function CompanionSection({ entry }: CompanionSectionProps) {
@@ -1227,7 +1226,7 @@ function CompanionSection({ entry }: CompanionSectionProps) {
   const routeCharacterId = originalCharacterId ?? 'draft';
 
   const grantedCompanions = useAppSelector((state) =>
-    state.characterEntry.draft.companions.filter(
+    state.characterEntry.character.companions.filter(
       (c) => c.grantedBy.type === 'class' && c.grantedBy.classEntryId === entry.id,
     ),
   );

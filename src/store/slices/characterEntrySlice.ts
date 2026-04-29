@@ -15,11 +15,10 @@ import type { AbilityKey } from '@/types/abilities';
 import type { Character } from '@/types';
 import type { LevelIncrementSlot } from '@/types/character';
 import type { CharacterFeat, Feats } from '@/types/feats';
-import type { ClassEntry, CharacterClasses } from '@/types/classes';
+import type { ClassEntry, CharacterClasses, FavoredClassBonusSelection } from '@/types/classes';
 import type { CharacterTrait } from '@/types/traits';
 import type { SpellcastingAdvancement, SpellcastingPool } from '@/types/spells';
 import type { EditorEquipmentItem, EditorEquippedSlot } from '@/types/character';
-import { type FavoredClassBonusSelection } from '@/types/characterDraft';
 import type {
   DraftEidolon,
   EidolonEdition,
@@ -57,7 +56,7 @@ export interface EntryValidationWarning {
 
 // ---- Feat slot helpers ----
 
-// Canonical source string format matching DraftFeatSlot.source values
+// Canonical source string format: "{source}_{level}" e.g. "level_3", "racial_1"
 function makeFeatSource(source: 'racial' | 'level' | 'bonus' | 'mythic', level: number): string {
   return `${source}_${level}`;
 }

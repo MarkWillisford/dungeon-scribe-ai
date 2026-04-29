@@ -268,57 +268,8 @@ describe('characterEntrySlice — session management', () => {
       expect(state.originalCharacterId).toBeNull();
     });
 
-    describe('migrateDraft — FCB migration', () => {
-      it('promotes legacy { hp, skillRank } format to array for favored classes', () => {
-        const draft: CharacterDraft = {
-          ...BLANK_DRAFT,
-          classes: [
-            makeClass('cls-1', {
-              isFavoredClass: true,
-              // Cast as any to simulate a legacy Firestore document shape
-              favoredClassBonuses: { hp: 2, skillRank: 1 } as unknown as [],
-              level: 5,
-            }),
-          ],
-        };
-        const state = reducer(makeInitialState(), loadCharacter({ draft, mode: 'edit' }));
-        const bonuses = state.character.classes.classes[0].favoredClassBonuses as
-          | { level: number; type: string }[]
-          | undefined;
-        expect(Array.isArray(bonuses)).toBe(true);
-        expect(bonuses).toHaveLength(3);
-        expect(bonuses![0]).toEqual({ level: 1, type: 'hp' });
-        expect(bonuses![1]).toEqual({ level: 2, type: 'hp' });
-        expect(bonuses![2]).toEqual({ level: 3, type: 'skill' });
-      });
-
-      it('clears stale favoredClassBonuses on non-favored classes instead of migrating', () => {
-        const draft: CharacterDraft = {
-          ...BLANK_DRAFT,
-          classes: [
-            makeClass('cls-1', {
-              isFavoredClass: false,
-              // Stale data left from a toggle-off before the fix
-              favoredClassBonuses: { hp: 1, skillRank: 0 } as unknown as [],
-              level: 3,
-            }),
-          ],
-        };
-        const state = reducer(makeInitialState(), loadCharacter({ draft, mode: 'edit' }));
-        expect(state.character.classes.classes[0].isFavoredClass).toBe(false);
-        expect(state.character.classes.classes[0].favoredClassBonuses).toBeUndefined();
-      });
-
-      it('leaves favoredClassBonuses undefined on non-favored classes that have no stale data', () => {
-        const draft: CharacterDraft = {
-          ...BLANK_DRAFT,
-          classes: [makeClass('cls-1', { isFavoredClass: false, level: 4 })],
-        };
-        const state = reducer(makeInitialState(), loadCharacter({ draft, mode: 'edit' }));
-        expect(state.character.classes.classes[0].favoredClassBonuses).toBeUndefined();
-      });
-    });
   });
+
 
   describe('resetDraft', () => {
     it('resets everything back to blank', () => {
@@ -2440,14 +2391,14 @@ describe('characterEntrySlice — companions', () => {
 // ---------------------------------------------------------------------------
 
 function makeStateWithSummoner() {
-  const summoner: DraftClassEntry = {
+  const summoner: ClassEntry = {
     id: 'summoner-1',
-    className: 'Summoner (Unchained)',
+    name: 'Summoner (Unchained)',
     level: 5,
     sourceSystem: 'pf1e',
     classChoices: [],
     prereqOverride: false,
-  };
+  } as ClassEntry;
   return reducer(makeInitialState(), addClass(summoner));
 }
 

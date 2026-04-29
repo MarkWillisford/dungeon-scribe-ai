@@ -4,7 +4,6 @@ import {
   effectiveLevelFromDraftClass,
   pickerFilterFromDraftClass,
 } from '@services/CompanionService';
-import type { DraftClassEntry } from '@/types/characterDraft';
 import type { Character } from '@/types';
 import type { ClassEntry } from '@/types/classes';
 import { BABProgression, SaveProgression } from '@/types/base';
@@ -465,16 +464,16 @@ describe('CompanionService.computeBaseStatBlock', () => {
 // effectiveLevelFromDraftClass
 // ---------------------------------------------------------------------------
 
-function makeDraft(className: string, level: number, archetypeName?: string): DraftClassEntry {
+function makeDraft(name: string, level: number, archetypeName?: string): ClassEntry {
   return {
     id: 'draft-1',
-    className,
+    name,
     level,
     archetypeName,
     sourceSystem: 'pf1e',
     prereqOverride: false,
     classChoices: [],
-  };
+  } as ClassEntry;
 }
 
 describe('effectiveLevelFromDraftClass', () => {

@@ -55,7 +55,7 @@ export function CompanionEntryScreen({ instanceId }: CompanionEntryScreenProps) 
   const [activeTab, setActiveTab] = useState<CompanionTabKey>('identity');
 
   const companion: CompanionInstance | undefined = useAppSelector((state) =>
-    state.characterEntry.draft.companions.find((c) => c.instanceId === instanceId),
+    state.characterEntry.character.companions.find((c) => c.instanceId === instanceId),
   );
 
   const entry: AnimalCompanionEntry | undefined = useMemo(

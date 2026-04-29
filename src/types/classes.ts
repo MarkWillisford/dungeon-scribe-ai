@@ -1,8 +1,12 @@
 import { BABProgression, SaveProgression, Effect } from './base';
 import { FeatPrerequisite } from './feats';
 import type { SpellcastingAdvancement } from './spells';
-import type { FavoredClassBonusSelection } from './characterDraft';
 import type { BroodmasterState } from './eidolon';
+
+export type FavoredClassBonusSelection =
+  | { level: number; type: 'hp' }
+  | { level: number; type: 'skill' }
+  | { level: number; type: 'alternate'; optionId: string };
 
 export interface CharacterClasses {
   classes: ClassEntry[];

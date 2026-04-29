@@ -2,21 +2,21 @@ import React from 'react';
 import { render, fireEvent } from '../../helpers/testUtils';
 import { BroodmasterPoolCard } from '@/components/character/direct-entry/BroodmasterPoolCard';
 import { EidolonPoolService } from '@/services/EidolonPoolService';
-import type { DraftClassEntry } from '@/types/characterDraft';
+import type { ClassEntry } from '@/types/classes';
 
 // ---- Redux mock ----
 
 const mockDispatch = jest.fn();
-let mockDraft = {
+let mockCharacter = {
   eidolons: [] as unknown[],
-  classes: [] as unknown[],
-  featSlots: [] as unknown[],
+  classes: { classes: [] as unknown[] },
+  feats: { feats: [] as unknown[] },
 };
 
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => mockDispatch,
   useAppSelector: (selector: (s: unknown) => unknown) =>
-    selector({ characterEntry: { draft: mockDraft } }),
+    selector({ characterEntry: { character: mockCharacter } }),
 }));
 
 jest.mock('@/hooks/useTheme', () => ({
@@ -41,17 +41,17 @@ jest.mock('@/components/character/direct-entry/EvolutionPickerSheet', () => ({
 
 const DATA_INDEX = EidolonPoolService.buildIndexFromStaticData();
 
-function makeClassEntry(overrides: Partial<DraftClassEntry> = {}): DraftClassEntry {
+function makeClassEntry(overrides: Partial<ClassEntry> = {}): ClassEntry {
   return {
     id: 'summoner-1',
-    className: 'Summoner',
+    name: 'Summoner',
     level: 10,
     sourceSystem: 'pf1e',
     classChoices: [],
     prereqOverride: false,
     archetypeId: 'broodmaster',
     ...overrides,
-  };
+  } as ClassEntry;
 }
 
 // ---- Tests ----
@@ -59,7 +59,7 @@ function makeClassEntry(overrides: Partial<DraftClassEntry> = {}): DraftClassEnt
 describe('BroodmasterPoolCard', () => {
   beforeEach(() => {
     mockDispatch.mockClear();
-    mockDraft = { eidolons: [], classes: [], featSlots: [] };
+    mockCharacter = { eidolons: [], classes: { classes: [] }, feats: { feats: [] } };
   });
 
   it('renders the Brood Pool heading', () => {

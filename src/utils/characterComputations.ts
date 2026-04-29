@@ -369,7 +369,7 @@ function fcbEffectDisplay(effect: FCBMechanicalEffect, count: number): string {
 }
 
 export function computeFCBAlternateAccumulation(
-  classes: DraftClassEntry[],
+  classes: ClassEntry[],
   options: FavoredClassBonusEntry[],
 ): AccumulatedFCBEffect[] {
   const optionMap = new Map(options.map((o) => [o.id, o]));

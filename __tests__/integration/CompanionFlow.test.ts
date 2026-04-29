@@ -8,7 +8,6 @@
 
 import { CompanionService } from '@services/CompanionService';
 import reducer, {
-  BLANK_DRAFT,
   addCompanion,
   removeCompanion,
   removeCompanionsGrantedByClass,
