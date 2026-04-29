@@ -52,6 +52,7 @@ function makeDraft(overrides: Partial<CharacterDraft> = {}): CharacterDraft {
     featSlots: [],
     spellcastingPools: [],
     equipment: [],
+    companions: [],
     eidolons: [],
     characterNotes: '',
     campaignNotes: '',
