@@ -520,8 +520,8 @@ export class CharacterTimelineService {
       return { effectiveInitiatorLevel: il, baseClass: entry.name };
     });
 
-    // knownManeuvers is empty at draft time — maneuver selection happens post-draft.
-    // maneuver_known prereqs will correctly fail during draft validation.
+    // knownManeuvers is empty during initial character entry — maneuver selection happens
+    // after entry completion. maneuver_known prereqs will correctly fail during entry validation.
     return { pools, knownManeuvers: [] };
   }
 
