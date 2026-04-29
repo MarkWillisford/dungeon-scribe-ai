@@ -24,6 +24,12 @@ const RECALC_EXCLUDED_ACTIONS = new Set([
   'characterEntry/setSaving',
   'characterEntry/setSaveError',
   'characterEntry/applyComputedStats',
+  'characterEntry/loadCharacter',
+  'characterEntry/resetDraft',
+  'characterEntry/markDirty',
+  'characterEntry/save/pending',
+  'characterEntry/save/fulfilled',
+  'characterEntry/save/rejected',
 ]);
 
 export const recalculateMiddleware: Middleware = (store) => (next) => (action) => {
