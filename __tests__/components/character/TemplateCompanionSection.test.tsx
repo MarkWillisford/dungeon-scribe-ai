@@ -151,7 +151,7 @@ function makeCompanion(overrides: Partial<CompanionInstance> = {}): CompanionIns
       weapons: [],
       magicItems: [],
       gear: [],
-      equippedSlots: new Map(),
+      equippedSlots: {},
     },
     notes: '',
     background: '',
@@ -175,7 +175,7 @@ describe('TemplateCompanionSection', () => {
   it('renders + Add button when no companion is granted yet', () => {
     const r = render(
       <TemplateCompanionSection
-templateId="druid-creature"
+        templateId="druid-creature"
         templateName="Druid Creature"
         spec={{ effectiveLevelFormula: 'characterLevel-3', pickerFilter: 'full' }}
       />,
@@ -188,7 +188,7 @@ templateId="druid-creature"
     // characterLevel=10, formula 'characterLevel-3' → effective level 7
     const r = render(
       <TemplateCompanionSection
-templateId="druid-creature"
+        templateId="druid-creature"
         templateName="Druid Creature"
         spec={{ effectiveLevelFormula: 'characterLevel-3', pickerFilter: 'full' }}
       />,
@@ -212,7 +212,7 @@ templateId="druid-creature"
     mockState.characterEntry.draft.classes = [{ level: 6 }, { level: 4 }];
     const r = render(
       <TemplateCompanionSection
-templateId="some-template"
+        templateId="some-template"
         templateName="Some Template"
         spec={{ effectiveLevelFormula: 'characterLevel', pickerFilter: 'full' }}
       />,
@@ -229,7 +229,7 @@ templateId="some-template"
     mockState.characterEntry.draft.classes = [{ level: 3 }];
     const r = render(
       <TemplateCompanionSection
-templateId="paladinish"
+        templateId="paladinish"
         templateName="Paladinish"
         spec={{ effectiveLevelFormula: 'characterLevel-4', pickerFilter: 'mountsOnly' }}
       />,
@@ -246,7 +246,7 @@ templateId="paladinish"
     mockState.characterEntry.draft.companions = [makeCompanion()];
     const r = render(
       <TemplateCompanionSection
-templateId="druid-creature"
+        templateId="druid-creature"
         templateName="Druid Creature"
         spec={{ effectiveLevelFormula: 'characterLevel-3', pickerFilter: 'full' }}
       />,
@@ -258,7 +258,7 @@ templateId="druid-creature"
     mockState.characterEntry.draft.companions = [makeCompanion({ instanceId: 'comp-9' })];
     const r = render(
       <TemplateCompanionSection
-templateId="druid-creature"
+        templateId="druid-creature"
         templateName="Druid Creature"
         spec={{ effectiveLevelFormula: 'characterLevel-3', pickerFilter: 'full' }}
       />,
@@ -285,7 +285,7 @@ templateId="druid-creature"
     ];
     const r = render(
       <TemplateCompanionSection
-templateId="druid-creature"
+        templateId="druid-creature"
         templateName="Druid Creature"
         spec={{ effectiveLevelFormula: 'characterLevel-3', pickerFilter: 'full' }}
       />,

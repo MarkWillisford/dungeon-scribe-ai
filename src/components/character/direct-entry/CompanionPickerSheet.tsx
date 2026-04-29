@@ -1,7 +1,16 @@
-import React, { useMemo, useState } from 'react';
-import { View, Text, TextInput, Pressable, Modal, FlatList, StyleSheet } from 'react-native';
+import React, { useMemo, useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Modal,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+} from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
-import { ALL_ANIMAL_COMPANIONS } from '@/data/animalCompanions';
+import { GameDataService } from '@/services/GameDataService';
 import type { AnimalCompanionEntry, BodyShape } from '@/types/animalCompanions';
 
 // ---- Filter -----------------------------------------------------------------
@@ -12,22 +21,6 @@ import type { AnimalCompanionEntry, BodyShape } from '@/types/animalCompanions';
 // Druid / Ranger / Hunter / Mad Dog / Sacred Huntsmaster use the full list.
 
 export type CompanionPickerFilter = 'full' | 'mountsOnly';
-
-const MOUNT_SHAPES: readonly BodyShape[] = [
-  'quadrupedHooves',
-  'quadrupedOther',
-  'quadrupedClaws',
-  'bipedClaws',
-  'avian',
-] as const;
-
-const MOUNTABLE_SIZE_RE = /Large|Huge|Gargantuan|Colossal/;
-
-function canBeMount(entry: AnimalCompanionEntry): boolean {
-  if (!MOUNT_SHAPES.includes(entry.bodyShape)) return false;
-  if (MOUNTABLE_SIZE_RE.test(entry.size)) return true;
-  return entry.progressionTiers.some((t) => t.sizeChange && MOUNTABLE_SIZE_RE.test(t.sizeChange));
-}
 
 // ---- Props ------------------------------------------------------------------
 
@@ -50,14 +43,32 @@ export function CompanionPickerSheet({
 }: CompanionPickerSheetProps) {
   const { colors, fantasy, isDark } = useTheme();
   const [query, setQuery] = useState('');
+  const [allItems, setAllItems] = useState<AnimalCompanionEntry[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const allItems = useMemo(() => {
-    const items =
-      pickerFilter === 'mountsOnly'
-        ? ALL_ANIMAL_COMPANIONS.filter(canBeMount)
-        : ALL_ANIMAL_COMPANIONS;
-    return [...items].sort((a, b) => a.name.localeCompare(b.name));
-  }, [pickerFilter]);
+  useEffect(() => {
+    if (!visible) return;
+    let cancelled = false;
+    GameDataService.getAnimalCompanions(
+      pickerFilter === 'mountsOnly' ? { mountsOnly: true } : undefined,
+    )
+      .then((entries) => {
+        if (!cancelled) {
+          setAllItems([...entries].sort((a, b) => a.name.localeCompare(b.name)));
+        }
+      })
+      .catch((e) => {
+        console.error('Failed to load animal companions:', e);
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoading(false);
+      });
+    return () => {
+      cancelled = true;
+      setIsLoading(true);
+      setAllItems([]);
+    };
+  }, [visible, pickerFilter]);
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
@@ -129,6 +140,15 @@ export function CompanionPickerSheet({
           />
         </View>
 
+        {isLoading && (
+          <View style={styles.loadingRow}>
+            <ActivityIndicator size="small" color={fantasy.gold} />
+            <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>
+              Loading companions...
+            </Text>
+          </View>
+        )}
+
         <FlatList
           data={filtered}
           keyExtractor={(entry) => entry.id}
@@ -157,7 +177,7 @@ export function CompanionPickerSheet({
           )}
           contentContainerStyle={styles.listContent}
           ListFooterComponent={
-            filtered.length === 0 ? (
+            !isLoading && filtered.length === 0 ? (
               <View style={styles.empty}>
                 <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
                   {query
@@ -228,6 +248,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     minHeight: 44,
+  },
+  loadingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    gap: 8,
+  },
+  loadingText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    fontStyle: 'italic',
   },
   listContent: { flexGrow: 1 },
   item: {

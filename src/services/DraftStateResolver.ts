@@ -8,6 +8,7 @@
 // be cast via `snapshot as unknown as Character` for those calls.
 //
 import type { CharacterDraft, DraftClassEntry, AbilityKey } from '@/types/characterDraft';
+import type { CompanionInstance } from '@/types/companions';
 import { computeOtherBonusTotal } from '@/types/characterDraft';
 import type { Ruleset } from '@/types/ruleset';
 import type { InitiatingContributor } from '@/types/initiating';
@@ -72,6 +73,7 @@ export interface DraftCharacterSnapshot {
     knownManeuvers: Array<{ maneuverId: string }>;
   };
   mythic?: { tier: number };
+  companions: CompanionInstance[];
 }
 
 // ---- Timeline types ----
@@ -120,6 +122,7 @@ export class DraftStateResolver {
     info: { race: { name: '' } },
     spellcasting: { pools: [] },
     initiating: { pools: [], knownManeuvers: [] },
+    companions: [],
   };
 
   /**
@@ -317,6 +320,7 @@ export class DraftStateResolver {
       info: { race: { name: draft.raceName } },
       spellcasting: this.buildSpellcastingSnapshot(partialClasses, classDataMap),
       initiating: this.buildInitiatingSnapshot(partialClasses, classDataMap),
+      companions: draft.companions,
     };
     // mythic omitted — direct-entry draft doesn't track mythic tier
   }

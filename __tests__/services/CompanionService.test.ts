@@ -44,7 +44,7 @@ function makeCharacter(classes: ClassEntry[]): Character {
 
 const classGrant = (className: string): CompanionGrant => ({
   type: 'class',
-  classEntryId: className,
+  classEntryId: `class-${className.toLowerCase()}-test`,
   className,
   classChoiceId: 'animal-companion',
 });
@@ -104,7 +104,7 @@ const makeInstance = (overrides: Partial<CompanionInstance> = {}): CompanionInst
     weapons: [],
     magicItems: [],
     gear: [],
-    equippedSlots: new Map(),
+    equippedSlots: {},
   },
   notes: '',
   background: '',

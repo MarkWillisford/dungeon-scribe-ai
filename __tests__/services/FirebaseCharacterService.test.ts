@@ -175,9 +175,9 @@ describe('FirebaseCharacterService', () => {
   });
 
   describe('serializeForFirestore — companion equippedSlots', () => {
-    test('converts companion equippedSlots Map to plain object', async () => {
+    test('passes companion equippedSlots Record through to Firestore', async () => {
       const character = createTestCharacter();
-      // Add a companion with a Map for equippedSlots
+      // Add a companion with a Record for equippedSlots (type changed from Map)
       (character as unknown as Record<string, unknown>).companions = [
         {
           instanceId: 'comp-1',
@@ -202,7 +202,7 @@ describe('FirebaseCharacterService', () => {
             weapons: [],
             magicItems: [],
             gear: [],
-            equippedSlots: new Map([['neck', 'amulet-1']]),
+            equippedSlots: { neck: 'amulet-1' },
           },
         },
       ];
@@ -238,7 +238,7 @@ describe('FirebaseCharacterService', () => {
       });
     }
 
-    test('converts companion equippedSlots plain object back to Map', async () => {
+    test('deserializes companion equippedSlots plain object as Record', async () => {
       const character = createTestCharacter();
       const base = JSON.parse(JSON.stringify(character));
       base.equipment.equippedSlots = {};
@@ -273,8 +273,8 @@ describe('FirebaseCharacterService', () => {
       mockGetDoc(base);
 
       const result = await FirebaseCharacterService.getCharacter('char-deser-1');
-      expect(result.companions[0].equipment.equippedSlots).toBeInstanceOf(Map);
-      expect(result.companions[0].equipment.equippedSlots.get('neck')).toBe('amulet-2');
+      expect(result.companions[0].equipment.equippedSlots).not.toBeInstanceOf(Map);
+      expect(result.companions[0].equipment.equippedSlots['neck']).toBe('amulet-2');
     });
 
     test('converts lastUpdated Firestore Timestamp to Date', async () => {

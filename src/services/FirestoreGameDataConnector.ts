@@ -40,6 +40,7 @@ import type {
   MartialTradition,
 } from '@/types/initiating';
 import type { DeityEntry } from '@/types/deities';
+import type { AnimalCompanionEntry, BodyShape } from '@/types/animalCompanions';
 
 import { GameDataCache, TTL } from './GameDataCache';
 import type {
@@ -757,6 +758,50 @@ export class FirestoreGameDataConnector implements GameDataConnector {
       console.error(`FirestoreGameDataConnector: failed to fetch martial tradition "${id}":`, e);
       return null;
     }
+  }
+
+  // ---- Animal companions -----------------------------------------------------
+
+  async getAnimalCompanions(filter?: { mountsOnly?: boolean }): Promise<AnimalCompanionEntry[]> {
+    const cacheKey = `animalCompanions/${JSON.stringify(filter ?? {})}`;
+    const cached = GameDataCache.get<AnimalCompanionEntry[]>(cacheKey);
+    if (cached) return cached;
+
+    return FirestoreGameDataConnector.dedup(cacheKey, async () => {
+      try {
+        const all = await FirestoreGameDataConnector.dedup('animalCompanions/__all', async () => {
+          const results = await fetchAll<AnimalCompanionEntry>('animalCompanions');
+          GameDataCache.set('animalCompanions/__all', results, TTL.OFFICIAL);
+          return results;
+        });
+
+        let results = all;
+        if (filter?.mountsOnly) {
+          const MOUNT_SHAPES: readonly BodyShape[] = [
+            'quadrupedHooves',
+            'quadrupedOther',
+            'quadrupedClaws',
+            'bipedClaws',
+            'avian',
+          ];
+          const MOUNTABLE_SIZE_RE = /Large|Huge|Gargantuan|Colossal/;
+          results = all.filter(
+            (entry) =>
+              MOUNT_SHAPES.includes(entry.bodyShape) &&
+              (MOUNTABLE_SIZE_RE.test(entry.size) ||
+                entry.progressionTiers.some(
+                  (t) => t.sizeChange && MOUNTABLE_SIZE_RE.test(t.sizeChange),
+                )),
+          );
+        }
+
+        GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+        return results;
+      } catch (e) {
+        console.error('FirestoreGameDataConnector: getAnimalCompanions failed:', e);
+        return [];
+      }
+    });
   }
 
   async getArchetypesByClass(className: string, _context?: QueryContext): Promise<ArchetypeData[]> {

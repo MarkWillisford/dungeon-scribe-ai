@@ -1212,6 +1212,18 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
     publisher: 'Player-Created',
   },
 
+  // Dreamscarred Press — Path of War initiating system (3pp, hosted on d20pfsrd with permission)
+  'dsp-pow': {
+    bookId: 'pow',
+    bookName: 'Path of War',
+    publisher: 'Dreamscarred Press',
+  },
+  'dsp-powe': {
+    bookId: 'powe',
+    bookName: 'Path of War: Expanded',
+    publisher: 'Dreamscarred Press',
+  },
+
   // External sources
   'd20pfsrd.com': {
     bookId: 'd20pfsrd',
@@ -1229,16 +1241,6 @@ const SHORT_CODE_MAP: Record<string, GameDataSource> = {
     bookId: 'tob',
     bookName: 'Tome of Battle: The Book of Nine Swords',
     publisher: 'Wizards of the Coast',
-  },
-  'dsp-pow': {
-    bookId: 'pow',
-    bookName: 'Path of War',
-    publisher: 'Dreamscarred Press',
-  },
-  'dsp-powe': {
-    bookId: 'powe',
-    bookName: 'Path of War: Expanded',
-    publisher: 'Dreamscarred Press',
   },
   'pf1e-pp': {
     bookId: 'pp',
@@ -1432,6 +1434,11 @@ const FULL_NAME_MAP: Record<string, string> = {
   "plane-hopper's handbook": 'pf1e-plane-hoppers-handbook',
   'psychic anthology': 'pf1e-psychic-anthology',
   "healer's handbook": 'pf1e-ppc-healh',
+
+  // --- Dreamscarred Press (Path of War) ---
+  'path of war': 'dsp-pow',
+  'path of war expanded': 'dsp-powe',
+  'path of war: expanded': 'dsp-powe',
   "monster hunter's handbook": 'pf1e-mhh',
   'wilderness origins': 'pf1e-wo',
   'legacy of the first world': 'pf1e-legacy-first-world',
@@ -1481,14 +1488,6 @@ const FULL_NAME_MAP: Record<string, string> = {
   "giant hunter's handbook": 'pf1e-ppc-ghh',
   "merchant's manifest": 'pf1e-ppc-mrm',
   "disciple's doctrine": 'pf1e-ppc-dd2',
-
-  // Tome of Battle / Path of War full names
-  'tome of battle': '3.5e-tob',
-  'book of nine swords': '3.5e-tob',
-  'tome of battle: the book of nine swords': '3.5e-tob',
-  'path of war': 'dsp-pow',
-  'path of war expanded': 'dsp-powe',
-  'path of war: expanded': 'dsp-powe',
 
   // Adventure Path named collections (not numbered)
   'curse of the crimson throne': 'pf1e-ap', // AP series, no specific number

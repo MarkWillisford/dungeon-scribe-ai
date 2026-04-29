@@ -38,6 +38,7 @@ import { ALL_EXPANDED_CLASSES, SPELL_TABLES } from '@/data/classes/index';
 import { getDefinitionsForClass } from '@/data/classChoiceDefinitions/index';
 import { ALL_WEAPONS, ALL_ARMOR, ALL_SHIELDS, ALL_GEAR } from '@/data/equipment';
 import { ALL_ARCHETYPES } from '@/data/classes/archetypes/index';
+import { ALL_ANIMAL_COMPANIONS } from '@/data/animalCompanions';
 import {
   ALL_WONDROUS_ITEMS,
   ALL_RINGS,
@@ -48,6 +49,7 @@ import {
   ALL_IOUN_STONES,
 } from '@/data/magicItems/index';
 import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import type { AnimalCompanionEntry, BodyShape } from '@/types/animalCompanions';
 import {
   CORE_RACES,
   FEATURED_RACES,
@@ -279,6 +281,25 @@ export class StaticGameDataConnector implements GameDataConnector {
 
   async getArchetypesByClass(className: string, _context?: QueryContext): Promise<ArchetypeData[]> {
     return ALL_ARCHETYPES.filter((a) => a.className === className);
+  }
+
+  async getAnimalCompanions(filter?: { mountsOnly?: boolean }): Promise<AnimalCompanionEntry[]> {
+    if (!filter?.mountsOnly) return ALL_ANIMAL_COMPANIONS;
+
+    const MOUNT_SHAPES: readonly BodyShape[] = [
+      'quadrupedHooves',
+      'quadrupedOther',
+      'quadrupedClaws',
+      'bipedClaws',
+      'avian',
+    ];
+    const MOUNTABLE_SIZE_RE = /Large|Huge|Gargantuan|Colossal/;
+    return ALL_ANIMAL_COMPANIONS.filter(
+      (entry) =>
+        MOUNT_SHAPES.includes(entry.bodyShape) &&
+        (MOUNTABLE_SIZE_RE.test(entry.size) ||
+          entry.progressionTiers.some((t) => t.sizeChange && MOUNTABLE_SIZE_RE.test(t.sizeChange))),
+    );
   }
 
   async getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]> {

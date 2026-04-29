@@ -69,7 +69,7 @@ export interface CompanionEquipment {
   weapons: Weapon[];
   magicItems: CharacterMagicItem[];
   gear: Gear[];
-  equippedSlots: Map<ItemSlot, string>;
+  equippedSlots: Partial<Record<ItemSlot, string>>;
 }
 
 // ---- CompanionInstance -------------------------------------------------------

@@ -100,6 +100,10 @@ const SCRIPTS: string[] = [
   'seedWarpriestBlessings.ts',
   'seedAlchemistDiscoveries.ts',
   'seedEidolonEvolutions.ts',
+  'seedDisciplines.ts',
+  'seedManeuvers.ts',
+  'seedStances.ts',
+  'seedMartialTraditions.ts',
 
   // Depends on option collections existing
   'seedClassChoiceDefinitions.ts',

@@ -240,7 +240,7 @@ function makeCompanion(overrides: Partial<CompanionInstance> = {}): CompanionIns
       weapons: [],
       magicItems: [],
       gear: [],
-      equippedSlots: new Map(),
+      equippedSlots: {},
     },
     notes: '',
     background: '',
@@ -887,7 +887,7 @@ describe('EquipmentSection', () => {
             identified: true,
           },
         ],
-        equippedSlots: new Map([['neck', 'item-1']]),
+        equippedSlots: { neck: 'item-1' },
       },
     });
     const r = render(<EquipmentSection companion={comp} entry={wolf} />);

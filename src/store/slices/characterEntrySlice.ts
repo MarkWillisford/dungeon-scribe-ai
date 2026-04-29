@@ -2,10 +2,8 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { enableMapSet } from 'immer';
 import { Alignment } from '@/types/base';
 
-// CompanionEquipment.equippedSlots is a Map<ItemSlot, string> — opt Immer
-// into Map/Set mutation support once, at module load. Idempotent; safe to
-// call from the slice module so both the production store and the test
-// suites pick it up without having to thread it through bootstrap code.
+// equippedSlots was changed from Map<ItemSlot,string> to Partial<Record<ItemSlot,string>>
+// on main. enableMapSet is kept for any other Map/Set state that may be added later.
 enableMapSet();
 import { ClassChoice } from '@/types/classes';
 import type {
@@ -598,7 +596,7 @@ const characterEntrySlice = createSlice({
           weapons: [],
           magicItems: [],
           gear: [],
-          equippedSlots: new Map(),
+          equippedSlots: {},
         },
         notes: '',
         background: '',
@@ -845,7 +843,7 @@ const characterEntrySlice = createSlice({
       const { slot, item } = action.payload;
 
       // Displace any existing item in this slot.
-      const existingInstanceId = comp.equipment.equippedSlots.get(slot);
+      const existingInstanceId = comp.equipment.equippedSlots[slot];
       if (existingInstanceId) {
         comp.equipment.magicItems = comp.equipment.magicItems.filter(
           (m) => m.instanceId !== existingInstanceId,
@@ -853,14 +851,14 @@ const characterEntrySlice = createSlice({
       }
 
       // Ensure the new item carries the slot and equipped flag so downstream
-      // readers don't have to cross-reference the map.
+      // readers don't have to cross-reference the record.
       const placed: CharacterMagicItem = {
         ...item,
         equipped: true,
         equippedSlot: slot === 'ring' ? 'ring_left' : (slot as Exclude<ItemSlot, 'ring'>),
       };
       comp.equipment.magicItems.push(placed);
-      comp.equipment.equippedSlots.set(slot, placed.instanceId);
+      comp.equipment.equippedSlots[slot] = placed.instanceId;
       state.isDirty = true;
     },
 
@@ -871,12 +869,12 @@ const characterEntrySlice = createSlice({
       const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       const { slot } = action.payload;
-      const instanceIdInSlot = comp.equipment.equippedSlots.get(slot);
+      const instanceIdInSlot = comp.equipment.equippedSlots[slot];
       if (!instanceIdInSlot) return;
       comp.equipment.magicItems = comp.equipment.magicItems.filter(
         (m) => m.instanceId !== instanceIdInSlot,
       );
-      comp.equipment.equippedSlots.delete(slot);
+      delete comp.equipment.equippedSlots[slot];
       state.isDirty = true;
     },
 
@@ -926,11 +924,14 @@ const characterEntrySlice = createSlice({
     },
 
     removeTemplate(state, action: PayloadAction<string>) {
-      state.draft.templates = state.draft.templates.filter((t) => t.id !== action.payload);
+      const removedId = action.payload;
+      state.draft.templates = state.draft.templates.filter((t) => t.id !== removedId);
+
       // Sweep companions granted by this template.
       state.draft.companions = state.draft.companions.filter(
-        (c) => !(c.grantedBy.type === 'template' && c.grantedBy.templateId === action.payload)
+        (c) => !(c.grantedBy.type === 'template' && c.grantedBy.templateId === removedId),
       );
+
       state.isDirty = true;
     },
 

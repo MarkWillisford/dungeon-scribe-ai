@@ -30,6 +30,7 @@ import type {
   DisciplineSourceSystem,
 } from '@/types/initiating';
 import type { ArchetypeData } from '@/data/classes/types';
+import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import type { QueryContext, RaceGroups, FeatFilter } from './GameDataService';
 
 // ---- Class choice collections -------------------------------------------------------
@@ -151,4 +152,7 @@ export interface GameDataConnector {
 
   // ---- Archetypes ----
   getArchetypesByClass(className: string, context?: QueryContext): Promise<ArchetypeData[]>;
+
+  // ---- Animal companions ----
+  getAnimalCompanions(filter?: { mountsOnly?: boolean }): Promise<AnimalCompanionEntry[]>;
 }

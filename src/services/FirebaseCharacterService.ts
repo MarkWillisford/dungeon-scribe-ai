@@ -174,10 +174,13 @@ export class FirebaseCharacterService {
     if (Array.isArray(character.companions)) {
       character.companions.forEach((companion) => {
         if (companion.equipment && !(companion.equipment.equippedSlots instanceof Map)) {
-          const slotsRecord = companion.equipment.equippedSlots as unknown as Record<string, string>;
-          companion.equipment.equippedSlots = new Map(
-            Object.entries(slotsRecord || {}) as [ItemSlot, string][],
-          );
+          const slotsRecord = companion.equipment.equippedSlots as unknown as Record<
+            string,
+            string
+          >;
+          companion.equipment.equippedSlots = { ...(slotsRecord || {}) } as Partial<
+            Record<ItemSlot, string>
+          >;
         }
       });
     }
@@ -204,6 +207,11 @@ export class FirebaseCharacterService {
     // Schema migration: backfill ruleset for documents written before v1.2.0
     if (!character.ruleset) {
       character.ruleset = { ...PRESET_PF1E_STANDARD };
+    }
+
+    // Schema migration: backfill companions for documents written before companions feature
+    if (!character.companions) {
+      character.companions = [];
     }
 
     return character;

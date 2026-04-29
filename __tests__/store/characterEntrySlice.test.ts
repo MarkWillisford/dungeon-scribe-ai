@@ -880,6 +880,40 @@ describe('characterEntrySlice — templates', () => {
       state = reducer(state, removeTemplate('does-not-exist'));
       expect(state.draft.templates).toHaveLength(1);
     });
+
+    it('sweeps companions granted by the removed template', () => {
+      let state = reducer(makeInitialState(), addTemplate(makeTemplate('tpl-1')));
+      state = reducer(
+        state,
+        addCompanion({
+          instanceId: 'comp-1',
+          sourceEntryId: 'wolf',
+          name: 'Shadow',
+          grantedBy: { type: 'template', templateId: 'tpl-1' },
+          effectiveProgressionLevel: 5,
+        }),
+      );
+      state = reducer(state, removeTemplate('tpl-1'));
+      expect(state.draft.templates).toHaveLength(0);
+      expect(state.draft.companions).toHaveLength(0);
+    });
+
+    it('does not sweep companions granted by a different template', () => {
+      let state = reducer(makeInitialState(), addTemplate(makeTemplate('tpl-1')));
+      state = reducer(state, addTemplate(makeTemplate('tpl-2')));
+      state = reducer(
+        state,
+        addCompanion({
+          instanceId: 'comp-1',
+          sourceEntryId: 'wolf',
+          name: 'Shadow',
+          grantedBy: { type: 'template', templateId: 'tpl-2' },
+          effectiveProgressionLevel: 5,
+        }),
+      );
+      state = reducer(state, removeTemplate('tpl-1'));
+      expect(state.draft.companions).toHaveLength(1);
+    });
   });
 
   describe('updateTemplate', () => {
@@ -1468,10 +1502,11 @@ describe('characterEntrySlice — enhancement sync', () => {
 describe('characterEntrySlice — companions', () => {
   const druidGrant = (
     classEntryId = 'class-druid',
+    className = 'Druid',
   ): Parameters<typeof addCompanion>[0]['grantedBy'] => ({
     type: 'class',
     classEntryId,
-    className: 'Druid',
+    className,
     classChoiceId: 'druid-nature-bond',
   });
 
@@ -2098,7 +2133,7 @@ describe('characterEntrySlice — companions', () => {
       expect(comp.equipment.magicItems[0].instanceId).toBe('item-1');
       expect(comp.equipment.magicItems[0].equipped).toBe(true);
       expect(comp.equipment.magicItems[0].equippedSlot).toBe('neck');
-      expect(comp.equipment.equippedSlots.get('neck')).toBe('item-1');
+      expect(comp.equipment.equippedSlots['neck']).toBe('item-1');
     });
 
     it('equipCompanionMagicItem: ring slot tags instance as ring_left', () => {
@@ -2112,7 +2147,7 @@ describe('characterEntrySlice — companions', () => {
       );
       const comp = state.draft.companions[0];
       expect(comp.equipment.magicItems[0].equippedSlot).toBe('ring_left');
-      expect(comp.equipment.equippedSlots.get('ring')).toBe('ring-1');
+      expect(comp.equipment.equippedSlots['ring']).toBe('ring-1');
     });
 
     it('equipCompanionMagicItem: replacing in a slot displaces the prior item', () => {
@@ -2135,7 +2170,7 @@ describe('characterEntrySlice — companions', () => {
       const comp = state.draft.companions[0];
       expect(comp.equipment.magicItems).toHaveLength(1);
       expect(comp.equipment.magicItems[0].instanceId).toBe('item-2');
-      expect(comp.equipment.equippedSlots.get('neck')).toBe('item-2');
+      expect(comp.equipment.equippedSlots['neck']).toBe('item-2');
     });
 
     it('equipCompanionMagicItem: different slots coexist', () => {
@@ -2157,7 +2192,7 @@ describe('characterEntrySlice — companions', () => {
       );
       const comp = state.draft.companions[0];
       expect(comp.equipment.magicItems).toHaveLength(2);
-      expect(comp.equipment.equippedSlots.size).toBe(2);
+      expect(Object.keys(comp.equipment.equippedSlots)).toHaveLength(2);
     });
 
     it('unequipCompanionMagicItem: removes the item and clears the slot entry', () => {
@@ -2172,7 +2207,7 @@ describe('characterEntrySlice — companions', () => {
       state = reducer(state, unequipCompanionMagicItem({ instanceId: 'comp-1', slot: 'neck' }));
       const comp = state.draft.companions[0];
       expect(comp.equipment.magicItems).toHaveLength(0);
-      expect(comp.equipment.equippedSlots.get('neck')).toBeUndefined();
+      expect(comp.equipment.equippedSlots['neck']).toBeUndefined();
     });
 
     it('unequipCompanionMagicItem: no-op when slot is empty', () => {

@@ -37,7 +37,20 @@ import { SWASHBUCKLER_ARCHETYPES } from './swashbucklerArchetypes';
 import { WARPRIEST_ARCHETYPES } from './warpriestArchetypes';
 import { WITCH_ARCHETYPES } from './witchArchetypes';
 import { WIZARD_ARCHETYPES } from './wizardArchetypes';
-import { INITIATING_ARCHETYPES } from './initiatingArchetypes';
+
+// Path of War — grant archetypes (add initiating to non-initiating classes)
+import { MYRMIDON_ARCHETYPE } from './myrmidon';
+import { HIDDEN_BLADE_ARCHETYPE } from './hidden-blade';
+import { KNIGHT_DISCIPLE_ARCHETYPE } from './knight-disciple';
+import { AMBUSH_HUNTER_ARCHETYPE } from './ambush-hunter';
+import { PRIMAL_DISCIPLE_ARCHETYPE } from './primal-disciple';
+import { RUBATO_ARCHETYPE } from './rubato';
+import { MONK_OF_THE_SILVER_FIST_ARCHETYPE } from './monk-of-the-silver-fist';
+
+// Path of War — swap archetypes (modify initiating class discipline lists)
+import { WARDER_POW_ARCHETYPES } from './warder-archetypes-pow';
+import { WARDER_WARLORD_POW_ARCHETYPES } from './warder-warlord-archetypes-pow';
+import { STALKER_ZEALOT_POW_ARCHETYPES } from './stalker-zealot-archetypes-pow';
 
 export { ALCHEMIST_ARCHETYPES } from './alchemistArchetypes';
 export { ANTIPALADIN_ARCHETYPES } from './antipaladinArchetypes';
@@ -75,7 +88,6 @@ export { SWASHBUCKLER_ARCHETYPES } from './swashbucklerArchetypes';
 export { WARPRIEST_ARCHETYPES } from './warpriestArchetypes';
 export { WITCH_ARCHETYPES } from './witchArchetypes';
 export { WIZARD_ARCHETYPES } from './wizardArchetypes';
-export { INITIATING_ARCHETYPES } from './initiatingArchetypes';
 
 export const ALL_ARCHETYPES: ArchetypeData[] = [
   ...ALCHEMIST_ARCHETYPES,
@@ -114,7 +126,18 @@ export const ALL_ARCHETYPES: ArchetypeData[] = [
   ...WARPRIEST_ARCHETYPES,
   ...WITCH_ARCHETYPES,
   ...WIZARD_ARCHETYPES,
-  ...INITIATING_ARCHETYPES,
+  // Path of War — grant archetypes
+  MYRMIDON_ARCHETYPE,
+  HIDDEN_BLADE_ARCHETYPE,
+  KNIGHT_DISCIPLE_ARCHETYPE,
+  AMBUSH_HUNTER_ARCHETYPE,
+  PRIMAL_DISCIPLE_ARCHETYPE,
+  RUBATO_ARCHETYPE,
+  MONK_OF_THE_SILVER_FIST_ARCHETYPE,
+  // Path of War — swap archetypes
+  ...WARDER_POW_ARCHETYPES,
+  ...WARDER_WARLORD_POW_ARCHETYPES,
+  ...STALKER_ZEALOT_POW_ARCHETYPES,
 ];
 
 export function getArchetypesByClass(className: string): ArchetypeData[] {

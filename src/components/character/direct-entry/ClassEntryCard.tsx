@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { ClassChoiceRow } from './ClassChoiceRow';
 import { CompanionCard } from './CompanionCard';
-import { CompanionPickerSheet, type CompanionPickerFilter } from './CompanionPickerSheet';
+import { CompanionPickerSheet } from './CompanionPickerSheet';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   removeClass,
@@ -22,11 +22,15 @@ import { type DraftClassEntry, type SpellcastingAdvancement } from '@/types/char
 import { GameDataService } from '@/services/GameDataService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { lookupClassData } from '@/utils/characterComputations';
+import {
+  effectiveLevelFromDraftClass,
+  pickerFilterFromDraftClass,
+} from '@/services/CompanionService';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { type ClassChoice } from '@/types/classes';
 import { ArchetypePickerSheet } from './ArchetypePickerSheet';
-import { ALL_ANIMAL_COMPANIONS } from '@/data/animalCompanions';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
+import { makeCompanionInstanceId } from '@/utils/companionUtils';
 
 // Pairs of featureNames that are mutually exclusive — filling one disables the other.
 const MUTUALLY_EXCLUSIVE_PAIRS: [string, string][] = [['Domain', 'Inquisition']];
@@ -41,41 +45,11 @@ function isMutuallyExcludedFilled(featureName: string, classChoices: ClassChoice
   return false;
 }
 
-// ---- Companion helpers (mirror ClassChoiceRow for consistency) -------------
-
-function effectiveLevelFromDraftClass(entry: DraftClassEntry): number {
-  const archetypes = entry.archetypeName ? [entry.archetypeName] : [];
-  switch (entry.className) {
-    case 'Druid':
-    case 'Hunter':
-    case 'Cavalier':
-      return entry.level;
-    case 'Ranger':
-      return Math.max(1, entry.level - 3);
-    case 'Paladin':
-      return Math.max(1, entry.level - 4);
-    case 'Inquisitor':
-      return archetypes.includes('Sacred Huntsmaster') ? entry.level : 0;
-    case 'Barbarian':
-      return archetypes.includes('Mad Dog') ? Math.max(1, entry.level - 2) : 0;
-    default:
-      return 0;
-  }
-}
-
-function pickerFilterForClass(entry: DraftClassEntry): CompanionPickerFilter {
-  return entry.className === 'Cavalier' || entry.className === 'Paladin' ? 'mountsOnly' : 'full';
-}
-
 // Class + archetype combos that may grant multiple companions from a single
 // class choice (Beastmaster gets 1 + INT mod). Detected here so the
 // "+ Add Companion" button appears only for these.
 function classSupportsMultipleCompanions(entry: DraftClassEntry): boolean {
   return entry.className === 'Ranger' && entry.archetypeName === 'Beastmaster';
-}
-
-function makeInstanceId(): string {
-  return `comp-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
 // ---- Source badge ----
@@ -790,7 +764,6 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
               })}
             </View>
           )}
-
         </View>
       )}
 
@@ -843,10 +816,13 @@ interface CompanionSectionProps {
 }
 
 function CompanionSection({ entry }: CompanionSectionProps) {
-  const { colors, fantasy, isDark } = useTheme();
+  const { fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [addPickerOpen, setAddPickerOpen] = useState(false);
+  const [companionEntryById, setCompanionEntryById] = useState<Map<string, AnimalCompanionEntry>>(
+    new Map(),
+  );
 
   // The companion builder route includes the character ID segment; for an
   // unsaved draft we use `draft` as a stable placeholder (the screen reads
@@ -860,13 +836,24 @@ function CompanionSection({ entry }: CompanionSectionProps) {
     ),
   );
 
-  const companionEntryById = useMemo(() => {
-    const map = new Map<string, AnimalCompanionEntry>();
-    for (const ac of ALL_ANIMAL_COMPANIONS) map.set(ac.id, ac);
-    return map;
-  }, []);
-
   const supportsMultiple = classSupportsMultipleCompanions(entry);
+
+  useEffect(() => {
+    if (grantedCompanions.length === 0 && !supportsMultiple) return;
+    let cancelled = false;
+    GameDataService.getAnimalCompanions()
+      .then((companions) => {
+        if (!cancelled) {
+          const map = new Map<string, AnimalCompanionEntry>();
+          for (const ac of companions) map.set(ac.id, ac);
+          setCompanionEntryById(map);
+        }
+      })
+      .catch((e) => console.error('Failed to load animal companions:', e));
+    return () => {
+      cancelled = true;
+    };
+  }, [grantedCompanions.length, supportsMultiple]);
   const grantedByLabel = entry.archetypeName
     ? `${entry.className} (${entry.archetypeName})`
     : entry.className;
@@ -877,7 +864,7 @@ function CompanionSection({ entry }: CompanionSectionProps) {
     // the single-companion flow.
     dispatch(
       addCompanion({
-        instanceId: makeInstanceId(),
+        instanceId: makeCompanionInstanceId(),
         sourceEntryId: ac.id,
         name: ac.name,
         grantedBy: {
@@ -927,7 +914,7 @@ function CompanionSection({ entry }: CompanionSectionProps) {
       <CompanionPickerSheet
         visible={addPickerOpen}
         title="Choose Companion"
-        pickerFilter={pickerFilterForClass(entry)}
+        pickerFilter={pickerFilterFromDraftClass(entry)}
         onSelect={handleAddCompanion}
         onClose={() => setAddPickerOpen(false)}
       />

@@ -18,6 +18,7 @@ import type { Character } from '@/types';
 import type { ClassEntry } from '@/types/classes';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import type { CompanionInstance, CompanionGrant } from '@/types/companions';
+import type { DraftClassEntry } from '@/types/characterDraft';
 import { BODY_SHAPE_SLOTS, type CompanionSlotAccess } from '@/data/companions/bodyShapeSlots';
 import { ALL_TEMPLATES } from '@/data/templates';
 import type { GrantsCompanionSpec } from '@/data/templates/types';
@@ -479,6 +480,49 @@ function effectiveLevelFromClass(classEntry: ClassEntry): number {
     default:
       return 0;
   }
+}
+
+// ---------------------------------------------------------------------------
+// Draft-entry helpers — used by ClassChoiceRow and ClassEntryCard during
+// character construction. Operate on DraftClassEntry (editor state) rather
+// than the persisted ClassEntry type used by effectiveLevelFromClass above.
+// ---------------------------------------------------------------------------
+
+/**
+ * Returns the effective companion progression level for a draft class entry.
+ * This is the formula the UI uses when assigning effectiveProgressionLevel on
+ * a newly-created CompanionInstance before the character is persisted.
+ */
+export function effectiveLevelFromDraftClass(cls: DraftClassEntry | undefined): number {
+  if (!cls) return 0;
+  const archetypes = cls.archetypeName ? [cls.archetypeName] : [];
+  switch (cls.className) {
+    case 'Druid':
+    case 'Hunter':
+    case 'Cavalier':
+      return cls.level;
+    case 'Ranger':
+      return Math.max(1, cls.level - 3);
+    case 'Paladin':
+      return Math.max(1, cls.level - 4);
+    case 'Inquisitor':
+      return archetypes.includes('Sacred Huntsmaster') ? cls.level : 0;
+    case 'Barbarian':
+      return archetypes.includes('Mad Dog') ? Math.max(1, cls.level - 2) : 0;
+    default:
+      return 0;
+  }
+}
+
+/**
+ * Returns 'mountsOnly' for classes whose companion must be a mount (Cavalier,
+ * Paladin), otherwise 'full' (all companions shown).
+ */
+export function pickerFilterFromDraftClass(
+  cls: DraftClassEntry | undefined,
+): 'full' | 'mountsOnly' {
+  if (!cls) return 'full';
+  return cls.className === 'Cavalier' || cls.className === 'Paladin' ? 'mountsOnly' : 'full';
 }
 
 // ---------------------------------------------------------------------------

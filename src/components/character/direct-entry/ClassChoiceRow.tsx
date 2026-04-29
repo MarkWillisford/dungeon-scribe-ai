@@ -2,10 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
-import {
-  CompanionPickerSheet,
-  type CompanionPickerFilter,
-} from '@/components/character/direct-entry/CompanionPickerSheet';
+import { CompanionPickerSheet } from '@/components/character/direct-entry/CompanionPickerSheet';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   upsertClassChoice,
@@ -15,46 +12,12 @@ import {
 import { type ClassChoice } from '@/types/classes';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { GameDataService } from '@/services/GameDataService';
+import {
+  effectiveLevelFromDraftClass,
+  pickerFilterFromDraftClass,
+} from '@/services/CompanionService';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
-import type { DraftClassEntry } from '@/types/characterDraft';
-
-// ---- Companion intercept helpers -------------------------------------------
-//
-// When the selected option for a class choice is 'animal_companion', we open
-// a follow-up picker so the player chooses a creature form. Effective level
-// and picker filter are derived from the granting class.
-
-function effectiveLevelFromDraftClass(cls: DraftClassEntry | undefined): number {
-  if (!cls) return 0;
-  const archetypes = cls.archetypeName ? [cls.archetypeName] : [];
-  switch (cls.className) {
-    case 'Druid':
-    case 'Hunter':
-    case 'Cavalier':
-      return cls.level;
-    case 'Ranger':
-      return Math.max(1, cls.level - 3);
-    case 'Paladin':
-      return Math.max(1, cls.level - 4);
-    case 'Inquisitor':
-      return archetypes.includes('Sacred Huntsmaster') ? cls.level : 0;
-    case 'Barbarian':
-      return archetypes.includes('Mad Dog') ? Math.max(1, cls.level - 2) : 0;
-    default:
-      return 0;
-  }
-}
-
-function pickerFilterFromDraftClass(cls: DraftClassEntry | undefined): CompanionPickerFilter {
-  if (!cls) return 'full';
-  return cls.className === 'Cavalier' || cls.className === 'Paladin' ? 'mountsOnly' : 'full';
-}
-
-function makeInstanceId(): string {
-  // React Native doesn't ship crypto.randomUUID; this is good enough for
-  // local draft-scoped instance IDs.
-  return `comp-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
-}
+import { makeCompanionInstanceId } from '@/utils/companionUtils';
 
 interface ClassChoiceRowProps {
   classId: string;
@@ -283,7 +246,7 @@ export function ClassChoiceRow({
   const handleCompanionSelect = (entry: AnimalCompanionEntry) => {
     dispatch(
       addCompanion({
-        instanceId: makeInstanceId(),
+        instanceId: makeCompanionInstanceId(),
         sourceEntryId: entry.id,
         name: entry.name,
         grantedBy: {

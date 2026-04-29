@@ -181,7 +181,7 @@ interface SlotCellProps {
 
 function SlotCell({ access, companion, onOpenPicker, onUnequip }: SlotCellProps) {
   const { colors, fantasy, isDark } = useTheme();
-  const equippedInstanceId = companion.equipment.equippedSlots.get(access.slot);
+  const equippedInstanceId = companion.equipment.equippedSlots[access.slot];
   const equippedItem = equippedInstanceId
     ? companion.equipment.magicItems.find((m) => m.instanceId === equippedInstanceId)
     : undefined;
