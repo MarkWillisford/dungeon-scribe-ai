@@ -205,6 +205,8 @@ describe('CharacterEntryScreen — handleSave', () => {
     mockIsSaving = true;
     const { tree } = render(<CharacterEntryScreen />);
     const { onSave } = headerNode(tree).props as { onSave: () => void };
+    // No await: the isSaving guard returns synchronously without dispatching.
+    // The async test wrapper is kept for consistency with the surrounding suite.
     onSave();
     expect(mockDispatch).not.toHaveBeenCalled();
   });
