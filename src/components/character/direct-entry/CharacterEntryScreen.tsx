@@ -8,7 +8,9 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { OrnateTab } from '@/components/ui/OrnateTab';
 import { CharacterEntryHeader } from './CharacterEntryHeader';
@@ -19,6 +21,7 @@ import {
   type EntryTabKey,
   type TabStatus,
 } from '@/store/slices/characterEntrySlice';
+import { saveCharacter } from '@/store/thunks/saveCharacter';
 import { CharacterValidationService } from '@/services/CharacterValidationService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
@@ -126,10 +129,13 @@ function useTabStatus(): Record<EntryTabKey, TabStatus> {
 export function CharacterEntryScreen() {
   const { colors, fantasy } = useTheme();
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const activeTab = useAppSelector((state) => state.characterEntry.activeTab);
   const character = useAppSelector((state) => state.characterEntry.character);
   const warnings = useAppSelector((state) => state.characterEntry.validationWarnings);
   const lastValidatedAt = useAppSelector((state) => state.characterEntry.lastValidatedAt);
+  const isDirty = useAppSelector((state) => state.characterEntry.isDirty);
+  const isSaving = useAppSelector((state) => state.characterEntry.isSaving);
   const ruleset = useAppSelector((state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD);
   const classDataMap = useAppSelector(selectClassDataMap);
   const tabStatus = useTabStatus();
@@ -150,9 +156,26 @@ export function CharacterEntryScreen() {
     setShowValidationSheet(true);
   }, [character, ruleset, classDataMap, dispatch]);
 
-  const handleSave = useCallback(() => {
-    // Save logic will be wired when the characters service is connected
-  }, []);
+  const handleSave = useCallback(async () => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (dispatch(saveCharacter() as any) as any).unwrap();
+      router.back();
+    } catch {
+      // setSaveError was already dispatched by the thunk
+    }
+  }, [dispatch, router]);
+
+  const handleBack = useCallback(() => {
+    if (!isDirty) {
+      router.back();
+      return;
+    }
+    Alert.alert('Unsaved Changes', 'You have unsaved changes. Leave without saving?', [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Leave', style: 'destructive', onPress: () => router.back() },
+    ]);
+  }, [isDirty, router]);
 
   const handlePortraitPress = useCallback(() => {
     // Portrait picker will be wired in a later PR
@@ -163,8 +186,9 @@ export function CharacterEntryScreen() {
       {/* Sticky header */}
       <CharacterEntryHeader
         onValidate={handleValidate}
-        onSave={handleSave}
+        onSave={isSaving ? () => {} : handleSave}
         onPortraitPress={handlePortraitPress}
+        onBack={handleBack}
       />
 
       {/* Tab bar */}

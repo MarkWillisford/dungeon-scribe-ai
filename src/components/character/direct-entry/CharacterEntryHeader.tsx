@@ -9,6 +9,7 @@ interface CharacterEntryHeaderProps {
   onValidate: () => void;
   onSave: () => void;
   onPortraitPress: () => void;
+  onBack?: () => void;
 }
 
 /** Derives a concise "Cleric 5 / Hathran 5 / ..." string from the character's classes array. */
@@ -26,6 +27,7 @@ export function CharacterEntryHeader({
   onValidate,
   onSave,
   onPortraitPress,
+  onBack,
 }: CharacterEntryHeaderProps) {
   const { colors, fantasy, shadows, isDark } = useTheme();
   const dispatch = useAppDispatch();
@@ -55,6 +57,18 @@ export function CharacterEntryHeader({
         { backgroundColor: headerBg, borderBottomColor: borderColor },
       ]}
     >
+      {/* Back button */}
+      {onBack && (
+        <Pressable
+          onPress={onBack}
+          style={styles.backButton}
+          accessibilityRole="button"
+          accessibilityLabel="Go back"
+        >
+          <Text style={[styles.backText, { color: colors.text.tertiary }]}>{'<'}</Text>
+        </Pressable>
+      )}
+
       {/* Portrait */}
       <Pressable
         onPress={onPortraitPress}
@@ -187,5 +201,15 @@ const styles = StyleSheet.create({
   },
   actionButton: {
     minWidth: 80,
+  },
+  backButton: {
+    paddingHorizontal: 4,
+    paddingVertical: 8,
+    flexShrink: 0,
+  },
+  backText: {
+    fontFamily: 'Cinzel',
+    fontSize: 18,
+    fontWeight: '700',
   },
 });
