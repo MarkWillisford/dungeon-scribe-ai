@@ -1,9 +1,37 @@
-import { CompanionService, AC_PROGRESSION } from '@services/CompanionService';
+import {
+  CompanionService,
+  AC_PROGRESSION,
+  effectiveLevelFromDraftClass,
+  pickerFilterFromDraftClass,
+} from '@services/CompanionService';
+import type { DraftClassEntry } from '@/types/characterDraft';
 import type { Character } from '@/types';
 import type { ClassEntry } from '@/types/classes';
 import { BABProgression, SaveProgression } from '@/types/base';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import type { CompanionInstance, CompanionGrant } from '@/types/companions';
+
+// Extend the real ALL_TEMPLATES with two synthetic entries used only in
+// template-formula branch tests below (characterLevel, characterLevel-4).
+jest.mock('@/data/templates', () => {
+  const real = jest.requireActual('@/data/templates');
+  return {
+    ...real,
+    ALL_TEMPLATES: [
+      ...real.ALL_TEMPLATES,
+      {
+        id: 'full-level-template',
+        name: 'Full Level Template',
+        grantsCompanion: { effectiveLevelFormula: 'characterLevel', pickerFilter: 'full' },
+      },
+      {
+        id: 'paladin-style-template',
+        name: 'Paladin Style Template',
+        grantsCompanion: { effectiveLevelFormula: 'characterLevel-4', pickerFilter: 'mountsOnly' },
+      },
+    ],
+  };
+});
 
 // ---------------------------------------------------------------------------
 // Fixtures — minimal stubs, not full character/entry objects. We only
@@ -232,6 +260,24 @@ describe('CompanionService.computeEffectiveLevel', () => {
       // totalLevel 10 − 3 = 7
       expect(CompanionService.computeEffectiveLevel(char, grant)).toBe(7);
     });
+
+    it('characterLevel formula: level 8 → 8', () => {
+      const char = makeCharacter([makeClassEntry({ name: 'Fighter', level: 8 })]);
+      const grant: CompanionGrant = { type: 'template', templateId: 'full-level-template' };
+      expect(CompanionService.computeEffectiveLevel(char, grant)).toBe(8);
+    });
+
+    it('characterLevel-4 formula: level 10 → 6', () => {
+      const char = makeCharacter([makeClassEntry({ name: 'Fighter', level: 10 })]);
+      const grant: CompanionGrant = { type: 'template', templateId: 'paladin-style-template' };
+      expect(CompanionService.computeEffectiveLevel(char, grant)).toBe(6);
+    });
+
+    it('characterLevel-4 formula: level 3 → 1 (clamped)', () => {
+      const char = makeCharacter([makeClassEntry({ name: 'Fighter', level: 3 })]);
+      const grant: CompanionGrant = { type: 'template', templateId: 'paladin-style-template' };
+      expect(CompanionService.computeEffectiveLevel(char, grant)).toBe(1);
+    });
   });
 
   describe('reserved grant types', () => {
@@ -394,6 +440,112 @@ describe('CompanionService.computeBaseStatBlock', () => {
     expect(stats.size).toBe('Large');
     expect(stats.naturalArmor).toBe(2 + 2 + 2 + 4); // base + t1 + t2 + table = 10
     expect(stats.appliedTiers).toEqual([4, 7]);
+  });
+
+  it('unhandled ability (INT) in tier emits a console.warn and is ignored', () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const intTier: AnimalCompanionEntry = {
+      ...wolfBase,
+      progressionTiers: [
+        {
+          atDruidLevel: 4,
+          abilityScoreChanges: [{ ability: 'INT' as 'STR', change: 2 }],
+        },
+      ],
+    };
+    const stats = CompanionService.computeBaseStatBlock(intTier, 4);
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('INT'));
+    // INT on the entry is 2; tier delta is silently ignored so base INT stays 2
+    expect(stats.int).toBe(2);
+    warnSpy.mockRestore();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// effectiveLevelFromDraftClass
+// ---------------------------------------------------------------------------
+
+function makeDraft(className: string, level: number, archetypeName?: string): DraftClassEntry {
+  return {
+    id: 'draft-1',
+    className,
+    level,
+    archetypeName,
+    sourceSystem: 'pf1e',
+    prereqOverride: false,
+    classChoices: [],
+  };
+}
+
+describe('effectiveLevelFromDraftClass', () => {
+  it('undefined → 0', () => {
+    expect(effectiveLevelFromDraftClass(undefined)).toBe(0);
+  });
+
+  it('Druid: returns full level', () => {
+    expect(effectiveLevelFromDraftClass(makeDraft('Druid', 8))).toBe(8);
+  });
+
+  it('Hunter: returns full level', () => {
+    expect(effectiveLevelFromDraftClass(makeDraft('Hunter', 5))).toBe(5);
+  });
+
+  it('Cavalier: returns full level', () => {
+    expect(effectiveLevelFromDraftClass(makeDraft('Cavalier', 6))).toBe(6);
+  });
+
+  it('Ranger level 7: returns 4 (level − 3)', () => {
+    expect(effectiveLevelFromDraftClass(makeDraft('Ranger', 7))).toBe(4);
+  });
+
+  it('Paladin level 6: returns 2 (level − 4)', () => {
+    expect(effectiveLevelFromDraftClass(makeDraft('Paladin', 6))).toBe(2);
+  });
+
+  it('Paladin level 3: returns 1 (clamped)', () => {
+    expect(effectiveLevelFromDraftClass(makeDraft('Paladin', 3))).toBe(1);
+  });
+
+  it('Inquisitor with Sacred Huntsmaster: returns full level', () => {
+    expect(effectiveLevelFromDraftClass(makeDraft('Inquisitor', 9, 'Sacred Huntsmaster'))).toBe(9);
+  });
+
+  it('Inquisitor without archetype: returns 0', () => {
+    expect(effectiveLevelFromDraftClass(makeDraft('Inquisitor', 9))).toBe(0);
+  });
+
+  it('Barbarian with Mad Dog: returns level − 2 (min 1)', () => {
+    expect(effectiveLevelFromDraftClass(makeDraft('Barbarian', 8, 'Mad Dog'))).toBe(6);
+  });
+
+  it('Barbarian without Mad Dog: returns 0', () => {
+    expect(effectiveLevelFromDraftClass(makeDraft('Barbarian', 8))).toBe(0);
+  });
+
+  it('Fighter (unsupported class): returns 0', () => {
+    expect(effectiveLevelFromDraftClass(makeDraft('Fighter', 10))).toBe(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// pickerFilterFromDraftClass
+// ---------------------------------------------------------------------------
+
+describe('pickerFilterFromDraftClass', () => {
+  it('undefined → full', () => {
+    expect(pickerFilterFromDraftClass(undefined)).toBe('full');
+  });
+
+  it('Cavalier → mountsOnly', () => {
+    expect(pickerFilterFromDraftClass(makeDraft('Cavalier', 5))).toBe('mountsOnly');
+  });
+
+  it('Paladin → mountsOnly', () => {
+    expect(pickerFilterFromDraftClass(makeDraft('Paladin', 5))).toBe('mountsOnly');
+  });
+
+  it('Druid → full', () => {
+    expect(pickerFilterFromDraftClass(makeDraft('Druid', 5))).toBe('full');
   });
 });
 
