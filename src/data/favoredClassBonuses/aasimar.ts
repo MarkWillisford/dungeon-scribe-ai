@@ -187,6 +187,8 @@ export const AASIMAR_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
       perLevelValue: { numerator: 1, denominator: 2 },
       maxTotal: 10,
     },
+    adminNotes:
+      'First pick grants DR 1/evil outright; subsequent picks add +1/2. perLevelValue models the incremental rate only — Phase 3 calc must special-case the first selection to award the full +1 rather than +0.5.',
     source: ARG,
     ...META,
   },

@@ -41,13 +41,15 @@ Updated wording: `Race: Human (tracked field — her actual race is a narrative 
 
 **Target:** All official PF1e races × all official classes with documented FCB entries on d20pfsrd/AoN.
 
-**Confirmed race list (37 races with FCB data):**
+**Confirmed race list (36 races with FCB data):**
 
 Core (7): Dwarf, Elf, Gnome, Half-Elf, Half-Orc, Halfling, Human
 
 Featured (16, ARG): Aasimar, Catfolk, Dhampir, Drow, Fetchling, Goblin, Hobgoblin, Ifrit, Kobold, Orc, Oread, Ratfolk, Sylph, Tengu, Tiefling, Undine
 
-Uncommon (14, ARG): Changeling, Duergar, Gillman, Grippli, Kitsune, Merfolk, Nagaji, Samsaran, Strix, Suli, Svirfneblin, Vanara, Vishkanya, Wayang
+Uncommon (13, ARG): Changeling, Duergar, Grippli, Kitsune, Merfolk, Nagaji, Samsaran, Strix, Suli, Svirfneblin, Vanara, Vishkanya, Wayang
+
+**Note — Gillman excluded:** Gillman has no alternate favored class bonuses in official Paizo sources (ARG p. 186 lists only the standard HP/skill rank options, no class-specific alternates). Excluded intentionally; not a data gap.
 
 Plus a small set of later additions (Android, Gathlain, Ghoran, Kasatha, Lashunta, Shabti, Syrinx, Wyrwood, Wyvaran, Skinwalker) — include if FCB data exists.
 
@@ -66,7 +68,7 @@ All three phases ship together in this branch. They execute sequentially so each
 ### Phase 1 — Data
 
 - Define `FavoredClassBonusOption` type
-- Scrape all 37 races × ~30 classes → static TS files under `src/data/favoredClassBonuses/`
+- Scrape all 36 races × ~30 classes → static TS files under `src/data/favoredClassBonuses/`
 - `GameDataService.getFavoredClassBonuses(raceName, className)` API
 - `FirestoreGameDataConnector` + `StaticGameDataConnector` wire-through
 - `scripts/db/seedFavoredClassBonuses.ts` + `seedAll.ts` entry
