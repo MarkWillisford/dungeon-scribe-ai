@@ -9,7 +9,7 @@
 // Book of Heroic Races: Advanced Favored Class Options. Those are non-Paizo and are excluded
 // from this official seed set.
 
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { GameDataSource } from '@/types/gameData';
 
 const ARG: GameDataSource = {
@@ -25,7 +25,7 @@ const META = {
   verificationStatus: 'needs_review' as const,
 };
 
-export const SAMSARAN_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
+export const SAMSARAN_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
   {
     id: 'samsaran-monk',
     raceName: 'Samsaran',

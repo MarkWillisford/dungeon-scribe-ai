@@ -55,6 +55,8 @@ import reducer, {
   unequipCompanionMagicItem,
   toggleFavoredClass,
   setFavoredClassBonuses,
+  setRacialFlexAbility,
+  syncFeatSlots,
   reorderClasses,
   addTemplate,
   removeTemplate,
@@ -219,6 +221,57 @@ describe('characterEntrySlice — session management', () => {
     it('sets originalCharacterId to null when characterId is omitted', () => {
       const state = reducer(makeInitialState(), loadCharacter({ draft: BLANK_DRAFT, mode: 'new' }));
       expect(state.originalCharacterId).toBeNull();
+    });
+
+    describe('migrateDraft — FCB migration', () => {
+      it('promotes legacy { hp, skillRank } format to array for favored classes', () => {
+        const draft: CharacterDraft = {
+          ...BLANK_DRAFT,
+          classes: [
+            makeClass('cls-1', {
+              isFavoredClass: true,
+              // Cast as any to simulate a legacy Firestore document shape
+              favoredClassBonuses: { hp: 2, skillRank: 1 } as unknown as [],
+              level: 5,
+            }),
+          ],
+        };
+        const state = reducer(makeInitialState(), loadCharacter({ draft, mode: 'edit' }));
+        const bonuses = state.draft.classes[0].favoredClassBonuses as
+          | { level: number; type: string }[]
+          | undefined;
+        expect(Array.isArray(bonuses)).toBe(true);
+        expect(bonuses).toHaveLength(3);
+        expect(bonuses![0]).toEqual({ level: 1, type: 'hp' });
+        expect(bonuses![1]).toEqual({ level: 2, type: 'hp' });
+        expect(bonuses![2]).toEqual({ level: 3, type: 'skill' });
+      });
+
+      it('clears stale favoredClassBonuses on non-favored classes instead of migrating', () => {
+        const draft: CharacterDraft = {
+          ...BLANK_DRAFT,
+          classes: [
+            makeClass('cls-1', {
+              isFavoredClass: false,
+              // Stale data left from a toggle-off before the fix
+              favoredClassBonuses: { hp: 1, skillRank: 0 } as unknown as [],
+              level: 3,
+            }),
+          ],
+        };
+        const state = reducer(makeInitialState(), loadCharacter({ draft, mode: 'edit' }));
+        expect(state.draft.classes[0].isFavoredClass).toBe(false);
+        expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
+      });
+
+      it('leaves favoredClassBonuses undefined on non-favored classes that have no stale data', () => {
+        const draft: CharacterDraft = {
+          ...BLANK_DRAFT,
+          classes: [makeClass('cls-1', { isFavoredClass: false, level: 4 })],
+        };
+        const state = reducer(makeInitialState(), loadCharacter({ draft, mode: 'edit' }));
+        expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
+      });
     });
   });
 
@@ -483,6 +536,30 @@ describe('characterEntrySlice — identity', () => {
       keys.forEach((k) => expect(state.draft.abilities[k].racial).toBe(0));
     });
   });
+
+  describe('setRacialFlexAbility', () => {
+    it('sets a new flex ability when none was previously set', () => {
+      const state = reducer(makeInitialState(), setRacialFlexAbility('str'));
+      expect(state.draft.racialFlexAbility).toBe('str');
+      expect(state.draft.abilities.str.racial).toBe(2);
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('clears the old flex racial bonus and applies it to the new ability', () => {
+      let state = reducer(makeInitialState(), setRacialFlexAbility('str'));
+      expect(state.draft.abilities.str.racial).toBe(2);
+      state = reducer(state, setRacialFlexAbility('dex'));
+      expect(state.draft.abilities.str.racial).toBe(0);
+      expect(state.draft.abilities.dex.racial).toBe(2);
+      expect(state.draft.racialFlexAbility).toBe('dex');
+    });
+
+    it('is a no-op on racial bonus when the same ability is selected again', () => {
+      let state = reducer(makeInitialState(), setRacialFlexAbility('con'));
+      state = reducer(state, setRacialFlexAbility('con'));
+      expect(state.draft.abilities.con.racial).toBe(2);
+    });
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -605,6 +682,26 @@ describe('characterEntrySlice — classes', () => {
       state = reducer(state, removeClass('base'));
       expect(state.draft.spellcastingPools).toHaveLength(0);
     });
+
+    it('cascades: clears dual-mode advancement pointers targeting the removed class', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('base')));
+      state = reducer(state, addClass(makeClass('prestige')));
+      state = reducer(
+        state,
+        updateClassSpellcastingAdvancement({
+          id: 'prestige',
+          advancement: {
+            mode: 'both',
+            perLevel: [{ arcaneBaseClassEntryId: 'base', divineBaseClassEntryId: 'other' }],
+          },
+        }),
+      );
+      state = reducer(state, removeClass('base'));
+      const adv = state.draft.classes[0].spellcastingAdvancement;
+      if (adv?.mode !== 'both') throw new Error('expected mode both');
+      expect(adv.perLevel[0].arcaneBaseClassEntryId).toBe('');
+      expect(adv.perLevel[0].divineBaseClassEntryId).toBe('other');
+    });
   });
 
   describe('updateClassLevel', () => {
@@ -658,6 +755,93 @@ describe('characterEntrySlice — classes', () => {
       const adv = state.draft.classes[0].spellcastingAdvancement;
       if (adv?.mode !== 'single') throw new Error('expected mode single');
       expect(adv.perLevel).toHaveLength(2);
+    });
+
+    it('prunes favoredClassBonuses selections beyond the new level when level decreases', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 5 })));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      const selections = [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'skill' as const },
+        { level: 3, type: 'hp' as const },
+        { level: 4, type: 'hp' as const },
+        { level: 5, type: 'skill' as const },
+      ];
+      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', selections }));
+      state = reducer(state, updateClassLevel({ id: 'cls-1', level: 3 }));
+      expect(state.draft.classes[0].favoredClassBonuses).toEqual(selections.slice(0, 3));
+    });
+
+    it('does not prune favoredClassBonuses when level increases', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 3 })));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      const selections = [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'skill' as const },
+        { level: 3, type: 'hp' as const },
+      ];
+      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', selections }));
+      state = reducer(state, updateClassLevel({ id: 'cls-1', level: 5 }));
+      expect(state.draft.classes[0].favoredClassBonuses).toEqual(selections);
+    });
+
+    it('leaves favoredClassBonuses undefined when level decreases and field is absent', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 5 })));
+      // isFavoredClass is false by default — no favoredClassBonuses
+      state = reducer(state, updateClassLevel({ id: 'cls-1', level: 2 }));
+      expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
+    });
+
+    it('grows dual-mode advancement perLevel when level increases', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('prestige', { level: 2 })));
+      state = reducer(
+        state,
+        updateClassSpellcastingAdvancement({
+          id: 'prestige',
+          advancement: {
+            mode: 'both',
+            perLevel: [
+              { arcaneBaseClassEntryId: 'arc', divineBaseClassEntryId: 'div' },
+              { arcaneBaseClassEntryId: 'arc', divineBaseClassEntryId: 'div' },
+            ],
+          },
+        }),
+      );
+      state = reducer(state, updateClassLevel({ id: 'prestige', level: 4 }));
+      const adv = state.draft.classes[0].spellcastingAdvancement;
+      if (adv?.mode !== 'both') throw new Error('expected mode both');
+      expect(adv.perLevel).toHaveLength(4);
+      expect(adv.perLevel.every((p) => p.arcaneBaseClassEntryId === 'arc')).toBe(true);
+    });
+
+    it('trims dual-mode advancement perLevel when level decreases', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('prestige', { level: 4 })));
+      state = reducer(
+        state,
+        updateClassSpellcastingAdvancement({
+          id: 'prestige',
+          advancement: {
+            mode: 'both',
+            perLevel: Array.from({ length: 4 }, () => ({
+              arcaneBaseClassEntryId: 'arc',
+              divineBaseClassEntryId: 'div',
+            })),
+          },
+        }),
+      );
+      state = reducer(state, updateClassLevel({ id: 'prestige', level: 2 }));
+      const adv = state.draft.classes[0].spellcastingAdvancement;
+      if (adv?.mode !== 'both') throw new Error('expected mode both');
+      expect(adv.perLevel).toHaveLength(2);
+    });
+  });
+
+  describe('syncFeatSlots', () => {
+    it('recalculates feat slots from classes and marks dirty', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 1 })));
+      // Add an extra manual slot not yet synced
+      state = reducer(state, syncFeatSlots());
+      expect(state.isDirty).toBe(true);
     });
   });
 
@@ -779,11 +963,11 @@ describe('characterEntrySlice — classes', () => {
   });
 
   describe('toggleFavoredClass', () => {
-    it('marks a class as favored and initializes bonus counters', () => {
+    it('marks a class as favored and initializes bonus selections as empty array', () => {
       let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
       state = reducer(state, toggleFavoredClass('cls-1'));
       expect(state.draft.classes[0].isFavoredClass).toBe(true);
-      expect(state.draft.classes[0].favoredClassBonuses).toEqual({ hp: 0, skillRank: 0 });
+      expect(state.draft.classes[0].favoredClassBonuses).toEqual([]);
       expect(state.isDirty).toBe(true);
     });
 
@@ -805,6 +989,42 @@ describe('characterEntrySlice — classes', () => {
       expect(state.draft.classes[0].isFavoredClass).toBe(false);
     });
 
+    it('clears favoredClassBonuses when toggling off the favored class', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      state = reducer(
+        state,
+        setFavoredClassBonuses({
+          id: 'cls-1',
+          selections: [{ level: 1, type: 'hp' as const }],
+        }),
+      );
+      expect(state.draft.classes[0].favoredClassBonuses).toHaveLength(1);
+      // Toggle off
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      expect(state.draft.classes[0].isFavoredClass).toBe(false);
+      expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
+    });
+
+    it('clears favoredClassBonuses on the previously-favored class when a different class is toggled on', () => {
+      let state = makeInitialState();
+      state = reducer(state, addClass(makeClass('cls-1')));
+      state = reducer(state, addClass(makeClass('cls-2')));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      state = reducer(
+        state,
+        setFavoredClassBonuses({
+          id: 'cls-1',
+          selections: [{ level: 1, type: 'skill' as const }],
+        }),
+      );
+      // Switch favored to cls-2
+      state = reducer(state, toggleFavoredClass('cls-2'));
+      expect(state.draft.classes[0].isFavoredClass).toBe(false);
+      expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
+      expect(state.draft.classes[1].isFavoredClass).toBe(true);
+    });
+
     it('is a no-op when id is not found', () => {
       let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
       const before = state.draft.classes[0].isFavoredClass;
@@ -814,17 +1034,42 @@ describe('characterEntrySlice — classes', () => {
   });
 
   describe('setFavoredClassBonuses', () => {
-    it('sets hp and skillRank bonus counts on the matching class', () => {
-      let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
+    it('stores per-level selections on the matching class', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 2 })));
       state = reducer(state, toggleFavoredClass('cls-1'));
-      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', hp: 5, skillRank: 3 }));
-      expect(state.draft.classes[0].favoredClassBonuses).toEqual({ hp: 5, skillRank: 3 });
+      const selections = [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'skill' as const },
+      ];
+      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', selections }));
+      expect(state.draft.classes[0].favoredClassBonuses).toEqual(selections);
       expect(state.isDirty).toBe(true);
+    });
+
+    it('clamps selections to cls.level, dropping entries beyond the class level', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 2 })));
+      state = reducer(state, toggleFavoredClass('cls-1'));
+      const selections = [
+        { level: 1, type: 'hp' as const },
+        { level: 2, type: 'skill' as const },
+        { level: 3, type: 'hp' as const }, // over-length — should be dropped
+      ];
+      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', selections }));
+      expect(state.draft.classes[0].favoredClassBonuses).toEqual([
+        { level: 1, type: 'hp' },
+        { level: 2, type: 'skill' },
+      ]);
     });
 
     it('is a no-op when id is not found', () => {
       let state = reducer(makeInitialState(), addClass(makeClass('cls-1')));
-      state = reducer(state, setFavoredClassBonuses({ id: 'does-not-exist', hp: 5, skillRank: 3 }));
+      state = reducer(
+        state,
+        setFavoredClassBonuses({
+          id: 'does-not-exist',
+          selections: [{ level: 1, type: 'hp' as const }],
+        }),
+      );
       expect(state.draft.classes[0].favoredClassBonuses).toBeUndefined();
     });
   });

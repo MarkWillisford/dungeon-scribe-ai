@@ -41,7 +41,7 @@ import type {
 } from '@/types/initiating';
 import type { DeityEntry } from '@/types/deities';
 import type { AnimalCompanionEntry, BodyShape } from '@/types/animalCompanions';
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 
 import { GameDataCache, TTL } from './GameDataCache';
 import type {
@@ -832,9 +832,9 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     raceName: string,
     className: string,
     _context?: QueryContext,
-  ): Promise<FavoredClassBonusOption[]> {
+  ): Promise<FavoredClassBonusEntry[]> {
     const cacheKey = `fcb/${raceName}/${className}`;
-    const cached = GameDataCache.get<FavoredClassBonusOption[]>(cacheKey);
+    const cached = GameDataCache.get<FavoredClassBonusEntry[]>(cacheKey);
     if (cached) return cached;
 
     return FirestoreGameDataConnector.dedup(cacheKey, async () => {
@@ -846,7 +846,7 @@ export class FirestoreGameDataConnector implements GameDataConnector {
           where('className', '==', className),
         );
         const snap = await getDocs(q);
-        const results = snap.docs.map((d) => d.data() as FavoredClassBonusOption);
+        const results = snap.docs.map((d) => d.data() as FavoredClassBonusEntry);
         GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
         return results;
       } catch (e) {

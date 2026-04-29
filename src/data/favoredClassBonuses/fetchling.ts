@@ -10,7 +10,7 @@
 //   - (PZO1135) → Adventurer's Guide
 //   - (PZO9466) → Blood of Shadows
 
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { GameDataSource } from '@/types/gameData';
 
 const ARG: GameDataSource = {
@@ -32,7 +32,7 @@ const META = {
   verificationStatus: 'needs_review' as const,
 };
 
-export const FETCHLING_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
+export const FETCHLING_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
   {
     id: 'fetchling-alchemist',
     raceName: 'Fetchling',

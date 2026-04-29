@@ -13,6 +13,7 @@ import {
   computeOtherBonusTotal,
 } from '@/types/characterDraft';
 import type { ExpandedClassData } from '@/data/classes/types';
+import type { FavoredClassBonusEntry, FCBMechanicalEffect } from '@/types/favoredClassBonuses';
 
 // ---- Class data lookup ----
 
@@ -221,7 +222,7 @@ export function computeMaxHP(
       hp += isFirstLevel ? hd : Math.floor(hd / 2) + 1;
       isFirstLevel = false;
     }
-    hp += cls.favoredClassBonuses?.hp ?? 0;
+    hp += cls.favoredClassBonuses?.filter((s) => s.type === 'hp').length ?? 0;
   }
   const totalLevel = classes.reduce((sum, c) => sum + c.level, 0);
   hp += conMod * totalLevel;
@@ -271,4 +272,145 @@ export function computeECL(
     .filter((t) => t.appliedAs === 'LA' && t.laValue)
     .reduce((sum, t) => sum + (t.laValue ?? 0), 0);
   return classLevels + templateLA;
+}
+
+// ---- FCB alternate accumulation ----
+//
+// Tallies the number of class levels invested in each alternate FCB option and
+// formats a human-readable display string for the current accumulated value.
+// Pure / sync — callers supply the pre-loaded option documents.
+
+export interface AccumulatedFCBEffect {
+  optionId: string;
+  shortName: string;
+  className: string;
+  count: number;
+  display: string;
+}
+
+function frac(count: number, numerator: number, denominator: number): number {
+  return Math.floor((count * numerator) / denominator);
+}
+
+function fcbEffectDisplay(effect: FCBMechanicalEffect, count: number): string {
+  if (count <= 0) return '';
+  switch (effect.type) {
+    case 'bonus': {
+      const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      const eff = effect.applyInIncrementsOf
+        ? Math.floor(val / effect.applyInIncrementsOf) * effect.applyInIncrementsOf
+        : val;
+      let s = `+${eff} ${effect.target}`;
+      if (effect.vsCombatManeuver?.length) s += ` vs ${effect.vsCombatManeuver.join('/')}`;
+      if (effect.vsCreatureType?.length) s += ` vs ${effect.vsCreatureType.join(', ')}`;
+      if (effect.inTerrain?.length) s += ` (${effect.inTerrain.join(', ')})`;
+      if (effect.conditionDescription) s += ` (${effect.conditionDescription})`;
+      if (effect.requiresPickOne) s += ` (chosen ${effect.pickOnePrompt ?? 'option'})`;
+      return s;
+    }
+    case 'natural_armor': {
+      const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      const tgt = effect.target === 'self' ? '' : ` (${effect.target})`;
+      return `+${val} natural armor${tgt}`;
+    }
+    case 'damage_reduction': {
+      const val =
+        effect.baseValue != null
+          ? effect.baseValue +
+            frac(count - 1, effect.perLevelValue.numerator, effect.perLevelValue.denominator)
+          : frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      const cap = effect.maxTotal != null ? ` (max ${effect.maxTotal})` : '';
+      return `DR ${val}/${effect.damageType}${cap} (${effect.target})`;
+    }
+    case 'resource_pool': {
+      const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      return `+${val} ${effect.resourceId.replace(/_/g, ' ')}`;
+    }
+    case 'class_level_bump': {
+      const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      const pick = effect.requiresPickOne
+        ? ` (chosen ${effect.pickOnePrompt ?? effect.featureName})`
+        : '';
+      const scope = effect.scopeDescription ? ` — ${effect.scopeDescription}` : '';
+      return `+${val} effective level for ${effect.featureName}${pick}${scope}`;
+    }
+    case 'feature_uses_per_day': {
+      const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      const pick = effect.requiresPickOne
+        ? ` (chosen ${effect.pickOnePrompt ?? effect.featureName})`
+        : '';
+      return `+${val} uses/day for ${effect.featureName}${pick}`;
+    }
+    case 'arcane_spell_failure_reduction': {
+      const val = frac(count, effect.perLevelPercent.numerator, effect.perLevelPercent.denominator);
+      return `-${val}% arcane spell failure (${effect.armorCategory} armor)`;
+    }
+    case 'weapon_proficiency_chip': {
+      const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      return `Non-proficiency penalty -${val} (chosen weapon)`;
+    }
+    case 'firearm_misfire_reduction': {
+      const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      return `Misfire chance -${val} (chosen firearm)`;
+    }
+    case 'caster_level': {
+      const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      const filter = effect.schoolFilter ? ` ${effect.schoolFilter}` : '';
+      const scope = effect.scopeType === 'full' ? '' : ` (${effect.scopeType.replace(/_/g, ' ')})`;
+      const pick = effect.requiresPickOne ? ` (chosen ${effect.pickOnePrompt ?? 'option'})` : '';
+      return `+${val} CL${filter}${scope}${pick}`;
+    }
+    case 'crafting_speedup': {
+      const normal = count * effect.goldPerDay;
+      const adv = count * effect.goldPerDayAdventuring;
+      return `+${normal} gp/day crafting (+${adv} adventuring, chosen feat)`;
+    }
+    case 'hardness_reduction_on_strike': {
+      const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      return `Hardness -${val} on strike (${effect.materials.join(', ')})`;
+    }
+    case 'feature_numeric_bump': {
+      const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      return `+${val} ${effect.bumpType} for ${effect.featureName}`;
+    }
+    case 'learn_option': {
+      const val = frac(count, effect.perLevelValue.numerator, effect.perLevelValue.denominator);
+      return `${val}× ${effect.optionType.replace(/_/g, ' ')} learned`;
+    }
+    case 'compound':
+      return effect.effects.map((e) => fcbEffectDisplay(e, count)).join('; ');
+    case 'unmapped':
+      return `${count} level${count !== 1 ? 's' : ''} invested`;
+    default:
+      return `${count} level${(count as number) !== 1 ? 's' : ''} invested`;
+  }
+}
+
+export function computeFCBAlternateAccumulation(
+  classes: DraftClassEntry[],
+  options: FavoredClassBonusEntry[],
+): AccumulatedFCBEffect[] {
+  const optionMap = new Map(options.map((o) => [o.id, o]));
+  const counts = new Map<string, number>();
+
+  for (const cls of classes) {
+    for (const sel of cls.favoredClassBonuses ?? []) {
+      if (sel.type !== 'alternate') continue;
+      counts.set(sel.optionId, (counts.get(sel.optionId) ?? 0) + 1);
+    }
+  }
+
+  const results: AccumulatedFCBEffect[] = [];
+  for (const [optionId, count] of counts) {
+    const option = optionMap.get(optionId);
+    if (!option) continue;
+    results.push({
+      optionId,
+      shortName: option.shortName,
+      className: option.className,
+      count,
+      display: fcbEffectDisplay(option.mechanicalEffect, count),
+    });
+  }
+  return results;
 }

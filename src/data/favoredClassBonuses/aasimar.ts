@@ -9,7 +9,7 @@
 //   - (PZO1134) → Ultimate Intrigue
 //   - (PZO1135) → Adventurer's Guide
 
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { GameDataSource } from '@/types/gameData';
 
 const ARG: GameDataSource = {
@@ -25,7 +25,7 @@ const META = {
   verificationStatus: 'needs_review' as const,
 };
 
-export const AASIMAR_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
+export const AASIMAR_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
   {
     id: 'aasimar-bard',
     raceName: 'Aasimar',
@@ -184,6 +184,7 @@ export const AASIMAR_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
       type: 'damage_reduction',
       target: 'eidolon',
       damageType: 'evil',
+      baseValue: 1,
       perLevelValue: { numerator: 1, denominator: 2 },
       maxTotal: 10,
     },

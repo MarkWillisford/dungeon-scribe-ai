@@ -13,7 +13,7 @@
 //   - (PZO1135) → Adventurer's Guide
 //   - (PRG:OA) → Occult Adventures
 
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { GameDataSource } from '@/types/gameData';
 
 const CRB: GameDataSource = {
@@ -71,7 +71,7 @@ const META = {
   verificationStatus: 'needs_review' as const,
 };
 
-export const GNOME_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
+export const GNOME_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
   {
     id: 'gnome-alchemist',
     raceName: 'Gnome',

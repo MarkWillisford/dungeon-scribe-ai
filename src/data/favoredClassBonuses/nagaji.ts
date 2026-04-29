@@ -5,7 +5,7 @@
 // code convention (see plans/favored-class-bonuses.md §"Source attribution"):
 //   - Nagaji is an ARG (Advanced Race Guide) race; entries without a citation default to ARG.
 
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { GameDataSource } from '@/types/gameData';
 
 const ARG: GameDataSource = {
@@ -21,7 +21,7 @@ const META = {
   verificationStatus: 'needs_review' as const,
 };
 
-export const NAGAJI_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
+export const NAGAJI_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
   {
     id: 'nagaji-alchemist',
     raceName: 'Nagaji',

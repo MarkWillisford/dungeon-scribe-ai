@@ -13,7 +13,7 @@
 // NOTE: 3rd-party publisher FCB options (Jon Brazer Enterprises "JBE:SF:FCO") listed on the
 // d20pfsrd page are intentionally excluded — this dataset is Paizo-official only.
 
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { GameDataSource } from '@/types/gameData';
 
 const ARG: GameDataSource = {
@@ -35,7 +35,7 @@ const META = {
   verificationStatus: 'needs_review' as const,
 };
 
-export const DUERGAR_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
+export const DUERGAR_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
   {
     id: 'duergar-cleric',
     raceName: 'Duergar',

@@ -56,9 +56,10 @@ export class DraftValidationService {
     const intTotal = abilityTotal(draft.abilities.int);
     const intMod = abilityModifier(intTotal);
 
-    const [classPrereqWarnings, featPrereqWarnings] = await Promise.all([
+    const [classPrereqWarnings, featPrereqWarnings, fcbWarnings] = await Promise.all([
       this.checkClassPrerequisites(draft, ruleset, timeline, warnId, classDataMap),
       this.checkFeatPrerequisites(draft, ruleset, timeline, warnId, classDataMap),
+      this.checkFavoredClassBonuses(draft, warnId),
     ]);
 
     return [
@@ -70,6 +71,7 @@ export class DraftValidationService {
       ...this.checkTraitCount(draft, ruleset, warnId),
       ...this.checkSkillRanks(draft, totalHD, intMod, warnId, classDataMap),
       ...this.checkSpellcastingAdvancement(draft, warnId, classDataMap),
+      ...fcbWarnings,
     ];
   }
 
@@ -524,6 +526,61 @@ export class DraftValidationService {
       }
     }
 
+    return w;
+  }
+
+  // ---- Favored class bonuses ----
+
+  private static async checkFavoredClassBonuses(
+    draft: CharacterDraft,
+    warnId: WarnId,
+  ): Promise<EntryValidationWarning[]> {
+    const w: EntryValidationWarning[] = [];
+    for (const cls of draft.classes) {
+      if (!cls.isFavoredClass) continue;
+      const allocated = cls.favoredClassBonuses?.length ?? 0;
+      if (allocated < cls.level) {
+        w.push(
+          warn(
+            warnId(`fcb-unallocated-${cls.id}`),
+            'classes',
+            `${cls.className}: ${cls.level - allocated} favored class bonus${cls.level - allocated === 1 ? '' : 'es'} unallocated.`,
+            'Assign each favored class level to HP, Skill, or an alternate on the Classes tab.',
+          ),
+        );
+      } else if (allocated > cls.level) {
+        w.push(
+          warn(
+            warnId(`fcb-overallocated-${cls.id}`),
+            'classes',
+            `${cls.className}: ${allocated - cls.level} favored class bonus${allocated - cls.level === 1 ? '' : 'es'} over-allocated (${allocated} selections for level ${cls.level}).`,
+            'Reduce favored class bonus selections to match the class level on the Classes tab.',
+          ),
+        );
+      }
+
+      // Check that alternate selections respect minimumClassLevel
+      const alternateSels = (cls.favoredClassBonuses ?? []).filter(
+        (s) => s.type === 'alternate',
+      ) as { type: 'alternate'; level: number; optionId: string }[];
+      if (alternateSels.length > 0 && draft.raceName) {
+        const entries = await GameDataService.getFavoredClassBonuses(draft.raceName, cls.className);
+        const entryMap = new Map(entries.map((e) => [e.id, e]));
+        for (const sel of alternateSels) {
+          const entry = entryMap.get(sel.optionId);
+          if (entry?.minimumClassLevel && sel.level < entry.minimumClassLevel) {
+            w.push(
+              warn(
+                warnId(`fcb-minlevel-${cls.id}-${sel.level}`),
+                'classes',
+                `${cls.className}: alternate "${entry.shortName}" requires class level ${entry.minimumClassLevel} but was selected at level ${sel.level}.`,
+                'Remove or reassign this favored class bonus selection on the Classes tab.',
+              ),
+            );
+          }
+        }
+      }
+    }
     return w;
   }
 }

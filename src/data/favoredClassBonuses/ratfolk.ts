@@ -13,7 +13,7 @@
 // so all default to ARG). A separate Jon Brazer Enterprises (JBE) subsection on the page is
 // third-party and is intentionally excluded here (isOfficial/Paizo-only scope).
 
-import type { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import type { GameDataSource } from '@/types/gameData';
 
 const ARG: GameDataSource = {
@@ -29,7 +29,7 @@ const META = {
   verificationStatus: 'needs_review' as const,
 };
 
-export const RATFOLK_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
+export const RATFOLK_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
   {
     id: 'ratfolk-alchemist',
     raceName: 'Ratfolk',

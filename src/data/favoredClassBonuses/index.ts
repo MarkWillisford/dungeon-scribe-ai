@@ -1,4 +1,4 @@
-import { FavoredClassBonusOption } from '@/types/favoredClassBonuses';
+import { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 
 import { AASIMAR_FAVORED_CLASS_BONUSES } from './aasimar';
 import { CATFOLK_FAVORED_CLASS_BONUSES } from './catfolk';
@@ -37,7 +37,7 @@ import { VANARA_FAVORED_CLASS_BONUSES } from './vanara';
 import { VISHKANYA_FAVORED_CLASS_BONUSES } from './vishkanya';
 import { WAYANG_FAVORED_CLASS_BONUSES } from './wayang';
 
-export const ALL_FAVORED_CLASS_BONUSES: FavoredClassBonusOption[] = [
+export const ALL_FAVORED_CLASS_BONUSES: FavoredClassBonusEntry[] = [
   ...AASIMAR_FAVORED_CLASS_BONUSES,
   ...CATFOLK_FAVORED_CLASS_BONUSES,
   ...CHANGELING_FAVORED_CLASS_BONUSES,
