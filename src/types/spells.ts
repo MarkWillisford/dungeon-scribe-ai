@@ -8,10 +8,16 @@ import type { DataQualityFields } from './base';
 export type SpellcastingAdvancement =
   | {
       mode: 'single';
+      // Length must equal this class entry's level.
+      // Entries may be { baseClassEntryId: '' } when the user hasn't chosen a target yet —
+      // validation surfaces that as a warning.
       perLevel: Array<{ baseClassEntryId: string }>;
     }
   | {
       mode: 'both';
+      // Length must equal this class entry's level.
+      // Entries may use '' for either id when the user hasn't chosen a target yet —
+      // validation surfaces that as a warning.
       perLevel: Array<{ arcaneBaseClassEntryId: string; divineBaseClassEntryId: string }>;
     };
 
