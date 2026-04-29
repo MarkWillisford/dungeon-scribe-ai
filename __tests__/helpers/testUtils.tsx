@@ -108,14 +108,15 @@ function createMinimalDispatcher() {
 
 /**
  * Install our minimal dispatcher on React internals, call fn, then restore.
+ * Pass keepState=true to preserve existing hooksState (for rerender after fireEvent).
  */
-function withHooks<T>(fn: () => T): T {
+function withHooks<T>(fn: () => T, keepState = false): T {
   const ReactInternals =
     (React as any).__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE ??
     (React as any).__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
   const prev = ReactInternals?.H;
   try {
-    hooksState = [];
+    if (!keepState) hooksState = [];
     hookIndex = 0;
     if (ReactInternals) {
       ReactInternals.H = createMinimalDispatcher();
@@ -128,7 +129,7 @@ function withHooks<T>(fn: () => T): T {
   }
 }
 
-function renderToTree(element: React.ReactElement): RenderedNode {
+function renderToTree(element: React.ReactElement, keepState = false): RenderedNode {
   if (typeof element === 'string' || typeof element === 'number') {
     return { type: 'TEXT', props: {}, children: [String(element)] };
   }
@@ -142,7 +143,7 @@ function renderToTree(element: React.ReactElement): RenderedNode {
   // If it's a function component, call it with hooks support
   if (typeof element.type === 'function') {
     try {
-      const result = withHooks(() => (element.type as Function)(element.props));
+      const result = withHooks(() => (element.type as Function)(element.props), keepState);
       if (!result)
         return {
           type: String(element.type.name || 'Component'),
@@ -172,7 +173,7 @@ function renderToTree(element: React.ReactElement): RenderedNode {
       if (typeof child === 'string' || typeof child === 'number') {
         children.push(String(child));
       } else if (React.isValidElement(child)) {
-        children.push(renderToTree(child));
+        children.push(renderToTree(child, keepState));
       }
     }
   }
@@ -215,6 +216,11 @@ export function render(element: React.ReactElement) {
 
   return {
     tree,
+
+    /** Re-render after fireEvent to get the updated tree (preserves hook state). */
+    rerender() {
+      return renderToTree(element, true);
+    },
 
     getByText(text: string) {
       const nodes = findAllNodes(tree, (n) => {
