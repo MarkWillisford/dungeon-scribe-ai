@@ -2781,7 +2781,7 @@ describe('characterEntrySlice — eidolons', () => {
     it('initialises summonerBroodmaster if not present', () => {
       const state = reducer(
         makeStateWithSummoner(),
-        setBroodmasterShared({ classEntryId: 'summoner-1', evolutionId: 'evolution-huge' }),
+        setBroodmasterShared({ classEntryId: 'summoner-1', evolutionId: 'evolution-claws' }),
       );
       expect(state.draft.classes[0].summonerBroodmaster).toBeDefined();
     });

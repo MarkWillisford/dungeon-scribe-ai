@@ -144,7 +144,7 @@ export interface EidolonBaseFormDefinition extends DataQualityFields {
   name: string;
   description: string;
   edition: EidolonEdition | 'both';
-  // true for aquatic/avian/mounted/tauric/vermious — late-APG additions allowed in both editions
+  // true for aquatic/avian/tauric — late-APG additions allowed in both editions
   legacyBaseForm?: boolean;
 
   startingSize: Size;

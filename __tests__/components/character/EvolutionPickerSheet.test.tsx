@@ -100,7 +100,7 @@ describe('EvolutionPickerSheet', () => {
       const { getAllText } = render(
         <EvolutionPickerSheet
           {...BASE_PROPS}
-          allowedEvolutionIds={['evolution-large', 'evolution-huge']}
+          allowedEvolutionIds={['evolution-large', 'evolution-claws']}
         />,
       );
       expect(getAllText().join(' ')).toContain('Add Evolution');

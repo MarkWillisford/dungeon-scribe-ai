@@ -148,7 +148,7 @@ export function BroodmasterPoolCard({ classEntry, edition, dataIndex }: Broodmas
                   styles.sharedRow,
                   {
                     borderColor: colors.border.DEFAULT,
-                    backgroundColor: isDark ? '#1A1F26' : '#FBF8F3',
+                    backgroundColor: isDark ? colors.bg.secondary : colors.bg.primary,
                   },
                 ]}
               >

@@ -175,7 +175,7 @@ export function EidolonAspectCard({ eidolon, summonerLevel, dataIndex }: Eidolon
                   styles.evoRow,
                   {
                     borderColor: colors.border.DEFAULT,
-                    backgroundColor: isDark ? '#1A1F26' : '#FBF8F3',
+                    backgroundColor: isDark ? colors.bg.secondary : colors.bg.primary,
                   },
                 ]}
               >

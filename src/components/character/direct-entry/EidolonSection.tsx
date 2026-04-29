@@ -566,7 +566,7 @@ function SelectedEvolutionRow({
     <View
       style={[
         styles.selectedRow,
-        { borderColor: colors.border.DEFAULT, backgroundColor: isDark ? '#1A1F26' : '#FBF8F3' },
+        { borderColor: colors.border.DEFAULT, backgroundColor: isDark ? colors.bg.secondary : colors.bg.primary },
       ]}
     >
       <View style={{ flex: 1 }}>

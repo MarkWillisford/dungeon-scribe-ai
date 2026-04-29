@@ -439,7 +439,7 @@ export function MetadataStep({
           accessibilityState={{ disabled: !canConfirm }}
           accessibilityLabel="Add evolution"
         >
-          <Text style={[styles.metadataButtonText, { color: '#1A1F26' }]}>Add</Text>
+          <Text style={[styles.metadataButtonText, { color: colors.text.primary }]}>Add</Text>
         </Pressable>
       </View>
     </View>
