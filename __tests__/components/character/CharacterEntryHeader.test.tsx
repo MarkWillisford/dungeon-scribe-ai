@@ -363,9 +363,11 @@ describe('CharacterEntryHeader — name editing', () => {
     );
     fireEvent.press(nameButton!);
     const updatedTree = rerender();
-    const inputs = findByType(updatedTree, 'TextInput');
-    expect(inputs.length).toBeGreaterThan(0);
-    fireEvent.changeText(inputs[0], 'Aria');
+    const nameInput = findByType(updatedTree, 'TextInput').find(
+      (n) => n.props.testID === 'character-name-input',
+    );
+    expect(nameInput).toBeDefined();
+    fireEvent.changeText(nameInput!, 'Aria');
     expect(mockDispatch).toHaveBeenCalled();
     const call = mockDispatch.mock.calls[mockDispatch.mock.calls.length - 1][0];
     expect(call.type).toBe('characterEntry/setName');

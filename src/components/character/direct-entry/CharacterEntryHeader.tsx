@@ -97,6 +97,7 @@ export function CharacterEntryHeader({
               { color: isDark ? fantasy.gold : fantasy.darkWood, borderBottomColor: fantasy.gold },
             ]}
             accessibilityLabel="Character name"
+            testID="character-name-input"
           />
         ) : (
           <Pressable
