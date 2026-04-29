@@ -73,6 +73,14 @@ function syncFeatSlotsFromClasses(character: Character): void {
     if (existingKeys.has(key)) continue;
     // Add an "empty" feat entry as a placeholder slot marker
     // We only add truly new slots (not already in feats.feats)
+    character.feats.feats.push({
+      featId: '',
+      name: '',
+      source: makeFeatSource(slot.source, slot.availableAtLevel),
+      grantedAtLevel: slot.availableAtLevel,
+      active: true,
+      choices: {},
+    });
   }
   // Slots are computed on read — we just need to ensure assigned feats stay in sync.
   // Remove feat entries whose slots no longer exist
