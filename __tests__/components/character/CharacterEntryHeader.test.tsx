@@ -200,6 +200,33 @@ describe('CharacterEntryHeader — portrait button', () => {
     fireEvent.press(portrait!);
     expect(onPortraitPress).toHaveBeenCalled();
   });
+
+  it('renders placeholder icon when portrait is empty', () => {
+    mockPortrait = '';
+    const { tree } = render(
+      <CharacterEntryHeader
+        onValidate={onValidate}
+        onSave={onSave}
+        onPortraitPress={onPortraitPress}
+      />,
+    );
+    const texts = getAllText(tree);
+    expect(texts.some((t) => t === '⚔')).toBe(true);
+  });
+
+  it('renders Image when portrait URI is set', () => {
+    mockPortrait = 'https://example.com/portrait.jpg';
+    const { tree } = render(
+      <CharacterEntryHeader
+        onValidate={onValidate}
+        onSave={onSave}
+        onPortraitPress={onPortraitPress}
+      />,
+    );
+    const images = findByType(tree, 'Image');
+    expect(images.length).toBeGreaterThan(0);
+    expect(images[0].props.source).toEqual({ uri: mockPortrait });
+  });
 });
 
 describe('CharacterEntryHeader — ECL and class summary', () => {

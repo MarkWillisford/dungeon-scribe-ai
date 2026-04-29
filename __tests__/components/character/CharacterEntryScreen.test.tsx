@@ -368,4 +368,115 @@ describe('CharacterEntryScreen — useTabStatus', () => {
     const { tabStatus } = ornateTabNode(tree).props as { tabStatus: Record<string, string> };
     expect(tabStatus.identity).toBe('complete');
   });
+
+  // Warning-override branch for each remaining tab
+  it.each([
+    'abilities',
+    'classes',
+    'combat',
+    'skills',
+    'traits',
+    'feats',
+    'spells',
+    'equipment',
+    'notes',
+  ])('%s warning overrides its status', (section) => {
+    mockWarnings = [{ section, isAcknowledged: false }];
+    const { tree } = render(<CharacterEntryScreen />);
+    const { tabStatus } = ornateTabNode(tree).props as { tabStatus: Record<string, string> };
+    expect(tabStatus[section]).toBe('warnings');
+  });
+
+  it('equipment is complete when editorEquipment has items', () => {
+    mockEditorEquipment = [{ id: 'item1' }];
+    const { tree } = render(<CharacterEntryScreen />);
+    const { tabStatus } = ornateTabNode(tree).props as { tabStatus: Record<string, string> };
+    expect(tabStatus.equipment).toBe('complete');
+  });
+
+  it('equipment is empty when editorEquipment is undefined', () => {
+    (mockEditorEquipment as unknown) = undefined;
+    const { tree } = render(<CharacterEntryScreen />);
+    const { tabStatus } = ornateTabNode(tree).props as { tabStatus: Record<string, string> };
+    expect(tabStatus.equipment).toBe('empty');
+  });
+});
+
+// ---- Tests: tab content rendering ----
+
+describe('CharacterEntryScreen — tab content rendering', () => {
+  it.each([
+    'abilities',
+    'classes',
+    'combat',
+    'skills',
+    'equipment',
+    'traits',
+    'feats',
+    'spells',
+    'notes',
+  ])('renders with activeTab=%s without crashing', (tab) => {
+    mockActiveTab = tab;
+    expect(() => render(<CharacterEntryScreen />)).not.toThrow();
+  });
+});
+
+// ---- Tests: validation FAB ----
+
+describe('CharacterEntryScreen — validation FAB', () => {
+  function getAllText(node: RenderedNode): string[] {
+    const texts: string[] = [];
+    if (node.type === 'Text') {
+      const text = node.children.filter((c) => typeof c === 'string').join('');
+      if (text) texts.push(text);
+    }
+    for (const child of node.children) {
+      if (typeof child !== 'string') texts.push(...getAllText(child));
+    }
+    return texts;
+  }
+
+  it('FAB is not rendered when lastValidatedAt is null', () => {
+    mockLastValidatedAt = null;
+    const { tree } = render(<CharacterEntryScreen />);
+    const buttons = findByType(tree, 'Pressable');
+    const fab = buttons.find(
+      (b) =>
+        b.props.accessibilityLabel?.includes('warning') ||
+        b.props.accessibilityLabel === 'Validation passed',
+    );
+    expect(fab).toBeUndefined();
+  });
+
+  it('FAB is rendered when lastValidatedAt is set', () => {
+    mockLastValidatedAt = Date.now();
+    const { tree } = render(<CharacterEntryScreen />);
+    const buttons = findByType(tree, 'Pressable');
+    const fab = buttons.find(
+      (b) =>
+        b.props.accessibilityLabel === 'Validation passed' ||
+        b.props.accessibilityLabel?.includes('warning'),
+    );
+    expect(fab).toBeDefined();
+  });
+
+  it('FAB shows warning count when there are unacknowledged warnings', () => {
+    mockLastValidatedAt = Date.now();
+    mockWarnings = [
+      { section: 'identity', isAcknowledged: false },
+      { section: 'classes', isAcknowledged: false },
+    ];
+    const { tree } = render(<CharacterEntryScreen />);
+    const texts = getAllText(tree);
+    expect(texts.some((t) => t === '⚠')).toBe(true);
+    expect(texts.some((t) => t === '2')).toBe(true);
+  });
+
+  it('FAB shows checkmark when all warnings are acknowledged', () => {
+    mockLastValidatedAt = Date.now();
+    mockWarnings = [{ section: 'identity', isAcknowledged: true }];
+    const { tree } = render(<CharacterEntryScreen />);
+    const texts = getAllText(tree);
+    expect(texts.some((t) => t === '✓')).toBe(true);
+  });
 });
