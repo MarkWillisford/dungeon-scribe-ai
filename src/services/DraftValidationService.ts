@@ -7,9 +7,11 @@ import type { CharacterDraft, DraftClassEntry } from '@/types/characterDraft';
 import type { EntryValidationWarning } from '@/store/slices/characterEntrySlice';
 import type { Character } from '@/types';
 import type { Ruleset } from '@/types/ruleset';
+import type { DraftEidolon } from '@/types/eidolon';
 import { DraftStateResolver, type ECLTimeline } from './DraftStateResolver';
 import { PrerequisiteService } from './PrerequisiteService';
 import { GameDataService } from '@/services/GameDataService';
+import { EidolonPoolService, type EidolonDataIndex } from './EidolonPoolService';
 import {
   lookupClassData,
   abilityTotal,
@@ -47,6 +49,7 @@ export class DraftValidationService {
     draft: CharacterDraft,
     ruleset: Ruleset,
     classDataMap: ClassDataMap,
+    eidolonDataIndex?: EidolonDataIndex,
   ): Promise<EntryValidationWarning[]> {
     const warnId = makeWarnId(); // scoped counter — safe under parallel calls and test isolation
 
@@ -62,6 +65,8 @@ export class DraftValidationService {
       this.checkFavoredClassBonuses(draft, warnId),
     ]);
 
+    const effectiveEidolonIndex = eidolonDataIndex ?? EidolonPoolService.buildIndexFromStaticData();
+
     return [
       ...this.checkIdentity(draft, warnId),
       ...this.checkAbilities(draft, totalHD, warnId),
@@ -72,6 +77,7 @@ export class DraftValidationService {
       ...this.checkSkillRanks(draft, totalHD, intMod, warnId, classDataMap),
       ...this.checkSpellcastingAdvancement(draft, warnId, classDataMap),
       ...fcbWarnings,
+      ...this.checkEidolons(draft, effectiveEidolonIndex, warnId),
     ];
   }
 
@@ -582,5 +588,217 @@ export class DraftValidationService {
       }
     }
     return w;
+  }
+
+  // ---- Eidolons ----
+
+  private static checkEidolons(
+    draft: CharacterDraft,
+    dataIndex: EidolonDataIndex,
+    warnId: WarnId,
+  ): EntryValidationWarning[] {
+    const w: EntryValidationWarning[] = [];
+
+    // Feat-without-summoner check: Extra Evolution feat is meaningless without
+    // a Summoner class entry.
+    const hasSummonerClass = draft.classes.some((c) =>
+      /^summoner(?:\s|$|\()/i.test(c.className.trim()),
+    );
+    const extraEvolutionCount = draft.featSlots.filter(
+      (s) => s.featId === 'extra-evolution',
+    ).length;
+    if (extraEvolutionCount > 0 && !hasSummonerClass) {
+      w.push(
+        warn(
+          warnId('eidolon-extra-evolution-no-summoner'),
+          'feats',
+          'Extra Evolution feat requires the Summoner class.',
+        ),
+      );
+    }
+
+    for (const eidolon of draft.eidolons) {
+      const classEntry = draft.classes.find((c) => c.id === eidolon.summonerClassEntryId);
+      if (!classEntry) {
+        w.push(
+          warn(
+            warnId(`eidolon-orphan-${eidolon.id}`),
+            'classes',
+            `Eidolon '${eidolon.name}' references a summoner class entry that no longer exists.`,
+            'Remove the eidolon or re-link it to a current class entry.',
+          ),
+        );
+        continue;
+      }
+
+      const summonerLevel = classEntry.level;
+
+      // ── Base form validity ──
+      const baseForm = dataIndex.baseForms.get(eidolon.baseForm);
+      if (!baseForm) {
+        w.push(
+          warn(
+            warnId(`eidolon-unknown-form-${eidolon.id}`),
+            'classes',
+            `Eidolon '${eidolon.name}': unknown base form '${eidolon.baseForm}'.`,
+          ),
+        );
+      } else if (baseForm.edition === 'unchained' && eidolon.edition !== 'unchained') {
+        w.push(
+          warn(
+            warnId(`eidolon-form-edition-${eidolon.id}`),
+            'classes',
+            `Eidolon '${eidolon.name}': base form '${baseForm.name}' is Unchained-only.`,
+          ),
+        );
+      }
+
+      // ── Subtype validity ──
+      if (eidolon.edition === 'unchained' && !eidolon.subtype) {
+        w.push(
+          warn(
+            warnId(`eidolon-missing-subtype-${eidolon.id}`),
+            'classes',
+            `Eidolon '${eidolon.name}': Unchained eidolons require a subtype.`,
+          ),
+        );
+      } else if (eidolon.subtype) {
+        const subtype = dataIndex.subtypes.get(eidolon.subtype);
+        if (!subtype) {
+          w.push(
+            warn(
+              warnId(`eidolon-unknown-subtype-${eidolon.id}`),
+              'classes',
+              `Eidolon '${eidolon.name}': unknown subtype '${eidolon.subtype}'.`,
+            ),
+          );
+        } else {
+          if (
+            subtype.requiredBaseForms.length > 0 &&
+            !subtype.requiredBaseForms.includes(eidolon.baseForm)
+          ) {
+            w.push(
+              warn(
+                warnId(`eidolon-subtype-form-${eidolon.id}`),
+                'classes',
+                `Eidolon '${eidolon.name}': ${subtype.name} subtype requires base form ${subtype.requiredBaseForms.join(', ')}.`,
+              ),
+            );
+          }
+        }
+      }
+
+      // ── Aspect / Greater Aspect diversion cap ──
+      const diverted = eidolon.aspectTransfer?.divertedPoints ?? 0;
+      if (diverted > 0) {
+        if (summonerLevel < 10) {
+          w.push(
+            warn(
+              warnId(`eidolon-aspect-too-early-${eidolon.id}`),
+              'classes',
+              `Aspect transfer requires summoner level 10 (current: ${summonerLevel}).`,
+            ),
+          );
+        } else if (summonerLevel < 18 && diverted > 2) {
+          w.push(
+            warn(
+              warnId(`eidolon-aspect-over-cap-${eidolon.id}`),
+              'classes',
+              `Aspect diversion (${diverted}) exceeds the 2-point cap at summoner levels 10–17.`,
+            ),
+          );
+        } else if (summonerLevel >= 18 && diverted > 6) {
+          w.push(
+            warn(
+              warnId(`eidolon-greater-aspect-over-cap-${eidolon.id}`),
+              'classes',
+              `Greater Aspect diversion (${diverted}) exceeds the 6-point cap at summoner level 18+.`,
+            ),
+          );
+        }
+      }
+
+      // ── Pool breakdown warnings (overspend, missing override reason) ──
+      const breakdown = EidolonPoolService.computePool(draft, eidolon.id, dataIndex);
+      for (const msg of breakdown.warnings) {
+        w.push(
+          warn(
+            warnId(`eidolon-pool-${eidolon.id}`),
+            'classes',
+            `Eidolon '${eidolon.name}': ${msg}.`,
+          ),
+        );
+      }
+
+      // ── Per-evolution prereq / level / stacking checks ──
+      // Walk the evolutions and re-check each one against the eidolon state
+      // *without* that evolution, to find any that are no longer legal.
+      const evolutionWarnings = this.checkEidolonEvolutions(eidolon, summonerLevel, dataIndex);
+      for (const [message, subId] of evolutionWarnings) {
+        w.push(warn(warnId(`eidolon-evo-${eidolon.id}-${subId}`), 'classes', message));
+      }
+    }
+
+    // ── Broodmaster shared-evolution level gates (once per class entry) ──
+    // These checks apply to the class entry's sharedEvolutions, which is the
+    // same list for every eidolon in the brood. Running them inside the eidolon
+    // loop would emit one warning per eidolon instead of one per class entry.
+    for (const classEntry of draft.classes) {
+      if (!classEntry.summonerBroodmaster?.sharedEvolutions) continue;
+      const summonerLevel = classEntry.level;
+      for (const shared of classEntry.summonerBroodmaster.sharedEvolutions) {
+        // Only 'evolution-large' exists as a data entry; Huge is a cost variant
+        // of Large (6 ep at L13+), not a separate ID, so no separate check is needed.
+        if (shared.evolutionId === 'evolution-large' && summonerLevel < 8) {
+          w.push(
+            warn(
+              warnId(`eidolon-brood-large-${classEntry.id}`),
+              'classes',
+              `Broodmaster shared Large evolution requires summoner level 8 (current: ${summonerLevel}).`,
+            ),
+          );
+        }
+      }
+    }
+
+    return w;
+  }
+
+  private static checkEidolonEvolutions(
+    eidolon: DraftEidolon,
+    summonerLevel: number,
+    dataIndex: EidolonDataIndex,
+  ): Array<[message: string, subId: string]> {
+    const results: Array<[message: string, subId: string]> = [];
+    // Re-check each selection as if re-adding it to an eidolon minus itself.
+    // Gives the real prereq / level / stacking reason when a selection is now
+    // illegal (e.g. user removed the prereq chain).
+    for (let i = 0; i < eidolon.selectedEvolutions.length; i++) {
+      const sel = eidolon.selectedEvolutions[i];
+      const def = dataIndex.evolutions.get(sel.evolutionId);
+      if (!def) {
+        results.push([
+          `Eidolon '${eidolon.name}': unknown evolution '${sel.evolutionId}'.`,
+          `unknown-${i}`,
+        ]);
+        continue;
+      }
+      const eidolonMinusSelection: DraftEidolon = {
+        ...eidolon,
+        selectedEvolutions: eidolon.selectedEvolutions.filter((_, idx) => idx !== i),
+      };
+      const result = EidolonPoolService.canSelectEvolution(
+        sel.evolutionId,
+        eidolonMinusSelection,
+        summonerLevel,
+        Number.POSITIVE_INFINITY, // ignore pool budget here; overspend surfaces via breakdown warnings
+        dataIndex,
+        sel.metadata,
+      );
+      if (!result.allowed && result.reason) {
+        results.push([`Eidolon '${eidolon.name}': ${result.reason}.`, `${def.id}-${i}`]);
+      }
+    }
+    return results;
   }
 }

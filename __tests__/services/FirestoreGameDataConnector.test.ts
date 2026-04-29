@@ -191,9 +191,7 @@ describe('FirestoreGameDataConnector', () => {
 
   describe('getClassByName', () => {
     test('returns class when doc exists', async () => {
-      mockGetDoc.mockResolvedValueOnce(
-        mockDocSnap({ name: 'Fighter', hitDie: 10 }) as never,
-      );
+      mockGetDoc.mockResolvedValueOnce(mockDocSnap({ name: 'Fighter', hitDie: 10 }) as never);
 
       const result = await connector.getClassByName('Fighter');
       expect(result?.name).toBe('Fighter');
@@ -207,9 +205,7 @@ describe('FirestoreGameDataConnector', () => {
     });
 
     test('caches result by lowercase name', async () => {
-      mockGetDoc.mockResolvedValueOnce(
-        mockDocSnap({ name: 'Fighter' }) as never,
-      );
+      mockGetDoc.mockResolvedValueOnce(mockDocSnap({ name: 'Fighter' }) as never);
 
       await connector.getClassByName('Fighter');
       const second = await connector.getClassByName('Fighter');
@@ -322,9 +318,7 @@ describe('FirestoreGameDataConnector', () => {
     });
 
     test('getGear returns gear and caches', async () => {
-      mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{ id: 'rope', name: 'Rope' }]) as never,
-      );
+      mockGetDocs.mockResolvedValueOnce(mockSnap([{ id: 'rope', name: 'Rope' }]) as never);
 
       const result = await connector.getGear();
       await connector.getGear();
@@ -367,10 +361,7 @@ describe('FirestoreGameDataConnector', () => {
         mockSnap([{ id: 'battle-cry', mysteryId: 'battle' }]) as never,
       );
 
-      const result = await connector.getClassChoiceOptions(
-        'revelations',
-        { mysteryId: 'battle' },
-      );
+      const result = await connector.getClassChoiceOptions('revelations', { mysteryId: 'battle' });
       expect(result).toHaveLength(1);
     });
 
@@ -379,17 +370,12 @@ describe('FirestoreGameDataConnector', () => {
         mockSnap([{ id: 'aberrant-sorcerer', classIds: ['sorcerer'] }]) as never,
       );
 
-      const result = await connector.getClassChoiceOptions(
-        'bloodlines',
-        { classId: 'sorcerer' },
-      );
+      const result = await connector.getClassChoiceOptions('bloodlines', { classId: 'sorcerer' });
       expect(result).toHaveLength(1);
     });
 
     test('bloodlines — no classId filter returns all', async () => {
-      mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{ id: 'a' }, { id: 'b' }]) as never,
-      );
+      mockGetDocs.mockResolvedValueOnce(mockSnap([{ id: 'a' }, { id: 'b' }]) as never);
 
       const result = await connector.getClassChoiceOptions('bloodlines', {});
       expect(result).toHaveLength(2);
@@ -400,17 +386,14 @@ describe('FirestoreGameDataConnector', () => {
         mockSnap([{ id: 'battle', wanderingSpirit: true }]) as never,
       );
 
-      const result = await connector.getClassChoiceOptions(
-        'shamanspirits',
-        { wanderingOnly: true },
-      );
+      const result = await connector.getClassChoiceOptions('shamanspirits', {
+        wanderingOnly: true,
+      });
       expect(result).toHaveLength(1);
     });
 
     test('shamanspirits — no filter returns all', async () => {
-      mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{ id: 'a' }, { id: 'b' }]) as never,
-      );
+      mockGetDocs.mockResolvedValueOnce(mockSnap([{ id: 'a' }, { id: 'b' }]) as never);
 
       const result = await connector.getClassChoiceOptions('shamanspirits', {});
       expect(result).toHaveLength(2);
@@ -421,17 +404,14 @@ describe('FirestoreGameDataConnector', () => {
         mockSnap([{ id: 'extended-range', talentType: 'infusion' }]) as never,
       );
 
-      const result = await connector.getClassChoiceOptions(
-        'wildtalents',
-        { talentType: 'infusion' },
-      );
+      const result = await connector.getClassChoiceOptions('wildtalents', {
+        talentType: 'infusion',
+      });
       expect(result).toHaveLength(1);
     });
 
     test('wildtalents — no filter returns all', async () => {
-      mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{ id: 'a' }, { id: 'b' }]) as never,
-      );
+      mockGetDocs.mockResolvedValueOnce(mockSnap([{ id: 'a' }, { id: 'b' }]) as never);
 
       const result = await connector.getClassChoiceOptions('wildtalents', {});
       expect(result).toHaveLength(2);
@@ -442,17 +422,12 @@ describe('FirestoreGameDataConnector', () => {
         mockSnap([{ id: 'see-unseen', trickTier: 'master' }]) as never,
       );
 
-      const result = await connector.getClassChoiceOptions(
-        'ninjatricks',
-        { trickTier: 'master' },
-      );
+      const result = await connector.getClassChoiceOptions('ninjatricks', { trickTier: 'master' });
       expect(result).toHaveLength(1);
     });
 
     test('ninjatricks — no filter returns all', async () => {
-      mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{ id: 'a' }, { id: 'b' }]) as never,
-      );
+      mockGetDocs.mockResolvedValueOnce(mockSnap([{ id: 'a' }, { id: 'b' }]) as never);
 
       const result = await connector.getClassChoiceOptions('ninjatricks', {});
       expect(result).toHaveLength(2);
@@ -463,10 +438,9 @@ describe('FirestoreGameDataConnector', () => {
         mockSnap([{ id: 'crippling', talentTier: 'advanced' }]) as never,
       );
 
-      const result = await connector.getClassChoiceOptions(
-        'roguetalents',
-        { talentTier: 'advanced' },
-      );
+      const result = await connector.getClassChoiceOptions('roguetalents', {
+        talentTier: 'advanced',
+      });
       expect(result).toHaveLength(1);
     });
 
@@ -475,17 +449,14 @@ describe('FirestoreGameDataConnector', () => {
         mockSnap([{ id: 'quarry', talentTier: 'advanced' }]) as never,
       );
 
-      const result = await connector.getClassChoiceOptions(
-        'slayertalents',
-        { talentTier: 'advanced' },
-      );
+      const result = await connector.getClassChoiceOptions('slayertalents', {
+        talentTier: 'advanced',
+      });
       expect(result).toHaveLength(1);
     });
 
     test('roguetalents — no filter returns all', async () => {
-      mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{ id: 'a' }, { id: 'b' }]) as never,
-      );
+      mockGetDocs.mockResolvedValueOnce(mockSnap([{ id: 'a' }, { id: 'b' }]) as never);
 
       const result = await connector.getClassChoiceOptions('roguetalents', {});
       expect(result).toHaveLength(2);
@@ -496,17 +467,14 @@ describe('FirestoreGameDataConnector', () => {
         mockSnap([{ id: 'grand-mutagen', discoveryTier: 'grand' }]) as never,
       );
 
-      const result = await connector.getClassChoiceOptions(
-        'alchemistdiscoveries',
-        { discoveryTier: 'grand' },
-      );
+      const result = await connector.getClassChoiceOptions('alchemistdiscoveries', {
+        discoveryTier: 'grand',
+      });
       expect(result).toHaveLength(1);
     });
 
     test('alchemistdiscoveries — no filter returns all', async () => {
-      mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{ id: 'a' }, { id: 'b' }]) as never,
-      );
+      mockGetDocs.mockResolvedValueOnce(mockSnap([{ id: 'a' }, { id: 'b' }]) as never);
 
       const result = await connector.getClassChoiceOptions('alchemistdiscoveries', {});
       expect(result).toHaveLength(2);
@@ -514,7 +482,10 @@ describe('FirestoreGameDataConnector', () => {
 
     test('domains — no deity filter returns all via fetchAll', async () => {
       mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{ id: 'air', name: 'Air' }, { id: 'fire', name: 'Fire' }]) as never,
+        mockSnap([
+          { id: 'air', name: 'Air' },
+          { id: 'fire', name: 'Fire' },
+        ]) as never,
       );
 
       const result = await connector.getClassChoiceOptions('domains', {});
@@ -532,32 +503,30 @@ describe('FirestoreGameDataConnector', () => {
       );
       // Second call: deity lookup
       mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{
-          name: 'Cayden Cailean',
-          domains: ['chaos', 'charm'],
-          subdomains: ['azata'],
-        }]) as never,
+        mockSnap([
+          {
+            name: 'Cayden Cailean',
+            domains: ['chaos', 'charm'],
+            subdomains: ['azata'],
+          },
+        ]) as never,
       );
 
-      const result = await connector.getClassChoiceOptions(
-        'domains',
-        { deityName: 'Cayden Cailean' },
-      );
+      const result = await connector.getClassChoiceOptions('domains', {
+        deityName: 'Cayden Cailean',
+      });
       expect(result).toHaveLength(1);
       expect(result[0].id).toBe('chaos');
     });
 
     test('domains — deity filter with unknown deity returns all', async () => {
-      mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{ id: 'air' }, { id: 'fire' }]) as never,
-      );
+      mockGetDocs.mockResolvedValueOnce(mockSnap([{ id: 'air' }, { id: 'fire' }]) as never);
       // Deity not found
       mockGetDocs.mockResolvedValueOnce(mockSnap([]) as never);
 
-      const result = await connector.getClassChoiceOptions(
-        'domains',
-        { deityName: 'UnknownDeity' },
-      );
+      const result = await connector.getClassChoiceOptions('domains', {
+        deityName: 'UnknownDeity',
+      });
       expect(result).toHaveLength(2);
     });
 
@@ -578,31 +547,29 @@ describe('FirestoreGameDataConnector', () => {
         ]) as never,
       );
       mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{
-          name: 'Cayden Cailean',
-          domains: ['chaos'],
-          subdomains: [],
-        }]) as never,
+        mockSnap([
+          {
+            name: 'Cayden Cailean',
+            domains: ['chaos'],
+            subdomains: [],
+          },
+        ]) as never,
       );
 
-      const result = await connector.getClassChoiceOptions(
-        'warpriestblessings',
-        { deityName: 'Cayden Cailean' },
-      );
+      const result = await connector.getClassChoiceOptions('warpriestblessings', {
+        deityName: 'Cayden Cailean',
+      });
       expect(result).toHaveLength(1);
       expect(result[0].id).toBe('warpriest-blessing-chaos');
     });
 
     test('warpriestblessings — unknown deity returns all', async () => {
-      mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{ id: 'a' }, { id: 'b' }]) as never,
-      );
+      mockGetDocs.mockResolvedValueOnce(mockSnap([{ id: 'a' }, { id: 'b' }]) as never);
       mockGetDocs.mockResolvedValueOnce(mockSnap([]) as never);
 
-      const result = await connector.getClassChoiceOptions(
-        'warpriestblessings',
-        { deityName: 'Nobody' },
-      );
+      const result = await connector.getClassChoiceOptions('warpriestblessings', {
+        deityName: 'Nobody',
+      });
       expect(result).toHaveLength(2);
     });
 
@@ -627,20 +594,85 @@ describe('FirestoreGameDataConnector', () => {
         ]) as never,
       );
 
-      const result = await connector.getClassChoiceOptions(
-        'eidolonevolutions',
-        { summonerType: 'apg' },
-      );
+      const result = await connector.getClassChoiceOptions('eidolonevolutions', {
+        summonerType: 'apg',
+      });
       expect(result).toHaveLength(2); // bite (null) + limbs (apg)
     });
 
     test('occultistfocuspowers — queries with isBasePower == false', async () => {
-      mockGetDocs.mockResolvedValueOnce(
-        mockSnap([{ id: 'ward', isBasePower: false }]) as never,
-      );
+      mockGetDocs.mockResolvedValueOnce(mockSnap([{ id: 'ward', isBasePower: false }]) as never);
 
       const result = await connector.getClassChoiceOptions('occultistfocuspowers', {});
       expect(result).toHaveLength(1);
+    });
+  });
+
+  // ---- Eidolon static catalogs ------------------------------------------------
+
+  describe('getEidolonBaseForms', () => {
+    test('returns base forms fetched from Firestore', async () => {
+      mockGetDocs.mockResolvedValueOnce(
+        mockSnap([
+          { id: 'biped', name: 'Biped', description: 'Two-legged form' },
+          { id: 'quadruped', name: 'Quadruped', description: 'Four-legged form' },
+        ]) as never,
+      );
+
+      const result = await connector.getEidolonBaseForms();
+      expect(result).toHaveLength(2);
+      expect(result[0].id).toBe('biped');
+      expect(result[1].id).toBe('quadruped');
+    });
+
+    test('caches results — second call skips Firestore', async () => {
+      mockGetDocs.mockResolvedValueOnce(mockSnap([{ id: 'biped', name: 'Biped' }]) as never);
+
+      await connector.getEidolonBaseForms();
+      const second = await connector.getEidolonBaseForms();
+
+      expect(second).toHaveLength(1);
+      expect(mockGetDocs).toHaveBeenCalledTimes(1);
+    });
+
+    test('returns empty array when Firestore throws', async () => {
+      mockGetDocs.mockRejectedValueOnce(new Error('Firestore unavailable'));
+
+      const result = await connector.getEidolonBaseForms();
+      expect(result).toEqual([]);
+    });
+  });
+
+  describe('getEidolonSubtypes', () => {
+    test('returns subtypes fetched from Firestore', async () => {
+      mockGetDocs.mockResolvedValueOnce(
+        mockSnap([
+          { id: 'agathion', name: 'Agathion', description: 'Agathion subtype' },
+          { id: 'demon', name: 'Demon', description: 'Demon subtype' },
+        ]) as never,
+      );
+
+      const result = await connector.getEidolonSubtypes();
+      expect(result).toHaveLength(2);
+      expect(result[0].id).toBe('agathion');
+      expect(result[1].id).toBe('demon');
+    });
+
+    test('caches results — second call skips Firestore', async () => {
+      mockGetDocs.mockResolvedValueOnce(mockSnap([{ id: 'agathion', name: 'Agathion' }]) as never);
+
+      await connector.getEidolonSubtypes();
+      const second = await connector.getEidolonSubtypes();
+
+      expect(second).toHaveLength(1);
+      expect(mockGetDocs).toHaveBeenCalledTimes(1);
+    });
+
+    test('returns empty array when Firestore throws', async () => {
+      mockGetDocs.mockRejectedValueOnce(new Error('Firestore unavailable'));
+
+      const result = await connector.getEidolonSubtypes();
+      expect(result).toEqual([]);
     });
   });
 });

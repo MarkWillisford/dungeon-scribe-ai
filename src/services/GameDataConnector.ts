@@ -29,6 +29,7 @@ import type {
   MartialTradition,
   DisciplineSourceSystem,
 } from '@/types/initiating';
+import type { EidolonBaseFormDefinition, EidolonSubtypeDefinition } from '@/types/eidolon';
 import type { ArchetypeData } from '@/data/classes/types';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
@@ -163,4 +164,8 @@ export interface GameDataConnector {
     className: string,
     context?: QueryContext,
   ): Promise<FavoredClassBonusEntry[]>;
+
+  // ---- Eidolon static catalogs ----
+  getEidolonBaseForms(): Promise<EidolonBaseFormDefinition[]>;
+  getEidolonSubtypes(): Promise<EidolonSubtypeDefinition[]>;
 }

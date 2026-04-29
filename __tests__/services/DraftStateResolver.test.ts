@@ -150,6 +150,7 @@ function blankDraft(): CharacterDraft {
     spellcastingPools: [],
     equipment: [],
     companions: [],
+    eidolons: [],
     characterNotes: '',
     campaignNotes: '',
   };
@@ -864,6 +865,90 @@ describe('DraftStateResolver', () => {
       expect(finalStandard).toBe(0);
       // Fractional: floor(0.75 + 0.5) = floor(1.25) = 1
       expect(finalFractional).toBe(1);
+    });
+  });
+
+  describe('eidolon scoping in snapshot', () => {
+    it('eidolons not present until their summoner class appears in partialClasses', () => {
+      const draft = blankDraft();
+      draft.classes = [
+        {
+          id: 'fighter-entry-1',
+          className: 'Fighter',
+          level: 2,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+        {
+          id: 'summoner-entry-1',
+          className: 'Summoner',
+          level: 2,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
+      draft.eidolons = [
+        {
+          id: 'eid-1',
+          name: 'Fido',
+          summonerClassEntryId: 'summoner-entry-1',
+          edition: 'apg',
+          baseForm: 'biped',
+          selectedEvolutions: [{ instanceId: 'inst-1', evolutionId: 'limbs-arms' }],
+        },
+      ];
+
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
+
+      // First two checkpoints are Fighter levels — eidolon must not appear yet
+      expect(timeline.checkpoints[0].snapshot.eidolons).toHaveLength(0);
+      expect(timeline.checkpoints[1].snapshot.eidolons).toHaveLength(0);
+
+      // Third checkpoint is Summoner 1 — eidolon now appears
+      expect(timeline.checkpoints[2].snapshot.eidolons).toHaveLength(1);
+      expect(timeline.checkpoints[2].snapshot.eidolons[0].id).toBe('eid-1');
+      expect(timeline.checkpoints[2].snapshot.eidolons[0].selectedEvolutions).toHaveLength(1);
+    });
+
+    it('eidolons from a different summoner entry are excluded even if class name matches a present class', () => {
+      // Two summoner entries; only one eidolon whose entry is in partialClasses should appear
+      const draft = blankDraft();
+      draft.classes = [
+        {
+          id: 'summoner-entry-A',
+          className: 'Summoner',
+          level: 3,
+          sourceSystem: 'pf1e',
+          classChoices: [],
+          prereqOverride: false,
+        },
+      ];
+      draft.eidolons = [
+        {
+          id: 'eid-A',
+          name: 'Alpha',
+          summonerClassEntryId: 'summoner-entry-A',
+          edition: 'apg',
+          baseForm: 'biped',
+          selectedEvolutions: [],
+        },
+        {
+          id: 'eid-B',
+          name: 'Beta',
+          summonerClassEntryId: 'summoner-entry-B', // stale / different entry not in draft.classes
+          edition: 'apg',
+          baseForm: 'quadruped',
+          selectedEvolutions: [],
+        },
+      ];
+
+      const timeline = DraftStateResolver.buildTimeline(draft, undefined, EMPTY_MAP);
+      const finalSnapshot = timeline.checkpoints[timeline.checkpoints.length - 1].snapshot;
+
+      expect(finalSnapshot.eidolons).toHaveLength(1);
+      expect(finalSnapshot.eidolons[0].id).toBe('eid-A');
     });
   });
 

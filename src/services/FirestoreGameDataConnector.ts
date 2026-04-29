@@ -42,6 +42,7 @@ import type {
 import type { DeityEntry } from '@/types/deities';
 import type { AnimalCompanionEntry, BodyShape } from '@/types/animalCompanions';
 import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
+import type { EidolonBaseFormDefinition, EidolonSubtypeDefinition } from '@/types/eidolon';
 
 import { GameDataCache, TTL } from './GameDataCache';
 import type {
@@ -854,6 +855,42 @@ export class FirestoreGameDataConnector implements GameDataConnector {
           `FirestoreGameDataConnector: getFavoredClassBonuses(${raceName}, ${className}) failed:`,
           e,
         );
+        return [];
+      }
+    });
+  }
+
+  // ---- Eidolon static catalogs -----------------------------------------------
+
+  async getEidolonBaseForms(): Promise<EidolonBaseFormDefinition[]> {
+    const cacheKey = 'eidolonbaseforms/__all';
+    const cached = GameDataCache.get<EidolonBaseFormDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    return FirestoreGameDataConnector.dedup(cacheKey, async () => {
+      try {
+        const results = await fetchAll<EidolonBaseFormDefinition>('eidolonbaseforms');
+        GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+        return results;
+      } catch (e) {
+        console.error('FirestoreGameDataConnector: getEidolonBaseForms failed:', e);
+        return [];
+      }
+    });
+  }
+
+  async getEidolonSubtypes(): Promise<EidolonSubtypeDefinition[]> {
+    const cacheKey = 'eidolonsubtypes/__all';
+    const cached = GameDataCache.get<EidolonSubtypeDefinition[]>(cacheKey);
+    if (cached) return cached;
+
+    return FirestoreGameDataConnector.dedup(cacheKey, async () => {
+      try {
+        const results = await fetchAll<EidolonSubtypeDefinition>('eidolonsubtypes');
+        GameDataCache.set(cacheKey, results, TTL.OFFICIAL);
+        return results;
+      } catch (e) {
+        console.error('FirestoreGameDataConnector: getEidolonSubtypes failed:', e);
         return [];
       }
     });

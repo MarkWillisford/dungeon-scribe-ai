@@ -794,6 +794,7 @@ const mockCharacter: Character = {
   grantedBonuses: [],
   resources: [],
   companions: [],
+  eidolons: [],
   buffs: [],
   savedBuffs: [],
   ruleset: {

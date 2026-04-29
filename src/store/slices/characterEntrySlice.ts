@@ -33,6 +33,13 @@ import {
   type DraftCombatStats,
   type FavoredClassBonusSelection,
 } from '@/types/characterDraft';
+import type {
+  DraftEidolon,
+  EidolonEdition,
+  EidolonForm,
+  EidolonSubtype,
+  SelectedEvolutionMetadata,
+} from '@/types/eidolon';
 
 // ---- Supporting types ----
 
@@ -124,6 +131,7 @@ export const BLANK_DRAFT: CharacterDraft = {
   spellcastingPools: [],
   equipment: [],
   companions: [],
+  eidolons: [],
   characterNotes: '',
   campaignNotes: '',
 };
@@ -1179,6 +1187,248 @@ const characterEntrySlice = createSlice({
       }
     },
 
+    // ---- Eidolons ----
+
+    addEidolon(
+      state,
+      action: PayloadAction<{
+        classEntryId: string;
+        edition: EidolonEdition;
+        baseForm: EidolonForm;
+        subtype?: EidolonSubtype;
+        name?: string;
+      }>,
+    ) {
+      // Make sure the owner class entry exists.
+      const owner = state.draft.classes.find((c) => c.id === action.payload.classEntryId);
+      if (!owner) return;
+      const id = `eidolon-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+      const newEidolon: DraftEidolon = {
+        id,
+        name: action.payload.name?.trim() || 'Eidolon',
+        summonerClassEntryId: action.payload.classEntryId,
+        edition: action.payload.edition,
+        baseForm: action.payload.baseForm,
+        subtype: action.payload.subtype,
+        selectedEvolutions: [],
+      };
+      state.draft.eidolons.push(newEidolon);
+      state.isDirty = true;
+    },
+
+    removeEidolon(state, action: PayloadAction<string>) {
+      const before = state.draft.eidolons.length;
+      state.draft.eidolons = state.draft.eidolons.filter((e) => e.id !== action.payload);
+      if (state.draft.eidolons.length !== before) state.isDirty = true;
+    },
+
+    renameEidolon(state, action: PayloadAction<{ eidolonId: string; name: string }>) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (eid) {
+        eid.name = action.payload.name;
+        state.isDirty = true;
+      }
+    },
+
+    setEidolonBaseForm(
+      state,
+      action: PayloadAction<{
+        eidolonId: string;
+        baseForm: EidolonForm;
+        removeEvolutionInstanceIds?: string[];
+      }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      eid.baseForm = action.payload.baseForm;
+      if (
+        action.payload.removeEvolutionInstanceIds &&
+        action.payload.removeEvolutionInstanceIds.length > 0
+      ) {
+        const toRemove = new Set(action.payload.removeEvolutionInstanceIds);
+        eid.selectedEvolutions = eid.selectedEvolutions.filter((s) => !toRemove.has(s.instanceId));
+      }
+      state.isDirty = true;
+    },
+
+    setEidolonSubtype(
+      state,
+      action: PayloadAction<{
+        eidolonId: string;
+        subtype: EidolonSubtype | undefined;
+        removeEvolutionInstanceIds?: string[];
+      }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      eid.subtype = action.payload.subtype;
+      if (
+        action.payload.removeEvolutionInstanceIds &&
+        action.payload.removeEvolutionInstanceIds.length > 0
+      ) {
+        const toRemove = new Set(action.payload.removeEvolutionInstanceIds);
+        eid.selectedEvolutions = eid.selectedEvolutions.filter((s) => !toRemove.has(s.instanceId));
+      }
+      state.isDirty = true;
+    },
+
+    addSelectedEvolution(
+      state,
+      action: PayloadAction<{
+        eidolonId: string;
+        evolutionId: string;
+        metadata?: SelectedEvolutionMetadata;
+      }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      // Defense-in-depth: 30 is far beyond any real EP budget (largest pool ~30 at
+      // level 20 with all extras, but every evolution costs at least 1 pt, so
+      // ≥ 30 selections is impossible in a valid character).
+      if (eid.selectedEvolutions.length >= 30) return;
+      const instanceId = `evo-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+      eid.selectedEvolutions.push({
+        instanceId,
+        evolutionId: action.payload.evolutionId,
+        metadata: action.payload.metadata,
+      });
+      state.isDirty = true;
+    },
+
+    removeSelectedEvolution(
+      state,
+      action: PayloadAction<{ eidolonId: string; instanceId: string }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      const before = eid.selectedEvolutions.length;
+      eid.selectedEvolutions = eid.selectedEvolutions.filter(
+        (s) => s.instanceId !== action.payload.instanceId,
+      );
+      if (eid.selectedEvolutions.length !== before) state.isDirty = true;
+    },
+
+    updateEvolutionMetadata(
+      state,
+      action: PayloadAction<{
+        eidolonId: string;
+        instanceId: string;
+        metadata?: SelectedEvolutionMetadata;
+      }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      const sel = eid.selectedEvolutions.find((s) => s.instanceId === action.payload.instanceId);
+      if (sel) {
+        sel.metadata = action.payload.metadata;
+        state.isDirty = true;
+      }
+    },
+
+    setEidolonPoolOverride(
+      state,
+      action: PayloadAction<
+        { eidolonId: string; clear: true } | { eidolonId: string; value: number; note: string }
+      >,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      if ('clear' in action.payload) {
+        eid.poolOverride = undefined;
+      } else {
+        eid.poolOverride = { value: action.payload.value, note: action.payload.note };
+      }
+      state.isDirty = true;
+    },
+
+    // ---- Broodmaster shared evolutions (live on the DraftClassEntry) ----
+
+    setBroodmasterShared(
+      state,
+      action: PayloadAction<{
+        classEntryId: string;
+        evolutionId: string;
+        metadata?: SelectedEvolutionMetadata;
+      }>,
+    ) {
+      const cls = state.draft.classes.find((c) => c.id === action.payload.classEntryId);
+      if (!cls) return;
+      if (!cls.summonerBroodmaster) {
+        cls.summonerBroodmaster = { sharedEvolutions: [] };
+      }
+      const instanceId = `brood-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+      cls.summonerBroodmaster.sharedEvolutions.push({
+        instanceId,
+        evolutionId: action.payload.evolutionId,
+        metadata: action.payload.metadata,
+      });
+      state.isDirty = true;
+    },
+
+    removeBroodmasterShared(
+      state,
+      action: PayloadAction<{ classEntryId: string; instanceId: string }>,
+    ) {
+      const cls = state.draft.classes.find((c) => c.id === action.payload.classEntryId);
+      if (!cls?.summonerBroodmaster) return;
+      const before = cls.summonerBroodmaster.sharedEvolutions.length;
+      cls.summonerBroodmaster.sharedEvolutions = cls.summonerBroodmaster.sharedEvolutions.filter(
+        (s) => s.instanceId !== action.payload.instanceId,
+      );
+      if (cls.summonerBroodmaster.sharedEvolutions.length !== before) state.isDirty = true;
+    },
+
+    // ---- Aspect / Greater Aspect (live on the DraftEidolon) ----
+
+    setAspectDivert(state, action: PayloadAction<{ eidolonId: string; divertedPoints: number }>) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      if (!eid.aspectTransfer) {
+        eid.aspectTransfer = { divertedPoints: 0, summonerEvolutions: [] };
+      }
+      // Clamp to [0, 6]. The absolute maximum is 6 (Greater Aspect at L18).
+      // Aspect (L10) caps at 2, but the UI enforces that; the reducer uses the
+      // game-wide ceiling so it remains valid for both abilities without knowing
+      // which one the summoner has.
+      eid.aspectTransfer.divertedPoints = Math.min(6, Math.max(0, action.payload.divertedPoints));
+      state.isDirty = true;
+    },
+
+    addSummonerAspectEvolution(
+      state,
+      action: PayloadAction<{
+        eidolonId: string;
+        evolutionId: string;
+        metadata?: SelectedEvolutionMetadata;
+      }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid) return;
+      if (!eid.aspectTransfer) {
+        eid.aspectTransfer = { divertedPoints: 0, summonerEvolutions: [] };
+      }
+      const instanceId = `asp-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+      eid.aspectTransfer.summonerEvolutions.push({
+        instanceId,
+        evolutionId: action.payload.evolutionId,
+        metadata: action.payload.metadata,
+      });
+      state.isDirty = true;
+    },
+
+    removeSummonerAspectEvolution(
+      state,
+      action: PayloadAction<{ eidolonId: string; instanceId: string }>,
+    ) {
+      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      if (!eid?.aspectTransfer) return;
+      const before = eid.aspectTransfer.summonerEvolutions.length;
+      eid.aspectTransfer.summonerEvolutions = eid.aspectTransfer.summonerEvolutions.filter(
+        (s) => s.instanceId !== action.payload.instanceId,
+      );
+      if (eid.aspectTransfer.summonerEvolutions.length !== before) state.isDirty = true;
+    },
+
     // ---- Notes ----
 
     setCharacterNotes(state, action: PayloadAction<string>) {
@@ -1278,6 +1528,20 @@ export const {
   assignEquipmentSlot,
   unassignEquipmentSlot,
   assignEquipmentContainer,
+  addEidolon,
+  removeEidolon,
+  renameEidolon,
+  setEidolonBaseForm,
+  setEidolonSubtype,
+  addSelectedEvolution,
+  removeSelectedEvolution,
+  updateEvolutionMetadata,
+  setEidolonPoolOverride,
+  setBroodmasterShared,
+  removeBroodmasterShared,
+  setAspectDivert,
+  addSummonerAspectEvolution,
+  removeSummonerAspectEvolution,
   setCharacterNotes,
   setCampaignNotes,
 } = characterEntrySlice.actions;

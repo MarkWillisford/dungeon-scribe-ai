@@ -1,9 +1,15 @@
 // UC-Only 2-Point Eidolon Evolutions
 // Source: Pathfinder Unchained (pf1e-unchained) + Horror Realms (pf1e-horror-realms)
-// Count: 2 entries
-// Excluded from this file (shared with APG): Ability Increase, Constrict, Energy Attacks,
-//   Extra Feat, Flight, Gore, Grab, Immunity, Limbs, Poison, Rake, Rend, Shared Slot,
-//   Trample, Tremorsense, Trip, Weapon Training
+// Count: 4 entries
+//
+// Includes:
+//   - UC-exclusive: Blood Frenzy, Intermediate Psychic Magic
+//   - UC forks with subtype requirements: Poison, Gore
+//     (APG versions kept with summoner: 'apg'; UC summoners use the -uc variants)
+//
+// Excluded from this file (shared with APG at identical cost and prereqs):
+//   Ability Increase, Constrict, Energy Attacks, Extra Feat, Flight, Grab, Immunity,
+//   Limbs, Rake, Rend, Shared Slot, Trample, Tremorsense, Trip, Weapon Training
 
 import type { EidolonEvolutionEntry } from '@/types/classOptions';
 
@@ -12,8 +18,9 @@ export const eidolonEvolutionsUc2pt: EidolonEvolutionEntry[] = [
     id: 'evolution-blood-frenzy',
     name: 'Blood Frenzy',
     description:
-      'The eidolon enters a frenzy when it is damaged. Whenever the eidolon takes damage in combat, it must attempt a Will save (DC 10 + 1/2 the eidolon\'s HD + the eidolon\'s Charisma modifier) or immediately attack the nearest creature, whether friend or foe, for 5 rounds (or until no creatures remain nearby). During the frenzy, the eidolon gains a +2 morale bonus on attack rolls and damage rolls. After the frenzy ends, the eidolon is fatigued for 1 minute and cannot frenzy again while fatigued. The eidolon must have an aberrant, daemon, or demon subtype and the summoner must be at least 7th level to select this evolution.',
+      "The eidolon enters a frenzy when it is damaged. Whenever the eidolon takes damage in combat, it must attempt a Will save (DC 10 + 1/2 the eidolon's HD + the eidolon's Charisma modifier) or immediately attack the nearest creature, whether friend or foe, for 5 rounds (or until no creatures remain nearby). During the frenzy, the eidolon gains a +2 morale bonus on attack rolls and damage rolls. After the frenzy ends, the eidolon is fatigued for 1 minute and cannot frenzy again while fatigued. The eidolon must have an aberrant, daemon, or demon subtype and the summoner must be at least 7th level to select this evolution.",
     evolutionPointCost: 2,
+    stacking: { canRepeat: false },
     effects: [
       {
         type: 'special',
@@ -22,9 +29,7 @@ export const eidolonEvolutionsUc2pt: EidolonEvolutionEntry[] = [
         source: 'Eidolon Evolution — Blood Frenzy',
       },
     ],
-    prerequisites: [
-      { type: 'level', minimum: 7, class: 'summoner' },
-    ],
+    prerequisites: [{ type: 'level', minimum: 7, class: 'summoner' }],
     subtypeRestrictions: ['aberrant', 'daemon', 'demon'],
     summoner: 'unchained',
     source: 'pf1e-horror-realms',
@@ -37,9 +42,9 @@ export const eidolonEvolutionsUc2pt: EidolonEvolutionEntry[] = [
     id: 'evolution-intermediate-psychic-magic',
     name: 'Intermediate Psychic Magic',
     description:
-      'The eidolon gains 2 points of psychic energy per day. Select one spell from the following list: compel hostility, lesser confusion, hypnotism, mind thrust I, or vanish. The eidolon can cast that spell as a psychic spell by spending 1 point of psychic energy. The caster level for this ability equals the eidolon\'s total Hit Dice minus 2 (minimum 1st), and the save DC equals 10 + 1/2 the eidolon\'s HD + the eidolon\'s Charisma modifier. This evolution can be selected more than once. Each time, the eidolon gains a different spell from the list. Multiple psychic energy pools do not stack; the eidolon uses the highest amount of psychic energy granted across all psychic magic evolutions. The eidolon must have an aberrant subtype, the basic psychic magic evolution, a Charisma score of at least 11, and the summoner must be at least 5th level to select this evolution.',
+      "The eidolon gains 2 points of psychic energy per day. Select one spell from the following list: compel hostility, lesser confusion, hypnotism, mind thrust I, or vanish. The eidolon can cast that spell as a psychic spell by spending 1 point of psychic energy. The caster level for this ability equals the eidolon's total Hit Dice minus 2 (minimum 1st), and the save DC equals 10 + 1/2 the eidolon's HD + the eidolon's Charisma modifier. This evolution can be selected more than once. Each time, the eidolon gains a different spell from the list. Multiple psychic energy pools do not stack; the eidolon uses the highest amount of psychic energy granted across all psychic magic evolutions. The eidolon must have an aberrant subtype, the basic psychic magic evolution, a Charisma score of at least 11, and the summoner must be at least 5th level to select this evolution.",
     evolutionPointCost: 2,
-    canBeTakenMultipleTimes: true,
+    stacking: { canRepeat: true, requiresDifferentMetadata: 'spell' },
     effects: [
       {
         type: 'special',
@@ -56,6 +61,66 @@ export const eidolonEvolutionsUc2pt: EidolonEvolutionEntry[] = [
     subtypeRestrictions: ['aberrant'],
     summoner: 'unchained',
     source: 'pf1e-horror-realms',
+    isOfficial: true,
+    verificationStatus: 'needs_review' as const,
+    visibility: 'global',
+    rev: 1,
+  },
+  // ── UC forks with subtype requirements ─────────────────────────────────────
+  {
+    id: 'evolution-poison-uc',
+    name: 'Poison',
+    description:
+      "The eidolon secretes a deadly poison. Whenever the eidolon makes a successful bite or sting attack, the target is poisoned. The target must make a Fortitude save or take 1d4 Str damage per round for 4 rounds (1 save to cure). The save DC is 10 + 1/2 the eidolon's HD + the eidolon's Constitution modifier. For 2 additional evolution points, the poison deals Constitution damage instead. An eidolon can only use this ability once per round. The eidolon must have the bite or sting evolution and a daemon, demon, devil, elemental, or protean subtype to take this evolution. The summoner must be at least 7th level before selecting this evolution.",
+    evolutionPointCost: 2,
+    stacking: { canRepeat: false },
+    effects: [
+      {
+        type: 'special',
+        target: 'special.poison',
+        value: 0,
+        source: 'Eidolon Evolution — Poison',
+      },
+    ],
+    prerequisites: [
+      { type: 'level', minimum: 7, class: 'summoner' },
+      { type: 'special', description: 'Eidolon must have the bite or sting evolution' },
+    ],
+    subtypeRestrictions: ['daemon', 'demon', 'devil', 'elemental', 'protean'],
+    summoner: 'unchained',
+    source: 'pf1e-unchained',
+    isOfficial: true,
+    verificationStatus: 'needs_review' as const,
+    visibility: 'global',
+    rev: 1,
+  },
+  {
+    id: 'evolution-gore-uc',
+    name: 'Gore',
+    description:
+      'The eidolon grows a number of horns on its head and gains a gore attack. This is a primary attack that deals 1d6 points of damage (1d8 if Large, 2d6 if Huge). The eidolon must have an agathion, daemon, demon, devil, div, elemental, protean, or psychopomp subtype to take this evolution.',
+    evolutionPointCost: 2,
+    stacking: { canRepeat: false },
+    effects: [
+      {
+        type: 'special',
+        target: 'special.gore',
+        value: 0,
+        source: 'Eidolon Evolution — Gore',
+      },
+    ],
+    subtypeRestrictions: [
+      'agathion',
+      'daemon',
+      'demon',
+      'devil',
+      'div',
+      'elemental',
+      'protean',
+      'psychopomp',
+    ],
+    summoner: 'unchained',
+    source: 'pf1e-unchained',
     isOfficial: true,
     verificationStatus: 'needs_review' as const,
     visibility: 'global',

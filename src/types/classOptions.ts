@@ -148,52 +148,25 @@ export interface ShamanSpiritEntry extends ClassOptionBase {
 
 // ---- Eidolon Evolution (Summoner, Summoner (Unchained) — shared pool) ----
 // Collection: 'eidolonevolutions'
+//
+// EidolonForm and EidolonSubtype unions live in src/types/eidolon.ts alongside
+// the base-form and subtype definition interfaces.
 
-export type EidolonForm =
-  | 'biped'
-  | 'quadruped'
-  | 'serpentine'
-  | 'aquatic'
-  | 'avian'
-  | 'mounted'
-  | 'tauric'
-  | 'vermious';
+import type { EidolonForm, EidolonSubtype, EvolutionStacking } from './eidolon';
 
-export type EidolonSubtype =
-  | 'aberrant'
-  | 'aeon'
-  | 'agathion'
-  | 'ancestor'
-  | 'angel'
-  | 'archon'
-  | 'astral'
-  | 'azata'
-  | 'daemon'
-  | 'deepwater'
-  | 'demon'
-  | 'devil'
-  | 'div'
-  | 'elemental'
-  | 'genie'
-  | 'inevitable'
-  | 'kami'
-  | 'kyton'
-  | 'plant'
-  | 'protean'
-  | 'psychopomp'
-  | 'radiant'
-  | 'shadow'
-  | 'storykin'
-  | 'twinned'
-  | 'void';
+export type { EidolonForm, EidolonSubtype } from './eidolon';
 
 export interface EidolonEvolutionEntry extends ClassOptionBase {
   evolutionPointCost: 1 | 2 | 3 | 4;
-  canBeTakenMultipleTimes?: boolean; // default false
+  // Structured stacking rules. Replaces the old `canBeTakenMultipleTimes: boolean`.
+  stacking: EvolutionStacking;
   effects: Effect[]; // structured grants (attacks, senses, movement, stat bonuses, etc.)
   summoner?: 'apg' | 'unchained'; // absent = available to both summoner versions
-  formRestrictions?: EidolonForm[]; // APG only — absent = any base form
+  formRestrictions?: EidolonForm[]; // absent = any base form
   subtypeRestrictions?: EidolonSubtype[]; // Unchained only — absent = any subtype
+  // Whether the evolution is selectable via Aspect / Greater Aspect (applies to
+  // the summoner, not the eidolon). Populated in the Phase 5 research pass.
+  aspectEligible?: boolean;
 }
 
 // ---- Mesmerist Trick ----

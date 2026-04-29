@@ -559,4 +559,45 @@ describe('PrerequisiteService', () => {
       expect(available).toContainEqual(choiceFeat);
     });
   });
+
+  describe('evolution prerequisite', () => {
+    function charWithEidolon(evolutionIds: string[]): Character {
+      const char = createTestCharacter();
+      char.eidolons = [
+        {
+          id: 'eid-1',
+          name: 'Companion',
+          summonerClassEntryId: 'summoner-1',
+          edition: 'apg',
+          baseForm: 'biped',
+          selectedEvolutions: evolutionIds.map((id, i) => ({
+            instanceId: `inst-${i}`,
+            evolutionId: id,
+          })),
+        },
+      ];
+      return char;
+    }
+
+    test('evolution prereq is met when the character has an eidolon with that evolution', async () => {
+      const char = charWithEidolon(['evolution-bite', 'evolution-claws']);
+      const feat = makeFeat([{ type: 'evolution', evolutionId: 'evolution-bite' }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(true);
+    });
+
+    test('evolution prereq fails when the character has no eidolons', async () => {
+      const char = createTestCharacter();
+      const feat = makeFeat([{ type: 'evolution', evolutionId: 'evolution-bite' }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+    });
+
+    test('evolution prereq fails when eidolon lacks the specific evolution', async () => {
+      const char = charWithEidolon(['evolution-claws']);
+      const feat = makeFeat([{ type: 'evolution', evolutionId: 'evolution-bite' }]);
+      const result = await PrerequisiteService.checkPrerequisites(char, feat);
+      expect(result.met).toBe(false);
+    });
+  });
 });

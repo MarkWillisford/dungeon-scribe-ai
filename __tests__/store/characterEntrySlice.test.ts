@@ -85,6 +85,20 @@ import reducer, {
   assignEquipmentContainer,
   setCharacterNotes,
   setCampaignNotes,
+  addEidolon,
+  removeEidolon,
+  renameEidolon,
+  setEidolonBaseForm,
+  setEidolonSubtype,
+  addSelectedEvolution,
+  removeSelectedEvolution,
+  updateEvolutionMetadata,
+  setEidolonPoolOverride,
+  setBroodmasterShared,
+  removeBroodmasterShared,
+  setAspectDivert,
+  addSummonerAspectEvolution,
+  removeSummonerAspectEvolution,
   type EntryValidationWarning,
 } from '@store/slices/characterEntrySlice';
 import { Alignment, BonusType } from '@/types/base';
@@ -2475,6 +2489,439 @@ describe('characterEntrySlice — companions', () => {
       );
       const b = reducer(a, unequipCompanionMagicItem({ instanceId: 'missing', slot: 'neck' }));
       expect(b.draft.companions[0].equipment.magicItems).toHaveLength(0);
+    });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Eidolons
+// ---------------------------------------------------------------------------
+
+function makeStateWithSummoner() {
+  const summoner: DraftClassEntry = {
+    id: 'summoner-1',
+    className: 'Summoner (Unchained)',
+    level: 5,
+    sourceSystem: 'pf1e',
+    classChoices: [],
+    prereqOverride: false,
+  };
+  return reducer(makeInitialState(), addClass(summoner));
+}
+
+describe('characterEntrySlice — eidolons', () => {
+  describe('addEidolon', () => {
+    it('pushes a new eidolon linked to the owning class entry', () => {
+      const state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({
+          classEntryId: 'summoner-1',
+          edition: 'unchained',
+          baseForm: 'biped',
+          subtype: 'angel',
+          name: 'Aziel',
+        }),
+      );
+      expect(state.draft.eidolons).toHaveLength(1);
+      const eid = state.draft.eidolons[0];
+      expect(eid.name).toBe('Aziel');
+      expect(eid.baseForm).toBe('biped');
+      expect(eid.subtype).toBe('angel');
+      expect(eid.summonerClassEntryId).toBe('summoner-1');
+      expect(eid.selectedEvolutions).toEqual([]);
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('uses a fallback name when none is provided', () => {
+      const state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({
+          classEntryId: 'summoner-1',
+          edition: 'apg',
+          baseForm: 'quadruped',
+        }),
+      );
+      expect(state.draft.eidolons[0].name).toBe('Eidolon');
+    });
+
+    it('is a no-op when the owning class entry does not exist', () => {
+      const state = reducer(
+        makeInitialState(),
+        addEidolon({ classEntryId: 'missing', edition: 'apg', baseForm: 'biped' }),
+      );
+      expect(state.draft.eidolons).toHaveLength(0);
+      expect(state.isDirty).toBe(false);
+    });
+  });
+
+  describe('removeEidolon', () => {
+    it('removes by id', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'apg', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(state, removeEidolon(id));
+      expect(state.draft.eidolons).toHaveLength(0);
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('is a no-op when id is not found', () => {
+      const state = reducer(makeInitialState(), removeEidolon('does-not-exist'));
+      expect(state.isDirty).toBe(false);
+    });
+  });
+
+  describe('renameEidolon', () => {
+    it('updates the name', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'apg', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(state, renameEidolon({ eidolonId: id, name: 'Companion' }));
+      expect(state.draft.eidolons[0].name).toBe('Companion');
+    });
+  });
+
+  describe('setEidolonBaseForm / setEidolonSubtype', () => {
+    it('updates base form and subtype independently', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({
+          classEntryId: 'summoner-1',
+          edition: 'unchained',
+          baseForm: 'biped',
+          subtype: 'angel',
+        }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(state, setEidolonBaseForm({ eidolonId: id, baseForm: 'serpentine' }));
+      state = reducer(state, setEidolonSubtype({ eidolonId: id, subtype: 'protean' }));
+      expect(state.draft.eidolons[0].baseForm).toBe('serpentine');
+      expect(state.draft.eidolons[0].subtype).toBe('protean');
+    });
+
+    it('setEidolonSubtype with undefined clears the subtype', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({
+          classEntryId: 'summoner-1',
+          edition: 'unchained',
+          baseForm: 'biped',
+          subtype: 'angel',
+        }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(state, setEidolonSubtype({ eidolonId: id, subtype: undefined }));
+      expect(state.draft.eidolons[0].subtype).toBeUndefined();
+    });
+
+    it('setEidolonBaseForm removes invalidated evolution instances', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'apg', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(
+        state,
+        addSelectedEvolution({ eidolonId: id, evolutionId: 'evo-limbs-arms', metadata: undefined }),
+      );
+      const instanceId = state.draft.eidolons[0].selectedEvolutions[0].instanceId;
+      state = reducer(
+        state,
+        setEidolonBaseForm({
+          eidolonId: id,
+          baseForm: 'serpentine',
+          removeEvolutionInstanceIds: [instanceId],
+        }),
+      );
+      expect(state.draft.eidolons[0].baseForm).toBe('serpentine');
+      expect(state.draft.eidolons[0].selectedEvolutions).toHaveLength(0);
+    });
+
+    it('setEidolonSubtype removes invalidated evolution instances', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'apg', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(
+        state,
+        addSelectedEvolution({ eidolonId: id, evolutionId: 'evo-claws', metadata: undefined }),
+      );
+      const instanceId = state.draft.eidolons[0].selectedEvolutions[0].instanceId;
+      state = reducer(
+        state,
+        setEidolonSubtype({
+          eidolonId: id,
+          subtype: 'daemon',
+          removeEvolutionInstanceIds: [instanceId],
+        }),
+      );
+      expect(state.draft.eidolons[0].subtype).toBe('daemon');
+      expect(state.draft.eidolons[0].selectedEvolutions).toHaveLength(0);
+    });
+  });
+
+  describe('addSelectedEvolution / removeSelectedEvolution / updateEvolutionMetadata', () => {
+    function freshEidolon() {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'apg', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      return { state, id };
+    }
+
+    it('adds a selected evolution with an auto-generated instanceId', () => {
+      const { state, id } = freshEidolon();
+      const next = reducer(
+        state,
+        addSelectedEvolution({ eidolonId: id, evolutionId: 'evolution-bite' }),
+      );
+      expect(next.draft.eidolons[0].selectedEvolutions).toHaveLength(1);
+      expect(next.draft.eidolons[0].selectedEvolutions[0].evolutionId).toBe('evolution-bite');
+      expect(next.draft.eidolons[0].selectedEvolutions[0].instanceId).toMatch(/^evo-/);
+    });
+
+    it('removes by instanceId', () => {
+      let { state, id } = freshEidolon();
+      state = reducer(
+        state,
+        addSelectedEvolution({ eidolonId: id, evolutionId: 'evolution-bite' }),
+      );
+      const instanceId = state.draft.eidolons[0].selectedEvolutions[0].instanceId;
+      state = reducer(state, removeSelectedEvolution({ eidolonId: id, instanceId }));
+      expect(state.draft.eidolons[0].selectedEvolutions).toHaveLength(0);
+    });
+
+    it('updates metadata on an existing selection', () => {
+      let { state, id } = freshEidolon();
+      state = reducer(
+        state,
+        addSelectedEvolution({
+          eidolonId: id,
+          evolutionId: 'evolution-ability-increase',
+          metadata: { ability: 'str' },
+        }),
+      );
+      const instanceId = state.draft.eidolons[0].selectedEvolutions[0].instanceId;
+      state = reducer(
+        state,
+        updateEvolutionMetadata({
+          eidolonId: id,
+          instanceId,
+          metadata: { ability: 'dex' },
+        }),
+      );
+      expect(state.draft.eidolons[0].selectedEvolutions[0].metadata?.ability).toBe('dex');
+    });
+
+    it('rejects additions when already at the hard cap of 30 evolutions', () => {
+      let { state, id } = freshEidolon();
+      // Add 30 evolutions to reach the cap.
+      for (let i = 0; i < 30; i++) {
+        state = reducer(
+          state,
+          addSelectedEvolution({ eidolonId: id, evolutionId: 'evolution-bite' }),
+        );
+      }
+      expect(state.draft.eidolons[0].selectedEvolutions).toHaveLength(30);
+      // A 31st addition must be silently rejected.
+      state = reducer(
+        state,
+        addSelectedEvolution({ eidolonId: id, evolutionId: 'evolution-claws' }),
+      );
+      expect(state.draft.eidolons[0].selectedEvolutions).toHaveLength(30);
+    });
+  });
+
+  describe('setEidolonPoolOverride', () => {
+    it('sets an override with a reason note', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'apg', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(
+        state,
+        setEidolonPoolOverride({ eidolonId: id, value: 25, note: 'DM grant from artifact' }),
+      );
+      expect(state.draft.eidolons[0].poolOverride).toEqual({
+        value: 25,
+        note: 'DM grant from artifact',
+      });
+    });
+
+    it('clears the override', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'apg', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(state, setEidolonPoolOverride({ eidolonId: id, value: 25, note: 'test' }));
+      state = reducer(state, setEidolonPoolOverride({ eidolonId: id, clear: true }));
+      expect(state.draft.eidolons[0].poolOverride).toBeUndefined();
+    });
+  });
+
+  describe('setBroodmasterShared / removeBroodmasterShared', () => {
+    it('adds a shared evolution to the class entry broodmaster state', () => {
+      const state = reducer(
+        makeStateWithSummoner(),
+        setBroodmasterShared({ classEntryId: 'summoner-1', evolutionId: 'evolution-large' }),
+      );
+      const cls = state.draft.classes[0];
+      expect(cls.summonerBroodmaster?.sharedEvolutions).toHaveLength(1);
+      expect(cls.summonerBroodmaster?.sharedEvolutions[0].evolutionId).toBe('evolution-large');
+      expect(cls.summonerBroodmaster?.sharedEvolutions[0].instanceId).toMatch(/^brood-/);
+    });
+
+    it('initialises summonerBroodmaster if not present', () => {
+      const state = reducer(
+        makeStateWithSummoner(),
+        setBroodmasterShared({ classEntryId: 'summoner-1', evolutionId: 'evolution-claws' }),
+      );
+      expect(state.draft.classes[0].summonerBroodmaster).toBeDefined();
+    });
+
+    it('is a no-op for an unknown classEntryId', () => {
+      const state = reducer(
+        makeStateWithSummoner(),
+        setBroodmasterShared({ classEntryId: 'missing', evolutionId: 'evolution-large' }),
+      );
+      expect(state.draft.classes[0].summonerBroodmaster).toBeUndefined();
+    });
+
+    it('removes a shared evolution by instanceId', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        setBroodmasterShared({ classEntryId: 'summoner-1', evolutionId: 'evolution-large' }),
+      );
+      const instanceId = state.draft.classes[0].summonerBroodmaster!.sharedEvolutions[0].instanceId;
+      state = reducer(state, removeBroodmasterShared({ classEntryId: 'summoner-1', instanceId }));
+      expect(state.draft.classes[0].summonerBroodmaster?.sharedEvolutions).toHaveLength(0);
+    });
+
+    it('removeBroodmasterShared is a no-op when broodmaster state is absent', () => {
+      const initial = makeStateWithSummoner();
+      const state = reducer(
+        initial,
+        removeBroodmasterShared({ classEntryId: 'summoner-1', instanceId: 'nonexistent' }),
+      );
+      expect(state.draft.classes[0].summonerBroodmaster).toBeUndefined();
+    });
+  });
+
+  describe('setAspectDivert', () => {
+    it('sets divertedPoints on the eidolon aspectTransfer', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'unchained', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(state, setAspectDivert({ eidolonId: id, divertedPoints: 2 }));
+      expect(state.draft.eidolons[0].aspectTransfer?.divertedPoints).toBe(2);
+    });
+
+    it('initialises aspectTransfer if not present', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'unchained', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(state, setAspectDivert({ eidolonId: id, divertedPoints: 1 }));
+      expect(state.draft.eidolons[0].aspectTransfer).toBeDefined();
+      expect(state.draft.eidolons[0].aspectTransfer?.summonerEvolutions).toEqual([]);
+    });
+
+    it('clamps to zero when negative value given', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'unchained', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(state, setAspectDivert({ eidolonId: id, divertedPoints: -3 }));
+      expect(state.draft.eidolons[0].aspectTransfer?.divertedPoints).toBe(0);
+    });
+
+    it('is a no-op for unknown eidolonId', () => {
+      const state = reducer(
+        makeStateWithSummoner(),
+        setAspectDivert({ eidolonId: 'missing', divertedPoints: 2 }),
+      );
+      expect(state.draft.eidolons).toHaveLength(0);
+    });
+
+    it('clamps to 6 (Greater Aspect max) when value exceeds the ceiling', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'unchained', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(state, setAspectDivert({ eidolonId: id, divertedPoints: 100 }));
+      expect(state.draft.eidolons[0].aspectTransfer?.divertedPoints).toBe(6);
+    });
+  });
+
+  describe('addSummonerAspectEvolution / removeSummonerAspectEvolution', () => {
+    it('adds a summoner aspect evolution with auto-generated instanceId', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'unchained', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(
+        state,
+        addSummonerAspectEvolution({ eidolonId: id, evolutionId: 'evolution-bite' }),
+      );
+      const evos = state.draft.eidolons[0].aspectTransfer?.summonerEvolutions ?? [];
+      expect(evos).toHaveLength(1);
+      expect(evos[0].evolutionId).toBe('evolution-bite');
+      expect(evos[0].instanceId).toMatch(/^asp-/);
+    });
+
+    it('initialises aspectTransfer if absent before adding', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'unchained', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(
+        state,
+        addSummonerAspectEvolution({ eidolonId: id, evolutionId: 'evolution-bite' }),
+      );
+      expect(state.draft.eidolons[0].aspectTransfer?.divertedPoints).toBe(0);
+    });
+
+    it('removes a summoner aspect evolution by instanceId', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'unchained', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      state = reducer(
+        state,
+        addSummonerAspectEvolution({ eidolonId: id, evolutionId: 'evolution-bite' }),
+      );
+      const instanceId = state.draft.eidolons[0].aspectTransfer!.summonerEvolutions[0].instanceId;
+      state = reducer(state, removeSummonerAspectEvolution({ eidolonId: id, instanceId }));
+      expect(state.draft.eidolons[0].aspectTransfer?.summonerEvolutions).toHaveLength(0);
+    });
+
+    it('removeSummonerAspectEvolution is a no-op when aspectTransfer is absent', () => {
+      let state = reducer(
+        makeStateWithSummoner(),
+        addEidolon({ classEntryId: 'summoner-1', edition: 'unchained', baseForm: 'biped' }),
+      );
+      const id = state.draft.eidolons[0].id;
+      const before = JSON.stringify(state.draft.eidolons[0]);
+      state = reducer(
+        state,
+        removeSummonerAspectEvolution({ eidolonId: id, instanceId: 'nonexistent' }),
+      );
+      expect(JSON.stringify(state.draft.eidolons[0])).toBe(before);
     });
   });
 });

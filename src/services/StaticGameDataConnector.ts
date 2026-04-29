@@ -21,6 +21,8 @@ import { ALL_INVESTIGATOR_TALENTS } from '@/data/investigatorTalents/index';
 import { ALL_BLOODLINES } from '@/data/bloodlines/index';
 import { ALL_SHAMAN_SPIRITS } from '@/data/shamanSpirits/index';
 import { ALL_EIDOLON_EVOLUTIONS } from '@/data/eidolonEvolutions/index';
+import { ALL_EIDOLON_BASE_FORMS } from '@/data/eidolonBaseForms/index';
+import { ALL_EIDOLON_SUBTYPES } from '@/data/eidolonSubtypes/index';
 import { ALL_MESMERIST_TRICKS } from '@/data/mesmeristTricks/index';
 import { ALL_WILD_TALENTS } from '@/data/kineticistWildTalents/index';
 import { ALL_OCCULTIST_FOCUS_POWERS } from '@/data/occultistFocusPowers/index';
@@ -82,6 +84,7 @@ import type {
   StanceDefinition,
   MartialTradition,
 } from '@/types/initiating';
+import type { EidolonBaseFormDefinition, EidolonSubtypeDefinition } from '@/types/eidolon';
 
 export class StaticGameDataConnector implements GameDataConnector {
   async getClassChoiceOptions(
@@ -359,5 +362,13 @@ export class StaticGameDataConnector implements GameDataConnector {
     return ALL_FAVORED_CLASS_BONUSES.filter(
       (fcb) => fcb.raceName === raceName && fcb.className === className,
     );
+  }
+
+  async getEidolonBaseForms() {
+    return ALL_EIDOLON_BASE_FORMS;
+  }
+
+  async getEidolonSubtypes() {
+    return ALL_EIDOLON_SUBTYPES;
   }
 }

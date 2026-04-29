@@ -72,6 +72,10 @@ export interface DraftCharacterSnapshot {
     pools: Array<{ effectiveInitiatorLevel: number; baseClass: string }>;
     knownManeuvers: Array<{ maneuverId: string }>;
   };
+  eidolons: Array<{
+    id: string;
+    selectedEvolutions: Array<{ evolutionId: string }>;
+  }>;
   mythic?: { tier: number };
   companions: CompanionInstance[];
 }
@@ -123,6 +127,7 @@ export class DraftStateResolver {
     spellcasting: { pools: [] },
     initiating: { pools: [], knownManeuvers: [] },
     companions: [],
+    eidolons: [],
   };
 
   /**
@@ -321,6 +326,7 @@ export class DraftStateResolver {
       spellcasting: this.buildSpellcastingSnapshot(partialClasses, classDataMap),
       initiating: this.buildInitiatingSnapshot(partialClasses, classDataMap),
       companions: draft.companions,
+      eidolons: this.buildEidolonsSnapshot(draft, partialClasses),
     };
     // mythic omitted — direct-entry draft doesn't track mythic tier
   }
@@ -497,5 +503,29 @@ export class DraftStateResolver {
     // knownManeuvers is empty at draft time — maneuver selection happens post-draft.
     // maneuver_known prereqs will correctly fail during draft validation.
     return { pools, knownManeuvers: [] };
+  }
+
+  /**
+   * Filter draft eidolons to only those owned by class entries that are present
+   * in partialClasses (i.e., classes that exist at this ECL checkpoint).
+   *
+   * partialClasses entries use `id: className` (synthetic), so we cross-reference
+   * against draft.classes by className to recover the real UUIDs used in
+   * DraftEidolon.summonerClassEntryId.
+   */
+  private static buildEidolonsSnapshot(
+    draft: CharacterDraft,
+    partialClasses: DraftClassEntry[],
+  ): DraftCharacterSnapshot['eidolons'] {
+    const presentClassNames = new Set(partialClasses.map((c) => c.className));
+    const allowedEntryIds = new Set(
+      draft.classes.filter((c) => presentClassNames.has(c.className)).map((c) => c.id),
+    );
+    return draft.eidolons
+      .filter((eid) => allowedEntryIds.has(eid.summonerClassEntryId))
+      .map((eid) => ({
+        id: eid.id,
+        selectedEvolutions: eid.selectedEvolutions.map((s) => ({ evolutionId: s.evolutionId })),
+      }));
   }
 }

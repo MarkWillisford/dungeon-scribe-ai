@@ -98,6 +98,7 @@ export class CharacterService {
       grantedBonuses: [],
       resources: [],
       companions: [],
+      eidolons: [],
 
       buffs: [],
       savedBuffs: [],
