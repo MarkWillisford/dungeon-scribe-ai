@@ -17,12 +17,7 @@ import {
   pickerFilterFromDraftClass,
 } from '@/services/CompanionService';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
-
-function makeInstanceId(): string {
-  // React Native doesn't ship crypto.randomUUID; this is good enough for
-  // local draft-scoped instance IDs.
-  return `comp-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
-}
+import { makeCompanionInstanceId } from '@/utils/companionUtils';
 
 interface ClassChoiceRowProps {
   classId: string;
@@ -251,7 +246,7 @@ export function ClassChoiceRow({
   const handleCompanionSelect = (entry: AnimalCompanionEntry) => {
     dispatch(
       addCompanion({
-        instanceId: makeInstanceId(),
+        instanceId: makeCompanionInstanceId(),
         sourceEntryId: entry.id,
         name: entry.name,
         grantedBy: {

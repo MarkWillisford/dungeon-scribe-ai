@@ -54,6 +54,8 @@ export const BODY_SHAPE_SLOTS: Record<BodyShape, BodyShapeProfile> = {
     ],
   },
   bipedClaws: {
+    // RAW is silent on claw-wielding; Hero Lab and Pathbuilder both treat
+    // bipedal claws as weapon-capable. canGrasp: true matches that consensus.
     canGrasp: true,
     slots: [
       { slot: 'armor', automatic: true },

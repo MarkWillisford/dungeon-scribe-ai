@@ -29,6 +29,7 @@ import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { type ClassChoice } from '@/types/classes';
 import { ArchetypePickerSheet } from './ArchetypePickerSheet';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
+import { makeCompanionInstanceId } from '@/utils/companionUtils';
 
 // Pairs of featureNames that are mutually exclusive — filling one disables the other.
 const MUTUALLY_EXCLUSIVE_PAIRS: [string, string][] = [['Domain', 'Inquisition']];
@@ -48,10 +49,6 @@ function isMutuallyExcludedFilled(featureName: string, classChoices: ClassChoice
 // "+ Add Companion" button appears only for these.
 function classSupportsMultipleCompanions(entry: DraftClassEntry): boolean {
   return entry.className === 'Ranger' && entry.archetypeName === 'Beastmaster';
-}
-
-function makeInstanceId(): string {
-  return `comp-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
 // ---- Source badge ----
@@ -831,7 +828,10 @@ function CompanionSection({ entry }: CompanionSectionProps) {
     ),
   );
 
+  const supportsMultiple = classSupportsMultipleCompanions(entry);
+
   useEffect(() => {
+    if (grantedCompanions.length === 0 && !supportsMultiple) return;
     let cancelled = false;
     GameDataService.getAnimalCompanions()
       .then((companions) => {
@@ -845,9 +845,7 @@ function CompanionSection({ entry }: CompanionSectionProps) {
     return () => {
       cancelled = true;
     };
-  }, []);
-
-  const supportsMultiple = classSupportsMultipleCompanions(entry);
+  }, [grantedCompanions.length, supportsMultiple]);
   const grantedByLabel = entry.archetypeName
     ? `${entry.className} (${entry.archetypeName})`
     : entry.className;
@@ -858,7 +856,7 @@ function CompanionSection({ entry }: CompanionSectionProps) {
     // the single-companion flow.
     dispatch(
       addCompanion({
-        instanceId: makeInstanceId(),
+        instanceId: makeCompanionInstanceId(),
         sourceEntryId: ac.id,
         name: ac.name,
         grantedBy: {
