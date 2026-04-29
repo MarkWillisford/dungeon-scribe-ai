@@ -65,43 +65,59 @@ function PlaceholderSection({ tab }: { tab: EntryTabKey }) {
 }
 
 // ---- Tab status derivation ----
-// Returns the completion dot status for each tab based on draft content.
+// Returns the completion dot status for each tab based on character content.
 // "empty" = no data entered, "complete" = data present, "warnings" = has warnings.
 
 function useTabStatus(): Record<EntryTabKey, TabStatus> {
-  const draft = useAppSelector((state) => state.characterEntry.draft);
+  const character = useAppSelector((state) => state.characterEntry.character);
   const warnings = useAppSelector((state) => state.characterEntry.validationWarnings);
 
   const hasWarning = (tab: EntryTabKey) =>
     warnings.some((w) => w.section === tab && !w.isAcknowledged);
 
   return {
-    identity: hasWarning('identity') ? 'warnings' : draft.name ? 'complete' : 'empty',
+    identity: hasWarning('identity') ? 'warnings' : character.info.name ? 'complete' : 'empty',
     abilities: hasWarning('abilities')
       ? 'warnings'
-      : draft.abilities.str.base !== 10
+      : character.abilityScores.str.base !== 10
         ? 'complete'
         : 'empty',
-    classes: hasWarning('classes') ? 'warnings' : draft.classes.length > 0 ? 'complete' : 'empty',
-    combat: hasWarning('combat') ? 'warnings' : draft.combat.currentHP > 0 ? 'complete' : 'empty',
+    classes: hasWarning('classes')
+      ? 'warnings'
+      : character.classes.classes.length > 0
+        ? 'complete'
+        : 'empty',
+    combat: hasWarning('combat')
+      ? 'warnings'
+      : character.combatStats.hitPoints.current > 0
+        ? 'complete'
+        : 'empty',
     skills: hasWarning('skills')
       ? 'warnings'
-      : Object.keys(draft.skills).length > 0
+      : character.classes.classes.length > 0
         ? 'complete'
         : 'empty',
-    traits: hasWarning('traits') ? 'warnings' : draft.traits.length > 0 ? 'complete' : 'empty',
-    feats: hasWarning('feats') ? 'warnings' : draft.featSlots.length > 0 ? 'complete' : 'empty',
+    traits: hasWarning('traits')
+      ? 'warnings'
+      : character.traits.traits.length > 0
+        ? 'complete'
+        : 'empty',
+    feats: hasWarning('feats')
+      ? 'warnings'
+      : character.feats.feats.length > 0
+        ? 'complete'
+        : 'empty',
     spells: hasWarning('spells')
       ? 'warnings'
-      : draft.spellcastingPools.length > 0
+      : character.spellcasting.pools.length > 0
         ? 'complete'
         : 'empty',
     equipment: hasWarning('equipment')
       ? 'warnings'
-      : draft.equipment.length > 0
+      : (character.editorEquipment?.length ?? 0) > 0
         ? 'complete'
         : 'empty',
-    notes: hasWarning('notes') ? 'warnings' : draft.characterNotes ? 'complete' : 'empty',
+    notes: hasWarning('notes') ? 'warnings' : character.info.notes ? 'complete' : 'empty',
   };
 }
 
@@ -111,7 +127,7 @@ export function CharacterEntryScreen() {
   const { colors, fantasy } = useTheme();
   const dispatch = useAppDispatch();
   const activeTab = useAppSelector((state) => state.characterEntry.activeTab);
-  const draft = useAppSelector((state) => state.characterEntry.draft);
+  const character = useAppSelector((state) => state.characterEntry.character);
   const warnings = useAppSelector((state) => state.characterEntry.validationWarnings);
   const lastValidatedAt = useAppSelector((state) => state.characterEntry.lastValidatedAt);
   const ruleset = useAppSelector((state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD);
@@ -129,10 +145,15 @@ export function CharacterEntryScreen() {
   );
 
   const handleValidate = useCallback(async () => {
-    const newWarnings = await DraftValidationService.validate(draft, ruleset, classDataMap);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const newWarnings = await DraftValidationService.validate(
+      character as any,
+      ruleset,
+      classDataMap,
+    );
     dispatch(setValidationWarnings(newWarnings));
     setShowValidationSheet(true);
-  }, [draft, ruleset, classDataMap, dispatch]);
+  }, [character, ruleset, classDataMap, dispatch]);
 
   const handleSave = useCallback(() => {
     // Save logic will be wired when the characters service is connected

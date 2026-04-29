@@ -1,20 +1,9 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setCombatField } from '@/store/slices/characterEntrySlice';
 import { AutoComputedValue } from '@/components/ui/AutoComputedValue';
-import {
-  computeTotalBAB,
-  formatBABString,
-  computeBaseFort,
-  computeBaseRef,
-  computeBaseWill,
-  computeMaxHP,
-  getAbilityModifier,
-} from '@/utils/characterComputations';
-import { selectClassDataMap } from '@/store/slices/gameDataSlice';
-import { type DraftCombatStats } from '@/types/characterDraft';
 
 // ---- Helpers ----
 
@@ -97,40 +86,56 @@ function Panel({ title, children }: PanelProps) {
 
 // ---- Main section ----
 
+type CombatFieldKey =
+  | 'currentHP'
+  | 'nonlethalDamage'
+  | 'tempHP'
+  | 'maxHPOverride'
+  | 'acMiscBonus'
+  | 'saveFortMisc'
+  | 'saveRefMisc'
+  | 'saveWillMisc'
+  | 'meleeAttackMisc'
+  | 'rangedAttackMisc'
+  | 'cmbMisc'
+  | 'speedLand'
+  | 'speedFly'
+  | 'speedSwim'
+  | 'speedClimb';
+
 export function CombatStatsSection() {
   const dispatch = useAppDispatch();
-  const combat = useAppSelector((state) => state.characterEntry.draft.combat);
-  const classes = useAppSelector((state) => state.characterEntry.draft.classes);
-  const abilities = useAppSelector((state) => state.characterEntry.draft.abilities);
-  const classDataMap = useAppSelector(selectClassDataMap);
+  const cs = useAppSelector((state) => state.characterEntry.character.combatStats);
 
-  const set = (field: keyof DraftCombatStats, value: number | undefined) =>
+  const set = (field: CombatFieldKey, value: number | undefined) =>
     dispatch(setCombatField({ field, value }));
 
-  // Computed base values
-  const strMod = useMemo(() => getAbilityModifier(abilities, 'str'), [abilities]);
-  const dexMod = useMemo(() => getAbilityModifier(abilities, 'dex'), [abilities]);
-  const wisMod = useMemo(() => getAbilityModifier(abilities, 'wis'), [abilities]);
-  const conMod = useMemo(() => getAbilityModifier(abilities, 'con'), [abilities]);
+  // Read pipeline-computed values directly from the character
+  const maxHP =
+    cs.hitPoints.base + cs.hitPoints.constitution + cs.hitPoints.favoredClass + cs.hitPoints.other;
+  const babArray = cs.attackBonuses.baseAttack;
+  const babString = babArray.length > 0 ? babArray.map(fmtSign).join('/') : '+0';
 
-  const computedMaxHP = useMemo(
-    () => computeMaxHP(classes, conMod, classDataMap),
-    [classes, conMod, classDataMap],
-  );
-  const totalBAB = useMemo(() => computeTotalBAB(classes, classDataMap), [classes, classDataMap]);
-  const babString = useMemo(() => formatBABString(totalBAB), [totalBAB]);
-  const baseFort = useMemo(() => computeBaseFort(classes, classDataMap), [classes, classDataMap]);
-  const baseRef = useMemo(() => computeBaseRef(classes, classDataMap), [classes, classDataMap]);
-  const baseWill = useMemo(() => computeBaseWill(classes, classDataMap), [classes, classDataMap]);
+  const strMod = cs.attackBonuses.strengthMod;
+  const dexMod = cs.armorClass.dexterity;
+  const baseFort = cs.savingThrows.fortitude.base;
+  const baseRef = cs.savingThrows.reflex.base;
+  const baseWill = cs.savingThrows.will.base;
+  const conMod = cs.savingThrows.fortitude.ability;
+  const wisMod = cs.savingThrows.will.ability;
 
-  const totalFort = baseFort + conMod + (combat.saveFortMisc ?? 0);
-  const totalRef = baseRef + dexMod + (combat.saveRefMisc ?? 0);
-  const totalWill = baseWill + wisMod + (combat.saveWillMisc ?? 0);
+  const totalFort = cs.savingThrows.fortitude.total;
+  const totalRef = cs.savingThrows.reflex.total;
+  const totalWill = cs.savingThrows.will.total;
 
-  const totalMelee = totalBAB + strMod + (combat.meleeAttackMisc ?? 0);
-  const totalRanged = totalBAB + dexMod + (combat.rangedAttackMisc ?? 0);
-  const totalCMB = totalBAB + strMod + (combat.cmbMisc ?? 0);
-  const totalCMD = 10 + totalBAB + strMod + dexMod;
+  const meleeMisc = cs.attackBonuses.miscMods.melee[0]?.value ?? 0;
+  const rangedMisc = cs.attackBonuses.miscMods.ranged[0]?.value ?? 0;
+  const cmbMisc = cs.combatManeuver.bonus.miscMods[0]?.value ?? 0;
+
+  const totalMelee = cs.attackBonuses.meleeTotal;
+  const totalRanged = cs.attackBonuses.rangedTotal;
+  const totalCMB = cs.combatManeuver.bonus.total;
+  const totalCMD = cs.combatManeuver.defense.total;
 
   return (
     <View style={styles.container}>
@@ -138,28 +143,28 @@ export function CombatStatsSection() {
       <Panel title="Hit Points">
         <View style={styles.row}>
           <Text style={styles.fieldLabel}>Max HP</Text>
-          {combat.maxHPOverride !== undefined ? (
+          {cs.hitPoints.other !== 0 ? (
             <>
               <NumInput
-                value={combat.maxHPOverride}
-                onCommit={(n) => set('maxHPOverride', n)}
+                value={cs.hitPoints.other}
+                onCommit={(n) => set('maxHPOverride', n ?? 0)}
                 width={64}
               />
-              <Pressable onPress={() => set('maxHPOverride', undefined)} hitSlop={8}>
+              <Pressable onPress={() => set('maxHPOverride', 0)} hitSlop={8}>
                 <Text style={styles.linkText}>↺ auto</Text>
               </Pressable>
             </>
           ) : (
             <>
-              <AutoComputedValue value={String(computedMaxHP)} />
-              <Pressable onPress={() => set('maxHPOverride', computedMaxHP)} hitSlop={8}>
+              <AutoComputedValue value={String(maxHP)} />
+              <Pressable onPress={() => set('maxHPOverride', maxHP)} hitSlop={8}>
                 <Text style={styles.linkText}>override</Text>
               </Pressable>
             </>
           )}
           <Text style={styles.fieldLabel}>Current</Text>
           <NumInput
-            value={combat.currentHP}
+            value={cs.hitPoints.current}
             onCommit={(n) => set('currentHP', n ?? 0)}
             width={64}
           />
@@ -167,12 +172,16 @@ export function CombatStatsSection() {
         <View style={styles.row}>
           <Text style={styles.fieldLabel}>Nonlethal</Text>
           <NumInput
-            value={combat.nonlethalDamage}
+            value={cs.hitPoints.nonlethal}
             onCommit={(n) => set('nonlethalDamage', n ?? 0)}
             width={56}
           />
           <Text style={styles.fieldLabel}>Temp HP</Text>
-          <NumInput value={combat.tempHP} onCommit={(n) => set('tempHP', n ?? 0)} width={56} />
+          <NumInput
+            value={cs.hitPoints.temporary}
+            onCommit={(n) => set('tempHP', n ?? 0)}
+            width={56}
+          />
         </View>
       </Panel>
 
@@ -180,14 +189,14 @@ export function CombatStatsSection() {
       <Panel title="Armor Class">
         <View style={styles.row}>
           <AutoComputedValue
-            value={`AC 10 + armor + dex ${fmtSign(dexMod)} + misc ${fmtSign(combat.acMiscBonus ?? 0)}`}
+            value={`AC 10 + armor + dex ${fmtSign(dexMod)} + misc ${fmtSign(cs.armorClass.misc)}`}
             label="Formula"
           />
         </View>
         <View style={styles.row}>
           <Text style={styles.fieldLabel}>Misc AC bonus</Text>
           <NumInput
-            value={combat.acMiscBonus}
+            value={cs.armorClass.misc}
             onCommit={(n) => set('acMiscBonus', n ?? 0)}
             signed
             width={56}
@@ -206,7 +215,7 @@ export function CombatStatsSection() {
             <View style={styles.miscRow}>
               <Text style={styles.miscLabel}>Misc</Text>
               <NumInput
-                value={combat.saveFortMisc}
+                value={cs.savingThrows.fortitude.misc}
                 onCommit={(n) => set('saveFortMisc', n ?? 0)}
                 signed
                 width={52}
@@ -222,7 +231,7 @@ export function CombatStatsSection() {
             <View style={styles.miscRow}>
               <Text style={styles.miscLabel}>Misc</Text>
               <NumInput
-                value={combat.saveRefMisc}
+                value={cs.savingThrows.reflex.misc}
                 onCommit={(n) => set('saveRefMisc', n ?? 0)}
                 signed
                 width={52}
@@ -238,7 +247,7 @@ export function CombatStatsSection() {
             <View style={styles.miscRow}>
               <Text style={styles.miscLabel}>Misc</Text>
               <NumInput
-                value={combat.saveWillMisc}
+                value={cs.savingThrows.will.misc}
                 onCommit={(n) => set('saveWillMisc', n ?? 0)}
                 signed
                 width={52}
@@ -259,7 +268,7 @@ export function CombatStatsSection() {
             <View style={styles.miscRow}>
               <Text style={styles.miscLabel}>Misc</Text>
               <NumInput
-                value={combat.meleeAttackMisc}
+                value={meleeMisc}
                 onCommit={(n) => set('meleeAttackMisc', n ?? 0)}
                 signed
                 width={52}
@@ -272,7 +281,7 @@ export function CombatStatsSection() {
             <View style={styles.miscRow}>
               <Text style={styles.miscLabel}>Misc</Text>
               <NumInput
-                value={combat.rangedAttackMisc}
+                value={rangedMisc}
                 onCommit={(n) => set('rangedAttackMisc', n ?? 0)}
                 signed
                 width={52}
@@ -285,7 +294,7 @@ export function CombatStatsSection() {
             <View style={styles.miscRow}>
               <Text style={styles.miscLabel}>Misc</Text>
               <NumInput
-                value={combat.cmbMisc}
+                value={cmbMisc}
                 onCommit={(n) => set('cmbMisc', n ?? 0)}
                 signed
                 width={52}
@@ -302,22 +311,15 @@ export function CombatStatsSection() {
       {/* Movement */}
       <Panel title="Movement">
         <View style={styles.speedGrid}>
-          {(
-            [
-              { label: 'Land', field: 'speedLand' },
-              { label: 'Fly', field: 'speedFly' },
-              { label: 'Swim', field: 'speedSwim' },
-              { label: 'Climb', field: 'speedClimb' },
-            ] as { label: string; field: keyof DraftCombatStats }[]
-          ).map(({ label, field }) => (
+          {[
+            { label: 'Land', field: 'speedLand' as CombatFieldKey, value: cs.movement.base },
+            { label: 'Fly', field: 'speedFly' as CombatFieldKey, value: cs.movement.fly },
+            { label: 'Swim', field: 'speedSwim' as CombatFieldKey, value: cs.movement.swim },
+            { label: 'Climb', field: 'speedClimb' as CombatFieldKey, value: cs.movement.climb },
+          ].map(({ label, field, value }) => (
             <View key={field} style={styles.speedCell}>
               <Text style={styles.speedLabel}>{label}</Text>
-              <NumInput
-                value={combat[field] as number | undefined}
-                onCommit={(n) => set(field, n)}
-                placeholder="—"
-                width={52}
-              />
+              <NumInput value={value} onCommit={(n) => set(field, n)} placeholder="—" width={52} />
               <Text style={styles.speedUnit}>ft</Text>
             </View>
           ))}

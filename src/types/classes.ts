@@ -1,5 +1,8 @@
 import { BABProgression, SaveProgression, Effect } from './base';
 import { FeatPrerequisite } from './feats';
+import type { SpellcastingAdvancement } from './spells';
+import type { FavoredClassBonusSelection } from './characterDraft';
+import type { BroodmasterState } from './eidolon';
 
 export interface CharacterClasses {
   classes: ClassEntry[];
@@ -41,6 +44,16 @@ export interface ClassEntry {
   sourceSystem?: 'pf1e' | '3.5e' | 'homebrew' | 'campaign';
   isCustom?: boolean;
   sourceNotes?: string; // e.g. "Ported from Complete Divine p.52, modified for Milani"
+
+  // Editor metadata — not used by the game engine
+  id?: string; // stable local UUID for React keys and action targeting
+  prereqOverride?: boolean; // DM override — suppress prereq warnings for this class
+  isFavoredClass?: boolean;
+  spellcastingAdvancement?: SpellcastingAdvancement;
+  archetypeId?: string;
+  archetypeName?: string;
+  favoredClassBonuses?: FavoredClassBonusSelection[];
+  summonerBroodmaster?: BroodmasterState;
 }
 
 // ---- Class Choices ----

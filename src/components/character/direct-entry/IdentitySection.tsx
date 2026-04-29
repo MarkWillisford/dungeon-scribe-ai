@@ -28,7 +28,7 @@ const ALIGNMENT_OPTIONS = Object.values(Alignment).map((a) => ({ label: a, value
 export function IdentitySection() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const draft = useAppSelector((state) => state.characterEntry.draft);
+  const character = useAppSelector((state) => state.characterEntry.character);
   const activeRuleset = useAppSelector((state) => state.ruleset.activeRuleset);
   const [rulesetOpen, setRulesetOpen] = useState(false);
 
@@ -38,14 +38,14 @@ export function IdentitySection() {
       <OrnatePanel title="Character Info">
         <FantasyTextInput
           label="Name"
-          value={draft.name}
+          value={character.info.name}
           onChangeText={(v) => dispatch(setName(v))}
           autoCapitalize="words"
           testID="identity-name"
         />
         <FantasyTextInput
           label="Player"
-          value={draft.player}
+          value={character.info.player}
           onChangeText={(v) => dispatch(setPlayer(v))}
           autoCapitalize="words"
           testID="identity-player"
@@ -55,7 +55,7 @@ export function IdentitySection() {
         <View style={styles.raceRow}>
           <FantasyTextInput
             label="Race"
-            value={draft.raceName}
+            value={character.info.race.name}
             onChangeText={() => {
               // TODO: open SearchPickerSheet for races
             }}
@@ -68,7 +68,7 @@ export function IdentitySection() {
 
         <InlinePicker
           label="Alignment"
-          value={draft.alignment}
+          value={character.info.alignment}
           options={ALIGNMENT_OPTIONS}
           onValueChange={(v) => dispatch(setAlignment(v as Alignment))}
           testID="identity-alignment"
@@ -95,7 +95,7 @@ export function IdentitySection() {
 
         <FantasyTextInput
           label="Deity"
-          value={draft.deity}
+          value={character.info.deity}
           onChangeText={(v) => dispatch(setDeity(v))}
           autoCapitalize="words"
           testID="identity-deity"
@@ -104,14 +104,14 @@ export function IdentitySection() {
         <View style={styles.twoCol}>
           <FantasyTextInput
             label="Gender"
-            value={draft.gender}
+            value={character.info.gender}
             onChangeText={(v) => dispatch(setGender(v))}
             style={styles.colFlex}
             testID="identity-gender"
           />
           <FantasyTextInput
             label="Age"
-            value={draft.age}
+            value={String(character.info.age || '')}
             onChangeText={(v) => dispatch(setAge(v))}
             keyboardType="numeric"
             style={styles.colSmall}
@@ -127,14 +127,14 @@ export function IdentitySection() {
         <View style={styles.twoCol}>
           <FantasyTextInput
             label="Height"
-            value={draft.height}
+            value={character.info.height}
             onChangeText={(v) => dispatch(setHeight(v))}
             style={styles.colFlex}
             testID="identity-height"
           />
           <FantasyTextInput
             label="Weight"
-            value={draft.weight}
+            value={character.info.weight}
             onChangeText={(v) => dispatch(setWeight(v))}
             style={styles.colFlex}
             testID="identity-weight"
@@ -143,14 +143,14 @@ export function IdentitySection() {
         <View style={styles.twoCol}>
           <FantasyTextInput
             label="Hair"
-            value={draft.hair}
+            value={character.info.hair}
             onChangeText={(v) => dispatch(setHair(v))}
             style={styles.colFlex}
             testID="identity-hair"
           />
           <FantasyTextInput
             label="Eyes"
-            value={draft.eyes}
+            value={character.info.eyes}
             onChangeText={(v) => dispatch(setEyes(v))}
             style={styles.colFlex}
             testID="identity-eyes"
@@ -158,7 +158,7 @@ export function IdentitySection() {
         </View>
         <FantasyTextInput
           label="Skin"
-          value={draft.skin}
+          value={character.info.skin}
           onChangeText={(v) => dispatch(setSkin(v))}
           testID="identity-skin"
         />
@@ -169,7 +169,7 @@ export function IdentitySection() {
       {/* Background */}
       <OrnatePanel title="Background">
         <TextInput
-          value={draft.background}
+          value={character.info.background}
           onChangeText={(v) => dispatch(setBackground(v))}
           placeholder="Character background, history, and personality..."
           placeholderTextColor={colors.text.tertiary}

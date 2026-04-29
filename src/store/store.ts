@@ -7,6 +7,7 @@ import uiReducer from './slices/uiSlice';
 import characterEntryReducer from './slices/characterEntrySlice';
 import rulesetReducer from './slices/rulesetSlice';
 import gameDataReducer from './slices/gameDataSlice';
+import { recalculateMiddleware } from './middleware/recalculateMiddleware';
 
 export const store = configureStore({
   reducer: {
@@ -42,7 +43,7 @@ export const store = configureStore({
           'characterEntry.draft.companions',
         ],
       },
-    }),
+    }).concat(recalculateMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

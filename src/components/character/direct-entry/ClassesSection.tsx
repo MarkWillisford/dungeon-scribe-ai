@@ -22,16 +22,10 @@ import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPicker
 import { ClassEntryCard } from './ClassEntryCard';
 import { TemplateEntryCard } from './TemplateEntryCard';
 import { GrantedBonusCard } from './GrantedBonusCard';
-import {
-  computeTotalBAB,
-  formatBABString,
-  computeBaseFort,
-  computeBaseRef,
-  computeBaseWill,
-  computeECL,
-} from '@/utils/characterComputations';
 import { selectClasses, selectClassDataMap } from '@/store/slices/gameDataSlice';
-import { type DraftClassEntry, type DraftTemplateEntry } from '@/types/characterDraft';
+import { type ClassEntry } from '@/types/classes';
+import { type AppliedTemplate } from '@/types/templates';
+import { BABProgression, SaveProgression } from '@/types/base';
 import { ALL_TEMPLATES } from '@/data/templates';
 
 function genId(): string {
@@ -63,7 +57,7 @@ function computeHoverIndex(heights: number[], fromIndex: number, dy: number): nu
 // ---- DraggableRow ----
 
 interface DraggableRowProps {
-  entry: DraftClassEntry;
+  entry: ClassEntry;
   index: number;
   count: number;
   activeIndex: SharedValue<number>;
@@ -186,7 +180,7 @@ function DraggableRow({
 
 function DraggableClassList() {
   const dispatch = useAppDispatch();
-  const classes = useAppSelector((state) => state.characterEntry.draft.classes);
+  const classes = useAppSelector((state) => state.characterEntry.character.classes.classes);
 
   const activeIndex = useSharedValue(-1);
   const dragY = useSharedValue(0);
@@ -236,7 +230,7 @@ function DraggableClassList() {
         const reordered = [...classes];
         const [moved] = reordered.splice(fromIndex, 1);
         reordered.splice(toIndex, 0, moved);
-        dispatch(reorderClasses(reordered.map((c) => c.id)));
+        dispatch(reorderClasses(reordered.map((c) => c.id ?? c.name)));
       }
     },
     [classes, dispatch, rowHeights],
@@ -399,8 +393,9 @@ function AddGrantModal({ visible, onAdd, onClose }: AddGrantModalProps) {
 export function ClassesSection() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const classes = useAppSelector((state) => state.characterEntry.draft.classes);
-  const templates = useAppSelector((state) => state.characterEntry.draft.templates);
+  const character = useAppSelector((state) => state.characterEntry.character);
+  const classes = character.classes.classes;
+  const templates = character.appliedTemplates;
   const allClasses = useAppSelector(selectClasses);
   const classDataMap = useAppSelector(selectClassDataMap);
 
@@ -422,14 +417,17 @@ export function ClassesSection() {
     [allClasses],
   );
 
-  // Computed summary values
-  const totalBAB = useMemo(() => computeTotalBAB(classes, classDataMap), [classes, classDataMap]);
-  const babString = useMemo(() => formatBABString(totalBAB), [totalBAB]);
-  const fort = useMemo(() => computeBaseFort(classes, classDataMap), [classes, classDataMap]);
-  const ref = useMemo(() => computeBaseRef(classes, classDataMap), [classes, classDataMap]);
-  const will = useMemo(() => computeBaseWill(classes, classDataMap), [classes, classDataMap]);
-  const ecl = useMemo(() => computeECL(classes, regularTemplates), [classes, regularTemplates]);
-  const totalHD = useMemo(() => classes.reduce((sum, c) => sum + c.level, 0), [classes]);
+  const totalHD = classes.reduce((sum, c) => sum + c.level, 0);
+  const templateLA = regularTemplates
+    .filter((t) => t.appliedAs === 'la' && t.la != null)
+    .reduce((sum, t) => sum + (t.la ?? 0), 0);
+  const ecl = totalHD + templateLA;
+
+  const cs = character.combatStats;
+  const babString = cs.attackBonuses.baseAttack.map((n) => (n >= 0 ? `+${n}` : `${n}`)).join('/');
+  const fort = cs.savingThrows.fortitude.total;
+  const ref = cs.savingThrows.reflex.total;
+  const will = cs.savingThrows.will.total;
 
   const formatSave = (n: number) => (n >= 0 ? `+${n}` : `${n}`);
 
@@ -450,11 +448,28 @@ export function ClassesSection() {
           }
       : undefined;
 
+    const emptySpellsPerDay = {
+      base: Array(10).fill(0),
+      bonus: Array(10).fill(0),
+      misc: Array(10).fill(0),
+      total: Array(10).fill(0),
+      used: Array(10).fill(0),
+    };
+
     dispatch(
       addClass({
         id: entryId,
-        className: item.label,
+        name: item.label,
         level: 1,
+        hitDieSize: classData?.hitDie ?? 8,
+        hitDieResults: [],
+        skillRanks: classData?.skillRanksPerLevel ?? 2,
+        classSkills: classData?.classSkills ?? [],
+        babProgression: (classData?.babProgression ?? BABProgression.Medium) as BABProgression,
+        fortProgression: (classData?.saves.fortitude ?? SaveProgression.Poor) as SaveProgression,
+        refProgression: (classData?.saves.reflex ?? SaveProgression.Poor) as SaveProgression,
+        willProgression: (classData?.saves.will ?? SaveProgression.Poor) as SaveProgression,
+        classFeatures: [],
         sourceSystem: 'pf1e',
         spellcastingAdvancement: initialAdvancement,
         classChoices: [],
@@ -468,10 +483,18 @@ export function ClassesSection() {
       dispatch(
         addSpellcastingPool({
           id: `pool-${entryId}`,
-          poolType: spellType === 'Divine' ? 'divine' : 'arcane',
+          baseClass: item.label.toLowerCase(),
+          castingType: spellType === 'Divine' ? 'divine' : 'arcane',
+          spellAbility: spellType === 'Divine' ? 'WIS' : 'INT',
           baseClassEntryId: entryId,
-          castingAbility: spellType === 'Divine' ? 'wis' : 'int',
-          spellsPerDayMisc: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          contributors: [],
+          effectiveSpellcastingLevel: 0,
+          baseCasterLevel: 0,
+          clBonuses: [],
+          spellsPerDay: emptySpellsPerDay,
+          spellDC: { base: 0, miscBonus: 0, byLevel: Array(10).fill(0) },
+          spellFailure: 0,
+          concentration: { abilityMod: 0, casterLevel: 0, misc: 0, total: 0 },
         }),
       );
     }
@@ -504,29 +527,36 @@ export function ClassesSection() {
   const handleAddTemplate = (item: SearchItem) => {
     const tpl = ALL_TEMPLATES.find((t) => t.id === item.key);
     if (!tpl) return;
-    const entry: DraftTemplateEntry = {
+    const entry: AppliedTemplate = {
       id: genId(),
       templateId: tpl.id,
-      templateName: tpl.name,
+      name: tpl.name,
       isFreeGrant: false,
-      acquired: tpl.acquisitionType,
-      ...(tpl.laAdjustment != null
-        ? { appliedAs: 'LA', laValue: tpl.laAdjustment }
-        : tpl.crTiers?.length
-          ? { appliedAs: 'CR' }
-          : { appliedAs: 'CR', crValue: tpl.crAdjustment ?? 0 }),
+      acquisitionType: tpl.acquisitionType,
+      appliedAs: tpl.laAdjustment != null ? 'la' : 'cr',
+      la: tpl.laAdjustment != null ? tpl.laAdjustment : undefined,
+      cr: tpl.crAdjustment != null ? tpl.crAdjustment : undefined,
+      paidTiers: [],
+      sourceId: tpl.id,
+      sourceRev: 0,
     };
     dispatch(addTemplate(entry));
     setTemplatePickerOpen(false);
   };
 
   const handleAddGrant = (name: string, note: string, grantedBy: string) => {
-    const entry: DraftTemplateEntry = {
+    const entry: AppliedTemplate = {
       id: genId(),
-      templateName: name,
+      name,
+      templateId: '',
       isFreeGrant: true,
       freeGrantNote: note || undefined,
       grantedBy: grantedBy || undefined,
+      appliedAs: 'cr',
+      acquisitionType: 'either',
+      paidTiers: [],
+      sourceId: '',
+      sourceRev: 0,
     };
     dispatch(addTemplate(entry));
     setGrantModalOpen(false);
@@ -627,8 +657,17 @@ export function ClassesSection() {
           dispatch(
             addClass({
               id: genId(),
-              className: name,
+              name,
               level: 1,
+              hitDieSize: 8,
+              hitDieResults: [],
+              skillRanks: 2,
+              classSkills: [],
+              babProgression: BABProgression.Medium,
+              fortProgression: SaveProgression.Poor,
+              refProgression: SaveProgression.Poor,
+              willProgression: SaveProgression.Poor,
+              classFeatures: [],
               sourceSystem: 'homebrew',
               classChoices: [],
               prereqOverride: false,

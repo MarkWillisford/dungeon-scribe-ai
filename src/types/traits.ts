@@ -71,6 +71,9 @@ export interface CharacterTrait {
   name: string;
   category: TraitCategory;
   choices: Record<string, string>;
+  // Editor metadata
+  id?: string;
+  description?: string;
 }
 
 // ---- Container on Character ----

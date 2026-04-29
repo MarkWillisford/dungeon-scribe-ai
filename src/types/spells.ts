@@ -1,6 +1,20 @@
 import type { GameDataSource } from './gameData';
 import type { DataQualityFields } from './base';
 
+// ---- Prestige class spellcasting advancement ----
+// 'single' — one base class advances per prestige level (Hathran, Dweomerkeeper, ...)
+// 'both'   — both an arcane and divine pool advance per prestige level (Mystic Theurge)
+// perLevel[i] corresponds to prestige class level (i + 1)
+export type SpellcastingAdvancement =
+  | {
+      mode: 'single';
+      perLevel: Array<{ baseClassEntryId: string }>;
+    }
+  | {
+      mode: 'both';
+      perLevel: Array<{ arcaneBaseClassEntryId: string; divineBaseClassEntryId: string }>;
+    };
+
 // ---- Spellcasting ----
 
 export interface Spellcasting {
@@ -19,6 +33,10 @@ export interface SpellcastingPool {
   baseClass: string; // 'cleric' | 'druid' | 'wizard' — maps to classLevels.{baseClass} in Firestore
   castingType: 'divine' | 'arcane' | 'psychic' | 'occult';
   spellAbility: 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
+
+  // Editor metadata
+  id?: string; // stable local UUID for action targeting
+  baseClassEntryId?: string; // ClassEntry.id of the base caster this pool represents
 
   // Which classes built this pool and how many levels each contributed
   contributors: SpellcastingContributor[];

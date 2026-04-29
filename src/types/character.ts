@@ -1,5 +1,13 @@
 import { Size, Alignment, Effect } from './base';
 import { Race } from './race';
+import type { AbilityKey } from './abilities';
+import type { ItemSlot } from './magicItems';
+
+// Which ability receives the +1 at each class-HD milestone (every 4 HD)
+export interface LevelIncrementSlot {
+  atHD: number; // 4, 8, 12, 16, 20, 24, ...
+  ability: AbilityKey | null;
+}
 
 // Core character information
 export interface CharacterInfo {
@@ -24,6 +32,29 @@ export interface CharacterInfo {
   portrait: string;
   background: string;
   notes: string;
+  // Editor metadata for race with flexible ability bonus
+  racialFlexBonus?: boolean;
+  racialFlexAbility?: AbilityKey;
+}
+
+// Character-layer equipped slot — ring splits into ring_left / ring_right
+export type EditorEquippedSlot = Exclude<ItemSlot, 'ring'> | 'ring_left' | 'ring_right';
+
+// Simplified equipment item used by the direct-entry editor.
+// The full Character.equipment typed arrays are populated when full item data is available.
+export interface EditorEquipmentItem {
+  id: string;
+  definitionId?: string; // Firestore doc id in the source collection
+  collection: 'weapons' | 'armor' | 'shields' | 'magicItems';
+  name: string;
+  slot?: EditorEquippedSlot;
+  containerId?: string;
+  isContainer?: boolean;
+  isOrbiting?: boolean;
+  allowsHandUse?: boolean;
+  notes?: string;
+  // Denormalized from item definition at add time — used for pipeline enhancement bonuses
+  abilityScoreBonuses?: Partial<Record<AbilityKey, number>>;
 }
 
 // Experience Points

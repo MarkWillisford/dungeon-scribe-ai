@@ -3,10 +3,10 @@ import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setSkillEntry, removeSkillEntry } from '@/store/slices/characterEntrySlice';
-import { getAbilityModifier } from '@/utils/characterComputations';
-import { type AbilityKey } from '@/types/characterDraft';
-import { type DraftSkillEntry } from '@/types/characterDraft';
+import type { AbilityKey } from '@/types/abilities';
 import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
+
+type SkillEntry = { ranks: number; misc: number };
 
 // ---- Static skill definitions ----
 
@@ -82,7 +82,7 @@ const SKILL_DEFS: SkillDef[] = [
 
 // ---- Helpers ----
 
-function getSpecialtyKeys(skills: Record<string, DraftSkillEntry>, baseKey: string): string[] {
+function getSpecialtyKeys(skills: Record<string, SkillEntry>, baseKey: string): string[] {
   const prefix = `${baseKey} (`;
   return Object.keys(skills)
     .filter((k) => k.startsWith(prefix) && k.endsWith(')'))
@@ -98,9 +98,9 @@ function capitalizeWords(s: string): string {
 interface SkillRowProps {
   def: SkillDef;
   label?: string;
-  entry: DraftSkillEntry;
+  entry: SkillEntry;
   abilityMod: number;
-  onChange: (entry: DraftSkillEntry) => void;
+  onChange: (entry: SkillEntry) => void;
   onRemove?: () => void;
 }
 
@@ -200,10 +200,10 @@ function SkillRow({ def, label, entry, abilityMod, onChange, onRemove }: SkillRo
 
 interface SpecialtyGroupProps {
   def: SkillDef;
-  skills: Record<string, DraftSkillEntry>;
+  skills: Record<string, SkillEntry>;
   filterQuery: string;
   abilityMod: number;
-  onChangeSkill: (skillKey: string, entry: DraftSkillEntry) => void;
+  onChangeSkill: (skillKey: string, entry: SkillEntry) => void;
   onRemoveSkill: (skillKey: string) => void;
   onAddSkill: (skillKey: string) => void;
 }
@@ -221,7 +221,7 @@ function SpecialtyGroup({
   const [adding, setAdding] = useState(false);
   const [input, setInput] = useState('');
 
-  const emptyEntry: DraftSkillEntry = { ranks: 0, misc: 0 };
+  const emptyEntry: SkillEntry = { ranks: 0, misc: 0 };
   const allKeys = useMemo(() => getSpecialtyKeys(skills, def.key), [skills, def.key]);
 
   const visibleKeys = useMemo(() => {
@@ -352,28 +352,28 @@ function SpecialtyGroup({
 export function SkillsSection() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const skills = useAppSelector((state) => state.characterEntry.draft.skills);
-  const abilities = useAppSelector((state) => state.characterEntry.draft.abilities);
+  const character = useAppSelector((state) => state.characterEntry.character);
+  const skills = character.skills as unknown as Record<string, SkillEntry>;
   const ruleset = useAppSelector((state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD);
   const showInitiating =
     ruleset.optionalRules.pathOfWarMechanics || ruleset.optionalRules.tomeOfBattleMechanics;
   const [showAll, setShowAll] = useState(false);
   const [query, setQuery] = useState('');
 
-  const abilityMods = useMemo(
-    () => ({
-      str: getAbilityModifier(abilities, 'str'),
-      dex: getAbilityModifier(abilities, 'dex'),
-      con: getAbilityModifier(abilities, 'con'),
-      int: getAbilityModifier(abilities, 'int'),
-      wis: getAbilityModifier(abilities, 'wis'),
-      cha: getAbilityModifier(abilities, 'cha'),
-    }),
-    [abilities],
-  );
+  const abilityMods = {
+    str: character.abilityScores.str.modifier,
+    dex: character.abilityScores.dex.modifier,
+    con: character.abilityScores.con.modifier,
+    int: character.abilityScores.int.modifier,
+    wis: character.abilityScores.wis.modifier,
+    cha: character.abilityScores.cha.modifier,
+  };
 
   const totalRanks = useMemo(
-    () => Object.values(skills).reduce((sum, e) => sum + e.ranks, 0),
+    () =>
+      Object.values(skills)
+        .filter((e): e is SkillEntry => typeof e === 'object' && e !== null && 'ranks' in e)
+        .reduce((sum, e) => sum + e.ranks, 0),
     [skills],
   );
 
@@ -402,7 +402,7 @@ export function SkillsSection() {
     });
   }, [skills, showAll, query, showInitiating]);
 
-  const emptyEntry: DraftSkillEntry = { ranks: 0, misc: 0 };
+  const emptyEntry: SkillEntry = { ranks: 0, misc: 0 };
 
   return (
     <View style={styles.container}>

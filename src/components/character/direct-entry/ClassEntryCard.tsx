@@ -18,11 +18,9 @@ import {
   addCompanion,
   removeCompanion,
 } from '@/store/slices/characterEntrySlice';
-import {
-  type DraftClassEntry,
-  type SpellcastingAdvancement,
-  type FavoredClassBonusSelection,
-} from '@/types/characterDraft';
+import { type ClassEntry } from '@/types/classes';
+import { type SpellcastingAdvancement } from '@/types/spells';
+import { type FavoredClassBonusSelection } from '@/types/characterDraft';
 import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
 import { GameDataService } from '@/services/GameDataService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
@@ -168,10 +166,10 @@ export function makeEmptyAdvancement(
 
 // ---- Favored Class Bonus Section ----
 
-function FavoredClassBonusSection({ entry }: { entry: DraftClassEntry }) {
+function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const raceName = useAppSelector((state) => state.characterEntry.draft.raceName);
+  const raceName = useAppSelector((state) => state.characterEntry.character.info.race?.name ?? '');
   const [alternates, setAlternates] = useState<FavoredClassBonusEntry[]>([]);
   const [altPickerLevel, setAltPickerLevel] = useState<number | null>(null);
 
@@ -634,17 +632,17 @@ const fcbStyles = StyleSheet.create({
   },
 });
 
-function AdvancementControls({ entry }: { entry: DraftClassEntry }) {
+function AdvancementControls({ entry }: { entry: ClassEntry }) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const classes = useAppSelector((state) => state.characterEntry.draft.classes);
+  const classes = useAppSelector((state) => state.characterEntry.character.classes.classes);
   const classDataMap = useAppSelector(selectClassDataMap);
   const [showPerLevel, setShowPerLevel] = useState(false);
 
   const adv = entry.spellcastingAdvancement;
   if (!adv) return null;
 
-  const spec = classDataMap.get(entry.className.toLowerCase())?.advancesSpellcasting;
+  const spec = classDataMap.get(entry.name.toLowerCase())?.advancesSpellcasting;
   if (!spec) return null;
 
   const getTradition = (className: string): 'divine' | 'arcane' | null => {
@@ -682,28 +680,28 @@ function AdvancementControls({ entry }: { entry: DraftClassEntry }) {
   const eligibleAny = classes.filter((c, idx) => {
     if (c.id === entry.id) return false;
     if (idx >= entryIndex) return false;
-    if (!isBaseCaster(c.className)) return false;
-    return traditionOk(c.className);
+    if (!isBaseCaster(c.name)) return false;
+    return traditionOk(c.name);
   });
   const eligibleArcane = classes.filter(
     (c, idx) =>
       c.id !== entry.id &&
       idx < entryIndex &&
-      isBaseCaster(c.className) &&
-      getTradition(c.className) === 'arcane',
+      isBaseCaster(c.name) &&
+      getTradition(c.name) === 'arcane',
   );
   const eligibleDivine = classes.filter(
     (c, idx) =>
       c.id !== entry.id &&
       idx < entryIndex &&
-      isBaseCaster(c.className) &&
-      getTradition(c.className) === 'divine',
+      isBaseCaster(c.name) &&
+      getTradition(c.name) === 'divine',
   );
 
   const setAllSingle = (targetId: string) => {
     dispatch(
       updateClassSpellcastingAdvancement({
-        id: entry.id,
+        id: entry.id ?? entry.name,
         advancement: {
           mode: 'single',
           perLevel: Array.from({ length: entry.level }, () => ({ baseClassEntryId: targetId })),
@@ -720,7 +718,7 @@ function AdvancementControls({ entry }: { entry: DraftClassEntry }) {
     const next = adv.perLevel.map((p) => ({ ...p, [field]: targetId }));
     dispatch(
       updateClassSpellcastingAdvancement({
-        id: entry.id,
+        id: entry.id ?? entry.name,
         advancement: { mode: 'both', perLevel: next },
       }),
     );
@@ -731,7 +729,7 @@ function AdvancementControls({ entry }: { entry: DraftClassEntry }) {
     const next = adv.perLevel.map((p, i) => (i === levelIdx ? { baseClassEntryId: targetId } : p));
     dispatch(
       updateClassSpellcastingAdvancement({
-        id: entry.id,
+        id: entry.id ?? entry.name,
         advancement: { mode: 'single', perLevel: next },
       }),
     );
@@ -746,7 +744,7 @@ function AdvancementControls({ entry }: { entry: DraftClassEntry }) {
     const next = adv.perLevel.map((p, i) => (i === levelIdx ? { ...p, [field]: targetId } : p));
     dispatch(
       updateClassSpellcastingAdvancement({
-        id: entry.id,
+        id: entry.id ?? entry.name,
         advancement: { mode: 'both', perLevel: next },
       }),
     );
@@ -790,7 +788,7 @@ function AdvancementControls({ entry }: { entry: DraftClassEntry }) {
     );
 
   const toOptions = (arr: typeof classes) =>
-    arr.map((c) => ({ label: `${c.className} ${c.level}`, value: c.id }));
+    arr.map((c) => ({ label: `${c.name} ${c.level}`, value: c.id ?? c.name }));
 
   return (
     <View style={styles.advancementPanel}>
@@ -924,7 +922,7 @@ function AdvancementControls({ entry }: { entry: DraftClassEntry }) {
 // ---- Main card ----
 
 interface ClassEntryCardProps {
-  entry: DraftClassEntry;
+  entry: ClassEntry;
 }
 
 export function ClassEntryCard({ entry }: ClassEntryCardProps) {
@@ -935,34 +933,43 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const [definitions, setDefinitions] = useState<ClassChoiceDefinition[]>([]);
   const [archetypeLoadedClass, setArchetypeLoadedClass] = useState<string | null>(null);
   const [archetypeExists, setArchetypeExists] = useState(false);
-  const hasArchetypes = archetypeLoadedClass === entry.className ? archetypeExists : null;
-  const characterDeity = useAppSelector((state) => state.characterEntry.draft.deity);
+  const hasArchetypes = archetypeLoadedClass === entry.name ? archetypeExists : null;
+  const characterDeity = useAppSelector((state) => state.characterEntry.character.info.deity);
+  const favoredClassBonuses = useAppSelector(
+    (state) => state.characterEntry.character.classes.favoredClassBonuses,
+  );
   const classDataMap = useAppSelector(selectClassDataMap);
-  const classData = lookupClassData(entry.className, classDataMap);
+  const classData = lookupClassData(entry.name, classDataMap);
   const isBaseClass = (classData?.maxLevel ?? 20) === 20;
 
+  const fcbHp =
+    favoredClassBonuses.find((b) => b.className === entry.name && b.bonusType === 'hp')?.value ?? 0;
+  const fcbSkill =
+    favoredClassBonuses.find((b) => b.className === entry.name && b.bonusType === 'skillRank')
+      ?.value ?? 0;
+
   useEffect(() => {
-    GameDataService.getClassChoiceDefinitions(entry.className)
+    GameDataService.getClassChoiceDefinitions(entry.name)
       .then(setDefinitions)
       .catch((e) => console.error('Failed to load class choice definitions:', e));
     let cancelled = false;
-    GameDataService.getArchetypesByClass(entry.className)
+    GameDataService.getArchetypesByClass(entry.name)
       .then((archetypes) => {
         if (!cancelled) {
           setArchetypeExists(archetypes.length > 0);
-          setArchetypeLoadedClass(entry.className);
+          setArchetypeLoadedClass(entry.name);
         }
       })
       .catch(() => {
         if (!cancelled) {
           setArchetypeExists(false);
-          setArchetypeLoadedClass(entry.className);
+          setArchetypeLoadedClass(entry.name);
         }
       });
     return () => {
       cancelled = true;
     };
-  }, [entry.className]);
+  }, [entry.name]);
 
   const allSlots = definitions.flatMap((def) => deriveChoiceSlots(def, entry.level));
   const hasChoices = allSlots.length > 0;
@@ -970,7 +977,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   // Whether and how this class advances spellcasting is a class-data fact,
   // not a user choice. If the data says it advances, we auto-ensure a
   // matching spellcastingAdvancement exists on the draft entry.
-  const advancesSpec = classDataMap.get(entry.className.toLowerCase())?.advancesSpellcasting;
+  const advancesSpec = classDataMap.get(entry.name.toLowerCase())?.advancesSpellcasting;
   useEffect(() => {
     if (!advancesSpec) return;
     const current = entry.spellcastingAdvancement;
@@ -980,7 +987,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
     // Mode mismatch or length mismatch — reinitialize.
     dispatch(
       updateClassSpellcastingAdvancement({
-        id: entry.id,
+        id: entry.id ?? entry.name,
         advancement: makeEmptyAdvancement(advancesSpec.mode, entry.level),
       }),
     );
@@ -999,14 +1006,14 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
       {/* Header row */}
       <View style={styles.header}>
         <Text style={[styles.className, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
-          {entry.className}
+          {entry.name}
         </Text>
-        <SourceBadge source={entry.sourceSystem} />
+        <SourceBadge source={entry.sourceSystem ?? 'pf1e'} />
         <Pressable
-          onPress={() => dispatch(removeClass(entry.id))}
+          onPress={() => dispatch(removeClass(entry.id ?? entry.name))}
           hitSlop={8}
           accessibilityRole="button"
-          accessibilityLabel={`Remove ${entry.className}`}
+          accessibilityLabel={`Remove ${entry.name}`}
           style={styles.removeButton}
         >
           <Text style={[styles.removeIcon, { color: colors.text.tertiary }]}>✕</Text>
@@ -1020,7 +1027,8 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           value={String(entry.level)}
           onChangeText={(t) => {
             const n = parseInt(t, 10);
-            if (!isNaN(n) && n >= 1) dispatch(updateClassLevel({ id: entry.id, level: n }));
+            if (!isNaN(n) && n >= 1)
+              dispatch(updateClassLevel({ id: entry.id ?? entry.name, level: n }));
           }}
           keyboardType="number-pad"
           selectTextOnFocus
@@ -1057,10 +1065,12 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
 
       <ArchetypePickerSheet
         visible={archetypePickerOpen}
-        title={`${entry.className} — Choose Archetype`}
-        className={entry.className}
+        title={`${entry.name} — Choose Archetype`}
+        className={entry.name}
         onSelect={({ archetypeId, archetypeName }) => {
-          dispatch(updateClassArchetype({ id: entry.id, archetypeId, archetypeName }));
+          dispatch(
+            updateClassArchetype({ id: entry.id ?? entry.name, archetypeId, archetypeName }),
+          );
           setArchetypePickerOpen(false);
         }}
         onClose={() => setArchetypePickerOpen(false)}
@@ -1073,7 +1083,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
       {/* Favored class — only base classes (maxLevel 20) can be favored */}
       {isBaseClass && (
         <Pressable
-          onPress={() => dispatch(toggleFavoredClass(entry.id))}
+          onPress={() => dispatch(toggleFavoredClass(entry.id ?? entry.name))}
           style={[
             styles.row,
             { borderTopColor: colors.border.DEFAULT, borderTopWidth: StyleSheet.hairlineWidth },
@@ -1128,24 +1138,22 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           {choicesExpanded && (
             <View style={styles.choicesList}>
               {allSlots.map((slot) => {
-                const existingChoices = entry.classChoices.filter(
+                const choices = entry.classChoices ?? [];
+                const existingChoices = choices.filter(
                   (c) => c.featureName === slot.definition.featureName,
                 );
                 const currentChoice = existingChoices[slot.choiceIndex];
                 return (
                   <ClassChoiceRow
                     key={`${slot.definition.id}-${slot.choiceIndex}`}
-                    classId={entry.id}
+                    classId={entry.id ?? entry.name}
                     definition={slot.definition}
                     choiceIndex={slot.choiceIndex}
                     currentChoice={currentChoice}
                     takenAtLevel={slot.takenAtLevel}
                     featureLabel={slot.featureLabel}
-                    siblingChoices={entry.classChoices}
-                    disabled={isMutuallyExcludedFilled(
-                      slot.definition.featureName,
-                      entry.classChoices,
-                    )}
+                    siblingChoices={choices}
+                    disabled={isMutuallyExcludedFilled(slot.definition.featureName, choices)}
                     characterDeity={characterDeity}
                   />
                 );
@@ -1160,7 +1168,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
       {/* Prereq status */}
       <View style={[styles.prereqRow, { borderTopColor: colors.border.DEFAULT }]}>
         <Pressable
-          onPress={() => dispatch(toggleClassPrereqOverride(entry.id))}
+          onPress={() => dispatch(toggleClassPrereqOverride(entry.id ?? entry.name))}
           style={styles.prereqOverride}
           accessibilityRole="checkbox"
           accessibilityState={{ checked: entry.prereqOverride }}

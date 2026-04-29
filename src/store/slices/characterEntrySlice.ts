@@ -1,10 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { enableMapSet } from 'immer';
-import { Alignment } from '@/types/base';
-
-// equippedSlots was changed from Map<ItemSlot,string> to Partial<Record<ItemSlot,string>>
-// on main. enableMapSet is kept for any other Map/Set state that may be added later.
-enableMapSet();
+import { Alignment, BonusType } from '@/types/base';
 import { ClassChoice } from '@/types/classes';
 import type {
   CompanionInstance,
@@ -16,23 +11,15 @@ import type {
 import type { AppliedTemplate } from '@/types/templates';
 import type { CharacterMagicItem, ItemSlot } from '@/types/magicItems';
 import { computeFeatSlots } from '@/utils/characterComputations';
-import {
-  type AbilityKey,
-  type CharacterDraft,
-  type DraftAbilityScore,
-  type DraftTypedBonus,
-  type DraftClassEntry,
-  type DraftTemplateEntry,
-  type DraftFeatSlot,
-  type DraftSkillEntry,
-  type DraftTrait,
-  type DraftSpellcastingPool,
-  type DraftEquipmentItem,
-  type DraftEquippedSlot,
-  type LevelIncrementSlot,
-  type DraftCombatStats,
-  type FavoredClassBonusSelection,
-} from '@/types/characterDraft';
+import type { AbilityKey } from '@/types/abilities';
+import type { Character } from '@/types';
+import type { LevelIncrementSlot } from '@/types/character';
+import type { CharacterFeat, Feats } from '@/types/feats';
+import type { ClassEntry, CharacterClasses } from '@/types/classes';
+import type { CharacterTrait } from '@/types/traits';
+import type { SpellcastingAdvancement, SpellcastingPool } from '@/types/spells';
+import type { EditorEquipmentItem, EditorEquippedSlot } from '@/types/character';
+import { type FavoredClassBonusSelection } from '@/types/characterDraft';
 import type {
   DraftEidolon,
   EidolonEdition,
@@ -40,6 +27,7 @@ import type {
   EidolonSubtype,
   SelectedEvolutionMetadata,
 } from '@/types/eidolon';
+import { CharacterService } from '@/services/CharacterService';
 
 // ---- Supporting types ----
 
@@ -67,106 +55,55 @@ export interface EntryValidationWarning {
   isAcknowledged: boolean;
 }
 
-// ---- Initial state helpers ----
+// ---- Feat slot helpers ----
 
-const blankAbilityScore: DraftAbilityScore = {
-  base: 10,
-  racial: 0,
-  inherent: 0,
-  enhancement: 0,
-  other: [],
-  levelIncrements: 0,
-};
-
-function blankAbilities() {
-  return {
-    str: { ...blankAbilityScore },
-    dex: { ...blankAbilityScore },
-    con: { ...blankAbilityScore },
-    int: { ...blankAbilityScore },
-    wis: { ...blankAbilityScore },
-    cha: { ...blankAbilityScore },
-  };
+// Canonical source string format matching DraftFeatSlot.source values
+function makeFeatSource(source: 'racial' | 'level' | 'bonus' | 'mythic', level: number): string {
+  return `${source}_${level}`;
 }
 
-const blankCombat: DraftCombatStats = {
-  currentHP: 0,
-  nonlethalDamage: 0,
-  tempHP: 0,
-  acMiscBonus: 0,
-  saveFortMisc: 0,
-  saveRefMisc: 0,
-  saveWillMisc: 0,
-  meleeAttackMisc: 0,
-  rangedAttackMisc: 0,
-  cmbMisc: 0,
-  speedLand: 30,
-};
+function syncFeatSlotsFromClasses(character: Character): void {
+  const raceName = character.info.race?.name ?? '';
+  // Build class-entry-like objects for computeFeatSlots (it accepts DraftClassEntry-like shapes)
+  const classInputs = character.classes.classes.map((c) => ({
+    id: c.id ?? c.name,
+    className: c.name,
+    level: c.level,
+    sourceSystem: (c.sourceSystem ?? 'pf1e') as 'pf1e' | '3.5e' | 'homebrew' | 'campaign',
+    classChoices: c.classChoices ?? [],
+    prereqOverride: c.prereqOverride ?? false,
+  }));
 
-export const BLANK_DRAFT: CharacterDraft = {
-  name: '',
-  player: '',
-  raceId: '',
-  raceName: '',
-  alignment: Alignment.TrueNeutral,
-  deity: '',
-  gender: '',
-  age: '',
-  height: '',
-  weight: '',
-  hair: '',
-  eyes: '',
-  skin: '',
-  background: '',
-  abilities: blankAbilities(),
-  racialFlexBonus: false,
-  racialFlexAbility: undefined,
-  levelIncrementSlots: [],
-  classes: [],
-  templates: [],
-  combat: blankCombat,
-  skills: {},
-  traits: [],
-  featSlots: [],
-  spellcastingPools: [],
-  equipment: [],
-  companions: [],
-  eidolons: [],
-  characterNotes: '',
-  campaignNotes: '',
-};
-
-// ---- Feat slot sync helper ----
-
-function syncFeatSlotsFromClasses(draft: CharacterDraft): void {
-  const generated = computeFeatSlots(draft.classes, draft.raceName);
-  for (const slot of generated) {
-    if (draft.featSlots.find((s) => s.id === slot.id)) continue;
-    // Migrate a legacy slot at the same level+source to the stable ID (preserves feat assignment)
-    const legacy = draft.featSlots.find(
-      (s) => s.availableAtLevel === slot.availableAtLevel && s.source === slot.source,
-    );
-    if (legacy) {
-      legacy.id = slot.id;
-    } else {
-      draft.featSlots.push(slot);
-    }
-  }
-  const SOURCE_ORDER: Record<string, number> = { racial: 0, level: 1, bonus: 2, mythic: 3 };
-  draft.featSlots.sort(
-    (a, b) =>
-      a.availableAtLevel - b.availableAtLevel ||
-      (SOURCE_ORDER[a.source] ?? 9) - (SOURCE_ORDER[b.source] ?? 9) ||
-      a.id.localeCompare(b.id),
+  const generated = computeFeatSlots(
+    classInputs as Parameters<typeof computeFeatSlots>[0],
+    raceName,
   );
+
+  // Build set of (source, level) pairs already in character feats
+  const existingKeys = new Set(character.feats.feats.map((f) => `${f.source}_${f.grantedAtLevel}`));
+
+  for (const slot of generated) {
+    const key = `${slot.source}_${slot.availableAtLevel}`;
+    if (existingKeys.has(key)) continue;
+    // Add an "empty" feat entry as a placeholder slot marker
+    // We only add truly new slots (not already in feats.feats)
+  }
+  // Slots are computed on read — we just need to ensure assigned feats stay in sync.
+  // Remove feat entries whose slots no longer exist
+  const validKeys = new Set(generated.map((s) => `${s.source}_${s.availableAtLevel}`));
+  character.feats.feats = character.feats.feats.filter((f) => {
+    if (!f.featId) return false; // Remove empty placeholders
+    const key = `${f.source}_${f.grantedAtLevel}`;
+    return validKeys.has(key) || f.source === 'bonus'; // Keep bonus feats regardless
+  });
 }
 
 const ABILITY_KEYS: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
 
-function syncEnhancementBonuses(state: { draft: CharacterDraft }): void {
-  for (const key of ABILITY_KEYS) state.draft.abilities[key].enhancement = 0;
+function syncEnhancementBonuses(character: Character): void {
+  for (const key of ABILITY_KEYS) character.abilityScores[key].bonuses.enhancement = [];
   const accumulated: Partial<Record<AbilityKey, number[]>> = {};
-  for (const item of state.draft.equipment) {
+  for (const item of character.editorEquipment ?? []) {
     if (item.slot && item.abilityScoreBonuses) {
       for (const [ab, val] of Object.entries(item.abilityScoreBonuses)) {
         (accumulated[ab as AbilityKey] ??= []).push(val as number);
@@ -174,27 +111,34 @@ function syncEnhancementBonuses(state: { draft: CharacterDraft }): void {
     }
   }
   for (const [ab, vals] of Object.entries(accumulated)) {
-    state.draft.abilities[ab as AbilityKey].enhancement = Math.max(...(vals as number[]));
+    const maxVal = Math.max(...(vals as number[]));
+    character.abilityScores[ab as AbilityKey].bonuses.enhancement = [
+      { value: maxVal, source: 'equipment', type: BonusType.ENHANCEMENT },
+    ];
   }
 }
 
 // ---- Slice state ----
 
 interface CharacterEntryState {
-  draft: CharacterDraft;
+  character: Character;
   mode: EntryMode;
   activeTab: EntryTabKey;
   isDirty: boolean;
-  originalCharacterId: string | null; // null for new characters
-  lastValidatedAt: number | null; // epoch ms of last Validate press
+  isSaving: boolean;
+  saveError: string | null;
+  originalCharacterId: string | null;
+  lastValidatedAt: number | null;
   validationWarnings: EntryValidationWarning[];
 }
 
 const initialState: CharacterEntryState = {
-  draft: BLANK_DRAFT,
+  character: CharacterService.createBlankCharacter(),
   mode: 'new',
   activeTab: 'identity',
   isDirty: false,
+  isSaving: false,
+  saveError: null,
   originalCharacterId: null,
   lastValidatedAt: null,
   validationWarnings: [],
@@ -216,24 +160,6 @@ function promoteLegacyFCB(legacy: unknown, classLevel: number): FavoredClassBonu
   return out.slice(0, classLevel);
 }
 
-function migrateDraft(draft: CharacterDraft): CharacterDraft {
-  const classes = draft.classes.map((cls) => {
-    if (cls.isFavoredClass) {
-      return {
-        ...cls,
-        favoredClassBonuses:
-          cls.favoredClassBonuses !== undefined
-            ? promoteLegacyFCB(cls.favoredClassBonuses, cls.level)
-            : [],
-      };
-    }
-    // Not the favored class — clear any stale FCB data that may have been left behind
-    // by a toggle-off that predates this fix.
-    return { ...cls, favoredClassBonuses: undefined };
-  });
-  return { ...draft, classes };
-}
-
 // ---- Slice ----
 
 const characterEntrySlice = createSlice({
@@ -244,22 +170,26 @@ const characterEntrySlice = createSlice({
 
     loadCharacter(
       state,
-      action: PayloadAction<{ draft: CharacterDraft; mode: EntryMode; characterId?: string }>,
+      action: PayloadAction<{ character: Character; mode: EntryMode; characterId?: string }>,
     ) {
-      state.draft = migrateDraft(action.payload.draft);
+      state.character = action.payload.character;
       state.mode = action.payload.mode;
       state.originalCharacterId = action.payload.characterId ?? null;
       state.activeTab = 'identity';
       state.isDirty = false;
+      state.isSaving = false;
+      state.saveError = null;
       state.lastValidatedAt = null;
       state.validationWarnings = [];
     },
 
     resetDraft(state) {
-      state.draft = BLANK_DRAFT;
+      state.character = CharacterService.createBlankCharacter();
       state.mode = 'new';
       state.activeTab = 'identity';
       state.isDirty = false;
+      state.isSaving = false;
+      state.saveError = null;
       state.originalCharacterId = null;
       state.lastValidatedAt = null;
       state.validationWarnings = [];
@@ -271,6 +201,19 @@ const characterEntrySlice = createSlice({
 
     markDirty(state) {
       state.isDirty = true;
+    },
+
+    setSaving(state, action: PayloadAction<boolean>) {
+      state.isSaving = action.payload;
+    },
+
+    setSaveError(state, action: PayloadAction<string | null>) {
+      state.saveError = action.payload;
+    },
+
+    // Applied by the recalculate middleware — do NOT trigger another recalc
+    applyComputedStats(state, action: PayloadAction<Character>) {
+      state.character = action.payload;
     },
 
     // ---- Validation ----
@@ -295,12 +238,12 @@ const characterEntrySlice = createSlice({
     // ---- Identity ----
 
     setName(state, action: PayloadAction<string>) {
-      state.draft.name = action.payload;
+      state.character.info.name = action.payload;
       state.isDirty = true;
     },
 
     setPlayer(state, action: PayloadAction<string>) {
-      state.draft.player = action.payload;
+      state.character.info.player = action.payload;
       state.isDirty = true;
     },
 
@@ -313,126 +256,118 @@ const characterEntrySlice = createSlice({
         hasFlexBonus?: boolean;
       }>,
     ) {
-      state.draft.raceId = action.payload.raceId;
-      state.draft.raceName = action.payload.raceName;
-      state.draft.racialFlexBonus = action.payload.hasFlexBonus ?? false;
+      // Update race info on CharacterInfo
+      state.character.info.race = {
+        ...state.character.info.race,
+        name: action.payload.raceName,
+        abilityModifiers: action.payload.racialBonuses as Record<string, number>,
+      };
+      state.character.info.racialFlexBonus = action.payload.hasFlexBonus ?? false;
       if (!action.payload.hasFlexBonus) {
-        state.draft.racialFlexAbility = undefined;
+        state.character.info.racialFlexAbility = undefined;
       }
       // Apply racial bonuses to ability scores (clear old ones first)
       const keys: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
       keys.forEach((k) => {
-        state.draft.abilities[k].racial = action.payload.racialBonuses[k] ?? 0;
+        state.character.abilityScores[k].racial = action.payload.racialBonuses[k] ?? 0;
       });
-      syncFeatSlotsFromClasses(state.draft);
+      syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
 
     setRacialFlexAbility(state, action: PayloadAction<AbilityKey>) {
-      const prev = state.draft.racialFlexAbility;
+      const prev = state.character.info.racialFlexAbility;
       const next = action.payload;
       if (prev && prev !== next) {
-        state.draft.abilities[prev].racial = 0;
+        state.character.abilityScores[prev].racial = 0;
       }
-      state.draft.abilities[next].racial = 2;
-      state.draft.racialFlexAbility = next;
+      state.character.abilityScores[next].racial = 2;
+      state.character.info.racialFlexAbility = next;
       state.isDirty = true;
     },
 
     setAlignment(state, action: PayloadAction<Alignment>) {
-      state.draft.alignment = action.payload;
+      state.character.info.alignment = action.payload;
       state.isDirty = true;
     },
 
     setDeity(state, action: PayloadAction<string>) {
-      const previousDeity = state.draft.deity;
-      state.draft.deity = action.payload;
-      // Clear stale domain selections when deity changes — domains valid for
-      // the previous deity may not be valid for the new one.
+      const previousDeity = state.character.info.deity;
+      state.character.info.deity = action.payload;
+      // Clear stale domain selections when deity changes
       if (previousDeity !== action.payload) {
-        for (const cls of state.draft.classes) {
-          cls.classChoices = cls.classChoices.filter((c) => c.featureName !== 'Domain');
+        for (const cls of state.character.classes.classes) {
+          if (cls.classChoices) {
+            cls.classChoices = cls.classChoices.filter((c) => c.featureName !== 'Domain');
+          }
         }
       }
       state.isDirty = true;
     },
 
     setGender(state, action: PayloadAction<string>) {
-      state.draft.gender = action.payload;
+      state.character.info.gender = action.payload;
       state.isDirty = true;
     },
 
     setAge(state, action: PayloadAction<string>) {
-      state.draft.age = action.payload;
+      state.character.info.age = parseInt(action.payload, 10) || 0;
       state.isDirty = true;
     },
 
     setHeight(state, action: PayloadAction<string>) {
-      state.draft.height = action.payload;
+      state.character.info.height = action.payload;
       state.isDirty = true;
     },
 
     setWeight(state, action: PayloadAction<string>) {
-      state.draft.weight = action.payload;
+      state.character.info.weight = action.payload;
       state.isDirty = true;
     },
 
     setHair(state, action: PayloadAction<string>) {
-      state.draft.hair = action.payload;
+      state.character.info.hair = action.payload;
       state.isDirty = true;
     },
 
     setEyes(state, action: PayloadAction<string>) {
-      state.draft.eyes = action.payload;
+      state.character.info.eyes = action.payload;
       state.isDirty = true;
     },
 
     setSkin(state, action: PayloadAction<string>) {
-      state.draft.skin = action.payload;
+      state.character.info.skin = action.payload;
       state.isDirty = true;
     },
 
     setBackground(state, action: PayloadAction<string>) {
-      state.draft.background = action.payload;
+      state.character.info.background = action.payload;
       state.isDirty = true;
     },
 
     setPortrait(state, action: PayloadAction<string>) {
-      state.draft.portrait = action.payload;
+      state.character.info.portrait = action.payload;
       state.isDirty = true;
     },
 
     // ---- Abilities ----
 
-    setAbilityField(
-      state,
-      action: PayloadAction<{
-        ability: AbilityKey;
-        field: Exclude<keyof DraftAbilityScore, 'other'>;
-        value: number;
-      }>,
-    ) {
-      (state.draft.abilities[action.payload.ability][action.payload.field] as number) =
-        action.payload.value;
+    setAbilityBase(state, action: PayloadAction<{ ability: AbilityKey; value: number }>) {
+      state.character.abilityScores[action.payload.ability].base = action.payload.value;
       state.isDirty = true;
     },
 
-    addOtherBonus(state, action: PayloadAction<{ ability: AbilityKey; bonus: DraftTypedBonus }>) {
-      state.draft.abilities[action.payload.ability].other.push(action.payload.bonus);
+    setAbilityInherent(state, action: PayloadAction<{ ability: AbilityKey; value: number }>) {
+      state.character.abilityScores[action.payload.ability].inherent = action.payload.value;
       state.isDirty = true;
     },
 
-    removeOtherBonus(state, action: PayloadAction<{ ability: AbilityKey; index: number }>) {
-      state.draft.abilities[action.payload.ability].other.splice(action.payload.index, 1);
-      state.isDirty = true;
-    },
-
-    updateOtherBonus(
-      state,
-      action: PayloadAction<{ ability: AbilityKey; index: number; bonus: DraftTypedBonus }>,
-    ) {
-      state.draft.abilities[action.payload.ability].other[action.payload.index] =
-        action.payload.bonus;
+    setAbilityOther(state, action: PayloadAction<{ ability: AbilityKey; value: number }>) {
+      // Store "other" misc bonus in the untyped bucket
+      const score = state.character.abilityScores[action.payload.ability];
+      score.bonuses.untyped = [
+        { value: action.payload.value, source: 'misc', type: BonusType.UNTYPED },
+      ];
       state.isDirty = true;
     },
 
@@ -440,41 +375,48 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ atHD: number; ability: AbilityKey | null }>,
     ) {
-      const slot = state.draft.levelIncrementSlots.find((s) => s.atHD === action.payload.atHD);
+      const slot = state.character.levelIncrementSlots.find((s) => s.atHD === action.payload.atHD);
       if (slot) {
         slot.ability = action.payload.ability;
         // Recalculate levelIncrements counts on all abilities
         const keys: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
         keys.forEach((k) => {
-          state.draft.abilities[k].levelIncrements = state.draft.levelIncrementSlots.filter(
-            (s) => s.ability === k,
-          ).length;
+          state.character.abilityScores[k].levelIncrements =
+            state.character.levelIncrementSlots.filter((s) => s.ability === k).length;
         });
       }
       state.isDirty = true;
     },
 
     setLevelIncrementSlots(state, action: PayloadAction<LevelIncrementSlot[]>) {
-      state.draft.levelIncrementSlots = action.payload;
+      state.character.levelIncrementSlots = action.payload;
       state.isDirty = true;
     },
 
     // ---- Classes ----
 
-    addClass(state, action: PayloadAction<DraftClassEntry>) {
-      state.draft.classes.push(action.payload);
-      syncFeatSlotsFromClasses(state.draft);
+    addClass(state, action: PayloadAction<ClassEntry>) {
+      state.character.classes.classes.push(action.payload);
+      state.character.classes.totalLevel = state.character.classes.classes.reduce(
+        (sum, c) => sum + c.level,
+        0,
+      );
+      syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
 
     removeClass(state, action: PayloadAction<string>) {
       const removedId = action.payload;
-      state.draft.classes = state.draft.classes.filter((c) => c.id !== removedId);
+      state.character.classes.classes = state.character.classes.classes.filter(
+        (c) => (c.id ?? c.name) !== removedId,
+      );
+      state.character.classes.totalLevel = state.character.classes.classes.reduce(
+        (sum, c) => sum + c.level,
+        0,
+      );
 
-      // Cascade: clear advancement pointers that targeted the removed class,
-      // so the validator can surface them as "missing target" warnings instead
-      // of the pool silently ignoring them.
-      for (const entry of state.draft.classes) {
+      // Cascade: clear advancement pointers that targeted the removed class
+      for (const entry of state.character.classes.classes) {
         const adv = entry.spellcastingAdvancement;
         if (!adv) continue;
         if (adv.mode === 'single') {
@@ -491,27 +433,33 @@ const characterEntrySlice = createSlice({
         }
       }
 
-      // Remove the pool anchored to this class (if any).
-      state.draft.spellcastingPools = state.draft.spellcastingPools.filter(
+      // Remove the spellcasting pool anchored to this class (if any)
+      state.character.spellcasting.pools = state.character.spellcasting.pools.filter(
         (p) => p.baseClassEntryId !== removedId,
       );
 
       // Sweep companions granted by this class.
-      state.draft.companions = state.draft.companions.filter(
+      state.character.companions = (state.character.companions ?? []).filter(
         (c) => !(c.grantedBy.type === 'class' && c.grantedBy.classEntryId === removedId),
       );
 
-      syncFeatSlotsFromClasses(state.draft);
+      syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
 
     updateClassLevel(state, action: PayloadAction<{ id: string; level: number }>) {
-      const cls = state.draft.classes.find((c) => c.id === action.payload.id);
+      const cls = state.character.classes.classes.find(
+        (c) => (c.id ?? c.name) === action.payload.id,
+      );
       if (!cls) return;
 
       const oldLevel = cls.level;
       const newLevel = action.payload.level;
       cls.level = newLevel;
+      state.character.classes.totalLevel = state.character.classes.classes.reduce(
+        (sum, c) => sum + c.level,
+        0,
+      );
 
       // Prune favored class bonus selections that are now beyond the new level.
       if (cls.favoredClassBonuses && newLevel < oldLevel) {
@@ -547,7 +495,7 @@ const characterEntrySlice = createSlice({
         }
       }
 
-      syncFeatSlotsFromClasses(state.draft);
+      syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
 
@@ -555,7 +503,9 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ id: string; archetypeId?: string; archetypeName?: string }>,
     ) {
-      const cls = state.draft.classes.find((c) => c.id === action.payload.id);
+      const cls = state.character.classes.classes.find(
+        (c) => (c.id ?? c.name) === action.payload.id,
+      );
       if (cls) {
         cls.archetypeId = action.payload.archetypeId;
         cls.archetypeName = action.payload.archetypeName;
@@ -567,10 +517,12 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{
         id: string;
-        advancement: DraftClassEntry['spellcastingAdvancement'];
+        advancement: ClassEntry['spellcastingAdvancement'];
       }>,
     ) {
-      const cls = state.draft.classes.find((c) => c.id === action.payload.id);
+      const cls = state.character.classes.classes.find(
+        (c) => (c.id ?? c.name) === action.payload.id,
+      );
       if (cls) {
         cls.spellcastingAdvancement = action.payload.advancement;
         state.isDirty = true;
@@ -581,12 +533,12 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ classId: string; choiceIndex: number; choice: ClassChoice }>,
     ) {
-      const cls = state.draft.classes.find((c) => c.id === action.payload.classId);
+      const cls = state.character.classes.classes.find(
+        (c) => (c.id ?? c.name) === action.payload.classId,
+      );
       if (cls) {
+        if (!cls.classChoices) cls.classChoices = [];
         const { choiceIndex, choice } = action.payload;
-        // Find the choiceIndex-th existing entry for this feature name.
-        // This correctly handles features with multiple slots at the same level
-        // (e.g. two Domain choices for Cleric, both at takenAtLevel 1).
         const sameFeatureIndices = cls.classChoices
           .map((ch, i) => ({ ch, i }))
           .filter(({ ch }) => ch.featureName === choice.featureName)
@@ -601,7 +553,7 @@ const characterEntrySlice = createSlice({
     },
 
     toggleClassPrereqOverride(state, action: PayloadAction<string>) {
-      const cls = state.draft.classes.find((c) => c.id === action.payload);
+      const cls = state.character.classes.classes.find((c) => (c.id ?? c.name) === action.payload);
       if (cls) {
         cls.prereqOverride = !cls.prereqOverride;
         state.isDirty = true;
@@ -927,25 +879,24 @@ const characterEntrySlice = createSlice({
     },
 
     toggleFavoredClass(state, action: PayloadAction<string>) {
-      const target = state.draft.classes.find((c) => c.id === action.payload);
+      const target = state.character.classes.classes.find(
+        (c) => (c.id ?? c.name) === action.payload,
+      );
       if (!target) return;
       const wasAlreadyFavored = target.isFavoredClass;
       // Clear favored (and stale FCB data) on all classes first
-      for (const cls of state.draft.classes) {
+      for (const cls of state.character.classes.classes) {
         if (cls.isFavoredClass) {
           cls.isFavoredClass = false;
           cls.favoredClassBonuses = undefined;
         }
       }
-      // Toggle: if it wasn't favored, mark it favored; if it was, leave all unfavored
       if (!wasAlreadyFavored) {
         target.isFavoredClass = true;
         if (!target.favoredClassBonuses) {
           target.favoredClassBonuses = [];
         }
       } else {
-        // Toggling OFF — clear stale bonus data so migrateDraft never sees
-        // FCB data on a non-favored class.
         target.favoredClassBonuses = undefined;
       }
       state.isDirty = true;
@@ -955,7 +906,9 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ id: string; selections: FavoredClassBonusSelection[] }>,
     ) {
-      const cls = state.draft.classes.find((c) => c.id === action.payload.id);
+      const cls = state.character.classes.classes.find(
+        (c) => (c.id ?? c.name) === action.payload.id,
+      );
       if (cls) {
         cls.favoredClassBonuses = action.payload.selections.filter((s) => s.level <= cls.level);
         state.isDirty = true;
@@ -963,47 +916,72 @@ const characterEntrySlice = createSlice({
     },
 
     reorderClasses(state, action: PayloadAction<string[]>) {
-      // action.payload is ordered array of class ids
-      const map = new Map(state.draft.classes.map((c) => [c.id, c]));
-      state.draft.classes = action.payload
+      const map = new Map(state.character.classes.classes.map((c) => [c.id ?? c.name, c]));
+      state.character.classes.classes = action.payload
         .map((id) => map.get(id))
-        .filter(Boolean) as typeof state.draft.classes;
+        .filter(Boolean) as ClassEntry[];
       state.isDirty = true;
     },
 
     // ---- Templates ----
 
-    addTemplate(state, action: PayloadAction<DraftTemplateEntry>) {
-      state.draft.templates.push(action.payload);
+    addTemplate(state, action: PayloadAction<AppliedTemplate>) {
+      if (action.payload.isFreeGrant) {
+        state.character.grantedBonuses.push({
+          id: action.payload.id ?? '',
+          name: action.payload.name,
+          description: action.payload.freeGrantNote ?? '',
+          grantedBy: action.payload.grantedBy ?? '',
+        });
+      } else {
+        state.character.appliedTemplates.push(action.payload);
+      }
       state.isDirty = true;
     },
 
     removeTemplate(state, action: PayloadAction<string>) {
       const removedId = action.payload;
-      state.draft.templates = state.draft.templates.filter((t) => t.id !== removedId);
+      state.character.appliedTemplates = state.character.appliedTemplates.filter(
+        (t) => t.id !== removedId,
+      );
+      state.character.grantedBonuses = state.character.grantedBonuses.filter(
+        (t) => t.id !== removedId,
+      );
 
       // Sweep companions granted by this template.
-      state.draft.companions = state.draft.companions.filter(
+      state.character.companions = (state.character.companions ?? []).filter(
         (c) => !(c.grantedBy.type === 'template' && c.grantedBy.templateId === removedId),
       );
 
       state.isDirty = true;
     },
 
-    updateTemplate(state, action: PayloadAction<DraftTemplateEntry>) {
-      const idx = state.draft.templates.findIndex((t) => t.id === action.payload.id);
-      if (idx >= 0) {
-        state.draft.templates[idx] = action.payload;
-        state.isDirty = true;
+    updateTemplate(state, action: PayloadAction<AppliedTemplate>) {
+      if (action.payload.isFreeGrant) {
+        const idx = state.character.grantedBonuses.findIndex((t) => t.id === action.payload.id);
+        if (idx >= 0) {
+          state.character.grantedBonuses[idx] = {
+            id: action.payload.id ?? '',
+            name: action.payload.name,
+            description: action.payload.freeGrantNote ?? '',
+            grantedBy: action.payload.grantedBy ?? '',
+          };
+          state.isDirty = true;
+        }
+      } else {
+        const idx = state.character.appliedTemplates.findIndex((t) => t.id === action.payload.id);
+        if (idx >= 0) {
+          state.character.appliedTemplates[idx] = action.payload;
+          state.isDirty = true;
+        }
       }
     },
 
     reorderTemplates(state, action: PayloadAction<string[]>) {
-      // action.payload is ordered array of template ids
-      const map = new Map(state.draft.templates.map((t) => [t.id, t]));
-      state.draft.templates = action.payload
+      const map = new Map(state.character.appliedTemplates.map((t) => [t.id ?? t.name, t]));
+      state.character.appliedTemplates = action.payload
         .map((id) => map.get(id))
-        .filter(Boolean) as typeof state.draft.templates;
+        .filter(Boolean) as AppliedTemplate[];
       state.isDirty = true;
     },
 
@@ -1011,9 +989,9 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ id: string; acquiredAtECL: number | undefined }>,
     ) {
-      const t = state.draft.templates.find((t) => t.id === action.payload.id);
+      const t = state.character.appliedTemplates.find((t) => t.id === action.payload.id);
       if (t) {
-        t.acquiredAtECL = action.payload.acquiredAtECL;
+        t.acquiredAtCharacterLevel = action.payload.acquiredAtECL;
         state.isDirty = true;
       }
     },
@@ -1022,105 +1000,232 @@ const characterEntrySlice = createSlice({
 
     setCombatField(
       state,
-      action: PayloadAction<{ field: keyof DraftCombatStats; value: number | undefined }>,
+      action: PayloadAction<{
+        field:
+          | 'currentHP'
+          | 'nonlethalDamage'
+          | 'tempHP'
+          | 'maxHPOverride'
+          | 'acMiscBonus'
+          | 'saveFortMisc'
+          | 'saveRefMisc'
+          | 'saveWillMisc'
+          | 'meleeAttackMisc'
+          | 'rangedAttackMisc'
+          | 'cmbMisc'
+          | 'speedLand'
+          | 'speedFly'
+          | 'speedSwim'
+          | 'speedClimb';
+        value: number | undefined;
+      }>,
     ) {
-      (state.draft.combat as Record<string, number | undefined>)[action.payload.field] =
-        action.payload.value;
+      const cs = state.character.combatStats;
+      const { field, value } = action.payload;
+      switch (field) {
+        case 'currentHP':
+          cs.hitPoints.current = value ?? 0;
+          break;
+        case 'nonlethalDamage':
+          cs.hitPoints.nonlethal = value ?? 0;
+          break;
+        case 'tempHP':
+          cs.hitPoints.temporary = value ?? 0;
+          break;
+        case 'maxHPOverride':
+          cs.hitPoints.other = value ?? 0;
+          break;
+        case 'acMiscBonus':
+          cs.armorClass.misc = value ?? 0;
+          break;
+        case 'saveFortMisc':
+          cs.savingThrows.fortitude.misc = value ?? 0;
+          break;
+        case 'saveRefMisc':
+          cs.savingThrows.reflex.misc = value ?? 0;
+          break;
+        case 'saveWillMisc':
+          cs.savingThrows.will.misc = value ?? 0;
+          break;
+        case 'meleeAttackMisc':
+          cs.attackBonuses.miscMods.melee = [
+            { value: value ?? 0, source: 'misc', type: BonusType.UNTYPED },
+          ];
+          break;
+        case 'rangedAttackMisc':
+          cs.attackBonuses.miscMods.ranged = [
+            { value: value ?? 0, source: 'misc', type: BonusType.UNTYPED },
+          ];
+          break;
+        case 'cmbMisc':
+          cs.combatManeuver.bonus.miscMods = [
+            { value: value ?? 0, source: 'misc', type: BonusType.UNTYPED },
+          ];
+          break;
+        case 'speedLand':
+          cs.movement.base = value ?? 30;
+          cs.movement.current = value ?? 30;
+          break;
+        case 'speedFly':
+          cs.movement.fly = value ?? 0;
+          break;
+        case 'speedSwim':
+          cs.movement.swim = value ?? 0;
+          break;
+        case 'speedClimb':
+          cs.movement.climb = value ?? 0;
+          break;
+      }
       state.isDirty = true;
     },
 
     // ---- Skills ----
 
-    setSkillEntry(state, action: PayloadAction<{ skillKey: string; entry: DraftSkillEntry }>) {
-      state.draft.skills[action.payload.skillKey] = action.payload.entry;
+    setSkillEntry(
+      state,
+      action: PayloadAction<{ skillKey: string; entry: { ranks: number; misc: number } }>,
+    ) {
+      const skill = (state.character.skills as Record<string, { ranks: number; misc: number }>)[
+        action.payload.skillKey
+      ];
+      if (skill && typeof skill === 'object' && 'ranks' in skill) {
+        skill.ranks = action.payload.entry.ranks;
+        skill.misc = action.payload.entry.misc;
+      }
       state.isDirty = true;
     },
 
     removeSkillEntry(state, action: PayloadAction<string>) {
-      if (action.payload in state.draft.skills) {
-        delete state.draft.skills[action.payload];
+      const skill = (state.character.skills as Record<string, { ranks: number; misc: number }>)[
+        action.payload
+      ];
+      if (skill && typeof skill === 'object' && 'ranks' in skill) {
+        skill.ranks = 0;
+        skill.misc = 0;
         state.isDirty = true;
       }
     },
 
     // ---- Traits ----
 
-    addTrait(state, action: PayloadAction<DraftTrait>) {
-      state.draft.traits.push(action.payload);
+    addTrait(state, action: PayloadAction<CharacterTrait>) {
+      state.character.traits.traits.push(action.payload);
       state.isDirty = true;
     },
 
     removeTrait(state, action: PayloadAction<string>) {
-      state.draft.traits = state.draft.traits.filter((t) => t.id !== action.payload);
+      state.character.traits.traits = state.character.traits.traits.filter(
+        (t) => (t.id ?? t.traitId) !== action.payload,
+      );
       state.isDirty = true;
     },
 
     // ---- Feats ----
 
     syncFeatSlots(state) {
-      syncFeatSlotsFromClasses(state.draft);
+      syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
 
-    addFeatSlot(state, action: PayloadAction<DraftFeatSlot>) {
-      state.draft.featSlots.push(action.payload);
-      // Keep sorted by availableAtLevel
-      state.draft.featSlots.sort((a, b) => a.availableAtLevel - b.availableAtLevel);
+    addFeatSlot(
+      state,
+      action: PayloadAction<{
+        id: string;
+        source: 'racial' | 'level' | 'bonus' | 'mythic';
+        availableAtLevel: number;
+        availableAt: string;
+      }>,
+    ) {
+      // Bonus feat slots are stored as empty CharacterFeat entries (featId = '')
+      // so the slot displays in the UI as an empty assignable slot
+      const slot = action.payload;
+      state.character.feats.feats.push({
+        featId: '',
+        name: '',
+        source: makeFeatSource(slot.source, slot.availableAtLevel),
+        grantedAtLevel: slot.availableAtLevel,
+        active: true,
+        choices: {},
+      });
+      state.character.feats.feats.sort((a, b) => a.grantedAtLevel - b.grantedAtLevel);
       state.isDirty = true;
     },
 
     removeFeatSlot(state, action: PayloadAction<string>) {
-      state.draft.featSlots = state.draft.featSlots.filter((f) => f.id !== action.payload);
+      // action.payload is the slot id (= source_level key)
+      state.character.feats.feats = state.character.feats.feats.filter(
+        (f) =>
+          makeFeatSource(
+            f.source.split('_')[0] as 'racial' | 'level' | 'bonus' | 'mythic',
+            f.grantedAtLevel,
+          ) !== action.payload,
+      );
       state.isDirty = true;
     },
 
     assignFeat(state, action: PayloadAction<{ slotId: string; featId: string; featName: string }>) {
-      const slot = state.draft.featSlots.find((f) => f.id === action.payload.slotId);
-      if (slot) {
-        slot.featId = action.payload.featId;
-        slot.featName = action.payload.featName;
-        state.isDirty = true;
+      // slotId format: "{source}_{level}" e.g. "level_3"
+      const [sourceStr, levelStr] = action.payload.slotId.split('_');
+      const grantedAtLevel = parseInt(levelStr, 10);
+      const existing = state.character.feats.feats.find(
+        (f) => f.source === sourceStr + '_' + grantedAtLevel,
+      );
+      if (existing) {
+        existing.featId = action.payload.featId;
+        existing.name = action.payload.featName;
+      } else {
+        state.character.feats.feats.push({
+          featId: action.payload.featId,
+          name: action.payload.featName,
+          source: action.payload.slotId,
+          grantedAtLevel,
+          active: true,
+          choices: {},
+        });
       }
+      state.isDirty = true;
     },
 
     unassignFeat(state, action: PayloadAction<string>) {
-      const slot = state.draft.featSlots.find((f) => f.id === action.payload);
-      if (slot) {
-        slot.featId = undefined;
-        slot.featName = undefined;
-        state.isDirty = true;
+      // action.payload is slotId = "{source}_{level}"
+      const feat = state.character.feats.feats.find(
+        (f) => f.source + '_' + f.grantedAtLevel === action.payload || f.source === action.payload,
+      );
+      if (feat) {
+        feat.featId = '';
+        feat.name = '';
       }
+      state.isDirty = true;
     },
 
     toggleFeatPrereqOverride(state, action: PayloadAction<string>) {
-      const slot = state.draft.featSlots.find((f) => f.id === action.payload);
-      if (slot) {
-        slot.prereqOverride = !slot.prereqOverride;
+      const feat = state.character.feats.feats.find(
+        (f) => f.source === action.payload || f.source + '_' + f.grantedAtLevel === action.payload,
+      );
+      if (feat) {
+        feat.prereqOverride = !feat.prereqOverride;
         state.isDirty = true;
       }
     },
 
     // ---- Spellcasting ----
 
-    addSpellcastingPool(state, action: PayloadAction<DraftSpellcastingPool>) {
-      state.draft.spellcastingPools.push(action.payload);
+    addSpellcastingPool(state, action: PayloadAction<SpellcastingPool>) {
+      state.character.spellcasting.pools.push(action.payload);
       state.isDirty = true;
     },
 
     removeSpellcastingPool(state, action: PayloadAction<string>) {
-      state.draft.spellcastingPools = state.draft.spellcastingPools.filter(
+      state.character.spellcasting.pools = state.character.spellcasting.pools.filter(
         (p) => p.id !== action.payload,
       );
       state.isDirty = true;
     },
 
-    updatePoolCastingAbility(
-      state,
-      action: PayloadAction<{ poolId: string; ability: AbilityKey }>,
-    ) {
-      const pool = state.draft.spellcastingPools.find((p) => p.id === action.payload.poolId);
+    updatePoolCastingAbility(state, action: PayloadAction<{ poolId: string; ability: string }>) {
+      const pool = state.character.spellcasting.pools.find((p) => p.id === action.payload.poolId);
       if (pool) {
-        pool.castingAbility = action.payload.ability;
+        pool.spellAbility = action.payload.ability.toUpperCase() as typeof pool.spellAbility;
         state.isDirty = true;
       }
     },
@@ -1129,57 +1234,64 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ poolId: string; spellLevel: number; value: number }>,
     ) {
-      const pool = state.draft.spellcastingPools.find((p) => p.id === action.payload.poolId);
+      const pool = state.character.spellcasting.pools.find((p) => p.id === action.payload.poolId);
       if (pool) {
-        pool.spellsPerDayMisc[action.payload.spellLevel] = action.payload.value;
+        pool.spellsPerDay.misc[action.payload.spellLevel] = action.payload.value;
         state.isDirty = true;
       }
     },
 
     // ---- Equipment ----
 
-    addEquipment(state, action: PayloadAction<DraftEquipmentItem>) {
-      state.draft.equipment.push(action.payload);
-      syncEnhancementBonuses(state);
+    addEquipment(state, action: PayloadAction<EditorEquipmentItem>) {
+      if (!state.character.editorEquipment) state.character.editorEquipment = [];
+      state.character.editorEquipment.push(action.payload);
+      syncEnhancementBonuses(state.character);
       state.isDirty = true;
     },
 
     removeEquipment(state, action: PayloadAction<string>) {
-      state.draft.equipment = state.draft.equipment.filter((e) => e.id !== action.payload);
-      syncEnhancementBonuses(state);
-      state.isDirty = true;
-    },
-
-    updateEquipment(state, action: PayloadAction<DraftEquipmentItem>) {
-      const idx = state.draft.equipment.findIndex((e) => e.id === action.payload.id);
-      if (idx >= 0) {
-        state.draft.equipment[idx] = action.payload;
-        syncEnhancementBonuses(state);
+      if (state.character.editorEquipment) {
+        state.character.editorEquipment = state.character.editorEquipment.filter(
+          (e) => e.id !== action.payload,
+        );
+        syncEnhancementBonuses(state.character);
         state.isDirty = true;
       }
     },
 
-    assignEquipmentSlot(state, action: PayloadAction<{ id: string; slot: DraftEquippedSlot }>) {
-      const item = state.draft.equipment.find((e) => e.id === action.payload.id);
+    updateEquipment(state, action: PayloadAction<EditorEquipmentItem>) {
+      if (state.character.editorEquipment) {
+        const idx = state.character.editorEquipment.findIndex((e) => e.id === action.payload.id);
+        if (idx >= 0) {
+          state.character.editorEquipment[idx] = action.payload;
+          syncEnhancementBonuses(state.character);
+          state.isDirty = true;
+        }
+      }
+    },
+
+    assignEquipmentSlot(state, action: PayloadAction<{ id: string; slot: EditorEquippedSlot }>) {
+      const item = state.character.editorEquipment?.find((e) => e.id === action.payload.id);
       if (item) {
         item.slot = action.payload.slot;
         item.containerId = undefined;
-        syncEnhancementBonuses(state);
+        syncEnhancementBonuses(state.character);
         state.isDirty = true;
       }
     },
 
     unassignEquipmentSlot(state, action: PayloadAction<string>) {
-      const item = state.draft.equipment.find((e) => e.id === action.payload);
+      const item = state.character.editorEquipment?.find((e) => e.id === action.payload);
       if (item) {
         item.slot = undefined;
-        syncEnhancementBonuses(state);
+        syncEnhancementBonuses(state.character);
         state.isDirty = true;
       }
     },
 
     assignEquipmentContainer(state, action: PayloadAction<{ id: string; containerId: string }>) {
-      const item = state.draft.equipment.find((e) => e.id === action.payload.id);
+      const item = state.character.editorEquipment?.find((e) => e.id === action.payload.id);
       if (item) {
         item.containerId = action.payload.containerId;
         item.slot = undefined;
@@ -1431,13 +1543,20 @@ const characterEntrySlice = createSlice({
 
     // ---- Notes ----
 
+    setNotes(state, action: PayloadAction<string>) {
+      state.character.info.notes = action.payload;
+      state.isDirty = true;
+    },
+
+    // Legacy aliases — kept so existing callers compile unchanged
     setCharacterNotes(state, action: PayloadAction<string>) {
-      state.draft.characterNotes = action.payload;
+      state.character.info.notes = action.payload;
       state.isDirty = true;
     },
 
     setCampaignNotes(state, action: PayloadAction<string>) {
-      state.draft.campaignNotes = action.payload;
+      // Campaign notes fold into the single notes field
+      state.character.info.notes = action.payload;
       state.isDirty = true;
     },
   },
@@ -1448,6 +1567,9 @@ export const {
   resetDraft,
   setActiveTab,
   markDirty,
+  setSaving,
+  setSaveError,
+  applyComputedStats,
   setValidationWarnings,
   acknowledgeWarning,
   clearValidation,
@@ -1466,10 +1588,9 @@ export const {
   setSkin,
   setBackground,
   setPortrait,
-  setAbilityField,
-  addOtherBonus,
-  removeOtherBonus,
-  updateOtherBonus,
+  setAbilityBase,
+  setAbilityInherent,
+  setAbilityOther,
   setLevelIncrementAbility,
   setLevelIncrementSlots,
   addClass,
@@ -1542,6 +1663,7 @@ export const {
   setAspectDivert,
   addSummonerAspectEvolution,
   removeSummonerAspectEvolution,
+  setNotes,
   setCharacterNotes,
   setCampaignNotes,
 } = characterEntrySlice.actions;

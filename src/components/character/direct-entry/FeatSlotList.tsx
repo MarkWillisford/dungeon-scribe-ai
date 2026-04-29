@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -11,10 +11,24 @@ import {
   syncFeatSlots,
 } from '@/store/slices/characterEntrySlice';
 import { FeatPickerSheet } from './FeatPickerSheet';
-import { type DraftFeatSlot, type FeatSlotSource } from '@/types/characterDraft';
+import { computeFeatSlots } from '@/utils/characterComputations';
+
+type FeatSlotSource = 'racial' | 'level' | 'bonus' | 'mythic';
 
 function genId(): string {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
+}
+
+// ---- Display model ----
+
+interface FeatSlotDisplay {
+  slotId: string;
+  source: FeatSlotSource;
+  availableAt: string;
+  availableAtLevel: number;
+  featId: string;
+  featName: string;
+  prereqOverride: boolean;
 }
 
 // ---- Source badge ----
@@ -52,7 +66,7 @@ const badgeStyles = StyleSheet.create({
 // ---- Feat slot row ----
 
 interface FeatSlotRowProps {
-  slot: DraftFeatSlot;
+  slot: FeatSlotDisplay;
 }
 
 function FeatSlotRow({ slot }: FeatSlotRowProps) {
@@ -68,16 +82,11 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
         onPress={() => setPickerOpen(true)}
         style={[rowStyles.row, { borderBottomColor: colors.border.DEFAULT }]}
         accessibilityRole="button"
-        accessibilityLabel={`${slot.availableAt}: ${slot.featName ?? 'unassigned'}`}
+        accessibilityLabel={`${slot.availableAt}: ${slot.featName || 'unassigned'}`}
         accessibilityHint="Tap to assign feat"
       >
-        {/* Source badge */}
         <SourceBadge source={slot.source} />
-
-        {/* Available at */}
         <Text style={[rowStyles.atLabel, { color: colors.text.tertiary }]}>{slot.availableAt}</Text>
-
-        {/* Feat name */}
         <Text
           style={[
             rowStyles.featName,
@@ -88,14 +97,12 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
           ]}
           numberOfLines={1}
         >
-          {slot.featName ?? '—— unassigned ——'}
+          {slot.featName || '—— unassigned ——'}
         </Text>
-
-        {/* Unassign / remove */}
         <View style={rowStyles.actions}>
           {assigned && (
             <Pressable
-              onPress={() => dispatch(unassignFeat(slot.id))}
+              onPress={() => dispatch(unassignFeat(slot.slotId))}
               hitSlop={8}
               accessibilityRole="button"
               accessibilityLabel="Unassign feat"
@@ -105,7 +112,7 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
           )}
           {slot.source === 'bonus' && (
             <Pressable
-              onPress={() => dispatch(removeFeatSlot(slot.id))}
+              onPress={() => dispatch(removeFeatSlot(slot.slotId))}
               hitSlop={8}
               accessibilityRole="button"
               accessibilityLabel="Remove bonus slot"
@@ -116,10 +123,9 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
         </View>
       </Pressable>
 
-      {/* Prereq override row (shown when a feat is assigned) */}
       {assigned && (
         <Pressable
-          onPress={() => dispatch(toggleFeatPrereqOverride(slot.id))}
+          onPress={() => dispatch(toggleFeatPrereqOverride(slot.slotId))}
           style={[rowStyles.prereqRow, { borderBottomColor: colors.border.DEFAULT }]}
           accessibilityRole="checkbox"
           accessibilityState={{ checked: slot.prereqOverride }}
@@ -140,9 +146,7 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
           <Text
             style={[
               rowStyles.prereqLabel,
-              {
-                color: slot.prereqOverride ? '#10B981' : colors.text.tertiary,
-              },
+              { color: slot.prereqOverride ? '#10B981' : colors.text.tertiary },
             ]}
           >
             {slot.prereqOverride ? 'Prereqs: trust player' : 'Prereqs: not checked'}
@@ -154,7 +158,7 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
         visible={pickerOpen}
         title={`${slot.availableAt} — Assign Feat`}
         onSelect={({ featId, featName }) => {
-          dispatch(assignFeat({ slotId: slot.id, featId, featName }));
+          dispatch(assignFeat({ slotId: slot.slotId, featId, featName }));
           setPickerOpen(false);
         }}
         onClose={() => setPickerOpen(false)}
@@ -226,18 +230,80 @@ const rowStyles = StyleSheet.create({
 export function FeatSlotList() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const featSlots = useAppSelector((state) => state.characterEntry.draft.featSlots);
+  const character = useAppSelector((state) => state.characterEntry.character);
 
-  useEffect(() => {
-    dispatch(syncFeatSlots());
-  }, [dispatch]);
+  // Build the display slot list by merging computed slots with assigned feats
+  const featSlots = useMemo<FeatSlotDisplay[]>(() => {
+    const classes = character.classes.classes.map((c) => ({
+      id: c.id ?? c.name,
+      className: c.name,
+      level: c.level,
+      sourceSystem: (c.sourceSystem ?? 'pf1e') as 'pf1e' | '3.5e' | 'homebrew' | 'campaign',
+      classChoices: c.classChoices ?? [],
+      prereqOverride: c.prereqOverride ?? false,
+    }));
+    const computed = computeFeatSlots(
+      classes as Parameters<typeof computeFeatSlots>[0],
+      character.info.race.name,
+    );
+
+    // Build a map of slotId → assigned feat
+    const assignedMap = new Map<
+      string,
+      { featId: string; name: string; prereqOverride?: boolean }
+    >();
+    for (const f of character.feats.feats) {
+      if (f.featId) {
+        const key = `${f.source}_${f.grantedAtLevel}`;
+        assignedMap.set(key, { featId: f.featId, name: f.name, prereqOverride: f.prereqOverride });
+        assignedMap.set(f.source, {
+          featId: f.featId,
+          name: f.name,
+          prereqOverride: f.prereqOverride,
+        });
+      }
+    }
+
+    const slots: FeatSlotDisplay[] = computed.map((s) => {
+      const slotId = `${s.source}_${s.availableAtLevel}`;
+      const assigned = assignedMap.get(slotId);
+      return {
+        slotId,
+        source: s.source as FeatSlotSource,
+        availableAt: s.availableAt,
+        availableAtLevel: s.availableAtLevel,
+        featId: assigned?.featId ?? '',
+        featName: assigned?.name ?? '',
+        prereqOverride: assigned?.prereqOverride ?? false,
+      };
+    });
+
+    // Also include manually-added bonus slots that aren't in the computed list
+    for (const f of character.feats.feats) {
+      if (f.source === 'bonus') {
+        const slotId = `bonus_${f.grantedAtLevel}`;
+        if (!slots.find((s) => s.slotId === slotId)) {
+          slots.push({
+            slotId,
+            source: 'bonus',
+            availableAt: 'Bonus',
+            availableAtLevel: f.grantedAtLevel,
+            featId: f.featId,
+            featName: f.name,
+            prereqOverride: f.prereqOverride ?? false,
+          });
+        }
+      }
+    }
+
+    return slots;
+  }, [character.classes.classes, character.feats.feats, character.info.race.name]);
 
   const total = featSlots.length;
-  const assigned = featSlots.filter((s) => !!s.featName).length;
+  const assignedCount = featSlots.filter((s) => !!s.featName).length;
 
   return (
     <View style={styles.container}>
-      {/* Summary */}
       <View
         style={[
           styles.summaryRow,
@@ -250,7 +316,7 @@ export function FeatSlotList() {
         <Text style={[styles.summaryText, { color: colors.text.secondary }]}>
           Slots:{' '}
           <Text style={{ fontWeight: '700', color: isDark ? fantasy.gold : fantasy.bronze }}>
-            {assigned}
+            {assignedCount}
           </Text>
           <Text>
             {' / '}
@@ -259,7 +325,6 @@ export function FeatSlotList() {
         </Text>
       </View>
 
-      {/* Slot list */}
       {featSlots.length > 0 ? (
         <View
           style={[
@@ -271,7 +336,7 @@ export function FeatSlotList() {
           ]}
         >
           {featSlots.map((slot) => (
-            <FeatSlotRow key={slot.id} slot={slot} />
+            <FeatSlotRow key={slot.slotId} slot={slot} />
           ))}
         </View>
       ) : (
@@ -282,7 +347,6 @@ export function FeatSlotList() {
         </View>
       )}
 
-      {/* Add bonus slot */}
       <Pressable
         onPress={() =>
           dispatch(
@@ -291,7 +355,6 @@ export function FeatSlotList() {
               source: 'bonus',
               availableAt: 'Bonus',
               availableAtLevel: 0,
-              prereqOverride: false,
             }),
           )
         }

@@ -4,7 +4,7 @@ import { CharacterEntryScreen } from '@/components/character/direct-entry/Charac
 import { useAppDispatch } from '@/store/hooks';
 import { loadCharacter, type EntryMode } from '@/store/slices/characterEntrySlice';
 import { loadClasses } from '@/store/slices/gameDataSlice';
-import { RISSI_FIXTURE } from '@/data/fixtures/rissi';
+import { CharacterService } from '@/services/CharacterService';
 
 /**
  * Entry point for the direct-entry character sheet.
@@ -35,7 +35,7 @@ export default function EntryRoute() {
     // For now, always load Rissi so the UI has real data during development.
     dispatch(
       loadCharacter({
-        draft: RISSI_FIXTURE,
+        character: CharacterService.createBlankCharacter(),
         mode: resolvedMode,
         characterId: characterId,
       }),
