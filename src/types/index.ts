@@ -15,6 +15,7 @@ import { MythicProgression } from './mythic';
 import { ResourcePool } from './resources';
 import { AppliedTemplate, GrantedBonus, LevelUpDecision, CharacterCRTracking } from './templates';
 import { Ruleset, CampaignRulesetLink } from './ruleset';
+import { CompanionInstance } from './companions';
 
 export interface Character {
   info: CharacterInfo;
@@ -45,6 +46,9 @@ export interface Character {
 
   // Resource pools (ki, arcane pool, mythic power, rage rounds, etc.)
   resources: ResourcePool[];
+
+  // Animal companions / special mounts — see plans/animal-companion-builder.md
+  companions: CompanionInstance[];
 
   // Combat runtime — from HL
   buffs: Buff[];
@@ -96,3 +100,4 @@ export * from './magicItems';
 export * from './ruleset';
 export * from './initiating';
 export * from './gameData';
+export * from './companions';

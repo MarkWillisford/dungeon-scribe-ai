@@ -2,16 +2,27 @@ import {
   abilityTotal,
   abilityModifier,
   formatModifier,
+  getAbilityModifier,
   formatBABString,
   computeTotalBAB,
+  computeTotalBABFractional,
   computeBaseFort,
   computeBaseRef,
   computeBaseWill,
+  computeBaseFortFractional,
+  computeBaseRefFractional,
+  computeBaseWillFractional,
   computeECL,
   computeMaxHP,
+  computeFeatSlots,
   type ClassDataMap,
 } from '@/utils/characterComputations';
-import { type DraftClassEntry, type DraftTemplateEntry } from '@/types/characterDraft';
+import {
+  type DraftClassEntry,
+  type DraftTemplateEntry,
+  type DraftAbilityScore,
+  type AbilityKey,
+} from '@/types/characterDraft';
 import { BonusType } from '@/types/base';
 import { ALL_EXPANDED_CLASSES } from '@/data/classes/index';
 
@@ -363,5 +374,191 @@ describe('computeMaxHP', () => {
 
   it('does not add favored class HP when not set', () => {
     expect(computeMaxHP([cls('Fighter', 2)], 0, TEST_CLASS_MAP)).toBe(10 + 6);
+  });
+});
+
+// ---- computeTotalBAB — Low BAB branch ----
+
+describe('computeTotalBAB — Low BAB', () => {
+  it('computes Low BAB (Wizard): floor(level * 0.5)', () => {
+    expect(computeTotalBAB([cls('Wizard', 4)], TEST_CLASS_MAP)).toBe(2);
+    expect(computeTotalBAB([cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(2);
+    expect(computeTotalBAB([cls('Wizard', 10)], TEST_CLASS_MAP)).toBe(5);
+  });
+
+  it('mixed Full + Low BAB multiclass', () => {
+    // Fighter 5 (5) + Wizard 5 (2) = 7
+    expect(computeTotalBAB([cls('Fighter', 5), cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(7);
+  });
+});
+
+// ---- getAbilityModifier ----
+
+describe('getAbilityModifier', () => {
+  function makeAbilities(
+    overrides: Partial<Record<AbilityKey, number>> = {},
+  ): Record<AbilityKey, DraftAbilityScore> {
+    const score = (base: number): DraftAbilityScore => ({
+      base,
+      racial: 0,
+      inherent: 0,
+      enhancement: 0,
+      other: [],
+      levelIncrements: 0,
+    });
+    const defaults: Record<AbilityKey, number> = {
+      str: 10,
+      dex: 10,
+      con: 10,
+      int: 10,
+      wis: 10,
+      cha: 10,
+    };
+    const merged = { ...defaults, ...overrides };
+    return {
+      str: score(merged.str),
+      dex: score(merged.dex),
+      con: score(merged.con),
+      int: score(merged.int),
+      wis: score(merged.wis),
+      cha: score(merged.cha),
+    };
+  }
+
+  it('returns +4 for str 18', () => {
+    expect(getAbilityModifier(makeAbilities({ str: 18 }), 'str')).toBe(4);
+  });
+
+  it('returns -1 for dex 8', () => {
+    expect(getAbilityModifier(makeAbilities({ dex: 8 }), 'dex')).toBe(-1);
+  });
+
+  it('returns 0 for wis 10', () => {
+    expect(getAbilityModifier(makeAbilities(), 'wis')).toBe(0);
+  });
+});
+
+// ---- computeFeatSlots ----
+
+describe('computeFeatSlots', () => {
+  it('returns empty array for no classes', () => {
+    expect(computeFeatSlots([], 'Dwarf')).toHaveLength(0);
+  });
+
+  it('grants a level feat slot at every odd HD (non-human)', () => {
+    // 4 levels → slots at HD 1, 3
+    const slots = computeFeatSlots([cls('Fighter', 4)], 'Dwarf');
+    expect(slots).toHaveLength(2);
+    expect(slots.map((s) => s.availableAtLevel)).toEqual([1, 3]);
+    expect(slots.every((s) => s.source === 'level')).toBe(true);
+  });
+
+  it('human gets an extra racial bonus feat slot', () => {
+    const slots = computeFeatSlots([cls('Fighter', 4)], 'Human');
+    expect(slots).toHaveLength(3);
+    expect(slots.some((s) => s.source === 'racial')).toBe(true);
+  });
+
+  it('slots are sorted by availableAtLevel', () => {
+    const slots = computeFeatSlots([cls('Fighter', 6)], 'Human');
+    const levels = slots.map((s) => s.availableAtLevel);
+    expect(levels).toEqual([...levels].sort((a, b) => a - b));
+  });
+
+  it('each level feat slot has a unique id', () => {
+    const slots = computeFeatSlots([cls('Fighter', 6)], 'Dwarf');
+    const ids = slots.map((s) => s.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+});
+
+// ---- computeTotalBABFractional ----
+
+describe('computeTotalBABFractional', () => {
+  it('returns 0 for empty class list', () => {
+    expect(computeTotalBABFractional([], TEST_CLASS_MAP)).toBe(0);
+  });
+
+  it('Full BAB: same as standard (no fractional difference)', () => {
+    expect(computeTotalBABFractional([cls('Fighter', 5)], TEST_CLASS_MAP)).toBe(5);
+    expect(computeTotalBABFractional([cls('Fighter', 10)], TEST_CLASS_MAP)).toBe(10);
+  });
+
+  it('Medium BAB (Cleric): floors once at end', () => {
+    // Cleric 5: 5 × 0.75 = 3.75 → 3
+    expect(computeTotalBABFractional([cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(3);
+  });
+
+  it('Low BAB (Wizard): floors once at end', () => {
+    // Wizard 5: 5 × 0.5 = 2.5 → 2
+    expect(computeTotalBABFractional([cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(2);
+  });
+
+  it('defaults unknown class to Medium (0.75)', () => {
+    expect(computeTotalBABFractional([cls('UnknownClass', 4)], TEST_CLASS_MAP)).toBe(3);
+  });
+
+  it('fractional multi-class sums before flooring', () => {
+    // Cleric 1 (0.75) + Rogue 1 (0.75) = 1.5 → 1
+    // vs standard: floor(0.75)+floor(0.75) = 0+0 = 0
+    const fractional = computeTotalBABFractional(
+      [cls('Cleric', 1), cls('Rogue', 1)],
+      TEST_CLASS_MAP,
+    );
+    expect(fractional).toBe(1); // fractional is strictly better here
+  });
+});
+
+// ---- computeBase*Fractional ----
+
+describe('computeBaseFortFractional', () => {
+  it('Good Fort (Cleric 5): 2 + floor(5/2) = 4', () => {
+    expect(computeBaseFortFractional([cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(4);
+  });
+
+  it('Poor Fort (Wizard 5): floor(5/3) = 1', () => {
+    expect(computeBaseFortFractional([cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(1);
+  });
+
+  it('no +2 when all classes have Poor Fort', () => {
+    expect(computeBaseFortFractional([cls('Wizard', 3)], TEST_CLASS_MAP)).toBe(1);
+  });
+
+  it('defaults unknown class to Poor save (level/3)', () => {
+    expect(computeBaseFortFractional([cls('UnknownClass', 3)], TEST_CLASS_MAP)).toBe(1);
+  });
+
+  it('multi-class: Good + Poor sums fractions before floor', () => {
+    // Cleric 1 (good: 0.5) + Wizard 1 (poor: 0.33) = 0.83 → 0; +2 base = 2
+    expect(computeBaseFortFractional([cls('Cleric', 1), cls('Wizard', 1)], TEST_CLASS_MAP)).toBe(2);
+  });
+});
+
+describe('computeBaseRefFractional', () => {
+  it('Good Ref (Rogue 4): 2 + floor(4/2) = 4', () => {
+    expect(computeBaseRefFractional([cls('Rogue', 4)], TEST_CLASS_MAP)).toBe(4);
+  });
+
+  it('Poor Ref (Cleric 5): floor(5/3) = 1', () => {
+    expect(computeBaseRefFractional([cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(1);
+  });
+
+  it('mixed Good + Poor Ref', () => {
+    expect(computeBaseRefFractional([cls('Rogue', 4), cls('Cleric', 4)], TEST_CLASS_MAP)).toBe(5);
+  });
+});
+
+describe('computeBaseWillFractional', () => {
+  it('Good Will (Cleric 5): 2 + floor(5/2) = 4', () => {
+    expect(computeBaseWillFractional([cls('Cleric', 5)], TEST_CLASS_MAP)).toBe(4);
+  });
+
+  it('Poor Will (Fighter 5): floor(5/3) = 1', () => {
+    expect(computeBaseWillFractional([cls('Fighter', 5)], TEST_CLASS_MAP)).toBe(1);
+  });
+
+  it('multiple Good Will classes: +2 once', () => {
+    // Cleric 5 + Wizard 5: 2 + floor((5/2 + 5/2)) = 2 + floor(5) = 7
+    expect(computeBaseWillFractional([cls('Cleric', 5), cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(7);
   });
 });

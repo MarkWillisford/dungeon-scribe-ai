@@ -44,8 +44,7 @@ jest.mock('@/services/ModifierPipelineService', () => ({
 function makeCharactersStore() {
   return configureStore({
     reducer: { characters: charactersReducer },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({ serializableCheck: false }),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
   });
 }
 
@@ -794,6 +793,7 @@ const mockCharacter: Character = {
   appliedTemplates: [],
   grantedBonuses: [],
   resources: [],
+  companions: [],
   buffs: [],
   savedBuffs: [],
   ruleset: {
@@ -1065,9 +1065,9 @@ describe('charactersSlice', () => {
       const stateWithChar = { ...initialState, activeCharacter: mockCharacter };
       const state = charactersReducer(stateWithChar, addFeat(mockFeat));
       expect(state.activeCharacter).not.toBeNull();
-      expect(
-        state.activeCharacter!.feats.feats.some((f) => f.featId === 'power-attack'),
-      ).toBe(true);
+      expect(state.activeCharacter!.feats.feats.some((f) => f.featId === 'power-attack')).toBe(
+        true,
+      );
     });
   });
 
@@ -1212,9 +1212,7 @@ describe('charactersSlice', () => {
 
     it('updateCharacter fails - sets error', async () => {
       const store = makeCharactersStore();
-      (FirebaseCharacterService.update as jest.Mock).mockRejectedValue(
-        new Error('Update failed'),
-      );
+      (FirebaseCharacterService.update as jest.Mock).mockRejectedValue(new Error('Update failed'));
       await store.dispatch(updateCharacter({ characterId: 'char-1', data: {} }));
       expect(store.getState().characters.error).toBe('Update failed');
     });
@@ -1229,8 +1227,7 @@ describe('charactersSlice', () => {
     it('deleteCharacter succeeds - removes character', async () => {
       const store = configureStore({
         reducer: { characters: charactersReducer },
-        middleware: (getDefaultMiddleware) =>
-          getDefaultMiddleware({ serializableCheck: false }),
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
         preloadedState: {
           characters: {
             characters: [mockCharacterSummary],
@@ -1248,9 +1245,7 @@ describe('charactersSlice', () => {
 
     it('deleteCharacter fails - sets error', async () => {
       const store = makeCharactersStore();
-      (FirebaseCharacterService.delete as jest.Mock).mockRejectedValue(
-        new Error('Delete failed'),
-      );
+      (FirebaseCharacterService.delete as jest.Mock).mockRejectedValue(new Error('Delete failed'));
       await store.dispatch(deleteCharacter('char-1'));
       expect(store.getState().characters.error).toBe('Delete failed');
     });

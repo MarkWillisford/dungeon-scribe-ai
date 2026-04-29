@@ -180,6 +180,11 @@ export class FirebaseCharacterService {
       character.ruleset = { ...PRESET_PF1E_STANDARD };
     }
 
+    // Schema migration: backfill companions for documents written before companions feature
+    if (!character.companions) {
+      character.companions = [];
+    }
+
     return character;
   }
 }

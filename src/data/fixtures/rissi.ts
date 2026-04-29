@@ -296,4 +296,7 @@ export const RISSI_FIXTURE: CharacterDraft = {
   // ---- Notes ----
   characterNotes: '',
   campaignNotes: '',
+
+  // ---- Companions ----
+  companions: [],
 };

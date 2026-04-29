@@ -97,6 +97,7 @@ export class CharacterService {
       appliedTemplates: [],
       grantedBonuses: [],
       resources: [],
+      companions: [],
 
       buffs: [],
       savedBuffs: [],

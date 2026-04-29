@@ -34,6 +34,11 @@ import reducer, {
   updateClassSpellcastingAdvancement,
   upsertClassChoice,
   toggleClassPrereqOverride,
+  addCompanion,
+  removeCompanion,
+  renameCompanion,
+  updateCompanionEffectiveLevel,
+  removeCompanionsGrantedByClass,
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,
@@ -861,6 +866,40 @@ describe('characterEntrySlice — templates', () => {
       state = reducer(state, removeTemplate('does-not-exist'));
       expect(state.draft.templates).toHaveLength(1);
     });
+
+    it('sweeps companions granted by the removed template', () => {
+      let state = reducer(makeInitialState(), addTemplate(makeTemplate('tpl-1')));
+      state = reducer(
+        state,
+        addCompanion({
+          instanceId: 'comp-1',
+          sourceEntryId: 'wolf',
+          name: 'Shadow',
+          grantedBy: { type: 'template', templateId: 'tpl-1' },
+          effectiveProgressionLevel: 5,
+        }),
+      );
+      state = reducer(state, removeTemplate('tpl-1'));
+      expect(state.draft.templates).toHaveLength(0);
+      expect(state.draft.companions).toHaveLength(0);
+    });
+
+    it('does not sweep companions granted by a different template', () => {
+      let state = reducer(makeInitialState(), addTemplate(makeTemplate('tpl-1')));
+      state = reducer(state, addTemplate(makeTemplate('tpl-2')));
+      state = reducer(
+        state,
+        addCompanion({
+          instanceId: 'comp-1',
+          sourceEntryId: 'wolf',
+          name: 'Shadow',
+          grantedBy: { type: 'template', templateId: 'tpl-2' },
+          effectiveProgressionLevel: 5,
+        }),
+      );
+      state = reducer(state, removeTemplate('tpl-1'));
+      expect(state.draft.companions).toHaveLength(1);
+    });
   });
 
   describe('updateTemplate', () => {
@@ -1416,7 +1455,10 @@ describe('characterEntrySlice — enhancement sync', () => {
   });
 
   it('two overlapping items — takes the highest per ability', () => {
-    const item1 = makeEquipmentItem('belt-1', { slot: 'belt', abilityScoreBonuses: { str: 2, con: 2 } });
+    const item1 = makeEquipmentItem('belt-1', {
+      slot: 'belt',
+      abilityScoreBonuses: { str: 2, con: 2 },
+    });
     const item2 = makeEquipmentItem('belt-2', { slot: 'belt', abilityScoreBonuses: { str: 4 } });
     let state = reducer(makeInitialState(), addEquipment(item1));
     state = reducer(state, addEquipment(item2));
@@ -1436,5 +1478,167 @@ describe('characterEntrySlice — enhancement sync', () => {
     let state = reducer(makeInitialState(), addEquipment(item));
     state = reducer(state, unassignEquipmentSlot('head-1'));
     expect(state.draft.abilities.wis.enhancement).toBe(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Companions
+// ---------------------------------------------------------------------------
+
+describe('characterEntrySlice — companions', () => {
+  const druidGrant = (
+    classEntryId = 'class-druid',
+    className = 'Druid',
+  ): Parameters<typeof addCompanion>[0]['grantedBy'] => ({
+    type: 'class',
+    classEntryId,
+    className,
+    classChoiceId: 'druid-nature-bond',
+  });
+
+  it('addCompanion seeds a new CompanionInstance with empty collections', () => {
+    const state = reducer(
+      makeInitialState(),
+      addCompanion({
+        instanceId: 'comp-1',
+        sourceEntryId: 'wolf',
+        name: 'Shadow',
+        grantedBy: druidGrant(),
+        effectiveProgressionLevel: 10,
+      }),
+    );
+    expect(state.draft.companions).toHaveLength(1);
+    const comp = state.draft.companions[0];
+    expect(comp.instanceId).toBe('comp-1');
+    expect(comp.name).toBe('Shadow');
+    expect(comp.sourceEntryId).toBe('wolf');
+    expect(comp.effectiveProgressionLevel).toBe(10);
+    expect(comp.feats).toEqual([]);
+    expect(comp.tricks).toEqual([]);
+    expect(comp.appliedTemplates).toEqual([]);
+    expect(state.isDirty).toBe(true);
+  });
+
+  it('removeCompanion drops by instanceId', () => {
+    let state = reducer(
+      makeInitialState(),
+      addCompanion({
+        instanceId: 'comp-1',
+        sourceEntryId: 'wolf',
+        name: 'Shadow',
+        grantedBy: druidGrant(),
+        effectiveProgressionLevel: 5,
+      }),
+    );
+    state = reducer(
+      state,
+      addCompanion({
+        instanceId: 'comp-2',
+        sourceEntryId: 'leopard',
+        name: 'Ember',
+        grantedBy: druidGrant(),
+        effectiveProgressionLevel: 5,
+      }),
+    );
+    state = reducer(state, removeCompanion('comp-1'));
+    expect(state.draft.companions.map((c) => c.instanceId)).toEqual(['comp-2']);
+  });
+
+  it('renameCompanion updates the name on the matched instance', () => {
+    let state = reducer(
+      makeInitialState(),
+      addCompanion({
+        instanceId: 'comp-1',
+        sourceEntryId: 'wolf',
+        name: 'Shadow',
+        grantedBy: druidGrant(),
+        effectiveProgressionLevel: 1,
+      }),
+    );
+    state = reducer(state, renameCompanion({ instanceId: 'comp-1', name: 'Umbra' }));
+    expect(state.draft.companions[0].name).toBe('Umbra');
+  });
+
+  it('updateCompanionEffectiveLevel changes progression level only', () => {
+    let state = reducer(
+      makeInitialState(),
+      addCompanion({
+        instanceId: 'comp-1',
+        sourceEntryId: 'wolf',
+        name: 'Shadow',
+        grantedBy: druidGrant(),
+        effectiveProgressionLevel: 4,
+      }),
+    );
+    state = reducer(
+      state,
+      updateCompanionEffectiveLevel({ instanceId: 'comp-1', effectiveProgressionLevel: 7 }),
+    );
+    expect(state.draft.companions[0].effectiveProgressionLevel).toBe(7);
+    expect(state.draft.companions[0].name).toBe('Shadow');
+  });
+
+  it('removeCompanionsGrantedByClass sweeps matches and keeps others', () => {
+    let state = reducer(
+      makeInitialState(),
+      addCompanion({
+        instanceId: 'comp-1',
+        sourceEntryId: 'wolf',
+        name: 'Shadow',
+        grantedBy: druidGrant('class-druid'),
+        effectiveProgressionLevel: 5,
+      }),
+    );
+    state = reducer(
+      state,
+      addCompanion({
+        instanceId: 'comp-2',
+        sourceEntryId: 'leopard',
+        name: 'Ember',
+        grantedBy: druidGrant('class-ranger'),
+        effectiveProgressionLevel: 5,
+      }),
+    );
+    state = reducer(state, removeCompanionsGrantedByClass('class-druid'));
+    expect(state.draft.companions.map((c) => c.instanceId)).toEqual(['comp-2']);
+  });
+
+  it('removeClass cascades: companions granted by that class are dropped', () => {
+    let state = reducer(
+      makeInitialState(),
+      addClass(makeClass('class-druid', { className: 'Druid' })),
+    );
+    state = reducer(
+      state,
+      addCompanion({
+        instanceId: 'comp-1',
+        sourceEntryId: 'wolf',
+        name: 'Shadow',
+        grantedBy: druidGrant('class-druid'),
+        effectiveProgressionLevel: 5,
+      }),
+    );
+    state = reducer(state, removeClass('class-druid'));
+    expect(state.draft.classes).toHaveLength(0);
+    expect(state.draft.companions).toHaveLength(0);
+  });
+
+  it('template-granted companions are NOT swept when an unrelated class is removed', () => {
+    let state = reducer(
+      makeInitialState(),
+      addClass(makeClass('class-druid', { className: 'Druid' })),
+    );
+    state = reducer(
+      state,
+      addCompanion({
+        instanceId: 'comp-1',
+        sourceEntryId: 'wolf',
+        name: 'Shadow',
+        grantedBy: { type: 'template', templateId: 'druid-simple' },
+        effectiveProgressionLevel: 5,
+      }),
+    );
+    state = reducer(state, removeClass('class-druid'));
+    expect(state.draft.companions).toHaveLength(1);
   });
 });

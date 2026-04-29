@@ -2,11 +2,22 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
-import { useAppDispatch } from '@/store/hooks';
-import { upsertClassChoice } from '@/store/slices/characterEntrySlice';
+import { CompanionPickerSheet } from '@/components/character/direct-entry/CompanionPickerSheet';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import {
+  upsertClassChoice,
+  addCompanion,
+  removeCompanion,
+} from '@/store/slices/characterEntrySlice';
 import { type ClassChoice } from '@/types/classes';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { GameDataService } from '@/services/GameDataService';
+import {
+  effectiveLevelFromDraftClass,
+  pickerFilterFromDraftClass,
+} from '@/services/CompanionService';
+import type { AnimalCompanionEntry } from '@/types/animalCompanions';
+import { makeCompanionInstanceId } from '@/utils/companionUtils';
 
 interface ClassChoiceRowProps {
   classId: string;
@@ -132,7 +143,22 @@ export function ClassChoiceRow({
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [companionPickerOpen, setCompanionPickerOpen] = useState(false);
   const [rawPickerItems, setRawPickerItems] = useState<SearchItem[]>([]);
+
+  const draftClass = useAppSelector((state) =>
+    state.characterEntry.draft.classes.find((c) => c.id === classId),
+  );
+
+  // Companion currently granted by this specific class choice, if any.
+  const existingCompanion = useAppSelector((state) =>
+    state.characterEntry.draft.companions.find(
+      (c) =>
+        c.grantedBy.type === 'class' &&
+        c.grantedBy.classEntryId === classId &&
+        c.grantedBy.classChoiceId === definition.id,
+    ),
+  );
 
   useEffect(() => {
     let stale = false;
@@ -166,7 +192,13 @@ export function ClassChoiceRow({
         choiceIndex,
         definition.collectionName,
       ),
-    [rawPickerItems, siblingChoices, definition.featureName, choiceIndex, definition.collectionName],
+    [
+      rawPickerItems,
+      siblingChoices,
+      definition.featureName,
+      choiceIndex,
+      definition.collectionName,
+    ],
   );
 
   // Resolve stored ID(s) back to human-readable labels for display.
@@ -182,6 +214,9 @@ export function ClassChoiceRow({
   }, [currentChoice, pickerItems]);
 
   const handleSelect = (item: SearchItem) => {
+    const wasAnimalCompanion = currentChoice?.selection === 'animal_companion';
+    const nowAnimalCompanion = item.key === 'animal_companion';
+
     dispatch(
       upsertClassChoice({
         classId,
@@ -194,6 +229,36 @@ export function ClassChoiceRow({
       }),
     );
     setPickerOpen(false);
+
+    // Switching away from animal_companion removes the tied instance.
+    if (wasAnimalCompanion && !nowAnimalCompanion && existingCompanion) {
+      dispatch(removeCompanion(existingCompanion.instanceId));
+    }
+
+    // Switching TO animal_companion opens the form picker. If the slot
+    // already has a companion (shouldn't normally happen, but guard anyway),
+    // skip reopening.
+    if (nowAnimalCompanion && !existingCompanion) {
+      setCompanionPickerOpen(true);
+    }
+  };
+
+  const handleCompanionSelect = (entry: AnimalCompanionEntry) => {
+    dispatch(
+      addCompanion({
+        instanceId: makeCompanionInstanceId(),
+        sourceEntryId: entry.id,
+        name: entry.name,
+        grantedBy: {
+          type: 'class',
+          classEntryId: classId,
+          className: draftClass?.className ?? '',
+          classChoiceId: definition.id,
+        },
+        effectiveProgressionLevel: effectiveLevelFromDraftClass(draftClass),
+      }),
+    );
+    setCompanionPickerOpen(false);
   };
 
   const hasItems = pickerItems.length > 0;
@@ -247,6 +312,14 @@ export function ClassChoiceRow({
         onSelect={handleSelect}
         onClose={() => setPickerOpen(false)}
         placeholder={`Search ${definition.featureName.toLowerCase()}...`}
+      />
+
+      <CompanionPickerSheet
+        visible={companionPickerOpen}
+        title={`${featureLabel} — Choose Companion`}
+        pickerFilter={pickerFilterFromDraftClass(draftClass)}
+        onSelect={handleCompanionSelect}
+        onClose={() => setCompanionPickerOpen(false)}
       />
     </>
   );

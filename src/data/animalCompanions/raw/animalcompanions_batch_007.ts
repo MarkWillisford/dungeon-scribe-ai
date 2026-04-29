@@ -20,6 +20,7 @@ export const direRat: AnimalCompanionEntry = {
   id: 'dire-rat',
   name: 'Dire Rat',
   companionType: 'animal',
+  bodyShape: 'quadrupedClaws',
   size: 'Small',
   speed: '40 ft., climb 20 ft., swim 20 ft.',
   naturalArmor: 1,
@@ -52,6 +53,7 @@ export const dragonflyGiant: AnimalCompanionEntry = {
   id: 'dragonfly-giant',
   name: 'Dragonfly, Giant',
   companionType: 'vermin',
+  bodyShape: 'unusual',
   size: 'Small',
   speed: '20 ft., fly 40 ft. (perfect)',
   naturalArmor: 2,
@@ -88,6 +90,7 @@ export const trilobiteGiant: AnimalCompanionEntry = {
   id: 'trilobite-giant',
   name: 'Trilobite, Giant',
   companionType: 'animal',
+  bodyShape: 'unusual',
   // PAGE_FETCH_FAILED — AONPRD page is JavaScript-rendered and returned no data
   size: 'Small',
   speed: '20 ft., swim 30 ft.',
@@ -112,6 +115,7 @@ export const trout: AnimalCompanionEntry = {
   id: 'trout',
   name: 'Trout',
   companionType: 'animal',
+  bodyShape: 'piscine',
   // PAGE_FETCH_FAILED — AONPRD page is JavaScript-rendered and returned no data
   size: 'Tiny',
   speed: 'swim 30 ft.',
@@ -136,6 +140,7 @@ export const tuataraGiant: AnimalCompanionEntry = {
   id: 'tuatara-giant',
   name: 'Tuatara, Giant',
   companionType: 'animal',
+  bodyShape: 'quadrupedShortLegs',
   // PAGE_FETCH_FAILED — AONPRD page is JavaScript-rendered and returned no data
   size: 'Small',
   speed: '20 ft.',
@@ -160,6 +165,7 @@ export const turkey: AnimalCompanionEntry = {
   id: 'turkey',
   name: 'Turkey',
   companionType: 'animal',
+  bodyShape: 'avian',
   // PAGE_FETCH_FAILED — AONPRD page is JavaScript-rendered and returned no data
   size: 'Small',
   speed: '30 ft., fly 30 ft. (average)',
@@ -184,6 +190,7 @@ export const turtle: AnimalCompanionEntry = {
   id: 'turtle',
   name: 'Turtle',
   companionType: 'animal',
+  bodyShape: 'quadrupedShortLegs',
   // PAGE_FETCH_FAILED — AONPRD page is JavaScript-rendered and returned no data
   // Note: "Gliding Turtle" (AP #121) is a separate entry collected below
   size: 'Tiny',
@@ -209,6 +216,7 @@ export const tyrannosaurus: AnimalCompanionEntry = {
   id: 'tyrannosaurus',
   name: 'Tyrannosaurus',
   companionType: 'animal',
+  bodyShape: 'bipedClaws',
   size: 'Medium',
   speed: '30 ft.',
   naturalArmor: 4,
@@ -245,6 +253,7 @@ export const uintaceratops: AnimalCompanionEntry = {
   id: 'uintaceratops',
   name: 'Uintaceratops',
   companionType: 'animal',
+  bodyShape: 'quadrupedOther',
   size: 'Medium',
   speed: '30 ft.',
   naturalArmor: 4,
@@ -282,6 +291,7 @@ export const ursineCharger: AnimalCompanionEntry = {
   id: 'ursine-charger',
   name: 'Ursine Charger',
   companionType: 'animal',
+  bodyShape: 'quadrupedClaws',
   // PAGE_FETCH_FAILED — AONPRD page is JavaScript-rendered and returned no data
   size: 'Medium',
   speed: '40 ft.',
@@ -311,6 +321,7 @@ export const unicorn: AnimalCompanionEntry = {
   id: 'unicorn',
   name: 'Unicorn',
   companionType: 'magical beast',
+  bodyShape: 'quadrupedHooves',
   size: 'Large',
   speed: '40 ft.',
   naturalArmor: 3,
@@ -334,6 +345,7 @@ export const viperGiant: AnimalCompanionEntry = {
   id: 'viper-giant',
   name: 'Viper, Giant',
   companionType: 'animal',
+  bodyShape: 'serpentine',
   // PAGE_FETCH_FAILED — AONPRD page is JavaScript-rendered and returned no data
   size: 'Medium',
   speed: '20 ft., climb 20 ft., swim 20 ft.',
@@ -358,6 +370,7 @@ export const vultureGiant: AnimalCompanionEntry = {
   id: 'vulture-giant',
   name: 'Vulture, Giant',
   companionType: 'animal',
+  bodyShape: 'avian',
   size: 'Medium',
   speed: '10 ft., fly 50 ft. (average)',
   naturalArmor: 2,
@@ -393,6 +406,7 @@ export const walrus: AnimalCompanionEntry = {
   id: 'walrus',
   name: 'Walrus',
   companionType: 'animal',
+  bodyShape: 'piscine',
   size: 'Medium',
   speed: '10 ft., swim 40 ft.',
   naturalArmor: 4,
@@ -428,6 +442,7 @@ export const waspGiant: AnimalCompanionEntry = {
   id: 'wasp-giant',
   name: 'Wasp, Giant',
   companionType: 'vermin',
+  bodyShape: 'unusual',
   size: 'Medium',
   speed: '20 ft., fly 60 ft. (good)',
   naturalArmor: 2,
@@ -466,6 +481,7 @@ export const weaselGiant: AnimalCompanionEntry = {
   id: 'weasel-giant',
   name: 'Weasel, Giant',
   companionType: 'animal',
+  bodyShape: 'quadrupedShortLegs',
   size: 'Small',
   speed: '30 ft., climb 10 ft.',
   naturalArmor: 1,
@@ -500,6 +516,7 @@ export const whaleShark: AnimalCompanionEntry = {
   id: 'whale-shark',
   name: 'Whale Shark',
   companionType: 'animal',
+  bodyShape: 'piscine',
   // PAGE_FETCH_FAILED — AONPRD page is JavaScript-rendered and returned no data
   size: 'Large',
   speed: 'swim 40 ft.',
@@ -524,6 +541,7 @@ export const wolf: AnimalCompanionEntry = {
   id: 'wolf',
   name: 'Wolf',
   companionType: 'animal',
+  bodyShape: 'quadrupedClaws',
   size: 'Medium',
   speed: '50 ft.',
   naturalArmor: 2,
@@ -559,6 +577,7 @@ export const wombatGiant: AnimalCompanionEntry = {
   id: 'wombat-giant',
   name: 'Wombat, Giant',
   companionType: 'animal',
+  bodyShape: 'quadrupedClaws',
   // PAGE_FETCH_FAILED — AONPRD page is JavaScript-rendered and returned no data
   size: 'Small',
   speed: '30 ft., burrow 10 ft.',
@@ -583,6 +602,7 @@ export const woodpeckerGiant: AnimalCompanionEntry = {
   id: 'woodpecker-giant',
   name: 'Woodpecker, Giant',
   companionType: 'animal',
+  bodyShape: 'avian',
   // PAGE_FETCH_FAILED — AONPRD page is JavaScript-rendered and returned no data
   size: 'Small',
   speed: '20 ft., fly 40 ft. (average)',
@@ -607,6 +627,7 @@ export const wyvernSkeletal: AnimalCompanionEntry = {
   id: 'wyvern-skeletal',
   name: 'Wyvern, Skeletal',
   companionType: 'magical beast',
+  bodyShape: 'avian',
   // PAGE_FETCH_FAILED — AONPRD page is JavaScript-rendered and returned no data
   // Note: Listed as "Wyvern, Skeletal" in AONPRD All companion list under Monstrous category
   size: 'Large',
@@ -632,6 +653,7 @@ export const zebra: AnimalCompanionEntry = {
   id: 'zebra',
   name: 'Zebra',
   companionType: 'animal',
+  bodyShape: 'quadrupedHooves',
   size: 'Large',
   speed: '50 ft.',
   naturalArmor: 2,

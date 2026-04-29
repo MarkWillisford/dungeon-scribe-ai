@@ -3,6 +3,8 @@ import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { ClassChoiceRow } from './ClassChoiceRow';
+import { CompanionCard } from './CompanionCard';
+import { CompanionPickerSheet } from './CompanionPickerSheet';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   removeClass,
@@ -12,14 +14,22 @@ import {
   toggleClassPrereqOverride,
   toggleFavoredClass,
   setFavoredClassBonuses,
+  addCompanion,
+  removeCompanion,
 } from '@/store/slices/characterEntrySlice';
 import { type DraftClassEntry, type SpellcastingAdvancement } from '@/types/characterDraft';
 import { GameDataService } from '@/services/GameDataService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { lookupClassData } from '@/utils/characterComputations';
+import {
+  effectiveLevelFromDraftClass,
+  pickerFilterFromDraftClass,
+} from '@/services/CompanionService';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { type ClassChoice } from '@/types/classes';
 import { ArchetypePickerSheet } from './ArchetypePickerSheet';
+import type { AnimalCompanionEntry } from '@/types/animalCompanions';
+import { makeCompanionInstanceId } from '@/utils/companionUtils';
 
 // Pairs of featureNames that are mutually exclusive — filling one disables the other.
 const MUTUALLY_EXCLUSIVE_PAIRS: [string, string][] = [['Domain', 'Inquisition']];
@@ -32,6 +42,13 @@ function isMutuallyExcludedFilled(featureName: string, classChoices: ClassChoice
     }
   }
   return false;
+}
+
+// Class + archetype combos that may grant multiple companions from a single
+// class choice (Beastmaster gets 1 + INT mod). Detected here so the
+// "+ Add Companion" button appears only for these.
+function classSupportsMultipleCompanions(entry: DraftClassEntry): boolean {
+  return entry.className === 'Ranger' && entry.archetypeName === 'Beastmaster';
 }
 
 // ---- Source badge ----
@@ -576,38 +593,41 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
       {advancesSpec && <AdvancementControls entry={entry} />}
 
       {/* Favored class — only base classes (maxLevel 20) can be favored */}
-      {isBaseClass && <Pressable
-        onPress={() => dispatch(toggleFavoredClass(entry.id))}
-        style={[styles.row, { borderTopColor: colors.border.DEFAULT, borderTopWidth: StyleSheet.hairlineWidth }]}
-        accessibilityRole="checkbox"
-        accessibilityState={{ checked: !!entry.isFavoredClass }}
-        accessibilityLabel="Favored class"
-      >
-        <View
+      {isBaseClass && (
+        <Pressable
+          onPress={() => dispatch(toggleFavoredClass(entry.id))}
           style={[
-            styles.checkbox,
-            {
-              borderColor: entry.isFavoredClass ? fantasy.gold : colors.border.DEFAULT,
-              backgroundColor: entry.isFavoredClass
-                ? isDark
-                  ? 'rgba(212,175,55,0.2)'
-                  : 'rgba(140,90,40,0.1)'
-                : 'transparent',
-            },
+            styles.row,
+            { borderTopColor: colors.border.DEFAULT, borderTopWidth: StyleSheet.hairlineWidth },
           ]}
+          accessibilityRole="checkbox"
+          accessibilityState={{ checked: !!entry.isFavoredClass }}
+          accessibilityLabel="Favored class"
         >
-          {entry.isFavoredClass && (
-            <Text style={[styles.checkmark, { color: fantasy.gold }]}>✓</Text>
-          )}
-        </View>
-        <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Favored class</Text>
-      </Pressable>}
+          <View
+            style={[
+              styles.checkbox,
+              {
+                borderColor: entry.isFavoredClass ? fantasy.gold : colors.border.DEFAULT,
+                backgroundColor: entry.isFavoredClass
+                  ? isDark
+                    ? 'rgba(212,175,55,0.2)'
+                    : 'rgba(140,90,40,0.1)'
+                  : 'transparent',
+              },
+            ]}
+          >
+            {entry.isFavoredClass && (
+              <Text style={[styles.checkmark, { color: fantasy.gold }]}>✓</Text>
+            )}
+          </View>
+          <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Favored class</Text>
+        </Pressable>
+      )}
 
       {isBaseClass && entry.isFavoredClass && (
         <View style={[styles.favoredBonusRow, { borderTopColor: colors.border.DEFAULT }]}>
-          <Text style={[styles.favoredBonusLabel, { color: colors.text.secondary }]}>
-            Bonuses:
-          </Text>
+          <Text style={[styles.favoredBonusLabel, { color: colors.text.secondary }]}>Bonuses:</Text>
           {(['hp', 'skillRank'] as const).map((field) => {
             const hp = entry.favoredClassBonuses?.hp ?? 0;
             const skillRank = entry.favoredClassBonuses?.skillRank ?? 0;
@@ -624,11 +644,13 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
                 <View style={styles.bonusStepperRow}>
                   <Pressable
                     onPress={() =>
-                      dispatch(setFavoredClassBonuses({
-                        id: entry.id,
-                        hp: field === 'hp' ? hp - 1 : hp,
-                        skillRank: field === 'skillRank' ? skillRank - 1 : skillRank,
-                      }))
+                      dispatch(
+                        setFavoredClassBonuses({
+                          id: entry.id,
+                          hp: field === 'hp' ? hp - 1 : hp,
+                          skillRank: field === 'skillRank' ? skillRank - 1 : skillRank,
+                        }),
+                      )
                     }
                     disabled={!canDec}
                     style={[
@@ -643,23 +665,25 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
                   >
                     <Text style={[styles.stepperBtnText, { color: colors.text.primary }]}>−</Text>
                   </Pressable>
-                  <Text style={[styles.stepperValue, { color: colors.text.primary }]}>
-                    {value}
-                  </Text>
+                  <Text style={[styles.stepperValue, { color: colors.text.primary }]}>{value}</Text>
                   <Pressable
                     onPress={() =>
-                      dispatch(setFavoredClassBonuses({
-                        id: entry.id,
-                        hp: field === 'hp' ? hp + 1 : hp,
-                        skillRank: field === 'skillRank' ? skillRank + 1 : skillRank,
-                      }))
+                      dispatch(
+                        setFavoredClassBonuses({
+                          id: entry.id,
+                          hp: field === 'hp' ? hp + 1 : hp,
+                          skillRank: field === 'skillRank' ? skillRank + 1 : skillRank,
+                        }),
+                      )
                     }
                     disabled={!canInc}
                     style={[
                       styles.stepperBtn,
                       {
                         borderColor: canInc
-                          ? isDark ? fantasy.gold : fantasy.bronze
+                          ? isDark
+                            ? fantasy.gold
+                            : fantasy.bronze
                           : colors.border.DEFAULT,
                         backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
                         opacity: canInc ? 1 : 0.3,
@@ -670,7 +694,13 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
                     <Text
                       style={[
                         styles.stepperBtnText,
-                        { color: canInc ? (isDark ? fantasy.gold : fantasy.darkWood) : colors.text.tertiary },
+                        {
+                          color: canInc
+                            ? isDark
+                              ? fantasy.gold
+                              : fantasy.darkWood
+                            : colors.text.tertiary,
+                        },
                       ]}
                     >
                       +
@@ -681,7 +711,10 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
             );
           })}
           <Text style={[styles.bonusRemaining, { color: colors.text.tertiary }]}>
-            {entry.level - (entry.favoredClassBonuses?.hp ?? 0) - (entry.favoredClassBonuses?.skillRank ?? 0)} left
+            {entry.level -
+              (entry.favoredClassBonuses?.hp ?? 0) -
+              (entry.favoredClassBonuses?.skillRank ?? 0)}{' '}
+            left
           </Text>
         </View>
       )}
@@ -730,6 +763,8 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
               })}
             </View>
           )}
+
+          <CompanionSection entry={entry} />
         </View>
       )}
 
@@ -764,6 +799,115 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           </Text>
         </Pressable>
       </View>
+    </View>
+  );
+}
+
+// ---- Companion section ------------------------------------------------------
+//
+// Renders CompanionCards for every companion granted by this class, plus an
+// "+ Add Companion" button for granting sources that may have multiple
+// (Beastmaster Ranger). Single-companion sources get the card created via the
+// class-choice intercept in ClassChoiceRow; this section just displays them.
+
+interface CompanionSectionProps {
+  entry: DraftClassEntry;
+}
+
+function CompanionSection({ entry }: CompanionSectionProps) {
+  const { fantasy, isDark } = useTheme();
+  const dispatch = useAppDispatch();
+  const [addPickerOpen, setAddPickerOpen] = useState(false);
+  const [companionEntryById, setCompanionEntryById] = useState<Map<string, AnimalCompanionEntry>>(
+    new Map(),
+  );
+
+  const grantedCompanions = useAppSelector((state) =>
+    state.characterEntry.draft.companions.filter(
+      (c) => c.grantedBy.type === 'class' && c.grantedBy.classEntryId === entry.id,
+    ),
+  );
+
+  const supportsMultiple = classSupportsMultipleCompanions(entry);
+
+  useEffect(() => {
+    if (grantedCompanions.length === 0 && !supportsMultiple) return;
+    let cancelled = false;
+    GameDataService.getAnimalCompanions()
+      .then((companions) => {
+        if (!cancelled) {
+          const map = new Map<string, AnimalCompanionEntry>();
+          for (const ac of companions) map.set(ac.id, ac);
+          setCompanionEntryById(map);
+        }
+      })
+      .catch((e) => console.error('Failed to load animal companions:', e));
+    return () => {
+      cancelled = true;
+    };
+  }, [grantedCompanions.length, supportsMultiple]);
+  const grantedByLabel = entry.archetypeName
+    ? `${entry.className} (${entry.archetypeName})`
+    : entry.className;
+
+  const handleAddCompanion = (ac: AnimalCompanionEntry) => {
+    // The "+ Add" button on Beastmaster-style multi-grant classes uses the
+    // animal_companion class choice as the nominal classChoiceId, matching
+    // the single-companion flow.
+    dispatch(
+      addCompanion({
+        instanceId: makeCompanionInstanceId(),
+        sourceEntryId: ac.id,
+        name: ac.name,
+        grantedBy: {
+          type: 'class',
+          classEntryId: entry.id,
+          className: entry.className,
+          classChoiceId: 'animal_companion',
+        },
+        effectiveProgressionLevel: effectiveLevelFromDraftClass(entry),
+      }),
+    );
+    setAddPickerOpen(false);
+  };
+
+  if (grantedCompanions.length === 0 && !supportsMultiple) return null;
+
+  return (
+    <View>
+      {grantedCompanions.map((comp) => (
+        <CompanionCard
+          key={comp.instanceId}
+          companion={comp}
+          entry={companionEntryById.get(comp.sourceEntryId)}
+          grantedByLabel={grantedByLabel}
+          onRemove={() => dispatch(removeCompanion(comp.instanceId))}
+          // Edit disabled until Phase 1.5 ships the builder screen.
+        />
+      ))}
+
+      {supportsMultiple && (
+        <Pressable
+          onPress={() => setAddPickerOpen(true)}
+          style={[styles.addCompanionBtn, { borderColor: isDark ? fantasy.gold : fantasy.bronze }]}
+          accessibilityRole="button"
+          accessibilityLabel="Add another companion"
+        >
+          <Text
+            style={[styles.addCompanionText, { color: isDark ? fantasy.gold : fantasy.darkWood }]}
+          >
+            + Add Companion
+          </Text>
+        </Pressable>
+      )}
+
+      <CompanionPickerSheet
+        visible={addPickerOpen}
+        title="Choose Companion"
+        pickerFilter={pickerFilterFromDraftClass(entry)}
+        onSelect={handleAddCompanion}
+        onClose={() => setAddPickerOpen(false)}
+      />
     </View>
   );
 }
@@ -981,5 +1125,20 @@ const styles = StyleSheet.create({
     fontFamily: 'LibreBaskerville',
     fontSize: 12,
     fontStyle: 'italic',
+  },
+  addCompanionBtn: {
+    marginTop: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  addCompanionText: {
+    fontFamily: 'Cinzel',
+    fontSize: 12,
+    fontWeight: '700',
+    letterSpacing: 0.5,
   },
 });
