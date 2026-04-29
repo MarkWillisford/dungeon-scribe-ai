@@ -1404,6 +1404,59 @@ describe('characterEntrySlice — feats', () => {
       expect(state.isDirty).toBe(true);
     });
   });
+
+  describe('syncFeatSlotsFromClasses', () => {
+    // Slot display is computed on read via computeFeatSlots; feats.feats stores only
+    // assigned feats (featId !== '') and bonus slots. Empty placeholders are always
+    // pruned — the UI does not need them persisted.
+
+    it('Test A (slot source): addClass does not persist empty placeholder entries — only assigned feats are stored', () => {
+      // Fighter level 1 = HD 1 → one level feat slot exists in the computed list,
+      // but feats.feats should be empty because nothing has been assigned yet.
+      const state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Fighter', level: 1 })),
+      );
+      expect(state.character.feats.feats).toHaveLength(0);
+    });
+
+    it('Test B (pruning): reducing class level removes assigned feats whose slots no longer exist', () => {
+      // Fighter level 3 = HD 1 and HD 3 → two computed feat slots
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Fighter', level: 3 })),
+      );
+      // Assign a real feat to the level-3 slot so pruning has something to remove
+      state = reducer(
+        state,
+        assignFeat({ slotId: 'level_3', featId: 'feat-power-attack', featName: 'Power Attack' }),
+      );
+      expect(state.character.feats.feats.some((f) => f.source === 'level_3')).toBe(true);
+
+      // Drop to level 1 → HD 3 slot no longer exists; the assigned feat should be pruned
+      state = reducer(state, updateClassLevel({ id: 'cls-1', level: 1 }));
+      expect(state.character.feats.feats.some((f) => f.source === 'level_3')).toBe(false);
+    });
+
+    it('Test C (pruning preserves valid slots): assigned feat at a still-valid level survives a level change', () => {
+      // Fighter level 3 → assign feat at level 1, then drop to level 1
+      // The level-1 slot still exists, so the feat should be kept
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Fighter', level: 3 })),
+      );
+      state = reducer(
+        state,
+        assignFeat({ slotId: 'level_1', featId: 'feat-dodge', featName: 'Dodge' }),
+      );
+      state = reducer(state, updateClassLevel({ id: 'cls-1', level: 1 }));
+      expect(
+        state.character.feats.feats.some(
+          (f) => f.source === 'level_1' && f.featId === 'feat-dodge',
+        ),
+      ).toBe(true);
+    });
+  });
 });
 
 // ---------------------------------------------------------------------------

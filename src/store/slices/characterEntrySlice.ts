@@ -87,8 +87,8 @@ function syncFeatSlotsFromClasses(character: Character): void {
   const validKeys = new Set(generated.map((s) => `${s.source}_${s.availableAtLevel}`));
   character.feats.feats = character.feats.feats.filter((f) => {
     if (!f.featId) return false; // Remove empty placeholders
-    const key = `${f.source}_${f.grantedAtLevel}`;
-    return validKeys.has(key) || f.source === 'bonus'; // Keep bonus feats regardless
+    // f.source is already the full key e.g. "level_3" — compare directly
+    return validKeys.has(f.source) || f.source === 'bonus'; // Keep bonus feats regardless
   });
 }
 
