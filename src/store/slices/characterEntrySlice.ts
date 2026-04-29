@@ -409,7 +409,9 @@ const characterEntrySlice = createSlice({
         0,
       );
 
-      // Cascade: clear advancement pointers that targeted the removed class
+      // Cascade: clear advancement pointers that targeted the removed class.
+      // Pointers are set to '' intentionally — empty string is a sentinel so the validator
+      // fires a "missing target" warning instead of silently dropping the advancement entry.
       for (const entry of state.character.classes.classes) {
         const adv = entry.spellcastingAdvancement;
         if (!adv) continue;
