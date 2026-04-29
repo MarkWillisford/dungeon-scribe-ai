@@ -479,4 +479,23 @@ describe('CharacterEntryScreen — validation FAB', () => {
     const texts = getAllText(tree);
     expect(texts.some((t) => t === '✓')).toBe(true);
   });
+
+  it('FAB accessibilityLabel includes warning count when warnings present', () => {
+    mockLastValidatedAt = Date.now();
+    mockWarnings = [{ section: 'combat', isAcknowledged: false }];
+    const { tree } = render(<CharacterEntryScreen />);
+    const buttons = findByType(tree, 'Pressable');
+    const fab = buttons.find((b) => b.props.accessibilityLabel?.includes('warning'));
+    expect(fab).toBeDefined();
+    expect(fab!.props.accessibilityLabel).toBe('1 validation warnings');
+  });
+
+  it('FAB accessibilityLabel is "Validation passed" when no unacknowledged warnings', () => {
+    mockLastValidatedAt = Date.now();
+    mockWarnings = [];
+    const { tree } = render(<CharacterEntryScreen />);
+    const buttons = findByType(tree, 'Pressable');
+    const fab = buttons.find((b) => b.props.accessibilityLabel === 'Validation passed');
+    expect(fab).toBeDefined();
+  });
 });
