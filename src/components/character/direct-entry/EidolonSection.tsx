@@ -94,7 +94,7 @@ export function EidolonSection({ classEntry }: EidolonSectionProps) {
       .catch((e) => console.error('EidolonSection: failed to load eidolon data index:', e));
   }, []);
 
-  const edition = summonerEditionFromClassName(classEntry.className);
+  const edition = summonerEditionFromClassName(classEntry.name);
   const archetypeKey = classEntry.archetypeId?.toLowerCase().trim() ?? '';
   const isBroodmaster = archetypeKey.includes('broodmaster');
   const isSynthesist = archetypeKey.includes('synthesist');
@@ -110,7 +110,7 @@ export function EidolonSection({ classEntry }: EidolonSectionProps) {
           onPress={() =>
             dispatch(
               addEidolon({
-                classEntryId: classEntry.id,
+                classEntryId: classEntry.id ?? '',
                 edition,
                 baseForm: 'biped',
                 subtype: edition === 'unchained' ? 'angel' : undefined,

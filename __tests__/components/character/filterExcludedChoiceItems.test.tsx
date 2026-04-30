@@ -20,7 +20,7 @@ jest.mock('@/components/character/direct-entry/CompanionPickerSheet', () => ({
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => jest.fn(),
   useAppSelector: (selector: (s: unknown) => unknown) =>
-    selector({ characterEntry: { draft: { classes: [], companions: [] } } }),
+    selector({ characterEntry: { character: { classes: { classes: [] }, companions: [] } } }),
 }));
 jest.mock('@/hooks/useTheme', () => ({
   useTheme: () => ({

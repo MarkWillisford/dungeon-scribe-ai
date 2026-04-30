@@ -467,6 +467,8 @@ export class CharacterService {
       conditions: { activeConditions: [] },
       experience: { current: 0, nextLevel: 2000 },
       currency: { platinum: 0, gold: 0, silver: 0, copper: 0, totalGP: 0 },
+      eidolons: [],
+      companions: [],
       levelHistory: [],
       appliedTemplates: [],
       grantedBonuses: [],

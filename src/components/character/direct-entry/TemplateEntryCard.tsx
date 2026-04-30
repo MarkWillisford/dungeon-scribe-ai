@@ -91,7 +91,7 @@ export function TemplateEntryCard({ entry }: TemplateEntryCardProps) {
       {companionGrant && entry.templateId && (
         <TemplateCompanionSection
           templateId={entry.templateId}
-          templateName={entry.templateName}
+          templateName={entry.name}
           spec={companionGrant}
         />
       )}

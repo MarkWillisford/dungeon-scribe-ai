@@ -254,6 +254,8 @@ function blankCharacter(): Character {
     experience: {} as any,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     currency: {} as any,
+    eidolons: [],
+    companions: [],
     levelHistory: [],
     appliedTemplates: [],
     grantedBonuses: [],

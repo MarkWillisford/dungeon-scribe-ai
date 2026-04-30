@@ -18,7 +18,6 @@ import type { Character } from '@/types';
 import type { ClassEntry } from '@/types/classes';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import type { CompanionInstance, CompanionGrant } from '@/types/companions';
-import type { ClassEntry } from '@/types/classes';
 import { BODY_SHAPE_SLOTS, type CompanionSlotAccess } from '@/data/companions/bodyShapeSlots';
 import { ALL_TEMPLATES } from '@/data/templates';
 import type { GrantsCompanionSpec } from '@/data/templates/types';

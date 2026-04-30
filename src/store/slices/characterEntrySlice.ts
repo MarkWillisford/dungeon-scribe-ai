@@ -597,18 +597,18 @@ const characterEntrySlice = createSlice({
         notes: '',
         background: '',
       };
-      state.draft.companions.push(companion);
+      state.character.companions.push(companion);
       state.isDirty = true;
     },
 
     removeCompanion(state, action: PayloadAction<string>) {
       const instanceId = action.payload;
-      state.draft.companions = state.draft.companions.filter((c) => c.instanceId !== instanceId);
+      state.character.companions = state.character.companions.filter((c) => c.instanceId !== instanceId);
       state.isDirty = true;
     },
 
     renameCompanion(state, action: PayloadAction<{ instanceId: string; name: string }>) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (comp) {
         comp.name = action.payload.name;
         state.isDirty = true;
@@ -619,7 +619,7 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ instanceId: string; effectiveProgressionLevel: number }>,
     ) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (comp) {
         comp.effectiveProgressionLevel = action.payload.effectiveProgressionLevel;
         state.isDirty = true;
@@ -631,11 +631,11 @@ const characterEntrySlice = createSlice({
     // internal-ish — only the migration helpers + integration tests call it.
     removeCompanionsGrantedByClass(state, action: PayloadAction<string>) {
       const classId = action.payload;
-      const before = state.draft.companions.length;
-      state.draft.companions = state.draft.companions.filter(
+      const before = state.character.companions.length;
+      state.character.companions = state.character.companions.filter(
         (c) => !(c.grantedBy.type === 'class' && c.grantedBy.classEntryId === classId),
       );
-      if (state.draft.companions.length !== before) state.isDirty = true;
+      if (state.character.companions.length !== before) state.isDirty = true;
     },
 
     // Set or clear a single ability score override on a companion. Pass
@@ -648,7 +648,7 @@ const characterEntrySlice = createSlice({
         value: number | null;
       }>,
     ) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       const { ability, value } = action.payload;
       if (value === null) {
@@ -667,7 +667,7 @@ const characterEntrySlice = createSlice({
         value: number;
       }>,
     ) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       comp.hp[action.payload.field] = action.payload.value;
       state.isDirty = true;
@@ -678,14 +678,14 @@ const characterEntrySlice = createSlice({
     // Player can manually reset overrides if the new form's base stats make
     // them stale.
     swapCompanionForm(state, action: PayloadAction<{ instanceId: string; sourceEntryId: string }>) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       comp.sourceEntryId = action.payload.sourceEntryId;
       state.isDirty = true;
     },
 
     setCompanionNotes(state, action: PayloadAction<{ instanceId: string; notes: string }>) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       comp.notes = action.payload.notes;
       state.isDirty = true;
@@ -695,7 +695,7 @@ const characterEntrySlice = createSlice({
     // CompanionService.computeFeatSlots; the slice just owns the assigned list.
     // Duplicate featIds are allowed (e.g. Toughness) so the UI can stack them.
     addCompanionFeat(state, action: PayloadAction<{ instanceId: string; feat: CompanionFeat }>) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       comp.feats.push(action.payload.feat);
       state.isDirty = true;
@@ -704,7 +704,7 @@ const characterEntrySlice = createSlice({
     // Removes the feat at a specific index so duplicates (e.g. two Toughness
     // picks) can be removed independently.
     removeCompanionFeatAt(state, action: PayloadAction<{ instanceId: string; index: number }>) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       const { index } = action.payload;
       if (index < 0 || index >= comp.feats.length) return;
@@ -715,7 +715,7 @@ const characterEntrySlice = createSlice({
     // Toggle a trick on/off. Tricks are a set; no duplicates. The UI enforces
     // the known-tricks cap, not the slice.
     toggleCompanionTrick(state, action: PayloadAction<{ instanceId: string; trick: TrickName }>) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       const { trick } = action.payload;
       const idx = comp.tricks.indexOf(trick);
@@ -730,7 +730,7 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ instanceId: string; skill: string; ranks: number }>,
     ) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       const { skill, ranks } = action.payload;
       if (ranks <= 0) {
@@ -748,7 +748,7 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ instanceId: string; background: string }>,
     ) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       comp.background = action.payload.background;
       state.isDirty = true;
@@ -762,7 +762,7 @@ const characterEntrySlice = createSlice({
         ability: CompanionAbilityIncrease['ability'];
       }>,
     ) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       const existing = comp.hdAbilityIncreases.find((i) => i.atLevel === action.payload.atLevel);
       if (existing) {
@@ -786,14 +786,14 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ instanceId: string; template: AppliedTemplate }>,
     ) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       comp.appliedTemplates.push(action.payload.template);
       state.isDirty = true;
     },
 
     removeCompanionTemplateAt(state, action: PayloadAction<{ instanceId: string; index: number }>) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       const { index } = action.payload;
       if (index < 0 || index >= comp.appliedTemplates.length) return;
@@ -809,7 +809,7 @@ const characterEntrySlice = createSlice({
         patch: Partial<AppliedTemplate>;
       }>,
     ) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       const { index, patch } = action.payload;
       if (index < 0 || index >= comp.appliedTemplates.length) return;
@@ -834,7 +834,7 @@ const characterEntrySlice = createSlice({
         item: CharacterMagicItem;
       }>,
     ) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       const { slot, item } = action.payload;
 
@@ -862,7 +862,7 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ instanceId: string; slot: ItemSlot }>,
     ) {
-      const comp = state.draft.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
       if (!comp) return;
       const { slot } = action.payload;
       const instanceIdInSlot = comp.equipment.equippedSlots[slot];
@@ -1312,7 +1312,7 @@ const characterEntrySlice = createSlice({
       }>,
     ) {
       // Make sure the owner class entry exists.
-      const owner = state.draft.classes.find((c) => c.id === action.payload.classEntryId);
+      const owner = state.character.classes.classes.find((c) => c.id === action.payload.classEntryId);
       if (!owner) return;
       const id = `eidolon-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
       const newEidolon: DraftEidolon = {
@@ -1324,18 +1324,18 @@ const characterEntrySlice = createSlice({
         subtype: action.payload.subtype,
         selectedEvolutions: [],
       };
-      state.draft.eidolons.push(newEidolon);
+      state.character.eidolons.push(newEidolon);
       state.isDirty = true;
     },
 
     removeEidolon(state, action: PayloadAction<string>) {
-      const before = state.draft.eidolons.length;
-      state.draft.eidolons = state.draft.eidolons.filter((e) => e.id !== action.payload);
-      if (state.draft.eidolons.length !== before) state.isDirty = true;
+      const before = state.character.eidolons.length;
+      state.character.eidolons = state.character.eidolons.filter((e) => e.id !== action.payload);
+      if (state.character.eidolons.length !== before) state.isDirty = true;
     },
 
     renameEidolon(state, action: PayloadAction<{ eidolonId: string; name: string }>) {
-      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      const eid = state.character.eidolons.find((e) => e.id === action.payload.eidolonId);
       if (eid) {
         eid.name = action.payload.name;
         state.isDirty = true;
@@ -1350,7 +1350,7 @@ const characterEntrySlice = createSlice({
         removeEvolutionInstanceIds?: string[];
       }>,
     ) {
-      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      const eid = state.character.eidolons.find((e) => e.id === action.payload.eidolonId);
       if (!eid) return;
       eid.baseForm = action.payload.baseForm;
       if (
@@ -1371,7 +1371,7 @@ const characterEntrySlice = createSlice({
         removeEvolutionInstanceIds?: string[];
       }>,
     ) {
-      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      const eid = state.character.eidolons.find((e) => e.id === action.payload.eidolonId);
       if (!eid) return;
       eid.subtype = action.payload.subtype;
       if (
@@ -1392,7 +1392,7 @@ const characterEntrySlice = createSlice({
         metadata?: SelectedEvolutionMetadata;
       }>,
     ) {
-      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      const eid = state.character.eidolons.find((e) => e.id === action.payload.eidolonId);
       if (!eid) return;
       // Defense-in-depth: 30 is far beyond any real EP budget (largest pool ~30 at
       // level 20 with all extras, but every evolution costs at least 1 pt, so
@@ -1411,7 +1411,7 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ eidolonId: string; instanceId: string }>,
     ) {
-      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      const eid = state.character.eidolons.find((e) => e.id === action.payload.eidolonId);
       if (!eid) return;
       const before = eid.selectedEvolutions.length;
       eid.selectedEvolutions = eid.selectedEvolutions.filter(
@@ -1428,7 +1428,7 @@ const characterEntrySlice = createSlice({
         metadata?: SelectedEvolutionMetadata;
       }>,
     ) {
-      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      const eid = state.character.eidolons.find((e) => e.id === action.payload.eidolonId);
       if (!eid) return;
       const sel = eid.selectedEvolutions.find((s) => s.instanceId === action.payload.instanceId);
       if (sel) {
@@ -1443,7 +1443,7 @@ const characterEntrySlice = createSlice({
         { eidolonId: string; clear: true } | { eidolonId: string; value: number; note: string }
       >,
     ) {
-      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      const eid = state.character.eidolons.find((e) => e.id === action.payload.eidolonId);
       if (!eid) return;
       if ('clear' in action.payload) {
         eid.poolOverride = undefined;
@@ -1463,7 +1463,7 @@ const characterEntrySlice = createSlice({
         metadata?: SelectedEvolutionMetadata;
       }>,
     ) {
-      const cls = state.draft.classes.find((c) => c.id === action.payload.classEntryId);
+      const cls = state.character.classes.classes.find((c) => c.id === action.payload.classEntryId);
       if (!cls) return;
       if (!cls.summonerBroodmaster) {
         cls.summonerBroodmaster = { sharedEvolutions: [] };
@@ -1481,7 +1481,7 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ classEntryId: string; instanceId: string }>,
     ) {
-      const cls = state.draft.classes.find((c) => c.id === action.payload.classEntryId);
+      const cls = state.character.classes.classes.find((c) => c.id === action.payload.classEntryId);
       if (!cls?.summonerBroodmaster) return;
       const before = cls.summonerBroodmaster.sharedEvolutions.length;
       cls.summonerBroodmaster.sharedEvolutions = cls.summonerBroodmaster.sharedEvolutions.filter(
@@ -1493,7 +1493,7 @@ const characterEntrySlice = createSlice({
     // ---- Aspect / Greater Aspect (live on the DraftEidolon) ----
 
     setAspectDivert(state, action: PayloadAction<{ eidolonId: string; divertedPoints: number }>) {
-      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      const eid = state.character.eidolons.find((e) => e.id === action.payload.eidolonId);
       if (!eid) return;
       if (!eid.aspectTransfer) {
         eid.aspectTransfer = { divertedPoints: 0, summonerEvolutions: [] };
@@ -1514,7 +1514,7 @@ const characterEntrySlice = createSlice({
         metadata?: SelectedEvolutionMetadata;
       }>,
     ) {
-      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      const eid = state.character.eidolons.find((e) => e.id === action.payload.eidolonId);
       if (!eid) return;
       if (!eid.aspectTransfer) {
         eid.aspectTransfer = { divertedPoints: 0, summonerEvolutions: [] };
@@ -1532,7 +1532,7 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ eidolonId: string; instanceId: string }>,
     ) {
-      const eid = state.draft.eidolons.find((e) => e.id === action.payload.eidolonId);
+      const eid = state.character.eidolons.find((e) => e.id === action.payload.eidolonId);
       if (!eid?.aspectTransfer) return;
       const before = eid.aspectTransfer.summonerEvolutions.length;
       eid.aspectTransfer.summonerEvolutions = eid.aspectTransfer.summonerEvolutions.filter(

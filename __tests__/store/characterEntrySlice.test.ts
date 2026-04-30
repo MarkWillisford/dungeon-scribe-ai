@@ -1047,34 +1047,6 @@ describe('characterEntrySlice — classes', () => {
       expect(state.character.classes.classes[0].favoredClassBonuses).toBeUndefined();
     });
 
-    it('rejects payload when hp + skillRank exceeds class level', () => {
-      let state = reducer(
-        makeInitialState(),
-        addClass(makeClass('cls-1', { name: 'Fighter', level: 4 })),
-      );
-      state = reducer(state, toggleFavoredClass('cls-1'));
-      // Total 5 + 3 = 8 > level 4 — bonuses should remain empty
-      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', hp: 5, skillRank: 3 }));
-      expect(state.character.classes.favoredClassBonuses).toHaveLength(0);
-    });
-
-    it('accepts payload when hp + skillRank exactly equals class level', () => {
-      let state = reducer(
-        makeInitialState(),
-        addClass(makeClass('cls-1', { name: 'Fighter', level: 8 })),
-      );
-      state = reducer(state, toggleFavoredClass('cls-1'));
-      // Total 5 + 3 = 8 = level 8 — should be accepted
-      state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', hp: 5, skillRank: 3 }));
-      const hpBonus = state.character.classes.favoredClassBonuses.find(
-        (b) => b.className === 'Fighter' && b.bonusType === 'hp',
-      );
-      const skBonus = state.character.classes.favoredClassBonuses.find(
-        (b) => b.className === 'Fighter' && b.bonusType === 'skillRank',
-      );
-      expect(hpBonus?.value).toBe(5);
-      expect(skBonus?.value).toBe(3);
-    });
   });
 
   describe('reorderClasses', () => {
@@ -1847,7 +1819,7 @@ describe('characterEntrySlice — companions', () => {
   it('removeClass cascades: companions granted by that class are dropped', () => {
     let state = reducer(
       makeInitialState(),
-      addClass(makeClass('class-druid', { className: 'Druid' })),
+      addClass(makeClass('class-druid', { name: 'Druid' })),
     );
     state = reducer(
       state,
@@ -1867,7 +1839,7 @@ describe('characterEntrySlice — companions', () => {
   it('template-granted companions are NOT swept when an unrelated class is removed', () => {
     let state = reducer(
       makeInitialState(),
-      addClass(makeClass('class-druid', { className: 'Druid' })),
+      addClass(makeClass('class-druid', { name: 'Druid' })),
     );
     state = reducer(
       state,
@@ -2115,9 +2087,9 @@ describe('characterEntrySlice — companions', () => {
         b,
         setCompanionSkillRank({ instanceId: 'missing', skill: 'Stealth', ranks: 3 }),
       );
-      expect(c.draft.companions[0].feats).toHaveLength(0);
-      expect(c.draft.companions[0].tricks).toHaveLength(0);
-      expect(c.draft.companions[0].skillRanks).toEqual({});
+      expect(c.character.companions[0].feats).toHaveLength(0);
+      expect(c.character.companions[0].tricks).toHaveLength(0);
+      expect(c.character.companions[0].skillRanks).toEqual({});
     });
 
     // ---- Phase 1.7: background / templates ---------------------------------
@@ -2329,8 +2301,8 @@ describe('characterEntrySlice — companions', () => {
           patch: { acquisitionType: 'acquired' },
         }),
       );
-      expect(d.draft.companions[0].background).toBe('');
-      expect(d.draft.companions[0].appliedTemplates).toHaveLength(0);
+      expect(d.character.companions[0].background).toBe('');
+      expect(d.character.companions[0].appliedTemplates).toHaveLength(0);
     });
 
     // ---- Phase 1.7: equipment ---------------------------------------------
@@ -2456,7 +2428,7 @@ describe('characterEntrySlice — companions', () => {
         }),
       );
       const b = reducer(a, unequipCompanionMagicItem({ instanceId: 'missing', slot: 'neck' }));
-      expect(b.draft.companions[0].equipment.magicItems).toHaveLength(0);
+      expect(b.character.companions[0].equipment.magicItems).toHaveLength(0);
     });
   });
 });
@@ -2473,7 +2445,7 @@ function makeStateWithSummoner() {
     sourceSystem: 'pf1e',
     classChoices: [],
     prereqOverride: false,
-  } as ClassEntry;
+  } as unknown as ClassEntry;
   return reducer(makeInitialState(), addClass(summoner));
 }
 
@@ -2648,9 +2620,9 @@ describe('characterEntrySlice — eidolons', () => {
         state,
         addSelectedEvolution({ eidolonId: id, evolutionId: 'evolution-bite' }),
       );
-      expect(next.draft.eidolons[0].selectedEvolutions).toHaveLength(1);
-      expect(next.draft.eidolons[0].selectedEvolutions[0].evolutionId).toBe('evolution-bite');
-      expect(next.draft.eidolons[0].selectedEvolutions[0].instanceId).toMatch(/^evo-/);
+      expect(next.character.eidolons[0].selectedEvolutions).toHaveLength(1);
+      expect(next.character.eidolons[0].selectedEvolutions[0].evolutionId).toBe('evolution-bite');
+      expect(next.character.eidolons[0].selectedEvolutions[0].instanceId).toMatch(/^evo-/);
     });
 
     it('removes by instanceId', () => {

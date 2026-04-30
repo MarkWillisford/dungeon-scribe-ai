@@ -473,7 +473,7 @@ function makeDraft(name: string, level: number, archetypeName?: string): ClassEn
     sourceSystem: 'pf1e',
     prereqOverride: false,
     classChoices: [],
-  } as ClassEntry;
+  } as unknown as ClassEntry;
 }
 
 describe('effectiveLevelFromDraftClass', () => {

@@ -175,9 +175,9 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
   useEffect(() => {
     let cancelled = false;
     const promise =
-      !raceName || !entry.className
+      !raceName || !entry.name
         ? Promise.resolve([])
-        : GameDataService.getFavoredClassBonuses(raceName, entry.className);
+        : GameDataService.getFavoredClassBonuses(raceName, entry.name);
     promise
       .then((results) => {
         if (!cancelled) setAlternates(results as FavoredClassBonusEntry[]);
@@ -188,7 +188,7 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
     return () => {
       cancelled = true;
     };
-  }, [raceName, entry.className]);
+  }, [raceName, entry.name]);
 
   const selections = useMemo(() => entry.favoredClassBonuses ?? [], [entry.favoredClassBonuses]);
   const allocated = selections.length;
@@ -203,17 +203,17 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
     (level: number, sel: FavoredClassBonusSelection) => {
       const next = selections.filter((s) => s.level !== level).concat(sel);
       next.sort((a, b) => a.level - b.level);
-      dispatch(setFavoredClassBonuses({ id: entry.id, selections: next }));
+      dispatch(setFavoredClassBonuses({ id: entry.id ?? entry.name, selections: next }));
     },
-    [dispatch, entry.id, selections],
+    [dispatch, entry.id, entry.name, selections],
   );
 
   const clearLevelSelection = useCallback(
     (level: number) => {
       const next = selections.filter((s) => s.level !== level);
-      dispatch(setFavoredClassBonuses({ id: entry.id, selections: next }));
+      dispatch(setFavoredClassBonuses({ id: entry.id ?? entry.name, selections: next }));
     },
-    [dispatch, entry.id, selections],
+    [dispatch, entry.id, entry.name, selections],
   );
 
   // The level currently open in the alt picker modal (null = closed)
@@ -941,11 +941,6 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const classData = lookupClassData(entry.name, classDataMap);
   const isBaseClass = (classData?.maxLevel ?? 20) === 20;
 
-  const fcbHp =
-    favoredClassBonuses.find((b) => b.className === entry.name && b.bonusType === 'hp')?.value ?? 0;
-  const fcbSkill =
-    favoredClassBonuses.find((b) => b.className === entry.name && b.bonusType === 'skillRank')
-      ?.value ?? 0;
 
   useEffect(() => {
     GameDataService.getClassChoiceDefinitions(entry.name)
@@ -990,7 +985,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
         advancement: makeEmptyAdvancement(advancesSpec.mode, entry.level),
       }),
     );
-  }, [advancesSpec, entry.id, entry.level, entry.spellcastingAdvancement, dispatch]);
+  }, [advancesSpec, entry.id, entry.name, entry.level, entry.spellcastingAdvancement, dispatch]);
 
   return (
     <View
@@ -1115,7 +1110,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
       {isBaseClass && entry.isFavoredClass && <FavoredClassBonusSection entry={entry} />}
 
       {/* Eidolon sub-sheet — rendered above class choices for Summoner entries */}
-      {SUMMONER_CLASS_RE.test(entry.className) && <EidolonSection classEntry={entry} />}
+      {SUMMONER_CLASS_RE.test(entry.name) && <EidolonSection classEntry={entry} />}
 
       {/* Class choices */}
       {hasChoices && (
@@ -1250,8 +1245,8 @@ function CompanionSection({ entry }: CompanionSectionProps) {
     };
   }, [grantedCompanions.length, supportsMultiple]);
   const grantedByLabel = entry.archetypeName
-    ? `${entry.className} (${entry.archetypeName})`
-    : entry.className;
+    ? `${entry.name} (${entry.archetypeName})`
+    : entry.name;
 
   const handleAddCompanion = (ac: AnimalCompanionEntry) => {
     // The "+ Add" button on Beastmaster-style multi-grant classes uses the
@@ -1264,8 +1259,8 @@ function CompanionSection({ entry }: CompanionSectionProps) {
         name: ac.name,
         grantedBy: {
           type: 'class',
-          classEntryId: entry.id,
-          className: entry.className,
+          classEntryId: entry.id ?? entry.name,
+          className: entry.name,
           classChoiceId: 'animal_companion',
         },
         effectiveProgressionLevel: effectiveLevelFromDraftClass(entry),

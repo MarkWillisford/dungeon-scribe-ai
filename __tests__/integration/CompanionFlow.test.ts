@@ -264,7 +264,7 @@ describe('CompanionService.computeBaseStatBlock — wolf progression', () => {
 describe('characterEntrySlice — companion lifecycle', () => {
   it('starts with no companions', () => {
     const state = makeState();
-    expect(state.draft.companions).toHaveLength(0);
+    expect(state.character.companions).toHaveLength(0);
   });
 
   it('addCompanion creates a well-formed instance', () => {
@@ -279,7 +279,7 @@ describe('characterEntrySlice — companion lifecycle', () => {
         effectiveProgressionLevel: 10,
       }),
     );
-    const comp = state.draft.companions[0];
+    const comp = state.character.companions[0];
     expect(comp).toMatchObject({
       instanceId: 'inst-1',
       sourceEntryId: 'wolf',
@@ -310,7 +310,7 @@ describe('characterEntrySlice — companion lifecycle', () => {
       }),
     );
     state = reducer(state, removeCompanion('inst-1'));
-    expect(state.draft.companions).toHaveLength(0);
+    expect(state.character.companions).toHaveLength(0);
   });
 
   it('updateCompanionEffectiveLevel updates only the target', () => {
@@ -329,7 +329,7 @@ describe('characterEntrySlice — companion lifecycle', () => {
       state,
       updateCompanionEffectiveLevel({ instanceId: 'inst-1', effectiveProgressionLevel: 12 }),
     );
-    expect(state.draft.companions[0].effectiveProgressionLevel).toBe(12);
+    expect(state.character.companions[0].effectiveProgressionLevel).toBe(12);
   });
 
   it('renameCompanion updates the name without touching other fields', () => {
@@ -345,8 +345,8 @@ describe('characterEntrySlice — companion lifecycle', () => {
       }),
     );
     state = reducer(state, renameCompanion({ instanceId: 'inst-1', name: 'Fang' }));
-    expect(state.draft.companions[0].name).toBe('Fang');
-    expect(state.draft.companions[0].sourceEntryId).toBe('wolf');
+    expect(state.character.companions[0].name).toBe('Fang');
+    expect(state.character.companions[0].sourceEntryId).toBe('wolf');
   });
 
   it('toggleCompanionTrick adds and then removes the trick', () => {
@@ -362,9 +362,9 @@ describe('characterEntrySlice — companion lifecycle', () => {
       }),
     );
     state = reducer(state, toggleCompanionTrick({ instanceId: 'inst-1', trick: 'attack' }));
-    expect(state.draft.companions[0].tricks).toContain('attack');
+    expect(state.character.companions[0].tricks).toContain('attack');
     state = reducer(state, toggleCompanionTrick({ instanceId: 'inst-1', trick: 'attack' }));
-    expect(state.draft.companions[0].tricks).not.toContain('attack');
+    expect(state.character.companions[0].tricks).not.toContain('attack');
   });
 
   it('addCompanionFeat records feat with hdWhenTaken', () => {
@@ -392,9 +392,9 @@ describe('characterEntrySlice — companion lifecycle', () => {
         },
       }),
     );
-    expect(state.draft.companions[0].feats).toHaveLength(1);
-    expect(state.draft.companions[0].feats[0].featId).toBe('improved-natural-attack');
-    expect(state.draft.companions[0].feats[0].hdWhenTaken).toBe(3);
+    expect(state.character.companions[0].feats).toHaveLength(1);
+    expect(state.character.companions[0].feats[0].featId).toBe('improved-natural-attack');
+    expect(state.character.companions[0].feats[0].hdWhenTaken).toBe(3);
   });
 });
 
@@ -435,19 +435,19 @@ describe('multi-companion: class grant + template grant coexist', () => {
 
   it('draft holds both companions', () => {
     const state = buildMultiCompanionState();
-    expect(state.draft.companions).toHaveLength(2);
+    expect(state.character.companions).toHaveLength(2);
   });
 
   it('class companion isolated by grantedBy.type === class', () => {
     const state = buildMultiCompanionState();
-    const classCompanions = state.draft.companions.filter((c) => c.grantedBy.type === 'class');
+    const classCompanions = state.character.companions.filter((c) => c.grantedBy.type === 'class');
     expect(classCompanions).toHaveLength(1);
     expect(classCompanions[0].instanceId).toBe('class-comp');
   });
 
   it('template companion isolated by grantedBy.templateId', () => {
     const state = buildMultiCompanionState();
-    const tplCompanions = state.draft.companions.filter(
+    const tplCompanions = state.character.companions.filter(
       (c) => c.grantedBy.type === 'template' && c.grantedBy.templateId === 'druid-creature',
     );
     expect(tplCompanions).toHaveLength(1);
@@ -457,15 +457,15 @@ describe('multi-companion: class grant + template grant coexist', () => {
   it('removeCompanionsGrantedByClass removes class companion, preserves template companion', () => {
     let state = buildMultiCompanionState();
     state = reducer(state, removeCompanionsGrantedByClass('Druid'));
-    expect(state.draft.companions).toHaveLength(1);
-    expect(state.draft.companions[0].instanceId).toBe('tpl-comp');
+    expect(state.character.companions).toHaveLength(1);
+    expect(state.character.companions[0].instanceId).toBe('tpl-comp');
   });
 
   it('removeCompanion(class-comp) leaves template companion untouched', () => {
     let state = buildMultiCompanionState();
     state = reducer(state, removeCompanion('class-comp'));
-    expect(state.draft.companions).toHaveLength(1);
-    expect(state.draft.companions[0].grantedBy.type).toBe('template');
+    expect(state.character.companions).toHaveLength(1);
+    expect(state.character.companions[0].grantedBy.type).toBe('template');
   });
 
   it('each companion mutation is independent', () => {
@@ -474,8 +474,8 @@ describe('multi-companion: class grant + template grant coexist', () => {
       state,
       updateCompanionEffectiveLevel({ instanceId: 'class-comp', effectiveProgressionLevel: 11 }),
     );
-    const classComp = state.draft.companions.find((c) => c.instanceId === 'class-comp')!;
-    const tplComp = state.draft.companions.find((c) => c.instanceId === 'tpl-comp')!;
+    const classComp = state.character.companions.find((c) => c.instanceId === 'class-comp')!;
+    const tplComp = state.character.companions.find((c) => c.instanceId === 'tpl-comp')!;
     expect(classComp.effectiveProgressionLevel).toBe(11);
     expect(tplComp.effectiveProgressionLevel).toBe(7); // unchanged
   });
@@ -521,7 +521,7 @@ describe('multi-companion: Beastmaster with two class-granted companions', () =>
       }),
     );
 
-    expect(state.draft.companions).toHaveLength(2);
+    expect(state.character.companions).toHaveLength(2);
   });
 
   it('removeCompanionsGrantedByClass("Ranger") sweeps both Beastmaster companions', () => {
@@ -560,7 +560,7 @@ describe('multi-companion: Beastmaster with two class-granted companions', () =>
     );
 
     state = reducer(state, removeCompanionsGrantedByClass('Ranger'));
-    expect(state.draft.companions).toHaveLength(0);
+    expect(state.character.companions).toHaveLength(0);
   });
 });
 

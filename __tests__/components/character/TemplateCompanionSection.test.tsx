@@ -9,12 +9,12 @@ const mockDispatch = jest.fn();
 let mockState: {
   characterEntry: {
     originalCharacterId: string | null;
-    draft: { companions: CompanionInstance[]; classes: { level: number }[] };
+    character: { companions: CompanionInstance[]; classes: { classes: { level: number }[] } };
   };
 } = {
   characterEntry: {
     originalCharacterId: null,
-    draft: { companions: [], classes: [{ level: 10 }] },
+    character: { companions: [], classes: { classes: [{ level: 10 }] } },
   },
 };
 
@@ -164,7 +164,7 @@ beforeEach(() => {
   mockState = {
     characterEntry: {
       originalCharacterId: null,
-      draft: { companions: [], classes: [{ level: 10 }] },
+      character: { companions: [], classes: { classes: [{ level: 10 }] } },
     },
   };
 });
@@ -209,7 +209,7 @@ describe('TemplateCompanionSection', () => {
   });
 
   it('characterLevel formula uses total level exactly', () => {
-    mockState.characterEntry.draft.classes = [{ level: 6 }, { level: 4 }];
+    mockState.characterEntry.character.classes.classes = [{ level: 6 }, { level: 4 }];
     const r = render(
       <TemplateCompanionSection
         templateId="some-template"
@@ -226,7 +226,7 @@ describe('TemplateCompanionSection', () => {
   });
 
   it('characterLevel-4 formula clamps to 1 at low levels', () => {
-    mockState.characterEntry.draft.classes = [{ level: 3 }];
+    mockState.characterEntry.character.classes.classes = [{ level: 3 }];
     const r = render(
       <TemplateCompanionSection
         templateId="paladinish"
@@ -243,7 +243,7 @@ describe('TemplateCompanionSection', () => {
   });
 
   it('renders CompanionCard when a companion for this template already exists', () => {
-    mockState.characterEntry.draft.companions = [makeCompanion()];
+    mockState.characterEntry.character.companions = [makeCompanion()];
     const r = render(
       <TemplateCompanionSection
         templateId="druid-creature"
@@ -255,7 +255,7 @@ describe('TemplateCompanionSection', () => {
   });
 
   it('CompanionCard remove dispatches removeCompanion with the instanceId', () => {
-    mockState.characterEntry.draft.companions = [makeCompanion({ instanceId: 'comp-9' })];
+    mockState.characterEntry.character.companions = [makeCompanion({ instanceId: 'comp-9' })];
     const r = render(
       <TemplateCompanionSection
         templateId="druid-creature"
@@ -277,7 +277,7 @@ describe('TemplateCompanionSection', () => {
   });
 
   it('filters by templateId — companion granted by a different template is not rendered', () => {
-    mockState.characterEntry.draft.companions = [
+    mockState.characterEntry.character.companions = [
       makeCompanion({
         instanceId: 'comp-other',
         grantedBy: { type: 'template', templateId: 'half-celestial' },

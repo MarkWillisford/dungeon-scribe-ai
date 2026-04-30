@@ -730,7 +730,7 @@ export class CharacterValidationService {
       }
 
       // ── Pool breakdown warnings (overspend, missing override reason) ──
-      const breakdown = EidolonPoolService.computePool(draft, eidolon.id, dataIndex);
+      const breakdown = EidolonPoolService.computePool(character, eidolon.id, dataIndex);
       for (const msg of breakdown.warnings) {
         w.push(
           warn(
