@@ -250,6 +250,7 @@ export function EquipmentPickerSheet({
       collection: item.collection,
       allowsHandUse: item.allowsHandUse,
       isContainer: item.isContainer,
+      effects: item.effects,
     });
   };
 
