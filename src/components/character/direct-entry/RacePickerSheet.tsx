@@ -1,5 +1,14 @@
-import React, { useState, useMemo } from 'react';
-import { View, Text, TextInput, Pressable, Modal, FlatList, StyleSheet } from 'react-native';
+import React, { useState, useMemo, useEffect } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Modal,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+} from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
 import type { ExpandedRaceData } from '@/data/races';
@@ -64,8 +73,11 @@ function formatMods(race: ExpandedRaceData): string {
 
 // ---- Component ----
 
-function buildRaceList(): ExpandedRaceData[] {
-  const groups = GameDataService.getRaceGroupsSync();
+function flattenGroups(groups: {
+  core: ExpandedRaceData[];
+  featured: ExpandedRaceData[];
+  uncommon: ExpandedRaceData[];
+}): ExpandedRaceData[] {
   const flat = [...groups.core, ...groups.featured, ...groups.uncommon];
   const seen = new Set<string>();
   return flat.filter((r) => {
@@ -78,8 +90,25 @@ function buildRaceList(): ExpandedRaceData[] {
 export function RacePickerSheet({ visible, onSelect, onClose }: RacePickerSheetProps) {
   const { colors, fantasy, isDark } = useTheme();
   const [query, setQuery] = useState('');
-  // Static data is bundled — build the list once, synchronously.
-  const [allRaces] = useState<ExpandedRaceData[]>(buildRaceList);
+  const [allRaces, setAllRaces] = useState<ExpandedRaceData[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!visible || loaded) return;
+    let cancelled = false;
+    GameDataService.getRaceGroups()
+      .then((groups) => {
+        if (cancelled) return;
+        setAllRaces(flattenGroups(groups));
+        setLoaded(true);
+      })
+      .catch((e) => {
+        if (!cancelled) console.error('RacePickerSheet: Firestore load failed', e);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [visible, loaded]);
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
@@ -146,54 +175,61 @@ export function RacePickerSheet({ visible, onSelect, onClose }: RacePickerSheetP
         </View>
 
         {/* Results */}
-        <FlatList
-          data={filtered}
-          keyExtractor={(r) => r.name}
-          keyboardShouldPersistTaps="handled"
-          renderItem={({ item }) => (
-            <Pressable
-              onPress={() => handleSelect(item)}
-              style={({ pressed }) => [
-                styles.item,
-                {
-                  borderBottomColor: colors.border.DEFAULT,
-                  backgroundColor: pressed
-                    ? isDark
-                      ? 'rgba(212,175,55,0.1)'
-                      : 'rgba(140,90,40,0.06)'
-                    : 'transparent',
-                },
-              ]}
-            >
-              <View style={styles.itemRow}>
-                <Text style={[styles.itemName, { color: colors.text.primary }]} numberOfLines={1}>
-                  {item.name}
-                </Text>
-                <View
-                  style={[
-                    styles.categoryBadge,
-                    { backgroundColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)' },
-                  ]}
-                >
-                  <Text style={[styles.categoryText, { color: colors.text.tertiary }]}>
-                    {item.category}
+        {!loaded ? (
+          <View style={styles.loadingView}>
+            <ActivityIndicator size="large" color={fantasy.gold} />
+            <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>Loading...</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={filtered}
+            keyExtractor={(r) => r.name}
+            keyboardShouldPersistTaps="handled"
+            renderItem={({ item }) => (
+              <Pressable
+                onPress={() => handleSelect(item)}
+                style={({ pressed }) => [
+                  styles.item,
+                  {
+                    borderBottomColor: colors.border.DEFAULT,
+                    backgroundColor: pressed
+                      ? isDark
+                        ? 'rgba(212,175,55,0.1)'
+                        : 'rgba(140,90,40,0.06)'
+                      : 'transparent',
+                  },
+                ]}
+              >
+                <View style={styles.itemRow}>
+                  <Text style={[styles.itemName, { color: colors.text.primary }]} numberOfLines={1}>
+                    {item.name}
                   </Text>
+                  <View
+                    style={[
+                      styles.categoryBadge,
+                      { backgroundColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)' },
+                    ]}
+                  >
+                    <Text style={[styles.categoryText, { color: colors.text.tertiary }]}>
+                      {item.category}
+                    </Text>
+                  </View>
                 </View>
+                <Text style={[styles.itemMods, { color: colors.text.secondary }]}>
+                  {formatMods(item)}
+                </Text>
+              </Pressable>
+            )}
+            contentContainerStyle={styles.listContent}
+            ListEmptyComponent={
+              <View style={styles.empty}>
+                <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
+                  {query ? `No races matching "${query}"` : 'No races available'}
+                </Text>
               </View>
-              <Text style={[styles.itemMods, { color: colors.text.secondary }]}>
-                {formatMods(item)}
-              </Text>
-            </Pressable>
-          )}
-          contentContainerStyle={styles.listContent}
-          ListEmptyComponent={
-            <View style={styles.empty}>
-              <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                {query ? `No races matching "${query}"` : 'No races available'}
-              </Text>
-            </View>
-          }
-        />
+            }
+          />
+        )}
       </View>
     </Modal>
   );
@@ -233,6 +269,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     minHeight: 44,
+  },
+  loadingView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
+  },
+  loadingText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+    fontStyle: 'italic',
   },
   listContent: { flexGrow: 1 },
   item: {

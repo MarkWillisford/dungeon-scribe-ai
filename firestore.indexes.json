@@ -67,6 +67,22 @@
         { "fieldPath": "raceName", "order": "ASCENDING" },
         { "fieldPath": "className", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "races",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "visibility", "order": "ASCENDING" },
+        { "fieldPath": "category", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "races",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "visibility", "order": "ASCENDING" },
+        { "fieldPath": "flexibleAbilityBonus", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []
