@@ -138,22 +138,6 @@ const initialState: CharacterEntryState = {
   validationWarnings: [],
 };
 
-// ---- Migration helpers ----
-
-// Converts a DraftClassEntry from the legacy { hp, skillRank } counter format
-// to the FavoredClassBonusSelection[] per-level format. Runs at loadCharacter time
-// so old Firestore documents are transparently upgraded.
-function promoteLegacyFCB(legacy: unknown, classLevel: number): FavoredClassBonusSelection[] {
-  if (Array.isArray(legacy)) return legacy as FavoredClassBonusSelection[];
-  if (!legacy || typeof legacy !== 'object') return [];
-  const { hp = 0, skillRank = 0 } = legacy as { hp?: number; skillRank?: number };
-  const out: FavoredClassBonusSelection[] = [];
-  for (let i = 0; i < hp; i++) out.push({ level: out.length + 1, type: 'hp' });
-  for (let i = 0; i < skillRank; i++) out.push({ level: out.length + 1, type: 'skill' });
-  // Cap at classLevel in case of stale over-allocated data
-  return out.slice(0, classLevel);
-}
-
 // ---- Slice ----
 
 const characterEntrySlice = createSlice({
@@ -603,12 +587,16 @@ const characterEntrySlice = createSlice({
 
     removeCompanion(state, action: PayloadAction<string>) {
       const instanceId = action.payload;
-      state.character.companions = state.character.companions.filter((c) => c.instanceId !== instanceId);
+      state.character.companions = state.character.companions.filter(
+        (c) => c.instanceId !== instanceId,
+      );
       state.isDirty = true;
     },
 
     renameCompanion(state, action: PayloadAction<{ instanceId: string; name: string }>) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (comp) {
         comp.name = action.payload.name;
         state.isDirty = true;
@@ -619,7 +607,9 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ instanceId: string; effectiveProgressionLevel: number }>,
     ) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (comp) {
         comp.effectiveProgressionLevel = action.payload.effectiveProgressionLevel;
         state.isDirty = true;
@@ -648,7 +638,9 @@ const characterEntrySlice = createSlice({
         value: number | null;
       }>,
     ) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       const { ability, value } = action.payload;
       if (value === null) {
@@ -667,7 +659,9 @@ const characterEntrySlice = createSlice({
         value: number;
       }>,
     ) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       comp.hp[action.payload.field] = action.payload.value;
       state.isDirty = true;
@@ -678,14 +672,18 @@ const characterEntrySlice = createSlice({
     // Player can manually reset overrides if the new form's base stats make
     // them stale.
     swapCompanionForm(state, action: PayloadAction<{ instanceId: string; sourceEntryId: string }>) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       comp.sourceEntryId = action.payload.sourceEntryId;
       state.isDirty = true;
     },
 
     setCompanionNotes(state, action: PayloadAction<{ instanceId: string; notes: string }>) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       comp.notes = action.payload.notes;
       state.isDirty = true;
@@ -695,7 +693,9 @@ const characterEntrySlice = createSlice({
     // CompanionService.computeFeatSlots; the slice just owns the assigned list.
     // Duplicate featIds are allowed (e.g. Toughness) so the UI can stack them.
     addCompanionFeat(state, action: PayloadAction<{ instanceId: string; feat: CompanionFeat }>) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       comp.feats.push(action.payload.feat);
       state.isDirty = true;
@@ -704,7 +704,9 @@ const characterEntrySlice = createSlice({
     // Removes the feat at a specific index so duplicates (e.g. two Toughness
     // picks) can be removed independently.
     removeCompanionFeatAt(state, action: PayloadAction<{ instanceId: string; index: number }>) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       const { index } = action.payload;
       if (index < 0 || index >= comp.feats.length) return;
@@ -715,7 +717,9 @@ const characterEntrySlice = createSlice({
     // Toggle a trick on/off. Tricks are a set; no duplicates. The UI enforces
     // the known-tricks cap, not the slice.
     toggleCompanionTrick(state, action: PayloadAction<{ instanceId: string; trick: TrickName }>) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       const { trick } = action.payload;
       const idx = comp.tricks.indexOf(trick);
@@ -730,7 +734,9 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ instanceId: string; skill: string; ranks: number }>,
     ) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       const { skill, ranks } = action.payload;
       if (ranks <= 0) {
@@ -748,7 +754,9 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ instanceId: string; background: string }>,
     ) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       comp.background = action.payload.background;
       state.isDirty = true;
@@ -762,7 +770,9 @@ const characterEntrySlice = createSlice({
         ability: CompanionAbilityIncrease['ability'];
       }>,
     ) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       const existing = comp.hdAbilityIncreases.find((i) => i.atLevel === action.payload.atLevel);
       if (existing) {
@@ -786,14 +796,18 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ instanceId: string; template: AppliedTemplate }>,
     ) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       comp.appliedTemplates.push(action.payload.template);
       state.isDirty = true;
     },
 
     removeCompanionTemplateAt(state, action: PayloadAction<{ instanceId: string; index: number }>) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       const { index } = action.payload;
       if (index < 0 || index >= comp.appliedTemplates.length) return;
@@ -809,7 +823,9 @@ const characterEntrySlice = createSlice({
         patch: Partial<AppliedTemplate>;
       }>,
     ) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       const { index, patch } = action.payload;
       if (index < 0 || index >= comp.appliedTemplates.length) return;
@@ -834,7 +850,9 @@ const characterEntrySlice = createSlice({
         item: CharacterMagicItem;
       }>,
     ) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       const { slot, item } = action.payload;
 
@@ -862,7 +880,9 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ instanceId: string; slot: ItemSlot }>,
     ) {
-      const comp = state.character.companions.find((c) => c.instanceId === action.payload.instanceId);
+      const comp = state.character.companions.find(
+        (c) => c.instanceId === action.payload.instanceId,
+      );
       if (!comp) return;
       const { slot } = action.payload;
       const instanceIdInSlot = comp.equipment.equippedSlots[slot];
@@ -1312,7 +1332,9 @@ const characterEntrySlice = createSlice({
       }>,
     ) {
       // Make sure the owner class entry exists.
-      const owner = state.character.classes.classes.find((c) => c.id === action.payload.classEntryId);
+      const owner = state.character.classes.classes.find(
+        (c) => c.id === action.payload.classEntryId,
+      );
       if (!owner) return;
       const id = `eidolon-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
       const newEidolon: DraftEidolon = {

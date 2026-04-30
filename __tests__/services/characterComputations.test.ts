@@ -374,7 +374,6 @@ describe('computeMaxHP', () => {
     expect(computeMaxHP([fighter], 0, TEST_CLASS_MAP)).toBe(10 + 6 + 6);
   });
 
-
   it('does not add favored class HP when not set', () => {
     expect(computeMaxHP([cls('Fighter', 2)], 0, TEST_CLASS_MAP)).toBe(10 + 6);
   });
@@ -990,4 +989,47 @@ describe('computeFCBAlternateAccumulation', () => {
     expect(result[0].count).toBe(3);
     expect(result[0].display).toBe('+3 cmb');
   });
+});
+
+// ---- fcbEffectDisplay branch coverage (count=0 and bonus+requiresPickOne) ----
+
+it('returns empty string when count is 0', () => {
+  const opt = fcbOption('test', 'Fighter', {
+    type: 'bonus',
+    bonusType: 'untyped',
+    target: 'cmb',
+    perLevelValue: { numerator: 1, denominator: 1 },
+  });
+  const entry = clsWithFCB('Fighter', 0, []);
+  const result = computeFCBAlternateAccumulation([entry], [opt]);
+  // count is 0 so display should be empty
+  expect(result).toHaveLength(0);
+});
+
+it('bonus type with requiresPickOne appends chosen prompt', () => {
+  const opt = fcbOption('pick-one', 'Magus', {
+    type: 'bonus',
+    bonusType: 'untyped',
+    target: 'concentration',
+    perLevelValue: { numerator: 1, denominator: 1 },
+    requiresPickOne: true,
+    pickOnePrompt: 'school',
+  });
+  const entry = clsWithFCB('Magus', 2, [{ level: 1, type: 'alternate', optionId: 'pick-one' }]);
+  const result = computeFCBAlternateAccumulation([entry], [opt]);
+  expect(result[0].display).toContain('(chosen school)');
+});
+
+it('class_level_bump with requiresPickOne but no pickOnePrompt falls back to featureName', () => {
+  const opt = fcbOption('bump-noprompt', 'Inquisitor', {
+    type: 'class_level_bump',
+    featureName: 'bane',
+    perLevelValue: { numerator: 1, denominator: 3 },
+    requiresPickOne: true,
+  });
+  const entry = clsWithFCB('Inquisitor', 3, [
+    { level: 1, type: 'alternate', optionId: 'bump-noprompt' },
+  ]);
+  const result = computeFCBAlternateAccumulation([entry], [opt]);
+  expect(result[0].display).toContain('(chosen bane)');
 });

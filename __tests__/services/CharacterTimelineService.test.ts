@@ -3,7 +3,7 @@ import type { Character } from '@/types';
 import type { ClassEntry } from '@/types/classes';
 import type { AppliedTemplate } from '@/types/templates';
 import type { AbilityScore } from '@/types/abilities';
-import { Alignment, Size } from '@/types/base';
+import { Alignment, Size, BonusType } from '@/types/base';
 import { BABProgression, SaveProgression } from '@/types/base';
 import type { ClassDataMap } from '@/utils/characterComputations';
 
@@ -240,7 +240,7 @@ function blankCharacter(): Character {
       pools: [],
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     initiating: {
       pools: [],
       disciplines: [],
@@ -444,6 +444,23 @@ describe('CharacterTimelineService', () => {
       // At HD 8 — two increments applied
       const at8 = timeline.checkpoints[7].snapshot;
       expect(at8.abilityScores.str.total).toBe(18);
+    });
+
+    it('enhancement bonus from gear is included in ability score snapshot total', () => {
+      const character = blankCharacter();
+      character.classes.classes = [makeClass('Fighter', 1, '1')];
+      character.abilityScores.str.bonuses.enhancement.push({
+        type: BonusType.ENHANCEMENT,
+        value: 4,
+        source: 'Belt of Giant Strength +4',
+        active: true,
+      });
+
+      const timeline = CharacterTimelineService.buildTimeline(character, undefined, EMPTY_MAP);
+      const snapshot = timeline.checkpoints[0].snapshot;
+
+      // str base=16, enhancement=4 → total=20
+      expect(snapshot.abilityScores.str.total).toBe(20);
     });
 
     it('class features filtered to current class level', () => {

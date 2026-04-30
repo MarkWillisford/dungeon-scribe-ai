@@ -81,6 +81,12 @@ import reducer, {
   unassignEquipmentSlot,
   assignEquipmentContainer,
   setCharacterNotes,
+  setSaving,
+  setSaveError,
+  applyComputedStats,
+  setAbilityOther,
+  setNotes,
+  setCompanionHDAbilityIncrease,
   addEidolon,
   removeEidolon,
   renameEidolon,
@@ -266,9 +272,7 @@ describe('characterEntrySlice — session management', () => {
       );
       expect(state.originalCharacterId).toBeNull();
     });
-
   });
-
 
   describe('resetDraft', () => {
     it('resets everything back to blank', () => {
@@ -743,7 +747,9 @@ describe('characterEntrySlice — classes', () => {
       ];
       state = reducer(state, setFavoredClassBonuses({ id: 'cls-1', selections }));
       state = reducer(state, updateClassLevel({ id: 'cls-1', level: 3 }));
-      expect(state.character.classes.classes[0].favoredClassBonuses).toEqual(selections.slice(0, 3));
+      expect(state.character.classes.classes[0].favoredClassBonuses).toEqual(
+        selections.slice(0, 3),
+      );
     });
 
     it('does not prune favoredClassBonuses when level increases', () => {
@@ -1046,7 +1052,6 @@ describe('characterEntrySlice — classes', () => {
       );
       expect(state.character.classes.classes[0].favoredClassBonuses).toBeUndefined();
     });
-
   });
 
   describe('reorderClasses', () => {
@@ -1817,10 +1822,7 @@ describe('characterEntrySlice — companions', () => {
   });
 
   it('removeClass cascades: companions granted by that class are dropped', () => {
-    let state = reducer(
-      makeInitialState(),
-      addClass(makeClass('class-druid', { name: 'Druid' })),
-    );
+    let state = reducer(makeInitialState(), addClass(makeClass('class-druid', { name: 'Druid' })));
     state = reducer(
       state,
       addCompanion({
@@ -1837,10 +1839,7 @@ describe('characterEntrySlice — companions', () => {
   });
 
   it('template-granted companions are NOT swept when an unrelated class is removed', () => {
-    let state = reducer(
-      makeInitialState(),
-      addClass(makeClass('class-druid', { name: 'Druid' })),
-    );
+    let state = reducer(makeInitialState(), addClass(makeClass('class-druid', { name: 'Druid' })));
     state = reducer(
       state,
       addCompanion({
@@ -2739,9 +2738,12 @@ describe('characterEntrySlice — eidolons', () => {
         makeStateWithSummoner(),
         setBroodmasterShared({ classEntryId: 'summoner-1', evolutionId: 'evolution-large' }),
       );
-      const instanceId = state.character.classes.classes[0].summonerBroodmaster!.sharedEvolutions[0].instanceId;
+      const instanceId =
+        state.character.classes.classes[0].summonerBroodmaster!.sharedEvolutions[0].instanceId;
       state = reducer(state, removeBroodmasterShared({ classEntryId: 'summoner-1', instanceId }));
-      expect(state.character.classes.classes[0].summonerBroodmaster?.sharedEvolutions).toHaveLength(0);
+      expect(state.character.classes.classes[0].summonerBroodmaster?.sharedEvolutions).toHaveLength(
+        0,
+      );
     });
 
     it('removeBroodmasterShared is a no-op when broodmaster state is absent', () => {
@@ -2845,7 +2847,8 @@ describe('characterEntrySlice — eidolons', () => {
         state,
         addSummonerAspectEvolution({ eidolonId: id, evolutionId: 'evolution-bite' }),
       );
-      const instanceId = state.character.eidolons[0].aspectTransfer!.summonerEvolutions[0].instanceId;
+      const instanceId =
+        state.character.eidolons[0].aspectTransfer!.summonerEvolutions[0].instanceId;
       state = reducer(state, removeSummonerAspectEvolution({ eidolonId: id, instanceId }));
       expect(state.character.eidolons[0].aspectTransfer?.summonerEvolutions).toHaveLength(0);
     });
@@ -2863,5 +2866,181 @@ describe('characterEntrySlice — eidolons', () => {
       );
       expect(JSON.stringify(state.character.eidolons[0])).toBe(before);
     });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Coverage targets — reducers not exercised elsewhere
+// ---------------------------------------------------------------------------
+
+describe('characterEntrySlice — misc state reducers', () => {
+  it('setSaving toggles isSaving', () => {
+    let state = reducer(undefined, { type: '@@INIT' });
+    state = reducer(state, setSaving(true));
+    expect(state.isSaving).toBe(true);
+    state = reducer(state, setSaving(false));
+    expect(state.isSaving).toBe(false);
+  });
+
+  it('setSaveError stores and clears error', () => {
+    let state = reducer(undefined, { type: '@@INIT' });
+    state = reducer(state, setSaveError('write failed'));
+    expect(state.saveError).toBe('write failed');
+    state = reducer(state, setSaveError(null));
+    expect(state.saveError).toBeNull();
+  });
+
+  it('applyComputedStats replaces character in-place', () => {
+    const state0 = reducer(undefined, { type: '@@INIT' });
+    const patched = { ...state0.character, info: { ...state0.character.info, name: 'Patched' } };
+    const state1 = reducer(state0, applyComputedStats(patched));
+    expect(state1.character.info.name).toBe('Patched');
+  });
+
+  it('setAbilityOther stores an untyped bonus on the ability', () => {
+    let state = reducer(undefined, { type: '@@INIT' });
+    state = reducer(state, setAbilityOther({ ability: 'str', value: 4 }));
+    const bonus = state.character.abilityScores.str.bonuses.untyped[0];
+    expect(bonus.value).toBe(4);
+    expect(bonus.source).toBe('misc');
+    expect(state.isDirty).toBe(true);
+  });
+
+  it('setNotes updates character notes', () => {
+    let state = reducer(undefined, { type: '@@INIT' });
+    state = reducer(state, setNotes('adventure log'));
+    expect(state.character.info.notes).toBe('adventure log');
+    expect(state.isDirty).toBe(true);
+  });
+});
+
+describe('characterEntrySlice — companion reducer no-op guards', () => {
+  const addComp = () =>
+    addCompanion({
+      instanceId: 'comp-1',
+      sourceEntryId: 'wolf',
+      name: 'Shadow',
+      grantedBy: {
+        type: 'class',
+        classEntryId: 'druid-1',
+        className: 'Druid',
+        classChoiceId: 'druid-nature-bond',
+      },
+      effectiveProgressionLevel: 10,
+    });
+
+  it('setCompanionHP is no-op for unknown instanceId', () => {
+    const s0 = reducer(undefined, { type: '@@INIT' });
+    const s1 = reducer(s0, setCompanionHP({ instanceId: 'nope', field: 'max', value: 99 }));
+    expect(s1.character.companions).toHaveLength(0);
+  });
+
+  it('swapCompanionForm is no-op for unknown instanceId', () => {
+    const s0 = reducer(undefined, { type: '@@INIT' });
+    const s1 = reducer(s0, swapCompanionForm({ instanceId: 'nope', sourceEntryId: 'cat' }));
+    expect(s1.character.companions).toHaveLength(0);
+  });
+
+  it('setCompanionNotes is no-op for unknown instanceId', () => {
+    const s0 = reducer(undefined, { type: '@@INIT' });
+    const s1 = reducer(s0, setCompanionNotes({ instanceId: 'nope', notes: 'x' }));
+    expect(s1.character.companions).toHaveLength(0);
+  });
+
+  it('addCompanionFeat is no-op for unknown instanceId', () => {
+    const s0 = reducer(undefined, { type: '@@INIT' });
+    const s1 = reducer(
+      s0,
+      addCompanionFeat({
+        instanceId: 'nope',
+        feat: { featId: 'f1', name: 'Dodge', hdWhenTaken: 1, active: true, choices: {} },
+      }),
+    );
+    expect(s1.character.companions).toHaveLength(0);
+  });
+
+  it('removeCompanionFeatAt is no-op for unknown instanceId and out-of-bounds index', () => {
+    let state = reducer(reducer(undefined, { type: '@@INIT' }), addComp());
+    state = reducer(
+      state,
+      addCompanionFeat({
+        instanceId: 'comp-1',
+        feat: { featId: 'f1', name: 'Dodge', hdWhenTaken: 1, active: true, choices: {} },
+      }),
+    );
+    // unknown instanceId
+    const before = state.character.companions[0].feats.length;
+    state = reducer(state, removeCompanionFeatAt({ instanceId: 'nope', index: 0 }));
+    expect(state.character.companions[0].feats).toHaveLength(before);
+    // out-of-bounds index
+    state = reducer(state, removeCompanionFeatAt({ instanceId: 'comp-1', index: 99 }));
+    expect(state.character.companions[0].feats).toHaveLength(before);
+  });
+
+  it('toggleCompanionTrick is no-op for unknown instanceId', () => {
+    const s0 = reducer(undefined, { type: '@@INIT' });
+    const s1 = reducer(s0, toggleCompanionTrick({ instanceId: 'nope', trick: 'come' }));
+    expect(s1.character.companions).toHaveLength(0);
+  });
+
+  it('setCompanionSkillRank is no-op for unknown instanceId', () => {
+    const s0 = reducer(undefined, { type: '@@INIT' });
+    const s1 = reducer(
+      s0,
+      setCompanionSkillRank({ instanceId: 'nope', skill: 'perception', ranks: 3 }),
+    );
+    expect(s1.character.companions).toHaveLength(0);
+  });
+
+  it('setCompanionBackground is no-op for unknown instanceId', () => {
+    const s0 = reducer(undefined, { type: '@@INIT' });
+    const s1 = reducer(s0, setCompanionBackground({ instanceId: 'nope', background: 'hero' }));
+    expect(s1.character.companions).toHaveLength(0);
+  });
+
+  it('setCompanionHDAbilityIncrease adds new increase and updates existing', () => {
+    let state = reducer(reducer(undefined, { type: '@@INIT' }), addComp());
+    state = reducer(
+      state,
+      setCompanionHDAbilityIncrease({ instanceId: 'comp-1', atLevel: 4, ability: 'STR' }),
+    );
+    expect(state.character.companions[0].hdAbilityIncreases).toEqual([
+      { atLevel: 4, ability: 'STR' },
+    ]);
+    // Update existing entry at same level
+    state = reducer(
+      state,
+      setCompanionHDAbilityIncrease({ instanceId: 'comp-1', atLevel: 4, ability: 'DEX' }),
+    );
+    expect(state.character.companions[0].hdAbilityIncreases).toEqual([
+      { atLevel: 4, ability: 'DEX' },
+    ]);
+    // No-op for unknown instanceId
+    const snapshot = JSON.stringify(state.character.companions);
+    state = reducer(
+      state,
+      setCompanionHDAbilityIncrease({ instanceId: 'nope', atLevel: 4, ability: 'CON' }),
+    );
+    expect(JSON.stringify(state.character.companions)).toBe(snapshot);
+  });
+});
+
+describe('characterEntrySlice — removeTemplate and updateTemplate branches', () => {
+  it('removeTemplate sweeps grantedBonuses by id', () => {
+    let state = reducer(undefined, { type: '@@INIT' });
+    state = reducer(
+      state,
+      addTemplate(makeTemplate('tmpl-1', { isFreeGrant: true, freeGrantNote: 'LA +4' })),
+    );
+    expect(state.character.grantedBonuses).toHaveLength(1);
+    state = reducer(state, removeTemplate('tmpl-1'));
+    expect(state.character.grantedBonuses).toHaveLength(0);
+  });
+
+  it('updateTemplate with isFreeGrant: false updates appliedTemplates', () => {
+    let state = reducer(undefined, { type: '@@INIT' });
+    state = reducer(state, addTemplate(makeTemplate('tmpl-2', { name: 'Vampire' })));
+    state = reducer(state, updateTemplate(makeTemplate('tmpl-2', { name: 'Vampire (Greater)' })));
+    expect(state.character.appliedTemplates[0].name).toBe('Vampire (Greater)');
   });
 });

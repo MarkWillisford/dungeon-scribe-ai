@@ -111,6 +111,7 @@ jest.mock('@/services/GameDataService', () => ({
       };
       return feats[id] ?? null;
     }),
+    getFavoredClassBonuses: jest.fn().mockResolvedValue([]),
   },
 }));
 
@@ -122,6 +123,7 @@ jest.mock('@services/PrerequisiteService', () => ({
 }));
 
 import { PrerequisiteService } from '@services/PrerequisiteService';
+import { GameDataService } from '@/services/GameDataService';
 
 // ---- Helpers ----
 
@@ -241,7 +243,7 @@ function blankCharacter(): Character {
     equipment: {} as any,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     spellcasting: { pools: [] } as any,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     initiating: {
       pools: [],
       disciplines: [],
@@ -942,6 +944,62 @@ describe('CharacterValidationService', () => {
         TEST_CLASS_MAP,
       );
       expect(warnings).toHaveLength(0);
+    });
+  });
+
+  describe('FCB alternate minimumClassLevel', () => {
+    it('warns when alternate selection is below minimumClassLevel', async () => {
+      (PrerequisiteService.checkPrerequisites as jest.Mock).mockResolvedValue({
+        met: true,
+        unmet: [],
+        reasons: [],
+      });
+      (GameDataService.getFavoredClassBonuses as jest.Mock).mockResolvedValueOnce([
+        { id: 'fcb-opt-1', shortName: 'Cool Bonus', minimumClassLevel: 3 },
+      ]);
+
+      const character = blankCharacter();
+      character.classes.classes[0].isFavoredClass = true;
+      character.classes.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'alternate', optionId: 'fcb-opt-1' },
+        { level: 2, type: 'hp' },
+        { level: 3, type: 'hp' },
+        { level: 4, type: 'hp' },
+      ];
+
+      const warnings = await CharacterValidationService.validate(
+        character,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
+      expect(warnings.some((w) => w.message.includes('requires class level'))).toBe(true);
+    });
+
+    it('covers filter/map callbacks with no minimumClassLevel violation', async () => {
+      (PrerequisiteService.checkPrerequisites as jest.Mock).mockResolvedValue({
+        met: true,
+        unmet: [],
+        reasons: [],
+      });
+      (GameDataService.getFavoredClassBonuses as jest.Mock).mockResolvedValueOnce([
+        { id: 'fcb-opt-2', shortName: 'Other Bonus', minimumClassLevel: 1 },
+      ]);
+
+      const character = blankCharacter();
+      character.classes.classes[0].isFavoredClass = true;
+      character.classes.classes[0].favoredClassBonuses = [
+        { level: 1, type: 'hp' },
+        { level: 2, type: 'hp' },
+        { level: 3, type: 'hp' },
+        { level: 4, type: 'alternate', optionId: 'fcb-opt-2' },
+      ];
+
+      const warnings = await CharacterValidationService.validate(
+        character,
+        DEFAULT_RULESET,
+        TEST_CLASS_MAP,
+      );
+      expect(warnings.some((w) => w.message.includes('requires class level'))).toBe(false);
     });
   });
 });
