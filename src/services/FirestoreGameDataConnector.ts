@@ -463,42 +463,19 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     if (cached) return cached;
 
     try {
-      const [core, featured, uncommon, flex] = await Promise.all([
-        getDocs(
-          query(
-            collection(db, 'races'),
-            where('visibility', '==', 'global'),
-            where('category', '==', 'Core'),
-          ),
-        ),
-        getDocs(
-          query(
-            collection(db, 'races'),
-            where('visibility', '==', 'global'),
-            where('category', '==', 'Featured'),
-          ),
-        ),
-        getDocs(
-          query(
-            collection(db, 'races'),
-            where('visibility', '==', 'global'),
-            where('category', '==', 'Uncommon'),
-          ),
-        ),
-        getDocs(
-          query(
-            collection(db, 'races'),
-            where('visibility', '==', 'global'),
-            where('flexibleAbilityBonus', '==', true),
-          ),
-        ),
-      ]);
+      // Single query on visibility only — group by category in memory.
+      // Avoids composite index requirements and eliminates the risk of
+      // Promise.all failing because one sub-query throws.
+      const snap = await getDocs(
+        query(collection(db, 'races'), where('visibility', '==', 'global')),
+      );
 
+      const all = snap.docs.map((d) => d.data() as RaceGroups['core'][number]);
       const result: RaceGroups = {
-        core: core.docs.map((d) => d.data()) as RaceGroups['core'],
-        featured: featured.docs.map((d) => d.data()) as RaceGroups['featured'],
-        uncommon: uncommon.docs.map((d) => d.data()) as RaceGroups['uncommon'],
-        flexibleAbility: flex.docs.map((d) => d.data()) as RaceGroups['flexibleAbility'],
+        core: all.filter((r) => r.category === 'Core'),
+        featured: all.filter((r) => r.category === 'Featured'),
+        uncommon: all.filter((r) => r.category === 'Uncommon'),
+        flexibleAbility: all.filter((r) => r.flexibleAbilityBonus === true),
       };
 
       GameDataCache.set(cacheKey, result);
