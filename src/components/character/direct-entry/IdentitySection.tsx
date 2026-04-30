@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   setName,
   setPlayer,
+  setRace,
+  setRacialFlexAbility,
   setAlignment,
   setDeity,
   setGender,
@@ -21,7 +23,9 @@ import {
   setBackground,
 } from '@/store/slices/characterEntrySlice';
 import { Alignment } from '@/types/base';
+import type { AbilityKey } from '@/types/abilities';
 import { RulesetSettingsSheet } from './RulesetSettingsSheet';
+import { RacePickerSheet } from './RacePickerSheet';
 
 const ALIGNMENT_OPTIONS = Object.values(Alignment).map((a) => ({ label: a, value: a }));
 
@@ -31,6 +35,7 @@ export function IdentitySection() {
   const character = useAppSelector((state) => state.characterEntry.character);
   const activeRuleset = useAppSelector((state) => state.ruleset.activeRuleset);
   const [rulesetOpen, setRulesetOpen] = useState(false);
+  const [racePickerOpen, setRacePickerOpen] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -51,20 +56,59 @@ export function IdentitySection() {
           testID="identity-player"
         />
 
-        {/* Race — will become SearchPickerSheet in a later PR */}
-        <View style={styles.raceRow}>
-          <FantasyTextInput
-            label="Race"
-            value={character.info.race.name}
-            onChangeText={() => {
-              // TODO: open SearchPickerSheet for races
-            }}
-            placeholder="Tap 🔍 to search races"
-            style={styles.raceFlex}
-            testID="identity-race"
-          />
+        {/* Race picker */}
+        <Pressable
+          onPress={() => setRacePickerOpen(true)}
+          style={[styles.raceRow, styles.raceButton]}
+          accessibilityRole="button"
+          accessibilityLabel={`Race: ${character.info.race.name || 'None selected'}. Tap to change.`}
+          testID="identity-race"
+        >
+          <Text style={[styles.raceLabel, { color: colors.text.secondary }]}>Race</Text>
+          <Text
+            style={[
+              styles.raceValue,
+              {
+                color: character.info.race.name
+                  ? isDark
+                    ? fantasy.gold
+                    : fantasy.darkWood
+                  : colors.text.tertiary,
+              },
+            ]}
+            numberOfLines={1}
+          >
+            {character.info.race.name || 'Tap to select race...'}
+          </Text>
           <Text style={[styles.searchIcon, { color: colors.text.tertiary }]}>🔍</Text>
-        </View>
+        </Pressable>
+
+        {/* Flex ability picker — shown only for races like Human that get +2 to any stat */}
+        {character.info.racialFlexBonus && (
+          <InlinePicker
+            label="Racial +2"
+            value={character.info.racialFlexAbility ?? ''}
+            options={[
+              { label: 'Strength', value: 'str' },
+              { label: 'Dexterity', value: 'dex' },
+              { label: 'Constitution', value: 'con' },
+              { label: 'Intelligence', value: 'int' },
+              { label: 'Wisdom', value: 'wis' },
+              { label: 'Charisma', value: 'cha' },
+            ]}
+            onValueChange={(v) => dispatch(setRacialFlexAbility(v as AbilityKey))}
+            testID="identity-racial-flex"
+          />
+        )}
+
+        <RacePickerSheet
+          visible={racePickerOpen}
+          onSelect={(result) => {
+            dispatch(setRace(result));
+            setRacePickerOpen(false);
+          }}
+          onClose={() => setRacePickerOpen(false)}
+        />
 
         <InlinePicker
           label="Alignment"
@@ -198,17 +242,27 @@ const styles = StyleSheet.create({
   },
   raceRow: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
-    marginBottom: 0,
+    alignItems: 'center',
   },
-  raceFlex: {
+  raceButton: {
+    paddingVertical: 10,
+    gap: 8,
+  },
+  raceLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    width: 90,
+    flexShrink: 0,
+  },
+  raceValue: {
     flex: 1,
-    marginBottom: 12,
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+    fontWeight: '600',
   },
   searchIcon: {
-    fontSize: 20,
-    marginLeft: 8,
-    marginBottom: 14,
+    fontSize: 18,
+    marginLeft: 4,
   },
   twoCol: {
     flexDirection: 'row',
