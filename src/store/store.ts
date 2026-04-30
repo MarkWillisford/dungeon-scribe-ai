@@ -41,9 +41,11 @@ export const store = configureStore({
           'auth.user.lastLogin',
           'characters.characters',
           'characters.activeCharacter',
-          // equipment.equippedSlots and companion slot lookups are Map<ItemSlot, string>.
-          // Serializable state only applies at the boundary of persistence;
-          // we handle Map↔Record conversion when saving to Firestore.
+          // Date objects and Map<ItemSlot,string> on the active character.
+          // Serializable state only applies at the persistence boundary;
+          // Map↔Record and Date↔string conversions are handled when saving to Firestore.
+          'characterEntry.character.lastUpdated',
+          'characterEntry.character.createdAt',
           'characterEntry.character.equipment.equippedSlots',
           'characterEntry.character.companions',
         ],
