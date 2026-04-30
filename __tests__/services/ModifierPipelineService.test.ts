@@ -415,6 +415,103 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  describe('collectEquipmentEffects — editorEquipment magic items', () => {
+    test('applies ability enhancement bonus from equipped magic item', () => {
+      const char = createTestCharacter({ cha: 10 });
+      char.editorEquipment = [
+        {
+          id: 'item-1',
+          definitionId: 'headband-cha-6',
+          collection: 'magicItems',
+          name: 'Headband of Alluring Charisma +6',
+          slot: 'headband',
+          effects: [
+            {
+              type: 'bonus',
+              bonusType: BonusType.ENHANCEMENT,
+              target: 'ability.cha',
+              value: 6,
+              source: 'Headband of Alluring Charisma +6',
+            },
+          ],
+        },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.abilityScores.cha.total).toBe(16);
+    });
+
+    test('populates bonuses.enhancement breakdown for equipped magic item', () => {
+      const char = createTestCharacter({ int: 10 });
+      char.editorEquipment = [
+        {
+          id: 'item-2',
+          definitionId: 'headband-int-6',
+          collection: 'magicItems',
+          name: 'Headband of Vast Intellect +6',
+          slot: 'headband',
+          effects: [
+            {
+              type: 'bonus',
+              bonusType: BonusType.ENHANCEMENT,
+              target: 'ability.int',
+              value: 6,
+              source: 'Headband of Vast Intellect +6',
+            },
+          ],
+        },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.abilityScores.int.bonuses.enhancement).toHaveLength(1);
+      expect(result.abilityScores.int.bonuses.enhancement[0].value).toBe(6);
+    });
+
+    test('does not apply effects from unequipped (no slot) items', () => {
+      const char = createTestCharacter({ int: 10 });
+      const baseInt = char.abilityScores.int.total;
+      char.editorEquipment = [
+        {
+          id: 'item-3',
+          collection: 'magicItems',
+          name: 'Headband (carried)',
+          effects: [
+            {
+              type: 'bonus',
+              bonusType: BonusType.ENHANCEMENT,
+              target: 'ability.int',
+              value: 6,
+              source: 'Headband',
+            },
+          ],
+        },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.abilityScores.int.total).toBe(baseInt);
+    });
+
+    test('stacks deflection AC from Ring of Protection through pipeline', () => {
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-4',
+          collection: 'magicItems',
+          name: 'Ring of Protection +3',
+          slot: 'ring_left',
+          effects: [
+            {
+              type: 'bonus',
+              bonusType: BonusType.DEFLECTION,
+              target: 'ac.deflection',
+              value: 3,
+              source: 'Ring of Protection +3',
+            },
+          ],
+        },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.deflection).toBe(3);
+    });
+  });
+
   describe('conditions effects', () => {
     test('active condition effects are applied to stats', () => {
       const char = createTestCharacter();

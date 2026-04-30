@@ -1,5 +1,5 @@
 import type { Character } from '@/types';
-import { BonusType, type Effect } from '@/types/base';
+import { BonusType, type Bonus, type Effect } from '@/types/base';
 import type { AbilityScores } from '@/types/abilities';
 import { Size, SaveProgression } from '@/types/base';
 import { FormulaService, type FormulaContext } from './FormulaService';
@@ -393,10 +393,26 @@ export class ModifierPipelineService {
     const abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha'] as const;
     for (const ab of abilities) {
       const score = c.abilityScores[ab];
-      score.total = score.base + score.racial + score.inherent + this.get(stacked, `ability.${ab}`);
+      const result = stacked.get(`ability.${ab}`);
+      score.total = score.base + score.racial + score.inherent + (result?.total ?? 0);
       score.tempTotal = Math.max(0, score.total - score.damage - score.drain);
       score.modifier = Math.floor((score.total - 10) / 2);
       score.tempModifier = Math.floor((score.tempTotal - 10) / 2);
+
+      // Populate per-bonusType breakdown so the UI can show "+6 Enhancement" etc.
+      for (const key of Object.keys(score.bonuses) as (keyof typeof score.bonuses)[]) {
+        score.bonuses[key] = [];
+      }
+      for (const contrib of result?.contributions ?? []) {
+        const key = contrib.bonusType as string;
+        if (key in score.bonuses) {
+          (score.bonuses as Record<string, Bonus[]>)[key].push({
+            type: contrib.bonusType as BonusType,
+            value: contrib.value,
+            source: contrib.source,
+          });
+        }
+      }
     }
   }
 
