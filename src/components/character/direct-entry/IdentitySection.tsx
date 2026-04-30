@@ -146,10 +146,14 @@ export function IdentitySection() {
         />
 
         <View style={styles.twoCol}>
-          <FantasyTextInput
+          <InlinePicker
             label="Gender"
             value={character.info.gender}
-            onChangeText={(v) => dispatch(setGender(v))}
+            options={[
+              { label: 'Male', value: 'Male' },
+              { label: 'Female', value: 'Female' },
+            ]}
+            onValueChange={(v) => dispatch(setGender(v))}
             style={styles.colFlex}
             testID="identity-gender"
           />
