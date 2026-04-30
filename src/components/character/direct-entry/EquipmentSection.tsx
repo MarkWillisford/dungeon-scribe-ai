@@ -326,6 +326,7 @@ export function EquipmentSection() {
       allowsHandUse: result.allowsHandUse,
       isContainer: result.isContainer,
       isOrbiting: pickerSlot === 'orbiting' || undefined,
+      effects: result.effects,
     };
     dispatch(addEquipment(newItem));
     if (pickerSlot !== 'orbiting' && pickerSlot !== 'none') {

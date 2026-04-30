@@ -55,6 +55,7 @@ export interface EditorEquipmentItem {
   notes?: string;
   // Denormalized from item definition at add time — used for pipeline enhancement bonuses
   abilityScoreBonuses?: Partial<Record<AbilityKey, number>>;
+  effects?: Effect[]; // snapshot from MagicItemDefinition.effects at pick time
 }
 
 // Experience Points

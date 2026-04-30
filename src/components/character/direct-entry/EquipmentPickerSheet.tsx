@@ -14,6 +14,7 @@ import { GameDataService } from '@/services/GameDataService';
 import type { WeaponDefinition, ArmorDefinition, ShieldDefinition } from '@/types/equipment';
 import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
 import type { EditorEquippedSlot } from '@/types/character';
+import type { Effect } from '@/types/base';
 
 // ---- Types ----
 
@@ -25,6 +26,7 @@ export interface EquipmentPickerResult {
   collection: 'weapons' | 'armor' | 'shields' | 'magicItems';
   allowsHandUse?: boolean;
   isContainer?: boolean;
+  effects?: Effect[];
 }
 
 interface PickerItem extends EquipmentPickerResult {
@@ -125,6 +127,7 @@ function mapMagicItem(m: MagicItemDefinition, isContainer = false): PickerItem {
     allowsHandUse,
     isContainer: isContainer || undefined,
     source: sourceLabel(m.source),
+    effects: m.effects,
   };
 }
 

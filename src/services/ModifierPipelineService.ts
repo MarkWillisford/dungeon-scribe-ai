@@ -271,9 +271,13 @@ export class ModifierPipelineService {
       }
     }
 
-    // TODO: Magic item effects will be resolved via MagicItemDefinition.effects
-    // once the effect lookup pipeline is wired (PR 2 — magic item data + runtime).
-    void character.equipment.magicItems;
+    // Magic items added via the direct-entry editor — effects snapshotted at pick time.
+    for (const item of character.editorEquipment ?? []) {
+      if (!item.slot || !item.effects?.length) continue;
+      for (const effect of item.effects) {
+        effects.push({ ...effect, source: effect.source || item.name });
+      }
+    }
 
     return effects;
   }
