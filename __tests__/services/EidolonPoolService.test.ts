@@ -1,77 +1,38 @@
 import { EidolonPoolService } from '@services/EidolonPoolService';
-import type { CharacterDraft } from '@/types/characterDraft';
+import type { Character } from '@/types';
+import type { ClassEntry } from '@/types/classes';
+import type { CharacterFeat } from '@/types/feats';
 import type { DraftEidolon, SelectedEvolution } from '@/types/eidolon';
 
 // ---- Fixtures ----
 
 const DATA_INDEX = EidolonPoolService.buildIndexFromStaticData();
 
-function makeDraft(overrides: Partial<CharacterDraft> = {}): CharacterDraft {
-  return {
-    name: 'Tester',
-    player: '',
-    raceId: '',
-    raceName: 'Human',
-    racialFlexBonus: false,
-    alignment: 'True Neutral' as CharacterDraft['alignment'],
-    deity: '',
-    gender: '',
-    age: '',
-    height: '',
-    weight: '',
-    hair: '',
-    eyes: '',
-    skin: '',
-    background: '',
-    abilities: {
-      str: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
-      dex: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
-      con: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
-      int: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
-      wis: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
-      cha: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
-    },
-    levelIncrementSlots: [],
-    classes: [],
-    templates: [],
-    combat: {
-      currentHP: 0,
-      nonlethalDamage: 0,
-      tempHP: 0,
-      acMiscBonus: 0,
-      saveFortMisc: 0,
-      saveRefMisc: 0,
-      saveWillMisc: 0,
-      meleeAttackMisc: 0,
-      rangedAttackMisc: 0,
-      cmbMisc: 0,
-      speedLand: 30,
-    },
-    skills: {},
-    traits: [],
-    featSlots: [],
-    spellcastingPools: [],
-    equipment: [],
-    companions: [],
-    eidolons: [],
-    characterNotes: '',
-    campaignNotes: '',
-    ...overrides,
-  };
+interface MakeCharacterOverrides {
+  classes?: ClassEntry[];
+  eidolons?: DraftEidolon[];
+  feats?: CharacterFeat[];
 }
 
-function makeSummonerClass(
-  overrides: Partial<CharacterDraft['classes'][number]> = {},
-): CharacterDraft['classes'][number] {
+function makeCharacter(overrides: MakeCharacterOverrides = {}): Character {
+  return {
+    classes: { classes: overrides.classes ?? [] },
+    eidolons: overrides.eidolons ?? [],
+    feats: { feats: overrides.feats ?? [], totalFeats: 0, bonusFeats: 0 },
+    companions: [],
+  } as unknown as Character;
+}
+
+function makeSummonerClass(overrides: Partial<ClassEntry> = {}): ClassEntry {
   return {
     id: 'summoner-1',
-    className: 'Summoner',
+    name: 'Summoner',
     level: 5,
     sourceSystem: 'pf1e',
     classChoices: [],
     prereqOverride: false,
     ...overrides,
-  };
+  } as ClassEntry;
 }
 
 function makeEidolon(overrides: Partial<DraftEidolon> = {}): DraftEidolon {
@@ -103,7 +64,7 @@ describe('EidolonPoolService — base pool', () => {
 
   for (let lvl = 1; lvl <= 20; lvl++) {
     test(`APG summoner level ${lvl} → ${APG_EXPECTED[lvl - 1]} ep`, () => {
-      const draft = makeDraft({
+      const draft = makeCharacter({
         classes: [makeSummonerClass({ level: lvl })],
         eidolons: [makeEidolon({ edition: 'apg', subtype: undefined })],
       });
@@ -114,7 +75,7 @@ describe('EidolonPoolService — base pool', () => {
 
   for (let lvl = 1; lvl <= 20; lvl++) {
     test(`Unchained summoner level ${lvl} → ${UC_EXPECTED[lvl - 1]} ep`, () => {
-      const draft = makeDraft({
+      const draft = makeCharacter({
         classes: [makeSummonerClass({ level: lvl })],
         eidolons: [makeEidolon({ edition: 'unchained', subtype: 'angel' })],
       });
@@ -129,18 +90,18 @@ describe('EidolonPoolService — base pool', () => {
 describe('EidolonPoolService — Extra Evolution feats', () => {
   test('each Extra Evolution feat adds +1 ep, capped at 5', () => {
     for (let count = 0; count <= 7; count++) {
-      const featSlots = Array.from({ length: count }, (_, i) => ({
-        id: `slot-${i}`,
-        source: 'level' as const,
-        availableAt: 'Lvl 1',
-        availableAtLevel: 1,
+      const feats = Array.from({ length: count }, () => ({
         featId: 'extra-evolution',
-        prereqOverride: false,
-      }));
-      const draft = makeDraft({
+        name: 'Extra Evolution',
+        source: 'level',
+        grantedAtLevel: 1,
+        active: true,
+        choices: {},
+      }) as CharacterFeat);
+      const draft = makeCharacter({
         classes: [makeSummonerClass({ level: 10 })],
         eidolons: [makeEidolon({ edition: 'apg', subtype: undefined })],
-        featSlots,
+        feats,
       });
       const breakdown = EidolonPoolService.computePool(draft, 'eid-1', DATA_INDEX);
       expect(breakdown.sources.extraEvolutionFeats).toBe(Math.min(count, 5));
@@ -162,7 +123,7 @@ describe('EidolonPoolService — subtype bonus ep grants', () => {
     ['psychopomp', 8, 1],
     ['shadow', 8, 1],
   ])('%s grants +%s ep at summoner level %s', (subtype, level, expected) => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level })],
       eidolons: [makeEidolon({ subtype: subtype as DraftEidolon['subtype'] })],
     });
@@ -171,7 +132,7 @@ describe('EidolonPoolService — subtype bonus ep grants', () => {
   });
 
   test('archon bonus does not apply at level 3 (pre-L4)', () => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 3 })],
       eidolons: [makeEidolon({ subtype: 'archon' })],
     });
@@ -180,7 +141,7 @@ describe('EidolonPoolService — subtype bonus ep grants', () => {
   });
 
   test('angel subtype grants 0 bonus ep (no +ep in its scaling)', () => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 20 })],
       eidolons: [makeEidolon({ subtype: 'angel' })],
     });
@@ -194,7 +155,7 @@ describe('EidolonPoolService — subtype bonus ep grants', () => {
 describe('EidolonPoolService — archetypes', () => {
   test('Master Summoner halves class level for pool math', () => {
     // Master Summoner level 10 APG → uses level 5 pool = 8 ep
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 10, archetypeId: 'master-summoner' })],
       eidolons: [makeEidolon({ edition: 'apg', subtype: undefined })],
     });
@@ -207,7 +168,7 @@ describe('EidolonPoolService — archetypes', () => {
   });
 
   test('Wild Caller (ARG) adds floor(level / 4) ep', () => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 16, archetypeId: 'wild-caller-arg' })],
       eidolons: [makeEidolon({ edition: 'apg', subtype: undefined })],
     });
@@ -216,7 +177,7 @@ describe('EidolonPoolService — archetypes', () => {
   });
 
   test('Morphic Savant: -1 flat', () => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 10, archetypeId: 'morphic-savant' })],
       eidolons: [makeEidolon({ edition: 'apg', subtype: undefined })],
     });
@@ -225,7 +186,7 @@ describe('EidolonPoolService — archetypes', () => {
   });
 
   test('Unwavering Conduit: -1 flat', () => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 10, archetypeId: 'unwavering-conduit' })],
       eidolons: [makeEidolon({ edition: 'apg', subtype: undefined })],
     });
@@ -234,7 +195,7 @@ describe('EidolonPoolService — archetypes', () => {
   });
 
   test('Pyroclast: -1 flat', () => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 10, archetypeId: 'pyroclast' })],
       eidolons: [makeEidolon({ edition: 'apg', subtype: undefined })],
     });
@@ -243,7 +204,7 @@ describe('EidolonPoolService — archetypes', () => {
   });
 
   test('Broodmaster with 2 eidolons splits the pool evenly', () => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 5, archetypeId: 'broodmaster' })],
       eidolons: [
         makeEidolon({ id: 'eid-1', name: 'A', edition: 'apg', subtype: undefined }),
@@ -258,7 +219,7 @@ describe('EidolonPoolService — archetypes', () => {
   });
 
   test('Broodmaster with 3 eidolons: uneven split leftover goes to first eidolon', () => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 5, archetypeId: 'broodmaster' })],
       eidolons: [
         makeEidolon({ id: 'eid-1', name: 'A', edition: 'apg', subtype: undefined }),
@@ -277,7 +238,7 @@ describe('EidolonPoolService — archetypes', () => {
 
   test('Broodmaster pre-spent shared evolution subtracts from the split pool', () => {
     // APG L8 pool = 11, spend 4 on Large → 7 left, split 2 ways = 3/3, leftover 1 to first = 4/3
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [
         makeSummonerClass({
           level: 8,
@@ -317,7 +278,7 @@ describe('EidolonPoolService — aspectCostToEidolon', () => {
   });
 
   test('computePool reports transferredToSummoner', () => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 18 })],
       eidolons: [
         makeEidolon({
@@ -338,7 +299,7 @@ describe('EidolonPoolService — aspectCostToEidolon', () => {
 
 describe('EidolonPoolService — pool override', () => {
   test('override replaces calculated total', () => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 5 })],
       eidolons: [
         makeEidolon({
@@ -355,7 +316,7 @@ describe('EidolonPoolService — pool override', () => {
   });
 
   test('override without reason produces a warning', () => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 5 })],
       eidolons: [
         makeEidolon({
@@ -374,7 +335,7 @@ describe('EidolonPoolService — pool override', () => {
 
 describe('EidolonPoolService — overspend warning', () => {
   test('spending more than the pool triggers a warning', () => {
-    const draft = makeDraft({
+    const draft = makeCharacter({
       classes: [makeSummonerClass({ level: 1 })], // UC L1 = 1 ep
       eidolons: [
         makeEidolon({

@@ -1,5 +1,12 @@
 // Complete Character interface — brings together all component types
-import { CharacterInfo, Experience, Currency, Conditions } from './character';
+import {
+  CharacterInfo,
+  Experience,
+  Currency,
+  Conditions,
+  LevelIncrementSlot,
+  EditorEquipmentItem,
+} from './character';
 import { AbilityScores } from './abilities';
 import { CharacterClasses } from './classes';
 import { CombatStats } from './combat';
@@ -64,6 +71,13 @@ export interface Character {
   ruleset: Ruleset;
   // Present when character is linked to a campaign
   campaignRulesetLink?: CampaignRulesetLink;
+
+  // Editor metadata — which ability received each +1 at HD 4/8/12/...
+  levelIncrementSlots: LevelIncrementSlot[];
+
+  // Editor metadata — simplified equipment list (full typed arrays in `equipment` stay empty
+  // until item picker provides full definition data)
+  editorEquipment?: EditorEquipmentItem[];
 
   // Version tracking
   schemaVersion: string;

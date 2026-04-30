@@ -797,6 +797,7 @@ const mockCharacter: Character = {
   eidolons: [],
   buffs: [],
   savedBuffs: [],
+  levelIncrementSlots: [],
   ruleset: {
     id: 'preset-pf1e-standard',
     name: 'PF1e Standard',

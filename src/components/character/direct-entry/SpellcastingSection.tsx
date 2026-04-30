@@ -10,14 +10,11 @@ import {
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { AutoComputedValue } from '@/components/ui/AutoComputedValue';
 import { GameDataService } from '@/services/GameDataService';
-import { getAbilityModifier } from '@/utils/characterComputations';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import type { ExpandedClassData, SpellProgressionTable } from '@/data/classes/types';
-import {
-  type DraftSpellcastingPool,
-  type DraftClassEntry,
-  type AbilityKey,
-} from '@/types/characterDraft';
+import { type SpellcastingPool } from '@/types/spells';
+import { type ClassEntry } from '@/types/classes';
+import { type AbilityKey } from '@/types/abilities';
 
 // ---- Helpers ----
 
@@ -51,13 +48,13 @@ function abilityBonusSpells(abilityMod: number, spellLevel: number): number {
  * pointers targeting this pool's baseClassEntryId.
  */
 interface PoolContributor {
-  entry: DraftClassEntry;
+  entry: ClassEntry;
   advancedLevels: number;
 }
 
 function getContributors(
-  classes: DraftClassEntry[],
-  pool: DraftSpellcastingPool,
+  classes: ClassEntry[],
+  pool: SpellcastingPool,
   classDataMap: Map<string, ExpandedClassData>,
 ): PoolContributor[] {
   const result: PoolContributor[] = [];
@@ -72,7 +69,7 @@ function getContributors(
     // levels listed in the class's advancement spec.
     const adv = entry.spellcastingAdvancement;
     if (!adv) continue;
-    const spec = classDataMap.get(entry.className.toLowerCase())?.advancesSpellcasting;
+    const spec = classDataMap.get(entry.name.toLowerCase())?.advancesSpellcasting;
     if (!spec) continue;
     const isAdvancingLevel = (lvl: number): boolean =>
       spec.atLevels ? spec.atLevels.includes(lvl) : lvl >= 1 && lvl <= entry.level;
@@ -100,13 +97,13 @@ function getContributors(
  * class's table governs what slots the caster has at each ESL.
  */
 function resolveSpellTableKey(
-  pool: DraftSpellcastingPool,
-  classes: DraftClassEntry[],
+  pool: SpellcastingPool,
+  classes: ClassEntry[],
   expandedClasses: ExpandedClassData[],
 ): string {
   const base = classes.find((c) => c.id === pool.baseClassEntryId);
   if (base) {
-    const data = expandedClasses.find((c) => c.name.toLowerCase() === base.className.toLowerCase());
+    const data = expandedClasses.find((c) => c.name.toLowerCase() === base.name.toLowerCase());
     if (data?.spellcasting.spellTableKey) return data.spellcasting.spellTableKey;
   }
   return 'FULL_9_PREPARED_PER_DAY';
@@ -116,13 +113,13 @@ function resolveSpellTableKey(
  * Domain/school bonus slots come from the pool's base class (e.g. Cleric).
  */
 function hasDomainSlots(
-  pool: DraftSpellcastingPool,
-  classes: DraftClassEntry[],
+  pool: SpellcastingPool,
+  classes: ClassEntry[],
   expandedClasses: ExpandedClassData[],
 ): boolean {
   const base = classes.find((c) => c.id === pool.baseClassEntryId);
   if (!base) return false;
-  const data = expandedClasses.find((c) => c.name.toLowerCase() === base.className.toLowerCase());
+  const data = expandedClasses.find((c) => c.name.toLowerCase() === base.name.toLowerCase());
   return data?.spellcasting.domainSlots === true;
 }
 
@@ -256,7 +253,7 @@ const gridStyles = StyleSheet.create({
 // ---- Pool card ----
 
 interface PoolCardProps {
-  pool: DraftSpellcastingPool;
+  pool: SpellcastingPool;
   abilityMod: number;
   expandedClasses: ExpandedClassData[];
   spellTables: Record<string, SpellProgressionTable>;
@@ -265,7 +262,7 @@ interface PoolCardProps {
 function PoolCard({ pool, abilityMod, expandedClasses, spellTables }: PoolCardProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const classes = useAppSelector((state) => state.characterEntry.draft.classes);
+  const classes = useAppSelector((state) => state.characterEntry.character.classes.classes);
   const classDataMap = useAppSelector(selectClassDataMap);
   const [spellsExpanded, setSpellsExpanded] = useState(true);
   const [contributorsExpanded, setContributorsExpanded] = useState(false);
@@ -309,31 +306,31 @@ function PoolCard({ pool, abilityMod, expandedClasses, spellTables }: PoolCardPr
             poolStyles.typeBadge,
             {
               backgroundColor:
-                pool.poolType === 'divine' ? 'rgba(139,92,246,0.2)' : 'rgba(59,130,246,0.2)',
+                pool.castingType === 'divine' ? 'rgba(139,92,246,0.2)' : 'rgba(59,130,246,0.2)',
             },
           ]}
         >
           <Text
             style={[
               poolStyles.typeBadgeText,
-              { color: pool.poolType === 'divine' ? '#8B5CF6' : '#3B82F6' },
+              { color: pool.castingType === 'divine' ? '#8B5CF6' : '#3B82F6' },
             ]}
           >
-            {pool.poolType.toUpperCase()}
+            {pool.castingType.toUpperCase()}
           </Text>
         </View>
 
         <InlinePicker
-          value={pool.castingAbility}
+          value={pool.spellAbility.toLowerCase() as AbilityKey}
           options={ABILITY_OPTIONS}
           onValueChange={(v) =>
-            dispatch(updatePoolCastingAbility({ poolId: pool.id, ability: v as AbilityKey }))
+            dispatch(updatePoolCastingAbility({ poolId: pool.id ?? '', ability: v }))
           }
           style={poolStyles.abilityPicker}
         />
 
         <Pressable
-          onPress={() => dispatch(removeSpellcastingPool(pool.id))}
+          onPress={() => dispatch(removeSpellcastingPool(pool.id ?? ''))}
           hitSlop={8}
           accessibilityRole="button"
           accessibilityLabel="Remove pool"
@@ -350,7 +347,7 @@ function PoolCard({ pool, abilityMod, expandedClasses, spellTables }: PoolCardPr
         <AutoComputedValue value={`${dcBase} + lvl`} label="Spell DC" />
         <AutoComputedValue value={fmtSign(esl + abilityMod)} label="Concentration" />
         <Text style={[poolStyles.abilityMod, { color: colors.text.secondary }]}>
-          {pool.castingAbility.toUpperCase()} {fmtSign(abilityMod)}
+          {pool.spellAbility} {fmtSign(abilityMod)}
         </Text>
       </View>
 
@@ -373,9 +370,9 @@ function PoolCard({ pool, abilityMod, expandedClasses, spellTables }: PoolCardPr
             </Text>
           ) : (
             contributors.map((c) => (
-              <View key={c.entry.id} style={poolStyles.contributorRow}>
+              <View key={c.entry.id ?? c.entry.name} style={poolStyles.contributorRow}>
                 <Text style={[poolStyles.contributorName, { color: colors.text.primary }]}>
-                  {c.entry.className}
+                  {c.entry.name}
                 </Text>
                 <Text
                   style={[
@@ -442,9 +439,9 @@ function PoolCard({ pool, abilityMod, expandedClasses, spellTables }: PoolCardPr
                 base={base}
                 abilityBonus={bonus}
                 domainSlot={domainSlots && spellLevel > 0}
-                misc={pool.spellsPerDayMisc[spellLevel] ?? 0}
+                misc={pool.spellsPerDay.misc[spellLevel] ?? 0}
                 onMiscChange={(v) =>
-                  dispatch(setSpellsPerDayMisc({ poolId: pool.id, spellLevel, value: v }))
+                  dispatch(setSpellsPerDayMisc({ poolId: pool.id ?? '', spellLevel, value: v }))
                 }
               />
             );
@@ -549,8 +546,8 @@ const poolStyles = StyleSheet.create({
 
 export function SpellcastingSection() {
   const { colors } = useTheme();
-  const pools = useAppSelector((state) => state.characterEntry.draft.spellcastingPools);
-  const abilities = useAppSelector((state) => state.characterEntry.draft.abilities);
+  const character = useAppSelector((state) => state.characterEntry.character);
+  const pools = character.spellcasting.pools;
   const [expandedClasses, setExpandedClasses] = useState<ExpandedClassData[]>([]);
   const [spellTables, setSpellTables] = useState<Record<string, SpellProgressionTable>>({});
 
@@ -565,14 +562,14 @@ export function SpellcastingSection() {
 
   const abilityMods = useMemo(
     () => ({
-      str: getAbilityModifier(abilities, 'str'),
-      dex: getAbilityModifier(abilities, 'dex'),
-      con: getAbilityModifier(abilities, 'con'),
-      int: getAbilityModifier(abilities, 'int'),
-      wis: getAbilityModifier(abilities, 'wis'),
-      cha: getAbilityModifier(abilities, 'cha'),
+      str: character.abilityScores.str.modifier,
+      dex: character.abilityScores.dex.modifier,
+      con: character.abilityScores.con.modifier,
+      int: character.abilityScores.int.modifier,
+      wis: character.abilityScores.wis.modifier,
+      cha: character.abilityScores.cha.modifier,
     }),
-    [abilities],
+    [character.abilityScores],
   );
 
   return (
@@ -588,9 +585,9 @@ export function SpellcastingSection() {
 
       {pools.map((pool) => (
         <PoolCard
-          key={pool.id}
+          key={pool.id ?? pool.castingType}
           pool={pool}
-          abilityMod={abilityMods[pool.castingAbility]}
+          abilityMod={abilityMods[pool.spellAbility.toLowerCase() as AbilityKey]}
           expandedClasses={expandedClasses}
           spellTables={spellTables}
         />

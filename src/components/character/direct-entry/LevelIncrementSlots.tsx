@@ -4,7 +4,7 @@ import { OrnatePanel } from '@/components/ui/OrnatePanel';
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setLevelIncrementAbility } from '@/store/slices/characterEntrySlice';
-import { type AbilityKey } from '@/types/characterDraft';
+import type { AbilityKey } from '@/types/abilities';
 import { useTheme } from '@/hooks/useTheme';
 
 const ABILITY_OPTIONS = [
@@ -19,9 +19,9 @@ const ABILITY_OPTIONS = [
 export function LevelIncrementSlots() {
   const { colors } = useTheme();
   const dispatch = useAppDispatch();
-  const slots = useAppSelector((state) => state.characterEntry.draft.levelIncrementSlots);
+  const slots = useAppSelector((state) => state.characterEntry.character.levelIncrementSlots);
   const totalClassHD = useAppSelector((state) =>
-    state.characterEntry.draft.classes.reduce((sum, c) => sum + c.level, 0),
+    state.characterEntry.character.classes.classes.reduce((sum: number, c) => sum + c.level, 0),
   );
 
   if (slots.length === 0) {

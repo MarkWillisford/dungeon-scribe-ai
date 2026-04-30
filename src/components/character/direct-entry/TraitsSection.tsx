@@ -5,8 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { addTrait, removeTrait } from '@/store/slices/characterEntrySlice';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
 import { GameDataService } from '@/services/GameDataService';
-import { type DraftTrait } from '@/types/characterDraft';
-import type { TraitDefinition } from '@/types/traits';
+import type { CharacterTrait, TraitDefinition } from '@/types/traits';
 
 // ---- Category badge colors ----
 
@@ -33,7 +32,7 @@ function genId(): string {
 // ---- Trait card ----
 
 interface TraitCardProps {
-  trait: DraftTrait;
+  trait: CharacterTrait;
 }
 
 function TraitCard({ trait }: TraitCardProps) {
@@ -53,7 +52,7 @@ function TraitCard({ trait }: TraitCardProps) {
     >
       <View style={styles.cardHeader}>
         <Text style={[styles.traitName, { color: isDark ? '#E5D5B0' : '#3D2B1F' }]}>
-          {trait.traitName}
+          {trait.name}
         </Text>
         <View style={[styles.categoryBadge, { backgroundColor: catStyle.bg }]}>
           <Text style={[styles.categoryText, { color: catStyle.text }]}>
@@ -61,10 +60,10 @@ function TraitCard({ trait }: TraitCardProps) {
           </Text>
         </View>
         <Pressable
-          onPress={() => dispatch(removeTrait(trait.id))}
+          onPress={() => dispatch(removeTrait(trait.id ?? trait.traitId))}
           hitSlop={8}
           accessibilityRole="button"
-          accessibilityLabel={`Remove ${trait.traitName}`}
+          accessibilityLabel={`Remove ${trait.name}`}
           style={styles.removeBtn}
         >
           <Text style={[styles.removeIcon, { color: colors.text.tertiary }]}>✕</Text>
@@ -86,7 +85,7 @@ const MAX_TRAITS_DEFAULT = 2;
 export function TraitsSection() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const traits = useAppSelector((state) => state.characterEntry.draft.traits);
+  const traits = useAppSelector((state) => state.characterEntry.character.traits.traits);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [allTraitDefs, setAllTraitDefs] = useState<TraitDefinition[]>([]);
 
@@ -117,14 +116,15 @@ export function TraitsSection() {
     }
     // Find the trait definition to pull category + description
     const def = allTraitDefs.find((t) => t.id === item.key);
-    const draft: DraftTrait = {
+    const trait: CharacterTrait = {
       id: genId(),
       traitId: item.key,
-      traitName: item.label,
+      name: item.label,
       category: def?.category ?? 'campaign',
+      choices: {},
       description: def?.shortDescription ?? def?.description ?? '',
     };
-    dispatch(addTrait(draft));
+    dispatch(addTrait(trait));
     setPickerOpen(false);
   };
 
@@ -132,8 +132,10 @@ export function TraitsSection() {
     dispatch(
       addTrait({
         id: genId(),
-        traitName: name,
+        name,
+        traitId: '',
         category: 'campaign',
+        choices: {},
         description: '',
       }),
     );

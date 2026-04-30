@@ -1,7 +1,5 @@
 import {
-  abilityTotal,
   abilityModifier,
-  getAbilityModifier,
   formatModifier,
   formatBABString,
   computeTotalBAB,
@@ -18,14 +16,11 @@ import {
   computeFCBAlternateAccumulation,
   type ClassDataMap,
 } from '@/utils/characterComputations';
-import {
-  type DraftClassEntry,
-  type DraftTemplateEntry,
-  type DraftAbilityScore,
-  type AbilityKey,
-} from '@/types/characterDraft';
-import { BonusType } from '@/types/base';
+import type { ClassEntry } from '@/types/classes';
+import type { AppliedTemplate } from '@/types/templates';
+import { BABProgression, SaveProgression, BonusType } from '@/types/base';
 import type { FavoredClassBonusEntry } from '@/types/favoredClassBonuses';
+import type { AbilityKey } from '@/types/abilities';
 import { ALL_EXPANDED_CLASSES } from '@/data/classes/index';
 
 // Reuse the full static set as the test map. These are the same classes the
@@ -37,110 +32,37 @@ const TEST_CLASS_MAP: ClassDataMap = new Map(
 
 // ---- helpers ----
 
-function cls(className: string, level: number): DraftClassEntry {
+function cls(name: string, level: number): ClassEntry {
   return {
-    id: `class-${className.toLowerCase()}`,
-    className,
+    name,
     level,
+    id: `class-${name.toLowerCase()}`,
+    hitDieSize: 8,
+    hitDieResults: [],
+    skillRanks: 2,
+    classSkills: [],
+    babProgression: BABProgression.Medium,
+    fortProgression: SaveProgression.Poor,
+    refProgression: SaveProgression.Poor,
+    willProgression: SaveProgression.Poor,
+    classFeatures: [],
     sourceSystem: 'pf1e',
     classChoices: [],
     prereqOverride: false,
   };
 }
 
-function laTemplate(laValue: number): DraftTemplateEntry {
-  return {
-    id: 'tpl-la',
-    templateName: 'LA Template',
-    appliedAs: 'LA',
-    laValue,
-    isFreeGrant: false,
-  };
+function laTemplate(la: number): Pick<AppliedTemplate, 'appliedAs' | 'la' | 'isFreeGrant'> {
+  return { appliedAs: 'la', la, isFreeGrant: false };
 }
 
-function crTemplate(crValue: number): DraftTemplateEntry {
-  return {
-    id: 'tpl-cr',
-    templateName: 'CR Template',
-    appliedAs: 'CR',
-    crValue,
-    isFreeGrant: false,
-  };
+function crTemplate(cr: number): Pick<AppliedTemplate, 'appliedAs' | 'la' | 'isFreeGrant'> {
+  return { appliedAs: 'cr', la: undefined, isFreeGrant: false };
 }
 
-function freeGrant(): DraftTemplateEntry {
-  return { id: 'tpl-free', templateName: 'Free Grant', isFreeGrant: true };
+function freeGrant(): Pick<AppliedTemplate, 'appliedAs' | 'la' | 'isFreeGrant'> {
+  return { appliedAs: 'cr', la: undefined, isFreeGrant: true };
 }
-
-// ---- abilityTotal ----
-
-describe('abilityTotal', () => {
-  it('sums all six layers', () => {
-    expect(
-      abilityTotal({
-        base: 16,
-        racial: 2,
-        inherent: 0,
-        enhancement: 4,
-        other: [],
-        levelIncrements: 2,
-      }),
-    ).toBe(24);
-  });
-
-  it('handles all-zero layers', () => {
-    expect(
-      abilityTotal({
-        base: 10,
-        racial: 0,
-        inherent: 0,
-        enhancement: 0,
-        other: [],
-        levelIncrements: 0,
-      }),
-    ).toBe(10);
-  });
-
-  it('applies stacking rules to other bonuses', () => {
-    // Two morale bonuses — only highest applies (+4)
-    // One untyped bonus — stacks (+3)
-    // Total: 10 + 4 + 3 = 17
-    expect(
-      abilityTotal({
-        base: 10,
-        racial: 0,
-        inherent: 0,
-        enhancement: 0,
-        other: [
-          { value: 2, bonusType: BonusType.MORALE },
-          { value: 4, bonusType: BonusType.MORALE },
-          { value: 3, bonusType: BonusType.UNTYPED },
-        ],
-        levelIncrements: 0,
-      }),
-    ).toBe(17);
-  });
-
-  it('penalties always stack regardless of type', () => {
-    // Two morale penalties — both stack (-2 + -4 = -6), not Math.max(-2,-4) = -2
-    // One sacred bonus — highest only (+4)
-    // Total: 10 + 4 + (-6) = 8
-    expect(
-      abilityTotal({
-        base: 10,
-        racial: 0,
-        inherent: 0,
-        enhancement: 0,
-        other: [
-          { value: -2, bonusType: BonusType.MORALE },
-          { value: -4, bonusType: BonusType.MORALE },
-          { value: 4, bonusType: BonusType.SACRED },
-        ],
-        levelIncrements: 0,
-      }),
-    ).toBe(8);
-  });
-});
 
 // ---- abilityModifier ----
 
@@ -202,23 +124,6 @@ describe('computeTotalBAB', () => {
     // Wizard: Low BAB — floor(level * 0.5)
     expect(computeTotalBAB([cls('Wizard', 4)], TEST_CLASS_MAP)).toBe(2);
     expect(computeTotalBAB([cls('Wizard', 5)], TEST_CLASS_MAP)).toBe(2);
-  });
-});
-
-// ---- getAbilityModifier ----
-
-describe('getAbilityModifier', () => {
-  it('returns correct modifier from a DraftAbilityScore record', () => {
-    const abilities = {
-      str: { base: 16, racial: 2, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
-      dex: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
-      con: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
-      int: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
-      wis: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
-      cha: { base: 10, racial: 0, inherent: 0, enhancement: 0, other: [], levelIncrements: 0 },
-    };
-    expect(getAbilityModifier(abilities, 'str')).toBe(4); // 18 total → +4
-    expect(getAbilityModifier(abilities, 'dex')).toBe(0); // 10 total → +0
   });
 });
 
@@ -489,52 +394,6 @@ describe('computeTotalBAB — Low BAB', () => {
   });
 });
 
-// ---- getAbilityModifier ----
-
-describe('getAbilityModifier', () => {
-  function makeAbilities(
-    overrides: Partial<Record<AbilityKey, number>> = {},
-  ): Record<AbilityKey, DraftAbilityScore> {
-    const score = (base: number): DraftAbilityScore => ({
-      base,
-      racial: 0,
-      inherent: 0,
-      enhancement: 0,
-      other: [],
-      levelIncrements: 0,
-    });
-    const defaults: Record<AbilityKey, number> = {
-      str: 10,
-      dex: 10,
-      con: 10,
-      int: 10,
-      wis: 10,
-      cha: 10,
-    };
-    const merged = { ...defaults, ...overrides };
-    return {
-      str: score(merged.str),
-      dex: score(merged.dex),
-      con: score(merged.con),
-      int: score(merged.int),
-      wis: score(merged.wis),
-      cha: score(merged.cha),
-    };
-  }
-
-  it('returns +4 for str 18', () => {
-    expect(getAbilityModifier(makeAbilities({ str: 18 }), 'str')).toBe(4);
-  });
-
-  it('returns -1 for dex 8', () => {
-    expect(getAbilityModifier(makeAbilities({ dex: 8 }), 'dex')).toBe(-1);
-  });
-
-  it('returns 0 for wis 10', () => {
-    expect(getAbilityModifier(makeAbilities(), 'wis')).toBe(0);
-  });
-});
-
 // ---- computeFeatSlots ----
 
 describe('computeFeatSlots', () => {
@@ -685,8 +544,8 @@ function fcbOption(
 function clsWithFCB(
   className: string,
   level: number,
-  bonuses: DraftClassEntry['favoredClassBonuses'],
-): DraftClassEntry {
+  bonuses: ClassEntry['favoredClassBonuses'],
+): ClassEntry {
   return { ...cls(className, level), isFavoredClass: true, favoredClassBonuses: bonuses };
 }
 
@@ -1130,4 +989,47 @@ describe('computeFCBAlternateAccumulation', () => {
     expect(result[0].count).toBe(3);
     expect(result[0].display).toBe('+3 cmb');
   });
+});
+
+// ---- fcbEffectDisplay branch coverage (count=0 and bonus+requiresPickOne) ----
+
+it('returns empty string when count is 0', () => {
+  const opt = fcbOption('test', 'Fighter', {
+    type: 'bonus',
+    bonusType: 'untyped',
+    target: 'cmb',
+    perLevelValue: { numerator: 1, denominator: 1 },
+  });
+  const entry = clsWithFCB('Fighter', 0, []);
+  const result = computeFCBAlternateAccumulation([entry], [opt]);
+  // count is 0 so display should be empty
+  expect(result).toHaveLength(0);
+});
+
+it('bonus type with requiresPickOne appends chosen prompt', () => {
+  const opt = fcbOption('pick-one', 'Magus', {
+    type: 'bonus',
+    bonusType: 'untyped',
+    target: 'concentration',
+    perLevelValue: { numerator: 1, denominator: 1 },
+    requiresPickOne: true,
+    pickOnePrompt: 'school',
+  });
+  const entry = clsWithFCB('Magus', 2, [{ level: 1, type: 'alternate', optionId: 'pick-one' }]);
+  const result = computeFCBAlternateAccumulation([entry], [opt]);
+  expect(result[0].display).toContain('(chosen school)');
+});
+
+it('class_level_bump with requiresPickOne but no pickOnePrompt falls back to featureName', () => {
+  const opt = fcbOption('bump-noprompt', 'Inquisitor', {
+    type: 'class_level_bump',
+    featureName: 'bane',
+    perLevelValue: { numerator: 1, denominator: 3 },
+    requiresPickOne: true,
+  });
+  const entry = clsWithFCB('Inquisitor', 3, [
+    { level: 1, type: 'alternate', optionId: 'bump-noprompt' },
+  ]);
+  const result = computeFCBAlternateAccumulation([entry], [opt]);
+  expect(result[0].display).toContain('(chosen bane)');
 });

@@ -23,7 +23,8 @@ import {
   setEidolonSubtype,
   removeSelectedEvolution,
 } from '@/store/slices/characterEntrySlice';
-import type { CharacterDraft, DraftClassEntry } from '@/types/characterDraft';
+import type { Character } from '@/types';
+import type { ClassEntry } from '@/types/classes';
 import type {
   DraftEidolon,
   EidolonEdition,
@@ -71,16 +72,16 @@ const EMPTY_INDEX: EidolonDataIndex = {
 // ---- Component ----
 
 interface EidolonSectionProps {
-  classEntry: DraftClassEntry;
+  classEntry: ClassEntry;
 }
 
 export function EidolonSection({ classEntry }: EidolonSectionProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const eidolons = useAppSelector((state) =>
-    state.characterEntry.draft.eidolons.filter((e) => e.summonerClassEntryId === classEntry.id),
+    state.characterEntry.character.eidolons.filter((e) => e.summonerClassEntryId === classEntry.id),
   );
-  const draft = useAppSelector((state) => state.characterEntry.draft);
+  const character = useAppSelector((state) => state.characterEntry.character);
 
   // Load EidolonDataIndex from GameDataService (Firestore-backed in production).
   const [dataIndex, setDataIndex] = useState<EidolonDataIndex>(EMPTY_INDEX);
@@ -93,7 +94,7 @@ export function EidolonSection({ classEntry }: EidolonSectionProps) {
       .catch((e) => console.error('EidolonSection: failed to load eidolon data index:', e));
   }, []);
 
-  const edition = summonerEditionFromClassName(classEntry.className);
+  const edition = summonerEditionFromClassName(classEntry.name);
   const archetypeKey = classEntry.archetypeId?.toLowerCase().trim() ?? '';
   const isBroodmaster = archetypeKey.includes('broodmaster');
   const isSynthesist = archetypeKey.includes('synthesist');
@@ -109,7 +110,7 @@ export function EidolonSection({ classEntry }: EidolonSectionProps) {
           onPress={() =>
             dispatch(
               addEidolon({
-                classEntryId: classEntry.id,
+                classEntryId: classEntry.id ?? '',
                 edition,
                 baseForm: 'biped',
                 subtype: edition === 'unchained' ? 'angel' : undefined,
@@ -156,7 +157,7 @@ export function EidolonSection({ classEntry }: EidolonSectionProps) {
           eidolon={eidolon}
           edition={edition}
           summonerLevel={classEntry.level}
-          draft={draft}
+          character={character}
           dataIndex={dataIndex}
           showAspectCard={!isSynthesist}
         />
@@ -171,7 +172,7 @@ interface EidolonCardProps {
   eidolon: DraftEidolon;
   edition: EidolonEdition;
   summonerLevel: number;
-  draft: CharacterDraft;
+  character: Character;
   dataIndex: EidolonDataIndex;
   showAspectCard: boolean;
 }
@@ -180,7 +181,7 @@ function EidolonCard({
   eidolon,
   edition,
   summonerLevel,
-  draft,
+  character,
   dataIndex,
   showAspectCard,
 }: EidolonCardProps) {
@@ -191,8 +192,8 @@ function EidolonCard({
   const [subtypePickerOpen, setSubtypePickerOpen] = useState(false);
 
   const breakdown = useMemo(
-    () => EidolonPoolService.computePool(draft, eidolon.id, dataIndex),
-    [draft, eidolon.id, dataIndex],
+    () => EidolonPoolService.computePool(character, eidolon.id, dataIndex),
+    [character, eidolon.id, dataIndex],
   );
 
   const applyBaseFormChange = (newForm: EidolonForm) => {

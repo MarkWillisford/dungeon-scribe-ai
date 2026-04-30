@@ -15,7 +15,7 @@
 //
 // The service also exposes `canSelectEvolution` for per-row picker validation.
 
-import type { CharacterDraft } from '@/types/characterDraft';
+import type { Character } from '@/types';
 import type { EidolonEvolutionEntry } from '@/types/classOptions';
 import type {
   DraftEidolon,
@@ -85,21 +85,21 @@ export class EidolonPoolService {
    * and free evolutions from base form / subtype scaling.
    */
   static computePool(
-    draft: CharacterDraft,
+    character: Character,
     eidolonId: string,
     dataIndex: EidolonDataIndex,
   ): EidolonPoolBreakdown {
     const warnings: string[] = [];
 
-    const eidolon = draft.eidolons.find((e) => e.id === eidolonId);
+    const eidolon = character.eidolons.find((e) => e.id === eidolonId);
     if (!eidolon) {
-      return this.emptyBreakdown([`Eidolon '${eidolonId}' not found on draft`]);
+      return this.emptyBreakdown([`Eidolon '${eidolonId}' not found on character`]);
     }
 
-    const classEntry = draft.classes.find((c) => c.id === eidolon.summonerClassEntryId);
+    const classEntry = character.classes.classes.find((c) => c.id === eidolon.summonerClassEntryId);
     if (!classEntry) {
       return this.emptyBreakdown([
-        `Summoner class entry '${eidolon.summonerClassEntryId}' not found on draft`,
+        `Summoner class entry '${eidolon.summonerClassEntryId}' not found on character`,
       ]);
     }
 
@@ -138,7 +138,7 @@ export class EidolonPoolService {
     // ── Extra Evolution feat count (max 5) ──
     const extraFeatCount = Math.min(
       EXTRA_EVOLUTION_MAX_COUNT,
-      draft.featSlots.filter((slot) => slot.featId === EXTRA_EVOLUTION_FEAT_ID).length,
+      character.feats.feats.filter((f) => f.featId === EXTRA_EVOLUTION_FEAT_ID).length,
     );
     const extraEvolutionFeats = extraFeatCount;
 
@@ -165,7 +165,7 @@ export class EidolonPoolService {
     // first brood member receives any leftover.
     let broodmasterShare = 0;
     if (archetype === ARCHETYPE_BROODMASTER) {
-      const brood = draft.eidolons.filter((e) => e.summonerClassEntryId === classEntry.id);
+      const brood = character.eidolons.filter((e) => e.summonerClassEntryId === classEntry.id);
       const broodSize = Math.max(1, brood.length);
       const sharedEvolutions = classEntry.summonerBroodmaster?.sharedEvolutions ?? [];
       const sharedCost = this.totalEvolutionCost(sharedEvolutions, dataIndex);

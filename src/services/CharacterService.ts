@@ -4,11 +4,22 @@ import { Skill } from '@/types/skills';
 import { EncumbranceVariant } from '@/types/equipment';
 import { AbilityScores } from '@/types/abilities';
 import { Race } from '@/types/race';
-import { BABProgression, SaveProgression } from '@/types/base';
+import { Alignment, BABProgression, SaveProgression, Size } from '@/types/base';
 import { ClassFeature } from '@/types/classes';
 import { AbilityScoreService } from '@services/AbilityScoreService';
 import { getClassByName } from '@data/classes';
 import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
+
+const PLACEHOLDER_RACE: Race = {
+  name: '',
+  sizeMod: Size.Medium,
+  baseSpeed: 30,
+  alternativeMovements: {},
+  abilityModifiers: {},
+  traits: [],
+  languages: [],
+  bonusLanguages: [],
+};
 
 export class CharacterService {
   private static readonly CURRENT_SCHEMA_VERSION = '1.2.0';
@@ -102,6 +113,8 @@ export class CharacterService {
 
       buffs: [],
       savedBuffs: [],
+
+      levelIncrementSlots: [],
 
       ruleset: { ...PRESET_PF1E_STANDARD },
 
@@ -398,7 +411,118 @@ export class CharacterService {
     return { valid: errors.length === 0, errors, warnings };
   }
 
-  private static createDefaultCombatStats() {
+  // ---- Blank character factory ----
+
+  static createBlankCharacter(): Character {
+    return {
+      info: {
+        id: this.generateCharacterId(),
+        name: '',
+        player: '',
+        userId: '',
+        firebaseId: undefined,
+        race: PLACEHOLDER_RACE,
+        size: Size.Medium,
+        alignment: Alignment.TrueNeutral,
+        deity: '',
+        gender: '',
+        age: 0,
+        height: '',
+        weight: '',
+        hair: '',
+        eyes: '',
+        skin: '',
+        homeland: '',
+        campaign: '',
+        portrait: '',
+        background: '',
+        notes: '',
+      },
+      abilityScores: this.createBlankAbilityScores(),
+      classes: {
+        classes: [],
+        totalLevel: 0,
+        baseAttackBonus: [0],
+        baseFortSave: 0,
+        baseRefSave: 0,
+        baseWillSave: 0,
+        favoredClassBonuses: [],
+      },
+      combatStats: this.createDefaultCombatStats(),
+      skills: this.createDefaultSkills(),
+      feats: { feats: [], totalFeats: 0, bonusFeats: 0 },
+      traits: { traits: [], maxTraits: 2 },
+      equipment: this.createDefaultEquipment(),
+      spellcasting: { pools: [], preparedSpells: [], knownSpells: [], spellbooks: [] },
+      initiating: {
+        pools: [],
+        knownManeuvers: [],
+        readiedManeuvers: [],
+        knownStances: [],
+        activeStanceIds: [],
+        maxActiveStances: 1,
+        featGrantedManeuvers: [],
+      },
+      specialAbilities: { specialAbilities: [] },
+      conditions: { activeConditions: [] },
+      experience: { current: 0, nextLevel: 2000 },
+      currency: { platinum: 0, gold: 0, silver: 0, copper: 0, totalGP: 0 },
+      eidolons: [],
+      companions: [],
+      levelHistory: [],
+      appliedTemplates: [],
+      grantedBonuses: [],
+      resources: [],
+      buffs: [],
+      savedBuffs: [],
+      levelIncrementSlots: [],
+      editorEquipment: [],
+      ruleset: { ...PRESET_PF1E_STANDARD },
+      schemaVersion: this.CURRENT_SCHEMA_VERSION,
+      lastUpdated: new Date(),
+      createdAt: new Date(),
+    };
+  }
+
+  private static createBlankAbilityScores(): AbilityScores {
+    const createBlankScore = () => ({
+      base: 10,
+      racial: 0,
+      inherent: 0,
+      damage: 0,
+      drain: 0,
+      bonuses: {
+        enhancement: [],
+        morale: [],
+        size: [],
+        alchemical: [],
+        insight: [],
+        profane: [],
+        sacred: [],
+        luck: [],
+        circumstance: [],
+        competence: [],
+        untyped: [],
+      },
+      levelIncrements: 0,
+      total: 10,
+      modifier: 0,
+      tempTotal: 10,
+      tempModifier: 0,
+    });
+    return {
+      str: createBlankScore(),
+      dex: createBlankScore(),
+      con: createBlankScore(),
+      int: createBlankScore(),
+      wis: createBlankScore(),
+      cha: createBlankScore(),
+    };
+  }
+
+  // ---- Default sub-object factories (also used by createDefaultCharacter) ----
+
+  static createDefaultCombatStats() {
     return {
       hitPoints: {
         base: 0,
@@ -475,7 +599,7 @@ export class CharacterService {
     };
   }
 
-  private static createDefaultSkills() {
+  static createDefaultSkills() {
     const createSkill = (ability: string, isClassSkill = false) => ({
       isClassSkill,
       ranks: 0,
@@ -530,7 +654,7 @@ export class CharacterService {
     };
   }
 
-  private static createDefaultEquipment() {
+  static createDefaultEquipment() {
     return {
       weapons: [],
       armor: [],

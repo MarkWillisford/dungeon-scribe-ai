@@ -13,7 +13,7 @@ import {
   type PickerSlot,
   type EquipmentPickerResult,
 } from './EquipmentPickerSheet';
-import type { DraftEquipmentItem, DraftEquippedSlot } from '@/types/characterDraft';
+import type { EditorEquipmentItem, EditorEquippedSlot } from '@/types/character';
 
 // ---- Helpers ----
 
@@ -25,7 +25,7 @@ function genId(): string {
 
 interface SlotCell {
   label: string;
-  slot: DraftEquippedSlot | null;
+  slot: EditorEquippedSlot | null;
 }
 
 const SLOT_ROWS: SlotCell[][] = [
@@ -65,8 +65,8 @@ const SLOT_ROWS: SlotCell[][] = [
 
 interface SlotCellProps {
   cell: SlotCell;
-  equippedItem?: DraftEquipmentItem;
-  onPickerOpen: (slot: DraftEquippedSlot) => void;
+  equippedItem?: EditorEquipmentItem;
+  onPickerOpen: (slot: EditorEquippedSlot) => void;
   onUnassign: (id: string) => void;
 }
 
@@ -105,16 +105,11 @@ function SlotCellView({ cell, equippedItem, onPickerOpen, onUnassign }: SlotCell
             styles.slotFilledButton,
             {
               borderColor: isDark ? fantasy.gold : fantasy.darkWood,
-              backgroundColor: isDark
-                ? 'rgba(212,175,55,0.12)'
-                : 'rgba(140,90,40,0.08)',
+              backgroundColor: isDark ? 'rgba(212,175,55,0.12)' : 'rgba(140,90,40,0.08)',
             },
           ]}
         >
-          <Text
-            style={[styles.slotItemName, { color: colors.text.primary }]}
-            numberOfLines={2}
-          >
+          <Text style={[styles.slotItemName, { color: colors.text.primary }]} numberOfLines={2}>
             {equippedItem.name}
           </Text>
           {equippedItem.allowsHandUse && (
@@ -136,8 +131,8 @@ function SlotCellView({ cell, equippedItem, onPickerOpen, onUnassign }: SlotCell
 // ---- ContainerList ----
 
 interface ContainerListProps {
-  containers: DraftEquipmentItem[];
-  equipment: DraftEquipmentItem[];
+  containers: EditorEquipmentItem[];
+  equipment: EditorEquipmentItem[];
   onPickerOpen: (slot: PickerSlot) => void;
   onRemove: (id: string) => void;
 }
@@ -195,9 +190,7 @@ function ContainerList({ containers, equipment, onPickerOpen, onRemove }: Contai
                     ) : (
                       contents.map((item) => (
                         <View key={item.id} style={styles.containerItem}>
-                          <Text
-                            style={[styles.containerItemName, { color: colors.text.primary }]}
-                          >
+                          <Text style={[styles.containerItemName, { color: colors.text.primary }]}>
                             {item.name}
                           </Text>
                           <Pressable onPress={() => onRemove(item.id)} hitSlop={8}>
@@ -229,7 +222,7 @@ function ContainerList({ containers, equipment, onPickerOpen, onRemove }: Contai
 // ---- IounStoneSection ----
 
 interface IounStoneSectionProps {
-  stones: DraftEquipmentItem[];
+  stones: EditorEquipmentItem[];
   onPickerOpen: (slot: PickerSlot) => void;
   onRemove: (id: string) => void;
 }
@@ -279,7 +272,7 @@ function CarriedList({
   carried,
   onRemove,
 }: {
-  carried: DraftEquipmentItem[];
+  carried: EditorEquipmentItem[];
   onRemove: (id: string) => void;
 }) {
   const { colors } = useTheme();
@@ -311,20 +304,21 @@ function CarriedList({
 
 export function EquipmentSection() {
   const dispatch = useAppDispatch();
-  const equipment = useAppSelector((state) => state.characterEntry.draft.equipment);
+  const equipment = useAppSelector((state) => state.characterEntry.character.editorEquipment ?? []);
   const [pickerSlot, setPickerSlot] = useState<PickerSlot | null>(null);
 
   const slottedItems = equipment.filter((e) => e.slot !== undefined);
   const containers = equipment.filter((e) => e.isContainer && !e.slot);
   const iounStones = equipment.filter((e) => e.isOrbiting && !e.slot && !e.containerId);
-  const carried = equipment.filter((e) => !e.slot && !e.containerId && !e.isContainer && !e.isOrbiting);
+  const carried = equipment.filter(
+    (e) => !e.slot && !e.containerId && !e.isContainer && !e.isOrbiting,
+  );
 
-  const getItemForSlot = (slot: DraftEquippedSlot) =>
-    slottedItems.find((e) => e.slot === slot);
+  const getItemForSlot = (slot: EditorEquippedSlot) => slottedItems.find((e) => e.slot === slot);
 
   const handlePickerSelect = (result: EquipmentPickerResult) => {
     if (!pickerSlot) return;
-    const newItem: DraftEquipmentItem = {
+    const newItem: EditorEquipmentItem = {
       id: genId(),
       definitionId: result.definitionId,
       collection: result.collection,
@@ -335,14 +329,14 @@ export function EquipmentSection() {
     };
     dispatch(addEquipment(newItem));
     if (pickerSlot !== 'orbiting' && pickerSlot !== 'none') {
-      dispatch(assignEquipmentSlot({ id: newItem.id, slot: pickerSlot as DraftEquippedSlot }));
+      dispatch(assignEquipmentSlot({ id: newItem.id, slot: pickerSlot as EditorEquippedSlot }));
     }
     setPickerSlot(null);
   };
 
   const handleAddCustom = (name: string) => {
     if (!pickerSlot) return;
-    const newItem: DraftEquipmentItem = {
+    const newItem: EditorEquipmentItem = {
       id: genId(),
       collection: 'magicItems',
       name,
@@ -351,7 +345,7 @@ export function EquipmentSection() {
     };
     dispatch(addEquipment(newItem));
     if (pickerSlot !== 'orbiting' && pickerSlot !== 'none') {
-      dispatch(assignEquipmentSlot({ id: newItem.id, slot: pickerSlot as DraftEquippedSlot }));
+      dispatch(assignEquipmentSlot({ id: newItem.id, slot: pickerSlot as EditorEquippedSlot }));
     }
     setPickerSlot(null);
   };
@@ -391,10 +385,7 @@ export function EquipmentSection() {
       />
 
       {/* Carried */}
-      <CarriedList
-        carried={carried}
-        onRemove={(id) => dispatch(removeEquipment(id))}
-      />
+      <CarriedList carried={carried} onRemove={(id) => dispatch(removeEquipment(id))} />
 
       {/* Picker Modal */}
       {pickerSlot !== null && (

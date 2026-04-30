@@ -1,4 +1,4 @@
-// Pure computation helpers for CharacterDraft values.
+// Pure computation helpers for Character values.
 // No Redux, no side effects — just math.
 //
 // Class stat data (BAB progression, save progression, hit die) is supplied
@@ -6,12 +6,8 @@
 // Firestore-backed gameData slice; in tests it's built from local fixtures.
 
 import { BABProgression, SaveProgression } from '@/types/base';
-import {
-  type DraftClassEntry,
-  type DraftAbilityScore,
-  type AbilityKey,
-  computeOtherBonusTotal,
-} from '@/types/characterDraft';
+import type { ClassEntry } from '@/types/classes';
+import type { AppliedTemplate } from '@/types/templates';
 import type { ExpandedClassData } from '@/data/classes/types';
 import type { FavoredClassBonusEntry, FCBMechanicalEffect } from '@/types/favoredClassBonuses';
 
@@ -26,18 +22,7 @@ export function lookupClassData(
   return classDataMap.get(className.toLowerCase()) ?? null;
 }
 
-// ---- Ability scores ----
-
-export function abilityTotal(score: DraftAbilityScore): number {
-  return (
-    score.base +
-    score.racial +
-    score.inherent +
-    score.enhancement +
-    computeOtherBonusTotal(score.other) +
-    score.levelIncrements
-  );
-}
+// ---- Ability score math ----
 
 export function abilityModifier(total: number): number {
   return Math.floor((total - 10) / 2);
@@ -45,13 +30,6 @@ export function abilityModifier(total: number): number {
 
 export function formatModifier(mod: number): string {
   return mod >= 0 ? `+${mod}` : `${mod}`;
-}
-
-export function getAbilityModifier(
-  abilities: Record<AbilityKey, DraftAbilityScore>,
-  key: AbilityKey,
-): number {
-  return abilityModifier(abilityTotal(abilities[key]));
 }
 
 // ---- BAB ----
@@ -70,9 +48,9 @@ function babContrib(data: ExpandedClassData | null, level: number): number {
   }
 }
 
-export function computeTotalBAB(classes: DraftClassEntry[], classDataMap: ClassDataMap): number {
+export function computeTotalBAB(classes: ClassEntry[], classDataMap: ClassDataMap): number {
   return classes.reduce(
-    (sum, c) => sum + babContrib(lookupClassData(c.className, classDataMap), c.level),
+    (sum, c) => sum + babContrib(lookupClassData(c.name, classDataMap), c.level),
     0,
   );
 }
@@ -103,18 +81,18 @@ function saveProgContrib(
 }
 
 function hasGoodSave(
-  classes: DraftClassEntry[],
+  classes: ClassEntry[],
   saveType: 'fortitude' | 'reflex' | 'will',
   classDataMap: ClassDataMap,
 ): boolean {
   return classes.some((c) => {
-    const data = lookupClassData(c.className, classDataMap);
+    const data = lookupClassData(c.name, classDataMap);
     return data !== null && data.saves[saveType] === SaveProgression.Good;
   });
 }
 
 function computeBaseSave(
-  classes: DraftClassEntry[],
+  classes: ClassEntry[],
   saveType: 'fortitude' | 'reflex' | 'will',
   classDataMap: ClassDataMap,
 ): number {
@@ -122,22 +100,21 @@ function computeBaseSave(
   return (
     base +
     classes.reduce(
-      (sum, c) =>
-        sum + saveProgContrib(lookupClassData(c.className, classDataMap), saveType, c.level),
+      (sum, c) => sum + saveProgContrib(lookupClassData(c.name, classDataMap), saveType, c.level),
       0,
     )
   );
 }
 
-export function computeBaseFort(classes: DraftClassEntry[], classDataMap: ClassDataMap): number {
+export function computeBaseFort(classes: ClassEntry[], classDataMap: ClassDataMap): number {
   return computeBaseSave(classes, 'fortitude', classDataMap);
 }
 
-export function computeBaseRef(classes: DraftClassEntry[], classDataMap: ClassDataMap): number {
+export function computeBaseRef(classes: ClassEntry[], classDataMap: ClassDataMap): number {
   return computeBaseSave(classes, 'reflex', classDataMap);
 }
 
-export function computeBaseWill(classes: DraftClassEntry[], classDataMap: ClassDataMap): number {
+export function computeBaseWill(classes: ClassEntry[], classDataMap: ClassDataMap): number {
   return computeBaseSave(classes, 'will', classDataMap);
 }
 
@@ -147,11 +124,11 @@ export function computeBaseWill(classes: DraftClassEntry[], classDataMap: ClassD
 // The +2 base bonus for good saves applies in both modes (once per character).
 
 export function computeTotalBABFractional(
-  classes: DraftClassEntry[],
+  classes: ClassEntry[],
   classDataMap: ClassDataMap,
 ): number {
   const raw = classes.reduce((sum, c) => {
-    const data = lookupClassData(c.className, classDataMap);
+    const data = lookupClassData(c.name, classDataMap);
     if (!data) return sum + c.level * 0.75;
     switch (data.babProgression) {
       case BABProgression.Full:
@@ -168,16 +145,16 @@ export function computeTotalBABFractional(
 }
 
 function computeBaseSaveFractional(
-  classes: DraftClassEntry[],
+  classes: ClassEntry[],
   saveType: 'fortitude' | 'reflex' | 'will',
   classDataMap: ClassDataMap,
 ): number {
   const hasGood = classes.some((c) => {
-    const data = lookupClassData(c.className, classDataMap);
+    const data = lookupClassData(c.name, classDataMap);
     return data !== null && data.saves[saveType] === SaveProgression.Good;
   });
   const raw = classes.reduce((sum, c) => {
-    const data = lookupClassData(c.className, classDataMap);
+    const data = lookupClassData(c.name, classDataMap);
     if (!data) return sum + c.level / 3;
     return sum + (data.saves[saveType] === SaveProgression.Good ? c.level / 2 : c.level / 3);
   }, 0);
@@ -185,21 +162,21 @@ function computeBaseSaveFractional(
 }
 
 export function computeBaseFortFractional(
-  classes: DraftClassEntry[],
+  classes: ClassEntry[],
   classDataMap: ClassDataMap,
 ): number {
   return computeBaseSaveFractional(classes, 'fortitude', classDataMap);
 }
 
 export function computeBaseRefFractional(
-  classes: DraftClassEntry[],
+  classes: ClassEntry[],
   classDataMap: ClassDataMap,
 ): number {
   return computeBaseSaveFractional(classes, 'reflex', classDataMap);
 }
 
 export function computeBaseWillFractional(
-  classes: DraftClassEntry[],
+  classes: ClassEntry[],
   classDataMap: ClassDataMap,
 ): number {
   return computeBaseSaveFractional(classes, 'will', classDataMap);
@@ -208,7 +185,7 @@ export function computeBaseWillFractional(
 // ---- Max HP ----
 
 export function computeMaxHP(
-  classes: DraftClassEntry[],
+  classes: ClassEntry[],
   conMod: number,
   classDataMap: ClassDataMap,
 ): number {
@@ -216,7 +193,7 @@ export function computeMaxHP(
   let hp = 0;
   let isFirstLevel = true;
   for (const cls of classes) {
-    const data = lookupClassData(cls.className, classDataMap);
+    const data = lookupClassData(cls.name, classDataMap);
     const hd = data?.hitDie ?? 8;
     for (let i = 0; i < cls.level; i++) {
       hp += isFirstLevel ? hd : Math.floor(hd / 2) + 1;
@@ -231,12 +208,17 @@ export function computeMaxHP(
 
 // ---- Feat slots ----
 
-export function computeFeatSlots(
-  classes: DraftClassEntry[],
-  race: string,
-): import('@/types/characterDraft').DraftFeatSlot[] {
+export interface FeatSlot {
+  id: string;
+  source: 'racial' | 'level' | 'bonus' | 'mythic';
+  availableAt: string;
+  availableAtLevel: number;
+  prereqOverride: boolean;
+}
+
+export function computeFeatSlots(classes: ClassEntry[], race: string): FeatSlot[] {
   const totalHD = classes.reduce((sum, c) => sum + c.level, 0);
-  const slots: import('@/types/characterDraft').DraftFeatSlot[] = [];
+  const slots: FeatSlot[] = [];
 
   for (let hd = 1; hd <= totalHD; hd += 2) {
     slots.push({
@@ -264,13 +246,13 @@ export function computeFeatSlots(
 // ---- ECL ----
 
 export function computeECL(
-  classes: DraftClassEntry[],
-  templates: { laValue?: number; appliedAs?: 'CR' | 'LA' }[],
+  classes: ClassEntry[],
+  templates: Pick<AppliedTemplate, 'appliedAs' | 'la' | 'isFreeGrant'>[],
 ): number {
   const classLevels = classes.reduce((sum, c) => sum + c.level, 0);
   const templateLA = templates
-    .filter((t) => t.appliedAs === 'LA' && t.laValue)
-    .reduce((sum, t) => sum + (t.laValue ?? 0), 0);
+    .filter((t) => t.appliedAs === 'la' && !t.isFreeGrant && t.la)
+    .reduce((sum, t) => sum + (t.la ?? 0), 0);
   return classLevels + templateLA;
 }
 
@@ -387,7 +369,7 @@ function fcbEffectDisplay(effect: FCBMechanicalEffect, count: number): string {
 }
 
 export function computeFCBAlternateAccumulation(
-  classes: DraftClassEntry[],
+  classes: ClassEntry[],
   options: FavoredClassBonusEntry[],
 ): AccumulatedFCBEffect[] {
   const optionMap = new Map(options.map((o) => [o.id, o]));

@@ -1,10 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { CharacterEntryScreen } from '@/components/character/direct-entry/CharacterEntryScreen';
 import { useAppDispatch } from '@/store/hooks';
 import { loadCharacter, type EntryMode } from '@/store/slices/characterEntrySlice';
 import { loadClasses } from '@/store/slices/gameDataSlice';
-import { RISSI_FIXTURE } from '@/data/fixtures/rissi';
+import { CharacterService } from '@/services/CharacterService';
+import { loadCharacterById } from '@/store/thunks/loadCharacterById';
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 
 /**
  * Entry point for the direct-entry character sheet.
@@ -13,11 +16,6 @@ import { RISSI_FIXTURE } from '@/data/fixtures/rissi';
  * Params:
  *   mode        — 'new' | 'import' | 'edit'  (default: 'new')
  *   characterId — Firestore document ID (required when mode === 'edit')
- *
- * For now, all modes load Rissi as the initial draft so the UI has real data
- * to render during development. When Firestore integration is wired, 'edit'
- * will fetch the character by characterId and 'new'/'import' will load a
- * blank draft.
  */
 export default function EntryRoute() {
   const dispatch = useAppDispatch();
@@ -27,27 +25,50 @@ export default function EntryRoute() {
   }>();
 
   const resolvedMode: EntryMode = mode ?? 'new';
+  const [loading, setLoading] = useState(resolvedMode === 'edit' && !!characterId);
 
   useEffect(() => {
-    // TODO: When Firestore integration is ready:
-    //   - 'edit': fetch character by characterId, dispatch loadCharacter with real data
-    //   - 'new' / 'import': dispatch loadCharacter with BLANK_DRAFT
-    // For now, always load Rissi so the UI has real data during development.
-    dispatch(
-      loadCharacter({
-        draft: RISSI_FIXTURE,
-        mode: resolvedMode,
-        characterId: characterId,
-      }),
-    );
+    async function initCharacter() {
+      if (resolvedMode === 'edit' && characterId) {
+        try {
+          const character = await dispatch(loadCharacterById(characterId)).unwrap();
+          dispatch(loadCharacter({ character, mode: resolvedMode, characterId }));
+        } catch {
+          // Fall back to blank on load failure
+          dispatch(
+            loadCharacter({
+              character: CharacterService.createBlankCharacter(),
+              mode: 'new',
+            }),
+          );
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        dispatch(
+          loadCharacter({
+            character: CharacterService.createBlankCharacter(),
+            mode: resolvedMode,
+            characterId,
+          }),
+        );
+      }
+    }
+
+    initCharacter();
   }, [dispatch, resolvedMode, characterId]);
 
   useEffect(() => {
-    // Fetch class stat data (global + campaign) so BAB/save/HP math can find
-    // custom prestige classes. Safe to fire on every mount — the thunk handles
-    // its own in-flight state and GameDataCache dedupes.
     dispatch(loadClasses());
   }, [dispatch]);
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1 }}>
+        <LoadingSpinner message="Loading character..." testID="entry-loading" />
+      </View>
+    );
+  }
 
   return <CharacterEntryScreen />;
 }

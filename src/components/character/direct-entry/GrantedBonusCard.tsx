@@ -3,10 +3,10 @@ import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch } from '@/store/hooks';
 import { removeTemplate } from '@/store/slices/characterEntrySlice';
-import { type DraftTemplateEntry } from '@/types/characterDraft';
+import { type AppliedTemplate } from '@/types/templates';
 
 interface GrantedBonusCardProps {
-  entry: DraftTemplateEntry;
+  entry: AppliedTemplate;
 }
 
 export function GrantedBonusCard({ entry }: GrantedBonusCardProps) {
@@ -28,13 +28,13 @@ export function GrantedBonusCard({ entry }: GrantedBonusCardProps) {
           <Text style={styles.grantBadgeText}>GRANT</Text>
         </View>
         <Text style={[styles.grantName, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
-          {entry.templateName}
+          {entry.name}
         </Text>
         <Pressable
-          onPress={() => dispatch(removeTemplate(entry.id))}
+          onPress={() => dispatch(removeTemplate(entry.id ?? ''))}
           hitSlop={8}
           accessibilityRole="button"
-          accessibilityLabel={`Remove ${entry.templateName}`}
+          accessibilityLabel={`Remove ${entry.name}`}
           style={styles.removeButton}
         >
           <Text style={[styles.removeIcon, { color: colors.text.tertiary }]}>✕</Text>

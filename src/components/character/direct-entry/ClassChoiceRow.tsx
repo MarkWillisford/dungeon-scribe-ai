@@ -147,12 +147,12 @@ export function ClassChoiceRow({
   const [rawPickerItems, setRawPickerItems] = useState<SearchItem[]>([]);
 
   const draftClass = useAppSelector((state) =>
-    state.characterEntry.draft.classes.find((c) => c.id === classId),
+    state.characterEntry.character.classes.classes.find((c) => c.id === classId),
   );
 
   // Companion currently granted by this specific class choice, if any.
   const existingCompanion = useAppSelector((state) =>
-    state.characterEntry.draft.companions.find(
+    state.characterEntry.character.companions.find(
       (c) =>
         c.grantedBy.type === 'class' &&
         c.grantedBy.classEntryId === classId &&
@@ -252,7 +252,7 @@ export function ClassChoiceRow({
         grantedBy: {
           type: 'class',
           classEntryId: classId,
-          className: draftClass?.className ?? '',
+          className: draftClass?.name ?? '',
           classChoiceId: definition.id,
         },
         effectiveProgressionLevel: effectiveLevelFromDraftClass(draftClass),

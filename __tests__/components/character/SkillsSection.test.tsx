@@ -2,21 +2,13 @@ import React from 'react';
 import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
 import { SkillsSection } from '@/components/character/direct-entry/SkillsSection';
 import { PRESET_PF1E_STANDARD, PRESET_GO_NUTS } from '@/data/rulesets/presets';
-import type { DraftAbilityScore, DraftSkillEntry } from '@/types/characterDraft';
 import type { Ruleset } from '@/types/ruleset';
 
 const mockDispatch = jest.fn();
 
-const baseAbilityScore: DraftAbilityScore = {
-  base: 10,
-  racial: 0,
-  inherent: 0,
-  enhancement: 0,
-  other: [],
-  levelIncrements: 0,
-};
+const baseAbilityScore = { modifier: 0 };
 
-const mockAbilities = {
+const mockAbilityScores = {
   str: baseAbilityScore,
   dex: baseAbilityScore,
   con: baseAbilityScore,
@@ -25,14 +17,16 @@ const mockAbilities = {
   cha: baseAbilityScore,
 };
 
-let mockSkills: Record<string, DraftSkillEntry> = {};
+let mockSkills: Record<string, { ranks: number; misc: number }> = {};
 let mockRuleset: Ruleset = PRESET_PF1E_STANDARD;
 
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => mockDispatch,
   useAppSelector: (selector: (s: unknown) => unknown) =>
     selector({
-      characterEntry: { draft: { skills: mockSkills, abilities: mockAbilities } },
+      characterEntry: {
+        character: { skills: mockSkills, abilityScores: mockAbilityScores },
+      },
       ruleset: { activeRuleset: mockRuleset },
     }),
 }));

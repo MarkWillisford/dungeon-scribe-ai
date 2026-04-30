@@ -337,4 +337,24 @@ describe('CharacterService', () => {
       expect(character.classes.classes[0].hitDieSize).toBe(8);
     });
   });
+
+  describe('createDefaultCharacter — skillRanks', () => {
+    test('applies valid skill ranks from creation params', () => {
+      const params: CreateCharacterParams = {
+        ...mockCreateParams,
+        skillRanks: { perception: 1 },
+      };
+      const character = CharacterService.createDefaultCharacter(params);
+      expect(character.skills.totalRanks).toBeGreaterThanOrEqual(1);
+    });
+
+    test('ignores skill ranks of 0 or keys not in skills', () => {
+      const params: CreateCharacterParams = {
+        ...mockCreateParams,
+        skillRanks: { perception: 0, nonExistentSkill: 5 },
+      };
+      const character = CharacterService.createDefaultCharacter(params);
+      expect(character.skills.totalRanks).toBe(0);
+    });
+  });
 });

@@ -4,7 +4,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { InlinePicker } from '@/components/ui/InlinePicker';
 import { useAppDispatch } from '@/store/hooks';
 import { removeTemplate, updateTemplate } from '@/store/slices/characterEntrySlice';
-import { type DraftTemplateEntry } from '@/types/characterDraft';
+import type { AppliedTemplate } from '@/types/templates';
 import { ALL_TEMPLATES } from '@/data/templates';
 import { TemplateCompanionSection } from './TemplateCompanionSection';
 
@@ -14,22 +14,22 @@ const ACQUIRED_OPTIONS = [
   { label: 'Either', value: 'either' },
 ];
 
-function eclLabel(entry: DraftTemplateEntry): string {
-  if (entry.appliedAs === 'LA' && entry.laValue != null) return `LA +${entry.laValue}`;
-  if (entry.appliedAs === 'CR' && entry.crValue != null) return `CR +${entry.crValue}`;
-  if (entry.appliedAs === 'CR') return 'CR (tiered)';
+function eclLabel(entry: AppliedTemplate): string {
+  if (entry.appliedAs === 'la' && entry.la != null) return `LA +${entry.la}`;
+  if (entry.appliedAs === 'cr' && entry.cr != null) return `CR +${entry.cr}`;
+  if (entry.appliedAs === 'cr') return 'CR (tiered)';
   return 'No ECL cost';
 }
 
 interface TemplateEntryCardProps {
-  entry: DraftTemplateEntry;
+  entry: AppliedTemplate;
 }
 
 export function TemplateEntryCard({ entry }: TemplateEntryCardProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
 
-  const update = (patch: Partial<DraftTemplateEntry>) => {
+  const update = (patch: Partial<AppliedTemplate>) => {
     dispatch(updateTemplate({ ...entry, ...patch }));
   };
 
@@ -54,35 +54,34 @@ export function TemplateEntryCard({ entry }: TemplateEntryCardProps) {
         },
       ]}
     >
-      {/* Header */}
       <View style={styles.header}>
         <Text style={[styles.templateName, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
-          {entry.templateName}
+          {entry.name}
         </Text>
         <Pressable
-          onPress={() => dispatch(removeTemplate(entry.id))}
+          onPress={() => dispatch(removeTemplate(entry.id ?? ''))}
           hitSlop={8}
           accessibilityRole="button"
-          accessibilityLabel={`Remove ${entry.templateName}`}
+          accessibilityLabel={`Remove ${entry.name}`}
           style={styles.removeButton}
         >
           <Text style={[styles.removeIcon, { color: colors.text.tertiary }]}>✕</Text>
         </Pressable>
       </View>
 
-      {/* ECL cost — read-only, fixed by the template definition */}
       <View style={styles.row}>
         <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>ECL cost</Text>
         <Text style={[styles.eclValue, { color: colors.text.primary }]}>{eclLabel(entry)}</Text>
       </View>
 
-      {/* Acquired */}
       <View style={styles.row}>
         <Text style={[styles.fieldLabel, { color: colors.text.secondary }]}>Acquired</Text>
         <InlinePicker
-          value={entry.acquired ?? 'either'}
+          value={entry.acquisitionType ?? 'either'}
           options={ACQUIRED_OPTIONS}
-          onValueChange={(v) => update({ acquired: v as DraftTemplateEntry['acquired'] })}
+          onValueChange={(v) =>
+            update({ acquisitionType: v as AppliedTemplate['acquisitionType'] })
+          }
           style={styles.medPicker}
         />
       </View>
@@ -92,7 +91,7 @@ export function TemplateEntryCard({ entry }: TemplateEntryCardProps) {
       {companionGrant && entry.templateId && (
         <TemplateCompanionSection
           templateId={entry.templateId}
-          templateName={entry.templateName}
+          templateName={entry.name}
           spec={companionGrant}
         />
       )}

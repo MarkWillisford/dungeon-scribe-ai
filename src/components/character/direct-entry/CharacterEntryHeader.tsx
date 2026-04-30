@@ -9,12 +9,13 @@ interface CharacterEntryHeaderProps {
   onValidate: () => void;
   onSave: () => void;
   onPortraitPress: () => void;
+  onBack?: () => void;
 }
 
-/** Derives a concise "Cleric 5 / Hathran 5 / ..." string from the draft's classes array. */
-function buildClassSummary(classes: { className: string; level: number }[]): string {
+/** Derives a concise "Cleric 5 / Hathran 5 / ..." string from the character's classes array. */
+function buildClassSummary(classes: { name: string; level: number }[]): string {
   if (classes.length === 0) return 'No classes';
-  return classes.map((c) => `${c.className} ${c.level}`).join(' / ');
+  return classes.map((c) => `${c.name} ${c.level}`).join(' / ');
 }
 
 /** Computes ECL from classes (sum of levels) + template LA costs. Templates not yet wired. */
@@ -26,17 +27,22 @@ export function CharacterEntryHeader({
   onValidate,
   onSave,
   onPortraitPress,
+  onBack,
 }: CharacterEntryHeaderProps) {
   const { colors, fantasy, shadows, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const draft = useAppSelector((state) => state.characterEntry.draft);
+  const character = useAppSelector((state) => state.characterEntry.character);
   const isDirty = useAppSelector((state) => state.characterEntry.isDirty);
 
   const [nameEditing, setNameEditing] = useState(false);
 
-  const ecl = computeECL(draft.classes);
-  const classSummary = buildClassSummary(draft.classes);
-  const subtitle = [draft.raceName || 'Unknown Race', `ECL ${ecl}`, draft.alignment]
+  const ecl = computeECL(character.classes.classes);
+  const classSummary = buildClassSummary(character.classes.classes);
+  const subtitle = [
+    character.info.race.name || 'Unknown Race',
+    `ECL ${ecl}`,
+    character.info.alignment,
+  ]
     .filter(Boolean)
     .join('  •  ');
 
@@ -51,6 +57,18 @@ export function CharacterEntryHeader({
         { backgroundColor: headerBg, borderBottomColor: borderColor },
       ]}
     >
+      {/* Back button */}
+      {onBack && (
+        <Pressable
+          onPress={onBack}
+          style={styles.backButton}
+          accessibilityRole="button"
+          accessibilityLabel="Go back"
+        >
+          <Text style={[styles.backText, { color: colors.text.tertiary }]}>{'<'}</Text>
+        </Pressable>
+      )}
+
       {/* Portrait */}
       <Pressable
         onPress={onPortraitPress}
@@ -58,8 +76,8 @@ export function CharacterEntryHeader({
         accessibilityRole="button"
         accessibilityLabel="Change portrait"
       >
-        {draft.portrait ? (
-          <Image source={{ uri: draft.portrait }} style={styles.portraitImage} />
+        {character.info.portrait ? (
+          <Image source={{ uri: character.info.portrait }} style={styles.portraitImage} />
         ) : (
           <Text style={[styles.portraitPlaceholder, { color: colors.text.tertiary }]}>⚔</Text>
         )}
@@ -69,7 +87,7 @@ export function CharacterEntryHeader({
       <View style={styles.centerBlock}>
         {nameEditing ? (
           <TextInput
-            value={draft.name}
+            value={character.info.name}
             onChangeText={(text) => dispatch(setName(text))}
             onBlur={() => setNameEditing(false)}
             autoFocus
@@ -79,6 +97,7 @@ export function CharacterEntryHeader({
               { color: isDark ? fantasy.gold : fantasy.darkWood, borderBottomColor: fantasy.gold },
             ]}
             accessibilityLabel="Character name"
+            testID="character-name-input"
           />
         ) : (
           <Pressable
@@ -90,7 +109,7 @@ export function CharacterEntryHeader({
               style={[styles.name, { color: isDark ? fantasy.gold : fantasy.darkWood }]}
               numberOfLines={1}
             >
-              {draft.name || 'Unnamed Character'}
+              {character.info.name || 'Unnamed Character'}
             </Text>
           </Pressable>
         )}
@@ -183,5 +202,15 @@ const styles = StyleSheet.create({
   },
   actionButton: {
     minWidth: 80,
+  },
+  backButton: {
+    paddingHorizontal: 4,
+    paddingVertical: 8,
+    flexShrink: 0,
+  },
+  backText: {
+    fontFamily: 'Cinzel',
+    fontSize: 18,
+    fontWeight: '700',
   },
 });

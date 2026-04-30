@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setCharacterNotes, setCampaignNotes } from '@/store/slices/characterEntrySlice';
+import { setNotes } from '@/store/slices/characterEntrySlice';
 
 // ---- Section label ----
 
@@ -53,22 +53,15 @@ function NotesArea({ label, value, placeholder, onChangeText }: NotesAreaProps) 
 
 export function NotesSection() {
   const dispatch = useAppDispatch();
-  const characterNotes = useAppSelector((state) => state.characterEntry.draft.characterNotes);
-  const campaignNotes = useAppSelector((state) => state.characterEntry.draft.campaignNotes);
+  const notes = useAppSelector((state) => state.characterEntry.character.info.notes);
 
   return (
     <View style={styles.container}>
       <NotesArea
-        label="Character Notes"
-        value={characterNotes}
-        placeholder="Backstory, personality, goals, appearance..."
-        onChangeText={(text) => dispatch(setCharacterNotes(text))}
-      />
-      <NotesArea
-        label="Campaign Notes"
-        value={campaignNotes}
-        placeholder="Session notes, quest hooks, NPC relationships..."
-        onChangeText={(text) => dispatch(setCampaignNotes(text))}
+        label="Notes"
+        value={notes}
+        placeholder="Backstory, personality, goals, session notes, NPC relationships..."
+        onChangeText={(text) => dispatch(setNotes(text))}
       />
     </View>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '../../helpers/testUtils';
 import { EidolonSection } from '@/components/character/direct-entry/EidolonSection';
-import type { CharacterDraft, DraftClassEntry } from '@/types/characterDraft';
+import type { ClassEntry } from '@/types/classes';
 import type { DraftEidolon } from '@/types/eidolon';
 
 // ---- GameDataService mock ----
@@ -20,14 +20,14 @@ jest.mock('@/services/GameDataService', () => ({
 
 const mockDispatch = jest.fn();
 let mockEidolons: DraftEidolon[] = [];
-let mockDraft: Partial<CharacterDraft> = { eidolons: [] };
+let mockCharacter: Record<string, unknown> = { eidolons: [], classes: { classes: [] }, feats: { feats: [] } };
 
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => mockDispatch,
   useAppSelector: (selector: (s: unknown) => unknown) =>
     selector({
       characterEntry: {
-        draft: { ...mockDraft, eidolons: mockEidolons },
+        character: { ...mockCharacter, eidolons: mockEidolons },
       },
     }),
 }));
@@ -63,16 +63,16 @@ jest.mock('@/components/character/direct-entry/BroodmasterPoolCard', () => ({
 
 // ---- Helpers ----
 
-function makeClassEntry(overrides: Partial<DraftClassEntry> = {}): DraftClassEntry {
+function makeClassEntry(overrides: Partial<ClassEntry> = {}): ClassEntry {
   return {
     id: 'summoner-1',
-    className: 'Summoner (Unchained)',
+    name: 'Summoner (Unchained)',
     level: 5,
     sourceSystem: 'pf1e',
     classChoices: [],
     prereqOverride: false,
     ...overrides,
-  };
+  } as ClassEntry;
 }
 
 // ---- Tests ----
@@ -81,7 +81,7 @@ describe('EidolonSection', () => {
   beforeEach(() => {
     mockDispatch.mockClear();
     mockEidolons = [];
-    mockDraft = { eidolons: [], classes: [], featSlots: [] };
+    mockCharacter = { eidolons: [], classes: { classes: [] }, feats: { feats: [] } };
   });
 
   it('renders the Create Eidolon button when no eidolons exist', () => {
@@ -103,10 +103,10 @@ describe('EidolonSection', () => {
         selectedEvolutions: [],
       },
     ];
-    mockDraft = {
+    mockCharacter = {
       eidolons: mockEidolons,
-      classes: [makeClassEntry()],
-      featSlots: [],
+      classes: { classes: [makeClassEntry()] },
+      feats: { feats: [] },
     };
     const { getAllText } = render(<EidolonSection classEntry={makeClassEntry()} />);
     const texts = getAllText().join(' ');
@@ -127,13 +127,13 @@ describe('EidolonSection', () => {
         selectedEvolutions: [],
       },
     ];
-    mockDraft = {
+    mockCharacter = {
       eidolons: mockEidolons,
-      classes: [makeClassEntry({ className: 'Summoner' })],
-      featSlots: [],
+      classes: { classes: [makeClassEntry({ name: 'Summoner' })] },
+      feats: { feats: [] },
     };
     const { getAllText } = render(
-      <EidolonSection classEntry={makeClassEntry({ className: 'Summoner' })} />,
+      <EidolonSection classEntry={makeClassEntry({ name: 'Summoner' })} />,
     );
     const texts = getAllText().join(' ');
     expect(texts).toContain('Base form');
@@ -151,10 +151,10 @@ describe('EidolonSection', () => {
         selectedEvolutions: [],
       },
     ];
-    mockDraft = {
+    mockCharacter = {
       eidolons: mockEidolons,
-      classes: [makeClassEntry({ archetypeId: 'summoner-synthesist' })],
-      featSlots: [],
+      classes: { classes: [makeClassEntry({ archetypeId: 'summoner-synthesist' })] },
+      feats: { feats: [] },
     };
     const { getAllText } = render(
       <EidolonSection classEntry={makeClassEntry({ archetypeId: 'summoner-synthesist' })} />,

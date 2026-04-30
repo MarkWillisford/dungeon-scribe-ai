@@ -19,6 +19,11 @@ export interface AppliedTemplate {
   paidTiers: number[]; // HD-tier indices already paid (CR templates)
   sourceId: string;
   sourceRev: number;
+  // Editor metadata
+  id?: string; // stable local UUID for action targeting
+  isFreeGrant?: boolean;
+  freeGrantNote?: string;
+  grantedBy?: string;
 }
 
 // ---- Granted Bonuses (free — no ECL impact) ----

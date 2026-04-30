@@ -71,9 +71,23 @@ export default function CharacterDetailScreen() {
     <SafeAreaView style={[styles.container, { backgroundColor: colors.bg.primary }]}>
       {/* Header */}
       <View style={[styles.header, { borderBottomColor: colors.border.DEFAULT }]}>
-        <Pressable onPress={() => router.back()} style={styles.backButton}>
-          <Text style={[styles.backText, { color: colors.text.tertiary }]}>{'< Back'}</Text>
-        </Pressable>
+        <View style={styles.headerRow}>
+          <Pressable onPress={() => router.back()} style={styles.backButton}>
+            <Text style={[styles.backText, { color: colors.text.tertiary }]}>{'< Back'}</Text>
+          </Pressable>
+          <OrnateButton
+            title="Edit"
+            onPress={() =>
+              router.push(
+                `/(tabs)/characters/entry?mode=edit&characterId=${id}` as Parameters<
+                  typeof router.push
+                >[0],
+              )
+            }
+            variant="secondary"
+            testID="character-detail-edit"
+          />
+        </View>
         <Text style={[styles.characterName, { color: fantasy.gold }]}>
           {activeCharacter.info.name}
         </Text>
@@ -528,7 +542,13 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     borderBottomWidth: 1,
   },
-  backButton: { paddingVertical: 4, marginBottom: 4 },
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  backButton: { paddingVertical: 4 },
   backText: { fontFamily: 'LibreBaskerville', fontSize: 13 },
   characterName: {
     fontFamily: 'Cinzel',

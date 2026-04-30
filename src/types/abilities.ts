@@ -1,5 +1,7 @@
 import { Bonus } from './base';
 
+export type AbilityKey = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha';
+
 export interface AbilityScores {
   str: AbilityScore;
   dex: AbilityScore;

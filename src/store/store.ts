@@ -7,6 +7,7 @@ import uiReducer from './slices/uiSlice';
 import characterEntryReducer from './slices/characterEntrySlice';
 import rulesetReducer from './slices/rulesetSlice';
 import gameDataReducer from './slices/gameDataSlice';
+import { recalculateMiddleware } from './middleware/recalculateMiddleware';
 
 export const store = configureStore({
   reducer: {
@@ -39,10 +40,10 @@ export const store = configureStore({
           // Companion equipment slot lookup is a Map<ItemSlot, string>.
           // Serializable state only applies at the boundary of persistence;
           // we handle Map↔Record conversion when saving to Firestore.
-          'characterEntry.draft.companions',
+          'characterEntry.character.companions',
         ],
       },
-    }),
+    }).concat(recalculateMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

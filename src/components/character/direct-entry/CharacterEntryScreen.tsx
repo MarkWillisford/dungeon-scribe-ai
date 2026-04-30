@@ -8,7 +8,9 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { OrnateTab } from '@/components/ui/OrnateTab';
 import { CharacterEntryHeader } from './CharacterEntryHeader';
@@ -19,7 +21,8 @@ import {
   type EntryTabKey,
   type TabStatus,
 } from '@/store/slices/characterEntrySlice';
-import { DraftValidationService } from '@/services/DraftValidationService';
+import { saveCharacter } from '@/store/thunks/saveCharacter';
+import { CharacterValidationService } from '@/services/CharacterValidationService';
 import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
 import { ValidationReportSheet } from './ValidationReportSheet';
@@ -65,43 +68,59 @@ function PlaceholderSection({ tab }: { tab: EntryTabKey }) {
 }
 
 // ---- Tab status derivation ----
-// Returns the completion dot status for each tab based on draft content.
+// Returns the completion dot status for each tab based on character content.
 // "empty" = no data entered, "complete" = data present, "warnings" = has warnings.
 
 function useTabStatus(): Record<EntryTabKey, TabStatus> {
-  const draft = useAppSelector((state) => state.characterEntry.draft);
+  const character = useAppSelector((state) => state.characterEntry.character);
   const warnings = useAppSelector((state) => state.characterEntry.validationWarnings);
 
   const hasWarning = (tab: EntryTabKey) =>
     warnings.some((w) => w.section === tab && !w.isAcknowledged);
 
   return {
-    identity: hasWarning('identity') ? 'warnings' : draft.name ? 'complete' : 'empty',
+    identity: hasWarning('identity') ? 'warnings' : character.info.name ? 'complete' : 'empty',
     abilities: hasWarning('abilities')
       ? 'warnings'
-      : draft.abilities.str.base !== 10
+      : character.abilityScores.str.base !== 10
         ? 'complete'
         : 'empty',
-    classes: hasWarning('classes') ? 'warnings' : draft.classes.length > 0 ? 'complete' : 'empty',
-    combat: hasWarning('combat') ? 'warnings' : draft.combat.currentHP > 0 ? 'complete' : 'empty',
+    classes: hasWarning('classes')
+      ? 'warnings'
+      : character.classes.classes.length > 0
+        ? 'complete'
+        : 'empty',
+    combat: hasWarning('combat')
+      ? 'warnings'
+      : character.combatStats.hitPoints.current > 0
+        ? 'complete'
+        : 'empty',
     skills: hasWarning('skills')
       ? 'warnings'
-      : Object.keys(draft.skills).length > 0
+      : character.classes.classes.length > 0
         ? 'complete'
         : 'empty',
-    traits: hasWarning('traits') ? 'warnings' : draft.traits.length > 0 ? 'complete' : 'empty',
-    feats: hasWarning('feats') ? 'warnings' : draft.featSlots.length > 0 ? 'complete' : 'empty',
+    traits: hasWarning('traits')
+      ? 'warnings'
+      : character.traits.traits.length > 0
+        ? 'complete'
+        : 'empty',
+    feats: hasWarning('feats')
+      ? 'warnings'
+      : character.feats.feats.length > 0
+        ? 'complete'
+        : 'empty',
     spells: hasWarning('spells')
       ? 'warnings'
-      : draft.spellcastingPools.length > 0
+      : character.spellcasting.pools.length > 0
         ? 'complete'
         : 'empty',
     equipment: hasWarning('equipment')
       ? 'warnings'
-      : draft.equipment.length > 0
+      : (character.editorEquipment?.length ?? 0) > 0
         ? 'complete'
         : 'empty',
-    notes: hasWarning('notes') ? 'warnings' : draft.characterNotes ? 'complete' : 'empty',
+    notes: hasWarning('notes') ? 'warnings' : character.info.notes ? 'complete' : 'empty',
   };
 }
 
@@ -110,10 +129,13 @@ function useTabStatus(): Record<EntryTabKey, TabStatus> {
 export function CharacterEntryScreen() {
   const { colors, fantasy } = useTheme();
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const activeTab = useAppSelector((state) => state.characterEntry.activeTab);
-  const draft = useAppSelector((state) => state.characterEntry.draft);
+  const character = useAppSelector((state) => state.characterEntry.character);
   const warnings = useAppSelector((state) => state.characterEntry.validationWarnings);
   const lastValidatedAt = useAppSelector((state) => state.characterEntry.lastValidatedAt);
+  const isDirty = useAppSelector((state) => state.characterEntry.isDirty);
+  const isSaving = useAppSelector((state) => state.characterEntry.isSaving);
   const ruleset = useAppSelector((state) => state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD);
   const classDataMap = useAppSelector(selectClassDataMap);
   const tabStatus = useTabStatus();
@@ -129,14 +151,31 @@ export function CharacterEntryScreen() {
   );
 
   const handleValidate = useCallback(async () => {
-    const newWarnings = await DraftValidationService.validate(draft, ruleset, classDataMap);
+    const newWarnings = await CharacterValidationService.validate(character, ruleset, classDataMap);
     dispatch(setValidationWarnings(newWarnings));
     setShowValidationSheet(true);
-  }, [draft, ruleset, classDataMap, dispatch]);
+  }, [character, ruleset, classDataMap, dispatch]);
 
-  const handleSave = useCallback(() => {
-    // Save logic will be wired when the characters service is connected
-  }, []);
+  const handleSave = useCallback(async () => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (dispatch(saveCharacter() as any) as any).unwrap();
+      router.back();
+    } catch {
+      // setSaveError was already dispatched by the thunk
+    }
+  }, [dispatch, router]);
+
+  const handleBack = useCallback(() => {
+    if (!isDirty) {
+      router.back();
+      return;
+    }
+    Alert.alert('Unsaved Changes', 'You have unsaved changes. Leave without saving?', [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Leave', style: 'destructive', onPress: () => router.back() },
+    ]);
+  }, [isDirty, router]);
 
   const handlePortraitPress = useCallback(() => {
     // Portrait picker will be wired in a later PR
@@ -147,8 +186,9 @@ export function CharacterEntryScreen() {
       {/* Sticky header */}
       <CharacterEntryHeader
         onValidate={handleValidate}
-        onSave={handleSave}
+        onSave={isSaving ? () => {} : handleSave}
         onPortraitPress={handlePortraitPress}
+        onBack={handleBack}
       />
 
       {/* Tab bar */}

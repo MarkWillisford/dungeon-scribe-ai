@@ -22,7 +22,7 @@ import {
   removeBroodmasterShared,
   addEidolon,
 } from '@/store/slices/characterEntrySlice';
-import type { DraftClassEntry } from '@/types/characterDraft';
+import type { ClassEntry } from '@/types/classes';
 import type { EidolonEdition, EidolonForm, SelectedEvolution } from '@/types/eidolon';
 import type { EidolonDataIndex } from '@/services/EidolonPoolService';
 import { EidolonPoolService } from '@/services/EidolonPoolService';
@@ -34,7 +34,7 @@ import { EvolutionPickerSheet } from './EvolutionPickerSheet';
 const SHARED_EVOLUTION_IDS = ['evolution-large'];
 
 interface BroodmasterPoolCardProps {
-  classEntry: DraftClassEntry;
+  classEntry: ClassEntry;
   edition: EidolonEdition;
   dataIndex: EidolonDataIndex;
 }
@@ -44,8 +44,8 @@ export function BroodmasterPoolCard({ classEntry, edition, dataIndex }: Broodmas
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
 
-  const draft = useAppSelector((s) => s.characterEntry.draft);
-  const broodEidolons = draft.eidolons.filter((e) => e.summonerClassEntryId === classEntry.id);
+  const character = useAppSelector((s) => s.characterEntry.character);
+  const broodEidolons = character.eidolons.filter((e) => e.summonerClassEntryId === classEntry.id);
   const broodSize = broodEidolons.length;
 
   const sharedEvolutions: SelectedEvolution[] = useMemo(
@@ -63,10 +63,10 @@ export function BroodmasterPoolCard({ classEntry, edition, dataIndex }: Broodmas
   const summonerLevel = classEntry.level;
   const preSplitTotal = useMemo(() => {
     if (broodEidolons.length === 0) return 0;
-    const b = EidolonPoolService.computePool(draft, broodEidolons[0].id, dataIndex);
+    const b = EidolonPoolService.computePool(character, broodEidolons[0].id, dataIndex);
     // Undo the broodmasterShare delta to recover the pre-split pool.
     return b.total - b.sources.broodmasterShare;
-  }, [draft, broodEidolons, dataIndex]);
+  }, [character, broodEidolons, dataIndex]);
 
   const poolAfterShared = preSplitTotal - sharedCost;
   const perMemberShare = broodSize > 0 ? Math.floor(poolAfterShared / broodSize) : poolAfterShared;
@@ -95,7 +95,7 @@ export function BroodmasterPoolCard({ classEntry, edition, dataIndex }: Broodmas
   function handleAddBroodMember() {
     dispatch(
       addEidolon({
-        classEntryId: classEntry.id,
+        classEntryId: classEntry.id ?? '',
         edition,
         baseForm: 'biped',
       }),
@@ -109,7 +109,7 @@ export function BroodmasterPoolCard({ classEntry, edition, dataIndex }: Broodmas
         text: 'Remove',
         style: 'destructive',
         onPress: () =>
-          dispatch(removeBroodmasterShared({ classEntryId: classEntry.id, instanceId })),
+          dispatch(removeBroodmasterShared({ classEntryId: classEntry.id ?? '', instanceId })),
       },
     ]);
   }
@@ -234,7 +234,7 @@ export function BroodmasterPoolCard({ classEntry, edition, dataIndex }: Broodmas
         dataIndex={dataIndex}
         allowedEvolutionIds={SHARED_EVOLUTION_IDS}
         onEvolutionSelected={(evolutionId, metadata) => {
-          dispatch(setBroodmasterShared({ classEntryId: classEntry.id, evolutionId, metadata }));
+          dispatch(setBroodmasterShared({ classEntryId: classEntry.id ?? '', evolutionId, metadata }));
           setPickerOpen(false);
         }}
         onClose={() => setPickerOpen(false)}

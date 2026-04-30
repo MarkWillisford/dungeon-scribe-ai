@@ -58,13 +58,13 @@ export function TemplateCompanionSection({
   // One companion per template (no multi-grant templates in scope for 1.8).
   // Using find so adding a second is a no-op at the UI layer.
   const companion = useAppSelector((state) =>
-    state.characterEntry.draft.companions.find(
+    state.characterEntry.character.companions.find(
       (c) => c.grantedBy.type === 'template' && c.grantedBy.templateId === templateId,
     ),
   );
 
   const totalCharacterLevel = useAppSelector((state) =>
-    state.characterEntry.draft.classes.reduce((sum, c) => sum + c.level, 0),
+    state.characterEntry.character.classes.classes.reduce((sum, c) => sum + c.level, 0),
   );
 
   const companionEntry = useMemo(

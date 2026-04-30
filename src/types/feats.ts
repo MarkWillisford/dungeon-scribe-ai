@@ -138,6 +138,7 @@ export interface CharacterFeat {
   grantedAtLevel: number;
   active: boolean;
   choices: Record<string, string>;
+  prereqOverride?: boolean; // DM override — suppress prereq warning for this feat slot
 
   // Point-in-time validation snapshots (what the character looked like when this feat was taken)
   babWhenTaken?: number;

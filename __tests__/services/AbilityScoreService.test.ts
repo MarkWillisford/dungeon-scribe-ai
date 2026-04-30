@@ -244,3 +244,46 @@ function createMockAbilityScores(values: {
     cha: AbilityScoreService.createDefaultAbilityScore(values.cha),
   };
 }
+
+describe('AbilityScoreService.simulateRoll', () => {
+  it('returns count rolls when keep is absent', () => {
+    const rolls = AbilityScoreService.simulateRoll(4, 6);
+    expect(rolls).toHaveLength(4);
+    for (const r of rolls) {
+      expect(r).toBeGreaterThanOrEqual(1);
+      expect(r).toBeLessThanOrEqual(6);
+    }
+  });
+
+  it('returns keep highest when keep < count', () => {
+    const rolls = AbilityScoreService.simulateRoll(4, 6, 3);
+    expect(rolls).toHaveLength(3);
+    // Result must be sorted descending (highest kept)
+    expect(rolls[0]).toBeGreaterThanOrEqual(rolls[rolls.length - 1]);
+  });
+});
+
+describe('AbilityScoreService.parseDiceFormula — edge cases', () => {
+  it('returns null when count exceeds 20', () => {
+    expect(AbilityScoreService.parseDiceFormula('21d6')).toBeNull();
+  });
+
+  it('returns null when sides exceeds 100', () => {
+    expect(AbilityScoreService.parseDiceFormula('4d101')).toBeNull();
+  });
+
+  it('returns null when keep exceeds count', () => {
+    expect(AbilityScoreService.parseDiceFormula('4d6k5')).toBeNull();
+  });
+
+  it('returns null when count is 0', () => {
+    expect(AbilityScoreService.parseDiceFormula('0d6')).toBeNull();
+  });
+});
+
+describe('AbilityScoreService.simulateRoll — keep >= count', () => {
+  it('returns all rolls when keep equals count', () => {
+    const rolls = AbilityScoreService.simulateRoll(3, 6, 3);
+    expect(rolls).toHaveLength(3);
+  });
+});

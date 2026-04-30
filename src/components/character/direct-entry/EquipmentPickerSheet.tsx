@@ -13,11 +13,11 @@ import { useTheme } from '@/hooks/useTheme';
 import { GameDataService } from '@/services/GameDataService';
 import type { WeaponDefinition, ArmorDefinition, ShieldDefinition } from '@/types/equipment';
 import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
-import type { DraftEquippedSlot } from '@/types/characterDraft';
+import type { EditorEquippedSlot } from '@/types/character';
 
 // ---- Types ----
 
-export type PickerSlot = DraftEquippedSlot | 'orbiting' | 'none';
+export type PickerSlot = EditorEquippedSlot | 'orbiting' | 'none';
 
 export interface EquipmentPickerResult {
   definitionId: string;
