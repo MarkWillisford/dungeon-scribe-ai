@@ -189,6 +189,18 @@ export function ClassChoiceRow({
     (state) => state.characterEntry.character.classes.classes,
   );
 
+  const spellcastingPools = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.pools,
+  );
+
+  const knownSpells = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.knownSpells,
+  );
+
+  const spellbooks = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.spellbooks,
+  );
+
   // Companion currently granted by this specific class choice, if any.
   const existingCompanion = useAppSelector((state) =>
     state.characterEntry.character.companions.find(
@@ -212,8 +224,25 @@ export function ClassChoiceRow({
       // 2. Resolve {chosen_X} / {chosen_deity} tokens.
       let resolvedFilter = resolveFilterTokens(baseFilter, siblingChoices ?? [], characterDeity);
 
-      // 3. Resolve castingType token → concrete classNames from the character's class list.
-      // Uses a static PF1e map so the picker works regardless of spellcasting pool config.
+      // 3a. character_castable — respects prepared/spontaneous/spellbook scope per pool.
+      if (resolvedFilter.castingType === 'character_castable') {
+        GameDataService.buildCastableSpellItems(
+          spellcastingPools,
+          knownSpells,
+          spellbooks,
+          characterClasses,
+        )
+          .then((items) => {
+            if (!stale) setRawPickerItems(items);
+          })
+          .catch((e) => console.error('Failed to build castable spell items:', e));
+        return () => {
+          stale = true;
+        };
+      }
+
+      // 3b. Resolve castingType ('divine' | 'arcane' | ...) → classNames from class list.
+      // Used by definitions that want a type-filtered class list regardless of spellcasting setup.
       if (resolvedFilter.castingType !== undefined) {
         const castingType = resolvedFilter.castingType as string;
         const classNames = characterClasses
@@ -236,7 +265,16 @@ export function ClassChoiceRow({
     return () => {
       stale = true;
     };
-  }, [definition, siblingChoices, characterDeity, takenAtLevel, characterClasses]);
+  }, [
+    definition,
+    siblingChoices,
+    characterDeity,
+    takenAtLevel,
+    characterClasses,
+    spellcastingPools,
+    knownSpells,
+    spellbooks,
+  ]);
 
   const pickerItems = useMemo(
     () =>

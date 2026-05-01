@@ -9,7 +9,10 @@ import type { ClassChoice } from '@/types/classes';
 import type { ClassChoiceDefinition } from '@/types/classChoices';
 
 jest.mock('@/services/GameDataService', () => ({
-  GameDataService: { getClassChoiceItems: jest.fn().mockResolvedValue([]) },
+  GameDataService: {
+    getClassChoiceItems: jest.fn().mockResolvedValue([]),
+    buildCastableSpellItems: jest.fn().mockResolvedValue([]),
+  },
 }));
 jest.mock('@/components/ui/SearchPickerSheet', () => ({
   SearchPickerSheet: () => null,
@@ -20,7 +23,15 @@ jest.mock('@/components/character/direct-entry/CompanionPickerSheet', () => ({
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => jest.fn(),
   useAppSelector: (selector: (s: unknown) => unknown) =>
-    selector({ characterEntry: { character: { classes: { classes: [] }, companions: [] } } }),
+    selector({
+      characterEntry: {
+        character: {
+          classes: { classes: [] },
+          companions: [],
+          spellcasting: { pools: [], knownSpells: [], spellbooks: [] },
+        },
+      },
+    }),
 }));
 jest.mock('@/hooks/useTheme', () => ({
   useTheme: () => ({

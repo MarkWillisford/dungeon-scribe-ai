@@ -68,6 +68,8 @@ import type {
 } from '@/types/initiating';
 import type { EidolonBaseFormDefinition, EidolonSubtypeDefinition } from '@/types/eidolon';
 import type { EidolonDataIndex } from './EidolonPoolService';
+import type { SpellcastingPool, KnownSpell, Spellbook } from '@/types/spells';
+import type { ClassEntry } from '@/types/classes';
 
 // ---- QueryContext ----------------------------------------------------------------
 
@@ -440,6 +442,130 @@ export class GameDataService {
     }
   }
 
+  // Spontaneous casters: their "castable" spells are their spells known, not the full class list.
+  static readonly SPONTANEOUS_CASTERS = new Set([
+    'oracle',
+    'sorcerer',
+    'bard',
+    'summoner',
+    'bloodrager',
+    'skald',
+    'medium',
+    'psychic',
+    'mesmerist',
+    'spiritualist',
+  ]);
+
+  // Prepared casters whose list is bounded by a spellbook (familiar/tome) rather than
+  // the full class catalog.
+  static readonly SPELLBOOK_CASTERS = new Set(['wizard', 'arcanist', 'witch', 'magus']);
+
+  /** Slugify a spell name to the same key format used by the seed scripts and Firestore connector. */
+  static spellKey(name: string): string {
+    return name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
+  /** Highest spell level the character can prepare from this pool (index into spellsPerDay.total). */
+  static maxCastableLevelFromPool(pool: SpellcastingPool): number {
+    const total = pool.spellsPerDay?.total ?? [];
+    for (let i = total.length - 1; i >= 0; i--) {
+      if (total[i] > 0) return i;
+    }
+    // Fallback: estimate from ESL using the standard full-caster formula.
+    return Math.min(9, Math.ceil((pool.effectiveSpellcastingLevel ?? 0) / 2));
+  }
+
+  /**
+   * Build SearchItem[] for the 'character_castable' scope:
+   *   - Spontaneous casters (Oracle, Sorcerer, Bard, ...): character's knownSpells for that class
+   *   - Spellbook casters (Wizard, Arcanist, Witch, Magus): spells in the character's spellbooks
+   *   - Prepared class-list casters (Cleric, Druid, Paladin, ...): full class list up to max castable level
+   *
+   * When pools are not configured, falls back to the character's class-list entries with maxSpellLevel 9.
+   */
+  static async buildCastableSpellItems(
+    pools: SpellcastingPool[],
+    knownSpells: KnownSpell[],
+    spellbooks: Spellbook[],
+    characterClasses: ClassEntry[],
+  ): Promise<SearchItem[]> {
+    const seen = new Set<string>();
+    const allItems: SearchItem[] = [];
+
+    const addItem = (item: SearchItem) => {
+      if (!seen.has(item.key)) {
+        seen.add(item.key);
+        allItems.push(item);
+      }
+    };
+
+    // If no pools are configured, fall back to full class list with no level cap.
+    const effectivePools: Array<{ baseClass: string; pool: SpellcastingPool | null }> =
+      pools.length > 0
+        ? pools.map((p) => ({ baseClass: p.baseClass, pool: p }))
+        : characterClasses
+            .map((c) => c.name.toLowerCase())
+            .filter(
+              (name) =>
+                GameDataService.SPONTANEOUS_CASTERS.has(name) ||
+                GameDataService.SPELLBOOK_CASTERS.has(name) ||
+                Object.keys(GameDataService.SPELL_CLASS_ABBREV).includes(name),
+            )
+            .map((name) => ({ baseClass: name, pool: null }));
+
+    for (const { baseClass, pool } of effectivePools) {
+      if (GameDataService.SPONTANEOUS_CASTERS.has(baseClass)) {
+        // Use the character's spells known for this class.
+        const poolKnown = knownSpells.filter((s) =>
+          s.classes.some((c) => c.className === baseClass),
+        );
+        for (const spell of poolKnown) {
+          const level = spell.classes.find((c) => c.className === baseClass)?.level ?? 0;
+          addItem({
+            key: GameDataService.spellKey(spell.name),
+            label: spell.name,
+            subLabel: GameDataService.buildSpellSubLabel(spell.classLevels, [baseClass]),
+            category: `Level ${level}`,
+          });
+        }
+      } else if (GameDataService.SPELLBOOK_CASTERS.has(baseClass)) {
+        // Use spells in the character's spellbooks that appear on this class list.
+        const bookSpells = spellbooks
+          .flatMap((b) => b.spells)
+          .filter((s) => s.classLevels[baseClass] !== undefined);
+        for (const spell of bookSpells) {
+          const level = spell.classLevels[baseClass] ?? 0;
+          addItem({
+            key: GameDataService.spellKey(spell.name),
+            label: spell.name,
+            subLabel: GameDataService.buildSpellSubLabel(spell.classLevels, [baseClass]),
+            category: `Level ${level}`,
+          });
+        }
+      } else {
+        // Prepared class-list caster: query via Firestore/static connector.
+        const maxLevel = pool ? GameDataService.maxCastableLevelFromPool(pool) : 9;
+        const items = await GameDataService.getClassChoiceItems('spells', {
+          classNames: [baseClass],
+          maxSpellLevel: maxLevel,
+        });
+        items.forEach(addItem);
+      }
+    }
+
+    allItems.sort((a, b) => {
+      const lvlA = parseInt(a.category?.replace('Level ', '') ?? '0', 10);
+      const lvlB = parseInt(b.category?.replace('Level ', '') ?? '0', 10);
+      if (lvlA !== lvlB) return lvlA - lvlB;
+      return a.label.localeCompare(b.label);
+    });
+
+    return allItems;
+  }
+
   private static readonly SPELL_CLASS_ABBREV: Record<string, string> = {
     arcanist: 'Arc',
     bard: 'Brd',
@@ -468,7 +594,7 @@ export class GameDataService {
   };
 
   /** Builds a compact level string for a spell subLabel, e.g. "Clr 3 / Drd 3". */
-  private static buildSpellSubLabel(
+  static buildSpellSubLabel(
     classLevels: Record<string, number>,
     relevantClasses: string[],
   ): string {
