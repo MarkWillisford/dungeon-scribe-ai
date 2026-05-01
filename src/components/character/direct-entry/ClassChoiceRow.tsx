@@ -19,6 +19,41 @@ import {
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import { makeCompanionInstanceId } from '@/utils/companionUtils';
 
+// Static PF1e class-to-casting-type map. Used to resolve castingType filter tokens
+// (e.g. castingType: 'divine') into concrete class names from the character's class list
+// without requiring spellcasting pools to be configured first.
+const CLASS_CASTING_TYPE: Record<string, 'divine' | 'arcane' | 'psychic' | 'occult'> = {
+  // Divine full casters
+  cleric: 'divine',
+  druid: 'divine',
+  oracle: 'divine',
+  warpriest: 'divine',
+  shaman: 'divine',
+  // Divine half casters
+  paladin: 'divine',
+  ranger: 'divine',
+  inquisitor: 'divine',
+  hunter: 'divine',
+  // Arcane full casters
+  wizard: 'arcane',
+  sorcerer: 'arcane',
+  arcanist: 'arcane',
+  witch: 'arcane',
+  // Arcane half casters
+  bard: 'arcane',
+  magus: 'arcane',
+  skald: 'arcane',
+  bloodrager: 'arcane',
+  summoner: 'arcane',
+  // Psychic
+  psychic: 'psychic',
+  mesmerist: 'psychic',
+  spiritualist: 'psychic',
+  medium: 'psychic',
+  // Occult
+  occultist: 'occult',
+};
+
 interface ClassChoiceRowProps {
   classId: string;
   definition: ClassChoiceDefinition;
@@ -150,8 +185,8 @@ export function ClassChoiceRow({
     state.characterEntry.character.classes.classes.find((c) => c.id === classId),
   );
 
-  const spellcastingPools = useAppSelector(
-    (state) => state.characterEntry.character.spellcasting.pools,
+  const characterClasses = useAppSelector(
+    (state) => state.characterEntry.character.classes.classes,
   );
 
   // Companion currently granted by this specific class choice, if any.
@@ -177,12 +212,13 @@ export function ClassChoiceRow({
       // 2. Resolve {chosen_X} / {chosen_deity} tokens.
       let resolvedFilter = resolveFilterTokens(baseFilter, siblingChoices ?? [], characterDeity);
 
-      // 3. Resolve castingType token → concrete classNames from spellcasting pools.
+      // 3. Resolve castingType token → concrete classNames from the character's class list.
+      // Uses a static PF1e map so the picker works regardless of spellcasting pool config.
       if (resolvedFilter.castingType !== undefined) {
         const castingType = resolvedFilter.castingType as string;
-        const classNames = spellcastingPools
-          .filter((p) => p.castingType === castingType)
-          .map((p) => p.baseClass);
+        const classNames = characterClasses
+          .map((c) => c.name.toLowerCase())
+          .filter((name) => CLASS_CASTING_TYPE[name] === castingType);
         const { castingType: _dropped, ...rest } = resolvedFilter;
         resolvedFilter = { ...rest, classNames };
       }
@@ -200,7 +236,7 @@ export function ClassChoiceRow({
     return () => {
       stale = true;
     };
-  }, [definition, siblingChoices, characterDeity, takenAtLevel, spellcastingPools]);
+  }, [definition, siblingChoices, characterDeity, takenAtLevel, characterClasses]);
 
   const pickerItems = useMemo(
     () =>
