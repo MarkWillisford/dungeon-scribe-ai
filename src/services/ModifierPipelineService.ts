@@ -210,6 +210,40 @@ export class ModifierPipelineService {
     // 7. Character traits — effects resolved via trait registry (future)
     // CharacterTrait stores traitId; effects will be looked up from TraitRegistryService
 
+    // 8. Applied templates — ability score changes snapshotted at add-time
+    const ABILITY_KEY: Record<string, string> = {
+      STR: 'str',
+      DEX: 'dex',
+      CON: 'con',
+      INT: 'int',
+      WIS: 'wis',
+      CHA: 'cha',
+    };
+    for (const tpl of character.appliedTemplates ?? []) {
+      for (const change of tpl.abilityScoreChanges ?? []) {
+        const ab = ABILITY_KEY[change.ability];
+        if (!ab) continue;
+        effects.push({
+          type: 'bonus',
+          bonusType: BonusType.UNTYPED,
+          target: `ability.${ab}`,
+          value: change.change,
+          source: tpl.name,
+        });
+      }
+    }
+
+    // 9. User-entered typed bonuses (morale, sacred, insight, etc. added via ability score UI)
+    for (const b of character.manualAbilityBonuses ?? []) {
+      effects.push({
+        type: 'bonus',
+        bonusType: b.bonusType,
+        target: `ability.${b.ability}`,
+        value: b.value,
+        source: b.source ?? 'Manual',
+      });
+    }
+
     return effects;
   }
 

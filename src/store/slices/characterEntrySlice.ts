@@ -12,7 +12,7 @@ import type { AppliedTemplate } from '@/types/templates';
 import type { CharacterMagicItem, ItemSlot } from '@/types/magicItems';
 import { computeFeatSlots } from '@/utils/characterComputations';
 import type { AbilityKey } from '@/types/abilities';
-import type { Character } from '@/types';
+import type { Character, ManualAbilityBonus } from '@/types';
 import type { LevelIncrementSlot } from '@/types/character';
 import type { CharacterFeat, Feats } from '@/types/feats';
 import type { ClassEntry, CharacterClasses, FavoredClassBonusSelection } from '@/types/classes';
@@ -340,12 +340,21 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
-    setAbilityOther(state, action: PayloadAction<{ ability: AbilityKey; value: number }>) {
-      // Store "other" misc bonus in the untyped bucket
-      const score = state.character.abilityScores[action.payload.ability];
-      score.bonuses.untyped = [
-        { value: action.payload.value, source: 'misc', type: BonusType.UNTYPED },
-      ];
+    addOtherBonus(state, action: PayloadAction<ManualAbilityBonus>) {
+      if (!state.character.manualAbilityBonuses) state.character.manualAbilityBonuses = [];
+      state.character.manualAbilityBonuses.push(action.payload);
+      state.isDirty = true;
+    },
+
+    removeOtherBonus(state, action: PayloadAction<{ ability: AbilityKey; index: number }>) {
+      if (!state.character.manualAbilityBonuses) return;
+      const abilityBonuses = state.character.manualAbilityBonuses.filter(
+        (b) => b.ability === action.payload.ability,
+      );
+      const target = abilityBonuses[action.payload.index];
+      if (!target) return;
+      const globalIndex = state.character.manualAbilityBonuses.indexOf(target);
+      if (globalIndex !== -1) state.character.manualAbilityBonuses.splice(globalIndex, 1);
       state.isDirty = true;
     },
 
@@ -1606,7 +1615,8 @@ export const {
   setPortrait,
   setAbilityBase,
   setAbilityInherent,
-  setAbilityOther,
+  addOtherBonus,
+  removeOtherBonus,
   setLevelIncrementAbility,
   setLevelIncrementSlots,
   addClass,

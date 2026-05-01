@@ -1,3 +1,4 @@
+import { BonusType } from '@/types/base';
 import reducer, {
   loadCharacter,
   resetDraft,
@@ -84,7 +85,8 @@ import reducer, {
   setSaving,
   setSaveError,
   applyComputedStats,
-  setAbilityOther,
+  addOtherBonus,
+  removeOtherBonus,
   setNotes,
   setCompanionHDAbilityIncrease,
   addEidolon,
@@ -2897,12 +2899,33 @@ describe('characterEntrySlice — misc state reducers', () => {
     expect(state1.character.info.name).toBe('Patched');
   });
 
-  it('setAbilityOther stores an untyped bonus on the ability', () => {
+  it('addOtherBonus stores a typed bonus in manualAbilityBonuses', () => {
     let state = reducer(undefined, { type: '@@INIT' });
-    state = reducer(state, setAbilityOther({ ability: 'str', value: 4 }));
-    const bonus = state.character.abilityScores.str.bonuses.untyped[0];
-    expect(bonus.value).toBe(4);
-    expect(bonus.source).toBe('misc');
+    state = reducer(
+      state,
+      addOtherBonus({ ability: 'str', bonusType: BonusType.MORALE, value: 4, source: 'Rage' }),
+    );
+    const bonus = state.character.manualAbilityBonuses?.[0];
+    expect(bonus?.ability).toBe('str');
+    expect(bonus?.bonusType).toBe(BonusType.MORALE);
+    expect(bonus?.value).toBe(4);
+    expect(bonus?.source).toBe('Rage');
+    expect(state.isDirty).toBe(true);
+  });
+
+  it('removeOtherBonus removes a bonus by ability-scoped index', () => {
+    let state = reducer(undefined, { type: '@@INIT' });
+    state = reducer(
+      state,
+      addOtherBonus({ ability: 'str', bonusType: BonusType.MORALE, value: 4 }),
+    );
+    state = reducer(
+      state,
+      addOtherBonus({ ability: 'str', bonusType: BonusType.SACRED, value: 2 }),
+    );
+    state = reducer(state, removeOtherBonus({ ability: 'str', index: 0 }));
+    expect(state.character.manualAbilityBonuses?.length).toBe(1);
+    expect(state.character.manualAbilityBonuses?.[0].bonusType).toBe(BonusType.SACRED);
     expect(state.isDirty).toBe(true);
   });
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, ScrollView, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { OrnatePanel } from '@/components/ui/OrnatePanel';
 import { AutoComputedValue } from '@/components/ui/AutoComputedValue';
@@ -7,11 +7,14 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   setAbilityBase,
   setAbilityInherent,
-  setAbilityOther,
+  addOtherBonus,
+  removeOtherBonus,
   setRacialFlexAbility,
 } from '@/store/slices/characterEntrySlice';
 import type { AbilityKey } from '@/types/abilities';
 import type { AbilityScore } from '@/types/abilities';
+import type { ManualAbilityBonus } from '@/types';
+import { BonusType } from '@/types/base';
 
 // ---- Helpers ----
 
@@ -138,6 +141,268 @@ function BreakdownRow({
   );
 }
 
+// ---- Other Bonus Types ----
+
+const ABILITY_BONUS_TYPES: BonusType[] = [
+  BonusType.MORALE,
+  BonusType.SACRED,
+  BonusType.PROFANE,
+  BonusType.INSIGHT,
+  BonusType.LUCK,
+  BonusType.ALCHEMICAL,
+  BonusType.CIRCUMSTANCE,
+  BonusType.COMPETENCE,
+  BonusType.INHERENT,
+  BonusType.SIZE,
+  BonusType.UNTYPED,
+];
+
+const BONUS_TYPE_LABELS: Partial<Record<BonusType, string>> = {
+  [BonusType.MORALE]: 'Morale',
+  [BonusType.SACRED]: 'Sacred',
+  [BonusType.PROFANE]: 'Profane',
+  [BonusType.INSIGHT]: 'Insight',
+  [BonusType.LUCK]: 'Luck',
+  [BonusType.ALCHEMICAL]: 'Alchemical',
+  [BonusType.CIRCUMSTANCE]: 'Circumstance',
+  [BonusType.COMPETENCE]: 'Competence',
+  [BonusType.INHERENT]: 'Inherent',
+  [BonusType.SIZE]: 'Size',
+  [BonusType.UNTYPED]: 'Untyped',
+};
+
+function computeOtherEffective(bonuses: ManualAbilityBonus[]): number {
+  if (bonuses.length === 0) return 0;
+  const byType = new Map<BonusType, number[]>();
+  for (const b of bonuses) {
+    const list = byType.get(b.bonusType) ?? [];
+    list.push(b.value);
+    byType.set(b.bonusType, list);
+  }
+  let total = 0;
+  for (const [type, values] of byType) {
+    total +=
+      type === BonusType.UNTYPED || type === BonusType.DODGE
+        ? values.reduce((a, v) => a + v, 0)
+        : Math.max(...values);
+  }
+  return total;
+}
+
+// ---- Other Bonus Section ----
+
+interface OtherBonusSectionProps {
+  abilityKey: AbilityKey;
+  bonuses: ManualAbilityBonus[];
+}
+
+function OtherBonusSection({ abilityKey, bonuses }: OtherBonusSectionProps) {
+  const { colors, fantasy, isDark } = useTheme();
+  const dispatch = useAppDispatch();
+  const [adding, setAdding] = useState(false);
+  const [addValue, setAddValue] = useState('0');
+  const [addType, setAddType] = useState<BonusType>(BonusType.MORALE);
+  const [addSource, setAddSource] = useState('');
+
+  const effectiveTotal = computeOtherEffective(bonuses);
+
+  const handleAdd = () => {
+    const v = parseInt(addValue, 10);
+    if (isNaN(v)) return;
+    dispatch(
+      addOtherBonus({
+        ability: abilityKey,
+        bonusType: addType,
+        value: v,
+        source: addSource.trim() || undefined,
+      }),
+    );
+    setAdding(false);
+    setAddValue('0');
+    setAddType(BonusType.MORALE);
+    setAddSource('');
+  };
+
+  return (
+    <View>
+      {bonuses.map((b, idx) => (
+        <View
+          key={idx}
+          style={[
+            styles.bonusRow,
+            {
+              borderBottomColor: colors.border.DEFAULT,
+              borderBottomWidth: StyleSheet.hairlineWidth,
+            },
+          ]}
+        >
+          <Text style={[styles.bonusValue, { color: colors.text.primary }]}>
+            {b.value >= 0 ? `+${b.value}` : `${b.value}`}
+          </Text>
+          <View
+            style={[
+              styles.bonusTypePill,
+              {
+                backgroundColor: isDark ? 'rgba(212,175,55,0.2)' : 'rgba(140,90,40,0.1)',
+                borderColor: fantasy.gold,
+              },
+            ]}
+          >
+            <Text style={[styles.bonusTypePillText, { color: fantasy.gold }]}>
+              {BONUS_TYPE_LABELS[b.bonusType] ?? b.bonusType}
+            </Text>
+          </View>
+          {b.source ? (
+            <Text style={[styles.bonusSource, { color: colors.text.tertiary }]} numberOfLines={1}>
+              {b.source}
+            </Text>
+          ) : (
+            <View style={styles.bonusSource} />
+          )}
+          <Pressable
+            onPress={() => dispatch(removeOtherBonus({ ability: abilityKey, index: idx }))}
+            style={styles.bonusRemoveBtn}
+            accessibilityLabel={`Remove ${BONUS_TYPE_LABELS[b.bonusType] ?? b.bonusType} bonus`}
+          >
+            <Text style={{ color: colors.text.tertiary, fontSize: 16 }}>×</Text>
+          </Pressable>
+        </View>
+      ))}
+
+      {adding ? (
+        <View style={[styles.addBonusForm, { borderColor: colors.border.DEFAULT }]}>
+          <View style={styles.addBonusInputRow}>
+            <TextInput
+              value={addValue}
+              onChangeText={setAddValue}
+              keyboardType="numeric"
+              selectTextOnFocus
+              placeholder="0"
+              placeholderTextColor={colors.text.tertiary}
+              style={[
+                styles.addBonusValueInput,
+                {
+                  color: colors.text.primary,
+                  borderColor: colors.border.DEFAULT,
+                  backgroundColor: colors.bg.tertiary,
+                },
+              ]}
+              accessibilityLabel="Bonus value"
+            />
+            <TextInput
+              value={addSource}
+              onChangeText={setAddSource}
+              placeholder="Source (optional)"
+              placeholderTextColor={colors.text.tertiary}
+              style={[
+                styles.addBonusSourceInput,
+                {
+                  color: colors.text.primary,
+                  borderColor: colors.border.DEFAULT,
+                  backgroundColor: colors.bg.tertiary,
+                },
+              ]}
+              accessibilityLabel="Bonus source"
+            />
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.typePicker}>
+            {ABILITY_BONUS_TYPES.map((bt) => (
+              <Pressable
+                key={bt}
+                onPress={() => setAddType(bt)}
+                style={[
+                  styles.typePill,
+                  {
+                    borderColor: addType === bt ? fantasy.gold : colors.border.DEFAULT,
+                    backgroundColor:
+                      addType === bt
+                        ? isDark
+                          ? 'rgba(212,175,55,0.2)'
+                          : 'rgba(140,90,40,0.1)'
+                        : 'transparent',
+                  },
+                ]}
+                accessibilityRole="radio"
+                accessibilityState={{ checked: addType === bt }}
+              >
+                <Text
+                  style={[
+                    styles.typePillText,
+                    { color: addType === bt ? fantasy.gold : colors.text.secondary },
+                  ]}
+                >
+                  {BONUS_TYPE_LABELS[bt] ?? bt}
+                </Text>
+              </Pressable>
+            ))}
+          </ScrollView>
+          <View style={styles.addBonusActions}>
+            <Pressable
+              onPress={handleAdd}
+              style={[styles.addBonusConfirmBtn, { backgroundColor: fantasy.gold }]}
+              accessibilityLabel="Confirm add bonus"
+            >
+              <Text
+                style={{ fontFamily: 'Cinzel', fontSize: 12, fontWeight: '700', color: '#1a0f00' }}
+              >
+                Add
+              </Text>
+            </Pressable>
+            <Pressable
+              onPress={() => {
+                setAdding(false);
+                setAddValue('0');
+                setAddSource('');
+              }}
+              style={[styles.addBonusCancelBtn, { borderColor: colors.border.DEFAULT }]}
+              accessibilityLabel="Cancel add bonus"
+            >
+              <Text
+                style={{
+                  fontFamily: 'LibreBaskerville',
+                  fontSize: 12,
+                  color: colors.text.secondary,
+                }}
+              >
+                Cancel
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      ) : (
+        <Pressable
+          onPress={() => setAdding(true)}
+          style={styles.addBonusButton}
+          accessibilityLabel="Add typed bonus"
+        >
+          <Text style={[styles.addBonusButtonText, { color: colors.text.tertiary }]}>
+            + Add bonus
+          </Text>
+        </Pressable>
+      )}
+
+      {bonuses.length > 0 && (
+        <View style={styles.otherEffectiveRow}>
+          <Text style={[styles.otherEffectiveLabel, { color: colors.text.secondary }]}>
+            Effective:
+          </Text>
+          <AutoComputedValue
+            value={effectiveTotal >= 0 ? `+${effectiveTotal}` : `${effectiveTotal}`}
+            style={styles.breakdownComputed}
+          />
+          {bonuses.some(
+            (b) => b.bonusType !== BonusType.UNTYPED && b.bonusType !== BonusType.DODGE,
+          ) && (
+            <Text style={[styles.otherStackNote, { color: colors.text.tertiary }]}>
+              highest per type
+            </Text>
+          )}
+        </View>
+      )}
+    </View>
+  );
+}
+
 // ---- Expanded Breakdown ----
 
 interface BreakdownPanelProps {
@@ -154,7 +419,11 @@ function BreakdownPanel({ abilityKey, score, onCollapse }: BreakdownPanelProps) 
   const total = score.total;
   const mod = score.modifier;
   const enhancementBonus = score.bonuses.enhancement[0]?.value ?? 0;
-  const untypedBonus = score.bonuses.untyped[0]?.value ?? 0;
+  const manualBonuses = useAppSelector((state) =>
+    (state.characterEntry.character.manualAbilityBonuses ?? []).filter(
+      (b) => b.ability === abilityKey,
+    ),
+  );
 
   return (
     <View
@@ -210,13 +479,13 @@ function BreakdownPanel({ abilityKey, score, onCollapse }: BreakdownPanelProps) 
           value={enhancementBonus}
           readOnlyNote="from equipped gear"
         />
-        <BreakdownRow
-          label="Other"
-          value={untypedBonus}
-          isLast
-          editable
-          onChangeValue={(v) => dispatch(setAbilityOther({ ability: abilityKey, value: v }))}
-        />
+        {/* Other — typed bonus list */}
+        <View style={[styles.breakdownRow, styles.otherSection]}>
+          <Text style={[styles.breakdownLabel, { color: colors.text.secondary }]}>{'└'} Other</Text>
+        </View>
+        <View style={styles.otherBonusContainer}>
+          <OtherBonusSection abilityKey={abilityKey} bonuses={manualBonuses} />
+        </View>
       </View>
 
       {/* Computed total */}

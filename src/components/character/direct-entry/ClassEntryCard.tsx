@@ -183,7 +183,7 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
         if (!cancelled) setAlternates(results as FavoredClassBonusEntry[]);
       })
       .catch((e) => {
-        if (!cancelled) console.error('Failed to load favored class bonuses:', e);
+        if (!cancelled) console.error('[FCB] Failed to load favored class bonuses:', e);
       });
     return () => {
       cancelled = true;
@@ -941,7 +941,6 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const classData = lookupClassData(entry.name, classDataMap);
   const isBaseClass = (classData?.maxLevel ?? 20) === 20;
 
-
   useEffect(() => {
     GameDataService.getClassChoiceDefinitions(entry.name)
       .then(setDefinitions)
@@ -1021,7 +1020,8 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           value={String(entry.level)}
           onChangeText={(t) => {
             const n = parseInt(t, 10);
-            if (!isNaN(n) && n >= 1)
+            const max = classData?.maxLevel ?? 20;
+            if (!isNaN(n) && n >= 1 && n <= max)
               dispatch(updateClassLevel({ id: entry.id ?? entry.name, level: n }));
           }}
           keyboardType="number-pad"
@@ -1036,6 +1036,11 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           ]}
           accessibilityLabel="Class level"
         />
+        {classData?.maxLevel !== undefined && classData.maxLevel < 20 && (
+          <Text style={[styles.fieldLabel, { color: colors.text.tertiary }]}>
+            {`/ ${classData.maxLevel}`}
+          </Text>
+        )}
         {hasArchetypes !== false && (
           <Pressable
             onPress={() => setArchetypePickerOpen(true)}

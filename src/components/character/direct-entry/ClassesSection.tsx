@@ -531,6 +531,7 @@ export function ClassesSection() {
       id: genId(),
       templateId: tpl.id,
       name: tpl.name,
+      abilityScoreChanges: tpl.abilityScoreChanges?.length ? tpl.abilityScoreChanges : undefined,
       isFreeGrant: false,
       acquisitionType: tpl.acquisitionType,
       appliedAs: tpl.laAdjustment != null ? 'la' : 'cr',
