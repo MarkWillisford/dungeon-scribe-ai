@@ -161,19 +161,30 @@ export class GameDataService {
         { classNames, maxSpellLevel, scope },
         ctx,
       );
-      return (
-        items as unknown as Array<{
-          id: string;
-          name: string;
-          school: string;
-          classLevels: Record<string, number>;
-        }>
-      ).map((s) => ({
-        key: s.id,
-        label: s.name,
-        subLabel: GameDataService.buildSpellSubLabel(s.classLevels, classNames),
-        category: s.school,
-      }));
+      const spells = items as unknown as Array<{
+        id: string;
+        name: string;
+        school: string;
+        classLevels: Record<string, number>;
+      }>;
+      const mapped = spells.map((s) => {
+        const levels = classNames
+          .map((cls) => s.classLevels[cls])
+          .filter((lvl): lvl is number => lvl !== undefined);
+        const minLevel = levels.length > 0 ? Math.min(...levels) : 0;
+        return {
+          key: s.id,
+          label: s.name,
+          subLabel: GameDataService.buildSpellSubLabel(s.classLevels, classNames),
+          category: `Level ${minLevel}`,
+          minLevel,
+        };
+      });
+      mapped.sort((a, b) => {
+        if (a.minLevel !== b.minLevel) return a.minLevel - b.minLevel;
+        return a.label.localeCompare(b.label);
+      });
+      return mapped.map(({ minLevel: _lvl, ...rest }) => rest);
     }
 
     // All other class choice collections go through getClassChoiceOptions.

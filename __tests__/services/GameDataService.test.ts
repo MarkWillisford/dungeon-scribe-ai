@@ -868,7 +868,7 @@ describe('GameDataService', () => {
       expect(items[0].key).toBe('cure-light-wounds');
       expect(items[0].label).toBe('Cure Light Wounds');
       expect(items[0].subLabel).toBe('Clr 1');
-      expect(items[0].category).toBe('Conjuration');
+      expect(items[0].category).toBe('Level 1');
     });
 
     test('spells — multiple classNames unions results and deduplicates', async () => {
