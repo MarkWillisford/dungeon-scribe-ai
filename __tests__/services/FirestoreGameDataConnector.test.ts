@@ -247,12 +247,15 @@ describe('FirestoreGameDataConnector', () => {
   // ---- Races ------------------------------------------------------------------
 
   describe('getRaceGroups', () => {
-    test('returns grouped races from four parallel queries', async () => {
-      mockGetDocs
-        .mockResolvedValueOnce(mockSnap([{ name: 'Human', category: 'Core' }]) as never)
-        .mockResolvedValueOnce(mockSnap([{ name: 'Aasimar', category: 'Featured' }]) as never)
-        .mockResolvedValueOnce(mockSnap([{ name: 'Tiefling', category: 'Uncommon' }]) as never)
-        .mockResolvedValueOnce(mockSnap([{ name: 'Human', flexibleAbilityBonus: true }]) as never);
+    test('returns races grouped by category from a single query', async () => {
+      mockGetDocs.mockResolvedValueOnce(
+        mockSnap([
+          { name: 'Human', category: 'Core' },
+          { name: 'Aasimar', category: 'Featured' },
+          { name: 'Tiefling', category: 'Uncommon' },
+          { name: 'Ganzi', flexibleAbilityBonus: true },
+        ]) as never,
+      );
 
       const result = await connector.getRaceGroups();
 
@@ -260,20 +263,16 @@ describe('FirestoreGameDataConnector', () => {
       expect(result.featured).toHaveLength(1);
       expect(result.uncommon).toHaveLength(1);
       expect(result.flexibleAbility).toHaveLength(1);
-      expect(mockGetDocs).toHaveBeenCalledTimes(4);
+      expect(mockGetDocs).toHaveBeenCalledTimes(1);
     });
 
     test('caches results', async () => {
-      mockGetDocs
-        .mockResolvedValueOnce(mockSnap([]) as never)
-        .mockResolvedValueOnce(mockSnap([]) as never)
-        .mockResolvedValueOnce(mockSnap([]) as never)
-        .mockResolvedValueOnce(mockSnap([]) as never);
+      mockGetDocs.mockResolvedValueOnce(mockSnap([]) as never);
 
       await connector.getRaceGroups();
       await connector.getRaceGroups();
 
-      expect(mockGetDocs).toHaveBeenCalledTimes(4); // Only the first call
+      expect(mockGetDocs).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -605,6 +604,76 @@ describe('FirestoreGameDataConnector', () => {
 
       const result = await connector.getClassChoiceOptions('occultistfocuspowers', {});
       expect(result).toHaveLength(1);
+    });
+
+    test('spells — runs one Firestore query per class name', async () => {
+      // One query for 'cleric'
+      mockGetDocs.mockResolvedValueOnce(
+        mockSnap([
+          { name: 'Cure Light Wounds', classLevels: { cleric: 1 }, school: 'Conjuration' },
+        ]) as never,
+      );
+
+      const result = await connector.getClassChoiceOptions('spells', {
+        classNames: ['cleric'],
+        maxSpellLevel: 3,
+      });
+
+      expect(mockGetDocs).toHaveBeenCalledTimes(1);
+      expect(result).toHaveLength(1);
+      const spell = result[0] as unknown as { id: string; name: string };
+      expect(spell.id).toBe('cure-light-wounds');
+      expect(spell.name).toBe('Cure Light Wounds');
+    });
+
+    test('spells — merges and deduplicates across class queries', async () => {
+      // Cleric query returns CLW + Flame Strike
+      mockGetDocs.mockResolvedValueOnce(
+        mockSnap([
+          {
+            name: 'Cure Light Wounds',
+            classLevels: { cleric: 1, druid: 1 },
+            school: 'Conjuration',
+          },
+          { name: 'Flame Strike', classLevels: { cleric: 5, druid: 4 }, school: 'Evocation' },
+        ]) as never,
+      );
+      // Druid query returns CLW again (duplicate) + Flame Strike again (duplicate)
+      mockGetDocs.mockResolvedValueOnce(
+        mockSnap([
+          {
+            name: 'Cure Light Wounds',
+            classLevels: { cleric: 1, druid: 1 },
+            school: 'Conjuration',
+          },
+          { name: 'Flame Strike', classLevels: { cleric: 5, druid: 4 }, school: 'Evocation' },
+        ]) as never,
+      );
+
+      const result = await connector.getClassChoiceOptions('spells', {
+        classNames: ['cleric', 'druid'],
+        maxSpellLevel: 5,
+      });
+
+      expect(mockGetDocs).toHaveBeenCalledTimes(2);
+      // Both spells appear exactly once despite being returned by both queries
+      expect(result).toHaveLength(2);
+    });
+
+    test('spells — empty classNames returns empty array immediately', async () => {
+      const result = await connector.getClassChoiceOptions('spells', { classNames: [] });
+      expect(mockGetDocs).not.toHaveBeenCalled();
+      expect(result).toHaveLength(0);
+    });
+
+    test('spells — returns empty array when Firestore throws', async () => {
+      mockGetDocs.mockRejectedValueOnce(new Error('Firestore unavailable'));
+
+      const result = await connector.getClassChoiceOptions('spells', {
+        classNames: ['cleric'],
+        maxSpellLevel: 3,
+      });
+      expect(result).toEqual([]);
     });
   });
 

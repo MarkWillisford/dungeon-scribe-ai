@@ -63,7 +63,8 @@ export type ClassChoiceCollection =
   | 'mesmeristtricks'
   | 'wildtalents'
   | 'occultistfocuspowers'
-  | 'phrenicamplifications';
+  | 'phrenicamplifications'
+  | 'spells';
 
 /**
  * Filter options for getClassChoiceOptions.
@@ -88,6 +89,12 @@ export interface ClassChoiceFilters {
   talentTier?: string;
   // alchemistdiscoveries — 'standard' | 'grand'
   discoveryTier?: string;
+  // spells — class names whose list to search (e.g. ['cleric', 'druid'])
+  classNames?: string[];
+  // spells — highest spell level to include (from levelFilterTable)
+  maxSpellLevel?: number;
+  // spells — 'class_list' shows all spells on the class list; 'spells_known' limits to chosen/spellbook (future)
+  scope?: 'class_list' | 'spells_known';
 }
 
 // ---- Initiating filter types --------------------------------------------------------

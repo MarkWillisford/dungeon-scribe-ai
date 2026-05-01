@@ -291,6 +291,42 @@ export class FirestoreGameDataConnector implements GameDataConnector {
           break;
         }
 
+        case 'spells': {
+          const classNames = filters.classNames ?? [];
+          const maxLevel = filters.maxSpellLevel ?? 9;
+          if (classNames.length === 0) {
+            results = [];
+            break;
+          }
+          // One Firestore query per class name; merge and deduplicate by name-slug.
+          const snapshots = await Promise.all(
+            classNames.map((cls) =>
+              getDocs(
+                query(
+                  collection(db, 'spells'),
+                  where(`classLevels.${cls}`, '>=', 1),
+                  where(`classLevels.${cls}`, '<=', maxLevel),
+                ),
+              ),
+            ),
+          );
+          const seen = new Set<string>();
+          const spells: ClassOptionBase[] = [];
+          for (const snap of snapshots) {
+            for (const d of snap.docs) {
+              const data = d.data() as Record<string, unknown> & { name: string };
+              if (!data.name) continue;
+              const id = toDocId(data.name);
+              if (!seen.has(id)) {
+                seen.add(id);
+                spells.push({ ...data, id } as unknown as ClassOptionBase);
+              }
+            }
+          }
+          results = spells;
+          break;
+        }
+
         default: {
           // Simple collections with no filter support
           const q = query(collection(db, collectionName), where('visibility', '==', 'global'));

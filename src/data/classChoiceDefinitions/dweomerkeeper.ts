@@ -20,6 +20,13 @@ export const dweomerkeeperDefinitions: ClassChoiceDefinition[] = [
     // castingType: 'character_castable' — resolved at render time to all spell lists the
     // character has access to, capped by her actual prepared spell levels per pool.
     collectionFilter: { castingType: 'character_castable' },
+    levelFilterTable: {
+      1: { maxSpellLevel: 3 },
+      3: { maxSpellLevel: 5 },
+      5: { maxSpellLevel: 7 },
+      7: { maxSpellLevel: 8 },
+      9: { maxSpellLevel: 9 },
+    },
     source: '3.5e',
     isOfficial: false,
     verificationStatus: 'needs_review' as const,

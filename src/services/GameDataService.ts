@@ -150,6 +150,32 @@ export class GameDataService {
       }));
     }
 
+    // Spell class choices — handled before validCollections to preserve classNames/maxSpellLevel context.
+    if (collectionName === 'spells') {
+      const classNames = (filter.classNames as string[] | undefined) ?? [];
+      const maxSpellLevel = (filter.maxSpellLevel as number | undefined) ?? 9;
+      const scope = (filter.scope as 'class_list' | 'spells_known' | undefined) ?? 'class_list';
+      if (classNames.length === 0) return [];
+      const items = await GameDataService.connector.getClassChoiceOptions(
+        'spells',
+        { classNames, maxSpellLevel, scope },
+        ctx,
+      );
+      return (
+        items as unknown as Array<{
+          id: string;
+          name: string;
+          school: string;
+          classLevels: Record<string, number>;
+        }>
+      ).map((s) => ({
+        key: s.id,
+        label: s.name,
+        subLabel: GameDataService.buildSpellSubLabel(s.classLevels, classNames),
+        category: s.school,
+      }));
+    }
+
     // All other class choice collections go through getClassChoiceOptions.
     const validCollections = [
       'domains',
@@ -401,6 +427,47 @@ export class GameDataService {
       default:
         return [];
     }
+  }
+
+  private static readonly SPELL_CLASS_ABBREV: Record<string, string> = {
+    arcanist: 'Arc',
+    bard: 'Brd',
+    bloodrager: 'Blr',
+    cleric: 'Clr',
+    druid: 'Drd',
+    hunter: 'Htr',
+    inquisitor: 'Inq',
+    investigator: 'Inv',
+    magus: 'Mag',
+    mesmerist: 'Mes',
+    occultist: 'Occ',
+    oracle: 'Orc',
+    paladin: 'Pal',
+    psychic: 'Psy',
+    ranger: 'Rgr',
+    shaman: 'Sha',
+    skald: 'Skd',
+    sorcerer: 'Sor',
+    spiritualist: 'Spr',
+    summoner: 'Sum',
+    summoner_unchained: 'SuU',
+    warpriest: 'Wpr',
+    witch: 'Wtc',
+    wizard: 'Wiz',
+  };
+
+  /** Builds a compact level string for a spell subLabel, e.g. "Clr 3 / Drd 3". */
+  private static buildSpellSubLabel(
+    classLevels: Record<string, number>,
+    relevantClasses: string[],
+  ): string {
+    const parts = relevantClasses
+      .filter((cls) => classLevels[cls] !== undefined)
+      .map((cls) => {
+        const abbr = GameDataService.SPELL_CLASS_ABBREV[cls] ?? cls.slice(0, 3);
+        return `${abbr} ${classLevels[cls]}`;
+      });
+    return parts.join(' / ');
   }
 
   // ---- Feats -----------------------------------------------------------------

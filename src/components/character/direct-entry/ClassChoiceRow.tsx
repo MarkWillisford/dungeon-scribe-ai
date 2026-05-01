@@ -150,6 +150,10 @@ export function ClassChoiceRow({
     state.characterEntry.character.classes.classes.find((c) => c.id === classId),
   );
 
+  const spellcastingPools = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.pools,
+  );
+
   // Companion currently granted by this specific class choice, if any.
   const existingCompanion = useAppSelector((state) =>
     state.characterEntry.character.companions.find(
@@ -163,11 +167,26 @@ export function ClassChoiceRow({
   useEffect(() => {
     let stale = false;
     if (definition.optionSource === 'collection' && definition.collectionName) {
-      const resolvedFilter = resolveFilterTokens(
-        definition.collectionFilter ?? {},
-        siblingChoices ?? [],
-        characterDeity,
-      );
+      // 1. Merge per-level overrides from levelFilterTable into the base filter.
+      const levelOverrides =
+        (definition.levelFilterTable as Record<number, Record<string, unknown>> | undefined)?.[
+          takenAtLevel
+        ] ?? {};
+      const baseFilter = { ...(definition.collectionFilter ?? {}), ...levelOverrides };
+
+      // 2. Resolve {chosen_X} / {chosen_deity} tokens.
+      let resolvedFilter = resolveFilterTokens(baseFilter, siblingChoices ?? [], characterDeity);
+
+      // 3. Resolve castingType token → concrete classNames from spellcasting pools.
+      if (resolvedFilter.castingType !== undefined) {
+        const castingType = resolvedFilter.castingType as string;
+        const classNames = spellcastingPools
+          .filter((p) => p.castingType === castingType)
+          .map((p) => p.baseClass);
+        const { castingType: _dropped, ...rest } = resolvedFilter;
+        resolvedFilter = { ...rest, classNames };
+      }
+
       GameDataService.getClassChoiceItems(definition.collectionName, resolvedFilter)
         .then((items) => {
           if (!stale) setRawPickerItems(items);
@@ -181,7 +200,7 @@ export function ClassChoiceRow({
     return () => {
       stale = true;
     };
-  }, [definition, siblingChoices, characterDeity]);
+  }, [definition, siblingChoices, characterDeity, takenAtLevel, spellcastingPools]);
 
   const pickerItems = useMemo(
     () =>

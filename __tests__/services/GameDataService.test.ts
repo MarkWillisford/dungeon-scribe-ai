@@ -404,6 +404,28 @@ jest.mock('@/data/phrenicAmplifications/index', () => ({
 jest.mock('@/data/favoredClassBonuses/index', () => ({
   ALL_FAVORED_CLASS_BONUSES: [],
 }));
+jest.mock('@/data/spells/index', () => ({
+  ALL_SPELLS: [
+    {
+      name: 'Cure Light Wounds',
+      classLevels: { cleric: 1, druid: 1, paladin: 1 },
+      school: 'Conjuration',
+      verificationStatus: 'needs_review',
+    },
+    {
+      name: 'Fireball',
+      classLevels: { wizard: 3, sorcerer: 3 },
+      school: 'Evocation',
+      verificationStatus: 'needs_review',
+    },
+    {
+      name: 'Flame Strike',
+      classLevels: { cleric: 5, druid: 4 },
+      school: 'Evocation',
+      verificationStatus: 'needs_review',
+    },
+  ],
+}));
 jest.mock('@/data/deities/index', () => ({
   getDeityByName: jest.fn((name: string) => {
     if (name === 'Cayden Cailean') {
@@ -832,6 +854,55 @@ describe('GameDataService', () => {
       expect(items.find((i) => i.key === 'relentless-healing')?.category).toBe(
         'Major Amplifications',
       );
+    });
+
+    test('spells — filters to cleric list at maxSpellLevel 3', async () => {
+      const items = await GameDataService.getClassChoiceItems('spells', {
+        classNames: ['cleric'],
+        maxSpellLevel: 3,
+      });
+      // Cure Light Wounds: cleric 1 ≤ 3 ✓
+      // Fireball: no cleric level ✗
+      // Flame Strike: cleric 5 > 3 ✗
+      expect(items).toHaveLength(1);
+      expect(items[0].key).toBe('cure-light-wounds');
+      expect(items[0].label).toBe('Cure Light Wounds');
+      expect(items[0].subLabel).toBe('Clr 1');
+      expect(items[0].category).toBe('Conjuration');
+    });
+
+    test('spells — multiple classNames unions results and deduplicates', async () => {
+      const items = await GameDataService.getClassChoiceItems('spells', {
+        classNames: ['cleric', 'druid'],
+        maxSpellLevel: 5,
+      });
+      // Cure Light Wounds: cleric 1, druid 1 — appears once (deduplicated)
+      // Flame Strike: cleric 5 ≤ 5, druid 4 ≤ 5 — appears once
+      const keys = items.map((i) => i.key);
+      expect(keys).toContain('cure-light-wounds');
+      expect(keys).toContain('flame-strike');
+      expect(keys.filter((k) => k === 'cure-light-wounds')).toHaveLength(1);
+    });
+
+    test('spells — subLabel includes all relevant class levels', async () => {
+      const items = await GameDataService.getClassChoiceItems('spells', {
+        classNames: ['cleric', 'druid'],
+        maxSpellLevel: 2,
+      });
+      // Only Cure Light Wounds passes (cleric 1, druid 1 both ≤ 2)
+      const clw = items.find((i) => i.key === 'cure-light-wounds');
+      expect(clw?.subLabel).toContain('Clr 1');
+      expect(clw?.subLabel).toContain('Drd 1');
+    });
+
+    test('spells — empty classNames returns empty array', async () => {
+      const items = await GameDataService.getClassChoiceItems('spells', { classNames: [] });
+      expect(items).toHaveLength(0);
+    });
+
+    test('spells — missing classNames returns empty array', async () => {
+      const items = await GameDataService.getClassChoiceItems('spells');
+      expect(items).toHaveLength(0);
     });
 
     test('unknown collection returns empty array', async () => {

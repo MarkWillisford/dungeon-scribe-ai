@@ -42,6 +42,7 @@ import { ALL_WEAPONS, ALL_ARMOR, ALL_SHIELDS, ALL_GEAR } from '@/data/equipment'
 import { ALL_ARCHETYPES } from '@/data/classes/archetypes/index';
 import { ALL_ANIMAL_COMPANIONS } from '@/data/animalCompanions';
 import { ALL_FAVORED_CLASS_BONUSES } from '@/data/favoredClassBonuses/index';
+import { ALL_SPELLS } from '@/data/spells/index';
 import {
   ALL_WONDROUS_ITEMS,
   ALL_RINGS,
@@ -209,6 +210,24 @@ export class StaticGameDataConnector implements GameDataConnector {
 
       case 'phrenicamplifications':
         return ALL_PHRENIC_AMPLIFICATIONS as ClassOptionBase[];
+
+      case 'spells': {
+        const classNames = filters.classNames ?? [];
+        const maxLevel = filters.maxSpellLevel ?? 9;
+        if (classNames.length === 0) return [];
+        return ALL_SPELLS.filter((s) =>
+          classNames.some((cls) => {
+            const lvl = (s.classLevels as Record<string, number>)[cls];
+            return lvl !== undefined && lvl <= maxLevel;
+          }),
+        ).map((s) => {
+          const id = s.name
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-|-$/g, '');
+          return { ...s, id } as unknown as ClassOptionBase;
+        });
+      }
 
       default:
         return [];
