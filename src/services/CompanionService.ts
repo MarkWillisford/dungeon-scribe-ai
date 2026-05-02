@@ -517,11 +517,11 @@ export function effectiveLevelFromDraftClass(cls: ClassEntry | undefined): numbe
  * Returns 'mountsOnly' for classes whose companion must be a mount (Cavalier,
  * Paladin), otherwise 'full' (all companions shown).
  */
-export function pickerFilterFromDraftClass(
-  cls: ClassEntry | undefined,
-): 'full' | 'mountsOnly' {
+export function pickerFilterFromDraftClass(cls: ClassEntry | undefined): 'full' | 'mountsOnly' {
   if (!cls) return 'full';
-  return cls.name === 'Cavalier' || cls.name === 'Paladin' ? 'mountsOnly' : 'full';
+  return cls.name === 'Cavalier' || cls.name === 'Paladin' || cls.name === 'Prestige Paladin'
+    ? 'mountsOnly'
+    : 'full';
 }
 
 // ---------------------------------------------------------------------------

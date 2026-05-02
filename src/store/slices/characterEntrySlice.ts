@@ -613,9 +613,10 @@ const characterEntrySlice = createSlice({
         name: string;
         grantedBy: CompanionGrant;
         effectiveProgressionLevel: number;
+        isMount?: boolean;
       }>,
     ) {
-      const { instanceId, sourceEntryId, name, grantedBy, effectiveProgressionLevel } =
+      const { instanceId, sourceEntryId, name, grantedBy, effectiveProgressionLevel, isMount } =
         action.payload;
       const companion: CompanionInstance = {
         instanceId,
@@ -623,6 +624,7 @@ const characterEntrySlice = createSlice({
         name,
         grantedBy,
         effectiveProgressionLevel,
+        ...(isMount ? { isMount: true } : {}),
         abilityScoreOverrides: {},
         hdAbilityIncreases: [],
         hp: { max: 0, current: 0, temp: 0, nonlethal: 0 },

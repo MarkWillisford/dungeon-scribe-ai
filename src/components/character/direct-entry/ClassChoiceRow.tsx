@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
 import { CompanionPickerSheet } from '@/components/character/direct-entry/CompanionPickerSheet';
@@ -179,8 +180,10 @@ export function ClassChoiceRow({
 }: ClassChoiceRowProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const [pickerOpen, setPickerOpen] = useState(false);
   const [companionPickerOpen, setCompanionPickerOpen] = useState(false);
+  const [companionPickerIsMount, setCompanionPickerIsMount] = useState(false);
   const [rawPickerItems, setRawPickerItems] = useState<SearchItem[]>([]);
 
   const draftClass = useAppSelector((state) =>
@@ -227,6 +230,9 @@ export function ClassChoiceRow({
         c.grantedBy.classChoiceId === definition.id,
     ),
   );
+
+  const originalCharacterId = useAppSelector((state) => state.characterEntry.originalCharacterId);
+  const routeCharacterId = originalCharacterId ?? 'draft';
 
   useEffect(() => {
     let stale = false;
@@ -325,9 +331,11 @@ export function ClassChoiceRow({
     return pickerItems.find((i) => i.key === id)?.label ?? id;
   }, [currentChoice, pickerItems]);
 
+  const COMPANION_KEYS = new Set(['animal_companion', 'mount']);
+
   const handleSelect = (item: SearchItem) => {
-    const wasAnimalCompanion = currentChoice?.selection === 'animal_companion';
-    const nowAnimalCompanion = item.key === 'animal_companion';
+    const wasCompanion = COMPANION_KEYS.has((currentChoice?.selection as string) ?? '');
+    const nowCompanion = COMPANION_KEYS.has(item.key);
 
     dispatch(
       upsertClassChoice({
@@ -342,15 +350,13 @@ export function ClassChoiceRow({
     );
     setPickerOpen(false);
 
-    // Switching away from animal_companion removes the tied instance.
-    if (wasAnimalCompanion && !nowAnimalCompanion && existingCompanion) {
+    if (wasCompanion && !nowCompanion && existingCompanion) {
       dispatch(removeCompanion(existingCompanion.instanceId));
     }
 
-    // Switching TO animal_companion opens the form picker. If the slot
-    // already has a companion (shouldn't normally happen, but guard anyway),
-    // skip reopening.
-    if (nowAnimalCompanion && !existingCompanion) {
+    // animal_companion auto-opens the picker on selection.
+    // mount does not — a "Configure Special Mount" button appears in the row instead.
+    if (item.key === 'animal_companion' && !existingCompanion) {
       setCompanionPickerOpen(true);
     }
   };
@@ -361,6 +367,7 @@ export function ClassChoiceRow({
         instanceId: makeCompanionInstanceId(),
         sourceEntryId: entry.id,
         name: entry.name,
+        isMount: companionPickerIsMount,
         grantedBy: {
           type: 'class',
           classEntryId: classId,
@@ -371,6 +378,7 @@ export function ClassChoiceRow({
       }),
     );
     setCompanionPickerOpen(false);
+    setCompanionPickerIsMount(false);
   };
 
   const hasItems = pickerItems.length > 0;
@@ -426,16 +434,172 @@ export function ClassChoiceRow({
         placeholder={`Search ${definition.featureName.toLowerCase()}...`}
       />
 
+      {/* Mount section — visible when 'mount' is the stored divine bond choice */}
+      {currentChoice?.selection === 'mount' && (
+        <View
+          style={[
+            mountStyles.section,
+            {
+              borderColor: isDark ? 'rgba(212,175,55,0.3)' : 'rgba(120,80,20,0.2)',
+              backgroundColor: isDark ? 'rgba(212,175,55,0.05)' : 'rgba(120,80,20,0.04)',
+            },
+          ]}
+        >
+          {existingCompanion ? (
+            // Mount already configured — show name + action buttons
+            <View style={mountStyles.mountCard}>
+              <View style={mountStyles.mountInfo}>
+                <Text style={[mountStyles.mountLabel, { color: colors.text.tertiary }]}>
+                  Special Mount
+                </Text>
+                <Text style={[mountStyles.mountName, { color: colors.text.primary }]}>
+                  {existingCompanion.name}
+                </Text>
+              </View>
+              <View style={mountStyles.mountActions}>
+                <Pressable
+                  onPress={() =>
+                    router.push(
+                      `/characters/${routeCharacterId}/companions/${existingCompanion.instanceId}`,
+                    )
+                  }
+                  style={[
+                    mountStyles.actionBtn,
+                    { borderColor: isDark ? fantasy.gold : fantasy.bronze },
+                  ]}
+                  accessibilityRole="button"
+                  accessibilityLabel="Edit mount"
+                >
+                  <Text
+                    style={[
+                      mountStyles.actionText,
+                      { color: isDark ? fantasy.gold : fantasy.darkWood },
+                    ]}
+                  >
+                    Edit
+                  </Text>
+                </Pressable>
+                <Pressable
+                  onPress={() => dispatch(removeCompanion(existingCompanion.instanceId))}
+                  style={[mountStyles.actionBtn, { borderColor: colors.text.tertiary }]}
+                  accessibilityRole="button"
+                  accessibilityLabel="Remove mount"
+                >
+                  <Text style={[mountStyles.actionText, { color: colors.text.tertiary }]}>
+                    Remove
+                  </Text>
+                </Pressable>
+              </View>
+            </View>
+          ) : (
+            // No mount yet — prompt to configure
+            <Pressable
+              onPress={() => {
+                setCompanionPickerIsMount(true);
+                setCompanionPickerOpen(true);
+              }}
+              style={[
+                mountStyles.configureBtn,
+                { borderColor: isDark ? fantasy.gold : fantasy.bronze },
+              ]}
+              accessibilityRole="button"
+              accessibilityLabel="Configure your special mount"
+            >
+              <Text
+                style={[
+                  mountStyles.configureBtnText,
+                  { color: isDark ? fantasy.gold : fantasy.darkWood },
+                ]}
+              >
+                + Configure Special Mount
+              </Text>
+              <Text style={[mountStyles.configureBtnSub, { color: colors.text.tertiary }]}>
+                Choose the mount type — configure bonuses as you level
+              </Text>
+            </Pressable>
+          )}
+        </View>
+      )}
+
       <CompanionPickerSheet
         visible={companionPickerOpen}
-        title={`${featureLabel} — Choose Companion`}
+        title={
+          companionPickerIsMount ? 'Choose Special Mount' : `${featureLabel} — Choose Companion`
+        }
         pickerFilter={pickerFilterFromDraftClass(draftClass)}
         onSelect={handleCompanionSelect}
-        onClose={() => setCompanionPickerOpen(false)}
+        onClose={() => {
+          setCompanionPickerOpen(false);
+          setCompanionPickerIsMount(false);
+        }}
       />
     </>
   );
 }
+
+const mountStyles = StyleSheet.create({
+  section: {
+    marginHorizontal: 4,
+    marginBottom: 6,
+    borderRadius: 8,
+    borderWidth: 1,
+    overflow: 'hidden',
+  },
+  mountCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    gap: 12,
+  },
+  mountInfo: {
+    flex: 1,
+    gap: 2,
+  },
+  mountLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 10,
+    fontStyle: 'italic',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  mountName: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  mountActions: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  actionBtn: {
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    borderRadius: 6,
+    borderWidth: 1,
+  },
+  actionText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+  },
+  configureBtn: {
+    padding: 12,
+    alignItems: 'center',
+    gap: 4,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderStyle: 'dashed',
+  },
+  configureBtnText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  configureBtnSub: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    fontStyle: 'italic',
+  },
+});
 
 const styles = StyleSheet.create({
   row: {

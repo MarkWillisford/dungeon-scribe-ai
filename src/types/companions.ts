@@ -92,6 +92,13 @@ export interface CompanionInstance {
   name: string;
   grantedBy: CompanionGrant;
   effectiveProgressionLevel: number;
+  // True for paladin/cavalier special mounts. The mount uses the standard
+  // druid animal companion progression (at paladin level), but differs from
+  // a normal AC in three ways tracked here for the companion builder:
+  //   • INT minimum 6 (bonded mounts are unusually intelligent)
+  //   • Paladin level 11+: gains Celestial Creature simple template, becomes magical beast
+  //   • Paladin level 15+: gains spell resistance = paladin level + 11
+  isMount?: boolean;
 
   abilityScoreOverrides: Partial<Record<'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA', number>>;
   hdAbilityIncreases: CompanionAbilityIncrease[];
