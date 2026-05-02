@@ -55,6 +55,7 @@ export interface ClassEntry {
   id?: string; // stable local UUID for React keys and action targeting
   prereqOverride?: boolean; // DM override — suppress prereq warnings for this class
   isFavoredClass?: boolean;
+  splitGroup?: string; // Shared UUID linking sibling cards that represent one class taken in multiple runs
   spellcastingAdvancement?: SpellcastingAdvancement;
   archetypeId?: string;
   archetypeName?: string;

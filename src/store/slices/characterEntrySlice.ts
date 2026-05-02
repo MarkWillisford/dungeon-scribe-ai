@@ -1043,6 +1043,89 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
+    splitClass(
+      state,
+      action: PayloadAction<{ classId: string; firstRunLevel: number; newEntryId: string }>,
+    ) {
+      const { classId, firstRunLevel, newEntryId } = action.payload;
+      const idx = state.character.classes.classes.findIndex((c) => (c.id ?? c.name) === classId);
+      if (idx === -1) return;
+
+      const original = state.character.classes.classes[idx];
+      const totalLevel = original.level;
+      const secondRunLevel = totalLevel - firstRunLevel;
+      if (firstRunLevel < 1 || secondRunLevel < 1) return;
+
+      // Mark the original as part of a split group (or reuse existing group)
+      const groupId = original.splitGroup ?? newEntryId;
+      original.splitGroup = groupId;
+      original.level = firstRunLevel;
+
+      // Prune FCBs beyond the new reduced level
+      if (original.favoredClassBonuses) {
+        original.favoredClassBonuses = original.favoredClassBonuses.filter(
+          (s) => s.level <= firstRunLevel,
+        );
+      }
+
+      // Split spellcasting advancement perLevel between the two runs
+      let secondAdvancement: ClassEntry['spellcastingAdvancement'];
+      const origAdv = original.spellcastingAdvancement;
+      if (origAdv) {
+        secondAdvancement = {
+          mode: origAdv.mode,
+          perLevel: origAdv.perLevel.slice(firstRunLevel) as typeof origAdv.perLevel,
+        } as ClassEntry['spellcastingAdvancement'];
+        origAdv.perLevel = origAdv.perLevel.slice(0, firstRunLevel) as typeof origAdv.perLevel;
+      }
+
+      // Split classChoices — choices taken at levels > firstRunLevel move to the second run
+      let secondChoices: ClassEntry['classChoices'] = [];
+      if (original.classChoices?.length) {
+        secondChoices = original.classChoices
+          .filter((c) => c.takenAtLevel > firstRunLevel)
+          .map((c) => ({ ...c, takenAtLevel: c.takenAtLevel - firstRunLevel }));
+        original.classChoices = original.classChoices.filter(
+          (c) => c.takenAtLevel <= firstRunLevel,
+        );
+      }
+
+      // Build the second entry as a shallow copy of the original, overriding level-specific data
+      const secondEntry: ClassEntry = {
+        ...original,
+        id: newEntryId,
+        splitGroup: groupId,
+        level: secondRunLevel,
+        hitDieResults: [],
+        favoredClassBonuses: [],
+        classChoices: secondChoices,
+        spellcastingAdvancement: secondAdvancement,
+        isFavoredClass: false,
+      };
+
+      // Insert the second card immediately after the first
+      state.character.classes.classes.splice(idx + 1, 0, secondEntry);
+
+      // Keep levelOrder in sync: replace the last (secondRunLevel) occurrences of classId
+      // with the new entry's id
+      if (state.character.classes.levelOrder) {
+        let toReplace = secondRunLevel;
+        for (let i = state.character.classes.levelOrder.length - 1; i >= 0 && toReplace > 0; i--) {
+          if (state.character.classes.levelOrder[i] === classId) {
+            state.character.classes.levelOrder[i] = newEntryId;
+            toReplace--;
+          }
+        }
+      }
+
+      state.character.classes.totalLevel = state.character.classes.classes.reduce(
+        (sum, c) => sum + c.level,
+        0,
+      );
+      syncFeatSlotsFromClasses(state.character);
+      state.isDirty = true;
+    },
+
     // ---- Templates ----
 
     addTemplate(state, action: PayloadAction<AppliedTemplate>) {
@@ -1757,6 +1840,7 @@ export const {
   reorderClasses,
   initLevelOrder,
   swapLevelSlot,
+  splitClass,
   addTemplate,
   removeTemplate,
   updateTemplate,
