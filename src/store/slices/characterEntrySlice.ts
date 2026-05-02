@@ -358,6 +358,27 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
+    updateOtherBonus(
+      state,
+      action: PayloadAction<{ ability: AbilityKey; index: number } & ManualAbilityBonus>,
+    ) {
+      if (!state.character.manualAbilityBonuses) return;
+      const abilityBonuses = state.character.manualAbilityBonuses.filter(
+        (b) => b.ability === action.payload.ability,
+      );
+      const target = abilityBonuses[action.payload.index];
+      if (!target) return;
+      const globalIndex = state.character.manualAbilityBonuses.indexOf(target);
+      if (globalIndex === -1) return;
+      state.character.manualAbilityBonuses[globalIndex] = {
+        ability: action.payload.ability,
+        bonusType: action.payload.bonusType,
+        value: action.payload.value,
+        source: action.payload.source,
+      };
+      state.isDirty = true;
+    },
+
     setLevelIncrementAbility(
       state,
       action: PayloadAction<{ atHD: number; ability: AbilityKey | null }>,
@@ -1806,6 +1827,7 @@ export const {
   setAbilityInherent,
   addOtherBonus,
   removeOtherBonus,
+  updateOtherBonus,
   setLevelIncrementAbility,
   setLevelIncrementSlots,
   addClass,

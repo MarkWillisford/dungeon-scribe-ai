@@ -9,6 +9,7 @@ import {
   setAbilityInherent,
   addOtherBonus,
   removeOtherBonus,
+  updateOtherBonus,
   setRacialFlexAbility,
 } from '@/store/slices/characterEntrySlice';
 import type { AbilityKey } from '@/types/abilities';
@@ -225,6 +226,125 @@ function AutoPipelineRow({ bonuses }: AutoPipelineRowProps) {
   );
 }
 
+// ---- Shared bonus form (used for both add and edit) ----
+
+interface BonusFormProps {
+  value: string;
+  type: BonusType;
+  source: string;
+  onChangeValue: (v: string) => void;
+  onChangeType: (t: BonusType) => void;
+  onChangeSource: (s: string) => void;
+  onConfirm: () => void;
+  onCancel: () => void;
+  confirmLabel: string;
+}
+
+function BonusForm({
+  value,
+  type,
+  source,
+  onChangeValue,
+  onChangeType,
+  onChangeSource,
+  onConfirm,
+  onCancel,
+  confirmLabel,
+}: BonusFormProps) {
+  const { colors, fantasy, isDark } = useTheme();
+  return (
+    <View style={[styles.addBonusForm, { borderColor: colors.border.DEFAULT }]}>
+      <View style={styles.addBonusInputRow}>
+        <TextInput
+          value={value}
+          onChangeText={onChangeValue}
+          keyboardType="numeric"
+          selectTextOnFocus
+          placeholder="0"
+          placeholderTextColor={colors.text.tertiary}
+          style={[
+            styles.addBonusValueInput,
+            {
+              color: colors.text.primary,
+              borderColor: colors.border.DEFAULT,
+              backgroundColor: colors.bg.tertiary,
+            },
+          ]}
+          accessibilityLabel="Bonus value"
+        />
+        <TextInput
+          value={source}
+          onChangeText={onChangeSource}
+          placeholder="Source (optional)"
+          placeholderTextColor={colors.text.tertiary}
+          style={[
+            styles.addBonusSourceInput,
+            {
+              color: colors.text.primary,
+              borderColor: colors.border.DEFAULT,
+              backgroundColor: colors.bg.tertiary,
+            },
+          ]}
+          accessibilityLabel="Bonus source"
+        />
+      </View>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.typePicker}>
+        {ABILITY_BONUS_TYPES.map((bt) => (
+          <Pressable
+            key={bt}
+            onPress={() => onChangeType(bt)}
+            style={[
+              styles.typePill,
+              {
+                borderColor: type === bt ? fantasy.gold : colors.border.DEFAULT,
+                backgroundColor:
+                  type === bt
+                    ? isDark
+                      ? 'rgba(212,175,55,0.2)'
+                      : 'rgba(140,90,40,0.1)'
+                    : 'transparent',
+              },
+            ]}
+            accessibilityRole="radio"
+            accessibilityState={{ checked: type === bt }}
+          >
+            <Text
+              style={[
+                styles.typePillText,
+                { color: type === bt ? fantasy.gold : colors.text.secondary },
+              ]}
+            >
+              {BONUS_TYPE_LABELS[bt] ?? bt}
+            </Text>
+          </Pressable>
+        ))}
+      </ScrollView>
+      <View style={styles.addBonusActions}>
+        <Pressable
+          onPress={onConfirm}
+          style={[styles.addBonusConfirmBtn, { backgroundColor: fantasy.gold }]}
+          accessibilityLabel={`${confirmLabel} bonus`}
+        >
+          <Text style={{ fontFamily: 'Cinzel', fontSize: 12, fontWeight: '700', color: '#1a0f00' }}>
+            {confirmLabel}
+          </Text>
+        </Pressable>
+        <Pressable
+          onPress={onCancel}
+          style={[styles.addBonusCancelBtn, { borderColor: colors.border.DEFAULT }]}
+          accessibilityLabel="Cancel"
+        >
+          <Text
+            style={{ fontFamily: 'LibreBaskerville', fontSize: 12, color: colors.text.secondary }}
+          >
+            Cancel
+          </Text>
+        </Pressable>
+      </View>
+    </View>
+  );
+}
+
 // ---- Other Bonus Section ----
 
 interface OtherBonusSectionProps {
@@ -235,179 +355,146 @@ interface OtherBonusSectionProps {
 function OtherBonusSection({ abilityKey, bonuses }: OtherBonusSectionProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
-  const [adding, setAdding] = useState(false);
-  const [addValue, setAddValue] = useState('0');
-  const [addType, setAddType] = useState<BonusType>(BonusType.MORALE);
-  const [addSource, setAddSource] = useState('');
+  // null = not editing/adding; -1 = adding new; >= 0 = editing that index
+  const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const [formValue, setFormValue] = useState('0');
+  const [formType, setFormType] = useState<BonusType>(BonusType.MORALE);
+  const [formSource, setFormSource] = useState('');
 
   const effectiveTotal = computeOtherEffective(bonuses);
 
-  const handleAdd = () => {
-    const v = parseInt(addValue, 10);
-    if (isNaN(v)) return;
-    dispatch(
-      addOtherBonus({
-        ability: abilityKey,
-        bonusType: addType,
-        value: v,
-        source: addSource.trim() || undefined,
-      }),
-    );
-    setAdding(false);
-    setAddValue('0');
-    setAddType(BonusType.MORALE);
-    setAddSource('');
+  const openAdd = () => {
+    setFormValue('0');
+    setFormType(BonusType.MORALE);
+    setFormSource('');
+    setActiveIdx(-1);
   };
+
+  const openEdit = (idx: number) => {
+    const b = bonuses[idx];
+    setFormValue(String(b.value));
+    setFormType(b.bonusType);
+    setFormSource(b.source ?? '');
+    setActiveIdx(idx);
+  };
+
+  const closeForm = () => {
+    setActiveIdx(null);
+    setFormValue('0');
+    setFormType(BonusType.MORALE);
+    setFormSource('');
+  };
+
+  const handleConfirm = () => {
+    const v = parseInt(formValue, 10);
+    if (isNaN(v)) return;
+    if (activeIdx === -1) {
+      dispatch(
+        addOtherBonus({
+          ability: abilityKey,
+          bonusType: formType,
+          value: v,
+          source: formSource.trim() || undefined,
+        }),
+      );
+    } else if (activeIdx !== null) {
+      dispatch(
+        updateOtherBonus({
+          ability: abilityKey,
+          index: activeIdx,
+          bonusType: formType,
+          value: v,
+          source: formSource.trim() || undefined,
+        }),
+      );
+    }
+    closeForm();
+  };
+
+  const isAdding = activeIdx === -1;
 
   return (
     <View>
       {bonuses.map((b, idx) => (
-        <View
-          key={idx}
-          style={[
-            styles.bonusRow,
-            {
-              borderBottomColor: colors.border.DEFAULT,
-              borderBottomWidth: StyleSheet.hairlineWidth,
-            },
-          ]}
-        >
-          <Text style={[styles.bonusValue, { color: colors.text.primary }]}>
-            {b.value >= 0 ? `+${b.value}` : `${b.value}`}
-          </Text>
-          <View
+        <View key={idx}>
+          <Pressable
+            onPress={() => openEdit(idx)}
             style={[
-              styles.bonusTypePill,
+              styles.bonusRow,
               {
-                backgroundColor: isDark ? 'rgba(212,175,55,0.2)' : 'rgba(140,90,40,0.1)',
-                borderColor: fantasy.gold,
+                borderBottomColor: colors.border.DEFAULT,
+                borderBottomWidth: StyleSheet.hairlineWidth,
+              },
+              activeIdx === idx && {
+                backgroundColor: isDark ? 'rgba(212,175,55,0.06)' : 'rgba(140,90,40,0.04)',
               },
             ]}
+            accessibilityRole="button"
+            accessibilityLabel={`Edit ${BONUS_TYPE_LABELS[b.bonusType] ?? b.bonusType} bonus`}
           >
-            <Text style={[styles.bonusTypePillText, { color: fantasy.gold }]}>
-              {BONUS_TYPE_LABELS[b.bonusType] ?? b.bonusType}
+            <Text style={[styles.bonusValue, { color: colors.text.primary }]}>
+              {b.value >= 0 ? `+${b.value}` : `${b.value}`}
             </Text>
-          </View>
-          {b.source ? (
-            <Text style={[styles.bonusSource, { color: colors.text.tertiary }]} numberOfLines={1}>
-              {b.source}
-            </Text>
-          ) : (
-            <View style={styles.bonusSource} />
-          )}
-          <Pressable
-            onPress={() => dispatch(removeOtherBonus({ ability: abilityKey, index: idx }))}
-            style={styles.bonusRemoveBtn}
-            accessibilityLabel={`Remove ${BONUS_TYPE_LABELS[b.bonusType] ?? b.bonusType} bonus`}
-          >
-            <Text style={{ color: colors.text.tertiary, fontSize: 16 }}>×</Text>
+            <View
+              style={[
+                styles.bonusTypePill,
+                {
+                  backgroundColor: isDark ? 'rgba(212,175,55,0.2)' : 'rgba(140,90,40,0.1)',
+                  borderColor: fantasy.gold,
+                },
+              ]}
+            >
+              <Text style={[styles.bonusTypePillText, { color: fantasy.gold }]}>
+                {BONUS_TYPE_LABELS[b.bonusType] ?? b.bonusType}
+              </Text>
+            </View>
+            {b.source ? (
+              <Text style={[styles.bonusSource, { color: colors.text.tertiary }]} numberOfLines={1}>
+                {b.source}
+              </Text>
+            ) : (
+              <View style={styles.bonusSource} />
+            )}
+            <Pressable
+              onPress={() => dispatch(removeOtherBonus({ ability: abilityKey, index: idx }))}
+              style={styles.bonusRemoveBtn}
+              accessibilityLabel={`Remove ${BONUS_TYPE_LABELS[b.bonusType] ?? b.bonusType} bonus`}
+            >
+              <Text style={{ color: colors.text.tertiary, fontSize: 16 }}>×</Text>
+            </Pressable>
           </Pressable>
+
+          {activeIdx === idx && (
+            <BonusForm
+              value={formValue}
+              type={formType}
+              source={formSource}
+              onChangeValue={setFormValue}
+              onChangeType={setFormType}
+              onChangeSource={setFormSource}
+              onConfirm={handleConfirm}
+              onCancel={closeForm}
+              confirmLabel="Save"
+            />
+          )}
         </View>
       ))}
 
-      {adding ? (
-        <View style={[styles.addBonusForm, { borderColor: colors.border.DEFAULT }]}>
-          <View style={styles.addBonusInputRow}>
-            <TextInput
-              value={addValue}
-              onChangeText={setAddValue}
-              keyboardType="numeric"
-              selectTextOnFocus
-              placeholder="0"
-              placeholderTextColor={colors.text.tertiary}
-              style={[
-                styles.addBonusValueInput,
-                {
-                  color: colors.text.primary,
-                  borderColor: colors.border.DEFAULT,
-                  backgroundColor: colors.bg.tertiary,
-                },
-              ]}
-              accessibilityLabel="Bonus value"
-            />
-            <TextInput
-              value={addSource}
-              onChangeText={setAddSource}
-              placeholder="Source (optional)"
-              placeholderTextColor={colors.text.tertiary}
-              style={[
-                styles.addBonusSourceInput,
-                {
-                  color: colors.text.primary,
-                  borderColor: colors.border.DEFAULT,
-                  backgroundColor: colors.bg.tertiary,
-                },
-              ]}
-              accessibilityLabel="Bonus source"
-            />
-          </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.typePicker}>
-            {ABILITY_BONUS_TYPES.map((bt) => (
-              <Pressable
-                key={bt}
-                onPress={() => setAddType(bt)}
-                style={[
-                  styles.typePill,
-                  {
-                    borderColor: addType === bt ? fantasy.gold : colors.border.DEFAULT,
-                    backgroundColor:
-                      addType === bt
-                        ? isDark
-                          ? 'rgba(212,175,55,0.2)'
-                          : 'rgba(140,90,40,0.1)'
-                        : 'transparent',
-                  },
-                ]}
-                accessibilityRole="radio"
-                accessibilityState={{ checked: addType === bt }}
-              >
-                <Text
-                  style={[
-                    styles.typePillText,
-                    { color: addType === bt ? fantasy.gold : colors.text.secondary },
-                  ]}
-                >
-                  {BONUS_TYPE_LABELS[bt] ?? bt}
-                </Text>
-              </Pressable>
-            ))}
-          </ScrollView>
-          <View style={styles.addBonusActions}>
-            <Pressable
-              onPress={handleAdd}
-              style={[styles.addBonusConfirmBtn, { backgroundColor: fantasy.gold }]}
-              accessibilityLabel="Confirm add bonus"
-            >
-              <Text
-                style={{ fontFamily: 'Cinzel', fontSize: 12, fontWeight: '700', color: '#1a0f00' }}
-              >
-                Add
-              </Text>
-            </Pressable>
-            <Pressable
-              onPress={() => {
-                setAdding(false);
-                setAddValue('0');
-                setAddSource('');
-              }}
-              style={[styles.addBonusCancelBtn, { borderColor: colors.border.DEFAULT }]}
-              accessibilityLabel="Cancel add bonus"
-            >
-              <Text
-                style={{
-                  fontFamily: 'LibreBaskerville',
-                  fontSize: 12,
-                  color: colors.text.secondary,
-                }}
-              >
-                Cancel
-              </Text>
-            </Pressable>
-          </View>
-        </View>
+      {isAdding ? (
+        <BonusForm
+          value={formValue}
+          type={formType}
+          source={formSource}
+          onChangeValue={setFormValue}
+          onChangeType={setFormType}
+          onChangeSource={setFormSource}
+          onConfirm={handleConfirm}
+          onCancel={closeForm}
+          confirmLabel="Add"
+        />
       ) : (
         <Pressable
-          onPress={() => setAdding(true)}
+          onPress={openAdd}
           style={styles.addBonusButton}
           accessibilityLabel="Add typed bonus"
         >
