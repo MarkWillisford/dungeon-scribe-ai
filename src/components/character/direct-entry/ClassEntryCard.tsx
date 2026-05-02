@@ -6,6 +6,7 @@ import { InlinePicker } from '@/components/ui/InlinePicker';
 import { ClassChoiceRow } from './ClassChoiceRow';
 import { CompanionCard } from './CompanionCard';
 import { CompanionPickerSheet } from './CompanionPickerSheet';
+import { shallowEqual } from 'react-redux';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   removeClass,
@@ -1225,10 +1226,12 @@ function CompanionSection({ entry }: CompanionSectionProps) {
   const originalCharacterId = useAppSelector((state) => state.characterEntry.originalCharacterId);
   const routeCharacterId = originalCharacterId ?? 'draft';
 
-  const grantedCompanions = useAppSelector((state) =>
-    state.characterEntry.character.companions.filter(
-      (c) => c.grantedBy.type === 'class' && c.grantedBy.classEntryId === entry.id,
-    ),
+  const grantedCompanions = useAppSelector(
+    (state) =>
+      state.characterEntry.character.companions.filter(
+        (c) => c.grantedBy.type === 'class' && c.grantedBy.classEntryId === entry.id,
+      ),
+    shallowEqual,
   );
 
   const supportsMultiple = classSupportsMultipleCompanions(entry);
