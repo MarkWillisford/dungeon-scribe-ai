@@ -388,6 +388,12 @@ const characterEntrySlice = createSlice({
         (sum, c) => sum + c.level,
         0,
       );
+      if (state.character.classes.levelOrder) {
+        const id = action.payload.id ?? action.payload.name;
+        for (let i = 0; i < action.payload.level; i++) {
+          state.character.classes.levelOrder.push(id);
+        }
+      }
       syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
@@ -432,6 +438,11 @@ const characterEntrySlice = createSlice({
         (c) => !(c.grantedBy.type === 'class' && c.grantedBy.classEntryId === removedId),
       );
 
+      if (state.character.classes.levelOrder) {
+        state.character.classes.levelOrder = state.character.classes.levelOrder.filter(
+          (id) => id !== removedId,
+        );
+      }
       syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
@@ -453,6 +464,24 @@ const characterEntrySlice = createSlice({
       // Prune favored class bonus selections that are now beyond the new level.
       if (cls.favoredClassBonuses && newLevel < oldLevel) {
         cls.favoredClassBonuses = cls.favoredClassBonuses.filter((s) => s.level <= newLevel);
+      }
+
+      // Keep levelOrder in sync when levels are directly adjusted.
+      if (state.character.classes.levelOrder) {
+        const classId = action.payload.id;
+        if (newLevel > oldLevel) {
+          for (let i = 0; i < newLevel - oldLevel; i++) {
+            state.character.classes.levelOrder.push(classId);
+          }
+        } else if (newLevel < oldLevel) {
+          let toRemove = oldLevel - newLevel;
+          for (let i = state.character.classes.levelOrder.length - 1; i >= 0 && toRemove > 0; i--) {
+            if (state.character.classes.levelOrder[i] === classId) {
+              state.character.classes.levelOrder.splice(i, 1);
+              toRemove--;
+            }
+          }
+        }
       }
 
       // Resize advancement perLevel to match the new class level.
@@ -945,6 +974,72 @@ const characterEntrySlice = createSlice({
       state.character.classes.classes = action.payload
         .map((id) => map.get(id))
         .filter(Boolean) as ClassEntry[];
+      state.isDirty = true;
+    },
+
+    initLevelOrder(state) {
+      const order: string[] = [];
+      for (const cls of state.character.classes.classes) {
+        const id = cls.id ?? cls.name;
+        for (let i = 0; i < cls.level; i++) {
+          order.push(id);
+        }
+      }
+      state.character.classes.levelOrder = order;
+      state.isDirty = true;
+    },
+
+    swapLevelSlot(state, action: PayloadAction<{ charLevel: number; newClassId: string }>) {
+      const order = state.character.classes.levelOrder;
+      if (!order) return;
+
+      const { charLevel, newClassId } = action.payload;
+      const idx = charLevel - 1;
+      const oldClassId = order[idx];
+      if (!oldClassId || oldClassId === newClassId) return;
+
+      const oldCls = state.character.classes.classes.find((c) => (c.id ?? c.name) === oldClassId);
+      const newCls = state.character.classes.classes.find((c) => (c.id ?? c.name) === newClassId);
+      if (!oldCls || !newCls) return;
+
+      order[idx] = newClassId;
+
+      oldCls.level -= 1;
+      newCls.level += 1;
+
+      // Prune FCBs that are now beyond the reduced level
+      if (oldCls.favoredClassBonuses) {
+        oldCls.favoredClassBonuses = oldCls.favoredClassBonuses.filter(
+          (s) => s.level <= oldCls.level,
+        );
+      }
+
+      // Shrink spellcasting advancement arrays if the old class lost a level
+      const oldAdv = oldCls.spellcastingAdvancement;
+      if (oldAdv) {
+        oldAdv.perLevel.length = oldCls.level;
+      }
+
+      // Grow spellcasting advancement arrays if the new class gained a level
+      const newAdv = newCls.spellcastingAdvancement;
+      if (newAdv) {
+        if (newAdv.mode === 'single') {
+          const template = newAdv.perLevel[newAdv.perLevel.length - 1] ?? { baseClassEntryId: '' };
+          newAdv.perLevel.push({ ...template });
+        } else {
+          const template = newAdv.perLevel[newAdv.perLevel.length - 1] ?? {
+            arcaneBaseClassEntryId: '',
+            divineBaseClassEntryId: '',
+          };
+          newAdv.perLevel.push({ ...template });
+        }
+      }
+
+      state.character.classes.totalLevel = state.character.classes.classes.reduce(
+        (sum, c) => sum + c.level,
+        0,
+      );
+      syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
 
@@ -1660,6 +1755,8 @@ export const {
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,
+  initLevelOrder,
+  swapLevelSlot,
   addTemplate,
   removeTemplate,
   updateTemplate,

@@ -16,6 +16,8 @@ export interface CharacterClasses {
   baseRefSave: number;
   baseWillSave: number;
   favoredClassBonuses: FavoredClassBonus[];
+  /** Class entry IDs in character-level order (index 0 = character level 1). Absent until the user opens the level progression editor. */
+  levelOrder?: string[];
 }
 
 export interface ClassEntry {

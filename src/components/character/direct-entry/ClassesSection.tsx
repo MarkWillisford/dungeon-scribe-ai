@@ -22,6 +22,7 @@ import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPicker
 import { ClassEntryCard } from './ClassEntryCard';
 import { TemplateEntryCard } from './TemplateEntryCard';
 import { GrantedBonusCard } from './GrantedBonusCard';
+import { LevelSequenceEditor } from './LevelSequenceEditor';
 import { selectClasses, selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { type ClassEntry } from '@/types/classes';
 import { type AppliedTemplate } from '@/types/templates';
@@ -402,6 +403,7 @@ export function ClassesSection() {
   const [classPickerOpen, setClassPickerOpen] = useState(false);
   const [templatePickerOpen, setTemplatePickerOpen] = useState(false);
   const [grantModalOpen, setGrantModalOpen] = useState(false);
+  const [levelEditorOpen, setLevelEditorOpen] = useState(false);
 
   const regularTemplates = templates.filter((t) => !t.isFreeGrant);
   const freeGrants = templates.filter((t) => t.isFreeGrant);
@@ -593,6 +595,20 @@ export function ClassesSection() {
       {/* Class cards — long-press ☰ handle to drag and reorder (multiclass only) */}
       <DraggableClassList />
 
+      {/* Level progression editor — only relevant with multiple classes */}
+      {classes.length > 1 && (
+        <Pressable
+          onPress={() => setLevelEditorOpen(true)}
+          style={[styles.levelProgressionButton, { borderColor: colors.border.DEFAULT }]}
+          accessibilityRole="button"
+          accessibilityLabel="Edit level progression order"
+        >
+          <Text style={[styles.levelProgressionText, { color: colors.text.tertiary }]}>
+            ⟳ Edit Level Progression
+          </Text>
+        </Pressable>
+      )}
+
       {/* Add class button */}
       <Pressable
         onPress={() => setClassPickerOpen(true)}
@@ -694,6 +710,9 @@ export function ClassesSection() {
         onAdd={handleAddGrant}
         onClose={() => setGrantModalOpen(false)}
       />
+
+      {/* Level progression editor */}
+      <LevelSequenceEditor visible={levelEditorOpen} onClose={() => setLevelEditorOpen(false)} />
     </View>
   );
 }
@@ -747,6 +766,18 @@ const styles = StyleSheet.create({
     fontFamily: 'LibreBaskerville',
     fontSize: 13,
     fontWeight: '600',
+  },
+  levelProgressionButton: {
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: 'dashed',
+    paddingVertical: 8,
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  levelProgressionText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
   },
   // Modal styles
   modalContainer: {
