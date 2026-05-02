@@ -491,6 +491,7 @@ export class GameDataService {
     knownSpells: KnownSpell[],
     spellbooks: Spellbook[],
     characterClasses: ClassEntry[],
+    eslByPoolId: Record<string, number> = {},
   ): Promise<SearchItem[]> {
     const seen = new Set<string>();
     const allItems: SearchItem[] = [];
@@ -547,7 +548,13 @@ export class GameDataService {
         }
       } else {
         // Prepared class-list caster: query via Firestore/static connector.
-        const maxLevel = pool ? GameDataService.maxCastableLevelFromPool(pool) : 9;
+        // Prefer slot data; fall back to caller-supplied ESL (same computation
+        // the Spellcasting tab uses, accounting for prestige class advancement).
+        let maxLevel = pool ? GameDataService.maxCastableLevelFromPool(pool) : 9;
+        if (maxLevel === 0 && pool) {
+          const esl = eslByPoolId[pool.id ?? ''] ?? 0;
+          maxLevel = esl > 0 ? Math.min(9, Math.ceil(esl / 2)) : 9;
+        }
         const items = await GameDataService.getClassChoiceItems('spells', {
           classNames: [baseClass],
           maxSpellLevel: maxLevel,

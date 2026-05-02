@@ -18,6 +18,8 @@ import {
 } from '@/services/CompanionService';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import { makeCompanionInstanceId } from '@/utils/companionUtils';
+import { computePoolEsl } from '@/utils/spellcastingUtils';
+import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 
 // Static PF1e class-to-casting-type map. Used to resolve castingType filter tokens
 // (e.g. castingType: 'divine') into concrete class names from the character's class list
@@ -201,6 +203,21 @@ export function ClassChoiceRow({
     (state) => state.characterEntry.character.spellcasting.spellbooks,
   );
 
+  const classDataMap = useAppSelector(selectClassDataMap);
+
+  // Pre-compute ESL per pool the same way the Spellcasting tab does, so that
+  // buildCastableSpellItems can determine max spell level even when
+  // pool.effectiveSpellcastingLevel hasn't been persisted (it never is).
+  const eslByPoolId = useMemo(() => {
+    const map: Record<string, number> = {};
+    for (const pool of spellcastingPools) {
+      if (pool.id) {
+        map[pool.id] = computePoolEsl(pool, characterClasses, classDataMap);
+      }
+    }
+    return map;
+  }, [spellcastingPools, characterClasses, classDataMap]);
+
   // Companion currently granted by this specific class choice, if any.
   const existingCompanion = useAppSelector((state) =>
     state.characterEntry.character.companions.find(
@@ -231,6 +248,7 @@ export function ClassChoiceRow({
           knownSpells,
           spellbooks,
           characterClasses,
+          eslByPoolId,
         )
           .then((items) => {
             if (!stale) setRawPickerItems(items);
@@ -274,6 +292,7 @@ export function ClassChoiceRow({
     spellcastingPools,
     knownSpells,
     spellbooks,
+    eslByPoolId,
   ]);
 
   const pickerItems = useMemo(

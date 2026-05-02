@@ -31,6 +31,7 @@ jest.mock('@/store/hooks', () => ({
           spellcasting: { pools: [], knownSpells: [], spellbooks: [] },
         },
       },
+      gameData: { classes: [] },
     }),
 }));
 jest.mock('@/hooks/useTheme', () => ({
