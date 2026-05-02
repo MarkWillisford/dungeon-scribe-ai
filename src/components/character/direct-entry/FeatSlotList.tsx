@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -8,13 +8,13 @@ import {
   removeFeatSlot,
   addFeatSlot,
   toggleFeatPrereqOverride,
-  syncFeatSlots,
   setFeatChoices,
 } from '@/store/slices/characterEntrySlice';
 import { FeatPickerSheet } from './FeatPickerSheet';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
 import { computeFeatSlots } from '@/utils/characterComputations';
 import { FeatRegistryService } from '@/services/FeatRegistryService';
+import { GameDataService } from '@/services/GameDataService';
 import type { FeatChoice } from '@/types/feats';
 
 type FeatSlotSource = 'racial' | 'level' | 'bonus' | 'mythic';
@@ -77,8 +77,10 @@ interface FeatSlotRowProps {
 function FeatSlotRow({ slot }: FeatSlotRowProps) {
   const { colors } = useTheme();
   const dispatch = useAppDispatch();
+  const eitrMode = useAppSelector((state) => state.ruleset.activeRuleset.optionalRules.eitrMode);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [activeChoicePicker, setActiveChoicePicker] = useState<FeatChoice | null>(null);
+  const [weaponItems, setWeaponItems] = useState<SearchItem[]>([]);
 
   const assigned = !!slot.featName;
   const featDef = assigned ? FeatRegistryService.getFeat(slot.featId) : undefined;
@@ -104,12 +106,44 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
     if (next) setActiveChoicePicker(next);
   };
 
-  const choiceItems: SearchItem[] = activeChoicePicker
-    ? (activeChoicePicker.options ?? []).map((opt) => ({
-        key: opt,
-        label: opt.charAt(0).toUpperCase() + opt.slice(1),
-      }))
-    : [];
+  // Async-load weapons when a weapon-type choice picker opens
+  useEffect(() => {
+    if (activeChoicePicker?.type !== 'weapon') return;
+    let cancelled = false;
+    GameDataService.getWeapons().then((weapons) => {
+      if (cancelled) return;
+      let items: SearchItem[];
+      if (eitrMode !== 'off') {
+        // EitR / Syren's: target weapon groups instead of individual weapons
+        const groups = Array.from(new Set(weapons.flatMap((w) => w.weaponGroup))).sort();
+        items = groups.map((g) => ({
+          key: g,
+          label: g
+            .split(' ')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' '),
+        }));
+      } else {
+        items = weapons
+          .map((w) => ({ key: w.name, label: w.name }))
+          .sort((a, b) => a.label.localeCompare(b.label));
+      }
+      setWeaponItems(items);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeChoicePicker?.type, eitrMode]);
+
+  // Derive picker items — static choices resolved inline, weapon choices from async state
+  const dynamicChoiceItems = useMemo<SearchItem[]>(() => {
+    if (!activeChoicePicker) return [];
+    if (activeChoicePicker.type === 'weapon') return weaponItems;
+    return (activeChoicePicker.options ?? []).map((opt) => ({
+      key: opt,
+      label: opt.charAt(0).toUpperCase() + opt.slice(1),
+    }));
+  }, [activeChoicePicker, weaponItems]);
 
   return (
     <>
@@ -217,7 +251,7 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
         <SearchPickerSheet
           visible
           title={`${slot.featName} — ${activeChoicePicker.label}`}
-          items={choiceItems}
+          items={dynamicChoiceItems}
           onSelect={(item) => {
             const updated = { ...slot.featChoices, [activeChoicePicker.type]: item.key };
             dispatch(setFeatChoices({ slotId: slot.slotId, choices: updated }));
