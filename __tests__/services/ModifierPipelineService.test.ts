@@ -512,6 +512,77 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  describe('collectEquipmentEffects — armor, shields, weapons', () => {
+    test('equipped armor with enhancement contributes armor+enhancement to AC', () => {
+      const char = createTestCharacter();
+      char.equipment.armor = [
+        { acBonus: 6, enhancement: 1, equipped: true, name: 'Chainmail +1' },
+      ] as unknown as typeof char.equipment.armor;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.armor).toBe(7);
+    });
+
+    test('unequipped armor is not counted', () => {
+      const char = createTestCharacter();
+      char.equipment.armor = [
+        { acBonus: 6, enhancement: 0, equipped: false, name: 'Chainmail' },
+      ] as unknown as typeof char.equipment.armor;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.armor).toBe(0);
+    });
+
+    test('equipped shield with enhancement contributes to AC', () => {
+      const char = createTestCharacter();
+      char.equipment.shields = [
+        { acBonus: 2, enhancement: 2, equipped: true, name: 'Heavy Shield +2' },
+      ] as unknown as typeof char.equipment.shields;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.shield).toBe(4);
+    });
+
+    test('equipped weapon with enhancement adds to melee attack', () => {
+      const char = createTestCharacter();
+      char.equipment.weapons = [
+        { enhancement: 1, equipped: true, masterwork: true, isRanged: false, name: 'Longsword +1' },
+      ] as unknown as typeof char.equipment.weapons;
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal + 1,
+      );
+    });
+
+    test('masterwork weapon with no enhancement gives +1 melee attack', () => {
+      const char = createTestCharacter();
+      char.equipment.weapons = [
+        {
+          enhancement: 0,
+          equipped: true,
+          masterwork: true,
+          isRanged: false,
+          name: 'Longsword (masterwork)',
+        },
+      ] as unknown as typeof char.equipment.weapons;
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal + 1,
+      );
+    });
+
+    test('equipped ranged weapon with enhancement adds to ranged attack', () => {
+      const char = createTestCharacter();
+      char.equipment.weapons = [
+        { enhancement: 1, equipped: true, masterwork: true, isRanged: true, name: 'Longbow +1' },
+      ] as unknown as typeof char.equipment.weapons;
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.rangedTotal).toBe(
+        baseline.combatStats.attackBonuses.rangedTotal + 1,
+      );
+    });
+  });
+
   describe('conditions effects', () => {
     test('active condition effects are applied to stats', () => {
       const char = createTestCharacter();

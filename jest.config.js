@@ -31,6 +31,7 @@ module.exports = {
       testMatch: [
         '<rootDir>/__tests__/services/**/*.test.ts',
         '<rootDir>/__tests__/store/**/*.test.ts',
+        '<rootDir>/__tests__/utils/**/*.test.ts',
         '<rootDir>/__tests__/integration/**/*.test.ts',
       ],
       setupFiles: ['<rootDir>/jest.setup.ts'],

@@ -1104,4 +1104,233 @@ describe('GameDataService', () => {
       expect(results.every((e) => e.raceName === 'Dwarf' && e.className === 'Wizard')).toBe(true);
     });
   });
+
+  describe('spellKey', () => {
+    test('lowercases and replaces non-alphanumeric runs with dashes', () => {
+      expect(GameDataService.spellKey('Cure Light Wounds')).toBe('cure-light-wounds');
+    });
+
+    test('strips leading and trailing dashes', () => {
+      expect(GameDataService.spellKey("D'eath's Touch")).toBe('d-eath-s-touch');
+    });
+
+    test('handles multiple consecutive special chars as one dash', () => {
+      expect(GameDataService.spellKey('Fire -- Burst')).toBe('fire-burst');
+    });
+
+    test('returns already-slugified input unchanged', () => {
+      expect(GameDataService.spellKey('fireball')).toBe('fireball');
+    });
+  });
+
+  describe('maxCastableLevelFromPool', () => {
+    test('returns highest index where total > 0', () => {
+      const pool = {
+        id: 'p1',
+        baseClass: 'cleric',
+        baseClassEntryId: 'c1',
+        spellsPerDay: { total: [0, 4, 3, 2, 0, 0, 0, 0, 0, 0] },
+      } as Parameters<typeof GameDataService.maxCastableLevelFromPool>[0];
+      expect(GameDataService.maxCastableLevelFromPool(pool)).toBe(3);
+    });
+
+    test('falls back to ESL formula when all slots are 0', () => {
+      const pool = {
+        id: 'p1',
+        baseClass: 'cleric',
+        baseClassEntryId: 'c1',
+        effectiveSpellcastingLevel: 6,
+        spellsPerDay: { total: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+      } as Parameters<typeof GameDataService.maxCastableLevelFromPool>[0];
+      // ceil(6/2) = 3
+      expect(GameDataService.maxCastableLevelFromPool(pool)).toBe(3);
+    });
+
+    test('returns 0 when no slot data and no ESL', () => {
+      const pool = {
+        id: 'p1',
+        baseClass: 'cleric',
+        baseClassEntryId: 'c1',
+      } as Parameters<typeof GameDataService.maxCastableLevelFromPool>[0];
+      expect(GameDataService.maxCastableLevelFromPool(pool)).toBe(0);
+    });
+  });
+
+  describe('buildSpellSubLabel', () => {
+    test('formats known class abbreviation correctly', () => {
+      expect(GameDataService.buildSpellSubLabel({ cleric: 3, druid: 4 }, ['cleric'])).toBe('Clr 3');
+    });
+
+    test('joins multiple classes with /', () => {
+      expect(GameDataService.buildSpellSubLabel({ cleric: 1, druid: 1 }, ['cleric', 'druid'])).toBe(
+        'Clr 1 / Drd 1',
+      );
+    });
+
+    test('uses 3-char fallback for unknown class', () => {
+      expect(GameDataService.buildSpellSubLabel({ oracle: 2 }, ['oracle'])).toBe('Orc 2');
+    });
+
+    test('skips classes not in classLevels', () => {
+      expect(GameDataService.buildSpellSubLabel({ cleric: 2 }, ['cleric', 'druid'])).toBe('Clr 2');
+    });
+  });
+
+  describe('buildCastableSpellItems', () => {
+    const CLERIC_POOL = {
+      id: 'pool-cleric',
+      baseClass: 'cleric',
+      baseClassEntryId: 'entry-cleric',
+      spellsPerDay: {
+        base: [0, 4, 3, 2, 0, 0, 0, 0, 0, 0],
+        bonus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        misc: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        total: [0, 4, 3, 2, 0, 0, 0, 0, 0, 0],
+        used: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      },
+    } as Parameters<typeof GameDataService.buildCastableSpellItems>[0][0];
+
+    test('prepared caster — queries connector and returns SearchItems within max level', async () => {
+      const items = await GameDataService.buildCastableSpellItems(
+        [CLERIC_POOL],
+        [],
+        [],
+        [
+          { id: 'entry-cleric', name: 'Cleric', level: 5 } as Parameters<
+            typeof GameDataService.buildCastableSpellItems
+          >[3][0],
+        ],
+        {},
+      );
+      // Cure Light Wounds (cleric 1) and Flame Strike (cleric 5 > maxLevel 3) — CLW should be included, FS excluded
+      const keys = items.map((i) => i.key);
+      expect(keys).toContain('cure-light-wounds');
+      expect(keys).not.toContain('flame-strike');
+    });
+
+    test('prepared caster — uses eslByPoolId fallback when maxLevel is 0', async () => {
+      const emptySlotPool = {
+        ...CLERIC_POOL,
+        spellsPerDay: {
+          base: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          bonus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          misc: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          total: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          used: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+      };
+      // ESL=6 → maxLevel = ceil(6/2) = 3
+      const items = await GameDataService.buildCastableSpellItems(
+        [emptySlotPool],
+        [],
+        [],
+        [
+          { id: 'entry-cleric', name: 'Cleric', level: 6 } as Parameters<
+            typeof GameDataService.buildCastableSpellItems
+          >[3][0],
+        ],
+        { 'pool-cleric': 6 },
+      );
+      const keys = items.map((i) => i.key);
+      expect(keys).toContain('cure-light-wounds');
+    });
+
+    test('spontaneous caster — uses knownSpells for that class', async () => {
+      const sorc: Parameters<typeof GameDataService.buildCastableSpellItems>[0][0] = {
+        id: 'pool-sorc',
+        baseClass: 'sorcerer',
+        baseClassEntryId: 'entry-sorc',
+      } as Parameters<typeof GameDataService.buildCastableSpellItems>[0][0];
+
+      const knownSpells = [
+        {
+          name: 'Fireball',
+          classLevels: { wizard: 3, sorcerer: 3 },
+          classes: [{ className: 'sorcerer', level: 3 }],
+        },
+      ] as unknown as Parameters<typeof GameDataService.buildCastableSpellItems>[1];
+
+      const items = await GameDataService.buildCastableSpellItems(
+        [sorc],
+        knownSpells,
+        [],
+        [
+          { id: 'entry-sorc', name: 'Sorcerer', level: 5 } as Parameters<
+            typeof GameDataService.buildCastableSpellItems
+          >[3][0],
+        ],
+        {},
+      );
+      const keys = items.map((i) => i.key);
+      expect(keys).toContain('fireball');
+      expect(items.find((i) => i.key === 'fireball')?.category).toBe('Level 3');
+    });
+
+    test('spellbook caster — uses spellbooks for that class', async () => {
+      const wiz: Parameters<typeof GameDataService.buildCastableSpellItems>[0][0] = {
+        id: 'pool-wiz',
+        baseClass: 'wizard',
+        baseClassEntryId: 'entry-wiz',
+      } as Parameters<typeof GameDataService.buildCastableSpellItems>[0][0];
+
+      const spellbooks = [
+        {
+          name: 'Standard',
+          spells: [
+            {
+              name: 'Fireball',
+              classLevels: { wizard: 3, sorcerer: 3 },
+            },
+          ],
+        },
+      ] as unknown as Parameters<typeof GameDataService.buildCastableSpellItems>[2];
+
+      const items = await GameDataService.buildCastableSpellItems(
+        [wiz],
+        [],
+        spellbooks,
+        [
+          { id: 'entry-wiz', name: 'Wizard', level: 5 } as Parameters<
+            typeof GameDataService.buildCastableSpellItems
+          >[3][0],
+        ],
+        {},
+      );
+      const keys = items.map((i) => i.key);
+      expect(keys).toContain('fireball');
+    });
+
+    test('no-pools fallback — includes prepared classes from class list', async () => {
+      const clericClass = { id: 'entry-cleric', name: 'Cleric', level: 5 } as Parameters<
+        typeof GameDataService.buildCastableSpellItems
+      >[3][0];
+      const items = await GameDataService.buildCastableSpellItems([], [], [], [clericClass], {});
+      // With no pools and cleric in class list, queries with maxSpellLevel 9
+      expect(items.length).toBeGreaterThan(0);
+    });
+
+    test('deduplicates spells appearing in multiple pools', async () => {
+      const pool2: Parameters<typeof GameDataService.buildCastableSpellItems>[0][0] = {
+        ...CLERIC_POOL,
+        id: 'pool-cleric-2',
+        baseClassEntryId: 'entry-cleric-2',
+      };
+      const items = await GameDataService.buildCastableSpellItems(
+        [CLERIC_POOL, pool2],
+        [],
+        [],
+        [
+          { id: 'entry-cleric', name: 'Cleric', level: 5 } as Parameters<
+            typeof GameDataService.buildCastableSpellItems
+          >[3][0],
+          { id: 'entry-cleric-2', name: 'Cleric', level: 5 } as Parameters<
+            typeof GameDataService.buildCastableSpellItems
+          >[3][0],
+        ],
+        {},
+      );
+      const clwItems = items.filter((i) => i.key === 'cure-light-wounds');
+      expect(clwItems).toHaveLength(1);
+    });
+  });
 });
