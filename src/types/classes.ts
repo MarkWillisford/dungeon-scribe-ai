@@ -61,6 +61,13 @@ export interface ClassEntry {
   archetypeName?: string;
   favoredClassBonuses?: FavoredClassBonusSelection[];
   summonerBroodmaster?: BroodmasterState;
+  // Companion stacking: this class's levels add to the effective progression
+  // level of companions granted by another class.
+  //   'all'       — stacks with every companion-granting class (e.g. Nature Warden)
+  //   '<classId>' — stacks with the specific class entry bearing that ID
+  // Only set when the class explicitly says so in its rules text; most classes
+  // (including Paladin's mount) do NOT stack with the druid animal companion.
+  advancesCompanionOf?: 'all' | string;
 }
 
 // ---- Class Choices ----

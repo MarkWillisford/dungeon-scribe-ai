@@ -14,7 +14,7 @@ import { type ClassChoice } from '@/types/classes';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { GameDataService } from '@/services/GameDataService';
 import {
-  effectiveLevelFromDraftClass,
+  computeCompanionEffectiveLevel,
   pickerFilterFromDraftClass,
 } from '@/services/CompanionService';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
@@ -373,7 +373,7 @@ export function ClassChoiceRow({
           className: draftClass?.name ?? '',
           classChoiceId: definition.id,
         },
-        effectiveProgressionLevel: effectiveLevelFromDraftClass(draftClass),
+        effectiveProgressionLevel: computeCompanionEffectiveLevel(draftClass!, characterClasses),
       }),
     );
     setCompanionPickerOpen(false);

@@ -517,6 +517,32 @@ export function effectiveLevelFromDraftClass(cls: ClassEntry | undefined): numbe
 }
 
 /**
+ * Computes the full effective companion progression level for a granted
+ * companion, including any stacking classes the user has configured via
+ * ClassEntry.advancesCompanionOf.
+ *
+ * Use this everywhere a companion's effectiveProgressionLevel is calculated
+ * rather than calling effectiveLevelFromDraftClass directly, so that prestige
+ * classes like Nature Warden ("stacks with all animal companion classes") are
+ * automatically included.
+ */
+export function computeCompanionEffectiveLevel(
+  grantingCls: ClassEntry,
+  allClasses: ClassEntry[],
+): number {
+  const base = effectiveLevelFromDraftClass(grantingCls);
+  const grantingId = grantingCls.id ?? grantingCls.name;
+  const stackBonus = allClasses
+    .filter((c) => {
+      if (!c.advancesCompanionOf) return false;
+      if ((c.id ?? c.name) === grantingId) return false; // don't double-count the granting class
+      return c.advancesCompanionOf === 'all' || c.advancesCompanionOf === grantingId;
+    })
+    .reduce((sum, c) => sum + c.level, 0);
+  return base + stackBonus;
+}
+
+/**
  * Returns 'mountsOnly' for classes whose companion must be a mount (Cavalier,
  * Paladin), otherwise 'full' (all companions shown).
  */

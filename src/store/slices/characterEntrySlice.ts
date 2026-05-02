@@ -27,7 +27,7 @@ import type {
   SelectedEvolutionMetadata,
 } from '@/types/eidolon';
 import { CharacterService } from '@/services/CharacterService';
-import { effectiveLevelFromDraftClass } from '@/services/CompanionService';
+import { computeCompanionEffectiveLevel } from '@/services/CompanionService';
 
 // ---- Supporting types ----
 
@@ -535,11 +535,21 @@ const characterEntrySlice = createSlice({
         }
       }
 
-      // Sync effectiveProgressionLevel for companions granted by this class.
-      const classId = action.payload.id;
+      // Recalculate effectiveProgressionLevel for all class-granted companions.
+      // This handles both direct changes (more druid levels → druid's companion
+      // advances) and stacking changes (more Nature Warden levels → druid's
+      // companion also advances via advancesCompanionOf).
       for (const companion of state.character.companions) {
-        if (companion.grantedBy.type === 'class' && companion.grantedBy.classEntryId === classId) {
-          companion.effectiveProgressionLevel = effectiveLevelFromDraftClass(cls);
+        const grant = companion.grantedBy;
+        if (grant.type !== 'class') continue;
+        const grantingCls = state.character.classes.classes.find(
+          (c) => (c.id ?? c.name) === grant.classEntryId,
+        );
+        if (grantingCls) {
+          companion.effectiveProgressionLevel = computeCompanionEffectiveLevel(
+            grantingCls,
+            state.character.classes.classes,
+          );
         }
       }
 
@@ -606,6 +616,32 @@ const characterEntrySlice = createSlice({
         cls.prereqOverride = !cls.prereqOverride;
         state.isDirty = true;
       }
+    },
+
+    setAdvancesCompanionOf(
+      state,
+      action: PayloadAction<{ id: string; advancesCompanionOf: 'all' | string | undefined }>,
+    ) {
+      const cls = state.character.classes.classes.find(
+        (c) => (c.id ?? c.name) === action.payload.id,
+      );
+      if (!cls) return;
+      cls.advancesCompanionOf = action.payload.advancesCompanionOf;
+      // Recalculate all companion effective levels — stacking changed.
+      for (const companion of state.character.companions) {
+        const grant = companion.grantedBy;
+        if (grant.type !== 'class') continue;
+        const grantingCls = state.character.classes.classes.find(
+          (c) => (c.id ?? c.name) === grant.classEntryId,
+        );
+        if (grantingCls) {
+          companion.effectiveProgressionLevel = computeCompanionEffectiveLevel(
+            grantingCls,
+            state.character.classes.classes,
+          );
+        }
+      }
+      state.isDirty = true;
     },
 
     // ---- Companions ----------------------------------------------------
@@ -1848,6 +1884,7 @@ export const {
   updateClassSpellcastingAdvancement,
   upsertClassChoice,
   toggleClassPrereqOverride,
+  setAdvancesCompanionOf,
   addCompanion,
   removeCompanion,
   renameCompanion,

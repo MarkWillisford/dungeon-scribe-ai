@@ -19,6 +19,7 @@ import {
   addCompanion,
   removeCompanion,
   splitClass,
+  setAdvancesCompanionOf,
 } from '@/store/slices/characterEntrySlice';
 import { type ClassEntry, type FavoredClassBonusSelection } from '@/types/classes';
 import { type SpellcastingAdvancement } from '@/types/spells';
@@ -28,6 +29,7 @@ import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { lookupClassData, computeFCBAlternateAccumulation } from '@/utils/characterComputations';
 import {
   effectiveLevelFromDraftClass,
+  computeCompanionEffectiveLevel,
   pickerFilterFromDraftClass,
 } from '@/services/CompanionService';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
@@ -1266,6 +1268,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
         </View>
       )}
 
+      <CompanionStackingRow entry={entry} />
       <CompanionSection entry={entry} />
 
       {/* Prereq status */}
@@ -1305,6 +1308,81 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
 
 // ---- Companion section ------------------------------------------------------
 //
+// ---- CompanionStackingRow ---------------------------------------------------
+// Shown for classes that don't grant their own companion but whose rules say
+// their levels stack with another class for animal companion progression (e.g.
+// Nature Warden "stacks with all other AC classes"; Mammoth Rider "stacks with
+// druid levels"). Hidden for classes that already have a built-in companion
+// formula and for characters with no companions at all.
+
+function CompanionStackingRow({ entry }: { entry: ClassEntry }) {
+  const { colors, fantasy, isDark } = useTheme();
+  const dispatch = useAppDispatch();
+
+  const allClasses = useAppSelector((state) => state.characterEntry.character.classes.classes);
+  const companions = useAppSelector((state) => state.characterEntry.character.companions);
+
+  // Only show for classes that have no built-in companion formula.
+  const hasOwnFormula = effectiveLevelFromDraftClass(entry) > 0;
+  // Only show when the character has at least one class-granted companion.
+  const companionGrantingClasses = allClasses.filter(
+    (c) => (c.id ?? c.name) !== (entry.id ?? entry.name) && effectiveLevelFromDraftClass(c) > 0,
+  );
+  const characterHasCompanions = companions.some((c) => c.grantedBy.type === 'class');
+
+  if (hasOwnFormula || !characterHasCompanions || companionGrantingClasses.length === 0) {
+    return null;
+  }
+
+  const current = entry.advancesCompanionOf;
+
+  const options = [
+    { label: 'None — does not advance companions', value: '' },
+    { label: 'All animal companions', value: 'all' },
+    ...companionGrantingClasses.map((c) => ({
+      label: `${c.name}${c.archetypeName ? ` (${c.archetypeName})` : ''} companion`,
+      value: c.id ?? c.name,
+    })),
+  ];
+
+  return (
+    <View style={[stackStyles.row, { borderTopColor: colors.border.DEFAULT }]}>
+      <Text style={[stackStyles.label, { color: colors.text.secondary }]}>Companion Stacking</Text>
+      <InlinePicker
+        options={options}
+        value={current ?? ''}
+        onValueChange={(val: string) =>
+          dispatch(
+            setAdvancesCompanionOf({
+              id: entry.id ?? entry.name,
+              advancesCompanionOf: val === '' ? undefined : (val as 'all' | string),
+            }),
+          )
+        }
+        placeholder="None"
+      />
+    </View>
+  );
+}
+
+const stackStyles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    gap: 8,
+  },
+  label: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    width: 120,
+    flexShrink: 0,
+  },
+});
+
+// ---- CompanionSection -------------------------------------------------------
 // Renders CompanionCards for every companion granted by this class, plus an
 // "+ Add Companion" button for granting sources that may have multiple
 // (Beastmaster Ranger). Single-companion sources get the card created via the
@@ -1328,6 +1406,8 @@ function CompanionSection({ entry }: CompanionSectionProps) {
   // from draft state anyway).
   const originalCharacterId = useAppSelector((state) => state.characterEntry.originalCharacterId);
   const routeCharacterId = originalCharacterId ?? 'draft';
+
+  const allClasses = useAppSelector((state) => state.characterEntry.character.classes.classes);
 
   const grantedCompanions = useAppSelector(
     (state) =>
@@ -1374,7 +1454,7 @@ function CompanionSection({ entry }: CompanionSectionProps) {
           className: entry.name,
           classChoiceId: 'animal_companion',
         },
-        effectiveProgressionLevel: effectiveLevelFromDraftClass(entry),
+        effectiveProgressionLevel: computeCompanionEffectiveLevel(entry, allClasses),
       }),
     );
     setAddPickerOpen(false);
