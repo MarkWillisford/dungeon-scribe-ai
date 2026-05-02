@@ -188,11 +188,18 @@ export function CombatStatsSection() {
       {/* Armor Class */}
       <Panel title="Armor Class">
         <View style={styles.row}>
-          <AutoComputedValue
-            value={`AC 10 + armor + dex ${fmtSign(dexMod)} + misc ${fmtSign(cs.armorClass.misc)}`}
-            label="Formula"
-          />
+          <AutoComputedValue value={String(cs.armorClass.total)} label="Total" />
+          <AutoComputedValue value={String(cs.armorClass.touch)} label="Touch" />
+          <AutoComputedValue value={String(cs.armorClass.flatFooted)} label="Flat-footed" />
         </View>
+        <Text style={styles.saveBreak}>
+          {`10 + armor ${cs.armorClass.armor} + shield ${cs.armorClass.shield} + dex ${fmtSign(dexMod)}` +
+            (cs.armorClass.natural ? ` + nat ${cs.armorClass.natural}` : '') +
+            (cs.armorClass.deflection ? ` + defl ${cs.armorClass.deflection}` : '') +
+            (cs.armorClass.dodge ? ` + dodge ${cs.armorClass.dodge}` : '') +
+            (cs.armorClass.size ? ` + size ${fmtSign(cs.armorClass.size)}` : '') +
+            (cs.armorClass.misc ? ` + misc ${fmtSign(cs.armorClass.misc)}` : '')}
+        </Text>
         <View style={styles.row}>
           <Text style={styles.fieldLabel}>Misc AC bonus</Text>
           <NumInput

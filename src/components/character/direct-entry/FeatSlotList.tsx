@@ -9,9 +9,13 @@ import {
   addFeatSlot,
   toggleFeatPrereqOverride,
   syncFeatSlots,
+  setFeatChoices,
 } from '@/store/slices/characterEntrySlice';
 import { FeatPickerSheet } from './FeatPickerSheet';
+import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
 import { computeFeatSlots } from '@/utils/characterComputations';
+import { FeatRegistryService } from '@/services/FeatRegistryService';
+import type { FeatChoice } from '@/types/feats';
 
 type FeatSlotSource = 'racial' | 'level' | 'bonus' | 'mythic';
 
@@ -29,6 +33,7 @@ interface FeatSlotDisplay {
   featId: string;
   featName: string;
   prereqOverride: boolean;
+  featChoices: Record<string, string>;
 }
 
 // ---- Source badge ----
@@ -73,8 +78,38 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
   const { colors } = useTheme();
   const dispatch = useAppDispatch();
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [activeChoicePicker, setActiveChoicePicker] = useState<FeatChoice | null>(null);
 
   const assigned = !!slot.featName;
+  const featDef = assigned ? FeatRegistryService.getFeat(slot.featId) : undefined;
+  const requiredChoices = featDef?.choices ?? [];
+
+  // Build display suffix from stored choices, e.g. " (Necromancy)"
+  const choiceSuffix = requiredChoices
+    .map((c) => slot.featChoices[c.type])
+    .filter(Boolean)
+    .map((v) => v.charAt(0).toUpperCase() + v.slice(1))
+    .join(', ');
+  const displayName = assigned
+    ? choiceSuffix
+      ? `${slot.featName} (${choiceSuffix})`
+      : slot.featName
+    : '—— unassigned ——';
+
+  const openNextUnfilledChoice = (
+    choices: FeatChoice[],
+    currentChoices: Record<string, string>,
+  ) => {
+    const next = choices.find((c) => !currentChoices[c.type]);
+    if (next) setActiveChoicePicker(next);
+  };
+
+  const choiceItems: SearchItem[] = activeChoicePicker
+    ? (activeChoicePicker.options ?? []).map((opt) => ({
+        key: opt,
+        label: opt.charAt(0).toUpperCase() + opt.slice(1),
+      }))
+    : [];
 
   return (
     <>
@@ -82,7 +117,7 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
         onPress={() => setPickerOpen(true)}
         style={[rowStyles.row, { borderBottomColor: colors.border.DEFAULT }]}
         accessibilityRole="button"
-        accessibilityLabel={`${slot.availableAt}: ${slot.featName || 'unassigned'}`}
+        accessibilityLabel={`${slot.availableAt}: ${displayName}`}
         accessibilityHint="Tap to assign feat"
       >
         <SourceBadge source={slot.source} />
@@ -97,9 +132,19 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
           ]}
           numberOfLines={1}
         >
-          {slot.featName || '—— unassigned ——'}
+          {displayName}
         </Text>
         <View style={rowStyles.actions}>
+          {assigned && requiredChoices.some((c) => !slot.featChoices[c.type]) && (
+            <Pressable
+              onPress={() => openNextUnfilledChoice(requiredChoices, slot.featChoices)}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel="Choose feat option"
+            >
+              <Text style={[rowStyles.actionIcon, { color: '#F59E0B' }]}>⚙</Text>
+            </Pressable>
+          )}
           {assigned && (
             <Pressable
               onPress={() => dispatch(unassignFeat(slot.slotId))}
@@ -160,9 +205,31 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
         onSelect={({ featId, featName }) => {
           dispatch(assignFeat({ slotId: slot.slotId, featId, featName }));
           setPickerOpen(false);
+          const def = FeatRegistryService.getFeat(featId);
+          if (def?.choices?.length) {
+            openNextUnfilledChoice(def.choices, slot.featChoices);
+          }
         }}
         onClose={() => setPickerOpen(false)}
       />
+
+      {activeChoicePicker && (
+        <SearchPickerSheet
+          visible
+          title={`${slot.featName} — ${activeChoicePicker.label}`}
+          items={choiceItems}
+          onSelect={(item) => {
+            const updated = { ...slot.featChoices, [activeChoicePicker.type]: item.key };
+            dispatch(setFeatChoices({ slotId: slot.slotId, choices: updated }));
+            setActiveChoicePicker(null);
+            if (featDef?.choices) {
+              openNextUnfilledChoice(featDef.choices, updated);
+            }
+          }}
+          onClose={() => setActiveChoicePicker(null)}
+          placeholder={`Search ${activeChoicePicker.label.toLowerCase()}...`}
+        />
+      )}
     </>
   );
 }
@@ -239,17 +306,19 @@ export function FeatSlotList() {
     // Build a map of slotId → assigned feat
     const assignedMap = new Map<
       string,
-      { featId: string; name: string; prereqOverride?: boolean }
+      { featId: string; name: string; prereqOverride?: boolean; choices: Record<string, string> }
     >();
     for (const f of character.feats.feats) {
       if (f.featId) {
         const key = `${f.source}_${f.grantedAtLevel}`;
-        assignedMap.set(key, { featId: f.featId, name: f.name, prereqOverride: f.prereqOverride });
-        assignedMap.set(f.source, {
+        const entry = {
           featId: f.featId,
           name: f.name,
           prereqOverride: f.prereqOverride,
-        });
+          choices: f.choices ?? {},
+        };
+        assignedMap.set(key, entry);
+        assignedMap.set(f.source, entry);
       }
     }
 
@@ -264,6 +333,7 @@ export function FeatSlotList() {
         featId: assigned?.featId ?? '',
         featName: assigned?.name ?? '',
         prereqOverride: assigned?.prereqOverride ?? false,
+        featChoices: assigned?.choices ?? {},
       };
     });
 
@@ -280,6 +350,7 @@ export function FeatSlotList() {
             featId: f.featId,
             featName: f.name,
             prereqOverride: f.prereqOverride ?? false,
+            featChoices: f.choices ?? {},
           });
         }
       }

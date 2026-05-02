@@ -1227,6 +1227,17 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
+    setFeatChoices(
+      state,
+      action: PayloadAction<{ slotId: string; choices: Record<string, string> }>,
+    ) {
+      const feat = state.character.feats.feats.find((f) => f.source === action.payload.slotId);
+      if (feat) {
+        feat.choices = action.payload.choices;
+        state.isDirty = true;
+      }
+    },
+
     toggleFeatPrereqOverride(state, action: PayloadAction<string>) {
       const feat = state.character.feats.feats.find(
         (f) => f.source === action.payload || f.source + '_' + f.grantedAtLevel === action.payload,
@@ -1664,6 +1675,7 @@ export const {
   removeFeatSlot,
   assignFeat,
   unassignFeat,
+  setFeatChoices,
   toggleFeatPrereqOverride,
   addSpellcastingPool,
   removeSpellcastingPool,
