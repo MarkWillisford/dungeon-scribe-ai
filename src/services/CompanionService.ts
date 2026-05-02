@@ -504,6 +504,9 @@ export function effectiveLevelFromDraftClass(cls: ClassEntry | undefined): numbe
       return Math.max(1, cls.level - 3);
     case 'Paladin':
       return Math.max(1, cls.level - 4);
+    case 'Prestige Paladin':
+      // Effective paladin level = class level + 3 (per class description).
+      return cls.level + 3;
     case 'Inquisitor':
       return archetypes.includes('Sacred Huntsmaster') ? cls.level : 0;
     case 'Barbarian':

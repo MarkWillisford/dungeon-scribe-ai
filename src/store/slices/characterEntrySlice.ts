@@ -27,6 +27,7 @@ import type {
   SelectedEvolutionMetadata,
 } from '@/types/eidolon';
 import { CharacterService } from '@/services/CharacterService';
+import { effectiveLevelFromDraftClass } from '@/services/CompanionService';
 
 // ---- Supporting types ----
 
@@ -531,6 +532,14 @@ const characterEntrySlice = createSlice({
           } else if (newLevel < oldLevel) {
             adv.perLevel.length = newLevel;
           }
+        }
+      }
+
+      // Sync effectiveProgressionLevel for companions granted by this class.
+      const classId = action.payload.id;
+      for (const companion of state.character.companions) {
+        if (companion.grantedBy.type === 'class' && companion.grantedBy.classEntryId === classId) {
+          companion.effectiveProgressionLevel = effectiveLevelFromDraftClass(cls);
         }
       }
 

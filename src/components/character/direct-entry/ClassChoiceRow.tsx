@@ -354,11 +354,10 @@ export function ClassChoiceRow({
       dispatch(removeCompanion(existingCompanion.instanceId));
     }
 
-    // animal_companion auto-opens the picker on selection.
-    // mount does not — a "Configure Special Mount" button appears in the row instead.
-    if (item.key === 'animal_companion' && !existingCompanion) {
-      setCompanionPickerOpen(true);
-    }
+    // Neither animal_companion nor mount auto-opens the picker.
+    // A "Configure" button appears below the row for both, so the user can
+    // build or revisit the companion at any level rather than being forced
+    // to do it at the moment of selection.
   };
 
   const handleCompanionSelect = (entry: AnimalCompanionEntry) => {
@@ -434,92 +433,102 @@ export function ClassChoiceRow({
         placeholder={`Search ${definition.featureName.toLowerCase()}...`}
       />
 
-      {/* Mount section — visible when 'mount' is the stored divine bond choice */}
-      {currentChoice?.selection === 'mount' && (
-        <View
-          style={[
-            mountStyles.section,
-            {
-              borderColor: isDark ? 'rgba(212,175,55,0.3)' : 'rgba(120,80,20,0.2)',
-              backgroundColor: isDark ? 'rgba(212,175,55,0.05)' : 'rgba(120,80,20,0.04)',
-            },
-          ]}
-        >
-          {existingCompanion ? (
-            // Mount already configured — show name + action buttons
-            <View style={mountStyles.mountCard}>
-              <View style={mountStyles.mountInfo}>
-                <Text style={[mountStyles.mountLabel, { color: colors.text.tertiary }]}>
-                  Special Mount
-                </Text>
-                <Text style={[mountStyles.mountName, { color: colors.text.primary }]}>
-                  {existingCompanion.name}
-                </Text>
-              </View>
-              <View style={mountStyles.mountActions}>
+      {/* Companion / mount section — visible when the choice is animal_companion or mount */}
+      {COMPANION_KEYS.has((currentChoice?.selection as string) ?? '') &&
+        (() => {
+          const isMountSelection = currentChoice?.selection === 'mount';
+          const label = isMountSelection ? 'Special Mount' : 'Animal Companion';
+          const configureBtnLabel = isMountSelection
+            ? '+ Configure Special Mount'
+            : '+ Configure Animal Companion';
+          const configureBtnSub = isMountSelection
+            ? 'Choose the mount type — revisit as you gain paladin levels'
+            : 'Choose the companion type — revisit as you gain levels';
+
+          return (
+            <View
+              style={[
+                mountStyles.section,
+                {
+                  borderColor: isDark ? 'rgba(212,175,55,0.3)' : 'rgba(120,80,20,0.2)',
+                  backgroundColor: isDark ? 'rgba(212,175,55,0.05)' : 'rgba(120,80,20,0.04)',
+                },
+              ]}
+            >
+              {existingCompanion ? (
+                <View style={mountStyles.mountCard}>
+                  <View style={mountStyles.mountInfo}>
+                    <Text style={[mountStyles.mountLabel, { color: colors.text.tertiary }]}>
+                      {label}
+                    </Text>
+                    <Text style={[mountStyles.mountName, { color: colors.text.primary }]}>
+                      {existingCompanion.name}
+                    </Text>
+                  </View>
+                  <View style={mountStyles.mountActions}>
+                    <Pressable
+                      onPress={() =>
+                        router.push(
+                          `/characters/${routeCharacterId}/companions/${existingCompanion.instanceId}`,
+                        )
+                      }
+                      style={[
+                        mountStyles.actionBtn,
+                        { borderColor: isDark ? fantasy.gold : fantasy.bronze },
+                      ]}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Edit ${label}`}
+                    >
+                      <Text
+                        style={[
+                          mountStyles.actionText,
+                          { color: isDark ? fantasy.gold : fantasy.darkWood },
+                        ]}
+                      >
+                        Edit
+                      </Text>
+                    </Pressable>
+                    <Pressable
+                      onPress={() => dispatch(removeCompanion(existingCompanion.instanceId))}
+                      style={[mountStyles.actionBtn, { borderColor: colors.text.tertiary }]}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Remove ${label}`}
+                    >
+                      <Text style={[mountStyles.actionText, { color: colors.text.tertiary }]}>
+                        Remove
+                      </Text>
+                    </Pressable>
+                  </View>
+                </View>
+              ) : (
                 <Pressable
-                  onPress={() =>
-                    router.push(
-                      `/characters/${routeCharacterId}/companions/${existingCompanion.instanceId}`,
-                    )
-                  }
+                  onPress={() => {
+                    setCompanionPickerIsMount(isMountSelection);
+                    setCompanionPickerOpen(true);
+                  }}
                   style={[
-                    mountStyles.actionBtn,
+                    mountStyles.configureBtn,
                     { borderColor: isDark ? fantasy.gold : fantasy.bronze },
                   ]}
                   accessibilityRole="button"
-                  accessibilityLabel="Edit mount"
+                  accessibilityLabel={configureBtnLabel}
                 >
                   <Text
                     style={[
-                      mountStyles.actionText,
+                      mountStyles.configureBtnText,
                       { color: isDark ? fantasy.gold : fantasy.darkWood },
                     ]}
                   >
-                    Edit
+                    {configureBtnLabel}
+                  </Text>
+                  <Text style={[mountStyles.configureBtnSub, { color: colors.text.tertiary }]}>
+                    {configureBtnSub}
                   </Text>
                 </Pressable>
-                <Pressable
-                  onPress={() => dispatch(removeCompanion(existingCompanion.instanceId))}
-                  style={[mountStyles.actionBtn, { borderColor: colors.text.tertiary }]}
-                  accessibilityRole="button"
-                  accessibilityLabel="Remove mount"
-                >
-                  <Text style={[mountStyles.actionText, { color: colors.text.tertiary }]}>
-                    Remove
-                  </Text>
-                </Pressable>
-              </View>
+              )}
             </View>
-          ) : (
-            // No mount yet — prompt to configure
-            <Pressable
-              onPress={() => {
-                setCompanionPickerIsMount(true);
-                setCompanionPickerOpen(true);
-              }}
-              style={[
-                mountStyles.configureBtn,
-                { borderColor: isDark ? fantasy.gold : fantasy.bronze },
-              ]}
-              accessibilityRole="button"
-              accessibilityLabel="Configure your special mount"
-            >
-              <Text
-                style={[
-                  mountStyles.configureBtnText,
-                  { color: isDark ? fantasy.gold : fantasy.darkWood },
-                ]}
-              >
-                + Configure Special Mount
-              </Text>
-              <Text style={[mountStyles.configureBtnSub, { color: colors.text.tertiary }]}>
-                Choose the mount type — configure bonuses as you level
-              </Text>
-            </Pressable>
-          )}
-        </View>
-      )}
+          );
+        })()}
 
       <CompanionPickerSheet
         visible={companionPickerOpen}
