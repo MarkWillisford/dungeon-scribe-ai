@@ -14,7 +14,7 @@ import {
 import type { AbilityKey } from '@/types/abilities';
 import type { AbilityScore } from '@/types/abilities';
 import type { ManualAbilityBonus } from '@/types';
-import { BonusType } from '@/types/base';
+import { BonusType, type Bonus } from '@/types/base';
 
 // ---- Helpers ----
 
@@ -187,6 +187,42 @@ function computeOtherEffective(bonuses: ManualAbilityBonus[]): number {
         : Math.max(...values);
   }
   return total;
+}
+
+// ---- Auto Pipeline Bonus Row (read-only: from templates, feats, racial traits, buffs) ----
+
+interface AutoPipelineRowProps {
+  bonuses: Bonus[];
+}
+
+function AutoPipelineRow({ bonuses }: AutoPipelineRowProps) {
+  const { colors, fantasy, isDark } = useTheme();
+  const [expanded, setExpanded] = useState(false);
+  const total = bonuses.reduce((sum, b) => sum + b.value, 0);
+
+  return (
+    <View
+      style={[
+        styles.breakdownRow,
+        { borderBottomColor: colors.border.DEFAULT, borderBottomWidth: StyleSheet.hairlineWidth },
+      ]}
+    >
+      <Text style={[styles.breakdownLabel, { color: colors.text.secondary }]}>├ Auto</Text>
+      <AutoComputedValue
+        value={total >= 0 ? `+${total}` : `${total}`}
+        style={styles.breakdownComputed}
+      />
+      <Pressable onPress={() => setExpanded((p) => !p)} style={{ flex: 1 }}>
+        <Text style={[styles.breakdownNote, { color: colors.text.tertiary }]}>
+          {expanded
+            ? bonuses
+                .map((b) => `${b.value >= 0 ? '+' : ''}${b.value} ${b.type} (${b.source})`)
+                .join(', ')
+            : `${bonuses.length} bonus${bonuses.length !== 1 ? 'es' : ''} — tap to expand`}
+        </Text>
+      </Pressable>
+    </View>
+  );
 }
 
 // ---- Other Bonus Section ----
@@ -419,6 +455,18 @@ function BreakdownPanel({ abilityKey, score, onCollapse }: BreakdownPanelProps) 
   const total = score.total;
   const mod = score.modifier;
   const enhancementBonus = score.bonuses.enhancement[0]?.value ?? 0;
+
+  // All non-enhancement pipeline contributions (templates, racial feats, buffs, etc.)
+  const autoPipelineBonuses = (
+    Object.entries(score.bonuses) as [
+      keyof typeof score.bonuses,
+      typeof score.bonuses.enhancement,
+    ][]
+  )
+    .filter(([key]) => key !== 'enhancement')
+    .flatMap(([, arr]) => arr);
+  const autoPipelineTotal = autoPipelineBonuses.reduce((sum, b) => sum + b.value, 0);
+
   const manualBonuses = useAppSelector((state) =>
     (state.characterEntry.character.manualAbilityBonuses ?? []).filter(
       (b) => b.ability === abilityKey,
@@ -479,6 +527,7 @@ function BreakdownPanel({ abilityKey, score, onCollapse }: BreakdownPanelProps) 
           value={enhancementBonus}
           readOnlyNote="from equipped gear"
         />
+        {autoPipelineTotal !== 0 && <AutoPipelineRow bonuses={autoPipelineBonuses} />}
         {/* Other — typed bonus list */}
         <View style={[styles.breakdownRow, styles.otherSection]}>
           <Text style={[styles.breakdownLabel, { color: colors.text.secondary }]}>{'└'} Other</Text>
