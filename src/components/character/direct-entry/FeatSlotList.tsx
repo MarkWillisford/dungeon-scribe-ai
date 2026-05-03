@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Modal, TextInput } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
@@ -34,6 +34,7 @@ interface FeatSlotDisplay {
   featName: string;
   prereqOverride: boolean;
   featChoices: Record<string, string>;
+  sourceLabel?: string;
 }
 
 // ---- Source badge ----
@@ -155,7 +156,9 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
         accessibilityHint="Tap to assign feat"
       >
         <SourceBadge source={slot.source} />
-        <Text style={[rowStyles.atLabel, { color: colors.text.tertiary }]}>{slot.availableAt}</Text>
+        <Text style={[rowStyles.atLabel, { color: colors.text.tertiary }]}>
+          {slot.sourceLabel || slot.availableAt}
+        </Text>
         <Text
           style={[
             rowStyles.featName,
@@ -252,6 +255,19 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
           visible
           title={`${slot.featName} — ${activeChoicePicker.label}`}
           items={dynamicChoiceItems}
+          allowCustom={activeChoicePicker.freeText}
+          onAddCustom={
+            activeChoicePicker.freeText
+              ? (name) => {
+                  const updated = { ...slot.featChoices, [activeChoicePicker.type]: name };
+                  dispatch(setFeatChoices({ slotId: slot.slotId, choices: updated }));
+                  setActiveChoicePicker(null);
+                  if (featDef?.choices) {
+                    openNextUnfilledChoice(featDef.choices, updated);
+                  }
+                }
+              : undefined
+          }
           onSelect={(item) => {
             const updated = { ...slot.featChoices, [activeChoicePicker.type]: item.key };
             dispatch(setFeatChoices({ slotId: slot.slotId, choices: updated }));
@@ -261,7 +277,11 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
             }
           }}
           onClose={() => setActiveChoicePicker(null)}
-          placeholder={`Search ${activeChoicePicker.label.toLowerCase()}...`}
+          placeholder={
+            activeChoicePicker.freeText
+              ? `Type ${activeChoicePicker.label.toLowerCase()} name...`
+              : `Search ${activeChoicePicker.label.toLowerCase()}...`
+          }
         />
       )}
     </>
@@ -332,6 +352,8 @@ export function FeatSlotList() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const character = useAppSelector((state) => state.characterEntry.character);
+  const [bonusLabelVisible, setBonusLabelVisible] = useState(false);
+  const [bonusLabelText, setBonusLabelText] = useState('');
 
   // Build the display slot list by merging computed slots with assigned feats
   const featSlots = useMemo<FeatSlotDisplay[]>(() => {
@@ -385,6 +407,7 @@ export function FeatSlotList() {
             featName: f.name,
             prereqOverride: f.prereqOverride ?? false,
             featChoices: f.choices ?? {},
+            sourceLabel: f.sourceLabel,
           });
         }
       }
@@ -442,16 +465,10 @@ export function FeatSlotList() {
       )}
 
       <Pressable
-        onPress={() =>
-          dispatch(
-            addFeatSlot({
-              id: genId(),
-              source: 'bonus',
-              availableAt: 'Bonus',
-              availableAtLevel: 0,
-            }),
-          )
-        }
+        onPress={() => {
+          setBonusLabelText('');
+          setBonusLabelVisible(true);
+        }}
         style={[styles.addButton, { borderColor: colors.border.DEFAULT }]}
         accessibilityRole="button"
         accessibilityLabel="Add bonus feat slot"
@@ -460,6 +477,94 @@ export function FeatSlotList() {
           + Add bonus slot
         </Text>
       </Pressable>
+
+      <Modal
+        visible={bonusLabelVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setBonusLabelVisible(false)}
+      >
+        <Pressable style={styles.modalOverlay} onPress={() => setBonusLabelVisible(false)}>
+          <Pressable
+            style={[
+              styles.modalCard,
+              {
+                backgroundColor: isDark ? colors.bg.secondary : colors.bg.primary,
+                borderColor: colors.border.DEFAULT,
+              },
+            ]}
+            onPress={() => {}}
+          >
+            <Text style={[styles.modalTitle, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
+              Add Bonus Feat Slot
+            </Text>
+            <Text style={[styles.modalLabel, { color: colors.text.secondary }]}>
+              Source label (optional)
+            </Text>
+            <TextInput
+              value={bonusLabelText}
+              onChangeText={setBonusLabelText}
+              placeholder="e.g. Fighter 2, Wizard 5..."
+              placeholderTextColor={colors.text.tertiary}
+              autoFocus
+              style={[
+                styles.modalInput,
+                {
+                  color: colors.text.primary,
+                  backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+                  borderColor: colors.border.DEFAULT,
+                },
+              ]}
+            />
+            <View style={styles.modalButtons}>
+              <Pressable
+                onPress={() => setBonusLabelVisible(false)}
+                style={[styles.modalBtn, { borderColor: colors.border.DEFAULT }]}
+              >
+                <Text
+                  style={{
+                    color: colors.text.tertiary,
+                    fontFamily: 'LibreBaskerville',
+                    fontSize: 14,
+                  }}
+                >
+                  Cancel
+                </Text>
+              </Pressable>
+              <Pressable
+                onPress={() => {
+                  const label = bonusLabelText.trim() || undefined;
+                  dispatch(
+                    addFeatSlot({
+                      id: genId(),
+                      source: 'bonus',
+                      availableAt: 'Bonus',
+                      availableAtLevel: 0,
+                      sourceLabel: label,
+                    }),
+                  );
+                  setBonusLabelVisible(false);
+                }}
+                style={[
+                  styles.modalBtn,
+                  { borderColor: fantasy.bronze, backgroundColor: 'rgba(140,90,40,0.1)' },
+                ]}
+              >
+                <Text
+                  style={{
+                    color: isDark ? fantasy.gold : fantasy.darkWood,
+                    fontFamily: 'LibreBaskerville',
+                    fontSize: 14,
+                    fontWeight: '700',
+                  }}
+                >
+                  Add Slot
+                </Text>
+              </Pressable>
+            </View>
+          </Pressable>
+        </Pressable>
+      </Modal>
     </View>
   );
 }
@@ -508,5 +613,48 @@ const styles = StyleSheet.create({
     fontFamily: 'LibreBaskerville',
     fontSize: 13,
     fontWeight: '600',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+  },
+  modalCard: {
+    width: '100%',
+    borderRadius: 12,
+    borderWidth: 1,
+    padding: 20,
+    gap: 12,
+  },
+  modalTitle: {
+    fontFamily: 'Cinzel',
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  modalLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+  },
+  modalInput: {
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    gap: 12,
+    marginTop: 4,
+  },
+  modalBtn: {
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 10,
+    alignItems: 'center',
   },
 });

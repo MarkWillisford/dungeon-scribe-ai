@@ -1410,6 +1410,7 @@ const characterEntrySlice = createSlice({
         source: 'racial' | 'level' | 'bonus' | 'mythic';
         availableAtLevel: number;
         availableAt: string;
+        sourceLabel?: string;
       }>,
     ) {
       // Bonus feat slots are stored as empty CharacterFeat entries (featId = '')
@@ -1422,6 +1423,7 @@ const characterEntrySlice = createSlice({
         grantedAtLevel: slot.availableAtLevel,
         active: true,
         choices: {},
+        ...(slot.sourceLabel ? { sourceLabel: slot.sourceLabel } : {}),
       });
       state.character.feats.feats.sort((a, b) => a.grantedAtLevel - b.grantedAtLevel);
       state.isDirty = true;

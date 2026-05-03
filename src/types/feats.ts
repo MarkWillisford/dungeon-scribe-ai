@@ -100,6 +100,8 @@ export interface FeatChoice {
   options?: string[];
   affectsEffects: boolean;
   effectTargetTemplate?: string;
+  /** When true, the picker has no pre-loaded options — user types a free-form value (e.g. spell name). */
+  freeText?: boolean;
 }
 
 // ---- Feat Definition (data template — stored in registry) ----
@@ -146,6 +148,9 @@ export interface CharacterFeat {
 
   // Mythic feat flag
   isMythic?: boolean;
+
+  /** Display label for manually-added bonus feat slots (e.g. "Fighter 2", "Rogue Talent"). */
+  sourceLabel?: string;
 }
 
 // ---- Container on Character ----
