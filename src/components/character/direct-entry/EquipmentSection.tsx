@@ -266,6 +266,53 @@ function IounStoneSection({ stones, onPickerOpen, onRemove }: IounStoneSectionPr
   );
 }
 
+// ---- SlotlessItemsSection ----
+
+interface SlotlessItemsSectionProps {
+  items: EditorEquipmentItem[];
+  onPickerOpen: (slot: PickerSlot) => void;
+  onRemove: (id: string) => void;
+}
+
+function SlotlessItemsSection({ items, onPickerOpen, onRemove }: SlotlessItemsSectionProps) {
+  const { colors } = useTheme();
+
+  return (
+    <View style={styles.subSection}>
+      {items.length > 0 && (
+        <>
+          <Text style={[styles.subSectionLabel, { color: colors.text.tertiary }]}>
+            Slotless Items
+          </Text>
+          {items.map((item) => (
+            <View
+              key={item.id}
+              style={[
+                styles.carriedRow,
+                { borderColor: colors.border.DEFAULT, backgroundColor: colors.bg.secondary },
+              ]}
+            >
+              <Text style={[styles.carriedName, { color: colors.text.primary }]}>{item.name}</Text>
+              <Pressable onPress={() => onRemove(item.id)} hitSlop={8}>
+                <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
+              </Pressable>
+            </View>
+          ))}
+        </>
+      )}
+      <Pressable
+        onPress={() => onPickerOpen('slotless')}
+        style={[styles.addButton, { borderColor: colors.border.DEFAULT }]}
+        accessibilityRole="button"
+      >
+        <Text style={[styles.addButtonText, { color: colors.text.tertiary }]}>
+          + Add Slotless Item
+        </Text>
+      </Pressable>
+    </View>
+  );
+}
+
 // ---- CarriedList ----
 
 function CarriedList({
@@ -310,9 +357,13 @@ export function EquipmentSection() {
   const slottedItems = equipment.filter((e) => e.slot !== undefined);
   const containers = equipment.filter((e) => e.isContainer && !e.slot);
   const iounStones = equipment.filter((e) => e.isOrbiting && !e.slot && !e.containerId);
-  const carried = equipment.filter(
+  const unslotted = equipment.filter(
     (e) => !e.slot && !e.containerId && !e.isContainer && !e.isOrbiting,
   );
+  // Slotless magic items (Pearls of Power, tomes, etc.) picked via the 'slotless' picker
+  const slotlessItems = unslotted.filter((e) => e.collection === 'magicItems');
+  // Mundane or custom-named carried items
+  const carried = unslotted.filter((e) => e.collection !== 'magicItems');
 
   const getItemForSlot = (slot: EditorEquippedSlot) => slottedItems.find((e) => e.slot === slot);
 
@@ -381,6 +432,13 @@ export function EquipmentSection() {
       {/* Ioun Stones */}
       <IounStoneSection
         stones={iounStones}
+        onPickerOpen={(slot) => setPickerSlot(slot)}
+        onRemove={(id) => dispatch(removeEquipment(id))}
+      />
+
+      {/* Slotless Items */}
+      <SlotlessItemsSection
+        items={slotlessItems}
         onPickerOpen={(slot) => setPickerSlot(slot)}
         onRemove={(id) => dispatch(removeEquipment(id))}
       />

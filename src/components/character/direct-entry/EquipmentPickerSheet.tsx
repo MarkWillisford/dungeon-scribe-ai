@@ -18,7 +18,7 @@ import type { Effect } from '@/types/base';
 
 // ---- Types ----
 
-export type PickerSlot = EditorEquippedSlot | 'orbiting' | 'none';
+export type PickerSlot = EditorEquippedSlot | 'orbiting' | 'none' | 'slotless';
 
 export interface EquipmentPickerResult {
   definitionId: string;
@@ -72,11 +72,12 @@ const SLOT_TITLES: Record<string, string> = {
   off_hand: 'Off Hand',
   orbiting: 'Ioun Stone',
   none: 'Container / Bag',
+  slotless: 'Slotless Magic Items',
 };
 
 function toFirestoreSlot(slot: PickerSlot): ItemSlot {
   if (slot === 'ring_left' || slot === 'ring_right') return 'ring';
-  if (slot === 'orbiting') return 'none';
+  if (slot === 'orbiting' || slot === 'slotless') return 'none';
   return slot as ItemSlot;
 }
 
@@ -183,8 +184,15 @@ async function loadItemsForSlot(slot: PickerSlot): Promise<PickerItem[]> {
     }
 
     case 'none': {
+      // Containers/bags: show all slotless wondrous items, marked as containers
       const items = await GameDataService.getMagicItemsBySlot('none');
       return items.filter((m) => m.category === 'wondrous').map((m) => mapMagicItem(m, true));
+    }
+
+    case 'slotless': {
+      // Slotless magic items (Pearls of Power, tomes, etc.) — excludes ioun stones
+      const items = await GameDataService.getMagicItemsBySlot('none');
+      return items.filter((m) => m.category !== 'ioun_stone').map((m) => mapMagicItem(m));
     }
 
     default: {
