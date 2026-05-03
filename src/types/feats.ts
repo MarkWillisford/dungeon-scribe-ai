@@ -36,7 +36,7 @@ export type FeatType =
 
 // ---- Feat Choice Key (shared between FeatChoice.type and choiceRequirement.key) ----
 
-export type FeatChoiceKey = 'weapon' | 'skill' | 'school' | 'ability' | 'custom';
+export type FeatChoiceKey = 'weapon' | 'skill' | 'school' | 'ability' | 'custom' | 'spell';
 
 // ---- Prerequisites (structured, machine-checkable) ----
 

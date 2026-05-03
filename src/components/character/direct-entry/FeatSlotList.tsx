@@ -15,6 +15,8 @@ import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPicker
 import { computeFeatSlots } from '@/utils/characterComputations';
 import { FeatRegistryService } from '@/services/FeatRegistryService';
 import { GameDataService } from '@/services/GameDataService';
+import { computePoolEsl } from '@/utils/spellcastingUtils';
+import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import type { FeatChoice } from '@/types/feats';
 
 type FeatSlotSource = 'racial' | 'level' | 'bonus' | 'mythic';
@@ -79,9 +81,32 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
   const { colors } = useTheme();
   const dispatch = useAppDispatch();
   const eitrMode = useAppSelector((state) => state.ruleset.activeRuleset.optionalRules.eitrMode);
+  const spellcastingPools = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.pools,
+  );
+  const knownSpells = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.knownSpells,
+  );
+  const spellbooks = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.spellbooks,
+  );
+  const characterClasses = useAppSelector(
+    (state) => state.characterEntry.character.classes.classes,
+  );
+  const classDataMap = useAppSelector(selectClassDataMap);
+
+  const eslByPoolId = useMemo(() => {
+    const map: Record<string, number> = {};
+    for (const pool of spellcastingPools) {
+      if (pool.id) map[pool.id] = computePoolEsl(pool, characterClasses, classDataMap);
+    }
+    return map;
+  }, [spellcastingPools, characterClasses, classDataMap]);
+
   const [pickerOpen, setPickerOpen] = useState(false);
   const [activeChoicePicker, setActiveChoicePicker] = useState<FeatChoice | null>(null);
   const [weaponItems, setWeaponItems] = useState<SearchItem[]>([]);
+  const [spellItems, setSpellItems] = useState<SearchItem[]>([]);
 
   const assigned = !!slot.featName;
   const featDef = assigned ? FeatRegistryService.getFeat(slot.featId) : undefined;
@@ -136,15 +161,43 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
     };
   }, [activeChoicePicker?.type, eitrMode]);
 
-  // Derive picker items — static choices resolved inline, weapon choices from async state
+  // Async-load spells when a spell-type choice picker opens
+  useEffect(() => {
+    if (activeChoicePicker?.type !== 'spell') return;
+    let cancelled = false;
+    GameDataService.buildCastableSpellItems(
+      spellcastingPools,
+      knownSpells,
+      spellbooks,
+      characterClasses,
+      eslByPoolId,
+    )
+      .then((items) => {
+        if (!cancelled) setSpellItems(items);
+      })
+      .catch((e) => console.error('Failed to load spell items for feat choice:', e));
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    activeChoicePicker?.type,
+    spellcastingPools,
+    knownSpells,
+    spellbooks,
+    characterClasses,
+    eslByPoolId,
+  ]);
+
+  // Derive picker items — static choices resolved inline, weapon/spell choices from async state
   const dynamicChoiceItems = useMemo<SearchItem[]>(() => {
     if (!activeChoicePicker) return [];
     if (activeChoicePicker.type === 'weapon') return weaponItems;
+    if (activeChoicePicker.type === 'spell') return spellItems;
     return (activeChoicePicker.options ?? []).map((opt) => ({
       key: opt,
       label: opt.charAt(0).toUpperCase() + opt.slice(1),
     }));
-  }, [activeChoicePicker, weaponItems]);
+  }, [activeChoicePicker, weaponItems, spellItems]);
 
   return (
     <>

@@ -1023,7 +1023,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       },
     ],
     activationMode: 'passive',
-    choices: [{ type: 'custom', label: 'Spell', affectsEffects: true, freeText: true }],
+    choices: [{ type: 'spell', label: 'Spell', affectsEffects: true }],
     tags: ['metamagic', 'perfection', 'capstone', 'spell mastery'],
   },
   {
@@ -1040,15 +1040,36 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       { type: 'skill', skillId: 'spellcraft', ranks: 19 },
       { type: 'special', description: 'At least five metamagic feats, Spell Perfection' },
     ],
-    effects: [],
+    effects: [
+      {
+        type: 'special' as const,
+        bonusType: BonusType.UNTYPED,
+        target: 'special.spell_perfection_free_metamagic_no_cap' as const,
+        value: 1,
+        source: 'Greater Spell Perfection',
+        condition: {
+          type: 'custom' as const,
+          params: {},
+          description: 'Chosen spell only; no 9th-level slot cap',
+        },
+      },
+      {
+        type: 'special' as const,
+        bonusType: BonusType.UNTYPED,
+        target: 'special.spell_perfection_double_bonuses' as const,
+        value: 2,
+        source: 'Greater Spell Perfection',
+        condition: {
+          type: 'custom' as const,
+          params: {},
+          description:
+            'Chosen spell only; doubles Spell Focus, Spell Penetration, Weapon Focus [ray], etc.',
+        },
+      },
+    ],
     activationMode: 'passive',
     choices: [
-      {
-        type: 'custom',
-        label: 'Spell (must have Spell Perfection for it)',
-        affectsEffects: true,
-        freeText: true,
-      },
+      { type: 'spell', label: 'Spell (must have Spell Perfection for it)', affectsEffects: true },
     ],
     tags: ['metamagic', 'perfection', 'capstone', 'spell mastery'],
   },
