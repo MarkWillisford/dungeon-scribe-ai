@@ -318,9 +318,9 @@ const mockCharacter: Character = {
     },
     initiative: { dexterity: 1, misc: 0, total: 1 },
     savingThrows: {
-      fortitude: { base: 4, ability: 3, magic: 0, resistance: 0, misc: 0, temporary: 0, total: 7 },
-      reflex: { base: 1, ability: 1, magic: 0, resistance: 0, misc: 0, temporary: 0, total: 2 },
-      will: { base: 1, ability: 2, magic: 0, resistance: 0, misc: 0, temporary: 0, total: 3 },
+      fortitude: { base: 4, ability: 3, magic: 0, misc: 0, temporary: 0, total: 7 },
+      reflex: { base: 1, ability: 1, magic: 0, misc: 0, temporary: 0, total: 2 },
+      will: { base: 1, ability: 2, magic: 0, misc: 0, temporary: 0, total: 3 },
     },
     movement: { base: 20, armor: 0, fly: 0, swim: 0, climb: 0, burrow: 0, current: 20 },
     attackBonuses: {

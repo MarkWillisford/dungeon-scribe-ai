@@ -1,14 +1,50 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setCombatField } from '@/store/slices/characterEntrySlice';
 import { AutoComputedValue } from '@/components/ui/AutoComputedValue';
+import { ModifierPipelineService } from '@/services/ModifierPipelineService';
+import { BonusType } from '@/types/base';
 
 // ---- Helpers ----
 
 function fmtSign(n: number): string {
   return n >= 0 ? `+${n}` : `${n}`;
+}
+
+const BONUS_TYPE_LABELS: Partial<Record<BonusType, string>> = {
+  [BonusType.RESISTANCE]: 'Resist',
+  [BonusType.MORALE]: 'Morale',
+  [BonusType.LUCK]: 'Luck',
+  [BonusType.SACRED]: 'Sacred',
+  [BonusType.PROFANE]: 'Profane',
+  [BonusType.INSIGHT]: 'Insight',
+  [BonusType.COMPETENCE]: 'Compet.',
+  [BonusType.CIRCUMSTANCE]: 'Circ.',
+  [BonusType.ALCHEMICAL]: 'Alchm.',
+  [BonusType.DODGE]: 'Dodge',
+};
+
+function getSaveBonusRows(
+  allSaveBreakdown: ReturnType<typeof ModifierPipelineService.getBreakdown>,
+  specificBreakdown: ReturnType<typeof ModifierPipelineService.getBreakdown>,
+): { type: BonusType; label: string; value: number }[] {
+  // Merge contributions from save.all and save-specific target, take max per type
+  const byType = new Map<BonusType, number>();
+  for (const b of [...allSaveBreakdown.bonuses, ...specificBreakdown.bonuses]) {
+    if (!b.stacked) continue;
+    if (b.type === BonusType.UNTYPED) continue; // untyped shows in the misc field
+    const existing = byType.get(b.type) ?? 0;
+    byType.set(b.type, existing + b.value);
+  }
+  return Array.from(byType.entries())
+    .filter(([, v]) => v !== 0)
+    .map(([bt, value]) => ({
+      type: bt,
+      label: BONUS_TYPE_LABELS[bt] ?? bt,
+      value,
+    }));
 }
 
 // ---- Numeric inline input ----
@@ -105,7 +141,18 @@ type CombatFieldKey =
 
 export function CombatStatsSection() {
   const dispatch = useAppDispatch();
-  const cs = useAppSelector((state) => state.characterEntry.character.combatStats);
+  const character = useAppSelector((state) => state.characterEntry.character);
+  const cs = character.combatStats;
+
+  const saveBreakdowns = useMemo(
+    () => ({
+      all: ModifierPipelineService.getBreakdown(character, 'save.all'),
+      fort: ModifierPipelineService.getBreakdown(character, 'save.fortitude'),
+      ref: ModifierPipelineService.getBreakdown(character, 'save.reflex'),
+      will: ModifierPipelineService.getBreakdown(character, 'save.will'),
+    }),
+    [character],
+  );
 
   const set = (field: CombatFieldKey, value: number | undefined) =>
     dispatch(setCombatField({ field, value }));
@@ -219,12 +266,12 @@ export function CombatStatsSection() {
             <Text style={styles.saveBreak}>
               base {fmtSign(baseFort)} + CON {fmtSign(conMod)}
             </Text>
-            {cs.savingThrows.fortitude.resistance !== 0 && (
-              <View style={styles.miscRow}>
-                <Text style={styles.miscLabel}>Resist</Text>
-                <AutoComputedValue value={fmtSign(cs.savingThrows.fortitude.resistance)} />
+            {getSaveBonusRows(saveBreakdowns.all, saveBreakdowns.fort).map((row) => (
+              <View key={row.type} style={styles.miscRow}>
+                <Text style={styles.miscLabel}>{row.label}</Text>
+                <AutoComputedValue value={fmtSign(row.value)} />
               </View>
-            )}
+            ))}
             <View style={styles.miscRow}>
               <Text style={styles.miscLabel}>Misc</Text>
               <NumInput
@@ -241,12 +288,12 @@ export function CombatStatsSection() {
             <Text style={styles.saveBreak}>
               base {fmtSign(baseRef)} + DEX {fmtSign(dexMod)}
             </Text>
-            {cs.savingThrows.reflex.resistance !== 0 && (
-              <View style={styles.miscRow}>
-                <Text style={styles.miscLabel}>Resist</Text>
-                <AutoComputedValue value={fmtSign(cs.savingThrows.reflex.resistance)} />
+            {getSaveBonusRows(saveBreakdowns.all, saveBreakdowns.ref).map((row) => (
+              <View key={row.type} style={styles.miscRow}>
+                <Text style={styles.miscLabel}>{row.label}</Text>
+                <AutoComputedValue value={fmtSign(row.value)} />
               </View>
-            )}
+            ))}
             <View style={styles.miscRow}>
               <Text style={styles.miscLabel}>Misc</Text>
               <NumInput
@@ -263,12 +310,12 @@ export function CombatStatsSection() {
             <Text style={styles.saveBreak}>
               base {fmtSign(baseWill)} + WIS {fmtSign(wisMod)}
             </Text>
-            {cs.savingThrows.will.resistance !== 0 && (
-              <View style={styles.miscRow}>
-                <Text style={styles.miscLabel}>Resist</Text>
-                <AutoComputedValue value={fmtSign(cs.savingThrows.will.resistance)} />
+            {getSaveBonusRows(saveBreakdowns.all, saveBreakdowns.will).map((row) => (
+              <View key={row.type} style={styles.miscRow}>
+                <Text style={styles.miscLabel}>{row.label}</Text>
+                <AutoComputedValue value={fmtSign(row.value)} />
               </View>
-            )}
+            ))}
             <View style={styles.miscRow}>
               <Text style={styles.miscLabel}>Misc</Text>
               <NumInput

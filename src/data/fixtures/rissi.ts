@@ -299,17 +299,9 @@ export const RISSI_FIXTURE: Character = {
     },
     initiative: { dexterity: 2, misc: 0, total: 2 },
     savingThrows: {
-      fortitude: {
-        base: 14,
-        ability: 4,
-        magic: 0,
-        resistance: 0,
-        misc: 2,
-        temporary: 0,
-        total: 20,
-      },
-      reflex: { base: 6, ability: 2, magic: 0, resistance: 0, misc: 0, temporary: 0, total: 8 },
-      will: { base: 17, ability: 9, magic: 0, resistance: 0, misc: 2, temporary: 0, total: 28 },
+      fortitude: { base: 14, ability: 4, magic: 0, misc: 2, temporary: 0, total: 20 },
+      reflex: { base: 6, ability: 2, magic: 0, misc: 0, temporary: 0, total: 8 },
+      will: { base: 17, ability: 9, magic: 0, misc: 2, temporary: 0, total: 28 },
     },
     movement: {
       base: 30,
