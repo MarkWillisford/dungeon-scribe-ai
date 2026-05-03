@@ -5,7 +5,7 @@ import {
   TextInput,
   Pressable,
   Modal,
-  FlatList,
+  SectionList,
   ActivityIndicator,
   StyleSheet,
 } from 'react-native';
@@ -44,6 +44,13 @@ interface EquipmentPickerSheetProps {
 }
 
 // ---- Helpers ----
+
+const SECTION_LABELS: Record<string, string> = {
+  weapons: 'Mundane Weapons',
+  armor: 'Mundane Armor',
+  shields: 'Mundane Shields',
+  magicItems: 'Magic Items',
+};
 
 const SLOT_TITLES: Record<string, string> = {
   head: 'Head Slot',
@@ -237,6 +244,19 @@ export function EquipmentPickerSheet({
     return allItems.filter((item) => item.name.toLowerCase().includes(q));
   }, [allItems, query]);
 
+  const sections = useMemo(() => {
+    const grouped = new Map<string, PickerItem[]>();
+    for (const item of filtered) {
+      const list = grouped.get(item.collection) ?? [];
+      list.push(item);
+      grouped.set(item.collection, list);
+    }
+    return Array.from(grouped.entries()).map(([key, data]) => ({
+      title: SECTION_LABELS[key] ?? key,
+      data,
+    }));
+  }, [filtered]);
+
   const handleClose = () => {
     setQuery('');
     onClose();
@@ -313,10 +333,29 @@ export function EquipmentPickerSheet({
             <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>Loading...</Text>
           </View>
         ) : (
-          <FlatList
-            data={filtered}
+          <SectionList
+            sections={sections}
             keyExtractor={(item) => item.definitionId}
             keyboardShouldPersistTaps="handled"
+            renderSectionHeader={({ section }) =>
+              sections.length > 1 ? (
+                <View
+                  style={[
+                    styles.sectionHeader,
+                    { backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary },
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.sectionHeaderText,
+                      { color: isDark ? fantasy.gold : fantasy.darkWood },
+                    ]}
+                  >
+                    {section.title}
+                  </Text>
+                </View>
+              ) : null
+            }
             renderItem={({ item }) => (
               <Pressable
                 onPress={() => handleSelect(item)}
@@ -445,6 +484,18 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   listContent: { flexGrow: 1 },
+  sectionHeader: {
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  sectionHeaderText: {
+    fontFamily: 'Cinzel',
+    fontSize: 11,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
   item: {
     paddingHorizontal: 16,
     paddingVertical: 10,

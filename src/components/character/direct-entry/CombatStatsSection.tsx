@@ -219,6 +219,12 @@ export function CombatStatsSection() {
             <Text style={styles.saveBreak}>
               base {fmtSign(baseFort)} + CON {fmtSign(conMod)}
             </Text>
+            {cs.savingThrows.fortitude.resistance !== 0 && (
+              <View style={styles.miscRow}>
+                <Text style={styles.miscLabel}>Resist</Text>
+                <AutoComputedValue value={fmtSign(cs.savingThrows.fortitude.resistance)} />
+              </View>
+            )}
             <View style={styles.miscRow}>
               <Text style={styles.miscLabel}>Misc</Text>
               <NumInput
@@ -235,6 +241,12 @@ export function CombatStatsSection() {
             <Text style={styles.saveBreak}>
               base {fmtSign(baseRef)} + DEX {fmtSign(dexMod)}
             </Text>
+            {cs.savingThrows.reflex.resistance !== 0 && (
+              <View style={styles.miscRow}>
+                <Text style={styles.miscLabel}>Resist</Text>
+                <AutoComputedValue value={fmtSign(cs.savingThrows.reflex.resistance)} />
+              </View>
+            )}
             <View style={styles.miscRow}>
               <Text style={styles.miscLabel}>Misc</Text>
               <NumInput
@@ -251,6 +263,12 @@ export function CombatStatsSection() {
             <Text style={styles.saveBreak}>
               base {fmtSign(baseWill)} + WIS {fmtSign(wisMod)}
             </Text>
+            {cs.savingThrows.will.resistance !== 0 && (
+              <View style={styles.miscRow}>
+                <Text style={styles.miscLabel}>Resist</Text>
+                <AutoComputedValue value={fmtSign(cs.savingThrows.will.resistance)} />
+              </View>
+            )}
             <View style={styles.miscRow}>
               <Text style={styles.miscLabel}>Misc</Text>
               <NumInput

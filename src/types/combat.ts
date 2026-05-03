@@ -136,6 +136,7 @@ export interface SavingThrow {
   base: number;
   ability: number;
   magic: number;
+  resistance: number;
   misc: number;
   temporary: number;
   total: number;

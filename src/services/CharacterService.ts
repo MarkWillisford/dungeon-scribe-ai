@@ -573,9 +573,17 @@ export class CharacterService {
       },
       initiative: { dexterity: 0, misc: 0, total: 0 },
       savingThrows: {
-        fortitude: { base: 0, ability: 0, magic: 0, misc: 0, temporary: 0, total: 0 },
-        reflex: { base: 0, ability: 0, magic: 0, misc: 0, temporary: 0, total: 0 },
-        will: { base: 0, ability: 0, magic: 0, misc: 0, temporary: 0, total: 0 },
+        fortitude: {
+          base: 0,
+          ability: 0,
+          magic: 0,
+          resistance: 0,
+          misc: 0,
+          temporary: 0,
+          total: 0,
+        },
+        reflex: { base: 0, ability: 0, magic: 0, resistance: 0, misc: 0, temporary: 0, total: 0 },
+        will: { base: 0, ability: 0, magic: 0, resistance: 0, misc: 0, temporary: 0, total: 0 },
       },
       movement: {
         base: 30,

@@ -423,6 +423,19 @@ export class ModifierPipelineService {
     return stacked.get(target)?.total ?? 0;
   }
 
+  private static getByType(
+    stacked: Map<string, StackedResult>,
+    target: string,
+    bonusType: BonusType,
+  ): number {
+    return (
+      stacked
+        .get(target)
+        ?.contributions.filter((c) => c.bonusType === bonusType)
+        .reduce((sum, c) => sum + c.value, 0) ?? 0
+    );
+  }
+
   private static applyAbilityScores(c: Character, stacked: Map<string, StackedResult>): void {
     const abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha'] as const;
     for (const ab of abilities) {
@@ -453,39 +466,53 @@ export class ModifierPipelineService {
   private static applySavingThrows(c: Character, stacked: Map<string, StackedResult>): void {
     const saves = c.combatStats.savingThrows;
     const allSaveBonus = this.get(stacked, 'save.all');
+    const allSaveResist = this.getByType(stacked, 'save.all', BonusType.RESISTANCE);
+    const allSaveMisc = allSaveBonus - allSaveResist;
 
     // Calculate base saves from class progressions
     c.classes.baseFortSave = this.calculateBaseSave(c, 'fort');
     c.classes.baseRefSave = this.calculateBaseSave(c, 'ref');
     c.classes.baseWillSave = this.calculateBaseSave(c, 'will');
 
+    const fortBonus = this.get(stacked, 'save.fortitude');
+    const fortResist = this.getByType(stacked, 'save.fortitude', BonusType.RESISTANCE);
     saves.fortitude.base = c.classes.baseFortSave;
     saves.fortitude.ability = c.abilityScores.con.tempModifier;
-    saves.fortitude.misc = this.get(stacked, 'save.fortitude') + allSaveBonus;
+    saves.fortitude.resistance = fortResist + allSaveResist;
+    saves.fortitude.misc = fortBonus - fortResist + allSaveMisc;
     saves.fortitude.total =
       saves.fortitude.base +
       saves.fortitude.ability +
       saves.fortitude.magic +
+      saves.fortitude.resistance +
       saves.fortitude.misc +
       saves.fortitude.temporary;
 
+    const refBonus = this.get(stacked, 'save.reflex');
+    const refResist = this.getByType(stacked, 'save.reflex', BonusType.RESISTANCE);
     saves.reflex.base = c.classes.baseRefSave;
     saves.reflex.ability = c.abilityScores.dex.tempModifier;
-    saves.reflex.misc = this.get(stacked, 'save.reflex') + allSaveBonus;
+    saves.reflex.resistance = refResist + allSaveResist;
+    saves.reflex.misc = refBonus - refResist + allSaveMisc;
     saves.reflex.total =
       saves.reflex.base +
       saves.reflex.ability +
       saves.reflex.magic +
+      saves.reflex.resistance +
       saves.reflex.misc +
       saves.reflex.temporary;
 
+    const willBonus = this.get(stacked, 'save.will');
+    const willResist = this.getByType(stacked, 'save.will', BonusType.RESISTANCE);
     saves.will.base = c.classes.baseWillSave;
     saves.will.ability = c.abilityScores.wis.tempModifier;
-    saves.will.misc = this.get(stacked, 'save.will') + allSaveBonus;
+    saves.will.resistance = willResist + allSaveResist;
+    saves.will.misc = willBonus - willResist + allSaveMisc;
     saves.will.total =
       saves.will.base +
       saves.will.ability +
       saves.will.magic +
+      saves.will.resistance +
       saves.will.misc +
       saves.will.temporary;
   }
