@@ -26,7 +26,7 @@ import { sleep, chunkArray } from './seedUtils';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
-const COLLECTION = 'animalcompanions';
+const COLLECTION = 'animalCompanions';
 const BATCH_SIZE = 500; // Firestore max writes per batch
 
 // --- Init ---

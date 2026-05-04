@@ -120,7 +120,7 @@ export const prestigePaladinDefinitions: ClassChoiceDefinition[] = [
     featureName: 'Divine Bond',
     description:
       'At 2nd level, the Prestige Paladin forms a divine bond. She may bond with her weapon or with a mount. Effective paladin level is 3 higher than actual class level for this ability.',
-    selectionMode: { type: 'single_at_creation' },
+    selectionMode: { type: 'at_class_levels', levels: [2] },
     optionSource: 'inline',
     optionGroups: [
       {
