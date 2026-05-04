@@ -394,3 +394,68 @@ describe('loadItemsForSlot', () => {
     expect(mockGetMagicItemsBySlot).toHaveBeenCalledWith('ring');
   });
 });
+
+// ---- EquipmentPickerSheet component (loading state) ----
+// useEffect is a no-op in testUtils, so the component always renders in loading
+// state (loadedSlot=null ≠ slot). We exercise the component function body,
+// filtered/sections memos, and handleClose.
+
+import React from 'react';
+import { render, fireEvent } from '../../helpers/testUtils';
+import { EquipmentPickerSheet } from '@/components/character/direct-entry/EquipmentPickerSheet';
+
+describe('EquipmentPickerSheet component (loading state)', () => {
+  const onSelect = jest.fn();
+  const onAddCustom = jest.fn();
+  const onClose = jest.fn();
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockGetMagicItemsBySlot.mockResolvedValue([]);
+  });
+
+  it('renders loading spinner when visible=true (useEffect no-op means data never loads)', () => {
+    const { getAllText } = render(
+      <EquipmentPickerSheet
+        visible
+        slot="neck"
+        onSelect={onSelect}
+        onAddCustom={onAddCustom}
+        onClose={onClose}
+      />,
+    );
+    expect(getAllText().some((t) => t.includes('Loading'))).toBe(true);
+  });
+
+  it('calls onClose when the ✕ button is pressed', () => {
+    const rendered = render(
+      <EquipmentPickerSheet
+        visible
+        slot="head"
+        onSelect={onSelect}
+        onAddCustom={onAddCustom}
+        onClose={onClose}
+      />,
+    );
+    const closeBtn = rendered.getByTestId('picker-close-btn');
+    fireEvent.press(closeBtn);
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('enters non-loading state when visible=false (covers loading=false branch)', () => {
+    // When visible=false, loading=false so SectionList renders instead of the spinner.
+    // In testUtils, Modal is never called as a child when it wraps the component return,
+    // so children are always rendered; we verify the SectionList path (no "Loading..." text).
+    const { getAllText } = render(
+      <EquipmentPickerSheet
+        visible={false}
+        slot="belt"
+        onSelect={onSelect}
+        onAddCustom={onAddCustom}
+        onClose={onClose}
+      />,
+    );
+    expect(getAllText().some((t) => t.includes('Loading'))).toBe(false);
+    expect(getAllText().some((t) => t.includes('Belt Slot'))).toBe(true);
+  });
+});

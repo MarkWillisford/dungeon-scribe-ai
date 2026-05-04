@@ -46,14 +46,15 @@ jest.mock('react-native', () => {
         data,
         renderItem,
         ListEmptyComponent,
-        keyExtractor: _k,
+        keyExtractor,
         contentContainerStyle: _cs,
         ...rest
       } = props;
       const items =
         data && data.length > 0
-          ? data.map((item: any, index: number) =>
-              renderItem
+          ? data.map((item: any, index: number) => {
+              if (keyExtractor) keyExtractor(item, index);
+              return renderItem
                 ? renderItem({
                     item,
                     index,
@@ -63,8 +64,8 @@ jest.mock('react-native', () => {
                       updateProps: () => {},
                     },
                   })
-                : null,
-            )
+                : null;
+            })
           : ListEmptyComponent
             ? [ListEmptyComponent]
             : [];
@@ -72,12 +73,13 @@ jest.mock('react-native', () => {
     },
     SectionList: (props: any) => {
       const React = require('react');
-      const { sections, renderItem, renderSectionHeader, keyExtractor: _k, ...rest } = props;
+      const { sections, renderItem, renderSectionHeader, keyExtractor, ...rest } = props;
       const items: any[] = [];
       if (sections) {
         sections.forEach((section: any, si: number) => {
           if (renderSectionHeader) items.push(renderSectionHeader({ section, index: si }));
           (section.data || []).forEach((item: any, ii: number) => {
+            if (keyExtractor) keyExtractor(item, ii);
             if (renderItem)
               items.push(
                 renderItem({

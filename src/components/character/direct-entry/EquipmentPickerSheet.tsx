@@ -309,7 +309,12 @@ export function EquipmentPickerSheet({
           <Text style={[styles.title, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
             {title}
           </Text>
-          <Pressable onPress={handleClose} style={styles.closeBtn} hitSlop={12}>
+          <Pressable
+            onPress={handleClose}
+            style={styles.closeBtn}
+            hitSlop={12}
+            testID="picker-close-btn"
+          >
             <Text style={[styles.closeText, { color: colors.text.tertiary }]}>✕</Text>
           </Pressable>
         </View>
