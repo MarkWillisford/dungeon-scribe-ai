@@ -372,6 +372,7 @@ export function EquipmentPickerSheet({
             }
             renderItem={({ item }) => (
               <Pressable
+                testID={`picker-item-${item.definitionId}`}
                 onPress={() => handleSelect(item)}
                 style={({ pressed }) => [
                   styles.item,

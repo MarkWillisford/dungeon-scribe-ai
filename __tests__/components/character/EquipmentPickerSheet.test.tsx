@@ -401,7 +401,7 @@ describe('loadItemsForSlot', () => {
 // filtered/sections memos, and handleClose.
 
 import React from 'react';
-import { render, fireEvent } from '../../helpers/testUtils';
+import { render, fireEvent, setHookStateAt } from '../../helpers/testUtils';
 import { EquipmentPickerSheet } from '@/components/character/direct-entry/EquipmentPickerSheet';
 
 describe('EquipmentPickerSheet component (loading state)', () => {
@@ -495,5 +495,137 @@ describe('EquipmentPickerSheet component (loading state)', () => {
     expect(addBtn).toBeTruthy();
     fireEvent.press(addBtn!);
     expect(onAddCustom).toHaveBeenCalledWith('Sword of Truth');
+  });
+});
+
+// ---- EquipmentPickerSheet renderItem branches (state injection) ----
+// useEffect is a no-op so allItems stays [] and loadedSlot stays null by default.
+// We use setHookStateAt to inject allItems (slot 1) and loadedSlot (slot 2) directly
+// after the initial render so rerender() sees them and the SectionList receives real data.
+// Hook slot order in EquipmentPickerSheet: 0=query, 1=allItems, 2=loadedSlot
+// (useEffect is no-op and does NOT consume a slot).
+
+describe('EquipmentPickerSheet renderItem / renderSectionHeader branches', () => {
+  const onSelect = jest.fn();
+  const onAddCustom = jest.fn();
+  const onClose = jest.fn();
+
+  function findNode(
+    node: import('../../helpers/testUtils').RenderedNode,
+    testID: string,
+  ): import('../../helpers/testUtils').RenderedNode | null {
+    if (node.props.testID === testID) return node;
+    for (const c of node.children) {
+      if (typeof c !== 'string') {
+        const f = findNode(c, testID);
+        if (f) return f;
+      }
+    }
+    return null;
+  }
+
+  beforeEach(() => jest.clearAllMocks());
+
+  it('covers renderItem true branches: price, description, source, allowsHandUse', () => {
+    // Item with all optional fields populated → covers all "truthy" branches in renderItem
+    const fullItem = {
+      definitionId: 'w-full',
+      name: 'Longsword',
+      collection: 'weapons',
+      price: 15,
+      description: 'A standard sword.',
+      source: 'Core',
+      allowsHandUse: true,
+    };
+    const rendered = render(
+      <EquipmentPickerSheet
+        visible
+        slot="neck"
+        onSelect={onSelect}
+        onAddCustom={onAddCustom}
+        onClose={onClose}
+      />,
+    );
+    setHookStateAt(1, [fullItem]);
+    setHookStateAt(2, 'neck'); // loadedSlot = slot → loading = false
+    const withItems =
+      rendered.rerender() as unknown as import('../../helpers/testUtils').RenderedNode;
+    expect(findNode(withItems, 'picker-item-w-full')).toBeTruthy();
+  });
+
+  it('covers renderItem false branches: no price, no description, no source, no allowsHandUse', () => {
+    const nakedItem = {
+      definitionId: 'm-naked',
+      name: 'Mystery Item',
+      collection: 'magicItems',
+      price: undefined,
+      description: undefined,
+      source: undefined,
+      allowsHandUse: undefined,
+    };
+    const rendered = render(
+      <EquipmentPickerSheet
+        visible
+        slot="neck"
+        onSelect={onSelect}
+        onAddCustom={onAddCustom}
+        onClose={onClose}
+      />,
+    );
+    setHookStateAt(1, [nakedItem]);
+    setHookStateAt(2, 'neck');
+    const withItems =
+      rendered.rerender() as unknown as import('../../helpers/testUtils').RenderedNode;
+    expect(findNode(withItems, 'picker-item-m-naked')).toBeTruthy();
+  });
+
+  it('covers renderSectionHeader true branch: more than one section', () => {
+    // Two items from different collections → sections.length > 1 → header View renders
+    const weaponItem = { definitionId: 'w1', name: 'Dagger', collection: 'weapons' };
+    const magicItem = { definitionId: 'm1', name: 'Ring of Protection', collection: 'magicItems' };
+    const rendered = render(
+      <EquipmentPickerSheet
+        visible
+        slot="neck"
+        onSelect={onSelect}
+        onAddCustom={onAddCustom}
+        onClose={onClose}
+      />,
+    );
+    setHookStateAt(1, [weaponItem, magicItem]);
+    setHookStateAt(2, 'neck');
+    const withItems =
+      rendered.rerender() as unknown as import('../../helpers/testUtils').RenderedNode;
+    // Both items should render
+    expect(findNode(withItems, 'picker-item-w1')).toBeTruthy();
+    expect(findNode(withItems, 'picker-item-m1')).toBeTruthy();
+  });
+
+  it('covers handleSelect: pressing an item calls onSelect', () => {
+    const item = {
+      definitionId: 'sel-1',
+      name: 'Cloak of Resistance +1',
+      collection: 'magicItems',
+      effects: [],
+    };
+    const rendered = render(
+      <EquipmentPickerSheet
+        visible
+        slot="neck"
+        onSelect={onSelect}
+        onAddCustom={onAddCustom}
+        onClose={onClose}
+      />,
+    );
+    setHookStateAt(1, [item]);
+    setHookStateAt(2, 'neck');
+    const withItems =
+      rendered.rerender() as unknown as import('../../helpers/testUtils').RenderedNode;
+    const itemBtn = findNode(withItems, 'picker-item-sel-1');
+    expect(itemBtn).toBeTruthy();
+    fireEvent.press(itemBtn!);
+    expect(onSelect).toHaveBeenCalledWith(
+      expect.objectContaining({ definitionId: 'sel-1', name: 'Cloak of Resistance +1' }),
+    );
   });
 });

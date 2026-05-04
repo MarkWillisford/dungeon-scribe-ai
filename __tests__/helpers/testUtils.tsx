@@ -221,6 +221,15 @@ function getAllText(node: RenderedNode): string[] {
   return texts;
 }
 
+/**
+ * Directly set a hook state slot by index between render() and rerender().
+ * Use with care: slot indices must match the component's exact useState call order.
+ * Slot 0 = first useState, slot 1 = second useState, etc. (useEffect is a no-op and does NOT consume a slot).
+ */
+export function setHookStateAt(idx: number, value: any): void {
+  hooksState[idx] = value;
+}
+
 export function render(element: React.ReactElement) {
   const tree = renderToTree(element);
 
