@@ -14,10 +14,17 @@ const DRY_RUN = process.argv.includes('--dry-run');
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? 'dungeon-scribe-ai-stagin-b4fb5';
 
 if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
-    projectId: PROJECT_ID,
-  });
+  const credential = process.env.GOOGLE_APPLICATION_CREDENTIALS
+    ? admin.credential.applicationDefault()
+    : (() => {
+        console.error(
+          'ERROR: GOOGLE_APPLICATION_CREDENTIALS env var not set.\n' +
+            'Download a service account key from Firebase Console and set:\n' +
+            '  export GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json',
+        );
+        process.exit(1);
+      })();
+  admin.initializeApp({ credential, projectId: PROJECT_ID });
 }
 
 const db = admin.firestore();
