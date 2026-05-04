@@ -145,6 +145,7 @@ function SlotCellView({ cell, equippedItem, onPickerOpen, onUnassign, onEdit }: 
       ) : (
         <Pressable
           onPress={() => onEdit(equippedItem)}
+          testID={`slot-item-${cell.slot}`}
           style={[
             styles.slotFilledButton,
             {
@@ -180,6 +181,7 @@ function SlotCellView({ cell, equippedItem, onPickerOpen, onUnassign, onEdit }: 
           )}
           <Pressable
             onPress={() => onUnassign(equippedItem.id)}
+            testID={`unassign-${cell.slot}`}
             hitSlop={8}
             style={styles.removeBtn}
           >
@@ -238,14 +240,22 @@ function ContainerList({
                   },
                 ]}
               >
-                <Pressable onPress={() => toggle(bag.id)} style={styles.containerHeader}>
+                <Pressable
+                  onPress={() => toggle(bag.id)}
+                  style={styles.containerHeader}
+                  testID={`container-toggle-${bag.id}`}
+                >
                   <Text style={[styles.containerName, { color: colors.text.primary }]}>
                     {bag.name}
                   </Text>
                   <Text style={[styles.containerCount, { color: colors.text.tertiary }]}>
                     {contents.length} item{contents.length !== 1 ? 's' : ''} {isOpen ? '▲' : '▼'}
                   </Text>
-                  <Pressable onPress={() => onRemove(bag.id)} hitSlop={8}>
+                  <Pressable
+                    onPress={() => onRemove(bag.id)}
+                    hitSlop={8}
+                    testID={`container-remove-${bag.id}`}
+                  >
                     <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
                   </Pressable>
                 </Pressable>
@@ -318,6 +328,7 @@ function IounStoneSection({ stones, onPickerOpen, onRemove, onEdit }: IounStoneS
               <Pressable
                 key={stone.id}
                 onPress={() => onEdit(stone)}
+                testID={`ioun-stone-${stone.id}`}
                 style={[
                   styles.iounRow,
                   { borderColor: colors.border.DEFAULT, backgroundColor: colors.bg.secondary },
@@ -339,7 +350,11 @@ function IounStoneSection({ stones, onPickerOpen, onRemove, onEdit }: IounStoneS
                     </Text>
                   )}
                 </View>
-                <Pressable onPress={() => onRemove(stone.id)} hitSlop={8}>
+                <Pressable
+                  onPress={() => onRemove(stone.id)}
+                  hitSlop={8}
+                  testID={`ioun-remove-${stone.id}`}
+                >
                   <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
                 </Pressable>
               </Pressable>
@@ -390,6 +405,7 @@ function SlotlessItemsSection({
               <Pressable
                 key={item.id}
                 onPress={() => onEdit(item)}
+                testID={`slotless-item-${item.id}`}
                 style={[
                   styles.carriedRow,
                   { borderColor: colors.border.DEFAULT, backgroundColor: colors.bg.secondary },
@@ -411,7 +427,11 @@ function SlotlessItemsSection({
                     </Text>
                   )}
                 </View>
-                <Pressable onPress={() => onRemove(item.id)} hitSlop={8}>
+                <Pressable
+                  onPress={() => onRemove(item.id)}
+                  hitSlop={8}
+                  testID={`slotless-remove-${item.id}`}
+                >
                   <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
                 </Pressable>
               </Pressable>
@@ -454,13 +474,18 @@ function CarriedList({
         <Pressable
           key={item.id}
           onPress={() => onEdit(item)}
+          testID={`carried-item-${item.id}`}
           style={[
             styles.carriedRow,
             { borderColor: colors.border.DEFAULT, backgroundColor: colors.bg.secondary },
           ]}
         >
           <Text style={[styles.carriedName, { color: colors.text.primary }]}>{item.name}</Text>
-          <Pressable onPress={() => onRemove(item.id)} hitSlop={8}>
+          <Pressable
+            onPress={() => onRemove(item.id)}
+            hitSlop={8}
+            testID={`carried-remove-${item.id}`}
+          >
             <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
           </Pressable>
         </Pressable>

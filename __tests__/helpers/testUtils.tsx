@@ -19,7 +19,7 @@ export interface RenderedNode {
 let hooksState: any[] = [];
 let hookIndex = 0;
 
-function createMinimalDispatcher() {
+function createMinimalDispatcher(keepState = false) {
   return {
     useState(initialState: any) {
       const idx = hookIndex++;
@@ -54,6 +54,9 @@ function createMinimalDispatcher() {
       const idx = hookIndex++;
       if (idx >= hooksState.length) {
         hooksState.push(factory());
+      } else if (keepState) {
+        // Re-run factory on rerender so state-driven memos (like search filters) update.
+        hooksState[idx] = factory();
       }
       return hooksState[idx];
     },
@@ -119,7 +122,7 @@ function withHooks<T>(fn: () => T, keepState = false): T {
     if (!keepState) hooksState = [];
     hookIndex = 0;
     if (ReactInternals) {
-      ReactInternals.H = createMinimalDispatcher();
+      ReactInternals.H = createMinimalDispatcher(keepState);
     }
     return fn();
   } finally {

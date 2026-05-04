@@ -40,7 +40,36 @@ jest.mock('react-native', () => {
     },
     TouchableOpacity: mockComponent('TouchableOpacity'),
     ScrollView: mockComponent('ScrollView'),
-    FlatList: mockComponent('FlatList'),
+    FlatList: (props: any) => {
+      const React = require('react');
+      const {
+        data,
+        renderItem,
+        ListEmptyComponent,
+        keyExtractor: _k,
+        contentContainerStyle: _cs,
+        ...rest
+      } = props;
+      const items =
+        data && data.length > 0
+          ? data.map((item: any, index: number) =>
+              renderItem
+                ? renderItem({
+                    item,
+                    index,
+                    separators: {
+                      highlight: () => {},
+                      unhighlight: () => {},
+                      updateProps: () => {},
+                    },
+                  })
+                : null,
+            )
+          : ListEmptyComponent
+            ? [ListEmptyComponent]
+            : [];
+      return React.createElement('FlatList', rest, items);
+    },
     SectionList: (props: any) => {
       const React = require('react');
       const { sections, renderItem, renderSectionHeader, keyExtractor: _k, ...rest } = props;

@@ -302,6 +302,7 @@ export function ItemEffectEditorSheet({
                     return (
                       <Pressable
                         key={chip.value}
+                        testID={`bonus-chip-${chip.value}`}
                         onPress={() => setPendingBonusType(chip.value)}
                         style={[
                           styles.chip,

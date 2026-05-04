@@ -288,6 +288,7 @@ export function EffectTargetPickerSheet({
       {/* Search */}
       <View style={[styles.searchRow, { borderBottomColor: colors.border.DEFAULT }]}>
         <TextInput
+          testID="search-input"
           value={query}
           onChangeText={setQuery}
           placeholder="Search targets..."
