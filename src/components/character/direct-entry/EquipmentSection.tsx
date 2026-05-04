@@ -24,7 +24,7 @@ function genId(): string {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
 }
 
-function formatEffectSummary(effects: Effect[] | undefined): string {
+export function formatEffectSummary(effects: Effect[] | undefined): string {
   if (!effects?.length) return '';
   const bonusEffects = effects.filter((e) => e.type !== 'special');
   const bonusPart = bonusEffects
@@ -43,7 +43,7 @@ function formatEffectSummary(effects: Effect[] | undefined): string {
   return bonusPart;
 }
 
-function formatSpecialSummary(effects: Effect[] | undefined): string {
+export function formatSpecialSummary(effects: Effect[] | undefined): string {
   if (!effects?.length) return '';
   const specials = effects.filter((e) => e.type === 'special');
   if (!specials.length) return '';

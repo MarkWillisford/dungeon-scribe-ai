@@ -247,6 +247,7 @@ export function EffectTargetPickerSheet({
 
   const renderItem = ({ item }: { item: EffectTargetOption }) => (
     <Pressable
+      testID={`target-item-${item.target}`}
       onPress={() => onSelect(item)}
       style={({ pressed }) => [
         styles.item,

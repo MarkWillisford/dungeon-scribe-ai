@@ -333,6 +333,7 @@ export function ItemEffectEditorSheet({
             {/* Value row */}
             <Text style={[styles.formLabel, { color: colors.text.secondary }]}>Value</Text>
             <TextInput
+              testID="pending-value-input"
               value={pendingValue}
               onChangeText={setPendingValue}
               keyboardType="numbers-and-punctuation"
@@ -352,6 +353,7 @@ export function ItemEffectEditorSheet({
             {/* Confirm / Cancel */}
             <View style={styles.formButtons}>
               <Pressable
+                testID="cancel-effect-btn"
                 onPress={() => {
                   setAddingEffect(false);
                   setPendingTarget(null);
@@ -363,6 +365,7 @@ export function ItemEffectEditorSheet({
                 <Text style={[styles.formBtnText, { color: colors.text.secondary }]}>Cancel</Text>
               </Pressable>
               <Pressable
+                testID="confirm-effect-btn"
                 onPress={handleConfirmEffect}
                 disabled={!pendingTarget || !pendingValue}
                 style={[

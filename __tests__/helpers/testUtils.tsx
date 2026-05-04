@@ -177,7 +177,9 @@ function renderToTree(element: React.ReactElement, keepState = false): RenderedN
       if (typeof child === 'string' || typeof child === 'number') {
         children.push(String(child));
       } else if (React.isValidElement(child)) {
-        children.push(renderToTree(child, keepState));
+        // Children always get fresh state (keepState=false). Parent state is
+        // preserved by the thisComponentState save/restore above.
+        children.push(renderToTree(child, false));
         hooksState = thisComponentState;
       }
     }

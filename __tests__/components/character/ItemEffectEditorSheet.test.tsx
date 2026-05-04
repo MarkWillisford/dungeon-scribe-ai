@@ -6,6 +6,10 @@ import {
   EffectTargetPickerSheet,
 } from '@/components/character/direct-entry/EffectTargetPickerSheet';
 import { ItemEffectEditorSheet } from '@/components/character/direct-entry/ItemEffectEditorSheet';
+import {
+  formatEffectSummary,
+  formatSpecialSummary,
+} from '@/components/character/direct-entry/EquipmentSection';
 import { CharacterService } from '@/services/CharacterService';
 import type { EditorEquipmentItem } from '@/types/character';
 import type { Character } from '@/types';
@@ -478,5 +482,223 @@ describe('ItemEffectEditorSheet', () => {
       />,
     );
     expect(queryByText('Cloak of Resistance +1')).toBeTruthy();
+  });
+
+  it('cancels the add-effect form when Cancel is pressed', () => {
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    fireEvent.press(rendered.getByTestId('add-effect-btn'));
+    const withForm = rendered.rerender();
+    const cancelBtn = findTestId(withForm, 'cancel-effect-btn');
+    expect(cancelBtn).toBeTruthy();
+    fireEvent.press(cancelBtn!);
+    const updated = rendered.rerender();
+    const texts = getAllText(updated);
+    expect(texts.some((t) => t.includes('No effects'))).toBe(true);
+  });
+
+  it('back button in target picker returns to main form', () => {
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    fireEvent.press(rendered.getByTestId('add-effect-btn'));
+    const withForm = rendered.rerender();
+    const chooseBtn = findTestId(withForm, 'choose-target-btn');
+    fireEvent.press(chooseBtn!);
+    const withPicker = rendered.rerender();
+    const backBtn = findTestId(withPicker, 'back-btn');
+    expect(backBtn).toBeTruthy();
+    fireEvent.press(backBtn!);
+    const updated = rendered.rerender();
+    const texts = getAllText(updated);
+    expect(texts.some((t) => t === 'Target')).toBe(true);
+  });
+
+  it('adds a bonus effect end-to-end (standard target)', () => {
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    // Open add form
+    fireEvent.press(rendered.getByTestId('add-effect-btn'));
+    const withForm = rendered.rerender();
+    // Navigate to target picker
+    const chooseBtn = findTestId(withForm, 'choose-target-btn');
+    fireEvent.press(chooseBtn!);
+    const withPicker = rendered.rerender();
+    // Select 'save.all' (All Saves) from the SectionList-rendered items
+    const targetBtn = findTestId(withPicker, 'target-item-save.all');
+    expect(targetBtn).toBeTruthy();
+    fireEvent.press(targetBtn!);
+    // Back in the form with target selected; set value
+    const withTarget = rendered.rerender();
+    const valueInput = findTestId(withTarget, 'pending-value-input');
+    expect(valueInput).toBeTruthy();
+    fireEvent.changeText(valueInput!, '2');
+    // Confirm — re-render with value set so confirm is enabled
+    const withValue = rendered.rerender();
+    const confirmBtn = findTestId(withValue, 'confirm-effect-btn');
+    expect(confirmBtn).toBeTruthy();
+    fireEvent.press(confirmBtn!);
+    // Effect should appear in list
+    const final = rendered.rerender();
+    const texts = getAllText(final);
+    expect(
+      texts.some((t) => t.includes('+2') || t.includes('resistance') || t.includes('save')),
+    ).toBe(true);
+  });
+
+  it('adds a special effect end-to-end (channel_dc)', () => {
+    const clericCharacter = makeCharacter(['Channel Energy']);
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={clericCharacter}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    fireEvent.press(rendered.getByTestId('add-effect-btn'));
+    const withForm = rendered.rerender();
+    const chooseBtn = findTestId(withForm, 'choose-target-btn');
+    fireEvent.press(chooseBtn!);
+    const withPicker = rendered.rerender();
+    const targetBtn = findTestId(withPicker, 'target-item-special.channel_dc');
+    expect(targetBtn).toBeTruthy();
+    fireEvent.press(targetBtn!);
+    const withTarget = rendered.rerender();
+    const valueInput = findTestId(withTarget, 'pending-value-input');
+    fireEvent.changeText(valueInput!, '2');
+    const withValue = rendered.rerender();
+    const confirmBtn = findTestId(withValue, 'confirm-effect-btn');
+    fireEvent.press(confirmBtn!);
+    const final = rendered.rerender();
+    const texts = getAllText(final);
+    expect(texts.some((t) => t.includes('Special') || t.includes('channel'))).toBe(true);
+  });
+});
+
+// ---- formatEffectSummary tests ----
+
+describe('formatEffectSummary', () => {
+  it('returns empty string for undefined effects', () => {
+    expect(formatEffectSummary(undefined)).toBe('');
+  });
+
+  it('returns empty string for empty effects array', () => {
+    expect(formatEffectSummary([])).toBe('');
+  });
+
+  it('returns empty string when all effects are special type', () => {
+    expect(
+      formatEffectSummary([
+        { type: 'special', target: 'special.channel_dc', value: 2, source: 'x' },
+      ]),
+    ).toBe('');
+  });
+
+  it('formats a positive bonus effect', () => {
+    const result = formatEffectSummary([
+      { type: 'bonus', target: 'save.all', value: 2, bonusType: BonusType.RESISTANCE, source: 'x' },
+    ]);
+    expect(result).toContain('+2');
+    expect(result).toContain('resistance');
+  });
+
+  it('formats a negative bonus effect', () => {
+    const result = formatEffectSummary([
+      {
+        type: 'bonus',
+        target: 'ability.str',
+        value: -2,
+        bonusType: BonusType.ENHANCEMENT,
+        source: 'x',
+      },
+    ]);
+    expect(result).toContain('-2');
+  });
+
+  it('uses "untyped" when bonusType is missing', () => {
+    const result = formatEffectSummary([
+      { type: 'bonus', target: 'hp', value: 5, source: 'x' } as never,
+    ]);
+    expect(result).toContain('untyped');
+  });
+
+  it('caps display at 3 bonus effects', () => {
+    const effects = Array.from({ length: 5 }, (_, i) => ({
+      type: 'bonus' as const,
+      target: 'hp' as never,
+      value: i + 1,
+      bonusType: BonusType.UNTYPED,
+      source: 'x',
+    }));
+    const result = formatEffectSummary(effects);
+    const parts = result.split(' · ');
+    expect(parts).toHaveLength(3);
+  });
+});
+
+// ---- formatSpecialSummary tests ----
+
+describe('formatSpecialSummary', () => {
+  it('returns empty string for undefined effects', () => {
+    expect(formatSpecialSummary(undefined)).toBe('');
+  });
+
+  it('returns empty string for empty effects array', () => {
+    expect(formatSpecialSummary([])).toBe('');
+  });
+
+  it('returns empty string when no special effects exist', () => {
+    expect(
+      formatSpecialSummary([
+        {
+          type: 'bonus',
+          target: 'save.all',
+          value: 1,
+          bonusType: BonusType.RESISTANCE,
+          source: 'x',
+        },
+      ]),
+    ).toBe('');
+  });
+
+  it('formats a positive special effect', () => {
+    const result = formatSpecialSummary([
+      { type: 'special', target: 'special.channel_dc', value: 2, source: 'x' },
+    ]);
+    expect(result).toContain('+2');
+    expect(result).toContain('channel dc');
+  });
+
+  it('formats a negative special effect', () => {
+    const result = formatSpecialSummary([
+      { type: 'special', target: 'special.rage_rounds', value: -1, source: 'x' },
+    ]);
+    expect(result).toContain('-1');
   });
 });
