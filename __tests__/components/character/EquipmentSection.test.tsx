@@ -511,4 +511,42 @@ describe('EquipmentSection sub-components', () => {
     fireEvent.press(findTestId(rendered.tree, 'container-remove-bag-1')!);
     expect(mockDispatch).toHaveBeenCalled();
   });
+
+  it('IounStoneSection: opens picker with orbiting slot when Add Orbiting Ioun Stone pressed', () => {
+    mockEquipment = [];
+    const rendered = render(<EquipmentSection />);
+    const addBtn = findTestId(rendered.tree, 'add-orbiting-ioun-stone');
+    expect(addBtn).toBeTruthy();
+    fireEvent.press(addBtn!);
+    const withPicker = rendered.rerender();
+    expect(findTestId(withPicker, 'picker-sheet')).toBeTruthy();
+  });
+
+  it('SlotlessItemsSection: opens picker with slotless slot when Add Slotless Item pressed', () => {
+    mockEquipment = [];
+    const rendered = render(<EquipmentSection />);
+    const addBtn = findTestId(rendered.tree, 'add-slotless-item');
+    expect(addBtn).toBeTruthy();
+    fireEvent.press(addBtn!);
+    const withPicker = rendered.rerender();
+    expect(findTestId(withPicker, 'picker-sheet')).toBeTruthy();
+  });
+
+  it('dispatches addEquipment only (no assign) when picker selects for orbiting slot', () => {
+    mockEquipment = [];
+    const rendered = render(<EquipmentSection />);
+    fireEvent.press(findTestId(rendered.tree, 'add-orbiting-ioun-stone')!);
+    const withPicker = rendered.rerender();
+    fireEvent.press(findTestId(withPicker, 'mock-picker-select')!);
+    expect(mockDispatch).toHaveBeenCalledTimes(1); // only addEquipment, no assignEquipmentSlot
+  });
+
+  it('dispatches addEquipment only (no assign) when picker selects for slotless slot', () => {
+    mockEquipment = [];
+    const rendered = render(<EquipmentSection />);
+    fireEvent.press(findTestId(rendered.tree, 'add-slotless-item')!);
+    const withPicker = rendered.rerender();
+    fireEvent.press(findTestId(withPicker, 'mock-picker-select')!);
+    expect(mockDispatch).toHaveBeenCalledTimes(1); // only addEquipment, no assignEquipmentSlot
+  });
 });

@@ -75,13 +75,13 @@ const SLOT_TITLES: Record<string, string> = {
   slotless: 'Slotless Magic Items',
 };
 
-function toFirestoreSlot(slot: PickerSlot): ItemSlot {
+export function toFirestoreSlot(slot: PickerSlot): ItemSlot {
   if (slot === 'ring_left' || slot === 'ring_right') return 'ring';
   if (slot === 'orbiting' || slot === 'slotless') return 'none';
   return slot as ItemSlot;
 }
 
-function sourceLabel(source: unknown): string | undefined {
+export function sourceLabel(source: unknown): string | undefined {
   if (!source) return undefined;
   if (typeof source === 'string') return source;
   if (typeof source === 'object' && source !== null && 'bookId' in source) {
@@ -90,7 +90,7 @@ function sourceLabel(source: unknown): string | undefined {
   return undefined;
 }
 
-function mapWeapon(w: WeaponDefinition): PickerItem {
+export function mapWeapon(w: WeaponDefinition): PickerItem {
   return {
     definitionId: w.id,
     name: w.name,
@@ -101,7 +101,7 @@ function mapWeapon(w: WeaponDefinition): PickerItem {
   };
 }
 
-function mapArmor(a: ArmorDefinition): PickerItem {
+export function mapArmor(a: ArmorDefinition): PickerItem {
   return {
     definitionId: a.id,
     name: a.name,
@@ -112,7 +112,7 @@ function mapArmor(a: ArmorDefinition): PickerItem {
   };
 }
 
-function mapShield(s: ShieldDefinition): PickerItem {
+export function mapShield(s: ShieldDefinition): PickerItem {
   return {
     definitionId: s.id,
     name: s.name,
@@ -124,7 +124,7 @@ function mapShield(s: ShieldDefinition): PickerItem {
   };
 }
 
-function mapMagicItem(m: MagicItemDefinition, isContainer = false): PickerItem {
+export function mapMagicItem(m: MagicItemDefinition, isContainer = false): PickerItem {
   const allowsHandUse = (m as { allowsHandUse?: boolean }).allowsHandUse;
   return {
     definitionId: m.id,
@@ -139,7 +139,7 @@ function mapMagicItem(m: MagicItemDefinition, isContainer = false): PickerItem {
   };
 }
 
-async function loadItemsForSlot(slot: PickerSlot): Promise<PickerItem[]> {
+export async function loadItemsForSlot(slot: PickerSlot): Promise<PickerItem[]> {
   switch (slot) {
     case 'main_hand': {
       const [weapons, magicItems] = await Promise.all([
@@ -203,7 +203,7 @@ async function loadItemsForSlot(slot: PickerSlot): Promise<PickerItem[]> {
   }
 }
 
-function formatPrice(price: number | undefined): string | undefined {
+export function formatPrice(price: number | undefined): string | undefined {
   if (price === undefined || price === null) return undefined;
   if (price === 0) return 'free';
   if (price >= 1000) return `${(price / 1000).toFixed(price % 1000 === 0 ? 0 : 1)}k gp`;

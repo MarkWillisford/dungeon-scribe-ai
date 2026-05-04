@@ -366,6 +366,7 @@ function IounStoneSection({ stones, onPickerOpen, onRemove, onEdit }: IounStoneS
         onPress={() => onPickerOpen('orbiting')}
         style={[styles.addButton, { borderColor: colors.border.DEFAULT }]}
         accessibilityRole="button"
+        testID="add-orbiting-ioun-stone"
       >
         <Text style={[styles.addButtonText, { color: colors.text.tertiary }]}>
           + Add Orbiting Ioun Stone
@@ -443,6 +444,7 @@ function SlotlessItemsSection({
         onPress={() => onPickerOpen('slotless')}
         style={[styles.addButton, { borderColor: colors.border.DEFAULT }]}
         accessibilityRole="button"
+        testID="add-slotless-item"
       >
         <Text style={[styles.addButtonText, { color: colors.text.tertiary }]}>
           + Add Slotless Item
@@ -527,7 +529,7 @@ export function EquipmentSection() {
       effects: result.effects,
     };
     dispatch(addEquipment(newItem));
-    if (pickerSlot !== 'orbiting' && pickerSlot !== 'none') {
+    if (pickerSlot !== 'orbiting' && pickerSlot !== 'none' && pickerSlot !== 'slotless') {
       dispatch(assignEquipmentSlot({ id: newItem.id, slot: pickerSlot as EditorEquippedSlot }));
     }
     setPickerSlot(null);
@@ -543,7 +545,7 @@ export function EquipmentSection() {
       isOrbiting: pickerSlot === 'orbiting' || undefined,
     };
     dispatch(addEquipment(newItem));
-    if (pickerSlot !== 'orbiting' && pickerSlot !== 'none') {
+    if (pickerSlot !== 'orbiting' && pickerSlot !== 'none' && pickerSlot !== 'slotless') {
       dispatch(assignEquipmentSlot({ id: newItem.id, slot: pickerSlot as EditorEquippedSlot }));
     }
     setPickerSlot(null);
