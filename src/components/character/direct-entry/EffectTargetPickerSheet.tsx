@@ -274,7 +274,7 @@ export function EffectTargetPickerSheet({
     >
       {/* Sub-header */}
       <View style={[styles.subHeader, { borderBottomColor: colors.border.DEFAULT }]}>
-        <Pressable onPress={onBack} style={styles.backBtn} hitSlop={12}>
+        <Pressable onPress={onBack} style={styles.backBtn} hitSlop={12} testID="back-btn">
           <Text style={[styles.backText, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
             ← Back
           </Text>

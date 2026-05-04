@@ -167,6 +167,10 @@ function renderToTree(element: React.ReactElement, keepState = false): RenderedN
   const rawChildren = renderedProps.children;
 
   if (rawChildren) {
+    // Save this component's hooksState before rendering children.
+    // Child function-component renders reset hooksState; restoring it here
+    // ensures fireEvent mutations on this component's state are preserved.
+    const thisComponentState = hooksState;
     const childArray = Array.isArray(rawChildren) ? rawChildren : [rawChildren];
     for (const child of childArray.flat(Infinity)) {
       if (child === null || child === undefined || child === false) continue;
@@ -174,6 +178,7 @@ function renderToTree(element: React.ReactElement, keepState = false): RenderedN
         children.push(String(child));
       } else if (React.isValidElement(child)) {
         children.push(renderToTree(child, keepState));
+        hooksState = thisComponentState;
       }
     }
   }

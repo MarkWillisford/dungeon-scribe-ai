@@ -237,6 +237,7 @@ export function ItemEffectEditorSheet({
             <Pressable
               onPress={() => handleRemoveEffect(index)}
               hitSlop={10}
+              testID={`remove-effect-${index}`}
               style={styles.removeBtn}
             >
               <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
@@ -248,6 +249,7 @@ export function ItemEffectEditorSheet({
         {!addingEffect && (
           <Pressable
             onPress={() => setAddingEffect(true)}
+            testID="add-effect-btn"
             style={[styles.addEffectBtn, { borderColor: isDark ? fantasy.gold : fantasy.darkWood }]}
           >
             <Text style={[styles.addEffectBtnText, { color: gold }]}>+ Add Effect</Text>
@@ -269,6 +271,7 @@ export function ItemEffectEditorSheet({
             <Text style={[styles.formLabel, { color: colors.text.secondary }]}>Target</Text>
             <Pressable
               onPress={() => setSheetView('targetPicker')}
+              testID="choose-target-btn"
               style={[
                 styles.targetPickerBtn,
                 { borderColor: pendingTarget ? gold : colors.border.DEFAULT },
