@@ -1023,7 +1023,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
       },
     ],
     activationMode: 'passive',
-    choices: [{ type: 'spell', label: 'Spell', affectsEffects: true }],
+    choices: [{ type: 'custom', label: 'Spell', affectsEffects: true }],
     tags: ['metamagic', 'perfection', 'capstone', 'spell mastery'],
   },
   {
@@ -1069,7 +1069,7 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
     ],
     activationMode: 'passive',
     choices: [
-      { type: 'spell', label: 'Spell (must have Spell Perfection for it)', affectsEffects: true },
+      { type: 'custom', label: 'Spell (must have Spell Perfection for it)', affectsEffects: true },
     ],
     tags: ['metamagic', 'perfection', 'capstone', 'spell mastery'],
   },
