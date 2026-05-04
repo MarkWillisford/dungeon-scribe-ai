@@ -458,4 +458,42 @@ describe('EquipmentPickerSheet component (loading state)', () => {
     expect(getAllText().some((t) => t.includes('Loading'))).toBe(false);
     expect(getAllText().some((t) => t.includes('Belt Slot'))).toBe(true);
   });
+
+  it('shows custom footer and calls onAddCustom when query is set (visible=false = loading=false)', () => {
+    // visible=false → loading=false. With a non-empty query the custom add footer renders
+    // because {query.trim() && !loading} is truthy. Pressing it calls handleAddCustom.
+    const rendered = render(
+      <EquipmentPickerSheet
+        visible={false}
+        slot="neck"
+        onSelect={onSelect}
+        onAddCustom={onAddCustom}
+        onClose={onClose}
+      />,
+    );
+    const searchInput = rendered.getByTestId('picker-search');
+    fireEvent.changeText(searchInput, 'Sword of Truth');
+    const withQuery = rendered.rerender();
+    // Walk the tree to find the custom add button
+    function findNode(
+      node: import('../../helpers/testUtils').RenderedNode,
+      testID: string,
+    ): import('../../helpers/testUtils').RenderedNode | null {
+      if (node.props.testID === testID) return node;
+      for (const c of node.children) {
+        if (typeof c !== 'string') {
+          const f = findNode(c, testID);
+          if (f) return f;
+        }
+      }
+      return null;
+    }
+    const addBtn = findNode(
+      withQuery as unknown as import('../../helpers/testUtils').RenderedNode,
+      'picker-add-custom',
+    );
+    expect(addBtn).toBeTruthy();
+    fireEvent.press(addBtn!);
+    expect(onAddCustom).toHaveBeenCalledWith('Sword of Truth');
+  });
 });

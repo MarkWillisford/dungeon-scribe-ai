@@ -322,6 +322,7 @@ export function EquipmentPickerSheet({
         {/* Search */}
         <View style={[styles.searchRow, { borderBottomColor: colors.border.DEFAULT }]}>
           <TextInput
+            testID="picker-search"
             value={query}
             onChangeText={setQuery}
             placeholder={`Search ${title.toLowerCase()}...`}
@@ -434,6 +435,7 @@ export function EquipmentPickerSheet({
         {query.trim() && !loading && (
           <View style={[styles.customFooter, { borderTopColor: colors.border.DEFAULT }]}>
             <Pressable
+              testID="picker-add-custom"
               onPress={handleAddCustom}
               style={[styles.customButton, { borderColor: fantasy.bronze }]}
             >
