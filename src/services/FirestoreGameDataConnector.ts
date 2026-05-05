@@ -298,24 +298,28 @@ export class FirestoreGameDataConnector implements GameDataConnector {
             results = [];
             break;
           }
-          // One Firestore query per class name; merge and deduplicate by name-slug.
+          // Query visibility == 'global' only per class name, then filter
+          // classLevels in memory. Querying on classLevels.{cls} (a dynamic map
+          // key) combined with visibility would require one composite index per
+          // class, which is not feasible. This mirrors the getRaceGroups pattern.
           const snapshots = await Promise.all(
             classNames.map((cls) =>
-              getDocs(
-                query(
-                  collection(db, 'spells'),
-                  where(`classLevels.${cls}`, '>=', 1),
-                  where(`classLevels.${cls}`, '<=', maxLevel),
-                ),
+              getDocs(query(collection(db, 'spells'), where('visibility', '==', 'global'))).then(
+                (snap) => ({ snap, cls }),
               ),
             ),
           );
           const seen = new Set<string>();
           const spells: ClassOptionBase[] = [];
-          for (const snap of snapshots) {
+          for (const { snap, cls } of snapshots) {
             for (const d of snap.docs) {
-              const data = d.data() as Record<string, unknown> & { name: string };
+              const data = d.data() as Record<string, unknown> & {
+                name: string;
+                classLevels?: Record<string, number>;
+              };
               if (!data.name) continue;
+              const level = data.classLevels?.[cls];
+              if (level === undefined || level < 1 || level > maxLevel) continue;
               const id = toDocId(data.name);
               if (!seen.has(id)) {
                 seen.add(id);
