@@ -415,13 +415,19 @@ const characterEntrySlice = createSlice({
     // ---- Classes ----
 
     addClass(state, action: PayloadAction<ClassEntry>) {
+      // Ensure every class entry has a stable id so reducers can target it
+      // reliably. Without this guarantee, gestalt builds with two classes of
+      // the same name would silently collide on the name-based fallback.
+      if (!action.payload.id) {
+        action.payload.id = Math.random().toString(36).slice(2) + Date.now().toString(36);
+      }
       state.character.classes.classes.push(action.payload);
       state.character.classes.totalLevel = state.character.classes.classes.reduce(
         (sum, c) => sum + c.level,
         0,
       );
       if (state.character.classes.levelOrder) {
-        const id = action.payload.id ?? action.payload.name;
+        const id = action.payload.id;
         for (let i = 0; i < action.payload.level; i++) {
           state.character.classes.levelOrder.push(id);
         }
@@ -1058,6 +1064,8 @@ const characterEntrySlice = createSlice({
     initLevelOrder(state) {
       const order: string[] = [];
       for (const cls of state.character.classes.classes) {
+        // id is guaranteed by addClass; fall back only for legacy persisted
+        // entries that pre-date this guarantee.
         const id = cls.id ?? cls.name;
         for (let i = 0; i < cls.level; i++) {
           order.push(id);
