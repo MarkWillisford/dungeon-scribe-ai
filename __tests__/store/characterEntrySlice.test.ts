@@ -103,6 +103,9 @@ import reducer, {
   setAspectDivert,
   addSummonerAspectEvolution,
   removeSummonerAspectEvolution,
+  initLevelOrder,
+  swapLevelSlot,
+  splitClass,
   type EntryValidationWarning,
 } from '@store/slices/characterEntrySlice';
 import { Alignment } from '@/types/base';
@@ -1074,6 +1077,139 @@ describe('characterEntrySlice — classes', () => {
       state = reducer(state, reorderClasses(['cls-2']));
       expect(state.character.classes.classes).toHaveLength(1);
       expect(state.character.classes.classes[0].id).toBe('cls-2');
+    });
+  });
+
+  // ---- initLevelOrder / swapLevelSlot / splitClass ----
+
+  describe('initLevelOrder', () => {
+    it('builds levelOrder with one entry per class level', () => {
+      let state = makeInitialState();
+      state = reducer(state, addClass(makeClass('cls-1', { level: 3 })));
+      state = reducer(state, addClass(makeClass('cls-2', { name: 'Rogue', level: 2 })));
+      state = reducer(state, initLevelOrder());
+      expect(state.character.classes.levelOrder).toEqual(['cls-1', 'cls-1', 'cls-1', 'cls-2', 'cls-2']);
+      expect(state.isDirty).toBe(true);
+    });
+  });
+
+  describe('swapLevelSlot', () => {
+    it('reassigns a level slot from one class to another and updates levels', () => {
+      let state = makeInitialState();
+      state = reducer(state, addClass(makeClass('cls-1', { level: 3 })));
+      state = reducer(state, addClass(makeClass('cls-2', { name: 'Rogue', level: 1 })));
+      state = reducer(state, initLevelOrder());
+      // levelOrder: ['cls-1','cls-1','cls-1','cls-2']
+      // Swap charLevel 3 (index 2, currently cls-1) to cls-2
+      state = reducer(state, swapLevelSlot({ charLevel: 3, newClassId: 'cls-2' }));
+      expect(state.character.classes.levelOrder![2]).toBe('cls-2');
+      const cls1 = state.character.classes.classes.find((c) => c.id === 'cls-1')!;
+      const cls2 = state.character.classes.classes.find((c) => c.id === 'cls-2')!;
+      expect(cls1.level).toBe(2);
+      expect(cls2.level).toBe(2);
+      expect(state.character.classes.totalLevel).toBe(4);
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('is a no-op when the slot already belongs to newClassId', () => {
+      let state = makeInitialState();
+      state = reducer(state, addClass(makeClass('cls-1', { level: 2 })));
+      state = reducer(state, addClass(makeClass('cls-2', { name: 'Rogue', level: 1 })));
+      state = reducer(state, initLevelOrder());
+      const before = JSON.stringify(state.character.classes);
+      state = reducer(state, swapLevelSlot({ charLevel: 1, newClassId: 'cls-1' }));
+      expect(JSON.stringify(state.character.classes)).toBe(before);
+    });
+
+    it('shrinks spellcastingAdvancement perLevel on the class that lost a slot', () => {
+      let state = makeInitialState();
+      const adv = {
+        mode: 'single' as const,
+        perLevel: [
+          { baseClassEntryId: 'cls-1' },
+          { baseClassEntryId: 'cls-1' },
+          { baseClassEntryId: 'cls-1' },
+        ],
+      };
+      state = reducer(state, addClass(makeClass('cls-1', { level: 3, spellcastingAdvancement: adv })));
+      state = reducer(state, addClass(makeClass('cls-2', { name: 'Rogue', level: 1 })));
+      state = reducer(state, initLevelOrder());
+      // Swap level 3 (cls-1) to cls-2 — cls-1 drops from 3 to 2
+      state = reducer(state, swapLevelSlot({ charLevel: 3, newClassId: 'cls-2' }));
+      const cls1 = state.character.classes.classes.find((c) => c.id === 'cls-1')!;
+      expect(cls1.spellcastingAdvancement!.perLevel).toHaveLength(2);
+    });
+  });
+
+  describe('splitClass', () => {
+    it('splits a 4-level class into two entries at the specified boundary', () => {
+      let state = makeInitialState();
+      state = reducer(state, addClass(makeClass('cls-1', { level: 4 })));
+      state = reducer(state, initLevelOrder());
+      state = reducer(state, splitClass({ classId: 'cls-1', firstRunLevel: 2, newEntryId: 'cls-1b' }));
+
+      expect(state.character.classes.classes).toHaveLength(2);
+      const first = state.character.classes.classes[0];
+      const second = state.character.classes.classes[1];
+      expect(first.level).toBe(2);
+      expect(second.level).toBe(2);
+      expect(second.id).toBe('cls-1b');
+      expect(state.character.classes.totalLevel).toBe(4);
+      expect(state.isDirty).toBe(true);
+    });
+
+    it('updates levelOrder so the second run uses newEntryId', () => {
+      let state = makeInitialState();
+      state = reducer(state, addClass(makeClass('cls-1', { level: 4 })));
+      state = reducer(state, initLevelOrder());
+      // Before: ['cls-1','cls-1','cls-1','cls-1']
+      state = reducer(state, splitClass({ classId: 'cls-1', firstRunLevel: 2, newEntryId: 'cls-1b' }));
+      const order = state.character.classes.levelOrder!;
+      expect(order).toHaveLength(4);
+      // Last 2 slots should be cls-1b; first 2 stay cls-1
+      expect(order.filter((id) => id === 'cls-1')).toHaveLength(2);
+      expect(order.filter((id) => id === 'cls-1b')).toHaveLength(2);
+    });
+
+    it('splits spellcastingAdvancement perLevel between the two entries', () => {
+      let state = makeInitialState();
+      const adv = {
+        mode: 'single' as const,
+        perLevel: [
+          { baseClassEntryId: 'cls-1' },
+          { baseClassEntryId: 'cls-1' },
+          { baseClassEntryId: 'cls-1' },
+          { baseClassEntryId: 'cls-1' },
+        ],
+      };
+      state = reducer(state, addClass(makeClass('cls-1', { level: 4, spellcastingAdvancement: adv })));
+      state = reducer(state, initLevelOrder());
+      state = reducer(state, splitClass({ classId: 'cls-1', firstRunLevel: 2, newEntryId: 'cls-1b' }));
+
+      const first = state.character.classes.classes[0];
+      const second = state.character.classes.classes[1];
+      expect(first.spellcastingAdvancement!.perLevel).toHaveLength(2);
+      expect(second.spellcastingAdvancement!.perLevel).toHaveLength(2);
+    });
+
+    it('is a no-op when firstRunLevel would leave the second run with 0 levels', () => {
+      let state = makeInitialState();
+      state = reducer(state, addClass(makeClass('cls-1', { level: 3 })));
+      state = reducer(state, initLevelOrder());
+      // firstRunLevel = 3 means secondRunLevel = 0 — invalid
+      state = reducer(state, splitClass({ classId: 'cls-1', firstRunLevel: 3, newEntryId: 'cls-1b' }));
+      expect(state.character.classes.classes).toHaveLength(1);
+    });
+
+    it('marks both runs with the same splitGroup', () => {
+      let state = makeInitialState();
+      state = reducer(state, addClass(makeClass('cls-1', { level: 4 })));
+      state = reducer(state, initLevelOrder());
+      state = reducer(state, splitClass({ classId: 'cls-1', firstRunLevel: 2, newEntryId: 'cls-1b' }));
+      const first = state.character.classes.classes[0];
+      const second = state.character.classes.classes[1];
+      expect(first.splitGroup).toBeDefined();
+      expect(second.splitGroup).toBe(first.splitGroup);
     });
   });
 });
