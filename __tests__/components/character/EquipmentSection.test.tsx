@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { render, fireEvent, type RenderedNode } from '../../helpers/testUtils';
 import {
@@ -16,6 +15,7 @@ let mockEquipment: EditorEquipmentItem[] = [];
 
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => mockDispatch,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useAppSelector: (selector: (s: any) => any) =>
     selector({
       characterEntry: {
@@ -47,6 +47,7 @@ jest.mock('@/hooks/useTheme', () => ({
 
 // Smart EquipmentPickerSheet mock — exposes select/custom/close callbacks
 jest.mock('@/components/character/direct-entry/EquipmentPickerSheet', () => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   EquipmentPickerSheet: ({ onSelect, onAddCustom, onClose, visible }: any) => {
     if (!visible) return null;
     const React = require('react');
@@ -78,6 +79,7 @@ jest.mock('@/components/character/direct-entry/EquipmentPickerSheet', () => ({
 
 // Smart ItemEffectEditorSheet mock — exposes save/remove/close callbacks
 jest.mock('@/components/character/direct-entry/ItemEffectEditorSheet', () => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ItemEffectEditorSheet: ({ onSave, onRemoveItem, onClose, item }: any) => {
     if (!item) return null;
     const React = require('react');

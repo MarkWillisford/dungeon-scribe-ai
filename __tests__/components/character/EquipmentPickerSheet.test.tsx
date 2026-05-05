@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Unit tests for EquipmentPickerSheet pure-function exports.
  * The component itself is mocked wherever EquipmentSection is tested;
@@ -12,9 +11,13 @@ const mockGetMagicItemsBySlot = jest.fn();
 
 jest.mock('@/services/GameDataService', () => ({
   GameDataService: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getWeapons: (...args: any[]) => mockGetWeapons(...args),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getArmor: (...args: any[]) => mockGetArmor(...args),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getShields: (...args: any[]) => mockGetShields(...args),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getMagicItemsBySlot: (...args: any[]) => mockGetMagicItemsBySlot(...args),
   },
 }));
@@ -227,6 +230,7 @@ describe('mapWeapon', () => {
   });
 
   it('resolves source object via sourceLabel', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const w = makeWeapon({ source: { bookId: 'UC' } as any });
     expect(mapWeapon(w).source).toBe('UC');
   });
@@ -286,6 +290,7 @@ describe('mapMagicItem', () => {
   });
 
   it('copies effects from the item', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const effects = [{ type: 'bonus' as const, target: 'ac' as any, value: 1, source: 'x' }];
     const m = makeMagicItem({ effects });
     expect(mapMagicItem(m).effects).toEqual(effects);
@@ -303,18 +308,21 @@ describe('loadItemsForSlot', () => {
     id: 'li1',
     name: 'Dusty Rose Prism',
     category: 'ioun_stone',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     slot: 'none' as any,
   });
   const wondrous = makeMagicItem({
     id: 'lw2',
     name: 'Haversack',
     category: 'wondrous',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     slot: 'none' as any,
   });
   const nonIoun = makeMagicItem({
     id: 'ln1',
     name: 'Pearl of Power',
     category: 'wondrous',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     slot: 'none' as any,
   });
 
