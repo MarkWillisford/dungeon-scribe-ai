@@ -1560,6 +1560,36 @@ export const MISC_TRAITS: TraitDefinition[] = [
     tags: ['diplomacy', 'class skill', 'leadership'],
   },
   {
+    id: 'urban_acolyte',
+    name: 'Urban Acolyte',
+    description:
+      "Growing up in a city has broadened your philosophy, and helped you interpret your patron's divine will in a novel way. You gain Knowledge (local) as a class skill. Additionally, you can select one of the following subdomains using the normal rules for subdomains so long as your deity grants access to its associated domain: Competition, Duels, Espionage, Fortifications, Industry, Legislation, Plague, or Riot.",
+    shortDescription: 'Knowledge (local) class skill; choose one urban subdomain',
+    source: 'Heroes of the Streets',
+    verificationStatus: 'verified' as const,
+    category: 'faith',
+    prerequisites: [],
+    effects: [],
+    choices: [
+      {
+        type: 'custom' as const,
+        label: 'Choose subdomain (requires deity access to associated domain)',
+        options: [
+          'Competition',
+          'Duels',
+          'Espionage',
+          'Fortifications',
+          'Industry',
+          'Legislation',
+          'Plague',
+          'Riot',
+        ],
+        affectsEffects: false,
+      },
+    ],
+    tags: ['knowledge_local', 'class_skill', 'subdomain', 'urban'],
+  },
+  {
     id: 'worldly',
     name: 'Worldly',
     description:

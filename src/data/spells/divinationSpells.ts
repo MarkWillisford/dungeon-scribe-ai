@@ -2,7 +2,7 @@ import type { SpellDefinition } from '@/types/spells';
 
 export const DIVINATION_SPELLS: SpellDefinition[] = [
   // ─── Pre-existing content ────────────────────────────────────────────────────
-// ─── CANTRIPS / ORISONS (Level 0) ────────────────────────────────────────────
+  // ─── CANTRIPS / ORISONS (Level 0) ────────────────────────────────────────────
 
   {
     name: 'Detect Magic',
@@ -2271,7 +2271,7 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_001 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Gallant Inspiration',
     classLevels: { bard: 2 },
     school: 'Divination',
@@ -3731,7 +3731,7 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_002 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Read Magic',
     classLevels: {
       antipaladin: 1,
@@ -5264,7 +5264,7 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_003 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Tactical Insight',
     classLevels: { bard: 6, inquisitor: 6 },
     school: 'Divination',
@@ -6107,7 +6107,7 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_A_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Aerial Tracks',
     classLevels: { druid: 4, inquisitor: 4, ranger: 3, shaman: 4 },
     school: 'Divination',
@@ -6120,22 +6120,41 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 hour/level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'The spell causes the air in the area to ripple where creatures have flown through it up to 1 day ago per caster level. Glowing wisps make the aerial tracks visible without penalties from poor lighting. The affected area moves with the caster, enabling pursuit of flying creatures across distances. Other creatures may follow the trail if they remain within range and move with the caster. Tracking difficulty uses the same DC as tracking creatures across soft ground.',
+    description:
+      'The spell causes the air in the area to ripple where creatures have flown through it up to 1 day ago per caster level. Glowing wisps make the aerial tracks visible without penalties from poor lighting. The affected area moves with the caster, enabling pursuit of flying creatures across distances. Other creatures may follow the trail if they remain within range and move with the caster. Tracking difficulty uses the same DC as tracking creatures across soft ground.',
     source: 'Pathfinder Player Companion: Heroes of the Wild',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Akashic Communion',
-    classLevels: { bard: 3, medium: 3, mesmerist: 4, occultist: 3, psychic: 3, shaman: 3, 'sorcerer/wizard': 4, spiritualist: 4, witch: 3 },
+    classLevels: {
+      bard: 3,
+      medium: 3,
+      mesmerist: 4,
+      occultist: 3,
+      psychic: 3,
+      shaman: 3,
+      sorcerer: 4,
+      wizard: 4,
+      spiritualist: 4,
+      witch: 3,
+    },
     school: 'Divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a square of reflective silver worth 100 gp', divine: true },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a square of reflective silver worth 100 gp',
+      divine: true,
+    },
     castingTime: '10 minutes',
     range: 'Personal',
     target: 'You',
     duration: '1 minute per caster level',
     savingThrow: 'None',
     spellResistance: 'None',
-    description: 'The caster attempts to access the Akashic Record, an extraplanar repository of all historical experiences. This grants one Knowledge skill check per 3 caster levels, each with a +10 insight bonus. The caster gains proficiency in Knowledge skills for these checks and may reroll failed checks. The GM rolls secretly; results on a natural 1 are wildly inaccurate. The spell requires continuous concentration; any interruption ends it. Once used for a specific topic, the spell cannot be reused for that same subject until the caster gains another level.',
+    description:
+      'The caster attempts to access the Akashic Record, an extraplanar repository of all historical experiences. This grants one Knowledge skill check per 3 caster levels, each with a +10 insight bonus. The caster gains proficiency in Knowledge skills for these checks and may reroll failed checks. The GM rolls secretly; results on a natural 1 are wildly inaccurate. The spell requires continuous concentration; any interruption ends it. Once used for a specific topic, the spell cannot be reused for that same subject until the caster gains another level.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -6150,28 +6169,37 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'Concentration, up to 1 round/level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'This divination spell allows you to peer into the aura of one target creature or object, gaining valuable information about its condition and nature. Each round you may examine one of four aura types: Alignment Aura (reveals alignment and aura type/power), Emotion Aura (shows emotional state and grants +2 circumstance bonus to social skill checks), Health Aura (discloses physical condition, wounds, poison, disease), or Magic Aura (determines number and power of magical auras present).',
+    description:
+      'This divination spell allows you to peer into the aura of one target creature or object, gaining valuable information about its condition and nature. Each round you may examine one of four aura types: Alignment Aura (reveals alignment and aura type/power), Emotion Aura (shows emotional state and grants +2 circumstance bonus to social skill checks), Health Aura (discloses physical condition, wounds, poison, disease), or Magic Aura (determines number and power of magical auras present).',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ancestral Communion',
-    classLevels: { bard: 2, 'cleric/oracle': 2 },
+    classLevels: { bard: 2, cleric: 2, oracle: 2 },
     school: 'Divination',
-    components: { verbal: true, somatic: true, focus: true, focusComponents: 'stone or metal image of ancestor', divine: true, material: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      focus: true,
+      focusComponents: 'stone or metal image of ancestor',
+      divine: true,
+      material: false,
+    },
     castingTime: '1 minute',
     range: 'Personal',
     target: 'You',
     duration: '1 minute per level',
     savingThrow: 'None',
     spellResistance: 'None',
-    description: 'The spell allows you to contact ancestral spirits for knowledge assistance. Consulting with spirits is a full-round action. Before making a Knowledge check, you gain a +4 insight bonus. If you\'ve already failed a Knowledge check, you can consult your ancestors and retry it. The bonus increases to +6 at 7th caster level and +8 at 11th caster level.',
+    description:
+      "The spell allows you to contact ancestral spirits for knowledge assistance. Consulting with spirits is a full-round action. Before making a Knowledge check, you gain a +4 insight bonus. If you've already failed a Knowledge check, you can consult your ancestors and retry it. The bonus increases to +6 at 7th caster level and +8 at 11th caster level.",
     source: 'Pathfinder Player Companion: People of the Stars',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ancestral Memory',
-    classLevels: { alchemist: 5, 'cleric/oracle': 5, druid: 4, shaman: 5 },
+    classLevels: { alchemist: 5, cleric: 5, oracle: 5, druid: 4, shaman: 5 },
     school: 'Divination',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -6180,15 +6208,25 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level',
     savingThrow: 'None',
     spellResistance: 'None',
-    description: 'This divination spell allows casters to access ancestral knowledge relevant to their current situation. Success is determined by a d% roll against 70% plus the caster\'s level. On failure, the caster gains a +5 insight bonus on all Intelligence-based skill checks for the duration. On success, the caster receives both the bonus and specific information from an ancestor\'s experience that directly addresses the character\'s current problem.',
+    description:
+      "This divination spell allows casters to access ancestral knowledge relevant to their current situation. Success is determined by a d% roll against 70% plus the caster's level. On failure, the caster gains a +5 insight bonus on all Intelligence-based skill checks for the duration. On success, the caster receives both the bonus and specific information from an ancestor's experience that directly addresses the character's current problem.",
     source: 'Pathfinder Player Companion: Dwarves of Golarion',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_A_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Anticipate Thoughts',
-    classLevels: { bard: 2, inquisitor: 2, magus: 2, mesmerist: 2, psychic: 2, 'sorcerer/wizard': 2, witch: 2 },
+    classLevels: {
+      bard: 2,
+      inquisitor: 2,
+      magus: 2,
+      mesmerist: 2,
+      psychic: 2,
+      sorcerer: 2,
+      wizard: 2,
+      witch: 2,
+    },
     school: 'Divination',
     descriptor: ['mind-affecting'],
     components: { verbal: true, somatic: false, material: false },
@@ -6198,7 +6236,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level',
     savingThrow: 'Will partial',
     spellResistance: 'Yes',
-    description: 'The caster gains a +2 insight bonus to AC against the target\'s attacks by tapping into the creature\'s mind. If the target fails its Will save, the caster also perceives the target\'s reactions to the caster\'s attacks, applying the bonus to both attack and damage rolls. These bonuses function only while the target remains within spell range. Each time the target misses the caster with an attack, the bonus increases by 1 (maximum +5) until the spell ends.',
+    description:
+      "The caster gains a +2 insight bonus to AC against the target's attacks by tapping into the creature's mind. If the target fails its Will save, the caster also perceives the target's reactions to the caster's attacks, applying the bonus to both attack and damage rolls. These bonuses function only while the target remains within spell range. Each time the target misses the caster with an attack, the bonus increases by 1 (maximum +5) until the spell ends.",
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -6215,13 +6254,25 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 hour/level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'This divination spell enhances underwater trails, enabling tracking as if across soft ground for creatures that passed through within the previous week. The affected area moves with the caster, allowing pursuit over distances. Other creatures may follow the trail if moving with the caster.',
+    description:
+      'This divination spell enhances underwater trails, enabling tracking as if across soft ground for creatures that passed through within the previous week. The affected area moves with the caster, allowing pursuit over distances. Other creatures may follow the trail if moving with the caster.',
     source: 'Pathfinder Player Companion: Blood of the Sea',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Aura Sight',
-    classLevels: { alchemist: 3, cleric: 3, inquisitor: 4, mesmerist: 3, psychic: 3, shaman: 3, 'sorcerer/wizard': 3, spiritualist: 3, witch: 3 },
+    classLevels: {
+      alchemist: 3,
+      cleric: 3,
+      inquisitor: 4,
+      mesmerist: 3,
+      psychic: 3,
+      shaman: 3,
+      sorcerer: 3,
+      wizard: 3,
+      spiritualist: 3,
+      witch: 3,
+    },
     school: 'Divination',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -6230,28 +6281,45 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 minute per caster level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'The spell causes your eyes to glow and enables alignment aura detection within 120 feet without requiring concentration. You perceive the location and power of chaotic, evil, good, and lawful auras based on the subject\'s Hit Dice or item\'s caster level. When auras are in line of sight, you may attempt a Knowledge (religion) check (DC 15 + spell level) to determine aura strength. This spell can become permanent via permanency (11th-level caster, 7,500 gp cost).',
+    description:
+      "The spell causes your eyes to glow and enables alignment aura detection within 120 feet without requiring concentration. You perceive the location and power of chaotic, evil, good, and lawful auras based on the subject's Hit Dice or item's caster level. When auras are in line of sight, you may attempt a Knowledge (religion) check (DC 15 + spell level) to determine aura strength. This spell can become permanent via permanency (11th-level caster, 7,500 gp cost).",
     source: 'Pathfinder Roleplaying Game: Advanced Race Guide',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Authenticating Gaze',
-    classLevels: { alchemist: 1, cleric: 1, inquisitor: 1, occultist: 1, 'sorcerer/wizard': 1 },
+    classLevels: { alchemist: 1, cleric: 1, inquisitor: 1, occultist: 1, sorcerer: 1, wizard: 1 },
     school: 'Divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a miniature magnifying glass or spectacles', divine: true },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a miniature magnifying glass or spectacles',
+      divine: true,
+    },
     castingTime: '1 standard action',
     range: 'Personal',
     target: 'You',
     duration: '1 minute per caster level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'The caster gains analytical understanding of written materials, receiving an insight bonus equal to caster level (maximum +10) on Appraise checks to determine the value of books and scrolls and on Linguistics checks to detect forgeries. The spell enables detecting forged documents at a glance. Additionally, the caster immediately detects magical auras on written works within 30 feet and line of sight.',
+    description:
+      'The caster gains analytical understanding of written materials, receiving an insight bonus equal to caster level (maximum +10) on Appraise checks to determine the value of books and scrolls and on Linguistics checks to detect forgeries. The spell enables detecting forged documents at a glance. Additionally, the caster immediately detects magical auras on written works within 30 feet and line of sight.',
     source: 'Pathfinder Player Companion: Paths of the Righteous',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Awaken the Devoured',
-    classLevels: { cleric: 5, inquisitor: 4, psychic: 5, shaman: 5, 'sorcerer/wizard': 5, spiritualist: 5, witch: 5 },
+    classLevels: {
+      cleric: 5,
+      inquisitor: 4,
+      psychic: 5,
+      shaman: 5,
+      sorcerer: 5,
+      wizard: 5,
+      spiritualist: 5,
+      witch: 5,
+    },
     school: 'Divination',
     descriptor: ['pain'],
     components: { verbal: true, somatic: true, material: false },
@@ -6261,15 +6329,16 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'Instantaneous and 1 round/level',
     savingThrow: 'Will partial (halves damage and negates confusion on success)',
     spellResistance: 'Yes',
-    description: 'The spell awakens the broken, anguished memories of the countless souls that the target daemons have consumed. It deals 1d8 points of damage per caster level (maximum 15d8) and inflicts confusion for 1 round per level on all targeted daemons. A successful Will save reduces damage by half and negates the confusion effect. Conjurers typically use this spell to torment daemons and force compliance.',
+    description:
+      'The spell awakens the broken, anguished memories of the countless souls that the target daemons have consumed. It deals 1d8 points of damage per caster level (maximum 15d8) and inflicts confusion for 1 round per level on all targeted daemons. A successful Will save reduces damage by half and negates the confusion effect. Conjurers typically use this spell to torment daemons and force compliance.',
     source: 'Pathfinder Roleplaying Game: Planar Adventures',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_B_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Battlemind Link',
-    classLevels: { inquisitor: 4, 'sorcerer/wizard': 6 },
+    classLevels: { inquisitor: 4, sorcerer: 6, wizard: 6 },
     school: 'Divination',
     descriptor: ['mind-affecting'],
     components: { verbal: true, somatic: true, material: false, focus: false, divine: false },
@@ -6279,22 +6348,31 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level',
     savingThrow: 'Will negates (harmless)',
     spellResistance: 'Yes (harmless)',
-    description: 'The caster merges thoughts with an ally, enabling coordinated combat. Both participants roll initiative and use the higher die result. In melee or ranged attacks against the same target, both combatants use the higher attack roll die. When both cast spells targeting identical areas or creatures, affected creatures receive a -2 penalty on saving throws. Benefits cease if either participant cannot see the other or becomes unconscious or helpless.',
+    description:
+      'The caster merges thoughts with an ally, enabling coordinated combat. Both participants roll initiative and use the higher die result. In melee or ranged attacks against the same target, both combatants use the higher attack roll die. When both cast spells targeting identical areas or creatures, affected creatures receive a -2 penalty on saving throws. Benefits cease if either participant cannot see the other or becomes unconscious or helpless.',
     source: 'Pathfinder Roleplaying Game: Ultimate Combat',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Beacon of Luck',
-    classLevels: { bard: 3, 'cleric/oracle': 3, inquisitor: 4, paladin: 4 },
+    classLevels: { bard: 3, cleric: 3, oracle: 3, inquisitor: 4, paladin: 4 },
     school: 'Divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'tuft of rabbit fur', focus: false, divine: true },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'tuft of rabbit fur',
+      focus: false,
+      divine: true,
+    },
     castingTime: '1 standard action',
     range: 'Personal; see text',
     target: 'You',
     duration: '1 minute/level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'The caster creates a 30-foot-radius burst of luck. The caster gains a +2 sacred bonus on all saving throws while active. As an immediate action before a saving throw is made, allies within the area can choose to roll twice and take the better result. Once a creature uses this benefit, it cannot benefit again for 24 hours.',
+    description:
+      'The caster creates a 30-foot-radius burst of luck. The caster gains a +2 sacred bonus on all saving throws while active. As an immediate action before a saving throw is made, allies within the area can choose to roll twice and take the better result. Once a creature uses this benefit, it cannot benefit again for 24 hours.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
     verificationStatus: 'needs_review' as const,
   },
@@ -6309,7 +6387,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes per caster level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'This divination allows spellcasters in animal form to speak normally, including when casting spells with verbal components. The caster may cast the spell while in animal form using appropriate somatic elements for that creature type. This effect functions with polymorph abilities and wild shape transformations.',
+    description:
+      'This divination allows spellcasters in animal form to speak normally, including when casting spells with verbal components. The caster may cast the spell while in animal form using appropriate somatic elements for that creature type. This effect functions with polymorph abilities and wild shape transformations.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
     verificationStatus: 'needs_review' as const,
   },
@@ -6324,13 +6403,14 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 hour/level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: "The spell grants an innate sense of the direction to the caster's home or the place where they last attempted a Craft check, with a +10 insight bonus on Survival checks to navigate back. Items in possession gain a +2 luck bonus on saving throws against spells and effects. The caster also gains a +5 luck bonus on Craft checks for creating or repairing objects in trained Craft skills.",
+    description:
+      "The spell grants an innate sense of the direction to the caster's home or the place where they last attempted a Craft check, with a +10 insight bonus on Survival checks to navigate back. Items in possession gain a +2 luck bonus on saving throws against spells and effects. The caster also gains a +5 luck bonus on Craft checks for creating or repairing objects in trained Craft skills.",
     source: 'Pathfinder Player Companion: Heroes of the Street',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_B_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Blood Transcription',
     classLevels: { alchemist: 2, magus: 2, witch: 2, wizard: 2 },
     school: 'Divination',
@@ -6342,7 +6422,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '24 hours',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'By consuming one pint of blood from a deceased spellcaster (killed within the last 24 hours), the caster can learn a spell that individual knew. The caster selects one spell available to the dead spellcaster (must be on their own spell list) and gains knowledge of it for 24 hours, during which the spell may be written down or taught to a familiar.',
+    description:
+      'By consuming one pint of blood from a deceased spellcaster (killed within the last 24 hours), the caster can learn a spell that individual knew. The caster selects one spell available to the dead spellcaster (must be on their own spell list) and gains knowledge of it for 24 hours, during which the spell may be written down or taught to a familiar.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
     verificationStatus: 'needs_review' as const,
   },
@@ -6350,20 +6431,28 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     name: 'Build Trust',
     classLevels: { bard: 2, cleric: 2, inquisitor: 2, mesmerist: 2, paladin: 1, psychic: 2 },
     school: 'Divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a gold piece', focus: false, divine: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a gold piece',
+      focus: false,
+      divine: false,
+    },
     castingTime: '1 standard action',
     range: 'Close (25 ft. + 5 ft./2 levels)',
     target: 'One creature',
     duration: '1 day/level; see text',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: 'The caster gains a +2 circumstance bonus on all Charisma checks and Charisma-based skill checks when interacting with the target. When failing such checks against the target, the caster can reroll as an immediate action (granting the target a new save to end the spell). The target becomes disillusioned when the spell ends but does not turn hostile. Attacking or taking obvious hostile action terminates the spell immediately.',
+    description:
+      'The caster gains a +2 circumstance bonus on all Charisma checks and Charisma-based skill checks when interacting with the target. When failing such checks against the target, the caster can reroll as an immediate action (granting the target a new save to end the spell). The target becomes disillusioned when the spell ends but does not turn hostile. Attacking or taking obvious hostile action terminates the spell immediately.',
     source: 'Pathfinder Player Companion: Wilderness Origins',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_C_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Calculated Luck',
     classLevels: { cleric: 3, witch: 4 },
     school: 'Divination',
@@ -6374,13 +6463,14 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'The caster rolls 3d8 and assigns each die result to one of three benefits: vulnerability to a specific energy type, a +1 caster level bonus to spells of a particular school, or a +2 luck bonus to specific d20 rolls based on the Eight Basic Energies table.',
+    description:
+      'The caster rolls 3d8 and assigns each die result to one of three benefits: vulnerability to a specific energy type, a +1 caster level bonus to spells of a particular school, or a +2 luck bonus to specific d20 rolls based on the Eight Basic Energies table.',
     source: 'Occult Mysteries',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Carrion Compass',
-    classLevels: { cleric: 1, ranger: 1, 'sorcerer/wizard': 2, witch: 1 },
+    classLevels: { cleric: 1, ranger: 1, sorcerer: 2, wizard: 2, witch: 1 },
     school: 'Divination',
     components: { verbal: true, somatic: true, material: false, focus: false, divine: false },
     castingTime: '1 standard action',
@@ -6389,28 +6479,46 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level',
     savingThrow: 'Will negates',
     spellResistance: 'No',
-    description: 'The spell animates one of the target undead\'s organs (heart, brain, or eyeball), which floats and leads the caster toward the creature\'s most recent controller, creator, or the location causing its animation. The organ moves at 30 feet per round and cannot travel more than 5 miles from the casting location.',
-    source: 'Undead Slayer\'s Handbook',
+    description:
+      "The spell animates one of the target undead's organs (heart, brain, or eyeball), which floats and leads the caster toward the creature's most recent controller, creator, or the location causing its animation. The organ moves at 30 feet per round and cannot travel more than 5 miles from the casting location.",
+    source: "Undead Slayer's Handbook",
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cleromancy',
-    classLevels: { cleric: 2, druid: 3, inquisitor: 3, 'sorcerer/wizard': 3 },
+    classLevels: { cleric: 2, druid: 3, inquisitor: 3, sorcerer: 3, wizard: 3 },
     school: 'Divination',
-    components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'a set of 64 chicken bones', divine: true },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: false,
+      focus: true,
+      focusComponents: 'a set of 64 chicken bones',
+      divine: true,
+    },
     castingTime: 'Full-round action',
     range: 'Personal',
     target: 'You',
     duration: '1 round/level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'The caster casts bones and groups matching results. For the spell\'s duration, the caster gains a luck bonus equal to one selected dice result on any d20 roll, applicable to a number of rolls matching the group\'s die count.',
+    description:
+      "The caster casts bones and groups matching results. For the spell's duration, the caster gains a luck bonus equal to one selected dice result on any d20 roll, applicable to a number of rolls matching the group's die count.",
     source: 'Occult Mysteries',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Commune with Birds',
-    classLevels: { bard: 2, druid: 1, psychic: 2, ranger: 1, shaman: 2, 'sorcerer/wizard': 2, witch: 2 },
+    classLevels: {
+      bard: 2,
+      druid: 1,
+      psychic: 2,
+      ranger: 1,
+      shaman: 2,
+      sorcerer: 2,
+      wizard: 2,
+      witch: 2,
+    },
     school: 'Divination',
     components: { verbal: true, somatic: true, material: false, focus: false, divine: false },
     castingTime: '1 standard action',
@@ -6419,43 +6527,71 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes; see text',
     savingThrow: 'None',
     spellResistance: 'None',
-    description: 'The caster emits a bird call audible up to one mile away, allowing understanding of avian responses to a single question over the next 10 minutes. Birds reply as if the caster had asked them the question using speak with animals.',
+    description:
+      'The caster emits a bird call audible up to one mile away, allowing understanding of avian responses to a single question over the next 10 minutes. Birds reply as if the caster had asked them the question using speak with animals.',
     source: 'Advanced Race Guide',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Commune With Texts',
-    classLevels: { bard: 5, cleric: 6, inquisitor: 6, medium: 4, occultist: 4, psychic: 6, 'sorcerer/wizard': 5, spiritualist: 6 },
+    classLevels: {
+      bard: 5,
+      cleric: 6,
+      inquisitor: 6,
+      medium: 4,
+      occultist: 4,
+      psychic: 6,
+      sorcerer: 5,
+      wizard: 5,
+      spiritualist: 6,
+    },
     school: 'Divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'incense worth 250 gp', focus: false, divine: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'incense worth 250 gp',
+      focus: false,
+      divine: false,
+    },
     castingTime: '1 minute',
     range: 'Close (25 ft. + 5 ft./2 levels)',
     target: 'A collection of texts',
     duration: '1 hour/level',
     savingThrow: 'None',
     spellResistance: 'None',
-    description: 'This spell enables rapid absorption of knowledge from books, scrolls, or texts. The caster can locate relevant information on any topic within the collection, attempt Knowledge checks as if trained, and gains a +2 bonus to applicable Knowledge checks.',
+    description:
+      'This spell enables rapid absorption of knowledge from books, scrolls, or texts. The caster can locate relevant information on any topic within the collection, attempt Knowledge checks as if trained, and gains a +2 bonus to applicable Knowledge checks.',
     source: 'Inner Sea Intrigue',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Contact Nalfeshnee',
-    classLevels: { cleric: 6, 'sorcerer/wizard': 6, witch: 6 },
+    classLevels: { cleric: 6, sorcerer: 6, wizard: 6, witch: 6 },
     school: 'Divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'powdered sapphire worth 250 gp', focus: true, focusComponents: 'bejeweled cold iron mirror worth at least 2,000 gp', divine: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'powdered sapphire worth 250 gp',
+      focus: true,
+      focusComponents: 'bejeweled cold iron mirror worth at least 2,000 gp',
+      divine: false,
+    },
     castingTime: '1 round',
     range: 'Personal',
     target: 'You',
     duration: 'Concentration',
     savingThrow: 'Will; DC 22',
     spellResistance: 'None',
-    description: 'The caster enters a trance, becoming helpless while contacting a nalfeshnee demon skilled in a chosen Knowledge skill. Each round, one question may be asked. Each answer inflicts 1d4 ability drain to Intelligence, Wisdom, or Charisma unless a Will save succeeds.',
+    description:
+      'The caster enters a trance, becoming helpless while contacting a nalfeshnee demon skilled in a chosen Knowledge skill. Each round, one question may be asked. Each answer inflicts 1d4 ability drain to Intelligence, Wisdom, or Charisma unless a Will save succeeds.',
     source: 'Demons Revisited',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_C_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Coordinated Effort',
     classLevels: { bard: 3, inquisitor: 3 },
     school: 'Divination',
@@ -6466,48 +6602,93 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'The caster selects a teamwork feat they possess and shares its benefits with willing allies through magical connection. Allies gain the feat\'s advantages without requiring the feat themselves, though the caster must participate in the circumstances triggering the bonus.',
-    source: 'Advanced Player\'s Guide',
+    description:
+      "The caster selects a teamwork feat they possess and shares its benefits with willing allies through magical connection. Allies gain the feat's advantages without requiring the feat themselves, though the caster must participate in the circumstances triggering the bonus.",
+    source: "Advanced Player's Guide",
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Treasure Map',
-    classLevels: { bard: 2, druid: 3, psychic: 2, ranger: 2, 'sorcerer/wizard': 2 },
+    classLevels: { bard: 2, druid: 3, psychic: 2, ranger: 2, sorcerer: 2, wizard: 2 },
     school: 'Divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'powdered metal and rare inks worth 100 gp', focus: false, divine: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'powdered metal and rare inks worth 100 gp',
+      focus: false,
+      divine: false,
+    },
     castingTime: '1 hour',
     range: 'Touch',
     target: 'One dead creature',
     duration: 'Instantaneous',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'This spell extracts a body part from a deceased creature (dead no more than 24 hours) and creates a magical map showing valuable locations the creature knew in life, revealing one treasure source per three caster levels.',
-    source: 'Advanced Player\'s Guide',
+    description:
+      'This spell extracts a body part from a deceased creature (dead no more than 24 hours) and creates a magical map showing valuable locations the creature knew in life, revealing one treasure source per three caster levels.',
+    source: "Advanced Player's Guide",
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cultural Adaptation',
-    classLevels: { bard: 1, cleric: 1, medium: 1, occultist: 1, psychic: 1, 'sorcerer/wizard': 1 },
+    classLevels: {
+      bard: 1,
+      cleric: 1,
+      medium: 1,
+      occultist: 1,
+      psychic: 1,
+      sorcerer: 1,
+      wizard: 1,
+    },
     school: 'Divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a document written in the language of the culture to be emulated', focus: false, divine: true },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a document written in the language of the culture to be emulated',
+      focus: false,
+      divine: true,
+    },
     castingTime: '1 standard action',
     range: 'Personal',
     target: 'You',
     duration: '10 minutes/level',
     savingThrow: 'None',
     spellResistance: 'None',
-    description: 'This spell enables adapting to a specific culture by granting native accent proficiency, appropriate body language, and cultural awareness. Provides +2 circumstance bonuses to Diplomacy and Disguise checks with culture members. Enchantment charm spell DCs increase by 1 against the target culture\'s natives.',
+    description:
+      "This spell enables adapting to a specific culture by granting native accent proficiency, appropriate body language, and cultural awareness. Provides +2 circumstance bonuses to Diplomacy and Disguise checks with culture members. Enchantment charm spell DCs increase by 1 against the target culture's natives.",
     source: 'Ultimate Intrigue',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_D_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Detect Anxieties',
-    classLevels: { antipaladin: 2, bard: 3, cleric: 3, inquisitor: 3, medium: 2, mesmerist: 2, paladin: 3, psychic: 2, sorcerer: 3, wizard: 3, spiritualist: 3, witch: 3 },
+    classLevels: {
+      antipaladin: 2,
+      bard: 3,
+      cleric: 3,
+      inquisitor: 3,
+      medium: 2,
+      mesmerist: 2,
+      paladin: 3,
+      psychic: 2,
+      sorcerer: 3,
+      wizard: 3,
+      spiritualist: 3,
+      witch: 3,
+    },
     school: 'Divination',
     descriptor: ['mind-affecting'],
-    components: { verbal: true, somatic: true, focus: true, divine: true, focusComponents: 'medallion', material: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      focus: true,
+      divine: true,
+      focusComponents: 'medallion',
+      material: false,
+    },
     castingTime: '1 standard action',
     range: '60 feet',
     area: 'Cone-shaped emanation',
@@ -6515,7 +6696,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'Concentration, up to 1 minute/level (D)',
     savingThrow: 'Will negates (see text)',
     spellResistance: 'No',
-    description: 'Functions like detect thoughts but senses significant anxieties of creatures with an Intelligence score of 1 or higher. Round 1: detects presence of minds. Round 2: reveals each mind\'s Wisdom score and fear condition (shaken through paralyzed). If highest Wisdom is 26+ and 10+ points higher than caster\'s, caster is stunned 1 round and spell ends. Round 3: reveals the most pressing current anxiety (Will negates). Knowledge of anxiety grants +2 bonus on Intimidate checks.',
+    description:
+      "Functions like detect thoughts but senses significant anxieties of creatures with an Intelligence score of 1 or higher. Round 1: detects presence of minds. Round 2: reveals each mind's Wisdom score and fear condition (shaken through paralyzed). If highest Wisdom is 26+ and 10+ points higher than caster's, caster is stunned 1 round and spell ends. Round 3: reveals the most pressing current anxiety (Will negates). Knowledge of anxiety grants +2 bonus on Intimidate checks.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -6531,16 +6713,37 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'Concentration, up to 10 minutes/level (D)',
     savingThrow: 'None (see text)',
     spellResistance: 'No',
-    description: 'Detects demonic presences and their influence. Round 1: identifies creatures with the demon subtype, possessed beings, those under demonic spell effects, or tainted creatures (tieflings, abyssal sorcerers, Demonic Obedience feats), and portals to the Abyss. Round 2: reveals the number of evil auras from demons and the strongest aura\'s potency. Round 3: displays each aura\'s power, location, and demon lord affiliations (Will save to conceal allegiance).',
+    description:
+      "Detects demonic presences and their influence. Round 1: identifies creatures with the demon subtype, possessed beings, those under demonic spell effects, or tainted creatures (tieflings, abyssal sorcerers, Demonic Obedience feats), and portals to the Abyss. Round 2: reveals the number of evil auras from demons and the strongest aura's potency. Round 3: displays each aura's power, location, and demon lord affiliations (Will save to conceal allegiance).",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Detect Desires',
-    classLevels: { antipaladin: 2, bard: 2, cleric: 3, inquisitor: 3, medium: 2, mesmerist: 3, paladin: 3, psychic: 2, sorcerer: 3, wizard: 3, spiritualist: 3, witch: 3 },
+    classLevels: {
+      antipaladin: 2,
+      bard: 2,
+      cleric: 3,
+      inquisitor: 3,
+      medium: 2,
+      mesmerist: 3,
+      paladin: 3,
+      psychic: 2,
+      sorcerer: 3,
+      wizard: 3,
+      spiritualist: 3,
+      witch: 3,
+    },
     school: 'Divination',
     descriptor: ['mind-affecting'],
-    components: { verbal: true, somatic: true, focus: true, divine: true, focusComponents: 'a medallion', material: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      focus: true,
+      divine: true,
+      focusComponents: 'a medallion',
+      material: false,
+    },
     castingTime: '1 standard action',
     range: '60 ft.',
     area: 'Cone-shaped emanation',
@@ -6548,7 +6751,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'Concentration, up to 1 minute/level (D)',
     savingThrow: 'Will negates (see text)',
     spellResistance: 'No',
-    description: 'Functions like detect thoughts but senses significant desires of creatures with an Intelligence score of 1 or higher, regardless of whether they are conscious or not. Round 2 reveals each mind\'s Charisma score; creatures with Charisma 26+ (and 10+ points higher than caster\'s) stun the caster for 1 round, ending the spell. Round 3 reveals the most pressing current desire (Will negates). Granting creatures desire opportunities grants a +2 circumstance bonus on Diplomacy.',
+    description:
+      "Functions like detect thoughts but senses significant desires of creatures with an Intelligence score of 1 or higher, regardless of whether they are conscious or not. Round 2 reveals each mind's Charisma score; creatures with Charisma 26+ (and 10+ points higher than caster's) stun the caster for 1 round, ending the spell. Round 3 reveals the most pressing current desire (Will negates). Granting creatures desire opportunities grants a +2 circumstance bonus on Diplomacy.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -6564,7 +6768,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'Concentration, up to 10 minutes/level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'Functions similarly to detect evil but specifically targets outsiders with the evil subtype, as well as lingering effects caused by their gifts, presence, and spells. Additionally detects clerics and paladins who serve fiendish deities including Asmodeus, archdevils, daemonic harbingers, and demon lords.',
+    description:
+      'Functions similarly to detect evil but specifically targets outsiders with the evil subtype, as well as lingering effects caused by their gifts, presence, and spells. Additionally detects clerics and paladins who serve fiendish deities including Asmodeus, archdevils, daemonic harbingers, and demon lords.',
     source: 'Pathfinder Player Companion: Agents of Evil',
     verificationStatus: 'needs_review' as const,
   },
@@ -6572,7 +6777,13 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     name: 'Detect Metal',
     classLevels: { alchemist: 1, bard: 1, sorcerer: 1, wizard: 1, summoner: 1 },
     school: 'Divination',
-    components: { verbal: true, somatic: true, focus: true, focusComponents: 'magnetized nail or ore nugget', material: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      focus: true,
+      focusComponents: 'magnetized nail or ore nugget',
+      material: false,
+    },
     castingTime: '1 standard action',
     range: '60 feet',
     area: 'Cone-shaped emanation',
@@ -6580,7 +6791,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'Concentration, up to 1 minute/level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'Detects metal objects or creatures within a 60-foot cone. When casting, the caster specifies whether to detect all metal objects or particular types such as silver, cold iron, or skymetal. The spell only detects the specified metal type when restricted parameters are chosen.',
+    description:
+      'Detects metal objects or creatures within a 60-foot cone. When casting, the caster specifies whether to detect all metal objects or particular types such as silver, cold iron, or skymetal. The spell only detects the specified metal type when restricted parameters are chosen.',
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
@@ -6596,7 +6808,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'Enables detection of radioactive sources within the affected area. The caster perceives radioactive objects as a glowing green shimmer in the air; the brighter and more intense the green, the more powerful the radioactivity. Blocked by 3 feet of dirt/wood, 1 foot of stone, 1 inch of metal, or lead sheeting.',
+    description:
+      'Enables detection of radioactive sources within the affected area. The caster perceives radioactive objects as a glowing green shimmer in the air; the brighter and more intense the green, the more powerful the radioactivity. Blocked by 3 feet of dirt/wood, 1 foot of stone, 1 inch of metal, or lead sheeting.',
     source: 'Pathfinder Campaign Setting: Technology Guide',
     verificationStatus: 'needs_review' as const,
   },
@@ -6604,20 +6817,36 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     name: 'Detect Relations',
     classLevels: { bard: 2, cleric: 2, inquisitor: 2, witch: 2 },
     school: 'Divination',
-    components: { verbal: true, somatic: true, focus: true, divine: true, focusComponents: 'a seed', material: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      focus: true,
+      divine: true,
+      focusComponents: 'a seed',
+      material: false,
+    },
     castingTime: '1 standard action',
     range: 'Close (25 ft. + 5 ft./2 levels)',
     target: 'One creature per level, no two of which can be more than 30 ft. apart',
     duration: 'Concentration, up to 1 min./level (D)',
     savingThrow: 'Will negates (see text)',
     spellResistance: 'No',
-    description: 'Identifies blood relationships between multiple creatures. Round 1: confirms whether subjects share blood relation. Round 2: identifies number of related subjects and general relation. Round 3: reveals precise relationship (Will save can negate). Ineffective for adoptive families. Physical barriers can block the effect.',
+    description:
+      'Identifies blood relationships between multiple creatures. Round 1: confirms whether subjects share blood relation. Round 2: identifies number of related subjects and general relation. Round 3: reveals precise relationship (Will save can negate). Ineffective for adoptive families. Physical barriers can block the effect.',
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Detect the Faithful',
-    classLevels: { antipaladin: 1, cleric: 1, druid: 1, inquisitor: 1, paladin: 1, ranger: 1, shaman: 1 },
+    classLevels: {
+      antipaladin: 1,
+      cleric: 1,
+      druid: 1,
+      inquisitor: 1,
+      paladin: 1,
+      ranger: 1,
+      shaman: 1,
+    },
     school: 'Divination',
     components: { verbal: true, somatic: true, divine: true, material: false },
     castingTime: '1 standard action',
@@ -6627,13 +6856,14 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'Concentration, up to 1 minute/level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'Identifies other worshipers of the caster\'s deity, including mortal followers and outsider servants. Round 1: detects presence or absence. Round 2: identifies number of worshipers. Round 3: pinpoints exact locations (direction only if outside line of sight). Penetrates barriers except lead, 1 foot of stone, 1 inch of common metal, or 3 feet of wood or dirt. Also detects heretics and creatures genuinely believing they follow the same faith.',
+    description:
+      "Identifies other worshipers of the caster's deity, including mortal followers and outsider servants. Round 1: detects presence or absence. Round 2: identifies number of worshipers. Round 3: pinpoints exact locations (direction only if outside line of sight). Penetrates barriers except lead, 1 foot of stone, 1 inch of common metal, or 3 feet of wood or dirt. Also detects heretics and creatures genuinely believing they follow the same faith.",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_D_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Determine Depth',
     classLevels: { bard: 2, druid: 2, sorcerer: 2, wizard: 2 },
     school: 'Divination',
@@ -6644,7 +6874,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'Concentration, up to 1 round/level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'Allows a caster to determine the exact thickness of barriers like walls, ceilings, or other solid structures through touch. Can measure depths up to 10 feet per caster level (maximum 200 feet at 20th level). Functions on earthen, plaster, stone, or wooden surfaces but cannot penetrate metal or harder materials.',
+    description:
+      'Allows a caster to determine the exact thickness of barriers like walls, ceilings, or other solid structures through touch. Can measure depths up to 10 feet per caster level (maximum 200 feet at 20th level). Functions on earthen, plaster, stone, or wooden surfaces but cannot penetrate metal or harder materials.',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
     verificationStatus: 'needs_review' as const,
   },
@@ -6653,14 +6884,21 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     classLevels: { bard: 1, psychic: 1, shaman: 1, sorcerer: 1, wizard: 1, witch: 1 },
     school: 'Divination',
     descriptor: ['mind-affecting'],
-    components: { verbal: true, somatic: true, focus: true, focusComponents: 'copper piece', material: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      focus: true,
+      focusComponents: 'copper piece',
+      material: false,
+    },
     castingTime: '1 standard action',
     range: '60 feet',
     target: 'One creature',
     duration: 'Concentration, up to 1 minute/level (D)',
     savingThrow: 'Will negates (see text)',
     spellResistance: 'Yes',
-    description: "Scans the thoughts of one individual to learn the names and locations of the target's living relatives, as well as the attitude of the target toward those relatives (and vice versa). The caster learns about one relative per round of concentration. Limited to information the target knows or believes.",
+    description:
+      "Scans the thoughts of one individual to learn the names and locations of the target's living relatives, as well as the attitude of the target toward those relatives (and vice versa). The caster learns about one relative per round of concentration. Limited to information the target knows or believes.",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
@@ -6668,7 +6906,13 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     name: 'Discern Value',
     classLevels: { bard: 3, sorcerer: 3, wizard: 3 },
     school: 'Divination',
-    components: { verbal: true, somatic: true, focus: true, focusComponents: 'platinum monocle worth 100 gp', material: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      focus: true,
+      focusComponents: 'platinum monocle worth 100 gp',
+      material: false,
+    },
     castingTime: '1 standard action',
     range: '60 feet',
     area: 'Cone-shaped emanation',
@@ -6676,7 +6920,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'Concentration, up to 1 minute/level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'Analyzes monetary value of objects and identifies which are most valuable to an average trader. A minimum detection threshold is specified when casting. Round 1: detects presence/absence of objects meeting the threshold. Round 2: the most valuable object glows; direction provided if outside line of sight. Round 3: objects valued within 10% of the highest-value item glow faintly. Does not reveal magical properties, cannot detect artifacts, and ignores priceless items.',
+    description:
+      'Analyzes monetary value of objects and identifies which are most valuable to an average trader. A minimum detection threshold is specified when casting. Round 1: detects presence/absence of objects meeting the threshold. Round 2: the most valuable object glows; direction provided if outside line of sight. Round 3: objects valued within 10% of the highest-value item glow faintly. Does not reveal magical properties, cannot detect artifacts, and ignores priceless items.',
     source: "Pathfinder Player Companion: Dungeoneer's Handbook",
     verificationStatus: 'needs_review' as const,
   },
@@ -6685,7 +6930,14 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     classLevels: { bard: 3, inquisitor: 3, sorcerer: 3, wizard: 3, witch: 3 },
     school: 'Divination',
     descriptor: ['mind-affecting'],
-    components: { verbal: true, somatic: true, focus: true, divine: true, focusComponents: 'copper piece', material: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      focus: true,
+      divine: true,
+      focusComponents: 'copper piece',
+      material: false,
+    },
     castingTime: '1 standard action',
     range: '60 feet',
     area: 'Cone-shaped emanation',
@@ -6693,7 +6945,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'Concentration, up to 1 minute/level (D)',
     savingThrow: 'Will negates (see text)',
     spellResistance: 'No',
-    description: 'Functions like detect thoughts but specifically targets mental control echoes. Each minute of concentration reveals one of five pieces of information about the creature mentally dominating the target: direction and distance to the controller, the controller\'s emotional state, a relevant iconic image, the controller\'s general location, or the name by which the target knows its controller.',
+    description:
+      "Functions like detect thoughts but specifically targets mental control echoes. Each minute of concentration reveals one of five pieces of information about the creature mentally dominating the target: direction and distance to the controller, the controller's emotional state, a relevant iconic image, the controller's general location, or the name by which the target knows its controller.",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
@@ -6709,7 +6962,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'See text',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: "Functions similarly to dream but allows reading a target's thoughts rather than sending messages. Waits for the target to sleep, then can concentrate to read its surface thoughts as if using detect thoughts for up to 1 minute per caster level. Alternatively, can scan dreams and subconscious by asking questions (one answer per minute of concentration, Will save each time). Targets may Bluff to implant false information on a successful check of 5+.",
+    description:
+      "Functions similarly to dream but allows reading a target's thoughts rather than sending messages. Waits for the target to sleep, then can concentrate to read its surface thoughts as if using detect thoughts for up to 1 minute per caster level. Alternatively, can scan dreams and subconscious by asking questions (one answer per minute of concentration, Will save each time). Targets may Bluff to implant false information on a successful check of 5+.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -6717,7 +6971,13 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     name: 'Dungeonsight',
     classLevels: { bard: 4, cleric: 5, inquisitor: 4, sorcerer: 5, wizard: 5 },
     school: 'Divination',
-    components: { verbal: true, somatic: true, focus: true, focusComponents: 'small glass orb worth 150 gp', material: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      focus: true,
+      focusComponents: 'small glass orb worth 150 gp',
+      material: false,
+    },
     castingTime: '1 standard action',
     range: 'Personal',
     area: '60-foot-radius emanation',
@@ -6725,13 +6985,14 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'Instantaneous',
     savingThrow: 'None',
     spellResistance: 'None',
-    description: 'Grants a clear and memorable view of the layout of chambers, barriers, and connecting passages within the spell\'s area. Reveals only architectural layout — not inhabitants or contents. Specifically identifies secret doors and hidden passages but provides no information about opening mechanisms.',
+    description:
+      "Grants a clear and memorable view of the layout of chambers, barriers, and connecting passages within the spell's area. Reveals only architectural layout — not inhabitants or contents. Specifically identifies secret doors and hidden passages but provides no information about opening mechanisms.",
     source: "Pathfinder Player Companion: Dragonslayer's Handbook",
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_E_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Eagle Eye',
     classLevels: { druid: 2, psychic: 2, ranger: 2, shaman: 2 },
     school: 'divination',
@@ -6743,8 +7004,9 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'You create a magical sensor positioned above you, up to the spell\'s maximum range. You perceive through normal vision from this elevated vantage point with 360-degree rotation capability. The spell does not penetrate solid surfaces but functions normally through foliage.',
-    source: 'Advanced Player\'s Guide',
+    description:
+      "You create a magical sensor positioned above you, up to the spell's maximum range. You perceive through normal vision from this elevated vantage point with 360-degree rotation capability. The spell does not penetrate solid surfaces but functions normally through foliage.",
+    source: "Advanced Player's Guide",
     verificationStatus: 'needs_review' as const,
   },
   {
@@ -6758,7 +7020,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1d4 rounds',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: 'You show the target a brief glimpse of the reward or punishment that awaits it when it dies, presenting a mental image of its destined plane in the afterlife. Good-aligned targets become fascinated, neutral-aligned targets become confused, and evil-aligned targets become shaken.',
+    description:
+      'You show the target a brief glimpse of the reward or punishment that awaits it when it dies, presenting a mental image of its destined plane in the afterlife. Good-aligned targets become fascinated, neutral-aligned targets become confused, and evil-aligned targets become shaken.',
     source: 'Pathfinder Campaign Setting: Inner Sea Gods',
     verificationStatus: 'needs_review' as const,
   },
@@ -6766,14 +7029,21 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     name: 'Ears of the City',
     classLevels: { bard: 1, cleric: 1, inquisitor: 1, shaman: 1, sorcerer: 1, wizard: 1, witch: 1 },
     school: 'divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a small piece of a brick', divine: true },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a small piece of a brick',
+      divine: true,
+    },
     castingTime: '1 standard action',
     range: 'Touch',
     target: 'One creature',
     duration: '1 round/level',
     savingThrow: 'Will negates (harmless)',
     spellResistance: 'Yes',
-    description: 'The target receives a stream of past scenes and pieces of conversations related to local people and events. Each round, the target can make a Diplomacy or Perception check to gather information as if spending 1d4 hours interviewing locals, though concentration on this effect renders the target blind and deaf.',
+    description:
+      'The target receives a stream of past scenes and pieces of conversations related to local people and events. Each round, the target can make a Diplomacy or Perception check to gather information as if spending 1d4 hours interviewing locals, though concentration on this effect renders the target blind and deaf.',
     source: 'Pathfinder Player Companion: Heroes of the Street',
     verificationStatus: 'needs_review' as const,
   },
@@ -6789,8 +7059,9 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'This spell allows you to communicate with creatures associated with a chosen element. You select one elemental type at casting: Air allows you to converse in Auran with creatures possessing the air subtype or fly speed; Earth allows Terran with creatures possessing the earth subtype or burrow speed; Fire allows Ignan with fire subtype creatures; Water allows Aquan with water subtype or swim speed creatures. The spell enables communication with creatures of Intelligence 1 or higher but does not guarantee favorable reactions.',
-    source: 'Advanced Player\'s Guide',
+    description:
+      'This spell allows you to communicate with creatures associated with a chosen element. You select one elemental type at casting: Air allows you to converse in Auran with creatures possessing the air subtype or fly speed; Earth allows Terran with creatures possessing the earth subtype or burrow speed; Fire allows Ignan with fire subtype creatures; Water allows Aquan with water subtype or swim speed creatures. The spell enables communication with creatures of Intelligence 1 or higher but does not guarantee favorable reactions.',
+    source: "Advanced Player's Guide",
     verificationStatus: 'needs_review' as const,
   },
   {
@@ -6804,13 +7075,29 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (see text)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'Upon casting, you roll a d20 and record the result. At any point during the spell\'s duration, you may use that recorded roll in place of a single ability check, attack roll, initiative check, saving throw, or skill check. The result must be used instead of rolling; you cannot choose to use it after seeing the result. Only one instance of this spell may be active on a character simultaneously.',
+    description:
+      "Upon casting, you roll a d20 and record the result. At any point during the spell's duration, you may use that recorded roll in place of a single ability check, attack roll, initiative check, saving throw, or skill check. The result must be used instead of rolling; you cannot choose to use it after seeing the result. Only one instance of this spell may be active on a character simultaneously.",
     source: 'Pathfinder Campaign Setting: Lost Kingdoms',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Enchantment Sight',
-    classLevels: { alchemist: 2, bard: 2, cleric: 2, oracle: 2, inquisitor: 2, medium: 2, mesmerist: 2, occultist: 2, paladin: 2, psychic: 2, sorcerer: 2, wizard: 2, spiritualist: 2, witch: 2 },
+    classLevels: {
+      alchemist: 2,
+      bard: 2,
+      cleric: 2,
+      oracle: 2,
+      inquisitor: 2,
+      medium: 2,
+      mesmerist: 2,
+      occultist: 2,
+      paladin: 2,
+      psychic: 2,
+      sorcerer: 2,
+      wizard: 2,
+      spiritualist: 2,
+      witch: 2,
+    },
     school: 'divination',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -6820,7 +7107,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'Your irises become purplish. Within 60 feet, enchanted creatures appear to glow with white light around their heads. The glow\'s intensity indicates spell level (faint/moderate/strong/overwhelming). Charm subschool effects glow scarlet; compulsion effects glow emerald. As a move action, you may attempt a Spellcraft check (DC 15 + spell level) to identify specific enchantment effects on visible targets. Enchantment sight can be made permanent with a permanency spell cast by a caster of 9th level or higher, at a cost of 2,500 gp.',
+    description:
+      "Your irises become purplish. Within 60 feet, enchanted creatures appear to glow with white light around their heads. The glow's intensity indicates spell level (faint/moderate/strong/overwhelming). Charm subschool effects glow scarlet; compulsion effects glow emerald. As a move action, you may attempt a Spellcraft check (DC 15 + spell level) to identify specific enchantment effects on visible targets. Enchantment sight can be made permanent with a permanency spell cast by a caster of 9th level or higher, at a cost of 2,500 gp.",
     source: 'Pathfinder Player Companion: Heroes of the High Court',
     verificationStatus: 'needs_review' as const,
   },
@@ -6835,7 +7123,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'You create a mental connection with willing participants (requiring Intelligence 3+). One favored enemy type is selected, and connected allies receive half your favored enemy bonus against that creature type. The connection terminates if any target exceeds the spell\'s range.',
+    description:
+      "You create a mental connection with willing participants (requiring Intelligence 3+). One favored enemy type is selected, and connected allies receive half your favored enemy bonus against that creature type. The connection terminates if any target exceeds the spell's range.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
     verificationStatus: 'needs_review' as const,
   },
@@ -6850,15 +7139,28 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 minute or until discharged',
     savingThrow: 'Will negates (harmless)',
     spellResistance: 'Yes',
-    description: 'The touched creature gains a +2 competence bonus on a single Diplomacy or Intimidate check. The recipient must decide to apply the bonus before rolling. Note: this is a 3.5E spell included for compatibility.',
+    description:
+      'The touched creature gains a +2 competence bonus on a single Diplomacy or Intimidate check. The recipient must decide to apply the bonus before rolling. Note: this is a 3.5E spell included for compatibility.',
     source: 'Pathfinder Companion: Taldor, Echoes of Glory',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_F_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Find Fault',
-    classLevels: { bard: 3, bloodrager: 3, inquisitor: 3, magus: 3, medium: 3, oracle: 3, psychic: 3, shaman: 3, 'sorcerer/wizard': 3, witch: 3 },
+    classLevels: {
+      bard: 3,
+      bloodrager: 3,
+      inquisitor: 3,
+      magus: 3,
+      medium: 3,
+      oracle: 3,
+      psychic: 3,
+      shaman: 3,
+      sorcerer: 3,
+      wizard: 3,
+      witch: 3,
+    },
     school: 'divination',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 standard action',
@@ -6867,7 +7169,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'instantaneous',
     savingThrow: 'none',
     spellResistance: 'yes',
-    description: 'You gain insight into a target\'s weaknesses, as if you had made an appropriate Knowledge skill check with a result equal to 20 + your caster level. Your first melee or ranged attack before the end of your next turn receives a +5 insight bonus. However, the spell fails if the target is polymorphed, disguised, or concealed by illusion and you are unaware of its true form.',
+    description:
+      "You gain insight into a target's weaknesses, as if you had made an appropriate Knowledge skill check with a result equal to 20 + your caster level. Your first melee or ranged attack before the end of your next turn receives a +5 insight bonus. However, the spell fails if the target is polymorphed, disguised, or concealed by illusion and you are unaware of its true form.",
     source: 'Pathfinder Player Companion: Arcane Anthology',
     verificationStatus: 'needs_review' as const,
   },
@@ -6882,13 +7185,14 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'instantaneous',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'You can sense whether a well-known creature you can clearly visualize is within a 20-mile radius and determine its distance, direction, movement status, speed, and mode of travel. The detection radius expands by 5 miles for every two caster levels above 10th, reaching a maximum 45-mile radius at 20th level. Anything preventing locate creature from functioning also blocks find quarry.',
+    description:
+      'You can sense whether a well-known creature you can clearly visualize is within a 20-mile radius and determine its distance, direction, movement status, speed, and mode of travel. The detection radius expands by 5 miles for every two caster levels above 10th, reaching a maximum 45-mile radius at 20th level. Anything preventing locate creature from functioning also blocks find quarry.',
     source: 'Pathfinder Roleplaying Game Ultimate Combat',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_F_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Focused Scrutiny',
     classLevels: { alchemist: 2, bard: 2, inquisitor: 2, psychic: 2, shaman: 2 },
     school: 'divination',
@@ -6899,7 +7203,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes per caster level (dismissible)',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'This divination spell grants you heightened awareness of a target creature\'s mannerisms, reactions, and body language. You gain a +10 bonus on Perception, Sense Motive, and Survival checks attempted against the target creature, as well as a +5 bonus on Diplomacy and Intimidate checks attempted against it.',
+    description:
+      "This divination spell grants you heightened awareness of a target creature's mannerisms, reactions, and body language. You gain a +10 bonus on Perception, Sense Motive, and Survival checks attempted against the target creature, as well as a +5 bonus on Diplomacy and Intimidate checks attempted against it.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
     verificationStatus: 'needs_review' as const,
   },
@@ -6915,7 +7220,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes per caster level (dismissible)',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'You select one alignment category (chaotic, evil, good, or lawful) and can track creatures bearing a strong or overwhelming aura of that alignment. The tracking functions like the scent ability, following aura traces on the ground rather than actual odor, though you gain no bonus to Perception checks. At 10th level, you can also track moderate alignment auras.',
+    description:
+      'You select one alignment category (chaotic, evil, good, or lawful) and can track creatures bearing a strong or overwhelming aura of that alignment. The tracking functions like the scent ability, following aura traces on the ground rather than actual odor, though you gain no bonus to Perception checks. At 10th level, you can also track moderate alignment auras.',
     source: 'Pathfinder Roleplaying Game Bestiary 2',
     verificationStatus: 'needs_review' as const,
   },
@@ -6931,13 +7237,14 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 minute per level (dismissible)',
     savingThrow: 'Will negates',
     spellResistance: 'yes',
-    description: 'This divination allows you to locate a target creature within range provided it remains within 10 feet of living plants or fungi. You must identify the target through physical characteristics like build, clothing, size, or tracks; line of effect is unnecessary. The nearby vegetation functions as a scrying sensor, extending your hearing, smell, and touch through all plants and fungi within 10 feet of the target, enabling you to assess object sizes and potentially overhear conversations. For one day after casting, you gain a +5 insight bonus on Survival checks to track creatures sensed via this spell.',
+    description:
+      'This divination allows you to locate a target creature within range provided it remains within 10 feet of living plants or fungi. You must identify the target through physical characteristics like build, clothing, size, or tracks; line of effect is unnecessary. The nearby vegetation functions as a scrying sensor, extending your hearing, smell, and touch through all plants and fungi within 10 feet of the target, enabling you to assess object sizes and potentially overhear conversations. For one day after casting, you gain a +5 insight bonus on Survival checks to track creatures sensed via this spell.',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Foretell Failure',
-    classLevels: { bard: 4, occultist: 5, oracle: 4, psychic: 4, 'sorcerer/wizard': 5, witch: 4 },
+    classLevels: { bard: 4, occultist: 5, oracle: 4, psychic: 4, sorcerer: 5, wizard: 5, witch: 4 },
     school: 'divination',
     components: { verbal: true, somatic: true, material: false },
     castingTime: '1 swift action',
@@ -6946,45 +7253,74 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'instantaneous',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'This divination spell enables you to gain insight before attempting a d20 roll. The spell magically informs you whether the action will succeed if you roll a 10 or better on the d20 roll involved. You must commit to the attempt if success is assured under those conditions; otherwise, you may pursue an alternative action. The action must be completable within a single round.',
+    description:
+      'This divination spell enables you to gain insight before attempting a d20 roll. The spell magically informs you whether the action will succeed if you roll a 10 or better on the d20 roll involved. You must commit to the attempt if success is assured under those conditions; otherwise, you may pursue an alternative action. The action must be completable within a single round.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Form Validation',
-    classLevels: { alchemist: 1, inquisitor: 1, 'sorcerer/wizard': 1 },
+    classLevels: { alchemist: 1, inquisitor: 1, sorcerer: 1, wizard: 1 },
     school: 'divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a bit of hair, a fingernail, or a similar portion of a creature' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a bit of hair, a fingernail, or a similar portion of a creature',
+    },
     castingTime: '1 standard action',
     range: 'touch',
     target: 'creature touched',
     duration: 'instantaneous',
     savingThrow: 'none',
     spellResistance: 'yes (harmless)',
-    description: 'To cast this spell, you need a bit of hair, a fingernail clipping, or some other portion of a creature that is no more than one week old per caster level. Upon touching the target creature, you instantly determine whether they match the creature from which you obtained the sample. The spell can be cast before touching the target to maintain discretion, and it functions on dead bodies or partial remains to verify identity.',
+    description:
+      'To cast this spell, you need a bit of hair, a fingernail clipping, or some other portion of a creature that is no more than one week old per caster level. Upon touching the target creature, you instantly determine whether they match the creature from which you obtained the sample. The spell can be cast before touching the target to maintain discretion, and it functions on dead bodies or partial remains to verify identity.',
     source: 'Pathfinder Campaign Setting: Pathfinder Society Field Guide',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: "Fortune's Path",
-    classLevels: { bard: 2, cleric: 3, 'sorcerer/wizard': 3 },
+    classLevels: { bard: 2, cleric: 3, sorcerer: 3, wizard: 3 },
     school: 'divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'incense worth 50 gp', focus: true, focusComponents: 'silver mirror worth at least 100 gp' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'incense worth 50 gp',
+      focus: true,
+      focusComponents: 'silver mirror worth at least 100 gp',
+    },
     castingTime: '10 minutes',
     range: 'personal',
     target: 'you',
     duration: 'instantaneous',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'You peer into a silver mirror to receive a divination about near-future events. You roll percentile dice and add your caster level (maximum +10) to determine accuracy and specificity. Results range from receiving no clear vision to accurately foreseeing a major event likely occurring within the next week, potentially including location details at the GM\'s discretion.',
+    description:
+      "You peer into a silver mirror to receive a divination about near-future events. You roll percentile dice and add your caster level (maximum +10) to determine accuracy and specificity. Results range from receiving no clear vision to accurately foreseeing a major event likely occurring within the next week, potentially including location details at the GM's discretion.",
     source: "Pathfinder Player Companion: Disciple's Doctrine",
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_G_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Grasp',
-    classLevels: { arcanist: 0, bard: 0, 'cleric/oracle': 0, druid: 0, hunter: 0, magus: 0, psychic: 0, skald: 0, 'sorcerer/wizard': 0, warpriest: 0, witch: 0 },
+    classLevels: {
+      arcanist: 0,
+      bard: 0,
+      cleric: 0,
+      oracle: 0,
+      druid: 0,
+      hunter: 0,
+      magus: 0,
+      psychic: 0,
+      skald: 0,
+      sorcerer: 0,
+      wizard: 0,
+      warpriest: 0,
+      witch: 0,
+    },
     school: 'divination',
     components: { verbal: true, somatic: false, material: false },
     castingTime: '1 immediate action',
@@ -6993,13 +7329,14 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'instantaneous',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'This spell functions as an immediate action when a climber fails a Climb check and would fall. The caster attempts another Climb check as a free action with a -2 penalty. Each successive use of this spell in the same climb increases the penalty by 2. Success prevents falling but halts progress.',
+    description:
+      'This spell functions as an immediate action when a climber fails a Climb check and would fall. The caster attempts another Climb check as a free action with a -2 penalty. Each successive use of this spell in the same climb increases the penalty by 2. Success prevents falling but halts progress.',
     source: 'Pathfinder Player Companion: Heroes of the Darklands',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_H_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Halfling Vengeance',
     classLevels: { antipaladin: 1, cleric: 2, inquisitor: 2 },
     school: 'divination',
@@ -7010,13 +7347,14 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level',
     savingThrow: 'Will negates (harmless)',
     spellResistance: 'yes (harmless)',
-    description: 'The caster grants a touched target the ability to identify enemy weaknesses. The recipient deals an additional 1d6 points of precision damage on successful attacks with daggers or slings when foes lack Dexterity bonuses to AC or are flanked. Damage scales by +1d6 per 4 caster levels beyond 3rd (maximum 5d6 at 19th level). Once per round, the target may sacrifice 2d6 precision damage to inflict one condition for one round: preventing attacks of opportunity against smaller creatures, denying Dexterity AC bonuses, imposing -2 attack penalties against smaller foes, or preventing 5-foot steps. Only one halfling vengeance spell affects a creature simultaneously.',
+    description:
+      'The caster grants a touched target the ability to identify enemy weaknesses. The recipient deals an additional 1d6 points of precision damage on successful attacks with daggers or slings when foes lack Dexterity bonuses to AC or are flanked. Damage scales by +1d6 per 4 caster levels beyond 3rd (maximum 5d6 at 19th level). Once per round, the target may sacrifice 2d6 precision damage to inflict one condition for one round: preventing attacks of opportunity against smaller creatures, denying Dexterity AC bonuses, imposing -2 attack penalties against smaller foes, or preventing 5-foot steps. Only one halfling vengeance spell affects a creature simultaneously.',
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_IJK ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Jungle Mind',
     classLevels: { druid: 5, oracle: 5, ranger: 4 },
     school: 'Divination',
@@ -7063,7 +7401,7 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_L_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Lend Judgment',
     classLevels: { inquisitor: 1 },
     school: 'divination',
@@ -7097,7 +7435,7 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_L_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Linked Legacy',
     classLevels: {
       bard: 1,
@@ -7106,7 +7444,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
       occultist: 1,
       psychic: 1,
       shaman: 1,
-      'sorcerer/wizard': 1,
+      sorcerer: 1,
+      wizard: 1,
       witch: 1,
     },
     school: 'divination',
@@ -7119,7 +7458,7 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     savingThrow: 'none',
     spellResistance: 'yes',
     description:
-      "This spell enables affected creatures to automatically share information gained from successful Knowledge checks or monster identification rolls as free actions. All spell targets receive shared information instantly. The spell ceases functioning for all targets if any move beyond close range of the caster until they reunite within range.",
+      'This spell enables affected creatures to automatically share information gained from successful Knowledge checks or monster identification rolls as free actions. All spell targets receive shared information instantly. The spell ceases functioning for all targets if any move beyond close range of the caster until they reunite within range.',
     source: 'Pathfinder Player Companion: Arcane Anthology',
     verificationStatus: 'needs_review' as const,
   },
@@ -7142,18 +7481,34 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_M_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Mask From Divination',
-    classLevels: { alchemist: 5, bloodrager: 4, magus: 5, shaman: 5, sorcerer: 5, wizard: 5, witch: 5 },
+    classLevels: {
+      alchemist: 5,
+      bloodrager: 4,
+      magus: 5,
+      shaman: 5,
+      sorcerer: 5,
+      wizard: 5,
+      witch: 5,
+    },
     school: 'divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'diamond dust worth 200 gp', focus: true, focusComponents: 'an eyeless mask' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'diamond dust worth 200 gp',
+      focus: true,
+      focusComponents: 'an eyeless mask',
+    },
     castingTime: '1 standard action',
     range: 'touch',
     target: 'creature touched',
     duration: '24 hours',
     savingThrow: 'Will negates (harmless, object)',
     spellResistance: 'yes (harmless, object)',
-    description: 'This spell grants the target protection similar to nondetection while also blocking divination attempts to gather information about the wearer. The mask adheres during the spell\'s duration and increases DCs for skill checks to learn about or identify the target by 4. Divination spells that reveal presence require caster level checks to succeed, and scrying targeting the wearer fails unless the scrying caster succeeds at a caster level check.',
+    description:
+      "This spell grants the target protection similar to nondetection while also blocking divination attempts to gather information about the wearer. The mask adheres during the spell's duration and increases DCs for skill checks to learn about or identify the target by 4. Divination spells that reveal presence require caster level checks to succeed, and scrying targeting the wearer fails unless the scrying caster succeeds at a caster level check.",
     source: "Pathfinder Roleplaying Game Adventurer's Guide",
     verificationStatus: 'needs_review' as const,
   },
@@ -7169,7 +7524,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'Will negates',
     spellResistance: 'yes',
-    description: "The spell prevents the target from accessing procedural memories and expertise. Affected creatures lose all skill ranks, known and prepared spells, activated feats, and their extraordinary, supernatural, and spell-like abilities that require activation. Passive abilities remain functional. The target may attempt a new Will save at the end of each turn to end the effect.",
+    description:
+      'The spell prevents the target from accessing procedural memories and expertise. Affected creatures lose all skill ranks, known and prepared spells, activated feats, and their extraordinary, supernatural, and spell-like abilities that require activation. Passive abilities remain functional. The target may attempt a new Will save at the end of each turn to end the effect.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -7185,7 +7541,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'instantaneous',
     savingThrow: 'Will half',
     spellResistance: 'yes',
-    description: 'You divine the most vulnerable portions of your opponent\'s mind and overload it with a glut of psychic information, dealing 1d6 damage per caster level (maximum 5d6). This spell has no effect on creatures without Intelligence scores.',
+    description:
+      "You divine the most vulnerable portions of your opponent's mind and overload it with a glut of psychic information, dealing 1d6 damage per caster level (maximum 5d6). This spell has no effect on creatures without Intelligence scores.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -7201,7 +7558,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'instantaneous',
     savingThrow: 'Will half',
     spellResistance: 'yes',
-    description: 'This spell functions as mind thrust I, dealing 1d8 damage per caster level (maximum 5d8). Can be undercast.',
+    description:
+      'This spell functions as mind thrust I, dealing 1d8 damage per caster level (maximum 5d8). Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -7217,7 +7575,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'instantaneous',
     savingThrow: 'Will half',
     spellResistance: 'yes',
-    description: 'This spell functions as mind thrust I, dealing 1d8 damage per caster level (maximum 10d8). Can be undercast.',
+    description:
+      'This spell functions as mind thrust I, dealing 1d8 damage per caster level (maximum 10d8). Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -7233,7 +7592,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'instantaneous',
     savingThrow: 'Will half',
     spellResistance: 'yes',
-    description: 'This spell functions as mind thrust I, dealing 1d8 damage per caster level (maximum 15d8). On a failed save, the target is fatigued for 1 round. Can be undercast.',
+    description:
+      'This spell functions as mind thrust I, dealing 1d8 damage per caster level (maximum 15d8). On a failed save, the target is fatigued for 1 round. Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -7249,7 +7609,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'instantaneous',
     savingThrow: 'Will half',
     spellResistance: 'yes',
-    description: 'This spell functions as mind thrust IV, dealing 1d8 damage per caster level (maximum 15d8). On a failed save, the target is exhausted for 1 round. On a successful save, the target is fatigued for 1 round. Can be undercast.',
+    description:
+      'This spell functions as mind thrust IV, dealing 1d8 damage per caster level (maximum 15d8). On a failed save, the target is exhausted for 1 round. On a successful save, the target is fatigued for 1 round. Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -7265,13 +7626,24 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'instantaneous',
     savingThrow: 'Will half',
     spellResistance: 'yes',
-    description: 'This spell functions as mind thrust IV, dealing 1d8 damage per caster level (maximum 20d8). On a failed save, the target is exhausted and stunned for 1 round. Can be undercast.',
+    description:
+      'This spell functions as mind thrust IV, dealing 1d8 damage per caster level (maximum 20d8). On a failed save, the target is exhausted and stunned for 1 round. Can be undercast.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mindshock',
-    classLevels: { antipaladin: 2, bloodrager: 2, inquisitor: 2, medium: 2, occultist: 2, psychic: 2, shaman: 2, spiritualist: 2, witch: 2 },
+    classLevels: {
+      antipaladin: 2,
+      bloodrager: 2,
+      inquisitor: 2,
+      medium: 2,
+      occultist: 2,
+      psychic: 2,
+      shaman: 2,
+      spiritualist: 2,
+      witch: 2,
+    },
     school: 'divination',
     descriptor: ['mind-affecting', 'pain'],
     components: { verbal: true, somatic: true, material: false },
@@ -7281,13 +7653,14 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'none',
     spellResistance: 'none',
-    description: 'You become infused with violent psychic energy. Your weapons, natural weapons, and unarmed strikes inflict an additional 1d4 points of nonlethal damage. Upon confirming a critical hit, the target becomes confused for 1 round due to pain. Creatures immune to critical hits, mind-affecting effects, or pain effects are unaffected.',
+    description:
+      'You become infused with violent psychic energy. Your weapons, natural weapons, and unarmed strikes inflict an additional 1d4 points of nonlethal damage. Upon confirming a critical hit, the target becomes confused for 1 round due to pain. Creatures immune to critical hits, mind-affecting effects, or pain effects are unaffected.',
     source: 'Pathfinder Player Companion: Occult Origins',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_M_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Mnemonic Siphon',
     classLevels: { arcanist: 4, magus: 3, occultist: 3, sorcerer: 4, wizard: 4, witch: 4 },
     school: 'divination',
@@ -7298,45 +7671,67 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 day/level or until discharged (D)',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'You inscribe a rune on the target object. The rune remains dormant until the object finds its way into the hands of a spellcaster. When triggered, it has a 10% chance per round to absorb spells matching your spell list, granting you temporary knowledge of the absorbed spell for 24 hours. The rune can absorb up to one spell per two caster levels before discharging.',
+    description:
+      'You inscribe a rune on the target object. The rune remains dormant until the object finds its way into the hands of a spellcaster. When triggered, it has a 10% chance per round to absorb spells matching your spell list, granting you temporary knowledge of the absorbed spell for 24 hours. The rune can absorb up to one spell per two caster levels before discharging.',
     source: 'Pathfinder Player Companion: Blood of the Ancients',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_P_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Pack Empathy',
-    classLevels: { bloodrager: 3, druid: 3, inquisitor: 3, medium: 2, ranger: 2, 'sorcerer/wizard': 3, spiritualist: 3, summoner: 3, witch: 3 },
+    classLevels: {
+      bloodrager: 3,
+      druid: 3,
+      inquisitor: 3,
+      medium: 2,
+      ranger: 2,
+      sorcerer: 3,
+      wizard: 3,
+      spiritualist: 3,
+      summoner: 3,
+      witch: 3,
+    },
     school: 'divination',
     components: { verbal: true, somatic: true, material: false, focus: false, divine: false },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
-    target: 'you plus one willing living creature per 3 levels, no two of which can be more than 30 ft. apart',
+    target:
+      'you plus one willing living creature per 3 levels, no two of which can be more than 30 ft. apart',
     duration: '1 hour/level (D)',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'You establish a psychic link between participants, enabling them to perceive each other\'s emotional conditions and communicate fundamental emotional concepts. The connection persists across distances on the same plane, terminating if a subject relocates to another plane or dies.',
+    description:
+      "You establish a psychic link between participants, enabling them to perceive each other's emotional conditions and communicate fundamental emotional concepts. The connection persists across distances on the same plane, terminating if a subject relocates to another plane or dies.",
     source: 'Advanced Race Guide',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Perfect Placement',
-    classLevels: { bard: 2, bloodrager: 2, magus: 3, psychic: 3, 'sorcerer/wizard': 3, witch: 3 },
+    classLevels: { bard: 2, bloodrager: 2, magus: 3, psychic: 3, sorcerer: 3, wizard: 3, witch: 3 },
     school: 'divination',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a chess piece', focus: false, divine: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a chess piece',
+      focus: false,
+      divine: false,
+    },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
     target: 'one creature per caster level; no two targets more than 30 ft. apart',
     duration: '1 round/level',
     savingThrow: 'Will negates (harmless)',
     spellResistance: 'yes (harmless)',
-    description: 'Targets receive a +1 insight bonus to AC and Reflex saves. This bonus increases to +3 specifically against attacks of opportunity.',
+    description:
+      'Targets receive a +1 insight bonus to AC and Reflex saves. This bonus increases to +3 specifically against attacks of opportunity.',
     source: 'Ultimate Intrigue',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_P_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Play Instrument',
     classLevels: { bard: 1 },
     school: 'divination',
@@ -7347,13 +7742,14 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'The spell allows you to play one instrument of your choice as if you had 1 rank in the appropriate Perform skill. You may also use improvised instruments, such as a barrel as a drum or a bow as a harp, treating them as if they were actual musical instruments.',
+    description:
+      'The spell allows you to play one instrument of your choice as if you had 1 rank in the appropriate Perform skill. You may also use improvised instruments, such as a barrel as a drum or a bow as a harp, treating them as if they were actual musical instruments.',
     source: 'Ultimate Magic',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Prediction of Failure',
-    classLevels: { 'sorcerer/wizard': 8, witch: 8 },
+    classLevels: { sorcerer: 8, wizard: 8, witch: 8 },
     school: 'divination',
     descriptor: ['curse', 'fear', 'mind-affecting'],
     components: { verbal: true, somatic: true, material: false, focus: false, divine: false },
@@ -7363,7 +7759,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: 'permanent or 1 round/level (see text)',
     savingThrow: 'Will partial',
     spellResistance: 'yes',
-    description: 'The spell causes the target to experience the anguish and suffering of every bitter failure it will ever experience, rendering it permanently shaken and sickened. A successful save reduces duration to 1 round/level. For spellcasters who fail the save, the spell additionally inflicts a random minor spellblight.',
+    description:
+      'The spell causes the target to experience the anguish and suffering of every bitter failure it will ever experience, rendering it permanently shaken and sickened. A successful save reduces duration to 1 round/level. For spellcasters who fail the save, the spell additionally inflicts a random minor spellblight.',
     source: 'Ultimate Magic',
     verificationStatus: 'needs_review' as const,
   },
@@ -7372,20 +7769,28 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     classLevels: { cleric: 2, inquisitor: 1, paladin: 1 },
     school: 'divination',
     descriptor: ['good'],
-    components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'silver hand mirror worth 50 gp', divine: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: false,
+      focus: true,
+      focusComponents: 'silver hand mirror worth 50 gp',
+      divine: false,
+    },
     castingTime: '1 minute',
     range: 'touch',
     target: 'one good-aligned creature',
     duration: '1 day',
     savingThrow: 'Will negates (harmless)',
     spellResistance: 'no',
-    description: 'The spell grants a creature the ability to foresee moral consequences, as if the creature were wearing a phylactery of faithfulness. The magic\'s guidance emphasizes protecting beauty and promotes peaceful solutions and compassion.',
+    description:
+      "The spell grants a creature the ability to foresee moral consequences, as if the creature were wearing a phylactery of faithfulness. The magic's guidance emphasizes protecting beauty and promotes peaceful solutions and compassion.",
     source: 'Inner Sea Gods',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Secret Speech',
     classLevels: { bard: 1, cleric: 2, inquisitor: 1, shaman: 2, sorcerer: 2, wizard: 2 },
     school: 'Divination',
@@ -7404,10 +7809,20 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_S2_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Share Language',
     school: 'divination',
-    classLevels: { bard: 1, cleric: 2, druid: 2, medium: 1, mesmerist: 1, occultist: 2, psychic: 1, sorcerer: 2, wizard: 2 },
+    classLevels: {
+      bard: 1,
+      cleric: 2,
+      druid: 2,
+      medium: 1,
+      mesmerist: 1,
+      occultist: 2,
+      psychic: 1,
+      sorcerer: 2,
+      wizard: 2,
+    },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: true },
     range: 'touch',
@@ -7415,7 +7830,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '24 hours',
     savingThrow: 'Will negates (harmless)',
     spellResistance: 'Yes',
-    description: 'Grants a touched creature the ability to comprehend and communicate in one language the caster knows, with additional languages possible at higher caster levels (up to 5 at 20th level). The recipient gains only linguistic knowledge. The spell does not affect the target\'s disposition toward others.',
+    description:
+      "Grants a touched creature the ability to comprehend and communicate in one language the caster knows, with additional languages possible at higher caster levels (up to 5 at 20th level). The recipient gains only linguistic knowledge. The spell does not affect the target's disposition toward others.",
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -7423,7 +7839,22 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     name: 'Shared Training',
     school: 'divination',
     descriptor: ['mind-affecting'],
-    classLevels: { arcanist: 3, bard: 2, cleric: 3, hunter: 2, inquisitor: 2, magus: 2, oracle: 3, paladin: 2, psychic: 3, ranger: 2, skald: 2, sorcerer: 3, warpriest: 3, wizard: 3 },
+    classLevels: {
+      arcanist: 3,
+      bard: 2,
+      cleric: 3,
+      hunter: 2,
+      inquisitor: 2,
+      magus: 2,
+      oracle: 3,
+      paladin: 2,
+      psychic: 3,
+      ranger: 2,
+      skald: 2,
+      sorcerer: 3,
+      warpriest: 3,
+      wizard: 3,
+    },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -7431,7 +7862,8 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level',
     savingThrow: 'none',
     spellResistance: 'No',
-    description: "Grants a selected teamwork feat to nearby allies who need not meet the feat's prerequisites. At higher caster levels (9th, 13th, 17th), the caster can share two, three, or four teamwork feats respectively.",
+    description:
+      "Grants a selected teamwork feat to nearby allies who need not meet the feat's prerequisites. At higher caster levels (9th, 13th, 17th), the caster can share two, three, or four teamwork feats respectively.",
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -7439,7 +7871,15 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     name: 'Skyshroud',
     school: 'divination',
     subschool: 'scrying',
-    classLevels: { arcanist: 3, bard: 3, cleric: 3, skald: 3, sorcerer: 3, wizard: 3, warpriest: 3 },
+    classLevels: {
+      arcanist: 3,
+      bard: 3,
+      cleric: 3,
+      skald: 3,
+      sorcerer: 3,
+      wizard: 3,
+      warpriest: 3,
+    },
     castingTime: '1 minute',
     components: { verbal: true, somatic: true, material: false, focus: true },
     range: 'long (400 ft. + 40 ft./level)',
@@ -7448,13 +7888,14 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
     duration: '1 hour/level',
     savingThrow: 'none',
     spellResistance: 'No',
-    description: 'Creates a hemispherical display showing the actual sky above the casting location, bypassing physical obstructions like stone or rock. Functions for purposes requiring sky visibility, spell preparation, and divine obediences, though it cannot support spells drawing direct power from the sky.',
+    description:
+      'Creates a hemispherical display showing the actual sky above the casting location, bypassing physical obstructions like stone or rock. Functions for purposes requiring sky visibility, spell preparation, and divine obediences, though it cannot support spells drawing direct power from the sky.',
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S3 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Synapse Overload',
     classLevels: { mesmerist: 4, psychic: 5 },
     school: 'Divination',
@@ -7473,18 +7914,25 @@ export const DIVINATION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_T_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Threefold Form',
     classLevels: { druid: 9, psychic: 9, witch: 9 },
     school: 'divination',
-    components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'a green, three-pointed knot made of mithral worth 729 gp' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: false,
+      focus: true,
+      focusComponents: 'a green, three-pointed knot made of mithral worth 729 gp',
+    },
     castingTime: '1 standard action',
     range: 'personal',
     target: 'you',
     duration: '9 rounds',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'You create three idealized versions of yourself at different life ages, splitting into three separate bodies. The spell functions similarly to bilocation but with three bodies instead of two. Each body is affected by threefold aspect with a different idealized age. Beyond the age-related effects from threefold aspect, all three bodies share your other effects as normal for bilocation magic.',
+    description:
+      'You create three idealized versions of yourself at different life ages, splitting into three separate bodies. The spell functions similarly to bilocation but with three bodies instead of two. Each body is affected by threefold aspect with a different idealized age. Beyond the age-related effects from threefold aspect, all three bodies share your other effects as normal for bilocation magic.',
     source: 'Pathfinder Player Companion: Legacy of the First World',
     verificationStatus: 'needs_review' as const,
   },

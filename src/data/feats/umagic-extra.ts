@@ -995,9 +995,82 @@ export const UMAGIC_EXTRA_FEATS: FeatDefinition[] = [
     prerequisites: [
       { type: 'special', description: 'Spellcraft 15 ranks, at least three metamagic feats' },
     ],
-    effects: [],
+    effects: [
+      {
+        type: 'special' as const,
+        bonusType: BonusType.UNTYPED,
+        target: 'special.spell_perfection_free_metamagic' as const,
+        value: 1,
+        source: 'Spell Perfection',
+        condition: {
+          type: 'custom' as const,
+          params: {},
+          description: 'Chosen spell only; modified level must not exceed 9th',
+        },
+      },
+      {
+        type: 'special' as const,
+        bonusType: BonusType.UNTYPED,
+        target: 'special.spell_perfection_double_bonuses' as const,
+        value: 2,
+        source: 'Spell Perfection',
+        condition: {
+          type: 'custom' as const,
+          params: {},
+          description:
+            'Chosen spell only; doubles Spell Focus, Spell Penetration, Weapon Focus [ray], etc.',
+        },
+      },
+    ],
     activationMode: 'passive',
     choices: [{ type: 'custom', label: 'Spell', affectsEffects: true }],
+    tags: ['metamagic', 'perfection', 'capstone', 'spell mastery'],
+  },
+  {
+    id: 'greater_spell_perfection',
+    name: 'Greater Spell Perfection',
+    description:
+      'Pick one spell for which you have already selected Spell Perfection. Whenever you cast that spell you may apply any one metamagic feat you have to that spell without affecting its level or casting time, without regard to the total modified level of the spell, even if it would use a spell slot above 9th level. This replaces the free metamagic feat granted by Spell Perfection. In addition, if you have other feats which allow you to apply a set numerical bonus to any aspect of this spell (such as Spell Focus, Spell Penetration, Weapon Focus [ray], and so on), double the bonus granted by that feat when applied to this spell.',
+    shortDescription:
+      'One free metamagic (ignoring 9th-level cap) and doubled bonuses for chosen Spell Perfection spell',
+    source: 'Ultimate Magic',
+    verificationStatus: 'needs_review' as const,
+    types: ['general'],
+    prerequisites: [
+      { type: 'skill', skillId: 'spellcraft', ranks: 19 },
+      { type: 'special', description: 'At least five metamagic feats, Spell Perfection' },
+    ],
+    effects: [
+      {
+        type: 'special' as const,
+        bonusType: BonusType.UNTYPED,
+        target: 'special.spell_perfection_free_metamagic_no_cap' as const,
+        value: 1,
+        source: 'Greater Spell Perfection',
+        condition: {
+          type: 'custom' as const,
+          params: {},
+          description: 'Chosen spell only; no 9th-level slot cap',
+        },
+      },
+      {
+        type: 'special' as const,
+        bonusType: BonusType.UNTYPED,
+        target: 'special.spell_perfection_double_bonuses' as const,
+        value: 2,
+        source: 'Greater Spell Perfection',
+        condition: {
+          type: 'custom' as const,
+          params: {},
+          description:
+            'Chosen spell only; doubles Spell Focus, Spell Penetration, Weapon Focus [ray], etc.',
+        },
+      },
+    ],
+    activationMode: 'passive',
+    choices: [
+      { type: 'custom', label: 'Spell (must have Spell Perfection for it)', affectsEffects: true },
+    ],
     tags: ['metamagic', 'perfection', 'capstone', 'spell mastery'],
   },
   {

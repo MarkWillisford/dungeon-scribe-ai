@@ -10,26 +10,20 @@ export const dweomerkeeperDefinitions: ClassChoiceDefinition[] = [
     className: 'dweomerkeeper',
     featureName: 'Mantle of Spells',
     description:
-      'At each odd level (1, 3, 5, 7, 9), a Dweomerkeeper selects one divine spell she can spontaneously convert any prepared divine spell into. The maximum spell level available scales with class level.',
+      'At 1st level and every odd level thereafter (1, 3, 5, 7, 9), a Dweomerkeeper chooses one arcane or divine spell she can cast. She may spontaneously convert any prepared spell of that type into the chosen spell, provided the converted spell is the same level or higher.',
     selectionMode: {
       type: 'at_class_levels',
       levels: [1, 3, 5, 7, 9],
     },
     optionSource: 'collection',
     collectionName: 'spells',
-    // Runtime filter: spells castable by this character + max level from levelFilterTable
-    collectionFilter: { castableByCharacter: true },
-    levelFilterTable: {
-      1: { maxSpellLevel: 3 },
-      3: { maxSpellLevel: 5 },
-      5: { maxSpellLevel: 7 },
-      7: { maxSpellLevel: 8 },
-      9: { maxSpellLevel: 9 },
-    },
+    // castingType: 'character_castable' — resolved at render time to all spell lists the
+    // character has access to, capped by her actual prepared spell levels per pool.
+    collectionFilter: { castingType: 'character_castable' },
     source: '3.5e',
     isOfficial: false,
     verificationStatus: 'needs_review' as const,
     visibility: 'campaign',
-    rev: 1,
+    rev: 2,
   },
 ];

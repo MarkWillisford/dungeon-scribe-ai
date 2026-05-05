@@ -1038,4 +1038,72 @@ export const MISC_FEATS_1: FeatDefinition[] = [
     activationMode: 'conditional',
     tags: ['knowledge', 'combat', 'insight'],
   },
+
+  // ==================== COMPLETE ARCANE (3.5e) ====================
+  {
+    id: 'persistent_spell_ca',
+    name: 'Persistent Spell (Complete Arcane)',
+    description:
+      "You can make a spell last all day. Spells that have a fixed or personal range and have a duration measured in rounds, minutes, hours, or similar can be made persistent. A persistent spell has a duration of 24 hours. Spells of instantaneous or permanent duration or spells whose effects are discharged are not affected by this feat. Persistent detection spells allow you to be aware of the presence of the detected phenomenon but require concentration to determine exact details. A persistent spell uses up a spell slot six levels higher than the spell's actual level.",
+    shortDescription: "Extend a spell's duration to 24 hours, uses +6 spell level slot",
+    source: 'Complete Arcane',
+    verificationStatus: 'needs_review' as const,
+    types: ['metamagic'],
+    prerequisites: [{ type: 'feat', featId: 'extend_spell' }],
+    effects: [],
+    activationMode: 'passive',
+    tags: ['metamagic', 'duration', 'persistent', '3_5e'],
+  },
+
+  // ==================== COMPLETE CHAMPION (3.5e) ====================
+  {
+    id: 'battle_blessing',
+    name: 'Battle Blessing',
+    description:
+      'Your ability to cast spells quickly in battle is exceptional. Any paladin spell with a casting time of 1 standard action can be cast as a swift action. Any paladin spell with a casting time of 1 full round can be cast as a standard action. Spells with other casting times are unaffected.',
+    shortDescription: 'Cast paladin standard-action spells as swift actions',
+    source: 'Complete Champion',
+    verificationStatus: 'needs_review' as const,
+    types: ['general'],
+    prerequisites: [{ type: 'special', description: 'Ability to cast paladin spells' }],
+    effects: [],
+    activationMode: 'passive',
+    tags: ['paladin', 'spellcasting', 'swift_action', '3_5e'],
+  },
+
+  // ==================== COMPLETE DIVINE (3.5e) ====================
+  {
+    id: 'divine_metamagic',
+    name: 'Divine Metamagic',
+    description:
+      'When you apply the selected metamagic feat to a divine spell, you can spend turn or rebuke undead attempts instead of using a higher-level spell slot. The number of turning attempts spent equals 1 + the number of additional spell levels the metamagic feat normally requires. You can take this feat multiple times; each time it applies to a different metamagic feat.',
+    shortDescription: 'Spend turn/rebuke attempts to apply chosen metamagic feat for free',
+    source: 'Complete Divine',
+    verificationStatus: 'needs_review' as const,
+    types: ['general'],
+    prerequisites: [{ type: 'special', description: 'Ability to turn or rebuke undead' }],
+    effects: [],
+    activationMode: 'passive',
+    choices: [
+      {
+        type: 'custom' as const,
+        label: 'Metamagic feat',
+        options: [
+          'Empower Spell',
+          'Enlarge Spell',
+          'Extend Spell',
+          'Heighten Spell',
+          'Maximize Spell',
+          'Persistent Spell',
+          'Quicken Spell',
+          'Selective Spell',
+          'Silent Spell',
+          'Still Spell',
+          'Widen Spell',
+        ],
+        affectsEffects: false,
+      },
+    ],
+    tags: ['divine', 'metamagic', 'turning', 'channel', '3_5e'],
+  },
 ];

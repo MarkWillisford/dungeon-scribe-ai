@@ -2,7 +2,7 @@ import type { SpellDefinition } from '@/types/spells';
 
 export const ILLUSION_SPELLS: SpellDefinition[] = [
   // ─── Pre-existing content ────────────────────────────────────────────────────
-// ───────────────────────── LEVEL 1 ─────────────────────────
+  // ───────────────────────── LEVEL 1 ─────────────────────────
   {
     name: 'Auditory Hallucination',
     classLevels: {
@@ -2237,7 +2237,7 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_001 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Loathsome Veil',
     classLevels: { arcanist: 3, mesmerist: 3, psychic: 3, sorcerer: 3, wizard: 3, witch: 3 },
     school: 'Illusion',
@@ -3729,7 +3729,7 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_002 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Symbol of Mirroring',
     classLevels: { arcanist: 2, mesmerist: 2, occultist: 2, sorcerer: 2, witch: 2, wizard: 2 },
     school: 'Illusion',
@@ -4171,7 +4171,7 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_A_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Absurdity',
     classLevels: { bard: 2, medium: 2, mesmerist: 2, psychic: 2, spiritualist: 2 },
     school: 'Illusion',
@@ -4184,13 +4184,25 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute per level (D)',
     savingThrow: 'Will negates',
     spellResistance: 'No',
-    description: 'This spell makes targets perceive intimidation and threats as laughably absurd. Intimidation attempts appear as exaggerated facial expressions or awkward speech. Fear-inducing effects become objects of ridicule. The spell grants immunity to the spooked condition and provides a 50% chance to negate shaken or scared conditions from any source, including Intimidate skill checks. Other fear-related spell effects function normally. However, affected creatures suffer a -10 penalty on Sense Motive checks to avoid surprise and detect threats, plus a -2 initiative penalty.',
+    description:
+      'This spell makes targets perceive intimidation and threats as laughably absurd. Intimidation attempts appear as exaggerated facial expressions or awkward speech. Fear-inducing effects become objects of ridicule. The spell grants immunity to the spooked condition and provides a 50% chance to negate shaken or scared conditions from any source, including Intimidate skill checks. Other fear-related spell effects function normally. However, affected creatures suffer a -10 penalty on Sense Motive checks to avoid surprise and detect threats, plus a -2 initiative penalty.',
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Adjustable Disguise',
-    classLevels: { alchemist: 3, antipaladin: 3, bard: 3, inquisitor: 3, mesmerist: 3, occultist: 3, psychic: 3, 'sorcerer/wizard': 3, witch: 3 },
+    classLevels: {
+      alchemist: 3,
+      antipaladin: 3,
+      bard: 3,
+      inquisitor: 3,
+      mesmerist: 3,
+      occultist: 3,
+      psychic: 3,
+      sorcerer: 3,
+      wizard: 3,
+      witch: 3,
+    },
     school: 'Illusion',
     subschool: 'Glamer',
     components: { verbal: true, somatic: true, material: false },
@@ -4200,8 +4212,9 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes per caster level (D)',
     savingThrow: 'None',
     spellResistance: 'None',
-    description: 'This spell operates similarly to disguise self but allows the caster to alter the disguise (within the limitations of disguise self) as a swift action during the spell\'s duration. The caster may change their appearance to different humanoid forms such as varying ages, races, genders, and professions. The number of alterations permitted equals the caster\'s level.',
-    source: 'Pathfinder Player Companion: Spymaster\'s Handbook',
+    description:
+      "This spell operates similarly to disguise self but allows the caster to alter the disguise (within the limitations of disguise self) as a swift action during the spell's duration. The caster may change their appearance to different humanoid forms such as varying ages, races, genders, and professions. The number of alterations permitted equals the caster's level.",
+    source: "Pathfinder Player Companion: Spymaster's Handbook",
     verificationStatus: 'needs_review' as const,
   },
   {
@@ -4217,7 +4230,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: 'The caster instills apprehension in the target about attacking them. Each time the target makes an attack against you, targets you with a harmful spell, or otherwise takes an action that would harm you, it takes 2d6 points of nonlethal damage.',
+    description:
+      'The caster instills apprehension in the target about attacking them. Each time the target makes an attack against you, targets you with a harmful spell, or otherwise takes an action that would harm you, it takes 2d6 points of nonlethal damage.',
     source: 'Pathfinder Player Companion: Faiths & Philosophies',
     verificationStatus: 'needs_review' as const,
   },
@@ -4233,48 +4247,81 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute per level (D)',
     savingThrow: 'Will disbelieve',
     spellResistance: 'None',
-    description: 'The caster develops an unmistakable air of authority, which clouds creatures\' minds so they perceive the caster as their superior. Affected creatures receive a Will save to see through the deception. Those who fail view the caster as they would their direct superior. The spell accounts for varying hierarchies, potentially creating conflicting perceptions that trigger additional saves.',
+    description:
+      "The caster develops an unmistakable air of authority, which clouds creatures' minds so they perceive the caster as their superior. Affected creatures receive a Will save to see through the deception. Those who fail view the caster as they would their direct superior. The spell accounts for varying hierarchies, potentially creating conflicting perceptions that trigger additional saves.",
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Alter Musical Instrument',
-    classLevels: { bard: 1, 'sorcerer/wizard': 1, witch: 1 },
+    classLevels: { bard: 1, sorcerer: 1, wizard: 1, witch: 1 },
     school: 'Illusion',
     subschool: 'Figment',
-    components: { verbal: true, somatic: true, focus: true, focusComponents: 'an instrument', material: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      focus: true,
+      focusComponents: 'an instrument',
+      material: false,
+    },
     castingTime: '1 standard action',
     range: 'Close (25 ft. + 5 ft./2 levels)',
     target: 'One musical instrument',
     duration: '1 hour/level (D)',
     savingThrow: 'Fortitude negates (object)',
     spellResistance: 'Yes (object)',
-    description: 'The spell allows a caster to alter how an instrument sounds, making it resemble a different instrument type. The change can range from minor adjustments to major transformations. All other properties remain unchanged—volume, pitch range, and playing method stay the same.',
+    description:
+      'The spell allows a caster to alter how an instrument sounds, making it resemble a different instrument type. The change can range from minor adjustments to major transformations. All other properties remain unchanged—volume, pitch range, and playing method stay the same.',
     source: 'Pathfinder Player Companion: Alchemy Manual',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_A_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Appearance of Life',
-    classLevels: { 'cleric/oracle': 3, medium: 2, mesmerist: 3, psychic: 3, 'sorcerer/wizard': 3, spiritualist: 3, witch: 3 },
+    classLevels: {
+      cleric: 3,
+      oracle: 3,
+      medium: 2,
+      mesmerist: 3,
+      psychic: 3,
+      sorcerer: 3,
+      wizard: 3,
+      spiritualist: 3,
+      witch: 3,
+    },
     school: 'Illusion',
     subschool: 'Glamer',
     descriptor: ['evil'],
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'one Tiny or larger living creature' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'one Tiny or larger living creature',
+    },
     castingTime: '1 round',
     range: 'Long (400 ft. + 40 ft./caster level)',
     target: 'One or more undead creatures',
     duration: '10 minutes/level (D)',
     savingThrow: 'Will disbelief or Will negates',
     spellResistance: 'No',
-    description: 'This illusion disguises Medium-sized or smaller undead as living humanoid creatures. The caster can affect multiple undead whose total Hit Dice don\'t exceed twice the caster\'s level. The illusion lacks smell, sound, texture, or temperature. Intelligent undead may attempt saving throws to resist; mindless undead cannot. Creatures interacting with the illusion gain disbelief saves. The spell interferes with detect undead, requiring a caster check to pierce it.',
+    description:
+      "This illusion disguises Medium-sized or smaller undead as living humanoid creatures. The caster can affect multiple undead whose total Hit Dice don't exceed twice the caster's level. The illusion lacks smell, sound, texture, or temperature. Intelligent undead may attempt saving throws to resist; mindless undead cannot. Creatures interacting with the illusion gain disbelief saves. The spell interferes with detect undead, requiring a caster check to pierce it.",
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Assumed Likeness',
-    classLevels: { bard: 1, magus: 2, medium: 1, mesmerist: 1, occultist: 2, psychic: 2, 'sorcerer/wizard': 2 },
+    classLevels: {
+      bard: 1,
+      magus: 2,
+      medium: 1,
+      mesmerist: 1,
+      occultist: 2,
+      psychic: 2,
+      sorcerer: 2,
+      wizard: 2,
+    },
     school: 'Illusion',
     subschool: 'Phantasm',
     descriptor: ['emotion', 'mind-affecting'],
@@ -4285,7 +4332,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes per caster level (D)',
     savingThrow: 'Will disbelief',
     spellResistance: 'Yes',
-    description: 'The caster creates a visual disguise drawn from targets\' memories, with each observer perceiving the caster as a creature matching their selected emotion. The spell grants a +10 bonus to Disguise checks but imposes a -5 penalty initially. Failed disbelief results grant targets a -2 penalty to Sense Motive checks. Additional benefits vary by emotion: Fear (+4 Intimidate), Hate (+2 attack/-2 AC), Lust (+4 Sleight of Hand), Respect (+4 Diplomacy), or Trust (+4 Bluff).',
+    description:
+      "The caster creates a visual disguise drawn from targets' memories, with each observer perceiving the caster as a creature matching their selected emotion. The spell grants a +10 bonus to Disguise checks but imposes a -5 penalty initially. Failed disbelief results grant targets a -2 penalty to Sense Motive checks. Additional benefits vary by emotion: Fear (+4 Intimidate), Hate (+2 attack/-2 AC), Lust (+4 Sleight of Hand), Respect (+4 Diplomacy), or Trust (+4 Bluff).",
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -4300,15 +4348,27 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 day/level (D)',
     savingThrow: 'Will negates (harmless, object)',
     spellResistance: 'Yes',
-    description: 'This illusion spell masks and manipulates a target\'s aura to confound those attempting to discern information via aura reading or analysis. It allows adjustment of four distinct aura types: alignment (shifted up to one step per axis), emotion (displayed colors modified), health status (conditions masked), and magical aura (appearing non-magical, as a specific item type, or under a particular spell). The spell\'s effects persist for the duration.',
+    description:
+      "This illusion spell masks and manipulates a target's aura to confound those attempting to discern information via aura reading or analysis. It allows adjustment of four distinct aura types: alignment (shifted up to one step per axis), emotion (displayed colors modified), health status (conditions masked), and magical aura (appearing non-magical, as a specific item type, or under a particular spell). The spell's effects persist for the duration.",
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_B_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Baleful Shadow Transmutation',
-    classLevels: { alchemist: 6, bard: 6, druid: 7, medium: 6, shaman: 6, 'sorcerer/wizard': 6, spiritualist: 6, summoner: 6, witch: 6 },
+    classLevels: {
+      alchemist: 6,
+      bard: 6,
+      druid: 7,
+      medium: 6,
+      shaman: 6,
+      sorcerer: 6,
+      wizard: 6,
+      spiritualist: 6,
+      summoner: 6,
+      witch: 6,
+    },
     school: 'Illusion',
     subschool: 'Shadow',
     descriptor: ['shadow'],
@@ -4319,31 +4379,58 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'Permanent',
     savingThrow: 'Will disbelief, then Fortitude negates',
     spellResistance: 'Yes',
-    description: "The caster infuses a target's shadow with Shadow Plane energies, making it resemble a different creature and deceiving the target into believing it has transformed. A successful Will save disbelieves the effect. If the Will save fails, a Fortitude save determines if the transformation is permanent. The spell causes loss of extraordinary, supernatural, and spell-like abilities, plus spellcasting. The target gains the abilities and scores of the new form while retaining non-magical class features. Incorporeal creatures and shapechangers are immune.",
+    description:
+      "The caster infuses a target's shadow with Shadow Plane energies, making it resemble a different creature and deceiving the target into believing it has transformed. A successful Will save disbelieves the effect. If the Will save fails, a Fortitude save determines if the transformation is permanent. The spell causes loss of extraordinary, supernatural, and spell-like abilities, plus spellcasting. The target gains the abilities and scores of the new form while retaining non-magical class features. Incorporeal creatures and shapechangers are immune.",
     source: 'Pathfinder Roleplaying Game: Horror Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Blend With Surroundings',
-    classLevels: { bard: 1, cleric: 1, druid: 1, shaman: 1, 'sorcerer/wizard': 1, summoner: 1, witch: 1 },
+    classLevels: {
+      bard: 1,
+      cleric: 1,
+      druid: 1,
+      shaman: 1,
+      sorcerer: 1,
+      wizard: 1,
+      summoner: 1,
+      witch: 1,
+    },
     school: 'Illusion',
     subschool: 'Glamer',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a chess piece', focus: false, divine: true },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a chess piece',
+      focus: false,
+      divine: true,
+    },
     castingTime: '1 round',
     range: 'Close (25 ft. + 5 ft./2 levels)',
     target: 'One creature',
     duration: '10 minutes/level',
     savingThrow: 'Fortitude negates (harmless) or Will disbelieves (if interacted with)',
     spellResistance: 'Yes (harmless)',
-    description: 'The spell allows a creature to assume the appearance of an inanimate object such as a statue, furniture, a tree, a bush, or a rock of similar size. While stationary, the target gains a +20 bonus to Stealth checks and can use Stealth while observed. Armor blends with the illusion, negating its Stealth penalty. If the target moves, the spell immediately terminates.',
+    description:
+      'The spell allows a creature to assume the appearance of an inanimate object such as a statue, furniture, a tree, a bush, or a rock of similar size. While stationary, the target gains a +20 bonus to Stealth checks and can use Stealth while observed. Armor blends with the illusion, negating its Stealth penalty. If the target moves, the spell immediately terminates.',
     source: 'Pathfinder Player Companion: Dirty Tactics Toolbox',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_B_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Blurred Movement',
-    classLevels: { alchemist: 1, bard: 1, bloodrager: 1, magus: 1, psychic: 1, 'sorcerer/wizard': 1, summoner: 1 },
+    classLevels: {
+      alchemist: 1,
+      bard: 1,
+      bloodrager: 1,
+      magus: 1,
+      psychic: 1,
+      sorcerer: 1,
+      wizard: 1,
+      summoner: 1,
+    },
     school: 'Illusion',
     subschool: 'Glamer',
     components: { verbal: true, somatic: true, material: false, focus: false, divine: false },
@@ -4353,29 +4440,38 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: "This spell operates similarly to blur, but the obscuring effect activates only when you move at least 10 feet on your turn and ceases at the end of your movement. It primarily defends against opportunity attacks during your turn. If movement exceeds twice your speed in a single turn, the blurring continues until your next turn begins.",
+    description:
+      'This spell operates similarly to blur, but the obscuring effect activates only when you move at least 10 feet on your turn and ceases at the end of your movement. It primarily defends against opportunity attacks during your turn. If movement exceeds twice your speed in a single turn, the blurring continues until your next turn begins.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Body Double',
-    classLevels: { bard: 2, bloodrager: 2, magus: 2, 'sorcerer/wizard': 2 },
+    classLevels: { bard: 2, bloodrager: 2, magus: 2, sorcerer: 2, wizard: 2 },
     school: 'Illusion',
     subschool: 'Glamer',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'two glass beads', focus: false, divine: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'two glass beads',
+      focus: false,
+      divine: false,
+    },
     castingTime: '1 standard action',
     range: 'Close (25 ft. + 5 ft./2 levels)',
     target: 'Two creatures; see text',
     duration: '1 round/level',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: "The caster selects a primary and secondary target within range. Upon failing its save, the primary target's appearance, scent, sounds, and mannerisms change to match those of the secondary target. If both are the same size category, they become indistinguishable. When adjacent, actions targeting one target have a 50% chance of affecting the other instead.",
+    description:
+      "The caster selects a primary and secondary target within range. Upon failing its save, the primary target's appearance, scent, sounds, and mannerisms change to match those of the secondary target. If both are the same size category, they become indistinguishable. When adjacent, actions targeting one target have a 50% chance of affecting the other instead.",
     source: 'Pathfinder Roleplaying Game: Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_C_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Cackling Skull',
     classLevels: { witch: 3 },
     school: 'Illusion',
@@ -4387,7 +4483,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'Permanent until discharged',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: 'This spell operates similarly to magic mouth but targets a skull. When triggered, the skull produces wild and unnerving cackles before delivering its message. Creatures hearing the cackles must make a Will save or become shaken for 1d4 rounds.',
+    description:
+      'This spell operates similarly to magic mouth but targets a skull. When triggered, the skull produces wild and unnerving cackles before delivering its message. Creatures hearing the cackles must make a Will save or become shaken for 1d4 rounds.',
     source: 'Ultimate Magic',
     verificationStatus: 'needs_review' as const,
   },
@@ -4403,7 +4500,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level',
     savingThrow: 'None',
     spellResistance: 'None',
-    description: 'The caster becomes difficult to perceive through translucence, gaining a +4 bonus to Stealth checks and 20% concealment (miss chance) against creatures more than 5 feet away.',
+    description:
+      'The caster becomes difficult to perceive through translucence, gaining a +4 bonus to Stealth checks and 20% concealment (miss chance) against creatures more than 5 feet away.',
     source: 'Advanced Class Guide',
     verificationStatus: 'needs_review' as const,
   },
@@ -4420,17 +4518,33 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level',
     savingThrow: 'None',
     spellResistance: 'None',
-    description: 'An enhanced version of chameleon stride affecting all allies within 10 feet at casting. Affected creatures can see each other normally. Benefit is lost if creatures exit the area.',
+    description:
+      'An enhanced version of chameleon stride affecting all allies within 10 feet at casting. Affected creatures can see each other normally. Benefit is lost if creatures exit the area.',
     source: 'Advanced Class Guide',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Charnel House',
-    classLevels: { antipaladin: 3, cleric: 5, mesmerist: 5, psychic: 5, 'sorcerer/wizard': 5, witch: 5 },
+    classLevels: {
+      antipaladin: 3,
+      cleric: 5,
+      mesmerist: 5,
+      psychic: 5,
+      sorcerer: 5,
+      wizard: 5,
+      witch: 5,
+    },
     school: 'Illusion',
     subschool: 'Shadow',
     descriptor: ['Evil', 'Shadow'],
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'one Tiny or larger living creature', focus: false, divine: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'one Tiny or larger living creature',
+      focus: false,
+      divine: false,
+    },
     castingTime: '10 minutes',
     range: 'Close (25 ft. + 5 ft./2 levels)',
     area: '20-foot cube',
@@ -4438,28 +4552,45 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level',
     savingThrow: 'Will partial',
     spellResistance: 'No',
-    description: 'The caster sacrifices a living creature to manifest a grisly illusion of viscera and gore. Creatures entering must succeed at a Will save or become sickened for 1d6 rounds. The floor becomes slippery, requiring DC 10 Acrobatics checks to move at half speed.',
+    description:
+      'The caster sacrifices a living creature to manifest a grisly illusion of viscera and gore. Creatures entering must succeed at a Will save or become sickened for 1d6 rounds. The floor becomes slippery, requiring DC 10 Acrobatics checks to move at half speed.',
     source: 'Horror Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Clarion Call',
-    classLevels: { bard: 1, cleric: 1, magus: 1, 'sorcerer/wizard': 1 },
+    classLevels: { bard: 1, cleric: 1, magus: 1, sorcerer: 1, wizard: 1 },
     school: 'Illusion',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a piece of brass', focus: false, divine: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a piece of brass',
+      focus: false,
+      divine: false,
+    },
     castingTime: '1 standard action',
     range: 'Touch',
     target: 'Creature touched',
     duration: '10 minutes/level',
     savingThrow: 'Fortitude negates (harmless)',
     spellResistance: 'Yes (harmless)',
-    description: 'The subject can produce a sound like the blast of a mighty horn by miming the action, and can speak in a booming voice that carries easily over great distances, lowering the DC of any check to hear what is said by -15.',
+    description:
+      'The subject can produce a sound like the blast of a mighty horn by miming the action, and can speak in a booming voice that carries easily over great distances, lowering the DC of any check to hear what is said by -15.',
     source: 'Knights of the Inner Sea',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloak of Secrets',
-    classLevels: { antipaladin: 1, bard: 1, cleric: 1, inquisitor: 1, 'sorcerer/wizard': 1, witch: 1 },
+    classLevels: {
+      antipaladin: 1,
+      bard: 1,
+      cleric: 1,
+      inquisitor: 1,
+      sorcerer: 1,
+      wizard: 1,
+      witch: 1,
+    },
     school: 'Illusion',
     subschool: 'Glamer',
     components: { verbal: true, somatic: true, material: false, focus: false, divine: false },
@@ -4470,13 +4601,14 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'Creates an invisible bubble that filters speech from inside the area, causing outside listeners to hear an altered conversation. Listeners can make DC 15 Sense Motive checks to detect the deception. The bubble obscures spell verbal components and imposes a -5 penalty to Spellcraft checks.',
+    description:
+      'Creates an invisible bubble that filters speech from inside the area, causing outside listeners to hear an altered conversation. Listeners can make DC 15 Sense Motive checks to detect the deception. The bubble obscures spell verbal components and imposes a -5 penalty to Spellcraft checks.',
     source: 'Heroes of the Street',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Cloak of Shadows',
-    classLevels: { antipaladin: 4, bard: 5, mesmerist: 5, 'sorcerer/wizard': 5 },
+    classLevels: { antipaladin: 4, bard: 5, mesmerist: 5, sorcerer: 5, wizard: 5 },
     school: 'Illusion',
     subschool: 'Shadow',
     descriptor: ['Evil', 'Shadow'],
@@ -4487,15 +4619,16 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'Wraps the caster in a protective mantle of semireal shadow providing: 20% miss chance, +5 competence bonus to Stealth, and DR 5/good. Also negates sunlight vulnerabilities. In dim light or darkness against foes without darkvision, enhances to 50% miss chance and +10 Stealth bonus.',
+    description:
+      'Wraps the caster in a protective mantle of semireal shadow providing: 20% miss chance, +5 competence bonus to Stealth, and DR 5/good. Also negates sunlight vulnerabilities. In dim light or darkness against foes without darkvision, enhances to 50% miss chance and +10 Stealth bonus.',
     source: 'Villain Codex',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_C_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Create Mindscape',
-    classLevels: { medium: 4, mesmerist: 4, psychic: 4, 'sorcerer/wizard': 5 },
+    classLevels: { medium: 4, mesmerist: 4, psychic: 4, sorcerer: 5, wizard: 5 },
     school: 'Illusion',
     subschool: 'Phantasm',
     descriptor: ['Mind-affecting'],
@@ -4506,13 +4639,14 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level',
     savingThrow: 'Will disbelief; see text',
     spellResistance: 'Yes',
-    description: 'The caster creates an immersive mental realm that both the caster and target enter. The environment has customizable shape, size, and gravity traits. Creatures within cannot act in the physical world. The spell ends when the caster departs or either participant drops below 0 hit points.',
+    description:
+      'The caster creates an immersive mental realm that both the caster and target enter. The environment has customizable shape, size, and gravity traits. Creatures within cannot act in the physical world. The spell ends when the caster departs or either participant drops below 0 hit points.',
     source: 'Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Create Mindscape, Greater',
-    classLevels: { mesmerist: 6, psychic: 6, 'sorcerer/wizard': 7 },
+    classLevels: { mesmerist: 6, psychic: 6, sorcerer: 7, wizard: 7 },
     school: 'Illusion',
     subschool: 'Phantasm',
     descriptor: ['Mind-affecting'],
@@ -4523,26 +4657,43 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 day/level',
     savingThrow: 'Will disbelief; see text',
     spellResistance: 'Yes',
-    description: 'Functions as create mindscape but affects one creature per caster level, lasts 1 day/level, and the caster can control multiple believable creatures simultaneously within the mindscape.',
+    description:
+      'Functions as create mindscape but affects one creature per caster level, lasts 1 day/level, and the caster can control multiple believable creatures simultaneously within the mindscape.',
     source: 'Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_D_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Dark Whispers',
-    classLevels: { antipaladin: 1, bard: 2, cleric: 2, sorcerer: 2, wizard: 2, summoner: 2, witch: 2 },
+    classLevels: {
+      antipaladin: 1,
+      bard: 2,
+      cleric: 2,
+      sorcerer: 2,
+      wizard: 2,
+      summoner: 2,
+      witch: 2,
+    },
     school: 'Illusion',
     subschool: 'Shadow',
     descriptor: ['language-dependent', 'shadow'],
-    components: { verbal: true, somatic: true, focus: true, divine: true, focusComponents: 'a scrap of black cloth', material: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      focus: true,
+      divine: true,
+      focusComponents: 'a scrap of black cloth',
+      material: false,
+    },
     castingTime: '1 standard action',
     range: 'Long (400 ft. + 40 ft./level)',
     target: 'One creature per caster level',
     duration: '10 minutes/level (D)',
     savingThrow: 'None',
     spellResistance: 'Yes',
-    description: 'Enables communication through targets\' shadows. The caster\'s words emerge from shadows as clear whispers without physical manifestation. Targets may respond aloud, with their voices appearing from the caster\'s shadow. After casting, line of effect is unnecessary. Communication can be intercepted with a Perception check (DC 25) and can be silenced. Language-based abilities function normally but spellcasting through shadows is not permitted.',
+    description:
+      "Enables communication through targets' shadows. The caster's words emerge from shadows as clear whispers without physical manifestation. Targets may respond aloud, with their voices appearing from the caster's shadow. After casting, line of effect is unnecessary. Communication can be intercepted with a Perception check (DC 25) and can be silenced. Language-based abilities function normally but spellcasting through shadows is not permitted.",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
@@ -4559,12 +4710,13 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'Instantaneous',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: 'Creates an illusory copy of the spellcaster that appears in an adjacent square. Any creature that threatens that square must succeed at a Will save or make an attack of opportunity against the image. The duplicate\'s AC equals 10 plus half the caster\'s level. As a figment, attacks against it have no effect.',
+    description:
+      "Creates an illusory copy of the spellcaster that appears in an adjacent square. Any creature that threatens that square must succeed at a Will save or make an attack of opportunity against the image. The duplicate's AC equals 10 plus half the caster's level. As a figment, attacks against it have no effect.",
     source: 'Pathfinder Player Companion: Melee Tactics Toolbox',
     verificationStatus: 'needs_review' as const,
   },
   {
-    name: "Dazzling Blade",
+    name: 'Dazzling Blade',
     classLevels: { bard: 1, sorcerer: 1, wizard: 1 },
     school: 'Illusion',
     subschool: 'Pattern',
@@ -4575,13 +4727,22 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level',
     savingThrow: 'Will negates (see text)',
     spellResistance: 'Yes (harmless, object)',
-    description: 'Enchants a metal weapon to appear highly polished and silvery. The wielder gains a +1 competence bonus (increasing by +1 per 3 caster levels, max +5) on Bluff checks to feint in combat, CMB checks to disarm, and CMD against disarm attempts. As a free action, the wielder can discharge the spell as a blinding flash; an adjacent opponent must make a Will save or become blinded for 1 round (dazzled on success).',
+    description:
+      'Enchants a metal weapon to appear highly polished and silvery. The wielder gains a +1 competence bonus (increasing by +1 per 3 caster levels, max +5) on Bluff checks to feint in combat, CMB checks to disarm, and CMD against disarm attempts. As a free action, the wielder can discharge the spell as a blinding flash; an adjacent opponent must make a Will save or become blinded for 1 round (dazzled on success).',
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Deceitful Veneer',
-    classLevels: { antipaladin: 3, bard: 4, inquisitor: 4, medium: 3, mesmerist: 4, psychic: 4, witch: 5 },
+    classLevels: {
+      antipaladin: 3,
+      bard: 4,
+      inquisitor: 4,
+      medium: 3,
+      mesmerist: 4,
+      psychic: 4,
+      witch: 5,
+    },
     school: 'Illusion',
     subschool: 'Glamer',
     components: { verbal: true, somatic: true, material: false },
@@ -4591,7 +4752,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level (D)',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: 'Alters the target\'s aura and subtle behavioral cues to make their statements appear false. Both magical detection (like discern lies) and mundane Sense Motive register the target\'s words as deceptive. A careful Sense Motive check (DC 15 + caster level) can reveal when the target actually speaks truthfully. The caster can suppress or resume the spell\'s effects as a standard action.',
+    description:
+      "Alters the target's aura and subtle behavioral cues to make their statements appear false. Both magical detection (like discern lies) and mundane Sense Motive register the target's words as deceptive. A careful Sense Motive check (DC 15 + caster level) can reveal when the target actually speaks truthfully. The caster can suppress or resume the spell's effects as a standard action.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -4607,13 +4769,22 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level or until triggered, then 1 round/level',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'Creates a protective ward that misleads those attempting to dispel magic. When a dispel effect targets one of the caster\'s active spells, they can use an immediate action to dismiss this spell and make an opposed caster level check. Success means the dispel fails and the spell\'s aura becomes difficult to detect for 1 round per caster level (divinations must succeed at CL check DC 15 + caster level).',
+    description:
+      "Creates a protective ward that misleads those attempting to dispel magic. When a dispel effect targets one of the caster's active spells, they can use an immediate action to dismiss this spell and make an opposed caster level check. Success means the dispel fails and the spell's aura becomes difficult to detect for 1 round per caster level (divinations must succeed at CL check DC 15 + caster level).",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Decrepit Disguise',
-    classLevels: { bard: 1, medium: 1, mesmerist: 1, occultist: 1, psychic: 1, sorcerer: 1, wizard: 1 },
+    classLevels: {
+      bard: 1,
+      medium: 1,
+      mesmerist: 1,
+      occultist: 1,
+      psychic: 1,
+      sorcerer: 1,
+      wizard: 1,
+    },
     school: 'Illusion',
     subschool: 'Glamer',
     components: { verbal: true, somatic: false, material: false },
@@ -4623,18 +4794,25 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 day/level',
     savingThrow: 'None (object) or Will disbelief (if interacted with)',
     spellResistance: 'No',
-    description: 'Makes objects appear worthless and decrepit. A masterwork sword might seem like a rusted, useless blade. When cast on attended objects, the wielder may attempt a Will save to disbelieve. The spell counters and dispels quintessence. Can be made permanent via permanency (9th-level caster, 500 gp).',
+    description:
+      'Makes objects appear worthless and decrepit. A masterwork sword might seem like a rusted, useless blade. When cast on attended objects, the wielder may attempt a Will save to disbelieve. The spell counters and dispels quintessence. Can be made permanent via permanency (9th-level caster, 500 gp).',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_D_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Dirge of the Victorious Knights',
     classLevels: { bard: 6 },
     school: 'Illusion',
     subschool: 'Shadow',
-    components: { verbal: true, somatic: true, focus: true, focusComponents: 'medal from dead Hellknight or opera script copy worth 100+ gp', material: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      focus: true,
+      focusComponents: 'medal from dead Hellknight or opera script copy worth 100+ gp',
+      material: false,
+    },
     castingTime: '1 round',
     range: '120 feet',
     area: '120-foot line, 10 feet wide',
@@ -4642,7 +4820,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'Instantaneous',
     savingThrow: 'Reflex half',
     spellResistance: 'Yes',
-    description: 'The caster performs an operatic piece to summon spectral illusions of mounted knights to trample foes. Shadowy knights deal 1d6 damage per caster level (maximum 20d6), divided equally between cold and arcane force damage; the arcane portion bypasses cold resistance and immunity. The knights cannot penetrate force barriers or obstacles blocking incorporeal creatures.',
+    description:
+      'The caster performs an operatic piece to summon spectral illusions of mounted knights to trample foes. Shadowy knights deal 1d6 damage per caster level (maximum 20d6), divided equally between cold and arcane force damage; the arcane portion bypasses cold resistance and immunity. The knights cannot penetrate force barriers or obstacles blocking incorporeal creatures.',
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
@@ -4651,7 +4830,12 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     classLevels: { bard: 2, cleric: 2, oracle: 2, inquisitor: 2, sorcerer: 3, wizard: 3, witch: 2 },
     school: 'Illusion',
     subschool: 'Shadow',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a drop of holy water' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a drop of holy water',
+    },
     castingTime: '1 standard action',
     range: 'Long (400 ft. + 40 ft./level)',
     area: 'Visual figment spanning up to four 10-ft. cubes plus one 10-ft. cube per caster level (shapeable)',
@@ -4659,7 +4843,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'Concentration plus 1d4 rounds',
     savingThrow: 'Will disbelief (if interacted with)',
     spellResistance: 'No',
-    description: 'Creates an animated illusion similar to minor image depicting the caster presenting something a vampire finds aversive (garlic, a holy symbol, bells ringing). The vampire reacts to this illusion as real and can attempt to overcome it via disbelief save or standard Will save against the spell\'s DC.',
+    description:
+      "Creates an animated illusion similar to minor image depicting the caster presenting something a vampire finds aversive (garlic, a holy symbol, bells ringing). The vampire reacts to this illusion as real and can attempt to overcome it via disbelief save or standard Will save against the spell's DC.",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
@@ -4669,14 +4854,20 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     school: 'Illusion',
     subschool: 'Phantasm',
     descriptor: ['emotion', 'fear', 'mind-affecting'],
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'pinch of black sand' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'pinch of black sand',
+    },
     castingTime: '1 standard action',
     range: 'Close (25 ft. + 5 ft./2 levels)',
     target: 'Up to one creature per caster level, no two targets more than 30 feet apart',
     duration: '10 minutes/level',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: 'Warps how targets perceive their surroundings, making buildings appear ruined and allies seem hostile. Affected creatures gain the scared condition and react with hostility toward newly encountered beings (but not creatures present during casting). Should an affected target become frightened or panicked, they sustain 1d6 Wisdom damage (once per casting).',
+    description:
+      'Warps how targets perceive their surroundings, making buildings appear ruined and allies seem hostile. Affected creatures gain the scared condition and react with hostility toward newly encountered beings (but not creatures present during casting). Should an affected target become frightened or panicked, they sustain 1d6 Wisdom damage (once per casting).',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -4693,7 +4884,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'Variable (see text)',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: 'Builds upon the dream spell, enabling two-way communication between the caster and sleeping targets. The caster can exchange messages equal to caster level (each limited to 25 words or a single vague image). Sleeping recipients possessing dream or dream council spells can expend a message to enter the caster\'s dreamscape while remaining asleep. Those with the Lucid Dreamer feat enter without casting.',
+    description:
+      "Builds upon the dream spell, enabling two-way communication between the caster and sleeping targets. The caster can exchange messages equal to caster level (each limited to 25 words or a single vague image). Sleeping recipients possessing dream or dream council spells can expend a message to enter the caster's dreamscape while remaining asleep. Those with the Lucid Dreamer feat enter without casting.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -4710,13 +4902,23 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'Instantaneous',
     savingThrow: 'Will disbelief, then Will partial',
     spellResistance: 'Yes',
-    description: 'Projects a comforting phantasm that leeches onto the psyche of a target, filling its dreams with pleasant visions. After sleeping, the target must succeed on a Will save or remain asleep, continuing to require saves each night. Without intervention, the sleeping creature eventually starves. Persists until removed by break enchantment, greater restoration, or miracle. The target awakens if dealt damage equal to 1 point per Hit Die, but becomes fatigued.',
+    description:
+      'Projects a comforting phantasm that leeches onto the psyche of a target, filling its dreams with pleasant visions. After sleeping, the target must succeed on a Will save or remain asleep, continuing to require saves each night. Without intervention, the sleeping creature eventually starves. Persists until removed by break enchantment, greater restoration, or miracle. The target awakens if dealt damage equal to 1 point per Hit Die, but becomes fatigued.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Dream Reality',
-    classLevels: { alchemist: 5, bard: 5, cleric: 6, mesmerist: 5, occultist: 5, psychic: 6, sorcerer: 6, wizard: 6 },
+    classLevels: {
+      alchemist: 5,
+      bard: 5,
+      cleric: 6,
+      mesmerist: 5,
+      occultist: 5,
+      psychic: 6,
+      sorcerer: 6,
+      wizard: 6,
+    },
     school: 'Illusion',
     subschool: 'Compulsion',
     descriptor: ['mind-affecting'],
@@ -4727,32 +4929,51 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level (D)',
     savingThrow: 'Will disbelief',
     spellResistance: 'Yes',
-    description: 'Causes affected creatures to perceive their surroundings as dreamlike. When the magical effect expires, the target forgets all identifying details of events that transpired while the spell lasted. If modify memory is cast before the spell concludes, the target may recover these suppressed details.',
+    description:
+      'Causes affected creatures to perceive their surroundings as dreamlike. When the magical effect expires, the target forgets all identifying details of events that transpired while the spell lasted. If modify memory is cast before the spell concludes, the target may recover these suppressed details.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_E_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Echo',
-    classLevels: { bard: 1, druid: 1, medium: 1, mesmerist: 1, occultist: 1, psychic: 1, ranger: 1, spiritualist: 1, witch: 1 },
+    classLevels: {
+      bard: 1,
+      druid: 1,
+      medium: 1,
+      mesmerist: 1,
+      occultist: 1,
+      psychic: 1,
+      ranger: 1,
+      spiritualist: 1,
+      witch: 1,
+    },
     school: 'illusion',
     subschool: 'figment',
-    components: { verbal: false, somatic: true, material: false, focus: true, focusComponents: 'a conch shell' },
+    components: {
+      verbal: false,
+      somatic: true,
+      material: false,
+      focus: true,
+      focusComponents: 'a conch shell',
+    },
     castingTime: '1 standard action',
-    range: 'Close (25 ft. + 5 ft./2 levels) or Long (400 ft. + 40 ft./level) if the area naturally echoes',
+    range:
+      'Close (25 ft. + 5 ft./2 levels) or Long (400 ft. + 40 ft./level) if the area naturally echoes',
     area: 'One 10-ft. cube per caster level',
     target: 'see text',
     duration: '1 round/level (D)',
     savingThrow: 'Will disbelief (if interacted with)',
     spellResistance: 'Yes',
-    description: 'You reproduce a sound from up to 1 round prior at its original volume from a designated area. Special sound effects do not replicate. You can concentrate as a standard action to alter the echo, change its source within the area, or use a Bluff check to create a distraction for hiding (bonus equals your caster level).',
+    description:
+      'You reproduce a sound from up to 1 round prior at its original volume from a designated area. Special sound effects do not replicate. You can concentrate as a standard action to alter the echo, change its source within the area, or use a Bluff check to create a distraction for hiding (bonus equals your caster level).',
     source: 'Pathfinder Roleplaying Game Ultimate Wilderness',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_E_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Exquisite Accompaniment',
     classLevels: { bard: 3 },
     school: 'illusion',
@@ -4766,19 +4987,26 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'None',
     spellResistance: 'No',
-    description: 'You create a glowing construct of magic in the form of a portable musical instrument that hovers nearby, moves with you, and accompanies your bardic performance. While the instrument plays, you avoid expending rounds of bardic performance from your daily allotment to maintain an active effect. However, activating or switching to a new bardic performance effect still costs rounds from your total daily allotment. The phantom instrument cannot be damaged but can be dispelled.',
+    description:
+      'You create a glowing construct of magic in the form of a portable musical instrument that hovers nearby, moves with you, and accompanies your bardic performance. While the instrument plays, you avoid expending rounds of bardic performance from your daily allotment to maintain an active effect. However, activating or switching to a new bardic performance effect still costs rounds from your total daily allotment. The phantom instrument cannot be damaged but can be dispelled.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_F_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Fable Tapestry',
     classLevels: { bard: 5 },
     school: 'illusion',
     subschool: 'shadow',
     descriptor: ['shadow'],
-    components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'your family scarf' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: false,
+      focus: true,
+      focusComponents: 'your family scarf',
+    },
     castingTime: '1 round',
     range: 'close (25 ft. + 5 ft./2 levels)',
     effect: '1 legendary character per 4 caster levels',
@@ -4786,23 +5014,41 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round per caster level',
     savingThrow: 'Will disbelief',
     spellResistance: 'yes',
-    description: 'This ability is restricted to members of a specific ethnic nomadic group. The caster uses shadows and colors from a family scarf to create legendary folkloric figures. The spell functions similarly to shadow conjuration emulating summon monster I, with the limitation that only one instance of the same character can exist at any time. These shadow creatures possess 40% of normal reality and come from a specific list including creatures like a freelance thief, fey giant toad, con artist, carousing champion, evasive slip, or bearded devil.',
+    description:
+      'This ability is restricted to members of a specific ethnic nomadic group. The caster uses shadows and colors from a family scarf to create legendary folkloric figures. The spell functions similarly to shadow conjuration emulating summon monster I, with the limitation that only one instance of the same character can exist at any time. These shadow creatures possess 40% of normal reality and come from a specific list including creatures like a freelance thief, fey giant toad, con artist, carousing champion, evasive slip, or bearded devil.',
     source: 'Pathfinder Campaign Setting: Inner Sea Races',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'False Future',
-    classLevels: { bard: 3, cleric: 4, medium: 3, mesmerist: 3, psychic: 4, shaman: 4, 'sorcerer/wizard': 5, spiritualist: 4, witch: 4 },
+    classLevels: {
+      bard: 3,
+      cleric: 4,
+      medium: 3,
+      mesmerist: 3,
+      psychic: 4,
+      shaman: 4,
+      sorcerer: 5,
+      wizard: 5,
+      spiritualist: 4,
+      witch: 4,
+    },
     school: 'illusion',
     subschool: 'glamer',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'crushed jade worth 100 gp' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'crushed jade worth 100 gp',
+    },
     castingTime: '1 standard action',
     range: 'touch',
     target: 'creature or object touched',
     duration: '1 hour per caster level (dismissible)',
     savingThrow: 'Will negates or Will disbelief',
     spellResistance: 'yes',
-    description: 'This spell obscures a target\'s future by preventing divinations from revealing their true actions or experiences. Instead, divinations show an alternate future the caster describes during casting. Targets can save to resist initially, and divination casters can save to disbelieve the illusion. The spell remains undetectable by standard magic detection but greater detect magic can reveal it.',
+    description:
+      "This spell obscures a target's future by preventing divinations from revealing their true actions or experiences. Instead, divinations show an alternate future the caster describes during casting. Targets can save to resist initially, and divination casters can save to disbelieve the illusion. The spell remains undetectable by standard magic detection but greater detect magic can reveal it.",
     source: 'Pathfinder Roleplaying Game Ultimate Intrigue',
     verificationStatus: 'needs_review' as const,
   },
@@ -4812,7 +5058,12 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     school: 'illusion',
     subschool: 'shadow',
     descriptor: ['shadow'],
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a small replica of the caster worth 5 gp' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a small replica of the caster worth 5 gp',
+    },
     castingTime: '1 standard action',
     range: 'medium (100 ft. + 10 ft./level)',
     effect: 'one shadow duplicate',
@@ -4820,13 +5071,14 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (dismissible)',
     savingThrow: 'Will disbelief (if interacted with)',
     spellResistance: 'no',
-    description: 'This spell functions as project image, except the illusory duplicate appears in your familiar\'s square and moves when your familiar moves.',
+    description:
+      "This spell functions as project image, except the illusory duplicate appears in your familiar's square and moves when your familiar moves.",
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Familiar Figment',
-    classLevels: { 'sorcerer/wizard': 2, witch: 2 },
+    classLevels: { sorcerer: 2, wizard: 2, witch: 2 },
     school: 'illusion',
     subschool: 'figment',
     components: { verbal: true, somatic: true, material: false },
@@ -4836,13 +5088,22 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round per level (dismissible)',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'This spell creates an illusory duplicate of your familiar that moves erratically around your familiar\'s space, frequently moving through the familiar\'s body. Attacks directed at the familiar have a 50% miss chance, with missed strikes targeting the figment instead. Unlike mirror image, the figment persists after being struck. As a swift action, the familiar can direct the figment to make a melee touch attack using your base attack bonus and the familiar\'s Dexterity modifier. Successful hits cause the target to be treated as flanked until the familiar\'s turn ends.',
+    description:
+      "This spell creates an illusory duplicate of your familiar that moves erratically around your familiar's space, frequently moving through the familiar's body. Attacks directed at the familiar have a 50% miss chance, with missed strikes targeting the figment instead. Unlike mirror image, the figment persists after being struck. As a swift action, the familiar can direct the figment to make a melee touch attack using your base attack bonus and the familiar's Dexterity modifier. Successful hits cause the target to be treated as flanked until the familiar's turn ends.",
     source: 'Pathfinder Player Companion: Animal Archive',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Fearsome Duplicate',
-    classLevels: { bard: 3, inquisitor: 3, mesmerist: 3, psychic: 3, 'sorcerer/wizard': 3, witch: 3 },
+    classLevels: {
+      bard: 3,
+      inquisitor: 3,
+      mesmerist: 3,
+      psychic: 3,
+      sorcerer: 3,
+      wizard: 3,
+      witch: 3,
+    },
     school: 'illusion',
     subschool: 'figment',
     components: { verbal: true, somatic: true, material: false },
@@ -4853,34 +5114,56 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level (dismissible)',
     savingThrow: 'Will disbelief (if interacted with)',
     spellResistance: 'no',
-    description: 'This illusion spell creates an enlarged, menacing phantom version of yourself up to two size categories larger. The duplicate can communicate and perform social interactions (Bluff, Diplomacy, Intimidate) with a +2 bonus on Intimidate checks. You perceive through the duplicate but take a -4 penalty to Perception checks while controlling it. The duplicate requires a standard action each round to maintain control and vanishes if attacked, damaged, or moved beyond spell range.',
+    description:
+      'This illusion spell creates an enlarged, menacing phantom version of yourself up to two size categories larger. The duplicate can communicate and perform social interactions (Bluff, Diplomacy, Intimidate) with a +2 bonus on Intimidate checks. You perceive through the duplicate but take a -4 penalty to Perception checks while controlling it. The duplicate requires a standard action each round to maintain control and vanishes if attacked, damaged, or moved beyond spell range.',
     source: 'Pathfinder Roleplaying Game Advanced Race Guide',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_G_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Geomessage',
-    classLevels: { arcanist: 4, bard: 3, hunter: 3, medium: 3, occultist: 3, ranger: 3, skald: 3, 'sorcerer/wizard': 4 },
+    classLevels: {
+      arcanist: 4,
+      bard: 3,
+      hunter: 3,
+      medium: 3,
+      occultist: 3,
+      ranger: 3,
+      skald: 3,
+      sorcerer: 4,
+      wizard: 4,
+    },
     school: 'illusion',
     subschool: 'figment',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a scrap of vellum' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a scrap of vellum',
+    },
     castingTime: '1 minute',
     range: 'touch',
     target: 'surface touched',
     duration: '1 day/level',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'The caster produces an invisible magical message of up to 50 words, or alternatively an image, drawing, or diagram on a touched surface. A second casting of geomessage is required to make the message visible. The spell permits optional passphrase protection; if included, the message becomes visible only to those who cast geomessage and speak the correct phrase. Without a passphrase, the message remains invisible solely to other geomessage casters. Standard detection methods like detect magic reveal the message\'s presence but not its content.',
+    description:
+      "The caster produces an invisible magical message of up to 50 words, or alternatively an image, drawing, or diagram on a touched surface. A second casting of geomessage is required to make the message visible. The spell permits optional passphrase protection; if included, the message becomes visible only to those who cast geomessage and speak the correct phrase. Without a passphrase, the message remains invisible solely to other geomessage casters. Standard detection methods like detect magic reveal the message's presence but not its content.",
     source: 'Pathfinder Roleplaying Game Villain Codex',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghost Sound',
-    classLevels: { bard: 0, magus: 0, psychic: 0, 'sorcerer/wizard': 0 },
+    classLevels: { bard: 0, magus: 0, psychic: 0, sorcerer: 0, wizard: 0 },
     school: 'illusion',
     subschool: 'figment',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a bit of wool or a small lump of wax' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a bit of wool or a small lump of wax',
+    },
     castingTime: '1 standard action',
     range: 'Close (25 ft. + 5 ft./2 levels)',
     effect: 'illusory sounds',
@@ -4888,13 +5171,22 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'Will disbelief',
     spellResistance: 'no',
-    description: 'This cantrip enables the caster to produce sound effects of varying volume based on caster level, creating as much noise as four normal humans per caster level (maximum 40 humans). The spell creates audio that can resemble various creatures and activities but produces unintelligible speech. Ghost sound can be used to enhance silent image spells and can be made permanent via a permanency spell.',
+    description:
+      'This cantrip enables the caster to produce sound effects of varying volume based on caster level, creating as much noise as four normal humans per caster level (maximum 40 humans). The spell creates audio that can resemble various creatures and activities but produces unintelligible speech. Ghost sound can be used to enhance silent image spells and can be made permanent via a permanency spell.',
     source: 'Pathfinder Roleplaying Game Core Rulebook',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Ghostly Disguise',
-    classLevels: { alchemist: 2, bard: 2, inquisitor: 2, psychic: 2, 'sorcerer/wizard': 2, witch: 2 },
+    classLevels: {
+      alchemist: 2,
+      bard: 2,
+      inquisitor: 2,
+      psychic: 2,
+      sorcerer: 2,
+      wizard: 2,
+      witch: 2,
+    },
     school: 'illusion',
     subschool: 'glamer',
     components: { verbal: true, somatic: true, material: false },
@@ -4904,15 +5196,16 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level (D)',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'The caster gains a translucent, ghostly appearance affecting themselves and all equipment. The illusion can incorporate existing disguises, creating ghostly versions of them. The form may display pale green, blue, or violet coloration, or a muted version of normal appearance. An optional floating effect is purely illusory; actual ground contact remains. The spell grants no incorporeal abilities.',
+    description:
+      'The caster gains a translucent, ghostly appearance affecting themselves and all equipment. The illusion can incorporate existing disguises, creating ghostly versions of them. The form may display pale green, blue, or violet coloration, or a muted version of normal appearance. An optional floating effect is purely illusory; actual ground contact remains. The spell grants no incorporeal abilities.',
     source: 'Pathfinder Roleplaying Game: Ultimate Magic',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_H_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Hallucinatory Decor',
-    classLevels: { bard: 3, mesmerist: 3, psychic: 3, 'sorcerer/wizard': 3, witch: 3 },
+    classLevels: { bard: 3, mesmerist: 3, psychic: 3, sorcerer: 3, wizard: 3, witch: 3 },
     school: 'illusion',
     subschool: 'glamer',
     components: { verbal: true, somatic: true, material: false },
@@ -4923,13 +5216,14 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 hour/level (D)',
     savingThrow: 'Will disbelief (if interacted with)',
     spellResistance: 'no',
-    description: 'This illusion spell allows casters to transform the appearance of indoor and outdoor structures. Objects retain their actual configuration but can be made to look, sound, and smell like different materials and artistic styles. Natural terrain cannot be altered, though landscaped areas like gardens are fair game. The spell operates identically to hallucinatory terrain in all other respects.',
+    description:
+      'This illusion spell allows casters to transform the appearance of indoor and outdoor structures. Objects retain their actual configuration but can be made to look, sound, and smell like different materials and artistic styles. Natural terrain cannot be altered, though landscaped areas like gardens are fair game. The spell operates identically to hallucinatory terrain in all other respects.',
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Haunted Fey Aspect',
-    classLevels: { bard: 0, psychic: 0, 'sorcerer/wizard': 0 },
+    classLevels: { bard: 0, psychic: 0, sorcerer: 0, wizard: 0 },
     school: 'illusion',
     subschool: 'glamer',
     components: { verbal: false, somatic: true, material: false },
@@ -4939,13 +5233,14 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'none',
     spellResistance: 'none',
-    description: 'The caster surrounds themselves with disturbing illusions, making you look and sound like a bizarre, insane fey creature. The spell grants damage reduction of 1 point per cold iron against a single opponent for the spell\'s duration, or until the caster takes damage.',
+    description:
+      "The caster surrounds themselves with disturbing illusions, making you look and sound like a bizarre, insane fey creature. The spell grants damage reduction of 1 point per cold iron against a single opponent for the spell's duration, or until the caster takes damage.",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Haunting Mists',
-    classLevels: { bard: 2, mesmerist: 2, psychic: 2, 'sorcerer/wizard': 2, witch: 2 },
+    classLevels: { bard: 2, mesmerist: 2, psychic: 2, sorcerer: 2, wizard: 2, witch: 2 },
     school: 'illusion',
     subschool: 'figment',
     descriptor: ['fear', 'shadow'],
@@ -4957,39 +5252,73 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level (D)',
     savingThrow: 'Will partial',
     spellResistance: 'no',
-    description: 'The caster creates an illusory mist cloud filled with shadowy shapes. The cloud remains stationary and obscures all vision types (including darkvision) beyond 5 feet. Creatures within 5 feet gain concealment (20% miss chance), while those farther away have total concealment (50% miss chance, preventing sight-based targeting). All creatures inside the mist must succeed at a Will save or suffer two effects: 1d2 points of Wisdom damage and the shaken condition. The shaken condition persists as long as the creature remains within the mist\'s area.',
+    description:
+      "The caster creates an illusory mist cloud filled with shadowy shapes. The cloud remains stationary and obscures all vision types (including darkvision) beyond 5 feet. Creatures within 5 feet gain concealment (20% miss chance), while those farther away have total concealment (50% miss chance, preventing sight-based targeting). All creatures inside the mist must succeed at a Will save or suffer two effects: 1d2 points of Wisdom damage and the shaken condition. The shaken condition persists as long as the creature remains within the mist's area.",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hidden Blades',
-    classLevels: { alchemist: 2, antipaladin: 2, bard: 2, inquisitor: 2, magus: 2, 'sorcerer/wizard': 2, summoner: 2 },
+    classLevels: {
+      alchemist: 2,
+      antipaladin: 2,
+      bard: 2,
+      inquisitor: 2,
+      magus: 2,
+      sorcerer: 2,
+      wizard: 2,
+      summoner: 2,
+    },
     school: 'illusion',
     subschool: 'glamer',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a shard of glass' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a shard of glass',
+    },
     castingTime: '1 standard action',
     range: 'touch',
     target: 'one weapon or up to 50 pieces of ammunition',
     duration: '10 minutes/level',
     savingThrow: 'Will negates (harmless, object)',
     spellResistance: 'yes (harmless, object)',
-    description: 'This illusion renders the targeted weapon or ammunition invisible. The wielder gains +20 bonus on Sleight of Hand checks made to conceal the weapon or ammunition and a +5 circumstance bonus on Bluff checks to feint with the weapon or ammunition.',
+    description:
+      'This illusion renders the targeted weapon or ammunition invisible. The wielder gains +20 bonus on Sleight of Hand checks made to conceal the weapon or ammunition and a +5 circumstance bonus on Bluff checks to feint with the weapon or ammunition.',
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Hide Bruises',
-    classLevels: { antipaladin: 1, arcanist: 1, bard: 1, inquisitor: 1, mesmerist: 1, occultist: 1, psychic: 1, skald: 1, 'sorcerer/wizard': 1, witch: 1 },
+    classLevels: {
+      antipaladin: 1,
+      arcanist: 1,
+      bard: 1,
+      inquisitor: 1,
+      mesmerist: 1,
+      occultist: 1,
+      psychic: 1,
+      skald: 1,
+      sorcerer: 1,
+      wizard: 1,
+      witch: 1,
+    },
     school: 'illusion',
     subschool: 'glamer',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a drop of blood' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a drop of blood',
+    },
     castingTime: '1 standard action',
     range: 'touch',
     target: 'one creature touched',
     duration: '10 minutes/level (D)',
     savingThrow: 'none; Will disbelief (see text)',
     spellResistance: 'yes (harmless)',
-    description: "This spell makes a target's wounds appear to vanish. When another creature attempts a Heal check to assess the target's injury severity, they suffer a -10 penalty. Those who physically contact the concealed areas may attempt a Will save to recognize the glamered areas as illusory.",
+    description:
+      "This spell makes a target's wounds appear to vanish. When another creature attempts a Heal check to assess the target's injury severity, they suffer a -10 penalty. Those who physically contact the concealed areas may attempt a Will save to recognize the glamered areas as illusory.",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
@@ -4998,7 +5327,12 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     classLevels: { druid: 3, ranger: 2 },
     school: 'illusion',
     subschool: 'glamer',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a sprig of mistletoe, and a vial of quicksilver' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a sprig of mistletoe, and a vial of quicksilver',
+    },
     castingTime: '10 minutes',
     range: 'close (25 ft. + 5 ft./2 levels)',
     area: 'one 20-ft. cube',
@@ -5006,13 +5340,22 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '2 hours/level (D)',
     savingThrow: 'Will disbelief (if interacted with)',
     spellResistance: 'no',
-    description: 'This illusion spell disguises a campsite area to appear as unwelcoming natural terrain matching surroundings. External creatures cannot perceive activity within — no smell, sound, heat, or wind sensations escape. However, those inside maintain normal external visibility, and anyone entering the spell\'s area sees everything clearly.',
+    description:
+      "This illusion spell disguises a campsite area to appear as unwelcoming natural terrain matching surroundings. External creatures cannot perceive activity within — no smell, sound, heat, or wind sensations escape. However, those inside maintain normal external visibility, and anyone entering the spell's area sees everything clearly.",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Horrific Doubles',
-    classLevels: { bard: 4, bloodrager: 4, medium: 3, mesmerist: 4, psychic: 4, 'sorcerer/wizard': 4 },
+    classLevels: {
+      bard: 4,
+      bloodrager: 4,
+      medium: 3,
+      mesmerist: 4,
+      psychic: 4,
+      sorcerer: 4,
+      wizard: 4,
+    },
     school: 'illusion',
     subschool: 'figment',
     descriptor: ['mind-affecting', 'fear'],
@@ -5023,13 +5366,14 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level',
     savingThrow: 'Will (see text)',
     spellResistance: 'yes (see text)',
-    description: 'This spell creates illusory duplicates resembling mirror image but with unsettling appearances. Creatures viewing the doubles must succeed at a Will save or become shaken. Those failing the save experience additional trauma when destroying an image — the double shifts to display the attacker\'s face or a disturbing alternative, causing frightened condition for 1 round and 1d3 Wisdom damage.',
+    description:
+      "This spell creates illusory duplicates resembling mirror image but with unsettling appearances. Creatures viewing the doubles must succeed at a Will save or become shaken. Those failing the save experience additional trauma when destroying an image — the double shifts to display the attacker's face or a disturbing alternative, causing frightened condition for 1 round and 1d3 Wisdom damage.",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_IJK ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Implant False Reading',
     classLevels: { mesmerist: 2, occultist: 2, psychic: 2 },
     school: 'Illusion',
@@ -5344,9 +5688,9 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_L_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Lose the Trail',
-    classLevels: { antipaladin: 2, ranger: 1, 'sorcerer/wizard': 1 },
+    classLevels: { antipaladin: 2, ranger: 1, sorcerer: 1, wizard: 1 },
     school: 'illusion',
     subschool: 'glamer',
     components: { verbal: true, somatic: true, material: false, divine: false },
@@ -5363,19 +5707,34 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_M_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Magic Mouth',
-    classLevels: { bard: 1, medium: 2, mesmerist: 1, occultist: 2, psychic: 2, sorcerer: 2, wizard: 2, summoner: 1 },
+    classLevels: {
+      bard: 1,
+      medium: 2,
+      mesmerist: 1,
+      occultist: 2,
+      psychic: 2,
+      sorcerer: 2,
+      wizard: 2,
+      summoner: 1,
+    },
     school: 'illusion',
     subschool: 'glamer',
-    components: { verbal: true, somatic: true, material: true, materialComponents: 'a small bit of honeycomb and jade dust worth 10 gp' },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: true,
+      materialComponents: 'a small bit of honeycomb and jade dust worth 10 gp',
+    },
     castingTime: '1 standard action',
     range: 'close (25 ft. + 5 ft./2 levels)',
     target: 'one creature or object',
     duration: 'permanent until discharged',
     savingThrow: 'Will negates (object)',
     spellResistance: 'yes (object)',
-    description: 'This spell imbues the chosen object or creature with an enchanted mouth that suddenly appears and speaks its message the next time a specified event occurs. The message must be 25 or fewer words long. The mouth speaks in any language you know. The mouth cannot utter verbal components, command words, or activate magical effects. Triggers can be visual or audible and operate within 15 feet per caster level.',
+    description:
+      'This spell imbues the chosen object or creature with an enchanted mouth that suddenly appears and speaks its message the next time a specified event occurs. The message must be 25 or fewer words long. The mouth speaks in any language you know. The mouth cannot utter verbal components, command words, or activate magical effects. Triggers can be visual or audible and operate within 15 feet per caster level.',
     source: 'Pathfinder RPG Core Rulebook',
     verificationStatus: 'needs_review' as const,
   },
@@ -5392,7 +5751,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'Will negates (see text)',
     spellResistance: 'yes',
-    description: 'You wrap your mind in phantasms of crippling doubt that assail any who dare harm you. Creatures attacking you or attempting harmful effects must succeed at a Will save. Psychic spells and spell-like abilities impose a -4 penalty to the save. Failed saves cause creatures to become shaken, unable to flank, and unable to threaten nearby creatures for 1d4+1 rounds, with an additional -2 penalty on saves against mind-affecting effects. If the affected creature was already shaken, it becomes staggered for 1 round and takes 1d4 Wisdom and Charisma damage instead.',
+    description:
+      'You wrap your mind in phantasms of crippling doubt that assail any who dare harm you. Creatures attacking you or attempting harmful effects must succeed at a Will save. Psychic spells and spell-like abilities impose a -4 penalty to the save. Failed saves cause creatures to become shaken, unable to flank, and unable to threaten nearby creatures for 1d4+1 rounds, with an additional -2 penalty on saves against mind-affecting effects. If the affected creature was already shaken, it becomes staggered for 1 round and takes 1d4 Wisdom and Charisma damage instead.',
     source: 'Pathfinder Player Companion: Occult Origins',
     verificationStatus: 'needs_review' as const,
   },
@@ -5409,7 +5769,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'permanent',
     savingThrow: 'Will partial (see text)',
     spellResistance: 'yes',
-    description: "You trap targets' minds in an immersive mental realm. Creatures with 10 HD or fewer get no save. Those with 11-15 HD escape after 10 minutes per caster level on a successful save. Those with 16+ HD negate the effect on a successful save. Affected creatures' bodies require food and water or face starvation. The microcosm cannot be escaped or entered via mindscape doors. Multiple affected creatures can interact within the shared mindscape. Only miracle or wish can terminate the effect.",
+    description:
+      "You trap targets' minds in an immersive mental realm. Creatures with 10 HD or fewer get no save. Those with 11-15 HD escape after 10 minutes per caster level on a successful save. Those with 16+ HD negate the effect on a successful save. Affected creatures' bodies require food and water or face starvation. The microcosm cannot be escaped or entered via mindscape doors. Multiple affected creatures can interact within the shared mindscape. Only miracle or wish can terminate the effect.",
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -5427,30 +5788,46 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level',
     savingThrow: 'Will negates (see text)',
     spellResistance: 'no',
-    description: 'This spell creates an imaginary doorway allowing entry into or escape from a mindscape. When cast outside a mindscape, you designate which creatures may perceive and use the door, connecting to a specific mindscape through a willing conduit creature (who may attempt a Will save to deny access). When cast inside a mindscape, a duplicate door appears in the real world. The spell can be cast as a full-round action during psychic duels. It cannot enter binary mindscapes but may exit them.',
+    description:
+      'This spell creates an imaginary doorway allowing entry into or escape from a mindscape. When cast outside a mindscape, you designate which creatures may perceive and use the door, connecting to a specific mindscape through a willing conduit creature (who may attempt a Will save to deny access). When cast inside a mindscape, a duplicate door appears in the real world. The spell can be cast as a full-round action during psychic duels. It cannot enter binary mindscapes but may exit them.',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Mirror Mantis',
-    classLevels: { bard: 1, cleric: 1, mesmerist: 1, occultist: 1, psychic: 1, sorcerer: 1, wizard: 1 },
+    classLevels: {
+      bard: 1,
+      cleric: 1,
+      mesmerist: 1,
+      occultist: 1,
+      psychic: 1,
+      sorcerer: 1,
+      wizard: 1,
+    },
     school: 'illusion',
     subschool: 'phantasm',
     descriptor: ['mind-affecting'],
-    components: { verbal: false, somatic: true, material: false, focus: true, focusComponents: 'a hand mirror stained with a dried drop of blood' },
+    components: {
+      verbal: false,
+      somatic: true,
+      material: false,
+      focus: true,
+      focusComponents: 'a hand mirror stained with a dried drop of blood',
+    },
     castingTime: '1 standard action',
     range: 'medium (100 ft. + 10 ft./level)',
     target: 'one living creature',
     duration: '1 hour/level',
     savingThrow: 'Will negates',
     spellResistance: 'yes',
-    description: "The spell causes the target to see a crimson assassin wearing a mantis mask in place of their own reflection. Only the target perceives this illusion. Upon first viewing, the target must succeed at a Will save or become shaken (with -2 on fear-related saves) while viewing the reflection and for 3 rounds afterward. After a successful save, the creature gains immunity to being shaken by this caster's spell for 24 hours.",
+    description:
+      "The spell causes the target to see a crimson assassin wearing a mantis mask in place of their own reflection. Only the target perceives this illusion. Upon first viewing, the target must succeed at a Will save or become shaken (with -2 on fear-related saves) while viewing the reflection and for 3 rounds afterward. After a successful save, the creature gains immunity to being shaken by this caster's spell for 24 hours.",
     source: "Pathfinder Roleplaying Game Adventurer's Guide",
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_M_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Muffle Sound',
     classLevels: { bard: 2, cleric: 2, oracle: 2, inquisitor: 2, mesmerist: 2, psychic: 2 },
     school: 'illusion',
@@ -5462,19 +5839,21 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level (D)',
     savingThrow: 'Will negates',
     spellResistance: 'yes',
-    description: 'This spell grants affected allies a +4 bonus on Stealth checks while introducing complications for spellcasting. Targets suffer a 20% chance of spell failure when casting spells with verbal components or using abilities with audible components. The spell permits normal hearing and offers no defense against language-dependent or sonic effects.',
+    description:
+      'This spell grants affected allies a +4 bonus on Stealth checks while introducing complications for spellcasting. Targets suffer a 20% chance of spell failure when casting spells with verbal components or using abilities with audible components. The spell permits normal hearing and offers no defense against language-dependent or sonic effects.',
     source: 'Pathfinder Roleplaying Game: Advanced Class Guide',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_N_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Negative Reaction',
     classLevels: {
       bard: 1,
       magus: 1,
       psychic: 1,
-      'sorcerer/wizard': 1,
+      sorcerer: 1,
+      wizard: 1,
       witch: 1,
     },
     school: 'Illusion',
@@ -5499,7 +5878,7 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_O_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Oath of Anonymity',
     classLevels: {
       bard: 0,
@@ -5543,18 +5922,20 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
       verbal: true,
       somatic: true,
       material: true,
-      materialComponents: 'a scrap of paper bearing a simple sentence written in at least five languages',
+      materialComponents:
+        'a scrap of paper bearing a simple sentence written in at least five languages',
       focus: false,
       divine: false,
     },
     castingTime: '1 standard action',
     range: 'touch',
-    target: 'one touched page, scroll, inscription, book, or document up to 3 feet in any dimension',
+    target:
+      'one touched page, scroll, inscription, book, or document up to 3 feet in any dimension',
     duration: '24 hours (dismissible)',
     savingThrow: 'none; see text',
     spellResistance: 'no',
     description:
-      "You create a latent illusion that affects how creatures perceive the text of the touched document. You designate up to one creature per caster level as immune to the effect. Affected creatures must succeed at a Will save or have difficulty parsing the text—the Linguistics check DC to read the document increases by your caster level (maximum +10), and the Wisdom check DC to avoid drawing false conclusions increases equally. Creatures unaffected by the illusion gain a circumstance bonus on Bluff checks made in connection with false information in the document. Magical glyphs and runes are also obscured; the Perception DC to find traps using such marks increases by half your caster level (maximum +5). This spell can be made permanent with the permanency spell (minimum caster level 10th; 5,000 gp).",
+      'You create a latent illusion that affects how creatures perceive the text of the touched document. You designate up to one creature per caster level as immune to the effect. Affected creatures must succeed at a Will save or have difficulty parsing the text—the Linguistics check DC to read the document increases by your caster level (maximum +10), and the Wisdom check DC to avoid drawing false conclusions increases equally. Creatures unaffected by the illusion gain a circumstance bonus on Bluff checks made in connection with false information in the document. Magical glyphs and runes are also obscured; the Perception DC to find traps using such marks increases by half your caster level (maximum +5). This spell can be made permanent with the permanency spell (minimum caster level 10th; 5,000 gp).',
     source: 'Pathfinder Roleplaying Game Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
@@ -5649,9 +6030,9 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_P_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Paranoia',
-    classLevels: { bard: 2, medium: 1, mesmerist: 1, psychic: 2, 'sorcerer/wizard': 2, witch: 2 },
+    classLevels: { bard: 2, medium: 1, mesmerist: 1, psychic: 2, sorcerer: 2, wizard: 2, witch: 2 },
     school: 'illusion',
     subschool: 'phantasm',
     descriptor: ['mind-affecting'],
@@ -5662,13 +6043,14 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'Will negates',
     spellResistance: 'yes',
-    description: 'The affected creature perceives all others as enemies and becomes hostile to everything except itself. It must take attacks of opportunity when triggered. When surrounded by two or more creatures, the target suffers a -2 penalty to attack rolls, weapon damage rolls, ability checks, skill checks, and saving throws.',
+    description:
+      'The affected creature perceives all others as enemies and becomes hostile to everything except itself. It must take attacks of opportunity when triggered. When surrounded by two or more creatures, the target suffers a -2 penalty to attack rolls, weapon damage rolls, ability checks, skill checks, and saving throws.',
     source: 'Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Peerless Integrity',
-    classLevels: { antipaladin: 2, bard: 2, mesmerist: 2, psychic: 2, 'sorcerer/wizard': 2 },
+    classLevels: { antipaladin: 2, bard: 2, mesmerist: 2, psychic: 2, sorcerer: 2, wizard: 2 },
     school: 'illusion',
     subschool: 'glamer',
     components: { verbal: true, somatic: true, material: false, focus: false, divine: true },
@@ -5679,32 +6061,41 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '10 minutes/level',
     savingThrow: 'none or Will negates (see text)',
     spellResistance: 'no',
-    description: 'This illusion conceals actual alignments, making affected creatures appear lawful good to divination magic. Creatures gain a +2 circumstance modifier on Bluff and Diplomacy checks. The spell does not block other divination types or protect against alignment-based harm effects.',
+    description:
+      'This illusion conceals actual alignments, making affected creatures appear lawful good to divination magic. Creatures gain a +2 circumstance modifier on Bluff and Diplomacy checks. The spell does not block other divination types or protect against alignment-based harm effects.',
     source: 'Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_P_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Placebo Effect',
     classLevels: { medium: 2, mesmerist: 2, psychic: 2 },
     school: 'illusion',
     subschool: 'phantasm',
     descriptor: ['mind-affecting'],
-    components: { verbal: true, somatic: false, material: true, materialComponents: 'sugar cube', focus: false, divine: false },
+    components: {
+      verbal: true,
+      somatic: false,
+      material: true,
+      materialComponents: 'sugar cube',
+      focus: false,
+      divine: false,
+    },
     castingTime: '1 standard action',
     range: 'touch',
     target: 'creature touched',
     duration: '1 minute/level',
     savingThrow: 'Will disbelief (harmless)',
     spellResistance: 'yes (harmless)',
-    description: 'This spell allows a subject to temporarily stop experiencing symptoms from a single ongoing affliction or condition. The affected condition may include: blinded, cursed, dazed, deafened, diseased, fatigued, frightened, nauseated, panicked, paralyzed, poisoned, shaken, sickened, staggered, or stunned. If the condition has a duration, it becomes suspended while the spell remains active. The spell only affects one instance of a condition type. It neither removes existing damage nor prevents future exposure to such conditions.',
+    description:
+      'This spell allows a subject to temporarily stop experiencing symptoms from a single ongoing affliction or condition. The affected condition may include: blinded, cursed, dazed, deafened, diseased, fatigued, frightened, nauseated, panicked, paralyzed, poisoned, shaken, sickened, staggered, or stunned. If the condition has a duration, it becomes suspended while the spell remains active. The spell only affects one instance of a condition type. It neither removes existing damage nor prevents future exposure to such conditions.',
     source: 'Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Planetarium',
-    classLevels: { bard: 2, cleric: 2, druid: 2, 'sorcerer/wizard': 2, summoner: 2, witch: 2 },
+    classLevels: { bard: 2, cleric: 2, druid: 2, sorcerer: 2, wizard: 2, summoner: 2, witch: 2 },
     school: 'illusion',
     subschool: 'figment',
     components: { verbal: true, somatic: true, material: false, focus: false, divine: false },
@@ -5715,13 +6106,14 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'concentration + 3 rounds',
     savingThrow: 'Will disbelief (harmless)',
     spellResistance: 'no',
-    description: 'This spell projects a celestial display showing the night sky based on your current location and the local time, allowing you to observe the heavens and all of its celestial bodies and features even during the daytime, indoors, or underground. The projection remains visible within the sphere\'s radius; outside it becomes indistinct.',
+    description:
+      "This spell projects a celestial display showing the night sky based on your current location and the local time, allowing you to observe the heavens and all of its celestial bodies and features even during the daytime, indoors, or underground. The projection remains visible within the sphere's radius; outside it becomes indistinct.",
     source: 'Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
   {
     name: 'Psychic Asylum',
-    classLevels: { mesmerist: 5, psychic: 5, 'sorcerer/wizard': 6 },
+    classLevels: { mesmerist: 5, psychic: 5, sorcerer: 6, wizard: 6 },
     school: 'illusion',
     subschool: 'phantasm',
     descriptor: ['mind-affecting'],
@@ -5732,15 +6124,16 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'instantaneous; see text',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'You create an internal mental landscape where you can spend up to 15 minutes without any time passing for your body. Within this mindscape, you gain perfect recall of any text, conversation, or image encountered within the past week per caster level. You may consult materials with eidetic memory clarity and prepare a single spell if capable of spell preparation. Mind-affecting effects continue expending duration while inside the asylum.',
+    description:
+      'You create an internal mental landscape where you can spend up to 15 minutes without any time passing for your body. Within this mindscape, you gain perfect recall of any text, conversation, or image encountered within the past week per caster level. You may consult materials with eidetic memory clarity and prepare a single spell if capable of spell preparation. Mind-affecting effects continue expending duration while inside the asylum.',
     source: 'Occult Adventures',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_R_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Raiment of Command',
-    classLevels: { bard: 2, 'sorcerer/wizard': 2 },
+    classLevels: { bard: 2, sorcerer: 2, wizard: 2 },
     school: 'illusion',
     subschool: 'glamer',
     components: { verbal: true, somatic: true, material: false },
@@ -5750,7 +6143,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 hour/level',
     savingThrow: 'will',
     spellResistance: 'no',
-    description: 'You are surrounded by an illusion of authority that makes others perceive you as a legitimate authority figure, granting a +5 bonus to Diplomacy and Intimidate checks. When impersonating a specific authority figure you have met, you gain +10 competence bonus on Disguise checks and related Bluff checks. Creatures with Intelligence 3 or higher take a -2 penalty on opposed checks against you, including Sense Motive (to detect bluffing) and Perception (to notice Stealth), as they unconsciously defer to the perceived authority.',
+    description:
+      'You are surrounded by an illusion of authority that makes others perceive you as a legitimate authority figure, granting a +5 bonus to Diplomacy and Intimidate checks. When impersonating a specific authority figure you have met, you gain +10 competence bonus on Disguise checks and related Bluff checks. Creatures with Intelligence 3 or higher take a -2 penalty on opposed checks against you, including Sense Motive (to detect bluffing) and Perception (to notice Stealth), as they unconsciously defer to the perceived authority.',
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
@@ -5766,13 +6160,14 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level (D)',
     savingThrow: 'will negates',
     spellResistance: 'yes',
-    description: 'This spell renders all targeted creatures silent similarly to the silence spell, but with distinct mechanics. The silence affects only each individual creature\'s space and does not extend outward. Notably, this is a one-way effect—external sounds can still reach the silenced creatures. Additionally, affected creatures receive a +10 circumstance bonus on Stealth checks.',
+    description:
+      "This spell renders all targeted creatures silent similarly to the silence spell, but with distinct mechanics. The silence affects only each individual creature's space and does not extend outward. Notably, this is a one-way effect—external sounds can still reach the silenced creatures. Additionally, affected creatures receive a +10 circumstance bonus on Stealth checks.",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Scintillating Wall',
     classLevels: { bard: 4, psychic: 5, sorcerer: 5, wizard: 5 },
     school: 'Illusion',
@@ -5862,7 +6257,7 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_S2_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Shadow Anchor',
     school: 'illusion',
     subschool: 'shadow',
@@ -5875,7 +6270,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: "Binds the target's shadow to its current location, restricting movement. The target moves freely within 5 feet but must make bull rush checks to move farther, with penalties increasing by distance. The spell ends if the target teleports or leaves the plane.",
+    description:
+      "Binds the target's shadow to its current location, restricting movement. The target moves freely within 5 feet but must make bull rush checks to move farther, with penalties increasing by distance. The spell ends if the target teleports or leaves the plane.",
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -5893,7 +6289,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level',
     savingThrow: 'Will negates',
     spellResistance: 'No',
-    description: 'Conjures a shadowy spiked chain functioning as a +2 vicious spiked chain, with enhancement bonuses increasing at higher caster levels. The chain radiates darkness in a 10-foot radius, reducing illumination by one step. Upon spell conclusion the caster may attempt a Will save to negate damage from the weapon\'s vicious quality.',
+    description:
+      "Conjures a shadowy spiked chain functioning as a +2 vicious spiked chain, with enhancement bonuses increasing at higher caster levels. The chain radiates darkness in a 10-foot radius, reducing illumination by one step. Upon spell conclusion the caster may attempt a Will save to negate damage from the weapon's vicious quality.",
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -5902,7 +6299,17 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     school: 'illusion',
     subschool: 'shadow',
     descriptor: ['shadow'],
-    classLevels: { antipaladin: 1, arcanist: 2, bard: 2, bloodrager: 2, magus: 2, skald: 2, sorcerer: 2, wizard: 2, spiritualist: 2 },
+    classLevels: {
+      antipaladin: 1,
+      arcanist: 2,
+      bard: 2,
+      bloodrager: 2,
+      magus: 2,
+      skald: 2,
+      sorcerer: 2,
+      wizard: 2,
+      spiritualist: 2,
+    },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
     range: 'personal',
@@ -5910,7 +6317,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level',
     savingThrow: 'Fortitude negates Strength damage',
     spellResistance: 'No',
-    description: 'Creates a pair of shadowy claws over the caster\'s hands made of semi-real material. The claws deal 1d4 damage (1d3 if Small) plus 1 point of Strength ability damage with each attack. A successful Fortitude save prevents the ability score reduction.',
+    description:
+      "Creates a pair of shadowy claws over the caster's hands made of semi-real material. The claws deal 1d4 damage (1d3 if Small) plus 1 point of Strength ability damage with each attack. A successful Fortitude save prevents the ability score reduction.",
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -5927,7 +6335,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level',
     savingThrow: 'Will disbelief (if interacted with)',
     spellResistance: 'Yes',
-    description: 'Grants the caster a quasi-real dragon form with two claw attacks (1d6 plus caster level) and one bite (1d8 plus caster level), plus shadowy wings for flight at base speed. These shadow weapons deal half damage initially, but creatures who believe in their reality suffer full damage. A Will save after the first strike grants half damage for the remainder of the spell.',
+    description:
+      'Grants the caster a quasi-real dragon form with two claw attacks (1d6 plus caster level) and one bite (1d8 plus caster level), plus shadowy wings for flight at base speed. These shadow weapons deal half damage initially, but creatures who believe in their reality suffer full damage. A Will save after the first strike grants half damage for the remainder of the spell.',
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -5944,7 +6353,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 hour/level until discharged, then 1 minute/level',
     savingThrow: 'Will disbelief (if interacted with)',
     spellResistance: 'Yes',
-    description: 'Conjures shadow wisps that trigger when the caster drops below 0 HP or becomes unconscious, immediately stabilizing the caster and transporting them to the Shadow Plane while a shadow duplicate appears in their place. The duplicate has 25% of the caster\'s hit points, deals reduced damage, and operates at 1/4 caster level, lasting until the second duration expires or the duplicate is destroyed.',
+    description:
+      "Conjures shadow wisps that trigger when the caster drops below 0 HP or becomes unconscious, immediately stabilizing the caster and transporting them to the Shadow Plane while a shadow duplicate appears in their place. The duplicate has 25% of the caster's hit points, deals reduced damage, and operates at 1/4 caster level, lasting until the second duration expires or the duplicate is destroyed.",
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -5953,7 +6363,16 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     school: 'illusion',
     subschool: 'shadow',
     descriptor: ['shadow'],
-    classLevels: { antipaladin: 3, arcanist: 4, bard: 4, skald: 4, sorcerer: 4, wizard: 4, spiritualist: 4, summoner: 4 },
+    classLevels: {
+      antipaladin: 3,
+      arcanist: 4,
+      bard: 4,
+      skald: 4,
+      sorcerer: 4,
+      wizard: 4,
+      spiritualist: 4,
+      summoner: 4,
+    },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -5961,7 +6380,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'instantaneous and 1 round (see text)',
     savingThrow: 'none',
     spellResistance: 'No',
-    description: 'Teleports the caster between shadows to a destination within range without requiring line of sight. Upon arrival, a shadowy duplicate remains at the origin and the caster may make an immediate Stealth check. For one round following teleportation, the caster gains 20% concealment from enveloping shadows.',
+    description:
+      'Teleports the caster between shadows to a destination within range without requiring line of sight. Upon arrival, a shadowy duplicate remains at the origin and the caster may make an immediate Stealth check. For one round following teleportation, the caster gains 20% concealment from enveloping shadows.',
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -5970,7 +6390,16 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     school: 'illusion',
     subschool: 'shadow',
     descriptor: ['shadow'],
-    classLevels: { bard: 6, medium: 6, shaman: 6, sorcerer: 6, wizard: 6, spiritualist: 5, summoner: 6, witch: 6 },
+    classLevels: {
+      bard: 6,
+      medium: 6,
+      shaman: 6,
+      sorcerer: 6,
+      wizard: 6,
+      spiritualist: 5,
+      summoner: 6,
+      witch: 6,
+    },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
     range: 'see text',
@@ -5978,7 +6407,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'see text',
     savingThrow: 'Will disbelief (if interacted with)',
     spellResistance: 'Yes',
-    description: 'Suffuses a target with energy from the Shadow Plane, altering its form to match a Shadow Plane creature by replicating transmutation effects including polymorph, enlarge person, and reduce person. Creatures interacting with the target may make Will saves to disbelieve, reducing damage from natural attacks to 20% and limiting special abilities to 20% success against skeptics.',
+    description:
+      'Suffuses a target with energy from the Shadow Plane, altering its form to match a Shadow Plane creature by replicating transmutation effects including polymorph, enlarge person, and reduce person. Creatures interacting with the target may make Will saves to disbelieve, reducing damage from natural attacks to 20% and limiting special abilities to 20% success against skeptics.',
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -5986,7 +6416,19 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     name: 'Shadow Trap',
     school: 'illusion',
     subschool: 'shadow',
-    classLevels: { antipaladin: 1, bard: 1, bloodrager: 1, cleric: 1, mesmerist: 1, occultist: 1, psychic: 1, shaman: 1, sorcerer: 1, wizard: 1, witch: 1 },
+    classLevels: {
+      antipaladin: 1,
+      bard: 1,
+      bloodrager: 1,
+      cleric: 1,
+      mesmerist: 1,
+      occultist: 1,
+      psychic: 1,
+      shaman: 1,
+      sorcerer: 1,
+      wizard: 1,
+      witch: 1,
+    },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -5994,7 +6436,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: "Immobilizes a target by anchoring their shadow to the ground, rendering them entangled and unable to move more than 5 feet from their starting position. Flying creatures can only hover or descend. The spell fails on creatures without shadows and terminates if the target enters complete darkness.",
+    description:
+      'Immobilizes a target by anchoring their shadow to the ground, rendering them entangled and unable to move more than 5 feet from their starting position. Flying creatures can only hover or descend. The spell fails on creatures without shadows and terminates if the target enters complete darkness.',
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -6012,7 +6455,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'none',
     spellResistance: 'No',
-    description: "Conjures a quasi-real phantom singer appearing as a shadowy duplicate that automatically follows the caster. The singer cannot be damaged but can be dispelled, and performs bardic performances chosen by the caster. Rounds spent do not count against the caster's own bardic performance pool.",
+    description:
+      "Conjures a quasi-real phantom singer appearing as a shadowy duplicate that automatically follows the caster. The singer cannot be damaged but can be dispelled, and performs bardic performances chosen by the caster. Rounds spent do not count against the caster's own bardic performance pool.",
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -6020,7 +6464,16 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     name: 'Shadowfade',
     school: 'illusion',
     subschool: 'shadow',
-    classLevels: { arcanist: 1, bard: 1, inquisitor: 1, mesmerist: 1, skald: 1, sorcerer: 1, wizard: 1, summoner: 1 },
+    classLevels: {
+      arcanist: 1,
+      bard: 1,
+      inquisitor: 1,
+      mesmerist: 1,
+      skald: 1,
+      sorcerer: 1,
+      wizard: 1,
+      summoner: 1,
+    },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: true },
     range: 'touch',
@@ -6028,7 +6481,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level (D)',
     savingThrow: 'Will negates (harmless)',
     spellResistance: 'Yes',
-    description: 'Grants the target invisibility to darkvision users in darkness and concealment in dim light. The effect provides no benefit in normal or bright light and automatically ends if the target takes hostile action or enters bright illumination.',
+    description:
+      'Grants the target invisibility to darkvision users in darkness and concealment in dim light. The effect provides no benefit in normal or bright light and automatically ends if the target takes hostile action or enters bright illumination.',
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -6037,7 +6491,16 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     school: 'illusion',
     subschool: 'shadow',
     descriptor: ['shadow'],
-    classLevels: { antipaladin: 4, bard: 4, mesmerist: 4, psychic: 4, sorcerer: 4, wizard: 4, spiritualist: 4, witch: 4 },
+    classLevels: {
+      antipaladin: 4,
+      bard: 4,
+      mesmerist: 4,
+      psychic: 4,
+      sorcerer: 4,
+      wizard: 4,
+      spiritualist: 4,
+      witch: 4,
+    },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
     range: 'touch',
@@ -6045,7 +6508,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'Will negates (see text)',
     spellResistance: 'Yes',
-    description: "Transforms the target's body into mystic shadow material from the Shadow Plane, making the physical form quasi-real. Attackers must succeed at a Will save to affect the target normally; those who fail deal only one-fifth damage and reduce special effects to 20% potency. Objects automatically succeed at saving throws against this spell.",
+    description:
+      "Transforms the target's body into mystic shadow material from the Shadow Plane, making the physical form quasi-real. Attackers must succeed at a Will save to affect the target normally; those who fail deal only one-fifth damage and reduce special effects to 20% potency. Objects automatically succeed at saving throws against this spell.",
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -6053,7 +6517,19 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     name: 'Shadowmind',
     school: 'illusion',
     subschool: 'phantasm',
-    classLevels: { antipaladin: 2, cleric: 3, druid: 3, inquisitor: 2, mesmerist: 3, occultist: 3, psychic: 3, shaman: 3, sorcerer: 3, wizard: 3, witch: 2 },
+    classLevels: {
+      antipaladin: 2,
+      cleric: 3,
+      druid: 3,
+      inquisitor: 2,
+      mesmerist: 3,
+      occultist: 3,
+      psychic: 3,
+      shaman: 3,
+      sorcerer: 3,
+      wizard: 3,
+      witch: 2,
+    },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: true },
     range: 'medium (100 ft. + 10 ft./level)',
@@ -6061,7 +6537,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level',
     savingThrow: 'Will negates',
     spellResistance: 'Yes',
-    description: "Dims targets' perceptions of light and shadow, making them perceive their surroundings as one light level darker than reality. Low-light vision and darkvision don't penetrate the effect since it is an illusion rather than actual darkness. Even creatures unaffected by magical darkness experience vision loss.",
+    description:
+      "Dims targets' perceptions of light and shadow, making them perceive their surroundings as one light level darker than reality. Low-light vision and darkvision don't penetrate the effect since it is an illusion rather than actual darkness. Even creatures unaffected by magical darkness experience vision loss.",
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -6070,7 +6547,20 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     school: 'illusion',
     subschool: 'glamer',
     descriptor: ['sonic'],
-    classLevels: { alchemist: 2, antipaladin: 2, bard: 2, inquisitor: 2, magus: 2, medium: 2, mesmerist: 2, occultist: 2, psychic: 2, sorcerer: 2, wizard: 2, spiritualist: 2 },
+    classLevels: {
+      alchemist: 2,
+      antipaladin: 2,
+      bard: 2,
+      inquisitor: 2,
+      magus: 2,
+      medium: 2,
+      mesmerist: 2,
+      occultist: 2,
+      psychic: 2,
+      sorcerer: 2,
+      wizard: 2,
+      spiritualist: 2,
+    },
     castingTime: '1 standard action',
     components: { verbal: true, somatic: true, material: false },
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -6078,7 +6568,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: 'concentration + 1 round/level (D)',
     savingThrow: 'Will negates (harmless) or Will disbelief (if interacted with)',
     spellResistance: 'No',
-    description: "Makes a target's sounds appear to emanate from a different location within range, which the caster can manipulate while concentrating. The spell deceives creatures relying on sound-based senses but cannot fool other detection methods like normal vision or tremorsense.",
+    description:
+      "Makes a target's sounds appear to emanate from a different location within range, which the caster can manipulate while concentrating. The spell deceives creatures relying on sound-based senses but cannot fool other detection methods like normal vision or tremorsense.",
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -6095,7 +6586,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level',
     savingThrow: 'none',
     spellResistance: 'Yes',
-    description: 'Functions similarly to mirror image, creating illusory duplicates of the caster that discharge an electric shock dealing 2d6 electricity damage when destroyed through melee attacks. Spell resistance applies only to the initial damage; failure makes targets immune to subsequent damage from this spell.',
+    description:
+      'Functions similarly to mirror image, creating illusory duplicates of the caster that discharge an electric shock dealing 2d6 electricity damage when destroyed through melee attacks. Spell resistance applies only to the initial damage; failure makes targets immune to subsequent damage from this spell.',
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -6103,7 +6595,16 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     name: 'Shroud of Innocuity',
     school: 'illusion',
     subschool: 'glamer',
-    classLevels: { bard: 3, medium: 3, mesmerist: 3, psychic: 3, shaman: 3, sorcerer: 3, wizard: 3, witch: 3 },
+    classLevels: {
+      bard: 3,
+      medium: 3,
+      mesmerist: 3,
+      psychic: 3,
+      shaman: 3,
+      sorcerer: 3,
+      wizard: 3,
+      witch: 3,
+    },
     castingTime: '1 minute',
     components: { verbal: true, somatic: true, material: false },
     range: 'close (25 ft. + 5 ft./2 levels)',
@@ -6111,7 +6612,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 hour/level (D)',
     savingThrow: 'none (harmless); Will to disbelieve',
     spellResistance: 'No',
-    description: 'Grants affected creatures an ordinary, unremarkable appearance tailored to each observer\'s cultural context, plus a +2 bonus to Diplomacy checks. Creatures with negative attitudes toward the target may attempt a Will save to see through the effect upon first encounter.',
+    description:
+      "Grants affected creatures an ordinary, unremarkable appearance tailored to each observer's cultural context, plus a +2 bonus to Diplomacy checks. Creatures with negative attitudes toward the target may attempt a Will save to see through the effect upon first encounter.",
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -6128,7 +6630,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'Will negates (creatures); none (objects)',
     spellResistance: 'Yes',
-    description: 'Creates an area of complete silence where all sound ceases, preventing verbal spellcasting and blocking sound-based effects. The silenced zone can be centered on a mobile creature or fixed to a location, and those within gain immunity to sonic and language-based attacks.',
+    description:
+      'Creates an area of complete silence where all sound ceases, preventing verbal spellcasting and blocking sound-based effects. The silenced zone can be centered on a mobile creature or fixed to a location, and those within gain immunity to sonic and language-based attacks.',
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -6145,7 +6648,8 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level (D)',
     savingThrow: 'none (object)',
     spellResistance: 'No',
-    description: 'Muffles sounds and sonic effects originating inside the area for anyone outside; Perception checks to hear sounds leaving the zone increase by 20 DC and saving throw DCs for sonic effects decrease by 2. The spell does not affect sounds entering the area or perception checks of creatures within it.',
+    description:
+      'Muffles sounds and sonic effects originating inside the area for anyone outside; Perception checks to hear sounds leaving the zone increase by 20 DC and saving throw DCs for sonic effects decrease by 2. The spell does not affect sounds entering the area or perception checks of creatures within it.',
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
@@ -6162,13 +6666,14 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 minute/level (D)',
     savingThrow: 'none',
     spellResistance: 'No',
-    description: 'An underwater-only spell that creates an illusory silt cloud surrounding the caster that moves with them, granting total concealment to creatures initially within it (partial to those entering later). The spell ends if the caster attacks.',
+    description:
+      'An underwater-only spell that creates an illusory silt cloud surrounding the caster that moves with them, granting total concealment to creatures initially within it (partial to those entering later). The spell ends if the caster attacks.',
     source: 'd20pfsrd.com',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_S3 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Stolen Light',
     classLevels: { bard: 3, sorcerer: 3, wizard: 3 },
     school: 'Illusion',
@@ -6276,7 +6781,7 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_gap_T_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Telepathic Silence',
     classLevels: { medium: 4, mesmerist: 4, occultist: 4, psychic: 4, spiritualist: 4 },
     school: 'illusion',
@@ -6289,13 +6794,14 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 round/level (D)',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'Within the affected region, creatures cannot transmit or receive telepathic communications. Spellcasters attempting to cast spells with thought components must make concentration checks (DC = 20 + double the spell\'s level) to avoid losing the spell. The thoughts of creatures within the area cannot be detected, located, or read with thoughtsense, detect thoughts, or similar effects. The spell does not interfere with mind-affecting spells or those that do not require telepathic communication, such as mind thrust.',
+    description:
+      "Within the affected region, creatures cannot transmit or receive telepathic communications. Spellcasters attempting to cast spells with thought components must make concentration checks (DC = 20 + double the spell's level) to avoid losing the spell. The thoughts of creatures within the area cannot be detected, located, or read with thoughtsense, detect thoughts, or similar effects. The spell does not interfere with mind-affecting spells or those that do not require telepathic communication, such as mind thrust.",
     source: 'Pathfinder Roleplaying Game',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_T_2 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Trail of the Rose',
     classLevels: { bard: 2, cleric: 2, oracle: 2 },
     school: 'illusion',
@@ -6307,13 +6813,14 @@ export const ILLUSION_SPELLS: SpellDefinition[] = [
     duration: '1 hour/level (D)',
     savingThrow: 'none',
     spellResistance: 'no',
-    description: 'This spell generates a visible, misty illusory trail with a rose scent. You designate up to six creatures who can perceive the effect; others cannot see it. The designation requires genuine familiarity with each creature. When you move, the illusory scent creates a path. If designated creatures encounter a middle section of the trail, they cannot determine the direction traveled, making it ideal for backtracking through complex environments like mazes or cave systems.',
+    description:
+      'This spell generates a visible, misty illusory trail with a rose scent. You designate up to six creatures who can perceive the effect; others cannot see it. The designation requires genuine familiarity with each creature. When you move, the illusory scent creates a path. If designated creatures encounter a middle section of the trail, they cannot determine the direction traveled, making it ideal for backtracking through complex environments like mazes or cave systems.',
     source: 'Pathfinder Player Companion: Faiths of Purity',
     verificationStatus: 'needs_review' as const,
   },
 
   // ─── batch_gap_VWYZ ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Wall of Nausea',
     classLevels: { bard: 3, psychic: 3, sorcerer: 3, wizard: 3 },
     school: 'Illusion',

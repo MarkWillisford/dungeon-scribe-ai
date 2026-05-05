@@ -2,7 +2,7 @@ import type { SpellDefinition } from '@/types/spells';
 
 export const UNIVERSAL_SPELLS: SpellDefinition[] = [
   // ─── Pre-existing content ────────────────────────────────────────────────────
-{
+  {
     name: 'Arcane Mark',
     classLevels: {
       arcanist: 0,
@@ -178,24 +178,41 @@ export const UNIVERSAL_SPELLS: SpellDefinition[] = [
   },
 
   // ─── batch_001 ─────────────────────────────────────────────────────────────
-// No additional universal spells exist beyond those already in universalSpells.ts.
+  // No additional universal spells exist beyond those already in universalSpells.ts.
   // d20pfsrd explicitly states the complete universal spell list is:
   // arcane mark, limited wish, permanency, prestidigitation, and wish —
   // all five of which are already present in src/data/spells/universalSpells.ts.,
 
   // ─── batch_gap_C_1 ─────────────────────────────────────────────────────────────
-{
+  {
     name: 'Collaborative Thaumaturgy',
-    classLevels: { bard: 3, cleric: 3, druid: 3, magus: 3, summoner: 3, 'sorcerer/wizard': 3, witch: 3 },
+    classLevels: {
+      bard: 3,
+      cleric: 3,
+      druid: 3,
+      magus: 3,
+      summoner: 3,
+      sorcerer: 3,
+      wizard: 3,
+      witch: 3,
+    },
     school: 'Universal',
-    components: { verbal: true, somatic: true, material: false, focus: true, focusComponents: 'bronze tuning fork', divine: false },
+    components: {
+      verbal: true,
+      somatic: true,
+      material: false,
+      focus: true,
+      focusComponents: 'bronze tuning fork',
+      divine: false,
+    },
     castingTime: '1 immediate action',
     range: 'Close (25 ft. + 5 ft./2 levels)',
     target: 'One creature',
     duration: 'Instantaneous',
     savingThrow: 'None',
     spellResistance: 'None',
-    description: 'This spell allows a caster to apply one metamagic effect (Enlarge, Extend, Silent, or Still Spell) to an ally\'s spell without increasing its level or casting time. Multiple castings enable stronger effects: two applications allow Empower Spell, while three allow Maximize or Widen Spell.',
+    description:
+      "This spell allows a caster to apply one metamagic effect (Enlarge, Extend, Silent, or Still Spell) to an ally's spell without increasing its level or casting time. Multiple castings enable stronger effects: two applications allow Empower Spell, while three allow Maximize or Widen Spell.",
     source: 'Pathfinder Society Primer',
     verificationStatus: 'needs_review' as const,
   },

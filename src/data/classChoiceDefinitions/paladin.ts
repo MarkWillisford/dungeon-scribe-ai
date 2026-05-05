@@ -118,25 +118,49 @@ export const paladinDefinitions: ClassChoiceDefinition[] = [
     className: 'paladin',
     featureName: 'Divine Bond',
     description:
-      'At 5th level, a paladin forms a divine bond. She may bond with her weapon or with a mount. Weapon enhancement choices are per-use selections at the table — not stored here.',
-    selectionMode: { type: 'single_at_creation' },
+      "At 5th level, a paladin forms a divine bond with her god. Once the form is chosen, it cannot be changed. Standard bonds: enhance a weapon with celestial energy, or gain the service of a special mount (functions as a druid animal companion at paladin level, INT minimum 6). Optional variant bonds (Healer's Handbook, GM discretion): Agathion, Angelic, or Archon bond. Weapon and variant bond enhancement choices are per-use, not stored here.",
+    selectionMode: { type: 'at_class_levels', levels: [5] },
     optionSource: 'inline',
     optionGroups: [
       {
-        id: 'bond-type',
-        name: '',
+        id: 'standard-bond',
+        name: 'Standard Bond',
         options: [
           {
             id: 'weapon',
-            name: 'Weapon',
+            name: 'Weapon Bond',
             description:
-              'The paladin can enhance her weapon with holy energy. She may add enhancement bonuses or special abilities from the divine bond list for a number of minutes per day equal to her paladin level.',
+              "A celestial spirit enhances the paladin's weapon for 1 minute/level. Grants a +1 enhancement bonus at 5th level, +1 per 3 levels beyond 5th (max +6 at 20th). Bonuses may be converted to weapon properties (axiomatic, holy, flaming, keen, speed, etc.). Usable once/day at 5th, +1/day per 4 levels beyond 5th (max 4/day at 17th).",
           },
           {
             id: 'mount',
-            name: 'Mount',
+            name: 'Special Mount',
             description:
-              'The paladin gains the service of a special mount (a heavy horse for Medium paladins, a pony for Small paladins). The mount advances in power as the paladin levels.',
+              'The paladin gains a bonded mount — typically a heavy horse (Medium) or pony (Small), though exotic options (boar, camel, dog, elk, etc.) may be available at GM discretion. Functions as a druid animal companion at paladin level, with INT of at least 6. At 11th level the mount gains the Celestial Creature template and becomes a magical beast. At 15th level it gains SR equal to paladin level + 11.',
+          },
+        ],
+      },
+      {
+        id: 'variant-bond',
+        name: "Variant Bond (Healer's Handbook — GM Discretion)",
+        options: [
+          {
+            id: 'agathion-bond',
+            name: 'Agathion Bond',
+            description:
+              'A standard action calls an agathion spirit for 1 minute/level. Adds Charisma bonus to HP restored by spells, lay on hands, and channel energy, plus 1 additional HP per 3 levels beyond 5th (max +5+Cha mod at 20th). Replaces weapon/mount bond.',
+          },
+          {
+            id: 'angelic-bond',
+            name: 'Angelic Bond',
+            description:
+              'A standard action manifests a resplendent halo for 1 minute/level, shedding light as continual flame. All allies within 20 ft gain protection from evil (deflection +3 and resistance +3, +1 per 3 levels beyond 5th, max +8 at 20th). Replaces weapon/mount bond.',
+          },
+          {
+            id: 'archon-bond',
+            name: 'Archon Bond',
+            description:
+              "A standard action causes the paladin's eyes to glow with righteous fury for 1 minute/level. Hostile creatures within 10 ft that look at the paladin must make a Will save (DC 10 + 1/2 paladin level + Cha) or take –2 on attack rolls, saves, and AC for 24 hours. Radius increases by 5 ft per 3 levels beyond 5th (max 35 ft at 20th). Replaces weapon/mount bond.",
           },
         ],
       },
@@ -145,6 +169,6 @@ export const paladinDefinitions: ClassChoiceDefinition[] = [
     isOfficial: true,
     verificationStatus: 'needs_review' as const,
     visibility: 'global',
-    rev: 1,
+    rev: 2,
   },
 ];
