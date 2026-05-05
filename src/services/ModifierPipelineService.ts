@@ -307,9 +307,30 @@ export class ModifierPipelineService {
 
     // Magic items added via the direct-entry editor — effects snapshotted at pick time.
     for (const item of character.editorEquipment ?? []) {
-      if (!item.slot || !item.effects?.length) continue;
-      for (const effect of item.effects) {
-        effects.push({ ...effect, source: effect.source || item.name });
+      if (!item.slot) continue;
+
+      // Structured Effect[] entries (preferred path for all item effects).
+      if (item.effects?.length) {
+        for (const effect of item.effects) {
+          effects.push({ ...effect, source: effect.source || item.name });
+        }
+      }
+
+      // abilityScoreBonuses: denormalised shorthand used by some magic items (e.g.
+      // Headband of Vast Intellect). Convert to Enhancement Effect[] so the pipeline
+      // correctly restores them after every recalculate() wipes score.bonuses.
+      if (item.abilityScoreBonuses) {
+        for (const [ab, val] of Object.entries(item.abilityScoreBonuses)) {
+          if (typeof val === 'number' && val !== 0) {
+            effects.push({
+              type: 'bonus',
+              bonusType: BonusType.ENHANCEMENT,
+              target: `ability.${ab}`,
+              value: val,
+              source: item.name,
+            });
+          }
+        }
       }
     }
 
