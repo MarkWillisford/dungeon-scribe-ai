@@ -18,6 +18,14 @@ Built for players and Dungeon Masters who need a real tool — not a glorified P
 
 **Combat tracker** — Initiative, HP tracking, buff/debuff toggles, attack resolution, and a full dice roller with roll history. Buffs and debuffs resolve through the same modifier pipeline as the character sheet — toggle Haste and your attack strings update live.
 
+**Animal companion builder** — Full stat block management for druid and ranger companions. Companions track their own HD, BAB, saves, skills, feats, and ability scores; progression tiers activate automatically as the master's class level increases.
+
+**Archetype support** — Archetype picker wired into the class entry card. Archetypes filter by class, display replaced and altered features, and are stored as first-class entries alongside the base class selection.
+
+**Favored class bonuses** — Per-level FCB selection (HP, skill rank, or alternate race/class bonus) pulled from Firestore. Supports all 36 APG races with race- and class-specific alternate bonuses.
+
+**Equipment effects pipeline** — Magic items equipped in any slot feed their bonuses directly through the modifier pipeline. Enhancement bonuses, resistance bonuses, deflection, natural armor, and other typed bonuses stack according to PF1e rules and update every derived stat automatically.
+
 ---
 
 ## Screenshots
@@ -68,7 +76,7 @@ The `DraftStateResolver` reconstructs a full ECL timeline from a character draft
 
 ### Testing
 
-690 tests across 36 suites covering all services, Redux slices, and UI components. Full branch protection on `main`: typecheck, lint, and full test suite must pass before merge.
+900+ tests across 40+ suites covering all services, Redux slices, and UI components. Full branch protection on `main`: typecheck, lint, and full test suite must pass before merge.
 
 ---
 
@@ -81,7 +89,7 @@ src/
   services/             Business logic (pure) + Firebase I/O
   store/                Redux Toolkit slices and typed hooks
   components/           React Native UI (combat tracker, character entry, shared primitives)
-  data/                 Static game data (438 seed files → Firestore)
+  data/                 Static game data (10,962+ docs across 38 Firestore collections)
   config/               Firebase init, environment configuration
   theme/                Colors, fonts, shadows, animation constants
 __tests__/              Jest tests (services, store, components, integration)
@@ -93,16 +101,26 @@ plans/                  Design specs and implementation plans
 
 ## Roadmap
 
-### Now
+### Recently Shipped
 
 - **Draft validation system** — ECL timeline resolver + prerequisite validator + ValidationReportSheet UI
-- **Firestore seeding** — Push all static collections to staging and production
+- **Firestore seeding** — 10,962 docs across 38 collections seeded to staging; all 36/36 count checks verified
+- **Archetype picker** — Filter archetypes by class, display replaced/altered features, first-class storage
+- **Ruleset selector UI** — Per-character ruleset configuration on the Identity tab
+- **Animal companion builder** — Full companion stat block with automatic progression tier advancement
+- **Favored class bonuses** — Per-level FCB selection with APG alternate bonuses for all 36 races
+- **Equipment effects pipeline** — Equipped items feed typed bonuses directly into the modifier pipeline
+
+### Now
+
+- **Enter Rissi** — End-to-end validation of a real level-24 multiclass character; ongoing bug triage and fixes
+- **Item effect editor** — Tap any equipped item to add, edit, or remove effects; custom enchantments and homebrew items
 
 ### Next
 
 - **Quick Build wizard** — Guided step-by-step character creation for new players
 - **Campaign management UI** — DM tools for ruleset management, handouts, and session tracking
-- **Enter Rissi** — End-to-end validation of a real level-24 multiclass character; the system integration test
+- **Production seeding** — Push all staging collections to the production Firebase project
 
 ### AI Features
 
