@@ -92,6 +92,7 @@ export function RacePickerSheet({ visible, onSelect, onClose }: RacePickerSheetP
   const [query, setQuery] = useState('');
   const [allRaces, setAllRaces] = useState<ExpandedRaceData[]>([]);
   const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!visible || loaded) return;
@@ -103,7 +104,10 @@ export function RacePickerSheet({ visible, onSelect, onClose }: RacePickerSheetP
         setLoaded(true);
       })
       .catch((e) => {
-        if (!cancelled) console.error('RacePickerSheet: Firestore load failed', e);
+        if (cancelled) return;
+        console.error('RacePickerSheet: Firestore load failed', e);
+        setError('Failed to load races. Please close and try again.');
+        setLoaded(true);
       });
     return () => {
       cancelled = true;
@@ -118,6 +122,7 @@ export function RacePickerSheet({ visible, onSelect, onClose }: RacePickerSheetP
 
   const handleClose = () => {
     setQuery('');
+    setError(null);
     onClose();
   };
 
@@ -179,6 +184,10 @@ export function RacePickerSheet({ visible, onSelect, onClose }: RacePickerSheetP
           <View style={styles.loadingView}>
             <ActivityIndicator size="large" color={fantasy.gold} />
             <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>Loading...</Text>
+          </View>
+        ) : error ? (
+          <View style={styles.empty}>
+            <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>{error}</Text>
           </View>
         ) : (
           <FlatList
