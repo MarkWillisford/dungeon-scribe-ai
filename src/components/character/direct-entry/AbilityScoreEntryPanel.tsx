@@ -182,10 +182,16 @@ function computeOtherEffective(bonuses: ManualAbilityBonus[]): number {
   }
   let total = 0;
   for (const [type, values] of byType) {
-    total +=
-      type === BonusType.UNTYPED || type === BonusType.DODGE
-        ? values.reduce((a, v) => a + v, 0)
-        : Math.max(...values);
+    if (type === BonusType.UNTYPED || type === BonusType.DODGE) {
+      // Untyped and dodge always stack
+      total += values.reduce((a, v) => a + v, 0);
+    } else {
+      // Typed bonuses: positives don't stack (take highest), penalties do stack (sum all negatives)
+      const positives = values.filter((v) => v > 0);
+      const negatives = values.filter((v) => v < 0);
+      if (positives.length > 0) total += Math.max(...positives);
+      total += negatives.reduce((a, v) => a + v, 0);
+    }
   }
   return total;
 }
