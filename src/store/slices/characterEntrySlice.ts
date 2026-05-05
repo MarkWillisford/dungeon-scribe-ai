@@ -349,12 +349,17 @@ const characterEntrySlice = createSlice({
 
     removeOtherBonus(state, action: PayloadAction<{ ability: AbilityKey; index: number }>) {
       if (!state.character.manualAbilityBonuses) return;
-      const abilityBonuses = state.character.manualAbilityBonuses.filter(
-        (b) => b.ability === action.payload.ability,
-      );
-      const target = abilityBonuses[action.payload.index];
-      if (!target) return;
-      const globalIndex = state.character.manualAbilityBonuses.indexOf(target);
+      const { ability, index } = action.payload;
+      // Compute the global index by counting how many items before it match the ability.
+      // This avoids indexOf (object identity), which can delete the wrong entry in Immer
+      // when two bonuses have identical field values.
+      let abilityCount = 0;
+      const globalIndex = state.character.manualAbilityBonuses.findIndex((b) => {
+        if (b.ability !== ability) return false;
+        if (abilityCount === index) return true;
+        abilityCount++;
+        return false;
+      });
       if (globalIndex !== -1) state.character.manualAbilityBonuses.splice(globalIndex, 1);
       state.isDirty = true;
     },
@@ -364,12 +369,17 @@ const characterEntrySlice = createSlice({
       action: PayloadAction<{ ability: AbilityKey; index: number } & ManualAbilityBonus>,
     ) {
       if (!state.character.manualAbilityBonuses) return;
-      const abilityBonuses = state.character.manualAbilityBonuses.filter(
-        (b) => b.ability === action.payload.ability,
-      );
-      const target = abilityBonuses[action.payload.index];
-      if (!target) return;
-      const globalIndex = state.character.manualAbilityBonuses.indexOf(target);
+      const { ability, index } = action.payload;
+      // Compute the global index by counting how many items before it match the ability.
+      // This avoids indexOf (object identity), which can update the wrong entry in Immer
+      // when two bonuses have identical field values.
+      let abilityCount = 0;
+      const globalIndex = state.character.manualAbilityBonuses.findIndex((b) => {
+        if (b.ability !== ability) return false;
+        if (abilityCount === index) return true;
+        abilityCount++;
+        return false;
+      });
       if (globalIndex === -1) return;
       state.character.manualAbilityBonuses[globalIndex] = {
         ability: action.payload.ability,
