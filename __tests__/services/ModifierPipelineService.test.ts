@@ -465,6 +465,30 @@ describe('ModifierPipelineService', () => {
       expect(result.abilityScores.int.bonuses.enhancement[0].value).toBe(6);
     });
 
+    test('applies effects from orbiting ioun stones (isOrbiting:true, slot:undefined)', () => {
+      const char = createTestCharacter({ int: 10 });
+      char.editorEquipment = [
+        {
+          id: 'ioun-1',
+          collection: 'magicItems',
+          name: 'Dusty Rose Prism Ioun Stone',
+          isOrbiting: true,
+          // slot intentionally absent — ioun stones orbit, not worn in a slot
+          effects: [
+            {
+              type: 'bonus',
+              bonusType: BonusType.INSIGHT,
+              target: 'ac',
+              value: 1,
+              source: 'Dusty Rose Prism Ioun Stone',
+            },
+          ],
+        },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.misc).toBe(1);
+    });
+
     test('does not apply effects from unequipped (no slot) items', () => {
       const char = createTestCharacter({ int: 10 });
       const baseInt = char.abilityScores.int.total;

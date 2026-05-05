@@ -307,7 +307,10 @@ export class ModifierPipelineService {
 
     // Magic items added via the direct-entry editor — effects snapshotted at pick time.
     for (const item of character.editorEquipment ?? []) {
-      if (!item.slot) continue;
+      // Orbiting ioun stones have isOrbiting:true and slot:undefined — they are actively
+      // worn and must flow through the pipeline. True slotless inventory items (wands,
+      // containers, carried gear) have neither a slot nor isOrbiting and are excluded.
+      if (!item.slot && !item.isOrbiting) continue;
 
       // Structured Effect[] entries (preferred path for all item effects).
       if (item.effects?.length) {
