@@ -29,6 +29,32 @@ jest.mock('@/hooks/useTheme', () => ({
   }),
 }));
 
+jest.mock('@/services/GameDataService', () => ({
+  GameDataService: {
+    searchFeats: jest.fn().mockResolvedValue([]),
+    getFeatById: jest.fn().mockResolvedValue(null),
+  },
+}));
+
+jest.mock('@/components/character/direct-entry/MagicItemEffectImportSheet', () => ({
+  MagicItemEffectImportSheet: ({
+    onBack,
+  }: {
+    visible: boolean;
+    currentItemName: string;
+    onImport: (effects: unknown[]) => void;
+    onBack: () => void;
+  }) => {
+    const React = require('react');
+    const { Pressable, Text } = require('react-native');
+    return React.createElement(
+      Pressable,
+      { testID: 'mock-import-back-btn', onPress: onBack },
+      React.createElement(Text, null, 'MockImportSheet'),
+    );
+  },
+}));
+
 // ---- Helpers ----
 
 function getAllText(node: RenderedNode): string[] {
@@ -778,8 +804,6 @@ describe('ItemEffectEditorSheet', () => {
         onClose={onClose}
       />,
     );
-    // The header shows a TextInput for custom items
-    const texts = getAllText(rendered.tree);
     // Name is in the TextInput value prop, not as a text child — verify by saving with new name
     rendered.getByTestId('save-btn'); // just confirm the component rendered
     fireEvent.press(rendered.getByTestId('save-btn'));
@@ -836,6 +860,217 @@ describe('ItemEffectEditorSheet', () => {
     const final = rendered.rerender();
     const texts = getAllText(final);
     expect(texts.some((t) => t.includes('Special') || t.includes('channel'))).toBe(true);
+  });
+
+  it('renders the + Import from Item button', () => {
+    const item = makeItem();
+    const { getByTestId } = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    expect(getByTestId('import-from-item-btn')).toBeTruthy();
+  });
+
+  it('switches to item import view when + Import from Item is pressed', () => {
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    fireEvent.press(rendered.getByTestId('import-from-item-btn'));
+    const updated = rendered.rerender();
+    const texts = getAllText(updated);
+    expect(texts.some((t) => t.includes('MockImportSheet'))).toBe(true);
+  });
+
+  it('returns to main view from import sheet via back', () => {
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    fireEvent.press(rendered.getByTestId('import-from-item-btn'));
+    const withImport = rendered.rerender();
+    const backBtn = findTestId(withImport, 'mock-import-back-btn');
+    expect(backBtn).toBeTruthy();
+    fireEvent.press(backBtn!);
+    const updated = rendered.rerender();
+    expect(findTestId(updated, 'import-from-item-btn')).toBeTruthy();
+  });
+
+  it('renders quick-add preset chips for weapon items', () => {
+    const item = makeItem({ collection: 'weapons' });
+    const { getByTestId } = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    expect(getByTestId('preset-chip-MW')).toBeTruthy();
+    expect(getByTestId('preset-chip-+1')).toBeTruthy();
+    expect(getByTestId('preset-chip-Flaming')).toBeTruthy();
+    expect(getByTestId('preset-chip-Holy')).toBeTruthy();
+    expect(getByTestId('preset-chip-Keen')).toBeTruthy();
+  });
+
+  it('renders quick-add preset chips for armor items', () => {
+    const item = makeItem({ collection: 'armor' });
+    const { getByTestId } = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    expect(getByTestId('preset-chip-MW')).toBeTruthy();
+    expect(getByTestId('preset-chip-Fortification')).toBeTruthy();
+  });
+
+  it('does not render preset chips for magicItems collection', () => {
+    const item = makeItem({ collection: 'magicItems' });
+    const { queryByTestId } = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    expect(queryByTestId('preset-chip-MW')).toBeNull();
+  });
+
+  it('adds a preset effect when a preset chip is pressed', () => {
+    const item = makeItem({ collection: 'weapons' });
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    fireEvent.press(rendered.getByTestId('preset-chip-+1'));
+    const updated = rendered.rerender();
+    const texts = getAllText(updated);
+    expect(texts.some((t) => t.includes('+1'))).toBe(true);
+  });
+
+  it('renders the Granted Feats section with + Add button', () => {
+    const item = makeItem();
+    const { getByTestId, queryByText } = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    expect(queryByText('Granted Feats')).toBeTruthy();
+    expect(getByTestId('add-feat-btn')).toBeTruthy();
+  });
+
+  it('switches to feat search view when + Add feat is pressed', () => {
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    fireEvent.press(rendered.getByTestId('add-feat-btn'));
+    const updated = rendered.rerender();
+    expect(findTestId(updated, 'feat-search-input')).toBeTruthy();
+  });
+
+  it('returns from feat search to main view via back button', () => {
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    fireEvent.press(rendered.getByTestId('add-feat-btn'));
+    const withFeatSearch = rendered.rerender();
+    const backBtn = findTestId(withFeatSearch, 'feat-search-back-btn');
+    expect(backBtn).toBeTruthy();
+    fireEvent.press(backBtn!);
+    const updated = rendered.rerender();
+    expect(findTestId(updated, 'add-feat-btn')).toBeTruthy();
+  });
+
+  it('saves grantedFeatIds on the item when feats added', () => {
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    // Navigate to feat search, go back without adding, then save
+    fireEvent.press(rendered.getByTestId('add-feat-btn'));
+    const withFeatSearch = rendered.rerender();
+    const backBtn = findTestId(withFeatSearch, 'feat-search-back-btn');
+    fireEvent.press(backBtn!);
+    rendered.rerender();
+    fireEvent.press(rendered.getByTestId('save-btn'));
+    // With no feats added, grantedFeatIds should be undefined
+    expect(onSave).toHaveBeenCalledWith(
+      expect.objectContaining({ id: 'item-1' }),
+    );
+    const saved = onSave.mock.calls[0][0];
+    expect(saved.grantedFeatIds).toBeUndefined();
+  });
+
+  it('initializes workingFeatIds from item.grantedFeatIds', () => {
+    const { GameDataService: mockGDS } = require('@/services/GameDataService');
+    mockGDS.getFeatById.mockResolvedValue({ id: 'power-attack', name: 'Power Attack' });
+
+    const item = makeItem({ grantedFeatIds: ['power-attack'] });
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    fireEvent.press(rendered.getByTestId('save-btn'));
+    const saved = onSave.mock.calls[0][0];
+    expect(saved.grantedFeatIds).toEqual(['power-attack']);
   });
 });
 

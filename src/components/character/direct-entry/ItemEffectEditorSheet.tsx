@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
@@ -15,7 +15,10 @@ import type { Effect, EffectTarget, EffectType } from '@/types/base';
 import type { Character } from '@/types';
 import type { EditorEquipmentItem } from '@/types/character';
 import { EffectTargetPickerSheet, buildTargetLabelMap } from './EffectTargetPickerSheet';
+import { MagicItemEffectImportSheet } from './MagicItemEffectImportSheet';
+import { GameDataService } from '@/services/GameDataService';
 import type { EffectTargetOption } from './EffectTargetPickerSheet';
+import type { FeatDefinition } from '@/types/feats';
 
 // ---- Helpers ----
 
@@ -35,6 +38,66 @@ const BONUS_TYPE_CHIPS: { label: string; value: BonusType }[] = [
   { label: 'Competence', value: BonusType.COMPETENCE },
   { label: 'Untyped', value: BonusType.UNTYPED },
 ];
+
+// Quick-add presets vary by item collection
+interface QuickPreset {
+  label: string;
+  effect: Omit<Effect, 'source'>;
+}
+
+function buildPresets(collection: EditorEquipmentItem['collection']): QuickPreset[] {
+  const enhancements: QuickPreset[] = [1, 2, 3, 4, 5].map((n) => ({
+    label: `+${n}`,
+    effect: {
+      type: 'bonus' as const,
+      target: collection === 'armor' ? 'ac.armor' : 'attack.melee',
+      bonusType: BonusType.ENHANCEMENT,
+      value: n,
+    },
+  }));
+
+  if (collection === 'weapons') {
+    return [
+      {
+        label: 'MW',
+        effect: { type: 'bonus', target: 'attack.melee', bonusType: BonusType.ENHANCEMENT, value: 1 },
+      },
+      ...enhancements,
+      {
+        label: 'Flaming',
+        effect: { type: 'special', target: 'special.flaming', value: 1 },
+      },
+      {
+        label: 'Holy',
+        effect: { type: 'special', target: 'special.holy', value: 1 },
+      },
+      {
+        label: 'Bane',
+        effect: { type: 'special', target: 'special.bane', value: 1 },
+      },
+      {
+        label: 'Keen',
+        effect: { type: 'special', target: 'special.keen', value: 1 },
+      },
+    ];
+  }
+
+  if (collection === 'armor') {
+    return [
+      {
+        label: 'MW',
+        effect: { type: 'bonus', target: 'ac.armor', bonusType: BonusType.ENHANCEMENT, value: 1 },
+      },
+      ...enhancements,
+      {
+        label: 'Fortification',
+        effect: { type: 'special', target: 'special.fortification', value: 1 },
+      },
+    ];
+  }
+
+  return [];
+}
 
 function isSpecialTarget(target: EffectTarget): boolean {
   return target.startsWith('special.');
@@ -69,7 +132,7 @@ interface ItemEffectEditorSheetProps {
   onClose: () => void;
 }
 
-type SheetView = 'main' | 'targetPicker';
+type SheetView = 'main' | 'targetPicker' | 'itemImport' | 'featSearch';
 
 // ---- Component ----
 
@@ -86,16 +149,49 @@ export function ItemEffectEditorSheet({
   const [sheetView, setSheetView] = useState<SheetView>('main');
   const [editedName, setEditedName] = useState(item?.name ?? '');
   const [workingEffects, setWorkingEffects] = useState<Effect[]>(item?.effects ?? []);
+  const [workingFeatIds, setWorkingFeatIds] = useState<string[]>(item?.grantedFeatIds ?? []);
   const [addingEffect, setAddingEffect] = useState(false);
   const [pendingTarget, setPendingTarget] = useState<EffectTargetOption | null>(null);
   const [pendingBonusType, setPendingBonusType] = useState<BonusType>(BonusType.UNTYPED);
   const [pendingValue, setPendingValue] = useState('');
 
+  // Feat search state
+  const [featQuery, setFeatQuery] = useState('');
+  const [featResults, setFeatResults] = useState<FeatDefinition[]>([]);
+  const [featNameMap, setFeatNameMap] = useState<Map<string, string>>(new Map());
+
+  // Populate feat name map from working feat IDs for display
+  useEffect(() => {
+    if (workingFeatIds.length === 0) return;
+    const missing = workingFeatIds.filter((id) => !featNameMap.has(id));
+    if (missing.length === 0) return;
+    Promise.all(missing.map((id) => GameDataService.getFeatById(id))).then((feats) => {
+      setFeatNameMap((prev) => {
+        const next = new Map(prev);
+        feats.forEach((f, i) => {
+          if (f) next.set(missing[i], f.name);
+        });
+        return next;
+      });
+    });
+  }, [workingFeatIds]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Search feats when query changes in featSearch view
+  useEffect(() => {
+    if (sheetView !== 'featSearch' || !featQuery) return;
+    let cancelled = false;
+    GameDataService.searchFeats(featQuery).then((results) => {
+      if (!cancelled) setFeatResults(results);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [featQuery, sheetView]);
+
   const labelMap = buildTargetLabelMap(character);
 
   const handleTargetSelect = useCallback((option: EffectTargetOption) => {
     setPendingTarget(option);
-    // Auto-set a sensible default bonus type for standard targets
     if (!isSpecialTarget(option.target)) {
       if (option.target.startsWith('save.')) setPendingBonusType(BonusType.RESISTANCE);
       else if (option.target.startsWith('ac.')) setPendingBonusType(BonusType.DEFLECTION);
@@ -131,10 +227,46 @@ export function ItemEffectEditorSheet({
     setWorkingEffects((prev) => prev.filter((_, i) => i !== index));
   }, []);
 
+  const handleQuickPreset = useCallback(
+    (preset: QuickPreset) => {
+      const effect: Effect = {
+        ...preset.effect,
+        source: editedName || item?.name || 'Custom',
+      } as Effect;
+      setWorkingEffects((prev) => [...prev, effect]);
+    },
+    [editedName, item?.name],
+  );
+
+  const handleImportEffects = useCallback((effects: Effect[]) => {
+    setWorkingEffects((prev) => [...prev, ...effects]);
+  }, []);
+
+  const handleAddFeat = useCallback(
+    (feat: FeatDefinition) => {
+      if (workingFeatIds.includes(feat.id)) return;
+      setWorkingFeatIds((prev) => [...prev, feat.id]);
+      setFeatNameMap((prev) => new Map(prev).set(feat.id, feat.name));
+      setFeatQuery('');
+      setFeatResults([]);
+      setSheetView('main');
+    },
+    [workingFeatIds],
+  );
+
+  const handleRemoveFeat = useCallback((id: string) => {
+    setWorkingFeatIds((prev) => prev.filter((fid) => fid !== id));
+  }, []);
+
   const handleSave = useCallback(() => {
     if (!item) return;
-    onSave({ ...item, name: editedName || item.name, effects: workingEffects });
-  }, [item, editedName, workingEffects, onSave]);
+    onSave({
+      ...item,
+      name: editedName || item.name,
+      effects: workingEffects,
+      grantedFeatIds: workingFeatIds.length > 0 ? workingFeatIds : undefined,
+    });
+  }, [item, editedName, workingEffects, workingFeatIds, onSave]);
 
   const handleRemoveItem = useCallback(() => {
     if (!item) return;
@@ -144,6 +276,9 @@ export function ItemEffectEditorSheet({
   if (!item) return null;
 
   const isDbItem = !!item.definitionId;
+  const gold = isDark ? fantasy.gold : fantasy.darkWood;
+  const headerBg = isDark ? colors.bg.secondary : colors.bg.primary;
+  const presets = buildPresets(item.collection);
 
   // ---- Target picker view ----
   if (sheetView === 'targetPicker') {
@@ -160,9 +295,94 @@ export function ItemEffectEditorSheet({
     );
   }
 
+  // ---- Import from item view ----
+  if (sheetView === 'itemImport') {
+    return (
+      <View
+        style={[styles.root, { backgroundColor: isDark ? colors.bg.primary : colors.bg.secondary }]}
+      >
+        <MagicItemEffectImportSheet
+          visible={true}
+          currentItemName={editedName || item.name}
+          onImport={handleImportEffects}
+          onBack={() => setSheetView('main')}
+        />
+      </View>
+    );
+  }
+
+  // ---- Feat search view ----
+  if (sheetView === 'featSearch') {
+    return (
+      <KeyboardAvoidingView
+        style={[styles.root, { backgroundColor: isDark ? colors.bg.primary : colors.bg.secondary }]}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+        <View
+          style={[
+            styles.header,
+            { backgroundColor: headerBg, borderBottomColor: colors.border.DEFAULT },
+          ]}
+        >
+          <Pressable onPress={() => { setSheetView('main'); setFeatQuery(''); }} hitSlop={12} testID="feat-search-back-btn">
+            <Text style={[styles.backBtn, { color: gold }]}>‹ Back</Text>
+          </Pressable>
+          <Text style={[styles.headerTitle, { color: gold }]}>Add Granted Feat</Text>
+        </View>
+        <View
+          style={[
+            styles.searchRow,
+            { borderBottomColor: colors.border.DEFAULT, backgroundColor: headerBg },
+          ]}
+        >
+          <TextInput
+            testID="feat-search-input"
+            value={featQuery}
+            onChangeText={setFeatQuery}
+            placeholder="Type a feat name..."
+            placeholderTextColor={colors.text.tertiary}
+            style={[
+              styles.searchInput,
+              {
+                color: colors.text.primary,
+                backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+                borderColor: colors.border.DEFAULT,
+              },
+            ]}
+            autoFocus
+            returnKeyType="search"
+            clearButtonMode="while-editing"
+          />
+        </View>
+        <ScrollView keyboardShouldPersistTaps="handled">
+          {!featQuery && (
+            <View style={styles.centerState}>
+              <Text style={[styles.hintText, { color: colors.text.tertiary }]}>
+                Type a feat name to search
+              </Text>
+            </View>
+          )}
+          {featQuery.length > 0 && featResults.length === 0 && (
+            <View style={styles.centerState}>
+              <Text style={[styles.hintText, { color: colors.text.tertiary }]}>No feats found</Text>
+            </View>
+          )}
+          {featResults.map((feat) => (
+            <Pressable
+              key={feat.id}
+              testID={`feat-result-${feat.id}`}
+              onPress={() => handleAddFeat(feat)}
+              style={[styles.effectRow, { borderBottomColor: colors.border.DEFAULT }]}
+            >
+              <Text style={[styles.effectLabel, { color: colors.text.primary }]}>{feat.name}</Text>
+            </Pressable>
+          ))}
+        </ScrollView>
+      </KeyboardAvoidingView>
+    );
+  }
+
   // ---- Main editor view ----
-  const gold = isDark ? fantasy.gold : fantasy.darkWood;
-  const headerBg = isDark ? colors.bg.secondary : colors.bg.primary;
 
   return (
     <KeyboardAvoidingView
@@ -204,6 +424,47 @@ export function ItemEffectEditorSheet({
       </View>
 
       <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.listContent}>
+        {/* Quick-add preset chips */}
+        {presets.length > 0 && (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.presetsRow}
+            contentContainerStyle={styles.presetsContent}
+          >
+            {presets.map((preset) => (
+              <Pressable
+                key={preset.label}
+                testID={`preset-chip-${preset.label}`}
+                onPress={() => handleQuickPreset(preset)}
+                style={[
+                  styles.chip,
+                  {
+                    borderColor: gold,
+                    backgroundColor: isDark ? 'rgba(212,175,55,0.1)' : 'rgba(140,90,40,0.07)',
+                  },
+                ]}
+              >
+                <Text style={[styles.chipText, { color: gold }]}>{preset.label}</Text>
+              </Pressable>
+            ))}
+          </ScrollView>
+        )}
+
+        {/* Import from item button */}
+        <Pressable
+          onPress={() => setSheetView('itemImport')}
+          testID="import-from-item-btn"
+          style={[
+            styles.importBtn,
+            { borderColor: isDark ? colors.border.DEFAULT : colors.border.DEFAULT },
+          ]}
+        >
+          <Text style={[styles.importBtnText, { color: colors.text.secondary }]}>
+            + Import from Item
+          </Text>
+        </Pressable>
+
         {/* Empty state */}
         {workingEffects.length === 0 && !addingEffect && (
           <View style={styles.emptyState}>
@@ -395,6 +656,46 @@ export function ItemEffectEditorSheet({
             </View>
           </View>
         )}
+
+        {/* Granted Feats section */}
+        <View style={styles.sectionHeader}>
+          <Text style={[styles.sectionTitle, { color: colors.text.secondary }]}>Granted Feats</Text>
+          <Pressable
+            testID="add-feat-btn"
+            onPress={() => setSheetView('featSearch')}
+            hitSlop={10}
+          >
+            <Text style={[styles.sectionAddBtn, { color: gold }]}>+ Add</Text>
+          </Pressable>
+        </View>
+
+        {workingFeatIds.length === 0 && (
+          <Text style={[styles.emptyText, { color: colors.text.tertiary, marginHorizontal: 16, marginBottom: 8 }]}>
+            None
+          </Text>
+        )}
+
+        {workingFeatIds.map((id) => (
+          <View
+            key={id}
+            style={[styles.effectRow, { borderBottomColor: colors.border.DEFAULT }]}
+          >
+            <Text
+              style={[styles.effectLabel, { color: colors.text.primary, flex: 1 }]}
+              numberOfLines={1}
+            >
+              {featNameMap.get(id) ?? id}
+            </Text>
+            <Pressable
+              onPress={() => handleRemoveFeat(id)}
+              hitSlop={10}
+              testID={`remove-feat-${id}`}
+              style={styles.removeBtn}
+            >
+              <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
+            </Pressable>
+          </View>
+        ))}
       </ScrollView>
 
       {/* Footer */}
@@ -442,6 +743,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Cinzel',
     fontSize: 16,
     fontWeight: '700',
+    flex: 1,
   },
   headerTitleInput: {
     fontFamily: 'Cinzel',
@@ -456,10 +758,38 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     marginTop: 2,
   },
+  backBtn: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 16,
+    fontWeight: '700',
+  },
   closeBtn: { paddingTop: 2 },
   closeBtnText: {
     fontFamily: 'LibreBaskerville',
     fontSize: 18,
+  },
+  presetsRow: {
+    flexGrow: 0,
+    marginTop: 12,
+    marginBottom: 4,
+  },
+  presetsContent: {
+    paddingHorizontal: 16,
+    gap: 6,
+  },
+  importBtn: {
+    marginHorizontal: 16,
+    marginTop: 6,
+    marginBottom: 2,
+    paddingVertical: 8,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  importBtnText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    fontWeight: '600',
   },
   listContent: { flexGrow: 1, paddingBottom: 8 },
   emptyState: {
@@ -583,6 +913,50 @@ const styles = StyleSheet.create({
     fontFamily: 'LibreBaskerville',
     fontSize: 14,
     fontWeight: '700',
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 8,
+  },
+  sectionTitle: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    flex: 1,
+  },
+  sectionAddBtn: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    fontWeight: '700',
+  },
+  searchRow: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  searchInput: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 15,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    minHeight: 40,
+  },
+  centerState: {
+    padding: 32,
+    alignItems: 'center',
+  },
+  hintText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+    fontStyle: 'italic',
+    textAlign: 'center',
   },
   footer: {
     flexDirection: 'row',

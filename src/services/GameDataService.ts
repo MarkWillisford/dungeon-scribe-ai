@@ -717,6 +717,14 @@ export class GameDataService {
     return GameDataService.connector.getMagicItemsBySlot(slot);
   }
 
+  static async searchMagicItems(query: string): Promise<MagicItemDefinition[]> {
+    return GameDataService.connector.searchMagicItems(query);
+  }
+
+  static async searchFeats(query: string): Promise<FeatDefinition[]> {
+    return GameDataService.connector.searchFeats(query);
+  }
+
   // ---- Initiating system -----------------------------------------------------
 
   static async getDisciplines(filter?: DisciplineFilter): Promise<DisciplineDefinition[]> {

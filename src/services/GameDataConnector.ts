@@ -148,6 +148,8 @@ export interface GameDataConnector {
   getShields(context?: QueryContext): Promise<ShieldDefinition[]>;
   getGear(context?: QueryContext): Promise<GearDefinition[]>;
   getMagicItemsBySlot(slot: ItemSlot): Promise<MagicItemDefinition[]>;
+  searchMagicItems(query: string): Promise<MagicItemDefinition[]>;
+  searchFeats(query: string): Promise<FeatDefinition[]>;
 
   // ---- Initiating system ----
   getDisciplines(filter?: DisciplineFilter): Promise<DisciplineDefinition[]>;

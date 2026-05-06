@@ -56,6 +56,7 @@ export interface EditorEquipmentItem {
   // Denormalized from item definition at add time — used for pipeline enhancement bonuses
   abilityScoreBonuses?: Partial<Record<AbilityKey, number>>;
   effects?: Effect[]; // snapshot from MagicItemDefinition.effects at pick time
+  grantedFeatIds?: string[]; // feat IDs granted while this item is equipped
 }
 
 // Experience Points

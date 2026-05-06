@@ -19,6 +19,7 @@
 import { collection, query, where, getDocs, getDoc, doc, limit } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 import { SPELL_TABLES } from '@/data/classes/index';
+import { ALL_FEATS } from '@/data/feats/index';
 
 import type { FeatDefinition } from '@/types/feats';
 import type { TraitDefinition } from '@/types/traits';
@@ -33,6 +34,15 @@ import type {
   GearDefinition,
 } from '@/types/equipment';
 import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
+import {
+  ALL_WONDROUS_ITEMS,
+  ALL_RINGS,
+  ALL_STAVES,
+  ALL_RODS,
+  ALL_MAGIC_WEAPONS,
+  ALL_MAGIC_ARMOR,
+  ALL_IOUN_STONES,
+} from '@/data/magicItems/index';
 import type {
   DisciplineDefinition,
   ManeuverDefinition,
@@ -405,6 +415,14 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     }
   }
 
+  async searchFeats(query: string): Promise<FeatDefinition[]> {
+    if (!query) return [];
+    const q = query.toLowerCase();
+    return Promise.resolve(
+      ALL_FEATS.filter((f) => f.name.toLowerCase().includes(q)).slice(0, 50),
+    );
+  }
+
   // ---- Traits ----------------------------------------------------------------
 
   async getTraits(): Promise<TraitDefinition[]> {
@@ -585,6 +603,21 @@ export class FirestoreGameDataConnector implements GameDataConnector {
         return [];
       }
     });
+  }
+
+  async searchMagicItems(query: string): Promise<MagicItemDefinition[]> {
+    if (!query) return [];
+    const q = query.toLowerCase();
+    const all: MagicItemDefinition[] = [
+      ...(ALL_WONDROUS_ITEMS as MagicItemDefinition[]),
+      ...(ALL_RINGS as MagicItemDefinition[]),
+      ...(ALL_STAVES as MagicItemDefinition[]),
+      ...(ALL_RODS as MagicItemDefinition[]),
+      ...(ALL_MAGIC_WEAPONS as MagicItemDefinition[]),
+      ...(ALL_MAGIC_ARMOR as MagicItemDefinition[]),
+      ...(ALL_IOUN_STONES as MagicItemDefinition[]),
+    ];
+    return all.filter((item) => item.name.toLowerCase().includes(q)).slice(0, 50);
   }
 
   // ---- Initiating system -----------------------------------------------------
