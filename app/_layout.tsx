@@ -18,8 +18,11 @@ initializeFeatRegistry?.();
 
 function DiceFABWrapper() {
   const pathname = usePathname();
-  // Hide FAB on the combat tab — it has an embedded dice roller
-  const hideFAB = pathname.startsWith('/combat') || pathname.startsWith('/(tabs)/combat');
+  // Hide FAB on the combat tab (has embedded roller) and character entry screen (keyboard/scroll conflicts)
+  const hideFAB =
+    pathname.startsWith('/combat') ||
+    pathname.startsWith('/(tabs)/combat') ||
+    pathname.endsWith('/entry');
   return <DiceFAB hidden={hideFAB} />;
 }
 
