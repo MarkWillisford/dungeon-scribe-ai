@@ -190,24 +190,15 @@ export function CombatStatsSection() {
       <Panel title="Hit Points">
         <View style={styles.row}>
           <Text style={styles.fieldLabel}>Max HP</Text>
-          {cs.hitPoints.other !== 0 ? (
-            <>
-              <NumInput
-                value={cs.hitPoints.other}
-                onCommit={(n) => set('maxHPOverride', n ?? 0)}
-                width={64}
-              />
-              <Pressable onPress={() => set('maxHPOverride', 0)} hitSlop={8}>
-                <Text style={styles.linkText}>↺ auto</Text>
-              </Pressable>
-            </>
-          ) : (
-            <>
-              <AutoComputedValue value={String(maxHP)} />
-              <Pressable onPress={() => set('maxHPOverride', Math.max(maxHP, 1))} hitSlop={8}>
-                <Text style={styles.linkText}>override</Text>
-              </Pressable>
-            </>
+          <NumInput
+            value={cs.hitPoints.other || maxHP}
+            onCommit={(n) => set('maxHPOverride', n ?? 0)}
+            width={64}
+          />
+          {cs.hitPoints.other !== 0 && (
+            <Pressable onPress={() => set('maxHPOverride', 0)} hitSlop={8}>
+              <Text style={styles.linkText}>↺ auto</Text>
+            </Pressable>
           )}
           <Text style={styles.fieldLabel}>Current</Text>
           <NumInput

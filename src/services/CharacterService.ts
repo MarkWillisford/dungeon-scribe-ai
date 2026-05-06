@@ -634,6 +634,7 @@ export class CharacterService {
       knowledgeGeography: createSkill('int'),
       knowledgeHistory: createSkill('int'),
       knowledgeLocal: createSkill('int'),
+      knowledgeMartial: createSkill('int'),
       knowledgeNature: createSkill('int'),
       knowledgeNobility: createSkill('int'),
       knowledgePlanes: createSkill('int'),
