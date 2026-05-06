@@ -214,7 +214,7 @@ export function CharacterEntryScreen() {
       >
         <ScrollView
           style={styles.scrollView}
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[styles.scrollContent, showValidationFAB && styles.scrollContentFAB]}
           keyboardShouldPersistTaps="handled"
         >
           {activeTab === 'identity' && <IdentitySection />}
@@ -298,6 +298,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 16,
     gap: 16,
+  },
+  scrollContentFAB: {
+    paddingBottom: 88,
   },
   placeholder: {
     paddingVertical: 60,
