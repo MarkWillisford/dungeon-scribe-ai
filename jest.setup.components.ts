@@ -167,6 +167,17 @@ jest.mock('react-native-reanimated', () => {
   };
 });
 
+// Mock react-native-safe-area-context
+jest.mock('react-native-safe-area-context', () => {
+  const React = require('react');
+  return {
+    SafeAreaView: (props: any) => React.createElement('SafeAreaView', props, props.children),
+    SafeAreaProvider: (props: any) => React.createElement('SafeAreaProvider', props, props.children),
+    useSafeAreaInsets: () => ({ top: 0, right: 0, bottom: 0, left: 0 }),
+    useSafeAreaFrame: () => ({ x: 0, y: 0, width: 375, height: 812 }),
+  };
+});
+
 // Mock Redux store hooks for useTheme
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => jest.fn(),
