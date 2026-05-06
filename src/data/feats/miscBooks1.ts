@@ -1086,21 +1086,9 @@ export const MISC_FEATS_1: FeatDefinition[] = [
     activationMode: 'passive',
     choices: [
       {
-        type: 'custom' as const,
+        type: 'owned_feat' as const,
         label: 'Metamagic feat',
-        options: [
-          'Empower Spell',
-          'Enlarge Spell',
-          'Extend Spell',
-          'Heighten Spell',
-          'Maximize Spell',
-          'Persistent Spell',
-          'Quicken Spell',
-          'Selective Spell',
-          'Silent Spell',
-          'Still Spell',
-          'Widen Spell',
-        ],
+        filterFeatType: 'metamagic' as const,
         affectsEffects: false,
       },
     ],

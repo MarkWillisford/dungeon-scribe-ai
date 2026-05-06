@@ -93,6 +93,9 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
   const characterClasses = useAppSelector(
     (state) => state.characterEntry.character.classes.classes,
   );
+  const assignedFeats = useAppSelector(
+    (state) => state.characterEntry.character.feats.feats,
+  );
   const classDataMap = useAppSelector(selectClassDataMap);
 
   const eslByPoolId = useMemo(() => {
@@ -193,11 +196,24 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
     if (!activeChoicePicker) return [];
     if (activeChoicePicker.type === 'weapon') return weaponItems;
     if (activeChoicePicker.type === 'spell') return spellItems;
+    if (activeChoicePicker.type === 'owned_feat') {
+      const seen = new Set<string>();
+      return assignedFeats
+        .filter((f) => {
+          if (!f.featId || !f.name) return false;
+          if (seen.has(f.featId)) return false;
+          seen.add(f.featId);
+          if (!activeChoicePicker.filterFeatType) return true;
+          const def = FeatRegistryService.getFeat(f.featId);
+          return def?.types.includes(activeChoicePicker.filterFeatType) ?? false;
+        })
+        .map((f) => ({ key: f.featId, label: f.name }));
+    }
     return (activeChoicePicker.options ?? []).map((opt) => ({
       key: opt,
       label: opt.charAt(0).toUpperCase() + opt.slice(1),
     }));
-  }, [activeChoicePicker, weaponItems, spellItems]);
+  }, [activeChoicePicker, weaponItems, spellItems, assignedFeats]);
 
   return (
     <>
