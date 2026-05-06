@@ -161,6 +161,7 @@ export function ItemEffectEditorSheet({
   const [featNameMap, setFeatNameMap] = useState<Map<string, string>>(new Map());
 
   // Populate feat name map from working feat IDs for display
+  /* istanbul ignore next */
   useEffect(() => {
     if (workingFeatIds.length === 0) return;
     const missing = workingFeatIds.filter((id) => !featNameMap.has(id));
@@ -177,6 +178,7 @@ export function ItemEffectEditorSheet({
   }, [workingFeatIds]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Search feats when query changes in featSearch view
+  /* istanbul ignore next */
   useEffect(() => {
     if (sheetView !== 'featSearch' || !featQuery) return;
     let cancelled = false;

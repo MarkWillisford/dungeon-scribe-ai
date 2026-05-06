@@ -39,6 +39,8 @@ jest.mock('@/services/GameDataService', () => ({
 jest.mock('@/components/character/direct-entry/MagicItemEffectImportSheet', () => ({
   MagicItemEffectImportSheet: ({
     onBack,
+    onImport,
+    currentItemName,
   }: {
     visible: boolean;
     currentItemName: string;
@@ -46,11 +48,28 @@ jest.mock('@/components/character/direct-entry/MagicItemEffectImportSheet', () =
     onBack: () => void;
   }) => {
     const React = require('react');
-    const { Pressable, Text } = require('react-native');
+    const { Pressable, Text, View } = require('react-native');
     return React.createElement(
-      Pressable,
-      { testID: 'mock-import-back-btn', onPress: onBack },
-      React.createElement(Text, null, 'MockImportSheet'),
+      View,
+      null,
+      React.createElement(
+        Pressable,
+        { testID: 'mock-import-back-btn', onPress: onBack },
+        React.createElement(Text, null, 'MockImportSheet'),
+      ),
+      React.createElement(
+        Pressable,
+        {
+          testID: 'mock-import-effects-btn',
+          onPress: () => {
+            onImport([
+              { type: 'bonus', target: 'save.all', value: 2, bonusType: 'resistance', source: currentItemName },
+            ]);
+            onBack();
+          },
+        },
+        React.createElement(Text, null, 'ImportEffects'),
+      ),
     );
   },
 }));
@@ -1071,6 +1090,81 @@ describe('ItemEffectEditorSheet', () => {
     fireEvent.press(rendered.getByTestId('save-btn'));
     const saved = onSave.mock.calls[0][0];
     expect(saved.grantedFeatIds).toEqual(['power-attack']);
+  });
+
+  it('merges imported effects into the working list (handleImportEffects)', () => {
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    fireEvent.press(rendered.getByTestId('import-from-item-btn'));
+    const withImport = rendered.rerender();
+    const importBtn = findTestId(withImport, 'mock-import-effects-btn');
+    expect(importBtn).toBeTruthy();
+    fireEvent.press(importBtn!);
+    // After import the sheet switches back to main; save and verify the effect is there
+    const updated = rendered.rerender();
+    fireEvent.press(findTestId(updated, 'save-btn')!);
+    const saved = onSave.mock.calls[0][0];
+    expect(saved.effects).toHaveLength(1);
+    expect(saved.effects[0].target).toBe('save.all');
+  });
+
+  it('adds a feat from search results (handleAddFeat)', () => {
+    const { setHookStateAt } = require('../../helpers/testUtils');
+    const item = makeItem();
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    // Switch to featSearch view (slot 0) and inject feat results (slot 9)
+    setHookStateAt(0, 'featSearch');
+    setHookStateAt(9, [{ id: 'power-attack', name: 'Power Attack' }]);
+    const withResults = rendered.rerender();
+    const featBtn = findTestId(withResults, 'feat-result-power-attack');
+    expect(featBtn).toBeTruthy();
+    fireEvent.press(featBtn!);
+    // After adding, view returns to main; save to verify feat was stored
+    const updated = rendered.rerender();
+    fireEvent.press(findTestId(updated, 'save-btn')!);
+    const saved = onSave.mock.calls[0][0];
+    expect(saved.grantedFeatIds).toContain('power-attack');
+  });
+
+  it('removes a granted feat (handleRemoveFeat)', () => {
+    const { setHookStateAt } = require('../../helpers/testUtils');
+    const item = makeItem({ grantedFeatIds: ['power-attack'] });
+    const rendered = render(
+      <ItemEffectEditorSheet
+        item={item}
+        character={character}
+        onSave={onSave}
+        onRemoveItem={onRemoveItem}
+        onClose={onClose}
+      />,
+    );
+    // Inject featNameMap so the remove button renders (slot 10)
+    setHookStateAt(10, new Map([['power-attack', 'Power Attack']]));
+    const withFeat = rendered.rerender();
+    const removeBtn = findTestId(withFeat, 'remove-feat-power-attack');
+    expect(removeBtn).toBeTruthy();
+    fireEvent.press(removeBtn!);
+    const updated = rendered.rerender();
+    fireEvent.press(findTestId(updated, 'save-btn')!);
+    const saved = onSave.mock.calls[0][0];
+    // handleSave sets grantedFeatIds to undefined when the array is empty
+    expect(saved.grantedFeatIds).toBeUndefined();
   });
 });
 

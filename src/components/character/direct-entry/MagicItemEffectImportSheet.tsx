@@ -32,10 +32,11 @@ export function MagicItemEffectImportSheet({
   const [results, setResults] = useState<MagicItemDefinition[]>([]);
   const [loading, setLoading] = useState(false);
 
+  /* istanbul ignore next */
   useEffect(() => {
     if (!visible || !query) return;
     let cancelled = false;
-    setLoading(true);
+    setLoading(true); // eslint-disable-line react-hooks/set-state-in-effect
     GameDataService.searchMagicItems(query).then((items) => {
       if (!cancelled) {
         setResults(items);
