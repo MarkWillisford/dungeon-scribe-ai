@@ -6,8 +6,10 @@ import { CharacterEntryScreen } from '@/components/character/direct-entry/Charac
 // ---- Router mock ----
 
 const mockBack = jest.fn();
+const mockReplace = jest.fn();
+const mockCanGoBack = jest.fn().mockReturnValue(true);
 jest.mock('expo-router', () => ({
-  useRouter: () => ({ back: mockBack }),
+  useRouter: () => ({ back: mockBack, replace: mockReplace, canGoBack: mockCanGoBack }),
 }));
 
 // ---- Store state vars ----
@@ -158,6 +160,8 @@ function ornateTabNode(tree: RenderedNode) {
 beforeEach(() => {
   jest.clearAllMocks();
   mockBack.mockReset();
+  mockReplace.mockReset();
+  mockCanGoBack.mockReturnValue(true);
   mockDispatch.mockReturnValue({ unwrap: mockUnwrap });
   mockUnwrap.mockResolvedValue(undefined);
   mockActiveTab = 'identity';
