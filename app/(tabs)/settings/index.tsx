@@ -1,5 +1,6 @@
 import React from 'react';
-import { SafeAreaView, View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { useTheme } from '@/hooks/useTheme';

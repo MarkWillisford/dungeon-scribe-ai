@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, Modal, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Modal } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch } from '@/store/hooks';
 import { appendRoll } from '@store/slices/combatSlice';

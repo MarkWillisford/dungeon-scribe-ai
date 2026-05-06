@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Alert, SafeAreaView, View, Text, FlatList, StyleSheet } from 'react-native';
+import { Alert, View, Text, FlatList, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { useTheme } from '@/hooks/useTheme';
