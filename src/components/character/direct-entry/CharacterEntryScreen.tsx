@@ -156,26 +156,34 @@ export function CharacterEntryScreen() {
     setShowValidationSheet(true);
   }, [character, ruleset, classDataMap, dispatch]);
 
+  const navigateAway = useCallback(() => {
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace('/(tabs)/characters');
+    }
+  }, [router]);
+
   const handleSave = useCallback(async () => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await (dispatch(saveCharacter() as any) as any).unwrap();
-      router.back();
+      navigateAway();
     } catch {
       // setSaveError was already dispatched by the thunk
     }
-  }, [dispatch, router]);
+  }, [dispatch, navigateAway]);
 
   const handleBack = useCallback(() => {
     if (!isDirty) {
-      router.back();
+      navigateAway();
       return;
     }
     Alert.alert('Unsaved Changes', 'You have unsaved changes. Leave without saving?', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Leave', style: 'destructive', onPress: () => router.back() },
+      { text: 'Leave', style: 'destructive', onPress: navigateAway },
     ]);
-  }, [isDirty, router]);
+  }, [isDirty, navigateAway]);
 
   const handlePortraitPress = useCallback(() => {
     // Portrait picker will be wired in a later PR
