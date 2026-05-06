@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, View, Text, ScrollView, StyleSheet, Pressable } from 'react-native';
+import { SafeAreaView, View, Text, ScrollView, StyleSheet, Pressable, Alert } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { useTheme } from '@/hooks/useTheme';
-import { fetchCharacter, toggleFeat } from '@/store/slices/charactersSlice';
+import { fetchCharacter, toggleFeat, deleteCharacter } from '@/store/slices/charactersSlice';
 import { OrnatePanel } from '@/components/ui/OrnatePanel';
 import { OrnateButton } from '@/components/ui/OrnateButton';
 import { OrnateTab } from '@/components/ui/OrnateTab';
@@ -110,6 +110,32 @@ export default function CharacterDetailScreen() {
         {activeTab === 'combat' && <CombatTab character={activeCharacter} />}
         {activeTab === 'skills' && <SkillsTab character={activeCharacter} />}
         {activeTab === 'feats' && <FeatsTab character={activeCharacter} dispatch={dispatch} />}
+
+        <View style={styles.dangerZone}>
+          <Pressable
+            style={styles.deleteButton}
+            onPress={() =>
+              Alert.alert(
+                'Delete Character',
+                `Are you sure you want to delete ${activeCharacter.info.name}? This cannot be undone.`,
+                [
+                  { text: 'Cancel', style: 'cancel' },
+                  {
+                    text: 'Delete',
+                    style: 'destructive',
+                    onPress: () => {
+                      dispatch(deleteCharacter(id));
+                      router.replace('/(tabs)/characters');
+                    },
+                  },
+                ],
+              )
+            }
+            testID="delete-character-button"
+          >
+            <Text style={styles.deleteButtonText}>Delete Character</Text>
+          </Pressable>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -568,6 +594,25 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   buttonContainer: { marginTop: 16 },
+  dangerZone: {
+    marginTop: 32,
+    paddingTop: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#5C1A1A',
+    alignItems: 'center',
+  },
+  deleteButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: '#8B0000',
+  },
+  deleteButtonText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+    color: '#8B0000',
+  },
 
   // Quick Stats
   quickStatsGrid: {
