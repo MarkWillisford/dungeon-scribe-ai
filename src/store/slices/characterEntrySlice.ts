@@ -93,6 +93,21 @@ function syncFeatSlotsFromClasses(character: Character): void {
   });
 }
 
+function syncLevelIncrementSlots(character: Character): void {
+  const totalHD = character.classes.classes.reduce((sum, c) => sum + c.level, 0);
+  const existing = character.levelIncrementSlots;
+  const updated: LevelIncrementSlot[] = [];
+  for (let hd = 4; hd <= totalHD; hd += 4) {
+    const prev = existing.find((s) => s.atHD === hd);
+    updated.push({ atHD: hd, ability: prev?.ability ?? null });
+  }
+  character.levelIncrementSlots = updated;
+  // Recount levelIncrements on each ability score from the (possibly pruned) slots
+  for (const key of (['str', 'dex', 'con', 'int', 'wis', 'cha'] as AbilityKey[])) {
+    character.abilityScores[key].levelIncrements = updated.filter((s) => s.ability === key).length;
+  }
+}
+
 const ABILITY_KEYS: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
 
 function syncEnhancementBonuses(character: Character): void {
@@ -433,6 +448,7 @@ const characterEntrySlice = createSlice({
         }
       }
       syncFeatSlotsFromClasses(state.character);
+      syncLevelIncrementSlots(state.character);
       state.isDirty = true;
     },
 
@@ -482,6 +498,7 @@ const characterEntrySlice = createSlice({
         );
       }
       syncFeatSlotsFromClasses(state.character);
+      syncLevelIncrementSlots(state.character);
       state.isDirty = true;
     },
 
@@ -570,6 +587,7 @@ const characterEntrySlice = createSlice({
       }
 
       syncFeatSlotsFromClasses(state.character);
+      syncLevelIncrementSlots(state.character);
       state.isDirty = true;
     },
 
@@ -1126,6 +1144,7 @@ const characterEntrySlice = createSlice({
         0,
       );
       syncFeatSlotsFromClasses(state.character);
+      syncLevelIncrementSlots(state.character);
       state.isDirty = true;
     },
 
@@ -1209,6 +1228,7 @@ const characterEntrySlice = createSlice({
         0,
       );
       syncFeatSlotsFromClasses(state.character);
+      syncLevelIncrementSlots(state.character);
       state.isDirty = true;
     },
 
