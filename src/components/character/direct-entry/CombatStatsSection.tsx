@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setCombatField } from '@/store/slices/characterEntrySlice';
@@ -157,9 +157,6 @@ export function CombatStatsSection() {
   const set = (field: CombatFieldKey, value: number | undefined) =>
     dispatch(setCombatField({ field, value }));
 
-  // Read pipeline-computed values directly from the character
-  const maxHP =
-    cs.hitPoints.base + cs.hitPoints.constitution + cs.hitPoints.favoredClass + cs.hitPoints.other;
   const babArray = cs.attackBonuses.baseAttack;
   const babString = babArray.length > 0 ? babArray.map(fmtSign).join('/') : '+0';
 
@@ -191,15 +188,10 @@ export function CombatStatsSection() {
         <View style={styles.row}>
           <Text style={styles.fieldLabel}>Max HP</Text>
           <NumInput
-            value={cs.hitPoints.other || maxHP}
+            value={cs.hitPoints.other}
             onCommit={(n) => set('maxHPOverride', n ?? 0)}
             width={64}
           />
-          {cs.hitPoints.other !== 0 && (
-            <Pressable onPress={() => set('maxHPOverride', 0)} hitSlop={8}>
-              <Text style={styles.linkText}>↺ auto</Text>
-            </Pressable>
-          )}
           <Text style={styles.fieldLabel}>Current</Text>
           <NumInput
             value={cs.hitPoints.current}
@@ -489,11 +481,5 @@ const styles = StyleSheet.create({
     fontFamily: 'LibreBaskerville',
     fontSize: 11,
     color: '#888',
-  },
-  linkText: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 11,
-    color: '#888',
-    textDecorationLine: 'underline',
   },
 });
