@@ -34,7 +34,6 @@ const mockRuleset: Ruleset = {
     abilityScoreMethod: 'point-buy',
     pointBuyBudget: 20,
     maxTraits: 2,
-    minTraits: 0,
   },
   version: 1,
   createdAt: '2026-04-09T00:00:00.000Z',

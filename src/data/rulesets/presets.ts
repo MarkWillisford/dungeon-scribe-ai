@@ -31,7 +31,6 @@ export const PRESET_PF1E_STANDARD: Ruleset = {
     abilityScoreMethod: 'point-buy',
     pointBuyBudget: 20,
     maxTraits: 2,
-    minTraits: 0,
   },
   version: 1,
   createdAt: '2026-04-09T00:00:00.000Z',
@@ -73,7 +72,6 @@ export const PRESET_PF1E_SOCIETY: Ruleset = {
     abilityScoreMethod: 'point-buy',
     pointBuyBudget: 20,
     maxTraits: 2,
-    minTraits: 0,
   },
   version: 1,
   createdAt: '2026-04-09T00:00:00.000Z',
@@ -114,8 +112,7 @@ export const PRESET_GO_NUTS: Ruleset = {
   campaignRequirements: {},
   validationSettings: {
     abilityScoreMethod: 'freeform',
-    maxTraits: 99,
-    minTraits: 0,
+    maxTraits: 99, // unlimited
   },
   version: 1,
   createdAt: '2026-04-09T00:00:00.000Z',
