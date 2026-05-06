@@ -1379,12 +1379,17 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ skillKey: string; entry: { ranks: number; misc: number } }>,
     ) {
-      const skill = (state.character.skills as Record<string, { ranks: number; misc: number }>)[
-        action.payload.skillKey
-      ];
+      const skillsMap = state.character.skills as Record<string, { ranks: number; misc: number }>;
+      const skill = skillsMap[action.payload.skillKey];
       if (skill && typeof skill === 'object' && 'ranks' in skill) {
         skill.ranks = action.payload.entry.ranks;
         skill.misc = action.payload.entry.misc;
+      } else {
+        // New specialty key (e.g. "craft (cooking)") — create the entry
+        skillsMap[action.payload.skillKey] = {
+          ranks: action.payload.entry.ranks,
+          misc: action.payload.entry.misc,
+        };
       }
       state.isDirty = true;
     },

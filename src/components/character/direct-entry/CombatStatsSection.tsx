@@ -204,7 +204,7 @@ export function CombatStatsSection() {
           ) : (
             <>
               <AutoComputedValue value={String(maxHP)} />
-              <Pressable onPress={() => set('maxHPOverride', maxHP)} hitSlop={8}>
+              <Pressable onPress={() => set('maxHPOverride', Math.max(maxHP, 1))} hitSlop={8}>
                 <Text style={styles.linkText}>override</Text>
               </Pressable>
             </>
