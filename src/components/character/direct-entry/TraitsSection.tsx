@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { addTrait, removeTrait } from '@/store/slices/characterEntrySlice';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
 import { GameDataService } from '@/services/GameDataService';
+import { PRESET_PF1E_STANDARD } from '@/data/rulesets/presets';
 import type { CharacterTrait, TraitDefinition } from '@/types/traits';
 
 // ---- Category badge colors ----
@@ -80,12 +81,13 @@ function TraitCard({ trait }: TraitCardProps) {
 
 // ---- Main section ----
 
-const MAX_TRAITS_DEFAULT = 2;
-
 export function TraitsSection() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const traits = useAppSelector((state) => state.characterEntry.character.traits.traits);
+  const maxTraits = useAppSelector(
+    (state) => (state.ruleset.activeRuleset ?? PRESET_PF1E_STANDARD).validationSettings.maxTraits,
+  );
   const [pickerOpen, setPickerOpen] = useState(false);
   const [allTraitDefs, setAllTraitDefs] = useState<TraitDefinition[]>([]);
 
@@ -106,7 +108,7 @@ export function TraitsSection() {
     [allTraitDefs],
   );
 
-  const overLimit = traits.length > MAX_TRAITS_DEFAULT;
+  const overLimit = traits.length > maxTraits;
 
   const handleSelect = (item: SearchItem) => {
     // Avoid duplicates
@@ -164,7 +166,7 @@ export function TraitsSection() {
           >
             {traits.length}
           </Text>
-          <Text style={{ fontWeight: '400' }}> / {MAX_TRAITS_DEFAULT}</Text>
+          <Text style={{ fontWeight: '400' }}> / {maxTraits}</Text>
         </Text>
         {overLimit && (
           <Text style={[styles.overLimitNote, { color: '#EF4444' }]}>
