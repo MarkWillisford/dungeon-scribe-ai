@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setCombatField } from '@/store/slices/characterEntrySlice';
@@ -65,16 +65,31 @@ function NumInput({
   signed = false,
 }: NumInputProps) {
   const { colors, isDark } = useTheme();
+  const [localText, setLocalText] = useState<string>('');
+  const [focused, setFocused] = useState(false);
+
+  // While focused: show the locally buffered text (allows clearing mid-type without committing).
+  // While blurred: show the externally controlled value.
+  const displayValue = focused ? localText : (value !== undefined ? String(value) : '');
+
   return (
     <TextInput
-      value={value !== undefined ? String(value) : ''}
+      value={displayValue}
+      onFocus={() => {
+        setFocused(true);
+        setLocalText(value !== undefined ? String(value) : '');
+      }}
       onChangeText={(t) => {
-        if (t === '' || t === '-') {
-          onCommit(signed && t === '-' ? undefined : undefined);
-          return;
-        }
+        setLocalText(t);
+        if (t === '' || t === '-') return; // don't commit while clearing
         const n = parseInt(t, 10);
         if (!isNaN(n)) onCommit(n);
+      }}
+      onBlur={() => {
+        setFocused(false);
+        if (localText === '' || localText === '-') {
+          onCommit(undefined); // cleared — signal to parent (e.g., reset to auto)
+        }
       }}
       keyboardType={signed ? 'numbers-and-punctuation' : 'number-pad'}
       selectTextOnFocus

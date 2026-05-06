@@ -8,6 +8,7 @@ import {
   updateEquipment,
   assignEquipmentSlot,
   unassignEquipmentSlot,
+  reequipFromContainer,
 } from '@/store/slices/characterEntrySlice';
 import {
   EquipmentPickerSheet,
@@ -201,6 +202,7 @@ interface ContainerListProps {
   onPickerOpen: (slot: PickerSlot) => void;
   onRemove: (id: string) => void;
   onEdit: (item: EditorEquipmentItem) => void;
+  onReequip: (id: string) => void;
 }
 
 function ContainerList({
@@ -209,8 +211,9 @@ function ContainerList({
   onPickerOpen,
   onRemove,
   onEdit,
+  onReequip,
 }: ContainerListProps) {
-  const { colors, isDark } = useTheme();
+  const { colors, fantasy, isDark } = useTheme();
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
 
   const toggle = (id: string) =>
@@ -277,11 +280,32 @@ function ContainerList({
                           <Text style={[styles.containerItemName, { color: colors.text.primary }]}>
                             {item.name}
                           </Text>
-                          <Pressable onPress={() => onRemove(item.id)} hitSlop={8}>
-                            <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>
-                              ✕
-                            </Text>
-                          </Pressable>
+                          <View style={styles.containerItemActions}>
+                            {item.unequippedFromSlot && (
+                              <Pressable
+                                onPress={() => onReequip(item.id)}
+                                hitSlop={8}
+                                testID={`reequip-${item.id}`}
+                                style={styles.reequipBtn}
+                              >
+                                <Text
+                                  style={[
+                                    styles.reequipBtnText,
+                                    { color: isDark ? fantasy.gold : fantasy.darkWood },
+                                  ]}
+                                >
+                                  Equip
+                                </Text>
+                              </Pressable>
+                            )}
+                            <Pressable onPress={() => onRemove(item.id)} hitSlop={8}>
+                              <Text
+                                style={[styles.removeBtnText, { color: colors.text.tertiary }]}
+                              >
+                                ✕
+                              </Text>
+                            </Pressable>
+                          </View>
                         </Pressable>
                       ))
                     )}
@@ -598,6 +622,7 @@ export function EquipmentSection() {
         onPickerOpen={(slot) => setPickerSlot(slot)}
         onRemove={(id) => dispatch(removeEquipment(id))}
         onEdit={handleEdit}
+        onReequip={(id) => dispatch(reequipFromContainer(id))}
       />
 
       {/* Ioun Stones */}
@@ -749,6 +774,9 @@ const styles = StyleSheet.create({
   },
   containerItem: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   containerItemName: { fontFamily: 'LibreBaskerville', fontSize: 13, flex: 1 },
+  containerItemActions: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  reequipBtn: {},
+  reequipBtnText: { fontFamily: 'LibreBaskerville', fontSize: 12, fontWeight: '700' },
   iounRow: {
     flexDirection: 'row',
     alignItems: 'center',

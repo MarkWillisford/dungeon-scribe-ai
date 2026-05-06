@@ -57,6 +57,7 @@ export interface EditorEquipmentItem {
   abilityScoreBonuses?: Partial<Record<AbilityKey, number>>;
   effects?: Effect[]; // snapshot from MagicItemDefinition.effects at pick time
   grantedFeatIds?: string[]; // feat IDs granted while this item is equipped
+  unequippedFromSlot?: EditorEquippedSlot; // set when slot-cleared to a container; used for re-equip
 }
 
 // Experience Points
