@@ -16,6 +16,8 @@ export interface CharacterClasses {
   baseRefSave: number;
   baseWillSave: number;
   favoredClassBonuses: FavoredClassBonus[];
+  /** Class entry IDs in character-level order (index 0 = character level 1). Absent until the user opens the level progression editor. */
+  levelOrder?: string[];
 }
 
 export interface ClassEntry {
@@ -53,11 +55,19 @@ export interface ClassEntry {
   id?: string; // stable local UUID for React keys and action targeting
   prereqOverride?: boolean; // DM override — suppress prereq warnings for this class
   isFavoredClass?: boolean;
+  splitGroup?: string; // Shared UUID linking sibling cards that represent one class taken in multiple runs
   spellcastingAdvancement?: SpellcastingAdvancement;
   archetypeId?: string;
   archetypeName?: string;
   favoredClassBonuses?: FavoredClassBonusSelection[];
   summonerBroodmaster?: BroodmasterState;
+  // Companion stacking: this class's levels add to the effective progression
+  // level of companions granted by another class.
+  //   'all'       — stacks with every companion-granting class (e.g. Nature Warden)
+  //   '<classId>' — stacks with the specific class entry bearing that ID
+  // Only set when the class explicitly says so in its rules text; most classes
+  // (including Paladin's mount) do NOT stack with the druid animal companion.
+  advancesCompanionOf?: 'all' | string;
 }
 
 // ---- Class Choices ----

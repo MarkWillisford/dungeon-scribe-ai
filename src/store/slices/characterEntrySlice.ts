@@ -12,7 +12,7 @@ import type { AppliedTemplate } from '@/types/templates';
 import type { CharacterMagicItem, ItemSlot } from '@/types/magicItems';
 import { computeFeatSlots } from '@/utils/characterComputations';
 import type { AbilityKey } from '@/types/abilities';
-import type { Character } from '@/types';
+import type { Character, ManualAbilityBonus } from '@/types';
 import type { LevelIncrementSlot } from '@/types/character';
 import type { CharacterFeat, Feats } from '@/types/feats';
 import type { ClassEntry, CharacterClasses, FavoredClassBonusSelection } from '@/types/classes';
@@ -27,6 +27,7 @@ import type {
   SelectedEvolutionMetadata,
 } from '@/types/eidolon';
 import { CharacterService } from '@/services/CharacterService';
+import { computeCompanionEffectiveLevel } from '@/services/CompanionService';
 
 // ---- Supporting types ----
 
@@ -340,12 +341,52 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
-    setAbilityOther(state, action: PayloadAction<{ ability: AbilityKey; value: number }>) {
-      // Store "other" misc bonus in the untyped bucket
-      const score = state.character.abilityScores[action.payload.ability];
-      score.bonuses.untyped = [
-        { value: action.payload.value, source: 'misc', type: BonusType.UNTYPED },
-      ];
+    addOtherBonus(state, action: PayloadAction<ManualAbilityBonus>) {
+      if (!state.character.manualAbilityBonuses) state.character.manualAbilityBonuses = [];
+      state.character.manualAbilityBonuses.push(action.payload);
+      state.isDirty = true;
+    },
+
+    removeOtherBonus(state, action: PayloadAction<{ ability: AbilityKey; index: number }>) {
+      if (!state.character.manualAbilityBonuses) return;
+      const { ability, index } = action.payload;
+      // Compute the global index by counting how many items before it match the ability.
+      // This avoids indexOf (object identity), which can delete the wrong entry in Immer
+      // when two bonuses have identical field values.
+      let abilityCount = 0;
+      const globalIndex = state.character.manualAbilityBonuses.findIndex((b) => {
+        if (b.ability !== ability) return false;
+        if (abilityCount === index) return true;
+        abilityCount++;
+        return false;
+      });
+      if (globalIndex !== -1) state.character.manualAbilityBonuses.splice(globalIndex, 1);
+      state.isDirty = true;
+    },
+
+    updateOtherBonus(
+      state,
+      action: PayloadAction<{ ability: AbilityKey; index: number } & ManualAbilityBonus>,
+    ) {
+      if (!state.character.manualAbilityBonuses) return;
+      const { ability, index } = action.payload;
+      // Compute the global index by counting how many items before it match the ability.
+      // This avoids indexOf (object identity), which can update the wrong entry in Immer
+      // when two bonuses have identical field values.
+      let abilityCount = 0;
+      const globalIndex = state.character.manualAbilityBonuses.findIndex((b) => {
+        if (b.ability !== ability) return false;
+        if (abilityCount === index) return true;
+        abilityCount++;
+        return false;
+      });
+      if (globalIndex === -1) return;
+      state.character.manualAbilityBonuses[globalIndex] = {
+        ability: action.payload.ability,
+        bonusType: action.payload.bonusType,
+        value: action.payload.value,
+        source: action.payload.source,
+      };
       state.isDirty = true;
     },
 
@@ -374,11 +415,23 @@ const characterEntrySlice = createSlice({
     // ---- Classes ----
 
     addClass(state, action: PayloadAction<ClassEntry>) {
+      // Ensure every class entry has a stable id so reducers can target it
+      // reliably. Without this guarantee, gestalt builds with two classes of
+      // the same name would silently collide on the name-based fallback.
+      if (!action.payload.id) {
+        action.payload.id = Math.random().toString(36).slice(2) + Date.now().toString(36);
+      }
       state.character.classes.classes.push(action.payload);
       state.character.classes.totalLevel = state.character.classes.classes.reduce(
         (sum, c) => sum + c.level,
         0,
       );
+      if (state.character.classes.levelOrder) {
+        const id = action.payload.id;
+        for (let i = 0; i < action.payload.level; i++) {
+          state.character.classes.levelOrder.push(id);
+        }
+      }
       syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
@@ -423,6 +476,11 @@ const characterEntrySlice = createSlice({
         (c) => !(c.grantedBy.type === 'class' && c.grantedBy.classEntryId === removedId),
       );
 
+      if (state.character.classes.levelOrder) {
+        state.character.classes.levelOrder = state.character.classes.levelOrder.filter(
+          (id) => id !== removedId,
+        );
+      }
       syncFeatSlotsFromClasses(state.character);
       state.isDirty = true;
     },
@@ -444,6 +502,24 @@ const characterEntrySlice = createSlice({
       // Prune favored class bonus selections that are now beyond the new level.
       if (cls.favoredClassBonuses && newLevel < oldLevel) {
         cls.favoredClassBonuses = cls.favoredClassBonuses.filter((s) => s.level <= newLevel);
+      }
+
+      // Keep levelOrder in sync when levels are directly adjusted.
+      if (state.character.classes.levelOrder) {
+        const classId = action.payload.id;
+        if (newLevel > oldLevel) {
+          for (let i = 0; i < newLevel - oldLevel; i++) {
+            state.character.classes.levelOrder.push(classId);
+          }
+        } else if (newLevel < oldLevel) {
+          let toRemove = oldLevel - newLevel;
+          for (let i = state.character.classes.levelOrder.length - 1; i >= 0 && toRemove > 0; i--) {
+            if (state.character.classes.levelOrder[i] === classId) {
+              state.character.classes.levelOrder.splice(i, 1);
+              toRemove--;
+            }
+          }
+        }
       }
 
       // Resize advancement perLevel to match the new class level.
@@ -472,6 +548,24 @@ const characterEntrySlice = createSlice({
           } else if (newLevel < oldLevel) {
             adv.perLevel.length = newLevel;
           }
+        }
+      }
+
+      // Recalculate effectiveProgressionLevel for all class-granted companions.
+      // This handles both direct changes (more druid levels → druid's companion
+      // advances) and stacking changes (more Nature Warden levels → druid's
+      // companion also advances via advancesCompanionOf).
+      for (const companion of state.character.companions) {
+        const grant = companion.grantedBy;
+        if (grant.type !== 'class') continue;
+        const grantingCls = state.character.classes.classes.find(
+          (c) => (c.id ?? c.name) === grant.classEntryId,
+        );
+        if (grantingCls) {
+          companion.effectiveProgressionLevel = computeCompanionEffectiveLevel(
+            grantingCls,
+            state.character.classes.classes,
+          );
         }
       }
 
@@ -540,6 +634,32 @@ const characterEntrySlice = createSlice({
       }
     },
 
+    setAdvancesCompanionOf(
+      state,
+      action: PayloadAction<{ id: string; advancesCompanionOf: 'all' | string | undefined }>,
+    ) {
+      const cls = state.character.classes.classes.find(
+        (c) => (c.id ?? c.name) === action.payload.id,
+      );
+      if (!cls) return;
+      cls.advancesCompanionOf = action.payload.advancesCompanionOf;
+      // Recalculate all companion effective levels — stacking changed.
+      for (const companion of state.character.companions) {
+        const grant = companion.grantedBy;
+        if (grant.type !== 'class') continue;
+        const grantingCls = state.character.classes.classes.find(
+          (c) => (c.id ?? c.name) === grant.classEntryId,
+        );
+        if (grantingCls) {
+          companion.effectiveProgressionLevel = computeCompanionEffectiveLevel(
+            grantingCls,
+            state.character.classes.classes,
+          );
+        }
+      }
+      state.isDirty = true;
+    },
+
     // ---- Companions ----------------------------------------------------
     //
     // Animal companions and special mounts. The slice owns the raw list;
@@ -554,9 +674,10 @@ const characterEntrySlice = createSlice({
         name: string;
         grantedBy: CompanionGrant;
         effectiveProgressionLevel: number;
+        isMount?: boolean;
       }>,
     ) {
-      const { instanceId, sourceEntryId, name, grantedBy, effectiveProgressionLevel } =
+      const { instanceId, sourceEntryId, name, grantedBy, effectiveProgressionLevel, isMount } =
         action.payload;
       const companion: CompanionInstance = {
         instanceId,
@@ -564,6 +685,7 @@ const characterEntrySlice = createSlice({
         name,
         grantedBy,
         effectiveProgressionLevel,
+        ...(isMount ? { isMount: true } : {}),
         abilityScoreOverrides: {},
         hdAbilityIncreases: [],
         hp: { max: 0, current: 0, temp: 0, nonlethal: 0 },
@@ -939,6 +1061,157 @@ const characterEntrySlice = createSlice({
       state.isDirty = true;
     },
 
+    initLevelOrder(state) {
+      const order: string[] = [];
+      for (const cls of state.character.classes.classes) {
+        // id is guaranteed by addClass; fall back only for legacy persisted
+        // entries that pre-date this guarantee.
+        const id = cls.id ?? cls.name;
+        for (let i = 0; i < cls.level; i++) {
+          order.push(id);
+        }
+      }
+      state.character.classes.levelOrder = order;
+      state.isDirty = true;
+    },
+
+    swapLevelSlot(state, action: PayloadAction<{ charLevel: number; newClassId: string }>) {
+      const order = state.character.classes.levelOrder;
+      if (!order) return;
+
+      const { charLevel, newClassId } = action.payload;
+      const idx = charLevel - 1;
+      const oldClassId = order[idx];
+      if (!oldClassId || oldClassId === newClassId) return;
+
+      const oldCls = state.character.classes.classes.find((c) => (c.id ?? c.name) === oldClassId);
+      const newCls = state.character.classes.classes.find((c) => (c.id ?? c.name) === newClassId);
+      if (!oldCls || !newCls) return;
+
+      order[idx] = newClassId;
+
+      oldCls.level -= 1;
+      newCls.level += 1;
+
+      // Prune FCBs that are now beyond the reduced level
+      if (oldCls.favoredClassBonuses) {
+        oldCls.favoredClassBonuses = oldCls.favoredClassBonuses.filter(
+          (s) => s.level <= oldCls.level,
+        );
+      }
+
+      // Shrink spellcasting advancement arrays if the old class lost a level
+      const oldAdv = oldCls.spellcastingAdvancement;
+      if (oldAdv) {
+        oldAdv.perLevel.length = oldCls.level;
+      }
+
+      // Grow spellcasting advancement arrays if the new class gained a level
+      const newAdv = newCls.spellcastingAdvancement;
+      if (newAdv) {
+        if (newAdv.mode === 'single') {
+          const template = newAdv.perLevel[newAdv.perLevel.length - 1] ?? { baseClassEntryId: '' };
+          newAdv.perLevel.push({ ...template });
+        } else {
+          const template = newAdv.perLevel[newAdv.perLevel.length - 1] ?? {
+            arcaneBaseClassEntryId: '',
+            divineBaseClassEntryId: '',
+          };
+          newAdv.perLevel.push({ ...template });
+        }
+      }
+
+      state.character.classes.totalLevel = state.character.classes.classes.reduce(
+        (sum, c) => sum + c.level,
+        0,
+      );
+      syncFeatSlotsFromClasses(state.character);
+      state.isDirty = true;
+    },
+
+    splitClass(
+      state,
+      action: PayloadAction<{ classId: string; firstRunLevel: number; newEntryId: string }>,
+    ) {
+      const { classId, firstRunLevel, newEntryId } = action.payload;
+      const idx = state.character.classes.classes.findIndex((c) => (c.id ?? c.name) === classId);
+      if (idx === -1) return;
+
+      const original = state.character.classes.classes[idx];
+      const totalLevel = original.level;
+      const secondRunLevel = totalLevel - firstRunLevel;
+      if (firstRunLevel < 1 || secondRunLevel < 1) return;
+
+      // Mark the original as part of a split group (or reuse existing group)
+      const groupId = original.splitGroup ?? newEntryId;
+      original.splitGroup = groupId;
+      original.level = firstRunLevel;
+
+      // Prune FCBs beyond the new reduced level
+      if (original.favoredClassBonuses) {
+        original.favoredClassBonuses = original.favoredClassBonuses.filter(
+          (s) => s.level <= firstRunLevel,
+        );
+      }
+
+      // Split spellcasting advancement perLevel between the two runs
+      let secondAdvancement: ClassEntry['spellcastingAdvancement'];
+      const origAdv = original.spellcastingAdvancement;
+      if (origAdv) {
+        secondAdvancement = {
+          mode: origAdv.mode,
+          perLevel: origAdv.perLevel.slice(firstRunLevel) as typeof origAdv.perLevel,
+        } as ClassEntry['spellcastingAdvancement'];
+        origAdv.perLevel = origAdv.perLevel.slice(0, firstRunLevel) as typeof origAdv.perLevel;
+      }
+
+      // Split classChoices — choices taken at levels > firstRunLevel move to the second run
+      let secondChoices: ClassEntry['classChoices'] = [];
+      if (original.classChoices?.length) {
+        secondChoices = original.classChoices
+          .filter((c) => c.takenAtLevel > firstRunLevel)
+          .map((c) => ({ ...c, takenAtLevel: c.takenAtLevel - firstRunLevel }));
+        original.classChoices = original.classChoices.filter(
+          (c) => c.takenAtLevel <= firstRunLevel,
+        );
+      }
+
+      // Build the second entry as a shallow copy of the original, overriding level-specific data
+      const secondEntry: ClassEntry = {
+        ...original,
+        id: newEntryId,
+        splitGroup: groupId,
+        level: secondRunLevel,
+        hitDieResults: [],
+        favoredClassBonuses: [],
+        classChoices: secondChoices,
+        spellcastingAdvancement: secondAdvancement,
+        isFavoredClass: false,
+      };
+
+      // Insert the second card immediately after the first
+      state.character.classes.classes.splice(idx + 1, 0, secondEntry);
+
+      // Keep levelOrder in sync: replace the last (secondRunLevel) occurrences of classId
+      // with the new entry's id
+      if (state.character.classes.levelOrder) {
+        let toReplace = secondRunLevel;
+        for (let i = state.character.classes.levelOrder.length - 1; i >= 0 && toReplace > 0; i--) {
+          if (state.character.classes.levelOrder[i] === classId) {
+            state.character.classes.levelOrder[i] = newEntryId;
+            toReplace--;
+          }
+        }
+      }
+
+      state.character.classes.totalLevel = state.character.classes.classes.reduce(
+        (sum, c) => sum + c.level,
+        0,
+      );
+      syncFeatSlotsFromClasses(state.character);
+      state.isDirty = true;
+    },
+
     // ---- Templates ----
 
     addTemplate(state, action: PayloadAction<AppliedTemplate>) {
@@ -1155,6 +1428,7 @@ const characterEntrySlice = createSlice({
         source: 'racial' | 'level' | 'bonus' | 'mythic';
         availableAtLevel: number;
         availableAt: string;
+        sourceLabel?: string;
       }>,
     ) {
       // Bonus feat slots are stored as empty CharacterFeat entries (featId = '')
@@ -1167,6 +1441,7 @@ const characterEntrySlice = createSlice({
         grantedAtLevel: slot.availableAtLevel,
         active: true,
         choices: {},
+        ...(slot.sourceLabel ? { sourceLabel: slot.sourceLabel } : {}),
       });
       state.character.feats.feats.sort((a, b) => a.grantedAtLevel - b.grantedAtLevel);
       state.isDirty = true;
@@ -1216,6 +1491,17 @@ const characterEntrySlice = createSlice({
         feat.name = '';
       }
       state.isDirty = true;
+    },
+
+    setFeatChoices(
+      state,
+      action: PayloadAction<{ slotId: string; choices: Record<string, string> }>,
+    ) {
+      const feat = state.character.feats.feats.find((f) => f.source === action.payload.slotId);
+      if (feat) {
+        feat.choices = action.payload.choices;
+        state.isDirty = true;
+      }
     },
 
     toggleFeatPrereqOverride(state, action: PayloadAction<string>) {
@@ -1606,7 +1892,9 @@ export const {
   setPortrait,
   setAbilityBase,
   setAbilityInherent,
-  setAbilityOther,
+  addOtherBonus,
+  removeOtherBonus,
+  updateOtherBonus,
   setLevelIncrementAbility,
   setLevelIncrementSlots,
   addClass,
@@ -1616,6 +1904,7 @@ export const {
   updateClassSpellcastingAdvancement,
   upsertClassChoice,
   toggleClassPrereqOverride,
+  setAdvancesCompanionOf,
   addCompanion,
   removeCompanion,
   renameCompanion,
@@ -1639,6 +1928,9 @@ export const {
   toggleFavoredClass,
   setFavoredClassBonuses,
   reorderClasses,
+  initLevelOrder,
+  swapLevelSlot,
+  splitClass,
   addTemplate,
   removeTemplate,
   updateTemplate,
@@ -1654,6 +1946,7 @@ export const {
   removeFeatSlot,
   assignFeat,
   unassignFeat,
+  setFeatChoices,
   toggleFeatPrereqOverride,
   addSpellcastingPool,
   removeSpellcastingPool,

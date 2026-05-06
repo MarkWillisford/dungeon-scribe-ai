@@ -291,6 +291,46 @@ export class FirestoreGameDataConnector implements GameDataConnector {
           break;
         }
 
+        case 'spells': {
+          const classNames = filters.classNames ?? [];
+          const maxLevel = filters.maxSpellLevel ?? 9;
+          if (classNames.length === 0) {
+            results = [];
+            break;
+          }
+          // Query visibility == 'global' only per class name, then filter
+          // classLevels in memory. Querying on classLevels.{cls} (a dynamic map
+          // key) combined with visibility would require one composite index per
+          // class, which is not feasible. This mirrors the getRaceGroups pattern.
+          const snapshots = await Promise.all(
+            classNames.map((cls) =>
+              getDocs(query(collection(db, 'spells'), where('visibility', '==', 'global'))).then(
+                (snap) => ({ snap, cls }),
+              ),
+            ),
+          );
+          const seen = new Set<string>();
+          const spells: ClassOptionBase[] = [];
+          for (const { snap, cls } of snapshots) {
+            for (const d of snap.docs) {
+              const data = d.data() as Record<string, unknown> & {
+                name: string;
+                classLevels?: Record<string, number>;
+              };
+              if (!data.name) continue;
+              const level = data.classLevels?.[cls];
+              if (level === undefined || level < 1 || level > maxLevel) continue;
+              const id = toDocId(data.name);
+              if (!seen.has(id)) {
+                seen.add(id);
+                spells.push({ ...data, id } as unknown as ClassOptionBase);
+              }
+            }
+          }
+          results = spells;
+          break;
+        }
+
         default: {
           // Simple collections with no filter support
           const q = query(collection(db, collectionName), where('visibility', '==', 'global'));
@@ -463,42 +503,19 @@ export class FirestoreGameDataConnector implements GameDataConnector {
     if (cached) return cached;
 
     try {
-      const [core, featured, uncommon, flex] = await Promise.all([
-        getDocs(
-          query(
-            collection(db, 'races'),
-            where('visibility', '==', 'global'),
-            where('category', '==', 'Core'),
-          ),
-        ),
-        getDocs(
-          query(
-            collection(db, 'races'),
-            where('visibility', '==', 'global'),
-            where('category', '==', 'Featured'),
-          ),
-        ),
-        getDocs(
-          query(
-            collection(db, 'races'),
-            where('visibility', '==', 'global'),
-            where('category', '==', 'Uncommon'),
-          ),
-        ),
-        getDocs(
-          query(
-            collection(db, 'races'),
-            where('visibility', '==', 'global'),
-            where('flexibleAbilityBonus', '==', true),
-          ),
-        ),
-      ]);
+      // Single query on visibility only — group by category in memory.
+      // Avoids composite index requirements and eliminates the risk of
+      // Promise.all failing because one sub-query throws.
+      const snap = await getDocs(
+        query(collection(db, 'races'), where('visibility', '==', 'global')),
+      );
 
+      const all = snap.docs.map((d) => d.data() as RaceGroups['core'][number]);
       const result: RaceGroups = {
-        core: core.docs.map((d) => d.data()) as RaceGroups['core'],
-        featured: featured.docs.map((d) => d.data()) as RaceGroups['featured'],
-        uncommon: uncommon.docs.map((d) => d.data()) as RaceGroups['uncommon'],
-        flexibleAbility: flex.docs.map((d) => d.data()) as RaceGroups['flexibleAbility'],
+        core: all.filter((r) => r.category === 'Core'),
+        featured: all.filter((r) => r.category === 'Featured'),
+        uncommon: all.filter((r) => r.category === 'Uncommon'),
+        flexibleAbility: all.filter((r) => r.flexibleAbilityBonus === true),
       };
 
       GameDataCache.set(cacheKey, result);

@@ -42,55 +42,7 @@ function abilityBonusSpells(abilityMod: number, spellLevel: number): number {
   return Math.floor((abilityMod - spellLevel) / 4) + 1;
 }
 
-/**
- * How many of an entry's levels contribute to a specific pool.
- * Base class: full level count. Prestige class: count of perLevel[i]
- * pointers targeting this pool's baseClassEntryId.
- */
-interface PoolContributor {
-  entry: ClassEntry;
-  advancedLevels: number;
-}
-
-function getContributors(
-  classes: ClassEntry[],
-  pool: SpellcastingPool,
-  classDataMap: Map<string, ExpandedClassData>,
-): PoolContributor[] {
-  const result: PoolContributor[] = [];
-  for (const entry of classes) {
-    // The pool's base class contributes its full level.
-    if (entry.id === pool.baseClassEntryId) {
-      if (entry.level > 0) result.push({ entry, advancedLevels: entry.level });
-      continue;
-    }
-
-    // Prestige classes advance via per-level pointers, but only at the
-    // levels listed in the class's advancement spec.
-    const adv = entry.spellcastingAdvancement;
-    if (!adv) continue;
-    const spec = classDataMap.get(entry.name.toLowerCase())?.advancesSpellcasting;
-    if (!spec) continue;
-    const isAdvancingLevel = (lvl: number): boolean =>
-      spec.atLevels ? spec.atLevels.includes(lvl) : lvl >= 1 && lvl <= entry.level;
-
-    let count = 0;
-    if (adv.mode === 'single') {
-      count = adv.perLevel.filter(
-        (p, i) => isAdvancingLevel(i + 1) && p.baseClassEntryId === pool.baseClassEntryId,
-      ).length;
-    } else {
-      count = adv.perLevel.filter(
-        (p, i) =>
-          isAdvancingLevel(i + 1) &&
-          (p.arcaneBaseClassEntryId === pool.baseClassEntryId ||
-            p.divineBaseClassEntryId === pool.baseClassEntryId),
-      ).length;
-    }
-    if (count > 0) result.push({ entry, advancedLevels: count });
-  }
-  return result;
-}
+import { getContributors, type PoolContributor } from '@/utils/spellcastingUtils';
 
 /**
  * Spell table for a pool is determined by its base class only — the base

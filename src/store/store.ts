@@ -31,15 +31,22 @@ export const store = configureStore({
           'characters/fetchCharacters/fulfilled',
           'characters/createCharacter/fulfilled',
           'characters/updateCharacter/fulfilled',
+          // Character entry actions carry full Character objects which contain Map fields.
+          'characterEntry/loadCharacter',
+          'characterEntry/applyComputedStats',
+          'characterEntry/save/fulfilled',
         ],
         ignoredPaths: [
           'auth.user.createdAt',
           'auth.user.lastLogin',
           'characters.characters',
           'characters.activeCharacter',
-          // Companion equipment slot lookup is a Map<ItemSlot, string>.
-          // Serializable state only applies at the boundary of persistence;
-          // we handle Map↔Record conversion when saving to Firestore.
+          // Date objects and Map<ItemSlot,string> on the active character.
+          // Serializable state only applies at the persistence boundary;
+          // Map↔Record and Date↔string conversions are handled when saving to Firestore.
+          'characterEntry.character.lastUpdated',
+          'characterEntry.character.createdAt',
+          'characterEntry.character.equipment.equippedSlots',
           'characterEntry.character.companions',
         ],
       },

@@ -63,7 +63,8 @@ service cloud.firestore {
     //   ninjaTricks, occultistFocusPowers, phrenicAmplifications, shamanSpirits,
     //   slayerTalents, warpriestBlessings, alchemistDiscoveries, eidolonEvolutions,
     //   classChoiceDefinitions, rulesets, magicItems, weapons, armor, shields, gear,
-    //   disciplines, maneuvers, stances, martialTraditions
+    //   disciplines, maneuvers, stances, martialTraditions, favoredClassBonuses,
+    //   eidolonbaseforms, eidolonsubtypes
     match /races/{docId}                    { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /classes/{docId}                  { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /feats/{docId}                    { allow read: if isAuthenticated(); allow write: if isAdmin(); }
@@ -106,6 +107,9 @@ service cloud.firestore {
     match /maneuvers/{docId}               { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /stances/{docId}                 { allow read: if isAuthenticated(); allow write: if isAdmin(); }
     match /martialTraditions/{docId}       { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /favoredClassBonuses/{docId}    { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /eidolonbaseforms/{docId}       { allow read: if isAuthenticated(); allow write: if isAdmin(); }
+    match /eidolonsubtypes/{docId}        { allow read: if isAuthenticated(); allow write: if isAdmin(); }
 
     // Campaigns collection
     match /campaigns/{campaignId} {

@@ -19,7 +19,7 @@ export interface RenderedNode {
 let hooksState: any[] = [];
 let hookIndex = 0;
 
-function createMinimalDispatcher() {
+function createMinimalDispatcher(keepState = false) {
   return {
     useState(initialState: any) {
       const idx = hookIndex++;
@@ -54,6 +54,9 @@ function createMinimalDispatcher() {
       const idx = hookIndex++;
       if (idx >= hooksState.length) {
         hooksState.push(factory());
+      } else if (keepState) {
+        // Re-run factory on rerender so state-driven memos (like search filters) update.
+        hooksState[idx] = factory();
       }
       return hooksState[idx];
     },
@@ -119,7 +122,7 @@ function withHooks<T>(fn: () => T, keepState = false): T {
     if (!keepState) hooksState = [];
     hookIndex = 0;
     if (ReactInternals) {
-      ReactInternals.H = createMinimalDispatcher();
+      ReactInternals.H = createMinimalDispatcher(keepState);
     }
     return fn();
   } finally {
@@ -167,13 +170,20 @@ function renderToTree(element: React.ReactElement, keepState = false): RenderedN
   const rawChildren = renderedProps.children;
 
   if (rawChildren) {
+    // Save this component's hooksState before rendering children.
+    // Child function-component renders reset hooksState; restoring it here
+    // ensures fireEvent mutations on this component's state are preserved.
+    const thisComponentState = hooksState;
     const childArray = Array.isArray(rawChildren) ? rawChildren : [rawChildren];
     for (const child of childArray.flat(Infinity)) {
       if (child === null || child === undefined || child === false) continue;
       if (typeof child === 'string' || typeof child === 'number') {
         children.push(String(child));
       } else if (React.isValidElement(child)) {
-        children.push(renderToTree(child, keepState));
+        // Children always get fresh state (keepState=false). Parent state is
+        // preserved by the thisComponentState save/restore above.
+        children.push(renderToTree(child, false));
+        hooksState = thisComponentState;
       }
     }
   }
@@ -209,6 +219,15 @@ function getAllText(node: RenderedNode): string[] {
     }
   }
   return texts;
+}
+
+/**
+ * Directly set a hook state slot by index between render() and rerender().
+ * Use with care: slot indices must match the component's exact useState call order.
+ * Slot 0 = first useState, slot 1 = second useState, etc. (useEffect is a no-op and does NOT consume a slot).
+ */
+export function setHookStateAt(idx: number, value: any): void {
+  hooksState[idx] = value;
 }
 
 export function render(element: React.ReactElement) {

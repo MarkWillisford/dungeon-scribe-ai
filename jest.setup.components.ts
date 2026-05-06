@@ -30,19 +30,77 @@ jest.mock('react-native', () => {
       });
     },
     Pressable: (props: any) => {
-      const { onPress, onPressIn, onPressOut, disabled, children, ...rest } = props;
+      const { onPress, onPressIn, onPressOut, disabled, children, style, ...rest } = props;
+      const resolvedStyle = typeof style === 'function' ? style({ pressed: false }) : style;
       return React.createElement(
         'Pressable',
-        { ...rest, onPress: disabled ? undefined : onPress, disabled },
+        { ...rest, style: resolvedStyle, onPress: disabled ? undefined : onPress, disabled },
         typeof children === 'function' ? children({ pressed: false }) : children,
       );
     },
     TouchableOpacity: mockComponent('TouchableOpacity'),
     ScrollView: mockComponent('ScrollView'),
-    FlatList: mockComponent('FlatList'),
+    FlatList: (props: any) => {
+      const React = require('react');
+      const {
+        data,
+        renderItem,
+        ListEmptyComponent,
+        keyExtractor,
+        contentContainerStyle: _cs,
+        ...rest
+      } = props;
+      const items =
+        data && data.length > 0
+          ? data.map((item: any, index: number) => {
+              if (keyExtractor) keyExtractor(item, index);
+              return renderItem
+                ? renderItem({
+                    item,
+                    index,
+                    separators: {
+                      highlight: () => {},
+                      unhighlight: () => {},
+                      updateProps: () => {},
+                    },
+                  })
+                : null;
+            })
+          : ListEmptyComponent
+            ? [ListEmptyComponent]
+            : [];
+      return React.createElement('FlatList', rest, items);
+    },
+    SectionList: (props: any) => {
+      const React = require('react');
+      const { sections, renderItem, renderSectionHeader, keyExtractor, ...rest } = props;
+      const items: any[] = [];
+      if (sections) {
+        sections.forEach((section: any, si: number) => {
+          if (renderSectionHeader) items.push(renderSectionHeader({ section, index: si }));
+          (section.data || []).forEach((item: any, ii: number) => {
+            if (keyExtractor) keyExtractor(item, ii);
+            if (renderItem)
+              items.push(
+                renderItem({
+                  item,
+                  index: ii,
+                  section,
+                  separators: { highlight: () => {}, unhighlight: () => {}, updateProps: () => {} },
+                }),
+              );
+          });
+        });
+      }
+      return React.createElement('SectionList', rest, items);
+    },
     Image: mockComponent('Image'),
     ActivityIndicator: mockComponent('ActivityIndicator'),
-    Modal: mockComponent('Modal'),
+    Modal: (props: any) => {
+      const { visible, children, ...rest } = props;
+      if (!visible) return null;
+      return React.createElement('Modal', rest, children);
+    },
     Alert: { alert: jest.fn() },
     Animated: {
       View: mockComponent('Animated.View'),

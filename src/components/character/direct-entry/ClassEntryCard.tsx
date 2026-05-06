@@ -6,6 +6,7 @@ import { InlinePicker } from '@/components/ui/InlinePicker';
 import { ClassChoiceRow } from './ClassChoiceRow';
 import { CompanionCard } from './CompanionCard';
 import { CompanionPickerSheet } from './CompanionPickerSheet';
+import { shallowEqual } from 'react-redux';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   removeClass,
@@ -17,6 +18,8 @@ import {
   setFavoredClassBonuses,
   addCompanion,
   removeCompanion,
+  splitClass,
+  setAdvancesCompanionOf,
 } from '@/store/slices/characterEntrySlice';
 import { type ClassEntry, type FavoredClassBonusSelection } from '@/types/classes';
 import { type SpellcastingAdvancement } from '@/types/spells';
@@ -26,6 +29,7 @@ import { selectClassDataMap } from '@/store/slices/gameDataSlice';
 import { lookupClassData, computeFCBAlternateAccumulation } from '@/utils/characterComputations';
 import {
   effectiveLevelFromDraftClass,
+  computeCompanionEffectiveLevel,
   pickerFilterFromDraftClass,
 } from '@/services/CompanionService';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
@@ -183,7 +187,7 @@ function FavoredClassBonusSection({ entry }: { entry: ClassEntry }) {
         if (!cancelled) setAlternates(results as FavoredClassBonusEntry[]);
       })
       .catch((e) => {
-        if (!cancelled) console.error('Failed to load favored class bonuses:', e);
+        if (!cancelled) console.error('[FCB] Failed to load favored class bonuses:', e);
       });
     return () => {
       cancelled = true;
@@ -929,18 +933,29 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
   const dispatch = useAppDispatch();
   const [choicesExpanded, setChoicesExpanded] = useState(false);
   const [archetypePickerOpen, setArchetypePickerOpen] = useState(false);
+  const [splitOpen, setSplitOpen] = useState(false);
+  const [splitFirstRun, setSplitFirstRun] = useState(1);
   const [definitions, setDefinitions] = useState<ClassChoiceDefinition[]>([]);
   const [archetypeLoadedClass, setArchetypeLoadedClass] = useState<string | null>(null);
   const [archetypeExists, setArchetypeExists] = useState(false);
   const hasArchetypes = archetypeLoadedClass === entry.name ? archetypeExists : null;
   const characterDeity = useAppSelector((state) => state.characterEntry.character.info.deity);
+  const allClasses = useAppSelector((state) => state.characterEntry.character.classes.classes);
+  // Sibling rank among split cards sharing the same splitGroup (1-based), or 0 if not split
+  const splitRank = entry.splitGroup
+    ? allClasses
+        .filter((c) => c.splitGroup === entry.splitGroup)
+        .findIndex((c) => (c.id ?? c.name) === (entry.id ?? entry.name)) + 1
+    : 0;
+  const splitSiblingCount = entry.splitGroup
+    ? allClasses.filter((c) => c.splitGroup === entry.splitGroup).length
+    : 0;
   const favoredClassBonuses = useAppSelector(
     (state) => state.characterEntry.character.classes.favoredClassBonuses,
   );
   const classDataMap = useAppSelector(selectClassDataMap);
   const classData = lookupClassData(entry.name, classDataMap);
   const isBaseClass = (classData?.maxLevel ?? 20) === 20;
-
 
   useEffect(() => {
     GameDataService.getClassChoiceDefinitions(entry.name)
@@ -1002,6 +1017,16 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
         <Text style={[styles.className, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
           {entry.name}
         </Text>
+        {splitSiblingCount > 0 && (
+          <View
+            style={[
+              styles.splitBadge,
+              { backgroundColor: isDark ? 'rgba(139,92,246,0.18)' : 'rgba(139,92,246,0.12)' },
+            ]}
+          >
+            <Text style={[styles.splitBadgeText, { color: '#8B5CF6' }]}>{`Pt ${splitRank}`}</Text>
+          </View>
+        )}
         <SourceBadge source={entry.sourceSystem ?? 'pf1e'} />
         <Pressable
           onPress={() => dispatch(removeClass(entry.id ?? entry.name))}
@@ -1021,7 +1046,8 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           value={String(entry.level)}
           onChangeText={(t) => {
             const n = parseInt(t, 10);
-            if (!isNaN(n) && n >= 1)
+            const max = classData?.maxLevel ?? 20;
+            if (!isNaN(n) && n >= 1 && n <= max)
               dispatch(updateClassLevel({ id: entry.id ?? entry.name, level: n }));
           }}
           keyboardType="number-pad"
@@ -1036,6 +1062,24 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           ]}
           accessibilityLabel="Class level"
         />
+        {classData?.maxLevel !== undefined && classData.maxLevel < 20 && (
+          <Text style={[styles.fieldLabel, { color: colors.text.tertiary }]}>
+            {`/ ${classData.maxLevel}`}
+          </Text>
+        )}
+        {entry.level > 1 && !splitOpen && (
+          <Pressable
+            onPress={() => {
+              setSplitFirstRun(Math.floor(entry.level / 2));
+              setSplitOpen(true);
+            }}
+            hitSlop={8}
+            accessibilityRole="button"
+            accessibilityLabel="Split class into two runs"
+          >
+            <Text style={[styles.splitLink, { color: colors.text.tertiary }]}>⤢ Split</Text>
+          </Pressable>
+        )}
         {hasArchetypes !== false && (
           <Pressable
             onPress={() => setArchetypePickerOpen(true)}
@@ -1056,6 +1100,73 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
           </Pressable>
         )}
       </View>
+
+      {/* Inline split UI */}
+      {splitOpen && (
+        <View
+          style={[
+            styles.splitPanel,
+            {
+              backgroundColor: isDark ? 'rgba(139,92,246,0.08)' : 'rgba(139,92,246,0.05)',
+              borderColor: '#8B5CF6',
+            },
+          ]}
+        >
+          <Text style={[styles.splitLabel, { color: colors.text.secondary }]}>
+            {`Split ${entry.name} (${entry.level} levels)`}
+          </Text>
+          <View style={styles.splitRow}>
+            <Text style={[styles.splitPartLabel, { color: colors.text.tertiary }]}>Run 1</Text>
+            <Pressable
+              onPress={() => setSplitFirstRun((n) => Math.max(1, n - 1))}
+              hitSlop={8}
+              style={[styles.splitStepper, { borderColor: colors.border.DEFAULT }]}
+            >
+              <Text style={[styles.splitStepperText, { color: colors.text.primary }]}>−</Text>
+            </Pressable>
+            <Text style={[styles.splitCount, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
+              {splitFirstRun}
+            </Text>
+            <Pressable
+              onPress={() => setSplitFirstRun((n) => Math.min(entry.level - 1, n + 1))}
+              hitSlop={8}
+              style={[styles.splitStepper, { borderColor: colors.border.DEFAULT }]}
+            >
+              <Text style={[styles.splitStepperText, { color: colors.text.primary }]}>+</Text>
+            </Pressable>
+            <Text style={[styles.splitPartLabel, { color: colors.text.tertiary }]}>
+              {'  /  Run 2'}
+            </Text>
+            <Text style={[styles.splitCount, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
+              {entry.level - splitFirstRun}
+            </Text>
+          </View>
+          <View style={styles.splitActions}>
+            <Pressable
+              onPress={() => setSplitOpen(false)}
+              style={[styles.splitCancel, { borderColor: colors.border.DEFAULT }]}
+            >
+              <Text style={[styles.splitCancelText, { color: colors.text.tertiary }]}>Cancel</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => {
+                const newId = Math.random().toString(36).slice(2) + Date.now().toString(36);
+                dispatch(
+                  splitClass({
+                    classId: entry.id ?? entry.name,
+                    firstRunLevel: splitFirstRun,
+                    newEntryId: newId,
+                  }),
+                );
+                setSplitOpen(false);
+              }}
+              style={[styles.splitConfirm, { backgroundColor: isDark ? '#8B5CF6' : '#7C3AED' }]}
+            >
+              <Text style={styles.splitConfirmText}>Split</Text>
+            </Pressable>
+          </View>
+        </View>
+      )}
 
       <ArchetypePickerSheet
         visible={archetypePickerOpen}
@@ -1157,6 +1268,7 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
         </View>
       )}
 
+      <CompanionStackingRow entry={entry} />
       <CompanionSection entry={entry} />
 
       {/* Prereq status */}
@@ -1196,6 +1308,81 @@ export function ClassEntryCard({ entry }: ClassEntryCardProps) {
 
 // ---- Companion section ------------------------------------------------------
 //
+// ---- CompanionStackingRow ---------------------------------------------------
+// Shown for classes that don't grant their own companion but whose rules say
+// their levels stack with another class for animal companion progression (e.g.
+// Nature Warden "stacks with all other AC classes"; Mammoth Rider "stacks with
+// druid levels"). Hidden for classes that already have a built-in companion
+// formula and for characters with no companions at all.
+
+function CompanionStackingRow({ entry }: { entry: ClassEntry }) {
+  const { colors, fantasy, isDark } = useTheme();
+  const dispatch = useAppDispatch();
+
+  const allClasses = useAppSelector((state) => state.characterEntry.character.classes.classes);
+  const companions = useAppSelector((state) => state.characterEntry.character.companions);
+
+  // Only show for classes that have no built-in companion formula.
+  const hasOwnFormula = effectiveLevelFromDraftClass(entry) > 0;
+  // Only show when the character has at least one class-granted companion.
+  const companionGrantingClasses = allClasses.filter(
+    (c) => (c.id ?? c.name) !== (entry.id ?? entry.name) && effectiveLevelFromDraftClass(c) > 0,
+  );
+  const characterHasCompanions = companions.some((c) => c.grantedBy.type === 'class');
+
+  if (hasOwnFormula || !characterHasCompanions || companionGrantingClasses.length === 0) {
+    return null;
+  }
+
+  const current = entry.advancesCompanionOf;
+
+  const options = [
+    { label: 'None — does not advance companions', value: '' },
+    { label: 'All animal companions', value: 'all' },
+    ...companionGrantingClasses.map((c) => ({
+      label: `${c.name}${c.archetypeName ? ` (${c.archetypeName})` : ''} companion`,
+      value: c.id ?? c.name,
+    })),
+  ];
+
+  return (
+    <View style={[stackStyles.row, { borderTopColor: colors.border.DEFAULT }]}>
+      <Text style={[stackStyles.label, { color: colors.text.secondary }]}>Companion Stacking</Text>
+      <InlinePicker
+        options={options}
+        value={current ?? ''}
+        onValueChange={(val: string) =>
+          dispatch(
+            setAdvancesCompanionOf({
+              id: entry.id ?? entry.name,
+              advancesCompanionOf: val === '' ? undefined : (val as 'all' | string),
+            }),
+          )
+        }
+        placeholder="None"
+      />
+    </View>
+  );
+}
+
+const stackStyles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    gap: 8,
+  },
+  label: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+    width: 120,
+    flexShrink: 0,
+  },
+});
+
+// ---- CompanionSection -------------------------------------------------------
 // Renders CompanionCards for every companion granted by this class, plus an
 // "+ Add Companion" button for granting sources that may have multiple
 // (Beastmaster Ranger). Single-companion sources get the card created via the
@@ -1220,10 +1407,14 @@ function CompanionSection({ entry }: CompanionSectionProps) {
   const originalCharacterId = useAppSelector((state) => state.characterEntry.originalCharacterId);
   const routeCharacterId = originalCharacterId ?? 'draft';
 
-  const grantedCompanions = useAppSelector((state) =>
-    state.characterEntry.character.companions.filter(
-      (c) => c.grantedBy.type === 'class' && c.grantedBy.classEntryId === entry.id,
-    ),
+  const allClasses = useAppSelector((state) => state.characterEntry.character.classes.classes);
+
+  const grantedCompanions = useAppSelector(
+    (state) =>
+      state.characterEntry.character.companions.filter(
+        (c) => c.grantedBy.type === 'class' && c.grantedBy.classEntryId === entry.id,
+      ),
+    shallowEqual,
   );
 
   const supportsMultiple = classSupportsMultipleCompanions(entry);
@@ -1263,7 +1454,7 @@ function CompanionSection({ entry }: CompanionSectionProps) {
           className: entry.name,
           classChoiceId: 'animal_companion',
         },
-        effectiveProgressionLevel: effectiveLevelFromDraftClass(entry),
+        effectiveProgressionLevel: computeCompanionEffectiveLevel(entry, allClasses),
       }),
     );
     setAddPickerOpen(false);
@@ -1348,6 +1539,94 @@ const styles = StyleSheet.create({
   removeIcon: {
     fontSize: 16,
     fontWeight: '700',
+  },
+  splitBadge: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 4,
+  },
+  splitBadgeText: {
+    fontFamily: 'Cinzel',
+    fontSize: 8,
+    fontWeight: '700',
+    letterSpacing: 0.5,
+  },
+  splitLink: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    textDecorationLine: 'underline',
+  },
+  splitPanel: {
+    marginHorizontal: 12,
+    marginBottom: 8,
+    borderRadius: 8,
+    borderWidth: 1,
+    padding: 10,
+    gap: 8,
+  },
+  splitLabel: {
+    fontFamily: 'Cinzel',
+    fontSize: 11,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  splitRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  splitPartLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+  },
+  splitStepper: {
+    width: 28,
+    height: 28,
+    borderRadius: 6,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  splitStepperText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 16,
+    fontWeight: '700',
+    lineHeight: 20,
+  },
+  splitCount: {
+    fontFamily: 'Cinzel',
+    fontSize: 18,
+    fontWeight: '700',
+    minWidth: 28,
+    textAlign: 'center',
+  },
+  splitActions: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  splitCancel: {
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingVertical: 8,
+    alignItems: 'center',
+  },
+  splitCancelText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+  },
+  splitConfirm: {
+    flex: 1,
+    borderRadius: 6,
+    paddingVertical: 8,
+    alignItems: 'center',
+  },
+  splitConfirmText: {
+    fontFamily: 'Cinzel',
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#FFFFFF',
   },
   row: {
     flexDirection: 'row',

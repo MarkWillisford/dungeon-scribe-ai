@@ -504,6 +504,9 @@ export function effectiveLevelFromDraftClass(cls: ClassEntry | undefined): numbe
       return Math.max(1, cls.level - 3);
     case 'Paladin':
       return Math.max(1, cls.level - 4);
+    case 'Prestige Paladin':
+      // Effective paladin level = class level + 3 (per class description).
+      return cls.level + 3;
     case 'Inquisitor':
       return archetypes.includes('Sacred Huntsmaster') ? cls.level : 0;
     case 'Barbarian':
@@ -514,14 +517,40 @@ export function effectiveLevelFromDraftClass(cls: ClassEntry | undefined): numbe
 }
 
 /**
+ * Computes the full effective companion progression level for a granted
+ * companion, including any stacking classes the user has configured via
+ * ClassEntry.advancesCompanionOf.
+ *
+ * Use this everywhere a companion's effectiveProgressionLevel is calculated
+ * rather than calling effectiveLevelFromDraftClass directly, so that prestige
+ * classes like Nature Warden ("stacks with all animal companion classes") are
+ * automatically included.
+ */
+export function computeCompanionEffectiveLevel(
+  grantingCls: ClassEntry,
+  allClasses: ClassEntry[],
+): number {
+  const base = effectiveLevelFromDraftClass(grantingCls);
+  const grantingId = grantingCls.id ?? grantingCls.name;
+  const stackBonus = allClasses
+    .filter((c) => {
+      if (!c.advancesCompanionOf) return false;
+      if ((c.id ?? c.name) === grantingId) return false; // don't double-count the granting class
+      return c.advancesCompanionOf === 'all' || c.advancesCompanionOf === grantingId;
+    })
+    .reduce((sum, c) => sum + c.level, 0);
+  return base + stackBonus;
+}
+
+/**
  * Returns 'mountsOnly' for classes whose companion must be a mount (Cavalier,
  * Paladin), otherwise 'full' (all companions shown).
  */
-export function pickerFilterFromDraftClass(
-  cls: ClassEntry | undefined,
-): 'full' | 'mountsOnly' {
+export function pickerFilterFromDraftClass(cls: ClassEntry | undefined): 'full' | 'mountsOnly' {
   if (!cls) return 'full';
-  return cls.name === 'Cavalier' || cls.name === 'Paladin' ? 'mountsOnly' : 'full';
+  return cls.name === 'Cavalier' || cls.name === 'Paladin' || cls.name === 'Prestige Paladin'
+    ? 'mountsOnly'
+    : 'full';
 }
 
 // ---------------------------------------------------------------------------

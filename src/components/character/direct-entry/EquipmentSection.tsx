@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, Text, Pressable, Modal, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   addEquipment,
   removeEquipment,
+  updateEquipment,
   assignEquipmentSlot,
   unassignEquipmentSlot,
 } from '@/store/slices/characterEntrySlice';
@@ -13,12 +14,51 @@ import {
   type PickerSlot,
   type EquipmentPickerResult,
 } from './EquipmentPickerSheet';
+import { ItemEffectEditorSheet } from './ItemEffectEditorSheet';
 import type { EditorEquipmentItem, EditorEquippedSlot } from '@/types/character';
+import type { Effect } from '@/types/base';
 
 // ---- Helpers ----
 
 function genId(): string {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
+}
+
+export function formatEffectSummary(effects: Effect[] | undefined): string {
+  if (!effects?.length) return '';
+  const bonusEffects = effects.filter((e) => e.type !== 'special');
+  const bonusPart = bonusEffects
+    .slice(0, 3)
+    .map((e) => {
+      const val =
+        typeof e.value === 'number'
+          ? e.value >= 0
+            ? `+${e.value}`
+            : `${e.value}`
+          : String(e.value);
+      const bt = e.bonusType ?? 'untyped';
+      return `${val} ${bt}`;
+    })
+    .join(' · ');
+  return bonusPart;
+}
+
+export function formatSpecialSummary(effects: Effect[] | undefined): string {
+  if (!effects?.length) return '';
+  const specials = effects.filter((e) => e.type === 'special');
+  if (!specials.length) return '';
+  return specials
+    .map((e) => {
+      const val =
+        typeof e.value === 'number'
+          ? e.value >= 0
+            ? `+${e.value}`
+            : `${e.value}`
+          : String(e.value);
+      const label = e.target.replace('special.', '').replace(/_/g, ' ');
+      return `${label} ${val}`;
+    })
+    .join(', ');
 }
 
 // ---- Slot grid layout ----
@@ -68,9 +108,10 @@ interface SlotCellProps {
   equippedItem?: EditorEquipmentItem;
   onPickerOpen: (slot: EditorEquippedSlot) => void;
   onUnassign: (id: string) => void;
+  onEdit: (item: EditorEquipmentItem) => void;
 }
 
-function SlotCellView({ cell, equippedItem, onPickerOpen, onUnassign }: SlotCellProps) {
+function SlotCellView({ cell, equippedItem, onPickerOpen, onUnassign, onEdit }: SlotCellProps) {
   const { colors, fantasy, isDark } = useTheme();
 
   if (!cell.slot) {
@@ -78,6 +119,8 @@ function SlotCellView({ cell, equippedItem, onPickerOpen, onUnassign }: SlotCell
   }
 
   const isEmpty = !equippedItem;
+  const bonusSummary = formatEffectSummary(equippedItem?.effects);
+  const specialSummary = formatSpecialSummary(equippedItem?.effects);
 
   return (
     <View style={styles.slotCell}>
@@ -100,7 +143,9 @@ function SlotCellView({ cell, equippedItem, onPickerOpen, onUnassign }: SlotCell
           </Text>
         </Pressable>
       ) : (
-        <View
+        <Pressable
+          onPress={() => onEdit(equippedItem)}
+          testID={`slot-item-${cell.slot}`}
           style={[
             styles.slotFilledButton,
             {
@@ -112,17 +157,37 @@ function SlotCellView({ cell, equippedItem, onPickerOpen, onUnassign }: SlotCell
           <Text style={[styles.slotItemName, { color: colors.text.primary }]} numberOfLines={2}>
             {equippedItem.name}
           </Text>
+          {!!bonusSummary && (
+            <Text
+              style={[
+                styles.effectSummaryText,
+                { color: isDark ? fantasy.gold : fantasy.darkWood },
+              ]}
+              numberOfLines={1}
+            >
+              {bonusSummary}
+            </Text>
+          )}
+          {!!specialSummary && (
+            <Text
+              style={[styles.specialSummaryText, { color: colors.text.tertiary }]}
+              numberOfLines={1}
+            >
+              {specialSummary}
+            </Text>
+          )}
           {equippedItem.allowsHandUse && (
             <Text style={[styles.bucklerNote, { color: fantasy.gold }]}>off-hand free</Text>
           )}
           <Pressable
             onPress={() => onUnassign(equippedItem.id)}
+            testID={`unassign-${cell.slot}`}
             hitSlop={8}
             style={styles.removeBtn}
           >
             <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
           </Pressable>
-        </View>
+        </Pressable>
       )}
     </View>
   );
@@ -135,9 +200,16 @@ interface ContainerListProps {
   equipment: EditorEquipmentItem[];
   onPickerOpen: (slot: PickerSlot) => void;
   onRemove: (id: string) => void;
+  onEdit: (item: EditorEquipmentItem) => void;
 }
 
-function ContainerList({ containers, equipment, onPickerOpen, onRemove }: ContainerListProps) {
+function ContainerList({
+  containers,
+  equipment,
+  onPickerOpen,
+  onRemove,
+  onEdit,
+}: ContainerListProps) {
   const { colors, isDark } = useTheme();
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
 
@@ -168,14 +240,22 @@ function ContainerList({ containers, equipment, onPickerOpen, onRemove }: Contai
                   },
                 ]}
               >
-                <Pressable onPress={() => toggle(bag.id)} style={styles.containerHeader}>
+                <Pressable
+                  onPress={() => toggle(bag.id)}
+                  style={styles.containerHeader}
+                  testID={`container-toggle-${bag.id}`}
+                >
                   <Text style={[styles.containerName, { color: colors.text.primary }]}>
                     {bag.name}
                   </Text>
                   <Text style={[styles.containerCount, { color: colors.text.tertiary }]}>
                     {contents.length} item{contents.length !== 1 ? 's' : ''} {isOpen ? '▲' : '▼'}
                   </Text>
-                  <Pressable onPress={() => onRemove(bag.id)} hitSlop={8}>
+                  <Pressable
+                    onPress={() => onRemove(bag.id)}
+                    hitSlop={8}
+                    testID={`container-remove-${bag.id}`}
+                  >
                     <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
                   </Pressable>
                 </Pressable>
@@ -189,7 +269,11 @@ function ContainerList({ containers, equipment, onPickerOpen, onRemove }: Contai
                       </Text>
                     ) : (
                       contents.map((item) => (
-                        <View key={item.id} style={styles.containerItem}>
+                        <Pressable
+                          key={item.id}
+                          onPress={() => onEdit(item)}
+                          style={styles.containerItem}
+                        >
                           <Text style={[styles.containerItemName, { color: colors.text.primary }]}>
                             {item.name}
                           </Text>
@@ -198,7 +282,7 @@ function ContainerList({ containers, equipment, onPickerOpen, onRemove }: Contai
                               ✕
                             </Text>
                           </Pressable>
-                        </View>
+                        </Pressable>
                       ))
                     )}
                   </View>
@@ -225,10 +309,11 @@ interface IounStoneSectionProps {
   stones: EditorEquipmentItem[];
   onPickerOpen: (slot: PickerSlot) => void;
   onRemove: (id: string) => void;
+  onEdit: (item: EditorEquipmentItem) => void;
 }
 
-function IounStoneSection({ stones, onPickerOpen, onRemove }: IounStoneSectionProps) {
-  const { colors } = useTheme();
+function IounStoneSection({ stones, onPickerOpen, onRemove, onEdit }: IounStoneSectionProps) {
+  const { colors, fantasy, isDark } = useTheme();
 
   return (
     <View style={styles.subSection}>
@@ -237,29 +322,132 @@ function IounStoneSection({ stones, onPickerOpen, onRemove }: IounStoneSectionPr
           <Text style={[styles.subSectionLabel, { color: colors.text.tertiary }]}>
             Orbiting Ioun Stones
           </Text>
-          {stones.map((stone) => (
-            <View
-              key={stone.id}
-              style={[
-                styles.iounRow,
-                { borderColor: colors.border.DEFAULT, backgroundColor: colors.bg.secondary },
-              ]}
-            >
-              <Text style={[styles.iounName, { color: colors.text.primary }]}>{stone.name}</Text>
-              <Pressable onPress={() => onRemove(stone.id)} hitSlop={8}>
-                <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
+          {stones.map((stone) => {
+            const bonusSummary = formatEffectSummary(stone.effects);
+            return (
+              <Pressable
+                key={stone.id}
+                onPress={() => onEdit(stone)}
+                testID={`ioun-stone-${stone.id}`}
+                style={[
+                  styles.iounRow,
+                  { borderColor: colors.border.DEFAULT, backgroundColor: colors.bg.secondary },
+                ]}
+              >
+                <View style={styles.itemRowInfo}>
+                  <Text style={[styles.iounName, { color: colors.text.primary }]}>
+                    {stone.name}
+                  </Text>
+                  {!!bonusSummary && (
+                    <Text
+                      style={[
+                        styles.effectSummaryText,
+                        { color: isDark ? fantasy.gold : fantasy.darkWood },
+                      ]}
+                      numberOfLines={1}
+                    >
+                      {bonusSummary}
+                    </Text>
+                  )}
+                </View>
+                <Pressable
+                  onPress={() => onRemove(stone.id)}
+                  hitSlop={8}
+                  testID={`ioun-remove-${stone.id}`}
+                >
+                  <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
+                </Pressable>
               </Pressable>
-            </View>
-          ))}
+            );
+          })}
         </>
       )}
       <Pressable
         onPress={() => onPickerOpen('orbiting')}
         style={[styles.addButton, { borderColor: colors.border.DEFAULT }]}
         accessibilityRole="button"
+        testID="add-orbiting-ioun-stone"
       >
         <Text style={[styles.addButtonText, { color: colors.text.tertiary }]}>
           + Add Orbiting Ioun Stone
+        </Text>
+      </Pressable>
+    </View>
+  );
+}
+
+// ---- SlotlessItemsSection ----
+
+interface SlotlessItemsSectionProps {
+  items: EditorEquipmentItem[];
+  onPickerOpen: (slot: PickerSlot) => void;
+  onRemove: (id: string) => void;
+  onEdit: (item: EditorEquipmentItem) => void;
+}
+
+function SlotlessItemsSection({
+  items,
+  onPickerOpen,
+  onRemove,
+  onEdit,
+}: SlotlessItemsSectionProps) {
+  const { colors, fantasy, isDark } = useTheme();
+
+  return (
+    <View style={styles.subSection}>
+      {items.length > 0 && (
+        <>
+          <Text style={[styles.subSectionLabel, { color: colors.text.tertiary }]}>
+            Slotless Items
+          </Text>
+          {items.map((item) => {
+            const bonusSummary = formatEffectSummary(item.effects);
+            return (
+              <Pressable
+                key={item.id}
+                onPress={() => onEdit(item)}
+                testID={`slotless-item-${item.id}`}
+                style={[
+                  styles.carriedRow,
+                  { borderColor: colors.border.DEFAULT, backgroundColor: colors.bg.secondary },
+                ]}
+              >
+                <View style={styles.itemRowInfo}>
+                  <Text style={[styles.carriedName, { color: colors.text.primary }]}>
+                    {item.name}
+                  </Text>
+                  {!!bonusSummary && (
+                    <Text
+                      style={[
+                        styles.effectSummaryText,
+                        { color: isDark ? fantasy.gold : fantasy.darkWood },
+                      ]}
+                      numberOfLines={1}
+                    >
+                      {bonusSummary}
+                    </Text>
+                  )}
+                </View>
+                <Pressable
+                  onPress={() => onRemove(item.id)}
+                  hitSlop={8}
+                  testID={`slotless-remove-${item.id}`}
+                >
+                  <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
+                </Pressable>
+              </Pressable>
+            );
+          })}
+        </>
+      )}
+      <Pressable
+        onPress={() => onPickerOpen('slotless')}
+        style={[styles.addButton, { borderColor: colors.border.DEFAULT }]}
+        accessibilityRole="button"
+        testID="add-slotless-item"
+      >
+        <Text style={[styles.addButtonText, { color: colors.text.tertiary }]}>
+          + Add Slotless Item
         </Text>
       </Pressable>
     </View>
@@ -271,9 +459,11 @@ function IounStoneSection({ stones, onPickerOpen, onRemove }: IounStoneSectionPr
 function CarriedList({
   carried,
   onRemove,
+  onEdit,
 }: {
   carried: EditorEquipmentItem[];
   onRemove: (id: string) => void;
+  onEdit: (item: EditorEquipmentItem) => void;
 }) {
   const { colors } = useTheme();
 
@@ -283,18 +473,24 @@ function CarriedList({
     <View style={styles.subSection}>
       <Text style={[styles.subSectionLabel, { color: colors.text.tertiary }]}>Carried</Text>
       {carried.map((item) => (
-        <View
+        <Pressable
           key={item.id}
+          onPress={() => onEdit(item)}
+          testID={`carried-item-${item.id}`}
           style={[
             styles.carriedRow,
             { borderColor: colors.border.DEFAULT, backgroundColor: colors.bg.secondary },
           ]}
         >
           <Text style={[styles.carriedName, { color: colors.text.primary }]}>{item.name}</Text>
-          <Pressable onPress={() => onRemove(item.id)} hitSlop={8}>
+          <Pressable
+            onPress={() => onRemove(item.id)}
+            hitSlop={8}
+            testID={`carried-remove-${item.id}`}
+          >
             <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>✕</Text>
           </Pressable>
-        </View>
+        </Pressable>
       ))}
     </View>
   );
@@ -305,14 +501,18 @@ function CarriedList({
 export function EquipmentSection() {
   const dispatch = useAppDispatch();
   const equipment = useAppSelector((state) => state.characterEntry.character.editorEquipment ?? []);
+  const character = useAppSelector((state) => state.characterEntry.character);
   const [pickerSlot, setPickerSlot] = useState<PickerSlot | null>(null);
+  const [editingItem, setEditingItem] = useState<EditorEquipmentItem | null>(null);
 
   const slottedItems = equipment.filter((e) => e.slot !== undefined);
   const containers = equipment.filter((e) => e.isContainer && !e.slot);
   const iounStones = equipment.filter((e) => e.isOrbiting && !e.slot && !e.containerId);
-  const carried = equipment.filter(
+  const unslotted = equipment.filter(
     (e) => !e.slot && !e.containerId && !e.isContainer && !e.isOrbiting,
   );
+  const slotlessItems = unslotted.filter((e) => e.collection === 'magicItems');
+  const carried = unslotted.filter((e) => e.collection !== 'magicItems');
 
   const getItemForSlot = (slot: EditorEquippedSlot) => slottedItems.find((e) => e.slot === slot);
 
@@ -326,9 +526,10 @@ export function EquipmentSection() {
       allowsHandUse: result.allowsHandUse,
       isContainer: result.isContainer,
       isOrbiting: pickerSlot === 'orbiting' || undefined,
+      effects: result.effects,
     };
     dispatch(addEquipment(newItem));
-    if (pickerSlot !== 'orbiting' && pickerSlot !== 'none') {
+    if (pickerSlot !== 'orbiting' && pickerSlot !== 'none' && pickerSlot !== 'slotless') {
       dispatch(assignEquipmentSlot({ id: newItem.id, slot: pickerSlot as EditorEquippedSlot }));
     }
     setPickerSlot(null);
@@ -344,11 +545,31 @@ export function EquipmentSection() {
       isOrbiting: pickerSlot === 'orbiting' || undefined,
     };
     dispatch(addEquipment(newItem));
-    if (pickerSlot !== 'orbiting' && pickerSlot !== 'none') {
+    if (pickerSlot !== 'orbiting' && pickerSlot !== 'none' && pickerSlot !== 'slotless') {
       dispatch(assignEquipmentSlot({ id: newItem.id, slot: pickerSlot as EditorEquippedSlot }));
     }
     setPickerSlot(null);
   };
+
+  const handleEdit = useCallback((item: EditorEquipmentItem) => {
+    setEditingItem(item);
+  }, []);
+
+  const handleEditorSave = useCallback(
+    (updated: EditorEquipmentItem) => {
+      dispatch(updateEquipment(updated));
+      setEditingItem(null);
+    },
+    [dispatch],
+  );
+
+  const handleEditorRemove = useCallback(
+    (id: string) => {
+      dispatch(removeEquipment(id));
+      setEditingItem(null);
+    },
+    [dispatch],
+  );
 
   return (
     <View style={styles.container}>
@@ -363,6 +584,7 @@ export function EquipmentSection() {
                 equippedItem={cell.slot ? getItemForSlot(cell.slot) : undefined}
                 onPickerOpen={(slot) => setPickerSlot(slot)}
                 onUnassign={(id) => dispatch(unassignEquipmentSlot(id))}
+                onEdit={handleEdit}
               />
             ))}
           </View>
@@ -375,6 +597,7 @@ export function EquipmentSection() {
         equipment={equipment}
         onPickerOpen={(slot) => setPickerSlot(slot)}
         onRemove={(id) => dispatch(removeEquipment(id))}
+        onEdit={handleEdit}
       />
 
       {/* Ioun Stones */}
@@ -382,12 +605,25 @@ export function EquipmentSection() {
         stones={iounStones}
         onPickerOpen={(slot) => setPickerSlot(slot)}
         onRemove={(id) => dispatch(removeEquipment(id))}
+        onEdit={handleEdit}
+      />
+
+      {/* Slotless Items */}
+      <SlotlessItemsSection
+        items={slotlessItems}
+        onPickerOpen={(slot) => setPickerSlot(slot)}
+        onRemove={(id) => dispatch(removeEquipment(id))}
+        onEdit={handleEdit}
       />
 
       {/* Carried */}
-      <CarriedList carried={carried} onRemove={(id) => dispatch(removeEquipment(id))} />
+      <CarriedList
+        carried={carried}
+        onRemove={(id) => dispatch(removeEquipment(id))}
+        onEdit={handleEdit}
+      />
 
-      {/* Picker Modal */}
+      {/* Equipment Picker Modal */}
       {pickerSlot !== null && (
         <EquipmentPickerSheet
           visible
@@ -397,6 +633,23 @@ export function EquipmentSection() {
           onClose={() => setPickerSlot(null)}
         />
       )}
+
+      {/* Item Effect Editor Modal */}
+      <Modal
+        visible={editingItem !== null}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        onRequestClose={() => setEditingItem(null)}
+      >
+        <ItemEffectEditorSheet
+          key={editingItem?.id ?? 'closed'}
+          item={editingItem}
+          character={character}
+          onSave={handleEditorSave}
+          onRemoveItem={handleEditorRemove}
+          onClose={() => setEditingItem(null)}
+        />
+      </Modal>
     </View>
   );
 }
@@ -440,6 +693,17 @@ const styles = StyleSheet.create({
     fontFamily: 'LibreBaskerville',
     fontSize: 10,
     fontWeight: '700',
+    textAlign: 'center',
+  },
+  effectSummaryText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 9,
+    textAlign: 'center',
+  },
+  specialSummaryText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 8,
+    fontStyle: 'italic',
     textAlign: 'center',
   },
   bucklerNote: {
@@ -495,6 +759,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   iounName: { fontFamily: 'LibreBaskerville', fontSize: 13, flex: 1 },
+  itemRowInfo: { flex: 1, gap: 2 },
   carriedRow: {
     flexDirection: 'row',
     alignItems: 'center',

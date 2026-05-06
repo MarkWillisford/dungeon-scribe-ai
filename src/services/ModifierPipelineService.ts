@@ -1,5 +1,5 @@
 import type { Character } from '@/types';
-import { BonusType, type Effect } from '@/types/base';
+import { BonusType, type Bonus, type Effect } from '@/types/base';
 import type { AbilityScores } from '@/types/abilities';
 import { Size, SaveProgression } from '@/types/base';
 import { FormulaService, type FormulaContext } from './FormulaService';
@@ -210,6 +210,40 @@ export class ModifierPipelineService {
     // 7. Character traits — effects resolved via trait registry (future)
     // CharacterTrait stores traitId; effects will be looked up from TraitRegistryService
 
+    // 8. Applied templates — ability score changes snapshotted at add-time
+    const ABILITY_KEY: Record<string, string> = {
+      STR: 'str',
+      DEX: 'dex',
+      CON: 'con',
+      INT: 'int',
+      WIS: 'wis',
+      CHA: 'cha',
+    };
+    for (const tpl of character.appliedTemplates ?? []) {
+      for (const change of tpl.abilityScoreChanges ?? []) {
+        const ab = ABILITY_KEY[change.ability];
+        if (!ab) continue;
+        effects.push({
+          type: 'bonus',
+          bonusType: BonusType.UNTYPED,
+          target: `ability.${ab}`,
+          value: change.change,
+          source: tpl.name,
+        });
+      }
+    }
+
+    // 9. User-entered typed bonuses (morale, sacred, insight, etc. added via ability score UI)
+    for (const b of character.manualAbilityBonuses ?? []) {
+      effects.push({
+        type: 'bonus',
+        bonusType: b.bonusType,
+        target: `ability.${b.ability}`,
+        value: b.value,
+        source: b.source ?? 'Manual',
+      });
+    }
+
     return effects;
   }
 
@@ -271,9 +305,37 @@ export class ModifierPipelineService {
       }
     }
 
-    // TODO: Magic item effects will be resolved via MagicItemDefinition.effects
-    // once the effect lookup pipeline is wired (PR 2 — magic item data + runtime).
-    void character.equipment.magicItems;
+    // Magic items added via the direct-entry editor — effects snapshotted at pick time.
+    for (const item of character.editorEquipment ?? []) {
+      // Orbiting ioun stones have isOrbiting:true and slot:undefined — they are actively
+      // worn and must flow through the pipeline. True slotless inventory items (wands,
+      // containers, carried gear) have neither a slot nor isOrbiting and are excluded.
+      if (!item.slot && !item.isOrbiting) continue;
+
+      // Structured Effect[] entries (preferred path for all item effects).
+      if (item.effects?.length) {
+        for (const effect of item.effects) {
+          effects.push({ ...effect, source: effect.source || item.name });
+        }
+      }
+
+      // abilityScoreBonuses: denormalised shorthand used by some magic items (e.g.
+      // Headband of Vast Intellect). Convert to Enhancement Effect[] so the pipeline
+      // correctly restores them after every recalculate() wipes score.bonuses.
+      if (item.abilityScoreBonuses) {
+        for (const [ab, val] of Object.entries(item.abilityScoreBonuses)) {
+          if (typeof val === 'number' && val !== 0) {
+            effects.push({
+              type: 'bonus',
+              bonusType: BonusType.ENHANCEMENT,
+              target: `ability.${ab}`,
+              value: val,
+              source: item.name,
+            });
+          }
+        }
+      }
+    }
 
     return effects;
   }
@@ -389,10 +451,26 @@ export class ModifierPipelineService {
     const abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha'] as const;
     for (const ab of abilities) {
       const score = c.abilityScores[ab];
-      score.total = score.base + score.racial + score.inherent + this.get(stacked, `ability.${ab}`);
+      const result = stacked.get(`ability.${ab}`);
+      score.total = score.base + score.racial + score.inherent + (result?.total ?? 0);
       score.tempTotal = Math.max(0, score.total - score.damage - score.drain);
       score.modifier = Math.floor((score.total - 10) / 2);
       score.tempModifier = Math.floor((score.tempTotal - 10) / 2);
+
+      // Populate per-bonusType breakdown so the UI can show "+6 Enhancement" etc.
+      for (const key of Object.keys(score.bonuses) as (keyof typeof score.bonuses)[]) {
+        score.bonuses[key] = [];
+      }
+      for (const contrib of result?.contributions ?? []) {
+        const key = contrib.bonusType as string;
+        if (key in score.bonuses) {
+          (score.bonuses as Record<string, Bonus[]>)[key].push({
+            type: contrib.bonusType as BonusType,
+            value: contrib.value,
+            source: contrib.source,
+          });
+        }
+      }
     }
   }
 

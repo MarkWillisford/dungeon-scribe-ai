@@ -415,6 +415,198 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  describe('collectEquipmentEffects — editorEquipment magic items', () => {
+    test('applies ability enhancement bonus from equipped magic item', () => {
+      const char = createTestCharacter({ cha: 10 });
+      char.editorEquipment = [
+        {
+          id: 'item-1',
+          definitionId: 'headband-cha-6',
+          collection: 'magicItems',
+          name: 'Headband of Alluring Charisma +6',
+          slot: 'headband',
+          effects: [
+            {
+              type: 'bonus',
+              bonusType: BonusType.ENHANCEMENT,
+              target: 'ability.cha',
+              value: 6,
+              source: 'Headband of Alluring Charisma +6',
+            },
+          ],
+        },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.abilityScores.cha.total).toBe(16);
+    });
+
+    test('populates bonuses.enhancement breakdown for equipped magic item', () => {
+      const char = createTestCharacter({ int: 10 });
+      char.editorEquipment = [
+        {
+          id: 'item-2',
+          definitionId: 'headband-int-6',
+          collection: 'magicItems',
+          name: 'Headband of Vast Intellect +6',
+          slot: 'headband',
+          effects: [
+            {
+              type: 'bonus',
+              bonusType: BonusType.ENHANCEMENT,
+              target: 'ability.int',
+              value: 6,
+              source: 'Headband of Vast Intellect +6',
+            },
+          ],
+        },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.abilityScores.int.bonuses.enhancement).toHaveLength(1);
+      expect(result.abilityScores.int.bonuses.enhancement[0].value).toBe(6);
+    });
+
+    test('applies effects from orbiting ioun stones (isOrbiting:true, slot:undefined)', () => {
+      const char = createTestCharacter({ int: 10 });
+      char.editorEquipment = [
+        {
+          id: 'ioun-1',
+          collection: 'magicItems',
+          name: 'Dusty Rose Prism Ioun Stone',
+          isOrbiting: true,
+          // slot intentionally absent — ioun stones orbit, not worn in a slot
+          effects: [
+            {
+              type: 'bonus',
+              bonusType: BonusType.INSIGHT,
+              target: 'ac',
+              value: 1,
+              source: 'Dusty Rose Prism Ioun Stone',
+            },
+          ],
+        },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.misc).toBe(1);
+    });
+
+    test('does not apply effects from unequipped (no slot) items', () => {
+      const char = createTestCharacter({ int: 10 });
+      const baseInt = char.abilityScores.int.total;
+      char.editorEquipment = [
+        {
+          id: 'item-3',
+          collection: 'magicItems',
+          name: 'Headband (carried)',
+          effects: [
+            {
+              type: 'bonus',
+              bonusType: BonusType.ENHANCEMENT,
+              target: 'ability.int',
+              value: 6,
+              source: 'Headband',
+            },
+          ],
+        },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.abilityScores.int.total).toBe(baseInt);
+    });
+
+    test('stacks deflection AC from Ring of Protection through pipeline', () => {
+      const char = createTestCharacter();
+      char.editorEquipment = [
+        {
+          id: 'item-4',
+          collection: 'magicItems',
+          name: 'Ring of Protection +3',
+          slot: 'ring_left',
+          effects: [
+            {
+              type: 'bonus',
+              bonusType: BonusType.DEFLECTION,
+              target: 'ac.deflection',
+              value: 3,
+              source: 'Ring of Protection +3',
+            },
+          ],
+        },
+      ];
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.deflection).toBe(3);
+    });
+  });
+
+  describe('collectEquipmentEffects — armor, shields, weapons', () => {
+    test('equipped armor with enhancement contributes armor+enhancement to AC', () => {
+      const char = createTestCharacter();
+      char.equipment.armor = [
+        { acBonus: 6, enhancement: 1, equipped: true, name: 'Chainmail +1' },
+      ] as unknown as typeof char.equipment.armor;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.armor).toBe(7);
+    });
+
+    test('unequipped armor is not counted', () => {
+      const char = createTestCharacter();
+      char.equipment.armor = [
+        { acBonus: 6, enhancement: 0, equipped: false, name: 'Chainmail' },
+      ] as unknown as typeof char.equipment.armor;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.armor).toBe(0);
+    });
+
+    test('equipped shield with enhancement contributes to AC', () => {
+      const char = createTestCharacter();
+      char.equipment.shields = [
+        { acBonus: 2, enhancement: 2, equipped: true, name: 'Heavy Shield +2' },
+      ] as unknown as typeof char.equipment.shields;
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.armorClass.shield).toBe(4);
+    });
+
+    test('equipped weapon with enhancement adds to melee attack', () => {
+      const char = createTestCharacter();
+      char.equipment.weapons = [
+        { enhancement: 1, equipped: true, masterwork: true, isRanged: false, name: 'Longsword +1' },
+      ] as unknown as typeof char.equipment.weapons;
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal + 1,
+      );
+    });
+
+    test('masterwork weapon with no enhancement gives +1 melee attack', () => {
+      const char = createTestCharacter();
+      char.equipment.weapons = [
+        {
+          enhancement: 0,
+          equipped: true,
+          masterwork: true,
+          isRanged: false,
+          name: 'Longsword (masterwork)',
+        },
+      ] as unknown as typeof char.equipment.weapons;
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal + 1,
+      );
+    });
+
+    test('equipped ranged weapon with enhancement adds to ranged attack', () => {
+      const char = createTestCharacter();
+      char.equipment.weapons = [
+        { enhancement: 1, equipped: true, masterwork: true, isRanged: true, name: 'Longbow +1' },
+      ] as unknown as typeof char.equipment.weapons;
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.combatStats.attackBonuses.rangedTotal).toBe(
+        baseline.combatStats.attackBonuses.rangedTotal + 1,
+      );
+    });
+  });
+
   describe('conditions effects', () => {
     test('active condition effects are applied to stats', () => {
       const char = createTestCharacter();

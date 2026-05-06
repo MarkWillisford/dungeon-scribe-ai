@@ -5,7 +5,7 @@ import {
   TextInput,
   Pressable,
   Modal,
-  FlatList,
+  SectionList,
   ActivityIndicator,
   StyleSheet,
 } from 'react-native';
@@ -14,10 +14,11 @@ import { GameDataService } from '@/services/GameDataService';
 import type { WeaponDefinition, ArmorDefinition, ShieldDefinition } from '@/types/equipment';
 import type { MagicItemDefinition, ItemSlot } from '@/types/magicItems';
 import type { EditorEquippedSlot } from '@/types/character';
+import type { Effect } from '@/types/base';
 
 // ---- Types ----
 
-export type PickerSlot = EditorEquippedSlot | 'orbiting' | 'none';
+export type PickerSlot = EditorEquippedSlot | 'orbiting' | 'none' | 'slotless';
 
 export interface EquipmentPickerResult {
   definitionId: string;
@@ -25,6 +26,7 @@ export interface EquipmentPickerResult {
   collection: 'weapons' | 'armor' | 'shields' | 'magicItems';
   allowsHandUse?: boolean;
   isContainer?: boolean;
+  effects?: Effect[];
 }
 
 interface PickerItem extends EquipmentPickerResult {
@@ -42,6 +44,13 @@ interface EquipmentPickerSheetProps {
 }
 
 // ---- Helpers ----
+
+const SECTION_LABELS: Record<string, string> = {
+  weapons: 'Mundane Weapons',
+  armor: 'Mundane Armor',
+  shields: 'Mundane Shields',
+  magicItems: 'Magic Items',
+};
 
 const SLOT_TITLES: Record<string, string> = {
   head: 'Head Slot',
@@ -63,15 +72,16 @@ const SLOT_TITLES: Record<string, string> = {
   off_hand: 'Off Hand',
   orbiting: 'Ioun Stone',
   none: 'Container / Bag',
+  slotless: 'Slotless Magic Items',
 };
 
-function toFirestoreSlot(slot: PickerSlot): ItemSlot {
+export function toFirestoreSlot(slot: PickerSlot): ItemSlot {
   if (slot === 'ring_left' || slot === 'ring_right') return 'ring';
-  if (slot === 'orbiting') return 'none';
+  if (slot === 'orbiting' || slot === 'slotless') return 'none';
   return slot as ItemSlot;
 }
 
-function sourceLabel(source: unknown): string | undefined {
+export function sourceLabel(source: unknown): string | undefined {
   if (!source) return undefined;
   if (typeof source === 'string') return source;
   if (typeof source === 'object' && source !== null && 'bookId' in source) {
@@ -80,7 +90,7 @@ function sourceLabel(source: unknown): string | undefined {
   return undefined;
 }
 
-function mapWeapon(w: WeaponDefinition): PickerItem {
+export function mapWeapon(w: WeaponDefinition): PickerItem {
   return {
     definitionId: w.id,
     name: w.name,
@@ -91,7 +101,7 @@ function mapWeapon(w: WeaponDefinition): PickerItem {
   };
 }
 
-function mapArmor(a: ArmorDefinition): PickerItem {
+export function mapArmor(a: ArmorDefinition): PickerItem {
   return {
     definitionId: a.id,
     name: a.name,
@@ -102,7 +112,7 @@ function mapArmor(a: ArmorDefinition): PickerItem {
   };
 }
 
-function mapShield(s: ShieldDefinition): PickerItem {
+export function mapShield(s: ShieldDefinition): PickerItem {
   return {
     definitionId: s.id,
     name: s.name,
@@ -114,7 +124,7 @@ function mapShield(s: ShieldDefinition): PickerItem {
   };
 }
 
-function mapMagicItem(m: MagicItemDefinition, isContainer = false): PickerItem {
+export function mapMagicItem(m: MagicItemDefinition, isContainer = false): PickerItem {
   const allowsHandUse = (m as { allowsHandUse?: boolean }).allowsHandUse;
   return {
     definitionId: m.id,
@@ -125,10 +135,11 @@ function mapMagicItem(m: MagicItemDefinition, isContainer = false): PickerItem {
     allowsHandUse,
     isContainer: isContainer || undefined,
     source: sourceLabel(m.source),
+    effects: m.effects,
   };
 }
 
-async function loadItemsForSlot(slot: PickerSlot): Promise<PickerItem[]> {
+export async function loadItemsForSlot(slot: PickerSlot): Promise<PickerItem[]> {
   switch (slot) {
     case 'main_hand': {
       const [weapons, magicItems] = await Promise.all([
@@ -173,8 +184,15 @@ async function loadItemsForSlot(slot: PickerSlot): Promise<PickerItem[]> {
     }
 
     case 'none': {
+      // Containers/bags: show all slotless wondrous items, marked as containers
       const items = await GameDataService.getMagicItemsBySlot('none');
       return items.filter((m) => m.category === 'wondrous').map((m) => mapMagicItem(m, true));
+    }
+
+    case 'slotless': {
+      // Slotless magic items (Pearls of Power, tomes, etc.) — excludes ioun stones
+      const items = await GameDataService.getMagicItemsBySlot('none');
+      return items.filter((m) => m.category !== 'ioun_stone').map((m) => mapMagicItem(m));
     }
 
     default: {
@@ -185,7 +203,7 @@ async function loadItemsForSlot(slot: PickerSlot): Promise<PickerItem[]> {
   }
 }
 
-function formatPrice(price: number | undefined): string | undefined {
+export function formatPrice(price: number | undefined): string | undefined {
   if (price === undefined || price === null) return undefined;
   if (price === 0) return 'free';
   if (price >= 1000) return `${(price / 1000).toFixed(price % 1000 === 0 ? 0 : 1)}k gp`;
@@ -234,6 +252,19 @@ export function EquipmentPickerSheet({
     return allItems.filter((item) => item.name.toLowerCase().includes(q));
   }, [allItems, query]);
 
+  const sections = useMemo(() => {
+    const grouped = new Map<string, PickerItem[]>();
+    for (const item of filtered) {
+      const list = grouped.get(item.collection) ?? [];
+      list.push(item);
+      grouped.set(item.collection, list);
+    }
+    return Array.from(grouped.entries()).map(([key, data]) => ({
+      title: SECTION_LABELS[key] ?? key,
+      data,
+    }));
+  }, [filtered]);
+
   const handleClose = () => {
     setQuery('');
     onClose();
@@ -247,6 +278,7 @@ export function EquipmentPickerSheet({
       collection: item.collection,
       allowsHandUse: item.allowsHandUse,
       isContainer: item.isContainer,
+      effects: item.effects,
     });
   };
 
@@ -277,7 +309,12 @@ export function EquipmentPickerSheet({
           <Text style={[styles.title, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
             {title}
           </Text>
-          <Pressable onPress={handleClose} style={styles.closeBtn} hitSlop={12}>
+          <Pressable
+            onPress={handleClose}
+            style={styles.closeBtn}
+            hitSlop={12}
+            testID="picker-close-btn"
+          >
             <Text style={[styles.closeText, { color: colors.text.tertiary }]}>✕</Text>
           </Pressable>
         </View>
@@ -285,6 +322,7 @@ export function EquipmentPickerSheet({
         {/* Search */}
         <View style={[styles.searchRow, { borderBottomColor: colors.border.DEFAULT }]}>
           <TextInput
+            testID="picker-search"
             value={query}
             onChangeText={setQuery}
             placeholder={`Search ${title.toLowerCase()}...`}
@@ -309,12 +347,32 @@ export function EquipmentPickerSheet({
             <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>Loading...</Text>
           </View>
         ) : (
-          <FlatList
-            data={filtered}
+          <SectionList
+            sections={sections}
             keyExtractor={(item) => item.definitionId}
             keyboardShouldPersistTaps="handled"
+            renderSectionHeader={({ section }) =>
+              sections.length > 1 ? (
+                <View
+                  style={[
+                    styles.sectionHeader,
+                    { backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary },
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.sectionHeaderText,
+                      { color: isDark ? fantasy.gold : fantasy.darkWood },
+                    ]}
+                  >
+                    {section.title}
+                  </Text>
+                </View>
+              ) : null
+            }
             renderItem={({ item }) => (
               <Pressable
+                testID={`picker-item-${item.definitionId}`}
                 onPress={() => handleSelect(item)}
                 style={({ pressed }) => [
                   styles.item,
@@ -378,6 +436,7 @@ export function EquipmentPickerSheet({
         {query.trim() && !loading && (
           <View style={[styles.customFooter, { borderTopColor: colors.border.DEFAULT }]}>
             <Pressable
+              testID="picker-add-custom"
               onPress={handleAddCustom}
               style={[styles.customButton, { borderColor: fantasy.bronze }]}
             >
@@ -441,6 +500,18 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   listContent: { flexGrow: 1 },
+  sectionHeader: {
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  sectionHeaderText: {
+    fontFamily: 'Cinzel',
+    fontSize: 11,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
   item: {
     paddingHorizontal: 16,
     paddingVertical: 10,

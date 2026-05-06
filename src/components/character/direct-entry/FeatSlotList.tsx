@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import React, { useState, useMemo, useEffect } from 'react';
+import { View, Text, Pressable, StyleSheet, Modal, TextInput } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
@@ -8,10 +8,16 @@ import {
   removeFeatSlot,
   addFeatSlot,
   toggleFeatPrereqOverride,
-  syncFeatSlots,
+  setFeatChoices,
 } from '@/store/slices/characterEntrySlice';
 import { FeatPickerSheet } from './FeatPickerSheet';
+import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
 import { computeFeatSlots } from '@/utils/characterComputations';
+import { FeatRegistryService } from '@/services/FeatRegistryService';
+import { GameDataService } from '@/services/GameDataService';
+import { computePoolEsl } from '@/utils/spellcastingUtils';
+import { selectClassDataMap } from '@/store/slices/gameDataSlice';
+import type { FeatChoice } from '@/types/feats';
 
 type FeatSlotSource = 'racial' | 'level' | 'bonus' | 'mythic';
 
@@ -29,6 +35,8 @@ interface FeatSlotDisplay {
   featId: string;
   featName: string;
   prereqOverride: boolean;
+  featChoices: Record<string, string>;
+  sourceLabel?: string;
 }
 
 // ---- Source badge ----
@@ -72,9 +80,124 @@ interface FeatSlotRowProps {
 function FeatSlotRow({ slot }: FeatSlotRowProps) {
   const { colors } = useTheme();
   const dispatch = useAppDispatch();
+  const eitrMode = useAppSelector((state) => state.ruleset.activeRuleset.optionalRules.eitrMode);
+  const spellcastingPools = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.pools,
+  );
+  const knownSpells = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.knownSpells,
+  );
+  const spellbooks = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.spellbooks,
+  );
+  const characterClasses = useAppSelector(
+    (state) => state.characterEntry.character.classes.classes,
+  );
+  const classDataMap = useAppSelector(selectClassDataMap);
+
+  const eslByPoolId = useMemo(() => {
+    const map: Record<string, number> = {};
+    for (const pool of spellcastingPools) {
+      if (pool.id) map[pool.id] = computePoolEsl(pool, characterClasses, classDataMap);
+    }
+    return map;
+  }, [spellcastingPools, characterClasses, classDataMap]);
+
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [activeChoicePicker, setActiveChoicePicker] = useState<FeatChoice | null>(null);
+  const [weaponItems, setWeaponItems] = useState<SearchItem[]>([]);
+  const [spellItems, setSpellItems] = useState<SearchItem[]>([]);
 
   const assigned = !!slot.featName;
+  const featDef = assigned ? FeatRegistryService.getFeat(slot.featId) : undefined;
+  const requiredChoices = featDef?.choices ?? [];
+
+  // Build display suffix from stored choices, e.g. " (Necromancy)"
+  const choiceSuffix = requiredChoices
+    .map((c) => slot.featChoices[c.type])
+    .filter(Boolean)
+    .map((v) => v.charAt(0).toUpperCase() + v.slice(1))
+    .join(', ');
+  const displayName = assigned
+    ? choiceSuffix
+      ? `${slot.featName} (${choiceSuffix})`
+      : slot.featName
+    : '—— unassigned ——';
+
+  const openNextUnfilledChoice = (
+    choices: FeatChoice[],
+    currentChoices: Record<string, string>,
+  ) => {
+    const next = choices.find((c) => !currentChoices[c.type]);
+    if (next) setActiveChoicePicker(next);
+  };
+
+  // Async-load weapons when a weapon-type choice picker opens
+  useEffect(() => {
+    if (activeChoicePicker?.type !== 'weapon') return;
+    let cancelled = false;
+    GameDataService.getWeapons().then((weapons) => {
+      if (cancelled) return;
+      let items: SearchItem[];
+      if (eitrMode !== 'off') {
+        // EitR / Syren's: target weapon groups instead of individual weapons
+        const groups = Array.from(new Set(weapons.flatMap((w) => w.weaponGroup))).sort();
+        items = groups.map((g) => ({
+          key: g,
+          label: g
+            .split(' ')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' '),
+        }));
+      } else {
+        items = weapons
+          .map((w) => ({ key: w.name, label: w.name }))
+          .sort((a, b) => a.label.localeCompare(b.label));
+      }
+      setWeaponItems(items);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeChoicePicker?.type, eitrMode]);
+
+  // Async-load spells when a spell-type choice picker opens
+  useEffect(() => {
+    if (activeChoicePicker?.type !== 'spell') return;
+    let cancelled = false;
+    GameDataService.buildCastableSpellItems(
+      spellcastingPools,
+      knownSpells,
+      spellbooks,
+      characterClasses,
+      eslByPoolId,
+    )
+      .then((items) => {
+        if (!cancelled) setSpellItems(items);
+      })
+      .catch((e) => console.error('Failed to load spell items for feat choice:', e));
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    activeChoicePicker?.type,
+    spellcastingPools,
+    knownSpells,
+    spellbooks,
+    characterClasses,
+    eslByPoolId,
+  ]);
+
+  // Derive picker items — static choices resolved inline, weapon/spell choices from async state
+  const dynamicChoiceItems = useMemo<SearchItem[]>(() => {
+    if (!activeChoicePicker) return [];
+    if (activeChoicePicker.type === 'weapon') return weaponItems;
+    if (activeChoicePicker.type === 'spell') return spellItems;
+    return (activeChoicePicker.options ?? []).map((opt) => ({
+      key: opt,
+      label: opt.charAt(0).toUpperCase() + opt.slice(1),
+    }));
+  }, [activeChoicePicker, weaponItems, spellItems]);
 
   return (
     <>
@@ -82,11 +205,13 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
         onPress={() => setPickerOpen(true)}
         style={[rowStyles.row, { borderBottomColor: colors.border.DEFAULT }]}
         accessibilityRole="button"
-        accessibilityLabel={`${slot.availableAt}: ${slot.featName || 'unassigned'}`}
+        accessibilityLabel={`${slot.availableAt}: ${displayName}`}
         accessibilityHint="Tap to assign feat"
       >
         <SourceBadge source={slot.source} />
-        <Text style={[rowStyles.atLabel, { color: colors.text.tertiary }]}>{slot.availableAt}</Text>
+        <Text style={[rowStyles.atLabel, { color: colors.text.tertiary }]}>
+          {slot.sourceLabel || slot.availableAt}
+        </Text>
         <Text
           style={[
             rowStyles.featName,
@@ -97,9 +222,19 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
           ]}
           numberOfLines={1}
         >
-          {slot.featName || '—— unassigned ——'}
+          {displayName}
         </Text>
         <View style={rowStyles.actions}>
+          {assigned && requiredChoices.some((c) => !slot.featChoices[c.type]) && (
+            <Pressable
+              onPress={() => openNextUnfilledChoice(requiredChoices, slot.featChoices)}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel="Choose feat option"
+            >
+              <Text style={[rowStyles.actionIcon, { color: '#F59E0B' }]}>⚙</Text>
+            </Pressable>
+          )}
           {assigned && (
             <Pressable
               onPress={() => dispatch(unassignFeat(slot.slotId))}
@@ -160,9 +295,48 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
         onSelect={({ featId, featName }) => {
           dispatch(assignFeat({ slotId: slot.slotId, featId, featName }));
           setPickerOpen(false);
+          const def = FeatRegistryService.getFeat(featId);
+          if (def?.choices?.length) {
+            openNextUnfilledChoice(def.choices, slot.featChoices);
+          }
         }}
         onClose={() => setPickerOpen(false)}
       />
+
+      {activeChoicePicker && (
+        <SearchPickerSheet
+          visible
+          title={`${slot.featName} — ${activeChoicePicker.label}`}
+          items={dynamicChoiceItems}
+          allowCustom={activeChoicePicker.freeText}
+          onAddCustom={
+            activeChoicePicker.freeText
+              ? (name) => {
+                  const updated = { ...slot.featChoices, [activeChoicePicker.type]: name };
+                  dispatch(setFeatChoices({ slotId: slot.slotId, choices: updated }));
+                  setActiveChoicePicker(null);
+                  if (featDef?.choices) {
+                    openNextUnfilledChoice(featDef.choices, updated);
+                  }
+                }
+              : undefined
+          }
+          onSelect={(item) => {
+            const updated = { ...slot.featChoices, [activeChoicePicker.type]: item.key };
+            dispatch(setFeatChoices({ slotId: slot.slotId, choices: updated }));
+            setActiveChoicePicker(null);
+            if (featDef?.choices) {
+              openNextUnfilledChoice(featDef.choices, updated);
+            }
+          }}
+          onClose={() => setActiveChoicePicker(null)}
+          placeholder={
+            activeChoicePicker.freeText
+              ? `Type ${activeChoicePicker.label.toLowerCase()} name...`
+              : `Search ${activeChoicePicker.label.toLowerCase()}...`
+          }
+        />
+      )}
     </>
   );
 }
@@ -231,6 +405,8 @@ export function FeatSlotList() {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
   const character = useAppSelector((state) => state.characterEntry.character);
+  const [bonusLabelVisible, setBonusLabelVisible] = useState(false);
+  const [bonusLabelText, setBonusLabelText] = useState('');
 
   // Build the display slot list by merging computed slots with assigned feats
   const featSlots = useMemo<FeatSlotDisplay[]>(() => {
@@ -239,17 +415,19 @@ export function FeatSlotList() {
     // Build a map of slotId → assigned feat
     const assignedMap = new Map<
       string,
-      { featId: string; name: string; prereqOverride?: boolean }
+      { featId: string; name: string; prereqOverride?: boolean; choices: Record<string, string> }
     >();
     for (const f of character.feats.feats) {
       if (f.featId) {
         const key = `${f.source}_${f.grantedAtLevel}`;
-        assignedMap.set(key, { featId: f.featId, name: f.name, prereqOverride: f.prereqOverride });
-        assignedMap.set(f.source, {
+        const entry = {
           featId: f.featId,
           name: f.name,
           prereqOverride: f.prereqOverride,
-        });
+          choices: f.choices ?? {},
+        };
+        assignedMap.set(key, entry);
+        assignedMap.set(f.source, entry);
       }
     }
 
@@ -264,6 +442,7 @@ export function FeatSlotList() {
         featId: assigned?.featId ?? '',
         featName: assigned?.name ?? '',
         prereqOverride: assigned?.prereqOverride ?? false,
+        featChoices: assigned?.choices ?? {},
       };
     });
 
@@ -280,6 +459,8 @@ export function FeatSlotList() {
             featId: f.featId,
             featName: f.name,
             prereqOverride: f.prereqOverride ?? false,
+            featChoices: f.choices ?? {},
+            sourceLabel: f.sourceLabel,
           });
         }
       }
@@ -337,16 +518,10 @@ export function FeatSlotList() {
       )}
 
       <Pressable
-        onPress={() =>
-          dispatch(
-            addFeatSlot({
-              id: genId(),
-              source: 'bonus',
-              availableAt: 'Bonus',
-              availableAtLevel: 0,
-            }),
-          )
-        }
+        onPress={() => {
+          setBonusLabelText('');
+          setBonusLabelVisible(true);
+        }}
         style={[styles.addButton, { borderColor: colors.border.DEFAULT }]}
         accessibilityRole="button"
         accessibilityLabel="Add bonus feat slot"
@@ -355,6 +530,94 @@ export function FeatSlotList() {
           + Add bonus slot
         </Text>
       </Pressable>
+
+      <Modal
+        visible={bonusLabelVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setBonusLabelVisible(false)}
+      >
+        <Pressable style={styles.modalOverlay} onPress={() => setBonusLabelVisible(false)}>
+          <Pressable
+            style={[
+              styles.modalCard,
+              {
+                backgroundColor: isDark ? colors.bg.secondary : colors.bg.primary,
+                borderColor: colors.border.DEFAULT,
+              },
+            ]}
+            onPress={() => {}}
+          >
+            <Text style={[styles.modalTitle, { color: isDark ? fantasy.gold : fantasy.darkWood }]}>
+              Add Bonus Feat Slot
+            </Text>
+            <Text style={[styles.modalLabel, { color: colors.text.secondary }]}>
+              Source label (optional)
+            </Text>
+            <TextInput
+              value={bonusLabelText}
+              onChangeText={setBonusLabelText}
+              placeholder="e.g. Fighter 2, Wizard 5..."
+              placeholderTextColor={colors.text.tertiary}
+              autoFocus
+              style={[
+                styles.modalInput,
+                {
+                  color: colors.text.primary,
+                  backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+                  borderColor: colors.border.DEFAULT,
+                },
+              ]}
+            />
+            <View style={styles.modalButtons}>
+              <Pressable
+                onPress={() => setBonusLabelVisible(false)}
+                style={[styles.modalBtn, { borderColor: colors.border.DEFAULT }]}
+              >
+                <Text
+                  style={{
+                    color: colors.text.tertiary,
+                    fontFamily: 'LibreBaskerville',
+                    fontSize: 14,
+                  }}
+                >
+                  Cancel
+                </Text>
+              </Pressable>
+              <Pressable
+                onPress={() => {
+                  const label = bonusLabelText.trim() || undefined;
+                  dispatch(
+                    addFeatSlot({
+                      id: genId(),
+                      source: 'bonus',
+                      availableAt: 'Bonus',
+                      availableAtLevel: 0,
+                      sourceLabel: label,
+                    }),
+                  );
+                  setBonusLabelVisible(false);
+                }}
+                style={[
+                  styles.modalBtn,
+                  { borderColor: fantasy.bronze, backgroundColor: 'rgba(140,90,40,0.1)' },
+                ]}
+              >
+                <Text
+                  style={{
+                    color: isDark ? fantasy.gold : fantasy.darkWood,
+                    fontFamily: 'LibreBaskerville',
+                    fontSize: 14,
+                    fontWeight: '700',
+                  }}
+                >
+                  Add Slot
+                </Text>
+              </Pressable>
+            </View>
+          </Pressable>
+        </Pressable>
+      </Modal>
     </View>
   );
 }
@@ -403,5 +666,48 @@ const styles = StyleSheet.create({
     fontFamily: 'LibreBaskerville',
     fontSize: 13,
     fontWeight: '600',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+  },
+  modalCard: {
+    width: '100%',
+    borderRadius: 12,
+    borderWidth: 1,
+    padding: 20,
+    gap: 12,
+  },
+  modalTitle: {
+    fontFamily: 'Cinzel',
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  modalLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+  },
+  modalInput: {
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    gap: 12,
+    marginTop: 4,
+  },
+  modalBtn: {
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 10,
+    alignItems: 'center',
   },
 });

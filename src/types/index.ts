@@ -7,7 +7,8 @@ import {
   LevelIncrementSlot,
   EditorEquipmentItem,
 } from './character';
-import { AbilityScores } from './abilities';
+import { AbilityScores, AbilityKey } from './abilities';
+import { BonusType } from './base';
 import { CharacterClasses } from './classes';
 import { CombatStats } from './combat';
 import { Skills } from './skills';
@@ -24,6 +25,13 @@ import { AppliedTemplate, GrantedBonus, LevelUpDecision, CharacterCRTracking } f
 import { Ruleset, CampaignRulesetLink } from './ruleset';
 import { CompanionInstance } from './companions';
 import { Eidolon } from './eidolon';
+
+export interface ManualAbilityBonus {
+  ability: AbilityKey;
+  bonusType: BonusType;
+  value: number;
+  source?: string;
+}
 
 export interface Character {
   info: CharacterInfo;
@@ -78,6 +86,10 @@ export interface Character {
   // Editor metadata — simplified equipment list (full typed arrays in `equipment` stay empty
   // until item picker provides full definition data)
   editorEquipment?: EditorEquipmentItem[];
+
+  // Editor metadata — user-entered typed bonuses for ability scores (morale, sacred, etc.)
+  // Stored here so the pipeline can pick them up as effects without overwriting computed bonuses.
+  manualAbilityBonuses?: ManualAbilityBonus[];
 
   // Version tracking
   schemaVersion: string;

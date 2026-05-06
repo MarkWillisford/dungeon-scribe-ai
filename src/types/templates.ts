@@ -11,6 +11,10 @@ export type LevelUpDecision =
 export interface AppliedTemplate {
   templateId: string; // Reference to template definition in Firestore
   name: string; // Snapshotted name
+  abilityScoreChanges?: Array<{
+    ability: 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
+    change: number;
+  }>; // Snapshotted at add-time for pipeline use
   appliedAs: 'la' | 'cr';
   la?: number; // LA value if appliedAs === 'la'
   cr?: number; // CR value if appliedAs === 'cr'

@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { SearchPickerSheet, type SearchItem } from '@/components/ui/SearchPickerSheet';
 import { CompanionPickerSheet } from '@/components/character/direct-entry/CompanionPickerSheet';
@@ -13,11 +14,48 @@ import { type ClassChoice } from '@/types/classes';
 import { type ClassChoiceDefinition } from '@/types/classChoices';
 import { GameDataService } from '@/services/GameDataService';
 import {
-  effectiveLevelFromDraftClass,
+  computeCompanionEffectiveLevel,
   pickerFilterFromDraftClass,
 } from '@/services/CompanionService';
 import type { AnimalCompanionEntry } from '@/types/animalCompanions';
 import { makeCompanionInstanceId } from '@/utils/companionUtils';
+import { computePoolEsl } from '@/utils/spellcastingUtils';
+import { selectClassDataMap } from '@/store/slices/gameDataSlice';
+
+// Static PF1e class-to-casting-type map. Used to resolve castingType filter tokens
+// (e.g. castingType: 'divine') into concrete class names from the character's class list
+// without requiring spellcasting pools to be configured first.
+const CLASS_CASTING_TYPE: Record<string, 'divine' | 'arcane' | 'psychic' | 'occult'> = {
+  // Divine full casters
+  cleric: 'divine',
+  druid: 'divine',
+  oracle: 'divine',
+  warpriest: 'divine',
+  shaman: 'divine',
+  // Divine half casters
+  paladin: 'divine',
+  ranger: 'divine',
+  inquisitor: 'divine',
+  hunter: 'divine',
+  // Arcane full casters
+  wizard: 'arcane',
+  sorcerer: 'arcane',
+  arcanist: 'arcane',
+  witch: 'arcane',
+  // Arcane half casters
+  bard: 'arcane',
+  magus: 'arcane',
+  skald: 'arcane',
+  bloodrager: 'arcane',
+  summoner: 'arcane',
+  // Psychic
+  psychic: 'psychic',
+  mesmerist: 'psychic',
+  spiritualist: 'psychic',
+  medium: 'psychic',
+  // Occult
+  occultist: 'occult',
+};
 
 interface ClassChoiceRowProps {
   classId: string;
@@ -142,13 +180,46 @@ export function ClassChoiceRow({
 }: ClassChoiceRowProps) {
   const { colors, fantasy, isDark } = useTheme();
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const [pickerOpen, setPickerOpen] = useState(false);
   const [companionPickerOpen, setCompanionPickerOpen] = useState(false);
+  const [companionPickerIsMount, setCompanionPickerIsMount] = useState(false);
   const [rawPickerItems, setRawPickerItems] = useState<SearchItem[]>([]);
 
   const draftClass = useAppSelector((state) =>
     state.characterEntry.character.classes.classes.find((c) => c.id === classId),
   );
+
+  const characterClasses = useAppSelector(
+    (state) => state.characterEntry.character.classes.classes,
+  );
+
+  const spellcastingPools = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.pools,
+  );
+
+  const knownSpells = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.knownSpells,
+  );
+
+  const spellbooks = useAppSelector(
+    (state) => state.characterEntry.character.spellcasting.spellbooks,
+  );
+
+  const classDataMap = useAppSelector(selectClassDataMap);
+
+  // Pre-compute ESL per pool the same way the Spellcasting tab does, so that
+  // buildCastableSpellItems can determine max spell level even when
+  // pool.effectiveSpellcastingLevel hasn't been persisted (it never is).
+  const eslByPoolId = useMemo(() => {
+    const map: Record<string, number> = {};
+    for (const pool of spellcastingPools) {
+      if (pool.id) {
+        map[pool.id] = computePoolEsl(pool, characterClasses, classDataMap);
+      }
+    }
+    return map;
+  }, [spellcastingPools, characterClasses, classDataMap]);
 
   // Companion currently granted by this specific class choice, if any.
   const existingCompanion = useAppSelector((state) =>
@@ -160,14 +231,51 @@ export function ClassChoiceRow({
     ),
   );
 
+  const originalCharacterId = useAppSelector((state) => state.characterEntry.originalCharacterId);
+  const routeCharacterId = originalCharacterId ?? 'draft';
+
   useEffect(() => {
     let stale = false;
     if (definition.optionSource === 'collection' && definition.collectionName) {
-      const resolvedFilter = resolveFilterTokens(
-        definition.collectionFilter ?? {},
-        siblingChoices ?? [],
-        characterDeity,
-      );
+      // 1. Merge per-level overrides from levelFilterTable into the base filter.
+      const levelOverrides =
+        (definition.levelFilterTable as Record<number, Record<string, unknown>> | undefined)?.[
+          takenAtLevel
+        ] ?? {};
+      const baseFilter = { ...(definition.collectionFilter ?? {}), ...levelOverrides };
+
+      // 2. Resolve {chosen_X} / {chosen_deity} tokens.
+      let resolvedFilter = resolveFilterTokens(baseFilter, siblingChoices ?? [], characterDeity);
+
+      // 3a. character_castable — respects prepared/spontaneous/spellbook scope per pool.
+      if (resolvedFilter.castingType === 'character_castable') {
+        GameDataService.buildCastableSpellItems(
+          spellcastingPools,
+          knownSpells,
+          spellbooks,
+          characterClasses,
+          eslByPoolId,
+        )
+          .then((items) => {
+            if (!stale) setRawPickerItems(items);
+          })
+          .catch((e) => console.error('Failed to build castable spell items:', e));
+        return () => {
+          stale = true;
+        };
+      }
+
+      // 3b. Resolve castingType ('divine' | 'arcane' | ...) → classNames from class list.
+      // Used by definitions that want a type-filtered class list regardless of spellcasting setup.
+      if (resolvedFilter.castingType !== undefined) {
+        const castingType = resolvedFilter.castingType as string;
+        const classNames = characterClasses
+          .map((c) => c.name.toLowerCase())
+          .filter((name) => CLASS_CASTING_TYPE[name] === castingType);
+        const { castingType: _dropped, ...rest } = resolvedFilter;
+        resolvedFilter = { ...rest, classNames };
+      }
+
       GameDataService.getClassChoiceItems(definition.collectionName, resolvedFilter)
         .then((items) => {
           if (!stale) setRawPickerItems(items);
@@ -181,7 +289,17 @@ export function ClassChoiceRow({
     return () => {
       stale = true;
     };
-  }, [definition, siblingChoices, characterDeity]);
+  }, [
+    definition,
+    siblingChoices,
+    characterDeity,
+    takenAtLevel,
+    characterClasses,
+    spellcastingPools,
+    knownSpells,
+    spellbooks,
+    eslByPoolId,
+  ]);
 
   const pickerItems = useMemo(
     () =>
@@ -213,9 +331,11 @@ export function ClassChoiceRow({
     return pickerItems.find((i) => i.key === id)?.label ?? id;
   }, [currentChoice, pickerItems]);
 
+  const COMPANION_KEYS = new Set(['animal_companion', 'mount']);
+
   const handleSelect = (item: SearchItem) => {
-    const wasAnimalCompanion = currentChoice?.selection === 'animal_companion';
-    const nowAnimalCompanion = item.key === 'animal_companion';
+    const wasCompanion = COMPANION_KEYS.has((currentChoice?.selection as string) ?? '');
+    const nowCompanion = COMPANION_KEYS.has(item.key);
 
     dispatch(
       upsertClassChoice({
@@ -230,17 +350,14 @@ export function ClassChoiceRow({
     );
     setPickerOpen(false);
 
-    // Switching away from animal_companion removes the tied instance.
-    if (wasAnimalCompanion && !nowAnimalCompanion && existingCompanion) {
+    if (wasCompanion && !nowCompanion && existingCompanion) {
       dispatch(removeCompanion(existingCompanion.instanceId));
     }
 
-    // Switching TO animal_companion opens the form picker. If the slot
-    // already has a companion (shouldn't normally happen, but guard anyway),
-    // skip reopening.
-    if (nowAnimalCompanion && !existingCompanion) {
-      setCompanionPickerOpen(true);
-    }
+    // Neither animal_companion nor mount auto-opens the picker.
+    // A "Configure" button appears below the row for both, so the user can
+    // build or revisit the companion at any level rather than being forced
+    // to do it at the moment of selection.
   };
 
   const handleCompanionSelect = (entry: AnimalCompanionEntry) => {
@@ -249,16 +366,18 @@ export function ClassChoiceRow({
         instanceId: makeCompanionInstanceId(),
         sourceEntryId: entry.id,
         name: entry.name,
+        isMount: companionPickerIsMount,
         grantedBy: {
           type: 'class',
           classEntryId: classId,
           className: draftClass?.name ?? '',
           classChoiceId: definition.id,
         },
-        effectiveProgressionLevel: effectiveLevelFromDraftClass(draftClass),
+        effectiveProgressionLevel: computeCompanionEffectiveLevel(draftClass!, characterClasses),
       }),
     );
     setCompanionPickerOpen(false);
+    setCompanionPickerIsMount(false);
   };
 
   const hasItems = pickerItems.length > 0;
@@ -314,16 +433,182 @@ export function ClassChoiceRow({
         placeholder={`Search ${definition.featureName.toLowerCase()}...`}
       />
 
+      {/* Companion / mount section — visible when the choice is animal_companion or mount */}
+      {COMPANION_KEYS.has((currentChoice?.selection as string) ?? '') &&
+        (() => {
+          const isMountSelection = currentChoice?.selection === 'mount';
+          const label = isMountSelection ? 'Special Mount' : 'Animal Companion';
+          const configureBtnLabel = isMountSelection
+            ? '+ Configure Special Mount'
+            : '+ Configure Animal Companion';
+          const configureBtnSub = isMountSelection
+            ? 'Choose the mount type — revisit as you gain paladin levels'
+            : 'Choose the companion type — revisit as you gain levels';
+
+          return (
+            <View
+              style={[
+                mountStyles.section,
+                {
+                  borderColor: isDark ? 'rgba(212,175,55,0.3)' : 'rgba(120,80,20,0.2)',
+                  backgroundColor: isDark ? 'rgba(212,175,55,0.05)' : 'rgba(120,80,20,0.04)',
+                },
+              ]}
+            >
+              {existingCompanion ? (
+                <View style={mountStyles.mountCard}>
+                  <View style={mountStyles.mountInfo}>
+                    <Text style={[mountStyles.mountLabel, { color: colors.text.tertiary }]}>
+                      {label}
+                    </Text>
+                    <Text style={[mountStyles.mountName, { color: colors.text.primary }]}>
+                      {existingCompanion.name}
+                    </Text>
+                  </View>
+                  <View style={mountStyles.mountActions}>
+                    <Pressable
+                      onPress={() =>
+                        router.push(
+                          `/characters/${routeCharacterId}/companions/${existingCompanion.instanceId}`,
+                        )
+                      }
+                      style={[
+                        mountStyles.actionBtn,
+                        { borderColor: isDark ? fantasy.gold : fantasy.bronze },
+                      ]}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Edit ${label}`}
+                    >
+                      <Text
+                        style={[
+                          mountStyles.actionText,
+                          { color: isDark ? fantasy.gold : fantasy.darkWood },
+                        ]}
+                      >
+                        Edit
+                      </Text>
+                    </Pressable>
+                    <Pressable
+                      onPress={() => dispatch(removeCompanion(existingCompanion.instanceId))}
+                      style={[mountStyles.actionBtn, { borderColor: colors.text.tertiary }]}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Remove ${label}`}
+                    >
+                      <Text style={[mountStyles.actionText, { color: colors.text.tertiary }]}>
+                        Remove
+                      </Text>
+                    </Pressable>
+                  </View>
+                </View>
+              ) : (
+                <Pressable
+                  onPress={() => {
+                    setCompanionPickerIsMount(isMountSelection);
+                    setCompanionPickerOpen(true);
+                  }}
+                  style={[
+                    mountStyles.configureBtn,
+                    { borderColor: isDark ? fantasy.gold : fantasy.bronze },
+                  ]}
+                  accessibilityRole="button"
+                  accessibilityLabel={configureBtnLabel}
+                >
+                  <Text
+                    style={[
+                      mountStyles.configureBtnText,
+                      { color: isDark ? fantasy.gold : fantasy.darkWood },
+                    ]}
+                  >
+                    {configureBtnLabel}
+                  </Text>
+                  <Text style={[mountStyles.configureBtnSub, { color: colors.text.tertiary }]}>
+                    {configureBtnSub}
+                  </Text>
+                </Pressable>
+              )}
+            </View>
+          );
+        })()}
+
       <CompanionPickerSheet
         visible={companionPickerOpen}
-        title={`${featureLabel} — Choose Companion`}
+        title={
+          companionPickerIsMount ? 'Choose Special Mount' : `${featureLabel} — Choose Companion`
+        }
         pickerFilter={pickerFilterFromDraftClass(draftClass)}
         onSelect={handleCompanionSelect}
-        onClose={() => setCompanionPickerOpen(false)}
+        onClose={() => {
+          setCompanionPickerOpen(false);
+          setCompanionPickerIsMount(false);
+        }}
       />
     </>
   );
 }
+
+const mountStyles = StyleSheet.create({
+  section: {
+    marginHorizontal: 4,
+    marginBottom: 6,
+    borderRadius: 8,
+    borderWidth: 1,
+    overflow: 'hidden',
+  },
+  mountCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    gap: 12,
+  },
+  mountInfo: {
+    flex: 1,
+    gap: 2,
+  },
+  mountLabel: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 10,
+    fontStyle: 'italic',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  mountName: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  mountActions: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  actionBtn: {
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    borderRadius: 6,
+    borderWidth: 1,
+  },
+  actionText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+  },
+  configureBtn: {
+    padding: 12,
+    alignItems: 'center',
+    gap: 4,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderStyle: 'dashed',
+  },
+  configureBtnText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  configureBtnSub: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    fontStyle: 'italic',
+  },
+});
 
 const styles = StyleSheet.create({
   row: {
