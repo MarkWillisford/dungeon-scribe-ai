@@ -446,15 +446,17 @@ export function FeatSlotList() {
       };
     });
 
-    // Also include manually-added bonus slots that aren't in the computed list
+    // Also include manually-added bonus slots that aren't in the computed list.
+    // f.source is stored as 'bonus_N' by makeFeatSource — use it directly as slotId
+    // so each slot has a stable unique key and remove/assign work correctly.
     for (const f of character.feats.feats) {
-      if (f.source === 'bonus') {
-        const slotId = `bonus_${f.grantedAtLevel}`;
+      if (f.source.startsWith('bonus_')) {
+        const slotId = f.source;
         if (!slots.find((s) => s.slotId === slotId)) {
           slots.push({
             slotId,
             source: 'bonus',
-            availableAt: 'Bonus',
+            availableAt: f.sourceLabel ?? 'Bonus',
             availableAtLevel: f.grantedAtLevel,
             featId: f.featId,
             featName: f.name,
@@ -587,12 +589,15 @@ export function FeatSlotList() {
               <Pressable
                 onPress={() => {
                   const label = bonusLabelText.trim() || undefined;
+                  const bonusCount = character.feats.feats.filter((f) =>
+                    f.source.startsWith('bonus_'),
+                  ).length;
                   dispatch(
                     addFeatSlot({
                       id: genId(),
                       source: 'bonus',
                       availableAt: 'Bonus',
-                      availableAtLevel: 0,
+                      availableAtLevel: bonusCount,
                       sourceLabel: label,
                     }),
                   );
