@@ -60,7 +60,7 @@ function buildPresets(collection: EditorEquipmentItem['collection']): QuickPrese
     return [
       {
         label: 'MW',
-        effect: { type: 'bonus', target: 'attack.melee', bonusType: BonusType.ENHANCEMENT, value: 1 },
+        effect: { type: 'bonus', target: 'attack.melee', bonusType: BonusType.UNTYPED, value: 1 },
       },
       ...enhancements,
       {
@@ -86,7 +86,7 @@ function buildPresets(collection: EditorEquipmentItem['collection']): QuickPrese
     return [
       {
         label: 'MW',
-        effect: { type: 'bonus', target: 'ac.armor', bonusType: BonusType.ENHANCEMENT, value: 1 },
+        effect: { type: 'bonus', target: 'ac.armor', bonusType: BonusType.UNTYPED, value: 1 },
       },
       ...enhancements,
       {
@@ -326,7 +326,14 @@ export function ItemEffectEditorSheet({
             { backgroundColor: headerBg, borderBottomColor: colors.border.DEFAULT },
           ]}
         >
-          <Pressable onPress={() => { setSheetView('main'); setFeatQuery(''); }} hitSlop={12} testID="feat-search-back-btn">
+          <Pressable
+            onPress={() => {
+              setSheetView('main');
+              setFeatQuery('');
+            }}
+            hitSlop={12}
+            testID="feat-search-back-btn"
+          >
             <Text style={[styles.backBtn, { color: gold }]}>‹ Back</Text>
           </Pressable>
           <Text style={[styles.headerTitle, { color: gold }]}>Add Granted Feat</Text>
@@ -662,26 +669,24 @@ export function ItemEffectEditorSheet({
         {/* Granted Feats section */}
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: colors.text.secondary }]}>Granted Feats</Text>
-          <Pressable
-            testID="add-feat-btn"
-            onPress={() => setSheetView('featSearch')}
-            hitSlop={10}
-          >
+          <Pressable testID="add-feat-btn" onPress={() => setSheetView('featSearch')} hitSlop={10}>
             <Text style={[styles.sectionAddBtn, { color: gold }]}>+ Add</Text>
           </Pressable>
         </View>
 
         {workingFeatIds.length === 0 && (
-          <Text style={[styles.emptyText, { color: colors.text.tertiary, marginHorizontal: 16, marginBottom: 8 }]}>
+          <Text
+            style={[
+              styles.emptyText,
+              { color: colors.text.tertiary, marginHorizontal: 16, marginBottom: 8 },
+            ]}
+          >
             None
           </Text>
         )}
 
         {workingFeatIds.map((id) => (
-          <View
-            key={id}
-            style={[styles.effectRow, { borderBottomColor: colors.border.DEFAULT }]}
-          >
+          <View key={id} style={[styles.effectRow, { borderBottomColor: colors.border.DEFAULT }]}>
             <Text
               style={[styles.effectLabel, { color: colors.text.primary, flex: 1 }]}
               numberOfLines={1}
