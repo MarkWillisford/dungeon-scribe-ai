@@ -674,6 +674,10 @@ export function ItemEffectEditorSheet({
           </Pressable>
         </View>
 
+        <Text style={[styles.featDisclaimerText, { color: colors.text.tertiary }]}>
+          Feat grants are stored but not yet applied to computed stats.
+        </Text>
+
         {workingFeatIds.length === 0 && (
           <Text
             style={[
@@ -920,6 +924,13 @@ const styles = StyleSheet.create({
     fontFamily: 'LibreBaskerville',
     fontSize: 14,
     fontWeight: '700',
+  },
+  featDisclaimerText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 11,
+    fontStyle: 'italic',
+    marginHorizontal: 16,
+    marginBottom: 8,
   },
   sectionHeader: {
     flexDirection: 'row',
