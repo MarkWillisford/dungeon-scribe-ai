@@ -160,7 +160,6 @@ export function ItemEffectEditorSheet({
   const [featResults, setFeatResults] = useState<FeatDefinition[]>([]);
   const [featNameMap, setFeatNameMap] = useState<Map<string, string>>(new Map());
 
-  // Populate feat name map from working feat IDs for display
   /* istanbul ignore next */
   useEffect(() => {
     if (workingFeatIds.length === 0) return;
@@ -177,7 +176,6 @@ export function ItemEffectEditorSheet({
     });
   }, [workingFeatIds]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Search feats when query changes in featSearch view
   /* istanbul ignore next */
   useEffect(() => {
     if (sheetView !== 'featSearch' || !featQuery) return;

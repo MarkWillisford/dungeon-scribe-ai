@@ -286,7 +286,6 @@ function ContainerList({
                                 onPress={() => onReequip(item.id)}
                                 hitSlop={8}
                                 testID={`reequip-${item.id}`}
-                                style={styles.reequipBtn}
                               >
                                 <Text
                                   style={[
@@ -299,9 +298,7 @@ function ContainerList({
                               </Pressable>
                             )}
                             <Pressable onPress={() => onRemove(item.id)} hitSlop={8}>
-                              <Text
-                                style={[styles.removeBtnText, { color: colors.text.tertiary }]}
-                              >
+                              <Text style={[styles.removeBtnText, { color: colors.text.tertiary }]}>
                                 ✕
                               </Text>
                             </Pressable>
@@ -775,7 +772,6 @@ const styles = StyleSheet.create({
   containerItem: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   containerItemName: { fontFamily: 'LibreBaskerville', fontSize: 13, flex: 1 },
   containerItemActions: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  reequipBtn: {},
   reequipBtnText: { fontFamily: 'LibreBaskerville', fontSize: 12, fontWeight: '700' },
   iounRow: {
     flexDirection: 'row',
