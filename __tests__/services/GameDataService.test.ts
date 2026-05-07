@@ -1333,4 +1333,71 @@ describe('GameDataService', () => {
       expect(clwItems).toHaveLength(1);
     });
   });
+
+  describe('searchMagicItems', () => {
+    test('returns items matching query (case-insensitive substring)', async () => {
+      const results = await GameDataService.searchMagicItems('cloak');
+      expect(Array.isArray(results)).toBe(true);
+      results.forEach((item) => {
+        expect(item.name.toLowerCase()).toContain('cloak');
+      });
+    });
+
+    test('returns empty array when query is empty', async () => {
+      const results = await GameDataService.searchMagicItems('');
+      expect(results).toEqual([]);
+    });
+
+    test('returns empty array when no items match', async () => {
+      const results = await GameDataService.searchMagicItems('zzzznotanitem99999');
+      expect(results).toEqual([]);
+    });
+
+    test('caps results at 50', async () => {
+      // 'ring' appears in many items — verify cap is enforced
+      const results = await GameDataService.searchMagicItems('ring');
+      expect(results.length).toBeLessThanOrEqual(50);
+    });
+
+    test('results include expected fields', async () => {
+      const results = await GameDataService.searchMagicItems('ring');
+      if (results.length > 0) {
+        expect(results[0]).toHaveProperty('id');
+        expect(results[0]).toHaveProperty('name');
+      }
+    });
+  });
+
+  describe('searchFeats', () => {
+    test('returns feats matching query (case-insensitive substring)', async () => {
+      const results = await GameDataService.searchFeats('dodge');
+      expect(Array.isArray(results)).toBe(true);
+      results.forEach((feat) => {
+        expect(feat.name.toLowerCase()).toContain('dodge');
+      });
+    });
+
+    test('returns empty array when query is empty', async () => {
+      const results = await GameDataService.searchFeats('');
+      expect(results).toEqual([]);
+    });
+
+    test('returns empty array when no feats match', async () => {
+      const results = await GameDataService.searchFeats('zzzznotafeat99999');
+      expect(results).toEqual([]);
+    });
+
+    test('caps results at 50', async () => {
+      const results = await GameDataService.searchFeats('feat');
+      expect(results.length).toBeLessThanOrEqual(50);
+    });
+
+    test('results include expected fields', async () => {
+      const results = await GameDataService.searchFeats('power attack');
+      if (results.length > 0) {
+        expect(results[0]).toHaveProperty('id');
+        expect(results[0]).toHaveProperty('name');
+      }
+    });
+  });
 });

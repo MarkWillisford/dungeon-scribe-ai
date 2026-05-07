@@ -1607,6 +1607,7 @@ const characterEntrySlice = createSlice({
       if (item) {
         item.slot = action.payload.slot;
         item.containerId = undefined;
+        item.unequippedFromSlot = undefined;
         syncEnhancementBonuses(state.character);
         state.isDirty = true;
       }
@@ -1615,10 +1616,41 @@ const characterEntrySlice = createSlice({
     unassignEquipmentSlot(state, action: PayloadAction<string>) {
       const item = state.character.editorEquipment?.find((e) => e.id === action.payload);
       if (item) {
+        item.unequippedFromSlot = item.slot;
+        const firstContainer = state.character.editorEquipment?.find(
+          (e) => e.isContainer && !e.slot,
+        );
+        if (firstContainer) {
+          item.containerId = firstContainer.id;
+        }
         item.slot = undefined;
         syncEnhancementBonuses(state.character);
         state.isDirty = true;
       }
+    },
+
+    reequipFromContainer(state, action: PayloadAction<string>) {
+      const item = state.character.editorEquipment?.find((e) => e.id === action.payload);
+      if (!item?.unequippedFromSlot) return;
+      const targetSlot = item.unequippedFromSlot;
+      // Displace anything currently in that slot back into a container
+      const displaced = state.character.editorEquipment?.find(
+        (e) => e.slot === targetSlot && e.id !== item.id,
+      );
+      if (displaced) {
+        const firstContainer = state.character.editorEquipment?.find(
+          (e) => e.isContainer && !e.slot && e.id !== item.id,
+        );
+        displaced.slot = undefined;
+        if (firstContainer) {
+          displaced.containerId = firstContainer.id;
+        }
+      }
+      item.slot = targetSlot;
+      item.unequippedFromSlot = undefined;
+      item.containerId = undefined;
+      syncEnhancementBonuses(state.character);
+      state.isDirty = true;
     },
 
     assignEquipmentContainer(state, action: PayloadAction<{ id: string; containerId: string }>) {
@@ -1982,6 +2014,7 @@ export const {
   updateEquipment,
   assignEquipmentSlot,
   unassignEquipmentSlot,
+  reequipFromContainer,
   assignEquipmentContainer,
   addEidolon,
   removeEidolon,

@@ -52,7 +52,7 @@ const SECTION_LABELS: Record<string, string> = {
   magicItems: 'Magic Items',
 };
 
-const SLOT_TITLES: Record<string, string> = {
+export const SLOT_TITLES: Record<string, string> = {
   head: 'Head Slot',
   headband: 'Headband Slot',
   eyes: 'Eyes Slot',
