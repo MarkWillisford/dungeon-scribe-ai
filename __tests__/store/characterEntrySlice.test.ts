@@ -81,6 +81,7 @@ import reducer, {
   assignEquipmentSlot,
   unassignEquipmentSlot,
   assignEquipmentContainer,
+  reequipFromContainer,
   setCharacterNotes,
   setSaving,
   setSaveError,
@@ -3340,5 +3341,93 @@ describe('characterEntrySlice — removeTemplate and updateTemplate branches', (
     state = reducer(state, addTemplate(makeTemplate('tmpl-2', { name: 'Vampire' })));
     state = reducer(state, updateTemplate(makeTemplate('tmpl-2', { name: 'Vampire (Greater)' })));
     expect(state.character.appliedTemplates[0].name).toBe('Vampire (Greater)');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// reequipFromContainer
+// ---------------------------------------------------------------------------
+
+describe('characterEntrySlice — reequipFromContainer', () => {
+  it('re-equips item to its unequippedFromSlot and clears tracking fields', () => {
+    let state = reducer(
+      makeInitialState(),
+      addEquipment(
+        makeEquipmentItem('amulet-1', { containerId: 'bag-1', unequippedFromSlot: 'neck' }),
+      ),
+    );
+    state = reducer(state, reequipFromContainer('amulet-1'));
+    const item = state.character.editorEquipment!.find((e) => e.id === 'amulet-1')!;
+    expect(item.slot).toBe('neck');
+    expect(item.unequippedFromSlot).toBeUndefined();
+    expect(item.containerId).toBeUndefined();
+    expect(state.isDirty).toBe(true);
+  });
+
+  it('is a no-op when unequippedFromSlot is not set on the item', () => {
+    let state = reducer(
+      makeInitialState(),
+      addEquipment(makeEquipmentItem('amulet-1', { containerId: 'bag-1' })),
+    );
+    const snapshot = JSON.stringify(state.character.editorEquipment);
+    state = reducer(state, reequipFromContainer('amulet-1'));
+    expect(JSON.stringify(state.character.editorEquipment)).toBe(snapshot);
+  });
+
+  it('is a no-op when the item id is not found', () => {
+    let state = reducer(
+      makeInitialState(),
+      addEquipment(makeEquipmentItem('amulet-1', { unequippedFromSlot: 'neck' })),
+    );
+    const snapshot = JSON.stringify(state.character.editorEquipment);
+    state = reducer(state, reequipFromContainer('does-not-exist'));
+    expect(JSON.stringify(state.character.editorEquipment)).toBe(snapshot);
+  });
+
+  it('displaces the current occupant of the target slot, clearing its slot', () => {
+    let state = reducer(
+      makeInitialState(),
+      addEquipment(makeEquipmentItem('belt-old', { slot: 'belt' })),
+    );
+    state = reducer(
+      state,
+      addEquipment(makeEquipmentItem('belt-new', { unequippedFromSlot: 'belt' })),
+    );
+    state = reducer(state, reequipFromContainer('belt-new'));
+    const displaced = state.character.editorEquipment!.find((e) => e.id === 'belt-old')!;
+    expect(displaced.slot).toBeUndefined();
+  });
+
+  it('sets displaced.containerId to the first available container when one exists', () => {
+    let state = reducer(
+      makeInitialState(),
+      addEquipment(makeEquipmentItem('bag-1', { isContainer: true })),
+    );
+    state = reducer(state, addEquipment(makeEquipmentItem('belt-old', { slot: 'belt' })));
+    state = reducer(
+      state,
+      addEquipment(
+        makeEquipmentItem('belt-new', { unequippedFromSlot: 'belt', containerId: 'bag-1' }),
+      ),
+    );
+    state = reducer(state, reequipFromContainer('belt-new'));
+    const displaced = state.character.editorEquipment!.find((e) => e.id === 'belt-old')!;
+    expect(displaced.containerId).toBe('bag-1');
+    expect(displaced.unequippedFromSlot).toBe('belt');
+  });
+
+  it('does not set containerId on displaced item when no container exists', () => {
+    let state = reducer(
+      makeInitialState(),
+      addEquipment(makeEquipmentItem('belt-old', { slot: 'belt' })),
+    );
+    state = reducer(
+      state,
+      addEquipment(makeEquipmentItem('belt-new', { unequippedFromSlot: 'belt' })),
+    );
+    state = reducer(state, reequipFromContainer('belt-new'));
+    const displaced = state.character.editorEquipment!.find((e) => e.id === 'belt-old')!;
+    expect(displaced.slot).toBeUndefined();
+    expect(displaced.containerId).toBeUndefined();
   });
 });
