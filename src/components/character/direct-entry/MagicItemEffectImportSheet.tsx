@@ -36,7 +36,7 @@ export function MagicItemEffectImportSheet({
   useEffect(() => {
     if (!visible || !query) return;
     let cancelled = false;
-    setLoading(true); // eslint-disable-line react-hooks/set-state-in-effect
+    setLoading(true); // eslint-disable-line react-hooks/set-state-in-effect -- intentional: synchronously setting loading state at effect start before async work begins
     GameDataService.searchMagicItems(query).then((items) => {
       if (!cancelled) {
         setResults(items);
