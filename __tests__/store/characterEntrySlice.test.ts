@@ -1886,14 +1886,46 @@ describe('characterEntrySlice — equipment', () => {
   });
 
   describe('unassignEquipmentSlot', () => {
-    it('clears slot', () => {
+    it('clears slot and sets unequippedFromSlot', () => {
       let state = reducer(
         makeInitialState(),
         addEquipment(makeEquipmentItem('eq-1', { slot: 'belt' })),
       );
       state = reducer(state, unassignEquipmentSlot('eq-1'));
       expect(state.character.editorEquipment![0].slot).toBeUndefined();
+      expect(state.character.editorEquipment![0].unequippedFromSlot).toBe('belt');
       expect(state.isDirty).toBe(true);
+    });
+
+    it('sets containerId to first container when one exists', () => {
+      let state = reducer(
+        makeInitialState(),
+        addEquipment(makeEquipmentItem('bag-1', { isContainer: true })),
+      );
+      state = reducer(state, addEquipment(makeEquipmentItem('eq-1', { slot: 'belt' })));
+      state = reducer(state, unassignEquipmentSlot('eq-1'));
+      const item = state.character.editorEquipment!.find((e) => e.id === 'eq-1')!;
+      expect(item.containerId).toBe('bag-1');
+    });
+
+    it('leaves containerId undefined when no container exists', () => {
+      let state = reducer(
+        makeInitialState(),
+        addEquipment(makeEquipmentItem('eq-1', { slot: 'belt' })),
+      );
+      state = reducer(state, unassignEquipmentSlot('eq-1'));
+      expect(state.character.editorEquipment![0].containerId).toBeUndefined();
+    });
+
+    it('clears slot in all cases', () => {
+      let state = reducer(
+        makeInitialState(),
+        addEquipment(makeEquipmentItem('bag-1', { isContainer: true })),
+      );
+      state = reducer(state, addEquipment(makeEquipmentItem('eq-1', { slot: 'head' })));
+      state = reducer(state, unassignEquipmentSlot('eq-1'));
+      const item = state.character.editorEquipment!.find((e) => e.id === 'eq-1')!;
+      expect(item.slot).toBeUndefined();
     });
   });
 
