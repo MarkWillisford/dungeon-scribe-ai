@@ -1607,6 +1607,7 @@ const characterEntrySlice = createSlice({
       if (item) {
         item.slot = action.payload.slot;
         item.containerId = undefined;
+        item.unequippedFromSlot = undefined;
         syncEnhancementBonuses(state.character);
         state.isDirty = true;
       }
