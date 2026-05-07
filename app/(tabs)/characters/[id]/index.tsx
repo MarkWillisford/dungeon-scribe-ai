@@ -113,9 +113,9 @@ export default function CharacterDetailScreen() {
         {activeTab === 'feats' && <FeatsTab character={activeCharacter} dispatch={dispatch} />}
       </ScrollView>
 
-      <View style={styles.dangerZone}>
+      <View style={[styles.dangerZone, { borderTopColor: colors.accent.DEFAULT }]}>
         <Pressable
-          style={styles.deleteButton}
+          style={[styles.deleteButton, { borderColor: colors.accent.DEFAULT }]}
           onPress={() =>
             Alert.alert(
               'Delete Character',
@@ -142,7 +142,9 @@ export default function CharacterDetailScreen() {
           }
           testID="delete-character-button"
         >
-          <Text style={styles.deleteButtonText}>Delete Character</Text>
+          <Text style={[styles.deleteButtonText, { color: colors.accent.DEFAULT }]}>
+            Delete Character
+          </Text>
         </Pressable>
       </View>
     </SafeAreaView>
@@ -606,7 +608,6 @@ const styles = StyleSheet.create({
     marginTop: 32,
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: '#5C1A1A',
     alignItems: 'center',
   },
   deleteButton: {
@@ -614,12 +615,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#8B0000',
   },
   deleteButtonText: {
     fontFamily: 'LibreBaskerville',
     fontSize: 14,
-    color: '#8B0000',
   },
 
   // Quick Stats
