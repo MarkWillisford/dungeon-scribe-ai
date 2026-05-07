@@ -335,61 +335,32 @@ export function RulesetSettingsSheet({ visible, onClose }: RulesetSettingsSheetP
 
           {/* Section D — Traits */}
           <SectionHeader title="Traits" colors={colors} />
-          <View style={styles.twoNumberRow}>
-            <View style={styles.numberRowHalf}>
-              <Text style={[styles.numberLabel, { color: colors.text.secondary }]}>Max Traits</Text>
-              <TextInput
-                value={String(activeRuleset.validationSettings.maxTraits)}
-                onChangeText={(t) => {
-                  const n = parseInt(t, 10);
-                  if (!isNaN(n) && n >= 0)
-                    patch({
-                      validationSettings: {
-                        ...activeRuleset.validationSettings,
-                        maxTraits: n,
-                      },
-                    });
-                }}
-                keyboardType="number-pad"
-                selectTextOnFocus
-                style={[
-                  styles.numberInput,
-                  {
-                    color: colors.text.primary,
-                    borderColor: colors.border.DEFAULT,
-                    backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
-                  },
-                ]}
-                accessibilityLabel="Maximum traits"
-              />
-            </View>
-            <View style={styles.numberRowHalf}>
-              <Text style={[styles.numberLabel, { color: colors.text.secondary }]}>Min Traits</Text>
-              <TextInput
-                value={String(activeRuleset.validationSettings.minTraits)}
-                onChangeText={(t) => {
-                  const n = parseInt(t, 10);
-                  if (!isNaN(n) && n >= 0)
-                    patch({
-                      validationSettings: {
-                        ...activeRuleset.validationSettings,
-                        minTraits: n,
-                      },
-                    });
-                }}
-                keyboardType="number-pad"
-                selectTextOnFocus
-                style={[
-                  styles.numberInput,
-                  {
-                    color: colors.text.primary,
-                    borderColor: colors.border.DEFAULT,
-                    backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
-                  },
-                ]}
-                accessibilityLabel="Minimum traits"
-              />
-            </View>
+          <View style={styles.numberRow}>
+            <Text style={[styles.numberLabel, { color: colors.text.secondary }]}>Traits allowed</Text>
+            <TextInput
+              value={String(activeRuleset.validationSettings.maxTraits)}
+              onChangeText={(t) => {
+                const n = parseInt(t, 10);
+                if (!isNaN(n) && n >= 0)
+                  patch({
+                    validationSettings: {
+                      ...activeRuleset.validationSettings,
+                      maxTraits: n,
+                    },
+                  });
+              }}
+              keyboardType="number-pad"
+              selectTextOnFocus
+              style={[
+                styles.numberInput,
+                {
+                  color: colors.text.primary,
+                  borderColor: colors.border.DEFAULT,
+                  backgroundColor: isDark ? colors.bg.tertiary : colors.bg.secondary,
+                },
+              ]}
+              accessibilityLabel="Traits allowed"
+            />
           </View>
 
           {/* Section E — Optional Rules */}

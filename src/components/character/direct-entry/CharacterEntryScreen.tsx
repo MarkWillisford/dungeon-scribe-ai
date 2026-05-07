@@ -5,11 +5,11 @@ import {
   ScrollView,
   Pressable,
   StyleSheet,
-  SafeAreaView,
   KeyboardAvoidingView,
   Platform,
   Alert,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { OrnateTab } from '@/components/ui/OrnateTab';
@@ -156,26 +156,34 @@ export function CharacterEntryScreen() {
     setShowValidationSheet(true);
   }, [character, ruleset, classDataMap, dispatch]);
 
+  const navigateAway = useCallback(() => {
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace('/(tabs)/characters');
+    }
+  }, [router]);
+
   const handleSave = useCallback(async () => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await (dispatch(saveCharacter() as any) as any).unwrap();
-      router.back();
+      navigateAway();
     } catch {
       // setSaveError was already dispatched by the thunk
     }
-  }, [dispatch, router]);
+  }, [dispatch, navigateAway]);
 
   const handleBack = useCallback(() => {
     if (!isDirty) {
-      router.back();
+      navigateAway();
       return;
     }
     Alert.alert('Unsaved Changes', 'You have unsaved changes. Leave without saving?', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Leave', style: 'destructive', onPress: () => router.back() },
+      { text: 'Leave', style: 'destructive', onPress: navigateAway },
     ]);
-  }, [isDirty, router]);
+  }, [isDirty, navigateAway]);
 
   const handlePortraitPress = useCallback(() => {
     // Portrait picker will be wired in a later PR
@@ -206,7 +214,7 @@ export function CharacterEntryScreen() {
       >
         <ScrollView
           style={styles.scrollView}
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[styles.scrollContent, showValidationFAB && styles.scrollContentFAB]}
           keyboardShouldPersistTaps="handled"
         >
           {activeTab === 'identity' && <IdentitySection />}
@@ -290,6 +298,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 16,
     gap: 16,
+  },
+  scrollContentFAB: {
+    paddingBottom: 88,
   },
   placeholder: {
     paddingVertical: 60,

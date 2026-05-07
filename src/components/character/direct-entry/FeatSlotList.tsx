@@ -93,6 +93,7 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
   const characterClasses = useAppSelector(
     (state) => state.characterEntry.character.classes.classes,
   );
+  const assignedFeats = useAppSelector((state) => state.characterEntry.character.feats.feats);
   const classDataMap = useAppSelector(selectClassDataMap);
 
   const eslByPoolId = useMemo(() => {
@@ -193,11 +194,24 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
     if (!activeChoicePicker) return [];
     if (activeChoicePicker.type === 'weapon') return weaponItems;
     if (activeChoicePicker.type === 'spell') return spellItems;
+    if (activeChoicePicker.type === 'owned_feat') {
+      const seen = new Set<string>();
+      return assignedFeats
+        .filter((f) => {
+          if (!f.featId || !f.name) return false;
+          if (seen.has(f.featId)) return false;
+          seen.add(f.featId);
+          if (!activeChoicePicker.filterFeatType) return true;
+          const def = FeatRegistryService.getFeat(f.featId);
+          return def?.types.includes(activeChoicePicker.filterFeatType) ?? false;
+        })
+        .map((f) => ({ key: f.featId, label: f.name }));
+    }
     return (activeChoicePicker.options ?? []).map((opt) => ({
       key: opt,
       label: opt.charAt(0).toUpperCase() + opt.slice(1),
     }));
-  }, [activeChoicePicker, weaponItems, spellItems]);
+  }, [activeChoicePicker, weaponItems, spellItems, assignedFeats]);
 
   return (
     <>
@@ -446,15 +460,17 @@ export function FeatSlotList() {
       };
     });
 
-    // Also include manually-added bonus slots that aren't in the computed list
+    // Also include manually-added bonus slots that aren't in the computed list.
+    // f.source is stored as 'bonus_N' by makeFeatSource — use it directly as slotId
+    // so each slot has a stable unique key and remove/assign work correctly.
     for (const f of character.feats.feats) {
-      if (f.source === 'bonus') {
-        const slotId = `bonus_${f.grantedAtLevel}`;
+      if (f.source.startsWith('bonus_')) {
+        const slotId = f.source;
         if (!slots.find((s) => s.slotId === slotId)) {
           slots.push({
             slotId,
             source: 'bonus',
-            availableAt: 'Bonus',
+            availableAt: f.sourceLabel ?? 'Bonus',
             availableAtLevel: f.grantedAtLevel,
             featId: f.featId,
             featName: f.name,
@@ -587,12 +603,19 @@ export function FeatSlotList() {
               <Pressable
                 onPress={() => {
                   const label = bonusLabelText.trim() || undefined;
+                  const bonusFeats = character.feats.feats.filter((f) =>
+                    f.source.startsWith('bonus_'),
+                  );
+                  const maxBonusIndex = bonusFeats.reduce((max, f) => {
+                    const idx = parseInt(f.source.split('_')[1] ?? '-1', 10);
+                    return Math.max(max, isNaN(idx) ? -1 : idx);
+                  }, -1);
                   dispatch(
                     addFeatSlot({
                       id: genId(),
                       source: 'bonus',
                       availableAt: 'Bonus',
-                      availableAtLevel: 0,
+                      availableAtLevel: maxBonusIndex + 1,
                       sourceLabel: label,
                     }),
                   );

@@ -896,9 +896,9 @@ export const INNER_SEA_TRAITS: TraitDefinition[] = [
     id: 'touched_by_divinity',
     name: 'Touched by Divinity',
     description:
-      'As long as you can remember, you have had an unexplained connection to a deity. Perhaps you were birth-blessed or witnessed a miracle as a child. You gain a +1 trait bonus on a save of your choice (Fortitude, Reflex, or Will).',
-    shortDescription: '+1 to one save of your choice',
-    source: 'Pathfinder Campaign Setting',
+      "As long as you can remember, you've had an unexplainable interest in one deity in particular. One of your parents might have been a priest of the deity, but even this can't explain your deep connection to the faith. You begin play with a silver holy symbol of your chosen deity for free. In addition, choose one domain associated with your chosen deity. You gain the use of that domain's 1st-level domain spell as a spell-like ability usable once per day (CL equals your character level).",
+    shortDescription: "Free silver holy symbol; 1st-level domain spell 1/day (CL = character level)",
+    source: 'Pathfinder Adventure Path: Wrath of the Righteous',
     verificationStatus: 'needs_review' as const,
     category: 'campaign',
     prerequisites: [],
@@ -906,13 +906,18 @@ export const INNER_SEA_TRAITS: TraitDefinition[] = [
     choices: [
       {
         type: 'custom',
-        label: 'Choose a saving throw',
-        options: ['Fortitude', 'Reflex', 'Will'],
-        affectsEffects: true,
-        effectTargetTemplate: 'save.{choice}',
+        label: 'Chosen deity',
+        options: [],
+        affectsEffects: false,
+      },
+      {
+        type: 'custom',
+        label: 'Chosen domain',
+        options: [],
+        affectsEffects: false,
       },
     ],
-    tags: ['save', 'divine', 'campaign'],
+    tags: ['divine', 'spell-like ability', 'campaign'],
   },
   {
     id: 'worldwound_refugee',

@@ -39,7 +39,6 @@ export interface ValidationSettings {
   abilityScoreMethod: 'point-buy' | 'standard-array' | 'dice' | 'freeform';
   pointBuyBudget?: number; // Only used when method === 'point-buy'
   maxTraits: number;
-  minTraits: number;
 }
 
 export interface CampaignRequirements {

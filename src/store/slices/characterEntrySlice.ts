@@ -89,8 +89,23 @@ function syncFeatSlotsFromClasses(character: Character): void {
   character.feats.feats = character.feats.feats.filter((f) => {
     if (!f.featId) return false; // Remove empty placeholders
     // f.source is already the full key e.g. "level_3" — compare directly
-    return validKeys.has(f.source) || f.source === 'bonus'; // Keep bonus feats regardless
+    return validKeys.has(f.source) || f.source.startsWith('bonus_'); // Keep bonus feats regardless
   });
+}
+
+function syncLevelIncrementSlots(character: Character): void {
+  const totalHD = character.classes.classes.reduce((sum, c) => sum + c.level, 0);
+  const existing = character.levelIncrementSlots;
+  const updated: LevelIncrementSlot[] = [];
+  for (let hd = 4; hd <= totalHD; hd += 4) {
+    const prev = existing.find((s) => s.atHD === hd);
+    updated.push({ atHD: hd, ability: prev?.ability ?? null });
+  }
+  character.levelIncrementSlots = updated;
+  // Recount levelIncrements on each ability score from the (possibly pruned) slots
+  for (const key of ['str', 'dex', 'con', 'int', 'wis', 'cha'] as AbilityKey[]) {
+    character.abilityScores[key].levelIncrements = updated.filter((s) => s.ability === key).length;
+  }
 }
 
 const ABILITY_KEYS: AbilityKey[] = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
@@ -433,6 +448,7 @@ const characterEntrySlice = createSlice({
         }
       }
       syncFeatSlotsFromClasses(state.character);
+      syncLevelIncrementSlots(state.character);
       state.isDirty = true;
     },
 
@@ -482,6 +498,7 @@ const characterEntrySlice = createSlice({
         );
       }
       syncFeatSlotsFromClasses(state.character);
+      syncLevelIncrementSlots(state.character);
       state.isDirty = true;
     },
 
@@ -570,6 +587,7 @@ const characterEntrySlice = createSlice({
       }
 
       syncFeatSlotsFromClasses(state.character);
+      syncLevelIncrementSlots(state.character);
       state.isDirty = true;
     },
 
@@ -1126,6 +1144,7 @@ const characterEntrySlice = createSlice({
         0,
       );
       syncFeatSlotsFromClasses(state.character);
+      syncLevelIncrementSlots(state.character);
       state.isDirty = true;
     },
 
@@ -1209,6 +1228,7 @@ const characterEntrySlice = createSlice({
         0,
       );
       syncFeatSlotsFromClasses(state.character);
+      syncLevelIncrementSlots(state.character);
       state.isDirty = true;
     },
 
@@ -1379,12 +1399,17 @@ const characterEntrySlice = createSlice({
       state,
       action: PayloadAction<{ skillKey: string; entry: { ranks: number; misc: number } }>,
     ) {
-      const skill = (state.character.skills as Record<string, { ranks: number; misc: number }>)[
-        action.payload.skillKey
-      ];
+      const skillsMap = state.character.skills as Record<string, { ranks: number; misc: number }>;
+      const skill = skillsMap[action.payload.skillKey];
       if (skill && typeof skill === 'object' && 'ranks' in skill) {
         skill.ranks = action.payload.entry.ranks;
         skill.misc = action.payload.entry.misc;
+      } else {
+        // New specialty key (e.g. "craft (cooking)") — create the entry
+        skillsMap[action.payload.skillKey] = {
+          ranks: action.payload.entry.ranks,
+          misc: action.payload.entry.misc,
+        };
       }
       state.isDirty = true;
     },

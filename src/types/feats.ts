@@ -36,7 +36,7 @@ export type FeatType =
 
 // ---- Feat Choice Key (shared between FeatChoice.type and choiceRequirement.key) ----
 
-export type FeatChoiceKey = 'weapon' | 'skill' | 'school' | 'ability' | 'custom' | 'spell';
+export type FeatChoiceKey = 'weapon' | 'skill' | 'school' | 'ability' | 'custom' | 'spell' | 'owned_feat';
 
 // ---- Prerequisites (structured, machine-checkable) ----
 
@@ -102,6 +102,8 @@ export interface FeatChoice {
   effectTargetTemplate?: string;
   /** When true, the picker has no pre-loaded options — user types a free-form value (e.g. spell name). */
   freeText?: boolean;
+  /** For type: 'owned_feat' — restrict to feats the character already has of this type. */
+  filterFeatType?: FeatType;
 }
 
 // ---- Feat Definition (data template — stored in registry) ----

@@ -826,7 +826,6 @@ const mockCharacter: Character = {
       abilityScoreMethod: 'point-buy' as const,
       pointBuyBudget: 20,
       maxTraits: 2,
-      minTraits: 0,
     },
     version: 1,
     createdAt: '2026-04-09T00:00:00.000Z',

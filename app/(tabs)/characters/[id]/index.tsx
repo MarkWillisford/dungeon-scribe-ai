@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, View, Text, ScrollView, StyleSheet, Pressable } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Pressable, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { useTheme } from '@/hooks/useTheme';
-import { fetchCharacter, toggleFeat } from '@/store/slices/charactersSlice';
+import { fetchCharacter, toggleFeat, deleteCharacter } from '@/store/slices/charactersSlice';
 import { OrnatePanel } from '@/components/ui/OrnatePanel';
 import { OrnateButton } from '@/components/ui/OrnateButton';
 import { OrnateTab } from '@/components/ui/OrnateTab';
@@ -111,6 +112,41 @@ export default function CharacterDetailScreen() {
         {activeTab === 'skills' && <SkillsTab character={activeCharacter} />}
         {activeTab === 'feats' && <FeatsTab character={activeCharacter} dispatch={dispatch} />}
       </ScrollView>
+
+      <View style={[styles.dangerZone, { borderTopColor: colors.accent.DEFAULT }]}>
+        <Pressable
+          style={[styles.deleteButton, { borderColor: colors.accent.DEFAULT }]}
+          onPress={() =>
+            Alert.alert(
+              'Delete Character',
+              `Are you sure you want to delete ${activeCharacter.info.name}? This cannot be undone.`,
+              [
+                { text: 'Cancel', style: 'cancel' },
+                {
+                  text: 'Delete',
+                  style: 'destructive',
+                  onPress: async () => {
+                    try {
+                      await (dispatch(deleteCharacter(id)) as any).unwrap();
+                      router.replace('/(tabs)/characters');
+                    } catch (err: any) {
+                      Alert.alert(
+                        'Delete Failed',
+                        err?.message ?? 'An error occurred while deleting the character.',
+                      );
+                    }
+                  },
+                },
+              ],
+            )
+          }
+          testID="delete-character-button"
+        >
+          <Text style={[styles.deleteButtonText, { color: colors.accent.DEFAULT }]}>
+            Delete Character
+          </Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 }
@@ -568,6 +604,22 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   buttonContainer: { marginTop: 16 },
+  dangerZone: {
+    marginTop: 32,
+    paddingTop: 16,
+    borderTopWidth: 1,
+    alignItems: 'center',
+  },
+  deleteButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 6,
+    borderWidth: 1,
+  },
+  deleteButtonText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+  },
 
   // Quick Stats
   quickStatsGrid: {
