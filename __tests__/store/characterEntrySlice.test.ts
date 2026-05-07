@@ -1088,7 +1088,13 @@ describe('characterEntrySlice — classes', () => {
       state = reducer(state, addClass(makeClass('cls-1', { level: 3 })));
       state = reducer(state, addClass(makeClass('cls-2', { name: 'Rogue', level: 2 })));
       state = reducer(state, initLevelOrder());
-      expect(state.character.classes.levelOrder).toEqual(['cls-1', 'cls-1', 'cls-1', 'cls-2', 'cls-2']);
+      expect(state.character.classes.levelOrder).toEqual([
+        'cls-1',
+        'cls-1',
+        'cls-1',
+        'cls-2',
+        'cls-2',
+      ]);
       expect(state.isDirty).toBe(true);
     });
   });
@@ -1131,7 +1137,10 @@ describe('characterEntrySlice — classes', () => {
           { baseClassEntryId: 'cls-1' },
         ],
       };
-      state = reducer(state, addClass(makeClass('cls-1', { level: 3, spellcastingAdvancement: adv })));
+      state = reducer(
+        state,
+        addClass(makeClass('cls-1', { level: 3, spellcastingAdvancement: adv })),
+      );
       state = reducer(state, addClass(makeClass('cls-2', { name: 'Rogue', level: 1 })));
       state = reducer(state, initLevelOrder());
       // Swap level 3 (cls-1) to cls-2 — cls-1 drops from 3 to 2
@@ -1146,7 +1155,10 @@ describe('characterEntrySlice — classes', () => {
       let state = makeInitialState();
       state = reducer(state, addClass(makeClass('cls-1', { level: 4 })));
       state = reducer(state, initLevelOrder());
-      state = reducer(state, splitClass({ classId: 'cls-1', firstRunLevel: 2, newEntryId: 'cls-1b' }));
+      state = reducer(
+        state,
+        splitClass({ classId: 'cls-1', firstRunLevel: 2, newEntryId: 'cls-1b' }),
+      );
 
       expect(state.character.classes.classes).toHaveLength(2);
       const first = state.character.classes.classes[0];
@@ -1163,7 +1175,10 @@ describe('characterEntrySlice — classes', () => {
       state = reducer(state, addClass(makeClass('cls-1', { level: 4 })));
       state = reducer(state, initLevelOrder());
       // Before: ['cls-1','cls-1','cls-1','cls-1']
-      state = reducer(state, splitClass({ classId: 'cls-1', firstRunLevel: 2, newEntryId: 'cls-1b' }));
+      state = reducer(
+        state,
+        splitClass({ classId: 'cls-1', firstRunLevel: 2, newEntryId: 'cls-1b' }),
+      );
       const order = state.character.classes.levelOrder!;
       expect(order).toHaveLength(4);
       // Last 2 slots should be cls-1b; first 2 stay cls-1
@@ -1182,9 +1197,15 @@ describe('characterEntrySlice — classes', () => {
           { baseClassEntryId: 'cls-1' },
         ],
       };
-      state = reducer(state, addClass(makeClass('cls-1', { level: 4, spellcastingAdvancement: adv })));
+      state = reducer(
+        state,
+        addClass(makeClass('cls-1', { level: 4, spellcastingAdvancement: adv })),
+      );
       state = reducer(state, initLevelOrder());
-      state = reducer(state, splitClass({ classId: 'cls-1', firstRunLevel: 2, newEntryId: 'cls-1b' }));
+      state = reducer(
+        state,
+        splitClass({ classId: 'cls-1', firstRunLevel: 2, newEntryId: 'cls-1b' }),
+      );
 
       const first = state.character.classes.classes[0];
       const second = state.character.classes.classes[1];
@@ -1197,7 +1218,10 @@ describe('characterEntrySlice — classes', () => {
       state = reducer(state, addClass(makeClass('cls-1', { level: 3 })));
       state = reducer(state, initLevelOrder());
       // firstRunLevel = 3 means secondRunLevel = 0 — invalid
-      state = reducer(state, splitClass({ classId: 'cls-1', firstRunLevel: 3, newEntryId: 'cls-1b' }));
+      state = reducer(
+        state,
+        splitClass({ classId: 'cls-1', firstRunLevel: 3, newEntryId: 'cls-1b' }),
+      );
       expect(state.character.classes.classes).toHaveLength(1);
     });
 
@@ -1205,7 +1229,10 @@ describe('characterEntrySlice — classes', () => {
       let state = makeInitialState();
       state = reducer(state, addClass(makeClass('cls-1', { level: 4 })));
       state = reducer(state, initLevelOrder());
-      state = reducer(state, splitClass({ classId: 'cls-1', firstRunLevel: 2, newEntryId: 'cls-1b' }));
+      state = reducer(
+        state,
+        splitClass({ classId: 'cls-1', firstRunLevel: 2, newEntryId: 'cls-1b' }),
+      );
       const first = state.character.classes.classes[0];
       const second = state.character.classes.classes[1];
       expect(first.splitGroup).toBeDefined();
@@ -1599,6 +1626,118 @@ describe('characterEntrySlice — feats', () => {
           (f) => f.source === 'level_1' && f.featId === 'feat-dodge',
         ),
       ).toBe(true);
+    });
+  });
+
+  describe('syncLevelIncrementSlots', () => {
+    // Pathfinder 1e: one ability score increase at every 4 HD (4, 8, 12, 16, 20).
+    // syncLevelIncrementSlots is called from addClass, removeClass, updateClassLevel,
+    // updateClassArchetype, and splitClass.
+
+    it('addClass at level 4 creates exactly one increment slot at HD 4', () => {
+      const state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 4 })));
+      const slots = state.character.levelIncrementSlots;
+      expect(slots).toHaveLength(1);
+      expect(slots[0].atHD).toBe(4);
+      expect(slots[0].ability).toBeNull();
+    });
+
+    it('addClass at level 8 creates two increment slots at HD 4 and HD 8', () => {
+      const state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 8 })));
+      const slots = state.character.levelIncrementSlots;
+      expect(slots).toHaveLength(2);
+      expect(slots.map((s: LevelIncrementSlot) => s.atHD)).toEqual([4, 8]);
+      expect(slots.every((s: LevelIncrementSlot) => s.ability === null)).toBe(true);
+    });
+
+    it('leveling from 4 to 8 adds the second slot without losing the first or its selection', () => {
+      // Start at level 4, assign an ability to the first slot
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 4 })));
+      state = reducer(state, setLevelIncrementAbility({ atHD: 4, ability: 'str' }));
+      expect(state.character.levelIncrementSlots[0].ability).toBe('str');
+
+      // Level up to 8
+      state = reducer(state, updateClassLevel({ id: 'cls-1', level: 8 }));
+      const slots = state.character.levelIncrementSlots;
+      expect(slots).toHaveLength(2);
+      // First slot preserved with its selection
+      expect(slots[0].atHD).toBe(4);
+      expect(slots[0].ability).toBe('str');
+      // New slot at HD 8 is empty
+      expect(slots[1].atHD).toBe(8);
+      expect(slots[1].ability).toBeNull();
+    });
+
+    it('removing a class that drops total HD below a multiple of 4 removes the corresponding slot', () => {
+      // Two classes: Fighter 4 + Rogue 4 = 8 total HD → two slots
+      let state = reducer(
+        makeInitialState(),
+        addClass(makeClass('cls-1', { name: 'Fighter', level: 4 })),
+      );
+      state = reducer(state, addClass(makeClass('cls-2', { name: 'Rogue', level: 4 })));
+      expect(state.character.levelIncrementSlots).toHaveLength(2);
+
+      // Remove the second class → 4 total HD → one slot
+      state = reducer(state, removeClass('cls-2'));
+      expect(state.character.levelIncrementSlots).toHaveLength(1);
+      expect(state.character.levelIncrementSlots[0].atHD).toBe(4);
+    });
+
+    it('removing all classes clears all increment slots', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 8 })));
+      expect(state.character.levelIncrementSlots).toHaveLength(2);
+      state = reducer(state, removeClass('cls-1'));
+      expect(state.character.levelIncrementSlots).toHaveLength(0);
+    });
+
+    it('slots exist at the correct milestone levels (4, 8, 12, 16, 20)', () => {
+      const state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 20 })));
+      const slots = state.character.levelIncrementSlots;
+      expect(slots).toHaveLength(5);
+      expect(slots.map((s: LevelIncrementSlot) => s.atHD)).toEqual([4, 8, 12, 16, 20]);
+    });
+
+    it('no slots are created for HD below 4', () => {
+      const state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 3 })));
+      expect(state.character.levelIncrementSlots).toHaveLength(0);
+    });
+
+    it('levelIncrements counts on ability scores reflect slot selections', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 8 })));
+      state = reducer(state, setLevelIncrementAbility({ atHD: 4, ability: 'int' }));
+      state = reducer(state, setLevelIncrementAbility({ atHD: 8, ability: 'int' }));
+      expect(state.character.abilityScores.int.levelIncrements).toBe(2);
+      expect(state.character.abilityScores.str.levelIncrements).toBe(0);
+    });
+
+    it('levelIncrements counts update correctly when a slot is removed via level reduction', () => {
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 8 })));
+      state = reducer(state, setLevelIncrementAbility({ atHD: 4, ability: 'wis' }));
+      state = reducer(state, setLevelIncrementAbility({ atHD: 8, ability: 'wis' }));
+      expect(state.character.abilityScores.wis.levelIncrements).toBe(2);
+
+      // Drop to level 4 — HD 8 slot removed
+      state = reducer(state, updateClassLevel({ id: 'cls-1', level: 4 }));
+      expect(state.character.levelIncrementSlots).toHaveLength(1);
+      expect(state.character.abilityScores.wis.levelIncrements).toBe(1);
+    });
+
+    it('splitClass preserves existing slot selections across the split', () => {
+      // Start with a level-8 class and assign both slots
+      let state = reducer(makeInitialState(), addClass(makeClass('cls-1', { level: 8 })));
+      state = reducer(state, setLevelIncrementAbility({ atHD: 4, ability: 'dex' }));
+      state = reducer(state, setLevelIncrementAbility({ atHD: 8, ability: 'con' }));
+
+      // Split: first run = 4, second run = 4 (total still 8)
+      state = reducer(
+        state,
+        splitClass({ classId: 'cls-1', firstRunLevel: 4, newEntryId: 'cls-1b' }),
+      );
+
+      const slots = state.character.levelIncrementSlots;
+      expect(slots).toHaveLength(2);
+      expect(slots[0]).toEqual({ atHD: 4, ability: 'dex' });
+      expect(slots[1]).toEqual({ atHD: 8, ability: 'con' });
     });
   });
 });
