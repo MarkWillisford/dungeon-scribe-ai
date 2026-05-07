@@ -40,8 +40,8 @@ export function MagicItemEffectImportSheet({
     GameDataService.searchMagicItems(query).then((items) => {
       if (!cancelled) {
         setResults(items);
-        setLoading(false);
       }
+      setLoading(false);
     });
     return () => {
       cancelled = true;
@@ -154,10 +154,7 @@ export function MagicItemEffectImportSheet({
               ]}
             >
               <View style={styles.resultInfo}>
-                <Text
-                  style={[styles.resultName, { color: colors.text.primary }]}
-                  numberOfLines={1}
-                >
+                <Text style={[styles.resultName, { color: colors.text.primary }]} numberOfLines={1}>
                   {item.name}
                 </Text>
                 {item.description ? (
