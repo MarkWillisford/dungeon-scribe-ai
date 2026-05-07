@@ -111,33 +111,33 @@ export default function CharacterDetailScreen() {
         {activeTab === 'combat' && <CombatTab character={activeCharacter} />}
         {activeTab === 'skills' && <SkillsTab character={activeCharacter} />}
         {activeTab === 'feats' && <FeatsTab character={activeCharacter} dispatch={dispatch} />}
-
-        <View style={styles.dangerZone}>
-          <Pressable
-            style={styles.deleteButton}
-            onPress={() =>
-              Alert.alert(
-                'Delete Character',
-                `Are you sure you want to delete ${activeCharacter.info.name}? This cannot be undone.`,
-                [
-                  { text: 'Cancel', style: 'cancel' },
-                  {
-                    text: 'Delete',
-                    style: 'destructive',
-                    onPress: () => {
-                      dispatch(deleteCharacter(id));
-                      router.replace('/(tabs)/characters');
-                    },
-                  },
-                ],
-              )
-            }
-            testID="delete-character-button"
-          >
-            <Text style={styles.deleteButtonText}>Delete Character</Text>
-          </Pressable>
-        </View>
       </ScrollView>
+
+      <View style={styles.dangerZone}>
+        <Pressable
+          style={styles.deleteButton}
+          onPress={() =>
+            Alert.alert(
+              'Delete Character',
+              `Are you sure you want to delete ${activeCharacter.info.name}? This cannot be undone.`,
+              [
+                { text: 'Cancel', style: 'cancel' },
+                {
+                  text: 'Delete',
+                  style: 'destructive',
+                  onPress: () => {
+                    dispatch(deleteCharacter(id));
+                    router.replace('/(tabs)/characters');
+                  },
+                },
+              ],
+            )
+          }
+          testID="delete-character-button"
+        >
+          <Text style={styles.deleteButtonText}>Delete Character</Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 }
