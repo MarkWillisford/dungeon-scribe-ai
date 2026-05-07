@@ -74,6 +74,17 @@ const defaultProps = {
 const SLOT_QUERY = 0;
 const SLOT_RESULTS = 1;
 
+const findTestId = (node: unknown, id: string): unknown => {
+  if (!node || typeof node !== 'object') return null;
+  const n = node as { props?: { testID?: string }; children?: unknown[] };
+  if (n.props?.testID === id) return node;
+  for (const child of n.children ?? []) {
+    const found = findTestId(child, id);
+    if (found) return found;
+  }
+  return null;
+};
+
 describe('MagicItemEffectImportSheet', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -81,9 +92,7 @@ describe('MagicItemEffectImportSheet', () => {
   });
 
   it('renders search input and empty-state prompt when query is empty', () => {
-    const { getByTestId, queryByText } = render(
-      <MagicItemEffectImportSheet {...defaultProps} />,
-    );
+    const { getByTestId, queryByText } = render(<MagicItemEffectImportSheet {...defaultProps} />);
     expect(getByTestId('import-search-input')).toBeTruthy();
     expect(queryByText('Type an item name to search')).toBeTruthy();
   });
@@ -112,7 +121,10 @@ describe('MagicItemEffectImportSheet', () => {
     const updated = rendered.rerender();
     const texts: string[] = [];
     const walk = (node: unknown) => {
-      if (typeof node === 'string') { texts.push(node); return; }
+      if (typeof node === 'string') {
+        texts.push(node);
+        return;
+      }
       if (node && typeof node === 'object' && 'children' in node) {
         for (const child of (node as { children: unknown[] }).children) walk(child);
       }
@@ -129,7 +141,10 @@ describe('MagicItemEffectImportSheet', () => {
     // The result row testID comes from `import-item-${item.id}`
     const texts: string[] = [];
     const walk = (node: unknown) => {
-      if (typeof node === 'string') { texts.push(node); return; }
+      if (typeof node === 'string') {
+        texts.push(node);
+        return;
+      }
       if (node && typeof node === 'object' && 'children' in node) {
         for (const child of (node as { children: unknown[] }).children) walk(child);
       }
@@ -152,17 +167,9 @@ describe('MagicItemEffectImportSheet', () => {
     setHookStateAt(SLOT_QUERY, 'ring');
     setHookStateAt(SLOT_RESULTS, [RING_ITEM]);
     const updated = rendered.rerender();
-    const findTestId = (node: unknown, id: string): unknown => {
-      if (!node || typeof node !== 'object') return null;
-      const n = node as { props?: { testID?: string }; children?: unknown[] };
-      if (n.props?.testID === id) return node;
-      for (const child of n.children ?? []) {
-        const found = findTestId(child, id);
-        if (found) return found;
-      }
-      return null;
-    };
-    const btn = findTestId(updated, 'import-item-ring-of-protection-1') as { props: { onPress?: () => void } } | null;
+    const btn = findTestId(updated, 'import-item-ring-of-protection-1') as {
+      props: { onPress?: () => void };
+    } | null;
     expect(btn).toBeTruthy();
     btn!.props.onPress?.();
     expect(onImport).toHaveBeenCalledWith(
@@ -181,23 +188,13 @@ describe('MagicItemEffectImportSheet', () => {
       effects: undefined,
     } as unknown as MagicItemDefinition;
     const onImport = jest.fn();
-    const rendered = render(
-      <MagicItemEffectImportSheet {...defaultProps} onImport={onImport} />,
-    );
+    const rendered = render(<MagicItemEffectImportSheet {...defaultProps} onImport={onImport} />);
     setHookStateAt(SLOT_QUERY, 'plain');
     setHookStateAt(SLOT_RESULTS, [noEffectsItem]);
     const updated = rendered.rerender();
-    const findTestId = (node: unknown, id: string): unknown => {
-      if (!node || typeof node !== 'object') return null;
-      const n = node as { props?: { testID?: string }; children?: unknown[] };
-      if (n.props?.testID === id) return node;
-      for (const child of n.children ?? []) {
-        const found = findTestId(child, id);
-        if (found) return found;
-      }
-      return null;
-    };
-    const btn = findTestId(updated, 'import-item-ring-no-effects') as { props: { onPress?: () => void } } | null;
+    const btn = findTestId(updated, 'import-item-ring-no-effects') as {
+      props: { onPress?: () => void };
+    } | null;
     expect(btn).toBeTruthy();
     btn!.props.onPress?.();
     expect(onImport).toHaveBeenCalledWith([]);
