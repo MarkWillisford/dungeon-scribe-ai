@@ -3413,7 +3413,7 @@ describe('characterEntrySlice — reequipFromContainer', () => {
     state = reducer(state, reequipFromContainer('belt-new'));
     const displaced = state.character.editorEquipment!.find((e) => e.id === 'belt-old')!;
     expect(displaced.containerId).toBe('bag-1');
-    expect(displaced.unequippedFromSlot).toBe('belt');
+    expect(displaced.unequippedFromSlot).toBeUndefined();
   });
 
   it('does not set containerId on displaced item when no container exists', () => {

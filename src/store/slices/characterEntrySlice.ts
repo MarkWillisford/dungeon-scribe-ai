@@ -1643,7 +1643,6 @@ const characterEntrySlice = createSlice({
         displaced.slot = undefined;
         if (firstContainer) {
           displaced.containerId = firstContainer.id;
-          displaced.unequippedFromSlot = targetSlot;
         }
       }
       item.slot = targetSlot;
