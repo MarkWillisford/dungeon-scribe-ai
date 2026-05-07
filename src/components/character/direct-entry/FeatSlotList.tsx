@@ -93,9 +93,7 @@ function FeatSlotRow({ slot }: FeatSlotRowProps) {
   const characterClasses = useAppSelector(
     (state) => state.characterEntry.character.classes.classes,
   );
-  const assignedFeats = useAppSelector(
-    (state) => state.characterEntry.character.feats.feats,
-  );
+  const assignedFeats = useAppSelector((state) => state.characterEntry.character.feats.feats);
   const classDataMap = useAppSelector(selectClassDataMap);
 
   const eslByPoolId = useMemo(() => {
@@ -605,15 +603,19 @@ export function FeatSlotList() {
               <Pressable
                 onPress={() => {
                   const label = bonusLabelText.trim() || undefined;
-                  const bonusCount = character.feats.feats.filter((f) =>
+                  const bonusFeats = character.feats.feats.filter((f) =>
                     f.source.startsWith('bonus_'),
-                  ).length;
+                  );
+                  const maxBonusIndex = bonusFeats.reduce((max, f) => {
+                    const idx = parseInt(f.source.split('_')[1] ?? '-1', 10);
+                    return Math.max(max, isNaN(idx) ? -1 : idx);
+                  }, -1);
                   dispatch(
                     addFeatSlot({
                       id: genId(),
                       source: 'bonus',
                       availableAt: 'Bonus',
-                      availableAtLevel: bonusCount,
+                      availableAtLevel: maxBonusIndex + 1,
                       sourceLabel: label,
                     }),
                   );
