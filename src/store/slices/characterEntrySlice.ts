@@ -89,7 +89,7 @@ function syncFeatSlotsFromClasses(character: Character): void {
   character.feats.feats = character.feats.feats.filter((f) => {
     if (!f.featId) return false; // Remove empty placeholders
     // f.source is already the full key e.g. "level_3" — compare directly
-    return validKeys.has(f.source) || f.source === 'bonus'; // Keep bonus feats regardless
+    return validKeys.has(f.source) || f.source.startsWith('bonus_'); // Keep bonus feats regardless
   });
 }
 
@@ -103,7 +103,7 @@ function syncLevelIncrementSlots(character: Character): void {
   }
   character.levelIncrementSlots = updated;
   // Recount levelIncrements on each ability score from the (possibly pruned) slots
-  for (const key of (['str', 'dex', 'con', 'int', 'wis', 'cha'] as AbilityKey[])) {
+  for (const key of ['str', 'dex', 'con', 'int', 'wis', 'cha'] as AbilityKey[]) {
     character.abilityScores[key].levelIncrements = updated.filter((s) => s.ability === key).length;
   }
 }
