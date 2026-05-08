@@ -6,18 +6,18 @@
 
 All five implementation phases are done. Files shipped:
 
-| File | Change |
-| --- | --- |
-| `src/types/ruleset.ts` | New — all Ruleset types |
-| `src/types/index.ts` | Added `ruleset: Ruleset`, `campaignRulesetLink?` to `Character`; exported ruleset types |
-| `src/types/characterDraft.ts` | Added `acquiredAtECL?` to `DraftTemplateEntry` |
-| `src/data/rulesets/presets.ts` | New — three system presets |
-| `scripts/db/seedRulesets.ts` | New — idempotent upsert to `rulesets/` collection |
-| `src/services/RulesetService.ts` | New — typed path builders, full CRUD, `getGlobalPreset`, `syncCharacterRuleset` |
-| `src/store/slices/rulesetSlice.ts` | New — Redux slice |
-| `src/store/store.ts` | Wired `rulesetReducer` |
-| `src/services/CharacterService.ts` | Default `ruleset` to `PRESET_PF1E_STANDARD`; bumped schema to `1.2.0` |
-| `src/services/FirebaseCharacterService.ts` | Migration: backfill `PRESET_PF1E_STANDARD` on pre-v1.2.0 documents |
+| File                                       | Change                                                                                  |
+| ------------------------------------------ | --------------------------------------------------------------------------------------- |
+| `src/types/ruleset.ts`                     | New — all Ruleset types                                                                 |
+| `src/types/index.ts`                       | Added `ruleset: Ruleset`, `campaignRulesetLink?` to `Character`; exported ruleset types |
+| `src/types/characterDraft.ts`              | Added `acquiredAtECL?` to `DraftTemplateEntry`                                          |
+| `src/data/rulesets/presets.ts`             | New — three system presets                                                              |
+| `scripts/db/seedRulesets.ts`               | New — idempotent upsert to `rulesets/` collection                                       |
+| `src/services/RulesetService.ts`           | New — typed path builders, full CRUD, `getGlobalPreset`, `syncCharacterRuleset`         |
+| `src/store/slices/rulesetSlice.ts`         | New — Redux slice                                                                       |
+| `src/store/store.ts`                       | Wired `rulesetReducer`                                                                  |
+| `src/services/CharacterService.ts`         | Default `ruleset` to `PRESET_PF1E_STANDARD`; bumped schema to `1.2.0`                   |
+| `src/services/FirebaseCharacterService.ts` | Migration: backfill `PRESET_PF1E_STANDARD` on pre-v1.2.0 documents                      |
 
 See open items table below for what remains deferred. Original design spec follows.
 
@@ -475,10 +475,10 @@ campaigns/{id}/ruleset              ← Embedded ruleset snapshot on campaign do
 
 ## Open Items
 
-| Item                                                                | Status                           | Blocking                               |
-| ------------------------------------------------------------------- | -------------------------------- | -------------------------------------- |
-| Phase E — Wire ruleset into `DraftValidationService`                | NOT STARTED — deferred to validation PR | Draft Validation System PR        |
-| Syren's subset definition — which EitR rules does Mark's table use? | PAUSED — needs Mark input        | `eitrMode: 'syrens_subset'` validation |
-| PF Society banned item list                                         | PAUSED — needs research          | Society preset completeness            |
-| EitR feat/prereq data (lookup table, removed feats, merged feats)   | Separate data plan — NOT STARTED | `eitrMode: 'full'` validation          |
-| Campaign ruleset management UI                                      | Out of scope for current phase   | Campaign management screens (future)   |
+| Item                                                                | Status                                  | Blocking                               |
+| ------------------------------------------------------------------- | --------------------------------------- | -------------------------------------- |
+| Phase E — Wire ruleset into `DraftValidationService`                | NOT STARTED — deferred to validation PR | Draft Validation System PR             |
+| Syren's subset definition — which EitR rules does Mark's table use? | PAUSED — needs Mark input               | `eitrMode: 'syrens_subset'` validation |
+| PF Society banned item list                                         | PAUSED — needs research                 | Society preset completeness            |
+| EitR feat/prereq data (lookup table, removed feats, merged feats)   | Separate data plan — NOT STARTED        | `eitrMode: 'full'` validation          |
+| Campaign ruleset management UI                                      | Out of scope for current phase          | Campaign management screens (future)   |

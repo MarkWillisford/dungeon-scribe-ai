@@ -17,14 +17,14 @@ direct-entry UI (Classes & Templates tab) can function. This plan defines:
 
 ## Status (as of 2026-03-25)
 
-| Area                                               | Status                                                                                                                                           |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Type changes (PR #4)                               | **COMPLETE** — `*Document`→`*Entry` rename, `druidAllowed`, `DeityBoons`, `AnimalCompanionEntry`, `subtypePrompt`, `levelFilterTable` all merged |
-| Dependent collections scraped                      | **COMPLETE** — domains (PR #8), rage powers (PR #7), rogue talents (PR #9), animal companions (PR #11), deities (PR #10) all merged              |
-| classChoiceDefinitions seeded — 10 classes (PR #5) | **COMPLETE** — fighter, cleric, druid, barbarian, ranger, paladin, wizard, rogue, dweomerkeeper, radiantServant, sentinel                        |
+| Area                                                        | Status                                                                                                                                                                                                                                                                  |
+| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Type changes (PR #4)                                        | **COMPLETE** — `*Document`→`*Entry` rename, `druidAllowed`, `DeityBoons`, `AnimalCompanionEntry`, `subtypePrompt`, `levelFilterTable` all merged                                                                                                                        |
+| Dependent collections scraped                               | **COMPLETE** — domains (PR #8), rage powers (PR #7), rogue talents (PR #9), animal companions (PR #11), deities (PR #10) all merged                                                                                                                                     |
+| classChoiceDefinitions seeded — 10 classes (PR #5)          | **COMPLETE** — fighter, cleric, druid, barbarian, ranger, paladin, wizard, rogue, dweomerkeeper, radiantServant, sentinel                                                                                                                                               |
 | classChoiceDefinitions — Cavalier, Inquisitor, Oracle, Bard | **COMPLETE** — branch `MW/class-choices-cavalier-inquisitor-oracle-bard`, PR pending. New collections: mysteries (17), cavalierOrders (12), inquisitions (40), revelations (150). New UI: `siblingChoices` prop + `resolveFilterTokens()` for `{chosen_mystery}` token. |
-| classChoiceDefinitions — remaining classes         | **NOT STARTED** — sorcerer, witch, magus, shaman, skald, hunter, arcanist, investigator, kineticist, etc.                                        |
-| Seed classChoiceDefinitions to Firestore           | **NOT STARTED** — `scripts/db/seedClassChoiceDefinitions.ts` written and ready                                                                   |
+| classChoiceDefinitions — remaining classes                  | **NOT STARTED** — sorcerer, witch, magus, shaman, skald, hunter, arcanist, investigator, kineticist, etc.                                                                                                                                                               |
+| Seed classChoiceDefinitions to Firestore                    | **NOT STARTED** — `scripts/db/seedClassChoiceDefinitions.ts` written and ready                                                                                                                                                                                          |
 
 **Immediate next step:** Run `seedClassChoiceDefinitions.ts` against staging, then add class choice definitions for remaining classes as the UI needs them.
 
@@ -32,12 +32,12 @@ direct-entry UI (Classes & Templates tab) can function. This plan defines:
 
 ## New Collections Added (2026-03-25)
 
-| Collection | Count | Location | Notes |
-| --- | --- | --- | --- |
-| `mysteries` | 17 | `src/data/mysteries/` | Battle, Bones, Flame, Heavens, Life, Lore, Nature, Stone, Waves, Wind (APG); Ancestor, Metal, Time, Wood (UM); Dragon (Legacy of Dragons); Lunar (Blood of the Moon); Spellscar (Inner Sea Magic) |
-| `cavalierorders` | 12 | `src/data/cavalierOrders/` | Cockatrice, Dragon, Lion, Shield, Star, Sword (APG); Flame (ppc-boe); Paw (ARG); Tome, Seal, Penitent, Blue Rose (UC) |
-| `inquisitions` | 40 | `src/data/inquisitions/` | All APG inquisitions |
-| `revelations` | 150 | `src/data/revelations/` | batch_001: Battle/Bones/Flame/Heavens/Life/Lore (60); batch_002: Nature/Stone/Waves/Wind/Ancestor/Dragon/Lunar/Metal/Time (90) |
+| Collection       | Count | Location                   | Notes                                                                                                                                                                                             |
+| ---------------- | ----- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mysteries`      | 17    | `src/data/mysteries/`      | Battle, Bones, Flame, Heavens, Life, Lore, Nature, Stone, Waves, Wind (APG); Ancestor, Metal, Time, Wood (UM); Dragon (Legacy of Dragons); Lunar (Blood of the Moon); Spellscar (Inner Sea Magic) |
+| `cavalierorders` | 12    | `src/data/cavalierOrders/` | Cockatrice, Dragon, Lion, Shield, Star, Sword (APG); Flame (ppc-boe); Paw (ARG); Tome, Seal, Penitent, Blue Rose (UC)                                                                             |
+| `inquisitions`   | 40    | `src/data/inquisitions/`   | All APG inquisitions                                                                                                                                                                              |
+| `revelations`    | 150   | `src/data/revelations/`    | batch_001: Battle/Bones/Flame/Heavens/Life/Lore (60); batch_002: Nature/Stone/Waves/Wind/Ancestor/Dragon/Lunar/Metal/Time (90)                                                                    |
 
 ---
 

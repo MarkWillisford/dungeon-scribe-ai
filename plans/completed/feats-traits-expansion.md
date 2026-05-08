@@ -29,6 +29,7 @@ Session 2026-03-31 additions (DH):
 - **AP Volumes (+25 feats):** Pathfinder #132 Six-Legend Soul, CotCT Player's Guide, Legacy of Fire Player's Guide, RotRL Player's Guide
 
 Skipped books (all monster/race-locked feats, not player-usable):
+
 - Demons Revisited (14), Inner Sea Monster Codex (13), Battle of Bloodmarch Hills (14 — giant subtype), The Dead Road (10 — Shabti/Duskwalker), The Reaper's Right Hand (8 — campaign-specific noble houses)
 - Distant Shores (6) and Magical Marketplace (5) — all reprints already in codebase
 
@@ -83,7 +84,7 @@ _Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
 | Giant Hunter's Handbook       | ~15   | 15   | ✅ DONE — `giantHunterFeats.ts`                                                    |
 | Advanced Class Origins        | ~14   | 14   | ✅ DONE — `advancedClassOriginsFeats.ts` (PR #24)                                  |
 | Dragonslayer's Handbook       | ~14   | 14   | ✅ DONE — `dragonslayerFeats.ts` (PR #24)                                          |
-| Demons Revisited              | ~14   | 0    | ⏭️ SKIPPED — all 14 are monster-only feats (outsider/devil/kyton subtypes)          |
+| Demons Revisited              | ~14   | 0    | ⏭️ SKIPPED — all 14 are monster-only feats (outsider/devil/kyton subtypes)         |
 | Halflings of Golarion         | ~13   | 16   | ✅ DONE — `halflingGolarionFeats.ts` (PR #24)                                      |
 | Animal Archive                | ~13   | 12   | ✅ DONE — `animalArchiveFeats.ts` (PR #24, Boon Companion reprint skipped)         |
 | Spymaster's Handbook          | ~13   | 13   | ✅ DONE — `spymasterFeats.ts` (PR #24)                                             |
@@ -91,7 +92,7 @@ _Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
 | Occult Origins                | ~12   | 12   | ✅ DONE — `occultOriginsFeats.ts` (PR #24)                                         |
 | Cheliax, Empire of Devils     | ~12   | 12   | ✅ DONE — `cheliaxFeats.ts` (PR #24)                                               |
 | Path of the Hellknight        | ~12   | 12   | ✅ DONE — `hellknightFeats.ts` (PR #24)                                            |
-| Inner Sea Monster Codex       | ~13   | 0    | ⏭️ SKIPPED — all feats require monster race subtypes (strix/girtablilu/urdefhan)    |
+| Inner Sea Monster Codex       | ~13   | 0    | ⏭️ SKIPPED — all feats require monster race subtypes (strix/girtablilu/urdefhan)   |
 | Distant Realms                | ~12   | 12   | ✅ DONE — `distantRealmsFeats.ts` (PR #24)                                         |
 | Aquatic Adventures            | ~16   | 13   | ✅ DONE — `aquaticAdventuresFeats.ts` (Dolphin Style chain skipped — reprint)      |
 | Arcane Anthology              | ~10   | 4    | ✅ DONE — `arcaneAnthologyFeats.ts` (PR #24, 6 reprints in adventurersGuideFeats)  |
@@ -105,45 +106,45 @@ _Researched 2026-03-20 via Archives of Nethys. Counts are approximate._
 
 Batched into `tier3Batch1Feats.ts` through `tier3Batch6Feats.ts`.
 
-| Book                       | Feats    | Status                                                          |
-| -------------------------- | -------- | --------------------------------------------------------------- |
-| Blood of the Coven         | ~9       | ✅ DONE (9) — tier3Batch1Feats.ts                               |
-| Dungeoneer's Handbook      | ~9       | ✅ DONE (9) — tier3Batch1Feats.ts                               |
-| Black Markets              | ~9       | ✅ DONE (9) — tier3Batch1Feats.ts                               |
-| Bastards of Golarion       | ~8       | ✅ DONE (8) — tier3Batch2Feats.ts                               |
-| Heroes of the Darklands    | ~8       | ✅ DONE (8) — tier3Batch2Feats.ts                               |
-| Rival Guide                | ~8       | ✅ DONE (4 new) — tier3Batch2Feats.ts (3 reprints, 1 monster)  |
-| People of the River        | ~7       | ✅ DONE (7) — tier3Batch2Feats.ts                               |
-| Demon Hunter's Handbook    | ~7       | ✅ DONE (7) — tier3Batch3Feats.ts                               |
-| Undead Slayer's Handbook   | ~7       | ✅ DONE (7) — tier3Batch3Feats.ts                               |
-| Champions of Balance       | ~7       | ✅ DONE (7) — tier3Batch3Feats.ts                               |
-| People of the Stars        | ~7       | ✅ DONE (7) — tier3Batch3Feats.ts                               |
-| Taldor, Echoes of Glory    | ~8       | ✅ DONE (8) — tier3Batch4Feats.ts                               |
-| People of the Sands        | ~6       | ✅ DONE (5 new) — tier3Batch4Feats.ts (1 reprint)              |
-| Distant Shores             | ~6       | ⏭️ SKIPPED — all 6 are reprints in acg.ts/teamworkFeats.ts      |
-| Andoran, Spirit of Liberty | ~4       | ✅ DONE (4) — tier3Batch4Feats.ts                               |
-| Inner Sea Magic            | ~7       | ✅ DONE (6 new) — tier3Batch5Feats.ts (1 reprint)              |
-| Inner Sea Intrigue         | ~6       | ✅ DONE (5 new) — tier3Batch5Feats.ts (1 reprint)              |
-| Occult Mysteries           | ~4       | ✅ DONE (3 new) — tier3Batch5Feats.ts (1 reprint)              |
-| Magical Marketplace        | ~5       | ⏭️ SKIPPED — all 5 already in armoryFeats/miscBooks/teamwork     |
-| The Harrow Handbook        | ~5       | ✅ DONE (4 new) — tier3Batch6Feats.ts (1 reprint)              |
-| Dwarves of Golarion        | ~5       | ✅ DONE (3 new) — tier3Batch6Feats.ts (2 reprints)             |
-| People of the North        | ~3       | ✅ DONE (1 new) — tier3Batch6Feats.ts (2 reprints)             |
-| Seekers of Secrets         | ~3       | ✅ DONE (2 new) — tier3Batch6Feats.ts (1 reprint)              |
+| Book                       | Feats | Status                                                        |
+| -------------------------- | ----- | ------------------------------------------------------------- |
+| Blood of the Coven         | ~9    | ✅ DONE (9) — tier3Batch1Feats.ts                             |
+| Dungeoneer's Handbook      | ~9    | ✅ DONE (9) — tier3Batch1Feats.ts                             |
+| Black Markets              | ~9    | ✅ DONE (9) — tier3Batch1Feats.ts                             |
+| Bastards of Golarion       | ~8    | ✅ DONE (8) — tier3Batch2Feats.ts                             |
+| Heroes of the Darklands    | ~8    | ✅ DONE (8) — tier3Batch2Feats.ts                             |
+| Rival Guide                | ~8    | ✅ DONE (4 new) — tier3Batch2Feats.ts (3 reprints, 1 monster) |
+| People of the River        | ~7    | ✅ DONE (7) — tier3Batch2Feats.ts                             |
+| Demon Hunter's Handbook    | ~7    | ✅ DONE (7) — tier3Batch3Feats.ts                             |
+| Undead Slayer's Handbook   | ~7    | ✅ DONE (7) — tier3Batch3Feats.ts                             |
+| Champions of Balance       | ~7    | ✅ DONE (7) — tier3Batch3Feats.ts                             |
+| People of the Stars        | ~7    | ✅ DONE (7) — tier3Batch3Feats.ts                             |
+| Taldor, Echoes of Glory    | ~8    | ✅ DONE (8) — tier3Batch4Feats.ts                             |
+| People of the Sands        | ~6    | ✅ DONE (5 new) — tier3Batch4Feats.ts (1 reprint)             |
+| Distant Shores             | ~6    | ⏭️ SKIPPED — all 6 are reprints in acg.ts/teamworkFeats.ts    |
+| Andoran, Spirit of Liberty | ~4    | ✅ DONE (4) — tier3Batch4Feats.ts                             |
+| Inner Sea Magic            | ~7    | ✅ DONE (6 new) — tier3Batch5Feats.ts (1 reprint)             |
+| Inner Sea Intrigue         | ~6    | ✅ DONE (5 new) — tier3Batch5Feats.ts (1 reprint)             |
+| Occult Mysteries           | ~4    | ✅ DONE (3 new) — tier3Batch5Feats.ts (1 reprint)             |
+| Magical Marketplace        | ~5    | ⏭️ SKIPPED — all 5 already in armoryFeats/miscBooks/teamwork  |
+| The Harrow Handbook        | ~5    | ✅ DONE (4 new) — tier3Batch6Feats.ts (1 reprint)             |
+| Dwarves of Golarion        | ~5    | ✅ DONE (3 new) — tier3Batch6Feats.ts (2 reprints)            |
+| People of the North        | ~3    | ✅ DONE (1 new) — tier3Batch6Feats.ts (2 reprints)            |
+| Seekers of Secrets         | ~3    | ✅ DONE (2 new) — tier3Batch6Feats.ts (1 reprint)             |
 
 ### Adventure Path volumes — ✅ ALL COMPLETE (PR #26)
 
 All in `apVolumeFeats.ts`.
 
-| Book                                       | Feats    | Status                                                  |
-| ------------------------------------------ | -------- | ------------------------------------------------------- |
-| Pathfinder #132: The Six-Legend Soul       | ~11      | ✅ DONE (10) — 1 feat details unavailable               |
-| Pathfinder #91: Battle of Bloodmarch Hills | ~14      | ⏭️ SKIPPED — all require giant subtype/Large+            |
-| Pathfinder #139: The Dead Road             | ~10      | ⏭️ SKIPPED — all require Shabti or Duskwalker race       |
-| Pathfinder #131: The Reaper's Right Hand   | ~8       | ⏭️ SKIPPED — campaign-specific noble house story feats   |
-| Legacy of Fire Player's Guide              | ~8       | ✅ DONE (8) — achievement feats                         |
-| Rise of the Runelords Player's Guide       | ~6       | ✅ DONE (4 new) — 2 reprints                            |
-| Curse of the Crimson Throne Player's Guide | ~5       | ✅ DONE (3 new) — 2 reprints                            |
+| Book                                       | Feats | Status                                                 |
+| ------------------------------------------ | ----- | ------------------------------------------------------ |
+| Pathfinder #132: The Six-Legend Soul       | ~11   | ✅ DONE (10) — 1 feat details unavailable              |
+| Pathfinder #91: Battle of Bloodmarch Hills | ~14   | ⏭️ SKIPPED — all require giant subtype/Large+          |
+| Pathfinder #139: The Dead Road             | ~10   | ⏭️ SKIPPED — all require Shabti or Duskwalker race     |
+| Pathfinder #131: The Reaper's Right Hand   | ~8    | ⏭️ SKIPPED — campaign-specific noble house story feats |
+| Legacy of Fire Player's Guide              | ~8    | ✅ DONE (8) — achievement feats                        |
+| Rise of the Runelords Player's Guide       | ~6    | ✅ DONE (4 new) — 2 reprints                           |
+| Curse of the Crimson Throne Player's Guide | ~5    | ✅ DONE (3 new) — 2 reprints                           |
 
 ---
 
