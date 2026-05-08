@@ -22,21 +22,22 @@ Primary source: **d20pfsrd.com** hosts full PoW/PoWE content with Dreamscarred's
 
 Mapped from Mark's plan. Every row here produces data files that need book-sourced content.
 
-| # | Domain | Count | Source per entry | Phase |
-| --- | --- | --- | --- | --- |
-| 1 | Disciplines (PoW + PoWE) | ~20 | d20pfsrd discipline index pages | 1 |
-| 2 | Maneuvers (PoW + PoWE) | ~500+ | d20pfsrd per-maneuver pages | 2 |
-| 3 | Stances (PoW + PoWE) | ~100+ | d20pfsrd per-stance pages | 3 |
-| 4 | Base classes (PoW + PoWE) | 6 | d20pfsrd per-class pages + tables | 4 |
-| 5 | Base class progression tables | 6 × 20 levels | Class page tables | 4 |
-| 6 | Prestige classes | 9 | d20pfsrd per-prestige-class pages | 5 |
-| 7 | Prestige class progression tables | 9 × 10 levels | Class page tables | 5 |
-| 8 | Initiating-granting archetypes | 7 | Archetype pages on each base class | 6 |
-| 9 | Discipline-swapping archetypes | ~13 | Archetype pages on Stalker/Warder/Warlord/Zealot | 6 |
-| 10 | Martial Traditions | ~20 | d20pfsrd traditions index + per-tradition pages | 7 |
-| 11 | PoW / PoWE feats | ~40–60 (scout first) | d20pfsrd feats index | 8 |
+| #   | Domain                            | Count                | Source per entry                                 | Phase |
+| --- | --------------------------------- | -------------------- | ------------------------------------------------ | ----- |
+| 1   | Disciplines (PoW + PoWE)          | ~20                  | d20pfsrd discipline index pages                  | 1     |
+| 2   | Maneuvers (PoW + PoWE)            | ~500+                | d20pfsrd per-maneuver pages                      | 2     |
+| 3   | Stances (PoW + PoWE)              | ~100+                | d20pfsrd per-stance pages                        | 3     |
+| 4   | Base classes (PoW + PoWE)         | 6                    | d20pfsrd per-class pages + tables                | 4     |
+| 5   | Base class progression tables     | 6 × 20 levels        | Class page tables                                | 4     |
+| 6   | Prestige classes                  | 9                    | d20pfsrd per-prestige-class pages                | 5     |
+| 7   | Prestige class progression tables | 9 × 10 levels        | Class page tables                                | 5     |
+| 8   | Initiating-granting archetypes    | 7                    | Archetype pages on each base class               | 6     |
+| 9   | Discipline-swapping archetypes    | ~13                  | Archetype pages on Stalker/Warder/Warlord/Zealot | 6     |
+| 10  | Martial Traditions                | ~20                  | d20pfsrd traditions index + per-tradition pages  | 7     |
+| 11  | PoW / PoWE feats                  | ~40–60 (scout first) | d20pfsrd feats index                             | 8     |
 
 Mark flagged these explicit **TBDs requiring source book** (can't all be found on d20pfsrd):
+
 - ~10 Martial Traditions — favored discipline + alignment
 - ~8 discipline-swapping archetypes — exact gained/lost disciplines
 - Progression table per-level values
@@ -49,17 +50,18 @@ Scraping agents must flag items they can't resolve from d20pfsrd so Doug/Mark ca
 
 Mechanical code drop from Mark's plan into the repo. No scraping, no creative decisions.
 
-| Task | File(s) |
-| --- | --- |
-| Types (copy verbatim from initiating-system.md Phase 1) | `src/types/initiating.ts` — `ManeuverDefinition`, `StanceDefinition`, `DisciplineDefinition`, `MartialTradition`, `InitiatingPool`, `RecoveryMechanic`, etc. |
-| Extend `DataQualityFields` onto every new type | same file — every catalog type must `extends DataQualityFields` |
-| normalizeSource short-codes for 3pp sources | `src/utils/normalizeSource.ts` — key `dsp-pow` → `{ bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' }`; key `dsp-powe` → `{ bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' }`. Note: the final `bookId` in data objects is `'pow'` / `'powe'` (NOT the normalizeSource key `'dsp-pow'`/`'dsp-powe'`). |
-| Empty data directories with index barrels | `src/data/disciplines/index.ts`, `src/data/maneuvers/index.ts`, `src/data/stances/index.ts`, `src/data/martialTraditions/index.ts` — each exports an empty `ALL_*` array for now |
-| Progression table skeleton | `src/data/classes/initiatingProgressionTables.ts` — types + empty registry |
-| Class data skeletons | `src/data/classes/initiatingClasses.ts`, `src/data/classes/initiatingPrestigeClasses.ts` — empty arrays |
-| Verify scripts | `scripts/verify-disciplines.ts`, `scripts/verify-maneuvers.ts`, `scripts/verify-stances.ts`, `scripts/verify-martial-traditions.ts` — mirror `scripts/verify-feats.ts` pattern (duplicate IDs, required fields, counts by source/discipline) |
+| Task                                                    | File(s)                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Types (copy verbatim from initiating-system.md Phase 1) | `src/types/initiating.ts` — `ManeuverDefinition`, `StanceDefinition`, `DisciplineDefinition`, `MartialTradition`, `InitiatingPool`, `RecoveryMechanic`, etc.                                                                                                                                                                                                      |
+| Extend `DataQualityFields` onto every new type          | same file — every catalog type must `extends DataQualityFields`                                                                                                                                                                                                                                                                                                   |
+| normalizeSource short-codes for 3pp sources             | `src/utils/normalizeSource.ts` — key `dsp-pow` → `{ bookId: 'pow', bookName: 'Path of War', publisher: 'Dreamscarred Press' }`; key `dsp-powe` → `{ bookId: 'powe', bookName: 'Path of War: Expanded', publisher: 'Dreamscarred Press' }`. Note: the final `bookId` in data objects is `'pow'` / `'powe'` (NOT the normalizeSource key `'dsp-pow'`/`'dsp-powe'`). |
+| Empty data directories with index barrels               | `src/data/disciplines/index.ts`, `src/data/maneuvers/index.ts`, `src/data/stances/index.ts`, `src/data/martialTraditions/index.ts` — each exports an empty `ALL_*` array for now                                                                                                                                                                                  |
+| Progression table skeleton                              | `src/data/classes/initiatingProgressionTables.ts` — types + empty registry                                                                                                                                                                                                                                                                                        |
+| Class data skeletons                                    | `src/data/classes/initiatingClasses.ts`, `src/data/classes/initiatingPrestigeClasses.ts` — empty arrays                                                                                                                                                                                                                                                           |
+| Verify scripts                                          | `scripts/verify-disciplines.ts`, `scripts/verify-maneuvers.ts`, `scripts/verify-stances.ts`, `scripts/verify-martial-traditions.ts` — mirror `scripts/verify-feats.ts` pattern (duplicate IDs, required fields, counts by source/discipline)                                                                                                                      |
 
 **Review checklist before Phase 0 ships:**
+
 - Every new catalog type `extends DataQualityFields` (don't repeat the PR #57 review miss)
 - `AppliedTemplate`-style character subdocs stay clean (no `DataQualityFields` on character state)
 - normalizeSource keys are `dsp-pow` / `dsp-powe`; the resulting `bookId` values in data objects are `'pow'` / `'powe'` — don't confuse the two
@@ -71,6 +73,7 @@ Mechanical code drop from Mark's plan into the repo. No scraping, no creative de
 Disciplines are small — name, description, associated skill, associated weapon groups, sourceSystem. Must land first because every maneuver/stance URL is discipline-scoped.
 
 **Source URLs (expected, agent to verify on first fetch):**
+
 - PoW: `https://www.d20pfsrd.com/path-of-war/disciplines/`
 - PoWE: `https://www.d20pfsrd.com/path-of-war-expanded/disciplines/`
 
@@ -101,33 +104,33 @@ If a discipline has >25 maneuvers, split into part 2: `<pow|powe>-<discipline-sl
 
 ### PoW maneuvers — batch assignments (one row = one agent)
 
-| # | Discipline | Expected | Split? | File(s) |
-| --- | --- | --- | --- | --- |
-| 1 | Broken Blade | ~29 | 2 | `pow-broken-blade.ts` (lvl 1–4), `pow-broken-blade-part2.ts` (lvl 5–9) |
-| 2 | Golden Lion | ~30 | 2 | `pow-golden-lion.ts` + `part2` |
-| 3 | Iron Tortoise | ~30 | 2 | `pow-iron-tortoise.ts` + `part2` |
-| 4 | Primal Fury | ~30 | 2 | `pow-primal-fury.ts` + `part2` |
-| 5 | Scarlet Throne | ~30 | 2 | `pow-scarlet-throne.ts` + `part2` |
-| 6 | Silver Crane | ~30 | 2 | `pow-silver-crane.ts` + `part2` |
-| 7 | Solar Wind | ~30 | 2 | `pow-solar-wind.ts` + `part2` |
-| 8 | Steel Serpent | ~30 | 2 | `pow-steel-serpent.ts` + `part2` |
-| 9 | Thrashing Dragon | ~30 | 2 | `pow-thrashing-dragon.ts` + `part2` |
-| 10 | Veiled Moon | ~30 | 2 | `pow-veiled-moon.ts` + `part2` |
+| #   | Discipline       | Expected | Split? | File(s)                                                                |
+| --- | ---------------- | -------- | ------ | ---------------------------------------------------------------------- |
+| 1   | Broken Blade     | ~29      | 2      | `pow-broken-blade.ts` (lvl 1–4), `pow-broken-blade-part2.ts` (lvl 5–9) |
+| 2   | Golden Lion      | ~30      | 2      | `pow-golden-lion.ts` + `part2`                                         |
+| 3   | Iron Tortoise    | ~30      | 2      | `pow-iron-tortoise.ts` + `part2`                                       |
+| 4   | Primal Fury      | ~30      | 2      | `pow-primal-fury.ts` + `part2`                                         |
+| 5   | Scarlet Throne   | ~30      | 2      | `pow-scarlet-throne.ts` + `part2`                                      |
+| 6   | Silver Crane     | ~30      | 2      | `pow-silver-crane.ts` + `part2`                                        |
+| 7   | Solar Wind       | ~30      | 2      | `pow-solar-wind.ts` + `part2`                                          |
+| 8   | Steel Serpent    | ~30      | 2      | `pow-steel-serpent.ts` + `part2`                                       |
+| 9   | Thrashing Dragon | ~30      | 2      | `pow-thrashing-dragon.ts` + `part2`                                    |
+| 10  | Veiled Moon      | ~30      | 2      | `pow-veiled-moon.ts` + `part2`                                         |
 
 ### PoWE maneuvers — batch assignments
 
-| # | Discipline | Expected | Split? | File(s) |
-| --- | --- | --- | --- | --- |
-| 11 | Black Seraph | ~30 | 2 | `powe-black-seraph.ts` + `part2` |
-| 12 | Cursed Razor | ~30 | 2 | `powe-cursed-razor.ts` + `part2` |
-| 13 | Elemental Flux | ~30 | 2 | `powe-elemental-flux.ts` + `part2` |
-| 14 | Eternal Guardian | ~30 | 2 | `powe-eternal-guardian.ts` + `part2` |
-| 15 | Mithral Current | ~30 | 2 | `powe-mithral-current.ts` + `part2` |
-| 16 | Piercing Thunder | ~30 | 2 | `powe-piercing-thunder.ts` + `part2` |
-| 17 | Riven Hourglass | ~30 | 2 | `powe-riven-hourglass.ts` + `part2` |
-| 18 | Shattered Mirror | ~30 | 2 | `powe-shattered-mirror.ts` + `part2` |
-| 19 | Sleeping Goddess | ~30 | 2 | `powe-sleeping-goddess.ts` + `part2` |
-| 20 | Tempest Gale | ~30 | 2 | `powe-tempest-gale.ts` + `part2` |
+| #   | Discipline       | Expected | Split? | File(s)                              |
+| --- | ---------------- | -------- | ------ | ------------------------------------ |
+| 11  | Black Seraph     | ~30      | 2      | `powe-black-seraph.ts` + `part2`     |
+| 12  | Cursed Razor     | ~30      | 2      | `powe-cursed-razor.ts` + `part2`     |
+| 13  | Elemental Flux   | ~30      | 2      | `powe-elemental-flux.ts` + `part2`   |
+| 14  | Eternal Guardian | ~30      | 2      | `powe-eternal-guardian.ts` + `part2` |
+| 15  | Mithral Current  | ~30      | 2      | `powe-mithral-current.ts` + `part2`  |
+| 16  | Piercing Thunder | ~30      | 2      | `powe-piercing-thunder.ts` + `part2` |
+| 17  | Riven Hourglass  | ~30      | 2      | `powe-riven-hourglass.ts` + `part2`  |
+| 18  | Shattered Mirror | ~30      | 2      | `powe-shattered-mirror.ts` + `part2` |
+| 19  | Sleeping Goddess | ~30      | 2      | `powe-sleeping-goddess.ts` + `part2` |
+| 20  | Tempest Gale     | ~30      | 2      | `powe-tempest-gale.ts` + `part2`     |
 
 **Split rule:** Part 1 covers maneuver levels 1–4; Part 2 covers levels 5–9. If a discipline turns out to have ≤25 maneuvers total, skip part 2 and bundle everything in part 1.
 
@@ -143,12 +146,12 @@ Each discipline has ~3–9 stances. Most disciplines fit comfortably with all st
 
 ### Batch assignments (25-cap applied)
 
-| # | Bundle | Estimated entries | Files produced |
-| --- | --- | --- | --- |
-| 21 | PoW stances — first 5 disciplines (Broken Blade, Golden Lion, Iron Tortoise, Primal Fury, Scarlet Throne) | ~25 | 5 files |
-| 22 | PoW stances — remaining 5 disciplines (Silver Crane, Solar Wind, Steel Serpent, Thrashing Dragon, Veiled Moon) | ~25 | 5 files |
-| 23 | PoWE stances — first 5 disciplines (Black Seraph, Cursed Razor, Elemental Flux, Eternal Guardian, Mithral Current) | ~25 | 5 files |
-| 24 | PoWE stances — remaining 5 disciplines (Piercing Thunder, Riven Hourglass, Shattered Mirror, Sleeping Goddess, Tempest Gale) | ~25 | 5 files |
+| #   | Bundle                                                                                                                       | Estimated entries | Files produced |
+| --- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------- | -------------- |
+| 21  | PoW stances — first 5 disciplines (Broken Blade, Golden Lion, Iron Tortoise, Primal Fury, Scarlet Throne)                    | ~25               | 5 files        |
+| 22  | PoW stances — remaining 5 disciplines (Silver Crane, Solar Wind, Steel Serpent, Thrashing Dragon, Veiled Moon)               | ~25               | 5 files        |
+| 23  | PoWE stances — first 5 disciplines (Black Seraph, Cursed Razor, Elemental Flux, Eternal Guardian, Mithral Current)           | ~25               | 5 files        |
+| 24  | PoWE stances — remaining 5 disciplines (Piercing Thunder, Riven Hourglass, Shattered Mirror, Sleeping Goddess, Tempest Gale) | ~25               | 5 files        |
 
 ---
 
@@ -160,14 +163,14 @@ Each class needs: HD, BAB, saves, skill ranks, class skills, armor/weapon profic
 
 One class = one agent. Each class easily fits under the 25-item cap if we count features+table as one unit — but the class features list for a base class typically has 15–25 named features across 20 levels, so one agent = one class is the right size.
 
-| # | Class | Book | Output files |
-| --- | --- | --- | --- |
-| 25 | Stalker | PoW | `src/data/classes/initiating/stalker.ts` + progression table entry |
-| 26 | Warder | PoW | `warder.ts` + progression |
-| 27 | Warlord | PoW | `warlord.ts` + progression |
-| 28 | Harbinger | PoWE | `harbinger.ts` + progression |
-| 29 | Mystic | PoWE | `mystic.ts` + progression |
-| 30 | Zealot | PoWE | `zealot.ts` + progression |
+| #   | Class     | Book | Output files                                                       |
+| --- | --------- | ---- | ------------------------------------------------------------------ |
+| 25  | Stalker   | PoW  | `src/data/classes/initiating/stalker.ts` + progression table entry |
+| 26  | Warder    | PoW  | `warder.ts` + progression                                          |
+| 27  | Warlord   | PoW  | `warlord.ts` + progression                                         |
+| 28  | Harbinger | PoWE | `harbinger.ts` + progression                                       |
+| 29  | Mystic    | PoWE | `mystic.ts` + progression                                          |
+| 30  | Zealot    | PoWE | `zealot.ts` + progression                                          |
 
 Each agent must also produce the entry for `initiatingProgressionTables.ts` — the `[maneuversKnown, maneuversReadied, stancesKnown][]` array for all 20 levels.
 
@@ -181,17 +184,17 @@ Each prestige class needs: prerequisites, HD, BAB, saves, 10-level progression t
 
 **Source:** `https://www.d20pfsrd.com/path-of-war<-expanded>/prestige-classes/<class-slug>/`
 
-| # | Prestige Class | Book | Output file |
-| --- | --- | --- | --- |
-| 31 | Animus Adept | PoWE | `src/data/classes/initiating/prestige/animus-adept.ts` |
-| 32 | Awakened Blade | PoW | `awakened-blade.ts` |
-| 33 | Battle Templar | PoWE | `battle-templar.ts` |
-| 34 | Bladecaster | PoW | `bladecaster.ts` |
-| 35 | Dragon Fury | PoW | `dragon-fury.ts` |
-| 36 | Landsknecht | PoWE | `landsknecht.ts` |
-| 37 | Mage Hunter | PoWE | `mage-hunter.ts` |
-| 38 | Phoenix Champion | PoW | `phoenix-champion.ts` |
-| 39 | Umbral Blade | PoWE | `umbral-blade.ts` |
+| #   | Prestige Class   | Book | Output file                                            |
+| --- | ---------------- | ---- | ------------------------------------------------------ |
+| 31  | Animus Adept     | PoWE | `src/data/classes/initiating/prestige/animus-adept.ts` |
+| 32  | Awakened Blade   | PoW  | `awakened-blade.ts`                                    |
+| 33  | Battle Templar   | PoWE | `battle-templar.ts`                                    |
+| 34  | Bladecaster      | PoW  | `bladecaster.ts`                                       |
+| 35  | Dragon Fury      | PoW  | `dragon-fury.ts`                                       |
+| 36  | Landsknecht      | PoWE | `landsknecht.ts`                                       |
+| 37  | Mage Hunter      | PoWE | `mage-hunter.ts`                                       |
+| 38  | Phoenix Champion | PoW  | `phoenix-champion.ts`                                  |
+| 39  | Umbral Blade     | PoWE | `umbral-blade.ts`                                      |
 
 Each prestige class is smaller than a base class (10 levels, fewer features). 1 agent per class, no splits expected.
 
@@ -207,15 +210,15 @@ Each needs: base class, IL progression rate (full/half), key ability, discipline
 
 **Source:** d20pfsrd archetype pages nested under the base class. URL pattern: `https://www.d20pfsrd.com/path-of-war<-expanded>/classes/<base-class>/<archetype-slug>/`
 
-| # | Archetype | Base | Output file |
-| --- | --- | --- | --- |
-| 40 | Primal Disciple | Barbarian | `src/data/classes/archetypes/primal-disciple.ts` |
-| 41 | Rubato | Bard | `rubato.ts` |
-| 42 | Myrmidon | Fighter | `myrmidon.ts` |
-| 43 | Monk of the Silver Fist | Monk | `monk-of-the-silver-fist.ts` |
-| 44 | Knight Disciple | Paladin | `knight-disciple.ts` |
-| 45 | Ambush Hunter | Ranger | `ambush-hunter.ts` |
-| 46 | Hidden Blade | Rogue | `hidden-blade.ts` |
+| #   | Archetype               | Base      | Output file                                      |
+| --- | ----------------------- | --------- | ------------------------------------------------ |
+| 40  | Primal Disciple         | Barbarian | `src/data/classes/archetypes/primal-disciple.ts` |
+| 41  | Rubato                  | Bard      | `rubato.ts`                                      |
+| 42  | Myrmidon                | Fighter   | `myrmidon.ts`                                    |
+| 43  | Monk of the Silver Fist | Monk      | `monk-of-the-silver-fist.ts`                     |
+| 44  | Knight Disciple         | Paladin   | `knight-disciple.ts`                             |
+| 45  | Ambush Hunter           | Ranger    | `ambush-hunter.ts`                               |
+| 46  | Hidden Blade            | Rogue     | `hidden-blade.ts`                                |
 
 One agent per archetype — 7 agents total. Each also emits a progression-table entry.
 
@@ -225,11 +228,11 @@ Smaller data — each just needs gained/lost discipline lists and any modified c
 
 **Source:** d20pfsrd archetype pages on each initiating class.
 
-| # | Archetype | Base Class | Output file |
-| --- | --- | --- | --- |
-| 47 (bundle 1: Warder, 5 archetypes) | Fiendbound Marauder, Ordained Defender, Dervish Defender, Zweihander Sentinel, Hawkguard | Warder | One file `warder-archetypes.ts` with 5 entries |
-| 48 (bundle 2: Warder + Warlord, ~5 archetypes) | Sworn Defender (Warder), Bannerman, Bushi, Steelfist Commando, Vanguard Commander (Warlord) | mixed | `warder-warlord-archetypes.ts` |
-| 49 (bundle 3: Stalker + Zealot, 3 archetypes) | Brutal Slayer (Stalker), Discordant Crusader, Void Prophet (Zealot) | mixed | `stalker-zealot-archetypes.ts` |
+| #                                              | Archetype                                                                                   | Base Class | Output file                                    |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------- | ---------- | ---------------------------------------------- |
+| 47 (bundle 1: Warder, 5 archetypes)            | Fiendbound Marauder, Ordained Defender, Dervish Defender, Zweihander Sentinel, Hawkguard    | Warder     | One file `warder-archetypes.ts` with 5 entries |
+| 48 (bundle 2: Warder + Warlord, ~5 archetypes) | Sworn Defender (Warder), Bannerman, Bushi, Steelfist Commando, Vanguard Commander (Warlord) | mixed      | `warder-warlord-archetypes.ts`                 |
+| 49 (bundle 3: Stalker + Zealot, 3 archetypes)  | Brutal Slayer (Stalker), Discordant Crusader, Void Prophet (Zealot)                         | mixed      | `stalker-zealot-archetypes.ts`                 |
 
 **Mark flagged (plan lines 406–413):** 8 of these have `TBD` for gained/lost disciplines. Agent must flag anything it can't confirm from d20pfsrd — Doug/Mark source-book it afterward.
 
@@ -255,10 +258,10 @@ Mark's plan doesn't enumerate PoW feats; these need a scout pass first to produc
 
 **Source:** `https://www.d20pfsrd.com/path-of-war/feats/` and the PoWE equivalent.
 
-| # | Pass | Work | Output |
-| --- | --- | --- | --- |
-| 50 | Scout | Fetch the PoW + PoWE feat index pages. Report: total count, list of feat names + URLs. No extraction. | Discovery report (inline chat) |
-| 51+ | Scrape | 25-item batches, one bundle per file. Target files: `src/data/feats/pow-feats.ts`, `src/data/feats/powe-feats.ts` (add `-part2` if either exceeds 25) | Feat definitions |
+| #   | Pass   | Work                                                                                                                                                  | Output                         |
+| --- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| 50  | Scout  | Fetch the PoW + PoWE feat index pages. Report: total count, list of feat names + URLs. No extraction.                                                 | Discovery report (inline chat) |
+| 51+ | Scrape | 25-item batches, one bundle per file. Target files: `src/data/feats/pow-feats.ts`, `src/data/feats/powe-feats.ts` (add `-part2` if either exceeds 25) | Feat definitions               |
 
 Feats extend `FeatDefinition` (existing type — no new shape). Use the PoW/PoWE prerequisite types added in Mark's plan Phase 1 (`initiator_level`, `maneuver_known`, `discipline_access`).
 
@@ -445,6 +448,7 @@ Phase 6 (Archetypes)┘
 Update after each batch. Agent # references the numbered rows in phase tables above.
 
 ### Phase 0 — Foundation
+
 - [ ] `src/types/initiating.ts` (all types, all extend `DataQualityFields`)
 - [ ] `src/utils/normalizeSource.ts` — `dsp-pow`, `dsp-powe` bookIds
 - [ ] Data directories + empty barrel `index.ts` (disciplines, maneuvers, stances, martialTraditions)
@@ -453,10 +457,12 @@ Update after each batch. Agent # references the numbered rows in phase tables ab
 - [ ] Verify scripts (4)
 
 ### Phase 1 — Disciplines (0/20) [Agent 1]
+
 - [ ] PoW (0/10)
 - [ ] PoWE (0/10)
 
 ### Phase 2 — Maneuvers (0/20 disciplines, 0/40 agents)
+
 - [ ] Broken Blade — part1, part2 [Agents 1a, 1b]
 - [ ] Golden Lion — part1, part2 [Agents 2a, 2b]
 - [ ] Iron Tortoise — part1, part2
@@ -479,12 +485,14 @@ Update after each batch. Agent # references the numbered rows in phase tables ab
 - [ ] Tempest Gale — part1, part2
 
 ### Phase 3 — Stances (0/4 bundle agents)
+
 - [ ] PoW stances bundle 1 (BB, GL, IT, PF, ST) [Agent 21]
 - [ ] PoW stances bundle 2 (SC, SW, SS, TD, VM) [Agent 22]
 - [ ] PoWE stances bundle 1 (BS, CR, EF, EG, MC) [Agent 23]
 - [ ] PoWE stances bundle 2 (PT, RH, SM, SG, TG) [Agent 24]
 
 ### Phase 4 — Base classes (0/6)
+
 - [ ] Stalker [Agent 25]
 - [ ] Warder [Agent 26]
 - [ ] Warlord [Agent 27]
@@ -493,6 +501,7 @@ Update after each batch. Agent # references the numbered rows in phase tables ab
 - [ ] Zealot [Agent 30]
 
 ### Phase 5 — Prestige classes (0/9)
+
 - [ ] Animus Adept [Agent 31]
 - [ ] Awakened Blade [Agent 32]
 - [ ] Battle Templar [Agent 33]
@@ -504,6 +513,7 @@ Update after each batch. Agent # references the numbered rows in phase tables ab
 - [ ] Umbral Blade [Agent 39]
 
 ### Phase 6a — Grant archetypes (0/7)
+
 - [ ] Primal Disciple [Agent 40]
 - [ ] Rubato [Agent 41]
 - [ ] Myrmidon [Agent 42]
@@ -513,6 +523,7 @@ Update after each batch. Agent # references the numbered rows in phase tables ab
 - [ ] Hidden Blade [Agent 46]
 
 ### Phase 6b — Swap archetypes (0/3 bundle agents)
+
 - [ ] Warder bundle 1 [Agent 47]
 - [ ] Warder/Warlord bundle [Agent 48]
 - [ ] Stalker/Zealot bundle [Agent 49]
@@ -520,6 +531,7 @@ Update after each batch. Agent # references the numbered rows in phase tables ab
 ### Phase 7 — Martial Traditions (0/~20) [Agent single-pass]
 
 ### Phase 8 — Feats (0/?)
+
 - [ ] Scout pass [Agent 50]
 - [ ] Scrape passes [Agents 51+]
 

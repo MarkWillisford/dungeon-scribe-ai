@@ -687,6 +687,7 @@ definition never specifies which finger — that's up to the player.
 
 **Conditional bonuses** (`EffectCondition` on individual effects):
 Use the `condition` field on an `Effect` for bonuses that only apply sometimes:
+
 ```typescript
 {
   type: 'bonus',
@@ -705,6 +706,7 @@ Use the `condition` field on an `Effect` for bonuses that only apply sometimes:
 **Class/race/alignment-gated power blocks** (`conditionalEffects[]` on the item):
 Use `conditionalEffects[]` when an entirely different set of effects or spell-like abilities
 applies only when the wielder meets a condition (paladin, dwarf, lawful good, etc.):
+
 ```typescript
 conditionalEffects: [
   {
@@ -715,6 +717,7 @@ conditionalEffects: [
   },
 ],
 ```
+
 See `_example.ts` Examples 4 and 5 for complete patterns.
 
 ### d20pfsrd URL Patterns
