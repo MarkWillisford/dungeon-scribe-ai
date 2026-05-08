@@ -1,6 +1,6 @@
 # Dungeon Scribe AI 1.1 — Implementation Plan
 
-## Status (as of 2026-04-22)
+## Status (as of 2026-05-07)
 
 All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown significantly beyond the original plan through additional phases.
 
@@ -52,11 +52,17 @@ All Phase 1 scaffold steps (0–10) are **COMPLETE**. The project has grown sign
 | **Issue #72 skills-tab fixes** — `SpecialtyGroup` component for Craft/Profession free-text specialties, initiating gating, skill tests                         | —                                         | **COMPLETE** — PR #100 (merged 2026-04-22)                                                                                                           |
 | **Issue #72 classes + template fixes** — favored class selection/steppers, drag-to-reorder multiclass, template picker improvements                            | —                                         | **COMPLETE** — PR #101 (merged 2026-04-22)                                                                                                           |
 | **Typed ability score bonuses + equipment enhancement sync** — `DraftTypedBonus[]`, stacking rules, enhancement auto-sync                                      | —                                         | **COMPLETE** — PR #98 (merged 2026-04-28)                                                                                                            |
-| **FCB Phase 1** — `FavoredClassBonusEntry` type, 36-race data, `GameDataService.getFavoredClassBonuses`, both connectors, seed script, Firestore index, tests | `favored-class-bonuses.md`                | **COMPLETE** — PR #106 (merged 2026-04-29)                                                                                                           |
-| **FCB Phase 2** — `FavoredClassBonusSelection[]` per-level model, `ClassEntryCard` picker, migration, slice updates, validation                               | `favored-class-bonuses.md`                | **IN REVIEW** — PR #107                                                                                                                              |
+| **FCB Phase 1** — `FavoredClassBonusEntry` type, 36-race data, `GameDataService.getFavoredClassBonuses`, both connectors, seed script, Firestore index, tests  | `favored-class-bonuses.md`                | **COMPLETE** — PR #106 (merged 2026-04-29)                                                                                                           |
+| **FCB Phase 2** — `FavoredClassBonusSelection[]` per-level model, `ClassEntryCard` picker, migration, slice updates, validation                                | `favored-class-bonuses.md`                | **COMPLETE** — PR #107 (merged 2026-04-29)                                                                                                           |
 | **Animal companion builder** — `CompanionService`, `CompanionPickerSheet`, `CompanionCard`, `TemplateCompanionSection`, Redux slice, tests                     | —                                         | **COMPLETE** — PR #104 (merged 2026-04-29)                                                                                                           |
 | **Companion builder screen** — full-page companion detail screen, `CompanionBuilderScreen`, navigation wiring                                                  | —                                         | **COMPLETE** — PR #105 (merged 2026-04-29)                                                                                                           |
-| Enter Rissi — validate model end-to-end                                                                                                                        | —                                         | NOT STARTED                                                                                                                                          |
+| **Eidolon evolution pool** — `GameDataService.getEidolonEvolutions`, `EidolonEvolutionPickerSheet`, `EidolonEvolutionPool`, wired into `ClassEntryCard`, tests | —                                         | **COMPLETE** — PR #108 (merged 2026-04-29)                                                                                                           |
+| **Eliminate CharacterDraft** — editor operates directly on `Character`; draft model removed                                                                    | `eliminate-character-draft.md`            | **COMPLETE** — PR #109 (merged 2026-04-30)                                                                                                           |
+| **Equipment effects pipeline** — `ItemEffectEditorSheet` extended, Dweomerkeeper spell picker, `MagicItemPreset` system                                        | `equipment-effects-pipeline.md`           | **COMPLETE** — PR #116 (merged 2026-05-06)                                                                                                           |
+| **Static data backfill** — spells, feats, traits, class choices, patch scripts for Firestore                                                                   | —                                         | **COMPLETE** — PR #117 (merged 2026-05-05)                                                                                                           |
+| **Direct entry bug fixes (Rissi session)** — spell picker, feat slots, HP, skills, traits, SafeAreaView, DiceFAB overlap                                       | —                                         | **COMPLETE** — PR #118 (merged 2026-05-07)                                                                                                           |
+| **Magic item effect import + presets** — `MagicItemEffectImportSheet`, preset library, feat grants, re-equip flow                                              | —                                         | **COMPLETE** — PR #119 (merged 2026-05-07)                                                                                                           |
+| Enter Rissi — validate model end-to-end                                                                                                                        | —                                         | **IN PROGRESS** — first session complete; open bugs tracked in `Current bugs in char direct input.txt`                                               |
 
 #### Note: Campaign content seeding — campaignId deferred (2026-04-15)
 
@@ -803,23 +809,21 @@ Firestore collection: `classChoiceDefinitions/{id}`. Key types: `ClassChoiceDefi
 - [x] **classChoiceDefinitions query fix** — `className` field (was `classIds`); all class choice pickers now load — COMPLETE (PR #92)
 - [x] **Archetype picker** — `getArchetypesByClass`, `ArchetypePickerSheet`, wired into `ClassEntryCard` — COMPLETE (PR #93)
 - [x] **Ruleset selector UI** — `RulesetSettingsSheet` on Identity tab — COMPLETE (PR #97)
-- [ ] Build remaining direct-entry UI components (`src/components/character/direct-entry/`)
-  - **IN PROGRESS (Eidolon Evolution Pool):** Branch `MW/eidolon-evolution-pool`. Slice reducers `addEidolonEvolution` / `removeEidolonEvolution` done. Still needed: `GameDataService.getEidolonEvolutions()`, `EidolonEvolutionPickerSheet.tsx`, `EidolonEvolutionPool.tsx`, wire into `ClassEntryCard.tsx`, tests. Pool formula: `availablePoints = classEntry.level` (both APG and unchained summoner). Each selected evolution stored as `ClassChoice { featureName: 'Eidolon Evolution', takenAtLevel: 0, selection: evolutionId, metadata: { cost, name } }`.
+- [x] Build remaining direct-entry UI components (`src/components/character/direct-entry/`)
+  - **COMPLETE (Eidolon Evolution Pool):** PR #108 (merged 2026-04-29). `GameDataService.getEidolonEvolutions`, `EidolonEvolutionPickerSheet`, `EidolonEvolutionPool` all shipped. Pool formula: `availablePoints = classEntry.level`. Each evolution stored as `ClassChoice { featureName: 'Eidolon Evolution', takenAtLevel: 0, selection: evolutionId, metadata: { cost, name } }`.
   - **TODO (Wandering Spirit Daily Reset):** Shaman wandering spirit uses `selectionMode: { type: 'special' }`. The UI needs a daily-reset component (analogous to spell preparation) that triggers after 8 hours of rest. Reads available spirits from `shamanspirits` collection filtered by `wanderingOnly: true`. Likely lives in a dedicated `WanderingSpiritPicker.tsx` component that integrates with the rest/long-rest flow.
   - **TODO (Evolution Prerequisite Enforcement):** The `Prerequisite` union includes a `{ type: 'evolution'; evolutionId: string }` variant (added with eidolon evolution work) and `PrerequisiteService.formatPrerequisite` handles it for display. However, `PrerequisiteService.checkSingle` has no `case 'evolution':` — it falls through to `default: return false`, meaning any evolution that lists another evolution as a prerequisite will always fail validation silently. This is latent today (no evolution data currently uses prerequisites) but must be implemented before the eidolon evolution picker enforces selection rules. **Fix:** add a `case 'evolution':` to `checkSingle` that looks up the character's current eidolon evolutions and checks whether `evolutionId` is present.
-- [ ] Wire direct-entry screen into navigation (`app/(tabs)/characters/[id]/entry.tsx`)
-- [ ] Enter Rissi — validate model end-to-end
+- [x] Wire direct-entry screen into navigation (`app/(tabs)/characters/[id]/entry.tsx`) — COMPLETE (PR #109, Eliminate CharacterDraft)
+- [ ] Enter Rissi — validate model end-to-end — IN PROGRESS (first session done; open bugs tracked)
 - [ ] Kah-Mei session — capture character, stress-test template model
 
-#### 3e. Animal Companion Builder — PLANNED
+#### 3e. Animal Companion Builder — COMPLETE (PR #104, #105 — merged 2026-04-29)
 
 **Trigger:** Druid or Ranger selects `animal_companion` as their Nature Bond / Hunter's Bond choice.
 
 The animal companion is not a `ClassChoiceDefinition` — it is a separate builder UI flow. The companion has its own HD, BAB, saves, skills, feats, ability scores, tricks, and HP. Its stats update automatically as druid/ranger level increases.
 
-**Data dependency:** `animalcompanions` Firestore collection must be seeded before this UI can function. Scraping plan: `plans/data-scraping/animal-companions-database.md` (needs writing).
-
-**Not a blocker for Rissi** — she has no animal companion. Can be built after the core direct-entry UI (3d) is functional.
+**Data dependency:** `animalcompanions` Firestore collection seeded. `CompanionService`, `CompanionPickerSheet`, `CompanionCard`, `TemplateCompanionSection`, `CompanionBuilderScreen`, and full Redux slice shipped.
 
 Key facts:
 
