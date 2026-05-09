@@ -127,12 +127,14 @@ export default function CharacterDetailScreen() {
                   style: 'destructive',
                   onPress: async () => {
                     try {
-                      await (dispatch(deleteCharacter(id)) as any).unwrap();
+                      await dispatch(deleteCharacter(id)).unwrap();
                       router.replace('/(tabs)/characters');
-                    } catch (err: any) {
+                    } catch (err: unknown) {
                       Alert.alert(
                         'Delete Failed',
-                        err?.message ?? 'An error occurred while deleting the character.',
+                        err instanceof Error
+                          ? err.message
+                          : 'An error occurred while deleting the character.',
                       );
                     }
                   },

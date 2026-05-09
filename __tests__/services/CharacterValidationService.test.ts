@@ -250,6 +250,7 @@ function blankCharacter(): Character {
       knownManeuvers: [],
       readiedManeuvers: [],
       equippedStances: [],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any,
     specialAbilities: { specialAbilities: [] },
     conditions: { activeConditions: [] },
