@@ -6,9 +6,15 @@
 
 ---
 
-## Root Cause
+## Resolution
 
-The project lives at `/mnt/c/Users/Markw/Documents/Development Projects/Dungeon Scribe AI 1.1/` — a Windows NTFS drive mounted inside WSL2 via the **9P protocol**.
+Fix 3 was applied (2026-05-08): repo cloned to `/home/markw/dungeon-scribe-ai` (native ext4), `.env` copied, `npm install` run, `CLAUDE.md` and `scripts/branch-cleanup.sh` updated to reference the new path. Hot reload now works. The Windows-side repo at `/mnt/c/` remains as a backup.
+
+---
+
+## Root Cause (historical)
+
+The project previously lived at `/mnt/c/Users/Markw/Documents/Development Projects/Dungeon Scribe AI 1.1/` — a Windows NTFS drive mounted inside WSL2 via the **9P protocol**.
 
 WSL2 kernel **5.10.16.3** (currently installed) does not propagate inotify events from the Windows host to the Linux side over 9P. Metro's file watcher chain:
 
@@ -107,10 +113,6 @@ The Windows-side repo at `/mnt/c/` can remain as a backup or be removed.
 
 ---
 
-## Recommended Order
+## Resolution Order (applied 2026-05-08)
 
-1. `wsl --update` + `wsl --shutdown` — takes 2 minutes, no risk
-2. `sudo apt install watchman` — takes 5 minutes, low risk
-3. Clone to `/home/markw/dungeon-scribe-ai/` — guaranteed fix, ~15 minutes
-
-Do them in sequence and stop when hot reload works.
+Fix 1 (kernel update) and Fix 2 (watchman) were not attempted — Fix 3 (native Linux path) was chosen as the definitive solution given that worktrees at `/home/markw/worktrees/` already proved it works.
