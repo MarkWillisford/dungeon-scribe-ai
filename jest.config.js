@@ -62,5 +62,6 @@ module.exports = {
     '!src/**/*.d.ts',
     '!src/types/**',
     '!src/**/index.ts',
+    '!src/data/**',
   ],
 };
