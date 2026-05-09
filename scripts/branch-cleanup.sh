@@ -5,7 +5,7 @@
 # Skips branches currently checked out in any worktree.
 
 set -e
-cd "/mnt/c/Users/Markw/Documents/Development Projects/Dungeon Scribe AI 1.1"
+cd "/home/markw/dungeon-scribe-ai"
 git fetch --quiet origin 2>/dev/null || true
 
 # Collect branches currently checked out in any worktree

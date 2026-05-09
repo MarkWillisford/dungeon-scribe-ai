@@ -51,7 +51,7 @@ e2e/           — Maestro E2E tests
 ## Working Directory (WSL)
 
 `$PROJ_DIR` is set at session start to the project root:
-`/mnt/c/Users/Markw/Documents/Development Projects/Dungeon Scribe AI 1.1`
+`/home/markw/dungeon-scribe-ai`
 
 ## Session Start
 
