@@ -71,6 +71,7 @@ jest.mock('@/services/FeatRegistryService', () => ({
 
 jest.mock('@/components/ui/OrnatePanel', () => {
   const React = require('react');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const OrnatePanel = (props: any) =>
     React.createElement('OrnatePanel', { testID: props.testID }, props.children);
   return { OrnatePanel };
@@ -78,6 +79,7 @@ jest.mock('@/components/ui/OrnatePanel', () => {
 
 jest.mock('@/components/ui/OrnateButton', () => {
   const React = require('react');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const OrnateButton = (props: any) =>
     React.createElement('Pressable', { testID: props.testID, onPress: props.onPress }, props.title);
   return { OrnateButton };
@@ -85,12 +87,14 @@ jest.mock('@/components/ui/OrnateButton', () => {
 
 jest.mock('@/components/ui/OrnateTab', () => {
   const React = require('react');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const OrnateTab = (props: any) => React.createElement('OrnateTab', props);
   return { OrnateTab };
 });
 
 jest.mock('@/components/ui/LoadingSpinner', () => {
   const React = require('react');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const LoadingSpinner = (props: any) =>
     React.createElement('LoadingSpinner', { testID: props.testID });
   return { LoadingSpinner };

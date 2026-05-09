@@ -103,7 +103,7 @@ describe('ALL_FAVORED_CLASS_BONUSES — structural integrity', () => {
       (e) => e.mechanicalEffect?.type === 'unmapped',
     );
     const missing = unmapped.filter((entry) => {
-      const reason = (entry.mechanicalEffect as any).reason;
+      const reason = (entry.mechanicalEffect as { reason?: string }).reason;
       return typeof reason !== 'string' || reason.trim() === '';
     });
     expect(missing.map((e) => `${e.id}: missing or empty reason`)).toEqual([]);
