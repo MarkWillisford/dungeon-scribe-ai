@@ -34,6 +34,9 @@ module.exports = {
         '<rootDir>/__tests__/utils/**/*.test.ts',
         '<rootDir>/__tests__/integration/**/*.test.ts',
       ],
+      transform: {
+        '^.+\\.tsx?$': ['ts-jest', { isolatedModules: true }],
+      },
       setupFiles: ['<rootDir>/jest.setup.ts'],
     },
     // Component tests — ts-jest with React Native mocks
@@ -44,7 +47,7 @@ module.exports = {
       roots: ['<rootDir>/__tests__'],
       testMatch: ['<rootDir>/__tests__/components/**/*.test.tsx'],
       transform: {
-        '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.jest.json' }],
+        '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.jest.json', isolatedModules: true }],
       },
       setupFiles: ['<rootDir>/jest.setup.ts', '<rootDir>/jest.setup.components.ts'],
     },
@@ -62,5 +65,6 @@ module.exports = {
     '!src/**/*.d.ts',
     '!src/types/**',
     '!src/**/index.ts',
+    '!src/data/**',
   ],
 };
