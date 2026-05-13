@@ -46,6 +46,7 @@
     "react-redux": "^9.2.0"
   },
   "devDependencies": {
+    "@ai-hero/sandcastle": "^0.5.10",
     "@testing-library/react-native": "^13.3.3",
     "@types/jest": "29.5.14",
     "@types/react": "~19.1.10",
