@@ -47,9 +47,26 @@ Ask the user:
 
 Iterate until the user approves the breakdown.
 
-### 5. Publish the issues to the issue tracker
+### 5. Create the milestone
 
-For each approved slice, publish a new issue to the issue tracker. Use the issue body template below. These issues are considered ready for AFK agents, so publish them with the correct triage label unless instructed otherwise.
+Before publishing any issues, create a GitHub milestone named after the PRD title:
+
+```bash
+gh milestone create --title "<PRD title>" --description "Tracks all issues from the <PRD title> PRD"
+```
+
+Note the milestone number returned — you will need it when publishing issues.
+
+If a milestone with that name already exists, use the existing one.
+
+### 6. Publish the issues to the issue tracker
+
+For each approved slice, publish a new issue to the issue tracker. Use the issue body template below.
+
+- **AFK slices**: apply the `sandcastle` label so the polling script picks them up automatically.
+- **HITL slices**: apply the `sandcastle` label AND add `<!-- HITL -->` as the first line of the issue body so the Sandcastle agent detects the checkpoint at run time.
+
+Assign every issue to the milestone created in step 5.
 
 Publish issues in dependency order (blockers first) so you can reference real issue identifiers in the "Blocked by" field.
 
