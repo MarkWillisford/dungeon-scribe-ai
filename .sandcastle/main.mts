@@ -14,9 +14,9 @@
 // for Run 2 on the same branch.
 //
 // Usage:
-//   npx tsx .sandcastle/main.ts
+//   npx tsx .sandcastle/main.mts
 // Or add to package.json:
-//   "scripts": { "sandcastle": "npx tsx .sandcastle/main.ts" }
+//   "scripts": { "sandcastle": "npx tsx .sandcastle/main.mts" }
 
 import { createSandbox, claudeCode } from '@ai-hero/sandcastle';
 import { docker } from '@ai-hero/sandcastle/sandboxes/docker';
