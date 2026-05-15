@@ -13,10 +13,13 @@
 // approves and relabels back to sandcastle, the next poll cycle picks it up
 // for Run 2 on the same branch.
 //
+// Dependency scheduling: before starting an issue, parseBlockers() extracts
+// any "Blocked by: #NNN" references from the issue body. If a blocker is still
+// open, selectIssue() walks up the chain and tries to work on the blocker
+// instead. If every eligible issue is blocked or in-progress, the loop idles.
+//
 // Usage:
 //   npx tsx .sandcastle/main.mts
-// Or add to package.json:
-//   "scripts": { "sandcastle": "npx tsx .sandcastle/main.mts" }
 
 import { createSandbox, claudeCode } from '@ai-hero/sandcastle';
 import { docker } from '@ai-hero/sandcastle/sandboxes/docker';
@@ -36,8 +39,6 @@ const hooks = {
   sandbox: { onSandboxReady: [{ command: 'npm install' }] },
 };
 
-// Copy host node_modules into each worktree for fast sandbox startup.
-// The onSandboxReady hook above handles platform-specific binaries.
 const copyToWorktree = ['node_modules'];
 
 interface GitHubLabel {
@@ -60,9 +61,7 @@ function listSandcastleIssues(): GitHubIssue[] {
 }
 
 function addLabel(issueNumber: number, label: string): void {
-  execSync(`gh issue edit ${issueNumber} --add-label "${label}"`, {
-    encoding: 'utf8',
-  });
+  execSync(`gh issue edit ${issueNumber} --add-label "${label}"`, { encoding: 'utf8' });
 }
 
 function removeLabel(issueNumber: number, label: string): void {
@@ -76,10 +75,57 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// Extract #NNN references from the "Blocked by" section of an issue body.
+function parseBlockers(body: string): number[] {
+  const match = body.match(/##\s*Blocked by\s*\n([\s\S]*?)(?:\n##|$)/i);
+  if (!match) return [];
+  return [...match[1].matchAll(/#(\d+)/g)].map((m) => parseInt(m[1], 10));
+}
+
+// Check whether a GitHub issue/PR is closed. Cached per poll cycle.
+const resolvedCache = new Map<number, boolean>();
+function isIssueResolved(issueNumber: number): boolean {
+  if (resolvedCache.has(issueNumber)) return resolvedCache.get(issueNumber)!;
+  try {
+    const out = execSync(`gh issue view ${issueNumber} --json state`, { encoding: 'utf8' });
+    const resolved = JSON.parse(out).state === 'CLOSED';
+    resolvedCache.set(issueNumber, resolved);
+    return resolved;
+  } catch {
+    return false;
+  }
+}
+
+// Walk the dependency graph to find the best issue to work on.
+// If an issue has unresolved blockers, recurse into those first.
+// Skips issues whose blockers are all in-progress or outside the queue.
+// visited guards against cycles.
+function selectIssue(issues: GitHubIssue[], visited = new Set<number>()): GitHubIssue | null {
+  for (const issue of issues) {
+    if (visited.has(issue.number)) continue;
+    visited.add(issue.number);
+
+    const unresolvedBlockers = parseBlockers(issue.body).filter((n) => !isIssueResolved(n));
+    if (unresolvedBlockers.length === 0) return issue;
+
+    for (const blockerNum of unresolvedBlockers) {
+      const blockerIssue = issues.find(
+        (i) => i.number === blockerNum && !i.labels.some((l) => l.name === LABEL_IN_PROGRESS),
+      );
+      if (blockerIssue) {
+        const candidate = selectIssue(
+          [blockerIssue, ...issues.filter((i) => i !== blockerIssue)],
+          visited,
+        );
+        if (candidate) return candidate;
+      }
+    }
+  }
+  return null;
+}
+
 async function processIssue(issue: GitHubIssue): Promise<void> {
   const { number: issueNumber, title } = issue;
-
-  // Use a deterministic branch name so HITL Run 2 continues on the same branch.
   const branch = `sandcastle/issue-${issueNumber}`;
 
   console.log(`\nPicking up issue #${issueNumber}: ${title}`);
@@ -91,8 +137,6 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
   const box = await createSandbox({
     branch,
     sandbox: docker({
-      // Mount host Claude Code auth (Max plan) into the container read-only.
-      // The container installs claude-code but has no credentials of its own.
       mounts: [
         {
           hostPath: `${homedir()}/.claude`,
@@ -115,10 +159,8 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
       completionSignal: COMPLETION_SIGNALS,
     });
 
-    const signal = result.completionSignal;
-
-    if (signal === '<promise>NEEDS_REVIEW</promise>') {
-      console.log(`Issue #${issueNumber} paused for architecture review (HITL).`);
+    if (result.completionSignal === '<promise>NEEDS_REVIEW</promise>') {
+      console.log(`Issue #${issueNumber} paused for review.`);
       removeLabel(issueNumber, LABEL_IN_PROGRESS);
       addLabel(issueNumber, LABEL_ARCH_REVIEW);
     } else {
@@ -128,7 +170,6 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
     }
   } catch (err) {
     console.error(`Error processing issue #${issueNumber}:`, err);
-    // Restore to sandcastle so a human can retry or investigate.
     removeLabel(issueNumber, LABEL_IN_PROGRESS);
     addLabel(issueNumber, LABEL_SANDCASTLE);
   } finally {
@@ -140,24 +181,27 @@ async function poll(): Promise<void> {
   console.log('Sandcastle polling started. Watching for sandcastle-labeled issues...\n');
 
   while (true) {
-    const issues = listSandcastleIssues();
+    resolvedCache.clear();
 
-    // Skip issues paused for architecture review — those wait for Mark's
-    // approval and a manual relabel back to `sandcastle`.
+    const issues = listSandcastleIssues();
     const eligible = issues.filter(
       (issue) => !issue.labels.some((l) => l.name === LABEL_ARCH_REVIEW),
     );
 
-    if (eligible.length > 0) {
-      await processIssue(eligible[0]);
+    const next = selectIssue(eligible);
+
+    if (next) {
+      await processIssue(next);
     } else {
       const ts = new Date().toLocaleTimeString('en-US', {
         timeZone: 'America/Los_Angeles',
         hour12: false,
       });
-      console.log(
-        `[${ts} PT] No eligible issues. Checking again in ${POLL_INTERVAL_MS / 1000}s...`,
-      );
+      const reason =
+        eligible.length === 0
+          ? 'No eligible issues.'
+          : 'All eligible issues are blocked or in-progress.';
+      console.log(`[${ts} PT] ${reason} Checking again in ${POLL_INTERVAL_MS / 1000}s...`);
     }
 
     await sleep(POLL_INTERVAL_MS);
