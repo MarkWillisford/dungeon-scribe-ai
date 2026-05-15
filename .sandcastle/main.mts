@@ -165,7 +165,10 @@ function selectIssue(issues: GitHubIssue[], visited = new Set<number>()): GitHub
         (i) => i.number === blockerNum && !i.labels.some((l) => l.name === LABEL_IN_PROGRESS),
       );
       if (blockerIssue) {
-        const candidate = selectIssue(issues, visited);
+        const candidate = selectIssue(
+          [blockerIssue, ...issues.filter((i) => i !== blockerIssue)],
+          visited,
+        );
         if (candidate) return candidate;
       }
     }
