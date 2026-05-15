@@ -146,7 +146,6 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
       ],
     }),
     hooks,
-    copyToWorktree,
   });
 
   try {
