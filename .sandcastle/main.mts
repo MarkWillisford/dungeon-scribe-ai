@@ -21,6 +21,7 @@
 import { createSandbox, claudeCode } from '@ai-hero/sandcastle';
 import { docker } from '@ai-hero/sandcastle/sandboxes/docker';
 import { execSync } from 'node:child_process';
+import { homedir } from 'node:os';
 
 const POLL_INTERVAL_MS = 30_000;
 
@@ -89,7 +90,17 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
 
   const box = await createSandbox({
     branch,
-    sandbox: docker(),
+    sandbox: docker({
+      // Mount host Claude Code auth (Max plan) into the container read-only.
+      // The container installs claude-code but has no credentials of its own.
+      mounts: [
+        {
+          hostPath: `${homedir()}/.claude`,
+          sandboxPath: '/home/agent/.claude',
+          readonly: true,
+        },
+      ],
+    }),
     hooks,
     copyToWorktree,
   });

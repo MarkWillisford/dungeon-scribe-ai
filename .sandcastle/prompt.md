@@ -82,7 +82,7 @@ If the issue body does NOT start with `<!-- HITL -->`, skip straight to implemen
 - Every new function and component needs test coverage.
 - Do not leave TODO comments or commented-out code in committed changes.
 - Do not add features, refactor, or introduce abstractions beyond what the issue requires.
-- If blocked by a missing dependency, ambiguous requirement, or unresolvable test failure, post a comment on issue #{{ISSUE_NUMBER}} explaining the blocker, then stop.
+- If blocked by a missing dependency, ambiguous requirement, or unresolvable test failure, post a comment on issue #{{ISSUE_NUMBER}} explaining the blocker, then emit `<promise>NEEDS_REVIEW</promise>` and stop.
 
 ---
 
