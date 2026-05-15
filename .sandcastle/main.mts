@@ -92,7 +92,9 @@ function isIssueResolved(issueNumber: number): boolean {
     resolvedCache.set(issueNumber, resolved);
     return resolved;
   } catch {
-    return false;
+    // Issue not found or inaccessible -- treat as resolved so it doesn't block forever.
+    resolvedCache.set(issueNumber, true);
+    return true;
   }
 }
 
@@ -113,10 +115,8 @@ function selectIssue(issues: GitHubIssue[], visited = new Set<number>()): GitHub
         (i) => i.number === blockerNum && !i.labels.some((l) => l.name === LABEL_IN_PROGRESS),
       );
       if (blockerIssue) {
-        const candidate = selectIssue(
-          [blockerIssue, ...issues.filter((i) => i !== blockerIssue)],
-          visited,
-        );
+        // Reuse the same issues array and visited set -- no rebuild on each recursion.
+        const candidate = selectIssue(issues, visited);
         if (candidate) return candidate;
       }
     }
