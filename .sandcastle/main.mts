@@ -165,10 +165,8 @@ function selectIssue(issues: GitHubIssue[], visited = new Set<number>()): GitHub
         (i) => i.number === blockerNum && !i.labels.some((l) => l.name === LABEL_IN_PROGRESS),
       );
       if (blockerIssue) {
-        const candidate = selectIssue(
-          [blockerIssue, ...issues.filter((i) => i !== blockerIssue)],
-          visited,
-        );
+        // Reuse the same issues array and visited set -- no rebuild on each recursion.
+        const candidate = selectIssue(issues, visited);
         if (candidate) return candidate;
       }
     }
