@@ -97,10 +97,14 @@ export class FormulaService {
 
   /**
    * Build a FormulaContext from a Character object.
+   *
+   * Per-class level variables are injected dynamically from character.classes
+   * (e.g. barbarianLevel: 4, clericLevel: 3). No fixed class list in code --
+   * new classes from Firestore get their variable automatically.
    */
   static buildContext(character: Character): FormulaContext {
     const s = character.abilityScores;
-    return {
+    const context: FormulaContext = {
       BAB: character.classes.baseAttackBonus[0] ?? 0,
       level: character.classes.totalLevel,
       str: s.str.total,
@@ -117,6 +121,24 @@ export class FormulaService {
       chaMod: s.cha.modifier,
       size: this.getSizeModifier(character.info.size),
     };
+
+    for (const cls of character.classes.classes) {
+      context[`${this.toClassId(cls.name)}Level`] = cls.level;
+    }
+
+    return context;
+  }
+
+  /**
+   * Normalize a class name to a camelCase identifier for formula variable injection.
+   * "Barbarian" -> "barbarian", "Holy Vindicator" -> "holyVindicator"
+   */
+  static toClassId(className: string): string {
+    return className
+      .replace(/[^a-zA-Z0-9\s]/g, '')
+      .trim()
+      .replace(/\s+(\w)/g, (_, c: string) => c.toUpperCase())
+      .replace(/^(.)/, (_, c: string) => c.toLowerCase());
   }
 
   /**
