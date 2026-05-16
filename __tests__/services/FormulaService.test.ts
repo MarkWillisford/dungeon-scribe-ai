@@ -1,5 +1,20 @@
 import { FormulaService, type FormulaContext } from '@services/FormulaService';
-import { Size } from '@/types/base';
+import { CharacterService } from '@services/CharacterService';
+import { Size, Alignment } from '@/types/base';
+import { AbilityScoreMethod } from '@/types/character';
+import type { Character } from '@/types';
+import type { Race } from '@/types/race';
+
+const mockRace: Race = {
+  name: 'Human',
+  sizeMod: Size.Medium,
+  baseSpeed: 30,
+  alternativeMovements: {},
+  abilityModifiers: {},
+  traits: [],
+  languages: ['Common'],
+  bonusLanguages: ['Any'],
+};
 
 const baseContext: FormulaContext = {
   BAB: 6,
@@ -133,6 +148,96 @@ describe('FormulaService', () => {
       expect(FormulaService.getSizeModifier(Size.Medium)).toBe(0);
       expect(FormulaService.getSizeModifier(Size.Large)).toBe(-1);
       expect(FormulaService.getSizeModifier(Size.Colossal)).toBe(-8);
+    });
+  });
+
+  describe('buildContext', () => {
+    function makeCharacter(className: string): Character {
+      return CharacterService.createDefaultCharacter({
+        name: 'Test',
+        race: mockRace,
+        selectedClass: className,
+        abilityScoreMethod: AbilityScoreMethod.PointBuy,
+        abilityScores: { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 },
+        alignment: Alignment.TrueNeutral,
+      });
+    }
+
+    test('injects classLevel variable for a single-class character', () => {
+      const char = makeCharacter('Barbarian');
+      const ctx = FormulaService.buildContext(char);
+      expect(ctx.barbarianLevel).toBe(char.classes.classes[0].level);
+    });
+
+    test('injects classLevel variables for a multiclass character', () => {
+      const char = makeCharacter('Barbarian');
+      char.classes.classes.push({
+        name: 'Cleric',
+        level: 3,
+        hitDieSize: 8,
+        hitDieResults: [],
+        skillRanks: 2,
+        classSkills: [],
+        babProgression: 'medium' as never,
+        fortProgression: 'good' as never,
+        refProgression: 'poor' as never,
+        willProgression: 'good' as never,
+        classFeatures: [],
+      });
+      char.classes.totalLevel = char.classes.classes.reduce((s, c) => s + c.level, 0);
+
+      const ctx = FormulaService.buildContext(char);
+      expect(ctx.barbarianLevel).toBe(char.classes.classes[0].level);
+      expect(ctx.clericLevel).toBe(3);
+      expect(ctx.level).toBe(char.classes.totalLevel);
+    });
+
+    test('camelCases multi-word class names', () => {
+      const char = makeCharacter('Holy Vindicator');
+      const ctx = FormulaService.buildContext(char);
+      expect(ctx.holyVindicatorLevel).toBeDefined();
+    });
+
+    test('total level is correct for a multiclass character', () => {
+      const char = makeCharacter('Fighter');
+      char.classes.classes[0].level = 4;
+      char.classes.classes.push({
+        name: 'Wizard',
+        level: 2,
+        hitDieSize: 6,
+        hitDieResults: [],
+        skillRanks: 2,
+        classSkills: [],
+        babProgression: 'poor' as never,
+        fortProgression: 'poor' as never,
+        refProgression: 'poor' as never,
+        willProgression: 'good' as never,
+        classFeatures: [],
+      });
+      char.classes.totalLevel = 6;
+
+      const ctx = FormulaService.buildContext(char);
+      expect(ctx.level).toBe(6);
+      expect(ctx.fighterLevel).toBe(4);
+      expect(ctx.wizardLevel).toBe(2);
+    });
+  });
+
+  describe('toClassId', () => {
+    test('lowercases single-word class names', () => {
+      expect(FormulaService.toClassId('Barbarian')).toBe('barbarian');
+      expect(FormulaService.toClassId('Cleric')).toBe('cleric');
+      expect(FormulaService.toClassId('Fighter')).toBe('fighter');
+    });
+
+    test('camelCases multi-word class names', () => {
+      expect(FormulaService.toClassId('Holy Vindicator')).toBe('holyVindicator');
+      expect(FormulaService.toClassId('Eldritch Knight')).toBe('eldritchKnight');
+    });
+
+    test('strips non-alphanumeric characters', () => {
+      expect(FormulaService.toClassId('Witch (Hex Channeler)')).toBe('witchHexChanneler');
+      expect(FormulaService.toClassId('Magus')).toBe('magus');
     });
   });
 });

@@ -35,7 +35,11 @@ Check the issue body above. If the very first line of the body is `<!-- HITL -->
 2. Design the interface/API shape for the feature.
 3. Post a GitHub comment on issue #{{ISSUE_NUMBER}} tagging @markvwillisford with your proposed design — include type signatures, component structure, or data model as appropriate.
 4. Do not write any implementation code.
-5. Emit `<promise>NEEDS_REVIEW</promise>` and stop.
+5. Commit any work produced and open a **draft** PR so Mark can review files:
+   ```
+   gh pr create --base {{SOURCE_BRANCH}} --draft --title "DRAFT: <title>" --body "<body explaining what needs review>"
+   ```
+6. Emit `<promise>NEEDS_REVIEW</promise>` and stop.
 
 **Run 2 — Implementation (approval comment present from Mark):**
 
@@ -82,7 +86,7 @@ If the issue body does NOT start with `<!-- HITL -->`, skip straight to implemen
 - Every new function and component needs test coverage.
 - Do not leave TODO comments or commented-out code in committed changes.
 - Do not add features, refactor, or introduce abstractions beyond what the issue requires.
-- If blocked by a missing dependency, ambiguous requirement, or unresolvable test failure, post a comment on issue #{{ISSUE_NUMBER}} explaining the blocker, then stop.
+- If blocked by a missing dependency, ambiguous requirement, or unresolvable test failure: (1) post a comment on issue #{{ISSUE_NUMBER}} explaining the blocker, (2) commit any work produced and open a **draft** PR so Mark can review files (`gh pr create --base {{SOURCE_BRANCH}} --draft --title "DRAFT: <title>" --body "<body>"`), then (3) emit `<promise>NEEDS_REVIEW</promise>` and stop.
 
 ---
 
