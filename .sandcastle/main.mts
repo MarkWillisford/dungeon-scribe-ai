@@ -143,7 +143,16 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
           sandboxPath: '/home/agent/.claude',
           readonly: true,
         },
+        {
+          hostPath: `${homedir()}/.firebase/serviceAccount-staging.json`,
+          sandboxPath: '/home/agent/.firebase/serviceAccount-staging.json',
+          readonly: true,
+        },
       ],
+      env: {
+        GOOGLE_APPLICATION_CREDENTIALS: '/home/agent/.firebase/serviceAccount-staging.json',
+        FIREBASE_PROJECT_ID: 'dungeon-scribe-ai-stagin-b4fb5',
+      },
     }),
     hooks,
   });
