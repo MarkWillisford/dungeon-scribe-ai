@@ -36,7 +36,7 @@ const LABEL_DONE = 'sandcastle-done';
 const COMPLETION_SIGNALS = ['<promise>COMPLETE</promise>', '<promise>NEEDS_REVIEW</promise>'];
 
 const hooks = {
-  sandbox: { onSandboxReady: [{ command: 'npm install' }] },
+  sandbox: { onSandboxReady: [{ command: 'NODE_ENV=development npm install' }] },
 };
 
 const copyToWorktree = ['node_modules'];
