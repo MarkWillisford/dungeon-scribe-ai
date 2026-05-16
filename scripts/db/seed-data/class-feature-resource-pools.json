@@ -1,0 +1,185 @@
+[
+  {
+    "classId": "barbarian",
+    "className": "Barbarian",
+    "featureName": "Rage",
+    "resourcePool": {
+      "id": "rage_rounds",
+      "name": "Rage",
+      "rechargeOn": "rest",
+      "maxFormula": "4 + conMod + (barbarianLevel - 1) * 2",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "bard",
+    "className": "Bard",
+    "featureName": "Bardic Performance",
+    "resourcePool": {
+      "id": "bardic_performance_rounds",
+      "name": "Bardic Performance",
+      "rechargeOn": "rest",
+      "maxFormula": "4 + chaMod + (bardLevel - 1) * 2",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "cleric",
+    "className": "Cleric",
+    "featureName": "Channel Energy 1d6",
+    "resourcePool": {
+      "id": "channel_energy_uses",
+      "name": "Channel Energy",
+      "rechargeOn": "rest",
+      "maxFormula": "3 + chaMod",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "monk",
+    "className": "Monk",
+    "featureName": "Ki Pool (magic)",
+    "resourcePool": {
+      "id": "ki",
+      "name": "Ki Pool",
+      "rechargeOn": "rest",
+      "maxFormula": "floor(monkLevel / 2) + wisMod",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "paladin",
+    "className": "Paladin",
+    "featureName": "Lay on Hands",
+    "resourcePool": {
+      "id": "lay_on_hands_uses",
+      "name": "Lay on Hands",
+      "rechargeOn": "rest",
+      "maxFormula": "floor(paladinLevel / 2) + chaMod",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "paladin",
+    "className": "Paladin",
+    "featureName": "Smite Evil 1/day",
+    "resourcePool": {
+      "id": "smite_evil_uses",
+      "name": "Smite Evil",
+      "rechargeOn": "rest",
+      "maxFormula": "1 + floor((paladinLevel - 1) / 3)",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "arcanist",
+    "className": "Arcanist",
+    "featureName": "Arcane Reservoir",
+    "resourcePool": {
+      "id": "arcane_reservoir",
+      "name": "Arcane Reservoir",
+      "rechargeOn": "rest",
+      "maxFormula": "3 + arcanistLevel",
+      "restRecoveryMode": "formula",
+      "restRecoveryFormula": "3 + floor(arcanistLevel / 2)"
+    }
+  },
+  {
+    "classId": "bloodrager",
+    "className": "Bloodrager",
+    "featureName": "Bloodrage",
+    "resourcePool": {
+      "id": "bloodrage_rounds",
+      "name": "Bloodrage",
+      "rechargeOn": "rest",
+      "maxFormula": "4 + conMod + (bloodragerLevel - 1) * 2",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "brawler",
+    "className": "Brawler",
+    "featureName": "Martial Flexibility",
+    "resourcePool": {
+      "id": "martial_flexibility_uses",
+      "name": "Martial Flexibility",
+      "rechargeOn": "rest",
+      "maxFormula": "3 + floor(brawlerLevel / 2)",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "investigator",
+    "className": "Investigator",
+    "featureName": "Inspiration",
+    "resourcePool": {
+      "id": "inspiration",
+      "name": "Inspiration",
+      "rechargeOn": "rest",
+      "maxFormula": "floor(investigatorLevel / 2) + intMod",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "skald",
+    "className": "Skald",
+    "featureName": "Raging Song",
+    "resourcePool": {
+      "id": "raging_song_rounds",
+      "name": "Raging Song",
+      "rechargeOn": "rest",
+      "maxFormula": "3 + chaMod + (skaldLevel - 1) * 2",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "swashbuckler",
+    "className": "Swashbuckler",
+    "featureName": "Panache",
+    "resourcePool": {
+      "id": "panache",
+      "name": "Panache",
+      "rechargeOn": "special",
+      "maxFormula": "max(1, chaMod)",
+      "restRecoveryMode": "full",
+      "specialRechargeNote": "Regain 1 panache on confirmed critical hit or killing blow with a light or one-handed piercing melee weapon"
+    }
+  },
+  {
+    "classId": "warpriest",
+    "className": "Warpriest",
+    "featureName": "Blessings",
+    "resourcePool": {
+      "id": "blessing_uses",
+      "name": "Blessings",
+      "rechargeOn": "rest",
+      "maxFormula": "3 + floor(warpriestLevel / 2)",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "warpriest",
+    "className": "Warpriest",
+    "featureName": "Fervor",
+    "resourcePool": {
+      "id": "fervor_uses",
+      "name": "Fervor",
+      "rechargeOn": "rest",
+      "maxFormula": "floor(warpriestLevel / 2) + wisMod",
+      "restRecoveryMode": "full"
+    }
+  },
+  {
+    "classId": "gunslinger",
+    "className": "Gunslinger",
+    "featureName": "Grit",
+    "resourcePool": {
+      "id": "grit",
+      "name": "Grit",
+      "rechargeOn": "special",
+      "maxFormula": "max(1, wisMod)",
+      "restRecoveryMode": "full",
+      "specialRechargeNote": "Regain 1 grit on confirmed critical hit with a firearm or killing blow with a firearm"
+    }
+  }
+]
