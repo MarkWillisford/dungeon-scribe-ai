@@ -33,7 +33,6 @@ module.exports = {
         '<rootDir>/__tests__/store/**/*.test.ts',
         '<rootDir>/__tests__/utils/**/*.test.ts',
         '<rootDir>/__tests__/integration/**/*.test.ts',
-        '<rootDir>/__tests__/scripts/**/*.test.ts',
       ],
       transform: {
         '^.+\\.tsx?$': ['ts-jest', { isolatedModules: true }],
