@@ -18,15 +18,24 @@
 // open, selectIssue() walks up the chain and tries to work on the blocker
 // instead. If every eligible issue is blocked or in-progress, the loop idles.
 //
+// Self-healing: the poll loop never exits on error. Infrastructure failures
+// (missing Docker image, transient git errors) are caught and recovered:
+//   - Missing Docker image: auto-rebuilt before the next issue attempt.
+//   - Any other processIssue failure: issue reset to `sandcastle`, loop continues.
+//   - main.mts changed on disk: process restarts itself to pick up new code.
+//
 // Usage:
 //   npx tsx .sandcastle/main.mts
 
 import { createSandbox, claudeCode } from '@ai-hero/sandcastle';
 import { docker } from '@ai-hero/sandcastle/sandboxes/docker';
-import { execSync } from 'node:child_process';
+import { execSync, spawn } from 'node:child_process';
 import { homedir } from 'node:os';
+import { readFileSync } from 'node:fs';
 
 const POLL_INTERVAL_MS = 30_000;
+const DOCKER_IMAGE = 'sandcastle:dungeon-scribe-ai';
+const SCRIPT_PATH = new URL(import.meta.url).pathname;
 
 const LABEL_SANDCASTLE = 'sandcastle';
 const LABEL_IN_PROGRESS = 'sandcastle-in-progress';
@@ -52,6 +61,43 @@ interface GitHubIssue {
   labels: GitHubLabel[];
 }
 
+// ---------------------------------------------------------------------------
+// Self-update: restart if main.mts has changed on disk since boot.
+// ---------------------------------------------------------------------------
+
+const SCRIPT_HASH_AT_BOOT = readFileSync(SCRIPT_PATH, 'utf8');
+
+function restartIfScriptChanged(): void {
+  const current = readFileSync(SCRIPT_PATH, 'utf8');
+  if (current !== SCRIPT_HASH_AT_BOOT) {
+    console.log('main.mts changed on disk — restarting to pick up new code...');
+    const child = spawn(process.execPath, process.argv.slice(1), {
+      detached: true,
+      stdio: 'inherit',
+    });
+    child.unref();
+    process.exit(0);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Docker image health: build if missing.
+// ---------------------------------------------------------------------------
+
+function ensureDockerImage(): void {
+  try {
+    execSync(`docker image inspect ${DOCKER_IMAGE}`, { stdio: 'pipe' });
+  } catch {
+    console.log(`Docker image '${DOCKER_IMAGE}' not found — building now...`);
+    execSync('npx sandcastle docker build-image', { encoding: 'utf8', stdio: 'inherit' });
+    console.log('Docker image built.');
+  }
+}
+
+// ---------------------------------------------------------------------------
+// GitHub helpers
+// ---------------------------------------------------------------------------
+
 function listSandcastleIssues(): GitHubIssue[] {
   const out = execSync(
     `gh issue list --label "${LABEL_SANDCASTLE}" --state open --json number,title,body,labels`,
@@ -74,6 +120,10 @@ function removeLabel(issueNumber: number, label: string): void {
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+// ---------------------------------------------------------------------------
+// Dependency scheduling
+// ---------------------------------------------------------------------------
 
 // Extract #NNN references from the "Blocked by" section of an issue body.
 function parseBlockers(body: string): number[] {
@@ -115,7 +165,6 @@ function selectIssue(issues: GitHubIssue[], visited = new Set<number>()): GitHub
         (i) => i.number === blockerNum && !i.labels.some((l) => l.name === LABEL_IN_PROGRESS),
       );
       if (blockerIssue) {
-        // Reuse the same issues array and visited set -- no rebuild on each recursion.
         const candidate = selectIssue(issues, visited);
         if (candidate) return candidate;
       }
@@ -123,6 +172,10 @@ function selectIssue(issues: GitHubIssue[], visited = new Set<number>()): GitHub
   }
   return null;
 }
+
+// ---------------------------------------------------------------------------
+// Issue processing
+// ---------------------------------------------------------------------------
 
 async function processIssue(issue: GitHubIssue): Promise<void> {
   const { number: issueNumber, title } = issue;
@@ -132,8 +185,6 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
   console.log(`Branch: ${branch}`);
 
   // Pull latest main so the sandbox always branches from the most recent commit.
-  // Without this, a long-running poller can fork from a stale local ref and
-  // re-implement things that were already merged while the poller was idle.
   execSync('git pull origin main', { encoding: 'utf8' });
   console.log('main updated.');
 
@@ -201,10 +252,20 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Poll loop
+// ---------------------------------------------------------------------------
+
 async function poll(): Promise<void> {
   console.log('Sandcastle polling started. Watching for sandcastle-labeled issues...\n');
 
   while (true) {
+    // Restart if main.mts was updated since this process booted.
+    restartIfScriptChanged();
+
+    // Ensure the Docker image is present before attempting any issue.
+    ensureDockerImage();
+
     resolvedCache.clear();
 
     const issues = listSandcastleIssues();
