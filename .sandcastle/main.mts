@@ -131,6 +131,12 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
   console.log(`\nPicking up issue #${issueNumber}: ${title}`);
   console.log(`Branch: ${branch}`);
 
+  // Pull latest main so the sandbox always branches from the most recent commit.
+  // Without this, a long-running poller can fork from a stale local ref and
+  // re-implement things that were already merged while the poller was idle.
+  execSync('git pull origin main', { encoding: 'utf8' });
+  console.log('main updated.');
+
   removeLabel(issueNumber, LABEL_SANDCASTLE);
   addLabel(issueNumber, LABEL_IN_PROGRESS);
 
