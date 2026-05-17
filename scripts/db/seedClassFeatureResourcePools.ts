@@ -1,21 +1,4 @@
-/**
- * seedClassFeatureResourcePools.ts — Patch class documents with classFeatureResourcePools map.
- *
- * Reads scripts/db/seed-data/class-feature-resource-pools.json, groups entries
- * by classId, and writes a classFeatureResourcePools map to each matching
- * document in the classes collection. The map is keyed by featureName and each
- * value is a ResourcePoolDefinition containing the formula and recharge metadata.
- *
- * Idempotent: uses set+merge so unrelated class document fields are not touched.
- * Targets staging by default; set FIREBASE_PROJECT_ID for other environments.
- *
- * Prerequisites:
- *   1. export GOOGLE_APPLICATION_CREDENTIALS=/path/to/serviceAccount.json
- *   2. export FIREBASE_PROJECT_ID=dungeon-scribe-ai-stagin-b4fb5  (staging, default)
- *
- * Usage:
- *   npx tsx scripts/db/seedClassFeatureResourcePools.ts [--dry-run]
- */
+// Usage: GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json npx tsx scripts/db/seedClassFeatureResourcePools.ts [--dry-run]
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -76,7 +59,7 @@ export async function seedClassFeatureResourcePools(
   );
 
   if (dryRun) {
-    console.log('[DRY RUN] — no writes will be performed');
+    console.log('[DRY RUN] -- no writes will be performed');
     classWrites.forEach(([classId, pools]) => {
       const features = Object.keys(pools).join(', ');
       console.log(`  would write: ${classId} (${features})`);
