@@ -141,7 +141,7 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
         {
           hostPath: `${homedir()}/.claude`,
           sandboxPath: '/home/agent/.claude',
-          readonly: true,
+          readonly: false,
         },
         {
           hostPath: `${homedir()}/.firebase/serviceAccount-staging.json`,
