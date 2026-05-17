@@ -8,6 +8,18 @@ export interface ResourcePoolContribution {
   value: number;
 }
 
+// Stored in Firestore on class documents (classFeatureResourcePools map).
+// Contains formula strings -- no runtime-computed values.
+export interface ResourcePoolDefinition {
+  id: string; // 'ki', 'rage_rounds', 'channel_energy_uses', etc.
+  name: string;
+  rechargeOn: 'rest' | 'per_encounter' | 'special';
+  maxFormula: string; // FormulaService expression, e.g. "4 + conMod + (barbarianLevel - 1) * 2"
+  restRecoveryMode: 'full' | 'formula';
+  restRecoveryFormula?: string; // only when restRecoveryMode is 'formula'
+  specialRechargeNote?: string;
+}
+
 export interface ResourcePool {
   id: string; // 'ki', 'arcane_pool', 'mythic_power', 'rage_rounds', etc.
   name: string;
@@ -21,7 +33,7 @@ export interface ResourcePool {
   // 'special'       — condition-based recharge (panache on killing blow, grit on confirming crit, etc.)
   restRecoveryMode: 'full' | 'formula';
   // 'full'    — sets current to max on rest
-  // 'formula' — evaluates restRecoveryFormula and adds result to current, capped at max
+  // 'formula' -- evaluates restRecoveryFormula and adds result to current, capped at max
   restRecoveryFormula?: string; // only present when restRecoveryMode is 'formula'
   specialRechargeNote?: string;
 }
