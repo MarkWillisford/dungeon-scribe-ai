@@ -137,6 +137,16 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
   execSync('git pull origin main', { encoding: 'utf8' });
   console.log('main updated.');
 
+  // If the branch already exists (reused worktree), rebase it onto main so the
+  // agent doesn't work on stale code and open a conflicting PR.
+  try {
+    execSync(`git rev-parse --verify ${branch}`, { encoding: 'utf8', stdio: 'pipe' });
+    execSync(`git rebase main ${branch}`, { encoding: 'utf8' });
+    console.log(`${branch} rebased onto main.`);
+  } catch {
+    // Branch doesn't exist yet — createSandbox will create it from current main.
+  }
+
   removeLabel(issueNumber, LABEL_SANDCASTLE);
   addLabel(issueNumber, LABEL_IN_PROGRESS);
 
