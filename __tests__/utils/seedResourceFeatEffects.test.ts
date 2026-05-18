@@ -147,9 +147,9 @@ describe('RESOURCE_FEAT_PATCHES', () => {
     expect(patch?.effect.value).toBe(2);
   });
 
-  it('Extra Arcane Pool grants 1 arcane pool point (per d20pfsrd)', () => {
+  it('Extra Arcane Pool grants 2 arcane pool points', () => {
     const patch = RESOURCE_FEAT_PATCHES.find((p) => p.featId === 'extra_arcane_pool');
     expect(patch?.effect.target).toBe('resource.arcane_pool');
-    expect(patch?.effect.value).toBe(1);
+    expect(patch?.effect.value).toBe(2);
   });
 });

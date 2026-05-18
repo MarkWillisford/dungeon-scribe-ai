@@ -9,8 +9,7 @@
  *   extra_lay_on_hands → resource.lay_on_hands          +2  (CRB)
  *   extra_grit         → resource.grit                 +2  (UC)
  *   extra_panache      → resource.panache               +2  (ACG)
- *   extra_arcane_pool  → resource.arcane_pool           +1  (UM — d20pfsrd confirms +1;
- *                                                            the local description "+2" is wrong)
+ *   extra_arcane_pool  → resource.arcane_pool           +2  (UM)
  *
  * Idempotent: any existing effect targeting the same resource pool is replaced.
  * Targets staging only. Will exit if FIREBASE_PROJECT_ID is set to any other project.
@@ -108,7 +107,7 @@ export const RESOURCE_FEAT_PATCHES: FeatPatch[] = [
       type: 'bonus',
       bonusType: BonusType.UNTYPED,
       target: 'resource.arcane_pool',
-      value: 1,
+      value: 2,
       source: 'Extra Arcane Pool',
     },
   },
