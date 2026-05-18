@@ -70,7 +70,13 @@ If the issue body does NOT start with `<!-- HITL -->`, skip straight to implemen
    Closes #{{ISSUE_NUMBER}}
    ```
 
-6. **Self-review** — run `git diff {{SOURCE_BRANCH}}...HEAD` and read your own diff. Fix anything you would flag in a code review.
+6. **Self-review** — invoke the `/self-review` skill against your working branch:
+
+   ```
+   /self-review {{TARGET_BRANCH}}
+   ```
+
+   This runs a multi-agent review of the branch, scores every issue found, and commits one fix per issue scoring 50 or above directly onto `{{TARGET_BRANCH}}`. Wait for it to finish before moving on. Do not open the PR until self-review has completed.
 
 7. **Open PR** — create a pull request from `{{TARGET_BRANCH}}` to `{{SOURCE_BRANCH}}`:
    ```
