@@ -190,12 +190,16 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
 
   // If the branch already exists (reused worktree), rebase it onto main so the
   // agent doesn't work on stale code and open a conflicting PR.
+  let branchExists = false;
   try {
     execSync(`git rev-parse --verify ${branch}`, { encoding: 'utf8', stdio: 'pipe' });
-    execSync(`git rebase main ${branch}`, { encoding: 'utf8' });
-    console.log(`${branch} rebased onto main.`);
+    branchExists = true;
   } catch {
     // Branch doesn't exist yet — createSandbox will create it from current main.
+  }
+  if (branchExists) {
+    execSync(`git rebase main ${branch}`, { encoding: 'utf8' });
+    console.log(`${branch} rebased onto main.`);
   }
 
   removeLabel(issueNumber, LABEL_SANDCASTLE);
@@ -230,7 +234,7 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
       maxIterations: 100,
       agent: claudeCode('claude-sonnet-4-6'),
       promptFile: './.sandcastle/prompt.md',
-      promptArgs: { ISSUE_NUMBER: String(issueNumber) },
+      promptArgs: { ISSUE_NUMBER: String(issueNumber), SOURCE_BRANCH: 'main', TARGET_BRANCH: branch },
       completionSignal: COMPLETION_SIGNALS,
     });
 
@@ -264,7 +268,14 @@ async function poll(): Promise<void> {
     restartIfScriptChanged();
 
     // Ensure the Docker image is present before attempting any issue.
-    ensureDockerImage();
+    // A build failure is logged and retried next cycle — it must not exit the loop.
+    try {
+      ensureDockerImage();
+    } catch (err) {
+      console.error('Docker image unavailable, will retry next cycle:', err);
+      await sleep(POLL_INTERVAL_MS);
+      continue;
+    }
 
     resolvedCache.clear();
 
