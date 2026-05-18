@@ -152,4 +152,10 @@ describe('RESOURCE_FEAT_PATCHES', () => {
     expect(patch?.effect.target).toBe('resource.arcane_pool');
     expect(patch?.effect.value).toBe(2);
   });
+
+  it('Extra Inspiration grants 3 inspiration uses', () => {
+    const patch = RESOURCE_FEAT_PATCHES.find((p) => p.featId === 'extra_inspiration');
+    expect(patch?.effect.target).toBe('resource.inspiration');
+    expect(patch?.effect.value).toBe(3);
+  });
 });

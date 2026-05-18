@@ -10,6 +10,7 @@
  *   extra_grit         → resource.grit                 +2  (UC)
  *   extra_panache      → resource.panache               +2  (ACG)
  *   extra_arcane_pool  → resource.arcane_pool           +2  (UM)
+ *   extra_inspiration  → resource.inspiration          +3  (ACG)
  *
  * Idempotent: any existing effect targeting the same resource pool is replaced.
  * Targets staging only. Will exit if FIREBASE_PROJECT_ID is set to any other project.
@@ -109,6 +110,17 @@ export const RESOURCE_FEAT_PATCHES: FeatPatch[] = [
       target: 'resource.arcane_pool',
       value: 2,
       source: 'Extra Arcane Pool',
+    },
+  },
+  {
+    featId: 'extra_inspiration',
+    featName: 'Extra Inspiration',
+    effect: {
+      type: 'bonus',
+      bonusType: BonusType.UNTYPED,
+      target: 'resource.inspiration',
+      value: 3,
+      source: 'Extra Inspiration',
     },
   },
 ];
