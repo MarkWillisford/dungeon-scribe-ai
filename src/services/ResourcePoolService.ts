@@ -182,7 +182,7 @@ export class ResourcePoolService {
     const context = FormulaService.buildContext(character);
 
     return pools.map((pool) => {
-      if (pool.rechargeOn === 'special') return pool;
+      if (pool.rechargeOn === 'special') return { ...pool };
 
       if (pool.restRecoveryMode === 'full') {
         return { ...pool, current: pool.max };
