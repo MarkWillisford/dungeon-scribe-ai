@@ -220,6 +220,8 @@ For every thread assessed in step 6 NOT marked Skip-reply:
 bash .agents/skills/babysit-pr/scripts/postSentinelReply.sh "$THREAD_ID" "$BODY"
 ```
 
+**Writing rule: never use em-dashes (—) in any reply, comment, or summary.** Use a comma, a period, or rewrite the sentence.
+
 Body templates:
 
 - **Agree**: `Addressed in <commit-url>. <one-line what changed>.`
