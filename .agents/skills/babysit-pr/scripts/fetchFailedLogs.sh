@@ -45,10 +45,10 @@ if [ -n "$PR_ARG" ]; then
     printf '{"error":"invalid PR number: %s"}\n' "$PR_ARG" >&2
     exit 2
   fi
-  ROLLUP="$(gh pr view "$PR_ARG" --json statusCheckRollup --jq '.statusCheckRollup' 2>/dev/null)" \
+  ROLLUP="$(gh pr view "$PR_ARG" --json statusCheckRollup --jq '.statusCheckRollup // []' 2>/dev/null)" \
     || { printf '{"error":"could not fetch PR %s"}\n' "$PR_ARG" >&2; exit 1; }
 else
-  ROLLUP="$(gh pr view --json statusCheckRollup --jq '.statusCheckRollup' 2>/dev/null)" \
+  ROLLUP="$(gh pr view --json statusCheckRollup --jq '.statusCheckRollup // []' 2>/dev/null)" \
     || { printf '{"error":"no PR for current branch"}\n' >&2; exit 1; }
 fi
 
@@ -67,7 +67,7 @@ FAILING_RAW="$(printf '%s' "$ROLLUP" \
         | (.state // "" | ascii_downcase) as $s
         | if $b == "fail" or $c == "failure" or $s == "failure" or $s == "error"
           then "fail" else "" end;
-      .[]
+      .[]?
       | select(normalized_bucket == "fail")
       | [.name // "unknown", .detailsUrl // ""]
       | @tsv
@@ -102,7 +102,7 @@ echo "# babysit-pr: failing checks"
 
 for RUN_ID in $RUN_IDS; do
   for JOB_ID in $(gh run view "$RUN_ID" --json jobs \
-      --jq '.jobs[] | select(.conclusion == "failure") | .databaseId'); do
+      --jq '.jobs[] | select((.conclusion // "") | IN("failure","timed_out","cancelled","action_required")) | .databaseId'); do
     echo ""
     echo "# --- run=$RUN_ID job=$JOB_ID ---"
     gh run view --job "$JOB_ID" --log-failed
