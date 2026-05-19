@@ -3,16 +3,24 @@ name: Babysit PR
 on:
   pull_request_review:
     types: [submitted]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to babysit'
+        required: true
+        type: string
 
 jobs:
   babysit:
-    # Only fire on CodeRabbit reviews; skip draft PRs
+    # On pull_request_review: only fire on CodeRabbit reviews of non-draft PRs.
+    # On workflow_dispatch: always run (pr_number input required).
     if: |
-      github.event.review.user.login == 'coderabbitai[bot]' &&
-      github.event.pull_request.draft == false
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.review.user.login == 'coderabbitai[bot]' &&
+       github.event.pull_request.draft == false)
     runs-on: ubuntu-latest
     concurrency:
-      group: babysit-pr-${{ github.event.pull_request.number }}
+      group: babysit-pr-${{ github.event.pull_request.number || inputs.pr_number }}
       cancel-in-progress: true
     permissions:
       contents: write
@@ -24,7 +32,7 @@ jobs:
       - name: Checkout PR branch
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha || format('refs/pull/{0}/head', inputs.pr_number) }}
           fetch-depth: 0
 
       - name: Setup Node 20
@@ -46,7 +54,7 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
-            Read `.agents/skills/babysit-pr/SKILL.md` and follow its instructions exactly for PR #${{ github.event.pull_request.number }}.
+            Read `.agents/skills/babysit-pr/SKILL.md` and follow its instructions exactly for PR #${{ github.event.pull_request.number || inputs.pr_number }}.
           claude_args: |
             --allowedTools Bash,Read,Write,Edit
             --max-turns 30
