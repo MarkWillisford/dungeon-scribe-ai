@@ -219,6 +219,9 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
   if (branchExists) {
     try {
       execSync(`git rebase main ${branch}`, { encoding: 'utf8', stdio: 'pipe' });
+      // git rebase <upstream> <branch> checks out <branch> into the working tree.
+      // We must return to main so the SDK can create a fresh worktree for the branch.
+      execSync(`git checkout main`, { encoding: 'utf8', stdio: 'pipe' });
       console.log(`${branch} rebased onto main.`);
     } catch {
       try {
