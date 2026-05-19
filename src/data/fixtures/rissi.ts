@@ -11,6 +11,8 @@ import { CharacterService } from '@/services/CharacterService';
 import type { Character } from '@/types/index';
 import type { AbilityScore } from '@/types/abilities';
 import type { Skill } from '@/types/skills';
+import type { ResourcePoolDefinition } from '@/types/resources';
+import type { ClassFeature } from '@/types/classes';
 
 const EMPTY_BONUSES = {
   enhancement: [],
@@ -76,6 +78,62 @@ function skill(
     total: ranks + abilityMod + classSkillBonus + misc,
   };
 }
+
+// ---- Class feature resource pool definitions for Rissi's active classes ----
+
+const CHANNEL_ENERGY_POOL: ResourcePoolDefinition = {
+  id: 'channel_energy_uses',
+  name: 'Channel Energy',
+  rechargeOn: 'rest',
+  maxFormula: '3 + chaMod',
+  restRecoveryMode: 'full',
+};
+
+// Prestige Paladin injects `prestigePaladinLevel` into the formula context
+// (FormulaService.toClassId("Prestige Paladin") === "prestigePaladin").
+// Formulas use that variable instead of the standard `paladinLevel`.
+const PRESTIGE_PALADIN_LAY_ON_HANDS_POOL: ResourcePoolDefinition = {
+  id: 'lay_on_hands_uses',
+  name: 'Lay on Hands',
+  rechargeOn: 'rest',
+  maxFormula: 'floor(prestigePaladinLevel / 2) + chaMod',
+  restRecoveryMode: 'full',
+};
+
+const PRESTIGE_PALADIN_SMITE_EVIL_POOL: ResourcePoolDefinition = {
+  id: 'smite_evil_uses',
+  name: 'Smite Evil',
+  rechargeOn: 'rest',
+  maxFormula: '1 + floor((prestigePaladinLevel - 1) / 3)',
+  restRecoveryMode: 'full',
+};
+
+const CLERIC_CLASS_FEATURES: ClassFeature[] = [
+  {
+    name: 'Channel Energy 1d6',
+    description: 'Channel positive energy to heal the living or harm the undead.',
+    level: 1,
+    effects: [],
+    resourcePool: CHANNEL_ENERGY_POOL,
+  },
+];
+
+const PRESTIGE_PALADIN_CLASS_FEATURES: ClassFeature[] = [
+  {
+    name: 'Lay on Hands',
+    description: 'Heal wounds by laying on hands.',
+    level: 1,
+    effects: [],
+    resourcePool: PRESTIGE_PALADIN_LAY_ON_HANDS_POOL,
+  },
+  {
+    name: 'Smite Evil 1/day',
+    description: 'Call out an evil foe to smite.',
+    level: 1,
+    effects: [],
+    resourcePool: PRESTIGE_PALADIN_SMITE_EVIL_POOL,
+  },
+];
 
 export const RISSI_FIXTURE: Character = {
   // ---- Identity ----
@@ -153,7 +211,7 @@ export const RISSI_FIXTURE: Character = {
         fortProgression: SaveProgression.Good,
         refProgression: SaveProgression.Poor,
         willProgression: SaveProgression.Good,
-        classFeatures: [],
+        classFeatures: CLERIC_CLASS_FEATURES,
         sourceSystem: 'pf1e',
         classChoices: [
           { featureName: 'Domain', takenAtLevel: 1, selection: 'healing' },
@@ -236,7 +294,7 @@ export const RISSI_FIXTURE: Character = {
         fortProgression: SaveProgression.Good,
         refProgression: SaveProgression.Poor,
         willProgression: SaveProgression.Good,
-        classFeatures: [],
+        classFeatures: PRESTIGE_PALADIN_CLASS_FEATURES,
         sourceSystem: '3.5e',
         spellcastingAdvancement: {
           mode: 'single',
@@ -389,7 +447,7 @@ export const RISSI_FIXTURE: Character = {
   feats: {
     feats: [
       {
-        featId: 'extra-channel',
+        featId: 'extra_channel',
         name: 'Extra Channel',
         source: 'human_bonus',
         grantedAtLevel: 1,

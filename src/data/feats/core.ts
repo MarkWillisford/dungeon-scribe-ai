@@ -286,7 +286,15 @@ export const CORE_FEATS: FeatDefinition[] = [
     verificationStatus: 'needs_review' as const,
     types: ['general'],
     prerequisites: [{ type: 'class_feature', featureName: 'channel energy' }],
-    effects: [],
+    effects: [
+      {
+        type: 'bonus',
+        bonusType: BonusType.UNTYPED,
+        target: 'resource.channel_energy_uses',
+        value: 2,
+        source: 'Extra Channel',
+      },
+    ],
     activationMode: 'passive',
     tags: ['channel', 'uses'],
   },
