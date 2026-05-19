@@ -56,7 +56,7 @@ export class ResourcePoolService {
         }
 
         poolMap.get(rp.id)!.contributions.push({
-          source: `${cls.name} class feature`,
+          source: `${cls.name}: ${feature.name}`,
           sourceType: 'class_feature',
           value: baseMax,
         });
