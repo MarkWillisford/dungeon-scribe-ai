@@ -96,7 +96,10 @@ export class ModifierPipelineService {
     this.applySkills(c, stacked);
     this.applyMovement(c, stacked);
 
-    // Phase 6: Compute resource pools (derived from class features, feats, equipment)
+    // Phase 6: Compute resource pools (derived from class features, feats, equipment).
+    // FCB resource pool contributions are not included here because computePools requires
+    // a pre-loaded fcbEntries registry (Firestore data). Those contributions are applied
+    // by callers that have already loaded the registry (e.g. FirebaseCharacterService).
     c.resources = ResourcePoolService.computePools(c);
 
     return c;
