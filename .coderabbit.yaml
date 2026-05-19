@@ -1,0 +1,60 @@
+# CodeRabbit configuration for Dungeon Scribe AI
+# Pathfinder 1e character manager — React Native / Expo / Firebase / Redux
+
+language: en-US
+
+reviews:
+  profile: assertive
+  request_changes_workflow: true
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  auto_review:
+    enabled: true
+    drafts: false
+
+  path_instructions:
+    - path: "src/services/**"
+      instructions: |
+        These are pure business logic services. Review for:
+        - Correct Pathfinder 1e rules implementation (ability scores, modifiers, resource pools, feats)
+        - No Firebase I/O in pure logic services — that belongs in Firebase*Service files only
+        - Functions must be pure and testable in isolation
+        - All bonus stacking follows PF1e rules: typed bonuses don't stack, untyped bonuses do
+
+    - path: "src/store/**"
+      instructions: |
+        Redux Toolkit slices. Review for:
+        - No side effects inside reducers
+        - State mutation only inside Immer-managed reducers
+        - Selectors should derive state, not duplicate it
+        - Action creator naming must match existing patterns
+
+    - path: "__tests__/**"
+      instructions: |
+        Jest tests. Review for:
+        - Tests must cover edge cases, not just the happy path
+        - No mocking so heavy that real behavior isn't verified
+        - Test descriptions must match what the test actually asserts
+        - No snapshot tests on components with business logic
+
+    - path: "app/**"
+      instructions: |
+        Expo Router screens. Review for:
+        - Safe area handling (useSafeAreaInsets or SafeAreaView)
+        - FlatList/FlashList over ScrollView for dynamic lists
+        - No inline style objects recreated on every render (use StyleSheet.create)
+        - Navigation patterns consistent with existing navigator structure
+        - Missing keyboardShouldPersistTaps on scroll views with inputs
+
+    - path: "src/types/**"
+      instructions: |
+        TypeScript interfaces for the Pathfinder data model. Review for:
+        - Breaking changes to shared interfaces without a migration path
+        - No use of `any` — suggest correct type or `unknown` with narrowing guard
+
+  abort_on_close: true
+
+chat:
+  auto_reply: true
