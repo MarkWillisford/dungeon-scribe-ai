@@ -175,12 +175,12 @@ function getReviewPassedPRs(): Array<{ number: number; headRefName: string; body
 function findReviewPassedPR(
   issueNumber: number,
 ): { headRefName: string } | null {
-  const prs = getReviewPassedPRs();
-  return (
-    prs.find((pr) =>
-      new RegExp(`(?:closes|fixes|resolves)\\s+#${issueNumber}\\b`, 'i').test(pr.body ?? ''),
-    ) ?? null
+  const matches = getReviewPassedPRs().filter((pr) =>
+    new RegExp(`(?:closes|fixes|resolves)\\s+#${issueNumber}\\b`, 'i').test(pr.body ?? ''),
   );
+  const uniqueHeads = [...new Set(matches.map((pr) => pr.headRefName))];
+  if (uniqueHeads.length !== 1) return null;
+  return { headRefName: uniqueHeads[0] };
 }
 
 function resolveBlocker(issueNumber: number): BlockerResolution {
@@ -240,9 +240,13 @@ function selectIssue(issues: GitHubIssue[], visited = new Set<number>()): IssueS
       // resolved via review-passed (not yet merged), start downstream work on that
       // branch. If multiple pre-merge parents exist, wait for merges to avoid a
       // complex multi-parent base.
-      const reviewPassedBranches = blockerNumbers
-        .map((n) => resolveBlocker(n).baseBranch)
-        .filter((b): b is string => b !== null);
+      const reviewPassedBranches = [
+        ...new Set(
+          blockerNumbers
+            .map((n) => resolveBlocker(n).baseBranch)
+            .filter((b): b is string => b !== null),
+        ),
+      ];
 
       if (reviewPassedBranches.length > 1) {
         // Multiple unmerged parents -- too complex to base safely. Skip for now.
