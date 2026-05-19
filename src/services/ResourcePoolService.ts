@@ -79,6 +79,7 @@ export class ResourcePoolService {
         } catch {
           continue;
         }
+        if (value <= 0) continue;
 
         poolMap.get(poolId)!.contributions.push({
           source: effect.source || charFeat.name,
@@ -102,6 +103,7 @@ export class ResourcePoolService {
         } catch {
           continue;
         }
+        if (value <= 0) continue;
 
         poolMap.get(poolId)!.contributions.push({
           source: effect.source || item.name,
