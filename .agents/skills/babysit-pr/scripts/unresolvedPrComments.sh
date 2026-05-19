@@ -4,7 +4,7 @@
 # Adds: thread IDs, per-thread sentinel recency state, stable nitpick fingerprints.
 #
 # Usage: bash unresolvedPrComments.sh [pr-number]
-# Compatible with macOS bash 3.2. Requires: gh, jq (>= 1.5), perl with Digest::SHA.
+# Compatible with macOS bash 3.2. Requires: gh, jq (>= 1.6), perl with Digest::SHA.
 
 set -euo pipefail
 
@@ -24,6 +24,14 @@ output_error() {
 validate_prerequisites() {
   if ! command -v jq >/dev/null 2>&1; then
     printf '{"error":"jq not found. Install from https://stedolan.github.io/jq"}\n' >&3
+    exit 1
+  fi
+  local jq_ver jq_major jq_minor
+  jq_ver="$(jq --version 2>/dev/null | sed 's/jq-//')"
+  jq_major="$(printf '%s' "$jq_ver" | cut -d. -f1)"
+  jq_minor="$(printf '%s' "$jq_ver" | cut -d. -f2 | cut -d- -f1)"
+  if [ "${jq_major:-0}" -lt 1 ] || { [ "${jq_major:-0}" -eq 1 ] && [ "${jq_minor:-0}" -lt 6 ]; }; then
+    printf '{"error":"jq >= 1.6 required (found jq-%s); upgrade from https://jqlang.github.io/jq/download"}\n' "$jq_ver" >&3
     exit 1
   fi
   if ! command -v gh >/dev/null 2>&1; then
@@ -339,6 +347,27 @@ main() {
               | if ($n != null and ($n | IN($fixedSet[]))) then empty else $c end
             else $c end
         )
+    ')"
+  fi
+
+  # Mirror the fixed-alert filter onto threads_json so thread-level counts
+  # don't include threads whose only actionable comment was a resolved alert.
+  if [ -n "$fixed_alerts" ]; then
+    threads_json="$(printf '%s' "$threads_json" | jq --arg fixed "$fixed_alerts" '
+      ($fixed | split(" ") | map(select(length > 0))) as $fixedSet
+      | map(
+          .comments = [
+            .comments[]
+            | if (.isBabysitSentinel | not) and
+                 ((.author == "github-advanced-security") or (.author == "github-advanced-security[bot]")) then
+                (((try (.body | capture("/code-scanning/(?<n>[0-9]+)") | .n)) // null)) as $n
+                | if $n != null and ($n | IN($fixedSet[])) then empty else . end
+              else . end
+          ]
+        )
+      | map(select(
+          [.comments[] | select(.isBabysitSentinel | not)] | length > 0
+        ))
     ')"
   fi
 
