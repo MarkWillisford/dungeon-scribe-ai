@@ -58,4 +58,4 @@ jobs:
           claude_args: |
             --allowedTools Bash,Read,Write,Edit
             --max-turns 30
-          track_progress: true
+          track_progress: ${{ github.event_name == 'pull_request_review' }}
