@@ -267,7 +267,7 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
       maxIterations: 100,
       agent: claudeCode('claude-sonnet-4-6'),
       promptFile: './.sandcastle/prompt.md',
-      promptArgs: { ISSUE_NUMBER: String(issueNumber), SOURCE_BRANCH: 'main', TARGET_BRANCH: branch },
+      promptArgs: { ISSUE_NUMBER: String(issueNumber) },
       completionSignal: COMPLETION_SIGNALS,
     });
 
