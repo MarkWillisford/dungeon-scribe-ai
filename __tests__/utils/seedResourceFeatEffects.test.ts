@@ -90,6 +90,7 @@ describe('RESOURCE_FEAT_PATCHES', () => {
       'extra_bane',
       'extra_panache',
       'extra_arcane_pool',
+      'extra_evolution',
     ];
     for (const id of required) {
       expect(featIds).toContain(id);
@@ -178,5 +179,11 @@ describe('RESOURCE_FEAT_PATCHES', () => {
     const patch = RESOURCE_FEAT_PATCHES.find((p) => p.featId === 'extra_bane');
     expect(patch?.effect.target).toBe('resource.bane');
     expect(patch?.effect.value).toBe(3);
+  });
+
+  it('Extra Evolution grants 1 evolution pool point', () => {
+    const patch = RESOURCE_FEAT_PATCHES.find((p) => p.featId === 'extra_evolution');
+    expect(patch?.effect.target).toBe('resource.evolution_pool');
+    expect(patch?.effect.value).toBe(1);
   });
 });

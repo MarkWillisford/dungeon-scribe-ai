@@ -14,6 +14,7 @@
  *   extra_panache      → resource.panache               +2  (ACG)
  *   extra_arcane_pool  → resource.arcane_pool           +2  (UM)
  *   extra_inspiration  → resource.inspiration          +3  (ACG)
+ *   extra_evolution    → resource.evolution_pool        +1  (CRB)
  *
  * Idempotent: any existing effect targeting the same resource pool is replaced.
  * Targets staging only. Will exit if FIREBASE_PROJECT_ID is set to any other project.
@@ -157,6 +158,17 @@ export const RESOURCE_FEAT_PATCHES: FeatPatch[] = [
       target: 'resource.inspiration',
       value: 3,
       source: 'Extra Inspiration',
+    },
+  },
+  {
+    featId: 'extra_evolution',
+    featName: 'Extra Evolution',
+    effect: {
+      type: 'bonus',
+      bonusType: BonusType.UNTYPED,
+      target: 'resource.evolution_pool',
+      value: 1,
+      source: 'Extra Evolution',
     },
   },
 ];
