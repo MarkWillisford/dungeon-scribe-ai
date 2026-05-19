@@ -7,7 +7,10 @@
  *   extra_ki           → resource.ki                   +2  (CRB)
  *   extra_rage         → resource.rage_rounds           +6  (CRB)
  *   extra_lay_on_hands → resource.lay_on_hands          +2  (CRB)
+ *   extra_bombs        → resource.bombs                 +2  (CRB)
+ *   extra_performance  → resource.bardic_performance    +6  (CRB)
  *   extra_grit         → resource.grit                 +2  (UC)
+ *   extra_bane         → resource.bane                 +3  (UC)
  *   extra_panache      → resource.panache               +2  (ACG)
  *   extra_arcane_pool  → resource.arcane_pool           +2  (UM)
  *   extra_inspiration  → resource.inspiration          +3  (ACG)
@@ -80,6 +83,28 @@ export const RESOURCE_FEAT_PATCHES: FeatPatch[] = [
     },
   },
   {
+    featId: 'extra_bombs',
+    featName: 'Extra Bombs',
+    effect: {
+      type: 'bonus',
+      bonusType: BonusType.UNTYPED,
+      target: 'resource.bombs',
+      value: 2,
+      source: 'Extra Bombs',
+    },
+  },
+  {
+    featId: 'extra_performance',
+    featName: 'Extra Performance',
+    effect: {
+      type: 'bonus',
+      bonusType: BonusType.UNTYPED,
+      target: 'resource.bardic_performance',
+      value: 6,
+      source: 'Extra Performance',
+    },
+  },
+  {
     featId: 'extra_grit',
     featName: 'Extra Grit',
     effect: {
@@ -88,6 +113,17 @@ export const RESOURCE_FEAT_PATCHES: FeatPatch[] = [
       target: 'resource.grit',
       value: 2,
       source: 'Extra Grit',
+    },
+  },
+  {
+    featId: 'extra_bane',
+    featName: 'Extra Bane',
+    effect: {
+      type: 'bonus',
+      bonusType: BonusType.UNTYPED,
+      target: 'resource.bane',
+      value: 3,
+      source: 'Extra Bane',
     },
   },
   {

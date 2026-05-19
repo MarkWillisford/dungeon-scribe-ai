@@ -84,7 +84,10 @@ describe('RESOURCE_FEAT_PATCHES', () => {
       'extra_ki',
       'extra_rage',
       'extra_lay_on_hands',
+      'extra_bombs',
+      'extra_performance',
       'extra_grit',
+      'extra_bane',
       'extra_panache',
       'extra_arcane_pool',
     ];
@@ -156,6 +159,24 @@ describe('RESOURCE_FEAT_PATCHES', () => {
   it('Extra Inspiration grants 3 inspiration uses', () => {
     const patch = RESOURCE_FEAT_PATCHES.find((p) => p.featId === 'extra_inspiration');
     expect(patch?.effect.target).toBe('resource.inspiration');
+    expect(patch?.effect.value).toBe(3);
+  });
+
+  it('Extra Bombs grants 2 bombs per day', () => {
+    const patch = RESOURCE_FEAT_PATCHES.find((p) => p.featId === 'extra_bombs');
+    expect(patch?.effect.target).toBe('resource.bombs');
+    expect(patch?.effect.value).toBe(2);
+  });
+
+  it('Extra Performance grants 6 bardic performance rounds', () => {
+    const patch = RESOURCE_FEAT_PATCHES.find((p) => p.featId === 'extra_performance');
+    expect(patch?.effect.target).toBe('resource.bardic_performance');
+    expect(patch?.effect.value).toBe(6);
+  });
+
+  it('Extra Bane grants 3 bane rounds per day', () => {
+    const patch = RESOURCE_FEAT_PATCHES.find((p) => p.featId === 'extra_bane');
+    expect(patch?.effect.target).toBe('resource.bane');
     expect(patch?.effect.value).toBe(3);
   });
 });
