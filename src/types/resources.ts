@@ -6,6 +6,7 @@ export interface ResourcePoolContribution {
   source: string; // e.g. "Cleric class feature", "Extra Channel", "Headband of Charisma +2"
   sourceType: 'class_feature' | 'feat' | 'equipment' | 'favored_class_bonus' | 'other';
   value: number;
+  bonusType?: string; // PF1e bonus type for stacking rules; omitted means untyped
 }
 
 // Stored in Firestore on class documents (classFeatureResourcePools map).

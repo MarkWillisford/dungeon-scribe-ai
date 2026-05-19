@@ -624,10 +624,12 @@ describe('ModifierPipelineService', () => {
         },
       });
       const result = ModifierPipelineService.recalculate(char);
-      expect(result.resources.length).toBeGreaterThan(0);
       const ragePool = result.resources.find((p) => p.id === 'rage');
       expect(ragePool).toBeDefined();
-      expect(ragePool!.max).toBeGreaterThan(0);
+      // con 13 → conMod 1; formula: 4 + conMod = 5
+      expect(ragePool!.max).toBe(5);
+      expect(ragePool!.baseMax).toBe(5);
+      expect(ragePool!.current).toBe(5);
     });
   });
 

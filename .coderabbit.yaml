@@ -28,7 +28,7 @@ reviews:
 
     - path: "src/services/**"
       instructions: |
-        Pure business logic services (non-Firebase). Review for:
+        Pure business logic services (non-Firebase). Does not apply to Firebase* files, which are covered by the Firebase-specific rule above. Review for:
         - Correct Pathfinder 1e rules implementation (ability scores, modifiers, resource pools, feats)
         - No Firebase I/O — pure logic only, no Firestore/Auth calls
         - Functions must be pure and testable in isolation

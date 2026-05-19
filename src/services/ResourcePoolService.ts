@@ -86,6 +86,7 @@ export class ResourcePoolService {
           source: effect.source || charFeat.name,
           sourceType: 'feat',
           value,
+          bonusType: effect.bonusType,
         });
       }
     }
@@ -110,6 +111,7 @@ export class ResourcePoolService {
           source: effect.source || item.name,
           sourceType: 'equipment',
           value,
+          bonusType: effect.bonusType,
         });
       }
     }
@@ -150,10 +152,37 @@ export class ResourcePoolService {
       const baseMax = acc.contributions
         .filter((c) => c.sourceType === 'class_feature')
         .reduce((sum, c) => sum + c.value, 0);
-      const max = acc.contributions.reduce((sum, c) => sum + c.value, 0);
+
+      // class_feature and favored_class_bonus always stack (they are ability definitions, not bonuses)
+      const alwaysStack = acc.contributions
+        .filter((c) => c.sourceType === 'class_feature' || c.sourceType === 'favored_class_bonus')
+        .reduce((sum, c) => sum + c.value, 0);
+
+      // feat and equipment contributions apply PF1e stacking: typed bonuses take only the highest
+      const bonusContribs = acc.contributions.filter(
+        (c) => c.sourceType === 'feat' || c.sourceType === 'equipment',
+      );
+      const byBonusType = new Map<string, number[]>();
+      for (const c of bonusContribs) {
+        const key = c.bonusType ?? 'untyped';
+        const arr = byBonusType.get(key) ?? [];
+        arr.push(c.value);
+        byBonusType.set(key, arr);
+      }
+      let bonusTotal = 0;
+      for (const [type, values] of byBonusType) {
+        if (type === 'untyped' || type === 'dodge') {
+          bonusTotal += values.reduce((sum, v) => sum + v, 0);
+        } else {
+          bonusTotal += Math.max(...values);
+        }
+      }
+
+      const max = alwaysStack + bonusTotal;
 
       const existing = character.resources?.find((r) => r.id === poolId);
-      const current = existing?.current ?? max;
+      const preserved = existing?.current ?? max;
+      const current = Math.max(0, Math.min(max, preserved));
 
       result.push({
         id: poolId,
@@ -198,7 +227,8 @@ export class ResourcePoolService {
         } catch {
           return { ...pool };
         }
-        return { ...pool, current: Math.min(pool.max, pool.current + recovery) };
+        const safeRecovery = Math.max(0, recovery);
+        return { ...pool, current: Math.min(pool.max, pool.current + safeRecovery) };
       }
 
       return { ...pool };
