@@ -10,7 +10,7 @@ export class ResourcePoolService {
    *
    * Walks class features, feats, equipped items, and FCB selections to build
    * max, baseMax, and a contributions array for each pool. Does not reset
-   * current — preserves any existing value from character.resources.
+   * current; preserves any existing value from character.resources.
    *
    * Pure function: no Firebase or Redux dependency.
    */
@@ -40,7 +40,7 @@ export class ResourcePoolService {
         try {
           baseMax = FormulaService.evaluate(rp.maxFormula, context);
         } catch {
-          // Unknown variable (class not in context) — pool not applicable to this character
+          // Unknown variable (class not in context); pool not applicable to this character
           continue;
         }
 

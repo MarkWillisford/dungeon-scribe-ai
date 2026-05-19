@@ -228,7 +228,7 @@ function makeArcanist(level: number): Character {
 
 // ---- computePools: class-based pool computation ----
 
-describe('ResourcePoolService.computePools — class features', () => {
+describe('ResourcePoolService.computePools: class features', () => {
   test('Barbarian level 6, con 14 → rage_rounds max = 16', () => {
     // 4 + 2(conMod) + (6-1)*2 = 16
     const char = makeBarbarian(6, 14);
@@ -314,7 +314,7 @@ describe('ResourcePoolService.computePools — class features', () => {
 
 // ---- computePools: contributions array ----
 
-describe('ResourcePoolService.computePools — contributions', () => {
+describe('ResourcePoolService.computePools: contributions', () => {
   test('base class feature contribution has correct sourceType and value', () => {
     const char = makeCleric(5, 16);
     const pools = ResourcePoolService.computePools(char);
@@ -513,7 +513,7 @@ describe('ResourcePoolService.computePools — contributions', () => {
 
 // ---- computePools: multiclass characters ----
 
-describe('ResourcePoolService.computePools — multiclass', () => {
+describe('ResourcePoolService.computePools: multiclass', () => {
   test('Monk 4 / Cleric 4 produces pools for both classes', () => {
     const char = makeCharacter({
       classes: [makeClassEntry('Monk', 4, [KI_POOL]), makeClassEntry('Cleric', 4, [CHANNEL_POOL])],
@@ -555,7 +555,7 @@ describe('ResourcePoolService.computePools — multiclass', () => {
 
 // ---- computePools: current value preservation ----
 
-describe('ResourcePoolService.computePools — current value preservation', () => {
+describe('ResourcePoolService.computePools: current value preservation', () => {
   test('preserves current from existing character.resources on recalculation', () => {
     const existing: ResourcePool = {
       id: 'rage_rounds',
