@@ -88,7 +88,7 @@ query($owner: String!, $repo: String!, $pr: Int!) {
         nodes {
           id
           isResolved
-          comments(first: 20) {
+          comments(first: 100) {
             nodes {
               id
               databaseId
