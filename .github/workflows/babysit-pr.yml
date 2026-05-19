@@ -29,47 +29,27 @@ jobs:
       id-token: write
 
     steps:
-      - name: Skip if last commit is from babysit-pr
-        id: guard
-        run: |
-          AUTHOR_EMAIL=$(gh api repos/${{ github.repository }}/commits/${{ github.event.pull_request.head.sha || '' }} \
-            --jq '.commit.author.email // ""' 2>/dev/null || echo "")
-          if [[ "$AUTHOR_EMAIL" == *"claude[bot]"* ]]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "Last commit is from claude[bot] — CodeRabbit is reviewing our own fix. Skipping."
-          else
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
-        env:
-          GH_TOKEN: ${{ github.token }}
-        if: github.event_name == 'pull_request_review'
-
       - name: Checkout PR branch
-        if: steps.guard.outputs.skip != 'true'
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: ${{ github.event.pull_request.head.sha || format('refs/pull/{0}/head', inputs.pr_number) }}
           fetch-depth: 0
 
       - name: Setup Node 20
-        if: steps.guard.outputs.skip != 'true'
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 20
           cache: npm
 
       - name: Install dependencies
-        if: steps.guard.outputs.skip != 'true'
         run: npm ci
 
       - name: Install jq and perl
-        if: steps.guard.outputs.skip != 'true'
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y jq perl
 
       - name: Run babysit-pr
-        if: steps.guard.outputs.skip != 'true'
         uses: anthropics/claude-code-action@855a15bff2f22a6b15d90a4ebef506b5f1da1aec # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
