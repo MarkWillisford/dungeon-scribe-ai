@@ -168,6 +168,8 @@ CI fixes are never Deferred as follow-ups: CI must pass on this PR.
 
 ### 6. Assess active review threads
 
+**NO COMMITS IN THIS STEP.** Edit files freely. Do not run `git add`, `git commit`, or `commitAndPush.sh` here. All changes accumulate in the working tree and are committed once in Step 8 after Steps 5, 6, AND 7 are all complete.
+
 For every thread in `activeThreads`:
 
 - Group comments by file; read each file once (not per comment).
@@ -189,6 +191,8 @@ DS AI specifics to watch for when applying fixes:
 
 ### 7. Assess CodeRabbit review-body comments
 
+**NO COMMITS IN THIS STEP.** Edit files freely. Do not run `git add`, `git commit`, or `commitAndPush.sh` here. All changes accumulate in the working tree and are committed once in Step 8 after Steps 5, 6, AND 7 are all complete.
+
 For every parsed CodeRabbit review-body comment in `nitpickComments`:
 
 - Check whether its `fingerprint` already appears in a prior babysit-pr sentinel comment. If yes, skip.
@@ -199,7 +203,9 @@ For every parsed CodeRabbit review-body comment in `nitpickComments`:
 
 Deferred CodeRabbit fingerprints go into the fenced fingerprint block at the end of the summary so future runs dedupe correctly.
 
-### 8. Commit and push (if any edits)
+### 8. Commit (do NOT push yet)
+
+**This is the ONLY place in the skill where commits are made.** Steps 5, 6, and 7 must all be fully complete before reaching this step. One commit covers all changes from all three assessment steps combined.
 
 If steps 5, 6, or 7 modified any files:
 
@@ -207,12 +213,14 @@ If steps 5, 6, or 7 modified any files:
 - Commit message: `fix: babysit-pr — <one-line what changed>` (conventional-commit form required by DS AI commitlint).
 
 ```bash
-bash .agents/skills/babysit-pr/scripts/commitAndPush.sh "fix: babysit-pr — <message>" <file1> [<file2> ...]
+bash .agents/skills/babysit-pr/scripts/commitOnly.sh "fix: babysit-pr — <message>" <file1> [<file2> ...]
 ```
 
 Capture the `url=` line for reply templates in step 9.
 
-### 9. Post replies
+**Do NOT push here.** Pushing triggers CodeRabbit to re-review, which fires a new babysit-pr run that cancels this one before replies are posted. The push happens at the end of step 9, after all sentinel replies are sent.
+
+### 9. Post replies, then push
 
 For every thread assessed in step 6 NOT marked Skip-reply:
 
@@ -243,6 +251,14 @@ The CodeRabbit summary body:
 - Lists each deferred item with `<!-- babysit-pr:followup v1 ds-ai@0.1.0 -->` on its own line.
 - Includes the commit URL for fixes.
 - Includes every current fingerprint in a fenced block at the end (addressed and deferred).
+
+**Push after all replies are posted.** Once every sentinel reply (thread replies + CodeRabbit summary comment) is sent, push the commit:
+
+```bash
+git push
+```
+
+All sentinels are now in place before CodeRabbit sees the new commit. When CodeRabbit re-reviews and triggers the next babysit-pr run, it will find those threads already addressed.
 
 ### 9a. Create follow-up issue for deferred items (if any)
 
