@@ -196,12 +196,12 @@ export class ResourcePoolService {
         try {
           recovery = FormulaService.evaluate(pool.restRecoveryFormula, context);
         } catch {
-          return pool;
+          return { ...pool };
         }
         return { ...pool, current: Math.min(pool.max, pool.current + recovery) };
       }
 
-      return pool;
+      return { ...pool };
     });
   }
 }
