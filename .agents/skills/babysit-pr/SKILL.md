@@ -168,6 +168,8 @@ CI fixes are never Deferred as follow-ups: CI must pass on this PR.
 
 ### 6. Assess active review threads
 
+**NO COMMITS IN THIS STEP.** Edit files freely. Do not run `git add`, `git commit`, or `commitAndPush.sh` here. All changes accumulate in the working tree and are committed once in Step 8 after Steps 5, 6, AND 7 are all complete.
+
 For every thread in `activeThreads`:
 
 - Group comments by file; read each file once (not per comment).
@@ -189,6 +191,8 @@ DS AI specifics to watch for when applying fixes:
 
 ### 7. Assess CodeRabbit review-body comments
 
+**NO COMMITS IN THIS STEP.** Edit files freely. Do not run `git add`, `git commit`, or `commitAndPush.sh` here. All changes accumulate in the working tree and are committed once in Step 8 after Steps 5, 6, AND 7 are all complete.
+
 For every parsed CodeRabbit review-body comment in `nitpickComments`:
 
 - Check whether its `fingerprint` already appears in a prior babysit-pr sentinel comment. If yes, skip.
@@ -200,6 +204,8 @@ For every parsed CodeRabbit review-body comment in `nitpickComments`:
 Deferred CodeRabbit fingerprints go into the fenced fingerprint block at the end of the summary so future runs dedupe correctly.
 
 ### 8. Commit and push (if any edits)
+
+**This is the ONLY place in the skill where commits are made.** Steps 5, 6, and 7 must all be fully complete before reaching this step. One commit covers all changes from all three assessment steps combined.
 
 If steps 5, 6, or 7 modified any files:
 
