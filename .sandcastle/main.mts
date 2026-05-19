@@ -35,7 +35,7 @@
 
 import { createSandbox, claudeCode } from '@ai-hero/sandcastle';
 import { docker } from '@ai-hero/sandcastle/sandboxes/docker';
-import { execSync, spawn } from 'node:child_process';
+import { execSync, execFileSync, spawn } from 'node:child_process';
 import { homedir } from 'node:os';
 import { readFileSync } from 'node:fs';
 
@@ -194,9 +194,10 @@ function resolveBlocker(issueNumber: number): BlockerResolution {
       resolverCache.set(issueNumber, result);
       return result;
     }
-  } catch {
-    // Issue not found or inaccessible -- treat as resolved so it doesn't block forever.
-    const result: BlockerResolution = { resolved: true, baseBranch: null };
+  } catch (err) {
+    console.error(`Failed to inspect blocker #${issueNumber}:`, err);
+    // Retry next poll cycle instead of incorrectly unblocking downstream work.
+    const result: BlockerResolution = { resolved: false, baseBranch: null };
     resolverCache.set(issueNumber, result);
     return result;
   }
@@ -269,6 +270,10 @@ function selectIssue(issues: GitHubIssue[], visited = new Set<number>()): IssueS
 // Issue processing
 // ---------------------------------------------------------------------------
 
+function git(args: string[], options: Record<string, unknown> = {}): string {
+  return execFileSync('git', args, { encoding: 'utf8', ...options }) as string;
+}
+
 async function processIssue(issue: GitHubIssue, baseBranch = 'main'): Promise<void> {
   const { number: issueNumber, title } = issue;
   const branch = `sandcastle/issue-${issueNumber}`;
@@ -280,13 +285,13 @@ async function processIssue(issue: GitHubIssue, baseBranch = 'main'): Promise<vo
   // Using fetch + reset (rather than pull) avoids both the "divergent branches"
   // error from unconfigured pull.rebase and the refspec rejection that occurs
   // when main is checked out and we try to fetch into refs/heads/main directly.
-  const fetchTargets = baseBranch !== 'main' ? `origin main ${baseBranch}` : 'origin main';
-  execSync(`git fetch ${fetchTargets}`, { encoding: 'utf8' });
+  const fetchArgs = baseBranch !== 'main' ? ['origin', 'main', baseBranch] : ['origin', 'main'];
+  git(['fetch', ...fetchArgs]);
 
   if (baseBranch !== 'main') {
     // Position HEAD at the pre-merge parent so createSandbox branches from there
     // if the issue branch doesn't exist yet.
-    execSync(`git checkout --detach origin/${baseBranch}`, { encoding: 'utf8', stdio: 'pipe' });
+    git(['checkout', '--detach', `origin/${baseBranch}`], { stdio: 'pipe' });
     console.log(`Positioned at base: ${baseBranch}`);
   } else {
     execSync('git checkout main', { encoding: 'utf8', stdio: 'pipe' });
@@ -318,11 +323,11 @@ async function processIssue(issue: GitHubIssue, baseBranch = 'main'): Promise<vo
   }
   if (branchExists) {
     try {
-      execSync(`git rebase ${rebaseTarget} ${branch}`, { encoding: 'utf8', stdio: 'pipe' });
+      git(['rebase', rebaseTarget, branch], { stdio: 'pipe' });
       // git rebase <upstream> <branch> checks out <branch> into the working tree.
       // Return to the base ref so the SDK can create a fresh worktree for the branch.
       if (baseBranch !== 'main') {
-        execSync(`git checkout --detach origin/${baseBranch}`, { encoding: 'utf8', stdio: 'pipe' });
+        git(['checkout', '--detach', `origin/${baseBranch}`], { stdio: 'pipe' });
       } else {
         execSync('git checkout main', { encoding: 'utf8', stdio: 'pipe' });
       }
@@ -334,14 +339,11 @@ async function processIssue(issue: GitHubIssue, baseBranch = 'main'): Promise<vo
         // Rebase may have already been aborted or not started cleanly.
       }
       if (baseBranch !== 'main') {
-        execSync(`git checkout --detach --force origin/${baseBranch}`, {
-          encoding: 'utf8',
-          stdio: 'pipe',
-        });
+        git(['checkout', '--detach', '--force', `origin/${baseBranch}`], { stdio: 'pipe' });
       } else {
         execSync('git checkout -f main', { encoding: 'utf8', stdio: 'pipe' });
       }
-      execSync(`git branch -f ${branch} ${rebaseTarget}`, { encoding: 'utf8', stdio: 'pipe' });
+      git(['branch', '-f', branch, rebaseTarget], { stdio: 'pipe' });
       console.log(`${branch} had rebase conflicts — reset to ${baseBranch}.`);
     }
   }
@@ -431,13 +433,13 @@ async function checkConflictedReviewPassedPRs(): Promise<void> {
       `PR #${pr.number} has a merge conflict — re-queuing issue #${issueNumber} for rebase`,
     );
     try {
-      execSync(`gh pr edit ${pr.number} --remove-label "${LABEL_REVIEW_PASSED}"`, {
-        encoding: 'utf8',
-      });
       execSync(
         `gh issue edit ${issueNumber} --remove-label "${LABEL_ARCH_REVIEW}" --add-label "${LABEL_SANDCASTLE}"`,
         { encoding: 'utf8' },
       );
+      execSync(`gh pr edit ${pr.number} --remove-label "${LABEL_REVIEW_PASSED}"`, {
+        encoding: 'utf8',
+      });
     } catch (err) {
       console.error(`Failed to re-queue issue #${issueNumber}:`, err);
     }
