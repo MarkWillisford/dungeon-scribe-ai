@@ -56,7 +56,7 @@ function makeClassEntry(
     fortProgression: 'good' as ClassEntry['fortProgression'],
     refProgression: 'poor' as ClassEntry['refProgression'],
     willProgression: 'poor' as ClassEntry['willProgression'],
-    classFeatures: resourcePools.map((rp, i) => ({
+    classFeatures: resourcePools.map((rp) => ({
       name: rp.name,
       description: '',
       level: 1,
@@ -315,6 +315,10 @@ describe('ResourcePoolService.computePools: class features', () => {
 // ---- computePools: contributions array ----
 
 describe('ResourcePoolService.computePools: contributions', () => {
+  afterEach(() => {
+    FeatRegistryService.clear();
+  });
+
   test('base class feature contribution has correct sourceType and value', () => {
     const char = makeCleric(5, 16);
     const pools = ResourcePoolService.computePools(char);
@@ -365,8 +369,6 @@ describe('ResourcePoolService.computePools: contributions', () => {
     expect(featContrib).toBeDefined();
     expect(featContrib!.value).toBe(2);
     expect(featContrib!.source).toBe('Extra Channel');
-
-    FeatRegistryService.clear();
   });
 
   test('equipment bonus contribution is attributed correctly', () => {

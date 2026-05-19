@@ -65,6 +65,7 @@ export class ResourcePoolService {
 
     // 2. Feat bonuses targeting resource.{poolId}
     for (const charFeat of character.feats.feats) {
+      if (!charFeat.active) continue;
       const featDef = FeatRegistryService.getFeat(charFeat.featId);
       if (!featDef) continue;
 
