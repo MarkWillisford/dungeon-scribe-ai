@@ -586,6 +586,27 @@ describe('ResourcePoolService.computePools: current value preservation', () => {
     const reservoir = pools.find((p) => p.id === 'arcane_reservoir')!;
     expect(reservoir.current).toBe(reservoir.max);
   });
+
+  test('clamps stale current above new max to the recomputed max', () => {
+    const existing: ResourcePool = {
+      id: 'rage_rounds',
+      name: 'Rage',
+      current: 20, // higher than the recomputed max of 16
+      max: 20,
+      baseMax: 20,
+      contributions: [],
+      rechargeOn: 'rest',
+      restRecoveryMode: 'full',
+    };
+
+    const char = makeBarbarian(6, 14); // level 6, con 14 → max = 16
+    char.resources = [existing];
+
+    const pools = ResourcePoolService.computePools(char);
+    const rage = pools.find((p) => p.id === 'rage_rounds')!;
+    expect(rage.max).toBe(16);
+    expect(rage.current).toBe(16); // clamped down to max, not left at stale 20
+  });
 });
 
 // ---- applyRest ----
@@ -729,5 +750,25 @@ describe('ResourcePoolService.applyRest', () => {
 
     const result = ResourcePoolService.applyRest(pools, char);
     expect(result[0].current).toBe(5);
+  });
+
+  test('negative formula recovery does not decrease current', () => {
+    const char = makeArcanist(4);
+    const pools: ResourcePool[] = [
+      {
+        id: 'arcane_reservoir',
+        name: 'Arcane Reservoir',
+        current: 3,
+        max: 7,
+        baseMax: 7,
+        contributions: [],
+        rechargeOn: 'rest',
+        restRecoveryMode: 'formula',
+        restRecoveryFormula: '-5',
+      },
+    ];
+
+    const result = ResourcePoolService.applyRest(pools, char);
+    expect(result[0].current).toBe(3); // floored at 0 before adding, so no decrease
   });
 });
