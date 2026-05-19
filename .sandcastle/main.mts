@@ -77,9 +77,11 @@ function restartIfScriptChanged(): void {
   const current = readFileSync(SCRIPT_PATH, 'utf8');
   if (current !== SCRIPT_HASH_AT_BOOT) {
     console.log('main.mts changed on disk — restarting to pick up new code...');
-    const child = spawn(process.execPath, process.argv.slice(1), {
+    // Restart via npx tsx explicitly — process.execPath is bare node and can't load .mts.
+    const child = spawn('npx', ['tsx', SCRIPT_PATH], {
       detached: true,
       stdio: 'inherit',
+      cwd: process.cwd(),
     });
     child.unref();
     process.exit(0);
