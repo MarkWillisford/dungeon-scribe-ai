@@ -607,6 +607,30 @@ describe('ModifierPipelineService', () => {
     });
   });
 
+  describe('resource pools', () => {
+    test('recalculate computes resource pools from class features', () => {
+      const char = createTestCharacter();
+      char.classes.classes[0].classFeatures.push({
+        name: 'Rage',
+        description: 'Barbarian rage',
+        level: 1,
+        effects: [],
+        resourcePool: {
+          id: 'rage',
+          name: 'Rage',
+          maxFormula: '4 + conMod',
+          rechargeOn: 'rest' as const,
+          restRecoveryMode: 'full' as const,
+        },
+      });
+      const result = ModifierPipelineService.recalculate(char);
+      expect(result.resources.length).toBeGreaterThan(0);
+      const ragePool = result.resources.find((p) => p.id === 'rage');
+      expect(ragePool).toBeDefined();
+      expect(ragePool!.max).toBeGreaterThan(0);
+    });
+  });
+
   describe('conditions effects', () => {
     test('active condition effects are applied to stats', () => {
       const char = createTestCharacter();

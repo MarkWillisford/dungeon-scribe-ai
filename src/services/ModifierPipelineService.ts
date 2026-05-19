@@ -4,6 +4,7 @@ import type { AbilityScores } from '@/types/abilities';
 import { Size, SaveProgression } from '@/types/base';
 import { FormulaService, type FormulaContext } from './FormulaService';
 import { FeatRegistryService } from './FeatRegistryService';
+import { ResourcePoolService } from './ResourcePoolService';
 
 // ---- Resolved Effect (after formula evaluation) ----
 
@@ -94,6 +95,9 @@ export class ModifierPipelineService {
     this.applyHitPoints(c, stacked);
     this.applySkills(c, stacked);
     this.applyMovement(c, stacked);
+
+    // Phase 6: Compute resource pools (derived from class features, feats, equipment)
+    c.resources = ResourcePoolService.computePools(c);
 
     return c;
   }
