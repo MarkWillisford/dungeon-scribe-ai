@@ -226,7 +226,7 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
       } catch {
         // Rebase may have already been aborted or not started cleanly.
       }
-      execSync(`git checkout main`, { encoding: 'utf8', stdio: 'pipe' });
+      execSync(`git checkout -f main`, { encoding: 'utf8', stdio: 'pipe' });
       execSync(`git branch -f ${branch} main`, { encoding: 'utf8', stdio: 'pipe' });
       console.log(`${branch} had rebase conflicts — reset to main.`);
     }
@@ -321,10 +321,19 @@ async function poll(): Promise<void> {
     } else if (issues.length === 0) {
       console.log('Queue empty — all issues complete. Shutting down.');
       process.exit(0);
-    } else {
-      // Issues exist but are all paused for architecture review — nothing to do.
+    } else if (eligible.every((i) => i.labels.some((l) => l.name === LABEL_ARCH_REVIEW))) {
+      // Every remaining issue is paused for architecture review — human input required.
       console.log('All remaining issues are paused for architecture review. Shutting down.');
       process.exit(0);
+    } else {
+      // Some issues are blocked or in-progress — this shouldn't happen in normal
+      // sequential operation, but log and continue rather than exit.
+      const ts = new Date().toLocaleTimeString('en-US', {
+        timeZone: 'America/Los_Angeles',
+        hour12: false,
+      });
+      console.log(`[${ts} PT] Issues exist but none are workable right now. Checking again in ${POLL_INTERVAL_MS / 1000}s...`);
+      await sleep(POLL_INTERVAL_MS);
     }
   }
 }
