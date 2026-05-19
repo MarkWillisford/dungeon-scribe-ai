@@ -193,8 +193,10 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
   console.log(`\nPicking up issue #${issueNumber}: ${title}`);
   console.log(`Branch: ${branch}`);
 
-  // Pull latest main so the sandbox always branches from the most recent commit.
-  execSync('git pull origin main', { encoding: 'utf8' });
+  // Update local main to the latest remote commit without checking it out.
+  // Using fetch with refspec avoids the "divergent branches" error that occurs
+  // when the working tree is on a non-main branch and pull tries to merge.
+  execSync('git fetch origin main:main', { encoding: 'utf8' });
   console.log('main updated.');
 
   // Remove any stale worktree for this branch left over from a prior crashed run.
