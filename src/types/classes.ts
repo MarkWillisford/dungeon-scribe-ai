@@ -2,6 +2,7 @@ import { BABProgression, SaveProgression, Effect } from './base';
 import { FeatPrerequisite } from './feats';
 import type { SpellcastingAdvancement } from './spells';
 import type { BroodmasterState } from './eidolon';
+import type { ResourcePoolDefinition } from './resources';
 
 export type FavoredClassBonusSelection =
   | { level: number; type: 'hp' }
@@ -90,6 +91,7 @@ export interface ClassFeature {
     current?: number;
   };
   effects: Effect[];
+  resourcePool?: ResourcePoolDefinition;
 }
 
 export interface FavoredClassBonus {
