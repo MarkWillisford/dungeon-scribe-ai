@@ -5,7 +5,7 @@ language: en-US
 
 reviews:
   profile: assertive
-  request_changes_workflow: true
+  request_changes_workflow: false
   high_level_summary: true
   poem: false
   review_status: true
@@ -15,11 +15,19 @@ reviews:
     drafts: false
 
   path_instructions:
+    - path: "src/services/**/Firebase*"
+      instructions: |
+        Firebase I/O service files. Review for:
+        - Correct Firestore read/write patterns (batches for multi-doc writes, transactions for concurrent updates)
+        - Missing .limit() on queries that could return unbounded results
+        - Unhandled promise rejections on Firebase reads/writes
+        - Real-time listener leaks (onSnapshot without unsubscribe)
+
     - path: "src/services/**"
       instructions: |
-        These are pure business logic services. Review for:
+        Pure business logic services (non-Firebase). Review for:
         - Correct Pathfinder 1e rules implementation (ability scores, modifiers, resource pools, feats)
-        - No Firebase I/O in pure logic services — that belongs in Firebase*Service files only
+        - No Firebase I/O — pure logic only, no Firestore/Auth calls
         - Functions must be pure and testable in isolation
         - All bonus stacking follows PF1e rules: typed bonuses don't stack, untyped bonuses do
 
