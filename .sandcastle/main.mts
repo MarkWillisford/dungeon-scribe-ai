@@ -18,11 +18,17 @@
 // open, selectIssue() walks up the chain and tries to work on the blocker
 // instead. If every eligible issue is blocked or in-progress, the loop idles.
 //
+// Shutdown: when the queue is empty (no sandcastle-labeled issues remain),
+// the process exits cleanly. If issues exist but are all paused for architecture
+// review, it also exits — those require human input before work can resume.
+//
 // Self-healing: the poll loop never exits on error. Infrastructure failures
 // (missing Docker image, transient git errors) are caught and recovered:
 //   - Missing Docker image: auto-rebuilt before the next issue attempt.
 //   - Any other processIssue failure: issue reset to `sandcastle`, loop continues.
 //   - main.mts changed on disk: process restarts itself to pick up new code.
+//   - Stale worktrees from prior crashed runs: removed before processing.
+//   - Rebase conflicts on stale branches: branch reset to main.
 //
 // Usage:
 //   npx tsx .sandcastle/main.mts
@@ -189,8 +195,20 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
   execSync('git pull origin main', { encoding: 'utf8' });
   console.log('main updated.');
 
-  // If the branch already exists (reused worktree), rebase it onto main so the
-  // agent doesn't work on stale code and open a conflicting PR.
+  // Remove any stale worktree for this branch left over from a prior crashed run.
+  try {
+    execSync(`git worktree remove --force .sandcastle/worktrees/sandcastle-issue-${issueNumber}`, {
+      encoding: 'utf8',
+      stdio: 'pipe',
+    });
+    console.log(`Removed stale worktree for ${branch}.`);
+  } catch {
+    // No stale worktree — nothing to do.
+  }
+
+  // If the branch already exists, rebase it onto main so the agent doesn't work
+  // on stale code. If the rebase conflicts (e.g. squash-merged commits), reset
+  // the branch to main and start fresh.
   let branchExists = false;
   try {
     execSync(`git rev-parse --verify ${branch}`, { encoding: 'utf8', stdio: 'pipe' });
@@ -199,8 +217,19 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
     // Branch doesn't exist yet — createSandbox will create it from current main.
   }
   if (branchExists) {
-    execSync(`git rebase main ${branch}`, { encoding: 'utf8' });
-    console.log(`${branch} rebased onto main.`);
+    try {
+      execSync(`git rebase main ${branch}`, { encoding: 'utf8', stdio: 'pipe' });
+      console.log(`${branch} rebased onto main.`);
+    } catch {
+      try {
+        execSync('git rebase --abort', { encoding: 'utf8', stdio: 'pipe' });
+      } catch {
+        // Rebase may have already been aborted or not started cleanly.
+      }
+      execSync(`git checkout -f main`, { encoding: 'utf8', stdio: 'pipe' });
+      execSync(`git branch -f ${branch} main`, { encoding: 'utf8', stdio: 'pipe' });
+      console.log(`${branch} had rebase conflicts — reset to main.`);
+    }
   }
 
   removeLabel(issueNumber, LABEL_SANDCASTLE);
@@ -289,19 +318,23 @@ async function poll(): Promise<void> {
 
     if (next) {
       await processIssue(next);
+    } else if (issues.length === 0) {
+      console.log('Queue empty — all issues complete. Shutting down.');
+      process.exit(0);
+    } else if (eligible.every((i) => i.labels.some((l) => l.name === LABEL_ARCH_REVIEW))) {
+      // Every remaining issue is paused for architecture review — human input required.
+      console.log('All remaining issues are paused for architecture review. Shutting down.');
+      process.exit(0);
     } else {
+      // Some issues are blocked or in-progress — this shouldn't happen in normal
+      // sequential operation, but log and continue rather than exit.
       const ts = new Date().toLocaleTimeString('en-US', {
         timeZone: 'America/Los_Angeles',
         hour12: false,
       });
-      const reason =
-        eligible.length === 0
-          ? 'No eligible issues.'
-          : 'All eligible issues are blocked or in-progress.';
-      console.log(`[${ts} PT] ${reason} Checking again in ${POLL_INTERVAL_MS / 1000}s...`);
+      console.log(`[${ts} PT] Issues exist but none are workable right now. Checking again in ${POLL_INTERVAL_MS / 1000}s...`);
+      await sleep(POLL_INTERVAL_MS);
     }
-
-    await sleep(POLL_INTERVAL_MS);
   }
 }
 
