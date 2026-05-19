@@ -193,10 +193,13 @@ async function processIssue(issue: GitHubIssue): Promise<void> {
   console.log(`\nPicking up issue #${issueNumber}: ${title}`);
   console.log(`Branch: ${branch}`);
 
-  // Update local main to the latest remote commit without checking it out.
-  // Using fetch with refspec avoids the "divergent branches" error that occurs
-  // when the working tree is on a non-main branch and pull tries to merge.
-  execSync('git fetch origin main:main', { encoding: 'utf8' });
+  // Ensure we are on main and fast-forward it to origin/main.
+  // Using fetch + reset (rather than pull) avoids both the "divergent branches"
+  // error from unconfigured pull.rebase and the refspec rejection that occurs
+  // when main is checked out and we try to fetch into refs/heads/main directly.
+  execSync('git fetch origin main', { encoding: 'utf8' });
+  execSync('git checkout main', { encoding: 'utf8', stdio: 'pipe' });
+  execSync('git reset --hard origin/main', { encoding: 'utf8', stdio: 'pipe' });
   console.log('main updated.');
 
   // Remove any stale worktree for this branch left over from a prior crashed run.
