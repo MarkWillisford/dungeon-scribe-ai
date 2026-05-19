@@ -1,0 +1,61 @@
+name: Babysit PR
+
+on:
+  pull_request_review:
+    types: [submitted]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to babysit'
+        required: true
+        type: string
+
+jobs:
+  babysit:
+    # On pull_request_review: only fire on CodeRabbit reviews of non-draft PRs.
+    # On workflow_dispatch: always run (pr_number input required).
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.review.user.login == 'coderabbitai[bot]' &&
+       github.event.pull_request.draft == false)
+    runs-on: ubuntu-latest
+    concurrency:
+      group: babysit-pr-${{ github.event.pull_request.number || inputs.pr_number }}
+      cancel-in-progress: true
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || format('refs/pull/{0}/head', inputs.pr_number) }}
+          fetch-depth: 0
+
+      - name: Setup Node 20
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install jq and perl
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y jq perl
+
+      - name: Run babysit-pr
+        uses: anthropics/claude-code-action@855a15bff2f22a6b15d90a4ebef506b5f1da1aec # v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Read `.agents/skills/babysit-pr/SKILL.md` and follow its instructions exactly for PR #${{ github.event.pull_request.number || inputs.pr_number }}.
+          claude_args: |
+            --allowedTools Bash,Read,Write,Edit
+            --max-turns 30
+          track_progress: ${{ github.event_name == 'pull_request_review' }}
