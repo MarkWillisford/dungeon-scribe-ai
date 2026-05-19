@@ -1,0 +1,29 @@
+name: Notify — PR Ready for Review
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  notify:
+    # Fires when babysit-pr adds the review-passed label
+    if: github.event.label.name == 'review-passed'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      - name: Post ready-for-review comment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh pr comment "$PR_NUMBER" \
+            --repo "$REPO" \
+            --body "**Ready for review**
+
+          babysit-pr has converged: CI is green and all CodeRabbit threads are addressed.
+
+          $PR_URL"

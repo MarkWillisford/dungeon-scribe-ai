@@ -1,0 +1,50 @@
+name: Babysit PR
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  babysit:
+    # Only fire on CodeRabbit reviews; skip draft PRs
+    if: |
+      github.event.review.user.login == 'coderabbitai[bot]' &&
+      github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install jq and perl
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y jq perl
+
+      - name: Run babysit-pr
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          direct_prompt: |
+            Read `.agents/skills/babysit-pr/SKILL.md` and follow its instructions exactly for PR #${{ github.event.pull_request.number }}.
+          claude_args: |
+            --allowedTools Bash,Read,Write,Edit
+            --max-turns 30
+          track_progress: true
