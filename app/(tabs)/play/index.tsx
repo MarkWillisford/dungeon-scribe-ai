@@ -605,7 +605,7 @@ function SessionPicker({
                       {isLoading ? (
                         <ActivityIndicator size="small" color="#FFFFFF" />
                       ) : (
-                        <Text style={pickerStyles.btnText}>Resume</Text>
+                        <Text style={[pickerStyles.btnText, { color: '#fff' }]}>Resume</Text>
                       )}
                     </Pressable>
                   )}
@@ -877,7 +877,6 @@ const pickerStyles = StyleSheet.create({
     fontFamily: 'Cinzel',
     fontSize: 12,
     fontWeight: '600',
-    color: '#FFFFFF',
   },
   newBtnText: {
     fontFamily: 'Cinzel',
