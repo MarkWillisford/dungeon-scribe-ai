@@ -33,12 +33,13 @@ import {
   setBuffLibrary,
   toggleBuff,
   toggleCombatAbility,
+  togglePreparedSpell,
+  useSpellSlot as expendSpellSlot,
 } from '@store/slices/combatSlice';
 import { CombatService } from '@services/CombatService';
 import { DiceService } from '@services/DiceService';
 import { PlaySessionService } from '@services/PlaySessionService';
 import { RollRecord, Buff, SavedBuff } from '@/types/buff';
-import type { PlaySessionDoc } from '@/types/playSession';
 import { BuffedTotals } from '@/types/combat';
 import type { CharacterSummary } from '@/types/character';
 import { BUFF_PRESETS } from '@/data/buffs/presets';
@@ -48,16 +49,18 @@ import { AttackPanel } from '@/components/combat/AttackPanel';
 import { DefensePanel } from '@/components/combat/DefensePanel';
 import { ResourcesPlayPanel } from '@/components/combat/ResourcesPlayPanel';
 import { BuffsPanel } from '@/components/combat/BuffsPanel';
+import { SpellsPanel } from '@/components/combat/SpellsPanel';
 import { CombatAbilityToggles } from '@/components/combat/CombatAbilityToggles';
 import { RollLog } from '@/components/combat/RollLog';
 import { DiceRoller } from '@/components/dice/DiceRoller';
 
-type CombatTab = 'playsheet' | 'buffs' | 'dice' | 'log';
+type CombatTab = 'playsheet' | 'buffs' | 'spells' | 'dice' | 'log';
 type PlayView = 'loading' | 'picker' | 'tracker';
 
 const TAB_LABELS: { key: CombatTab; label: string }[] = [
   { key: 'playsheet', label: 'Playsheet' },
   { key: 'buffs', label: 'Buffs' },
+  { key: 'spells', label: 'Spells' },
   { key: 'dice', label: 'Dice' },
   { key: 'log', label: 'Log' },
 ];
@@ -554,6 +557,25 @@ export default function CombatTrackerScreen() {
           />
 
           <View style={styles.spacerLarge} />
+        </ScrollView>
+      )}
+
+      {activeTab === 'spells' && (
+        <ScrollView
+          style={styles.tabContent}
+          contentContainerStyle={styles.tabContentInner}
+          showsVerticalScrollIndicator={false}
+        >
+          <SpellsPanel
+            pools={character.spellcasting.pools}
+            preparedSpells={character.spellcasting.preparedSpells}
+            preparedSpellsCast={preparedSpellsCast}
+            spellSlotsUsed={spellSlotsUsed}
+            onTogglePreparedSpell={(spellIndex) => dispatch(togglePreparedSpell({ spellIndex }))}
+            onUseSpellSlot={(poolKey, level) => dispatch(expendSpellSlot({ poolKey, level }))}
+            testID="spells-panel"
+          />
+          <View style={{ height: 80 }} />
         </ScrollView>
       )}
 

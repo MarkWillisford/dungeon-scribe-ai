@@ -50,6 +50,7 @@ function makeSessionDoc(overrides: Partial<PlaySessionDoc> = {}): PlaySessionDoc
       combatExpertisePenalty: 1,
     },
     spellSlotsUsed: {},
+    preparedSpellsCast: {},
     resourcePools: {},
     round: 3,
     createdAt: '2026-01-01T00:00:00.000Z',
@@ -89,6 +90,7 @@ describe('PlaySessionService', () => {
           combatExpertisePenalty: 1,
         },
         spellSlotsUsed: {},
+        preparedSpellsCast: {},
         resourcePools: {},
         round: 0,
       });
@@ -120,6 +122,7 @@ describe('PlaySessionService', () => {
           combatExpertisePenalty: 1,
         },
         spellSlotsUsed: {},
+        preparedSpellsCast: {},
         resourcePools: {},
         round: 0,
       });

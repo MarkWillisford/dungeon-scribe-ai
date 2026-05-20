@@ -12,8 +12,10 @@ export interface PlaySessionDoc {
   tempHP: number;
   activeBuffs: Buff[];
   combatAbilities: CombatAbilityState;
-  /** spell level (1-9) → number of slots expended */
-  spellSlotsUsed: Record<number, number>;
+  /** pool baseClass → used slot count per spell level (index = level, 0 = cantrips) */
+  spellSlotsUsed: Record<string, number[]>;
+  /** stringified index into character.spellcasting.preparedSpells → cast state */
+  preparedSpellsCast: Record<string, boolean>;
   /** resource pool id → current remaining value */
   resourcePools: Record<string, number>;
   round: number;

@@ -287,6 +287,8 @@ export const {
   resetCombat,
   initNewSession,
   initFromSession,
+  togglePreparedSpell,
+  useSpellSlot,
 } = combatSlice.actions;
 
 export default combatSlice.reducer;
