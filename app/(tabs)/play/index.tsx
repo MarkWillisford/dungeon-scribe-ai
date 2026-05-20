@@ -379,6 +379,7 @@ export default function CombatTrackerScreen() {
     setSessionCharacterId(null);
     sessionInitRef.current = false;
     setSessionCheckDone(true);
+    sessionInitRef.current = false;
   }, [dispatch, userId, sessionCharacterId]);
 
   // ── Render guards ────────────────────────────────────────────────────────────

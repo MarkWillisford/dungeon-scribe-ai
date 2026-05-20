@@ -82,6 +82,32 @@ describe('HPTracker', () => {
     expect(getByText('Staggered (auto)')).toBeTruthy();
   });
 
+  it('shows Disabled (not Unconscious) when currentHP is 0 and nonlethal exceeds max HP', () => {
+    const { getByText } = render(
+      <HPTracker {...makeProps({ currentHP: 0, maxHP: 30, nonlethalDamage: 31 })} />,
+    );
+    expect(getByText('Disabled')).toBeTruthy();
+  });
+
+  it('calls onToggleStaggered when stagger badge is pressed', () => {
+    const onToggleStaggered = jest.fn();
+    const { tree } = render(<HPTracker {...makeProps({ isStaggered: true, onToggleStaggered })} />);
+    function findByLabel(node: RenderedNode, label: string): RenderedNode | null {
+      if (node.props?.accessibilityLabel === label) return node;
+      for (const child of node.children ?? []) {
+        if (typeof child !== 'string') {
+          const found = findByLabel(child, label);
+          if (found) return found;
+        }
+      }
+      return null;
+    }
+    const badge = findByLabel(tree, 'Staggered — tap to clear');
+    expect(badge).toBeTruthy();
+    if (badge?.props?.onPress) badge.props.onPress();
+    expect(onToggleStaggered).toHaveBeenCalledTimes(1);
+  });
+
   it('quick damage button calls onAdjustHP with damage amount', () => {
     const onAdjustHP = jest.fn();
     const { tree } = render(<HPTracker {...makeProps({ onAdjustHP })} />);

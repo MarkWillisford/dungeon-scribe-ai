@@ -195,7 +195,7 @@ const combatSlice = createSlice({
     },
 
     applyNonlethalRest(state, action: PayloadAction<{ characterLevel: number }>) {
-      const recovery = Math.max(1, action.payload.characterLevel);
+      const recovery = NonLethalService.restRecoveryAmount(action.payload.characterLevel);
       state.nonlethalDamage = Math.max(0, state.nonlethalDamage - recovery);
       // Re-check staggered threshold after recovery
       if (state.currentHP !== null && state.currentHP > 0 && state.staggeredAutoApplied) {

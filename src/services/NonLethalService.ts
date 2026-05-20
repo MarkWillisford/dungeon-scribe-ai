@@ -29,6 +29,7 @@ export class NonLethalService {
    * Floors at 0.
    */
   static applyHeal(currentNonlethal: number, amount: number): number {
-    return Math.max(0, currentNonlethal - amount);
+    const safeAmount = Math.max(0, amount);
+    return Math.max(0, currentNonlethal - safeAmount);
   }
 }
