@@ -117,7 +117,7 @@ jobs:
           show_full_output: true
 
       - name: Retry if rate-limited mid-run
-        if: steps.babysit.outcome == 'failure' && (inputs.retry_count || '0') < '2'
+        if: steps.babysit.outcome == 'failure' && fromJSON(inputs.retry_count || '0') < 2
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BABYSIT_EXECUTION_FILE: ${{ steps.babysit.outputs.execution_file || '' }}
@@ -158,7 +158,7 @@ jobs:
             --field retry_count="$next_retry"
 
       - name: Fail if mid-run retries exhausted
-        if: steps.babysit.outcome == 'failure' && (inputs.retry_count || '0') >= '2'
+        if: steps.babysit.outcome == 'failure' && fromJSON(inputs.retry_count || '0') >= 2
         env:
           BABYSIT_EXECUTION_FILE: ${{ steps.babysit.outputs.execution_file || '' }}
         run: |
