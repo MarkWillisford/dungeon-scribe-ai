@@ -559,6 +559,7 @@ export default function CombatTrackerScreen() {
           style={styles.tabContent}
           contentContainerStyle={styles.tabContentInner}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
         >
           <BuffsPanel
             activeBuffs={activeBuffs}
@@ -619,6 +620,7 @@ export default function CombatTrackerScreen() {
           style={styles.tabContent}
           contentContainerStyle={styles.tabContentInner}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
         >
           <RollLog rolls={rollLog} onClear={() => dispatch(clearRollLog())} testID="roll-log" />
           <View style={styles.spacerSmall} />

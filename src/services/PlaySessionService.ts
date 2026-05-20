@@ -177,7 +177,7 @@ export class PlaySessionService {
         ? (data.preparedSpellsCast as Record<string, boolean>)
         : {},
       resourcePools,
-      round: (data.round as number) ?? 0,
+      round: PlaySessionService.asNumber(data.round),
       createdAt: PlaySessionService.timestampToString(data.createdAt),
       updatedAt: PlaySessionService.timestampToString(data.updatedAt),
     };
