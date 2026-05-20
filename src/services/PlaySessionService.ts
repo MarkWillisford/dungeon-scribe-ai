@@ -26,7 +26,7 @@ const pendingUpdates = new Map<
 >();
 
 function sessionKey(userId: string, characterId: string): string {
-  return `${userId}:${characterId}`;
+  return JSON.stringify([userId, characterId]);
 }
 
 export class PlaySessionService {
@@ -137,19 +137,33 @@ export class PlaySessionService {
     pendingUpdates.clear();
   }
 
+  private static isPlainObject(v: unknown): v is Record<string, unknown> {
+    return typeof v === 'object' && v !== null && !Array.isArray(v);
+  }
+
   private static deserialize(characterId: string, data: Record<string, unknown>): PlaySessionDoc {
+    const activeBuffs = Array.isArray(data.activeBuffs)
+      ? (data.activeBuffs as PlaySessionDoc['activeBuffs'])
+      : [];
+    const combatAbilities = PlaySessionService.isPlainObject(data.combatAbilities)
+      ? (data.combatAbilities as unknown as PlaySessionDoc['combatAbilities'])
+      : PlaySessionService.defaultCombatAbilities();
+    const spellSlotsUsed = PlaySessionService.isPlainObject(data.spellSlotsUsed)
+      ? (data.spellSlotsUsed as Record<number, number>)
+      : {};
+    const resourcePools = PlaySessionService.isPlainObject(data.resourcePools)
+      ? (data.resourcePools as Record<string, number>)
+      : {};
     return {
       characterId,
       userId: (data.userId as string) ?? '',
       currentHP: (data.currentHP as number) ?? 0,
       nonlethalDamage: (data.nonlethalDamage as number) ?? 0,
       tempHP: (data.tempHP as number) ?? 0,
-      activeBuffs: (data.activeBuffs as PlaySessionDoc['activeBuffs']) ?? [],
-      combatAbilities:
-        (data.combatAbilities as PlaySessionDoc['combatAbilities']) ??
-        PlaySessionService.defaultCombatAbilities(),
-      spellSlotsUsed: (data.spellSlotsUsed as Record<number, number>) ?? {},
-      resourcePools: (data.resourcePools as Record<string, number>) ?? {},
+      activeBuffs,
+      combatAbilities,
+      spellSlotsUsed,
+      resourcePools,
       round: (data.round as number) ?? 0,
       createdAt: PlaySessionService.timestampToString(data.createdAt),
       updatedAt: PlaySessionService.timestampToString(data.updatedAt),

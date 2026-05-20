@@ -33,6 +33,7 @@ import {
   toggleCombatAbility,
 } from '@store/slices/combatSlice';
 import { CombatService } from '@services/CombatService';
+import { DiceService } from '@services/DiceService';
 import { PlaySessionService } from '@services/PlaySessionService';
 import { RollRecord, Buff, SavedBuff } from '@/types/buff';
 import type { PlaySessionDoc } from '@/types/playSession';
@@ -129,7 +130,9 @@ export default function CombatTrackerScreen() {
     if (currentHP === null) return undefined;
     const sub = AppState.addEventListener('change', (state: AppStateStatus) => {
       if (state === 'background' || state === 'inactive') {
-        void PlaySessionService.flushPendingUpdate();
+        void PlaySessionService.flushPendingUpdate().catch((error) => {
+          console.error('Failed to flush pending play session updates', error);
+        });
       }
     });
     return () => sub.remove();
@@ -242,7 +245,7 @@ export default function CombatTrackerScreen() {
         },
       ]);
     },
-    [dispatch, userId],
+    [character, dispatch, userId],
   );
 
   const handleResumeSession = useCallback(
@@ -432,7 +435,7 @@ export default function CombatTrackerScreen() {
             testID="defense-panel"
           />
 
-          <View style={{ height: 80 }} />
+          <View style={styles.spacerLarge} />
         </ScrollView>
       )}
 
@@ -465,7 +468,7 @@ export default function CombatTrackerScreen() {
             testID="combat-ability-toggles"
           />
 
-          <View style={{ height: 80 }} />
+          <View style={styles.spacerLarge} />
         </ScrollView>
       )}
 
@@ -482,7 +485,7 @@ export default function CombatTrackerScreen() {
           showsVerticalScrollIndicator={false}
         >
           <RollLog rolls={rollLog} onClear={() => dispatch(clearRollLog())} testID="roll-log" />
-          <View style={{ height: 40 }} />
+          <View style={styles.spacerSmall} />
         </ScrollView>
       )}
     </SafeAreaView>
@@ -516,6 +519,8 @@ function SessionPicker({
       setResuming(characterId);
       try {
         await onResumeSession(characterId);
+      } catch (error) {
+        console.warn('Failed to resume session:', error);
       } finally {
         setResuming(null);
       }
@@ -583,7 +588,7 @@ function SessionPicker({
                     style={[
                       pickerStyles.newBtn,
                       { borderColor: colors.border.DEFAULT },
-                      item.id !== activeCharacterId && { opacity: 0.4 },
+                      item.id !== activeCharacterId && pickerStyles.newBtnDisabled,
                     ]}
                     onPress={() => onNewSession(item.id)}
                     disabled={item.id !== activeCharacterId}
@@ -624,7 +629,6 @@ function InitiativeRow({
   onRollRecorded: (r: RollRecord) => void;
 }) {
   const { colors, fantasy } = useTheme();
-  const { DiceService } = require('@services/DiceService');
   const handleRoll = () => {
     const raw = DiceService.rollD20();
     const total = raw + initiative;
@@ -761,6 +765,8 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   sectionSpacer: { height: 8 },
+  spacerLarge: { height: 80 },
+  spacerSmall: { height: 40 },
   noChar: {
     flex: 1,
     alignItems: 'center',
@@ -838,6 +844,9 @@ const pickerStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 40,
+  },
+  newBtnDisabled: {
+    opacity: 0.4,
   },
   btnText: {
     fontFamily: 'Cinzel',
