@@ -39,7 +39,7 @@ import { execSync, execFileSync, spawn } from 'node:child_process';
 import { homedir } from 'node:os';
 import { readFileSync } from 'node:fs';
 
-const POLL_INTERVAL_MS = 30_000;
+const POLL_INTERVAL_MS = 300_000; // 5 minutes
 const DOCKER_IMAGE = 'sandcastle:dungeon-scribe-ai';
 const SCRIPT_PATH = new URL(import.meta.url).pathname;
 
@@ -87,6 +87,24 @@ function restartIfScriptChanged(): void {
     child.unref();
     process.exit(0);
   }
+}
+
+// ---------------------------------------------------------------------------
+// Rate limit handling
+// ---------------------------------------------------------------------------
+
+function parseResetEpoch(text: string): number | null {
+  const match = text.match(/resets (\d+):(\d+)(am|pm) \(UTC\)/i);
+  if (!match) return null;
+  let hours = parseInt(match[1], 10);
+  const minutes = parseInt(match[2], 10);
+  const ampm = match[3].toLowerCase();
+  if (ampm === 'pm' && hours !== 12) hours += 12;
+  if (ampm === 'am' && hours === 12) hours = 0;
+  const now = new Date();
+  const reset = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), hours, minutes, 0));
+  if (reset.getTime() <= Date.now()) reset.setUTCDate(reset.getUTCDate() + 1);
+  return reset.getTime();
 }
 
 // ---------------------------------------------------------------------------
@@ -398,9 +416,24 @@ async function processIssue(issue: GitHubIssue, baseBranch = 'main'): Promise<vo
       addLabel(issueNumber, LABEL_DONE);
     }
   } catch (err) {
-    console.error(`Error processing issue #${issueNumber}:`, err);
-    removeLabel(issueNumber, LABEL_IN_PROGRESS);
-    addLabel(issueNumber, LABEL_SANDCASTLE);
+    const msg = String((err as any)?.message ?? err ?? '');
+    if (msg.toLowerCase().includes('hit your limit')) {
+      const resetEpoch = parseResetEpoch(msg);
+      const waitMs = resetEpoch
+        ? Math.max(resetEpoch - Date.now() + 120_000, 0)
+        : 3_600_000;
+      const waitMins = Math.ceil(waitMs / 60_000);
+      console.log(
+        `Rate limited on issue #${issueNumber}. Re-queuing and waiting ${waitMins}m for reset...`,
+      );
+      removeLabel(issueNumber, LABEL_IN_PROGRESS);
+      addLabel(issueNumber, LABEL_SANDCASTLE);
+      await sleep(waitMs);
+    } else {
+      console.error(`Error processing issue #${issueNumber}:`, err);
+      removeLabel(issueNumber, LABEL_IN_PROGRESS);
+      addLabel(issueNumber, LABEL_SANDCASTLE);
+    }
   } finally {
     await box.close();
   }
