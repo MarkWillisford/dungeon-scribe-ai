@@ -296,5 +296,19 @@ describe('PlaySessionService', () => {
       await PlaySessionService.flushPendingUpdate();
       expect(mockFirestore.updateDoc).not.toHaveBeenCalled();
     });
+
+    it('keeps debounced writes isolated per session key', () => {
+      PlaySessionService.scheduleDebouncedUpdate('user-1', 'char-1', { currentHP: 30 }, 2500);
+      PlaySessionService.scheduleDebouncedUpdate('user-1', 'char-2', { currentHP: 10 }, 2500);
+      jest.advanceTimersByTime(3000);
+      expect(mockFirestore.updateDoc).toHaveBeenCalledTimes(2);
+    });
+
+    it('cancelPendingUpdate drops all queued writes', () => {
+      PlaySessionService.scheduleDebouncedUpdate('user-1', 'char-1', { currentHP: 30 }, 2500);
+      PlaySessionService.cancelPendingUpdate();
+      jest.advanceTimersByTime(3000);
+      expect(mockFirestore.updateDoc).not.toHaveBeenCalled();
+    });
   });
 });

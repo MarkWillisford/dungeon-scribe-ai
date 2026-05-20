@@ -66,7 +66,7 @@ export class PlaySessionService {
     if (!docSnap.exists()) return null;
     const data = docSnap.data() as Record<string, unknown>;
     if (typeof data.currentHP !== 'number') return null;
-    return this.deserialize(docSnap.id, data);
+    return this.deserialize(userId, docSnap.id, data);
   }
 
   static async update(userId: string, characterId: string, data: PlaySessionUpdate): Promise<void> {
@@ -99,6 +99,7 @@ export class PlaySessionService {
     const key = sessionKey(userId, characterId);
     const existing = pendingUpdates.get(key);
     if (existing) clearTimeout(existing.timer);
+    const mergedData: PlaySessionUpdate = existing ? { ...existing.data, ...data } : { ...data };
     const timer = setTimeout(() => {
       const pending = pendingUpdates.get(key);
       if (!pending) return;
@@ -109,7 +110,7 @@ export class PlaySessionService {
         },
       );
     }, delayMs);
-    pendingUpdates.set(key, { userId, characterId, data, timer });
+    pendingUpdates.set(key, { userId, characterId, data: mergedData, timer });
   }
 
   /**
@@ -141,7 +142,11 @@ export class PlaySessionService {
     return typeof v === 'object' && v !== null && !Array.isArray(v);
   }
 
-  private static deserialize(characterId: string, data: Record<string, unknown>): PlaySessionDoc {
+  private static deserialize(
+    userId: string,
+    characterId: string,
+    data: Record<string, unknown>,
+  ): PlaySessionDoc {
     const activeBuffs = Array.isArray(data.activeBuffs)
       ? (data.activeBuffs as PlaySessionDoc['activeBuffs'])
       : [];
@@ -156,7 +161,7 @@ export class PlaySessionService {
       : {};
     return {
       characterId,
-      userId: (data.userId as string) ?? '',
+      userId,
       currentHP: (data.currentHP as number) ?? 0,
       nonlethalDamage: (data.nonlethalDamage as number) ?? 0,
       tempHP: (data.tempHP as number) ?? 0,

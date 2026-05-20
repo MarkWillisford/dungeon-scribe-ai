@@ -125,6 +125,18 @@ export default function CombatTrackerScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- currentHP intentionally excluded: sessionInitRef guards against re-running; dispatch is stable
   }, [userId, dispatch]);
 
+  // Restore sessionCharacterId after a remount during an active session.
+  // Component state resets to null on remount; this re-derives the key so
+  // auto-save and handleEndCombat can find the correct Firestore document.
+  useEffect(() => {
+    if (!userId || sessionCharacterId !== null || currentHP === null) return;
+    PlaySessionService.listActiveSessionCharacterIds(userId)
+      .then((ids) => {
+        if (ids.length === 1) setSessionCharacterId(ids[0]);
+      })
+      .catch(() => {});
+  }, [userId, sessionCharacterId, currentHP]);
+
   // Auto-save: flush pending write when app goes to background
   useEffect(() => {
     if (currentHP === null) return undefined;
@@ -216,30 +228,34 @@ export default function CombatTrackerScreen() {
         {
           text: 'Start New Session',
           style: 'destructive',
-          onPress: () => {
-            dispatch(initNewSession({ maxHP: charMaxHP }));
-            setSessionCharacterId(characterId);
-            if (userId) {
-              void PlaySessionService.create(userId, characterId, {
-                currentHP: charMaxHP,
-                nonlethalDamage: 0,
-                tempHP: 0,
-                activeBuffs: [],
-                combatAbilities: {
-                  powerAttack: false,
-                  deadlyAim: false,
-                  rage: false,
-                  twoWeaponFighting: false,
-                  twoWeaponFightingLightOffhand: false,
-                  haste: false,
-                  flurryOfBlows: false,
-                  combatExpertise: false,
-                  combatExpertisePenalty: 1,
-                },
-                spellSlotsUsed: {},
-                resourcePools: {},
-                round: 0,
-              });
+          onPress: async () => {
+            try {
+              if (userId) {
+                await PlaySessionService.create(userId, characterId, {
+                  currentHP: charMaxHP,
+                  nonlethalDamage: 0,
+                  tempHP: 0,
+                  activeBuffs: [],
+                  combatAbilities: {
+                    powerAttack: false,
+                    deadlyAim: false,
+                    rage: false,
+                    twoWeaponFighting: false,
+                    twoWeaponFightingLightOffhand: false,
+                    haste: false,
+                    flurryOfBlows: false,
+                    combatExpertise: false,
+                    combatExpertisePenalty: 1,
+                  },
+                  spellSlotsUsed: {},
+                  resourcePools: {},
+                  round: 0,
+                });
+              }
+              dispatch(initNewSession({ maxHP: charMaxHP }));
+              setSessionCharacterId(characterId);
+            } catch {
+              Alert.alert('Error', 'Failed to start session. Please try again.');
             }
           },
         },
@@ -264,10 +280,12 @@ export default function CombatTrackerScreen() {
   const handleEndCombat = useCallback(() => {
     PlaySessionService.cancelPendingUpdate();
     if (userId && sessionCharacterId) {
-      void PlaySessionService.delete(userId, sessionCharacterId);
+      PlaySessionService.delete(userId, sessionCharacterId).catch((error) => {
+        console.error('Failed to end play session', error);
+      });
+      setActiveSessionIds((ids) => ids.filter((id) => id !== sessionCharacterId));
     }
     dispatch(resetCombat());
-    setActiveSessionIds([]);
     setSessionCharacterId(null);
     setSessionCheckDone(true);
   }, [dispatch, userId, sessionCharacterId]);
