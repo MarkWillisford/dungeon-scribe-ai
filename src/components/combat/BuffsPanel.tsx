@@ -26,6 +26,9 @@ const CATEGORY_COLORS: Record<string, string> = {
   Custom: '#1A237E',
 };
 
+const ACTIVE_GREEN = '#4CAF50';
+const INACTIVE_GREY = '#9E9E9E';
+
 export function BuffsPanel({
   activeBuffs,
   buffLibrary,
@@ -115,7 +118,7 @@ export function BuffsPanel({
                 <View
                   style={[
                     styles.buffDot,
-                    { backgroundColor: buff.isActive ? '#4CAF50' : '#9E9E9E' },
+                    { backgroundColor: buff.isActive ? ACTIVE_GREEN : INACTIVE_GREY },
                   ]}
                 />
                 <Text style={[styles.buffName, { color: colors.text.primary }]}>{buff.name}</Text>
@@ -147,7 +150,7 @@ export function BuffsPanel({
                   <Pressable
                     style={[
                       styles.actionBtn,
-                      { borderColor: buff.isActive ? '#FF9800' : '#4CAF50' },
+                      { borderColor: buff.isActive ? '#FF9800' : ACTIVE_GREEN },
                     ]}
                     onPress={() => onToggleBuff(buff.id)}
                     accessibilityLabel={
@@ -157,7 +160,7 @@ export function BuffsPanel({
                     <Text
                       style={[
                         styles.actionBtnText,
-                        { color: buff.isActive ? '#FF9800' : '#4CAF50' },
+                        { color: buff.isActive ? '#FF9800' : ACTIVE_GREEN },
                       ]}
                     >
                       {buff.isActive ? 'Pause' : 'Resume'}
@@ -180,11 +183,14 @@ export function BuffsPanel({
       {/* Turn cycle buttons */}
       <View style={styles.turnRow}>
         <Pressable
-          style={[styles.turnBtn, { borderColor: '#4CAF50', backgroundColor: colors.bg.secondary }]}
+          style={[
+            styles.turnBtn,
+            { borderColor: ACTIVE_GREEN, backgroundColor: colors.bg.secondary },
+          ]}
           onPress={onStartTurn}
           accessibilityLabel="Start Turn"
         >
-          <Text style={[styles.turnBtnText, { color: '#4CAF50' }]}>Start Turn</Text>
+          <Text style={[styles.turnBtnText, { color: ACTIVE_GREEN }]}>Start Turn</Text>
         </Pressable>
         <Pressable
           style={[
