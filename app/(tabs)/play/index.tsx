@@ -279,6 +279,14 @@ export default function CombatTrackerScreen() {
     [combatAbilities.rage, character, currentHP, tempHP, dispatch],
   );
 
+  const handleStartTurn = useCallback(() => {
+    dispatch(startTurn());
+  }, [dispatch]);
+
+  const handleEndTurn = useCallback(() => {
+    dispatch(endTurn());
+  }, [dispatch]);
+
   const handleNewSession = useCallback(
     (characterId: string) => {
       const hp = character!.combatStats.hitPoints;
@@ -553,8 +561,8 @@ export default function CombatTrackerScreen() {
             onSaveToLibrary={(_: SavedBuff) => {
               /* future: dispatch(addToBuffLibrary(buff)) */
             }}
-            onStartTurn={() => dispatch(startTurn())}
-            onEndTurn={() => dispatch(endTurn())}
+            onStartTurn={handleStartTurn}
+            onEndTurn={handleEndTurn}
             testID="buffs-panel"
           />
 
