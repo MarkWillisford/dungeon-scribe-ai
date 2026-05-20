@@ -638,7 +638,7 @@ describe('decrementPool', () => {
 
   it('is a no-op for an unknown pool id', () => {
     const state = combatReducer(undefined, decrementPool({ poolId: 'nonexistent', amount: 1 }));
-    expect(state.resourcePools['nonexistent']).toBe(0);
+    expect(state.resourcePools['nonexistent']).toBeUndefined();
   });
 });
 

@@ -203,8 +203,8 @@ const combatSlice = createSlice({
 
     decrementPool(state, action: PayloadAction<{ poolId: string; amount: number }>) {
       const { poolId, amount } = action.payload;
-      const current = state.resourcePools[poolId] ?? 0;
-      state.resourcePools[poolId] = Math.max(0, current - amount);
+      if (!(poolId in state.resourcePools)) return;
+      state.resourcePools[poolId] = Math.max(0, state.resourcePools[poolId] - amount);
     },
 
     applyNewEncounter(state, action: PayloadAction<ResourcePool[]>) {
