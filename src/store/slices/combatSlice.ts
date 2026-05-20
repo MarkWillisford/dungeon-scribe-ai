@@ -211,6 +211,7 @@ const combatSlice = createSlice({
     applyNewEncounter(state, action: PayloadAction<ResourcePool[]>) {
       for (const pool of action.payload) {
         if (pool.rechargeOn === 'per_encounter') {
+          if (!(pool.id in state.resourcePools)) continue;
           state.resourcePools[pool.id] = pool.max;
         }
       }
@@ -220,7 +221,7 @@ const combatSlice = createSlice({
 
     resetCombat(state) {
       state.activeBuffs = [];
-      state.combatAbilities = defaultCombatAbilities;
+      state.combatAbilities = { ...defaultCombatAbilities };
       state.currentHP = null;
       state.tempHP = 0;
       state.nonlethalDamage = 0;
@@ -236,7 +237,7 @@ const combatSlice = createSlice({
       state.tempHP = 0;
       state.nonlethalDamage = 0;
       state.activeBuffs = [];
-      state.combatAbilities = defaultCombatAbilities;
+      state.combatAbilities = { ...defaultCombatAbilities };
       state.round = 0;
       state.resourcePools = {};
       for (const pool of action.payload.pools ?? []) {

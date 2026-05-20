@@ -681,6 +681,15 @@ describe('applyNewEncounter', () => {
     state = combatReducer(state, applyNewEncounter([specialPool]));
     expect(state.resourcePools['grit']).toBe(1);
   });
+
+  it('does not create phantom entries for pool IDs absent from state', () => {
+    const knownPool = makePool({ id: 'stamina', max: 10, rechargeOn: 'per_encounter' });
+    const phantomPool = makePool({ id: 'phantom', max: 5, rechargeOn: 'per_encounter' });
+    let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [knownPool] }));
+    state = combatReducer(state, applyNewEncounter([knownPool, phantomPool]));
+    expect(state.resourcePools['stamina']).toBe(10);
+    expect(state.resourcePools['phantom']).toBeUndefined();
+  });
 });
 
 // ----------------------------------------------------------------
