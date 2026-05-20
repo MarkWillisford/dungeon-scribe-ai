@@ -126,7 +126,7 @@ export default function CombatTrackerScreen() {
     PlaySessionService.listActiveSessionCharacterIds(userId)
       .then(async (ids) => {
         setActiveSessionIds(ids);
-        if (ids.length === 1 && character && ids[0] === character.info.id) {
+        if (ids.length === 1 && ids[0] === character.info.id) {
           const sessionDoc = await PlaySessionService.get(userId, ids[0]);
           if (sessionDoc) {
             dispatch(initFromSession(sessionDoc));
@@ -138,7 +138,7 @@ export default function CombatTrackerScreen() {
       })
       .catch(() => setSessionCheckDone(true));
     // eslint-disable-next-line react-hooks/exhaustive-deps -- currentHP intentionally excluded: sessionInitRef guards against re-running; dispatch is stable
-  }, [userId, dispatch]);
+  }, [userId, character, dispatch]);
 
   // Restore sessionCharacterId after a remount during an active session.
   // Component state resets to null on remount; this re-derives the key so
