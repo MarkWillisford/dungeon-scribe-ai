@@ -264,6 +264,13 @@ export default function CombatTrackerScreen() {
   const handleResumeSession = useCallback(
     async (characterId: string) => {
       if (!userId) return;
+      if (!character || characterId !== character.info.id) {
+        Alert.alert(
+          'Resume Unavailable',
+          'Select that character first in the Characters tab, then resume the session.',
+        );
+        return;
+      }
       try {
         const sessionDoc = await PlaySessionService.get(userId, characterId);
         if (sessionDoc) {
