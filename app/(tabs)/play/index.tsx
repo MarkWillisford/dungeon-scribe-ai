@@ -364,6 +364,9 @@ export default function CombatTrackerScreen() {
           'Could not load session. Check your connection and try again.',
         );
       }
+      dispatch(initFromSession(sessionDoc));
+      setSessionCharacterId(characterId);
+      // playView → 'tracker' automatically because currentHP becomes non-null
     },
     [dispatch, userId, character],
   );
