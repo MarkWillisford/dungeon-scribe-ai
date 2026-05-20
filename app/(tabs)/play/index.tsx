@@ -270,9 +270,14 @@ export default function CombatTrackerScreen() {
           dispatch(initFromSession(sessionDoc));
           setSessionCharacterId(characterId);
           // playView → 'tracker' automatically because currentHP becomes non-null
+        } else {
+          Alert.alert('Resume Failed', 'Session data is unavailable. Please start a new session.');
         }
       } catch {
-        Alert.alert('Resume Failed', 'Could not load session. Check your connection and try again.');
+        Alert.alert(
+          'Resume Failed',
+          'Could not load session. Check your connection and try again.',
+        );
       }
     },
     [dispatch, userId],
