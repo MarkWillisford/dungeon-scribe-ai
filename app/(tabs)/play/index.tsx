@@ -659,6 +659,7 @@ function SessionPicker({
         await onResumeSession(characterId);
       } catch (error) {
         console.warn('Failed to resume session:', error);
+        Alert.alert('Resume Failed', 'Could not load the saved session. Please try again.');
       } finally {
         setResuming(null);
       }
