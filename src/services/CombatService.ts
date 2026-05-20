@@ -318,7 +318,7 @@ export class CombatService {
   static getHPState(current: number, max: number, conScore: number, nonlethalDamage = 0): HPState {
     if (current <= -conScore) return 'dead';
     if (current < 0) return 'dying';
-    if (nonlethalDamage > max) return 'unconscious';
+    if (nonlethalDamage > max && current > 0) return 'unconscious';
     if (current === 0) return 'disabled';
     if (current <= Math.floor(max / 2)) return 'wounded';
     return 'healthy';
