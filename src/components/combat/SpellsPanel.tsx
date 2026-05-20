@@ -92,7 +92,7 @@ function PoolSection({
   colors,
   fantasy,
 }: PoolSectionProps) {
-  const poolKey = pool.baseClass;
+  const poolKey = pool.id ?? pool.baseClass;
   const poolLabel = pool.baseClass.charAt(0).toUpperCase() + pool.baseClass.slice(1);
 
   return (
