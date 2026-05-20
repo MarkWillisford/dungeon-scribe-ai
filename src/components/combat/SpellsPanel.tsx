@@ -166,7 +166,7 @@ function SpontaneousView({
   return (
     <View style={styles.slotGrid}>
       {levels.map(({ level, total, used }) => {
-        const remaining = total - used;
+        const remaining = Math.max(0, total - used);
         const canUse = remaining > 0;
         return (
           <View
