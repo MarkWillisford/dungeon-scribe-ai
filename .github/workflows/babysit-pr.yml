@@ -58,5 +58,5 @@ jobs:
             Read `.agents/skills/babysit-pr/SKILL.md` and follow its instructions exactly for PR #${{ github.event.pull_request.number || inputs.pr_number }}.
           claude_args: |
             --allowedTools Bash,Read,Write,Edit
-            --max-turns 30
+            --max-turns 80
           track_progress: ${{ github.event_name == 'pull_request_review' }}
