@@ -133,6 +133,11 @@ export class PlaySessionService {
         console.error('Failed to flush play session', result.reason);
       }
     }
+    await Promise.all(
+      entries.map((entry) =>
+        PlaySessionService.update(entry.userId, entry.characterId, entry.data),
+      ),
+    );
   }
 
   /** Discard all pending debounced writes without writing to Firestore. */

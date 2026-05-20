@@ -197,7 +197,7 @@ export default function CombatTrackerScreen() {
   useEffect(() => {
     if (!character || !userId || currentHP === null) return;
     if (!sessionCharacterId) return;
-    const sessionData: Partial<PlaySessionDoc> = {
+    const sessionData = {
       currentHP,
       tempHP,
       nonlethalDamage,
