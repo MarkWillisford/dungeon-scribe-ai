@@ -267,11 +267,15 @@ export default function CombatTrackerScreen() {
   const handleResumeSession = useCallback(
     async (characterId: string) => {
       if (!userId) return;
-      const sessionDoc = await PlaySessionService.get(userId, characterId);
-      if (sessionDoc) {
-        dispatch(initFromSession(sessionDoc));
-        setSessionCharacterId(characterId);
-        // playView → 'tracker' automatically because currentHP becomes non-null
+      try {
+        const sessionDoc = await PlaySessionService.get(userId, characterId);
+        if (sessionDoc) {
+          dispatch(initFromSession(sessionDoc));
+          setSessionCharacterId(characterId);
+          // playView → 'tracker' automatically because currentHP becomes non-null
+        }
+      } catch {
+        Alert.alert('Resume Failed', 'Could not load session. Check your connection and try again.');
       }
     },
     [dispatch, userId],
