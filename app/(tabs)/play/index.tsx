@@ -182,6 +182,33 @@ export default function CombatTrackerScreen() {
     sessionCharacterId,
   ]);
 
+  // Auto-save: flush pending write when app goes to background
+  useEffect(() => {
+    if (currentHP === null) return undefined;
+    const sub = AppState.addEventListener('change', (state: AppStateStatus) => {
+      if (state === 'background' || state === 'inactive') {
+        void PlaySessionService.flushPendingUpdate();
+      }
+    });
+    return () => sub.remove();
+  }, [currentHP]);
+
+  // Auto-save: schedule debounced write on every meaningful state change
+  useEffect(() => {
+    if (!character || !userId || currentHP === null) return;
+    const characterId = character.info.firebaseId ?? character.info.id;
+    const sessionData: Partial<PlaySessionDoc> = {
+      currentHP,
+      tempHP,
+      nonlethalDamage,
+      activeBuffs,
+      combatAbilities,
+      round,
+    };
+    PlaySessionService.scheduleDebouncedUpdate(userId, characterId, sessionData);
+  }, [character, userId, currentHP, tempHP, nonlethalDamage, activeBuffs, combatAbilities, round]);
+
+  // Computed values used in tracker
   const maxHP = useMemo(() => {
     if (!character) return 0;
     const hp = character.combatStats.hitPoints;
