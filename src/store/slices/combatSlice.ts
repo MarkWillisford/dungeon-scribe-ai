@@ -163,12 +163,6 @@ const combatSlice = createSlice({
 
     nextRound(state) {
       state.round += 1;
-      // Tick down buff durations; remove expired round-duration buffs
-      state.activeBuffs = state.activeBuffs.filter((buff) => {
-        if (buff.duration === null || buff.durationType !== 'rounds') return true;
-        buff.duration -= 1;
-        return buff.duration > 0;
-      });
     },
 
     setRound(state, action: PayloadAction<number>) {
