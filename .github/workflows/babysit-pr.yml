@@ -159,6 +159,18 @@ jobs:
 
       - name: Fail if mid-run retries exhausted
         if: steps.babysit.outcome == 'failure' && (inputs.retry_count || '0') >= '2'
+        env:
+          BABYSIT_EXECUTION_FILE: ${{ steps.babysit.outputs.execution_file || '' }}
         run: |
-          echo "babysit-pr rate-limited mid-run and retry limit (2) reached. Failing."
+          babysit_output=""
+          if [ -n "$BABYSIT_EXECUTION_FILE" ] && [ -f "$BABYSIT_EXECUTION_FILE" ]; then
+            babysit_output=$(cat "$BABYSIT_EXECUTION_FILE")
+          fi
+
+          if echo "$babysit_output" | grep -qi "hit your limit"; then
+            echo "babysit-pr rate-limited mid-run and retry limit (2) reached. Failing."
+          else
+            echo "babysit-pr failed on final retry attempt (not a rate limit)."
+            echo "$babysit_output"
+          fi
           exit 1
