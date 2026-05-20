@@ -631,6 +631,14 @@ describe('decrementPool', () => {
     const state = combatReducer(undefined, decrementPool({ poolId: 'nonexistent', amount: 1 }));
     expect(state.resourcePools['nonexistent']).toBeUndefined();
   });
+
+  it('is a no-op when amount is zero or negative', () => {
+    let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [makePool()] }));
+    state = combatReducer(state, decrementPool({ poolId: 'ki', amount: 0 }));
+    expect(state.resourcePools['ki']).toBe(8);
+    state = combatReducer(state, decrementPool({ poolId: 'ki', amount: -2 }));
+    expect(state.resourcePools['ki']).toBe(8);
+  });
 });
 
 // ----------------------------------------------------------------
