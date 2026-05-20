@@ -40,6 +40,7 @@ import { CombatService } from '@services/CombatService';
 import { DiceService } from '@services/DiceService';
 import { PlaySessionService } from '@services/PlaySessionService';
 import { RollRecord, Buff, SavedBuff } from '@/types/buff';
+import type { PlaySessionDoc } from '@/types/playSession';
 import { BuffedTotals } from '@/types/combat';
 import type { CharacterSummary } from '@/types/character';
 import { BUFF_PRESETS } from '@/data/buffs/presets';
@@ -974,6 +975,76 @@ const pickerStyles = StyleSheet.create({
     fontFamily: 'Cinzel',
     fontSize: 12,
     fontWeight: '600',
+  },
+  newBtnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 12,
+    fontWeight: '600',
+  },
+});
+
+const pickerStyles = StyleSheet.create({
+  header: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    gap: 4,
+  },
+  title: {
+    fontFamily: 'Cinzel',
+    fontSize: 22,
+    fontWeight: '700',
+  },
+  subtitle: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+  },
+  list: {
+    padding: 16,
+    gap: 12,
+  },
+  card: {
+    borderRadius: 10,
+    borderWidth: 1,
+    padding: 14,
+    gap: 10,
+  },
+  cardInfo: { gap: 2 },
+  cardName: {
+    fontFamily: 'Cinzel',
+    fontSize: 15,
+    fontWeight: '700',
+  },
+  cardSub: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+  },
+  cardActions: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  resumeBtn: {
+    flex: 1,
+    borderRadius: 6,
+    paddingVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 40,
+  },
+  newBtn: {
+    flex: 1,
+    borderRadius: 6,
+    borderWidth: 1,
+    paddingVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 40,
+  },
+  btnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#FFFFFF',
   },
   newBtnText: {
     fontFamily: 'Cinzel',
