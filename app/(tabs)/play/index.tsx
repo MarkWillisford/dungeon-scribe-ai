@@ -1,5 +1,16 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  Alert,
+  AppState,
+  type AppStateStatus,
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  ScrollView,
+  ActivityIndicator,
+  FlatList,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -11,7 +22,8 @@ import {
   appendRoll,
   applyRageEndHPLoss,
   clearRollLog,
-  initHP,
+  initFromSession,
+  initNewSession,
   nextRound,
   removeBuff,
   resetCombat,
@@ -21,8 +33,11 @@ import {
   toggleCombatAbility,
 } from '@store/slices/combatSlice';
 import { CombatService } from '@services/CombatService';
+import { PlaySessionService } from '@services/PlaySessionService';
 import { RollRecord, Buff, SavedBuff } from '@/types/buff';
+import type { PlaySessionDoc } from '@/types/playSession';
 import { BuffedTotals } from '@/types/combat';
+import type { CharacterSummary } from '@/types/character';
 import { BUFF_PRESETS } from '@/data/buffs/presets';
 
 import { HPTracker } from '@/components/combat/HPTracker';
@@ -34,6 +49,7 @@ import { RollLog } from '@/components/combat/RollLog';
 import { DiceRoller } from '@/components/dice/DiceRoller';
 
 type CombatTab = 'playsheet' | 'buffs' | 'dice' | 'log';
+type PlayView = 'loading' | 'picker' | 'tracker';
 
 const TAB_LABELS: { key: CombatTab; label: string }[] = [
   { key: 'playsheet', label: 'Playsheet' },
@@ -45,10 +61,11 @@ const TAB_LABELS: { key: CombatTab; label: string }[] = [
 export default function CombatTrackerScreen() {
   const { colors, fantasy } = useTheme();
   const dispatch = useAppDispatch();
-  const [activeTab, setActiveTab] = useState<CombatTab>('playsheet');
 
-  // Redux state
+  // Redux state — must be declared before any derived state that depends on it
   const character = useAppSelector((s) => s.characters.activeCharacter);
+  const characters = useAppSelector((s) => s.characters.characters);
+  const userId = useAppSelector((s) => s.auth.user?.uid);
   const {
     activeBuffs,
     combatAbilities,
@@ -60,6 +77,23 @@ export default function CombatTrackerScreen() {
     buffLibrary,
   } = useAppSelector((s) => s.combat);
 
+  const [activeTab, setActiveTab] = useState<CombatTab>('playsheet');
+  // sessionCheckDone tracks whether the Firestore session lookup has completed.
+  // Initialize to true if we're already in a session (currentHP not null) so
+  // the derived playView skips the loading state on subsequent mounts.
+  const [sessionCheckDone, setSessionCheckDone] = useState(currentHP !== null);
+  const [activeSessionIds, setActiveSessionIds] = useState<string[]>([]);
+  // sessionCharacterId is the stable Firestore document key for the active session.
+  // Set when a session starts and cleared when combat ends so auto-save and
+  // handleEndCombat always use the same key, avoiding a mismatch between
+  // CharacterSummary.id (local UUID) and character.info.firebaseId (Firestore doc ID).
+  const [sessionCharacterId, setSessionCharacterId] = useState<string | null>(null);
+  const sessionInitRef = useRef(false);
+
+  // Derive the view from state — avoids setting derived state inside effects.
+  const playView: PlayView =
+    currentHP !== null ? 'tracker' : sessionCheckDone ? 'picker' : 'loading';
+
   // Seed buff library with presets on first load if empty
   useEffect(() => {
     if (buffLibrary.length === 0) {
@@ -67,48 +101,175 @@ export default function CombatTrackerScreen() {
     }
   }, [buffLibrary.length, dispatch]);
 
-  // Init HP from character when entering combat for the first time
+  // Check Firestore for active sessions. Runs when userId becomes available.
+  // Uses a ref guard so it only fires once even if userId triggers a re-run.
   useEffect(() => {
-    if (character && currentHP === null) {
-      const hp = character.combatStats.hitPoints;
-      const maxHP = hp.base + hp.constitution + hp.favoredClass + hp.other;
-      dispatch(initHP(maxHP));
-    }
-  }, [character, currentHP, dispatch]);
+    if (sessionInitRef.current || currentHP !== null || !userId) return;
+    sessionInitRef.current = true;
 
-  // Compute buffed totals whenever character, buffs, or abilities change
-  const totals: BuffedTotals | null = useMemo(() => {
-    if (!character) return null;
-    return CombatService.calculateAllTotals(character, activeBuffs, combatAbilities);
-  }, [character, activeBuffs, combatAbilities]);
+    PlaySessionService.listActiveSessionCharacterIds(userId)
+      .then(async (ids) => {
+        setActiveSessionIds(ids);
+        if (ids.length === 1) {
+          const sessionDoc = await PlaySessionService.get(userId, ids[0]);
+          if (sessionDoc) {
+            dispatch(initFromSession(sessionDoc));
+            setSessionCharacterId(ids[0]);
+            return;
+          }
+        }
+        setSessionCheckDone(true);
+      })
+      .catch(() => setSessionCheckDone(true));
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- currentHP intentionally excluded: sessionInitRef guards against re-running; dispatch is stable
+  }, [userId, dispatch]);
 
+  // Auto-save: flush pending write when app goes to background
+  useEffect(() => {
+    if (currentHP === null) return undefined;
+    const sub = AppState.addEventListener('change', (state: AppStateStatus) => {
+      if (state === 'background' || state === 'inactive') {
+        void PlaySessionService.flushPendingUpdate();
+      }
+    });
+    return () => sub.remove();
+  }, [currentHP]);
+
+  // Auto-save: schedule debounced write on every meaningful state change
+  useEffect(() => {
+    if (!character || !userId || currentHP === null) return;
+    if (!sessionCharacterId) return;
+    const sessionData = {
+      currentHP,
+      tempHP,
+      nonlethalDamage,
+      activeBuffs,
+      combatAbilities,
+      round,
+    };
+    PlaySessionService.scheduleDebouncedUpdate(userId, sessionCharacterId, sessionData);
+  }, [
+    character,
+    userId,
+    currentHP,
+    tempHP,
+    nonlethalDamage,
+    activeBuffs,
+    combatAbilities,
+    round,
+    sessionCharacterId,
+  ]);
+
+  // Computed values used in tracker
   const maxHP = useMemo(() => {
     if (!character) return 0;
     const hp = character.combatStats.hitPoints;
     return hp.base + hp.constitution + hp.favoredClass + hp.other;
   }, [character]);
 
+  const totals: BuffedTotals | null = useMemo(() => {
+    if (!character) return null;
+    return CombatService.calculateAllTotals(character, activeBuffs, combatAbilities);
+  }, [character, activeBuffs, combatAbilities]);
+
   const conScore = character?.abilityScores.con.total ?? 10;
   const bab = character?.combatStats.attackBonuses.baseAttack[0] ?? 0;
 
-  const handleRollRecorded = (record: RollRecord) => {
-    dispatch(appendRoll(record));
-  };
+  // ── Handlers ────────────────────────────────────────────────────────────────
 
-  const handleAddBuff = (buff: Buff) => {
-    dispatch(addBuff(buff));
-  };
+  const handleRollRecorded = useCallback(
+    (record: RollRecord) => {
+      dispatch(appendRoll(record));
+    },
+    [dispatch],
+  );
 
-  const handleToggleCombatAbility = (key: Parameters<typeof toggleCombatAbility>[0]) => {
-    // If rage is being toggled off, apply HP adjustment
-    if (key === 'rage' && combatAbilities.rage && character && currentHP !== null) {
-      const result = CombatService.calculateRageEndHPAdjustment(character, currentHP, tempHP);
-      dispatch(
-        applyRageEndHPLoss({ newCurrentHP: result.newCurrentHP, newTempHP: result.newTempHP }),
-      );
+  const handleAddBuff = useCallback(
+    (buff: Buff) => {
+      dispatch(addBuff(buff));
+    },
+    [dispatch],
+  );
+
+  const handleToggleCombatAbility = useCallback(
+    (key: Parameters<typeof toggleCombatAbility>[0]) => {
+      if (key === 'rage' && combatAbilities.rage && character && currentHP !== null) {
+        const result = CombatService.calculateRageEndHPAdjustment(character, currentHP, tempHP);
+        dispatch(
+          applyRageEndHPLoss({ newCurrentHP: result.newCurrentHP, newTempHP: result.newTempHP }),
+        );
+      }
+      dispatch(toggleCombatAbility(key));
+    },
+    [combatAbilities.rage, character, currentHP, tempHP, dispatch],
+  );
+
+  const handleNewSession = useCallback(
+    (characterId: string) => {
+      const hp = character!.combatStats.hitPoints;
+      const charMaxHP = hp.base + hp.constitution + hp.favoredClass + hp.other;
+      Alert.alert('New Session', 'This will reset your current HP, buffs, and spell slots.', [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Start New Session',
+          style: 'destructive',
+          onPress: () => {
+            dispatch(initNewSession({ maxHP: charMaxHP }));
+            setSessionCharacterId(characterId);
+            if (userId) {
+              void PlaySessionService.create(userId, characterId, {
+                currentHP: charMaxHP,
+                nonlethalDamage: 0,
+                tempHP: 0,
+                activeBuffs: [],
+                combatAbilities: {
+                  powerAttack: false,
+                  deadlyAim: false,
+                  rage: false,
+                  twoWeaponFighting: false,
+                  twoWeaponFightingLightOffhand: false,
+                  haste: false,
+                  flurryOfBlows: false,
+                  combatExpertise: false,
+                  combatExpertisePenalty: 1,
+                },
+                spellSlotsUsed: {},
+                resourcePools: {},
+                round: 0,
+              });
+            }
+          },
+        },
+      ]);
+    },
+    [dispatch, userId],
+  );
+
+  const handleResumeSession = useCallback(
+    async (characterId: string) => {
+      if (!userId) return;
+      const sessionDoc = await PlaySessionService.get(userId, characterId);
+      if (sessionDoc) {
+        dispatch(initFromSession(sessionDoc));
+        setSessionCharacterId(characterId);
+        // playView → 'tracker' automatically because currentHP becomes non-null
+      }
+    },
+    [dispatch, userId],
+  );
+
+  const handleEndCombat = useCallback(() => {
+    PlaySessionService.cancelPendingUpdate();
+    if (userId && sessionCharacterId) {
+      void PlaySessionService.delete(userId, sessionCharacterId);
     }
-    dispatch(toggleCombatAbility(key));
-  };
+    dispatch(resetCombat());
+    setActiveSessionIds([]);
+    setSessionCharacterId(null);
+    setSessionCheckDone(true);
+  }, [dispatch, userId, sessionCharacterId]);
+
+  // ── Render guards ────────────────────────────────────────────────────────────
 
   if (!character) {
     return (
@@ -122,6 +283,30 @@ export default function CombatTrackerScreen() {
       </SafeAreaView>
     );
   }
+
+  if (playView === 'loading') {
+    return (
+      <SafeAreaView style={[styles.safe, { backgroundColor: colors.bg.primary }]}>
+        <View style={styles.centered}>
+          <ActivityIndicator size="large" color={fantasy.gold} />
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  if (playView === 'picker') {
+    return (
+      <SessionPicker
+        characters={characters}
+        activeSessionCharacterIds={activeSessionIds}
+        activeCharacterId={character.info.id}
+        onNewSession={handleNewSession}
+        onResumeSession={handleResumeSession}
+      />
+    );
+  }
+
+  // ── Tracker view ─────────────────────────────────────────────────────────────
 
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: colors.bg.primary }]}>
@@ -145,7 +330,7 @@ export default function CombatTrackerScreen() {
           </Pressable>
           <Pressable
             style={[styles.endBtn, { borderColor: colors.error.DEFAULT }]}
-            onPress={() => dispatch(resetCombat())}
+            onPress={handleEndCombat}
             accessibilityLabel="End combat"
           >
             <Text style={[styles.endBtnText, { color: colors.error.DEFAULT }]}>End</Text>
@@ -197,7 +382,6 @@ export default function CombatTrackerScreen() {
           contentContainerStyle={styles.tabContentInner}
           showsVerticalScrollIndicator={false}
         >
-          {/* HP Tracker */}
           <SectionHeader title="Hit Points" />
           <HPTracker
             currentHP={currentHP ?? maxHP}
@@ -211,14 +395,12 @@ export default function CombatTrackerScreen() {
             testID="hp-tracker"
           />
 
-          {/* Initiative */}
           <SectionHeader title="Initiative" />
           <InitiativeRow
             initiative={character.combatStats.initiative.total}
             onRollRecorded={handleRollRecorded}
           />
 
-          {/* Attacks */}
           <SectionHeader title="Attacks" />
           <AttackPanel
             meleeAttacks={
@@ -231,7 +413,6 @@ export default function CombatTrackerScreen() {
             testID="attack-panel"
           />
 
-          {/* Defense */}
           <SectionHeader title="Defense" />
           <DefensePanel
             ac={
@@ -308,6 +489,120 @@ export default function CombatTrackerScreen() {
   );
 }
 
+// ── Session Picker ────────────────────────────────────────────────────────────
+
+interface SessionPickerProps {
+  characters: CharacterSummary[];
+  activeSessionCharacterIds: string[];
+  activeCharacterId: string;
+  onNewSession: (characterId: string) => void;
+  onResumeSession: (characterId: string) => Promise<void>;
+}
+
+function SessionPicker({
+  characters,
+  activeSessionCharacterIds,
+  activeCharacterId,
+  onNewSession,
+  onResumeSession,
+}: SessionPickerProps) {
+  const { colors, fantasy } = useTheme();
+  const [resuming, setResuming] = useState<string | null>(null);
+
+  const activeSet = useMemo(() => new Set(activeSessionCharacterIds), [activeSessionCharacterIds]);
+
+  const handleResume = useCallback(
+    async (characterId: string) => {
+      setResuming(characterId);
+      try {
+        await onResumeSession(characterId);
+      } finally {
+        setResuming(null);
+      }
+    },
+    [onResumeSession],
+  );
+
+  return (
+    <SafeAreaView style={[styles.safe, { backgroundColor: colors.bg.primary }]}>
+      <View style={[pickerStyles.header, { borderBottomColor: colors.border.DEFAULT }]}>
+        <Text style={[pickerStyles.title, { color: fantasy.gold }]}>Play Session</Text>
+        <Text style={[pickerStyles.subtitle, { color: colors.text.secondary }]}>
+          Choose a character to begin
+        </Text>
+      </View>
+
+      {characters.length === 0 ? (
+        <View style={styles.centered}>
+          <Text style={[styles.noCharDesc, { color: colors.text.secondary }]}>
+            No characters found. Create a character first.
+          </Text>
+        </View>
+      ) : (
+        <FlatList
+          data={characters}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={pickerStyles.list}
+          renderItem={({ item }) => {
+            const hasSession = activeSet.has(item.id);
+            const isLoading = resuming === item.id;
+            return (
+              <View
+                style={[
+                  pickerStyles.card,
+                  {
+                    backgroundColor: colors.bg.secondary,
+                    borderColor: hasSession ? fantasy.bronze : colors.border.DEFAULT,
+                  },
+                ]}
+              >
+                <View style={pickerStyles.cardInfo}>
+                  <Text style={[pickerStyles.cardName, { color: fantasy.gold }]} numberOfLines={1}>
+                    {item.name}
+                  </Text>
+                  <Text style={[pickerStyles.cardSub, { color: colors.text.tertiary }]}>
+                    {item.classes} · {item.race}
+                  </Text>
+                </View>
+                <View style={pickerStyles.cardActions}>
+                  {hasSession && (
+                    <Pressable
+                      style={[pickerStyles.resumeBtn, { backgroundColor: colors.primary.DEFAULT }]}
+                      onPress={() => void handleResume(item.id)}
+                      disabled={isLoading}
+                      accessibilityLabel={`Resume session for ${item.name}`}
+                    >
+                      {isLoading ? (
+                        <ActivityIndicator size="small" color="#FFFFFF" />
+                      ) : (
+                        <Text style={pickerStyles.btnText}>Resume</Text>
+                      )}
+                    </Pressable>
+                  )}
+                  <Pressable
+                    style={[
+                      pickerStyles.newBtn,
+                      { borderColor: colors.border.DEFAULT },
+                      item.id !== activeCharacterId && { opacity: 0.4 },
+                    ]}
+                    onPress={() => onNewSession(item.id)}
+                    disabled={item.id !== activeCharacterId}
+                    accessibilityLabel={`New session for ${item.name}`}
+                  >
+                    <Text style={[pickerStyles.newBtnText, { color: colors.text.secondary }]}>
+                      New Session
+                    </Text>
+                  </Pressable>
+                </View>
+              </View>
+            );
+          }}
+        />
+      )}
+    </SafeAreaView>
+  );
+}
+
 // ── Small helpers ────────────────────────────────────────────────────────────
 
 function SectionHeader({ title }: { title: string }) {
@@ -376,6 +671,7 @@ function InitiativeRow({
 
 const styles = StyleSheet.create({
   safe: { flex: 1 },
+  centered: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -483,6 +779,76 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     lineHeight: 22,
+  },
+});
+
+const pickerStyles = StyleSheet.create({
+  header: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    gap: 4,
+  },
+  title: {
+    fontFamily: 'Cinzel',
+    fontSize: 22,
+    fontWeight: '700',
+  },
+  subtitle: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+  },
+  list: {
+    padding: 16,
+    gap: 12,
+  },
+  card: {
+    borderRadius: 10,
+    borderWidth: 1,
+    padding: 14,
+    gap: 10,
+  },
+  cardInfo: { gap: 2 },
+  cardName: {
+    fontFamily: 'Cinzel',
+    fontSize: 15,
+    fontWeight: '700',
+  },
+  cardSub: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 12,
+  },
+  cardActions: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  resumeBtn: {
+    flex: 1,
+    borderRadius: 6,
+    paddingVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 40,
+  },
+  newBtn: {
+    flex: 1,
+    borderRadius: 6,
+    borderWidth: 1,
+    paddingVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 40,
+  },
+  btnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#FFFFFF',
+  },
+  newBtnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 12,
+    fontWeight: '600',
   },
 });
 

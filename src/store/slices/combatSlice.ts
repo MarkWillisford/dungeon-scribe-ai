@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { Buff, BuffPackage, CombatAbilityState, RollRecord, SavedBuff } from '@/types/buff';
+import type { PlaySessionDoc } from '@/types/playSession';
 
 interface CombatState {
   // Session buffs (lost when combat ends or app closes)
@@ -204,6 +205,28 @@ const combatSlice = createSlice({
       state.round = 0;
       // Keep roll log and buff library — they persist across sessions
     },
+
+    // ---- Session initialisation ----
+
+    initNewSession(state, action: PayloadAction<{ maxHP: number }>) {
+      state.currentHP = action.payload.maxHP;
+      state.tempHP = 0;
+      state.nonlethalDamage = 0;
+      state.activeBuffs = [];
+      state.combatAbilities = defaultCombatAbilities;
+      state.round = 0;
+    },
+
+    initFromSession(state, action: PayloadAction<PlaySessionDoc>) {
+      const s = action.payload;
+      state.currentHP = s.currentHP;
+      state.tempHP = s.tempHP;
+      state.nonlethalDamage = s.nonlethalDamage;
+      state.activeBuffs = s.activeBuffs;
+      state.combatAbilities = s.combatAbilities;
+      state.round = s.round;
+      // Roll log and buff library are not session-scoped — leave them as-is
+    },
   },
 });
 
@@ -231,6 +254,8 @@ export const {
   removeFromBuffLibrary,
   setBuffPackages,
   resetCombat,
+  initNewSession,
+  initFromSession,
 } = combatSlice.actions;
 
 export default combatSlice.reducer;
