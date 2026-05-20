@@ -90,6 +90,7 @@ export default function CombatTrackerScreen() {
   // CharacterSummary.id (local UUID) and character.info.firebaseId (Firestore doc ID).
   const [sessionCharacterId, setSessionCharacterId] = useState<string | null>(null);
   const sessionInitRef = useRef(false);
+  const lastUserIdRef = useRef<string | null>(null);
 
   // Derive the view from state — avoids setting derived state inside effects.
   const playView: PlayView =
@@ -103,7 +104,15 @@ export default function CombatTrackerScreen() {
   }, [buffLibrary.length, dispatch]);
 
   // Uses a ref guard so it only fires once even if userId triggers a re-run.
+  // Reset the guard when userId changes so a newly signed-in user gets a fresh lookup.
   useEffect(() => {
+    if (lastUserIdRef.current !== (userId ?? null)) {
+      lastUserIdRef.current = userId ?? null;
+      sessionInitRef.current = false;
+      setSessionCheckDone(currentHP !== null);
+      setActiveSessionIds([]);
+      setSessionCharacterId(null);
+    }
     if (sessionInitRef.current || currentHP !== null || !userId) return;
     sessionInitRef.current = true;
 
@@ -290,7 +299,7 @@ export default function CombatTrackerScreen() {
     [dispatch, userId, character],
   );
 
-  const handleEndCombat = useCallback(() => {
+  const handleEndCombat = useCallback(async () => {
     PlaySessionService.cancelPendingUpdate();
     if (userId && sessionCharacterId) {
       PlaySessionService.delete(userId, sessionCharacterId).catch((error) => {
