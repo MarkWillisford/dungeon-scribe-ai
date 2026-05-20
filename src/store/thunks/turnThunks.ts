@@ -28,9 +28,8 @@ export const endTurn = () => (dispatch: AppDispatch, getState: () => RootState) 
   dispatch(setActiveCharacter(recalculated));
 };
 
-export const startTurn = () => (dispatch: AppDispatch, getState: () => RootState) => {
+export const startTurn = () => (dispatch: AppDispatch) => {
   dispatch(startTurnApply());
 
-  const _character = getState().characters.activeCharacter;
   // Start-of-turn effects: bleed, regeneration — stubs for future implementation
 };
