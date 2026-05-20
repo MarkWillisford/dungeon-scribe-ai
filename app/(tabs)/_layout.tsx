@@ -31,9 +31,9 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="combat"
+        name="play"
         options={{
-          title: 'Combat',
+          title: 'Play',
           tabBarIcon: ({ color }) => <Text style={[styles.icon, { color }]}>&#x2694;</Text>,
         }}
       />
