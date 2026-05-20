@@ -468,6 +468,7 @@ export default function CombatTrackerScreen() {
           style={styles.tabContent}
           contentContainerStyle={styles.tabContentInner}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
         >
           <SectionHeader title="Hit Points" />
           <HPTracker

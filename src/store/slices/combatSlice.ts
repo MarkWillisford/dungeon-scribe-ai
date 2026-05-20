@@ -201,8 +201,9 @@ const combatSlice = createSlice({
 
     // ---- Resource pools ----
 
-    decrementPool(state, action: PayloadAction<{ poolId: string; amount: number }>) {
-      const { poolId, amount } = action.payload;
+    decrementPool(state, action: PayloadAction<{ poolId: string; amount?: number }>) {
+      const { poolId, amount = 1 } = action.payload;
+      if (amount <= 0) return;
       if (!(poolId in state.resourcePools)) return;
       state.resourcePools[poolId] = Math.max(0, state.resourcePools[poolId] - amount);
     },
@@ -251,7 +252,7 @@ const combatSlice = createSlice({
       state.activeBuffs = s.activeBuffs.map((buff) => ({ ...buff }));
       state.combatAbilities = { ...s.combatAbilities };
       state.round = s.round;
-      state.resourcePools = s.resourcePools;
+      state.resourcePools = s.resourcePools ?? {};
       // Roll log and buff library are not session-scoped — leave them as-is
     },
   },

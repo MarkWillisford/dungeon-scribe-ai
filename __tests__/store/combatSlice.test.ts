@@ -567,28 +567,13 @@ describe('initFromSession', () => {
     expect(state.buffLibrary).toHaveLength(1);
   });
 
-  it('handles a session doc with empty buffs and default abilities', () => {
-    const state = combatReducer(
-      undefined,
-      initFromSession(
-        makeSessionDoc({
-          activeBuffs: [],
-          combatAbilities: {
-            powerAttack: false,
-            deadlyAim: false,
-            rage: false,
-            twoWeaponFighting: false,
-            twoWeaponFightingLightOffhand: false,
-            haste: false,
-            flurryOfBlows: false,
-            combatExpertise: false,
-            combatExpertisePenalty: 1,
-          },
-        }),
-      ),
-    );
+  it('handles a session doc with empty buffs and missing combatAbilities', () => {
+    const doc: Partial<PlaySessionDoc> = { ...makeSessionDoc({ activeBuffs: [] }) };
+    delete doc.combatAbilities;
+    const state = combatReducer(undefined, initFromSession(doc as unknown as PlaySessionDoc));
     expect(state.activeBuffs).toHaveLength(0);
     expect(state.combatAbilities.powerAttack).toBe(false);
+    expect(state.combatAbilities.combatExpertisePenalty).toBe(1);
   });
 });
 
@@ -615,9 +600,15 @@ function makePool(overrides: Partial<ResourcePool> = {}): ResourcePool {
 // ----------------------------------------------------------------
 
 describe('decrementPool', () => {
-  it('reduces the pool current value by 1', () => {
+  it('reduces the pool current value by an explicit amount of 1', () => {
     let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [makePool()] }));
     state = combatReducer(state, decrementPool({ poolId: 'ki', amount: 1 }));
+    expect(state.resourcePools['ki']).toBe(7);
+  });
+
+  it('uses the default decrement amount of 1 when amount is omitted', () => {
+    let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [makePool()] }));
+    state = combatReducer(state, decrementPool({ poolId: 'ki' }));
     expect(state.resourcePools['ki']).toBe(7);
   });
 
@@ -717,5 +708,12 @@ describe('initFromSession resource pools', () => {
     );
     expect(state.resourcePools['ki']).toBe(5);
     expect(state.resourcePools['rage']).toBe(3);
+  });
+
+  it('defaults resourcePools to empty when missing from the session doc', () => {
+    const doc: Partial<PlaySessionDoc> = { ...makeSessionDoc() };
+    delete doc.resourcePools;
+    const state = combatReducer(undefined, initFromSession(doc as unknown as PlaySessionDoc));
+    expect(state.resourcePools).toEqual({});
   });
 });
