@@ -428,6 +428,7 @@ async function processIssue(issue: GitHubIssue, baseBranch = 'main'): Promise<vo
       );
       removeLabel(issueNumber, LABEL_IN_PROGRESS);
       addLabel(issueNumber, LABEL_SANDCASTLE);
+      await box.close();
       await sleep(waitMs);
     } else {
       console.error(`Error processing issue #${issueNumber}:`, err);
@@ -435,7 +436,7 @@ async function processIssue(issue: GitHubIssue, baseBranch = 'main'): Promise<vo
       addLabel(issueNumber, LABEL_SANDCASTLE);
     }
   } finally {
-    await box.close();
+    await box.close().catch(() => {});
   }
 }
 

@@ -9,6 +9,11 @@ on:
         description: 'PR number to babysit'
         required: true
         type: string
+      retry_count:
+        description: 'Internal: tracks mid-run re-dispatch attempts'
+        required: false
+        default: '0'
+        type: string
 
 jobs:
   babysit:
@@ -28,6 +33,7 @@ jobs:
       pull-requests: write
       issues: write
       id-token: write
+      actions: write
 
     steps:
       - name: Checkout PR branch
@@ -111,18 +117,24 @@ jobs:
           show_full_output: true
 
       - name: Retry if rate-limited mid-run
-        if: steps.babysit.outcome == 'failure'
+        if: steps.babysit.outcome == 'failure' && (inputs.retry_count || '0') < '2'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BABYSIT_OUTPUT: ${{ steps.babysit.outputs.output || '' }}
+          BABYSIT_EXECUTION_FILE: ${{ steps.babysit.outputs.execution_file || '' }}
           PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
+          RETRY_COUNT: ${{ inputs.retry_count || '0' }}
         run: |
-          if ! echo "$BABYSIT_OUTPUT" | grep -qi "hit your limit"; then
+          babysit_output=""
+          if [ -n "$BABYSIT_EXECUTION_FILE" ] && [ -f "$BABYSIT_EXECUTION_FILE" ]; then
+            babysit_output=$(cat "$BABYSIT_EXECUTION_FILE")
+          fi
+
+          if ! echo "$babysit_output" | grep -qi "hit your limit"; then
             echo "babysit-pr failed (not a rate limit). Failing job."
             exit 1
           fi
 
-          reset_str=$(echo "$BABYSIT_OUTPUT" | grep -oP 'resets \K\d+:\d+[ap]m(?= \(UTC\))' | head -1)
+          reset_str=$(echo "$babysit_output" | grep -oP 'resets \K\d+:\d+[ap]m(?= \(UTC\))' | head -1)
           wait_s=$(python3 -c "
           import re, datetime
           m = re.match(r'(\d+):(\d+)([ap]m)', '${reset_str:-}')
@@ -138,6 +150,15 @@ jobs:
               print(3600)
           ")
 
-          echo "Rate limited mid-run. Sleeping ${wait_s}s, then re-triggering PR #${PR_NUMBER}."
+          next_retry=$((RETRY_COUNT + 1))
+          echo "Rate limited mid-run (attempt $((RETRY_COUNT + 1))/2). Sleeping ${wait_s}s, then re-triggering PR #${PR_NUMBER}."
           sleep "$wait_s"
-          gh workflow run babysit-pr.yml --repo "$GITHUB_REPOSITORY" --field pr_number="$PR_NUMBER"
+          gh workflow run babysit-pr.yml --repo "$GITHUB_REPOSITORY" \
+            --field pr_number="$PR_NUMBER" \
+            --field retry_count="$next_retry"
+
+      - name: Fail if mid-run retries exhausted
+        if: steps.babysit.outcome == 'failure' && (inputs.retry_count || '0') >= '2'
+        run: |
+          echo "babysit-pr rate-limited mid-run and retry limit (2) reached. Failing."
+          exit 1
