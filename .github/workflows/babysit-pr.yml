@@ -60,3 +60,4 @@ jobs:
             --allowedTools Bash,Read,Write,Edit
             --max-turns 80
           track_progress: ${{ github.event_name == 'pull_request_review' }}
+          show_full_output: true
