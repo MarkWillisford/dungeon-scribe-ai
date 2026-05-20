@@ -102,7 +102,6 @@ export default function CombatTrackerScreen() {
     }
   }, [buffLibrary.length, dispatch]);
 
-  // Check Firestore for active sessions. Runs when userId becomes available.
   // Uses a ref guard so it only fires once even if userId triggers a re-run.
   useEffect(() => {
     if (sessionInitRef.current || currentHP !== null || !userId) return;
@@ -150,7 +149,6 @@ export default function CombatTrackerScreen() {
     return () => sub.remove();
   }, [currentHP]);
 
-  // Auto-save: schedule debounced write on every meaningful state change
   useEffect(() => {
     if (!character || !userId || currentHP === null) return;
     if (!sessionCharacterId) return;
@@ -175,7 +173,6 @@ export default function CombatTrackerScreen() {
     sessionCharacterId,
   ]);
 
-  // Computed values used in tracker
   const maxHP = useMemo(() => {
     if (!character) return 0;
     const hp = character.combatStats.hitPoints;
