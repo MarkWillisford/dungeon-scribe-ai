@@ -202,7 +202,9 @@ export default function CombatTrackerScreen() {
     if (currentHP === null) return undefined;
     const sub = AppState.addEventListener('change', (state: AppStateStatus) => {
       if (state === 'background' || state === 'inactive') {
-        void PlaySessionService.flushPendingUpdate();
+        void PlaySessionService.flushPendingUpdate().catch((error) => {
+          console.error('Failed to flush pending play session updates', error);
+        });
       }
     });
     return () => sub.remove();
@@ -1050,6 +1052,9 @@ const pickerStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 40,
+  },
+  newBtnDisabled: {
+    opacity: 0.4,
   },
   btnText: {
     fontFamily: 'Cinzel',
