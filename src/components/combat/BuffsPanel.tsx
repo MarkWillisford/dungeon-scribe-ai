@@ -14,6 +14,8 @@ interface BuffsPanelProps {
   onRemoveBuff: (id: string) => void;
   onToggleBuff: (id: string) => void;
   onSaveToLibrary: (buff: SavedBuff) => void;
+  onStartTurn: () => void;
+  onEndTurn: () => void;
   testID?: string;
 }
 
@@ -32,6 +34,8 @@ export function BuffsPanel({
   onRemoveBuff,
   onToggleBuff,
   onSaveToLibrary: _onSaveToLibrary,
+  onStartTurn,
+  onEndTurn,
   testID,
 }: BuffsPanelProps) {
   const { colors, fantasy } = useTheme();
@@ -172,6 +176,27 @@ export function BuffsPanel({
           </View>
         ))
       )}
+
+      {/* Turn cycle buttons */}
+      <View style={styles.turnRow}>
+        <Pressable
+          style={[styles.turnBtn, { borderColor: '#4CAF50', backgroundColor: colors.bg.secondary }]}
+          onPress={onStartTurn}
+          accessibilityLabel="Start Turn"
+        >
+          <Text style={[styles.turnBtnText, { color: '#4CAF50' }]}>Start Turn</Text>
+        </Pressable>
+        <Pressable
+          style={[
+            styles.turnBtn,
+            { borderColor: fantasy.bronze, backgroundColor: colors.bg.secondary },
+          ]}
+          onPress={onEndTurn}
+          accessibilityLabel="End Turn"
+        >
+          <Text style={[styles.turnBtnText, { color: fantasy.bronze }]}>End Turn</Text>
+        </Pressable>
+      </View>
 
       {/* Add buttons */}
       <View style={styles.addRow}>
@@ -391,6 +416,24 @@ const styles = StyleSheet.create({
   actionBtnText: {
     fontFamily: 'Cinzel',
     fontSize: 11,
+    fontWeight: '600',
+  },
+  turnRow: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  turnBtn: {
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 10,
+    alignItems: 'center',
+    minHeight: 44,
+    justifyContent: 'center',
+  },
+  turnBtnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 13,
     fontWeight: '600',
   },
   addRow: {

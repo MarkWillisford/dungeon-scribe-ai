@@ -27,6 +27,8 @@ function makeProps(overrides = {}) {
     onRemoveBuff: jest.fn(),
     onToggleBuff: jest.fn(),
     onSaveToLibrary: jest.fn(),
+    onStartTurn: jest.fn(),
+    onEndTurn: jest.fn(),
     ...overrides,
   };
 }
@@ -60,5 +62,29 @@ describe('BuffsPanel', () => {
   it('is findable by testID', () => {
     const { getByTestId } = render(<BuffsPanel {...makeProps()} testID="buffs-panel" />);
     expect(getByTestId('buffs-panel')).toBeTruthy();
+  });
+
+  it('shows Start Turn button', () => {
+    const { getByText } = render(<BuffsPanel {...makeProps()} />);
+    expect(getByText('Start Turn')).toBeTruthy();
+  });
+
+  it('shows End Turn button', () => {
+    const { getByText } = render(<BuffsPanel {...makeProps()} />);
+    expect(getByText('End Turn')).toBeTruthy();
+  });
+
+  it('calls onStartTurn when Start Turn is pressed', () => {
+    const onStartTurn = jest.fn();
+    const { getByLabelText } = render(<BuffsPanel {...makeProps({ onStartTurn })} />);
+    getByLabelText('Start Turn').props.onPress();
+    expect(onStartTurn).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onEndTurn when End Turn is pressed', () => {
+    const onEndTurn = jest.fn();
+    const { getByLabelText } = render(<BuffsPanel {...makeProps({ onEndTurn })} />);
+    getByLabelText('End Turn').props.onPress();
+    expect(onEndTurn).toHaveBeenCalledTimes(1);
   });
 });

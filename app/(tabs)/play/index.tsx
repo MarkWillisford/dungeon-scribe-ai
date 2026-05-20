@@ -39,6 +39,7 @@ import {
 import { CombatService } from '@services/CombatService';
 import { DiceService } from '@services/DiceService';
 import { PlaySessionService } from '@services/PlaySessionService';
+import { endTurn, startTurn } from '@store/thunks/turnThunks';
 import { RollRecord, Buff, SavedBuff } from '@/types/buff';
 import type { PlaySessionDoc } from '@/types/playSession';
 import { BuffedTotals } from '@/types/combat';
@@ -552,6 +553,8 @@ export default function CombatTrackerScreen() {
             onSaveToLibrary={(_: SavedBuff) => {
               /* future: dispatch(addToBuffLibrary(buff)) */
             }}
+            onStartTurn={() => dispatch(startTurn())}
+            onEndTurn={() => dispatch(endTurn())}
             testID="buffs-panel"
           />
 
