@@ -210,6 +210,19 @@ const combatSlice = createSlice({
     applyRageEndHPLoss(state, action: PayloadAction<{ newCurrentHP: number; newTempHP: number }>) {
       state.currentHP = action.payload.newCurrentHP;
       state.tempHP = action.payload.newTempHP;
+      // Re-check staggered threshold after HP change from rage ending
+      if (state.currentHP > 0) {
+        if (state.nonlethalDamage >= state.currentHP) {
+          state.isStaggered = true;
+          state.staggeredAutoApplied = true;
+        } else if (state.staggeredAutoApplied) {
+          state.isStaggered = false;
+          state.staggeredAutoApplied = false;
+        }
+      } else if (state.staggeredAutoApplied) {
+        state.isStaggered = false;
+        state.staggeredAutoApplied = false;
+      }
     },
 
     // ---- Round management ----

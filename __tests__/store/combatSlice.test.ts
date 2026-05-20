@@ -416,6 +416,24 @@ describe('applyRageEndHPLoss', () => {
   });
 });
 
+describe('applyRageEndHPLoss staggered interaction', () => {
+  it('auto-applies staggered when rage-end HP loss meets nonlethal threshold', () => {
+    let state = combatReducer(undefined, initHP(10));
+    state = combatReducer(state, adjustNonlethal(8)); // nonlethal=8, HP=10 — no stagger
+    state = combatReducer(state, applyRageEndHPLoss({ newCurrentHP: 8, newTempHP: 0 })); // HP=8, nonlethal=8 — stagger
+    expect(state.isStaggered).toBe(true);
+    expect(state.staggeredAutoApplied).toBe(true);
+  });
+
+  it('auto-clears staggered when rage-end HP loss drives HP to 0 or below', () => {
+    let state = combatReducer(undefined, initHP(5));
+    state = combatReducer(state, adjustNonlethal(5)); // auto-staggered
+    state = combatReducer(state, applyRageEndHPLoss({ newCurrentHP: 0, newTempHP: 0 }));
+    expect(state.isStaggered).toBe(false);
+    expect(state.staggeredAutoApplied).toBe(false);
+  });
+});
+
 // ----------------------------------------------------------------
 // Round management
 // ----------------------------------------------------------------
