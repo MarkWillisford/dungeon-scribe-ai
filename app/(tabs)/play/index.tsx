@@ -196,7 +196,7 @@ export default function CombatTrackerScreen() {
   // Auto-save: schedule debounced write on every meaningful state change
   useEffect(() => {
     if (!character || !userId || currentHP === null) return;
-    const characterId = character.info.firebaseId ?? character.info.id;
+    if (!sessionCharacterId) return;
     const sessionData: Partial<PlaySessionDoc> = {
       currentHP,
       tempHP,
@@ -205,8 +205,18 @@ export default function CombatTrackerScreen() {
       combatAbilities,
       round,
     };
-    PlaySessionService.scheduleDebouncedUpdate(userId, characterId, sessionData);
-  }, [character, userId, currentHP, tempHP, nonlethalDamage, activeBuffs, combatAbilities, round]);
+    PlaySessionService.scheduleDebouncedUpdate(userId, sessionCharacterId, sessionData);
+  }, [
+    character,
+    userId,
+    currentHP,
+    tempHP,
+    nonlethalDamage,
+    activeBuffs,
+    combatAbilities,
+    round,
+    sessionCharacterId,
+  ]);
 
   // Computed values used in tracker
   const maxHP = useMemo(() => {
