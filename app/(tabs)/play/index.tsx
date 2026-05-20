@@ -287,6 +287,7 @@ export default function CombatTrackerScreen() {
     }
     dispatch(resetCombat());
     setSessionCharacterId(null);
+    sessionInitRef.current = false;
     setSessionCheckDone(true);
   }, [dispatch, userId, sessionCharacterId]);
 
