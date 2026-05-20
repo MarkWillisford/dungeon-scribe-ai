@@ -156,13 +156,15 @@ export class PlaySessionService {
       ? (data.activeBuffs as PlaySessionDoc['activeBuffs'])
       : [];
     const combatAbilities = PlaySessionService.isPlainObject(data.combatAbilities)
-      ? (data.combatAbilities as unknown as PlaySessionDoc['combatAbilities'])
+      ? PlaySessionService.normalizeCombatAbilities(data.combatAbilities)
       : PlaySessionService.defaultCombatAbilities();
     const spellSlotsUsed = PlaySessionService.isPlainObject(data.spellSlotsUsed)
       ? (data.spellSlotsUsed as Record<string, number[]>)
       : {};
     const resourcePools = PlaySessionService.isPlainObject(data.resourcePools)
-      ? (data.resourcePools as Record<string, number>)
+      ? Object.fromEntries(
+          Object.entries(data.resourcePools).map(([k, v]) => [k, PlaySessionService.asNumber(v)]),
+        )
       : {};
     return {
       characterId,
