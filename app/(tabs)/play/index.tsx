@@ -126,7 +126,7 @@ export default function CombatTrackerScreen() {
     PlaySessionService.listActiveSessionCharacterIds(userId)
       .then(async (ids) => {
         setActiveSessionIds(ids);
-        if (ids.length === 1) {
+        if (ids.length === 1 && character && ids[0] === character.info.id) {
           const sessionDoc = await PlaySessionService.get(userId, ids[0]);
           if (sessionDoc) {
             dispatch(initFromSession(sessionDoc));
@@ -318,6 +318,7 @@ export default function CombatTrackerScreen() {
 
   const handleResumeSession = useCallback(
     async (characterId: string) => {
+      if (!character || characterId !== character.info.id) return;
       if (!userId) return;
       if (!character || characterId !== character.info.id) {
         Alert.alert(
@@ -575,7 +576,7 @@ export default function CombatTrackerScreen() {
             onUseSpellSlot={(poolKey, level) => dispatch(expendSpellSlot({ poolKey, level }))}
             testID="spells-panel"
           />
-          <View style={{ height: 80 }} />
+          <View style={styles.footerSpacer} />
         </ScrollView>
       )}
 
@@ -679,9 +680,13 @@ function SessionPicker({
                 <View style={pickerStyles.cardActions}>
                   {hasSession && (
                     <Pressable
-                      style={[pickerStyles.resumeBtn, { backgroundColor: colors.primary.DEFAULT }]}
+                      style={[
+                        pickerStyles.resumeBtn,
+                        { backgroundColor: colors.primary.DEFAULT },
+                        item.id !== activeCharacterId && { opacity: 0.4 },
+                      ]}
                       onPress={() => void handleResume(item.id)}
-                      disabled={isLoading}
+                      disabled={isLoading || item.id !== activeCharacterId}
                       accessibilityLabel={`Resume session for ${item.name}`}
                     >
                       {isLoading ? (

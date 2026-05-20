@@ -826,4 +826,14 @@ describe('useSpellSlot', () => {
     expect(state.spellSlotsUsed['sorcerer'][1]).toBe(1);
     expect(state.spellSlotsUsed['sorcerer'][2]).toBe(2);
   });
+
+  it('ignores negative level and does not mutate state', () => {
+    const state = combatReducer(undefined, useSpellSlot({ poolKey: 'wizard', level: -1 }));
+    expect(state.spellSlotsUsed['wizard']).toBeUndefined();
+  });
+
+  it('ignores non-integer level and does not mutate state', () => {
+    const state = combatReducer(undefined, useSpellSlot({ poolKey: 'bard', level: 1.5 }));
+    expect(state.spellSlotsUsed['bard']).toBeUndefined();
+  });
 });

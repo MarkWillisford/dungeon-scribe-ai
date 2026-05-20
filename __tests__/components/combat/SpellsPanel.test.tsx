@@ -226,6 +226,18 @@ describe('SpellsPanel — spontaneous caster (sorcerer)', () => {
     expect(onUse).toHaveBeenCalledWith('sorcerer', 1);
   });
 
+  it('uses pool.id as key when id is present (not baseClass)', () => {
+    const onUse = jest.fn();
+    const poolWithId = { ...sorcererPool, id: 'sorcerer-pool-uuid' };
+    const { tree } = render(
+      <SpellsPanel {...makeProps({ pools: [poolWithId], onUseSpellSlot: onUse })} />,
+    );
+    const btn = findByLabel(tree, 'Use level 1 spell slot');
+    expect(btn).toBeTruthy();
+    if (btn?.props?.onPress) btn.props.onPress();
+    expect(onUse).toHaveBeenCalledWith('sorcerer-pool-uuid', 1);
+  });
+
   it('disables Use button when no slots remain', () => {
     const { tree } = render(
       <SpellsPanel

@@ -248,7 +248,7 @@ function PreparedView({
     <View style={styles.spellList}>
       {poolSpells.map(({ spell, index }) => {
         const isCast = preparedSpellsCast[String(index)] ?? false;
-        const spellLevel = spell.classLevels[pool.baseClass] ?? 0;
+        const spellLevel = spell.classLevels[pool.baseClass.toLowerCase()] ?? 0;
         return (
           <View
             key={index}

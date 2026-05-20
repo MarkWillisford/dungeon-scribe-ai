@@ -138,6 +138,16 @@ export class PlaySessionService {
         PlaySessionService.update(entry.userId, entry.characterId, entry.data),
       ),
     );
+    results.forEach((result, i) => {
+      if (result.status === 'rejected') {
+        const entry = entries[i];
+        console.error('Failed to flush play session update', {
+          userId: entry.userId,
+          characterId: entry.characterId,
+          error: result.reason,
+        });
+      }
+    });
   }
 
   /** Discard all pending debounced writes without writing to Firestore. */

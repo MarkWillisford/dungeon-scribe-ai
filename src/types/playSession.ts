@@ -12,7 +12,7 @@ export interface PlaySessionDoc {
   tempHP: number;
   activeBuffs: Buff[];
   combatAbilities: CombatAbilityState;
-  /** pool baseClass → used slot count per spell level (index = level, 0 = cantrips) */
+  /** pool.id ?? pool.baseClass → used slot count per spell level (index = level, 0 = cantrips) */
   spellSlotsUsed: Record<string, number[]>;
   /** stringified index into character.spellcasting.preparedSpells → cast state */
   preparedSpellsCast: Record<string, boolean>;
