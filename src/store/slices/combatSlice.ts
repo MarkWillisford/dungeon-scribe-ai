@@ -149,7 +149,7 @@ const combatSlice = createSlice({
       }
       // Re-check staggered threshold after HP change
       if (state.currentHP > 0) {
-        if (state.nonlethalDamage >= state.currentHP) {
+        if (NonLethalService.checkStaggered(state.nonlethalDamage, state.currentHP)) {
           state.isStaggered = true;
           state.staggeredAutoApplied = true;
         } else if (state.staggeredAutoApplied) {
@@ -175,7 +175,7 @@ const combatSlice = createSlice({
       state.nonlethalDamage = Math.max(0, state.nonlethalDamage + action.payload);
       // Auto-apply/clear staggered based on threshold
       if (state.currentHP !== null && state.currentHP > 0) {
-        if (state.nonlethalDamage >= state.currentHP) {
+        if (NonLethalService.checkStaggered(state.nonlethalDamage, state.currentHP)) {
           state.isStaggered = true;
           state.staggeredAutoApplied = true;
         } else if (state.staggeredAutoApplied) {
@@ -212,7 +212,7 @@ const combatSlice = createSlice({
       state.tempHP = action.payload.newTempHP;
       // Re-check staggered threshold after HP change from rage ending
       if (state.currentHP > 0) {
-        if (state.nonlethalDamage >= state.currentHP) {
+        if (NonLethalService.checkStaggered(state.nonlethalDamage, state.currentHP)) {
           state.isStaggered = true;
           state.staggeredAutoApplied = true;
         } else if (state.staggeredAutoApplied) {
