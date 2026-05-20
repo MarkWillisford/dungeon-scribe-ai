@@ -21,7 +21,9 @@ import {
   adjustNonlethal,
   appendRoll,
   applyRageEndHPLoss,
+  applyNewEncounter,
   clearRollLog,
+  decrementPool,
   initFromSession,
   initNewSession,
   nextRound,
@@ -44,6 +46,7 @@ import { BUFF_PRESETS } from '@/data/buffs/presets';
 import { HPTracker } from '@/components/combat/HPTracker';
 import { AttackPanel } from '@/components/combat/AttackPanel';
 import { DefensePanel } from '@/components/combat/DefensePanel';
+import { ResourcesPlayPanel } from '@/components/combat/ResourcesPlayPanel';
 import { BuffsPanel } from '@/components/combat/BuffsPanel';
 import { CombatAbilityToggles } from '@/components/combat/CombatAbilityToggles';
 import { RollLog } from '@/components/combat/RollLog';
@@ -76,6 +79,7 @@ export default function CombatTrackerScreen() {
     round,
     rollLog,
     buffLibrary,
+    resourcePools,
   } = useAppSelector((s) => s.combat);
 
   const [activeTab, setActiveTab] = useState<CombatTab>('playsheet');
@@ -204,6 +208,7 @@ export default function CombatTrackerScreen() {
       activeBuffs,
       combatAbilities,
       round,
+      resourcePools,
     };
     PlaySessionService.scheduleDebouncedUpdate(userId, sessionCharacterId, sessionData);
   }, [
@@ -215,6 +220,7 @@ export default function CombatTrackerScreen() {
     activeBuffs,
     combatAbilities,
     round,
+    resourcePools,
     sessionCharacterId,
   ]);
 

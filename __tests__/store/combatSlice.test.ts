@@ -16,6 +16,8 @@ import combatReducer, {
   setBuffLibrary,
   addToBuffLibrary,
   removeFromBuffLibrary,
+  decrementPool,
+  applyNewEncounter,
   resetCombat,
   initNewSession,
   initFromSession,
@@ -23,6 +25,7 @@ import combatReducer, {
 import { BonusType } from '@/types/base';
 import { Buff, RollRecord, SavedBuff } from '@/types/buff';
 import type { PlaySessionDoc } from '@/types/playSession';
+import type { ResourcePool } from '@/types/resources';
 
 // ----------------------------------------------------------------
 // Helpers
@@ -586,5 +589,133 @@ describe('initFromSession', () => {
     );
     expect(state.activeBuffs).toHaveLength(0);
     expect(state.combatAbilities.powerAttack).toBe(false);
+  });
+});
+
+// ----------------------------------------------------------------
+// Resource pool helpers
+// ----------------------------------------------------------------
+
+function makePool(overrides: Partial<ResourcePool> = {}): ResourcePool {
+  return {
+    id: 'ki',
+    name: 'Ki Points',
+    current: 8,
+    max: 8,
+    baseMax: 8,
+    contributions: [],
+    rechargeOn: 'rest',
+    restRecoveryMode: 'full',
+    ...overrides,
+  };
+}
+
+// ----------------------------------------------------------------
+// decrementPool
+// ----------------------------------------------------------------
+
+describe('decrementPool', () => {
+  it('reduces the pool current value by 1', () => {
+    let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [makePool()] }));
+    state = combatReducer(state, decrementPool({ poolId: 'ki', amount: 1 }));
+    expect(state.resourcePools['ki']).toBe(7);
+  });
+
+  it('reduces the pool current value by a custom amount', () => {
+    let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [makePool()] }));
+    state = combatReducer(state, decrementPool({ poolId: 'ki', amount: 3 }));
+    expect(state.resourcePools['ki']).toBe(5);
+  });
+
+  it('does not go below 0', () => {
+    let state = combatReducer(
+      undefined,
+      initNewSession({ maxHP: 20, pools: [makePool({ max: 2 })] }),
+    );
+    state = combatReducer(state, decrementPool({ poolId: 'ki', amount: 10 }));
+    expect(state.resourcePools['ki']).toBe(0);
+  });
+
+  it('is a no-op for an unknown pool id', () => {
+    const state = combatReducer(undefined, decrementPool({ poolId: 'nonexistent', amount: 1 }));
+    expect(state.resourcePools['nonexistent']).toBe(0);
+  });
+});
+
+// ----------------------------------------------------------------
+// applyNewEncounter
+// ----------------------------------------------------------------
+
+describe('applyNewEncounter', () => {
+  it('resets per_encounter pools to their max', () => {
+    const encounterPool = makePool({
+      id: 'stamina',
+      name: 'Stamina',
+      max: 10,
+      rechargeOn: 'per_encounter',
+    });
+    let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [encounterPool] }));
+    state = combatReducer(state, decrementPool({ poolId: 'stamina', amount: 7 }));
+    expect(state.resourcePools['stamina']).toBe(3);
+    state = combatReducer(state, applyNewEncounter([encounterPool]));
+    expect(state.resourcePools['stamina']).toBe(10);
+  });
+
+  it('does not reset rest-recharge pools', () => {
+    const restPool = makePool({ id: 'ki', max: 8, rechargeOn: 'rest' });
+    const encounterPool = makePool({ id: 'stamina', max: 10, rechargeOn: 'per_encounter' });
+    let state = combatReducer(
+      undefined,
+      initNewSession({ maxHP: 20, pools: [restPool, encounterPool] }),
+    );
+    state = combatReducer(state, decrementPool({ poolId: 'ki', amount: 4 }));
+    state = combatReducer(state, decrementPool({ poolId: 'stamina', amount: 5 }));
+    state = combatReducer(state, applyNewEncounter([restPool, encounterPool]));
+    expect(state.resourcePools['ki']).toBe(4);
+    expect(state.resourcePools['stamina']).toBe(10);
+  });
+
+  it('does not reset special-recharge pools', () => {
+    const specialPool = makePool({ id: 'grit', max: 3, rechargeOn: 'special' });
+    let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [specialPool] }));
+    state = combatReducer(state, decrementPool({ poolId: 'grit', amount: 2 }));
+    state = combatReducer(state, applyNewEncounter([specialPool]));
+    expect(state.resourcePools['grit']).toBe(1);
+  });
+});
+
+// ----------------------------------------------------------------
+// initNewSession with pools
+// ----------------------------------------------------------------
+
+describe('initNewSession with pools', () => {
+  it('initialises resource pools to their max values', () => {
+    const pools = [
+      makePool({ id: 'ki', max: 8 }),
+      makePool({ id: 'rage', max: 12, rechargeOn: 'rest' }),
+    ];
+    const state = combatReducer(undefined, initNewSession({ maxHP: 40, pools }));
+    expect(state.resourcePools['ki']).toBe(8);
+    expect(state.resourcePools['rage']).toBe(12);
+  });
+
+  it('initialises to empty resourcePools when no pools provided', () => {
+    const state = combatReducer(undefined, initNewSession({ maxHP: 20 }));
+    expect(state.resourcePools).toEqual({});
+  });
+});
+
+// ----------------------------------------------------------------
+// initFromSession restores resource pools
+// ----------------------------------------------------------------
+
+describe('initFromSession resource pools', () => {
+  it('restores resourcePools from the session doc', () => {
+    const state = combatReducer(
+      undefined,
+      initFromSession(makeSessionDoc({ resourcePools: { ki: 5, rage: 3 } })),
+    );
+    expect(state.resourcePools['ki']).toBe(5);
+    expect(state.resourcePools['rage']).toBe(3);
   });
 });

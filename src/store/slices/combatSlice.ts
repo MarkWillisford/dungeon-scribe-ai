@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { Buff, BuffPackage, CombatAbilityState, RollRecord, SavedBuff } from '@/types/buff';
 import type { PlaySessionDoc } from '@/types/playSession';
+import type { ResourcePool } from '@/types/resources';
 
 interface CombatState {
   // Session buffs (lost when combat ends or app closes)
@@ -23,6 +24,9 @@ interface CombatState {
   // Character's saved buff library (loaded from Firebase on mount)
   buffLibrary: SavedBuff[];
   buffPackages: BuffPackage[];
+
+  // Resource pool current values (pool id → current remaining)
+  resourcePools: Record<string, number>;
 }
 
 const defaultCombatAbilities: CombatAbilityState = {
@@ -47,6 +51,7 @@ const initialState: CombatState = {
   rollLog: [],
   buffLibrary: [],
   buffPackages: [],
+  resourcePools: {},
 };
 
 const combatSlice = createSlice({
@@ -194,6 +199,22 @@ const combatSlice = createSlice({
       state.buffPackages = action.payload;
     },
 
+    // ---- Resource pools ----
+
+    decrementPool(state, action: PayloadAction<{ poolId: string; amount: number }>) {
+      const { poolId, amount } = action.payload;
+      const current = state.resourcePools[poolId] ?? 0;
+      state.resourcePools[poolId] = Math.max(0, current - amount);
+    },
+
+    applyNewEncounter(state, action: PayloadAction<ResourcePool[]>) {
+      for (const pool of action.payload) {
+        if (pool.rechargeOn === 'per_encounter') {
+          state.resourcePools[pool.id] = pool.max;
+        }
+      }
+    },
+
     // ---- Session reset ----
 
     resetCombat(state) {
@@ -203,18 +224,23 @@ const combatSlice = createSlice({
       state.tempHP = 0;
       state.nonlethalDamage = 0;
       state.round = 0;
+      state.resourcePools = {};
       // Keep roll log and buff library — they persist across sessions
     },
 
     // ---- Session initialisation ----
 
-    initNewSession(state, action: PayloadAction<{ maxHP: number }>) {
+    initNewSession(state, action: PayloadAction<{ maxHP: number; pools?: ResourcePool[] }>) {
       state.currentHP = action.payload.maxHP;
       state.tempHP = 0;
       state.nonlethalDamage = 0;
       state.activeBuffs = [];
       state.combatAbilities = defaultCombatAbilities;
       state.round = 0;
+      state.resourcePools = {};
+      for (const pool of action.payload.pools ?? []) {
+        state.resourcePools[pool.id] = pool.max;
+      }
     },
 
     initFromSession(state, action: PayloadAction<PlaySessionDoc>) {
@@ -225,6 +251,7 @@ const combatSlice = createSlice({
       state.activeBuffs = s.activeBuffs.map((buff) => ({ ...buff }));
       state.combatAbilities = { ...s.combatAbilities };
       state.round = s.round;
+      state.resourcePools = s.resourcePools;
       // Roll log and buff library are not session-scoped — leave them as-is
     },
   },
@@ -253,6 +280,8 @@ export const {
   addToBuffLibrary,
   removeFromBuffLibrary,
   setBuffPackages,
+  decrementPool,
+  applyNewEncounter,
   resetCombat,
   initNewSession,
   initFromSession,
