@@ -1060,6 +1060,9 @@ const pickerStyles = StyleSheet.create({
     justifyContent: 'center',
     minHeight: 40,
   },
+  newBtnDisabled: {
+    opacity: 0.4,
+  },
   btnText: {
     fontFamily: 'Cinzel',
     fontSize: 12,
