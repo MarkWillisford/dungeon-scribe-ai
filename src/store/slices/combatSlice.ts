@@ -156,6 +156,9 @@ const combatSlice = createSlice({
           state.isStaggered = false;
           state.staggeredAutoApplied = false;
         }
+      } else if (state.staggeredAutoApplied) {
+        state.isStaggered = false;
+        state.staggeredAutoApplied = false;
       }
     },
 

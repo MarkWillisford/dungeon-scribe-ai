@@ -396,6 +396,14 @@ describe('adjustHP nonlethal threshold interaction', () => {
     expect(state.isStaggered).toBe(false);
     expect(state.staggeredAutoApplied).toBe(false);
   });
+
+  it('auto-clears staggered when lethal damage drives HP to 0 or below', () => {
+    let state = combatReducer(undefined, initHP(5));
+    state = combatReducer(state, adjustNonlethal(5)); // auto-staggered
+    state = combatReducer(state, adjustHP({ delta: -5, maxHP: 20 })); // HP=0
+    expect(state.isStaggered).toBe(false);
+    expect(state.staggeredAutoApplied).toBe(false);
+  });
 });
 
 describe('applyRageEndHPLoss', () => {
