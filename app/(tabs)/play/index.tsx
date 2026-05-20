@@ -287,7 +287,7 @@ export default function CombatTrackerScreen() {
         );
       }
     },
-    [dispatch, userId],
+    [dispatch, userId, character],
   );
 
   const handleEndCombat = useCallback(() => {
