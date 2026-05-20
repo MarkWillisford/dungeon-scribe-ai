@@ -9,18 +9,22 @@ interface HPTrackerProps {
   tempHP: number;
   nonlethalDamage: number;
   conScore: number;
+  isStaggered: boolean;
+  staggeredAutoApplied: boolean;
   onAdjustHP: (delta: number) => void;
   onAddTempHP: (amount: number) => void;
   onAdjustNonlethal: (delta: number) => void;
+  onToggleStaggered: () => void;
   testID?: string;
 }
 
-const HP_STATE_COLORS = {
+const HP_STATE_COLORS: Record<HPState, string> = {
   healthy: '#4CAF50',
   wounded: '#FF9800',
   disabled: '#FF5722',
   dying: '#F44336',
   dead: '#424242',
+  unconscious: '#9C27B0',
 };
 
 const HP_STATE_LABELS: Record<HPState, string> = {
@@ -29,6 +33,7 @@ const HP_STATE_LABELS: Record<HPState, string> = {
   disabled: 'Disabled',
   dying: 'Dying',
   dead: 'Dead',
+  unconscious: 'Unconscious',
 };
 
 export function HPTracker({
@@ -37,17 +42,21 @@ export function HPTracker({
   tempHP,
   nonlethalDamage,
   conScore,
+  isStaggered,
+  staggeredAutoApplied,
   onAdjustHP,
   onAddTempHP,
   onAdjustNonlethal,
+  onToggleStaggered,
   testID,
 }: HPTrackerProps) {
   const { colors, fantasy } = useTheme();
   const [customInput, setCustomInput] = useState('');
   const [tempInput, setTempInput] = useState('');
+  const [nlInput, setNlInput] = useState('');
   const [showTempModal, setShowTempModal] = useState(false);
 
-  const hpState = CombatService.getHPState(currentHP, maxHP, conScore);
+  const hpState = CombatService.getHPState(currentHP, maxHP, conScore, nonlethalDamage);
   const stateColor = HP_STATE_COLORS[hpState];
   const hpPercent = maxHP > 0 ? Math.max(0, Math.min(1, currentHP / maxHP)) : 0;
 
@@ -77,6 +86,14 @@ export function HPTracker({
       onAddTempHP(val);
       setTempInput('');
       setShowTempModal(false);
+    }
+  };
+
+  const handleApplyNonlethal = () => {
+    const val = parseInt(nlInput, 10);
+    if (!isNaN(val) && val > 0) {
+      onAdjustNonlethal(val);
+      setNlInput('');
     }
   };
 
@@ -119,18 +136,6 @@ export function HPTracker({
           <Text style={styles.stateLabel}>{HP_STATE_LABELS[hpState]}</Text>
         </View>
       </View>
-
-      {/* Nonlethal indicator */}
-      {nonlethalDamage > 0 && (
-        <View style={styles.nonlethalRow}>
-          <Text style={[styles.nonlethalLabel, { color: colors.text.tertiary }]}>
-            {`Nonlethal: ${nonlethalDamage}`}
-          </Text>
-          <Pressable onPress={() => onAdjustNonlethal(-nonlethalDamage)}>
-            <Text style={[styles.clearText, { color: fantasy.gold }]}>Clear</Text>
-          </Pressable>
-        </View>
-      )}
 
       {/* Quick adjust buttons */}
       <View style={styles.quickButtons}>
@@ -207,6 +212,92 @@ export function HPTracker({
       >
         <Text style={[styles.tempHPButtonText, { color: '#2196F3' }]}>+ Temp HP</Text>
       </Pressable>
+
+      {/* Nonlethal section */}
+      <View
+        style={[
+          styles.nonlethalSection,
+          { backgroundColor: colors.bg.secondary, borderColor: colors.border.DEFAULT },
+        ]}
+      >
+        {/* Header row */}
+        <View style={styles.nonlethalHeaderRow}>
+          <Text style={[styles.nonlethalSectionTitle, { color: colors.text.secondary }]}>
+            {`Nonlethal: ${nonlethalDamage}`}
+          </Text>
+          {nonlethalDamage > 0 && (
+            <Pressable
+              onPress={() => onAdjustNonlethal(-nonlethalDamage)}
+              accessibilityLabel="Clear nonlethal damage"
+            >
+              <Text style={[styles.clearText, { color: fantasy.gold }]}>Clear</Text>
+            </Pressable>
+          )}
+        </View>
+
+        {/* Quick nonlethal damage buttons */}
+        <View style={styles.nlQuickButtons}>
+          {[1, 5, 10].map((amount) => (
+            <Pressable
+              key={amount}
+              style={[
+                styles.nlQuickBtn,
+                { borderColor: '#FF9800', backgroundColor: colors.bg.primary },
+              ]}
+              onPress={() => onAdjustNonlethal(amount)}
+              accessibilityLabel={`Apply ${amount} nonlethal damage`}
+            >
+              <Text style={[styles.nlQuickBtnText, { color: '#FF9800' }]}>{`+${amount} NL`}</Text>
+            </Pressable>
+          ))}
+        </View>
+
+        {/* Custom nonlethal input */}
+        <View style={styles.nlCustomRow}>
+          <TextInput
+            style={[
+              styles.nlInput,
+              {
+                borderColor: colors.border.DEFAULT,
+                backgroundColor: colors.bg.primary,
+                color: colors.text.primary,
+              },
+            ]}
+            value={nlInput}
+            onChangeText={setNlInput}
+            keyboardType="numeric"
+            placeholder="Amount"
+            placeholderTextColor={colors.text.tertiary}
+            accessibilityLabel="Custom nonlethal damage amount"
+          />
+          <Pressable
+            style={[styles.customBtn, { backgroundColor: '#FF9800' }]}
+            onPress={handleApplyNonlethal}
+            accessibilityLabel="Apply nonlethal damage"
+          >
+            <Text style={styles.customBtnText}>Apply NL</Text>
+          </Pressable>
+        </View>
+
+        {/* Staggered condition toggle */}
+        <Pressable
+          style={[
+            styles.staggeredBadge,
+            {
+              backgroundColor: isStaggered ? '#FF9800' : colors.bg.primary,
+              borderColor: '#FF9800',
+            },
+          ]}
+          onPress={onToggleStaggered}
+          accessibilityLabel={
+            isStaggered ? 'Staggered — tap to clear' : 'Not staggered — tap to apply'
+          }
+        >
+          <Text style={[styles.staggeredText, { color: isStaggered ? '#FFFFFF' : '#FF9800' }]}>
+            {isStaggered ? `Staggered${staggeredAutoApplied ? ' (auto)' : ''}` : 'Staggered: Off'}
+          </Text>
+        </Pressable>
+      </View>
 
       {/* Temp HP Modal */}
       <Modal visible={showTempModal} transparent animationType="fade">
@@ -311,20 +402,6 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '600',
   },
-  nonlethalRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  nonlethalLabel: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 13,
-  },
-  clearText: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 13,
-    fontWeight: '600',
-  },
   quickButtons: {
     flexDirection: 'row',
     gap: 6,
@@ -383,6 +460,75 @@ const styles = StyleSheet.create({
   tempHPButtonText: {
     fontFamily: 'Cinzel',
     fontSize: 13,
+    fontWeight: '600',
+  },
+  // Nonlethal section
+  nonlethalSection: {
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 10,
+    gap: 8,
+  },
+  nonlethalHeaderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  nonlethalSectionTitle: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  clearText: {
+    fontFamily: 'LibreBaskerville',
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  nlQuickButtons: {
+    flexDirection: 'row',
+    gap: 6,
+  },
+  nlQuickBtn: {
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingVertical: 8,
+    alignItems: 'center',
+    minHeight: 40,
+    justifyContent: 'center',
+  },
+  nlQuickBtnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  nlCustomRow: {
+    flexDirection: 'row',
+    gap: 6,
+    alignItems: 'center',
+  },
+  nlInput: {
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    fontFamily: 'LibreBaskerville',
+    fontSize: 14,
+    minHeight: 40,
+  },
+  staggeredBadge: {
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    minHeight: 40,
+    justifyContent: 'center',
+  },
+  staggeredText: {
+    fontFamily: 'Cinzel',
+    fontSize: 12,
     fontWeight: '600',
   },
   modalOverlay: {

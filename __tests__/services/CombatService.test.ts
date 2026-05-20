@@ -447,6 +447,27 @@ describe('CombatService.getHPState', () => {
     expect(CombatService.getHPState(-14, MAX, CON)).toBe('dead');
     expect(CombatService.getHPState(-20, MAX, CON)).toBe('dead');
   });
+
+  it('unconscious when nonlethal exceeds max HP', () => {
+    expect(CombatService.getHPState(15, MAX, CON, 21)).toBe('unconscious');
+    expect(CombatService.getHPState(20, MAX, CON, 25)).toBe('unconscious');
+  });
+
+  it('not unconscious when nonlethal equals max HP', () => {
+    expect(CombatService.getHPState(15, MAX, CON, 20)).not.toBe('unconscious');
+  });
+
+  it('dead takes priority over unconscious', () => {
+    expect(CombatService.getHPState(-14, MAX, CON, 25)).toBe('dead');
+  });
+
+  it('dying takes priority over unconscious', () => {
+    expect(CombatService.getHPState(-1, MAX, CON, 25)).toBe('dying');
+  });
+
+  it('defaults nonlethalDamage to 0 (backward compatible)', () => {
+    expect(CombatService.getHPState(15, MAX, CON)).toBe('healthy');
+  });
 });
 
 // ----------------------------------------------------------------

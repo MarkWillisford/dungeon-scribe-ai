@@ -9,9 +9,12 @@ function makeProps(overrides = {}) {
     tempHP: 0,
     nonlethalDamage: 0,
     conScore: 14,
+    isStaggered: false,
+    staggeredAutoApplied: false,
     onAdjustHP: jest.fn(),
     onAddTempHP: jest.fn(),
     onAdjustNonlethal: jest.fn(),
+    onToggleStaggered: jest.fn(),
     ...overrides,
   };
 }
@@ -58,6 +61,25 @@ describe('HPTracker', () => {
   it('shows nonlethal damage indicator', () => {
     const { getByText } = render(<HPTracker {...makeProps({ nonlethalDamage: 8 })} />);
     expect(getByText('Nonlethal: 8')).toBeTruthy();
+  });
+
+  it('shows Unconscious when nonlethal exceeds max HP', () => {
+    const { getByText } = render(
+      <HPTracker {...makeProps({ currentHP: 20, maxHP: 30, nonlethalDamage: 31 })} />,
+    );
+    expect(getByText('Unconscious')).toBeTruthy();
+  });
+
+  it('shows staggered badge when isStaggered is true', () => {
+    const { getByText } = render(<HPTracker {...makeProps({ isStaggered: true })} />);
+    expect(getByText('Staggered')).toBeTruthy();
+  });
+
+  it('shows auto label when staggeredAutoApplied is true', () => {
+    const { getByText } = render(
+      <HPTracker {...makeProps({ isStaggered: true, staggeredAutoApplied: true })} />,
+    );
+    expect(getByText('Staggered (auto)')).toBeTruthy();
   });
 
   it('quick damage button calls onAdjustHP with damage amount', () => {

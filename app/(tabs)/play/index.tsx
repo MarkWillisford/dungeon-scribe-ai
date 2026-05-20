@@ -81,6 +81,8 @@ export default function CombatTrackerScreen() {
     currentHP,
     tempHP,
     nonlethalDamage,
+    isStaggered,
+    staggeredAutoApplied,
     round,
     rollLog,
     buffLibrary,
@@ -500,9 +502,12 @@ export default function CombatTrackerScreen() {
             tempHP={tempHP}
             nonlethalDamage={nonlethalDamage}
             conScore={conScore}
+            isStaggered={isStaggered}
+            staggeredAutoApplied={staggeredAutoApplied}
             onAdjustHP={(delta) => dispatch(adjustHP({ delta, maxHP }))}
             onAddTempHP={(amount) => dispatch(addTempHP(amount))}
             onAdjustNonlethal={(delta) => dispatch(adjustNonlethal(delta))}
+            onToggleStaggered={() => dispatch(toggleStaggered())}
             testID="hp-tracker"
           />
 

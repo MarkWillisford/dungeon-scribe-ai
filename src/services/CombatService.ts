@@ -4,7 +4,7 @@ import { Buff, CombatAbilityState } from '@/types/buff';
 import { ACTotals, BuffedTotals, SkillTotal } from '@/types/combat';
 import { ModifierPipelineService } from './ModifierPipelineService';
 
-export type HPState = 'healthy' | 'wounded' | 'disabled' | 'dying' | 'dead';
+export type HPState = 'healthy' | 'wounded' | 'disabled' | 'dying' | 'dead' | 'unconscious';
 
 export interface RageEndResult {
   newCurrentHP: number;
@@ -313,10 +313,12 @@ export class CombatService {
   /**
    * Returns the HP state label for display.
    * PF1e: dead at <= -(CON score), dying at < 0, disabled at 0, otherwise alive.
+   * Non-lethal > max HP overrides to unconscious (checked after dead/dying).
    */
-  static getHPState(current: number, max: number, conScore: number): HPState {
+  static getHPState(current: number, max: number, conScore: number, nonlethalDamage = 0): HPState {
     if (current <= -conScore) return 'dead';
     if (current < 0) return 'dying';
+    if (nonlethalDamage > max) return 'unconscious';
     if (current === 0) return 'disabled';
     if (current <= Math.floor(max / 2)) return 'wounded';
     return 'healthy';

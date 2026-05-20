@@ -9,6 +9,8 @@ import combatReducer, {
   adjustHP,
   addTempHP,
   adjustNonlethal,
+  toggleStaggered,
+  applyNonlethalRest,
   applyRageEndHPLoss,
   nextRound,
   appendRoll,
@@ -271,6 +273,129 @@ describe('adjustNonlethal', () => {
     const state = combatReducer(undefined, adjustNonlethal(-5));
     expect(state.nonlethalDamage).toBe(0);
   });
+
+  it('auto-applies staggered when nonlethal reaches current HP', () => {
+    let state = combatReducer(undefined, initHP(10));
+    state = combatReducer(state, adjustNonlethal(10));
+    expect(state.isStaggered).toBe(true);
+    expect(state.staggeredAutoApplied).toBe(true);
+  });
+
+  it('auto-applies staggered when nonlethal exceeds current HP', () => {
+    let state = combatReducer(undefined, initHP(10));
+    state = combatReducer(state, adjustNonlethal(15));
+    expect(state.isStaggered).toBe(true);
+    expect(state.staggeredAutoApplied).toBe(true);
+  });
+
+  it('does not auto-apply staggered when nonlethal is below current HP', () => {
+    let state = combatReducer(undefined, initHP(10));
+    state = combatReducer(state, adjustNonlethal(9));
+    expect(state.isStaggered).toBe(false);
+  });
+
+  it('does not auto-apply staggered when currentHP is null (no session)', () => {
+    const state = combatReducer(undefined, adjustNonlethal(10));
+    expect(state.isStaggered).toBe(false);
+  });
+
+  it('auto-clears staggered when nonlethal healed below current HP', () => {
+    let state = combatReducer(undefined, initHP(10));
+    state = combatReducer(state, adjustNonlethal(10)); // triggers auto-staggered
+    state = combatReducer(state, adjustNonlethal(-5)); // drops to 5, below currentHP=10
+    expect(state.isStaggered).toBe(false);
+    expect(state.staggeredAutoApplied).toBe(false);
+  });
+
+  it('does not auto-clear staggered set manually when nonlethal drops below HP', () => {
+    let state = combatReducer(undefined, initHP(10));
+    state = combatReducer(state, toggleStaggered()); // manual apply
+    expect(state.staggeredAutoApplied).toBe(false);
+    state = combatReducer(state, adjustNonlethal(5)); // below currentHP
+    // staggeredAutoApplied is false, so auto-clear should not fire
+    expect(state.isStaggered).toBe(true);
+  });
+});
+
+describe('toggleStaggered', () => {
+  it('applies staggered manually', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, toggleStaggered());
+    expect(state.isStaggered).toBe(true);
+    expect(state.staggeredAutoApplied).toBe(false);
+  });
+
+  it('clears staggered manually', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, toggleStaggered()); // on
+    state = combatReducer(state, toggleStaggered()); // off
+    expect(state.isStaggered).toBe(false);
+  });
+
+  it('clears staggeredAutoApplied when manually clearing', () => {
+    let state = combatReducer(undefined, initHP(10));
+    state = combatReducer(state, adjustNonlethal(10)); // auto-apply
+    expect(state.staggeredAutoApplied).toBe(true);
+    state = combatReducer(state, toggleStaggered()); // manual clear
+    expect(state.isStaggered).toBe(false);
+    expect(state.staggeredAutoApplied).toBe(false);
+  });
+});
+
+describe('applyNonlethalRest', () => {
+  it('recovers 1 nonlethal per character level', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, adjustNonlethal(10));
+    state = combatReducer(state, applyNonlethalRest({ characterLevel: 5 }));
+    expect(state.nonlethalDamage).toBe(5);
+  });
+
+  it('floors nonlethal at 0 (no negative nonlethal)', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, adjustNonlethal(3));
+    state = combatReducer(state, applyNonlethalRest({ characterLevel: 10 }));
+    expect(state.nonlethalDamage).toBe(0);
+  });
+
+  it('recovers at least 1 for level 0', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, adjustNonlethal(5));
+    state = combatReducer(state, applyNonlethalRest({ characterLevel: 0 }));
+    expect(state.nonlethalDamage).toBe(4);
+  });
+
+  it('auto-clears staggered when rest drops nonlethal below current HP', () => {
+    let state = combatReducer(undefined, initHP(10));
+    state = combatReducer(state, adjustNonlethal(10)); // auto-staggered
+    state = combatReducer(state, applyNonlethalRest({ characterLevel: 5 })); // drops to 5 < 10
+    expect(state.isStaggered).toBe(false);
+    expect(state.staggeredAutoApplied).toBe(false);
+  });
+
+  it('does not auto-clear staggered if nonlethal still >= current HP after rest', () => {
+    let state = combatReducer(undefined, initHP(10));
+    state = combatReducer(state, adjustNonlethal(12)); // auto-staggered, 12 >= 10
+    state = combatReducer(state, applyNonlethalRest({ characterLevel: 1 })); // drops to 11, still >= 10
+    expect(state.isStaggered).toBe(true);
+  });
+});
+
+describe('adjustHP nonlethal threshold interaction', () => {
+  it('auto-applies staggered when lethal damage drops HP to nonlethal level', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, adjustNonlethal(5)); // nonlethal=5, currentHP=20 — no stagger
+    state = combatReducer(state, adjustHP({ delta: -15, maxHP: 20 })); // currentHP=5, nonlethal=5 — stagger
+    expect(state.isStaggered).toBe(true);
+    expect(state.staggeredAutoApplied).toBe(true);
+  });
+
+  it('auto-clears staggered when healing brings HP above nonlethal', () => {
+    let state = combatReducer(undefined, initHP(5));
+    state = combatReducer(state, adjustNonlethal(5)); // auto-staggered
+    state = combatReducer(state, adjustHP({ delta: 10, maxHP: 20 })); // currentHP=15 > nonlethal=5
+    expect(state.isStaggered).toBe(false);
+    expect(state.staggeredAutoApplied).toBe(false);
+  });
 });
 
 describe('applyRageEndHPLoss', () => {
@@ -360,10 +485,11 @@ describe('setBuffLibrary / addToBuffLibrary / removeFromBuffLibrary', () => {
 // ----------------------------------------------------------------
 
 describe('resetCombat', () => {
-  it('clears buffs, abilities, HP, and round but keeps library and log', () => {
+  it('clears buffs, abilities, HP, staggered, and round but keeps library and log', () => {
     let state = combatReducer(undefined, addBuff(makeBuff()));
     state = combatReducer(state, toggleCombatAbility('powerAttack'));
     state = combatReducer(state, initHP(20));
+    state = combatReducer(state, adjustNonlethal(20)); // triggers auto-staggered
     state = combatReducer(state, nextRound());
     state = combatReducer(state, appendRoll(makeRoll()));
     state = combatReducer(
@@ -387,6 +513,8 @@ describe('resetCombat', () => {
     expect(state.combatAbilities.powerAttack).toBe(false);
     expect(state.currentHP).toBeNull();
     expect(state.round).toBe(0);
+    expect(state.isStaggered).toBe(false);
+    expect(state.staggeredAutoApplied).toBe(false);
     // Roll log and library persist
     expect(state.rollLog).toHaveLength(1);
     expect(state.buffLibrary).toHaveLength(1);
@@ -799,5 +927,23 @@ describe('useSpellSlot', () => {
   it('ignores non-integer level and does not mutate state', () => {
     const state = combatReducer(undefined, useSpellSlot({ poolKey: 'bard', level: 1.5 }));
     expect(state.spellSlotsUsed['bard']).toBeUndefined();
+  });
+
+  it('re-derives staggered when nonlethal >= currentHP on load', () => {
+    const state = combatReducer(
+      undefined,
+      initFromSession(makeSessionDoc({ currentHP: 10, nonlethalDamage: 10 })),
+    );
+    expect(state.isStaggered).toBe(true);
+    expect(state.staggeredAutoApplied).toBe(true);
+  });
+
+  it('clears staggered when nonlethal < currentHP on load', () => {
+    const state = combatReducer(
+      undefined,
+      initFromSession(makeSessionDoc({ currentHP: 20, nonlethalDamage: 3 })),
+    );
+    expect(state.isStaggered).toBe(false);
+    expect(state.staggeredAutoApplied).toBe(false);
   });
 });
