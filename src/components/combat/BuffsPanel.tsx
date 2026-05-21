@@ -197,7 +197,6 @@ export function BuffsPanel({
         ))
       )}
 
-      {/* Turn cycle buttons */}
       <View style={styles.turnRow}>
         <Pressable
           style={[
@@ -242,7 +241,6 @@ export function BuffsPanel({
         </Pressable>
       </View>
 
-      {/* Conditions section */}
       <View style={[styles.conditionsSection, { borderColor: colors.border.DEFAULT }]}>
         <Text style={[styles.sectionHeader, { color: fantasy.gold }]}>Conditions</Text>
         <View style={styles.conditionsGrid}>
