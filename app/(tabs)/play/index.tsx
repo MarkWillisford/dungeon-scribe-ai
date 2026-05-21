@@ -57,6 +57,8 @@ import { SpellsPanel } from '@/components/combat/SpellsPanel';
 import { CombatAbilityToggles } from '@/components/combat/CombatAbilityToggles';
 import { RollLog } from '@/components/combat/RollLog';
 import { DiceRoller } from '@/components/dice/DiceRoller';
+import { DamageInputPanel } from '@/components/combat/DamageInputPanel';
+import { DamageResolutionService } from '@services/DamageResolutionService';
 
 type CombatTab = 'playsheet' | 'buffs' | 'spells' | 'dice' | 'log';
 type PlayView = 'loading' | 'picker' | 'tracker';
@@ -262,6 +264,11 @@ export default function CombatTrackerScreen() {
 
   const conScore = character?.abilityScores.con.total ?? 10;
   const bab = character?.combatStats.attackBonuses.baseAttack[0] ?? 0;
+
+  const resistances = useMemo(() => {
+    if (!character) return { dr: [], energyResistance: {} };
+    return DamageResolutionService.extractResistances(character, activeBuffs);
+  }, [character, activeBuffs]);
 
   // ── Handlers ────────────────────────────────────────────────────────────────
 
@@ -526,6 +533,12 @@ export default function CombatTrackerScreen() {
             onAdjustNonlethal={(delta) => dispatch(adjustNonlethal(delta))}
             onToggleStaggered={() => dispatch(toggleStaggered())}
             testID="hp-tracker"
+          />
+
+          <DamageInputPanel
+            resistances={resistances}
+            onApplyDamage={(resolved) => dispatch(adjustHP({ delta: -resolved, maxHP }))}
+            testID="damage-input-panel"
           />
 
           <SectionHeader title="Initiative" />

@@ -151,7 +151,7 @@ export class ModifierPipelineService {
   // Phase 1: Effect Collection
   // ============================================================
 
-  private static collectAllEffects(character: Character): Effect[] {
+  static collectAllEffects(character: Character): Effect[] {
     const effects: Effect[] = [];
 
     // 1. Racial traits
