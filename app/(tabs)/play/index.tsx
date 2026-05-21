@@ -40,6 +40,7 @@ import {
 import { CombatService } from '@services/CombatService';
 import { PlaySessionService } from '@services/PlaySessionService';
 import { endTurn, startTurn } from '@store/thunks/turnThunks';
+import { toggleCondition } from '@store/thunks/conditionThunks';
 import { RollRecord, Buff, SavedBuff } from '@/types/buff';
 import type { PlaySessionDoc } from '@/types/playSession';
 import { BuffedTotals } from '@/types/combat';
@@ -291,6 +292,13 @@ export default function CombatTrackerScreen() {
   const handleEndTurn = useCallback(() => {
     dispatch(endTurn());
   }, [dispatch]);
+
+  const handleToggleCondition = useCallback(
+    (conditionName: string) => {
+      dispatch(toggleCondition(conditionName));
+    },
+    [dispatch],
+  );
 
   const handleNewSession = useCallback(
     (characterId: string) => {
@@ -565,12 +573,14 @@ export default function CombatTrackerScreen() {
             activeBuffs={activeBuffs}
             buffLibrary={buffLibrary}
             round={round}
+            activeConditions={character?.conditions.activeConditions.map((c) => c.name) ?? []}
             onAddBuff={handleAddBuff}
             onRemoveBuff={(id) => dispatch(removeBuff(id))}
             onToggleBuff={(id) => dispatch(toggleBuff(id))}
             onSaveToLibrary={(_: SavedBuff) => {
               /* future: dispatch(addToBuffLibrary(buff)) */
             }}
+            onToggleCondition={handleToggleCondition}
             onStartTurn={handleStartTurn}
             onEndTurn={handleEndTurn}
             testID="buffs-panel"
