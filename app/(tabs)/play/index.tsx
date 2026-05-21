@@ -573,7 +573,7 @@ export default function CombatTrackerScreen() {
             activeBuffs={activeBuffs}
             buffLibrary={buffLibrary}
             round={round}
-            activeConditions={character?.conditions.activeConditions.map((c) => c.name) ?? []}
+            activeConditions={character.conditions.activeConditions.map((c) => c.name)}
             onAddBuff={handleAddBuff}
             onRemoveBuff={(id) => dispatch(removeBuff(id))}
             onToggleBuff={(id) => dispatch(toggleBuff(id))}
