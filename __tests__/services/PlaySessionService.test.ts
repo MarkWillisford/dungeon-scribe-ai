@@ -334,6 +334,17 @@ describe('PlaySessionService', () => {
       expect(updateArg.currentHP).toBe(28);
     });
 
+    it('merges disjoint partial updates for the same session key', () => {
+      PlaySessionService.scheduleDebouncedUpdate('user-1', 'char-1', { currentHP: 30 }, 2500);
+      jest.advanceTimersByTime(1000);
+      PlaySessionService.scheduleDebouncedUpdate('user-1', 'char-1', { round: 4 }, 2500);
+      jest.advanceTimersByTime(3000);
+      expect(mockFirestore.updateDoc).toHaveBeenCalledTimes(1);
+      const updateArg = mockFirestore.updateDoc.mock.calls[0][1];
+      expect(updateArg.currentHP).toBe(30);
+      expect(updateArg.round).toBe(4);
+    });
+
     it('flushPendingUpdate writes immediately and cancels the timer', async () => {
       PlaySessionService.scheduleDebouncedUpdate('user-1', 'char-1', { currentHP: 15 }, 2500);
       await PlaySessionService.flushPendingUpdate();

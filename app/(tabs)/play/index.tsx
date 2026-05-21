@@ -71,6 +71,13 @@ const TAB_LABELS: { key: CombatTab; label: string }[] = [
 
 export default function CombatTrackerScreen() {
   const { colors, fantasy } = useTheme();
+  const th = useMemo(
+    () => ({
+      safeBg: { backgroundColor: colors.bg.primary },
+      headerBorder: { borderBottomColor: colors.border.DEFAULT },
+    }),
+    [colors],
+  );
   const dispatch = useAppDispatch();
 
   // Redux state — must be declared before any derived state that depends on it
@@ -395,7 +402,7 @@ export default function CombatTrackerScreen() {
 
   if (!character) {
     return (
-      <SafeAreaView style={[styles.safe, { backgroundColor: colors.bg.primary }]}>
+      <SafeAreaView style={[styles.safe, th.safeBg]}>
         <View style={styles.noChar}>
           <Text style={[styles.noCharTitle, { color: fantasy.gold }]}>No Character Selected</Text>
           <Text style={[styles.noCharDesc, { color: colors.text.secondary }]}>
@@ -408,7 +415,7 @@ export default function CombatTrackerScreen() {
 
   if (playView === 'loading') {
     return (
-      <SafeAreaView style={[styles.safe, { backgroundColor: colors.bg.primary }]}>
+      <SafeAreaView style={[styles.safe, th.safeBg]}>
         <View style={styles.centered}>
           <ActivityIndicator size="large" color={fantasy.gold} />
         </View>
@@ -431,9 +438,9 @@ export default function CombatTrackerScreen() {
   // ── Tracker view ─────────────────────────────────────────────────────────────
 
   return (
-    <SafeAreaView style={[styles.safe, { backgroundColor: colors.bg.primary }]}>
+    <SafeAreaView style={[styles.safe, th.safeBg]}>
       {/* Header */}
-      <View style={[styles.header, { borderBottomColor: colors.border.DEFAULT }]}>
+      <View style={[styles.header, th.headerBorder]}>
         <View style={styles.headerLeft}>
           <Text style={[styles.charName, { color: fantasy.gold }]} numberOfLines={1}>
             {character.info.name}
@@ -662,6 +669,20 @@ function SessionPicker({
 
   const activeSet = useMemo(() => new Set(activeSessionCharacterIds), [activeSessionCharacterIds]);
 
+  const sth = useMemo(
+    () => ({
+      safeBg: { backgroundColor: colors.bg.primary },
+      headerBorder: { borderBottomColor: colors.border.DEFAULT },
+      goldText: { color: fantasy.gold },
+      secondaryText: { color: colors.text.secondary },
+      cardBg: { backgroundColor: colors.bg.secondary },
+      bronzeBorder: { borderColor: fantasy.bronze },
+      dfltBorder: { borderColor: colors.border.DEFAULT },
+      primaryBg: { backgroundColor: colors.primary.DEFAULT },
+    }),
+    [colors, fantasy],
+  );
+
   const handleResume = useCallback(
     async (characterId: string) => {
       setResuming(characterId);
@@ -678,17 +699,17 @@ function SessionPicker({
   );
 
   return (
-    <SafeAreaView style={[styles.safe, { backgroundColor: colors.bg.primary }]}>
-      <View style={[pickerStyles.header, { borderBottomColor: colors.border.DEFAULT }]}>
-        <Text style={[pickerStyles.title, { color: fantasy.gold }]}>Play Session</Text>
-        <Text style={[pickerStyles.subtitle, { color: colors.text.secondary }]}>
+    <SafeAreaView style={[styles.safe, sth.safeBg]}>
+      <View style={[pickerStyles.header, sth.headerBorder]}>
+        <Text style={[pickerStyles.title, sth.goldText]}>Play Session</Text>
+        <Text style={[pickerStyles.subtitle, sth.secondaryText]}>
           Choose a character to begin
         </Text>
       </View>
 
       {characters.length === 0 ? (
         <View style={styles.centered}>
-          <Text style={[styles.noCharDesc, { color: colors.text.secondary }]}>
+          <Text style={[styles.noCharDesc, sth.secondaryText]}>
             No characters found. Create a character first.
           </Text>
         </View>
@@ -704,14 +725,12 @@ function SessionPicker({
               <View
                 style={[
                   pickerStyles.card,
-                  {
-                    backgroundColor: colors.bg.secondary,
-                    borderColor: hasSession ? fantasy.bronze : colors.border.DEFAULT,
-                  },
+                  sth.cardBg,
+                  hasSession ? sth.bronzeBorder : sth.dfltBorder,
                 ]}
               >
                 <View style={pickerStyles.cardInfo}>
-                  <Text style={[pickerStyles.cardName, { color: fantasy.gold }]} numberOfLines={1}>
+                  <Text style={[pickerStyles.cardName, sth.goldText]} numberOfLines={1}>
                     {item.name}
                   </Text>
                   <Text style={[pickerStyles.cardSub, { color: colors.text.tertiary }]}>
@@ -740,14 +759,14 @@ function SessionPicker({
                   <Pressable
                     style={[
                       pickerStyles.newBtn,
-                      { borderColor: colors.border.DEFAULT },
+                      sth.dfltBorder,
                       item.id !== activeCharacterId && pickerStyles.newBtnDisabled,
                     ]}
                     onPress={() => onNewSession(item.id)}
                     disabled={item.id !== activeCharacterId}
                     accessibilityLabel={`New session for ${item.name}`}
                   >
-                    <Text style={[pickerStyles.newBtnText, { color: colors.text.secondary }]}>
+                    <Text style={[pickerStyles.newBtnText, sth.secondaryText]}>
                       New Session
                     </Text>
                   </Pressable>

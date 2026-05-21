@@ -123,4 +123,22 @@ describe('InitiativeRow', () => {
     const { getByTestId } = render(<InitiativeRow {...makeProps()} testID="initiative-row" />);
     expect(getByTestId('initiative-row')).toBeTruthy();
   });
+
+  it('renders +0 for zero initiative modifier', () => {
+    const { getByText } = render(<InitiativeRow {...makeProps({ initiative: 0 })} />);
+    expect(getByText('+0')).toBeTruthy();
+  });
+
+  it('roll with zero modifier records correct breakdown and total', () => {
+    mockRollD20.mockReturnValue(7);
+    const onRollRecorded = jest.fn();
+    const { tree } = render(<InitiativeRow {...makeProps({ initiative: 0, onRollRecorded })} />);
+    const btn = findByLabel(tree, 'Roll initiative');
+    if (btn?.props?.onPress) btn.props.onPress();
+    const record = onRollRecorded.mock.calls[0][0];
+    expect(record.breakdown).toContain('Initiative: +0');
+    expect(record.rawRoll).toBe(7);
+    expect(record.total).toBe(7);
+    expect(record.isManual).toBe(false);
+  });
 });
