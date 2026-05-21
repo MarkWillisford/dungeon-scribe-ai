@@ -26,6 +26,13 @@ const DESCRIPTOR_LABELS: Record<IncomingDamageDescriptor, string> = {
   slashing: 'Slashing',
   bludgeoning: 'Bludgeoning',
   magic: 'Magic Weapon',
+  silver: 'Silver',
+  'cold iron': 'Cold Iron',
+  adamantine: 'Adamantine',
+  good: 'Good Aligned',
+  evil: 'Evil Aligned',
+  lawful: 'Lawful Aligned',
+  chaotic: 'Chaotic Aligned',
 };
 
 export function DamageInputPanel({ resistances, onApplyDamage, testID }: DamageInputPanelProps) {

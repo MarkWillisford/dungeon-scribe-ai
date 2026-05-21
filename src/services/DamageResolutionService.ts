@@ -5,7 +5,28 @@ import type { Buff } from '@/types/buff';
 import { ModifierPipelineService } from './ModifierPipelineService';
 
 // DR bypass materials/descriptors not covered by DamageType
-export type IncomingDamageDescriptor = DamageType | 'magic';
+export type DRBypassMaterial =
+  | 'magic'
+  | 'silver'
+  | 'cold iron'
+  | 'adamantine'
+  | 'good'
+  | 'evil'
+  | 'lawful'
+  | 'chaotic';
+
+export type IncomingDamageDescriptor = DamageType | DRBypassMaterial;
+
+const KNOWN_DR_BYPASSES = new Set<DRBypassMaterial>([
+  'magic',
+  'silver',
+  'cold iron',
+  'adamantine',
+  'good',
+  'evil',
+  'lawful',
+  'chaotic',
+]);
 
 export interface DREntry {
   amount: number;
@@ -130,8 +151,9 @@ export class DamageResolutionService {
     const options = new Set<IncomingDamageDescriptor>();
 
     for (const entry of resistances.dr) {
-      if (entry.bypass === 'magic') {
-        options.add('magic');
+      const bypass = entry.bypass.toLowerCase() as DRBypassMaterial;
+      if (KNOWN_DR_BYPASSES.has(bypass)) {
+        options.add(bypass);
       }
     }
 
