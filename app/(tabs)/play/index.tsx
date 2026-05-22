@@ -272,7 +272,7 @@ export default function CombatTrackerScreen() {
           onPress: () => dispatch(confirmStabilization()),
         },
       ],
-      { cancelable: false },
+      { cancelable: false, onDismiss: () => dispatch(clearStabilizationPrompt()) },
     );
   }, [pendingStabilizationPrompt, dispatch]);
 
