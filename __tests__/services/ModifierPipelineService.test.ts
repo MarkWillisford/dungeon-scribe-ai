@@ -394,6 +394,55 @@ describe('ModifierPipelineService', () => {
       // Only highest natural armor should apply: 3, not 5
       expect(result.combatStats.armorClass.natural).toBe(3);
     });
+
+    test('morale bonus from two sources takes highest (not stacked)', () => {
+      const char = createTestCharacter();
+      const baseline = ModifierPipelineService.recalculate(createTestCharacter());
+
+      // Add two morale buffs to attack.all — Bless (+1) and Inspire Courage (+2)
+      char.buffs.push({
+        id: 'bless',
+        name: 'Bless',
+        source: 'Cleric',
+        bonusType: BonusType.MORALE,
+        duration: 10,
+        durationType: 'rounds',
+        isActive: true,
+        effects: [
+          {
+            type: 'bonus',
+            bonusType: BonusType.MORALE,
+            target: 'attack.all',
+            value: 1,
+            source: 'Bless',
+          },
+        ],
+      });
+      char.buffs.push({
+        id: 'inspire_courage',
+        name: 'Inspire Courage',
+        source: 'Bard',
+        bonusType: BonusType.MORALE,
+        duration: 999,
+        durationType: 'rounds',
+        isActive: true,
+        effects: [
+          {
+            type: 'bonus',
+            bonusType: BonusType.MORALE,
+            target: 'attack.all',
+            value: 2,
+            source: 'Inspire Courage',
+          },
+        ],
+      });
+
+      const result = ModifierPipelineService.recalculate(char);
+      // Only highest morale bonus should apply: +2, not +3 (1+2)
+      expect(result.combatStats.attackBonuses.meleeTotal).toBe(
+        baseline.combatStats.attackBonuses.meleeTotal + 2,
+      );
+    });
   });
 
   describe('BAB progressions', () => {
