@@ -17,9 +17,12 @@ import combatReducer, {
   addToBuffLibrary,
   removeFromBuffLibrary,
   resetCombat,
+  initNewSession,
+  initFromSession,
 } from '@store/slices/combatSlice';
 import { BonusType } from '@/types/base';
 import { Buff, RollRecord, SavedBuff } from '@/types/buff';
+import type { PlaySessionDoc } from '@/types/playSession';
 
 // ----------------------------------------------------------------
 // Helpers
@@ -418,5 +421,170 @@ describe('resetCombat', () => {
     // Roll log and library persist
     expect(state.rollLog).toHaveLength(1);
     expect(state.buffLibrary).toHaveLength(1);
+  });
+});
+
+// ----------------------------------------------------------------
+// initNewSession
+// ----------------------------------------------------------------
+
+describe('initNewSession', () => {
+  it('sets currentHP to the provided maxHP', () => {
+    const state = combatReducer(undefined, initNewSession({ maxHP: 55 }));
+    expect(state.currentHP).toBe(55);
+  });
+
+  it('clears tempHP and nonlethalDamage', () => {
+    let state = combatReducer(undefined, initHP(30));
+    state = combatReducer(state, addTempHP(10));
+    state = combatReducer(state, adjustNonlethal(5));
+    state = combatReducer(state, initNewSession({ maxHP: 30 }));
+    expect(state.tempHP).toBe(0);
+    expect(state.nonlethalDamage).toBe(0);
+  });
+
+  it('clears active buffs and resets combat abilities', () => {
+    let state = combatReducer(undefined, addBuff(makeBuff()));
+    state = combatReducer(state, toggleCombatAbility('powerAttack'));
+    state = combatReducer(state, initNewSession({ maxHP: 40 }));
+    expect(state.activeBuffs).toHaveLength(0);
+    expect(state.combatAbilities.powerAttack).toBe(false);
+  });
+
+  it('resets the round counter to 0', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, nextRound());
+    state = combatReducer(state, nextRound());
+    state = combatReducer(state, initNewSession({ maxHP: 20 }));
+    expect(state.round).toBe(0);
+  });
+
+  it('does not clear the roll log or buff library', () => {
+    let state = combatReducer(undefined, appendRoll(makeRoll()));
+    state = combatReducer(
+      state,
+      addToBuffLibrary({
+        id: 'lib',
+        name: 'Library Buff',
+        description: '',
+        source: 'Spell',
+        category: 'Spell',
+        bonusType: BonusType.MORALE,
+        duration: 5,
+        durationType: 'rounds',
+        effects: [],
+      }),
+    );
+    state = combatReducer(state, initNewSession({ maxHP: 30 }));
+    expect(state.rollLog).toHaveLength(1);
+    expect(state.buffLibrary).toHaveLength(1);
+  });
+});
+
+// ----------------------------------------------------------------
+// initFromSession
+// ----------------------------------------------------------------
+
+function makeSessionDoc(overrides: Partial<PlaySessionDoc> = {}): PlaySessionDoc {
+  return {
+    characterId: 'char-1',
+    userId: 'user-1',
+    currentHP: 22,
+    nonlethalDamage: 3,
+    tempHP: 5,
+    activeBuffs: [makeBuff({ id: 'session_buff', name: 'Session Buff', duration: 4 })],
+    combatAbilities: {
+      powerAttack: true,
+      deadlyAim: false,
+      rage: false,
+      twoWeaponFighting: false,
+      twoWeaponFightingLightOffhand: false,
+      haste: true,
+      flurryOfBlows: false,
+      combatExpertise: false,
+      combatExpertisePenalty: 2,
+    },
+    spellSlotsUsed: { 1: 2, 2: 1 },
+    resourcePools: { rage: 5 },
+    round: 7,
+    createdAt: '2026-01-01T00:00:00.000Z',
+    updatedAt: '2026-01-01T01:00:00.000Z',
+    ...overrides,
+  };
+}
+
+describe('initFromSession', () => {
+  it('restores currentHP from the session doc', () => {
+    const state = combatReducer(undefined, initFromSession(makeSessionDoc()));
+    expect(state.currentHP).toBe(22);
+  });
+
+  it('restores tempHP and nonlethalDamage', () => {
+    const state = combatReducer(undefined, initFromSession(makeSessionDoc()));
+    expect(state.tempHP).toBe(5);
+    expect(state.nonlethalDamage).toBe(3);
+  });
+
+  it('restores activeBuffs from the session doc', () => {
+    const state = combatReducer(undefined, initFromSession(makeSessionDoc()));
+    expect(state.activeBuffs).toHaveLength(1);
+    expect(state.activeBuffs[0].id).toBe('session_buff');
+  });
+
+  it('restores combatAbilities from the session doc', () => {
+    const state = combatReducer(undefined, initFromSession(makeSessionDoc()));
+    expect(state.combatAbilities.powerAttack).toBe(true);
+    expect(state.combatAbilities.haste).toBe(true);
+    expect(state.combatAbilities.combatExpertisePenalty).toBe(2);
+  });
+
+  it('restores the round counter', () => {
+    const state = combatReducer(undefined, initFromSession(makeSessionDoc()));
+    expect(state.round).toBe(7);
+  });
+
+  it('does not overwrite the roll log or buff library', () => {
+    let state = combatReducer(undefined, appendRoll(makeRoll()));
+    state = combatReducer(
+      state,
+      addToBuffLibrary({
+        id: 'lib2',
+        name: 'Lib Buff',
+        description: '',
+        source: 'Feat',
+        category: 'Ability',
+        bonusType: BonusType.MORALE,
+        duration: 1,
+        durationType: 'rounds',
+        effects: [],
+      }),
+    );
+    state = combatReducer(state, initFromSession(makeSessionDoc()));
+    expect(state.rollLog).toHaveLength(1);
+    expect(state.buffLibrary).toHaveLength(1);
+  });
+
+  it('handles a session doc with empty buffs and default abilities', () => {
+    const state = combatReducer(
+      undefined,
+      initFromSession(
+        makeSessionDoc({
+          activeBuffs: [],
+          combatAbilities: {
+            powerAttack: false,
+            deadlyAim: false,
+            rage: false,
+            twoWeaponFighting: false,
+            twoWeaponFightingLightOffhand: false,
+            haste: false,
+            flurryOfBlows: false,
+            combatExpertise: false,
+            combatExpertisePenalty: 1,
+          },
+        }),
+      ),
+    );
+    expect(state.activeBuffs).toHaveLength(0);
+    expect(state.combatAbilities.powerAttack).toBe(false);
   });
 });
