@@ -381,6 +381,7 @@ const combatSlice = createSlice({
 
       // Full HP restoration
       state.currentHP = maxHP;
+      state.tempHP = 0;
 
       // Non-lethal recovery: 1 HP per character level
       const recovery = NonLethalService.restRecoveryAmount(characterLevel);
