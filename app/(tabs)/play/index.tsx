@@ -24,6 +24,8 @@ import {
   applyLongRest,
   applyNewEncounter,
   clearRollLog,
+  clearStabilizationPrompt,
+  confirmStabilization,
   decrementPool,
   initFromSession,
   initNewSession,
@@ -96,6 +98,7 @@ export default function CombatTrackerScreen() {
     nonlethalDamage,
     isStaggered,
     staggeredAutoApplied,
+    pendingStabilizationPrompt,
     round,
     rollLog,
     buffLibrary,
@@ -251,6 +254,27 @@ export default function CombatTrackerScreen() {
     resourcePools,
     sessionCharacterId,
   ]);
+
+  // Show stabilization prompt when End Turn triggers it while the character is dying
+  useEffect(() => {
+    if (!pendingStabilizationPrompt) return;
+    Alert.alert(
+      'Stabilization Check',
+      'Make a DC 10 Constitution check — did you stabilize?',
+      [
+        {
+          text: 'No',
+          style: 'cancel',
+          onPress: () => dispatch(clearStabilizationPrompt()),
+        },
+        {
+          text: 'Yes',
+          onPress: () => dispatch(confirmStabilization()),
+        },
+      ],
+      { cancelable: false },
+    );
+  }, [pendingStabilizationPrompt, dispatch]);
 
   // Computed values used in tracker
   const maxHP = useMemo(() => {

@@ -26,6 +26,8 @@ import combatReducer, {
   initFromSession,
   togglePreparedSpell,
   useSpellSlot,
+  confirmStabilization,
+  clearStabilizationPrompt,
 } from '@store/slices/combatSlice';
 import { BonusType } from '@/types/base';
 import { Buff, RollRecord, SavedBuff } from '@/types/buff';
@@ -1103,5 +1105,149 @@ describe('applyLongRest', () => {
     state = combatReducer(state, restAction({ maxHP: 10, characterLevel: 15 }));
     expect(state.isStaggered).toBe(false);
     expect(state.staggeredAutoApplied).toBe(false);
+  });
+});
+
+// ----------------------------------------------------------------
+// Dying state
+// ----------------------------------------------------------------
+
+describe('Dying — auto-set on HP drop below 0', () => {
+  it('sets isDying when HP drops to -1', () => {
+    let state = combatReducer(undefined, initHP(1));
+    state = combatReducer(state, adjustHP({ delta: -2, maxHP: 20 }));
+    expect(state.currentHP).toBe(-1);
+    expect(state.isDying).toBe(true);
+    expect(state.dyingAutoApplied).toBe(true);
+  });
+
+  it('sets isDying when HP drops below 0 by a larger amount', () => {
+    let state = combatReducer(undefined, initHP(5));
+    state = combatReducer(state, adjustHP({ delta: -10, maxHP: 20 }));
+    expect(state.currentHP).toBe(-5);
+    expect(state.isDying).toBe(true);
+    expect(state.dyingAutoApplied).toBe(true);
+  });
+
+  it('does not set isDying when HP is exactly 0', () => {
+    let state = combatReducer(undefined, initHP(5));
+    state = combatReducer(state, adjustHP({ delta: -5, maxHP: 20 }));
+    expect(state.currentHP).toBe(0);
+    expect(state.isDying).toBe(false);
+  });
+
+  it('clears isDying when auto-applied and healing brings HP back to 0', () => {
+    let state = combatReducer(undefined, initHP(5));
+    state = combatReducer(state, adjustHP({ delta: -10, maxHP: 20 })); // HP=-5, dying
+    state = combatReducer(state, adjustHP({ delta: 5, maxHP: 20 })); // HP=0
+    expect(state.currentHP).toBe(0);
+    expect(state.isDying).toBe(false);
+    expect(state.dyingAutoApplied).toBe(false);
+  });
+
+  it('clears isDying when healing brings HP above 0', () => {
+    let state = combatReducer(undefined, initHP(5));
+    state = combatReducer(state, adjustHP({ delta: -10, maxHP: 20 })); // HP=-5, dying
+    state = combatReducer(state, adjustHP({ delta: 10, maxHP: 20 })); // HP=5
+    expect(state.isDying).toBe(false);
+    expect(state.dyingAutoApplied).toBe(false);
+  });
+
+  it('clears isStabilized when healing out of dying', () => {
+    let state = combatReducer(undefined, initHP(5));
+    state = combatReducer(state, adjustHP({ delta: -10, maxHP: 20 }));
+    state = combatReducer(state, confirmStabilization());
+    state = combatReducer(state, adjustHP({ delta: 10, maxHP: 20 }));
+    expect(state.isStabilized).toBe(false);
+  });
+});
+
+describe('endTurnDecrement while dying', () => {
+  it('decrements HP by 1 when dying and not stabilized', () => {
+    let state = combatReducer(undefined, initHP(3));
+    state = combatReducer(state, adjustHP({ delta: -5, maxHP: 20 })); // HP=-2, dying
+    state = combatReducer(state, { type: 'combat/endTurnDecrement' });
+    expect(state.currentHP).toBe(-3);
+  });
+
+  it('sets pendingStabilizationPrompt when dying and not stabilized', () => {
+    let state = combatReducer(undefined, initHP(3));
+    state = combatReducer(state, adjustHP({ delta: -5, maxHP: 20 })); // dying
+    state = combatReducer(state, { type: 'combat/endTurnDecrement' });
+    expect(state.pendingStabilizationPrompt).toBe(true);
+  });
+
+  it('does not decrement HP when not dying', () => {
+    let state = combatReducer(undefined, initHP(10));
+    state = combatReducer(state, { type: 'combat/endTurnDecrement' });
+    expect(state.currentHP).toBe(10);
+  });
+
+  it('does not set pendingStabilizationPrompt when not dying', () => {
+    let state = combatReducer(undefined, initHP(10));
+    state = combatReducer(state, { type: 'combat/endTurnDecrement' });
+    expect(state.pendingStabilizationPrompt).toBe(false);
+  });
+});
+
+describe('confirmStabilization', () => {
+  it('sets isStabilized and clears pendingStabilizationPrompt', () => {
+    let state = combatReducer(undefined, initHP(3));
+    state = combatReducer(state, adjustHP({ delta: -5, maxHP: 20 }));
+    state = combatReducer(state, { type: 'combat/endTurnDecrement' }); // sets prompt
+    state = combatReducer(state, confirmStabilization());
+    expect(state.isStabilized).toBe(true);
+    expect(state.pendingStabilizationPrompt).toBe(false);
+  });
+
+  it('stops bleed-out on the next End Turn after stabilization', () => {
+    let state = combatReducer(undefined, initHP(3));
+    state = combatReducer(state, adjustHP({ delta: -5, maxHP: 20 })); // HP=-2
+    state = combatReducer(state, confirmStabilization());
+    const hpBeforeEndTurn = state.currentHP;
+    state = combatReducer(state, { type: 'combat/endTurnDecrement' });
+    expect(state.currentHP).toBe(hpBeforeEndTurn); // no change
+    expect(state.pendingStabilizationPrompt).toBe(false);
+  });
+});
+
+describe('clearStabilizationPrompt', () => {
+  it('clears pendingStabilizationPrompt without stabilizing', () => {
+    let state = combatReducer(undefined, initHP(3));
+    state = combatReducer(state, adjustHP({ delta: -5, maxHP: 20 }));
+    state = combatReducer(state, { type: 'combat/endTurnDecrement' });
+    expect(state.pendingStabilizationPrompt).toBe(true);
+    state = combatReducer(state, clearStabilizationPrompt());
+    expect(state.pendingStabilizationPrompt).toBe(false);
+    expect(state.isStabilized).toBe(false);
+  });
+
+  it('bleed-out continues after clearing prompt without stabilizing', () => {
+    let state = combatReducer(undefined, initHP(3));
+    state = combatReducer(state, adjustHP({ delta: -5, maxHP: 20 })); // HP=-2
+    state = combatReducer(state, { type: 'combat/endTurnDecrement' }); // HP=-3, prompt set
+    state = combatReducer(state, clearStabilizationPrompt()); // prompt cleared, not stabilized
+    const hpAfterClear = state.currentHP; // -3
+    state = combatReducer(state, { type: 'combat/endTurnDecrement' }); // HP=-4
+    expect(state.currentHP).toBe(hpAfterClear! - 1);
+    expect(state.pendingStabilizationPrompt).toBe(true);
+  });
+});
+
+describe('initFromSession re-derives dying state', () => {
+  it('sets isDying when session currentHP is negative', () => {
+    const state = combatReducer(undefined, initFromSession(makeSessionDoc({ currentHP: -3 })));
+    expect(state.isDying).toBe(true);
+    expect(state.dyingAutoApplied).toBe(true);
+  });
+
+  it('does not set isDying when session currentHP is 0', () => {
+    const state = combatReducer(undefined, initFromSession(makeSessionDoc({ currentHP: 0 })));
+    expect(state.isDying).toBe(false);
+  });
+
+  it('does not set isDying when session currentHP is positive', () => {
+    const state = combatReducer(undefined, initFromSession(makeSessionDoc({ currentHP: 10 })));
+    expect(state.isDying).toBe(false);
   });
 });
