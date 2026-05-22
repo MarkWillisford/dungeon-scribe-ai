@@ -90,6 +90,7 @@ export default function CombatTrackerScreen() {
   // CharacterSummary.id (local UUID) and character.info.firebaseId (Firestore doc ID).
   const [sessionCharacterId, setSessionCharacterId] = useState<string | null>(null);
   const sessionInitRef = useRef(false);
+  const lastUserIdRef = useRef<string | null>(null);
 
   // Derive the view from state — avoids setting derived state inside effects.
   const playView: PlayView =
@@ -102,9 +103,16 @@ export default function CombatTrackerScreen() {
     }
   }, [buffLibrary.length, dispatch]);
 
-  // Check Firestore for active sessions. Runs when userId becomes available.
   // Uses a ref guard so it only fires once even if userId triggers a re-run.
+  // Reset the guard when userId changes so a newly signed-in user gets a fresh lookup.
   useEffect(() => {
+    if (lastUserIdRef.current !== (userId ?? null)) {
+      lastUserIdRef.current = userId ?? null;
+      sessionInitRef.current = false;
+      setSessionCheckDone(currentHP !== null);
+      setActiveSessionIds([]);
+      setSessionCharacterId(null);
+    }
     if (sessionInitRef.current || currentHP !== null || !userId) return;
     sessionInitRef.current = true;
 
@@ -150,7 +158,6 @@ export default function CombatTrackerScreen() {
     return () => sub.remove();
   }, [currentHP]);
 
-  // Auto-save: schedule debounced write on every meaningful state change
   useEffect(() => {
     if (!character || !userId || currentHP === null) return;
     if (!sessionCharacterId) return;
@@ -175,7 +182,6 @@ export default function CombatTrackerScreen() {
     sessionCharacterId,
   ]);
 
-  // Computed values used in tracker
   const maxHP = useMemo(() => {
     if (!character) return 0;
     const hp = character.combatStats.hitPoints;
@@ -267,17 +273,33 @@ export default function CombatTrackerScreen() {
   const handleResumeSession = useCallback(
     async (characterId: string) => {
       if (!userId) return;
-      const sessionDoc = await PlaySessionService.get(userId, characterId);
-      if (sessionDoc) {
-        dispatch(initFromSession(sessionDoc));
-        setSessionCharacterId(characterId);
-        // playView → 'tracker' automatically because currentHP becomes non-null
+      if (!character || characterId !== character.info.id) {
+        Alert.alert(
+          'Resume Unavailable',
+          'Select that character first in the Characters tab, then resume the session.',
+        );
+        return;
+      }
+      try {
+        const sessionDoc = await PlaySessionService.get(userId, characterId);
+        if (sessionDoc) {
+          dispatch(initFromSession(sessionDoc));
+          setSessionCharacterId(characterId);
+          // playView → 'tracker' automatically because currentHP becomes non-null
+        } else {
+          Alert.alert('Resume Failed', 'Session data is unavailable. Please start a new session.');
+        }
+      } catch {
+        Alert.alert(
+          'Resume Failed',
+          'Could not load session. Check your connection and try again.',
+        );
       }
     },
-    [dispatch, userId],
+    [dispatch, userId, character],
   );
 
-  const handleEndCombat = useCallback(() => {
+  const handleEndCombat = useCallback(async () => {
     PlaySessionService.cancelPendingUpdate();
     if (userId && sessionCharacterId) {
       PlaySessionService.delete(userId, sessionCharacterId).catch((error) => {
@@ -287,6 +309,7 @@ export default function CombatTrackerScreen() {
     }
     dispatch(resetCombat());
     setSessionCharacterId(null);
+    sessionInitRef.current = false;
     setSessionCheckDone(true);
   }, [dispatch, userId, sessionCharacterId]);
 
@@ -598,7 +621,7 @@ function SessionPicker({
                       {isLoading ? (
                         <ActivityIndicator size="small" color="#FFFFFF" />
                       ) : (
-                        <Text style={pickerStyles.btnText}>Resume</Text>
+                        <Text style={[pickerStyles.btnText, { color: '#fff' }]}>Resume</Text>
                       )}
                     </Pressable>
                   )}
@@ -870,7 +893,6 @@ const pickerStyles = StyleSheet.create({
     fontFamily: 'Cinzel',
     fontSize: 12,
     fontWeight: '600',
-    color: '#FFFFFF',
   },
   newBtnText: {
     fontFamily: 'Cinzel',

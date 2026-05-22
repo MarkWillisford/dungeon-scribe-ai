@@ -63,7 +63,6 @@ function makeSessionDoc(overrides: Partial<PlaySessionDoc> = {}): PlaySessionDoc
 describe('PlaySessionService', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    // Discard any pending debounce state without triggering a Firestore write
     PlaySessionService.cancelPendingUpdate();
   });
 

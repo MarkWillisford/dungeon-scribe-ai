@@ -123,11 +123,16 @@ export class PlaySessionService {
     for (const entry of entries) {
       clearTimeout(entry.timer);
     }
-    await Promise.all(
+    const results = await Promise.allSettled(
       entries.map((entry) =>
         PlaySessionService.update(entry.userId, entry.characterId, entry.data),
       ),
     );
+    for (const result of results) {
+      if (result.status === 'rejected') {
+        console.error('Failed to flush play session', result.reason);
+      }
+    }
   }
 
   /** Discard all pending debounced writes without writing to Firestore. */
