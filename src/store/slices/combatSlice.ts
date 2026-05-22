@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { Buff, BuffPackage, CombatAbilityState, RollRecord, SavedBuff } from '@/types/buff';
 import type { PlaySessionDoc } from '@/types/playSession';
 import type { ResourcePool } from '@/types/resources';
+import { NonLethalService } from '@/services/NonLethalService';
 
 interface CombatState {
   // Session buffs (lost when combat ends or app closes)
@@ -345,6 +346,11 @@ const combatSlice = createSlice({
       state.resourcePools = s.resourcePools ?? {};
       state.preparedSpellsCast = s.preparedSpellsCast ?? {};
       state.spellSlotsUsed = s.spellSlotsUsed ?? {};
+      // Re-derive staggered from restored HP state
+      const staggered =
+        s.currentHP !== null && NonLethalService.checkStaggered(s.nonlethalDamage, s.currentHP);
+      state.isStaggered = staggered;
+      state.staggeredAutoApplied = staggered;
       // Roll log and buff library are not session-scoped — leave them as-is
     },
 
