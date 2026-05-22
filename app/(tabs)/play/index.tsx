@@ -51,7 +51,6 @@ import { BuffsPanel } from '@/components/combat/BuffsPanel';
 import { CombatAbilityToggles } from '@/components/combat/CombatAbilityToggles';
 import { RollLog } from '@/components/combat/RollLog';
 import { DiceRoller } from '@/components/dice/DiceRoller';
-import { DiceService } from '@services/DiceService';
 
 type CombatTab = 'playsheet' | 'buffs' | 'dice' | 'log';
 type PlayView = 'loading' | 'picker' | 'tracker';
