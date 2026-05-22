@@ -169,6 +169,21 @@ const combatSlice = createSlice({
       state.round = action.payload;
     },
 
+    // ---- Turn management ----
+
+    endTurnDecrement(state) {
+      for (const buff of state.activeBuffs) {
+        if (buff.duration !== null && buff.durationType === 'rounds') {
+          buff.duration -= 1;
+        }
+      }
+      state.activeBuffs = state.activeBuffs.filter((b) => b.duration === null || b.duration > 0);
+    },
+
+    startTurnApply(_state) {
+      // Stub: bleed, regeneration effects go here
+    },
+
     // ---- Roll log ----
 
     appendRoll(state, action: PayloadAction<RollRecord>) {
@@ -296,6 +311,8 @@ export const {
   applyRageEndHPLoss,
   nextRound,
   setRound,
+  endTurnDecrement,
+  startTurnApply,
   appendRoll,
   clearRollLog,
   setBuffLibrary,
