@@ -989,6 +989,18 @@ describe('applyLongRest', () => {
       ...overrides,
     });
 
+  it('is a no-op when there is no active session (currentHP is null)', () => {
+    const state = combatReducer(undefined, restAction({ maxHP: 999 }));
+    expect(state.currentHP).toBeNull();
+  });
+
+  it('recovers at least 1 nonlethal at level 0', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, adjustNonlethal(5));
+    state = combatReducer(state, restAction({ characterLevel: 0 }));
+    expect(state.nonlethalDamage).toBe(4);
+  });
+
   it('resets currentHP to maxHP', () => {
     let state = combatReducer(undefined, initHP(20));
     state = combatReducer(state, adjustHP({ delta: -8, maxHP: 20 }));

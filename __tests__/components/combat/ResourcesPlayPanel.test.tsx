@@ -111,6 +111,21 @@ describe('ResourcesPlayPanel', () => {
     expect(getByText('No resource pools defined')).toBeTruthy();
   });
 
+  it('shows Long Rest button even when no pools', () => {
+    const { getByText } = render(
+      <ResourcesPlayPanel {...makeProps({ pools: [], currentValues: {} })} />,
+    );
+    expect(getByText('Long Rest')).toBeTruthy();
+  });
+
+  it('calls onLongRest when Long Rest button is pressed', () => {
+    const onLongRest = jest.fn();
+    const { getByLabelText } = render(<ResourcesPlayPanel {...makeProps({ onLongRest })} />);
+    const btn = getByLabelText('Long Rest');
+    if (btn.props.onPress) btn.props.onPress();
+    expect(onLongRest).toHaveBeenCalledTimes(1);
+  });
+
   it('is findable by testID', () => {
     const { getByTestId } = render(
       <ResourcesPlayPanel {...makeProps()} testID="resources-panel" />,

@@ -414,7 +414,7 @@ const combatSlice = createSlice({
         } else if (pool.rechargeOn === 'special') {
           const amount = specialPoolRecovery[pool.id];
           if (amount !== undefined && amount > 0) {
-            const current = state.resourcePools[pool.id] ?? 0;
+            const current = state.resourcePools[pool.id] ?? pool.max;
             state.resourcePools[pool.id] = Math.min(pool.max, current + amount);
           }
         }
