@@ -156,13 +156,22 @@ export class PlaySessionService {
       ? (data.activeBuffs as PlaySessionDoc['activeBuffs'])
       : [];
     const combatAbilities = PlaySessionService.isPlainObject(data.combatAbilities)
-      ? (data.combatAbilities as unknown as PlaySessionDoc['combatAbilities'])
+      ? PlaySessionService.normalizeCombatAbilities(data.combatAbilities)
       : PlaySessionService.defaultCombatAbilities();
-    const spellSlotsUsed = PlaySessionService.isPlainObject(data.spellSlotsUsed)
-      ? (data.spellSlotsUsed as Record<string, number[]>)
-      : {};
+    const spellSlotsUsed = (
+      PlaySessionService.isPlainObject(data.spellSlotsUsed)
+        ? Object.fromEntries(
+            Object.entries(data.spellSlotsUsed).map(([k, v]) => [
+              k,
+              Array.isArray(v) ? v : PlaySessionService.asNumber(v),
+            ]),
+          )
+        : {}
+    ) as Record<string, number[]>;
     const resourcePools = PlaySessionService.isPlainObject(data.resourcePools)
-      ? (data.resourcePools as Record<string, number>)
+      ? Object.fromEntries(
+          Object.entries(data.resourcePools).map(([k, v]) => [k, PlaySessionService.asNumber(v)]),
+        )
       : {};
     return {
       characterId,
@@ -177,9 +186,41 @@ export class PlaySessionService {
         ? (data.preparedSpellsCast as Record<string, boolean>)
         : {},
       resourcePools,
-      round: (data.round as number) ?? 0,
+      round: PlaySessionService.asNumber(data.round),
       createdAt: PlaySessionService.timestampToString(data.createdAt),
       updatedAt: PlaySessionService.timestampToString(data.updatedAt),
+    };
+  }
+
+  private static asNumber(value: unknown, fallback = 0): number {
+    return typeof value === 'number' && isFinite(value) ? value : fallback;
+  }
+
+  private static normalizeCombatAbilities(
+    raw: Record<string, unknown>,
+  ): PlaySessionDoc['combatAbilities'] {
+    const defaults = PlaySessionService.defaultCombatAbilities();
+    return {
+      powerAttack: typeof raw.powerAttack === 'boolean' ? raw.powerAttack : defaults.powerAttack,
+      deadlyAim: typeof raw.deadlyAim === 'boolean' ? raw.deadlyAim : defaults.deadlyAim,
+      rage: typeof raw.rage === 'boolean' ? raw.rage : defaults.rage,
+      twoWeaponFighting:
+        typeof raw.twoWeaponFighting === 'boolean'
+          ? raw.twoWeaponFighting
+          : defaults.twoWeaponFighting,
+      twoWeaponFightingLightOffhand:
+        typeof raw.twoWeaponFightingLightOffhand === 'boolean'
+          ? raw.twoWeaponFightingLightOffhand
+          : defaults.twoWeaponFightingLightOffhand,
+      haste: typeof raw.haste === 'boolean' ? raw.haste : defaults.haste,
+      flurryOfBlows:
+        typeof raw.flurryOfBlows === 'boolean' ? raw.flurryOfBlows : defaults.flurryOfBlows,
+      combatExpertise:
+        typeof raw.combatExpertise === 'boolean' ? raw.combatExpertise : defaults.combatExpertise,
+      combatExpertisePenalty: PlaySessionService.asNumber(
+        raw.combatExpertisePenalty,
+        defaults.combatExpertisePenalty,
+      ),
     };
   }
 

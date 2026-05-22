@@ -198,6 +198,55 @@ describe('PlaySessionService', () => {
       const result = await PlaySessionService.get('user-1', 'char-corrupt');
       expect(result).toBeNull();
     });
+
+    it('normalizes combatAbilities with corrupt field types to defaults', async () => {
+      mockFirestore.getDoc.mockResolvedValue({
+        exists: () => true,
+        id: 'char-corrupt-abilities',
+        data: () => ({
+          userId: 'user-1',
+          currentHP: 10,
+          combatAbilities: { powerAttack: 'yes', combatExpertisePenalty: 'bad', rage: true },
+        }),
+      });
+
+      const result = await PlaySessionService.get('user-1', 'char-corrupt-abilities');
+      expect(result!.combatAbilities.powerAttack).toBe(false);
+      expect(result!.combatAbilities.combatExpertisePenalty).toBe(1);
+      expect(result!.combatAbilities.rage).toBe(true);
+    });
+
+    it('normalizes spellSlotsUsed with string values to 0', async () => {
+      mockFirestore.getDoc.mockResolvedValue({
+        exists: () => true,
+        id: 'char-corrupt-slots',
+        data: () => ({
+          userId: 'user-1',
+          currentHP: 10,
+          spellSlotsUsed: { 1: '2', 3: 1 },
+        }),
+      });
+
+      const result = await PlaySessionService.get('user-1', 'char-corrupt-slots');
+      expect(result!.spellSlotsUsed[1]).toBe(0);
+      expect(result!.spellSlotsUsed[3]).toBe(1);
+    });
+
+    it('normalizes resourcePools with string values to 0', async () => {
+      mockFirestore.getDoc.mockResolvedValue({
+        exists: () => true,
+        id: 'char-corrupt-pools',
+        data: () => ({
+          userId: 'user-1',
+          currentHP: 10,
+          resourcePools: { rage: '3', ki: 5 },
+        }),
+      });
+
+      const result = await PlaySessionService.get('user-1', 'char-corrupt-pools');
+      expect(result!.resourcePools['rage']).toBe(0);
+      expect(result!.resourcePools['ki']).toBe(5);
+    });
   });
 
   // ── update ───────────────────────────────────────────────────────────────────

@@ -38,7 +38,6 @@ import {
   useSpellSlot as expendSpellSlot,
 } from '@store/slices/combatSlice';
 import { CombatService } from '@services/CombatService';
-import { DiceService } from '@services/DiceService';
 import { PlaySessionService } from '@services/PlaySessionService';
 import { endTurn, startTurn } from '@store/thunks/turnThunks';
 import { RollRecord, Buff, SavedBuff } from '@/types/buff';
@@ -48,6 +47,7 @@ import type { CharacterSummary } from '@/types/character';
 import { BUFF_PRESETS } from '@/data/buffs/presets';
 
 import { HPTracker } from '@/components/combat/HPTracker';
+import { InitiativeRow } from '@/components/combat/InitiativeRow';
 import { AttackPanel } from '@/components/combat/AttackPanel';
 import { DefensePanel } from '@/components/combat/DefensePanel';
 import { ResourcesPlayPanel } from '@/components/combat/ResourcesPlayPanel';
@@ -559,6 +559,7 @@ export default function CombatTrackerScreen() {
           style={styles.tabContent}
           contentContainerStyle={styles.tabContentInner}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
         >
           <BuffsPanel
             activeBuffs={activeBuffs}
@@ -619,6 +620,7 @@ export default function CombatTrackerScreen() {
           style={styles.tabContent}
           contentContainerStyle={styles.tabContentInner}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
         >
           <RollLog rolls={rollLog} onClear={() => dispatch(clearRollLog())} testID="roll-log" />
           <View style={styles.spacerSmall} />
@@ -657,6 +659,7 @@ function SessionPicker({
         await onResumeSession(characterId);
       } catch (error) {
         console.warn('Failed to resume session:', error);
+        Alert.alert('Resume Failed', 'Could not load the saved session. Please try again.');
       } finally {
         setResuming(null);
       }
@@ -757,56 +760,6 @@ function SectionHeader({ title }: { title: string }) {
       <View style={[sectionHeaderStyles.line, { backgroundColor: fantasy.bronze }]} />
       <Text style={[sectionHeaderStyles.text, { color: fantasy.gold }]}>{title}</Text>
       <View style={[sectionHeaderStyles.line, { backgroundColor: fantasy.bronze }]} />
-    </View>
-  );
-}
-
-function InitiativeRow({
-  initiative,
-  onRollRecorded,
-}: {
-  initiative: number;
-  onRollRecorded: (r: RollRecord) => void;
-}) {
-  const { colors, fantasy } = useTheme();
-  const handleRoll = () => {
-    const raw = DiceService.rollD20();
-    const total = raw + initiative;
-    const record: RollRecord = {
-      id: `init_${Date.now()}`,
-      timestamp: Date.now(),
-      type: 'initiative',
-      label: 'Initiative',
-      diceNotation: DiceService.buildNotation(1, 20, initiative),
-      rawRoll: raw,
-      modifier: initiative,
-      total,
-      breakdown: [`d20: ${raw}`, `Initiative: ${initiative >= 0 ? '+' : ''}${initiative}`],
-      isCrit: raw === 20,
-      isCritFail: raw === 1,
-      isManual: false,
-    };
-    onRollRecorded(record);
-  };
-
-  return (
-    <View
-      style={[
-        initStyles.row,
-        { backgroundColor: colors.bg.secondary, borderColor: colors.border.DEFAULT },
-      ]}
-    >
-      <Text style={[initStyles.label, { color: colors.text.tertiary }]}>Initiative</Text>
-      <Text style={[initStyles.value, { color: fantasy.gold }]}>
-        {initiative >= 0 ? `+${initiative}` : `${initiative}`}
-      </Text>
-      <Pressable
-        style={[initStyles.rollBtn, { backgroundColor: colors.primary.DEFAULT }]}
-        onPress={handleRoll}
-        accessibilityLabel="Roll initiative"
-      >
-        <Text style={initStyles.rollBtnText}>Roll</Text>
-      </Pressable>
     </View>
   );
 }
@@ -1019,42 +972,5 @@ const sectionHeaderStyles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '700',
     letterSpacing: 1,
-  },
-});
-
-const initStyles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 12,
-    gap: 8,
-  },
-  label: {
-    fontFamily: 'LibreBaskerville',
-    fontSize: 13,
-    flex: 1,
-  },
-  value: {
-    fontFamily: 'Cinzel',
-    fontSize: 22,
-    fontWeight: '700',
-    minWidth: 48,
-    textAlign: 'right',
-  },
-  rollBtn: {
-    borderRadius: 6,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    minHeight: 44,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  rollBtnText: {
-    fontFamily: 'Cinzel',
-    fontSize: 13,
-    color: '#FFFFFF',
-    fontWeight: '600',
   },
 });
