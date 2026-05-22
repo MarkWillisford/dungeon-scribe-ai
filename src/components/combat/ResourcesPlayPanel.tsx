@@ -26,23 +26,6 @@ export function ResourcesPlayPanel({
   const [customInputFor, setCustomInputFor] = useState<string | null>(null);
   const [customAmount, setCustomAmount] = useState('');
 
-  if (pools.length === 0) {
-    return (
-      <View testID={testID} style={styles.container}>
-        <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-          No resource pools defined
-        </Text>
-        <Pressable
-          style={[styles.restBtn, { borderColor: fantasy.gold }]}
-          onPress={onLongRest}
-          accessibilityLabel="Long Rest"
-        >
-          <Text style={[styles.restBtnText, { color: fantasy.gold }]}>Long Rest</Text>
-        </Pressable>
-      </View>
-    );
-  }
-
   const handleLongPress = (poolId: string) => {
     setCustomInputFor(poolId);
     setCustomAmount('');
@@ -65,6 +48,11 @@ export function ResourcesPlayPanel({
 
   return (
     <View testID={testID} style={styles.container}>
+      {pools.length === 0 && (
+        <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
+          No resource pools defined
+        </Text>
+      )}
       {pools.map((pool) => {
         const current = currentValues[pool.id] ?? pool.max;
         const isEditingThis = customInputFor === pool.id;
