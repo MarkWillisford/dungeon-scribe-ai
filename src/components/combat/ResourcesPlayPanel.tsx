@@ -9,6 +9,7 @@ interface ResourcesPlayPanelProps {
   onDecrementPool: (poolId: string, amount: number) => void;
   onNewEncounter: () => void;
   showNewEncounterButton: boolean;
+  onLongRest: () => void;
   testID?: string;
 }
 
@@ -18,6 +19,7 @@ export function ResourcesPlayPanel({
   onDecrementPool,
   onNewEncounter,
   showNewEncounterButton,
+  onLongRest,
   testID,
 }: ResourcesPlayPanelProps) {
   const { colors, fantasy } = useTheme();
@@ -30,6 +32,13 @@ export function ResourcesPlayPanel({
         <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
           No resource pools defined
         </Text>
+        <Pressable
+          style={[styles.restBtn, { borderColor: fantasy.gold }]}
+          onPress={onLongRest}
+          accessibilityLabel="Long Rest"
+        >
+          <Text style={[styles.restBtnText, { color: fantasy.gold }]}>Long Rest</Text>
+        </Pressable>
       </View>
     );
   }
@@ -145,6 +154,14 @@ export function ResourcesPlayPanel({
           <Text style={[styles.newEncounterBtnText, { color: fantasy.bronze }]}>New Encounter</Text>
         </Pressable>
       )}
+
+      <Pressable
+        style={[styles.restBtn, { borderColor: fantasy.gold }]}
+        onPress={onLongRest}
+        accessibilityLabel="Long Rest"
+      >
+        <Text style={[styles.restBtnText, { color: fantasy.gold }]}>Long Rest</Text>
+      </Pressable>
     </View>
   );
 }
@@ -238,6 +255,19 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   newEncounterBtnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 13,
+    fontWeight: '600',
+    letterSpacing: 0.5,
+  },
+  restBtn: {
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 12,
+    alignItems: 'center',
+    marginTop: 4,
+  },
+  restBtnText: {
     fontFamily: 'Cinzel',
     fontSize: 13,
     fontWeight: '600',

@@ -23,6 +23,7 @@ function makeProps(overrides: Partial<Parameters<typeof ResourcesPlayPanel>[0]> 
     currentValues: { ki: 8 },
     onDecrementPool: jest.fn(),
     onNewEncounter: jest.fn(),
+    onLongRest: jest.fn(),
     showNewEncounterButton: false,
     ...overrides,
   };
