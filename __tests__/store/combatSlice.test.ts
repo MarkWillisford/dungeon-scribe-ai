@@ -11,6 +11,7 @@ import combatReducer, {
   adjustNonlethal,
   toggleStaggered,
   applyNonlethalRest,
+  applyLongRest,
   applyRageEndHPLoss,
   nextRound,
   appendRoll,
@@ -969,6 +970,137 @@ describe('useSpellSlot', () => {
       undefined,
       initFromSession(makeSessionDoc({ currentHP: 20, nonlethalDamage: 3 })),
     );
+    expect(state.isStaggered).toBe(false);
+    expect(state.staggeredAutoApplied).toBe(false);
+  });
+});
+
+// ----------------------------------------------------------------
+// applyLongRest
+// ----------------------------------------------------------------
+
+describe('applyLongRest', () => {
+  const restAction = (overrides: Partial<Parameters<typeof applyLongRest>[0]> = {}) =>
+    applyLongRest({
+      maxHP: 20,
+      characterLevel: 5,
+      pools: [],
+      specialPoolRecovery: {},
+      ...overrides,
+    });
+
+  it('is a no-op when there is no active session (currentHP is null)', () => {
+    const state = combatReducer(undefined, restAction({ maxHP: 999 }));
+    expect(state.currentHP).toBeNull();
+  });
+
+  it('recovers at least 1 nonlethal at level 0', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, adjustNonlethal(5));
+    state = combatReducer(state, restAction({ characterLevel: 0 }));
+    expect(state.nonlethalDamage).toBe(4);
+  });
+
+  it('resets currentHP to maxHP', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, adjustHP({ delta: -8, maxHP: 20 }));
+    expect(state.currentHP).toBe(12);
+    state = combatReducer(state, restAction({ maxHP: 20 }));
+    expect(state.currentHP).toBe(20);
+  });
+
+  it('resets preparedSpellsCast to empty', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, togglePreparedSpell({ spellIndex: 0 }));
+    state = combatReducer(state, togglePreparedSpell({ spellIndex: 3 }));
+    state = combatReducer(state, restAction());
+    expect(state.preparedSpellsCast).toEqual({});
+  });
+
+  it('resets spellSlotsUsed to empty', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, useSpellSlot({ poolKey: 'wizard', level: 1 }));
+    state = combatReducer(state, useSpellSlot({ poolKey: 'wizard', level: 2 }));
+    state = combatReducer(state, restAction());
+    expect(state.spellSlotsUsed).toEqual({});
+  });
+
+  it('refills rechargeOn rest pools to max', () => {
+    const pool = makePool({ id: 'ki', max: 10, rechargeOn: 'rest' });
+    let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [pool] }));
+    state = combatReducer(state, decrementPool({ poolId: 'ki', amount: 7 }));
+    expect(state.resourcePools['ki']).toBe(3);
+    state = combatReducer(state, restAction({ pools: [pool] }));
+    expect(state.resourcePools['ki']).toBe(10);
+  });
+
+  it('does not refill per_encounter pools on rest', () => {
+    const pool = makePool({ id: 'stamina', max: 5, rechargeOn: 'per_encounter' });
+    let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [pool] }));
+    state = combatReducer(state, decrementPool({ poolId: 'stamina', amount: 3 }));
+    expect(state.resourcePools['stamina']).toBe(2);
+    state = combatReducer(state, restAction({ pools: [pool] }));
+    expect(state.resourcePools['stamina']).toBe(2);
+  });
+
+  it('applies formula recovery for special pools, not max reset', () => {
+    const pool = makePool({
+      id: 'arcane_reservoir',
+      max: 10,
+      rechargeOn: 'special',
+      restRecoveryFormula: '3 + casterLevel',
+    });
+    let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [pool] }));
+    state = combatReducer(state, decrementPool({ poolId: 'arcane_reservoir', amount: 8 }));
+    expect(state.resourcePools['arcane_reservoir']).toBe(2);
+    state = combatReducer(
+      state,
+      restAction({ pools: [pool], specialPoolRecovery: { arcane_reservoir: 5 } }),
+    );
+    expect(state.resourcePools['arcane_reservoir']).toBe(7);
+    expect(state.resourcePools['arcane_reservoir']).not.toBe(pool.max);
+  });
+
+  it('caps special pool recovery at max', () => {
+    const pool = makePool({ id: 'arcane_reservoir', max: 10, rechargeOn: 'special' });
+    let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [pool] }));
+    state = combatReducer(state, decrementPool({ poolId: 'arcane_reservoir', amount: 2 }));
+    expect(state.resourcePools['arcane_reservoir']).toBe(8);
+    state = combatReducer(
+      state,
+      restAction({ pools: [pool], specialPoolRecovery: { arcane_reservoir: 100 } }),
+    );
+    expect(state.resourcePools['arcane_reservoir']).toBe(10);
+  });
+
+  it('ignores special pools with no recovery entry', () => {
+    const pool = makePool({ id: 'grit', max: 3, rechargeOn: 'special' });
+    let state = combatReducer(undefined, initNewSession({ maxHP: 20, pools: [pool] }));
+    state = combatReducer(state, decrementPool({ poolId: 'grit', amount: 2 }));
+    expect(state.resourcePools['grit']).toBe(1);
+    state = combatReducer(state, restAction({ pools: [pool] }));
+    expect(state.resourcePools['grit']).toBe(1);
+  });
+
+  it('reduces nonlethal damage by character level', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, adjustNonlethal(10));
+    state = combatReducer(state, restAction({ characterLevel: 4 }));
+    expect(state.nonlethalDamage).toBe(6);
+  });
+
+  it('does not reduce nonlethal below zero', () => {
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, adjustNonlethal(3));
+    state = combatReducer(state, restAction({ characterLevel: 10 }));
+    expect(state.nonlethalDamage).toBe(0);
+  });
+
+  it('clears auto-applied staggered when nonlethal drops below max hp after rest', () => {
+    let state = combatReducer(undefined, initHP(10));
+    state = combatReducer(state, adjustNonlethal(10));
+    expect(state.isStaggered).toBe(true);
+    state = combatReducer(state, restAction({ maxHP: 10, characterLevel: 15 }));
     expect(state.isStaggered).toBe(false);
     expect(state.staggeredAutoApplied).toBe(false);
   });

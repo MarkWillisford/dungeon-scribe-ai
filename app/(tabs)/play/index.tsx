@@ -21,6 +21,7 @@ import {
   adjustNonlethal,
   appendRoll,
   applyRageEndHPLoss,
+  applyLongRest,
   applyNewEncounter,
   clearRollLog,
   decrementPool,
@@ -38,6 +39,7 @@ import {
   useSpellSlot as expendSpellSlot,
 } from '@store/slices/combatSlice';
 import { CombatService } from '@services/CombatService';
+import { FormulaService } from '@services/FormulaService';
 import { PlaySessionService } from '@services/PlaySessionService';
 import { endTurn, startTurn } from '@store/thunks/turnThunks';
 import { toggleCondition } from '@store/thunks/conditionThunks';
@@ -405,6 +407,44 @@ export default function CombatTrackerScreen() {
     sessionInitRef.current = false;
   }, [dispatch, userId, sessionCharacterId]);
 
+  const handleLongRest = useCallback(() => {
+    if (!character || currentHP === null) return;
+    Alert.alert(
+      'Long Rest',
+      'Take a long rest? This restores HP, spell slots, and per-rest resources.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Rest',
+          onPress: () => {
+            const formulaContext = FormulaService.buildContext(character);
+            const specialPoolRecovery: Record<string, number> = {};
+            for (const pool of character.resources) {
+              if (pool.rechargeOn === 'special' && pool.restRecoveryFormula) {
+                try {
+                  const amount = Math.floor(
+                    FormulaService.evaluate(pool.restRecoveryFormula, formulaContext),
+                  );
+                  if (amount > 0) specialPoolRecovery[pool.id] = amount;
+                } catch {
+                  // invalid formula — skip this pool
+                }
+              }
+            }
+            dispatch(
+              applyLongRest({
+                maxHP,
+                characterLevel: character.classes.totalLevel,
+                pools: character.resources,
+                specialPoolRecovery,
+              }),
+            );
+          },
+        },
+      ],
+    );
+  }, [character, currentHP, maxHP, dispatch]);
+
   // ── Render guards ────────────────────────────────────────────────────────────
 
   if (!character) {
@@ -578,6 +618,19 @@ export default function CombatTrackerScreen() {
             testID="defense-panel"
           />
 
+          <SectionHeader title="Resources" />
+          <ResourcesPlayPanel
+            pools={character.resources}
+            currentValues={resourcePools}
+            onDecrementPool={(poolId, amount) => dispatch(decrementPool({ poolId, amount }))}
+            onNewEncounter={() => dispatch(applyNewEncounter(character.resources))}
+            showNewEncounterButton={character.resources.some(
+              (p) => p.rechargeOn === 'per_encounter',
+            )}
+            onLongRest={handleLongRest}
+            testID="resources-play-panel"
+          />
+
           <View style={styles.spacerLarge} />
         </ScrollView>
       )}
@@ -715,9 +768,7 @@ function SessionPicker({
     <SafeAreaView style={[styles.safe, sth.safeBg]}>
       <View style={[pickerStyles.header, sth.headerBorder]}>
         <Text style={[pickerStyles.title, sth.goldText]}>Play Session</Text>
-        <Text style={[pickerStyles.subtitle, sth.secondaryText]}>
-          Choose a character to begin
-        </Text>
+        <Text style={[pickerStyles.subtitle, sth.secondaryText]}>Choose a character to begin</Text>
       </View>
 
       {characters.length === 0 ? (
@@ -779,9 +830,7 @@ function SessionPicker({
                     disabled={item.id !== activeCharacterId}
                     accessibilityLabel={`New session for ${item.name}`}
                   >
-                    <Text style={[pickerStyles.newBtnText, sth.secondaryText]}>
-                      New Session
-                    </Text>
+                    <Text style={[pickerStyles.newBtnText, sth.secondaryText]}>New Session</Text>
                   </Pressable>
                 </View>
               </View>

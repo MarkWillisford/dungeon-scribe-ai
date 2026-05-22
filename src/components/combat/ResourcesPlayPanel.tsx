@@ -9,6 +9,7 @@ interface ResourcesPlayPanelProps {
   onDecrementPool: (poolId: string, amount: number) => void;
   onNewEncounter: () => void;
   showNewEncounterButton: boolean;
+  onLongRest: () => void;
   testID?: string;
 }
 
@@ -18,21 +19,12 @@ export function ResourcesPlayPanel({
   onDecrementPool,
   onNewEncounter,
   showNewEncounterButton,
+  onLongRest,
   testID,
 }: ResourcesPlayPanelProps) {
   const { colors, fantasy } = useTheme();
   const [customInputFor, setCustomInputFor] = useState<string | null>(null);
   const [customAmount, setCustomAmount] = useState('');
-
-  if (pools.length === 0) {
-    return (
-      <View testID={testID} style={styles.container}>
-        <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-          No resource pools defined
-        </Text>
-      </View>
-    );
-  }
 
   const handleLongPress = (poolId: string) => {
     setCustomInputFor(poolId);
@@ -56,6 +48,11 @@ export function ResourcesPlayPanel({
 
   return (
     <View testID={testID} style={styles.container}>
+      {pools.length === 0 && (
+        <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
+          No resource pools defined
+        </Text>
+      )}
       {pools.map((pool) => {
         const current = currentValues[pool.id] ?? pool.max;
         const isEditingThis = customInputFor === pool.id;
@@ -145,6 +142,14 @@ export function ResourcesPlayPanel({
           <Text style={[styles.newEncounterBtnText, { color: fantasy.bronze }]}>New Encounter</Text>
         </Pressable>
       )}
+
+      <Pressable
+        style={[styles.restBtn, { borderColor: fantasy.gold }]}
+        onPress={onLongRest}
+        accessibilityLabel="Long Rest"
+      >
+        <Text style={[styles.restBtnText, { color: fantasy.gold }]}>Long Rest</Text>
+      </Pressable>
     </View>
   );
 }
@@ -238,6 +243,19 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   newEncounterBtnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 13,
+    fontWeight: '600',
+    letterSpacing: 0.5,
+  },
+  restBtn: {
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 12,
+    alignItems: 'center',
+    marginTop: 4,
+  },
+  restBtnText: {
     fontFamily: 'Cinzel',
     fontSize: 13,
     fontWeight: '600',

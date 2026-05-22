@@ -367,6 +367,59 @@ const combatSlice = createSlice({
       }
       state.spellSlotsUsed[poolKey][level] = (state.spellSlotsUsed[poolKey][level] ?? 0) + 1;
     },
+
+    applyLongRest(
+      state,
+      action: PayloadAction<{
+        maxHP: number;
+        characterLevel: number;
+        pools: ResourcePool[];
+        specialPoolRecovery: Record<string, number>;
+      }>,
+    ) {
+      if (state.currentHP === null) return;
+      const { maxHP, characterLevel, pools, specialPoolRecovery } = action.payload;
+
+      // Full HP restoration
+      state.currentHP = maxHP;
+      state.tempHP = 0;
+      state.round = 0;
+
+      // Non-lethal recovery: 1 HP per character level
+      const recovery = NonLethalService.restRecoveryAmount(characterLevel);
+      state.nonlethalDamage = Math.max(0, state.nonlethalDamage - recovery);
+
+      // Re-derive staggered after HP and nonlethal changes
+      if (state.currentHP > 0) {
+        if (NonLethalService.checkStaggered(state.nonlethalDamage, state.currentHP)) {
+          state.isStaggered = true;
+          state.staggeredAutoApplied = true;
+        } else if (state.staggeredAutoApplied) {
+          state.isStaggered = false;
+          state.staggeredAutoApplied = false;
+        }
+      } else if (state.staggeredAutoApplied) {
+        state.isStaggered = false;
+        state.staggeredAutoApplied = false;
+      }
+
+      // Reset spell tracking
+      state.preparedSpellsCast = {};
+      state.spellSlotsUsed = {};
+
+      // Resource pools
+      for (const pool of pools) {
+        if (pool.rechargeOn === 'rest') {
+          state.resourcePools[pool.id] = pool.max;
+        } else if (pool.rechargeOn === 'special') {
+          const amount = specialPoolRecovery[pool.id];
+          if (amount !== undefined && amount > 0) {
+            const current = state.resourcePools[pool.id] ?? pool.max;
+            state.resourcePools[pool.id] = Math.min(pool.max, current + amount);
+          }
+        }
+      }
+    },
   },
 });
 
@@ -404,6 +457,7 @@ export const {
   initFromSession,
   togglePreparedSpell,
   useSpellSlot,
+  applyLongRest,
 } = combatSlice.actions;
 
 export default combatSlice.reducer;
