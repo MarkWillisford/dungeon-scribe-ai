@@ -21,7 +21,9 @@ import {
   adjustNonlethal,
   appendRoll,
   applyRageEndHPLoss,
+  applyNewEncounter,
   clearRollLog,
+  decrementPool,
   initFromSession,
   initNewSession,
   nextRound,
@@ -44,6 +46,7 @@ import { BUFF_PRESETS } from '@/data/buffs/presets';
 import { HPTracker } from '@/components/combat/HPTracker';
 import { AttackPanel } from '@/components/combat/AttackPanel';
 import { DefensePanel } from '@/components/combat/DefensePanel';
+import { ResourcesPlayPanel } from '@/components/combat/ResourcesPlayPanel';
 import { BuffsPanel } from '@/components/combat/BuffsPanel';
 import { CombatAbilityToggles } from '@/components/combat/CombatAbilityToggles';
 import { RollLog } from '@/components/combat/RollLog';
@@ -76,6 +79,7 @@ export default function CombatTrackerScreen() {
     round,
     rollLog,
     buffLibrary,
+    resourcePools,
   } = useAppSelector((s) => s.combat);
 
   const [activeTab, setActiveTab] = useState<CombatTab>('playsheet');
@@ -182,6 +186,45 @@ export default function CombatTrackerScreen() {
     sessionCharacterId,
   ]);
 
+  // Auto-save: flush pending write when app goes to background
+  useEffect(() => {
+    if (currentHP === null) return undefined;
+    const sub = AppState.addEventListener('change', (state: AppStateStatus) => {
+      if (state === 'background' || state === 'inactive') {
+        void PlaySessionService.flushPendingUpdate();
+      }
+    });
+    return () => sub.remove();
+  }, [currentHP]);
+
+  // Auto-save: schedule debounced write on every meaningful state change
+  useEffect(() => {
+    if (!character || !userId || currentHP === null) return;
+    if (!sessionCharacterId) return;
+    const sessionData = {
+      currentHP,
+      tempHP,
+      nonlethalDamage,
+      activeBuffs,
+      combatAbilities,
+      round,
+      resourcePools,
+    };
+    PlaySessionService.scheduleDebouncedUpdate(userId, sessionCharacterId, sessionData);
+  }, [
+    character,
+    userId,
+    currentHP,
+    tempHP,
+    nonlethalDamage,
+    activeBuffs,
+    combatAbilities,
+    round,
+    resourcePools,
+    sessionCharacterId,
+  ]);
+
+  // Computed values used in tracker
   const maxHP = useMemo(() => {
     if (!character) return 0;
     const hp = character.combatStats.hitPoints;
@@ -425,6 +468,7 @@ export default function CombatTrackerScreen() {
           style={styles.tabContent}
           contentContainerStyle={styles.tabContentInner}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
         >
           <SectionHeader title="Hit Points" />
           <HPTracker
