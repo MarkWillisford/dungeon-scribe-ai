@@ -27,6 +27,10 @@ interface CombatState {
 
   // Resource pool current values (pool id → current remaining)
   resourcePools: Record<string, number>;
+
+  // Spell tracking
+  preparedSpellsCast: Record<string, boolean>;
+  spellSlotsUsed: Record<string, number[]>;
 }
 
 const defaultCombatAbilities: CombatAbilityState = {
@@ -52,6 +56,8 @@ const initialState: CombatState = {
   buffLibrary: [],
   buffPackages: [],
   resourcePools: {},
+  preparedSpellsCast: {},
+  spellSlotsUsed: {},
 };
 
 const combatSlice = createSlice({
@@ -227,6 +233,8 @@ const combatSlice = createSlice({
       state.nonlethalDamage = 0;
       state.round = 0;
       state.resourcePools = {};
+      state.preparedSpellsCast = {};
+      state.spellSlotsUsed = {};
       // Keep roll log and buff library — they persist across sessions
     },
 
@@ -240,6 +248,8 @@ const combatSlice = createSlice({
       state.combatAbilities = { ...defaultCombatAbilities };
       state.round = 0;
       state.resourcePools = {};
+      state.preparedSpellsCast = {};
+      state.spellSlotsUsed = {};
       for (const pool of action.payload.pools ?? []) {
         state.resourcePools[pool.id] = pool.max;
       }
@@ -254,7 +264,23 @@ const combatSlice = createSlice({
       state.combatAbilities = { ...defaultCombatAbilities, ...(s.combatAbilities ?? {}) };
       state.round = s.round;
       state.resourcePools = s.resourcePools ?? {};
+      state.preparedSpellsCast = s.preparedSpellsCast ?? {};
+      state.spellSlotsUsed = s.spellSlotsUsed ?? {};
       // Roll log and buff library are not session-scoped — leave them as-is
+    },
+
+    togglePreparedSpell(state, action: PayloadAction<{ spellIndex: number }>) {
+      const key = String(action.payload.spellIndex);
+      state.preparedSpellsCast[key] = !state.preparedSpellsCast[key];
+    },
+
+    useSpellSlot(state, action: PayloadAction<{ poolKey: string; level: number }>) {
+      const { poolKey, level } = action.payload;
+      if (level < 0 || !Number.isInteger(level)) return;
+      if (!state.spellSlotsUsed[poolKey]) {
+        state.spellSlotsUsed[poolKey] = [];
+      }
+      state.spellSlotsUsed[poolKey][level] = (state.spellSlotsUsed[poolKey][level] ?? 0) + 1;
     },
   },
 });

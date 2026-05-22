@@ -83,6 +83,8 @@ export default function CombatTrackerScreen() {
     rollLog,
     buffLibrary,
     resourcePools,
+    preparedSpellsCast,
+    spellSlotsUsed,
   } = useAppSelector((s) => s.combat);
 
   const [activeTab, setActiveTab] = useState<CombatTab>('playsheet');
@@ -126,7 +128,7 @@ export default function CombatTrackerScreen() {
     PlaySessionService.listActiveSessionCharacterIds(userId)
       .then(async (ids) => {
         setActiveSessionIds(ids);
-        if (ids.length === 1 && ids[0] === character.info.id) {
+        if (ids.length === 1 && ids[0] === character?.info.id) {
           const sessionDoc = await PlaySessionService.get(userId, ids[0]);
           if (sessionDoc) {
             dispatch(initFromSession(sessionDoc));
@@ -175,6 +177,8 @@ export default function CombatTrackerScreen() {
       activeBuffs,
       combatAbilities,
       round,
+      preparedSpellsCast,
+      spellSlotsUsed,
     };
     PlaySessionService.scheduleDebouncedUpdate(userId, sessionCharacterId, sessionData);
   }, [
@@ -186,6 +190,8 @@ export default function CombatTrackerScreen() {
     activeBuffs,
     combatAbilities,
     round,
+    preparedSpellsCast,
+    spellSlotsUsed,
     sessionCharacterId,
   ]);
 
@@ -300,6 +306,7 @@ export default function CombatTrackerScreen() {
                     combatExpertisePenalty: 1,
                   },
                   spellSlotsUsed: {},
+                  preparedSpellsCast: {},
                   resourcePools: {},
                   round: 0,
                 });
@@ -897,6 +904,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     lineHeight: 22,
+  },
+  footerSpacer: {
+    height: 32,
   },
 });
 
