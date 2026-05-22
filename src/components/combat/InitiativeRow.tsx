@@ -14,11 +14,12 @@ export function InitiativeRow({ initiative, onRollRecorded, testID }: Initiative
   const { colors, fantasy } = useTheme();
 
   const handleRoll = () => {
+    const now = Date.now();
     const raw = DiceService.rollD20();
     const total = raw + initiative;
     const record: RollRecord = {
-      id: `init_${Date.now()}`,
-      timestamp: Date.now(),
+      id: `init_${now}`,
+      timestamp: now,
       type: 'initiative',
       label: 'Initiative',
       diceNotation: DiceService.buildNotation(1, 20, initiative),
