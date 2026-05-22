@@ -33,12 +33,13 @@ import {
   setBuffLibrary,
   toggleBuff,
   toggleCombatAbility,
+  togglePreparedSpell,
+  useSpellSlot as expendSpellSlot,
 } from '@store/slices/combatSlice';
 import { CombatService } from '@services/CombatService';
 import { DiceService } from '@services/DiceService';
 import { PlaySessionService } from '@services/PlaySessionService';
 import { RollRecord, Buff, SavedBuff } from '@/types/buff';
-import type { PlaySessionDoc } from '@/types/playSession';
 import { BuffedTotals } from '@/types/combat';
 import type { CharacterSummary } from '@/types/character';
 import { BUFF_PRESETS } from '@/data/buffs/presets';
@@ -48,16 +49,18 @@ import { AttackPanel } from '@/components/combat/AttackPanel';
 import { DefensePanel } from '@/components/combat/DefensePanel';
 import { ResourcesPlayPanel } from '@/components/combat/ResourcesPlayPanel';
 import { BuffsPanel } from '@/components/combat/BuffsPanel';
+import { SpellsPanel } from '@/components/combat/SpellsPanel';
 import { CombatAbilityToggles } from '@/components/combat/CombatAbilityToggles';
 import { RollLog } from '@/components/combat/RollLog';
 import { DiceRoller } from '@/components/dice/DiceRoller';
 
-type CombatTab = 'playsheet' | 'buffs' | 'dice' | 'log';
+type CombatTab = 'playsheet' | 'buffs' | 'spells' | 'dice' | 'log';
 type PlayView = 'loading' | 'picker' | 'tracker';
 
 const TAB_LABELS: { key: CombatTab; label: string }[] = [
   { key: 'playsheet', label: 'Playsheet' },
   { key: 'buffs', label: 'Buffs' },
+  { key: 'spells', label: 'Spells' },
   { key: 'dice', label: 'Dice' },
   { key: 'log', label: 'Log' },
 ];
@@ -80,6 +83,8 @@ export default function CombatTrackerScreen() {
     rollLog,
     buffLibrary,
     resourcePools,
+    preparedSpellsCast,
+    spellSlotsUsed,
   } = useAppSelector((s) => s.combat);
 
   const [activeTab, setActiveTab] = useState<CombatTab>('playsheet');
@@ -123,7 +128,7 @@ export default function CombatTrackerScreen() {
     PlaySessionService.listActiveSessionCharacterIds(userId)
       .then(async (ids) => {
         setActiveSessionIds(ids);
-        if (ids.length === 1) {
+        if (ids.length === 1 && ids[0] === character?.info.id) {
           const sessionDoc = await PlaySessionService.get(userId, ids[0]);
           if (sessionDoc) {
             dispatch(initFromSession(sessionDoc));
@@ -135,7 +140,7 @@ export default function CombatTrackerScreen() {
       })
       .catch(() => setSessionCheckDone(true));
     // eslint-disable-next-line react-hooks/exhaustive-deps -- currentHP intentionally excluded: sessionInitRef guards against re-running; dispatch is stable
-  }, [userId, dispatch]);
+  }, [userId, character, dispatch]);
 
   // Restore sessionCharacterId after a remount during an active session.
   // Component state resets to null on remount; this re-derives the key so
@@ -172,6 +177,8 @@ export default function CombatTrackerScreen() {
       activeBuffs,
       combatAbilities,
       round,
+      preparedSpellsCast,
+      spellSlotsUsed,
     };
     PlaySessionService.scheduleDebouncedUpdate(userId, sessionCharacterId, sessionData);
   }, [
@@ -183,6 +190,8 @@ export default function CombatTrackerScreen() {
     activeBuffs,
     combatAbilities,
     round,
+    preparedSpellsCast,
+    spellSlotsUsed,
     sessionCharacterId,
   ]);
 
@@ -297,6 +306,7 @@ export default function CombatTrackerScreen() {
                     combatExpertisePenalty: 1,
                   },
                   spellSlotsUsed: {},
+                  preparedSpellsCast: {},
                   resourcePools: {},
                   round: 0,
                 });
@@ -315,6 +325,7 @@ export default function CombatTrackerScreen() {
 
   const handleResumeSession = useCallback(
     async (characterId: string) => {
+      if (!character || characterId !== character.info.id) return;
       if (!userId) return;
       if (!character || characterId !== character.info.id) {
         Alert.alert(
@@ -557,6 +568,25 @@ export default function CombatTrackerScreen() {
         </ScrollView>
       )}
 
+      {activeTab === 'spells' && (
+        <ScrollView
+          style={styles.tabContent}
+          contentContainerStyle={styles.tabContentInner}
+          showsVerticalScrollIndicator={false}
+        >
+          <SpellsPanel
+            pools={character.spellcasting.pools}
+            preparedSpells={character.spellcasting.preparedSpells}
+            preparedSpellsCast={preparedSpellsCast}
+            spellSlotsUsed={spellSlotsUsed}
+            onTogglePreparedSpell={(spellIndex) => dispatch(togglePreparedSpell({ spellIndex }))}
+            onUseSpellSlot={(poolKey, level) => dispatch(expendSpellSlot({ poolKey, level }))}
+            testID="spells-panel"
+          />
+          <View style={styles.footerSpacer} />
+        </ScrollView>
+      )}
+
       {activeTab === 'dice' && (
         <View style={styles.tabContent}>
           <DiceRoller onRollRecorded={handleRollRecorded} testID="dice-roller" />
@@ -657,9 +687,13 @@ function SessionPicker({
                 <View style={pickerStyles.cardActions}>
                   {hasSession && (
                     <Pressable
-                      style={[pickerStyles.resumeBtn, { backgroundColor: colors.primary.DEFAULT }]}
+                      style={[
+                        pickerStyles.resumeBtn,
+                        { backgroundColor: colors.primary.DEFAULT },
+                        item.id !== activeCharacterId && { opacity: 0.4 },
+                      ]}
                       onPress={() => void handleResume(item.id)}
-                      disabled={isLoading}
+                      disabled={isLoading || item.id !== activeCharacterId}
                       accessibilityLabel={`Resume session for ${item.name}`}
                     >
                       {isLoading ? (
@@ -870,6 +904,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     lineHeight: 22,
+  },
+  footerSpacer: {
+    height: 32,
   },
 });
 

@@ -21,6 +21,8 @@ import combatReducer, {
   resetCombat,
   initNewSession,
   initFromSession,
+  togglePreparedSpell,
+  useSpellSlot,
 } from '@store/slices/combatSlice';
 import { BonusType } from '@/types/base';
 import { Buff, RollRecord, SavedBuff } from '@/types/buff';
@@ -507,7 +509,8 @@ function makeSessionDoc(overrides: Partial<PlaySessionDoc> = {}): PlaySessionDoc
       combatExpertise: false,
       combatExpertisePenalty: 2,
     },
-    spellSlotsUsed: { 1: 2, 2: 1 },
+    spellSlotsUsed: { wizard: [0, 2, 1] },
+    preparedSpellsCast: { '0': true },
     resourcePools: { rage: 5 },
     round: 7,
     createdAt: '2026-01-01T00:00:00.000Z',
@@ -732,5 +735,105 @@ describe('initFromSession resource pools', () => {
     delete doc.resourcePools;
     const state = combatReducer(undefined, initFromSession(doc as unknown as PlaySessionDoc));
     expect(state.resourcePools).toEqual({});
+  });
+
+  it('restores preparedSpellsCast from the session doc', () => {
+    const state = combatReducer(undefined, initFromSession(makeSessionDoc()));
+    expect(state.preparedSpellsCast['0']).toBe(true);
+  });
+
+  it('restores spellSlotsUsed from the session doc', () => {
+    const state = combatReducer(undefined, initFromSession(makeSessionDoc()));
+    expect(state.spellSlotsUsed['wizard']).toEqual([0, 2, 1]);
+  });
+
+  it('defaults preparedSpellsCast and spellSlotsUsed to empty objects when absent', () => {
+    const doc = makeSessionDoc();
+    const { preparedSpellsCast: _psc, spellSlotsUsed: _ssu, ...rest } = doc;
+    const state = combatReducer(undefined, initFromSession(rest as typeof doc));
+    expect(state.preparedSpellsCast).toEqual({});
+    expect(state.spellSlotsUsed).toEqual({});
+  });
+});
+
+// ----------------------------------------------------------------
+// togglePreparedSpell
+// ----------------------------------------------------------------
+
+describe('togglePreparedSpell', () => {
+  it('marks a spell as cast (false → true)', () => {
+    const state = combatReducer(undefined, togglePreparedSpell({ spellIndex: 0 }));
+    expect(state.preparedSpellsCast['0']).toBe(true);
+  });
+
+  it('unmarks a cast spell (true → false)', () => {
+    let state = combatReducer(undefined, togglePreparedSpell({ spellIndex: 2 }));
+    state = combatReducer(state, togglePreparedSpell({ spellIndex: 2 }));
+    expect(state.preparedSpellsCast['2']).toBe(false);
+  });
+
+  it('toggles different spell indices independently', () => {
+    let state = combatReducer(undefined, togglePreparedSpell({ spellIndex: 0 }));
+    state = combatReducer(state, togglePreparedSpell({ spellIndex: 3 }));
+    expect(state.preparedSpellsCast['0']).toBe(true);
+    expect(state.preparedSpellsCast['3']).toBe(true);
+    state = combatReducer(state, togglePreparedSpell({ spellIndex: 0 }));
+    expect(state.preparedSpellsCast['0']).toBe(false);
+    expect(state.preparedSpellsCast['3']).toBe(true);
+  });
+
+  it('starts from false when the key is absent', () => {
+    const state = combatReducer(undefined, togglePreparedSpell({ spellIndex: 99 }));
+    expect(state.preparedSpellsCast['99']).toBe(true);
+  });
+});
+
+// ----------------------------------------------------------------
+// useSpellSlot
+// ----------------------------------------------------------------
+
+describe('useSpellSlot', () => {
+  it('increments used count for the given pool and level', () => {
+    const state = combatReducer(undefined, useSpellSlot({ poolKey: 'sorcerer', level: 2 }));
+    expect(state.spellSlotsUsed['sorcerer'][2]).toBe(1);
+  });
+
+  it('increments again on repeated use', () => {
+    let state = combatReducer(undefined, useSpellSlot({ poolKey: 'bard', level: 1 }));
+    state = combatReducer(state, useSpellSlot({ poolKey: 'bard', level: 1 }));
+    state = combatReducer(state, useSpellSlot({ poolKey: 'bard', level: 1 }));
+    expect(state.spellSlotsUsed['bard'][1]).toBe(3);
+  });
+
+  it('initialises the pool entry when first used', () => {
+    const state = combatReducer(undefined, useSpellSlot({ poolKey: 'wizard', level: 3 }));
+    expect(state.spellSlotsUsed['wizard']).toBeDefined();
+    expect(state.spellSlotsUsed['wizard'][3]).toBe(1);
+  });
+
+  it('tracks different pools independently', () => {
+    let state = combatReducer(undefined, useSpellSlot({ poolKey: 'cleric', level: 1 }));
+    state = combatReducer(state, useSpellSlot({ poolKey: 'wizard', level: 1 }));
+    state = combatReducer(state, useSpellSlot({ poolKey: 'wizard', level: 1 }));
+    expect(state.spellSlotsUsed['cleric'][1]).toBe(1);
+    expect(state.spellSlotsUsed['wizard'][1]).toBe(2);
+  });
+
+  it('tracks different levels within the same pool independently', () => {
+    let state = combatReducer(undefined, useSpellSlot({ poolKey: 'sorcerer', level: 1 }));
+    state = combatReducer(state, useSpellSlot({ poolKey: 'sorcerer', level: 2 }));
+    state = combatReducer(state, useSpellSlot({ poolKey: 'sorcerer', level: 2 }));
+    expect(state.spellSlotsUsed['sorcerer'][1]).toBe(1);
+    expect(state.spellSlotsUsed['sorcerer'][2]).toBe(2);
+  });
+
+  it('ignores negative level and does not mutate state', () => {
+    const state = combatReducer(undefined, useSpellSlot({ poolKey: 'wizard', level: -1 }));
+    expect(state.spellSlotsUsed['wizard']).toBeUndefined();
+  });
+
+  it('ignores non-integer level and does not mutate state', () => {
+    const state = combatReducer(undefined, useSpellSlot({ poolKey: 'bard', level: 1.5 }));
+    expect(state.spellSlotsUsed['bard']).toBeUndefined();
   });
 });

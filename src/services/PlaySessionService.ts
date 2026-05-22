@@ -159,7 +159,7 @@ export class PlaySessionService {
       ? (data.combatAbilities as unknown as PlaySessionDoc['combatAbilities'])
       : PlaySessionService.defaultCombatAbilities();
     const spellSlotsUsed = PlaySessionService.isPlainObject(data.spellSlotsUsed)
-      ? (data.spellSlotsUsed as Record<number, number>)
+      ? (data.spellSlotsUsed as Record<string, number[]>)
       : {};
     const resourcePools = PlaySessionService.isPlainObject(data.resourcePools)
       ? (data.resourcePools as Record<string, number>)
@@ -173,6 +173,9 @@ export class PlaySessionService {
       activeBuffs,
       combatAbilities,
       spellSlotsUsed,
+      preparedSpellsCast: PlaySessionService.isPlainObject(data.preparedSpellsCast)
+        ? (data.preparedSpellsCast as Record<string, boolean>)
+        : {},
       resourcePools,
       round: (data.round as number) ?? 0,
       createdAt: PlaySessionService.timestampToString(data.createdAt),
