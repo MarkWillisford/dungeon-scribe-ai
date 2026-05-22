@@ -34,6 +34,7 @@ import {
   toggleBuff,
   toggleCombatAbility,
   togglePreparedSpell,
+  toggleStaggered,
   useSpellSlot as expendSpellSlot,
 } from '@store/slices/combatSlice';
 import { CombatService } from '@services/CombatService';
@@ -81,6 +82,8 @@ export default function CombatTrackerScreen() {
     currentHP,
     tempHP,
     nonlethalDamage,
+    isStaggered,
+    staggeredAutoApplied,
     round,
     rollLog,
     buffLibrary,
@@ -202,7 +205,9 @@ export default function CombatTrackerScreen() {
     if (currentHP === null) return undefined;
     const sub = AppState.addEventListener('change', (state: AppStateStatus) => {
       if (state === 'background' || state === 'inactive') {
-        void PlaySessionService.flushPendingUpdate();
+        void PlaySessionService.flushPendingUpdate().catch((error) => {
+          console.error('Failed to flush pending play session updates', error);
+        });
       }
     });
     return () => sub.remove();
@@ -375,6 +380,7 @@ export default function CombatTrackerScreen() {
     setSessionCharacterId(null);
     sessionInitRef.current = false;
     setSessionCheckDone(true);
+    sessionInitRef.current = false;
   }, [dispatch, userId, sessionCharacterId]);
 
   // ── Render guards ────────────────────────────────────────────────────────────
@@ -498,9 +504,12 @@ export default function CombatTrackerScreen() {
             tempHP={tempHP}
             nonlethalDamage={nonlethalDamage}
             conScore={conScore}
+            isStaggered={isStaggered}
+            staggeredAutoApplied={staggeredAutoApplied}
             onAdjustHP={(delta) => dispatch(adjustHP({ delta, maxHP }))}
             onAddTempHP={(amount) => dispatch(addTempHP(amount))}
             onAdjustNonlethal={(delta) => dispatch(adjustNonlethal(delta))}
+            onToggleStaggered={() => dispatch(toggleStaggered())}
             testID="hp-tracker"
           />
 

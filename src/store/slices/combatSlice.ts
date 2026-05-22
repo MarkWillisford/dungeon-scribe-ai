@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { Buff, BuffPackage, CombatAbilityState, RollRecord, SavedBuff } from '@/types/buff';
 import type { PlaySessionDoc } from '@/types/playSession';
 import type { ResourcePool } from '@/types/resources';
+import { NonLethalService } from '@/services/NonLethalService';
 
 interface CombatState {
   // Session buffs (lost when combat ends or app closes)
@@ -14,6 +15,11 @@ interface CombatState {
   currentHP: number | null;
   tempHP: number;
   nonlethalDamage: number;
+
+  // Staggered condition (PF1e: non-lethal >= current HP)
+  isStaggered: boolean;
+  // True when Staggered was set by the auto-trigger (allows auto-clear on recovery)
+  staggeredAutoApplied: boolean;
 
   // Round counter
   round: number;
@@ -51,6 +57,8 @@ const initialState: CombatState = {
   currentHP: null,
   tempHP: 0,
   nonlethalDamage: 0,
+  isStaggered: false,
+  staggeredAutoApplied: false,
   round: 0,
   rollLog: [],
   buffLibrary: [],
@@ -116,6 +124,8 @@ const combatSlice = createSlice({
       state.currentHP = action.payload;
       state.tempHP = 0;
       state.nonlethalDamage = 0;
+      state.isStaggered = false;
+      state.staggeredAutoApplied = false;
     },
 
     setCurrentHP(state, action: PayloadAction<number>) {
@@ -138,6 +148,19 @@ const combatSlice = createSlice({
         }
         state.currentHP = state.currentHP - remaining;
       }
+      // Re-check staggered threshold after HP change
+      if (state.currentHP > 0) {
+        if (NonLethalService.checkStaggered(state.nonlethalDamage, state.currentHP)) {
+          state.isStaggered = true;
+          state.staggeredAutoApplied = true;
+        } else if (state.staggeredAutoApplied) {
+          state.isStaggered = false;
+          state.staggeredAutoApplied = false;
+        }
+      } else if (state.staggeredAutoApplied) {
+        state.isStaggered = false;
+        state.staggeredAutoApplied = false;
+      }
     },
 
     addTempHP(state, action: PayloadAction<number>) {
@@ -151,12 +174,56 @@ const combatSlice = createSlice({
 
     adjustNonlethal(state, action: PayloadAction<number>) {
       state.nonlethalDamage = Math.max(0, state.nonlethalDamage + action.payload);
+      // Auto-apply/clear staggered based on threshold
+      if (state.currentHP !== null && state.currentHP > 0) {
+        if (NonLethalService.checkStaggered(state.nonlethalDamage, state.currentHP)) {
+          state.isStaggered = true;
+          state.staggeredAutoApplied = true;
+        } else if (state.staggeredAutoApplied) {
+          state.isStaggered = false;
+          state.staggeredAutoApplied = false;
+        }
+      }
+    },
+
+    toggleStaggered(state) {
+      if (state.isStaggered) {
+        state.isStaggered = false;
+        state.staggeredAutoApplied = false;
+      } else {
+        state.isStaggered = true;
+      }
+    },
+
+    applyNonlethalRest(state, action: PayloadAction<{ characterLevel: number }>) {
+      const recovery = NonLethalService.restRecoveryAmount(action.payload.characterLevel);
+      state.nonlethalDamage = Math.max(0, state.nonlethalDamage - recovery);
+      // Re-check staggered threshold after recovery
+      if (state.currentHP !== null && state.currentHP > 0 && state.staggeredAutoApplied) {
+        if (state.nonlethalDamage < state.currentHP) {
+          state.isStaggered = false;
+          state.staggeredAutoApplied = false;
+        }
+      }
     },
 
     // Called when Rage ends — reduces HP due to CON loss
     applyRageEndHPLoss(state, action: PayloadAction<{ newCurrentHP: number; newTempHP: number }>) {
       state.currentHP = action.payload.newCurrentHP;
       state.tempHP = action.payload.newTempHP;
+      // Re-check staggered threshold after HP change from rage ending
+      if (state.currentHP > 0) {
+        if (NonLethalService.checkStaggered(state.nonlethalDamage, state.currentHP)) {
+          state.isStaggered = true;
+          state.staggeredAutoApplied = true;
+        } else if (state.staggeredAutoApplied) {
+          state.isStaggered = false;
+          state.staggeredAutoApplied = false;
+        }
+      } else if (state.staggeredAutoApplied) {
+        state.isStaggered = false;
+        state.staggeredAutoApplied = false;
+      }
     },
 
     // ---- Round management ----
@@ -240,6 +307,8 @@ const combatSlice = createSlice({
       state.currentHP = null;
       state.tempHP = 0;
       state.nonlethalDamage = 0;
+      state.isStaggered = false;
+      state.staggeredAutoApplied = false;
       state.round = 0;
       state.resourcePools = {};
       state.preparedSpellsCast = {};
@@ -253,6 +322,8 @@ const combatSlice = createSlice({
       state.currentHP = action.payload.maxHP;
       state.tempHP = 0;
       state.nonlethalDamage = 0;
+      state.isStaggered = false;
+      state.staggeredAutoApplied = false;
       state.activeBuffs = [];
       state.combatAbilities = { ...defaultCombatAbilities };
       state.round = 0;
@@ -275,6 +346,11 @@ const combatSlice = createSlice({
       state.resourcePools = s.resourcePools ?? {};
       state.preparedSpellsCast = s.preparedSpellsCast ?? {};
       state.spellSlotsUsed = s.spellSlotsUsed ?? {};
+      // Re-derive staggered from restored HP state
+      const staggered =
+        s.currentHP !== null && NonLethalService.checkStaggered(s.nonlethalDamage, s.currentHP);
+      state.isStaggered = staggered;
+      state.staggeredAutoApplied = staggered;
       // Roll log and buff library are not session-scoped — leave them as-is
     },
 
@@ -308,6 +384,8 @@ export const {
   addTempHP,
   clearTempHP,
   adjustNonlethal,
+  toggleStaggered,
+  applyNonlethalRest,
   applyRageEndHPLoss,
   nextRound,
   setRound,
