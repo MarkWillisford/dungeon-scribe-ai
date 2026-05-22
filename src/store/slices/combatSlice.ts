@@ -199,6 +199,7 @@ const combatSlice = createSlice({
         }
         state.isDying = true;
         state.dyingAutoApplied = true;
+        state.isStabilized = false;
       }
     },
 
@@ -284,6 +285,7 @@ const combatSlice = createSlice({
         }
         state.isDying = true;
         state.dyingAutoApplied = true;
+        state.isStabilized = false;
       }
     },
 
