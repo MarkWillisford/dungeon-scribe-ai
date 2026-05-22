@@ -188,47 +188,6 @@ export default function CombatTrackerScreen() {
     return () => sub.remove();
   }, [currentHP]);
 
-  useEffect(() => {
-    if (!character || !userId || currentHP === null) return;
-    if (!sessionCharacterId) return;
-    const sessionData = {
-      currentHP,
-      tempHP,
-      nonlethalDamage,
-      activeBuffs,
-      combatAbilities,
-      round,
-      preparedSpellsCast,
-      spellSlotsUsed,
-    };
-    PlaySessionService.scheduleDebouncedUpdate(userId, sessionCharacterId, sessionData);
-  }, [
-    character,
-    userId,
-    currentHP,
-    tempHP,
-    nonlethalDamage,
-    activeBuffs,
-    combatAbilities,
-    round,
-    preparedSpellsCast,
-    spellSlotsUsed,
-    sessionCharacterId,
-  ]);
-
-  // Auto-save: flush pending write when app goes to background
-  useEffect(() => {
-    if (currentHP === null) return undefined;
-    const sub = AppState.addEventListener('change', (state: AppStateStatus) => {
-      if (state === 'background' || state === 'inactive') {
-        void PlaySessionService.flushPendingUpdate().catch((error) => {
-          console.error('Failed to flush pending play session updates', error);
-        });
-      }
-    });
-    return () => sub.remove();
-  }, [currentHP]);
-
   // Auto-save: schedule debounced write on every meaningful state change
   useEffect(() => {
     if (!character || !userId || currentHP === null) return;
@@ -241,6 +200,8 @@ export default function CombatTrackerScreen() {
       activeBuffs,
       combatAbilities,
       round,
+      preparedSpellsCast,
+      spellSlotsUsed,
       resourcePools,
     };
     PlaySessionService.scheduleDebouncedUpdate(userId, sessionCharacterId, sessionData);
@@ -254,6 +215,8 @@ export default function CombatTrackerScreen() {
     activeBuffs,
     combatAbilities,
     round,
+    preparedSpellsCast,
+    spellSlotsUsed,
     resourcePools,
     sessionCharacterId,
   ]);

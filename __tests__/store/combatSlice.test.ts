@@ -1160,6 +1160,16 @@ describe('Dying — auto-set on HP drop below 0', () => {
     state = combatReducer(state, adjustHP({ delta: 10, maxHP: 20 }));
     expect(state.isStabilized).toBe(false);
   });
+
+  it('clears isStabilized when a stabilized dying character takes further damage', () => {
+    let state = combatReducer(undefined, initHP(5));
+    state = combatReducer(state, adjustHP({ delta: -10, maxHP: 20 })); // HP=-5, dying
+    state = combatReducer(state, confirmStabilization()); // stabilized while still dying
+    expect(state.isStabilized).toBe(true);
+    state = combatReducer(state, adjustHP({ delta: -1, maxHP: 20 })); // HP=-6, still dying
+    expect(state.isStabilized).toBe(false);
+    expect(state.isDying).toBe(true);
+  });
 });
 
 describe('endTurnDecrement while dying', () => {
@@ -1249,5 +1259,20 @@ describe('initFromSession re-derives dying state', () => {
   it('does not set isDying when session currentHP is positive', () => {
     const state = combatReducer(undefined, initFromSession(makeSessionDoc({ currentHP: 10 })));
     expect(state.isDying).toBe(false);
+  });
+
+  it('restores isStabilized=true from the session doc', () => {
+    const state = combatReducer(
+      undefined,
+      initFromSession(makeSessionDoc({ currentHP: -3, isStabilized: true })),
+    );
+    expect(state.isDying).toBe(true);
+    expect(state.isStabilized).toBe(true);
+  });
+
+  it('defaults isStabilized to false when missing in the session doc', () => {
+    const state = combatReducer(undefined, initFromSession(makeSessionDoc({ currentHP: -3 })));
+    expect(state.isDying).toBe(true);
+    expect(state.isStabilized).toBe(false);
   });
 });
