@@ -14,6 +14,8 @@ interface BuffsPanelProps {
   onRemoveBuff: (id: string) => void;
   onToggleBuff: (id: string) => void;
   onSaveToLibrary: (buff: SavedBuff) => void;
+  onStartTurn: () => void;
+  onEndTurn: () => void;
   testID?: string;
 }
 
@@ -24,6 +26,9 @@ const CATEGORY_COLORS: Record<string, string> = {
   Custom: '#1A237E',
 };
 
+const ACTIVE_GREEN = '#4CAF50';
+const INACTIVE_GREY = '#9E9E9E';
+
 export function BuffsPanel({
   activeBuffs,
   buffLibrary,
@@ -32,6 +37,8 @@ export function BuffsPanel({
   onRemoveBuff,
   onToggleBuff,
   onSaveToLibrary: _onSaveToLibrary,
+  onStartTurn,
+  onEndTurn,
   testID,
 }: BuffsPanelProps) {
   const { colors, fantasy } = useTheme();
@@ -111,7 +118,7 @@ export function BuffsPanel({
                 <View
                   style={[
                     styles.buffDot,
-                    { backgroundColor: buff.isActive ? '#4CAF50' : '#9E9E9E' },
+                    { backgroundColor: buff.isActive ? ACTIVE_GREEN : INACTIVE_GREY },
                   ]}
                 />
                 <Text style={[styles.buffName, { color: colors.text.primary }]}>{buff.name}</Text>
@@ -143,7 +150,7 @@ export function BuffsPanel({
                   <Pressable
                     style={[
                       styles.actionBtn,
-                      { borderColor: buff.isActive ? '#FF9800' : '#4CAF50' },
+                      { borderColor: buff.isActive ? '#FF9800' : ACTIVE_GREEN },
                     ]}
                     onPress={() => onToggleBuff(buff.id)}
                     accessibilityLabel={
@@ -153,7 +160,7 @@ export function BuffsPanel({
                     <Text
                       style={[
                         styles.actionBtnText,
-                        { color: buff.isActive ? '#FF9800' : '#4CAF50' },
+                        { color: buff.isActive ? '#FF9800' : ACTIVE_GREEN },
                       ]}
                     >
                       {buff.isActive ? 'Pause' : 'Resume'}
@@ -172,6 +179,30 @@ export function BuffsPanel({
           </View>
         ))
       )}
+
+      {/* Turn cycle buttons */}
+      <View style={styles.turnRow}>
+        <Pressable
+          style={[
+            styles.turnBtn,
+            { borderColor: ACTIVE_GREEN, backgroundColor: colors.bg.secondary },
+          ]}
+          onPress={onStartTurn}
+          accessibilityLabel="Start Turn"
+        >
+          <Text style={[styles.turnBtnText, { color: ACTIVE_GREEN }]}>Start Turn</Text>
+        </Pressable>
+        <Pressable
+          style={[
+            styles.turnBtn,
+            { borderColor: fantasy.bronze, backgroundColor: colors.bg.secondary },
+          ]}
+          onPress={onEndTurn}
+          accessibilityLabel="End Turn"
+        >
+          <Text style={[styles.turnBtnText, { color: fantasy.bronze }]}>End Turn</Text>
+        </Pressable>
+      </View>
 
       {/* Add buttons */}
       <View style={styles.addRow}>
@@ -391,6 +422,24 @@ const styles = StyleSheet.create({
   actionBtnText: {
     fontFamily: 'Cinzel',
     fontSize: 11,
+    fontWeight: '600',
+  },
+  turnRow: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  turnBtn: {
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 10,
+    alignItems: 'center',
+    minHeight: 44,
+    justifyContent: 'center',
+  },
+  turnBtnText: {
+    fontFamily: 'Cinzel',
+    fontSize: 13,
     fontWeight: '600',
   },
   addRow: {

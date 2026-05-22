@@ -163,16 +163,25 @@ const combatSlice = createSlice({
 
     nextRound(state) {
       state.round += 1;
-      // Tick down buff durations; remove expired round-duration buffs
-      state.activeBuffs = state.activeBuffs.filter((buff) => {
-        if (buff.duration === null || buff.durationType !== 'rounds') return true;
-        buff.duration -= 1;
-        return buff.duration > 0;
-      });
     },
 
     setRound(state, action: PayloadAction<number>) {
       state.round = action.payload;
+    },
+
+    // ---- Turn management ----
+
+    endTurnDecrement(state) {
+      for (const buff of state.activeBuffs) {
+        if (buff.duration !== null && buff.durationType === 'rounds') {
+          buff.duration -= 1;
+        }
+      }
+      state.activeBuffs = state.activeBuffs.filter((b) => b.duration === null || b.duration > 0);
+    },
+
+    startTurnApply(_state) {
+      // Stub: bleed, regeneration effects go here
     },
 
     // ---- Roll log ----
@@ -302,6 +311,8 @@ export const {
   applyRageEndHPLoss,
   nextRound,
   setRound,
+  endTurnDecrement,
+  startTurnApply,
   appendRoll,
   clearRollLog,
   setBuffLibrary,

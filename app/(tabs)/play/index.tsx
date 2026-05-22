@@ -39,7 +39,9 @@ import {
 import { CombatService } from '@services/CombatService';
 import { DiceService } from '@services/DiceService';
 import { PlaySessionService } from '@services/PlaySessionService';
+import { endTurn, startTurn } from '@store/thunks/turnThunks';
 import { RollRecord, Buff, SavedBuff } from '@/types/buff';
+import type { PlaySessionDoc } from '@/types/playSession';
 import { BuffedTotals } from '@/types/combat';
 import type { CharacterSummary } from '@/types/character';
 import { BUFF_PRESETS } from '@/data/buffs/presets';
@@ -276,6 +278,14 @@ export default function CombatTrackerScreen() {
     },
     [combatAbilities.rage, character, currentHP, tempHP, dispatch],
   );
+
+  const handleStartTurn = useCallback(() => {
+    dispatch(startTurn());
+  }, [dispatch]);
+
+  const handleEndTurn = useCallback(() => {
+    dispatch(endTurn());
+  }, [dispatch]);
 
   const handleNewSession = useCallback(
     (characterId: string) => {
@@ -551,6 +561,8 @@ export default function CombatTrackerScreen() {
             onSaveToLibrary={(_: SavedBuff) => {
               /* future: dispatch(addToBuffLibrary(buff)) */
             }}
+            onStartTurn={handleStartTurn}
+            onEndTurn={handleEndTurn}
             testID="buffs-panel"
           />
 

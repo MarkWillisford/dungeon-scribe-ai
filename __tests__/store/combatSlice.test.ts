@@ -292,42 +292,6 @@ describe('nextRound', () => {
     const state = combatReducer(undefined, nextRound());
     expect(state.round).toBe(1);
   });
-
-  it('ticks down round-duration buff durations', () => {
-    let state = combatReducer(
-      undefined,
-      addBuff(makeBuff({ id: 'b', duration: 3, durationType: 'rounds' })),
-    );
-    state = combatReducer(state, nextRound());
-    expect(state.activeBuffs[0].duration).toBe(2);
-  });
-
-  it('removes buff when duration reaches 0', () => {
-    let state = combatReducer(
-      undefined,
-      addBuff(makeBuff({ id: 'b', duration: 1, durationType: 'rounds' })),
-    );
-    state = combatReducer(state, nextRound());
-    expect(state.activeBuffs).toHaveLength(0);
-  });
-
-  it('does not remove permanent buffs', () => {
-    let state = combatReducer(
-      undefined,
-      addBuff(makeBuff({ id: 'perm', duration: null, durationType: 'permanent' })),
-    );
-    state = combatReducer(state, nextRound());
-    expect(state.activeBuffs).toHaveLength(1);
-  });
-
-  it('does not decrement non-round buffs', () => {
-    let state = combatReducer(
-      undefined,
-      addBuff(makeBuff({ id: 'min', duration: 5, durationType: 'minutes' })),
-    );
-    state = combatReducer(state, nextRound());
-    expect(state.activeBuffs[0].duration).toBe(5); // unchanged
-  });
 });
 
 // ----------------------------------------------------------------
