@@ -9,6 +9,7 @@ export interface PlaySessionDoc {
   userId: string;
   currentHP: number;
   nonlethalDamage: number;
+  isStabilized?: boolean;
   tempHP: number;
   activeBuffs: Buff[];
   combatAbilities: CombatAbilityState;

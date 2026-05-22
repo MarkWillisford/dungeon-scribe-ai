@@ -442,7 +442,7 @@ const combatSlice = createSlice({
       const dying = s.currentHP !== null && s.currentHP < 0;
       state.isDying = dying;
       state.dyingAutoApplied = dying;
-      state.isStabilized = false;
+      state.isStabilized = s.isStabilized ?? false;
       state.pendingStabilizationPrompt = false;
       // Roll log and buff library are not session-scoped — leave them as-is
     },
