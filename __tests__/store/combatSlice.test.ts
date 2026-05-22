@@ -998,14 +998,16 @@ describe('applyLongRest', () => {
   });
 
   it('resets preparedSpellsCast to empty', () => {
-    let state = combatReducer(undefined, togglePreparedSpell({ spellIndex: 0 }));
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, togglePreparedSpell({ spellIndex: 0 }));
     state = combatReducer(state, togglePreparedSpell({ spellIndex: 3 }));
     state = combatReducer(state, restAction());
     expect(state.preparedSpellsCast).toEqual({});
   });
 
   it('resets spellSlotsUsed to empty', () => {
-    let state = combatReducer(undefined, useSpellSlot({ poolKey: 'wizard', level: 1 }));
+    let state = combatReducer(undefined, initHP(20));
+    state = combatReducer(state, useSpellSlot({ poolKey: 'wizard', level: 1 }));
     state = combatReducer(state, useSpellSlot({ poolKey: 'wizard', level: 2 }));
     state = combatReducer(state, restAction());
     expect(state.spellSlotsUsed).toEqual({});

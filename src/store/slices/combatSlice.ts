@@ -377,6 +377,7 @@ const combatSlice = createSlice({
         specialPoolRecovery: Record<string, number>;
       }>,
     ) {
+      if (state.currentHP === null) return;
       const { maxHP, characterLevel, pools, specialPoolRecovery } = action.payload;
 
       // Full HP restoration
