@@ -251,7 +251,7 @@ const combatSlice = createSlice({
       state.tempHP = s.tempHP;
       state.nonlethalDamage = s.nonlethalDamage;
       state.activeBuffs = s.activeBuffs.map((buff) => ({ ...buff }));
-      state.combatAbilities = { ...s.combatAbilities };
+      state.combatAbilities = { ...defaultCombatAbilities, ...(s.combatAbilities ?? {}) };
       state.round = s.round;
       state.resourcePools = s.resourcePools ?? {};
       // Roll log and buff library are not session-scoped — leave them as-is
