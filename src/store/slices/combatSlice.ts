@@ -21,6 +21,15 @@ interface CombatState {
   // True when Staggered was set by the auto-trigger (allows auto-clear on recovery)
   staggeredAutoApplied: boolean;
 
+  // Dying condition (PF1e: current HP < 0)
+  isDying: boolean;
+  // True when Dying was set by the auto-trigger (allows auto-clear on recovery)
+  dyingAutoApplied: boolean;
+  // True when character has stabilized — bleed-out stops
+  isStabilized: boolean;
+  // Signals UI to show the DC 10 Con stabilization check prompt after End Turn
+  pendingStabilizationPrompt: boolean;
+
   // Round counter
   round: number;
 
@@ -59,6 +68,10 @@ const initialState: CombatState = {
   nonlethalDamage: 0,
   isStaggered: false,
   staggeredAutoApplied: false,
+  isDying: false,
+  dyingAutoApplied: false,
+  isStabilized: false,
+  pendingStabilizationPrompt: false,
   round: 0,
   rollLog: [],
   buffLibrary: [],
@@ -126,6 +139,10 @@ const combatSlice = createSlice({
       state.nonlethalDamage = 0;
       state.isStaggered = false;
       state.staggeredAutoApplied = false;
+      state.isDying = false;
+      state.dyingAutoApplied = false;
+      state.isStabilized = false;
+      state.pendingStabilizationPrompt = false;
     },
 
     setCurrentHP(state, action: PayloadAction<number>) {
@@ -148,7 +165,7 @@ const combatSlice = createSlice({
         }
         state.currentHP = state.currentHP - remaining;
       }
-      // Re-check staggered threshold after HP change
+      // Re-check staggered and dying thresholds after HP change
       if (state.currentHP > 0) {
         if (NonLethalService.checkStaggered(state.nonlethalDamage, state.currentHP)) {
           state.isStaggered = true;
@@ -157,9 +174,32 @@ const combatSlice = createSlice({
           state.isStaggered = false;
           state.staggeredAutoApplied = false;
         }
-      } else if (state.staggeredAutoApplied) {
-        state.isStaggered = false;
-        state.staggeredAutoApplied = false;
+        if (state.dyingAutoApplied) {
+          state.isDying = false;
+          state.dyingAutoApplied = false;
+          state.isStabilized = false;
+          state.pendingStabilizationPrompt = false;
+        }
+      } else if (state.currentHP === 0) {
+        if (state.staggeredAutoApplied) {
+          state.isStaggered = false;
+          state.staggeredAutoApplied = false;
+        }
+        if (state.dyingAutoApplied) {
+          state.isDying = false;
+          state.dyingAutoApplied = false;
+          state.isStabilized = false;
+          state.pendingStabilizationPrompt = false;
+        }
+      } else {
+        // currentHP < 0 — dying
+        if (state.staggeredAutoApplied) {
+          state.isStaggered = false;
+          state.staggeredAutoApplied = false;
+        }
+        state.isDying = true;
+        state.dyingAutoApplied = true;
+        state.isStabilized = false;
       }
     },
 
@@ -211,7 +251,7 @@ const combatSlice = createSlice({
     applyRageEndHPLoss(state, action: PayloadAction<{ newCurrentHP: number; newTempHP: number }>) {
       state.currentHP = action.payload.newCurrentHP;
       state.tempHP = action.payload.newTempHP;
-      // Re-check staggered threshold after HP change from rage ending
+      // Re-check staggered and dying thresholds after HP change from rage ending
       if (state.currentHP > 0) {
         if (NonLethalService.checkStaggered(state.nonlethalDamage, state.currentHP)) {
           state.isStaggered = true;
@@ -220,9 +260,32 @@ const combatSlice = createSlice({
           state.isStaggered = false;
           state.staggeredAutoApplied = false;
         }
-      } else if (state.staggeredAutoApplied) {
-        state.isStaggered = false;
-        state.staggeredAutoApplied = false;
+        if (state.dyingAutoApplied) {
+          state.isDying = false;
+          state.dyingAutoApplied = false;
+          state.isStabilized = false;
+          state.pendingStabilizationPrompt = false;
+        }
+      } else if (state.currentHP === 0) {
+        if (state.staggeredAutoApplied) {
+          state.isStaggered = false;
+          state.staggeredAutoApplied = false;
+        }
+        if (state.dyingAutoApplied) {
+          state.isDying = false;
+          state.dyingAutoApplied = false;
+          state.isStabilized = false;
+          state.pendingStabilizationPrompt = false;
+        }
+      } else {
+        // currentHP < 0 — dying
+        if (state.staggeredAutoApplied) {
+          state.isStaggered = false;
+          state.staggeredAutoApplied = false;
+        }
+        state.isDying = true;
+        state.dyingAutoApplied = true;
+        state.isStabilized = false;
       }
     },
 
@@ -245,10 +308,26 @@ const combatSlice = createSlice({
         }
       }
       state.activeBuffs = state.activeBuffs.filter((b) => b.duration === null || b.duration > 0);
+      // Dying bleed-out: lose 1 HP per turn while dying and not stabilized
+      if (state.isDying && !state.isStabilized && state.currentHP !== null) {
+        state.currentHP -= 1;
+        state.pendingStabilizationPrompt = true;
+      }
     },
 
     startTurnApply(_state) {
-      // Stub: bleed, regeneration effects go here
+      // Stub: regeneration effects go here
+    },
+
+    // ---- Dying / stabilization ----
+
+    confirmStabilization(state) {
+      state.isStabilized = true;
+      state.pendingStabilizationPrompt = false;
+    },
+
+    clearStabilizationPrompt(state) {
+      state.pendingStabilizationPrompt = false;
     },
 
     // ---- Roll log ----
@@ -309,6 +388,10 @@ const combatSlice = createSlice({
       state.nonlethalDamage = 0;
       state.isStaggered = false;
       state.staggeredAutoApplied = false;
+      state.isDying = false;
+      state.dyingAutoApplied = false;
+      state.isStabilized = false;
+      state.pendingStabilizationPrompt = false;
       state.round = 0;
       state.resourcePools = {};
       state.preparedSpellsCast = {};
@@ -324,6 +407,10 @@ const combatSlice = createSlice({
       state.nonlethalDamage = 0;
       state.isStaggered = false;
       state.staggeredAutoApplied = false;
+      state.isDying = false;
+      state.dyingAutoApplied = false;
+      state.isStabilized = false;
+      state.pendingStabilizationPrompt = false;
       state.activeBuffs = [];
       state.combatAbilities = { ...defaultCombatAbilities };
       state.round = 0;
@@ -351,6 +438,12 @@ const combatSlice = createSlice({
         s.currentHP !== null && NonLethalService.checkStaggered(s.nonlethalDamage, s.currentHP);
       state.isStaggered = staggered;
       state.staggeredAutoApplied = staggered;
+      // Re-derive dying from restored HP state
+      const dying = s.currentHP !== null && s.currentHP < 0;
+      state.isDying = dying;
+      state.dyingAutoApplied = dying;
+      state.isStabilized = s.isStabilized ?? false;
+      state.pendingStabilizationPrompt = false;
       // Roll log and buff library are not session-scoped — leave them as-is
     },
 
@@ -444,6 +537,8 @@ export const {
   setRound,
   endTurnDecrement,
   startTurnApply,
+  confirmStabilization,
+  clearStabilizationPrompt,
   appendRoll,
   clearRollLog,
   setBuffLibrary,
