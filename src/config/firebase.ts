@@ -24,14 +24,10 @@ let auth: ReturnType<typeof getAuth>;
 if (Platform.OS === 'web') {
   auth = getAuth(app);
 } else {
-  try {
-    const { getReactNativePersistence } = require('firebase/auth');
-    auth = initializeAuth(app, {
-      persistence: getReactNativePersistence(AsyncStorage),
-    });
-  } catch {
-    auth = getAuth(app);
-  }
+  const { getReactNativePersistence } = require('firebase/auth');
+  auth = initializeAuth(app, {
+    persistence: getReactNativePersistence(AsyncStorage),
+  });
 }
 
 const db = getFirestore(app);
