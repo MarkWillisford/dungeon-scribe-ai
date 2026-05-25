@@ -13,7 +13,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
     "typecheck": "tsc --noEmit",
-    "firebase:deploy-rules": "firebase deploy --only firestore:rules,firestore:indexes,storage --project staging",
+    "firebase:deploy-rules": "firebase deploy --only firestore:rules,firestore:indexes --project staging",
     "prepare": "husky",
     "sandcastle": "tsx .sandcastle/main.mts"
   },
