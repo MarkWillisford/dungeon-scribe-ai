@@ -36,6 +36,11 @@ service cloud.firestore {
       allow update: if isUser(userId);
     }
 
+    // Play sessions — per-character live session state
+    match /users/{userId}/sessions/{sessionId} {
+      allow read, write: if isUser(userId);
+    }
+
     // Characters collection — ownership-based access
     match /characters/{characterId} {
       allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
