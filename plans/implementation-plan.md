@@ -884,7 +884,7 @@ The combat tracker (Phase 2) was built as a standalone system. This phase wires 
 - [x] Long Rest button: resets HP to max, restores all spell slots, refills all `rechargeOn: 'rest'` pools, clears non-permanent conditions — PR #201
 - [x] Non-lethal damage recovered on rest — PR #191
 - [x] Dying state: bleed-out auto-decrements HP by 1 at End Turn, stabilization DC 10 Con check prompt — PR #202
-- [ ] Short rest (per-encounter pool reset only, optional HD spend) — not yet built
+- [ ] Short rest — see 4f
 
 #### 4f. Remaining
 
