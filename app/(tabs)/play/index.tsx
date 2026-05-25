@@ -465,7 +465,7 @@ export default function CombatTrackerScreen() {
       <SessionPicker
         characters={characters}
         activeSessionCharacterIds={activeSessionIds}
-        activeCharacterId={character.info.id}
+        activeCharacterId={character.info.firebaseId ?? character.info.id}
         onNewSession={handleNewSession}
         onResumeSession={handleResumeSession}
       />
