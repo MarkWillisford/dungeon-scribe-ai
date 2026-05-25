@@ -28,6 +28,7 @@ export const store = configureStore({
           'auth/login/fulfilled',
           'auth/signup/fulfilled',
           'auth/googleLogin/fulfilled',
+          'characters/fetchCharacter/fulfilled',
           'characters/fetchCharacters/fulfilled',
           'characters/createCharacter/fulfilled',
           'characters/updateCharacter/fulfilled',
