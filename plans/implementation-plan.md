@@ -841,59 +841,70 @@ Key facts:
 - [ ] Build companion builder components
 - [ ] Wire companion builder into direct-entry Classes & Templates tab
 
-### Phase 4: Play Session — Combat Wiring
+### Phase 4: Play Session — Combat Wiring — LARGELY COMPLETE (2026-05-23)
 
-The combat tracker (Phase 2) was built as a standalone system. This phase wires it to the character system so a saved character can actually be played at the table.
+The combat tracker (Phase 2) was built as a standalone system. This phase wires it to the character system so a saved character can actually be played at the table. Full PRD: `docs/prds/phase-4-play-session.md`.
 
-#### 4a. Character → Combat Session Initialization
+**2372 tests passing across 83 suites** as of 2026-05-22.
 
-When a player taps "Play" on a saved character, `combatSlice` must be hydrated from the character's computed stats. No manual re-entry of stats.
+#### 4a. Character → Combat Session Initialization — COMPLETE (PR #184, #192)
 
-- Load the character from Firestore (already available via `FirebaseCharacterService.getCharacter`)
-- Dispatch a `initCombatSession(character)` thunk that seeds `combatSlice` from:
-  - `character.combatStats.hitPoints.max` → HP tracker max
-  - `character.combatStats.armorClass` → DefensePanel base values
-  - `character.combatStats.savingThrows` → save totals
-  - `character.combatStats.attackBonuses` → AttackPanel base values
-  - `character.classes` → available combat ability toggles (Power Attack, Rage, etc.) gated by class/feat
-- Add a "Play" button to the character detail screen (`[id]/index.tsx`) that navigates to the combat tab with the character pre-loaded
-- The combat tab must show which character is active and provide a way to switch
+- [x] Session picker on the Play tab lists all characters with New Session / Resume Session — PR #184
+- [x] `PlaySessionService` / `FirebasePlaySessionService` persist session state to `users/{uid}/sessions/{characterId}` — PR #184
+- [x] `initCombatSession(character)` thunk seeds `combatSlice` from computed character snapshot (HP max, AC, saves, attacks, resource pools) — PR #184
+- [x] Combat Play Panel with HP tracker wired to session state and initiative roll button — PR #192
+- [x] Multiple characters can have independent active sessions simultaneously — PR #184
+- [x] Bottom nav tab renamed from "Combat" to "Play" — PR #183
 
-#### 4b. Play-State Persistence
+#### 4b. Play-State Persistence — COMPLETE (PR #184, #185, #190)
 
-Combat state (current HP, active buffs, spell slots used) must survive app close and session breaks.
+- [x] `combatSlice` extended to hold all live play state: active buffs, conditions, non-lethal, temp HP, current HP, per-pool values, spell slot used counts — PR #184
+- [x] Session auto-save: debounced write (2-3s after last change) + immediate flush on `AppState` background — PR #185
+- [x] Resume Session restores complete play state from Firestore Session Doc — PR #184
+- [x] Start Turn / End Turn buttons own all duration management: buff/condition tick-down, expiry removal, stat recalculation — PR #190
 
-- `combatSlice` state is currently ephemeral Redux (lost on app close)
-- Add a `PlaySessionService` / `FirebasePlaySessionService` that persists combat state to Firestore under `users/{uid}/sessions/{characterId}`
-- Auto-save on meaningful state changes (HP change, buff added/removed, slot used)
-- Load existing session on "Play" if one exists for that character; offer "Resume" or "New Session"
+#### 4c. Spell Slot Tracking — COMPLETE (PR #188)
 
-#### 4c. Spell Slot Tracking
+- [x] Prepared casters (Cleric, Wizard): each prepared spell shown with cast/uncast toggle — PR #188
+- [x] Spontaneous casters (Sorcerer, Bard): remaining slots per spell level with tap-to-decrement — PR #188
+- [x] Slot state persisted in Session Doc; recovered on long rest (see 4e) — PR #188
 
-Using spells at the table must decrement slots and persist that state.
+#### 4d. Resource Pool Tracking — COMPLETE (PR #186, #198, #199, #200)
 
-- Add slot-use controls to the playsheet spellcasting panel: tap a slot level → mark one use
-- Recovery via rest (see 4e)
-- Track per-pool, per-level remaining uses in `combatSlice` (not in the editor `Character`)
-- For spontaneous casters (Sorcerer, Bard): spells-per-day remaining
-- For prepared casters (Cleric, Wizard): prepared spells with cast/uncast toggle
+- [x] Resources Play Panel: one row per active resource pool, current/max display, tap-to-decrement — PR #186
+- [x] New Encounter button resets all `rechargeOn: 'per_encounter'` pools — PR #186
+- [x] Buffs & Conditions Play Panel: activate buffs from library, apply conditions, add external spells (Haste, Bless, etc.) — PR #198
+- [x] Buff activation routes through `ModifierPipelineService.recalculate()` so typed bonus stacking is always enforced — PR #198
+- [x] Temp HP take-highest rule enforced automatically — PR #199
+- [x] Damage resolution with DR/energy resistance: damage type selector shown only when character has relevant values — PR #200
+- [x] Non-lethal damage tracked separately; Staggered auto-triggered when non-lethal >= current HP; Unconscious when non-lethal > max HP — PR #191
 
-#### 4d. Resource Pool Tracking
+#### 4e. Rest / Recovery — COMPLETE (PR #191, #201, #202)
 
-Class resources that recharge on rest or per-encounter.
+- [x] Long Rest button: resets HP to max, restores all spell slots, refills all `rechargeOn: 'rest'` pools, clears non-permanent conditions — PR #201
+- [x] Non-lethal damage recovered on rest — PR #191
+- [x] Dying state: bleed-out auto-decrements HP by 1 at End Turn, stabilization DC 10 Con check prompt — PR #202
+- [ ] Short rest — see 4f
 
-- Ki points, rage rounds, channel energy, bardic performance, lay on hands, etc.
-- UI: a row per active resource pool showing current / max with tap-to-decrement
-- Pools initialized from `character.resources` on session start
-- State persisted in play session (see 4b)
-- `rechargeOn: 'rest' | 'per_encounter' | 'special'` already typed — wire per-encounter pools to a "New Encounter" action
+#### 4f. Remaining
 
-#### 4e. Rest / Recovery
+- [ ] **Issue #149** — End-to-end validation: resource pools against Rissi (manual verification gate — must load Rissi on a device connected to staging Firestore and confirm all pool maxes and contribution breakdowns are correct before Phase 4 is considered fully complete)
+- [ ] **Issue #182** — Integration test suite: multi-session independence, buff activation through `recalculate()`, Dying End Turn, rest recovery, navigate-away-and-back state restore (blocked by #149)
+- [ ] Short rest (per-encounter pool reset + optional HD spend for HP)
 
-- **Long rest**: reset HP to max, recover all spell slots, refill all `rechargeOn: 'rest'` pools, clear non-permanent conditions
-- **Short rest**: recover `rechargeOn: 'per_encounter'` pools, optionally spend HD for HP
-- Single button per rest type in the playsheet. Confirmation alert before applying.
-- Write the recovered state back to the play session in Firestore
+### Phase 4 Verification
+
+| Check                              | Status                                   |
+| ---------------------------------- | ---------------------------------------- |
+| `npm test` — 2372 tests, 83 suites | Passing (2026-05-22)                     |
+| Session auto-save verified         | Yes (PR #185)                            |
+| HP tracker, temp HP, non-lethal    | Verified in code review (PRs #191, #199) |
+| DR/resistance damage resolution    | Verified in code review (PR #200)        |
+| Buff stacking via `recalculate()`  | Verified in code review (PR #198)        |
+| Dying bleed-out and stabilization  | Verified in code review (PR #202)        |
+| Long rest full recovery            | Verified in code review (PR #201)        |
+| Rissi end-to-end on device         | **PENDING — Issue #149**                 |
+| Integration test suite             | **PENDING — Issue #182**                 |
 
 ---
 
