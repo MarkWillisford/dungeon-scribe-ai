@@ -976,6 +976,7 @@ All four Jest coverage thresholds now met globally (statements 80%, branches 70%
 - **Custom test renderer:** Could not install `react-test-renderer` (npm peer dep conflict). Built a lightweight custom renderer at `__tests__/helpers/testUtils.tsx` with minimal React hooks support.
 - **Jest projects config:** Tests split into two Jest projects (`services` + `components`) with separate configs. Component tests use `tsconfig.jest.json` to override `jsx: "react-jsx"`.
 - **firebase-tools as devDependency:** Installed locally for rule deployment (`npm run firebase:deploy-rules`) rather than globally.
+- **Firebase CLI not authenticated on server (Issue #207):** The server has no Firebase credentials, so `npm run firebase:deploy-rules` fails. Rules changes must be deployed manually from the laptop. Fix: run `firebase login:ci` on the laptop, add the resulting `FIREBASE_TOKEN` to the server's environment. Until resolved, any PR that changes `firestore.rules` requires a manual laptop deploy step.
 
 ## Critical Source Files
 
