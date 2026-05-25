@@ -354,7 +354,6 @@ export default function CombatTrackerScreen() {
 
   const handleResumeSession = useCallback(
     async (characterId: string) => {
-      if (!character || characterId !== (character.info.firebaseId ?? character.info.id)) return;
       if (!userId) return;
       if (!character || characterId !== (character.info.firebaseId ?? character.info.id)) {
         Alert.alert(
