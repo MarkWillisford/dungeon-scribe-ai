@@ -96,7 +96,12 @@ export class FirebaseCharacterService {
 
     const data = docSnap.data();
     const character = this.deserializeFromFirestore(data);
-    const enriched = await this.mergeClassFeatureResourcePools(character);
+    let enriched = character;
+    try {
+      enriched = await this.mergeClassFeatureResourcePools(character);
+    } catch (err) {
+      console.warn('[FirebaseCharacterService] mergeClassFeatureResourcePools failed, returning base character', err);
+    }
 
     return {
       ...enriched,
@@ -149,7 +154,7 @@ export class FirebaseCharacterService {
       const firestoreFeatures = featuresByClassId.get(docId);
 
       // Synthesize feature entries for classes whose array was never populated.
-      let baseFeatures = cls.classFeatures;
+      let baseFeatures = Array.isArray(cls.classFeatures) ? cls.classFeatures : [];
       if (baseFeatures.length === 0 && firestoreFeatures?.length) {
         baseFeatures = firestoreFeatures
           .filter((f) => f.level <= cls.level)
