@@ -15,6 +15,7 @@ import type { Character } from '@/types';
 import type { CharacterSummary } from '@/types/character';
 import type { EquipmentSlot } from '@/types/equipment';
 import type { ItemSlot } from '@/types/magicItems';
+import type { ResourcePoolDefinition } from '@/types/resources';
 import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
 
 export class FirebaseCharacterService {
@@ -75,7 +76,14 @@ export class FirebaseCharacterService {
   }
 
   /**
-   * Get a single character by ID
+   * Get a single character by ID.
+   *
+   * After deserializing the character document, we fetch the corresponding
+   * class documents from Firestore and merge their classFeatureResourcePools
+   * onto the character's stored class features. This allows
+   * ResourcePoolService.computePools() (called inside
+   * ModifierPipelineService.recalculate()) to find pool definitions without
+   * needing async Firestore access of its own.
    */
   static async getCharacter(characterId: string): Promise<Character> {
     const docRef = doc(db, this.COLLECTION, characterId);
@@ -87,14 +95,69 @@ export class FirebaseCharacterService {
 
     const data = docSnap.data();
     const character = this.deserializeFromFirestore(data);
+    const enriched = await this.mergeClassFeatureResourcePools(character);
 
     return {
-      ...character,
+      ...enriched,
       info: {
-        ...character.info,
+        ...enriched.info,
         firebaseId: docSnap.id,
       },
     };
+  }
+
+  /**
+   * Load classFeatureResourcePools from each class document in Firestore and
+   * merge the matching ResourcePoolDefinition onto each class feature stored on
+   * the character. This is keyed by feature name so the match is exact.
+   *
+   * Characters that were saved before resource pool data existed in Firestore
+   * are updated transparently — no migration required.
+   */
+  private static async mergeClassFeatureResourcePools(character: Character): Promise<Character> {
+    const classIds = character.classes.classes.map((cls) => this.classDocId(cls.name));
+    const uniqueIds = [...new Set(classIds)];
+    if (uniqueIds.length === 0) return character;
+
+    const classDocSnaps = await Promise.all(uniqueIds.map((id) => getDoc(doc(db, 'classes', id))));
+
+    // Build classDocId → { featureName: ResourcePoolDefinition }
+    const poolsByClassId = new Map<string, Record<string, ResourcePoolDefinition>>();
+    for (const snap of classDocSnaps) {
+      if (!snap.exists()) continue;
+      const pools = snap.data().classFeatureResourcePools as
+        | Record<string, ResourcePoolDefinition>
+        | undefined;
+      if (pools) poolsByClassId.set(snap.id, pools);
+    }
+
+    if (poolsByClassId.size === 0) return character;
+
+    const enrichedClasses = character.classes.classes.map((cls) => {
+      const poolMap = poolsByClassId.get(this.classDocId(cls.name));
+      if (!poolMap) return cls;
+
+      const enrichedFeatures = cls.classFeatures.map((feature) => {
+        if (feature.resourcePool) return feature;
+        const poolDef = poolMap[feature.name];
+        return poolDef ? { ...feature, resourcePool: poolDef } : feature;
+      });
+
+      return { ...cls, classFeatures: enrichedFeatures };
+    });
+
+    return {
+      ...character,
+      classes: { ...character.classes, classes: enrichedClasses },
+    };
+  }
+
+  /** Derive the Firestore document ID for a class from its display name. */
+  private static classDocId(className: string): string {
+    return className
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
   }
 
   /**
