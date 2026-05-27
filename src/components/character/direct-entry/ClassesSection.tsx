@@ -471,7 +471,10 @@ export function ClassesSection() {
         fortProgression: (classData?.saves.fortitude ?? SaveProgression.Poor) as SaveProgression,
         refProgression: (classData?.saves.reflex ?? SaveProgression.Poor) as SaveProgression,
         willProgression: (classData?.saves.will ?? SaveProgression.Poor) as SaveProgression,
-        classFeatures: [],
+        classFeatures:
+          classData?.classFeatures
+            ?.filter((f) => f.level <= 1)
+            .map((f) => ({ effects: [], ...f })) ?? [],
         sourceSystem: 'pf1e',
         spellcastingAdvancement: initialAdvancement,
         classChoices: [],

@@ -15,6 +15,7 @@ import type { Character } from '@/types';
 import type { CharacterSummary } from '@/types/character';
 import type { EquipmentSlot } from '@/types/equipment';
 import type { ItemSlot } from '@/types/magicItems';
+import type { ClassFeature } from '@/types/classes';
 import type { ResourcePoolDefinition } from '@/types/resources';
 import { PRESET_PF1E_STANDARD } from '@data/rulesets/presets';
 
@@ -107,12 +108,17 @@ export class FirebaseCharacterService {
   }
 
   /**
-   * Load classFeatureResourcePools from each class document in Firestore and
-   * merge the matching ResourcePoolDefinition onto each class feature stored on
-   * the character. This is keyed by feature name so the match is exact.
+   * Load class documents from Firestore and merge two things onto the character:
    *
-   * Characters that were saved before resource pool data existed in Firestore
-   * are updated transparently — no migration required.
+   * 1. classFeatures: if a class entry has an empty array (characters created
+   *    before features were persisted on the entry), inject features from the
+   *    class doc filtered to levels the character has actually reached.
+   *
+   * 2. classFeatureResourcePools: attach the ResourcePoolDefinition onto each
+   *    matching feature by name so ResourcePoolService.computePools() can work
+   *    without its own async Firestore access.
+   *
+   * Uses the class doc snaps already fetched — no extra DB calls.
    */
   private static async mergeClassFeatureResourcePools(character: Character): Promise<Character> {
     const classIds = character.classes.classes.map((cls) => this.classDocId(cls.name));
@@ -121,23 +127,38 @@ export class FirebaseCharacterService {
 
     const classDocSnaps = await Promise.all(uniqueIds.map((id) => getDoc(doc(db, 'classes', id))));
 
-    // Build classDocId → { featureName: ResourcePoolDefinition }
     const poolsByClassId = new Map<string, Record<string, ResourcePoolDefinition>>();
+    const featuresByClassId = new Map<string, ClassFeature[]>();
+
     for (const snap of classDocSnaps) {
       if (!snap.exists()) continue;
-      const pools = snap.data().classFeatureResourcePools as
+      const data = snap.data();
+      const pools = data.classFeatureResourcePools as
         | Record<string, ResourcePoolDefinition>
         | undefined;
       if (pools) poolsByClassId.set(snap.id, pools);
+      const features = data.classFeatures as ClassFeature[] | undefined;
+      if (features?.length) featuresByClassId.set(snap.id, features);
     }
 
-    if (poolsByClassId.size === 0) return character;
+    if (poolsByClassId.size === 0 && featuresByClassId.size === 0) return character;
 
     const enrichedClasses = character.classes.classes.map((cls) => {
-      const poolMap = poolsByClassId.get(this.classDocId(cls.name));
-      if (!poolMap) return cls;
+      const docId = this.classDocId(cls.name);
+      const poolMap = poolsByClassId.get(docId);
+      const firestoreFeatures = featuresByClassId.get(docId);
 
-      const enrichedFeatures = cls.classFeatures.map((feature) => {
+      // Synthesize feature entries for classes whose array was never populated.
+      let baseFeatures = cls.classFeatures;
+      if (baseFeatures.length === 0 && firestoreFeatures?.length) {
+        baseFeatures = firestoreFeatures
+          .filter((f) => f.level <= cls.level)
+          .map((f) => ({ ...f, effects: (f as ClassFeature).effects ?? [] }));
+      }
+
+      if (!poolMap) return { ...cls, classFeatures: baseFeatures };
+
+      const enrichedFeatures = baseFeatures.map((feature) => {
         if (feature.resourcePool) return feature;
         const poolDef = poolMap[feature.name];
         return poolDef ? { ...feature, resourcePool: poolDef } : feature;
