@@ -170,6 +170,19 @@ export class FirebaseCharacterService {
 
       if (!poolMap) return { ...cls, classFeatures: baseFeatures };
 
+      // classFeatures is still empty (no classFeatures field on the Firestore class doc).
+      // Synthesize minimal stubs from the pool definitions so computePools() can find them.
+      if (baseFeatures.length === 0) {
+        const synthetic: ClassFeature[] = Object.entries(poolMap).map(([name, poolDef]) => ({
+          name,
+          description: '',
+          level: 1,
+          effects: [],
+          resourcePool: poolDef,
+        }));
+        return { ...cls, classFeatures: synthetic };
+      }
+
       const enrichedFeatures = baseFeatures.map((feature) => {
         if (feature.resourcePool) return feature;
         const poolDef = poolMap[feature.name];
