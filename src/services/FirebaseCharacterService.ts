@@ -153,13 +153,20 @@ export class FirebaseCharacterService {
       const poolMap = poolsByClassId.get(docId);
       const firestoreFeatures = featuresByClassId.get(docId);
 
-      // Synthesize feature entries for classes whose array was never populated.
-      let baseFeatures = Array.isArray(cls.classFeatures) ? cls.classFeatures : [];
-      if (baseFeatures.length === 0 && firestoreFeatures?.length) {
-        baseFeatures = firestoreFeatures
-          .filter((f) => f.level <= cls.level)
-          .map((f) => ({ ...f, effects: (f as ClassFeature).effects ?? [] }));
-      }
+      // Merge Firestore features into the stored array, adding any that are
+      // missing (e.g. features gained after level-up that were never persisted).
+      const storedFeatures = Array.isArray(cls.classFeatures) ? cls.classFeatures : [];
+      const normalizedStored = storedFeatures.map((f) => ({
+        ...f,
+        effects: f.effects ?? [],
+      }));
+      const missingFeatures = (firestoreFeatures ?? [])
+        .filter((f) => f.level <= cls.level)
+        .filter(
+          (f) => !normalizedStored.some((existing) => existing.name === f.name && existing.level === f.level),
+        )
+        .map((f) => ({ ...f, effects: f.effects ?? [] }));
+      let baseFeatures = [...normalizedStored, ...missingFeatures];
 
       if (!poolMap) return { ...cls, classFeatures: baseFeatures };
 
